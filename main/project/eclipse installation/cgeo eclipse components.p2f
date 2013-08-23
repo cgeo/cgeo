@@ -1,23 +1,23 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <?p2f version='1.0.0'?>
 <p2f version='1.0.0'>
-  <ius size='20'>
-    <iu id='com.android.ide.eclipse.ddms.feature.group' name='Android DDMS' version='17.0.0.v201203161636-291853'>
+  <ius size='22'>
+    <iu id='com.android.ide.eclipse.ddms.feature.group' name='Android DDMS' version='22.0.1.v201305230001--685705'>
       <repositories size='1'>
         <repository location='https://dl-ssl.google.com/android/eclipse'/>
       </repositories>
     </iu>
-    <iu id='com.android.ide.eclipse.adt.feature.group' name='Android Development Tools' version='17.0.0.v201203161636-291853'>
+    <iu id='com.android.ide.eclipse.adt.feature.group' name='Android Development Tools' version='22.0.1.v201305230001--685705'>
       <repositories size='1'>
         <repository location='https://dl-ssl.google.com/android/eclipse'/>
       </repositories>
     </iu>
-    <iu id='com.android.ide.eclipse.hierarchyviewer.feature.group' name='Android Hierarchy Viewer' version='17.0.0.v201203161636-291853'>
+    <iu id='com.android.ide.eclipse.hierarchyviewer.feature.group' name='Android Hierarchy Viewer' version='22.0.1.v201305230001--685705'>
       <repositories size='1'>
         <repository location='https://dl-ssl.google.com/android/eclipse'/>
       </repositories>
     </iu>
-    <iu id='com.android.ide.eclipse.traceview.feature.group' name='Android Traceview' version='17.0.0.v201203161636-291853'>
+    <iu id='com.android.ide.eclipse.traceview.feature.group' name='Android Traceview' version='22.0.1.v201305230001--685705'>
       <repositories size='1'>
         <repository location='https://dl-ssl.google.com/android/eclipse'/>
       </repositories>
@@ -32,91 +32,96 @@
         <repository location='http://dl.google.com/eclipse/inst/codepro/latest/3.7'/>
       </repositories>
     </iu>
-    <iu id='org.eclipse.egit.feature.group' name='Eclipse EGit' version='1.3.0.201202151440-r'>
-      <repositories size='3'>
-        <repository location='http://download.eclipse.org/releases/indigo'/>
-        <repository location='http://marketplace.eclipse.org/repo/'/>
-        <repository location='http://download.eclipse.org/egit/updates'/>
-      </repositories>
-    </iu>
-    <iu id='org.eclipse.mylyn.github.feature.feature.group' name='Eclipse EGit Mylyn GitHub Feature' version='1.3.0.201202151440-r'>
+    <iu id='org.eclipse.mylyn.github.feature.feature.group' name='Eclipse EGit Mylyn GitHub Feature' version='2.2.0.201212191850-r'>
       <repositories size='3'>
         <repository location='http://download.eclipse.org/egit/github/updates'/>
-        <repository location='http://download.eclipse.org/releases/indigo'/>
+        <repository location='http://download.eclipse.org/releases/juno'/>
         <repository location='http://marketplace.eclipse.org/repo/'/>
       </repositories>
     </iu>
-    <iu id='org.eclipse.jdt.feature.group' name='Eclipse Java Development Tools' version='3.7.2.v20120120-1414-7z8gFcuFMP7BW5XTz0jLTnz0l9B1'>
-      <repositories size='3'>
-        <repository location='http://download.eclipse.org/releases/indigo'/>
-        <repository location='http://download.eclipse.org/eclipse/updates/3.7'/>
+    <iu id='epp.package.java' name='Eclipse IDE for Java Developers' version='1.5.2.20130211-1820'>
+      <repositories size='2'>
+        <repository location='http://download.eclipse.org/releases/juno'/>
         <repository location='http://marketplace.eclipse.org/repo/'/>
       </repositories>
     </iu>
-    <iu id='org.eclipse.platform.ide' name='Eclipse Platform' version='3.7.2.M20120208-0800'>
-      <repositories size='3'>
-        <repository location='http://download.eclipse.org/releases/indigo'/>
-        <repository location='http://download.eclipse.org/eclipse/updates/3.7'/>
-        <repository location='http://marketplace.eclipse.org/repo/'/>
-      </repositories>
-    </iu>
-    <iu id='EclipseRegExFeature.feature.group' name='Eclipse_RegEx_Feature' version='1.3.1'>
-      <repositories size='1'>
-        <repository location='http://brosinski.com/regex/update'/>
-      </repositories>
-    </iu>
-    <iu id='org.eclipse.egit.mylyn.feature.group' name='EGit Mylyn' version='1.3.0.201202151440-r'>
-      <repositories size='3'>
-        <repository location='http://download.eclipse.org/releases/indigo'/>
-        <repository location='http://marketplace.eclipse.org/repo/'/>
-        <repository location='http://download.eclipse.org/egit/updates'/>
-      </repositories>
-    </iu>
-    <iu id='edu.umd.cs.findbugs.plugin.eclipse.feature.group' name='FindBugs Feature' version='2.0.0.20111221'>
+    <iu id='edu.umd.cs.findbugs.plugin.eclipse.feature.group' name='FindBugs Feature' version='2.0.2.20121210'>
       <repositories size='1'>
         <repository location='http://findbugs.cs.umd.edu/eclipse'/>
       </repositories>
     </iu>
-    <iu id='org.eclipse.wst.jsdt.feature.feature.group' name='JavaScript Development Tools' version='1.3.2.v201201112313-7G78FZvFC7sRekSz-g-nAlz'>
+    <iu id='org.eclipse.wst.jsdt.feature.feature.group' name='JavaScript Development Tools' version='1.4.1.v201208171701-7H7DFg0FC7sReqSyfqesWi'>
       <repositories size='2'>
-        <repository location='http://download.eclipse.org/releases/indigo'/>
+        <repository location='http://download.eclipse.org/releases/juno'/>
         <repository location='http://marketplace.eclipse.org/repo/'/>
       </repositories>
     </iu>
-    <iu id='org.eclipse.epp.mpc.feature.group' name='Marketplace Client' version='1.1.1.I20110907-0947'>
-      <repositories size='2'>
-        <repository location='http://download.eclipse.org/releases/indigo'/>
-        <repository location='http://marketplace.eclipse.org/repo/'/>
+    <iu id='net.jeeeyul.pdetools.feature.feature.group' name='Jeeeyul&apos;s PDE-Tools' version='1.1.0.201301211219'>
+      <repositories size='1'>
+        <repository location='https://raw.github.com/jeeeyul/pde-tools/master/net.jeeeyul.pdetools.updatesite'/>
       </repositories>
     </iu>
-    <iu id='org.eclipse.mylyn.ide_feature.feature.group' name='Mylyn Context Connector: Eclipse IDE' version='3.6.5.v20120215-0100'>
-      <repositories size='2'>
-        <repository location='http://download.eclipse.org/releases/indigo'/>
-        <repository location='http://marketplace.eclipse.org/repo/'/>
+    <iu id='org.moreunit.feature.group' name='MoreUnit For Java' version='3.0.2'>
+      <repositories size='1'>
+        <repository location='http://moreunit.sourceforge.net/update-site/'/>
       </repositories>
     </iu>
-    <iu id='org.eclipse.mylyn.java_feature.feature.group' name='Mylyn Context Connector: Java Development' version='3.6.5.v20120215-0100'>
+    <iu id='org.eclipse.mylyn.hudson.feature.group' name='Mylyn Builds Connector: Hudson/Jenkins' version='1.0.4.v20130429-0100'>
       <repositories size='2'>
-        <repository location='http://download.eclipse.org/releases/indigo'/>
-        <repository location='http://marketplace.eclipse.org/repo/'/>
+        <repository location='http://download.eclipse.org/mylyn/releases/latest'/>
+        <repository location='http://download.eclipse.org/mylyn/releases/juno'/>
       </repositories>
     </iu>
-    <iu id='org.eclipse.mylyn.team_feature.feature.group' name='Mylyn Context Connector: Team Support' version='3.6.5.v20120215-0100'>
+    <iu id='org.eclipse.mylyn.ide_feature.feature.group' name='Mylyn Context Connector: Eclipse IDE' version='3.8.4.v20130429-0100'>
       <repositories size='2'>
-        <repository location='http://download.eclipse.org/releases/indigo'/>
-        <repository location='http://marketplace.eclipse.org/repo/'/>
+        <repository location='http://download.eclipse.org/mylyn/releases/latest'/>
+        <repository location='http://download.eclipse.org/mylyn/releases/juno'/>
       </repositories>
     </iu>
-    <iu id='org.eclipse.mylyn_feature.feature.group' name='Mylyn Task List' version='3.6.5.v20120215-0100'>
+    <iu id='org.eclipse.mylyn.java_feature.feature.group' name='Mylyn Context Connector: Java Development' version='3.8.4.v20130429-0100'>
       <repositories size='2'>
-        <repository location='http://download.eclipse.org/releases/indigo'/>
-        <repository location='http://marketplace.eclipse.org/repo/'/>
+        <repository location='http://download.eclipse.org/mylyn/releases/latest'/>
+        <repository location='http://download.eclipse.org/mylyn/releases/juno'/>
       </repositories>
     </iu>
-    <iu id='org.eclipse.mylyn.context_feature.feature.group' name='Mylyn Task-Focused Interface' version='3.6.5.v20120215-0100'>
+    <iu id='org.eclipse.mylyn.team_feature.feature.group' name='Mylyn Context Connector: Team Support' version='3.8.4.v20130429-0100'>
       <repositories size='2'>
-        <repository location='http://download.eclipse.org/releases/indigo'/>
-        <repository location='http://marketplace.eclipse.org/repo/'/>
+        <repository location='http://download.eclipse.org/mylyn/releases/latest'/>
+        <repository location='http://download.eclipse.org/mylyn/releases/juno'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.mylyn_feature.feature.group' name='Mylyn Task List' version='3.8.4.v20130429-0100'>
+      <repositories size='2'>
+        <repository location='http://download.eclipse.org/mylyn/releases/latest'/>
+        <repository location='http://download.eclipse.org/mylyn/releases/juno'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.mylyn.context_feature.feature.group' name='Mylyn Task-Focused Interface' version='3.8.4.v20130429-0100'>
+      <repositories size='2'>
+        <repository location='http://download.eclipse.org/mylyn/releases/latest'/>
+        <repository location='http://download.eclipse.org/mylyn/releases/juno'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.mylyn.versions.feature.group' name='Mylyn Versions' version='1.0.4.v20130429-0100'>
+      <repositories size='2'>
+        <repository location='http://download.eclipse.org/mylyn/releases/latest'/>
+        <repository location='http://download.eclipse.org/mylyn/releases/juno'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.mylyn.git.feature.group' name='Mylyn Versions Connector: Git' version='1.0.4.v20130429-0100'>
+      <repositories size='2'>
+        <repository location='http://download.eclipse.org/mylyn/releases/latest'/>
+        <repository location='http://download.eclipse.org/mylyn/releases/juno'/>
+      </repositories>
+    </iu>
+    <iu id='com.android.ide.eclipse.gldebugger.feature.group' name='Tracer for OpenGL ES' version='22.0.1.v201305230001--685705'>
+      <repositories size='1'>
+        <repository location='https://dl-ssl.google.com/android/eclipse'/>
+      </repositories>
+    </iu>
+    <iu id='org.ucdetector.feature.feature.group' name='UCDetector' version='1.10.0'>
+      <repositories size='1'>
+        <repository location='http://ucdetector.sourceforge.net/update'/>
       </repositories>
     </iu>
   </ius>

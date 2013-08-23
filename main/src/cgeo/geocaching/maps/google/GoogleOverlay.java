@@ -20,7 +20,7 @@ public class GoogleOverlay extends Overlay implements OverlayImpl {
     private GeneralOverlay overlayBase = null;
     private Lock lock = new ReentrantLock();
 
-    public GoogleOverlay(Activity activityIn, overlayType ovlType) {
+    public GoogleOverlay(Activity activityIn, OverlayType ovlType) {
         switch (ovlType) {
             case PositionOverlay:
                 overlayBase = new PositionOverlay(activityIn, this);

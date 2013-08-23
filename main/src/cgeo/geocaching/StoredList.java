@@ -12,10 +12,13 @@ import android.content.res.Resources;
 import android.view.View;
 import android.widget.EditText;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
-public class StoredList {
+public final class StoredList {
     public static final int TEMPORARY_LIST_ID = 0;
     public static final int STANDARD_LIST_ID = 1;
     public static final int ALL_LIST_ID = 2;
@@ -68,8 +71,12 @@ public class StoredList {
             promptForListSelection(titleId, runAfterwards, false, -1);
         }
 
-        public void promptForListSelection(final int titleId, final RunnableWithArgument<Integer> runAfterwards, final boolean onlyMoveTargets, final int exceptListId) {
-            final List<StoredList> lists = cgData.getLists();
+        public void promptForListSelection(final int titleId, final RunnableWithArgument<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId) {
+            promptForListSelection(titleId, runAfterwards, onlyConcreteLists, exceptListId, StringUtils.EMPTY);
+        }
+
+        public void promptForListSelection(final int titleId, final RunnableWithArgument<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId, final String newListName) {
+            final List<StoredList> lists = getSortedLists();
 
             if (lists == null) {
                 return;
@@ -86,7 +93,7 @@ public class StoredList {
             for (StoredList list : lists) {
                 listsTitle.add(list.getTitleAndCount());
             }
-            if (!onlyMoveTargets) {
+            if (!onlyConcreteLists) {
                 listsTitle.add("<" + res.getString(R.string.list_menu_all_lists) + ">");
             }
             listsTitle.add("<" + res.getString(R.string.list_menu_create) + ">");
@@ -98,12 +105,12 @@ public class StoredList {
             builder.setItems(listsTitle.toArray(items), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int itemId) {
-                    if (itemId == lists.size() && !onlyMoveTargets) {
+                    if (itemId == lists.size() && !onlyConcreteLists) {
                         // all lists
                         runAfterwards.run(StoredList.ALL_LIST_ID);
                     } else if (itemId >= lists.size()) {
                         // create new list on the fly
-                        promptForListCreation(runAfterwards);
+                        promptForListCreation(runAfterwards, newListName);
                     }
                     else {
                         if (runAfterwards != null) {
@@ -115,8 +122,21 @@ public class StoredList {
             builder.create().show();
         }
 
-        public void promptForListCreation(final RunnableWithArgument<Integer> runAfterwards) {
-            handleListNameInput("", R.string.list_dialog_create_title, R.string.list_dialog_create, new RunnableWithArgument<String>() {
+        private static List<StoredList> getSortedLists() {
+            final Collator collator = Collator.getInstance();
+            final List<StoredList> lists = cgData.getLists();
+            Collections.sort(lists, new Comparator<StoredList>() {
+
+                @Override
+                public int compare(StoredList lhs, StoredList rhs) {
+                    return collator.compare(lhs.getTitle(), rhs.getTitle());
+                }
+            });
+            return lists;
+        }
+
+        public void promptForListCreation(final RunnableWithArgument<Integer> runAfterwards, String newListName) {
+            handleListNameInput(newListName, R.string.list_dialog_create_title, R.string.list_dialog_create, new RunnableWithArgument<String>() {
 
                 @Override
                 public void run(final String listName) {
@@ -175,5 +195,24 @@ public class StoredList {
                 }
             });
         }
+    }
+
+    /**
+     * Get the list title. This method is not public by intention to make clients use the {@link UserInterface} class.
+     *
+     * @return
+     */
+    protected String getTitle() {
+        return title;
+    }
+
+    /**
+     * Return the given list, if it is a concrete list. Return the default list otherwise.
+     */
+    public static int getConcreteList(int listId) {
+        if (listId == ALL_LIST_ID || listId == TEMPORARY_LIST_ID) {
+            return STANDARD_LIST_ID;
+        }
+        return listId;
     }
 }

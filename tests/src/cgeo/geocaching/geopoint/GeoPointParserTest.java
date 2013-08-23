@@ -1,5 +1,7 @@
 package cgeo.geocaching.geopoint;
 
+import cgeo.geocaching.ui.Formatter;
+
 import android.test.AndroidTestCase;
 
 public class GeoPointParserTest extends AndroidTestCase {
@@ -31,7 +33,6 @@ public class GeoPointParserTest extends AndroidTestCase {
         assertNull(point);
     }
 
-
     public static void testSouth() {
         assertEquals(-refLatitude, GeopointParser.parseLatitude("S 49° 56.031"), 1e-8);
     }
@@ -48,6 +49,12 @@ public class GeoPointParserTest extends AndroidTestCase {
         final Geopoint goal1 = GeopointParser.parse("N 49° 43' 57\" | E 2 12' 35");
         final Geopoint goal2 = GeopointParser.parse("N 49 43.95 E2°12.5833333333");
         assertTrue(goal1.isEqualTo(goal2, 1e-6));
+    }
+
+    public static void testParseOurOwnSeparator() {
+        final Geopoint separator = GeopointParser.parse("N 49° 43' 57\"" + Formatter.SEPARATOR + "E 2 12' 35");
+        final Geopoint noSeparator = GeopointParser.parse("N 49 43.95 E2°12.5833333333");
+        assertTrue(separator.isEqualTo(noSeparator, 1e-6));
     }
 
     public static void testInSentence() {

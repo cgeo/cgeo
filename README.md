@@ -4,6 +4,8 @@ You want to contribute?
 -----------------------
 Perfect! Please **tell us in the [issue tracker](https://github.com/cgeo/cgeo/issues) before hacking** on your great new feature. It would be bad if you have implemented something great, but we can't include it because it doesn't fit the remaining architecture and code. You might also want to chat with the developers on channel #cgeo on the freenode IRC network.
 
+[![Build Status](http://ci.cgeo.org/job/c-geo/badge/icon)](http://ci.cgeo.org/job/c-geo/)
+
 Get the source
 --------------
 
@@ -51,6 +53,9 @@ If the workspace directory name contains a space and leads to errors in the -dex
 4. edit `local.properties` (see comments in the file)
 5. copy `./main/templates/mapsapikey.xml` to `./main/res/values/`
 6. edit `./main/res/values/mapsapikey.xml` and insert your Maps API key (see comments in the file)
+7. copy `./main/templates/ocde_okapi.xml` to `./main/res/values/`
+8. request your personal ConsumerKey and -Secret at [opencaching.de OKAPI signup](http://www.opencaching.de/okapi/signup.html)
+9. edit `./main/res/values/ocde_okapi.xml` and insert your keys there.
 
 ### Building with Ant ###
 
@@ -73,6 +78,8 @@ The Test classes can be found in the project cgeo-os-test. Test classes should b
 the class under test.
 Every class can be "Run As" (or "Debug As") an [Android JUnit Test](http://developer.android.com/guide/topics/testing/testing_android.html) from Eclipse.
 To run all tests use the same "Run As" menu item from the context menu of the test project.
+
+For tests to run successfully you need to configure c:geo on the emulator that runs the test with a valid geocaching.com account. In order for all tests to be successfull the account needs to be premium.
 
 License
 -------

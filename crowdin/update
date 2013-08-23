@@ -1,0 +1,29 @@
+#/bin/sh
+
+#
+#
+# This script updates 
+#   main/res/values/strings.xml
+# and
+#   cgeo-calendar/res/values/strings.xml
+# in crowdin by uploading the files from master to crowdin.
+#
+#
+
+# see: http://crowdin.net/page/api/update-file
+
+# update_file uploads the file in parameter 1 to the crowdin file name in parameter 2 
+update_file() {
+    crowdin_surf -F "files[$2]=@$1" \
+        "http://api.crowdin.net/api/project/cgeo/update-file?key=${CROWDIN_APIKEY}"
+}
+
+. "`dirname $0`/globals"
+
+echo You must be on an up-to-date master branch to execute this script.
+echo You have 5 seconds to abort with ctrl-c if this is not the case.
+sleep 5
+
+update_file main/res/values/strings.xml /cgeo/strings.xml
+update_file cgeo-calendar/res/values/strings.xml /cgeo-calendar/strings.xml
+

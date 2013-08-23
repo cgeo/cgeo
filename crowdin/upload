@@ -1,0 +1,39 @@
+#/bin/sh
+
+#
+#
+# This script uploads 
+#   main/res/values-xx/strings.xml
+# and
+#   cgeo-calendar/res/values-xx/strings.xml
+# in crowdin by uploading the files from the current branch to crowdin.
+#
+#
+
+# see: 
+
+# upload_file uploads the file in parameter 1 to the crowdin file name in parameter 2 
+upload_file() {
+    if [ -f "$2" ]; then
+        CROWDIN_LANG=`map_to_crowdin_code "$1"`
+        crowdin_surf \
+            -F \"files[$3]=@$2\" \
+            -F \"language=$CROWDIN_LANG\" \
+            -F \"import_eq_suggestions=1\" \
+            \"http://api.crowdin.net/api/project/cgeo/upload-translation?key=${CROWDIN_APIKEY}\"
+    else
+        debug "$2 not found."
+    fi
+}
+
+. "`dirname $0`/globals"
+
+if [ $# -eq 0 ]; then
+    debug "no languages passed - aborting."
+fi
+
+for i in $@; do
+    upload_file $i main/res/values-$i/strings.xml /cgeo/strings.xml
+    upload_file $i cgeo-calendar/res/values-$i/strings.xml /cgeo-calendar/strings.xml
+done
+

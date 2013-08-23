@@ -1,35 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string-array name="waypoint_coordinate_formats" translatable="false">
-    <item>@string/waypoint_coordinate_formats_plain</item>
-    <item>DDD.DDDDD°</item>
-    <item>DDD°MM.MMM\'</item>
-    <item>DDD°MM\'SS.SSS\"</item>
-  </string-array>
-  
-  <!-- distance units -->
-  <string name="unit_m" translatable="false">m</string>
-  <string name="unit_km" translatable="false">km</string>
-  <string name="unit_ft" translatable="false">ft</string>
-  <string name="unit_yd" translatable="false">yd</string>
-  <string name="unit_mi" translatable="false">mi</string>
-  
-  <!-- distance units -->
-  <string-array name="distance_units" translatable="false">
-    <item>@string/unit_m</item>
-    <item>@string/unit_km</item>
-    <item>@string/unit_ft</item>
-    <item>@string/unit_yd</item>
-    <item>@string/unit_mi</item>
-  </string-array>
-  
-  <string name="init_select_themefolder" translatable="false">…</string>
-  <string name="init_select_map_directory" translatable="false">…</string>
-  <string name="init_select_gpx_exportdir" translatable="false">…</string>
-  <string name="init_select_gpx_importdir" translatable="false">…</string>
-  
-  <!-- contributors -->
-  <string name="contributors" translatable="false">\n
+
+    <string-array name="waypoint_coordinate_formats" translatable="false">
+        <item>@string/waypoint_coordinate_formats_plain</item>
+        <item>DDD.DDDDD°</item>
+        <item>DDD°MM.MMM\'</item>
+        <item>DDD°MM\'SS.SSS\"</item>
+    </string-array>
+
+    <!-- distance units -->
+    <string name="unit_m" translatable="false">m</string>
+    <string name="unit_km" translatable="false">km</string>
+    <string name="unit_ft" translatable="false">ft</string>
+    <string name="unit_yd" translatable="false">yd</string>
+    <string name="unit_mi" translatable="false">mi</string>
+
+    <!-- distance units -->
+    <string-array name="distance_units" translatable="false">
+        <item>@string/unit_m</item>
+        <item>@string/unit_km</item>
+        <item>@string/unit_ft</item>
+        <item>@string/unit_yd</item>
+        <item>@string/unit_mi</item>
+    </string-array>
+
+    <!-- upload image scaling -->
+    <integer-array name="log_image_scale_values">
+        <item>-1</item>
+        <item>512</item>
+        <item>640</item>
+        <item>800</item>
+        <item>1024</item>
+    </integer-array>
+    
+    <string name="settings_gc_legal_note_url" translatable="false">http://www.geocaching.com/about/termsofuse.aspx</string>
+    <string name="settings_offline_maps_url" translatable="false">http://faq.cgeo.org/#3_12</string>
+    <string name="settings_themes_url" translatable="false">http://faq.cgeo.org/#3_26</string>
+    <string name="settings_send2cgeo_url" translatable="false">http://send2.cgeo.org/</string>
+    <string name="settings_facebook_login_url" translatable="false">http://faq.cgeo.org/#1_38</string>
+
+    <!-- contributors -->
+    <string name="contributors" translatable="false">
     · <a href="http://carnero.cc/">carnero</a> as the father of c:geo\n
     \n
     · 0xErnie (localization DE)\n
@@ -54,6 +65,7 @@
     · Ludovic Valente (localization FR)\n
     · marco-jacob (code, loc. DE)\n
     · MichielK (code, loc. NL)\n
+    · <a href="http://www.linkedin.com/in/mieczyslawtorchala">Mieczyslaw Torchala</a> (localization PL)\n
     · mucek4 (code, open source project leader)\n
     · ncorreia (code, localization PT)\n
     · Pascal (localization NL)\n
@@ -80,9 +92,9 @@
     · <a href="http://commons.apache.org/">The Apache Commons Project</a>\n
     · <a href="http://androidicons.com/">Android Icons</a> (<a href="https://creativecommons.org/licenses/by/3.0/">CC-BY 3.0</a>)\n
     · <a href="http://rrze-icon-set.berlios.de/index.html">RRZE Icon set</a> (<a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA 3.0</a>)\n
-  </string>
-  
-  <!-- cache menu -->
-  <string name="cache_menu_sygic" translatable="false">Sygic</string>
+	</string>
+
+    <!-- cache menu -->
+    <string name="cache_menu_sygic" translatable="false">Sygic</string>
 
 </resources>

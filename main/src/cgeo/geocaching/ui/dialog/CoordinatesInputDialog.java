@@ -3,8 +3,8 @@ package cgeo.geocaching.ui.dialog;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
-import cgeo.geocaching.Settings.coordInputFormatEnum;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.Settings.CoordInputFormatEnum;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.compatibility.Compatibility;
@@ -13,13 +13,10 @@ import cgeo.geocaching.geopoint.GeopointFormatter;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -28,7 +25,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class CoordinatesInputDialog extends Dialog {
+public class CoordinatesInputDialog extends NoTitleDialog {
 
     final private AbstractActivity context;
     final private IGeoData geo;
@@ -44,10 +41,10 @@ public class CoordinatesInputDialog extends Dialog {
 
     private CoordinateUpdate cuListener;
 
-    private coordInputFormatEnum currentFormat = null;
+    private CoordInputFormatEnum currentFormat = null;
 
     public CoordinatesInputDialog(final AbstractActivity context, final Geocache cache, final Geopoint gp, final IGeoData geo) {
-        super(context, ActivityMixin.getTheme());
+        super(context, ActivityMixin.getDialogTheme());
         this.context = context;
         this.geo = geo;
         this.cache = cache;
@@ -65,22 +62,7 @@ public class CoordinatesInputDialog extends Dialog {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        try {
-            requestWindowFeature(Window.FEATURE_NO_TITLE);
-            getWindow().setLayout(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        } catch (Exception e) {
-            // nothing
-        }
-
-        setContentView(R.layout.coords);
-
-        findViewById(R.id.actionBarManualbutton).setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                ActivityMixin.goManual(context, "c:geo-geocoordinate-input");
-            }
-        });
+        setContentView(R.layout.coordinatesinput_dialog);
 
         final Spinner spinner = (Spinner) findViewById(R.id.spinnerCoordinateFormats);
         final ArrayAdapter<CharSequence> adapter =
@@ -290,7 +272,7 @@ public class CoordinatesInputDialog extends Dialog {
              * formatSec 2/3 2 2 3
              */
 
-            if (currentFormat == coordInputFormatEnum.Plain) {
+            if (currentFormat == CoordInputFormatEnum.Plain) {
                 return;
             }
 
@@ -343,10 +325,10 @@ public class CoordinatesInputDialog extends Dialog {
     }
 
     private boolean calc(final boolean signalError) {
-        if (currentFormat == coordInputFormatEnum.Plain) {
+        if (currentFormat == CoordInputFormatEnum.Plain) {
             try {
                 gp = new Geopoint(eLat.getText().toString(), eLon.getText().toString());
-            } catch (Geopoint.ParseException e) {
+            } catch (final Geopoint.ParseException e) {
                 if (signalError) {
                     context.showToast(context.getResources().getString(R.string.err_parse_lat_lon));
                 }
@@ -355,20 +337,20 @@ public class CoordinatesInputDialog extends Dialog {
             return true;
         }
 
-        String latDir = bLat.getText().toString();
-        String lonDir = bLon.getText().toString();
-        String latDeg = eLatDeg.getText().toString();
-        String lonDeg = eLonDeg.getText().toString();
-        String latDegFrac = eLatMin.getText().toString();
-        String lonDegFrac = eLonMin.getText().toString();
-        String latMin = eLatMin.getText().toString();
-        String lonMin = eLonMin.getText().toString();
-        String latMinFrac = eLatSec.getText().toString();
-        String lonMinFrac = eLonSec.getText().toString();
-        String latSec = eLatSec.getText().toString();
-        String lonSec = eLonSec.getText().toString();
-        String latSecFrac = eLatSub.getText().toString();
-        String lonSecFrac = eLonSub.getText().toString();
+        final String latDir = bLat.getText().toString();
+        final String lonDir = bLon.getText().toString();
+        final String latDeg = eLatDeg.getText().toString();
+        final String lonDeg = eLonDeg.getText().toString();
+        final String latDegFrac = eLatMin.getText().toString();
+        final String lonDegFrac = eLonMin.getText().toString();
+        final String latMin = eLatMin.getText().toString();
+        final String lonMin = eLonMin.getText().toString();
+        final String latMinFrac = eLatSec.getText().toString();
+        final String lonMinFrac = eLonSec.getText().toString();
+        final String latSec = eLatSec.getText().toString();
+        final String lonSec = eLonSec.getText().toString();
+        final String latSecFrac = eLatSub.getText().toString();
+        final String lonSecFrac = eLonSub.getText().toString();
 
         switch (currentFormat) {
             case Deg:
@@ -393,10 +375,10 @@ public class CoordinatesInputDialog extends Dialog {
         if (editText == eLonDeg || editText == eLatSub || editText == eLonSub) {
             return 3;
         }
-        if ((editText == eLatMin || editText == eLonMin) && currentFormat == coordInputFormatEnum.Deg) {
+        if ((editText == eLatMin || editText == eLonMin) && currentFormat == CoordInputFormatEnum.Deg) {
             return 5;
         }
-        if ((editText == eLatSec || editText == eLonSec) && currentFormat == coordInputFormatEnum.Min) {
+        if ((editText == eLatSec || editText == eLonSec) && currentFormat == CoordInputFormatEnum.Min) {
             return 3;
         }
         return 2;
@@ -420,7 +402,7 @@ public class CoordinatesInputDialog extends Dialog {
                 }
             }
 
-            currentFormat = coordInputFormatEnum.fromInt(pos);
+            currentFormat = CoordInputFormatEnum.fromInt(pos);
             Settings.setCoordInputFormat(currentFormat);
             updateGUI();
         }

@@ -1,6 +1,5 @@
 package cgeo.geocaching.test;
 
-
 import cgeo.geocaching.utils.Log;
 
 import android.test.AndroidTestCase;
@@ -9,9 +8,7 @@ import java.util.List;
 
 /**
  * Test class to compare the performance of two regular expressions on given data.
- * Can be used to improve the time needed to parse the cache data
- *
- * @author blafoo
+ * Can be used to improve the time needed to parse the cache data.
  */
 public class RegExRealPerformanceTest extends AndroidTestCase {
 

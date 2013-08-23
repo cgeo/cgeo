@@ -4,7 +4,7 @@ import org.xmlpull.v1.XmlSerializer;
 
 import java.io.IOException;
 
-public class XmlUtils {
+public final class XmlUtils {
 
     private XmlUtils() {
         // Do not instantiate

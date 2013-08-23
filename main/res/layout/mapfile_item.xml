@@ -22,7 +22,7 @@
         android:singleLine="true"
         android:textColor="?text_color_grey"
         android:textIsSelectable="false"
-        android:textSize="12dip" />
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/mapfilename"
@@ -35,6 +35,6 @@
         android:singleLine="true"
         android:textColor="?text_color"
         android:textIsSelectable="false"
-        android:textSize="22dip" />
+        android:textSize="22sp" />
 
 </LinearLayout>

@@ -4,10 +4,12 @@
 // @description    Add button "Send to c:geo" to geocaching.com
 // @include        http://www.geocaching.com/seek/cache_details*
 // @include        http://www.geocaching.com/map/*
-// @include        http://www.geocaching.com/geocache/* 
+// @include        http://www.geocaching.com/geocache/*
+// @include        http://www.geocaching.com/my/recentlyviewedcaches*
+// @include        http://www.geocaching.com/seek/nearest*
 // @icon           http://send2.cgeo.org/content/images/logo.png
 // @updateURL      http://send2.cgeo.org/send2cgeo.user.js
-// @version        0.27
+// @version        0.29
 // ==/UserScript==
 
 // Inserts javascript that will be called by the s2cgeo button. The closure
@@ -32,7 +34,7 @@ s.textContent =  '(' + function() {
         // hide "please wait text" and show iframe
         $('#send2cgeo div').hide();
         // hide box after 3 seconds
-        $(this).show().parent().delay(3000).fadeOut();
+        $(this).css('display', 'block').parent().delay(3000).fadeOut();
       });
   };
 
@@ -70,7 +72,7 @@ s.textContent =  '(' + function() {
              + '<span>Send to c:geo</span>';
 
     map.innerHTML = map.innerHTML.replace('Log Visit</span>', html);
-  } else {
+  } else if(document.getElementById('ctl00_ContentBody_CoordInfoLinkControl1_uxCoordInfoCode') != null){
     // geocaching.com cache detail page
     var GCCode = $('#ctl00_ContentBody_CoordInfoLinkControl1_uxCoordInfoCode')
                   .html();
@@ -83,6 +85,18 @@ s.textContent =  '(' + function() {
 
     $('#Download p:last').append(html);
     $('#Download dd:last').append(html);
+  } else {
+    // geocaching.com recentlyviewed
+    $('img[src="/images/icons/16/send_to_gps.png"]').each(function(){
+      $(this).attr('alt', "Send to c:geo").attr('title', "Send to c:geo");
+    });
+    $('a[title="Send to GPS"]').each(function(){
+      var text = $(this).parent().parent().find(".Merge").last().find(".small").first().text().split("|");
+      var GCCode = text[text.length - 2].trim();
+      this.href="javascript:window.s2geo('"+GCCode+"')";
+      this.title = "Send to c:geo";
+    });
+    
   }
 } + ')();';
 

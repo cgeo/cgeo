@@ -2,6 +2,11 @@
 <lint>
     <issue id="ContentDescription" severity="ignore" />
     <issue id="ExportedContentProvider" severity="ignore" />
+    <issue id="InvalidPackage" severity="ignore" />
     <issue id="MissingTranslation" severity="ignore" />
     <issue id="Registered" severity="ignore" />
+    <issue id="UnusedResources">
+        <ignore path="res/drawable-mdpi/attribute_maintenance.png" />
+        <ignore path="res/values/vpi__colors.xml" />
+    </issue>
 </lint>

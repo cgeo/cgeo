@@ -1,7 +1,8 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.enumerations.LogType;
-import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -38,17 +39,11 @@ public class Trackable implements ILogable {
     private String trackingcode = null;
 
     public String getUrl() {
-        if (StringUtils.startsWithIgnoreCase(getGeocode(), "GK")) {
-            String hex = getGeocode().substring(3);
-            try {
-                int id = Integer.parseInt(hex, 16);
-                return "http://geokrety.org/konkret.php?id=" + id;
-            } catch (NumberFormatException e) {
-                Log.e("Trackable.getUrl", e);
-                return null;
-            }
-        }
-        return "http://www.geocaching.com//track/details.aspx?tracker=" + geocode;
+        return getConnector().getUrl(this);
+    }
+
+    private TrackableConnector getConnector() {
+        return ConnectorFactory.getConnector(this);
     }
 
     public String getGuid() {
@@ -208,7 +203,7 @@ public class Trackable implements ILogable {
     }
 
     public boolean isLoggable() {
-        return !StringUtils.startsWithIgnoreCase(getGeocode(), "GK");
+        return getConnector().isLoggable();
     }
 
     public String getTrackingcode() {
@@ -220,7 +215,7 @@ public class Trackable implements ILogable {
     }
 
     static public List<LogType> getPossibleLogTypes() {
-        List<LogType> logTypes = new ArrayList<LogType>();
+        final List<LogType> logTypes = new ArrayList<LogType>();
         logTypes.add(LogType.RETRIEVED_IT);
         logTypes.add(LogType.GRABBED_IT);
         logTypes.add(LogType.NOTE);

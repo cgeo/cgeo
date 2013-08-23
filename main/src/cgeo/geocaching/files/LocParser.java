@@ -27,19 +27,13 @@ import java.util.regex.Pattern;
 
 public final class LocParser extends FileParser {
 
+    private static final String NAME_OWNER_SEPARATOR = " by ";
     private static final Pattern patternGeocode = Pattern
             .compile("name id=\"([^\"]+)\"");
     private static final Pattern patternLat = Pattern
             .compile("lat=\"([^\"]+)\"");
     private static final Pattern patternLon = Pattern
             .compile("lon=\"([^\"]+)\"");
-    // premium only >>
-    private static final Pattern patternDifficulty = Pattern
-            .compile("<difficulty>([^<]+)</difficulty>");
-    private static final Pattern patternTerrain = Pattern
-            .compile("<terrain>([^<]+)</terrain>");
-    private static final Pattern patternContainer = Pattern
-            .compile("<container>([^<]+)</container>");
     private static final Pattern patternName = Pattern.compile("CDATA\\[([^\\]]+)\\]");
 
     private static final CacheSize[] SIZES = {
@@ -82,6 +76,7 @@ public final class LocParser extends FileParser {
         if (StringUtils.isBlank(cache.getName())) {
             cache.setName(coord.getName());
         }
+        cache.setOwnerUserId(coord.getOwnerUserId());
     }
 
     static Map<String, Geocache> parseCoordinates(final String fileContent) {
@@ -110,7 +105,7 @@ public final class LocParser extends FileParser {
         try {
             return new Geopoint(Double.valueOf(latitude), Double.valueOf(longitude));
         } catch (NumberFormatException e) {
-            Log.e("LOC format has changed");
+            Log.e("LOC format has changed", e);
         }
         // fall back to parser, just in case the format changes
         return new Geopoint(latitude, longitude);
@@ -156,7 +151,11 @@ public final class LocParser extends FileParser {
         final MatcherWrapper matcherName = new MatcherWrapper(patternName, pointString);
         if (matcherName.find()) {
             final String name = matcherName.group(1).trim();
-            cache.setName(StringUtils.substringBeforeLast(name, " by ").trim());
+            String ownerName = StringUtils.trim(StringUtils.substringAfterLast(name, NAME_OWNER_SEPARATOR));
+            if (StringUtils.isEmpty(cache.getOwnerUserId()) && StringUtils.isNotEmpty(ownerName)) {
+                cache.setOwnerUserId(ownerName);
+            }
+            cache.setName(StringUtils.substringBeforeLast(name, NAME_OWNER_SEPARATOR).trim());
         } else {
             cache.setName(cache.getGeocode());
         }
@@ -167,20 +166,20 @@ public final class LocParser extends FileParser {
             cache.setCoords(parsePoint(matcherLat.group(1).trim(), matcherLon.group(1).trim()));
         }
 
-        final MatcherWrapper matcherDifficulty = new MatcherWrapper(patternDifficulty, pointString);
+        final String difficulty = StringUtils.substringBetween(pointString, "<difficulty>", "</difficulty>");
+        final String terrain = StringUtils.substringBetween(pointString, "<terrain>", "</terrain>");
+        final String container = StringUtils.substringBetween(pointString, "<container>", "</container");
         try {
-            if (matcherDifficulty.find()) {
-                cache.setDifficulty(Float.parseFloat(matcherDifficulty.group(1).trim()));
+            if (StringUtils.isNotBlank(difficulty)) {
+                cache.setDifficulty(Float.parseFloat(difficulty.trim()));
             }
 
-            final MatcherWrapper matcherTerrain = new MatcherWrapper(patternTerrain, pointString);
-            if (matcherTerrain.find()) {
-                cache.setTerrain(Float.parseFloat(matcherTerrain.group(1).trim()));
+            if (StringUtils.isNotBlank(terrain)) {
+                cache.setTerrain(Float.parseFloat(terrain.trim()));
             }
 
-            final MatcherWrapper matcherContainer = new MatcherWrapper(patternContainer, pointString);
-            if (matcherContainer.find()) {
-                final int size = Integer.parseInt(matcherContainer.group(1).trim());
+            if (StringUtils.isNotBlank(container)) {
+                final int size = Integer.parseInt(container.trim());
                 if (size >= 1 && size <= 8) {
                     cache.setSize(SIZES[size - 1]);
                 }

@@ -1,8 +1,8 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.settings.Settings;
 
 import android.graphics.Bitmap;
 
@@ -21,7 +21,7 @@ public abstract class IconDecoder {
     private static final int CT_MEGAEVENT = 7;
     private static final int CT_CITO = 8;
     private static final int CT_WEBCAM = 9;
-    private static final int CT_WHEREIGO = 10;
+    private static final int CT_WHERIGO = 10;
     private static final int CT_VIRTUAL = 11;
     private static final int CT_LETTERBOX = 12;
 
@@ -87,19 +87,19 @@ public abstract class IconDecoder {
         if (count > 1) { // 2 pixels need to detect same type and we say good to go
             switch (type) {
                 case CT_TRADITIONAL:
-                    cache.setType(CacheType.TRADITIONAL);
+                    cache.setType(CacheType.TRADITIONAL, zoomlevel);
                     return true;
                 case CT_MULTI:
-                    cache.setType(CacheType.MULTI);
+                    cache.setType(CacheType.MULTI, zoomlevel);
                     return true;
                 case CT_MYSTERY:
-                    cache.setType(CacheType.MYSTERY);
+                    cache.setType(CacheType.MYSTERY, zoomlevel);
                     return true;
                 case CT_EVENT:
-                    cache.setType(CacheType.EVENT);
+                    cache.setType(CacheType.EVENT, zoomlevel);
                     return true;
                 case CT_EARTH:
-                    cache.setType(CacheType.EARTH);
+                    cache.setType(CacheType.EARTH, zoomlevel);
                     return true;
                 case CT_FOUND:
                     cache.setFound(true);
@@ -108,22 +108,22 @@ public abstract class IconDecoder {
                     cache.setOwnerUserId(Settings.getUsername());
                     return true;
                 case CT_MEGAEVENT:
-                    cache.setType(CacheType.MEGA_EVENT);
+                    cache.setType(CacheType.MEGA_EVENT, zoomlevel);
                     return true;
                 case CT_CITO:
-                    cache.setType(CacheType.CITO);
+                    cache.setType(CacheType.CITO, zoomlevel);
                     return true;
                 case CT_WEBCAM:
-                    cache.setType(CacheType.WEBCAM);
+                    cache.setType(CacheType.WEBCAM, zoomlevel);
                     return true;
-                case CT_WHEREIGO:
-                    cache.setType(CacheType.WHERIGO);
+                case CT_WHERIGO:
+                    cache.setType(CacheType.WHERIGO, zoomlevel);
                     return true;
                 case CT_VIRTUAL:
-                    cache.setType(CacheType.VIRTUAL);
+                    cache.setType(CacheType.VIRTUAL, zoomlevel);
                     return true;
                 case CT_LETTERBOX:
-                    cache.setType(CacheType.LETTERBOX);
+                    cache.setType(CacheType.LETTERBOX, zoomlevel);
                     return true;
             }
         }
@@ -395,12 +395,12 @@ public abstract class IconDecoder {
                     if (g < 71) {
                         return CT_MYSTERY;
                     }
-                    return r < 153 ? CT_WHEREIGO : CT_WEBCAM;
+                    return r < 153 ? CT_WHERIGO : CT_WEBCAM;
                 }
                 if (b < 167) {
                     return r < 157 ? CT_TRADITIONAL : CT_WEBCAM;
                 }
-                return CT_WHEREIGO;
+                return CT_WHERIGO;
             }
             if (g < 199) {
                 if (r < 142) {
@@ -450,7 +450,7 @@ public abstract class IconDecoder {
             if (b < 252) {
                 if (r < 243) {
                     if (r < 225) {
-                        return CT_WHEREIGO;
+                        return CT_WHERIGO;
                     }
                     if (b < 232) {
                         if (g < 228) {
@@ -459,14 +459,14 @@ public abstract class IconDecoder {
                         return r < 231 ? CT_VIRTUAL : CT_TRADITIONAL;
                     }
                     if (r < 236) {
-                        return CT_WHEREIGO;
+                        return CT_WHERIGO;
                     }
-                    return r < 240 ? CT_WEBCAM : CT_WHEREIGO;
+                    return r < 240 ? CT_WEBCAM : CT_WHERIGO;
                 }
                 if (g < 247) {
                     return r < 245 ? CT_WEBCAM : CT_FOUND;
                 }
-                return CT_WHEREIGO;
+                return CT_WHERIGO;
             }
             return CT_LETTERBOX;
         }

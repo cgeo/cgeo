@@ -18,14 +18,18 @@ public class cgeoapplication extends Application {
 
     private volatile GeoDataProvider geo;
     private volatile DirectionProvider dir;
-    public boolean firstRun = true; // c:geo is just launched
+    public boolean checkLogin = true; // c:geo is just launched
     public boolean showLoginToast = true; //login toast shown just once.
     private boolean liveMapHintShown = false; // livemap hint has been shown
     final private StatusUpdater statusUpdater = new StatusUpdater();
     private static cgeoapplication instance;
 
     public cgeoapplication() {
-        instance = this;
+        setInstance(this);
+    }
+
+    private static void setInstance(final cgeoapplication application) {
+        instance = application;
     }
 
     public static cgeoapplication getInstance() {
@@ -86,39 +90,6 @@ public class cgeoapplication extends Application {
     }
 
     /**
-     * restore the database in a new thread, showing a progress window
-     *
-     * @param fromActivity
-     *            calling activity
-     */
-    public void restoreDatabase(final Activity fromActivity) {
-        final Resources res = this.getResources();
-        final ProgressDialog dialog = ProgressDialog.show(fromActivity, res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_running), true, false);
-        final AtomicBoolean atomic = new AtomicBoolean(false);
-        Thread restoreThread = new Thread() {
-            final Handler handler = new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    dialog.dismiss();
-                    boolean restored = atomic.get();
-                    String message = restored ? res.getString(R.string.init_restore_success) : res.getString(R.string.init_restore_failed);
-                    ActivityMixin.helpDialog(fromActivity, res.getString(R.string.init_backup_restore), message);
-                    if (fromActivity instanceof cgeo) {
-                        ((cgeo) fromActivity).updateCacheCounter();
-                    }
-                }
-            };
-
-            @Override
-            public void run() {
-                atomic.set(cgData.restoreDatabase());
-                handler.sendMessage(handler.obtainMessage());
-            }
-        };
-        restoreThread.start();
-    }
-
-    /**
      * Register an observer to receive GeoData information.
      * <br/>
      * If there is a chance that no observers are registered before this
@@ -168,6 +139,10 @@ public class cgeoapplication extends Application {
             }
         }
         return dir;
+    }
+
+    public Float currentDirection() {
+        return currentDirObject().getMemory();
     }
 
     public StatusUpdater getStatusUpdater() {

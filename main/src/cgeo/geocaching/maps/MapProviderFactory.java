@@ -1,12 +1,18 @@
 package cgeo.geocaching.maps;
 
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.R;
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.maps.google.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.Log;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.view.Menu;
+import android.view.SubMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +30,21 @@ public class MapProviderFactory {
     }
 
     public static boolean isGoogleMapsInstalled() {
-        boolean googleMaps = true;
+        // Check if API key is available
+        if (StringUtils.isBlank(cgeoapplication.getInstance().getString(R.string.maps_api_key))) {
+            Log.w("No Google API key available.");
+            return false;
+        }
+
+        // Check if API is available
         try {
             Class.forName("com.google.android.maps.MapActivity");
         } catch (ClassNotFoundException e) {
-            googleMaps = false;
+            return false;
         }
-        return googleMaps;
+
+        // Assume that Google Maps is available and working
+        return true;
     }
 
     public static List<MapSource> getMapSources() {
@@ -43,13 +57,16 @@ public class MapProviderFactory {
         return provider1 == provider2 && provider1.isSameActivity(source1, source2);
     }
 
-    public static void addMapviewMenuItems(final Menu parentMenu, final int groupId) {
+    public static void addMapviewMenuItems(Menu menu) {
+        final SubMenu parentMenu = menu.findItem(R.id.menu_select_mapview).getSubMenu();
+
         final int currentSource = Settings.getMapSource().getNumericalId();
         for (int i = 0; i < mapSources.size(); i++) {
             final MapSource mapSource = mapSources.get(i);
             final int id = mapSource.getNumericalId();
-            parentMenu.add(groupId, id, i, mapSource.getName()).setCheckable(true).setChecked(id == currentSource);
+            parentMenu.add(R.id.menu_group_map_sources, id, i, mapSource.getName()).setCheckable(true).setChecked(id == currentSource);
         }
+        parentMenu.setGroupCheckable(R.id.menu_group_map_sources, true, true);
     }
 
     public static MapSource getMapSource(int id) {

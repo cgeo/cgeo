@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+
     <string-array name="attribute_ids" translatable="false">
         <item>dogs_yes</item>
         <item>dogs_no</item>
@@ -69,10 +70,14 @@
         <item>frontyard_no</item>
         <item>teamwork_yes</item>
         <item>teamwork_no</item>
+
+        <!-- attributes (specials -> yes, no) -->
         <item>landf_yes</item>
         <item>landf_no</item>
         <item>partnership_yes</item>
         <item>partnership_no</item>
+        <item>geotour_yes</item>
+        <item>geotour_no</item>
 
         <!-- attributes (equipment -> required, not required) -->
         <item>fee_yes</item>
@@ -140,4 +145,5 @@
         <item>food_yes</item>
         <item>food_no</item>
     </string-array>
+
 </resources>

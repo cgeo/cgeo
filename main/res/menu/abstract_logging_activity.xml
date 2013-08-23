@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/menu_signature"
+        android:icon="@drawable/ic_menu_edit"
+        android:title="@string/init_signature">
+    </item>
+    <item
+        android:id="@+id/menu_templates"
+        android:icon="@drawable/ic_menu_add"
+        android:title="@string/log_add">
+        <menu /> <!-- filled dynamically -->
+    </item>
+    <item
+        android:id="@+id/menu_smilies"
+        android:icon="@drawable/ic_menu_emoticons"
+        android:title="@string/log_smilies">
+        <menu /> <!-- filled dynamically -->
+    </item>
+
+</menu>

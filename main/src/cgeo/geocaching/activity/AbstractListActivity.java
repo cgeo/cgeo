@@ -12,33 +12,22 @@ import android.view.View;
 public abstract class AbstractListActivity extends FragmentListActivity implements
         IAbstractActivity {
 
-    private String helpTopic;
     private boolean keepScreenOn = false;
 
     protected cgeoapplication app = null;
     protected Resources res = null;
 
     protected AbstractListActivity() {
-        this(null);
+        this(false);
     }
 
     protected AbstractListActivity(final boolean keepScreenOn) {
-        this(null);
         this.keepScreenOn = keepScreenOn;
-    }
-
-    protected AbstractListActivity(final String helpTopic) {
-        this.helpTopic = helpTopic;
     }
 
     @Override
     final public void goHome(View view) {
         ActivityMixin.goHome(this);
-    }
-
-    @Override
-    public void goManual(View view) {
-        ActivityMixin.goManual(this, helpTopic);
     }
 
     final public void showProgress(final boolean show) {
@@ -71,7 +60,10 @@ public abstract class AbstractListActivity extends FragmentListActivity implemen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initializeCommonFields();
+    }
 
+    private void initializeCommonFields() {
         // init
         res = this.getResources();
         app = (cgeoapplication) this.getApplication();
@@ -79,12 +71,28 @@ public abstract class AbstractListActivity extends FragmentListActivity implemen
         ActivityMixin.keepScreenOn(this, keepScreenOn);
     }
 
-    final public void setTitle(final String title) {
+    final protected void setTitle(final String title) {
         ActivityMixin.setTitle(this, title);
     }
 
     @Override
     public void invalidateOptionsMenuCompatible() {
         Compatibility.invalidateOptionsMenu(this);
+    }
+
+    public void onCreate(Bundle savedInstanceState, int resourceLayoutID) {
+        super.onCreate(savedInstanceState);
+        initializeCommonFields();
+
+        setTheme();
+        setContentView(resourceLayoutID);
+    }
+
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+
+        // initialize action bar title with activity title
+        ActivityMixin.setTitle(this, getTitle());
     }
 }

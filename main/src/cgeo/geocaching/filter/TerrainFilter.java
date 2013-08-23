@@ -1,30 +1,34 @@
 package cgeo.geocaching.filter;
 
-
-import cgeo.geocaching.R;
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 class TerrainFilter extends AbstractRangeFilter {
 
-    public TerrainFilter(int terrain) {
+    public TerrainFilter(final int terrain) {
         super(R.string.cache_terrain, terrain);
     }
 
     @Override
-    public boolean accepts(Geocache cache) {
-        return rangeMin <= cache.getTerrain() && cache.getTerrain() < rangeMax;
+    public boolean accepts(final Geocache cache) {
+        final float terrain = cache.getTerrain();
+        return rangeMin <= terrain && terrain < rangeMax;
     }
 
     public static class Factory implements IFilterFactory {
+        private static final int TERRAIN_MIN = 1;
+        private static final int TERRAIN_MAX = 5;
+
         @Override
-        public IFilter[] getFilters() {
-            final ArrayList<IFilter> filters = new ArrayList<IFilter>(5);
-            for (int terrain = 1; terrain <= 5; terrain++) {
+        public List<IFilter> getFilters() {
+            final ArrayList<IFilter> filters = new ArrayList<IFilter>(TERRAIN_MAX);
+            for (int terrain = TERRAIN_MIN; terrain <= TERRAIN_MAX; terrain++) {
                 filters.add(new TerrainFilter(terrain));
             }
-            return filters.toArray(new IFilter[filters.size()]);
+            return filters;
         }
     }
 

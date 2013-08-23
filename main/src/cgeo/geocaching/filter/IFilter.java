@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface IFilter {
 
-    public abstract String getName();
+    String getName();
 
     /**
      * @param cache
      * @return true if the filter accepts the cache, false otherwise
      */
-    public abstract boolean accepts(final Geocache cache);
+    boolean accepts(final Geocache cache);
 
-    public void filter(final List<Geocache> list);
+    void filter(final List<Geocache> list);
 }

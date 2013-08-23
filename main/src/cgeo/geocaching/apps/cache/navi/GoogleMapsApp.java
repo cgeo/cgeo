@@ -30,7 +30,7 @@ class GoogleMapsApp extends AbstractPointNavigationApp {
         } catch (Exception e) {
             // nothing
         }
-        Log.i("cgBase.runExternalMap: No maps application available.");
+        Log.i("GoogleMapsApp.navigate: No maps application available.");
 
         ActivityMixin.showToast(activity, getString(R.string.err_application_no));
     }

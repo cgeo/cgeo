@@ -9,6 +9,8 @@ public class CryptUtilsTest extends TestCase {
         assertEquals("", CryptUtils.rot13(""));
         assertEquals("", CryptUtils.rot13((String) null));
         assertEquals("Pnpur uvag", CryptUtils.rot13("Cache hint"));
+        assertEquals("Pnpur [plain] uvag", CryptUtils.rot13("Cache [plain] hint"));
+        assertEquals("[all plain]", CryptUtils.rot13("[all plain]"));
         assertEquals("123", CryptUtils.rot13("123"));
     }
 

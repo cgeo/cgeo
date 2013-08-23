@@ -5,7 +5,7 @@ import cgeo.geocaching.Image;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.core.IOUtils;
@@ -28,7 +28,7 @@ public abstract class MockedCache implements ICache {
         this.coords = coords;
         this.data = MockedCache.readCachePage(getGeocode());
         // for mocked caches the user logged in is the user who saved the html file(s)
-        this.mockedDataUser = BaseUtils.getMatch(data, GCConstants.PATTERN_LOGIN_NAME, true, "");
+        this.mockedDataUser = TextUtils.getMatch(data, GCConstants.PATTERN_LOGIN_NAME, true, "");
     }
 
     public String getMockedDataUser() {
@@ -68,7 +68,7 @@ public abstract class MockedCache implements ICache {
                 buffer.append(line).append('\n');
             }
 
-            return BaseUtils.replaceWhitespace(buffer.toString());
+            return TextUtils.replaceWhitespace(buffer.toString());
         } catch (IOException e) {
             Assert.fail(e.getMessage());
         } finally {
@@ -129,7 +129,7 @@ public abstract class MockedCache implements ICache {
     }
 
     @Override
-    public boolean isWatchlist() {
+    public boolean isOnWatchlist() {
         return false;
     }
 

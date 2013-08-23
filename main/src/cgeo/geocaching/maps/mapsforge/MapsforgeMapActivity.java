@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps.mapsforge;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.maps.AbstractMap;
 import cgeo.geocaching.maps.CGeoMap;
@@ -78,7 +79,9 @@ public class MapsforgeMapActivity extends MapActivity implements MapActivityImpl
 
     @Override
     public boolean superOnCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
+        final boolean result = super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.map_activity, menu);
+        return result;
     }
 
     @Override
@@ -115,12 +118,6 @@ public class MapsforgeMapActivity extends MapActivity implements MapActivityImpl
     @Override
     public void goHome(View view) {
         mapBase.goHome(view);
-    }
-
-    // open manual entry
-    @Override
-    public void goManual(View view) {
-        mapBase.goManual(view);
     }
 
     @Override

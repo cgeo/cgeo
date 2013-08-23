@@ -1,0 +1,44 @@
+#!/bin/bash
+
+. "`dirname $0`/credentials"
+
+OUT=/tmp/crowdin.`basename $0`.`date +%Y-%m-%d.%H:%M:%S`.out
+
+crowdin_surf () {
+    _do curl -o "${OUT}" $@ || die "curl produced an error."
+    grep -q "error" "${OUT}" && (cat "${OUT}" ; die "crowdin access failed." ; )
+    debug "crowdin answer"
+    cat "${OUT}"
+}
+
+require_tools () {
+	# code taken from backup2l
+    local NOT_AVAIL=""
+	for TOOL in $@; do
+	    if [ "`which $TOOL 2> /dev/null`" == "" ]; then NOT_AVAIL="$NOT_AVAIL $TOOL"; fi
+	done
+	if [[ "$NOT_AVAIL" != "" ]]; then
+	    die "The following required tool(s) cannot be found: $NOT_AVAIL"
+    fi
+}
+
+map_to_crowdin_code () {
+    CODE=$1
+    [[ "$CODE" == "es" ]] && CODE="es-ES"
+    [[ "$CODE" == "sv" ]] && CODE="sv-SE"
+    [[ "$CODE" == "pt" ]] && CODE="pt-PT"
+    echo "$CODE"
+}
+
+finish () { : ; }
+die () { for i; do debug "$i"; done; finish; exit 1; }
+debug () { echo "`date +%Y-%m-%d.%H:%M:%S` `basename $0`: $@"; }
+
+# use this function for executing commands.
+_do () { debug "$@"; eval "$@"; }
+
+require_tools git curl wget unzip
+
+git rev-parse --show-toplevel >& /dev/null || die "Please start this script from within a repo. Aborting."
+cd "`git rev-parse --show-toplevel`"
+

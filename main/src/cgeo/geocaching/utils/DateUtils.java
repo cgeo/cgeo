@@ -2,7 +2,12 @@ package cgeo.geocaching.utils;
 
 import java.util.Calendar;
 
-public class DateUtils {
+public final class DateUtils {
+
+    private DateUtils() {
+        // utility class
+    }
+
     public static int daysSince(long date) {
         final Calendar logDate = Calendar.getInstance();
         logDate.setTimeInMillis(date);

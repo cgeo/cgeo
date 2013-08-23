@@ -2,12 +2,12 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.Image;
 import cgeo.geocaching.LogEntry;
-import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.Trackable;
+import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
-import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import java.util.List;
 
@@ -94,9 +94,40 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertTrue(goal.contains("href=\"http://www.geocaching.com/seek/cache_details.aspx?wp=GC3B7PD#\""));
     }
 
+    public void testParseSpeedManagerCompressedTrackable() {
+        final Trackable tbNormal = parseTrackable(R.raw.tb54vjj_no_speedmanager_html);
+        assertTB54VJJ(tbNormal);
+        final Trackable tbCompressed = parseTrackable(R.raw.tb54vjj_speedmanager_html);
+        assertTB54VJJ(tbCompressed);
+    }
+
+    private static void assertTB54VJJ(final Trackable trackable) {
+        assertNotNull(trackable);
+        assertEquals("Krtek - Der kleine Maulwurf", trackable.getName());
+        final String goal = trackable.getGoal();
+        assertNotNull(goal);
+        assertTrue(goal.startsWith("Bei meinem Besitzer auf der Couch"));
+        assertTrue(goal.endsWith("Geocachern zusammen fotografieren."));
+        assertEquals("Der kleine Maulwurf in etwas gr&ouml;&szlig;er :-)", trackable.getDetails());
+        assertEquals("TB54VJJ", trackable.getGeocode());
+        assertEquals("Nordrhein-Westfalen, Germany", trackable.getOrigin());
+        assertEquals("Lineflyer", trackable.getOwner());
+        // the icon url is manipulated during compression
+        assertTrue(trackable.getIconUrl().endsWith("www.geocaching.com/images/wpttypes/21.gif"));
+        assertTrue(trackable.getImage().endsWith("img.geocaching.com/track/display/d9a475fa-da90-43ec-aec0-92afe26163e1.jpg"));
+        assertEquals("d11a3e3d-7db0-4d43-87f2-7893238844a6", trackable.getOwnerGuid());
+        assertNull(trackable.getSpottedGuid());
+        assertEquals(Trackable.SPOTTED_OWNER, trackable.getSpottedType());
+        assertNotNull(trackable.getReleased());
+        assertEquals("Travel Bug Dog Tag", trackable.getType());
+        final List<LogEntry> logs = trackable.getLogs();
+        assertNotNull(logs);
+        assertEquals(10, logs.size());
+    }
+
     private Trackable parseTrackable(int trackablePage) {
         final String pageContent = getFileContent(trackablePage);
-        return GCParser.parseTrackable(BaseUtils.replaceWhitespace(pageContent), null);
+        return GCParser.parseTrackable(TextUtils.replaceWhitespace(pageContent), null);
     }
 
     public void testParseMarkMissing() {

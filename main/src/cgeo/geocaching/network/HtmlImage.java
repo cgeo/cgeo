@@ -6,7 +6,9 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.files.LocalStorage;
-import cgeo.geocaching.utils.ImageHelper;
+import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.IOUtils;
+import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
@@ -21,10 +23,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.text.Html;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Date;
 
 public class HtmlImage implements Html.ImageGetter {
@@ -42,7 +44,8 @@ public class HtmlImage implements Html.ImageGetter {
             "hitwebcounter.com",
             "kostenloser-counter.eu",
             "trendcounter.com",
-            "hit-counter-download.com"
+            "hit-counter-download.com",
+            "gcwetterau.de/counter"
     };
     public static final String SHARED = "shared";
 
@@ -66,6 +69,7 @@ public class HtmlImage implements Html.ImageGetter {
 
         bfOptions = new BitmapFactory.Options();
         bfOptions.inTempStorage = new byte[16 * 1024];
+        bfOptions.inPreferredConfig = Bitmap.Config.RGB_565;
 
         Point displaySize = Compatibility.getDisplaySize();
         this.maxWidth = displaySize.x - 25;
@@ -129,7 +133,7 @@ public class HtmlImage implements Html.ImageGetter {
             }
         }
 
-        return imagePre != null ? ImageHelper.scaleBitmapToFitDisplay(imagePre) : null;
+        return imagePre != null ? ImageUtils.scaleBitmapToFitDisplay(imagePre) : null;
     }
 
     /**
@@ -143,9 +147,13 @@ public class HtmlImage implements Html.ImageGetter {
      */
     private static void makeFreshCopy(final File file) {
         final File tempFile = new File(file.getParentFile(), file.getName() + "-temp");
-        file.renameTo(tempFile);
-        LocalStorage.copy(tempFile, file);
-        tempFile.delete();
+        if (file.renameTo(tempFile)) {
+            LocalStorage.copy(tempFile, file);
+            FileUtils.deleteIgnoringFailure(tempFile);
+        }
+        else {
+            Log.e("Could not reset timestamp of file " + file.getAbsolutePath());
+        }
     }
 
     private Bitmap getTransparent1x1Image() {
@@ -194,7 +202,11 @@ public class HtmlImage implements Html.ImageGetter {
         if (file.exists()) {
             if (listId >= StoredList.STANDARD_LIST_ID || file.lastModified() > (new Date().getTime() - (24 * 60 * 60 * 1000)) || forceKeep) {
                 setSampleSize(file);
-                return BitmapFactory.decodeFile(file.getPath(), bfOptions);
+                final Bitmap image = BitmapFactory.decodeFile(file.getPath(), bfOptions);
+                if (image == null) {
+                    Log.e("Cannot decode bitmap from " + file.getPath());
+                }
+                return image;
             }
         }
         return null;
@@ -205,20 +217,14 @@ public class HtmlImage implements Html.ImageGetter {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
 
-        FileInputStream fis = null;
+        BufferedInputStream stream = null;
         try {
-            fis = new FileInputStream(file);
-            BitmapFactory.decodeStream(fis, null, options);
+            stream = new BufferedInputStream(new FileInputStream(file));
+            BitmapFactory.decodeStream(stream, null, options);
         } catch (FileNotFoundException e) {
             Log.e("HtmlImage.setSampleSize", e);
         } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    // ignore
-                }
-            }
+            IOUtils.closeQuietly(stream);
         }
 
         int scale = 1;

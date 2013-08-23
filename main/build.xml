@@ -53,7 +53,7 @@
     <!-- Custom targets -->
     <target name="install_release" description="Install signed release application" depends="release">
         <exec executable="${sdk.dir}/platform-tools/adb">
-            <arg line="install -r ./bin/${ant.project.name}-release.apk" />
+            <arg line="-d install -r ./bin/${ant.project.name}-release.apk" />
         </exec>
     </target>
     
@@ -61,7 +61,32 @@
         description="Changes API key to debug">
     </target>
     
-    <!-- extension targets. Uncomment the ones where you want to do custom work
+	<taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask">
+		<classpath>
+		    <pathelement location="./compile-libs/findbugs-ant.jar"/>
+		</classpath>
+	</taskdef>
+
+	<target name="findbugs">
+		<mkdir dir="reports" />
+		<gettarget
+			androidJarFileOut="project.target.android.jar"
+		    androidAidlFileOut="project.target.framework.aidl"
+		    bootClassPathOut="project.target.class.path"
+		    targetApiOut="project.target.apilevel"
+		    minSdkVersionOut="project.minSdkVersion" />
+		<findbugs 
+			home="${findbugs.home}" 
+			output="xml" 
+			outputFile="reports/findbugs.xml" 
+			excludefilter="project/findbugs/exclusions.xml"
+			effort="max">
+			<auxClasspath path="${project.target.android.jar}" />
+			<class location="${out.dir}" />
+		</findbugs>
+	</target>
+	
+	<!-- extension targets. Uncomment the ones where you want to do custom work
          in between standard targets -->
     <target name="-pre-build">
         <condition property="build.mode.release" else="false">
@@ -83,15 +108,108 @@
         <copy file="./templates/mapsapikey.xml" todir="./res/values/" overwrite="true">
             <filterset refid="build-tokens" />
         </copy>
-    </target>
+        <copy file="./templates/ocde_okapi.xml" todir="./res/values/" overwrite="true">
+            <filterset>
+                <filter token="ocde.okapi.consumer.key" value="${ocde.okapi.consumer.key}"/>
+                <filter token="ocde.okapi.consumer.secret" value="${ocde.okapi.consumer.secret}"/>
+            </filterset>
+        </copy>
+        <copy file="./templates/ocpl_okapi.xml" todir="./res/values/" overwrite="true">
+            <filterset>
+                <filter token="ocpl.okapi.consumer.key" value="${ocpl.okapi.consumer.key}"/>
+                <filter token="ocpl.okapi.consumer.secret" value="${ocpl.okapi.consumer.secret}"/>
+            </filterset>
+        </copy>
+        </target>
 
-<!--
-    <target name="-pre-compile">
+<!-- start of modifications for android annotations, see https://github.com/excilys/androidannotations/wiki/Building-Project-Ant -->
+	<property name="generated.dir" value="annotation_gen" />
+	<property name="generated.absolute.dir" location="${generated.dir}" />
+	<property name="java.compilerargs" value="-s &apos;${generated.absolute.dir}&apos;" />    
+	<target name="-pre-compile">
+		<mkdir dir="${generated.absolute.dir}" />
+	</target>
+    <target name="-compile" depends="-pre-build, -build-setup, -code-gen, -pre-compile">
+        <do-only-if-manifest-hasCode elseText="hasCode = false. Skipping...">
+            <!-- merge the project's own classpath and the tested project's classpath -->
+            <path id="project.javac.classpath">
+                <path refid="project.all.jars.path" />
+                <path refid="tested.project.classpath" />
+                <path path="${java.compiler.classpath}" />
+                <fileset dir="compile-libs" includes="*.jar"/>
+            </path>
+            <javac encoding="${java.encoding}"
+                    source="${java.source}" target="${java.target}"
+                    debug="true" extdirs="" includeantruntime="false"
+                    destdir="${out.classes.absolute.dir}"
+                    bootclasspathref="project.target.class.path"
+                    verbose="${verbose}"
+                    classpathref="project.javac.classpath"
+                    fork="${need.javac.fork}">
+                <src path="${source.absolute.dir}" />
+                <src path="${gen.absolute.dir}" />
+                <compilerarg line="${java.compilerargs}" />
+            </javac>
+
+            <!-- if the project is instrumented, intrument the classes -->
+            <if condition="${build.is.instrumented}">
+                <then>
+                    <echo level="info">Instrumenting classes from ${out.absolute.dir}/classes...</echo>
+
+                    <!-- build the filter to remove R, Manifest, BuildConfig -->
+                    <getemmafilter
+                            appPackage="${project.app.package}"
+                            libraryPackagesRefId="project.library.packages"
+                            filterOut="emma.default.filter"/>
+
+                    <!-- define where the .em file is going. This may have been
+                         setup already if this is a library -->
+                    <property name="emma.coverage.absolute.file" location="${out.absolute.dir}/coverage.em" />
+
+                    <!-- It only instruments class files, not any external libs -->
+                    <emma enabled="true">
+                        <instr verbosity="${verbosity}"
+                               mode="overwrite"
+                               instrpath="${out.absolute.dir}/classes"
+                               outdir="${out.absolute.dir}/classes"
+                               metadatafile="${emma.coverage.absolute.file}">
+                            <filter excludes="${emma.default.filter}" />
+                            <filter value="${emma.filter}" />
+                        </instr>
+                    </emma>
+                </then>
+            </if>
+
+            <!-- if the project is a library then we generate a jar file -->
+            <if condition="${project.is.library}">
+                <then>
+                    <echo level="info">Creating library output jar file...</echo>
+                    <property name="out.library.jar.file" location="${out.absolute.dir}/classes.jar" />
+                    <if>
+                        <condition>
+                            <length string="${android.package.excludes}" trim="true" when="greater" length="0" />
+                        </condition>
+                        <then>
+                            <echo level="info">Custom jar packaging exclusion: ${android.package.excludes}</echo>
+                        </then>
+                    </if>
+
+                    <propertybyreplace name="project.app.package.path" input="${project.app.package}" replace="." with="/" />
+
+                    <jar destfile="${out.library.jar.file}">
+                        <fileset dir="${out.classes.absolute.dir}"
+                                includes="**/*.class"
+                                excludes="${project.app.package.path}/R.class ${project.app.package.path}/R$*.class ${project.app.package.path}/BuildConfig.class"/>
+                        <fileset dir="${source.absolute.dir}" excludes="**/*.java ${android.package.excludes}" />
+                    </jar>
+                </then>
+            </if>
+
+        </do-only-if-manifest-hasCode>
     </target>
--->
-    <!-- This is typically used for code obfuscation.
-       Compiled code location: ${out.classes.absolute.dir}
-       If this is not done in place, override ${out.dex.input.absolute.dir} -->
+<!-- end of modifications for android-annotations -->    
+    
+	
 <!--
     <target name="-post-compile">
     </target>

@@ -1,7 +1,11 @@
 package cgeo.geocaching;
 
+import butterknife.InjectView;
+import butterknife.Views;
+
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.utils.Log;
 
@@ -17,20 +21,35 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class WaypointPopup extends AbstractPopupActivity {
+    @InjectView(R.id.actionbar_title) protected TextView actionBarTitle;
+    @InjectView(R.id.waypoint_details_list) protected LinearLayout waypointDetailsLayout;
+    @InjectView(R.id.edit) protected Button buttonEdit;
+    @InjectView(R.id.details_list) protected LinearLayout cacheDetailsLayout;
+
     private int waypointId = 0;
     private Waypoint waypoint = null;
+    private TextView waypointDistance = null;
 
     public WaypointPopup() {
-        super("c:geo-waypoint-info", R.layout.waypoint_popup);
+        super(R.layout.waypoint_popup);
     }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Views.inject(this);
         // get parameters
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
             waypointId = extras.getInt(Intents.EXTRA_WAYPOINT_ID);
+        }
+    }
+
+    @Override
+    public void onUpdateGeoData(IGeoData geo) {
+        if (geo.getCoords() != null && waypoint != null && waypoint.getCoords() != null) {
+            waypointDistance.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(waypoint.getCoords())));
+            waypointDistance.bringToFront();
         }
     }
 
@@ -45,17 +64,16 @@ public class WaypointPopup extends AbstractPopupActivity {
                 setTitle(waypoint.getGeocode());
             }
 
-            // actionbar icon
-            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(waypoint.getWaypointType().markerId), null, null, null);
+            actionBarTitle.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(waypoint.getWaypointType().markerId), null, null, null);
 
-            //Start filling waypoint details
-            details = new CacheDetailsCreator(this, (LinearLayout) findViewById(R.id.waypoint_details_list));
+            details = new CacheDetailsCreator(this, waypointDetailsLayout);
 
             //Waypoint geocode
             details.add(R.string.cache_geocode, waypoint.getPrefix() + waypoint.getGeocode().substring(2));
+            details.addDistance(waypoint, waypointDistance);
+            waypointDistance = details.getValueView();
+            details.add(R.string.waypoint_note, waypoint.getNote());
 
-            // Edit Button
-            final Button buttonEdit = (Button) findViewById(R.id.edit);
             buttonEdit.setOnClickListener(new OnClickListener() {
 
                 @Override
@@ -65,14 +83,13 @@ public class WaypointPopup extends AbstractPopupActivity {
                 }
             });
 
-            //Start filling cache details
-            details = new CacheDetailsCreator(this, (LinearLayout) findViewById(R.id.details_list));
+            details = new CacheDetailsCreator(this, cacheDetailsLayout);
             details.add(R.string.cache_name, cache.getName());
 
             addCacheDetails();
 
         } catch (Exception e) {
-            Log.e("cgeopopup.init", e);
+            Log.e("WaypointPopup.init", e);
         }
     }
 

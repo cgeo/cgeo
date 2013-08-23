@@ -1,8 +1,11 @@
 package cgeo.geocaching.ui;
 
-import cgeo.geocaching.R;
+import butterknife.InjectView;
+
 import cgeo.geocaching.GpxFileListActivity;
+import cgeo.geocaching.R;
 import cgeo.geocaching.files.GPXImporter;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -18,28 +21,29 @@ import java.io.File;
 import java.util.List;
 
 public class GPXListAdapter extends ArrayAdapter<File> {
-    private GpxFileListActivity activity = null;
-    private LayoutInflater inflater = null;
+    private final GpxFileListActivity activity;
+    private final LayoutInflater inflater;
 
-    private static class ViewHolder {
-        TextView filepath;
-        TextView filename;
+    protected static class ViewHolder extends AbstractViewHolder {
+        @InjectView(R.id.filepath) protected TextView filepath;
+        @InjectView(R.id.filename) protected TextView filename;
+
+        public ViewHolder(View view) {
+            super(view);
+        }
     }
 
     public GPXListAdapter(GpxFileListActivity parentIn, List<File> listIn) {
         super(parentIn, 0, listIn);
 
         activity = parentIn;
+        inflater = ((Activity) getContext()).getLayoutInflater();
     }
 
     @Override
     public View getView(final int position, final View rowView, final ViewGroup parent) {
-        if (inflater == null) {
-            inflater = ((Activity) getContext()).getLayoutInflater();
-        }
-
         if (position > getCount()) {
-            Log.w("cgGPXListAdapter.getView: Attempt to access missing item #" + position);
+            Log.w("GPXListAdapter.getView: Attempt to access missing item #" + position);
             return null;
         }
 
@@ -50,12 +54,7 @@ public class GPXListAdapter extends ArrayAdapter<File> {
         final ViewHolder holder;
         if (view == null) {
             view = inflater.inflate(R.layout.gpx_item, null);
-
-            holder = new ViewHolder();
-            holder.filepath = (TextView) view.findViewById(R.id.filepath);
-            holder.filename = (TextView) view.findViewById(R.id.filename);
-
-            view.setTag(holder);
+            holder = new ViewHolder(view);
         } else {
             holder = (ViewHolder) view.getTag();
         }
@@ -82,7 +81,7 @@ public class GPXListAdapter extends ArrayAdapter<File> {
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
-                                file.delete();
+                                FileUtils.deleteIgnoringFailure(file);
                                 GPXListAdapter.this.remove(file);
                             }
                         })

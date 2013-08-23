@@ -1,8 +1,11 @@
 package cgeo.geocaching.filter;
 
-import cgeo.geocaching.R;
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.R;
 import cgeo.geocaching.cgeoapplication;
+
+import java.util.Collections;
+import java.util.List;
 
 class TrackablesFilter extends AbstractFilter implements IFilterFactory {
     public TrackablesFilter() {
@@ -10,13 +13,13 @@ class TrackablesFilter extends AbstractFilter implements IFilterFactory {
     }
 
     @Override
-    public boolean accepts(Geocache cache) {
+    public boolean accepts(final Geocache cache) {
         return cache.hasTrackables();
     }
 
     @Override
-    public IFilter[] getFilters() {
-        return new IFilter[] { this };
+    public List<TrackablesFilter> getFilters() {
+        return Collections.singletonList(this);
     }
 
 }

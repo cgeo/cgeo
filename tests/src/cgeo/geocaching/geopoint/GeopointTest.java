@@ -1,5 +1,6 @@
 package cgeo.geocaching.geopoint;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.test.AndroidTestCase;
 
@@ -49,7 +50,15 @@ public class GeopointTest extends AndroidTestCase {
         final Geopoint gp2 = new Geopoint(-30.1, -2.3);
 
         final float d12 = gp1.distanceTo(gp2);
-        Assert.assertEquals(110.967995, d12, 1e-6);
+
+        // broken distance calculation in 4.2.1
+        if (Build.VERSION.SDK_INT == 17) {
+            Assert.assertEquals(110.83107, d12, 1e-6);
+        }
+        else {
+            Assert.assertEquals(110.967995, d12, 1e-6);
+        }
+
         Assert.assertEquals(d12, gp2.distanceTo(gp1), 1e-6);
 
         // Bearing in both directions cannot be added, as this is
@@ -228,10 +237,6 @@ public class GeopointTest extends AndroidTestCase {
         Assert.assertEquals(lonMin, gp.getLonMin());
         Assert.assertEquals(lonSec, gp.getLonSec());
         Assert.assertEquals(lonSecFrac, gp.getLonSecFrac());
-    }
-
-    public static void testElevation() {
-        assertEquals(125.663703918457, (new Geopoint(48.0, 2.0)).getElevation(), 0.1);
     }
 
     private static void assertParseException(Runnable runnable) {

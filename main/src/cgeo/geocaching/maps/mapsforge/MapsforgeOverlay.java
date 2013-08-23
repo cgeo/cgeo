@@ -21,7 +21,7 @@ public class MapsforgeOverlay extends Overlay implements OverlayImpl {
     private GeneralOverlay overlayBase = null;
     private Lock lock = new ReentrantLock();
 
-    public MapsforgeOverlay(Activity activityIn, OverlayImpl.overlayType ovlType) {
+    public MapsforgeOverlay(Activity activityIn, OverlayImpl.OverlayType ovlType) {
 
         switch (ovlType) {
             case PositionOverlay:

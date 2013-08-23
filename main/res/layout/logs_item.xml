@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="3dip"
+    android:paddingTop="3dip" >
+
+    <TextView
+        android:id="@+id/author"
+        style="@style/logitem_author" />
+
+    <LinearLayout
+        android:id="@+id/detail_box"
+        android:layout_width="102dip"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/author"
+        android:layout_gravity="left|top"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="100dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|top"
+            android:orientation="vertical"
+            android:padding="3dip" >
+
+            <TextView
+                android:id="@+id/added"
+                style="@style/logitem_property" />
+
+            <TextView
+                android:id="@+id/type"
+                style="@style/logitem_property" />
+
+            <TextView
+                android:id="@+id/count_or_location"
+                style="@style/logitem_property" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/log_mark"
+            style="@style/logitem_mark" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/log_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/detail_box"
+        android:orientation="vertical"
+        android:paddingLeft="3dip"
+        android:textSize="14sp" >
+
+        <TextView
+            android:id="@+id/log"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="22dip"
+            android:autoLink="web"
+            android:gravity="left"
+            android:linksClickable="true"
+            android:textColor="?text_color"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/log_images"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|top"
+            android:layout_marginTop="3dip"
+            android:drawableLeft="?log_img_icon"
+            android:drawablePadding="3dip"
+            android:textColor="?text_color"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</RelativeLayout>

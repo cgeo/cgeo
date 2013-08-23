@@ -3,7 +3,7 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.enumerations.LogType;
@@ -61,31 +61,12 @@ public class LoggingUI extends AbstractUIFactory {
         }
     }
 
-    private static final int MENU_ICON_LOG_VISIT = R.drawable.ic_menu_edit;
-    private static final int MENU_LOG_VISIT = 100;
-    private static final int MENU_LOG_VISIT_OFFLINE = 101;
-
-    public static void addMenuItems(final Menu menu, final Geocache cache) {
-        if (cache == null) {
-            return;
-        }
-        if (!cache.supportsLogging()) {
-            return;
-        }
-        if (Settings.getLogOffline()) {
-            menu.add(0, MENU_LOG_VISIT_OFFLINE, 0, res.getString(R.string.cache_menu_visit_offline)).setIcon(MENU_ICON_LOG_VISIT);
-        }
-        else {
-            menu.add(0, MENU_LOG_VISIT, 0, res.getString(R.string.cache_menu_visit)).setIcon(MENU_ICON_LOG_VISIT);
-        }
-    }
-
     public static boolean onMenuItemSelected(final MenuItem item, IAbstractActivity activity, Geocache cache) {
         switch (item.getItemId()) {
-            case MENU_LOG_VISIT:
+            case R.id.menu_log_visit:
                 cache.logVisit(activity);
                 return true;
-            case MENU_LOG_VISIT_OFFLINE:
+            case R.id.menu_log_visit_offline:
                 showOfflineMenu(cache, (Activity) activity);
                 return true;
             default:
@@ -123,7 +104,7 @@ public class LoggingUI extends AbstractUIFactory {
                             break;
 
                         case CLEAR_LOG:
-                            cgData.clearLogOffline(cache.getGeocode());
+                            cache.clearOfflineLog();
                             break;
                     }
                 } else {
@@ -136,10 +117,17 @@ public class LoggingUI extends AbstractUIFactory {
 
     }
 
-    public static void onPrepareOptionsMenu(Menu menu) {
-        final MenuItem item = menu.findItem(MENU_LOG_VISIT);
-        if (item != null) {
-            item.setEnabled(Settings.isLogin());
-        }
+    public static void onPrepareOptionsMenu(Menu menu, Geocache cache) {
+        final MenuItem itemLog = menu.findItem(R.id.menu_log_visit);
+        itemLog.setVisible(cache.supportsLogging() && !Settings.getLogOffline());
+        itemLog.setEnabled(Settings.isLogin());
+
+        final MenuItem itemOffline = menu.findItem(R.id.menu_log_visit_offline);
+        itemOffline.setVisible(cache.supportsLogging() && Settings.getLogOffline());
+    }
+
+    public static void addMenuItems(Activity activity, Menu menu, Geocache cache) {
+        activity.getMenuInflater().inflate(R.menu.logging_ui, menu);
+        onPrepareOptionsMenu(menu, cache);
     }
 }

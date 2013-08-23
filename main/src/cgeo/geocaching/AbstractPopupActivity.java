@@ -9,6 +9,7 @@ import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteRating;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.utils.GeoDirHandler;
@@ -34,11 +35,6 @@ import android.widget.TextView;
 
 public abstract class AbstractPopupActivity extends AbstractActivity {
 
-    private static final int MENU_CACHES_AROUND = 5;
-    private static final int MENU_NAVIGATION = 3;
-    private static final int MENU_DEFAULT_NAVIGATION = 2;
-    private static final int MENU_SHOW_IN_BROWSER = 7;
-
     protected Geocache cache = null;
     protected String geocode = null;
     protected CacheDetailsCreator details;
@@ -52,7 +48,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         public void handleMessage(Message msg) {
             try {
                 details.addRating(cache);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 // nothing
             }
         }
@@ -67,14 +63,24 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
                     cacheDistance.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(cache.getCoords())));
                     cacheDistance.bringToFront();
                 }
-            } catch (Exception e) {
+                onUpdateGeoData(geo);
+            } catch (final Exception e) {
                 Log.w("Failed to UpdateLocation location.");
             }
         }
     };
 
-    protected AbstractPopupActivity(String helpTopic, int layout) {
-        super(helpTopic);
+    /**
+     * Callback to run when new location information is available.
+     * This may be overridden by deriving classes. The default implementation does nothing.
+     *
+     * @param geo
+     *            the new data
+     */
+    public void onUpdateGeoData(final IGeoData geo) {
+    }
+
+    protected AbstractPopupActivity(int layout) {
         this.layout = layout;
     }
 
@@ -100,12 +106,6 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
                 ratingHandler.sendMessage(msg);
             }
         }).start();
-    }
-
-    @Override
-    public void goManual(View view) {
-        super.goManual(view);
-        finish();
     }
 
     protected void init() {
@@ -134,7 +134,6 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         this.setTheme(ActivityMixin.getDialogTheme());
         // set layout
         setContentView(layout);
-        setTitle(res.getString(R.string.detail));
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
@@ -162,12 +161,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication().getName()).setIcon(R.drawable.ic_menu_compass); // default navigation tool
-        menu.add(0, MENU_NAVIGATION, 0, res.getString(R.string.cache_menu_navigate)).setIcon(R.drawable.ic_menu_mapmode);
-        LoggingUI.addMenuItems(menu, cache);
-        menu.add(0, MENU_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(R.drawable.ic_menu_rotate); // caches around
-        menu.add(0, MENU_SHOW_IN_BROWSER, 0, res.getString(R.string.cache_menu_browser)).setIcon(R.drawable.ic_menu_info_details); // browser
-
+        getMenuInflater().inflate(R.menu.abstract_popup_activity, menu);
         return true;
     }
 
@@ -176,16 +170,16 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         final int menuItem = item.getItemId();
 
         switch (menuItem) {
-            case MENU_DEFAULT_NAVIGATION:
+            case R.id.menu_default_navigation:
                 navigateTo();
                 return true;
-            case MENU_NAVIGATION:
+            case R.id.menu_navigate:
                 showNavigationMenu();
                 return true;
-            case MENU_CACHES_AROUND:
+            case R.id.menu_caches_around:
                 cachesAround();
                 return true;
-            case MENU_SHOW_IN_BROWSER:
+            case R.id.menu_show_in_browser:
                 showInBrowser();
                 return true;
             default:
@@ -209,12 +203,13 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
 
         try {
             final boolean visible = getCoordinates() != null;
-            menu.findItem(MENU_DEFAULT_NAVIGATION).setVisible(visible);
-            menu.findItem(MENU_NAVIGATION).setVisible(visible);
-            menu.findItem(MENU_CACHES_AROUND).setVisible(visible);
+            menu.findItem(R.id.menu_default_navigation).setVisible(visible);
+            menu.findItem(R.id.menu_navigate).setVisible(visible);
+            menu.findItem(R.id.menu_caches_around).setVisible(visible);
 
-            LoggingUI.onPrepareOptionsMenu(menu);
-        } catch (Exception e) {
+            menu.findItem(R.id.menu_default_navigation).setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
+            LoggingUI.onPrepareOptionsMenu(menu, cache);
+        } catch (final Exception e) {
             // nothing
         }
 
@@ -269,8 +264,8 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
             aquireGCVote();
         }
 
-        // favourite count
-        details.add(R.string.cache_favourite, cache.getFavoritePoints() + "×");
+        // favorite count
+        details.add(R.string.cache_favorite, cache.getFavoritePoints() + "×");
 
         // more details
         final Button buttonMore = (Button) findViewById(R.id.more_details);

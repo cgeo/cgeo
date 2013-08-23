@@ -1,18 +1,27 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.IGeoData;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.settings.Settings;
 
 import android.os.Handler;
 import android.os.Message;
 
 /**
  * GeoData and Direction handler. Manipulating geodata and direction information
- * through a GeoDirHandler ensures that all listeners are registered from a
- * {@link android.os.Looper} thread.
+ * through a GeoDirHandler ensures that all listeners are registered from a {@link android.os.Looper} thread.
+ * <p>
+ * To use this class, override at least one of {@link #updateDirection(float)} or {@link #updateGeoData(IGeoData)}. You
+ * need to start the handler using one of
+ * <ul>
+ * <li>{@link #startDir()}</li>
+ * <li>{@link #startGeo()}</li>
+ * <li>{@link #startGeoAndDir()}</li>
+ * </ul>
+ * A good place might be the {@code onResume} method of the Activity. Stop the Handler accordingly in {@code onPause}.
+ * </p>
  */
-public class GeoDirHandler extends Handler implements IObserver<Object> {
+public abstract class GeoDirHandler extends Handler implements IObserver<Object> {
 
     private static final int OBSERVABLE = 1 << 1;
     private static final int START_GEO = 1 << 2;
@@ -54,10 +63,16 @@ public class GeoDirHandler extends Handler implements IObserver<Object> {
         obtainMessage(OBSERVABLE, o).sendToTarget();
     }
 
+    public void updateAll() {
+        update(app.currentGeo());
+        update(app.currentDirection());
+    }
+
     /**
      * Update method called when new IGeoData is available.
      *
-     * @param data the new data
+     * @param data
+     *            the new data
      */
     protected void updateGeoData(final IGeoData data) {
         // Override this in children
@@ -66,7 +81,8 @@ public class GeoDirHandler extends Handler implements IObserver<Object> {
     /**
      * Update method called when new direction data is available.
      *
-     * @param direction the new direction
+     * @param direction
+     *            the new direction
      */
     protected void updateDirection(final float direction) {
         // Override this in children
@@ -118,4 +134,3 @@ public class GeoDirHandler extends Handler implements IObserver<Object> {
         sendEmptyMessage(STOP_GEO | STOP_DIR);
     }
 }
-

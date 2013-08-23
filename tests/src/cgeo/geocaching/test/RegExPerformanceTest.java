@@ -5,7 +5,7 @@ import cgeo.geocaching.test.mock.GC2CJPF;
 import cgeo.geocaching.test.mock.GC2JVEH;
 import cgeo.geocaching.test.mock.GC3XX5J;
 import cgeo.geocaching.test.mock.MockedCache;
-import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,10 +16,8 @@ import junit.framework.TestCase;
 
 /**
  * Test class to compare the performance of two regular expressions on given data.
- * Can be used to improve the time needed to parse the cache data
+ * Can be used to improve the time needed to parse the cache data.
  * Run As "JUnit Test"
- *
- * @author blafoo
  */
 public class RegExPerformanceTest extends TestCase {
 
@@ -69,7 +67,6 @@ public class RegExPerformanceTest extends TestCase {
     public final static Pattern PATTERN_DESCRIPTION_OLD = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\"[^>]*>" + "(.*)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>", Pattern.CASE_INSENSITIVE);
     public final static Pattern PATTERN_DESCRIPTION = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\">(.*?)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>");
 
-
     public final static List<MockedCache> MOCKED_CACHES;
     static {
         MOCKED_CACHES = Arrays.asList(new GC2CJPF(), new GC1ZXX2(), new GC2JVEH(), new GC3XX5J());
@@ -99,8 +96,8 @@ public class RegExPerformanceTest extends TestCase {
 
         for (MockedCache cache : MOCKED_CACHES) {
             String page = cache.getData();
-            String result1 = BaseUtils.getMatch(page, p1, true, "");
-            String result2 = BaseUtils.getMatch(page, p2, true, "");
+            String result1 = TextUtils.getMatch(page, p1, true, "");
+            String result2 = TextUtils.getMatch(page, p2, true, "");
             assertEquals(result1, result2);
 
             long diff1, diff2;
@@ -124,7 +121,7 @@ public class RegExPerformanceTest extends TestCase {
     private static long parse(String page, Pattern pattern, int iterations) {
         final long start = System.currentTimeMillis();
         for (int j = 0; j < iterations; j++) {
-            BaseUtils.getMatch(page, pattern, true, "");
+            TextUtils.getMatch(page, pattern, true, "");
         }
         return System.currentTimeMillis() - start;
 

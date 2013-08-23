@@ -1,11 +1,15 @@
 package cgeo.geocaching;
 
 import cgeo.CGeoTestCase;
+import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -123,6 +127,35 @@ public class cgDataTest extends CGeoTestCase {
         }
     }
 
+    // Check that loading a cache by case insensitive geo code works correctly (see #3139)
+    public static void testGeocodeCaseInsensitive() {
+
+        final String GEOCODE_CACHE = "TEST";
+        final String upperCase = GEOCODE_CACHE;
+        final String lowerCase = StringUtils.lowerCase(upperCase);
+        assertFalse(upperCase.equals(lowerCase));
+
+        // create cache and trackable
+        final Geocache cache = new Geocache();
+        cache.setGeocode(upperCase);
+        cache.setDetailed(true);
+
+        try {
+            final Geocache oldCache = cgData.loadCache(upperCase, LoadFlags.LOAD_ALL_DB_ONLY);
+            assertNull("Database contained old cache!", oldCache);
+
+            cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+            final Geocache cacheWithOriginalCode = cgData.loadCache(upperCase, LoadFlags.LOAD_ALL_DB_ONLY);
+            assertNotNull("Cache was not saved correctly!", cacheWithOriginalCode);
+
+            final Geocache cacheLowerCase = cgData.loadCache(lowerCase, LoadFlags.LOAD_ALL_DB_ONLY);
+            assertNotNull("Could not find cache by case insensitive geocode", cacheLowerCase);
+
+        } finally {
+            cgData.removeCache(upperCase, LoadFlags.REMOVE_ALL);
+        }
+    }
+
     // Loading logs for an empty geocode should return an empty list, not null!
     public static void testLoadLogsFromEmptyGeocode() {
 
@@ -130,5 +163,66 @@ public class cgDataTest extends CGeoTestCase {
 
         assertNotNull("Logs must not be null", logs);
         assertEquals("Logs from empty geocode must be empty", 0, logs.size());
+    }
+
+    public static void testLoadCacheHistory() {
+        int sumCaches = 0;
+        int allCaches = 0;
+        for (CacheType cacheType : CacheType.values()) {
+            SearchResult historyOfType = cgData.getHistoryOfCaches(false, cacheType);
+            assertNotNull(historyOfType);
+            if (cacheType != CacheType.ALL) {
+                sumCaches += historyOfType.getCount();
+            } else {
+                allCaches = historyOfType.getCount();
+            }
+        }
+        // check that sum of types equals 'all'
+        assertEquals(sumCaches, allCaches);
+        // check that two different routines behave the same
+        assertEquals(cgData.getAllHistoryCachesCount(), sumCaches);
+    }
+
+    public static void testCachedMissing() {
+
+        // Tile to test
+        final Tile tile = new Tile(new Geopoint("N49 44.0 E8 37.0"), 14);
+        final Set<Tile> tiles = new HashSet<Tile>();
+        tiles.add(tile);
+
+        // set up geocaches to fill into cacheCache
+        final Geocache main = new Geocache();
+        main.setGeocode("GC12345");
+        main.setCoords(new Geopoint("N49 44.0 E8 37.0"));
+        final Geocache inTileLowZoom = new Geocache();
+        inTileLowZoom.setGeocode("GC12346");
+        inTileLowZoom.setCoords(new Geopoint("N49 44.001 E8 37.001"), Tile.ZOOMLEVEL_MIN_PERSONALIZED - 5);
+        final Geocache outTile = new Geocache();
+        outTile.setGeocode("GC12347");
+        outTile.setCoords(new Geopoint(tile.getViewport().getLatitudeMin() - 0.1, tile.getViewport().getLongitudeMin() - 0.1));
+        final Geocache otherConnector = new Geocache();
+        otherConnector.setGeocode("OC0001");
+        otherConnector.setCoords(new Geopoint("N49 44.0 E8 37.0"));
+        final Geocache inTileHighZoom = new Geocache();
+        inTileHighZoom.setGeocode("GC12348");
+        inTileHighZoom.setCoords(new Geopoint("N49 44.001 E8 37.001"), Tile.ZOOMLEVEL_MIN_PERSONALIZED + 1);
+
+        // put in cache
+        cgData.saveCache(main, EnumSet.of(SaveFlag.SAVE_CACHE));
+        cgData.saveCache(inTileLowZoom, EnumSet.of(SaveFlag.SAVE_CACHE));
+        cgData.saveCache(inTileHighZoom, EnumSet.of(SaveFlag.SAVE_CACHE));
+        cgData.saveCache(outTile, EnumSet.of(SaveFlag.SAVE_CACHE));
+        cgData.saveCache(otherConnector, EnumSet.of(SaveFlag.SAVE_CACHE));
+
+        final SearchResult search = new SearchResult(main);
+
+        Set<String> filteredGeoCodes = cgData.getCachedMissingFromSearch(search, tiles, GCConnector.getInstance(), Tile.ZOOMLEVEL_MIN_PERSONALIZED - 1);
+
+        assertTrue(filteredGeoCodes.contains(inTileLowZoom.getGeocode()));
+        assertFalse(filteredGeoCodes.contains(inTileHighZoom.getGeocode()));
+        assertFalse(filteredGeoCodes.contains(otherConnector.getGeocode()));
+        assertFalse(filteredGeoCodes.contains(outTile.getGeocode()));
+        assertFalse(filteredGeoCodes.contains(main.getGeocode()));
+
     }
 }

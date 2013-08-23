@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.DateUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
 
@@ -37,7 +38,7 @@ public final class LogEntry {
         this(Settings.getUsername(), dateInMilliSeconds, type, text);
     }
 
-    public LogEntry(final String author, long dateInMilliSeconds, final LogType type, final String text) {
+    public LogEntry(final String author, final long dateInMilliSeconds, final LogType type, final String text) {
         this.author = author;
         this.date = dateInMilliSeconds;
         this.type = type;
@@ -50,7 +51,7 @@ public final class LogEntry {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }
@@ -108,7 +109,7 @@ public final class LogEntry {
     public String getDisplayText() {
         if (Settings.getPlainLogs()) {
             MatcherWrapper matcher = new MatcherWrapper(PATTERN_REMOVE_COLORS, log);
-            return matcher.replaceAll("");
+            return matcher.replaceAll(StringUtils.EMPTY);
         }
         return log;
     }

@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import android.os.Handler;
 import android.os.Message;
@@ -9,12 +10,14 @@ import java.io.File;
 import java.util.List;
 
 /**
- * Utiliy class for files
- *
- * @author rsudev
+ * Utility class for files
  *
  */
-public class FileUtils {
+public final class FileUtils {
+
+    private FileUtils() {
+        // utility class
+    }
 
     public static void listDir(List<File> result, File directory, FileSelector chooser, Handler feedBackHandler) {
 
@@ -60,5 +63,67 @@ public class FileUtils {
         public abstract boolean isSelected(File file);
 
         public abstract boolean shouldEnd();
+    }
+
+    /**
+     * Create a unique non existing file named like the given file name. If a file with the given name already exists,
+     * add a number as suffix to the file name.<br>
+     * Example: For the file name "file.ext" this will return the first file of the list
+     * <ul>
+     * <li>file.ext</li>
+     * <li>file_2.ext</li>
+     * <li>file_3.ext</li>
+     * </ul>
+     * which does not yet exist.
+     */
+    public static File getUniqueNamedFile(final String baseNameAndPath) {
+        String extension = StringUtils.substringAfterLast(baseNameAndPath, ".");
+        String pathName = StringUtils.substringBeforeLast(baseNameAndPath, ".");
+        int number = 1;
+        while (new File(getNumberedFileName(pathName, extension, number)).exists()) {
+            number++;
+        }
+        return new File(getNumberedFileName(pathName, extension, number));
+    }
+
+    private static String getNumberedFileName(String pathName, String extension, int number) {
+        return pathName + (number > 1 ? "_" + Integer.toString(number) : "") + "." + extension;
+    }
+
+    /**
+     * This usage of this method indicates that the return value of File.delete() can safely be ignored.
+     */
+    public static void deleteIgnoringFailure(final File file) {
+        final boolean success = file.delete() || !file.exists();
+        if (!success) {
+            Log.i("Could not delete " + file.getAbsolutePath());
+        }
+    }
+
+    /**
+     * Deletes a file and logs deletion failures.
+     *
+     * @return <code> true</code> if this file was deleted, <code>false</code> otherwise.
+     */
+    public static boolean delete(final File file) {
+        final boolean success = file.delete() || !file.exists();
+        if (!success) {
+            Log.e("Could not delete " + file.getAbsolutePath());
+        }
+        return success;
+    }
+
+    /**
+     * Creates the directory named by the given file, creating any missing parent directories in the process.
+     *
+     * @return <code>true</code> if the directory was created, <code>false</code> on failure or if the directory already
+     *         existed.
+     */
+    public static boolean mkdirs(File file) {
+        final boolean success = file.mkdirs() || file.isDirectory(); // mkdirs returns false on existing directories
+        if (!success) {
+            Log.e("Could not make directories " + file.getAbsolutePath());
+        }
+        return success;
     }
 }

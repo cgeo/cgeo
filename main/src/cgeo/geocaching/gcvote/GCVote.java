@@ -1,9 +1,9 @@
 package cgeo.geocaching.gcvote;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -22,6 +22,7 @@ import java.util.regex.Pattern;
 public final class GCVote {
     private static final Pattern patternLogIn = Pattern.compile("loggedIn='([^']+)'", Pattern.CASE_INSENSITIVE);
     private static final Pattern patternGuid = Pattern.compile("cacheId='([^']+)'", Pattern.CASE_INSENSITIVE);
+    private static final Pattern patternWaypoint = Pattern.compile("waypoint='([^']+)'", Pattern.CASE_INSENSITIVE);
     private static final Pattern patternRating = Pattern.compile("voteAvg='([0-9.]+)'", Pattern.CASE_INSENSITIVE);
     private static final Pattern patternVotes = Pattern.compile("voteCnt='([0-9]+)'", Pattern.CASE_INSENSITIVE);
     private static final Pattern patternVote = Pattern.compile("voteUser='([0-9.]+)'", Pattern.CASE_INSENSITIVE);
@@ -73,10 +74,13 @@ public final class GCVote {
                     params.put("userName", login.left, "password", login.right);
                 }
             }
+            // use guid or gccode for lookup
+            boolean requestByGuids = true;
             if (guids != null && !guids.isEmpty()) {
                 params.put("cacheIds", StringUtils.join(guids.toArray(), ','));
             } else {
                 params.put("waypoints", StringUtils.join(geocodes.toArray(), ','));
+                requestByGuids = false;
             }
             params.put("version", "cgeo");
             final String page = Network.getResponseData(Network.getRequest("http://gcvote.com/getVotes.php", params));
@@ -91,18 +95,34 @@ public final class GCVote {
                     continue;
                 }
 
+                String id = null;
                 String guid = null;
                 try {
                     final MatcherWrapper matcherGuid = new MatcherWrapper(patternGuid, voteData);
                     if (matcherGuid.find()) {
                         if (matcherGuid.groupCount() > 0) {
                             guid = matcherGuid.group(1);
+                            if (requestByGuids) {
+                                id = guid;
+                            }
                         }
                     }
                 } catch (Exception e) {
                     Log.w("GCVote.getRating: Failed to parse guid");
                 }
-                if (guid == null) {
+                if (!requestByGuids) {
+                    try {
+                        final MatcherWrapper matcherWp = new MatcherWrapper(patternWaypoint, voteData);
+                        if (matcherWp.find()) {
+                            if (matcherWp.groupCount() > 0) {
+                                id = matcherWp.group(1);
+                            }
+                        }
+                    } catch (Exception e) {
+                        Log.w("GCVote.getRating: Failed to parse waypoint");
+                    }
+                }
+                if (id == null) {
                     continue;
                 }
 
@@ -158,9 +178,9 @@ public final class GCVote {
                     }
                 }
 
-                if (StringUtils.isNotBlank(guid)) {
+                if (StringUtils.isNotBlank(id)) {
                     GCVoteRating gcvoteRating = new GCVoteRating(rating, votes, myVote);
-                    ratings.put(guid, gcvoteRating);
+                    ratings.put(id, gcvoteRating);
                     ratingsCache.put(guid, gcvoteRating);
                 }
             }
@@ -176,9 +196,12 @@ public final class GCVote {
      *
      * @param cache
      * @param vote
-     * @return
+     * @return {@code true} if the rating was submitted successfully
      */
     public static boolean setRating(Geocache cache, double vote) {
+        if (!Settings.isGCvoteLogin()) {
+            return false;
+        }
         if (!cache.supportsGCVote()) {
             return false;
         }
@@ -212,26 +235,26 @@ public final class GCVote {
             return;
         }
 
-        final ArrayList<String> guids = new ArrayList<String>(caches.size());
+        final ArrayList<String> geocodes = new ArrayList<String>(caches.size());
         for (final Geocache cache : caches) {
-            String guid = cache.getGuid();
-            if (StringUtils.isNotBlank(guid)) {
-                guids.add(guid);
+            String geocode = cache.getGeocode();
+            if (StringUtils.isNotBlank(geocode)) {
+                geocodes.add(geocode);
             }
         }
 
-        if (guids.isEmpty()) {
+        if (geocodes.isEmpty()) {
             return;
         }
 
         try {
-            final Map<String, GCVoteRating> ratings = GCVote.getRating(guids, null);
+            final Map<String, GCVoteRating> ratings = GCVote.getRating(null, geocodes);
 
             if (MapUtils.isNotEmpty(ratings)) {
                 // save found cache coordinates
                 for (Geocache cache : caches) {
-                    if (ratings.containsKey(cache.getGuid())) {
-                        GCVoteRating rating = ratings.get(cache.getGuid());
+                    if (ratings.containsKey(cache.getGeocode())) {
+                        GCVoteRating rating = ratings.get(cache.getGeocode());
 
                         cache.setRating(rating.getRating());
                         cache.setVotes(rating.getVotes());

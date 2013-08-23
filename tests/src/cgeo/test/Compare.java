@@ -1,15 +1,20 @@
 package cgeo.test;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.utils.CryptUtils;
+
+import org.apache.commons.lang3.StringUtils;
 
 public abstract class Compare {
 
     public static void assertCompareCaches(ICache expected, Geocache actual, boolean all) {
+        assertNotNull(actual);
         assertEquals(expected.getGeocode(), actual.getGeocode());
         assertTrue(expected.getType() == actual.getType());
         assertEquals(expected.getOwnerDisplayName(), actual.getOwnerDisplayName());
@@ -29,14 +34,14 @@ public abstract class Compare {
             assertTrue(actual.isReliableLatLon());
             assertEquals(expected.isOwner(), actual.isOwner());
             assertEquals(expected.getOwnerUserId(), actual.getOwnerUserId());
-            assertEquals(expected.getHint(), actual.getHint());
+            assertTrue(StringUtils.equals(expected.getHint(), actual.getHint()) || StringUtils.equals(expected.getHint(), CryptUtils.rot13(actual.getHint())));
             assertTrue(actual.getDescription().startsWith(expected.getDescription()));
             assertEquals(expected.getShortDescription(), actual.getShortDescription());
             assertEquals(expected.getCacheId(), actual.getCacheId());
             assertEquals(expected.getLocation(), actual.getLocation());
             assertEquals(expected.isFound(), actual.isFound());
             assertEquals(expected.isFavorite(), actual.isFavorite());
-            assertEquals(expected.isWatchlist(), actual.isWatchlist());
+            assertEquals(expected.isOnWatchlist(), actual.isOnWatchlist());
 
             for (String attribute : expected.getAttributes()) {
                 assertTrue("Expected attribute '" + attribute + "' not found in " + actual.getGeocode(), actual.getAttributes().contains(attribute));

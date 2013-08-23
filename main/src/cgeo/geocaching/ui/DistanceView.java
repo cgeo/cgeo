@@ -36,8 +36,4 @@ public class DistanceView extends TextView {
     public void setDistance(Float distance) {
         setText("~" + Units.getDistanceFromKilometers(distance));
     }
-
-    public void clear() {
-        setText(null);
-    }
 }

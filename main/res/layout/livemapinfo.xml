@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="@string/live_map_notification"
             android:textColor="?text_color"
-            android:textSize="14dip" />
+            android:textSize="14sp" />
 
         <CheckBox
             android:id="@+id/live_map_hint_hide"

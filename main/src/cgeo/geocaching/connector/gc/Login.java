@@ -1,16 +1,16 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.TextUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 
@@ -30,20 +30,22 @@ import java.util.Map;
 
 public abstract class Login {
 
+    private static final String DEFAULT_CUSTOM_DATE_FORMAT = "MM/dd/yyyy";
+
     private final static String ENGLISH = "<a href=\"#\">English&#9660;</a>";
 
     // false = not logged in
     private static boolean actualLoginStatus = false;
-    private static String actualUserName = "";
+    private static String actualUserName = StringUtils.EMPTY;
     private static int actualCachesFound = -1;
-    private static String actualStatus = "";
+    private static String actualStatus = StringUtils.EMPTY;
 
-    private final static Map<String, SimpleDateFormat> gcCustomDateFormats;
+    private final static Map<String, SimpleDateFormat> GC_CUSTOM_DATE_FORMATS;
     public static final String LANGUAGE_CHANGE_URI = "http://www.geocaching.com/my/souvenirs.aspx";
 
     static {
         final String[] formats = new String[] {
-                "MM/dd/yyyy",
+                DEFAULT_CUSTOM_DATE_FORMAT,
                 "yyyy-MM-dd",
                 "yyyy/MM/dd",
                 "dd/MMM/yyyy",
@@ -52,13 +54,13 @@ public abstract class Login {
                 "dd/MM/yyyy"
         };
 
-        Map<String, SimpleDateFormat> map = new HashMap<String, SimpleDateFormat>();
+        final Map<String, SimpleDateFormat> map = new HashMap<String, SimpleDateFormat>();
 
-        for (String format : formats) {
+        for (final String format : formats) {
             map.put(format, new SimpleDateFormat(format, Locale.ENGLISH));
         }
 
-        gcCustomDateFormats = Collections.unmodifiableMap(map);
+        GC_CUSTOM_DATE_FORMATS = Collections.unmodifiableMap(map);
     }
 
     public static StatusCode login() {
@@ -66,10 +68,10 @@ public abstract class Login {
     }
 
     private static StatusCode login(boolean retry) {
-        final ImmutablePair<String, String> login = Settings.getLogin();
+        final ImmutablePair<String, String> login = Settings.getGcLogin();
 
-        if (login == null || StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
-            Login.setActualStatus(cgeoapplication.getInstance().getString(R.string.err_login));
+        if (StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
+            clearLoginInfo();
             Log.e("Login.login: No login information stored");
             return StatusCode.NO_LOGIN_INFO_STORED;
         }
@@ -77,7 +79,7 @@ public abstract class Login {
         Login.setActualStatus(cgeoapplication.getInstance().getString(R.string.init_login_popup_working));
         HttpResponse loginResponse = Network.getRequest("https://www.geocaching.com/login/default.aspx");
         String loginData = Network.getResponseData(loginResponse);
-        if (loginResponse != null && loginResponse.getStatusLine().getStatusCode() == 503 && BaseUtils.matches(loginData, GCConstants.PATTERN_MAINTENANCE)) {
+        if (loginResponse != null && loginResponse.getStatusLine().getStatusCode() == 503 && TextUtils.matches(loginData, GCConstants.PATTERN_MAINTENANCE)) {
             return StatusCode.MAINTENANCE;
         }
 
@@ -147,15 +149,29 @@ public abstract class Login {
     }
 
     public static StatusCode logout() {
-        HttpResponse logoutResponse = Network.getRequest("https://www.geocaching.com/login/default.aspx?RESET=Y&redir=http%3a%2f%2fwww.geocaching.com%2fdefault.aspx%3f");
-        String logoutData = Network.getResponseData(logoutResponse);
-        if (logoutResponse != null && logoutResponse.getStatusLine().getStatusCode() == 503 && BaseUtils.matches(logoutData, GCConstants.PATTERN_MAINTENANCE)) {
+        final HttpResponse logoutResponse = Network.getRequest("https://www.geocaching.com/login/default.aspx?RESET=Y&redir=http%3a%2f%2fwww.geocaching.com%2fdefault.aspx%3f");
+        final String logoutData = Network.getResponseData(logoutResponse);
+        if (logoutResponse != null && logoutResponse.getStatusLine().getStatusCode() == 503 && TextUtils.matches(logoutData, GCConstants.PATTERN_MAINTENANCE)) {
             return StatusCode.MAINTENANCE;
         }
 
+        resetLoginStatus();
+
+        return StatusCode.NO_ERROR;
+    }
+
+    private static void resetLoginStatus() {
         Cookies.clearCookies();
         Settings.setCookieStore(null);
-        return StatusCode.NO_ERROR;
+
+        setActualLoginStatus(false);
+    }
+
+    private static void clearLoginInfo() {
+        resetLoginStatus();
+
+        setActualCachesFound(-1);
+        setActualStatus(cgeoapplication.getInstance().getString(R.string.err_login));
     }
 
     static void setActualCachesFound(final int found) {
@@ -205,17 +221,17 @@ public abstract class Login {
         setActualStatus(cgeoapplication.getInstance().getString(R.string.init_login_popup_ok));
 
         // on every page except login page
-        setActualLoginStatus(BaseUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME));
+        setActualLoginStatus(TextUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME));
         if (isActualLoginStatus()) {
-            setActualUserName(BaseUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???"));
+            setActualUserName(TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???"));
             int cachesCount = 0;
             try {
-                cachesCount = Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll("[,.]", ""));
-            } catch (NumberFormatException e) {
+                cachesCount = Integer.parseInt(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll("[,.]", ""));
+            } catch (final NumberFormatException e) {
                 Log.e("getLoginStatus: bad cache count", e);
             }
             setActualCachesFound(cachesCount);
-            Settings.setMemberStatus(BaseUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, null));
+            Settings.setMemberStatus(TextUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, null));
             if ( page.contains(GCConstants.MEMBER_STATUS_RENEW) ) {
                 Settings.setMemberStatus(GCConstants.MEMBER_STATUS_PM);
             }
@@ -223,7 +239,7 @@ public abstract class Login {
         }
 
         // login page
-        setActualLoginStatus(BaseUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE));
+        setActualLoginStatus(TextUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE));
         if (isActualLoginStatus()) {
             setActualUserName(Settings.getUsername());
             // number of caches found is not part of this page
@@ -260,23 +276,23 @@ public abstract class Login {
 
     public static BitmapDrawable downloadAvatarAndGetMemberStatus() {
         try {
-            final String profile = BaseUtils.replaceWhitespace(Network.getResponseData(Network.getRequest("http://www.geocaching.com/my/")));
+            final String profile = TextUtils.replaceWhitespace(Network.getResponseData(Network.getRequest("http://www.geocaching.com/my/")));
 
-            Settings.setMemberStatus(BaseUtils.getMatch(profile, GCConstants.PATTERN_MEMBER_STATUS, true, null));
+            Settings.setMemberStatus(TextUtils.getMatch(profile, GCConstants.PATTERN_MEMBER_STATUS, true, null));
             if (profile.contains(GCConstants.MEMBER_STATUS_RENEW)) {
                 Settings.setMemberStatus(GCConstants.MEMBER_STATUS_PM);
             }
 
-            setActualCachesFound(Integer.parseInt(BaseUtils.getMatch(profile, GCConstants.PATTERN_CACHES_FOUND, true, "-1").replaceAll("[,.]", "")));
+            setActualCachesFound(Integer.parseInt(TextUtils.getMatch(profile, GCConstants.PATTERN_CACHES_FOUND, true, "-1").replaceAll("[,.]", "")));
 
-            final String avatarURL = BaseUtils.getMatch(profile, GCConstants.PATTERN_AVATAR_IMAGE_PROFILE_PAGE, false, null);
+            final String avatarURL = TextUtils.getMatch(profile, GCConstants.PATTERN_AVATAR_IMAGE_PROFILE_PAGE, false, null);
             if (null != avatarURL) {
                 final HtmlImage imgGetter = new HtmlImage("", false, 0, false);
                 return imgGetter.getDrawable(avatarURL);
             }
             // No match? There may be no avatar set by user.
             Log.d("No avatar set for user");
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Log.w("Error when retrieving user avatar", e);
         }
         return null;
@@ -294,7 +310,7 @@ public abstract class Login {
             return;
         }
 
-        String customDate = BaseUtils.getMatch(result, GCConstants.PATTERN_CUSTOMDATE, true, null);
+        final String customDate = TextUtils.getMatch(result, GCConstants.PATTERN_CUSTOMDATE, true, null);
         if (null != customDate) {
             Settings.setGcCustomDate(customDate);
         }
@@ -307,17 +323,17 @@ public abstract class Login {
 
         final String trimmed = input.trim();
 
-        if (gcCustomDateFormats.containsKey(format)) {
+        if (GC_CUSTOM_DATE_FORMATS.containsKey(format)) {
             try {
-                return gcCustomDateFormats.get(format).parse(trimmed);
-            } catch (ParseException e) {
+                return GC_CUSTOM_DATE_FORMATS.get(format).parse(trimmed);
+            } catch (final ParseException e) {
             }
         }
 
-        for (SimpleDateFormat sdf : gcCustomDateFormats.values()) {
+        for (final SimpleDateFormat sdf : GC_CUSTOM_DATE_FORMATS.values()) {
             try {
                 return sdf.parse(trimmed);
-            } catch (ParseException e) {
+            } catch (final ParseException e) {
             }
         }
 
@@ -330,11 +346,11 @@ public abstract class Login {
 
     public static SimpleDateFormat getCustomGcDateFormat() {
         final String format = Settings.getGcCustomDate();
-        if (gcCustomDateFormats.containsKey(format)) {
-            return gcCustomDateFormats.get(format);
+        if (GC_CUSTOM_DATE_FORMATS.containsKey(format)) {
+            return GC_CUSTOM_DATE_FORMATS.get(format);
         }
 
-        return gcCustomDateFormats.get("MM/dd/yyyy");
+        return GC_CUSTOM_DATE_FORMATS.get(DEFAULT_CUSTOM_DATE_FORMAT);
     }
 
     /**
@@ -347,7 +363,7 @@ public abstract class Login {
             return true;
         }
 
-        for (String s : a) {
+        for (final String s : a) {
             if (StringUtils.isNotEmpty(s)) {
                 return false;
             }
@@ -373,24 +389,24 @@ public abstract class Login {
         if (matcherViewstateCount.find()) {
             try {
                 count = Integer.parseInt(matcherViewstateCount.group(1));
-            } catch (NumberFormatException e) {
+            } catch (final NumberFormatException e) {
                 Log.e("getViewStates", e);
             }
         }
 
-        String[] viewstates = new String[count];
+        final String[] viewstates = new String[count];
 
         // Get the viewstates
         final MatcherWrapper matcherViewstates = new MatcherWrapper(GCConstants.PATTERN_VIEWSTATES, page);
         while (matcherViewstates.find()) {
-            String sno = matcherViewstates.group(1); // number of viewstate
+            final String sno = matcherViewstates.group(1); // number of viewstate
             int no;
             if (StringUtils.isEmpty(sno)) {
                 no = 0;
             } else {
                 try {
                     no = Integer.parseInt(sno);
-                } catch (NumberFormatException e) {
+                } catch (final NumberFormatException e) {
                     Log.e("getViewStates", e);
                     no = 0;
                 }
@@ -436,17 +452,17 @@ public abstract class Login {
      * @return
      */
     public static String postRequestLogged(final String uri, final Parameters params) {
-        HttpResponse response = Network.postRequest(uri, params);
-        String data = Network.getResponseData(response);
+        final String data = Network.getResponseData(Network.postRequest(uri, params));
 
-        if (!getLoginStatus(data)) {
-            if (login() == StatusCode.NO_ERROR) {
-                response = Network.postRequest(uri, params);
-                data = Network.getResponseData(response);
-            } else {
-                Log.i("Working as guest.");
-            }
+        if (getLoginStatus(data)) {
+            return data;
         }
+
+        if (login() == StatusCode.NO_ERROR) {
+            return Network.getResponseData(Network.postRequest(uri, params));
+        }
+
+        Log.i("Working as guest.");
         return data;
     }
 
@@ -458,26 +474,37 @@ public abstract class Login {
      * @return
      */
     public static String getRequestLogged(final String uri, final Parameters params) {
-        final String data = Network.getResponseData(Network.getRequest(uri, params));
+        final String data = Network.getResponseData(Network.getRequest(uri, params), canRemoveWhitespace(uri));
 
         if (getLoginStatus(data)) {
             return data;
         }
 
         if (login() == StatusCode.NO_ERROR) {
-            return Network.getResponseData(Network.getRequest(uri, params));
+            return Network.getResponseData(Network.getRequest(uri, params), canRemoveWhitespace(uri));
         }
 
         Log.w("Working as guest.");
         return data;
     }
 
+    /**
+     * Unfortunately the cache details page contains user generated whitespace in the personal note, therefore we cannot
+     * remove the white space from cache details pages.
+     *
+     * @param uri
+     * @return
+     */
+    private static boolean canRemoveWhitespace(final String uri) {
+        return !StringUtils.contains(uri, "cache_details");
+    }
+
     /** Get user session & session token from the Live Map. Needed for following requests */
     public static String[] getMapTokens() {
         final HttpResponse response = Network.getRequest(GCConstants.URL_LIVE_MAP);
         final String data = Network.getResponseData(response);
-        final String userSession = BaseUtils.getMatch(data, GCConstants.PATTERN_USERSESSION, "");
-        final String sessionToken = BaseUtils.getMatch(data, GCConstants.PATTERN_SESSIONTOKEN, "");
+        final String userSession = TextUtils.getMatch(data, GCConstants.PATTERN_USERSESSION, "");
+        final String sessionToken = TextUtils.getMatch(data, GCConstants.PATTERN_SESSIONTOKEN, "");
         return new String[] { userSession, sessionToken };
     }
 }

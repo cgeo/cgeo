@@ -2,15 +2,16 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
+import cgeo.geocaching.settings.Settings;
 
 import android.annotation.TargetApi;
 import android.test.ActivityInstrumentationTestCase2;
 
 @TargetApi(8)
-public class SettingsTest extends ActivityInstrumentationTestCase2<cgeo> {
+public class SettingsTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
     public SettingsTest() {
-        super(cgeo.class);
+        super(MainActivity.class);
     }
 
     /**
@@ -25,6 +26,7 @@ public class SettingsTest extends ActivityInstrumentationTestCase2<cgeo> {
     }
 
     public static void testSettings() {
+        // unfortunately, several other tests depend on being a premium member and will fail if run by a basic member
         assertEquals(GCConstants.MEMBER_STATUS_PM, Settings.getMemberStatus());
     }
 

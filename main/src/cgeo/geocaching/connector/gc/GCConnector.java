@@ -4,30 +4,46 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgData;
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.AbstractConnector;
+import cgeo.geocaching.connector.ILoggingManager;
+import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
-import cgeo.geocaching.enumerations.CacheRealm;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.settings.SettingsActivity;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import android.app.Activity;
+import android.content.Context;
+import android.os.Handler;
+
 import java.util.regex.Pattern;
 
-public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort {
+public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ILogin {
 
     private static final String CACHE_URL_SHORT = "http://coord.info/";
     // Double slash is used to force open in browser
     private static final String CACHE_URL_LONG = "http://www.geocaching.com//seek/cache_details.aspx?wp=";
-    private static final Pattern gpxZipFilePattern = Pattern.compile("\\d{7,}(_.+)?\\.zip", Pattern.CASE_INSENSITIVE);
+    /**
+     * Pocket queries downloaded from the website use a numeric prefix. The pocket query creator Android app adds a
+     * verbatim "pocketquery" prefix.
+     */
+    private static final Pattern GPX_ZIP_FILE_PATTERN = Pattern.compile("((\\d{7,})|(pocketquery))" + "(_.+)?" + "\\.zip", Pattern.CASE_INSENSITIVE);
+
+    /**
+     * Pattern for GC codes
+     */
+    private final static Pattern PATTERN_GC_CODE = Pattern.compile("GC[0-9A-Z]+", Pattern.CASE_INSENSITIVE);
 
     private GCConnector() {
         // singleton
@@ -49,7 +65,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         if (geocode == null) {
             return false;
         }
-        return GCConstants.PATTERN_GC_CODE.matcher(geocode).matches() || GCConstants.PATTERN_TB_CODE.matcher(geocode).matches();
+        return GCConnector.PATTERN_GC_CODE.matcher(geocode).matches();
     }
 
     @Override
@@ -60,6 +76,11 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public String getCacheUrl(Geocache cache) {
         return CACHE_URL_SHORT + cache.getGeocode();
+    }
+
+    @Override
+    public boolean supportsPersonalNote() {
+        return true;
     }
 
     @Override
@@ -78,8 +99,23 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    public boolean supportsLogImages() {
+        return true;
+    }
+
+    @Override
+    public ILoggingManager getLoggingManager(Activity activity, Geocache cache) {
+        return new GCLoggingManager(activity, cache);
+    }
+
+    @Override
+    public boolean canLog(Geocache cache) {
+        return StringUtils.isNotBlank(cache.getCacheId());
+    }
+
+    @Override
     public String getName() {
-        return "GeoCaching.com";
+        return "geocaching.com";
     }
 
     @Override
@@ -135,7 +171,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean isZippedGPXFile(final String fileName) {
-        return gpxZipFilePattern.matcher(fileName).matches();
+        return GPX_ZIP_FILE_PATTERN.matcher(fileName).matches();
     }
 
     @Override
@@ -149,7 +185,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     }
 
-    public static boolean addToWatchlist(Geocache cache) {
+    @Override
+    public boolean addToWatchlist(Geocache cache) {
         final boolean added = GCParser.addToWatchlist(cache);
         if (added) {
             cgData.saveChangedCache(cache);
@@ -157,7 +194,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         return added;
     }
 
-    public static boolean removeFromWatchlist(Geocache cache) {
+    @Override
+    public boolean removeFromWatchlist(Geocache cache) {
         final boolean removed = GCParser.removeFromWatchlist(cache);
         if (removed) {
             cgData.saveChangedCache(cache);
@@ -218,6 +256,15 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    public boolean uploadPersonalNote(Geocache cache) {
+        final boolean uploaded = GCParser.uploadPersonalNote(cache);
+        if (uploaded) {
+            cgData.saveChangedCache(cache);
+        }
+        return uploaded;
+    }
+
+    @Override
     public SearchResult searchByCenter(Geopoint center) {
         // TODO make search by coordinate use this method. currently it is just a marker that this connector supports search by center
         return null;
@@ -234,12 +281,57 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public CacheRealm getCacheRealm() {
-        return CacheRealm.GC;
+    public boolean isActivated() {
+        return Settings.isGCConnectorActive();
     }
 
     @Override
-    public boolean isActivated() {
-        return true;
+    public int getCacheMapMarkerId(boolean disabled) {
+        if (disabled) {
+            return R.drawable.marker_disabled;
+        }
+        return R.drawable.marker;
+    }
+
+    @Override
+    public boolean login(Handler handler, Context fromActivity) {
+        // login
+        final StatusCode status = Login.login();
+
+        if (status == StatusCode.NO_ERROR) {
+            cgeoapplication.getInstance().checkLogin = false;
+            Login.detectGcCustomDate();
+        }
+
+        if (cgeoapplication.getInstance().showLoginToast && handler != null) {
+            handler.sendMessage(handler.obtainMessage(0, status));
+            cgeoapplication.getInstance().showLoginToast = false;
+
+            // invoke settings activity to insert login details
+            if (status == StatusCode.NO_LOGIN_INFO_STORED && fromActivity != null) {
+                SettingsActivity.jumpToServicesPage(fromActivity);
+            }
+        }
+        return status == StatusCode.NO_ERROR;
+    }
+
+    @Override
+    public String getUserName() {
+        return Login.getActualUserName();
+    }
+
+    @Override
+    public int getCachesFound() {
+        return Login.getActualCachesFound();
+    }
+
+    @Override
+    public String getLoginStatusString() {
+        return Login.getActualStatus();
+    }
+
+    @Override
+    public boolean isLoggedIn() {
+        return Login.isActualLoginStatus();
     }
 }

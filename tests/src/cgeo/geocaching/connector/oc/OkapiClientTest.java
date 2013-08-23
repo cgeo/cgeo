@@ -3,7 +3,6 @@ package cgeo.geocaching.connector.oc;
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.cgData;
-import cgeo.geocaching.connector.oc.OkapiClient;
 import cgeo.geocaching.enumerations.LoadFlags;
 
 public class OkapiClientTest extends CGeoTestCase {
@@ -23,4 +22,10 @@ public class OkapiClientTest extends CGeoTestCase {
         assertTrue(cache.isDetailed());
     }
 
+    public static void testOCSearchMustWorkWithoutOAuthAccessTokens() {
+        final String geoCode = "OC1234";
+        Geocache cache = OkapiClient.getCache(geoCode);
+        assertNotNull("You must have a valid OKAPI key installed for running this test (but you do not need to set credentials in the app).", cache);
+        assertEquals("Wupper-Schein", cache.getName());
+    }
 }

@@ -2,8 +2,9 @@ package cgeo.geocaching.connector;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
-import cgeo.geocaching.enumerations.CacheRealm;
 import cgeo.geocaching.geopoint.Geopoint;
+
+import android.app.Activity;
 
 public interface IConnector {
     /**
@@ -45,6 +46,22 @@ public interface IConnector {
     public boolean supportsWatchList();
 
     /**
+     * Add the cache to the watchlist
+     *
+     * @param cache
+     * @return True - success/False - failure
+     */
+    public boolean addToWatchlist(Geocache cache);
+
+    /**
+     * Remove the cache from the watchlist
+     *
+     * @param cache
+     * @return True - success/False - failure
+     */
+    public boolean removeFromWatchlist(Geocache cache);
+
+    /**
      * enable/disable favorite points controls in cache details
      *
      * @return
@@ -57,6 +74,20 @@ public interface IConnector {
      * @return
      */
     public boolean supportsLogging();
+
+    /**
+     * enable/disable attaching image to log
+     *
+     * @return
+     */
+    public boolean supportsLogImages();
+
+    /**
+     * Get an ILoggingManager to guide the logging process.
+     *
+     * @return
+     */
+    public ILoggingManager getLoggingManager(Activity activity, Geocache cache);
 
     /**
      * get host name of the connector server for dynamic loading of data
@@ -98,19 +129,27 @@ public interface IConnector {
     public boolean isReliableLatLon(boolean cacheHasReliableLatLon);
 
     /**
-     * Return required tokens for specific following actions
-     *
-     * @return
-     */
-    public String[] getTokens();
-
-    /**
      * extract a geocode from the given URL, if this connector can handle that URL somehow
      *
      * @param url
      * @return
      */
     public String getGeocodeFromUrl(final String url);
+
+    /**
+     * enable/disable uploading personal note
+     *
+     * @return true, when uploading is possible
+     */
+    public boolean supportsPersonalNote();
+
+    /**
+     * Uploading personal note to website
+     *
+     * @param cache
+     * @return success
+     */
+    public boolean uploadPersonalNote(Geocache cache);
 
     /**
      * enable/disable uploading modified coordinates to website
@@ -120,16 +159,7 @@ public interface IConnector {
     public boolean supportsOwnCoordinates();
 
     /**
-     * Uploading modified coordinates to website
-     *
-     * @param cache
-     * @param wpt
-     * @return success
-     */
-    public boolean uploadModifiedCoordinates(Geocache cache, Geopoint wpt);
-
-    /**
-     * Reseting of modified coordinates on website to details
+     * Resetting of modified coordinates on website to details
      *
      * @param cache
      * @return success
@@ -137,11 +167,13 @@ public interface IConnector {
     public boolean deleteModifiedCoordinates(Geocache cache);
 
     /**
-     * The CacheRealm this cache belongs to
+     * Uploading modified coordinates to website
      *
-     * @return
+     * @param cache
+     * @param wpt
+     * @return success
      */
-    public CacheRealm getCacheRealm();
+    public boolean uploadModifiedCoordinates(Geocache cache, Geopoint wpt);
 
     /**
      * Return true if this connector is activated for online
@@ -159,4 +191,22 @@ public interface IConnector {
      * @return <code>true</code> if the current user is the cache owner, <code>false</code> otherwise
      */
     public boolean isOwner(final ICache cache);
+
+    /**
+     * Check if the cache information is complete enough to be
+     * able to log online.
+     *
+     * @param geocache
+     * @return
+     */
+    public boolean canLog(Geocache geocache);
+
+    /**
+     * Return the marker id of the caches for this connector. This creates the different backgrounds for cache markers
+     * on the map.
+     *
+     * @param disabled
+     *            Whether to return the enabled or disabled marker type
+     */
+    public int getCacheMapMarkerId(boolean disabled);
 }

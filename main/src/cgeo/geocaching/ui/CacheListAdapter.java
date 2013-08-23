@@ -1,17 +1,20 @@
 package cgeo.geocaching.ui;
 
+import butterknife.InjectView;
+
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.DistanceComparator;
+import cgeo.geocaching.sorting.EventDateComparator;
 import cgeo.geocaching.sorting.InverseComparator;
 import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.utils.AngleUtils;
@@ -77,13 +80,13 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     private static final int[] RATING_BACKGROUND = new int[3];
     static {
         if (Settings.isLightSkin()) {
-            RATING_BACKGROUND[0] = R.drawable.favourite_background_red_light;
-            RATING_BACKGROUND[1] = R.drawable.favourite_background_orange_light;
-            RATING_BACKGROUND[2] = R.drawable.favourite_background_green_light;
+            RATING_BACKGROUND[0] = R.drawable.favorite_background_red_light;
+            RATING_BACKGROUND[1] = R.drawable.favorite_background_orange_light;
+            RATING_BACKGROUND[2] = R.drawable.favorite_background_green_light;
         } else {
-            RATING_BACKGROUND[0] = R.drawable.favourite_background_red_dark;
-            RATING_BACKGROUND[1] = R.drawable.favourite_background_orange_dark;
-            RATING_BACKGROUND[2] = R.drawable.favourite_background_green_dark;
+            RATING_BACKGROUND[0] = R.drawable.favorite_background_red_dark;
+            RATING_BACKGROUND[1] = R.drawable.favorite_background_orange_dark;
+            RATING_BACKGROUND[2] = R.drawable.favorite_background_green_dark;
         }
     }
 
@@ -91,16 +94,20 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
      * view holder for the cache list adapter
      *
      */
-    private static class ViewHolder {
-        CheckBox checkbox;
-        ImageView logStatusMark;
-        TextView text;
-        TextView favourite;
-        TextView info;
-        ImageView inventory;
-        DistanceView distance;
-        CompassMiniView direction;
-        ImageView dirImg;
+    protected static class ViewHolder extends AbstractViewHolder {
+        @InjectView(R.id.checkbox) protected CheckBox checkbox;
+        @InjectView(R.id.log_status_mark) protected ImageView logStatusMark;
+        @InjectView(R.id.text) protected TextView text;
+        @InjectView(R.id.distance) protected DistanceView distance;
+        @InjectView(R.id.favorite) protected TextView favorite;
+        @InjectView(R.id.info) protected TextView info;
+        @InjectView(R.id.inventory) protected ImageView inventory;
+        @InjectView(R.id.direction) protected CompassMiniView direction;
+        @InjectView(R.id.dirimg) protected ImageView dirImg;
+
+        public ViewHolder(View view) {
+            super(view);
+        }
     }
 
     public CacheListAdapter(final Activity activity, final List<Geocache> list, CacheListType cacheListType) {
@@ -348,20 +355,9 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
         final ViewHolder holder;
         if (v == null) {
-            v = inflater.inflate(R.layout.caches_item, null);
+            v = inflater.inflate(R.layout.cacheslist_item, null);
 
-            holder = new ViewHolder();
-            holder.checkbox = (CheckBox) v.findViewById(R.id.checkbox);
-            holder.logStatusMark = (ImageView) v.findViewById(R.id.log_status_mark);
-            holder.text = (TextView) v.findViewById(R.id.text);
-            holder.distance = (DistanceView) v.findViewById(R.id.distance);
-            holder.direction = (CompassMiniView) v.findViewById(R.id.direction);
-            holder.dirImg = (ImageView) v.findViewById(R.id.dirimg);
-            holder.inventory = (ImageView) v.findViewById(R.id.inventory);
-            holder.favourite = (TextView) v.findViewById(R.id.favourite);
-            holder.info = (TextView) v.findViewById(R.id.info);
-
-            v.setTag(holder);
+            holder = new ViewHolder(v);
         } else {
             holder = (ViewHolder) v.getTag();
         }
@@ -453,14 +449,14 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
             holder.direction.setVisibility(View.GONE);
         }
 
-        holder.favourite.setText(Integer.toString(cache.getFavoritePoints()));
+        holder.favorite.setText(Integer.toString(cache.getFavoritePoints()));
 
         int favoriteBack;
         // set default background, neither vote nor rating may be available
         if (lightSkin) {
-            favoriteBack = R.drawable.favourite_background_light;
+            favoriteBack = R.drawable.favorite_background_light;
         } else {
-            favoriteBack = R.drawable.favourite_background_dark;
+            favoriteBack = R.drawable.favorite_background_dark;
         }
         final float myVote = cache.getMyVote();
         if (myVote > 0) { // use my own rating for display, if I have voted
@@ -481,7 +477,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
                 favoriteBack = RATING_BACKGROUND[0];
             }
         }
-        holder.favourite.setBackgroundResource(favoriteBack);
+        holder.favorite.setBackgroundResource(favoriteBack);
 
         if (cacheListType == CacheListType.HISTORY && cache.getVisitedDate() > 0) {
             holder.info.setText(Formatter.formatCacheInfoHistory(cache));
@@ -646,5 +642,30 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
             return checked;
         }
         return list.size();
+    }
+
+    public void setInitialComparator() {
+        // will be called repeatedly when coming back to the list, therefore check first for an already existing sorting
+        if (cacheComparator != null) {
+            return;
+        }
+        CacheComparator comparator = null; // a null comparator will automatically sort by distance
+        if (cacheListType == CacheListType.HISTORY) {
+            comparator = new VisitComparator();
+        } else {
+            if (CollectionUtils.isNotEmpty(list)) {
+                boolean eventsOnly = true;
+                for (final Geocache cache : list) {
+                    if (!cache.isEventCache()) {
+                        eventsOnly = false;
+                        break;
+                    }
+                }
+                if (eventsOnly) {
+                    comparator = new EventDateComparator();
+                }
+            }
+        }
+        setComparator(comparator);
     }
 }

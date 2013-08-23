@@ -2,16 +2,11 @@ package cgeo.geocaching.geopoint;
 
 import cgeo.geocaching.ICoordinates;
 import cgeo.geocaching.R;
-import cgeo.geocaching.geopoint.GeopointFormatter.Format;
-import cgeo.geocaching.network.Network;
-import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import android.location.Location;
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -19,11 +14,15 @@ import android.os.Parcelable;
  * Abstraction of geographic point.
  */
 public final class Geopoint implements ICoordinates, Parcelable {
-    public static final double deg2rad = Math.PI / 180;
-    public static final double rad2deg = 180 / Math.PI;
-    public static final float erad = 6371.0f;
-
     public static final Geopoint ZERO = new Geopoint(0.0, 0.0);
+
+    private static final double DEG_TO_RAD = Math.PI / 180;
+    private static final double RAD_TO_DEG = 180 / Math.PI;
+    private static final float EARTH_RADIUS = 6371.0f;
+    /**
+     * JIT bug in Android 4.2.1
+     */
+    private static final boolean DISTANCE_BROKEN = Build.VERSION.SDK_INT == Build.VERSION_CODES.JELLY_BEAN_MR1;
 
     private final double latitude;
     private final double longitude;
@@ -215,7 +214,11 @@ public final class Geopoint implements ICoordinates, Parcelable {
      *             if there is an error in distance calculation
      */
     public float distanceTo(final ICoordinates point) {
-        return pathTo(point.getCoords())[0] / 1000;
+        final Geopoint otherCoords = point.getCoords();
+        if (DISTANCE_BROKEN) {
+            return (float) (getDistance(latitude, longitude, otherCoords.latitude, otherCoords.longitude) / 1000);
+        }
+        return pathTo(otherCoords)[0] / 1000;
     }
 
     /**
@@ -241,15 +244,15 @@ public final class Geopoint implements ICoordinates, Parcelable {
      * @return the projected geopoint
      */
     public Geopoint project(final double bearing, final double distance) {
-        final double rlat1 = latitude * deg2rad;
-        final double rlon1 = longitude * deg2rad;
-        final double rbearing = bearing * deg2rad;
-        final double rdistance = distance / erad;
+        final double rlat1 = latitude * DEG_TO_RAD;
+        final double rlon1 = longitude * DEG_TO_RAD;
+        final double rbearing = bearing * DEG_TO_RAD;
+        final double rdistance = distance / EARTH_RADIUS;
 
         final double rlat = Math.asin(Math.sin(rlat1) * Math.cos(rdistance) + Math.cos(rlat1) * Math.sin(rdistance) * Math.cos(rbearing));
         final double rlon = rlon1 + Math.atan2(Math.sin(rbearing) * Math.sin(rdistance) * Math.cos(rlat1), Math.cos(rdistance) - Math.sin(rlat1) * Math.sin(rlat));
 
-        return new Geopoint(rlat * rad2deg, rlon * rad2deg);
+        return new Geopoint(rlat * RAD_TO_DEG, rlon * RAD_TO_DEG);
     }
 
     @Override
@@ -321,34 +324,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
             super(msg);
             resource = faulty == GeopointParser.LatLon.LAT ? R.string.err_parse_lat : R.string.err_parse_lon;
         }
-    }
-
-    public Double getElevation() {
-        try {
-            final String uri = "http://maps.googleapis.com/maps/api/elevation/json";
-            final Parameters params = new Parameters(
-                    "sensor", "false",
-                    "locations", format(Format.LAT_LON_DECDEGREE_COMMA));
-            final JSONObject response = Network.requestJSON(uri, params);
-
-            if (response == null) {
-                return null;
-            }
-
-            if (!StringUtils.equalsIgnoreCase(response.getString("status"), "OK")) {
-                return null;
-            }
-
-            if (response.has("results")) {
-                JSONArray results = response.getJSONArray("results");
-                JSONObject result = results.getJSONObject(0);
-                return result.getDouble("elevation");
-            }
-        } catch (Exception e) {
-            Log.w("cgBase.getElevation", e);
-        }
-
-        return null;
     }
 
     @Override
@@ -586,4 +561,25 @@ public final class Geopoint implements ICoordinates, Parcelable {
     private static String getLatSign(final String latDir) {
         return "S".equalsIgnoreCase(latDir) ? "-" : "";
     }
+
+    /**
+     * Gets distance in meters (workaround for 4.2.1 JIT bug).
+     */
+    public static double getDistance(double lat1, double lon1, double lat2, double lon2) {
+        double earthRadius = 6372.8; // for haversine use R = 6372.8 km instead of 6371 km
+        double dLat = toRadians(lat2 - lat1);
+        double dLon = toRadians(lon2 - lon1);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        //double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        //return R * c * 1000;
+        // simplify haversine:
+        return (2 * earthRadius * 1000 * Math.asin(Math.sqrt(a)));
+    }
+
+    private static double toRadians(double angdeg) {
+        return angdeg * DEG_TO_RAD;
+    }
+
 }

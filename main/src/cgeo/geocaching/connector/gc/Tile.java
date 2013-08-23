@@ -37,6 +37,7 @@ public class Tile {
     public static final int TILE_SIZE = 256;
     public static final int ZOOMLEVEL_MAX = 18;
     public static final int ZOOMLEVEL_MIN = 0;
+    public static final int ZOOMLEVEL_MIN_PERSONALIZED = 12;
 
     static final int[] NUMBER_OF_TILES = new int[ZOOMLEVEL_MAX - ZOOMLEVEL_MIN + 1];
     static final int[] NUMBER_OF_PIXELS = new int[ZOOMLEVEL_MAX - ZOOMLEVEL_MIN + 1];
@@ -49,7 +50,7 @@ public class Tile {
 
     private final int tileX;
     private final int tileY;
-    private final int zoomlevel;
+    private final int zoomLevel;
     private final Viewport viewPort;
 
     public Tile(Geopoint origin, int zoomlevel) {
@@ -58,7 +59,7 @@ public class Tile {
 
     private Tile(int tileX, int tileY, int zoomlevel) {
 
-        this.zoomlevel = clippedZoomlevel(zoomlevel);
+        this.zoomLevel = clippedZoomlevel(zoomlevel);
 
         this.tileX = tileX;
         this.tileY = tileY;
@@ -66,8 +67,8 @@ public class Tile {
         viewPort = new Viewport(getCoord(new UTFGridPosition(0, 0)), getCoord(new UTFGridPosition(63, 63)));
     }
 
-    public int getZoomlevel() {
-        return zoomlevel;
+    public int getZoomLevel() {
+        return zoomLevel;
     }
 
     private static int clippedZoomlevel(int zoomlevel) {
@@ -119,14 +120,14 @@ public class Tile {
         double pixX = tileX * TILE_SIZE + pos.x * 4;
         double pixY = tileY * TILE_SIZE + pos.y * 4;
 
-        double lonDeg = ((360.0 * pixX) / NUMBER_OF_PIXELS[this.zoomlevel]) - 180.0;
-        double latRad = Math.atan(Math.sinh(Math.PI * (1 - 2 * pixY / NUMBER_OF_PIXELS[this.zoomlevel])));
+        double lonDeg = ((360.0 * pixX) / NUMBER_OF_PIXELS[this.zoomLevel]) - 180.0;
+        double latRad = Math.atan(Math.sinh(Math.PI * (1 - 2 * pixY / NUMBER_OF_PIXELS[this.zoomLevel])));
         return new Geopoint(Math.toDegrees(latRad), lonDeg);
     }
 
     @Override
     public String toString() {
-        return String.format(Locale.US, "(%d/%d), zoom=%d", tileX, tileY, zoomlevel);
+        return String.format(Locale.US, "(%d/%d), zoom=%d", tileX, tileY, zoomLevel);
     }
 
     /**
@@ -224,7 +225,7 @@ public class Tile {
         }
         return (this.tileX == ((Tile) o).tileX)
                 && (this.tileY == ((Tile) o).tileY)
-                && (this.zoomlevel == ((Tile) o).zoomlevel);
+                && (this.zoomLevel == ((Tile) o).zoomLevel);
     }
 
     @Override
@@ -243,13 +244,17 @@ public class Tile {
         try {
             return response != null ? BitmapFactory.decodeStream(response.getEntity().getContent()) : null;
         } catch (IOException e) {
-            Log.e("cgBase.requestMapTile() " + e.getMessage());
+            Log.e("Tile.requestMapTile() ", e);
         }
         return null;
     }
 
     public boolean containsPoint(final ICoordinates point) {
         return viewPort.contains(point);
+    }
+
+    public Viewport getViewport() {
+        return viewPort;
     }
 
     /**
@@ -318,6 +323,10 @@ public class Tile {
 
         public static void add(final Tile tile) {
             tileCache.put(tile.hashCode(), tile);
+        }
+
+        public static void clear() {
+            tileCache.clear();
         }
     }
 

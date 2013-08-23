@@ -72,4 +72,8 @@ public enum WaypointType {
     public final String toString() {
         return getL10n();
     }
+
+    public boolean applyDistanceRule() {
+        return (this == FINAL || this == STAGE);
+    }
 }

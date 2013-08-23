@@ -9,12 +9,13 @@ import android.content.res.Resources;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 abstract class StateFilter extends AbstractFilter {
 
-    final static Resources res = cgeoapplication.getInstance().getResources();
+    static final Resources res = cgeoapplication.getInstance().getResources();
 
-    protected StateFilter(String name) {
+    protected StateFilter(final String name) {
         super(name);
     }
 
@@ -25,7 +26,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(Geocache cache) {
+        public boolean accepts(final Geocache cache) {
             return cache.isFound();
         }
 
@@ -37,7 +38,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(Geocache cache) {
+        public boolean accepts(final Geocache cache) {
             return cache.isArchived();
         }
     }
@@ -48,7 +49,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(Geocache cache) {
+        public boolean accepts(final Geocache cache) {
             return cache.isDisabled();
         }
     }
@@ -59,7 +60,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(Geocache cache) {
+        public boolean accepts(final Geocache cache) {
             return cache.isPremiumMembersOnly();
         }
     }
@@ -70,7 +71,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(Geocache cache) {
+        public boolean accepts(final Geocache cache) {
             return !cache.isPremiumMembersOnly();
         }
     }
@@ -81,32 +82,56 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(Geocache cache) {
+        public boolean accepts(final Geocache cache) {
             return cache.isLogOffline();
+        }
+    }
+
+    static class StateStoredFilter extends StateFilter {
+        public StateStoredFilter() {
+            super(res.getString(R.string.cache_status_stored));
+        }
+
+        @Override
+        public boolean accepts(final Geocache cache) {
+            return cache.isOffline();
+        }
+    }
+
+    static class StateNotStoredFilter extends StateFilter {
+        public StateNotStoredFilter() {
+            super(res.getString(R.string.cache_status_not_stored));
+        }
+
+        @Override
+        public boolean accepts(final Geocache cache) {
+            return !cache.isOffline();
         }
     }
 
     public static class Factory implements IFilterFactory {
 
         @Override
-        public IFilter[] getFilters() {
-            final ArrayList<StateFilter> filters = new ArrayList<StateFilter>();
+        public List<StateFilter> getFilters() {
+            final List<StateFilter> filters = new ArrayList<StateFilter>(6);
             filters.add(new StateFoundFilter());
             filters.add(new StateArchivedFilter());
             filters.add(new StateDisabledFilter());
             filters.add(new StatePremiumFilter());
             filters.add(new StateNonPremiumFilter());
             filters.add(new StateOfflineLogFilter());
+            filters.add(new StateStoredFilter());
+            filters.add(new StateNotStoredFilter());
 
             Collections.sort(filters, new Comparator<StateFilter>() {
 
                 @Override
-                public int compare(StateFilter filter1, StateFilter filter2) {
+                public int compare(final StateFilter filter1, final StateFilter filter2) {
                     return filter1.getName().compareToIgnoreCase(filter2.getName());
                 }
             });
 
-            return filters.toArray(new StateFilter[filters.size()]);
+            return filters;
         }
 
     }

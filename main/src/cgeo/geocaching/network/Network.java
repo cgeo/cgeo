@@ -1,9 +1,9 @@
 package cgeo.geocaching.network;
 
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.files.LocalStorage;
-import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 
 import ch.boye.httpclientandroidlib.Header;
 import ch.boye.httpclientandroidlib.HeaderElement;
@@ -40,6 +40,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 
 import java.io.File;
@@ -314,12 +317,14 @@ public abstract class Network {
             return null;
         }
 
-        final String etag = LocalStorage.getSavedHeader(cacheFile, "etag");
+        final String etag = LocalStorage.getSavedHeader(cacheFile, LocalStorage.HEADER_ETAG);
         if (etag != null) {
+            // The ETag is a more robust check than a timestamp. If we have an ETag, it is enough
+            // to identify the right version of the resource.
             return new Parameters("If-None-Match", etag);
         }
 
-        final String lastModified = LocalStorage.getSavedHeader(cacheFile, "last-modified");
+        final String lastModified = LocalStorage.getSavedHeader(cacheFile, LocalStorage.HEADER_LAST_MODIFIED);
         if (lastModified != null) {
             return new Parameters("If-Modified-Since", lastModified);
         }
@@ -415,7 +420,7 @@ public abstract class Network {
     private static String getResponseDataNoError(final HttpResponse response, boolean replaceWhitespace) {
         try {
             String data = EntityUtils.toString(response.getEntity(), CharEncoding.UTF_8);
-            return replaceWhitespace ? BaseUtils.replaceWhitespace(data) : data;
+            return replaceWhitespace ? TextUtils.replaceWhitespace(data) : data;
         } catch (Exception e) {
             Log.e("getResponseData", e);
             return null;
@@ -425,7 +430,7 @@ public abstract class Network {
     /**
      * Get the body of a HTTP response.
      *
-     * {@link BaseUtils#replaceWhitespace(String)} will be called on the result
+     * {@link TextUtils#replaceWhitespace(String)} will be called on the result
      *
      * @param response a HTTP response, which can be null
      * @return the body if the response comes from a successful HTTP request, <code>null</code> otherwise
@@ -438,7 +443,7 @@ public abstract class Network {
      * Get the body of a HTTP response.
      *
      * @param response a HTTP response, which can be null
-     * @param replaceWhitespace <code>true</code> if {@link BaseUtils#replaceWhitespace(String)}
+     * @param replaceWhitespace <code>true</code> if {@link TextUtils#replaceWhitespace(String)}
      *                          should be called on the body
      * @return the body if the response comes from a successful HTTP request, <code>null</code> otherwise
      */
@@ -469,6 +474,21 @@ public abstract class Network {
             Log.e("Network.encode", e);
         }
         return null;
+    }
+
+    /**
+     * Checks if the device has network connection.
+     *
+     * @param context
+     *            context of the application, cannot be null
+     *
+     * @return <code>true</code> if the device is connected to the network.
+     */
+    public static boolean isNetworkConnected(Context context) {
+        ConnectivityManager conMan = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = conMan.getActiveNetworkInfo();
+
+        return activeNetwork != null && activeNetwork.isConnected();
     }
 
 }

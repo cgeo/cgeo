@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:scrollbars="none" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="4dip" >
+
+        <!-- Details list -->
+
+        <LinearLayout
+            android:id="@+id/details_list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <!-- Attributes box -->
+
+        <LinearLayout
+            android:id="@+id/attributes_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <View
+                style="@style/separator_horizontal"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="9dp" />
+
+            <!-- innerbox is only needed to define the paddings easily -->
+
+            <LinearLayout
+                android:id="@+id/attributes_innerbox"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp" />
+        </LinearLayout>
+
+        <!-- Offline box -->
+
+        <LinearLayout
+            android:id="@+id/offline_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <View
+                style="@style/separator_horizontal"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="9dp" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/offline_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="6dip"
+                    android:layout_marginRight="130dip"
+                    android:paddingRight="3dip"
+                    android:textColor="?text_color"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/offline_refresh"
+                    style="@style/button_small"
+                    android:layout_width="60dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="71dip"
+                    android:text="@string/cache_offline_refresh"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/offline_store"
+                    style="@style/button_small"
+                    android:layout_width="60dip"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/cache_offline_store" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <!-- list box -->
+
+        <RelativeLayout
+            android:id="@+id/list_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <TextView
+                android:id="@+id/list_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="left"
+                android:layout_marginLeft="6dip"
+                android:layout_marginRight="130dip"
+                android:paddingRight="3dip"
+                android:textColor="?text_color"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/change_list"
+                style="@style/button_small"
+                android:layout_alignParentRight="true"
+                android:text="@string/cache_list_change"
+                android:visibility="visible" />
+        </RelativeLayout>
+
+        <!-- Watchlist box -->
+
+        <LinearLayout
+            android:id="@+id/watchlist_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <View
+                style="@style/separator_horizontal"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="9dp" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/watchlist_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="6dip"
+                    android:layout_marginRight="130dip"
+                    android:paddingRight="3dip"
+                    android:textColor="?text_color"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/add_to_watchlist"
+                    style="@style/button_small"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/cache_watchlist_add"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/remove_from_watchlist"
+                    style="@style/button_small"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/cache_watchlist_remove"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <!-- Favorite points box -->
+
+        <LinearLayout
+            android:id="@+id/favpoint_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <View
+                style="@style/separator_horizontal"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="9dp" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/favpoint_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="6dip"
+                    android:layout_marginRight="130dip"
+                    android:paddingRight="3dip"
+                    android:textColor="?text_color"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/add_to_favpoint"
+                    style="@style/button_small"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/cache_favpoint_add"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/remove_from_favpoint"
+                    style="@style/button_small"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/cache_favpoint_remove"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <!-- License Box -->
+
+        <LinearLayout
+            android:id="@+id/license_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <RelativeLayout style="@style/separator_horizontal_layout" >
+
+                <View style="@style/separator_horizontal" />
+
+                <TextView
+                    style="@style/separator_horizontal_headline"
+                    android:text="@string/cache_license" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/license"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:linksClickable="true"
+                android:padding="3dip"
+                android:textColor="?text_color"
+                android:textColorLink="?text_color_link"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Map Preview Box -->
+
+        <LinearLayout
+            android:id="@+id/map_preview_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <View
+                style="@style/separator_horizontal"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="9dp" />
+
+            <ImageView
+                android:id="@+id/map_preview"
+                android:layout_width="fill_parent"
+                android:layout_height="80dip"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:onClick="showNavigationMenu"
+                android:scaleType="centerCrop"
+                android:src="@null" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

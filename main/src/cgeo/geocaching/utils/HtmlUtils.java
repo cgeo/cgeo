@@ -10,7 +10,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class HtmlUtils {
+public final class HtmlUtils {
+
+    private HtmlUtils() {
+        // utility class
+    }
 
     /**
      * Extract the text from a HTML based string. This is similar to what HTML.fromHtml(...) does, but this method also
@@ -20,6 +24,9 @@ public class HtmlUtils {
      * @return
      */
     public static String extractText(CharSequence html) {
+        if (StringUtils.isBlank(html)) {
+            return StringUtils.EMPTY;
+        }
         String result = html.toString();
 
         // recognize images in textview HTML contents

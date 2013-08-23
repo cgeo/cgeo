@@ -1,10 +1,13 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCSmiliesProvider;
 import cgeo.geocaching.connector.gc.GCSmiliesProvider.Smiley;
+import cgeo.geocaching.connector.trackable.TravelBugConnector;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
@@ -17,28 +20,18 @@ import android.view.SubMenu;
 import android.widget.EditText;
 
 public abstract class AbstractLoggingActivity extends AbstractActivity {
-    private static final int MENU_SIGNATURE = 1;
-    private static final int MENU_SMILEY = 2;
-
-    protected AbstractLoggingActivity(String helpTopic) {
-        super(helpTopic);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
-        // signature menu
-        menu.add(0, MENU_SIGNATURE, 0, res.getString(R.string.init_signature)).setIcon(R.drawable.ic_menu_edit);
+        getMenuInflater().inflate(R.menu.abstract_logging_activity, menu);
 
-        // templates menu
-        final SubMenu menuLog = menu.addSubMenu(0, 0, 0, res.getString(R.string.log_add)).setIcon(R.drawable.ic_menu_add);
-        for (LogTemplate template : LogTemplateProvider.getTemplates()) {
+        final SubMenu menuLog = menu.findItem(R.id.menu_templates).getSubMenu();
+        for (final LogTemplate template : LogTemplateProvider.getTemplates()) {
             menuLog.add(0, template.getItemId(), 0, template.getResourceId());
         }
-        menuLog.add(0, MENU_SIGNATURE, 0, res.getString(R.string.init_signature));
 
-        // smilies
-        final SubMenu menuSmilies = menu.addSubMenu(0, MENU_SMILEY, 0, res.getString(R.string.log_smilies)).setIcon(R.drawable.ic_menu_emoticons);
-        for (Smiley smiley : GCSmiliesProvider.getSmilies()) {
+        final SubMenu menuSmilies = menu.findItem(R.id.menu_smilies).getSubMenu();
+        for (final Smiley smiley : GCSmiliesProvider.getSmilies()) {
             menuSmilies.add(0, smiley.getItemId(), 0, smiley.text);
         }
 
@@ -48,7 +41,7 @@ public abstract class AbstractLoggingActivity extends AbstractActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         final boolean signatureAvailable = StringUtils.isNotBlank(Settings.getSignature());
-        menu.findItem(MENU_SIGNATURE).setVisible(signatureAvailable);
+        menu.findItem(R.id.menu_signature).setVisible(signatureAvailable);
 
         boolean smileyVisible = false;
         final Geocache cache = getLogContext().getCache();
@@ -56,11 +49,11 @@ public abstract class AbstractLoggingActivity extends AbstractActivity {
             smileyVisible = true;
         }
         final Trackable trackable = getLogContext().getTrackable();
-        if (trackable != null && ConnectorFactory.getConnector(trackable).equals(GCConnector.getInstance())) {
+        if (trackable != null && ConnectorFactory.getConnector(trackable).equals(TravelBugConnector.getInstance())) {
             smileyVisible = true;
         }
 
-        menu.findItem(MENU_SMILEY).setVisible(smileyVisible);
+        menu.findItem(R.id.menu_smilies).setVisible(smileyVisible);
 
         return true;
     }
@@ -69,7 +62,7 @@ public abstract class AbstractLoggingActivity extends AbstractActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         final int id = item.getItemId();
 
-        if (id == MENU_SIGNATURE) {
+        if (id == R.id.menu_signature) {
             insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), getLogContext()), true);
             return true;
         }
@@ -93,6 +86,6 @@ public abstract class AbstractLoggingActivity extends AbstractActivity {
 
     protected void insertIntoLog(String newText, final boolean moveCursor) {
         final EditText log = (EditText) findViewById(R.id.log);
-        insertAtPosition(log, newText, moveCursor);
+        ActivityMixin.insertAtPosition(log, newText, moveCursor);
     }
 }

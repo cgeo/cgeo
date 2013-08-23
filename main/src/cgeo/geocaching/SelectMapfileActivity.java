@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.files.AbstractFileListActivity;
 import cgeo.geocaching.files.IFileSelectionView;
 import cgeo.geocaching.files.LocalStorage;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.FileSelectionListAdapter;
 
 import android.content.Context;
@@ -19,7 +20,7 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
         super("map");
     }
 
-    String mapFile;
+    private String mapFile;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,17 +47,12 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
     @Override
     protected List<File> getBaseFolders() {
         List<File> folders = new ArrayList<File>();
-        for (File dir : getStorages()) {
+        for (File dir : LocalStorage.getStorages()) {
             folders.add(new File(dir, "mfmaps"));
             folders.add(new File(new File(dir, "Locus"), "mapsVector"));
             folders.add(new File(dir, LocalStorage.cache));
         }
         return folders;
-    }
-
-    @Override
-    protected void setTitle() {
-        setTitle(res.getString(R.string.map_file_select_title));
     }
 
     @Override

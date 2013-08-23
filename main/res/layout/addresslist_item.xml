@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/button_map"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dip"
+    android:background="?background_color"
+    android:orientation="vertical"
+    android:paddingBottom="7dip"
+    android:paddingLeft="5dip"
+    android:paddingRight="5dip"
+    android:paddingTop="7dip" >
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:gravity="left"
+        android:scrollHorizontally="true"
+        android:singleLine="false"
+        android:textColor="?text_color"
+        android:textIsSelectable="false"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:gravity="left"
+        android:lines="1"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:textColor="?text_color"
+        android:textIsSelectable="false"
+        android:textSize="12sp" />
+
+</LinearLayout>

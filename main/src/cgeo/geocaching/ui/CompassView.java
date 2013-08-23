@@ -3,6 +3,7 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.PeriodicHandler;
+import cgeo.geocaching.utils.PeriodicHandler.PeriodicHandlerListener;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,7 +15,7 @@ import android.util.AttributeSet;
 import android.util.FloatMath;
 import android.view.View;
 
-public class CompassView extends View {
+public class CompassView extends View implements PeriodicHandlerListener {
 
     private Context context = null;
     private Bitmap compassUnderlay = null;
@@ -48,7 +49,7 @@ public class CompassView extends View {
     private int compassOverlayWidth = 0;
     private int compassOverlayHeight = 0;
     private boolean initialDisplay;
-    private final RedrawHandler redrawHandler = new RedrawHandler();
+    private final PeriodicHandler redrawHandler = new PeriodicHandler(40, this);
 
     public CompassView(Context contextIn) {
         super(contextIn);
@@ -145,26 +146,18 @@ public class CompassView extends View {
         return AngleUtils.normalize(actual + offset);
     }
 
-    private class RedrawHandler extends PeriodicHandler {
-
-        public RedrawHandler() {
-            super(40);
-        }
-
-        @Override
-        public void act() {
-            final float newAzimuthShown = smoothUpdate(northMeasured, azimuthShown);
-            final float newCacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
-            if (Math.abs(AngleUtils.difference(azimuthShown, newAzimuthShown)) >= 2 ||
-                    Math.abs(AngleUtils.difference(cacheHeadingShown, newCacheHeadingShown)) >= 2) {
-                synchronized(CompassView.this) {
-                    azimuthShown = newAzimuthShown;
-                    cacheHeadingShown = newCacheHeadingShown;
-                }
-                invalidate();
+    @Override
+    public void onPeriodic() {
+        final float newAzimuthShown = smoothUpdate(northMeasured, azimuthShown);
+        final float newCacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
+        if (Math.abs(AngleUtils.difference(azimuthShown, newAzimuthShown)) >= 2 ||
+                Math.abs(AngleUtils.difference(cacheHeadingShown, newCacheHeadingShown)) >= 2) {
+            synchronized(this) {
+                azimuthShown = newAzimuthShown;
+                cacheHeadingShown = newCacheHeadingShown;
             }
+            invalidate();
         }
-
     }
 
     @Override
@@ -178,12 +171,12 @@ public class CompassView extends View {
             headingDrawn = cacheHeadingShown;
         }
 
-        float azimuthTemp = azimuthDrawn;
+        final float azimuthTemp = azimuthDrawn;
         final float azimuthRelative = AngleUtils.normalize(azimuthTemp - headingDrawn);
 
         // compass margins
-        int canvasCenterX = (compassRoseWidth / 2) + ((getWidth() - compassRoseWidth) / 2);
-        int canvasCenterY = (compassRoseHeight / 2) + ((getHeight() - compassRoseHeight) / 2);
+        final int canvasCenterX = (compassRoseWidth / 2) + ((getWidth() - compassRoseWidth) / 2);
+        final int canvasCenterY = (compassRoseHeight / 2) + ((getHeight() - compassRoseHeight) / 2);
 
         super.onDraw(canvas);
 
@@ -224,38 +217,36 @@ public class CompassView extends View {
     }
 
     private int measureWidth(int measureSpec) {
-        int result;
-        int specMode = MeasureSpec.getMode(measureSpec);
-        int specSize = MeasureSpec.getSize(measureSpec);
+        final int specMode = MeasureSpec.getMode(measureSpec);
+        final int specSize = MeasureSpec.getSize(measureSpec);
 
         if (specMode == MeasureSpec.EXACTLY) {
-            result = specSize;
-        } else {
-            result = compassArrow.getWidth() + getPaddingLeft() + getPaddingRight();
-
-            if (specMode == MeasureSpec.AT_MOST) {
-                result = Math.min(result, specSize);
-            }
+            return specSize;
         }
 
-        return result;
+        final int desired = compassArrow.getWidth() + getPaddingLeft() + getPaddingRight();
+        if (specMode == MeasureSpec.AT_MOST) {
+            return Math.min(desired, specSize);
+        }
+
+        return desired;
     }
 
     private int measureHeight(int measureSpec) {
-        int result;
-        int specMode = MeasureSpec.getMode(measureSpec);
-        int specSize = MeasureSpec.getSize(measureSpec);
+        // The duplicated code in measureHeight and measureWidth cannot be avoided.
+        // Those methods must be efficient, therefore we cannot extract the code differences and unify the remainder.
+        final int specMode = MeasureSpec.getMode(measureSpec);
+        final int specSize = MeasureSpec.getSize(measureSpec);
 
         if (specMode == MeasureSpec.EXACTLY) {
-            result = specSize;
-        } else {
-            result = compassArrow.getHeight() + getPaddingTop() + getPaddingBottom();
-
-            if (specMode == MeasureSpec.AT_MOST) {
-                result = Math.min(result, specSize);
-            }
+            return specSize;
         }
 
-        return result;
+        final int desired = compassArrow.getHeight() + getPaddingTop() + getPaddingBottom();
+        if (specMode == MeasureSpec.AT_MOST) {
+            return Math.min(desired, specSize);
+        }
+
+        return desired;
     }
 }

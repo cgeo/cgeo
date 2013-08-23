@@ -2,7 +2,6 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -11,9 +10,11 @@ import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LiveMapStrategy.StrategyFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.Log;
@@ -92,7 +93,7 @@ public class GCMap {
                 JSONObject ownerObj = dataObject.getJSONObject("owner");
                 cache.setOwnerDisplayName(ownerObj.getString("text"));
 
-                result.addCache(cache);
+                result.addAndPutInCache(cache);
 
             }
         } catch (JSONException e) {
@@ -208,16 +209,15 @@ public class GCMap {
                 cache.setReliableLatLon(false);
                 cache.setGeocode(id);
                 cache.setName(nameCache.get(id));
-                cache.setZoomlevel(tile.getZoomlevel());
-                cache.setCoords(tile.getCoord(xy));
+                cache.setCoords(tile.getCoord(xy), tile.getZoomLevel());
                 if (strategy.flags.contains(StrategyFlag.PARSE_TILES) && bitmap != null) {
                     for (UTFGridPosition singlePos : singlePositions.get(id)) {
-                        if (IconDecoder.parseMapPNG(cache, bitmap, singlePos, tile.getZoomlevel())) {
+                        if (IconDecoder.parseMapPNG(cache, bitmap, singlePos, tile.getZoomLevel())) {
                             break; // cache parsed
                         }
                     }
                 } else {
-                    cache.setType(CacheType.UNKNOWN);
+                    cache.setType(CacheType.UNKNOWN, tile.getZoomLevel());
                 }
 
                 boolean exclude = false;
@@ -231,13 +231,13 @@ public class GCMap {
                     exclude = true;
                 }
                 if (!exclude) {
-                    searchResult.addCache(cache);
+                    searchResult.addAndPutInCache(cache);
                 }
             }
             Log.d("Retrieved " + searchResult.getCount() + " caches for tile " + tile.toString());
 
         } catch (Exception e) {
-            Log.e("GCBase.parseMapJSON", e);
+            Log.e("GCMap.parseMapJSON", e);
         }
 
         return searchResult;
@@ -283,13 +283,20 @@ public class GCMap {
      * @return
      */
     private static SearchResult searchByViewport(final Viewport viewport, final String[] tokens, Strategy strategy) {
-        Log.d("GCBase.searchByViewport" + viewport.toString());
+        Log.d("GCMap.searchByViewport" + viewport.toString());
 
         final SearchResult searchResult = new SearchResult();
-        searchResult.setUrl(GCConstants.URL_LIVE_MAP + "?ll=" + viewport.getCenter().getLatitude() + "," + viewport.getCenter().getLongitude());
+
+        if (Settings.isDebug()) {
+            searchResult.setUrl(viewport.getCenter().format(Format.LAT_LON_DECMINUTE));
+        }
 
         if (strategy.flags.contains(StrategyFlag.LOAD_TILES)) {
             final Set<Tile> tiles = Tile.getTilesForViewport(viewport);
+
+            if (Settings.isDebug()) {
+                searchResult.setUrl(new StringBuilder().append(tiles.iterator().next().getZoomLevel()).append(Formatter.SEPARATOR).append(searchResult.getUrl()).toString());
+            }
 
             for (Tile tile : tiles) {
 
@@ -297,7 +304,7 @@ public class GCMap {
                     final Parameters params = new Parameters(
                             "x", String.valueOf(tile.getX()),
                             "y", String.valueOf(tile.getY()),
-                            "z", String.valueOf(tile.getZoomlevel()),
+                            "z", String.valueOf(tile.getZoomLevel()),
                             "ep", "1",
                             "app", "cgeo");
                     if (tokens != null) {
@@ -313,7 +320,7 @@ public class GCMap {
                     } else if (Settings.getCacheType() == CacheType.MYSTERY) {
                         params.put("ect", "9,5,3,6,453,13,1304,137,11,4,2,1858");
                     }
-                    if (tile.getZoomlevel() != 14) {
+                    if (tile.getZoomLevel() != 14) {
                         params.put("_", String.valueOf(System.currentTimeMillis()));
                     }
                     // TODO: other types t.b.d
@@ -330,14 +337,14 @@ public class GCMap {
 
                     String data = Tile.requestMapInfo(GCConstants.URL_MAP_INFO, params, GCConstants.URL_LIVE_MAP);
                     if (StringUtils.isEmpty(data)) {
-                        Log.w("GCBase.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
+                        Log.w("GCMap.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
                     } else {
                         final SearchResult search = GCMap.parseMapJSON(data, tile, bitmap, strategy);
-                        if (search == null || CollectionUtils.isEmpty(search.getGeocodes())) {
-                            Log.e("GCBase.searchByViewport: No cache parsed for viewport " + viewport);
+                        if (CollectionUtils.isEmpty(search.getGeocodes())) {
+                            Log.e("GCMap.searchByViewport: No cache parsed for viewport " + viewport);
                         }
                         else {
-                            searchResult.addGeocodes(search.getGeocodes());
+                            searchResult.addSearchResult(search);
                         }
                         Tile.Cache.add(tile);
                     }
@@ -349,20 +356,21 @@ public class GCMap {
 
                 }
             }
+
+            // Check for vanished found caches
+            if (tiles.iterator().next().getZoomLevel() >= Tile.ZOOMLEVEL_MIN_PERSONALIZED) {
+                searchResult.addFilteredGeocodes(cgData.getCachedMissingFromSearch(searchResult, tiles, GCConnector.getInstance(), Tile.ZOOMLEVEL_MIN_PERSONALIZED - 1));
+            }
         }
 
-        if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY)) {
+        if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY) && Settings.isPremiumMember()) {
             final Geopoint center = viewport.getCenter();
             if ((lastSearchViewport == null) || !lastSearchViewport.contains(center)) {
                 //FIXME We don't have a RecaptchaReceiver!?
                 SearchResult search = GCParser.searchByCoords(center, Settings.getCacheType(), false, null);
                 if (search != null && !search.isEmpty()) {
                     final Set<String> geocodes = search.getGeocodes();
-                    if (Settings.isPremiumMember()) {
-                        lastSearchViewport = cgData.getBounds(geocodes);
-                    } else {
-                        lastSearchViewport = new Viewport(center, center);
-                    }
+                    lastSearchViewport = cgData.getBounds(geocodes);
                     searchResult.addGeocodes(geocodes);
                 }
             }

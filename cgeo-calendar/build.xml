@@ -4,7 +4,7 @@
     <!-- The local.properties file is created and updated by the 'android' tool.
          It contains the path to the SDK. It should *NOT* be checked into
          Version Control Systems. -->
-    <property file="local.properties" />
+    <loadproperties srcFile="local.properties" />
 
     <!-- The ant.properties file can be created by you. It is only edited by the
          'android' tool to add properties to it.
@@ -38,7 +38,7 @@
          This file is an integral part of the build system for your
          application and should be checked into Version Control Systems. -->
     <loadproperties srcFile="project.properties" />
-
+    
     <!-- The private.properties file sets api-keys as well as keystore,
          certificate and passwords (if you want).
          See /templates/private.properties for more information. -->
@@ -46,10 +46,9 @@
 
     <!-- quick check on sdk.dir -->
     <fail
-            message="sdk.dir is missing. Make sure to generate local.properties using 'android update project' or to inject it through an env var"
+            message="sdk.dir is missing. Make sure to generate local.properties using 'android update project'"
             unless="sdk.dir"
     />
-
 
 <!-- extension targets. Uncomment the ones where you want to do custom work
      in between standard targets -->
@@ -68,6 +67,95 @@
     <target name="-post-compile">
     </target>
 -->
+	
+	<!-- modified to be able to change compiler arguments -->
+		<property name="generated.dir" value="annotation_gen" />
+		<property name="generated.absolute.dir" location="${generated.dir}" />
+		<property name="java.compilerargs" value="-s &apos;${generated.absolute.dir}&apos;" />    
+		<target name="-pre-compile">
+			<mkdir dir="${generated.absolute.dir}" />
+		</target>
+	    <target name="-compile" depends="-pre-build, -build-setup, -code-gen, -pre-compile">
+	        <do-only-if-manifest-hasCode elseText="hasCode = false. Skipping...">
+	            <!-- merge the project's own classpath and the main project's classpath -->
+	            <path id="project.javac.classpath">
+	                <path refid="project.all.jars.path" />
+	                <path refid="tested.project.classpath" />
+	                <path path="${java.compiler.classpath}" />
+	                <fileset dir="../main/compile-libs" includes="*.jar"/> <!-- added -->
+	                <fileset dir="../main/libs" includes="*.jar"/> <!-- added -->
+	                <path path="../main/bin/classes" /> <!-- added -->
+	            </path>
+	            <javac encoding="${java.encoding}"
+	                    source="${java.source}" target="${java.target}"
+	                    debug="true" extdirs="" includeantruntime="false"
+	                    destdir="${out.classes.absolute.dir}"
+	                    bootclasspathref="project.target.class.path"
+	                    verbose="${verbose}"
+	                    classpathref="project.javac.classpath"
+	                    fork="${need.javac.fork}">
+	                <src path="${source.absolute.dir}" />
+	                <src path="${gen.absolute.dir}" />
+	                <compilerarg line="${java.compilerargs}" />
+	            </javac>
+
+	            <!-- if the project is instrumented, intrument the classes -->
+	            <if condition="${build.is.instrumented}">
+	                <then>
+	                    <echo level="info">Instrumenting classes from ${out.absolute.dir}/classes...</echo>
+
+	                    <!-- build the filter to remove R, Manifest, BuildConfig -->
+	                    <getemmafilter
+	                            appPackage="${project.app.package}"
+	                            libraryPackagesRefId="project.library.packages"
+	                            filterOut="emma.default.filter"/>
+
+	                    <!-- define where the .em file is going. This may have been
+	                         setup already if this is a library -->
+	                    <property name="emma.coverage.absolute.file" location="${out.absolute.dir}/coverage.em" />
+
+	                    <!-- It only instruments class files, not any external libs -->
+	                    <emma enabled="true">
+	                        <instr verbosity="${verbosity}"
+	                               mode="overwrite"
+	                               instrpath="${out.absolute.dir}/classes"
+	                               outdir="${out.absolute.dir}/classes"
+	                               metadatafile="${emma.coverage.absolute.file}">
+	                            <filter excludes="${emma.default.filter}" />
+	                            <filter value="${emma.filter}" />
+	                        </instr>
+	                    </emma>
+	                </then>
+	            </if>
+
+	            <!-- if the project is a library then we generate a jar file -->
+	            <if condition="${project.is.library}">
+	                <then>
+	                    <echo level="info">Creating library output jar file...</echo>
+	                    <property name="out.library.jar.file" location="${out.absolute.dir}/classes.jar" />
+	                    <if>
+	                        <condition>
+	                            <length string="${android.package.excludes}" trim="true" when="greater" length="0" />
+	                        </condition>
+	                        <then>
+	                            <echo level="info">Custom jar packaging exclusion: ${android.package.excludes}</echo>
+	                        </then>
+	                    </if>
+
+	                    <propertybyreplace name="project.app.package.path" input="${project.app.package}" replace="." with="/" />
+
+	                    <jar destfile="${out.library.jar.file}">
+	                        <fileset dir="${out.classes.absolute.dir}"
+	                                includes="**/*.class"
+	                                excludes="${project.app.package.path}/R.class ${project.app.package.path}/R$*.class ${project.app.package.path}/BuildConfig.class"/>
+	                        <fileset dir="${source.absolute.dir}" excludes="**/*.java ${android.package.excludes}" />
+	                    </jar>
+	                </then>
+	            </if>
+
+	        </do-only-if-manifest-hasCode>
+	    </target>
+	<!-- end of modifications for compiler arguments -->    	
 
     <!-- Import the actual build file.
 
@@ -87,7 +175,7 @@
          In all cases you must update the value of version-tag below to read 'custom' instead of an integer,
          in order to avoid having your file be overridden by tools such as "android update project"
     -->
-    <!-- version-tag: 1 -->
+    <!-- version-tag: custom -->
     <import file="${sdk.dir}/tools/ant/build.xml" />
 
 </project>

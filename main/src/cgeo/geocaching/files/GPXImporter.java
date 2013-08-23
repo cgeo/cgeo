@@ -3,7 +3,7 @@ package cgeo.geocaching.files;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.StaticMapsProvider;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.IAbstractActivity;
@@ -24,6 +24,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -48,6 +49,7 @@ public class GPXImporter {
     static final int IMPORT_STEP_STATIC_MAPS_SKIPPED = 9;
 
     public static final String GPX_FILE_EXTENSION = ".gpx";
+    public static final String LOC_FILE_EXTENSION = ".loc";
     public static final String ZIP_FILE_EXTENSION = ".zip";
     public static final String WAYPOINTS_FILE_SUFFIX = "-wpts";
     public static final String WAYPOINTS_FILE_SUFFIX_AND_EXTENSION = WAYPOINTS_FILE_SUFFIX + GPX_FILE_EXTENSION;
@@ -55,12 +57,12 @@ public class GPXImporter {
     private static final List<String> GPX_MIME_TYPES = Arrays.asList("text/xml", "application/xml");
     private static final List<String> ZIP_MIME_TYPES = Arrays.asList("application/zip", "application/x-compressed", "application/x-zip-compressed", "application/x-zip", "application/octet-stream");
 
-    private Progress progress = new Progress(true);
+    private final Progress progress = new Progress(true);
 
-    private Resources res;
-    private int listId;
-    private IAbstractActivity fromActivity;
-    private Handler importFinishedHandler;
+    private final Resources res;
+    private final int listId;
+    private final IAbstractActivity fromActivity;
+    private final Handler importFinishedHandler;
 
     public GPXImporter(final IAbstractActivity fromActivity, final int listId, final Handler importFinishedHandler) {
         this.listId = listId;
@@ -100,7 +102,7 @@ public class GPXImporter {
         // Google search says: there is no solution for this problem
         // Gmail doesn't work at all, see #967
         if (mimeType == null) {
-            if (StringUtils.endsWithIgnoreCase(uri.getPath(), GPX_FILE_EXTENSION)) {
+            if (StringUtils.endsWithIgnoreCase(uri.getPath(), GPX_FILE_EXTENSION) || StringUtils.endsWithIgnoreCase(uri.getPath(), LOC_FILE_EXTENSION)) {
                 mimeType = "application/xml";
             } else {
                 // if we can't determine a better type, default to zip import
@@ -111,7 +113,11 @@ public class GPXImporter {
 
         Log.i("importGPX: " + uri + ", mimetype=" + mimeType);
         if (GPX_MIME_TYPES.contains(mimeType)) {
-            new ImportGpxAttachmentThread(uri, contentResolver, listId, importStepHandler, progressHandler).start();
+            if (StringUtils.endsWithIgnoreCase(uri.getPath(), LOC_FILE_EXTENSION)) {
+                new ImportLocAttachmentThread(uri, contentResolver, listId, importStepHandler, progressHandler).start();
+            } else {
+                new ImportGpxAttachmentThread(uri, contentResolver, listId, importStepHandler, progressHandler).start();
+            }
         } else if (ZIP_MIME_TYPES.contains(mimeType)) {
             new ImportGpxZipAttachmentThread(uri, contentResolver, listId, importStepHandler, progressHandler).start();
         } else {
@@ -137,14 +143,12 @@ public class GPXImporter {
                 final Collection<Geocache> caches = doImport();
                 Log.i("Imported successfully " + caches.size() + " caches.");
 
-                final SearchResult search = new SearchResult();
-                for (Geocache cache : caches) {
-                    search.addCache(cache);
-                }
+                final SearchResult search = new SearchResult(caches);
+                // Do not put imported caches into the cachecache. That would consume lots of memory for no benefit.
 
                 if (Settings.isStoreOfflineMaps() || Settings.isStoreOfflineWpMaps()) {
                     importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_STORE_STATIC_MAPS, R.string.gpx_import_store_static_maps, search.getCount()));
-                    boolean finishedWithoutCancel = importStaticMaps(search);
+                    final boolean finishedWithoutCancel = importStaticMaps(search);
                     // Skip last message if static maps where canceled
                     if (!finishedWithoutCancel) {
                         return;
@@ -152,16 +156,16 @@ public class GPXImporter {
                 }
 
                 importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED, search.getCount(), 0, search));
-            } catch (IOException e) {
-                Log.i("Importing caches failed - error reading data: " + e.getMessage());
+            } catch (final IOException e) {
+                Log.i("Importing caches failed - error reading data: ", e);
                 importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED_WITH_ERROR, R.string.gpx_import_error_io, 0, e.getLocalizedMessage()));
-            } catch (ParserException e) {
-                Log.i("Importing caches failed - data format error" + e.getMessage());
+            } catch (final ParserException e) {
+                Log.i("Importing caches failed - data format error", e);
                 importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED_WITH_ERROR, R.string.gpx_import_error_parser, 0, e.getLocalizedMessage()));
-            } catch (CancellationException e) {
+            } catch (final CancellationException e) {
                 Log.i("Importing caches canceled");
                 importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_CANCELED));
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.e("Importing caches failed - unknown error: ", e);
                 importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED_WITH_ERROR, R.string.gpx_import_error_unexpected, 0, e.getLocalizedMessage()));
             }
@@ -171,10 +175,14 @@ public class GPXImporter {
 
         private boolean importStaticMaps(final SearchResult importedCaches) {
             int storedCacheMaps = 0;
-            for (String geocode : importedCaches.getGeocodes()) {
-                Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
-                Log.d("GPXImporter.ImportThread.importStaticMaps start downloadMaps for cache " + geocode);
-                StaticMapsProvider.downloadMaps(cache);
+            for (final String geocode : importedCaches.getGeocodes()) {
+                final Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
+                if (cache != null) {
+                    Log.d("GPXImporter.ImportThread.importStaticMaps start downloadMaps for cache " + geocode);
+                    StaticMapsProvider.downloadMaps(cache);
+                } else {
+                    Log.d("GPXImporter.ImportThread.importStaticMaps: no data found for " + geocode);
+                }
                 storedCacheMaps++;
                 if (progressHandler.isCancelled()) {
                     return false;
@@ -197,8 +205,32 @@ public class GPXImporter {
         protected Collection<Geocache> doImport() throws IOException, ParserException {
             Log.i("Import LOC file: " + file.getAbsolutePath());
             importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches, (int) file.length()));
-            LocParser parser = new LocParser(listId);
+            final LocParser parser = new LocParser(listId);
             return parser.parse(file, progressHandler);
+        }
+    }
+
+    static class ImportLocAttachmentThread extends ImportThread {
+        private final Uri uri;
+        private final ContentResolver contentResolver;
+
+        public ImportLocAttachmentThread(Uri uri, ContentResolver contentResolver, int listId, Handler importStepHandler, CancellableHandler progressHandler) {
+            super(listId, importStepHandler, progressHandler);
+            this.uri = uri;
+            this.contentResolver = contentResolver;
+        }
+
+        @Override
+        protected Collection<Geocache> doImport() throws IOException, ParserException {
+            Log.i("Import LOC from uri: " + uri);
+            importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches, -1));
+            final InputStream is = contentResolver.openInputStream(uri);
+            final LocParser parser = new LocParser(listId);
+            try {
+                return parser.parse(is, progressHandler);
+            } finally {
+                is.close();
+            }
         }
     }
 
@@ -213,7 +245,7 @@ public class GPXImporter {
             try {
                 // try to parse cache file as GPX 10
                 return doImport(new GPX10Parser(listId));
-            } catch (ParserException pe) {
+            } catch (final ParserException pe) {
                 // didn't work -> lets try GPX11
                 return doImport(new GPX11Parser(listId));
             }
@@ -251,7 +283,7 @@ public class GPXImporter {
 
     static class ImportGpxAttachmentThread extends ImportGpxThread {
         private final Uri uri;
-        private ContentResolver contentResolver;
+        private final ContentResolver contentResolver;
 
         public ImportGpxAttachmentThread(Uri uri, ContentResolver contentResolver, int listId, Handler importStepHandler, CancellableHandler progressHandler) {
             super(listId, importStepHandler, progressHandler);
@@ -263,7 +295,7 @@ public class GPXImporter {
         protected Collection<Geocache> doImport(GPXParser parser) throws IOException, ParserException {
             Log.i("Import GPX from uri: " + uri);
             importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches, -1));
-            InputStream is = contentResolver.openInputStream(uri);
+            final InputStream is = contentResolver.openInputStream(uri);
             try {
                 return parser.parse(is, progressHandler);
             } finally {
@@ -283,7 +315,7 @@ public class GPXImporter {
             Collection<Geocache> caches = Collections.emptySet();
             // can't assume that GPX file comes before waypoint file in zip -> so we need two passes
             // 1. parse GPX files
-            ZipInputStream zis = new ZipInputStream(getInputStream());
+            ZipInputStream zis = new ZipInputStream(new BufferedInputStream(getInputStream()));
             try {
                 for (ZipEntry zipEntry = zis.getNextEntry(); zipEntry != null; zipEntry = zis.getNextEntry()) {
                     if (StringUtils.endsWithIgnoreCase(zipEntry.getName(), GPX_FILE_EXTENSION)) {
@@ -301,7 +333,7 @@ public class GPXImporter {
             }
 
             // 2. parse waypoint files
-            zis = new ZipInputStream(getInputStream());
+            zis = new ZipInputStream(new BufferedInputStream(getInputStream()));
             try {
                 for (ZipEntry zipEntry = zis.getNextEntry(); zipEntry != null; zipEntry = zis.getNextEntry()) {
                     if (StringUtils.endsWithIgnoreCase(zipEntry.getName(), WAYPOINTS_FILE_SUFFIX_AND_EXTENSION)) {
@@ -337,7 +369,7 @@ public class GPXImporter {
 
     static class ImportGpxZipAttachmentThread extends ImportGpxZipThread {
         private final Uri uri;
-        private ContentResolver contentResolver;
+        private final ContentResolver contentResolver;
 
         public ImportGpxZipAttachmentThread(Uri uri, ContentResolver contentResolver, int listId, Handler importStepHandler, CancellableHandler progressHandler) {
             super(listId, importStepHandler, progressHandler);
@@ -360,13 +392,11 @@ public class GPXImporter {
     };
 
     final private Handler importStepHandler = new Handler() {
-        private boolean showProgressAfterCancel = false;
-
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case IMPORT_STEP_START:
-                    Message cancelMessage = importStepHandler.obtainMessage(IMPORT_STEP_CANCEL);
+                    final Message cancelMessage = importStepHandler.obtainMessage(IMPORT_STEP_CANCEL);
                     progress.show((Context) fromActivity, res.getString(R.string.gpx_import_title_reading_file), res.getString(R.string.gpx_import_loading_caches), ProgressDialog.STYLE_HORIZONTAL, cancelMessage);
                     break;
 
@@ -378,7 +408,7 @@ public class GPXImporter {
 
                 case IMPORT_STEP_STORE_STATIC_MAPS:
                     progress.dismiss();
-                    Message skipMessage = importStepHandler.obtainMessage(IMPORT_STEP_STATIC_MAPS_SKIPPED, msg.arg2, 0);
+                    final Message skipMessage = importStepHandler.obtainMessage(IMPORT_STEP_STATIC_MAPS_SKIPPED, msg.arg2, 0);
                     progress.show((Context) fromActivity, res.getString(R.string.gpx_import_title_static_maps), res.getString(R.string.gpx_import_store_static_maps), ProgressDialog.STYLE_HORIZONTAL, skipMessage);
                     progress.setMaxProgressAndReset(msg.arg2);
                     break;
@@ -386,7 +416,7 @@ public class GPXImporter {
                 case IMPORT_STEP_STATIC_MAPS_SKIPPED:
                     progress.dismiss();
                     progressHandler.cancel();
-                    StringBuilder bufferSkipped = new StringBuilder(20);
+                    final StringBuilder bufferSkipped = new StringBuilder(20);
                     bufferSkipped.append(res.getString(R.string.gpx_import_static_maps_skipped)).append(", ").append(msg.arg1).append(' ').append(res.getString(R.string.gpx_import_caches_imported));
                     fromActivity.helpDialog(res.getString(R.string.gpx_import_title_caches_imported), bufferSkipped.toString());
                     importFinished();
@@ -410,11 +440,8 @@ public class GPXImporter {
                     break;
 
                 case IMPORT_STEP_CANCELED:
-                    StringBuilder bufferCanceled = new StringBuilder(20);
+                    final StringBuilder bufferCanceled = new StringBuilder(20);
                     bufferCanceled.append(res.getString(R.string.gpx_import_canceled));
-                    if (showProgressAfterCancel) {
-                        bufferCanceled.append(", ").append(progress.getProgress()).append(' ').append(res.getString(R.string.gpx_import_caches_imported));
-                    }
                     fromActivity.showShortToast(bufferCanceled.toString());
                     importFinished();
                     break;
@@ -435,13 +462,13 @@ public class GPXImporter {
             return null;
         }
         final String gpxFileName = gpxfile.getName();
-        File dir = gpxfile.getParentFile();
-        String[] filenameList = dir.list();
-        for (String filename : filenameList) {
+        final File dir = gpxfile.getParentFile();
+        final String[] filenameList = dir.list();
+        for (final String filename : filenameList) {
             if (!StringUtils.containsIgnoreCase(filename, WAYPOINTS_FILE_SUFFIX)) {
                 continue;
             }
-            String expectedGpxFileName = StringUtils.substringBeforeLast(filename, WAYPOINTS_FILE_SUFFIX)
+            final String expectedGpxFileName = StringUtils.substringBeforeLast(filename, WAYPOINTS_FILE_SUFFIX)
                     + StringUtils.substringAfterLast(filename, WAYPOINTS_FILE_SUFFIX);
             if (gpxFileName.equals(expectedGpxFileName)) {
                 return filename;

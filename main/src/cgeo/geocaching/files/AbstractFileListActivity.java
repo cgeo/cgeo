@@ -5,7 +5,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.utils.FileUtils;
-import cgeo.geocaching.utils.IOUtils;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -19,10 +18,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.ArrayAdapter;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -55,15 +51,11 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
         }
 
         private String getDefaultFolders() {
-            StringBuilder sb = new StringBuilder();
-            for (File f : getBaseFolders()) {
-                String fName = f.getPath();
-                if (sb.length() > 0) {
-                    sb.append('\n');
-                }
-                sb.append(fName);
+            final ArrayList<String> names = new ArrayList<String>();
+            for (File dir : getExistingBaseFolders()) {
+                names.add(dir.getPath());
             }
-            return sb.toString();
+            return StringUtils.join(names, '\n');
         }
     };
 
@@ -89,7 +81,6 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
 
         setTheme();
         setContentView(R.layout.gpx);
-        setTitle();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -146,11 +137,6 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
      */
     protected abstract List<File> getBaseFolders();
 
-    /**
-     * Triggers the deriving class to set the title
-     */
-    protected abstract void setTitle();
-
     private class SearchFilesThread extends Thread {
 
         private final FileListSelector selector = new FileListSelector();
@@ -166,19 +152,16 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
             try {
                 if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                     boolean loaded = false;
-                    for (final File dir : getBaseFolders())
-                    {
-                        if (dir.exists() && dir.isDirectory()) {
-                            FileUtils.listDir(list, dir,selector,changeWaitDialogHandler);
-                            if (!list.isEmpty()) {
-                                loaded = true;
-                                break;
-                            }
+                    for (final File dir : getExistingBaseFolders()) {
+                        FileUtils.listDir(list, dir, selector, changeWaitDialogHandler);
+                        if (!list.isEmpty()) {
+                            loaded = true;
+                            break;
                         }
                     }
                     if (!loaded) {
                         changeWaitDialogHandler.sendMessage(Message.obtain(changeWaitDialogHandler, MSG_SEARCH_WHOLE_SD_CARD, Environment.getExternalStorageDirectory().getName()));
-                        listDirs(list, getStorages(), selector, changeWaitDialogHandler);
+                        listDirs(list, LocalStorage.getStorages(), selector, changeWaitDialogHandler);
                     }
                 } else {
                     Log.w("No external media mounted.");
@@ -208,49 +191,6 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
         }
     }
 
-    /*
-     * Get all storages available on the device.
-     * Will include paths like /mnt/sdcard /mnt/usbdisk /mnt/ext_card /mnt/sdcard/ext_card
-     */
-    protected static List<File> getStorages() {
-
-        String extStorage = Environment.getExternalStorageDirectory().getAbsolutePath();
-        List<File> storages = new ArrayList<File>();
-        storages.add(new File(extStorage));
-        File file = new File("/system/etc/vold.fstab");
-        if (file.canRead()) {
-            FileReader fr = null;
-            BufferedReader br = null;
-            try {
-                fr = new FileReader(file);
-                br = new BufferedReader(fr);
-                String s = br.readLine();
-                while (s != null) {
-                    if (s.startsWith("dev_mount")) {
-                        String[] tokens = StringUtils.split(s);
-                        if (tokens.length >= 3) {
-                            String path = tokens[2]; // mountpoint
-                            if (!extStorage.equals(path)) {
-                                File directory = new File(path);
-                                if (directory.exists() && directory.isDirectory()) {
-                                    storages.add(directory);
-                                }
-                            }
-                        }
-                    }
-                    s = br.readLine();
-                }
-            } catch (IOException e) {
-                Log.e("Could not get additional mount points for user content. " +
-                        "Proceeding with external storage only (" + extStorage + ")");
-            } finally {
-                IOUtils.closeQuietly(fr);
-                IOUtils.closeQuietly(br);
-            }
-        }
-        return storages;
-    }
-
     /**
      * Check if a filename belongs to the AbstractFileListActivity. This implementation checks for file extensions.
      * Subclasses may override this method to filter out specific files.
@@ -265,6 +205,16 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
             }
         }
         return false;
+    }
+
+    protected List<File> getExistingBaseFolders() {
+        ArrayList<File> result = new ArrayList<File>();
+        for (final File dir : getBaseFolders()) {
+            if (dir.exists() && dir.isDirectory()) {
+                result.add(dir);
+            }
+        }
+        return result;
     }
 
     protected AbstractFileListActivity(final String extension) {

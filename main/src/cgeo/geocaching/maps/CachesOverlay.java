@@ -1,11 +1,11 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CachePopup;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IWaypoint;
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.WaypointPopup;
-import cgeo.geocaching.Geocache;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.connector.gc.GCMap;
@@ -58,14 +58,14 @@ public class CachesOverlay extends AbstractItemizedOverlay {
         mapItemFactory = mapProvider.getMapItemFactory();
     }
 
-    public void updateItems(CachesOverlayItemImpl item) {
+    void updateItems(CachesOverlayItemImpl item) {
         List<CachesOverlayItemImpl> itemsPre = new ArrayList<CachesOverlayItemImpl>();
         itemsPre.add(item);
 
         updateItems(itemsPre);
     }
 
-    public void updateItems(List<CachesOverlayItemImpl> itemsPre) {
+    void updateItems(List<CachesOverlayItemImpl> itemsPre) {
         if (itemsPre == null) {
             return;
         }
@@ -86,11 +86,11 @@ public class CachesOverlay extends AbstractItemizedOverlay {
         }
     }
 
-    public boolean getCircles() {
+    boolean getCircles() {
         return displayCircles;
     }
 
-    public void switchCircles() {
+    void switchCircles() {
         displayCircles = !displayCircles;
     }
 
@@ -126,20 +126,17 @@ public class CachesOverlay extends AbstractItemizedOverlay {
             final Point center = new Point();
 
             for (CachesOverlayItemImpl item : items) {
-                final Geopoint itemCoord = item.getCoord().getCoords();
-                final GeoPointImpl itemGeo = mapItemFactory.getGeoPointBase(itemCoord);
-                projection.toPixels(itemGeo, center);
+                if (item.applyDistanceRule()) {
+                    final Geopoint itemCoord = item.getCoord().getCoords();
+                    final GeoPointImpl itemGeo = mapItemFactory.getGeoPointBase(itemCoord);
+                    projection.toPixels(itemGeo, center);
 
-                final CacheType type = item.getType();
-                if (type == null || type == CacheType.MULTI || type == CacheType.MYSTERY || type == CacheType.VIRTUAL || type.isEvent()) {
-                    blockedCircle.setColor(0x66000000);
-                    blockedCircle.setStyle(Style.STROKE);
-                    canvas.drawCircle(center.x, center.y, radius, blockedCircle);
-                } else {
+                    // dashed circle around the waypoint
                     blockedCircle.setColor(0x66BB0000);
                     blockedCircle.setStyle(Style.STROKE);
                     canvas.drawCircle(center.x, center.y, radius, blockedCircle);
 
+                    // filling the circle area with a transparent color
                     blockedCircle.setColor(0x44BB0000);
                     blockedCircle.setStyle(Style.FILL);
                     canvas.drawCircle(center.x, center.y, radius, blockedCircle);
@@ -209,9 +206,9 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
             progress.show(context, context.getResources().getString(R.string.map_live), context.getResources().getString(R.string.cache_dialog_loading_details), true, null);
 
+            CachesOverlayItemImpl item = null;
             // prevent concurrent changes
             getOverlayImpl().lock();
-            CachesOverlayItemImpl item = null;
             try {
                 if (index < items.size()) {
                     item = items.get(index);
@@ -247,7 +244,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
             progress.dismiss();
         } catch (Exception e) {
-            Log.e("cgMapOverlay.onTap", e);
+            Log.e("CachesOverlay.onTap", e);
             if (progress != null) {
                 progress.dismiss();
             }
@@ -261,7 +258,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
         try {
             return items.get(index);
         } catch (Exception e) {
-            Log.e("cgMapOverlay.createItem", e);
+            Log.e("CachesOverlay.createItem", e);
         }
 
         return null;
@@ -272,7 +269,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
         try {
             return items.size();
         } catch (Exception e) {
-            Log.e("cgMapOverlay.size", e);
+            Log.e("CachesOverlay.size", e);
         }
 
         return 0;

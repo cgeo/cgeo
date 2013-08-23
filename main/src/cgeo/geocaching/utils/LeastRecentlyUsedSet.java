@@ -10,13 +10,13 @@ import java.util.List;
 /**
  * Synchronized set wrapper for the LeastRecentlyUsedMap.
  *
- * This code is heavily based on the HashSet code that represent Map as a Set.
+ * This code is heavily based on the HashSet code that represents Map as a Set.
  * Unfortunately HashSet does not allow to use a custom Map as its Storage.
  * Therefore overriding removeEldestEntry() is impossible for a normal LinkedHashSet.
  *
  * Synchronization is added to guard against concurrent modification. Iterator
  * access has to be guarded externally or the synchronized getAsList method can be used
- * to get a clone for iteration
+ * to get a clone for iteration.
  */
 public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
         implements Cloneable, java.io.Serializable {
@@ -28,7 +28,7 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
 
     public LeastRecentlyUsedSet(int maxEntries, int initialCapacity, float loadFactor) {
         // because we don't use any Map.get() methods from the Set, BOUNDED and LRU_CACHE have the exact same Behaviour
-        // So we useLRU_CACHE mode because it should perform a bit better (as it doesn't re-add explicitly)
+        // So we use LRU_CACHE mode because it should perform a bit better (as it doesn't re-add explicitly)
         map = new LeastRecentlyUsedMap.LruCache<E, Object>(maxEntries, initialCapacity, loadFactor);
     }
 

@@ -5,7 +5,6 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgData;
@@ -14,9 +13,11 @@ import cgeo.geocaching.cgeocaches;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.Login;
+import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -30,6 +31,7 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.LiveMapInfoDialogBuilder;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -70,6 +72,7 @@ import android.widget.ViewSwitcher.ViewFactory;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -86,7 +89,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     /** max. number of caches displayed in the Live Map */
     public static final int MAX_CACHES = 500;
 
-    /** Controls the behaviour of the map */
+    /** Controls the behavior of the map */
     public enum MapMode {
         /** Live Map */
         LIVE,
@@ -116,24 +119,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private static final String EXTRAS_MAP_MODE = "mapMode";
     private static final String EXTRAS_LIVE_ENABLED = "liveEnabled";
 
-    private static final int MENU_SELECT_MAPVIEW = 1;
-    private static final int MENU_MAP_LIVE = 2;
-    private static final int MENU_STORE_CACHES = 3;
-    private static final int SUBMENU_MODES = 4;
-    private static final int MENU_TRAIL_MODE = 81;
-    private static final int MENU_THEME_MODE = 82;
-    private static final int MENU_CIRCLE_MODE = 83;
-    private static final int SUBMENU_STRATEGY = 5;
-    private static final int MENU_STRATEGY_FASTEST = 51;
-    private static final int MENU_STRATEGY_FAST = 52;
-    private static final int MENU_STRATEGY_AUTO = 53;
-    private static final int MENU_STRATEGY_DETAILED = 74;
-
-    private static final int MENU_AS_LIST = 7;
-
     private static final String BUNDLE_MAP_SOURCE = "mapSource";
     private static final String BUNDLE_MAP_STATE = "mapState";
     private static final String BUNDLE_LIVE_ENABLED = "liveEnabled";
+    private static final String BUNDLE_TRAIL_HISTORY = "trailHistory";
 
     private Resources res = null;
     private MapItemFactory mapItemFactory = null;
@@ -167,14 +156,12 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private ScaleOverlay overlayScale = null;
     private PositionOverlay overlayPosition = null;
     // data for overlays
-    private static final int[][] INSET_RELIABLE = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }; // center, 33x40 / 45x51
-    private static final int[][] INSET_TYPE = { { 5, 8, 6, 10 }, { 4, 4, 5, 11 } }; // center, 22x22 / 36x36
-    private static final int[][] INSET_OWN = { { 21, 0, 0, 26 }, { 25, 0, 0, 35 } }; // top right, 12x12 / 16x16
-    private static final int[][] INSET_FOUND = { { 0, 0, 21, 28 }, { 0, 0, 25, 35 } }; // top left, 12x12 / 16x16
-    private static final int[][] INSET_USERMODIFIEDCOORDS = { { 21, 28, 0, 0 }, { 19, 25, 0, 0 } }; // bottom right, 12x12 / 26x26
-    private static final int[][] INSET_PERSONALNOTE = { { 0, 28, 21, 0 }, { 0, 25, 19, 0 } }; // bottom left, 12x12 / 26x26
-    private static final int MENU_GROUP_MAP_SOURCES = 1;
-    private static final int MENU_GROUP_MAP_STRATEGY = 2;
+    private static final int[][] INSET_RELIABLE = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }; // center, 33x40 / 45x51 / 60x68
+    private static final int[][] INSET_TYPE = { { 5, 8, 6, 10 }, { 4, 4, 5, 11 }, { 4, 4, 5, 11 } }; // center, 22x22 / 36x36
+    private static final int[][] INSET_OWN = { { 21, 0, 0, 26 }, { 25, 0, 0, 35 }, { 40, 0, 0, 48 } }; // top right, 12x12 / 16x16 / 20x20
+    private static final int[][] INSET_FOUND = { { 0, 0, 21, 28 }, { 0, 0, 25, 35 }, { 0, 0, 40, 48 } }; // top left, 12x12 / 16x16 / 20x20
+    private static final int[][] INSET_USERMODIFIEDCOORDS = { { 21, 28, 0, 0 }, { 19, 25, 0, 0 }, { 25, 33, 0, 0 } }; // bottom right, 12x12 / 26x26 / 35x35
+    private static final int[][] INSET_PERSONALNOTE = { { 0, 28, 21, 0 }, { 0, 25, 19, 0 }, { 0, 33, 25, 0 } }; // bottom left, 12x12 / 26x26 / 35x35
 
     private SparseArray<LayerDrawable> overlaysCache = new SparseArray<LayerDrawable>();
     /** Count of caches currently visible */
@@ -196,7 +183,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     /** Live mode enabled for map. **/
     private boolean isLiveEnabled;
     // other things
-    private boolean liveChanged = false; // previous state for loadTimer
+    private boolean markersInvalidated = false; // previous state for loadTimer
     private boolean centered = false; // if map is already centered
     private boolean alreadyCentered = false; // -""- for setting my location
     private static Set<String> dirtyCaches = null;
@@ -360,6 +347,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         outState.putInt(BUNDLE_MAP_SOURCE, currentSourceId);
         outState.putIntArray(BUNDLE_MAP_STATE, currentMapState());
         outState.putBoolean(BUNDLE_LIVE_ENABLED, isLiveEnabled);
+        if (overlayPosition != null) {
+            outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY, overlayPosition.getHistory());
+        }
     }
 
     @Override
@@ -382,9 +372,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         if (extras != null) {
             mapMode = (MapMode) extras.get(EXTRAS_MAP_MODE);
             isLiveEnabled = extras.getBoolean(EXTRAS_LIVE_ENABLED, false);
-            searchIntent = (SearchResult) extras.getParcelable(EXTRAS_SEARCH);
+            searchIntent = extras.getParcelable(EXTRAS_SEARCH);
             geocodeIntent = extras.getString(EXTRAS_GEOCODE);
-            coordsIntent = (Geopoint) extras.getParcelable(EXTRAS_COORDS);
+            coordsIntent = extras.getParcelable(EXTRAS_COORDS);
             waypointTypeIntent = WaypointType.findById(extras.getString(EXTRAS_WPTTYPE));
             mapStateIntent = extras.getIntArray(EXTRAS_MAPSTATE);
             mapTitle = extras.getString(EXTRAS_MAP_TITLE);
@@ -397,11 +387,14 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             mapTitle = res.getString(R.string.map_map);
         }
 
+        ArrayList<Location> trailHistory = null;
+
         // Get fresh map information from the bundle if any
         if (savedInstanceState != null) {
             currentSourceId = savedInstanceState.getInt(BUNDLE_MAP_SOURCE, Settings.getMapSource().getNumericalId());
             mapStateIntent = savedInstanceState.getIntArray(BUNDLE_MAP_STATE);
             isLiveEnabled = savedInstanceState.getBoolean(BUNDLE_LIVE_ENABLED, false);
+            trailHistory = savedInstanceState.getParcelableArrayList(BUNDLE_TRAIL_HISTORY);
         } else {
             currentSourceId = Settings.getMapSource().getNumericalId();
         }
@@ -438,6 +431,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         if (overlayPosition == null) {
             overlayPosition = mapView.createAddPositionOverlay(activity);
+            if (trailHistory != null) {
+                overlayPosition.setHistory(trailHistory);
+            }
         }
 
         if (overlayScale == null) {
@@ -541,34 +537,14 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // menu inflation happens in Google/Mapsforge specific classes
+        super.onCreateOptionsMenu(menu);
 
-        SubMenu submenu = menu.addSubMenu(0, MENU_SELECT_MAPVIEW, 0, res.getString(R.string.map_view_map)).setIcon(R.drawable.ic_menu_mapmode);
-        addMapViewMenuItems(submenu);
+        MapProviderFactory.addMapviewMenuItems(menu);
 
-        menu.add(0, MENU_MAP_LIVE, 0, res.getString(R.string.map_live_disable)).setIcon(R.drawable.ic_menu_refresh);
-        menu.add(0, MENU_STORE_CACHES, 0, res.getString(R.string.caches_store_offline)).setIcon(R.drawable.ic_menu_set_as).setEnabled(false);
-        SubMenu subMenuModes = menu.addSubMenu(0, SUBMENU_MODES, 0, res.getString(R.string.map_modes)).setIcon(R.drawable.ic_menu_mark);
-        subMenuModes.add(0, MENU_TRAIL_MODE, 0, res.getString(R.string.map_trail_hide)).setIcon(R.drawable.ic_menu_trail);
-        subMenuModes.add(0, MENU_CIRCLE_MODE, 0, res.getString(R.string.map_circles_hide)).setIcon(R.drawable.ic_menu_circle);
-        subMenuModes.add(0, MENU_THEME_MODE, 0, res.getString(R.string.map_theme_select)).setIcon(R.drawable.ic_menu_preferences);
-
-        Strategy strategy = Settings.getLiveMapStrategy();
-        SubMenu subMenuStrategy = menu.addSubMenu(0, SUBMENU_STRATEGY, 0, res.getString(R.string.map_strategy)).setIcon(R.drawable.ic_menu_preferences);
+        final SubMenu subMenuStrategy = menu.findItem(R.id.submenu_strategy).getSubMenu();
         subMenuStrategy.setHeaderTitle(res.getString(R.string.map_strategy_title));
-        subMenuStrategy.add(MENU_GROUP_MAP_STRATEGY, MENU_STRATEGY_FASTEST, 0, Strategy.FASTEST.getL10n()).setCheckable(true).setChecked(strategy == Strategy.FASTEST);
-        subMenuStrategy.add(MENU_GROUP_MAP_STRATEGY, MENU_STRATEGY_FAST, 0, Strategy.FAST.getL10n()).setCheckable(true).setChecked(strategy == Strategy.FAST);
-        subMenuStrategy.add(MENU_GROUP_MAP_STRATEGY, MENU_STRATEGY_AUTO, 0, Strategy.AUTO.getL10n()).setCheckable(true).setChecked(strategy == Strategy.AUTO);
-        subMenuStrategy.add(MENU_GROUP_MAP_STRATEGY, MENU_STRATEGY_DETAILED, 0, Strategy.DETAILED.getL10n()).setCheckable(true).setChecked(strategy == Strategy.DETAILED);
-        subMenuStrategy.setGroupCheckable(MENU_GROUP_MAP_STRATEGY, true, true);
-
-        menu.add(0, MENU_AS_LIST, 0, res.getString(R.string.map_as_list)).setIcon(R.drawable.ic_menu_agenda);
-
         return true;
-    }
-
-    private static void addMapViewMenuItems(final Menu menu) {
-        MapProviderFactory.addMapviewMenuItems(menu, MENU_GROUP_MAP_SOURCES);
-        menu.setGroupCheckable(MENU_GROUP_MAP_SOURCES, true, true);
     }
 
     @Override
@@ -582,38 +558,59 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         }
 
         try {
-            MenuItem item = menu.findItem(MENU_TRAIL_MODE);
+            MenuItem item = menu.findItem(R.id.menu_trail_mode);
             if (Settings.isMapTrail()) {
                 item.setTitle(res.getString(R.string.map_trail_hide));
             } else {
                 item.setTitle(res.getString(R.string.map_trail_show));
             }
 
-            item = menu.findItem(MENU_MAP_LIVE); // live map
+            item = menu.findItem(R.id.menu_map_live); // live map
             if (isLiveEnabled) {
                 item.setTitle(res.getString(R.string.map_live_disable));
             } else {
                 item.setTitle(res.getString(R.string.map_live_enable));
             }
 
-            final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
-            menu.findItem(MENU_STORE_CACHES).setEnabled(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport) && new SearchResult(geocodesInViewport).hasUnsavedCaches());
+            item = menu.findItem(R.id.menu_mycaches_mode); // own & found caches
+            if (Settings.isExcludeMyCaches()) {
+                item.setTitle(res.getString(R.string.map_mycaches_show));
+            } else {
+                item.setTitle(res.getString(R.string.map_mycaches_hide));
+            }
 
-            item = menu.findItem(MENU_CIRCLE_MODE); // show circles
+            final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
+            menu.findItem(R.id.menu_store_caches).setEnabled(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport) && new SearchResult(geocodesInViewport).hasUnsavedCaches());
+
+            item = menu.findItem(R.id.menu_circle_mode); // show circles
             if (overlayCaches != null && overlayCaches.getCircles()) {
                 item.setTitle(res.getString(R.string.map_circles_hide));
             } else {
                 item.setTitle(res.getString(R.string.map_circles_show));
             }
 
-            item = menu.findItem(MENU_THEME_MODE); // show theme selection
+            item = menu.findItem(R.id.menu_theme_mode); // show theme selection
             item.setVisible(mapView.hasMapThemes());
 
-            menu.findItem(MENU_AS_LIST).setEnabled(isLiveEnabled && !isLoading());
+            menu.findItem(R.id.menu_as_list).setEnabled(isLiveEnabled && !isLoading());
 
-            menu.findItem(SUBMENU_STRATEGY).setEnabled(isLiveEnabled);
+            menu.findItem(R.id.submenu_strategy).setEnabled(isLiveEnabled);
+
+            switch (Settings.getLiveMapStrategy()) {
+                case FASTEST:
+                    menu.findItem(R.id.menu_strategy_fastest).setChecked(true);
+                    break;
+                case FAST:
+                    menu.findItem(R.id.menu_strategy_fast).setChecked(true);
+                    break;
+                case AUTO:
+                    menu.findItem(R.id.menu_strategy_auto).setChecked(true);
+                    break;
+                default: // DETAILED
+                    menu.findItem(R.id.menu_strategy_detailed).setChecked(true);
+            }
         } catch (Exception e) {
-            Log.e("cgeomap.onPrepareOptionsMenu", e);
+            Log.e("CGeoMap.onPrepareOptionsMenu", e);
         }
 
         return true;
@@ -623,22 +620,22 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     public boolean onOptionsItemSelected(MenuItem item) {
         final int id = item.getItemId();
         switch (id) {
-            case MENU_TRAIL_MODE:
+            case R.id.menu_trail_mode:
                 Settings.setMapTrail(!Settings.isMapTrail());
                 mapView.repaintRequired(overlayPosition);
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
-            case MENU_MAP_LIVE:
+            case R.id.menu_map_live:
                 isLiveEnabled = !isLiveEnabled;
                 if (mapMode == MapMode.LIVE) {
                     Settings.setLiveMap(isLiveEnabled);
                 }
-                liveChanged = true;
+                markersInvalidated = true;
                 lastSearchResult = null;
                 searchIntent = null;
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
-            case MENU_STORE_CACHES:
+            case R.id.menu_store_caches:
                 if (!isLoading()) {
                     final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
                     final List<String> geocodes = new ArrayList<String>();
@@ -672,7 +669,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     }
                 }
                 return true;
-            case MENU_CIRCLE_MODE:
+            case R.id.menu_circle_mode:
                 if (overlayCaches == null) {
                     return false;
                 }
@@ -681,29 +678,37 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 mapView.repaintRequired(overlayCaches);
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
-            case MENU_THEME_MODE:
+            case R.id.menu_mycaches_mode:
+                Settings.setExcludeMine(!Settings.isExcludeMyCaches());
+                markersInvalidated = true;
+                ActivityMixin.invalidateOptionsMenu(activity);
+                if (!Settings.isExcludeMyCaches()) {
+                    Tile.Cache.clear();
+                }
+                return true;
+            case R.id.menu_theme_mode:
                 selectMapTheme();
                 return true;
-            case MENU_AS_LIST: {
+            case R.id.menu_as_list: {
                 cgeocaches.startActivityMap(activity, new SearchResult(getGeocodesForCachesInViewport()));
                 return true;
             }
-            case MENU_STRATEGY_FASTEST: {
+            case R.id.menu_strategy_fastest: {
                 item.setChecked(true);
                 Settings.setLiveMapStrategy(Strategy.FASTEST);
                 return true;
             }
-            case MENU_STRATEGY_FAST: {
+            case R.id.menu_strategy_fast: {
                 item.setChecked(true);
                 Settings.setLiveMapStrategy(Strategy.FAST);
                 return true;
             }
-            case MENU_STRATEGY_AUTO: {
+            case R.id.menu_strategy_auto: {
                 item.setChecked(true);
                 Settings.setLiveMapStrategy(Strategy.AUTO);
                 return true;
             }
-            case MENU_STRATEGY_DETAILED: {
+            case R.id.menu_strategy_detailed: {
                 item.setChecked(true);
                 Settings.setLiveMapStrategy(Strategy.DETAILED);
                 return true;
@@ -751,9 +756,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                     @Override
                     public void onClick(DialogInterface dialog, int newItem) {
-                        if (newItem == selectedItem) {
-                            // no change
-                        } else {
+                        if (newItem != selectedItem) {
                             // Adjust index because of <default> selection
                             if (newItem > 0) {
                                 Settings.setCustomRenderThemeFile(themeFiles[newItem - 1].getPath());
@@ -1031,7 +1034,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                         // check if map moved or zoomed
                         //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
-                        final boolean moved = liveChanged || (isLiveEnabled && !downloaded) || (viewport == null) || zoomNow != zoom ||
+                        final boolean moved = markersInvalidated || (isLiveEnabled && !downloaded) || (viewport == null) || zoomNow != zoom ||
                                 (mapMoved(viewport, viewportNow) && (cachesCnt <= 0 || CollectionUtils.isEmpty(caches) || !viewport.includes(viewportNow)));
 
                         // update title on any change
@@ -1042,7 +1045,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                         // save new values
                         if (moved) {
-                            liveChanged = false;
+                            markersInvalidated = false;
 
                             long currentTime = System.currentTimeMillis();
 
@@ -1055,7 +1058,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                     yield();
                 } catch (Exception e) {
-                    Log.w("cgeomap.LoadTimer.run", e);
+                    Log.w("CGeoMap.LoadTimer.run", e);
                 }
             }
         }
@@ -1097,8 +1100,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 }
                 // live mode search result
                 if (isLiveEnabled) {
-                    SearchResult liveResult = new SearchResult(cgData.loadCachedInViewport(viewport, Settings.getCacheType()));
-                    searchResult.addGeocodes(liveResult.getGeocodes());
+                    searchResult.addSearchResult(cgData.loadCachedInViewport(viewport, Settings.getCacheType()));
                 }
 
                 downloaded = true;
@@ -1177,28 +1179,29 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     }
 
                     searchResult = ConnectorFactory.searchByViewport(viewport.resize(0.8), tokens);
-                    if (searchResult != null) {
-                        downloaded = true;
-                        if (searchResult.getError() == StatusCode.NOT_LOGGED_IN) {
-                            Login.login();
-                            tokens = null;
-                        } else {
-                            break;
-                        }
+                    downloaded = true;
+                    if (searchResult.getError() == StatusCode.NOT_LOGGED_IN && Settings.isGCConnectorActive()) {
+                        Login.login();
+                        tokens = null;
+                    } else {
+                        break;
                     }
                     count++;
 
                 } while (count < 2);
 
-                if (searchResult != null) {
-                    Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-                    CGeoMap.filter(result);
-                    // update the caches
-                    // new collection type needs to remove first
-                    caches.removeAll(result);
-                    caches.addAll(result);
-                    lastSearchResult = searchResult;
-                }
+                Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+                CGeoMap.filter(result);
+                // update the caches
+                // first remove filtered out
+                final Set<String> filteredCodes = searchResult.getFilteredGeocodes();
+                Log.d("Filtering out " + filteredCodes.size() + " caches: " + filteredCodes.toString());
+                caches.removeAll(cgData.loadCaches(filteredCodes, LoadFlags.LOAD_CACHE_ONLY));
+                cgData.removeCaches(filteredCodes, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+                // new collection type needs to remove first to refresh
+                caches.removeAll(result);
+                caches.addAll(result);
+                lastSearchResult = searchResult;
 
                 //render
                 displayExecutor.execute(new DisplayRunnable(viewport));
@@ -1351,7 +1354,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                     geoDirUpdate.startDir();
                 } catch (Exception e) {
-                    Log.e("cgeocaches.onPrepareOptionsMenu.onCancel", e);
+                    Log.e("CGeoMap.storeCaches.onCancel", e);
                 }
             }
         });
@@ -1429,7 +1432,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         Geocache.storeCache(null, geocode, listId, false, handler);
                     }
                 } catch (Exception e) {
-                    Log.e("cgeocaches.LoadDetails.run", e);
+                    Log.e("CGeoMap.LoadDetails.run", e);
                 } finally {
                     // one more cache over
                     detailProgress++;
@@ -1578,12 +1581,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         ActivityMixin.goHome(activity);
     }
 
-    // open manual entry
-    @Override
-    public void goManual(View view) {
-        ActivityMixin.goManual(activity, "c:geo-live-map");
-    }
-
     @Override
     public View makeView() {
         ImageView imageView = new ImageView(activity);
@@ -1645,13 +1642,13 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     }
 
     private CachesOverlayItemImpl getCacheItem(final Geocache cache) {
-        final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(cache, cache.getType());
+        final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(cache, cache.getType().applyDistanceRule());
 
         final int hashcode = new HashCodeBuilder()
                 .append(cache.isReliableLatLon())
                 .append(cache.getType().id)
                 .append(cache.isDisabled() || cache.isArchived())
-                .append(cache.getCacheRealm().id)
+                .append(cache.getMapMarkerId())
                 .append(cache.isOwner())
                 .append(cache.isFound())
                 .append(cache.hasUserModifiedCoords())
@@ -1660,20 +1657,23 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 .append(cache.getListId() > 0)
                 .toHashCode();
 
-        final LayerDrawable ldFromCache = overlaysCache.get(hashcode);
-        if (ldFromCache != null) {
-            item.setMarker(ldFromCache);
-            return item;
+        LayerDrawable drawable = overlaysCache.get(hashcode);
+        if (drawable == null) {
+            drawable = createCacheItem(cache, hashcode);
         }
+        item.setMarker(drawable);
+        return item;
+    }
 
+    private LayerDrawable createCacheItem(final Geocache cache, final int hashcode) {
         // Set initial capacities to the maximum of layers and insets to avoid dynamic reallocation
         final ArrayList<Drawable> layers = new ArrayList<Drawable>(9);
         final ArrayList<int[]> insets = new ArrayList<int[]>(8);
 
         // background: disabled or not
-        final Drawable marker = getResources().getDrawable(cache.isDisabled() || cache.isArchived() ? cache.getCacheRealm().markerDisabledId : cache.getCacheRealm().markerId);
+        final Drawable marker = getResources().getDrawable(cache.getMapMarkerId());
         layers.add(marker);
-        final int resolution = marker.getIntrinsicWidth() > 40 ? 1 : 0;
+        final int resolution = marker.getIntrinsicWidth() > 40 ? (marker.getIntrinsicWidth() > 50 ? 2 : 1) : 0;
         // reliable or not
         if (!cache.isReliableLatLon()) {
             insets.add(INSET_RELIABLE[resolution]);
@@ -1719,13 +1719,11 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         }
 
         overlaysCache.put(hashcode, ld);
-
-        item.setMarker(ld);
-        return item;
+        return ld;
     }
 
     private CachesOverlayItemImpl getWaypointItem(final Waypoint waypoint) {
-        final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(waypoint, null);
+        final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(waypoint, waypoint.getWaypointType().applyDistanceRule());
         Drawable marker = getResources().getDrawable(!waypoint.isVisited() ? R.drawable.marker : R.drawable.marker_transparent);
         final Drawable[] layers = new Drawable[] {
                 marker,

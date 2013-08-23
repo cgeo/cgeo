@@ -35,6 +35,4 @@ public interface MapActivityImpl {
 
     public abstract void goHome(View view);
 
-    public abstract void goManual(View view);
-
 }

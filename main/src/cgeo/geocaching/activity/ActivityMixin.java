@@ -1,15 +1,14 @@
 package cgeo.geocaching.activity;
 
+import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgeo;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.compatibility.Compatibility;
 
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -17,38 +16,22 @@ import android.os.Build;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import gnu.android.app.appmanualclient.AppManualReaderClient;
-
 public final class ActivityMixin {
 
     public final static void goHome(final Activity fromActivity) {
-        final Intent intent = new Intent(fromActivity, cgeo.class);
+        final Intent intent = new Intent(fromActivity, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         fromActivity.startActivity(intent);
         fromActivity.finish();
     }
 
-    public static void goManual(final Context context, final String helpTopic) {
-        if (StringUtils.isBlank(helpTopic)) {
-            return;
-        }
-        try {
-            AppManualReaderClient.openManual(
-                    "c-geo",
-                    helpTopic,
-                    context,
-                    "http://manual.cgeo.org/");
-        } catch (Exception e) {
-            // nothing
-        }
-    }
-
-    public static void setTitle(final Activity activity, final String text) {
+    public static void setTitle(final Activity activity, final CharSequence text) {
         if (StringUtils.isBlank(text)) {
             return;
         }
@@ -95,6 +78,10 @@ public final class ActivityMixin {
         }
 
         return R.style.popup_dark;
+    }
+
+    public static void showToast(final Activity activity, final int resId) {
+        ActivityMixin.showToast(activity, activity.getString(resId));
     }
 
     public static void showToast(final Activity activity, final String text) {
@@ -147,5 +134,32 @@ public final class ActivityMixin {
 
     public static void invalidateOptionsMenu(Activity activity) {
         Compatibility.invalidateOptionsMenu(activity);
+    }
+
+    /**
+     * insert text into the EditText at the current cursor position
+     * 
+     * @param editText
+     * @param insertText
+     * @param moveCursor
+     *            place the cursor after the inserted text
+     */
+    public static void insertAtPosition(final EditText editText, final String insertText, final boolean moveCursor) {
+        int selectionStart = editText.getSelectionStart();
+        int selectionEnd = editText.getSelectionEnd();
+        int start = Math.min(selectionStart, selectionEnd);
+        int end = Math.max(selectionStart, selectionEnd);
+
+        final String content = editText.getText().toString();
+        String completeText;
+        if (start > 0 && !Character.isWhitespace(content.charAt(start - 1))) {
+            completeText = " " + insertText;
+        } else {
+            completeText = insertText;
+        }
+
+        editText.getText().replace(start, end, completeText);
+        int newCursor = moveCursor ? start + completeText.length() : start;
+        editText.setSelection(newCursor, newCursor);
     }
 }

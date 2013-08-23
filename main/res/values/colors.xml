@@ -24,4 +24,5 @@
     <color name="button_enabled">#FF000000</color>
     <color name="button_disabled">#66000000</color>
     <color name="archived_cache_color">#FFAC0B0B</color>
+
 </resources>

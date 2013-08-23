@@ -19,7 +19,6 @@
     <CheckBox
         android:id="@+id/onlynew"
         style="@style/checkbox_full"
-        android:enabled="false"
         android:text="@string/export_fieldnotes_onlynew" />
 
 </LinearLayout>

@@ -21,7 +21,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?text_color"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/info"
@@ -34,7 +34,7 @@
                 android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:textColor="?text_color_headline"
-                android:textSize="14dp"
+                android:textSize="14sp"
                 android:visibility="gone" />
         </LinearLayout>
 
@@ -59,7 +59,7 @@
         android:scrollHorizontally="true"
         android:singleLine="true"
         android:textColor="?text_color_headline"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:visibility="gone" />
 
     <TextView
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
         android:textColor="?text_color"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:visibility="gone" />
 
     <View

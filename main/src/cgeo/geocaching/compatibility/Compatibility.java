@@ -102,10 +102,6 @@ public final class Compatibility {
         return level13.getDisplayWidth();
     }
 
-    public static int getDisplayHeight() {
-        return level13.getDisplayHeight();
-    }
-
     public static Point getDisplaySize() {
         return level13.getDisplaySize();
     }

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/0" xmlns:groundspeak="http://www.groundspeak.com/cache/1/0" xmlns:ns3="http://www.groundspeak.com/cache/1/0/1" xmlns:ns4="http://www.gsak.net/xmlv1/5" xmlns:ox="http://www.opencaching.com/xmlschemas/opencaching/1/0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" creator="OpenCaching" version="1.0" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.opencaching.com/xmlschemas/opencaching/1/0 http://www.opencaching.com/xmlschemas/opencaching/1/0/opencaching.xsd http://www.groundspeak.com/cache/1/0 http://www.groundspeak.com/cache/1/0/cache.xsd">
+    <name>OpenCaching GPX</name>
+    <desc>1 geocache.  Terms of Use: http://www.opencaching.com/#terms</desc>
+    <author>OpenCaching</author>
+    <email>site@OpenCaching.com</email>
+    <url>http://www.opencaching.com/api/geocache/OX1RY0Y.gpx</url>
+    <time>2013-06-09T06:24:06.311Z</time>
+    <keywords>geocache, cache, opencaching, waypoint, ox</keywords>
+    <wpt lon="9.1836" lat="48.8642167">
+        <time>2010-12-17T15:51:11.000Z</time>
+        <name>OX1RY0Y</name>
+        <desc>Kornwestheim und die Römer by Thomas&amp;Dani, Traditional Cache(1.5/1.0/2.8)</desc>
+        <url>http://www.opencaching.com/#geocache/OX1RY0Y</url>
+        <urlname>Kornwestheim und die Römer</urlname>
+        <sym>Geocache</sym>
+        <type>Geocache|Traditional Cache</type>
+        <groundspeak:cache archived="False" available="True" id="1666403">
+            <groundspeak:name>Kornwestheim und die Römer</groundspeak:name>
+            <groundspeak:placed_by>Thomas&amp;Dani</groundspeak:placed_by>
+            <groundspeak:owner id="6809">Thomas&amp;Dani</groundspeak:owner>
+            <groundspeak:type>Traditional Cache</groundspeak:type>
+            <groundspeak:container>Small</groundspeak:container>
+            <groundspeak:difficulty>1.5</groundspeak:difficulty>
+            <groundspeak:terrain>1</groundspeak:terrain>
+            <groundspeak:long_description html="True">Dieses sind die Reste einer in Kornwestheim gefundenen römischen Wasserleitung. Sie stammt aus dem 1. bis 3. Jahrhundert n. Chr. Die Wasserleitung versorgte in etwas den Bereich der heutigen Innenstadt. Unklar ist, aus welcher Quelle das Wasser entnommen wurde. Als Material wurde Stubensandstein verwendet. Die Rinnen waren zwischen 1 bis 2 Meter lang und im leichten Gefälle (ca. 1%) verlegt. Die Stoßfugen der Rinnen waren mit Blei abgedichtet.&lt;br/&gt;&lt;br/&gt;Dieses ist unser Erstlingswerk. Nach über 1000 Founds wurde es glaube auch mal Zeit.&lt;br/&gt;&lt;br/&gt;Es ist ein gewöhnlicher Tradi. Bitte seid vorsichtig beim suchen und beim wieder verstecken. Ihr werdet von allen Seiten beobachtet.&lt;br/&gt;&lt;br/&gt;Viel spaß beim Cachen&lt;br/&gt;&lt;br/&gt;Thomas&amp;Dani  </groundspeak:long_description>
+            <groundspeak:encoded_hints>Wasserleitung</groundspeak:encoded_hints>
+            <groundspeak:logs>
+                <groundspeak:log id="2559652">
+                    <groundspeak:date>2013-04-20T22:00:00.000Z</groundspeak:date>
+                    <groundspeak:type>Found it</groundspeak:type>
+                    <groundspeak:finder id="191958">kb1991</groundspeak:finder>
+                    <groundspeak:text encoded="False">Mein erster Cache :D
+Ist leider etwas nass in der Dose...
+Macht trotzdem super viel Spaß und bin weiterhin dabei :)</groundspeak:text>
+                </groundspeak:log>
+                <groundspeak:log id="2527772">
+                    <groundspeak:date>2013-03-28T23:00:00.000Z</groundspeak:date>
+                    <groundspeak:type>Found it</groundspeak:type>
+                    <groundspeak:finder id="187186">BHM_Ausflug</groundspeak:finder>
+                    <groundspeak:text encoded="False">kleiner Spaziergang und um 15:56 Uhr haben wir geloggt :-), hier laufen wirklich einige Leute rum....</groundspeak:text>
+                </groundspeak:log>
+                <groundspeak:log id="2211102">
+                    <groundspeak:date>2012-11-01T15:56:33.000Z</groundspeak:date>
+                    <groundspeak:type>Found it</groundspeak:type>
+                    <groundspeak:finder id="160085">FalkPfeifer</groundspeak:finder>
+                    <groundspeak:text encoded="False">
+Aufgezeichnet über OpenCaching für iPhone</groundspeak:text>
+                </groundspeak:log>
+                <groundspeak:log id="1283223">
+                    <groundspeak:date>2011-06-08T20:54:09.000Z</groundspeak:date>
+                    <groundspeak:type>Found it</groundspeak:type>
+                    <groundspeak:finder id="28349">Karica</groundspeak:finder>
+                    <groundspeak:text encoded="False"/>
+                </groundspeak:log>
+                <groundspeak:log id="1088277">
+                    <groundspeak:date>2010-10-09T22:00:00.000Z</groundspeak:date>
+                    <groundspeak:type>Found it</groundspeak:type>
+                    <groundspeak:finder id="11188">John_T_Clark</groundspeak:finder>
+                    <groundspeak:text encoded="False">Nach langen suchen doch gefunden.
+
+Danke</groundspeak:text>
+                </groundspeak:log>
+            </groundspeak:logs>
+        </groundspeak:cache>
+        <ox:opencaching>
+            <ox:ratings>
+                <ox:awesomeness>2.8</ox:awesomeness>
+                <ox:difficulty>1.5</ox:difficulty>
+                <ox:size>2.8</ox:size>
+                <ox:terrain>1.0</ox:terrain>
+            </ox:ratings>
+        </ox:opencaching>
+    </wpt>
+</gpx>

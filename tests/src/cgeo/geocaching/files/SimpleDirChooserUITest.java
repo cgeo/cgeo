@@ -11,7 +11,8 @@ import android.widget.CheckBox;
 import java.util.ArrayList;
 
 @TargetApi(Build.VERSION_CODES.FROYO)
-@Suppress() /* This test breaks the continuous integration server, do not run it for now. */
+@Suppress()
+/* This test breaks the continuous integration server, do not run it for now. */
 public class SimpleDirChooserUITest extends ActivityInstrumentationTestCase2<SimpleDirChooser> {
 
     private Solo solo;

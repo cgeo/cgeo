@@ -28,7 +28,8 @@ public enum CacheType {
     LOSTANDFOUND("lostfound", "Lost & Found", "3ea6533d-bb52-42fe-b2d2-79a3424d4728", R.string.lostfound, R.drawable.type_event), // icon missing
     PROJECT_APE("ape", "Project Ape Cache", "2555690d-b2bc-4b55-b5ac-0cb704c0b768", R.string.ape, R.drawable.type_ape),
     GCHQ("gchq", "Groundspeak HQ", "416f2494-dc17-4b6a-9bab-1a29dd292d8c", R.string.gchq, R.drawable.type_hq),
-    GPS_EXHIBIT("gps", "GPS Cache Exhibit", "72e69af2-7986-4990-afd9-bc16cbbb4ce3", R.string.gps, R.drawable.type_traditional), // icon missing
+    GPS_EXHIBIT("gps", "GPS Adventures Exhibit", "72e69af2-7986-4990-afd9-bc16cbbb4ce3", R.string.gps, R.drawable.type_event), // icon missing
+    BLOCK_PARTY("block", "Groundspeak Block Party", "bc2f3df2-1aab-4601-b2ff-b5091f6c02e3", R.string.block, R.drawable.type_event), // icon missing
     UNKNOWN("unknown", "unknown", "", R.string.unknown, R.drawable.type_unknown),
     /** No real cache type -> filter */
     ALL("all", "display all caches", "9a79e6ce-3344-409c-bbe9-496530baf758", R.string.all_types, R.drawable.type_unknown);
@@ -88,7 +89,8 @@ public enum CacheType {
     }
 
     public boolean isEvent() {
-        return CacheType.EVENT == this || CacheType.MEGA_EVENT == this || CacheType.CITO == this || CacheType.LOSTANDFOUND == this;
+        return CacheType.EVENT == this || CacheType.MEGA_EVENT == this || CacheType.CITO == this ||
+                CacheType.LOSTANDFOUND == this || CacheType.BLOCK_PARTY == this;
     }
 
     @Override
@@ -98,7 +100,7 @@ public enum CacheType {
 
     /**
      * Whether this type contains the given cache.
-     * 
+     *
      * @param cache
      * @return true if this is the ALL type or if this type equals the type of the cache.
      */
@@ -110,5 +112,13 @@ public enum CacheType {
             return true;
         }
         return cache.getType() == this;
+    }
+
+    public boolean applyDistanceRule() {
+        return !isVirtual() && !isEvent();
+    }
+
+    public boolean isVirtual() {
+        return VIRTUAL == this || WEBCAM == this || EARTH == this;
     }
 }

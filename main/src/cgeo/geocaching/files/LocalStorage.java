@@ -2,14 +2,20 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.IOUtils;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.Header;
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.lang3.StringUtils;
 
 import android.os.Environment;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,17 +26,26 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handle local storage issues on phone and SD card.
  *
  */
-public class LocalStorage {
+public final class LocalStorage {
+
+    public static final String HEADER_LAST_MODIFIED = "last-modified";
+    public static final String HEADER_ETAG = "etag";
 
     /** Name of the local private directory used to hold cached information */
     public final static String cache = ".cgeo";
 
     private static File internalStorageBase;
+
+    private LocalStorage() {
+        // utility class
+    }
 
     /**
      * Return the primary storage cache root (external media if mounted, phone otherwise).
@@ -152,7 +167,7 @@ public class LocalStorage {
 
     private static File buildFile(final File base, final String fileName, final boolean isUrl, final boolean createDirs) {
         if (createDirs) {
-            base.mkdirs();
+            FileUtils.mkdirs(base);
         }
         return new File(base, isUrl ? CryptUtils.md5(fileName) + getExtension(fileName) : fileName);
     }
@@ -173,8 +188,8 @@ public class LocalStorage {
 
         try {
             final boolean saved = saveToFile(response.getEntity().getContent(), targetFile);
-            saveHeader("etag", saved ? response : null, targetFile);
-            saveHeader("last-modified", saved ? response : null, targetFile);
+            saveHeader(HEADER_ETAG, saved ? response : null, targetFile);
+            saveHeader(HEADER_LAST_MODIFIED, saved ? response : null, targetFile);
             return saved;
         } catch (IOException e) {
             Log.e("LocalStorage.saveEntityToFile", e);
@@ -187,7 +202,7 @@ public class LocalStorage {
         final Header header = response != null ? response.getFirstHeader(name) : null;
         final File file = filenameForHeader(baseFile, name);
         if (header == null) {
-            file.delete();
+            FileUtils.deleteIgnoringFailure(file);
         } else {
             saveToFile(new ByteArrayInputStream(header.getValue().getBytes()), file);
         }
@@ -249,15 +264,15 @@ public class LocalStorage {
                 final boolean written = copy(inputStream, fos);
                 fos.close();
                 if (!written) {
-                    targetFile.delete();
+                    FileUtils.deleteIgnoringFailure(targetFile);
                 }
                 return written;
             } finally {
-                inputStream.close();
+                IOUtils.closeQuietly(inputStream);
             }
         } catch (IOException e) {
             Log.e("LocalStorage.saveToFile", e);
-            targetFile.delete();
+            FileUtils.deleteIgnoringFailure(targetFile);
         }
         return false;
     }
@@ -272,33 +287,29 @@ public class LocalStorage {
      * @return true if the copy happened without error, false otherwise
      */
     public static boolean copy(final File source, final File destination) {
-        destination.getParentFile().mkdirs();
+        FileUtils.mkdirs(destination.getParentFile());
 
         InputStream input = null;
-        OutputStream output;
-        try {
-            input = new FileInputStream(source);
-            output = new FileOutputStream(destination);
-        } catch (FileNotFoundException e) {
-            Log.e("LocalStorage.copy: could not open file", e);
-            if (input != null) {
-                try {
-                    input.close();
-                } catch (IOException e1) {
-                    // ignore
-                }
-            }
-            return false;
-        }
-
-        boolean copyDone = copy(input, output);
+        OutputStream output = null;
+        boolean copyDone = false;
 
         try {
+            input = new BufferedInputStream(new FileInputStream(source));
+            output = new BufferedOutputStream(new FileOutputStream(destination));
+            copyDone = copy(input, output);
+            // close here already to catch any issue with closing
             input.close();
             output.close();
-        } catch (IOException e) {
-            Log.e("LocalStorage.copy: could not close file", e);
+        } catch (FileNotFoundException e) {
+            Log.e("LocalStorage.copy: could not copy file", e);
             return false;
+        } catch (IOException e) {
+            Log.e("LocalStorage.copy: could not copy file", e);
+            return false;
+        } finally {
+            // close here quietly to clean up in all situations
+            IOUtils.closeQuietly(input);
+            IOUtils.closeQuietly(output);
         }
 
         return copyDone;
@@ -336,12 +347,12 @@ public class LocalStorage {
                 if (file.isDirectory()) {
                     deleteDirectory(file);
                 } else {
-                    file.delete();
+                    FileUtils.delete(file);
                 }
             }
         }
 
-        return path.delete();
+        return FileUtils.delete(path);
     }
 
     /**
@@ -359,7 +370,7 @@ public class LocalStorage {
         }
         for (final File file : filesToDelete) {
             try {
-                if (!file.delete()) {
+                if (!FileUtils.delete(file)) {
                     Log.w("LocalStorage.deleteFilesPrefix: Can't delete file " + file.getName());
                 }
             } catch (Exception e) {
@@ -386,5 +397,48 @@ public class LocalStorage {
             }
         };
         return LocalStorage.getStorageDir(geocode).listFiles(filter);
+    }
+
+    /**
+     * Get all storages available on the device.
+     * Will include paths like /mnt/sdcard /mnt/usbdisk /mnt/ext_card /mnt/sdcard/ext_card
+     */
+    public static List<File> getStorages() {
+
+        String extStorage = Environment.getExternalStorageDirectory().getAbsolutePath();
+        List<File> storages = new ArrayList<File>();
+        storages.add(new File(extStorage));
+        File file = new File("/system/etc/vold.fstab");
+        if (file.canRead()) {
+            FileReader fr = null;
+            BufferedReader br = null;
+            try {
+                fr = new FileReader(file);
+                br = new BufferedReader(fr);
+                String s = br.readLine();
+                while (s != null) {
+                    if (s.startsWith("dev_mount")) {
+                        String[] tokens = StringUtils.split(s);
+                        if (tokens.length >= 3) {
+                            String path = tokens[2]; // mountpoint
+                            if (!extStorage.equals(path)) {
+                                File directory = new File(path);
+                                if (directory.exists() && directory.isDirectory()) {
+                                    storages.add(directory);
+                                }
+                            }
+                        }
+                    }
+                    s = br.readLine();
+                }
+            } catch (IOException e) {
+                Log.e("Could not get additional mount points for user content. " +
+                        "Proceeding with external storage only (" + extStorage + ")");
+            } finally {
+                IOUtils.closeQuietly(fr);
+                IOUtils.closeQuietly(br);
+            }
+        }
+        return storages;
     }
 }

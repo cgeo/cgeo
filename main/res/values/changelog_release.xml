@@ -92,11 +92,7 @@
       In fast mode the cache type might be wrong in rare cases\n
       On low zoom owned/found caches may not be hidden anymore\n
     · Other:\n
-      Log images with huge size cause a long loading time\n
-      After uploading log images they are only shown in the logview after refreshing the cache\n
-      The personal note added to a cache is not synced to geocaching.com but will be overruled by personal notes on geocaching.com\n
       On devices with HD display resolution OSM maps might not work. Please use Google maps in this case.\n
-      A huge amount of pictures on the image tab of a cache might cause a crash\n
     <b>Old releases</b>\n
     · Please refer to the release notes on the <a href="http://www.cgeo.org">c:geo-website</a>.\n
     \n</string>

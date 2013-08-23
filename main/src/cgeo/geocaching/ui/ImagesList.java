@@ -11,7 +11,6 @@ import cgeo.geocaching.utils.Log;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -31,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Collection;
@@ -39,23 +39,18 @@ import java.util.List;
 
 public class ImagesList {
 
-    private static final int MENU_FILE = 201;
-    private static final int MENU_BROWSER = 202;
-
     private BitmapDrawable currentDrawable;
     private Image currentImage;
 
     public enum ImageType {
-        LogImages(R.string.cache_log_images_title, R.string.cache_log_images_loading),
-        SpoilerImages(R.string.cache_spoiler_images_title, R.string.cache_spoiler_images_loading),
-        AllImages(R.string.cache_images_title, R.string.cache_images_loading);
+        LogImages(R.string.cache_log_images_title),
+        SpoilerImages(R.string.cache_spoiler_images_title),
+        AllImages(R.string.cache_images_title);
 
         private final int titleResId;
-        private final int loadingResId;
 
-        ImageType(final int title, final int loading) {
+        ImageType(final int title) {
             this.titleResId = title;
-            this.loadingResId = loading;
         }
 
         public int getTitle() {
@@ -64,9 +59,6 @@ public class ImagesList {
     }
 
     private LayoutInflater inflater = null;
-    private ProgressDialog progressDialog = null;
-    private int count = 0;
-    private int countDone = 0;
     private final Activity activity;
     // We could use a Set here, but we will insert no duplicates, so there is no need to check for uniqueness.
     private final Collection<Bitmap> bitmaps = new LinkedList<Bitmap>();
@@ -83,17 +75,9 @@ public class ImagesList {
         inflater = activity.getLayoutInflater();
     }
 
-    public void loadImages(final View parentView, final List<Image> images, ImageType imageType, final boolean offline) {
+    public void loadImages(final View parentView, final List<Image> images, final boolean offline) {
 
         imagesView = (LinearLayout) parentView.findViewById(R.id.spoiler_list);
-
-        count = images.size();
-        progressDialog = new ProgressDialog(activity);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setMessage(activity.getString(imageType.loadingResId));
-        progressDialog.setCancelable(true);
-        progressDialog.setMax(count);
-        progressDialog.show();
 
         for (final Image img : images) {
             LinearLayout rowView = (LinearLayout) inflater.inflate(R.layout.cache_image_item, null);
@@ -154,18 +138,11 @@ public class ImagesList {
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 imageView.setLayoutParams(new LayoutParams(bounds.width(), bounds.height()));
 
+                view.findViewById(R.id.progress_bar).setVisibility(View.GONE);
                 view.addView(imageView);
 
                 imageView.setId(image.hashCode());
                 images.put(imageView.getId(), img);
-            }
-
-            synchronized (activity) {
-                countDone++;
-                progressDialog.setProgress(countDone);
-                if (progressDialog.getProgress() >= count) {
-                    progressDialog.dismiss();
-                }
             }
         }
     }
@@ -179,10 +156,9 @@ public class ImagesList {
     }
 
     public void onCreateContextMenu(ContextMenu menu, View v) {
+        activity.getMenuInflater().inflate(R.menu.images_list_context, menu);
         final Resources res = activity.getResources();
         menu.setHeaderTitle(res.getString(R.string.cache_image));
-        menu.add(0, MENU_FILE, 0, res.getString(R.string.cache_image_open_file));
-        menu.add(0, MENU_BROWSER, 0, res.getString(R.string.cache_image_open_browser));
         final ImageView view = (ImageView) v;
         currentDrawable = (BitmapDrawable) view.getDrawable();
         currentImage = images.get(view.getId());
@@ -190,10 +166,10 @@ public class ImagesList {
 
     public boolean onContextItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case MENU_FILE:
+            case R.id.image_open_file:
                 viewImageInStandardApp(currentDrawable);
                 return true;
-            case MENU_BROWSER:
+            case R.id.image_open_browser:
                 if (currentImage != null) {
                     currentImage.openInBrowser(activity);
                 }
@@ -205,15 +181,15 @@ public class ImagesList {
 
     private void viewImageInStandardApp(final BitmapDrawable image) {
         final File file = LocalStorage.getStorageFile(null, "temp.jpg", false, true);
-        FileOutputStream fos = null;
+        BufferedOutputStream stream = null;
         try {
-            fos = new FileOutputStream(file);
-            image.getBitmap().compress(CompressFormat.JPEG, 100, fos);
+            stream = new BufferedOutputStream(new FileOutputStream(file));
+            image.getBitmap().compress(CompressFormat.JPEG, 100, stream);
         } catch (Exception e) {
-            Log.e("ImagesActivity.handleMessage.onClick", e);
+            Log.e("ImagesList.viewImageInStandardApp", e);
             return;
         } finally {
-            IOUtils.closeQuietly(fos);
+            IOUtils.closeQuietly(stream);
         }
 
         final Intent intent = new Intent();

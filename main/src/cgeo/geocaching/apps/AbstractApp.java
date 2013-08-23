@@ -1,9 +1,10 @@
 package cgeo.geocaching.apps;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.cgeo;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.utils.ProcessUtils;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.content.Intent;
 
@@ -26,10 +27,10 @@ public abstract class AbstractApp implements App {
 
     @Override
     public boolean isInstalled() {
-        if (ProcessUtils.isInstalled(packageName)) {
+        if (StringUtils.isNotEmpty(packageName) && ProcessUtils.isLaunchable(packageName)) {
             return true;
         }
-        return cgeo.isIntentAvailable(intent);
+        return ProcessUtils.isIntentAvailable(intent);
     }
 
     protected Intent getLaunchIntent() {

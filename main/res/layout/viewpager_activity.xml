@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/cgeo.geocaching"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="?background_color"
+    android:orientation="vertical" >
+
+    <include layout="@layout/actionbar" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.viewpagerindicator.TitlePageIndicator
+        android:id="@+id/pager_indicator"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/actionbar_background"
+        app:footerColor="#ff888888"
+        app:footerIndicatorHeight="3dp"
+        app:footerIndicatorStyle="underline"
+        app:textSize="16sp" />
+
+</LinearLayout>

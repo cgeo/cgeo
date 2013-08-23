@@ -1,7 +1,6 @@
 package cgeo.geocaching.maps.mapsforge;
 
 import cgeo.geocaching.IWaypoint;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -15,8 +14,8 @@ public class MapsforgeMapItemFactory implements MapItemFactory {
     }
 
     @Override
-    public CachesOverlayItemImpl getCachesOverlayItem(final IWaypoint coordinate, final CacheType type) {
-        return new MapsforgeCacheOverlayItem(coordinate, type);
+    public CachesOverlayItemImpl getCachesOverlayItem(final IWaypoint coordinate, boolean applyDistanceRule) {
+        return new MapsforgeCacheOverlayItem(coordinate, applyDistanceRule);
     }
 
 }

@@ -4,41 +4,46 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.utils.Log;
 
+import com.googlecode.androidannotations.annotations.EActivity;
+import com.googlecode.androidannotations.annotations.Extra;
+import com.googlecode.androidannotations.annotations.OptionsItem;
+import com.googlecode.androidannotations.annotations.OptionsMenu;
+
 import org.apache.commons.collections.CollectionUtils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@EActivity
+@OptionsMenu(R.menu.static_maps_activity_options)
 public class StaticMapsActivity extends AbstractActivity {
 
     private static final String EXTRAS_WAYPOINT = "waypoint";
     private static final String EXTRAS_DOWNLOAD = "download";
     private static final String EXTRAS_GEOCODE = "geocode";
-    private static final int MENU_REFRESH = 1;
+
+    @Extra(EXTRAS_DOWNLOAD) boolean download = false;
+    @Extra(EXTRAS_WAYPOINT) Integer waypointId = null;
+    @Extra(EXTRAS_GEOCODE) String geocode = null;
+
     private final List<Bitmap> maps = new ArrayList<Bitmap>();
-    private boolean download = false;
-    private Integer waypoint_id = null;
-    private String geocode = null;
     private LayoutInflater inflater = null;
     private ProgressDialog waitDialog = null;
     private LinearLayout smapsView = null;
     private final Handler loadMapsHandler = new Handler() {
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(final Message msg) {
             if (waitDialog != null) {
                 waitDialog.dismiss();
             }
@@ -79,7 +84,7 @@ public class StaticMapsActivity extends AbstractActivity {
 
         for (final Bitmap image : maps) {
             if (image != null) {
-                final ImageView map = (ImageView) inflater.inflate(R.layout.map_static_item, null);
+                final ImageView map = (ImageView) inflater.inflate(R.layout.staticmaps_activity_item, null);
                 map.setImageBitmap(image);
                 smapsView.addView(map);
             }
@@ -87,24 +92,8 @@ public class StaticMapsActivity extends AbstractActivity {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setTheme();
-        setContentView(R.layout.map_static);
-        setTitle(res.getString(R.string.map_static_title));
-
-        // get parameters
-        final Bundle extras = getIntent().getExtras();
-
-        // try to get data from extras
-        if (extras != null) {
-            download = extras.getBoolean(EXTRAS_DOWNLOAD, false);
-            geocode = extras.getString(EXTRAS_GEOCODE);
-            if (extras.containsKey(EXTRAS_WAYPOINT)) {
-                waypoint_id = extras.getInt(EXTRAS_WAYPOINT);
-            }
-        }
+    public void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState, R.layout.staticmaps_activity);
 
         if (geocode == null) {
             showToast("Sorry, c:geo forgot for what cache you want to load static maps.");
@@ -118,12 +107,6 @@ public class StaticMapsActivity extends AbstractActivity {
         (new LoadMapsThread()).start();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-    }
-
     private class LoadMapsThread extends Thread {
 
         @Override
@@ -131,11 +114,11 @@ public class StaticMapsActivity extends AbstractActivity {
             try {
                 // try downloading 2 times
                 for (int trials = 0; trials < 2; trials++) {
-                    for (int level = 1; level <= 5; level++) {
+                    for (int level = 1; level <= StaticMapsProvider.MAPS_LEVEL_MAX; level++) {
                         try {
-                            if (waypoint_id != null) {
+                            if (waypointId != null) {
                                 final Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-                                final Bitmap image = StaticMapsProvider.getWaypointMap(geocode, cache.getWaypointById(waypoint_id), level);
+                                final Bitmap image = StaticMapsProvider.getWaypointMap(geocode, cache.getWaypointById(waypointId), level);
                                 if (image != null) {
                                     maps.add(image);
                                 }
@@ -161,30 +144,20 @@ public class StaticMapsActivity extends AbstractActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, MENU_REFRESH, 0, res.getString(R.string.cache_offline_refresh));
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == MENU_REFRESH) {
-            downloadStaticMaps();
-            restartActivity();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    @OptionsItem(R.id.menu_refresh)
+    void refreshMaps() {
+        downloadStaticMaps();
+        restartActivity();
     }
 
     private boolean downloadStaticMaps() {
         final Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-        if (waypoint_id == null) {
+        if (waypointId == null) {
             showToast(res.getString(R.string.info_storing_static_maps));
             StaticMapsProvider.storeCacheStaticMap(cache, true);
             return cache.hasStaticMap();
         }
-        final Waypoint waypoint = cache.getWaypointById(waypoint_id);
+        final Waypoint waypoint = cache.getWaypointById(waypointId);
         if (waypoint != null) {
             showToast(res.getString(R.string.info_storing_static_maps));
             // refresh always removes old waypoint files
@@ -197,16 +170,10 @@ public class StaticMapsActivity extends AbstractActivity {
     }
 
     public static void startActivity(final Context activity, final String geocode, final boolean download, final Waypoint waypoint) {
-        final Intent intent = new Intent(activity, StaticMapsActivity.class);
-        // if resuming our app within this activity, finish it and return to the cache activity
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-        intent.putExtra(EXTRAS_GEOCODE, geocode);
-        if (download) {
-            intent.putExtra(EXTRAS_DOWNLOAD, true);
-        }
+        StaticMapsActivity_.IntentBuilder_ builder = StaticMapsActivity_.intent(activity).geocode(geocode).download(download);
         if (waypoint != null) {
-            intent.putExtra(EXTRAS_WAYPOINT, waypoint.getId());
+            builder.waypointId(waypoint.getId());
         }
-        activity.startActivity(intent);
+        builder.start();
     }
 }

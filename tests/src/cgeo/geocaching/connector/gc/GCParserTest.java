@@ -3,11 +3,14 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Image;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.Trackable;
 import cgeo.geocaching.Waypoint;
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.test.RegExPerformanceTest;
@@ -22,6 +25,7 @@ import android.os.Handler;
 import android.test.suitebuilder.annotation.MediumTest;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GCParserTest extends AbstractResourceInstrumentationTestCase {
 
@@ -64,9 +68,9 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         final Geocache cache = parseCache(R.raw.own_cache);
         assertNotNull(cache);
         assertTrue(CollectionUtils.isNotEmpty(cache.getSpoilers()));
-        assertEquals(1, cache.getSpoilers().size());
-        final Image spoiler = cache.getSpoilers().get(0);
-        assertEquals("http://img.geocaching.com/cache/large/3f9365c3-f55c-4e55-9992-ee0e5175712c.jpg", spoiler.getUrl());
+        assertEquals(2, cache.getSpoilers().size());
+        final Image spoiler = cache.getSpoilers().get(1);
+        assertEquals("http://img.geocaching.com/cache/large/6ddbbe82-8762-46ad-8f4c-57d03f4b0564.jpeg", spoiler.getUrl());
         assertEquals("SPOILER", spoiler.getTitle());
         assertNull(spoiler.getDescription());
     }
@@ -93,7 +97,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     /**
-     * Test {@link cgBase#parseCacheFromText(String, int, CancellableHandler)} with "mocked" data
+     * Test {@link GCParser#parseCacheFromText(String, int, CancellableHandler)} with "mocked" data
      *
      */
     @MediumTest
@@ -187,6 +191,22 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(13, cache.getWaypoints().size());
     }
 
+    public static void testNoteParsingWaypointTypes() {
+        final Geocache cache = new Geocache();
+        cache.setWaypoints(new ArrayList<Waypoint>(), false);
+        cache.setPersonalNote("\"Parking area at PARKING=N 50° 40.666E 006° 58.222\n" +
+                "My calculated final coordinates: FINAL=N 50° 40.777E 006° 58.111\n" +
+                "Get some ice cream at N 50° 40.555E 006° 58.000\"");
+
+        cache.parseWaypointsFromNote();
+        final List<Waypoint> waypoints = cache.getWaypoints();
+
+        assertEquals(3, waypoints.size());
+        assertEquals(WaypointType.PARKING, waypoints.get(0).getWaypointType());
+        assertEquals(WaypointType.FINAL, waypoints.get(1).getWaypointType());
+        assertEquals(WaypointType.WAYPOINT, waypoints.get(2).getWaypointType());
+    }
+
     private Geocache parseCache(int resourceId) {
         final String page = getFileContent(resourceId);
         final SearchResult result = GCParser.parseCacheFromText(page, null);
@@ -195,4 +215,12 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         return result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
     }
 
+    public void testTrackableNotActivated() {
+        final String page = getFileContent(R.raw.tb123e_html);
+        final Trackable trackable = GCParser.parseTrackable(page, "TB123E");
+        assertNotNull(trackable);
+        assertEquals("TB123E", trackable.getGeocode());
+        final String expectedDetails = cgeoapplication.getInstance().getString(cgeo.geocaching.R.string.trackable_not_activated);
+        assertEquals(expectedDetails, trackable.getDetails());
+    }
 }

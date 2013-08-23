@@ -2,8 +2,8 @@ package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
+import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractConnector;
-import cgeo.geocaching.enumerations.CacheRealm;
 
 import java.util.regex.Pattern;
 
@@ -12,7 +12,7 @@ public class OCConnector extends AbstractConnector {
     private final String host;
     private final String name;
     private final Pattern codePattern;
-    private static final Pattern gpxZipFilePattern = Pattern.compile("oc[a-z]{2,3}\\d{5,}\\.zip", Pattern.CASE_INSENSITIVE);
+    private static final Pattern GPX_ZIP_FILE_PATTERN = Pattern.compile("oc[a-z]{2,3}\\d{5,}\\.zip", Pattern.CASE_INSENSITIVE);
 
     public OCConnector(final String name, final String host, final String prefix) {
         this.name = name;
@@ -45,7 +45,7 @@ public class OCConnector extends AbstractConnector {
 
     @Override
     public boolean isZippedGPXFile(String fileName) {
-        return gpxZipFilePattern.matcher(fileName).matches();
+        return GPX_ZIP_FILE_PATTERN.matcher(fileName).matches();
     }
 
     @Override
@@ -59,8 +59,11 @@ public class OCConnector extends AbstractConnector {
     }
 
     @Override
-    public CacheRealm getCacheRealm() {
-        return CacheRealm.OC;
+    public int getCacheMapMarkerId(boolean disabled) {
+        if (disabled) {
+            return R.drawable.marker_disabled_oc;
+        }
+        return R.drawable.marker_oc;
     }
 
 }

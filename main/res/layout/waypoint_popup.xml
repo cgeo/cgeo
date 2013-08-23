@@ -7,25 +7,9 @@
 
     <LinearLayout style="@style/action_bar" >
 
-        <TextView style="@style/action_bar_title" />
+        <include layout="@layout/actionbar_title_no_home" />
 
-        <View style="@style/action_bar_separator" />
-
-        <ImageView
-            android:id="@+id/defaultNavigation"
-            style="@style/action_bar_action"
-            android:longClickable="true"
-            android:onClick="goDefaultNavigation"
-            android:src="@drawable/actionbar_compass_dark" />
-
-        <View
-            android:id="@+id/separator"
-            style="@style/action_bar_separator" />
-
-        <ImageView
-            style="@style/action_bar_action"
-            android:onClick="goManual"
-            android:src="@drawable/actionbar_manual" />
+        <include layout="@layout/actionbar_button_compass" />
     </LinearLayout>
 
     <ScrollView

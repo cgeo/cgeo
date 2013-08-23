@@ -2,14 +2,17 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.TestSettings;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.net.Uri;
 import android.os.Message;
@@ -257,16 +260,20 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
     protected void setUp() throws Exception {
         super.setUp();
 
-        tempDir = new File(System.getProperty("java.io.tmpdir"), "cgeogpxesTest");
+        final String globalTempDir = System.getProperty("java.io.tmpdir");
+        assertTrue("java.io.tmpdir is not defined", StringUtils.isNotBlank(globalTempDir));
+
+        tempDir = new File(globalTempDir, "cgeogpxesTest");
         tempDir.mkdir();
+        assertTrue("Could not create directory " + tempDir.getPath(), tempDir.exists());
         // workaround to get storage initialized
         cgData.getAllHistoryCachesCount();
         listId = cgData.createList("cgeogpxesTest");
 
         importCacheStaticMaps = Settings.isStoreOfflineMaps();
-        Settings.setStoreOfflineMaps(true);
+        TestSettings.setStoreOfflineMaps(true);
         importWpStaticMaps = Settings.isStoreOfflineWpMaps();
-        Settings.setStoreOfflineWpMaps(true);
+        TestSettings.setStoreOfflineWpMaps(true);
     }
 
     @Override
@@ -277,8 +284,8 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         cgData.markDropped(cachesInList);
         cgData.removeList(listId);
         deleteDirectory(tempDir);
-        Settings.setStoreOfflineMaps(importCacheStaticMaps);
-        Settings.setStoreOfflineWpMaps(importWpStaticMaps);
+        TestSettings.setStoreOfflineMaps(importCacheStaticMaps);
+        TestSettings.setStoreOfflineWpMaps(importWpStaticMaps);
         super.tearDown();
     }
 

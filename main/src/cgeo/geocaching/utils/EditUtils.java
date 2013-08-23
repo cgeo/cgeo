@@ -8,6 +8,10 @@ import android.widget.TextView;
 
 public final class EditUtils {
 
+    private EditUtils() {
+        // utility class
+    }
+
     public static void setActionListener(final EditText editText, final Runnable runnable) {
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 

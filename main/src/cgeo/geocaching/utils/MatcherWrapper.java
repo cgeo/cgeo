@@ -22,6 +22,10 @@ public class MatcherWrapper {
         return matcher.find();
     }
 
+    public boolean find(int start) {
+        return matcher.find(start);
+    }
+
     /**
      * see {@link Matcher#group(int)}
      */

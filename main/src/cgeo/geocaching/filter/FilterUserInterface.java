@@ -1,9 +1,9 @@
 package cgeo.geocaching.filter;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RunnableWithArgument;
 
@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public final class FilterUserInterface {
 
@@ -54,12 +55,13 @@ public final class FilterUserInterface {
         register(R.string.caches_filter_track, TrackablesFilter.class);
         register(R.string.caches_filter_modified, ModifiedFilter.class);
         register(R.string.caches_filter_origin, OriginFilter.Factory.class);
+        register(R.string.caches_filter_distance, DistanceFilter.Factory.class);
 
         // sort by localized names
         Collections.sort(registry, new Comparator<FactoryEntry>() {
 
             @Override
-            public int compare(FactoryEntry lhs, FactoryEntry rhs) {
+            public int compare(final FactoryEntry lhs, final FactoryEntry rhs) {
                 return lhs.name.compareToIgnoreCase(rhs.name);
             }
         });
@@ -68,7 +70,7 @@ public final class FilterUserInterface {
         register(R.string.caches_filter_clear, null);
     }
 
-    private void register(int resourceId, Class<? extends IFilterFactory> factoryClass) {
+    private void register(final int resourceId, final Class<? extends IFilterFactory> factoryClass) {
         registry.add(new FactoryEntry(res.getString(resourceId), factoryClass));
     }
 
@@ -80,7 +82,7 @@ public final class FilterUserInterface {
 
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int itemIndex) {
+            public void onClick(final DialogInterface dialog, final int itemIndex) {
                 FactoryEntry entry = adapter.getItem(itemIndex);
                 // reset?
                 if (entry.filterFactory == null) {
@@ -101,9 +103,9 @@ public final class FilterUserInterface {
     }
 
     private void selectFromFactory(final IFilterFactory factory, final String menuTitle, final RunnableWithArgument<IFilter> runAfterwards) {
-        final IFilter[] filters = factory.getFilters();
-        if (filters.length == 1) {
-            runAfterwards.run(filters[0]);
+        final List<IFilter> filters = Collections.unmodifiableList(factory.getFilters());
+        if (filters.size() == 1) {
+            runAfterwards.run(filters.get(0));
             return;
         }
 
@@ -113,8 +115,8 @@ public final class FilterUserInterface {
         final ArrayAdapter<IFilter> adapter = new ArrayAdapter<IFilter>(activity, android.R.layout.select_dialog_item, filters);
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int item) {
-                runAfterwards.run(filters[item]);
+            public void onClick(final DialogInterface dialog, final int item) {
+                runAfterwards.run(filters.get(item));
             }
         });
 

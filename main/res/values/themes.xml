@@ -2,16 +2,18 @@
 <resources>
 
     <style name="cgeo_main" parent="android:style/Theme.Wallpaper.NoTitleBar">
+
         <!-- system elements -->
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <style name="cgeo" parent="android:style/Theme.NoTitleBar">
+
         <!-- system elements -->
         <item name="android:buttonStyle">@style/button</item>
         <item name="android:editTextStyle">@style/edittext</item>
         <item name="android:windowContentOverlay">@null</item>
-        
+
         <!-- own values: colors -->
         <item name="just_color">@color/just_black</item>
         <item name="text_color_link">@color/link</item>
@@ -20,7 +22,6 @@
     </style>
 
     <style name="dark" parent="cgeo">
-        <!-- system values -->
 
         <!-- own values: colors -->
         <item name="text_color">@color/text_dark</item>
@@ -36,10 +37,10 @@
         <item name="button">@drawable/action_button_dark</item>
         <item name="input">@drawable/input_bcg_dark</item>
         <item name="inventory">@drawable/inventory_background_dark</item>
-        <item name="favourite">@drawable/favourite_background_dark</item>
-        <item name="favourite_r">@drawable/favourite_background_red_dark</item>
-        <item name="favourite_o">@drawable/favourite_background_orange_dark</item>
-        <item name="favourite_g">@drawable/favourite_background_green_dark</item>
+        <item name="favorite">@drawable/favorite_background_dark</item>
+        <item name="favorite_r">@drawable/favorite_background_red_dark</item>
+        <item name="favorite_o">@drawable/favorite_background_orange_dark</item>
+        <item name="favorite_g">@drawable/favorite_background_green_dark</item>
         <item name="close">@drawable/map_close_dark</item>
         <item name="log_img_icon">@drawable/log_img_dark</item>
         <item name="actionbar_compass">@drawable/actionbar_compass_dark</item>
@@ -50,7 +51,6 @@
     </style>
 
     <style name="light" parent="cgeo">
-        <!-- system values -->
 
         <!-- own values: colors -->
         <item name="android:windowBackground">@color/just_white</item>
@@ -67,10 +67,10 @@
         <item name="button">@drawable/action_button_light</item>
         <item name="input">@drawable/input_bcg_light</item>
         <item name="inventory">@drawable/inventory_background_light</item>
-        <item name="favourite">@drawable/favourite_background_light</item>
-        <item name="favourite_r">@drawable/favourite_background_red_light</item>
-        <item name="favourite_o">@drawable/favourite_background_orange_light</item>
-        <item name="favourite_g">@drawable/favourite_background_green_light</item>
+        <item name="favorite">@drawable/favorite_background_light</item>
+        <item name="favorite_r">@drawable/favorite_background_red_light</item>
+        <item name="favorite_o">@drawable/favorite_background_orange_light</item>
+        <item name="favorite_g">@drawable/favorite_background_green_light</item>
         <item name="close">@drawable/map_close_light</item>
         <item name="log_img_icon">@drawable/log_img_light</item>
         <item name="actionbar_compass">@drawable/actionbar_compass_light</item>
@@ -81,6 +81,7 @@
     </style>
 
     <style name="cgeo_popup" parent="android:style/Theme.Dialog">
+
         <!-- system elements -->
         <item name="android:buttonStyle">@style/button</item>
         <item name="android:editTextStyle">@style/edittext</item>
@@ -89,7 +90,6 @@
 
     <!-- TODO: Popup probably doesn't need all these fields set. Should delete unnecessary ones. -->
     <style name="popup_dark" parent="cgeo_popup">
-        <!-- system values -->
 
         <!-- own values: colors -->
         <item name="just_color">@color/just_black</item>
@@ -109,10 +109,10 @@
         <item name="button">@drawable/action_button_dark</item>
         <item name="input">@drawable/input_bcg_dark</item>
         <item name="inventory">@drawable/inventory_background_dark</item>
-        <item name="favourite">@drawable/favourite_background_dark</item>
-        <item name="favourite_r">@drawable/favourite_background_red_dark</item>
-        <item name="favourite_o">@drawable/favourite_background_orange_dark</item>
-        <item name="favourite_g">@drawable/favourite_background_green_dark</item>
+        <item name="favorite">@drawable/favorite_background_dark</item>
+        <item name="favorite_r">@drawable/favorite_background_red_dark</item>
+        <item name="favorite_o">@drawable/favorite_background_orange_dark</item>
+        <item name="favorite_g">@drawable/favorite_background_green_dark</item>
         <item name="close">@drawable/map_close_dark</item>
         <item name="log_img_icon">@drawable/log_img_dark</item>
         <item name="actionbar_compass">@drawable/actionbar_compass_dark</item>
@@ -124,7 +124,6 @@
 
     <!-- TODO: Popup probably doesn't need all these fields set. Should delete unnecessary ones. -->
     <style name="popup_light" parent="cgeo_popup">
-        <!-- system values -->
 
         <!-- own values: colors -->
         <item name="android:windowBackground">@color/just_white</item>
@@ -141,10 +140,10 @@
         <item name="button">@drawable/action_button_light</item>
         <item name="input">@drawable/input_bcg_light</item>
         <item name="inventory">@drawable/inventory_background_light</item>
-        <item name="favourite">@drawable/favourite_background_light</item>
-        <item name="favourite_r">@drawable/favourite_background_red_light</item>
-        <item name="favourite_o">@drawable/favourite_background_orange_light</item>
-        <item name="favourite_g">@drawable/favourite_background_green_light</item>
+        <item name="favorite">@drawable/favorite_background_light</item>
+        <item name="favorite_r">@drawable/favorite_background_red_light</item>
+        <item name="favorite_o">@drawable/favorite_background_orange_light</item>
+        <item name="favorite_g">@drawable/favorite_background_green_light</item>
         <item name="close">@drawable/map_close_light</item>
         <item name="log_img_icon">@drawable/log_img_light</item>
         <item name="actionbar_compass">@drawable/actionbar_compass_light</item>
@@ -153,5 +152,29 @@
         <!-- own values: other -->
         <item name="compass">1</item>
     </style>
+    
+    <style name="settings" parent="android:Theme">
+        <item name="settings_cloud">@drawable/settings_cloud_white</item>
+        <item name="settings_details">@drawable/settings_details_white</item>
+        <item name="settings_eye">@drawable/settings_eye_white</item>
+        <item name="settings_map">@drawable/settings_map_white</item>
+        <item name="settings_arrow">@drawable/settings_arrow_white</item>
+        <item name="settings_nut">@drawable/settings_nut_white</item>
+        <item name="settings_pen">@drawable/settings_pen_white</item>
+        <item name="settings_sdcard">@drawable/settings_sdcard_white</item>
+        <item name="settings_info_icon">@drawable/settings_info_icon_white</item>
+    </style>
 
+    <style name="settings.light" parent="android:Theme.Light">
+        <item name="settings_cloud">@drawable/settings_cloud_black</item>
+        <item name="settings_details">@drawable/settings_details_black</item>
+        <item name="settings_eye">@drawable/settings_eye_black</item>
+        <item name="settings_map">@drawable/settings_map_black</item>
+        <item name="settings_arrow">@drawable/settings_arrow_black</item>
+        <item name="settings_nut">@drawable/settings_nut_black</item>
+        <item name="settings_pen">@drawable/settings_pen_black</item>
+        <item name="settings_sdcard">@drawable/settings_sdcard_black</item>
+        <item name="settings_info_icon">@drawable/settings_info_icon_black</item>
+    </style>
+    
 </resources>

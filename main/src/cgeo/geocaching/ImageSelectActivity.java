@@ -1,7 +1,13 @@
 package cgeo.geocaching;
 
+import butterknife.InjectView;
+import butterknife.Views;
+
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -10,14 +16,18 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.MediaStore.MediaColumns;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -25,37 +35,41 @@ import java.util.Date;
 import java.util.Locale;
 
 public class ImageSelectActivity extends AbstractActivity {
+
+    @InjectView(R.id.caption) protected EditText captionView;
+    @InjectView(R.id.description) protected EditText descriptionView;
+    @InjectView(R.id.logImageScale) protected Spinner scaleView;
+    @InjectView(R.id.camera) protected Button cameraButton;
+    @InjectView(R.id.stored) protected Button storedButton;
+    @InjectView(R.id.save) protected Button saveButton;
+    @InjectView(R.id.cancel) protected Button clearButton;
+    @InjectView(R.id.image_preview) protected ImageView imagePreview;
+
     static final String EXTRAS_CAPTION = "caption";
     static final String EXTRAS_DESCRIPTION = "description";
     static final String EXTRAS_URI_AS_STRING = "uri";
+    static final String EXTRAS_SCALE = "scale";
 
     private static final String SAVED_STATE_IMAGE_CAPTION = "cgeo.geocaching.saved_state_image_caption";
     private static final String SAVED_STATE_IMAGE_DESCRIPTION = "cgeo.geocaching.saved_state_image_description";
     private static final String SAVED_STATE_IMAGE_URI = "cgeo.geocaching.saved_state_image_uri";
+    private static final String SAVED_STATE_IMAGE_SCALE = "cgeo.geocaching.saved_state_image_scale";
 
     private static final int SELECT_NEW_IMAGE = 1;
     private static final int SELECT_STORED_IMAGE = 2;
 
-    private EditText captionView;
-    private EditText descriptionView;
-
     // Data to be saved while reconfiguring
     private String imageCaption;
     private String imageDescription;
+    private int scaleChoiceIndex;
     private Uri imageUri;
-
-    public ImageSelectActivity() {
-        super("c:geo-selectimage");
-    }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState, R.layout.imageselect_activity);
+        Views.inject(this);
 
-        setTheme();
-        setContentView(R.layout.visit_image);
-        setTitle(res.getString(R.string.log_image));
-
+        scaleChoiceIndex = Settings.getLogImageScale();
         imageCaption = "";
         imageDescription = "";
         imageUri = Uri.EMPTY;
@@ -66,6 +80,7 @@ public class ImageSelectActivity extends AbstractActivity {
             imageCaption = extras.getString(EXTRAS_CAPTION);
             imageDescription = extras.getString(EXTRAS_DESCRIPTION);
             imageUri = Uri.parse(extras.getString(EXTRAS_URI_AS_STRING));
+            scaleChoiceIndex = extras.getInt(EXTRAS_SCALE, scaleChoiceIndex);
         }
 
         // Restore previous state
@@ -73,9 +88,9 @@ public class ImageSelectActivity extends AbstractActivity {
             imageCaption = savedInstanceState.getString(SAVED_STATE_IMAGE_CAPTION);
             imageDescription = savedInstanceState.getString(SAVED_STATE_IMAGE_DESCRIPTION);
             imageUri = Uri.parse(savedInstanceState.getString(SAVED_STATE_IMAGE_URI));
+            scaleChoiceIndex = savedInstanceState.getInt(SAVED_STATE_IMAGE_SCALE);
         }
 
-        final Button cameraButton = (Button) findViewById(R.id.camera);
         cameraButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -84,7 +99,6 @@ public class ImageSelectActivity extends AbstractActivity {
             }
         });
 
-        final Button storedButton = (Button) findViewById(R.id.stored);
         storedButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -93,17 +107,27 @@ public class ImageSelectActivity extends AbstractActivity {
             }
         });
 
-        captionView = (EditText) findViewById(R.id.caption);
         if (StringUtils.isNotBlank(imageCaption)) {
             captionView.setText(imageCaption);
         }
 
-        descriptionView = (EditText) findViewById(R.id.description);
         if (StringUtils.isNotBlank(imageDescription)) {
             descriptionView.setText(imageDescription);
         }
 
-        final Button saveButton = (Button) findViewById(R.id.save);
+        scaleView.setSelection(scaleChoiceIndex);
+        scaleView.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                scaleChoiceIndex = scaleView.getSelectedItemPosition();
+                Settings.setLogImageScale(scaleChoiceIndex);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
         saveButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -112,7 +136,6 @@ public class ImageSelectActivity extends AbstractActivity {
             }
         });
 
-        final Button clearButton = (Button) findViewById(R.id.cancel);
         clearButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -131,15 +154,19 @@ public class ImageSelectActivity extends AbstractActivity {
         outState.putString(SAVED_STATE_IMAGE_CAPTION, imageCaption);
         outState.putString(SAVED_STATE_IMAGE_DESCRIPTION, imageDescription);
         outState.putString(SAVED_STATE_IMAGE_URI, imageUri != null ? imageUri.getPath() : StringUtils.EMPTY);
+        outState.putInt(SAVED_STATE_IMAGE_SCALE, scaleChoiceIndex);
     }
 
     public void saveImageInfo(boolean saveInfo) {
         if (saveInfo) {
+            String filename = writeScaledImage(imageUri.getPath());
+            imageUri = Uri.parse(filename);
             Intent intent = new Intent();
             syncEditTexts();
             intent.putExtra(EXTRAS_CAPTION, imageCaption);
             intent.putExtra(EXTRAS_DESCRIPTION, imageDescription);
             intent.putExtra(EXTRAS_URI_AS_STRING, imageUri.toString());
+            intent.putExtra(EXTRAS_SCALE, scaleChoiceIndex);
 
             setResult(RESULT_OK, intent);
         } else {
@@ -152,6 +179,7 @@ public class ImageSelectActivity extends AbstractActivity {
     private void syncEditTexts() {
         imageCaption = captionView.getText().toString();
         imageDescription = descriptionView.getText().toString();
+        scaleChoiceIndex = scaleView.getSelectedItemPosition();
     }
 
     private void selectImageFromCamera() {
@@ -231,8 +259,39 @@ public class ImageSelectActivity extends AbstractActivity {
         loadImagePreview();
     }
 
+    /**
+     * Scales and writes the scaled image.
+     *
+     * @param filePath
+     * @return
+     */
+    private String writeScaledImage(final String filePath) {
+        scaleChoiceIndex = scaleView.getSelectedItemPosition();
+        final int maxXY = getResources().getIntArray(R.array.log_image_scale_values)[scaleChoiceIndex];
+        if (maxXY == 0) {
+            return filePath;
+        }
+        BitmapFactory.Options sizeOnlyOptions = new BitmapFactory.Options();
+        sizeOnlyOptions.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(filePath, sizeOnlyOptions);
+        final int myMaxXY = Math.max(sizeOnlyOptions.outHeight, sizeOnlyOptions.outWidth);
+        final int sampleSize = myMaxXY / maxXY;
+        Bitmap image;
+        if (sampleSize > 1) {
+            BitmapFactory.Options sampleOptions = new BitmapFactory.Options();
+            sampleOptions.inSampleSize = sampleSize;
+            image = BitmapFactory.decodeFile(filePath, sampleOptions);
+        } else {
+            image = BitmapFactory.decodeFile(filePath);
+        }
+        final BitmapDrawable scaledImage = ImageUtils.scaleBitmapTo(image, maxXY, maxXY);
+        final String uploadFilename = getOutputImageFile().getPath();
+        ImageUtils.storeBitmap(scaledImage.getBitmap(), Bitmap.CompressFormat.JPEG, 75, uploadFilename);
+        return uploadFilename;
+    }
+
     private void showFailure() {
-        showToast(getResources().getString(R.string.err_aquire_image_failed));
+        showToast(getResources().getString(R.string.err_acquire_image_failed));
     }
 
     private void loadImagePreview() {
@@ -244,7 +303,6 @@ public class ImageSelectActivity extends AbstractActivity {
             return;
         }
 
-        final ImageView imagePreview = (ImageView) findViewById(R.id.image_preview);
         BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
         bitmapOptions.inSampleSize = 8;
         final Bitmap bitmap = BitmapFactory.decodeFile(imageUri.getPath(), bitmapOptions);
@@ -271,8 +329,7 @@ public class ImageSelectActivity extends AbstractActivity {
 
         // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-                Log.w("Failed to create directory");
+            if (!FileUtils.mkdirs(mediaStorageDir)) {
                 return null;
             }
         }

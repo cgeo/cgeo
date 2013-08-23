@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 public class GC3XX5J extends MockedCache {
 
     public GC3XX5J() {
@@ -110,7 +109,6 @@ public class GC3XX5J extends MockedCache {
         };
         return new MockedLazyInitializedList<String>(attributes);
     }
-
 
     @Override
     public Map<LogType, Integer> getLogCounts() {

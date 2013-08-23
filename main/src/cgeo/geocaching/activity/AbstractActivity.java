@@ -1,35 +1,32 @@
 package cgeo.geocaching.activity;
 
-import cgeo.geocaching.Settings;
+import butterknife.Views;
+
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.network.Cookies;
+import cgeo.geocaching.settings.Settings;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 public abstract class AbstractActivity extends FragmentActivity implements IAbstractActivity {
-
-    final private String helpTopic;
 
     protected cgeoapplication app = null;
     protected Resources res = null;
     private boolean keepScreenOn = false;
 
     protected AbstractActivity() {
-        this(null);
+        this(false);
     }
 
-    protected AbstractActivity(final String helpTopic) {
-        this.helpTopic = helpTopic;
-    }
-
-    protected AbstractActivity(final String helpTopic, final boolean keepScreenOn) {
-        this(helpTopic);
+    protected AbstractActivity(final boolean keepScreenOn) {
         this.keepScreenOn = keepScreenOn;
     }
 
@@ -38,20 +35,15 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
         ActivityMixin.goHome(this);
     }
 
-    @Override
-    public void goManual(final View view) {
-        ActivityMixin.goManual(this, helpTopic);
-    }
-
-    final public void setTitle(final String title) {
+    final protected void setTitle(final String title) {
         ActivityMixin.setTitle(this, title);
     }
 
-    final public void showProgress(final boolean show) {
+    final protected void showProgress(final boolean show) {
         ActivityMixin.showProgress(this, show);
     }
 
-    final public void setTheme() {
+    final protected void setTheme() {
         ActivityMixin.setTheme(this);
     }
 
@@ -70,22 +62,14 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
         ActivityMixin.helpDialog(this, title, message);
     }
 
-    public final void helpDialog(final String title, final String message, final Drawable icon) {
+    protected final void helpDialog(final String title, final String message, final Drawable icon) {
         ActivityMixin.helpDialog(this, title, message, icon);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // init
-        res = this.getResources();
-        app = (cgeoapplication) this.getApplication();
-
-        // Restore cookie store if needed
-        Cookies.restoreCookieStore(Settings.getCookieStore());
-
-        ActivityMixin.keepScreenOn(this, keepScreenOn);
+        initializeCommonFields();
     }
 
     protected static void disableSuggestions(final EditText edit) {
@@ -101,31 +85,38 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
         ActivityMixin.invalidateOptionsMenu(this);
     }
 
-    /**
-     * insert text into the EditText at the current cursor position
-     *
-     * @param editText
-     * @param insertText
-     * @param moveCursor
-     *            place the cursor after the inserted text
-     */
-    public static void insertAtPosition(final EditText editText, final String insertText, final boolean moveCursor) {
-        int selectionStart = editText.getSelectionStart();
-        int selectionEnd = editText.getSelectionEnd();
-        int start = Math.min(selectionStart, selectionEnd);
-        int end = Math.max(selectionStart, selectionEnd);
+    protected void onCreate(final Bundle savedInstanceState, final int resourceLayoutID) {
+        super.onCreate(savedInstanceState);
 
-        final String content = editText.getText().toString();
-        String completeText;
-        if (start > 0 && !Character.isWhitespace(content.charAt(start - 1))) {
-            completeText = " " + insertText;
-        } else {
-            completeText = insertText;
-        }
+        initializeCommonFields();
 
-        editText.getText().replace(start, end, completeText);
-        int newCursor = moveCursor ? start + completeText.length() : start;
-        editText.setSelection(newCursor, newCursor);
+        // non declarative part of layout
+        setTheme();
+        setContentView(resourceLayoutID);
+
+        // create view variables
+        Views.inject(this);
     }
 
+    private void initializeCommonFields() {
+        // initialize commonly used members
+        res = this.getResources();
+        app = (cgeoapplication) this.getApplication();
+
+        // only needed in some activities, but implemented in super class nonetheless
+        Cookies.restoreCookieStore(Settings.getCookieStore());
+        ActivityMixin.keepScreenOn(this, keepScreenOn);
+    }
+
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+
+        // initialize the action bar title with the activity title for single source
+        ActivityMixin.setTitle(this, getTitle());
+    }
+
+    protected void hideKeyboard() {
+        ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+    }
 }

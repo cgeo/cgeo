@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="?background_color"
+    android:orientation="vertical" >
+
+    <include layout="@layout/actionbar" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/destination"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:textColor="?text_color"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/cacheinfo"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentTop="false"
+                android:layout_below="@+id/destination"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:textColor="?text_color"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="left"
+                android:layout_marginLeft="3dip"
+                android:text="@null"
+                android:textColor="?text_color"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="right"
+                android:layout_marginRight="3dip"
+                android:text="@null"
+                android:textColor="?text_color"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/nav_location"
+                style="@style/location_current"
+                android:layout_above="@+id/status"
+                android:layout_alignParentBottom="false"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentTop="false"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="95dp"
+                android:text="@string/loc_trying" />
+
+            <RelativeLayout
+                android:id="@+id/status"
+                android:layout_width="fill_parent"
+                android:layout_height="16dip"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentTop="false"
+                android:longClickable="true" >
+
+                <TextView
+                    android:id="@+id/nav_type"
+                    style="@style/location_current_type"
+                    android:textColor="?text_color_grey" />
+
+                <TextView
+                    android:id="@+id/nav_accuracy"
+                    style="@style/location_current_accuracy"
+                    android:textColor="?text_color_grey" />
+
+                <TextView
+                    android:id="@+id/nav_satellites"
+                    style="@style/location_current_satellites"
+                    android:textColor="?text_color_grey" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <view
+            android:id="@+id/rose"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="1dip"
+            android:layout_marginLeft="1dip"
+            android:layout_marginRight="1dip"
+            android:layout_marginTop="6dip"
+            android:layout_weight="1"
+            class="cgeo.geocaching.ui.CompassView"
+            android:gravity="center"
+            android:keepScreenOn="true"
+            android:padding="4dip" />
+    </LinearLayout>
+
+</LinearLayout>

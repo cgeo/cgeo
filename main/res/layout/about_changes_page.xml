@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="4dip" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/changelog_master"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_margin="7dip"
+            android:linksClickable="true"
+            android:paddingLeft="3dip"
+            android:text="@string/changelog_master"
+            android:textColor="?text_color"
+            android:textColorLink="?text_color_link"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/changelog_release"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_margin="7dip"
+            android:linksClickable="true"
+            android:paddingLeft="3dip"
+            android:text="@string/changelog_release"
+            android:textColor="?text_color"
+            android:textColorLink="?text_color_link"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</ScrollView>

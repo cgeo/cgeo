@@ -28,7 +28,7 @@ public class UrlLoader extends AsyncTaskLoader<String> {
         try {
             return Network.getResponseData(Network.getRequest(url, params));
         } catch (final Exception e) {
-            Log.w("cgeovisit.UrlLoader.loadInBackground", e);
+            Log.w("UrlLoader.loadInBackground", e);
             return null;
         }
     }

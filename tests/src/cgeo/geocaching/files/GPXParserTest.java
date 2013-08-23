@@ -2,8 +2,6 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
-import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.StoredList;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -14,6 +12,8 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,7 +29,6 @@ import java.util.Set;
 
 public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     private static final SimpleDateFormat LOG_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US); // 2010-04-20T07:00:00Z
-    private int listId;
 
     public void testGPXVersion100() throws Exception {
         testGPXVersion(R.raw.gc1bkp3_gpx100);
@@ -189,12 +188,12 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     private List<Geocache> readGPX10(int... resourceIds) throws IOException, ParserException {
-        final GPX10Parser parser = new GPX10Parser(listId);
+        final GPX10Parser parser = new GPX10Parser(getTemporaryListId());
         return readVersionedGPX(parser, resourceIds);
     }
 
     private List<Geocache> readGPX11(int... resourceIds) throws IOException, ParserException {
-        final GPX11Parser parser = new GPX11Parser(listId);
+        final GPX11Parser parser = new GPX11Parser(getTemporaryListId());
         return readVersionedGPX(parser, resourceIds);
     }
 
@@ -284,20 +283,43 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         removeCacheCompletely(geocode);
     }
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        listId = cgData.createList("Temporary unit testing");
-        assertTrue(listId != StoredList.TEMPORARY_LIST_ID);
-        assertTrue(listId != StoredList.STANDARD_LIST_ID);
+    public void testWaymarking() throws Exception {
+        final List<Geocache> caches = readGPX10(R.raw.waymarking_gpx);
+        assertEquals(1, caches.size());
+        final Geocache waymark = caches.get(0);
+        assertNotNull(waymark);
+        assertEquals("WM7BM7", waymark.getGeocode());
+        assertEquals("Roman water pipe Kornwestheim", waymark.getName());
+        assertTrue(StringUtils.isNotBlank(waymark.getUrl())); // connector must be able to create it
+        assertEquals(CacheType.UNKNOWN, waymark.getType());
+        assertEquals(CacheSize.UNKNOWN, waymark.getSize());
     }
 
-    @Override
-    protected void tearDown() throws Exception {
-        final SearchResult search = cgData.getBatchOfStoredCaches(null, CacheType.ALL, listId);
-        assertNotNull(search);
-        cgData.removeCaches(search.getGeocodes(), LoadFlags.REMOVE_ALL);
-        cgData.removeList(listId);
-        super.tearDown();
+    /**
+     * This one uses geocodes where the first character is actually a digit, not a character
+     */
+    public void testGCTour() throws Exception {
+        final List<Geocache> caches = readGPX10(R.raw.gctour_gpx);
+        assertEquals(54, caches.size());
     }
+
+    public void testOX() throws IOException, ParserException {
+        final List<Geocache> caches = readGPX10(R.raw.ox1ry0y_gpx);
+        assertEquals(1, caches.size());
+        final Geocache cache = caches.get(0);
+        assertEquals("OX1RY0Y", cache.getGeocode());
+        assertEquals(CacheType.TRADITIONAL, cache.getType());
+        assertEquals(false, cache.isArchived());
+        assertEquals(false, cache.isDisabled());
+        assertEquals("Kornwestheim und die Römer", cache.getName());
+        assertEquals("Thomas&Dani", cache.getOwnerDisplayName());
+        assertEquals(CacheSize.SMALL, cache.getSize());
+        assertEquals(1.5f, cache.getDifficulty());
+        assertEquals(1.0f, cache.getTerrain());
+        assertTrue(cache.getDescription().startsWith("Dieses sind die Reste einer in Kornwestheim gefundenen"));
+        assertEquals(new Geopoint(48.8642167, 9.1836), cache.getCoords());
+        assertTrue(cache.isReliableLatLon());
+        assertEquals("Wasserleitung", cache.getHint());
+    }
+
 }

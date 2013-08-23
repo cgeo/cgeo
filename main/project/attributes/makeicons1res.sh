@@ -7,7 +7,9 @@ require () {
 }
 
 require optipng
+#part of ImageMagick package
 require convert
+#part of ImageMagick package
 require composite
 require sed
 
