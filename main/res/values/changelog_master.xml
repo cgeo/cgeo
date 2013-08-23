@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
-    <b>Next feature release</b>\n
+    <b>2013.08.23</b>\n
     <b>New Features:</b>\n
     · Talking compass (select \"Start talking\" while compass is active)\n
     · New menu structure for c:geo settings\n
