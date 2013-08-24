@@ -129,6 +129,14 @@ public final class StoredList {
 
                 @Override
                 public int compare(StoredList lhs, StoredList rhs) {
+                    // have the standard list at the top
+                    if (lhs.id == STANDARD_LIST_ID) {
+                        return -1;
+                    }
+                    if (rhs.id == STANDARD_LIST_ID) {
+                        return 1;
+                    }
+                    // otherwise sort alphabetical
                     return collator.compare(lhs.getTitle(), rhs.getTitle());
                 }
             });
