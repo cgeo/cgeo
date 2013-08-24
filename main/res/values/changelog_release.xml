@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>2013.08.23</b>\n
+    <b>2013.08.24</b>\n
     <b>New Features:</b>\n
     · Talking compass (select \"Start talking\" while compass is active)\n
     · New menu structure for c:geo settings\n
@@ -24,7 +24,7 @@
     · Support smilies also for trackable logs\n
     · Starting Bike navigation for Google navigation added\n
     · Support importing LOC files from waymarking.com\n
-    · Added slovenian translation\n
+    · Added Slovenian translation\n
     · Support reloading the reCAPTCHA (basic members)\n
     · Field note export \"since last export\" now uses the last export date from c:geo instead of the gc.com feature\n
     · Show event date in search results\n
