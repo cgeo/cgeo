@@ -232,6 +232,17 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
+                    android:host="www.geocaching.com"
+                    android:pathPrefix="/geocache/GC"
+                    android:scheme="http" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
                     android:host="geocaching.com"
                     android:pathPrefix="/seek/cache_details.aspx"
                     android:scheme="http" />
