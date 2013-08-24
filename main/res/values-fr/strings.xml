@@ -460,7 +460,7 @@
   <string name="init_sendToCgeo">Envoyer vers c:geo</string>
   <string name="settings_info_send2cgeo_title">Informations sur send2cgeo</string>
   <string name="init_sendToCgeo_name">Votre nom d\'appareil:</string>
-  <string name="init_sendToCgeo_description">Envoyer vers c:geo permet de recevoir les caches directement depuis le site Geocaching.com en utilisant une extension pour Firefox ou Chrome. Après votre inscription, veuillez lire <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Pour utiliser send2cgeo, vous avez juste besoin de vous inscrire. c:geo fonctionnera aussi sans enregistrer votre appareil.</string>
+  <string name="init_sendToCgeo_description"><b>Envoyer vers c:geo</b> permet de recevoir les caches directement depuis le site Geocaching.com en utilisant une extension pour Firefox ou Chrome. Après votre inscription, veuillez lire <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Pour utiliser send2cgeo, vous avez juste besoin de vous inscrire. c:geo fonctionnera aussi sans enregistrer votre appareil.</string>
   <string name="init_sendToCgeo_register">Demande d\'enregistrement</string>
   <string name="init_sendToCgeo_registering">Enregistrer votre appareil pour \"Send to c:geo\"…</string>
   <string name="init_sendToCgeo_register_ok">Enregistrement réussi. Le code PIN est ####. Utiliser le sur le site de c:geo pour ajouter votre appareil dans votre navigateur.</string>
