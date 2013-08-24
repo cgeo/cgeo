@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!-- changelog for the master branch -->
-  <string name="changelog_master" translatable="false"></string>
+  <string name="changelog_master" translatable="false">
+    <b>Next version</b>\n
+    <b>New Features:</b>\n
+    \n
+    <b>Bugfixes:</b>\n
+  </string>
 </resources>
