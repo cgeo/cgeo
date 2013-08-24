@@ -317,6 +317,9 @@
   <string name="about_donate">Doar</string>
   <string name="about_donation_more">Doar\ndesenvolvimento</string>
   <string name="about_contributors">Contribuidores</string>
+  <string name="about_license">Licença</string>
+  <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
+  <string name="about_help">Ajuda</string>
   <string name="settings_title_services">Serviços</string>
   <string name="settings_title_appearance">Aparência</string>
   <string name="settings_title_cachedetails">Detalhos da Cache</string>
@@ -331,6 +334,8 @@
   <string name="settings_title_system">Sistema</string>
   <string name="settings_title_navigation_menu">Menu de navegação</string>
   <string name="settings_category_browser">Browser</string>
+  <string name="settings_category_geocaching">Geocaching</string>
+  <string name="settings_category_social">Redes sociais</string>
   <string name="settings_category_logging_other">Outras Opções de Registo</string>
   <string name="settings_goto_url_button">mais …</string>
   <string name="settings_title_gc">Geocaching.com</string>
@@ -343,6 +348,11 @@
   <string name="init_oc_de_description">Autorizar c:geo com opencaching.de para pesquisar por caches e aceder/filtrar as suas caches encontradas.</string>
   <string name="init_register_oc_de">Autorizar c:geo</string>
   <string name="init_reregister_oc_de">Reautorizar c:geo</string>
+  <string name="init_oc_pl">Opencaching.pl</string>
+  <string name="settings_activate_oc_pl">Activar</string>
+  <string name="init_oc_pl_description">Autorizar c:geo com opencaching.pl para pesquisar por caches e aceder/filtrar as suas caches encontradas.</string>
+  <string name="init_register_oc_pl">Autorizar c:geo</string>
+  <string name="init_reregister_oc_pl">Reautorizar c:geo</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activar</string>
@@ -437,6 +447,7 @@
   <string name="init_default_navigation_tool_description">Aqui pode selecionar o seu navegador preferido.</string>
   <string name="init_default_navigation_tool_select">Ferramenta de selecção</string>
   <string name="init_default_navigation_tool_2_description">Aqui define a sua segunda preferida ferramenta de navefação. É activada com clique longo no ícone ao lado do títula da cache.</string>
+  <string name="init_navigation_menu_description">Aqui você pode selecionar qual dos métodos de navegação disponíveis serão mostrados no menu de navegação para um cache ou um ponto de referência. Métodos desativados não estão instalados neste dispositivo.</string>
   <string name="init_debug_title">Informação de depuração</string>
   <string name="init_debug_note">O c:geo consegue gerar muita informação de depuração. Enquanto para os utilizadores esta informação não é muito importante, os desenvolvedores podem precisar para analisar um bug. Neste caso, eles pedem-lhe que marque a caixa de verificação abaixo e lhes envie o ficheiro de log.</string>
   <string name="init_debug">Activar depuração</string>
@@ -480,6 +491,7 @@
   <string name="about_auth_1">O processo seguinte permite <b>c:geo</b> aceder ao Twitter - se concordar.</string>
   <string name="about_auth_2">Um clique sobre o botão \"autorizar c:geo \" irá iniciar o processo. Este processo irá abrir um navegador com uma página no Twitter. Entre nesta página e permita o <b>c:geo</b> aceder à sua conta. Se isso for aceite, o Twitter vai mostrar um código PIN numérico. Este PIN deve ser colado em <b>c:geo</b> e confirmado. É tudo.</string>
   <string name="auth_ocde">opencaching.de</string>
+  <string name="auth_ocpl">Opencaching.pl</string>
   <string name="auth_authorize_oc">Autorizar c:geo</string>
   <string name="auth_start_oc">Começar autorização</string>
   <string name="auth_again_oc">Iniciar de novo</string>
@@ -1018,6 +1030,7 @@
   <string name="nutshellmanual">Manual: <a href="">o essencial do c:geo</a></string>
   <string name="market">Android: <a href="">c:geo no Google Play</a></string>
   <string name="about_twitter">O <b>c:geo</b> deve publicar no Twitter de cada vez que uma cache for registada?</string>
+  <string name="faq">FAQ: <a href="">faq.cgeo.org</a></string>
   <string name="status_new_release" tools:ignore="UnusedResources">Nova versão disponível.\nClique para instalar.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Nova \'nightly build\' disponível.\nClique para instalar.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Nova \'release candidate\' disponível .\nClique para instalar.</string>
