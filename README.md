@@ -49,13 +49,14 @@ If the workspace directory name contains a space and leads to errors in the -dex
 1. copy `./main/templates/private.properties` to `./main/`
 2. edit `private.properties` (see comments in the file)
 3. copy `./main/templates/local.properties` to `./main/`
-3. copy `./main/templates/local.properties` to `./tests/`
-4. edit `local.properties` (see comments in the file)
-5. copy `./main/templates/mapsapikey.xml` to `./main/res/values/`
-6. edit `./main/res/values/mapsapikey.xml` and insert your Maps API key (see comments in the file)
-7. copy `./main/templates/ocde_okapi.xml` to `./main/res/values/`
-8. request your personal ConsumerKey and -Secret at [opencaching.de OKAPI signup](http://www.opencaching.de/okapi/signup.html)
-9. edit `./main/res/values/ocde_okapi.xml` and insert your keys there.
+4. copy `./main/templates/local.properties` to `./tests/`
+5. edit `local.properties` (see comments in the file)
+6. copy `./main/templates/mapsapikey.xml` to `./main/res/values/`
+7. edit `./main/res/values/mapsapikey.xml` and insert your Maps API key (see comments in the file)
+8. copy `./main/templates/ocde_okapi.xml` to `./main/res/values/`
+9. request your personal ConsumerKey and -Secret at [opencaching.de OKAPI signup](http://www.opencaching.de/okapi/signup.html)
+10. edit `./main/res/values/ocde_okapi.xml` and insert your keys there.
+11. Repeat steps 8-10 with `ocpl_okapi.xml` and [opencaching.pl OKAPI signup](http://www.opencaching.pl/okapi/signup.html)
 
 ### Building with Ant ###
 
