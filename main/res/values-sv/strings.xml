@@ -959,6 +959,7 @@
     <string name="tts_service">Talande kompass</string>
     <string name="tts_start">Starta tal</string>
     <string name="tts_stop">Stoppa tal</string>
+    <string name="err_tts_lang_not_supported">Detta språk hanteras inte av text-to-speech.</string>
     <string name="tts_one_kilometer">en kilometer</string>
     <plurals name="tts_kilometers">
         <item quantity="one">%s kilometer</item>
