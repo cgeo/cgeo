@@ -40,6 +40,7 @@ import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListAdapter;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -482,7 +483,18 @@ public class SettingsActivity extends PreferenceActivity {
             } else if (isPreference(preference, R.string.pref_mapsource)) {
                 // reset the cached map source
                 int mapSourceId = Integer.valueOf(stringValue);
-                final MapSource mapSource = MapProviderFactory.getMapSource(mapSourceId);
+                MapSource mapSource = MapProviderFactory.getMapSource(mapSourceId);
+                // If there is no corresponding map source (because some map sources were
+                // removed from the device since) then use the first one available.
+                if (mapSource == null) {
+                    mapSource = MapProviderFactory.getAnyMapSource();
+                    if (mapSource == null) {
+                        // There are no map source. There is little we can do here, except log an error and
+                        // return to avoid triggering a null pointer exception.
+                        Log.e("SettingsActivity.onPreferenceChange: no map source available");
+                        return true;
+                    }
+                }
                 Settings.setMapSource(mapSource);
                 preference.setSummary(mapSource.getName());
             } else if (isPreference(preference, R.string.pref_connectorOCActive) || isPreference(preference, R.string.pref_connectorOCPLActive) || isPreference(preference, R.string.pref_connectorGCActive)) {
