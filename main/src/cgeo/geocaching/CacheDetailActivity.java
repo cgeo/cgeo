@@ -1279,7 +1279,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             private Handler handler;
 
             public DropCacheThread(Handler handler) {
-                super();
                 this.handler = handler;
             }
 
