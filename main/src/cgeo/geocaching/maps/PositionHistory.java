@@ -28,7 +28,7 @@ public class PositionHistory {
         if (coordinates.getAccuracy() >= 50f) {
             return;
         }
-        if (coordinates.getLatitude() == 0.0 && coordinates.getLatitude() == 0.0) {
+        if (coordinates.getLatitude() == 0.0 && coordinates.getLongitude() == 0.0) {
             return;
         }
         if (history.isEmpty()) {
