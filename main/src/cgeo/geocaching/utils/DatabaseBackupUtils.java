@@ -97,7 +97,7 @@ public class DatabaseBackupUtils {
 
     public static File getRestoreFile() {
         final File fileSourceFile = cgData.getBackupFileInternal();
-        return fileSourceFile.exists() ? fileSourceFile : null;
+        return fileSourceFile.exists() && fileSourceFile.length() > 0 ? fileSourceFile : null;
     }
 
     public static boolean hasBackup() {
