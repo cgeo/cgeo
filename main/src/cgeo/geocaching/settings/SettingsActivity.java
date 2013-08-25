@@ -40,7 +40,6 @@ import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListAdapter;
-import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;

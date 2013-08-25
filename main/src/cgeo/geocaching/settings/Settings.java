@@ -471,7 +471,7 @@ public final class Settings {
 
     /**
      * @return User selected date format on GC.com
-     * @see Login#gcCustomDateFormats
+     * @see Login#GC_CUSTOM_DATE_FORMATS
      */
     public static String getGcCustomDate() {
         return getString(R.string.pref_gccustomdate, null);
