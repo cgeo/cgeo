@@ -1,8 +1,8 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.cgData.StorageLocation;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.IAbstractActivity;
+import cgeo.geocaching.cgData.StorageLocation;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ILoggingManager;
@@ -33,6 +33,7 @@ import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.UncertainProperty;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -602,21 +603,21 @@ public class Geocache implements ICache, IWaypoint {
 
     @Override
     public boolean isArchived() {
-        return (archived != null && archived.booleanValue());
+        return BooleanUtils.isTrue(archived);
     }
 
     @Override
     public boolean isDisabled() {
-        return (disabled != null && disabled.booleanValue());
+        return BooleanUtils.isTrue(disabled);
     }
 
     @Override
     public boolean isPremiumMembersOnly() {
-        return (premiumMembersOnly != null && premiumMembersOnly.booleanValue());
+        return BooleanUtils.isTrue(premiumMembersOnly);
     }
 
     public void setPremiumMembersOnly(boolean members) {
-        this.premiumMembersOnly = Boolean.valueOf(members);
+        this.premiumMembersOnly = members;
     }
 
     @Override
@@ -767,16 +768,16 @@ public class Geocache implements ICache, IWaypoint {
 
     @Override
     public boolean isFound() {
-        return (found != null && found.booleanValue());
+        return BooleanUtils.isTrue(found);
     }
 
     @Override
     public boolean isFavorite() {
-        return (favorite != null && favorite.booleanValue());
+        return BooleanUtils.isTrue(favorite);
     }
 
     public void setFavorite(boolean favorite) {
-        this.favorite = Boolean.valueOf(favorite);
+        this.favorite = favorite;
     }
 
     @Override
@@ -990,11 +991,11 @@ public class Geocache implements ICache, IWaypoint {
 
     @Override
     public boolean isOnWatchlist() {
-        return (onWatchlist != null && onWatchlist.booleanValue());
+        return BooleanUtils.isTrue(onWatchlist);
     }
 
     public void setOnWatchlist(boolean onWatchlist) {
-        this.onWatchlist = Boolean.valueOf(onWatchlist);
+        this.onWatchlist = onWatchlist;
     }
 
     /**
@@ -1063,11 +1064,11 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public boolean isLogOffline() {
-        return (logOffline != null && logOffline.booleanValue());
+        return BooleanUtils.isTrue(logOffline);
     }
 
     public void setLogOffline(boolean logOffline) {
-        this.logOffline = Boolean.valueOf(logOffline);
+        this.logOffline = logOffline;
     }
 
     public boolean isStatusChecked() {
@@ -1140,15 +1141,15 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public void setDisabled(boolean disabled) {
-        this.disabled = Boolean.valueOf(disabled);
+        this.disabled = disabled;
     }
 
     public void setArchived(boolean archived) {
-        this.archived = Boolean.valueOf(archived);
+        this.archived = archived;
     }
 
     public void setFound(boolean found) {
-        this.found = Boolean.valueOf(found);
+        this.found = found;
     }
 
     public void setAttributes(List<String> attributes) {
