@@ -69,6 +69,12 @@ public class MapProviderFactory {
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources, true, true);
     }
 
+    /**
+     * Return a map source by id.
+     *
+     * @param id the map source id
+     * @return the map source, or <tt>null</tt> if <tt>id</tt> does not correspond to a registered map source
+     */
     public static MapSource getMapSource(int id) {
         for (MapSource mapSource : mapSources) {
             if (mapSource.getNumericalId() == id) {
@@ -76,6 +82,15 @@ public class MapProviderFactory {
             }
         }
         return null;
+    }
+
+    /**
+     * Return a map source if there is at least one.
+     *
+     * @return the first map source in the collection, or <tt>null</tt> if there are none registered
+     */
+    public static MapSource getAnyMapSource() {
+        return mapSources.isEmpty() ? null : mapSources.get(0);
     }
 
     public static void registerMapSource(final MapSource mapSource) {
