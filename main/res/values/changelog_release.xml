@@ -2,6 +2,12 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release</b>\n
+    · Corrected language check for Talking Compass\n
+    · Fall back to other map if selected map is not available any more\n
+    · Have new list active after list creation\n
+    \n
+    \n
     <b>2013.08.24</b>\n
     <b>New Features:</b>\n
     · Talking compass (select \"Start talking\" while compass is active)\n
