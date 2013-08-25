@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 
 import android.app.Activity;
@@ -50,7 +51,9 @@ public abstract class AbstractMap {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        return mapActivity.superOnCreateOptionsMenu(menu);
+        final boolean result = mapActivity.superOnCreateOptionsMenu(menu);
+        mapActivity.getActivity().getMenuInflater().inflate(R.menu.map_activity, menu);
+        return result;
     }
 
     public boolean onPrepareOptionsMenu(Menu menu) {
