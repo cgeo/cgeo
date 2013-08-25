@@ -542,7 +542,7 @@ public class MainActivity extends AbstractActivity {
                     navAccuracy.setText(null);
                     navLocation.setText(res.getString(R.string.loc_trying));
                 }
-            } catch (Exception e) {
+            } catch (RuntimeException e) {
                 Log.w("Failed to update location.");
             }
         }

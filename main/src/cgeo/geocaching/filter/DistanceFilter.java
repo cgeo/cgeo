@@ -27,7 +27,7 @@ class DistanceFilter extends AbstractFilter {
         final Geopoint coords = cache.getCoords();
         if (coords == null) {
             // If a cache has no coordinates, consider it to be out of range. It will
-            // happen with archived cache.
+            // happen with archived caches.
             return false;
         }
         final float distance = currentPos.distanceTo(coords);

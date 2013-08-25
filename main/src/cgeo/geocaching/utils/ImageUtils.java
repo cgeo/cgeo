@@ -10,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 public final class ImageUtils {
 
@@ -75,7 +76,7 @@ public final class ImageUtils {
             bitmap.compress(format, quality, bos);
             bos.flush();
             bos.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
             Log.e("ImageHelper.storeBitmap", e);
         }
     }

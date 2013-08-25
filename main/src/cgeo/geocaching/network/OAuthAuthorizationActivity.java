@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 
+import ch.boye.httpclientandroidlib.ParseException;
 import ch.boye.httpclientandroidlib.client.entity.UrlEncodedFormEntity;
 import ch.boye.httpclientandroidlib.util.EntityUtils;
 
@@ -22,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.regex.Pattern;
 
 public abstract class OAuthAuthorizationActivity extends AbstractActivity {
@@ -156,38 +158,36 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     private void requestToken() {
 
         int status = 0;
-        try {
-            final Parameters params = new Parameters();
-            params.put("oauth_callback", "oob");
-            final String method = "GET";
-            OAuth.signOAuth(host, pathRequest, method, https, params, null, null, consumerKey, consumerSecret);
-            final String line = Network.getResponseData(Network.getRequest(getUrlPrefix() + host + pathRequest, params));
+        final Parameters params = new Parameters();
+        params.put("oauth_callback", "oob");
+        final String method = "GET";
+        OAuth.signOAuth(host, pathRequest, method, https, params, null, null, consumerKey, consumerSecret);
+        final String line = Network.getResponseData(Network.getRequest(getUrlPrefix() + host + pathRequest, params));
 
-            if (StringUtils.isNotBlank(line)) {
-                final MatcherWrapper paramsMatcher1 = new MatcherWrapper(paramsPattern1, line);
-                if (paramsMatcher1.find()) {
-                    OAtoken = paramsMatcher1.group(1);
-                }
-                final MatcherWrapper paramsMatcher2 = new MatcherWrapper(paramsPattern2, line);
-                if (paramsMatcher2.find()) {
-                    OAtokenSecret = paramsMatcher2.group(1);
-                }
+        if (StringUtils.isNotBlank(line)) {
+            final MatcherWrapper paramsMatcher1 = new MatcherWrapper(paramsPattern1, line);
+            if (paramsMatcher1.find()) {
+                OAtoken = paramsMatcher1.group(1);
+            }
+            final MatcherWrapper paramsMatcher2 = new MatcherWrapper(paramsPattern2, line);
+            if (paramsMatcher2.find()) {
+                OAtokenSecret = paramsMatcher2.group(1);
+            }
 
-                if (StringUtils.isNotBlank(OAtoken) && StringUtils.isNotBlank(OAtokenSecret)) {
-                    setTempTokens(OAtoken, OAtokenSecret);
-                    try {
-                        final Parameters paramsBrowser = new Parameters();
-                        paramsBrowser.put("oauth_token", OAtoken);
-                        final String encodedParams = EntityUtils.toString(new UrlEncodedFormEntity(paramsBrowser));
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getUrlPrefix() + host + pathAuthorize + "?" + encodedParams)));
-                        status = 1;
-                    } catch (Exception e) {
-                        Log.e("OAuthAuthorizationActivity.requestToken(2)", e);
-                    }
+            if (StringUtils.isNotBlank(OAtoken) && StringUtils.isNotBlank(OAtokenSecret)) {
+                setTempTokens(OAtoken, OAtokenSecret);
+                try {
+                    final Parameters paramsBrowser = new Parameters();
+                    paramsBrowser.put("oauth_token", OAtoken);
+                    final String encodedParams = EntityUtils.toString(new UrlEncodedFormEntity(paramsBrowser));
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getUrlPrefix() + host + pathAuthorize + "?" + encodedParams)));
+                    status = 1;
+                } catch (ParseException e) {
+                    Log.e("OAuthAuthorizationActivity.requestToken", e);
+                } catch (IOException e) {
+                    Log.e("OAuthAuthorizationActivity.requestToken", e);
                 }
             }
-        } catch (Exception e) {
-            Log.e("OAuthAuthorizationActivity.requestToken(1)", e);
         }
 
         requestTokenHandler.sendEmptyMessage(status);
