@@ -548,16 +548,9 @@ public final class Settings {
 
     static boolean getImperialUnitsDefault() {
         final String countryCode = Locale.getDefault().getCountry();
-        if ("US".equals(countryCode)) {
-            return true; // USA
-        }
-        if ("LR".equals(countryCode)) {
-            return true; // Liberia
-        }
-        if ("MM".equals(countryCode)) {
-            return true; // Burma
-        }
-        return false;
+        return "US".equals(countryCode)  // USA
+            || "LR".equals(countryCode)  // Liberia
+            || "MM".equals(countryCode); // Burma
     }
 
     public static boolean isLiveMap() {
