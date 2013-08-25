@@ -481,8 +481,14 @@ public class SettingsActivity extends PreferenceActivity {
                 }
             } else if (isPreference(preference, R.string.pref_mapsource)) {
                 // reset the cached map source
-                int mapSourceId = Integer.valueOf(stringValue);
-                MapSource mapSource = MapProviderFactory.getMapSource(mapSourceId);
+                MapSource mapSource;
+                try {
+                    final int mapSourceId = Integer.valueOf(stringValue);
+                    mapSource = MapProviderFactory.getMapSource(mapSourceId);
+                } catch (final NumberFormatException e) {
+                    Log.e("SettingsActivity.onPreferenceChange: bad source id `" + stringValue + "'");
+                    mapSource = null;
+                }
                 // If there is no corresponding map source (because some map sources were
                 // removed from the device since) then use the first one available.
                 if (mapSource == null) {
