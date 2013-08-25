@@ -50,7 +50,7 @@ class DistanceFilter extends AbstractFilter {
                 else {
                     maxRange = Integer.MAX_VALUE;
                 }
-                final String range = maxRange == Integer.MAX_VALUE ? "> " + String.valueOf(minRange) : String.valueOf(minRange) + " - " + String.valueOf(maxRange);
+                final String range = maxRange == Integer.MAX_VALUE ? "> " + minRange : minRange + " - " + maxRange;
                 final String name = cgeoapplication.getInstance().getResources().getQuantityString(R.plurals.tts_kilometers, maxRange, range);
                 filters.add(new DistanceFilter(name, minRange, maxRange));
             }
