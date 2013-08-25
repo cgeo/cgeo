@@ -2,6 +2,11 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.connector.gc.Tile;
 
+/**
+ * Property with certainty. When merging properties, the one with higher certainty wins.
+ * 
+ * @param <T>
+ */
 public class UncertainProperty<T> {
 
     private final T value;
