@@ -1040,6 +1040,7 @@
   <string name="tts_service">Boussole parlante</string>
   <string name="tts_start">Commencer à parler</string>
   <string name="tts_stop">Arrêter de parler</string>
+  <string name="err_tts_lang_not_supported">La langue courante n\'est pas prise en charge par la synthèse vocale.</string>
   <string name="tts_one_kilometer">un kilomètre</string>
   <string name="tts_one_meter">un mètre</string>
   <string name="tts_one_mile">un mille</string>
