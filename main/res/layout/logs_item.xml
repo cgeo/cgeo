@@ -58,9 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginTop="22dip"
-            android:autoLink="web"
             android:gravity="left"
-            android:linksClickable="true"
             android:textColor="?text_color"
             android:textSize="14sp" />
 
