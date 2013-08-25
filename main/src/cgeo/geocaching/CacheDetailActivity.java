@@ -2451,7 +2451,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     protected void storeCache(final int listId, final StoreCacheHandler storeCacheHandler) {
-        progress.show(CacheDetailActivity.this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
+        progress.show(this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
 
         if (storeThread != null) {
             storeThread.interrupt();
