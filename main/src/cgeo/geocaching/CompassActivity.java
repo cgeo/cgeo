@@ -134,7 +134,16 @@ public class CompassActivity extends AbstractActivity {
         setDestCoords();
         setCacheInfo();
 
-        geoDirHandler.updateAll();
+        // Force a refresh of location and direction when data is available.
+        final cgeoapplication app = cgeoapplication.getInstance();
+        final IGeoData geo = app.currentGeo();
+        if (geo != null) {
+            geoDirHandler.update(geo);
+        }
+        final Float dir = app.currentDirection();
+        if (dir != null) {
+            geoDirHandler.update(dir);
+        }
     }
 
     @Override
