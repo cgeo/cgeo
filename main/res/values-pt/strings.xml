@@ -1040,6 +1040,7 @@
   <string name="tts_service">Bússola que fala</string>
   <string name="tts_start">Comece a falar</string>
   <string name="tts_stop">Páre de falar</string>
+  <string name="err_tts_lang_not_supported">A linguagem corrente não é suportada pelo texto em fala.</string>
   <string name="tts_one_kilometer">um quilômetro</string>
   <string name="tts_one_meter">um metro</string>
   <string name="tts_one_mile">uma milha</string>
