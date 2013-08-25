@@ -26,7 +26,6 @@ public abstract class SimpleHandler extends Handler {
             activity.showToast(msg.getData().getString(MESSAGE_TEXT));
         }
         dismissProgress();
-        return;
     }
 
     protected final void showToast(final int resId) {

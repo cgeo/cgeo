@@ -26,7 +26,6 @@ public class SimpleCancellableHandler extends CancellableHandler {
             activity.showToast(msg.getData().getString(MESSAGE_TEXT));
         }
         dismissProgress();
-        return;
     }
 
     @Override
