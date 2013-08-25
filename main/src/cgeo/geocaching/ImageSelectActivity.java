@@ -159,16 +159,20 @@ public class ImageSelectActivity extends AbstractActivity {
 
     public void saveImageInfo(boolean saveInfo) {
         if (saveInfo) {
-            String filename = writeScaledImage(imageUri.getPath());
-            imageUri = Uri.parse(filename);
-            Intent intent = new Intent();
-            syncEditTexts();
-            intent.putExtra(EXTRAS_CAPTION, imageCaption);
-            intent.putExtra(EXTRAS_DESCRIPTION, imageDescription);
-            intent.putExtra(EXTRAS_URI_AS_STRING, imageUri.toString());
-            intent.putExtra(EXTRAS_SCALE, scaleChoiceIndex);
-
-            setResult(RESULT_OK, intent);
+            final String filename = writeScaledImage(imageUri.getPath());
+            if (filename != null) {
+                imageUri = Uri.parse(filename);
+                final Intent intent = new Intent();
+                syncEditTexts();
+                intent.putExtra(EXTRAS_CAPTION, imageCaption);
+                intent.putExtra(EXTRAS_DESCRIPTION, imageDescription);
+                intent.putExtra(EXTRAS_URI_AS_STRING, imageUri.toString());
+                intent.putExtra(EXTRAS_SCALE, scaleChoiceIndex);
+                setResult(RESULT_OK, intent);
+            } else {
+                showToast(res.getString(R.string.err_select_logimage_failed));
+                setResult(RESULT_CANCELED);
+            }
         } else {
             setResult(RESULT_CANCELED);
         }
@@ -263,7 +267,7 @@ public class ImageSelectActivity extends AbstractActivity {
      * Scales and writes the scaled image.
      *
      * @param filePath
-     * @return
+     * @return the scaled image path, or <tt>null</tt> if the image cannot be decoded
      */
     private String writeScaledImage(final String filePath) {
         scaleChoiceIndex = scaleView.getSelectedItemPosition();
@@ -283,6 +287,10 @@ public class ImageSelectActivity extends AbstractActivity {
             image = BitmapFactory.decodeFile(filePath, sampleOptions);
         } else {
             image = BitmapFactory.decodeFile(filePath);
+        }
+        // If image decoding fail, return null
+        if (image == null) {
+            return null;
         }
         final BitmapDrawable scaledImage = ImageUtils.scaleBitmapTo(image, maxXY, maxXY);
         final String uploadFilename = getOutputImageFile().getPath();
