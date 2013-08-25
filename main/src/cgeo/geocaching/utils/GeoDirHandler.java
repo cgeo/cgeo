@@ -63,11 +63,6 @@ public abstract class GeoDirHandler extends Handler implements IObserver<Object>
         obtainMessage(OBSERVABLE, o).sendToTarget();
     }
 
-    public void updateAll() {
-        update(app.currentGeo());
-        update(app.currentDirection());
-    }
-
     /**
      * Update method called when new IGeoData is available.
      *
