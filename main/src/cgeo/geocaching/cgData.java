@@ -20,6 +20,7 @@ import cgeo.geocaching.utils.Log;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -2479,7 +2480,8 @@ public class cgData {
         }
     }
 
-    public static List<StoredList> getLists() {
+    public static @NonNull
+    List<StoredList> getLists() {
         init();
 
         final Resources res = cgeoapplication.getInstance().getResources();
