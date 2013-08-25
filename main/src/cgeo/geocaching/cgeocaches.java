@@ -718,7 +718,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 invalidateOptionsMenuCompatible();
                 return false;
             case MENU_CREATE_LIST:
-                new StoredList.UserInterface(this).promptForListCreation(null, newListName);
+                new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(), newListName);
                 invalidateOptionsMenuCompatible();
                 return false;
             case MENU_DROP_LIST:
@@ -1450,13 +1450,17 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         if (type != CacheListType.OFFLINE) {
             return;
         }
-        new StoredList.UserInterface(this).promptForListSelection(R.string.list_title, new RunnableWithArgument<Integer>() {
+        new StoredList.UserInterface(this).promptForListSelection(R.string.list_title, getListSwitchingRunnable());
+    }
+
+    private RunnableWithArgument<Integer> getListSwitchingRunnable() {
+        return new RunnableWithArgument<Integer>() {
 
             @Override
             public void run(final Integer selectedListId) {
                 switchListById(selectedListId);
             }
-        });
+        };
     }
 
     public void switchListById(int id) {
