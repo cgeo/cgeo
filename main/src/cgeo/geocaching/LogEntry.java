@@ -9,7 +9,6 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -29,10 +28,6 @@ public final class LogEntry {
     private List<Image> logImages = null;
     public String cacheName = ""; // used for trackables
     public String cacheGuid = ""; // used for trackables
-
-    public LogEntry(final Calendar date, final LogType type, final String text) {
-        this(Settings.getUsername(), date.getTimeInMillis(), type, text);
-    }
 
     public LogEntry(final long dateInMilliSeconds, final LogType type, final String text) {
         this(Settings.getUsername(), dateInMilliSeconds, type, text);

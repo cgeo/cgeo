@@ -150,6 +150,9 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(parseTime("2011-09-11T07:00:00Z"), log.date);
         assertEquals(-1, log.found);
         assertEquals("Sehr schöne Runde und wir haben wieder etwas Neues über Hockenheim gelernt. Super Tarnung.\nTFTC, Geoteufel", log.log);
+        assertFalse(log.isOwn());
+        assertEquals(log.log, log.getDisplayText());
+        assertTrue(log.daysSinceLog() > 700);
 
         // following info is not contained in pocket query gpx file
         assertEquals(0, cache.getAttributes().size());

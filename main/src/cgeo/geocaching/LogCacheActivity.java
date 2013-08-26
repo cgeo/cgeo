@@ -539,7 +539,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 final LogResult logResult = loggingManager.postLog(cache, typeSelected, date, log, logPwd, trackables);
 
                 if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
-                    final LogEntry logNow = new LogEntry(date, typeSelected, log);
+                    final LogEntry logNow = new LogEntry(date.getTimeInMillis(), typeSelected, log);
 
                     cache.getLogs().add(0, logNow);
 
