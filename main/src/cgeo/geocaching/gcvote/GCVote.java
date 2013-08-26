@@ -20,16 +20,16 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 public final class GCVote {
-    private static final Pattern patternLogIn = Pattern.compile("loggedIn='([^']+)'", Pattern.CASE_INSENSITIVE);
-    private static final Pattern patternGuid = Pattern.compile("cacheId='([^']+)'", Pattern.CASE_INSENSITIVE);
-    private static final Pattern patternWaypoint = Pattern.compile("waypoint='([^']+)'", Pattern.CASE_INSENSITIVE);
-    private static final Pattern patternRating = Pattern.compile("voteAvg='([0-9.]+)'", Pattern.CASE_INSENSITIVE);
-    private static final Pattern patternVotes = Pattern.compile("voteCnt='([0-9]+)'", Pattern.CASE_INSENSITIVE);
-    private static final Pattern patternVote = Pattern.compile("voteUser='([0-9.]+)'", Pattern.CASE_INSENSITIVE);
-    private static final Pattern patternVoteElement = Pattern.compile("<vote ([^>]+)>", Pattern.CASE_INSENSITIVE);
+    private static final Pattern PATTERN_LOG_IN = Pattern.compile("loggedIn='([^']+)'", Pattern.CASE_INSENSITIVE);
+    private static final Pattern PATTERN_GUID = Pattern.compile("cacheId='([^']+)'", Pattern.CASE_INSENSITIVE);
+    private static final Pattern PATTERN_WAYPOINT = Pattern.compile("waypoint='([^']+)'", Pattern.CASE_INSENSITIVE);
+    private static final Pattern PATTERN_RATING = Pattern.compile("voteAvg='([0-9.]+)'", Pattern.CASE_INSENSITIVE);
+    private static final Pattern PATTERN_VOTES = Pattern.compile("voteCnt='([0-9]+)'", Pattern.CASE_INSENSITIVE);
+    private static final Pattern PATTERN_VOTE = Pattern.compile("voteUser='([0-9.]+)'", Pattern.CASE_INSENSITIVE);
+    private static final Pattern PATTERN_VOTE_ELEMENT = Pattern.compile("<vote ([^>]+)>", Pattern.CASE_INSENSITIVE);
 
     private static final int MAX_CACHED_RATINGS = 1000;
-    private static LeastRecentlyUsedMap<String, GCVoteRating> ratingsCache = new LeastRecentlyUsedMap.LruCache<String, GCVoteRating>(MAX_CACHED_RATINGS);
+    private static final LeastRecentlyUsedMap<String, GCVoteRating> RATINGS_CACHE = new LeastRecentlyUsedMap.LruCache<String, GCVoteRating>(MAX_CACHED_RATINGS);
 
     /**
      * Get user rating for a given guid or geocode. For a guid first the ratings cache is checked
@@ -40,8 +40,8 @@ public final class GCVote {
      * @return
      */
     public static GCVoteRating getRating(String guid, String geocode) {
-        if (StringUtils.isNotBlank(guid) && ratingsCache.containsKey(guid)) {
-            return ratingsCache.get(guid);
+        if (StringUtils.isNotBlank(guid) && RATINGS_CACHE.containsKey(guid)) {
+            return RATINGS_CACHE.get(guid);
         }
 
         final Map<String, GCVoteRating> ratings = getRating(singletonOrNull(guid), singletonOrNull(geocode));
@@ -88,7 +88,7 @@ public final class GCVote {
                 return null;
             }
 
-            final MatcherWrapper matcherVoteElement = new MatcherWrapper(patternVoteElement, page);
+            final MatcherWrapper matcherVoteElement = new MatcherWrapper(PATTERN_VOTE_ELEMENT, page);
             while (matcherVoteElement.find()) {
                 String voteData = matcherVoteElement.group(1);
                 if (voteData == null) {
@@ -97,7 +97,7 @@ public final class GCVote {
 
                 String id = null;
                 String guid = null;
-                final MatcherWrapper matcherGuid = new MatcherWrapper(patternGuid, voteData);
+                final MatcherWrapper matcherGuid = new MatcherWrapper(PATTERN_GUID, voteData);
                 if (matcherGuid.find()) {
                     if (matcherGuid.groupCount() > 0) {
                         guid = matcherGuid.group(1);
@@ -107,7 +107,7 @@ public final class GCVote {
                     }
                 }
                 if (!requestByGuids) {
-                    final MatcherWrapper matcherWp = new MatcherWrapper(patternWaypoint, voteData);
+                    final MatcherWrapper matcherWp = new MatcherWrapper(PATTERN_WAYPOINT, voteData);
                     if (matcherWp.find()) {
                         if (matcherWp.groupCount() > 0) {
                             id = matcherWp.group(1);
@@ -119,7 +119,7 @@ public final class GCVote {
                 }
 
                 boolean loggedIn = false;
-                final MatcherWrapper matcherLoggedIn = new MatcherWrapper(patternLogIn, page);
+                final MatcherWrapper matcherLoggedIn = new MatcherWrapper(PATTERN_LOG_IN, page);
                 if (matcherLoggedIn.find()) {
                     if (matcherLoggedIn.groupCount() > 0) {
                         if (matcherLoggedIn.group(1).equalsIgnoreCase("true")) {
@@ -130,7 +130,7 @@ public final class GCVote {
 
                 float rating = 0;
                 try {
-                    final MatcherWrapper matcherRating = new MatcherWrapper(patternRating, voteData);
+                    final MatcherWrapper matcherRating = new MatcherWrapper(PATTERN_RATING, voteData);
                     if (matcherRating.find()) {
                         rating = Float.parseFloat(matcherRating.group(1));
                     }
@@ -143,7 +143,7 @@ public final class GCVote {
 
                 int votes = -1;
                 try {
-                    final MatcherWrapper matcherVotes = new MatcherWrapper(patternVotes, voteData);
+                    final MatcherWrapper matcherVotes = new MatcherWrapper(PATTERN_VOTES, voteData);
                     if (matcherVotes.find()) {
                         votes = Integer.parseInt(matcherVotes.group(1));
                     }
@@ -157,7 +157,7 @@ public final class GCVote {
                 float myVote = 0;
                 if (loggedIn) {
                     try {
-                        final MatcherWrapper matcherVote = new MatcherWrapper(patternVote, voteData);
+                        final MatcherWrapper matcherVote = new MatcherWrapper(PATTERN_VOTE, voteData);
                         if (matcherVote.find()) {
                             myVote = Float.parseFloat(matcherVote.group(1));
                         }
@@ -169,7 +169,7 @@ public final class GCVote {
                 if (StringUtils.isNotBlank(id)) {
                     GCVoteRating gcvoteRating = new GCVoteRating(rating, votes, myVote);
                     ratings.put(id, gcvoteRating);
-                    ratingsCache.put(guid, gcvoteRating);
+                    RATINGS_CACHE.put(guid, gcvoteRating);
                 }
             }
         } catch (RuntimeException e) {
