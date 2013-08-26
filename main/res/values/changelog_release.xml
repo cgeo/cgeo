@@ -2,10 +2,12 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release</b>\n
+    <b>2013.08.26</b>\n
     · Corrected language check for Talking Compass\n
     · Fall back to other map if selected map is not available any more\n
     · Have new list active after list creation\n
+    · Settings in light skin on Android 2.3 are visible again\n
+    · Other small bug fixes\n
     \n
     \n
     <b>2013.08.24</b>\n
@@ -47,7 +49,7 @@
     · Support of Block Party cache type\n
     · Support of GPS Adventure Exhibit cache type\n
     · Circles on the map only for physical stages\n
-    · Overlay icons on map sized correctly on highres displays\m
+    · Overlay icons on map sized correctly on highres displays\n
     · Cache archived status not correctly refreshed\n
     · Bad title shown when invoking c:geo from email (import operation)\n
     · Avoid crash when log images is too large\n
