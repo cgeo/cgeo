@@ -64,7 +64,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
                     cacheDistance.bringToFront();
                 }
                 onUpdateGeoData(geo);
-            } catch (final Exception e) {
+            } catch (final RuntimeException e) {
                 Log.w("Failed to UpdateLocation location.");
             }
         }
@@ -209,7 +209,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
 
             menu.findItem(R.id.menu_default_navigation).setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
             LoggingUI.onPrepareOptionsMenu(menu, cache);
-        } catch (final Exception e) {
+        } catch (final RuntimeException e) {
             // nothing
         }
 

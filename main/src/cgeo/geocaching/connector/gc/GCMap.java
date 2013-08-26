@@ -236,7 +236,9 @@ public class GCMap {
             }
             Log.d("Retrieved " + searchResult.getCount() + " caches for tile " + tile.toString());
 
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
+            Log.e("GCMap.parseMapJSON", e);
+        } catch (JSONException e) {
             Log.e("GCMap.parseMapJSON", e);
         }
 

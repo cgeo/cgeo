@@ -90,7 +90,9 @@ public class ComparatorUserInterface {
                         CacheComparator comparator = entry.cacheComparator.newInstance();
                         runAfterwards.run(comparator);
                     }
-                } catch (Exception e) {
+                } catch (InstantiationException e) {
+                    Log.e("selectComparator", e);
+                } catch (IllegalAccessException e) {
                     Log.e("selectComparator", e);
                 }
                 dialog.dismiss();

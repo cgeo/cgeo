@@ -114,7 +114,7 @@ public class EditWaypointActivity extends AbstractActivity {
                 if (own) {
                     initializeWaypointTypeSelector();
                 }
-            } catch (Exception e) {
+            } catch (RuntimeException e) {
                 Log.e("EditWaypointActivity.loadWaypointHandler", e);
             } finally {
                 if (waitDialog != null) {

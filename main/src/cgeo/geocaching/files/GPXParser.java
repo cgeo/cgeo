@@ -272,7 +272,7 @@ public abstract class GPXParser extends FileParser {
                                     Double.valueOf(longitude)));
                         }
                     }
-                } catch (final Exception e) {
+                } catch (final NumberFormatException e) {
                     Log.w("Failed to parse waypoint's latitude and/or longitude.");
                 }
             }
@@ -501,7 +501,7 @@ public abstract class GPXParser extends FileParser {
                         if (attrs.getIndex("available") > -1) {
                             cache.setDisabled(!attrs.getValue("available").equalsIgnoreCase("true"));
                         }
-                    } catch (final Exception e) {
+                    } catch (final RuntimeException e) {
                         Log.w("Failed to parse cache attributes.");
                     }
                 }
@@ -680,7 +680,7 @@ public abstract class GPXParser extends FileParser {
                         if (attrs.getIndex("ref") > -1) {
                             trackable.setGeocode(attrs.getValue("ref"));
                         }
-                    } catch (final Exception e) {
+                    } catch (final RuntimeException e) {
                         // nothing
                     }
                 }
@@ -724,7 +724,7 @@ public abstract class GPXParser extends FileParser {
                         if (attrs.getIndex("id") > -1) {
                             log.id = Integer.parseInt(attrs.getValue("id"));
                         }
-                    } catch (final Exception e) {
+                    } catch (final NumberFormatException e) {
                         // nothing
                     }
                 }

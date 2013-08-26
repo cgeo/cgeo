@@ -31,7 +31,7 @@ public class DecryptTextClickListener implements View.OnClickListener {
                 String string = (String) text;
                 logView.setText(CryptUtils.rot13(string));
             }
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             // nothing
         }
     }

@@ -4,7 +4,6 @@ import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IWaypoint;
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.Progress;
@@ -19,11 +18,13 @@ import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 
 import android.content.Context;
+import android.content.res.Resources.NotFoundException;
 import android.graphics.Canvas;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
@@ -243,7 +244,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
             }
 
             progress.dismiss();
-        } catch (Exception e) {
+        } catch (NotFoundException e) {
             Log.e("CachesOverlay.onTap", e);
             if (progress != null) {
                 progress.dismiss();

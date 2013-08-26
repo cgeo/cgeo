@@ -97,29 +97,21 @@ public final class GCVote {
 
                 String id = null;
                 String guid = null;
-                try {
-                    final MatcherWrapper matcherGuid = new MatcherWrapper(patternGuid, voteData);
-                    if (matcherGuid.find()) {
-                        if (matcherGuid.groupCount() > 0) {
-                            guid = matcherGuid.group(1);
-                            if (requestByGuids) {
-                                id = guid;
-                            }
+                final MatcherWrapper matcherGuid = new MatcherWrapper(patternGuid, voteData);
+                if (matcherGuid.find()) {
+                    if (matcherGuid.groupCount() > 0) {
+                        guid = matcherGuid.group(1);
+                        if (requestByGuids) {
+                            id = guid;
                         }
                     }
-                } catch (Exception e) {
-                    Log.w("GCVote.getRating: Failed to parse guid");
                 }
                 if (!requestByGuids) {
-                    try {
-                        final MatcherWrapper matcherWp = new MatcherWrapper(patternWaypoint, voteData);
-                        if (matcherWp.find()) {
-                            if (matcherWp.groupCount() > 0) {
-                                id = matcherWp.group(1);
-                            }
+                    final MatcherWrapper matcherWp = new MatcherWrapper(patternWaypoint, voteData);
+                    if (matcherWp.find()) {
+                        if (matcherWp.groupCount() > 0) {
+                            id = matcherWp.group(1);
                         }
-                    } catch (Exception e) {
-                        Log.w("GCVote.getRating: Failed to parse waypoint");
                     }
                 }
                 if (id == null) {
@@ -127,17 +119,13 @@ public final class GCVote {
                 }
 
                 boolean loggedIn = false;
-                try {
-                    final MatcherWrapper matcherLoggedIn = new MatcherWrapper(patternLogIn, page);
-                    if (matcherLoggedIn.find()) {
-                        if (matcherLoggedIn.groupCount() > 0) {
-                            if (matcherLoggedIn.group(1).equalsIgnoreCase("true")) {
-                                loggedIn = true;
-                            }
+                final MatcherWrapper matcherLoggedIn = new MatcherWrapper(patternLogIn, page);
+                if (matcherLoggedIn.find()) {
+                    if (matcherLoggedIn.groupCount() > 0) {
+                        if (matcherLoggedIn.group(1).equalsIgnoreCase("true")) {
+                            loggedIn = true;
                         }
                     }
-                } catch (Exception e) {
-                    Log.w("GCVote.getRating: Failed to parse loggedIn");
                 }
 
                 float rating = 0;
@@ -146,7 +134,7 @@ public final class GCVote {
                     if (matcherRating.find()) {
                         rating = Float.parseFloat(matcherRating.group(1));
                     }
-                } catch (Exception e) {
+                } catch (NumberFormatException e) {
                     Log.w("GCVote.getRating: Failed to parse rating");
                 }
                 if (rating <= 0) {
@@ -159,7 +147,7 @@ public final class GCVote {
                     if (matcherVotes.find()) {
                         votes = Integer.parseInt(matcherVotes.group(1));
                     }
-                } catch (Exception e) {
+                } catch (NumberFormatException e) {
                     Log.w("GCVote.getRating: Failed to parse vote count");
                 }
                 if (votes < 0) {
@@ -173,7 +161,7 @@ public final class GCVote {
                         if (matcherVote.find()) {
                             myVote = Float.parseFloat(matcherVote.group(1));
                         }
-                    } catch (Exception e) {
+                    } catch (NumberFormatException e) {
                         Log.w("GCVote.getRating: Failed to parse user's vote");
                     }
                 }
@@ -184,7 +172,7 @@ public final class GCVote {
                     ratingsCache.put(guid, gcvoteRating);
                 }
             }
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             Log.e("GCVote.getRating", e);
         }
 

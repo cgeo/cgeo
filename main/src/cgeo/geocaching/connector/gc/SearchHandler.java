@@ -91,7 +91,7 @@ public class SearchHandler extends Handler {
 
                 dlg.create().show();
             }
-        } catch (Exception e) {
+        } catch (MalformedURLException e) {
             Log.e("Error in reCAPTCHA handler", e);
         }
     }

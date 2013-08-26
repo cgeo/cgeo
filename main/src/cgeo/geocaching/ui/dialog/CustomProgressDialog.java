@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -38,7 +39,11 @@ public class CustomProgressDialog extends ProgressDialog {
                     method.invoke(textView, View.GONE);
                 }
             }
-        } catch (Exception e) {
+        } catch (NoSuchMethodException e) {
+            Log.e("Failed to invoke the progressDialog method 'setVisibility' and set 'mProgressNumber' to GONE.", e);
+        } catch (IllegalAccessException e) {
+            Log.e("Failed to invoke the progressDialog method 'setVisibility' and set 'mProgressNumber' to GONE.", e);
+        } catch (InvocationTargetException e) {
             Log.e("Failed to invoke the progressDialog method 'setVisibility' and set 'mProgressNumber' to GONE.", e);
         }
     }

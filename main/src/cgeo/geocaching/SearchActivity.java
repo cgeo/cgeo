@@ -238,7 +238,7 @@ public class SearchActivity extends AbstractActivity {
                         lonEdit.setHint(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
                     }
                 }
-            } catch (final Exception e) {
+            } catch (final RuntimeException e) {
                 Log.w("Failed to update location.");
             }
         }

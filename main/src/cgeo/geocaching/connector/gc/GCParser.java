@@ -147,7 +147,7 @@ public abstract class GCParser {
                         }
                     }
                 }
-            } catch (final Exception e) {
+            } catch (final RuntimeException e) {
                 // failed to parse GUID and/or Disabled
                 Log.w("GCParser.parseSearch: Failed to parse GUID and/or Disabled data");
             }
@@ -320,7 +320,7 @@ public abstract class GCParser {
 
                 LocParser.parseLoc(searchResult, coordinates);
 
-            } catch (final Exception e) {
+            } catch (final RuntimeException e) {
                 Log.e("GCParser.parseSearch.CIDs", e);
             }
         }
@@ -569,7 +569,7 @@ public abstract class GCParser {
                 }
                 cache.setAttributes(attributes);
             }
-        } catch (final Exception e) {
+        } catch (final RuntimeException e) {
             // failed to parse cache attributes
             Log.w("GCParser.parseCache: Failed to parse cache attributes");
         }
@@ -598,7 +598,7 @@ public abstract class GCParser {
                 }
                 cache.addSpoiler(new Image(url, title, description));
             }
-        } catch (final Exception e) {
+        } catch (final RuntimeException e) {
             // failed to parse cache spoilers
             Log.w("GCParser.parseCache: Failed to parse cache spoilers");
         }
@@ -632,7 +632,7 @@ public abstract class GCParser {
                     }
                 }
             }
-        } catch (final Exception e) {
+        } catch (final RuntimeException e) {
             // failed to parse cache inventory
             Log.w("GCParser.parseCache: Failed to parse cache inventory (2)");
         }
@@ -654,7 +654,7 @@ public abstract class GCParser {
                     }
                 }
             }
-        } catch (final Exception e) {
+        } catch (final NumberFormatException e) {
             // failed to parse logs
             Log.w("GCParser.parseCache: Failed to parse cache log count");
         }
@@ -1083,7 +1083,7 @@ public abstract class GCParser {
 
                 page = Network.getResponseData(Network.postRequest(uri, params));
             }
-        } catch (final Exception e) {
+        } catch (final RuntimeException e) {
             Log.e("GCParser.postLog.confim", e);
         }
 
@@ -1396,7 +1396,7 @@ public abstract class GCParser {
                 trackable.setOwnerGuid(matcherOwner.group(1));
                 trackable.setOwner(matcherOwner.group(2).trim());
             }
-        } catch (final Exception e) {
+        } catch (final RuntimeException e) {
             // failed to parse trackable owner name
             Log.w("GCParser.parseTrackable: Failed to parse trackable owner name");
         }
@@ -1427,7 +1427,7 @@ public abstract class GCParser {
             if (TextUtils.matches(page, GCConstants.PATTERN_TRACKABLE_SPOTTEDOWNER)) {
                 trackable.setSpottedType(Trackable.SPOTTED_OWNER);
             }
-        } catch (final Exception e) {
+        } catch (final RuntimeException e) {
             // failed to parse trackable last known place
             Log.w("GCParser.parseTrackable: Failed to parse trackable last known place");
         }
@@ -1476,7 +1476,7 @@ public abstract class GCParser {
                     trackable.setDetails(convertLinks(details));
                 }
             }
-        } catch (final Exception e) {
+        } catch (final RuntimeException e) {
             // failed to parse trackable details & image
             Log.w("GCParser.parseTrackable: Failed to parse trackable details & image");
         }

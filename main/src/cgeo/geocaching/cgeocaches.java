@@ -655,7 +655,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
             setMenuItemLabel(menu, MENU_REMOVE_FROM_HISTORY, R.string.cache_remove_from_history, R.string.cache_clear_history);
             setMenuItemLabel(menu, MENU_EXPORT, R.string.export, R.string.export);
-        } catch (final Exception e) {
+        } catch (final RuntimeException e) {
             Log.e("cgeocaches.onPrepareOptionsMenu", e);
         }
 

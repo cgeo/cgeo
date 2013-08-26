@@ -47,6 +47,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -141,7 +142,7 @@ public class MainActivity extends AbstractActivity {
 
                     navLocation.setText(StringUtils.join(addressParts, ", "));
                 }
-            } catch (Exception e) {
+            } catch (RuntimeException e) {
                 // nothing
             }
 
@@ -721,7 +722,7 @@ public class MainActivity extends AbstractActivity {
                 final Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
                 final Geopoint coords = app.currentGeo().getCoords();
                 addresses = geocoder.getFromLocation(coords.getLatitude(), coords.getLongitude(), 1);
-            } catch (Exception e) {
+            } catch (IOException e) {
                 Log.i("Failed to obtain address");
             }
 

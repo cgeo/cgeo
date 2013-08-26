@@ -5,6 +5,7 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 
 import java.math.BigInteger;
+import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 
 import javax.crypto.Mac;
@@ -111,7 +112,7 @@ public final class CryptUtils {
             final Mac mac = Mac.getInstance("HmacSHA1");
             mac.init(secretKeySpec);
             macBytes = mac.doFinal(text.getBytes());
-        } catch (Exception e) {
+        } catch (GeneralSecurityException e) {
             Log.e("CryptUtils.hashHmac", e);
         }
 

@@ -27,7 +27,7 @@ class GoogleMapsApp extends AbstractPointNavigationApp {
             activity.startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse("geo:" + point.getLatitude() + "," + point.getLongitude())));
             return;
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             // nothing
         }
         Log.i("GoogleMapsApp.navigate: No maps application available.");

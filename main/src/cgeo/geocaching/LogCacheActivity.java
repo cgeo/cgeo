@@ -570,7 +570,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 }
 
                 return logResult.getPostLogResult();
-            } catch (Exception e) {
+            } catch (RuntimeException e) {
                 Log.e("VisitCacheActivity.Poster.doInBackgroundInternal", e);
             }
 

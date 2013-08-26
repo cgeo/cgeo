@@ -141,7 +141,7 @@ class GpxExport extends AbstractExport {
                         ExportTask.this.publishProgress(countExported);
                     }
                 });
-            } catch (final Exception e) {
+            } catch (final IOException e) {
                 Log.e("GpxExport.ExportTask export", e);
 
                 if (writer != null) {

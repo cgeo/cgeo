@@ -50,7 +50,7 @@ public class UsefulAppsActivity extends AbstractActivity {
                 marketIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
                 activity.startActivity(marketIntent);
 
-            } catch (Exception e) {
+            } catch (RuntimeException e) {
                 // market not available in standard emulator
             }
         }

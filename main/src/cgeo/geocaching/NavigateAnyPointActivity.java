@@ -331,7 +331,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
             menu.findItem(R.id.menu_caches_around).setVisible(visible);
 
             menu.findItem(R.id.menu_clear_history).setEnabled(!getHistoryOfSearchedLocations().isEmpty());
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             // nothing
         }
 
@@ -454,7 +454,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
             try {
                 latButton.setHint(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
                 lonButton.setHint(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
-            } catch (final Exception e) {
+            } catch (final RuntimeException e) {
                 Log.w("Failed to update location.");
             }
         }

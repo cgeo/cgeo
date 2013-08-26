@@ -282,7 +282,7 @@ public class CompassActivity extends AbstractActivity {
                 if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
                     updateNorthHeading(geo.getBearing());
                 }
-            } catch (Exception e) {
+            } catch (RuntimeException e) {
                 Log.w("Failed to LocationUpdater location.");
             }
         }

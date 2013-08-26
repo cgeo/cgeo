@@ -609,7 +609,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 default: // DETAILED
                     menu.findItem(R.id.menu_strategy_detailed).setChecked(true);
             }
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             Log.e("CGeoMap.onPrepareOptionsMenu", e);
         }
 
@@ -948,7 +948,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                             mapView.repaintRequired(overlayPosition);
                         }
                     }
-                } catch (Exception e) {
+                } catch (RuntimeException e) {
                     Log.w("Failed to update location.");
                 }
             }
@@ -1418,7 +1418,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                                 }
 
                                 sleep(delay);
-                            } catch (Exception e) {
+                            } catch (InterruptedException e) {
                                 // nothing
                             }
                         }
@@ -1501,7 +1501,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             try {
                 mapController.setCenter(mapItemFactory.getGeoPointBase(new Geopoint(mapState[0] / 1.0e6, mapState[1] / 1.0e6)));
                 mapController.setZoom(mapState[2]);
-            } catch (Exception e) {
+            } catch (RuntimeException e) {
                 // nothing at all
             }
 
@@ -1525,7 +1525,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 if (viewport.getLatitudeSpan() != 0 && viewport.getLongitudeSpan() != 0) {
                     mapController.zoomToSpan((int) (viewport.getLatitudeSpan() * 1e6), (int) (viewport.getLongitudeSpan() * 1e6));
                 }
-            } catch (Exception e) {
+            } catch (RuntimeException e) {
                 // nothing at all
             }
 
