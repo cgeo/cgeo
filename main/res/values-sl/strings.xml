@@ -1159,6 +1159,7 @@
     <string name="tts_service">Glasovni kompas</string>
     <string name="tts_start">Začni glasovno navigacijo</string>
     <string name="tts_stop">Ustavi glasovno navigacijo</string>
+    <string name="err_tts_lang_not_supported">Trenutno izbrani jezik ni podprt s storitvijo pretvorbe besedila v govor.</string>
 
     <!-- various -->
     <string name="clipboard_copy_ok">Skopirano v odložišče</string>
