@@ -1,16 +1,14 @@
 package cgeo.geocaching;
 
+import cgeo.CGeoTestCase;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
-
-import android.os.Handler;
-import android.test.AndroidTestCase;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class GeocacheTest extends AndroidTestCase {
+public class GeocacheTest extends CGeoTestCase {
 
     final static private class MockedEventCache extends Geocache {
         public MockedEventCache(final Date date) {
@@ -62,7 +60,8 @@ public class GeocacheTest extends AndroidTestCase {
 
     private static void assertWaypointsParsed(String note, int expectedWaypoints) {
         Geocache cache = new Geocache();
-        cache.setGeocode("Test" + System.nanoTime());
+        final String geocode = "Test" + System.nanoTime();
+        cache.setGeocode(geocode);
         cache.setWaypoints(new ArrayList<Waypoint>(), false);
         for (int i = 0; i < 2; i++) {
             cache.setPersonalNote(note);
@@ -76,7 +75,7 @@ public class GeocacheTest extends AndroidTestCase {
             assertEquals(cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " 1", waypoint.getName());
             cache.store(StoredList.TEMPORARY_LIST_ID, null);
         }
-        cache.drop(new Handler());
+        removeCacheCompletely(geocode);
     }
 
     public static void testMergeDownloadedStored() {
