@@ -1,12 +1,17 @@
 package cgeo.geocaching.utils;
 
 
+import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.StringUtils;
+
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -63,7 +68,7 @@ public final class CryptUtils {
 
     public static String rot13(String text) {
         if (text == null) {
-            return "";
+            return StringUtils.EMPTY;
         }
         final StringBuilder result = new StringBuilder();
         Rot13Encryption rot13 = new Rot13Encryption();
@@ -77,42 +82,44 @@ public final class CryptUtils {
     }
 
     public static String md5(String text) {
-        String hashed = "";
-
         try {
             final MessageDigest digest = MessageDigest.getInstance("MD5");
-            digest.update(text.getBytes(), 0, text.length());
-            hashed = new BigInteger(1, digest.digest()).toString(16);
-        } catch (Exception e) {
+            digest.update(text.getBytes(CharEncoding.UTF_8), 0, text.length());
+            return new BigInteger(1, digest.digest()).toString(16);
+        } catch (NoSuchAlgorithmException e) {
+            Log.e("CryptUtils.md5", e);
+        } catch (UnsupportedEncodingException e) {
             Log.e("CryptUtils.md5", e);
         }
 
-        return hashed;
+        return StringUtils.EMPTY;
     }
 
     public static String sha1(String text) {
-        String hashed = "";
-
         try {
             final MessageDigest digest = MessageDigest.getInstance("SHA-1");
-            digest.update(text.getBytes(), 0, text.length());
-            hashed = new BigInteger(1, digest.digest()).toString(16);
-        } catch (Exception e) {
+            digest.update(text.getBytes(CharEncoding.UTF_8), 0, text.length());
+            return new BigInteger(1, digest.digest()).toString(16);
+        } catch (NoSuchAlgorithmException e) {
+            Log.e("CryptUtils.sha1", e);
+        } catch (UnsupportedEncodingException e) {
             Log.e("CryptUtils.sha1", e);
         }
 
-        return hashed;
+        return StringUtils.EMPTY;
     }
 
     public static byte[] hashHmac(String text, String salt) {
         byte[] macBytes = {};
 
         try {
-            final SecretKeySpec secretKeySpec = new SecretKeySpec(salt.getBytes(), "HmacSHA1");
+            final SecretKeySpec secretKeySpec = new SecretKeySpec(salt.getBytes(CharEncoding.UTF_8), "HmacSHA1");
             final Mac mac = Mac.getInstance("HmacSHA1");
             mac.init(secretKeySpec);
-            macBytes = mac.doFinal(text.getBytes());
+            macBytes = mac.doFinal(text.getBytes(CharEncoding.UTF_8));
         } catch (GeneralSecurityException e) {
+            Log.e("CryptUtils.hashHmac", e);
+        } catch (UnsupportedEncodingException e) {
             Log.e("CryptUtils.hashHmac", e);
         }
 

@@ -1,11 +1,14 @@
 package cgeo.geocaching.utils;
 
+import org.apache.commons.lang3.CharEncoding;
+
 import android.os.Environment;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.Writer;
 
 public final class Log {
@@ -107,7 +110,7 @@ public final class Log {
         }
         Writer writer = null;
         try {
-            writer = new BufferedWriter(new FileWriter(file, true));
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), CharEncoding.UTF_8));
             writer.write(msg);
         } catch (final IOException e) {
             Log.e("logToFile: cannot write to " + file, e);
