@@ -1,12 +1,11 @@
 package cgeo.geocaching.connector;
 
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import org.apache.commons.lang3.StringUtils;
-
-import android.app.Activity;
 
 public abstract class AbstractConnector implements IConnector {
 
@@ -79,7 +78,7 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
-    public ILoggingManager getLoggingManager(Activity activity, Geocache cache) {
+    public ILoggingManager getLoggingManager(final LogCacheActivity activity, final Geocache cache) {
         return new NoLoggingManager();
     }
 

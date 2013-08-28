@@ -3,10 +3,9 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.cgData;
-import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.settings.Settings;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -61,13 +60,13 @@ public class LoggingUI extends AbstractUIFactory {
         }
     }
 
-    public static boolean onMenuItemSelected(final MenuItem item, IAbstractActivity activity, Geocache cache) {
+    public static boolean onMenuItemSelected(final MenuItem item, final Activity activity, final Geocache cache) {
         switch (item.getItemId()) {
             case R.id.menu_log_visit:
                 cache.logVisit(activity);
                 return true;
             case R.id.menu_log_visit_offline:
-                showOfflineMenu(cache, (Activity) activity);
+                showOfflineMenu(cache, activity);
                 return true;
             default:
                 return false;
@@ -100,7 +99,7 @@ public class LoggingUI extends AbstractUIFactory {
                 if (logTypeEntry.logType == null) {
                     switch (logTypeEntry.specialLogType) {
                         case LOG_CACHE:
-                            cache.logVisit((IAbstractActivity) activity);
+                            cache.logVisit(activity);
                             break;
 
                         case CLEAR_LOG:

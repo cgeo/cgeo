@@ -1,7 +1,6 @@
 package cgeo.geocaching.activity;
 
 import cgeo.geocaching.cgeoapplication;
-import cgeo.geocaching.compatibility.Compatibility;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -77,7 +76,7 @@ public abstract class AbstractListActivity extends FragmentListActivity implemen
 
     @Override
     public void invalidateOptionsMenuCompatible() {
-        Compatibility.invalidateOptionsMenu(this);
+        ActivityMixin.invalidateOptionsMenu(this);
     }
 
     public void onCreate(Bundle savedInstanceState, int resourceLayoutID) {

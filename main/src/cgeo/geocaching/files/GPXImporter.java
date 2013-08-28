@@ -3,12 +3,12 @@ package cgeo.geocaching.files;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.StaticMapsProvider;
 import cgeo.geocaching.cgData;
-import cgeo.geocaching.activity.IAbstractActivity;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
@@ -17,7 +17,6 @@ import org.apache.commons.lang3.StringUtils;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -61,13 +60,13 @@ public class GPXImporter {
 
     private final Resources res;
     private final int listId;
-    private final IAbstractActivity fromActivity;
+    private final Activity fromActivity;
     private final Handler importFinishedHandler;
 
-    public GPXImporter(final IAbstractActivity fromActivity, final int listId, final Handler importFinishedHandler) {
+    public GPXImporter(final Activity fromActivity, final int listId, final Handler importFinishedHandler) {
         this.listId = listId;
         this.fromActivity = fromActivity;
-        res = ((Activity) fromActivity).getResources();
+        res = fromActivity.getResources();
         this.importFinishedHandler = importFinishedHandler;
     }
 
@@ -91,8 +90,8 @@ public class GPXImporter {
      * Import GPX provided via intent of activity that instantiated this GPXImporter.
      */
     public void importGPX() {
-        final ContentResolver contentResolver = ((Activity) fromActivity).getContentResolver();
-        final Intent intent = ((Activity) fromActivity).getIntent();
+        final ContentResolver contentResolver = fromActivity.getContentResolver();
+        final Intent intent = fromActivity.getIntent();
         final Uri uri = intent.getData();
 
         String mimeType = intent.getType();
@@ -397,7 +396,7 @@ public class GPXImporter {
             switch (msg.what) {
                 case IMPORT_STEP_START:
                     final Message cancelMessage = importStepHandler.obtainMessage(IMPORT_STEP_CANCEL);
-                    progress.show((Context) fromActivity, res.getString(R.string.gpx_import_title_reading_file), res.getString(R.string.gpx_import_loading_caches), ProgressDialog.STYLE_HORIZONTAL, cancelMessage);
+                    progress.show(fromActivity, res.getString(R.string.gpx_import_title_reading_file), res.getString(R.string.gpx_import_loading_caches), ProgressDialog.STYLE_HORIZONTAL, cancelMessage);
                     break;
 
                 case IMPORT_STEP_READ_FILE:
@@ -409,7 +408,7 @@ public class GPXImporter {
                 case IMPORT_STEP_STORE_STATIC_MAPS:
                     progress.dismiss();
                     final Message skipMessage = importStepHandler.obtainMessage(IMPORT_STEP_STATIC_MAPS_SKIPPED, msg.arg2, 0);
-                    progress.show((Context) fromActivity, res.getString(R.string.gpx_import_title_static_maps), res.getString(R.string.gpx_import_store_static_maps), ProgressDialog.STYLE_HORIZONTAL, skipMessage);
+                    progress.show(fromActivity, res.getString(R.string.gpx_import_title_static_maps), res.getString(R.string.gpx_import_store_static_maps), ProgressDialog.STYLE_HORIZONTAL, skipMessage);
                     progress.setMaxProgressAndReset(msg.arg2);
                     break;
 
@@ -418,19 +417,19 @@ public class GPXImporter {
                     progressHandler.cancel();
                     final StringBuilder bufferSkipped = new StringBuilder(20);
                     bufferSkipped.append(res.getString(R.string.gpx_import_static_maps_skipped)).append(", ").append(msg.arg1).append(' ').append(res.getString(R.string.gpx_import_caches_imported));
-                    fromActivity.helpDialog(res.getString(R.string.gpx_import_title_caches_imported), bufferSkipped.toString());
+                    ActivityMixin.helpDialog(fromActivity, res.getString(R.string.gpx_import_title_caches_imported), bufferSkipped.toString());
                     importFinished();
                     break;
 
                 case IMPORT_STEP_FINISHED:
                     progress.dismiss();
-                    fromActivity.helpDialog(res.getString(R.string.gpx_import_title_caches_imported), msg.arg1 + " " + res.getString(R.string.gpx_import_caches_imported));
+                    ActivityMixin.helpDialog(fromActivity, res.getString(R.string.gpx_import_title_caches_imported), msg.arg1 + " " + res.getString(R.string.gpx_import_caches_imported));
                     importFinished();
                     break;
 
                 case IMPORT_STEP_FINISHED_WITH_ERROR:
                     progress.dismiss();
-                    fromActivity.helpDialog(res.getString(R.string.gpx_import_title_caches_import_failed), res.getString(msg.arg1) + "\n\n" + msg.obj);
+                    ActivityMixin.helpDialog(fromActivity, res.getString(R.string.gpx_import_title_caches_import_failed), res.getString(msg.arg1) + "\n\n" + msg.obj);
                     importFinished();
                     break;
 
@@ -442,7 +441,7 @@ public class GPXImporter {
                 case IMPORT_STEP_CANCELED:
                     final StringBuilder bufferCanceled = new StringBuilder(20);
                     bufferCanceled.append(res.getString(R.string.gpx_import_canceled));
-                    fromActivity.showShortToast(bufferCanceled.toString());
+                    ActivityMixin.showShortToast(fromActivity, bufferCanceled.toString());
                     importFinished();
                     break;
 

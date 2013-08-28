@@ -2,6 +2,7 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
+import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgData;
@@ -15,15 +16,14 @@ import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
-import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 
@@ -104,7 +104,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public ILoggingManager getLoggingManager(Activity activity, Geocache cache) {
+    public ILoggingManager getLoggingManager(final LogCacheActivity activity, final Geocache cache) {
         return new GCLoggingManager(activity, cache);
     }
 

@@ -9,7 +9,6 @@ import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 
-import android.app.Activity;
 import android.net.Uri;
 
 import java.util.Arrays;
@@ -26,10 +25,10 @@ public class OkapiLoggingManager implements ILoggingManager {
     private final static List<LogType> standardLogTypes = Arrays.asList(LogType.FOUND_IT, LogType.DIDNT_FIND_IT, LogType.NOTE);
     private final static List<LogType> eventLogTypes = Arrays.asList(LogType.WILL_ATTEND, LogType.ATTENDED, LogType.NOTE);
 
-    public OkapiLoggingManager(Activity activity, OCApiLiveConnector connector, Geocache cache) {
+    public OkapiLoggingManager(final LogCacheActivity activity, OCApiLiveConnector connector, Geocache cache) {
         this.connector = connector;
         this.cache = cache;
-        this.activity = (LogCacheActivity) activity;
+        this.activity = activity;
     }
 
     @Override

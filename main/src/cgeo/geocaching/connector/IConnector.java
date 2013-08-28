@@ -2,9 +2,8 @@ package cgeo.geocaching.connector;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
+import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.geopoint.Geopoint;
-
-import android.app.Activity;
 
 public interface IConnector {
     /**
@@ -87,7 +86,7 @@ public interface IConnector {
      *
      * @return
      */
-    public ILoggingManager getLoggingManager(Activity activity, Geocache cache);
+    public ILoggingManager getLoggingManager(final LogCacheActivity activity, final Geocache cache);
 
     /**
      * get host name of the connector server for dynamic loading of data

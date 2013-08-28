@@ -1,8 +1,7 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.cgData.StorageLocation;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ILoggingManager;
@@ -448,16 +447,16 @@ public class Geocache implements ICache, IWaypoint {
         return cacheType.getValue().isEvent();
     }
 
-    public void logVisit(final IAbstractActivity fromActivity) {
+    public void logVisit(final Activity fromActivity) {
         if (!getConnector().canLog(this)) {
-            fromActivity.showToast(((Activity) fromActivity).getResources().getString(R.string.err_cannot_log_visit));
+            ActivityMixin.showToast(fromActivity, fromActivity.getResources().getString(R.string.err_cannot_log_visit));
             return;
         }
-        final Intent logVisitIntent = new Intent((Activity) fromActivity, LogCacheActivity.class);
+        final Intent logVisitIntent = new Intent(fromActivity, LogCacheActivity.class);
         logVisitIntent.putExtra(LogCacheActivity.EXTRAS_ID, cacheId);
         logVisitIntent.putExtra(LogCacheActivity.EXTRAS_GEOCODE, geocode);
 
-        ((Activity) fromActivity).startActivity(logVisitIntent);
+        fromActivity.startActivity(logVisitIntent);
     }
 
     public void logOffline(final Activity fromActivity, final LogType logType) {
@@ -569,7 +568,7 @@ public class Geocache implements ICache, IWaypoint {
         return getConnector().supportsOwnCoordinates();
     }
 
-    public ILoggingManager getLoggingManager(Activity activity) {
+    public ILoggingManager getLoggingManager(final LogCacheActivity activity) {
         return getConnector().getLoggingManager(activity, this);
     }
 

@@ -3,7 +3,6 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ILoggingManager;
@@ -13,12 +12,12 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.loaders.UrlLoader;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -38,8 +37,8 @@ public class GCLoggingManager implements ILoggingManager, LoaderManager.LoaderCa
     private List<LogType> possibleLogTypes;
     private boolean hasLoaderError = true;
 
-    public GCLoggingManager(Activity activity, Geocache cache) {
-        this.activity = (LogCacheActivity) activity;
+    public GCLoggingManager(final LogCacheActivity activity, final Geocache cache) {
+        this.activity = activity;
         this.cache = cache;
     }
 

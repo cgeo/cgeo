@@ -1,6 +1,7 @@
 package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
@@ -16,7 +17,6 @@ import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 
@@ -110,7 +110,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public ILoggingManager getLoggingManager(Activity activity, Geocache cache) {
+    public ILoggingManager getLoggingManager(final LogCacheActivity activity, final Geocache cache) {
         return new OkapiLoggingManager(activity, this, cache);
     }
 
