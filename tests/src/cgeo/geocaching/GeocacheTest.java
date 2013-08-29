@@ -50,32 +50,41 @@ public class GeocacheTest extends CGeoTestCase {
         assertEquals("GC1234", cache.getGeocode());
     }
 
-    public static void testUpdateWaypointFromNote() {
+    public void testUpdateWaypointFromNote() {
         assertWaypointsParsed("Test N51 13.888 E007 03.444", 1);
     }
 
-    public static void testUpdateWaypointsFromNote() {
+    public void testUpdateWaypointsFromNote() {
         assertWaypointsParsed("Test N51 13.888 E007 03.444 Test N51 13.233 E007 03.444 Test N51 09.123 E007 03.444", 3);
     }
 
-    private static void assertWaypointsParsed(String note, int expectedWaypoints) {
-        Geocache cache = new Geocache();
-        final String geocode = "Test" + System.nanoTime();
-        cache.setGeocode(geocode);
-        cache.setWaypoints(new ArrayList<Waypoint>(), false);
-        for (int i = 0; i < 2; i++) {
-            cache.setPersonalNote(note);
-            cache.parseWaypointsFromNote();
-            final List<Waypoint> waypoints = cache.getWaypoints();
-            assertNotNull(waypoints);
-            assertEquals(expectedWaypoints, waypoints.size());
-            final Waypoint waypoint = waypoints.get(0);
-            assertEquals(new Geopoint("N51 13.888 E007 03.444"), waypoint.getCoords());
-            //            assertEquals("Test", waypoint.getNote());
-            assertEquals(cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " 1", waypoint.getName());
-            cache.store(StoredList.TEMPORARY_LIST_ID, null);
+    private void assertWaypointsParsed(String note, int expectedWaypoints) {
+
+        recordMapStoreFlags();
+
+        try {
+            setMapStoreFlags(false, false);
+
+            Geocache cache = new Geocache();
+            final String geocode = "Test" + System.nanoTime();
+            cache.setGeocode(geocode);
+            cache.setWaypoints(new ArrayList<Waypoint>(), false);
+            for (int i = 0; i < 2; i++) {
+                cache.setPersonalNote(note);
+                cache.parseWaypointsFromNote();
+                final List<Waypoint> waypoints = cache.getWaypoints();
+                assertNotNull(waypoints);
+                assertEquals(expectedWaypoints, waypoints.size());
+                final Waypoint waypoint = waypoints.get(0);
+                assertEquals(new Geopoint("N51 13.888 E007 03.444"), waypoint.getCoords());
+                //            assertEquals("Test", waypoint.getNote());
+                assertEquals(cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " 1", waypoint.getName());
+                cache.store(StoredList.TEMPORARY_LIST_ID, null);
+            }
+            removeCacheCompletely(geocode);
+        } finally {
+            restoreMapStoreFlags();
         }
-        removeCacheCompletely(geocode);
     }
 
     public static void testMergeDownloadedStored() {
