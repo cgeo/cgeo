@@ -112,4 +112,9 @@
     <string name="pref_ocpl_tokenpublic">ocpl_tokenpublic</string>
     <string name="pref_temp_ocpl_token_secret">ocpl-temp-token-secret</string>
     <string name="pref_temp_ocpl_token_public">ocpl-temp-token-public</string>
+    <string name="pref_fakekey_gc_website">fakekey_gc_website</string>
+    <string name="pref_fakekey_ocde_website">fakekey_ocde_website</string>
+    <string name="pref_fakekey_ocpl_website">fakekey_ocpl_website</string>
+    <string name="pref_fakekey_gcvote_website">fakekey_gcvote_website</string>
+    <string name="pref_fakekey_sendtocgeo_website">fakekey_sendtocgeo_website</string>
 </resources>

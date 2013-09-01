@@ -510,7 +510,10 @@
     <string name="init_use_native_ua">Android browser</string>
     <string name="init_summary_use_native_ua">Identify as Android browser. Solves login problems when using certain network providers.</string>
     <string name="init_rendertheme_folder">Map Themes Directory</string>
-
+    <string name="settings_open_website">Open website</string>
+    <string name="settings_settings">Settings</string>
+    <string name="settings_information">Information</string>
+    
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
     <string name="map_source_google_satellite">Google: Satellite</string>

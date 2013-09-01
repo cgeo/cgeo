@@ -8,6 +8,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.files.SimpleDirChooser;
 import cgeo.geocaching.maps.MapProviderFactory;
@@ -151,6 +152,22 @@ public class SettingsActivity extends PreferenceActivity {
         getPreference(R.string.pref_connectorOCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         getPreference(R.string.pref_connectorOCPLActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         getPreference(R.string.pref_connectorGCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
+        setWebsite(R.string.pref_fakekey_gc_website, GCConnector.getInstance().getHost());
+        setWebsite(R.string.pref_fakekey_ocde_website, "opencaching.de");
+        setWebsite(R.string.pref_fakekey_ocpl_website, "opencaching.pl");
+        setWebsite(R.string.pref_fakekey_gcvote_website, "gcvote.com");
+        setWebsite(R.string.pref_fakekey_sendtocgeo_website, "send2.cgeo.org");
+    }
+
+    private void setWebsite(final int preferenceKey, final String host) {
+        Preference preference = getPreference(preferenceKey);
+        preference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(final Preference preference) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://" + host)));
+                return true;
+            }
+        });
     }
 
     private static String getKey(final int prefKeyId) {
