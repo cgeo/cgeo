@@ -1614,7 +1614,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         return;
                     }
 
-                    ((ImageView) view.findViewById(R.id.map_preview)).setImageDrawable(image);
+                    final ImageView imageView = (ImageView) view.findViewById(R.id.map_preview);
+                    imageView.setImageDrawable(image);
                     view.findViewById(R.id.map_preview_box).setVisibility(View.VISIBLE);
                 } catch (final Exception e) {
                     Log.e("CacheDetailActivity.PreviewMapTask", e);

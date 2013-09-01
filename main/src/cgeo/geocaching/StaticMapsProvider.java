@@ -14,13 +14,9 @@ import ch.boye.httpclientandroidlib.HttpResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
-import android.util.DisplayMetrics;
-import android.view.Display;
-import android.view.WindowManager;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -40,6 +36,11 @@ public final class StaticMapsProvider {
 
     /** ThreadPool restricting this to 1 Thread. **/
     private static final BlockingThreadPool POOL = new BlockingThreadPool(1, Thread.MIN_PRIORITY);
+
+    /**
+     * max size in free API version: https://developers.google.com/maps/documentation/staticmaps/#Imagesizes
+     */
+    private static final int GOOGLE_MAPS_MAX_SIZE = 640;
 
     private StaticMapsProvider() {
         // utility class
@@ -61,7 +62,7 @@ public final class StaticMapsProvider {
         final Parameters params = new Parameters(
                 "center", latlonMap,
                 "zoom", String.valueOf(zoom),
-                "size", String.valueOf(width) + 'x' + String.valueOf(height),
+                "size", String.valueOf(limitSize(width)) + 'x' + String.valueOf(limitSize(height)),
                 "maptype", mapType,
                 "markers", "icon:" + markerUrl + '|' + shadow + latlonMap,
                 "sensor", "false");
@@ -86,6 +87,10 @@ public final class StaticMapsProvider {
                 FileUtils.deleteIgnoringFailure(file);
             }
         }
+    }
+
+    private static int limitSize(final int imageSize) {
+        return Math.min(imageSize, GOOGLE_MAPS_MAX_SIZE);
     }
 
     public static void downloadMaps(final Geocache cache) {
@@ -172,13 +177,10 @@ public final class StaticMapsProvider {
 
     public static void storeCachePreviewMap(final Geocache cache) {
         final String latlonMap = cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
-        final Display display = ((WindowManager) cgeoapplication.getInstance().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        DisplayMetrics metrics = new DisplayMetrics();
-        display.getMetrics(metrics);
-        final int width = metrics.widthPixels;
-        final int height = (int) (110 * metrics.density);
+        final Point displaySize = Compatibility.getDisplaySize();
+        final int minSize = Math.min(displaySize.x, displaySize.y);
         final String markerUrl = MARKERS_URL + "my_location_mdpi.png";
-        downloadMap(cache.getGeocode(), 15, ROADMAP, markerUrl, PREFIX_PREVIEW, "shadow:false|", latlonMap, width, height, null);
+        downloadMap(cache.getGeocode(), 15, ROADMAP, markerUrl, PREFIX_PREVIEW, "shadow:false|", latlonMap, minSize, minSize, null);
     }
 
     private static int guessMaxDisplaySide() {
