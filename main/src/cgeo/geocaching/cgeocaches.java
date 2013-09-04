@@ -25,6 +25,7 @@ import cgeo.geocaching.loaders.KeywordGeocacheListLoader;
 import cgeo.geocaching.loaders.NextPageGeocacheListLoader;
 import cgeo.geocaching.loaders.OfflineGeocacheListLoader;
 import cgeo.geocaching.loaders.OwnerGeocacheListLoader;
+import cgeo.geocaching.loaders.PocketGeocacheListLoader;
 import cgeo.geocaching.loaders.RemoveFromHistoryLoader;
 import cgeo.geocaching.loaders.UsernameGeocacheListLoader;
 import cgeo.geocaching.maps.CGeoMap;
@@ -1678,6 +1679,18 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         context.startActivity(cachesIntent);
     }
 
+    public static void startActivityPocket(final AbstractActivity context, final String guid, final String name) {
+        if (guid == null) {
+            context.showToast(cgeoapplication.getInstance().getString(R.string.warn_pocket_query_select));
+            return;
+        }
+        final Intent cachesIntent = new Intent(context, cgeocaches.class);
+        cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.POCKET);
+        cachesIntent.putExtra(Intents.EXTRA_NAME, name);
+        cachesIntent.putExtra(Intents.EXTRA_POCKET_GUID, guid);
+        context.startActivity(cachesIntent);
+    }
+
     public static void startActivityMap(final Context context, final SearchResult search) {
         final Intent cachesIntent = new Intent(context, cgeocaches.class);
         cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.MAP);
@@ -1764,6 +1777,12 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 break;
             case NEXT_PAGE:
                 loader = new NextPageGeocacheListLoader(app, search);
+                break;
+            case POCKET:
+                final String guid = extras.getString(Intents.EXTRA_POCKET_GUID);
+                final String pocket_name = extras.getString(Intents.EXTRA_NAME);
+                title = pocket_name;
+                loader = new PocketGeocacheListLoader(app, guid);
                 break;
         }
         setTitle(title);

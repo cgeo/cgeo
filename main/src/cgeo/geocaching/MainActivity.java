@@ -511,6 +511,23 @@ public class MainActivity extends AbstractActivity {
                             }
                         });
                         nearestView.setBackgroundResource(R.drawable.main_nearby);
+
+                        nearestView.setOnLongClickListener(new View.OnLongClickListener() {
+
+                            @Override
+                            public boolean onLongClick(View v) {
+                                new PocketQueryList.UserInterface(MainActivity.this).promptForListSelection(new RunnableWithArgument<PocketQueryList>() {
+
+                                    @Override
+                                    public void run(PocketQueryList pql) {
+                                        cgeocaches.startActivityPocket(MainActivity.this, pql.getGuid(), pql.getName());
+                                    }
+                                });
+                                return true;
+                            }
+                        });
+                        nearestView.setLongClickable(true);
+
                     }
 
                     navType.setText(res.getString(geo.getLocationProvider().resourceId));

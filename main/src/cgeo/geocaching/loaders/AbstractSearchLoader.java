@@ -17,6 +17,7 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
 
     public enum CacheListLoaderType {
         OFFLINE,
+        POCKET,
         HISTORY,
         NEAREST,
         COORDINATE,

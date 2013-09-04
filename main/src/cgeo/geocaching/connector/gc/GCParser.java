@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Image;
 import cgeo.geocaching.LogEntry;
+import cgeo.geocaching.PocketQueryList;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Trackable;
@@ -906,6 +907,17 @@ public abstract class GCParser {
         return searchByAny(cacheType, isSearchForMyCaches(userName), showCaptcha, params, recaptchaReceiver);
     }
 
+    public static SearchResult searchByPocket(final String pocketGuid, final CacheType cacheType, final boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
+        if (StringUtils.isBlank(pocketGuid)) {
+            Log.e("GCParser.searchByPocket: No guid name given");
+            return null;
+        }
+
+        final Parameters params = new Parameters("pq", pocketGuid);
+
+        return searchByAny(cacheType, false, showCaptcha, params, recaptchaReceiver);
+    }
+
     public static SearchResult searchByOwner(final String userName, final CacheType cacheType, final boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
         if (StringUtils.isBlank(userName)) {
             Log.e("GCParser.searchByOwner: No user name given");
@@ -976,6 +988,42 @@ public abstract class GCParser {
         }
 
         return trackable;
+    }
+
+    public static List<PocketQueryList> searchPocketQueryList() {
+
+        final Parameters params = new Parameters();
+
+        final String page = Login.getRequestLogged("http://www.geocaching.com/pocket/default.aspx", params);
+
+        if (StringUtils.isBlank(page)) {
+            Log.e("GCParser.searchPocketQueryList: No data from server");
+            return null;
+        }
+
+        String subPage = StringUtils.substringAfter(page, "class=\"PocketQueryListTable");
+        if (StringUtils.isEmpty(subPage)) {
+            Log.e("GCParser.searchPocketQueryList: class \"PocketQueryListTable\" not found on page");
+            return Collections.emptyList();
+        }
+
+        List<PocketQueryList> list = new ArrayList<PocketQueryList>();
+
+        final MatcherWrapper matcherPocket = new MatcherWrapper(GCConstants.PATTERN_LIST_PQ, subPage);
+
+        while (matcherPocket.find()) {
+            int maxCaches;
+            try {
+                maxCaches = Integer.parseInt(matcherPocket.group(1));
+            } catch (NumberFormatException e) {
+                maxCaches = 0;
+                Log.e("GCParser.searchPocketQueryList: Unable to parse max caches", e);
+            }
+            final PocketQueryList pqList = new PocketQueryList(matcherPocket.group(2), matcherPocket.group(3), maxCaches);
+            list.add(pqList);
+        }
+
+        return list;
     }
 
     public static ImmutablePair<StatusCode, String> postLog(final String geocode, final String cacheid, final String[] viewstates,
