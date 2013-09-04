@@ -4,9 +4,7 @@ import butterknife.InjectView;
 import butterknife.Views;
 
 import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -16,7 +14,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -30,9 +27,6 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 public class ImageSelectActivity extends AbstractActivity {
 
@@ -190,7 +184,7 @@ public class ImageSelectActivity extends AbstractActivity {
         // create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        imageUri = getOutputImageFileUri(); // create a file to save the image
+        imageUri = ImageUtils.getOutputImageFileUri(); // create a file to save the image
         if (imageUri == null) {
             showFailure();
             return;
@@ -272,30 +266,7 @@ public class ImageSelectActivity extends AbstractActivity {
     private String writeScaledImage(final String filePath) {
         scaleChoiceIndex = scaleView.getSelectedItemPosition();
         final int maxXY = getResources().getIntArray(R.array.log_image_scale_values)[scaleChoiceIndex];
-        if (maxXY == 0) {
-            return filePath;
-        }
-        BitmapFactory.Options sizeOnlyOptions = new BitmapFactory.Options();
-        sizeOnlyOptions.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(filePath, sizeOnlyOptions);
-        final int myMaxXY = Math.max(sizeOnlyOptions.outHeight, sizeOnlyOptions.outWidth);
-        final int sampleSize = myMaxXY / maxXY;
-        Bitmap image;
-        if (sampleSize > 1) {
-            BitmapFactory.Options sampleOptions = new BitmapFactory.Options();
-            sampleOptions.inSampleSize = sampleSize;
-            image = BitmapFactory.decodeFile(filePath, sampleOptions);
-        } else {
-            image = BitmapFactory.decodeFile(filePath);
-        }
-        // If image decoding fail, return null
-        if (image == null) {
-            return null;
-        }
-        final BitmapDrawable scaledImage = ImageUtils.scaleBitmapTo(image, maxXY, maxXY);
-        final String uploadFilename = getOutputImageFile().getPath();
-        ImageUtils.storeBitmap(scaledImage.getBitmap(), Bitmap.CompressFormat.JPEG, 75, uploadFilename);
-        return uploadFilename;
+        return ImageUtils.readScaleAndWriteImage(filePath, maxXY);
     }
 
     private void showFailure() {
@@ -316,34 +287,5 @@ public class ImageSelectActivity extends AbstractActivity {
         final Bitmap bitmap = BitmapFactory.decodeFile(imageUri.getPath(), bitmapOptions);
         imagePreview.setImageBitmap(bitmap);
         imagePreview.setVisibility(View.VISIBLE);
-    }
-
-    private static Uri getOutputImageFileUri() {
-        final File file = getOutputImageFile();
-        if (file == null) {
-            return null;
-        }
-        return Uri.fromFile(file);
-    }
-
-    /** Create a File for saving an image or video */
-    private static File getOutputImageFile() {
-        // To be safe, you should check that the SDCard is mounted
-        // using Environment.getExternalStorageState() before doing this.
-
-        File mediaStorageDir = new File(Compatibility.getExternalPictureDir(), "cgeo");
-        // This location works best if you want the created images to be shared
-        // between applications and persist after your app has been uninstalled.
-
-        // Create the storage directory if it does not exist
-        if (!mediaStorageDir.exists()) {
-            if (!FileUtils.mkdirs(mediaStorageDir)) {
-                return null;
-            }
-        }
-
-        // Create a media file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
-        return new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
     }
 }
