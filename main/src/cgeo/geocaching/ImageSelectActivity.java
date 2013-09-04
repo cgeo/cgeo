@@ -272,7 +272,7 @@ public class ImageSelectActivity extends AbstractActivity {
     private String writeScaledImage(final String filePath) {
         scaleChoiceIndex = scaleView.getSelectedItemPosition();
         final int maxXY = getResources().getIntArray(R.array.log_image_scale_values)[scaleChoiceIndex];
-        if (maxXY == 0) {
+        if (maxXY <= 0) {
             return filePath;
         }
         BitmapFactory.Options sizeOnlyOptions = new BitmapFactory.Options();
