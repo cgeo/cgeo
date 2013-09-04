@@ -510,6 +510,9 @@
     <string name="init_use_native_ua">Identifiering</string>
     <string name="init_summary_use_native_ua">Identifiera som en Android webbläsare. Löser problem med inloggning vid uppkoppling via vissa operatörer.</string>
     <string name="init_rendertheme_folder">Katalog för kartteman</string>
+    <string name="settings_open_website">Öppna hemsida</string>
+    <string name="settings_settings">Inställningar</string>
+    <string name="settings_information">Information</string>
 
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
