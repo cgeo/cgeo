@@ -4,12 +4,18 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.compatibility.Compatibility;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public final class ImageUtils {
 
@@ -78,5 +84,69 @@ public final class ImageUtils {
         } catch (Exception e) {
             Log.e("ImageHelper.storeBitmap", e);
         }
+    }
+
+    /**
+     * Scales an image to the desired boundings and encodes to file.
+     *
+     * @param filePath
+     *            Image to read
+     * @param maxXY
+     *            boundings
+     * @return String filename and path, NULL if something fails
+     */
+    public static String readScaleAndWriteImage(final String filePath, final int maxXY) {
+        if (maxXY <= 0) {
+            return filePath;
+        }
+        BitmapFactory.Options sizeOnlyOptions = new BitmapFactory.Options();
+        sizeOnlyOptions.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(filePath, sizeOnlyOptions);
+        final int myMaxXY = Math.max(sizeOnlyOptions.outHeight, sizeOnlyOptions.outWidth);
+        final int sampleSize = myMaxXY / maxXY;
+        Bitmap image;
+        if (sampleSize > 1) {
+            BitmapFactory.Options sampleOptions = new BitmapFactory.Options();
+            sampleOptions.inSampleSize = sampleSize;
+            image = BitmapFactory.decodeFile(filePath, sampleOptions);
+        } else {
+            image = BitmapFactory.decodeFile(filePath);
+        }
+        if (image == null) {
+            return null;
+        }
+        final BitmapDrawable scaledImage = scaleBitmapTo(image, maxXY, maxXY);
+        final String uploadFilename = ImageUtils.getOutputImageFile().getPath();
+        storeBitmap(scaledImage.getBitmap(), Bitmap.CompressFormat.JPEG, 75, uploadFilename);
+        return uploadFilename;
+    }
+
+    /** Create a File for saving an image or video */
+    public static File getOutputImageFile() {
+        // To be safe, you should check that the SDCard is mounted
+        // using Environment.getExternalStorageState() before doing this.
+    
+        File mediaStorageDir = new File(Compatibility.getExternalPictureDir(), "cgeo");
+        // This location works best if you want the created images to be shared
+        // between applications and persist after your app has been uninstalled.
+    
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists()) {
+            if (!FileUtils.mkdirs(mediaStorageDir)) {
+                return null;
+            }
+        }
+    
+        // Create a media file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
+        return new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
+    }
+
+    public static Uri getOutputImageFileUri() {
+        final File file = getOutputImageFile();
+        if (file == null) {
+            return null;
+        }
+        return Uri.fromFile(file);
     }
 }
