@@ -664,7 +664,7 @@ public final class Settings {
     public static void setAnyCoordinates(final Geopoint coords) {
         if (null != coords) {
             putFloat(R.string.pref_anylatitude, (float) coords.getLatitude());
-            putFloat(R.string.pref_anylatitude, (float) coords.getLongitude());
+            putFloat(R.string.pref_anylongitude, (float) coords.getLongitude());
         } else {
             remove(R.string.pref_anylatitude);
             remove(R.string.pref_anylongitude);
