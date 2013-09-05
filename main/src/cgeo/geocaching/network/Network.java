@@ -178,7 +178,7 @@ public abstract class Network {
         request.addHeader("Content-Type", "application/json; charset=utf-8");
         if (json != null) {
             try {
-                request.setEntity(new StringEntity(json.toString()));
+                request.setEntity(new StringEntity(json.toString(), CharEncoding.UTF_8));
             } catch (UnsupportedEncodingException e) {
                 Log.e("postJsonRequest:JSON Entity: UnsupportedEncodingException");
                 return null;
