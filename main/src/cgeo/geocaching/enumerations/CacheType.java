@@ -114,7 +114,7 @@ public enum CacheType {
     }
 
     public boolean applyDistanceRule() {
-        return !isVirtual() && !isEvent();
+        return TRADITIONAL == this || PROJECT_APE == this || GCHQ == this;
     }
 
     public boolean isVirtual() {
