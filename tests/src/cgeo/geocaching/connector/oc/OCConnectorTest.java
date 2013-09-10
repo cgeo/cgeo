@@ -7,6 +7,9 @@ import junit.framework.TestCase;
 
 public class OCConnectorTest extends TestCase {
 
+    /**
+     * OC.DE used up the 4 digit/character name space and switched over to 5 recently
+     */
     public static void testCanHandleNew5DigitCodes() {
         final IConnector ocConnector = getOcDeConnector();
         assertTrue(ocConnector.canHandle("OCFFFF"));
