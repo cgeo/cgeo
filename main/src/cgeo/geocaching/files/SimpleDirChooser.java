@@ -156,6 +156,7 @@ public class SimpleDirChooser extends AbstractListActivity {
         @Override
         public void onClick(View arg0) {
             Option option = adapter.getItem(position);
+            lastPosition = -1;
             if (option.getName().equals(PARENT_DIR)) {
                 currentDir = new File(option.getPath());
                 fill(currentDir);
