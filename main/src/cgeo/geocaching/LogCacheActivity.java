@@ -214,7 +214,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         if (!postButton.isEnabled()) {
             return res.getString(R.string.log_post_not_possible);
         }
-        if (typeSelected != LogType.FOUND_IT || !Settings.isGCvoteLogin() || !cache.supportsGCVote()) {
+        if (!Settings.isGCvoteLogin() || !cache.supportsGCVote()) {
             return res.getString(R.string.log_post);
         }
         if (rating == 0) {
@@ -555,6 +555,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                         if (tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
                             Twitter.postTweetCache(geocode);
                         }
+                    }
+                    if (rating > 0) {
                         GCVote.setRating(cache, rating);
                     }
 
