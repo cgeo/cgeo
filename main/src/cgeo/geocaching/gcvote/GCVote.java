@@ -16,10 +16,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
 
 public final class GCVote {
+    public static final float NO_RATING = 0;
     private static final Pattern PATTERN_LOG_IN = Pattern.compile("loggedIn='([^']+)'", Pattern.CASE_INSENSITIVE);
     private static final Pattern PATTERN_GUID = Pattern.compile("cacheId='([^']+)'", Pattern.CASE_INSENSITIVE);
     private static final Pattern PATTERN_WAYPOINT = Pattern.compile("waypoint='([^']+)'", Pattern.CASE_INSENSITIVE);
@@ -30,6 +32,12 @@ public final class GCVote {
 
     private static final int MAX_CACHED_RATINGS = 1000;
     private static final LeastRecentlyUsedMap<String, GCVoteRating> RATINGS_CACHE = new LeastRecentlyUsedMap.LruCache<String, GCVoteRating>(MAX_CACHED_RATINGS);
+    private static final float MIN_RATING = 1;
+    private static final float MAX_RATING = 5;
+
+    private GCVote() {
+        // utility class
+    }
 
     /**
      * Get user rating for a given guid or geocode. For a guid first the ratings cache is checked
@@ -39,7 +47,7 @@ public final class GCVote {
      * @param geocode
      * @return
      */
-    public static GCVoteRating getRating(String guid, String geocode) {
+    public static GCVoteRating getRating(final String guid, final String geocode) {
         if (StringUtils.isNotBlank(guid) && RATINGS_CACHE.containsKey(guid)) {
             return RATINGS_CACHE.get(guid);
         }
@@ -59,7 +67,7 @@ public final class GCVote {
      * @param geocodes
      * @return
      */
-    public static Map<String, GCVoteRating> getRating(List<String> guids, List<String> geocodes) {
+    public static Map<String, GCVoteRating> getRating(final List<String> guids, final List<String> geocodes) {
         if (guids == null && geocodes == null) {
             return null;
         }
@@ -128,7 +136,7 @@ public final class GCVote {
                     }
                 }
 
-                float rating = 0;
+                float rating = NO_RATING;
                 try {
                     final MatcherWrapper matcherRating = new MatcherWrapper(PATTERN_RATING, voteData);
                     if (matcherRating.find()) {
@@ -137,7 +145,7 @@ public final class GCVote {
                 } catch (NumberFormatException e) {
                     Log.w("GCVote.getRating: Failed to parse rating");
                 }
-                if (rating <= 0) {
+                if (!isValidRating(rating)) {
                     continue;
                 }
 
@@ -154,7 +162,7 @@ public final class GCVote {
                     continue;
                 }
 
-                float myVote = 0;
+                float myVote = NO_RATING;
                 if (loggedIn) {
                     try {
                         final MatcherWrapper matcherVote = new MatcherWrapper(PATTERN_VOTE, voteData);
@@ -186,7 +194,7 @@ public final class GCVote {
      * @param vote
      * @return {@code true} if the rating was submitted successfully
      */
-    public static boolean setRating(Geocache cache, double vote) {
+    public static boolean setRating(final Geocache cache, final float vote) {
         if (!Settings.isGCvoteLogin()) {
             return false;
         }
@@ -197,7 +205,7 @@ public final class GCVote {
         if (StringUtils.isBlank(guid)) {
             return false;
         }
-        if (vote <= 0.0 || vote > 5.0) {
+        if (!isValidRating(vote)) {
             return false;
         }
 
@@ -218,7 +226,7 @@ public final class GCVote {
         return result.trim().equalsIgnoreCase("ok");
     }
 
-    public static void loadRatings(ArrayList<Geocache> caches) {
+    public static void loadRatings(final ArrayList<Geocache> caches) {
         if (!Settings.isRatingWanted()) {
             return;
         }
@@ -254,4 +262,13 @@ public final class GCVote {
             Log.e("GCvote.loadRatings", e);
         }
     }
+
+    public static boolean isValidRating(final float rating) {
+        return rating >= MIN_RATING && rating <= MAX_RATING;
+    }
+
+    public static String getRatingText(final float rating) {
+        return String.format(Locale.getDefault(), "%.1f", rating);
+    }
+
 }

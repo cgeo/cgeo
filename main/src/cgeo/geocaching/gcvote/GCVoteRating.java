@@ -5,7 +5,7 @@ public final class GCVoteRating {
     private final int votes;
     private final float myVote;
 
-    public GCVoteRating(float rating, int votes, float myVote) {
+    public GCVoteRating(final float rating, final int votes, final float myVote) {
         this.rating = rating;
         this.votes = votes;
         this.myVote = myVote;

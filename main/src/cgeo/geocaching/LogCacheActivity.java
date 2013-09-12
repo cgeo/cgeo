@@ -46,7 +46,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class LogCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent {
     static final String EXTRAS_GEOCODE = "geocode";
@@ -79,7 +78,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private ILoggingManager loggingManager;
 
     // Data to be saved while reconfiguring
-    private double rating;
+    private float rating;
     private LogType typeSelected;
     private Calendar date;
     private String imageCaption;
@@ -217,10 +216,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         if (!Settings.isGCvoteLogin() || !cache.supportsGCVote()) {
             return res.getString(R.string.log_post);
         }
-        if (rating == 0) {
-            return res.getString(R.string.log_post_no_rate);
+        if (GCVote.isValidRating(rating)) {
+            return res.getString(R.string.log_post_rate) + " " + GCVote.getRatingText(rating) + "*";
         }
-        return res.getString(R.string.log_post_rate) + " " + ratingTextValue(rating) + "*";
+        return res.getString(R.string.log_post_no_rate);
     }
 
     @Override
@@ -261,7 +260,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
         // Restore previous state
         if (savedInstanceState != null) {
-            rating = savedInstanceState.getDouble(SAVED_STATE_RATING);
+            rating = savedInstanceState.getFloat(SAVED_STATE_RATING);
             typeSelected = LogType.getById(savedInstanceState.getInt(SAVED_STATE_TYPE));
             date.setTimeInMillis(savedInstanceState.getLong(SAVED_STATE_DATE));
             imageCaption = savedInstanceState.getString(SAVED_STATE_IMAGE_CAPTION);
@@ -341,7 +340,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private void setDefaultValues() {
         date = Calendar.getInstance();
-        rating = 0.0;
+        rating = GCVote.NO_RATING;
         if (cache.isEventCache()) {
             final Date eventDate = cache.getHiddenDate();
             boolean expired = DateUtils.daysSince(eventDate.getTime()) > 0;
@@ -438,19 +437,15 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
         final int id = item.getItemId();
         if (id >= 10 && id <= 19) {
-            rating = (id - 9) / 2.0;
-            if (rating < 1) {
-                rating = 0;
+            rating = (id - 9) / 2.0f;
+            if (!GCVote.isValidRating(rating)) {
+                rating = GCVote.NO_RATING;
             }
             updatePostButtonText();
             return true;
         }
 
         return false;
-    }
-
-    private static String ratingTextValue(final double rating) {
-        return String.format(Locale.getDefault(), "%.1f", rating);
     }
 
     @Override
@@ -556,7 +551,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                             Twitter.postTweetCache(geocode);
                         }
                     }
-                    if (rating > 0) {
+                    if (GCVote.isValidRating(rating)) {
                         GCVote.setRating(cache, rating);
                     }
 
