@@ -119,8 +119,8 @@ public final class StoredList {
             builder.create().show();
         }
 
-        private static @NonNull
-        List<StoredList> getSortedLists() {
+        @NonNull
+        private static List<StoredList> getSortedLists() {
             final Collator collator = Collator.getInstance();
             final List<StoredList> lists = cgData.getLists();
             Collections.sort(lists, new Comparator<StoredList>() {

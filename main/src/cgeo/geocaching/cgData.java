@@ -2480,8 +2480,8 @@ public class cgData {
         }
     }
 
-    public static @NonNull
-    List<StoredList> getLists() {
+    @NonNull
+    public static List<StoredList> getLists() {
         init();
 
         final Resources res = cgeoapplication.getInstance().getResources();
