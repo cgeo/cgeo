@@ -438,7 +438,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         menu.setHeaderTitle(fieldTitle);
         menu.add(viewId, MENU_FIELD_COPY, 0, res.getString(android.R.string.copy));
         if (!copyOnly) {
-            if (clickedItemText.length() > TranslationUtils.translationTextLengthToWarn) {
+            if (clickedItemText.length() > TranslationUtils.TRANSLATION_TEXT_LENGTH_WARN) {
                 showToast(res.getString(R.string.translate_length_warning));
             }
             menu.add(viewId, MENU_FIELD_TRANSLATE, 0, res.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()));

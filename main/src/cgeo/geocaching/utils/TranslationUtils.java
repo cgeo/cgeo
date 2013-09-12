@@ -13,12 +13,12 @@ import android.net.Uri;
  */
 public final class TranslationUtils {
 
-    private static final String translationWebsite = "http://translate.google.com/";
-    private static final String translationForceClassicMode = "?vi=c";
-    private static final String translationAutoSelect = "#auto";
-    private static final String translationFieldSeparator = "|";
+    private static final String TRANSLATION_WEBSITE = "http://translate.google.com/";
+    private static final String TRANSLATION_FORCE_CLASSIC_MODE = "?vi=c";
+    private static final String TRANSLATION_AUTO_SELECT = "#auto";
+    private static final String TRANSLATION_FIELD_SEPARATOR = "|";
 
-    public static final int translationTextLengthToWarn = 500;
+    public static final int TRANSLATION_TEXT_LENGTH_WARN = 500;
     private static final String TRANSLATION_APP = "com.google.android.apps.translate";
 
     private TranslationUtils() {
@@ -26,8 +26,8 @@ public final class TranslationUtils {
     }
 
     /**
-     * Build a URI for Google Translate
-     *
+     * Build a URI for Google Translate.
+     * 
      * @param toLang
      *            The two-letter lowercase ISO language codes as defined by ISO 639-1
      * @param text
@@ -40,11 +40,11 @@ public final class TranslationUtils {
         if (ProcessUtils.isLaunchable(TRANSLATION_APP)) {
             content = StringUtils.replace(content, "+", "%20");
         }
-        return translationWebsite + translationForceClassicMode + translationAutoSelect + translationFieldSeparator + toLang + translationFieldSeparator + content;
+        return TRANSLATION_WEBSITE + TRANSLATION_FORCE_CLASSIC_MODE + TRANSLATION_AUTO_SELECT + TRANSLATION_FIELD_SEPARATOR + toLang + TRANSLATION_FIELD_SEPARATOR + content;
     }
 
     /**
-     * Send Intent for Google Translate. Can be caught by Google Translate App or browser
+     * Send Intent for Google Translate. Can be caught by Google Translate App or browser.
      *
      * @param toLang
      *            The two-letter lowercase ISO language codes as defined by ISO 639-1
