@@ -309,7 +309,7 @@ public abstract class GCParser {
                 final String coordinates = Network.getResponseData(Network.postRequest("http://www.geocaching.com/seek/nearest.aspx", params), false);
 
                 if (StringUtils.isNotBlank(coordinates)) {
-                    if (coordinates.contains("You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
+                    if (coordinates != null && coordinates.contains("You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
                         Log.i("User has not agreed to the license agreement. Can\'t download .loc file.");
 
                         searchResult.setError(StatusCode.UNAPPROVED_LICENSE);

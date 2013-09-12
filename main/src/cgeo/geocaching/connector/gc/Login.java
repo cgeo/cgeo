@@ -114,7 +114,7 @@ public abstract class Login {
         loginResponse = Network.postRequest("https://www.geocaching.com/login/default.aspx", params);
         loginData = Network.getResponseData(loginResponse);
 
-        if (StringUtils.isBlank(loginData)) {
+        if (loginData == null || StringUtils.isBlank(loginData)) {
             Log.e("Login.login: Failed to retrieve login page (2nd)");
             // FIXME: should it be CONNECTION_FAILED to match the first attempt?
             return StatusCode.COMMUNICATION_ERROR; // no login page
