@@ -34,9 +34,9 @@ import ch.boye.httpclientandroidlib.params.CoreProtocolPNames;
 import ch.boye.httpclientandroidlib.params.HttpParams;
 import ch.boye.httpclientandroidlib.protocol.HttpContext;
 import ch.boye.httpclientandroidlib.util.EntityUtils;
-
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.Nullable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -150,6 +150,7 @@ public abstract class Network {
      * @param params the parameters to add to the POST request
      * @return the HTTP response, or null in case of an encoding error params
      */
+    @Nullable
     public static HttpResponse postRequest(final String uri, final Parameters params) {
         return request("POST", uri, params, null, null);
     }
@@ -162,6 +163,7 @@ public abstract class Network {
      * @params headers the headers to add to the request
      * @return the HTTP response, or null in case of an encoding error params
      */
+    @Nullable
     public static HttpResponse postRequest(final String uri, final Parameters params, final Parameters headers) {
         return request("POST", uri, params, headers, null);
     }
@@ -173,6 +175,7 @@ public abstract class Network {
      * @param json the json object to add to the POST request
      * @return the HTTP response, or null in case of an encoding error params
      */
+    @Nullable
     public static HttpResponse postJsonRequest(final String uri, final JSONObject json) {
         HttpPost request = new HttpPost(uri);
         request.addHeader("Content-Type", "application/json; charset=utf-8");
@@ -197,6 +200,7 @@ public abstract class Network {
      * @param file the file to include in the request
      * @return the HTTP response, or null in case of an encoding error param
      */
+    @Nullable
     public static HttpResponse postRequest(final String uri, final Parameters params,
             final String fileFieldName, final String fileContentType, final File file) {
         final MultipartEntity entity = new MultipartEntity();
@@ -232,7 +236,9 @@ public abstract class Network {
      *            the cache file used to cache this query
      * @return the HTTP response, or null in case of an encoding error in a POST request arguments
      */
-    private static HttpResponse request(final String method, final String uri, final Parameters params, final Parameters headers, final File cacheFile) {
+    @Nullable
+    private static HttpResponse request(final String method, final String uri,
+                                        @Nullable final Parameters params, @Nullable final Parameters headers, @Nullable final File cacheFile) {
         HttpRequestBase request;
         if (method.equals("GET")) {
             final String fullUri = params == null ? uri : Uri.parse(uri).buildUpon().encodedQuery(params.toString()).build().toString();
@@ -263,7 +269,7 @@ public abstract class Network {
      * @param cacheFile
      *            if non-null, the file to take ETag and If-Modified-Since information from
      */
-    private static void addHeaders(final HttpRequestBase request, final Parameters headers, final File cacheFile) {
+    private static void addHeaders(final HttpRequestBase request, @Nullable final Parameters headers, @Nullable final File cacheFile) {
         for (final NameValuePair header : Parameters.extend(Parameters.merge(headers, cacheHeaders(cacheFile)),
                 "Accept-Charset", "utf-8,iso-8859-1;q=0.8,utf-16;q=0.8,*;q=0.7",
                 "Accept-Language", "en-US,*;q=0.9",
@@ -282,6 +288,7 @@ public abstract class Network {
      * @return
      *            the response, or null if there has been a failure
      */
+    @Nullable
     private static HttpResponse doRepeatedRequests(final HttpRequestBase request) {
         final String reqLogStr = request.getMethod() + " " + Network.hidePassword(request.getURI().toString());
         Log.d(reqLogStr);
@@ -312,7 +319,8 @@ public abstract class Network {
         return null;
     }
 
-    private static Parameters cacheHeaders(final File cacheFile) {
+    @Nullable
+    private static Parameters cacheHeaders(@Nullable final File cacheFile) {
         if (cacheFile == null || !cacheFile.exists()) {
             return null;
         }
@@ -343,7 +351,8 @@ public abstract class Network {
      *            the name of the file storing the cached resource, or null not to use one
      * @return the HTTP response
      */
-    public static HttpResponse getRequest(final String uri, final Parameters params, final File cacheFile) {
+    @Nullable
+    public static HttpResponse getRequest(final String uri, @Nullable final Parameters params, @Nullable final File cacheFile) {
         return request("GET", uri, params, null, cacheFile);
     }
 
@@ -357,7 +366,8 @@ public abstract class Network {
      *            the parameters to add the the GET request
      * @return the HTTP response
      */
-    public static HttpResponse getRequest(final String uri, final Parameters params) {
+    @Nullable
+    public static HttpResponse getRequest(final String uri, @Nullable final Parameters params) {
         return request("GET", uri, params, null, null);
     }
 
@@ -372,7 +382,8 @@ public abstract class Network {
      *            the headers to add to the GET request
      * @return the HTTP response
      */
-    public static HttpResponse getRequest(final String uri, final Parameters params, final Parameters headers) {
+    @Nullable
+    public static HttpResponse getRequest(final String uri, @Nullable final Parameters params, @Nullable final Parameters headers) {
         return request("GET", uri, params, headers, null);
     }
 
@@ -383,6 +394,7 @@ public abstract class Network {
      *            the URI to request
      * @return the HTTP response
      */
+    @Nullable
     public static HttpResponse getRequest(final String uri) {
         return request("GET", uri, null, null, null);
     }
@@ -392,7 +404,7 @@ public abstract class Network {
         return " (" + (System.currentTimeMillis() - before) + " ms) ";
     }
 
-    static public boolean isSuccess(final HttpResponse response) {
+    static public boolean isSuccess(@Nullable final HttpResponse response) {
         return response != null && response.getStatusLine().getStatusCode() == 200;
     }
 
@@ -403,7 +415,8 @@ public abstract class Network {
      * @param params the query parameters, or <code>null</code> if there are none
      * @return a JSON object if the request was successful and the body could be decoded, <code>null</code> otherwise
      */
-    public static JSONObject requestJSON(final String uri, final Parameters params) {
+    @Nullable
+    public static JSONObject requestJSON(final String uri, @Nullable final Parameters params) {
         final HttpResponse response = request("GET", uri, params, new Parameters("Accept", "application/json, text/javascript, */*; q=0.01"), null);
         final String responseData = Network.getResponseData(response, false);
         if (responseData != null) {
@@ -417,6 +430,7 @@ public abstract class Network {
         return null;
     }
 
+    @Nullable
     private static String getResponseDataNoError(final HttpResponse response, boolean replaceWhitespace) {
         try {
             String data = EntityUtils.toString(response.getEntity(), CharEncoding.UTF_8);
@@ -435,6 +449,7 @@ public abstract class Network {
      * @param response a HTTP response, which can be null
      * @return the body if the response comes from a successful HTTP request, <code>null</code> otherwise
      */
+    @Nullable
     public static String getResponseData(final HttpResponse response) {
         return Network.getResponseData(response, true);
     }
@@ -447,17 +462,22 @@ public abstract class Network {
      *                          should be called on the body
      * @return the body if the response comes from a successful HTTP request, <code>null</code> otherwise
      */
-    public static String getResponseData(final HttpResponse response, boolean replaceWhitespace) {
+    @Nullable
+    public static String getResponseData(@Nullable final HttpResponse response, boolean replaceWhitespace) {
         if (!isSuccess(response)) {
             return null;
         }
+        assert(response != null); // Caught above
         return getResponseDataNoError(response, replaceWhitespace);
     }
 
+    @Nullable
     public static String rfc3986URLEncode(String text) {
-        return StringUtils.replace(Network.encode(text).replace("+", "%20"), "%7E", "~");
+        final String encoded = Network.encode(text);
+        return encoded != null ? StringUtils.replace(encoded.replace("+", "%20"), "%7E", "~") : null;
     }
 
+    @Nullable
     public static String decode(final String text) {
         try {
             return URLDecoder.decode(text, CharEncoding.UTF_8);
@@ -467,6 +487,7 @@ public abstract class Network {
         return null;
     }
 
+    @Nullable
     public static String encode(final String text) {
         try {
             return URLEncoder.encode(text, CharEncoding.UTF_8);
