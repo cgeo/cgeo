@@ -73,7 +73,7 @@ public abstract class Network {
     static {
         Network.clientParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, CharEncoding.UTF_8);
         Network.clientParams.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
-        Network.clientParams.setParameter(CoreConnectionPNames.SO_TIMEOUT, 30000);
+        Network.clientParams.setParameter(CoreConnectionPNames.SO_TIMEOUT, 90000);
         Network.clientParams.setParameter(ClientPNames.HANDLE_REDIRECTS,  true);
     }
 
