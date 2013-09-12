@@ -423,7 +423,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
-        final boolean voteAvailable = Settings.isGCvoteLogin() && (typeSelected == LogType.FOUND_IT || typeSelected == LogType.ATTENDED || typeSelected == LogType.WEBCAM_PHOTO_TAKEN) && StringUtils.isNotBlank(cache.getGuid()) && cache.supportsGCVote();
+        final boolean voteAvailable = Settings.isGCvoteLogin() && StringUtils.isNotBlank(cache.getGuid()) && cache.supportsGCVote();
         menu.findItem(SUBMENU_VOTE).setVisible(voteAvailable);
 
         return true;
