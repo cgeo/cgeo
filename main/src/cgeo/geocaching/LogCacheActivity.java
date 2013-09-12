@@ -344,7 +344,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         rating = 0.0;
         if (cache.isEventCache()) {
             final Date eventDate = cache.getHiddenDate();
-            boolean expired = DateUtils.daysSince(eventDate.getTime()) > 0;
+            boolean expired = DateUtils.daysSince(eventDate.getTime()) >= 0;
 
             if (cache.hasOwnLog(LogType.WILL_ATTEND) || expired) {
                 if (cache.hasOwnLog(LogType.ATTENDED)) {
