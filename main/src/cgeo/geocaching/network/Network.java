@@ -54,8 +54,6 @@ import java.nio.charset.Charset;
 
 public abstract class Network {
 
-    private static final int NB_DOWNLOAD_RETRIES = 4;
-
     /** User agent id */
     private final static String PC_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:9.0.1) Gecko/20100101 Firefox/9.0.1";
     /** Native user agent, taken from a Android 2.2 Nexus **/
@@ -294,26 +292,19 @@ public abstract class Network {
         Log.d(reqLogStr);
 
         final HttpClient client = Network.getHttpClient();
-        for (int i = 0; i <= Network.NB_DOWNLOAD_RETRIES; i++) {
-            final long before = System.currentTimeMillis();
-            try {
-                final HttpResponse response = client.execute(request);
-                int status = response.getStatusLine().getStatusCode();
-                if (status == 200) {
-                    Log.d(status + Network.formatTimeSpan(before) + reqLogStr);
-                } else {
-                    Log.w(status + " [" + response.getStatusLine().getReasonPhrase() + "]" + Network.formatTimeSpan(before) + reqLogStr);
-                }
-                return response;
-            } catch (IOException e) {
-                final String timeSpan = Network.formatTimeSpan(before);
-                final String tries = (i + 1) + "/" + (Network.NB_DOWNLOAD_RETRIES + 1);
-                if (i == Network.NB_DOWNLOAD_RETRIES) {
-                    Log.w("Failure " + tries + timeSpan + reqLogStr + " (" + e.toString() + ")");
-                } else {
-                    Log.w("Failure " + tries + " (" + e.toString() + ")" + timeSpan + "- retrying " + reqLogStr);
-                }
+        final long before = System.currentTimeMillis();
+        try {
+            final HttpResponse response = client.execute(request);
+            int status = response.getStatusLine().getStatusCode();
+            if (status == 200) {
+                Log.d(status + Network.formatTimeSpan(before) + reqLogStr);
+            } else {
+                Log.w(status + " [" + response.getStatusLine().getReasonPhrase() + "]" + Network.formatTimeSpan(before) + reqLogStr);
             }
+            return response;
+        } catch (IOException e) {
+            final String timeSpan = Network.formatTimeSpan(before);
+            Log.w("Failure" + timeSpan + reqLogStr + " (" + e.toString() + ")");
         }
 
         return null;
