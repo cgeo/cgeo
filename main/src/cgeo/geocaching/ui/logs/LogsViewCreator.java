@@ -129,7 +129,7 @@ public abstract class LogsViewCreator extends AbstractCachingPageViewCreator<Lis
         if (null == convertView) {
             holder.author.setOnClickListener(createUserActionsListener());
             holder.text.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-            holder.text.setOnClickListener(new DecryptTextClickListener());
+            holder.text.setOnClickListener(new DecryptTextClickListener(holder.text));
             activity.registerForContextMenu(holder.text);
         }
     }

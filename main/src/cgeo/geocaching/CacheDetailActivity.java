@@ -1706,12 +1706,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
                 hintView.setVisibility(View.VISIBLE);
                 hintView.setClickable(true);
-                hintView.setOnClickListener(new DecryptTextClickListener());
+                hintView.setOnClickListener(new DecryptTextClickListener(hintView));
+                hintBoxView.setOnClickListener(new DecryptTextClickListener(hintView));
+                hintBoxView.setClickable(true);
                 registerForContextMenu(hintView);
             } else {
                 hintView.setVisibility(View.GONE);
                 hintView.setClickable(false);
                 hintView.setOnClickListener(null);
+                hintBoxView.setClickable(false);
+                hintBoxView.setOnClickListener(null);
             }
 
             final TextView spoilerlinkView = ((TextView) view.findViewById(R.id.hint_spoilerlink));
