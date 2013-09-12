@@ -216,7 +216,7 @@ public final class GCVote {
 
         final String result = Network.getResponseData(Network.getRequest("http://gcvote.com/setVote.php", params));
 
-        return result.trim().equalsIgnoreCase("ok");
+        return result != null && result.trim().equalsIgnoreCase("ok");
     }
 
     public static void loadRatings(final ArrayList<Geocache> caches) {

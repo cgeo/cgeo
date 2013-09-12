@@ -441,7 +441,7 @@ public abstract class Network {
      * @return the body if the response comes from a successful HTTP request, <code>null</code> otherwise
      */
     @Nullable
-    public static String getResponseData(final HttpResponse response) {
+    public static String getResponseData(@Nullable final HttpResponse response) {
         return Network.getResponseData(response, true);
     }
 

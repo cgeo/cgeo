@@ -1326,7 +1326,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
                 if (responseFromWeb != null && responseFromWeb.getStatusLine().getStatusCode() == 200) {
                     final String response = Network.getResponseData(responseFromWeb);
-                    if (response.length() > 2) {
+                    if (response != null && response.length() > 2) {
                         delay = 1;
                         handler.sendMessage(handler.obtainMessage(1, response));
                         yield();

@@ -99,7 +99,7 @@ public class RegisterSend2CgeoPreference extends Preference {
 
                         if (response != null && response.getStatusLine().getStatusCode() == 200) {
                             //response was OK
-                            String[] strings = Network.getResponseData(response).split(",");
+                            String[] strings = StringUtils.split(Network.getResponseData(response), ',');
                             try {
                                 pin = Integer.parseInt(strings[1].trim());
                             } catch (Exception e) {

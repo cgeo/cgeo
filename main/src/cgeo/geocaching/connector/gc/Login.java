@@ -276,7 +276,8 @@ public abstract class Login {
 
     public static BitmapDrawable downloadAvatarAndGetMemberStatus() {
         try {
-            final String profile = TextUtils.replaceWhitespace(Network.getResponseData(Network.getRequest("http://www.geocaching.com/my/")));
+            final String responseData = StringUtils.defaultString(Network.getResponseData(Network.getRequest("http://www.geocaching.com/my/")));
+            final String profile = TextUtils.replaceWhitespace(responseData);
 
             Settings.setMemberStatus(TextUtils.getMatch(profile, GCConstants.PATTERN_MEMBER_STATUS, true, null));
             if (profile.contains(GCConstants.MEMBER_STATUS_RENEW)) {
