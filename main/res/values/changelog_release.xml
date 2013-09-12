@@ -2,6 +2,15 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release</b>\n
+    · GPS exhibit not recognized as event cache\n
+    · Lost and Found cache type not parsed\n
+    · No more OC caches from 1000km away\n
+    · Coordinates 0.0 on anywhere screen\n
+    · Default log options on event is Attended on the day of event\n
+    · Gcvote on event caches\n    
+    \n
+    \n
     <b>2013.08.26</b>\n
     · Corrected language check for Talking Compass\n
     · Fall back to other map if selected map is not available any more\n
