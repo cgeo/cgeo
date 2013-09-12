@@ -213,7 +213,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         if (!postButton.isEnabled()) {
             return res.getString(R.string.log_post_not_possible);
         }
-        if (!Settings.isGCvoteLogin() || !cache.supportsGCVote()) {
+        if (!GCVote.isVotingPossible(cache)) {
             return res.getString(R.string.log_post);
         }
         if (GCVote.isValidRating(rating)) {
@@ -423,8 +423,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
-        final boolean voteAvailable = Settings.isGCvoteLogin() && StringUtils.isNotBlank(cache.getGuid()) && cache.supportsGCVote();
-        menu.findItem(SUBMENU_VOTE).setVisible(voteAvailable);
+        menu.findItem(SUBMENU_VOTE).setVisible(GCVote.isVotingPossible(cache));
 
         return true;
     }

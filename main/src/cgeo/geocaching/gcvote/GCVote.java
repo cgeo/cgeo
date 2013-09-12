@@ -195,14 +195,7 @@ public final class GCVote {
      * @return {@code true} if the rating was submitted successfully
      */
     public static boolean setRating(final Geocache cache, final float vote) {
-        if (!Settings.isGCvoteLogin()) {
-            return false;
-        }
-        if (!cache.supportsGCVote()) {
-            return false;
-        }
-        String guid = cache.getGuid();
-        if (StringUtils.isBlank(guid)) {
+        if (!isVotingPossible(cache)) {
             return false;
         }
         if (!isValidRating(vote)) {
@@ -217,7 +210,7 @@ public final class GCVote {
         final Parameters params = new Parameters(
                 "userName", login.left,
                 "password", login.right,
-                "cacheId", guid,
+                "cacheId", cache.getGuid(),
                 "voteUser", String.format("%.1f", vote).replace(',', '.'),
                 "version", "cgeo");
 
@@ -269,6 +262,10 @@ public final class GCVote {
 
     public static String getRatingText(final float rating) {
         return String.format(Locale.getDefault(), "%.1f", rating);
+    }
+
+    public static boolean isVotingPossible(final Geocache cache) {
+        return Settings.isGCvoteLogin() && StringUtils.isNotBlank(cache.getGuid()) && cache.supportsGCVote();
     }
 
 }
