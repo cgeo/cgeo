@@ -10,8 +10,8 @@ public class OkapiClientTest extends CGeoTestCase {
     public static void testGetOCCache() {
         final String geoCode = "OU0331";
         Geocache cache = OkapiClient.getCache(geoCode);
-        assertNotNull(cache);
-        assertEquals(geoCode, cache.getGeocode());
+        assertNotNull("Did not get cache from OKAPI", cache);
+        assertEquals("Unexpected geo code", geoCode, cache.getGeocode());
         assertEquals("Oshkosh Municipal Tank", cache.getName());
         assertTrue(cache.isDetailed());
         // cache should be stored to DB (to listID 0) when loaded above
