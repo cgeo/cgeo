@@ -519,7 +519,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             case CONTEXT_MENU_WAYPOINT_CACHES_AROUND:
                 final Waypoint waypointAround = cache.getWaypoint(index);
                 if (waypointAround != null) {
-                    cgeocaches.startActivityCoordinates(this, waypointAround.getCoords());
+                    CacheListActivity.startActivityCoordinates(this, waypointAround.getCoords());
                 }
                 break;
 
@@ -588,7 +588,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 cache.openInBrowser(this);
                 return true;
             case MENU_CACHES_AROUND:
-                cgeocaches.startActivityCoordinates(this, cache.getCoords());
+                CacheListActivity.startActivityCoordinates(this, cache.getCoords());
                 return true;
             case MENU_CALENDAR:
                 addToCalendarWithIntent();

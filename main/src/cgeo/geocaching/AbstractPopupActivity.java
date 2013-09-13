@@ -285,7 +285,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
             showToast(res.getString(R.string.err_location_unknown));
             return;
         }
-        cgeocaches.startActivityCoordinates(this, coords);
+        CacheListActivity.startActivityCoordinates(this, coords);
         finish();
     }
 

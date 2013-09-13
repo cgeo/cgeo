@@ -443,7 +443,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
             return;
         }
 
-        cgeocaches.startActivityCoordinates(this, coords);
+        CacheListActivity.startActivityCoordinates(this, coords);
 
         finish();
     }

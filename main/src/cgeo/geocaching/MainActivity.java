@@ -284,7 +284,7 @@ public class MainActivity extends AbstractActivity {
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;
             case R.id.menu_history:
-                cgeocaches.startActivityHistory(this);
+                CacheListActivity.startActivityHistory(this);
                 return true;
             case R.id.menu_scan:
                 startScannerApplication();
@@ -367,7 +367,7 @@ public class MainActivity extends AbstractActivity {
                     @Override
                     public void run(final Integer selectedListId) {
                         Settings.saveLastList(selectedListId);
-                        cgeocaches.startActivityOffline(MainActivity.this);
+                        CacheListActivity.startActivityOffline(MainActivity.this);
                     }
                 });
                 return true;
@@ -568,7 +568,7 @@ public class MainActivity extends AbstractActivity {
         }
 
         nearestView.setPressed(true);
-        cgeocaches.startActivityNearest(this, app.currentGeo().getCoords());
+        CacheListActivity.startActivityNearest(this, app.currentGeo().getCoords());
     }
 
     /**
@@ -577,7 +577,7 @@ public class MainActivity extends AbstractActivity {
      */
     public void cgeoFindByOffline(final View v) {
         findByOffline.setPressed(true);
-        cgeocaches.startActivityOffline(this);
+        CacheListActivity.startActivityOffline(this);
     }
 
     /**

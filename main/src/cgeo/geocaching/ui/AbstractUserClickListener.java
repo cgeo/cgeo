@@ -1,7 +1,7 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeocaches;
+import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.network.Network;
 
@@ -53,10 +53,10 @@ abstract class AbstractUserClickListener implements View.OnClickListener {
             public void onClick(DialogInterface dialog, int item) {
                 switch (item) {
                     case 0:
-                        cgeocaches.startActivityOwner(context, name.toString());
+                        CacheListActivity.startActivityOwner(context, name.toString());
                         return;
                     case 1:
-                        cgeocaches.startActivityUserName(context, name.toString());
+                        CacheListActivity.startActivityUserName(context, name.toString());
                         return;
                     case 2:
                         context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + Network.encode(name.toString()))));

@@ -9,7 +9,7 @@ import cgeo.geocaching.StoredList;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.cgeoapplication;
-import cgeo.geocaching.cgeocaches;
+import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.Login;
@@ -690,7 +690,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 selectMapTheme();
                 return true;
             case R.id.menu_as_list: {
-                cgeocaches.startActivityMap(activity, new SearchResult(getGeocodesForCachesInViewport()));
+                CacheListActivity.startActivityMap(activity, new SearchResult(getGeocodesForCachesInViewport()));
                 return true;
             }
             case R.id.menu_strategy_fastest: {

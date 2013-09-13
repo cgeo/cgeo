@@ -2,9 +2,9 @@ package cgeo.geocaching.ui;
 
 import butterknife.InjectView;
 
+import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgeoapplication;
-import cgeo.geocaching.cgeocaches;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
 
@@ -61,7 +61,7 @@ public class AddressListAdapter extends ArrayAdapter<Address> {
             @Override
             public void onClick(final View v) {
                 final Activity activity = (Activity) v.getContext();
-                cgeocaches.startActivityAddress(activity, new Geopoint(address.getLatitude(), address.getLongitude()), StringUtils.defaultString(address.getAddressLine(0)));
+                CacheListActivity.startActivityAddress(activity, new Geopoint(address.getLatitude(), address.getLongitude()), StringUtils.defaultString(address.getAddressLine(0)));
                 activity.finish();
             }
         });

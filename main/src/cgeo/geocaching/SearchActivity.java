@@ -142,7 +142,7 @@ public class SearchActivity extends AbstractActivity {
         }
 
         if (keywordSearch) { // keyword fallback, if desired by caller
-            cgeocaches.startActivityKeyword(this, query.trim());
+            CacheListActivity.startActivityKeyword(this, query.trim());
             return true;
         }
 
@@ -281,7 +281,7 @@ public class SearchActivity extends AbstractActivity {
             }
         } else {
             try {
-                cgeocaches.startActivityCoordinates(this, new Geopoint(StringUtils.trim(latText), StringUtils.trim(lonText)));
+                CacheListActivity.startActivityCoordinates(this, new Geopoint(StringUtils.trim(latText), StringUtils.trim(lonText)));
             } catch (final Geopoint.ParseException e) {
                 showToast(res.getString(e.resource));
             }
@@ -305,7 +305,7 @@ public class SearchActivity extends AbstractActivity {
             return;
         }
 
-        cgeocaches.startActivityKeyword(this, StringUtils.trim(keyText));
+        CacheListActivity.startActivityKeyword(this, StringUtils.trim(keyText));
     }
 
     private class FindByAddressListener implements View.OnClickListener {
@@ -344,7 +344,7 @@ public class SearchActivity extends AbstractActivity {
             return;
         }
 
-        cgeocaches.startActivityUserName(this, StringUtils.trim(usernameText));
+        CacheListActivity.startActivityUserName(this, StringUtils.trim(usernameText));
     }
 
     private void findByOwnerFn() {
@@ -359,7 +359,7 @@ public class SearchActivity extends AbstractActivity {
             return;
         }
 
-        cgeocaches.startActivityOwner(this, StringUtils.trim(usernameText));
+        CacheListActivity.startActivityOwner(this, StringUtils.trim(usernameText));
     }
 
     private class FindByGeocodeListener implements View.OnClickListener {

@@ -137,7 +137,7 @@
             android:configChanges="keyboardHidden|orientation" >
         </activity>
         <activity
-            android:name=".cgeocaches"
+            android:name=".CacheListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name" >
 

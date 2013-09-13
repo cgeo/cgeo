@@ -66,7 +66,7 @@ public class AddressListActivity extends AbstractListActivity {
                     }
                 } else {
                     finish();
-                    cgeocaches.startActivityAddress(AddressListActivity.this, null, keyword);
+                    CacheListActivity.startActivityAddress(AddressListActivity.this, null, keyword);
                 }
             }
 

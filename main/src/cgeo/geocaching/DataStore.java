@@ -2989,7 +2989,7 @@ public class DataStore {
 
     public static Set<String> getCachedMissingFromSearch(final SearchResult searchResult, final Set<Tile> tiles, final IConnector connector, final int maxZoom) {
 
-        // get cached cgeocaches
+        // get cached CacheListActivity
         final Set<String> cachedGeocodes = new HashSet<String>();
         for (Tile tile : tiles) {
             cachedGeocodes.addAll(cacheCache.getInViewport(tile.getViewport(), CacheType.ALL));
