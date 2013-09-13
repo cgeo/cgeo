@@ -1,7 +1,6 @@
 package cgeo.geocaching.maps.mapsforge;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.maps.AbstractMapProvider;
 import cgeo.geocaching.maps.MapProviderFactory;
@@ -10,6 +9,7 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.v024.MapsforgeMapActivity024;
 import cgeo.geocaching.maps.mapsforge.v024.MapsforgeMapItemFactory024;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -168,10 +168,6 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         for (String mapFile : offlineMaps) {
             final String mapName = StringUtils.capitalize(StringUtils.substringBeforeLast(new File(mapFile).getName(), "."));
             registerMapSource(new OfflineMapSource(mapFile, this, mapName + " (" + resources.getString(R.string.map_source_osm_offline) + ")", MapGeneratorInternal.DATABASE_RENDERER));
-        }
-        // have a default entry, if no map files are available. otherwise we cannot select "offline" in the settings
-        if (offlineMaps.isEmpty()) {
-            registerMapSource(new OfflineMapSource("", this, resources.getString(R.string.map_source_osm_offline), MapGeneratorInternal.DATABASE_RENDERER));
         }
     }
 }

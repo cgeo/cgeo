@@ -427,7 +427,7 @@
   <string name="init_backup_last">Backup verfügbar von</string>
   <string name="init_backup_last_no">Keine Datei mit Datenbanksicherung gefunden.</string>
   <string name="settings_info_offline_maps_title">Info zu Offline-Karten</string>
-  <string name="settings_info_offline_maps">c:geo ermöglicht es, Offline-Karten zu verwenden. Du kannst Karten bei mapsforge herunterladen oder sogar eigene Karten aus OSM-Daten erstellen.</string>
+  <string name="settings_info_offline_maps">c:geo ermöglicht es, Offline-Karten zu verwenden. Du kannst Karten bei mapsforge herunterladen oder sogar eigene Karten aus OSM-Daten erstellen. Es muss erst ein Verzeichnis mit Offline-Karten gewählt werden, bevor eine Offline-Karte gewählt werden kann.</string>
   <string name="settings_info_themes_title">Info zu Karten-Themes</string>
   <string name="settings_info_themes">c:geo kann eigene Karten-Themes für Offline-Karten verwenden. Du kannst sie dazu benutzen, um die Farbauswahl der Karte (z. B. für eine Nachtansicht) zu verändern oder um bestimmte Objekte wie z. B. Radwege oder Höhenlinien hervorzuheben.</string>
   <string name="init_mapsource_select">Kartenquelle wählen</string>
