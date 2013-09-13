@@ -1,7 +1,6 @@
 package cgeo.geocaching.maps.mapsforge;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
 import cgeo.geocaching.maps.PositionOverlay;
@@ -15,6 +14,7 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl.OverlayType;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -46,6 +46,9 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     public MapsforgeMapView(Context context, AttributeSet attrs) {
         super(context, attrs);
         gestureDetector = new GestureDetector(context, new GestureListener());
+        if (Settings.isScaleMapsforgeText()) {
+            this.setTextScale(getResources().getDisplayMetrics().density);
+        }
     }
 
     @Override

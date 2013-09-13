@@ -441,6 +441,10 @@ public final class Settings {
         return MapsforgeMapProvider.isValidMapFile(mapFileIn);
     }
 
+    public static boolean isScaleMapsforgeText() {
+        return getBoolean(R.string.pref_mapsforge_scale_text, true);
+    }
+
     public static CoordInputFormatEnum getCoordInputFormat() {
         return CoordInputFormatEnum.fromInt(getInt(R.string.pref_coordinputformat, 0));
     }

@@ -38,6 +38,7 @@
     <string name="pref_choose_list">choose_list</string>
     <string name="pref_mapsource">mapsource</string>
     <string name="pref_mapDirectory">mapDirectory</string>
+    <string name="pref_mapsforge_scale_text">mapsforgeScaleText</string>
     <string name="pref_renderthemepath">renderthemepath</string>
     <string name="pref_showwaypointsthreshold">waypointsthreshold</string>
     <string name="pref_maptrail">maptrail</string>
