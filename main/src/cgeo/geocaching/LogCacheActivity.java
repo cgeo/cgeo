@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
@@ -346,22 +347,15 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             boolean expired = DateUtils.daysSince(eventDate.getTime()) >= 0;
 
             if (cache.hasOwnLog(LogType.WILL_ATTEND) || expired) {
-                if (cache.hasOwnLog(LogType.ATTENDED)) {
-                    typeSelected = LogType.NOTE;
-                }
-                else {
-                    typeSelected = LogType.ATTENDED;
-                }
-            }
-            else {
+                typeSelected = cache.hasOwnLog(LogType.ATTENDED) ? LogType.NOTE : LogType.ATTENDED;
+            } else {
                 typeSelected = LogType.WILL_ATTEND;
             }
-        }
-        else {
+        } else {
             if (cache.isFound()) {
                 typeSelected = LogType.NOTE;
             } else {
-                typeSelected = LogType.FOUND_IT;
+                typeSelected = cache.getType() == CacheType.WEBCAM ? LogType.WEBCAM_PHOTO_TAKEN : LogType.FOUND_IT;
             }
         }
         text = null;
