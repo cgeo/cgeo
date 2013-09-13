@@ -519,14 +519,7 @@
     <string name="auth_authorize">c:geoを認証</string>
     <string name="auth_start">認証を開始</string>
     <string name="auth_again">再度認証を開始</string>
-    <string name="auth_pin_hint">TwitterのPINコード</string>
     <string name="auth_finish">完了</string>
-    <string name="auth_dialog_wait">Twitterからの返答を待っています…</string>
-    <string name="auth_dialog_pin_title">PINコード</string>
-    <string name="auth_dialog_pin_message">Twitterのサイトで表示されたPINコードを入力してください。認証を完了するために必要です。</string>
-    <string name="auth_dialog_completed">c:geoはTwitterにポストするための認証を受けました。</string>
-    <string name="about_auth_1"><b>c:geo</b>がTwitterにアクセスする許可を得るには次のようにしてください。</string>
-    <string name="about_auth_2">「認証を開始する」ボタンを押すとブラウザでTwitterのページが開きます。そのページにログインすれば<b>c:geo</b>があなたのアカウントにアクセルする許可が得られます。ログインに成功したら数字のPINコードが表示されるので、この下の入力欄にコピー&amp;ペーストして「完了」ボタンを押してください。</string>
 
     <!-- auth opencaching -->
     <string name="auth_ocde">opencaching.de</string>

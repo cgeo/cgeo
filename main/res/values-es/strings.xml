@@ -386,12 +386,7 @@
     <string name="auth_authorize">Autorizar c:geo</string>
     <string name="auth_start">Iniciar autorización</string>
     <string name="auth_again">Volver a iniciar</string>
-    <string name="auth_pin_hint">PIN asignado por Twitter</string>
     <string name="auth_finish">Fin</string>
-    <string name="auth_dialog_wait">Esperando por Twitter…</string>
-    <string name="auth_dialog_pin_title">Código PIN</string>
-    <string name="auth_dialog_pin_message">Debes usar el codigo PIN suministrado por Twitter. Es obligatorio completar la autorización.</string>
-    <string name="auth_dialog_completed">c:geo ahora está autorizado para publicar en Twitter.</string>
 
     <!-- cache -->
     <plurals name="cache_counts">
@@ -771,7 +766,5 @@
     <string name="twitter">Twitter: <a href="">@android_GC</a></string>
     <string name="nutshellmanual">Manual: <a href="">c:geo en breve</a></string>
     <string name="about_twitter">¿Debe <b>c:geo</b> publicar el nuevo estado en Twitter cuando registras un escondite?</string>
-    <string name="about_auth_1">El siguiente proceso permite a  <b>c:geo</b> acceder a Twitter - si estás de acuerdo.</string>
-    <string name="about_auth_2">Hacer clic en el botón \"autorizar c:geo\" iniciará el proceso. Este proceso abrirá un navegador con la web de Twitter. Identifícate y permite a <b>c:geo</b> acceder a tu cuenta. Si aceptas Twitter te mostrará un código PIN. Este PIN debe ser pegado en <b>c:geo</b> y ser confirmado. Eso es todo.</string>
 
 </resources>

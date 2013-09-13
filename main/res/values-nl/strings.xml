@@ -456,12 +456,7 @@
     <string name="auth_authorize">c:geo Autoriseren</string>
     <string name="auth_start">Start autorisatie</string>
     <string name="auth_again">Nogmaals starten</string>
-    <string name="auth_pin_hint">Door Twitter toegekende pin</string>
     <string name="auth_finish">Afronden</string>
-    <string name="auth_dialog_wait">Wachten op Twitter…</string>
-    <string name="auth_dialog_pin_title">Pin code</string>
-    <string name="auth_dialog_pin_message">Voer de door de Twitter website verstrekte PIN code in. Deze is verplicht om de autorisatie af te ronden.</string>
-    <string name="auth_dialog_completed">c:geo Is nu geautoriseerd om naar Twitter te posten.</string>
 
     <!-- cache -->
     <plurals name="cache_counts">
@@ -1018,8 +1013,6 @@
     <string name="twitter">Twitter: <a href="">@android_GC</a></string>
     <string name="nutshellmanual">Handleiding: <a href="">c:geo in een notendop</a></string>
     <string name="about_twitter">Moet <b>c:geo</b> elke cache vondst publiceren naar Twitter?</string>
-    <string name="about_auth_1">Het volgende proces staat <b>c:geo</b> toe om Twitter toegang te verkrijgen bij goedkeuring.</string>
-    <string name="about_auth_2">Klik op de \"autoriseer c:geo\" knop om het proces te starten. Dit proces zal een browser openen met een Twitter pagina. Login op deze pagina en sta <b>c:geo</b> toegang tot je account toe. Bij goedkeuring laat Twitter een numerieke PIN code zien. Deze PIN dien je te plakken en te bevestigen in <b>c:geo</b>.</string>
 
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Nieuwe release beschikbaar.\nTik om te installeren.</string>

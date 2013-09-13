@@ -475,12 +475,7 @@
     <string name="auth_authorize">Autorizovat c:geo</string>
     <string name="auth_start">Zahájit autorizaci</string>
     <string name="auth_again">Znovu autorizovat</string>
-    <string name="auth_pin_hint">PIN přidělený Twitterem</string>
     <string name="auth_finish">Dokončit</string>
-    <string name="auth_dialog_wait">Čekání na Twitter…</string>
-    <string name="auth_dialog_pin_title">PIN kód</string>
-    <string name="auth_dialog_pin_message">Prosím, napiš PIN kód přidělený Twitterem. Je to nutné pro dokončení autorizace.</string>
-    <string name="auth_dialog_completed">c:geo nyní může posílat zprávy na Tvůj Twitter.</string>
 
     <!-- cache -->
     <plurals name="cache_counts">
@@ -1040,8 +1035,6 @@
     <string name="twitter">Twitter: <a href="">@android_GC</a></string>
     <string name="nutshellmanual">Návod: <a href="">c:geo v Nutshell</a></string>
     <string name="about_twitter">Má <b>c:geo</b> publikovat nový status na Twitteru vždy, když zaloguješ keš?</string>
-    <string name="about_auth_1">Následující proces dovoluje aplikaci <b>c:geo</b> přístup na Twitter - pokud budeš souhlasit.</string>
-    <string name="about_auth_2">Klepnutím na tlačítko \"Zahájit autorizaci\" bude proces zahájen. Tento proces otevře webový prohlížeč s Twitterem. Přihlaš se na této stránce a povol <b>c:geu</b> přístup k tvému účtu. Pokud je to povoleno, Twitter ti ukáže číselný PIN kód. Tento PIN kód musíš zadat do <b>c:geo</b> a potvrdit. To je vše.</string>
 
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Dostupné nové vydání.\nKlepni pro instalaci.</string>

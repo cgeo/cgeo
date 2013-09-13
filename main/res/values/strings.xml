@@ -533,19 +533,18 @@
     <string name="sendToCgeo_download_fail">c:geo failed to download caches. No internet connection, or send2c:geo is down.</string>
     <string name="sendToCgeo_no_registration">c:geo failed to download caches. Registration for send2c:geo expired. Please register in settings.</string>
 
-    <!-- auth twitter -->
+    <!-- auth generic -->
     <string name="auth_twitter">Twitter</string>
     <string name="auth_authorize">Authorize c:geo</string>
     <string name="auth_start">Start authorization</string>
     <string name="auth_again">Start again</string>
-    <string name="auth_pin_hint">PIN assigned by Twitter</string>
     <string name="auth_finish">Finish</string>
-    <string name="auth_dialog_wait">Waiting for Twitter…</string>
-    <string name="auth_dialog_pin_title">PIN code</string>
-    <string name="auth_dialog_pin_message">Please type in the PIN code provided by Twitter. It is required to complete authorization.</string>
-    <string name="auth_dialog_completed">c:geo is now authorized to post on Twitter.</string>
-    <string name="about_auth_1">The following process will allow <b>c:geo</b> to access Twitter.</string>
-    <string name="about_auth_2">Pressing the \"authorize c:geo\" button will start the process. This process will open up a web browser with a Twitter page. Log in on this page and allow <b>c:geo</b> to access your account. After this, Twitter will show up a numeric PIN code. This PIN must be pasted into <b>c:geo</b> and confirmed. That\'s all.</string>
+    <string name="auth_dialog_waiting">Waiting for %s…</string>
+    <string name="auth_explain_short">The following process will allow <b>c:geo</b> to access %s.</string>
+    <string name="auth_explain_long">Pressing the \"authorize c:geo\" button will start the process. This process will open up a web browser with a %s page. Log in on this page and allow <b>c:geo</b> to access your account. That\'s all.</string>
+
+    <!-- auth Twitter -->
+    <string name="auth_dialog_completed_twitter">c:geo is now authorized to post on Twitter.</string>
 
     <!-- auth opencaching -->
     <string name="auth_ocde">opencaching.de</string>

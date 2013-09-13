@@ -19,7 +19,8 @@ public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
                 "/okapi/services/oauth/access_token",
                 false,
                 CgeoApplication.getInstance().getResources().getString(authParams.getCKResId()),
-                CgeoApplication.getInstance().getResources().getString(authParams.getCSResId()));
+                CgeoApplication.getInstance().getResources().getString(authParams.getCSResId()),
+                null);
         this.authParams = authParams;
     }
 

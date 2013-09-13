@@ -514,12 +514,7 @@
     <string name="auth_authorize">Autoryzacja c:geo</string>
     <string name="auth_start">Rozpoczynam autoryzację</string>
     <string name="auth_again">Rozpoczynam ponownie autoryzację</string>
-    <string name="auth_pin_hint">PIN nadany przez Twitter</string>
     <string name="auth_finish">Gotowe</string>
-    <string name="auth_dialog_wait">Czekam na Twitter…</string>
-    <string name="auth_dialog_pin_title">Kod PIN</string>
-    <string name="auth_dialog_pin_message">Proszę wpisać kod PIN dostarczony przez stronę Twitter. To jest obowiązkowe do ukończenia autoryzacji.</string>
-    <string name="auth_dialog_completed">c:geo jest teraz upoważniony do postu na Twitter.</string>
 
     <!-- auth opencaching -->
     <string name="auth_ocde">opencaching.de</string>
@@ -1121,8 +1116,6 @@
     <string name="nutshellmanual">Podręcznik: <a href="">c:geo skrócona instrukcja obsługi</a></string>
     <string name="market">Android: <a href="">c:geo w Google Play</a></string>
     <string name="about_twitter">Czy chczesz aby <b>c:geo</b> publikował nowy status na Twitter za każdym razem kiedy znajdziesz skrzynkę?</string>
-    <string name="about_auth_1">Poniższy proces pozwala <b>c:geo</b> uzyskać dostęp do Twitter za Twoim pozwoleniem.</string>
-    <string name="about_auth_2">Kliknięcie na \"Autoryzacja c:geo\" spowoduje rozpoczęcie procesu. Ten proces spowoduje otwarcie przeglądarki internetowej na stronie Twitter. Zaloguj się na tej stronie i pozwól <b>c:geo</b> uzyskać dostęp do Twojego konta. Jeśli zostanie zaakceptowany, Twitter wyświetli kod numeryczny PIN. Kod PIN musi zostać wklejony do <b>c:geo</b> i potwierdzony. To wszystko.</string>
 
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Dostępna nowa wersja.\nKliknij aby zainstalować.</string>

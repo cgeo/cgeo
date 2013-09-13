@@ -3,6 +3,7 @@ package cgeo.geocaching.network;
 import butterknife.InjectView;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.R.string;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -30,6 +31,9 @@ import java.util.regex.Pattern;
 
 public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
+    public static final int NOT_AUTHENTICATED = 0;
+    public static final int AUTHENTICATED = 1;
+
     private String host;
     private String pathRequest;
     private String pathAuthorize;
@@ -37,6 +41,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     private boolean https;
     private String consumerKey;
     private String consumerSecret;
+    @Nullable private String callback;
     private String OAtoken = null;
     private String OAtokenSecret = null;
     private final Pattern paramsPattern1 = Pattern.compile("oauth_token=([a-zA-Z0-9\\-\\_.]+)");
@@ -62,9 +67,11 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
             if (msg.what == 1) {
                 startButton.setText(getAuthAgain());
 
-                pinEntry.setVisibility(View.VISIBLE);
-                pinEntryButton.setVisibility(View.VISIBLE);
-                pinEntryButton.setOnClickListener(new ConfirmPINListener());
+                if (isOOB()) {
+                    pinEntry.setVisibility(View.VISIBLE);
+                    pinEntryButton.setVisibility(View.VISIBLE);
+                    pinEntryButton.setOnClickListener(new ConfirmPINListener());
+                }
             } else {
                 showToast(getErrAuthInitialize());
                 startButton.setText(getAuthStart());
@@ -83,7 +90,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
             pinEntryButton.setOnClickListener(new ConfirmPINListener());
             pinEntryButton.setEnabled(true);
 
-            if (msg.what == 1) {
+            if (msg.what == AUTHENTICATED) {
                 showToast(getAuthDialogCompleted());
 
                 pinEntryButton.setVisibility(View.GONE);
@@ -106,7 +113,8 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
             String pathAccess,
             boolean https,
             String consumerKey,
-            String consumerSecret) {
+            String consumerSecret,
+            @Nullable String callback) {
         this.host = host;
         this.pathRequest = pathRequest;
         this.pathAuthorize = pathAuthorize;
@@ -114,6 +122,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         this.https = https;
         this.consumerKey = consumerKey;
         this.consumerSecret = consumerSecret;
+        this.callback = callback;
     }
 
     @Override
@@ -122,10 +131,6 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
         setTitle(getAuthTitle());
 
-        init();
-    }
-
-    private void init() {
         auth_1.setText(getAboutAuth1());
         auth_2.setText(getAboutAuth2());
 
@@ -145,18 +150,43 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         } else {
             // already have temporary tokens, continue from pin
             startButton.setText(getAuthAgain());
-
-            pinEntry.setHint(getAuthPinHint());
-            pinEntry.setVisibility(View.VISIBLE);
-            pinEntryButton.setVisibility(View.VISIBLE);
-            pinEntryButton.setOnClickListener(new ConfirmPINListener());
+            if (isOOB()) {
+                pinEntry.setHint(getAuthPinHint());
+                pinEntry.setVisibility(View.VISIBLE);
+                pinEntryButton.setVisibility(View.VISIBLE);
+                pinEntryButton.setOnClickListener(new ConfirmPINListener());
+            }
         }
+    }
+
+    @Override
+    public void onNewIntent(final Intent intent) {
+        setIntent(intent);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        final Uri uri = getIntent().getData();
+        if (uri != null) {
+            final String verifier = uri.getQueryParameter("oauth_verifier");
+            if (StringUtils.isNotBlank(verifier)) {
+                exchangeTokens(verifier);
+            } else {
+                // We can shortcut the whole verification process if we do not have a token at all.
+                changeTokensHandler.sendEmptyMessage(NOT_AUTHENTICATED);
+            }
+        }
+    }
+
+    private boolean isOOB() {
+        return callback == null;
     }
 
     private void requestToken() {
 
         final Parameters params = new Parameters();
-        params.put("oauth_callback", "oob");
+        params.put("oauth_callback", isOOB() ? "oob" : callback);
         final String method = "GET";
         OAuth.signOAuth(host, pathRequest, method, https, params, null, null, consumerKey, consumerSecret);
         final String line = Network.getResponseData(Network.getRequest(getUrlPrefix() + host + pathRequest, params));
@@ -192,12 +222,12 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         requestTokenHandler.sendEmptyMessage(status);
     }
 
-    private void changeToken() {
+    private void changeToken(final String verifier) {
 
-        int status = 0;
+        int status = NOT_AUTHENTICATED;
 
         try {
-            final Parameters params = new Parameters("oauth_verifier", pinEntry.getText().toString());
+            final Parameters params = new Parameters("oauth_verifier", verifier);
 
             final String method = "POST";
             OAuth.signOAuth(host, pathAccess, method, https, params, OAtoken, OAtokenSecret, consumerKey, consumerSecret);
@@ -221,7 +251,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
                 setTokens(null, null, false);
             } else {
                 setTokens(OAtoken, OAtokenSecret, true);
-                status = 1;
+                status = AUTHENTICATED;
             }
         } catch (Exception e) {
             Log.e("OAuthAuthorizationActivity.changeToken", e);
@@ -263,29 +293,34 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
         @Override
         public void onClick(View arg0) {
-            if (StringUtils.isEmpty(pinEntry.getText().toString())) {
+            final String verifier = pinEntry.getText().toString();
+            if (StringUtils.isEmpty(verifier)) {
                 helpDialog(getAuthDialogPinTitle(), getAuthDialogPinMessage());
                 return;
             }
 
-            if (changeTokensDialog == null) {
-                changeTokensDialog = new ProgressDialog(OAuthAuthorizationActivity.this);
-                changeTokensDialog.setCancelable(false);
-                changeTokensDialog.setMessage(getAuthDialogWait());
-            }
-            changeTokensDialog.show();
-            pinEntryButton.setEnabled(false);
-            pinEntryButton.setOnTouchListener(null);
-            pinEntryButton.setOnClickListener(null);
-
-            (new Thread() {
-
-                @Override
-                public void run() {
-                    changeToken();
-                }
-            }).start();
+            exchangeTokens(verifier);
         }
+    }
+
+    private void exchangeTokens(final String verifier) {
+        if (changeTokensDialog == null) {
+            changeTokensDialog = new ProgressDialog(this);
+            changeTokensDialog.setCancelable(false);
+            changeTokensDialog.setMessage(getAuthDialogWait());
+        }
+        changeTokensDialog.show();
+        pinEntryButton.setEnabled(false);
+        pinEntryButton.setOnTouchListener(null);
+        pinEntryButton.setOnClickListener(null);
+
+        (new Thread() {
+
+            @Override
+            public void run() {
+                changeToken(verifier);
+            }
+        }).start();
     }
 
     protected abstract ImmutablePair<String, String> getTempTokens();
@@ -298,29 +333,56 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
     protected abstract String getAuthTitle();
 
-    protected abstract String getAuthAgain();
+    protected String getAuthAgain() {
+        return getString(R.string.auth_again);
+    }
 
-    protected abstract String getErrAuthInitialize();
+    protected String getErrAuthInitialize() {
+        return getString(string.err_auth_initialize);
+    }
 
-    protected abstract String getAuthStart();
+    protected String getAuthStart() {
+        return getString(R.string.auth_start);
+    }
 
     protected abstract String getAuthDialogCompleted();
 
-    protected abstract String getErrAuthProcess();
+    protected String getErrAuthProcess() {
+        return res.getString(R.string.err_auth_process);
+    }
 
-    protected abstract String getAuthDialogWait();
+    protected String getAuthDialogWait() {
+        return res.getString(R.string.auth_dialog_waiting, getTitle());
+    }
 
-    protected abstract String getAuthDialogPinTitle();
+    protected String getAuthDialogPinTitle() {
+        assert false;
+        return null;
+    }
 
-    protected abstract String getAuthDialogPinMessage();
+    protected String getAuthDialogPinMessage() {
+        assert false;
+        return null;
+    }
 
-    protected abstract String getAboutAuth1();
+    protected String getAuthPinHint() {
+        assert false;
+        return null;
+    }
 
-    protected abstract String getAboutAuth2();
+    protected String getAboutAuth1() {
+        return res.getString(R.string.auth_explain_short, getTitle());
+    }
 
-    protected abstract String getAuthAuthorize();
+    protected String getAboutAuth2() {
+        return res.getString(R.string.auth_explain_long, getTitle());
+    }
 
-    protected abstract String getAuthPinHint();
+    protected String getAuthAuthorize() {
+        return res.getString(R.string.auth_authorize, getTitle());
+    }
 
-    protected abstract String getAuthFinish();
+    protected String getAuthFinish() {
+        return res.getString(R.string.auth_finish, getTitle());
+    }
 }

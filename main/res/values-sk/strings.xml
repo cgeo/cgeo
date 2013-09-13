@@ -446,12 +446,7 @@
     <string name="auth_authorize">autorizovať c:geo</string>
     <string name="auth_start">Zahájiť autorizáciu</string>
     <string name="auth_again">Znovu autorizovať</string>
-    <string name="auth_pin_hint">PIN pridelený Twitterom</string>
     <string name="auth_finish">Dokončiť</string>
-    <string name="auth_dialog_wait">Čakanie na Twitter…</string>
-    <string name="auth_dialog_pin_title">PIN kód</string>
-    <string name="auth_dialog_pin_message">Prosím, napíšte PIN kód, ktorý vám zobrazil Twitter. Je to potrebné pre dokončenie autorizácie.</string>
-    <string name="auth_dialog_completed">c:geo teraz môže posielať správy na váš Twitter.</string>
 
     <!-- cache -->
     <plurals name="cache_counts">
@@ -937,8 +932,6 @@
     <string name="twitter">Twitter: <a href="">@android_GC</a></string>
     <string name="nutshellmanual">Manuál: <a href="">c:geo v kocke</a></string>
     <string name="about_twitter">Chcete, aby <b>c:geo</b> napísalo na váš Twitter vždy keď zapíšete nájdenie skrýše?</string>
-    <string name="about_auth_1">Pomocou nasledujúceho procesu môžete aplikácii <b>c:geo</b> umožniť odosielanie príspevkov na váš Twitter.  </string>
-    <string name="about_auth_2">Ťuknutím na tlačidlo „Zahájiť autorizáciu“ celý proces začne. Tento proces otvorí webovú stránku Twitteru, kde sa sa prihlásite a tlačidlom „Authorize app“ umožníte aplikácii <b>c:geo</b> prístup k vášmu Twitter účtu. Potom čo ťuknete na „Authorize app“, Twitter vám pridelí PIN kód. Tento kód skopírujte a vložte do aplikácie <b>c:geo</b>. A potvrďte. To je všetko.</string>
 
     <!-- status -->
     <string name="status_new_release" tools:ignore="UnusedResources">Je dostupné nové vydanie.\nKliknite pre inštaláciu.</string>

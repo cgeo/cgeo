@@ -535,14 +535,7 @@
     <string name="auth_authorize">Poveži c:geo s Twitterjem</string>
     <string name="auth_start">Začni z avtorizacijo</string>
     <string name="auth_again">Ponovno začni</string>
-    <string name="auth_pin_hint">PIN, ki ga dodeli Twitter</string>
     <string name="auth_finish">Končaj</string>
-    <string name="auth_dialog_wait">Čakam na Twitter…</string>
-    <string name="auth_dialog_pin_title">PIN koda</string>
-    <string name="auth_dialog_pin_message">Vnesite PIN kodo, ki ste jo dobili na spletni strani Twitterja.</string>
-    <string name="auth_dialog_completed">c:geo je sedaj povezan s Twitterjem za objavo sporočil.</string>
-    <string name="about_auth_1">Sledeči postopek omogoča <b>c:geotu</b> povezavo s Twitterjem.</string>
-    <string name="about_auth_2">Klik na gumb \"Poveži c:geo\" bo začel s postopkom avtorizacije. Med postopkom se bo odprl brskalnik s Twitterjem. V brskalniku se prijavite v Twitter in dovolite aplikaciji <b>c:geo</b> da dostopa do vašega računa. Ko to potrdite, vam bo Twitter izpisal PIN kodo. To kodo prepišite v <b>c:geo</b> in potrdite.</string>
 
     <!-- auth opencaching -->
     <string name="auth_ocde">opencaching.de</string>

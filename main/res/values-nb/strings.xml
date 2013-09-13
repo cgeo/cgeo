@@ -220,12 +220,7 @@
     <string name="auth_authorize">Autoriser c:geo</string>
     <string name="auth_start">Start autorisasjon</string>
     <string name="auth_again">Prøv igjen</string>
-    <string name="auth_pin_hint">PIN-kode oppgitt av Twitter</string>
     <string name="auth_finish">Fullfør</string>
-    <string name="auth_dialog_wait">venter på Twitter…</string>
-    <string name="auth_dialog_pin_title">PIN-kode</string>
-    <string name="auth_dialog_pin_message">Vennligst tast inn PIN-koden oppgitt av Twitter. Det er obligatorisk at du fullfører autorisasjonen.</string>
-    <string name="auth_dialog_completed">c:geo kan nå poste på Twitter.</string>
 
     <!-- cache -->
     <plurals name="cache_counts">
@@ -389,7 +384,5 @@
     <string name="website">web-side: <a href="http://cgeo.org/">cgeo.org</a></string>
     <string name="facebook">facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
     <string name="about_twitter">Ønsker du at <b>c:geo</b> skal poste en status på Twitter hver gang du logger ett funn via <b>c:geo</b>?</string>
-    <string name="about_auth_1">Den følgende prosessen tillater <b>c:geo</b> tilgang til Twitter - hvis bruker samtykker.</string>
-    <string name="about_auth_2">Trykk på \"Start autorisasjon\" knappen for å starte prosessen. Denne prosessen vil åpne Twitter i web-leseren. Logg inn, og tillat <b>c:geo</b> tilgang til kontoen din. Hvis du aksepterer, vil Twitter oppgi en numerisk PIN-kode. Denne PIN-koden må så limes inn i <b>c:geo</b>. Verre er det ikke.</string>
 
 </resources>

@@ -536,14 +536,7 @@
     <string name="auth_authorize">Koppla c:geo mot Twitter</string>
     <string name="auth_start">Påbörja koppling mot Twitter</string>
     <string name="auth_again">Koppla mot Twitter igen</string>
-    <string name="auth_pin_hint">PIN erhållen från Twitter</string>
     <string name="auth_finish">Bekräfta PIN</string>
-    <string name="auth_dialog_wait">Väntar på Twitter…</string>
-    <string name="auth_dialog_pin_title">PIN kod</string>
-    <string name="auth_dialog_pin_message">Vänligen skriv in PIN koden du fick på Twitters hemsida. Den krävs för att slutföra kopplingen.</string>
-    <string name="auth_dialog_completed">c:geo är nu godkänd att posta på Twitter.</string>
-    <string name="about_auth_1">Nedan tillåter du <b>c:geo</b> att ansluta till Twitter.</string>
-    <string name="about_auth_2">Klicka på \"Påbörja koppling mot Twitter\" om du vill koppla ihop <b>c:geo</b> med Twitter. Twitters hemsida kommer att öppnas i en webbläsare. Logga in på den sidan och tillåt <b>c:geo</b> att ansluta till ditt konto. När du godkänt så kommer Twitter att visa en PIN kod. Kom ihåg denna PIN kod, stäng webbläsaren och skriv in PIN koden i <b>c:geo</b> och bekräfta.</string>
 
     <!-- auth opencaching -->
     <string name="auth_ocde">opencaching.de</string>
