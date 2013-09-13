@@ -52,9 +52,9 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-public class cgData {
+public class DataStore {
 
-    private cgData() {
+    private DataStore() {
         // utility class
     }
 
@@ -297,7 +297,7 @@ public class cgData {
             final DbHelper dbHelper = new DbHelper(new DBContext(cgeoapplication.getInstance()));
             database = dbHelper.getWritableDatabase();
         } catch (Exception e) {
-            Log.e("cgData.init: unable to open database for R/W", e);
+            Log.e("DataStore.init: unable to open database for R/W", e);
         }
     }
 
@@ -757,7 +757,7 @@ public class cgData {
             // to NPE traces.
             final int staleHistorySearches = db.delete(dbTableSearchDestionationHistory, "date is null", null);
             if (staleHistorySearches > 0) {
-                Log.w(String.format(Locale.getDefault(), "cgData.dbHelper.onOpen: removed %d bad search history entries", staleHistorySearches));
+                Log.w(String.format(Locale.getDefault(), "DataStore.dbHelper.onOpen: removed %d bad search history entries", staleHistorySearches));
             }
         }
 
@@ -860,7 +860,7 @@ public class cgData {
 
             return getFirstColumn(cursor);
         } catch (final Exception e) {
-            Log.e("cgData.allDetailedThere", e);
+            Log.e("DataStore.allDetailedThere", e);
             return new String[0];
         }
     }
@@ -907,7 +907,7 @@ public class cgData {
 
             cursor.close();
         } catch (final Exception e) {
-            Log.e("cgData.isThere", e);
+            Log.e("DataStore.isThere", e);
         }
 
         if (detailed && dataDetailed == 0) {
@@ -954,7 +954,7 @@ public class cgData {
         } catch (SQLiteDoneException e) {
             // Do nothing, it only means we have no information on the cache
         } catch (Exception e) {
-            Log.e("cgData.isOffline", e);
+            Log.e("DataStore.isOffline", e);
         }
 
         return false;
@@ -975,7 +975,7 @@ public class cgData {
         } catch (SQLiteDoneException e) {
             // Do nothing, it only means we have no information on the cache
         } catch (Exception e) {
-            Log.e("cgData.getGeocodeForGuid", e);
+            Log.e("DataStore.getGeocodeForGuid", e);
         }
 
         return null;
@@ -996,7 +996,7 @@ public class cgData {
         } catch (SQLiteDoneException e) {
             // Do nothing, it only means we have no information on the cache
         } catch (Exception e) {
-            Log.e("cgData.getCacheidForGeocode", e);
+            Log.e("DataStore.getCacheidForGeocode", e);
         }
 
         return null;
@@ -1497,7 +1497,7 @@ public class cgData {
         }
 
         if (remaining.size() >= 1) {
-            Log.d("cgData.loadCaches(" + remaining.toString() + ") returned no results");
+            Log.d("DataStore.loadCaches(" + remaining.toString() + ") returned no results");
         }
         return result;
     }
@@ -1528,7 +1528,7 @@ public class cgData {
         }
 
         query.append(" WHERE ").append(dbTableCaches).append('.');
-        query.append(cgData.whereGeocodeIn(geocodes));
+        query.append(DataStore.whereGeocodeIn(geocodes));
 
         Cursor cursor = database.rawQuery(query.toString(), null);
         try {
@@ -1536,7 +1536,7 @@ public class cgData {
             int logIndex = -1;
 
             while (cursor.moveToNext()) {
-                Geocache cache = cgData.createCacheFromDatabaseContent(cursor);
+                Geocache cache = DataStore.createCacheFromDatabaseContent(cursor);
 
                 if (loadFlags.contains(LoadFlag.LOAD_ATTRIBUTES)) {
                     cache.setAttributes(loadAttributes(cache.getGeocode()));
@@ -1717,7 +1717,7 @@ public class cgData {
                 null,
                 "1");
 
-        Log.d("cgData.loadWaypoint(" + id + ")");
+        Log.d("DataStore.loadWaypoint(" + id + ")");
 
         final Waypoint waypoint = cursor.moveToFirst() ? createWaypointFromDatabaseContent(cursor) : null;
 
@@ -2038,7 +2038,7 @@ public class cgData {
             }
             return (int) compiledStmnt.simpleQueryForLong();
         } catch (Exception e) {
-            Log.e("cgData.loadAllStoredCachesCount", e);
+            Log.e("DataStore.loadAllStoredCachesCount", e);
         }
 
         return 0;
@@ -2050,7 +2050,7 @@ public class cgData {
         try {
             return (int) PreparedStatements.getCountHistoryCaches().simpleQueryForLong();
         } catch (Exception e) {
-            Log.e("cgData.getAllHistoricCachesCount", e);
+            Log.e("DataStore.getAllHistoricCachesCount", e);
         }
 
         return 0;
@@ -2115,7 +2115,7 @@ public class cgData {
 
             cursor.close();
         } catch (final Exception e) {
-            Log.e("cgData.loadBatchOfStoredGeocodes", e);
+            Log.e("DataStore.loadBatchOfStoredGeocodes", e);
         }
 
         return geocodes;
@@ -2152,7 +2152,7 @@ public class cgData {
             }
             cursor.close();
         } catch (Exception e) {
-            Log.e("cgData.loadBatchOfHistoricGeocodes", e);
+            Log.e("DataStore.loadBatchOfHistoricGeocodes", e);
         }
 
         return geocodes;
@@ -2222,7 +2222,7 @@ public class cgData {
 
             cursor.close();
         } catch (final Exception e) {
-            Log.e("cgData.loadInViewport", e);
+            Log.e("DataStore.loadInViewport", e);
         }
 
         return new SearchResult(geocodes);
@@ -2286,7 +2286,7 @@ public class cgData {
                 removeCaches(geocodes, LoadFlags.REMOVE_ALL);
             }
         } catch (final Exception e) {
-            Log.w("cgData.clean", e);
+            Log.w("DataStore.clean", e);
         }
 
         Log.d("Database clean: finished");
@@ -2357,11 +2357,11 @@ public class cgData {
 
     public static boolean saveLogOffline(String geocode, Date date, LogType type, String log) {
         if (StringUtils.isBlank(geocode)) {
-            Log.e("cgData.saveLogOffline: cannot log a blank geocode");
+            Log.e("DataStore.saveLogOffline: cannot log a blank geocode");
             return false;
         }
         if (LogType.UNKNOWN == type && StringUtils.isBlank(log)) {
-            Log.e("cgData.saveLogOffline: cannot log an unknown log type and no message");
+            Log.e("DataStore.saveLogOffline: cannot log an unknown log type and no message");
             return false;
         }
 
@@ -2452,7 +2452,7 @@ public class cgData {
                 return logCount.simpleQueryForLong() > 0;
             }
         } catch (Exception e) {
-            Log.e("cgData.hasLogOffline", e);
+            Log.e("DataStore.hasLogOffline", e);
         }
 
         return false;
@@ -2500,7 +2500,7 @@ public class cgData {
             lists.addAll(storedLists);
             cursor.close();
         } catch (final Exception e) {
-            Log.e("cgData.readLists", e);
+            Log.e("DataStore.readLists", e);
         }
         return lists;
     }
@@ -2740,7 +2740,7 @@ public class cgData {
         } catch (SQLiteDoneException e) {
             // Do nothing, it only means we have no information on the cache
         } catch (Exception e) {
-            Log.e("cgData.getCacheDescription", e);
+            Log.e("DataStore.getCacheDescription", e);
         }
 
         return partial;
@@ -2850,7 +2850,7 @@ public class cgData {
     }
 
     public static boolean saveChangedCache(Geocache cache) {
-        return cgData.saveCache(cache, cache.getStorageLocation().contains(StorageLocation.DATABASE) ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.SAVE_CACHE));
+        return DataStore.saveCache(cache, cache.getStorageLocation().contains(StorageLocation.DATABASE) ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.SAVE_CACHE));
     }
 
     private static class PreparedStatements {
@@ -2912,7 +2912,7 @@ public class cgData {
         }
 
         private static SQLiteStatement getLogCountOfGeocode() {
-            return getStatement("LogCountFromGeocode", "SELECT count(_id) FROM " + cgData.dbTableLogsOffline + " WHERE geocode = ?");
+            return getStatement("LogCountFromGeocode", "SELECT count(_id) FROM " + DataStore.dbTableLogsOffline + " WHERE geocode = ?");
         }
 
         private static SQLiteStatement getCountCachesOnStandardList() {
@@ -2962,7 +2962,7 @@ public class cgData {
             return null;
         }
 
-        return cgData.getBounds(Collections.singleton(geocode));
+        return DataStore.getBounds(Collections.singleton(geocode));
     }
 
     public static void clearVisitDate(String[] selected) {
@@ -2970,18 +2970,18 @@ public class cgData {
     }
 
     public static SearchResult getBatchOfStoredCaches(Geopoint coords, CacheType cacheType, int listId) {
-        final Set<String> geocodes = cgData.loadBatchOfStoredGeocodes(coords, cacheType, listId);
-        return new SearchResult(geocodes, cgData.getAllStoredCachesCount(cacheType, listId));
+        final Set<String> geocodes = DataStore.loadBatchOfStoredGeocodes(coords, cacheType, listId);
+        return new SearchResult(geocodes, DataStore.getAllStoredCachesCount(cacheType, listId));
     }
 
     public static SearchResult getHistoryOfCaches(boolean detailedOnly, CacheType cacheType) {
-        final Set<String> geocodes = cgData.loadBatchOfHistoricGeocodes(detailedOnly, cacheType);
-        return new SearchResult(geocodes, cgData.getAllHistoryCachesCount());
+        final Set<String> geocodes = DataStore.loadBatchOfHistoricGeocodes(detailedOnly, cacheType);
+        return new SearchResult(geocodes, DataStore.getAllHistoryCachesCount());
     }
 
     public static boolean saveWaypoint(int id, String geocode, Waypoint waypoint) {
-        if (cgData.saveWaypointInternal(id, geocode, waypoint)) {
-            cgData.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+        if (DataStore.saveWaypointInternal(id, geocode, waypoint)) {
+            DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
             return true;
         }
         return false;

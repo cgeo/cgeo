@@ -469,7 +469,7 @@ public class MainActivity extends AbstractActivity {
     }
 
     private void checkRestore() {
-        if (!cgData.isNewlyCreatedDatebase() || null == DatabaseBackupUtils.getRestoreFile()) {
+        if (!DataStore.isNewlyCreatedDatebase() || null == DatabaseBackupUtils.getRestoreFile()) {
             return;
         }
         new AlertDialog.Builder(this)
@@ -480,7 +480,7 @@ public class MainActivity extends AbstractActivity {
                     @Override
                     public void onClick(final DialogInterface dialog, final int id) {
                         dialog.dismiss();
-                        cgData.resetNewlyCreatedDatabase();
+                        DataStore.resetNewlyCreatedDatabase();
                         DatabaseBackupUtils.restoreDatabase(MainActivity.this);
                     }
                 })
@@ -488,7 +488,7 @@ public class MainActivity extends AbstractActivity {
                     @Override
                     public void onClick(final DialogInterface dialog, final int id) {
                         dialog.cancel();
-                        cgData.resetNewlyCreatedDatabase();
+                        DataStore.resetNewlyCreatedDatabase();
                     }
                 })
                 .create()
@@ -641,7 +641,7 @@ public class MainActivity extends AbstractActivity {
             }
 
             int checks = 0;
-            while (!cgData.isInitialized()) {
+            while (!DataStore.isInitialized()) {
                 try {
                     wait(500);
                     checks++;
@@ -654,7 +654,7 @@ public class MainActivity extends AbstractActivity {
                 }
             }
 
-            countBubbleCnt = cgData.getAllCachesCount();
+            countBubbleCnt = DataStore.getAllCachesCount();
 
             countBubbleHandler.sendEmptyMessage(0);
         }
@@ -679,7 +679,7 @@ public class MainActivity extends AbstractActivity {
             }
 
             cleanupRunning = true;
-            cgData.clean(more);
+            DataStore.clean(more);
             cleanupRunning = false;
 
             if (version > 0) {

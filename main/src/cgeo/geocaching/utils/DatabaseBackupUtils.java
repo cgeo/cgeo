@@ -1,8 +1,8 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgData;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.ui.Formatter;
 
@@ -50,7 +50,7 @@ public class DatabaseBackupUtils {
 
             @Override
             public void run() {
-                restoreSuccessful.set(cgData.restoreDatabaseInternal());
+                restoreSuccessful.set(DataStore.restoreDatabaseInternal());
                 handler.sendMessage(handler.obtainMessage());
             }
         };
@@ -61,7 +61,7 @@ public class DatabaseBackupUtils {
         final Context context = activity;
         // avoid overwriting an existing backup with an empty database
         // (can happen directly after reinstalling the app)
-        if (cgData.getAllCachesCount() == 0) {
+        if (DataStore.getAllCachesCount() == 0) {
             ActivityMixin.helpDialog(activity,
                     context.getString(R.string.init_backup),
                     context.getString(R.string.init_backup_unnecessary));
@@ -74,7 +74,7 @@ public class DatabaseBackupUtils {
         new Thread() {
             @Override
             public void run() {
-                final String backupFileName = cgData.backupDatabaseInternal();
+                final String backupFileName = DataStore.backupDatabaseInternal();
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -96,7 +96,7 @@ public class DatabaseBackupUtils {
     }
 
     public static File getRestoreFile() {
-        final File fileSourceFile = cgData.getBackupFileInternal();
+        final File fileSourceFile = DataStore.getBackupFileInternal();
         return fileSourceFile.exists() && fileSourceFile.length() > 0 ? fileSourceFile : null;
     }
 

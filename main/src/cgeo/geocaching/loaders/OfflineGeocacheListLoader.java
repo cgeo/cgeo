@@ -2,7 +2,7 @@ package cgeo.geocaching.loaders;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.cgData;
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import android.content.Context;
@@ -20,7 +20,7 @@ public class OfflineGeocacheListLoader extends AbstractSearchLoader {
 
     @Override
     public SearchResult runSearch() {
-        return cgData.getBatchOfStoredCaches(searchCenter, Settings.getCacheType(), listId);
+        return DataStore.getBatchOfStoredCaches(searchCenter, Settings.getCacheType(), listId);
     }
 
     public void setListId(int listId) {

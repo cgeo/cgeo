@@ -1,8 +1,8 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -361,7 +361,7 @@ public class GCMap {
 
             // Check for vanished found caches
             if (tiles.iterator().next().getZoomLevel() >= Tile.ZOOMLEVEL_MIN_PERSONALIZED) {
-                searchResult.addFilteredGeocodes(cgData.getCachedMissingFromSearch(searchResult, tiles, GCConnector.getInstance(), Tile.ZOOMLEVEL_MIN_PERSONALIZED - 1));
+                searchResult.addFilteredGeocodes(DataStore.getCachedMissingFromSearch(searchResult, tiles, GCConnector.getInstance(), Tile.ZOOMLEVEL_MIN_PERSONALIZED - 1));
             }
         }
 
@@ -372,7 +372,7 @@ public class GCMap {
                 SearchResult search = GCParser.searchByCoords(center, Settings.getCacheType(), false, null);
                 if (search != null && !search.isEmpty()) {
                     final Set<String> geocodes = search.getGeocodes();
-                    lastSearchViewport = cgData.getBounds(geocodes);
+                    lastSearchViewport = DataStore.getBounds(geocodes);
                     searchResult.addGeocodes(geocodes);
                 }
             }

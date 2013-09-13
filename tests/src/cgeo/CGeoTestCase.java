@@ -1,6 +1,6 @@
 package cgeo;
 
-import cgeo.geocaching.cgData;
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
@@ -29,7 +29,7 @@ public abstract class CGeoTestCase extends ApplicationTestCase<cgeoapplication> 
 
     /** Remove cache from DB and cache to ensure that the cache is not loaded from the database */
     protected static void deleteCacheFromDB(String geocode) {
-        cgData.removeCache(geocode, LoadFlags.REMOVE_ALL);
+        DataStore.removeCache(geocode, LoadFlags.REMOVE_ALL);
     }
 
     /**
@@ -40,7 +40,7 @@ public abstract class CGeoTestCase extends ApplicationTestCase<cgeoapplication> 
     protected static void removeCacheCompletely(final String geocode) {
         final EnumSet<RemoveFlag> flags = EnumSet.copyOf(LoadFlags.REMOVE_ALL);
         flags.add(RemoveFlag.REMOVE_OWN_WAYPOINTS_ONLY_FOR_TESTING);
-        cgData.removeCache(geocode, flags);
+        DataStore.removeCache(geocode, flags);
     }
 
     /**

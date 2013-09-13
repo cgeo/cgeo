@@ -80,7 +80,7 @@ public final class StoredList {
             final List<StoredList> lists = getSortedLists();
 
             if (exceptListId > StoredList.TEMPORARY_LIST_ID) {
-                StoredList exceptList = cgData.getList(exceptListId);
+                StoredList exceptList = DataStore.getList(exceptListId);
                 if (exceptList != null) {
                     lists.remove(exceptList);
                 }
@@ -122,7 +122,7 @@ public final class StoredList {
         @NonNull
         private static List<StoredList> getSortedLists() {
             final Collator collator = Collator.getInstance();
-            final List<StoredList> lists = cgData.getLists();
+            final List<StoredList> lists = DataStore.getLists();
             Collections.sort(lists, new Comparator<StoredList>() {
 
                 @Override
@@ -146,9 +146,9 @@ public final class StoredList {
 
                 @Override
                 public void run(final String listName) {
-                    final int newId = cgData.createList(listName);
+                    final int newId = DataStore.createList(listName);
 
-                    if (newId >= cgData.customListIdOffset) {
+                    if (newId >= DataStore.customListIdOffset) {
                         ActivityMixin.showToast(activity, res.getString(R.string.list_dialog_create_ok));
                         if (runAfterwards != null) {
                             runAfterwards.run(newId);
@@ -189,12 +189,12 @@ public final class StoredList {
         }
 
         public void promptForListRename(final int listId, final Runnable runAfterRename) {
-            final StoredList list = cgData.getList(listId);
+            final StoredList list = DataStore.getList(listId);
             handleListNameInput(list.title, R.string.list_dialog_rename_title, R.string.list_dialog_rename, new RunnableWithArgument<String>() {
 
                 @Override
                 public void run(final String listName) {
-                    cgData.renameList(listId, listName);
+                    DataStore.renameList(listId, listName);
                     if (runAfterRename != null) {
                         runAfterRename.run();
                     }

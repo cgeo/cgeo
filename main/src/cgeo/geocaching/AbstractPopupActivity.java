@@ -109,7 +109,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
     }
 
     protected void init() {
-        cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
 
         if (cache == null) {
             showToast(res.getString(R.string.err_detail_cache_find));

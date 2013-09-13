@@ -1,9 +1,9 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.cgData;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -215,7 +215,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
             }
         }
         // reload caches, because the parser only returns the minimum version of each cache
-        return new ArrayList<Geocache>(cgData.loadCaches(result, LoadFlags.LOAD_ALL_DB_ONLY));
+        return new ArrayList<Geocache>(DataStore.loadCaches(result, LoadFlags.LOAD_ALL_DB_ONLY));
     }
 
     public static void testParseDateWithFractionalSeconds() throws ParseException {
@@ -258,9 +258,9 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         removeCacheCompletely(geocode);
         final List<Geocache> caches = readGPX10(R.raw.lazy);
         assertEquals(1, caches.size());
-        cgData.removeAllFromCache();
+        DataStore.removeAllFromCache();
         // load only the minimum cache, it has several members missing
-        final Geocache minimalCache = cgData.loadCache(geocode, EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
+        final Geocache minimalCache = DataStore.loadCache(geocode, EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
 
         // now check that we load lazy members on demand
         assertFalse(minimalCache.getAttributes().isEmpty());

@@ -111,7 +111,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
         if (Settings.isPremiumMember() || search.getError() == null) {
             assertEquals(1, search.getGeocodes().size());
             assertTrue(search.getGeocodes().contains(geocode));
-            return cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+            return DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         }
         assertEquals(0, search.getGeocodes().size());
         return null;
@@ -295,7 +295,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
                     SearchResult search = ConnectorFactory.searchByViewport(viewport, tokens);
                     assertNotNull(search);
                     assertTrue(search.getGeocodes().contains(mockedCache.getGeocode()));
-                    Geocache parsedCache = cgData.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+                    Geocache parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
 
                     assertEquals(Settings.isPremiumMember(), mockedCache.getCoords().equals(parsedCache.getCoords()));
                     assertEquals(Settings.isPremiumMember(), parsedCache.isReliableLatLon());
@@ -307,7 +307,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
                     search = ConnectorFactory.searchByViewport(viewport, tokens);
                     assertNotNull(search);
                     assertTrue(search.getGeocodes().contains(mockedCache.getGeocode()));
-                    parsedCache = cgData.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+                    parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
 
                     assertEquals(Settings.isPremiumMember(), mockedCache.getCoords().equals(parsedCache.getCoords()));
                     assertEquals(Settings.isPremiumMember(), parsedCache.isReliableLatLon());
@@ -350,7 +350,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
             assertNotNull(search);
             assertTrue(search.getGeocodes().contains(cache.getGeocode()));
             // coords differ
-            final Geocache cacheFromViewport = cgData.loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+            final Geocache cacheFromViewport = DataStore.loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
             Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
             Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cacheFromViewport.getCoords());
             assertFalse(cache.getCoords().isEqualTo(cacheFromViewport.getCoords(), 1e-3));

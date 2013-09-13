@@ -130,7 +130,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
             }
         }
 
-        trackable = cgData.loadTrackable(geocode);
+        trackable = DataStore.loadTrackable(geocode);
 
         if (StringUtils.isNotBlank(trackable.getName())) {
             setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getName());

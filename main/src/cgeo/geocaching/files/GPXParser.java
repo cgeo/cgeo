@@ -1,12 +1,12 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -312,10 +312,10 @@ public abstract class GPXParser extends FileParser {
 
                     // finally store the cache in the database
                     result.add(geocode);
-                    cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
 
                     // avoid the cachecache using lots of memory for caches which the user did not actually look at
-                    cgData.removeAllFromCache();
+                    DataStore.removeAllFromCache();
                     showProgressMessage(progressHandler, progressStream.getProgress());
                 } else if (StringUtils.isNotBlank(cache.getName())
                         && StringUtils.containsIgnoreCase(type, "waypoint")) {
@@ -331,7 +331,7 @@ public abstract class GPXParser extends FileParser {
                 if (cache.getName().length() > 2) {
                     final String cacheGeocodeForWaypoint = "GC" + cache.getName().substring(2).toUpperCase(Locale.US);
                     // lookup cache for waypoint in already parsed caches
-                    final Geocache cacheForWaypoint = cgData.loadCache(cacheGeocodeForWaypoint, LoadFlags.LOAD_CACHE_OR_DB);
+                    final Geocache cacheForWaypoint = DataStore.loadCache(cacheGeocodeForWaypoint, LoadFlags.LOAD_CACHE_OR_DB);
                     if (cacheForWaypoint != null) {
                         final Waypoint waypoint = new Waypoint(cache.getShortDescription(), convertWaypointSym2Type(sym), false);
                         waypoint.setId(-1);
@@ -349,7 +349,7 @@ public abstract class GPXParser extends FileParser {
                         newPoints.add(waypoint);
                         Waypoint.mergeWayPoints(newPoints, mergedWayPoints, true);
                         cacheForWaypoint.setWaypoints(newPoints, false);
-                        cgData.saveCache(cacheForWaypoint, EnumSet.of(SaveFlag.SAVE_DB));
+                        DataStore.saveCache(cacheForWaypoint, EnumSet.of(SaveFlag.SAVE_DB));
                         showProgressMessage(progressHandler, progressStream.getProgress());
                     }
                 }
@@ -785,7 +785,7 @@ public abstract class GPXParser extends FileParser {
         try {
             progressStream = new ProgressInputStream(stream);
             Xml.parse(progressStream, Xml.Encoding.UTF_8, root.getContentHandler());
-            return cgData.loadCaches(result, EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
+            return DataStore.loadCaches(result, EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
         } catch (final SAXException e) {
             Log.w("Cannot parse .gpx file as GPX " + version + ": could not parse XML - ", e);
             throw new ParserException("Cannot parse .gpx file as GPX " + version + ": could not parse XML", e);

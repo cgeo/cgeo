@@ -1,9 +1,9 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.CGeoTestCase;
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.cgData;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.utils.CancellableHandler;
 
@@ -27,7 +27,7 @@ public class WaypointsTest extends CGeoTestCase {
     public static void testDownloadWaypoints() {
         // Check that repeated loads of "GC33HXE" hold the right number of waypoints (issue #2430).
         final String GEOCODE = "GC33HXE";
-        cgData.removeCache(GEOCODE, LoadFlags.REMOVE_ALL);
+        DataStore.removeCache(GEOCODE, LoadFlags.REMOVE_ALL);
         assertEquals(9, downloadCache(GEOCODE).getWaypoints().size());
         assertEquals(9, downloadCache(GEOCODE).getWaypoints().size());
     }

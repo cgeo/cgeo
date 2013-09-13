@@ -1,8 +1,8 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.cgData;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.settings.Settings;
@@ -74,7 +74,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(GPXImporter.IMPORT_STEP_FINISHED, iMsg.next().what);
         final SearchResult search = (SearchResult) importStepHandler.messages.get(3).obj;
         assertEquals(Collections.singletonList(geocode), new ArrayList<String>(search.getGeocodes()));
-        final Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         assertCacheProperties(cache);
 
         assertTrue(cache.getWaypoints().isEmpty());
@@ -101,7 +101,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_READ_WPT_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
         final SearchResult search = (SearchResult) importStepHandler.messages.get(4).obj;
         assertEquals(Collections.singletonList("GC31J2H"), new ArrayList<String>(search.getGeocodes()));
-        final Geocache cache = cgData.loadCache("GC31J2H", LoadFlags.LOAD_CACHE_OR_DB);
+        final Geocache cache = DataStore.loadCache("GC31J2H", LoadFlags.LOAD_CACHE_OR_DB);
         assertCacheProperties(cache);
         assertEquals(2, cache.getWaypoints().size());
     }
@@ -114,7 +114,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         runImportThread(importThread);
 
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
-        final Geocache cache = cgData.loadCache("AID1", LoadFlags.LOAD_CACHE_OR_DB);
+        final Geocache cache = DataStore.loadCache("AID1", LoadFlags.LOAD_CACHE_OR_DB);
         assertCacheProperties(cache);
         assertEquals("First Aid Station #1", cache.getName());
     }
@@ -136,7 +136,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
         final SearchResult search = (SearchResult) importStepHandler.messages.get(3).obj;
         assertEquals(Collections.singletonList("OC5952"), new ArrayList<String>(search.getGeocodes()));
-        final Geocache cache = cgData.loadCache("OC5952", LoadFlags.LOAD_CACHE_OR_DB);
+        final Geocache cache = DataStore.loadCache("OC5952", LoadFlags.LOAD_CACHE_OR_DB);
         assertCacheProperties(cache);
     }
 
@@ -178,7 +178,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
         final SearchResult search = (SearchResult) importStepHandler.messages.get(3).obj;
         assertEquals(Collections.singletonList(geocode), new ArrayList<String>(search.getGeocodes()));
-        final Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         assertCacheProperties(cache);
 
         assertTrue(cache.getWaypoints().isEmpty());
@@ -196,7 +196,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_READ_WPT_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
         final SearchResult search = (SearchResult) importStepHandler.messages.get(4).obj;
         assertEquals(Collections.singletonList(geocode), new ArrayList<String>(search.getGeocodes()));
-        final Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         assertCacheProperties(cache);
         assertEquals(1, cache.getWaypoints().size()); // this is the original pocket query result without test waypoint
     }
@@ -222,7 +222,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_READ_WPT_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
         final SearchResult search = (SearchResult) importStepHandler.messages.get(4).obj;
         assertEquals(Collections.singletonList(geocode), new ArrayList<String>(search.getGeocodes()));
-        final Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         assertCacheProperties(cache);
         assertEquals(1, cache.getWaypoints().size()); // this is the original pocket query result without test waypoint
     }
@@ -267,8 +267,8 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         tempDir.mkdir();
         assertTrue("Could not create directory " + tempDir.getPath(), tempDir.exists());
         // workaround to get storage initialized
-        cgData.getAllHistoryCachesCount();
-        listId = cgData.createList("cgeogpxesTest");
+        DataStore.getAllHistoryCachesCount();
+        listId = DataStore.createList("cgeogpxesTest");
 
         importCacheStaticMaps = Settings.isStoreOfflineMaps();
         TestSettings.setStoreOfflineMaps(true);
@@ -278,11 +278,11 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
 
     @Override
     protected void tearDown() throws Exception {
-        final SearchResult search = cgData.getBatchOfStoredCaches(null, CacheType.ALL, listId);
+        final SearchResult search = DataStore.getBatchOfStoredCaches(null, CacheType.ALL, listId);
         final List<Geocache> cachesInList = new ArrayList<Geocache>();
         cachesInList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
-        cgData.markDropped(cachesInList);
-        cgData.removeList(listId);
+        DataStore.markDropped(cachesInList);
+        DataStore.removeList(listId);
         deleteDirectory(tempDir);
         TestSettings.setStoreOfflineMaps(importCacheStaticMaps);
         TestSettings.setStoreOfflineWpMaps(importWpStaticMaps);

@@ -1,11 +1,11 @@
 package cgeo.geocaching.connector.oc;
 
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Image;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -265,7 +265,7 @@ final class OkapiClient {
 
             parseCoreCache(response, cache);
 
-            cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_CACHE));
+            DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_CACHE));
         } catch (final JSONException e) {
             Log.e("OkapiClient.parseSmallCache", e);
         }
@@ -340,7 +340,7 @@ final class OkapiClient {
 
             cache.setDetailedUpdatedNow();
             // save full detailed caches
-            cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+            DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
         } catch (final JSONException e) {
             Log.e("OkapiClient.parseCache", e);
         }

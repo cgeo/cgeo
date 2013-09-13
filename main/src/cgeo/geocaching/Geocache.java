@@ -1,6 +1,6 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.cgData.StorageLocation;
+import cgeo.geocaching.DataStore.StorageLocation;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -112,20 +112,20 @@ public class Geocache implements ICache, IWaypoint {
     private final List<String> attributes = new LazyInitializedList<String>() {
         @Override
         public List<String> call() {
-            return cgData.loadAttributes(geocode);
+            return DataStore.loadAttributes(geocode);
         }
     };
     private final List<Waypoint> waypoints = new LazyInitializedList<Waypoint>() {
         @Override
         public List<Waypoint> call() {
-            return cgData.loadWaypoints(geocode);
+            return DataStore.loadWaypoints(geocode);
         }
     };
     private List<Image> spoilers = null;
     private final List<LogEntry> logs = new LazyInitializedList<LogEntry>() {
         @Override
         public List<LogEntry> call() {
-            return cgData.loadLogs(geocode);
+            return DataStore.loadLogs(geocode);
         }
     };
     private List<Trackable> inventory = null;
@@ -469,12 +469,12 @@ public class Geocache implements ICache, IWaypoint {
         if (logType == LogType.UNKNOWN) {
             return;
         }
-        final boolean status = cgData.saveLogOffline(geocode, date.getTime(), logType, log);
+        final boolean status = DataStore.saveLogOffline(geocode, date.getTime(), logType, log);
 
         final Resources res = fromActivity.getResources();
         if (status) {
             ActivityMixin.showToast(fromActivity, res.getString(R.string.info_log_saved));
-            cgData.saveVisitDate(geocode);
+            DataStore.saveVisitDate(geocode);
             logOffline = Boolean.TRUE;
 
             notifyChange();
@@ -484,7 +484,7 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public void clearOfflineLog() {
-        cgData.clearLogOffline(geocode);
+        DataStore.clearLogOffline(geocode);
         notifyChange();
     }
 
@@ -664,7 +664,7 @@ public class Geocache implements ICache, IWaypoint {
      */
     private void initializeCacheTexts() {
         if (description == null || shortdesc == null || hint == null || location == null) {
-            final Geocache partial = cgData.loadCacheTexts(this.getGeocode());
+            final Geocache partial = DataStore.loadCacheTexts(this.getGeocode());
             if (description == null) {
                 setDescription(partial.getDescription());
             }
@@ -1028,7 +1028,7 @@ public class Geocache implements ICache, IWaypoint {
                 }
             }
         }
-        return saveToDatabase && cgData.saveWaypoints(this);
+        return saveToDatabase && DataStore.saveWaypoints(this);
     }
 
     /**
@@ -1244,7 +1244,7 @@ public class Geocache implements ICache, IWaypoint {
             // when waypoint was edited, finalDefined may have changed
             resetFinalDefined();
         }
-        return saveToDatabase && cgData.saveWaypoint(waypoint.getId(), geocode, waypoint);
+        return saveToDatabase && DataStore.saveWaypoint(waypoint.getId(), geocode, waypoint);
     }
 
     public boolean hasWaypoints() {
@@ -1297,7 +1297,7 @@ public class Geocache implements ICache, IWaypoint {
         copy.setUserDefined();
         copy.setName(cgeoapplication.getInstance().getString(R.string.waypoint_copy_of) + " " + copy.getName());
         waypoints.add(index + 1, copy);
-        return cgData.saveWaypoint(-1, geocode, copy);
+        return DataStore.saveWaypoint(-1, geocode, copy);
     }
 
     /**
@@ -1317,8 +1317,8 @@ public class Geocache implements ICache, IWaypoint {
         if (waypoint.isUserDefined()) {
             final int index = getWaypointIndex(waypoint);
             waypoints.remove(index);
-            cgData.deleteWaypoint(waypoint.getId());
-            cgData.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+            DataStore.deleteWaypoint(waypoint.getId());
+            DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
             // Check status if Final is defined
             if (waypoint.isFinalWithCoords()) {
                 resetFinalDefined();
@@ -1337,8 +1337,8 @@ public class Geocache implements ICache, IWaypoint {
     public void deleteWaypointForce(Waypoint waypoint) {
         final int index = getWaypointIndex(waypoint);
         waypoints.remove(index);
-        cgData.deleteWaypoint(waypoint.getId());
-        cgData.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+        DataStore.deleteWaypoint(waypoint.getId());
+        DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
         resetFinalDefined();
     }
 
@@ -1511,8 +1511,8 @@ public class Geocache implements ICache, IWaypoint {
 
     public void drop(Handler handler) {
         try {
-            cgData.markDropped(Collections.singletonList(this));
-            cgData.removeCache(getGeocode(), EnumSet.of(RemoveFlag.REMOVE_CACHE));
+            DataStore.markDropped(Collections.singletonList(this));
+            DataStore.removeCache(getGeocode(), EnumSet.of(RemoveFlag.REMOVE_CACHE));
 
             handler.sendMessage(Message.obtain());
         } catch (final Exception e) {
@@ -1563,7 +1563,7 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public void refresh(int newListId, CancellableHandler handler) {
-        cgData.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+        DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
         storeCache(null, geocode, newListId, true, handler);
     }
 
@@ -1639,7 +1639,7 @@ public class Geocache implements ICache, IWaypoint {
             }
 
             cache.setListId(listId);
-            cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+            DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
 
             if (CancellableHandler.isCancelled(handler)) {
                 return;
@@ -1661,9 +1661,9 @@ public class Geocache implements ICache, IWaypoint {
             return null;
         }
 
-        if (!forceReload && listId == StoredList.TEMPORARY_LIST_ID && (cgData.isOffline(geocode, guid) || cgData.isThere(geocode, guid, true, true))) {
+        if (!forceReload && listId == StoredList.TEMPORARY_LIST_ID && (DataStore.isOffline(geocode, guid) || DataStore.isThere(geocode, guid, true, true))) {
             final SearchResult search = new SearchResult();
-            final String realGeocode = StringUtils.isNotBlank(geocode) ? geocode : cgData.getGeocodeForGuid(guid);
+            final String realGeocode = StringUtils.isNotBlank(geocode) ? geocode : DataStore.getGeocodeForGuid(guid);
             search.addGeocode(realGeocode);
             return search;
         }
@@ -1735,7 +1735,7 @@ public class Geocache implements ICache, IWaypoint {
      * @return
      */
     public boolean hasAttribute(CacheAttribute attribute, boolean yes) {
-        Geocache fullCache = cgData.loadCache(getGeocode(), EnumSet.of(LoadFlag.LOAD_ATTRIBUTES));
+        Geocache fullCache = DataStore.loadCache(getGeocode(), EnumSet.of(LoadFlag.LOAD_ATTRIBUTES));
         if (fullCache == null) {
             fullCache = this;
         }

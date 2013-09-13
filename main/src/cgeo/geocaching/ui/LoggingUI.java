@@ -1,9 +1,9 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgData;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.settings.Settings;
 
@@ -74,7 +74,7 @@ public class LoggingUI extends AbstractUIFactory {
     }
 
     private static void showOfflineMenu(final Geocache cache, final Activity activity) {
-        final LogEntry currentLog = cgData.loadLogOffline(cache.getGeocode());
+        final LogEntry currentLog = DataStore.loadLogOffline(cache.getGeocode());
         final LogType currentLogType = currentLog == null ? null : currentLog.type;
 
         final List<LogType> logTypes = cache.getPossibleLogTypes();

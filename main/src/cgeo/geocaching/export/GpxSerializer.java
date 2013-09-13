@@ -1,9 +1,9 @@
 package cgeo.geocaching.export;
 
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.cgData;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -81,7 +81,7 @@ public final class GpxSerializer {
     }
 
     private void exportBatch(final XmlSerializer gpx, Collection<String> geocodesOfBatch) throws IOException {
-        final Set<Geocache> caches = cgData.loadCaches(geocodesOfBatch, LoadFlags.LOAD_ALL_DB_ONLY);
+        final Set<Geocache> caches = DataStore.loadCaches(geocodesOfBatch, LoadFlags.LOAD_ALL_DB_ONLY);
         for (final Geocache cache : caches) {
             gpx.startTag(PREFIX_GPX, "wpt");
             gpx.attribute("", "lat", Double.toString(cache.getCoords().getLatitude()));

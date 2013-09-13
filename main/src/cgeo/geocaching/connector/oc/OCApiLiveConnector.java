@@ -1,9 +1,9 @@
 package cgeo.geocaching.connector.oc;
 
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.capability.ILogin;
@@ -87,7 +87,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
         final boolean added = OkapiClient.setWatchState(cache, true, this);
 
         if (added) {
-            cgData.saveChangedCache(cache);
+            DataStore.saveChangedCache(cache);
         }
 
         return added;
@@ -98,7 +98,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
         final boolean removed = OkapiClient.setWatchState(cache, false, this);
 
         if (removed) {
-            cgData.saveChangedCache(cache);
+            DataStore.saveChangedCache(cache);
         }
 
         return removed;

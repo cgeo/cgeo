@@ -1,8 +1,8 @@
 package cgeo.geocaching.loaders;
 
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.cgData;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 
@@ -18,7 +18,7 @@ public class HistoryGeocacheListLoader extends AbstractSearchLoader {
 
     @Override
     public SearchResult runSearch() {
-        return cgData.getHistoryOfCaches(true, coords != null ? Settings.getCacheType() : CacheType.ALL);
+        return DataStore.getHistoryOfCaches(true, coords != null ? Settings.getCacheType() : CacheType.ALL);
     }
 
 }

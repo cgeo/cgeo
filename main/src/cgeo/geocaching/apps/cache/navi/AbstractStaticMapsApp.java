@@ -6,7 +6,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.StaticMapsActivity;
 import cgeo.geocaching.StaticMapsProvider;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.cgData;
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.AbstractApp;
 
@@ -34,7 +34,7 @@ abstract class AbstractStaticMapsApp extends AbstractApp implements CacheNavigat
             return false;
         }
         String geocode = waypoint.getGeocode();
-        if (StringUtils.isNotEmpty(geocode) && cgData.isOffline(geocode, null)) {
+        if (StringUtils.isNotEmpty(geocode) && DataStore.isOffline(geocode, null)) {
             return StaticMapsProvider.hasStaticMapForWaypoint(geocode, waypoint);
         }
         return false;

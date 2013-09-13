@@ -493,14 +493,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             case CONTEXT_MENU_WAYPOINT_DUPLICATE:
                 final Waypoint waypointDuplicate = cache.getWaypoint(index);
                 if (cache.duplicateWaypoint(waypointDuplicate)) {
-                    cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                     notifyDataSetChanged();
                 }
                 break;
             case CONTEXT_MENU_WAYPOINT_DELETE:
                 final Waypoint waypointDelete = cache.getWaypoint(index);
                 if (cache.deleteWaypoint(waypointDelete)) {
-                    cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                     notifyDataSetChanged();
                 }
                 break;
@@ -1480,7 +1480,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             Settings.saveLastList(listId);
-            cgData.moveToList(cache, listId);
+            DataStore.moveToList(cache, listId);
             updateListBox();
         }
 
@@ -1563,7 +1563,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
                 // update text
                 final TextView text = (TextView) view.findViewById(R.id.list_text);
-                final StoredList list = cgData.getList(cache.getListId());
+                final StoredList list = DataStore.getList(cache.getListId());
                 if (list != null) {
                     text.setText(res.getString(R.string.cache_list_text) + " " + list.title);
                 } else {
@@ -2201,7 +2201,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 cache.setCoords(wpt.getCoords());
                 cache.setUserModifiedCoords(false);
                 cache.deleteWaypointForce(wpt);
-                cgData.saveChangedCache(cache);
+                DataStore.saveChangedCache(cache);
                 handler.sendEmptyMessage(LOCAL);
             }
 
@@ -2495,7 +2495,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     cache.parseWaypointsFromNote();
                     TextView personalNoteView = (TextView) activity.findViewById(R.id.personalnote);
                     setPersonalNote(personalNoteView, note);
-                    cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                     activity.notifyDataSetChanged();
                 }
             };

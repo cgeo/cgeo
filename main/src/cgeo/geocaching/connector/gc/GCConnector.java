@@ -1,11 +1,11 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.ILoggingManager;
@@ -137,10 +137,10 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
         if (StringUtils.isEmpty(page)) {
             final SearchResult search = new SearchResult();
-            if (cgData.isThere(geocode, guid, true, false)) {
+            if (DataStore.isThere(geocode, guid, true, false)) {
                 if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
                     Log.i("Loading old cache from cache.");
-                    search.addGeocode(cgData.getGeocodeForGuid(guid));
+                    search.addGeocode(DataStore.getGeocodeForGuid(guid));
                 } else {
                     search.addGeocode(geocode);
                 }
@@ -189,7 +189,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     public boolean addToWatchlist(Geocache cache) {
         final boolean added = GCParser.addToWatchlist(cache);
         if (added) {
-            cgData.saveChangedCache(cache);
+            DataStore.saveChangedCache(cache);
         }
         return added;
     }
@@ -198,7 +198,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     public boolean removeFromWatchlist(Geocache cache) {
         final boolean removed = GCParser.removeFromWatchlist(cache);
         if (removed) {
-            cgData.saveChangedCache(cache);
+            DataStore.saveChangedCache(cache);
         }
         return removed;
     }
@@ -215,7 +215,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     public static boolean addToFavorites(Geocache cache) {
         final boolean added = GCParser.addToFavorites(cache);
         if (added) {
-            cgData.saveChangedCache(cache);
+            DataStore.saveChangedCache(cache);
         }
         return added;
     }
@@ -232,7 +232,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     public static boolean removeFromFavorites(Geocache cache) {
         final boolean removed = GCParser.removeFromFavorites(cache);
         if (removed) {
-            cgData.saveChangedCache(cache);
+            DataStore.saveChangedCache(cache);
         }
         return removed;
     }
@@ -241,7 +241,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     public boolean uploadModifiedCoordinates(Geocache cache, Geopoint wpt) {
         final boolean uploaded = GCParser.uploadModifiedCoordinates(cache, wpt);
         if (uploaded) {
-            cgData.saveChangedCache(cache);
+            DataStore.saveChangedCache(cache);
         }
         return uploaded;
     }
@@ -250,7 +250,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     public boolean deleteModifiedCoordinates(Geocache cache) {
         final boolean deleted = GCParser.deleteModifiedCoordinates(cache);
         if (deleted) {
-            cgData.saveChangedCache(cache);
+            DataStore.saveChangedCache(cache);
         }
         return deleted;
     }
@@ -259,7 +259,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     public boolean uploadPersonalNote(Geocache cache) {
         final boolean uploaded = GCParser.uploadPersonalNote(cache);
         if (uploaded) {
-            cgData.saveChangedCache(cache);
+            DataStore.saveChangedCache(cache);
         }
         return uploaded;
     }

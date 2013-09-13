@@ -1,9 +1,9 @@
 package cgeo.geocaching.export;
 
 import cgeo.CGeoTestCase;
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
-import cgeo.geocaching.cgData;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -30,7 +30,7 @@ public class ExportTest extends CGeoTestCase {
         cache.setCoords(new Geopoint("N 49 44.000 E 8 37.000"));
         final LogEntry log = new LogEntry(1353244820000L, LogType.FOUND_IT, "Smile: \ud83d\ude0a");
         cache.getLogs().add(log);
-        cgData.saveCache(cache, LoadFlags.SAVE_ALL);
+        DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
         ArrayList<Geocache> exportList = new ArrayList<Geocache>();
         exportList.add(cache);
         GpxExportTester gpxExport = new GpxExportTester();
@@ -38,7 +38,7 @@ public class ExportTest extends CGeoTestCase {
         try {
             result = gpxExport.testExportSync(exportList);
         } finally {
-            cgData.removeCache(cache.getGeocode(), LoadFlags.REMOVE_ALL);
+            DataStore.removeCache(cache.getGeocode(), LoadFlags.REMOVE_ALL);
         }
 
         assertNotNull(result);

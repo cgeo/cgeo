@@ -1,9 +1,9 @@
 package cgeo.geocaching.test;
 
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.StoredList;
-import cgeo.geocaching.cgData;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
@@ -27,7 +27,7 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
     protected static void removeCacheCompletely(final String geocode) {
         final EnumSet<RemoveFlag> flags = EnumSet.copyOf(LoadFlags.REMOVE_ALL);
         flags.add(RemoveFlag.REMOVE_OWN_WAYPOINTS_ONLY_FOR_TESTING);
-        cgData.removeCache(geocode, flags);
+        DataStore.removeCache(geocode, flags);
     }
 
     protected InputStream getResourceStream(int resourceId) {
@@ -65,17 +65,17 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        temporaryListId = cgData.createList("Temporary unit testing");
+        temporaryListId = DataStore.createList("Temporary unit testing");
         assertTrue(temporaryListId != StoredList.TEMPORARY_LIST_ID);
         assertTrue(temporaryListId != StoredList.STANDARD_LIST_ID);
     }
 
     @Override
     protected void tearDown() throws Exception {
-        final SearchResult search = cgData.getBatchOfStoredCaches(null, CacheType.ALL, temporaryListId);
+        final SearchResult search = DataStore.getBatchOfStoredCaches(null, CacheType.ALL, temporaryListId);
         assertNotNull(search);
-        cgData.removeCaches(search.getGeocodes(), LoadFlags.REMOVE_ALL);
-        cgData.removeList(temporaryListId);
+        DataStore.removeCaches(search.getGeocodes(), LoadFlags.REMOVE_ALL);
+        DataStore.removeList(temporaryListId);
         super.tearDown();
     }
 

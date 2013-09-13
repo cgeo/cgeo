@@ -3,7 +3,7 @@ package cgeo.geocaching.export;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgData;
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.StatusCode;
@@ -134,7 +134,7 @@ class FieldnoteExport extends AbstractExport {
                 int i = 0;
                 for (final Geocache cache : caches) {
                     if (cache.isLogOffline()) {
-                        final LogEntry log = cgData.loadLogOffline(cache.getGeocode());
+                        final LogEntry log = DataStore.loadLogOffline(cache.getGeocode());
                         if (!onlyNew || log.date > Settings.getFieldnoteExportDate()) {
                             appendFieldNote(fieldNoteBuffer, cache, log);
                         }

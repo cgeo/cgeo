@@ -199,7 +199,7 @@ public class SearchResult implements Parcelable {
         SearchResult result = new SearchResult(this);
         result.geocodes.clear();
         final ArrayList<Geocache> cachesForVote = new ArrayList<Geocache>();
-        final Set<Geocache> caches = cgData.loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
+        final Set<Geocache> caches = DataStore.loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
         int excluded = 0;
         for (Geocache cache : caches) {
             // Is there any reason to exclude the cache from the list?
@@ -220,11 +220,11 @@ public class SearchResult implements Parcelable {
     }
 
     public Geocache getFirstCacheFromResult(final EnumSet<LoadFlag> loadFlags) {
-        return CollectionUtils.isNotEmpty(geocodes) ? cgData.loadCache(geocodes.iterator().next(), loadFlags) : null;
+        return CollectionUtils.isNotEmpty(geocodes) ? DataStore.loadCache(geocodes.iterator().next(), loadFlags) : null;
     }
 
     public Set<Geocache> getCachesFromSearchResult(final EnumSet<LoadFlag> loadFlags) {
-        return cgData.loadCaches(geocodes, loadFlags);
+        return DataStore.loadCaches(geocodes, loadFlags);
     }
 
     /** Add the geocode to the search. No cache is loaded into the CacheCache */
@@ -243,7 +243,7 @@ public class SearchResult implements Parcelable {
     /** Add the cache geocode to the search and store the cache in the CacheCache */
     public boolean addAndPutInCache(final Geocache cache) {
         addGeocode(cache.getGeocode());
-        return cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_CACHE));
+        return DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_CACHE));
     }
 
     public boolean isEmpty() {
@@ -252,7 +252,7 @@ public class SearchResult implements Parcelable {
 
     public boolean hasUnsavedCaches() {
         for (final String geocode : getGeocodes()) {
-            if (!cgData.isOffline(geocode, null)) {
+            if (!DataStore.isOffline(geocode, null)) {
                 return true;
             }
         }

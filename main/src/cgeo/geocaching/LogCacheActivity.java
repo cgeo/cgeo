@@ -234,13 +234,13 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
 
         if ((StringUtils.isBlank(cacheid)) && StringUtils.isNotBlank(geocode)) {
-            cacheid = cgData.getCacheidForGeocode(geocode);
+            cacheid = DataStore.getCacheidForGeocode(geocode);
         }
         if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(cacheid)) {
-            geocode = cgData.getGeocodeForGuid(cacheid);
+            geocode = DataStore.getGeocodeForGuid(cacheid);
         }
 
-        cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         possibleLogTypes = cache.getPossibleLogTypes();
 
         if (StringUtils.isNotBlank(cache.getName())) {
@@ -268,7 +268,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             imageUri = Uri.parse(savedInstanceState.getString(SAVED_STATE_IMAGE_URI));
         } else {
             // If log had been previously saved, load it now, otherwise initialize signature as needed
-            final LogEntry log = cgData.loadLogOffline(geocode);
+            final LogEntry log = DataStore.loadLogOffline(geocode);
             if (log != null) {
                 typeSelected = log.type;
                 date.setTime(new Date(log.date));
@@ -542,7 +542,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                         cache.setVisitedDate(new Date().getTime());
                     }
 
-                    cgData.saveChangedCache(cache);
+                    DataStore.saveChangedCache(cache);
                     cache.clearOfflineLog();
 
                     if (typeSelected == LogType.FOUND_IT) {
@@ -559,7 +559,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                         final String uploadedImageUrl = imageResult.getImageUri();
                         if (StringUtils.isNotEmpty(uploadedImageUrl)) {
                             logNow.addLogImage(new Image(uploadedImageUrl, imageCaption, imageDescription));
-                            cgData.saveChangedCache(cache);
+                            DataStore.saveChangedCache(cache);
                         }
                         return imageResult.getPostResult();
                     }

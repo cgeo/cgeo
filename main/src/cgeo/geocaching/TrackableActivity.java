@@ -233,7 +233,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         @Override
         public void run() {
             if (StringUtils.isNotEmpty(geocode)) {
-                trackable = cgData.loadTrackable(geocode);
+                trackable = DataStore.loadTrackable(geocode);
 
                 if (trackable == null || trackable.isLoggable()) {
                     // iterate over the connectors as some codes may be handled by multiple connectors

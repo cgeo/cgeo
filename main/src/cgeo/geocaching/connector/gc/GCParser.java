@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Image;
 import cgeo.geocaching.LogEntry;
@@ -8,7 +9,6 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -357,7 +357,7 @@ public abstract class GCParser {
 
             // save full detailed caches
             CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_cache);
-            cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+            DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
 
             // update progress message so user knows we're still working. This is more of a place holder than
             // actual indication of what the program is doing
@@ -1094,7 +1094,7 @@ public abstract class GCParser {
                 Log.i("Log successfully posted to cache #" + cacheid);
 
                 if (geocode != null) {
-                    cgData.saveVisitDate(geocode);
+                    DataStore.saveVisitDate(geocode);
                 }
 
                 Login.getLoginStatus(page);
@@ -1539,7 +1539,7 @@ public abstract class GCParser {
         }
 
         if (cgeoapplication.getInstance() != null) {
-            cgData.saveTrackable(trackable);
+            DataStore.saveTrackable(trackable);
         }
 
         return trackable;

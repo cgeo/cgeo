@@ -469,7 +469,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
     private boolean isConcreteList() {
         return type == CacheListType.OFFLINE &&
-                (listId == StoredList.STANDARD_LIST_ID || listId >= cgData.customListIdOffset);
+                (listId == StoredList.STANDARD_LIST_ID || listId >= DataStore.customListIdOffset);
     }
 
     private boolean isInvokedFromAttachment() {
@@ -503,7 +503,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
         // refresh standard list if it has changed (new caches downloaded)
         if (type == CacheListType.OFFLINE && listId >= StoredList.STANDARD_LIST_ID && search != null) {
-            final SearchResult newSearch = cgData.getBatchOfStoredCaches(coords, Settings.getCacheType(), listId);
+            final SearchResult newSearch = DataStore.getBatchOfStoredCaches(coords, Settings.getCacheType(), listId);
             if (newSearch.getTotal() != search.getTotal()) {
                 refreshCurrentList();
             }
@@ -643,7 +643,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                 item.setVisible(isNonDefaultList);
             }
 
-            final boolean multipleLists = cgData.getLists().size() >= 2;
+            final boolean multipleLists = DataStore.getLists().size() >= 2;
             item = menu.findItem(MENU_SWITCH_LIST);
             if (item != null) {
                 item.setVisible(multipleLists);
@@ -866,7 +866,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
             @Override
             public void run(Integer newListId) {
-                cgData.moveToList(adapter.getCheckedOrAllCaches(), newListId);
+                DataStore.moveToList(adapter.getCheckedOrAllCaches(), newListId);
                 adapter.setSelectMode(false);
 
                 refreshCurrentList();
@@ -924,7 +924,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
                     @Override
                     public void run(Integer newListId) {
-                        cgData.moveToList(Collections.singletonList(cache), newListId);
+                        DataStore.moveToList(Collections.singletonList(cache), newListId);
                         adapter.setSelectMode(false);
                         refreshCurrentList();
                     }
@@ -1385,7 +1385,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
         @Override
         protected Void doInBackgroundInternal(Geocache[] caches) {
             removeGeoAndDir();
-            cgData.markDropped(Arrays.asList(caches));
+            DataStore.markDropped(Arrays.asList(caches));
             startGeoAndDir();
             return null;
         }
@@ -1416,7 +1416,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
         @Override
         public void run() {
-            cgData.clearLogsOffline(selected);
+            DataStore.clearLogsOffline(selected);
             handler.sendEmptyMessage(MSG_DONE);
         }
     }
@@ -1468,7 +1468,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
             return;
         }
 
-        final StoredList list = cgData.getList(id);
+        final StoredList list = DataStore.getList(id);
         if (list == null) {
             return;
         }
@@ -1480,7 +1480,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
 
         showProgress(true);
         showFooterLoadingCaches();
-        cgData.moveToList(adapter.getCheckedCaches(), listId);
+        DataStore.moveToList(adapter.getCheckedCaches(), listId);
 
         currentLoader = (OfflineGeocacheListLoader) getSupportLoaderManager().initLoader(CacheListType.OFFLINE.ordinal(), new Bundle(), this);
         currentLoader.reset();
@@ -1503,7 +1503,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
     }
 
     private void removeListInternal() {
-        if (cgData.removeList(listId)) {
+        if (DataStore.removeList(listId)) {
             showToast(res.getString(R.string.list_dialog_remove_ok));
             switchListById(StoredList.STANDARD_LIST_ID);
         } else {
@@ -1701,7 +1701,7 @@ public class cgeocaches extends AbstractListActivity implements FilteredActivity
                     listId = StoredList.STANDARD_LIST_ID;
                     title = res.getString(R.string.stored_caches_button);
                 } else {
-                    final StoredList list = cgData.getList(listId);
+                    final StoredList list = DataStore.getList(listId);
                     // list.id may be different if listId was not valid
                     listId = list.id;
                     title = list.title;

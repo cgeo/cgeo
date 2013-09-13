@@ -46,15 +46,15 @@ public class cgeoapplication extends Application {
     @Override
     public void onLowMemory() {
         Log.i("Cleaning applications cache.");
-        cgData.removeAllFromCache();
+        DataStore.removeAllFromCache();
     }
 
     @Override
     public void onTerminate() {
         Log.d("Terminating c:geo…");
 
-        cgData.clean();
-        cgData.closeDb();
+        DataStore.clean();
+        DataStore.closeDb();
 
         super.onTerminate();
     }
@@ -82,7 +82,7 @@ public class cgeoapplication extends Application {
 
             @Override
             public void run() {
-                atomic.set(cgData.moveDatabase());
+                atomic.set(DataStore.moveDatabase());
                 handler.sendMessage(handler.obtainMessage());
             }
         };

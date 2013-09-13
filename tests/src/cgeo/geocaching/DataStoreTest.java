@@ -18,7 +18,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class cgDataTest extends CGeoTestCase {
+public class DataStoreTest extends CGeoTestCase {
 
     public static void testStoredLists() {
 
@@ -35,11 +35,11 @@ public class cgDataTest extends CGeoTestCase {
         try {
 
             // create lists
-            listId1 = cgData.createList("cgData Test");
+            listId1 = DataStore.createList("DataStore Test");
             assertTrue(listId1 > StoredList.STANDARD_LIST_ID);
-            listId2 = cgData.createList("cgDataTest");
+            listId2 = DataStore.createList("DataStoreTest");
             assertTrue(listId2 > StoredList.STANDARD_LIST_ID);
-            assertTrue(cgData.getLists().size() >= 2);
+            assertTrue(DataStore.getLists().size() >= 2);
 
             cache1.setDetailed(true);
             cache1.setListId(listId1);
@@ -47,33 +47,33 @@ public class cgDataTest extends CGeoTestCase {
             cache2.setListId(listId1);
 
             // save caches to DB (cache1=listId1, cache2=listId1)
-            cgData.saveCache(cache1, LoadFlags.SAVE_ALL);
-            cgData.saveCache(cache2, LoadFlags.SAVE_ALL);
-            assertTrue(cgData.getAllCachesCount() >= 2);
+            DataStore.saveCache(cache1, LoadFlags.SAVE_ALL);
+            DataStore.saveCache(cache2, LoadFlags.SAVE_ALL);
+            assertTrue(DataStore.getAllCachesCount() >= 2);
 
             // rename list (cache1=listId1, cache2=listId1)
-            assertEquals(1, cgData.renameList(listId1, "cgData Test (renamed)"));
+            assertEquals(1, DataStore.renameList(listId1, "DataStore Test (renamed)"));
 
             // get list
-            final StoredList list1 = cgData.getList(listId1);
-            assertEquals("cgData Test (renamed)", list1.title);
+            final StoredList list1 = DataStore.getList(listId1);
+            assertEquals("DataStore Test (renamed)", list1.title);
 
             // move to list (cache1=listId2, cache2=listId2)
-            cgData.moveToList(Collections.singletonList(cache1), listId2);
-            assertEquals(1, cgData.getAllStoredCachesCount(CacheType.ALL, listId2));
+            DataStore.moveToList(Collections.singletonList(cache1), listId2);
+            assertEquals(1, DataStore.getAllStoredCachesCount(CacheType.ALL, listId2));
 
             // remove list (cache1=listId2, cache2=listId2)
-            assertTrue(cgData.removeList(listId1));
+            assertTrue(DataStore.removeList(listId1));
 
             // mark dropped (cache1=1, cache2=0)
-            cgData.markDropped(Collections.singletonList(cache2));
+            DataStore.markDropped(Collections.singletonList(cache2));
 
             // mark stored (cache1=1, cache2=listId2)
-            cgData.moveToList(Collections.singletonList(cache2), listId2);
-            assertEquals(2, cgData.getAllStoredCachesCount(CacheType.ALL, listId2));
+            DataStore.moveToList(Collections.singletonList(cache2), listId2);
+            assertEquals(2, DataStore.getAllStoredCachesCount(CacheType.ALL, listId2));
 
             // drop stored (cache1=0, cache2=0)
-            cgData.removeList(listId2);
+            DataStore.removeList(listId2);
 
         } finally {
 
@@ -81,25 +81,25 @@ public class cgDataTest extends CGeoTestCase {
             final Set<String> geocodes = new HashSet<String>();
             geocodes.add(cache1.getGeocode());
             geocodes.add(cache2.getGeocode());
-            cgData.removeCaches(geocodes, LoadFlags.REMOVE_ALL);
+            DataStore.removeCaches(geocodes, LoadFlags.REMOVE_ALL);
 
             // remove list
-            cgData.removeList(listId1);
-            cgData.removeList(listId2);
+            DataStore.removeList(listId1);
+            DataStore.removeList(listId2);
         }
     }
 
     // Check that queries don't throw an exception (see issue #1429).
     public static void testLoadWaypoints() {
         final Viewport viewport = new Viewport(new Geopoint(-1, -2), new Geopoint(3, 4));
-        cgData.loadWaypoints(viewport, false, false, CacheType.ALL);
-        cgData.loadWaypoints(viewport, false, true, CacheType.ALL);
-        cgData.loadWaypoints(viewport, true, false, CacheType.ALL);
-        cgData.loadWaypoints(viewport, true, true, CacheType.ALL);
-        cgData.loadWaypoints(viewport, false, false, CacheType.TRADITIONAL);
-        cgData.loadWaypoints(viewport, false, true, CacheType.TRADITIONAL);
-        cgData.loadWaypoints(viewport, true, false, CacheType.TRADITIONAL);
-        cgData.loadWaypoints(viewport, true, true, CacheType.TRADITIONAL);
+        DataStore.loadWaypoints(viewport, false, false, CacheType.ALL);
+        DataStore.loadWaypoints(viewport, false, true, CacheType.ALL);
+        DataStore.loadWaypoints(viewport, true, false, CacheType.ALL);
+        DataStore.loadWaypoints(viewport, true, true, CacheType.ALL);
+        DataStore.loadWaypoints(viewport, false, false, CacheType.TRADITIONAL);
+        DataStore.loadWaypoints(viewport, false, true, CacheType.TRADITIONAL);
+        DataStore.loadWaypoints(viewport, true, false, CacheType.TRADITIONAL);
+        DataStore.loadWaypoints(viewport, true, true, CacheType.TRADITIONAL);
     }
 
     // Check that saving a cache and trackable without logs works (see #2199)
@@ -118,12 +118,12 @@ public class cgDataTest extends CGeoTestCase {
         cache.setInventory(inventory);
 
         try {
-            cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
-            final Geocache loadedCache = cgData.loadCache(GEOCODE_CACHE, LoadFlags.LOAD_ALL_DB_ONLY);
+            DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+            final Geocache loadedCache = DataStore.loadCache(GEOCODE_CACHE, LoadFlags.LOAD_ALL_DB_ONLY);
             assertNotNull("Cache was not saved!", loadedCache);
             assertEquals(1, loadedCache.getInventory().size());
         } finally {
-            cgData.removeCache(GEOCODE_CACHE, LoadFlags.REMOVE_ALL);
+            DataStore.removeCache(GEOCODE_CACHE, LoadFlags.REMOVE_ALL);
         }
     }
 
@@ -141,25 +141,25 @@ public class cgDataTest extends CGeoTestCase {
         cache.setDetailed(true);
 
         try {
-            final Geocache oldCache = cgData.loadCache(upperCase, LoadFlags.LOAD_ALL_DB_ONLY);
+            final Geocache oldCache = DataStore.loadCache(upperCase, LoadFlags.LOAD_ALL_DB_ONLY);
             assertNull("Database contained old cache!", oldCache);
 
-            cgData.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
-            final Geocache cacheWithOriginalCode = cgData.loadCache(upperCase, LoadFlags.LOAD_ALL_DB_ONLY);
+            DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+            final Geocache cacheWithOriginalCode = DataStore.loadCache(upperCase, LoadFlags.LOAD_ALL_DB_ONLY);
             assertNotNull("Cache was not saved correctly!", cacheWithOriginalCode);
 
-            final Geocache cacheLowerCase = cgData.loadCache(lowerCase, LoadFlags.LOAD_ALL_DB_ONLY);
+            final Geocache cacheLowerCase = DataStore.loadCache(lowerCase, LoadFlags.LOAD_ALL_DB_ONLY);
             assertNotNull("Could not find cache by case insensitive geocode", cacheLowerCase);
 
         } finally {
-            cgData.removeCache(upperCase, LoadFlags.REMOVE_ALL);
+            DataStore.removeCache(upperCase, LoadFlags.REMOVE_ALL);
         }
     }
 
     // Loading logs for an empty geocode should return an empty list, not null!
     public static void testLoadLogsFromEmptyGeocode() {
 
-        final List<LogEntry> logs = cgData.loadLogs("");
+        final List<LogEntry> logs = DataStore.loadLogs("");
 
         assertNotNull("Logs must not be null", logs);
         assertEquals("Logs from empty geocode must be empty", 0, logs.size());
@@ -169,7 +169,7 @@ public class cgDataTest extends CGeoTestCase {
         int sumCaches = 0;
         int allCaches = 0;
         for (CacheType cacheType : CacheType.values()) {
-            SearchResult historyOfType = cgData.getHistoryOfCaches(false, cacheType);
+            SearchResult historyOfType = DataStore.getHistoryOfCaches(false, cacheType);
             assertNotNull(historyOfType);
             if (cacheType != CacheType.ALL) {
                 sumCaches += historyOfType.getCount();
@@ -180,7 +180,7 @@ public class cgDataTest extends CGeoTestCase {
         // check that sum of types equals 'all'
         assertEquals(sumCaches, allCaches);
         // check that two different routines behave the same
-        assertEquals(cgData.getAllHistoryCachesCount(), sumCaches);
+        assertEquals(DataStore.getAllHistoryCachesCount(), sumCaches);
     }
 
     public static void testCachedMissing() {
@@ -208,15 +208,15 @@ public class cgDataTest extends CGeoTestCase {
         inTileHighZoom.setCoords(new Geopoint("N49 44.001 E8 37.001"), Tile.ZOOMLEVEL_MIN_PERSONALIZED + 1);
 
         // put in cache
-        cgData.saveCache(main, EnumSet.of(SaveFlag.SAVE_CACHE));
-        cgData.saveCache(inTileLowZoom, EnumSet.of(SaveFlag.SAVE_CACHE));
-        cgData.saveCache(inTileHighZoom, EnumSet.of(SaveFlag.SAVE_CACHE));
-        cgData.saveCache(outTile, EnumSet.of(SaveFlag.SAVE_CACHE));
-        cgData.saveCache(otherConnector, EnumSet.of(SaveFlag.SAVE_CACHE));
+        DataStore.saveCache(main, EnumSet.of(SaveFlag.SAVE_CACHE));
+        DataStore.saveCache(inTileLowZoom, EnumSet.of(SaveFlag.SAVE_CACHE));
+        DataStore.saveCache(inTileHighZoom, EnumSet.of(SaveFlag.SAVE_CACHE));
+        DataStore.saveCache(outTile, EnumSet.of(SaveFlag.SAVE_CACHE));
+        DataStore.saveCache(otherConnector, EnumSet.of(SaveFlag.SAVE_CACHE));
 
         final SearchResult search = new SearchResult(main);
 
-        Set<String> filteredGeoCodes = cgData.getCachedMissingFromSearch(search, tiles, GCConnector.getInstance(), Tile.ZOOMLEVEL_MIN_PERSONALIZED - 1);
+        Set<String> filteredGeoCodes = DataStore.getCachedMissingFromSearch(search, tiles, GCConnector.getInstance(), Tile.ZOOMLEVEL_MIN_PERSONALIZED - 1);
 
         assertTrue(filteredGeoCodes.contains(inTileLowZoom.getGeocode()));
         assertFalse(filteredGeoCodes.contains(inTileHighZoom.getGeocode()));

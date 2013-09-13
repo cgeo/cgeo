@@ -1,8 +1,8 @@
 package cgeo.geocaching.twitter;
 
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Trackable;
-import cgeo.geocaching.cgData;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -22,12 +22,12 @@ public final class Twitter {
     private static final int MAX_TWEET_SIZE = 140;
 
     public static void postTweetCache(String geocode) {
-        final Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         postTweet(cgeoapplication.getInstance(), getStatusMessage(cache), null);
     }
 
     public static void postTweetTrackable(String geocode) {
-        final Trackable trackable = cgData.loadTrackable(geocode);
+        final Trackable trackable = DataStore.loadTrackable(geocode);
         postTweet(cgeoapplication.getInstance(), getStatusMessage(trackable), null);
     }
 

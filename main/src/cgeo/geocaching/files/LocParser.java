@@ -1,8 +1,8 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.cgData;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -59,7 +59,7 @@ public final class LocParser extends FileParser {
                 contained.add(geocode);
             }
         }
-        Set<Geocache> caches = cgData.loadCaches(contained, LoadFlags.LOAD_CACHE_OR_DB);
+        Set<Geocache> caches = DataStore.loadCaches(contained, LoadFlags.LOAD_CACHE_OR_DB);
         for (Geocache cache : caches) {
             Geocache coord = cidCoords.get(cache.getGeocode());
             copyCoordToCache(coord, cache);

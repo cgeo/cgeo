@@ -214,7 +214,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
     private List<Destination> getHistoryOfSearchedLocations() {
         if (historyOfSearchedLocations == null) {
             // Load from database
-            historyOfSearchedLocations = cgData.loadHistoryOfSearchedLocations();
+            historyOfSearchedLocations = DataStore.loadHistoryOfSearchedLocations();
         }
 
         return historyOfSearchedLocations;
@@ -377,7 +377,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
             getHistoryOfSearchedLocations().add(0, loc);
 
             // Save location
-            cgData.saveSearchedDestination(loc);
+            DataStore.saveSearchedDestination(loc);
 
             // Ensure to remove the footer
             historyListView.removeFooterView(getEmptyHistoryFooter());
@@ -396,7 +396,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
             getHistoryOfSearchedLocations().remove(destination);
 
             // Save
-            cgData.removeSearchedDestination(destination);
+            DataStore.removeSearchedDestination(destination);
 
             if (getHistoryOfSearchedLocations().isEmpty()) {
                 if (historyListView.getFooterViewsCount() == 0) {
@@ -415,7 +415,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
             getHistoryOfSearchedLocations().clear();
 
             // Save
-            cgData.clearSearchedDestinations();
+            DataStore.clearSearchedDestinations();
 
             if (historyListView.getFooterViewsCount() == 0) {
                 historyListView.addFooterView(getEmptyHistoryFooter());

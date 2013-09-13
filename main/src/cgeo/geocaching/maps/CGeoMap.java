@@ -7,7 +7,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.cgData;
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeocaches;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -361,7 +361,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         activity = this.getActivity();
         app = (cgeoapplication) activity.getApplication();
 
-        int countBubbleCnt = cgData.getAllCachesCount();
+        int countBubbleCnt = DataStore.getAllCachesCount();
         caches = new LeastRecentlyUsedSet<Geocache>(MAX_CACHES + countBubbleCnt);
 
         final MapProvider mapProvider = Settings.getMapProvider();
@@ -491,7 +491,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         if (!CollectionUtils.isEmpty(dirtyCaches)) {
             for (String geocode : dirtyCaches) {
-                Geocache cache = cgData.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
+                Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
                 if (cache != null) {
                     // new collection type needs to remove first
                     caches.remove(cache);
@@ -641,7 +641,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     final List<String> geocodes = new ArrayList<String>();
 
                     for (final String geocode : geocodesInViewport) {
-                        if (!cgData.isOffline(geocode, null)) {
+                        if (!DataStore.isOffline(geocode, null)) {
                             geocodes.add(geocode);
                         }
                     }
@@ -1090,7 +1090,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                 SearchResult searchResult;
                 if (mapMode == MapMode.LIVE) {
-                    searchResult = isLiveEnabled ? new SearchResult() : new SearchResult(cgData.loadStoredInViewport(viewport, Settings.getCacheType()));
+                    searchResult = isLiveEnabled ? new SearchResult() : new SearchResult(DataStore.loadStoredInViewport(viewport, Settings.getCacheType()));
                 } else {
                     // map started from another activity
                     searchResult = searchIntent != null ? new SearchResult(searchIntent) : new SearchResult();
@@ -1100,7 +1100,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 }
                 // live mode search result
                 if (isLiveEnabled) {
-                    searchResult.addSearchResult(cgData.loadCachedInViewport(viewport, Settings.getCacheType()));
+                    searchResult.addSearchResult(DataStore.loadCachedInViewport(viewport, Settings.getCacheType()));
                 }
 
                 downloaded = true;
@@ -1123,7 +1123,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                             || mapMode == MapMode.COORDS) {
                         //All visible waypoints
                         CacheType type = Settings.getCacheType();
-                        Set<Waypoint> waypointsInViewport = cgData.loadWaypoints(viewport, excludeMine, excludeDisabled, type);
+                        Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(viewport, excludeMine, excludeDisabled, type);
                         waypoints.addAll(waypointsInViewport);
                     }
                     else {
@@ -1196,8 +1196,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 // first remove filtered out
                 final Set<String> filteredCodes = searchResult.getFilteredGeocodes();
                 Log.d("Filtering out " + filteredCodes.size() + " caches: " + filteredCodes.toString());
-                caches.removeAll(cgData.loadCaches(filteredCodes, LoadFlags.LOAD_CACHE_ONLY));
-                cgData.removeCaches(filteredCodes, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+                caches.removeAll(DataStore.loadCaches(filteredCodes, LoadFlags.LOAD_CACHE_ONLY));
+                DataStore.removeCaches(filteredCodes, EnumSet.of(RemoveFlag.REMOVE_CACHE));
                 // new collection type needs to remove first to refresh
                 caches.removeAll(result);
                 caches.addAll(result);
@@ -1409,7 +1409,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         break;
                     }
 
-                    if (!cgData.isOffline(geocode, null)) {
+                    if (!DataStore.isOffline(geocode, null)) {
                         if ((System.currentTimeMillis() - last) < 1500) {
                             try {
                                 int delay = 1000 + (int) (Math.random() * 1000.0) - (int) (System.currentTimeMillis() - last);
@@ -1512,9 +1512,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 Viewport viewport = null;
 
                 if (geocodeCenter != null) {
-                    viewport = cgData.getBounds(geocodeCenter);
+                    viewport = DataStore.getBounds(geocodeCenter);
                 } else if (searchCenter != null) {
-                    viewport = cgData.getBounds(searchCenter.getGeocodes());
+                    viewport = DataStore.getBounds(searchCenter.getGeocodes());
                 }
 
                 if (viewport == null) {
