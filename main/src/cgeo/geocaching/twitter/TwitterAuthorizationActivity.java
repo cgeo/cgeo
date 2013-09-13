@@ -15,7 +15,8 @@ public class TwitterAuthorizationActivity extends OAuthAuthorizationActivity {
                 "/oauth/access_token",
                 true,
                 Settings.getKeyConsumerPublic(),
-                Settings.getKeyConsumerSecret());
+                Settings.getKeyConsumerSecret(),
+                null);
     }
 
     @Override
