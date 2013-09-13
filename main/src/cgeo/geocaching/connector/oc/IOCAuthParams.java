@@ -57,4 +57,11 @@ public interface IOCAuthParams {
      * @return
      */
     int getTempTokenSecretPrefKey();
+
+    /**
+     * The URI to use as a callback (OAuth)
+     *
+     * @return
+     */
+    String getCallbackUri();
 }

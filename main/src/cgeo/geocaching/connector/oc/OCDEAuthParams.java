@@ -43,4 +43,9 @@ public class OCDEAuthParams implements IOCAuthParams {
     public int getTempTokenSecretPrefKey() {
         return R.string.pref_temp_ocde_token_secret;
     }
+
+    @Override
+    public String getCallbackUri() {
+        return "callback://www.cgeo.org/opencaching.de/";
+    }
 }

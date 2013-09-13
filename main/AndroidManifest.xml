@@ -387,7 +387,19 @@
             android:name=".connector.oc.OCDEAuthorizationActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.cgeo.org"
+                    android:pathPrefix="/opencaching.de/"
+                    android:scheme="callback" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".connector.oc.OCPLAuthorizationActivity"

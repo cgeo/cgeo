@@ -43,4 +43,9 @@ public class OCPLAuthParams implements IOCAuthParams {
     public int getTempTokenSecretPrefKey() {
         return R.string.pref_temp_ocpl_token_secret;
     }
+
+    @Override
+    public String getCallbackUri() {
+        return null;
+    }
 }

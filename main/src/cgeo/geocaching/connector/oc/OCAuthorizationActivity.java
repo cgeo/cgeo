@@ -20,7 +20,7 @@ public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
                 false,
                 CgeoApplication.getInstance().getResources().getString(authParams.getCKResId()),
                 CgeoApplication.getInstance().getResources().getString(authParams.getCSResId()),
-                null);
+                authParams.getCallbackUri());
         this.authParams = authParams;
     }
 
