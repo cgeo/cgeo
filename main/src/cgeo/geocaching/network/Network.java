@@ -458,7 +458,7 @@ public abstract class Network {
         if (!isSuccess(response)) {
             return null;
         }
-        assert(response != null); // Caught above
+        assert response != null; // Caught above
         return getResponseDataNoError(response, replaceWhitespace);
     }
 
