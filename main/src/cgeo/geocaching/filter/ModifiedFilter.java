@@ -2,7 +2,7 @@ package cgeo.geocaching.filter;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 
 import java.util.Collections;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
 class ModifiedFilter extends AbstractFilter implements IFilterFactory {
 
     public ModifiedFilter() {
-        super(cgeoapplication.getInstance().getString(R.string.caches_filter_modified));
+        super(CgeoApplication.getInstance().getString(R.string.caches_filter_modified));
     }
 
     @Override

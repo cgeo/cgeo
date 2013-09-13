@@ -1,6 +1,6 @@
 package cgeo.geocaching.speech;
 
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
@@ -29,7 +29,7 @@ public class TextFactoryTest extends AndroidTestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        final Resources resources = cgeoapplication.getInstance().getResources();
+        final Resources resources = CgeoApplication.getInstance().getResources();
         final Configuration config = resources.getConfiguration();
         defaultLocale1 = config.locale;
         defaultLocale2 = Locale.getDefault();
@@ -149,7 +149,7 @@ public class TextFactoryTest extends AndroidTestCase {
     private static void setLocale(Locale locale1, Locale locale2, boolean metric) {
         final Configuration config = new Configuration();
         config.locale = locale1;
-        final Resources resources = cgeoapplication.getInstance().getResources();
+        final Resources resources = CgeoApplication.getInstance().getResources();
         resources.updateConfiguration(config, resources.getDisplayMetrics());
 
         Locale.setDefault(locale2);

@@ -1,7 +1,7 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.ProcessUtils;
@@ -31,7 +31,7 @@ class StreetviewApp extends AbstractPointNavigationApp {
             activity.startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse("google.streetview:cbll=" + point.getLatitude() + "," + point.getLongitude())));
         } catch (final ActivityNotFoundException e) {
-            ActivityMixin.showToast(activity, cgeoapplication.getInstance().getString(R.string.err_application_no));
+            ActivityMixin.showToast(activity, CgeoApplication.getInstance().getString(R.string.err_application_no));
         }
     }
 }

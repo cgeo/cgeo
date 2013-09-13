@@ -1,7 +1,7 @@
 package cgeo.geocaching.maps.mapsforge;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.maps.AbstractMapProvider;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
@@ -33,7 +33,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
     private MapItemFactory mapItemFactory = new MapsforgeMapItemFactory();
 
     private MapsforgeMapProvider() {
-        final Resources resources = cgeoapplication.getInstance().getResources();
+        final Resources resources = CgeoApplication.getInstance().getResources();
 
         registerMapSource(new MapsforgeMapSource(MAPSFORGE_MAPNIK_ID, this, resources.getString(R.string.map_source_osm_mapnik), MapGeneratorInternal.MAPNIK));
         registerMapSource(new MapsforgeMapSource(MAPSFORGE_CYCLEMAP_ID, this, resources.getString(R.string.map_source_osm_cyclemap), MapGeneratorInternal.OPENCYCLEMAP));
@@ -163,7 +163,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
 
     public void updateOfflineMaps() {
         MapProviderFactory.deleteOfflineMapSources();
-        final Resources resources = cgeoapplication.getInstance().getResources();
+        final Resources resources = CgeoApplication.getInstance().getResources();
         final List<String> offlineMaps = getOfflineMaps();
         for (String mapFile : offlineMaps) {
             final String mapName = StringUtils.capitalize(StringUtils.substringBeforeLast(new File(mapFile).getName(), "."));

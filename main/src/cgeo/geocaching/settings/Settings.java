@@ -1,8 +1,8 @@
 package cgeo.geocaching.settings;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.StoredList;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.Login;
@@ -69,7 +69,7 @@ public final class Settings {
     }
 
     private static final SharedPreferences sharedPrefs = PreferenceManager
-            .getDefaultSharedPreferences(cgeoapplication.getInstance().getBaseContext());
+            .getDefaultSharedPreferences(CgeoApplication.getInstance().getBaseContext());
     static {
         migrateSettings();
         Log.setDebug(sharedPrefs.getBoolean(getKey(R.string.pref_debug), false));
@@ -90,7 +90,7 @@ public final class Settings {
         int oldVersion = getInt(R.string.pref_settingsversion, 0);
         if (oldVersion < 1) {
             final String oldPreferencesName = "cgeo.pref";
-            final SharedPreferences old = cgeoapplication.getInstance().getSharedPreferences(oldPreferencesName, Context.MODE_PRIVATE);
+            final SharedPreferences old = CgeoApplication.getInstance().getSharedPreferences(oldPreferencesName, Context.MODE_PRIVATE);
             final Editor e = sharedPrefs.edit();
 
             e.putString(getKey(R.string.pref_temp_twitter_token_secret), old.getString(getKey(R.string.pref_temp_twitter_token_secret), null));
@@ -191,7 +191,7 @@ public final class Settings {
     }
 
     private static String getKey(final int prefKeyId) {
-        return cgeoapplication.getInstance().getString(prefKeyId);
+        return CgeoApplication.getInstance().getString(prefKeyId);
     }
 
     static String getString(final int prefKeyId, final String defaultValue) {
@@ -257,7 +257,7 @@ public final class Settings {
     public static void setLanguage(boolean useEnglish) {
         final Configuration config = new Configuration();
         config.locale = useEnglish ? Locale.ENGLISH : Locale.getDefault();
-        final Resources resources = cgeoapplication.getInstance().getResources();
+        final Resources resources = CgeoApplication.getInstance().getResources();
         resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 

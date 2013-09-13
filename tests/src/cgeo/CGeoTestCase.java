@@ -1,7 +1,7 @@
 package cgeo;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DataStore;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.settings.Settings;
@@ -11,14 +11,14 @@ import android.test.ApplicationTestCase;
 
 import java.util.EnumSet;
 
-public abstract class CGeoTestCase extends ApplicationTestCase<cgeoapplication> {
+public abstract class CGeoTestCase extends ApplicationTestCase<CgeoApplication> {
 
     private boolean oldStoreMapsFlag;
     private boolean oldStoreWpMapsFlag;
     private boolean oldMapStoreFlagsRecorded = false;
 
     public CGeoTestCase() {
-        super(cgeoapplication.class);
+        super(CgeoApplication.class);
     }
 
     @Override

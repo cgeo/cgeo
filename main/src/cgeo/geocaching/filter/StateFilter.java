@@ -1,8 +1,8 @@
 package cgeo.geocaching.filter;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeoapplication;
 
 import android.content.res.Resources;
 
@@ -13,7 +13,7 @@ import java.util.List;
 
 abstract class StateFilter extends AbstractFilter {
 
-    static final Resources res = cgeoapplication.getInstance().getResources();
+    static final Resources res = CgeoApplication.getInstance().getResources();
 
     protected StateFilter(final String name) {
         super(name);

@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DirectionProvider;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IGeoData;
@@ -8,7 +9,6 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.DataStore;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -128,7 +128,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private MapItemFactory mapItemFactory = null;
     private Activity activity = null;
     private MapViewImpl mapView = null;
-    private cgeoapplication app = null;
+    private CgeoApplication app = null;
     final private GeoDirHandler geoDirUpdate = new UpdateLoc();
     private SearchResult searchIntent = null;
     private String geocodeIntent = null;
@@ -359,7 +359,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         // class init
         res = this.getResources();
         activity = this.getActivity();
-        app = (cgeoapplication) activity.getApplication();
+        app = (CgeoApplication) activity.getApplication();
 
         int countBubbleCnt = DataStore.getAllCachesCount();
         caches = new LeastRecentlyUsedSet<Geocache>(MAX_CACHES + countBubbleCnt);

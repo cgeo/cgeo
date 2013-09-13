@@ -1,12 +1,12 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.capability.ILogin;
@@ -299,13 +299,13 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         final StatusCode status = Login.login();
 
         if (status == StatusCode.NO_ERROR) {
-            cgeoapplication.getInstance().checkLogin = false;
+            CgeoApplication.getInstance().checkLogin = false;
             Login.detectGcCustomDate();
         }
 
-        if (cgeoapplication.getInstance().showLoginToast && handler != null) {
+        if (CgeoApplication.getInstance().showLoginToast && handler != null) {
             handler.sendMessage(handler.obtainMessage(0, status));
-            cgeoapplication.getInstance().showLoginToast = false;
+            CgeoApplication.getInstance().showLoginToast = false;
 
             // invoke settings activity to insert login details
             if (status == StatusCode.NO_LOGIN_INFO_STORED && fromActivity != null) {

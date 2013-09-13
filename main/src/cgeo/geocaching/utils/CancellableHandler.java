@@ -1,6 +1,6 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 
 import android.os.Handler;
 import android.os.Message;
@@ -114,7 +114,7 @@ public abstract class CancellableHandler extends Handler {
 
     public static void sendLoadProgressDetail(final Handler handler, final int resourceId) {
         if (null != handler) {
-            handler.obtainMessage(UPDATE_LOAD_PROGRESS_DETAIL, cgeoapplication.getInstance().getString(resourceId)).sendToTarget();
+            handler.obtainMessage(UPDATE_LOAD_PROGRESS_DETAIL, CgeoApplication.getInstance().getString(resourceId)).sendToTarget();
         }
     }
 }

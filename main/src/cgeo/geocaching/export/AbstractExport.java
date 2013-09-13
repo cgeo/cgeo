@@ -1,7 +1,7 @@
 package cgeo.geocaching.export;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeoapplication;
 
 abstract class AbstractExport implements Export {
     private final String name;
@@ -23,7 +23,7 @@ abstract class AbstractExport implements Export {
      * @return localized string
      */
     protected static String getString(int resourceId) {
-        return cgeoapplication.getInstance().getString(resourceId);
+        return CgeoApplication.getInstance().getString(resourceId);
     }
 
     /**
@@ -36,7 +36,7 @@ abstract class AbstractExport implements Export {
      * @return localized string
      */
     protected static String getString(int resourceId, Object... params) {
-        return cgeoapplication.getInstance().getString(resourceId, params);
+        return CgeoApplication.getInstance().getString(resourceId, params);
     }
 
     @Override

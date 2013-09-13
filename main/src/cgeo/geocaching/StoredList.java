@@ -59,12 +59,12 @@ public final class StoredList {
 
     public static class UserInterface {
         private final Activity activity;
-        private final cgeoapplication app;
+        private final CgeoApplication app;
         private final Resources res;
 
         public UserInterface(final Activity activity) {
             this.activity = activity;
-            app = cgeoapplication.getInstance();
+            app = CgeoApplication.getInstance();
             res = app.getResources();
         }
 

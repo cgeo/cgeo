@@ -1,6 +1,6 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 
 import android.content.Context;
 
@@ -24,7 +24,7 @@ public final class ClipboardUtils {
      */
     public static void copyToClipboard(final CharSequence text) {
         // fully qualified name used here to avoid buggy deprecation warning (of javac) on the import statement
-        final android.text.ClipboardManager clipboard = (android.text.ClipboardManager) cgeoapplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
+        final android.text.ClipboardManager clipboard = (android.text.ClipboardManager) CgeoApplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
         clipboard.setText(text);
     }
 

@@ -1,10 +1,10 @@
 package cgeo.geocaching.connector.oc;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
@@ -29,9 +29,9 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     private UserInfo userInfo = new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.NOT_RETRIEVED);
 
     public OCApiLiveConnector(String name, String host, String prefix, String licenseString, int cKResId, int cSResId, int isActivePrefKeyId, int tokenPublicPrefKeyId, int tokenSecretPrefKeyId, ApiSupport apiSupport) {
-        super(name, host, prefix, CryptUtils.rot13(cgeoapplication.getInstance().getResources().getString(cKResId)), licenseString, apiSupport);
+        super(name, host, prefix, CryptUtils.rot13(CgeoApplication.getInstance().getResources().getString(cKResId)), licenseString, apiSupport);
 
-        cS = CryptUtils.rot13(cgeoapplication.getInstance().getResources().getString(cSResId));
+        cS = CryptUtils.rot13(CgeoApplication.getInstance().getResources().getString(cSResId));
         this.isActivePrefKeyId = isActivePrefKeyId;
         this.tokenPublicPrefKeyId = tokenPublicPrefKeyId;
         this.tokenSecretPrefKeyId = tokenSecretPrefKeyId;
@@ -145,7 +145,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
 
     @Override
     public String getLoginStatusString() {
-        return cgeoapplication.getInstance().getString(userInfo.getStatus().resId);
+        return CgeoApplication.getInstance().getString(userInfo.getStatus().resId);
     }
 
     @Override

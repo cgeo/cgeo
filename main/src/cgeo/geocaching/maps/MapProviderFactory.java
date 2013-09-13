@@ -1,7 +1,7 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.maps.google.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
@@ -31,7 +31,7 @@ public class MapProviderFactory {
 
     public static boolean isGoogleMapsInstalled() {
         // Check if API key is available
-        if (StringUtils.isBlank(cgeoapplication.getInstance().getString(R.string.maps_api_key))) {
+        if (StringUtils.isBlank(CgeoApplication.getInstance().getString(R.string.maps_api_key))) {
             Log.w("No Google API key available.");
             return false;
         }

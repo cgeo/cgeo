@@ -1,6 +1,6 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.compatibility.Compatibility;
 
 import android.graphics.Bitmap;
@@ -46,7 +46,7 @@ public final class ImageUtils {
      * @return BitmapDrawable The scaled image
      */
     public static BitmapDrawable scaleBitmapTo(final Bitmap image, final int maxWidth, final int maxHeight) {
-        final cgeoapplication app = cgeoapplication.getInstance();
+        final CgeoApplication app = CgeoApplication.getInstance();
         Bitmap result = image;
         int width = image.getWidth();
         int height = image.getHeight();

@@ -3,7 +3,7 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -22,7 +22,7 @@ public abstract class Formatter {
     /** Text separator used for formatting texts */
     public static final String SEPARATOR = " · ";
 
-    private static final Context context = cgeoapplication.getInstance().getBaseContext();
+    private static final Context context = CgeoApplication.getInstance().getBaseContext();
 
     /**
      * Generate a time string according to system-wide settings (locale, 12/24 hour)
@@ -87,9 +87,9 @@ public abstract class Formatter {
         int diff = cgeo.geocaching.utils.DateUtils.daysSince(date);
         switch (diff) {
             case 0:
-                return cgeoapplication.getInstance().getString(R.string.log_today);
+                return CgeoApplication.getInstance().getString(R.string.log_today);
             case 1:
-                return cgeoapplication.getInstance().getString(R.string.log_yesterday);
+                return CgeoApplication.getInstance().getString(R.string.log_yesterday);
             default:
                 return formatShortDate(date);
         }
@@ -116,10 +116,10 @@ public abstract class Formatter {
         addShortInfos(cache, infos);
 
         if (cache.isPremiumMembersOnly()) {
-            infos.add(cgeoapplication.getInstance().getString(R.string.cache_premium));
+            infos.add(CgeoApplication.getInstance().getString(R.string.cache_premium));
         }
         if (cacheListType != CacheListType.OFFLINE && cacheListType != CacheListType.HISTORY && cache.getListId() > 0) {
-            infos.add(cgeoapplication.getInstance().getString(R.string.cache_offline));
+            infos.add(CgeoApplication.getInstance().getString(R.string.cache_offline));
         }
         return StringUtils.join(infos, Formatter.SEPARATOR);
     }
@@ -161,7 +161,7 @@ public abstract class Formatter {
             infos.add(waypointType.getL10n());
         }
         if (Waypoint.PREFIX_OWN.equalsIgnoreCase(waypoint.getPrefix())) {
-            infos.add(cgeoapplication.getInstance().getString(R.string.waypoint_custom));
+            infos.add(CgeoApplication.getInstance().getString(R.string.waypoint_custom));
         } else {
             if (StringUtils.isNotBlank(waypoint.getPrefix())) {
                 infos.add(waypoint.getPrefix());

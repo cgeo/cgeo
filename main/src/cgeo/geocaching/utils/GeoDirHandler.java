@@ -1,7 +1,7 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.IGeoData;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.settings.Settings;
 
 import android.os.Handler;
@@ -29,7 +29,7 @@ public abstract class GeoDirHandler extends Handler implements IObserver<Object>
     private static final int STOP_GEO = 1 << 4;
     private static final int STOP_DIR = 1 << 5;
 
-    private static final cgeoapplication app = cgeoapplication.getInstance();
+    private static final CgeoApplication app = CgeoApplication.getInstance();
 
     @Override
     final public void handleMessage(final Message message) {

@@ -3,7 +3,7 @@ package cgeo.geocaching.filter;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ class DistanceFilter extends AbstractFilter {
         super(name);
         this.minDistance = minDistance;
         this.maxDistance = maxDistance;
-        geo = cgeoapplication.getInstance().currentGeo();
+        geo = CgeoApplication.getInstance().currentGeo();
     }
 
     @Override
@@ -51,7 +51,7 @@ class DistanceFilter extends AbstractFilter {
                     maxRange = Integer.MAX_VALUE;
                 }
                 final String range = maxRange == Integer.MAX_VALUE ? "> " + minRange : minRange + " - " + maxRange;
-                final String name = cgeoapplication.getInstance().getResources().getQuantityString(R.plurals.tts_kilometers, maxRange, range);
+                final String name = CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.tts_kilometers, maxRange, range);
                 filters.add(new DistanceFilter(name, minRange, maxRange));
             }
             return filters;

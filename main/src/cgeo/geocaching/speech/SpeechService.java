@@ -2,7 +2,7 @@ package cgeo.geocaching.speech;
 
 import cgeo.geocaching.DirectionProvider;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.settings.Settings;
@@ -48,7 +48,7 @@ public class SpeechService extends Service implements OnInitListener {
     GeoDirHandler geoHandler = new GeoDirHandler() {
         @Override
         protected void updateDirection(float newDirection) {
-            if (cgeoapplication.getInstance().currentGeo().getSpeed() <= 5) {
+            if (CgeoApplication.getInstance().currentGeo().getSpeed() <= 5) {
                 direction = DirectionProvider.getDirectionNow(startingActivity, newDirection);
                 directionInitialized = true;
                 updateCompass();

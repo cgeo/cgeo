@@ -1,7 +1,7 @@
 package cgeo.geocaching.enumerations;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -143,7 +143,7 @@ public enum CacheAttribute {
      * @return the localized text
      */
     public String getL10n(final boolean enabled) {
-        return cgeoapplication.getInstance().getResources().getString(
+        return CgeoApplication.getInstance().getResources().getString(
                 enabled ? stringIdYes : stringIdNo);
     }
 

@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.oc;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.network.OAuthAuthorizationActivity;
 import cgeo.geocaching.settings.Settings;
 
@@ -17,8 +17,8 @@ public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
                 "/okapi/services/oauth/authorize",
                 "/okapi/services/oauth/access_token",
                 false,
-                cgeoapplication.getInstance().getResources().getString(authParams.getCKResId()),
-                cgeoapplication.getInstance().getResources().getString(authParams.getCSResId()));
+                CgeoApplication.getInstance().getResources().getString(authParams.getCKResId()),
+                CgeoApplication.getInstance().getResources().getString(authParams.getCSResId()));
         this.authParams = authParams;
     }
 

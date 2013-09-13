@@ -3,7 +3,7 @@ package cgeo.geocaching.apps;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -43,7 +43,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
 
     @Override
     public boolean isInstalled() {
-        return LocusUtils.isLocusAvailable(cgeoapplication.getInstance());
+        return LocusUtils.isLocusAvailable(CgeoApplication.getInstance());
     }
 
     /**

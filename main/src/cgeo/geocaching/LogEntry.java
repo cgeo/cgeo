@@ -89,7 +89,7 @@ public final class LogEntry {
             }
         }
         if (titles.isEmpty()) {
-            titles.add(cgeoapplication.getInstance().getString(R.string.cache_log_image_default_title));
+            titles.add(CgeoApplication.getInstance().getString(R.string.cache_log_image_default_title));
         }
         return StringUtils.join(titles, ", ");
     }

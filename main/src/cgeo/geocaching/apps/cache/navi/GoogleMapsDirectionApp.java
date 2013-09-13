@@ -2,7 +2,7 @@ package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.utils.Log;
@@ -25,7 +25,7 @@ public class GoogleMapsDirectionApp extends AbstractPointNavigationApp {
     @Override
     public void navigate(Activity activity, Geopoint coords) {
         try {
-            IGeoData geo = cgeoapplication.getInstance().currentGeo();
+            IGeoData geo = CgeoApplication.getInstance().currentGeo();
             final Geopoint coordsNow = geo == null ? null : geo.getCoords();
 
             if (coordsNow != null) {

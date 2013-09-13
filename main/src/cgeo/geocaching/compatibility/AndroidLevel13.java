@@ -1,6 +1,6 @@
 package cgeo.geocaching.compatibility;
 
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -18,7 +18,7 @@ public class AndroidLevel13 implements AndroidLevel13Interface {
     @Override
     public Point getDisplaySize() {
         Point dimensions = new Point();
-        ((WindowManager) cgeoapplication.getInstance().getSystemService(Context.WINDOW_SERVICE))
+        ((WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE))
                 .getDefaultDisplay().getSize(dimensions);
         return dimensions;
     }

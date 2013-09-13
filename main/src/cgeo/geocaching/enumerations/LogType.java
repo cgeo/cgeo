@@ -1,7 +1,7 @@
 package cgeo.geocaching.enumerations;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeoapplication;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -102,6 +102,6 @@ public enum LogType {
     }
 
     public final String getL10n() {
-        return cgeoapplication.getInstance().getBaseContext().getResources().getString(stringId);
+        return CgeoApplication.getInstance().getBaseContext().getResources().getString(stringId);
     }
 }

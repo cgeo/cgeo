@@ -2,7 +2,7 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.enumerations.WaypointType;
 
 import android.test.AndroidTestCase;
@@ -20,7 +20,7 @@ public class FormatterTest extends AndroidTestCase {
     public static void testOwnWaypoint() {
         final Waypoint own = new Waypoint("my own", WaypointType.OWN, true);
         own.setPrefix(Waypoint.PREFIX_OWN);
-        assertFormatting(own, cgeoapplication.getInstance().getString(R.string.waypoint_custom));
+        assertFormatting(own, CgeoApplication.getInstance().getString(R.string.waypoint_custom));
     }
 
     private static void assertFormatting(Waypoint waypoint, String expected) {

@@ -1,9 +1,9 @@
 package cgeo.geocaching.filter;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 
 import android.content.res.Resources;
@@ -40,8 +40,8 @@ class AttributeFilter extends AbstractFilter {
 
         @Override
         public List<IFilter> getFilters() {
-            final String packageName = cgeoapplication.getInstance().getBaseContext().getPackageName();
-            final Resources res = cgeoapplication.getInstance().getResources();
+            final String packageName = CgeoApplication.getInstance().getBaseContext().getPackageName();
+            final Resources res = CgeoApplication.getInstance().getResources();
 
             final List<IFilter> filters = new LinkedList<IFilter>();
             for (final String id: res.getStringArray(R.array.attribute_ids)) {

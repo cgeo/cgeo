@@ -6,7 +6,7 @@ import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filter.IFilter;
@@ -112,7 +112,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
     public CacheListAdapter(final Activity activity, final List<Geocache> list, CacheListType cacheListType) {
         super(activity, 0, list);
-        final IGeoData currentGeo = cgeoapplication.getInstance().currentGeo();
+        final IGeoData currentGeo = CgeoApplication.getInstance().currentGeo();
         if (currentGeo != null) {
             coords = currentGeo.getCoords();
         }

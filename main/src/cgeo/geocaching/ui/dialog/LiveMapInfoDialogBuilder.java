@@ -2,7 +2,7 @@ package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -33,7 +33,7 @@ public class LiveMapInfoDialogBuilder {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                cgeoapplication.getInstance().setLiveMapHintShown();
+                CgeoApplication.getInstance().setLiveMapHintShown();
                 if (checkBoxHide.getVisibility() == View.VISIBLE && checkBoxHide.isChecked()) {
                     Settings.setHideLiveHint(true);
                 }

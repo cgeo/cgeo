@@ -1295,7 +1295,7 @@ public class Geocache implements ICache, IWaypoint {
         final int index = getWaypointIndex(original);
         final Waypoint copy = new Waypoint(original);
         copy.setUserDefined();
-        copy.setName(cgeoapplication.getInstance().getString(R.string.waypoint_copy_of) + " " + copy.getName());
+        copy.setName(CgeoApplication.getInstance().getString(R.string.waypoint_copy_of) + " " + copy.getName());
         waypoints.add(index + 1, copy);
         return DataStore.saveWaypoint(-1, geocode, copy);
     }
@@ -1406,7 +1406,7 @@ public class Geocache implements ICache, IWaypoint {
                     if (point.getLatitudeE6() != 0 && point.getLongitudeE6() != 0 &&
                             ((point.getLatitudeE6() % 1000) != 0 || (point.getLongitudeE6() % 1000) != 0) &&
                             !hasIdenticalWaypoint(point)) {
-                        final String name = cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
+                        final String name = CgeoApplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
                         final String potentialWaypointType = note.substring(Math.max(0, matcher.start() - 15));
                         final Waypoint waypoint = new Waypoint(name, parseWaypointType(potentialWaypointType), false);
                         waypoint.setCoords(point);
@@ -1708,7 +1708,7 @@ public class Geocache implements ICache, IWaypoint {
             }
         }
         // 12 o'clock
-        final String hourLocalized = cgeoapplication.getInstance().getString(R.string.cache_time_full_hours);
+        final String hourLocalized = CgeoApplication.getInstance().getString(R.string.cache_time_full_hours);
         if (StringUtils.isNotBlank(hourLocalized)) {
             final Pattern fullHours = Pattern.compile("\\b(\\d{1,2})\\s+" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE);
             final MatcherWrapper matcherHours = new MatcherWrapper(fullHours, getDescription());

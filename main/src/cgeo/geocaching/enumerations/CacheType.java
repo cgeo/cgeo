@@ -2,7 +2,7 @@ package cgeo.geocaching.enumerations;
 
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -85,7 +85,7 @@ public enum CacheType {
     }
 
     public final String getL10n() {
-        return cgeoapplication.getInstance().getBaseContext().getResources().getString(stringId);
+        return CgeoApplication.getInstance().getBaseContext().getResources().getString(stringId);
     }
 
     public boolean isEvent() {

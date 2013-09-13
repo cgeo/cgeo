@@ -1,8 +1,8 @@
 package cgeo.geocaching.speech;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.utils.AngleUtils;
@@ -78,11 +78,11 @@ public class TextFactory {
     }
 
     private static String getString(int resourceId, Object... formatArgs) {
-        return cgeoapplication.getInstance().getString(resourceId, formatArgs);
+        return CgeoApplication.getInstance().getString(resourceId, formatArgs);
     }
 
     private static String getQuantityString(int resourceId, int quantity, Object... formatArgs) {
-        return cgeoapplication.getInstance().getResources().getQuantityString(resourceId, quantity, formatArgs);
+        return CgeoApplication.getInstance().getResources().getQuantityString(resourceId, quantity, formatArgs);
     }
 
     private static String getDirection(Geopoint position, Geopoint target, float direction) {

@@ -2,7 +2,7 @@ package cgeo.geocaching.export;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
@@ -125,7 +125,7 @@ class GpxExport extends AbstractExport {
 
             final List<String> allGeocodes = new ArrayList<String>(Arrays.asList(geocodes));
 
-            setMessage(cgeoapplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts, allGeocodes.size(), allGeocodes.size()));
+            setMessage(CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts, allGeocodes.size(), allGeocodes.size()));
 
             final File exportFile = getExportFile();
             BufferedWriter writer = null;

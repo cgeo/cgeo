@@ -78,7 +78,7 @@ public class GeocacheTest extends CGeoTestCase {
                 final Waypoint waypoint = waypoints.get(0);
                 assertEquals(new Geopoint("N51 13.888 E007 03.444"), waypoint.getCoords());
                 //            assertEquals("Test", waypoint.getNote());
-                assertEquals(cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " 1", waypoint.getName());
+                assertEquals(CgeoApplication.getInstance().getString(R.string.cache_personal_note) + " 1", waypoint.getName());
                 cache.store(StoredList.TEMPORARY_LIST_ID, null);
             }
             removeCacheCompletely(geocode);

@@ -1,7 +1,7 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.connector.oc.OCDEAuthorizationActivity;
 import cgeo.geocaching.connector.oc.OCPLAuthorizationActivity;
 
@@ -35,7 +35,7 @@ public class AuthorizeOcPreference extends Preference {
     private OCAuthorizations getAuthorization() {
         final String prefKey = getKey();
         for (OCAuthorizations auth : OCAuthorizations.values()) {
-            if (auth.prefKeyId != NO_KEY && prefKey.equals(cgeoapplication.getInstance().getString(auth.prefKeyId))) {
+            if (auth.prefKeyId != NO_KEY && prefKey.equals(CgeoApplication.getInstance().getString(auth.prefKeyId))) {
                 return auth;
             }
         }

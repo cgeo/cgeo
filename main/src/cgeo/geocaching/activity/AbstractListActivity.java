@@ -1,6 +1,6 @@
 package cgeo.geocaching.activity;
 
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -13,7 +13,7 @@ public abstract class AbstractListActivity extends FragmentListActivity implemen
 
     private boolean keepScreenOn = false;
 
-    protected cgeoapplication app = null;
+    protected CgeoApplication app = null;
     protected Resources res = null;
 
     protected AbstractListActivity() {
@@ -65,7 +65,7 @@ public abstract class AbstractListActivity extends FragmentListActivity implemen
     private void initializeCommonFields() {
         // init
         res = this.getResources();
-        app = (cgeoapplication) this.getApplication();
+        app = (CgeoApplication) this.getApplication();
 
         ActivityMixin.keepScreenOn(this, keepScreenOn);
     }

@@ -1,7 +1,7 @@
 package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,7 +27,7 @@ public class DateComparator extends AbstractCacheComparator {
                 final ArrayList<Geocache> list = new ArrayList<Geocache>();
                 list.add(cache1);
                 list.add(cache2);
-                final DistanceComparator distanceComparator = new DistanceComparator(cgeoapplication.getInstance().currentGeo().getCoords(), list);
+                final DistanceComparator distanceComparator = new DistanceComparator(CgeoApplication.getInstance().currentGeo().getCoords(), list);
                 return distanceComparator.compare(cache1, cache2);
             }
             return dateDifference;

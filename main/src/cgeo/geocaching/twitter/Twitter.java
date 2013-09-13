@@ -1,9 +1,9 @@
 package cgeo.geocaching.twitter;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Trackable;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
@@ -23,15 +23,15 @@ public final class Twitter {
 
     public static void postTweetCache(String geocode) {
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-        postTweet(cgeoapplication.getInstance(), getStatusMessage(cache), null);
+        postTweet(CgeoApplication.getInstance(), getStatusMessage(cache), null);
     }
 
     public static void postTweetTrackable(String geocode) {
         final Trackable trackable = DataStore.loadTrackable(geocode);
-        postTweet(cgeoapplication.getInstance(), getStatusMessage(trackable), null);
+        postTweet(CgeoApplication.getInstance(), getStatusMessage(trackable), null);
     }
 
-    private static void postTweet(final cgeoapplication app, final String status, final Geopoint coords) {
+    private static void postTweet(final CgeoApplication app, final String status, final Geopoint coords) {
         if (app == null || !Settings.isUseTwitter() || !Settings.isTwitterLoginValid()) {
             return;
         }

@@ -3,7 +3,7 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
@@ -255,7 +255,7 @@ public class GCMap {
      * @return
      */
     public static SearchResult searchByViewport(final Viewport viewport, final String[] tokens) {
-        int speed = (int) cgeoapplication.getInstance().currentGeo().getSpeed() * 60 * 60 / 1000; // in km/h
+        int speed = (int) CgeoApplication.getInstance().currentGeo().getSpeed() * 60 * 60 / 1000; // in km/h
         Strategy strategy = Settings.getLiveMapStrategy();
         if (strategy == Strategy.AUTO) {
             strategy = speed >= 30 ? Strategy.FAST : Strategy.DETAILED;

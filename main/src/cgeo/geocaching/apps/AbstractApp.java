@@ -1,7 +1,7 @@
 package cgeo.geocaching.apps;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.utils.ProcessUtils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -53,7 +53,7 @@ public abstract class AbstractApp implements App {
     }
 
     protected static String getString(int ressourceId) {
-        return cgeoapplication.getInstance().getString(ressourceId);
+        return CgeoApplication.getInstance().getString(ressourceId);
     }
 
     @Override

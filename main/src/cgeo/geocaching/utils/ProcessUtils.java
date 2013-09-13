@@ -1,6 +1,6 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 
 import org.apache.commons.collections.CollectionUtils;
 
@@ -43,7 +43,7 @@ public final class ProcessUtils {
      * This will find installed applications even without launch intent (e.g. the streetview plugin).
      */
     private static boolean hasPackageInstalled(final String packageName) {
-        final List<PackageInfo> packs = cgeoapplication.getInstance().getPackageManager().getInstalledPackages(0);
+        final List<PackageInfo> packs = CgeoApplication.getInstance().getPackageManager().getInstalledPackages(0);
         for (final PackageInfo packageInfo : packs) {
             if (packageName.equals(packageInfo.packageName)) {
                 return true;
@@ -59,7 +59,7 @@ public final class ProcessUtils {
         if (packageName == null) {
             return null;
         }
-        final PackageManager packageManager = cgeoapplication.getInstance().getPackageManager();
+        final PackageManager packageManager = CgeoApplication.getInstance().getPackageManager();
         try {
             // This can throw an exception where the exception type is only defined on API Level > 3
             // therefore surround with try-catch
@@ -70,7 +70,7 @@ public final class ProcessUtils {
     }
 
     public static boolean isIntentAvailable(final String intent) {
-        final PackageManager packageManager = cgeoapplication.getInstance().getPackageManager();
+        final PackageManager packageManager = CgeoApplication.getInstance().getPackageManager();
         final List<ResolveInfo> list = packageManager.queryIntentActivities(
                 new Intent(intent), PackageManager.MATCH_DEFAULT_ONLY);
 

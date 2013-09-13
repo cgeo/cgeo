@@ -38,12 +38,12 @@ public class StatusFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        cgeoapplication.getInstance().getStatusUpdater().addObserver(statusHandler);
+        CgeoApplication.getInstance().getStatusUpdater().addObserver(statusHandler);
     }
 
     @Override
     public void onPause() {
-        cgeoapplication.getInstance().getStatusUpdater().deleteObserver(statusHandler);
+        CgeoApplication.getInstance().getStatusUpdater().deleteObserver(statusHandler);
         super.onPause();
     }
 

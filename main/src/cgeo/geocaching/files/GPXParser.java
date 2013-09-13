@@ -7,7 +7,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.StoredList;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -205,7 +205,7 @@ public abstract class GPXParser extends FileParser {
             // get text for string
             String stringName;
             try {
-                stringName = cgeoapplication.getInstance().getResources().getResourceName(stringId);
+                stringName = CgeoApplication.getInstance().getResources().getResourceName(stringId);
             } catch (final NullPointerException e) {
                 return null;
             }

@@ -294,7 +294,7 @@ public class DataStore {
         }
 
         try {
-            final DbHelper dbHelper = new DbHelper(new DBContext(cgeoapplication.getInstance()));
+            final DbHelper dbHelper = new DbHelper(new DBContext(CgeoApplication.getInstance()));
             database = dbHelper.getWritableDatabase();
         } catch (Exception e) {
             Log.e("DataStore.init: unable to open database for R/W", e);
@@ -2484,7 +2484,7 @@ public class DataStore {
     public static List<StoredList> getLists() {
         init();
 
-        final Resources res = cgeoapplication.getInstance().getResources();
+        final Resources res = CgeoApplication.getInstance().getResources();
         final List<StoredList> lists = new ArrayList<StoredList>();
         lists.add(new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) PreparedStatements.getCountCachesOnStandardList().simpleQueryForLong()));
 
@@ -2536,7 +2536,7 @@ public class DataStore {
             }
         }
 
-        Resources res = cgeoapplication.getInstance().getResources();
+        Resources res = CgeoApplication.getInstance().getResources();
         if (id == StoredList.ALL_LIST_ID) {
             return new StoredList(StoredList.ALL_LIST_ID, res.getString(R.string.list_all_lists), getAllCachesCount());
         }

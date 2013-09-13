@@ -3,8 +3,8 @@ package cgeo.geocaching.ui;
 import butterknife.InjectView;
 
 import cgeo.geocaching.CacheListActivity;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
 
@@ -38,7 +38,7 @@ public class AddressListAdapter extends ArrayAdapter<Address> {
     public AddressListAdapter(final Context context) {
         super(context, 0);
         inflater = ((Activity) context).getLayoutInflater();
-        location = cgeoapplication.getInstance().currentGeo().getCoords();
+        location = CgeoApplication.getInstance().currentGeo().getCoords();
     }
 
     @Override

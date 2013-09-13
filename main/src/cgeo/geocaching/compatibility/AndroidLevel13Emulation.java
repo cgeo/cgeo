@@ -1,6 +1,6 @@
 package cgeo.geocaching.compatibility;
 
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 
 import android.content.Context;
 import android.graphics.Point;
@@ -22,7 +22,7 @@ public class AndroidLevel13Emulation implements AndroidLevel13Interface {
     }
 
     private static Display getDisplay() {
-        return ((WindowManager) cgeoapplication.getInstance().getSystemService(Context.WINDOW_SERVICE))
+        return ((WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE))
                 .getDefaultDisplay();
     }
 }

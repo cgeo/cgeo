@@ -14,7 +14,7 @@ import android.os.Message;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class cgeoapplication extends Application {
+public class CgeoApplication extends Application {
 
     private volatile GeoDataProvider geo;
     private volatile DirectionProvider dir;
@@ -22,17 +22,17 @@ public class cgeoapplication extends Application {
     public boolean showLoginToast = true; //login toast shown just once.
     private boolean liveMapHintShown = false; // livemap hint has been shown
     final private StatusUpdater statusUpdater = new StatusUpdater();
-    private static cgeoapplication instance;
+    private static CgeoApplication instance;
 
-    public cgeoapplication() {
+    public CgeoApplication() {
         setInstance(this);
     }
 
-    private static void setInstance(final cgeoapplication application) {
+    private static void setInstance(final CgeoApplication application) {
         instance = application;
     }
 
-    public static cgeoapplication getInstance() {
+    public static CgeoApplication getInstance() {
         return instance;
     }
 

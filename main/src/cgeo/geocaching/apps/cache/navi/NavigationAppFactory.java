@@ -1,9 +1,9 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.apps.App;
@@ -320,7 +320,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      */
     public static void startDefaultNavigationApplication(int defaultNavigation, Activity activity, Geocache cache) {
         if (cache == null || cache.getCoords() == null) {
-            ActivityMixin.showToast(activity, cgeoapplication.getInstance().getString(R.string.err_location_unknown));
+            ActivityMixin.showToast(activity, CgeoApplication.getInstance().getString(R.string.err_location_unknown));
             return;
         }
 
@@ -342,7 +342,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      */
     public static void startDefaultNavigationApplication(int defaultNavigation, Activity activity, Waypoint waypoint) {
         if (waypoint == null || waypoint.getCoords() == null) {
-            ActivityMixin.showToast(activity, cgeoapplication.getInstance().getString(R.string.err_location_unknown));
+            ActivityMixin.showToast(activity, CgeoApplication.getInstance().getString(R.string.err_location_unknown));
             return;
         }
         navigateWaypoint(activity, waypoint, getDefaultNavigationApplication(defaultNavigation));
@@ -356,7 +356,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      */
     public static void startDefaultNavigationApplication(int defaultNavigation, Activity activity, final Geopoint destination) {
         if (destination == null) {
-            ActivityMixin.showToast(activity, cgeoapplication.getInstance().getString(R.string.err_location_unknown));
+            ActivityMixin.showToast(activity, CgeoApplication.getInstance().getString(R.string.err_location_unknown));
             return;
         }
 

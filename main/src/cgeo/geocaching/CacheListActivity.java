@@ -1593,7 +1593,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private static boolean isValidUsername(AbstractActivity context, String username) {
         if (StringUtils.isBlank(username)) {
-            context.showToast(cgeoapplication.getInstance().getString(R.string.warn_no_username));
+            context.showToast(CgeoApplication.getInstance().getString(R.string.warn_no_username));
             return false;
         }
         return true;
@@ -1661,7 +1661,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private static boolean isValidCoords(AbstractActivity context, Geopoint coords) {
         if (coords == null) {
-            context.showToast(cgeoapplication.getInstance().getString(R.string.warn_no_coordinates));
+            context.showToast(CgeoApplication.getInstance().getString(R.string.warn_no_coordinates));
             return false;
         }
         return true;
@@ -1669,7 +1669,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     public static void startActivityKeyword(final AbstractActivity context, final String keyword) {
         if (keyword == null) {
-            context.showToast(cgeoapplication.getInstance().getString(R.string.warn_no_keyword));
+            context.showToast(CgeoApplication.getInstance().getString(R.string.warn_no_keyword));
             return;
         }
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);

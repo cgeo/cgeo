@@ -1,6 +1,6 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.IOUtils;
@@ -86,7 +86,7 @@ public final class LocalStorage {
     private static File getInternalStorageBase() {
         if (internalStorageBase == null) {
             // A race condition will do no harm as the operation is idempotent. No need to synchronize.
-            internalStorageBase = cgeoapplication.getInstance().getApplicationContext().getFilesDir().getParentFile();
+            internalStorageBase = CgeoApplication.getInstance().getApplicationContext().getFilesDir().getParentFile();
         }
         return internalStorageBase;
     }

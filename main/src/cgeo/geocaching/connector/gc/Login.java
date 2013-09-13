@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.HtmlImage;
@@ -76,7 +76,7 @@ public abstract class Login {
             return StatusCode.NO_LOGIN_INFO_STORED;
         }
 
-        Login.setActualStatus(cgeoapplication.getInstance().getString(R.string.init_login_popup_working));
+        Login.setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
         HttpResponse loginResponse = Network.getRequest("https://www.geocaching.com/login/default.aspx");
         String loginData = Network.getResponseData(loginResponse);
         if (loginResponse != null && loginResponse.getStatusLine().getStatusCode() == 503 && TextUtils.matches(loginData, GCConstants.PATTERN_MAINTENANCE)) {
@@ -171,7 +171,7 @@ public abstract class Login {
         resetLoginStatus();
 
         setActualCachesFound(-1);
-        setActualStatus(cgeoapplication.getInstance().getString(R.string.err_login));
+        setActualStatus(CgeoApplication.getInstance().getString(R.string.err_login));
     }
 
     static void setActualCachesFound(final int found) {
@@ -218,7 +218,7 @@ public abstract class Login {
             return false;
         }
 
-        setActualStatus(cgeoapplication.getInstance().getString(R.string.init_login_popup_ok));
+        setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_ok));
 
         // on every page except login page
         setActualLoginStatus(TextUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME));
@@ -246,7 +246,7 @@ public abstract class Login {
             return true;
         }
 
-        setActualStatus(cgeoapplication.getInstance().getString(R.string.init_login_popup_failed));
+        setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_failed));
         return false;
     }
 

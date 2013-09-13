@@ -1,7 +1,7 @@
 package cgeo.geocaching.maps.google;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.maps.AbstractMapProvider;
 import cgeo.geocaching.maps.AbstractMapSource;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
@@ -20,7 +20,7 @@ public final class GoogleMapProvider extends AbstractMapProvider {
     private final MapItemFactory mapItemFactory;
 
     private GoogleMapProvider() {
-        final Resources resources = cgeoapplication.getInstance().getResources();
+        final Resources resources = CgeoApplication.getInstance().getResources();
 
         registerMapSource(new GoogleMapSource(this, resources.getString(R.string.map_source_google_map)));
         registerMapSource(new GoogleSatelliteSource(this, resources.getString(R.string.map_source_google_satellite)));

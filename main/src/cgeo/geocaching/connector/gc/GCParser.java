@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Image;
@@ -9,7 +10,6 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -667,7 +667,7 @@ public abstract class GCParser {
             final String originalCoords = TextUtils.getMatch(page, GCConstants.PATTERN_LATLON_ORIG, false, null);
 
             if (null != originalCoords) {
-                final Waypoint waypoint = new Waypoint(cgeoapplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
+                final Waypoint waypoint = new Waypoint(CgeoApplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
                 waypoint.setCoords(new Geopoint(originalCoords));
                 cache.addOrChangeWaypoint(waypoint, false);
                 cache.setUserModifiedCoords(true);
@@ -706,7 +706,7 @@ public abstract class GCParser {
 
                     // waypoint name
                     // res is null during the unit tests
-                    final String name = TextUtils.getMatch(wp[6], GCConstants.PATTERN_WPNAME, true, 1, cgeoapplication.getInstance().getString(R.string.waypoint), true);
+                    final String name = TextUtils.getMatch(wp[6], GCConstants.PATTERN_WPNAME, true, 1, CgeoApplication.getInstance().getString(R.string.waypoint), true);
 
                     // waypoint type
                     final String resulttype = TextUtils.getMatch(wp[3], GCConstants.PATTERN_WPTYPE, null);
@@ -1481,7 +1481,7 @@ public abstract class GCParser {
             Log.w("GCParser.parseTrackable: Failed to parse trackable details & image");
         }
         if (StringUtils.isEmpty(trackable.getDetails()) && page.contains(GCConstants.ERROR_TB_NOT_ACTIVATED)) {
-            trackable.setDetails(cgeoapplication.getInstance().getString(R.string.trackable_not_activated));
+            trackable.setDetails(CgeoApplication.getInstance().getString(R.string.trackable_not_activated));
         }
 
         // trackable logs
@@ -1538,7 +1538,7 @@ public abstract class GCParser {
             trackable.setTrackingcode(possibleTrackingcode);
         }
 
-        if (cgeoapplication.getInstance() != null) {
+        if (CgeoApplication.getInstance() != null) {
             DataStore.saveTrackable(trackable);
         }
 

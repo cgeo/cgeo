@@ -1,7 +1,7 @@
 package cgeo.geocaching.enumerations;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 
 import java.util.EnumSet;
 
@@ -42,7 +42,7 @@ public interface LiveMapStrategy {
         }
 
         public final String getL10n() {
-            return cgeoapplication.getInstance().getBaseContext().getResources().getString(stringId);
+            return CgeoApplication.getInstance().getBaseContext().getResources().getString(stringId);
         }
     }
 }

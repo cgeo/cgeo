@@ -30,7 +30,7 @@
         android:xlargeScreens="true" />
 
     <application
-        android:name=".cgeoapplication"
+        android:name=".CgeoApplication"
         android:allowBackup="true"
         android:backupAgent="cgeo.geocaching.backup.CentralBackupAgent"
         android:icon="@drawable/cgeo"

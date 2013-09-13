@@ -1,8 +1,8 @@
 package cgeo.geocaching.network;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.StoredList;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.files.LocalStorage;
@@ -74,7 +74,7 @@ public class HtmlImage implements Html.ImageGetter {
         Point displaySize = Compatibility.getDisplaySize();
         this.maxWidth = displaySize.x - 25;
         this.maxHeight = displaySize.y - 25;
-        this.resources = cgeoapplication.getInstance().getResources();
+        this.resources = CgeoApplication.getInstance().getResources();
     }
 
     @Override

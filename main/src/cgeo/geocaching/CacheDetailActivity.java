@@ -1134,7 +1134,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 if (time > 0) {
                     String dateString = Formatter.formatFullDate(time);
                     if (cache.isEventCache()) {
-                        dateString = DateUtils.formatDateTime(cgeoapplication.getInstance().getBaseContext(), time, DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + dateString;
+                        dateString = DateUtils.formatDateTime(CgeoApplication.getInstance().getBaseContext(), time, DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + dateString;
                     }
                     details.add(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden, dateString);
                 }

@@ -6,7 +6,7 @@ import cgeo.geocaching.Image;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.LogResult;
@@ -297,7 +297,7 @@ final class OkapiClient {
             final StringBuilder description = new StringBuilder(500);
             if (!response.isNull("gc_code")) {
                 final String gccode = response.getString("gc_code");
-                description.append(cgeoapplication.getInstance().getResources()
+                description.append(CgeoApplication.getInstance().getResources()
                         .getString(R.string.cache_listed_on, GCConnector.getInstance().getName()))
                         .append(": <a href=\"http://coord.info/")
                         .append(gccode)

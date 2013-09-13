@@ -134,7 +134,7 @@ public class CompassActivity extends AbstractActivity {
         setCacheInfo();
 
         // Force a refresh of location and direction when data is available.
-        final cgeoapplication app = cgeoapplication.getInstance();
+        final CgeoApplication app = CgeoApplication.getInstance();
         final IGeoData geo = app.currentGeo();
         if (geo != null) {
             geoDirHandler.update(geo);

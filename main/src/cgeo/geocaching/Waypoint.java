@@ -35,7 +35,7 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
 
     public static void initializeScale() {
         // Calculate visited inset based on screen density
-        VISITED_INSET = (int) (6.6f * cgeoapplication.getInstance().getResources().getDisplayMetrics().density + 0.5f);
+        VISITED_INSET = (int) (6.6f * CgeoApplication.getInstance().getResources().getDisplayMetrics().density + 0.5f);
     }
 
     /**

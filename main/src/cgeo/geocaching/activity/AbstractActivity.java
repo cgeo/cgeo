@@ -2,7 +2,7 @@ package cgeo.geocaching.activity;
 
 import butterknife.Views;
 
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.settings.Settings;
@@ -18,7 +18,7 @@ import android.widget.EditText;
 
 public abstract class AbstractActivity extends FragmentActivity implements IAbstractActivity {
 
-    protected cgeoapplication app = null;
+    protected CgeoApplication app = null;
     protected Resources res = null;
     private boolean keepScreenOn = false;
 
@@ -101,7 +101,7 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
     private void initializeCommonFields() {
         // initialize commonly used members
         res = this.getResources();
-        app = (cgeoapplication) this.getApplication();
+        app = (CgeoApplication) this.getApplication();
 
         // only needed in some activities, but implemented in super class nonetheless
         Cookies.restoreCookieStore(Settings.getCookieStore());

@@ -1,11 +1,11 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Image;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -220,7 +220,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         final Trackable trackable = GCParser.parseTrackable(page, "TB123E");
         assertNotNull(trackable);
         assertEquals("TB123E", trackable.getGeocode());
-        final String expectedDetails = cgeoapplication.getInstance().getString(cgeo.geocaching.R.string.trackable_not_activated);
+        final String expectedDetails = CgeoApplication.getInstance().getString(cgeo.geocaching.R.string.trackable_not_activated);
         assertEquals(expectedDetails, trackable.getDetails());
     }
 }

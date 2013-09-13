@@ -4,7 +4,7 @@ import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.ui.UserActionsClickListener;
 
@@ -23,7 +23,7 @@ import java.util.Map.Entry;
 
 public class CacheLogsViewCreator extends LogsViewCreator {
     private final boolean allLogs;
-    private final Resources res = cgeoapplication.getInstance().getResources();
+    private final Resources res = CgeoApplication.getInstance().getResources();
 
     public CacheLogsViewCreator(CacheDetailActivity cacheDetailActivity, boolean allLogs) {
         super(cacheDetailActivity);

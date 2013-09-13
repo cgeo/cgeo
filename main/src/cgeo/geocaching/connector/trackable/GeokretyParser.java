@@ -1,8 +1,8 @@
 package cgeo.geocaching.connector.trackable;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Trackable;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.utils.Log;
 
 import org.xml.sax.Attributes;
@@ -63,15 +63,15 @@ public class GeokretyParser {
     protected static String getType(int type) {
         switch (type) {
             case 0:
-                return cgeoapplication.getInstance().getString(R.string.geokret_type_traditional);
+                return CgeoApplication.getInstance().getString(R.string.geokret_type_traditional);
             case 1:
-                return cgeoapplication.getInstance().getString(R.string.geokret_type_book_or_media);
+                return CgeoApplication.getInstance().getString(R.string.geokret_type_book_or_media);
             case 2:
-                return cgeoapplication.getInstance().getString(R.string.geokret_type_human);
+                return CgeoApplication.getInstance().getString(R.string.geokret_type_human);
             case 3:
-                return cgeoapplication.getInstance().getString(R.string.geokret_type_coin);
+                return CgeoApplication.getInstance().getString(R.string.geokret_type_coin);
             case 4:
-                return cgeoapplication.getInstance().getString(R.string.geokret_type_post);
+                return CgeoApplication.getInstance().getString(R.string.geokret_type_post);
         }
         return null;
     }

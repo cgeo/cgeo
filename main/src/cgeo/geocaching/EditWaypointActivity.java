@@ -432,7 +432,7 @@ public class EditWaypointActivity extends AbstractActivity {
                         }
                         if (modifyLocal.isChecked() || modifyBoth.isChecked()) {
                             if (!cache.hasUserModifiedCoords()) {
-                                final Waypoint origWaypoint = new Waypoint(cgeoapplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
+                                final Waypoint origWaypoint = new Waypoint(CgeoApplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
                                 origWaypoint.setCoords(cache.getCoords());
                                 cache.addOrChangeWaypoint(origWaypoint, false);
                                 cache.setUserModifiedCoords(true);

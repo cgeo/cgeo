@@ -1,9 +1,9 @@
 package cgeo.geocaching.settings;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SelectMapfileActivity;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
@@ -171,7 +171,7 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
     private static String getKey(final int prefKeyId) {
-        return cgeoapplication.getInstance().getString(prefKeyId);
+        return CgeoApplication.getInstance().getString(prefKeyId);
     }
 
     private Preference getPreference(final int keyId) {
@@ -354,7 +354,7 @@ public class SettingsActivity extends PreferenceActivity {
             @Override
             public boolean onPreferenceClick(final Preference preference) {
                 boolean oldValue = Settings.isDbOnSDCard();
-                ((cgeoapplication) SettingsActivity.this.getApplication())
+                ((CgeoApplication) SettingsActivity.this.getApplication())
                         .moveDatabase(SettingsActivity.this);
                 return oldValue != Settings.isDbOnSDCard();
             }
@@ -523,7 +523,7 @@ public class SettingsActivity extends PreferenceActivity {
                 preference.setSummary(mapSource.getName());
             } else if (isPreference(preference, R.string.pref_connectorOCActive) || isPreference(preference, R.string.pref_connectorOCPLActive) || isPreference(preference, R.string.pref_connectorGCActive)) {
                 // // reset log-in status if connector activation was changed
-                cgeoapplication.getInstance().checkLogin = true;
+                CgeoApplication.getInstance().checkLogin = true;
             } else if (preference instanceof ListPreference) {
                 // For list preferences, look up the correct display value in
                 // the preference's 'entries' list.
@@ -554,7 +554,7 @@ public class SettingsActivity extends PreferenceActivity {
                 if (Login.isActualLoginStatus()) {
                     Login.logout();
                 }
-                cgeoapplication.getInstance().checkLogin = true;
+                CgeoApplication.getInstance().checkLogin = true;
             }
             return true;
         }
