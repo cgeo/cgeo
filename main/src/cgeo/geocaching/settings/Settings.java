@@ -748,8 +748,8 @@ public final class Settings {
                 && StringUtils.isNotBlank(getTokenSecret());
     }
 
-    public static void setTwitterTokens(final String tokenPublic,
-            final String tokenSecret, boolean enableTwitter) {
+    public static void setTwitterTokens(@Nullable final String tokenPublic,
+            @Nullable final String tokenSecret, boolean enableTwitter) {
         putString(R.string.pref_twitter_token_public, tokenPublic);
         putString(R.string.pref_twitter_token_secret, tokenSecret);
         if (tokenPublic != null) {
@@ -759,8 +759,8 @@ public final class Settings {
         setUseTwitter(enableTwitter);
     }
 
-    public static void setTwitterTempTokens(final String tokenPublic,
-            final String tokenSecret) {
+    public static void setTwitterTempTokens(@Nullable final String tokenPublic,
+            @Nullable final String tokenSecret) {
         putString(R.string.pref_temp_twitter_token_public, tokenPublic);
         putString(R.string.pref_temp_twitter_token_secret, tokenSecret);
     }
