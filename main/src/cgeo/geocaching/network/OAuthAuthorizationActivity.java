@@ -3,6 +3,7 @@ package cgeo.geocaching.network;
 import butterknife.InjectView;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.R.string;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -332,29 +333,56 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
     protected abstract String getAuthTitle();
 
-    protected abstract String getAuthAgain();
+    protected String getAuthAgain() {
+        return getString(R.string.auth_again);
+    }
 
-    protected abstract String getErrAuthInitialize();
+    protected String getErrAuthInitialize() {
+        return getString(string.err_auth_initialize);
+    }
 
-    protected abstract String getAuthStart();
+    protected String getAuthStart() {
+        return getString(R.string.auth_start);
+    }
 
     protected abstract String getAuthDialogCompleted();
 
-    protected abstract String getErrAuthProcess();
+    protected String getErrAuthProcess() {
+        return res.getString(R.string.err_auth_process);
+    }
 
-    protected abstract String getAuthDialogWait();
+    protected String getAuthDialogWait() {
+        return res.getString(R.string.auth_dialog_waiting, getTitle());
+    }
 
-    protected abstract String getAuthDialogPinTitle();
+    protected String getAuthDialogPinTitle() {
+        assert false;
+        return null;
+    }
 
-    protected abstract String getAuthDialogPinMessage();
+    protected String getAuthDialogPinMessage() {
+        assert false;
+        return null;
+    }
 
-    protected abstract String getAboutAuth1();
+    protected String getAuthPinHint() {
+        assert false;
+        return null;
+    }
 
-    protected abstract String getAboutAuth2();
+    protected String getAboutAuth1() {
+        return res.getString(R.string.auth_explain_short, getTitle());
+    }
 
-    protected abstract String getAuthAuthorize();
+    protected String getAboutAuth2() {
+        return res.getString(R.string.auth_explain_long, getTitle());
+    }
 
-    protected abstract String getAuthPinHint();
+    protected String getAuthAuthorize() {
+        return res.getString(R.string.auth_authorize, getTitle());
+    }
 
-    protected abstract String getAuthFinish();
+    protected String getAuthFinish() {
+        return res.getString(R.string.auth_finish, getTitle());
+    }
 }

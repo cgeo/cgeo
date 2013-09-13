@@ -482,14 +482,7 @@
   <string name="auth_authorize">autorisation de c:geo</string>
   <string name="auth_start">début d\'autorisation</string>
   <string name="auth_again">redémarre</string>
-  <string name="auth_pin_hint">code donné par Twitter</string>
   <string name="auth_finish">terminé</string>
-  <string name="auth_dialog_wait">en attente de Twitter…</string>
-  <string name="auth_dialog_pin_title">code PIN</string>
-  <string name="auth_dialog_pin_message">Veuillez saisir votre code PIN fourni par Twitter. Il est obligatoire pour finaliser l\'autorisation.</string>
-  <string name="auth_dialog_completed">c:geo est maintenant autorisé à poster sur Twitter.</string>
-  <string name="about_auth_1">Le processus suivant permet à <b>c:geo</b> d\'accéder à votre compte Twitter - si vous acceptez.</string>
-  <string name="about_auth_2">Cliquer sur le bouton \"début d\'autorisation\" pour démarrer. Une fenêtre de navigateur va s\'ouvrir pour vous connecter sur Twitter. Accepter pour que <b>c:geo</b> accéde à votre compte. Twitter vous affichera alors une code PIN composé de chiffres. Merci de coller ce code dans <b>c:geo</b> puis confirmer. C\'est tout!</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
   <string name="auth_authorize_oc">Autoriser c:geo</string>
