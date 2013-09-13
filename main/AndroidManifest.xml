@@ -111,7 +111,19 @@
             android:name=".twitter.TwitterAuthorizationActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/auth_twitter"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden"
+            android:launchMode="singleTask" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.cgeo.org"
+                    android:pathPrefix="/twitter/"
+                    android:scheme="callback" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".EditWaypointActivity_"

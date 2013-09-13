@@ -16,7 +16,7 @@ public class TwitterAuthorizationActivity extends OAuthAuthorizationActivity {
                 true,
                 Settings.getKeyConsumerPublic(),
                 Settings.getKeyConsumerSecret(),
-                null);
+                "callback://www.cgeo.org/twitter/");
     }
 
     @Override
