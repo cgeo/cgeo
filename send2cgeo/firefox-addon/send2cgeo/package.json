@@ -1,0 +1,17 @@
+{
+	"description": "This is a small wrapper around the send2cgeo Greasemonkey script.\n\nCredit goes to the developers of send2cgeo.user.js",
+	"contributors": [],
+	"dependencies": ["api-utils", "addon-kit"],
+	"fullName": "send2cgeo",
+	"id": "jid0-XabGAJzXPgqYfMo6BeiN59yek1k",
+	"lib": "lib",
+	"license": "Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)",
+	"icon": "data/send2cgeo.48.png",
+	"icon64": "data/send2cgeo.64.png",
+	"author": "JavaJens",
+	"url": "",
+	"name": "send2cgeo",
+	"version": "0.1a",
+	"main": "main",
+	"homepage": "http://send2.cgeo.org/"
+}
