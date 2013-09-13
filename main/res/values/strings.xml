@@ -899,6 +899,7 @@
     <string name="destination_set">Set destination</string>
     <string name="navigation_direct_navigation">Direct Navigation</string>
     <string name="navigation_target">Target</string>
+    <string name="err_nav_no_coordinates">Cannot start navigation with no coordinates</string>
 
     <!-- license -->
     <string name="license">License</string>
