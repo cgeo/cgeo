@@ -1,5 +1,7 @@
 package cgeo.geocaching.network;
 
+import butterknife.InjectView;
+
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.utils.Log;
@@ -8,9 +10,9 @@ import cgeo.geocaching.utils.MatcherWrapper;
 import ch.boye.httpclientandroidlib.ParseException;
 import ch.boye.httpclientandroidlib.client.entity.UrlEncodedFormEntity;
 import ch.boye.httpclientandroidlib.util.EntityUtils;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -39,9 +41,11 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     private String OAtokenSecret = null;
     private final Pattern paramsPattern1 = Pattern.compile("oauth_token=([a-zA-Z0-9\\-\\_.]+)");
     private final Pattern paramsPattern2 = Pattern.compile("oauth_token_secret=([a-zA-Z0-9\\-\\_.]+)");
-    private Button startButton = null;
-    private EditText pinEntry = null;
-    private Button pinEntryButton = null;
+    @InjectView(R.id.start) protected Button startButton;
+    @InjectView(R.id.pin) protected EditText pinEntry;
+    @InjectView(R.id.pin_button) protected Button pinEntryButton;
+    @InjectView(R.id.auth_1) protected TextView auth_1;
+    @InjectView(R.id.auth_2) protected TextView auth_2;
     private ProgressDialog requestTokenDialog = null;
     private ProgressDialog changeTokensDialog = null;
     private Handler requestTokenHandler = new Handler() {
@@ -122,14 +126,8 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     }
 
     private void init() {
-        startButton = (Button) findViewById(R.id.start);
-        pinEntry = (EditText) findViewById(R.id.pin);
-        pinEntryButton = (Button) findViewById(R.id.pin_button);
-
-        TextView auth = (TextView) findViewById(R.id.auth_1);
-        auth.setText(getAboutAuth1());
-        auth = (TextView) findViewById(R.id.auth_2);
-        auth.setText(getAboutAuth2());
+        auth_1.setText(getAboutAuth1());
+        auth_2.setText(getAboutAuth2());
 
         ImmutablePair<String, String> tempToken = getTempTokens();
         OAtoken = tempToken.left;
@@ -157,14 +155,15 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
     private void requestToken() {
 
-        int status = 0;
         final Parameters params = new Parameters();
         params.put("oauth_callback", "oob");
         final String method = "GET";
         OAuth.signOAuth(host, pathRequest, method, https, params, null, null, consumerKey, consumerSecret);
         final String line = Network.getResponseData(Network.getRequest(getUrlPrefix() + host + pathRequest, params));
 
+        int status = 0;
         if (StringUtils.isNotBlank(line)) {
+            assert line != null;
             final MatcherWrapper paramsMatcher1 = new MatcherWrapper(paramsPattern1, line);
             if (paramsMatcher1.find()) {
                 OAtoken = paramsMatcher1.group(1);
@@ -264,7 +263,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
         @Override
         public void onClick(View arg0) {
-            if (StringUtils.isEmpty(((EditText) findViewById(R.id.pin)).getText().toString())) {
+            if (StringUtils.isEmpty(pinEntry.getText().toString())) {
                 helpDialog(getAuthDialogPinTitle(), getAuthDialogPinMessage());
                 return;
             }
@@ -291,9 +290,9 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
     protected abstract ImmutablePair<String, String> getTempTokens();
 
-    protected abstract void setTempTokens(String tokenPublic, String tokenSecret);
+    protected abstract void setTempTokens(@Nullable String tokenPublic, @Nullable String tokenSecret);
 
-    protected abstract void setTokens(String tokenPublic, String tokenSecret, boolean enable);
+    protected abstract void setTokens(@Nullable String tokenPublic, @Nullable String tokenSecret, boolean enable);
 
     // get resources from derived class
 

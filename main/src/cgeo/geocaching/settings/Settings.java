@@ -24,6 +24,7 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -313,7 +314,7 @@ public final class Settings {
         return new ImmutablePair<String, String>(getString(tokenPublicPrefKey, null), getString(tokenSecretPrefKey, null));
     }
 
-    public static void setTokens(final int tokenPublicPrefKey, final String tokenPublic, final int tokenSecretPrefKey, final String tokenSecret) {
+    public static void setTokens(final int tokenPublicPrefKey, @Nullable final String tokenPublic, final int tokenSecretPrefKey, @Nullable final String tokenSecret) {
         if (tokenPublic == null) {
             remove(tokenPublicPrefKey);
         } else {

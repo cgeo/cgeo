@@ -3,8 +3,8 @@ package cgeo.geocaching.network;
 import cgeo.geocaching.utils.CryptUtils;
 
 import ch.boye.httpclientandroidlib.NameValuePair;
-
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,8 +16,8 @@ public class OAuth {
             final String method,
             final boolean https,
             final Parameters params,
-            final String token,
-            final String tokenSecret,
+            @Nullable final String token,
+            @Nullable final String tokenSecret,
             final String consumerKey,
             final String consumerSecret) {
         params.put(
