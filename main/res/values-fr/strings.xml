@@ -427,10 +427,12 @@
   <string name="init_backup_last">Sauvegarde disponible depuis</string>
   <string name="init_backup_last_no">Il n\'y a pas de fichier avec une sauvegarde.</string>
   <string name="settings_info_offline_maps_title">Informations sur les cartes hors-ligne</string>
-  <string name="settings_info_offline_maps">c:geo prend en charge les cartes hors-ligne. Vous pouvez télécharger des cartes depuis Mapsforge ou même créer vos propres cartes à partir des données d\'OSM.</string>
+  <string name="settings_info_offline_maps">c:geo prend en charge les cartes hors-ligne. Vous pouvez télécharger des cartes depuis Mapsforge ou même créer vos propres cartes à partir des données d\'OSM. Vous devez d\'abord sélectionner le répertoire des cartes en mode hors connexion pour pouvoir utiliser cette fonctionnalité.</string>
   <string name="settings_info_themes_title">Informations sur les thèmes de cartes</string>
   <string name="settings_info_themes">c:geo prend en charge des thèmes personnalisés pour les cartes en mode hors-ligne. Ils peuvent être utilisés pour modifier le style de couleur de la carte (par exemple d\'avoir une vue de nuit) ou mettre en évidence certains objets comme les pistes cyclables ou les lignes de niveau.</string>
   <string name="init_mapsource_select">Choisir la source des cartes</string>
+  <string name="settings_title_scale_map_text">Zoom du texte</string>
+  <string name="settings_summary_scale_map_text">Mise à l\'échelle des textes sur la carte hors-ligne en fonction de la résolution de l\'appareil</string>
   <string name="init_map_directory_description">Dossier contenant les cartes hors-ligne</string>
   <string name="init_gpx_exportdir">Dossier d\'exportation GPX</string>
   <string name="init_gpx_importdir">Dossier d\'importation GPX</string>
@@ -463,6 +465,9 @@
   <string name="init_use_native_ua">S\'identifier comme le navigateur web Android. Peut résoudre des problèmes de connexion avec certains opérateurs mobiles.</string>
   <string name="init_summary_use_native_ua">S\'identifier comme le navigateur Android. Résout les problèmes de connexion lors de l\'utilisation de certains fournisseurs d\'accès au réseau.</string>
   <string name="init_rendertheme_folder">Dossier contenant les cartes hors-ligne personnelles (optionnelles).</string>
+  <string name="settings_open_website">Ouvrir le site dans un navigateur</string>
+  <string name="settings_settings">Paramètres</string>
+  <string name="settings_information">Information</string>
   <string name="map_source_google_map">Google Maps : plan</string>
   <string name="map_source_google_satellite">Google Maps : satellite</string>
   <string name="map_source_osm_mapnik">OSM : rendu Mapnik</string>
@@ -483,6 +488,10 @@
   <string name="auth_start">début d\'autorisation</string>
   <string name="auth_again">redémarre</string>
   <string name="auth_finish">terminé</string>
+  <string name="auth_dialog_waiting">En attente de %s…</string>
+  <string name="auth_explain_short">Le processus suivant autorisera <b>c:geo</b> à accéder à %s.</string>
+  <string name="auth_explain_long">L\'appui sur \"Autoriser c:geo\" démarrera le processus. Un navigateur web ouvrira la page de %s. Vous pourrez vous connecter sur votre compte et en autoriser l\'accès à <b>c:geo</b>. C\'est tout.</string>
+  <string name="auth_dialog_completed_twitter">c:geo est maintenant autorisé à poster sur Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
   <string name="auth_authorize_oc">Autoriser c:geo</string>
@@ -791,6 +800,7 @@
   <string name="destination_set">Définir une destination</string>
   <string name="navigation_direct_navigation">Navigation directe</string>
   <string name="navigation_target">Cible</string>
+  <string name="err_nav_no_coordinates">Impossible de démarrer la navigation en l\'absence de coordonnées</string>
   <string name="license">Licence</string>
   <string name="license_show">Afficher la licence</string>
   <string name="license_dismiss">Rejeter</string>
