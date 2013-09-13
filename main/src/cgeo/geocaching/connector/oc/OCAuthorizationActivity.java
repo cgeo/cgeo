@@ -6,6 +6,7 @@ import cgeo.geocaching.network.OAuthAuthorizationActivity;
 import cgeo.geocaching.settings.Settings;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.Nullable;
 
 public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
 
@@ -28,12 +29,12 @@ public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
     }
 
     @Override
-    protected void setTempTokens(String tokenPublic, String tokenSecret) {
+    protected void setTempTokens(@Nullable final String tokenPublic, @Nullable final String tokenSecret) {
         Settings.setTokens(authParams.getTempTokenPublicPrefKey(), tokenPublic, authParams.getTempTokenSecretPrefKey(), tokenSecret);
     }
 
     @Override
-    protected void setTokens(String tokenPublic, String tokenSecret, boolean enable) {
+    protected void setTokens(@Nullable final String tokenPublic, @Nullable final String tokenSecret, final boolean enable) {
         Settings.setTokens(authParams.getTokenPublicPrefKey(), tokenPublic, authParams.getTokenSecretPrefKey(), tokenSecret);
         if (tokenPublic != null) {
             Settings.setTokens(authParams.getTempTokenPublicPrefKey(), null, authParams.getTempTokenSecretPrefKey(), null);
