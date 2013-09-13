@@ -114,11 +114,12 @@ public abstract class Login {
         loginResponse = Network.postRequest("https://www.geocaching.com/login/default.aspx", params);
         loginData = Network.getResponseData(loginResponse);
 
-        if (loginData == null || StringUtils.isBlank(loginData)) {
+        if (StringUtils.isBlank(loginData)) {
             Log.e("Login.login: Failed to retrieve login page (2nd)");
             // FIXME: should it be CONNECTION_FAILED to match the first attempt?
             return StatusCode.COMMUNICATION_ERROR; // no login page
         }
+        assert loginData != null;  // Caught above
 
         if (Login.getLoginStatus(loginData)) {
             Log.i("Successfully logged in Geocaching.com as " + login.left + " (" + Settings.getMemberStatus() + ')');
