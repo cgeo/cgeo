@@ -100,7 +100,7 @@
   <string name="log_stars_4_description">plutôt bien</string>
   <string name="log_stars_45_description">très bien</string>
   <string name="log_stars_5_description">super</string>
-  <string name="log_webcam">photo webcam prise</string>
+  <string name="log_webcam">Photo prise par la webcam</string>
   <string name="log_new_log">Carnet</string>
   <string name="log_new_log_text">Message</string>
   <string name="log_announcement">Annonce</string>
