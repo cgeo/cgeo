@@ -226,6 +226,8 @@
     <string name="warn_deprecated_mapfile">You are using a deprecated version of map file (0.2.4).\nConsider switching to a version 0.3.0 map.\nWe will drop support for version 0.2.4 in the next release.</string>
     <string name="warn_nonexistant_mapfile">The selected map file does not exist.\nOffline maps are not available.</string>
     <string name="warn_rendertheme_missing">Map theme not found.</string>
+    <string name="warn_pocket_query_select">No Pocket query selected.</string>
+    <string name="warn_no_pocket_query_found">No Pocket query found online.</string>
     <string name="info_log_posted">c:geo successfully submitted the log.</string>
     <string name="info_log_saved">c:geo successfully saved the log.</string>
     <string name="info_log_cleared">Log was cleared.</string>
@@ -852,6 +854,9 @@
     <string name="search_address_started">Searching for places</string>
     <string name="search_address_result">Found places</string>
     <string name="search_own_caches">Search my caches</string>
+	<string name="search_pocket_title">Pocket Query</string>
+	<string name="search_pocket_loading">Loading a list of Pocket Queries</string>
+	<string name="search_pocket_select">Choose Pocket Query</string>
 
     <!-- trackable -->
     <string name="trackable">Trackable</string>
