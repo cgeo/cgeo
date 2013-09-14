@@ -5,7 +5,7 @@ cd `dirname "$0"`
 . ./funcs.sh
 
 finddiffs () {
-    echo "translations missing or not in the right place for language '$1':" > $1.missing
+    echo "translations missing for language '$1':" > $1.missing
     diff -y en.str $1.str > tmp.str
     echo "Only in values/strings.xml:" >> $1.missing
     grep "<\||" tmp.str | cut -d " " -f 1 | while read s; do
