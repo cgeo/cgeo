@@ -243,6 +243,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
     protected abstract void startDefaultNavigation2();
 
     protected final void addCacheDetails() {
+        assert cache != null;
         // cache type
         final String cacheType = cache.getType().getL10n();
         final String cacheSize = cache.getSize() != CacheSize.UNKNOWN ? " (" + cache.getSize().getL10n() + ")" : "";
@@ -256,6 +257,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
 
         details.addDifficulty(cache);
         details.addTerrain(cache);
+        details.addEventDate(cache);
 
         // rating
         if (cache.getRating() > 0) {

@@ -8,9 +8,11 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.Activity;
 import android.content.res.Resources;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -174,5 +176,15 @@ public final class CacheDetailsCreator {
             text = waypointDistanceView.getText().toString();
         }
         add(R.string.cache_distance, text);
+    }
+
+    public void addEventDate(@NonNull Geocache cache) {
+        if (cache.isEventCache() && cache.getHiddenDate() != null) {
+            final long time = cache.getHiddenDate().getTime();
+            if (time > 0) {
+                final String dateString = DateUtils.formatDateTime(CgeoApplication.getInstance().getBaseContext(), time, DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + Formatter.formatFullDate(time);
+                add(R.string.cache_event, dateString);
+            }
+        }
     }
 }
