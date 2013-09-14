@@ -10,6 +10,7 @@ public class HtmlUtilsTest extends TestCase {
         assertEquals(StringUtils.EMPTY, HtmlUtils.extractText(null));
         assertEquals(StringUtils.EMPTY, HtmlUtils.extractText(StringUtils.EMPTY));
         assertEquals(StringUtils.EMPTY, HtmlUtils.extractText("   "));
+        assertEquals("bold", HtmlUtils.extractText("<b>bold</b>"));
     }
 
 }
