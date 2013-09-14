@@ -307,22 +307,22 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     }
 
     protected String getAuthDialogWait() {
-        return res.getString(R.string.auth_dialog_waiting, getTitle());
+        return res.getString(R.string.auth_dialog_waiting, getAuthTitle());
     }
 
     protected String getAuthExplainShort() {
-        return res.getString(R.string.auth_explain_short, getTitle());
+        return res.getString(R.string.auth_explain_short, getAuthTitle());
     }
 
     protected String getAuthExplainLong() {
-        return res.getString(R.string.auth_explain_long, getTitle());
+        return res.getString(R.string.auth_explain_long, getAuthTitle());
     }
 
     protected String getAuthAuthorize() {
-        return res.getString(R.string.auth_authorize, getTitle());
+        return res.getString(R.string.auth_authorize, getAuthTitle());
     }
 
     protected String getAuthFinish() {
-        return res.getString(R.string.auth_finish, getTitle());
+        return res.getString(R.string.auth_finish, getAuthTitle());
     }
 }
