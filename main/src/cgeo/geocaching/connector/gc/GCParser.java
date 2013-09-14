@@ -34,8 +34,8 @@ import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
-
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.ListUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -1660,7 +1660,7 @@ public abstract class GCParser {
 
     public static List<LogType> parseTypes(String page) {
         if (StringUtils.isEmpty(page)) {
-            return null;
+            return ListUtils.EMPTY_LIST;
         }
 
         final List<LogType> types = new ArrayList<LogType>();
