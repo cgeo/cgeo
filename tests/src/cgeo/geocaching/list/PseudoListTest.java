@@ -1,14 +1,14 @@
 package cgeo.geocaching.list;
 
-import org.apache.commons.lang3.StringUtils;
-
 import junit.framework.TestCase;
 
 public class PseudoListTest extends TestCase {
 
     public static void testGetTitleAndCount() throws Exception {
         final String title = PseudoList.ALL_LIST.title;
-        assertTrue("pseudo lists shall not have a number shown in their title", StringUtils.isAlpha(title.substring(1, title.length() - 1)));
+        for (int i = 0; i < title.length(); i++) {
+            assertFalse("pseudo lists shall not have a number shown in their title", Character.isDigit(title.charAt(i)));
+        }
     }
 
     public static void testIsConcrete() throws Exception {
