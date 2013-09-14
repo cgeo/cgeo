@@ -149,7 +149,6 @@
     <string name="err_watchlist_still_managing">Még folyik a figyelőlista kezelése.</string>
     <string name="err_watchlist_failed">A figyelőlita megváltoztatása nem sikerült.</string>
     <string name="err_application_no">A c:geo nem talál megfelelő alkalmazást.</string>
-    <string name="err_auth_initialize">Sajnáljuk, a c:geo nem tudta elindítani az engedélyezési eljárást.</string>
     <string name="err_auth_process">Az engedélyezési eljárás sikertelen.</string>
     <string name="err_cannot_log_visit">A c:geo-nak nincs elég információja a láda logolásához. Kérlek logold a ládát a teljes láda leírásnál.</string>
     <string name="err_download_fail">Sajnáljuk, a c:geo nem tudja letölteni a ládákat, mert </string>

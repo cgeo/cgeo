@@ -150,7 +150,6 @@
   <string name="err_watchlist_still_managing">Ainda a gerir a sua watchlist.</string>
   <string name="err_watchlist_failed">A gestão da sua watchlist falhou.</string>
   <string name="err_application_no">O c:geo não encontra a aplicação correcta.</string>
-  <string name="err_auth_initialize">O c:geo falhou a iniciar o processo de autorização.</string>
   <string name="err_auth_process">Processo de autorização falhou.</string>
   <string name="err_cannot_log_visit">O c:geo não tem informação suficiente para registar a visita. Por favor, faça-o a partir dos detalhes completos da cache.</string>
   <string name="err_download_fail">O c:geo falhou o download das caches porque </string>
@@ -293,12 +292,13 @@
   <string name="caches_clear_offlinelogs_progress">A limpar registos offline</string>
   <string name="list_menu">Listas</string>
   <string name="list_menu_create">Criar nova lista</string>
+  <string name="list_menu_all_lists">Todas as caches</string>
   <string name="list_menu_drop">Apagar lista actual</string>
   <string name="list_menu_change">Mudar de lista</string>
   <string name="list_menu_rename">Mudar o nome da lista corrente.</string>
   <string name="list_title">Escolha uma lista</string>
   <string name="list_inbox">Arquivadas</string>
-  <string name="list_all_lists">caches todas</string>
+  <string name="list_all_lists">Todas as caches</string>
   <string name="list_dialog_create_title">Nova lista</string>
   <string name="list_dialog_create">Criar</string>
   <string name="list_dialog_cancel">Cancelar</string>
@@ -426,10 +426,12 @@
   <string name="init_backup_last">Disponível backup de</string>
   <string name="init_backup_last_no">Não existe nenhum ficheiro de backup.</string>
   <string name="settings_info_offline_maps_title">Informações sobre Offline Maps</string>
-  <string name="settings_info_offline_maps">c: geo suporta mapas para uso offline. Pode baixar mapas de Mapsforge ou até mesmo criar seus próprios mapas a partir de dados OSM.</string>
+  <string name="settings_info_offline_maps">c:geo supports maps for offline use. You can download maps from Mapsforge or even create your own maps from OSM data. You need to select the offline map directory first to to get offline map support.</string>
   <string name="settings_info_themes_title">Informações sobre Map Themes</string>
   <string name="settings_info_themes">c: geo suporta temas customizados para os mapas off-line. Estes podem ser usados ​​para alterar o estilo de cores do mapa (por exemplo, ter um mapa para visão nocturna) ou para realçar certos objetos, como ciclovias ou linhas de altura dentro do mapa.</string>
   <string name="init_mapsource_select">Seleccione a fonte de mapa</string>
+  <string name="settings_title_scale_map_text">Scale Map Text</string>
+  <string name="settings_summary_scale_map_text">Scale text labels on offline map according to device dpi</string>
   <string name="init_map_directory_description">Directório com os mapas offline</string>
   <string name="init_gpx_exportdir">Directório para exportar GPX</string>
   <string name="init_gpx_importdir">Directório para importar GPX</string>
@@ -462,6 +464,9 @@
   <string name="init_use_native_ua">Identificar como se fosse o browser do Android. Resolve os problemas de login em alguns provedores de rede.</string>
   <string name="init_summary_use_native_ua">Identificar como se fosse o browser do Android. Resolve os problemas de login em alguns provedores de rede.</string>
   <string name="init_rendertheme_folder">Directório de Temas de Mapas</string>
+  <string name="settings_open_website">Abrir o website</string>
+  <string name="settings_settings">Definições</string>
+  <string name="settings_information">Informações</string>
   <string name="map_source_google_map">Google: Mapa</string>
   <string name="map_source_google_satellite">Google: Satélite</string>
   <string name="map_source_osm_mapnik">OSM: Mapnik</string>
@@ -482,6 +487,10 @@
   <string name="auth_start">Iniciar autorização</string>
   <string name="auth_again">Iniciar de novo</string>
   <string name="auth_finish">Fim</string>
+  <string name="auth_dialog_waiting">Esperando por %s…</string>
+  <string name="auth_explain_short">O processo a seguir permitirá que <b>c:geo</b> acesse o %s.</string>
+  <string name="auth_explain_long">Pressing the \"authorize c:geo\" button will start the process. This process will open up a web browser with a %s page. Log in on this page and allow <b>c:geo</b> to access your account. That\'s all.</string>
+  <string name="auth_dialog_completed_twitter">O c:geo está agora autorizado a publicar no Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">Opencaching.pl</string>
   <string name="auth_dialog_completed_oc">c:geo está agora autorizado a interagir com %s.</string>
@@ -780,6 +789,7 @@
   <string name="destination_set">Definir destino</string>
   <string name="navigation_direct_navigation">Navegação directa</string>
   <string name="navigation_target">Destino</string>
+  <string name="err_nav_no_coordinates">Não pode iniciar a navegação sem coordenadas</string>
   <string name="license">Licença</string>
   <string name="license_show">Mostrar licença</string>
   <string name="license_dismiss">Dispensar</string>
@@ -1011,7 +1021,7 @@
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
   <string name="nutshellmanual">Manual: <a href="">o essencial do c:geo</a></string>
   <string name="market">Android: <a href="">c:geo no Google Play</a></string>
-  <string name="about_twitter">O <b>c:geo</b> deve publicar no Twitter de cada vez que uma cache for registada?</string>
+  <string name="about_twitter">O <b>c:geo</b> deve publicar no Twitter de cada vez que uma cache foi registrada?</string>
   <string name="faq">FAQ: <a href="">faq.cgeo.org</a></string>
   <string name="status_new_release" tools:ignore="UnusedResources">Nova versão disponível.\nClique para instalar.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Nova \'nightly build\' disponível.\nClique para instalar.</string>

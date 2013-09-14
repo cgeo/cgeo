@@ -150,7 +150,6 @@
   <string name="err_watchlist_still_managing">Liste de suivi toujours en traitement.</string>
   <string name="err_watchlist_failed">Échec lors du changement de votre liste de suivi.</string>
   <string name="err_application_no">c:geo ne trouve pas d\'application conforme.</string>
-  <string name="err_auth_initialize">c:geo a échoué dans la demande d\'autorisation.</string>
   <string name="err_auth_process">Échec de la demande d\'autorisation.</string>
   <string name="err_cannot_log_visit">c:geo n\'a pas assez d\'information pour logger votre visite. Faites le depuis le détail de la cache, s\'il vous plait!</string>
   <string name="err_download_fail">c:geo n\'a pas réussi à télécharger les caches car </string>
