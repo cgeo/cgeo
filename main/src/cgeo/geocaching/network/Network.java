@@ -185,7 +185,7 @@ public abstract class Network {
                 return null;
             }
         }
-        return doRepeatedRequests(request);
+        return doLogRequest(request);
     }
 
     /**
@@ -216,7 +216,7 @@ public abstract class Network {
         request.setEntity(entity);
 
         addHeaders(request, null, null);
-        return doRepeatedRequests(request);
+        return doLogRequest(request);
     }
 
     /**
@@ -255,7 +255,7 @@ public abstract class Network {
 
         addHeaders(request, headers, cacheFile);
 
-        return doRepeatedRequests(request);
+        return doLogRequest(request);
     }
 
     /**
@@ -279,7 +279,7 @@ public abstract class Network {
     }
 
     /**
-     * Retry a request for a few times.
+     * Perform an HTTP request and log it.
      *
      * @param request
      *            the request to try
@@ -287,7 +287,7 @@ public abstract class Network {
      *            the response, or null if there has been a failure
      */
     @Nullable
-    private static HttpResponse doRepeatedRequests(final HttpRequestBase request) {
+    private static HttpResponse doLogRequest(final HttpRequestBase request) {
         final String reqLogStr = request.getMethod() + " " + Network.hidePassword(request.getURI().toString());
         Log.d(reqLogStr);
 
@@ -302,7 +302,7 @@ public abstract class Network {
                 Log.w(status + " [" + response.getStatusLine().getReasonPhrase() + "]" + Network.formatTimeSpan(before) + reqLogStr);
             }
             return response;
-        } catch (IOException e) {
+        } catch (final IOException e) {
             final String timeSpan = Network.formatTimeSpan(before);
             Log.w("Failure" + timeSpan + reqLogStr + " (" + e.toString() + ")");
         }
