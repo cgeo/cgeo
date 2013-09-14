@@ -21,6 +21,7 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.GPXParser;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CancellableHandler;

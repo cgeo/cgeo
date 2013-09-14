@@ -3,12 +3,12 @@ package cgeo.geocaching.test;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.StoredList;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.files.GPX10Parser;
 import cgeo.geocaching.files.ParserException;
+import cgeo.geocaching.list.StoredList;
 
 import android.content.res.Resources;
 import android.test.InstrumentationTestCase;

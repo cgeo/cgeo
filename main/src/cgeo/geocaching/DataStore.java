@@ -13,6 +13,8 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.list.PseudoList;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
@@ -2019,7 +2021,7 @@ public class DataStore {
                 reasonIndex = 1;
             }
             String listKey;
-            if (list == StoredList.ALL_LIST_ID) {
+            if (list == PseudoList.ALL_LIST_ID) {
                 sql.append(" and reason > 0");
                 listKey = "all_list";
             } else {
@@ -2033,7 +2035,7 @@ public class DataStore {
             if (cacheType != CacheType.ALL) {
                 compiledStmnt.bindString(1, cacheType.id);
             }
-            if (list != StoredList.ALL_LIST_ID) {
+            if (list != PseudoList.ALL_LIST_ID) {
                 compiledStmnt.bindLong(reasonIndex, list);
             }
             return (int) compiledStmnt.simpleQueryForLong();
@@ -2076,7 +2078,7 @@ public class DataStore {
         final StringBuilder selection = new StringBuilder();
 
         selection.append("reason ");
-        selection.append(listId != StoredList.ALL_LIST_ID ? "=" + Math.max(listId, 1) : ">= " + StoredList.STANDARD_LIST_ID);
+        selection.append(listId != PseudoList.ALL_LIST_ID ? "=" + Math.max(listId, 1) : ">= " + StoredList.STANDARD_LIST_ID);
         selection.append(" and detailed = 1 ");
 
         String[] selectionArgs = null;
@@ -2537,8 +2539,8 @@ public class DataStore {
         }
 
         Resources res = CgeoApplication.getInstance().getResources();
-        if (id == StoredList.ALL_LIST_ID) {
-            return new StoredList(StoredList.ALL_LIST_ID, res.getString(R.string.list_all_lists), getAllCachesCount());
+        if (id == PseudoList.ALL_LIST_ID) {
+            return new StoredList(PseudoList.ALL_LIST_ID, res.getString(R.string.list_all_lists), getAllCachesCount());
         }
 
         // fall back to standard list in case of invalid list id
@@ -2653,7 +2655,7 @@ public class DataStore {
     }
 
     public static void moveToList(final List<Geocache> caches, final int listId) {
-        if (listId == StoredList.ALL_LIST_ID) {
+        if (listId == PseudoList.ALL_LIST_ID) {
             return;
         }
         if (caches.isEmpty()) {

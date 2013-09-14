@@ -4,6 +4,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.files.AbstractFileListActivity;
 import cgeo.geocaching.files.GPXImporter;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.GPXListAdapter;
 

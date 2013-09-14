@@ -8,6 +8,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.list.StoredList;
 
 import org.apache.commons.lang3.StringUtils;
 

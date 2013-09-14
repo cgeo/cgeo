@@ -2,7 +2,6 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.StoredList;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.Login;
@@ -10,6 +9,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.google.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;

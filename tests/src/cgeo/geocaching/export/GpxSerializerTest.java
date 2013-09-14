@@ -1,9 +1,9 @@
 package cgeo.geocaching.export;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.StoredList;
 import cgeo.geocaching.files.GPX10Parser;
 import cgeo.geocaching.files.ParserException;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 

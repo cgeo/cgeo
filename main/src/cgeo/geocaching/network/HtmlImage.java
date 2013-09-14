@@ -2,10 +2,10 @@ package cgeo.geocaching.network;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.StoredList;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.files.LocalStorage;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.IOUtils;
 import cgeo.geocaching.utils.ImageUtils;

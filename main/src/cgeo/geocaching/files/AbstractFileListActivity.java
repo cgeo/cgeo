@@ -2,8 +2,8 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
-import cgeo.geocaching.StoredList;
 import cgeo.geocaching.activity.AbstractListActivity;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 

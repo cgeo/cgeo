@@ -1,9 +1,9 @@
 package cgeo.geocaching.connector.ox;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.StoredList;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.CryptUtils;

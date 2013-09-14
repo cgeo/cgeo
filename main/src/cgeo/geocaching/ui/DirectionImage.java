@@ -1,6 +1,6 @@
 package cgeo.geocaching.ui;
 
-import cgeo.geocaching.StoredList;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.network.HtmlImage;
 
 import org.apache.commons.lang3.StringUtils;

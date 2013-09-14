@@ -16,6 +16,7 @@ import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.filter.FilterUserInterface;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.loaders.AbstractSearchLoader;
 import cgeo.geocaching.loaders.AbstractSearchLoader.CacheListLoaderType;
 import cgeo.geocaching.loaders.AddressGeocacheListLoader;
@@ -47,6 +48,7 @@ import ch.boye.httpclientandroidlib.HttpResponse;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -1453,6 +1455,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         new StoredList.UserInterface(this).promptForListSelection(R.string.list_title, getListSwitchingRunnable());
     }
 
+    @NonNull
     private RunnableWithArgument<Integer> getListSwitchingRunnable() {
         return new RunnableWithArgument<Integer>() {
 

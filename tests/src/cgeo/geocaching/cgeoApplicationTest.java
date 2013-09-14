@@ -12,6 +12,7 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;

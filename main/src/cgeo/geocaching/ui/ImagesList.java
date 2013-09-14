@@ -2,8 +2,8 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.Image;
 import cgeo.geocaching.R;
-import cgeo.geocaching.StoredList;
 import cgeo.geocaching.files.LocalStorage;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.IOUtils;
 import cgeo.geocaching.utils.Log;

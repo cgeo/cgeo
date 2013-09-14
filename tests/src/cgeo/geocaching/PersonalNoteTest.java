@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.list.StoredList;
+
 import junit.framework.TestCase;
 
 public class PersonalNoteTest extends TestCase {

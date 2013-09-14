@@ -1,4 +1,7 @@
-package cgeo.geocaching;
+package cgeo.geocaching.list;
+
+import cgeo.geocaching.DataStore;
+import cgeo.geocaching.list.StoredList;
 
 import junit.framework.TestCase;
 

@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.list.StoredList;
 
 import java.util.ArrayList;
 import java.util.Date;
