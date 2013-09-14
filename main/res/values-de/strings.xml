@@ -293,7 +293,6 @@
   <string name="caches_clear_offlinelogs_progress">Lösche Offline-Logs</string>
   <string name="list_menu">Liste</string>
   <string name="list_menu_create">Neue Liste</string>
-  <string name="list_menu_all_lists">Alle</string>
   <string name="list_menu_drop">Aktuelle Liste löschen</string>
   <string name="list_menu_change">Andere Liste anzeigen</string>
   <string name="list_menu_rename">Aktuelle Liste umbenennen</string>

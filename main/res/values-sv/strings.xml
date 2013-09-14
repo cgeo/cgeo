@@ -333,7 +333,6 @@
     <!-- caches lists -->
     <string name="list_menu">Listor</string>
     <string name="list_menu_create">Skapa en ny lista</string>
-    <string name="list_menu_all_lists">Alla cacher</string>
     <string name="list_menu_drop">Ta bort den här listan</string>
     <string name="list_menu_change">Byt lista</string>
     <string name="list_menu_rename">Byt namn på den här listan</string>

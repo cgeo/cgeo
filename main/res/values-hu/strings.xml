@@ -290,7 +290,6 @@
     <!-- caches lists -->
     <string name="list_menu">Lista</string>
     <string name="list_menu_create">Új lista létrehozása</string>
-    <string name="list_menu_all_lists">Az összes láda</string>
     <string name="list_menu_drop">Jelenlegi lista elvetése</string>
     <string name="list_menu_change">Lista megváltoztatása</string>
     <string name="list_menu_rename">Az aktuális lista átnevezése</string>

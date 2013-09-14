@@ -330,7 +330,6 @@
     <!-- caches lists -->
     <string name="list_menu">Lista</string>
     <string name="list_menu_create">Crea nuova lista</string>
-    <string name="list_menu_all_lists">Tutte i cache</string>
     <string name="list_menu_drop">Elimina la lista corrente</string>
     <string name="list_menu_change">Cambia lista</string>
     <string name="list_menu_rename">Rinomina la lista corrente</string>

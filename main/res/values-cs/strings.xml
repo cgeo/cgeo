@@ -321,7 +321,6 @@
     <!-- caches lists -->
     <string name="list_menu">Seznam</string>
     <string name="list_menu_create">Vytvořit nový seznam</string>
-    <string name="list_menu_all_lists">Všechny keše</string>
     <string name="list_menu_drop">Smazat aktuální seznam</string>
     <string name="list_menu_change">Změnit seznam</string>
     <string name="list_menu_rename">Přejmenovat aktuální seznam</string>

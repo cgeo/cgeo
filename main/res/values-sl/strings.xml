@@ -335,7 +335,6 @@
     <!-- caches lists -->
     <string name="list_menu">Seznam</string>
     <string name="list_menu_create">Ustvari nov seznam</string>
-    <string name="list_menu_all_lists">Vsi zakladi</string>
     <string name="list_menu_drop">Izbriši trenutni seznam</string>
     <string name="list_menu_change">Spremeni seznam</string>
     <string name="list_menu_rename">Preimenuj trenutni seznam</string>
