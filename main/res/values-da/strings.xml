@@ -81,6 +81,7 @@
     <string name="err_detail_no_spoiler">c:geo fandt ingen spoilerbilleder til denne cache.</string>
     <string name="err_detail_no_map_static">c:geo fandt ingen statiske kort til denne cache.</string>
     <string name="err_application_no">c:geo kan ikke finde en passende applikation.</string>
+    <string name="err_auth_initialize">Beklager, c:geo kan ikke gennemføre godkendelsen.</string>
     <string name="err_auth_process">Godkendelse fejlede.</string>
     <string name="err_cannot_log_visit">c:geo har ikke nok informationer til at logge besøg. Log fra "Alle detaljer".</string>
     <string name="err_download_fail">Beklager, c:geo kan ikke hente cachen pga. </string>

@@ -154,6 +154,7 @@
     <string name="err_watchlist_still_managing">Bezig je watchlist te beheren.</string>
     <string name="err_watchlist_failed">Het veranderen van watchlist lukt niet.</string>
     <string name="err_application_no">c:geo Kan geen geschikte applicatie vinden.</string>
+    <string name="err_auth_initialize">Sorry, het is c:geo niet gelukt het autorisatie proces te initialiseren.</string>
     <string name="err_auth_process">Autorisatie proces mislukt.</string>
     <string name="err_cannot_log_visit">c:geo Heeft onvoldoende informatie om bezoek te loggen. Probeer het vanuit de volledige cache details.</string>
     <string name="err_download_fail">Sorry, c:geo heeft caches niet kunnen downloaden omdat </string>

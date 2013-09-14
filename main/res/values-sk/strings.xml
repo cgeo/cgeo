@@ -149,6 +149,7 @@
     <string name="err_watchlist_still_managing">Stále prebieha správa vášho zoznamu sledovaných.</string>
     <string name="err_watchlist_failed">Zlyhala zmena sledovaných.</string>
     <string name="err_application_no">Prepáčte, c:geo nemôže násjť žiadnu použiteľnú aplikáciu.</string>
+    <string name="err_auth_initialize">Prepáčte, c:geo nedokázalo zahájiť autorizáciu.</string>
     <string name="err_auth_process">Autorizácia zlyhala.</string>
     <string name="err_cannot_log_visit">c:geo nemá dostatok informácií pre zapísanie návštevy. Prosím urobte to z kompletného detailu skrýše.</string>
     <string name="err_download_fail">Prepáčte, c:geo nemôže načítať skrýšu, pretože</string>

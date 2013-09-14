@@ -162,6 +162,7 @@
     <string name="err_watchlist_still_managing">Stále probíhá zpracování tvého Watchlistu.</string>
     <string name="err_watchlist_failed">Změna tvého Watchlistu selhala.</string>
     <string name="err_application_no">c:geo nemůže najít žádnou vhodnou aplikaci.</string>
+    <string name="err_auth_initialize">c:geo nedokázalo zahájit autorizační proces.</string>
     <string name="err_auth_process">Autorizační proces selhal.</string>
     <string name="err_cannot_log_visit">c:geo nemůže zapsat log. Prosím, zaloguj svou návštěvu z obrazovky detailů keše.</string>
     <string name="err_download_fail">c:geo nedokázalo stáhnout keš.</string>

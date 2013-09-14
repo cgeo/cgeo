@@ -158,6 +158,7 @@
     <string name="err_watchlist_still_managing">Seguir gestionando tu lista de seguimiento.</string>
     <string name="err_watchlist_failed">Error al cambiar la lista de seguimiento.</string>
     <string name="err_application_no">c:geo no encuentra ninguna aplicación válida.</string>
+    <string name="err_auth_initialize">Lo siento, c:geo no ha podido iniciar el proceso de autorización.</string>
     <string name="err_auth_process">El proceso de autorización ha fallado.</string>
     <string name="err_cannot_log_visit">c:geo no tiene información suficiente para registrar la visita. Inténtalo de nuevo con más detalles sobre el escondite.</string>
     <string name="err_download_fail">Lo siento, c:geo no ha podido descargar escondites a causa de </string>

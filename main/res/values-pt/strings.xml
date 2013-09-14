@@ -150,6 +150,7 @@
   <string name="err_watchlist_still_managing">Ainda a gerir a sua watchlist.</string>
   <string name="err_watchlist_failed">A gestão da sua watchlist falhou.</string>
   <string name="err_application_no">O c:geo não encontra a aplicação correcta.</string>
+  <string name="err_auth_initialize">O c:geo falhou a iniciar o processo de autorização.</string>
   <string name="err_auth_process">Processo de autorização falhou.</string>
   <string name="err_cannot_log_visit">O c:geo não tem informação suficiente para registar a visita. Por favor, faça-o a partir dos detalhes completos da cache.</string>
   <string name="err_download_fail">O c:geo falhou o download das caches porque </string>

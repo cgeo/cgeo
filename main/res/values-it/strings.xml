@@ -172,6 +172,7 @@
     <string name="err_watchlist_still_managing">Sto ancora gestendo la tua watchlist.</string>
     <string name="err_watchlist_failed">La modifica alla tua watchlist è fallita.</string>
     <string name="err_application_no">c:geo non trova nessuna applicazione compatibile.</string>
+    <string name="err_auth_initialize">c:geo ha fallito l\'inizializzazione del processo di autorizzazione.</string>
     <string name="err_auth_process">Processo di autorizzazione fallito.</string>
     <string name="err_cannot_log_visit">c:geo non ha abbastanza informazioni per salvare il log. Per cortesia effettuarlo dalla pagina dei dettagli completi del cache.</string>
     <string name="err_download_fail">c:geo ha fallito il download dei cache perché </string>

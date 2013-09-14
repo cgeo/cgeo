@@ -100,6 +100,7 @@
     <string name="err_detail_no_spoiler">c:geo fant ingen bilder for denne cachen.</string>
     <string name="err_detail_no_map_static">c:geo fant ingen statiske kart for denne cachen.</string>
     <string name="err_application_no">c:geo klarte ikke å finne en passende applikasjon.</string>
+    <string name="err_auth_initialize">Beklager, c:geo klarte ikke å igangsette autoriserings-prosessen.</string>
     <string name="err_auth_process">Autoriserings-prosessen mislyktes.</string>
     <string name="err_cannot_log_visit">c:geo har ikke nok informasjon til å logge funn. Prøv å laste inn cachens detaljer først.</string>
     <string name="err_download_fail">Beklager. c:geo klarte ikke å laste ned cachene p.g.a.</string>

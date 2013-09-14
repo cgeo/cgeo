@@ -166,6 +166,7 @@
     <string name="err_watchlist_still_managing">Wciąż pracuję nad listą obserwowanych.</string>
     <string name="err_watchlist_failed">Zmiana listy obserwowanych zakończona niepowodzeniem.</string>
     <string name="err_application_no">c:geo nie znalazł żadnych odpowiednich programów.</string>
+    <string name="err_auth_initialize">c:geo nie może rozpocząć autoryzacji.</string>
     <string name="err_auth_process">Autoryzacja zakończona niepowodzeniem.</string>
     <string name="err_cannot_log_visit">c:geo nie może dodać wpisu wizyty. Proszę spróbuj przez szczegóły skrzynki.</string>
     <string name="err_download_fail">c:geo nie może załadować skrzynek.</string>
