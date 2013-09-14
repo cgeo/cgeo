@@ -8,7 +8,6 @@ import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.Header;
 import ch.boye.httpclientandroidlib.HttpResponse;
-
 import org.apache.commons.lang3.StringUtils;
 
 import android.os.Environment;
@@ -21,11 +20,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -204,7 +205,13 @@ public final class LocalStorage {
         if (header == null) {
             FileUtils.deleteIgnoringFailure(file);
         } else {
-            saveToFile(new ByteArrayInputStream(header.getValue().getBytes()), file);
+            try {
+                saveToFile(new ByteArrayInputStream(header.getValue().getBytes("UTF-8")), file);
+            } catch (final UnsupportedEncodingException e) {
+                // Do not try to display the header in the log message, as our default encoding is
+                // likely to be UTF-8 and it will fail as well.
+                Log.e("LocalStorage.saveHeader: unable to decode header", e);
+            }
         }
     }
 
@@ -224,7 +231,7 @@ public final class LocalStorage {
     public static String getSavedHeader(final File baseFile, final String name) {
         try {
             final File file = filenameForHeader(baseFile, name);
-            final FileReader f = new FileReader(file);
+            final Reader f = new InputStreamReader(new FileInputStream(file), "UTF-8");
             try {
                 // No header will be more than 256 bytes
                 final char[] value = new char[256];
@@ -410,10 +417,10 @@ public final class LocalStorage {
         storages.add(new File(extStorage));
         File file = new File("/system/etc/vold.fstab");
         if (file.canRead()) {
-            FileReader fr = null;
+            Reader fr = null;
             BufferedReader br = null;
             try {
-                fr = new FileReader(file);
+                fr = new InputStreamReader(new FileInputStream(file), "UTF-8");
                 br = new BufferedReader(fr);
                 String s = br.readLine();
                 while (s != null) {

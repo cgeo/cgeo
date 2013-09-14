@@ -1,5 +1,7 @@
 package cgeo.geocaching.utils;
 
+import org.eclipse.jdt.annotation.Nullable;
+
 import java.io.Closeable;
 import java.io.IOException;
 
@@ -9,7 +11,7 @@ final public class IOUtils {
         // utility class
     }
 
-    public static void closeQuietly(final Closeable closeable) {
+    public static void closeQuietly(@Nullable final Closeable closeable) {
         if (closeable != null) {
             try {
                 closeable.close();

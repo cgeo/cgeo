@@ -51,7 +51,7 @@ public abstract class FileParser {
     protected static StringBuilder readStream(InputStream is, CancellableHandler progressHandler) throws IOException {
         final StringBuilder buffer = new StringBuilder();
         ProgressInputStream progressInputStream = new ProgressInputStream(is);
-        final BufferedReader input = new BufferedReader(new InputStreamReader(progressInputStream));
+        final BufferedReader input = new BufferedReader(new InputStreamReader(progressInputStream, "UTF-8"));
 
         try {
             String line;
