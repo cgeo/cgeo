@@ -435,7 +435,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             @Override
             public void onClick(View v) {
-                selectList(v);
+                selectList();
             }
         });
 
@@ -735,7 +735,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 invalidateOptionsMenuCompatible();
                 return false;
             case MENU_SWITCH_LIST:
-                selectList(null);
+                selectList();
                 invalidateOptionsMenuCompatible();
                 return false;
             case MENU_FILTER:
@@ -1444,12 +1444,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
-    /**
-     * @param view
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void selectList(View view) {
-        if (type != CacheListType.OFFLINE) {
+    public void selectList() {
+        if (!type.canSwitch) {
             return;
         }
         new StoredList.UserInterface(this).promptForListSelection(R.string.list_title, getListSwitchingRunnable());
