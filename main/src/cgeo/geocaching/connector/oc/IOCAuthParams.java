@@ -28,7 +28,7 @@ public interface IOCAuthParams {
      * 
      * @return
      */
-    int getAuthTitelResId();
+    int getAuthTitleResId();
 
     /**
      * Preference key of the public token

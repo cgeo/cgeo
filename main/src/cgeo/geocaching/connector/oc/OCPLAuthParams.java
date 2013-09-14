@@ -20,7 +20,7 @@ public class OCPLAuthParams implements IOCAuthParams {
     }
 
     @Override
-    public int getAuthTitelResId() {
+    public int getAuthTitleResId() {
         return R.string.auth_ocpl;
     }
 

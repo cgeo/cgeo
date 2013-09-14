@@ -44,7 +44,7 @@ public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
 
     @Override
     protected String getAuthTitle() {
-        return res.getString(authParams.getAuthTitelResId());
+        return res.getString(authParams.getAuthTitleResId());
     }
 
     @Override

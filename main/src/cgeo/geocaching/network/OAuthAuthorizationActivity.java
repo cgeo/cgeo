@@ -115,8 +115,8 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
         setTitle(getAuthTitle());
 
-        auth_1.setText(getAboutAuth1());
-        auth_2.setText(getAboutAuth2());
+        auth_1.setText(getAuthExplainShort());
+        auth_2.setText(getAuthExplainLong());
 
         ImmutablePair<String, String> tempToken = getTempTokens();
         OAtoken = tempToken.left;
@@ -310,11 +310,11 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         return res.getString(R.string.auth_dialog_waiting, getTitle());
     }
 
-    protected String getAboutAuth1() {
+    protected String getAuthExplainShort() {
         return res.getString(R.string.auth_explain_short, getTitle());
     }
 
-    protected String getAboutAuth2() {
+    protected String getAuthExplainLong() {
         return res.getString(R.string.auth_explain_long, getTitle());
     }
 
