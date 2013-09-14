@@ -40,6 +40,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.NonNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -1654,6 +1655,7 @@ public abstract class GCParser {
         return logs;
     }
 
+    @NonNull
     public static List<LogType> parseTypes(String page) {
         if (StringUtils.isEmpty(page)) {
             return ListUtils.EMPTY_LIST;

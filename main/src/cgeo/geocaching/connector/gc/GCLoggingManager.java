@@ -17,6 +17,7 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -42,6 +43,7 @@ public class GCLoggingManager implements ILoggingManager, LoaderManager.LoaderCa
         this.cache = cache;
     }
 
+    @Nullable
     @Override
     public Loader<String> onCreateLoader(int arg0, Bundle arg1) {
         if (!Settings.isLogin()) { // allow offline logging
