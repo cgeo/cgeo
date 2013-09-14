@@ -44,27 +44,11 @@
                 android:textColor="?text_color"
                 android:textSize="14sp" />
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="7dip" >
+            <Button
+                android:id="@+id/start"
+                style="@style/button_full"
+                android:layout_margin="7dip" />
 
-                <Button
-                    android:id="@+id/start"
-                    style="@style/button_full" />
-
-                <EditText
-                    android:id="@+id/pin"
-                    style="@style/edittext_full"
-                    android:inputType="number"
-                    android:visibility="gone" />
-
-                <Button
-                    android:id="@+id/pin_button"
-                    style="@style/button_full"
-                    android:visibility="visible" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

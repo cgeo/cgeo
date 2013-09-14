@@ -13,6 +13,7 @@ import ch.boye.httpclientandroidlib.client.entity.UrlEncodedFormEntity;
 import ch.boye.httpclientandroidlib.util.EntityUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import android.app.ProgressDialog;
@@ -23,7 +24,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -34,21 +34,19 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     public static final int NOT_AUTHENTICATED = 0;
     public static final int AUTHENTICATED = 1;
 
-    private String host;
-    private String pathRequest;
-    private String pathAuthorize;
-    private String pathAccess;
-    private boolean https;
-    private String consumerKey;
-    private String consumerSecret;
-    @Nullable private String callback;
+    @NonNull final private String host;
+    @NonNull final private String pathRequest;
+    @NonNull final private String pathAuthorize;
+    @NonNull final private String pathAccess;
+    private final boolean https;
+    @NonNull final private String consumerKey;
+    @NonNull final private String consumerSecret;
+    @NonNull final private String callback;
     private String OAtoken = null;
     private String OAtokenSecret = null;
     private final Pattern paramsPattern1 = Pattern.compile("oauth_token=([a-zA-Z0-9\\-\\_.]+)");
     private final Pattern paramsPattern2 = Pattern.compile("oauth_token_secret=([a-zA-Z0-9\\-\\_.]+)");
     @InjectView(R.id.start) protected Button startButton;
-    @InjectView(R.id.pin) protected EditText pinEntry;
-    @InjectView(R.id.pin_button) protected Button pinEntryButton;
     @InjectView(R.id.auth_1) protected TextView auth_1;
     @InjectView(R.id.auth_2) protected TextView auth_2;
     private ProgressDialog requestTokenDialog = null;
@@ -66,12 +64,6 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
             if (msg.what == 1) {
                 startButton.setText(getAuthAgain());
-
-                if (isOOB()) {
-                    pinEntry.setVisibility(View.VISIBLE);
-                    pinEntryButton.setVisibility(View.VISIBLE);
-                    pinEntryButton.setOnClickListener(new ConfirmPINListener());
-                }
             } else {
                 showToast(getErrAuthInitialize());
                 startButton.setText(getAuthStart());
@@ -87,34 +79,26 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
                 changeTokensDialog.dismiss();
             }
 
-            pinEntryButton.setOnClickListener(new ConfirmPINListener());
-            pinEntryButton.setEnabled(true);
-
             if (msg.what == AUTHENTICATED) {
                 showToast(getAuthDialogCompleted());
-
-                pinEntryButton.setVisibility(View.GONE);
-
                 setResult(RESULT_OK);
                 finish();
             } else {
                 showToast(getErrAuthProcess());
-
-                pinEntry.setVisibility(View.GONE);
-                pinEntryButton.setVisibility(View.GONE);
                 startButton.setText(getAuthStart());
             }
         }
     };
 
-    public OAuthAuthorizationActivity(String host,
-            String pathRequest,
-            String pathAuthorize,
-            String pathAccess,
-            boolean https,
-            String consumerKey,
-            String consumerSecret,
-            @Nullable String callback) {
+    public OAuthAuthorizationActivity
+            (@NonNull String host,
+             @NonNull String pathRequest,
+             @NonNull String pathAuthorize,
+             @NonNull String pathAccess,
+             boolean https,
+             @NonNull String consumerKey,
+             @NonNull String consumerSecret,
+             @NonNull String callback) {
         this.host = host;
         this.pathRequest = pathRequest;
         this.pathAuthorize = pathAuthorize;
@@ -139,8 +123,6 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         OAtokenSecret = tempToken.right;
 
         startButton.setText(getAuthAuthorize());
-        pinEntryButton.setText(getAuthFinish());
-
         startButton.setEnabled(true);
         startButton.setOnClickListener(new StartListener());
 
@@ -150,12 +132,6 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         } else {
             // already have temporary tokens, continue from pin
             startButton.setText(getAuthAgain());
-            if (isOOB()) {
-                pinEntry.setHint(getAuthPinHint());
-                pinEntry.setVisibility(View.VISIBLE);
-                pinEntryButton.setVisibility(View.VISIBLE);
-                pinEntryButton.setOnClickListener(new ConfirmPINListener());
-            }
         }
     }
 
@@ -179,14 +155,10 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         }
     }
 
-    private boolean isOOB() {
-        return callback == null;
-    }
-
     private void requestToken() {
 
         final Parameters params = new Parameters();
-        params.put("oauth_callback", isOOB() ? "oob" : callback);
+        params.put("oauth_callback", callback);
         final String method = "GET";
         OAuth.signOAuth(host, pathRequest, method, https, params, null, null, consumerKey, consumerSecret);
         final String line = Network.getResponseData(Network.getRequest(getUrlPrefix() + host + pathRequest, params));
@@ -289,20 +261,6 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         }
     }
 
-    private class ConfirmPINListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(View arg0) {
-            final String verifier = pinEntry.getText().toString();
-            if (StringUtils.isEmpty(verifier)) {
-                helpDialog(getAuthDialogPinTitle(), getAuthDialogPinMessage());
-                return;
-            }
-
-            exchangeTokens(verifier);
-        }
-    }
-
     private void exchangeTokens(final String verifier) {
         if (changeTokensDialog == null) {
             changeTokensDialog = new ProgressDialog(this);
@@ -310,9 +268,6 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
             changeTokensDialog.setMessage(getAuthDialogWait());
         }
         changeTokensDialog.show();
-        pinEntryButton.setEnabled(false);
-        pinEntryButton.setOnTouchListener(null);
-        pinEntryButton.setOnClickListener(null);
 
         (new Thread() {
 
@@ -353,21 +308,6 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
     protected String getAuthDialogWait() {
         return res.getString(R.string.auth_dialog_waiting, getTitle());
-    }
-
-    protected String getAuthDialogPinTitle() {
-        assert false;
-        return null;
-    }
-
-    protected String getAuthDialogPinMessage() {
-        assert false;
-        return null;
-    }
-
-    protected String getAuthPinHint() {
-        assert false;
-        return null;
     }
 
     protected String getAboutAuth1() {
