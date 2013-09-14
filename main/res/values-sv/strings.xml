@@ -541,17 +541,7 @@
     <!-- auth opencaching -->
     <string name="auth_ocde">opencaching.de</string>
     <string name="auth_ocpl">opencaching.pl</string>
-    <string name="auth_authorize_oc">Tillåt c:geo</string>
-    <string name="auth_start_oc">Starta godkännande</string>
-    <string name="auth_again_oc">Starta igen</string>
-    <string name="auth_pin_hint_oc">PIN erhållen från %s</string>
-    <string name="auth_finish_oc">Slutför</string>
-    <string name="auth_dialog_wait_oc">Väntar på %s…</string>
-    <string name="auth_dialog_pin_title_oc">PIN kod</string>
-    <string name="auth_dialog_pin_message_oc">Vänlig ange PIN koden som du fått från %s. Den krävs för att slutföra godkännandet.</string>
     <string name="auth_dialog_completed_oc">c:geo är nu godkänd för att kommunicera med %s.</string>
-    <string name="about_auth_1_oc">Nedan tillåter du <b>c:geo</b> att kommunicera med %s.</string>
-    <string name="about_auth_2_oc">Klicka på \"Tillåt c:geo\" nedan för att koppla ihop <b>c:geo</b> med %s. Logga in på den sida som kommer att öppnas i din webbläsare. Tillåt sedan <b>c:geo</b> att komma åt till konto. Efter detta kommer %s att visa en numerisk PIN kod. Denna PIN kod måste sedan anges i <b>c:geo</b> och godkännas.</string>
 
     <!-- cache -->
     <plurals name="cache_counts">

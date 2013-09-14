@@ -46,6 +46,6 @@ public class OCPLAuthParams implements IOCAuthParams {
 
     @Override
     public String getCallbackUri() {
-        return null;
+        return "callback://www.cgeo.org/opencaching.pl/";
     }
 }

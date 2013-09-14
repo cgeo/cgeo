@@ -494,17 +494,7 @@
   <string name="auth_dialog_completed_twitter">c:geo est maintenant autorisé à poster sur Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
-  <string name="auth_authorize_oc">Autoriser c:geo</string>
-  <string name="auth_start_oc">Commencer l\'autorisation</string>
-  <string name="auth_again_oc">Recommencer</string>
-  <string name="auth_pin_hint_oc">Code donné par %s</string>
-  <string name="auth_finish_oc">Terminer</string>
-  <string name="auth_dialog_wait_oc">En attente de %s…</string>
-  <string name="auth_dialog_pin_title_oc">Code PIN</string>
-  <string name="auth_dialog_pin_message_oc">Veuillez saisir votre code PIN fourni par %s. Il est nécessaire pour finaliser l\'autorisation.</string>
   <string name="auth_dialog_completed_oc">c:geo est désormais autorisé à interagir avec %s.</string>
-  <string name="about_auth_1_oc">La procédure suivante permet à <b>c:geo</b> d\'accéder à %s - si vous acceptez.</string>
-  <string name="about_auth_2_oc">Cliquer sur le bouton \"début d\'autorisation\" pour démarrer. Une fenêtre de navigateur va s\'ouvrir pour vous connecter sur %s. Accepter pour que <b>c:geo</b> accède à votre compte. %s vous affichera alors un code PIN composé de chiffres. Merci de recopier ce code dans <b>c:geo</b> et de confirmer. C\'est tout.</string>
   <string name="cache_offline">Hors ligne</string>
   <string name="cache_offline_refresh">Recharger</string>
   <string name="cache_offline_drop">Effacer</string>

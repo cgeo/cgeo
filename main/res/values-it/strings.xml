@@ -486,17 +486,7 @@
 
     <!-- auth opencaching -->
     <string name="auth_ocde">opencaching.de</string>
-    <string name="auth_authorize_oc">Autorizza c:geo</string>
-    <string name="auth_start_oc">Start autorizzazione</string>
-    <string name="auth_again_oc">Start nuovamente</string>
-    <string name="auth_pin_hint_oc">PIN assegnato da %s</string>
-    <string name="auth_finish_oc">Fine</string>
-    <string name="auth_dialog_wait_oc">In attesa di %s…</string>
-    <string name="auth_dialog_pin_title_oc">PIN code</string>
-    <string name="auth_dialog_pin_message_oc">Prego riportare il PIN fornito dal sito %s. È necessario per completare l\'autorizzazione.</string>
     <string name="auth_dialog_completed_oc">c:geo è ora autorizzato ad accedere a %s.</string>
-    <string name="about_auth_1_oc">La procedura seguente consentirà a <b>c:geo</b></string>
-    <string name="about_auth_2_oc">Un click sul pulsante \"Autorizza c:geo\" inizierà la procedura. Verrà aperta la pagina %s nel browser. Effettua Login sulla pagina ed acconsenti a <b>c:geo</b></string>
 
     <!-- cache -->
     <plurals name="cache_counts">

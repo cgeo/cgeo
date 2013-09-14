@@ -523,17 +523,7 @@
 
     <!-- auth opencaching -->
     <string name="auth_ocde">opencaching.de</string>
-    <string name="auth_authorize_oc">c:geoを認証</string>
-    <string name="auth_start_oc">認証を開始</string>
-    <string name="auth_again_oc">再度認証を開始</string>
-    <string name="auth_pin_hint_oc">%sのPINコード</string>
-    <string name="auth_finish_oc">完了</string>
-    <string name="auth_dialog_wait_oc">%sからの返答を待っています…</string>
-    <string name="auth_dialog_pin_title_oc">PINコード</string>
-    <string name="auth_dialog_pin_message_oc">%sのサイトで表示されたPINコードを入力してください。認証を完了するために必要です。</string>
     <string name="auth_dialog_completed_oc">c:geoは%sと連携するための認証を受けました。</string>
-    <string name="about_auth_1_oc"><b>c:geo</b>が%sにアクセスする許可を得るには次のようにしてください。</string>
-    <string name="about_auth_2_oc">「認証を開始する」ボタンを押すとブラウザで%sのページが開きます。そのページにログインすれば<b>c:geo</b>があなたのアカウントにアクセルする許可が得られます。ログインに成功したら数字のPINコードが表示されるので、この下の入力欄にコピー&amp;ペーストして「完了」ボタンを押してください。</string>
 
     <!-- cache -->
     <plurals name="cache_counts">

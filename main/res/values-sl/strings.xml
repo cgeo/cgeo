@@ -540,17 +540,7 @@
     <!-- auth opencaching -->
     <string name="auth_ocde">opencaching.de</string>
     <string name="auth_ocpl">opencaching.pl</string>
-    <string name="auth_authorize_oc">Poveži c:geo</string>
-    <string name="auth_start_oc">Začni z avtorizacijo</string>
-    <string name="auth_again_oc">Ponovno začni</string>
-    <string name="auth_pin_hint_oc">PIN, ki ga dodeli %s</string>
-    <string name="auth_finish_oc">Končaj</string>
-    <string name="auth_dialog_wait_oc">Čakam na %s…</string>
-    <string name="auth_dialog_pin_title_oc">PIN koda</string>
-    <string name="auth_dialog_pin_message_oc">Vnesite PIN kodo, ki ste jo dobili na spletni strani %s.</string>
     <string name="auth_dialog_completed_oc">c:geo je sedaj povezan z %s.</string>
-    <string name="about_auth_1_oc">Sledeči postopek omogoča <b>c:geotu</b> povezavo z %s.</string>
-    <string name="about_auth_2_oc">Klik na gumb \"Poveži c:geo\" bo začel s postopkom avtorizacije. Med postopkom se bo odprl brskalnik s stranjo %s. V brskalniku se prijavite na to stran in dovolite aplikaciji <b>c:geo</b> da dostopa do vašega računa. Ko to potrdite, vam bo %s izpisal PIN kodo. To kodo prepišite v <b>c:geo</b> in potrdite.</string>
 
     <!-- cache -->
     <plurals name="cache_counts">
