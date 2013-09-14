@@ -94,7 +94,7 @@ public final class ImageUtils {
      *            Image to read
      * @param maxXY
      *            boundings
-     * @return String filename and path, NULL if something fails
+     * @return filename and path, <tt>null</tt> if something fails
      */
     public static String readScaleAndWriteImage(final String filePath, final int maxXY) {
         if (maxXY <= 0) {
@@ -117,12 +117,21 @@ public final class ImageUtils {
             return null;
         }
         final BitmapDrawable scaledImage = scaleBitmapTo(image, maxXY, maxXY);
-        final String uploadFilename = ImageUtils.getOutputImageFile().getPath();
+        final File tempImageFile = ImageUtils.getOutputImageFile();
+        if (tempImageFile == null) {
+            Log.e("ImageUtils.readScaleAndWriteImage: unable to write scaled image");
+            return null;
+        }
+        final String uploadFilename = tempImageFile.getPath();
         storeBitmap(scaledImage.getBitmap(), Bitmap.CompressFormat.JPEG, 75, uploadFilename);
         return uploadFilename;
     }
 
-    /** Create a File for saving an image or video */
+    /** Create a File for saving an image or video
+     *
+     * @return the temporary image file to use, or <tt>null</tt> if the media directory could
+     * not be created.
+     * */
     public static File getOutputImageFile() {
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
@@ -134,6 +143,7 @@ public final class ImageUtils {
         // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists()) {
             if (!FileUtils.mkdirs(mediaStorageDir)) {
+                Log.e("ImageUtils.getOutputImageFile: cannot create media storage directory");
                 return null;
             }
         }
