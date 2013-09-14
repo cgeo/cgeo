@@ -3,6 +3,9 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.compatibility.Compatibility;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
@@ -96,7 +99,8 @@ public final class ImageUtils {
      *            boundings
      * @return filename and path, <tt>null</tt> if something fails
      */
-    public static String readScaleAndWriteImage(final String filePath, final int maxXY) {
+    @Nullable
+    public static String readScaleAndWriteImage(@NonNull final String filePath, final int maxXY) {
         if (maxXY <= 0) {
             return filePath;
         }
@@ -132,6 +136,7 @@ public final class ImageUtils {
      * @return the temporary image file to use, or <tt>null</tt> if the media directory could
      * not be created.
      * */
+    @Nullable
     public static File getOutputImageFile() {
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
@@ -153,6 +158,7 @@ public final class ImageUtils {
         return new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
     }
 
+    @Nullable
     public static Uri getOutputImageFileUri() {
         final File file = getOutputImageFile();
         if (file == null) {
