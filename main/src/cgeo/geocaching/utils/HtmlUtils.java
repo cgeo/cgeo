@@ -3,6 +3,7 @@ package cgeo.geocaching.utils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
+import android.text.Html;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
 
@@ -56,7 +57,7 @@ public final class HtmlUtils {
             }
         }
 
-        // some line breaks are still in the text, source is unknown
-        return StringUtils.replace(result, "<br />", "\n").trim();
+        // now that images are gone, do a normal html to text conversion
+        return Html.fromHtml(result).toString().trim();
     }
 }
