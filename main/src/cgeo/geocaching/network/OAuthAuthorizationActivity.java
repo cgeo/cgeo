@@ -293,7 +293,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     }
 
     protected String getErrAuthInitialize() {
-        return getString(string.err_auth_initialize);
+        return getString(R.string.err_auth_initialize);
     }
 
     protected String getAuthStart() {
