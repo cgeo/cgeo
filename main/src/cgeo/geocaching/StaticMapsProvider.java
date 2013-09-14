@@ -11,8 +11,8 @@ import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
-
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -245,11 +245,8 @@ public final class StaticMapsProvider {
      * @param cache
      * @return <code>true</code> if at least one map file exists; <code>false</code> otherwise
      */
-    public static boolean hasStaticMap(final Geocache cache) {
-        if (cache == null) {
-            return false;
-        }
-        final String geocode = cache.getGeocode();
+    public static boolean hasStaticMap(@NonNull final Geocache cache) {
+       final String geocode = cache.getGeocode();
         if (StringUtils.isBlank(geocode)) {
             return false;
         }

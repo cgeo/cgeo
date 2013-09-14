@@ -16,6 +16,8 @@ import cgeo.geocaching.apps.cache.navi.GoogleNavigationApp.GoogleNavigationWalki
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.settings.Settings;
 
+import org.eclipse.jdt.annotation.Nullable;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -273,7 +275,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         return menuItem != null;
     }
 
-    private static void navigateCache(Activity activity, Geocache cache, App app) {
+    private static void navigateCache(Activity activity, Geocache cache, @Nullable App app) {
         if (app instanceof CacheNavigationApp) {
             final CacheNavigationApp cacheApp = (CacheNavigationApp) app;
             cacheApp.navigate(activity, cache);
@@ -286,7 +288,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         return menuItem != null;
     }
 
-    private static void navigateWaypoint(Activity activity, Waypoint waypoint, App app) {
+    private static void navigateWaypoint(Activity activity, Waypoint waypoint, @Nullable App app) {
         if (app instanceof WaypointNavigationApp) {
             final WaypointNavigationApp waypointApp = (WaypointNavigationApp) app;
             waypointApp.navigate(activity, waypoint);
@@ -300,6 +302,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         }
     }
 
+    @Nullable
     private static App getAppFromMenuItem(MenuItem item) {
         final int id = item.getItemId();
         for (final NavigationAppsEnum navApp : NavigationAppsEnum.values()) {
