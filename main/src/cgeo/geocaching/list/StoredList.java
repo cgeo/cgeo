@@ -89,12 +89,12 @@ public final class StoredList extends AbstractList {
             if (!onlyConcreteLists) {
                 lists.add(PseudoList.ALL_LIST);
             }
+            lists.add(PseudoList.NEW_LIST);
 
             final List<CharSequence> listsTitle = new ArrayList<CharSequence>();
             for (AbstractList list : lists) {
                 listsTitle.add(list.getTitleAndCount());
             }
-            listsTitle.add("<" + res.getString(R.string.list_menu_create) + ">");
 
             final CharSequence[] items = new CharSequence[listsTitle.size()];
 
@@ -103,7 +103,8 @@ public final class StoredList extends AbstractList {
             builder.setItems(listsTitle.toArray(items), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int itemId) {
-                    if (itemId >= lists.size()) {
+                    final AbstractList list = lists.get(itemId);
+                    if (list == PseudoList.NEW_LIST) {
                         // create new list on the fly
                         promptForListCreation(runAfterwards, newListName);
                     }
@@ -208,10 +209,15 @@ public final class StoredList extends AbstractList {
      * Return the given list, if it is a concrete list. Return the default list otherwise.
      */
     public static int getConcreteList(int listId) {
-        if (listId == PseudoList.ALL_LIST_ID || listId == TEMPORARY_LIST_ID) {
+        if (listId == PseudoList.ALL_LIST.id || listId == TEMPORARY_LIST_ID) {
             return STANDARD_LIST_ID;
         }
         return listId;
+    }
+
+    @Override
+    public boolean isConcrete() {
+        return true;
     }
 
 }

@@ -1,15 +1,28 @@
 package cgeo.geocaching.list;
 
-abstract class AbstractList {
+import org.eclipse.jdt.annotation.Nullable;
+
+import android.util.SparseArray;
+
+public abstract class AbstractList {
 
     public final int id;
     public final String title;
+    private static SparseArray<AbstractList> LISTS = new SparseArray<AbstractList>();
 
     public AbstractList(final int id, final String title) {
         this.id = id;
         this.title = title;
+        LISTS.put(id, this);
     }
 
     public abstract String getTitleAndCount();
+
+    public abstract boolean isConcrete();
+
+    @Nullable
+    public static AbstractList getListById(int listId) {
+        return LISTS.get(listId);
+    }
 
 }

@@ -5,16 +5,33 @@ import cgeo.geocaching.R;
 
 public class PseudoList extends AbstractList {
 
-    public static final int ALL_LIST_ID = 2;
+    private static final int ALL_LIST_ID = 2;
+    /**
+     * list entry to show all caches
+     */
     public static final PseudoList ALL_LIST = new PseudoList(ALL_LIST_ID, R.string.list_all_lists);
 
-    public PseudoList(int id, final int titleResourceId) {
+    private static final int NEW_LIST_ID = 3;
+    /**
+     * list entry to create a new list
+     */
+    public static final AbstractList NEW_LIST = new PseudoList(NEW_LIST_ID, R.string.list_menu_create);
+
+    /**
+     * private constructor to have all instances as constants in the class
+     */
+    private PseudoList(int id, final int titleResourceId) {
         super(id, CgeoApplication.getInstance().getResources().getString(titleResourceId));
     }
 
     @Override
     public String getTitleAndCount() {
         return "<" + title + ">";
+    }
+
+    @Override
+    public boolean isConcrete() {
+        return false;
     }
 
 }
