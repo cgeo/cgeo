@@ -342,7 +342,7 @@
   <string name="settings_gc_legal_note">En utilisant les services de geocaching.com, vous acceptez les conditions d\'utilisation de Groundspeak.</string>
   <string name="settings_info_facebook_login_title">Connexion Facebook</string>
   <string name="settings_info_facebook_login">Vous ne pouvez pas faire que c:geo se connecte à geocaching.com avec votre compte Facebook. Mais il existe une solution simple…</string>
-  <string name="init_oc">opencaching.de</string>
+  <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Activer</string>
   <string name="init_oc_de_description">Autoriser c:geo à utiliser opencaching.de pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
   <string name="init_register_oc_de">Autoriser c:geo</string>
@@ -426,7 +426,7 @@
   <string name="init_backup_last">Sauvegarde disponible depuis</string>
   <string name="init_backup_last_no">Il n\'y a pas de fichier avec une sauvegarde.</string>
   <string name="settings_info_offline_maps_title">Informations sur les cartes hors-ligne</string>
-  <string name="settings_info_offline_maps">c:geo prend en charge les cartes hors-ligne. Vous pouvez télécharger des cartes depuis Mapsforge ou même créer vos propres cartes à partir des données d\'OSM. Vous devez d\'abord sélectionner le répertoire des cartes en mode hors connexion pour pouvoir utiliser cette fonctionnalité.</string>
+  <string name="settings_info_offline_maps">c:geo prend en charge les cartes hors-ligne. Vous pouvez télécharger des cartes depuis Mapsforge ou même créer vos propres cartes à partir des données d\'OSM. Vous devez d\'abord sélectionner le répertoire des cartes en mode hors-ligne pour pouvoir utiliser cette fonctionnalité.</string>
   <string name="settings_info_themes_title">Informations sur les thèmes de cartes</string>
   <string name="settings_info_themes">c:geo prend en charge des thèmes personnalisés pour les cartes en mode hors-ligne. Ils peuvent être utilisés pour modifier le style de couleur de la carte (par exemple d\'avoir une vue de nuit) ou mettre en évidence certains objets comme les pistes cyclables ou les lignes de niveau.</string>
   <string name="init_mapsource_select">Choisir la source des cartes</string>
