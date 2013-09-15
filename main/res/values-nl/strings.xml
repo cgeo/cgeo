@@ -343,7 +343,7 @@
     <string name="init_login_popup_ok">Ingelogd.</string>
     <string name="init_login_popup_failed">Inloggen mislukt.</string>
     <string name="init_login_popup_failed_reason">Inloggen mislukt omdat </string>
-    <string name="init_twitter_authorize">c:geo Autoriseren</string>
+    <string name="settings_authorize">c:geo Autoriseren</string>
     <string name="init_signature">Handtekening</string>
     <string name="init_signature_help_text">Maak een handtekening om te gebruiken in logs.\nSpeciale teksten die gebruikt kunnen worden zijn: [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nDeze worden ingevuld op het moment dat de handtekening ingevoegd word.</string>
     <string name="init_signature_template_button">Voeg template toe</string>

@@ -335,7 +335,7 @@
     <string name="init_login_popup_ok">Prihlásenie úspešné</string>
     <string name="init_login_popup_failed">Prihlásenie neúspešné</string>
     <string name="init_login_popup_failed_reason">Prihlásenie neúspešné: </string>
-    <string name="init_twitter_authorize">Autorizovať c:geo</string>
+    <string name="settings_authorize">Autorizovať c:geo</string>
     <string name="init_signature">Podpis</string>
     <string name="init_signature_help_text">Zapíšte váš podpis, ktorý chcete použiť v texte záznamov.\nMôžete použiť špeciálne slová: [DATE] , [TIME], [DATETIME], [USER] a [NUMBER].\nTieto budú nahradené pri vložení podpisu.</string>
     <string name="init_signature_template_button">Vložiť šablónu</string>

@@ -345,13 +345,11 @@
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Aktivieren</string>
   <string name="init_oc_de_description">Autorisiere c:geo auf opencaching.de zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
-  <string name="init_register_oc_de">c:geo autorisieren</string>
-  <string name="init_reregister_oc_de">c:geo neu autorisieren</string>
+  <string name="settings_authorize">c:geo autorisieren</string>
+  <string name="settings_reauthorize">c:geo neu autorisieren</string>
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Aktiviere</string>
   <string name="init_oc_pl_description">Autorisiere c:geo auf opencaching.pl zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
-  <string name="init_register_oc_pl">c:geo autorisieren</string>
-  <string name="init_reregister_oc_pl">c:geo neu autorisieren</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivieren</string>
@@ -364,8 +362,6 @@
   <string name="init_login_popup_failed">Login fehlgeschlagen</string>
   <string name="init_login_popup_failed_reason">Login fehlgeschlagen:</string>
   <string name="init_login_popup_not_authorized">Nicht autorisiert</string>
-  <string name="init_twitter_authorize">c:geo autorisieren</string>
-  <string name="init_twitter_reauthorize">c:geo neu autorisieren</string>
   <string name="init_signature">Signatur</string>
   <string name="init_signature_help_text">Verwendete Signatur für Logtexte.\nErlaubte Platzhalter sind: [DATE], [TIME], [DATETIME], [USER] &amp; [NUMBER]. Diese werden beim Einfügen der Signatur durch die entsprechenden Werte ersetzt.</string>
   <string name="init_signature_template_button">Platzhalter einfügen</string>

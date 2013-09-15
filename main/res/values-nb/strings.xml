@@ -196,7 +196,7 @@
     <string name="init_login_popup_ok">Innlogging fullført.</string>
     <string name="init_login_popup_failed">Innlogging mislyktes.</string>
     <string name="init_login_popup_failed_reason">Innlogging mislyktes p.g.a.</string>
-    <string name="init_twitter_authorize">Autoriser c:geo</string>
+    <string name="settings_authorize">Autoriser c:geo</string>
     <string name="init_signature">Signatur</string>
     <string name="init_skin">Hvitt tema</string>
     <string name="init_summary_skin">Hvitt tema</string>

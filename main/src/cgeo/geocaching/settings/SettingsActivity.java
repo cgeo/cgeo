@@ -418,22 +418,22 @@ public class SettingsActivity extends PreferenceActivity {
     void setOCDEAuthTitle() {
         getPreference(R.string.pref_fakekey_ocde_authorization)
                 .setTitle(getString(Settings.hasOCAuthorization(R.string.pref_ocde_tokenpublic, R.string.pref_ocde_tokensecret)
-                        ? R.string.init_reregister_oc_de
-                        : R.string.init_register_oc_de));
+                        ? R.string.settings_reauthorize
+                        : R.string.settings_authorize));
     }
 
     void setOCPLAuthTitle() {
         getPreference(R.string.pref_fakekey_ocpl_authorization)
                 .setTitle(getString(Settings.hasOCAuthorization(R.string.pref_ocpl_tokenpublic, R.string.pref_ocpl_tokensecret)
-                        ? R.string.init_reregister_oc_pl
-                        : R.string.init_register_oc_pl));
+                        ? R.string.settings_reauthorize
+                        : R.string.settings_authorize));
     }
 
     void setTwitterAuthTitle() {
         getPreference(R.string.pref_fakekey_twitter_authorization)
                 .setTitle(getString(Settings.hasTwitterAuthorization()
-                        ? R.string.init_twitter_reauthorize
-                        : R.string.init_twitter_authorize));
+                        ? R.string.settings_reauthorize
+                        : R.string.settings_authorize));
     }
 
     public static void jumpToServicesPage(final Context fromActivity) {

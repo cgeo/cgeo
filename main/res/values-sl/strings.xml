@@ -394,13 +394,11 @@
     <string name="init_oc">Opencaching.de</string>
     <string name="settings_activate_oc">Aktiviraj</string>
     <string name="init_oc_de_description">Poveži c:geo z opencaching.de za iskanje zakladov in dostop in filter najdenih zakladov.</string>
-    <string name="init_register_oc_de">Poveži c:geo z opencaching.de</string>
-    <string name="init_reregister_oc_de">Ponovno poveži c:geo</string>
+    <string name="settings_authorize">Poveži c:geo</string>
+    <string name="settings_reauthorize">Ponovno poveži c:geo</string>
     <string name="init_oc_pl">Opencaching.pl</string>
     <string name="settings_activate_oc_pl">Aktiviraj</string>
     <string name="init_oc_pl_description">Poveži c:geo z opencaching.pl za iskanje zakladov in dostop in filter najdenih zakladov.</string>
-    <string name="init_register_oc_pl">Poveži c:geo z opencaching.pl</string>
-    <string name="init_reregister_oc_pl">Ponovno poveži c:geo</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="settings_activate_twitter">Aktiviraj</string>
@@ -413,8 +411,6 @@
     <string name="init_login_popup_failed">Prijava neuspešna</string>
     <string name="init_login_popup_failed_reason">Prijava neuspešna:</string>
     <string name="init_login_popup_not_authorized">Ni avtoriziran</string>
-    <string name="init_twitter_authorize">Poveži c:geo s Twitterjem</string>
-    <string name="init_twitter_reauthorize">Ponovno poveži c:geo s Twitterjem</string>
     <string name="init_signature">Podpis</string>
     <string name="init_signature_help_text">Vnesite podpis, ki bo uporabljen b baših zapisih obiskov.\nPosebni nizi, ki jih lahko uporabite so: [DATE] - datum, [TIME] - ura, [DATETIME] - datum in ura, [USER] - uporabniško ime in [NUMBER] - število najdb.\nTi nizi bodo zamenjani s pravimi podatki ob vpisu.</string>
     <string name="init_signature_template_button">Vnesi predlogo</string>

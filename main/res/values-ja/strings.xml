@@ -385,8 +385,8 @@
     <string name="init_oc">Opencaching.de</string>
     <string name="settings_activate_oc">有効化</string>
     <string name="init_oc_de_description">キャッシュを検索したり見つけたキャッシュにアクセス/フィルタリングしたりするためにc:geoにopencaching.deを認証させる。</string>
-    <string name="init_register_oc_de">c:geoを認証</string>
-    <string name="init_reregister_oc_de">再度c:geoを認証</string>
+    <string name="settings_authorize">c:geoを認証</string>
+    <string name="settings_reauthorize">再度c:geoを認証</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="settings_activate_twitter">有効化</string>
@@ -399,8 +399,6 @@
     <string name="init_login_popup_failed">ログイン失敗</string>
     <string name="init_login_popup_failed_reason">ログインに失敗しました。原因: </string>
     <string name="init_login_popup_not_authorized">認証できませんでした</string>
-    <string name="init_twitter_authorize">c:geoを認証</string>
-    <string name="init_twitter_reauthorize">再度c:geoを認証</string>
     <string name="init_signature">署名</string>
     <string name="init_signature_help_text">ログ本文で使う署名を入力してください。\n特別な文字として、[DATE]、[TIME]、[DATETIME]、[USER]や[NUMBER]があります。\nこれらは署名の挿入時に、日付、時間、日時、ユーザ名や見つけたキャッシュ数+1に変換されます。</string>
     <string name="init_signature_template_button">テンプレートを挿入</string>

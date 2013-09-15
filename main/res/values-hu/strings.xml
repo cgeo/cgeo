@@ -327,7 +327,7 @@
     <string name="init_login_popup_ok">Belépés ok.</string>
     <string name="init_login_popup_failed">Belépés sikertelen.</string>
     <string name="init_login_popup_failed_reason">Belépés sikertelen, mert </string>
-    <string name="init_twitter_authorize">Engedélyezés</string>
+    <string name="settings_authorize">Engedélyezés</string>
     <string name="init_signature">Aláírás</string>
     <string name="init_signature_help_text">Add meg az aláírásod amit a bejegyzés szövegében szeretnél használni.\nHasználható speciális címkék: [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nEzek az aláírás beillesztése után válnak láthatóvá.</string>
     <string name="init_signature_template_button">Sablon beillesztése</string>

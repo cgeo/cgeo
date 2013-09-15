@@ -345,13 +345,11 @@
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Activer</string>
   <string name="init_oc_de_description">Autoriser c:geo à utiliser opencaching.de pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
-  <string name="init_register_oc_de">Autoriser c:geo</string>
-  <string name="init_reregister_oc_de">Ré-autoriser c:geo</string>
+  <string name="settings_authorize">Autoriser c:geo</string>
+  <string name="settings_reauthorize">Ré-autoriser c:geo</string>
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Activer</string>
   <string name="init_oc_pl_description">Autoriser c:geo à utiliser opencaching.pl pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
-  <string name="init_register_oc_pl">Autoriser c:geo</string>
-  <string name="init_reregister_oc_pl">Ré-autoriser c:geo</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activer</string>
@@ -364,8 +362,6 @@
   <string name="init_login_popup_failed">Erreur de connexion</string>
   <string name="init_login_popup_failed_reason">Erreur de connexion: </string>
   <string name="init_login_popup_not_authorized">Non autorisé</string>
-  <string name="init_twitter_authorize">Autorisation de c:geo</string>
-  <string name="init_twitter_reauthorize">Ré-autoriser c:geo</string>
   <string name="init_signature">Signature</string>
   <string name="init_signature_help_text">Écrivez votre propre signature pour vos visites.\nLes codes spéciaux supportés sont : [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nAu moment de l\'insertion de la signature, ces codes seront remplacés par la valeur correspondante.</string>
   <string name="init_signature_template_button">Insérer un modèle</string>

@@ -380,7 +380,7 @@
     <string name="init_oc">Opencaching.de</string>  
     <string name="settings_activate_oc">Aktywuj</string>
     <string name="init_oc_de_description">Autoryzuj c:geo z opencaching.de aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
-    <string name="init_register_oc_de">Autoryzuj c:geo</string>    
+    <string name="settings_authorize">Autoryzuj c:geo</string>    
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="settings_activate_twitter">Aktywuj</string>
@@ -393,7 +393,6 @@
     <string name="init_login_popup_failed">Logowanie nie powiodło się</string>
     <string name="init_login_popup_failed_reason">Logowanie nie powiodło się, ponieważ </string>
     <string name="init_login_popup_not_authorized">Brak autoryzacji</string>
-    <string name="init_twitter_authorize">Autoryzacja c:geo</string>
     <string name="init_signature">Podpis</string>
     <string name="init_signature_help_text">Wprowadź Twój podpis, który będzie używany przy wpisie do dziennika.\nWyrażenia specjalne, które mogą być użyte to: [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nBędą one zastępowane w momencie wstawiania podpisu.</string>
     <string name="init_signature_template_button">Wstaw szablon</string>

@@ -359,7 +359,7 @@
     <!-- init -->
     <string name="init_oc">opencaching.de</string>
     <string name="init_oc_de_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.de</string>
-    <string name="init_register_oc_de">Autorizza c:geo</string>
+    <string name="settings_authorize">Autorizza c:geo</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="init_username">Utente</string>
@@ -370,7 +370,6 @@
     <string name="init_login_popup_ok">Login OK.</string>
     <string name="init_login_popup_failed">Login fallito.</string>
     <string name="init_login_popup_failed_reason">Login fallito perché </string>
-    <string name="init_twitter_authorize">Autorizza c:geo</string>
     <string name="init_signature">Firma</string>
     <string name="init_signature_help_text">Scrivi la tua firma da usare nei testi di log.\nStringhe speciali possono essere usate come: [DATE], [TIME], [DATETIME], [USER] e [NUMBER].\nSaranno espanse quando la firma viene inserita.</string>
     <string name="init_signature_template_button">Stringhe speciali</string>
