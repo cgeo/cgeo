@@ -97,6 +97,8 @@ public class HtmlImage implements Html.ImageGetter {
             final File file = LocalStorage.getStorageFile(pseudoGeocode, url, true, true);
             if (url.startsWith("data:image/")) {
                 if (url.contains(";base64,")) {
+                    // TODO: when we use SDK level 8 or above, we can use the streaming version of the base64
+                    // Android utilities.
                     byte[] decoded = Base64.decode(StringUtils.substringAfter(url, ";base64,"), Base64.DEFAULT);
                     OutputStream out = null;
                     try {
