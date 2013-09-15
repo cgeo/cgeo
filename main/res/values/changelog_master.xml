@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!-- changelog for the master branch -->
-  <string name="changelog_master" translatable="false"></string>
+  <string name="changelog_master" translatable="false">
+    <b>Next feature release</b>\n
+    <b>New Features:</b>\n
+    · Popup on map shows date of event caches\n
+    · \n
+    \n
+     <b>Bugfixes:</b>\n
+     · \n
+  </string>
 </resources>
