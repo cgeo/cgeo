@@ -25,6 +25,8 @@ public class CgeoTestsActivity extends Activity {
     private TextView logView;
     private LogcatAsyncTask logCatTask;
 
+    private BottomAwareScrollView scrollView;
+
     private class LogcatAsyncTask extends AsyncTask<Integer, String, Void> {
         // TestRunner and silence others
         private static final String CMD = "logcat -v brief TestRunner:I cgeo:I *:S";
@@ -44,8 +46,12 @@ public class CgeoTestsActivity extends Activity {
         @Override
         protected void onProgressUpdate(String... values) {
             final String line = values[0];
+            final boolean isAtBottom = scrollView.isAtBottom();
             if (!TextUtils.isEmpty(line)) {
                 logView.append(Html.fromHtml("<font color=\"" + color(line) + "\">" + line + "</font><br/>"));
+                if (isAtBottom) {
+                    scrollView.scrollTo(0, logView.getBottom());
+                }
             }
         }
 
@@ -85,6 +91,7 @@ public class CgeoTestsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cgeo_tests_activity);
         logView = (TextView) findViewById(R.id.logOutput);
+        scrollView = (BottomAwareScrollView) findViewById(R.id.scrollView);
     }
 
     @Override

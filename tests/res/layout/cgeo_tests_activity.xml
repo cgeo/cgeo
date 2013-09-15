@@ -21,7 +21,7 @@
         android:text="@string/logcat"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <ScrollView
+    <cgeo.geocaching.test.BottomAwareScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:textSize="8sp"
             tools:ignore="SmallSp" />
-    </ScrollView>
+    </cgeo.geocaching.test.BottomAwareScrollView>
 
     <Button
         android:id="@+id/buttonRun"
