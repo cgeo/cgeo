@@ -24,6 +24,7 @@ import java.util.List;
 
 public final class StoredList extends AbstractList {
     public static final int TEMPORARY_LIST_ID = 0;
+    public static final StoredList TEMPORARY_LIST = new StoredList(TEMPORARY_LIST_ID, "<temporary>", 0);  // Never displayed
     public static final int STANDARD_LIST_ID = 1;
     private final int count; // this value is only valid as long as the list is not changed by other database operations
 
