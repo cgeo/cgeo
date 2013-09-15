@@ -5,9 +5,9 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.network.HtmlImage;
-import cgeo.geocaching.utils.IOUtils;
 import cgeo.geocaching.utils.Log;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;

@@ -3,11 +3,11 @@ package cgeo.geocaching.files;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.FileUtils;
-import cgeo.geocaching.utils.IOUtils;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.Header;
 import ch.boye.httpclientandroidlib.HttpResponse;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.os.Environment;

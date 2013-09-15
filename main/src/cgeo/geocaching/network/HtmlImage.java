@@ -7,11 +7,11 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.utils.FileUtils;
-import cgeo.geocaching.utils.IOUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.content.res.Resources;

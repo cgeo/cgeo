@@ -1,9 +1,9 @@
 package cgeo.geocaching.export;
 
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
-import cgeo.geocaching.DataStore;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.gc.Login;
 import cgeo.geocaching.enumerations.StatusCode;
@@ -13,9 +13,9 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.FileUtils;
-import cgeo.geocaching.utils.IOUtils;
 import cgeo.geocaching.utils.Log;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 

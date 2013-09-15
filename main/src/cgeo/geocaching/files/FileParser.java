@@ -2,7 +2,8 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.utils.CancellableHandler;
-import cgeo.geocaching.utils.IOUtils;
+
+import org.apache.commons.io.IOUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;

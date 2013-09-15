@@ -1,5 +1,6 @@
 package cgeo.geocaching.utils;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.CharEncoding;
 
 import android.os.Environment;
