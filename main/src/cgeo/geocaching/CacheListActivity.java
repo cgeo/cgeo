@@ -45,8 +45,8 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RunnableWithArgument;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
-
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -1219,21 +1219,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         @Override
         public void run() {
             removeGeoAndDir();
+            // First refresh caches that do not yet have static maps to get them a chance to get a copy
+            // before the limit expires, unless we do not want to store offline maps.
+            final List<Geocache> allCaches = Settings.isStoreOfflineMaps() ?
+                    ListUtils.union(ListUtils.selectRejected(caches, Geocache.hasStaticMap),
+                            ListUtils.select(caches, Geocache.hasStaticMap)) :
+                    caches;
 
-            final List<Geocache> cachesWithStaticMaps = new ArrayList<Geocache>(this.caches.size());
-            for (final Geocache cache : this.caches) {
-                if (Settings.isStoreOfflineMaps() && cache.hasStaticMap()) {
-                    cachesWithStaticMaps.add(cache);
-                    continue;
-                }
-                if (!refreshCache(cache)) {
-                    // in case of interruption avoid the second loop
-                    cachesWithStaticMaps.clear();
-                    break;
-                }
-            }
-
-            for (final Geocache cache : cachesWithStaticMaps) {
+            for (final Geocache cache : allCaches) {
                 if (!refreshCache(cache)) {
                     break;
                 }
