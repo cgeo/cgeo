@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="6dp"
+    android:layout_marginRight="6dp"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/headline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:lines="1"
+        android:singleLine="true"
+        android:text="@string/logcat"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/buttonRun"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/headline" >
+
+        <TextView
+            android:id="@+id/logOutput"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="8sp"
+            tools:ignore="SmallSp" />
+    </ScrollView>
+
+    <Button
+        android:id="@+id/buttonRun"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="false"
+        android:onClick="runTests"
+        android:text="@string/run_tests" />
+
+    <requestFocus
+        android:layout_alignTop="@+id/buttonRun"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp" />
+
+</RelativeLayout>

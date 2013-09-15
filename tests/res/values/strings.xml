@@ -2,5 +2,7 @@
 <resources>
 
     <string name="app_name">c:geo tests</string>
+    <string name="logcat">Logcat:</string>
+    <string name="run_tests">Run tests…</string>
 
 </resources>
