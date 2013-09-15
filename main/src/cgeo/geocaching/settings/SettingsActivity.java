@@ -407,6 +407,9 @@ public class SettingsActivity extends PreferenceActivity {
             case R.string.pref_fakekey_ocpl_authorization:
                 setOCPLAuthTitle();
                 break;
+            case R.string.pref_fakekey_twitter_authorization:
+                setTwitterAuthTitle();
+                break;
             default:
                 Log.e(String.format(Locale.ENGLISH, "Invalid key %d in SettingsActivity.setTitle()", prefKeyId));
         }

@@ -82,7 +82,7 @@
                         android:layout="@layout/text_preference"
                         android:text="@string/init_oc_de_description" />
 
-                    <cgeo.geocaching.settings.AuthorizeOcPreference
+                    <cgeo.geocaching.settings.OAuthPreference
                         android:dependency="@string/pref_connectorOCActive"
                         android:key="@string/pref_fakekey_ocde_authorization" />
                 </PreferenceCategory>
@@ -104,7 +104,7 @@
                         android:layout="@layout/text_preference"
                         android:text="@string/init_oc_pl_description" />
 
-                    <cgeo.geocaching.settings.AuthorizeOcPreference
+                    <cgeo.geocaching.settings.OAuthPreference
                         android:dependency="@string/pref_connectorOCPLActive"
                         android:key="@string/pref_fakekey_ocpl_authorization" />
                 </PreferenceCategory>
@@ -167,7 +167,7 @@
                     android:layout="@layout/text_preference"
                     android:text="@string/about_twitter" />
 
-                <cgeo.geocaching.settings.AuthorizeTwitterPreference
+                <cgeo.geocaching.settings.OAuthPreference
                     android:dependency="@string/pref_twitter"
                     android:key="@string/pref_fakekey_twitter_authorization" />
             </PreferenceScreen>

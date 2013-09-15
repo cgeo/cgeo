@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.oc.OCDEAuthorizationActivity;
 import cgeo.geocaching.connector.oc.OCPLAuthorizationActivity;
+import cgeo.geocaching.twitter.TwitterAuthorizationActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,49 +13,50 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class AuthorizeOcPreference extends Preference {
+public class OAuthPreference extends Preference {
 
     private static final int NO_KEY = -1;
 
-    private enum OCAuthorizations {
+    private enum OAuthActivityMapping {
         NONE(NO_KEY, null),
         OCDE(R.string.pref_fakekey_ocde_authorization, OCDEAuthorizationActivity.class),
-        OCPL(R.string.pref_fakekey_ocpl_authorization, OCPLAuthorizationActivity.class);
+        OCPL(R.string.pref_fakekey_ocpl_authorization, OCPLAuthorizationActivity.class),
+        TWITTER(R.string.pref_fakekey_twitter_authorization, TwitterAuthorizationActivity.class);
 
         public int prefKeyId;
         public Class<?> authActivity;
 
-        OCAuthorizations(int prefKeyId, Class<?> clazz) {
+        OAuthActivityMapping(int prefKeyId, Class<?> clazz) {
             this.prefKeyId = prefKeyId;
             this.authActivity = clazz;
         }
     }
 
-    private final OCAuthorizations ocAuth;
+    private final OAuthActivityMapping oAuthMapping;
 
-    private OCAuthorizations getAuthorization() {
+    private OAuthActivityMapping getAuthorization() {
         final String prefKey = getKey();
-        for (OCAuthorizations auth : OCAuthorizations.values()) {
+        for (OAuthActivityMapping auth : OAuthActivityMapping.values()) {
             if (auth.prefKeyId != NO_KEY && prefKey.equals(CgeoApplication.getInstance().getString(auth.prefKeyId))) {
                 return auth;
             }
         }
-        return OCAuthorizations.NONE;
+        return OAuthActivityMapping.NONE;
     }
 
-    public AuthorizeOcPreference(Context context) {
+    public OAuthPreference(Context context) {
         super(context);
-        this.ocAuth = getAuthorization();
+        this.oAuthMapping = getAuthorization();
     }
 
-    public AuthorizeOcPreference(Context context, AttributeSet attrs) {
+    public OAuthPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.ocAuth = getAuthorization();
+        this.oAuthMapping = getAuthorization();
     }
 
-    public AuthorizeOcPreference(Context context, AttributeSet attrs, int defStyle) {
+    public OAuthPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        this.ocAuth = getAuthorization();
+        this.oAuthMapping = getAuthorization();
     }
 
     @Override
@@ -64,17 +66,17 @@ public class AuthorizeOcPreference extends Preference {
         setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                if (ocAuth.authActivity != null) {
+                if (oAuthMapping.authActivity != null) {
                     Intent authIntent = new Intent(preference.getContext(),
-                            ocAuth.authActivity);
+                            oAuthMapping.authActivity);
                     activity.startActivityForResult(authIntent,
-                            ocAuth.prefKeyId);
+                            oAuthMapping.prefKeyId);
                 }
                 return false; // no shared preference has to be changed
             }
         });
 
-        activity.setOcAuthTitle(ocAuth.prefKeyId);
+        activity.setOcAuthTitle(oAuthMapping.prefKeyId);
         return super.onCreateView(parent);
     }
 }
