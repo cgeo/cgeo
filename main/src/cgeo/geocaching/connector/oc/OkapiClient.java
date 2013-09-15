@@ -316,11 +316,9 @@ final class OkapiClient {
             if (images != null) {
                 for (int i = 0; i < images.length(); i++) {
                     final JSONObject imageResponse = images.getJSONObject(i);
-                    if (imageResponse.getBoolean(CACHE_IMAGE_IS_SPOILER)) {
-                        final String title = imageResponse.getString(CACHE_IMAGE_CAPTION);
-                        final String url = absoluteUrl(imageResponse.getString(CACHE_IMAGE_URL), cache.getGeocode());
-                        cache.addSpoiler(new Image(url, title));
-                    }
+                    final String title = imageResponse.getString(CACHE_IMAGE_CAPTION);
+                    final String url = absoluteUrl(imageResponse.getString(CACHE_IMAGE_URL), cache.getGeocode());
+                    cache.addSpoiler(new Image(url, title));
                 }
             }
 
