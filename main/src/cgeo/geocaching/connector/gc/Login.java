@@ -13,10 +13,11 @@ import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
-
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.graphics.drawable.BitmapDrawable;
 
@@ -213,11 +214,12 @@ public abstract class Login {
      * @param page
      * @return <code>true</code> if user is logged in, <code>false</code> otherwise
      */
-    public static boolean getLoginStatus(final String page) {
+    public static boolean getLoginStatus(@Nullable final String page) {
         if (StringUtils.isBlank(page)) {
             Log.e("Login.checkLogin: No page given");
             return false;
         }
+        assert page != null;
 
         setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_ok));
 
@@ -475,10 +477,13 @@ public abstract class Login {
      * @param params
      * @return
      */
-    public static String getRequestLogged(final String uri, final Parameters params) {
-        final String data = Network.getResponseData(Network.getRequest(uri, params), canRemoveWhitespace(uri));
+    @Nullable
+    public static String getRequestLogged(@NonNull final String uri, @Nullable final Parameters params) {
+        final HttpResponse response = Network.getRequest(uri, params);
+        final String data = Network.getResponseData(response, canRemoveWhitespace(uri));
 
-        if (getLoginStatus(data)) {
+        // A page not found will not be found if the user logs in either
+        if (Network.isPageNotFound(response) || getLoginStatus(data)) {
             return data;
         }
 

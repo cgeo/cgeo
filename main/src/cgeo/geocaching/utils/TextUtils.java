@@ -3,6 +3,8 @@
  */
 package cgeo.geocaching.utils;
 
+import org.eclipse.jdt.annotation.Nullable;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,7 +36,7 @@ public final class TextUtils {
      *            Find the last occurring value
      * @return defaultValue or the n-th group if the pattern matches (trimmed if wanted)
      */
-    public static String getMatch(final String data, final Pattern p, final boolean trim, final int group, final String defaultValue, final boolean last) {
+    public static String getMatch(@Nullable final String data, final Pattern p, final boolean trim, final int group, final String defaultValue, final boolean last) {
         if (data != null) {
 
             String result = null;
@@ -87,7 +89,7 @@ public final class TextUtils {
      *            Value to return if the pattern is not found
      * @return defaultValue or the first group if the pattern matches (trimmed)
      */
-    public static String getMatch(final String data, final Pattern p, final String defaultValue) {
+    public static String getMatch(@Nullable final String data, final Pattern p, final String defaultValue) {
         return TextUtils.getMatch(data, p, true, 1, defaultValue, false);
     }
 

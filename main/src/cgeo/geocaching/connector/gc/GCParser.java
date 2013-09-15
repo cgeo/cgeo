@@ -40,6 +40,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -843,6 +844,7 @@ public abstract class GCParser {
      * @param recaptchaReceiver
      * @return
      */
+    @Nullable
     private static SearchResult searchByAny(final CacheType cacheType, final boolean my, final boolean showCaptcha, final Parameters params, RecaptchaReceiver recaptchaReceiver) {
         insertCacheType(params, cacheType);
 
@@ -854,6 +856,7 @@ public abstract class GCParser {
             Log.e("GCParser.searchByAny: No data from server");
             return null;
         }
+        assert page != null;
 
         final SearchResult searchResult = parseSearch(fullUri, page, showCaptcha, recaptchaReceiver);
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
@@ -940,6 +943,7 @@ public abstract class GCParser {
         return null;
     }
 
+    @Nullable
     public static Trackable searchTrackable(final String geocode, final String guid, final String id) {
         if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid) && StringUtils.isBlank(id)) {
             Log.w("GCParser.searchTrackable: No geocode nor guid nor id given");
@@ -964,6 +968,7 @@ public abstract class GCParser {
             Log.e("GCParser.searchTrackable: No data from server");
             return trackable;
         }
+        assert page != null;
 
         trackable = parseTrackable(page, geocode);
         if (trackable == null) {
@@ -1132,6 +1137,7 @@ public abstract class GCParser {
             Log.e("GCParser.uploadLogImage: No data from server");
             return new ImmutablePair<StatusCode, String>(StatusCode.UNKNOWN_ERROR, null);
         }
+        assert page != null;
 
         final String[] viewstates = Login.getViewstates(page);
 
@@ -1289,7 +1295,8 @@ public abstract class GCParser {
         return !guidOnPage; // on watch list (=error) / not on watch list
     }
 
-    static String requestHtmlPage(final String geocode, final String guid, final String log, final String numlogs) {
+    @Nullable
+    static String requestHtmlPage(@Nullable final String geocode, @Nullable final String guid, final String log, final String numlogs) {
         final Parameters params = new Parameters("decrypt", "y");
         if (StringUtils.isNotBlank(geocode)) {
             params.put("wp", geocode);

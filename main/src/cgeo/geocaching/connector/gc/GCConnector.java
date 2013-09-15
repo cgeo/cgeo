@@ -152,6 +152,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
             search.setError(StatusCode.COMMUNICATION_ERROR);
             return search;
         }
+        assert page != null;
 
         final SearchResult searchResult = GCParser.parseCache(page, handler);
 

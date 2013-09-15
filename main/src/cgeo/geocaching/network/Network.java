@@ -399,6 +399,10 @@ public abstract class Network {
         return response != null && response.getStatusLine().getStatusCode() == 200;
     }
 
+    static public boolean isPageNotFound(@Nullable final HttpResponse response) {
+        return response != null && response.getStatusLine().getStatusCode() == 404;
+    }
+
     /**
      * Get the result of a GET HTTP request returning a JSON body.
      *
