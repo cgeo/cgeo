@@ -15,9 +15,12 @@ public final class UTFGridPosition {
     private final static Pattern PATTERN_JSON_KEY = Pattern.compile("[^\\d]*" + "(\\d+),\\s*(\\d+)" + "[^\\d]*"); // (12, 34)
 
     public UTFGridPosition(final int x, final int y) {
-        assert x >= 0 && x <= UTFGrid.GRID_MAXX : "x outside bounds";
-        assert y >= 0 && y <= UTFGrid.GRID_MAXY : "y outside bounds";
-
+        if (x < 0 || x > UTFGrid.GRID_MAXX) {
+            throw new IllegalArgumentException("x outside bounds");
+        }
+        if (y < 0 || y > UTFGrid.GRID_MAXY) {
+            throw new IllegalArgumentException("y outside bounds");
+        }
         this.x = x;
         this.y = y;
     }
