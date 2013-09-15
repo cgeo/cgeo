@@ -8,7 +8,7 @@ import cgeo.geocaching.settings.Settings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.Nullable;
 
-public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
+public abstract class OCAuthorizationActivity extends OAuthAuthorizationActivity {
 
     final IOCAuthParams authParams;
 

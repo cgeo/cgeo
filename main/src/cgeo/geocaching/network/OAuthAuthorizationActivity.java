@@ -3,7 +3,6 @@ package cgeo.geocaching.network;
 import butterknife.InjectView;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.R.string;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -11,6 +10,7 @@ import cgeo.geocaching.utils.MatcherWrapper;
 import ch.boye.httpclientandroidlib.ParseException;
 import ch.boye.httpclientandroidlib.client.entity.UrlEncodedFormEntity;
 import ch.boye.httpclientandroidlib.util.EntityUtils;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;

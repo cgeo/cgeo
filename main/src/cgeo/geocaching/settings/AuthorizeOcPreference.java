@@ -1,7 +1,7 @@
 package cgeo.geocaching.settings;
 
-import cgeo.geocaching.R;
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 import cgeo.geocaching.connector.oc.OCDEAuthorizationActivity;
 import cgeo.geocaching.connector.oc.OCPLAuthorizationActivity;
 
@@ -65,9 +65,9 @@ public class AuthorizeOcPreference extends Preference {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 if (ocAuth.authActivity != null) {
-                Intent authIntent = new Intent(preference.getContext(),
+                    Intent authIntent = new Intent(preference.getContext(),
                             ocAuth.authActivity);
-                activity.startActivityForResult(authIntent,
+                    activity.startActivityForResult(authIntent,
                             ocAuth.prefKeyId);
                 }
                 return false; // no shared preference has to be changed
