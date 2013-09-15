@@ -1,14 +1,18 @@
 package cgeo.geocaching.activity;
 
-import cgeo.geocaching.MainActivity;
+import cgeo.geocaching.AboutActivity;
 
 import android.annotation.TargetApi;
 import android.test.ActivityInstrumentationTestCase2;
 
+/**
+ * This test uses the about activity to avoid side effects like network and GPS being triggered by the main activity.
+ * 
+ */
 @TargetApi(8)
-public class ProgressTest extends ActivityInstrumentationTestCase2<MainActivity> {
+public class ProgressTest extends ActivityInstrumentationTestCase2<AboutActivity> {
     public ProgressTest() {
-        super(MainActivity.class);
+        super(AboutActivity.class);
     }
 
     public void testProgressWrapper() {
