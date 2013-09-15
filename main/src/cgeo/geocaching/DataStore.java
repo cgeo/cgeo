@@ -20,8 +20,8 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.MapUtils;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 

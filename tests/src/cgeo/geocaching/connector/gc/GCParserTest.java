@@ -18,7 +18,7 @@ import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.test.Compare;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.os.Handler;

@@ -2,7 +2,7 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 
 import android.content.Intent;
 import android.content.pm.PackageInfo;

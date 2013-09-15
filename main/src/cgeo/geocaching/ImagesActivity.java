@@ -5,7 +5,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.ImagesList.ImageType;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 
 import android.content.Context;
 import android.content.Intent;

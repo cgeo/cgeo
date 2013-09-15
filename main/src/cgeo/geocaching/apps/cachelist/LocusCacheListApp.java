@@ -5,7 +5,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.apps.AbstractLocusApp;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 
 import android.app.Activity;
 import android.content.Intent;

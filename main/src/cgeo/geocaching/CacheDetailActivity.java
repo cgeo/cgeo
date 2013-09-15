@@ -53,7 +53,7 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
