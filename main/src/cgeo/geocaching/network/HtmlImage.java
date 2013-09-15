@@ -12,7 +12,6 @@ import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
-
 import org.apache.commons.lang3.StringUtils;
 
 import android.content.res.Resources;
@@ -22,11 +21,15 @@ import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.text.Html;
+import android.util.Base64;
 
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Date;
 
 public class HtmlImage implements Html.ImageGetter {
@@ -91,24 +94,43 @@ public class HtmlImage implements Html.ImageGetter {
 
         // Download image and save it to the cache
         if (imagePre == null) {
-            final String absoluteURL = makeAbsoluteURL(url);
+            final File file = LocalStorage.getStorageFile(pseudoGeocode, url, true, true);
+            if (url.startsWith("data:image/")) {
+                if (url.contains(";base64,")) {
+                    byte[] decoded = Base64.decode(StringUtils.substringAfter(url, ";base64,"), Base64.DEFAULT);
+                    OutputStream out = null;
+                    try {
+                        out = new FileOutputStream(file);
+                        out.write(decoded);
+                    } catch (final IOException e) {
+                        Log.e("HtmlImage.getDrawable: cannot write file for decoded inline image", e);
+                        return null;
+                    } finally {
+                        IOUtils.closeQuietly(out);
+                    }
+                } else {
+                    Log.e("HtmlImage.getDrawable: unable to decode non-base64 inline image");
+                    return null;
+                }
+            } else {
+                final String absoluteURL = makeAbsoluteURL(url);
 
-            if (absoluteURL != null) {
-                try {
-                    final File file = LocalStorage.getStorageFile(pseudoGeocode, url, true, true);
-                    final HttpResponse httpResponse = Network.getRequest(absoluteURL, null, file);
-                    if (httpResponse != null) {
-                        final int statusCode = httpResponse.getStatusLine().getStatusCode();
-                        if (statusCode == 200) {
-                            LocalStorage.saveEntityToFile(httpResponse, file);
-                        } else if (statusCode == 304) {
-                            if (!file.setLastModified(System.currentTimeMillis())) {
-                                makeFreshCopy(file);
+                if (absoluteURL != null) {
+                    try {
+                        final HttpResponse httpResponse = Network.getRequest(absoluteURL, null, file);
+                        if (httpResponse != null) {
+                            final int statusCode = httpResponse.getStatusLine().getStatusCode();
+                            if (statusCode == 200) {
+                                LocalStorage.saveEntityToFile(httpResponse, file);
+                            } else if (statusCode == 304) {
+                                if (!file.setLastModified(System.currentTimeMillis())) {
+                                    makeFreshCopy(file);
+                                }
                             }
                         }
+                    } catch (Exception e) {
+                        Log.e("HtmlImage.getDrawable (downloading from web)", e);
                     }
-                } catch (Exception e) {
-                    Log.e("HtmlImage.getDrawable (downloading from web)", e);
                 }
             }
         }

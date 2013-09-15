@@ -99,7 +99,14 @@ public final class LocalStorage {
      * @return the file extension, including the leading dot, or the empty string if none could be determined
      */
     static String getExtension(final String url) {
-        final String urlExt = StringUtils.substringAfterLast(url, ".");
+        String urlExt;
+        if (url.startsWith("data:")) {
+            // "data:image/png;base64,i53…" -> ".png"
+            urlExt = StringUtils.substringAfter(StringUtils.substringBefore(url, ";"), "/");
+        } else {
+            // "http://example.com/foo/bar.png" -> ".png"
+            urlExt = StringUtils.substringAfterLast(url, ".");
+        }
         return urlExt.length() >= 1 && urlExt.length() <= 4 ? "." + urlExt : "";
     }
 
