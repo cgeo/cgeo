@@ -24,4 +24,8 @@ public class StoredListTest extends TestCase {
     public static void testConcrete() {
         assertTrue(getStandardList().isConcrete());
     }
+
+    public static void testTitleAndCountContainsTitle() {
+        assertTrue(getStandardList().getTitleAndCount().startsWith(getStandardList().getTitle()));
+    }
 }

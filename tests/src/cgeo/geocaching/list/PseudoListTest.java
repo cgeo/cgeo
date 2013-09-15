@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 public class PseudoListTest extends TestCase {
 
     public static void testGetTitleAndCount() throws Exception {
-        final String title = PseudoList.ALL_LIST.title;
+        final String title = PseudoList.ALL_LIST.getTitleAndCount();
         for (int i = 0; i < title.length(); i++) {
             assertFalse("pseudo lists shall not have a number shown in their title", Character.isDigit(title.charAt(i)));
         }
