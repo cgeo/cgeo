@@ -14,6 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Note: this class has a natural ordering that is inconsistent with equals.
+ */
 public class Waypoint implements IWaypoint, Comparable<Waypoint> {
 
     public static final String PREFIX_OWN = "OWN";

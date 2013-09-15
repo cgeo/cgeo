@@ -197,6 +197,9 @@ public class SimpleDirChooser extends AbstractListActivity {
         }
     }
 
+    /**
+     * Note: this class has a natural ordering that is inconsistent with equals.
+     */
     public static class Option implements Comparable<Option> {
         private final String name;
         private final String path;
