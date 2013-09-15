@@ -12,8 +12,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.Handler;
-import android.os.Message;
 
 import java.io.File;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -34,27 +32,24 @@ public class DatabaseBackupUtils {
         final Resources res = activity.getResources();
         final ProgressDialog dialog = ProgressDialog.show(activity, res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_running), true, false);
         final AtomicBoolean restoreSuccessful = new AtomicBoolean(false);
-        Thread restoreThread = new Thread() {
-            final Handler handler = new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    dialog.dismiss();
-                    boolean restored = restoreSuccessful.get();
-                    String message = restored ? res.getString(R.string.init_restore_success) : res.getString(R.string.init_restore_failed);
-                    ActivityMixin.helpDialog(activity, res.getString(R.string.init_backup_restore), message);
-                    if (activity instanceof MainActivity) {
-                        ((MainActivity) activity).updateCacheCounter();
-                    }
-                }
-            };
-
+        new Thread() {
             @Override
             public void run() {
                 restoreSuccessful.set(DataStore.restoreDatabaseInternal());
-                handler.sendMessage(handler.obtainMessage());
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialog.dismiss();
+                        boolean restored = restoreSuccessful.get();
+                        String message = restored ? res.getString(R.string.init_restore_success) : res.getString(R.string.init_restore_failed);
+                        ActivityMixin.helpDialog(activity, res.getString(R.string.init_backup_restore), message);
+                        if (activity instanceof MainActivity) {
+                            ((MainActivity) activity).updateCacheCounter();
+                        }
+                    }
+                });
             }
-        };
-        restoreThread.start();
+        }.start();
     }
 
     public static boolean createBackup(final Activity activity, final Runnable runAfterwards) {

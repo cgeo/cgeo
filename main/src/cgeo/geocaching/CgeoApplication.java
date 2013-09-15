@@ -9,8 +9,6 @@ import android.app.Activity;
 import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.res.Resources;
-import android.os.Handler;
-import android.os.Message;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -69,24 +67,21 @@ public class CgeoApplication extends Application {
         final Resources res = this.getResources();
         final ProgressDialog dialog = ProgressDialog.show(fromActivity, res.getString(R.string.init_dbmove_dbmove), res.getString(R.string.init_dbmove_running), true, false);
         final AtomicBoolean atomic = new AtomicBoolean(false);
-        Thread moveThread = new Thread() {
-            final Handler handler = new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    dialog.dismiss();
-                    boolean success = atomic.get();
-                    String message = success ? res.getString(R.string.init_dbmove_success) : res.getString(R.string.init_dbmove_failed);
-                    ActivityMixin.helpDialog(fromActivity, res.getString(R.string.init_dbmove_dbmove), message);
-                }
-            };
-
+        new Thread() {
             @Override
             public void run() {
                 atomic.set(DataStore.moveDatabase());
-                handler.sendMessage(handler.obtainMessage());
+                fromActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialog.dismiss();
+                        boolean success = atomic.get();
+                        String message = success ? res.getString(R.string.init_dbmove_success) : res.getString(R.string.init_dbmove_failed);
+                        ActivityMixin.helpDialog(fromActivity, res.getString(R.string.init_dbmove_dbmove), message);
+                    }
+                });
             }
-        };
-        moveThread.start();
+        }.start();
     }
 
     /**

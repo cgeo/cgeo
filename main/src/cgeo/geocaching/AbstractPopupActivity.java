@@ -21,8 +21,6 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -41,18 +39,6 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
 
     private TextView cacheDistance = null;
     private final int layout;
-
-    private final Handler ratingHandler = new Handler() {
-
-        @Override
-        public void handleMessage(Message msg) {
-            try {
-                details.addRating(cache);
-            } catch (final Exception e) {
-                // nothing
-            }
-        }
-    };
 
     private final GeoDirHandler geoUpdate = new GeoDirHandler() {
 
@@ -91,8 +77,8 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         if (!cache.supportsGCVote()) {
             return;
         }
-        (new Thread("Load GCVote") {
 
+        (new Thread("Load GCVote") {
             @Override
             public void run() {
                 final GCVoteRating rating = GCVote.getRating(cache.getGuid(), geocode);
@@ -102,8 +88,11 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
                 }
                 cache.setRating(rating.getRating());
                 cache.setVotes(rating.getVotes());
-                final Message msg = Message.obtain();
-                ratingHandler.sendMessage(msg);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        details.addRating(cache);                    }
+                });
             }
         }).start();
     }
