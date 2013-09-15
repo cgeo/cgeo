@@ -34,6 +34,7 @@ import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -1604,7 +1605,16 @@ public abstract class GCParser {
             rawResponse = TextUtils.getMatch(page, GCConstants.PATTERN_LOGBOOK, "");
         }
 
+        return parseLogs(friends, rawResponse);
+    }
+
+    private static List<LogEntry> parseLogs(final boolean friends, String rawResponse) {
         final List<LogEntry> logs = new ArrayList<LogEntry>();
+
+        // for non logged in users the log book is not shown
+        if (StringUtils.isBlank(rawResponse)) {
+            return logs;
+        }
 
         try {
             final JSONObject resp = new JSONObject(rawResponse);
