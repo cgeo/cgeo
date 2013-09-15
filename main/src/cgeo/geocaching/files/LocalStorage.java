@@ -9,6 +9,7 @@ import ch.boye.httpclientandroidlib.Header;
 import ch.boye.httpclientandroidlib.HttpResponse;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.os.Environment;
 
@@ -206,7 +207,7 @@ public final class LocalStorage {
         return false;
     }
 
-    private static void saveHeader(final String name, final HttpResponse response, final File baseFile) {
+    private static void saveHeader(final String name, @Nullable final HttpResponse response, final File baseFile) {
         final Header header = response != null ? response.getFirstHeader(name) : null;
         final File file = filenameForHeader(baseFile, name);
         if (header == null) {
@@ -233,8 +234,9 @@ public final class LocalStorage {
      *            the name of the cached resource
      * @param name
      *            the name of the header ("etag" or "last-modified")
-     * @return null if no value has been cached, the value otherwise
+     * @return the cached value, or <tt>null</tt> if none has been cached
      */
+    @Nullable
     public static String getSavedHeader(final File baseFile, final String name) {
         try {
             final File file = filenameForHeader(baseFile, name);
