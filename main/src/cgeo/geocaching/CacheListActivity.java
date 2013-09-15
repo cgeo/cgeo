@@ -1202,7 +1202,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final private Handler handler;
         final private int listIdLD;
         private volatile boolean needToStop = false;
-        private long last = 0L;
         final private List<Geocache> caches;
 
         public LoadDetailsThread(Handler handlerIn, List<Geocache> caches, int listId) {
@@ -1257,30 +1256,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 if (needToStop) {
                     throw new InterruptedException("Stopped storing process.");
                 }
-
-                if ((System.currentTimeMillis() - last) < 1500) {
-                    try {
-                        int delay = 1000 + ((Double) (Math.random() * 1000)).intValue() - (int) (System.currentTimeMillis() - last);
-                        if (delay < 0) {
-                            delay = 500;
-                        }
-
-                        Log.i("Waiting for next cache " + delay + " ms");
-                    } catch (final Exception e) {
-                        Log.e("CacheListActivity.LoadDetailsThread.sleep", e);
-                    }
-                }
-
-                if (needToStop) {
-                    throw new InterruptedException("Stopped storing process.");
-                }
-
                 detailProgress++;
                 cache.refresh(listIdLD, null);
-
                 handler.sendEmptyMessage(cacheList.indexOf(cache));
-
-                yield();
             } catch (final InterruptedException e) {
                 Log.i(e.getMessage());
                 return false;
@@ -1288,7 +1266,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 Log.e("CacheListActivity.LoadDetailsThread", e);
             }
 
-            last = System.currentTimeMillis();
             return true;
         }
     }
