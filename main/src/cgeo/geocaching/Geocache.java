@@ -1748,7 +1748,7 @@ public class Geocache implements ICache, IWaypoint {
         return StaticMapsProvider.hasStaticMap(this);
     }
 
-    public static Predicate<Geocache> hasStaticMap = new Predicate<Geocache>() {
+    public static final Predicate<Geocache> hasStaticMap = new Predicate<Geocache>() {
         @Override
         public boolean evaluate(final Geocache cache) {
             return cache.hasStaticMap();
