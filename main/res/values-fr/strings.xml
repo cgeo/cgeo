@@ -342,11 +342,11 @@
   <string name="settings_gc_legal_note">En utilisant les services de geocaching.com, vous acceptez les conditions d\'utilisation de Groundspeak.</string>
   <string name="settings_info_facebook_login_title">Connexion Facebook</string>
   <string name="settings_info_facebook_login">Vous ne pouvez pas faire que c:geo se connecte à geocaching.com avec votre compte Facebook. Mais il existe une solution simple…</string>
+  <string name="settings_authorize">Autoriser c:geo</string>
+  <string name="settings_reauthorize">Ré-autoriser c:geo</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Activer</string>
   <string name="init_oc_de_description">Autoriser c:geo à utiliser opencaching.de pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
-  <string name="settings_authorize">Autoriser c:geo</string>
-  <string name="settings_reauthorize">Ré-autoriser c:geo</string>
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Activer</string>
   <string name="init_oc_pl_description">Autoriser c:geo à utiliser opencaching.pl pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
