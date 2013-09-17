@@ -34,11 +34,6 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertUnpublished(cache);
     }
 
-    public void testUnpublishedCacheOwner() {
-        final int cache = R.raw.gc433yc_owner_unpublished;
-        assertUnpublished(cache);
-    }
-
     private void assertUnpublished(final int cache) {
         final String page = getFileContent(cache);
         final SearchResult result = GCParser.parseCacheFromText(page, null);
