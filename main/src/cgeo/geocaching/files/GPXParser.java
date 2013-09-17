@@ -1,12 +1,12 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -787,7 +787,6 @@ public abstract class GPXParser extends FileParser {
             Xml.parse(progressStream, Xml.Encoding.UTF_8, root.getContentHandler());
             return DataStore.loadCaches(result, EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
         } catch (final SAXException e) {
-            Log.w("Cannot parse .gpx file as GPX " + version + ": could not parse XML - ", e);
             throw new ParserException("Cannot parse .gpx file as GPX " + version + ": could not parse XML", e);
         }
     }
