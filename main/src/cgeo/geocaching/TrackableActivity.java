@@ -16,6 +16,7 @@ import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.UserActionsClickListener;
+import cgeo.geocaching.ui.UserNameClickListener;
 import cgeo.geocaching.ui.logs.TrackableLogsViewCreator;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
@@ -422,7 +423,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                         }
                     });
                 } else if (Trackable.SPOTTED_USER == trackable.getSpottedType()) {
-                    spotted.setOnClickListener(new UserActionsClickListener());
+                    spotted.setOnClickListener(new UserNameClickListener(Html.fromHtml(trackable.getSpottedName()).toString()));
+                } else if (Trackable.SPOTTED_OWNER == trackable.getSpottedType()) {
+                    spotted.setOnClickListener(new UserNameClickListener(Html.fromHtml(trackable.getOwner()).toString()));
                 }
             }
 
