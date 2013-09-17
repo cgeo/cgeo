@@ -20,8 +20,8 @@ public final class CacheListAppFactory extends AbstractAppFactory {
     private static class LazyHolder {
         public static final CacheListApp[] apps = {
                 new InternalCacheListMap(),
-                new LocusCacheListApp(false),
-                new LocusCacheListApp(true)
+                new LocusShowCacheListApp(),
+                new LocusExportCacheListApp()
         };
     }
 
