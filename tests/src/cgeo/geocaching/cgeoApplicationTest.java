@@ -129,36 +129,16 @@ public class cgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link Geocache#searchByGeocode(String, String, int, boolean, CancellableHandler)}
+     * Set the login data to the cgeo login, run the given Runnable, and restore the login.
+     *
+     * @param runnable
      */
-    @MediumTest
-    public static void testSearchByGeocodeNotLoggedIn() {
+    private static void withMockedLoginDo(final Runnable runnable) {
         final ImmutablePair<String, String> login = Settings.getGcLogin();
         final String memberStatus = Settings.getMemberStatus();
 
         try {
-            // non premium cache
-            MockedCache cache = new GC2CJPF();
-
-            deleteCacheFromDBAndLogout(cache.getGeocode());
-
-            SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST_ID, true, null);
-            assertNotNull(search);
-            assertEquals(1, search.getGeocodes().size());
-            assertTrue(search.getGeocodes().contains(cache.getGeocode()));
-            final Geocache searchedCache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
-            // coords must be null if the user is not logged in
-            assertNull(searchedCache.getCoords());
-
-            // premium cache. Not visible to guests
-            cache = new GC2JVEH();
-
-            deleteCacheFromDBAndLogout(cache.getGeocode());
-
-            search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST_ID, true, null);
-            assertNotNull(search);
-            assertEquals(0, search.getGeocodes().size());
-
+            runnable.run();
         } finally {
             // restore user and password
             TestSettings.setLogin(login.left, login.right);
@@ -171,26 +151,53 @@ public class cgeoApplicationTest extends CGeoTestCase {
      * Test {@link Geocache#searchByGeocode(String, String, int, boolean, CancellableHandler)}
      */
     @MediumTest
+    public static void testSearchByGeocodeNotLoggedIn() {
+        withMockedLoginDo(new Runnable() {
+
+            public void run() {
+                // non premium cache
+                MockedCache cache = new GC2CJPF();
+
+                deleteCacheFromDBAndLogout(cache.getGeocode());
+
+                SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST_ID, true, null);
+                assertNotNull(search);
+                assertEquals(1, search.getGeocodes().size());
+                assertTrue(search.getGeocodes().contains(cache.getGeocode()));
+                final Geocache searchedCache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+                // coords must be null if the user is not logged in
+                assertNull(searchedCache.getCoords());
+
+                // premium cache. Not visible to guests
+                cache = new GC2JVEH();
+
+                deleteCacheFromDBAndLogout(cache.getGeocode());
+
+                search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST_ID, true, null);
+                assertNotNull(search);
+                assertEquals(0, search.getGeocodes().size());
+            }
+        });
+    }
+
+    /**
+     * Test {@link Geocache#searchByGeocode(String, String, int, boolean, CancellableHandler)}
+     */
+    @MediumTest
     public static void testSearchErrorOccured() {
-        final ImmutablePair<String, String> login = Settings.getGcLogin();
-        final String memberStatus = Settings.getMemberStatus();
+        withMockedLoginDo(new Runnable() {
 
-        try {
-            // non premium cache
-            final MockedCache cache = new GC1ZXX2();
+            public void run() {
+                // non premium cache
+                final MockedCache cache = new GC1ZXX2();
 
-            deleteCacheFromDBAndLogout(cache.getGeocode());
+                deleteCacheFromDBAndLogout(cache.getGeocode());
 
-            final SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST_ID, true, null);
-            assertNotNull(search);
-            assertEquals(0, search.getGeocodes().size());
-
-        } finally {
-            // restore user and password
-            TestSettings.setLogin(login.left, login.right);
-            Settings.setMemberStatus(memberStatus);
-            Login.login();
-        }
+                final SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST_ID, true, null);
+                assertNotNull(search);
+                assertEquals(0, search.getGeocodes().size());
+            }
+        });
     }
 
     /**
@@ -327,56 +334,54 @@ public class cgeoApplicationTest extends CGeoTestCase {
      */
     @MediumTest
     public static void testSearchByViewportNotLoggedIn() {
+        withMockedLoginDo(new Runnable() {
 
-        final ImmutablePair<String, String> login = Settings.getGcLogin();
-        final String memberStatus = Settings.getMemberStatus();
-        final Strategy strategy = Settings.getLiveMapStrategy();
-        final Strategy testStrategy = Strategy.FAST; // FASTEST, FAST or DETAILED for tests
-        Settings.setLiveMapStrategy(testStrategy);
-        final CacheType cacheType = Settings.getCacheType();
+            public void run() {
+                final Strategy strategy = Settings.getLiveMapStrategy();
+                final Strategy testStrategy = Strategy.FAST; // FASTEST, FAST or DETAILED for tests
+                Settings.setLiveMapStrategy(testStrategy);
+                final CacheType cacheType = Settings.getCacheType();
 
-        try {
+                try {
 
-            final String[] tokens = null; // without a valid token we are "logged off"
+                    final String[] tokens = null; // without a valid token we are "logged off"
 
-            // non premium cache
-            MockedCache cache = new GC2CJPF();
-            deleteCacheFromDBAndLogout(cache.getGeocode());
-            Tile.Cache.removeFromTileCache(cache);
-            Settings.setCacheType(CacheType.ALL);
+                    // non premium cache
+                    MockedCache cache = new GC2CJPF();
+                    deleteCacheFromDBAndLogout(cache.getGeocode());
+                    Tile.Cache.removeFromTileCache(cache);
+                    Settings.setCacheType(CacheType.ALL);
 
-            Viewport viewport = new Viewport(cache, 0.003, 0.003);
-            SearchResult search = ConnectorFactory.searchByViewport(viewport, tokens);
+                    Viewport viewport = new Viewport(cache, 0.003, 0.003);
+                    SearchResult search = ConnectorFactory.searchByViewport(viewport, tokens);
 
-            assertNotNull(search);
-            assertTrue(search.getGeocodes().contains(cache.getGeocode()));
-            // coords differ
-            final Geocache cacheFromViewport = DataStore.loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
-            Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
-            Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cacheFromViewport.getCoords());
-            assertFalse(cache.getCoords().isEqualTo(cacheFromViewport.getCoords(), 1e-3));
-            // depending on the chosen strategy the coords can be reliable or not
-            assertEquals(testStrategy == Strategy.DETAILED, cacheFromViewport.isReliableLatLon());
+                    assertNotNull(search);
+                    assertTrue(search.getGeocodes().contains(cache.getGeocode()));
+                    // coords differ
+                    final Geocache cacheFromViewport = DataStore.loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+                    Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
+                    Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cacheFromViewport.getCoords());
+                    assertFalse(cache.getCoords().isEqualTo(cacheFromViewport.getCoords(), 1e-3));
+                    // depending on the chosen strategy the coords can be reliable or not
+                    assertEquals(testStrategy == Strategy.DETAILED, cacheFromViewport.isReliableLatLon());
 
-            // premium cache
-            cache = new GC2JVEH();
-            deleteCacheFromDBAndLogout(cache.getGeocode());
+                    // premium cache
+                    cache = new GC2JVEH();
+                    deleteCacheFromDBAndLogout(cache.getGeocode());
 
-            viewport = new Viewport(cache, 0.003, 0.003);
-            search = ConnectorFactory.searchByViewport(viewport, tokens);
+                    viewport = new Viewport(cache, 0.003, 0.003);
+                    search = ConnectorFactory.searchByViewport(viewport, tokens);
 
-            assertNotNull(search);
-            // depending on the chosen strategy the cache is part of the search or not
-            assertEquals(testStrategy == Strategy.DETAILED, search.getGeocodes().contains(cache.getGeocode()));
+                    assertNotNull(search);
+                    // depending on the chosen strategy the cache is part of the search or not
+                    assertEquals(testStrategy == Strategy.DETAILED, search.getGeocodes().contains(cache.getGeocode()));
 
-        } finally {
-            // restore user and password
-            TestSettings.setLogin(login.left, login.right);
-            Settings.setMemberStatus(memberStatus);
-            Login.login();
-            Settings.setLiveMapStrategy(strategy);
-            Settings.setCacheType(cacheType);
-        }
+                } finally {
+                    Settings.setLiveMapStrategy(strategy);
+                    Settings.setCacheType(cacheType);
+                }
+            }
+        });
     }
 
     /**
