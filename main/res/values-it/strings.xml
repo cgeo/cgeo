@@ -314,7 +314,7 @@
   <string name="about_version">Versione</string>
   <string name="about_changelog">Modifiche</string>
   <string name="about_donate">Donazioni</string>
-  <string name="about_donation_more">Donazione\nsviluppo</string>
+  <string name="about_donation_more">Fai una\nDonazione</string>
   <string name="about_contributors">Contributori</string>
   <string name="about_license">Licenza</string>
   <string name="about_apache_license"><a href="">Licenza Apache, versione 2.0</a></string>
@@ -331,7 +331,7 @@
   <string name="settings_title_basicmembers">Membri Basic</string>
   <string name="settings_title_navigation">Navigazione</string>
   <string name="settings_title_system">Sistema</string>
-  <string name="settings_title_navigation_menu">Menu di navigazione</string>
+  <string name="settings_title_navigation_menu">Menu \"Naviga\"</string>
   <string name="settings_category_browser">Browser</string>
   <string name="settings_category_geocaching">Geocaching</string>
   <string name="settings_category_social">Social media</string>
@@ -460,7 +460,7 @@
   <string name="init_use_native_ua">Browser Android</string>
   <string name="init_summary_use_native_ua">Identifica come browser Android. Risolve alcuni problemi di login con alcuni provider di rete.</string>
   <string name="init_rendertheme_folder">Directory per i temi mappa</string>
-  <string name="settings_open_website">Apri sito</string>
+  <string name="settings_open_website">Apri il sito</string>
   <string name="settings_settings">Impostazioni</string>
   <string name="settings_information">Informazioni</string>
   <string name="map_source_google_map">Google: Map</string>
@@ -485,8 +485,8 @@
   <string name="auth_finish">Fine</string>
   <string name="auth_dialog_waiting">In attesa di %s…</string>
   <string name="auth_explain_short">Il processo seguente permetterà a <b>c:geo</b> di accedere a %s.</string>
-  <string name="auth_explain_long">Premendo il pulsante \"autorizza c:geo\" avrà inizio il processo. Verrà aperto un browser web con la pagina %s. Accedere alla pagina e lasciare che <b>c:geo</b> acceda al tuo account.</string>
-  <string name="auth_dialog_completed_twitter">c:geo è ora autorizzato a pubblicare su Twitter.</string>
+  <string name="auth_explain_long">Premendo il pulsante \"autorizza c:geo\" avrà inizio il processo. Verrà aperto un browser web con la pagina %s. Effettuare login alla pagina e lasciare che <b>c:geo</b> acceda al tuo account.</string>
+  <string name="auth_dialog_completed_twitter">c:geo è ora autorizzato a postare su Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
   <string name="auth_dialog_completed_oc">c:geo è ora autorizzato ad accedere a %s.</string>
@@ -1013,7 +1013,7 @@
   <string name="powered_by">carnero</string>
   <string name="support">Supporto: <a href="">support@cgeo.org</a></string>
   <string name="website">Sito: <a href="">cgeo.org</a></string>
-  <string name="facebook">Facebook: <a href="">c:geo page</a></string>
+  <string name="facebook">Facebook: <a href="">Pagina c:geo</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
   <string name="nutshellmanual">Manuale: <a href="">c:geo in a Nutshell</a></string>
   <string name="market">Android: <a href="">c:geo su Google Play</a></string>
