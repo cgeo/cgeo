@@ -3,6 +3,7 @@
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
     <b>Next bugfix release</b>\n
+    · Unscaled log picture now uploaded correctly\n
     · GPS exhibit not recognized as event cache\n
     · Lost and Found cache type not parsed\n
     · Limit results of nearby search to 200km to avoid opencaching results far away\n
