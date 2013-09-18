@@ -13,6 +13,7 @@
     · Do not include HTML code in translation\n
     · Picture loading from opencaching.pl corrected\n
     · Fixed crash when scaling log images\n
+    · Clicking TB holder name opened an invalid link\n
     \n
     \n
     <b>2013.08.26</b>\n
