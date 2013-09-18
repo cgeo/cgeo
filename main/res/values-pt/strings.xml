@@ -342,11 +342,11 @@
   <string name="settings_gc_legal_note">Quando você usa do serviço do geocaching.com, você aceita os termos de uso da Groundspeak.</string>
   <string name="settings_info_facebook_login_title">Facebook Login</string>
   <string name="settings_info_facebook_login">Não consegue que c:geo faça o login em geocaching.com com a sua conta do Facebook. Mas existe uma solução simples…</string>
+  <string name="settings_authorize">Autorizar c:geo</string>
+  <string name="settings_reauthorize">Reautorizar c:geo</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Activar</string>
   <string name="init_oc_de_description">Autorizar c:geo com opencaching.de para pesquisar por caches e aceder/filtrar as suas caches encontradas.</string>
-  <string name="settings_authorize">Autorizar c:geo</string>
-  <string name="settings_reauthorize">Reautorizar c:geo</string>
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Activar</string>
   <string name="init_oc_pl_description">Autorizar c:geo com opencaching.pl para pesquisar por caches e aceder/filtrar as suas caches encontradas.</string>
@@ -422,12 +422,9 @@
   <string name="init_backup_last">Disponível backup de</string>
   <string name="init_backup_last_no">Não existe nenhum ficheiro de backup.</string>
   <string name="settings_info_offline_maps_title">Informações sobre Offline Maps</string>
-  <string name="settings_info_offline_maps">c:geo supports maps for offline use. You can download maps from Mapsforge or even create your own maps from OSM data. You need to select the offline map directory first to to get offline map support.</string>
   <string name="settings_info_themes_title">Informações sobre Map Themes</string>
   <string name="settings_info_themes">c: geo suporta temas customizados para os mapas off-line. Estes podem ser usados ​​para alterar o estilo de cores do mapa (por exemplo, ter um mapa para visão nocturna) ou para realçar certos objetos, como ciclovias ou linhas de altura dentro do mapa.</string>
   <string name="init_mapsource_select">Seleccione a fonte de mapa</string>
-  <string name="settings_title_scale_map_text">Scale Map Text</string>
-  <string name="settings_summary_scale_map_text">Scale text labels on offline map according to device dpi</string>
   <string name="init_map_directory_description">Directório com os mapas offline</string>
   <string name="init_gpx_exportdir">Directório para exportar GPX</string>
   <string name="init_gpx_importdir">Directório para importar GPX</string>
@@ -485,7 +482,6 @@
   <string name="auth_finish">Fim</string>
   <string name="auth_dialog_waiting">Esperando por %s…</string>
   <string name="auth_explain_short">O processo a seguir permitirá que <b>c:geo</b> acesse o %s.</string>
-  <string name="auth_explain_long">Pressing the \"authorize c:geo\" button will start the process. This process will open up a web browser with a %s page. Log in on this page and allow <b>c:geo</b> to access your account. That\'s all.</string>
   <string name="auth_dialog_completed_twitter">O c:geo está agora autorizado a publicar no Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">Opencaching.pl</string>

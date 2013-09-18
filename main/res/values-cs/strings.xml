@@ -342,8 +342,6 @@
   <string name="settings_gc_legal_note">Používáním služeb Geocaching.com souhlasíš s Podmínkami použití společnosti Groundspeak.</string>
   <string name="settings_info_facebook_login_title">Facebook přihlášení</string>
   <string name="settings_info_facebook_login">Přes c:geo se sice na Geocaching.com pomocí Facebook účtu nepřihlásíš, ale je tu jednoduché řešení …</string>
-  <string name="settings_authorize">Authorize c:geo</string>
-  <string name="settings_reauthorize">Authorize c:geo again</string>
   <string name="init_oc">opencaching.de</string>
   <string name="settings_activate_oc">Aktivace opencaching.de na Aktivní mapě a ve vyhledávání</string>
   <string name="init_oc_de_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.de.</string>
@@ -426,8 +424,6 @@
   <string name="settings_info_themes_title">Info o stylech mapy</string>
   <string name="settings_info_themes">c:geo podporuje vlastní styly pro offline mapy. Ty mohou být použity pro změnu barevného stylu mapy (např. noční mapa), pro zvýranění důležitých objektů (jako jsou např. cykloztezky) nebo pro určení šířky čar.</string>
   <string name="init_mapsource_select">Vyber mapový zdroj</string>
-  <string name="settings_title_scale_map_text">Scale Map Text</string>
-  <string name="settings_summary_scale_map_text">Scale text labels on offline map according to device dpi</string>
   <string name="init_map_directory_description">Složka s offline mapami</string>
   <string name="init_gpx_exportdir">Složka pro GPX export</string>
   <string name="init_gpx_importdir">Složka pro GPX import</string>
@@ -460,9 +456,6 @@
   <string name="init_use_native_ua">Identifikovat se jako webový prohlížeč Android. Řeší problémy v některých sítích.</string>
   <string name="init_summary_use_native_ua">Identifikovat se jako webový prohlížeč Android. Řeší problémy v některých sítích.</string>
   <string name="init_rendertheme_folder">Složka témat mapy</string>
-  <string name="settings_open_website">Open website</string>
-  <string name="settings_settings">Settings</string>
-  <string name="settings_information">Information</string>
   <string name="map_source_google_map">Google: Mapa</string>
   <string name="map_source_google_satellite">Google: Satelitní</string>
   <string name="map_source_osm_mapnik">OSM: Mapnik</string>
@@ -483,10 +476,6 @@
   <string name="auth_start">Zahájit autorizaci</string>
   <string name="auth_again">Znovu autorizovat</string>
   <string name="auth_finish">Dokončit</string>
-  <string name="auth_dialog_waiting">Waiting for %s…</string>
-  <string name="auth_explain_short">The following process will allow <b>c:geo</b> to access %s.</string>
-  <string name="auth_explain_long">Pressing the \"authorize c:geo\" button will start the process. This process will open up a web browser with a %s page. Log in on this page and allow <b>c:geo</b> to access your account. That\'s all.</string>
-  <string name="auth_dialog_completed_twitter">c:geo is now authorized to post on Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
   <string name="auth_dialog_completed_oc">c:geo je nyní autorizováno pro interakce s %s.</string>
@@ -785,7 +774,6 @@
   <string name="destination_set">Cíl nastaven</string>
   <string name="navigation_direct_navigation">Přímá navigace</string>
   <string name="navigation_target">Cíl</string>
-  <string name="err_nav_no_coordinates">Cannot start navigation with no coordinates</string>
   <string name="license">Licence</string>
   <string name="license_show">Zobrazit licenci</string>
   <string name="license_dismiss">Zamítnout</string>
@@ -1047,40 +1035,5 @@
     <item quantity="one">minuta</item>
     <item quantity="few">minuty</item>
     <item quantity="other">minuty</item>
-  </plurals>
-  <plurals name="cache_counts">
-    <item quantity="one">Jedna keš</item>
-    <item quantity="few">%1$d keší</item>
-    <item quantity="other">%1$d caches</item>
-  </plurals>
-  <plurals name="waypoints">
-    <item quantity="one">1 bod trasy</item>
-    <item quantity="few">%d bodů trasy</item>
-    <item quantity="other">%d Waypoints</item>
-  </plurals>
-  <plurals name="tts_kilometers">
-    <item quantity="one">%s kilometrů</item>
-    <item quantity="few">%s kilometers</item>
-    <item quantity="other">%s kilometers</item>
-  </plurals>
-  <plurals name="tts_meters">
-    <item quantity="one">%s metrů</item>
-    <item quantity="few">%s meters</item>
-    <item quantity="other">%s meters</item>
-  </plurals>
-  <plurals name="tts_miles">
-    <item quantity="one">%s mil</item>
-    <item quantity="few">%s miles</item>
-    <item quantity="other">%s miles</item>
-  </plurals>
-  <plurals name="tts_feet">
-    <item quantity="one">%s stop</item>
-    <item quantity="few">%s feet</item>
-    <item quantity="other">%s feet</item>
-  </plurals>
-  <plurals name="days_ago">
-    <item quantity="one">včera</item>
-    <item quantity="few">před %d dny</item>
-    <item quantity="other">%d days ago</item>
   </plurals>
 </resources>

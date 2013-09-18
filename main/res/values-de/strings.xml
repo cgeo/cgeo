@@ -34,7 +34,7 @@
   <string name="cache_size_regular">Regular</string>
   <string name="cache_size_large">Large</string>
   <string name="cache_size_other">Sonstige</string>
-  <string name="cache_size_virtual">Kein Behälter</string>
+  <string name="cache_size_virtual">Virtual</string>
   <string name="cache_size_notchosen">Nicht gewählt</string>
   <string name="cache_size_unknown">Unbekannt</string>
   <string name="wp_final">Final</string>
@@ -64,12 +64,12 @@
   <string name="log_unarchived">Aus dem Archiv geholt</string>
   <string name="log_needs_archived">Sollte archiviert werden</string>
   <string name="log_discovered">Gesehen</string>
-  <string name="log_reviewer">Review(er)-Anmerkung</string>
+  <string name="log_reviewer">Reviewer-Anmerkung</string>
   <string name="log_retractlisting">Listing zurückgezogen</string>
   <string name="log_marked_missing">Als verloren gemeldet</string>
   <string name="log_tb_nothing">Keine Aktion</string>
   <string name="log_tb_visit">Besucht</string>
-  <string name="log_tb_drop">Ablegen</string>
+  <string name="log_tb_drop">Abgelegt</string>
   <string name="log_tb_changeall">Alle ändern</string>
   <string name="log_save">Speichern</string>
   <string name="log_saving">Log wird gesendet…</string>
@@ -123,7 +123,7 @@
   <string name="err_none">OK</string>
   <string name="err_start">Kommunikation nicht gestartet</string>
   <string name="err_parse">Parsing der Anmeldung gescheitert</string>
-  <string name="err_server">Verbindung zu geocaching.com konnte nicht hergestellt werden (Server oder Verbindung inaktiv?)</string>
+  <string name="err_server">Verbindung zu Geocaching.com konnte nicht hergestellt werden (Server oder Verbindung inaktiv?)</string>
   <string name="err_login">Keine Anmeldedaten gespeichert.</string>
   <string name="err_login_failed">Login fehlgeschlagen.</string>
   <string name="err_login_failed_toast">c:geo konnte sich nicht einloggen und arbeitet im Offline-Modus. Bitte die Login-Daten in den Einstellungen überprüfen oder eine Internetverbindung herstellen.</string>
@@ -132,12 +132,12 @@
   <string name="err_missing_auth">Benutzername oder Passwort nicht gesetzt.</string>
   <string name="err_wrong">Falsche Anmeldedaten</string>
   <string name="err_maintenance">Geocaching.com wird zur Zeit gewartet, bitte später erneut versuchen. c:geo arbeitet im Offline-Modus.</string>
-  <string name="err_license">Die geocaching.com Nutzungsbedingungen wurden nicht akzeptiert. c:geo kann deshalb keine Koordinaten laden.</string>
-  <string name="err_unvalidated_account">Die Logindaten müssen zuerst auf geocaching.com validiert werden.</string>
-  <string name="err_unpublished">Der aufgerufene Cache ist noch nicht veröffentlicht</string>
-  <string name="err_premium_only">Der Cache ist nur für Premium-Mitglieder von geocaching.com verfügbar</string>
+  <string name="err_license">Die Geocaching.com Nutzungsbedingungen wurden nicht akzeptiert. c:geo kann deshalb keine Koordinaten laden.</string>
+  <string name="err_unvalidated_account">Die Logindaten müssen zuerst auf Geocaching.com validiert werden.</string>
+  <string name="err_unpublished">Der aufgerufene Cache ist noch nicht veröffentlicht.</string>
+  <string name="err_premium_only">Der Cache ist nur für Premium-Mitglieder von Geocaching.com verfügbar.</string>
   <string name="err_detail_open">c:geo konnte die Cache-Details nicht öffnen.</string>
-  <string name="err_detail_cache">c:geo konnte diesen Cache nicht darstellen. Ist es wirklich ein Cache?</string>
+  <string name="err_detail_cache">c:geo kann diesen Cache nicht darstellen. Ist es wirklich ein Cache?</string>
   <string name="err_detail_cache_find">c:geo konnte keinen Cache finden.</string>
   <string name="err_detail_cache_find_some">c:geo konnte diesen Cache nicht finden.</string>
   <string name="err_detail_cache_find_any">c:geo konnte keine Caches finden.</string>
@@ -161,7 +161,7 @@
   <string name="err_favorite_failed">Ändern des Favoriten-Status ist fehlgeschlagen.</string>
   <string name="err_select_logimage_failed">Auswahl eines Bildes für das Log ist fehlgeschlagen.</string>
   <string name="err_acquire_image_failed">Erstellen eines Fotos ist fehlgeschlagen.</string>
-  <string name="err_tb_display">\"c:geo kann den gewünschten Trackable nicht anzeigen. Ist es wirklich einer?</string>
+  <string name="err_tb_display">c:geo kann den gewünschten Trackable nicht anzeigen. Ist es wirklich einer?</string>
   <string name="err_tb_details_open">c:geo konnte die Details des Trackables nicht öffnen.</string>
   <string name="err_tb_forgot_saw">c:geo hat vergessen, welcher Trackable gesehen wurde.</string>
   <string name="err_tb_find">c:geo findet den Trackable nicht</string>
@@ -206,7 +206,7 @@
   <string name="info_log_saved">Log erfolgreich gespeichert.</string>
   <string name="info_log_cleared">Log wurde geleert.</string>
   <string name="info_log_type_changed">Logtyp wurde verändert!</string>
-  <string name="info_select_logimage_cancelled">Foto Auswahl oder Erstellung abgebrochen.</string>
+  <string name="info_select_logimage_cancelled">Fotoauswahl oder -erstellung abgebrochen.</string>
   <string name="info_stored_image">Neues Foto gespeichert nach:</string>
   <string name="info_storing_static_maps">Versuche, statische Karten zu speichern</string>
   <string name="loc_last">Letzte Position</string>
@@ -345,8 +345,6 @@
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Aktivieren</string>
   <string name="init_oc_de_description">Autorisiere c:geo auf opencaching.de zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
-  <string name="settings_authorize">c:geo autorisieren</string>
-  <string name="settings_reauthorize">c:geo neu autorisieren</string>
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Aktiviere</string>
   <string name="init_oc_pl_description">Autorisiere c:geo auf opencaching.pl zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
@@ -422,7 +420,7 @@
   <string name="init_backup_last">Backup verfügbar von</string>
   <string name="init_backup_last_no">Keine Datei mit Datenbanksicherung gefunden.</string>
   <string name="settings_info_offline_maps_title">Info zu Offline-Karten</string>
-  <string name="settings_info_offline_maps">c:geo ermöglicht es, Offline-Karten zu verwenden. Du kannst Karten bei mapsforge herunterladen oder sogar eigene Karten aus OSM-Daten erstellen. Es muss erst ein Verzeichnis mit Offline-Karten gewählt werden, bevor eine Offline-Karte gewählt werden kann.</string>
+  <string name="settings_info_offline_maps">c:ego ermöglicht es Offline-Karten zu verwenden. Die Karten können bei Mapsforge heruntergeladen werden oder es können eigene Karten aus OSM-Daten erstellt werden. Es mus zuerst ein Verzeichnis mit Offline-Karten gewählt werden, bevor eine Offline-Karte ausgewählt werden kann.</string>
   <string name="settings_info_themes_title">Info zu Karten-Themes</string>
   <string name="settings_info_themes">c:geo kann eigene Karten-Themes für Offline-Karten verwenden. Du kannst sie dazu benutzen, um die Farbauswahl der Karte (z. B. für eine Nachtansicht) zu verändern oder um bestimmte Objekte wie z. B. Radwege oder Höhenlinien hervorzuheben.</string>
   <string name="init_mapsource_select">Kartenquelle wählen</string>
