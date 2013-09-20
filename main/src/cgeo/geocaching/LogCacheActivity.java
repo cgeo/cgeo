@@ -351,6 +351,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             } else {
                 typeSelected = LogType.WILL_ATTEND;
             }
+            // it this is an attended event log, use the event date by default instead of the current date
+            if (expired && typeSelected == LogType.ATTENDED) {
+                date.setTime(eventDate);
+            }
         } else {
             if (cache.isFound()) {
                 typeSelected = LogType.NOTE;
