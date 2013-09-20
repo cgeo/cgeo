@@ -80,7 +80,7 @@
     <string name="log_retractlisting">Vrácení Listingu</string>
     <string name="log_marked_missing">Označeno za ztracené</string>
     <string name="log_tb_nothing">Beze změny</string>
-    <string name="log_tb_visit">Návštíveno</string>
+    <string name="log_tb_visit">Navštíveno</string>
     <string name="log_tb_drop">Nechat zde</string>
     <string name="log_tb_changeall">Změnit vše</string>
     <string name="log_save">Uložit</string>
@@ -326,7 +326,7 @@
     <string name="caches_filter_clear">Vymazat filtry</string>
     <string name="caches_filter_modified">S upravenými souřadnicemi</string>
     <string name="caches_filter_origin">Původ keše</string>
-    <string name="caches_filter_distance">Vzádlenost</string>
+    <string name="caches_filter_distance">Vzdálenost</string>
     <string name="caches_removing_from_history">Čištění Historie…</string>
     <string name="caches_clear_offlinelogs">Smazat offline Logy</string>
     <string name="caches_clear_offlinelogs_progress">Mazání offline logů</string>
@@ -386,16 +386,16 @@
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_activate_gc">Aktivace</string>
     <string name="settings_gc_legal_note">Pro používání služeb Geocaching.com musíš souhlasit s podmínkami použití společnosti Groundspeak</string>
-    <string name="settings_info_facebook_login_title">Přihlášení k Facebooku</string>
+    <string name="settings_info_facebook_login_title">Přihlášení přes Facebook</string>
     <string name="settings_info_facebook_login">c:geo není možné přihlásit na geocaching.com pomocí tvého účtu Facebook. Ale je tu možnost jak to obejít …</string>
     <string name="init_oc">opencaching.de</string>
     <string name="settings_activate_oc">Aktivace opencaching.de na Aktivní mapě a ve vyhledávání</string>
-    <string name="init_oc_de_description">Autorizovat c:geo na opencaching.de pro hledání kešek a přístup/filtrování již nalezených keší.</string>
+    <string name="init_oc_de_description">Autorizovat c:geo na opencaching.de pro hledání keší a přístup/filtrování již nalezených keší.</string>
     <string name="init_register_oc_de">Autorizovat c:geo</string>
     <string name="init_reregister_oc_de">Autorizovat c:geo znovu</string>
     <string name="init_oc_pl">Opencaching.pl</string>
     <string name="settings_activate_oc_pl">Aktivovat</string>
-    <string name="init_oc_pl_description">Autorizovat c:geo na opencaching.pl pro hledání kešek a přístup/filtrování již nalezených keší.</string>
+    <string name="init_oc_pl_description">Autorizovat c:geo na opencaching.pl pro hledání keší a přístup/filtrování již nalezených keší.</string>
     <string name="init_register_oc_pl">Autorizovat c:geo</string>
     <string name="init_reregister_oc_pl">Autorizovat c:geo znovu</string>
     <string name="init_gcvote">GCvote.com</string>
@@ -488,11 +488,11 @@
     <string name="init_loaddirectionimg">V případě potřeby stáhnout směrový obrázek (pouze Basic Member)</string>
     <string name="init_summary_loaddirectionimg">V případě potřeby stáhnout směrový obrázek (pouze Basic Member)</string>
     <string name="init_default_navigation_tool">Výchozí navigace</string>
-    <string name="init_secondary_navigation_tool">Sekundární Navigation</string>
+    <string name="init_secondary_navigation_tool">Sekundární Navigace</string>
     <string name="init_default_navigation_tool_description">Zde můžeš vybrat preferovaný navigační nástroj.</string>
     <string name="init_default_navigation_tool_select">Vyber nástroj</string>
     <string name="init_default_navigation_tool_2_description">Zde můžeš vybrat druhý preferovaný navigační nástroj. Ten se aktivuje dlouhým klepnutím na navigační ikonu vedle názvu keše.</string>
-    <string name="init_navigation_menu_description">Zde lze vybrat která z navigačních metod bude zobrazena v navigačním menu pro keš či bod trasy. Zakázané volby nejsou nainstalované na tomto zařízení.</string>
+    <string name="init_navigation_menu_description">Zde lze vybrat, která z navigačních metod bude zobrazena v navigačním menu pro keš či bod trasy. Zakázané volby nejsou nainstalované na tomto zařízení.</string>
     <string name="init_debug_title">Ladící informace</string>
     <string name="init_debug_note">c:geo může generovat mnoho ladících informací. Tyto informace nejsou pro běžné uživatele užitečné, ale pro vývojáře mohou být užitečné při hledání problému. V případě potřeby zaškrtni tuto volbu a pošli jim vygenerovaný soubor.</string>
     <string name="init_debug">Generovat ladící informace</string>
@@ -519,7 +519,7 @@
     <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
     <string name="map_source_osm_offline">Offline</string>
     <string name="init_sendToCgeo">Poslat do c:geo</string>
-    <string name="settings_info_send2cgeo_title">Informace o send2cgeo</string>
+    <string name="settings_info_send2cgeo_title">Informace o send2c:geo</string>
     <string name="init_sendToCgeo_name">Název tvého zařízení</string>
     <string name="init_sendToCgeo_description"><b>Send2cgeo</b> umožňuje stahovat keše přímo ze stránky Geocaching.com pomocí speciálního pluginu pro Firefox a Chrome. Před registrací si přečti <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Pokud chceš používat funkci send2cgeo, musíš se zaregistrovat. c:geo bude pracovat normálně i bez registrace.</string>
     <string name="init_sendToCgeo_register">Požádat o registraci</string>
@@ -553,7 +553,7 @@
     <string name="auth_finish_oc">Dokončit</string>
     <string name="auth_dialog_wait_oc">Čekání na %s…</string>
     <string name="auth_dialog_pin_title_oc">PIN kód</string>
-    <string name="auth_dialog_pin_message_oc">Prosím vložte PIN poskytnutý stránkou %s. Je potřeba k dokončení autorizace.</string>
+    <string name="auth_dialog_pin_message_oc">Prosím, vložte PIN poskytnutý stránkou %s. Je potřeba k dokončení autorizace.</string>
     <string name="auth_dialog_completed_oc">c:geo je nyní autorizováno pro spojení s %s.</string>
     <string name="about_auth_1_oc">Následující proces umožňuje <b>c:geo</b> přistoupit k %s.</string>
     <string name="about_auth_2_oc">Stistknutím tlačítka \"authorizovat c:geo\" se spustí proces. Tento proces otevře webový prohlížeč se stránkou %s. Přihlašte se na této stránce a povolte <b>c:geo</b> přistupovat k Vašemu účtu. Poté, %s zobrazí číselný PIN kód. Tento PIN musí být vložen do <b>c:geo</b> and potvrzen, to je vše.</string>
@@ -588,7 +588,7 @@
     <string name="cache_personal_note_upload">Nahrát</string>
     <string name="cache_personal_note_uploading">Nahrávám osobní poznámku</string>
     <string name="cache_personal_note_upload_done">Osobní poznámka byla nahrána</string>
-    <string name="cache_personal_note_upload_cancelled">Nahrání osobní poznámky bylo zrušeno</string>
+    <string name="cache_personal_note_upload_cancelled">Nahrávání osobní poznámky bylo zrušeno</string>
     <string name="cache_personal_note_unstored">Keš není uložena</string>
     <string name="cache_personal_note_store">Keš bude nejdříve uložena pro povolení osobních poznámek.</string>
     <string name="cache_description">Popis</string>
@@ -916,7 +916,7 @@
     <string name="helper_barcode_title">Barcode Scanner</string>
     <string name="helper_barcode_description">Jsou zde skripty Greasemonkey a stránky, které ti umožní zobrazit geokód jako čárový kód. S touto aplikací může c:geo přečíst daný geokód přímo z tvého displeje.</string>
     <string name="helper_pocketquery_title">Pocket Query Creator</string>
-    <string name="helper_pocketquery_description">Umožňuje snadné vyvtváření a stahování Pocket Queries se středem na aktuální pozici nebo okolo bodu vybraného na mapě. Vyžaduje Premium Geocaching.com účet.</string>
+    <string name="helper_pocketquery_description">Umožňuje snadné vytváření a stahování Pocket Queries se středem na aktuální pozici nebo okolo bodu vybraného na mapě. Vyžaduje Premium Geocaching.com účet.</string>
 
     <!-- add-ons -->
     <string name="addon_missing_title">Chybějící modul</string>
@@ -1154,9 +1154,9 @@
 
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Mluvící kompas</string>
-    <string name="tts_start">Začni mluvit</string>
-    <string name="tts_stop">Ukonči mluvení</string>
-    <string name="err_tts_lang_not_supported">Aktuální jazyk není podporován převodem textu do řeči.</string>
+    <string name="tts_start">Začít mluvit</string>
+    <string name="tts_stop">Ukončit mluvení</string>
+    <string name="err_tts_lang_not_supported">Aktuální jazyk není podporován pro převod textu do řeči.</string>
     <string name="tts_one_kilometer">jeden kilometr</string>
     <plurals name="tts_kilometers">
         <item quantity="one">%s kilometr</item>
