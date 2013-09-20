@@ -3,10 +3,10 @@ package cgeo.geocaching.ui;
 import butterknife.InjectView;
 
 import cgeo.geocaching.CacheDetailActivity;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filter.IFilter;
@@ -328,7 +328,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     }
 
     public void setActualHeading(final float direction) {
-        if (Math.abs(AngleUtils.difference(azimuth, direction)) < 10) {
+        if (Math.abs(AngleUtils.difference(azimuth, direction)) < 5) {
             return;
         }
 
