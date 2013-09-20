@@ -1,8 +1,8 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
 
 import android.content.Context;
@@ -84,6 +84,7 @@ final public class CompassMiniView extends View {
 
     @Override
     public void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
         instances--;
         if (instances == 0) {
             if (compassArrow != null) {

@@ -87,6 +87,7 @@ public class CompassView extends View implements PeriodicHandlerListener {
     @Override
     public void onDetachedFromWindow() {
         redrawHandler.stop();
+        super.onDetachedFromWindow();
 
         if (compassUnderlay != null) {
             compassUnderlay.recycle();
