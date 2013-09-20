@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/menu_copy"
+        android:title="@android:string/copy">
+    </item>
+    <item
+        android:id="@+id/menu_translate_to_sys_lang"
+        android:title="@string/translate_to_sys_lang">
+    </item>
+    <item
+        android:id="@+id/menu_translate_to_english"
+        android:title="@string/translate_to_english">
+    </item>
+    <item
+        android:id="@+id/menu_cache_share_field"
+        android:title="@string/cache_share_field">
+    </item>
+
+</menu>

@@ -124,10 +124,6 @@ import java.util.regex.Pattern;
  */
 public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailActivity.Page> {
 
-    private static final int MENU_FIELD_COPY = 1;
-    private static final int MENU_FIELD_TRANSLATE = 2;
-    private static final int MENU_FIELD_TRANSLATE_EN = 3;
-    private static final int MENU_FIELD_SHARE = 4;
     private static final int MENU_SHARE = 12;
     private static final int MENU_CALENDAR = 11;
     private static final int MENU_CACHES_AROUND = 10;
@@ -366,11 +362,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             case R.id.value: // coordinates, gc-code, name
                 clickedItemText = ((TextView) view).getText();
                 final String itemTitle = (String) ((TextView) ((View) view.getParent()).findViewById(R.id.name)).getText();
-                buildOptionsContextmenu(menu, viewId, itemTitle, true);
+                buildDetailsContextMenu(menu, itemTitle, true);
                 break;
             case R.id.shortdesc:
                 clickedItemText = ((TextView) view).getText();
-                buildOptionsContextmenu(menu, viewId, res.getString(R.string.cache_description), false);
+                buildDetailsContextMenu(menu, res.getString(R.string.cache_description), false);
                 break;
             case R.id.longdesc:
                 // combine short and long description
@@ -380,19 +376,19 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 } else {
                     clickedItemText = shortDesc + "\n\n" + ((TextView) view).getText();
                 }
-                buildOptionsContextmenu(menu, viewId, res.getString(R.string.cache_description), false);
+                buildDetailsContextMenu(menu, res.getString(R.string.cache_description), false);
                 break;
             case R.id.personalnote:
                 clickedItemText = ((TextView) view).getText();
-                buildOptionsContextmenu(menu, viewId, res.getString(R.string.cache_personal_note), true);
+                buildDetailsContextMenu(menu, res.getString(R.string.cache_personal_note), true);
                 break;
             case R.id.hint:
                 clickedItemText = ((TextView) view).getText();
-                buildOptionsContextmenu(menu, viewId, res.getString(R.string.cache_hint), false);
+                buildDetailsContextMenu(menu, res.getString(R.string.cache_hint), false);
                 break;
             case R.id.log:
                 clickedItemText = ((TextView) view).getText();
-                buildOptionsContextmenu(menu, viewId, res.getString(R.string.cache_logs), false);
+                buildDetailsContextMenu(menu, res.getString(R.string.cache_logs), false);
                 break;
             case -1:
                 if (null != cache.getWaypoints()) {
@@ -435,55 +431,45 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
-    private void buildOptionsContextmenu(ContextMenu menu, int viewId, String fieldTitle, boolean copyOnly) {
+    private void buildDetailsContextMenu(ContextMenu menu, String fieldTitle, boolean copyOnly) {
         menu.setHeaderTitle(fieldTitle);
-        menu.add(viewId, MENU_FIELD_COPY, 0, res.getString(android.R.string.copy));
+        getMenuInflater().inflate(R.menu.details_context, menu);
+        menu.findItem(R.id.menu_translate_to_sys_lang).setVisible(!copyOnly);
         if (!copyOnly) {
             if (clickedItemText.length() > TranslationUtils.TRANSLATION_TEXT_LENGTH_WARN) {
                 showToast(res.getString(R.string.translate_length_warning));
             }
-            menu.add(viewId, MENU_FIELD_TRANSLATE, 0, res.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()));
-            if (!StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage())) {
-                menu.add(viewId, MENU_FIELD_TRANSLATE_EN, 0, res.getString(R.string.translate_to_english));
-            }
-
+            menu.findItem(R.id.menu_translate_to_sys_lang).setTitle(res.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()));
         }
-        menu.add(viewId, MENU_FIELD_SHARE, 0, res.getString(R.string.cache_share_field));
+        final boolean localeIsEnglish = StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage());
+        menu.findItem(R.id.menu_translate_to_english).setVisible(!copyOnly && !localeIsEnglish);
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_copy:
+                ClipboardUtils.copyToClipboard(clickedItemText);
+                showToast(res.getString(R.string.clipboard_copy_ok));
+                return true;
+            case R.id.menu_translate_to_sys_lang:
+                TranslationUtils.startActivityTranslate(this, Locale.getDefault().getLanguage(), HtmlUtils.extractText(clickedItemText));
+                return true;
+            case R.id.menu_translate_to_english:
+                TranslationUtils.startActivityTranslate(this, Locale.ENGLISH.getLanguage(), HtmlUtils.extractText(clickedItemText));
+                return true;
+            case R.id.menu_cache_share_field:
+                final Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, clickedItemText.toString());
+                startActivity(Intent.createChooser(intent, res.getText(R.string.cache_share_field)));
+                return true;
+            default:
+                break;
+        }
         final int groupId = item.getGroupId();
         final int index = item.getItemId();
         switch (groupId) {
-            case R.id.value:
-            case R.id.shortdesc:
-            case R.id.longdesc:
-            case R.id.personalnote:
-            case R.id.hint:
-            case R.id.log:
-                switch (index) {
-                    case MENU_FIELD_COPY:
-                        ClipboardUtils.copyToClipboard(clickedItemText);
-                        showToast(res.getString(R.string.clipboard_copy_ok));
-                        return true;
-                    case MENU_FIELD_TRANSLATE:
-                        TranslationUtils.startActivityTranslate(this, Locale.getDefault().getLanguage(), HtmlUtils.extractText(clickedItemText));
-                        return true;
-                    case MENU_FIELD_TRANSLATE_EN:
-                        TranslationUtils.startActivityTranslate(this, Locale.ENGLISH.getLanguage(), HtmlUtils.extractText(clickedItemText));
-                        return true;
-                    case MENU_FIELD_SHARE:
-                        final Intent intent = new Intent(Intent.ACTION_SEND);
-                        intent.setType("text/plain");
-                        intent.putExtra(Intent.EXTRA_TEXT, clickedItemText.toString());
-                        startActivity(Intent.createChooser(intent, res.getText(R.string.cache_share_field)));
-                        return true;
-                    default:
-                        break;
-                }
-
-                break;
             case CONTEXT_MENU_WAYPOINT_EDIT:
                 final Waypoint waypointEdit = cache.getWaypoint(index);
                 if (waypointEdit != null) {
