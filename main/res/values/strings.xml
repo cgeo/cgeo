@@ -904,7 +904,9 @@
     <string name="helper_barcode_description">There are Greasemonkey scripts and websites which enable display of geocodes as barcodes. With this app, c:geo can read such geocodes directly from the screen of your computer.</string>
     <string name="helper_pocketquery_title">Pocket Query Creator</string>
     <string name="helper_pocketquery_description">Allows easy creation and download of Pocket Queries centred on your current position or a point selected from a map. Requires a Premium Geocaching.com account.</string>
-
+    <string name="helper_google_translate_title">Google Translate</string>
+    <string name="helper_google_translate_description">If you download translation packages in the Google Translate app, then you can easily translate cache descriptions in c:geo by a long tap on the cache description text (without an Internet connection).</string>
+    
     <!-- add-ons -->
     <string name="addon_missing_title">Missing Add-On</string>
     <string name="addon_download_prompt">Get it now from Google Play.</string>
