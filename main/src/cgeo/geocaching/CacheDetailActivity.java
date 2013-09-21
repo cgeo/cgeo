@@ -130,14 +130,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private static final int MENU_BROWSER = 7;
     private static final int MENU_DEFAULT_NAVIGATION = 13;
 
-    private static final int CONTEXT_MENU_WAYPOINT_EDIT = 1234;
-    private static final int CONTEXT_MENU_WAYPOINT_DUPLICATE = 1235;
-    private static final int CONTEXT_MENU_WAYPOINT_DELETE = 1236;
-    private static final int CONTEXT_MENU_WAYPOINT_NAVIGATE = 1238;
-    private static final int CONTEXT_MENU_WAYPOINT_CACHES_AROUND = 1239;
-    private static final int CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION = 1240;
-    private static final int CONTEXT_MENU_WAYPOINT_RESET_ORIGINAL_CACHE_COORDINATES = 1241;
-
     private static final int MESSAGE_FAILED = -1;
     private static final int MESSAGE_SUCCEEDED = 1;
 
@@ -170,7 +162,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     };
 
     private CharSequence clickedItemText = null;
-    private int contextMenuWPIndex = -1;
 
     /**
      * If another activity is called and can modify the data of this activity, we refresh it on resume.
@@ -181,6 +172,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private TextView cacheDistanceView;
 
     protected ImagesList imagesList;
+    /**
+     * waypoint selected in context menu. This variable will be gone when the waypoint context menu is a fragment.
+     */
+    private Waypoint selectedWaypoint;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -357,7 +352,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo info) {
         super.onCreateContextMenu(menu, view, info);
         final int viewId = view.getId();
-        contextMenuWPIndex = -1;
         switch (viewId) {
             case R.id.value: // coordinates, gc-code, name
                 clickedItemText = ((TextView) view).getText();
@@ -398,24 +392,23 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                             if (parent.getChildAt(i) == view) {
                                 final List<Waypoint> sortedWaypoints = new ArrayList<Waypoint>(cache.getWaypoints());
                                 Collections.sort(sortedWaypoints);
-                                final Waypoint waypoint = sortedWaypoints.get(i);
-                                final int index = cache.getWaypoints().indexOf(waypoint);
+                                selectedWaypoint = sortedWaypoints.get(i);
+
                                 menu.setHeaderTitle(res.getString(R.string.waypoint));
-                                if (waypoint.getWaypointType().equals(WaypointType.ORIGINAL)) {
-                                    menu.add(CONTEXT_MENU_WAYPOINT_RESET_ORIGINAL_CACHE_COORDINATES, index, 0, R.string.waypoint_reset_cache_coords);
-                                } else {
-                                    menu.add(CONTEXT_MENU_WAYPOINT_EDIT, index, 0, R.string.waypoint_edit);
-                                    menu.add(CONTEXT_MENU_WAYPOINT_DUPLICATE, index, 0, R.string.waypoint_duplicate);
-                                }
-                                contextMenuWPIndex = index;
-                                if (waypoint.isUserDefined() && !waypoint.getWaypointType().equals(WaypointType.ORIGINAL)) {
-                                    menu.add(CONTEXT_MENU_WAYPOINT_DELETE, index, 0, R.string.waypoint_delete);
-                                }
-                                if (waypoint.getCoords() != null) {
-                                    menu.add(CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION, index, 0, NavigationAppFactory.getDefaultNavigationApplication().getName());
-                                    menu.add(CONTEXT_MENU_WAYPOINT_NAVIGATE, index, 0, R.string.cache_menu_navigate).setIcon(R.drawable.ic_menu_mapmode);
-                                    menu.add(CONTEXT_MENU_WAYPOINT_CACHES_AROUND, index, 0, R.string.cache_menu_around);
-                                }
+                                getMenuInflater().inflate(R.menu.waypoint_options, menu);
+                                final boolean isOriginalWaypoint = selectedWaypoint.getWaypointType().equals(WaypointType.ORIGINAL);
+                                menu.findItem(R.id.menu_waypoint_reset_cache_coords).setVisible(isOriginalWaypoint);
+                                menu.findItem(R.id.menu_waypoint_edit).setVisible(!isOriginalWaypoint);
+                                menu.findItem(R.id.menu_waypoint_duplicate).setVisible(!isOriginalWaypoint);
+                                final boolean userDefined = selectedWaypoint.isUserDefined() && !selectedWaypoint.getWaypointType().equals(WaypointType.ORIGINAL);
+                                menu.findItem(R.id.menu_waypoint_delete).setVisible(userDefined);
+                                final boolean hasCoords = selectedWaypoint.getCoords() != null;
+                                final MenuItem defaultNavigationMenu = menu.findItem(R.id.menu_waypoint_navigate_default);
+                                defaultNavigationMenu.setVisible(hasCoords);
+                                defaultNavigationMenu.setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
+                                menu.findItem(R.id.menu_waypoint_navigate).setVisible(hasCoords);
+                                menu.findItem(R.id.menu_waypoint_caches_around).setVisible(hasCoords);
+
                                 break;
                             }
                         }
@@ -448,6 +441,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+        // detail fields
             case R.id.menu_copy:
                 ClipboardUtils.copyToClipboard(clickedItemText);
                 showToast(res.getString(R.string.clipboard_copy_ok));
@@ -464,71 +458,57 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 intent.putExtra(Intent.EXTRA_TEXT, clickedItemText.toString());
                 startActivity(Intent.createChooser(intent, res.getText(R.string.cache_share_field)));
                 return true;
-            default:
-                break;
-        }
-        final int groupId = item.getGroupId();
-        final int index = item.getItemId();
-        switch (groupId) {
-            case CONTEXT_MENU_WAYPOINT_EDIT:
-                final Waypoint waypointEdit = cache.getWaypoint(index);
-                if (waypointEdit != null) {
-                    EditWaypointActivity.startActivityEditWaypoint(this, waypointEdit.getId());
+                // waypoints
+            case R.id.menu_waypoint_edit:
+                if (selectedWaypoint != null) {
+                    EditWaypointActivity.startActivityEditWaypoint(this, selectedWaypoint.getId());
                     refreshOnResume = true;
                 }
-                break;
-            case CONTEXT_MENU_WAYPOINT_DUPLICATE:
-                final Waypoint waypointDuplicate = cache.getWaypoint(index);
-                if (cache.duplicateWaypoint(waypointDuplicate)) {
+                return true;
+            case R.id.menu_waypoint_duplicate:
+                if (cache.duplicateWaypoint(selectedWaypoint)) {
                     DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                     notifyDataSetChanged();
                 }
-                break;
-            case CONTEXT_MENU_WAYPOINT_DELETE:
-                final Waypoint waypointDelete = cache.getWaypoint(index);
-                if (cache.deleteWaypoint(waypointDelete)) {
+                return true;
+            case R.id.menu_waypoint_delete:
+                if (cache.deleteWaypoint(selectedWaypoint)) {
                     DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                     notifyDataSetChanged();
                 }
-                break;
-            case CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION:
-                final Waypoint waypointNavigation = cache.getWaypoint(index);
-                if (waypointNavigation != null) {
-                    NavigationAppFactory.startDefaultNavigationApplication(1, this, waypointNavigation);
+                return true;
+            case R.id.menu_waypoint_navigate_default:
+                if (selectedWaypoint != null) {
+                    NavigationAppFactory.startDefaultNavigationApplication(1, this, selectedWaypoint);
                 }
-                break;
-            case CONTEXT_MENU_WAYPOINT_NAVIGATE:
-                final Waypoint waypointNav = cache.getWaypoint(contextMenuWPIndex);
-                if (waypointNav != null) {
-                    NavigationAppFactory.showNavigationMenu(this, null, waypointNav, null);
+                return true;
+            case R.id.menu_waypoint_navigate:
+                if (selectedWaypoint != null) {
+                    NavigationAppFactory.showNavigationMenu(this, null, selectedWaypoint, null);
                 }
-                break;
-            case CONTEXT_MENU_WAYPOINT_CACHES_AROUND:
-                final Waypoint waypointAround = cache.getWaypoint(index);
-                if (waypointAround != null) {
-                    CacheListActivity.startActivityCoordinates(this, waypointAround.getCoords());
+                return true;
+            case R.id.menu_waypoint_caches_around:
+                if (selectedWaypoint != null) {
+                    CacheListActivity.startActivityCoordinates(this, selectedWaypoint.getCoords());
                 }
-                break;
-
-            case CONTEXT_MENU_WAYPOINT_RESET_ORIGINAL_CACHE_COORDINATES:
-                final Waypoint waypointReset = cache.getWaypoint(index);
+                return true;
+            case R.id.menu_waypoint_reset_cache_coords:
                 if (ConnectorFactory.getConnector(cache).supportsOwnCoordinates()) {
-                    createResetCacheCoordinatesDialog(cache, waypointReset).show();
+                    createResetCacheCoordinatesDialog(cache, selectedWaypoint).show();
                 }
                 else {
                     final ProgressDialog progressDialog = ProgressDialog.show(this, getString(R.string.cache), getString(R.string.waypoint_reset), true);
                     final HandlerResetCoordinates handler = new HandlerResetCoordinates(this, progressDialog, false);
-                    new ResetCoordsThread(cache, handler, waypointReset, true, false, progressDialog).start();
+                    new ResetCoordsThread(cache, handler, selectedWaypoint, true, false, progressDialog).start();
                 }
-                break;
-
+                return true;
             default:
-                if (imagesList != null && imagesList.onContextItemSelected(item)) {
-                    return true;
-                }
-                return onOptionsItemSelected(item);
+                break;
         }
-        return false;
+        if (imagesList != null && imagesList.onContextItemSelected(item)) {
+            return true;
+        }
+        return onOptionsItemSelected(item);
     }
 
     @Override

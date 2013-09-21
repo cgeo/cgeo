@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <item
+        android:id="@+id/menu_waypoint_reset_cache_coords"
+        android:title="@string/waypoint_reset_cache_coords">
+    </item>
+    <item
+        android:id="@+id/menu_waypoint_edit"
+        android:title="@string/waypoint_edit">
+    </item>
+    <item
+        android:id="@+id/menu_waypoint_duplicate"
+        android:title="@string/waypoint_duplicate">
+    </item>
+    <item
+        android:id="@+id/menu_waypoint_delete"
+        android:title="@string/waypoint_delete">
+    </item>
+    <item
+        android:id="@+id/menu_waypoint_navigate_default"
+        android:title="@null">
+    </item>
+    <item
+        android:id="@+id/menu_waypoint_navigate"
+        android:title="@string/cache_menu_navigate">
+    </item>
+    <item
+        android:id="@+id/menu_waypoint_caches_around"
+        android:title="@string/cache_menu_around">
+    </item>
+</menu>
