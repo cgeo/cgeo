@@ -26,7 +26,6 @@ class AddEntry extends AbstractAddEntry {
 
         final Date eventDate = entry.parseDate();
         final String description = entry.parseDescription();
-        final String eventLocation = entry.parseLocation();
 
         // values
         final ContentValues event = new ContentValues();
@@ -43,8 +42,8 @@ class AddEntry extends AbstractAddEntry {
         event.put("title", Html.fromHtml(entry.getName()).toString());
         event.put("description", description);
 
-        if (eventLocation.length() > 0) {
-            event.put("eventLocation", eventLocation);
+        if (entry.getCoords().length() > 0) {
+            event.put("eventLocation", entry.getCoords());
         }
         event.put("hasAlarm", 0);
 

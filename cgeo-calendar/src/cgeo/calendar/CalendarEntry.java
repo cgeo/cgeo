@@ -20,7 +20,6 @@ class CalendarEntry {
     private String url;
     private String personalNote;
     private String name;
-    private String location;
     private String coords;
     private int startTimeMinutes = -1;
     private Uri uri;
@@ -32,7 +31,6 @@ class CalendarEntry {
         this.url = getParameter(ICalendar.PARAM_URL);
         this.personalNote = getParameter(ICalendar.PARAM_NOTE);
         this.name = getParameter(ICalendar.PARAM_NAME);
-        location = getParameter(ICalendar.PARAM_LOCATION);
         coords = getParameter(ICalendar.PARAM_COORDS);
         final String startTime = getParameter(ICalendar.PARAM_START_TIME_MINUTES);
         if (startTime.length() > 0) {
@@ -75,30 +73,6 @@ class CalendarEntry {
 
     public String getShortDesc() {
         return shortDesc;
-    }
-
-    /**
-     * @return location string with coordinates and location
-     */
-    protected String parseLocation() {
-        final StringBuilder locBuffer = new StringBuilder();
-        if (coords.length() > 0) {
-            locBuffer.append(coords);
-        }
-        if (location.length() > 0) {
-            boolean addParentheses = false;
-            if (locBuffer.length() > 0) {
-                addParentheses = true;
-                locBuffer.append(" (");
-            }
-
-            locBuffer.append(Html.fromHtml(location).toString());
-            if (addParentheses) {
-                locBuffer.append(')');
-            }
-        }
-
-        return locBuffer.toString();
     }
 
     /**
@@ -151,6 +125,10 @@ class CalendarEntry {
 
     public int getStartTimeMinutes() {
         return startTimeMinutes;
+    }
+
+    public String getCoords() {
+        return coords;
     }
 
 }
