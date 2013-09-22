@@ -5,13 +5,15 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.list.StoredList;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class GeocacheTest extends CGeoTestCase {
 
-    final static private class MockedEventCache extends Geocache {
+    private static final class MockedEventCache extends Geocache {
         public MockedEventCache(final Date date) {
             setHidden(date);
             setType(CacheType.EVENT);
@@ -51,15 +53,15 @@ public class GeocacheTest extends CGeoTestCase {
         assertEquals("GC1234", cache.getGeocode());
     }
 
-    public void testUpdateWaypointFromNote() {
+    public final void testUpdateWaypointFromNote() {
         assertWaypointsParsed("Test N51 13.888 E007 03.444", 1);
     }
 
-    public void testUpdateWaypointsFromNote() {
+    public final void testUpdateWaypointsFromNote() {
         assertWaypointsParsed("Test N51 13.888 E007 03.444 Test N51 13.233 E007 03.444 Test N51 09.123 E007 03.444", 3);
     }
 
-    private void assertWaypointsParsed(String note, int expectedWaypoints) {
+    private void assertWaypointsParsed(final String note, final int expectedWaypoints) {
 
         recordMapStoreFlags();
 
@@ -220,5 +222,33 @@ public class GeocacheTest extends CGeoTestCase {
         Geocache cache = new Geocache();
         cache.setName("GR8 01-01");
         assertEquals("GR000008 000001-000001", cache.getNameForSorting());
+    }
+
+    public static void testGuessEventTime() {
+        assertTime("text 14:20 text", 14, 20);
+        assertNoTime("text 30:40 text");
+        assertNoTime("text 14:90 text");
+        final String time_hours = CgeoApplication.getInstance().getString(R.string.cache_time_full_hours);
+        assertTime("text 16 " + time_hours, 16, 0);
+        assertTime("text 16 " + StringUtils.lowerCase(time_hours), 16, 0);
+        assertTime("text 16:00 " + time_hours, 16, 0);
+        assertTime("text 16.00 " + time_hours, 16, 0);
+        assertTime("text 14:20.", 14, 20);
+        assertTime("<b>14:20</b>", 14, 20);
+    }
+
+    private static void assertTime(final String description, final int hours, final int minutes) {
+        final Geocache cache = new Geocache();
+        cache.setDescription(description);
+        cache.setType(CacheType.EVENT);
+        final int minutesAfterMidnight = hours * 60 + minutes;
+        assertEquals(String.valueOf(minutesAfterMidnight), cache.guessEventTimeMinutes());
+    }
+
+    private static void assertNoTime(final String description) {
+        final Geocache cache = new Geocache();
+        cache.setDescription(description);
+        cache.setType(CacheType.EVENT);
+        assertNull(cache.guessEventTimeMinutes());
     }
 }

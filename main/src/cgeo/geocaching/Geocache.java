@@ -1695,30 +1695,28 @@ public class Geocache implements ICache, IWaypoint {
         if (!isEventCache()) {
             return null;
         }
-        // 12:34
-        final Pattern time = Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)\\b");
-        final MatcherWrapper matcher = new MatcherWrapper(time, getDescription());
-        while (matcher.find()) {
-            try {
-                final int hours = Integer.valueOf(matcher.group(1));
-                final int minutes = Integer.valueOf(matcher.group(2));
-                if (hours >= 0 && hours < 24 && minutes >= 0 && minutes < 60) {
-                    return String.valueOf(hours * 60 + minutes);
-                }
-            } catch (final NumberFormatException e) {
-                // cannot happen, but static code analysis doesn't know
-            }
-        }
-        // 12 o'clock
+
         final String hourLocalized = CgeoApplication.getInstance().getString(R.string.cache_time_full_hours);
+        ArrayList<Pattern> patterns = new ArrayList<Pattern>();
+
+        // 12:34
+        patterns.add(Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)\\b"));
         if (StringUtils.isNotBlank(hourLocalized)) {
-            final Pattern fullHours = Pattern.compile("\\b(\\d{1,2})\\s+" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE);
-            final MatcherWrapper matcherHours = new MatcherWrapper(fullHours, getDescription());
-            if (matcherHours.find()) {
+            // 12 o'clock, 12.00 o'clock
+            patterns.add(Pattern.compile("\\b(\\d{1,2})(?:\\.00)?\\s+" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
+        }
+
+        for (Pattern pattern : patterns) {
+            final MatcherWrapper matcher = new MatcherWrapper(pattern, getDescription());
+            while (matcher.find()) {
                 try {
-                    final int hours = Integer.valueOf(matcherHours.group(1));
-                    if (hours >= 0 && hours < 24) {
-                        return String.valueOf(hours * 60);
+                    final int hours = Integer.valueOf(matcher.group(1));
+                    int minutes = 0;
+                    if (matcher.groupCount() >= 2) {
+                        minutes = Integer.valueOf(matcher.group(2));
+                    }
+                    if (hours >= 0 && hours < 24 && minutes >= 0 && minutes < 60) {
+                        return String.valueOf(hours * 60 + minutes);
                     }
                 } catch (final NumberFormatException e) {
                     // cannot happen, but static code analysis doesn't know
