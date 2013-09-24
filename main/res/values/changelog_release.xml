@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release</b>\n
+    <b>2013.09.19</b>\n
     · Unscaled log picture now uploaded correctly\n
     · GPS exhibit not recognized as event cache\n
     · Lost and Found cache type not parsed\n
