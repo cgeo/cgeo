@@ -71,7 +71,7 @@ public class CachePopup extends AbstractPopupActivity {
     }
 
     @Override
-    protected void showNavigationMenu() {
+    public void showNavigationMenu() {
         NavigationAppFactory.showNavigationMenu(this, cache, null, null);
     }
 
@@ -216,7 +216,7 @@ public class CachePopup extends AbstractPopupActivity {
     }
 
     @Override
-    protected void navigateTo() {
+    public void navigateTo() {
         NavigationAppFactory.startDefaultNavigationApplication(1, this, cache);
     }
 

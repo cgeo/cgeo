@@ -12,6 +12,11 @@
         android:title="@string/cache_menu_navigate">
     </item>
     <item
+        android:id="@+id/menu_calendar"
+        android:icon="@drawable/ic_menu_agenda"
+        android:title="@string/cache_menu_event">
+    </item>
+    <item
         android:id="@+id/menu_log_visit_offline"
         android:icon="@drawable/ic_menu_edit"
         android:title="@string/cache_menu_visit_offline">
@@ -31,5 +36,10 @@
         android:icon="@drawable/ic_menu_info_details"
         android:title="@string/cache_menu_browser">
     </item>
-
+    <item
+        android:id="@+id/menu_share"
+        android:icon="@drawable/ic_menu_share"
+        android:title="@string/cache_menu_share">
+    </item>
+    
 </menu>

@@ -2,7 +2,6 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.gcvote.GCVote;
@@ -17,9 +16,7 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.content.Intent;
 import android.graphics.Rect;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,7 +28,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public abstract class AbstractPopupActivity extends AbstractActivity {
+public abstract class AbstractPopupActivity extends AbstractActivity implements CacheMenuHandler.ActivityInterface {
 
     protected Geocache cache = null;
     protected String geocode = null;
@@ -110,11 +107,8 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         geocode = cache.getGeocode();
     }
 
-    private void showInBrowser() {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(cache.getUrl())));
-    }
-
-    protected abstract void navigateTo();
+    @Override
+    public abstract void navigateTo();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -150,31 +144,17 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.abstract_popup_activity, menu);
+        CacheMenuHandler.addMenuItems(this, menu, cache);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        final int menuItem = item.getItemId();
-
-        switch (menuItem) {
-            case R.id.menu_default_navigation:
-                navigateTo();
-                return true;
-            case R.id.menu_navigate:
-                showNavigationMenu();
-                return true;
-            case R.id.menu_caches_around:
-                cachesAround();
-                return true;
-            case R.id.menu_show_in_browser:
-                showInBrowser();
-                return true;
-            default:
-                if (LoggingUI.onMenuItemSelected(item, this, cache)) {
-                    return true;
-                }
+        if (CacheMenuHandler.onMenuItemSelected(item, this, cache)) {
+            return true;
+        }
+        if (LoggingUI.onMenuItemSelected(item, this, cache)) {
+            return true;
         }
 
         return true;
@@ -191,12 +171,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         super.onPrepareOptionsMenu(menu);
 
         try {
-            final boolean visible = getCoordinates() != null;
-            menu.findItem(R.id.menu_default_navigation).setVisible(visible);
-            menu.findItem(R.id.menu_navigate).setVisible(visible);
-            menu.findItem(R.id.menu_caches_around).setVisible(visible);
-
-            menu.findItem(R.id.menu_default_navigation).setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
+            CacheMenuHandler.onPrepareOptionsMenu(menu, cache);
             LoggingUI.onPrepareOptionsMenu(menu, cache);
         } catch (final RuntimeException e) {
             // nothing
@@ -227,7 +202,8 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         return super.onTouchEvent(event);
     }
 
-    protected abstract void showNavigationMenu();
+    @Override
+    public abstract void showNavigationMenu();
 
     protected abstract void startDefaultNavigation2();
 
@@ -270,7 +246,8 @@ public abstract class AbstractPopupActivity extends AbstractActivity {
         });
     }
 
-    private void cachesAround() {
+    @Override
+    public void cachesAround() {
         final Geopoint coords = getCoordinates();
         if (coords == null) {
             showToast(res.getString(R.string.err_location_unknown));

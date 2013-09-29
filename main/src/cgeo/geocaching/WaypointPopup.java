@@ -94,7 +94,7 @@ public class WaypointPopup extends AbstractPopupActivity {
     }
 
     @Override
-    protected void navigateTo() {
+    public void navigateTo() {
         NavigationAppFactory.startDefaultNavigationApplication(1, this, waypoint);
     }
 
@@ -119,7 +119,7 @@ public class WaypointPopup extends AbstractPopupActivity {
     }
 
     @Override
-    protected void showNavigationMenu() {
+    public void showNavigationMenu() {
         NavigationAppFactory.showNavigationMenu(this, null, waypoint, null);
     }
 

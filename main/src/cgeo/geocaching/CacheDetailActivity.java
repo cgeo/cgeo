@@ -3,7 +3,6 @@ package cgeo.geocaching;
 import butterknife.InjectView;
 import butterknife.Views;
 
-import cgeo.calendar.ICalendar;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.activity.Progress;
@@ -16,12 +15,10 @@ import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
-import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
@@ -65,8 +62,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
@@ -90,7 +85,6 @@ import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -122,13 +116,7 @@ import java.util.regex.Pattern;
  *
  * e.g. details, description, logs, waypoints, inventory...
  */
-public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailActivity.Page> {
-
-    private static final int MENU_SHARE = 12;
-    private static final int MENU_CALENDAR = 11;
-    private static final int MENU_CACHES_AROUND = 10;
-    private static final int MENU_BROWSER = 7;
-    private static final int MENU_DEFAULT_NAVIGATION = 13;
+public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailActivity.Page> implements CacheMenuHandler.ActivityInterface {
 
     private static final int MESSAGE_FAILED = -1;
     private static final int MESSAGE_SUCCEEDED = 1;
@@ -513,58 +501,28 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (null != cache) {
-            menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication().getName()).setIcon(R.drawable.ic_menu_compass); // default navigation tool
-
-            final SubMenu subMenu = menu.addSubMenu(0, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(R.drawable.ic_menu_mapmode);
-            NavigationAppFactory.addMenuItems(subMenu, cache);
-
-            menu.add(0, MENU_CALENDAR, 0, res.getString(R.string.cache_menu_event)).setIcon(R.drawable.ic_menu_agenda); // add event to calendar
-            LoggingUI.addMenuItems(this, menu, cache);
-            menu.add(0, MENU_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(R.drawable.ic_menu_rotate); // caches around
-            menu.add(0, MENU_BROWSER, 0, res.getString(R.string.cache_menu_browser)).setIcon(R.drawable.ic_menu_globe); // browser
-            menu.add(0, MENU_SHARE, 0, res.getString(R.string.cache_menu_share)).setIcon(R.drawable.ic_menu_share); // share cache
-        }
+        CacheMenuHandler.addMenuItems(this, menu, cache);
         return true;
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if (cache != null) {
-            menu.findItem(MENU_DEFAULT_NAVIGATION).setVisible(null != cache.getCoords());
-            menu.findItem(MENU_CALENDAR).setVisible(cache.canBeAddedToCalendar());
-            menu.findItem(MENU_CACHES_AROUND).setVisible(null != cache.getCoords() && cache.supportsCachesAround());
-            menu.findItem(MENU_BROWSER).setVisible(cache.canOpenInBrowser());
-            LoggingUI.onPrepareOptionsMenu(menu, cache);
-        }
+        CacheMenuHandler.onPrepareOptionsMenu(menu, cache);
+        LoggingUI.onPrepareOptionsMenu(menu, cache);
         return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (CacheMenuHandler.onMenuItemSelected(item, this, cache)) {
+            return true;
+        }
+
         final int menuItem = item.getItemId();
 
         switch (menuItem) {
             case 0:
                 // no menu selected, but a new sub menu shown
-                return false;
-            case MENU_DEFAULT_NAVIGATION:
-                startDefaultNavigation();
-                return true;
-            case MENU_BROWSER:
-                cache.openInBrowser(this);
-                return true;
-            case MENU_CACHES_AROUND:
-                CacheListActivity.startActivityCoordinates(this, cache.getCoords());
-                return true;
-            case MENU_CALENDAR:
-                addToCalendarWithIntent();
-                return true;
-            case MENU_SHARE:
-                if (cache != null) {
-                    cache.shareCache(this, res);
-                    return true;
-                }
                 return false;
             default:
                 if (NavigationAppFactory.onMenuItemSelected(item, this, cache)) {
@@ -695,80 +653,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         public void run() {
             search = Geocache.searchByGeocode(geocode, StringUtils.isBlank(geocode) ? guid : null, 0, false, handler);
             handler.sendMessage(Message.obtain());
-        }
-    }
-
-    /**
-     * Indicates whether the specified action can be used as an intent. This
-     * method queries the package manager for installed packages that can
-     * respond to an intent with the specified action. If no suitable package is
-     * found, this method returns false.
-     *
-     * @param context
-     *            The application's environment.
-     * @param action
-     *            The Intent action to check for availability.
-     * @param uri
-     *            The Intent URI to check for availability.
-     *
-     * @return True if an Intent with the specified action can be sent and
-     *         responded to, false otherwise.
-     */
-    private static boolean isIntentAvailable(Context context, String action, Uri uri) {
-        final PackageManager packageManager = context.getPackageManager();
-        final Intent intent;
-        if (uri == null) {
-            intent = new Intent(action);
-        } else {
-            intent = new Intent(action, uri);
-        }
-        final List<ResolveInfo> list = packageManager.queryIntentActivities(intent,
-                PackageManager.MATCH_DEFAULT_ONLY);
-        return !list.isEmpty();
-    }
-
-    private void addToCalendarWithIntent() {
-
-        final boolean calendarAddOnAvailable = isIntentAvailable(this, ICalendar.INTENT, Uri.parse(ICalendar.URI_SCHEME + "://" + ICalendar.URI_HOST));
-
-        if (calendarAddOnAvailable) {
-            final Parameters params = new Parameters(
-                    ICalendar.PARAM_NAME, cache.getName(),
-                    ICalendar.PARAM_NOTE, StringUtils.defaultString(cache.getPersonalNote()),
-                    ICalendar.PARAM_HIDDEN_DATE, String.valueOf(cache.getHiddenDate().getTime()),
-                    ICalendar.PARAM_URL, StringUtils.defaultString(cache.getUrl()),
-                    ICalendar.PARAM_COORDS, cache.getCoords() == null ? "" : cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW),
-                    ICalendar.PARAM_LOCATION, StringUtils.defaultString(cache.getLocation()),
-                    ICalendar.PARAM_SHORT_DESC, StringUtils.defaultString(cache.getShortDescription()),
-                    ICalendar.PARAM_START_TIME_MINUTES, StringUtils.defaultString(cache.guessEventTimeMinutes())
-                    );
-
-            startActivity(new Intent(ICalendar.INTENT,
-                    Uri.parse(ICalendar.URI_SCHEME + "://" + ICalendar.URI_HOST + "?" + params.toString())));
-        } else {
-            // Inform user the calendar add-on is not installed and let them get it from Google Play
-            new AlertDialog.Builder(this)
-                    .setTitle(res.getString(R.string.addon_missing_title))
-                    .setMessage(new StringBuilder(res.getString(R.string.helper_calendar_missing))
-                            .append(' ')
-                            .append(res.getString(R.string.addon_download_prompt))
-                            .toString())
-                    .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            final Intent intent = new Intent(Intent.ACTION_VIEW);
-                            intent.setData(Uri.parse(ICalendar.CALENDAR_ADDON_URI));
-                            startActivity(intent);
-                        }
-                    })
-                    .setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    })
-                    .create()
-                    .show();
         }
     }
 
@@ -2479,5 +2363,20 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         } else {
             personalNoteView.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void navigateTo() {
+        startDefaultNavigation();
+    }
+
+    @Override
+    public void showNavigationMenu() {
+        NavigationAppFactory.showNavigationMenu(this, cache, null, null);
+    }
+
+    @Override
+    public void cachesAround() {
+        CacheListActivity.startActivityCoordinates(this, cache.getCoords());
     }
 }
