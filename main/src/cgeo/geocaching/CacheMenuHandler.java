@@ -36,27 +36,31 @@ public class CacheMenuHandler extends AbstractUIFactory {
 
     }
 
-    public static boolean onMenuItemSelected(MenuItem item, CacheMenuHandler.ActivityInterface activity, Geocache cache) {
+    public static boolean onMenuItemSelected(MenuItem item, CacheMenuHandler.ActivityInterface activityInterface, Geocache cache) {
+        assert activityInterface instanceof Activity;
+        final Activity activity = (Activity) activityInterface;
         switch (item.getItemId()) {
             case R.id.menu_default_navigation:
-                activity.navigateTo();
+                activityInterface.navigateTo();
                 return true;
             case R.id.menu_navigate:
-                activity.showNavigationMenu();
+                activityInterface.showNavigationMenu();
                 return true;
             case R.id.menu_caches_around:
-                activity.cachesAround();
+                activityInterface.cachesAround();
                 return true;
             case R.id.menu_show_in_browser:
-                cache.openInBrowser((Activity) activity);
+                cache.openInBrowser(activity);
                 return true;
             case R.id.menu_share:
-                cache.shareCache((Activity) activity, res);
+                cache.shareCache(activity, res);
                 return true;
             case R.id.menu_calendar:
-                addToCalendarWithIntent((Activity) activity, cache);
+                addToCalendarWithIntent(activity, cache);
+                return true;
+            default:
+                return false;
         }
-        return false;
     }
 
     public static void onPrepareOptionsMenu(final Menu menu, final Geocache cache) {
