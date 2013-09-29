@@ -1,12 +1,12 @@
 package cgeo.geocaching.connector.oc;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Image;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.LogResult;
@@ -81,7 +81,6 @@ final class OkapiClient {
     private static final String CACHE_LATEST_LOGS = "latest_logs";
     private static final String CACHE_IMAGE_URL = "url";
     private static final String CACHE_IMAGE_CAPTION = "caption";
-    private static final String CACHE_IMAGE_IS_SPOILER = "is_spoiler";
     private static final String CACHE_IMAGES = "images";
     private static final String CACHE_HINT = "hint";
     private static final String CACHE_DESCRIPTION = "description";
@@ -318,6 +317,7 @@ final class OkapiClient {
                     final JSONObject imageResponse = images.getJSONObject(i);
                     final String title = imageResponse.getString(CACHE_IMAGE_CAPTION);
                     final String url = absoluteUrl(imageResponse.getString(CACHE_IMAGE_URL), cache.getGeocode());
+                    // all images are added as spoiler images, although OKAPI has spoiler and non spoiler images
                     cache.addSpoiler(new Image(url, title));
                 }
             }

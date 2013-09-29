@@ -50,7 +50,6 @@ public class CompassActivity extends AbstractActivity {
     private static final String EXTRAS_CACHE_INFO = "cacheinfo";
     private static final List<IWaypoint> coordinates = new ArrayList<IWaypoint>();
     private static final int COORDINATES_OFFSET = 10;
-    private static final int REQUEST_TTS_DATA_CHECK = 1;
     private Geopoint dstCoords = null;
     private float cacheHeading = 0;
     private String title = null;
@@ -105,7 +104,7 @@ public class CompassActivity extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        // sensor & geolocation manager
+        // sensor and geolocation manager
         geoDirHandler.startGeoAndDir();
     }
 
