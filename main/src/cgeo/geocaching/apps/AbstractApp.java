@@ -1,7 +1,7 @@
 package cgeo.geocaching.apps;
 
-import cgeo.geocaching.Geocache;
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.utils.ProcessUtils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -13,16 +13,21 @@ public abstract class AbstractApp implements App {
     private final String packageName;
     private final String intent;
     private final String name;
+    /**
+     * a unique id, defined in res/values/ids.xml
+     */
+    private final int id;
 
-    protected AbstractApp(final String name, final String intent,
+    protected AbstractApp(final String name, final int id, final String intent,
             final String packageName) {
         this.name = name;
+        this.id = id;
         this.intent = intent;
         this.packageName = packageName;
     }
 
-    protected AbstractApp(final String name, final String intent) {
-        this(name, intent, null);
+    protected AbstractApp(final String name, final int id, final String intent) {
+        this(name, id, intent, null);
     }
 
     @Override
@@ -38,7 +43,7 @@ public abstract class AbstractApp implements App {
     }
 
     @Override
-    public boolean isDefaultNavigationApp() {
+    public boolean isUsableAsDefaultNavigationApp() {
         return true;
     }
 
@@ -49,7 +54,7 @@ public abstract class AbstractApp implements App {
 
     @Override
     public int getId() {
-        return getName().hashCode();
+        return id;
     }
 
     protected static String getString(int ressourceId) {

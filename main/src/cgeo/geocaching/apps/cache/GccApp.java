@@ -10,7 +10,7 @@ public class GccApp extends AbstractGeneralApp {
     private static final String PACKAGE_PRO = "eisbehr.gcc.pro";
 
     public GccApp() {
-        super(getString(R.string.cache_menu_gcc), null);
+        super(getString(R.string.cache_menu_gcc), R.id.cache_app_gcc, null);
     }
 
     @Override

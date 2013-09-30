@@ -1,8 +1,8 @@
 package cgeo.geocaching.apps.cachelist;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.Geocache;
 import cgeo.geocaching.apps.AbstractApp;
 import cgeo.geocaching.maps.CGeoMap;
 
@@ -13,7 +13,7 @@ import java.util.List;
 class InternalCacheListMap extends AbstractApp implements CacheListApp {
 
     InternalCacheListMap() {
-        super(getString(R.string.cache_menu_map), null);
+        super(getString(R.string.cache_menu_map), R.id.cache_list_app_map, null);
     }
 
     @Override

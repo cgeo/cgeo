@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/menu_default_navigation"
+        android:icon="@drawable/ic_menu_compass"
+        android:title="@string/cache_menu_navigate"> <!-- will be replaced -->
+    </item>
+    <item
+        android:id="@+id/menu_navigate"
+        android:icon="@drawable/ic_menu_mapmode"
+        android:title="@string/cache_menu_navigate">
+    </item>
+    <item
+        android:id="@+id/menu_cache_details"
+        android:title="@string/cache_menu_details">
+    </item>
+    <item
+        android:id="@+id/menu_log_visit_offline"
+        android:icon="@drawable/ic_menu_edit"
+        android:title="@string/cache_menu_visit_offline">
+    </item>
+    <item
+        android:id="@+id/menu_log_visit"
+        android:icon="@drawable/ic_menu_edit"
+        android:title="@string/cache_menu_visit">
+    </item>
+    <item
+        android:id="@+id/menu_drop_cache"
+        android:title="@string/cache_offline_drop">
+    </item>
+    <item
+        android:id="@+id/menu_move_to_list"
+        android:title="@string/cache_menu_move_list">
+    </item>
+    <item
+        android:id="@+id/menu_export"
+        android:title="@string/export">
+    </item>
+    <item
+        android:id="@+id/menu_refresh"
+        android:title="@string/cache_menu_refresh">
+    </item>
+    <item
+        android:id="@+id/menu_store_cache"
+        android:title="@string/cache_offline_store">
+    </item>
+
+</menu>

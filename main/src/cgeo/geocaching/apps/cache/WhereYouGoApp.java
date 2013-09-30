@@ -1,12 +1,12 @@
 package cgeo.geocaching.apps.cache;
 
-import cgeo.geocaching.R;
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
 
 public class WhereYouGoApp extends AbstractGeneralApp {
     public WhereYouGoApp() {
-        super(getString(R.string.cache_menu_whereyougo), "menion.android.whereyougo");
+        super(getString(R.string.cache_menu_whereyougo), R.id.cache_app_whereyougo, "menion.android.whereyougo");
     }
 
     @Override

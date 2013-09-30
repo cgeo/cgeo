@@ -45,6 +45,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RunnableWithArgument;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -68,7 +69,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
@@ -85,34 +85,6 @@ import java.util.Set;
 public class CacheListActivity extends AbstractListActivity implements FilteredActivity, LoaderManager.LoaderCallbacks<SearchResult> {
 
     private static final int MAX_LIST_ITEMS = 1000;
-    private static final int MENU_REFRESH_STORED = 2;
-    private static final int MENU_CACHE_DETAILS = 4;
-    private static final int MENU_DROP_CACHES = 5;
-    private static final int MENU_IMPORT_GPX = 6;
-    private static final int MENU_CREATE_LIST = 7;
-    private static final int MENU_DROP_LIST = 8;
-    private static final int MENU_INVERT_SELECTION = 9;
-    private static final int MENU_SWITCH_LIST = 17;
-    private static final int MENU_IMPORT_WEB = 21;
-    private static final int MENU_EXPORT = 22;
-    private static final int MENU_REMOVE_FROM_HISTORY = 23;
-    private static final int MENU_DROP_CACHE = 24;
-    private static final int MENU_MOVE_TO_LIST = 25;
-    private static final int MENU_REFRESH = 26;
-    private static final int MENU_SWITCH_SELECT_MODE = 52;
-    private static final int SUBMENU_SHOW_MAP = 54;
-    private static final int SUBMENU_MANAGE_LISTS = 55;
-    private static final int SUBMENU_MANAGE_OFFLINE = 56;
-    private static final int MENU_SORT = 57;
-    private static final int SUBMENU_MANAGE_HISTORY = 60;
-    private static final int MENU_RENAME_LIST = 64;
-    private static final int MENU_DROP_CACHES_AND_LIST = 65;
-    private static final int MENU_DEFAULT_NAVIGATION = 66;
-    private static final int MENU_NAVIGATION = 69;
-    private static final int MENU_STORE_CACHE = 73;
-    private static final int MENU_FILTER = 74;
-    private static final int MENU_DELETE_EVENTS = 75;
-    private static final int MENU_CLEAR_OFFLINE_LOGS = 76;
 
     private static final int MSG_DONE = -1;
     private static final int MSG_RESTART_GEO_AND_DIR = -2;
@@ -162,10 +134,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     };
     private ContextMenuInfo lastMenuInfo;
     private String contextMenuGeocode = "";
-    /**
-     * the navigation menu item for the cache list (not the context menu!), or <code>null</code>
-     */
-    private MenuItem navigationMenu;
 
     // FIXME: This method has mostly been replaced by the loaders. But it still contains a license agreement check.
     public void handleCachesLoaded() {
@@ -531,132 +499,80 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, MENU_FILTER, 0, res.getString(R.string.caches_filter)).setIcon(R.drawable.ic_menu_filter);
+        getMenuInflater().inflate(R.menu.cache_list_options, menu);
 
-        if (type != CacheListType.HISTORY) {
-            menu.add(0, MENU_SORT, 0, res.getString(R.string.caches_sort)).setIcon(R.drawable.ic_menu_sort_alphabetically);
-        }
-
-        menu.add(0, MENU_SWITCH_SELECT_MODE, 0, res.getString(R.string.caches_select_mode)).setIcon(R.drawable.ic_menu_agenda);
-        menu.add(0, MENU_INVERT_SELECTION, 0, res.getString(R.string.caches_select_invert)).setIcon(R.drawable.ic_menu_mark);
-        if (type == CacheListType.OFFLINE) {
-            final SubMenu subMenu = menu.addSubMenu(0, SUBMENU_MANAGE_OFFLINE, 0, res.getString(R.string.caches_manage)).setIcon(R.drawable.ic_menu_save);
-            subMenu.add(0, MENU_DROP_CACHES, 0, res.getString(R.string.caches_drop_all)); // delete saved caches
-            subMenu.add(0, MENU_DROP_CACHES_AND_LIST, 0, res.getString(R.string.caches_drop_all_and_list));
-            subMenu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.cache_offline_refresh)); // download details for all caches
-            subMenu.add(0, MENU_MOVE_TO_LIST, 0, res.getString(R.string.cache_menu_move_list));
-            subMenu.add(0, MENU_DELETE_EVENTS, 0, res.getString(R.string.caches_delete_events));
-            subMenu.add(0, MENU_CLEAR_OFFLINE_LOGS, 0, res.getString(R.string.caches_clear_offlinelogs));
-
-            //TODO: add submenu/AlertDialog and use R.string.gpx_import_title
-            subMenu.add(0, MENU_IMPORT_GPX, 0, res.getString(R.string.gpx_import_title));
-            if (Settings.getWebDeviceCode() != null) {
-                subMenu.add(0, MENU_IMPORT_WEB, 0, res.getString(R.string.web_import_title));
-            }
-
-            subMenu.add(0, MENU_EXPORT, 0, res.getString(R.string.export)); // export caches
-        } else {
-            if (type == CacheListType.HISTORY) {
-                final SubMenu subMenu = menu.addSubMenu(0, SUBMENU_MANAGE_HISTORY, 0, res.getString(R.string.caches_manage)).setIcon(R.drawable.ic_menu_save);
-                subMenu.add(0, MENU_EXPORT, 0, res.getString(R.string.export)); // export caches
-                subMenu.add(0, MENU_REMOVE_FROM_HISTORY, 0, res.getString(R.string.cache_clear_history)); // remove from history
-                subMenu.add(0, MENU_CLEAR_OFFLINE_LOGS, 0, res.getString(R.string.caches_clear_offlinelogs));
-                menu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.cache_offline_refresh)).setIcon(R.drawable.ic_menu_set_as);
-            } else {
-                menu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.caches_store_offline)).setIcon(R.drawable.ic_menu_set_as); // download details for all caches
-            }
-        }
-
-        navigationMenu = CacheListAppFactory.addMenuItems(menu, this, res);
-
-        if (type == CacheListType.OFFLINE) {
-            final SubMenu subMenu = menu.addSubMenu(0, SUBMENU_MANAGE_LISTS, 0, res.getString(R.string.list_menu)).setIcon(R.drawable.ic_menu_more);
-            subMenu.add(0, MENU_CREATE_LIST, 0, res.getString(R.string.list_menu_create));
-            subMenu.add(0, MENU_DROP_LIST, 0, res.getString(R.string.list_menu_drop));
-            subMenu.add(0, MENU_RENAME_LIST, 0, res.getString(R.string.list_menu_rename));
-            subMenu.add(0, MENU_SWITCH_LIST, 0, res.getString(R.string.list_menu_change));
-        }
+        CacheListAppFactory.addMenuItems(menu, this, res);
 
         return true;
     }
 
     private static void setVisible(final Menu menu, final int itemId, final boolean visible) {
-        final MenuItem item = menu.findItem(itemId);
-        if (item != null) {
-            item.setVisible(visible);
-        }
+        menu.findItem(itemId).setVisible(visible);
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
+        final boolean isHistory = type == CacheListType.HISTORY;
+        final boolean isOffline = type == CacheListType.OFFLINE;
+        final boolean isEmpty = cacheList.isEmpty();
+        final boolean isConcrete = isConcreteList();
+
         try {
             if (adapter.isSelectMode()) {
-                menu.findItem(MENU_SWITCH_SELECT_MODE).setTitle(res.getString(R.string.caches_select_mode_exit))
+                menu.findItem(R.id.menu_switch_select_mode).setTitle(res.getString(R.string.caches_select_mode_exit))
                         .setIcon(R.drawable.ic_menu_clear_playlist);
-                menu.findItem(MENU_INVERT_SELECTION).setVisible(true);
             } else {
-                menu.findItem(MENU_SWITCH_SELECT_MODE).setTitle(res.getString(R.string.caches_select_mode))
+                menu.findItem(R.id.menu_switch_select_mode).setTitle(res.getString(R.string.caches_select_mode))
                         .setIcon(R.drawable.ic_menu_agenda);
-                menu.findItem(MENU_INVERT_SELECTION).setVisible(false);
             }
+            menu.findItem(R.id.menu_invert_selection).setVisible(adapter.isSelectMode());
 
-            final boolean isEmpty = cacheList.isEmpty();
-            final boolean isConcrete = isConcreteList();
 
-            setVisible(menu, MENU_SWITCH_SELECT_MODE, !isEmpty);
-            setVisible(menu, SUBMENU_MANAGE_HISTORY, !isEmpty);
-            setVisible(menu, SUBMENU_SHOW_MAP, !isEmpty);
-            setVisible(menu, MENU_SORT, !isEmpty);
-            setVisible(menu, MENU_REFRESH_STORED, !isEmpty && (isConcrete || type != CacheListType.OFFLINE));
-            setVisible(menu, MENU_DROP_CACHES, !isEmpty);
-            setVisible(menu, MENU_DROP_CACHES_AND_LIST, isConcrete && !isEmpty);
-            setVisible(menu, MENU_DELETE_EVENTS, isConcrete && !isEmpty && containsEvents());
-            setVisible(menu, MENU_MOVE_TO_LIST, !isEmpty);
-            setVisible(menu, MENU_EXPORT, !isEmpty);
-            setVisible(menu, MENU_REMOVE_FROM_HISTORY, !isEmpty);
-            setVisible(menu, MENU_CLEAR_OFFLINE_LOGS, !isEmpty && containsOfflineLogs());
+            setVisible(menu, R.id.menu_switch_select_mode, !isEmpty);
+            setVisible(menu, R.id.submenu_manage, isOffline || isHistory);
+            setVisible(menu, R.id.submenu_manage_lists, isOffline);
 
-            if (navigationMenu != null) {
-                navigationMenu.setVisible(!isEmpty);
+            setVisible(menu, R.id.menu_sort, !isEmpty && !isHistory);
+            setVisible(menu, R.id.menu_refresh_stored, !isEmpty && (isConcrete || type != CacheListType.OFFLINE));
+            setVisible(menu, R.id.menu_drop_caches, !isEmpty && isOffline);
+            setVisible(menu, R.id.menu_drop_caches_and_list, isConcrete && !isEmpty && isOffline);
+            setVisible(menu, R.id.menu_delete_events, isConcrete && !isEmpty && containsEvents());
+            setVisible(menu, R.id.menu_move_to_list, isOffline && !isEmpty);
+            setVisible(menu, R.id.menu_export, !isEmpty && (isHistory || isOffline));
+            setVisible(menu, R.id.menu_remove_from_history, !isEmpty && isHistory);
+            setVisible(menu, R.id.menu_clear_offline_logs, !isEmpty && containsOfflineLogs() && (isHistory || isOffline));
+            setVisible(menu, R.id.menu_import_web, isOffline && Settings.getWebDeviceCode() != null);
+            setVisible(menu, R.id.menu_import_gpx, isOffline);
+            setVisible(menu, R.id.menu_refresh_stored_top, !isOffline);
+
+            if (!isOffline && !isHistory) {
+                menu.findItem(R.id.menu_refresh_stored_top).setTitle(R.string.caches_store_offline);
             }
 
             final boolean hasSelection = adapter != null && adapter.getCheckedCount() > 0;
             final boolean isNonDefaultList = isConcrete && listId != StoredList.STANDARD_LIST_ID;
 
-            if (type == CacheListType.OFFLINE || type == CacheListType.HISTORY) { // only offline list
-                setMenuItemLabel(menu, MENU_DROP_CACHES, R.string.caches_drop_selected, R.string.caches_drop_all);
-                setMenuItemLabel(menu, MENU_REFRESH_STORED, R.string.caches_refresh_selected, R.string.caches_refresh_all);
-                setMenuItemLabel(menu, MENU_MOVE_TO_LIST, R.string.caches_move_selected, R.string.caches_move_all);
+            if (isOffline || type == CacheListType.HISTORY) { // only offline list
+                setMenuItemLabel(menu, R.id.menu_drop_caches, R.string.caches_drop_selected, R.string.caches_drop_all);
+                setMenuItemLabel(menu, R.id.menu_refresh_stored, R.string.caches_refresh_selected, R.string.caches_refresh_all);
+                setMenuItemLabel(menu, R.id.menu_move_to_list, R.string.caches_move_selected, R.string.caches_move_all);
             } else { // search and global list (all other than offline and history)
-                setMenuItemLabel(menu, MENU_REFRESH_STORED, R.string.caches_store_selected, R.string.caches_store_offline);
-            }
-            if (type == CacheListType.OFFLINE) {
-                menu.findItem(MENU_DROP_CACHES_AND_LIST).setVisible(!hasSelection && isNonDefaultList && !adapter.isFiltered());
+                setMenuItemLabel(menu, R.id.menu_refresh_stored, R.string.caches_store_selected, R.string.caches_store_offline);
             }
 
-            MenuItem item = menu.findItem(MENU_DROP_LIST);
-            if (item != null) {
-                item.setVisible(isNonDefaultList);
-            }
-            item = menu.findItem(MENU_RENAME_LIST);
-            if (item != null) {
-                item.setVisible(isNonDefaultList);
-            }
+            menu.findItem(R.id.menu_drop_caches_and_list).setVisible(isOffline && !hasSelection && isNonDefaultList && !adapter.isFiltered());
+
+            menu.findItem(R.id.menu_drop_list).setVisible(isNonDefaultList);
+            menu.findItem(R.id.menu_rename_list).setVisible(isNonDefaultList);
 
             final boolean multipleLists = DataStore.getLists().size() >= 2;
-            item = menu.findItem(MENU_SWITCH_LIST);
-            if (item != null) {
-                item.setVisible(multipleLists);
-            }
-            item = menu.findItem(MENU_MOVE_TO_LIST);
-            if (item != null) {
-                item.setVisible(!isEmpty);
-            }
+            menu.findItem(R.id.menu_switch_list).setVisible(multipleLists);
+            menu.findItem(R.id.menu_move_to_list).setVisible(!isEmpty);
 
-            setMenuItemLabel(menu, MENU_REMOVE_FROM_HISTORY, R.string.cache_remove_from_history, R.string.cache_clear_history);
-            setMenuItemLabel(menu, MENU_EXPORT, R.string.export, R.string.export);
+            setMenuItemLabel(menu, R.id.menu_remove_from_history, R.string.cache_remove_from_history, R.string.cache_clear_history);
+            setMenuItemLabel(menu, R.id.menu_export, R.string.export, R.string.export);
         } catch (final RuntimeException e) {
             Log.e("CacheListActivity.onPrepareOptionsMenu", e);
         }
@@ -697,51 +613,50 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        final int itemId = item.getItemId();
-        switch (itemId) {
-            case MENU_SWITCH_SELECT_MODE:
+        switch (item.getItemId()) {
+            case R.id.menu_switch_select_mode:
                 adapter.switchSelectMode();
                 invalidateOptionsMenuCompatible();
                 return true;
-            case MENU_REFRESH_STORED:
+            case R.id.menu_refresh_stored:
                 refreshStored(adapter.getCheckedOrAllCaches());
                 invalidateOptionsMenuCompatible();
                 return true;
-            case MENU_DROP_CACHES:
+            case R.id.menu_drop_caches:
                 dropStored(false);
                 invalidateOptionsMenuCompatible();
                 return false;
-            case MENU_DROP_CACHES_AND_LIST:
+            case R.id.menu_drop_caches_and_list:
                 dropStored(true);
                 invalidateOptionsMenuCompatible();
                 return true;
-            case MENU_IMPORT_GPX:
+            case R.id.menu_import_gpx:
                 importGpx();
                 invalidateOptionsMenuCompatible();
                 return false;
-            case MENU_CREATE_LIST:
+            case R.id.menu_create_list:
                 new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(), newListName);
                 invalidateOptionsMenuCompatible();
                 return false;
-            case MENU_DROP_LIST:
+            case R.id.menu_drop_list:
                 removeList(true);
                 invalidateOptionsMenuCompatible();
                 return false;
-            case MENU_RENAME_LIST:
+            case R.id.menu_rename_list:
                 renameList();
                 return false;
-            case MENU_INVERT_SELECTION:
+            case R.id.menu_invert_selection:
                 adapter.invertSelection();
                 invalidateOptionsMenuCompatible();
                 return false;
-            case MENU_SWITCH_LIST:
+            case R.id.menu_switch_list:
                 selectList();
                 invalidateOptionsMenuCompatible();
                 return false;
-            case MENU_FILTER:
+            case R.id.menu_filter:
                 showFilterMenu(null);
                 return true;
-            case MENU_SORT:
+            case R.id.menu_sort:
                 final CacheComparator oldComparator = adapter.getCacheComparator();
                 new ComparatorUserInterface(this).selectComparator(oldComparator, new RunnableWithArgument<CacheComparator>() {
                     @Override
@@ -758,25 +673,25 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     }
                 });
                 return true;
-            case MENU_IMPORT_WEB:
+            case R.id.menu_import_web:
                 importWeb();
                 return false;
-            case MENU_EXPORT:
+            case R.id.menu_export:
                 ExportFactory.showExportMenu(adapter.getCheckedOrAllCaches(), this);
                 return false;
-            case MENU_REMOVE_FROM_HISTORY:
+            case R.id.menu_remove_from_history:
                 removeFromHistoryCheck();
                 invalidateOptionsMenuCompatible();
                 return false;
-            case MENU_MOVE_TO_LIST:
+            case R.id.menu_move_to_list:
                 moveCachesToOtherList();
                 invalidateOptionsMenuCompatible();
                 return true;
-            case MENU_DELETE_EVENTS:
+            case R.id.menu_delete_events:
                 deletePastEvents();
                 invalidateOptionsMenuCompatible();
                 return true;
-            case MENU_CLEAR_OFFLINE_LOGS:
+            case R.id.menu_clear_offline_logs:
                 clearOfflineLogs();
                 invalidateOptionsMenuCompatible();
                 return true;
@@ -846,21 +761,21 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         contextMenuGeocode = cache.getGeocode();
 
-        if (cache.getCoords() != null) {
-            menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication().getName());
-            menu.add(1, MENU_NAVIGATION, 0, res.getString(R.string.cache_menu_navigate)).setIcon(R.drawable.ic_menu_mapmode);
-            LoggingUI.addMenuItems(this, menu, cache);
-            menu.add(0, MENU_CACHE_DETAILS, 0, res.getString(R.string.cache_menu_details));
-        }
-        if (cache.isOffline()) {
-            menu.add(0, MENU_DROP_CACHE, 0, res.getString(R.string.cache_offline_drop));
-            menu.add(0, MENU_MOVE_TO_LIST, 0, res.getString(R.string.cache_menu_move_list));
-            menu.add(0, MENU_EXPORT, 0, res.getString(R.string.export));
-            menu.add(0, MENU_REFRESH, 0, res.getString(R.string.cache_menu_refresh));
-        }
-        else {
-            menu.add(0, MENU_STORE_CACHE, 0, res.getString(R.string.cache_offline_store));
-        }
+        getMenuInflater().inflate(R.menu.cache_list_context, menu);
+
+        menu.findItem(R.id.menu_default_navigation).setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
+        final boolean hasCoords = cache.getCoords() != null;
+        menu.findItem(R.id.menu_default_navigation).setVisible(hasCoords);
+        menu.findItem(R.id.menu_navigate).setVisible(hasCoords);
+        menu.findItem(R.id.menu_cache_details).setVisible(hasCoords);
+        final boolean isOffline = cache.isOffline();
+        menu.findItem(R.id.menu_drop_cache).setVisible(isOffline);
+        menu.findItem(R.id.menu_move_to_list).setVisible(isOffline);
+        menu.findItem(R.id.menu_export).setVisible(isOffline);
+        menu.findItem(R.id.menu_refresh).setVisible(isOffline);
+        menu.findItem(R.id.menu_store_cache).setVisible(!isOffline);
+
+        LoggingUI.onPrepareOptionsMenu(menu, cache);
     }
 
     private void moveCachesToOtherList() {
@@ -901,18 +816,17 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return true;
         }
 
-        final int id = item.getItemId();
-        switch (id) {
-            case MENU_DEFAULT_NAVIGATION:
+        switch (item.getItemId()) {
+            case R.id.menu_default_navigation:
                 NavigationAppFactory.startDefaultNavigationApplication(1, this, cache);
                 break;
-            case MENU_NAVIGATION:
+            case R.id.menu_navigate:
                 NavigationAppFactory.showNavigationMenu(this, cache, null, null);
                 break;
-            case MENU_CACHE_DETAILS:
+            case R.id.menu_cache_details:
                 CacheDetailActivity.startActivity(this, cache.getGeocode(), cache.getName());
                 break;
-            case MENU_DROP_CACHE:
+            case R.id.menu_drop_cache:
                 cache.drop(new Handler() {
                     @Override
                     public void handleMessage(Message msg) {
@@ -921,7 +835,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     }
                 });
                 break;
-            case MENU_MOVE_TO_LIST:
+            case R.id.menu_move_to_list:
                 new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list, new RunnableWithArgument<Integer>() {
 
                     @Override
@@ -932,11 +846,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     }
                 }, true, listId, newListName);
                 break;
-            case MENU_STORE_CACHE:
-            case MENU_REFRESH:
+            case R.id.menu_store_cache:
+            case R.id.menu_refresh:
                 refreshStored(Collections.singletonList(cache));
                 break;
-            case MENU_EXPORT:
+            case R.id.menu_export:
                 ExportFactory.showExportMenu(Collections.singletonList(cache), this);
                 return false;
             default:

@@ -5,14 +5,20 @@ import cgeo.geocaching.Geocache;
 public interface App {
     public boolean isInstalled();
 
-    public boolean isDefaultNavigationApp();
+    /**
+     * Whether or not an application can be used as the default navigation.
+     */
+    public boolean isUsableAsDefaultNavigationApp();
 
     public String getName();
 
+    /**
+     * @return the unique ID of the application, defined in res/values/ids.xml
+     */
     int getId();
 
     /**
-     * whether or not the app can be used with the given cache (may depend on properties of the cache)
+     * Whether or not the app can be used with the given cache (may depend on properties of the cache).
      *
      * @param cache
      * @return

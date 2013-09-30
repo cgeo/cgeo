@@ -7,7 +7,7 @@ import cgeo.geocaching.enumerations.CacheAttribute;
 public class CacheBeaconApp extends AbstractGeneralApp {
 
     public CacheBeaconApp() {
-        super(getString(R.string.cache_menu_cachebeacon), "de.fun2code.android.cachebeacon");
+        super(getString(R.string.cache_menu_cachebeacon), R.id.cache_app_cache_beacon, "de.fun2code.android.cachebeacon");
     }
 
     @Override

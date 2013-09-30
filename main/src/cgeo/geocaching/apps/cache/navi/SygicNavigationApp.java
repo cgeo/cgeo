@@ -17,7 +17,7 @@ public class SygicNavigationApp extends AbstractPointNavigationApp {
     private static final String PACKAGE = "com.sygic.aura";
 
     SygicNavigationApp() {
-        super(getString(R.string.cache_menu_sygic), null, PACKAGE);
+        super(getString(R.string.cache_menu_sygic), R.id.cache_app_sygic, null, PACKAGE);
     }
 
     @Override

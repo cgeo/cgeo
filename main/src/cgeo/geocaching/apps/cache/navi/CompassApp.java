@@ -1,9 +1,9 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import cgeo.geocaching.CompassActivity;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.CompassActivity;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.ui.Formatter;
 
@@ -12,7 +12,7 @@ import android.app.Activity;
 class CompassApp extends AbstractPointNavigationApp {
 
     CompassApp() {
-        super(getString(R.string.compass_title), null);
+        super(getString(R.string.compass_title), R.id.cache_app_compass, null);
     }
 
     @Override

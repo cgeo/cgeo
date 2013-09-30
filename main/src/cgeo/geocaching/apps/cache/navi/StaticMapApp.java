@@ -1,15 +1,15 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.Geocache;
 
 import android.app.Activity;
 
 class StaticMapApp extends AbstractStaticMapsApp {
 
     StaticMapApp() {
-        super(getString(R.string.cache_menu_map_static));
+        super(getString(R.string.cache_menu_map_static), R.id.cache_app_show_static_maps);
     }
 
     @Override

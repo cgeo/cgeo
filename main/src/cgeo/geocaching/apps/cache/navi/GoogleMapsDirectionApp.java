@@ -1,8 +1,8 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.utils.Log;
@@ -14,7 +14,7 @@ import android.net.Uri;
 public class GoogleMapsDirectionApp extends AbstractPointNavigationApp {
 
     protected GoogleMapsDirectionApp() {
-        super(getString(R.string.cache_menu_maps_directions), null);
+        super(getString(R.string.cache_menu_maps_directions), R.id.cache_app_google_maps_direction, null);
     }
 
     @Override

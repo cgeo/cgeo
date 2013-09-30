@@ -1,9 +1,8 @@
 package cgeo.geocaching.apps;
 
-import cgeo.geocaching.Geocache;
-import cgeo.geocaching.R;
-import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.Geocache;
+import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -16,7 +15,6 @@ import menion.android.locus.addon.publiclib.geoData.PointGeocachingDataWaypoint;
 import menion.android.locus.addon.publiclib.geoData.PointsData;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.location.Location;
 
 import java.text.SimpleDateFormat;
@@ -30,15 +28,10 @@ import java.util.Locale;
  * @see <a href="http://forum.asamm.cz/viewtopic.php?f=29&t=767">Locus forum</a>
  */
 public abstract class AbstractLocusApp extends AbstractApp {
-    private static final String INTENT = Intent.ACTION_VIEW;
     private static final SimpleDateFormat ISO8601DATE = new SimpleDateFormat("yyyy-MM-dd'T'", Locale.US);
 
-    protected AbstractLocusApp() {
-        super(getString(R.string.caches_map_locus), INTENT);
-    }
-
-    protected AbstractLocusApp(final String text, final String intent) {
-        super(text, intent);
+    protected AbstractLocusApp(final String text, int id, final String intent) {
+        super(text, id, intent);
     }
 
     @Override
@@ -48,7 +41,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
 
     /**
      * Display a list of caches / waypoints in Locus
-     * 
+     *
      * @param objectsToShow
      *            which caches/waypoints to show
      * @param withCacheWaypoints

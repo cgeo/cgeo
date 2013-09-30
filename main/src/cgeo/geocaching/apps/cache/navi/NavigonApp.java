@@ -13,7 +13,7 @@ class NavigonApp extends AbstractPointNavigationApp {
     private static final String INTENT_EXTRA_KEY_LONGITUDE = "longitude";
 
     NavigonApp() {
-        super(getString(R.string.cache_menu_navigon), INTENT);
+        super(getString(R.string.cache_menu_navigon), R.id.cache_app_navigon, INTENT);
     }
 
     @Override

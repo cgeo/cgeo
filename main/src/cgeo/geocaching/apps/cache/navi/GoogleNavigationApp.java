@@ -12,8 +12,8 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
 
     private final String mode;
 
-    protected GoogleNavigationApp(final int nameResourceId, final String mode) {
-        super(getString(nameResourceId), null);
+    protected GoogleNavigationApp(final int nameResourceId, final int id, final String mode) {
+        super(getString(nameResourceId), id, null);
         this.mode = mode;
     }
 
@@ -36,19 +36,19 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
 
     static class GoogleNavigationWalkingApp extends GoogleNavigationApp {
         GoogleNavigationWalkingApp() {
-            super(R.string.cache_menu_navigation_walk, "w");
+            super(R.string.cache_menu_navigation_walk, R.id.cache_app_google_navigation_walk, "w");
         }
     }
 
     static class GoogleNavigationDrivingApp extends GoogleNavigationApp {
         GoogleNavigationDrivingApp() {
-            super(R.string.cache_menu_navigation_drive, "d");
+            super(R.string.cache_menu_navigation_drive, R.id.cache_app_google_navigation_drive, "d");
         }
     }
 
     static class GoogleNavigationBikeApp extends GoogleNavigationApp {
         GoogleNavigationBikeApp() {
-            super(R.string.cache_menu_navigation_bike, "b");
+            super(R.string.cache_menu_navigation_bike, R.id.cache_app_google_navigation_bike, "b");
         }
     }
 }

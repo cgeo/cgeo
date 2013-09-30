@@ -216,7 +216,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     public static List<NavigationAppsEnum> getInstalledDefaultNavigationApps() {
         final List<NavigationAppsEnum> installedNavigationApps = new ArrayList<NavigationAppsEnum>();
         for (final NavigationAppsEnum appEnum : NavigationAppsEnum.values()) {
-            if (appEnum.app.isInstalled() && appEnum.app.isDefaultNavigationApp()) {
+            if (appEnum.app.isInstalled() && appEnum.app.isUsableAsDefaultNavigationApp()) {
                 installedNavigationApps.add(appEnum);
             }
         }

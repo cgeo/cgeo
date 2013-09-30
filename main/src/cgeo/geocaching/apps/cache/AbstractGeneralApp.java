@@ -9,8 +9,8 @@ import android.content.Intent;
 
 abstract class AbstractGeneralApp extends AbstractApp implements CacheNavigationApp {
 
-    protected AbstractGeneralApp(String name, String packageName) {
-        super(name, null, packageName);
+    protected AbstractGeneralApp(final String name, final int id, final String packageName) {
+        super(name, id, null, packageName);
     }
 
     @Override

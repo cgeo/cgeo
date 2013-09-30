@@ -11,7 +11,7 @@ class OruxMapsApp extends AbstractPointNavigationApp {
     private static final String INTENT = "com.oruxmaps.VIEW_MAP_ONLINE";
 
     OruxMapsApp() {
-        super(getString(R.string.cache_menu_oruxmaps), INTENT);
+        super(getString(R.string.cache_menu_oruxmaps), R.id.cache_app_orux_maps, INTENT);
     }
 
     @Override

@@ -1,12 +1,12 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ILogable;
 import cgeo.geocaching.R;
 import cgeo.geocaching.StaticMapsActivity;
 import cgeo.geocaching.StaticMapsProvider;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.DataStore;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.AbstractApp;
 
@@ -15,8 +15,8 @@ import org.apache.commons.lang3.StringUtils;
 import android.app.Activity;
 
 abstract class AbstractStaticMapsApp extends AbstractApp implements CacheNavigationApp, WaypointNavigationApp {
-    protected AbstractStaticMapsApp(String name) {
-        super(name, null);
+    protected AbstractStaticMapsApp(final String name, final int id) {
+        super(name, id, null);
     }
 
     @Override
@@ -25,7 +25,7 @@ abstract class AbstractStaticMapsApp extends AbstractApp implements CacheNavigat
     }
 
     @Override
-    public boolean isDefaultNavigationApp() {
+    public boolean isUsableAsDefaultNavigationApp() {
         return false;
     }
 
