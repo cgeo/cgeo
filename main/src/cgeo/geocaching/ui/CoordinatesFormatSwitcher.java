@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 /**
  * view click listener to automatically switch different coordinate formats
- * 
+ *
  */
 public class CoordinatesFormatSwitcher implements OnClickListener {
 
@@ -29,6 +29,7 @@ public class CoordinatesFormatSwitcher implements OnClickListener {
 
     @Override
     public void onClick(View view) {
+        assert view instanceof TextView;
         position = (position + 1) % availableFormats.length;
         TextView textView = (TextView) view;
         // rotate coordinate formats on click

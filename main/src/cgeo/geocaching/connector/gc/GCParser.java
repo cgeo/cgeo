@@ -1642,7 +1642,7 @@ public abstract class GCParser {
                 // TODO: we should update our log data structure to be able to record
                 // proper coordinates, and make them clickable. In the meantime, it is
                 // better to integrate those coordinates into the text rather than not
-                // display them as all.
+                // display them at all.
                 final String latLon = entry.getString("LatLonString");
                 final LogEntry logDone = new LogEntry(
                         entry.getString("UserName"),

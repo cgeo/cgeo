@@ -342,15 +342,18 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         final int viewId = view.getId();
         switch (viewId) {
             case R.id.value: // coordinates, gc-code, name
+                assert view instanceof TextView;
                 clickedItemText = ((TextView) view).getText();
                 final String itemTitle = (String) ((TextView) ((View) view.getParent()).findViewById(R.id.name)).getText();
                 buildDetailsContextMenu(menu, itemTitle, true);
                 break;
             case R.id.shortdesc:
+                assert view instanceof TextView;
                 clickedItemText = ((TextView) view).getText();
                 buildDetailsContextMenu(menu, res.getString(R.string.cache_description), false);
                 break;
             case R.id.longdesc:
+                assert view instanceof TextView;
                 // combine short and long description
                 final String shortDesc = cache.getShortDescription();
                 if (StringUtils.isBlank(shortDesc)) {
@@ -361,14 +364,17 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 buildDetailsContextMenu(menu, res.getString(R.string.cache_description), false);
                 break;
             case R.id.personalnote:
+                assert view instanceof TextView;
                 clickedItemText = ((TextView) view).getText();
                 buildDetailsContextMenu(menu, res.getString(R.string.cache_personal_note), true);
                 break;
             case R.id.hint:
+                assert view instanceof TextView;
                 clickedItemText = ((TextView) view).getText();
                 buildDetailsContextMenu(menu, res.getString(R.string.cache_hint), false);
                 break;
             case R.id.log:
+                assert view instanceof TextView;
                 clickedItemText = ((TextView) view).getText();
                 buildDetailsContextMenu(menu, res.getString(R.string.cache_logs), false);
                 break;

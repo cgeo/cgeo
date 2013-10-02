@@ -105,6 +105,8 @@ public class LoggingUI extends AbstractUIFactory {
                         case CLEAR_LOG:
                             cache.clearOfflineLog();
                             break;
+                        default:
+                            throw new IllegalStateException();
                     }
                 } else {
                     cache.logOffline(activity, logTypeEntry.logType);

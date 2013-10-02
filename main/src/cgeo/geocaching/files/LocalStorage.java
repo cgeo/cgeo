@@ -7,6 +7,7 @@ import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.Header;
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
@@ -37,6 +38,7 @@ import java.util.List;
  */
 public final class LocalStorage {
 
+    private static final String FILE_SYSTEM_TABLE_PATH = "/system/etc/vold.fstab";
     public static final String HEADER_LAST_MODIFIED = "last-modified";
     public static final String HEADER_ETAG = "etag";
 
@@ -424,7 +426,7 @@ public final class LocalStorage {
         String extStorage = Environment.getExternalStorageDirectory().getAbsolutePath();
         List<File> storages = new ArrayList<File>();
         storages.add(new File(extStorage));
-        File file = new File("/system/etc/vold.fstab");
+        File file = new File(FILE_SYSTEM_TABLE_PATH);
         if (file.canRead()) {
             Reader fr = null;
             BufferedReader br = null;

@@ -1648,6 +1648,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             case NEXT_PAGE:
                 loader = new NextPageGeocacheListLoader(app, search);
                 break;
+            default:
+                throw new IllegalStateException();
         }
         setTitle(title);
         showProgress(true);

@@ -3,13 +3,13 @@ package cgeo.geocaching.ui.dialog;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.settings.Settings.CoordInputFormatEnum;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.Settings.CoordInputFormatEnum;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -216,6 +216,8 @@ public class CoordinatesInputDialog extends NoTitleDialog {
                 eLonSec.setText(addZeros(gp.getLonSec(), 2));
                 eLonSub.setText(addZeros(gp.getLonSecFrac(), 3));
                 break;
+            default:
+                throw new IllegalStateException();
         }
     }
 
@@ -227,6 +229,7 @@ public class CoordinatesInputDialog extends NoTitleDialog {
 
         @Override
         public void onClick(View view) {
+            assert view instanceof Button;
             final Button button = (Button) view;
             final CharSequence text = button.getText();
             if (StringUtils.isBlank(text)) {

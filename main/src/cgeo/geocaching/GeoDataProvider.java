@@ -303,6 +303,8 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
                         changed = true;
                     }
                     break;
+                default:
+                    throw new IllegalStateException();
             }
 
             if (changed) {

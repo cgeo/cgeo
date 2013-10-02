@@ -517,6 +517,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
         @Override
         public void onClick(View view) {
+            assert view instanceof CheckBox;
             final boolean checkNow = ((CheckBox) view).isChecked();
             cache.setStatusChecked(checkNow);
         }

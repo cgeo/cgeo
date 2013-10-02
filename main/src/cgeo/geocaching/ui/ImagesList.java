@@ -156,6 +156,7 @@ public class ImagesList {
     }
 
     public void onCreateContextMenu(ContextMenu menu, View v) {
+        assert v instanceof ImageView;
         activity.getMenuInflater().inflate(R.menu.images_list_context, menu);
         final Resources res = activity.getResources();
         menu.setHeaderTitle(res.getString(R.string.cache_image));
