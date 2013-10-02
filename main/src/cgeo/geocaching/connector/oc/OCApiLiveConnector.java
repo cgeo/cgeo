@@ -8,6 +8,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
+import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.oc.UserInfo.UserInfoStatus;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -20,7 +21,7 @@ import org.apache.commons.lang3.StringUtils;
 import android.content.Context;
 import android.os.Handler;
 
-public class OCApiLiveConnector extends OCApiConnector implements ISearchByCenter, ISearchByViewPort, ILogin {
+public class OCApiLiveConnector extends OCApiConnector implements ISearchByCenter, ISearchByViewPort, ILogin, ISearchByKeyword {
 
     private final String cS;
     private final int isActivePrefKeyId;
@@ -151,5 +152,11 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     @Override
     public boolean isLoggedIn() {
         return userInfo.getStatus() == UserInfoStatus.SUCCESSFUL;
+    }
+
+    @Override
+    public SearchResult searchByName(final String name) {
+        final Geopoint currentPos = CgeoApplication.getInstance().currentGeo().getCoords();
+        return new SearchResult(OkapiClient.getCachesNamed(currentPos, name, this));
     }
 }

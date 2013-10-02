@@ -1,8 +1,10 @@
 package cgeo.geocaching.loaders;
 
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.gc.GCParser;
+import cgeo.geocaching.settings.Settings;
 
 import android.content.Context;
 
@@ -17,7 +19,18 @@ public class KeywordGeocacheListLoader extends AbstractSearchLoader {
 
     @Override
     public SearchResult runSearch() {
-        return GCParser.searchByKeyword(keyword, Settings.getCacheType(), Settings.isShowCaptcha(), this);
+        SearchResult searchResult = new SearchResult();
+        if (Settings.isGCConnectorActive()) {
+            searchResult = GCParser.searchByKeyword(keyword, Settings.getCacheType(), Settings.isShowCaptcha(), this);
+        }
+
+        for (ISearchByKeyword connector : ConnectorFactory.getSearchByKeywordConnectors()) {
+            if (connector.isActivated()) {
+                searchResult.addSearchResult(connector.searchByName(keyword));
+            }
+        }
+
+        return searchResult;
     }
 
 }

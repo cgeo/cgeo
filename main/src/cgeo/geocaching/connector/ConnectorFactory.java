@@ -6,6 +6,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
+import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector;
@@ -60,6 +61,8 @@ public final class ConnectorFactory {
 
     private static final ISearchByCenter[] searchByCenterConns;
 
+    private static final ISearchByKeyword[] searchByKeywordConns;
+
     static {
         final List<ISearchByViewPort> vpConns = new ArrayList<ISearchByViewPort>();
         for (final IConnector conn : CONNECTORS) {
@@ -77,6 +80,15 @@ public final class ConnectorFactory {
             }
         }
         searchByCenterConns = centerConns.toArray(new ISearchByCenter[centerConns.size()]);
+
+        final List<ISearchByKeyword> keywordConns = new ArrayList<ISearchByKeyword>();
+        for (final IConnector conn : CONNECTORS) {
+            // GCConnector is handled specially, omit it here!
+            if (conn instanceof ISearchByKeyword && !(conn instanceof GCConnector)) {
+                keywordConns.add((ISearchByKeyword) conn);
+            }
+        }
+        searchByKeywordConns = keywordConns.toArray(new ISearchByKeyword[keywordConns.size()]);
     }
 
     public static IConnector[] getConnectors() {
@@ -85,6 +97,10 @@ public final class ConnectorFactory {
 
     public static ISearchByCenter[] getSearchByCenterConnectors() {
         return searchByCenterConns;
+    }
+
+    public static ISearchByKeyword[] getSearchByKeywordConnectors() {
+        return searchByKeywordConns;
     }
 
     public static ILogin[] getActiveLiveConnectors() {

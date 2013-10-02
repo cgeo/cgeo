@@ -115,8 +115,9 @@ final class OkapiClient {
     private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS = "gc_code|attribution_note";
     private static final String SERVICE_CACHE_ADDITIONAL_L3_FIELDS = "is_watched|my_notes";
 
-    private static final String METHOD_SEARCH_NEAREST = "services/caches/search/nearest";
+    private static final String METHOD_SEARCH_ALL = "services/caches/search/all";
     private static final String METHOD_SEARCH_BBOX = "services/caches/search/bbox";
+    private static final String METHOD_SEARCH_NEAREST = "services/caches/search/nearest";
     private static final String METHOD_RETRIEVE_CACHES = "services/caches/geocaches";
 
     public static Geocache getCache(final String geoCode) {
@@ -146,8 +147,30 @@ final class OkapiClient {
         final Map<String, String> valueMap = new LinkedHashMap<String, String>();
         valueMap.put("center", centerString);
         valueMap.put("limit", "20");
-        valueMap.put("radius", "200");
+        //        valueMap.put("radius", "200");
+        valueMap.put("name", "Rund um die Berolina*");
 
+        return requestCaches(connector, params, valueMap);
+    }
+
+    public static List<Geocache> getCachesNamed(final Geopoint center, final String namePart, final OCApiConnector connector) {
+        final Map<String, String> valueMap = new LinkedHashMap<String, String>();
+        final Parameters params;
+
+        // search around current position, if there is a position
+        if (center != null) {
+            final String centerString = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, center) + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, center);
+            params = new Parameters("search_method", METHOD_SEARCH_NEAREST);
+            valueMap.put("center", centerString);
+            valueMap.put("limit", "20");
+        }
+        else {
+            params = new Parameters("search_method", METHOD_SEARCH_ALL);
+            valueMap.put("limit", "20");
+        }
+
+        // full wildcard search, maybe we need to change this after some testing and evaluation
+        valueMap.put("name", "*" + namePart + "*");
         return requestCaches(connector, params, valueMap);
     }
 
@@ -165,7 +188,9 @@ final class OkapiClient {
         return parseCaches(data);
     }
 
-    // Assumes level 3 OAuth
+    /**
+     * Assumes level 3 OAuth.
+     */
     public static List<Geocache> getCachesBBox(final Viewport viewport, final OCApiConnector connector) {
 
         if (viewport.getLatitudeSpan() == 0 || viewport.getLongitudeSpan() == 0) {
