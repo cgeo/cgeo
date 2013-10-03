@@ -1,8 +1,8 @@
 package cgeo.geocaching.speech;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DirectionProvider;
 import cgeo.geocaching.R;
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.settings.Settings;
@@ -177,7 +177,7 @@ public class SpeechService extends Service implements OnInitListener {
         if (intent != null) {
             target = intent.getParcelableExtra(EXTRA_TARGET_COORDS);
         }
-        return START_NOT_STICKY;
+        return START_NOT_STICKY; // service can be stopped by system, if under memory pressure
     }
 
     private void speak(final String text) {
