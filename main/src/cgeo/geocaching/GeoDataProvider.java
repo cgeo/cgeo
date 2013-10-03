@@ -272,6 +272,7 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
         public void onGpsStatusChanged(final int event) {
             boolean changed = false;
             switch (event) {
+                case GpsStatus.GPS_EVENT_FIRST_FIX:
                 case GpsStatus.GPS_EVENT_SATELLITE_STATUS: {
                     final GpsStatus status = geoManager.getGpsStatus(null);
                     int visible = 0;
