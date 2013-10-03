@@ -17,7 +17,10 @@
 	
 	<!-- irrelevant findings -->
 	<Match>
-	    <Bug pattern="SE_COMPARATOR_SHOULD_BE_SERIALIZABLE" />
+	    <Or>
+	        <Bug pattern="ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD"/>
+    	    <Bug pattern="SE_COMPARATOR_SHOULD_BE_SERIALIZABLE" />
+	    </Or>
 	</Match>
 	<Match>
 	    <Bug pattern="DM_STRING_CTOR" />
@@ -25,6 +28,10 @@
 	        <Class name="~.*MatcherWrapper"></Class>
 	        <Class name="~.*TextUtils"></Class>
 	    </Or>
+	</Match>
+	<Match>
+	    <Bug pattern="DMI_HARDCODED_ABSOLUTE_FILENAME"/>
+	    <Class name="~.*LocalStorage"/>
 	</Match>
 		
 </FindBugsFilter>
