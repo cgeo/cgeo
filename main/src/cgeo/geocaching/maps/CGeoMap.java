@@ -1,14 +1,14 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.DirectionProvider;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.DataStore;
-import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.Login;
@@ -1383,7 +1383,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         final private CancellableHandler handler;
         final private List<String> geocodes;
         final private int listId;
-        private long last = 0L;
 
         public LoadDetails(final CancellableHandler handler, final List<String> geocodes, final int listId) {
             this.handler = handler;
@@ -1410,25 +1409,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     }
 
                     if (!DataStore.isOffline(geocode, null)) {
-                        if ((System.currentTimeMillis() - last) < 1500) {
-                            try {
-                                int delay = 1000 + (int) (Math.random() * 1000.0) - (int) (System.currentTimeMillis() - last);
-                                if (delay < 0) {
-                                    delay = 500;
-                                }
-
-                                sleep(delay);
-                            } catch (InterruptedException e) {
-                                // nothing
-                            }
-                        }
-
-                        if (handler.isCancelled()) {
-                            Log.i("Stopped storing process.");
-
-                            break;
-                        }
-
                         Geocache.storeCache(null, geocode, listId, false, handler);
                     }
                 } catch (Exception e) {
@@ -1441,8 +1421,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                 // FIXME: what does this yield() do here?
                 yield();
-
-                last = System.currentTimeMillis();
             }
 
             // we're done
