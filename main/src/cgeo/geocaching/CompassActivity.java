@@ -4,16 +4,20 @@ import butterknife.InjectView;
 import butterknife.Views;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.ui.CompassView;
+import cgeo.geocaching.ui.Formatter;
+import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.content.Context;
 import android.content.Intent;
@@ -34,6 +38,8 @@ import java.util.List;
 
 public class CompassActivity extends AbstractActivity {
 
+    private static final int COORDINATES_OFFSET = 10;
+
     @InjectView(R.id.nav_type) protected TextView navType;
     @InjectView(R.id.nav_accuracy) protected TextView navAccuracy;
     @InjectView(R.id.nav_satellites) protected TextView navSatellites;
@@ -49,7 +55,11 @@ public class CompassActivity extends AbstractActivity {
     private static final String EXTRAS_GEOCODE = "geocode";
     private static final String EXTRAS_CACHE_INFO = "cacheinfo";
     private static final List<IWaypoint> coordinates = new ArrayList<IWaypoint>();
-    private static final int COORDINATES_OFFSET = 10;
+
+    /**
+     * Destination of the compass, or null (if the compass is used for a waypoint only).
+     */
+    private @Nullable Geocache cache = null;
     private Geopoint dstCoords = null;
     private float cacheHeading = 0;
     private String title = null;
@@ -69,7 +79,11 @@ public class CompassActivity extends AbstractActivity {
         // get parameters
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            title = extras.getString(EXTRAS_GEOCODE);
+            final String geocode = extras.getString(EXTRAS_GEOCODE);
+            if (StringUtils.isNotEmpty(geocode)) {
+                cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+            }
+            title = geocode;
             final String name = extras.getString(EXTRAS_NAME);
             dstCoords = extras.getParcelable(EXTRAS_COORDS);
             info = extras.getString(EXTRAS_CACHE_INFO);
@@ -157,6 +171,9 @@ public class CompassActivity extends AbstractActivity {
         } else {
             menu.findItem(R.id.menu_select_destination).setVisible(false);
         }
+        if (cache != null) {
+            LoggingUI.addMenuItems(this, menu, cache);
+        }
         return true;
     }
 
@@ -199,6 +216,9 @@ public class CompassActivity extends AbstractActivity {
                 SpeechService.stopService(this);
                 return true;
             default:
+                if (LoggingUI.onMenuItemSelected(item, this, cache)) {
+                    return true;
+                }
                 int coordinatesIndex = id - COORDINATES_OFFSET;
                 if (coordinatesIndex >= 0 && coordinatesIndex < coordinates.size()) {
                     final IWaypoint coordinate = coordinates.get(coordinatesIndex);
@@ -323,6 +343,11 @@ public class CompassActivity extends AbstractActivity {
 
     public static void startActivity(final Context context, final String geocode, final String displayedName, final Geopoint coords, final Collection<IWaypoint> coordinatesWithType) {
         CompassActivity.startActivity(context, geocode, displayedName, coords, coordinatesWithType, null);
+    }
+
+    public static void startActivity(final Context context, final Geocache cache) {
+        startActivity(context, cache.getGeocode(), cache.getName(), cache.getCoords(), null,
+                Formatter.formatCacheInfoShort(cache));
     }
 
 }

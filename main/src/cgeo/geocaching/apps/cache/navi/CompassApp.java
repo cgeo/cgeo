@@ -5,7 +5,6 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.ui.Formatter;
 
 import android.app.Activity;
 
@@ -33,8 +32,7 @@ class CompassApp extends AbstractPointNavigationApp {
 
     @Override
     public void navigate(Activity activity, Geocache cache) {
-        CompassActivity.startActivity(activity, cache.getGeocode(), cache.getName(), cache.getCoords(), null,
-                Formatter.formatCacheInfoShort(cache));
+        CompassActivity.startActivity(activity, cache);
     }
 
 }
