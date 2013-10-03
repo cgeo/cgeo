@@ -147,8 +147,7 @@ final class OkapiClient {
         final Map<String, String> valueMap = new LinkedHashMap<String, String>();
         valueMap.put("center", centerString);
         valueMap.put("limit", "20");
-        //        valueMap.put("radius", "200");
-        valueMap.put("name", "Rund um die Berolina*");
+        valueMap.put("radius", "200");
 
         return requestCaches(connector, params, valueMap);
     }
