@@ -618,6 +618,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 adapter.switchSelectMode();
                 invalidateOptionsMenuCompatible();
                 return true;
+            case R.id.menu_refresh_stored_top:
             case R.id.menu_refresh_stored:
                 refreshStored(adapter.getCheckedOrAllCaches());
                 invalidateOptionsMenuCompatible();
