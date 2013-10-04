@@ -86,12 +86,21 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
     }
 
     protected void onCreate(final Bundle savedInstanceState, final int resourceLayoutID) {
+        onCreate(savedInstanceState, resourceLayoutID, false);
+    }
+
+    protected void onCreate(final Bundle savedInstanceState, final int resourceLayoutID, boolean useDialogTheme) {
+
         super.onCreate(savedInstanceState);
 
         initializeCommonFields();
 
         // non declarative part of layout
-        setTheme();
+        if (useDialogTheme) {
+            setTheme(ActivityMixin.getDialogTheme());
+        } else {
+            setTheme();
+        }
         setContentView(resourceLayoutID);
 
         // create view variables
