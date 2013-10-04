@@ -83,7 +83,7 @@ class FieldnoteExport extends AbstractExport {
         final CheckBox onlyNewOption = (CheckBox) layout.findViewById(R.id.onlynew);
 
         if (Settings.getFieldnoteExportDate() > 0) {
-            onlyNewOption.setText(getString(R.string.export_fieldnotes_onlynew) + "\n(" + Formatter.formatDateTime(Settings.getFieldnoteExportDate()) + ')');
+            onlyNewOption.setText(getString(R.string.export_fieldnotes_onlynew) + " (" + Formatter.formatDateTime(Settings.getFieldnoteExportDate()) + ')');
         }
 
         builder.setPositiveButton(R.string.export, new DialogInterface.OnClickListener() {
