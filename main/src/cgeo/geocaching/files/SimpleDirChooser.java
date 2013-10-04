@@ -88,6 +88,7 @@ public class SimpleDirChooser extends AbstractListActivity {
     }
 
     private void fill(File dir) {
+        lastPosition = -1;
         EditText path = (EditText) findViewById(R.id.simple_dir_chooser_path);
         path.setText(this.getResources().getString(R.string.simple_dir_chooser_current_path) + " " + dir.getAbsolutePath());
         final File[] dirs = dir.listFiles(new DirOnlyFilenameFilter());
@@ -164,7 +165,6 @@ public class SimpleDirChooser extends AbstractListActivity {
         @Override
         public void onClick(View arg0) {
             Option option = adapter.getItem(position);
-            lastPosition = -1;
             if (option.getName().equals(PARENT_DIR)) {
                 currentDir = new File(option.getPath());
                 fill(currentDir);
