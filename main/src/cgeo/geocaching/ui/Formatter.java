@@ -1,9 +1,9 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -105,6 +105,18 @@ public abstract class Formatter {
      */
     public static String formatShortDateTime(long date) {
         return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_ABBREV_ALL);
+    }
+
+    /**
+     * Generate a numeric date and time string according to system-wide settings (locale,
+     * date format) such as "7 september at 12:35".
+     * 
+     * @param date
+     *            milliseconds since the epoch
+     * @return the formatted string
+     */
+    public static String formatDateTime(long date) {
+        return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME);
     }
 
     public static String formatCacheInfoLong(Geocache cache, CacheListType cacheListType) {
