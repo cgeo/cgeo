@@ -34,6 +34,7 @@ import ch.boye.httpclientandroidlib.params.CoreProtocolPNames;
 import ch.boye.httpclientandroidlib.params.HttpParams;
 import ch.boye.httpclientandroidlib.protocol.HttpContext;
 import ch.boye.httpclientandroidlib.util.EntityUtils;
+
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
@@ -447,6 +448,14 @@ public abstract class Network {
     @Nullable
     public static String getResponseData(@Nullable final HttpResponse response) {
         return Network.getResponseData(response, true);
+    }
+
+    @Nullable
+    public static String getResponseDataAlways(@Nullable final HttpResponse response) {
+        if (response == null) {
+            return null;
+        }
+        return getResponseDataNoError(response, false);
     }
 
     /**

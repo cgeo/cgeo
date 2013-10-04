@@ -30,6 +30,8 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
+import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.json.JSONArray;
@@ -132,7 +134,7 @@ final class OkapiClient {
         params.add("fields", getFullFields(ocapiConn));
         params.add("attribution_append", "none");
 
-        final JSONObject data = request(ocapiConn, OkapiService.SERVICE_CACHE, params);
+        final JSONObject data = request(ocapiConn, OkapiService.SERVICE_CACHE, params).data;
 
         if (data == null) {
             return null;
@@ -178,7 +180,7 @@ final class OkapiClient {
         params.add("search_params", new JSONObject(valueMap).toString());
         addRetrieveParams(params, connector);
 
-        final JSONObject data = request(connector, OkapiService.SERVICE_SEARCH_AND_RETRIEVE, params);
+        final JSONObject data = request(connector, OkapiService.SERVICE_SEARCH_AND_RETRIEVE, params).data;
 
         if (data == null) {
             return Collections.emptyList();
@@ -211,7 +213,7 @@ final class OkapiClient {
         final Parameters params = new Parameters("cache_code", cache.getGeocode());
         params.add("watched", watched ? "true" : "false");
 
-        final JSONObject data = request(connector, OkapiService.SERVICE_MARK_CACHE, params);
+        final JSONObject data = request(connector, OkapiService.SERVICE_MARK_CACHE, params).data;
 
         if (data == null) {
             return false;
@@ -235,7 +237,7 @@ final class OkapiClient {
             params.add("password", logPassword);
         }
 
-        final JSONObject data = request(connector, OkapiService.SERVICE_SUBMIT_LOG, params);
+        final JSONObject data = request(connector, OkapiService.SERVICE_SUBMIT_LOG, params).data;
 
         if (data == null) {
             return new LogResult(StatusCode.LOG_POST_ERROR, "");
@@ -621,7 +623,7 @@ final class OkapiClient {
         return res.toString();
     }
 
-    private static JSONObject request(final OCApiConnector connector, final OkapiService service, final Parameters params) {
+    private static JSONResult request(final OCApiConnector connector, final OkapiService service, final Parameters params) {
         if (connector == null) {
             return null;
         }
@@ -641,7 +643,7 @@ final class OkapiClient {
         }
 
         final String uri = "http://" + host + service.methodName;
-        return Network.requestJSON(uri, params);
+        return new JSONResult(Network.getRequest(uri, params));
     }
 
     private static String getPreferredLanguage() {
@@ -693,11 +695,15 @@ final class OkapiClient {
     public static UserInfo getUserInfo(final OCApiLiveConnector connector) {
         final Parameters params = new Parameters("fields", USER_INFO_FIELDS);
 
-        final JSONObject data = request(connector, OkapiService.SERVICE_USER, params);
+        final JSONResult result = request(connector, OkapiService.SERVICE_USER, params);
 
-        if (data == null) {
-            return new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.FAILED);
+        if (!result.isSuccess) {
+            final OkapiError error = new OkapiError(result.data);
+            Log.e("OkapiClient.getUserInfo: error getting user info: '" + error.getMessage() + "'");
+            return new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.getFromOkapiError(error.getResult()));
         }
+
+        JSONObject data = result.data;
 
         String name = StringUtils.EMPTY;
         boolean successUserName = false;
@@ -726,4 +732,23 @@ final class OkapiClient {
         return new UserInfo(name, finds, successUserName && successFinds ? UserInfoStatus.SUCCESSFUL : UserInfoStatus.FAILED);
     }
 
+    private static class JSONResult {
+
+        public final boolean isSuccess;
+        public final JSONObject data;
+
+        public JSONResult(final HttpResponse response) {
+            isSuccess = Network.isSuccess(response);
+            final String responseData = Network.getResponseDataAlways(response);
+            JSONObject data = null;
+            if (responseData != null) {
+                try {
+                    data = new JSONObject(responseData);
+                } catch (final JSONException e) {
+                    Log.w("JSONResult", e);
+                }
+            }
+            this.data = data;
+        }
+    }
 }
