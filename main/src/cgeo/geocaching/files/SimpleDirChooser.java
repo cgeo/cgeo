@@ -32,17 +32,20 @@ import java.util.List;
  * Dialog for choosing a file or directory.
  */
 public class SimpleDirChooser extends AbstractListActivity {
+    public static final String EXTRA_CHOOSE_FOR_WRITING = "chooseForWriting";
     private static final String PARENT_DIR = "..        ";
     private File currentDir;
     private FileArrayAdapter adapter;
     private Button okButton = null;
     private int lastPosition = -1;
+    private boolean chooseForWriting = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final Bundle extras = getIntent().getExtras();
         currentDir = dirContaining(extras.getString(Intents.EXTRA_START_DIR));
+        chooseForWriting = extras.getBoolean(SimpleDirChooser.EXTRA_CHOOSE_FOR_WRITING, false);
 
         ActivityMixin.setTheme(this);
         setContentView(R.layout.simple_dir_chooser);
@@ -91,13 +94,13 @@ public class SimpleDirChooser extends AbstractListActivity {
         List<Option> listDirs = new ArrayList<Option>();
         try {
             for (File currentDir : dirs) {
-                listDirs.add(new Option(currentDir.getName(), currentDir.getAbsolutePath()));
+                listDirs.add(new Option(currentDir.getName(), currentDir.getAbsolutePath(), currentDir.canWrite()));
             }
         } catch (RuntimeException e) {
         }
         Collections.sort(listDirs);
         if (dir.getParent() != null) {
-            listDirs.add(0, new Option(PARENT_DIR, dir.getParent()));
+            listDirs.add(0, new Option(PARENT_DIR, dir.getParent(), false));
         }
         this.adapter = new FileArrayAdapter(this, R.layout.simple_dir_item, listDirs);
         this.setListAdapter(adapter);
@@ -138,8 +141,13 @@ public class SimpleDirChooser extends AbstractListActivity {
                 }
                 CheckBox check = (CheckBox) v.findViewById(R.id.CheckBox);
                 if (check != null) {
-                    check.setOnClickListener(new OnCheckBoxClickListener(position));
-                    check.setChecked(option.isChecked());
+                    if (!chooseForWriting || option.isWriteable()) {
+                        check.setOnClickListener(new OnCheckBoxClickListener(position));
+                        check.setChecked(option.isChecked());
+                        check.setEnabled(true);
+                    } else {
+                        check.setEnabled(false);
+                    }
                 }
             }
             return v;
@@ -204,10 +212,12 @@ public class SimpleDirChooser extends AbstractListActivity {
         private final String name;
         private final String path;
         private boolean checked = false;
+        private boolean writeable = false;
 
-        public Option(String name, String path) {
+        public Option(String name, String path, boolean writeable) {
             this.name = name;
             this.path = path;
+            this.writeable = writeable;
         }
 
         public String getName() {
@@ -226,6 +236,10 @@ public class SimpleDirChooser extends AbstractListActivity {
             this.checked = checked;
         }
 
+        public boolean isWriteable() {
+            return writeable;
+        }
+
         @Override
         public int compareTo(Option other) {
             if (other != null && this.name != null) {
@@ -240,7 +254,7 @@ public class SimpleDirChooser extends AbstractListActivity {
         @Override
         public boolean accept(File dir, String filename) {
             File file = new File(dir, filename);
-            return file.isDirectory() && file.canWrite();
+            return file.isDirectory() && file.canRead();
         }
 
     }

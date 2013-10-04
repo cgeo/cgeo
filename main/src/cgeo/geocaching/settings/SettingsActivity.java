@@ -73,18 +73,20 @@ public class SettingsActivity extends PreferenceActivity {
      */
     private enum DirChooserType {
         GPX_IMPORT_DIR(1, R.string.pref_gpxImportDir,
-                Environment.getExternalStorageDirectory().getPath() + "/gpx"),
+                Environment.getExternalStorageDirectory().getPath() + "/gpx", false),
         GPX_EXPORT_DIR(2, R.string.pref_gpxExportDir,
-                Environment.getExternalStorageDirectory().getPath() + "/gpx"),
-        THEMES_DIR(3, R.string.pref_renderthemepath, "");
+                Environment.getExternalStorageDirectory().getPath() + "/gpx", true),
+        THEMES_DIR(3, R.string.pref_renderthemepath, "", false);
         public final int requestCode;
         public final int keyId;
         public final String defaultValue;
+        public final boolean writeMode;
 
-        DirChooserType(final int requestCode, final int keyId, final String defaultValue) {
+        DirChooserType(final int requestCode, final int keyId, final String defaultValue, final boolean writeMode) {
             this.requestCode = requestCode;
             this.keyId = keyId;
             this.defaultValue = defaultValue;
+            this.writeMode = writeMode;
         }
     }
 
@@ -306,6 +308,7 @@ public class SettingsActivity extends PreferenceActivity {
             // OI file manager not available
             final Intent dirChooser = new Intent(this, SimpleDirChooser.class);
             dirChooser.putExtra(Intents.EXTRA_START_DIR, startDirectory);
+            dirChooser.putExtra(SimpleDirChooser.EXTRA_CHOOSE_FOR_WRITING, dct.writeMode);
             startActivityForResult(dirChooser, dct.requestCode);
         }
     }
