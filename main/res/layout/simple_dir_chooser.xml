@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="?background_color"
     android:orientation="vertical" >
 
     <LinearLayout
+        android:id="@+id/headerLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
         android:orientation="vertical" >
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
@@ -33,16 +33,11 @@
             android:singleLine="true" />
     </LinearLayout>
 
-    <ListView
-        android:id="@android:id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="100" />
-
     <LinearLayout
+        android:id="@+id/buttonLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:paddingTop="10dip" >
 
@@ -63,4 +58,11 @@
             android:text="@android:string/cancel" />
     </LinearLayout>
 
-</LinearLayout>
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/buttonLayout"
+        android:layout_below="@+id/headerLayout" />
+
+</RelativeLayout>
