@@ -42,7 +42,7 @@ import java.util.Locale;
 /**
  * General c:geo preferences/settings set by the user
  */
-public final class Settings {
+public class Settings {
 
     public static final int SHOW_WP_THRESHOLD_DEFAULT = 10;
     public static final int SHOW_WP_THRESHOLD_MAX = 50;
@@ -82,8 +82,8 @@ public final class Settings {
      */
     private static MapSource mapSource;
 
-    private Settings() {
-        // this class is not to be instantiated;
+    protected Settings() {
+        throw new InstantiationError();
     }
 
     private static void migrateSettings() {
@@ -215,13 +215,13 @@ public final class Settings {
         return sharedPrefs.getFloat(getKey(prefKeyId), defaultValue);
     }
 
-    static boolean putString(final int prefKeyId, final String value) {
+    protected static boolean putString(final int prefKeyId, final String value) {
         final SharedPreferences.Editor edit = sharedPrefs.edit();
         edit.putString(getKey(prefKeyId), value);
         return edit.commit();
     }
 
-    private static boolean putBoolean(final int prefKeyId, final boolean value) {
+    protected static boolean putBoolean(final int prefKeyId, final boolean value) {
         final SharedPreferences.Editor edit = sharedPrefs.edit();
         edit.putBoolean(getKey(prefKeyId), value);
         return edit.commit();
@@ -450,10 +450,6 @@ public final class Settings {
         putInt(R.string.pref_coordinputformat, format.ordinal());
     }
 
-    static void setLogOffline(final boolean offline) {
-        putBoolean(R.string.pref_log_offline, offline);
-    }
-
     public static boolean getLogOffline() {
         return getBoolean(R.string.pref_log_offline, false);
     }
@@ -480,11 +476,6 @@ public final class Settings {
 
     public static boolean isExcludeMyCaches() {
         return getBoolean(R.string.pref_excludemine, false);
-    }
-
-    public static void setUseEnglish(final boolean english) {
-        putBoolean(R.string.pref_useenglish, english);
-        setLanguage(english);
     }
 
     public static boolean isUseEnglish() {
@@ -797,20 +788,10 @@ public final class Settings {
                 String.valueOf(NavigationAppsEnum.COMPASS.id)));
     }
 
-    public static void setDefaultNavigationTool(final int defaultNavigationTool) {
-        putString(R.string.pref_defaultNavigationTool,
-                String.valueOf(defaultNavigationTool));
-    }
-
     public static int getDefaultNavigationTool2() {
         return Integer.parseInt(getString(
                 R.string.pref_defaultNavigationTool2,
                 String.valueOf(NavigationAppsEnum.INTERNAL_MAP.id)));
-    }
-
-    public static void setDefaultNavigationTool2(final int defaultNavigationTool) {
-        putString(R.string.pref_defaultNavigationTool2,
-                String.valueOf(defaultNavigationTool));
     }
 
     public static Strategy getLiveMapStrategy() {
@@ -928,16 +909,8 @@ public final class Settings {
         return getString(R.string.pref_twitter_cache_message, "I found [NAME] ([URL]).");
     }
 
-    public static void setCacheTwitterMessage(final String template) {
-        putString(R.string.pref_twitter_cache_message, template);
-    }
-
     public static String getTrackableTwitterMessage() {
         return getString(R.string.pref_twitter_trackable_message, "I touched [NAME] ([URL]).");
-    }
-
-    public static void setTrackableTwitterMessage(final String template) {
-        putString(R.string.pref_twitter_trackable_message, template);
     }
 
     public static int getLogImageScale() {
@@ -946,11 +919,6 @@ public final class Settings {
 
     public static void setLogImageScale(final int scale) {
         putInt(R.string.pref_logImageScale, scale);
-    }
-
-    // Only for tests!
-    static void setExcludeDisabledCaches(final boolean exclude) {
-        putBoolean(R.string.pref_excludedisabled, exclude);
     }
 
     public static void setExcludeMine(final boolean exclude) {
@@ -969,18 +937,6 @@ public final class Settings {
         boolean a = putString(R.string.pref_username, username);
         boolean b = putString(R.string.pref_password, password);
         return a && b;
-    }
-
-    static void setStoreOfflineMaps(final boolean offlineMaps) {
-        putBoolean(R.string.pref_offlinemaps, offlineMaps);
-    }
-
-    static void setStoreOfflineWpMaps(final boolean offlineWpMaps) {
-        putBoolean(R.string.pref_offlinewpmaps, offlineWpMaps);
-    }
-
-    static void setUseImperialUnits(final boolean imperial) {
-        putBoolean(R.string.pref_units, imperial);
     }
 
     public static long getFieldnoteExportDate() {

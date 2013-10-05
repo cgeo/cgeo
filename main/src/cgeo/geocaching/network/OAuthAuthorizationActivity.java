@@ -321,8 +321,4 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     protected String getAuthAuthorize() {
         return res.getString(R.string.auth_authorize, getAuthTitle());
     }
-
-    protected String getAuthFinish() {
-        return res.getString(R.string.auth_finish, getAuthTitle());
-    }
 }

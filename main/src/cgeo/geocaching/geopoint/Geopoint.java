@@ -300,7 +300,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Returns formatted coordinates with default format.
      * Default format is decimalminutes, e.g. N 52° 36.123 E 010° 03.456
-     *
+     * 
      * @return formatted coordinates
      */
     @Override
@@ -364,8 +364,8 @@ public final class Geopoint implements ICoordinates, Parcelable {
     }
 
     /**
-     * Get longitude chararcter (E or W).
-     *
+     * Get longitude character (E or W).
+     * 
      * @return
      */
     public char getLonDir() {

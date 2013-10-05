@@ -29,11 +29,6 @@ import java.util.Set;
  */
 public class Tile {
 
-    public static final double LATITUDE_MIN = -85.05112878;
-    public static final double LATITUDE_MAX = 85.05112878;
-    public static final double LONGITUDE_MIN = -180;
-    public static final double LONGITUDE_MAX = 180;
-
     public static final int TILE_SIZE = 256;
     public static final int ZOOMLEVEL_MAX = 18;
     public static final int ZOOMLEVEL_MIN = 0;

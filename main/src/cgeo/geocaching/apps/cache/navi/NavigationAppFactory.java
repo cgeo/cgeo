@@ -224,44 +224,6 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     }
 
     /**
-     * This offset is used to build unique menu ids to avoid collisions of ids in menus
-     */
-    private static final int MENU_ITEM_OFFSET = 12345;
-
-
-    /**
-     * Adds the installed navigation tools to the given menu.
-     * Use {@link #onMenuItemSelected(MenuItem, Activity, cgeo.geocaching.Geocache)} on
-     * selection event to start the selected navigation tool.
-     *
-     * <b>Only use this way if {@link #showNavigationMenu(Activity, cgeo.geocaching.Geocache, cgeo.geocaching.Waypoint, Geopoint, boolean, boolean)} is
-     * not suitable for the given usecase.</b>
-     *
-     * @param menu
-     */
-    public static void addMenuItems(final Menu menu, final Geocache cache) {
-        for (final NavigationAppsEnum navApp : getInstalledNavigationApps()) {
-            if (navApp.app instanceof CacheNavigationApp) {
-                final CacheNavigationApp cacheApp = (CacheNavigationApp) navApp.app;
-                if (cacheApp.isEnabled(cache) && Settings.isUseNavigationApp(navApp)) {
-                    menu.add(0, MENU_ITEM_OFFSET + navApp.id, 0, navApp.app.getName());
-                }
-            }
-        }
-    }
-
-    public static void addMenuItems(final Menu menu, final Waypoint waypoint) {
-        for (final NavigationAppsEnum navApp : getInstalledNavigationApps()) {
-            if (navApp.app instanceof WaypointNavigationApp) {
-                final WaypointNavigationApp waypointApp = (WaypointNavigationApp) navApp.app;
-                if (waypointApp.isEnabled(waypoint) && Settings.isUseNavigationApp(navApp)) {
-                    menu.add(0, MENU_ITEM_OFFSET + navApp.id, 0, navApp.app.getName());
-                }
-            }
-        }
-    }
-
-    /**
      * Handles menu selections for menu entries created with {@link #addMenuItems(Menu, cgeo.geocaching.Geocache)}.
      *
      * @param item
@@ -306,7 +268,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     private static App getAppFromMenuItem(MenuItem item) {
         final int id = item.getItemId();
         for (final NavigationAppsEnum navApp : NavigationAppsEnum.values()) {
-            if (MENU_ITEM_OFFSET + navApp.id == id) {
+            if (navApp.id == id) {
                 return navApp.app;
             }
         }

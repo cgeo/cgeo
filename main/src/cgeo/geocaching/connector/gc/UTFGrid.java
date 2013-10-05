@@ -12,22 +12,6 @@ public final class UTFGrid {
     public static final int GRID_MAXX = 63;
     public static final int GRID_MAXY = 63;
 
-    /**
-     * Convert a value from a JSON grid object into an id that can be used as an index
-     * It's not used at the moment due to optimizations.
-     * But maybe we need it some day...
-     */
-    public static short getUTFGridId(final char value) {
-        short result = (short) value;
-        if (result >= 93) {
-            result--;
-        }
-        if (result >= 35) {
-            result--;
-        }
-        return (short) (result - 32);
-    }
-
     /** Calculate from a list of positions (x/y) the coords */
     public static UTFGridPosition getPositionInGrid(List<UTFGridPosition> positions) {
         int minX = GRID_MAXX;

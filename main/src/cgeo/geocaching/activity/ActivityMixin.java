@@ -2,8 +2,8 @@ package cgeo.geocaching.activity;
 
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.settings.Settings;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -61,14 +61,6 @@ public final class ActivityMixin {
         } else {
             activity.setTheme(R.style.dark);
         }
-    }
-
-    public static int getTheme() {
-        if (Settings.isLightSkin()) {
-            return R.style.light;
-        }
-
-        return R.style.dark;
     }
 
     public static int getDialogTheme() {

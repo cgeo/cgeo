@@ -31,10 +31,6 @@ public abstract class AbstractItemizedOverlay implements GeneralOverlay {
         return ovlImpl.superOnTap(index);
     }
 
-    Drawable boundCenter(Drawable markerIn) {
-        return ovlImpl.superBoundCenter(markerIn);
-    }
-
     Drawable boundCenterBottom(Drawable markerIn) {
         return ovlImpl.superBoundCenterBottom(markerIn);
     }

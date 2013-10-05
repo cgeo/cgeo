@@ -95,20 +95,6 @@ public final class CryptUtils {
         return StringUtils.EMPTY;
     }
 
-    public static String sha1(String text) {
-        try {
-            final MessageDigest digest = MessageDigest.getInstance("SHA-1");
-            digest.update(text.getBytes(CharEncoding.UTF_8), 0, text.length());
-            return new BigInteger(1, digest.digest()).toString(16);
-        } catch (NoSuchAlgorithmException e) {
-            Log.e("CryptUtils.sha1", e);
-        } catch (UnsupportedEncodingException e) {
-            Log.e("CryptUtils.sha1", e);
-        }
-
-        return StringUtils.EMPTY;
-    }
-
     public static byte[] hashHmac(String text, String salt) {
         byte[] macBytes = {};
 
