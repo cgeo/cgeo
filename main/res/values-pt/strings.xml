@@ -478,7 +478,6 @@
   <string name="auth_authorize">Autorizar c:geo</string>
   <string name="auth_start">Iniciar autorização</string>
   <string name="auth_again">Iniciar de novo</string>
-  <string name="auth_finish">Fim</string>
   <string name="auth_dialog_waiting">Esperando por %s…</string>
   <string name="auth_explain_short">O processo a seguir permitirá que <b>c:geo</b> acesse o %s.</string>
   <string name="auth_dialog_completed_twitter">O c:geo está agora autorizado a publicar no Twitter.</string>

@@ -400,7 +400,6 @@
   <string name="auth_authorize">Hozzáférés engedélyezése a c:geo-nak</string>
   <string name="auth_start">Engedélyezés indítása</string>
   <string name="auth_again">Engedélyezés indítása újra</string>
-  <string name="auth_finish">Befejezés</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Frissítés</string>
   <string name="cache_offline_drop">Törlés</string>

@@ -187,7 +187,6 @@
   <string name="auth_authorize">Autoriser c:geo</string>
   <string name="auth_start">Start autorisasjon</string>
   <string name="auth_again">Prøv igjen</string>
-  <string name="auth_finish">Fullfør</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Oppdater</string>
   <string name="cache_offline_drop">Slett</string>

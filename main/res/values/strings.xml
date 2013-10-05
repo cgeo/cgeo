@@ -535,7 +535,6 @@
     <string name="auth_authorize">Authorize c:geo</string>
     <string name="auth_start">Start authorization</string>
     <string name="auth_again">Start again</string>
-    <string name="auth_finish">Finish</string>
     <string name="auth_dialog_waiting">Waiting for %s…</string>
     <string name="auth_explain_short">The following process will allow <b>c:geo</b> to access %s.</string>
     <string name="auth_explain_long">Pressing the \"authorize c:geo\" button will start the process. This process will open up a web browser with a %s page. Log in on this page and allow <b>c:geo</b> to access your account. That\'s all.</string>

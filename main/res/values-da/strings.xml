@@ -124,7 +124,6 @@
   <string name="auth_authorize">Godkend c:geo</string>
   <string name="auth_start">Start godkendelse</string>
   <string name="auth_again">Start igen</string>
-  <string name="auth_finish">Færdig</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Genindlæs</string>
   <string name="cache_offline_drop">Fjern</string>

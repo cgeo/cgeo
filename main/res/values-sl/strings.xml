@@ -473,7 +473,6 @@
   <string name="auth_authorize">Poveži c:geo s Twitterjem</string>
   <string name="auth_start">Začni z avtorizacijo</string>
   <string name="auth_again">Ponovno začni</string>
-  <string name="auth_finish">Končaj</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
   <string name="auth_dialog_completed_oc">c:geo je sedaj povezan z %s.</string>

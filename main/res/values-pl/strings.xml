@@ -474,7 +474,6 @@
   <string name="auth_authorize">Autoryzacja c:geo</string>
   <string name="auth_start">Rozpoczynam autoryzację</string>
   <string name="auth_again">Rozpoczynam ponownie autoryzację</string>
-  <string name="auth_finish">Gotowe</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
   <string name="auth_dialog_completed_oc">c:geo został zautoryzowany by komunikować się z %s.</string>

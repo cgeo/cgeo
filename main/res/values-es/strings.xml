@@ -338,7 +338,6 @@
   <string name="auth_authorize">Autorizar c:geo</string>
   <string name="auth_start">Iniciar autorización</string>
   <string name="auth_again">Volver a iniciar</string>
-  <string name="auth_finish">Fin</string>
   <string name="cache_offline">Desconectado</string>
   <string name="cache_offline_refresh">Actualizar</string>
   <string name="cache_offline_drop">Tirar</string>

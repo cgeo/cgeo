@@ -474,7 +474,6 @@
   <string name="auth_authorize">c:geo autorisieren</string>
   <string name="auth_start">Starte Autorisierung</string>
   <string name="auth_again">Neustarten</string>
-  <string name="auth_finish">Fertig</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
   <string name="auth_dialog_completed_oc">c:geo ist nun autorisiert, caches zu laden und auf %s zu loggen.</string>

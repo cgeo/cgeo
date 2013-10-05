@@ -474,7 +474,6 @@
   <string name="auth_authorize">c:geo Autoriseren</string>
   <string name="auth_start">Start autorisatie</string>
   <string name="auth_again">Nogmaals starten</string>
-  <string name="auth_finish">Afronden</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
   <string name="auth_dialog_completed_oc">c:geo is nu gekoppeld met %s.</string>

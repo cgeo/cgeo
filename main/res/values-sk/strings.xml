@@ -401,7 +401,6 @@
   <string name="auth_authorize">autorizovať c:geo</string>
   <string name="auth_start">Zahájiť autorizáciu</string>
   <string name="auth_again">Znovu autorizovať</string>
-  <string name="auth_finish">Dokončiť</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Obnoviť</string>
   <string name="cache_offline_drop">Zmazať</string>

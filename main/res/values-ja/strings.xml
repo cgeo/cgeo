@@ -459,7 +459,6 @@
   <string name="auth_authorize">c:geoを認証</string>
   <string name="auth_start">認証を開始</string>
   <string name="auth_again">再度認証を開始</string>
-  <string name="auth_finish">完了</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_dialog_completed_oc">c:geoは%sと連携するための認証を受けました。</string>
   <string name="cache_offline">オフライン</string>

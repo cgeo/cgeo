@@ -437,7 +437,6 @@
   <string name="auth_authorize">Koppla c:geo mot Twitter</string>
   <string name="auth_start">Påbörja koppling mot Twitter</string>
   <string name="auth_again">Påbörja koppling mot Twitter igen</string>
-  <string name="auth_finish">Bekräfta PIN</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Uppdatera</string>
   <string name="cache_offline_drop">Radera</string>
