@@ -928,8 +928,16 @@ public final class Settings {
         return getString(R.string.pref_twitter_cache_message, "I found [NAME] ([URL]).");
     }
 
+    public static void setCacheTwitterMessage(final String template) {
+        putString(R.string.pref_twitter_cache_message, template);
+    }
+
     public static String getTrackableTwitterMessage() {
         return getString(R.string.pref_twitter_trackable_message, "I touched [NAME] ([URL]).");
+    }
+
+    public static void setTrackableTwitterMessage(final String template) {
+        putString(R.string.pref_twitter_trackable_message, template);
     }
 
     public static int getLogImageScale() {
