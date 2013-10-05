@@ -361,7 +361,6 @@
   <string name="init_login_popup_failed_reason">Přihlášení se nezdařilo, protože:</string>
   <string name="init_login_popup_not_authorized">Neautorizováno</string>
   <string name="init_signature">Podpis</string>
-  <string name="init_signature_help_text">Zadej podpis k použití při logování.\nSpeciální řetězce, které můžeš použít jsou: [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nTyto řetězce budou nahrazeny při vkládání podpisu do Logu.</string>
   <string name="init_signature_template_button">Vložit šablonu</string>
   <string name="init_signature_template_date">Datum</string>
   <string name="init_signature_template_time">Čas</string>

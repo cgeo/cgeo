@@ -361,7 +361,6 @@
   <string name="init_login_popup_failed_reason">Logowanie nie powiodło się, ponieważ </string>
   <string name="init_login_popup_not_authorized">Brak autoryzacji</string>
   <string name="init_signature">Podpis</string>
-  <string name="init_signature_help_text">Wprowadź Twój podpis, który będzie używany przy wpisie do dziennika.\nWyrażenia specjalne, które mogą być użyte to: [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nBędą one zastępowane w momencie wstawiania podpisu.</string>
   <string name="init_signature_template_button">Wstaw szablon</string>
   <string name="init_signature_template_date">Data</string>
   <string name="init_signature_template_time">Czas</string>

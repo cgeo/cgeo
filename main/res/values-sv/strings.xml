@@ -333,7 +333,6 @@
   <string name="init_login_popup_failed">Inloggning misslyckades</string>
   <string name="init_login_popup_failed_reason">Inloggning misslyckades:</string>
   <string name="init_signature">Signatur</string>
-  <string name="init_signature_help_text">Skriv den signatur som du vill använda i dina loggtexter.\nDet finns några speciella texter som kan användas och som expanderas när signaturen läggs in: [DATE] , [TIME], [USER] &amp; [NUMBER].</string>
   <string name="init_signature_template_button">Infoga makro</string>
   <string name="init_signature_template_date">Datum</string>
   <string name="init_signature_template_time">Tid</string>

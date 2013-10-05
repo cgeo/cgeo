@@ -363,7 +363,6 @@
   <string name="init_login_popup_failed_reason">Login falhado porque </string>
   <string name="init_login_popup_not_authorized">Não autorizado</string>
   <string name="init_signature">Assinatura</string>
-  <string name="init_signature_help_text">Escreva a sua assinatura, para adicionar ao texto de registo na cache.\nPode usar algumas palavras-chave: [DATE] , [TIME], [USER] &amp; [NUMBER].\nEstas serão expandidas quando a assinatura for inserida.</string>
   <string name="init_signature_template_button">Inserir modelo</string>
   <string name="init_signature_template_date">Data</string>
   <string name="init_signature_template_time">Hora</string>

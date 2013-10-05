@@ -410,7 +410,7 @@
     <string name="init_login_popup_failed_reason">Login failed:</string>
     <string name="init_login_popup_not_authorized">Not authorized</string>
     <string name="init_signature">Signature</string>
-    <string name="init_signature_help_text">Enter a signature to be appended to your logs.\nSpecial strings that can be used are: [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nThese will be expanded when the signature is inserted.</string>
+    <string name="init_template_help">Placeholder strings like [NAME] will be expanded later when this template is used.</string>
     <string name="init_signature_template_button">Insert Template</string>
     <string name="init_signature_template_date">Date</string>
     <string name="init_signature_template_time">Time</string>
@@ -510,6 +510,8 @@
     <string name="settings_open_website">Open website</string>
     <string name="settings_settings">Settings</string>
     <string name="settings_information">Information</string>
+    <string name="settings_twitter_cache_message">Message for found cache</string>
+    <string name="settings_twitter_trackable_message">Message for found trackable</string>
     
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>

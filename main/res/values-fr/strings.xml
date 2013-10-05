@@ -363,7 +363,6 @@
   <string name="init_login_popup_failed_reason">Erreur de connexion: </string>
   <string name="init_login_popup_not_authorized">Non autorisé</string>
   <string name="init_signature">Signature</string>
-  <string name="init_signature_help_text">Écrivez votre propre signature pour vos visites.\nLes codes spéciaux supportés sont : [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nAu moment de l\'insertion de la signature, ces codes seront remplacés par la valeur correspondante.</string>
   <string name="init_signature_template_button">Insérer un modèle</string>
   <string name="init_signature_template_date">Date</string>
   <string name="init_signature_template_time">Heure</string>

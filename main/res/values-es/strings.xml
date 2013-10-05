@@ -281,7 +281,6 @@
   <string name="init_login_popup_failed">Error en el acceso.</string>
   <string name="init_login_popup_failed_reason">El acceso ha fallado debido a </string>
   <string name="init_signature">Firma</string>
-  <string name="init_signature_help_text">Escribe la firma que quieres usar en los registros.\nLas palabras especiales que puedes usar son: [DATE], [TIME], [USER] y [NUMBER].\nSerán reemplazados por sus valores al insertar la firma.</string>
   <string name="init_signature_template_button">Insertar plantilla</string>
   <string name="init_signature_template_date">Fecha</string>
   <string name="init_signature_template_time">Hora</string>

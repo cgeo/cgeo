@@ -42,9 +42,9 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 /**
- * Exports offline-logs in the Groundspeak Field Note format.<br>
+ * Exports offline logs in the Groundspeak Field Note format.<br>
  * <br>
- *
+ * 
  * Field Notes are simple plain text files, but poorly documented. Syntax:<br>
  * <code>GCxxxxx,yyyy-mm-ddThh:mm:ssZ,Found it,"logtext"</code>
  */

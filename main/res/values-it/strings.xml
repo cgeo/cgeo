@@ -363,7 +363,6 @@
   <string name="init_login_popup_failed_reason">Login fallito: </string>
   <string name="init_login_popup_not_authorized">Non autorizzato</string>
   <string name="init_signature">Firma</string>
-  <string name="init_signature_help_text">Scrivi la tua firma da usare nei testi di log.\nStringhe speciali possono essere usate come: [DATE], [TIME], [DATETIME], [USER] e [NUMBER].\nSaranno espanse quando la firma viene inserita.</string>
   <string name="init_signature_template_button">Stringhe speciali</string>
   <string name="init_signature_template_date">Data</string>
   <string name="init_signature_template_time">Ora</string>

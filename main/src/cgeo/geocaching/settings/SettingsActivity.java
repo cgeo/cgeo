@@ -15,8 +15,6 @@ import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.utils.DatabaseBackupUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.LogTemplateProvider;
-import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openintents.intents.FileManagerIntents;
@@ -34,17 +32,10 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.view.MenuItem;
-import android.view.MenuItem.OnMenuItemClickListener;
-import android.view.View;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.ListAdapter;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -63,8 +54,6 @@ public class SettingsActivity extends PreferenceActivity {
 
     private static final String INTENT_GOTO = "GOTO";
     private static final int INTENT_GOTO_SERVICES = 1;
-
-    private EditText signatureText;
 
     /**
      * Enumeration for directory choosers. This is how we can retrieve information about the
@@ -133,7 +122,7 @@ public class SettingsActivity extends PreferenceActivity {
                 R.string.pref_gpxExportDir, R.string.pref_gpxImportDir,
                 R.string.pref_mapDirectory, R.string.pref_defaultNavigationTool,
                 R.string.pref_defaultNavigationTool2, R.string.pref_webDeviceName,
-                R.string.pref_fakekey_preference_backup_info, }) {
+                R.string.pref_fakekey_preference_backup_info, R.string.pref_twitter_cache_message, R.string.pref_twitter_trackable_message }) {
             bindSummaryToStringValue(k);
         }
         getPreference(R.string.pref_units).setDefaultValue(Settings.getImperialUnitsDefault());
@@ -178,44 +167,6 @@ public class SettingsActivity extends PreferenceActivity {
 
     private Preference getPreference(final int keyId) {
         return SettingsActivity.findPreference(this, getKey(keyId));
-    }
-
-    // workaround, because OnContextItemSelected nor onMenuItemSelected is never called
-    OnMenuItemClickListener TEMPLATE_CLICK = new OnMenuItemClickListener() {
-        @Override
-        public boolean onMenuItemClick(final MenuItem item) {
-            LogTemplate template = LogTemplateProvider.getTemplate(item.getItemId());
-            if (template != null) {
-                insertSignatureTemplate(template);
-                return true;
-            }
-            return false;
-        }
-    };
-
-    // workaround, because OnContextItemSelected and onMenuItemSelected are never called
-    void setSignatureTextView(final EditText view) {
-        this.signatureText = view;
-    }
-
-    @Override
-    public void onCreateContextMenu(final ContextMenu menu, final View v,
-            final ContextMenuInfo menuInfo) {
-        // context menu for signature templates
-        if (v.getId() == R.id.signature_templates) {
-            menu.setHeaderTitle(R.string.init_signature_template_button);
-            ArrayList<LogTemplate> templates = LogTemplateProvider.getTemplates();
-            for (int i = 0; i < templates.size(); ++i) {
-                menu.add(0, templates.get(i).getItemId(), 0, templates.get(i).getResourceId());
-                menu.getItem(i).setOnMenuItemClickListener(TEMPLATE_CLICK);
-            }
-        }
-        super.onCreateContextMenu(menu, v, menuInfo);
-    }
-
-    private void insertSignatureTemplate(final LogTemplate template) {
-        String insertText = "[" + template.getTemplateString() + "]";
-        ActivityMixin.insertAtPosition(signatureText, insertText, true);
     }
 
     /**

@@ -170,6 +170,17 @@
                 <cgeo.geocaching.settings.OAuthPreference
                     android:dependency="@string/pref_twitter"
                     android:key="@string/pref_fakekey_twitter_authorization" />
+
+                <cgeo.geocaching.settings.TemplateTextPreference
+                    android:defaultValue="I found [NAME] ([URL])."
+                    android:dependency="@string/pref_twitter"
+                    android:key="@string/pref_twitter_cache_message"
+                    android:title="@string/settings_twitter_cache_message" />
+                <cgeo.geocaching.settings.TemplateTextPreference
+                    android:defaultValue="I touched [NAME] ([URL])."
+                    android:dependency="@string/pref_twitter"
+                    android:key="@string/pref_twitter_trackable_message"
+                    android:title="@string/settings_twitter_trackable_message" />
             </PreferenceScreen>
         </PreferenceCategory>
         <PreferenceCategory android:title="@string/settings_category_browser" >
@@ -277,12 +288,12 @@
             <Preference
                 android:key="@string/pref_renderthemepath"
                 android:title="@string/init_rendertheme_folder" />
-            <CheckBoxPreference
-                android:key="@string/pref_mapsforge_scale_text"
-                android:title="@string/settings_title_scale_map_text"
-                android:summary="@string/settings_summary_scale_map_text"
-                android:defaultValue="true" />
 
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="@string/pref_mapsforge_scale_text"
+                android:summary="@string/settings_summary_scale_map_text"
+                android:title="@string/settings_title_scale_map_text" />
         </PreferenceCategory>
         <PreferenceCategory android:title="@string/settings_title_map_content" >
             <Preference
@@ -305,7 +316,7 @@
         android:icon="?attr/settings_pen"
         android:title="@string/settings_title_logging" >
         <PreferenceCategory android:title="@string/init_signature" >
-            <cgeo.geocaching.settings.LogSignaturePreference
+            <cgeo.geocaching.settings.TemplateTextPreference
                 android:key="@string/pref_signature"
                 android:title="@string/init_signature" />
 

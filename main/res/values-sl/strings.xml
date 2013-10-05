@@ -361,7 +361,6 @@
   <string name="init_login_popup_failed_reason">Prijava neuspešna:</string>
   <string name="init_login_popup_not_authorized">Ni avtoriziran</string>
   <string name="init_signature">Podpis</string>
-  <string name="init_signature_help_text">Vnesite podpis, ki bo uporabljen b baših zapisih obiskov.\nPosebni nizi, ki jih lahko uporabite so: [DATE] - datum, [TIME] - ura, [DATETIME] - datum in ura, [USER] - uporabniško ime in [NUMBER] - število najdb.\nTi nizi bodo zamenjani s pravimi podatki ob vpisu.</string>
   <string name="init_signature_template_button">Vnesi predlogo</string>
   <string name="init_signature_template_date">Datum</string>
   <string name="init_signature_template_time">Ura</string>

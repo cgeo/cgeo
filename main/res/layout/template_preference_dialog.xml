@@ -2,23 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:padding="8dp" >
 
-    <TextView
-        android:text="@string/init_signature_help_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-    
     <EditText
         android:id="@+id/signature_dialog_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/init_signature"
-        android:inputType="textMultiLine|textCapSentences"
         android:gravity="top|left"
+        android:inputType="textMultiLine|textCapSentences"
         android:minLines="3"
         android:singleLine="false" />
 
@@ -26,8 +18,15 @@
         android:id="@+id/signature_templates"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
         android:layout_gravity="right"
+        android:paddingTop="8dp"
         android:text="@string/init_signature_template_button" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:text="@string/init_template_help"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </LinearLayout>

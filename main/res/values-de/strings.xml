@@ -361,7 +361,6 @@
   <string name="init_login_popup_failed_reason">Login fehlgeschlagen:</string>
   <string name="init_login_popup_not_authorized">Nicht autorisiert</string>
   <string name="init_signature">Signatur</string>
-  <string name="init_signature_help_text">Verwendete Signatur für Logtexte.\nErlaubte Platzhalter sind: [DATE], [TIME], [DATETIME], [USER] &amp; [NUMBER]. Diese werden beim Einfügen der Signatur durch die entsprechenden Werte ersetzt.</string>
   <string name="init_signature_template_button">Platzhalter einfügen</string>
   <string name="init_signature_template_date">Datum</string>
   <string name="init_signature_template_time">Zeit</string>

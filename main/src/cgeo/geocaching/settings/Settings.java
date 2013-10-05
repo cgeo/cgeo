@@ -925,13 +925,11 @@ public final class Settings {
     }
 
     public static String getCacheTwitterMessage() {
-        // TODO make customizable from UI
-        return "I found [NAME] ([URL])";
+        return getString(R.string.pref_twitter_cache_message, "I found [NAME] ([URL]).");
     }
 
     public static String getTrackableTwitterMessage() {
-        // TODO make customizable from UI
-        return "I touched [NAME] ([URL])!";
+        return getString(R.string.pref_twitter_trackable_message, "I touched [NAME] ([URL]).");
     }
 
     public static int getLogImageScale() {
