@@ -228,13 +228,14 @@ public class GeocacheTest extends CGeoTestCase {
         assertTime("text 14:20 text", 14, 20);
         assertNoTime("text 30:40 text");
         assertNoTime("text 14:90 text");
-        final String time_hours = CgeoApplication.getInstance().getString(R.string.cache_time_full_hours);
-        assertTime("text 16 " + time_hours, 16, 0);
-        assertTime("text 16 " + StringUtils.lowerCase(time_hours), 16, 0);
-        assertTime("text 16:00 " + time_hours, 16, 0);
-        assertTime("text 16.00 " + time_hours, 16, 0);
+        final String timeHours = CgeoApplication.getInstance().getString(R.string.cache_time_full_hours);
+        assertTime("text 16 " + timeHours, 16, 0);
+        assertTime("text 16 " + StringUtils.lowerCase(timeHours), 16, 0);
+        assertTime("text 16:00 " + timeHours, 16, 0);
+        assertTime("text 16.00 " + timeHours, 16, 0);
         assertTime("text 14:20.", 14, 20);
         assertTime("<b>14:20</b>", 14, 20);
+        assertTime("<u><em>Uhrzeit:</em></u> 17-20 " + timeHours + "</span></strong>", 17, 00);
     }
 
     private static void assertTime(final String description, final int hours, final int minutes) {
