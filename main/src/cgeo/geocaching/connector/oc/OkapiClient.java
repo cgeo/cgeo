@@ -34,6 +34,8 @@ import ch.boye.httpclientandroidlib.HttpResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -134,13 +136,9 @@ final class OkapiClient {
         params.add("fields", getFullFields(ocapiConn));
         params.add("attribution_append", "none");
 
-        final JSONObject data = request(ocapiConn, OkapiService.SERVICE_CACHE, params).data;
+        final JSONResult result = request(ocapiConn, OkapiService.SERVICE_CACHE, params);
 
-        if (data == null) {
-            return null;
-        }
-
-        return parseCache(data);
+        return result.isSuccess ? parseCache(result.data) : null;
     }
 
     public static List<Geocache> getCachesAround(final Geopoint center, final OCApiConnector connector) {
@@ -623,14 +621,15 @@ final class OkapiClient {
         return res.toString();
     }
 
+    @NonNull
     private static JSONResult request(final OCApiConnector connector, final OkapiService service, final Parameters params) {
         if (connector == null) {
-            return null;
+            return new JSONResult(null);
         }
 
         final String host = connector.getHost();
         if (StringUtils.isBlank(host)) {
-            return null;
+            return new JSONResult(null);
         }
 
         params.add("langpref", getPreferredLanguage());
@@ -732,13 +731,17 @@ final class OkapiClient {
         return new UserInfo(name, finds, successUserName && successFinds ? UserInfoStatus.SUCCESSFUL : UserInfoStatus.FAILED);
     }
 
+    /**
+     * Encapsulates response state and content of an HTTP-request that expects a JSON result. <code>isSuccess</code> is
+     * only true, if the response state was success and <code>data</code> is not null.
+     */
     private static class JSONResult {
 
         public final boolean isSuccess;
         public final JSONObject data;
 
-        public JSONResult(final HttpResponse response) {
-            isSuccess = Network.isSuccess(response);
+        public JSONResult(final @Nullable HttpResponse response) {
+            boolean isSuccess = Network.isSuccess(response);
             final String responseData = Network.getResponseDataAlways(response);
             JSONObject data = null;
             if (responseData != null) {
@@ -749,6 +752,7 @@ final class OkapiClient {
                 }
             }
             this.data = data;
+            this.isSuccess = isSuccess && data != null;
         }
     }
 }

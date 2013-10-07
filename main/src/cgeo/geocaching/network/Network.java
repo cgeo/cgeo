@@ -452,10 +452,7 @@ public abstract class Network {
 
     @Nullable
     public static String getResponseDataAlways(@Nullable final HttpResponse response) {
-        if (response == null) {
-            return null;
-        }
-        return getResponseDataNoError(response, false);
+        return response != null ? getResponseDataNoError(response, false) : null;
     }
 
     /**

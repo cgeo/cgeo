@@ -409,7 +409,7 @@
     <string name="init_login_popup_failed">Login failed</string>
     <string name="init_login_popup_failed_reason">Login failed:</string>
     <string name="init_login_popup_not_authorized">Not authorized</string>
-    <string name="init_login_popup_invalid_timestamp">Lokal time invalid, adjust device time</string>
+    <string name="init_login_popup_invalid_timestamp">Local time invalid, adjust device time</string>
     <string name="init_login_popup_invalid_token">Authorization invalid, re-authorize</string>
     <string name="init_signature">Signature</string>
     <string name="init_signature_help_text">Enter a signature to be appended to your logs.\nSpecial strings that can be used are: [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nThese will be expanded when the signature is inserted.</string>
