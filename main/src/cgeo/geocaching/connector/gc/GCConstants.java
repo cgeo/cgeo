@@ -135,12 +135,12 @@ public final class GCConstants {
     public final static Pattern PATTERN_WPTYPE = Pattern.compile("\\/wpttypes\\/sm\\/(.+)\\.jpg");
     public final static Pattern PATTERN_WPPREFIXORLOOKUPORLATLON = Pattern.compile(">([^<]*<[^>]+>)?([^<]+)(<[^>]+>[^<]*)?<\\/td>");
     public final static Pattern PATTERN_WPNAME = Pattern.compile(">[^<]*<a[^>]+>([^<]*)<\\/a>");
-    public final static Pattern PATTERN_WPNOTE = Pattern.compile("colspan=\"6\">(.*)<\\/td>");
+    public final static Pattern PATTERN_WPNOTE = Pattern.compile("colspan=\"6\">(.*)" + Pattern.quote("</td>"), Pattern.DOTALL);
 
     /**
      * Patterns for different purposes
      */
-    /** replace linebreak and paragraph tags */
+    /** replace line break and paragraph tags */
     public final static Pattern PATTERN_LINEBREAK = Pattern.compile("<(br|p)[^>]*>");
     public final static Pattern PATTERN_TYPEBOX = Pattern.compile("<select name=\"ctl00\\$ContentBody\\$LogBookPanel1\\$ddLogType\" id=\"ctl00_ContentBody_LogBookPanel1_ddLogType\"[^>]*>"
             + "(([^<]*<option[^>]*>[^<]+</option>)+)[^<]*</select>", Pattern.CASE_INSENSITIVE);
