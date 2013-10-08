@@ -562,7 +562,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 setMenuItemLabel(menu, R.id.menu_refresh_stored, R.string.caches_store_selected, R.string.caches_store_offline);
             }
 
-            menu.findItem(R.id.menu_drop_caches_and_list).setVisible(isOffline && !hasSelection && isNonDefaultList && !adapter.isFiltered());
+            // make combined list deletion only possible when there are no filters, as that leads to confusion for the hidden caches
+            menu.findItem(R.id.menu_drop_caches_and_list).setVisible(isOffline && !hasSelection && isNonDefaultList && !adapter.isFiltered() && Settings.getCacheType() == CacheType.ALL);
 
             menu.findItem(R.id.menu_drop_list).setVisible(isNonDefaultList);
             menu.findItem(R.id.menu_rename_list).setVisible(isNonDefaultList);
