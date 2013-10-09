@@ -36,7 +36,7 @@
     
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="30dip" >
+                android:layout_height="wrap_content" >
     
                 <TextView
                     android:id="@+id/heading"
