@@ -228,7 +228,6 @@
     <style name="location_current_style">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_alignParentBottom">true</item>
         <item name="android:layout_gravity">right</item>
         <item name="android:paddingLeft">3dip</item>
         <item name="android:paddingRight">3dip</item>
