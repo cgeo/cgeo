@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.TypedArray;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.view.View;
@@ -20,8 +21,13 @@ import java.util.ArrayList;
 
 public class TemplateTextPreference extends DialogPreference {
 
+    /**
+     * default value, if none is given in the preference XML.
+     */
+    private static final String DEFAULT_VALUE = StringUtils.EMPTY;
     private SettingsActivity settingsActivity;
     private EditText editText;
+    private String initialValue;
 
     public TemplateTextPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -42,7 +48,7 @@ public class TemplateTextPreference extends DialogPreference {
         settingsActivity = (SettingsActivity) this.getContext();
 
         editText = (EditText) view.findViewById(R.id.signature_dialog_text);
-        editText.setText(getPersistedString(StringUtils.EMPTY));
+        editText.setText(getPersistedString(initialValue != null ? initialValue.toString() : StringUtils.EMPTY));
 
         Button button = (Button) view.findViewById(R.id.signature_templates);
         button.setOnClickListener(new View.OnClickListener() {
@@ -84,5 +90,22 @@ public class TemplateTextPreference extends DialogPreference {
             callChangeListener(text);
         }
         super.onDialogClosed(positiveResult);
+    }
+
+    @Override
+    protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue) {
+        if (restorePersistedValue) {
+            // Restore existing state
+            initialValue = this.getPersistedString(DEFAULT_VALUE);
+        } else {
+            // Set default state from the XML attribute
+            initialValue = defaultValue.toString();
+            persistString(initialValue);
+        }
+    }
+
+    @Override
+    protected Object onGetDefaultValue(TypedArray array, int index) {
+        return array.getString(index);
     }
 }
