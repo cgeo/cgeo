@@ -48,6 +48,8 @@ import java.util.List;
 
 @EActivity
 public class EditWaypointActivity extends AbstractActivity {
+    private static final ArrayList<WaypointType> POSSIBLE_WAYPOINT_TYPES = new ArrayList<WaypointType>(WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL);
+
     @ViewById(R.id.buttonLatitude) protected Button buttonLat;
     @ViewById(R.id.buttonLongitude) protected Button buttonLon;
     @ViewById(R.id.add_waypoint) protected Button addWaypoint;
@@ -70,14 +72,21 @@ public class EditWaypointActivity extends AbstractActivity {
     @Extra(Intents.EXTRA_COUNT) protected int wpCount = 0;
 
     @InstanceState protected int waypointTypeSelectorPosition = -1;
+
     private ProgressDialog waitDialog = null;
     private Waypoint waypoint = null;
     private String prefix = "OWN";
     private String lookup = "---";
     private boolean own = true;
-    ArrayList<WaypointType> wpTypes = null;
     ArrayList<String> distanceUnits = null;
+    /**
+     * {@code true} if the activity is newly created, {@code false} if it is restored from an instance state
+     */
     private boolean initViews = true;
+    /**
+     * This is the cache that the waypoint belongs to.
+     */
+    private Geocache cache;
 
     private Handler loadWaypointHandler = new Handler() {
 
@@ -158,6 +167,10 @@ public class EditWaypointActivity extends AbstractActivity {
             initViews = false;
         }
 
+        if (geocode != null) {
+            cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+            setCoordsModificationVisibility(ConnectorFactory.getConnector(geocode), cache);
+        }
         if (id > 0) { // existing waypoint
             waitDialog = ProgressDialog.show(this, null, res.getString(R.string.waypoint_loading), true);
             waitDialog.setCancelable(true);
@@ -166,11 +179,6 @@ public class EditWaypointActivity extends AbstractActivity {
 
         } else { // new waypoint
             initializeWaypointTypeSelector();
-
-            if (geocode != null) {
-                final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-                setCoordsModificationVisibility(ConnectorFactory.getConnector(geocode), cache);
-            }
         }
 
         initializeDistanceUnitSelector();
@@ -202,8 +210,7 @@ public class EditWaypointActivity extends AbstractActivity {
     }
 
     private void initializeWaypointTypeSelector() {
-        wpTypes = new ArrayList<WaypointType>(WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL);
-        ArrayAdapter<WaypointType> wpAdapter = new ArrayAdapter<WaypointType>(this, android.R.layout.simple_spinner_item, wpTypes.toArray(new WaypointType[wpTypes.size()]));
+        ArrayAdapter<WaypointType> wpAdapter = new ArrayAdapter<WaypointType>(this, android.R.layout.simple_spinner_item, POSSIBLE_WAYPOINT_TYPES.toArray(new WaypointType[POSSIBLE_WAYPOINT_TYPES.size()]));
         wpAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         waypointTypeSelector.setAdapter(wpAdapter);
 
@@ -218,17 +225,30 @@ public class EditWaypointActivity extends AbstractActivity {
             }
         });
 
-        if (initViews) {
-            int typeIndex = -1;
-            if (waypoint != null) {
-                typeIndex = wpTypes.indexOf(waypoint.getWaypointType());
-            }
-            waypointTypeSelector.setSelection(typeIndex >= 0 ? typeIndex : wpTypes.indexOf(WaypointType.WAYPOINT));
-        } else {
-            waypointTypeSelector.setSelection(waypointTypeSelectorPosition);
+        waypointTypeSelector.setSelection(getDefaultWaypointType());
+        waypointTypeSelector.setVisibility(View.VISIBLE);
+    }
+
+    private int getDefaultWaypointType() {
+        // potentially restore saved instance state
+        if (waypointTypeSelectorPosition >= 0) {
+            return waypointTypeSelectorPosition;
         }
 
-        waypointTypeSelector.setVisibility(View.VISIBLE);
+        // when editing, use the existing type
+        if (waypoint != null) {
+            return POSSIBLE_WAYPOINT_TYPES.indexOf(waypoint.getWaypointType());
+        }
+
+        // make default for new waypoint depend on cache type
+        switch (cache.getType()) {
+            case MYSTERY:
+                return POSSIBLE_WAYPOINT_TYPES.indexOf(WaypointType.FINAL);
+            case MULTI:
+                return POSSIBLE_WAYPOINT_TYPES.indexOf(WaypointType.STAGE);
+            default:
+                return POSSIBLE_WAYPOINT_TYPES.indexOf(WaypointType.WAYPOINT);
+        }
     }
 
     private void initializeDistanceUnitSelector() {
@@ -361,7 +381,7 @@ public class EditWaypointActivity extends AbstractActivity {
             final String noteText = note.getText().toString().trim();
             final Geopoint coordsToSave = coords;
             final int selectedTypeIndex = waypointTypeSelector.getSelectedItemPosition();
-            final WaypointType type = selectedTypeIndex >= 0 ? wpTypes.get(selectedTypeIndex) : waypoint.getWaypointType();
+            final WaypointType type = selectedTypeIndex >= 0 ? POSSIBLE_WAYPOINT_TYPES.get(selectedTypeIndex) : waypoint.getWaypointType();
             final boolean visited = visitedCheckBox.isChecked();
             final ProgressDialog progress = ProgressDialog.show(EditWaypointActivity.this, getString(R.string.cache), getString(R.string.waypoint_being_saved), true);
             final Handler finishHandler = new Handler() {
@@ -468,8 +488,8 @@ public class EditWaypointActivity extends AbstractActivity {
         return con.supportsOwnCoordinates() && con.uploadModifiedCoordinates(cache, waypointUploaded);
     }
 
-    public static void startActivityEditWaypoint(final Context context, final int waypointId) {
-        EditWaypointActivity_.intent(context).id(waypointId).start();
+    public static void startActivityEditWaypoint(final Context context, final Geocache cache, final int waypointId) {
+        EditWaypointActivity_.intent(context).geocode(cache.getGeocode()).id(waypointId).start();
     }
 
     public static void startActivityAddWaypoint(final Context context, final Geocache cache) {

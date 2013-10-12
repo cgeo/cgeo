@@ -78,7 +78,7 @@ public class WaypointPopup extends AbstractPopupActivity {
 
                 @Override
                 public void onClick(View arg0) {
-                    EditWaypointActivity.startActivityEditWaypoint(WaypointPopup.this, waypoint.getId());
+                    EditWaypointActivity.startActivityEditWaypoint(WaypointPopup.this, cache, waypoint.getId());
                     finish();
                 }
             });

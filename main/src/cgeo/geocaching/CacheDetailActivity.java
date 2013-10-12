@@ -455,7 +455,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 // waypoints
             case R.id.menu_waypoint_edit:
                 if (selectedWaypoint != null) {
-                    EditWaypointActivity.startActivityEditWaypoint(this, selectedWaypoint.getId());
+                    EditWaypointActivity.startActivityEditWaypoint(this, cache, selectedWaypoint.getId());
                     refreshOnResume = true;
                 }
                 return true;
@@ -1890,7 +1890,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 waypointView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
-                        EditWaypointActivity.startActivityEditWaypoint(CacheDetailActivity.this, wpt.getId());
+                        EditWaypointActivity.startActivityEditWaypoint(CacheDetailActivity.this, cache, wpt.getId());
                         refreshOnResume = true;
                         return true;
                     }
