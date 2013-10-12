@@ -4,6 +4,14 @@ import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * Stream to measure progress of reading automatically.
+ * <p>
+ * The method @link ProgressInputStream#read(byte[]) does not need to be overridden as it delegates to @link
+ * ProgressInputStream#read(byte[], int, int) anyway.
+ * </p>
+ *
+ */
 public class ProgressInputStream extends FilterInputStream {
 
     private int progress = 0;
@@ -15,14 +23,10 @@ public class ProgressInputStream extends FilterInputStream {
     @Override
     public int read() throws IOException {
         final int read = super.read();
-        progress += read;
+        if (read >= 0) {
+            progress++;
+        }
         return read;
-    }
-
-    @Override
-    public int read(byte[] buffer) throws IOException {
-        return super.read(buffer);
-        // don't increment here, this calls another read implementation which we already measure
     }
 
     @Override
