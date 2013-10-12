@@ -13,8 +13,6 @@ import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.utils.EditUtils;
-import cgeo.geocaching.utils.GeoDirHandler;
-import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -38,23 +36,25 @@ public class SearchActivity extends AbstractActivity {
 
     @InjectView(R.id.buttonLatitude) protected Button buttonLatitude;
     @InjectView(R.id.buttonLongitude) protected Button buttonLongitude;
-    @InjectView(R.id.search_coordinates) protected Button findByCoords;
-    @InjectView(R.id.search_address) protected Button findByAddress;
-    @InjectView(R.id.geocode) protected AutoCompleteTextView geocodeEdit;
-    @InjectView(R.id.display_geocode) protected Button displayByGeocode;
-    @InjectView(R.id.search_keyword) protected Button findByKeyword;
-    @InjectView(R.id.search_username) protected Button findByUserName;
-    @InjectView(R.id.search_owner) protected Button findByOwner;
-    @InjectView(R.id.trackable) protected AutoCompleteTextView trackable;
-    @InjectView(R.id.display_trackable) protected Button displayTrackable;
-    @InjectView(R.id.latitude) protected EditText latEdit;
-    @InjectView(R.id.longitude) protected EditText lonEdit;
-    @InjectView(R.id.keyword) protected EditText keywordEditText;
+    @InjectView(R.id.search_coordinates) protected Button buttonSearchCoords;
+
     @InjectView(R.id.address) protected EditText addressEditText;
+    @InjectView(R.id.search_address) protected Button buttonSearchAddress;
+
+    @InjectView(R.id.geocode) protected AutoCompleteTextView geocodeEditText;
+    @InjectView(R.id.display_geocode) protected Button buttonSearchGeocode;
+
+    @InjectView(R.id.keyword) protected EditText keywordEditText;
+    @InjectView(R.id.search_keyword) protected Button buttonSearchKeyword;
+
     @InjectView(R.id.username) protected EditText userNameEditText;
+    @InjectView(R.id.search_username) protected Button buttonSearchUserName;
+
     @InjectView(R.id.owner) protected EditText ownerNameEditText;
-    @InjectView(R.id.geocode) protected EditText geocodeEditText;
-    @InjectView(R.id.trackable) protected EditText trackableEditText;
+    @InjectView(R.id.search_owner) protected Button buttonSearchOwner;
+
+    @InjectView(R.id.trackable) protected AutoCompleteTextView trackableEditText;
+    @InjectView(R.id.display_trackable) protected Button buttonSearchTrackable;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -98,14 +98,7 @@ public class SearchActivity extends AbstractActivity {
     @Override
     public void onResume() {
         super.onResume();
-        geoDirHandler.startGeo();
         init();
-    }
-
-    @Override
-    public void onPause() {
-        geoDirHandler.stopGeo();
-        super.onPause();
     }
 
     /**
@@ -153,53 +146,65 @@ public class SearchActivity extends AbstractActivity {
 
         buttonLatitude.setOnClickListener(new FindByCoordsAction());
         buttonLongitude.setOnClickListener(new FindByCoordsAction());
-        findByCoords.setOnClickListener(new FindByCoordsListener());
+        buttonSearchCoords.setOnClickListener(new View.OnClickListener() {
 
-        EditUtils.setActionListener((EditText) findViewById(R.id.address), new Runnable() {
+            @Override
+            public void onClick(View arg0) {
+                findByCoordsFn();
+            }
+        });
+
+        EditUtils.setActionListener(addressEditText, new Runnable() {
 
             @Override
             public void run() {
                 findByAddressFn();
             }
         });
-        findByAddress.setOnClickListener(new FindByAddressListener());
+        buttonSearchAddress.setOnClickListener(new FindByAddressListener());
 
-        EditUtils.setActionListener(geocodeEdit, new Runnable() {
+        EditUtils.setActionListener(geocodeEditText, new Runnable() {
 
             @Override
             public void run() {
                 findByGeocodeFn();
             }
         });
-        addHistoryEntries(geocodeEdit, DataStore.getRecentGeocodesForSearch());
-        displayByGeocode.setOnClickListener(new FindByGeocodeListener());
+        addHistoryEntries(geocodeEditText, DataStore.getRecentGeocodesForSearch());
+        buttonSearchGeocode.setOnClickListener(new FindByGeocodeListener());
 
-        EditUtils.setActionListener((EditText) findViewById(R.id.keyword), new Runnable() {
+        EditUtils.setActionListener(keywordEditText, new Runnable() {
 
             @Override
             public void run() {
                 findByKeywordFn();
             }
         });
-        findByKeyword.setOnClickListener(new FindByKeywordListener());
+        buttonSearchKeyword.setOnClickListener(new FindByKeywordListener());
 
-        EditUtils.setActionListener((EditText) findViewById(R.id.username), new Runnable() {
+        EditUtils.setActionListener(userNameEditText, new Runnable() {
 
             @Override
             public void run() {
                 findByUsernameFn();
             }
         });
-        findByUserName.setOnClickListener(new FindByUsernameListener());
+        buttonSearchUserName.setOnClickListener(new View.OnClickListener() {
 
-        EditUtils.setActionListener((EditText) findViewById(R.id.owner), new Runnable() {
+            @Override
+            public void onClick(View arg0) {
+                findByUsernameFn();
+            }
+        });
+
+        EditUtils.setActionListener(ownerNameEditText, new Runnable() {
 
             @Override
             public void run() {
                 findByOwnerFn();
             }
         });
-        findByOwner.setOnClickListener(new OnClickListener() {
+        buttonSearchOwner.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -207,16 +212,22 @@ public class SearchActivity extends AbstractActivity {
             }
         });
 
-        EditUtils.setActionListener(trackable, new Runnable() {
+        EditUtils.setActionListener(trackableEditText, new Runnable() {
 
             @Override
             public void run() {
                 findTrackableFn();
             }
         });
-        addHistoryEntries(trackable, DataStore.getTrackableCodes());
-        disableSuggestions(trackable);
-        displayTrackable.setOnClickListener(new FindTrackableListener());
+        addHistoryEntries(trackableEditText, DataStore.getTrackableCodes());
+        disableSuggestions(trackableEditText);
+        buttonSearchTrackable.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                findTrackableFn();
+            }
+        });
     }
 
     private void addHistoryEntries(final AutoCompleteTextView textView, final String[] entries) {
@@ -225,24 +236,6 @@ public class SearchActivity extends AbstractActivity {
             textView.setAdapter(historyAdapter);
         }
     }
-
-    private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
-        @Override
-        public void updateGeoData(final IGeoData geo) {
-            try {
-                if (geo.getCoords() != null) {
-                    if (latEdit != null) {
-                        latEdit.setHint(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
-                    }
-                    if (lonEdit != null) {
-                        lonEdit.setHint(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
-                    }
-                }
-            } catch (final RuntimeException e) {
-                Log.w("Failed to update location.");
-            }
-        }
-    };
 
     private class FindByCoordsAction implements OnClickListener {
 
@@ -261,17 +254,9 @@ public class SearchActivity extends AbstractActivity {
         }
     }
 
-    private class FindByCoordsListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(View arg0) {
-            findByCoordsFn();
-        }
-    }
-
     private void findByCoordsFn() {
-        final String latText = buttonLatitude.getText().toString();
-        final String lonText = buttonLongitude.getText().toString();
+        final String latText = StringUtils.trim(buttonLatitude.getText().toString());
+        final String lonText = StringUtils.trim(buttonLongitude.getText().toString());
 
         if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) {
             final IGeoData geo = app.currentGeo();
@@ -281,7 +266,7 @@ public class SearchActivity extends AbstractActivity {
             }
         } else {
             try {
-                CacheListActivity.startActivityCoordinates(this, new Geopoint(StringUtils.trim(latText), StringUtils.trim(lonText)));
+                CacheListActivity.startActivityCoordinates(this, new Geopoint(latText, lonText));
             } catch (final Geopoint.ParseException e) {
                 showToast(res.getString(e.resource));
             }
@@ -298,14 +283,14 @@ public class SearchActivity extends AbstractActivity {
 
     private void findByKeywordFn() {
         // find caches by coordinates
-        final String keyText = keywordEditText.getText().toString();
+        final String keyText = StringUtils.trim(keywordEditText.getText().toString());
 
         if (StringUtils.isBlank(keyText)) {
             helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_keyword));
             return;
         }
 
-        CacheListActivity.startActivityKeyword(this, StringUtils.trim(keyText));
+        CacheListActivity.startActivityKeyword(this, keyText);
     }
 
     private class FindByAddressListener implements View.OnClickListener {
@@ -316,7 +301,7 @@ public class SearchActivity extends AbstractActivity {
     }
 
     private void findByAddressFn() {
-        final String addText = addressEditText.getText().toString();
+        final String addText = StringUtils.trim(addressEditText.getText().toString());
 
         if (StringUtils.isBlank(addText)) {
             helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_address));
@@ -324,27 +309,19 @@ public class SearchActivity extends AbstractActivity {
         }
 
         final Intent addressesIntent = new Intent(this, AddressListActivity.class);
-        addressesIntent.putExtra(Intents.EXTRA_KEYWORD, StringUtils.trim(addText));
+        addressesIntent.putExtra(Intents.EXTRA_KEYWORD, addText);
         startActivity(addressesIntent);
     }
 
-    private class FindByUsernameListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(View arg0) {
-            findByUsernameFn();
-        }
-    }
-
     public void findByUsernameFn() {
-        final String usernameText = userNameEditText.getText().toString();
+        final String usernameText = StringUtils.trim(userNameEditText.getText().toString());
 
         if (StringUtils.isBlank(usernameText)) {
             helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_user));
             return;
         }
 
-        CacheListActivity.startActivityUserName(this, StringUtils.trim(usernameText));
+        CacheListActivity.startActivityUserName(this, usernameText);
     }
 
     private void findByOwnerFn() {
@@ -359,7 +336,7 @@ public class SearchActivity extends AbstractActivity {
             return;
         }
 
-        CacheListActivity.startActivityOwner(this, StringUtils.trim(usernameText));
+        CacheListActivity.startActivityOwner(this, usernameText);
     }
 
     private class FindByGeocodeListener implements View.OnClickListener {
@@ -371,26 +348,18 @@ public class SearchActivity extends AbstractActivity {
     }
 
     private void findByGeocodeFn() {
-        final String geocodeText = geocodeEditText.getText().toString();
+        final String geocodeText = StringUtils.trim(geocodeEditText.getText().toString());
 
         if (StringUtils.isBlank(geocodeText) || geocodeText.equalsIgnoreCase("GC")) {
             helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_gccode));
             return;
         }
 
-        CacheDetailActivity.startActivity(this, StringUtils.trim(geocodeText));
-    }
-
-    private class FindTrackableListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(View arg0) {
-            findTrackableFn();
-        }
+        CacheDetailActivity.startActivity(this, geocodeText);
     }
 
     private void findTrackableFn() {
-        final String trackableText = trackableEditText.getText().toString();
+        final String trackableText = StringUtils.trim(trackableEditText.getText().toString());
 
         if (StringUtils.isBlank(trackableText) || trackableText.equalsIgnoreCase("TB")) {
             helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_tb));
@@ -398,7 +367,7 @@ public class SearchActivity extends AbstractActivity {
         }
 
         final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
-        trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, StringUtils.trim(trackableText).toUpperCase(Locale.US));
+        trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, trackableText.toUpperCase(Locale.US));
         startActivity(trackablesIntent);
     }
 
