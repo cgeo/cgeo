@@ -14,10 +14,11 @@ import menion.android.locus.addon.publiclib.geoData.PointGeocachingData;
 import menion.android.locus.addon.publiclib.geoData.PointGeocachingDataWaypoint;
 import menion.android.locus.addon.publiclib.geoData.PointsData;
 
+import org.apache.commons.lang3.time.FastDateFormat;
+
 import android.app.Activity;
 import android.location.Location;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -28,7 +29,7 @@ import java.util.Locale;
  * @see <a href="http://forum.asamm.cz/viewtopic.php?f=29&t=767">Locus forum</a>
  */
 public abstract class AbstractLocusApp extends AbstractApp {
-    private static final SimpleDateFormat ISO8601DATE = new SimpleDateFormat("yyyy-MM-dd'T'", Locale.US);
+    private static final FastDateFormat ISO8601DATE = FastDateFormat.getInstance("yyyy-MM-dd'T'", Locale.US);
 
     protected AbstractLocusApp(final String text, int id, final String intent) {
         super(text, id, intent);

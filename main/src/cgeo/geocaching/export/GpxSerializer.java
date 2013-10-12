@@ -13,11 +13,11 @@ import cgeo.org.kxml2.io.KXmlSerializer;
 
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.FastDateFormat;
 import org.xmlpull.v1.XmlSerializer;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -27,7 +27,7 @@ import java.util.Set;
 
 public final class GpxSerializer {
 
-    private static final SimpleDateFormat dateFormatZ = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+    private static final FastDateFormat dateFormatZ = FastDateFormat.getInstance("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
     public static final String PREFIX_XSI = "http://www.w3.org/2001/XMLSchema-instance";
     public static final String PREFIX_GPX = "http://www.topografix.com/GPX/1/0";
     public static final String PREFIX_GROUNDSPEAK = "http://www.groundspeak.com/cache/1/0";

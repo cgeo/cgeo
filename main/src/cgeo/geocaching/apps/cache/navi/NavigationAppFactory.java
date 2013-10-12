@@ -21,7 +21,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
@@ -224,8 +223,9 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     }
 
     /**
-     * Handles menu selections for menu entries created with {@link #addMenuItems(Menu, cgeo.geocaching.Geocache)}.
-     *
+     * Handles menu selections for menu entries created with
+     * {@link #showNavigationMenu(Activity, Geocache, Waypoint, Geopoint)}.
+     * 
      * @param item
      * @param activity
      * @param cache
@@ -242,12 +242,6 @@ public final class NavigationAppFactory extends AbstractAppFactory {
             final CacheNavigationApp cacheApp = (CacheNavigationApp) app;
             cacheApp.navigate(activity, cache);
         }
-    }
-
-    public static boolean onMenuItemSelected(final MenuItem item, Activity activity, Waypoint waypoint) {
-        final App menuItem = getAppFromMenuItem(item);
-        navigateWaypoint(activity, waypoint, menuItem);
-        return menuItem != null;
     }
 
     private static void navigateWaypoint(Activity activity, Waypoint waypoint, @Nullable App app) {

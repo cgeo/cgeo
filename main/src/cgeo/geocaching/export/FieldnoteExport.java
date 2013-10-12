@@ -18,6 +18,7 @@ import cgeo.geocaching.utils.Log;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.FastDateFormat;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -44,16 +45,13 @@ import java.util.TimeZone;
 /**
  * Exports offline logs in the Groundspeak Field Note format.<br>
  * <br>
- * 
+ *
  * Field Notes are simple plain text files, but poorly documented. Syntax:<br>
  * <code>GCxxxxx,yyyy-mm-ddThh:mm:ssZ,Found it,"logtext"</code>
  */
 class FieldnoteExport extends AbstractExport {
     private static final File exportLocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/field-notes");
-    private static final SimpleDateFormat fieldNoteDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
-    static {
-        fieldNoteDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-    }
+    private static final FastDateFormat fieldNoteDateFormat = FastDateFormat.getInstance("yyyy-MM-dd'T'HH:mm:ss'Z'", TimeZone.getTimeZone("UTC"), Locale.US);
 
     protected FieldnoteExport() {
         super(getString(R.string.export_fieldnotes));
