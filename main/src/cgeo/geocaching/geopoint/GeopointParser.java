@@ -25,8 +25,8 @@ class GeopointParser {
     }
 
     //                                                            ( 1  )    ( 2  )         ( 3  )       ( 4  )       (        5        )
-    private static final Pattern PATTERN_LAT = Pattern.compile("\\b([NS])\\s*(\\d+)°?(?:\\s*(\\d+)(?:[.,](\\d+)|'?\\s*(\\d+(?:[.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
-    private static final Pattern PATTERN_LON = Pattern.compile("\\b([WE])\\s*(\\d+)°?(?:\\s*(\\d+)(?:[.,](\\d+)|'?\\s*(\\d+(?:[.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
+    private static final Pattern PATTERN_LAT = Pattern.compile("\\b([NS]|)\\s*(\\d+)°?(?:\\s*(\\d+)(?:[.,](\\d+)|'?\\s*(\\d+(?:[.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
+    private static final Pattern PATTERN_LON = Pattern.compile("\\b([WE]|)\\s*(\\d+)°?(?:\\s*(\\d+)(?:[.,](\\d+)|'?\\s*(\\d+(?:[.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
 
     private static final Pattern PATTERN_BAD_BLANK = Pattern.compile("(\\d)[,.] (\\d{2,})");
 
@@ -131,7 +131,7 @@ class GeopointParser {
 
         }
 
-        // Nothing found with "N 52...", try to match string as decimaldegree
+        // Nothing found with "N 52...", try to match string as decimal degree
         try {
             final String[] items = StringUtils.split(text.trim());
             if (items.length > 0) {

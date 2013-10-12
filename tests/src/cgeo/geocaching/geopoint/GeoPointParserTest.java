@@ -93,4 +93,19 @@ public class GeoPointParserTest extends AndroidTestCase {
         assertEquals(refLatitude, GeopointParser.parseLatitude("N 49° 56, 031"), 1e-8);
     }
 
+    public static void testNonTrimmed() {
+        assertEquals(refLatitude, GeopointParser.parseLatitude("    N 49° 56, 031   "), 1e-8);
+    }
+
+    public static void testEquatorGC53() {
+        assertEquals(new Geopoint(0, 36), GeopointParser.parse("00° 00.000 E 036° 00.000"));
+    }
+
+    public static void testMeridian() {
+        assertEquals(new Geopoint(123, 0), GeopointParser.parse("N 123° 00.000 00° 00.000"));
+    }
+
+    public static void testEquatorMeridian() {
+        assertEquals(new Geopoint(0, 0), GeopointParser.parse("00° 00.000 00° 00.000"));
+    }
 }
