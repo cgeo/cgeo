@@ -110,6 +110,12 @@ class GeopointParser {
         final Pattern pattern = LatLon.LAT == latlon ? PATTERN_LAT : PATTERN_LON;
         matcher = new MatcherWrapper(pattern, replaceSpaceAfterComma);
 
+        try {
+            return new ResultWrapper(Double.valueOf(replaceSpaceAfterComma), 0, text.length());
+        } catch (NumberFormatException e1) {
+            // fall through to advanced parsing
+        }
+
         if (matcher.find()) {
             final double sign = matcher.group(1).equalsIgnoreCase("S") || matcher.group(1).equalsIgnoreCase("W") ? -1.0 : 1.0;
             final double degree = Integer.valueOf(matcher.group(2)).doubleValue();
@@ -131,13 +137,14 @@ class GeopointParser {
 
         }
 
-        // Nothing found with "N 52...", try to match string as decimal degree
+        // Nothing found with "N 52...", try to match string as decimal degree parts (i.e. multiple doubles)
         try {
             final String[] items = StringUtils.split(text.trim());
-            if (items.length > 0) {
+            if (items.length > 0 && items.length <= 2) {
                 final int index = (latlon == LatLon.LON ? items.length - 1 : 0);
-                final int pos = (latlon == LatLon.LON ? text.lastIndexOf(items[index]) : text.indexOf(items[index]));
-                return new ResultWrapper(Double.parseDouble(items[index]), pos, items[index].length());
+                final String textPart = items[index];
+                final int pos = (latlon == LatLon.LON ? text.lastIndexOf(textPart) : text.indexOf(textPart));
+                return new ResultWrapper(Double.parseDouble(textPart), pos, textPart.length());
             }
         } catch (NumberFormatException e) {
             // The right exception will be raised below.
