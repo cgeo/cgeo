@@ -35,14 +35,22 @@ public class GeokretyParser {
             @Override
             public void start(Attributes attributes) {
                 try {
-                    if (attributes.getIndex("id") > -1) {
+                    final int indexId = attributes.getIndex("id");
+                    if (indexId > -1) {
                         trackable.setGeocode(geocode(Integer.valueOf(attributes.getValue("id"))));
                     }
-                    if (attributes.getIndex("dist") > -1) {
+                    final int indexDist = attributes.getIndex("dist");
+                    if (indexDist > -1) {
                         trackable.setDistance(Float.valueOf(attributes.getValue("dist")));
                     }
-                    if (attributes.getIndex("type") > -1) {
+                    final int indexType = attributes.getIndex("type");
+                    if (indexType > -1) {
                         trackable.setType(getType(Integer.valueOf(attributes.getValue("type"))));
+                    }
+                    final int indexWaypoint = attributes.getIndex("waypoint");
+                    if (indexWaypoint > -1) {
+                        trackable.setSpottedName(attributes.getValue(indexWaypoint));
+                        trackable.setSpottedType(Trackable.SPOTTED_CACHE);
                     }
                 } catch (final NumberFormatException e) {
                     Log.e("Parsing geokret", e);

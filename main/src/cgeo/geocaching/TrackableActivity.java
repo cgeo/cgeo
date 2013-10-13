@@ -419,7 +419,16 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                     spotted.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View arg0) {
-                            CacheDetailActivity.startActivityGuid(TrackableActivity.this, trackable.getSpottedGuid(), trackable.getSpottedName());
+                            if (StringUtils.isNotBlank(trackable.getSpottedGuid())) {
+                                CacheDetailActivity.startActivityGuid(TrackableActivity.this, trackable.getSpottedGuid(), trackable.getSpottedName());
+                            }
+                            else {
+                                // for geokrety we only know the cache geocode
+                                final String cacheCode = trackable.getSpottedName();
+                                if (ConnectorFactory.canHandle(cacheCode)) {
+                                    CacheDetailActivity.startActivity(TrackableActivity.this, cacheCode);
+                                }
+                            }
                         }
                     });
                 } else if (Trackable.SPOTTED_USER == trackable.getSpottedType()) {
