@@ -171,6 +171,11 @@ final class OkapiClient {
     }
 
     private static List<Geocache> requestCaches(final OCApiConnector connector, final Parameters params, final Map<String, String> valueMap) {
+        // if a global type filter is set, and OKAPI does not know that type, then return an empty list instead of all caches
+        if (Settings.getCacheType() != CacheType.ALL && StringUtils.isBlank(getFilterFromType())) {
+            return Collections.emptyList();
+        }
+
         addFilterParams(valueMap, connector);
         params.add("search_params", new JSONObject(valueMap).toString());
         addRetrieveParams(params, connector);
@@ -658,7 +663,7 @@ final class OkapiClient {
             valueMap.put("found_status", "notfound_only");
         }
         if (Settings.getCacheType() != CacheType.ALL) {
-            valueMap.put("type", getFilterFromType(Settings.getCacheType()));
+            valueMap.put("type", getFilterFromType());
         }
     }
 
@@ -668,8 +673,8 @@ final class OkapiClient {
         params.add("wrap", "true");
     }
 
-    private static String getFilterFromType(final CacheType cacheType) {
-        switch (cacheType) {
+    private static String getFilterFromType() {
+        switch (Settings.getCacheType()) {
             case EVENT:
                 return "Event";
             case MULTI:
