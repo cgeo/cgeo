@@ -106,9 +106,9 @@ final class OkapiClient {
     // the several realms of possible fields for cache retrieval:
     // Core: for livemap requests (L3 - only with level 3 auth)
     // Additional: additional fields for full cache (L3 - only for level 3 auth, current - only for connectors with current api)
-    private static final String SERVICE_CACHE_CORE_FIELDS = "code|name|location|type|status|difficulty|terrain|size";
+    private static final String SERVICE_CACHE_CORE_FIELDS = "code|name|location|type|status|difficulty|terrain|size|date_hidden";
     private static final String SERVICE_CACHE_CORE_L3_FIELDS = "is_found";
-    private static final String SERVICE_CACHE_ADDITIONAL_FIELDS = "owner|founds|notfounds|rating|rating_votes|recommendations|description|hint|images|latest_logs|date_hidden|alt_wpts|attrnames|req_passwd";
+    private static final String SERVICE_CACHE_ADDITIONAL_FIELDS = "owner|founds|notfounds|rating|rating_votes|recommendations|description|hint|images|latest_logs|alt_wpts|attrnames|req_passwd";
     private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS = "gc_code|attribution_note";
     private static final String SERVICE_CACHE_ADDITIONAL_L3_FIELDS = "is_watched|my_notes";
 
@@ -350,7 +350,6 @@ final class OkapiClient {
 
             cache.setAttributes(parseAttributes(response.getJSONArray(CACHE_ATTRNAMES)));
             cache.setLogs(parseLogs(response.getJSONArray(CACHE_LATEST_LOGS)));
-            cache.setHidden(parseDate(response.getString(CACHE_HIDDEN)));
             //TODO: Store license per cache
             //cache.setLicense(response.getString("attribution_note"));
             cache.setWaypoints(parseWaypoints(response.getJSONArray(CACHE_WPTS)), false);
@@ -389,6 +388,7 @@ final class OkapiClient {
         if (!response.isNull(CACHE_IS_FOUND)) {
             cache.setFound(response.getBoolean(CACHE_IS_FOUND));
         }
+        cache.setHidden(parseDate(response.getString(CACHE_HIDDEN)));
     }
 
     private static String absoluteUrl(final String url, final String geocode) {
