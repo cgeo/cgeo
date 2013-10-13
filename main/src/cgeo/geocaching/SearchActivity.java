@@ -57,7 +57,7 @@ public class SearchActivity extends AbstractActivity {
     @InjectView(R.id.display_trackable) protected Button buttonSearchTrackable;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // search query
@@ -89,14 +89,14 @@ public class SearchActivity extends AbstractActivity {
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public final void onConfigurationChanged(final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
         init();
     }
 
     @Override
-    public void onResume() {
+    public final void onResume() {
         super.onResume();
         init();
     }
@@ -143,27 +143,26 @@ public class SearchActivity extends AbstractActivity {
     }
 
     private void init() {
-
         buttonLatitude.setOnClickListener(new FindByCoordsAction());
         buttonLongitude.setOnClickListener(new FindByCoordsAction());
+
         buttonSearchCoords.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View arg0) {
+            public void onClick(final View arg0) {
                 findByCoordsFn();
             }
         });
 
-        EditUtils.setActionListener(addressEditText, new Runnable() {
+        setSearchAction(addressEditText, buttonSearchAddress, new Runnable() {
 
             @Override
             public void run() {
                 findByAddressFn();
             }
         });
-        buttonSearchAddress.setOnClickListener(new FindByAddressListener());
 
-        EditUtils.setActionListener(geocodeEditText, new Runnable() {
+        setSearchAction(geocodeEditText, buttonSearchGeocode, new Runnable() {
 
             @Override
             public void run() {
@@ -171,48 +170,32 @@ public class SearchActivity extends AbstractActivity {
             }
         });
         addHistoryEntries(geocodeEditText, DataStore.getRecentGeocodesForSearch());
-        buttonSearchGeocode.setOnClickListener(new FindByGeocodeListener());
 
-        EditUtils.setActionListener(keywordEditText, new Runnable() {
+        setSearchAction(keywordEditText, buttonSearchKeyword, new Runnable() {
 
             @Override
             public void run() {
                 findByKeywordFn();
             }
         });
-        buttonSearchKeyword.setOnClickListener(new FindByKeywordListener());
 
-        EditUtils.setActionListener(userNameEditText, new Runnable() {
+        setSearchAction(userNameEditText, buttonSearchUserName, new Runnable() {
 
             @Override
             public void run() {
                 findByUsernameFn();
             }
         });
-        buttonSearchUserName.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View arg0) {
-                findByUsernameFn();
-            }
-        });
-
-        EditUtils.setActionListener(ownerNameEditText, new Runnable() {
+        setSearchAction(ownerNameEditText, buttonSearchOwner, new Runnable() {
 
             @Override
             public void run() {
                 findByOwnerFn();
             }
         });
-        buttonSearchOwner.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(View arg0) {
-                findByOwnerFn();
-            }
-        });
-
-        EditUtils.setActionListener(trackableEditText, new Runnable() {
+        setSearchAction(trackableEditText, buttonSearchTrackable, new Runnable() {
 
             @Override
             public void run() {
@@ -221,11 +204,14 @@ public class SearchActivity extends AbstractActivity {
         });
         addHistoryEntries(trackableEditText, DataStore.getTrackableCodes());
         disableSuggestions(trackableEditText);
-        buttonSearchTrackable.setOnClickListener(new View.OnClickListener() {
+    }
 
+    private static void setSearchAction(final EditText editText, final Button button, final Runnable runnable) {
+        EditUtils.setActionListener(editText, runnable);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View arg0) {
-                findTrackableFn();
+            public void onClick(final View arg0) {
+                runnable.run();
             }
         });
     }
@@ -240,12 +226,12 @@ public class SearchActivity extends AbstractActivity {
     private class FindByCoordsAction implements OnClickListener {
 
         @Override
-        public void onClick(View arg0) {
+        public void onClick(final View arg0) {
             final CoordinatesInputDialog coordsDialog = new CoordinatesInputDialog(SearchActivity.this, null, null, app.currentGeo());
             coordsDialog.setCancelable(true);
             coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate() {
                 @Override
-                public void update(Geopoint gp) {
+                public void update(final Geopoint gp) {
                     buttonLatitude.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
                     buttonLongitude.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
                 }
@@ -273,14 +259,6 @@ public class SearchActivity extends AbstractActivity {
         }
     }
 
-    private class FindByKeywordListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(View arg0) {
-            findByKeywordFn();
-        }
-    }
-
     private void findByKeywordFn() {
         // find caches by coordinates
         final String keyText = StringUtils.trim(keywordEditText.getText().toString());
@@ -291,13 +269,6 @@ public class SearchActivity extends AbstractActivity {
         }
 
         CacheListActivity.startActivityKeyword(this, keyText);
-    }
-
-    private class FindByAddressListener implements View.OnClickListener {
-        @Override
-        public void onClick(View arg0) {
-            findByAddressFn();
-        }
     }
 
     private void findByAddressFn() {
@@ -313,7 +284,7 @@ public class SearchActivity extends AbstractActivity {
         startActivity(addressesIntent);
     }
 
-    public void findByUsernameFn() {
+    public final void findByUsernameFn() {
         final String usernameText = StringUtils.trim(userNameEditText.getText().toString());
 
         if (StringUtils.isBlank(usernameText)) {
@@ -328,7 +299,7 @@ public class SearchActivity extends AbstractActivity {
         findByOwnerFn(ownerNameEditText.getText().toString());
     }
 
-    private void findByOwnerFn(String userName) {
+    private void findByOwnerFn(final String userName) {
         final String usernameText = StringUtils.trimToEmpty(userName);
 
         if (StringUtils.isBlank(usernameText)) {
@@ -337,14 +308,6 @@ public class SearchActivity extends AbstractActivity {
         }
 
         CacheListActivity.startActivityOwner(this, usernameText);
-    }
-
-    private class FindByGeocodeListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(View arg0) {
-            findByGeocodeFn();
-        }
     }
 
     private void findByGeocodeFn() {
@@ -372,13 +335,13 @@ public class SearchActivity extends AbstractActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public final boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.search_activity_options, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public final boolean onOptionsItemSelected(final MenuItem item) {
         if (item.getItemId() == R.id.menu_search_own_caches) {
             findByOwnerFn(Settings.getUsername());
             return true;
