@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import butterknife.InjectView;
+import butterknife.Optional;
 import butterknife.Views;
 
 import cgeo.geocaching.activity.AbstractActivity;
@@ -43,13 +44,15 @@ import java.util.List;
 
 public class NavigateAnyPointActivity extends AbstractActivity {
 
-    @InjectView(R.id.buttonLatitude) protected Button latButton;
-    @InjectView(R.id.buttonLongitude) protected Button lonButton;
-    @InjectView(R.id.current) protected Button buttonCurrent;
     @InjectView(R.id.historyList) protected ListView historyListView;
-    @InjectView(R.id.distanceUnit) protected Spinner distanceUnitSelector;
-    @InjectView(R.id.bearing) protected EditText bearingEditText;
-    @InjectView(R.id.distance) protected EditText distanceEditText;
+
+    // list header fields are optional, due to being expanded later than the list itself
+    @Optional @InjectView(R.id.buttonLatitude) protected Button latButton;
+    @Optional @InjectView(R.id.buttonLongitude) protected Button lonButton;
+    @Optional @InjectView(R.id.distance) protected EditText distanceEditText;
+    @Optional @InjectView(R.id.distanceUnit) protected Spinner distanceUnitSelector;
+    @Optional @InjectView(R.id.current) protected Button buttonCurrent;
+    @Optional @InjectView(R.id.bearing) protected EditText bearingEditText;
 
     private boolean changed = false;
     private List<Destination> historyOfSearchedLocations;
