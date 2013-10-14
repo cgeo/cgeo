@@ -4,7 +4,7 @@
 // @description Add button "Send to c:geo" to opencaching.de
 // @include http://www.opencaching.de/viewcache.php*
 // @icon http://send2.cgeo.org/content/images/logo.png
-// @version 0.2
+// @version 0.3
 // ==/UserScript==
 
 // Inserts javascript that will be called by the s2cgeo button. The closure
@@ -62,7 +62,8 @@ document.getElementsByTagName("head")[0].appendChild(s);
   if(oc !== null) {
     
 	var occode=oc.innerHTML;
-	occode = occode.substr(occode.indexOf('wp=')+3,6);
+	var wppos = occode.indexOf('wp=');
+	occode = occode.substring(wppos+3,occode.indexOf("'", wppos+3));
 	
     var html = '<img src="resource2/ocstyle/images/viewcache/14x19-gps-device.png" class="icon16" alt="" />'
 			 + '<a class="send-to-gps" '
