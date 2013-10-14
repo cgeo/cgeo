@@ -5,9 +5,19 @@
     <b>Next feature release</b>\n
     <b>New Features:</b>\n
     · Popup on map shows date of event caches\n
-    · \n
+    · Show cache where a Geokrety is currently placed\n
+    · Editable twitter templates\n
+    · Creating a new WP the type will be preset depending on the cache type\n 
+    · Show event date for OC event caches in search results\n
     \n
      <b>Bugfixes:</b>\n
-     · \n
+    · Cache type filter was not applied for OC nearby search\n
+    · No cache coords if cache is at equator or prime meridian\n
+    · Parts of the compass not shown when using big fonts\n
+    · WP with special characters have not been shown\n
+    · Disallow deletion of all caches incl. list if a filter is in use\n
+    · OC authorization page not shown in light theme\n
+    · DirChooser not showing all dirs on some devices\n
+     \n
   </string>
 </resources>
