@@ -940,15 +940,46 @@ public class Settings {
     }
 
     public static long getFieldnoteExportDate() {
-        return getLong(R.string.pref_fieldnoteExportDate, 0);
+        return getLong(R.string.pref_fieldNoteExportDate, 0);
     }
 
+    /**
+     * remember date of last field note export
+     *
+     * @param date
+     */
     public static void setFieldnoteExportDate(final long date) {
-        putLong(R.string.pref_fieldnoteExportDate, date);
+        putLong(R.string.pref_fieldNoteExportDate, date);
     }
 
     public static boolean isUseNavigationApp(NavigationAppsEnum navApp) {
         return getBoolean(navApp.preferenceKey, true);
+    }
+
+    /**
+     * remember the state of the "Upload" checkbox in the field notes export dialog
+     *
+     * @param upload
+     */
+    public static void setFieldNoteExportUpload(boolean upload) {
+        putBoolean(R.string.pref_fieldNoteExportUpload, upload);
+    }
+
+    public static boolean getFieldNoteExportUpload() {
+        return getBoolean(R.string.pref_fieldNoteExportUpload, true);
+    }
+
+    /**
+     * remember the state of the "Only new" checkbox in the field notes export dialog
+     *
+     * @param onlyNew
+     */
+    public static void setFieldNoteExportOnlyNew(boolean onlyNew) {
+        putBoolean(R.string.pref_fieldNoteExportOnlyNew, onlyNew);
+    }
+
+    public static boolean getFieldNoteExportOnlyNew() {
+        return getBoolean(R.string.pref_fieldNoteExportOnlyNew, false);
     }
 
 }

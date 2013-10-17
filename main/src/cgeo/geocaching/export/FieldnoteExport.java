@@ -78,7 +78,9 @@ class FieldnoteExport extends AbstractExport {
         builder.setView(layout);
 
         final CheckBox uploadOption = (CheckBox) layout.findViewById(R.id.upload);
+        uploadOption.setChecked(Settings.getFieldNoteExportUpload());
         final CheckBox onlyNewOption = (CheckBox) layout.findViewById(R.id.onlynew);
+        onlyNewOption.setChecked(Settings.getFieldNoteExportOnlyNew());
 
         if (Settings.getFieldnoteExportDate() > 0) {
             onlyNewOption.setText(getString(R.string.export_fieldnotes_onlynew) + " (" + Formatter.formatDateTime(Settings.getFieldnoteExportDate()) + ')');
@@ -88,12 +90,12 @@ class FieldnoteExport extends AbstractExport {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                final boolean upload = uploadOption.isChecked();
+                final boolean onlyNew = onlyNewOption.isChecked();
+                Settings.setFieldNoteExportUpload(upload);
+                Settings.setFieldNoteExportOnlyNew(onlyNew);
                 dialog.dismiss();
-                new ExportTask(
-                        activity,
-                        uploadOption.isChecked(),
-                        onlyNewOption.isChecked())
-                        .execute(caches);
+                new ExportTask(activity, upload, onlyNew).execute(caches);
             }
         });
 

@@ -94,7 +94,9 @@
     <string name="pref_ocde_tokenpublic">ocde_tokenpublic</string>
     <string name="pref_temp_ocde_token_secret">ocde-temp-token-secret</string>
     <string name="pref_temp_ocde_token_public">ocde-temp-token-public</string>
-    <string name="pref_fieldnoteExportDate">fieldnoteExportDate</string>
+    <string name="pref_fieldNoteExportDate">fieldnoteExportDate</string>
+    <string name="pref_fieldNoteExportUpload">fieldnoteExportUpload</string>
+    <string name="pref_fieldNoteExportOnlyNew">fieldnoteExportOnlyNew</string>
     <string name="pref_navigation_menu_compass">navigationCompass</string>
     <string name="pref_navigation_menu_radar">navigationRadar</string>
     <string name="pref_navigation_menu_internal_map">navigationInternalMap</string>
