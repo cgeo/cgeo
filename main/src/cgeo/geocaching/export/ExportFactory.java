@@ -56,6 +56,7 @@ public abstract class ExportFactory {
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
+                dialog.dismiss();
                 final Export selectedExport = adapter.getItem(item);
                 selectedExport.export(caches, activity);
             }
