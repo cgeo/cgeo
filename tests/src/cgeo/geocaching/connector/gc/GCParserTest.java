@@ -61,13 +61,13 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
 
     public void testOwnCache() {
         final Geocache cache = parseCache(R.raw.own_cache);
-        assertNotNull(cache);
-        assertTrue(CollectionUtils.isNotEmpty(cache.getSpoilers()));
-        assertEquals(2, cache.getSpoilers().size());
+        assertNotNull("Cache not parsed!", cache);
+        assertTrue("No spoilers found!", CollectionUtils.isNotEmpty(cache.getSpoilers()));
+        assertEquals("Wrong number of spoilers", 2, cache.getSpoilers().size());
         final Image spoiler = cache.getSpoilers().get(1);
-        assertEquals("http://img.geocaching.com/cache/large/6ddbbe82-8762-46ad-8f4c-57d03f4b0564.jpeg", spoiler.getUrl());
-        assertEquals("SPOILER", spoiler.getTitle());
-        assertNull(spoiler.getDescription());
+        assertEquals("First spoiler image url wrong", "http://imgcdn.geocaching.com/cache/large/6ddbbe82-8762-46ad-8f4c-57d03f4b0564.jpeg", spoiler.getUrl());
+        assertEquals("First spoiler image text wrong", "SPOILER", spoiler.getTitle());
+        assertNull("First spoiler image description not empty", spoiler.getDescription());
     }
 
     private static Geocache createCache(int index) {
