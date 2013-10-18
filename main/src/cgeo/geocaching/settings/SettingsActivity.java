@@ -414,9 +414,21 @@ public class SettingsActivity extends PreferenceActivity {
             case R.string.pref_mapDirectory:
                 if (data.hasExtra(Intents.EXTRA_MAP_FILE)) {
                     final String mapFile = data.getStringExtra(Intents.EXTRA_MAP_FILE);
-                    Settings.setMapFile(mapFile);
-                    if (!Settings.isValidMapFile(Settings.getMapFile())) {
-                        ActivityMixin.showToast(this, R.string.warn_invalid_mapfile);
+                    File file = new File(mapFile);
+                    if (!file.isDirectory()) {
+                        Settings.setMapFile(mapFile);
+                        if (!Settings.isValidMapFile(Settings.getMapFile())) {
+                            ActivityMixin.showToast(this, R.string.warn_invalid_mapfile);
+                        } else {
+                            // Ensure map source preference is updated accordingly.
+                            // TODO: There should be a better way to find and select the map source for a map file
+                            Integer mapSourceId = mapFile.hashCode();
+                            ListPreference mapSource = (ListPreference) getPreference(R.string.pref_mapsource);
+                            mapSource.setValue(mapSourceId.toString());
+                            VALUE_CHANGE_LISTENER.onPreferenceChange(mapSource, mapSourceId);
+                        }
+                    } else {
+                        Settings.setMapFileDirectory(mapFile);
                     }
                 }
                 initMapSourcePreference();

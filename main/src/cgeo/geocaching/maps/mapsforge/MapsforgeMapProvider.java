@@ -50,25 +50,24 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
     }
 
     public static List<String> getOfflineMaps() {
-        final String mapFile = Settings.getMapFile();
-        if (StringUtils.isEmpty(mapFile)) {
-            return Collections.emptyList();
-        }
 
-        try {
-            File directory = new File(mapFile).getParentFile();
-            ArrayList<String> mapFileList = new ArrayList<String>();
-            for (File file : directory.listFiles()) {
-                if (file.getName().endsWith(".map")) {
-                    if (MapsforgeMapProvider.isValidMapFile(file.getAbsolutePath())) {
-                        mapFileList.add(file.getAbsolutePath());
+        File directory = new File(Settings.getMapFileDirectory());
+
+        if (directory.isDirectory()) {
+            try {
+                ArrayList<String> mapFileList = new ArrayList<String>();
+                for (File file : directory.listFiles()) {
+                    if (file.getName().endsWith(".map")) {
+                        if (MapsforgeMapProvider.isValidMapFile(file.getAbsolutePath())) {
+                            mapFileList.add(file.getAbsolutePath());
+                        }
                     }
                 }
+                Collections.sort(mapFileList, String.CASE_INSENSITIVE_ORDER);
+                return mapFileList;
+            } catch (Exception e) {
+                Log.e("MapsforgeMapProvider.getOfflineMaps: ", e);
             }
-            Collections.sort(mapFileList, String.CASE_INSENSITIVE_ORDER);
-            return mapFileList;
-        } catch (Exception e) {
-            Log.e("MapsforgeMapProvider.getOfflineMaps: ", e);
         }
         return Collections.emptyList();
     }
