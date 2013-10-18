@@ -6,6 +6,11 @@
 
     <include layout="@layout/actionbar" />
 
+    <Button
+        android:id="@+id/select_dir"
+        style="@style/button_full"
+        android:visibility="gone"/>
+
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"

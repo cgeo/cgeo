@@ -66,7 +66,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
             if (waitDialog != null) {
                 waitDialog.dismiss();
             }
-            if (CollectionUtils.isEmpty(files)) {
+            if (CollectionUtils.isEmpty(files) && requireFiles()) {
                 showToast(res.getString(R.string.file_list_no_files));
                 finish();
             } else if (adapter != null) {
@@ -104,7 +104,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
                         if (searchingThread != null && searchingThread.isAlive()) {
                             searchingThread.notifyEnd();
                         }
-                        if (files.isEmpty()) {
+                        if (files.isEmpty() && requireFiles()) {
                             finish();
                         }
                     }
@@ -119,6 +119,10 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
     public void onResume() {
         super.onResume();
 
+    }
+
+    protected boolean requireFiles() {
+        return true;
     }
 
     protected abstract T getAdapter(List<File> files);
