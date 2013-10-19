@@ -12,6 +12,8 @@ import cgeo.geocaching.network.OAuth;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.LogTemplateProvider;
+import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 
@@ -64,35 +66,22 @@ public final class Twitter {
     private static void appendHashTag(final StringBuilder status, final String tag) {
         if (status.length() + HASH_PREFIX_WITH_BLANK.length() + tag.length() <= MAX_TWEET_SIZE) {
             final String tagWithPrefix = HASH_PREFIX_WITH_BLANK + tag;
-            if (status.indexOf(tagWithPrefix, 0) == -1) {
+            if (!StringUtils.contains(status, tagWithPrefix)) {
                 status.append(tagWithPrefix);
             }
         }
     }
 
     static String getStatusMessage(Geocache cache) {
-        String name = cache.getName();
-        if (name.length() > 100) {
-            name = name.substring(0, 100) + '…';
-            }
-        final String url = StringUtils.defaultString(cache.getUrl());
-        return fillTemplate(Settings.getCacheTwitterMessage(), name, url);
+        return appendHashTags(LogTemplateProvider.applyTemplates(Settings.getCacheTwitterMessage(), new LogContext(cache)));
     }
 
     static String getStatusMessage(Trackable trackable) {
-        String name = trackable.getName();
-        if (name.length() > 82) {
-            name = name.substring(0, 81) + '…';
-        }
-        String url = StringUtils.defaultString(trackable.getUrl());
-        String status = Settings.getTrackableTwitterMessage();
-        return fillTemplate(status, name, url);
+        return appendHashTags(LogTemplateProvider.applyTemplates(Settings.getTrackableTwitterMessage(), new LogContext(trackable)));
     }
 
-    private static String fillTemplate(String template, String name, final String url) {
-        String result = StringUtils.replace(template, "[NAME]", name);
-        result = StringUtils.replace(result, "[URL]", url);
-        StringBuilder builder = new StringBuilder(result);
+    private static String appendHashTags(final String status) {
+        StringBuilder builder = new StringBuilder(status);
         appendHashTag(builder, "cgeo");
         appendHashTag(builder, "geocaching");
         return builder.toString();

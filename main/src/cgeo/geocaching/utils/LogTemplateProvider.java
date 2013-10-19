@@ -178,6 +178,35 @@ public final class LogTemplateProvider {
                 return StringUtils.EMPTY;
             }
         });
+        templates.add(new LogTemplate("NAME", R.string.init_signature_template_name) {
+            @Override
+            public String getValue(LogContext context) {
+                Trackable trackable = context.getTrackable();
+                if (trackable != null) {
+                    return trackable.getName();
+                }
+                Geocache cache = context.getCache();
+                if (cache != null) {
+                    return cache.getName();
+                }
+                return StringUtils.EMPTY;
+            }
+        });
+        templates.add(new LogTemplate("URL", R.string.init_signature_template_url) {
+
+            @Override
+            public String getValue(LogContext context) {
+                Trackable trackable = context.getTrackable();
+                if (trackable != null) {
+                    return trackable.getUrl();
+                }
+                Geocache cache = context.getCache();
+                if (cache != null) {
+                    return cache.getUrl();
+                }
+                return StringUtils.EMPTY;
+            }
+        });
         return templates;
     }
 
