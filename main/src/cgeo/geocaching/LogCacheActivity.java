@@ -277,7 +277,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             } else if (StringUtils.isNotBlank(Settings.getSignature())
                     && Settings.isAutoInsertSignature()
                     && StringUtils.isBlank(currentLogText())) {
-                insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(cache, log)), false);
+                insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(cache, null)), false);
             }
         }
         updatePostButtonText();
