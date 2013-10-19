@@ -491,39 +491,7 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public List<LogType> getPossibleLogTypes() {
-        final List<LogType> logTypes = new ArrayList<LogType>();
-        if (isEventCache()) {
-            logTypes.add(LogType.WILL_ATTEND);
-            logTypes.add(LogType.ATTENDED);
-            if (isOwner()) {
-                logTypes.add(LogType.ANNOUNCEMENT);
-            }
-        } else if (CacheType.WEBCAM == cacheType.getValue()) {
-            logTypes.add(LogType.WEBCAM_PHOTO_TAKEN);
-        } else {
-            logTypes.add(LogType.FOUND_IT);
-        }
-        if (!isEventCache()) {
-            logTypes.add(LogType.DIDNT_FIND_IT);
-        }
-        logTypes.add(LogType.NOTE);
-        if (!isEventCache()) {
-            logTypes.add(LogType.NEEDS_MAINTENANCE);
-        }
-        if (isOwner()) {
-            logTypes.add(LogType.OWNER_MAINTENANCE);
-            if (isDisabled()) {
-                logTypes.add(LogType.ENABLE_LISTING);
-            }
-            else {
-                logTypes.add(LogType.TEMP_DISABLE_LISTING);
-            }
-            logTypes.add(LogType.ARCHIVE);
-        }
-        if (!isArchived() && !isOwner()) {
-            logTypes.add(LogType.NEEDS_ARCHIVE);
-        }
-        return logTypes;
+        return getConnector().getPossibleLogTypes(this);
     }
 
     public void openInBrowser(Activity fromActivity) {

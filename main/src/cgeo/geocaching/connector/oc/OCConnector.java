@@ -4,7 +4,10 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractConnector;
+import cgeo.geocaching.enumerations.LogType;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class OCConnector extends AbstractConnector {
@@ -13,6 +16,9 @@ public class OCConnector extends AbstractConnector {
     private final String name;
     private final Pattern codePattern;
     private static final Pattern GPX_ZIP_FILE_PATTERN = Pattern.compile("oc[a-z]{2,3}\\d{5,}\\.zip", Pattern.CASE_INSENSITIVE);
+
+    private static final List<LogType> STANDARD_LOG_TYPES = Arrays.asList(LogType.FOUND_IT, LogType.DIDNT_FIND_IT, LogType.NOTE);
+    private static final List<LogType> EVENT_LOG_TYPES = Arrays.asList(LogType.WILL_ATTEND, LogType.ATTENDED, LogType.NOTE);
 
     public OCConnector(final String name, final String host, final String prefix) {
         this.name = name;
@@ -66,4 +72,12 @@ public class OCConnector extends AbstractConnector {
         return R.drawable.marker_oc;
     }
 
+    @Override
+    public final List<LogType> getPossibleLogTypes(Geocache cache) {
+        if (cache.isEventCache()) {
+            return EVENT_LOG_TYPES;
+        }
+
+        return STANDARD_LOG_TYPES;
+    }
 }

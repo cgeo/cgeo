@@ -3,9 +3,14 @@ package cgeo.geocaching.connector;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
+import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractConnector implements IConnector {
 
@@ -145,5 +150,42 @@ public abstract class AbstractConnector implements IConnector {
             return R.drawable.marker_disabled_other;
         }
         return R.drawable.marker_other;
+    }
+
+    @Override
+    public List<LogType> getPossibleLogTypes(Geocache geocache) {
+        final List<LogType> logTypes = new ArrayList<LogType>();
+        if (geocache.isEventCache()) {
+            logTypes.add(LogType.WILL_ATTEND);
+            logTypes.add(LogType.ATTENDED);
+            if (geocache.isOwner()) {
+                logTypes.add(LogType.ANNOUNCEMENT);
+            }
+        } else if (CacheType.WEBCAM == geocache.getType()) {
+            logTypes.add(LogType.WEBCAM_PHOTO_TAKEN);
+        } else {
+            logTypes.add(LogType.FOUND_IT);
+        }
+        if (!geocache.isEventCache()) {
+            logTypes.add(LogType.DIDNT_FIND_IT);
+        }
+        logTypes.add(LogType.NOTE);
+        if (!geocache.isEventCache()) {
+            logTypes.add(LogType.NEEDS_MAINTENANCE);
+        }
+        if (geocache.isOwner()) {
+            logTypes.add(LogType.OWNER_MAINTENANCE);
+            if (geocache.isDisabled()) {
+                logTypes.add(LogType.ENABLE_LISTING);
+            }
+            else {
+                logTypes.add(LogType.TEMP_DISABLE_LISTING);
+            }
+            logTypes.add(LogType.ARCHIVE);
+        }
+        if (!geocache.isArchived() && !geocache.isOwner()) {
+            logTypes.add(LogType.NEEDS_ARCHIVE);
+        }
+        return logTypes;
     }
 }

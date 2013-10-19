@@ -3,7 +3,10 @@ package cgeo.geocaching.connector;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.LogCacheActivity;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
+
+import java.util.List;
 
 public interface IConnector {
     /**
@@ -208,4 +211,13 @@ public interface IConnector {
      *            Whether to return the enabled or disabled marker type
      */
     public int getCacheMapMarkerId(boolean disabled);
+
+    /**
+     * Get the list of <b>potentially</b> possible log types for a cache. Those may still be filter further during the
+     * actual logging activity.
+     * 
+     * @param geocache
+     * @return
+     */
+    public List<LogType> getPossibleLogTypes(Geocache geocache);
 }

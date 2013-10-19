@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.list.StoredList;
 
@@ -251,5 +252,19 @@ public class GeocacheTest extends CGeoTestCase {
         cache.setDescription(description);
         cache.setType(CacheType.EVENT);
         assertNull(cache.guessEventTimeMinutes());
+    }
+
+    public static void testGetPossibleLogTypes() throws Exception {
+        Geocache gcCache = new Geocache();
+        gcCache.setGeocode("GC123");
+        gcCache.setType(CacheType.WEBCAM);
+        assertTrue(gcCache.getPossibleLogTypes().contains(LogType.WEBCAM_PHOTO_TAKEN));
+        assertTrue("GC caches can have maintenance logs", gcCache.getPossibleLogTypes().contains(LogType.NEEDS_MAINTENANCE));
+
+        Geocache ocCache = new Geocache();
+        ocCache.setGeocode("OC1234");
+        ocCache.setType(CacheType.TRADITIONAL);
+        assertFalse("A traditional cache cannot have a webcam log", ocCache.getPossibleLogTypes().contains(LogType.WEBCAM_PHOTO_TAKEN));
+        assertFalse("OC caches have no maintenance log type", ocCache.getPossibleLogTypes().contains(LogType.NEEDS_MAINTENANCE));
     }
 }

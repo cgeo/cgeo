@@ -11,7 +11,6 @@ import cgeo.geocaching.enumerations.StatusCode;
 
 import android.net.Uri;
 
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
@@ -22,48 +21,42 @@ public class OkapiLoggingManager implements ILoggingManager {
     private final Geocache cache;
     private LogCacheActivity activity;
 
-    private final static List<LogType> standardLogTypes = Arrays.asList(LogType.FOUND_IT, LogType.DIDNT_FIND_IT, LogType.NOTE);
-    private final static List<LogType> eventLogTypes = Arrays.asList(LogType.WILL_ATTEND, LogType.ATTENDED, LogType.NOTE);
-
-    public OkapiLoggingManager(final LogCacheActivity activity, OCApiLiveConnector connector, Geocache cache) {
+    public OkapiLoggingManager(final LogCacheActivity activity, final OCApiLiveConnector connector, final Geocache cache) {
         this.connector = connector;
         this.cache = cache;
         this.activity = activity;
     }
 
     @Override
-    public void init() {
+    public final void init() {
         activity.onLoadFinished();
     }
 
     @Override
-    public LogResult postLog(Geocache cache, LogType logType, Calendar date, String log, String logPassword, List<TrackableLog> trackableLogs) {
+    public final LogResult postLog(final Geocache cache, final LogType logType, final Calendar date, final String log, final String logPassword, final List<TrackableLog> trackableLogs) {
         final LogResult result = OkapiClient.postLog(cache, logType, date, log, logPassword, connector);
         connector.login(null, null);
         return result;
     }
 
     @Override
-    public ImageResult postLogImage(String logId, String imageCaption, String imageDescription, Uri imageUri) {
+    public final ImageResult postLogImage(final String logId, final String imageCaption, final String imageDescription, final Uri imageUri) {
         return new ImageResult(StatusCode.LOG_POST_ERROR, "");
     }
 
     @Override
-    public boolean hasLoaderError() {
+    public final boolean hasLoaderError() {
         return false;
     }
 
     @Override
-    public List<TrackableLog> getTrackables() {
+    public final List<TrackableLog> getTrackables() {
         return Collections.emptyList();
     }
 
     @Override
     public List<LogType> getPossibleLogTypes() {
-        if (cache.isEventCache()) {
-            return eventLogTypes;
-        }
-
-        return standardLogTypes;
+        return connector.getPossibleLogTypes(cache);
     }
+
 }
