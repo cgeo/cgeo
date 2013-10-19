@@ -432,8 +432,7 @@ public class SettingsActivity extends PreferenceActivity {
                     }
                 }
                 initMapSourcePreference();
-                getPreference(R.string.pref_mapDirectory).setSummary(
-                        Settings.getMapFileDirectory());
+                getPreference(R.string.pref_mapDirectory).setSummary(StringUtils.defaultString(Settings.getMapFileDirectory()));
                 break;
             case R.string.pref_fakekey_ocde_authorization:
                 setOCDEAuthTitle();

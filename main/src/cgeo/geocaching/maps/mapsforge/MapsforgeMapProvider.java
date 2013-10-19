@@ -50,9 +50,12 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
     }
 
     public static List<String> getOfflineMaps() {
+        final String directoryPath = Settings.getMapFileDirectory();
+        if (StringUtils.isBlank(directoryPath)) {
+            return Collections.emptyList();
+        }
 
-        File directory = new File(Settings.getMapFileDirectory());
-
+        File directory = new File(directoryPath);
         if (directory.isDirectory()) {
             try {
                 ArrayList<String> mapFileList = new ArrayList<String>();
