@@ -531,7 +531,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
 
             setVisible(menu, R.id.menu_switch_select_mode, !isEmpty);
-            setVisible(menu, R.id.submenu_manage, isOffline || isHistory);
+            setVisible(menu, R.id.submenu_manage, (isHistory && !isEmpty) || isOffline);
             setVisible(menu, R.id.submenu_manage_lists, isOffline);
 
             setVisible(menu, R.id.menu_sort, !isEmpty && !isHistory);
@@ -545,7 +545,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setVisible(menu, R.id.menu_clear_offline_logs, !isEmpty && containsOfflineLogs() && (isHistory || isOffline));
             setVisible(menu, R.id.menu_import_web, isOffline && Settings.getWebDeviceCode() != null);
             setVisible(menu, R.id.menu_import_gpx, isOffline);
-            setVisible(menu, R.id.menu_refresh_stored_top, !isOffline);
+            setVisible(menu, R.id.menu_refresh_stored_top, !isOffline && !isEmpty);
 
             if (!isOffline && !isHistory) {
                 menu.findItem(R.id.menu_refresh_stored_top).setTitle(R.string.caches_store_offline);

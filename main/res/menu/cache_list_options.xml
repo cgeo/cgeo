@@ -27,20 +27,20 @@
         android:title="@string/caches_manage">
         <menu>
             <item
-                android:id="@+id/menu_drop_caches"
-                android:title="@string/caches_drop_all">
-            </item>
-            <item
-                android:id="@+id/menu_drop_caches_and_list"
-                android:title="@string/caches_drop_all_and_list">
-            </item>
-            <item
                 android:id="@+id/menu_refresh_stored"
                 android:title="@string/cache_offline_refresh">
             </item>
             <item
                 android:id="@+id/menu_move_to_list"
                 android:title="@string/cache_menu_move_list">
+            </item>
+            <item
+                android:id="@+id/menu_drop_caches"
+                android:title="@string/caches_drop_all">
+            </item>
+            <item
+                android:id="@+id/menu_drop_caches_and_list"
+                android:title="@string/caches_drop_all_and_list">
             </item>
             <item
                 android:id="@+id/menu_delete_events"
