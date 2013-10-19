@@ -3,6 +3,7 @@ package cgeo.geocaching.twitter;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -23,9 +24,9 @@ public final class Twitter {
     private static final String HASH_PREFIX_WITH_BLANK = " #";
     private static final int MAX_TWEET_SIZE = 140;
 
-    public static void postTweetCache(String geocode) {
+    public static void postTweetCache(String geocode, LogEntry logEntry) {
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-        postTweet(CgeoApplication.getInstance(), getStatusMessage(cache), null);
+        postTweet(CgeoApplication.getInstance(), getStatusMessage(cache, logEntry), null);
     }
 
     public static void postTweetTrackable(String geocode) {
@@ -72,8 +73,8 @@ public final class Twitter {
         }
     }
 
-    static String getStatusMessage(Geocache cache) {
-        return appendHashTags(LogTemplateProvider.applyTemplates(Settings.getCacheTwitterMessage(), new LogContext(cache)));
+    static String getStatusMessage(Geocache cache, LogEntry logEntry) {
+        return appendHashTags(LogTemplateProvider.applyTemplates(Settings.getCacheTwitterMessage(), new LogContext(cache, logEntry)));
     }
 
     static String getStatusMessage(Trackable trackable) {

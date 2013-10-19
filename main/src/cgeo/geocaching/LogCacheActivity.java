@@ -277,7 +277,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             } else if (StringUtils.isNotBlank(Settings.getSignature())
                     && Settings.isAutoInsertSignature()
                     && StringUtils.isBlank(currentLogText())) {
-                insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(cache)), false);
+                insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(cache, log)), false);
             }
         }
         updatePostButtonText();
@@ -545,7 +545,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
                     if (typeSelected == LogType.FOUND_IT) {
                         if (tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
-                            Twitter.postTweetCache(geocode);
+                            Twitter.postTweetCache(geocode, logNow);
                         }
                     }
                     if (GCVote.isValidRating(rating)) {
@@ -609,7 +609,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     @Override
     protected LogContext getLogContext() {
-        return new LogContext(cache);
+        return new LogContext(cache, null);
     }
 
     private void selectAllTrackablesAction() {

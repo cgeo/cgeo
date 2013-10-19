@@ -463,7 +463,7 @@ public class Geocache implements ICache, IWaypoint {
 
     public void logOffline(final Activity fromActivity, final LogType logType) {
         final boolean mustIncludeSignature = StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature();
-        final String initial = mustIncludeSignature ? LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(this, true)) : "";
+        final String initial = mustIncludeSignature ? LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(this, null, true)) : "";
         logOffline(fromActivity, initial, Calendar.getInstance(), logType);
     }
 

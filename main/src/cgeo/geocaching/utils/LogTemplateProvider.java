@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -35,9 +36,10 @@ public final class LogTemplateProvider {
         private Geocache cache;
         private Trackable trackable;
         private boolean offline = false;
+        private LogEntry logEntry;
 
-        public LogContext(final Geocache cache) {
-            this(cache, false);
+        public LogContext(final Geocache cache, LogEntry logEntry) {
+            this(cache, logEntry, false);
         }
 
         public LogContext(final Trackable trackable) {
@@ -45,12 +47,13 @@ public final class LogTemplateProvider {
         }
 
         public LogContext(final boolean offline) {
-            this(null, offline);
+            this(null, null, offline);
         }
 
-        public LogContext(final Geocache cache, final boolean offline) {
+        public LogContext(final Geocache cache, LogEntry logEntry, final boolean offline) {
             this.cache = cache;
             this.offline = offline;
+            this.logEntry = logEntry;
         }
 
         public final Geocache getCache() {
@@ -63,6 +66,10 @@ public final class LogTemplateProvider {
 
         public final boolean isOffline() {
             return offline;
+        }
+
+        public final LogEntry getLogEntry() {
+            return logEntry;
         }
     }
 
@@ -203,6 +210,16 @@ public final class LogTemplateProvider {
                 Geocache cache = context.getCache();
                 if (cache != null) {
                     return cache.getUrl();
+                }
+                return StringUtils.EMPTY;
+            }
+        });
+        templates.add(new LogTemplate("LOG", R.string.init_signature_template_log) {
+            @Override
+            public String getValue(LogContext context) {
+                LogEntry logEntry = context.getLogEntry();
+                if (logEntry != null) {
+                    return logEntry.getDisplayText();
                 }
                 return StringUtils.EMPTY;
             }
