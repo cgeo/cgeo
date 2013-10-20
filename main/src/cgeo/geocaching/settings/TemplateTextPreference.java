@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.preference.DialogPreference;
+import android.text.InputFilter;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +29,8 @@ public class TemplateTextPreference extends DialogPreference {
     private SettingsActivity settingsActivity;
     private EditText editText;
     private String initialValue;
+
+    private static final int MAX_TWEET_SIZE = 140;
 
     public TemplateTextPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -48,6 +51,13 @@ public class TemplateTextPreference extends DialogPreference {
         settingsActivity = (SettingsActivity) this.getContext();
 
         editText = (EditText) view.findViewById(R.id.signature_dialog_text);
+
+        // limit the input length for twitter messages
+        if ((this.getTitle() == settingsActivity.getString(R.string.settings_twitter_cache_message)) ||
+                (this.getTitle() == settingsActivity.getString(R.string.settings_twitter_trackable_message))) {
+            editText.setFilters(new InputFilter[] { new InputFilter.LengthFilter(MAX_TWEET_SIZE) });
+        }
+
         editText.setText(getPersistedString(initialValue != null ? initialValue.toString() : StringUtils.EMPTY));
 
         Button button = (Button) view.findViewById(R.id.signature_templates);
