@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/waypoint"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
+    android:descendantFocusability="blocksDescendants"
+    android:longClickable="true"
     android:orientation="vertical"
     android:paddingTop="9dp" >
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:descendantFocusability="blocksDescendants"
         android:orientation="horizontal" >
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:descendantFocusability="blocksDescendants"
             android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/name"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:focusable="false"
                 android:textColor="?text_color"
                 android:textSize="18sp" />
 
@@ -30,6 +37,7 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="12dp"
                 android:ellipsize="marquee"
+                android:focusable="false"
                 android:lines="1"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
@@ -44,6 +52,7 @@
             android:layout_alignParentRight="true"
             android:layout_gravity="right"
             android:clickable="true"
+            android:focusable="false"
             android:longClickable="true"
             android:src="?actionbar_compass" />
     </RelativeLayout>
@@ -55,6 +64,7 @@
         android:layout_gravity="left"
         android:layout_marginLeft="12dp"
         android:ellipsize="marquee"
+        android:focusable="false"
         android:lines="1"
         android:scrollHorizontally="true"
         android:singleLine="true"
@@ -67,6 +77,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
+        android:focusable="false"
         android:textColor="?text_color"
         android:textSize="14sp"
         android:visibility="gone" />

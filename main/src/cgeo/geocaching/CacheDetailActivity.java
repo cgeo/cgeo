@@ -378,37 +378,21 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 clickedItemText = ((TextView) view).getText();
                 buildDetailsContextMenu(menu, res.getString(R.string.cache_logs), false);
                 break;
-            case -1:
-                if (null != cache.getWaypoints()) {
-                    try {
-                        final ViewGroup parent = ((ViewGroup) view.getParent());
-                        for (int i = 0; i < parent.getChildCount(); i++) {
-                            if (parent.getChildAt(i) == view) {
-                                final List<Waypoint> sortedWaypoints = new ArrayList<Waypoint>(cache.getWaypoints());
-                                Collections.sort(sortedWaypoints);
-                                selectedWaypoint = sortedWaypoints.get(i);
-
-                                menu.setHeaderTitle(res.getString(R.string.waypoint));
-                                getMenuInflater().inflate(R.menu.waypoint_options, menu);
-                                final boolean isOriginalWaypoint = selectedWaypoint.getWaypointType().equals(WaypointType.ORIGINAL);
-                                menu.findItem(R.id.menu_waypoint_reset_cache_coords).setVisible(isOriginalWaypoint);
-                                menu.findItem(R.id.menu_waypoint_edit).setVisible(!isOriginalWaypoint);
-                                menu.findItem(R.id.menu_waypoint_duplicate).setVisible(!isOriginalWaypoint);
-                                final boolean userDefined = selectedWaypoint.isUserDefined() && !selectedWaypoint.getWaypointType().equals(WaypointType.ORIGINAL);
-                                menu.findItem(R.id.menu_waypoint_delete).setVisible(userDefined);
-                                final boolean hasCoords = selectedWaypoint.getCoords() != null;
-                                final MenuItem defaultNavigationMenu = menu.findItem(R.id.menu_waypoint_navigate_default);
-                                defaultNavigationMenu.setVisible(hasCoords);
-                                defaultNavigationMenu.setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
-                                menu.findItem(R.id.menu_waypoint_navigate).setVisible(hasCoords);
-                                menu.findItem(R.id.menu_waypoint_caches_around).setVisible(hasCoords);
-
-                                break;
-                            }
-                        }
-                    } catch (final RuntimeException e) {
-                    }
-                }
+            case R.id.waypoint:
+                menu.setHeaderTitle(res.getString(R.string.waypoint));
+                getMenuInflater().inflate(R.menu.waypoint_options, menu);
+                final boolean isOriginalWaypoint = selectedWaypoint.getWaypointType().equals(WaypointType.ORIGINAL);
+                menu.findItem(R.id.menu_waypoint_reset_cache_coords).setVisible(isOriginalWaypoint);
+                menu.findItem(R.id.menu_waypoint_edit).setVisible(!isOriginalWaypoint);
+                menu.findItem(R.id.menu_waypoint_duplicate).setVisible(!isOriginalWaypoint);
+                final boolean userDefined = selectedWaypoint.isUserDefined() && !selectedWaypoint.getWaypointType().equals(WaypointType.ORIGINAL);
+                menu.findItem(R.id.menu_waypoint_delete).setVisible(userDefined);
+                final boolean hasCoords = selectedWaypoint.getCoords() != null;
+                final MenuItem defaultNavigationMenu = menu.findItem(R.id.menu_waypoint_navigate_default);
+                defaultNavigationMenu.setVisible(hasCoords);
+                defaultNavigationMenu.setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
+                menu.findItem(R.id.menu_waypoint_navigate).setVisible(hasCoords);
+                menu.findItem(R.id.menu_waypoint_caches_around).setVisible(hasCoords);
                 break;
             default:
                 if (imagesList != null) {
@@ -1795,113 +1779,24 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
-    private class WaypointsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
+    private class WaypointsViewCreator extends AbstractCachingPageViewCreator<ListView> {
 
         @Override
-        public ScrollView getDispatchedView() {
+        public ListView getDispatchedView() {
             if (cache == null) {
                 // something is really wrong
                 return null;
             }
 
-            view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_waypoints_page, null);
-
-            final LinearLayout waypoints = (LinearLayout) view.findViewById(R.id.waypoints);
-
             // sort waypoints: PP, Sx, FI, OWN
             final List<Waypoint> sortedWaypoints = new ArrayList<Waypoint>(cache.getWaypoints());
             Collections.sort(sortedWaypoints);
 
-            for (final Waypoint wpt : sortedWaypoints) {
-                final LinearLayout waypointView = (LinearLayout) getLayoutInflater().inflate(R.layout.waypoint_item, null);
-
-                // coordinates
-                if (null != wpt.getCoords()) {
-                    final TextView coordinatesView = (TextView) waypointView.findViewById(R.id.coordinates);
-                    coordinatesView.setOnClickListener(new CoordinatesFormatSwitcher(wpt.getCoords()));
-                    coordinatesView.setText(wpt.getCoords().toString());
-                    coordinatesView.setVisibility(View.VISIBLE);
-                }
-
-                // info
-                final String waypointInfo = Formatter.formatWaypointInfo(wpt);
-                if (StringUtils.isNotBlank(waypointInfo)) {
-                    final TextView infoView = (TextView) waypointView.findViewById(R.id.info);
-                    infoView.setText(waypointInfo);
-                    infoView.setVisibility(View.VISIBLE);
-                }
-
-                // title
-                final TextView nameView = (TextView) waypointView.findViewById(R.id.name);
-                if (StringUtils.isNotBlank(wpt.getName())) {
-                    nameView.setText(StringEscapeUtils.unescapeHtml4(wpt.getName()));
-                } else if (null != wpt.getCoords()) {
-                    nameView.setText(wpt.getCoords().toString());
-                } else {
-                    nameView.setText(res.getString(R.string.waypoint));
-                }
-                wpt.setIcon(res, nameView);
-
-                // visited
-                if (wpt.isVisited()) {
-                    final TypedValue a = new TypedValue();
-                    getTheme().resolveAttribute(R.attr.text_color_grey, a, true);
-                    if (a.type >= TypedValue.TYPE_FIRST_COLOR_INT && a.type <= TypedValue.TYPE_LAST_COLOR_INT) {
-                        // really should be just a color!
-                        nameView.setTextColor(a.data);
-                    }
-                }
-
-                // note
-                if (StringUtils.isNotBlank(wpt.getNote())) {
-                    final TextView noteView = (TextView) waypointView.findViewById(R.id.note);
-                    noteView.setVisibility(View.VISIBLE);
-                    if (TextUtils.containsHtml(wpt.getNote())) {
-                        noteView.setText(Html.fromHtml(wpt.getNote()), TextView.BufferType.SPANNABLE);
-                    }
-                    else {
-                        noteView.setText(wpt.getNote());
-                    }
-                }
-
-                final View wpNavView = waypointView.findViewById(R.id.wpDefaultNavigation);
-                wpNavView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        NavigationAppFactory.startDefaultNavigationApplication(1, CacheDetailActivity.this, wpt);
-                    }
-                });
-                wpNavView.setOnLongClickListener(new View.OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(View v) {
-                        NavigationAppFactory.startDefaultNavigationApplication(2, CacheDetailActivity.this, wpt);
-                        return true;
-                    }
-                });
-
-                registerForContextMenu(waypointView);
-                waypointView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        openContextMenu(v);
-                    }
-                });
-
-                waypointView.setOnLongClickListener(new View.OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(View v) {
-                        EditWaypointActivity.startActivityEditWaypoint(CacheDetailActivity.this, cache, wpt.getId());
-                        refreshOnResume = true;
-                        return true;
-                    }
-                });
-
-                waypoints.addView(waypointView);
-            }
-
-            final Button addWaypoint = (Button) view.findViewById(R.id.add_waypoint);
-            addWaypoint.setClickable(true);
-            addWaypoint.setOnClickListener(new View.OnClickListener() {
+            view = (ListView) getLayoutInflater().inflate(R.layout.cachedetail_waypoints_page, null);
+            view.setClickable(true);
+            View addWaypointButton = getLayoutInflater().inflate(R.layout.cachedetail_waypoints_footer, null);
+            view.addFooterView(addWaypointButton);
+            addWaypointButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
@@ -1910,7 +1805,112 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
             });
 
+            view.setAdapter(new ArrayAdapter<Waypoint>(CacheDetailActivity.this, R.layout.waypoint_item, sortedWaypoints) {
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    View rowView = convertView;
+                    if (null == rowView) {
+                        rowView = getLayoutInflater().inflate(R.layout.waypoint_item, null);
+                        rowView.setClickable(true);
+                        rowView.setLongClickable(true);
+                    }
+                    WaypointViewHolder holder = (WaypointViewHolder) rowView.getTag();
+                    if (null == holder) {
+                        holder = new WaypointViewHolder(rowView);
+                    }
+
+                    final Waypoint waypoint = getItem(position);
+                    fillViewHolder(rowView, holder, waypoint);
+                    return rowView;
+                }
+            });
+
             return view;
+        }
+
+        protected void fillViewHolder(View rowView, final WaypointViewHolder holder, final Waypoint wpt) {
+            // coordinates
+            if (null != wpt.getCoords()) {
+                final TextView coordinatesView = holder.coordinatesView;
+                coordinatesView.setOnClickListener(new CoordinatesFormatSwitcher(wpt.getCoords()));
+                coordinatesView.setText(wpt.getCoords().toString());
+                coordinatesView.setVisibility(View.VISIBLE);
+            }
+
+            // info
+            final String waypointInfo = Formatter.formatWaypointInfo(wpt);
+            if (StringUtils.isNotBlank(waypointInfo)) {
+                final TextView infoView = holder.infoView;
+                infoView.setText(waypointInfo);
+                infoView.setVisibility(View.VISIBLE);
+            }
+
+            // title
+            final TextView nameView = holder.nameView;
+            if (StringUtils.isNotBlank(wpt.getName())) {
+                nameView.setText(StringEscapeUtils.unescapeHtml4(wpt.getName()));
+            } else if (null != wpt.getCoords()) {
+                nameView.setText(wpt.getCoords().toString());
+            } else {
+                nameView.setText(res.getString(R.string.waypoint));
+            }
+            wpt.setIcon(res, nameView);
+
+            // visited
+            if (wpt.isVisited()) {
+                final TypedValue a = new TypedValue();
+                getTheme().resolveAttribute(R.attr.text_color_grey, a, true);
+                if (a.type >= TypedValue.TYPE_FIRST_COLOR_INT && a.type <= TypedValue.TYPE_LAST_COLOR_INT) {
+                    // really should be just a color!
+                    nameView.setTextColor(a.data);
+                }
+            }
+
+            // note
+            if (StringUtils.isNotBlank(wpt.getNote())) {
+                final TextView noteView = holder.noteView;
+                noteView.setVisibility(View.VISIBLE);
+                if (TextUtils.containsHtml(wpt.getNote())) {
+                    noteView.setText(Html.fromHtml(wpt.getNote()), TextView.BufferType.SPANNABLE);
+                }
+                else {
+                    noteView.setText(wpt.getNote());
+                }
+            }
+
+            final View wpNavView = holder.wpNavView;
+            wpNavView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    NavigationAppFactory.startDefaultNavigationApplication(1, CacheDetailActivity.this, wpt);
+                }
+            });
+            wpNavView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    NavigationAppFactory.startDefaultNavigationApplication(2, CacheDetailActivity.this, wpt);
+                    return true;
+                }
+            });
+
+            registerForContextMenu(rowView);
+            rowView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectedWaypoint = wpt;
+                    openContextMenu(v);
+                }
+            });
+
+            rowView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    selectedWaypoint = wpt;
+                    EditWaypointActivity.startActivityEditWaypoint(CacheDetailActivity.this, cache, wpt.getId());
+                    refreshOnResume = true;
+                    return true;
+                }
+            });
         }
     }
 
