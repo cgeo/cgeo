@@ -29,15 +29,16 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
                 final SearchResult searchResult = ConnectorFactory.searchByViewport(viewport, tokens);
                 assertNotNull(searchResult);
                 assertFalse(searchResult.isEmpty());
-                assertTrue(searchResult.getGeocodes().contains("GC211WG"));
-                // Spiel & Sport GC211WG N 52° 25.413 E 009° 36.049
+                assertTrue(searchResult.getGeocodes().contains("GC4ER5H"));
+                // Edelstein N 52° 25.363 E 009° 36.236
+                // 22.10.13: Changed from GC211WG (archived) to GC4ER5H  in same area
             }
 
             {
                 final Viewport viewport = new Viewport(new Geopoint("N 52° 24.000 E 9° 34.500"), new Geopoint("N 52° 26.000 E 9° 38.500"));
                 final SearchResult searchResult = ConnectorFactory.searchByViewport(viewport, tokens);
                 assertNotNull(searchResult);
-                assertTrue(searchResult.getGeocodes().contains("GC211WG"));
+                assertTrue(searchResult.getGeocodes().contains("GC4ER5H"));
             }
         } finally {
             // restore user settings
