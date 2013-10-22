@@ -244,6 +244,7 @@
   <string name="caches_sort_terrain">Terräng</string>
   <string name="caches_sort_size">Storlek</string>
   <string name="caches_sort_favorites">Favoriter</string>
+  <string name="caches_sort_favorites_ratio">Favoriter [%]</string>
   <string name="caches_sort_name">Namn</string>
   <string name="caches_sort_geocode">Geo kod</string>
   <string name="caches_sort_rating">Betyg (GC-vote)</string>

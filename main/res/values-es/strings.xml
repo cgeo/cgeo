@@ -216,6 +216,7 @@
   <string name="caches_sort_terrain">terreno</string>
   <string name="caches_sort_size">tamaño</string>
   <string name="caches_sort_favorites">popularidad</string>
+  <string name="caches_sort_favorites_ratio">popularidad [%]</string>
   <string name="caches_sort_name">nombre</string>
   <string name="caches_sort_geocode">Código</string>
   <string name="caches_sort_rating">valoración</string>

@@ -246,6 +246,7 @@
   <string name="caches_sort_terrain">terenu</string>
   <string name="caches_sort_size">rozmiaru</string>
   <string name="caches_sort_favorites">popularności</string>
+  <string name="caches_sort_favorites_ratio">popularności [%]</string>
   <string name="caches_sort_name">nazwy</string>
   <string name="caches_sort_geocode">Kod skrytki</string>
   <string name="caches_sort_rating">oceny</string>
