@@ -34,12 +34,13 @@ public final class Twitter {
         postTweet(CgeoApplication.getInstance(), getStatusMessage(trackable), null);
     }
 
-    private static void postTweet(final CgeoApplication app, final String status, final Geopoint coords) {
+    private static void postTweet(final CgeoApplication app, final String statusIn, final Geopoint coords) {
         if (app == null || !Settings.isUseTwitter() || !Settings.isTwitterLoginValid()) {
             return;
         }
 
         try {
+            final String status = shortenToMaxSize(statusIn);
             Parameters parameters = new Parameters("status", status);
             if (coords != null) {
                 parameters.put(
@@ -62,6 +63,14 @@ public final class Twitter {
         } catch (Exception e) {
             Log.e("Twitter.postTweet", e);
         }
+    }
+
+    private static String shortenToMaxSize(final String status) {
+        String result = StringUtils.trim(status);
+        if (StringUtils.length(result) > MAX_TWEET_SIZE) {
+            return StringUtils.substring(result, 0, MAX_TWEET_SIZE - 1) + '…';
+        }
+        return result;
     }
 
     private static void appendHashTag(final StringBuilder status, final String tag) {
