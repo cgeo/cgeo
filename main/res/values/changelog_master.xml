@@ -18,6 +18,7 @@
     · Disallow deletion of all caches incl. list if a filter is in use\n
     · OC authorization page not shown in light theme\n
     · DirChooser not showing all dirs on some devices\n
+    · Network timeout reduced to 30 seconds to avoid long waiting time\n
      \n
   </string>
 </resources>
