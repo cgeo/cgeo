@@ -30,7 +30,6 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
                 assertNotNull(searchResult);
                 assertFalse(searchResult.isEmpty());
                 assertTrue(searchResult.getGeocodes().contains("GC4ER5H"));
-                // Edelstein N 52° 25.363 E 009° 36.236
                 // 22.10.13: Changed from GC211WG (archived) to GC4ER5H  in same area
             }
 
