@@ -101,8 +101,10 @@ public class SettingsActivity extends PreferenceActivity {
         if (gotoPage == INTENT_GOTO_SERVICES) {
             // start with services screen
             PreferenceScreen main = (PreferenceScreen) getPreference(R.string.pref_fakekey_main_screen);
-            int index = getPreference(R.string.pref_fakekey_services_screen).getOrder();
-            main.onItemClick(null, null, index, 0);
+            if (main != null) {
+                int index = getPreference(R.string.pref_fakekey_services_screen).getOrder();
+                main.onItemClick(null, null, index, 0);
+            }
         }
     }
 
