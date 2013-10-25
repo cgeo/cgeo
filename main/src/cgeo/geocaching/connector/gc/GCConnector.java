@@ -15,8 +15,8 @@ import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
-import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
@@ -80,7 +80,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean supportsPersonalNote() {
-        return true;
+        return Settings.isPremiumMember();
     }
 
     @Override
