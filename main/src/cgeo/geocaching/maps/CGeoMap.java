@@ -592,7 +592,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             item = menu.findItem(R.id.menu_theme_mode); // show theme selection
             item.setVisible(mapView.hasMapThemes());
 
-            menu.findItem(R.id.menu_as_list).setEnabled(isLiveEnabled && !isLoading());
+            menu.findItem(R.id.menu_as_list).setEnabled(!isLoading());
 
             menu.findItem(R.id.submenu_strategy).setEnabled(isLiveEnabled);
 
