@@ -907,7 +907,7 @@ public abstract class GCParser {
         return searchByAny(cacheType, isSearchForMyCaches(userName), showCaptcha, params, recaptchaReceiver);
     }
 
-    public static SearchResult searchByPocket(final String pocketGuid, final CacheType cacheType, final boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
+    public static SearchResult searchByPocketQuery(final String pocketGuid, final CacheType cacheType, final boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
         if (StringUtils.isBlank(pocketGuid)) {
             Log.e("GCParser.searchByPocket: No guid name given");
             return null;
