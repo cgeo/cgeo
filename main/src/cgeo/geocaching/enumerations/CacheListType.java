@@ -2,6 +2,7 @@ package cgeo.geocaching.enumerations;
 
 public enum CacheListType {
     OFFLINE(true),
+    POCKET(false),
     HISTORY(true),
     NEAREST(false),
     COORDINATE(false),

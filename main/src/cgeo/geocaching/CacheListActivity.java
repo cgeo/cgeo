@@ -26,6 +26,7 @@ import cgeo.geocaching.loaders.KeywordGeocacheListLoader;
 import cgeo.geocaching.loaders.NextPageGeocacheListLoader;
 import cgeo.geocaching.loaders.OfflineGeocacheListLoader;
 import cgeo.geocaching.loaders.OwnerGeocacheListLoader;
+import cgeo.geocaching.loaders.PocketGeocacheListLoader;
 import cgeo.geocaching.loaders.RemoveFromHistoryLoader;
 import cgeo.geocaching.loaders.UsernameGeocacheListLoader;
 import cgeo.geocaching.maps.CGeoMap;
@@ -1570,6 +1571,19 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
+    public static void startActivityPocket(final AbstractActivity context, final @NonNull PocketQueryList pq) {
+        final String guid = pq.getGuid();
+        if (guid == null) {
+            context.showToast(CgeoApplication.getInstance().getString(R.string.warn_pocket_query_select));
+            return;
+        }
+        final Intent cachesIntent = new Intent(context, CacheListActivity.class);
+        cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.POCKET);
+        cachesIntent.putExtra(Intents.EXTRA_NAME, pq.getName());
+        cachesIntent.putExtra(Intents.EXTRA_POCKET_GUID, guid);
+        context.startActivity(cachesIntent);
+    }
+
     // Loaders
 
     @Override
@@ -1649,6 +1663,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 break;
             case NEXT_PAGE:
                 loader = new NextPageGeocacheListLoader(app, search);
+                break;
+            case POCKET:
+                final String guid = extras.getString(Intents.EXTRA_POCKET_GUID);
+                final String pocket_name = extras.getString(Intents.EXTRA_NAME);
+                title = pocket_name;
+                loader = new PocketGeocacheListLoader(app, guid);
                 break;
             default:
                 throw new IllegalStateException();

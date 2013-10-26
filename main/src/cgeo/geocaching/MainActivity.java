@@ -27,6 +27,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -512,6 +513,26 @@ public class MainActivity extends AbstractActivity {
                             }
                         });
                         nearestView.setBackgroundResource(R.drawable.main_nearby);
+
+                        nearestView.setOnLongClickListener(new View.OnLongClickListener() {
+
+                            @Override
+                            public boolean onLongClick(View v) {
+                                if (!Settings.isPremiumMember()) {
+                                    return true;
+                                }
+                                new PocketQueryList.UserInterface(MainActivity.this).promptForListSelection(new RunnableWithArgument<PocketQueryList>() {
+
+                                    @Override
+                                    public void run(final @NonNull PocketQueryList pql) {
+                                        CacheListActivity.startActivityPocket(MainActivity.this, pql);
+                                    }
+                                });
+                                return true;
+                            }
+                        });
+                        nearestView.setLongClickable(true);
+
                     }
 
                     navType.setText(res.getString(geo.getLocationProvider().resourceId));
