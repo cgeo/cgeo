@@ -335,7 +335,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
             if (status == StatusCode.NO_ERROR && Settings.isUseTwitter() &&
                     Settings.isTwitterLoginValid() &&
                     tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
-                Twitter.postTweetTrackable(geocode);
+                Twitter.postTweetTrackable(geocode, new LogEntry(0, typeSelected, log));
             }
 
             return status;
@@ -356,6 +356,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
     @Override
     protected LogContext getLogContext() {
-        return new LogContext(trackable);
+        return new LogContext(trackable, null);
     }
 }

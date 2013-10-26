@@ -42,8 +42,9 @@ public final class LogTemplateProvider {
             this(cache, logEntry, false);
         }
 
-        public LogContext(final Trackable trackable) {
+        public LogContext(final Trackable trackable, final LogEntry logEntry) {
             this.trackable = trackable;
+            this.logEntry = logEntry;
         }
 
         public LogContext(final boolean offline) {

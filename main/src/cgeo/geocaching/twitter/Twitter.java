@@ -19,19 +19,27 @@ import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import ch.boye.httpclientandroidlib.HttpResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 public final class Twitter {
     private static final String HASH_PREFIX_WITH_BLANK = " #";
     private static final int MAX_TWEET_SIZE = 140;
 
-    public static void postTweetCache(String geocode, LogEntry logEntry) {
+    public static void postTweetCache(String geocode, final @Nullable LogEntry logEntry) {
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        if (cache == null) {
+            return;
+        }
         postTweet(CgeoApplication.getInstance(), getStatusMessage(cache, logEntry), null);
     }
 
-    public static void postTweetTrackable(String geocode) {
+    public static void postTweetTrackable(String geocode, final @Nullable LogEntry logEntry) {
         final Trackable trackable = DataStore.loadTrackable(geocode);
-        postTweet(CgeoApplication.getInstance(), getStatusMessage(trackable), null);
+        if (trackable == null) {
+            return;
+        }
+        postTweet(CgeoApplication.getInstance(), getStatusMessage(trackable, logEntry), null);
     }
 
     private static void postTweet(final CgeoApplication app, final String statusIn, final Geopoint coords) {
@@ -82,12 +90,12 @@ public final class Twitter {
         }
     }
 
-    static String getStatusMessage(Geocache cache, LogEntry logEntry) {
+    static String getStatusMessage(final @NonNull Geocache cache, final @Nullable LogEntry logEntry) {
         return appendHashTags(LogTemplateProvider.applyTemplates(Settings.getCacheTwitterMessage(), new LogContext(cache, logEntry)));
     }
 
-    static String getStatusMessage(Trackable trackable) {
-        return appendHashTags(LogTemplateProvider.applyTemplates(Settings.getTrackableTwitterMessage(), new LogContext(trackable)));
+    static String getStatusMessage(final @NonNull Trackable trackable, final @Nullable LogEntry logEntry) {
+        return appendHashTags(LogTemplateProvider.applyTemplates(Settings.getTrackableTwitterMessage(), new LogContext(trackable, logEntry)));
     }
 
     private static String appendHashTags(final String status) {
