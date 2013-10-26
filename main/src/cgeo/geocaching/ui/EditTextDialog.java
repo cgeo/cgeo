@@ -11,46 +11,50 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.EditText;
 
-public class EditNoteDialog extends DialogFragment {
+public class EditTextDialog extends DialogFragment {
 
-    public interface EditNoteDialogListener {
-        void onFinishEditNoteDialog(final String inputText);
+    public interface EditTextDialogListener {
+        void onFinishEditTextDialog(final String inputText);
     }
 
-    public static final String ARGUMENT_INITIAL_NOTE = "initialNote";
+    public static final String ARGUMENT_TEXT = "text";
 
     private EditText mEditText;
-    private EditNoteDialogListener listener;
+    private EditTextDialogListener listener;
+    private int layoutResourceId;
+    private int titleResourceId;
 
-    public static EditNoteDialog newInstance(final String initialNote, EditNoteDialogListener listener) {
-        EditNoteDialog dialog = new EditNoteDialog();
+    public static EditTextDialog newInstance(final String initialText, final int layoutResourceId, final int titleResourceId, EditTextDialogListener listener) {
+        EditTextDialog dialog = new EditTextDialog();
 
         Bundle arguments = new Bundle();
-        arguments.putString(EditNoteDialog.ARGUMENT_INITIAL_NOTE, initialNote);
+        arguments.putString(EditTextDialog.ARGUMENT_TEXT, initialText);
         dialog.setArguments(arguments);
         dialog.listener = listener;
+        dialog.layoutResourceId = layoutResourceId;
+        dialog.titleResourceId = titleResourceId;
 
         return dialog;
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View view = View.inflate(new ContextThemeWrapper(getActivity(), R.style.dark), R.layout.fragment_edit_note, null);
-        mEditText = (EditText) view.findViewById(R.id.note);
-        String initialNote = getArguments().getString(ARGUMENT_INITIAL_NOTE);
+        View view = View.inflate(new ContextThemeWrapper(getActivity(), R.style.dark), this.layoutResourceId, null);
+        mEditText = (EditText) view.findViewById(R.id.text);
+        String initialNote = getArguments().getString(ARGUMENT_TEXT);
         if (initialNote != null) {
             mEditText.setText(initialNote);
-            getArguments().remove(ARGUMENT_INITIAL_NOTE);
+            getArguments().remove(ARGUMENT_TEXT);
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.cache_personal_note);
+        builder.setTitle(this.titleResourceId);
         builder.setView(view);
         builder.setPositiveButton(android.R.string.ok,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        listener.onFinishEditNoteDialog(mEditText.getText().toString());
+                        listener.onFinishEditTextDialog(mEditText.getText().toString());
                         dialog.dismiss();
                     }
                 });

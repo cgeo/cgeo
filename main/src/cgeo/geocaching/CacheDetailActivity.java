@@ -25,8 +25,8 @@ import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.DecryptTextClickListener;
-import cgeo.geocaching.ui.EditNoteDialog;
-import cgeo.geocaching.ui.EditNoteDialog.EditNoteDialogListener;
+import cgeo.geocaching.ui.EditTextDialog;
+import cgeo.geocaching.ui.EditTextDialog.EditTextDialogListener;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.HtmlImageCounter;
 import cgeo.geocaching.ui.ImagesList;
@@ -2346,9 +2346,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     public static void editPersonalNote(final Geocache cache, final CacheDetailActivity activity) {
         if (cache.isOffline()) {
-            EditNoteDialogListener editNoteDialogListener = new EditNoteDialogListener() {
+            EditTextDialogListener editTextDialogListener = new EditTextDialogListener() {
                 @Override
-                public void onFinishEditNoteDialog(final String note) {
+                public void onFinishEditTextDialog(final String note) {
                     cache.setPersonalNote(note);
                     cache.parseWaypointsFromNote();
                     TextView personalNoteView = (TextView) activity.findViewById(R.id.personalnote);
@@ -2358,7 +2358,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
             };
             final FragmentManager fm = activity.getSupportFragmentManager();
-            final EditNoteDialog dialog = EditNoteDialog.newInstance(cache.getPersonalNote(), editNoteDialogListener);
+            final EditTextDialog dialog = EditTextDialog.newInstance(cache.getPersonalNote(), R.layout.fragment_edit_note, R.string.cache_personal_note, editTextDialogListener);
             dialog.show(fm, "fragment_edit_note");
         }
     }
