@@ -1191,10 +1191,12 @@ public class DataStore {
 
         List<Waypoint> waypoints = cache.getWaypoints();
         if (CollectionUtils.isNotEmpty(waypoints)) {
+            final ArrayList<String> currentWaypointIds = new ArrayList<String>();
             ContentValues values = new ContentValues();
             long timeStamp = System.currentTimeMillis();
             for (Waypoint oneWaypoint : waypoints) {
                 if (oneWaypoint.isUserDefined()) {
+                    currentWaypointIds.add(Integer.toString(oneWaypoint.getId()));
                     continue;
                 }
 
@@ -1216,13 +1218,28 @@ public class DataStore {
                 } else {
                     database.update(dbTableWaypoints, values, "_id = ?", new String[] { Integer.toString(oneWaypoint.getId(), 10) });
                 }
+                currentWaypointIds.add(Integer.toString(oneWaypoint.getId()));
             }
+
+            removeOutdatedWaypointsOfCache(cache, currentWaypointIds);
         }
     }
 
     /**
+     * remove all waypoints of the given cache, where the id is not in the given list
+     * 
+     * @param cache
+     * @param remainingWaypointIds
+     *            ids of waypoints which shall not be deleted
+     */
+    private static void removeOutdatedWaypointsOfCache(final @NonNull Geocache cache, final @NonNull Collection<String> remainingWaypointIds) {
+        final String idList = StringUtils.join(remainingWaypointIds, ',');
+        database.delete(dbTableWaypoints, "geocode = ? AND _id NOT in (" + idList + ")", new String[] { cache.getGeocode() });
+    }
+
+    /**
      * Save coordinates into a ContentValues
-     *
+     * 
      * @param values
      *            a ContentValues to save coordinates in
      * @param oneWaypoint
