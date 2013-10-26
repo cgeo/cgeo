@@ -246,6 +246,7 @@
   <string name="caches_sort_terrain">Terénu</string>
   <string name="caches_sort_size">Velikosti</string>
   <string name="caches_sort_favorites">Oblíbenosti</string>
+  <string name="caches_sort_favorites_ratio">Oblíbenosti [%]</string>
   <string name="caches_sort_name">Jména</string>
   <string name="caches_sort_geocode">Geokódu</string>
   <string name="caches_sort_rating">Hodnocení</string>

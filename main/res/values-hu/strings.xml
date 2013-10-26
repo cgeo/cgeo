@@ -223,6 +223,7 @@
   <string name="caches_sort_terrain">terep</string>
   <string name="caches_sort_size">méret</string>
   <string name="caches_sort_favorites">sikeresség</string>
+  <string name="caches_sort_favorites_ratio">sikeresség [%]</string>
   <string name="caches_sort_name">név</string>
   <string name="caches_sort_rating">osztályzat</string>
   <string name="caches_sort_vote">szavazat (saját osztályzat)</string>

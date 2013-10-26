@@ -47,6 +47,7 @@ public class ComparatorUserInterface {
         register(R.string.caches_sort_inventory, InventoryComparator.class);
         register(R.string.caches_sort_name, NameComparator.class);
         register(R.string.caches_sort_favorites, PopularityComparator.class);
+        register(R.string.caches_sort_favorites_ratio, PopularityRatioComparator.class);
         register(R.string.caches_sort_rating, RatingComparator.class);
         register(R.string.caches_sort_size, SizeComparator.class);
         register(R.string.caches_sort_state, StateComparator.class);

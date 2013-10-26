@@ -246,6 +246,7 @@
   <string name="caches_sort_terrain">Terrein</string>
   <string name="caches_sort_size">Formaat</string>
   <string name="caches_sort_favorites">Populariteit</string>
+  <string name="caches_sort_favorites_ratio">Populariteit [%]</string>
   <string name="caches_sort_name">Naam</string>
   <string name="caches_sort_geocode">Geocode</string>
   <string name="caches_sort_rating">Waardering</string>
