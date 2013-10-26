@@ -246,7 +246,7 @@
   <string name="caches_sort_terrain">Teren</string>
   <string name="caches_sort_size">Velikost</string>
   <string name="caches_sort_favorites">Številu favoritov</string>
-  <string name="caches_sort_favorites_ratio_ratio">Številu favoritov [%]</string>
+  <string name="caches_sort_favorites_ratio">Številu favoritov [%]</string>
   <string name="caches_sort_name">Imenu</string>
   <string name="caches_sort_geocode">Geo kodi</string>
   <string name="caches_sort_rating">Glasovih</string>
