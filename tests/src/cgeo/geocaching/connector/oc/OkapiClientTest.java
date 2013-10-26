@@ -1,8 +1,8 @@
 package cgeo.geocaching.connector.oc;
 
 import cgeo.CGeoTestCase;
-import cgeo.geocaching.Geocache;
 import cgeo.geocaching.DataStore;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.enumerations.LoadFlags;
 
 public class OkapiClientTest extends CGeoTestCase {
@@ -28,4 +28,20 @@ public class OkapiClientTest extends CGeoTestCase {
         assertNotNull("You must have a valid OKAPI key installed for running this test (but you do not need to set credentials in the app).", cache);
         assertEquals("Wupper-Schein", cache.getName());
     }
+
+    public static void testOCCacheWithWaypoints() {
+        final String geoCode = "OCDDD2";
+        removeCacheCompletely(geoCode);
+        Geocache cache = OkapiClient.getCache(geoCode);
+        assertNotNull("Did not get cache from OKAPI", cache);
+        // cache should be stored to DB (to listID 0) when loaded above
+        cache = DataStore.loadCache(geoCode, LoadFlags.LOAD_ALL_DB_ONLY);
+        assertNotNull(cache);
+        assertEquals(3, cache.getWaypoints().size());
+
+        // load again
+        cache.refresh(cache.getListId(), null);
+        assertEquals(3, cache.getWaypoints().size());
+    }
+
 }
