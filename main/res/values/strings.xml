@@ -712,7 +712,8 @@
     <!-- simple_dir_chooser -->
     <string name="simple_dir_chooser_title">Choose directory</string>
     <string name="simple_dir_chooser_current_path">Path:</string>
-
+    <string name="simple_dir_chooser_invalid_path">Invalid path</string>
+    
     <!-- gpx -->
     <string name="gpx_import_loading_caches">Loading caches from .gpx file</string>
     <string name="gpx_import_loading_waypoints">Loading waypoints file</string>

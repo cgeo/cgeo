@@ -9,7 +9,6 @@
         android:id="@+id/text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:lines="8" />
+        android:inputType="text" />
 
 </LinearLayout>

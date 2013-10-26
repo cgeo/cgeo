@@ -619,6 +619,7 @@
   <string name="file_title_searching">Suche</string>
   <string name="simple_dir_chooser_title">Verzeichnis wählen</string>
   <string name="simple_dir_chooser_current_path">Pfad:</string>
+  <string name="simple_dir_chooser_invalid_path">Ungültiger Pfad</string>
   <string name="gpx_import_loading_caches">Lade Caches aus GPX-Datei</string>
   <string name="gpx_import_loading_waypoints">Lade Wegpunkte aus GPX-Datei</string>
   <string name="gpx_import_store_static_maps">Schreibe statische Karten</string>

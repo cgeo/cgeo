@@ -4,6 +4,8 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.ui.EditTextDialog;
+import cgeo.geocaching.ui.EditTextDialog.EditTextDialogListener;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -12,6 +14,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -73,6 +76,15 @@ public class SimpleDirChooser extends AbstractListActivity {
                 finish();
             }
         });
+
+        EditText pathField = (EditText) findViewById(R.id.simple_dir_chooser_path);
+        pathField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editPath();
+            }
+
+        });
     }
 
     /**
@@ -85,6 +97,30 @@ public class SimpleDirChooser extends AbstractListActivity {
         return StringUtils.contains(path, File.separatorChar) ?
                 new File(StringUtils.substringBeforeLast(path, Character.toString(File.separatorChar))) :
                 Environment.getExternalStorageDirectory();
+    }
+
+    public void editPath() {
+        EditTextDialogListener editTextDialogListener = new EditTextDialogListener() {
+            @Override
+            public void onFinishEditTextDialog(final String text) {
+                EditText pathField = (EditText) findViewById(R.id.simple_dir_chooser_path);
+                File file = new File(text);
+                if (file.exists() && file.isDirectory()) {
+                    pathField.setText(SimpleDirChooser.this.getResources().getString(R.string.simple_dir_chooser_current_path) + " " + text);
+                    currentDir = file;
+                    fill(currentDir);
+                } else {
+                    showToast("Invalid path");
+                }
+            }
+        };
+        EditText pathField = (EditText) findViewById(R.id.simple_dir_chooser_path);
+        final FragmentManager fm = SimpleDirChooser.this.getSupportFragmentManager();
+        String path = pathField.getText().toString();
+        String prefix = this.getResources().getString(R.string.simple_dir_chooser_current_path) + " ";
+        path = path.substring(prefix.length());
+        final EditTextDialog dialog = EditTextDialog.newInstance(path, R.layout.fragment_edit_text, R.string.simple_dir_chooser_current_path, editTextDialogListener);
+        dialog.show(fm, "fragment_edit_text");
     }
 
     private void fill(File dir) {
