@@ -289,6 +289,7 @@
   <string name="caches_filter_modified">Mit geänderten Koordinaten</string>
   <string name="caches_filter_origin">Herkunft</string>
   <string name="caches_filter_distance">Entfernung</string>
+  <string name="caches_filter_popularity">Beliebtheit</string>
   <string name="caches_removing_from_history">Lösche aus Verlauf…</string>
   <string name="caches_clear_offlinelogs">Offline-Logs löschen</string>
   <string name="caches_clear_offlinelogs_progress">Lösche Offline-Logs</string>
@@ -1022,6 +1023,7 @@
   <string name="tts_one_foot">ein Fuß</string>
   <string name="tts_one_oclock">ein Uhr</string>
   <string name="tts_oclock">%s Uhr</string>
+  <string name="tts_one_favorite_point">ein Favoritenpunkt</string>
   <string name="clipboard_copy_ok">In Zwischenablage kopiert</string>
   <string-array name="log_image_scales">
     <item>Keine Skalierung</item>
@@ -1061,5 +1063,9 @@
   <plurals name="days_ago">
     <item quantity="one">gestern</item>
     <item quantity="other">vor %d Tagen</item>
+  </plurals>
+  <plurals name="tts_favorite_points">
+    <item quantity="one">%s Favoritenpunkt</item>
+    <item quantity="other">%s Favoritenpunkte</item>
   </plurals>
 </resources>
