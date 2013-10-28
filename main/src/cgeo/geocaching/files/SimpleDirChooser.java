@@ -7,11 +7,14 @@ import cgeo.geocaching.activity.ActivityMixin;
 
 import org.apache.commons.lang3.StringUtils;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -73,6 +76,45 @@ public class SimpleDirChooser extends AbstractListActivity {
                 finish();
             }
         });
+
+        EditText pathField = (EditText) findViewById(R.id.simple_dir_chooser_path);
+        pathField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editPath();
+            }
+
+        });
+    }
+
+    public void editPath() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(SimpleDirChooser.this);
+        builder.setTitle(R.string.simple_dir_chooser_current_path);
+        final EditText input = new EditText(SimpleDirChooser.this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        input.setText(currentDir.getPath());
+        builder.setView(input);
+        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String pathText = input.getText().toString();
+                File newPathDir = new File(pathText);
+                if (newPathDir.exists() && newPathDir.isDirectory()) {
+                    currentDir = newPathDir;
+                    fill(currentDir);
+                } else {
+                    showToast(SimpleDirChooser.this.getResources().getString(R.string.simple_dir_chooser_invalid_path));
+                }
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
 
     /**
