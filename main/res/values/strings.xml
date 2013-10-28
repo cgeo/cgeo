@@ -1189,8 +1189,7 @@
         <item quantity="one">yesterday</item>
         <item quantity="other">%d days ago</item>
     </plurals>
-    <string name="tts_one_favorite_point">one favorite point</string>
-    <plurals name="tts_favorite_points">
+    <plurals name="favorite_points">
         <item quantity="one">%s favorite point</item>
         <item quantity="other">%s favorite points</item>
     </plurals>

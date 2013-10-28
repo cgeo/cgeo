@@ -33,7 +33,7 @@ class PopularityFilter extends AbstractFilter {
                 final int minRange = FAVORITES[i];
                 final int maxRange = Integer.MAX_VALUE;
                 final String range = "> " + minRange;
-                final String name = CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.tts_favorite_points, minRange, range);
+                final String name = CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.favorite_points, minRange, range);
                 filters.add(new PopularityFilter(name, minRange, maxRange));
             }
             return filters;

@@ -1023,7 +1023,6 @@
   <string name="tts_one_foot">ein Fuß</string>
   <string name="tts_one_oclock">ein Uhr</string>
   <string name="tts_oclock">%s Uhr</string>
-  <string name="tts_one_favorite_point">ein Favoritenpunkt</string>
   <string name="clipboard_copy_ok">In Zwischenablage kopiert</string>
   <string-array name="log_image_scales">
     <item>Keine Skalierung</item>
@@ -1064,7 +1063,7 @@
     <item quantity="one">gestern</item>
     <item quantity="other">vor %d Tagen</item>
   </plurals>
-  <plurals name="tts_favorite_points">
+  <plurals name="favorite_points">
     <item quantity="one">%s Favoritenpunkt</item>
     <item quantity="other">%s Favoritenpunkte</item>
   </plurals>
