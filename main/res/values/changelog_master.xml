@@ -22,7 +22,6 @@
     · DirChooser not showing all dirs on some devices\n
     · Network timeout reduced to 30 seconds to avoid long waiting time\n
     · Show now also possible when map is not live\n
-    · Personal note upload now only for PM\n
      \n
   </string>
 </resources>
