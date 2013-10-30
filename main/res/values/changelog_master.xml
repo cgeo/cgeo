@@ -4,11 +4,13 @@
   <string name="changelog_master" translatable="false">
     <b>Next feature release</b>\n
     <b>New Features:</b>\n
+    · Browse pocket queries online (long press on nearby)\n
     · Popup on map shows date of event caches\n
     · Show cache where a Geokrety is currently placed\n
-    · Editable twitter templates\n
+    · Configurable twitter templates\n
     · Creating a new WP the type will be preset depending on the cache type\n 
     · Show event date for OC event caches in search results\n
+    · Sorting caches by favorite point percentage\n
     \n
      <b>Bugfixes:</b>\n
     · Cache type filter was not applied for OC nearby search\n
@@ -19,6 +21,8 @@
     · OC authorization page not shown in light theme\n
     · DirChooser not showing all dirs on some devices\n
     · Network timeout reduced to 30 seconds to avoid long waiting time\n
+    · Show now also possible when map is not live\n
+    · Personal note upload now only for PM\n
      \n
   </string>
 </resources>
