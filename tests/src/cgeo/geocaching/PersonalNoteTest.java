@@ -1,6 +1,9 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.list.StoredList;
+
+import org.apache.commons.lang3.StringUtils;
 
 import junit.framework.TestCase;
 
@@ -23,6 +26,20 @@ public class PersonalNoteTest extends TestCase {
         PersonalNote parsedNote = new PersonalNote(cache);
         assertEquals(testString, parsedNote.toString());
         assertPersonalNote(parsedNote, null, "Simple provider note");
+    }
+
+    public static void testLocalNoteExceedsLimit() {
+        String testString = StringUtils.repeat("x", GCConstants.PERSONAL_NOTE_MAX_CHARS + 1);
+        Geocache truncCache = new Geocache();
+        truncCache.setPersonalNote(testString.substring(0, GCConstants.PERSONAL_NOTE_MAX_CHARS));
+        PersonalNote parsedNote = new PersonalNote(truncCache);
+
+        Geocache exceedingCache = new Geocache();
+        exceedingCache.setListId(StoredList.STANDARD_LIST_ID); // stored
+        exceedingCache.setPersonalNote(testString.toString());
+        PersonalNote otherNote = new PersonalNote(exceedingCache);
+        PersonalNote result = parsedNote.mergeWith(otherNote);
+        assertPersonalNote(result, null, testString.toString());
     }
 
     public static void testParseCgeoOnly() {

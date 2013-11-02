@@ -177,6 +177,8 @@ public final class GCConstants {
 
     /** Number of logs to retrieve from GC.com */
     public final static int NUMBER_OF_LOGS = 35;
+    /** Maximum number of chars for personal note. **/
+    public final static int PERSONAL_NOTE_MAX_CHARS = 500;
 
     private final static String SEQUENCE_GCID = "0123456789ABCDEFGHJKMNPQRTVWXYZ";
     private final static long GC_BASE31 = 31;
