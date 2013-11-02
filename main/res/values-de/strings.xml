@@ -343,6 +343,8 @@
   <string name="settings_gc_legal_note">Mit Benutzung der Dienste von geocaching.com werden die Groundspeak-Nutzungsbedingungen (englisch) akzeptiert.</string>
   <string name="settings_info_facebook_login_title">Facebook-Login</string>
   <string name="settings_info_facebook_login">c:geo kann sich zwar nicht per Facebook bei Geocaching.com einloggen, aber es gibt eine einfache Abhilfe …</string>
+  <string name="settings_authorize">c:geo autorisieren</string>
+  <string name="settings_reauthorize">c:geo erneut autorisieren</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Aktivieren</string>
   <string name="init_oc_de_description">Autorisiere c:geo auf opencaching.de zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
@@ -456,6 +458,11 @@
   <string name="init_use_native_ua">Android-Browser</string>
   <string name="init_summary_use_native_ua">Als Android-Browser identifizieren. Löst Login-Probleme einiger Netzanbieter.</string>
   <string name="init_rendertheme_folder">Karten-Themes-Verzeichnis</string>
+  <string name="settings_open_website">Öffne Webseite</string>
+  <string name="settings_settings">Einstellungen</string>
+  <string name="settings_information">Information</string>
+  <string name="settings_twitter_cache_message">Nachricht für gefundene Caches</string>
+  <string name="settings_twitter_trackable_message">Nachricht für gefundene Trackables</string>
   <string name="map_source_google_map">Google: Karte</string>
   <string name="map_source_google_satellite">Google: Satellit</string>
   <string name="map_source_osm_mapnik">OSM: Mapnik</string>
@@ -477,7 +484,7 @@
   <string name="auth_again">Neustarten</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
-  <string name="auth_dialog_completed_oc">c:geo ist nun autorisiert, caches zu laden und auf %s zu loggen.</string>
+  <string name="auth_dialog_completed_oc">c:geo ist nun autorisiert, Caches zu laden und auf %s zu loggen.</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Aktualisieren</string>
   <string name="cache_offline_drop">Löschen</string>
