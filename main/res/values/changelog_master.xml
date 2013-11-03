@@ -20,8 +20,9 @@
     · Disallow deletion of all caches incl. list if a filter is in use\n
     · OC authorization page not shown in light theme\n
     · DirChooser not showing all dirs on some devices\n
+    · Allow manual path input in dirchooser\n
     · Network timeout reduced to 30 seconds to avoid long waiting time\n
-    · Show now also possible when map is not live\n
+    · Show as list also possible when map is not live\n
      \n
   </string>
 </resources>
