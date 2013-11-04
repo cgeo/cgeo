@@ -1190,8 +1190,8 @@
         <item quantity="other">%d days ago</item>
     </plurals>
     <plurals name="favorite_points">
-        <item quantity="one">%s favorite point</item>
-        <item quantity="other">%s favorite points</item>
+        <item quantity="one">%s favorite</item>
+        <item quantity="other">%s favorites</item>
     </plurals>
 
 </resources>
