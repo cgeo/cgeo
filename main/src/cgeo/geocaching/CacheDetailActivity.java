@@ -11,6 +11,7 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
@@ -1521,7 +1522,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 personalNoteUpload.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        uploadPersonalNote();
+                        if (StringUtils.length(cache.getPersonalNote()) > GCConstants.PERSONAL_NOTE_MAX_CHARS) {
+                            warnPersonalNoteExceedsLimit();
+                        } else {
+                            uploadPersonalNote();
+                        }
                     }
                 });
             } else {
@@ -1625,6 +1630,33 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                     storeCache(StoredList.STANDARD_LIST_ID, new StoreCachePersonalNoteHandler(CacheDetailActivity.this, progress));
+                }
+
+            });
+            final AlertDialog dialog = builder.create();
+            dialog.setOwnerActivity(CacheDetailActivity.this);
+            dialog.show();
+        }
+
+        private void warnPersonalNoteExceedsLimit() {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(CacheDetailActivity.this);
+            builder.setTitle(R.string.cache_personal_note_limit);
+            String lang = getString(R.string.cache_personal_note_truncation, GCConstants.PERSONAL_NOTE_MAX_CHARS);
+            builder.setMessage(lang);
+            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // do nothing
+                }
+            });
+
+            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    uploadPersonalNote();
                 }
 
             });

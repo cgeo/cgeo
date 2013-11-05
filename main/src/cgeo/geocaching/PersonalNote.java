@@ -70,8 +70,10 @@ public class PersonalNote {
     private PersonalNote mergeOnlyProviderNotes(final PersonalNote other) {
         final PersonalNote result = new PersonalNote();
         if (StringUtils.isNotEmpty(other.providerNote) && StringUtils.isNotEmpty(providerNote)) {
-            if (providerNote.equals(other.providerNote)) {
-                result.providerNote = providerNote;
+            // Don't overwrite a stored personal note if provider note is different.
+            // Prevents the local personal note from being overwritten by a truncated note from GC.com.
+            if (StringUtils.startsWith(other.providerNote, providerNote)) {
+                result.providerNote = other.providerNote;
                 return result;
             }
             if (other.isOffline) {

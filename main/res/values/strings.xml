@@ -581,6 +581,8 @@
     <string name="cache_log_image_default_title">Photo</string>
     <string name="cache_personal_note">Personal note</string>
     <string name="cache_personal_note_edit">Edit</string>
+    <string name="cache_personal_note_limit">Personal note limit</string>
+    <string name="cache_personal_note_truncation">This personal note will be truncated after %d characters by Geocaching.com.</string>
     <string name="cache_personal_note_upload">Upload</string>
     <string name="cache_personal_note_uploading">Uploading personal note</string>
     <string name="cache_personal_note_upload_done">Personal note uploaded</string>
