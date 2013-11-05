@@ -23,6 +23,7 @@
     · Allow manual path input in dirchooser\n
     · Network timeout reduced to 30 seconds to avoid long waiting time\n
     · Show as list also possible when map is not live\n
+    · Respect limit of 500 chars for personal note on gc.com on upload or merge\n
      \n
   </string>
 </resources>
