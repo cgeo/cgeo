@@ -253,7 +253,7 @@ public class Geocache implements ICache, IWaypoint {
         if (hidden == null) {
             hidden = other.hidden;
         }
-        if (StringUtils.isBlank(getHint())) {
+        if (!detailed && StringUtils.isBlank(getHint())) {
             hint = other.getHint();
         }
         if (size == null || CacheSize.UNKNOWN == size) {
@@ -284,7 +284,7 @@ public class Geocache implements ICache, IWaypoint {
             final PersonalNote mergedNote = myNote.mergeWith(otherNote);
             personalNote = mergedNote.toString();
         }
-        if (StringUtils.isBlank(getShortDescription())) {
+        if (!detailed && StringUtils.isBlank(getShortDescription())) {
             shortdesc = other.getShortDescription();
         }
         if (StringUtils.isBlank(getDescription())) {
@@ -304,7 +304,7 @@ public class Geocache implements ICache, IWaypoint {
         if (myVote == 0) {
             myVote = other.myVote;
         }
-        if (attributes.isEmpty()) {
+        if (!detailed && attributes.isEmpty()) {
             attributes.clear();
             if (other.attributes != null) {
                 attributes.addAll(other.attributes);
