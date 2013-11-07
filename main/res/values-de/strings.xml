@@ -289,6 +289,7 @@
   <string name="caches_filter_modified">Mit geänderten Koordinaten</string>
   <string name="caches_filter_origin">Herkunft</string>
   <string name="caches_filter_distance">Entfernung</string>
+  <string name="caches_filter_popularity_ratio">Beliebtheit [%]</string>
   <string name="caches_removing_from_history">Lösche aus Verlauf…</string>
   <string name="caches_clear_offlinelogs">Offline-Logs löschen</string>
   <string name="caches_clear_offlinelogs_progress">Lösche Offline-Logs</string>
@@ -1065,4 +1066,5 @@
     <item quantity="one">gestern</item>
     <item quantity="other">vor %d Tagen</item>
   </plurals>
+  <string name="percent_favorite_points">% Favoriten</string>
 </resources>

@@ -9,7 +9,6 @@ import cgeo.geocaching.enumerations.LogType;
 
 /**
  * sorts caches by popularity ratio (favorites per find in %).
- * only caches with 10 finds and more are counted to obtain meaningful statistics
  */
 public class PopularityRatioComparator extends AbstractCacheComparator {
 
@@ -27,10 +26,10 @@ public class PopularityRatioComparator extends AbstractCacheComparator {
         int finds1 = getFindsCount(cache1);
         int finds2 = getFindsCount(cache2);
 
-        if (finds1 != 0 && finds1 > 9) {
+        if (finds1 != 0) {
             ratio1 = (((float) cache1.getFavoritePoints()) / ((float) finds1));
         }
-        if (finds2 != 0 && finds2 > 9) {
+        if (finds2 != 0) {
             ratio2 = (((float) cache2.getFavoritePoints()) / ((float) finds2));
         }
 
