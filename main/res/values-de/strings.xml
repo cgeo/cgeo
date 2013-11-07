@@ -289,6 +289,7 @@
   <string name="caches_filter_modified">Mit geänderten Koordinaten</string>
   <string name="caches_filter_origin">Herkunft</string>
   <string name="caches_filter_distance">Entfernung</string>
+  <string name="caches_filter_popularity">Beliebtheit</string>
   <string name="caches_removing_from_history">Lösche aus Verlauf…</string>
   <string name="caches_clear_offlinelogs">Offline-Logs löschen</string>
   <string name="caches_clear_offlinelogs_progress">Lösche Offline-Logs</string>
@@ -1064,5 +1065,9 @@
   <plurals name="days_ago">
     <item quantity="one">gestern</item>
     <item quantity="other">vor %d Tagen</item>
+  </plurals>
+  <plurals name="favorite_points">
+    <item quantity="one">%s Favorit</item>
+    <item quantity="other">%s Favoriten</item>
   </plurals>
 </resources>
