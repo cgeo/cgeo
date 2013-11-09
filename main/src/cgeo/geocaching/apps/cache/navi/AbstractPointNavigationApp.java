@@ -24,7 +24,10 @@ abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNa
 
     @Override
     public void navigate(Activity activity, Geocache cache) {
-        final Geopoint coords = cache.getCoords();
+        navigateWithNullCheck(activity, cache.getCoords());
+    }
+
+    private void navigateWithNullCheck(Activity activity, final Geopoint coords) {
         if (coords != null) {
             navigate(activity, coords);
         } else {
@@ -34,13 +37,7 @@ abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNa
 
     @Override
     public void navigate(Activity activity, Waypoint waypoint) {
-        final Geopoint coords = waypoint.getCoords();
-        if (coords != null) {
-            navigate(activity, coords);
-        } else {
-            ActivityMixin.showToast(activity, activity.getResources().getString(R.string.err_nav_no_coordinates));
-        }
-        navigate(activity, waypoint.getCoords());
+        navigateWithNullCheck(activity, waypoint.getCoords());
     }
 
     @Override
