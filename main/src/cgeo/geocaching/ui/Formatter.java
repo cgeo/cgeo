@@ -15,6 +15,7 @@ import android.text.format.DateUtils;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public abstract class Formatter {
@@ -110,7 +111,7 @@ public abstract class Formatter {
     /**
      * Generate a numeric date and time string according to system-wide settings (locale,
      * date format) such as "7 september at 12:35".
-     * 
+     *
      * @param date
      *            milliseconds since the epoch
      * @return the formatted string
@@ -153,8 +154,11 @@ public abstract class Formatter {
         // don't show "not chosen" for events and virtuals, that should be the normal case
         if (cache.getSize() != CacheSize.UNKNOWN && cache.showSize()) {
             infos.add(cache.getSize().getL10n());
-        } else if (cache.isEventCache() && cache.getHiddenDate() != null) {
-            infos.add(Formatter.formatShortDate(cache.getHiddenDate().getTime()));
+        } else if (cache.isEventCache()) {
+            final Date hiddenDate = cache.getHiddenDate();
+            if (hiddenDate != null) {
+                infos.add(Formatter.formatShortDate(hiddenDate.getTime()));
+            }
         }
     }
 

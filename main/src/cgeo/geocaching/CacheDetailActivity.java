@@ -107,6 +107,7 @@ import android.widget.TextView.BufferType;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
@@ -971,8 +972,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             // cache hidden
-            if (cache.getHiddenDate() != null) {
-                final long time = cache.getHiddenDate().getTime();
+            final Date hiddenDate = cache.getHiddenDate();
+            if (hiddenDate != null) {
+                final long time = hiddenDate.getTime();
                 if (time > 0) {
                     String dateString = Formatter.formatFullDate(time);
                     if (cache.isEventCache()) {

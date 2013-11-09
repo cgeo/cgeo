@@ -37,6 +37,7 @@ import org.apache.commons.collections4.Predicate;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -750,6 +751,7 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     @Override
+    @Nullable
     public Date getHiddenDate() {
         return hidden;
     }

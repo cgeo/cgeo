@@ -17,6 +17,8 @@ import android.net.Uri;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.Date;
+
 /**
  * Shared menu handling for all activities having menu items related to a cache.
  *
@@ -83,10 +85,11 @@ public class CacheMenuHandler extends AbstractUIFactory {
         final boolean calendarAddOnAvailable = ProcessUtils.isIntentAvailable(ICalendar.INTENT, Uri.parse(ICalendar.URI_SCHEME + "://" + ICalendar.URI_HOST));
 
         if (calendarAddOnAvailable) {
+            final Date hiddenDate = cache.getHiddenDate();
             final Parameters params = new Parameters(
                     ICalendar.PARAM_NAME, cache.getName(),
                     ICalendar.PARAM_NOTE, StringUtils.defaultString(cache.getPersonalNote()),
-                    ICalendar.PARAM_HIDDEN_DATE, String.valueOf(cache.getHiddenDate().getTime()),
+                    ICalendar.PARAM_HIDDEN_DATE, hiddenDate != null ? String.valueOf(hiddenDate.getTime()) : StringUtils.EMPTY,
                     ICalendar.PARAM_URL, StringUtils.defaultString(cache.getUrl()),
                     ICalendar.PARAM_COORDS, cache.getCoords() == null ? "" : cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW),
                     ICalendar.PARAM_LOCATION, StringUtils.defaultString(cache.getLocation()),

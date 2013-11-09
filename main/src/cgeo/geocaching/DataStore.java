@@ -1067,10 +1067,11 @@ public class DataStore {
         values.put("name", cache.getName());
         values.put("owner", cache.getOwnerDisplayName());
         values.put("owner_real", cache.getOwnerUserId());
-        if (cache.getHiddenDate() == null) {
+        final Date hiddenDate = cache.getHiddenDate();
+        if (hiddenDate == null) {
             values.put("hidden", 0);
         } else {
-            values.put("hidden", cache.getHiddenDate().getTime());
+            values.put("hidden", hiddenDate.getTime());
         }
         values.put("hint", cache.getHint());
         values.put("size", cache.getSize() == null ? "" : cache.getSize().id);

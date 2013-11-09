@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.location.Location;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -119,8 +120,9 @@ public abstract class AbstractLocusApp extends AbstractApp {
         pg.premiumOnly = cache.isPremiumMembersOnly();
         pg.name = cache.getName();
         pg.placedBy = cache.getOwnerDisplayName();
-        if (cache.getHiddenDate() != null) {
-            pg.hidden = ISO8601DATE.format(cache.getHiddenDate().getTime());
+        final Date hiddenDate = cache.getHiddenDate();
+        if (hiddenDate != null) {
+            pg.hidden = ISO8601DATE.format(hiddenDate.getTime());
         }
         int locusId = toLocusType(cache.getType());
         if (locusId != NO_LOCUS_ID) {

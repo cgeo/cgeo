@@ -1,6 +1,9 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.Geocache;
+
 import java.util.Calendar;
+import java.util.Date;
 
 public final class DateUtils {
 
@@ -20,4 +23,13 @@ public final class DateUtils {
         today.set(Calendar.HOUR_OF_DAY, 0);
         return (int) Math.round((today.getTimeInMillis() - logDate.getTimeInMillis()) / 86400000d);
     }
+
+    public static boolean isPastEvent(final Geocache cache) {
+        if (!cache.isEventCache()) {
+            return false;
+        }
+        final Date hiddenDate = cache.getHiddenDate();
+        return hiddenDate != null && DateUtils.daysSince(hiddenDate.getTime()) > 0;
+    }
+
 }

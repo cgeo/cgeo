@@ -22,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public final class CacheDetailsCreator {
@@ -179,12 +180,17 @@ public final class CacheDetailsCreator {
     }
 
     public void addEventDate(@NonNull Geocache cache) {
-        if (cache.isEventCache() && cache.getHiddenDate() != null) {
-            final long time = cache.getHiddenDate().getTime();
-            if (time > 0) {
-                final String dateString = DateUtils.formatDateTime(CgeoApplication.getInstance().getBaseContext(), time, DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + Formatter.formatFullDate(time);
-                add(R.string.cache_event, dateString);
-            }
+        if (!cache.isEventCache()) {
+            return;
+        }
+        final Date hiddenDate = cache.getHiddenDate();
+        if (hiddenDate == null) {
+            return;
+        }
+        final long time = hiddenDate.getTime();
+        if (time > 0) {
+            final String dateString = DateUtils.formatDateTime(CgeoApplication.getInstance().getBaseContext(), time, DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + Formatter.formatFullDate(time);
+            add(R.string.cache_event, dateString);
         }
     }
 }

@@ -400,7 +400,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         }
 
         Spannable spannable = null;
-        if (cache.isDisabled() || cache.isArchived() || isPastEvent(cache)) { // strike
+        if (cache.isDisabled() || cache.isArchived() || DateUtils.isPastEvent(cache)) { // strike
             spannable = Spannable.Factory.getInstance().newSpannable(cache.getName());
             spannable.setSpan(new StrikethroughSpan(), 0, spannable.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
@@ -487,10 +487,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         }
 
         return v;
-    }
-
-    private static boolean isPastEvent(final Geocache cache) {
-        return cache.isEventCache() && DateUtils.daysSince(cache.getHiddenDate().getTime()) > 0;
     }
 
     private static Drawable getCacheIcon(Geocache cache) {

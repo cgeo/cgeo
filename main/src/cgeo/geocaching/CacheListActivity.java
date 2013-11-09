@@ -78,7 +78,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -706,11 +705,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public void deletePastEvents() {
         final List<Geocache> deletion = new ArrayList<Geocache>();
         for (final Geocache cache : adapter.getCheckedOrAllCaches()) {
-            if (cache.isEventCache()) {
-                final Date eventDate = cache.getHiddenDate();
-                if (DateUtils.daysSince(eventDate.getTime()) > 0) {
-                    deletion.add(cache);
-                }
+            if (DateUtils.isPastEvent(cache)) {
+                deletion.add(cache);
             }
         }
         new DropDetailsTask(false).execute(deletion.toArray(new Geocache[deletion.size()]));
