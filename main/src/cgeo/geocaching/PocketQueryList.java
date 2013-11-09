@@ -53,8 +53,7 @@ public final class PocketQueryList {
 
                 for (int i = 0; i < pocketQueryList.size(); i++) {
                     PocketQueryList pq = pocketQueryList.get(i);
-
-                    items[i] = pq.name + " (" + pq.maxCaches + ")";
+                    items[i] = pq.name;
                 }
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(activity);

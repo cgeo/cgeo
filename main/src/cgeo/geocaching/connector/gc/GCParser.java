@@ -56,6 +56,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.GregorianCalendar;
@@ -1026,6 +1027,15 @@ public abstract class GCParser {
             final PocketQueryList pqList = new PocketQueryList(guid, name, maxCaches);
             list.add(pqList);
         }
+
+        // just in case, lets sort the resulting list
+        Collections.sort(list, new Comparator<PocketQueryList>() {
+
+            @Override
+            public int compare(PocketQueryList left, PocketQueryList right) {
+                return String.CASE_INSENSITIVE_ORDER.compare(left.getName(), right.getName());
+            }
+        });
 
         return list;
     }
