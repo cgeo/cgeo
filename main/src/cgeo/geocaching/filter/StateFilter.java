@@ -127,7 +127,7 @@ abstract class StateFilter extends AbstractFilter {
 
                 @Override
                 public int compare(final StateFilter filter1, final StateFilter filter2) {
-                    return filter1.getName().compareToIgnoreCase(filter2.getName());
+                    return String.CASE_INSENSITIVE_ORDER.compare(filter1.getName(), filter2.getName());
                 }
             });
 
