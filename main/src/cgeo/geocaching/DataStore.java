@@ -1191,10 +1191,12 @@ public class DataStore {
 
         List<Waypoint> waypoints = cache.getWaypoints();
         if (CollectionUtils.isNotEmpty(waypoints)) {
+            final ArrayList<String> storedIds = new ArrayList<String>();
             ContentValues values = new ContentValues();
             long timeStamp = System.currentTimeMillis();
             for (Waypoint oneWaypoint : waypoints) {
                 if (oneWaypoint.isUserDefined()) {
+                    storedIds.add(Integer.toString(oneWaypoint.getId()));
                     continue;
                 }
 
@@ -1216,7 +1218,11 @@ public class DataStore {
                 } else {
                     database.update(dbTableWaypoints, values, "_id = ?", new String[] { Integer.toString(oneWaypoint.getId(), 10) });
                 }
+                storedIds.add(Integer.toString(oneWaypoint.getId()));
             }
+            // remove outdated waypoints after a refresh of the cache
+            final String idList = StringUtils.join(storedIds, ',');
+            database.delete(dbTableWaypoints, "geocode = ? AND _id NOT in (" + idList + ")", new String[] { geocode });
         }
     }
 
