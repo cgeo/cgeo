@@ -100,6 +100,11 @@ public class GeocacheTest extends CGeoTestCase {
         stored.setType(CacheType.TRADITIONAL);
         stored.setCoords(new Geopoint(40.0, 8.0));
         stored.setDescription("Test1");
+        ArrayList<String> attributes = new ArrayList<String>(1);
+        attributes.add("TestAttribute");
+        stored.setAttributes(attributes);
+        stored.setShortDescription("Short");
+        stored.setHint("Hint");
 
         Geocache download = new Geocache();
         download.setGeocode("GC12345");
@@ -117,6 +122,9 @@ public class GeocacheTest extends CGeoTestCase {
         assertEquals("Longitude not merged correctly", 9.0, download.getCoords().getLongitude(), 0.1);
         assertEquals("Latitude not merged correctly", 41.0, download.getCoords().getLatitude(), 0.1);
         assertEquals("Description not merged correctly", "Test2", download.getDescription());
+        assertEquals("ShortDescription not merged correctly", "", download.getShortDescription());
+        assertEquals("Attributes not merged correctly", new ArrayList<String>(0), download.getAttributes());
+        assertEquals("Hint not merged correctly", "", download.getHint());
     }
 
     public static void testMergeLivemapStored() {
