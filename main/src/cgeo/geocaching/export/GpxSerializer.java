@@ -3,6 +3,7 @@ package cgeo.geocaching.export;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
+import cgeo.geocaching.Trackable;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -130,6 +131,7 @@ public final class GpxSerializer {
             gpx.endTag(PREFIX_GROUNDSPEAK, "long_description");
 
             writeLogs(cache);
+            writeTravelBugs(cache);
 
             gpx.endTag(PREFIX_GROUNDSPEAK, "cache");
             gpx.endTag(PREFIX_GPX, "wpt");
@@ -227,6 +229,26 @@ public final class GpxSerializer {
         }
 
         gpx.endTag(PREFIX_GROUNDSPEAK, "logs");
+    }
+
+    private void writeTravelBugs(final Geocache cache) throws IOException {
+        List<Trackable> inventory = cache.getInventory();
+        if (inventory.isEmpty()) {
+            return;
+        }
+        gpx.startTag(PREFIX_GROUNDSPEAK, "travelbugs");
+
+        for (final Trackable trackable : inventory) {
+            gpx.startTag(PREFIX_GROUNDSPEAK, "travelbug");
+
+            // in most cases the geocode will be empty (only the guid is known). those travel bugs cannot be imported again!
+            gpx.attribute("", "ref", trackable.getGeocode());
+            XmlUtils.simpleText(gpx, PREFIX_GROUNDSPEAK, "name", trackable.getName());
+
+            gpx.endTag(PREFIX_GROUNDSPEAK, "travelbug");
+        }
+
+        gpx.endTag(PREFIX_GROUNDSPEAK, "travelbugs");
     }
 
     private void writeAttributes(final Geocache cache) throws IOException {
