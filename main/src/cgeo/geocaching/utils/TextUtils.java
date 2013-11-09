@@ -153,4 +153,16 @@ public final class TextUtils {
         return str.indexOf('<') != -1 || str.indexOf('&') != -1;
     }
 
+    /**
+     * Remove all control characters (which are not valid in XML or HTML), as those should not appear in cache texts
+     * anyway
+     *
+     * @param input
+     * @return
+     */
+    public static String removeControlCharacters(final String input) {
+        Matcher remover = PATTERN_REMOVE_NONPRINTABLE.matcher(input);
+        return remover.replaceAll(" ").trim();
+    }
+
 }

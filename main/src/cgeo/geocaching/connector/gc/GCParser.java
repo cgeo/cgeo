@@ -1694,11 +1694,12 @@ public abstract class GCParser {
                 // better to integrate those coordinates into the text rather than not
                 // display them at all.
                 final String latLon = entry.getString("LatLonString");
+                final String logText = (StringUtils.isEmpty(latLon) ? "" : (latLon + "<br/><br/>")) + TextUtils.removeControlCharacters(entry.getString("LogText"));
                 final LogEntry logDone = new LogEntry(
-                        entry.getString("UserName"),
+                        TextUtils.removeControlCharacters(entry.getString("UserName")),
                         date,
                         LogType.getByIconName(logIconName),
-                        (StringUtils.isEmpty(latLon) ? "" : (latLon + "<br/><br/>")) + entry.getString("LogText"));
+                        logText);
                 logDone.found = entry.getInt("GeocacheFindCount");
                 logDone.friend = friends;
 
@@ -1706,7 +1707,7 @@ public abstract class GCParser {
                 for (int i = 0; i < images.length(); i++) {
                     final JSONObject image = images.getJSONObject(i);
                     final String url = "http://img.geocaching.com/cache/log/large/" + image.getString("FileName");
-                    final String title = image.getString("Name");
+                    final String title = TextUtils.removeControlCharacters(image.getString("Name"));
                     final Image logImage = new Image(url, title);
                     logDone.addLogImage(logImage);
                 }
