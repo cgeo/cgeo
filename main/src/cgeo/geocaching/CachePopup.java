@@ -45,7 +45,7 @@ public class CachePopup extends AbstractPopupActivity {
     private class DropCacheHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
-            init();
+            CachePopup.this.finish();
         }
     }
 
