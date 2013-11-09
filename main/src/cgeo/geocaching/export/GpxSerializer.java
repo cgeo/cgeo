@@ -12,6 +12,7 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.XmlUtils;
 import cgeo.org.kxml2.io.KXmlSerializer;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.FastDateFormat;
@@ -233,7 +234,7 @@ public final class GpxSerializer {
 
     private void writeTravelBugs(final Geocache cache) throws IOException {
         List<Trackable> inventory = cache.getInventory();
-        if (inventory.isEmpty()) {
+        if (CollectionUtils.isEmpty(inventory)) {
             return;
         }
         gpx.startTag(PREFIX_GROUNDSPEAK, "travelbugs");
