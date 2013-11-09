@@ -103,7 +103,7 @@ public final class GpxSerializer {
             gpx.startTag(PREFIX_GROUNDSPEAK, "cache");
             gpx.attribute("", "id", cache.getCacheId());
             gpx.attribute("", "available", !cache.isDisabled() ? "True" : "False");
-            gpx.attribute("", "archives", cache.isArchived() ? "True" : "False");
+            gpx.attribute("", "archived", cache.isArchived() ? "True" : "False");
 
             XmlUtils.multipleTexts(gpx, PREFIX_GROUNDSPEAK,
                     "name", cache.getName(),
