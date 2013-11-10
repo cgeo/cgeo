@@ -5,14 +5,12 @@ import cgeo.geocaching.geopoint.Geopoint;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Note: this class has a natural ordering that is inconsistent with equals.
- */
-public class Waypoint implements IWaypoint, Comparable<Waypoint> {
+public class Waypoint implements IWaypoint {
 
     public static final String PREFIX_OWN = "OWN";
     private static final int ORDER_UNDEFINED = -2;
@@ -135,11 +133,6 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
         return cachedOrder;
     }
 
-    @Override
-    public int compareTo(Waypoint other) {
-        return order() - other.order();
-    }
-
     public String getPrefix() {
         return prefix;
     }
@@ -254,4 +247,14 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
         return (int) hash;
     }
 
+    /**
+     * Sort waypoints by their probable order (e.g. parking first, final last).
+     */
+    public static final Comparator<? super Waypoint> WAYPOINT_COMPARATOR = new Comparator<Waypoint>() {
+
+        @Override
+        public int compare(Waypoint left, Waypoint right) {
+            return left.order() - right.order();
+        }
+    };
 }

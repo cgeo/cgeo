@@ -1826,7 +1826,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // sort waypoints: PP, Sx, FI, OWN
             final List<Waypoint> sortedWaypoints = new ArrayList<Waypoint>(cache.getWaypoints());
-            Collections.sort(sortedWaypoints);
+            Collections.sort(sortedWaypoints, Waypoint.WAYPOINT_COMPARATOR);
 
             view = (ListView) getLayoutInflater().inflate(R.layout.cachedetail_waypoints_page, null);
             view.setClickable(true);
