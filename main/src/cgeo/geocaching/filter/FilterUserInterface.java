@@ -57,6 +57,7 @@ public final class FilterUserInterface {
         register(R.string.caches_filter_origin, OriginFilter.Factory.class);
         register(R.string.caches_filter_distance, DistanceFilter.Factory.class);
         register(R.string.caches_filter_personal_note, PersonalNoteFilter.class);
+        register(R.string.caches_filter_popularity, PopularityFilter.Factory.class);
 
         // sort by localized names
         Collections.sort(registry, new Comparator<FactoryEntry>() {

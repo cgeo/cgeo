@@ -330,6 +330,7 @@
     <string name="caches_filter_origin">Origin</string>
     <string name="caches_filter_distance">Distance</string>
     <string name="caches_filter_personal_note">With personal note</string>
+    <string name="caches_filter_popularity">Popularity</string>
     <string name="caches_removing_from_history">Removing from History…</string>
     <string name="caches_clear_offlinelogs">Clear offline logs</string>
     <string name="caches_clear_offlinelogs_progress">Clearing offline logs</string>
@@ -1191,6 +1192,10 @@
     <plurals name="days_ago">
         <item quantity="one">yesterday</item>
         <item quantity="other">%d days ago</item>
+    </plurals>
+    <plurals name="favorite_points">
+        <item quantity="one">%s favorite</item>
+        <item quantity="other">%s favorites</item>
     </plurals>
 
 </resources>
