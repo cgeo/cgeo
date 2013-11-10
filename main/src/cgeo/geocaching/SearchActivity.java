@@ -110,7 +110,9 @@ public class SearchActivity extends AbstractActivity {
      *            Set to true if keyword search should be performed if query isn't GC or TB
      * @return true if a search was performed, else false
      */
-    private boolean instantSearch(final String query, final boolean keywordSearch) {
+    private boolean instantSearch(final String nonTrimmedQuery, final boolean keywordSearch) {
+        final String query = StringUtils.trim(nonTrimmedQuery);
+
         // first check if this was a scanned URL
         String geocode = ConnectorFactory.getGeocodeFromURL(query);
 
