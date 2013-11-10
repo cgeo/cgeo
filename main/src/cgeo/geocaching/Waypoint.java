@@ -4,6 +4,7 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import java.util.Comparator;
 import java.util.HashMap;
@@ -93,9 +94,16 @@ public class Waypoint implements IWaypoint {
             if (newPrefixes.containsKey(prefix)) {
                 newPrefixes.get(prefix).merge(oldWaypoint);
             } else if (oldWaypoint.isUserDefined() || forceMerge) {
-                newPoints.add(oldWaypoint);
+                // personal note waypoints should always be taken from the new list only
+                if (!isPersonalNoteWaypoint(oldWaypoint)) {
+                    newPoints.add(oldWaypoint);
+                }
             }
         }
+    }
+
+    private static boolean isPersonalNoteWaypoint(final @NonNull Waypoint waypoint) {
+        return StringUtils.startsWith(waypoint.getName(), CgeoApplication.getInstance().getString(R.string.cache_personal_note) + " ");
     }
 
     public boolean isUserDefined() {
