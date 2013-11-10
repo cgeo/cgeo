@@ -245,8 +245,8 @@
   <string name="caches_sort_difficulty">Schwierigkeit</string>
   <string name="caches_sort_terrain">Gelände</string>
   <string name="caches_sort_size">Größe</string>
-  <string name="caches_sort_favorites">Beliebtheit</string>
-  <string name="caches_sort_favorites_ratio">Beliebtheit [%]</string>
+  <string name="caches_sort_favorites">Favoriten</string>
+  <string name="caches_sort_favorites_ratio">Favoriten [%]</string>
   <string name="caches_sort_name">Name</string>
   <string name="caches_sort_geocode">Geo-Code</string>
   <string name="caches_sort_rating">Bewertung</string>
@@ -289,8 +289,8 @@
   <string name="caches_filter_modified">Mit geänderten Koordinaten</string>
   <string name="caches_filter_origin">Herkunft</string>
   <string name="caches_filter_distance">Entfernung</string>
-  <string name="caches_filter_popularity">Beliebtheit</string>
-  <string name="caches_filter_popularity_ratio">Beliebtheit [%]</string>
+  <string name="caches_filter_popularity">Favoriten</string>
+  <string name="caches_filter_popularity_ratio">Favoriten [%]</string>
   <string name="caches_removing_from_history">Lösche aus Verlauf…</string>
   <string name="caches_clear_offlinelogs">Offline-Logs löschen</string>
   <string name="caches_clear_offlinelogs_progress">Lösche Offline-Logs</string>
