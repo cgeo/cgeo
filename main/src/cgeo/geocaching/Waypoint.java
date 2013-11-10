@@ -5,11 +5,6 @@ import cgeo.geocaching.geopoint.Geopoint;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
-import android.widget.TextView;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,13 +28,6 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
     private int cachedOrder = ORDER_UNDEFINED;
     private boolean own = false;
     private boolean visited = false;
-    // preliminary default for mdpi screens
-    private static int VISITED_INSET = 7;
-
-    public static void initializeScale() {
-        // Calculate visited inset based on screen density
-        VISITED_INSET = (int) (6.6f * CgeoApplication.getInstance().getResources().getDisplayMetrics().density + 0.5f);
-    }
 
     /**
      * require name and type for every waypoint
@@ -62,22 +50,6 @@ public class Waypoint implements IWaypoint, Comparable<Waypoint> {
         merge(other);
         this.waypointType = other.waypointType;
         id = -1;
-    }
-
-    public void setIcon(final Resources res, final TextView nameView) {
-        Drawable icon;
-        if (visited) {
-            LayerDrawable ld = new LayerDrawable(new Drawable[] {
-                    res.getDrawable(waypointType.markerId),
-                    res.getDrawable(R.drawable.tick) });
-            ld.setLayerInset(0, 0, 0, VISITED_INSET, VISITED_INSET);
-            ld.setLayerInset(1, VISITED_INSET, VISITED_INSET, 0, 0);
-            icon = ld;
-        } else {
-            icon = res.getDrawable(waypointType.markerId);
-        }
-        final Drawable fIcon = icon;
-        nameView.setCompoundDrawablesWithIntrinsicBounds(fIcon, null, null, null);
     }
 
     public void merge(final Waypoint old) {

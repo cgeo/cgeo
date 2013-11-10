@@ -68,6 +68,7 @@ import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -1814,6 +1815,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     private class WaypointsViewCreator extends AbstractCachingPageViewCreator<ListView> {
+        private final int VISITED_INSET = (int) (6.6f * CgeoApplication.getInstance().getResources().getDisplayMetrics().density + 0.5f);
 
         @Override
         public ListView getDispatchedView() {
@@ -1864,19 +1866,25 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         protected void fillViewHolder(View rowView, final WaypointViewHolder holder, final Waypoint wpt) {
             // coordinates
+            final TextView coordinatesView = holder.coordinatesView;
             if (null != wpt.getCoords()) {
-                final TextView coordinatesView = holder.coordinatesView;
                 coordinatesView.setOnClickListener(new CoordinatesFormatSwitcher(wpt.getCoords()));
                 coordinatesView.setText(wpt.getCoords().toString());
                 coordinatesView.setVisibility(View.VISIBLE);
             }
+            else {
+                coordinatesView.setVisibility(View.GONE);
+            }
 
             // info
             final String waypointInfo = Formatter.formatWaypointInfo(wpt);
+            final TextView infoView = holder.infoView;
             if (StringUtils.isNotBlank(waypointInfo)) {
-                final TextView infoView = holder.infoView;
                 infoView.setText(waypointInfo);
                 infoView.setVisibility(View.VISIBLE);
+            }
+            else {
+                infoView.setVisibility(View.GONE);
             }
 
             // title
@@ -1888,7 +1896,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             } else {
                 nameView.setText(res.getString(R.string.waypoint));
             }
-            wpt.setIcon(res, nameView);
+            setWaypointIcon(res, nameView, wpt);
 
             // visited
             if (wpt.isVisited()) {
@@ -1901,8 +1909,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             // note
+            final TextView noteView = holder.noteView;
             if (StringUtils.isNotBlank(wpt.getNote())) {
-                final TextView noteView = holder.noteView;
                 noteView.setVisibility(View.VISIBLE);
                 if (TextUtils.containsHtml(wpt.getNote())) {
                     noteView.setText(Html.fromHtml(wpt.getNote()), TextView.BufferType.SPANNABLE);
@@ -1910,6 +1918,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 else {
                     noteView.setText(wpt.getNote());
                 }
+            }
+            else {
+                noteView.setVisibility(View.GONE);
             }
 
             final View wpNavView = holder.wpNavView;
@@ -1945,6 +1956,22 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     return true;
                 }
             });
+        }
+
+        private void setWaypointIcon(final Resources res, final TextView nameView, final Waypoint wpt) {
+            final WaypointType waypointType = wpt.getWaypointType();
+            final Drawable icon;
+            if (wpt.isVisited()) {
+                LayerDrawable ld = new LayerDrawable(new Drawable[] {
+                        res.getDrawable(waypointType.markerId),
+                        res.getDrawable(R.drawable.tick) });
+                ld.setLayerInset(0, 0, 0, VISITED_INSET, VISITED_INSET);
+                ld.setLayerInset(1, VISITED_INSET, VISITED_INSET, 0, 0);
+                icon = ld;
+            } else {
+                icon = res.getDrawable(waypointType.markerId);
+            }
+            nameView.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
         }
     }
 
