@@ -126,7 +126,17 @@ public class SearchActivity extends AbstractActivity {
         }
 
         // Check if the query is a TB code
-        final TrackableConnector trackableConnector = ConnectorFactory.getTrackableConnector(geocode);
+        TrackableConnector trackableConnector = ConnectorFactory.getTrackableConnector(geocode);
+
+        // check if the query contains a TB code
+        if (trackableConnector == ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR) {
+            final String tbCode = ConnectorFactory.getTrackableFromURL(query);
+            if (StringUtils.isNotBlank(tbCode)) {
+                trackableConnector = ConnectorFactory.getTrackableConnector(tbCode);
+                geocode = tbCode;
+            }
+        }
+
         if (trackableConnector != ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR) {
             final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
             trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, geocode.toUpperCase(Locale.US));

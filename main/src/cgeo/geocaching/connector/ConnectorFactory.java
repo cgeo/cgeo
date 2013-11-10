@@ -21,6 +21,7 @@ import cgeo.geocaching.connector.trackable.UnknownTrackableConnector;
 import cgeo.geocaching.geopoint.Viewport;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,7 @@ public final class ConnectorFactory {
             UNKNOWN_CONNECTOR // the unknown connector MUST be the last one
     };
 
-    public static final UnknownTrackableConnector UNKNOWN_TRACKABLE_CONNECTOR = new UnknownTrackableConnector();
+    @NonNull public static final UnknownTrackableConnector UNKNOWN_TRACKABLE_CONNECTOR = new UnknownTrackableConnector();
     private static final TrackableConnector[] TRACKABLE_CONNECTORS = new TrackableConnector[] {
             new GeokretyConnector(), // GK must be first, as it overlaps with the secret codes of travel bugs
             TravelBugConnector.getInstance(),
@@ -133,6 +134,7 @@ public final class ConnectorFactory {
         return getTrackableConnector(trackable.getGeocode());
     }
 
+    @NonNull
     public static TrackableConnector getTrackableConnector(String geocode) {
         for (final TrackableConnector connector : TRACKABLE_CONNECTORS) {
             if (connector.canHandleTrackable(geocode)) {
@@ -185,6 +187,19 @@ public final class ConnectorFactory {
 
     public static TrackableConnector[] getTrackableConnectors() {
         return TRACKABLE_CONNECTORS;
+    }
+
+    public static String getTrackableFromURL(final String url) {
+        if (url == null) {
+            return null;
+        }
+        for (final TrackableConnector connector : TRACKABLE_CONNECTORS) {
+            final String geocode = connector.getTrackableCodeFromUrl(url);
+            if (StringUtils.isNotBlank(geocode)) {
+                return geocode;
+            }
+        }
+        return null;
     }
 
 }

@@ -3,6 +3,9 @@ package cgeo.geocaching.connector.trackable;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.gc.GCParser;
 
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.regex.Pattern;
 
 public class TravelBugConnector extends AbstractTrackableConnector {
@@ -47,4 +50,8 @@ public class TravelBugConnector extends AbstractTrackableConnector {
         return Holder.INSTANCE;
     }
 
+    @Override
+    public String getTrackableCodeFromUrl(@NonNull String url) {
+        return StringUtils.substringAfterLast(url, "?tracker=");
+    }
 }
