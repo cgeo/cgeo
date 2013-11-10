@@ -480,7 +480,7 @@
     <string name="init_backup_last">Available backup from</string>
     <string name="init_backup_last_no">There is no file with a backup.</string>
     <string name="settings_info_offline_maps_title">Info on Offline Maps</string>
-    <string name="settings_info_offline_maps">c:geo supports maps for offline use. You can download maps from Mapsforge or even create your own maps from OSM data. You need to select the offline map directory first to to get offline map support.</string>
+    <string name="settings_info_offline_maps">c:geo supports maps for offline use. You can download maps from Mapsforge or even create your own maps from OSM data. You need to select the offline map directory first to get offline map support.</string>
     <string name="settings_info_themes_title">Info on Map Themes</string>
     <string name="settings_info_themes">c:geo supports custom themes for offline maps. These can be used to change the color style of the map (e.g. to have a nightview map) or to highlight certain objects like cycle paths or height lines within the map.</string>
     <string name="init_mapsource_select">Select Map Source</string>
