@@ -202,6 +202,8 @@
   <string name="warn_deprecated_mapfile">Es wird eine veraltete Offline-Karte v0.2.4 verwendet.\nBitte zukünftig Offline-Karten in der Version 0.3.0 verwenden.\nDer Support für die alte Version wird im nächsten Release eingestellt.</string>
   <string name="warn_nonexistant_mapfile">Die gewählte Datei existiert nicht.\nOffline Karte ist nicht verfügbar.</string>
   <string name="warn_rendertheme_missing">Das gewählte Karten-Theme wurde nicht gefunden.</string>
+  <string name="warn_pocket_query_select">Kein Pocket Query ausgewählt.</string>
+  <string name="warn_no_pocket_query_found">Kein Pocket Query online gefunden.</string>
   <string name="info_log_posted">Log erfolgreich gesendet.</string>
   <string name="info_log_saved">Log erfolgreich gespeichert.</string>
   <string name="info_log_cleared">Log wurde geleert.</string>
@@ -745,6 +747,9 @@
   <string name="search_address_started">Suche nach Orten</string>
   <string name="search_address_result">Gefundene Orte</string>
   <string name="search_own_caches">Meine Caches suchen</string>
+  <string name="search_pocket_title">Pocket Query</string>
+  <string name="search_pocket_loading">Lade Liste der Pocket Queries</string>
+  <string name="search_pocket_select">Pocket Query wählen</string>
   <string name="trackable">Trackable</string>
   <string name="trackable_details_loading">Lade Details des Trackable…</string>
   <string name="trackable_log_touch">Logge Fund</string>
