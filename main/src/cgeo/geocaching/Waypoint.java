@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 
@@ -265,4 +266,24 @@ public class Waypoint implements IWaypoint {
             return left.order() - right.order();
         }
     };
+
+    /**
+     * Delegates the creation of the waypoint-id for gpx-export to the waypoint
+     * 
+     * @param prefix
+     * @return
+     */
+    public String getGpxId(String prefix) {
+
+        String gpxId = prefix;
+
+        if (StringUtils.isNotBlank(geocode)) {
+            Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+            if (cache != null) {
+                gpxId = cache.getWaypointGpxId(prefix);
+            }
+        }
+
+        return gpxId;
+    }
 }

@@ -335,4 +335,13 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     public boolean isLoggedIn() {
         return Login.isActualLoginStatus();
     }
+
+    @Override
+    public String getWaypointGpxId(String prefix, String geocode) {
+        String gpxId = prefix;
+        if (StringUtils.isNotBlank(geocode) && geocode.length() > 2) {
+            gpxId += geocode.substring(2);
+        }
+        return gpxId;
+    }
 }

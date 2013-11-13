@@ -188,4 +188,10 @@ public abstract class AbstractConnector implements IConnector {
         }
         return logTypes;
     }
+
+    @Override
+    public String getWaypointGpxId(String prefix, String geocode) {
+        // Default: just return the prefix
+        return prefix;
+    }
 }

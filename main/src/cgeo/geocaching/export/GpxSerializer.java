@@ -33,6 +33,7 @@ public final class GpxSerializer {
     public static final String PREFIX_XSI = "http://www.w3.org/2001/XMLSchema-instance";
     public static final String PREFIX_GPX = "http://www.topografix.com/GPX/1/0";
     public static final String PREFIX_GROUNDSPEAK = "http://www.groundspeak.com/cache/1/0";
+    public static final String PREFIX_GSAK = "http://www.gsak.net/xmlv1/4";
 
     /**
      * During the export, only this number of geocaches is fully loaded into memory.
@@ -193,11 +194,17 @@ public final class GpxSerializer {
             gpx.attribute("", "lat", Double.toString(coords.getLatitude()));
             gpx.attribute("", "lon", Double.toString(coords.getLongitude()));
             XmlUtils.multipleTexts(gpx, PREFIX_GPX,
-                    "name", prefix + wp.getGeocode().substring(2),
+                    "name", wp.getGpxId(prefix),
                     "cmt", wp.getNote(),
                     "desc", wp.getName(),
                     "sym", wp.getWaypointType().toString(), //TODO: Correct identifier string
                     "type", "Waypoint|" + wp.getWaypointType().toString()); //TODO: Correct identifier string
+            // add parent reference the GSAK-way
+            gpx.startTag(PREFIX_GSAK, "wptExtension");
+            gpx.startTag(PREFIX_GSAK, "Parent");
+            gpx.text(wp.getGeocode());
+            gpx.endTag(PREFIX_GSAK, "Parent");
+            gpx.endTag(PREFIX_GSAK, "wptExtension");
             gpx.endTag(PREFIX_GPX, "wpt");
         }
     }
