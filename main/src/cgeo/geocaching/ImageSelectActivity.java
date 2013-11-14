@@ -15,7 +15,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -285,9 +284,9 @@ public class ImageSelectActivity extends AbstractActivity {
             return;
         }
 
-        BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-        bitmapOptions.inSampleSize = 8;
-        final Bitmap bitmap = BitmapFactory.decodeFile(imageUri.getPath(), bitmapOptions);
+        final Bitmap bitmap = ImageUtils.readAndScaleImageToFitDisplay(imageUri.getPath());
+        int heigth = bitmap.getHeight();
+        int width = bitmap.getWidth();
         imagePreview.setImageBitmap(bitmap);
         imagePreview.setVisibility(View.VISIBLE);
     }
