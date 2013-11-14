@@ -64,12 +64,14 @@ public final class GpxSerializer {
         gpx.setPrefix("", PREFIX_GPX);
         gpx.setPrefix("xsi", PREFIX_XSI);
         gpx.setPrefix("groundspeak", PREFIX_GROUNDSPEAK);
+        gpx.setPrefix("gsak", PREFIX_GSAK);
         gpx.startTag(PREFIX_GPX, "gpx");
         gpx.attribute("", "version", "1.0");
         gpx.attribute("", "creator", "c:geo - http://www.cgeo.org/");
         gpx.attribute(PREFIX_XSI, "schemaLocation",
                 PREFIX_GPX + " http://www.topografix.com/GPX/1/0/gpx.xsd " +
-                        PREFIX_GROUNDSPEAK + " http://www.groundspeak.com/cache/1/0/1/cache.xsd");
+                        PREFIX_GROUNDSPEAK + " http://www.groundspeak.com/cache/1/0/1/cache.xsd" +
+                        PREFIX_GSAK + " http://www.gsak.net/xmlv1/4/gsak.xsd");
 
         // Split the overall set of geocodes into small chunks. That is a compromise between memory efficiency (because
         // we don't load all caches fully into memory) and speed (because we don't query each cache separately).
