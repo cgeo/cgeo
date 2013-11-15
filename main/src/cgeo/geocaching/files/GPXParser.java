@@ -70,6 +70,7 @@ public abstract class GPXParser extends FileParser {
      * supported GSAK extension of the GPX format
      */
     private static final String[] GSAK_NS = new String[] {
+            "http://www.gsak.net/xmlv1/4",
             "http://www.gsak.net/xmlv1/5",
             "http://www.gsak.net/xmlv1/6"
     };
@@ -90,6 +91,7 @@ public abstract class GPXParser extends FileParser {
     private String cmt = null;
     private String desc = null;
     protected final String[] userData = new String[5]; // take 5 cells, that makes indexing 1..4 easier
+    private String parentCacheCode = null;
 
     /**
      * Parser result. Maps geocode to cache.
@@ -329,13 +331,15 @@ public abstract class GPXParser extends FileParser {
                 fixCache(cache);
 
                 if (cache.getName().length() > 2) {
-                    final String cacheGeocodeForWaypoint = "GC" + cache.getName().substring(2).toUpperCase(Locale.US);
+                    if (StringUtils.isBlank(parentCacheCode)) {
+                        parentCacheCode = "GC" + cache.getName().substring(2).toUpperCase(Locale.US);
+                    }
                     // lookup cache for waypoint in already parsed caches
-                    final Geocache cacheForWaypoint = DataStore.loadCache(cacheGeocodeForWaypoint, LoadFlags.LOAD_CACHE_OR_DB);
+                    final Geocache cacheForWaypoint = DataStore.loadCache(parentCacheCode, LoadFlags.LOAD_CACHE_OR_DB);
                     if (cacheForWaypoint != null) {
                         final Waypoint waypoint = new Waypoint(cache.getShortDescription(), convertWaypointSym2Type(sym), false);
                         waypoint.setId(-1);
-                        waypoint.setGeocode(cacheGeocodeForWaypoint);
+                        waypoint.setGeocode(parentCacheCode);
                         waypoint.setPrefix(cache.getName().substring(0, 2));
                         waypoint.setLookup("---");
                         // there is no lookup code in gpx file
@@ -480,6 +484,14 @@ public abstract class GPXParser extends FileParser {
             for (int i = 2; i <= 4; i++) {
                 gsak.getChild(gsakNamespace, "User" + i).setEndTextElementListener(new UserDataListener(i));
             }
+
+            gsak.getChild(gsakNamespace, "Parent").setEndTextElementListener(new EndTextElementListener() {
+
+                @Override
+                public void end(String body) {
+                    parentCacheCode = body;
+                }
+            });
         }
 
         // 3 different versions of the GC schema
@@ -869,6 +881,7 @@ public abstract class GPXParser extends FileParser {
         name = null;
         desc = null;
         cmt = null;
+        parentCacheCode = null;
 
         cache = new Geocache(this);
 
