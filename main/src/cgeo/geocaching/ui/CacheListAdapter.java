@@ -427,26 +427,33 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         if (cache.getDistance() != null) {
             holder.distance.setDistance(cache.getDistance());
         }
-        if (cache.getCoords() != null) {
-            holder.direction.setVisibility(View.VISIBLE);
-            holder.dirImg.setVisibility(View.GONE);
-            holder.direction.updateAzimuth(azimuth);
-            if (coords != null) {
-                holder.distance.update(coords);
-                holder.direction.updateCurrentCoords(coords);
+
+        if (cache.getCoords() != null && coords != null) {
+            holder.distance.update(coords);
+        }
+
+        // only show the direction if this is enabled in the settings
+        if (Settings.isLiveList()) {
+            if (cache.getCoords() != null) {
+                holder.direction.setVisibility(View.VISIBLE);
+                holder.dirImg.setVisibility(View.GONE);
+                holder.direction.updateAzimuth(azimuth);
+                if (coords != null) {
+                    holder.direction.updateCurrentCoords(coords);
+                }
+            } else if (cache.getDirection() != null) {
+                holder.direction.setVisibility(View.VISIBLE);
+                holder.dirImg.setVisibility(View.GONE);
+                holder.direction.updateAzimuth(azimuth);
+                holder.direction.updateHeading(cache.getDirection());
+            } else if (StringUtils.isNotBlank(cache.getDirectionImg())) {
+                holder.dirImg.setImageDrawable(DirectionImage.getDrawable(cache.getDirectionImg()));
+                holder.dirImg.setVisibility(View.VISIBLE);
+                holder.direction.setVisibility(View.GONE);
+            } else {
+                holder.dirImg.setVisibility(View.GONE);
+                holder.direction.setVisibility(View.GONE);
             }
-        } else if (cache.getDirection() != null) {
-            holder.direction.setVisibility(View.VISIBLE);
-            holder.dirImg.setVisibility(View.GONE);
-            holder.direction.updateAzimuth(azimuth);
-            holder.direction.updateHeading(cache.getDirection());
-        } else if (StringUtils.isNotBlank(cache.getDirectionImg())) {
-            holder.dirImg.setImageDrawable(DirectionImage.getDrawable(cache.getDirectionImg()));
-            holder.dirImg.setVisibility(View.VISIBLE);
-            holder.direction.setVisibility(View.GONE);
-        } else {
-            holder.dirImg.setVisibility(View.GONE);
-            holder.direction.setVisibility(View.GONE);
         }
 
         holder.favorite.setText(Integer.toString(cache.getFavoritePoints()));
