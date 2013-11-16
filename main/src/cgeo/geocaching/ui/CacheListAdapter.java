@@ -60,6 +60,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     private boolean selectMode = false;
     private IFilter currentFilter = null;
     private List<Geocache> originalList = null;
+    private boolean isLiveList = Settings.isLiveList();
 
     final private Set<CompassMiniView> compasses = new LinkedHashSet<CompassMiniView>();
     final private Set<DistanceView> distances = new LinkedHashSet<DistanceView>();
@@ -433,7 +434,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         }
 
         // only show the direction if this is enabled in the settings
-        if (Settings.isLiveList()) {
+        if (isLiveList) {
             if (cache.getCoords() != null) {
                 holder.direction.setVisibility(View.VISIBLE);
                 holder.dirImg.setVisibility(View.GONE);
