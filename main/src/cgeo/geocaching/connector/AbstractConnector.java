@@ -194,4 +194,10 @@ public abstract class AbstractConnector implements IConnector {
         // Default: just return the prefix
         return prefix;
     }
+
+    @Override
+    public String getWaypointPrefix(String name) {
+        // Default: just return the name
+        return name;
+    }
 }

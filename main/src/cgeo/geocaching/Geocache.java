@@ -1775,4 +1775,8 @@ public class Geocache implements ICache, IWaypoint {
     public String getWaypointGpxId(String prefix) {
         return getConnector().getWaypointGpxId(prefix, geocode);
     }
+
+    public String getWaypointPrefix(String name) {
+        return getConnector().getWaypointPrefix(name);
+    }
 }

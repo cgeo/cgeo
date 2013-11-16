@@ -330,7 +330,7 @@ public abstract class GPXParser extends FileParser {
             private void addWaypointToCache() {
                 fixCache(cache);
 
-                if (cache.getName().length() > 2) {
+                if (cache.getName().length() > 2 || StringUtils.isNotBlank(parentCacheCode)) {
                     if (StringUtils.isBlank(parentCacheCode)) {
                         parentCacheCode = "GC" + cache.getName().substring(2).toUpperCase(Locale.US);
                     }
@@ -340,7 +340,7 @@ public abstract class GPXParser extends FileParser {
                         final Waypoint waypoint = new Waypoint(cache.getShortDescription(), convertWaypointSym2Type(sym), false);
                         waypoint.setId(-1);
                         waypoint.setGeocode(parentCacheCode);
-                        waypoint.setPrefix(cache.getName().substring(0, 2));
+                        waypoint.setPrefix(cacheForWaypoint.getWaypointPrefix(cache.getName()));
                         waypoint.setLookup("---");
                         // there is no lookup code in gpx file
                         waypoint.setCoords(cache.getCoords());
