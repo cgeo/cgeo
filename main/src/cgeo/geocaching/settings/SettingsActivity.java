@@ -93,9 +93,13 @@ public class SettingsActivity extends PreferenceActivity {
         if (gotoPage == INTENT_GOTO_SERVICES) {
             // start with services screen
             PreferenceScreen main = (PreferenceScreen) getPreference(R.string.pref_fakekey_main_screen);
-            if (main != null) {
-                int index = getPreference(R.string.pref_fakekey_services_screen).getOrder();
-                main.onItemClick(null, null, index, 0);
+            try {
+                if (main != null) {
+                    int index = getPreference(R.string.pref_fakekey_services_screen).getOrder();
+                    main.onItemClick(null, null, index, 0);
+                }
+            } catch (RuntimeException e) {
+                Log.e("could not open services preferences", e);
             }
         }
     }
