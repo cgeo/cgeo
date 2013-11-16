@@ -153,29 +153,35 @@ public final class GpxSerializer {
         final List<Waypoint> waypoints = cache.getWaypoints();
         final List<Waypoint> ownWaypoints = new ArrayList<Waypoint>(waypoints.size());
         final List<Waypoint> originWaypoints = new ArrayList<Waypoint>(waypoints.size());
+        int maxPrefix = 0;
         for (final Waypoint wp : cache.getWaypoints()) {
+
+            // Retrieve numerical prefixes to have a basis for assigning prefixes to own waypoints
+            final String prefix = wp.getPrefix();
+            if (StringUtils.isNotBlank(prefix)) {
+                try {
+                    final int numericPrefix = Integer.parseInt(prefix);
+                    maxPrefix = Math.max(numericPrefix, maxPrefix);
+                } catch (final NumberFormatException ex) {
+                    // ignore non numeric prefix, as it should be unique in the list of non-own waypoints already
+                }
+            }
             if (wp.isUserDefined()) {
                 ownWaypoints.add(wp);
             } else {
                 originWaypoints.add(wp);
             }
         }
-        int maxPrefix = 0;
         for (final Waypoint wp : originWaypoints) {
-            final String prefix = wp.getPrefix();
-            try {
-                final int numericPrefix = Integer.parseInt(prefix);
-                maxPrefix = Math.max(numericPrefix, maxPrefix);
-            } catch (final NumberFormatException ex) {
-                // ignore non numeric prefix, as it should be unique in the list of non-own waypoints already
-            }
-            writeCacheWaypoint(wp, prefix);
+            writeCacheWaypoint(wp);
         }
-        // Prefixes must be unique. There use numeric strings as prefixes in OWN waypoints
+        // Prefixes must be unique. There use numeric strings as prefixes in OWN waypoints where they are missing
         for (final Waypoint wp : ownWaypoints) {
-            maxPrefix++;
-            final String prefix = StringUtils.leftPad(String.valueOf(maxPrefix), 2, '0');
-            writeCacheWaypoint(wp, prefix);
+            if (StringUtils.isBlank(wp.getPrefix()) || StringUtils.equalsIgnoreCase("OWN", wp.getPrefix())) {
+                maxPrefix++;
+                wp.setPrefix(StringUtils.leftPad(String.valueOf(maxPrefix), 2, '0'));
+            }
+            writeCacheWaypoint(wp);
         }
     }
 
@@ -188,7 +194,7 @@ public final class GpxSerializer {
      * @param prefix
      * @throws IOException
      */
-    private void writeCacheWaypoint(final Waypoint wp, final String prefix) throws IOException {
+    private void writeCacheWaypoint(final Waypoint wp) throws IOException {
         final Geopoint coords = wp.getCoords();
         // TODO: create some extension to GPX to include waypoint without coords
         if (coords != null) {
@@ -196,7 +202,7 @@ public final class GpxSerializer {
             gpx.attribute("", "lat", Double.toString(coords.getLatitude()));
             gpx.attribute("", "lon", Double.toString(coords.getLongitude()));
             XmlUtils.multipleTexts(gpx, PREFIX_GPX,
-                    "name", wp.getGpxId(prefix),
+                    "name", wp.getGpxId(),
                     "cmt", wp.getNote(),
                     "desc", wp.getName(),
                     "sym", wp.getWaypointType().toString(), //TODO: Correct identifier string

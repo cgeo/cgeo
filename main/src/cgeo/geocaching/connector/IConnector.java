@@ -224,9 +224,17 @@ public interface IConnector {
     /**
      * Get the gpx id for a waypoint when exporting. For some connectors there is an inherent name logic,
      * for others its just the 'prefix'
-     * 
+     *
      * @param prefix
      * @return
      */
     public String getWaypointGpxId(String prefix, String geocode);
+
+    /**
+     * Get the 'prefix' (key) for a waypoint from the 'name' in the gpx file
+     * 
+     * @param name
+     * @return
+     */
+    public String getWaypointPrefix(String name);
 }

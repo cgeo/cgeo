@@ -344,4 +344,13 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         }
         return gpxId;
     }
+
+    @Override
+    public String getWaypointPrefix(String name) {
+        String prefix = name;
+        if (StringUtils.isNotBlank(prefix) && prefix.length() >= 2) {
+            prefix = name.substring(0, 2);
+        }
+        return prefix;
+    }
 }
