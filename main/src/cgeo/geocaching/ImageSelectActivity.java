@@ -285,8 +285,6 @@ public class ImageSelectActivity extends AbstractActivity {
         }
 
         final Bitmap bitmap = ImageUtils.readAndScaleImageToFitDisplay(imageUri.getPath());
-        int heigth = bitmap.getHeight();
-        int width = bitmap.getWidth();
         imagePreview.setImageBitmap(bitmap);
         imagePreview.setVisibility(View.VISIBLE);
     }
