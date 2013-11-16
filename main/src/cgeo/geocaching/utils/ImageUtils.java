@@ -53,6 +53,9 @@ public final class ImageUtils {
         final int maxWidth = displaySize.x - 25;
         final int maxHeight = displaySize.y - 25;
         final Bitmap image = readDownsampledImage(filename, maxWidth, maxHeight);
+        if (image == null) {
+            return null;
+        }
         final BitmapDrawable scaledImage = scaleBitmapTo(image, maxWidth, maxHeight);
         return scaledImage.getBitmap();
     }
@@ -122,6 +125,9 @@ public final class ImageUtils {
             return filePath;
         }
         Bitmap image = readDownsampledImage(filePath, maxXY, maxXY);
+        if (image == null) {
+            return null;
+        }
         final BitmapDrawable scaledImage = scaleBitmapTo(image, maxXY, maxXY);
         final File tempImageFile = ImageUtils.getOutputImageFile();
         if (tempImageFile == null) {
@@ -152,15 +158,12 @@ public final class ImageUtils {
         final int myMaxXY = Math.max(sizeOnlyOptions.outHeight, sizeOnlyOptions.outWidth);
         final int maxXY = Math.max(maxX, maxY);
         final int sampleSize = myMaxXY / maxXY;
-        Bitmap image;
         if (sampleSize > 1) {
             BitmapFactory.Options sampleOptions = new BitmapFactory.Options();
             sampleOptions.inSampleSize = sampleSize;
-            image = BitmapFactory.decodeFile(filePath, sampleOptions);
-        } else {
-            image = BitmapFactory.decodeFile(filePath);
+            return BitmapFactory.decodeFile(filePath, sampleOptions);
         }
-        return image;
+        return BitmapFactory.decodeFile(filePath);
     }
 
     /** Create a File for saving an image or video
