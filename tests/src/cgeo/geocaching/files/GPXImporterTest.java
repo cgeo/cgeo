@@ -100,7 +100,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         assertCacheProperties(cache);
 
-        assertEquals("Incorrect number of waypoints imported", 3, cache.getWaypoints().size());
+        assertEquals("Incorrect number of waypoints imported", 4, cache.getWaypoints().size());
     }
 
     private void runImportThread(GPXImporter.ImportThread importThread) {

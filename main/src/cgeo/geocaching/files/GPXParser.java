@@ -74,6 +74,10 @@ public abstract class GPXParser extends FileParser {
             "http://www.gsak.net/xmlv1/5",
             "http://www.gsak.net/xmlv1/6"
     };
+    /**
+     * c:geo extensions of the gpx format
+     */
+    private static final String CGEO_NS = "http://www.cgeo.org/wptext/1/0";
 
     private static final Pattern PATTERN_MILLISECONDS = Pattern.compile("\\.\\d{3,7}");
 
@@ -92,6 +96,8 @@ public abstract class GPXParser extends FileParser {
     private String desc = null;
     protected final String[] userData = new String[5]; // take 5 cells, that makes indexing 1..4 easier
     private String parentCacheCode = null;
+    private boolean wptVisited = false;
+    private boolean wptUserDefined = false;
 
     /**
      * Parser result. Maps geocode to cache.
@@ -338,6 +344,9 @@ public abstract class GPXParser extends FileParser {
                     final Geocache cacheForWaypoint = DataStore.loadCache(parentCacheCode, LoadFlags.LOAD_CACHE_OR_DB);
                     if (cacheForWaypoint != null) {
                         final Waypoint waypoint = new Waypoint(cache.getShortDescription(), convertWaypointSym2Type(sym), false);
+                        if (wptUserDefined) {
+                            waypoint.setUserDefined();
+                        }
                         waypoint.setId(-1);
                         waypoint.setGeocode(parentCacheCode);
                         waypoint.setPrefix(cacheForWaypoint.getWaypointPrefix(cache.getName()));
@@ -345,7 +354,7 @@ public abstract class GPXParser extends FileParser {
                         // there is no lookup code in gpx file
                         waypoint.setCoords(cache.getCoords());
                         waypoint.setNote(cache.getDescription());
-
+                        waypoint.setVisited(wptVisited);
                         final ArrayList<Waypoint> mergedWayPoints = new ArrayList<Waypoint>();
                         mergedWayPoints.addAll(cacheForWaypoint.getWaypoints());
 
@@ -493,6 +502,27 @@ public abstract class GPXParser extends FileParser {
                 }
             });
         }
+
+        // c:geo extensions
+        final Element cgeoVisited = cacheParent.getChild(CGEO_NS, "visited");
+
+        cgeoVisited.setEndTextElementListener(new EndTextElementListener() {
+
+            @Override
+            public void end(String visited) {
+                wptVisited = Boolean.valueOf(visited.trim());
+            }
+        });
+
+        final Element cgeoUserDefined = cacheParent.getChild(CGEO_NS, "userdefined");
+
+        cgeoUserDefined.setEndTextElementListener(new EndTextElementListener() {
+
+            @Override
+            public void end(String userDefined) {
+                wptUserDefined = Boolean.valueOf(userDefined.trim());
+            }
+        });
 
         // 3 different versions of the GC schema
         for (final String nsGC : GROUNDSPEAK_NAMESPACE) {
@@ -882,6 +912,8 @@ public abstract class GPXParser extends FileParser {
         desc = null;
         cmt = null;
         parentCacheCode = null;
+        wptVisited = false;
+        wptUserDefined = false;
 
         cache = new Geocache(this);
 

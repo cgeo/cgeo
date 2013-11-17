@@ -34,6 +34,7 @@ public final class GpxSerializer {
     public static final String PREFIX_GPX = "http://www.topografix.com/GPX/1/0";
     public static final String PREFIX_GROUNDSPEAK = "http://www.groundspeak.com/cache/1/0";
     public static final String PREFIX_GSAK = "http://www.gsak.net/xmlv1/4";
+    public static final String PREFIX_CGEO = "http://www.cgeo.org/wptext/1/0";
 
     /**
      * During the export, only this number of geocaches is fully loaded into memory.
@@ -65,12 +66,13 @@ public final class GpxSerializer {
         gpx.setPrefix("xsi", PREFIX_XSI);
         gpx.setPrefix("groundspeak", PREFIX_GROUNDSPEAK);
         gpx.setPrefix("gsak", PREFIX_GSAK);
+        gpx.setPrefix("cgeo", PREFIX_CGEO);
         gpx.startTag(PREFIX_GPX, "gpx");
         gpx.attribute("", "version", "1.0");
         gpx.attribute("", "creator", "c:geo - http://www.cgeo.org/");
         gpx.attribute(PREFIX_XSI, "schemaLocation",
                 PREFIX_GPX + " http://www.topografix.com/GPX/1/0/gpx.xsd " +
-                        PREFIX_GROUNDSPEAK + " http://www.groundspeak.com/cache/1/0/1/cache.xsd" +
+                        PREFIX_GROUNDSPEAK + " http://www.groundspeak.com/cache/1/0/1/cache.xsd " +
                         PREFIX_GSAK + " http://www.gsak.net/xmlv1/4/gsak.xsd");
 
         // Split the overall set of geocodes into small chunks. That is a compromise between memory efficiency (because
@@ -213,6 +215,16 @@ public final class GpxSerializer {
             gpx.text(wp.getGeocode());
             gpx.endTag(PREFIX_GSAK, "Parent");
             gpx.endTag(PREFIX_GSAK, "wptExtension");
+            if (wp.isVisited()) {
+                gpx.startTag(PREFIX_CGEO, "visited");
+                gpx.text("true");
+                gpx.endTag(PREFIX_CGEO, "visitied");
+            }
+            if (wp.isUserDefined()) {
+                gpx.startTag(PREFIX_CGEO, "userdefined");
+                gpx.text("true");
+                gpx.endTag(PREFIX_CGEO, "userdefined");
+            }
             gpx.endTag(PREFIX_GPX, "wpt");
         }
     }

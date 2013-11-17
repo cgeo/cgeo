@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.0" creator="Opencaching.de - http://www.opencaching.de" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd" xmlns="http://www.topografix.com/GPX/1/0">
+<gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cgeo="http://www.cgeo.org/wptext/1/0" version="1.0" creator="Opencaching.de - http://www.opencaching.de" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd" xmlns="http://www.topografix.com/GPX/1/0">
   <name>Cache listing generated from Opencaching.de</name>
   <desc>This is a waypoint file generated from Opencaching.de</desc>
   <author>Opencaching.de</author>
@@ -118,5 +118,16 @@ Viel Spaß!&lt;p&gt;&lt;em&gt;© &lt;a href='http://www.opencaching.de/viewprofi
     <gsak:wptExtension xmlns:gsak="http://www.gsak.net/xmlv1/4">
       <gsak:Parent>OCDDD2</gsak:Parent>
     </gsak:wptExtension>
+  </wpt>
+  <wpt lat="48.885" lon="9.174999999999999">
+    <name>01</name>
+    <cmt>Ttt</cmt>
+    <desc>Wegpunkt 4</desc>
+    <sym>Question to Answer</sym>
+    <type>Waypoint|Question to Answer</type>
+    <gsak:wptExtension xmlns:gsak="http://www.gsak.net/xmlv1/4">
+      <gsak:Parent>OCDDD2</gsak:Parent>
+    </gsak:wptExtension>
+    <cgeo:userdefined>true</cgeo:userdefined>
   </wpt>
 </gpx>
