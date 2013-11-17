@@ -806,6 +806,8 @@
   <string name="helper_barcode_description">Es gibt GreaseMonkey-Scripte und Webseiten, die Geocodes als Strichcode darstellen können. Bei Verwendung dieser Skripte kann c:geo über diese App den Geocode eines Caches direkt vom Bildschirm des Computers ablesen.</string>
   <string name="helper_pocketquery_title">Pocket Query Creator</string>
   <string name="helper_pocketquery_description">Ermöglicht das einfache Erzeugen und Herunterladen von Pocket Queries basierend auf der aktuellen Position oder einem auf der Karte gewählten Punkt. Setzt eine Premiummitgliedschaft bei geocaching.com voraus.</string>
+  <string name="helper_google_translate_title">Google Übersetzer</string>
+  <string name="helper_google_translate_description">Wenn man Sprachpakete in der Übersetzer-App herunterlädt, kann man Cachebeschreibungen durch langen Klick darauf auch offline übersetzen.</string>
   <string name="addon_missing_title">Add-On fehlt</string>
   <string name="addon_download_prompt">Jetzt im Google Play Store herunterladen</string>
   <string name="export">Exportieren</string>
