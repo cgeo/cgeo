@@ -22,7 +22,15 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
     public static void testWriteEmptyGPX() throws Exception {
         final StringWriter writer = new StringWriter();
         new GpxSerializer().writeGPX(Collections.<String> emptyList(), writer, null);
-        assertEquals("<?xml version='1.0' encoding='UTF-8' standalone='yes' ?><gpx version=\"1.0\" creator=\"c:geo - http://www.cgeo.org/\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.groundspeak.com/cache/1/0 http://www.groundspeak.com/cache/1/0/1/cache.xsd\" xmlns=\"http://www.topografix.com/GPX/1/0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:groundspeak=\"http://www.groundspeak.com/cache/1/0\" />", writer.getBuffer().toString());
+        assertEquals("<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>" +
+                "<gpx version=\"1.0\" creator=\"c:geo - http://www.cgeo.org/\" " +
+                "xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd " +
+                "http://www.groundspeak.com/cache/1/0 http://www.groundspeak.com/cache/1/0/1/cache.xsd " +
+                "http://www.gsak.net/xmlv1/4 http://www.gsak.net/xmlv1/4/gsak.xsd\" " +
+                "xmlns=\"http://www.topografix.com/GPX/1/0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
+                "xmlns:groundspeak=\"http://www.groundspeak.com/cache/1/0\" xmlns:gsak=\"http://www.gsak.net/xmlv1/4\" " +
+                "xmlns:cgeo=\"http://www.cgeo.org/wptext/1/0\" />",
+                writer.getBuffer().toString());
     }
 
     public void testProgressReporting() throws IOException, ParserException {

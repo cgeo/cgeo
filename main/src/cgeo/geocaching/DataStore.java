@@ -1107,7 +1107,7 @@ public class DataStore {
 
         try {
             saveAttributesWithoutTransaction(cache);
-            saveOriginalWaypointsWithoutTransaction(cache);
+            saveWaypointsWithoutTransaction(cache);
             saveSpoilersWithoutTransaction(cache);
             saveLogsWithoutTransaction(cache.getGeocode(), cache.getLogs());
             saveLogCountsWithoutTransaction(cache);
@@ -1175,7 +1175,7 @@ public class DataStore {
         database.beginTransaction();
 
         try {
-            saveOriginalWaypointsWithoutTransaction(cache);
+            saveWaypointsWithoutTransaction(cache);
             database.setTransactionSuccessful();
             return true;
         } catch (Exception e) {
@@ -1186,7 +1186,7 @@ public class DataStore {
         return false;
     }
 
-    private static void saveOriginalWaypointsWithoutTransaction(final Geocache cache) {
+    private static void saveWaypointsWithoutTransaction(final Geocache cache) {
         String geocode = cache.getGeocode();
 
         List<Waypoint> waypoints = cache.getWaypoints();
@@ -1195,10 +1195,6 @@ public class DataStore {
             ContentValues values = new ContentValues();
             long timeStamp = System.currentTimeMillis();
             for (Waypoint oneWaypoint : waypoints) {
-                if (oneWaypoint.isUserDefined()) {
-                    currentWaypointIds.add(Integer.toString(oneWaypoint.getId()));
-                    continue;
-                }
 
                 values.clear();
                 values.put("geocode", geocode);
@@ -1227,7 +1223,7 @@ public class DataStore {
 
     /**
      * remove all waypoints of the given cache, where the id is not in the given list
-     * 
+     *
      * @param cache
      * @param remainingWaypointIds
      *            ids of waypoints which shall not be deleted
@@ -1239,7 +1235,7 @@ public class DataStore {
 
     /**
      * Save coordinates into a ContentValues
-     * 
+     *
      * @param values
      *            a ContentValues to save coordinates in
      * @param oneWaypoint

@@ -445,6 +445,7 @@ final class OkapiClient {
                 if (result == null) {
                     result = new ArrayList<Waypoint>();
                 }
+                wpt.setPrefix(wpt.getName());
                 result.add(wpt);
             } catch (final JSONException e) {
                 Log.e("OkapiClient.parseWaypoints", e);

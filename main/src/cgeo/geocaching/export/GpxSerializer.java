@@ -33,6 +33,8 @@ public final class GpxSerializer {
     public static final String PREFIX_XSI = "http://www.w3.org/2001/XMLSchema-instance";
     public static final String PREFIX_GPX = "http://www.topografix.com/GPX/1/0";
     public static final String PREFIX_GROUNDSPEAK = "http://www.groundspeak.com/cache/1/0";
+    public static final String PREFIX_GSAK = "http://www.gsak.net/xmlv1/4";
+    public static final String PREFIX_CGEO = "http://www.cgeo.org/wptext/1/0";
 
     /**
      * During the export, only this number of geocaches is fully loaded into memory.
@@ -63,12 +65,15 @@ public final class GpxSerializer {
         gpx.setPrefix("", PREFIX_GPX);
         gpx.setPrefix("xsi", PREFIX_XSI);
         gpx.setPrefix("groundspeak", PREFIX_GROUNDSPEAK);
+        gpx.setPrefix("gsak", PREFIX_GSAK);
+        gpx.setPrefix("cgeo", PREFIX_CGEO);
         gpx.startTag(PREFIX_GPX, "gpx");
         gpx.attribute("", "version", "1.0");
         gpx.attribute("", "creator", "c:geo - http://www.cgeo.org/");
         gpx.attribute(PREFIX_XSI, "schemaLocation",
                 PREFIX_GPX + " http://www.topografix.com/GPX/1/0/gpx.xsd " +
-                        PREFIX_GROUNDSPEAK + " http://www.groundspeak.com/cache/1/0/1/cache.xsd");
+                        PREFIX_GROUNDSPEAK + " http://www.groundspeak.com/cache/1/0/1/cache.xsd " +
+                        PREFIX_GSAK + " http://www.gsak.net/xmlv1/4/gsak.xsd");
 
         // Split the overall set of geocodes into small chunks. That is a compromise between memory efficiency (because
         // we don't load all caches fully into memory) and speed (because we don't query each cache separately).
@@ -150,29 +155,35 @@ public final class GpxSerializer {
         final List<Waypoint> waypoints = cache.getWaypoints();
         final List<Waypoint> ownWaypoints = new ArrayList<Waypoint>(waypoints.size());
         final List<Waypoint> originWaypoints = new ArrayList<Waypoint>(waypoints.size());
+        int maxPrefix = 0;
         for (final Waypoint wp : cache.getWaypoints()) {
+
+            // Retrieve numerical prefixes to have a basis for assigning prefixes to own waypoints
+            final String prefix = wp.getPrefix();
+            if (StringUtils.isNotBlank(prefix)) {
+                try {
+                    final int numericPrefix = Integer.parseInt(prefix);
+                    maxPrefix = Math.max(numericPrefix, maxPrefix);
+                } catch (final NumberFormatException ex) {
+                    // ignore non numeric prefix, as it should be unique in the list of non-own waypoints already
+                }
+            }
             if (wp.isUserDefined()) {
                 ownWaypoints.add(wp);
             } else {
                 originWaypoints.add(wp);
             }
         }
-        int maxPrefix = 0;
         for (final Waypoint wp : originWaypoints) {
-            final String prefix = wp.getPrefix();
-            try {
-                final int numericPrefix = Integer.parseInt(prefix);
-                maxPrefix = Math.max(numericPrefix, maxPrefix);
-            } catch (final NumberFormatException ex) {
-                // ignore non numeric prefix, as it should be unique in the list of non-own waypoints already
-            }
-            writeCacheWaypoint(wp, prefix);
+            writeCacheWaypoint(wp);
         }
-        // Prefixes must be unique. There use numeric strings as prefixes in OWN waypoints
+        // Prefixes must be unique. There use numeric strings as prefixes in OWN waypoints where they are missing
         for (final Waypoint wp : ownWaypoints) {
-            maxPrefix++;
-            final String prefix = StringUtils.leftPad(String.valueOf(maxPrefix), 2, '0');
-            writeCacheWaypoint(wp, prefix);
+            if (StringUtils.isBlank(wp.getPrefix()) || StringUtils.equalsIgnoreCase("OWN", wp.getPrefix())) {
+                maxPrefix++;
+                wp.setPrefix(StringUtils.leftPad(String.valueOf(maxPrefix), 2, '0'));
+            }
+            writeCacheWaypoint(wp);
         }
     }
 
@@ -185,7 +196,7 @@ public final class GpxSerializer {
      * @param prefix
      * @throws IOException
      */
-    private void writeCacheWaypoint(final Waypoint wp, final String prefix) throws IOException {
+    private void writeCacheWaypoint(final Waypoint wp) throws IOException {
         final Geopoint coords = wp.getCoords();
         // TODO: create some extension to GPX to include waypoint without coords
         if (coords != null) {
@@ -193,11 +204,27 @@ public final class GpxSerializer {
             gpx.attribute("", "lat", Double.toString(coords.getLatitude()));
             gpx.attribute("", "lon", Double.toString(coords.getLongitude()));
             XmlUtils.multipleTexts(gpx, PREFIX_GPX,
-                    "name", prefix + wp.getGeocode().substring(2),
+                    "name", wp.getGpxId(),
                     "cmt", wp.getNote(),
                     "desc", wp.getName(),
                     "sym", wp.getWaypointType().toString(), //TODO: Correct identifier string
                     "type", "Waypoint|" + wp.getWaypointType().toString()); //TODO: Correct identifier string
+            // add parent reference the GSAK-way
+            gpx.startTag(PREFIX_GSAK, "wptExtension");
+            gpx.startTag(PREFIX_GSAK, "Parent");
+            gpx.text(wp.getGeocode());
+            gpx.endTag(PREFIX_GSAK, "Parent");
+            gpx.endTag(PREFIX_GSAK, "wptExtension");
+            if (wp.isVisited()) {
+                gpx.startTag(PREFIX_CGEO, "visited");
+                gpx.text("true");
+                gpx.endTag(PREFIX_CGEO, "visitied");
+            }
+            if (wp.isUserDefined()) {
+                gpx.startTag(PREFIX_CGEO, "userdefined");
+                gpx.text("true");
+                gpx.endTag(PREFIX_CGEO, "userdefined");
+            }
             gpx.endTag(PREFIX_GPX, "wpt");
         }
     }

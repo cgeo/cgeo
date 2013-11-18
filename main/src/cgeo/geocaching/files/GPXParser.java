@@ -70,9 +70,14 @@ public abstract class GPXParser extends FileParser {
      * supported GSAK extension of the GPX format
      */
     private static final String[] GSAK_NS = new String[] {
+            "http://www.gsak.net/xmlv1/4",
             "http://www.gsak.net/xmlv1/5",
             "http://www.gsak.net/xmlv1/6"
     };
+    /**
+     * c:geo extensions of the gpx format
+     */
+    private static final String CGEO_NS = "http://www.cgeo.org/wptext/1/0";
 
     private static final Pattern PATTERN_MILLISECONDS = Pattern.compile("\\.\\d{3,7}");
 
@@ -90,6 +95,9 @@ public abstract class GPXParser extends FileParser {
     private String cmt = null;
     private String desc = null;
     protected final String[] userData = new String[5]; // take 5 cells, that makes indexing 1..4 easier
+    private String parentCacheCode = null;
+    private boolean wptVisited = false;
+    private boolean wptUserDefined = false;
 
     /**
      * Parser result. Maps geocode to cache.
@@ -328,20 +336,25 @@ public abstract class GPXParser extends FileParser {
             private void addWaypointToCache() {
                 fixCache(cache);
 
-                if (cache.getName().length() > 2) {
-                    final String cacheGeocodeForWaypoint = "GC" + cache.getName().substring(2).toUpperCase(Locale.US);
+                if (cache.getName().length() > 2 || StringUtils.isNotBlank(parentCacheCode)) {
+                    if (StringUtils.isBlank(parentCacheCode)) {
+                        parentCacheCode = "GC" + cache.getName().substring(2).toUpperCase(Locale.US);
+                    }
                     // lookup cache for waypoint in already parsed caches
-                    final Geocache cacheForWaypoint = DataStore.loadCache(cacheGeocodeForWaypoint, LoadFlags.LOAD_CACHE_OR_DB);
+                    final Geocache cacheForWaypoint = DataStore.loadCache(parentCacheCode, LoadFlags.LOAD_CACHE_OR_DB);
                     if (cacheForWaypoint != null) {
                         final Waypoint waypoint = new Waypoint(cache.getShortDescription(), convertWaypointSym2Type(sym), false);
+                        if (wptUserDefined) {
+                            waypoint.setUserDefined();
+                        }
                         waypoint.setId(-1);
-                        waypoint.setGeocode(cacheGeocodeForWaypoint);
-                        waypoint.setPrefix(cache.getName().substring(0, 2));
+                        waypoint.setGeocode(parentCacheCode);
+                        waypoint.setPrefix(cacheForWaypoint.getWaypointPrefix(cache.getName()));
                         waypoint.setLookup("---");
                         // there is no lookup code in gpx file
                         waypoint.setCoords(cache.getCoords());
                         waypoint.setNote(cache.getDescription());
-
+                        waypoint.setVisited(wptVisited);
                         final ArrayList<Waypoint> mergedWayPoints = new ArrayList<Waypoint>();
                         mergedWayPoints.addAll(cacheForWaypoint.getWaypoints());
 
@@ -480,7 +493,36 @@ public abstract class GPXParser extends FileParser {
             for (int i = 2; i <= 4; i++) {
                 gsak.getChild(gsakNamespace, "User" + i).setEndTextElementListener(new UserDataListener(i));
             }
+
+            gsak.getChild(gsakNamespace, "Parent").setEndTextElementListener(new EndTextElementListener() {
+
+                @Override
+                public void end(String body) {
+                    parentCacheCode = body;
+                }
+            });
         }
+
+        // c:geo extensions
+        final Element cgeoVisited = cacheParent.getChild(CGEO_NS, "visited");
+
+        cgeoVisited.setEndTextElementListener(new EndTextElementListener() {
+
+            @Override
+            public void end(String visited) {
+                wptVisited = Boolean.valueOf(visited.trim());
+            }
+        });
+
+        final Element cgeoUserDefined = cacheParent.getChild(CGEO_NS, "userdefined");
+
+        cgeoUserDefined.setEndTextElementListener(new EndTextElementListener() {
+
+            @Override
+            public void end(String userDefined) {
+                wptUserDefined = Boolean.valueOf(userDefined.trim());
+            }
+        });
 
         // 3 different versions of the GC schema
         for (final String nsGC : GROUNDSPEAK_NAMESPACE) {
@@ -869,6 +911,9 @@ public abstract class GPXParser extends FileParser {
         name = null;
         desc = null;
         cmt = null;
+        parentCacheCode = null;
+        wptVisited = false;
+        wptUserDefined = false;
 
         cache = new Geocache(this);
 
