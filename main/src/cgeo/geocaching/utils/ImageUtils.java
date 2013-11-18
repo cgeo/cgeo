@@ -46,13 +46,17 @@ public final class ImageUtils {
      *
      * @param filename
      *            The image file to read and scale
-     * @return Bitmap The scaled image
+     * @return Bitmap The scaled image or Null if source image can't be read
      */
+    @Nullable
     public static Bitmap readAndScaleImageToFitDisplay(@NonNull final String filename) {
         Point displaySize = Compatibility.getDisplaySize();
         final int maxWidth = displaySize.x - 25;
         final int maxHeight = displaySize.y - 25;
         final Bitmap image = readDownsampledImage(filename, maxWidth, maxHeight);
+        if (image == null) {
+            return null;
+        }
         final BitmapDrawable scaledImage = scaleBitmapTo(image, maxWidth, maxHeight);
         return scaledImage.getBitmap();
     }
@@ -64,6 +68,7 @@ public final class ImageUtils {
      *            The bitmap to scale
      * @return BitmapDrawable The scaled image
      */
+    @NonNull
     public static BitmapDrawable scaleBitmapTo(@NonNull final Bitmap image, final int maxWidth, final int maxHeight) {
         final CgeoApplication app = CgeoApplication.getInstance();
         Bitmap result = image;
@@ -94,7 +99,7 @@ public final class ImageUtils {
      * @param pathOfOutputImage
      *            Path to store to
      */
-    public static void storeBitmap(@NonNull final Bitmap bitmap, @NonNull final Bitmap.CompressFormat format, final int quality, @NonNull final String pathOfOutputImage) {
+    public static void storeBitmap(final Bitmap bitmap, final Bitmap.CompressFormat format, final int quality, final String pathOfOutputImage) {
         try {
             FileOutputStream out = new FileOutputStream(pathOfOutputImage);
             BufferedOutputStream bos = new BufferedOutputStream(out);
@@ -107,12 +112,12 @@ public final class ImageUtils {
     }
 
     /**
-     * Scales an image to the desired boundings and encodes to file.
+     * Scales an image to the desired bounds and encodes to file.
      *
      * @param filePath
      *            Image to read
      * @param maxXY
-     *            boundings
+     *            bounds
      * @return filename and path, <tt>null</tt> if something fails
      */
     @Nullable
@@ -121,6 +126,9 @@ public final class ImageUtils {
             return filePath;
         }
         Bitmap image = readDownsampledImage(filePath, maxXY, maxXY);
+        if (image == null) {
+            return null;
+        }
         final BitmapDrawable scaledImage = scaleBitmapTo(image, maxXY, maxXY);
         final File tempImageFile = ImageUtils.getOutputImageFile();
         if (tempImageFile == null) {
