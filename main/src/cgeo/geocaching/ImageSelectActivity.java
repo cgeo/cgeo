@@ -9,7 +9,6 @@ import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import android.content.Intent;
@@ -265,7 +264,10 @@ public class ImageSelectActivity extends AbstractActivity {
      * @return the scaled image path, or <tt>null</tt> if the image cannot be decoded
      */
     @Nullable
-    private String writeScaledImage(@NonNull final String filePath) {
+    private String writeScaledImage(@Nullable final String filePath) {
+        if (filePath == null) {
+            return null;
+        }
         scaleChoiceIndex = scaleView.getSelectedItemPosition();
         final int maxXY = getResources().getIntArray(R.array.log_image_scale_values)[scaleChoiceIndex];
         return ImageUtils.readScaleAndWriteImage(filePath, maxXY);
@@ -276,7 +278,7 @@ public class ImageSelectActivity extends AbstractActivity {
     }
 
     private void loadImagePreview() {
-        if (imageUri == null) {
+        if (imageUri == null || imageUri.getPath() == null) {
             return;
         }
         if (!new File(imageUri.getPath()).exists()) {
@@ -284,6 +286,7 @@ public class ImageSelectActivity extends AbstractActivity {
             return;
         }
 
+        @SuppressWarnings("null")
         final Bitmap bitmap = ImageUtils.readAndScaleImageToFitDisplay(imageUri.getPath());
         imagePreview.setImageBitmap(bitmap);
         imagePreview.setVisibility(View.VISIBLE);
