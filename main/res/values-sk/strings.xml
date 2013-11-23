@@ -680,8 +680,8 @@
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">Súbor GPX bude exportovaný do %1$s s názvom súboru podľa aktuálneho dátumu a času.</string>
   <string name="export_gpx_to">Odoslať exportovaný GPS do</string>
-  <string name="attribute_dogs_yes">Psi povolené</string>
-  <string name="attribute_dogs_no">Psi nepovolené</string>
+  <string name="attribute_dogs_yes">Psy povolené</string>
+  <string name="attribute_dogs_no">Psy nepovolené</string>
   <string name="attribute_bicycles_yes">Bicykle povolené</string>
   <string name="attribute_bicycles_no">Bicykle nepovolené</string>
   <string name="attribute_motorcycles_yes">Motorky povolené</string>
