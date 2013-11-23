@@ -80,6 +80,29 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertTrue(cache.getWaypoints().isEmpty());
     }
 
+    public void testImportOcGpx() throws IOException {
+        final String geocode = "OCDDD2";
+        removeCacheCompletely(geocode);
+        final File ocddd2 = new File(tempDir, "ocddd2.gpx");
+        copyResourceToFile(R.raw.ocddd2, ocddd2);
+
+        final GPXImporter.ImportGpxFileThread importThread = new GPXImporter.ImportGpxFileThread(ocddd2, listId, importStepHandler, progressHandler);
+        runImportThread(importThread);
+
+        assertEquals(4, importStepHandler.messages.size());
+        final Iterator<Message> iMsg = importStepHandler.messages.iterator();
+        assertEquals(GPXImporter.IMPORT_STEP_START, iMsg.next().what);
+        assertEquals(GPXImporter.IMPORT_STEP_READ_FILE, iMsg.next().what);
+        assertEquals(GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, iMsg.next().what);
+        assertEquals(GPXImporter.IMPORT_STEP_FINISHED, iMsg.next().what);
+        final SearchResult search = (SearchResult) importStepHandler.messages.get(3).obj;
+        assertEquals(Collections.singletonList(geocode), new ArrayList<String>(search.getGeocodes()));
+        final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        assertCacheProperties(cache);
+
+        assertEquals("Incorrect number of waypoints imported", 4, cache.getWaypoints().size());
+    }
+
     private void runImportThread(GPXImporter.ImportThread importThread) {
         importThread.start();
         try {
