@@ -53,9 +53,11 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
@@ -63,6 +65,7 @@ import java.util.regex.Pattern;
  */
 public class Geocache implements ICache, IWaypoint {
 
+    private static final int OWN_WP_PREFIX_OFFSET = 17;
     private long updated = 0;
     private long detailedUpdate = 0;
     private long visitedDate = 0;
@@ -1209,6 +1212,7 @@ public class Geocache implements ICache, IWaypoint {
         waypoint.setGeocode(geocode);
 
         if (waypoint.getId() < 0) { // this is a new waypoint
+            assignUniquePrefix(waypoint);
             waypoints.add(waypoint);
             if (waypoint.isFinalWithCoords()) {
                 finalDefined = true;
@@ -1216,13 +1220,40 @@ public class Geocache implements ICache, IWaypoint {
         } else { // this is a waypoint being edited
             final int index = getWaypointIndex(waypoint);
             if (index >= 0) {
-                waypoints.remove(index);
+                Waypoint oldWaypoint = waypoints.remove(index);
+                waypoint.setPrefix(oldWaypoint.getPrefix());
+                //migration
+                if (StringUtils.isBlank(waypoint.getPrefix())
+                        || StringUtils.equalsIgnoreCase(waypoint.getPrefix(), Waypoint.PREFIX_OWN)) {
+                    assignUniquePrefix(waypoint);
+                }
             }
             waypoints.add(waypoint);
             // when waypoint was edited, finalDefined may have changed
             resetFinalDefined();
         }
         return saveToDatabase && DataStore.saveWaypoint(waypoint.getId(), geocode, waypoint);
+    }
+
+    /*
+     * Assigns a unique two-digit (compatibility with gc.com)
+     * prefix within the scope of this cache.
+     */
+    private void assignUniquePrefix(Waypoint waypoint) {
+        // gather existing prefixes
+        Set<String> assignedPrefixes = new HashSet<String>();
+        for (Waypoint wp : waypoints) {
+            assignedPrefixes.add(wp.getPrefix());
+        }
+
+        for (int i = OWN_WP_PREFIX_OFFSET; i < 100; i++) {
+            String prefixCandidate = StringUtils.leftPad(String.valueOf(i), 2, '0');
+            if (!assignedPrefixes.contains(prefixCandidate)) {
+                waypoint.setPrefix(prefixCandidate);
+                break;
+            }
+        }
+
     }
 
     public boolean hasWaypoints() {

@@ -179,7 +179,7 @@ public final class GpxSerializer {
         }
         // Prefixes must be unique. There use numeric strings as prefixes in OWN waypoints where they are missing
         for (final Waypoint wp : ownWaypoints) {
-            if (StringUtils.isBlank(wp.getPrefix()) || StringUtils.equalsIgnoreCase("OWN", wp.getPrefix())) {
+            if (StringUtils.isBlank(wp.getPrefix()) || StringUtils.equalsIgnoreCase(Waypoint.PREFIX_OWN, wp.getPrefix())) {
                 maxPrefix++;
                 wp.setPrefix(StringUtils.leftPad(String.valueOf(maxPrefix), 2, '0'));
             }
