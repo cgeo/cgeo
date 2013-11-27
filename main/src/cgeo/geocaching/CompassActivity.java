@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.Views;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -108,7 +108,7 @@ public class CompassActivity extends AbstractActivity {
         setDestCoords();
         setCacheInfo();
 
-        Views.inject(this);
+        ButterKnife.inject(this);
 
         // make sure we can control the TTS volume
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
@@ -140,7 +140,7 @@ public class CompassActivity extends AbstractActivity {
         super.onConfigurationChanged(newConfig);
 
         setContentView(R.layout.compass_activity);
-        Views.inject(this);
+        ButterKnife.inject(this);
 
         setTitle();
         setDestCoords();

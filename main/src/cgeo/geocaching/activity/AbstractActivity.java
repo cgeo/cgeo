@@ -1,6 +1,6 @@
 package cgeo.geocaching.activity;
 
-import butterknife.Views;
+import butterknife.ButterKnife;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.compatibility.Compatibility;
@@ -104,7 +104,7 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
         setContentView(resourceLayoutID);
 
         // create view variables
-        Views.inject(this);
+        ButterKnife.inject(this);
     }
 
     private void initializeCommonFields() {

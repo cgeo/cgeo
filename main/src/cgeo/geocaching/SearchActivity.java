@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.Views;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -84,7 +84,7 @@ public class SearchActivity extends AbstractActivity {
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.search));
 
-        Views.inject(this);
+        ButterKnife.inject(this);
         init();
     }
 

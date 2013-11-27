@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.Views;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
@@ -349,7 +349,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         @Override
         public ScrollView getDispatchedView() {
             view = (ScrollView) getLayoutInflater().inflate(R.layout.trackable_details_view, null);
-            Views.inject(this, view);
+            ButterKnife.inject(this, view);
 
             final CacheDetailsCreator details = new CacheDetailsCreator(TrackableActivity.this, detailsList);
 

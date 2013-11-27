@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.Views;
 
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -37,7 +37,7 @@ public class WaypointPopup extends AbstractPopupActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Views.inject(this);
+        ButterKnife.inject(this);
         // get parameters
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {

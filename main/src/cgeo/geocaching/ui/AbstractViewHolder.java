@@ -1,6 +1,6 @@
 package cgeo.geocaching.ui;
 
-import butterknife.Views;
+import butterknife.ButterKnife;
 
 import android.view.View;
 
@@ -12,7 +12,7 @@ import android.view.View;
 public abstract class AbstractViewHolder {
 
     protected AbstractViewHolder(View view) {
-        Views.inject(this, view);
+        ButterKnife.inject(this, view);
         view.setTag(this);
     }
 

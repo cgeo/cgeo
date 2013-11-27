@@ -47,9 +47,9 @@
 }
 
 # Butter knife view injection, see http://jakewharton.github.io/butterknife/
--dontwarn butterknife.Views$InjectViewProcessor
--dontwarn butterknife.internal.InjectViewProcessor
+-dontwarn butterknife.internal.**
 -keep class **$$ViewInjector { *; }
+-keepnames class * { @butterknife.InjectView *;}
 
 # Null analysis annotations of Eclipse JDT are just used by the Eclipse compiler, so ignore them here
 -dontwarn org.eclipse.jdt.annotation.**

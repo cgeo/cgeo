@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.Views;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
@@ -1481,7 +1481,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_description_page, null);
-            Views.inject(this, view);
+            ButterKnife.inject(this, view);
 
             // cache short description
             if (StringUtils.isNotBlank(cache.getShortDescription())) {

@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.Views;
 
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
@@ -36,7 +36,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @Override
         public ScrollView getDispatchedView() {
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_license_page, null);
-            Views.inject(this, view);
+            ButterKnife.inject(this, view);
             setClickListener(licenseLink, "http://www.apache.org/licenses/LICENSE-2.0.html");
             licenseText.setText(getRawResourceString(R.raw.license));
             return view;
@@ -50,7 +50,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @Override
         public ScrollView getDispatchedView() {
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_contributors_page, null);
-            Views.inject(this, view);
+            ButterKnife.inject(this, view);
             contributors.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             return view;
         }
@@ -65,7 +65,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @Override
         public ScrollView getDispatchedView() {
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_changes_page, null);
-            Views.inject(this, view);
+            ButterKnife.inject(this, view);
             changeLogRelease.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             final String changeLogMasterString = getString(R.string.changelog_master);
             if (StringUtils.isBlank(changeLogMasterString)) {
@@ -91,7 +91,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @Override
         public ScrollView getDispatchedView() {
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_help_page, null);
-            Views.inject(this, view);
+            ButterKnife.inject(this, view);
             setClickListener(support, "mailto:support@cgeo.org");
             setClickListener(website, "http://www.cgeo.org/");
             setClickListener(facebook, "http://www.facebook.com/pages/cgeo/297269860090");
@@ -118,7 +118,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @Override
         public ScrollView getDispatchedView() {
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_version_page, null);
-            Views.inject(this, view);
+            ButterKnife.inject(this, view);
             version.setText(Version.getVersionName(AboutActivity.this));
             setClickListener(donateButton, "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AQBS7UP76CXW2");
             return view;

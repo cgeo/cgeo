@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.Views;
 
 import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.connector.gc.Login;
@@ -117,7 +117,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.logtrackable_activity);
-        Views.inject(this);
+        ButterKnife.inject(this);
 
         // get parameters
         final Bundle extras = getIntent().getExtras();

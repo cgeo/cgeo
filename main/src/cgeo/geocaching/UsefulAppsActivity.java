@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.Views;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.ui.AbstractViewHolder;
@@ -70,7 +70,7 @@ public class UsefulAppsActivity extends AbstractActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.usefulapps_activity);
 
-        Views.inject(this);
+        ButterKnife.inject(this);
 
         list.setAdapter(new ArrayAdapter<HelperApp>(this, R.layout.usefulapps_item, HELPER_APPS) {
             @Override

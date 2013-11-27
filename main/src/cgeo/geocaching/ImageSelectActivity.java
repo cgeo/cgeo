@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.Views;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.settings.Settings;
@@ -61,7 +61,7 @@ public class ImageSelectActivity extends AbstractActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.imageselect_activity);
-        Views.inject(this);
+        ButterKnife.inject(this);
 
         scaleChoiceIndex = Settings.getLogImageScale();
         imageCaption = "";

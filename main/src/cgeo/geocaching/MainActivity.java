@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.Views;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -205,7 +205,7 @@ public class MainActivity extends AbstractActivity {
         // don't call the super implementation with the layout argument, as that would set the wrong theme
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
-        Views.inject(this);
+        ButterKnife.inject(this);
 
         if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
             // If we had been open already, start from the last used activity.

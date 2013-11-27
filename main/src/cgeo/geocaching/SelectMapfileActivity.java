@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.Views;
 
 import cgeo.geocaching.files.AbstractFileListActivity;
 import cgeo.geocaching.files.IFileSelectionView;
@@ -38,7 +38,7 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Views.inject(this);
+        ButterKnife.inject(this);
 
         mapFile = Settings.getMapFile();
 

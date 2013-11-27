@@ -1,8 +1,8 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.Optional;
-import butterknife.Views;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
@@ -124,7 +124,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.navigateanypoint_activity);
-        Views.inject(this);
+        ButterKnife.inject(this);
 
         createHistoryView();
         init();
@@ -135,7 +135,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
         historyListView.addHeaderView(pointControls, null, false);
 
         // inject a second time to also find the dynamically expanded views above
-        Views.inject(this);
+        ButterKnife.inject(this);
 
         if (getHistoryOfSearchedLocations().isEmpty()) {
             historyListView.addFooterView(getEmptyHistoryFooter(), null, false);
