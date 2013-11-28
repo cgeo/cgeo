@@ -9,6 +9,7 @@ import com.viewpagerindicator.TitleProvider;
 import org.apache.commons.lang3.tuple.Pair;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -43,6 +44,10 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
     private final Map<Page, PageViewCreator> viewCreators = new HashMap<Page, PageViewCreator>();
 
     /**
+     * Store the states of the page views to be able to persist them when destroyed and reinstantiated again
+     */
+    private final Map<Page, Bundle> viewStates = new HashMap<Page, Bundle>();
+    /**
      * The {@link ViewPager} for this activity.
      */
     private ViewPager viewPager;
@@ -76,6 +81,16 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
          * Handles changed data-sets.
          */
         public void notifyDataSetChanged();
+
+        /**
+         * Gets state of the view
+         */
+        public Bundle getViewState();
+
+        /**
+         * Set the state of the view
+         */
+        public void setViewState(Bundle state);
     }
 
     /**
@@ -93,6 +108,14 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
+
+            final Page page = pageOrder.get(position);
+
+            // Store the state of the view if the page supports it
+            PageViewCreator creator = viewCreators.get(page);
+            Bundle state = creator.getViewState();
+            viewStates.put(page, state);
+
             container.removeView((View) object);
         }
 
@@ -107,6 +130,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
+
             final Page page = pageOrder.get(position);
 
             PageViewCreator creator = viewCreators.get(page);
@@ -114,6 +138,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
             if (null == creator && null != page) {
                 creator = AbstractViewPagerActivity.this.createViewCreator(page);
                 viewCreators.put(page, creator);
+                viewStates.put(page, new Bundle());
             }
 
             View view = null;
@@ -123,12 +148,16 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
                     // Result from getView() is maybe cached, but it should be valid because the
                     // creator should be informed about data-changes with notifyDataSetChanged()
                     view = creator.getView();
+
+                    // Restore the state of the view if the page supports it
+                    Bundle state = viewStates.get(page);
+                    creator.setViewState(state);
+
                     container.addView(view, 0);
                 }
             } catch (Exception e) {
                 Log.e("ViewPagerAdapter.instantiateItem ", e);
             }
-
             return view;
         }
 
@@ -225,9 +254,14 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
     protected abstract String getTitle(Page page);
 
     protected final void reinitializeViewPager() {
+
         // notify all creators that the data has changed
         for (PageViewCreator creator : viewCreators.values()) {
             creator.notifyDataSetChanged();
+        }
+        // reset the stored view states of all pages
+        for (Bundle state : viewStates.values()) {
+            state.clear();
         }
 
         pageOrder.clear();
