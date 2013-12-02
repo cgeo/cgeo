@@ -11,6 +11,10 @@
     · Creating a new WP the type will be preset depending on the cache type\n 
     · Show event date for OC event caches in search results\n
     · Sorting caches by favorite point percentage\n
+    · Filtering caches which have a personal note\n
+    · Include TB inventory in GPX export\n
+    · New populartiy ratio filter (percentage of favorite points)\n
+    · Support TB URLs for the QR-code scanner\n
     \n
      <b>Bugfixes:</b>\n
     · Cache type filter was not applied for OC nearby search\n
@@ -24,6 +28,13 @@
     · Network timeout reduced to 30 seconds to avoid long waiting time\n
     · Show as list also possible when map is not live\n
     · Respect limit of 500 chars for personal note on gc.com on upload or merge\n
+    · GPX export did not export archived status\n
+    · Hint was not removed from stored caches if removed on website\n
+    · Short description was not removed from stored caches if removed on website\n
+    · Attribute was not removed from stored caches if removed from the website\n
+    · Fixed rare crash when logging an event cache\n
+    · Waypoints have sometimes been doubled when refreshing cache\n
+    · Preview image for logpicture was downscaled to wrong size\n
      \n
   </string>
 </resources>
