@@ -65,6 +65,7 @@ final class OkapiClient {
     private static final SynchronizedDateFormat ISO8601DATEFORMAT = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault());
 
     private static final String CACHE_ATTRNAMES = "attrnames";
+    private static final String CACHE_ATTR_ACODES = "attr_acodes";
     private static final String WPT_LOCATION = "location";
     private static final String WPT_DESCRIPTION = "description";
     private static final String WPT_TYPE = "type";
@@ -113,7 +114,7 @@ final class OkapiClient {
     private static final String SERVICE_CACHE_CORE_FIELDS = "code|name|location|type|status|difficulty|terrain|size|date_hidden";
     private static final String SERVICE_CACHE_CORE_L3_FIELDS = "is_found";
     private static final String SERVICE_CACHE_ADDITIONAL_FIELDS = "owner|founds|notfounds|rating|rating_votes|recommendations|description|hint|images|latest_logs|alt_wpts|attrnames|req_passwd";
-    private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS = "gc_code|attribution_note";
+    private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS = "gc_code|attribution_note|attr_acodes";
     private static final String SERVICE_CACHE_ADDITIONAL_L3_FIELDS = "is_watched|my_notes";
 
     private static final String METHOD_SEARCH_ALL = "services/caches/search/all";
@@ -348,7 +349,7 @@ final class OkapiClient {
                 }
             }
 
-            cache.setAttributes(parseAttributes(response.getJSONArray(CACHE_ATTRNAMES)));
+            cache.setAttributes(parseAttributes(response.getJSONArray(CACHE_ATTRNAMES), response.optJSONArray(CACHE_ATTR_ACODES)));
             cache.setLogs(parseLogs(response.getJSONArray(CACHE_LATEST_LOGS)));
             //TODO: Store license per cache
             //cache.setLicense(response.getString("attribution_note"));
@@ -509,17 +510,20 @@ final class OkapiClient {
         return null;
     }
 
-    private static List<String> parseAttributes(final JSONArray nameList) {
+    private static List<String> parseAttributes(final JSONArray nameList, final JSONArray acodeList) {
 
         final List<String> result = new ArrayList<String>();
 
         for (int i = 0; i < nameList.length(); i++) {
             try {
                 final String name = nameList.getString(i);
-                final CacheAttribute attr = CacheAttribute.getByOcId(AttributeParser.getOcDeId(name));
+                final int acode = acodeList != null ? Integer.parseInt(acodeList.getString(i).substring(1)) : CacheAttribute.NO_ID;
+                final CacheAttribute attr = CacheAttribute.getByOcACode(acode);
 
                 if (attr != null) {
                     result.add(attr.rawName);
+                } else {
+                    result.add(name);
                 }
             } catch (final JSONException e) {
                 Log.e("OkapiClient.parseAttributes", e);

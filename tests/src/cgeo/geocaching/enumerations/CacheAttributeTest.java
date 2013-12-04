@@ -35,10 +35,10 @@ public class CacheAttributeTest extends AndroidTestCase {
     public static void testGetBy() {
         final CacheAttribute attribute = CacheAttribute.HIKING; // an attribute that is present in GC and OC
         assertTrue("Test cannot be run with this attribute", attribute.gcid >= 0);
-        assertTrue("Test cannot be run with this attribute", attribute.ocid >= 0);
+        assertTrue("Test cannot be run with this attribute", attribute.ocacode >= 0);
         assertSame(CacheAttribute.getByRawName(attribute.rawName), attribute);
         assertSame(CacheAttribute.getByGcId(attribute.gcid), attribute);
-        assertSame(CacheAttribute.getByOcId(attribute.ocid), attribute);
+        assertSame(CacheAttribute.getByOcACode(attribute.ocacode), attribute);
     }
 
     public static void testIsEnabled() {

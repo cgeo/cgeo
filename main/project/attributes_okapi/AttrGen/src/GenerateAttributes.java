@@ -22,7 +22,7 @@ public class GenerateAttributes {
 	public static void main(String[] args) {
 
 		File inFile = new File(args[0]);
-		InputStream inputStream; 
+		InputStream inputStream;
 
 		try {
 
@@ -47,52 +47,24 @@ public class GenerateAttributes {
 		System.out.print(
 "// This is a generated file, do not change manually!\n" +
 "\n" +
-"package cgeo.geocaching.connector.oc;\n" +
-"\n" +
-"import java.util.HashMap;\n" +
-"import java.util.Map;\n" +
-"\n" +
-"public class AttributeParser {\n" +
-"\n" +
-"    private final static Map<String, Integer> attrMapDe;\n" +
-"    private final static Map<String, Integer> attrMapPl;\n" +
-"\n" +
-"    static {\n" +
-"        attrMapDe = new HashMap<String, Integer>();\n" +
-"        attrMapPl = new HashMap<String, Integer>();\n" +
-"\n" +
-"        // last header line\n");
+ "# internal name   | gcid | ocid | acode | man | license | copyright holder | URL\n");
+	}
+
+	private static String formattedId(int id, int width) {
+		String result = "                            ".substring(0, width - 1)
+				+ id;
+		return result.substring(result.length() - width);
 	}
 
     private static void writeAttr(AttrInfo attr) {
 
-    	for(String name : attr.names) {
-    		if (attr.oc_de_id > 0) {
-    			System.out.println("        attrMapDe.put(\"" + name + "\", " + attr.oc_de_id + ");");
-    		}
-    		if (attr.oc_pl_id > 0) {
-    			System.out.println("        attrMapPl.put(\"" + name + "\", " + attr.oc_pl_id + ");");
-    		}
-    	}
-
+		System.out.println("                  | " + formattedId(attr.gc_id, 4)
+				+ " | " + formattedId(attr.oc_de_id, 4) + " | "
+				+ formattedId(attr.acode, 5) + " |");
 	}
 
 	private static void writeTrailer() {
-		System.out.print(
-"        // first trailer line\n" +
-"\n" +
-"    }\n" +
-"\n" +
-"    public static int getOcDeId(final String name) {\n" +
-"\n" +
-"        int result = 0;\n" +
-"\n" +
-"        if (attrMapDe.containsKey(name)) {\n" +
-"            result = attrMapDe.get(name);\n" +
-"        }\n" +
-"        return result;\n" +
-"    }\n" +
-"}\n");
+		System.out.println();
 	}
 
 	private static void parseAttributes(InputSource stream) {
@@ -104,7 +76,7 @@ public class GenerateAttributes {
 
 	      DefaultHandler handler = new DefaultHandler() {
 
-	        AttrInfo attr; 
+	        AttrInfo attr;
 	        ArrayList<String> names;
 	        boolean readingName;
 
@@ -115,15 +87,29 @@ public class GenerateAttributes {
 	          if (qName.equalsIgnoreCase("attr")) {
 	        	  attr = new AttrInfo();
 	        	  names = new ArrayList<String>();
+						attr.acode = Integer.parseInt(attributes.getValue(
+								"acode").substring(1));
 	          }
 
 	          if (attr != null && qName.equalsIgnoreCase("opencaching")) {
-	        	  if ("http://opencaching.de/".equalsIgnoreCase(attributes.getValue("site_url"))) {
+						if ("http://www.opencaching.de/"
+								.equalsIgnoreCase(attributes
+.getValue("schema"))) {
 	        		  attr.oc_de_id = Integer.parseInt(attributes.getValue("id"));
-	        	  } else if ("http://opencaching.pl/".equalsIgnoreCase(attributes.getValue("site_url"))) {
+						} else if ("http://opencaching.pl/"
+								.equalsIgnoreCase(attributes.getValue("schema"))) {
 	        		  attr.oc_pl_id = Integer.parseInt(attributes.getValue("id"));
+						} else if ("http://www.opencaching.nl/"
+								.equalsIgnoreCase(attributes.getValue("schema"))) {
+							attr.oc_nl_id = Integer.parseInt(attributes
+									.getValue("id"));
 	        	  }
 	          }
+
+					if (attr != null && qName.equalsIgnoreCase("groundspeak")) {
+						attr.gc_id = Integer
+								.parseInt(attributes.getValue("id"));
+					}
 
 	          if (names != null && qName.equalsIgnoreCase("name")) {
 	        	  readingName = true;
@@ -162,11 +148,14 @@ public class GenerateAttributes {
 	    }
 
 	}
-	
+
 	static class AttrInfo {
 		public int oc_de_id;
+		public int oc_nl_id;
 		public int oc_pl_id;
+		public int acode;
+		public int gc_id;
 		public String[] names;
 	}
-	
+
 }

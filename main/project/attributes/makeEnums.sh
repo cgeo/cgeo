@@ -15,7 +15,7 @@ require cut
 cat iconlist.txt | grep -v "^#" | while read l; do
     name=`echo $l | cut -d "|" -f 1 | sed "s/ *//g"`
     gcid=`echo $l | cut -d "|" -f 2 | sed "s/ *//g"`
-    ocid=`echo $l | cut -d "|" -f 3 | sed "s/ *//g"`
+    ocid=`echo $l | cut -d "|" -f 4 | sed "s/ *//g"`
     enum=`echo $name | tr a-z A-Z`
     yes=R.string.attribute_${name}_yes
     no=R.string.attribute_${name}_no
