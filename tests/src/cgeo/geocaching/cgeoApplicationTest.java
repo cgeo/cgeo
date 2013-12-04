@@ -81,7 +81,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
         assertEquals("0564a940-8311-40ee-8e76-7e91b2cf6284", tb.getOwnerGuid());
         assertEquals("Kinder erfreuen.<br /><br />Make children happy.", tb.getGoal());
         assertTrue(tb.getDetails().startsWith("Auf der CD sind"));
-        assertEquals("http://img.geocaching.com/track/display/38382780-87a7-4393-8393-78841678ee8c.jpg", tb.getImage());
+        assertEquals("http://imgcdn.geocaching.com/track/display/38382780-87a7-4393-8393-78841678ee8c.jpg", tb.getImage());
         // Following data can change over time
         assertTrue(tb.getDistance() >= 10617.8f);
         assertTrue(tb.getLogs().size() >= 10);

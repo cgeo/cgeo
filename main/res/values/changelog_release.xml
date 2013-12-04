@@ -2,6 +2,11 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+   <b>Next bugfix release</b>\n
+    · Personal note upload now only for PM\n
+    · Find count not updated is user has found 1 cache\n
+    \n
+    \n
     <b>2013.10.23</b>\n
     · Adapted to changes on gc.com (spoiler images)\n
     · Possibility to manually select file path for maps\n
