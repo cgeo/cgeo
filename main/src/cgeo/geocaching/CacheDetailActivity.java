@@ -883,10 +883,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 final boolean enabled = CacheAttribute.isEnabled(attributeName);
                 // search for a translation of the attribute
                 CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
-                if (attrib == null) {
-                    attrib = CacheAttribute.UNKNOWN;
+                if (attrib != null) {
+                    attributeName = attrib.getL10n(enabled);
                 }
-                attributeName = attrib.getL10n(enabled);
                 if (buffer.length() > 0) {
                     buffer.append('\n');
                 }
