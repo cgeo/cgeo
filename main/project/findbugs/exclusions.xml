@@ -4,7 +4,7 @@
 	<Match>
 	    <Or>
 			<Class name="~.*\.R\$.*"/>
-	        <Class name="~.*ViewHolder"
+	        <Class name="~.*ViewHolder"/>
 	    </Or>
 	</Match>
 	
