@@ -8,7 +8,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.network.HtmlImage;
-import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
+import cgeo.geocaching.ui.AbstractCachingListViewPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.Formatter;
@@ -30,7 +30,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class LogsViewCreator extends AbstractCachingPageViewCreator<ListView> {
+public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCreator {
 
     protected final AbstractActivity activity;
 

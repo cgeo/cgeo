@@ -113,8 +113,10 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
 
             // Store the state of the view if the page supports it
             PageViewCreator creator = viewCreators.get(page);
-            Bundle state = creator.getViewState();
-            viewStates.put(page, state);
+            if (creator != null) {
+                Bundle state = creator.getViewState();
+                viewStates.put(page, state);
+            }
 
             container.removeView((View) object);
         }
