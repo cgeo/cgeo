@@ -11,6 +11,7 @@ import cgeo.geocaching.ui.UserActionsClickListener;
 import org.apache.commons.lang3.StringUtils;
 
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
@@ -109,4 +110,37 @@ public class CacheLogsViewCreator extends LogsViewCreator {
         return new UserActionsClickListener(getCache());
     }
 
+    /**
+     * Get the state of the current view
+     *
+     * @return the state encapsulated in a bundle
+     */
+    @Override
+    public Bundle getViewState() {
+        if (view == null) {
+            return null;
+        }
+        int position = view.getFirstVisiblePosition();
+        View child = view.getChildAt(0);
+        int positionFromTop = (child == null) ? 0 : child.getTop();
+        Bundle state = new Bundle();
+        state.putInt("position", position);
+        state.putInt("positionFromTop", positionFromTop);
+        return state;
+    }
+
+    /**
+     * Restore a previously stored state of the view
+     *
+     */
+    @Override
+    public void setViewState(Bundle state) {
+        if (view == null) {
+            return;
+        }
+        int logViewPosition = state.getInt("position");
+        int logViewPositionFromTop = state.getInt("positionFromTop");
+        view.setSelectionFromTop(logViewPosition, logViewPositionFromTop);
+        return;
+    }
 }
