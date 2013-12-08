@@ -286,12 +286,33 @@ public class Settings {
         return new ImmutablePair<String, String>(username, password);
     }
 
+    /**
+     * Get login and password information.
+     *
+     * @return a pair either with (login, password) or (empty, empty) if no valid information is stored
+     */
+    public static ImmutablePair<String, String> getECLogin() {
+
+        final String username = getString(R.string.pref_ecusername, null);
+        final String password = getString(R.string.pref_ecpassword, null);
+
+        if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
+            return new ImmutablePair<String, String>(StringUtils.EMPTY, StringUtils.EMPTY);
+        }
+
+        return new ImmutablePair<String, String>(username, password);
+    }
+
     public static String getUsername() {
         return getString(R.string.pref_username, null);
     }
 
     public static boolean isGCConnectorActive() {
         return getBoolean(R.string.pref_connectorGCActive, true);
+    }
+
+    public static boolean isECConnectorActive() {
+        return getBoolean(R.string.pref_connectorECActive, true);
     }
 
     public static boolean isPremiumMember() {
@@ -980,6 +1001,10 @@ public class Settings {
 
     public static boolean getFieldNoteExportOnlyNew() {
         return getBoolean(R.string.pref_fieldNoteExportOnlyNew, false);
+    }
+
+    public static String getECIconSet() {
+        return getString(R.string.pref_ec_icons, "1");
     }
 
 }

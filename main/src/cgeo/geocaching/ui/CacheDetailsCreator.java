@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
+import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
 
@@ -53,14 +54,18 @@ public final class CacheDetailsCreator {
     }
 
     public RelativeLayout addStars(final int nameId, final float value) {
+        return addStars(nameId, value, 5);
+    }
+
+    public RelativeLayout addStars(final int nameId, final float value, final int max) {
         final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_information_item, null);
         final TextView nameView = (TextView) layout.findViewById(R.id.name);
         lastValueView = (TextView) layout.findViewById(R.id.value);
         final LinearLayout layoutStars = (LinearLayout) layout.findViewById(R.id.stars);
 
         nameView.setText(activity.getResources().getString(nameId));
-        lastValueView.setText(String.format("%.1f", value) + ' ' + activity.getResources().getString(R.string.cache_rating_of) + " 5");
-        createStarImages(layoutStars, value);
+        lastValueView.setText(String.format("%.1f", value) + ' ' + activity.getResources().getString(R.string.cache_rating_of) + " " + String.format("%d", max));
+        createStarImages(layoutStars, value, max);
         layoutStars.setVisibility(View.VISIBLE);
 
         parentView.addView(layout);
@@ -68,9 +73,13 @@ public final class CacheDetailsCreator {
     }
 
     private void createStarImages(final ViewGroup starsContainer, final float value) {
+        createStarImages(starsContainer, value, 5);
+    }
+
+    private void createStarImages(final ViewGroup starsContainer, final float value, final int max) {
         final LayoutInflater inflater = LayoutInflater.from(activity);
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < max; i++) {
             ImageView star = (ImageView) inflater.inflate(R.layout.star_image, null);
             if (value - i >= 0.75) {
                 star.setImageResource(R.drawable.star_on);
@@ -130,7 +139,11 @@ public final class CacheDetailsCreator {
 
     public void addTerrain(Geocache cache) {
         if (cache.getTerrain() > 0) {
-            addStars(R.string.cache_terrain, cache.getTerrain());
+            if (ECConnector.getInstance().canHandle(cache.getGeocode())) {
+                addStars(R.string.cache_terrain, cache.getTerrain(), 7);
+            } else {
+                addStars(R.string.cache_terrain, cache.getTerrain());
+            }
         }
     }
 

@@ -11,6 +11,7 @@ public enum StatusCode {
     LOG_SAVED(R.string.info_log_saved),
     LOGIN_PARSE_ERROR(R.string.err_parse),
     CONNECTION_FAILED(R.string.err_server),
+    CONNECTION_FAILED_EC(R.string.err_server_ec),
     NO_LOGIN_INFO_STORED(R.string.err_login),
     UNKNOWN_ERROR(R.string.err_unknown),
     COMMUNICATION_ERROR(R.string.err_comm),

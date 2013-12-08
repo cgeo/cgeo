@@ -18,6 +18,9 @@
     <string name="pref_password">password</string>
     <string name="pref_connectorOCActive">connectorOCActive</string>
     <string name="pref_connectorOCPLActive">connectorOCPLActive</string>
+    <string name="pref_ecusername">ecusername</string>
+    <string name="pref_ecpassword">ecpassword</string>
+    <string name="pref_connectorECActive">connectorECActive</string>
     <string name="pref_pass_vote">pass-vote</string>
     <string name="pref_twitter">twitter</string>
     <string name="pref_webDeviceName">webDeviceName</string>
@@ -123,9 +126,11 @@
     <string name="pref_fakekey_gc_website">fakekey_gc_website</string>
     <string name="pref_fakekey_ocde_website">fakekey_ocde_website</string>
     <string name="pref_fakekey_ocpl_website">fakekey_ocpl_website</string>
+    <string name="pref_fakekey_ec_website">fakekey_ec_website</string>
     <string name="pref_fakekey_gcvote_website">fakekey_gcvote_website</string>
     <string name="pref_fakekey_sendtocgeo_website">fakekey_sendtocgeo_website</string>
     <string name="pref_twitter_cache_message">twitter_cache_message</string>
     <string name="pref_twitter_trackable_message">twitter_trackable_message</string>
+    <string name="pref_ec_icons">ec_icons</string>
 
 </resources>
