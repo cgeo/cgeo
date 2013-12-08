@@ -180,4 +180,10 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
         return R.drawable.marker_oc;
     }
 
+    @Override
+    public String getLicenseText(final Geocache cache) {
+        // NOT TO BE TRANSLATED
+        return "© " + cache.getOwnerDisplayName() + ", <a href=\"" + getCacheUrl(cache) + "\">" + getName() + "</a>, CC BY-NC-ND 3.0, alle Logeinträge © jeweiliger Autor";
+    }
+
 }
