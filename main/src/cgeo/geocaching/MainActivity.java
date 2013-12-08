@@ -668,7 +668,7 @@ public class MainActivity extends AbstractActivity {
                     wait(500);
                     checks++;
                 } catch (Exception e) {
-                    // nothing;
+                    Log.e("MainActivity.CountBubbleUpdateThread.run", e);
                 }
 
                 if (checks > 10) {

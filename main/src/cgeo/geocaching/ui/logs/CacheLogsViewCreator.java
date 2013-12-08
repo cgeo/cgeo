@@ -1,10 +1,10 @@
 package cgeo.geocaching.ui.logs;
 
 import cgeo.geocaching.CacheDetailActivity;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.ui.UserActionsClickListener;
 

@@ -276,10 +276,7 @@ public abstract class GCParser {
 
         String recaptchaText = null;
         if (thread != null && StringUtils.isNotBlank(thread.getChallenge())) {
-            if (thread.getText() == null) {
-                thread.waitForUser();
-            }
-
+            thread.waitForUser();
             recaptchaText = thread.getText();
         }
 

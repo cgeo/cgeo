@@ -142,8 +142,6 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     public static void showNavigationMenu(final Activity activity,
             final Geocache cache, final Waypoint waypoint, final Geopoint destination,
             final boolean showInternalMap, final boolean showDefaultNavigation) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(R.string.cache_menu_navigate);
         final List<NavigationAppsEnum> items = new ArrayList<NavigationAppFactory.NavigationAppsEnum>();
         final int defaultNavigationTool = Settings.getDefaultNavigationTool();
         for (final NavigationAppsEnum navApp : getInstalledNavigationApps()) {
@@ -166,26 +164,25 @@ public final class NavigationAppFactory extends AbstractAppFactory {
                 }
             }
         }
+
+        if (items.size() == 1) {
+            invokeNavigation(activity, cache, waypoint, destination, items.get(0).app);
+            return;
+        }
+
         /*
          * Using an ArrayAdapter with list of NavigationAppsEnum items avoids
          * handling between mapping list positions allows us to do dynamic filtering of the list based on use case.
          */
         final ArrayAdapter<NavigationAppsEnum> adapter = new ArrayAdapter<NavigationAppsEnum>(activity, android.R.layout.select_dialog_item, items);
 
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(R.string.cache_menu_navigate);
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
                 final NavigationAppsEnum selectedItem = adapter.getItem(item);
-                final App app = selectedItem.app;
-                if (cache != null) {
-                    navigateCache(activity, cache, app);
-                }
-                else if (waypoint != null) {
-                    navigateWaypoint(activity, waypoint, app);
-                }
-                else {
-                    navigateGeopoint(activity, destination, app);
-                }
+                invokeNavigation(activity, cache, waypoint, destination, selectedItem.app);
             }
         });
         final AlertDialog alert = builder.create();
@@ -225,7 +222,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     /**
      * Handles menu selections for menu entries created with
      * {@link #showNavigationMenu(Activity, Geocache, Waypoint, Geopoint)}.
-     * 
+     *
      * @param item
      * @param activity
      * @param cache
@@ -341,6 +338,18 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         }
         // default navigation tool wasn't set already or couldn't be found (not installed any more for example)
         return NavigationAppsEnum.COMPASS.app;
+    }
+
+    private static void invokeNavigation(final Activity activity, final Geocache cache, final Waypoint waypoint, final Geopoint destination, final App app) {
+        if (cache != null) {
+            navigateCache(activity, cache, app);
+        }
+        else if (waypoint != null) {
+            navigateWaypoint(activity, waypoint, app);
+        }
+        else {
+            navigateGeopoint(activity, destination, app);
+        }
     }
 
 }

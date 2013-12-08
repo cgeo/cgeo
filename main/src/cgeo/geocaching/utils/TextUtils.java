@@ -3,6 +3,8 @@
  */
 package cgeo.geocaching.utils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import org.eclipse.jdt.annotation.Nullable;
 
 import java.util.regex.Matcher;
@@ -36,6 +38,7 @@ public final class TextUtils {
      *            Find the last occurring value
      * @return defaultValue or the n-th group if the pattern matches (trimmed if wanted)
      */
+    @SuppressFBWarnings("DM_STRING_CTOR")
     public static String getMatch(@Nullable final String data, final Pattern p, final boolean trim, final int group, final String defaultValue, final boolean last) {
         if (data != null) {
 

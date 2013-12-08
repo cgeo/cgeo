@@ -80,7 +80,9 @@ public class CompassView extends View implements PeriodicHandlerListener {
         setfil = new PaintFlagsDrawFilter(0, Paint.FILTER_BITMAP_FLAG);
         remfil = new PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG, 0);
 
-        initialDisplay = true;
+        synchronized (this) {
+            initialDisplay = true;
+        }
         redrawHandler.start();
     }
 
@@ -148,7 +150,7 @@ public class CompassView extends View implements PeriodicHandlerListener {
     }
 
     @Override
-    public void onPeriodic() {
+    public synchronized void onPeriodic() {
         final float newAzimuthShown = smoothUpdate(northMeasured, azimuthShown);
         final float newCacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
         if (Math.abs(AngleUtils.difference(azimuthShown, newAzimuthShown)) >= 2 ||

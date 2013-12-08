@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -46,7 +47,9 @@ public class UsefulAppsActivity extends AbstractActivity {
 
         private void installFromMarket(Activity activity) {
             try {
-                Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + packageName));
+                // allow also opening pure http URLs in addition to market packages
+                final String url = (packageName.startsWith("http:")) ? packageName : "market://details?id=" + packageName;
+                final Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 marketIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
                 activity.startActivity(marketIntent);
 
@@ -58,6 +61,7 @@ public class UsefulAppsActivity extends AbstractActivity {
 
     private static final HelperApp[] HELPER_APPS = {
             new HelperApp(R.string.helper_calendar_title, R.string.helper_calendar_description, R.drawable.cgeo, "cgeo.calendar"),
+            new HelperApp(R.string.helper_sendtocgeo_title, R.string.helper_sendtocgeo_description, R.drawable.cgeo, "http://send2.cgeo.org"),
             new HelperApp(R.string.helper_pocketquery_title, R.string.helper_pocketquery_description, R.drawable.helper_pocketquery, "org.pquery"),
             new HelperApp(R.string.helper_locus_title, R.string.helper_locus_description, R.drawable.helper_locus, "menion.android.locus"),
             new HelperApp(R.string.helper_google_translate_title, R.string.helper_google_translate_description, R.drawable.helper_google_translate, "com.google.android.apps.translate"),
@@ -92,7 +96,7 @@ public class UsefulAppsActivity extends AbstractActivity {
             private void fillViewHolder(ViewHolder holder, HelperApp app) {
                 holder.title.setText(res.getString(app.titleId));
                 holder.image.setImageDrawable(res.getDrawable(app.iconId));
-                holder.description.setText(res.getString(app.descriptionId));
+                holder.description.setText(Html.fromHtml(res.getString(app.descriptionId)));
             }
         });
 

@@ -108,9 +108,6 @@ public abstract class AbstractPopupActivity extends AbstractActivity implements 
     }
 
     @Override
-    public abstract void navigateTo();
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // set theme
@@ -201,9 +198,6 @@ public abstract class AbstractPopupActivity extends AbstractActivity implements 
         }
         return super.onTouchEvent(event);
     }
-
-    @Override
-    public abstract void showNavigationMenu();
 
     protected abstract void startDefaultNavigation2();
 

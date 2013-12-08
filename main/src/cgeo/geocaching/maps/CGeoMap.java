@@ -517,13 +517,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     @Override
     public void onPause() {
-        if (loadTimer != null) {
-            loadTimer.stopIt();
-            loadTimer = null;
-        }
-
+        stopTimer();
         deleteGeoDirObservers();
-
         savePrefs();
 
         if (mapView != null) {
@@ -994,12 +989,16 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             (new DisplayPointThread()).start();
         } else {
             // start timer
-            if (loadTimer != null) {
-                loadTimer.stopIt();
-                loadTimer = null;
-            }
+            stopTimer();
             loadTimer = new LoadTimer();
             loadTimer.start();
+        }
+    }
+
+    private synchronized void stopTimer() {
+        if (loadTimer != null) {
+            loadTimer.stopIt();
+            loadTimer = null;
         }
     }
 
@@ -1311,9 +1310,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         protected DoRunnable(final Viewport viewport) {
             this.viewport = viewport;
         }
-
-        @Override
-        public abstract void run();
     }
 
     /**
@@ -1480,7 +1476,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 mapController.setCenter(mapItemFactory.getGeoPointBase(new Geopoint(mapState[0] / 1.0e6, mapState[1] / 1.0e6)));
                 mapController.setZoom(mapState[2]);
             } catch (RuntimeException e) {
-                // nothing at all
+                Log.e("centermap", e);
             }
 
             centered = true;
@@ -1504,7 +1500,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     mapController.zoomToSpan((int) (viewport.getLatitudeSpan() * 1e6), (int) (viewport.getLongitudeSpan() * 1e6));
                 }
             } catch (RuntimeException e) {
-                // nothing at all
+                Log.e("centermap", e);
             }
 
             centered = true;
@@ -1513,7 +1509,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             try {
                 mapController.setCenter(makeGeoPoint(coordsCenter));
             } catch (Exception e) {
-                // nothing at all
+                Log.e("centermap", e);
             }
 
             centered = true;

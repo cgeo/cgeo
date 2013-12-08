@@ -2,7 +2,10 @@
 <FindBugsFilter>
     <!-- generated Android resources -->
 	<Match>
-		<Class name="~.*\.R\$.*"/>
+	    <Or>
+			<Class name="~.*\.R\$.*"/>
+	        <Class name="~.*ViewHolder"/>
+	    </Or>
 	</Match>
 	
 	<!-- third party code -->

@@ -3,6 +3,8 @@ package cgeo.geocaching;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.utils.MemorySubject;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
@@ -54,6 +56,7 @@ public class DirectionProvider extends MemorySubject<Float> implements SensorEve
     }
 
     @Override
+    @SuppressFBWarnings("FE_FLOATING_POINT_EQUALITY")
     public void onSensorChanged(final SensorEvent event) {
         final float direction = event.values[0];
         if (direction != previous) {

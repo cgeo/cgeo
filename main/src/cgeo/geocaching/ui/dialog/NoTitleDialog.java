@@ -1,5 +1,7 @@
 package cgeo.geocaching.ui.dialog;
 
+import cgeo.geocaching.utils.Log;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -24,7 +26,7 @@ public abstract class NoTitleDialog extends Dialog {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
             getWindow().setLayout(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         } catch (final Exception e) {
-            // nothing
+            Log.e("NoTitleDialog.onCreate", e);
         }
     }
 }
