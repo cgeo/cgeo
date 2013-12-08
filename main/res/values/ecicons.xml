@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="ECIcons">
+        <item>@string/settings_ec_icons_other</item>
+        <item>@string/settings_ec_icons_oc</item>
+    </string-array>
+    <string-array name="ECIconsValues">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+</resources>

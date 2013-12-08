@@ -114,6 +114,53 @@
                         android:title="@string/settings_open_website" />
                 </PreferenceCategory>
             </PreferenceScreen>
+
+            <PreferenceScreen android:title="@string/settings_title_ec" >
+                <PreferenceCategory android:title="@string/settings_settings" >
+                    <CheckBoxPreference
+                        android:defaultValue="false"
+                        android:key="@string/pref_connectorECActive"
+                        android:title="@string/settings_activate_ec" />
+
+                    <EditTextPreference
+                        android:dependency="@string/pref_connectorECActive"
+                        android:dialogTitle="@string/init_username"
+                        android:hint="@string/init_username"
+                        android:imeOptions="actionDone"
+                        android:key="@string/pref_ecusername"
+                        android:singleLine="true"
+                        android:title="@string/init_username" />
+
+                    <cgeo.geocaching.settings.EditPasswordPreference
+                        android:dependency="@string/pref_connectorECActive"
+                        android:dialogTitle="@string/init_password"
+                        android:hint="@string/init_password"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:key="@string/pref_ecpassword"
+                        android:singleLine="true"
+                        android:title="@string/init_password" />
+                    <cgeo.geocaching.settings.CheckECCredentialsPreference
+                        android:dependency="@string/pref_connectorECActive"
+                        android:title="@string/init_login" />
+                </PreferenceCategory>
+                <PreferenceCategory android:title="@string/settings_title_appearance" >
+	                <ListPreference
+	                    android:dependency="@string/pref_connectorECActive"
+		                android:defaultValue="1"
+		                android:dialogTitle="@string/init_ec_icons"
+		                android:key="@string/pref_ec_icons"
+		                android:title="@string/init_ec_icons"
+	            		android:entries="@array/ECIcons"
+	            		android:entryValues="@array/ECIconsValues" />
+                </PreferenceCategory>
+                <PreferenceCategory android:title="@string/settings_information" >
+                    <Preference
+                        android:key="@string/pref_fakekey_ec_website"
+                        android:title="@string/settings_open_website" />
+                </PreferenceCategory>
+            </PreferenceScreen>
+
             <PreferenceScreen android:title="@string/init_gcvote" >
                 <PreferenceCategory android:title="@string/settings_settings" >
                     <cgeo.geocaching.settings.EditPasswordPreference
