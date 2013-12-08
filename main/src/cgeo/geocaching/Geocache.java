@@ -32,6 +32,8 @@ import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.UncertainProperty;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.lang3.BooleanUtils;
@@ -366,6 +368,7 @@ public class Geocache implements ICache, IWaypoint {
      *            the other cache to compare this one to
      * @return true if both caches have the same content
      */
+    @SuppressFBWarnings("FE_FLOATING_POINT_EQUALITY")
     private boolean isEqualTo(final Geocache other) {
         return detailed == other.detailed &&
                 StringUtils.equalsIgnoreCase(geocode, other.geocode) &&

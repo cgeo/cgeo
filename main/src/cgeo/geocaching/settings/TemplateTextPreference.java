@@ -48,7 +48,7 @@ public class TemplateTextPreference extends DialogPreference {
         settingsActivity = (SettingsActivity) this.getContext();
 
         editText = (EditText) view.findViewById(R.id.signature_dialog_text);
-        editText.setText(getPersistedString(initialValue != null ? initialValue.toString() : StringUtils.EMPTY));
+        editText.setText(getPersistedString(initialValue != null ? initialValue : StringUtils.EMPTY));
 
         Button button = (Button) view.findViewById(R.id.signature_templates);
         button.setOnClickListener(new View.OnClickListener() {

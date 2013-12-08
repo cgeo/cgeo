@@ -1,5 +1,7 @@
 package cgeo.geocaching.utils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,6 +46,7 @@ public class MatcherWrapper {
      * @param input
      * @return
      */
+    @SuppressFBWarnings("DM_STRING_CTOR")
     private static String newString(String input) {
         if (input == null) {
             return null;
