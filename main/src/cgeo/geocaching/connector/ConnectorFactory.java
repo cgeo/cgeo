@@ -43,7 +43,7 @@ public final class ConnectorFactory {
             new OCApiLiveConnector("opencaching.pl", "www.opencaching.pl", "OP", "CC BY-SA 3.0",
                     R.string.oc_pl_okapi_consumer_key, R.string.oc_pl_okapi_consumer_secret,
                     R.string.pref_connectorOCPLActive, R.string.pref_ocpl_tokenpublic, R.string.pref_ocpl_tokensecret, ApiSupport.current),
-            new OCApiConnector("OpenCaching.US", "www.opencaching.us", "OU", "pTsYAYSXFcfcRQnYE6uA", "CC BY-NC-SA 2.5", ApiSupport.oldapi),
+            new OCApiConnector("OpenCaching.US", "www.opencaching.us", "OU", "pTsYAYSXFcfcRQnYE6uA", "CC BY-NC-SA 2.5", ApiSupport.current),
             new OXConnector(),
             new GeocachingAustraliaConnector(),
             new GeopeitusConnector(),
