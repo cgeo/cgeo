@@ -22,6 +22,7 @@ public enum StatusCode {
     PREMIUM_ONLY(R.string.err_premium_only),
     MAINTENANCE(R.string.err_maintenance),
     LOG_POST_ERROR(R.string.err_log_post_failed),
+    LOG_POST_ERROR_EC(R.string.err_log_post_failed_ec),
     NO_LOG_TEXT(R.string.warn_log_text_fill),
     NO_DATA_FROM_SERVER(R.string.err_log_failed_server),
     NOT_LOGGED_IN(R.string.init_login_popup_failed),
