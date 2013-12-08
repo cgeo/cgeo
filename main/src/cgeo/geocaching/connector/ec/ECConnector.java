@@ -3,13 +3,16 @@ package cgeo.geocaching.connector.ec;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
+import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.AbstractConnector;
+import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
@@ -22,7 +25,9 @@ import org.apache.commons.lang3.StringUtils;
 import android.content.Context;
 import android.os.Handler;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class ECConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ILogin {
@@ -184,6 +189,37 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     public String getLicenseText(final Geocache cache) {
         // NOT TO BE TRANSLATED
         return "© " + cache.getOwnerDisplayName() + ", <a href=\"" + getCacheUrl(cache) + "\">" + getName() + "</a>, CC BY-NC-ND 3.0, alle Logeinträge © jeweiliger Autor";
+    }
+
+    @Override
+    public boolean supportsLogging() {
+        return true;
+    }
+
+    @Override
+    public boolean canLog(Geocache cache) {
+        return true;
+    }
+
+    @Override
+    public ILoggingManager getLoggingManager(final LogCacheActivity activity, final Geocache cache) {
+        return new ECLoggingManager(activity, this, cache);
+    }
+
+    @Override
+    public List<LogType> getPossibleLogTypes(Geocache geocache) {
+        final List<LogType> logTypes = new ArrayList<LogType>();
+        if (geocache.isEventCache()) {
+            logTypes.add(LogType.WILL_ATTEND);
+            logTypes.add(LogType.ATTENDED);
+        } else {
+            logTypes.add(LogType.FOUND_IT);
+        }
+        if (!geocache.isEventCache()) {
+            logTypes.add(LogType.DIDNT_FIND_IT);
+        }
+        logTypes.add(LogType.NOTE);
+        return logTypes;
     }
 
 }

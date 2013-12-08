@@ -204,6 +204,7 @@
     <string name="err_log_load_data_still">c:geo is still loading data required to post log. Please wait a little while longer.</string>
     <string name="err_log_failed_server">c:geo failed to post log because server is not responding.</string>
     <string name="err_log_post_failed">It seems that your log was not posted. Please check it on Geocaching.com.</string>
+    <string name="err_log_post_failed_ec">It seems that your log was not posted. Please check it on Extremcaching.com.</string>
     <string name="err_logimage_post_failed">It seems that your log image was not uploaded. Please check it on Geocaching.com.</string>
     <string name="err_search_address_forgot">c:geo forgot the address you tried to find.</string>
     <string name="err_parse_lat">c:geo can\'t parse latitude.</string>

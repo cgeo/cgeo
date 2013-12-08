@@ -2,8 +2,11 @@ package cgeo.geocaching.connector.ec;
 
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
+import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.list.StoredList;
@@ -15,19 +18,24 @@ import ch.boye.httpclientandroidlib.HttpResponse;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.FastDateFormat;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class ECApi {
 
     private static final String API_URL = "http://extremcaching.com/exports/api.php";
+    private static final FastDateFormat LOG_DATE_FORMAT = FastDateFormat.getInstance("yyyy-MM-dd HH:mm:ss.SSSZ", TimeZone.getTimeZone("UTC"), Locale.US);
 
     public static String cleanCode(String geocode) {
         return geocode.replace("EC", "");
@@ -73,6 +81,40 @@ public class ECApi {
         return importCachesFromJSON(response);
     }
 
+    public static LogResult postLog(final Geocache cache, final LogType logType, final Calendar date, final String log) {
+        return postLog(cache, logType, date, log, false);
+    }
+
+    public static LogResult postLog(final Geocache cache, final LogType logType, final Calendar date, final String log, boolean isRetry) {
+        final Parameters params = new Parameters("cache_id", cache.getGeocode());
+        params.add("type", logType.type);
+        params.add("log", log);
+        params.add("date", LOG_DATE_FORMAT.format(date.getTime()));
+
+        final String uri = "http://extremcaching.com/exports/log.php";
+        final HttpResponse response = Network.postRequest(uri, params);
+
+        if (response == null) {
+            return new LogResult(StatusCode.LOG_POST_ERROR_EC, "");
+        }
+        if (!isRetry && response.getStatusLine().getStatusCode() == 403) {
+            if (ECLogin.login() == StatusCode.NO_ERROR) {
+                apiRequest(uri, params, true);
+            }
+        }
+        if (response.getStatusLine().getStatusCode() != 200) {
+            return new LogResult(StatusCode.LOG_POST_ERROR_EC, "");
+        }
+
+        final String data = Network.getResponseDataAlways(response);
+        if (data != null && !StringUtils.isBlank(data) && StringUtils.contains(data, "success")) {
+            final String uid = StringUtils.remove(data, "success:");
+            return new LogResult(StatusCode.NO_ERROR, uid);
+        }
+
+        return new LogResult(StatusCode.LOG_POST_ERROR_EC, "");
+    }
+
 
     private static HttpResponse apiRequest(final Parameters params) {
         return apiRequest(API_URL, params, false);
@@ -89,7 +131,9 @@ public class ECApi {
             return null;
         }
         if (!isRetry && response.getStatusLine().getStatusCode() == 403) {
-            apiRequest(uri, params, true);
+            if (ECLogin.login() == StatusCode.NO_ERROR) {
+                apiRequest(uri, params, true);
+            }
         }
         if (response.getStatusLine().getStatusCode() != 200) {
             return null;

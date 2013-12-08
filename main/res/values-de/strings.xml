@@ -180,6 +180,7 @@
   <string name="err_log_load_data_still">c:geo lädt gerade die benötigten Daten. Bitte kurz warten.</string>
   <string name="err_log_failed_server">c:geo konnte Log nicht senden, weil der Server nicht antwortete.</string>
   <string name="err_log_post_failed">c:geo konnte Log nicht absenden.</string>
+  <string name="err_log_post_failed_ec">Es scheint dass Ihr Log nicht hochgeladen werden konnte. Bitte prüfen Sie es auf Extremcaching.com nach.</string>
   <string name="err_logimage_post_failed">Es scheint dass Ihr Logfoto nicht hochgeladen werden konnte. Bitte prüfen Sie es auf Geocaching.com nach.</string>
   <string name="err_search_address_forgot">c:geo hat die Adresse vergessen, die gesucht wurde.</string>
   <string name="err_parse_lat">c:geo konnte den Breitengrad nicht verarbeiten.</string>
