@@ -517,13 +517,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     @Override
     public void onPause() {
-        if (loadTimer != null) {
-            loadTimer.stopIt();
-            loadTimer = null;
-        }
-
+        stopTimer();
         deleteGeoDirObservers();
-
         savePrefs();
 
         if (mapView != null) {
@@ -994,12 +989,16 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             (new DisplayPointThread()).start();
         } else {
             // start timer
-            if (loadTimer != null) {
-                loadTimer.stopIt();
-                loadTimer = null;
-            }
+            stopTimer();
             loadTimer = new LoadTimer();
             loadTimer.start();
+        }
+    }
+
+    private synchronized void stopTimer() {
+        if (loadTimer != null) {
+            loadTimer.stopIt();
+            loadTimer = null;
         }
     }
 

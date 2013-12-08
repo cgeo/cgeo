@@ -68,11 +68,6 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
     }
 
     @Override
-    public boolean takeContentChanged() {
-        return super.takeContentChanged();
-    }
-
-    @Override
     protected void onStartLoading() {
         forceLoad();
     }
@@ -91,7 +86,9 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
     @Override
     public synchronized void waitForUser() {
         try {
-            wait();
+            while (getText() == null) {
+                wait();
+            }
         } catch (InterruptedException e) {
             Log.w("searchThread is not waiting for user…");
         }
