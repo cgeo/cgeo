@@ -33,8 +33,7 @@ public class ECLoggingManager implements ILoggingManager {
 
     @Override
     public final LogResult postLog(final Geocache cache, final LogType logType, final Calendar date, final String log, final String logPassword, final List<TrackableLog> trackableLogs) {
-        final LogResult result = ECApi.postLog(cache, logType, date, log);
-        return result;
+        return ECApi.postLog(cache, logType, date, log);
     }
 
     @Override

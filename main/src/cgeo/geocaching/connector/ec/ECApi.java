@@ -7,6 +7,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.files.GPX10Parser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.list.StoredList;
@@ -34,7 +35,8 @@ import java.util.TimeZone;
 
 public class ECApi {
 
-    private static final String API_URL = "http://extremcaching.com/exports/api.php";
+    private static final String API_HOST = "http://extremcaching.com/exports/";
+
     private static final FastDateFormat LOG_DATE_FORMAT = FastDateFormat.getInstance("yyyy-MM-dd HH:mm:ss.SSSZ", TimeZone.getTimeZone("UTC"), Locale.US);
 
     public static String cleanCode(String geocode) {
@@ -42,9 +44,8 @@ public class ECApi {
     }
 
     public static Geocache searchByGeoCode(final String geocode) {
-        final Parameters params = new Parameters("id", cleanCode(geocode));
-        params.add("cgeo", "1");
-        final HttpResponse response = apiRequest("http://extremcaching.com/exports/gpx.php", params);
+        final Parameters params = new Parameters("id", cleanCode(geocode), "cgeo", "1");
+        final HttpResponse response = apiRequest("gpx.php", params);
 
         final Collection<Geocache> caches = importCachesFromGPXResponse(response);
         if (CollectionUtils.isNotEmpty(caches)) {
@@ -91,7 +92,7 @@ public class ECApi {
         params.add("log", log);
         params.add("date", LOG_DATE_FORMAT.format(date.getTime()));
 
-        final String uri = "http://extremcaching.com/exports/log.php";
+        final String uri = API_HOST + "log.php";
         final HttpResponse response = Network.postRequest(uri, params);
 
         if (response == null) {
@@ -107,7 +108,7 @@ public class ECApi {
         }
 
         final String data = Network.getResponseDataAlways(response);
-        if (data != null && !StringUtils.isBlank(data) && StringUtils.contains(data, "success")) {
+        if (!StringUtils.isBlank(data) && StringUtils.contains(data, "success")) {
             final String uid = StringUtils.remove(data, "success:");
             return new LogResult(StatusCode.NO_ERROR, uid);
         }
@@ -117,7 +118,7 @@ public class ECApi {
 
 
     private static HttpResponse apiRequest(final Parameters params) {
-        return apiRequest(API_URL, params, false);
+        return apiRequest("api.php", params, false);
     }
 
     private static HttpResponse apiRequest(final String uri, final Parameters params) {
@@ -125,7 +126,7 @@ public class ECApi {
     }
 
     private static HttpResponse apiRequest(final String uri, final Parameters params, final boolean isRetry) {
-        final HttpResponse response = Network.getRequest(uri, params);
+        final HttpResponse response = Network.getRequest(API_HOST + uri, params);
 
         if (response == null) {
             return null;
@@ -145,14 +146,13 @@ public class ECApi {
         if (response == null) {
             return Collections.emptyList();
         }
-        Collection<Geocache> caches;
+
         try {
-            caches = new ECGPXParser(StoredList.TEMPORARY_LIST_ID).parse(response.getEntity().getContent(), null);
+            return new GPX10Parser(StoredList.TEMPORARY_LIST_ID).parse(response.getEntity().getContent(), null);
         } catch (Exception e) {
             Log.e("Error importing gpx from extremcaching.com", e);
             return Collections.emptyList();
         }
-        return caches;
     }
 
     private static List<Geocache> importCachesFromJSON(final HttpResponse response) {
@@ -160,14 +160,17 @@ public class ECApi {
         if (response != null) {
             try {
                 final String data = Network.getResponseDataAlways(response);
-                if (data == null || StringUtils.isBlank(data) || StringUtils.equals(data, "[]")) {
+                if (StringUtils.isBlank(data) || StringUtils.equals(data, "[]")) {
                     return Collections.emptyList();
                 }
                 final JSONArray json = new JSONArray(data);
-                final List<Geocache> caches = new ArrayList<Geocache>(json.length());
-                for (int i = 0; i < json.length(); i++) {
+                final int len = json.length();
+                final List<Geocache> caches = new ArrayList<Geocache>(len);
+                for (int i = 0; i < len; i++) {
                     final Geocache cache = parseCache(json.getJSONObject(i));
-                    caches.add(cache);
+                    if (cache != null) {
+                        caches.add(cache);
+                    }
                 }
                 return caches;
             } catch (final JSONException e) {
@@ -194,6 +197,7 @@ public class ECApi {
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_CACHE));
         } catch (final JSONException e) {
             Log.e("ECApi.parseCache", e);
+            return null;
         }
         return cache;
     }

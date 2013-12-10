@@ -78,8 +78,6 @@ public class CheckECCredentialsPreference extends Preference {
                     if (loginDialog != null && loginDialog.isShowing()) {
                         loginDialog.dismiss();
                     }
-                    // enable/disable basic member preferences
-                    //activity.initBasicMemberPreferences();
                 }
             }
         };
@@ -110,8 +108,7 @@ public class CheckECCredentialsPreference extends Preference {
                     final StatusCode loginResult = ECLogin.login();
                     Object payload = loginResult;
                     if (loginResult == StatusCode.NO_ERROR) {
-                        //Login.detectGcCustomDate();
-                        payload = null;// Login.downloadAvatarAndGetMemberStatus();
+                        payload = null;
                     }
                     logInHandler.obtainMessage(0, payload).sendToTarget();
                 }

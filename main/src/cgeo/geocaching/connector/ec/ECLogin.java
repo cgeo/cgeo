@@ -41,7 +41,6 @@ public abstract class ECLogin {
         }
 
         ECLogin.setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
-        //HttpResponse loginResponse = Network.getRequest("http://extremcaching.com/component/users/?view=login");
         HttpResponse loginResponse = Network.getRequest("https://extremcaching.com/community/profil1");
         String loginData = Network.getResponseData(loginResponse);
 
@@ -54,9 +53,6 @@ public abstract class ECLogin {
             Log.i("Already logged in Extremcaching.com as " + login.left);
             return StatusCode.NO_ERROR; // logged in
         }
-
-        //Cookies.clearCookies();
-        //Settings.setCookieStore(null);
 
         final Parameters params = new Parameters(
                 "username", login.left,
@@ -89,7 +85,7 @@ public abstract class ECLogin {
             return StatusCode.NO_ERROR; // logged in
         }
 
-        if (loginData.contains("Benutzername und Passwort falsch")) {
+        if (loginData.contains("Benutzername und Passwort falsch")) { // Yes, it's hardcoded in German (translation is done using Javascript and Google Translate)
             Log.i("Failed to log in Extremcaching.com as " + login.left + " because of wrong username/password");
             return StatusCode.WRONG_LOGIN_DATA; // wrong login
         }

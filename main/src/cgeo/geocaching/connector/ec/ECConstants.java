@@ -10,7 +10,7 @@ public final class ECConstants {
 
     public static final Pattern PATTERN_LOGIN_NAME = Pattern.compile("\"mod_login_greetingfrontpage-teaser\">Hallo, ([^<]+)</span>");
     public static final Pattern PATTERN_LOGIN_SECURITY = Pattern.compile("<input type=\"hidden\" name=\"return\" value=\"(.*)\" />[^<]*<input type=\"hidden\" name=\"(.*)\" value=\"1\" />");
-    public static final Pattern PATTERN_CACHES_FOUND = Pattern.compile("Gefundene Caches::</label><div class=\"cb_field\"><div id=\"cbfv_71\">([0-9]+)</div>");
+    public static final Pattern PATTERN_CACHES_FOUND = Pattern.compile("Gefundene Caches.*?>([0-9]+)<");
 
     private ECConstants() {
         // this class shall not have instances

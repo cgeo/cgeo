@@ -4,7 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.connector.ec.ECConnector;
+import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
 
@@ -72,10 +72,6 @@ public final class CacheDetailsCreator {
         return layout;
     }
 
-    private void createStarImages(final ViewGroup starsContainer, final float value) {
-        createStarImages(starsContainer, value, 5);
-    }
-
     private void createStarImages(final ViewGroup starsContainer, final float value, final int max) {
         final LayoutInflater inflater = LayoutInflater.from(activity);
 
@@ -139,11 +135,7 @@ public final class CacheDetailsCreator {
 
     public void addTerrain(Geocache cache) {
         if (cache.getTerrain() > 0) {
-            if (ECConnector.getInstance().canHandle(cache.getGeocode())) {
-                addStars(R.string.cache_terrain, cache.getTerrain(), 7);
-            } else {
-                addStars(R.string.cache_terrain, cache.getTerrain());
-            }
+            addStars(R.string.cache_terrain, cache.getTerrain(), ConnectorFactory.getConnector(cache).getMaxTerrain());
         }
     }
 
