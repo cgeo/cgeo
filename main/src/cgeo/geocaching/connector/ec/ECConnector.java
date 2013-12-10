@@ -84,12 +84,8 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
         CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
 
         final Geocache cache = ECApi.searchByGeoCode(geocode);
-        if (cache == null) {
-            return null;
-        }
-        final SearchResult searchResult = new SearchResult(cache);
 
-        return searchResult;
+        return cache != null ? new SearchResult(cache) : null;
     }
 
     @Override
@@ -114,7 +110,6 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean isOwner(final ICache cache) {
-        //return StringUtils.equalsIgnoreCase(cache.getOwnerUserId(), Settings.getUsername());
         return false;
     }
 
@@ -173,16 +168,9 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     public int getCacheMapMarkerId(boolean disabled) {
         final String icons = Settings.getECIconSet();
         if (StringUtils.equals(icons, "1")) {
-            if (disabled) {
-                return R.drawable.marker_disabled_other;
-            }
-            return R.drawable.marker_other;
+            return disabled ? R.drawable.marker_disabled_other : R.drawable.marker_other;
         }
-
-        if (disabled) {
-            return R.drawable.marker_disabled_oc;
-        }
-        return R.drawable.marker_oc;
+        return disabled ? R.drawable.marker_disabled_oc : R.drawable.marker_oc;
     }
 
     @Override
@@ -220,6 +208,11 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
         }
         logTypes.add(LogType.NOTE);
         return logTypes;
+    }
+
+    @Override
+    public int getMaxTerrain() {
+        return 7;
     }
 
 }

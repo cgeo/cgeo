@@ -232,9 +232,16 @@ public interface IConnector {
 
     /**
      * Get the 'prefix' (key) for a waypoint from the 'name' in the gpx file
-     * 
+     *
      * @param name
      * @return
      */
     public String getWaypointPrefix(String name);
+
+    /**
+     * Get the maximum value for Terrain
+     *
+     * @return
+     */
+    public int getMaxTerrain();
 }
