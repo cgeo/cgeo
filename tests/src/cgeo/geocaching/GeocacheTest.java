@@ -245,6 +245,8 @@ public class GeocacheTest extends CGeoTestCase {
         assertTime("text 14:20.", 14, 20);
         assertTime("<b>14:20</b>", 14, 20);
         assertTime("<u><em>Uhrzeit:</em></u> 17-20 " + timeHours + "</span></strong>", 17, 00);
+        assertTime("von 11 bis 13 " + timeHours, 11, 00);
+        assertTime("from 11 to 13 " + timeHours, 11, 00);
     }
 
     private static void assertTime(final String description, final int hours, final int minutes) {

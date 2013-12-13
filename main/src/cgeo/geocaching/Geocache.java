@@ -1713,7 +1713,7 @@ public class Geocache implements ICache, IWaypoint {
         patterns.add(Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)\\b"));
         if (StringUtils.isNotBlank(hourLocalized)) {
             // 17 - 20 o'clock
-            patterns.add(Pattern.compile("\\b(\\d{1,2})(?:\\.00)?" + "\\s*-\\s*" + "(?:\\d{1,2})(?:\\.00)?" + "\\s+" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
+            patterns.add(Pattern.compile("\\b(\\d{1,2})(?:\\.00)?" + "\\s*(?:-|[a-z]+)\\s*" + "(?:\\d{1,2})(?:\\.00)?" + "\\s+" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
             // 12 o'clock, 12.00 o'clock
             patterns.add(Pattern.compile("\\b(\\d{1,2})(?:\\.00)?\\s+" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
         }
