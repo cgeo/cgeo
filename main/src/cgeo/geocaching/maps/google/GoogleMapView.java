@@ -2,7 +2,6 @@ package cgeo.geocaching.maps.google;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
 import cgeo.geocaching.maps.PositionOverlay;
@@ -15,11 +14,13 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl.OverlayType;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
+import org.apache.commons.lang3.reflect.MethodUtils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -31,6 +32,7 @@ import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
+import android.widget.ZoomButtonsController;
 
 public class GoogleMapView extends MapView implements MapViewImpl {
     private GestureDetector gestureDetector;
@@ -71,9 +73,14 @@ public class GoogleMapView extends MapView implements MapViewImpl {
             // Push zoom controls to the right
             FrameLayout.LayoutParams zoomParams = new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
             zoomParams.gravity = Gravity.RIGHT;
-            getZoomButtonsController().getZoomControls().setLayoutParams(zoomParams);
+            // The call to retrieve the zoom buttons controller is undocumented and works so far on all devices
+            // supported by Google Play, but fails at least on one Jolla.
+            final ZoomButtonsController controller = (ZoomButtonsController) MethodUtils.invokeMethod(this, "getZoomButtonsController");
+            controller.getZoomControls().setLayoutParams(zoomParams);
 
             super.displayZoomControls(takeFocus);
+        } catch (NoSuchMethodException e) {
+            Log.w("GoogleMapView.displayZoomControls: unable to explicitly place the zoom buttons");
         } catch (Exception e) {
             Log.e("GoogleMapView.displayZoomControls", e);
         }
