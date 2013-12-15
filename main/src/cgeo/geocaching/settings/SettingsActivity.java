@@ -128,7 +128,8 @@ public class SettingsActivity extends PreferenceActivity {
                 R.string.pref_gpxExportDir, R.string.pref_gpxImportDir,
                 R.string.pref_mapDirectory, R.string.pref_defaultNavigationTool,
                 R.string.pref_defaultNavigationTool2, R.string.pref_webDeviceName,
-                R.string.pref_fakekey_preference_backup_info, R.string.pref_twitter_cache_message, R.string.pref_twitter_trackable_message }) {
+                R.string.pref_fakekey_preference_backup_info, R.string.pref_twitter_cache_message, R.string.pref_twitter_trackable_message,
+                R.string.pref_ecusername, R.string.pref_ecpassword, R.string.pref_ec_icons }) {
             bindSummaryToStringValue(k);
         }
         getPreference(R.string.pref_units).setDefaultValue(Settings.getImperialUnitsDefault());
@@ -149,9 +150,11 @@ public class SettingsActivity extends PreferenceActivity {
         getPreference(R.string.pref_connectorOCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         getPreference(R.string.pref_connectorOCPLActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         getPreference(R.string.pref_connectorGCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
+        getPreference(R.string.pref_connectorECActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         setWebsite(R.string.pref_fakekey_gc_website, GCConnector.getInstance().getHost());
         setWebsite(R.string.pref_fakekey_ocde_website, "opencaching.de");
         setWebsite(R.string.pref_fakekey_ocpl_website, "opencaching.pl");
+        setWebsite(R.string.pref_fakekey_ec_website, "extremcaching.com");
         setWebsite(R.string.pref_fakekey_gcvote_website, "gcvote.com");
         setWebsite(R.string.pref_fakekey_sendtocgeo_website, "send2.cgeo.org");
     }
@@ -495,7 +498,7 @@ public class SettingsActivity extends PreferenceActivity {
                 }
                 Settings.setMapSource(mapSource);
                 preference.setSummary(mapSource.getName());
-            } else if (isPreference(preference, R.string.pref_connectorOCActive) || isPreference(preference, R.string.pref_connectorOCPLActive) || isPreference(preference, R.string.pref_connectorGCActive)) {
+            } else if (isPreference(preference, R.string.pref_connectorOCActive) || isPreference(preference, R.string.pref_connectorOCPLActive) || isPreference(preference, R.string.pref_connectorGCActive) || isPreference(preference, R.string.pref_connectorECActive)) {
                 // // reset log-in status if connector activation was changed
                 CgeoApplication.getInstance().checkLogin = true;
             } else if (preference instanceof ListPreference) {

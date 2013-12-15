@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
+import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector.ApiSupport;
@@ -30,6 +31,7 @@ public final class ConnectorFactory {
     private static final UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
     private static final IConnector[] CONNECTORS = new IConnector[] {
             GCConnector.getInstance(),
+            ECConnector.getInstance(),
             new OCApiLiveConnector("opencaching.de", "www.opencaching.de", "OC", "CC BY-NC-ND, alle Logeinträge © jeweiliger Autor",
                     R.string.oc_de_okapi_consumer_key, R.string.oc_de_okapi_consumer_secret,
                     R.string.pref_connectorOCActive, R.string.pref_ocde_tokenpublic, R.string.pref_ocde_tokensecret, ApiSupport.current),

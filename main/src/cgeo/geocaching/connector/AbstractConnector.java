@@ -200,4 +200,9 @@ public abstract class AbstractConnector implements IConnector {
         // Default: just return the name
         return name;
     }
+
+    @Override
+    public int getMaxTerrain() {
+        return 5;
+    }
 }

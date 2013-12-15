@@ -148,6 +148,7 @@
     <string name="err_start">Communication not started</string>
     <string name="err_parse">Failed Login page parsing</string>
     <string name="err_server">Unable to contact Geocaching.com. The website may be down or your internet connection not working.</string>
+    <string name="err_server_ec">Unable to contact Extremcaching.com. The website may be down or your internet connection not working.</string>
     <string name="err_login">No Login information stored</string>
     <string name="err_login_failed">c:geo can\'t log in.</string>
     <string name="err_login_failed_toast">c:geo can\'t log in. c:geo works offline with Stored caches. Check Login settings or enable your internet connection.</string>
@@ -203,6 +204,7 @@
     <string name="err_log_load_data_still">c:geo is still loading data required to post log. Please wait a little while longer.</string>
     <string name="err_log_failed_server">c:geo failed to post log because server is not responding.</string>
     <string name="err_log_post_failed">It seems that your log was not posted. Please check it on Geocaching.com.</string>
+    <string name="err_log_post_failed_ec">It seems that your log was not posted. Please check it on Extremcaching.com.</string>
     <string name="err_logimage_post_failed">It seems that your log image was not uploaded. Please check it on Geocaching.com.</string>
     <string name="err_search_address_forgot">c:geo forgot the address you tried to find.</string>
     <string name="err_parse_lat">c:geo can\'t parse latitude.</string>
@@ -391,7 +393,9 @@
     <string name="settings_goto_url_button">more …</string>
 
     <string name="settings_title_gc">Geocaching.com</string>
+    <string name="settings_title_ec">Extremcaching.com</string>
     <string name="settings_activate_gc">Activate</string>
+    <string name="settings_activate_ec">Activate</string>
     <string name="settings_gc_legal_note">With using the service of geocaching.com, you accept the Groundspeak Terms of Use.</string>
     <string name="settings_info_facebook_login_title">Facebook Login</string>
     <string name="settings_info_facebook_login">You can\'t make c:geo login to geocaching.com with your Facebook account. But there is a simple workaround …</string>
@@ -523,6 +527,9 @@
     <string name="settings_information">Information</string>
     <string name="settings_twitter_cache_message">Message for found cache</string>
     <string name="settings_twitter_trackable_message">Message for found trackable</string>
+    <string name="init_ec_icons">Map Icons</string>
+    <string name="settings_ec_icons_other">Other</string>
+    <string name="settings_ec_icons_oc">OC</string>
     
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>
