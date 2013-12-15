@@ -27,7 +27,6 @@ import com.google.zxing.integration.android.IntentResult;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -524,7 +523,7 @@ public class MainActivity extends AbstractActivity {
                                 new PocketQueryList.UserInterface(MainActivity.this).promptForListSelection(new RunnableWithArgument<PocketQueryList>() {
 
                                     @Override
-                                    public void run(final @NonNull PocketQueryList pql) {
+                                    public void run(final PocketQueryList pql) {
                                         CacheListActivity.startActivityPocket(MainActivity.this, pql);
                                     }
                                 });
