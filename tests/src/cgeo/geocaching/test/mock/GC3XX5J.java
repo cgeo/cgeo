@@ -133,10 +133,4 @@ public class GC3XX5J extends MockedCache {
     public String getShortDescription() {
         return "Kadar zbolimo nam pomaga...<br /> <br /> When we get sick, they are helpful...";
     }
-
-    @Override
-    public String getPersonalNote() {
-        return super.getPersonalNote();
-    }
-
 }

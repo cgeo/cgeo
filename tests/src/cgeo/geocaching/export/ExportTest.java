@@ -7,6 +7,7 @@ import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.utils.FileUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class ExportTest extends CGeoTestCase {
 
         assertNotNull(result);
 
-        result.delete();
+        FileUtils.deleteIgnoringFailure(result);
     }
 
     private static class GpxExportTester extends GpxExport {

@@ -35,7 +35,7 @@ class CalendarEntry {
         final String startTime = getParameter(ICalendar.PARAM_START_TIME_MINUTES);
         if (startTime.length() > 0) {
             try {
-                this.startTimeMinutes = Integer.valueOf(startTime);
+                this.startTimeMinutes = Integer.parseInt(startTime);
             } catch (NumberFormatException e) {
                 Log.e("CalendarEntry creation", e);
             }

@@ -36,10 +36,10 @@ public class PersonalNoteTest extends TestCase {
 
         Geocache exceedingCache = new Geocache();
         exceedingCache.setListId(StoredList.STANDARD_LIST_ID); // stored
-        exceedingCache.setPersonalNote(testString.toString());
+        exceedingCache.setPersonalNote(testString);
         PersonalNote otherNote = new PersonalNote(exceedingCache);
         PersonalNote result = parsedNote.mergeWith(otherNote);
-        assertPersonalNote(result, null, testString.toString());
+        assertPersonalNote(result, null, testString);
     }
 
     public static void testParseCgeoOnly() {

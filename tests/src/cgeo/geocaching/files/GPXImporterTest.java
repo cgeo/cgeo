@@ -12,6 +12,7 @@ import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.net.Uri;
@@ -50,8 +51,8 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
             // the "real" method check
             assertEquals(wptsFileName, GPXImporter.getWaypointsFileNameForGpxFile(gpx));
             // they also need to be deleted, because of case sensitive tests that will not work correct on case insensitive file systems
-            gpx.delete();
-            wpts.delete();
+            FileUtils.deleteQuietly(gpx);
+            FileUtils.deleteQuietly(wpts);
         }
         final File gpx1 = new File(tempDir, "abc.gpx");
         assertNull(GPXImporter.getWaypointsFileNameForGpxFile(gpx1));
@@ -260,7 +261,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
             msg1.copyFrom(msg);
             messages.add(msg1);
             lastMessage = System.currentTimeMillis();
-            notify();
+            notifyAll();
         }
 
         public synchronized void waitForCompletion(final long milliseconds, final int maxMessages) {
@@ -287,7 +288,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertTrue("java.io.tmpdir is not defined", StringUtils.isNotBlank(globalTempDir));
 
         tempDir = new File(globalTempDir, "cgeogpxesTest");
-        tempDir.mkdir();
+        cgeo.geocaching.utils.FileUtils.mkdirs(tempDir);
         assertTrue("Could not create directory " + tempDir.getPath(), tempDir.exists());
         // workaround to get storage initialized
         DataStore.getAllHistoryCachesCount();
@@ -306,21 +307,9 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         cachesInList.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
         DataStore.markDropped(cachesInList);
         DataStore.removeList(listId);
-        deleteDirectory(tempDir);
+        FileUtils.deleteDirectory(tempDir);
         TestSettings.setStoreOfflineMaps(importCacheStaticMaps);
         TestSettings.setStoreOfflineWpMaps(importWpStaticMaps);
         super.tearDown();
     }
-
-    private static void deleteDirectory(File dir) {
-        for (File f : dir.listFiles()) {
-            if (f.isFile()) {
-                f.delete();
-            } else if (f.isDirectory()) {
-                deleteDirectory(f);
-            }
-        }
-        dir.delete();
-    }
-
 }

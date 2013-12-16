@@ -12,13 +12,13 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
+import cgeo.geocaching.utils.SynchronizedDateFormat;
 
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumSet;
@@ -28,7 +28,7 @@ import java.util.Locale;
 import java.util.Set;
 
 public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
-    private static final SimpleDateFormat LOG_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US); // 2010-04-20T07:00:00Z
+    private static final SynchronizedDateFormat LOG_DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US); // 2010-04-20T07:00:00Z
 
     public void testGPXVersion100() throws Exception {
         testGPXVersion(R.raw.gc1bkp3_gpx100);

@@ -40,7 +40,9 @@ import junit.framework.Assert;
  * application and/or context.
  */
 
-public class cgeoApplicationTest extends CGeoTestCase {
+public class CgeoApplicationTest extends CGeoTestCase {
+
+    private static final String[] INVALID_TOKEN = null;
 
     /**
      * The name 'test preconditions' is a convention to signal that if this test
@@ -69,6 +71,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
     @MediumTest
     public static void testSearchTrackable() {
         final Trackable tb = GCParser.searchTrackable("TB2J1VZ", null, null);
+        assertNotNull(tb);
         // fix data
         assertEquals("aefffb86-099f-444f-b132-605436163aa8", tb.getGuid());
         assertEquals("TB2J1VZ", tb.getGeocode());
@@ -344,8 +347,6 @@ public class cgeoApplicationTest extends CGeoTestCase {
 
                 try {
 
-                    final String[] tokens = null; // without a valid token we are "logged off"
-
                     // non premium cache
                     MockedCache cache = new GC2CJPF();
                     deleteCacheFromDBAndLogout(cache.getGeocode());
@@ -353,7 +354,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
                     Settings.setCacheType(CacheType.ALL);
 
                     Viewport viewport = new Viewport(cache, 0.003, 0.003);
-                    SearchResult search = ConnectorFactory.searchByViewport(viewport, tokens);
+                    SearchResult search = ConnectorFactory.searchByViewport(viewport, INVALID_TOKEN);
 
                     assertNotNull(search);
                     assertTrue(search.getGeocodes().contains(cache.getGeocode()));
@@ -370,7 +371,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
                     deleteCacheFromDBAndLogout(cache.getGeocode());
 
                     viewport = new Viewport(cache, 0.003, 0.003);
-                    search = ConnectorFactory.searchByViewport(viewport, tokens);
+                    search = ConnectorFactory.searchByViewport(viewport, INVALID_TOKEN);
 
                     assertNotNull(search);
                     // depending on the chosen strategy the cache is part of the search or not
@@ -392,7 +393,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
             String oldUser = mockedCache.getMockedDataUser();
             try {
                 mockedCache.setMockedDataUser(Settings.getUsername());
-                Geocache parsedCache = cgeoApplicationTest.testSearchByGeocode(mockedCache.getGeocode());
+                Geocache parsedCache = CgeoApplicationTest.testSearchByGeocode(mockedCache.getGeocode());
                 if (null != parsedCache) {
                     Compare.assertCompareCaches(mockedCache, parsedCache, true);
                 }
@@ -406,10 +407,10 @@ public class cgeoApplicationTest extends CGeoTestCase {
      * Caches that are good test cases
      */
     public static void testSearchByGeocodeSpecialties() {
-        final Geocache GCV2R9 = cgeoApplicationTest.testSearchByGeocode("GCV2R9");
+        final Geocache GCV2R9 = CgeoApplicationTest.testSearchByGeocode("GCV2R9");
         Assert.assertEquals("California, United States", GCV2R9.getLocation());
 
-        final Geocache GC1ZXEZ = cgeoApplicationTest.testSearchByGeocode("GC1ZXEZ");
+        final Geocache GC1ZXEZ = CgeoApplicationTest.testSearchByGeocode("GC1ZXEZ");
         Assert.assertEquals("Ms.Marple/Mr.Stringer", GC1ZXEZ.getOwnerUserId());
     }
 

@@ -2,6 +2,8 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.utils.Log;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import android.os.SystemClock;
@@ -51,6 +53,7 @@ public class HtmlPerformanceTest extends AndroidTestCase {
         });
     }
 
+    @SuppressFBWarnings("DM_GC")
     private static long measure(String label, Runnable runnable) {
         System.gc();
         final long start = SystemClock.elapsedRealtime();

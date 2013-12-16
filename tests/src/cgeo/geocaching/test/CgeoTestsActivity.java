@@ -1,5 +1,7 @@
 package cgeo.geocaching.test;
 
+import butterknife.ButterKnife;
+
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.pm.InstrumentationInfo;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
@@ -76,7 +79,9 @@ public class CgeoTestsActivity extends Activity {
                     Thread.sleep(50);
                     publishProgress(mReader.readLine());
                 } while (System.currentTimeMillis() < timeout);
-            } catch (Exception e) {
+            } catch (InterruptedException e) {
+                publishProgress("ERROR: " + e);
+            } catch (IOException e) {
                 publishProgress("ERROR: " + e);
             } finally {
                 publishProgress("END");
@@ -90,8 +95,8 @@ public class CgeoTestsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cgeo_tests_activity);
-        logView = (TextView) findViewById(R.id.logOutput);
-        scrollView = (BottomAwareScrollView) findViewById(R.id.scrollView);
+        logView = ButterKnife.findById(this, R.id.logOutput);
+        scrollView = ButterKnife.findById(this, R.id.scrollView);
     }
 
     @Override
@@ -114,7 +119,7 @@ public class CgeoTestsActivity extends Activity {
      *            referenced from XML layout
      */
     public void runTests(final View v) {
-        final Button button = (Button) findViewById(R.id.buttonRun);
+        final Button button = ButterKnife.findById(this, R.id.buttonRun);
         button.setEnabled(false);
         try {
             runTestsInternally();

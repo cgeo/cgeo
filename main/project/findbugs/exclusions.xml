@@ -25,6 +25,8 @@
     	    <Bug pattern="SE_COMPARATOR_SHOULD_BE_SERIALIZABLE" />
 	    </Or>
 	</Match>
+	
+	<!-- Memory usage improvement by explicitly removing shared substrings in pattern matcher. -->
 	<Match>
 	    <Bug pattern="DM_STRING_CTOR" />
 	    <Or>
@@ -32,9 +34,17 @@
 	        <Class name="~.*TextUtils"></Class>
 	    </Or>
 	</Match>
+	
+	<!-- File scanner needs to use hard coded names. -->
 	<Match>
 	    <Bug pattern="DMI_HARDCODED_ABSOLUTE_FILENAME"/>
 	    <Class name="~.*LocalStorage"/>
 	</Match>
-		
+	
+	<!-- Tests using setUp() methods don't initialize their fields in the constructor. -->
+	<Match>
+	    <Bug pattern="UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR"/>
+	    <Class name="~.*Test"/>
+	</Match>
+			
 </FindBugsFilter>
