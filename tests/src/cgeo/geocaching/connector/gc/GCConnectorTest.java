@@ -20,7 +20,7 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
             // set up settings required for test
             TestSettings.setExcludeMine(false);
             Settings.setCacheType(CacheType.ALL);
-            GCLogin.login();
+            GCLogin.getInstance().login();
 
             final String[] tokens = GCLogin.getMapTokens();
 

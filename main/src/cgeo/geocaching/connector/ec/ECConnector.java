@@ -124,7 +124,7 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public boolean login(Handler handler, Context fromActivity) {
         // login
-        final StatusCode status = ECLogin.login();
+        final StatusCode status = ECLogin.getInstance().login();
 
         if (status == StatusCode.NO_ERROR) {
             CgeoApplication.getInstance().checkLogin = false;
@@ -144,22 +144,22 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public String getUserName() {
-        return ECLogin.getActualUserName();
+        return ECLogin.getInstance().getActualUserName();
     }
 
     @Override
     public int getCachesFound() {
-        return ECLogin.getActualCachesFound();
+        return ECLogin.getInstance().getActualCachesFound();
     }
 
     @Override
     public String getLoginStatusString() {
-        return ECLogin.getActualStatus();
+        return ECLogin.getInstance().getActualStatus();
     }
 
     @Override
     public boolean isLoggedIn() {
-        return ECLogin.isActualLoginStatus();
+        return ECLogin.getInstance().isActualLoginStatus();
     }
 
     @Override

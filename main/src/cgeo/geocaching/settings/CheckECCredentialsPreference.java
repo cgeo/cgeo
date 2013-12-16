@@ -29,7 +29,7 @@ public class CheckECCredentialsPreference extends AbstractCheckCredentialsPrefer
 
     @Override
     protected Object login() {
-        final StatusCode loginResult = ECLogin.login();
+        final StatusCode loginResult = ECLogin.getInstance().login();
         Object payload = loginResult;
         if (loginResult == StatusCode.NO_ERROR) {
             payload = null;

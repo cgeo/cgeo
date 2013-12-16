@@ -99,7 +99,7 @@ public class ECApi {
             return new LogResult(StatusCode.LOG_POST_ERROR_EC, "");
         }
         if (!isRetry && response.getStatusLine().getStatusCode() == 403) {
-            if (ECLogin.login() == StatusCode.NO_ERROR) {
+            if (ECLogin.getInstance().login() == StatusCode.NO_ERROR) {
                 apiRequest(uri, params, true);
             }
         }
@@ -132,7 +132,7 @@ public class ECApi {
             return null;
         }
         if (!isRetry && response.getStatusLine().getStatusCode() == 403) {
-            if (ECLogin.login() == StatusCode.NO_ERROR) {
+            if (ECLogin.getInstance().login() == StatusCode.NO_ERROR) {
                 apiRequest(uri, params, true);
             }
         }

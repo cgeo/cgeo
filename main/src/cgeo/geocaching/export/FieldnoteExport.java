@@ -175,16 +175,16 @@ class FieldnoteExport extends AbstractExport {
             if (upload) {
                 publishProgress(STATUS_UPLOAD);
 
-                if (!GCLogin.isActualLoginStatus()) {
+                if (!GCLogin.getInstance().isActualLoginStatus()) {
                     // no need to upload (possibly large file) if we're not logged in
-                    final StatusCode loginState = GCLogin.login();
+                    final StatusCode loginState = GCLogin.getInstance().login();
                     if (loginState != StatusCode.NO_ERROR) {
                         Log.e("FieldnoteExport.ExportTask upload: Login failed");
                     }
                 }
 
                 final String uri = "http://www.geocaching.com/my/uploadfieldnotes.aspx";
-                final String page = GCLogin.getRequestLogged(uri, null);
+                final String page = GCLogin.getInstance().getRequestLogged(uri, null);
 
                 if (StringUtils.isBlank(page)) {
                     Log.e("FieldnoteExport.ExportTask get page: No data from server");

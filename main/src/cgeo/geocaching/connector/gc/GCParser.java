@@ -785,8 +785,8 @@ public abstract class GCParser {
                 "__EVENTARGUMENT", "");
         GCLogin.putViewstates(params, viewstates);
 
-        final String page = GCLogin.postRequestLogged(uri, params);
-        if (!GCLogin.getLoginStatus(page)) {
+        final String page = GCLogin.getInstance().postRequestLogged(uri, params);
+        if (!GCLogin.getInstance().getLoginStatus(page)) {
             Log.e("GCParser.postLogTrackable: Can not log in geocaching");
             return search;
         }
@@ -850,7 +850,7 @@ public abstract class GCParser {
 
         final String uri = "http://www.geocaching.com/seek/nearest.aspx";
         final String fullUri = uri + "?" + addFToParams(params, my, true);
-        final String page = GCLogin.getRequestLogged(uri, addFToParams(params, my, true));
+        final String page = GCLogin.getInstance().getRequestLogged(uri, addFToParams(params, my, true));
 
         if (StringUtils.isBlank(page)) {
             Log.e("GCParser.searchByAny: No data from server");
@@ -866,7 +866,7 @@ public abstract class GCParser {
 
         final SearchResult search = searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(), false, cacheType);
 
-        GCLogin.getLoginStatus(page);
+        GCLogin.getInstance().getLoginStatus(page);
 
         return search;
     }
@@ -973,7 +973,7 @@ public abstract class GCParser {
             params.put("id", id);
         }
 
-        final String page = GCLogin.getRequestLogged("http://www.geocaching.com/track/details.aspx", params);
+        final String page = GCLogin.getInstance().getRequestLogged("http://www.geocaching.com/track/details.aspx", params);
 
         if (StringUtils.isBlank(page)) {
             Log.e("GCParser.searchTrackable: No data from server");
@@ -994,7 +994,7 @@ public abstract class GCParser {
 
         final Parameters params = new Parameters();
 
-        final String page = GCLogin.getRequestLogged("http://www.geocaching.com/pocket/default.aspx", params);
+        final String page = GCLogin.getInstance().getRequestLogged("http://www.geocaching.com/pocket/default.aspx", params);
 
         if (StringUtils.isBlank(page)) {
             Log.e("GCParser.searchPocketQueryList: No data from server");
@@ -1091,8 +1091,8 @@ public abstract class GCParser {
         }
 
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/log.aspx").encodedQuery("ID=" + cacheid).build().toString();
-        String page = GCLogin.postRequestLogged(uri, params);
-        if (!GCLogin.getLoginStatus(page)) {
+        String page = GCLogin.getInstance().postRequestLogged(uri, params);
+        if (!GCLogin.getInstance().getLoginStatus(page)) {
             Log.e("GCParser.postLog: Cannot log in geocaching");
             return new ImmutablePair<StatusCode, String>(StatusCode.NOT_LOGGED_IN, "");
         }
@@ -1156,10 +1156,10 @@ public abstract class GCParser {
                     DataStore.saveVisitDate(geocode);
                 }
 
-                GCLogin.getLoginStatus(page);
+                GCLogin.getInstance().getLoginStatus(page);
                 // the log-successful-page contains still the old value
-                if (GCLogin.getActualCachesFound() >= 0) {
-                    GCLogin.setActualCachesFound(GCLogin.getActualCachesFound() + 1);
+                if (GCLogin.getInstance().getActualCachesFound() >= 0) {
+                    GCLogin.getInstance().setActualCachesFound(GCLogin.getInstance().getActualCachesFound() + 1);
                 }
 
                 final String logID = TextUtils.getMatch(page, GCConstants.PATTERN_LOG_IMAGE_UPLOAD, "");
@@ -1190,7 +1190,7 @@ public abstract class GCParser {
     public static ImmutablePair<StatusCode, String> uploadLogImage(final String logId, final String caption, final String description, final Uri imageUri) {
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/upload.aspx").encodedQuery("LID=" + logId).build().toString();
 
-        final String page = GCLogin.getRequestLogged(uri, null);
+        final String page = GCLogin.getInstance().getRequestLogged(uri, null);
         if (StringUtils.isBlank(page)) {
             Log.e("GCParser.uploadLogImage: No data from server");
             return new ImmutablePair<StatusCode, String>(StatusCode.UNKNOWN_ERROR, null);
@@ -1272,8 +1272,8 @@ public abstract class GCParser {
                 "ctl00$ContentBody$uxVistOtherListingGC", "");
 
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("wid=" + tbid).build().toString();
-        final String page = GCLogin.postRequestLogged(uri, params);
-        if (!GCLogin.getLoginStatus(page)) {
+        final String page = GCLogin.getInstance().postRequestLogged(uri, params);
+        if (!GCLogin.getInstance().getLoginStatus(page)) {
             Log.e("GCParser.postLogTrackable: Cannot log in geocaching");
             return StatusCode.NOT_LOGGED_IN;
         }
@@ -1302,7 +1302,7 @@ public abstract class GCParser {
      */
     static boolean addToWatchlist(final Geocache cache) {
         final String uri = "http://www.geocaching.com/my/watchlist.aspx?w=" + cache.getCacheId();
-        final String page = GCLogin.postRequestLogged(uri, null);
+        final String page = GCLogin.getInstance().postRequestLogged(uri, null);
 
         if (StringUtils.isBlank(page)) {
             Log.e("GCParser.addToWatchlist: No data from server");
@@ -1328,7 +1328,7 @@ public abstract class GCParser {
      */
     static boolean removeFromWatchlist(final Geocache cache) {
         final String uri = "http://www.geocaching.com/my/watchlist.aspx?ds=1&action=rem&id=" + cache.getCacheId();
-        String page = GCLogin.postRequestLogged(uri, null);
+        String page = GCLogin.getInstance().postRequestLogged(uri, null);
 
         if (StringUtils.isBlank(page)) {
             Log.e("GCParser.removeFromWatchlist: No data from server");
@@ -1364,7 +1364,7 @@ public abstract class GCParser {
         params.put("log", log);
         params.put("numlogs", numlogs);
 
-        return GCLogin.getRequestLogged("http://www.geocaching.com/seek/cache_details.aspx", params);
+        return GCLogin.getInstance().getRequestLogged("http://www.geocaching.com/seek/cache_details.aspx", params);
     }
 
     /**

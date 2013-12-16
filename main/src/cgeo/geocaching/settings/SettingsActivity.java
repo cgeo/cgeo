@@ -528,8 +528,8 @@ public class SettingsActivity extends PreferenceActivity {
             }
             if ((isPreference(preference, R.string.pref_username) && !stringValue.equals(Settings.getUsername())) || (isPreference(preference, R.string.pref_password) && !stringValue.equals(Settings.getGcLogin().getRight()))) {
                 // reset log-in if gc user or password is changed
-                if (GCLogin.isActualLoginStatus()) {
-                    GCLogin.logout();
+                if (GCLogin.getInstance().isActualLoginStatus()) {
+                    GCLogin.getInstance().logout();
                 }
                 CgeoApplication.getInstance().checkLogin = true;
             }

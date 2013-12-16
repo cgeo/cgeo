@@ -2,6 +2,7 @@ package cgeo.geocaching.connector.ec;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.AbstractLogin;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.Network;
@@ -18,20 +19,22 @@ import org.eclipse.jdt.annotation.Nullable;
 
 import java.util.regex.Matcher;
 
-public abstract class ECLogin {
+public class ECLogin extends AbstractLogin {
 
-    // false = not logged in
-    private static boolean actualLoginStatus = false;
-    private static String actualUserName = StringUtils.EMPTY;
-    private static int actualCachesFound = -1;
-    private static String actualStatus = StringUtils.EMPTY;
-
-
-    public static StatusCode login() {
-        return login(true);
+    private ECLogin() {
+        // singleton
     }
 
-    private static StatusCode login(boolean retry) {
+    private static class SingletonHolder {
+        private static ECLogin INSTANCE = new ECLogin();
+    }
+
+    public static ECLogin getInstance() {
+        return SingletonHolder.INSTANCE;
+    }
+
+    @Override
+    protected StatusCode login(boolean retry) {
         final ImmutablePair<String, String> login = Settings.getECLogin();
 
         if (StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
@@ -40,7 +43,7 @@ public abstract class ECLogin {
             return StatusCode.NO_LOGIN_INFO_STORED;
         }
 
-        ECLogin.setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
+        setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
         HttpResponse loginResponse = Network.getRequest("https://extremcaching.com/community/profil1");
         String loginData = Network.getResponseData(loginResponse);
 
@@ -49,7 +52,7 @@ public abstract class ECLogin {
             return StatusCode.CONNECTION_FAILED_EC; // no login page
         }
 
-        if (ECLogin.getLoginStatus(loginData)) {
+        if (getLoginStatus(loginData)) {
             Log.i("Already logged in Extremcaching.com as " + login.left);
             return StatusCode.NO_ERROR; // logged in
         }
@@ -77,7 +80,7 @@ public abstract class ECLogin {
         }
         assert loginData != null;  // Caught above
 
-        if (ECLogin.getLoginStatus(loginData)) {
+        if (getLoginStatus(loginData)) {
             Log.i("Successfully logged in Extremcaching.com as " + login.left);
 
             Settings.setCookieStore(Cookies.dumpCookieStore());
@@ -98,51 +101,6 @@ public abstract class ECLogin {
         return StatusCode.UNKNOWN_ERROR; // can't login
     }
 
-    private static void resetLoginStatus() {
-        Cookies.clearCookies();
-        Settings.setCookieStore(null);
-
-        setActualLoginStatus(false);
-    }
-
-    private static void clearLoginInfo() {
-        resetLoginStatus();
-
-        setActualCachesFound(-1);
-        setActualStatus(CgeoApplication.getInstance().getString(R.string.err_login));
-    }
-
-    static void setActualCachesFound(final int found) {
-        actualCachesFound = found;
-    }
-
-    public static String getActualStatus() {
-        return actualStatus;
-    }
-
-    private static void setActualStatus(final String status) {
-        actualStatus = status;
-    }
-
-    public static boolean isActualLoginStatus() {
-        return actualLoginStatus;
-    }
-
-    private static void setActualLoginStatus(boolean loginStatus) {
-        actualLoginStatus = loginStatus;
-    }
-
-    public static String getActualUserName() {
-        return actualUserName;
-    }
-
-    private static void setActualUserName(String userName) {
-        actualUserName = userName;
-    }
-
-    public static int getActualCachesFound() {
-        return actualCachesFound;
-    }
 
     /**
      * Check if the user has been logged in when he retrieved the data.
@@ -150,7 +108,7 @@ public abstract class ECLogin {
      * @param page
      * @return <code>true</code> if user is logged in, <code>false</code> otherwise
      */
-    public static boolean getLoginStatus(@Nullable final String page) {
+    public boolean getLoginStatus(@Nullable final String page) {
         if (StringUtils.isBlank(page)) {
             Log.e("ECLogin.getLoginStatus: No page given");
             return false;

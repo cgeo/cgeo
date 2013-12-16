@@ -2,6 +2,7 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.AbstractLogin;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.HtmlImage;
@@ -13,6 +14,7 @@ import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -29,17 +31,11 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public abstract class GCLogin {
+public class GCLogin extends AbstractLogin {
 
     private static final String DEFAULT_CUSTOM_DATE_FORMAT = "MM/dd/yyyy";
 
     private final static String ENGLISH = "<a href=\"#\">English&#9660;</a>";
-
-    // false = not logged in
-    private static boolean actualLoginStatus = false;
-    private static String actualUserName = StringUtils.EMPTY;
-    private static int actualCachesFound = -1;
-    private static String actualStatus = StringUtils.EMPTY;
 
     private final static Map<String, SimpleDateFormat> GC_CUSTOM_DATE_FORMATS;
     public static final String LANGUAGE_CHANGE_URI = "http://www.geocaching.com/my/souvenirs.aspx";
@@ -64,11 +60,20 @@ public abstract class GCLogin {
         GC_CUSTOM_DATE_FORMATS = Collections.unmodifiableMap(map);
     }
 
-    public static StatusCode login() {
-        return login(true);
+    private GCLogin() {
+        // singleton
     }
 
-    private static StatusCode login(boolean retry) {
+    public static GCLogin getInstance() {
+        return SingletonHolder.INSTANCE;
+    }
+
+    private static class SingletonHolder {
+        private static final GCLogin INSTANCE = new GCLogin();
+    }
+
+    @Override
+    protected StatusCode login(boolean retry) {
         final ImmutablePair<String, String> login = Settings.getGcLogin();
 
         if (StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
@@ -77,7 +82,7 @@ public abstract class GCLogin {
             return StatusCode.NO_LOGIN_INFO_STORED;
         }
 
-        GCLogin.setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
+        setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
         HttpResponse loginResponse = Network.getRequest("https://www.geocaching.com/login/default.aspx");
         String loginData = Network.getResponseData(loginResponse);
         if (loginResponse != null && loginResponse.getStatusLine().getStatusCode() == 503 && TextUtils.matches(loginData, GCConstants.PATTERN_MAINTENANCE)) {
@@ -86,12 +91,12 @@ public abstract class GCLogin {
 
         if (StringUtils.isBlank(loginData)) {
             Log.e("Login.login: Failed to retrieve login page (1st)");
-            return StatusCode.CONNECTION_FAILED; // no loginpage
+            return StatusCode.CONNECTION_FAILED; // no login page
         }
 
-        if (GCLogin.getLoginStatus(loginData)) {
+        if (getLoginStatus(loginData)) {
             Log.i("Already logged in Geocaching.com as " + login.left + " (" + Settings.getMemberStatus() + ')');
-            GCLogin.switchToEnglish(loginData);
+            switchToEnglish(loginData);
             return StatusCode.NO_ERROR; // logged in
         }
 
@@ -122,10 +127,10 @@ public abstract class GCLogin {
         }
         assert loginData != null;  // Caught above
 
-        if (GCLogin.getLoginStatus(loginData)) {
+        if (getLoginStatus(loginData)) {
             Log.i("Successfully logged in Geocaching.com as " + login.left + " (" + Settings.getMemberStatus() + ')');
 
-            GCLogin.switchToEnglish(loginData);
+            switchToEnglish(loginData);
             Settings.setCookieStore(Cookies.dumpCookieStore());
 
             return StatusCode.NO_ERROR; // logged in
@@ -143,14 +148,14 @@ public abstract class GCLogin {
 
         Log.i("Failed to log in Geocaching.com as " + login.left + " for some unknown reason");
         if (retry) {
-            GCLogin.switchToEnglish(loginData);
+            switchToEnglish(loginData);
             return login(false);
         }
 
         return StatusCode.UNKNOWN_ERROR; // can't login
     }
 
-    public static StatusCode logout() {
+    public StatusCode logout() {
         final HttpResponse logoutResponse = Network.getRequest("https://www.geocaching.com/login/default.aspx?RESET=Y&redir=http%3a%2f%2fwww.geocaching.com%2fdefault.aspx%3f");
         final String logoutData = Network.getResponseData(logoutResponse);
         if (logoutResponse != null && logoutResponse.getStatusLine().getStatusCode() == 503 && TextUtils.matches(logoutData, GCConstants.PATTERN_MAINTENANCE)) {
@@ -162,51 +167,6 @@ public abstract class GCLogin {
         return StatusCode.NO_ERROR;
     }
 
-    private static void resetLoginStatus() {
-        Cookies.clearCookies();
-        Settings.setCookieStore(null);
-
-        setActualLoginStatus(false);
-    }
-
-    private static void clearLoginInfo() {
-        resetLoginStatus();
-
-        setActualCachesFound(-1);
-        setActualStatus(CgeoApplication.getInstance().getString(R.string.err_login));
-    }
-
-    static void setActualCachesFound(final int found) {
-        actualCachesFound = found;
-    }
-
-    public static String getActualStatus() {
-        return actualStatus;
-    }
-
-    private static void setActualStatus(final String status) {
-        actualStatus = status;
-    }
-
-    public static boolean isActualLoginStatus() {
-        return actualLoginStatus;
-    }
-
-    private static void setActualLoginStatus(boolean loginStatus) {
-        actualLoginStatus = loginStatus;
-    }
-
-    public static String getActualUserName() {
-        return actualUserName;
-    }
-
-    private static void setActualUserName(String userName) {
-        actualUserName = userName;
-    }
-
-    public static int getActualCachesFound() {
-        return actualCachesFound;
-    }
 
     /**
      * Check if the user has been logged in when he retrieved the data.
@@ -214,7 +174,7 @@ public abstract class GCLogin {
      * @param page
      * @return <code>true</code> if user is logged in, <code>false</code> otherwise
      */
-    public static boolean getLoginStatus(@Nullable final String page) {
+    public boolean getLoginStatus(@Nullable final String page) {
         if (StringUtils.isBlank(page)) {
             Log.e("Login.checkLogin: No page given");
             return false;
@@ -253,7 +213,7 @@ public abstract class GCLogin {
         return false;
     }
 
-    private static void switchToEnglish(String previousPage) {
+    private void switchToEnglish(String previousPage) {
         if (previousPage != null && previousPage.contains(ENGLISH)) {
             Log.i("Geocaching.com language already set to English");
             // get find count
@@ -277,7 +237,7 @@ public abstract class GCLogin {
         }
     }
 
-    public static BitmapDrawable downloadAvatarAndGetMemberStatus() {
+    public BitmapDrawable downloadAvatarAndGetMemberStatus() {
         try {
             final String responseData = StringUtils.defaultString(Network.getResponseData(Network.getRequest("http://www.geocaching.com/my/")));
             final String profile = TextUtils.replaceWhitespace(responseData);
@@ -455,7 +415,7 @@ public abstract class GCLogin {
      * @param uri
      * @return
      */
-    public static String postRequestLogged(final String uri, final Parameters params) {
+    public String postRequestLogged(final String uri, final Parameters params) {
         final String data = Network.getResponseData(Network.postRequest(uri, params));
 
         if (getLoginStatus(data)) {
@@ -478,7 +438,7 @@ public abstract class GCLogin {
      * @return
      */
     @Nullable
-    public static String getRequestLogged(@NonNull final String uri, @Nullable final Parameters params) {
+    public String getRequestLogged(@NonNull final String uri, @Nullable final Parameters params) {
         final HttpResponse response = Network.getRequest(uri, params);
         final String data = Network.getResponseData(response, canRemoveWhitespace(uri));
 
@@ -514,4 +474,5 @@ public abstract class GCLogin {
         final String sessionToken = TextUtils.getMatch(data, GCConstants.PATTERN_SESSIONTOKEN, "");
         return new String[] { userSession, sessionToken };
     }
+
 }
