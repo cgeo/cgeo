@@ -1425,7 +1425,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         }
     }
 
-    private static void filter(Collection<Geocache> caches) {
+    private static synchronized void filter(Collection<Geocache> caches) {
         boolean excludeMine = Settings.isExcludeMyCaches();
         boolean excludeDisabled = Settings.isExcludeDisabledCaches();
 
