@@ -1581,7 +1581,7 @@ public class Geocache implements ICache, IWaypoint {
 
     public static void storeCache(Geocache origCache, String geocode, int listId, boolean forceRedownload, CancellableHandler handler) {
         try {
-            Geocache cache;
+            Geocache cache = null;
             // get cache details, they may not yet be complete
             if (origCache != null) {
                 SearchResult search = null;
@@ -1596,9 +1596,9 @@ public class Geocache implements ICache, IWaypoint {
                 }
             } else if (StringUtils.isNotBlank(geocode)) {
                 final SearchResult search = searchByGeocode(geocode, null, listId, forceRedownload, handler);
-                cache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
-            } else {
-                cache = null;
+                if (search != null) {
+                    cache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+                }
             }
 
             if (cache == null) {
