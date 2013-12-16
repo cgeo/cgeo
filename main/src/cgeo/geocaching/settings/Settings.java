@@ -312,7 +312,7 @@ public class Settings {
     }
 
     public static boolean isECConnectorActive() {
-        return getBoolean(R.string.pref_connectorECActive, true);
+        return getBoolean(R.string.pref_connectorECActive, false);
     }
 
     public static boolean isPremiumMember() {

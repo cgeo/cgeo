@@ -104,6 +104,10 @@ public abstract class GPXParser extends FileParser {
      */
     private final Set<String> result = new HashSet<String>(100);
     private ProgressInputStream progressStream;
+    /**
+     * URL contained in the header of the GPX file. Used to guess where the file is coming from.
+     */
+    protected String scriptUrl;
 
     private final class UserDataListener implements EndTextElementListener {
         private final int index;
@@ -265,6 +269,14 @@ public abstract class GPXParser extends FileParser {
         final RootElement root = new RootElement(namespace, "gpx");
         final Element waypoint = root.getChild(namespace, "wpt");
 
+        root.getChild(namespace, "url").setEndTextElementListener(new EndTextElementListener() {
+
+            @Override
+            public void end(String body) {
+                scriptUrl = body;
+            }
+        });
+
         // waypoint - attributes
         waypoint.setStartElementListener(new StartElementListener() {
 
@@ -382,14 +394,19 @@ public abstract class GPXParser extends FileParser {
             }
         });
 
-        // waypoint.getName()
+        // waypoint.name
         waypoint.getChild(namespace, "name").setEndTextElementListener(new EndTextElementListener() {
 
             @Override
             public void end(String body) {
                 name = body;
 
-                final String content = body.trim();
+                String content = body.trim();
+
+                // extremcaching.com manipulates the GC code by adding GC in front of ECxxx
+                if (StringUtils.startsWithIgnoreCase(content, "GCEC") && StringUtils.containsIgnoreCase(scriptUrl, "extremcaching")) {
+                    content = content.substring(2);
+                }
                 cache.setName(content);
 
                 findGeoCode(cache.getName());

@@ -1,7 +1,7 @@
 package cgeo.geocaching.enumerations;
 
-import cgeo.geocaching.R;
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -55,6 +55,28 @@ public enum CacheSize {
         final CacheSize resultNormalized = CacheSize.FIND_BY_ID.get(id.toLowerCase(Locale.US).trim());
         if (resultNormalized != null) {
             return resultNormalized;
+        }
+        return getByNumber(id);
+    }
+
+    /**
+     * Bad GPX files can contain the container size encoded as number.
+     * 
+     * @param id
+     * @return
+     */
+    private static CacheSize getByNumber(final String id) {
+        try {
+            int numerical = Integer.parseInt(id);
+            if (numerical != 0) {
+                for (CacheSize size : CacheSize.values()) {
+                    if (size.comparable == numerical) {
+                        return size;
+                    }
+                }
+            }
+        } catch (NumberFormatException e) {
+            // ignore, as this might be a number or not
         }
         return UNKNOWN;
     }

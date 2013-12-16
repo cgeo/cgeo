@@ -8,6 +8,7 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 public abstract class AbstractConnector implements IConnector {
 
     @Override
-    public boolean canHandle(String geocode) {
+    public boolean canHandle(@NonNull final String geocode) {
         return false;
     }
 

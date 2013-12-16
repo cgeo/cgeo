@@ -6,6 +6,8 @@ import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.List;
 
 public interface IConnector {
@@ -22,7 +24,7 @@ public interface IConnector {
      * @param geocode
      * @return
      */
-    public boolean canHandle(final String geocode);
+    public boolean canHandle(final @NonNull String geocode);
 
     /**
      * get browser URL for the given cache

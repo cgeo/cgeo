@@ -21,6 +21,7 @@ import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.utils.CancellableHandler;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.content.Context;
 import android.os.Handler;
@@ -56,10 +57,7 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public boolean canHandle(String geocode) {
-        if (geocode == null) {
-            return false;
-        }
+    public boolean canHandle(@NonNull String geocode) {
         return ECConnector.PATTERN_EC_CODE.matcher(geocode).matches();
     }
 
