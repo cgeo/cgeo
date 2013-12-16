@@ -297,11 +297,11 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public boolean login(Handler handler, Context fromActivity) {
         // login
-        final StatusCode status = Login.login();
+        final StatusCode status = GCLogin.login();
 
         if (status == StatusCode.NO_ERROR) {
             CgeoApplication.getInstance().checkLogin = false;
-            Login.detectGcCustomDate();
+            GCLogin.detectGcCustomDate();
         }
 
         if (CgeoApplication.getInstance().showLoginToast && handler != null) {
@@ -318,22 +318,22 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public String getUserName() {
-        return Login.getActualUserName();
+        return GCLogin.getActualUserName();
     }
 
     @Override
     public int getCachesFound() {
-        return Login.getActualCachesFound();
+        return GCLogin.getActualCachesFound();
     }
 
     @Override
     public String getLoginStatusString() {
-        return Login.getActualStatus();
+        return GCLogin.getActualStatus();
     }
 
     @Override
     public boolean isLoggedIn() {
-        return Login.isActualLoginStatus();
+        return GCLogin.isActualLoginStatus();
     }
 
     @Override

@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public abstract class Login {
+public abstract class GCLogin {
 
     private static final String DEFAULT_CUSTOM_DATE_FORMAT = "MM/dd/yyyy";
 
@@ -77,7 +77,7 @@ public abstract class Login {
             return StatusCode.NO_LOGIN_INFO_STORED;
         }
 
-        Login.setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
+        GCLogin.setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
         HttpResponse loginResponse = Network.getRequest("https://www.geocaching.com/login/default.aspx");
         String loginData = Network.getResponseData(loginResponse);
         if (loginResponse != null && loginResponse.getStatusLine().getStatusCode() == 503 && TextUtils.matches(loginData, GCConstants.PATTERN_MAINTENANCE)) {
@@ -89,9 +89,9 @@ public abstract class Login {
             return StatusCode.CONNECTION_FAILED; // no loginpage
         }
 
-        if (Login.getLoginStatus(loginData)) {
+        if (GCLogin.getLoginStatus(loginData)) {
             Log.i("Already logged in Geocaching.com as " + login.left + " (" + Settings.getMemberStatus() + ')');
-            Login.switchToEnglish(loginData);
+            GCLogin.switchToEnglish(loginData);
             return StatusCode.NO_ERROR; // logged in
         }
 
@@ -105,12 +105,12 @@ public abstract class Login {
                 "ctl00$ContentBody$tbPassword", login.right,
                 "ctl00$ContentBody$cbRememberMe", "on",
                 "ctl00$ContentBody$btnSignIn", "Login");
-        final String[] viewstates = Login.getViewstates(loginData);
+        final String[] viewstates = GCLogin.getViewstates(loginData);
         if (isEmpty(viewstates)) {
             Log.e("Login.login: Failed to find viewstates");
             return StatusCode.LOGIN_PARSE_ERROR; // no viewstates
         }
-        Login.putViewstates(params, viewstates);
+        GCLogin.putViewstates(params, viewstates);
 
         loginResponse = Network.postRequest("https://www.geocaching.com/login/default.aspx", params);
         loginData = Network.getResponseData(loginResponse);
@@ -122,10 +122,10 @@ public abstract class Login {
         }
         assert loginData != null;  // Caught above
 
-        if (Login.getLoginStatus(loginData)) {
+        if (GCLogin.getLoginStatus(loginData)) {
             Log.i("Successfully logged in Geocaching.com as " + login.left + " (" + Settings.getMemberStatus() + ')');
 
-            Login.switchToEnglish(loginData);
+            GCLogin.switchToEnglish(loginData);
             Settings.setCookieStore(Cookies.dumpCookieStore());
 
             return StatusCode.NO_ERROR; // logged in
@@ -143,7 +143,7 @@ public abstract class Login {
 
         Log.i("Failed to log in Geocaching.com as " + login.left + " for some unknown reason");
         if (retry) {
-            Login.switchToEnglish(loginData);
+            GCLogin.switchToEnglish(loginData);
             return login(false);
         }
 
@@ -267,7 +267,7 @@ public abstract class Login {
             final Parameters params = new Parameters(
                     "__EVENTTARGET", "ctl00$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem", // switch to english
                     "__EVENTARGUMENT", "");
-            Login.transferViewstates(page, params);
+            GCLogin.transferViewstates(page, params);
             final HttpResponse response = Network.postRequest(LANGUAGE_CHANGE_URI, params, new Parameters("Referer", LANGUAGE_CHANGE_URI));
             if (Network.isSuccess(response)) {
                 Log.i("changed language on geocaching.com to English");

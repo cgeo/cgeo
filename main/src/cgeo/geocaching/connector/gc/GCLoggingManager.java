@@ -60,7 +60,7 @@ public class GCLoggingManager implements ILoggingManager, LoaderManager.LoaderCa
             hasLoaderError = true;
         } else {
 
-            viewstates = Login.getViewstates(page);
+            viewstates = GCLogin.getViewstates(page);
             trackables = GCParser.parseTrackableLog(page);
             possibleLogTypes = GCParser.parseTypes(page);
 

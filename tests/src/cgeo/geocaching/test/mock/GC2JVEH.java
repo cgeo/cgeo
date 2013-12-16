@@ -2,7 +2,7 @@ package cgeo.geocaching.test.mock;
 
 import cgeo.geocaching.Image;
 import cgeo.geocaching.Trackable;
-import cgeo.geocaching.connector.gc.Login;
+import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
@@ -89,7 +89,7 @@ public class GC2JVEH extends MockedCache {
     @Override
     public Date getHiddenDate() {
         try {
-            return Login.parseGcCustomDate("28/11/2010", getDateFormat());
+            return GCLogin.parseGcCustomDate("28/11/2010", getDateFormat());
         } catch (ParseException e) {
             // intentionally left blank
         }

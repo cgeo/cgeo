@@ -3,7 +3,7 @@ package cgeo.geocaching;
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCParser;
-import cgeo.geocaching.connector.gc.Login;
+import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
@@ -51,7 +51,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
     @SuppressWarnings("static-method")
     @SmallTest
     public void testPreconditions() {
-        assertEquals(StatusCode.NO_ERROR, Login.login());
+        assertEquals(StatusCode.NO_ERROR, GCLogin.login());
     }
 
     /**
@@ -143,7 +143,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
             // restore user and password
             TestSettings.setLogin(login.left, login.right);
             Settings.setMemberStatus(memberStatus);
-            Login.login();
+            GCLogin.login();
         }
     }
 
@@ -295,7 +295,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
                     final GC2CJPF mockedCache = new GC2CJPF();
                     deleteCacheFromDB(mockedCache.getGeocode());
 
-                    final String[] tokens = Login.getMapTokens();
+                    final String[] tokens = GCLogin.getMapTokens();
                     final Viewport viewport = new Viewport(mockedCache, 0.003, 0.003);
 
                     // check coords for DETAILED
@@ -417,7 +417,7 @@ public class cgeoApplicationTest extends CGeoTestCase {
     private static void deleteCacheFromDBAndLogout(String geocode) {
         deleteCacheFromDB(geocode);
 
-        Login.logout();
+        GCLogin.logout();
         // Modify login data to avoid an automatic login again
         TestSettings.setLogin("c:geo", "c:geo");
         Settings.setMemberStatus("Basic member");

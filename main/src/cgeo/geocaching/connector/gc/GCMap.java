@@ -85,7 +85,7 @@ public class GCMap {
                 cache.setDifficulty(Float.parseFloat(difficultyObj.getString("text"))); // 3.5
                 JSONObject terrainObj = dataObject.getJSONObject("terrain");
                 cache.setTerrain(Float.parseFloat(terrainObj.getString("text"))); // 1.5
-                cache.setHidden(Login.parseGcCustomDate(dataObject.getString("hidden"), "MM/dd/yyyy")); // 7/23/2001
+                cache.setHidden(GCLogin.parseGcCustomDate(dataObject.getString("hidden"), "MM/dd/yyyy")); // 7/23/2001
                 JSONObject containerObj = dataObject.getJSONObject("container");
                 cache.setSize(CacheSize.getById(containerObj.getString("text"))); // Regular
                 JSONObject typeObj = dataObject.getJSONObject("type");

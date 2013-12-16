@@ -4,7 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.connector.gc.GCConstants;
-import cgeo.geocaching.connector.gc.Login;
+import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LogType;
@@ -489,7 +489,7 @@ public class Settings {
 
     /**
      * @return User selected date format on GC.com
-     * @see Login#GC_CUSTOM_DATE_FORMATS
+     * @see GCLogin#GC_CUSTOM_DATE_FORMATS
      */
     public static String getGcCustomDate() {
         return getString(R.string.pref_gccustomdate, null);

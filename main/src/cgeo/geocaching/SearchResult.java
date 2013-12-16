@@ -1,6 +1,6 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.connector.gc.Login;
+import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
@@ -173,7 +173,7 @@ public class SearchResult implements Parcelable {
     }
 
     public void setViewstates(String[] viewstates) {
-        if (Login.isEmpty(viewstates)) {
+        if (GCLogin.isEmpty(viewstates)) {
             return;
         }
 

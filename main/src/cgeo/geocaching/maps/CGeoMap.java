@@ -11,7 +11,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.gc.Login;
+import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
@@ -1171,7 +1171,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 do {
 
                     if (tokens == null) {
-                        tokens = Login.getMapTokens();
+                        tokens = GCLogin.getMapTokens();
                         if (noMapTokenHandler != null && tokens == null) {
                             noMapTokenHandler.sendEmptyMessage(0);
                         }
@@ -1180,7 +1180,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     searchResult = ConnectorFactory.searchByViewport(viewport.resize(0.8), tokens);
                     downloaded = true;
                     if (searchResult.getError() == StatusCode.NOT_LOGGED_IN && Settings.isGCConnectorActive()) {
-                        Login.login();
+                        GCLogin.login();
                         tokens = null;
                     } else {
                         break;

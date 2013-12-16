@@ -45,10 +45,10 @@ public class GCConstantsTest extends AndroidTestCase {
      */
 
     public static void testCacheCountOnline() {
-        Login.logout();
-        Login.setActualCachesFound(0);
-        Login.login();
-        assertTrue(Login.getActualCachesFound() > 0);
+        GCLogin.logout();
+        GCLogin.setActualCachesFound(0);
+        GCLogin.login();
+        assertTrue(GCLogin.getActualCachesFound() > 0);
     }
 
     public static void testConstants() {

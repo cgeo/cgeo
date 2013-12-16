@@ -9,7 +9,7 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.gc.GCConnector;
-import cgeo.geocaching.connector.gc.Login;
+import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.files.SimpleDirChooser;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
@@ -528,8 +528,8 @@ public class SettingsActivity extends PreferenceActivity {
             }
             if ((isPreference(preference, R.string.pref_username) && !stringValue.equals(Settings.getUsername())) || (isPreference(preference, R.string.pref_password) && !stringValue.equals(Settings.getGcLogin().getRight()))) {
                 // reset log-in if gc user or password is changed
-                if (Login.isActualLoginStatus()) {
-                    Login.logout();
+                if (GCLogin.isActualLoginStatus()) {
+                    GCLogin.logout();
                 }
                 CgeoApplication.getInstance().checkLogin = true;
             }

@@ -4,7 +4,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import cgeo.geocaching.connector.gc.GCParser;
-import cgeo.geocaching.connector.gc.Login;
+import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Network;
@@ -76,7 +76,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
                 showToast(res.getString(R.string.info_log_type_changed));
             }
 
-            if (Login.isEmpty(viewstates)) {
+            if (GCLogin.isEmpty(viewstates)) {
                 if (attempts < 2) {
                     showToast(res.getString(R.string.err_log_load_data_again));
                     new LoadDataThread().start();
@@ -200,7 +200,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
             possibleLogTypes = Trackable.getPossibleLogTypes();
         }
 
-        if (Login.isEmpty(viewstates)) {
+        if (GCLogin.isEmpty(viewstates)) {
             buttonPost.setEnabled(false);
             buttonPost.setOnTouchListener(null);
             buttonPost.setOnClickListener(null);
@@ -294,7 +294,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
                 final String page = Network.getResponseData(Network.getRequest("http://www.geocaching.com/track/log.aspx", params));
 
-                viewstates = Login.getViewstates(page);
+                viewstates = GCLogin.getViewstates(page);
 
                 final List<LogType> typesPre = GCParser.parseTypes(page);
                 if (CollectionUtils.isNotEmpty(typesPre)) {

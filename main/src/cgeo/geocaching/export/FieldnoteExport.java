@@ -5,7 +5,7 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.connector.gc.Login;
+import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -175,30 +175,30 @@ class FieldnoteExport extends AbstractExport {
             if (upload) {
                 publishProgress(STATUS_UPLOAD);
 
-                if (!Login.isActualLoginStatus()) {
+                if (!GCLogin.isActualLoginStatus()) {
                     // no need to upload (possibly large file) if we're not logged in
-                    final StatusCode loginState = Login.login();
+                    final StatusCode loginState = GCLogin.login();
                     if (loginState != StatusCode.NO_ERROR) {
                         Log.e("FieldnoteExport.ExportTask upload: Login failed");
                     }
                 }
 
                 final String uri = "http://www.geocaching.com/my/uploadfieldnotes.aspx";
-                final String page = Login.getRequestLogged(uri, null);
+                final String page = GCLogin.getRequestLogged(uri, null);
 
                 if (StringUtils.isBlank(page)) {
                     Log.e("FieldnoteExport.ExportTask get page: No data from server");
                     return false;
                 }
 
-                final String[] viewstates = Login.getViewstates(page);
+                final String[] viewstates = GCLogin.getViewstates(page);
 
                 final Parameters uploadParams = new Parameters(
                         "__EVENTTARGET", "",
                         "__EVENTARGUMENT", "",
                         "ctl00$ContentBody$btnUpload", "Upload Field Note");
 
-                Login.putViewstates(uploadParams, viewstates);
+                GCLogin.putViewstates(uploadParams, viewstates);
 
                 Network.getResponseData(Network.postRequest(uri, uploadParams, "ctl00$ContentBody$FieldNoteLoader", "text/plain", exportFile));
 

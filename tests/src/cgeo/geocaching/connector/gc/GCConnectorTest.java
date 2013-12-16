@@ -20,9 +20,9 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
             // set up settings required for test
             TestSettings.setExcludeMine(false);
             Settings.setCacheType(CacheType.ALL);
-            Login.login();
+            GCLogin.login();
 
-            final String[] tokens = Login.getMapTokens();
+            final String[] tokens = GCLogin.getMapTokens();
 
             {
                 final Viewport viewport = new Viewport(new Geopoint("N 52° 25.369 E 9° 35.499"), new Geopoint("N 52° 25.600 E 9° 36.200"));

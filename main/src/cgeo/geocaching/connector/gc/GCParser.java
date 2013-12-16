@@ -79,7 +79,7 @@ public abstract class GCParser {
 
         final SearchResult searchResult = new SearchResult();
         searchResult.setUrl(url);
-        searchResult.viewstates = Login.getViewstates(page);
+        searchResult.viewstates = GCLogin.getViewstates(page);
 
         // recaptcha
         if (showCaptcha) {
@@ -203,7 +203,7 @@ public abstract class GCParser {
             final String dateHidden = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_HIDDEN_DATE, false, 1, null, false);
             if (StringUtils.isNotBlank(dateHidden)) {
                 try {
-                    Date date = Login.parseGcCustomDate(dateHidden);
+                    Date date = GCLogin.parseGcCustomDate(dateHidden);
                     if (date != null) {
                         cache.setHidden(date);
                     }
@@ -462,13 +462,13 @@ public abstract class GCParser {
             try {
                 String hiddenString = TextUtils.getMatch(tableInside, GCConstants.PATTERN_HIDDEN, true, null);
                 if (StringUtils.isNotBlank(hiddenString)) {
-                    cache.setHidden(Login.parseGcCustomDate(hiddenString));
+                    cache.setHidden(GCLogin.parseGcCustomDate(hiddenString));
                 }
                 if (cache.getHiddenDate() == null) {
                     // event date
                     hiddenString = TextUtils.getMatch(tableInside, GCConstants.PATTERN_HIDDENEVENT, true, null);
                     if (StringUtils.isNotBlank(hiddenString)) {
-                        cache.setHidden(Login.parseGcCustomDate(hiddenString));
+                        cache.setHidden(GCLogin.parseGcCustomDate(hiddenString));
                     }
                 }
             } catch (final ParseException e) {
@@ -494,7 +494,7 @@ public abstract class GCParser {
         try {
             final String foundDateString = TextUtils.getMatch(page, GCConstants.PATTERN_FOUND_DATE, true, null);
             if (StringUtils.isNotBlank(foundDateString)) {
-                cache.setVisitedDate(Login.parseGcCustomDate(foundDateString).getTime());
+                cache.setVisitedDate(GCLogin.parseGcCustomDate(foundDateString).getTime());
             }
         } catch (final ParseException e) {
             // failed to parse cache found date
@@ -772,7 +772,7 @@ public abstract class GCParser {
             return search;
         }
 
-        if (Login.isEmpty(viewstates)) {
+        if (GCLogin.isEmpty(viewstates)) {
             Log.e("GCParser.searchByNextPage: No viewstate given");
             return search;
         }
@@ -783,10 +783,10 @@ public abstract class GCParser {
         final Parameters params = new Parameters(
                 "__EVENTTARGET", "ctl00$ContentBody$pgrBottom$ctl08",
                 "__EVENTARGUMENT", "");
-        Login.putViewstates(params, viewstates);
+        GCLogin.putViewstates(params, viewstates);
 
-        final String page = Login.postRequestLogged(uri, params);
-        if (!Login.getLoginStatus(page)) {
+        final String page = GCLogin.postRequestLogged(uri, params);
+        if (!GCLogin.getLoginStatus(page)) {
             Log.e("GCParser.postLogTrackable: Can not log in geocaching");
             return search;
         }
@@ -850,7 +850,7 @@ public abstract class GCParser {
 
         final String uri = "http://www.geocaching.com/seek/nearest.aspx";
         final String fullUri = uri + "?" + addFToParams(params, my, true);
-        final String page = Login.getRequestLogged(uri, addFToParams(params, my, true));
+        final String page = GCLogin.getRequestLogged(uri, addFToParams(params, my, true));
 
         if (StringUtils.isBlank(page)) {
             Log.e("GCParser.searchByAny: No data from server");
@@ -866,7 +866,7 @@ public abstract class GCParser {
 
         final SearchResult search = searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(), false, cacheType);
 
-        Login.getLoginStatus(page);
+        GCLogin.getLoginStatus(page);
 
         return search;
     }
@@ -973,7 +973,7 @@ public abstract class GCParser {
             params.put("id", id);
         }
 
-        final String page = Login.getRequestLogged("http://www.geocaching.com/track/details.aspx", params);
+        final String page = GCLogin.getRequestLogged("http://www.geocaching.com/track/details.aspx", params);
 
         if (StringUtils.isBlank(page)) {
             Log.e("GCParser.searchTrackable: No data from server");
@@ -994,7 +994,7 @@ public abstract class GCParser {
 
         final Parameters params = new Parameters();
 
-        final String page = Login.getRequestLogged("http://www.geocaching.com/pocket/default.aspx", params);
+        final String page = GCLogin.getRequestLogged("http://www.geocaching.com/pocket/default.aspx", params);
 
         if (StringUtils.isBlank(page)) {
             Log.e("GCParser.searchPocketQueryList: No data from server");
@@ -1040,7 +1040,7 @@ public abstract class GCParser {
     public static ImmutablePair<StatusCode, String> postLog(final String geocode, final String cacheid, final String[] viewstates,
             final LogType logType, final int year, final int month, final int day,
             final String log, final List<TrackableLog> trackables) {
-        if (Login.isEmpty(viewstates)) {
+        if (GCLogin.isEmpty(viewstates)) {
             Log.e("GCParser.postLog: No viewstate given");
             return new ImmutablePair<StatusCode, String>(StatusCode.LOG_POST_ERROR, "");
         }
@@ -1061,7 +1061,7 @@ public abstract class GCParser {
                 "__EVENTARGUMENT", "",
                 "__LASTFOCUS", "",
                 "ctl00$ContentBody$LogBookPanel1$ddLogType", Integer.toString(logType.id),
-                "ctl00$ContentBody$LogBookPanel1$uxDateVisited", Login.getCustomGcDateFormat().format(new GregorianCalendar(year, month - 1, day).getTime()),
+                "ctl00$ContentBody$LogBookPanel1$uxDateVisited", GCLogin.getCustomGcDateFormat().format(new GregorianCalendar(year, month - 1, day).getTime()),
                 "ctl00$ContentBody$LogBookPanel1$uxDateVisited$Month", Integer.toString(month),
                 "ctl00$ContentBody$LogBookPanel1$uxDateVisited$Day", Integer.toString(day),
                 "ctl00$ContentBody$LogBookPanel1$uxDateVisited$Year", Integer.toString(year),
@@ -1074,7 +1074,7 @@ public abstract class GCParser {
                 "ctl00$ContentBody$LogBookPanel1$btnSubmitLog", "Submit Log Entry",
                 "ctl00$ContentBody$LogBookPanel1$uxLogCreationSource", "Old",
                 "ctl00$ContentBody$uxVistOtherListingGC", "");
-        Login.putViewstates(params, viewstates);
+        GCLogin.putViewstates(params, viewstates);
         if (trackables != null && !trackables.isEmpty()) { //  we have some trackables to proceed
             final StringBuilder hdnSelected = new StringBuilder();
 
@@ -1091,8 +1091,8 @@ public abstract class GCParser {
         }
 
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/log.aspx").encodedQuery("ID=" + cacheid).build().toString();
-        String page = Login.postRequestLogged(uri, params);
-        if (!Login.getLoginStatus(page)) {
+        String page = GCLogin.postRequestLogged(uri, params);
+        if (!GCLogin.getLoginStatus(page)) {
             Log.e("GCParser.postLog: Cannot log in geocaching");
             return new ImmutablePair<StatusCode, String>(StatusCode.NOT_LOGGED_IN, "");
         }
@@ -1103,15 +1103,15 @@ public abstract class GCParser {
 
         try {
             if (matcher.find() && matcher.groupCount() > 0) {
-                final String[] viewstatesConfirm = Login.getViewstates(page);
+                final String[] viewstatesConfirm = GCLogin.getViewstates(page);
 
-                if (Login.isEmpty(viewstatesConfirm)) {
+                if (GCLogin.isEmpty(viewstatesConfirm)) {
                     Log.e("GCParser.postLog: No viewstate for confirm log");
                     return new ImmutablePair<StatusCode, String>(StatusCode.LOG_POST_ERROR, "");
                 }
 
                 params.clear();
-                Login.putViewstates(params, viewstatesConfirm);
+                GCLogin.putViewstates(params, viewstatesConfirm);
                 params.put("__EVENTTARGET", "");
                 params.put("__EVENTARGUMENT", "");
                 params.put("__LASTFOCUS", "");
@@ -1156,10 +1156,10 @@ public abstract class GCParser {
                     DataStore.saveVisitDate(geocode);
                 }
 
-                Login.getLoginStatus(page);
+                GCLogin.getLoginStatus(page);
                 // the log-successful-page contains still the old value
-                if (Login.getActualCachesFound() >= 0) {
-                    Login.setActualCachesFound(Login.getActualCachesFound() + 1);
+                if (GCLogin.getActualCachesFound() >= 0) {
+                    GCLogin.setActualCachesFound(GCLogin.getActualCachesFound() + 1);
                 }
 
                 final String logID = TextUtils.getMatch(page, GCConstants.PATTERN_LOG_IMAGE_UPLOAD, "");
@@ -1190,14 +1190,14 @@ public abstract class GCParser {
     public static ImmutablePair<StatusCode, String> uploadLogImage(final String logId, final String caption, final String description, final Uri imageUri) {
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/upload.aspx").encodedQuery("LID=" + logId).build().toString();
 
-        final String page = Login.getRequestLogged(uri, null);
+        final String page = GCLogin.getRequestLogged(uri, null);
         if (StringUtils.isBlank(page)) {
             Log.e("GCParser.uploadLogImage: No data from server");
             return new ImmutablePair<StatusCode, String>(StatusCode.UNKNOWN_ERROR, null);
         }
         assert page != null;
 
-        final String[] viewstates = Login.getViewstates(page);
+        final String[] viewstates = GCLogin.getViewstates(page);
 
         final Parameters uploadParams = new Parameters(
                 "__EVENTTARGET", "",
@@ -1205,7 +1205,7 @@ public abstract class GCParser {
                 "ctl00$ContentBody$ImageUploadControl1$uxFileCaption", caption,
                 "ctl00$ContentBody$ImageUploadControl1$uxFileDesc", description,
                 "ctl00$ContentBody$ImageUploadControl1$uxUpload", "Upload");
-        Login.putViewstates(uploadParams, viewstates);
+        GCLogin.putViewstates(uploadParams, viewstates);
 
         final File image = new File(imageUri.getPath());
         final String response = Network.getResponseData(Network.postRequest(uri, uploadParams, "ctl00$ContentBody$ImageUploadControl1$uxFileUpload", "image/jpeg", image));
@@ -1229,7 +1229,7 @@ public abstract class GCParser {
      */
     public static StatusCode postLogTrackable(final String tbid, final String trackingCode, final String[] viewstates,
             final LogType logType, final int year, final int month, final int day, final String log) {
-        if (Login.isEmpty(viewstates)) {
+        if (GCLogin.isEmpty(viewstates)) {
             Log.e("GCParser.postLogTrackable: No viewstate given");
             return StatusCode.LOG_POST_ERROR;
         }
@@ -1250,13 +1250,13 @@ public abstract class GCParser {
                 "__LASTFOCUS", "",
                 "ctl00$ContentBody$LogBookPanel1$ddLogType", Integer.toString(logType.id),
                 "ctl00$ContentBody$LogBookPanel1$tbCode", trackingCode);
-        Login.putViewstates(params, viewstates);
+        GCLogin.putViewstates(params, viewstates);
         if (currentDate.get(Calendar.YEAR) == year && (currentDate.get(Calendar.MONTH) + 1) == month && currentDate.get(Calendar.DATE) == day) {
             params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged", "");
             params.put("ctl00$ContentBody$LogBookPanel1$uxDateVisited", "");
         } else {
             params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged", Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year));
-            params.put("ctl00$ContentBody$LogBookPanel1$uxDateVisited", Login.getCustomGcDateFormat().format(new GregorianCalendar(year, month - 1, day).getTime()));
+            params.put("ctl00$ContentBody$LogBookPanel1$uxDateVisited", GCLogin.getCustomGcDateFormat().format(new GregorianCalendar(year, month - 1, day).getTime()));
         }
         params.put(
                 "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day", Integer.toString(day),
@@ -1272,8 +1272,8 @@ public abstract class GCParser {
                 "ctl00$ContentBody$uxVistOtherListingGC", "");
 
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("wid=" + tbid).build().toString();
-        final String page = Login.postRequestLogged(uri, params);
-        if (!Login.getLoginStatus(page)) {
+        final String page = GCLogin.postRequestLogged(uri, params);
+        if (!GCLogin.getLoginStatus(page)) {
             Log.e("GCParser.postLogTrackable: Cannot log in geocaching");
             return StatusCode.NOT_LOGGED_IN;
         }
@@ -1302,7 +1302,7 @@ public abstract class GCParser {
      */
     static boolean addToWatchlist(final Geocache cache) {
         final String uri = "http://www.geocaching.com/my/watchlist.aspx?w=" + cache.getCacheId();
-        final String page = Login.postRequestLogged(uri, null);
+        final String page = GCLogin.postRequestLogged(uri, null);
 
         if (StringUtils.isBlank(page)) {
             Log.e("GCParser.addToWatchlist: No data from server");
@@ -1328,7 +1328,7 @@ public abstract class GCParser {
      */
     static boolean removeFromWatchlist(final Geocache cache) {
         final String uri = "http://www.geocaching.com/my/watchlist.aspx?ds=1&action=rem&id=" + cache.getCacheId();
-        String page = Login.postRequestLogged(uri, null);
+        String page = GCLogin.postRequestLogged(uri, null);
 
         if (StringUtils.isBlank(page)) {
             Log.e("GCParser.removeFromWatchlist: No data from server");
@@ -1340,7 +1340,7 @@ public abstract class GCParser {
                 "__EVENTTARGET", "",
                 "__EVENTARGUMENT", "",
                 "ctl00$ContentBody$btnYes", "Yes");
-        Login.transferViewstates(page, params);
+        GCLogin.transferViewstates(page, params);
 
         page = Network.getResponseData(Network.postRequest(uri, params));
         final boolean guidOnPage = cache.isGuidContainedInPage(page);
@@ -1364,7 +1364,7 @@ public abstract class GCParser {
         params.put("log", log);
         params.put("numlogs", numlogs);
 
-        return Login.getRequestLogged("http://www.geocaching.com/seek/cache_details.aspx", params);
+        return GCLogin.getRequestLogged("http://www.geocaching.com/seek/cache_details.aspx", params);
     }
 
     /**
@@ -1560,7 +1560,7 @@ public abstract class GCParser {
             while (matcherLogs.find()) {
                 long date = 0;
                 try {
-                    date = Login.parseGcCustomDate(matcherLogs.group(2)).getTime();
+                    date = GCLogin.parseGcCustomDate(matcherLogs.group(2)).getTime();
                 } catch (final ParseException e) {
                 }
 
@@ -1691,7 +1691,7 @@ public abstract class GCParser {
 
                 long date = 0;
                 try {
-                    date = Login.parseGcCustomDate(entry.getString("Visited")).getTime();
+                    date = GCLogin.parseGcCustomDate(entry.getString("Visited")).getTime();
                 } catch (final ParseException e) {
                     Log.e("GCParser.loadLogsFromDetails: failed to parse log date.");
                 }

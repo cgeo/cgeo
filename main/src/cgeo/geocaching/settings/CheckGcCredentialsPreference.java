@@ -1,6 +1,6 @@
 package cgeo.geocaching.settings;
 
-import cgeo.geocaching.connector.gc.Login;
+import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.StatusCode;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -29,11 +29,11 @@ public class CheckGcCredentialsPreference extends AbstractCheckCredentialsPrefer
 
     @Override
     protected Object login() {
-        final StatusCode loginResult = Login.login();
+        final StatusCode loginResult = GCLogin.login();
         Object payload = loginResult;
         if (loginResult == StatusCode.NO_ERROR) {
-            Login.detectGcCustomDate();
-            payload = Login.downloadAvatarAndGetMemberStatus();
+            GCLogin.detectGcCustomDate();
+            payload = GCLogin.downloadAvatarAndGetMemberStatus();
         }
         return payload;
     }
