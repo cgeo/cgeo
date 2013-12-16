@@ -270,7 +270,6 @@ public class Waypoint implements IWaypoint {
     /**
      * Delegates the creation of the waypoint-id for gpx-export to the waypoint
      *
-     * @param prefix
      * @return
      */
     public String getGpxId() {
