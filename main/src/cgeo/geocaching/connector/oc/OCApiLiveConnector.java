@@ -39,7 +39,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public boolean isActivated() {
+    public boolean isActive() {
         return Settings.isOCConnectorActive(isActivePrefKeyId);
     }
 

@@ -8,6 +8,7 @@ import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 public class OCApiConnector extends OCConnector implements ISearchByGeocode {
 
@@ -41,7 +42,7 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
     }
 
     @Override
-    public String getLicenseText(final Geocache cache) {
+    public String getLicenseText(final @NonNull Geocache cache) {
         // NOT TO BE TRANSLATED
         return "© " + cache.getOwnerDisplayName() + ", <a href=\"" + getCacheUrl(cache) + "\">" + getName() + "</a>, " + licenseString;
     }
@@ -56,7 +57,7 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
     }
 
     @Override
-    public boolean isActivated() {
+    public boolean isActive() {
         // currently always active, but only for details download
         return true;
     }

@@ -23,6 +23,7 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.content.Context;
 import android.os.Handler;
@@ -61,20 +62,17 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public boolean canHandle(String geocode) {
-        if (geocode == null) {
-            return false;
-        }
+    public boolean canHandle(@NonNull String geocode) {
         return GCConnector.PATTERN_GC_CODE.matcher(geocode).matches();
     }
 
     @Override
-    public String getLongCacheUrl(Geocache cache) {
+    public String getLongCacheUrl(@NonNull Geocache cache) {
         return CACHE_URL_LONG + cache.getGeocode();
     }
 
     @Override
-    public String getCacheUrl(Geocache cache) {
+    public String getCacheUrl(@NonNull Geocache cache) {
         return CACHE_URL_SHORT + cache.getGeocode();
     }
 
@@ -282,7 +280,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public boolean isActivated() {
+    public boolean isActive() {
         return Settings.isGCConnectorActive();
     }
 

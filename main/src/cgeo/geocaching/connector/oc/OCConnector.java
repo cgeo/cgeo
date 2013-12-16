@@ -6,6 +6,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.enumerations.LogType;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -27,10 +29,7 @@ public class OCConnector extends AbstractConnector {
     }
 
     @Override
-    public boolean canHandle(String geocode) {
-        if (geocode == null) {
-            return false;
-        }
+    public boolean canHandle(@NonNull String geocode) {
         return codePattern.matcher(geocode).matches();
     }
 
@@ -40,7 +39,7 @@ public class OCConnector extends AbstractConnector {
     }
 
     @Override
-    public String getCacheUrl(Geocache cache) {
+    public String getCacheUrl(@NonNull Geocache cache) {
         return getCacheUrlPrefix() + cache.getGeocode();
     }
 

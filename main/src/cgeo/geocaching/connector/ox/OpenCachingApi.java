@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.ox;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -18,13 +19,13 @@ import java.util.Collections;
 
 public class OpenCachingApi {
 
+    private static final String API_URL_CACHES_GPX = "http://www.opencaching.com/api/geocache.gpx";
     private static final String DEV_KEY = CryptUtils.rot13("PtqQnHo9RUTht3Np");
 
     public static Geocache searchByGeoCode(final String geocode) {
-        final HttpResponse response = Network.getRequest("http://www.opencaching.com/api/geocache/" + geocode + ".gpx",
+        final HttpResponse response = getRequest("http://www.opencaching.com/api/geocache/" + geocode + ".gpx",
                 new Parameters(
-                        "Authorization", DEV_KEY,
-                        "log_limit", "30",
+                        "log_limit", "50",
                         "hint", "true",
                         "description", "html"));
         final Collection<Geocache> caches = importCachesFromResponse(response, true);
@@ -32,6 +33,11 @@ public class OpenCachingApi {
             return caches.iterator().next();
         }
         return null;
+    }
+
+    private static HttpResponse getRequest(String string, Parameters parameters) {
+        parameters.add("Authorization", DEV_KEY);
+        return Network.getRequest(string, parameters);
     }
 
     private static Collection<Geocache> importCachesFromResponse(final HttpResponse response, final boolean isDetailed) {
@@ -49,16 +55,27 @@ public class OpenCachingApi {
     }
 
     public static Collection<Geocache> searchByCenter(final Geopoint center) {
-        final HttpResponse response = Network.getRequest("http://www.opencaching.com/api/geocache/.gpx",
+        final HttpResponse response = getRequest(API_URL_CACHES_GPX,
                 new Parameters(
-                        "Authorization", DEV_KEY,
                         "log_limit", "0",
                         "hint", "false",
                         "description", "none",
-                        "limit", "10",
+                        "limit", "20",
                         "center", center.format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA)));
         return importCachesFromResponse(response, false);
     }
 
+
+    public static Collection<Geocache> searchByBoundingBox(final Viewport viewport) {
+        final String bbox = viewport.bottomLeft.format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA) + "," + viewport.topRight.format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA);
+        final HttpResponse response = getRequest(API_URL_CACHES_GPX,
+                new Parameters(
+                        "log_limit", "0",
+                        "hint", "false",
+                        "description", "none",
+                        "limit", "100",
+                        "bbox", bbox));
+        return importCachesFromResponse(response, false);
+    }
 
 }

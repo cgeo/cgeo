@@ -89,7 +89,7 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
-    public String getLicenseText(final Geocache cache) {
+    public String getLicenseText(final @NonNull Geocache cache) {
         return null;
     }
 
@@ -133,7 +133,7 @@ public abstract class AbstractConnector implements IConnector {
     abstract protected String getCacheUrlPrefix();
 
     @Override
-    public String getLongCacheUrl(final Geocache cache) {
+    public String getLongCacheUrl(final @NonNull Geocache cache) {
         return getCacheUrl(cache);
     }
 
@@ -141,7 +141,7 @@ public abstract class AbstractConnector implements IConnector {
      * {@link IConnector}
      */
     @Override
-    public boolean isActivated() {
+    public boolean isActive() {
         return false;
     }
 

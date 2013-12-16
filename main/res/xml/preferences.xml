@@ -161,6 +161,43 @@
                 </PreferenceCategory>
             </PreferenceScreen>
 
+            <PreferenceScreen android:title="@string/settings_title_ox" >
+                <PreferenceCategory android:title="@string/settings_settings" >
+                    <CheckBoxPreference
+                        android:defaultValue="false"
+                        android:key="@string/pref_connectorOXActive"
+                        android:title="@string/settings_activate_ox" />
+<!-- 
+                    <EditTextPreference
+                        android:dependency="@string/pref_connectorECActive"
+                        android:dialogTitle="@string/init_username"
+                        android:hint="@string/init_username"
+                        android:imeOptions="actionDone"
+                        android:key="@string/pref_ecusername"
+                        android:singleLine="true"
+                        android:title="@string/init_username" />
+
+                    <cgeo.geocaching.settings.EditPasswordPreference
+                        android:dependency="@string/pref_connectorECActive"
+                        android:dialogTitle="@string/init_password"
+                        android:hint="@string/init_password"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:key="@string/pref_ecpassword"
+                        android:singleLine="true"
+                        android:title="@string/init_password" />
+                    <cgeo.geocaching.settings.CheckECCredentialsPreference
+                        android:dependency="@string/pref_connectorECActive"
+                        android:title="@string/init_login" />
+ -->
+                </PreferenceCategory>
+                <PreferenceCategory android:title="@string/settings_information" >
+                    <Preference
+                        android:key="@string/pref_fakekey_ox_website"
+                        android:title="@string/settings_open_website" />
+                </PreferenceCategory>
+            </PreferenceScreen>
+
             <PreferenceScreen android:title="@string/init_gcvote" >
                 <PreferenceCategory android:title="@string/settings_settings" >
                     <cgeo.geocaching.settings.EditPasswordPreference

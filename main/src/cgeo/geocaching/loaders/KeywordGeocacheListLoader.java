@@ -25,7 +25,7 @@ public class KeywordGeocacheListLoader extends AbstractSearchLoader {
         }
 
         for (ISearchByKeyword connector : ConnectorFactory.getSearchByKeywordConnectors()) {
-            if (connector.isActivated()) {
+            if (connector.isActive()) {
                 searchResult.addSearchResult(connector.searchByName(keyword));
             }
         }

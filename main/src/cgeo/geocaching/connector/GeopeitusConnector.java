@@ -4,6 +4,7 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 public class GeopeitusConnector extends AbstractConnector {
 
@@ -13,7 +14,7 @@ public class GeopeitusConnector extends AbstractConnector {
     }
 
     @Override
-    public String getCacheUrl(final Geocache cache) {
+    public String getCacheUrl(final @NonNull Geocache cache) {
         return getCacheUrlPrefix() + StringUtils.stripStart(cache.getGeocode().substring(2), "0");
     }
 
@@ -28,7 +29,7 @@ public class GeopeitusConnector extends AbstractConnector {
     }
 
     @Override
-    public boolean canHandle(String geocode) {
+    public boolean canHandle(@NonNull String geocode) {
         return StringUtils.startsWith(geocode, "GE") && isNumericId(geocode.substring(2));
     }
 

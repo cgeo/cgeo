@@ -109,7 +109,7 @@ public final class ConnectorFactory {
     public static ILogin[] getActiveLiveConnectors() {
         final List<ILogin> liveConns = new ArrayList<ILogin>();
         for (final IConnector conn : CONNECTORS) {
-            if (conn instanceof ILogin && conn.isActivated()) {
+            if (conn instanceof ILogin && conn.isActive()) {
                 liveConns.add((ILogin) conn);
             }
         }
@@ -170,7 +170,7 @@ public final class ConnectorFactory {
 
         final SearchResult result = new SearchResult();
         for (final ISearchByViewPort vpconn : searchByViewPortConns) {
-            if (vpconn.isActivated()) {
+            if (vpconn.isActive()) {
                 result.addSearchResult(vpconn.searchByViewport(viewport, tokens));
             }
         }

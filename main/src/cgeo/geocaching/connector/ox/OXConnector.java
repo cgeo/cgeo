@@ -3,12 +3,16 @@ package cgeo.geocaching.connector.ox;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
+import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CancellableHandler;
+
+import org.eclipse.jdt.annotation.NonNull;
 
 import java.util.Collection;
 import java.util.regex.Pattern;
@@ -17,17 +21,17 @@ import java.util.regex.Pattern;
  * connector for OpenCaching.com
  *
  */
-public class OXConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode {
+public class OXConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort {
 
     private static final Pattern PATTERN_GEOCODE = Pattern.compile("OX[A-Z0-9]+", Pattern.CASE_INSENSITIVE);
 
     @Override
-    public boolean canHandle(String geocode) {
+    public boolean canHandle(@NonNull String geocode) {
         return PATTERN_GEOCODE.matcher(geocode).matches();
     }
 
     @Override
-    public String getCacheUrl(Geocache cache) {
+    public String getCacheUrl(@NonNull Geocache cache) {
         return getCacheUrlPrefix() + cache.getGeocode();
     }
 
@@ -42,9 +46,9 @@ public class OXConnector extends AbstractConnector implements ISearchByCenter, I
     }
 
     @Override
-    public String getLicenseText(Geocache cache) {
+    public String getLicenseText(@NonNull Geocache cache) {
         // NOT TO BE TRANSLATED
-        return "<a href=\"" + getCacheUrl(cache) + "\">" + getName() + "</a> data licensed under the Creative Commons BY-SA 3.0 License";
+        return "<a href=\"" + getCacheUrl(cache) + "\">" + getName() + "</a> data licensed under the Creative Commons CC-BY-SA 3.0 License";
     }
 
     @Override
@@ -74,5 +78,19 @@ public class OXConnector extends AbstractConnector implements ISearchByCenter, I
     @Override
     protected String getCacheUrlPrefix() {
         return "http://www.opencaching.com/#!geocache/";
+    }
+
+    @Override
+    public SearchResult searchByViewport(Viewport viewport, String[] tokens) {
+        Collection<Geocache> caches = OpenCachingApi.searchByBoundingBox(viewport);
+        if (caches == null) {
+            return null;
+        }
+        return new SearchResult(caches);
+    }
+
+    @Override
+    public boolean isActive() {
+        return Settings.isOXConnectorActive();
     }
 }

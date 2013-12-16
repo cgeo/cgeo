@@ -4,6 +4,7 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 public class UnknownConnector extends AbstractConnector {
 
@@ -13,7 +14,7 @@ public class UnknownConnector extends AbstractConnector {
     }
 
     @Override
-    public String getCacheUrl(Geocache cache) {
+    public String getCacheUrl(@NonNull Geocache cache) {
         return null; // we have no url for these caches
     }
 
@@ -28,7 +29,7 @@ public class UnknownConnector extends AbstractConnector {
     }
 
     @Override
-    public boolean canHandle(final String geocode) {
+    public boolean canHandle(final @NonNull String geocode) {
         return StringUtils.isNotBlank(geocode);
     }
 

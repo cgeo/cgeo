@@ -315,6 +315,10 @@ public class Settings {
         return getBoolean(R.string.pref_connectorECActive, false);
     }
 
+    public static boolean isOXConnectorActive() {
+        return getBoolean(R.string.pref_connectorOXActive, false);
+    }
+
     public static boolean isPremiumMember() {
         // Basic Member, Premium Member, ???
         return GCConstants.MEMBER_STATUS_PM.equalsIgnoreCase(Settings.getMemberStatus());

@@ -19,20 +19,21 @@ public interface IConnector {
     public String getName();
 
     /**
-     * return true, if this connector is responsible for the given cache
+     * Check if this connector is responsible for the given geocode.
      *
      * @param geocode
-     * @return
+     *            geocode of a cache
+     * @return return {@code true}, if this connector is responsible for the cache
      */
     public boolean canHandle(final @NonNull String geocode);
 
     /**
-     * get browser URL for the given cache
+     * Get the browser URL for the given cache.
      *
      * @param cache
      * @return
      */
-    public String getCacheUrl(final Geocache cache);
+    public String getCacheUrl(final @NonNull Geocache cache);
 
     /**
      * get long browser URL for the given cache
@@ -40,7 +41,7 @@ public interface IConnector {
      * @param cache
      * @return
      */
-    public String getLongCacheUrl(final Geocache cache);
+    public String getLongCacheUrl(final @NonNull Geocache cache);
 
     /**
      * enable/disable watchlist controls in cache details
@@ -94,19 +95,19 @@ public interface IConnector {
     public ILoggingManager getLoggingManager(final LogCacheActivity activity, final Geocache cache);
 
     /**
-     * get host name of the connector server for dynamic loading of data
+     * Get host name of the connector server for dynamic loading of data.
      *
      * @return
      */
     public String getHost();
 
     /**
-     * get cache data license text
+     * Get cache data license text. This is displayed somewhere near the cache details.
      *
      * @param cache
      * @return
      */
-    public String getLicenseText(final Geocache cache);
+    public String getLicenseText(final @NonNull Geocache cache);
 
     /**
      * enable/disable user actions in cache details
@@ -180,13 +181,13 @@ public interface IConnector {
     public boolean uploadModifiedCoordinates(Geocache cache, Geopoint wpt);
 
     /**
-     * Return true if this connector is activated for online
-     * interaction (download details, do searches, ...)
+     * Return {@code true} if this connector is active for online interaction (download details, do searches, ...). If
+     * this is {@code false}, the connector will still be used for already stored offline caches.
      *
      * @return
      */
 
-    public boolean isActivated();
+    public boolean isActive();
 
     /**
      * Check if the current user is the owner of the given cache.
@@ -215,7 +216,7 @@ public interface IConnector {
     public int getCacheMapMarkerId(boolean disabled);
 
     /**
-     * Get the list of <b>potentially</b> possible log types for a cache. Those may still be filter further during the
+     * Get the list of <b>potentially</b> possible log types for a cache. Those may still be filtered further during the
      * actual logging activity.
      *
      * @param geocache
@@ -224,8 +225,8 @@ public interface IConnector {
     public List<LogType> getPossibleLogTypes(Geocache geocache);
 
     /**
-     * Get the gpx id for a waypoint when exporting. For some connectors there is an inherent name logic,
-     * for others its just the 'prefix'
+     * Get the GPX id for a waypoint when exporting. For some connectors there is an inherent name logic,
+     * for others its just the 'prefix'.
      *
      * @param prefix
      * @return
@@ -233,7 +234,7 @@ public interface IConnector {
     public String getWaypointGpxId(String prefix, String geocode);
 
     /**
-     * Get the 'prefix' (key) for a waypoint from the 'name' in the gpx file
+     * Get the 'prefix' (key) for a waypoint from the 'name' in the GPX file
      *
      * @param name
      * @return

@@ -394,8 +394,10 @@
 
     <string name="settings_title_gc">Geocaching.com</string>
     <string name="settings_title_ec">Extremcaching.com</string>
+    <string name="settings_title_ox">Opencaching.com (Garmin)</string>
     <string name="settings_activate_gc">Activate</string>
     <string name="settings_activate_ec">Activate</string>
+    <string name="settings_activate_ox">Activate</string>
     <string name="settings_gc_legal_note">With using the service of geocaching.com, you accept the Groundspeak Terms of Use.</string>
     <string name="settings_info_facebook_login_title">Facebook Login</string>
     <string name="settings_info_facebook_login">You can\'t make c:geo login to geocaching.com with your Facebook account. But there is a simple workaround …</string>

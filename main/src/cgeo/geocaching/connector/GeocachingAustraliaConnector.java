@@ -4,6 +4,7 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICache;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 public class GeocachingAustraliaConnector extends AbstractConnector {
 
@@ -13,7 +14,7 @@ public class GeocachingAustraliaConnector extends AbstractConnector {
     }
 
     @Override
-    public String getCacheUrl(final Geocache cache) {
+    public String getCacheUrl(final @NonNull Geocache cache) {
         return getCacheUrlPrefix() + cache.getGeocode();
     }
 
@@ -28,7 +29,7 @@ public class GeocachingAustraliaConnector extends AbstractConnector {
     }
 
     @Override
-    public boolean canHandle(final String geocode) {
+    public boolean canHandle(final @NonNull String geocode) {
         return (StringUtils.startsWithIgnoreCase(geocode, "GA") || StringUtils.startsWithIgnoreCase(geocode, "TP")) && isNumericId(geocode.substring(2));
     }
 
