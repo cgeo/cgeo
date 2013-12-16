@@ -11,7 +11,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-public class NoLoggingManager implements ILoggingManager {
+public class NoLoggingManager extends AbstractLoggingManager {
 
     @Override
     public void init() {
@@ -31,11 +31,6 @@ public class NoLoggingManager implements ILoggingManager {
     @Override
     public boolean hasLoaderError() {
         return true;
-    }
-
-    @Override
-    public List<TrackableLog> getTrackables() {
-        return Collections.emptyList();
     }
 
     @Override

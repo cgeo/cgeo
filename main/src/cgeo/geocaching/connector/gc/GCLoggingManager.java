@@ -5,7 +5,7 @@ import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.connector.ILoggingManager;
+import cgeo.geocaching.connector.AbstractLoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.enumerations.LogType;
@@ -28,7 +28,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-public class GCLoggingManager implements ILoggingManager, LoaderManager.LoaderCallbacks<String> {
+public class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.LoaderCallbacks<String> {
 
     private final LogCacheActivity activity;
     private final Geocache cache;

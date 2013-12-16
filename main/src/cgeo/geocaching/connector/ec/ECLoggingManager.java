@@ -3,7 +3,7 @@ package cgeo.geocaching.connector.ec;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.TrackableLog;
-import cgeo.geocaching.connector.ILoggingManager;
+import cgeo.geocaching.connector.AbstractLoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.enumerations.LogType;
@@ -11,10 +11,9 @@ import cgeo.geocaching.enumerations.LogType;
 import android.net.Uri;
 
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.List;
 
-public class ECLoggingManager implements ILoggingManager {
+public class ECLoggingManager extends AbstractLoggingManager {
 
     private final ECConnector connector;
     private final Geocache cache;
@@ -39,16 +38,6 @@ public class ECLoggingManager implements ILoggingManager {
     @Override
     public final ImageResult postLogImage(final String logId, final String imageCaption, final String imageDescription, final Uri imageUri) {
         return null;
-    }
-
-    @Override
-    public final boolean hasLoaderError() {
-        return false;
-    }
-
-    @Override
-    public final List<TrackableLog> getTrackables() {
-        return Collections.emptyList();
     }
 
     @Override
