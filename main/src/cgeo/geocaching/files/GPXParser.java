@@ -350,7 +350,12 @@ public abstract class GPXParser extends FileParser {
 
                 if (cache.getName().length() > 2 || StringUtils.isNotBlank(parentCacheCode)) {
                     if (StringUtils.isBlank(parentCacheCode)) {
-                        parentCacheCode = "GC" + cache.getName().substring(2).toUpperCase(Locale.US);
+                        if (StringUtils.containsIgnoreCase(scriptUrl, "extremcaching")) {
+                            parentCacheCode = cache.getName().substring(2);
+                        }
+                        else {
+                            parentCacheCode = "GC" + cache.getName().substring(2).toUpperCase(Locale.US);
+                        }
                     }
                     // lookup cache for waypoint in already parsed caches
                     final Geocache cacheForWaypoint = DataStore.loadCache(parentCacheCode, LoadFlags.LOAD_CACHE_OR_DB);
