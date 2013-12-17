@@ -46,7 +46,7 @@ public class OpenCachingApi {
         }
         Collection<Geocache> caches;
         try {
-            caches = new OXGPXParser(StoredList.STANDARD_LIST_ID, isDetailed).parse(response.getEntity().getContent(), null);
+            caches = new OXGPXParser(StoredList.TEMPORARY_LIST_ID, isDetailed).parse(response.getEntity().getContent(), null);
         } catch (Exception e) {
             Log.e("Error importing from OpenCaching.com", e);
             return Collections.emptyList();
