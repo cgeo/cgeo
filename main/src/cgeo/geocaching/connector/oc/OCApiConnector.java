@@ -9,6 +9,7 @@ import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 public class OCApiConnector extends OCConnector implements ISearchByGeocode {
 
@@ -48,7 +49,7 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
     }
 
     @Override
-    public SearchResult searchByGeocode(final String geocode, final String guid, final CancellableHandler handler) {
+    public SearchResult searchByGeocode(final @Nullable String geocode, final @Nullable String guid, final CancellableHandler handler) {
         final Geocache cache = OkapiClient.getCache(geocode);
         if (cache == null) {
             return null;

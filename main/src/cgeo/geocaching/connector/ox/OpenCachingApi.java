@@ -13,6 +13,7 @@ import cgeo.geocaching.utils.Log;
 import ch.boye.httpclientandroidlib.HttpResponse;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -22,7 +23,7 @@ public class OpenCachingApi {
     private static final String API_URL_CACHES_GPX = "http://www.opencaching.com/api/geocache.gpx";
     private static final String DEV_KEY = CryptUtils.rot13("PtqQnHo9RUTht3Np");
 
-    public static Geocache searchByGeoCode(final String geocode) {
+    public static Geocache searchByGeoCode(final @NonNull String geocode) {
         final HttpResponse response = getRequest("http://www.opencaching.com/api/geocache/" + geocode + ".gpx",
                 new Parameters(
                         "log_limit", "50",
@@ -54,7 +55,7 @@ public class OpenCachingApi {
         return caches;
     }
 
-    public static Collection<Geocache> searchByCenter(final Geopoint center) {
+    public static Collection<Geocache> searchByCenter(final @NonNull Geopoint center) {
         final HttpResponse response = getRequest(API_URL_CACHES_GPX,
                 new Parameters(
                         "log_limit", "0",
@@ -66,7 +67,7 @@ public class OpenCachingApi {
     }
 
 
-    public static Collection<Geocache> searchByBoundingBox(final Viewport viewport) {
+    public static Collection<Geocache> searchByBoundingBox(final @NonNull Viewport viewport) {
         final String bbox = viewport.bottomLeft.format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA) + "," + viewport.topRight.format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA);
         final HttpResponse response = getRequest(API_URL_CACHES_GPX,
                 new Parameters(
@@ -75,6 +76,17 @@ public class OpenCachingApi {
                         "description", "none",
                         "limit", "100",
                         "bbox", bbox));
+        return importCachesFromResponse(response, false);
+    }
+
+    public static Collection<Geocache> searchByKeyword(final @NonNull String name) {
+        final HttpResponse response = getRequest(API_URL_CACHES_GPX,
+                new Parameters(
+                        "log_limit", "5",
+                        "hint", "false",
+                        "description", "none",
+                        "limit", "100",
+                        "name", name));
         return importCachesFromResponse(response, false);
     }
 

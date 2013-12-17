@@ -17,6 +17,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.content.Context;
 import android.os.Handler;
@@ -44,12 +45,12 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public SearchResult searchByViewport(Viewport viewport, String[] tokens) {
+    public SearchResult searchByViewport(@NonNull Viewport viewport, String[] tokens) {
         return new SearchResult(OkapiClient.getCachesBBox(viewport, this));
     }
 
     @Override
-    public SearchResult searchByCenter(Geopoint center) {
+    public SearchResult searchByCenter(@NonNull Geopoint center) {
 
         return new SearchResult(OkapiClient.getCachesAround(center, this));
     }
@@ -155,7 +156,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public SearchResult searchByName(final String name) {
+    public SearchResult searchByName(final @NonNull String name) {
         final Geopoint currentPos = CgeoApplication.getInstance().currentGeo().getCoords();
         return new SearchResult(OkapiClient.getCachesNamed(currentPos, name, this));
     }

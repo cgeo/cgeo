@@ -166,7 +166,7 @@ public final class ConnectorFactory {
     }
 
     /** @see ISearchByViewPort#searchByViewport */
-    public static SearchResult searchByViewport(final Viewport viewport, final String[] tokens) {
+    public static SearchResult searchByViewport(final @NonNull Viewport viewport, final String[] tokens) {
 
         final SearchResult result = new SearchResult();
         for (final ISearchByViewPort vpconn : searchByViewPortConns) {

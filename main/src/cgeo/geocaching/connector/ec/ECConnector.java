@@ -22,6 +22,7 @@ import cgeo.geocaching.utils.CancellableHandler;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.content.Context;
 import android.os.Handler;
@@ -77,7 +78,7 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public SearchResult searchByGeocode(final String geocode, final String guid, final CancellableHandler handler) {
+    public SearchResult searchByGeocode(final @Nullable String geocode, final @Nullable String guid, final CancellableHandler handler) {
 
         CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
 
@@ -87,7 +88,7 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public SearchResult searchByViewport(Viewport viewport, String[] tokens) {
+    public SearchResult searchByViewport(@NonNull Viewport viewport, String[] tokens) {
         final Collection<Geocache> caches = ECApi.searchByBBox(viewport);
         if (caches == null) {
             return null;
@@ -97,7 +98,7 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public SearchResult searchByCenter(Geopoint center) {
+    public SearchResult searchByCenter(@NonNull Geopoint center) {
         final Collection<Geocache> caches = ECApi.searchByCenter(center);
         if (caches == null) {
             return null;

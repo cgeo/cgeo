@@ -24,6 +24,7 @@ import cgeo.geocaching.utils.Log;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.content.Context;
 import android.os.Handler;
@@ -127,7 +128,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public SearchResult searchByGeocode(final String geocode, final String guid, final CancellableHandler handler) {
+    public SearchResult searchByGeocode(final @Nullable String geocode, final @Nullable String guid, final CancellableHandler handler) {
 
         CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
 
@@ -164,7 +165,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public SearchResult searchByViewport(Viewport viewport, String[] tokens) {
+    public SearchResult searchByViewport(@NonNull Viewport viewport, String[] tokens) {
         return GCMap.searchByViewport(viewport, tokens);
     }
 
@@ -264,7 +265,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public SearchResult searchByCenter(Geopoint center) {
+    public SearchResult searchByCenter(@NonNull Geopoint center) {
         // TODO make search by coordinate use this method. currently it is just a marker that this connector supports search by center
         return null;
     }
