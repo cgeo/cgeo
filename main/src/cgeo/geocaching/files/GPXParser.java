@@ -856,6 +856,9 @@ public abstract class GPXParser extends FileParser {
     }
 
     /**
+     * Overwrite this method in a GPX parser sub class to modify the {@link Geocache}, after it has been fully parsed
+     * from the GPX file and before it gets stored.
+     * 
      * @param cache
      *            currently imported cache
      */
