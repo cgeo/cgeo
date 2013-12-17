@@ -46,6 +46,7 @@
     <attr name="text" format="string" />
     <attr name="url" format="string" />
     <attr name="urlButton" format="string" />
+    <attr name="connector" format="string" />
     
     <!-- others -->
     <attr name="compass" format="integer" />

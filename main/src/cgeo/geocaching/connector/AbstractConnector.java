@@ -1,14 +1,21 @@
 package cgeo.geocaching.connector;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.capability.ISearchByCenter;
+import cgeo.geocaching.connector.capability.ISearchByGeocode;
+import cgeo.geocaching.connector.capability.ISearchByKeyword;
+import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+
+import android.text.Html;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -205,5 +212,46 @@ public abstract class AbstractConnector implements IConnector {
     @Override
     public int getMaxTerrain() {
         return 5;
+    }
+
+    @Override
+    public final String getCapabilitiesMessage() {
+        StringBuilder builder = new StringBuilder("<p>"
+                + CgeoApplication.getInstance().getString(R.string.feature_description) + "<ul>");
+        builder.append(capability(ISearchByViewPort.class, R.string.feature_search_live_map));
+        builder.append(capability(ISearchByKeyword.class, R.string.feature_search_keyword));
+        builder.append(capability(ISearchByCenter.class, R.string.feature_search_center));
+        builder.append(capability(ISearchByGeocode.class, R.string.feature_search_geocode));
+        if (supportsUserActions()) {
+            builder.append(feature(R.string.feature_search_user));
+        }
+        if (supportsLogging()) {
+            builder.append(feature(R.string.feature_online_logging));
+        }
+        if (supportsLogImages()) {
+            builder.append(feature(R.string.feature_log_images));
+        }
+        if (supportsPersonalNote()) {
+            builder.append(feature(R.string.feature_personal_notes));
+        }
+        if (supportsOwnCoordinates()) {
+            builder.append(feature(R.string.feature_own_coordinates));
+        }
+        if (supportsWatchList()) {
+            builder.append(feature(R.string.feature_watch_list));
+        }
+        builder.append("</ul></p>");
+        return builder.toString();
+    }
+
+    private String capability(Class<? extends IConnector> clazz, final int featureResourceId) {
+        if (clazz.isInstance(this)) {
+            return feature(featureResourceId);
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private static String feature(int featureResourceId) {
+        return "<li>" + Html.escapeHtml(CgeoApplication.getInstance().getString(featureResourceId)) + "</li>";
     }
 }

@@ -7,11 +7,10 @@ import android.preference.EditTextPreference;
 import android.util.AttributeSet;
 
 /**
- * This is just a dummy preference, to be able check for the type.
+ * Password preference. It will only show a row of asterisks as summary instead of the password.
  * <p>
  * Use it exactly as an EditTextPreference
- *
- * @see SettingsActivity - search for EditPasswordPreference
+ * 
  */
 public class EditPasswordPreference extends EditTextPreference {
 

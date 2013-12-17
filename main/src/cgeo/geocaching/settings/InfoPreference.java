@@ -17,48 +17,61 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-public class InfoPreference extends Preference {
+/**
+ * Preference which shows a dialog containing textual explanation. The dialog has two buttons, where one will open a
+ * hyper link with more detailed information.
+ * <p>
+ * The URL for the hyper link and the text are given as custom attributes in the preference XML definition.
+ * </p>
+ *
+ */
+public class InfoPreference extends AbstractAttributeBasedPrefence {
 
-    // strings for the popup dialog
+    /**
+     * Content of the dialog, filled from preferences XML.
+     */
     private String text;
+    /**
+     * URL for the second button, filled from preferences XML.
+     */
     private String url;
+    /**
+     * text for the second button to open an URL, filled from preferences XML.
+     */
     private String urlButton;
 
     private LayoutInflater inflater;
 
     public InfoPreference(Context context) {
         super(context);
-        init(context, null, 0);
+        init(context);
     }
 
     public InfoPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context, attrs, 0);
+        init(context);
     }
 
     public InfoPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init(context, attrs, defStyle);
+        init(context);
     }
 
-    private void init(Context context, AttributeSet attrs, int defStyle) {
+    private void init(Context context) {
         inflater = ((Activity) context).getLayoutInflater();
-
         setPersistent(false);
+    }
 
-        if (attrs == null) {
-            return; // coward's retreat
-        }
+    @Override
+    protected int[] getAttributeNames() {
+        return new int[] { android.R.attr.text, R.attr.url, R.attr.urlButton };
+    }
 
-        TypedArray types = context.obtainStyledAttributes(attrs, new int[] {
-                android.R.attr.text, R.attr.url, R.attr.urlButton },
-                defStyle, 0);
-
-        text = types.getString(0);
-        url = types.getString(1);
-        urlButton = types.getString(2);
-
-        types.recycle();
+    @Override
+    protected void processAttributeValues(TypedArray values) {
+        text = values.getString(0);
+        url = values.getString(1);
+        urlButton = values.getString(2);
     }
 
     @Override

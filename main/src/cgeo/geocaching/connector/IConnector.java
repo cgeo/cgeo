@@ -247,4 +247,11 @@ public interface IConnector {
      * @return
      */
     public int getMaxTerrain();
+
+    /**
+     * Creates a text listing all features of this connector to be displayed to the user.
+     *
+     * @return
+     */
+    public String getCapabilitiesMessage();
 }

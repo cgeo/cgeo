@@ -12,6 +12,7 @@ import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
+import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -31,7 +32,7 @@ import android.os.Handler;
 
 import java.util.regex.Pattern;
 
-public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ILogin {
+public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ISearchByKeyword, ILogin {
 
     private static final String CACHE_URL_SHORT = "http://coord.info/";
     // Double slash is used to force open in browser
@@ -205,11 +206,12 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     /**
      * Add a cache to the favorites list.
-     *
+     * 
      * This must not be called from the UI thread.
-     *
-     * @param cache the cache to add
-     * @return <code>true</code> if the cache was sucessfully added, <code>false</code> otherwise
+     * 
+     * @param cache
+     *            the cache to add
+     * @return <code>true</code> if the cache was successfully added, <code>false</code> otherwise
      */
 
     public static boolean addToFavorites(Geocache cache) {
@@ -222,11 +224,12 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     /**
      * Remove a cache from the favorites list.
-     *
+     * 
      * This must not be called from the UI thread.
-     *
-     * @param cache the cache to add
-     * @return <code>true</code> if the cache was sucessfully added, <code>false</code> otherwise
+     * 
+     * @param cache
+     *            the cache to add
+     * @return <code>true</code> if the cache was successfully added, <code>false</code> otherwise
      */
 
     public static boolean removeFromFavorites(Geocache cache) {
@@ -351,5 +354,11 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
             prefix = name.substring(0, 2);
         }
         return prefix;
+    }
+
+    @Override
+    public SearchResult searchByName(@NonNull String name) {
+        // TODO make the connector use this method. Currently it is only a marker interface.
+        return null;
     }
 }

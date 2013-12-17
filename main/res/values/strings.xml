@@ -532,6 +532,18 @@
     <string name="init_ec_icons">Map Icons</string>
     <string name="settings_ec_icons_other">Other</string>
     <string name="settings_ec_icons_oc">OC</string>
+    <string name="settings_features">Supported Features</string>
+    <string name="feature_description">The following <b>online</b> features of this website are supported in c:geo (in addition to the offline features):</string>
+    <string name="feature_personal_notes">Personal notes</string>
+    <string name="feature_online_logging">Online logging</string>
+    <string name="feature_log_images">Attach images to logs</string>
+    <string name="feature_watch_list">Watch list</string>
+    <string name="feature_own_coordinates">Storing of modified coordinates</string>
+    <string name="feature_search_user">Search by owner/finder</string>
+    <string name="feature_search_keyword">Search by keyword</string>
+    <string name="feature_search_live_map">Live map</string>
+    <string name="feature_search_center">Search by position</string>
+    <string name="feature_search_geocode">Search by geocode</string>
     
     <!-- map sources -->
     <string name="map_source_google_map">Google: Map</string>

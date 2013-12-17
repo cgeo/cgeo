@@ -1,7 +1,6 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
 
 import android.content.Context;
 import android.preference.Preference;
@@ -14,7 +13,7 @@ import android.widget.TextView;
 
 public class WpThresholdPreference extends Preference {
 
-    TextView valueView;
+    private TextView valueView;
 
     public WpThresholdPreference(Context context) {
         super(context);

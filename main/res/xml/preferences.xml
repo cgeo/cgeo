@@ -59,6 +59,10 @@
                     </PreferenceScreen>
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
+                    <cgeo.geocaching.settings.CapabilitiesPreference
+                        android:title="@string/settings_features"
+                        cgeo:connector="GC" />
+
                     <cgeo.geocaching.settings.InfoPreference
                         android:text="@string/settings_info_facebook_login"
                         android:title="@string/settings_info_facebook_login_title"
@@ -87,6 +91,9 @@
                         android:key="@string/pref_fakekey_ocde_authorization" />
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
+                    <cgeo.geocaching.settings.CapabilitiesPreference
+                        android:title="@string/settings_features"
+                        cgeo:connector="OC" />
                     <Preference
                         android:key="@string/pref_fakekey_ocde_website"
                         android:title="@string/settings_open_website" />
@@ -109,6 +116,9 @@
                         android:key="@string/pref_fakekey_ocpl_authorization" />
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
+                    <cgeo.geocaching.settings.CapabilitiesPreference
+                        android:title="@string/settings_features"
+                        cgeo:connector="OP" />
                     <Preference
                         android:key="@string/pref_fakekey_ocpl_website"
                         android:title="@string/settings_open_website" />
@@ -155,6 +165,9 @@
 	            		android:entryValues="@array/ECIconsValues" />
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
+                    <cgeo.geocaching.settings.CapabilitiesPreference
+                        android:title="@string/settings_features"
+                        cgeo:connector="EC" />
                     <Preference
                         android:key="@string/pref_fakekey_ec_website"
                         android:title="@string/settings_open_website" />
@@ -167,31 +180,11 @@
                         android:defaultValue="false"
                         android:key="@string/pref_connectorOXActive"
                         android:title="@string/settings_activate_ox" />
-<!-- 
-                    <EditTextPreference
-                        android:dependency="@string/pref_connectorECActive"
-                        android:dialogTitle="@string/init_username"
-                        android:hint="@string/init_username"
-                        android:imeOptions="actionDone"
-                        android:key="@string/pref_ecusername"
-                        android:singleLine="true"
-                        android:title="@string/init_username" />
-
-                    <cgeo.geocaching.settings.EditPasswordPreference
-                        android:dependency="@string/pref_connectorECActive"
-                        android:dialogTitle="@string/init_password"
-                        android:hint="@string/init_password"
-                        android:imeOptions="actionDone"
-                        android:inputType="textPassword"
-                        android:key="@string/pref_ecpassword"
-                        android:singleLine="true"
-                        android:title="@string/init_password" />
-                    <cgeo.geocaching.settings.CheckECCredentialsPreference
-                        android:dependency="@string/pref_connectorECActive"
-                        android:title="@string/init_login" />
- -->
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
+                    <cgeo.geocaching.settings.CapabilitiesPreference
+                        android:title="@string/settings_features"
+                        cgeo:connector="OX" />
                     <Preference
                         android:key="@string/pref_fakekey_ox_website"
                         android:title="@string/settings_open_website" />
