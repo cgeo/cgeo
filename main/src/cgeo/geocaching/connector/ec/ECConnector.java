@@ -79,7 +79,9 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public SearchResult searchByGeocode(final @Nullable String geocode, final @Nullable String guid, final CancellableHandler handler) {
-
+        if (geocode == null) {
+            return null;
+        }
         CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
 
         final Geocache cache = ECApi.searchByGeoCode(geocode);

@@ -29,6 +29,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -141,7 +142,7 @@ public class SimpleDirChooser extends AbstractListActivity {
             }
         } catch (RuntimeException e) {
         }
-        Collections.sort(listDirs);
+        Collections.sort(listDirs, Option.NAME_COMPARATOR);
         if (dir.getParent() != null) {
             listDirs.add(0, new Option(PARENT_DIR, dir.getParent(), false));
         }
@@ -247,14 +248,20 @@ public class SimpleDirChooser extends AbstractListActivity {
         }
     }
 
-    /**
-     * Note: this class has a natural ordering that is inconsistent with equals.
-     */
-    public static class Option implements Comparable<Option> {
+    public static class Option {
         private final String name;
         private final String path;
         private boolean checked = false;
         private boolean writeable = false;
+
+        private static Comparator<Option> NAME_COMPARATOR = new Comparator<SimpleDirChooser.Option>() {
+
+            @Override
+            public int compare(Option lhs, Option rhs) {
+                return String.CASE_INSENSITIVE_ORDER.compare(lhs.name, rhs.name);
+            }
+
+        };
 
         public Option(String name, String path, boolean writeable) {
             this.name = name;
@@ -280,14 +287,6 @@ public class SimpleDirChooser extends AbstractListActivity {
 
         public boolean isWriteable() {
             return writeable;
-        }
-
-        @Override
-        public int compareTo(Option other) {
-            if (other != null && this.name != null) {
-                return String.CASE_INSENSITIVE_ORDER.compare(this.name, other.getName());
-            }
-            throw new IllegalArgumentException("");
         }
     }
 
