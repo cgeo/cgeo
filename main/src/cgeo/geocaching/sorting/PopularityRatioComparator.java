@@ -3,9 +3,7 @@
  */
 package cgeo.geocaching.sorting;
 
-import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.enumerations.LogType;
 
 /**
  * sorts caches by popularity ratio (favorites per find in %).
@@ -39,17 +37,6 @@ public class PopularityRatioComparator extends AbstractCacheComparator {
             return -1;
         }
 
-        return 0;
-    }
-
-    private static int getFindsCount(Geocache cache) {
-        if (cache.getLogCounts().isEmpty()) {
-            cache.setLogCounts(DataStore.loadLogCounts(cache.getGeocode()));
-        }
-        Integer logged = cache.getLogCounts().get(LogType.FOUND_IT);
-        if (logged != null) {
-            return logged;
-        }
         return 0;
     }
 }
