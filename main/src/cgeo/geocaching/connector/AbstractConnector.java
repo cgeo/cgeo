@@ -15,8 +15,6 @@ import cgeo.geocaching.geopoint.Geopoint;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
-import android.text.Html;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -252,6 +250,6 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     private static String feature(int featureResourceId) {
-        return "<li>" + Html.escapeHtml(CgeoApplication.getInstance().getString(featureResourceId)) + "</li>";
+        return "<li>" + CgeoApplication.getInstance().getString(featureResourceId) + "</li>";
     }
 }
