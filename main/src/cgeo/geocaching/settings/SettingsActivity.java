@@ -469,13 +469,7 @@ public class SettingsActivity extends PreferenceActivity {
         public boolean onPreferenceChange(final Preference preference, final Object value) {
             String stringValue = value.toString();
 
-            if (preference instanceof EditPasswordPreference) {
-                if (StringUtils.isBlank((String) value)) {
-                    preference.setSummary(StringUtils.EMPTY);
-                } else {
-                    preference.setSummary(StringUtils.repeat("\u2022 ", 10));
-                }
-            } else if (isPreference(preference, R.string.pref_mapsource)) {
+            if (isPreference(preference, R.string.pref_mapsource)) {
                 // reset the cached map source
                 MapSource mapSource;
                 try {
