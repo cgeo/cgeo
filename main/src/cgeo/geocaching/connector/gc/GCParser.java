@@ -871,12 +871,12 @@ public abstract class GCParser {
         return search;
     }
 
-    public static SearchResult searchByCoords(final Geopoint coords, final CacheType cacheType, final boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
+    public static SearchResult searchByCoords(final @NonNull Geopoint coords, final CacheType cacheType, final boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
         final Parameters params = new Parameters("lat", Double.toString(coords.getLatitude()), "lng", Double.toString(coords.getLongitude()));
         return searchByAny(cacheType, false, showCaptcha, params, recaptchaReceiver);
     }
 
-    public static SearchResult searchByKeyword(final String keyword, final CacheType cacheType, final boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
+    public static SearchResult searchByKeyword(final @NonNull String keyword, final CacheType cacheType, final boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
         if (StringUtils.isBlank(keyword)) {
             Log.e("GCParser.searchByKeyword: No keyword given");
             return null;

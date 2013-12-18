@@ -2,13 +2,15 @@ package cgeo.geocaching.connector.capability;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.loaders.RecaptchaReceiver;
 
 import org.eclipse.jdt.annotation.NonNull;
 
 /**
- * connector capability of searching online for a cache by name
- *
+ * Connector capability of searching online for a cache by keyword.
+ * 
  */
 public interface ISearchByKeyword extends IConnector {
-    public SearchResult searchByName(final @NonNull String name);
+    // TODO: The recaptcha receiver is only needed for GC. Would be good to refactor this away from the generic interface.
+    public SearchResult searchByKeyword(final @NonNull String keyword, final @NonNull RecaptchaReceiver recaptchaReceiver);
 }

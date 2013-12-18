@@ -10,6 +10,7 @@ import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CancellableHandler;
 
@@ -72,7 +73,7 @@ public class OXConnector extends AbstractConnector implements ISearchByCenter, I
     }
 
     @Override
-    public SearchResult searchByCenter(@NonNull Geopoint center) {
+    public SearchResult searchByCenter(@NonNull Geopoint center, final @NonNull RecaptchaReceiver recaptchaReceiver) {
         return createSearchResult(OpenCachingApi.searchByCenter(center));
     }
 
@@ -92,7 +93,7 @@ public class OXConnector extends AbstractConnector implements ISearchByCenter, I
     }
 
     @Override
-    public SearchResult searchByName(final @NonNull String name) {
+    public SearchResult searchByKeyword(final @NonNull String name, final @NonNull RecaptchaReceiver recaptchaReceiver) {
         return createSearchResult(OpenCachingApi.searchByKeyword(name));
     }
 

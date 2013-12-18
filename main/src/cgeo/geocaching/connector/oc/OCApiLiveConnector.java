@@ -13,6 +13,7 @@ import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.oc.UserInfo.UserInfoStatus;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CryptUtils;
 
@@ -50,7 +51,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public SearchResult searchByCenter(@NonNull Geopoint center) {
+    public SearchResult searchByCenter(@NonNull Geopoint center, final @NonNull RecaptchaReceiver recaptchaReceiver) {
 
         return new SearchResult(OkapiClient.getCachesAround(center, this));
     }
@@ -156,7 +157,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public SearchResult searchByName(final @NonNull String name) {
+    public SearchResult searchByKeyword(final @NonNull String name, final @NonNull RecaptchaReceiver recaptchaReceiver) {
         final Geopoint currentPos = CgeoApplication.getInstance().currentGeo().getCoords();
         return new SearchResult(OkapiClient.getCachesNamed(currentPos, name, this));
     }

@@ -17,6 +17,7 @@ import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -206,9 +207,9 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     /**
      * Add a cache to the favorites list.
-     * 
+     *
      * This must not be called from the UI thread.
-     * 
+     *
      * @param cache
      *            the cache to add
      * @return <code>true</code> if the cache was successfully added, <code>false</code> otherwise
@@ -224,9 +225,9 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     /**
      * Remove a cache from the favorites list.
-     * 
+     *
      * This must not be called from the UI thread.
-     * 
+     *
      * @param cache
      *            the cache to add
      * @return <code>true</code> if the cache was successfully added, <code>false</code> otherwise
@@ -268,9 +269,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public SearchResult searchByCenter(@NonNull Geopoint center) {
-        // TODO make search by coordinate use this method. currently it is just a marker that this connector supports search by center
-        return null;
+    public SearchResult searchByCenter(@NonNull Geopoint center, final @NonNull RecaptchaReceiver recaptchaReceiver) {
+        return GCParser.searchByCoords(center, Settings.getCacheType(), Settings.isShowCaptcha(), recaptchaReceiver);
     }
 
     @Override
@@ -357,8 +357,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public SearchResult searchByName(@NonNull String name) {
-        // TODO make the connector use this method. Currently it is only a marker interface.
-        return null;
+    public SearchResult searchByKeyword(@NonNull String keyword, final @NonNull RecaptchaReceiver recaptchaReceiver) {
+        return GCParser.searchByKeyword(keyword, Settings.getCacheType(), Settings.isShowCaptcha(), recaptchaReceiver);
     }
 }

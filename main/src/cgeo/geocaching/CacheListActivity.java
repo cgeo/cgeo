@@ -1631,7 +1631,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 }
                 if (coords != null) {
                     loader = new CoordsGeocacheListLoader(app, coords);
-                    }
+                }
                 else {
                     loader = new AddressGeocacheListLoader(app, address);
                 }

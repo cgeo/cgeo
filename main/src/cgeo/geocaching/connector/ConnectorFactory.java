@@ -24,6 +24,7 @@ import cgeo.geocaching.geopoint.Viewport;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,38 +61,22 @@ public final class ConnectorFactory {
             UNKNOWN_TRACKABLE_CONNECTOR // must be last
     };
 
-    private static final ISearchByViewPort[] searchByViewPortConns;
+    private static final ISearchByViewPort[] searchByViewPortConns = getMatchingConnectors(ISearchByViewPort.class);
 
-    private static final ISearchByCenter[] searchByCenterConns;
+    private static final ISearchByCenter[] searchByCenterConns = getMatchingConnectors(ISearchByCenter.class);
 
-    private static final ISearchByKeyword[] searchByKeywordConns;
+    private static final ISearchByKeyword[] searchByKeywordConns = getMatchingConnectors(ISearchByKeyword.class);
 
-    static {
-        final List<ISearchByViewPort> vpConns = new ArrayList<ISearchByViewPort>();
+    @SuppressWarnings("unchecked")
+    private static <T extends IConnector> T[] getMatchingConnectors(final Class<T> clazz) {
+        final List<T> matching = new ArrayList<T>();
         for (final IConnector conn : CONNECTORS) {
-            if (conn instanceof ISearchByViewPort) {
-                vpConns.add((ISearchByViewPort) conn);
+            if (clazz.isInstance(conn)) {
+                matching.add((T) conn);
             }
         }
-        searchByViewPortConns = vpConns.toArray(new ISearchByViewPort[vpConns.size()]);
-
-        final List<ISearchByCenter> centerConns = new ArrayList<ISearchByCenter>();
-        for (final IConnector conn : CONNECTORS) {
-            // GCConnector is handled specially, omit it here!
-            if (conn instanceof ISearchByCenter && !(conn instanceof GCConnector)) {
-                centerConns.add((ISearchByCenter) conn);
-            }
-        }
-        searchByCenterConns = centerConns.toArray(new ISearchByCenter[centerConns.size()]);
-
-        final List<ISearchByKeyword> keywordConns = new ArrayList<ISearchByKeyword>();
-        for (final IConnector conn : CONNECTORS) {
-            // GCConnector is handled specially, omit it here!
-            if (conn instanceof ISearchByKeyword && !(conn instanceof GCConnector)) {
-                keywordConns.add((ISearchByKeyword) conn);
-            }
-        }
-        searchByKeywordConns = keywordConns.toArray(new ISearchByKeyword[keywordConns.size()]);
+        T[] result = (T[]) Array.newInstance(clazz, matching.size());
+        return matching.toArray(result);
     }
 
     public static IConnector[] getConnectors() {

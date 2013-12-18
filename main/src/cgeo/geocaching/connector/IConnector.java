@@ -8,6 +8,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface IConnector {
@@ -249,9 +250,9 @@ public interface IConnector {
     public int getMaxTerrain();
 
     /**
-     * Creates a text listing all features of this connector to be displayed to the user.
-     *
+     * Get a user readable collection of all online features of this connector.
+     * 
      * @return
      */
-    public String getCapabilitiesMessage();
+    public Collection<String> getCapabilities();
 }

@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.capability;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.loaders.RecaptchaReceiver;
 
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -11,5 +12,5 @@ import org.eclipse.jdt.annotation.NonNull;
  *
  */
 public interface ISearchByCenter extends IConnector {
-    public SearchResult searchByCenter(final @NonNull Geopoint center);
+    public SearchResult searchByCenter(final @NonNull Geopoint center, final @NonNull RecaptchaReceiver recaptchaReceiver);
 }

@@ -1,5 +1,6 @@
 package cgeo.geocaching.settings;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -67,7 +68,15 @@ public class CapabilitiesPreference extends AbstractAttributeBasedPrefence {
         if (connector == null) {
             return StringUtils.EMPTY;
         }
-        return connector.getCapabilitiesMessage();
+        StringBuilder builder = new StringBuilder("<p>"
+                + CgeoApplication.getInstance().getString(R.string.feature_description) + "<ul>");
+
+        for (String capability : connector.getCapabilities()) {
+            builder.append("<li>").append(capability).append("</li>");
+        }
+
+        builder.append("</ul></p>");
+        return builder.toString();
     }
 
     @Override
