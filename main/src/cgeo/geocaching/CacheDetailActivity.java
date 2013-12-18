@@ -382,7 +382,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 buildDetailsContextMenu(menu, res.getString(R.string.cache_logs), false);
                 break;
             case R.id.waypoint:
-                menu.setHeaderTitle(res.getString(R.string.waypoint));
+                menu.setHeaderTitle(selectedWaypoint.getName() + " (" + res.getString(R.string.waypoint) + ")");
                 getMenuInflater().inflate(R.menu.waypoint_options, menu);
                 final boolean isOriginalWaypoint = selectedWaypoint.getWaypointType().equals(WaypointType.ORIGINAL);
                 menu.findItem(R.id.menu_waypoint_reset_cache_coords).setVisible(isOriginalWaypoint);
