@@ -254,7 +254,8 @@
     <string name="menu_history">History</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Scan geocode</string>
-
+    <string name="menu_pocket_queries">Pocket queries</string>
+    
     <!-- main screen -->
     <string name="live_map_button">Live map</string>
     <string name="caches_nearby_button">Nearby</string>

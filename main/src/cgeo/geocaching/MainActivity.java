@@ -268,6 +268,7 @@ public class MainActivity extends AbstractActivity {
     public boolean onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_scan).setEnabled(ProcessUtils.isIntentAvailable(SCAN_INTENT));
+        menu.findItem(R.id.menu_pocket_queries).setVisible(Settings.isPremiumMember());
         return true;
     }
 
@@ -289,6 +290,18 @@ public class MainActivity extends AbstractActivity {
                 return true;
             case R.id.menu_scan:
                 startScannerApplication();
+                return true;
+            case R.id.menu_pocket_queries:
+                if (!Settings.isPremiumMember()) {
+                    return true;
+                }
+                new PocketQueryList.UserInterface(MainActivity.this).promptForListSelection(new RunnableWithArgument<PocketQueryList>() {
+
+                    @Override
+                    public void run(final PocketQueryList pql) {
+                        CacheListActivity.startActivityPocket(MainActivity.this, pql);
+                    }
+                });
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -512,26 +525,6 @@ public class MainActivity extends AbstractActivity {
                             }
                         });
                         nearestView.setBackgroundResource(R.drawable.main_nearby);
-
-                        nearestView.setOnLongClickListener(new View.OnLongClickListener() {
-
-                            @Override
-                            public boolean onLongClick(View v) {
-                                if (!Settings.isPremiumMember()) {
-                                    return true;
-                                }
-                                new PocketQueryList.UserInterface(MainActivity.this).promptForListSelection(new RunnableWithArgument<PocketQueryList>() {
-
-                                    @Override
-                                    public void run(final PocketQueryList pql) {
-                                        CacheListActivity.startActivityPocket(MainActivity.this, pql);
-                                    }
-                                });
-                                return true;
-                            }
-                        });
-                        nearestView.setLongClickable(true);
-
                     }
 
                     navType.setText(res.getString(geo.getLocationProvider().resourceId));

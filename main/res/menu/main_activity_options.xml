@@ -12,6 +12,11 @@
         android:title="@string/menu_history">
     </item>
     <item
+        android:id="@+id/menu_pocket_queries"
+        android:icon="@drawable/ic_menu_account_list"
+        android:title="@string/menu_pocket_queries">
+    </item>
+    <item
         android:id="@+id/menu_helpers"
         android:icon="@drawable/ic_menu_shopping"
         android:title="@string/menu_helpers">
