@@ -1,4 +1,4 @@
 <factorypath>
-    <factorypathentry kind="WKSPJAR" id="/cgeo/libs/butterknife-4.0.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="WKSPJAR" id="/cgeo/libs/butterknife-4.0.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="WKSPJAR" id="/cgeo/compile-libs/androidannotations-2.7.1.jar" enabled="true" runInBatchMode="false"/>
 </factorypath>
