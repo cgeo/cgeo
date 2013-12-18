@@ -2,11 +2,8 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
-import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
-import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
-import cgeo.geocaching.maps.interfaces.OverlayImpl;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -14,37 +11,21 @@ import android.app.Activity;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.Typeface;
 import android.util.DisplayMetrics;
 
-public class ScaleOverlay implements GeneralOverlay {
-
+public class ScaleDrawer {
     private static final double SCALE_WIDTH_FACTOR = 1.0 / 2.5;
 
     private Paint scale = null;
     private Paint scaleShadow = null;
     private BlurMaskFilter blur = null;
     private float pixelDensity = 0;
-    private OverlayImpl ovlImpl = null;
 
-    public ScaleOverlay(Activity activity, OverlayImpl overlayImpl) {
-        this.ovlImpl = overlayImpl;
-
+    public ScaleDrawer(Activity activity) {
         DisplayMetrics metrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         pixelDensity = metrics.density;
-    }
-
-    @Override
-    public void drawOverlayBitmap(Canvas canvas, Point drawPosition,
-            MapProjectionImpl projection, byte drawZoomLevel) {
-        drawInternal(canvas, getOverlayImpl().getMapViewImpl());
-    }
-
-    @Override
-    public void draw(Canvas canvas, MapViewImpl mapView, boolean shadow) {
-        drawInternal(canvas, mapView);
     }
 
     static private double keepSignificantDigit(final double distance) {
@@ -52,8 +33,7 @@ public class ScaleOverlay implements GeneralOverlay {
         return scale * Math.floor(distance / scale);
     }
 
-    private void drawInternal(Canvas canvas, MapViewImpl mapView) {
-
+    void drawScale(Canvas canvas, MapViewImpl mapView) {
         final double span = mapView.getLongitudeSpan() / 1e6;
         final GeoPointImpl center = mapView.getMapViewCenter();
 
@@ -109,8 +89,4 @@ public class ScaleOverlay implements GeneralOverlay {
         canvas.drawText(String.format(formatString, distanceRound) + " " + scaled.right, (float) (pixels - (10 * pixelDensity)), (bottom - (10 * pixelDensity)), scale);
     }
 
-    @Override
-    public OverlayImpl getOverlayImpl() {
-        return ovlImpl;
-    }
 }

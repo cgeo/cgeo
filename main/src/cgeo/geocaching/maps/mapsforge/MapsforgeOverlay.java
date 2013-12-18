@@ -1,7 +1,6 @@
 package cgeo.geocaching.maps.mapsforge;
 
-import cgeo.geocaching.maps.PositionOverlay;
-import cgeo.geocaching.maps.ScaleOverlay;
+import cgeo.geocaching.maps.PositionAndScaleOverlay;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
@@ -18,21 +17,11 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class MapsforgeOverlay extends Overlay implements OverlayImpl {
 
-    private GeneralOverlay overlayBase = null;
+    private PositionAndScaleOverlay overlayBase = null;
     private Lock lock = new ReentrantLock();
 
-    public MapsforgeOverlay(Activity activityIn, OverlayImpl.OverlayType ovlType) {
-
-        switch (ovlType) {
-            case PositionOverlay:
-                overlayBase = new PositionOverlay(activityIn, this);
-                break;
-            case ScaleOverlay:
-                overlayBase = new ScaleOverlay(activityIn, this);
-                break;
-            default:
-                throw new IllegalStateException();
-        }
+    public MapsforgeOverlay(Activity activityIn) {
+        overlayBase = new PositionAndScaleOverlay(activityIn, this);
     }
 
     @Override

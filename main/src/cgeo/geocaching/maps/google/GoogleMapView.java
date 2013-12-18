@@ -4,8 +4,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
-import cgeo.geocaching.maps.PositionOverlay;
-import cgeo.geocaching.maps.ScaleOverlay;
+import cgeo.geocaching.maps.PositionAndScaleOverlay;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapControllerImpl;
@@ -13,13 +12,13 @@ import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
-import cgeo.geocaching.maps.interfaces.OverlayImpl.OverlayType;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
+
 import org.apache.commons.lang3.reflect.MethodUtils;
 
 import android.app.Activity;
@@ -126,19 +125,11 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public PositionOverlay createAddPositionOverlay(Activity activity) {
+    public PositionAndScaleOverlay createAddPositionAndScaleOverlay(Activity activity) {
 
-        GoogleOverlay ovl = new GoogleOverlay(activity, OverlayType.PositionOverlay);
+        GoogleOverlay ovl = new GoogleOverlay(activity);
         getOverlays().add(ovl);
-        return (PositionOverlay) ovl.getBase();
-    }
-
-    @Override
-    public ScaleOverlay createAddScaleOverlay(Activity activity) {
-
-        GoogleOverlay ovl = new GoogleOverlay(activity, OverlayType.ScaleOverlay);
-        getOverlays().add(ovl);
-        return (ScaleOverlay) ovl.getBase();
+        return (PositionAndScaleOverlay) ovl.getBase();
     }
 
     @Override

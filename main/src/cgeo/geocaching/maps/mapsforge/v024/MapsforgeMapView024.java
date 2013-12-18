@@ -1,11 +1,9 @@
 package cgeo.geocaching.maps.mapsforge.v024;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
-import cgeo.geocaching.maps.PositionOverlay;
-import cgeo.geocaching.maps.ScaleOverlay;
+import cgeo.geocaching.maps.PositionAndScaleOverlay;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapControllerImpl;
@@ -13,7 +11,7 @@ import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
-import cgeo.geocaching.maps.interfaces.OverlayImpl.OverlayType;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import org.mapsforge.android.mapsold.GeoPoint;
@@ -102,17 +100,10 @@ public class MapsforgeMapView024 extends MapView implements MapViewImpl {
     }
 
     @Override
-    public PositionOverlay createAddPositionOverlay(Activity activity) {
-        MapsforgeOverlay ovl = new MapsforgeOverlay(activity, OverlayType.PositionOverlay);
+    public PositionAndScaleOverlay createAddPositionAndScaleOverlay(Activity activity) {
+        MapsforgeOverlay ovl = new MapsforgeOverlay(activity);
         getOverlays().add(ovl);
-        return (PositionOverlay) ovl.getBase();
-    }
-
-    @Override
-    public ScaleOverlay createAddScaleOverlay(Activity activity) {
-        MapsforgeOverlay ovl = new MapsforgeOverlay(activity, OverlayType.ScaleOverlay);
-        getOverlays().add(ovl);
-        return (ScaleOverlay) ovl.getBase();
+        return (PositionAndScaleOverlay) ovl.getBase();
     }
 
     @Override

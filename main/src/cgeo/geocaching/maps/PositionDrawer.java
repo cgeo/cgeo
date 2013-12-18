@@ -2,12 +2,9 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
-import cgeo.geocaching.maps.interfaces.MapViewImpl;
-import cgeo.geocaching.maps.interfaces.OverlayImpl;
 import cgeo.geocaching.settings.Settings;
 
 import android.app.Activity;
@@ -23,7 +20,8 @@ import android.location.Location;
 
 import java.util.ArrayList;
 
-public class PositionOverlay implements GeneralOverlay {
+public class PositionDrawer {
+
     private Location coordinates = null;
     private GeoPointImpl location = null;
     private float heading = 0f;
@@ -39,47 +37,14 @@ public class PositionOverlay implements GeneralOverlay {
     private PaintFlagsDrawFilter remfil = null;
     private PositionHistory positionHistory = new PositionHistory();
     private Activity activity;
-    private MapItemFactory mapItemFactory = null;
-    private OverlayImpl ovlImpl = null;
+    private MapItemFactory mapItemFactory;
 
-    public PositionOverlay(Activity activity, OverlayImpl ovlImpl) {
+    public PositionDrawer(Activity activity) {
         this.activity = activity;
         this.mapItemFactory = Settings.getMapProvider().getMapItemFactory();
-        this.ovlImpl = ovlImpl;
     }
 
-    public void setCoordinates(Location coordinatesIn) {
-        coordinates = coordinatesIn;
-        location = mapItemFactory.getGeoPointBase(new Geopoint(coordinates));
-    }
-
-    public Location getCoordinates() {
-        return coordinates;
-    }
-
-    public void setHeading(float bearingNow) {
-        heading = bearingNow;
-    }
-
-    public float getHeading() {
-        return heading;
-    }
-
-    @Override
-    public void drawOverlayBitmap(Canvas canvas, Point drawPosition,
-            MapProjectionImpl projection, byte drawZoomLevel) {
-
-        drawInternal(canvas, projection);
-    }
-
-    @Override
-    public void draw(Canvas canvas, MapViewImpl mapView, boolean shadow) {
-
-        drawInternal(canvas, mapView.getMapProjection());
-    }
-
-    private void drawInternal(Canvas canvas, MapProjectionImpl projection) {
-
+    void drawPosition(Canvas canvas, MapProjectionImpl projection) {
         if (coordinates == null || location == null) {
             return;
         }
@@ -194,13 +159,6 @@ public class PositionOverlay implements GeneralOverlay {
         canvas.drawBitmap(arrow, matrix, null);
 
         canvas.setDrawFilter(remfil);
-
-        //super.draw(canvas, mapView, shadow);
-    }
-
-    @Override
-    public OverlayImpl getOverlayImpl() {
-        return this.ovlImpl;
     }
 
     public ArrayList<Location> getHistory() {
@@ -210,4 +168,22 @@ public class PositionOverlay implements GeneralOverlay {
     public void setHistory(ArrayList<Location> history) {
         positionHistory.setHistory(history);
     }
+
+    public void setHeading(float bearingNow) {
+        heading = bearingNow;
+    }
+
+    public float getHeading() {
+        return heading;
+    }
+
+    public void setCoordinates(Location coordinatesIn) {
+        coordinates = coordinatesIn;
+        location = mapItemFactory.getGeoPointBase(new Geopoint(coordinates));
+    }
+
+    public Location getCoordinates() {
+        return coordinates;
+    }
+
 }

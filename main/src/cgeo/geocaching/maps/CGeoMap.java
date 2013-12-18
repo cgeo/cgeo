@@ -153,8 +153,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private volatile boolean downloaded = false;
     // overlays
     private CachesOverlay overlayCaches = null;
-    private ScaleOverlay overlayScale = null;
-    private PositionOverlay overlayPosition = null;
+    private PositionAndScaleOverlay overlayPositionAndScale = null;
     // data for overlays
     private static final int[][] INSET_RELIABLE = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }; // center, 33x40 / 45x51 / 60x68
     private static final int[][] INSET_TYPE = { { 5, 8, 6, 10 }, { 4, 4, 5, 11 }, { 4, 4, 5, 11 } }; // center, 22x22 / 36x36
@@ -347,8 +346,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         outState.putInt(BUNDLE_MAP_SOURCE, currentSourceId);
         outState.putIntArray(BUNDLE_MAP_STATE, currentMapState());
         outState.putBoolean(BUNDLE_LIVE_ENABLED, isLiveEnabled);
-        if (overlayPosition != null) {
-            outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY, overlayPosition.getHistory());
+        if (overlayPositionAndScale != null) {
+            outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY, overlayPositionAndScale.getHistory());
         }
     }
 
@@ -429,15 +428,11 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             overlayCaches = mapView.createAddMapOverlay(mapView.getContext(), getResources().getDrawable(R.drawable.marker));
         }
 
-        if (overlayPosition == null) {
-            overlayPosition = mapView.createAddPositionOverlay(activity);
+        if (overlayPositionAndScale == null) {
+            overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay(activity);
             if (trailHistory != null) {
-                overlayPosition.setHistory(trailHistory);
+                overlayPositionAndScale.setHistory(trailHistory);
             }
-        }
-
-        if (overlayScale == null) {
-            overlayScale = mapView.createAddScaleOverlay(activity);
         }
 
         mapView.repaintRequired(null);
@@ -617,7 +612,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         switch (id) {
             case R.id.menu_trail_mode:
                 Settings.setMapTrail(!Settings.isMapTrail());
-                mapView.repaintRequired(overlayPosition);
+                mapView.repaintRequired(overlayPositionAndScale);
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
             case R.id.menu_map_live:
@@ -924,8 +919,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                 try {
                     if (mapView != null) {
-                        if (overlayPosition == null) {
-                            overlayPosition = mapView.createAddPositionOverlay(activity);
+                        if (overlayPositionAndScale == null) {
+                            overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay(activity);
                         }
 
                         boolean needsRepaintForDistance = needsRepaintForDistance();
@@ -938,9 +933,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         }
 
                         if (needsRepaintForDistance || needsRepaintForHeading) {
-                            overlayPosition.setCoordinates(currentLocation);
-                            overlayPosition.setHeading(currentHeading);
-                            mapView.repaintRequired(overlayPosition);
+                            overlayPositionAndScale.setCoordinates(currentLocation);
+                            overlayPositionAndScale.setHeading(currentHeading);
+                            mapView.repaintRequired(overlayPositionAndScale);
                         }
                     }
                 } catch (RuntimeException e) {
@@ -950,7 +945,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         }
 
         boolean needsRepaintForHeading() {
-            return Math.abs(AngleUtils.difference(currentHeading, overlayPosition.getHeading())) > MIN_HEADING_DELTA;
+            return Math.abs(AngleUtils.difference(currentHeading, overlayPositionAndScale.getHeading())) > MIN_HEADING_DELTA;
         }
 
         boolean needsRepaintForDistance() {
@@ -959,7 +954,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 return false;
             }
 
-            final Location lastLocation = overlayPosition.getCoordinates();
+            final Location lastLocation = overlayPositionAndScale.getCoordinates();
 
             float dist = Float.MAX_VALUE;
             if (lastLocation != null) {

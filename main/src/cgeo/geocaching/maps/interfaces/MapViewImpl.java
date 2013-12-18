@@ -2,8 +2,7 @@ package cgeo.geocaching.maps.interfaces;
 
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
-import cgeo.geocaching.maps.PositionOverlay;
-import cgeo.geocaching.maps.ScaleOverlay;
+import cgeo.geocaching.maps.PositionAndScaleOverlay;
 
 import android.app.Activity;
 import android.content.Context;
@@ -47,9 +46,7 @@ public interface MapViewImpl {
 
     CachesOverlay createAddMapOverlay(Context context, Drawable drawable);
 
-    ScaleOverlay createAddScaleOverlay(Activity activity);
-
-    PositionOverlay createAddPositionOverlay(Activity activity);
+    PositionAndScaleOverlay createAddPositionAndScaleOverlay(Activity activity);
 
     void setMapSource();
 
