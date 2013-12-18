@@ -24,7 +24,7 @@ public class CheckGcCredentialsPreference extends AbstractCheckCredentialsPrefer
 
     @Override
     protected ImmutablePair<String, String> getCredentials() {
-        return Settings.getGcLogin();
+        return Settings.getGcCredentials();
     }
 
     @Override

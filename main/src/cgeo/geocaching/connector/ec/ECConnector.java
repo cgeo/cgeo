@@ -8,6 +8,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.ILoggingManager;
+import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
@@ -33,7 +34,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class ECConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ILogin {
+public class ECConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ILogin, ICredentials {
 
     private static final String CACHE_URL = "http://extremcaching.com/index.php/output-2/";
 
@@ -41,7 +42,6 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
      * Pattern for EC codes
      */
     private final static Pattern PATTERN_EC_CODE = Pattern.compile("EC[0-9]+", Pattern.CASE_INSENSITIVE);
-
 
     private ECConnector() {
         // singleton
@@ -51,10 +51,11 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
      * initialization on demand holder pattern
      */
     private static class Holder {
-        private static final ECConnector INSTANCE = new ECConnector();
+        private static final @NonNull ECConnector INSTANCE = new ECConnector();
     }
 
-    public static ECConnector getInstance() {
+    public static @NonNull
+    ECConnector getInstance() {
         return Holder.INSTANCE;
     }
 
@@ -215,6 +216,16 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public int getMaxTerrain() {
         return 7;
+    }
+
+    @Override
+    public int getUsernamePreferenceKey() {
+        return R.string.pref_ecusername;
+    }
+
+    @Override
+    public int getPasswordPreferenceKey() {
+        return R.string.pref_ecpassword;
     }
 
 }

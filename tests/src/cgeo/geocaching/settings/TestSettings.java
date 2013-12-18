@@ -24,8 +24,8 @@ public final class TestSettings extends Settings {
         putBoolean(R.string.pref_excludemine, exclude);
     }
 
-    public static boolean setLogin(final String username, final String password) {
-        return Settings.setLogin(username, password);
+    public static void setLogin(final String username, final String password) {
+        Settings.setLogin(username, password);
     }
 
     public static void setStoreOfflineMaps(final boolean offlineMaps) {

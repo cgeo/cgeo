@@ -74,9 +74,11 @@ public class GCLogin extends AbstractLogin {
 
     @Override
     protected StatusCode login(boolean retry) {
-        final ImmutablePair<String, String> login = Settings.getGcLogin();
+        final ImmutablePair<String, String> credentials = Settings.getGcCredentials();
+        final String username = credentials.left;
+        final String password = credentials.right;
 
-        if (StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
+        if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
             clearLoginInfo();
             Log.e("Login.login: No login information stored");
             return StatusCode.NO_LOGIN_INFO_STORED;
@@ -95,7 +97,7 @@ public class GCLogin extends AbstractLogin {
         }
 
         if (getLoginStatus(loginData)) {
-            Log.i("Already logged in Geocaching.com as " + login.left + " (" + Settings.getMemberStatus() + ')');
+            Log.i("Already logged in Geocaching.com as " + username + " (" + Settings.getMemberStatus() + ')');
             switchToEnglish(loginData);
             return StatusCode.NO_ERROR; // logged in
         }
@@ -106,8 +108,8 @@ public class GCLogin extends AbstractLogin {
         final Parameters params = new Parameters(
                 "__EVENTTARGET", "",
                 "__EVENTARGUMENT", "",
-                "ctl00$ContentBody$tbUsername", login.left,
-                "ctl00$ContentBody$tbPassword", login.right,
+                "ctl00$ContentBody$tbUsername", username,
+                "ctl00$ContentBody$tbPassword", password,
                 "ctl00$ContentBody$cbRememberMe", "on",
                 "ctl00$ContentBody$btnSignIn", "Login");
         final String[] viewstates = GCLogin.getViewstates(loginData);
@@ -128,7 +130,7 @@ public class GCLogin extends AbstractLogin {
         assert loginData != null;  // Caught above
 
         if (getLoginStatus(loginData)) {
-            Log.i("Successfully logged in Geocaching.com as " + login.left + " (" + Settings.getMemberStatus() + ')');
+            Log.i("Successfully logged in Geocaching.com as " + username + " (" + Settings.getMemberStatus() + ')');
 
             switchToEnglish(loginData);
             Settings.setCookieStore(Cookies.dumpCookieStore());
@@ -137,16 +139,16 @@ public class GCLogin extends AbstractLogin {
         }
 
         if (loginData.contains("Your username/password combination does not match.")) {
-            Log.i("Failed to log in Geocaching.com as " + login.left + " because of wrong username/password");
+            Log.i("Failed to log in Geocaching.com as " + username + " because of wrong username/password");
             return StatusCode.WRONG_LOGIN_DATA; // wrong login
         }
 
         if (loginData.contains("You must validate your account before you can log in.")) {
-            Log.i("Failed to log in Geocaching.com as " + login.left + " because account needs to be validated first");
+            Log.i("Failed to log in Geocaching.com as " + username + " because account needs to be validated first");
             return StatusCode.UNVALIDATED_ACCOUNT;
         }
 
-        Log.i("Failed to log in Geocaching.com as " + login.left + " for some unknown reason");
+        Log.i("Failed to log in Geocaching.com as " + username + " for some unknown reason");
         if (retry) {
             switchToEnglish(loginData);
             return login(false);

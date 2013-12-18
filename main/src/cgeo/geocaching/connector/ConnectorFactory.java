@@ -70,9 +70,9 @@ public final class ConnectorFactory {
     @SuppressWarnings("unchecked")
     private static <T extends IConnector> T[] getMatchingConnectors(final Class<T> clazz) {
         final List<T> matching = new ArrayList<T>();
-        for (final IConnector conn : CONNECTORS) {
-            if (clazz.isInstance(conn)) {
-                matching.add((T) conn);
+        for (final IConnector connector : CONNECTORS) {
+            if (clazz.isInstance(connector)) {
+                matching.add((T) connector);
             }
         }
         T[] result = (T[]) Array.newInstance(clazz, matching.size());
@@ -155,11 +155,10 @@ public final class ConnectorFactory {
 
     /** @see ISearchByViewPort#searchByViewport */
     public static SearchResult searchByViewport(final @NonNull Viewport viewport, final String[] tokens) {
-
         final SearchResult result = new SearchResult();
-        for (final ISearchByViewPort vpconn : searchByViewPortConns) {
-            if (vpconn.isActive()) {
-                result.addSearchResult(vpconn.searchByViewport(viewport, tokens));
+        for (final ISearchByViewPort connector : searchByViewPortConns) {
+            if (connector.isActive()) {
+                result.addSearchResult(connector.searchByViewport(viewport, tokens));
             }
         }
         return result;

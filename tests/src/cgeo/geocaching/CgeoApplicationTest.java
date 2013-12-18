@@ -137,7 +137,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
      * @param runnable
      */
     private static void withMockedLoginDo(final Runnable runnable) {
-        final ImmutablePair<String, String> login = Settings.getGcLogin();
+        final ImmutablePair<String, String> login = Settings.getGcCredentials();
         final String memberStatus = Settings.getMemberStatus();
 
         try {

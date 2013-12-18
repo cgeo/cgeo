@@ -35,7 +35,7 @@ public class ECLogin extends AbstractLogin {
 
     @Override
     protected StatusCode login(boolean retry) {
-        final ImmutablePair<String, String> login = Settings.getECLogin();
+        final ImmutablePair<String, String> login = Settings.getCredentials(ECConnector.getInstance());
 
         if (StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
             clearLoginInfo();

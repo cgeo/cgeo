@@ -3,6 +3,8 @@ package cgeo.geocaching.settings;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
+import cgeo.geocaching.connector.capability.ICredentials;
+import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.CacheType;
@@ -24,6 +26,7 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import android.content.Context;
@@ -270,20 +273,12 @@ public class Settings {
     }
 
     /**
-     * Get login and password information.
+     * Get login and password information of Geocaching.com.
      *
      * @return a pair either with (login, password) or (empty, empty) if no valid information is stored
      */
-    public static ImmutablePair<String, String> getGcLogin() {
-
-        final String username = getString(R.string.pref_username, null);
-        final String password = getString(R.string.pref_password, null);
-
-        if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-            return new ImmutablePair<String, String>(StringUtils.EMPTY, StringUtils.EMPTY);
-        }
-
-        return new ImmutablePair<String, String>(username, password);
+    public static ImmutablePair<String, String> getGcCredentials() {
+        return getCredentials(GCConnector.getInstance());
     }
 
     /**
@@ -291,10 +286,9 @@ public class Settings {
      *
      * @return a pair either with (login, password) or (empty, empty) if no valid information is stored
      */
-    public static ImmutablePair<String, String> getECLogin() {
-
-        final String username = getString(R.string.pref_ecusername, null);
-        final String password = getString(R.string.pref_ecpassword, null);
+    public static ImmutablePair<String, String> getCredentials(final @NonNull ICredentials connector) {
+        final String username = getString(connector.getUsernamePreferenceKey(), null);
+        final String password = getString(connector.getPasswordPreferenceKey(), null);
 
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
             return new ImmutablePair<String, String>(StringUtils.EMPTY, StringUtils.EMPTY);
@@ -636,8 +630,6 @@ public class Settings {
      * @return
      */
     private static int getConvertedMapId() {
-        // what the heck is happening here?? hashCodes of Strings?
-        // why not strings?
         final int id = Integer.parseInt(getString(R.string.pref_mapsource,
                 String.valueOf(MAP_SOURCE_DEFAULT)));
         switch (id) {
@@ -950,18 +942,16 @@ public class Settings {
         putBoolean(R.string.pref_excludemine, exclude);
     }
 
-    static boolean setLogin(final String username, final String password) {
-
+    static void setLogin(final String username, final String password) {
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
             // erase username and password
-            boolean a = remove(R.string.pref_username);
-            boolean b = remove(R.string.pref_password);
-            return a && b;
+            remove(R.string.pref_username);
+            remove(R.string.pref_password);
+            return;
         }
         // save username and password
-        boolean a = putString(R.string.pref_username, username);
-        boolean b = putString(R.string.pref_password, password);
-        return a && b;
+        putString(R.string.pref_username, username);
+        putString(R.string.pref_password, password);
     }
 
     public static long getFieldnoteExportDate() {

@@ -9,6 +9,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.ILoggingManager;
+import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
@@ -33,7 +34,7 @@ import android.os.Handler;
 
 import java.util.regex.Pattern;
 
-public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ISearchByKeyword, ILogin {
+public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ISearchByKeyword, ILogin, ICredentials {
 
     private static final String CACHE_URL_SHORT = "http://coord.info/";
     // Double slash is used to force open in browser
@@ -57,10 +58,11 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
      * initialization on demand holder pattern
      */
     private static class Holder {
-        private static final GCConnector INSTANCE = new GCConnector();
+        private static final @NonNull GCConnector INSTANCE = new GCConnector();
     }
 
-    public static GCConnector getInstance() {
+    public static @NonNull
+    GCConnector getInstance() {
         return Holder.INSTANCE;
     }
 
@@ -359,5 +361,15 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public SearchResult searchByKeyword(@NonNull String keyword, final @NonNull RecaptchaReceiver recaptchaReceiver) {
         return GCParser.searchByKeyword(keyword, Settings.getCacheType(), Settings.isShowCaptcha(), recaptchaReceiver);
+    }
+
+    @Override
+    public int getUsernamePreferenceKey() {
+        return R.string.pref_username;
+    }
+
+    @Override
+    public int getPasswordPreferenceKey() {
+        return R.string.pref_password;
     }
 }

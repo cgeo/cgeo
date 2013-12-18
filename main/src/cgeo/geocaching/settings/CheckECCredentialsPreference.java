@@ -1,5 +1,6 @@
 package cgeo.geocaching.settings;
 
+import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.ec.ECLogin;
 import cgeo.geocaching.enumerations.StatusCode;
 
@@ -24,7 +25,7 @@ public class CheckECCredentialsPreference extends AbstractCheckCredentialsPrefer
 
     @Override
     protected ImmutablePair<String, String> getCredentials() {
-        return Settings.getECLogin();
+        return Settings.getCredentials(ECConnector.getInstance());
     }
 
     @Override

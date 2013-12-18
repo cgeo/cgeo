@@ -4,13 +4,15 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ISearchByKeyword;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.content.Context;
 
 public class KeywordGeocacheListLoader extends AbstractSearchLoader {
 
-    private final String keyword;
+    private final @NonNull String keyword;
 
-    public KeywordGeocacheListLoader(Context context, String keyword) {
+    public KeywordGeocacheListLoader(Context context, final @NonNull String keyword) {
         super(context);
         this.keyword = keyword;
     }
