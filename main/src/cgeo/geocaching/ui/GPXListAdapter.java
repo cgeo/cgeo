@@ -5,11 +5,11 @@ import butterknife.InjectView;
 import cgeo.geocaching.GpxFileListActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.files.GPXImporter;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,25 +74,13 @@ public class GPXListAdapter extends ArrayAdapter<File> {
 
             @Override
             public boolean onLongClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                builder.setTitle(R.string.gpx_import_delete_title)
-                        .setMessage(activity.getString(R.string.gpx_import_delete_message, file.getName()))
-                        .setCancelable(false)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                FileUtils.deleteIgnoringFailure(file);
-                                GPXListAdapter.this.remove(file);
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
+                Dialogs.confirmYesNo(activity, R.string.gpx_import_delete_title, activity.getString(R.string.gpx_import_delete_message, file.getName()), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        FileUtils.deleteIgnoringFailure(file);
+                        GPXListAdapter.this.remove(file);
+                    }
+                });
                 return true;
             }
         });

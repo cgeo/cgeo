@@ -39,6 +39,7 @@ import cgeo.geocaching.sorting.ComparatorUserInterface;
 import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.ui.WeakReferenceHandler;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.DateUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
@@ -1027,27 +1028,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     public void removeFromHistoryCheck() {
-        final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setCancelable(true);
-        dialog.setTitle(res.getString(R.string.caches_removing_from_history));
-        dialog.setMessage((adapter != null && adapter.getCheckedCount() > 0) ? res.getString(R.string.cache_remove_from_history)
-                : res.getString(R.string.cache_clear_history));
-        dialog.setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
+        int message = (adapter != null && adapter.getCheckedCount() > 0) ? R.string.cache_remove_from_history
+                : R.string.cache_clear_history;
+        Dialogs.confirmYesNo(this, R.string.caches_removing_from_history, message, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 removeFromHistory();
                 dialog.cancel();
             }
         });
-        dialog.setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        });
-
-        final AlertDialog alert = dialog.create();
-        alert.show();
     }
 
     public void removeFromHistory() {
@@ -1072,16 +1061,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     public void dropStored(final boolean removeListAfterwards) {
-        final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setCancelable(true);
-        dialog.setTitle(res.getString(R.string.caches_drop_stored));
-
-        if (adapter.getCheckedCount() > 0) {
-            dialog.setMessage(res.getString(R.string.caches_drop_selected_ask));
-        } else {
-            dialog.setMessage(res.getString(R.string.caches_drop_all_ask));
-        }
-        dialog.setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
+        int message = (adapter.getCheckedCount() > 0) ? R.string.caches_drop_selected_ask : R.string.caches_drop_all_ask;
+        Dialogs.confirmYesNo(this, R.string.caches_drop_stored, message, new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int id) {
@@ -1089,16 +1070,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 dialog.cancel();
             }
         });
-        dialog.setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        });
-
-        final AlertDialog alert = dialog.create();
-        alert.show();
     }
 
     public void dropSelected(boolean removeListAfterwards) {
@@ -1407,24 +1378,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         // ask him, if there are caches on the list
-        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
-
-        alert.setTitle(R.string.list_dialog_remove_title);
-        alert.setMessage(R.string.list_dialog_remove_description);
-        alert.setPositiveButton(R.string.list_dialog_remove, new DialogInterface.OnClickListener() {
+        Dialogs.confirm(this, R.string.list_dialog_remove_title, R.string.list_dialog_remove_description, R.string.list_dialog_remove, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int whichButton) {
                 removeListInternal();
             }
         });
-        alert.setNegativeButton(res.getString(R.string.list_dialog_cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int whichButton) {
-                dialog.dismiss();
-            }
-        });
-
-        alert.show();
     }
 
     /**

@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.network.StatusUpdater;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.IObserver;
 import cgeo.geocaching.utils.Log;
 
@@ -75,7 +75,7 @@ public class CgeoApplication extends Application {
                         dialog.dismiss();
                         boolean success = atomic.get();
                         String message = success ? res.getString(R.string.init_dbmove_success) : res.getString(R.string.init_dbmove_failed);
-                        ActivityMixin.helpDialog(fromActivity, res.getString(R.string.init_dbmove_dbmove), message);
+                        Dialogs.message(fromActivity, R.string.init_dbmove_dbmove, message);
                     }
                 });
             }

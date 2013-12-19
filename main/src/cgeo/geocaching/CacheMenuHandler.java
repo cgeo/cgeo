@@ -5,12 +5,12 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.AbstractUIFactory;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.ProcessUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -101,28 +101,17 @@ public class CacheMenuHandler extends AbstractUIFactory {
                     Uri.parse(ICalendar.URI_SCHEME + "://" + ICalendar.URI_HOST + "?" + params.toString())));
         } else {
             // Inform user the calendar add-on is not installed and let them get it from Google Play
-            new AlertDialog.Builder(activity)
-                    .setTitle(res.getString(R.string.addon_missing_title))
-                    .setMessage(new StringBuilder(res.getString(R.string.helper_calendar_missing))
-                            .append(' ')
-                            .append(res.getString(R.string.addon_download_prompt))
-                            .toString())
-                    .setPositiveButton(activity.getString(android.R.string.yes), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            final Intent intent = new Intent(Intent.ACTION_VIEW);
-                            intent.setData(Uri.parse(ICalendar.CALENDAR_ADDON_URI));
-                            activity.startActivity(intent);
-                        }
-                    })
-                    .setNegativeButton(activity.getString(android.R.string.no), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    })
-                    .create()
-                    .show();
+            Dialogs.confirmYesNo(activity, R.string.addon_missing_title, new StringBuilder(res.getString(R.string.helper_calendar_missing))
+                    .append(' ')
+                    .append(res.getString(R.string.addon_download_prompt))
+                    .toString(), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int id) {
+                    final Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(ICalendar.CALENDAR_ADDON_URI));
+                    activity.startActivity(intent);
+                }
+            });
         }
     }
 

@@ -12,6 +12,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
@@ -331,7 +332,7 @@ public class EditWaypointActivity extends AbstractActivity {
 
             if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText)
                     && StringUtils.isBlank(latText) && StringUtils.isBlank(lonText)) {
-                helpDialog(res.getString(R.string.err_point_no_position_given_title), res.getString(R.string.err_point_no_position_given));
+                Dialogs.message(EditWaypointActivity.this, R.string.err_point_no_position_given_title, R.string.err_point_no_position_given);
                 return;
             }
 
@@ -359,7 +360,7 @@ public class EditWaypointActivity extends AbstractActivity {
                 try {
                     bearing = Double.parseDouble(bearingText);
                 } catch (NumberFormatException e) {
-                    helpDialog(res.getString(R.string.err_point_bear_and_dist_title), res.getString(R.string.err_point_bear_and_dist));
+                    Dialogs.message(EditWaypointActivity.this, R.string.err_point_bear_and_dist_title, R.string.err_point_bear_and_dist);
                     return;
                 }
 

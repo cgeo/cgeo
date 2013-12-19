@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
@@ -45,14 +46,11 @@ public class RegisterSend2CgeoPreference extends Preference {
                 }
 
                 if (msg.what > 0) {
-                    ActivityMixin.helpDialog(activity,
-                            activity.getString(R.string.init_sendToCgeo),
+                    Dialogs.message(activity, R.string.init_sendToCgeo,
                             activity.getString(R.string.init_sendToCgeo_register_ok)
                                     .replace("####", String.valueOf(msg.what)));
                 } else {
-                    ActivityMixin.helpDialog(activity,
-                            activity.getString(R.string.init_sendToCgeo),
-                            activity.getString(R.string.init_sendToCgeo_register_fail));
+                    Dialogs.message(activity, R.string.init_sendToCgeo, R.string.init_sendToCgeo_register_fail);
                 }
             } catch (Exception e) {
                 ActivityMixin.showToast(activity, R.string.init_sendToCgeo_register_fail);

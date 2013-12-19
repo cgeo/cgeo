@@ -8,10 +8,7 @@ import cgeo.geocaching.settings.Settings;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.Gravity;
 import android.view.View;
@@ -94,30 +91,6 @@ public final class ActivityMixin {
         }
     }
 
-    public static void helpDialog(final Activity activity, final String title, final String message, final Drawable icon) {
-        if (StringUtils.isBlank(message)) {
-            return;
-        }
-
-        AlertDialog.Builder dialog = new AlertDialog.Builder(activity).setTitle(title).setMessage(message).setCancelable(true);
-        dialog.setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        });
-        if (icon != null) {
-            dialog.setIcon(icon);
-        }
-
-        AlertDialog alert = dialog.create();
-        alert.show();
-    }
-
-    public static void helpDialog(Activity activity, String title, String message) {
-        helpDialog(activity, title, message, null);
-    }
-
     public static void keepScreenOn(final Activity abstractActivity, boolean keepScreenOn) {
         if (keepScreenOn) {
             abstractActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -130,7 +103,7 @@ public final class ActivityMixin {
 
     /**
      * insert text into the EditText at the current cursor position
-     * 
+     *
      * @param editText
      * @param insertText
      * @param moveCursor

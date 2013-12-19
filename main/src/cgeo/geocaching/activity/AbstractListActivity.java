@@ -3,7 +3,6 @@ package cgeo.geocaching.activity;
 import cgeo.geocaching.CgeoApplication;
 
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentListActivity;
 import android.view.View;
@@ -45,15 +44,6 @@ public abstract class AbstractListActivity extends FragmentListActivity implemen
     @Override
     public final void showShortToast(String text) {
         ActivityMixin.showShortToast(this, text);
-    }
-
-    @Override
-    public final void helpDialog(final String title, final String message) {
-        ActivityMixin.helpDialog(this, title, message, null);
-    }
-
-    public final void helpDialog(final String title, final String message, final Drawable icon) {
-        ActivityMixin.helpDialog(this, title, message, icon);
     }
 
     @Override

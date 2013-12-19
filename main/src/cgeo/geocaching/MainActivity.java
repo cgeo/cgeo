@@ -15,6 +15,7 @@ import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.ui.Formatter;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.DatabaseBackupUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
@@ -330,11 +331,7 @@ public class MainActivity extends AbstractActivity {
                 if (query == null) {
                     query = "";
                 }
-                new AlertDialog.Builder(this)
-                        .setMessage(res.getString(R.string.unknown_scan) + "\n\n" + query)
-                .setPositiveButton(getString(android.R.string.ok), null)
-                .create()
-                .show();
+                Dialogs.message(this, res.getString(R.string.unknown_scan) + "\n\n" + query);
             }
         }
     }

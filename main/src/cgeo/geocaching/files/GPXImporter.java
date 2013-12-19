@@ -1,14 +1,15 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.StaticMapsProvider;
-import cgeo.geocaching.DataStore;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
@@ -417,19 +418,19 @@ public class GPXImporter {
                     progressHandler.cancel();
                     final StringBuilder bufferSkipped = new StringBuilder(20);
                     bufferSkipped.append(res.getString(R.string.gpx_import_static_maps_skipped)).append(", ").append(msg.arg1).append(' ').append(res.getString(R.string.gpx_import_caches_imported));
-                    ActivityMixin.helpDialog(fromActivity, res.getString(R.string.gpx_import_title_caches_imported), bufferSkipped.toString());
+                    Dialogs.message(fromActivity, R.string.gpx_import_title_caches_imported, bufferSkipped.toString());
                     importFinished();
                     break;
 
                 case IMPORT_STEP_FINISHED:
                     progress.dismiss();
-                    ActivityMixin.helpDialog(fromActivity, res.getString(R.string.gpx_import_title_caches_imported), msg.arg1 + " " + res.getString(R.string.gpx_import_caches_imported));
+                    Dialogs.message(fromActivity, R.string.gpx_import_title_caches_imported, msg.arg1 + " " + res.getString(R.string.gpx_import_caches_imported));
                     importFinished();
                     break;
 
                 case IMPORT_STEP_FINISHED_WITH_ERROR:
                     progress.dismiss();
-                    ActivityMixin.helpDialog(fromActivity, res.getString(R.string.gpx_import_title_caches_import_failed), res.getString(msg.arg1) + "\n\n" + msg.obj);
+                    Dialogs.message(fromActivity, R.string.gpx_import_title_caches_import_failed, res.getString(msg.arg1) + "\n\n" + msg.obj);
                     importFinished();
                     break;
 

@@ -35,6 +35,7 @@ import cgeo.geocaching.ui.IndexOutOfBoundsAvoidingTextView;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.ui.OwnerActionsClickListener;
 import cgeo.geocaching.ui.WeakReferenceHandler;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.logs.CacheLogsViewCreator;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -1615,18 +1616,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         private void warnPersonalNoteNeedsStoring() {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(CacheDetailActivity.this);
-            builder.setTitle(R.string.cache_personal_note_unstored);
-            builder.setMessage(R.string.cache_personal_note_store);
-            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    // do nothing
-                }
-            });
-
-            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            Dialogs.confirm(CacheDetailActivity.this, R.string.cache_personal_note_unstored, R.string.cache_personal_note_store,
+                    new DialogInterface.OnClickListener() {
 
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -1635,36 +1626,19 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
 
             });
-            final AlertDialog dialog = builder.create();
-            dialog.setOwnerActivity(CacheDetailActivity.this);
-            dialog.show();
         }
 
         private void warnPersonalNoteExceedsLimit() {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(CacheDetailActivity.this);
-            builder.setTitle(R.string.cache_personal_note_limit);
-            String lang = getString(R.string.cache_personal_note_truncation, GCConstants.PERSONAL_NOTE_MAX_CHARS);
-            builder.setMessage(lang);
-            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            Dialogs.confirm(CacheDetailActivity.this, R.string.cache_personal_note_limit, getString(R.string.cache_personal_note_truncation, GCConstants.PERSONAL_NOTE_MAX_CHARS),
+                    new DialogInterface.OnClickListener() {
 
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    // do nothing
-                }
-            });
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            uploadPersonalNote();
+                        }
 
-            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                    uploadPersonalNote();
-                }
-
-            });
-            final AlertDialog dialog = builder.create();
-            dialog.setOwnerActivity(CacheDetailActivity.this);
-            dialog.show();
+                    });
         }
 
     }

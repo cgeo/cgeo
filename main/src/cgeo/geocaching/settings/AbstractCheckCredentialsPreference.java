@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Cookies;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -60,13 +61,9 @@ public abstract class AbstractCheckCredentialsPreference extends Preference {
                     }
 
                     if (msg.obj == null || (msg.obj instanceof Drawable)) {
-                        ActivityMixin.helpDialog(activity,
-                                res.getString(R.string.init_login_popup),
-                                res.getString(R.string.init_login_popup_ok),
-                                (Drawable) msg.obj);
+                        Dialogs.message(activity, R.string.init_login_popup, R.string.init_login_popup_ok, (Drawable) msg.obj);
                     } else {
-                        ActivityMixin.helpDialog(activity,
-                                res.getString(R.string.init_login_popup),
+                        Dialogs.message(activity, R.string.init_login_popup,
                                 res.getString(R.string.init_login_popup_failed_reason)
                                         + " "
                                         + ((StatusCode) msg.obj).getErrorString(res)

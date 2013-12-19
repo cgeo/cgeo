@@ -12,6 +12,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.EditUtils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -276,7 +277,7 @@ public class SearchActivity extends AbstractActivity {
         final String keyText = StringUtils.trim(keywordEditText.getText().toString());
 
         if (StringUtils.isBlank(keyText)) {
-            helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_keyword));
+            Dialogs.message(this, R.string.warn_search_help_title, R.string.warn_search_help_keyword);
             return;
         }
 
@@ -287,7 +288,7 @@ public class SearchActivity extends AbstractActivity {
         final String addText = StringUtils.trim(addressEditText.getText().toString());
 
         if (StringUtils.isBlank(addText)) {
-            helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_address));
+            Dialogs.message(this, R.string.warn_search_help_title, R.string.warn_search_help_address);
             return;
         }
 
@@ -300,7 +301,7 @@ public class SearchActivity extends AbstractActivity {
         final String usernameText = StringUtils.trim(userNameEditText.getText().toString());
 
         if (StringUtils.isBlank(usernameText)) {
-            helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_user));
+            Dialogs.message(this, R.string.warn_search_help_title, R.string.warn_search_help_user);
             return;
         }
 
@@ -315,7 +316,7 @@ public class SearchActivity extends AbstractActivity {
         final String usernameText = StringUtils.trimToEmpty(userName);
 
         if (StringUtils.isBlank(usernameText)) {
-            helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_user));
+            Dialogs.message(this, R.string.warn_search_help_title, R.string.warn_search_help_user);
             return;
         }
 
@@ -326,7 +327,7 @@ public class SearchActivity extends AbstractActivity {
         final String geocodeText = StringUtils.trim(geocodeEditText.getText().toString());
 
         if (StringUtils.isBlank(geocodeText) || geocodeText.equalsIgnoreCase("GC")) {
-            helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_gccode));
+            Dialogs.message(this, R.string.warn_search_help_title, R.string.warn_search_help_gccode);
             return;
         }
 
@@ -337,7 +338,7 @@ public class SearchActivity extends AbstractActivity {
         final String trackableText = StringUtils.trim(trackableEditText.getText().toString());
 
         if (StringUtils.isBlank(trackableText) || trackableText.equalsIgnoreCase("TB")) {
-            helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_tb));
+            Dialogs.message(this, R.string.warn_search_help_title, R.string.warn_search_help_tb);
             return;
         }
 

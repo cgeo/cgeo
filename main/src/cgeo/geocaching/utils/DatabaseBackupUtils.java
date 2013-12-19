@@ -3,8 +3,8 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.ui.Formatter;
+import cgeo.geocaching.ui.dialog.Dialogs;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -42,7 +42,7 @@ public class DatabaseBackupUtils {
                         dialog.dismiss();
                         boolean restored = restoreSuccessful.get();
                         String message = restored ? res.getString(R.string.init_restore_success) : res.getString(R.string.init_restore_failed);
-                        ActivityMixin.helpDialog(activity, res.getString(R.string.init_backup_restore), message);
+                        Dialogs.message(activity, R.string.init_backup_restore, message);
                         if (activity instanceof MainActivity) {
                             ((MainActivity) activity).updateCacheCounter();
                         }
@@ -57,9 +57,7 @@ public class DatabaseBackupUtils {
         // avoid overwriting an existing backup with an empty database
         // (can happen directly after reinstalling the app)
         if (DataStore.getAllCachesCount() == 0) {
-            ActivityMixin.helpDialog(activity,
-                    context.getString(R.string.init_backup),
-                    context.getString(R.string.init_backup_unnecessary));
+            Dialogs.message(activity, R.string.init_backup, R.string.init_backup_unnecessary);
             return false;
         }
 
@@ -74,8 +72,8 @@ public class DatabaseBackupUtils {
                     @Override
                     public void run() {
                         dialog.dismiss();
-                        ActivityMixin.helpDialog(activity,
-                                context.getString(R.string.init_backup_backup),
+                        Dialogs.message(activity,
+                                R.string.init_backup_backup,
                                 backupFileName != null
                                         ? context.getString(R.string.init_backup_success)
                                                 + "\n" + backupFileName
