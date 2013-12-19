@@ -1,8 +1,6 @@
 package cgeo.geocaching.sorting;
 
-import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.utils.Log;
 
 
@@ -47,22 +45,5 @@ public abstract class AbstractCacheComparator implements CacheComparator {
      *         cache2.
      */
     protected abstract int compareCaches(final Geocache cache1, final Geocache cache2);
-
-    /**
-     * Get number of overall finds for a cache.
-     * 
-     * @param cache
-     * @return
-     */
-    protected static int getFindsCount(Geocache cache) {
-        if (cache.getLogCounts().isEmpty()) {
-            cache.setLogCounts(DataStore.loadLogCounts(cache.getGeocode()));
-        }
-        Integer logged = cache.getLogCounts().get(LogType.FOUND_IT);
-        if (logged != null) {
-            return logged;
-        }
-        return 0;
-    }
 
 }

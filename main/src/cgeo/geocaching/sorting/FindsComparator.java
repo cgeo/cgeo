@@ -11,8 +11,8 @@ public class FindsComparator extends AbstractCacheComparator {
 
     @Override
     protected int compareCaches(Geocache cache1, Geocache cache2) {
-        int finds1 = getFindsCount(cache1);
-        int finds2 = getFindsCount(cache2);
+        int finds1 = cache1.getFindsCount();
+        int finds2 = cache2.getFindsCount();
         return finds2 - finds1;
     }
 

@@ -1813,4 +1813,21 @@ public class Geocache implements ICache, IWaypoint {
     public String getWaypointPrefix(String name) {
         return getConnector().getWaypointPrefix(name);
     }
+
+    /**
+     * Get number of overall finds for a cache, or 0 if the number of finds is not known.
+     *
+     * @return
+     */
+    public int getFindsCount() {
+        if (getLogCounts().isEmpty()) {
+            setLogCounts(DataStore.loadLogCounts(getGeocode()));
+        }
+        Integer logged = getLogCounts().get(LogType.FOUND_IT);
+        if (logged != null) {
+            return logged;
+        }
+        return 0;
+    }
+
 }

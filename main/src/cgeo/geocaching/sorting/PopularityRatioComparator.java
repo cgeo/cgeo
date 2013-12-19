@@ -21,8 +21,8 @@ public class PopularityRatioComparator extends AbstractCacheComparator {
         float ratio1 = 0.0f;
         float ratio2 = 0.0f;
 
-        int finds1 = getFindsCount(cache1);
-        int finds2 = getFindsCount(cache2);
+        int finds1 = cache1.getFindsCount();
+        int finds2 = cache2.getFindsCount();
 
         if (finds1 != 0) {
             ratio1 = (((float) cache1.getFavoritePoints()) / ((float) finds1));
