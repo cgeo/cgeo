@@ -26,6 +26,12 @@ public class CachePopup extends AbstractPopupActivity {
     private final Progress progress = new Progress();
 
     private class StoreCacheHandler extends CancellableHandler {
+        private final int progressMessage;
+
+        public StoreCacheHandler(final int progressMessage) {
+            this.progressMessage = progressMessage;
+        }
+
         @Override
         public void handleRegularMessage(Message msg) {
             if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
@@ -36,7 +42,7 @@ public class CachePopup extends AbstractPopupActivity {
         }
 
         private void updateStatusMsg(final String msg) {
-            progress.setMessage(res.getString(R.string.cache_dialog_offline_save_message)
+            progress.setMessage(res.getString(progressMessage)
                     + "\n\n"
                     + msg);
         }
@@ -46,23 +52,6 @@ public class CachePopup extends AbstractPopupActivity {
         @Override
         public void handleMessage(Message msg) {
             CachePopup.this.finish();
-        }
-    }
-
-    private class RefreshCacheHandler extends CancellableHandler {
-        @Override
-        public void handleRegularMessage(Message msg) {
-            if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
-                updateStatusMsg((String) msg.obj);
-            } else {
-                init();
-            }
-        }
-
-        private void updateStatusMsg(final String msg) {
-            progress.setMessage(res.getString(R.string.cache_dialog_refresh_message)
-                    + "\n\n"
-                    + msg);
         }
     }
 
@@ -133,7 +122,7 @@ public class CachePopup extends AbstractPopupActivity {
         }
 
         protected void storeCache(final int listId) {
-            final StoreCacheHandler storeCacheHandler = new StoreCacheHandler();
+            final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(R.string.cache_dialog_offline_save_message);
             progress.show(CachePopup.this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
             new StoreCacheThread(listId, storeCacheHandler).start();
         }
@@ -168,7 +157,7 @@ public class CachePopup extends AbstractPopupActivity {
                 return;
             }
 
-            final RefreshCacheHandler refreshCacheHandler = new RefreshCacheHandler();
+            final StoreCacheHandler refreshCacheHandler = new StoreCacheHandler(R.string.cache_dialog_offline_save_message);
             progress.show(CachePopup.this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
             new RefreshCacheThread(refreshCacheHandler).start();
         }

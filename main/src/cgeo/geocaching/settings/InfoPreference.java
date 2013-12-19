@@ -1,14 +1,11 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.ui.UrlPopup;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.TypedArray;
-import android.net.Uri;
 import android.preference.Preference;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -82,39 +79,30 @@ public class InfoPreference extends AbstractAttributeBasedPrefence {
 
             @Override
             public boolean onPreferenceClick(final Preference preference) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(
-                        preference.getContext());
-                builder.setMessage(text)
-                        .setIcon(android.R.drawable.ic_dialog_info)
-                        .setTitle(preference.getTitle())
-                        .setPositiveButton(R.string.err_none, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        })
-                        .setNegativeButton(urlButton, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                Intent i = new Intent(Intent.ACTION_VIEW);
-                                i.setData(Uri.parse(url));
-                                preference.getContext().startActivity(i);
-                            }
-                        });
-                builder.create().show();
+                new UrlPopup(preference.getContext()).show(preference.getTitle().toString(), text, url, urlButton);
+                // don't update the preference value
                 return false;
             }
         });
 
-        // show an Info Icon
-        View v = super.onCreateView(parent);
+        return addInfoIcon(parent);
+    }
 
-        ImageView i = (ImageView) inflater.inflate(R.layout.preference_info_icon, parent, false);
-        LinearLayout l = (LinearLayout) v.findViewById(android.R.id.widget_frame);
-        l.setVisibility(View.VISIBLE);
-        l.addView(i);
+    /**
+     * Add an info icon at the left hand side of the preference.
+     *
+     * @param parent
+     * @return
+     */
+    private View addInfoIcon(ViewGroup parent) {
+        View preferenceView = super.onCreateView(parent);
 
-        return v;
+        ImageView iconView = (ImageView) inflater.inflate(R.layout.preference_info_icon, parent, false);
+        LinearLayout frame = (LinearLayout) preferenceView.findViewById(android.R.id.widget_frame);
+        frame.setVisibility(View.VISIBLE);
+        frame.addView(iconView);
+
+        return preferenceView;
     }
 
 }

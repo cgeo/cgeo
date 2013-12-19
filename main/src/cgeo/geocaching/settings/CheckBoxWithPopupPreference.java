@@ -1,13 +1,10 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.ui.UrlPopup;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.TypedArray;
-import android.net.Uri;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.util.AttributeSet;
@@ -63,26 +60,7 @@ public class CheckBoxWithPopupPreference extends CheckBoxPreference {
                 if (!(Boolean) newValue) {
                     return true;
                 }
-                AlertDialog.Builder builder = new AlertDialog.Builder(
-                        preference.getContext());
-                builder.setMessage(text)
-                        .setIcon(android.R.drawable.ic_dialog_info)
-                        .setTitle(title)
-                        .setPositiveButton(R.string.err_none, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        })
-                        .setNegativeButton(urlButton, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                Intent i = new Intent(Intent.ACTION_VIEW);
-                                i.setData(Uri.parse(url));
-                                preference.getContext().startActivity(i);
-                            }
-                        });
-                builder.create().show();
+                new UrlPopup(preference.getContext()).show(title, text, url, urlButton);
                 return true;
             }
         });
