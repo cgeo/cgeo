@@ -4,7 +4,8 @@
   <string name="changelog_master" translatable="false">
     <b>Next feature release</b>\n
     <b>New Features:</b>\n
-    · Browse pocket queries online (long press on nearby)\n
+    · Browse pocket queries online (Press menu on mainscreen)\n
+    · Support of extremcaching.com\n
     · Popup on map shows date of event caches\n
     · Show cache where a Geokrety is currently placed\n
     · Configurable twitter templates\n
@@ -17,6 +18,7 @@
     · Support TB URLs for the QR-code scanner\n
     \n
      <b>Bugfixes:</b>\n
+    · Reduce memory usage for OSM mapsforge to avoid crashes\n
     · Cache type filter was not applied for OC nearby search\n
     · No cache coords if cache is at equator or prime meridian\n
     · Parts of the compass not shown when using big fonts\n
