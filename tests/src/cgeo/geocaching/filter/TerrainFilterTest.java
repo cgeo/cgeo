@@ -19,6 +19,6 @@ public class TerrainFilterTest extends CGeoTestCase {
     }
 
     public static void testAllFilters() {
-        assertTrue(new TerrainFilter.Factory().getFilters().size() == 5); // terrain ranges from 1 to 5
+        assertTrue(new TerrainFilter.Factory().getFilters().size() == 7); // terrain ranges from 1 to 7 (due to ExtremCaching.com using that value)
     }
 }
