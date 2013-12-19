@@ -20,7 +20,7 @@ class TerrainFilter extends AbstractRangeFilter {
 
     public static class Factory implements IFilterFactory {
         private static final int TERRAIN_MIN = 1;
-        private static final int TERRAIN_MAX = 5;
+        private static final int TERRAIN_MAX = 7;
 
         @Override
         public List<IFilter> getFilters() {
