@@ -8,6 +8,7 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import org.mapsforge.android.mapsold.ItemizedOverlay;
 import org.mapsforge.android.mapsold.Projection;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
@@ -21,9 +22,9 @@ public class MapsforgeCacheOverlay extends ItemizedOverlay<MapsforgeCacheOverlay
     private CachesOverlay base;
     private Lock lock = new ReentrantLock();
 
-    public MapsforgeCacheOverlay(Context contextIn, Drawable markerIn) {
+    public MapsforgeCacheOverlay(Context contextIn, Drawable markerIn, Activity activity) {
         super(boundCenterBottom(markerIn));
-        base = new CachesOverlay(this, contextIn);
+        base = new CachesOverlay(this, contextIn, activity);
     }
 
     @Override
