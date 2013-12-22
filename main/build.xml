@@ -95,32 +95,26 @@
 
         <if condition="${build.mode.release}">
             <then>
-                <filterset id="build-tokens">
+                <filterset id="maps-key">
                     <filter token="maps.api.key" value="${maps.api.key.market}"/>
                 </filterset>
             </then>
             <else>
-                <filterset id="build-tokens">
+                <filterset id="maps-key">
                     <filter token="maps.api.key" value="${maps.api.key}"/>
                 </filterset>
             </else>
         </if>
-        <copy file="./templates/mapsapikey.xml" todir="./res/values/" overwrite="true">
-            <filterset refid="build-tokens" />
-        </copy>
-        <copy file="./templates/ocde_okapi.xml" todir="./res/values/" overwrite="true">
+        <copy file="./templates/keys.xml" todir="./res/values/" overwrite="true">
+            <filterset refid="maps-key" />
             <filterset>
                 <filter token="ocde.okapi.consumer.key" value="${ocde.okapi.consumer.key}"/>
                 <filter token="ocde.okapi.consumer.secret" value="${ocde.okapi.consumer.secret}"/>
-            </filterset>
-        </copy>
-        <copy file="./templates/ocpl_okapi.xml" todir="./res/values/" overwrite="true">
-            <filterset>
                 <filter token="ocpl.okapi.consumer.key" value="${ocpl.okapi.consumer.key}"/>
                 <filter token="ocpl.okapi.consumer.secret" value="${ocpl.okapi.consumer.secret}"/>
             </filterset>
         </copy>
-        </target>
+    </target>
 
 <!-- start of modifications for android annotations, see https://github.com/excilys/androidannotations/wiki/Building-Project-Ant -->
 	<property name="generated.dir" value="annotation_gen" />
