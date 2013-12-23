@@ -1722,10 +1722,10 @@ public class Geocache implements ICache, IWaypoint {
             final MatcherWrapper matcher = new MatcherWrapper(pattern, getDescription());
             while (matcher.find()) {
                 try {
-                    final int hours = Integer.valueOf(matcher.group(1));
+                    final int hours = Integer.parseInt(matcher.group(1));
                     int minutes = 0;
                     if (matcher.groupCount() >= 2) {
-                        minutes = Integer.valueOf(matcher.group(2));
+                        minutes = Integer.parseInt(matcher.group(2));
                     }
                     if (hours >= 0 && hours < 24 && minutes >= 0 && minutes < 60) {
                         return String.valueOf(hours * 60 + minutes);

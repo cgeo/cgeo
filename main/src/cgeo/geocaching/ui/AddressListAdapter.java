@@ -11,7 +11,6 @@ import cgeo.geocaching.geopoint.Units;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
-import android.content.Context;
 import android.location.Address;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,9 +34,9 @@ public class AddressListAdapter extends ArrayAdapter<Address> {
         }
     }
 
-    public AddressListAdapter(final Context context) {
+    public AddressListAdapter(final Activity context) {
         super(context, 0);
-        inflater = ((Activity) context).getLayoutInflater();
+        inflater = context.getLayoutInflater();
         location = CgeoApplication.getInstance().currentGeo().getCoords();
     }
 

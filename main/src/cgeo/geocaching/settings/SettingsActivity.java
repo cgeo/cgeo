@@ -473,7 +473,7 @@ public class SettingsActivity extends PreferenceActivity {
                 // reset the cached map source
                 MapSource mapSource;
                 try {
-                    final int mapSourceId = Integer.valueOf(stringValue);
+                    final int mapSourceId = Integer.parseInt(stringValue);
                     mapSource = MapProviderFactory.getMapSource(mapSourceId);
                 } catch (final NumberFormatException e) {
                     Log.e("SettingsActivity.onPreferenceChange: bad source id '" + stringValue + "'");

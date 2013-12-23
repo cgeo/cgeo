@@ -37,15 +37,15 @@ public class GeokretyParser {
                 try {
                     final int indexId = attributes.getIndex("id");
                     if (indexId > -1) {
-                        trackable.setGeocode(geocode(Integer.valueOf(attributes.getValue("id"))));
+                        trackable.setGeocode(geocode(Integer.parseInt(attributes.getValue("id"))));
                     }
                     final int indexDist = attributes.getIndex("dist");
                     if (indexDist > -1) {
-                        trackable.setDistance(Float.valueOf(attributes.getValue("dist")));
+                        trackable.setDistance(Float.parseFloat(attributes.getValue("dist")));
                     }
                     final int indexType = attributes.getIndex("type");
                     if (indexType > -1) {
-                        trackable.setType(getType(Integer.valueOf(attributes.getValue("type"))));
+                        trackable.setType(getType(Integer.parseInt(attributes.getValue("type"))));
                     }
                     final int indexWaypoint = attributes.getIndex("waypoint");
                     if (indexWaypoint > -1) {
