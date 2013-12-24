@@ -1161,6 +1161,14 @@
     <string name="attribute_unknown_no">No unknown attribute present</string>
     <string name="attribute_geotour_yes">Part of GeoTour</string>
     <string name="attribute_geotour_no">Not part of GeoTour</string>
+    <string name="attribute_kids_2_yes">Take your children</string>
+    <string name="attribute_kids_2_no">Do not take your children</string>
+    <string name="attribute_historic_site_yes">Historic site</string>
+    <string name="attribute_historic_site_no">No historic site</string>
+    <string name="attribute_magnetic_yes">Magnetic cache</string>
+    <string name="attribute_magnetic_no">No magnetic cache</string>
+    <string name="attribute_usb_cache_yes">Dead drop USB cache</string>
+    <string name="attribute_usb_cache_no">No dead drop USB cache</string>
 
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>

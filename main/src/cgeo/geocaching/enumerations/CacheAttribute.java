@@ -79,7 +79,7 @@ public enum CacheAttribute {
     STROLLER(41, -1, "stroller", R.drawable.attribute_stroller, R.string.attribute_stroller_yes, R.string.attribute_stroller_no),
     FUEL(58, -1, "fuel", R.drawable.attribute_fuel, R.string.attribute_fuel_yes, R.string.attribute_fuel_no),
     FOOD(59, -1, "food", R.drawable.attribute_food, R.string.attribute_food_yes, R.string.attribute_food_no),
-    OC_ONLY(-1, -1, "oc_only", R.drawable.attribute_oc_only, R.string.attribute_oc_only_yes, R.string.attribute_oc_only_no),
+    OC_ONLY(-1, 1, "oc_only", R.drawable.attribute_oc_only, R.string.attribute_oc_only_yes, R.string.attribute_oc_only_no),
     LINK_ONLY(-1, -1, "link_only", R.drawable.attribute_link_only, R.string.attribute_link_only_yes, R.string.attribute_link_only_no),
     LETTERBOX(-1, 4, "letterbox", R.drawable.attribute_letterbox, R.string.attribute_letterbox_yes, R.string.attribute_letterbox_no),
     RAILWAY(-1, 60, "railway", R.drawable.attribute_railway, R.string.attribute_railway_yes, R.string.attribute_railway_no),
@@ -109,7 +109,11 @@ public enum CacheAttribute {
     OTHER_CACHE(-1, 13, "other_cache", R.drawable.attribute_other_cache, R.string.attribute_other_cache_yes, R.string.attribute_other_cache_no),
     ASK_OWNER(-1, 17, "ask_owner", R.drawable.attribute_ask_owner, R.string.attribute_ask_owner_yes, R.string.attribute_ask_owner_no),
     UNKNOWN(-1, -1, "unknown", R.drawable.attribute_unknown, R.string.attribute_unknown_yes, R.string.attribute_unknown_no),
-    GEOTOUR(67, -1, "geotour", R.drawable.attribute_geotour, R.string.attribute_geotour_yes, R.string.attribute_geotour_no);
+    GEOTOUR(67, -1, "geotour", R.drawable.attribute_geotour, R.string.attribute_geotour_yes, R.string.attribute_geotour_no),
+    KIDS_2(-1, 70, "kids_2", R.drawable.attribute_kids_2, R.string.attribute_kids_2_yes, R.string.attribute_kids_2_no),
+    HISTORIC_SITE(-1, 29, "historic_site", R.drawable.attribute_historic_site, R.string.attribute_historic_site_yes, R.string.attribute_historic_site_no),
+    MAGNETIC(-1, 6, "magnetic", R.drawable.attribute_magnetic, R.string.attribute_magnetic_yes, R.string.attribute_magnetic_no),
+    USB_CACHE(-1, 10, "usb_cache", R.drawable.attribute_usb_cache, R.string.attribute_usb_cache_yes, R.string.attribute_usb_cache_no);
     // THIS LIST IS GENERATED: don't change anything here but read
     // project/attributes/readme.txt
 
