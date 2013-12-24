@@ -10,7 +10,7 @@ import android.widget.ListView;
 /**
  * {@link PageViewCreator} for {@link ListView}, which can save scroll state on purging a page from the
  * {@link ViewPager}, and restore the state on re-recreation.
- * 
+ *
  */
 public abstract class AbstractCachingListViewPageViewCreator extends AbstractCachingPageViewCreator<ListView> {
     private static final String STATE_POSITION_FROM_TOP = "positionFromTop";
@@ -41,7 +41,7 @@ public abstract class AbstractCachingListViewPageViewCreator extends AbstractCac
      */
     @Override
     public void setViewState(Bundle state) {
-        if (view == null) {
+        if (view == null || state == null) {
             return;
         }
         int logViewPosition = state.getInt(STATE_POSITION);
