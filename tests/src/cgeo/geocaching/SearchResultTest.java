@@ -13,7 +13,7 @@ public class SearchResultTest extends AndroidTestCase {
         geocodes.add("GC23456");
         final SearchResult searchResult = new SearchResult(geocodes);
         assertEquals(2, searchResult.getCount());
-        assertEquals(2, searchResult.getTotal());
+        assertEquals(2, searchResult.getTotalCountGC());
         assertTrue(searchResult.getGeocodes().contains("GC12345"));
     }
 

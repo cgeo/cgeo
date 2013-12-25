@@ -268,7 +268,7 @@ public abstract class GCParser {
         try {
             final String result = TextUtils.getMatch(page, GCConstants.PATTERN_SEARCH_TOTALCOUNT, false, 1, null, true);
             if (null != result) {
-                searchResult.setTotal(Integer.parseInt(result) - excludedCaches);
+                searchResult.setTotalCountGC(Integer.parseInt(result) - excludedCaches);
             }
         } catch (final NumberFormatException e) {
             Log.w("GCParser.parseSearch: Failed to parse cache count");

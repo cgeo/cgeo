@@ -475,7 +475,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         // refresh standard list if it has changed (new caches downloaded)
         if (type == CacheListType.OFFLINE && listId >= StoredList.STANDARD_LIST_ID && search != null) {
             final SearchResult newSearch = DataStore.getBatchOfStoredCaches(coords, Settings.getCacheType(), listId);
-            if (newSearch.getTotal() != search.getTotal()) {
+            if (newSearch.getTotalCountGC() != search.getTotalCountGC()) {
                 refreshCurrentList();
             }
         }
@@ -945,7 +945,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         boolean enableMore = (type != CacheListType.OFFLINE && cacheList.size() < MAX_LIST_ITEMS);
         if (enableMore && search != null) {
-            final int count = search.getTotal();
+            final int count = search.getTotalCountGC();
             enableMore = enableMore && count > 0 && cacheList.size() < count;
         }
 

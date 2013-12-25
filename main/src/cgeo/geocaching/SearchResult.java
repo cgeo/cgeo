@@ -28,7 +28,11 @@ public class SearchResult implements Parcelable {
     private StatusCode error = null;
     private String url = "";
     public String[] viewstates = null;
-    private int totalCnt = 0;
+    /**
+     * Overall number of search results matching our search on geocaching.com. If this number is higher than 20, we have
+     * to fetch multiple pages to get all caches.
+     */
+    private int totalCountGC = 0;
 
     final public static Parcelable.Creator<SearchResult> CREATOR = new Parcelable.Creator<SearchResult>() {
         @Override
@@ -60,20 +64,23 @@ public class SearchResult implements Parcelable {
         error = searchResult.error;
         url = searchResult.url;
         viewstates = searchResult.viewstates;
-        setTotal(searchResult.getTotal());
+        setTotalCountGC(searchResult.getTotalCountGC());
     }
 
     /**
      * Build a search result from an existing collection of geocodes.
      *
-     * @param geocodes a non-null collection of geocodes
-     * @param total the total number of geocodes (FIXME: what is the meaning of this number wrt to geocodes.size()?)
+     * @param geocodes
+     *            a non-null collection of geocodes
+     * @param totalCountGC
+     *            the total number of caches matching that search on geocaching.com (as we always get only the next 20
+     *            from a web page)
      */
-    public SearchResult(final Collection<String> geocodes, final int total) {
+    public SearchResult(final Collection<String> geocodes, final int totalCountGC) {
         this.geocodes = new HashSet<String>(geocodes.size());
         this.geocodes.addAll(geocodes);
         this.filteredGeocodes = new HashSet<String>();
-        this.setTotal(total);
+        this.setTotalCountGC(totalCountGC);
     }
 
     /**
@@ -99,7 +106,7 @@ public class SearchResult implements Parcelable {
             viewstates = new String[length];
             in.readStringArray(viewstates);
         }
-        setTotal(in.readInt());
+        setTotalCountGC(in.readInt());
     }
 
     /**
@@ -136,7 +143,7 @@ public class SearchResult implements Parcelable {
             out.writeInt(viewstates.length);
             out.writeStringArray(viewstates);
         }
-        out.writeInt(getTotal());
+        out.writeInt(getTotalCountGC());
     }
 
     @Override
@@ -176,16 +183,20 @@ public class SearchResult implements Parcelable {
         if (GCLogin.isEmpty(viewstates)) {
             return;
         }
+        // lazy initialization of viewstates
+        if (this.viewstates == null) {
+            this.viewstates = new String[viewstates.length];
+        }
 
         System.arraycopy(viewstates, 0, this.viewstates, 0, viewstates.length);
     }
 
-    public int getTotal() {
-        return totalCnt;
+    public int getTotalCountGC() {
+        return totalCountGC;
     }
 
-    public void setTotal(int totalCnt) {
-        this.totalCnt = totalCnt;
+    public void setTotalCountGC(int totalCountGC) {
+        this.totalCountGC = totalCountGC;
     }
 
     /**
@@ -214,7 +225,7 @@ public class SearchResult implements Parcelable {
             }
         }
         // decrease maximum number of caches by filtered ones
-        result.setTotal(result.getTotal() - excluded);
+        result.setTotalCountGC(result.getTotalCountGC() - excluded);
         GCVote.loadRatings(cachesForVote);
         return result;
     }
@@ -268,12 +279,18 @@ public class SearchResult implements Parcelable {
     }
 
     public void addSearchResult(SearchResult other) {
-        if (other != null) {
-            addGeocodes(other.geocodes);
-            addFilteredGeocodes(other.filteredGeocodes);
-            if (StringUtils.isBlank(url)) {
-                url = other.url;
-            }
+        if (other == null) {
+            return;
+        }
+        addGeocodes(other.geocodes);
+        addFilteredGeocodes(other.filteredGeocodes);
+        if (StringUtils.isBlank(url)) {
+            url = other.url;
+        }
+        // copy the GC total search results number to be able to use "More caches" button
+        if (getTotalCountGC() == 0 && other.getTotalCountGC() != 0) {
+            setViewstates(other.getViewstates());
+            setTotalCountGC(other.getTotalCountGC());
         }
     }
 
