@@ -4,6 +4,7 @@ import cgeo.CGeoTestCase;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.connector.gc.GCParser;
+import cgeo.geocaching.connector.gc.MapTokens;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
@@ -42,7 +43,7 @@ import junit.framework.Assert;
 
 public class CgeoApplicationTest extends CGeoTestCase {
 
-    private static final String[] INVALID_TOKEN = null;
+    private static final MapTokens INVALID_TOKEN = null;
 
     /**
      * The name 'test preconditions' is a convention to signal that if this test
@@ -298,7 +299,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     final GC2CJPF mockedCache = new GC2CJPF();
                     deleteCacheFromDB(mockedCache.getGeocode());
 
-                    final String[] tokens = GCLogin.getMapTokens();
+                    final MapTokens tokens = GCLogin.getMapTokens();
                     final Viewport viewport = new Viewport(mockedCache, 0.003, 0.003);
 
                     // check coords for DETAILED

@@ -10,6 +10,7 @@ import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.gc.MapTokens;
 import cgeo.geocaching.connector.oc.OCApiConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector.ApiSupport;
 import cgeo.geocaching.connector.oc.OCApiLiveConnector;
@@ -154,7 +155,7 @@ public final class ConnectorFactory {
     }
 
     /** @see ISearchByViewPort#searchByViewport */
-    public static SearchResult searchByViewport(final @NonNull Viewport viewport, final String[] tokens) {
+    public static SearchResult searchByViewport(final @NonNull Viewport viewport, final MapTokens tokens) {
         final SearchResult result = new SearchResult();
         for (final ISearchByViewPort connector : searchByViewPortConns) {
             if (connector.isActive()) {

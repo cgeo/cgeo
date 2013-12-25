@@ -1,9 +1,9 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
@@ -254,7 +254,7 @@ public class GCMap {
      *            Live map tokens
      * @return
      */
-    public static SearchResult searchByViewport(final Viewport viewport, final String[] tokens) {
+    public static SearchResult searchByViewport(final Viewport viewport, final MapTokens tokens) {
         int speed = (int) CgeoApplication.getInstance().currentGeo().getSpeed() * 60 * 60 / 1000; // in km/h
         Strategy strategy = Settings.getLiveMapStrategy();
         if (strategy == Strategy.AUTO) {
@@ -284,7 +284,7 @@ public class GCMap {
      *            Strategy for data retrieval and parsing, @see Strategy
      * @return
      */
-    private static SearchResult searchByViewport(final Viewport viewport, final String[] tokens, Strategy strategy) {
+    private static SearchResult searchByViewport(final Viewport viewport, final MapTokens tokens, Strategy strategy) {
         Log.d("GCMap.searchByViewport" + viewport.toString());
 
         final SearchResult searchResult = new SearchResult();
@@ -310,7 +310,7 @@ public class GCMap {
                             "ep", "1",
                             "app", "cgeo");
                     if (tokens != null) {
-                        params.put("k", tokens[0], "st", tokens[1]);
+                        params.put("k", tokens.getUserSession(), "st", tokens.getSessionToken());
                     }
                     if (Settings.isExcludeMyCaches()) { // works only for PM
                         params.put("hf", "1", "hh", "1"); // hide found, hide hidden

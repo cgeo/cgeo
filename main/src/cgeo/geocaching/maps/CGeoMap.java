@@ -12,6 +12,7 @@ import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCLogin;
+import cgeo.geocaching.connector.gc.MapTokens;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
@@ -138,7 +139,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     // status data
     /** Last search result used for displaying header */
     private SearchResult lastSearchResult = null;
-    private String[] tokens = null;
+    private MapTokens tokens = null;
     private boolean noMapTokenShowed = false;
     // map status data
     private boolean followMyLocation = false;
@@ -1167,7 +1168,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                     if (tokens == null) {
                         tokens = GCLogin.getMapTokens();
-                        if (noMapTokenHandler != null && tokens == null) {
+                        if (noMapTokenHandler != null && (StringUtils.isEmpty(tokens.getUserSession()) || StringUtils.isEmpty(tokens.getSessionToken()))) {
                             noMapTokenHandler.sendEmptyMessage(0);
                         }
                     }

@@ -169,7 +169,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public SearchResult searchByViewport(@NonNull Viewport viewport, String[] tokens) {
+    public SearchResult searchByViewport(@NonNull Viewport viewport, final MapTokens tokens) {
         return GCMap.searchByViewport(viewport, tokens);
     }
 
