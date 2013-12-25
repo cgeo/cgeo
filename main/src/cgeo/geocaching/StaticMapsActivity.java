@@ -9,6 +9,8 @@ import com.googlecode.androidannotations.annotations.Extra;
 import com.googlecode.androidannotations.annotations.OptionsItem;
 import com.googlecode.androidannotations.annotations.OptionsMenu;
 
+import org.apache.commons.collections4.CollectionUtils;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -26,9 +28,6 @@ import java.util.List;
 @OptionsMenu(R.menu.static_maps_activity_options)
 public class StaticMapsActivity extends AbstractActivity {
 
-    private static final int RESULT_DOWNLOAD_FAILED = -1;
-    private static final int RESULT_LOAD_FAILED = -2;
-    private static final int RESULT_SUCCEEDED = 1;
     private static final String EXTRAS_WAYPOINT = "waypoint";
     private static final String EXTRAS_DOWNLOAD = "download";
     private static final String EXTRAS_GEOCODE = "geocode";
@@ -48,17 +47,25 @@ public class StaticMapsActivity extends AbstractActivity {
             if (waitDialog != null) {
                 waitDialog.dismiss();
             }
-            final int result = ((Integer) msg.obj).intValue();
-            if (result == RESULT_DOWNLOAD_FAILED) {
-                showToast(res.getString(R.string.err_detail_google_maps_limit_reached));
-                finish();
-            } else if (result == RESULT_LOAD_FAILED) {
-                showToast(res.getString(R.string.err_detail_not_load_map_static));
-                finish();
-            } else {
-                showStaticMaps();
+            try {
+                if (CollectionUtils.isEmpty(maps)) {
+                    if (download) {
+                        final boolean succeeded = downloadStaticMaps();
+                        if (succeeded) {
+                            startActivity(StaticMapsActivity.this.getIntent());
+                        } else {
+                            showToast(res.getString(R.string.err_detail_google_maps_limit_reached));
+                        }
+                    } else {
+                        showToast(res.getString(R.string.err_detail_not_load_map_static));
+                    }
+                    finish();
+                } else {
+                    showStaticMaps();
+                }
+            } catch (Exception e) {
+                Log.e("StaticMapsActivity.loadMapsHandler", e);
             }
-            return;
         }
     };
 
@@ -88,16 +95,11 @@ public class StaticMapsActivity extends AbstractActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.staticmaps_activity);
 
-        loadMapsImpl(download);
-    }
-
-    private void loadMapsImpl(final boolean download) {
         if (geocode == null) {
             showToast("Sorry, c:geo forgot for what cache you want to load static maps.");
             finish();
             return;
         }
-        this.download = download;
 
         waitDialog = ProgressDialog.show(this, null, res.getString(R.string.map_static_loading), true);
         waitDialog.setCancelable(true);
@@ -109,16 +111,6 @@ public class StaticMapsActivity extends AbstractActivity {
 
         @Override
         public void run() {
-            boolean succeeded = true;
-            if (download) {
-                succeeded = downloadStaticMaps();
-            }
-            if (!succeeded) {
-                Message msg = Message.obtain();
-                msg.obj = RESULT_DOWNLOAD_FAILED;
-                loadMapsHandler.sendMessage(msg);
-                return;
-            }
             try {
                 // try downloading 2 times
                 for (int trials = 0; trials < 2; trials++) {
@@ -145,13 +137,7 @@ public class StaticMapsActivity extends AbstractActivity {
                     }
                 }
 
-                Message msg = Message.obtain();
-                if (maps.isEmpty()) {
-                    msg.obj = RESULT_LOAD_FAILED;
-                } else {
-                    msg.obj = RESULT_SUCCEEDED;
-                }
-                loadMapsHandler.sendMessage(msg);
+                loadMapsHandler.sendMessage(Message.obtain());
             } catch (Exception e) {
                 Log.e("StaticMapsActivity.LoadMapsThread.run", e);
             }
@@ -160,21 +146,26 @@ public class StaticMapsActivity extends AbstractActivity {
 
     @OptionsItem(R.id.menu_refresh)
     void refreshMaps() {
-        loadMapsImpl(true);
+        downloadStaticMaps();
+        restartActivity();
     }
 
     private boolean downloadStaticMaps() {
-        final Geocache cache = DataStore.loadCache(this.geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         if (waypointId == null) {
+            showToast(res.getString(R.string.info_storing_static_maps));
             StaticMapsProvider.storeCacheStaticMap(cache, true);
             return cache.hasStaticMap();
         }
         final Waypoint waypoint = cache.getWaypointById(waypointId);
         if (waypoint != null) {
+            showToast(res.getString(R.string.info_storing_static_maps));
+            // refresh always removes old waypoint files
             StaticMapsProvider.removeWpStaticMaps(waypoint, geocode);
             StaticMapsProvider.storeWaypointStaticMap(cache, waypoint, true);
             return StaticMapsProvider.hasStaticMapForWaypoint(geocode, waypoint);
         }
+        showToast(res.getString(R.string.err_detail_not_load_map_static));
         return false;
     }
 
