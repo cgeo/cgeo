@@ -19,7 +19,6 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.DatabaseBackupUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.RunnableWithArgument;
 import cgeo.geocaching.utils.Version;
 
@@ -72,7 +71,6 @@ public class MainActivity extends AbstractActivity {
     @InjectView(R.id.offline_count) protected TextView countBubble;
     @InjectView(R.id.info_area) protected LinearLayout infoArea;
 
-    private static final String SCAN_INTENT = "com.google.zxing.client.android.SCAN";
     public static final int SEARCH_REQUEST_CODE = 2;
 
     private int version = 0;
@@ -268,7 +266,6 @@ public class MainActivity extends AbstractActivity {
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_scan).setEnabled(ProcessUtils.isIntentAvailable(SCAN_INTENT));
         menu.findItem(R.id.menu_pocket_queries).setVisible(Settings.isPremiumMember());
         return true;
     }
@@ -312,6 +309,11 @@ public class MainActivity extends AbstractActivity {
 
     private void startScannerApplication() {
         IntentIntegrator integrator = new IntentIntegrator(this);
+        // integrator dialog is English only, therefore localize it
+        integrator.setButtonYesByID(android.R.string.yes);
+        integrator.setButtonNoByID(android.R.string.no);
+        integrator.setTitleByID(R.string.menu_scan_geo);
+        integrator.setMessageByID(R.string.menu_scan_description);
         integrator.initiateScan(IntentIntegrator.QR_CODE_TYPES);
     }
 
