@@ -3,6 +3,7 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.activity.AbstractViewPagerActivity.PageViewCreator;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -24,7 +25,8 @@ public abstract class AbstractCachingListViewPageViewCreator extends AbstractCac
      * @return the state encapsulated in a bundle
      */
     @Override
-    public Bundle getViewState() {
+    public @Nullable
+    Bundle getViewState() {
         if (view == null) {
             return null;
         }

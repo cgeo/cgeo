@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.AbstractViewPagerActivity.PageViewCreator;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.os.Bundle;
 import android.view.View;
@@ -42,7 +43,8 @@ public abstract class AbstractCachingPageViewCreator<ViewClass extends View> imp
      * @return empty bundle
      */
     @Override
-    public Bundle getViewState() {
+    public @Nullable
+    Bundle getViewState() {
         return new Bundle();
     }
 

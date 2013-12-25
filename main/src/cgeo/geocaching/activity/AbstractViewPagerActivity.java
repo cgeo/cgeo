@@ -8,6 +8,7 @@ import com.viewpagerindicator.TitleProvider;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -86,7 +87,8 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
         /**
          * Gets state of the view
          */
-        public Bundle getViewState();
+        public @Nullable
+        Bundle getViewState();
 
         /**
          * Set the state of the view
@@ -115,8 +117,11 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
             // Store the state of the view if the page supports it
             PageViewCreator creator = viewCreators.get(page);
             if (creator != null) {
+                @Nullable
                 Bundle state = creator.getViewState();
-                viewStates.put(page, state);
+                if (state != null) {
+                    viewStates.put(page, state);
+                }
             }
 
             container.removeView((View) object);
