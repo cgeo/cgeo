@@ -11,8 +11,10 @@ import cgeo.geocaching.utils.MatcherWrapper;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -219,19 +221,12 @@ public final class GCVote {
         return result != null && result.trim().equalsIgnoreCase("ok");
     }
 
-    public static void loadRatings(final ArrayList<Geocache> caches) {
+    public static void loadRatings(final @NonNull ArrayList<Geocache> caches) {
         if (!Settings.isRatingWanted()) {
             return;
         }
 
-        final ArrayList<String> geocodes = new ArrayList<String>(caches.size());
-        for (final Geocache cache : caches) {
-            String geocode = cache.getGeocode();
-            if (StringUtils.isNotBlank(geocode)) {
-                geocodes.add(geocode);
-            }
-        }
-
+        final ArrayList<String> geocodes = getVotableGeocodes(caches);
         if (geocodes.isEmpty()) {
             return;
         }
@@ -254,6 +249,24 @@ public final class GCVote {
         } catch (Exception e) {
             Log.e("GCvote.loadRatings", e);
         }
+    }
+
+    /**
+     * Get geocodes of all the caches, which can be used with GCVote. Non-GC caches will be filtered out.
+     * 
+     * @param caches
+     * @return
+     */
+    private static @NonNull
+    ArrayList<String> getVotableGeocodes(final @NonNull Collection<Geocache> caches) {
+        final ArrayList<String> geocodes = new ArrayList<String>(caches.size());
+        for (final Geocache cache : caches) {
+            String geocode = cache.getGeocode();
+            if (StringUtils.isNotBlank(geocode) && cache.supportsGCVote()) {
+                geocodes.add(geocode);
+            }
+        }
+        return geocodes;
     }
 
     public static boolean isValidRating(final float rating) {
