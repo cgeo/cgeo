@@ -16,12 +16,17 @@ public class GoogleMapController implements MapControllerImpl {
 
     @Override
     public void animateTo(GeoPointImpl geoPoint) {
-        mapController.animateTo((GeoPoint) geoPoint);
+        mapController.animateTo(castToGeoPointImpl(geoPoint));
+    }
+
+    private static GeoPoint castToGeoPointImpl(GeoPointImpl geoPoint) {
+        assert geoPoint instanceof GeoPoint;
+        return (GeoPoint) geoPoint;
     }
 
     @Override
     public void setCenter(GeoPointImpl geoPoint) {
-        mapController.setCenter((GeoPoint) geoPoint);
+        mapController.setCenter(castToGeoPointImpl(geoPoint));
     }
 
     @Override

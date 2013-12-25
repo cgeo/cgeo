@@ -18,12 +18,17 @@ public class MapsforgeMapController implements MapControllerImpl {
 
     @Override
     public void animateTo(GeoPointImpl geoPoint) {
-        mapController.setCenter((GeoPoint) geoPoint);
+        mapController.setCenter(castToGeoPoint(geoPoint));
+    }
+
+    private static GeoPoint castToGeoPoint(GeoPointImpl geoPoint) {
+        assert geoPoint instanceof GeoPoint;
+        return (GeoPoint) geoPoint;
     }
 
     @Override
     public void setCenter(GeoPointImpl geoPoint) {
-        mapController.setCenter((GeoPoint) geoPoint);
+        mapController.setCenter(castToGeoPoint(geoPoint));
     }
 
     /**

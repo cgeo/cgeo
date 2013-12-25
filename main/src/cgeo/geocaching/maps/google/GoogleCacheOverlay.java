@@ -63,7 +63,12 @@ public class GoogleCacheOverlay extends ItemizedOverlay<GoogleCacheOverlayItem> 
 
     @Override
     public void draw(Canvas canvas, MapView mapView, boolean shadow) {
-        base.draw(canvas, (MapViewImpl) mapView, shadow);
+        base.draw(canvas, castMapViewImpl(mapView), shadow);
+    }
+
+    private static MapViewImpl castMapViewImpl(MapView mapView) {
+        assert mapView instanceof MapViewImpl;
+        return (MapViewImpl) mapView;
     }
 
     @Override

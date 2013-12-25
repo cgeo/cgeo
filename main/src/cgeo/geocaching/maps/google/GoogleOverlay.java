@@ -28,6 +28,7 @@ public class GoogleOverlay extends Overlay implements OverlayImpl {
         super.draw(canvas, mapView, shadow);
 
         if (overlayBase != null) {
+            assert mapView instanceof MapViewImpl;
             overlayBase.draw(canvas, (MapViewImpl) mapView, shadow);
         }
     }

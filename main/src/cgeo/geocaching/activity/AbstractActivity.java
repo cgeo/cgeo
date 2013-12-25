@@ -96,7 +96,7 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
         // create view variables
         ButterKnife.inject(this);
     }
-
+    
     private void initializeCommonFields() {
         // initialize commonly used members
         res = this.getResources();

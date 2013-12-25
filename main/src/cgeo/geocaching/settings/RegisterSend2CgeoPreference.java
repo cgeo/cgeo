@@ -40,6 +40,11 @@ public class RegisterSend2CgeoPreference extends Preference {
     private Handler webAuthHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+            // satisfy static code analysis
+            if (activity == null) {
+                return;
+            }
+
             try {
                 if (progressDialog != null && progressDialog.isShowing()) {
                     progressDialog.dismiss();
@@ -70,6 +75,11 @@ public class RegisterSend2CgeoPreference extends Preference {
         setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
+                // satisfy static code analysis
+                if (activity == null) {
+                    return true;
+                }
+
                 final String deviceName = Settings.getWebDeviceName();
                 final String deviceCode = Settings.getWebDeviceCode();
 
