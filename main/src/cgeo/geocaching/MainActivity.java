@@ -656,7 +656,7 @@ public class MainActivity extends AbstractActivity {
             int checks = 0;
             while (!DataStore.isInitialized()) {
                 try {
-                    wait(500);
+                    sleep(500);
                     checks++;
                 } catch (Exception e) {
                     Log.e("MainActivity.CountBubbleUpdateThread.run", e);
