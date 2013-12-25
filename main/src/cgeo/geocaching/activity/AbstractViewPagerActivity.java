@@ -7,6 +7,7 @@ import com.viewpagerindicator.TitlePageIndicator;
 import com.viewpagerindicator.TitleProvider;
 
 import org.apache.commons.lang3.tuple.Pair;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -90,7 +91,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
         /**
          * Set the state of the view
          */
-        public void setViewState(Bundle state);
+        public void setViewState(@NonNull Bundle state);
     }
 
     /**
@@ -153,7 +154,9 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
 
                     // Restore the state of the view if the page supports it
                     Bundle state = viewStates.get(page);
-                    creator.setViewState(state);
+                    if (state != null) {
+                        creator.setViewState(state);
+                    }
 
                     container.addView(view, 0);
                 }
