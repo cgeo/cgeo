@@ -5,12 +5,14 @@ import cgeo.geocaching.connector.oc.OCConnector;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.mock.GC1ZXX2;
 
+import java.util.Collection;
+
 public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCase {
 
     public static void testGetConnectors() {
-        final IConnector[] connectors = ConnectorFactory.getConnectors();
+        final Collection<IConnector> connectors = ConnectorFactory.getConnectors();
         assertNotNull(connectors);
-        assertTrue(connectors.length > 0); // unknown connector must exist
+        assertFalse(connectors.isEmpty()); // unknown connector must exist
     }
 
     public static void testCanHandle() {

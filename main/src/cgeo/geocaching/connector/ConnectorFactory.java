@@ -25,13 +25,15 @@ import cgeo.geocaching.geopoint.Viewport;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public final class ConnectorFactory {
     private static final UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
-    private static final IConnector[] CONNECTORS = new IConnector[] {
+    private static final Collection<IConnector> CONNECTORS = Collections.unmodifiableCollection(Arrays.asList(new IConnector[] {
             GCConnector.getInstance(),
             ECConnector.getInstance(),
             new OCApiLiveConnector("opencaching.de", "www.opencaching.de", "OC", "CC BY-NC-ND, alle Logeinträge © jeweiliger Autor",
@@ -53,42 +55,41 @@ public final class ConnectorFactory {
             new GeopeitusConnector(),
             new WaymarkingConnector(),
             UNKNOWN_CONNECTOR // the unknown connector MUST be the last one
-    };
+    }));
 
     @NonNull public static final UnknownTrackableConnector UNKNOWN_TRACKABLE_CONNECTOR = new UnknownTrackableConnector();
-    private static final TrackableConnector[] TRACKABLE_CONNECTORS = new TrackableConnector[] {
+    private static final Collection<TrackableConnector> TRACKABLE_CONNECTORS = Collections.unmodifiableCollection(Arrays.asList(new TrackableConnector[] {
             new GeokretyConnector(), // GK must be first, as it overlaps with the secret codes of travel bugs
             TravelBugConnector.getInstance(),
             UNKNOWN_TRACKABLE_CONNECTOR // must be last
-    };
+    }));
 
-    private static final ISearchByViewPort[] searchByViewPortConns = getMatchingConnectors(ISearchByViewPort.class);
+    private static final Collection<ISearchByViewPort> searchByViewPortConns = getMatchingConnectors(ISearchByViewPort.class);
 
-    private static final ISearchByCenter[] searchByCenterConns = getMatchingConnectors(ISearchByCenter.class);
+    private static final Collection<ISearchByCenter> searchByCenterConns = getMatchingConnectors(ISearchByCenter.class);
 
-    private static final ISearchByKeyword[] searchByKeywordConns = getMatchingConnectors(ISearchByKeyword.class);
+    private static final Collection<ISearchByKeyword> searchByKeywordConns = getMatchingConnectors(ISearchByKeyword.class);
 
     @SuppressWarnings("unchecked")
-    private static <T extends IConnector> T[] getMatchingConnectors(final Class<T> clazz) {
+    private static <T extends IConnector> Collection<T> getMatchingConnectors(final Class<T> clazz) {
         final List<T> matching = new ArrayList<T>();
         for (final IConnector connector : CONNECTORS) {
             if (clazz.isInstance(connector)) {
                 matching.add((T) connector);
             }
         }
-        T[] result = (T[]) Array.newInstance(clazz, matching.size());
-        return matching.toArray(result);
+        return Collections.unmodifiableCollection(matching);
     }
 
-    public static IConnector[] getConnectors() {
+    public static Collection<IConnector> getConnectors() {
         return CONNECTORS;
     }
 
-    public static ISearchByCenter[] getSearchByCenterConnectors() {
+    public static Collection<ISearchByCenter> getSearchByCenterConnectors() {
         return searchByCenterConns;
     }
 
-    public static ISearchByKeyword[] getSearchByKeywordConnectors() {
+    public static Collection<ISearchByKeyword> getSearchByKeywordConnectors() {
         return searchByKeywordConns;
     }
 
@@ -175,7 +176,7 @@ public final class ConnectorFactory {
         return null;
     }
 
-    public static TrackableConnector[] getTrackableConnectors() {
+    public static Collection<TrackableConnector> getTrackableConnectors() {
         return TRACKABLE_CONNECTORS;
     }
 
