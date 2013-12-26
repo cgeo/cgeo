@@ -304,7 +304,7 @@ public class DataStore {
         }
     }
 
-    public static void closeDb() {
+    public static synchronized void closeDb() {
         if (database == null) {
             return;
         }

@@ -186,7 +186,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private boolean markersInvalidated = false; // previous state for loadTimer
     private boolean centered = false; // if map is already centered
     private boolean alreadyCentered = false; // -""- for setting my location
-    private static Set<String> dirtyCaches = null;
+    private static final Set<String> dirtyCaches = new HashSet<String>();
 
     // Thread pooling
     private static BlockingQueue<Runnable> displayQueue = new ArrayBlockingQueue<Runnable>(1);
@@ -1605,9 +1605,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     }
 
     public static void markCacheAsDirty(final String geocode) {
-        if (dirtyCaches == null) {
-            dirtyCaches = new HashSet<String>();
-        }
         dirtyCaches.add(geocode);
     }
 

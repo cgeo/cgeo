@@ -599,7 +599,7 @@ public class Settings {
         putInt(R.string.pref_lastmaplon, mapViewCenter.getLongitudeE6());
     }
 
-    public static MapSource getMapSource() {
+    public static synchronized MapSource getMapSource() {
         if (mapSource != null) {
             return mapSource;
         }
