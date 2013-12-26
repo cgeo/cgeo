@@ -304,7 +304,6 @@ public class MainActivity extends AbstractActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
 
     private void startScannerApplication() {

@@ -128,6 +128,7 @@ public abstract class AbstractConnector implements IConnector {
     public String getGeocodeFromUrl(final String url) {
         final String urlPrefix = getCacheUrlPrefix();
         if (StringUtils.startsWith(url, urlPrefix)) {
+            @NonNull
             String geocode = url.substring(urlPrefix.length());
             if (canHandle(geocode)) {
                 return geocode;

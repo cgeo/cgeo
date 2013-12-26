@@ -24,6 +24,7 @@ import cgeo.geocaching.geopoint.Viewport;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -103,7 +104,10 @@ public final class ConnectorFactory {
         return liveConns.toArray(new ILogin[liveConns.size()]);
     }
 
-    public static boolean canHandle(final String geocode) {
+    public static boolean canHandle(final @Nullable String geocode) {
+        if (geocode == null) {
+            return false;
+        }
         if (isInvalidGeocode(geocode)) {
             return false;
         }

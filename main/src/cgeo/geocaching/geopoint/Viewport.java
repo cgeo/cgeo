@@ -2,6 +2,8 @@ package cgeo.geocaching.geopoint;
 
 import cgeo.geocaching.ICoordinates;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.Locale;
 import java.util.Set;
 
@@ -9,9 +11,9 @@ import java.util.Set;
 
 public class Viewport {
 
-    public final Geopoint center;
-    public final Geopoint bottomLeft;
-    public final Geopoint topRight;
+    public final @NonNull Geopoint center;
+    public final @NonNull Geopoint bottomLeft;
+    public final @NonNull Geopoint topRight;
 
     public Viewport(final ICoordinates point1, final ICoordinates point2) {
         final Geopoint gp1 = point1.getCoords();
@@ -50,7 +52,8 @@ public class Viewport {
         return topRight.getLongitude();
     }
 
-    public Geopoint getCenter() {
+    public @NonNull
+    Geopoint getCenter() {
         return center;
     }
 
@@ -115,7 +118,8 @@ public class Viewport {
      *            multiplicative factor for the latitude and longitude span (> 1 to widen, < 1 to shrink)
      * @return a widened or shrunk viewport
      */
-    public Viewport resize(final double factor) {
+    public @NonNull
+    Viewport resize(final double factor) {
         return new Viewport(getCenter(), getLatitudeSpan() * factor, getLongitudeSpan() * factor);
     }
 
