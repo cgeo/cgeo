@@ -1,14 +1,22 @@
 package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.utils.RunnableWithArgument;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.drawable.Drawable;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
+import android.view.WindowManager;
+import android.widget.EditText;
 
 /**
  * Wrapper for {@link AlertDialog}. If you want to show a simple text, use one of the
@@ -288,4 +296,72 @@ public final class Dialogs {
         message(context, getString(title), getString(message), icon);
     }
 
+    /**
+     * Show a message dialog for input from the user. The okay button is only enabled on non empty input.
+     * 
+     * @param context
+     *            activity owning the dialog
+     * @param title
+     *            message dialog title
+     * @param defaultValue
+     *            default input value
+     * @param buttonTitle
+     *            title of the okay button
+     * @param okayListener
+     *            listener to be run on okay
+     */
+    public static void input(final Activity context, final int title, final String defaultValue, final int buttonTitle, final RunnableWithArgument<String> okayListener) {
+        final EditText input = new EditText(context);
+        input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_CLASS_TEXT);
+        input.setText(defaultValue);
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(title);
+        builder.setView(input);
+        builder.setPositiveButton(buttonTitle, new OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                okayListener.run(input.getText().toString());
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int whichButton) {
+                dialog.dismiss();
+            }
+        });
+        final AlertDialog dialog = builder.create();
+
+        input.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // empty
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // empty
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                enableDialogButtonIfNotEmpty(dialog, editable.toString());
+            }
+        });
+        // force keyboard
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+        // disable button
+        dialog.show();
+        enableDialogButtonIfNotEmpty(dialog, defaultValue);
+
+        // position cursor after text
+        input.setSelection(input.getText().length());
+    }
+
+    private static void enableDialogButtonIfNotEmpty(final AlertDialog dialog, final String input) {
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(StringUtils.isNotBlank(input));
+    }
 }

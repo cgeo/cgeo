@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.RunnableWithArgument;
 
 import org.apache.commons.lang3.StringUtils;
@@ -13,10 +14,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.TextWatcher;
-import android.widget.EditText;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -160,50 +157,17 @@ public final class StoredList extends AbstractList {
         }
 
         private void handleListNameInput(final String defaultValue, int dialogTitle, int buttonTitle, final RunnableWithArgument<String> runnable) {
-            final EditText input = new EditText(activity);
-            input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_CLASS_TEXT);
-            input.setText(defaultValue);
+            Dialogs.input(activity, dialogTitle, defaultValue, buttonTitle, new RunnableWithArgument<String>() {
 
-            final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-            builder.setTitle(dialogTitle);
-            builder.setView(input);
-            builder.setPositiveButton(buttonTitle, new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int whichButton) {
+                public void run(final String input) {
                     // remove whitespaces added by autocompletion of Android keyboard
-                    String listName = StringUtils.trim(input.getText().toString());
+                    String listName = StringUtils.trim(input);
                     if (StringUtils.isNotBlank(listName)) {
                         runnable.run(listName);
                     }
                 }
             });
-            builder.setNegativeButton(res.getString(R.string.list_dialog_cancel), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int whichButton) {
-                    dialog.dismiss();
-                }
-            });
-            final AlertDialog dialog = builder.create();
-            input.addTextChangedListener(new TextWatcher() {
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    // empty
-                }
-
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                    // empty
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-                    enableDialogButton(dialog, editable.toString());
-                }
-            });
-            dialog.show();
-            enableDialogButton(dialog, defaultValue);
-            input.setSelection(input.getText().length());
         }
 
         public void promptForListRename(final int listId, @NonNull final Runnable runAfterRename) {
@@ -218,9 +182,6 @@ public final class StoredList extends AbstractList {
             });
         }
 
-        private static void enableDialogButton(final AlertDialog dialog, final String input) {
-            dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(StringUtils.isNotBlank(input));
-        }
     }
 
     /**
