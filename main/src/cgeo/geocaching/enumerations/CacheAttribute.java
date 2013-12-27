@@ -113,7 +113,19 @@ public enum CacheAttribute {
     KIDS_2(-1, 70, "kids_2", R.drawable.attribute_kids_2, R.string.attribute_kids_2_yes, R.string.attribute_kids_2_no),
     HISTORIC_SITE(-1, 29, "historic_site", R.drawable.attribute_historic_site, R.string.attribute_historic_site_yes, R.string.attribute_historic_site_no),
     MAGNETIC(-1, 6, "magnetic", R.drawable.attribute_magnetic, R.string.attribute_magnetic_yes, R.string.attribute_magnetic_no),
-    USB_CACHE(-1, 10, "usb_cache", R.drawable.attribute_usb_cache, R.string.attribute_usb_cache_yes, R.string.attribute_usb_cache_no);
+    USB_CACHE(-1, 10, "usb_cache", R.drawable.attribute_usb_cache, R.string.attribute_usb_cache_yes, R.string.attribute_usb_cache_no),
+    SHOVEL(-1, 51, "shovel", R.drawable.attribute_shovel, R.string.attribute_shovel_yes, R.string.attribute_shovel_no),
+    SPECIFIC_ACCESS(-1, 73, "specific_access", R.drawable.attribute_specific_access, R.string.attribute_specific_access_yes, R.string.attribute_specific_access_no),
+    PEDESTRIAN_ONLY(-1, 20, "pedestrian_only", R.drawable.attribute_pedestrian_only, R.string.attribute_pedestrian_only_yes, R.string.attribute_pedestrian_only_no),
+    NATURE_CACHE(-1, 28, "nature_cache", R.drawable.attribute_nature_cache, R.string.attribute_nature_cache_yes, R.string.attribute_nature_cache_no),
+    BYOP(-1, 50, "byop", R.drawable.attribute_byop, R.string.attribute_byop_yes, R.string.attribute_byop_no),
+    SAFARI_CACHE(-1, 72, "safari_cache", R.drawable.attribute_safari_cache, R.string.attribute_safari_cache_yes, R.string.attribute_safari_cache_no),
+    QUICK_CACHE(-1, 68, "quick_cache", R.drawable.attribute_quick_cache, R.string.attribute_quick_cache_yes, R.string.attribute_quick_cache_no),
+    WHERIGO(-1, 3, "wherigo", R.drawable.attribute_wherigo, R.string.attribute_wherigo_yes, R.string.attribute_wherigo_no),
+    AUDIO_CACHE(-1, 7, "audio_cache", R.drawable.attribute_audio_cache, R.string.attribute_audio_cache_yes, R.string.attribute_audio_cache_no),
+    GEOHOTEL(-1, 5, "geohotel", R.drawable.attribute_geohotel, R.string.attribute_geohotel_yes, R.string.attribute_geohotel_no),
+    SURVEY_MARKER(-1, 2, "survey_marker", R.drawable.attribute_survey_marker, R.string.attribute_survey_marker_yes, R.string.attribute_survey_marker_no),
+    OFFSET_CACHE(-1, 8, "offset_cache", R.drawable.attribute_offset_cache, R.string.attribute_offset_cache_yes, R.string.attribute_offset_cache_no);
     // THIS LIST IS GENERATED: don't change anything here but read
     // project/attributes/readme.txt
 

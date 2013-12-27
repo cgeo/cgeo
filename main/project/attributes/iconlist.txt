@@ -116,16 +116,15 @@ kids_2            |      |      |    70 |  x  | PD      |                       
 historic_site     |      |      |    29 |     | PD      | Reuben                    | http://thenounproject.com/term/castle/12390/
 magnetic          |      |      |     6 |     | PD      |                           | http://thenounproject.com/term/magnet/698/
 usb_cache         |      |      |    10 |     | CCBY    | Kenneth van Alt           | http://thenounproject.com/term/usb/1824/
-### In need of icons
-survey_marker     |      |      |     2 |
-wherigo           |      |      |     3 |
-geohotel          |      |      |     5 |
-audio_cache       |      |      |     7 |
-offset_cache      |      |      |     8 |
-pedestrian_only   |      |      |    20 |
-nature_cache      |      |      |    28 |
-byop              |      |      |    50 |
-shovel            |      |      |    51 |
-quick_cache       |      |      |    68 |
-safari_cache      |      |      |    72 |
-specific_access   |      |      |    73 |
+shovel            |      |      |    51 |     | PD      | Luis Prado                | http://thenounproject.com/term/shovel/369/
+specific_access   |      |      |    73 |     | PD      | Desbenoit                 | http://thenounproject.com/term/clock/1164/
+pedestrian_only   |      |      |    20 |     | PD      | Reuben                    | http://thenounproject.com/term/walking/24068/
+nature_cache      |      |      |    28 |     | PD      | Shane Herzog              | http://thenounproject.com/term/tree/17078/
+byop              |      |      |    50 |     | PD      | JM Waideaswaran           | http://thenounproject.com/term/pencil/14435/
+safari_cache      |      |      |    72 |     | PD      | rsudev, John Hoogstrate   | http://thenounproject.com/term/camera/1513/, http://thenounproject.com/term/flag/1666/
+quick_cache       |      |      |    68 |     | PD      | Mike Wirth                | http://thenounproject.com/term/hour-glass/2486/
+wherigo           |      |      |     3 |     | PD      | Larissa Mancia            | http://thenounproject.com/term/clapperboard/1650/
+audio_cache       |      |      |     7 |     | PD      | Michael Martin-Smucker    | http://thenounproject.com/term/headphones/7213/
+geohotel          |      |      |     5 |     | CCBYNCSA| rsudev, Marcela Machuca, geokrety.org | http://thenounproject.com/term/hotel/12799/, geokrety.org
+survey_marker     |      |      |     2 |     | PD      | rsudev                    | selfmade
+offset_cache      |      |      |     8 |     | PD      | rsudev, S.Shohei          | selfmade, http://thenounproject.com/term/arrow/5582/

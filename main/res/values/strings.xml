@@ -1171,6 +1171,30 @@
     <string name="attribute_magnetic_no">No magnetic cache</string>
     <string name="attribute_usb_cache_yes">Dead drop USB cache</string>
     <string name="attribute_usb_cache_no">No dead drop USB cache</string>
+    <string name="attribute_shovel_yes">You may need a shovel</string>
+    <string name="attribute_shovel_no">You don\'t need a shovel</string>
+    <string name="attribute_specific_access_yes">Available at specified hours (may require access fee)</string>
+    <string name="attribute_specific_access_no">Available at all times</string>
+    <string name="attribute_pedestrian_only_yes">Access only by walk</string>
+    <string name="attribute_pedestrian_only_no">Access not only by walk</string>
+    <string name="attribute_nature_cache_yes">Hidden in natural surroundings (forests, mountains, etc.)</string>
+    <string name="attribute_nature_cache_no">Not hidden in natural surroundings</string>
+    <string name="attribute_byop_yes">Take something to write</string>
+    <string name="attribute_byop_no">Own pencil not necessary</string>
+    <string name="attribute_safari_cache_yes">Reverse cache</string>
+    <string name="attribute_safari_cache_no">No reverse cache</string>
+    <string name="attribute_quick_cache_yes">Quick cache</string>
+    <string name="attribute_quick_cache_no">Not a quick cache</string>
+    <string name="attribute_wherigo_yes">Wherigo cache</string>
+    <string name="attribute_wherigo_no">No Wherigo cache</string>
+    <string name="attribute_audio_cache_yes">Description contains an audio file</string>
+    <string name="attribute_audio_cache_no">Description doesn\'t contain an audio file</string>
+    <string name="attribute_geohotel_yes">GeoHotel cache</string>
+    <string name="attribute_geohotel_no">No GeoHotel cache</string>
+    <string name="attribute_survey_marker_yes">Near a Survey Marker</string>
+    <string name="attribute_survey_marker_no">Not near a Survey Marker</string>
+    <string name="attribute_offset_cache_yes">Offset cache</string>
+    <string name="attribute_offset_cache_no">No offset cache</string>
 
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
