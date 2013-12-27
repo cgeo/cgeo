@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.ec;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.connector.LogResult;
+import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
@@ -35,7 +36,7 @@ import java.util.TimeZone;
 
 public class ECApi {
 
-    private static final String API_HOST = "http://extremcaching.com/exports/";
+    private static final String API_HOST = "https://extremcaching.com/exports/";
 
     private static final FastDateFormat LOG_DATE_FORMAT = FastDateFormat.getInstance("yyyy-MM-dd HH:mm:ss.SSSZ", TimeZone.getTimeZone("UTC"), Locale.US);
 
@@ -44,7 +45,7 @@ public class ECApi {
     }
 
     public static Geocache searchByGeoCode(final String geocode) {
-        final Parameters params = new Parameters("id", cleanCode(geocode), "cgeo", "1");
+        final Parameters params = new Parameters("id", cleanCode(geocode), "cgeo", "1", "sid", ECLogin.getInstance().getSessionId());
         final HttpResponse response = apiRequest("gpx.php", params);
 
         final Collection<Geocache> caches = importCachesFromGPXResponse(response);
@@ -126,6 +127,7 @@ public class ECApi {
     }
 
     private static HttpResponse apiRequest(final String uri, final Parameters params, final boolean isRetry) {
+        params.add("sid", ECLogin.getInstance().getSessionId());
         final HttpResponse response = Network.getRequest(API_HOST + uri, params);
 
         if (response == null) {
@@ -192,6 +194,7 @@ public class ECApi {
             cache.setType(getCacheType(response.getString("type")));
             cache.setDifficulty((float) response.getDouble("difficulty"));
             cache.setTerrain((float) response.getDouble("terrain"));
+            cache.setSize(CacheSize.getById(response.getString("size")));
             cache.setFound(response.getInt("found") == 1 ? true : false);
 
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_CACHE));
