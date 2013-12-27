@@ -8,18 +8,36 @@ import cgeo.geocaching.maps.interfaces.OverlayImpl;
 import android.app.Activity;
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.location.Location;
+
+import java.util.ArrayList;
 
 public class PositionAndScaleOverlay implements GeneralOverlay {
     private OverlayImpl ovlImpl = null;
 
-    //  PositionDrawer positionDrawer = null;
-
-    //    ScaleDrawer scaleDrawer = null;
+    PositionDrawer positionDrawer = null;
+    ScaleDrawer scaleDrawer = null;
 
     public PositionAndScaleOverlay(Activity activity, OverlayImpl ovlImpl) {
         this.ovlImpl = ovlImpl;
-        //        positionDrawer = new PositionDrawer(activity);
-        //scaleDrawer = new ScaleDrawer(activity);
+        positionDrawer = new PositionDrawer(activity);
+        scaleDrawer = new ScaleDrawer(activity);
+    }
+
+    public void setCoordinates(Location coordinatesIn) {
+        positionDrawer.setCoordinates(coordinatesIn);
+    }
+
+    public Location getCoordinates() {
+        return positionDrawer.getCoordinates();
+    }
+
+    public void setHeading(float bearingNow) {
+        positionDrawer.setHeading(bearingNow);
+    }
+
+    public float getHeading() {
+        return positionDrawer.getHeading();
     }
 
     @Override
@@ -36,8 +54,8 @@ public class PositionAndScaleOverlay implements GeneralOverlay {
     }
 
     private void drawInternal(Canvas canvas, MapProjectionImpl projection, MapViewImpl mapView) {
-        //    positionDrawer.drawPosition(canvas, projection);
-        //        scaleDrawer.drawScale(canvas, mapView);
+        positionDrawer.drawPosition(canvas, projection);
+        scaleDrawer.drawScale(canvas, mapView);
     }
 
     @Override
@@ -45,4 +63,11 @@ public class PositionAndScaleOverlay implements GeneralOverlay {
         return this.ovlImpl;
     }
 
+    public ArrayList<Location> getHistory() {
+        return positionDrawer.getHistory();
+    }
+
+    public void setHistory(ArrayList<Location> history) {
+        positionDrawer.setHistory(history);
+    }
 }

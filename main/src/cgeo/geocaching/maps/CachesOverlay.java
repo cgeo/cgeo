@@ -1,11 +1,11 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CachePopup;
-import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IWaypoint;
 import cgeo.geocaching.R;
 import cgeo.geocaching.WaypointPopup;
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.connector.gc.GCMap;
 import cgeo.geocaching.enumerations.CacheType;
@@ -23,7 +23,6 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.Canvas;
@@ -48,10 +47,8 @@ public class CachesOverlay extends AbstractItemizedOverlay {
     private PaintFlagsDrawFilter setFilter = null;
     private PaintFlagsDrawFilter removeFilter = null;
     private MapItemFactory mapItemFactory = null;
-    private ScaleDrawer scaleDrawer = null;
-    private PositionDrawer positionDrawer;
 
-    public CachesOverlay(ItemizedOverlayImpl ovlImpl, Context contextIn, Activity activity) {
+    public CachesOverlay(ItemizedOverlayImpl ovlImpl, Context contextIn) {
         super(ovlImpl);
 
         populate();
@@ -60,8 +57,6 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
         final MapProvider mapProvider = Settings.getMapProvider();
         mapItemFactory = mapProvider.getMapItemFactory();
-        positionDrawer = new PositionDrawer(activity);
-        scaleDrawer = new ScaleDrawer(activity);
     }
 
     void updateItems(CachesOverlayItemImpl item) {
@@ -102,95 +97,59 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
     @Override
     public void draw(Canvas canvas, MapViewImpl mapView, boolean shadow) {
-        drawInternalBefore(canvas, mapView.getMapProjection(), mapView);
+
+        drawInternal(canvas, mapView.getMapProjection());
+
         super.draw(canvas, mapView, false);
-        drawInternalAfter(canvas, mapView.getMapProjection(), mapView);
     }
 
     @Override
     public void drawOverlayBitmap(Canvas canvas, Point drawPosition,
             MapProjectionImpl projection, byte drawZoomLevel) {
-        drawInternalBefore(canvas, projection, getOverlayImpl().getMapViewImpl());
+
+        drawInternal(canvas, projection);
+
         super.drawOverlayBitmap(canvas, drawPosition, projection, drawZoomLevel);
-        drawInternalAfter(canvas, projection, getOverlayImpl().getMapViewImpl());
     }
 
-    private void drawInternalBefore(Canvas canvas, MapProjectionImpl projection, MapViewImpl mapView) {
-        // prevent content changes
-        getOverlayImpl().lock();
-        try {
-            drawCircles(canvas, projection);
-        } finally {
-            getOverlayImpl().unlock();
-        }
-    }
-
-    private void drawInternalAfter(Canvas canvas, MapProjectionImpl projection, MapViewImpl mapView) {
-        // prevent content changes
-        getOverlayImpl().lock();
-        try {
-            scaleDrawer.drawScale(canvas, mapView);
-            positionDrawer.drawPosition(canvas, projection);
-        } finally {
-            getOverlayImpl().unlock();
-        }
-    }
-
-    private void drawCircles(Canvas canvas, MapProjectionImpl projection) {
+    private void drawInternal(Canvas canvas, MapProjectionImpl projection) {
         if (!displayCircles || items.isEmpty()) {
             return;
         }
-        lazyInitializeDrawingObjects();
-        canvas.setDrawFilter(setFilter);
-        final int height = canvas.getHeight();
-        final int width = canvas.getWidth();
 
-        final int radius = calculateDrawingRadius(projection);
-        final Point center = new Point();
+        // prevent content changes
+        getOverlayImpl().lock();
+        try {
+            lazyInitializeDrawingObjects();
+            canvas.setDrawFilter(setFilter);
+            final int height = canvas.getHeight();
+            final int width = canvas.getWidth();
 
-        for (CachesOverlayItemImpl item : items) {
-            if (item.applyDistanceRule()) {
-                final Geopoint itemCoord = item.getCoord().getCoords();
-                final GeoPointImpl itemGeo = mapItemFactory.getGeoPointBase(itemCoord);
-                projection.toPixels(itemGeo, center);
-                if (center.x > -radius && center.y > -radius && center.x < width + radius && center.y < height + radius) {
-                    // dashed circle around the waypoint
-                    blockedCircle.setColor(0x66BB0000);
-                    blockedCircle.setStyle(Style.STROKE);
-                    canvas.drawCircle(center.x, center.y, radius, blockedCircle);
+            final int radius = calculateDrawingRadius(projection);
+            final Point center = new Point();
 
-                    // filling the circle area with a transparent color
-                    blockedCircle.setColor(0x44BB0000);
-                    blockedCircle.setStyle(Style.FILL);
-                    canvas.drawCircle(center.x, center.y, radius, blockedCircle);
+            for (CachesOverlayItemImpl item : items) {
+                if (item.applyDistanceRule()) {
+                    final Geopoint itemCoord = item.getCoord().getCoords();
+                    final GeoPointImpl itemGeo = mapItemFactory.getGeoPointBase(itemCoord);
+                    projection.toPixels(itemGeo, center);
+                    if (center.x > -radius && center.y > -radius && center.x < width + radius && center.y < height + radius) {
+                        // dashed circle around the waypoint
+                        blockedCircle.setColor(0x66BB0000);
+                        blockedCircle.setStyle(Style.STROKE);
+                        canvas.drawCircle(center.x, center.y, radius, blockedCircle);
+
+                        // filling the circle area with a transparent color
+                        blockedCircle.setColor(0x44BB0000);
+                        blockedCircle.setStyle(Style.FILL);
+                        canvas.drawCircle(center.x, center.y, radius, blockedCircle);
+                    }
                 }
             }
+            canvas.setDrawFilter(removeFilter);
+        } finally {
+            getOverlayImpl().unlock();
         }
-        canvas.setDrawFilter(removeFilter);
-    }
-
-    public void setCoordinates(Location coordinatesIn) {
-        positionDrawer.setCoordinates(coordinatesIn);
-    }
-
-    public Location getCoordinates() {
-        return positionDrawer.getCoordinates();
-    }
-
-    public void setHeading(float bearingNow) {
-        positionDrawer.setHeading(bearingNow);
-    }
-
-    public float getHeading() {
-        return positionDrawer.getHeading();
-    }
-
-    public ArrayList<Location> getHistory() {
-        return positionDrawer.getHistory();
-    }
-
-    public void setHistory(ArrayList<Location> history) {
-        positionDrawer.setHistory(history);
     }
 
     /**

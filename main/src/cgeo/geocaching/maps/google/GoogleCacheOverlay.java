@@ -8,7 +8,6 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapView;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
@@ -25,9 +24,9 @@ public class GoogleCacheOverlay extends ItemizedOverlay<GoogleCacheOverlayItem> 
     private CachesOverlay base;
     private Lock lock = new ReentrantLock();
 
-    public GoogleCacheOverlay(Context contextIn, Drawable markerIn, Activity activity) {
+    public GoogleCacheOverlay(Context contextIn, Drawable markerIn) {
         super(boundCenterBottom(markerIn));
-        base = new CachesOverlay(this, contextIn, activity);
+        base = new CachesOverlay(this, contextIn);
     }
 
     @Override

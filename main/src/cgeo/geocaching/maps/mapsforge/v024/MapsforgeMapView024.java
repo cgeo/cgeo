@@ -92,9 +92,9 @@ public class MapsforgeMapView024 extends MapView implements MapViewImpl {
     }
 
     @Override
-    public CachesOverlay createAddMapOverlay(Context context, Drawable drawable, Activity activity) {
+    public CachesOverlay createAddMapOverlay(Context context, Drawable drawable) {
 
-        MapsforgeCacheOverlay ovl = new MapsforgeCacheOverlay(context, drawable, activity);
+        MapsforgeCacheOverlay ovl = new MapsforgeCacheOverlay(context, drawable);
         getOverlays().add(ovl);
         return ovl.getBase();
     }
