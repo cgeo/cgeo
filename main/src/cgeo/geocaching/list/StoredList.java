@@ -13,7 +13,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.view.View;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.widget.EditText;
 
 import java.text.Collator;
@@ -158,14 +160,14 @@ public final class StoredList extends AbstractList {
         }
 
         private void handleListNameInput(final String defaultValue, int dialogTitle, int buttonTitle, final RunnableWithArgument<String> runnable) {
-            final AlertDialog.Builder alert = new AlertDialog.Builder(activity);
-            final View view = activity.getLayoutInflater().inflate(R.layout.list_create_dialog, null);
-            final EditText input = (EditText) view.findViewById(R.id.text);
+            final EditText input = new EditText(activity);
+            input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_CLASS_TEXT);
             input.setText(defaultValue);
 
-            alert.setTitle(dialogTitle);
-            alert.setView(view);
-            alert.setPositiveButton(buttonTitle, new DialogInterface.OnClickListener() {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            builder.setTitle(dialogTitle);
+            builder.setView(input);
+            builder.setPositiveButton(buttonTitle, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int whichButton) {
                     // remove whitespaces added by autocompletion of Android keyboard
@@ -175,14 +177,33 @@ public final class StoredList extends AbstractList {
                     }
                 }
             });
-            alert.setNegativeButton(res.getString(R.string.list_dialog_cancel), new DialogInterface.OnClickListener() {
+            builder.setNegativeButton(res.getString(R.string.list_dialog_cancel), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int whichButton) {
                     dialog.dismiss();
                 }
             });
+            final AlertDialog dialog = builder.create();
+            input.addTextChangedListener(new TextWatcher() {
 
-            alert.show();
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    // empty
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    // empty
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    enableDialogButton(dialog, editable.toString());
+                }
+            });
+            dialog.show();
+            enableDialogButton(dialog, defaultValue);
+            input.setSelection(input.getText().length());
         }
 
         public void promptForListRename(final int listId, @NonNull final Runnable runAfterRename) {
@@ -195,6 +216,10 @@ public final class StoredList extends AbstractList {
                     runAfterRename.run();
                 }
             });
+        }
+
+        private static void enableDialogButton(final AlertDialog dialog, final String input) {
+            dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(StringUtils.isNotBlank(input));
         }
     }
 
