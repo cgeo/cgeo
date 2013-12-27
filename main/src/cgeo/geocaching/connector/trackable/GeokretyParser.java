@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.utils.Log;
 
+import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -35,22 +36,26 @@ public class GeokretyParser {
             @Override
             public void start(Attributes attributes) {
                 try {
-                    final int indexId = attributes.getIndex("id");
-                    if (indexId > -1) {
-                        trackable.setGeocode(geocode(Integer.parseInt(attributes.getValue("id"))));
+                    final String kretyId = attributes.getValue("id");
+                    if (StringUtils.isNotBlank(kretyId)) {
+                        trackable.setGeocode(geocode(Integer.parseInt(kretyId)));
                     }
-                    final int indexDist = attributes.getIndex("dist");
-                    if (indexDist > -1) {
-                        trackable.setDistance(Float.parseFloat(attributes.getValue("dist")));
+                    final String distance = attributes.getValue("dist");
+                    if (StringUtils.isNotBlank(distance)) {
+                        trackable.setDistance(Float.parseFloat(distance));
                     }
-                    final int indexType = attributes.getIndex("type");
-                    if (indexType > -1) {
-                        trackable.setType(getType(Integer.parseInt(attributes.getValue("type"))));
+                    final String kretyType = attributes.getValue("type");
+                    if (StringUtils.isNotBlank(kretyType)) {
+                        trackable.setType(getType(Integer.parseInt(kretyType)));
                     }
-                    final int indexWaypoint = attributes.getIndex("waypoint");
-                    if (indexWaypoint > -1) {
-                        trackable.setSpottedName(attributes.getValue(indexWaypoint));
+                    final String waypointCode = attributes.getValue("waypoint");
+                    if (StringUtils.isNotBlank(waypointCode)) {
+                        trackable.setSpottedName(waypointCode);
                         trackable.setSpottedType(Trackable.SPOTTED_CACHE);
+                    }
+                    final String imageName = attributes.getValue("image");
+                    if (StringUtils.isNotBlank(imageName)) {
+                        trackable.setImage("http://geokrety.org/obrazki/" + imageName);
                     }
                 } catch (final NumberFormatException e) {
                     Log.e("Parsing geokret", e);
