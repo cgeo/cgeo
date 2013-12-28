@@ -31,7 +31,6 @@ import cgeo.geocaching.ui.EditNoteDialog.EditNoteDialogListener;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.HtmlImageCounter;
 import cgeo.geocaching.ui.ImagesList;
-import cgeo.geocaching.ui.IndexOutOfBoundsAvoidingTextView;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.ui.OwnerActionsClickListener;
 import cgeo.geocaching.ui.WeakReferenceHandler;
@@ -1655,15 +1654,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
      */
     private class LoadDescriptionTask extends AsyncTask<Object, Void, Void> {
         private final View loadingIndicatorView;
-        private final IndexOutOfBoundsAvoidingTextView descriptionView;
+        private final TextView descriptionView;
         private final String descriptionString;
         private Spanned description;
         private final View shortDescView;
 
         public LoadDescriptionTask(final String description, final View descriptionView, final View loadingIndicatorView, final View shortDescView) {
-            assert descriptionView instanceof IndexOutOfBoundsAvoidingTextView;
             this.descriptionString = description;
-            this.descriptionView = (IndexOutOfBoundsAvoidingTextView) descriptionView;
+            this.descriptionView = (TextView) descriptionView;
             this.loadingIndicatorView = loadingIndicatorView;
             this.shortDescView = shortDescView;
         }
