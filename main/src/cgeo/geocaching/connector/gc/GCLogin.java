@@ -473,10 +473,9 @@ public class GCLogin extends AbstractLogin {
      *
      * @return first is user session, second is session token
      */
-    public static @NonNull
+    public @NonNull
     MapTokens getMapTokens() {
-        final HttpResponse response = Network.getRequest(GCConstants.URL_LIVE_MAP);
-        final String data = Network.getResponseData(response);
+        final String data = getRequestLogged(GCConstants.URL_LIVE_MAP, null);
         final String userSession = TextUtils.getMatch(data, GCConstants.PATTERN_USERSESSION, "");
         final String sessionToken = TextUtils.getMatch(data, GCConstants.PATTERN_SESSIONTOKEN, "");
         return new MapTokens(userSession, sessionToken);

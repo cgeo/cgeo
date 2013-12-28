@@ -1161,29 +1161,19 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         public void run() {
             try {
                 showProgressHandler.sendEmptyMessage(SHOW_PROGRESS); // show progress
-
-                int count = 0;
-                SearchResult searchResult;
-                do {
-
+                SearchResult searchResult = new SearchResult();
+                if (Settings.isGCConnectorActive()) {
                     if (tokens == null) {
-                        tokens = GCLogin.getMapTokens();
+                        tokens = GCLogin.getInstance().getMapTokens();
                         if (noMapTokenHandler != null && (StringUtils.isEmpty(tokens.getUserSession()) || StringUtils.isEmpty(tokens.getSessionToken()))) {
+                            tokens = null;
                             noMapTokenHandler.sendEmptyMessage(0);
                         }
                     }
 
                     searchResult = ConnectorFactory.searchByViewport(viewport.resize(0.8), tokens);
                     downloaded = true;
-                    if (searchResult.getError() == StatusCode.NOT_LOGGED_IN && Settings.isGCConnectorActive()) {
-                        GCLogin.getInstance().login();
-                        tokens = null;
-                    } else {
-                        break;
-                    }
-                    count++;
-
-                } while (count < 2);
+                }
 
                 Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
                 CGeoMap.filter(result);
