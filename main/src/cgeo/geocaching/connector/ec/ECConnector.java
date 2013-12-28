@@ -132,10 +132,6 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
         // login
         final StatusCode status = ECLogin.getInstance().login();
 
-        if (status == StatusCode.NO_ERROR) {
-            CgeoApplication.getInstance().checkLogin = false;
-        }
-
         if (CgeoApplication.getInstance().showLoginToast && handler != null) {
             handler.sendMessage(handler.obtainMessage(0, status));
             CgeoApplication.getInstance().showLoginToast = false;

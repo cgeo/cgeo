@@ -16,7 +16,7 @@ public class CgeoApplication extends Application {
 
     private volatile GeoDataProvider geo;
     private volatile DirectionProvider dir;
-    public boolean checkLogin = true; // c:geo is just launched
+    private boolean forceRelog = false; // c:geo needs to log into cache providers
     public boolean showLoginToast = true; //login toast shown just once.
     private boolean liveMapHintShown = false; // livemap hint has been shown
     final private StatusUpdater statusUpdater = new StatusUpdater();
@@ -148,6 +148,24 @@ public class CgeoApplication extends Application {
 
     public void setLiveMapHintShown() {
         liveMapHintShown = true;
+    }
+
+    /**
+     * Check if cgeo must relog even if already logged in.
+     *
+     * @return <code>true</code> if it is necessary to relog
+     */
+    public boolean mustRelog() {
+        final boolean mustLogin = forceRelog;
+        forceRelog = false;
+        return mustLogin;
+    }
+
+    /**
+     * Force cgeo to relog when reaching the main activity.
+     */
+    public void forceRelog() {
+        forceRelog = true;
     }
 
 }

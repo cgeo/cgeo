@@ -494,7 +494,7 @@ public class SettingsActivity extends PreferenceActivity {
                 preference.setSummary(mapSource.getName());
             } else if (isPreference(preference, R.string.pref_connectorOCActive) || isPreference(preference, R.string.pref_connectorOCPLActive) || isPreference(preference, R.string.pref_connectorGCActive) || isPreference(preference, R.string.pref_connectorECActive)) {
                 // // reset log-in status if connector activation was changed
-                CgeoApplication.getInstance().checkLogin = true;
+                CgeoApplication.getInstance().forceRelog();
             } else if (preference instanceof ListPreference) {
                 // For list preferences, look up the correct display value in
                 // the preference's 'entries' list.
@@ -520,12 +520,13 @@ public class SettingsActivity extends PreferenceActivity {
                 // simple string representation.
                 preference.setSummary(stringValue);
             }
+            // TODO: do not special case geocaching.com here
             if ((isPreference(preference, R.string.pref_username) && !stringValue.equals(Settings.getUsername())) || (isPreference(preference, R.string.pref_password) && !stringValue.equals(Settings.getGcCredentials().getRight()))) {
                 // reset log-in if gc user or password is changed
                 if (GCLogin.getInstance().isActualLoginStatus()) {
                     GCLogin.getInstance().logout();
                 }
-                CgeoApplication.getInstance().checkLogin = true;
+                CgeoApplication.getInstance().forceRelog();
             }
             return true;
         }

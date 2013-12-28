@@ -1,8 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ILogin;
@@ -22,9 +19,10 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RunnableWithArgument;
 import cgeo.geocaching.utils.Version;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -232,7 +230,26 @@ public class MainActivity extends AbstractActivity {
         locationUpdater.startGeo();
         satellitesHandler.startGeo();
         updateUserInfoHandler.sendEmptyMessage(-1);
+        startBackgroundLogin();
         init();
+    }
+
+    private void startBackgroundLogin() {
+        assert(app != null);
+
+        (new Thread() {
+            @Override
+            public void run() {
+                final boolean mustLogin = app.mustRelog();
+
+                for (final ILogin conn : ConnectorFactory.getActiveLiveConnectors()) {
+                    if (mustLogin || !conn.isLoggedIn()) {
+                        conn.login(firstLoginHandler, MainActivity.this);
+                        updateUserInfoHandler.sendEmptyMessage(-1);
+                    }
+                }
+            }
+        }).start();
     }
 
     @Override
@@ -342,11 +359,6 @@ public class MainActivity extends AbstractActivity {
     }
 
     private void init() {
-
-        if (app.checkLogin) {
-            (new FirstLoginThread()).start();
-        }
-
         if (initialized) {
             return;
         }
@@ -696,23 +708,6 @@ public class MainActivity extends AbstractActivity {
 
             if (version > 0) {
                 Settings.setVersion(version);
-            }
-        }
-    }
-
-    private class FirstLoginThread extends Thread {
-
-        @Override
-        public void run() {
-            if (app == null) {
-                return;
-            }
-
-            ILogin[] conns = ConnectorFactory.getActiveLiveConnectors();
-
-            for (ILogin conn : conns) {
-                conn.login(firstLoginHandler, MainActivity.this);
-                updateUserInfoHandler.sendEmptyMessage(-1);
             }
         }
     }
