@@ -4,22 +4,22 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractLogin;
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.TextUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.Nullable;
-
-import java.util.regex.Matcher;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class ECLogin extends AbstractLogin {
+
+    protected String sessionId = null;
 
     private ECLogin() {
         // singleton
@@ -44,53 +44,28 @@ public class ECLogin extends AbstractLogin {
         }
 
         setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
-        HttpResponse loginResponse = Network.getRequest("https://extremcaching.com/community/profil1");
+
+        final Parameters params = new Parameters("user", login.left, "pass", login.right);
+        HttpResponse loginResponse = Network.postRequest("https://extremcaching.com/exports/apilogin.php", params);
+
         String loginData = Network.getResponseData(loginResponse);
 
         if (StringUtils.isBlank(loginData)) {
-            Log.e("ECLogin.login: Failed to retrieve login page (1st)");
+            Log.e("ECLogin.login: Failed to retrieve login data");
             return StatusCode.CONNECTION_FAILED_EC; // no login page
         }
 
-        if (getLoginStatus(loginData)) {
-            Log.i("Already logged in Extremcaching.com as " + login.left);
-            return StatusCode.NO_ERROR; // logged in
+        assert loginData != null;
+
+        if (loginData.contains("Wrong username or password")) { // hardcoded in English
+            Log.i("Failed to log in Extremcaching.com as " + login.left + " because of wrong username/password");
+            return StatusCode.WRONG_LOGIN_DATA; // wrong login
         }
-
-        final Parameters params = new Parameters(
-                "username", login.left,
-                "password", login.right,
-                "remember", "yes");
-
-        Matcher m = ECConstants.PATTERN_LOGIN_SECURITY.matcher(loginData);
-        if (m.find() && m.groupCount() == 2) {
-            params.add("return", m.group(1));
-            params.add(m.group(2), "1");
-        } else {
-            Log.e("ECLogin.login security tokens in login form not found");
-            return StatusCode.COMMUNICATION_ERROR;
-        }
-
-        loginResponse = Network.postRequest("http://extremcaching.com/component/users/?task=user.login", params);
-        loginData = Network.getResponseData(loginResponse);
-
-        if (StringUtils.isBlank(loginData)) {
-            Log.e("ECLogin.login: Failed to retrieve login page (2nd)");
-            return StatusCode.COMMUNICATION_ERROR; // no login page
-        }
-        assert loginData != null;  // Caught above
 
         if (getLoginStatus(loginData)) {
             Log.i("Successfully logged in Extremcaching.com as " + login.left);
 
-            Settings.setCookieStore(Cookies.dumpCookieStore());
-
             return StatusCode.NO_ERROR; // logged in
-        }
-
-        if (loginData.contains("Benutzername und Passwort falsch")) { // Yes, it's hardcoded in German (translation is done using Javascript and Google Translate)
-            Log.i("Failed to log in Extremcaching.com as " + login.left + " because of wrong username/password");
-            return StatusCode.WRONG_LOGIN_DATA; // wrong login
         }
 
         Log.i("Failed to log in Extremcaching.com as " + login.left + " for some unknown reason");
@@ -105,34 +80,49 @@ public class ECLogin extends AbstractLogin {
     /**
      * Check if the user has been logged in when he retrieved the data.
      *
-     * @param page
+     * @param data
      * @return <code>true</code> if user is logged in, <code>false</code> otherwise
      */
-    public boolean getLoginStatus(@Nullable final String page) {
-        if (StringUtils.isBlank(page)) {
-            Log.e("ECLogin.getLoginStatus: No page given");
+    public boolean getLoginStatus(@Nullable final String data) {
+        if (StringUtils.isBlank(data) || StringUtils.equals(data, "[]")) {
+            Log.e("ECLogin.getLoginStatus: No or empty data given");
             return false;
         }
-        assert page != null;
+        assert data != null;
 
         setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_ok));
 
-        // on every page except login page
-        setActualLoginStatus(TextUtils.matches(page, ECConstants.PATTERN_LOGIN_NAME));
-        if (isActualLoginStatus()) {
-            setActualUserName(TextUtils.getMatch(page, ECConstants.PATTERN_LOGIN_NAME, true, "???"));
-            int cachesCount = 0;
-            try {
-                cachesCount = Integer.parseInt(TextUtils.getMatch(page, ECConstants.PATTERN_CACHES_FOUND, true, "0"));
-            } catch (final NumberFormatException e) {
-                Log.e("ECLogin.getLoginStatus: bad cache count", e);
+        try {
+            final JSONObject json = new JSONObject(data);
+
+            final String sid = json.getString("sid");
+            if (!StringUtils.isBlank(sid)) {
+                sessionId = sid;
+                setActualLoginStatus(true);
+                setActualUserName(json.getString("username"));
+                setActualCachesFound(json.getInt("found"));
+                return true;
             }
-            setActualCachesFound(cachesCount);
-            return true;
+            resetLoginStatus();
+        } catch (final JSONException e) {
+            Log.e("ECLogin.getLoginStatus", e);
         }
 
         setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_failed));
         return false;
+    }
+
+    @Override
+    protected void resetLoginStatus() {
+        sessionId = null;
+        setActualLoginStatus(false);
+    }
+
+    public String getSessionId() {
+        if (!StringUtils.isBlank(sessionId) || login() == StatusCode.NO_ERROR) {
+            return sessionId;
+        }
+        return StringUtils.EMPTY;
     }
 
 }
