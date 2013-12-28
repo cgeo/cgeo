@@ -44,7 +44,7 @@ public interface MapViewImpl {
 
     Context getContext();
 
-    CachesOverlay createAddMapOverlay(Context context, Drawable drawable);
+    CachesOverlay createAddMapOverlay(Context context, Drawable drawable, Activity activity);
 
     PositionAndScaleOverlay createAddPositionAndScaleOverlay(Activity activity);
 
@@ -75,7 +75,7 @@ public interface MapViewImpl {
     /**
      * Indicates if the current map view supports different themes
      * for map rendering
-     * 
+     *
      * @return true - supports custom themes, false - does not support custom themes
      */
     boolean hasMapThemes();
