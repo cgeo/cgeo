@@ -26,6 +26,7 @@ import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.test.Compare;
 
+import junit.framework.Assert;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -33,8 +34,6 @@ import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import java.util.GregorianCalendar;
-
-import junit.framework.Assert;
 
 /**
  * The c:geo application test. It can be used for tests that require an
@@ -299,7 +298,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     final GC2CJPF mockedCache = new GC2CJPF();
                     deleteCacheFromDB(mockedCache.getGeocode());
 
-                    final MapTokens tokens = GCLogin.getMapTokens();
+                    final MapTokens tokens = GCLogin.getInstance().getMapTokens();
                     final Viewport viewport = new Viewport(mockedCache, 0.003, 0.003);
 
                     // check coords for DETAILED
@@ -340,7 +339,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     public static void testSearchByViewportNotLoggedIn() {
         withMockedLoginDo(new Runnable() {
 
-            public void run() {
+            public void Crun() {
                 final Strategy strategy = Settings.getLiveMapStrategy();
                 final Strategy testStrategy = Strategy.FAST; // FASTEST, FAST or DETAILED for tests
                 Settings.setLiveMapStrategy(testStrategy);

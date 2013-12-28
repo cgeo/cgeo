@@ -22,7 +22,7 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
             Settings.setCacheType(CacheType.ALL);
             GCLogin.getInstance().login();
 
-            final MapTokens tokens = GCLogin.getMapTokens();
+            final MapTokens tokens = GCLogin.getInstance().getMapTokens();
 
             {
                 final Viewport viewport = new Viewport(new Geopoint("N 52° 25.369 E 9° 35.499"), new Geopoint("N 52° 25.600 E 9° 36.200"));
