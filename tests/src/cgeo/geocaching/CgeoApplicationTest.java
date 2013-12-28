@@ -339,7 +339,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     public static void testSearchByViewportNotLoggedIn() {
         withMockedLoginDo(new Runnable() {
 
-            public void Crun() {
+            public void run() {
                 final Strategy strategy = Settings.getLiveMapStrategy();
                 final Strategy testStrategy = Strategy.FAST; // FASTEST, FAST or DETAILED for tests
                 Settings.setLiveMapStrategy(testStrategy);
