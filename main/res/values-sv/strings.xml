@@ -302,7 +302,6 @@
   <string name="list_all_lists">Alla cacher</string>
   <string name="list_dialog_create_title">Ny lista</string>
   <string name="list_dialog_create">Skapa</string>
-  <string name="list_dialog_cancel">Avbryt</string>
   <string name="list_dialog_create_ok">Den nya listan har skapats</string>
   <string name="list_dialog_create_err">c:geo misslyckades med att skapa den nya listan</string>
   <string name="list_dialog_remove_title">Ta bort lista</string>

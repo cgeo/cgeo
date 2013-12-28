@@ -273,7 +273,6 @@
   <string name="list_all_lists">Az összes geoláda</string>
   <string name="list_dialog_create_title">Új lista</string>
   <string name="list_dialog_create">Létrehozás</string>
-  <string name="list_dialog_cancel">Mégsem</string>
   <string name="list_dialog_create_ok">Az új lista létrejött</string>
   <string name="list_dialog_create_err">a c:geo-nak nem sikerült az új lista létrehozása</string>
   <string name="list_dialog_remove_title">Lista eltávolítása</string>

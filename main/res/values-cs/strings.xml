@@ -302,7 +302,6 @@
   <string name="list_all_lists">Všechny keše</string>
   <string name="list_dialog_create_title">Nový seznam</string>
   <string name="list_dialog_create">Vytvořit</string>
-  <string name="list_dialog_cancel">Zrušit</string>
   <string name="list_dialog_create_ok">Nový seznam byl vytvořen</string>
   <string name="list_dialog_create_err">c:geo nedokázalo vytvořit nový seznam</string>
   <string name="list_dialog_remove_title">Odstranit seznam</string>

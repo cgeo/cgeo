@@ -308,7 +308,6 @@
   <string name="list_all_lists">Alle</string>
   <string name="list_dialog_create_title">Neue Liste</string>
   <string name="list_dialog_create">Erstellen</string>
-  <string name="list_dialog_cancel">Abbrechen</string>
   <string name="list_dialog_create_ok">Neue Liste wurde erstellt</string>
   <string name="list_dialog_create_err">c:geo konnte die neue Liste nicht erstellen</string>
   <string name="list_dialog_remove_title">Liste entfernen</string>

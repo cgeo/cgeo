@@ -274,7 +274,6 @@
   <string name="list_all_lists">Všetky skrýše</string>
   <string name="list_dialog_create_title">Nový zoznam</string>
   <string name="list_dialog_create">Vytvoriť</string>
-  <string name="list_dialog_cancel">Zrušiť</string>
   <string name="list_dialog_create_ok">Vytvorený nový zoznam</string>
   <string name="list_dialog_create_err">c:geo sa nepodarilo vytvoriť nový zoznam</string>
   <string name="list_dialog_remove_title">Odstránenie zoznamu</string>

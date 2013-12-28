@@ -302,7 +302,6 @@
   <string name="list_all_lists">Toutes les caches</string>
   <string name="list_dialog_create_title">Nouvelle liste</string>
   <string name="list_dialog_create">Créer</string>
-  <string name="list_dialog_cancel">Annuler</string>
   <string name="list_dialog_create_ok">Nouvelle liste créée</string>
   <string name="list_dialog_create_err">c:geo n\'a pas pu créer la liste</string>
   <string name="list_dialog_remove_title">Supprimer la liste</string>

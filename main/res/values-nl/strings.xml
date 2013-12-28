@@ -302,7 +302,6 @@
   <string name="list_all_lists">Alle caches</string>
   <string name="list_dialog_create_title">Nieuwe lijst</string>
   <string name="list_dialog_create">Maak</string>
-  <string name="list_dialog_cancel">Annuleer</string>
   <string name="list_dialog_create_ok">Nieuwe lijst is aangemaakt</string>
   <string name="list_dialog_create_err">c:geo kon geen nieuwe lijst aanmaken</string>
   <string name="list_dialog_remove_title">Verwijder lijst</string>

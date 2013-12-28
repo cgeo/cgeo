@@ -302,7 +302,6 @@
   <string name="list_all_lists">Vsi zakladi</string>
   <string name="list_dialog_create_title">Nov seznam</string>
   <string name="list_dialog_create">Ustvari</string>
-  <string name="list_dialog_cancel">Prekliči</string>
   <string name="list_dialog_create_ok">Nov seznam je bil ustvarjen</string>
   <string name="list_dialog_create_err">c:geo ni mogel ustvariti novega seznama</string>
   <string name="list_dialog_remove_title">Odstrani seznam</string>

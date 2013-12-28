@@ -300,7 +300,6 @@
   <string name="list_all_lists">全てのキャッシュ</string>
   <string name="list_dialog_create_title">新しいリスト</string>
   <string name="list_dialog_create">作成</string>
-  <string name="list_dialog_cancel">キャンセル</string>
   <string name="list_dialog_create_ok">新しいリストを作成しました</string>
   <string name="list_dialog_create_err">新しいリストを作成することができませんでした</string>
   <string name="list_dialog_remove_title">リストの消去</string>

@@ -302,7 +302,6 @@
   <string name="list_all_lists">Wszystkie skrzynki</string>
   <string name="list_dialog_create_title">Nowa lista</string>
   <string name="list_dialog_create">Utwórz</string>
-  <string name="list_dialog_cancel">Anuluj</string>
   <string name="list_dialog_create_ok">Nowa lista została utworzona</string>
   <string name="list_dialog_create_err">c:geo nie mógł utworzyć nowej listy</string>
   <string name="list_dialog_remove_title">Usuń listę</string>
