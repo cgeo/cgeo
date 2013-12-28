@@ -156,7 +156,6 @@ public class ECApi {
     }
 
     private static List<Geocache> importCachesFromJSON(final HttpResponse response) {
-
         if (response != null) {
             try {
                 final String data = Network.getResponseDataAlways(response);
@@ -179,7 +178,6 @@ public class ECApi {
         }
 
         return Collections.emptyList();
-
     }
 
     private static Geocache parseCache(final JSONObject response) {
@@ -192,7 +190,7 @@ public class ECApi {
             cache.setType(getCacheType(response.getString("type")));
             cache.setDifficulty((float) response.getDouble("difficulty"));
             cache.setTerrain((float) response.getDouble("terrain"));
-            cache.setFound(response.getInt("found") == 1 ? true : false);
+            cache.setFound(response.getInt("found") == 1);
 
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_CACHE));
         } catch (final JSONException e) {
