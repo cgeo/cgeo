@@ -1661,6 +1661,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         public LoadDescriptionTask(final String description, final View descriptionView, final View loadingIndicatorView, final View shortDescView) {
             this.descriptionString = description;
+            assert(descriptionView instanceof TextView);
             this.descriptionView = (TextView) descriptionView;
             this.loadingIndicatorView = loadingIndicatorView;
             this.shortDescView = shortDescView;
