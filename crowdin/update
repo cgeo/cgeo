@@ -4,8 +4,8 @@
 #
 # This script updates 
 #   main/res/values/strings.xml
-# and
 #   cgeo-calendar/res/values/strings.xml
+#   cgeo-contacts/res/values/strings.xml
 # in crowdin by uploading the files from master to crowdin.
 #
 #
@@ -26,4 +26,4 @@ sleep 5
 
 update_file main/res/values/strings.xml /cgeo/strings.xml
 update_file cgeo-calendar/res/values/strings.xml /cgeo-calendar/strings.xml
-
+update_file cgeo-contacts/res/values/strings.xml /cgeo-contacts/strings.xml

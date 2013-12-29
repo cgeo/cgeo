@@ -4,8 +4,8 @@
 #
 # This script uploads 
 #   main/res/values-xx/strings.xml
-# and
 #   cgeo-calendar/res/values-xx/strings.xml
+#   cgeo-contacts/res/values-xx/strings.xml
 # in crowdin by uploading the files from the current branch to crowdin.
 #
 #
@@ -35,5 +35,5 @@ fi
 for i in $@; do
     upload_file $i main/res/values-$i/strings.xml /cgeo/strings.xml
     upload_file $i cgeo-calendar/res/values-$i/strings.xml /cgeo-calendar/strings.xml
+    upload_file $i cgeo-contacts/res/values-$i/strings.xml /cgeo-contacts/strings.xml
 done
-
