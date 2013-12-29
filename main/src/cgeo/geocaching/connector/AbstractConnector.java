@@ -214,10 +214,10 @@ public abstract class AbstractConnector implements IConnector {
     @Override
     public final Collection<String> getCapabilities() {
         ArrayList<String> builder = new ArrayList<String>();
-        builder.add(capability(ISearchByViewPort.class, R.string.feature_search_live_map));
-        builder.add(capability(ISearchByKeyword.class, R.string.feature_search_keyword));
-        builder.add(capability(ISearchByCenter.class, R.string.feature_search_center));
-        builder.add(capability(ISearchByGeocode.class, R.string.feature_search_geocode));
+        addCapability(builder, ISearchByViewPort.class, R.string.feature_search_live_map);
+        addCapability(builder, ISearchByKeyword.class, R.string.feature_search_keyword);
+        addCapability(builder, ISearchByCenter.class, R.string.feature_search_center);
+        addCapability(builder, ISearchByGeocode.class, R.string.feature_search_geocode);
         if (supportsUserActions()) {
             builder.add(feature(R.string.feature_search_user));
         }
@@ -239,11 +239,10 @@ public abstract class AbstractConnector implements IConnector {
         return builder;
     }
 
-    private String capability(Class<? extends IConnector> clazz, final int featureResourceId) {
+    private void addCapability(final ArrayList<String> capabilities, final Class<? extends IConnector> clazz, final int featureResourceId) {
         if (clazz.isInstance(this)) {
-            return feature(featureResourceId);
+            capabilities.add(feature(featureResourceId));
         }
-        return StringUtils.EMPTY;
     }
 
     private static String feature(int featureResourceId) {
