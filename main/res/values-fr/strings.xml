@@ -124,6 +124,7 @@
   <string name="err_start">Communication non démarrée</string>
   <string name="err_parse">Échec login lecture page</string>
   <string name="err_server">Échec de la connexion à Geocaching.com (probléme de serveur ou de connexion?)</string>
+  <string name="err_server_ec">Impossible de contacter Extremcaching.com. Le site web peut ne pas fonctionner ou votre connexion Internet peut être défectueuse.</string>
   <string name="err_login">Pas d\'utilisateur ou de mot de passe enregistré</string>
   <string name="err_login_failed">c:geo ne peut pas se connecter.</string>
   <string name="err_login_failed_toast">c:geo est en mode hors-ligne et ne peut pas se connecter. Vérifiez votre connexion Internet.</string>
@@ -179,6 +180,7 @@
   <string name="err_log_load_data_still">c:geo est en train de charger les données pour enregistrer votre visite. Veuillez patienter encore un peu.</string>
   <string name="err_log_failed_server">c:geo n\'a pas réussi à charger les données pour enregistrer votre visite car le serveur ne répond pas.</string>
   <string name="err_log_post_failed">Il semble que votre visite n\'a pas été enregistrée. Veuillez vérifier sur le site Geocaching.com.</string>
+  <string name="err_log_post_failed_ec">Il semble que votre visite n\'a pas été enregistrée. Veuillez vérifier sur le site Extremcaching.com.</string>
   <string name="err_logimage_post_failed">Il semble que l\'envoi de l\'image ait échoué. Veuillez vérifier sur le site Geocaching.com.</string>
   <string name="err_search_address_forgot">c:geo a oublié l\'adresse recherchée.</string>
   <string name="err_parse_lat">c:geo n\'arrive pas à lire la latitude.</string>
@@ -202,6 +204,8 @@
   <string name="warn_deprecated_mapfile">Vous utilisez un fichier de carte obsolète de version 0.2.4.\nVous devriez charger sans tarder une carte version 0.3.\nLe support des cartes 0.2.4 disparaîtra dans une prochaine version de c:geo.</string>
   <string name="warn_nonexistant_mapfile">Le fichier de carte spécifié n\'existe pas.\nLes cartes hors ligne ne sont pas disponibles.</string>
   <string name="warn_rendertheme_missing">Le thème de la carte n\'a pas été trouvé.</string>
+  <string name="warn_pocket_query_select">Aucune Pocket Query sélectionnée.</string>
+  <string name="warn_no_pocket_query_found">Aucune Pocket Query trouvée en ligne.</string>
   <string name="info_log_posted">Envoi de la visite réussi.</string>
   <string name="info_log_saved">Sauvegarde de la visite réussie.</string>
   <string name="info_log_cleared">La visite a été effacée.</string>
@@ -222,6 +226,8 @@
   <string name="menu_history">Historique</string>
   <string name="menu_filter">Filtre</string>
   <string name="menu_scan_geo">Scanner géocode</string>
+  <string name="menu_pocket_queries">Pocket queries</string>
+  <string name="menu_scan_description">c:geo peut scanner des QR codes contenant des géocodes. L\'application permettant de le faire n\'est pas installée. Voulez-vous ouvrir Google Play Store pour l\'installer ?</string>
   <string name="live_map_button">Carte</string>
   <string name="caches_nearby_button">Proches</string>
   <string name="advanced_search_button">Recherche</string>
@@ -245,8 +251,8 @@
   <string name="caches_sort_difficulty">difficulté</string>
   <string name="caches_sort_terrain">terrain</string>
   <string name="caches_sort_size">taille</string>
-  <string name="caches_sort_favorites">popularité</string>
-  <string name="caches_sort_favorites_ratio">popularité [%]</string>
+  <string name="caches_sort_favorites">Favoris</string>
+  <string name="caches_sort_favorites_ratio">Favoris [%]</string>
   <string name="caches_sort_name">nom</string>
   <string name="caches_sort_geocode">Geocode</string>
   <string name="caches_sort_rating">note</string>
@@ -289,6 +295,9 @@
   <string name="caches_filter_modified">Avec les coordonnées modifiées</string>
   <string name="caches_filter_origin">Avec les coordonées originales</string>
   <string name="caches_filter_distance">Distance</string>
+  <string name="caches_filter_personal_note">Avec une note personnelle</string>
+  <string name="caches_filter_popularity">Favoris</string>
+  <string name="caches_filter_popularity_ratio">Favoris [%]</string>
   <string name="caches_removing_from_history">Effacer de l\'historique…</string>
   <string name="caches_clear_offlinelogs">Effacer les entrées de carnet hors-ligne</string>
   <string name="caches_clear_offlinelogs_progress">Effacement des entrées de carnet hors-ligne</string>
@@ -328,7 +337,7 @@
   <string name="settings_title_map_data">Données cartographiques</string>
   <string name="settings_title_map_content">Contenu de la carte</string>
   <string name="settings_title_gpx">GPX</string>
-  <string name="settings_title_basicmembers">Membres de base</string>
+  <string name="settings_title_basicmembers">Options pour les membres non-premium</string>
   <string name="settings_title_navigation">Navigation</string>
   <string name="settings_title_system">Système</string>
   <string name="settings_title_navigation_menu">Menu de navigation</string>
@@ -338,7 +347,11 @@
   <string name="settings_category_logging_other">Options de carnets supplémentaires</string>
   <string name="settings_goto_url_button">plus…</string>
   <string name="settings_title_gc">Geocaching.com</string>
+  <string name="settings_title_ec">Extremcaching.com</string>
+  <string name="settings_title_ox">Opencaching.com (Garmin)</string>
   <string name="settings_activate_gc">Activer</string>
+  <string name="settings_activate_ec">Activer</string>
+  <string name="settings_activate_ox">Activer</string>
   <string name="settings_gc_legal_note">En utilisant les services de geocaching.com, vous acceptez les conditions d\'utilisation de Groundspeak.</string>
   <string name="settings_info_facebook_login_title">Connexion Facebook</string>
   <string name="settings_info_facebook_login">Vous ne pouvez pas faire que c:geo se connecte à geocaching.com avec votre compte Facebook. Mais il existe une solution simple…</string>
@@ -362,7 +375,10 @@
   <string name="init_login_popup_failed">Erreur de connexion</string>
   <string name="init_login_popup_failed_reason">Erreur de connexion: </string>
   <string name="init_login_popup_not_authorized">Non autorisé</string>
+  <string name="init_login_popup_invalid_timestamp">Heure locale invalide, réglez votre appareil</string>
+  <string name="init_login_popup_invalid_token">Autorisation non valide, ré-autoriser</string>
   <string name="init_signature">Signature</string>
+  <string name="init_template_help">Les constructions comme [NAME] seront développées lors de l\'utilisation du modèle.</string>
   <string name="init_signature_template_button">Insérer un modèle</string>
   <string name="init_signature_template_date">Date</string>
   <string name="init_signature_template_time">Heure</string>
@@ -370,6 +386,9 @@
   <string name="init_signature_template_user">Utilisateur</string>
   <string name="init_signature_template_number">Nombre</string>
   <string name="init_signature_template_owner">Propriétaire</string>
+  <string name="init_signature_template_name">Nom</string>
+  <string name="init_signature_template_url">URL</string>
+  <string name="init_signature_template_log">Texte du journal</string>
   <string name="init_ratingwanted">Charger la note depuis GCvote.com</string>
   <string name="init_summary_ratingwanted">Charger la note depuis GCvote.com</string>
   <string name="init_friendlogswanted">Charger le carnet (amis)</string>
@@ -462,6 +481,23 @@
   <string name="settings_open_website">Ouvrir le site dans un navigateur</string>
   <string name="settings_settings">Paramètres</string>
   <string name="settings_information">Information</string>
+  <string name="settings_twitter_cache_message">Message pour une cache trouvée</string>
+  <string name="settings_twitter_trackable_message">Message pour un objet voyageur trouvé</string>
+  <string name="init_ec_icons">Icônes de carte</string>
+  <string name="settings_ec_icons_other">Style propre</string>
+  <string name="settings_ec_icons_oc">Comme ceux de OC</string>
+  <string name="settings_features">Fonctionnalités prises en charge</string>
+  <string name="feature_description">Les fonctionnalités <b>en ligne</b> suivantes de ce site sont prises en charge par c:geo (en addition des fonctionnalités hors-ligne) :</string>
+  <string name="feature_personal_notes">Notes personnelles</string>
+  <string name="feature_online_logging">Enregistrement des journaux en ligne</string>
+  <string name="feature_log_images">Joindre des images aux entrées de journal</string>
+  <string name="feature_watch_list">Liste de suivi</string>
+  <string name="feature_own_coordinates">Stockage de coordonnées modifiées</string>
+  <string name="feature_search_user">Recherche par propriétaire/découvreur</string>
+  <string name="feature_search_keyword">Recherche par mot clé</string>
+  <string name="feature_search_live_map">Carte active</string>
+  <string name="feature_search_center">Recherche par position</string>
+  <string name="feature_search_geocode">Recherche par géocode</string>
   <string name="map_source_google_map">Google Maps : plan</string>
   <string name="map_source_google_satellite">Google Maps : satellite</string>
   <string name="map_source_osm_mapnik">OSM : rendu Mapnik</string>
@@ -508,6 +544,8 @@
   <string name="cache_log_image_default_title">Photo</string>
   <string name="cache_personal_note">Note personnelle</string>
   <string name="cache_personal_note_edit">Éditer</string>
+  <string name="cache_personal_note_limit">Taille de la note personnelle</string>
+  <string name="cache_personal_note_truncation">La note personnelle sera tronquée après %d caractères par Geocaching.com.</string>
   <string name="cache_personal_note_upload">Envoyer</string>
   <string name="cache_personal_note_uploading">Envoi de la note personnelle</string>
   <string name="cache_personal_note_upload_done">Note personnelle envoyée</string>
@@ -584,6 +622,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_cachebeacon">Cache Beacon</string>
   <string name="cache_menu_navigon">Navigon</string>
+  <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_status">Statut</string>
   <string name="cache_status_offline_log">Visite sauvée hors-ligne</string>
   <string name="cache_status_found">Trouvée</string>
@@ -630,6 +669,7 @@
   <string name="file_title_searching">Recherche en cours</string>
   <string name="simple_dir_chooser_title">Choisir le dossier</string>
   <string name="simple_dir_chooser_current_path">Chemin :</string>
+  <string name="simple_dir_chooser_invalid_path">Chemin d\'accès invalide</string>
   <string name="gpx_import_loading_caches">Chargement des caches depuis le fichier .gpx</string>
   <string name="gpx_import_loading_waypoints">Chargement des points intermédiaires depuis le fichier .gpx</string>
   <string name="gpx_import_store_static_maps">Écriture des cartes statiques</string>
@@ -743,6 +783,9 @@
   <string name="search_address_started">Recherche par lieu</string>
   <string name="search_address_result">Lieux trouvés</string>
   <string name="search_own_caches">Chercher mes caches</string>
+  <string name="search_pocket_title">Pocket Query</string>
+  <string name="search_pocket_loading">Chargement d\'une liste de Pocket Queries</string>
+  <string name="search_pocket_select">Choisir la Pocket Query</string>
   <string name="trackable">Objet voyageur</string>
   <string name="trackable_details_loading">Chargement des détails d\'un objet voyageur…</string>
   <string name="trackable_log_touch">Toucher l\'objet</string>
@@ -790,6 +833,8 @@
   <string name="helper_calendar_title">Module supplémentaire c:geo agenda</string>
   <string name="helper_calendar_missing">Module supplémentaire c:geo agenda non installé</string>
   <string name="helper_calendar_description">Permet d\'exporter les événements liés aux caches dans le calendrier Android.</string>
+  <string name="helper_sendtocgeo_title">Envoyer vers c:geo</string>
+  <string name="helper_sendtocgeo_description">Envoyer à c:geo (<i>Send to c:geo</i>) est une extension pour le navigateur <strong>de votre ordinateur</strong>. Lorsque vous naviguez sur geocaching.com, vous pouvez envoyer des caches vers votre smartphone avec un clic.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Application simple affichant des cartes en ligne et hors ligne. Permet d\'enregistrer son parcours, de gérer des POI et de nombreuses autres fonctions utiles.</string>
   <string name="helper_gpsstatus_title">Etat GPS</string>
@@ -800,6 +845,8 @@
   <string name="helper_barcode_description">Il existe des programmes et des sites web permettant d\'afficher un géo-code sous forme de code barre. Avec cette application, c:geo pourra lire les géo-codes affichés sous cette forme sur l\'écran de votre ordinateur.</string>
   <string name="helper_pocketquery_title">Pocket Query Creator</string>
   <string name="helper_pocketquery_description">Permet la création facile et le téléchargement de Pocket Queries centrées sur votre position actuelle ou un point sélectionné sur une carte. Nécessite un compte Premium Geocaching.com.</string>
+  <string name="helper_google_translate_title">Google Traduction</string>
+  <string name="helper_google_translate_description">Si vous téléchargez des modules de traduction dans l\'application Google Traduction, vous pourrez facilement traduire les descriptions des caches dans c:geo par un clic long sur le texte de la description (même sans connexion Internet).</string>
   <string name="addon_missing_title">Module complémentaire manquant</string>
   <string name="addon_download_prompt">Le télécharger sur Google Play.</string>
   <string name="export">Exporter</string>
@@ -1007,6 +1054,38 @@
   <string name="attribute_unknown_no">Attribut inconnu négatif</string>
   <string name="attribute_geotour_yes">Partie d\'un GéoTour</string>
   <string name="attribute_geotour_no">Ne fait pas partie d\'un GéoTour</string>
+  <string name="attribute_kids_2_yes">Emmenez vos enfants</string>
+  <string name="attribute_kids_2_no">N\'emmenez pas vos enfants</string>
+  <string name="attribute_historic_site_yes">Site historique</string>
+  <string name="attribute_historic_site_no">Site non historique</string>
+  <string name="attribute_magnetic_yes">Cache magnétique</string>
+  <string name="attribute_magnetic_no">Cache non magnétique</string>
+  <string name="attribute_usb_cache_yes">Cache \"dead drop USB\"</string>
+  <string name="attribute_usb_cache_no">Cache non \"dead drop USB\"</string>
+  <string name="attribute_shovel_yes">Vous pouvez avoir besoin d\'une pelle</string>
+  <string name="attribute_shovel_no">Vous n\'avez pas besoin d\'une pelle</string>
+  <string name="attribute_specific_access_yes">Disponible à certaines heures (peut nécessiter des frais d\'accès)</string>
+  <string name="attribute_specific_access_no">Disponible à toute heure</string>
+  <string name="attribute_pedestrian_only_yes">Accès uniquement à pied</string>
+  <string name="attribute_pedestrian_only_no">Accès autrement qu\'à pied</string>
+  <string name="attribute_nature_cache_yes">Cachée dans un cadre naturel (forêts, montagnes, etc.)</string>
+  <string name="attribute_nature_cache_no">Non cachée dans un environnement naturel</string>
+  <string name="attribute_byop_yes">Prenez quelque chose pour écrire</string>
+  <string name="attribute_byop_no">Crayon non nécessaire</string>
+  <string name="attribute_safari_cache_yes">Cache inversée</string>
+  <string name="attribute_safari_cache_no">Cache non inversée</string>
+  <string name="attribute_quick_cache_yes">Cache rapide</string>
+  <string name="attribute_quick_cache_no">Cache non rapide</string>
+  <string name="attribute_wherigo_yes">Cache Wherigo</string>
+  <string name="attribute_wherigo_no">Cache non Wherigo</string>
+  <string name="attribute_audio_cache_yes">La description contient un fichier audio</string>
+  <string name="attribute_audio_cache_no">La description ne contient pas de fichier audio</string>
+  <string name="attribute_geohotel_yes">Cache GeoHôtel</string>
+  <string name="attribute_geohotel_no">Cache non-GeoHôtel</string>
+  <string name="attribute_survey_marker_yes">Près d\'un repère d\'arpentage</string>
+  <string name="attribute_survey_marker_no">Pas près d\'un repère d\'arpentage</string>
+  <string name="attribute_offset_cache_yes">Cache relative</string>
+  <string name="attribute_offset_cache_no">Pas de cache relative</string>
   <string name="quote">Pour faciliter le géocaching.</string>
   <string name="powered_by">carnero</string>
   <string name="support">support: <a href="">support@cgeo.org</a></string>
@@ -1034,6 +1113,7 @@
   <string name="tts_one_oclock">une heure</string>
   <string name="tts_oclock">%s heures</string>
   <string name="clipboard_copy_ok">Copié dans le presse-papiers</string>
+  <string name="percent_favorite_points">%\ favoris</string>
   <string-array name="log_image_scales">
     <item>Taille originale</item>
     <item>512 px</item>
@@ -1072,5 +1152,9 @@
   <plurals name="days_ago">
     <item quantity="one">hier</item>
     <item quantity="other">il y a %d jours</item>
+  </plurals>
+  <plurals name="favorite_points">
+    <item quantity="one">%s favori</item>
+    <item quantity="other">%s favoris</item>
   </plurals>
 </resources>
