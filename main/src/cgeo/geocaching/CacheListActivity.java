@@ -444,7 +444,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private boolean isInvokedFromAttachment() {
-        return Intent.ACTION_VIEW.equals(getIntent().getAction());
+        final Intent intent = getIntent();
+        return Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null;
     }
 
     private void importGpxAttachement() {
@@ -1550,7 +1551,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         AbstractSearchLoader loader = null;
         switch (enumType) {
             case OFFLINE:
-                listId = Settings.getLastList();
+                // open either the requested or the last list
+                if (extras.containsKey(Intents.EXTRA_LIST_ID)) {
+                    listId = extras.getInt(Intents.EXTRA_LIST_ID);
+                }
+                else {
+                    listId = Settings.getLastList();
+                }
                 if (listId <= StoredList.TEMPORARY_LIST_ID) {
                     listId = StoredList.STANDARD_LIST_ID;
                     title = res.getString(R.string.stored_caches_button);

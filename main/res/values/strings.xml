@@ -1257,4 +1257,7 @@
     </plurals>
     
     <string name="percent_favorite_points">%\  favorites</string>
+    
+    <!-- shortcuts -->
+    <string name="create_shortcut">Create shortcut</string>
 </resources>
