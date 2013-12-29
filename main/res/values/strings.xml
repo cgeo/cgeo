@@ -381,7 +381,7 @@
     <string name="settings_title_map_data">Map Data</string>
     <string name="settings_title_map_content">Map Content</string>
     <string name="settings_title_gpx">GPX</string>
-    <string name="settings_title_basicmembers">Basic Members</string>
+    <string name="settings_title_basicmembers">Options for Basic Members</string>
     <string name="settings_title_navigation">Navigation</string>
     <string name="settings_title_system">System</string>
     <string name="settings_title_navigation_menu">Navigation Menu</string>
@@ -531,8 +531,8 @@
     <string name="settings_twitter_cache_message">Message for found cache</string>
     <string name="settings_twitter_trackable_message">Message for found trackable</string>
     <string name="init_ec_icons">Map Icons</string>
-    <string name="settings_ec_icons_other">Other</string>
-    <string name="settings_ec_icons_oc">OC</string>
+    <string name="settings_ec_icons_other">Own style</string>
+    <string name="settings_ec_icons_oc">Like OC</string>
     <string name="settings_features">Supported Features</string>
     <string name="feature_description">The following <b>online</b> features of this website are supported in c:geo (in addition to the offline features):</string>
     <string name="feature_personal_notes">Personal notes</string>
