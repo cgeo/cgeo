@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">c:geo - contacts (add-on)</string>
+    <string name="contact_not_found">Contact with alias/nickname %s not found. Add it in your contacts app first.</string>
+    
+</resources>

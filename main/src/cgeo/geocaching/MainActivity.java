@@ -1,5 +1,8 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ILogin;
@@ -19,10 +22,9 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RunnableWithArgument;
 import cgeo.geocaching.utils.Version;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 

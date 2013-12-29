@@ -31,5 +31,4 @@
         android:icon="@drawable/ic_menu_info_details"
         android:title="@string/menu_about">
     </item>
-
 </menu>
