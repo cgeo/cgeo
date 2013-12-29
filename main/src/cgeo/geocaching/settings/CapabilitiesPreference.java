@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.preference.Preference;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class CapabilitiesPreference extends AbstractAttributeBasedPrefence {
         @Override
         public boolean onPreferenceClick(final Preference preference) {
             WebView htmlView = new WebView(preference.getContext());
-            htmlView.loadData(createCapabilitiesMessage(), "text/html", null);
+            htmlView.loadDataWithBaseURL(null, createCapabilitiesMessage(), "text/html", "utf-8", null);
             AlertDialog.Builder builder = new AlertDialog.Builder(preference.getContext());
             builder.setView(htmlView)
                     .setIcon(android.R.drawable.ic_dialog_info)
@@ -69,13 +70,13 @@ public class CapabilitiesPreference extends AbstractAttributeBasedPrefence {
             return StringUtils.EMPTY;
         }
         StringBuilder builder = new StringBuilder("<p>"
-                + CgeoApplication.getInstance().getString(R.string.feature_description) + "<ul>");
+                + TextUtils.htmlEncode(CgeoApplication.getInstance().getString(R.string.feature_description)) + "</p><ul>");
 
         for (String capability : connector.getCapabilities()) {
-            builder.append("<li>").append(capability).append("</li>");
+            builder.append("<li>").append(TextUtils.htmlEncode(capability)).append("</li>");
         }
 
-        builder.append("</ul></p>");
+        builder.append("</ul>");
         return builder.toString();
     }
 
