@@ -818,6 +818,7 @@
   <string name="user_menu_view_found">Caches trouvées</string>
   <string name="user_menu_open_browser">Ouvrir le profil dans un navigateur</string>
   <string name="user_menu_send_message">Envoyer un message</string>
+  <string name="user_menu_open_contact">Ouvrir la fiche du contact</string>
   <string name="navigation">Navigation</string>
   <string name="compass_title">Boussole</string>
   <string name="use_gps">Utiliser GPS</string>
@@ -1114,6 +1115,7 @@
   <string name="tts_oclock">%s heures</string>
   <string name="clipboard_copy_ok">Copié dans le presse-papiers</string>
   <string name="percent_favorite_points">%\ favoris</string>
+  <string name="create_shortcut">Créer un raccourci</string>
   <string-array name="log_image_scales">
     <item>Taille originale</item>
     <item>512 px</item>
