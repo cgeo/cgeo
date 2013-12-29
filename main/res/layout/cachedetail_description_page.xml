@@ -11,7 +11,7 @@
 
         <!-- Short description -->
 
-        <TextView
+        <cgeo.geocaching.ui.IndexOutOfBoundsAvoidingTextView
             android:id="@+id/shortdesc"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
 
         <!-- Long description -->
 
-        <TextView
+        <cgeo.geocaching.ui.IndexOutOfBoundsAvoidingTextView
             android:id="@+id/longdesc"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
