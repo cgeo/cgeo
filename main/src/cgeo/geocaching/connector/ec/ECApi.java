@@ -40,12 +40,12 @@ public class ECApi {
 
     private static final FastDateFormat LOG_DATE_FORMAT = FastDateFormat.getInstance("yyyy-MM-dd HH:mm:ss.SSSZ", TimeZone.getTimeZone("UTC"), Locale.US);
 
-    public static String cleanCode(String geocode) {
-        return geocode.replace("EC", "");
+    public static String getIdFromGeocode(final String geocode) {
+        return StringUtils.removeStartIgnoreCase(geocode, "EC");
     }
 
     public static Geocache searchByGeoCode(final String geocode) {
-        final Parameters params = new Parameters("id", cleanCode(geocode));
+        final Parameters params = new Parameters("id", getIdFromGeocode(geocode));
         final HttpResponse response = apiRequest("gpx.php", params);
 
         final Collection<Geocache> caches = importCachesFromGPXResponse(response);
