@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.BaseColumns;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.Gravity;
@@ -55,43 +54,21 @@ public final class ContactsActivity extends Activity {
     }
 
     private int getContactId(final String searchName) {
-        Cursor contactCursor = null;
         int foundId = 0;
+        final String[] projection = new String[] { ContactsContract.Data.CONTACT_ID };
+        final String selection = ContactsContract.CommonDataKinds.Nickname.NAME + " = ? COLLATE NOCASE";
+        final String[] selectionArgs = new String[] { searchName };
+        Cursor nicknameCursor = null;
         try {
-            contactCursor = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
-            int idColumn = contactCursor.getColumnIndex(BaseColumns._ID);
-            while (contactCursor.moveToNext()) {
-                int contactId = contactCursor.getInt(idColumn);
-                String where = ContactsContract.Data.CONTACT_ID + " = ? AND " + ContactsContract.Data.MIMETYPE + " = ?";
-                String[] params = new String[] { String.valueOf(contactId), ContactsContract.CommonDataKinds.Nickname.CONTENT_ITEM_TYPE };
-                Cursor nicknameCursor = null;
-                try {
-                    nicknameCursor = getContentResolver().query(ContactsContract.Data.CONTENT_URI, null, where, params, null);
-                    while (nicknameCursor.moveToNext()) {
-                        String nicknameName = nicknameCursor.getString(nicknameCursor.getColumnIndex(ContactsContract.CommonDataKinds.Nickname.NAME));
-                        if (StringUtils.equalsIgnoreCase(nicknameName, searchName)) {
-                            foundId = contactId;
-                            break;
-                        }
-                    }
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } finally {
-                    if (nicknameCursor != null) {
-                        nicknameCursor.close();
-                    }
-                }
-                if (foundId != 0) {
-                    break;
-                }
+            nicknameCursor = getContentResolver().query(ContactsContract.Data.CONTENT_URI, projection, selection, selectionArgs, null);
+            if (nicknameCursor != null && nicknameCursor.moveToNext()) {
+                foundId = nicknameCursor.getInt(0);
             }
         } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Log.e(LOG_TAG, "ContactsActivity.getContactId", e);
         } finally {
-            if (contactCursor != null) {
-                contactCursor.close();
+            if (nicknameCursor != null) {
+                nicknameCursor.close();
             }
         }
         return foundId;
