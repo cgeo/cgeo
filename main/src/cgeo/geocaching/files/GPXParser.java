@@ -12,6 +12,7 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
+import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -335,7 +336,7 @@ public abstract class GPXParser extends FileParser {
                     DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
 
                     // avoid the cachecache using lots of memory for caches which the user did not actually look at
-                    DataStore.removeAllFromCache();
+                    DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
                     showProgressMessage(progressHandler, progressStream.getProgress());
                 } else if (StringUtils.isNotBlank(cache.getName())
                         && StringUtils.containsIgnoreCase(type, "waypoint")) {
@@ -858,7 +859,7 @@ public abstract class GPXParser extends FileParser {
     /**
      * Overwrite this method in a GPX parser sub class to modify the {@link Geocache}, after it has been fully parsed
      * from the GPX file and before it gets stored.
-     * 
+     *
      * @param cache
      *            currently imported cache
      */
