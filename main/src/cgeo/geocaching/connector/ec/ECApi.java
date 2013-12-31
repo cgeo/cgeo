@@ -92,6 +92,7 @@ public class ECApi {
         params.add("type", logType.type);
         params.add("log", log);
         params.add("date", LOG_DATE_FORMAT.format(date.getTime()));
+        params.add("sid", ECLogin.getInstance().getSessionId());
 
         final String uri = API_HOST + "log.php";
         final HttpResponse response = Network.postRequest(uri, params);
@@ -110,6 +111,9 @@ public class ECApi {
 
         final String data = Network.getResponseDataAlways(response);
         if (!StringUtils.isBlank(data) && StringUtils.contains(data, "success")) {
+            if (logType == LogType.FOUND_IT || logType == LogType.ATTENDED) {
+                ECLogin.getInstance().setActualCachesFound(ECLogin.getInstance().getActualCachesFound() + 1);
+            }
             final String uid = StringUtils.remove(data, "success:");
             return new LogResult(StatusCode.NO_ERROR, uid);
         }
