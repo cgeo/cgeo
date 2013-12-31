@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 public class ECLogin extends AbstractLogin {
 
+    private final CgeoApplication app = CgeoApplication.getInstance();
     protected String sessionId = null;
 
     private ECLogin() {
@@ -43,7 +44,7 @@ public class ECLogin extends AbstractLogin {
             return StatusCode.NO_LOGIN_INFO_STORED;
         }
 
-        setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
+        setActualStatus(app.getString(R.string.init_login_popup_working));
 
         final Parameters params = new Parameters("user", login.left, "pass", login.right);
         HttpResponse loginResponse = Network.postRequest("https://extremcaching.com/exports/apilogin.php", params);
@@ -90,7 +91,7 @@ public class ECLogin extends AbstractLogin {
         }
         assert data != null;
 
-        setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_ok));
+        setActualStatus(app.getString(R.string.init_login_popup_ok));
 
         try {
             final JSONObject json = new JSONObject(data);
@@ -108,7 +109,7 @@ public class ECLogin extends AbstractLogin {
             Log.e("ECLogin.getLoginStatus", e);
         }
 
-        setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_failed));
+        setActualStatus(app.getString(R.string.init_login_popup_failed));
         return false;
     }
 

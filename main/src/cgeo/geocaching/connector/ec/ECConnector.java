@@ -43,6 +43,8 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
      * Pattern for EC codes
      */
     private final static Pattern PATTERN_EC_CODE = Pattern.compile("EC[0-9]+", Pattern.CASE_INSENSITIVE);
+    private final CgeoApplication app = CgeoApplication.getInstance();
+    private final ECLogin ecLogin = ECLogin.getInstance();
 
     private ECConnector() {
         // singleton
@@ -130,11 +132,11 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public boolean login(Handler handler, Context fromActivity) {
         // login
-        final StatusCode status = ECLogin.getInstance().login();
+        final StatusCode status = ecLogin.login();
 
-        if (CgeoApplication.getInstance().showLoginToast && handler != null) {
+        if (app.showLoginToast && handler != null) {
             handler.sendMessage(handler.obtainMessage(0, status));
-            CgeoApplication.getInstance().showLoginToast = false;
+            app.showLoginToast = false;
 
             // invoke settings activity to insert login details
             if (status == StatusCode.NO_LOGIN_INFO_STORED && fromActivity != null) {
@@ -146,22 +148,22 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public String getUserName() {
-        return ECLogin.getInstance().getActualUserName();
+        return ecLogin.getActualUserName();
     }
 
     @Override
     public int getCachesFound() {
-        return ECLogin.getInstance().getActualCachesFound();
+        return ecLogin.getActualCachesFound();
     }
 
     @Override
     public String getLoginStatusString() {
-        return ECLogin.getInstance().getActualStatus();
+        return ecLogin.getActualStatus();
     }
 
     @Override
     public boolean isLoggedIn() {
-        return ECLogin.getInstance().isActualLoginStatus();
+        return ecLogin.isActualLoginStatus();
     }
 
     @Override

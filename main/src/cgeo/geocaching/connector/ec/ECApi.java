@@ -38,6 +38,7 @@ public class ECApi {
 
     private static final String API_HOST = "https://extremcaching.com/exports/";
 
+    private static final ECLogin ecLogin = ECLogin.getInstance();
     private static final FastDateFormat LOG_DATE_FORMAT = FastDateFormat.getInstance("yyyy-MM-dd HH:mm:ss.SSSZ", TimeZone.getTimeZone("UTC"), Locale.US);
 
     public static String getIdFromGeocode(final String geocode) {
@@ -92,7 +93,7 @@ public class ECApi {
         params.add("type", logType.type);
         params.add("log", log);
         params.add("date", LOG_DATE_FORMAT.format(date.getTime()));
-        params.add("sid", ECLogin.getInstance().getSessionId());
+        params.add("sid", ecLogin.getSessionId());
 
         final String uri = API_HOST + "log.php";
         final HttpResponse response = Network.postRequest(uri, params);
@@ -101,7 +102,7 @@ public class ECApi {
             return new LogResult(StatusCode.LOG_POST_ERROR_EC, "");
         }
         if (!isRetry && response.getStatusLine().getStatusCode() == 403) {
-            if (ECLogin.getInstance().login() == StatusCode.NO_ERROR) {
+            if (ecLogin.login() == StatusCode.NO_ERROR) {
                 apiRequest(uri, params, true);
             }
         }
@@ -112,7 +113,7 @@ public class ECApi {
         final String data = Network.getResponseDataAlways(response);
         if (!StringUtils.isBlank(data) && StringUtils.contains(data, "success")) {
             if (logType == LogType.FOUND_IT || logType == LogType.ATTENDED) {
-                ECLogin.getInstance().setActualCachesFound(ECLogin.getInstance().getActualCachesFound() + 1);
+                ecLogin.setActualCachesFound(ecLogin.getActualCachesFound() + 1);
             }
             final String uid = StringUtils.remove(data, "success:");
             return new LogResult(StatusCode.NO_ERROR, uid);
@@ -134,7 +135,7 @@ public class ECApi {
         // add session and cgeo marker on every request
         if (!isRetry) {
             params.add("cgeo", "1");
-            params.add("sid", ECLogin.getInstance().getSessionId());
+            params.add("sid", ecLogin.getSessionId());
         }
 
         final HttpResponse response = Network.getRequest(API_HOST + uri, params);
@@ -144,7 +145,7 @@ public class ECApi {
 
         // retry at most one time
         if (!isRetry && response.getStatusLine().getStatusCode() == 403) {
-            if (ECLogin.getInstance().login() == StatusCode.NO_ERROR) {
+            if (ecLogin.login() == StatusCode.NO_ERROR) {
                 return apiRequest(uri, params, true);
             }
         }
