@@ -18,7 +18,6 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
-import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
@@ -187,6 +186,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private boolean centered = false; // if map is already centered
     private boolean alreadyCentered = false; // -""- for setting my location
     private static final Set<String> dirtyCaches = new HashSet<String>();
+    /**
+     * if live map is enabled, this is the minimum zoom level, independent of the stored setting
+     */
+    private static final int MIN_LIVEMAP_ZOOM = 12;
 
     // Thread pooling
     private static BlockingQueue<Runnable> displayQueue = new ArrayBlockingQueue<Runnable>(1);
@@ -438,7 +441,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         mapView.repaintRequired(null);
 
-        mapView.getMapController().setZoom(Settings.getMapZoom());
+        setZoom(Settings.getMapZoom());
         mapView.getMapController().setCenter(Settings.getMapCenter());
 
         if (null == mapStateIntent) {
@@ -466,6 +469,15 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         if (!app.isLiveMapHintShown() && !Settings.getHideLiveMapHint()) {
             LiveMapInfoDialogBuilder.create(activity).show();
         }
+    }
+
+    /**
+     * Set the zoom of the map. The zoom is restricted to a certain minimum in case of live map.
+     *
+     * @param zoom
+     */
+    private void setZoom(final int zoom) {
+        mapView.getMapController().setZoom(isLiveEnabled ? Math.min(zoom, MIN_LIVEMAP_ZOOM) : zoom);
     }
 
     private void prepareFilterBar() {
@@ -1460,7 +1472,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         if (!centered && mapState != null) {
             try {
                 mapController.setCenter(mapItemFactory.getGeoPointBase(new Geopoint(mapState[0] / 1.0e6, mapState[1] / 1.0e6)));
-                mapController.setZoom(mapState[2]);
+                setZoom(mapState[2]);
             } catch (RuntimeException e) {
                 Log.e("centermap", e);
             }
