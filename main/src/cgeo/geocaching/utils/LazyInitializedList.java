@@ -1,7 +1,10 @@
 package cgeo.geocaching.utils;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -9,6 +12,7 @@ public abstract class LazyInitializedList<ElementType> extends AbstractList<Elem
 
     private volatile List<ElementType> list;
 
+    @NonNull
     private List<ElementType> getList() {
         if (list == null) {
             synchronized(this) {
@@ -19,6 +23,10 @@ public abstract class LazyInitializedList<ElementType> extends AbstractList<Elem
                     }
                 } catch (final Exception e) {
                     Log.e("LazyInitializedList.getList", e);
+                }
+                if (list == null) {
+                    Log.e("LazyInitializedList.getList: using an empty list as a fallback");
+                    list = Collections.emptyList();
                 }
             }
         }
