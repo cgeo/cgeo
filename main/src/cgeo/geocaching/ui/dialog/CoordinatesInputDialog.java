@@ -217,7 +217,6 @@ public class CoordinatesInputDialog extends NoTitleDialog {
                 eLonSub.setText(addZeros(gp.getLonSecFrac(), 3));
                 break;
         }
-        throw new IllegalStateException(); // cannot happen if switch case is enum complete
     }
 
     private static String addZeros(final int value, final int len) {
