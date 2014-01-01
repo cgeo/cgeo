@@ -179,9 +179,8 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 return new ContributorsViewCreator();
             case LICENSE:
                 return new LicenseViewCreator();
-            default:
-                throw new IllegalArgumentException();
         }
+        throw new IllegalStateException(); // cannot happen, when switch case is enum complete
     }
 
     @Override

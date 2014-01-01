@@ -2206,9 +2206,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             case IMAGES:
                 return new ImagesViewCreator();
 
-            default:
-                throw new IllegalArgumentException();
         }
+        throw new IllegalStateException(); // cannot happen as long as switch case is enum complete
     }
 
     static void updateOfflineBox(final View view, final Geocache cache, final Resources res,

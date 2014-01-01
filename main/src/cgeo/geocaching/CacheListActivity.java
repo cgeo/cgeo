@@ -1632,8 +1632,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 title = pocket_name;
                 loader = new PocketGeocacheListLoader(app, guid);
                 break;
-            default:
-                throw new IllegalStateException();
         }
         setTitle(title);
         showProgress(true);

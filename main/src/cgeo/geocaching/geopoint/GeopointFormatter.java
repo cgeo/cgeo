@@ -109,9 +109,8 @@ public class GeopointFormatter {
                 return String.format(Locale.getDefault(), "%c %03d %06.3f", rgp.getLonDir(), rgp.getLonDeg(), rgp.getLonMinRaw());
             }
 
-            default:
-                throw new IllegalArgumentException();
         }
+        throw new IllegalStateException(); // cannot happen, if switch case is enum complete
     }
 
 }

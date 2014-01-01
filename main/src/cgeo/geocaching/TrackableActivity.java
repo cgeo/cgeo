@@ -316,9 +316,8 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 return new DetailsViewCreator();
             case LOGS:
                 return new TrackableLogsViewCreator(this, trackable);
-            default:
-                throw new IllegalArgumentException();
         }
+        throw new IllegalStateException(); // cannot happen as long as switch case is enum complete
     }
 
     @Override

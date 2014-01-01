@@ -216,9 +216,8 @@ public class CoordinatesInputDialog extends NoTitleDialog {
                 eLonSec.setText(addZeros(gp.getLonSec(), 2));
                 eLonSub.setText(addZeros(gp.getLonSecFrac(), 3));
                 break;
-            default:
-                throw new IllegalStateException();
         }
+        throw new IllegalStateException(); // cannot happen if switch case is enum complete
     }
 
     private static String addZeros(final int value, final int len) {
@@ -361,8 +360,6 @@ public class CoordinatesInputDialog extends NoTitleDialog {
                     break;
                 case Plain:
                     // This case has been handled above
-                default:
-                    throw new IllegalArgumentException();
             }
         } catch (final Geopoint.ParseException e) {
             if (signalError) {
