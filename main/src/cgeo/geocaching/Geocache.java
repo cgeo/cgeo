@@ -198,6 +198,9 @@ public class Geocache implements ICache, IWaypoint {
         if (other == null) {
             return false;
         }
+        if (other == this) {
+            return true;
+        }
 
         updated = System.currentTimeMillis();
         // if parsed cache is not yet detailed and stored is, the information of
