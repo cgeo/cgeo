@@ -328,47 +328,47 @@ public class CoordinatesInputDialog extends NoTitleDialog {
     }
 
     private boolean calc(final boolean signalError) {
-        if (currentFormat == CoordInputFormatEnum.Plain) {
-            try {
+        try {
+            if (currentFormat == CoordInputFormatEnum.Plain) {
                 gp = new Geopoint(eLat.getText().toString(), eLon.getText().toString());
-            } catch (final Geopoint.ParseException e) {
-                if (signalError) {
-                    context.showToast(context.getResources().getString(R.string.err_parse_lat_lon));
-                }
-                return false;
+                return true;
             }
-            return true;
-        }
 
-        final String latDir = bLat.getText().toString();
-        final String lonDir = bLon.getText().toString();
-        final String latDeg = eLatDeg.getText().toString();
-        final String lonDeg = eLonDeg.getText().toString();
-        final String latDegFrac = eLatMin.getText().toString();
-        final String lonDegFrac = eLonMin.getText().toString();
-        final String latMin = eLatMin.getText().toString();
-        final String lonMin = eLonMin.getText().toString();
-        final String latMinFrac = eLatSec.getText().toString();
-        final String lonMinFrac = eLonSec.getText().toString();
-        final String latSec = eLatSec.getText().toString();
-        final String lonSec = eLonSec.getText().toString();
-        final String latSecFrac = eLatSub.getText().toString();
-        final String lonSecFrac = eLonSub.getText().toString();
+            final String latDir = bLat.getText().toString();
+            final String lonDir = bLon.getText().toString();
+            final String latDeg = eLatDeg.getText().toString();
+            final String lonDeg = eLonDeg.getText().toString();
+            final String latDegFrac = eLatMin.getText().toString();
+            final String lonDegFrac = eLonMin.getText().toString();
+            final String latMin = eLatMin.getText().toString();
+            final String lonMin = eLonMin.getText().toString();
+            final String latMinFrac = eLatSec.getText().toString();
+            final String lonMinFrac = eLonSec.getText().toString();
+            final String latSec = eLatSec.getText().toString();
+            final String lonSec = eLonSec.getText().toString();
+            final String latSecFrac = eLatSub.getText().toString();
+            final String lonSecFrac = eLonSub.getText().toString();
 
-        switch (currentFormat) {
-            case Deg:
-                gp = new Geopoint(latDir, latDeg, latDegFrac, lonDir, lonDeg, lonDegFrac);
-                break;
-            case Min:
-                gp = new Geopoint(latDir, latDeg, latMin, latMinFrac, lonDir, lonDeg, lonMin, lonMinFrac);
-                break;
-            case Sec:
-                gp = new Geopoint(latDir, latDeg, latMin, latSec, latSecFrac, lonDir, lonDeg, lonMin, lonSec, lonSecFrac);
-                break;
-            case Plain:
-                // This case has been handled above
-            default:
-                throw new IllegalArgumentException();
+            switch (currentFormat) {
+                case Deg:
+                    gp = new Geopoint(latDir, latDeg, latDegFrac, lonDir, lonDeg, lonDegFrac);
+                    break;
+                case Min:
+                    gp = new Geopoint(latDir, latDeg, latMin, latMinFrac, lonDir, lonDeg, lonMin, lonMinFrac);
+                    break;
+                case Sec:
+                    gp = new Geopoint(latDir, latDeg, latMin, latSec, latSecFrac, lonDir, lonDeg, lonMin, lonSec, lonSecFrac);
+                    break;
+                case Plain:
+                    // This case has been handled above
+                default:
+                    throw new IllegalArgumentException();
+            }
+        } catch (final Geopoint.ParseException e) {
+            if (signalError) {
+                context.showToast(context.getResources().getString(R.string.err_parse_lat_lon));
+            }
+            return false;
         }
 
         return true;
