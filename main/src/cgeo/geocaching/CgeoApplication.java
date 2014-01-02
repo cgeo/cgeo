@@ -1,6 +1,5 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.network.StatusUpdater;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.IObserver;
 import cgeo.geocaching.utils.Log;
@@ -19,7 +18,6 @@ public class CgeoApplication extends Application {
     private boolean forceRelog = false; // c:geo needs to log into cache providers
     public boolean showLoginToast = true; //login toast shown just once.
     private boolean liveMapHintShown = false; // livemap hint has been shown
-    final private StatusUpdater statusUpdater = new StatusUpdater();
     private static CgeoApplication instance;
 
     public CgeoApplication() {
@@ -32,11 +30,6 @@ public class CgeoApplication extends Application {
 
     public static CgeoApplication getInstance() {
         return instance;
-    }
-
-    @Override
-    public void onCreate() {
-        new Thread(statusUpdater).start();
     }
 
     @Override
@@ -126,10 +119,6 @@ public class CgeoApplication extends Application {
 
     public Float currentDirection() {
         return currentDirObject().getMemory();
-    }
-
-    public StatusUpdater getStatusUpdater() {
-        return statusUpdater;
     }
 
     public boolean isLiveMapHintShown() {
