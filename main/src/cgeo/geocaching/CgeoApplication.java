@@ -1,8 +1,9 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.IObserver;
 import cgeo.geocaching.utils.Log;
+
+import rx.Observable;
 
 import android.app.Activity;
 import android.app.Application;
@@ -13,8 +14,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CgeoApplication extends Application {
 
-    private volatile GeoDataProvider geo;
-    private volatile DirectionProvider dir;
+    private volatile Observable<IGeoData> geo;
+    private volatile Observable<Float> dir;
     private boolean forceRelog = false; // c:geo needs to log into cache providers
     public boolean showLoginToast = true; //login toast shown just once.
     private boolean liveMapHintShown = false; // livemap hint has been shown
@@ -65,29 +66,11 @@ public class CgeoApplication extends Application {
         }.start();
     }
 
-    /**
-     * Register an observer to receive GeoData information.
-     * <br/>
-     * If there is a chance that no observers are registered before this
-     * method is called, it is necessary to call it from a task implementing
-     * a looper interface as the data provider will use listeners that
-     * require a looper thread to run.
-     *
-     * @param observer a geodata observer
-     */
-    public void addGeoObserver(final IObserver<? super IGeoData> observer) {
-        currentGeoObject().addObserver(observer);
-    }
-
-    public void deleteGeoObserver(final IObserver<? super IGeoData> observer) {
-        currentGeoObject().deleteObserver(observer);
-    }
-
-    private GeoDataProvider currentGeoObject() {
+    public Observable<IGeoData> currentGeoObject() {
         if (geo == null) {
             synchronized(this) {
                 if (geo == null) {
-                    geo = new GeoDataProvider(this);
+                    geo = GeoDataProvider.create(this);
                 }
             }
         }
@@ -95,22 +78,14 @@ public class CgeoApplication extends Application {
     }
 
     public IGeoData currentGeo() {
-        return currentGeoObject().getMemory();
+        return currentGeoObject().first().toBlockingObservable().single();
     }
 
-    public void addDirectionObserver(final IObserver<? super Float> observer) {
-        currentDirObject().addObserver(observer);
-    }
-
-    public void deleteDirectionObserver(final IObserver<? super Float> observer) {
-        currentDirObject().deleteObserver(observer);
-    }
-
-    private DirectionProvider currentDirObject() {
+    public Observable<Float> currentDirObject() {
         if (dir == null) {
             synchronized(this) {
                 if (dir == null) {
-                    dir = new DirectionProvider(this);
+                    dir = DirectionProvider.create(this);
                 }
             }
         }
@@ -118,7 +93,7 @@ public class CgeoApplication extends Application {
     }
 
     public Float currentDirection() {
-        return currentDirObject().getMemory();
+        return currentDirObject().first().toBlockingObservable().single();
     }
 
     public boolean isLiveMapHintShown() {

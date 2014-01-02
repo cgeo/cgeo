@@ -898,7 +898,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         private long timeLastPositionOverlayCalculation = 0;
 
         @Override
-        protected void updateGeoData(final IGeoData geo) {
+        public void updateGeoData(final IGeoData geo) {
             if (geo.isPseudoLocation()) {
                 locationValid = false;
             } else {

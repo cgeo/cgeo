@@ -4,12 +4,15 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.settings.Settings;
 
-import android.os.Handler;
-import android.os.Message;
+import rx.Observable;
+import rx.Subscription;
+import rx.android.concurrency.AndroidSchedulers;
+import rx.util.functions.Action1;
+
+import java.util.concurrent.TimeUnit;
 
 /**
- * GeoData and Direction handler. Manipulating geodata and direction information
- * through a GeoDirHandler ensures that all listeners are registered from a {@link android.os.Looper} thread.
+ * GeoData and Direction handler.
  * <p>
  * To use this class, override at least one of {@link #updateDirection(float)} or {@link #updateGeoData(IGeoData)}. You
  * need to start the handler using one of
@@ -21,47 +24,11 @@ import android.os.Message;
  * A good place might be the {@code onResume} method of the Activity. Stop the Handler accordingly in {@code onPause}.
  * </p>
  */
-public abstract class GeoDirHandler extends Handler implements IObserver<Object> {
-
-    private static final int OBSERVABLE = 1 << 1;
-    private static final int START_GEO = 1 << 2;
-    private static final int START_DIR = 1 << 3;
-    private static final int STOP_GEO = 1 << 4;
-    private static final int STOP_DIR = 1 << 5;
-
+public abstract class GeoDirHandler {
     private static final CgeoApplication app = CgeoApplication.getInstance();
 
-    @Override
-    final public void handleMessage(final Message message) {
-        if ((message.what & START_GEO) != 0) {
-            app.addGeoObserver(this);
-        }
-
-        if ((message.what & START_DIR) != 0) {
-            app.addDirectionObserver(this);
-        }
-
-        if ((message.what & STOP_GEO) != 0) {
-            app.deleteGeoObserver(this);
-        }
-
-        if ((message.what & STOP_DIR) != 0) {
-            app.deleteDirectionObserver(this);
-        }
-
-        if ((message.what & OBSERVABLE) != 0) {
-            if (message.obj instanceof IGeoData) {
-                updateGeoData((IGeoData) message.obj);
-            } else {
-                updateDirection((Float) message.obj);
-            }
-        }
-    }
-
-    @Override
-    final public void update(final Object o) {
-        obtainMessage(OBSERVABLE, o).sendToTarget();
-    }
+    private Subscription dirSubscription = null;
+    private Subscription geoSubscription = null;
 
     /**
      * Update method called when new IGeoData is available.
@@ -69,7 +36,7 @@ public abstract class GeoDirHandler extends Handler implements IObserver<Object>
      * @param data
      *            the new data
      */
-    protected void updateGeoData(final IGeoData data) {
+    public void updateGeoData(final IGeoData data) {
         // Override this in children
     }
 
@@ -79,24 +46,38 @@ public abstract class GeoDirHandler extends Handler implements IObserver<Object>
      * @param direction
      *            the new direction
      */
-    protected void updateDirection(final float direction) {
+    public void updateDirection(final float direction) {
         // Override this in children
     }
 
     /**
      * Register the current GeoDirHandler for GeoData information.
      */
-    public void startGeo() {
-        sendEmptyMessage(START_GEO);
+    public synchronized void startGeo() {
+        geoSubscription = app.currentGeoObject()
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<IGeoData>() {
+                    @Override
+                    public void call(final IGeoData geoData) {
+                        updateGeoData(geoData);
+                    }
+                });
     }
 
     /**
      * Register the current GeoDirHandler for direction information if the preferences
      * allow it.
      */
-    public void startDir() {
+    public synchronized void startDir() {
         if (Settings.isUseCompass()) {
-            sendEmptyMessage(START_DIR);
+            dirSubscription = app.currentDirObject()
+                    .subscribeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Action1<Float>() {
+                        @Override
+                        public void call(final Float direction) {
+                            updateDirection(direction);
+                        }
+                    });
         }
     }
 
@@ -105,27 +86,43 @@ public abstract class GeoDirHandler extends Handler implements IObserver<Object>
      * preferences allow it).
      */
     public void startGeoAndDir() {
-        sendEmptyMessage(START_GEO | (Settings.isUseCompass() ? START_DIR : 0));
+        startGeo();
+        startDir();
     }
 
     /**
      * Unregister the current GeoDirHandler for GeoData information.
      */
-    public void stopGeo() {
-        sendEmptyMessage(STOP_GEO);
+    public synchronized void stopGeo() {
+        // Delay the unsubscription by 2.5 seconds, so that another activity has
+        // the time to subscribe and the GPS receiver will not be turned down.
+        if (geoSubscription != null) {
+            final Subscription subscription = geoSubscription;
+            geoSubscription = null;
+            Observable.interval(2500, TimeUnit.MILLISECONDS).take(1).subscribe(new Action1<Long>() {
+                @Override
+                public void call(final Long aLong) {
+                    subscription.unsubscribe();
+                }
+            });
+        }
     }
 
     /**
      * Unregister the current GeoDirHandler for direction information.
      */
-    public void stopDir() {
-        sendEmptyMessage(STOP_DIR);
+    public synchronized void stopDir() {
+        if (dirSubscription != null) {
+            dirSubscription.unsubscribe();
+            dirSubscription = null;
+        }
     }
 
     /**
      * Unregister the current GeoDirHandler for GeoData and direction information.
      */
     public void stopGeoAndDir() {
-        sendEmptyMessage(STOP_GEO | STOP_DIR);
+        stopGeo();
+        stopDir();
     }
 }

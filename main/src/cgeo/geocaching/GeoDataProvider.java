@@ -3,9 +3,14 @@ package cgeo.geocaching;
 import cgeo.geocaching.enumerations.LocationProviderType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MemorySubject;
 
 import org.apache.commons.lang3.StringUtils;
+import rx.Observable;
+import rx.Observable.OnSubscribeFunc;
+import rx.Observer;
+import rx.Subscription;
+import rx.observables.ConnectableObservable;
+import rx.subjects.BehaviorSubject;
 
 import android.content.Context;
 import android.location.GpsSatellite;
@@ -15,22 +20,14 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.TimeUnit;
-
-/**
- * Provide information about the user location. This class should be instantiated only once per application.
- */
-class GeoDataProvider extends MemorySubject<IGeoData> {
+class GeoDataProvider implements OnSubscribeFunc<IGeoData> {
 
     private static final String LAST_LOCATION_PSEUDO_PROVIDER = "last";
     private final LocationManager geoManager;
-    private final GpsStatus.Listener gpsStatusListener = new GpsStatusListener();
     private final LocationData gpsLocation = new LocationData();
     private final LocationData netLocation = new LocationData();
-    private final Listener networkListener = new Listener(LocationManager.NETWORK_PROVIDER, netLocation);
-    private final Listener gpsListener = new Listener(LocationManager.GPS_PROVIDER, gpsLocation);
-    private final Unregisterer unregisterer = new Unregisterer();
+    private final BehaviorSubject<IGeoData> subject;
+
     public boolean gpsEnabled = false;
     public int satellitesVisible = 0;
     public int satellitesFixed = 0;
@@ -111,51 +108,6 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
         }
     }
 
-    private class Unregisterer extends Thread {
-
-        private boolean unregisterRequested = false;
-        private final ArrayBlockingQueue<Boolean> queue = new ArrayBlockingQueue<Boolean>(1);
-
-        public void cancelUnregister() {
-            try {
-                queue.put(false);
-            } catch (final InterruptedException e) {
-                // Do nothing
-            }
-        }
-
-        public void lateUnregister() {
-            try {
-                queue.put(true);
-            } catch (final InterruptedException e) {
-                // Do nothing
-            }
-        }
-
-        @Override
-        public void run() {
-            try {
-                while (true) {
-                    if (unregisterRequested) {
-                        final Boolean element = queue.poll(2500, TimeUnit.MILLISECONDS);
-                        if (element == null) {
-                            // Timeout
-                            unregisterListeners();
-                            unregisterRequested = false;
-                        } else {
-                            unregisterRequested = element;
-                        }
-                    } else {
-                        unregisterRequested = queue.take();
-                    }
-                }
-            } catch (final InterruptedException e) {
-                // Do nothing
-            }
-        }
-
-    }
-
     /**
      * Build a new geo data provider object.
      * <p/>
@@ -164,10 +116,50 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
      *
      * @param context the context used to retrieve the system services
      */
-    GeoDataProvider(final Context context) {
+    protected GeoDataProvider(final Context context) {
         geoManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        unregisterer.start();
+        subject = BehaviorSubject.create(findInitialLocation());
+    }
 
+    public static Observable<IGeoData> create(final Context context) {
+        final GeoDataProvider provider = new GeoDataProvider(context);
+        return provider.worker.refCount();
+    }
+
+    @Override
+    public Subscription onSubscribe(final Observer<? super IGeoData> observer) {
+        return subject.subscribe(observer);
+    }
+
+    final ConnectableObservable<IGeoData> worker = new ConnectableObservable<IGeoData>(this) {
+        @Override
+        public Subscription connect() {
+            final GpsStatus.Listener gpsStatusListener = new GpsStatusListener();
+            geoManager.addGpsStatusListener(gpsStatusListener);
+
+            final Listener networkListener = new Listener(LocationManager.NETWORK_PROVIDER, netLocation);
+            final Listener gpsListener = new Listener(LocationManager.GPS_PROVIDER, gpsLocation);
+
+            for (final Listener listener : new Listener[] { networkListener, gpsListener }) {
+                try {
+                    geoManager.requestLocationUpdates(listener.locationProvider, 0, 0, listener);
+                } catch (final Exception e) {
+                    Log.w("There is no location provider " + listener.locationProvider);
+                }
+            }
+
+            return new Subscription() {
+                @Override
+                public void unsubscribe() {
+                    geoManager.removeUpdates(networkListener);
+                    geoManager.removeUpdates(gpsListener);
+                    geoManager.removeGpsStatusListener(gpsStatusListener);
+                }
+            };
+        }
+    };
+
+    private IGeoData findInitialLocation() {
         final Location initialLocation = new Location(LAST_LOCATION_PSEUDO_PROVIDER);
         try {
             // Try to find a sensible initial location from the last locations known to Android.
@@ -195,44 +187,12 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
         }
         // Start with an historical GeoData just in case someone queries it before we get
         // a chance to get any information.
-        notifyObservers(new GeoData(initialLocation, false, 0, 0));
+        return new GeoData(initialLocation, false, 0, 0);
     }
 
     private static void copyCoords(final Location target, final Location source) {
         target.setLatitude(source.getLatitude());
         target.setLongitude(source.getLongitude());
-    }
-    private void registerListeners() {
-        geoManager.addGpsStatusListener(gpsStatusListener);
-
-        for (final Listener listener : new Listener[] { networkListener, gpsListener }) {
-            try {
-                geoManager.requestLocationUpdates(listener.locationProvider, 0, 0, listener);
-            } catch (final Exception e) {
-                Log.w("There is no location provider " + listener.locationProvider);
-            }
-        }
-    }
-
-    private synchronized void unregisterListeners() {
-        // This method must be synchronized because it will be called asynchronously from the Unregisterer thread.
-        // We check that no observers have been re-added to prevent a race condition.
-        if (sizeObservers() == 0) {
-            geoManager.removeUpdates(networkListener);
-            geoManager.removeUpdates(gpsListener);
-            geoManager.removeGpsStatusListener(gpsStatusListener);
-        }
-    }
-
-    @Override
-    protected void onFirstObserver() {
-        unregisterer.cancelUnregister();
-        registerListeners();
-    }
-
-    @Override
-    protected void onLastObserver() {
-        unregisterer.lateUnregister();
     }
 
     private class Listener implements LocationListener {
@@ -336,7 +296,7 @@ class GeoDataProvider extends MemorySubject<IGeoData> {
         // We do not necessarily get signalled when satellites go to 0/0.
         final int visible = gpsLocation.isRecent() ? satellitesVisible : 0;
         final IGeoData current = new GeoData(locationData.location, gpsEnabled, visible, satellitesFixed);
-        notifyObservers(current);
+        subject.onNext(current);
     }
 
 }
