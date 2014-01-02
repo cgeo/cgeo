@@ -1338,11 +1338,11 @@ public class DataStore {
         }
     }
 
-    private static void saveLogsWithoutTransaction(final String geocode, final Iterable<LogEntry> logs) {
+    private static void saveLogsWithoutTransaction(final String geocode, final List<LogEntry> logs) {
         // TODO delete logimages referring these logs
         database.delete(dbTableLogs, "geocode = ?", new String[]{geocode});
 
-        if (!logs.iterator().hasNext()) {
+        if (logs.isEmpty()) {
             return;
         }
 
