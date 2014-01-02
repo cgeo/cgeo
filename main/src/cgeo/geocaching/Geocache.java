@@ -130,7 +130,7 @@ public class Geocache implements ICache, IWaypoint {
         }
     };
     private List<Image> spoilers = null;
-    private final List<LogEntry> logs = new LazyInitializedList<LogEntry>() {
+    private final LazyInitializedList<LogEntry> logs = new LazyInitializedList<LogEntry>() {
         @Override
         public List<LogEntry> call() {
             return DataStore.loadLogs(geocode);
@@ -1022,7 +1022,10 @@ public class Geocache implements ICache, IWaypoint {
      * @return never <code>null</code>
      */
     public List<LogEntry> getLogs() {
-        return logs;
+        // It is important to return the underlying list here and not the lazily initialized one,
+        // because database manipulation may erase the existing logs before methods are called
+        // on the previous logs, when updating the saved logs for example.
+        return logs.getUnderlyingList();
     }
 
     /**
