@@ -13,7 +13,7 @@ public abstract class LazyInitializedList<ElementType> extends AbstractList<Elem
     private volatile List<ElementType> list;
 
     @NonNull
-    private List<ElementType> getList() {
+    public List<ElementType> getUnderlyingList() {
         if (list == null) {
             synchronized(this) {
                 try {
@@ -35,32 +35,32 @@ public abstract class LazyInitializedList<ElementType> extends AbstractList<Elem
 
     @Override
     public boolean add(final ElementType element) {
-        return getList().add(element);
+        return getUnderlyingList().add(element);
     }
 
     @Override
     public ElementType set(final int index, final ElementType element) {
-        return getList().set(index, element);
+        return getUnderlyingList().set(index, element);
     }
 
     @Override
     public ElementType remove(final int index) {
-        return getList().remove(index);
+        return getUnderlyingList().remove(index);
     }
 
     @Override
     public void add(int index, final ElementType element) {
-        getList().add(index, element);
+        getUnderlyingList().add(index, element);
     }
 
     @Override
     public int size() {
-        return getList().size();
+        return getUnderlyingList().size();
     }
 
     @Override
     public ElementType get(final int index) {
-        return getList().get(index);
+        return getUnderlyingList().get(index);
     }
 
     @Override
