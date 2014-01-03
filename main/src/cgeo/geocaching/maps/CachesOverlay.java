@@ -1,11 +1,11 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CachePopup;
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.IWaypoint;
 import cgeo.geocaching.R;
 import cgeo.geocaching.WaypointPopup;
-import cgeo.geocaching.DataStore;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.connector.gc.GCMap;
 import cgeo.geocaching.enumerations.CacheType;
@@ -22,6 +22,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.content.Context;
 import android.content.res.Resources.NotFoundException;
@@ -226,19 +227,24 @@ public class CachesOverlay extends AbstractItemizedOverlay {
             }
 
             final IWaypoint coordinate = item.getCoord();
+            final String coordType = coordinate.getCoordType();
 
-            if (StringUtils.isNotBlank(coordinate.getCoordType()) && coordinate.getCoordType().equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
-                Geocache cache = DataStore.loadCache(coordinate.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
-                RequestDetailsThread requestDetailsThread = new RequestDetailsThread(cache);
-                if (!requestDetailsThread.requestRequired()) {
-                    // don't show popup if we have enough details
-                    progress.dismiss();
+            if (StringUtils.equalsIgnoreCase(coordType, "cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
+                final Geocache cache = DataStore.loadCache(coordinate.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+                if (cache != null) {
+                    RequestDetailsThread requestDetailsThread = new RequestDetailsThread(cache);
+                    if (!requestDetailsThread.requestRequired()) {
+                        // don't show popup if we have enough details
+                        progress.dismiss();
+                    }
+                    requestDetailsThread.start();
+                    return true;
                 }
-                requestDetailsThread.start();
-                return true;
+                progress.dismiss();
+                return false;
             }
 
-            if (coordinate.getCoordType() != null && coordinate.getCoordType().equalsIgnoreCase("waypoint") && coordinate.getId() >= 0) {
+            if (StringUtils.equalsIgnoreCase(coordType, "waypoint") && coordinate.getId() >= 0) {
                 CGeoMap.markCacheAsDirty(coordinate.getGeocode());
                 WaypointPopup.startActivity(context, coordinate.getId(), coordinate.getGeocode());
             } else {
@@ -281,9 +287,9 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
     private class RequestDetailsThread extends Thread {
 
-        private final Geocache cache;
+        private final @NonNull Geocache cache;
 
-        public RequestDetailsThread(Geocache cache) {
+        public RequestDetailsThread(final @NonNull Geocache cache) {
             this.cache = cache;
         }
 
