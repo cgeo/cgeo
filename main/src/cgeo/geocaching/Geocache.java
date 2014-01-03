@@ -314,7 +314,6 @@ public class Geocache implements ICache, IWaypoint {
             myVote = other.myVote;
         }
         if (!detailed && attributes.isEmpty()) {
-            attributes.clear();
             if (other.attributes != null) {
                 attributes.addAll(other.attributes);
             }
