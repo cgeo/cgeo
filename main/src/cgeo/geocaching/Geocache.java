@@ -117,13 +117,13 @@ public class Geocache implements ICache, IWaypoint {
     private int votes = 0;
     private float myVote = 0; // valid ratings are larger than zero
     private int inventoryItems = 0;
-    private final List<String> attributes = new LazyInitializedList<String>() {
+    private final LazyInitializedList<String> attributes = new LazyInitializedList<String>() {
         @Override
         public List<String> call() {
             return DataStore.loadAttributes(geocode);
         }
     };
-    private final List<Waypoint> waypoints = new LazyInitializedList<Waypoint>() {
+    private final LazyInitializedList<Waypoint> waypoints = new LazyInitializedList<Waypoint>() {
         @Override
         public List<Waypoint> call() {
             return DataStore.loadWaypoints(geocode);
@@ -766,7 +766,7 @@ public class Geocache implements ICache, IWaypoint {
 
     @Override
     public List<String> getAttributes() {
-        return attributes;
+        return attributes.getUnderlyingList();
     }
 
     @Override
@@ -989,7 +989,7 @@ public class Geocache implements ICache, IWaypoint {
      * @return always non <code>null</code>
      */
     public List<Waypoint> getWaypoints() {
-        return waypoints;
+        return waypoints.getUnderlyingList();
     }
 
     /**

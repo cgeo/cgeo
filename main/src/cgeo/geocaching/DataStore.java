@@ -1162,15 +1162,19 @@ public class DataStore {
     }
 
     private static void saveAttributesWithoutTransaction(final Geocache cache) {
-        String geocode = cache.getGeocode();
+        final String geocode = cache.getGeocode();
+
+        // The attributes must be fetched first because lazy loading may load
+        // a null set otherwise.
+        final List<String> attributes = cache.getAttributes();
         database.delete(dbTableAttributes, "geocode = ?", new String[]{geocode});
 
-        if (cache.getAttributes().isEmpty()) {
+        if (attributes.isEmpty()) {
             return;
         }
         SQLiteStatement statement = PreparedStatements.getInsertAttribute();
         final long timestamp = System.currentTimeMillis();
-        for (String attribute : cache.getAttributes()) {
+        for (final String attribute : attributes) {
             statement.bindString(1, geocode);
             statement.bindLong(2, timestamp);
             statement.bindString(3, attribute);
