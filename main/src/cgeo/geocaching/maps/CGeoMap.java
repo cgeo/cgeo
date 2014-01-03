@@ -477,7 +477,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
      * @param zoom
      */
     private void setZoom(final int zoom) {
-        mapView.getMapController().setZoom(isLiveEnabled ? Math.min(zoom, MIN_LIVEMAP_ZOOM) : zoom);
+        mapView.getMapController().setZoom(isLiveEnabled ? Math.max(zoom, MIN_LIVEMAP_ZOOM) : zoom);
     }
 
     private void prepareFilterBar() {
