@@ -59,6 +59,10 @@
                 android:title="@string/web_import_title">
             </item>
             <item
+                android:id="@+id/menu_import_android"
+                android:title="@string/gpx_import_android">
+            </item>
+            <item
                 android:id="@+id/menu_export"
                 android:title="@string/export">
             </item>

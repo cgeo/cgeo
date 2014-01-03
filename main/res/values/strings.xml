@@ -763,6 +763,7 @@
     <string name="gpx_import_delete_title">Delete file</string>
     <string name="gpx_import_delete_message">Do you want to delete %s?</string>
     <string name="gpx_import_select_list_title">Import GPX to list</string>
+    <string name="gpx_import_android">Import from Android</string>
     
     <!-- map file select -->
     <string name="map_file_select_title">Select map file</string>

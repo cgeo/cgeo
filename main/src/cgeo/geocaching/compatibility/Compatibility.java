@@ -5,6 +5,7 @@ import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.reflect.MethodUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -24,33 +25,22 @@ public final class Compatibility {
     private final static AndroidLevel8Interface level8;
     private final static AndroidLevel11Interface level11;
     private final static AndroidLevel13Interface level13;
+    private final static AndroidLevel19Interface level19;
 
     static {
-        if (isLevel8) {
-            level8 = new AndroidLevel8();
-        }
-        else {
-            level8 = new AndroidLevel8Emulation();
-        }
-        if (sdkVersion >= 11) {
-            level11 = new AndroidLevel11();
-        }
-        else {
-            level11 = new AndroidLevel11Emulation();
-        }
-        if (sdkVersion >= 13) {
-            level13 = new AndroidLevel13();
-        }
-        else {
-            level13 = new AndroidLevel13Emulation();
-        }
+        level8 = isLevel8 ? new AndroidLevel8() : new AndroidLevel8Emulation();
+        level11 = sdkVersion >= 11 ? new AndroidLevel11() : new AndroidLevel11Emulation();
+        level13 = sdkVersion >= 13 ? new AndroidLevel13() : new AndroidLevel13Emulation();
+        level19 = sdkVersion >= 19 ? new AndroidLevel19() : new AndroidLevel19Emulation();
     }
 
     /**
      * Add 90, 180 or 270 degrees to the given rotation.
      *
-     * @param directionNowPre the direction in degrees before adjustment
-     * @param activity the activity whose rotation is used to adjust the direction
+     * @param directionNowPre
+     *            the direction in degrees before adjustment
+     * @param activity
+     *            the activity whose rotation is used to adjust the direction
      * @return the adjusted direction, in the [0, 360[ range
      */
     public static float getDirectionNow(final float directionNowPre, final Activity activity) {
@@ -110,4 +100,11 @@ public final class Compatibility {
         return level8.getExternalPictureDir();
     }
 
+    public static void importGpxFromStorageAccessFramework(final @NonNull Activity activity, int requestCodeImportGpx) {
+        level19.importGpxFromStorageAccessFramework(activity, requestCodeImportGpx);
+    }
+
+    public static boolean isStorageAccessFrameworkAvailable() {
+        return sdkVersion >= 19;
+    }
 }
