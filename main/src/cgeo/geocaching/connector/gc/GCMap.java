@@ -69,6 +69,7 @@ public class GCMap {
                 throw new JSONException("No data inside JSON");
             }
 
+            final ArrayList<Geocache> caches = new ArrayList<Geocache>();
             for (int j = 0; j < dataArray.length(); j++) {
                 final Geocache cache = new Geocache();
 
@@ -93,9 +94,9 @@ public class GCMap {
                 JSONObject ownerObj = dataObject.getJSONObject("owner");
                 cache.setOwnerDisplayName(ownerObj.getString("text"));
 
-                result.addAndPutInCache(cache);
-
+                caches.add(cache);
             }
+            result.addAndPutInCache(caches);
         } catch (JSONException e) {
             result.setError(StatusCode.UNKNOWN_ERROR);
         } catch (ParseException e) {
@@ -200,6 +201,7 @@ public class GCMap {
                 }
             }
 
+            final ArrayList<Geocache> caches = new ArrayList<Geocache>();
             for (Entry<String, List<UTFGridPosition>> entry : positions.entrySet()) {
                 String id = entry.getKey();
                 List<UTFGridPosition> pos = entry.getValue();
@@ -231,9 +233,10 @@ public class GCMap {
                     exclude = true;
                 }
                 if (!exclude) {
-                    searchResult.addAndPutInCache(cache);
+                    caches.add(cache);
                 }
             }
+            searchResult.addAndPutInCache(caches);
             Log.d("Retrieved " + searchResult.getCount() + " caches for tile " + tile.toString());
 
         } catch (RuntimeException e) {

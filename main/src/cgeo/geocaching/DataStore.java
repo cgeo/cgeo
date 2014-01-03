@@ -1012,36 +1012,67 @@ public class DataStore {
      *            the Cache to save in the CacheCache/DB
      * @param saveFlags
      *
-     * @return true = cache saved successfully to the CacheCache/DB
      */
-    public static boolean saveCache(Geocache cache, EnumSet<LoadFlags.SaveFlag> saveFlags) {
-        if (cache == null) {
-            throw new IllegalArgumentException("cache must not be null");
+    public static void saveCache(Geocache cache, EnumSet<LoadFlags.SaveFlag> saveFlags) {
+        saveCaches(Collections.singletonList(cache), saveFlags);
+    }
+
+    /**
+     * Save/store a cache to the CacheCache
+     *
+     * @param caches
+     *            the caches to save in the CacheCache/DB
+     * @param saveFlags
+     *
+     */
+    public static void saveCaches(Collection<Geocache> caches, EnumSet<LoadFlags.SaveFlag> saveFlags) {
+        if (CollectionUtils.isEmpty(caches)) {
+            return;
+        }
+        final ArrayList<String> cachesFromDatabase = new ArrayList<String>();
+        final HashMap<String, Geocache> existingCaches = new HashMap<String, Geocache>();
+
+        // first check which caches are in the memory cache
+        for (Geocache cache : caches) {
+            final String geocode = cache.getGeocode();
+            final Geocache cacheFromCache = cacheCache.getCacheFromCache(geocode);
+            if (cacheFromCache == null) {
+                cachesFromDatabase.add(geocode);
+            }
+            else {
+                existingCaches.put(geocode, cacheFromCache);
+            }
         }
 
+        // then load all remaining caches from the database in one step
+        for (Geocache cacheFromDatabase : loadCaches(cachesFromDatabase, LoadFlags.LOAD_ALL_DB_ONLY)) {
+            existingCaches.put(cacheFromDatabase.getGeocode(), cacheFromDatabase);
+        }
+
+        final ArrayList<Geocache> toBeStored = new ArrayList<Geocache>();
         // Merge with the data already stored in the CacheCache or in the database if
         // the cache had not been loaded before, and update the CacheCache.
         // Also, a DB update is required if the merge data comes from the CacheCache
         // (as it may be more recent than the version in the database), or if the
         // version coming from the database is different than the version we are entering
         // into the cache (that includes absence from the database).
-        final String geocode = cache.getGeocode();
-        final Geocache cacheFromCache = cacheCache.getCacheFromCache(geocode);
-        final boolean dbUpdateRequired =
-                !cache.gatherMissingFrom(cacheFromCache != null ?
-                        cacheFromCache :
-                        loadCache(geocode, LoadFlags.LOAD_ALL_DB_ONLY)) ||
-                cacheFromCache != null;
-        cache.addStorageLocation(StorageLocation.CACHE);
-        cacheCache.putCacheInCache(cache);
+        for (Geocache cache : caches) {
+            final String geocode = cache.getGeocode();
+            final Geocache existingCache = existingCaches.get(geocode);
+            final boolean dbUpdateRequired = !cache.gatherMissingFrom(existingCache) || cacheCache.getCacheFromCache(geocode) != null;
+            cache.addStorageLocation(StorageLocation.CACHE);
+            cacheCache.putCacheInCache(cache);
 
-        // Only save the cache in the database if it is requested by the caller and
-        // the cache contains detailed information.
-        if (!saveFlags.contains(SaveFlag.SAVE_DB)) {
-            return true;
+            // Only save the cache in the database if it is requested by the caller and
+            // the cache contains detailed information.
+            if (saveFlags.contains(SaveFlag.SAVE_DB) && cache.isDetailed() && dbUpdateRequired) {
+                toBeStored.add(cache);
+            }
         }
 
-        return cache.isDetailed() && dbUpdateRequired && storeIntoDatabase(cache);
+        for (Geocache geocache : toBeStored) {
+            storeIntoDatabase(geocache);
+        }
     }
 
     private static boolean storeIntoDatabase(final Geocache cache) {
@@ -2870,8 +2901,8 @@ public class DataStore {
         return result;
     }
 
-    public static boolean saveChangedCache(Geocache cache) {
-        return DataStore.saveCache(cache, cache.getStorageLocation().contains(StorageLocation.DATABASE) ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.SAVE_CACHE));
+    public static void saveChangedCache(Geocache cache) {
+        DataStore.saveCache(cache, cache.getStorageLocation().contains(StorageLocation.DATABASE) ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.SAVE_CACHE));
     }
 
     private static class PreparedStatements {

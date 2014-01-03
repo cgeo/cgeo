@@ -126,9 +126,7 @@ public class SearchResult implements Parcelable {
      */
     public SearchResult(final Collection<Geocache> caches) {
         this();
-        for (final Geocache cache : caches) {
-            addAndPutInCache(cache);
-        }
+        addAndPutInCache(caches);
     }
 
     @Override
@@ -209,7 +207,7 @@ public class SearchResult implements Parcelable {
 
         SearchResult result = new SearchResult(this);
         result.geocodes.clear();
-        final ArrayList<Geocache> cachesForVote = new ArrayList<Geocache>();
+        final ArrayList<Geocache> includedCaches = new ArrayList<Geocache>();
         final Set<Geocache> caches = DataStore.loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
         int excluded = 0;
         for (Geocache cache : caches) {
@@ -220,13 +218,13 @@ public class SearchResult implements Parcelable {
             if (excludeCache) {
                 excluded++;
             } else {
-                result.addAndPutInCache(cache);
-                cachesForVote.add(cache);
+                includedCaches.add(cache);
             }
         }
+        result.addAndPutInCache(includedCaches);
         // decrease maximum number of caches by filtered ones
         result.setTotalCountGC(result.getTotalCountGC() - excluded);
-        GCVote.loadRatings(cachesForVote);
+        GCVote.loadRatings(includedCaches);
         return result;
     }
 
@@ -252,9 +250,11 @@ public class SearchResult implements Parcelable {
     }
 
     /** Add the cache geocode to the search and store the cache in the CacheCache */
-    public boolean addAndPutInCache(final Geocache cache) {
-        addGeocode(cache.getGeocode());
-        return DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_CACHE));
+    public void addAndPutInCache(final Collection<Geocache> caches) {
+        for (Geocache geocache : caches) {
+            addGeocode(geocache.getGeocode());
+        }
+        DataStore.saveCaches(caches, EnumSet.of(SaveFlag.SAVE_CACHE));
     }
 
     public boolean isEmpty() {

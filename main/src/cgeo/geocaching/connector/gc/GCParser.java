@@ -121,6 +121,7 @@ public abstract class GCParser {
         final int rows_count = rows.length;
 
         int excludedCaches = 0;
+        final ArrayList<Geocache> caches = new ArrayList<Geocache>();
         for (int z = 1; z < rows_count; z++) {
             final Geocache cache = new Geocache();
             final String row = rows[z];
@@ -261,8 +262,9 @@ public abstract class GCParser {
                 Log.w("GCParser.parseSearch: Failed to parse favorite count");
             }
 
-            searchResult.addAndPutInCache(cache);
+            caches.add(cache);
         }
+        searchResult.addAndPutInCache(caches);
 
         // total caches found
         try {
@@ -324,8 +326,8 @@ public abstract class GCParser {
 
         // get direction images
         if (Settings.getLoadDirImg()) {
-            final Set<Geocache> caches = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-            for (final Geocache cache : caches) {
+            final Set<Geocache> cachesReloaded = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+            for (final Geocache cache : cachesReloaded) {
                 if (cache.getCoords() == null && StringUtils.isNotEmpty(cache.getDirectionImg())) {
                     DirectionImage.getDrawable(cache.getDirectionImg());
                 }
@@ -748,15 +750,12 @@ public abstract class GCParser {
         }
 
         cache.setDetailedUpdatedNow();
-        searchResult.addAndPutInCache(cache);
+        searchResult.addAndPutInCache(Collections.singletonList(cache));
         return searchResult;
     }
 
     private static String getNumberString(final String numberWithPunctuation) {
-        if (numberWithPunctuation == null) {
-            return null;
-        }
-        return numberWithPunctuation.replaceAll("[.,]", "");
+        return StringUtils.replaceChars(numberWithPunctuation, ".,", "");
     }
 
     public static SearchResult searchByNextPage(final SearchResult search, boolean showCaptcha, RecaptchaReceiver recaptchaReceiver) {
