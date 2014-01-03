@@ -1173,7 +1173,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         public void run() {
             try {
                 showProgressHandler.sendEmptyMessage(SHOW_PROGRESS); // show progress
-                SearchResult searchResult = new SearchResult();
                 if (Settings.isGCConnectorActive()) {
                     if (tokens == null) {
                         tokens = GCLogin.getInstance().getMapTokens();
@@ -1183,7 +1182,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         }
                     }
                 }
-                searchResult = ConnectorFactory.searchByViewport(viewport.resize(0.8), tokens);
+                final SearchResult searchResult = ConnectorFactory.searchByViewport(viewport.resize(0.8), tokens);
                 downloaded = true;
 
                 Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
