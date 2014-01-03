@@ -188,7 +188,6 @@ public class GCLogin extends AbstractLogin {
         assert page != null;
 
         if (TextUtils.matches(page, GCConstants.PATTERN_MAP_LOGGED_IN)) {
-            setActualUserName(TextUtils.getMatch(page, GCConstants.PATTERN_MAP_LOGGED_IN, true, "???"));
             return true;
         }
 
