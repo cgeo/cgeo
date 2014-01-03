@@ -5,8 +5,10 @@
     <b>Next feature release</b>\n
     <b>New Features:</b>\n
     · Browse pocket queries online (Press menu on mainscreen)\n
+    · c:geo widget for direct access to stored lists\n
     · Support of extremcaching.com\n
     · Popup on map shows date of event caches\n
+    · Support GPX import from Google Drive\n
     · Show cache where a Geokrety is currently placed\n
     · Configurable twitter templates\n
     · Creating a new WP the type will be preset depending on the cache type\n 
@@ -16,9 +18,14 @@
     · Include TB inventory in GPX export\n
     · New popularity ratio filter (percentage of favorite points)\n
     · Support TB URLs for the QR-code scanner\n
+    · Limit inital zoom on live map to avoid huge area loading\n
+    · Preparation for new c:geo contacts plugin\n
+    · Support geokrety images\n
+    · Preparation for Pebble navigation app (authored by another developer)\n
     \n
      <b>Bugfixes:</b>\n
     · Reduce memory usage for OSM mapsforge to avoid crashes\n
+    · Optimize database access for faster live map loading\n
     · Cache type filter was not applied for OC nearby search\n
     · No cache coords if cache is at equator or prime meridian\n
     · Parts of the compass not shown when using big fonts\n
@@ -37,6 +44,9 @@
     · Fixed rare crash when logging an event cache\n
     · Waypoints have sometimes been doubled when refreshing cache\n
     · Preview image for logpicture was downscaled to wrong size\n
+    · Optimized login procedure and session management for gc.com\n
+    · Corrected attribute loading for opencaching.pl\n
+    · A lot of changes for more stability and usability\n
      \n
   </string>
 </resources>
