@@ -98,7 +98,9 @@ public class GCLogin extends AbstractLogin {
 
         if (getLoginStatus(loginData)) {
             Log.i("Already logged in Geocaching.com as " + username + " (" + Settings.getMemberStatus() + ')');
-            switchToEnglish(loginData);
+            if (switchToEnglish(loginData) && retry) {
+                return login(false);
+            };
             return StatusCode.NO_ERROR; // logged in
         }
 
@@ -132,7 +134,9 @@ public class GCLogin extends AbstractLogin {
         if (getLoginStatus(loginData)) {
             Log.i("Successfully logged in Geocaching.com as " + username + " (" + Settings.getMemberStatus() + ')');
 
-            switchToEnglish(loginData);
+            if (switchToEnglish(loginData) && retry) {
+                return login(false);
+            }
             Settings.setCookieStore(Cookies.dumpCookieStore());
 
             return StatusCode.NO_ERROR; // logged in
@@ -220,7 +224,13 @@ public class GCLogin extends AbstractLogin {
         return false;
     }
 
-    private void switchToEnglish(String previousPage) {
+    /**
+     * Ensure that the web site is in English.
+     *
+     * @param previousPage the content of the last loaded page
+     * @return <code>true</code> if a switch was necessary and succesfully performed (non-English -> English)
+     */
+    private boolean switchToEnglish(String previousPage) {
         if (previousPage != null && previousPage.contains(ENGLISH)) {
             Log.i("Geocaching.com language already set to English");
             // get find count
@@ -238,10 +248,11 @@ public class GCLogin extends AbstractLogin {
             final HttpResponse response = Network.postRequest(LANGUAGE_CHANGE_URI, params, new Parameters("Referer", LANGUAGE_CHANGE_URI));
             if (Network.isSuccess(response)) {
                 Log.i("changed language on geocaching.com to English");
-            } else {
-                Log.e("Failed to set geocaching.com language to English");
+                return true;
             }
+            Log.e("Failed to set geocaching.com language to English");
         }
+        return false;
     }
 
     public BitmapDrawable downloadAvatarAndGetMemberStatus() {
