@@ -239,19 +239,19 @@ public class MainActivity extends AbstractActivity {
     private void startBackgroundLogin() {
         assert(app != null);
 
-        (new Thread() {
-            @Override
-            public void run() {
-                final boolean mustLogin = app.mustRelog();
+        final boolean mustLogin = app.mustRelog();
 
-                for (final ILogin conn : ConnectorFactory.getActiveLiveConnectors()) {
-                    if (mustLogin || !conn.isLoggedIn()) {
+        for (final ILogin conn : ConnectorFactory.getActiveLiveConnectors()) {
+            if (mustLogin || !conn.isLoggedIn()) {
+                new Thread() {
+                    @Override
+                    public void run() {
                         conn.login(firstLoginHandler, MainActivity.this);
                         updateUserInfoHandler.sendEmptyMessage(-1);
                     }
-                }
+                }.start();
             }
-        }).start();
+        }
     }
 
     @Override
