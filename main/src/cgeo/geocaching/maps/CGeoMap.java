@@ -1182,10 +1182,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                             noMapTokenHandler.sendEmptyMessage(0);
                         }
                     }
-
-                    searchResult = ConnectorFactory.searchByViewport(viewport.resize(0.8), tokens);
-                    downloaded = true;
                 }
+                searchResult = ConnectorFactory.searchByViewport(viewport.resize(0.8), tokens);
+                downloaded = true;
 
                 Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
                 CGeoMap.filter(result);
