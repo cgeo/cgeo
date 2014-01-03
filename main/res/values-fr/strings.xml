@@ -632,7 +632,7 @@
   <string name="cache_status_not_premium">Pour tous les membres</string>
   <string name="cache_status_stored">Stockée</string>
   <string name="cache_status_not_stored">Non stockée</string>
-  <string name="cache_geocode">Code gc</string>
+  <string name="cache_geocode">Géocode</string>
   <string name="cache_name">Nom</string>
   <string name="cache_type">Type</string>
   <string name="cache_size">Taille</string>
@@ -687,6 +687,7 @@
   <string name="gpx_import_delete_title">Effacer le fichier</string>
   <string name="gpx_import_delete_message">Voulez vous effacer %s ?</string>
   <string name="gpx_import_select_list_title">Importer GPX dans la liste</string>
+  <string name="gpx_import_android">Importation depuis Android</string>
   <string name="map_file_select_title">Choisir un fichier carte</string>
   <string name="web_import_title">Import depuis le web</string>
   <string name="web_import_waiting">En attente de nouvelles caches depuis le web…</string>
@@ -759,7 +760,7 @@
   <string name="live_map_notification">Lors de l\'affichage de la carte active, certaines coordonnées de géocaches peuvent être imprécises et sont indiquées par un cercle orange.\nDemander les détails d\'une géocache ou la sauver pour une utilisation hors-ligne récupérera les coordonnées exactes.\n\nVous trouverez plus d\'informations sur les changements sur la page \"À propos de c:geo\".</string>
   <string name="live_map_note_dontshow">Ne plus afficher</string>
   <string name="search_bar_hint">Recherche de caches</string>
-  <string name="search_bar_desc">Caches (code GC, mot clé), Objets voyageurs (code TB)</string>
+  <string name="search_bar_desc">Caches (géocode, mot clé), Objets voyageurs (code TB)</string>
   <string name="search_coordinates">Coordonnées</string>
   <string name="search_coordinates_button">Recherche par coordonnées</string>
   <string name="search_address">Adresse</string>
