@@ -8,7 +8,9 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
+import cgeo.geocaching.connector.capability.ISearchByFinder;
 import cgeo.geocaching.connector.capability.ISearchByKeyword;
+import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.gc.MapTokens;
 import cgeo.geocaching.connector.oc.UserInfo.UserInfoStatus;
@@ -24,7 +26,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import android.content.Context;
 import android.os.Handler;
 
-public class OCApiLiveConnector extends OCApiConnector implements ISearchByCenter, ISearchByViewPort, ILogin, ISearchByKeyword {
+public class OCApiLiveConnector extends OCApiConnector implements ISearchByCenter, ISearchByViewPort, ILogin, ISearchByKeyword, ISearchByOwner, ISearchByFinder {
 
     private final String cS;
     private final int isActivePrefKeyId;
@@ -53,8 +55,17 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
 
     @Override
     public SearchResult searchByCenter(@NonNull Geopoint center, final @NonNull RecaptchaReceiver recaptchaReceiver) {
-
         return new SearchResult(OkapiClient.getCachesAround(center, this));
+    }
+
+    @Override
+    public SearchResult searchByOwner(@NonNull String username, final @NonNull RecaptchaReceiver recaptchaReceiver) {
+        return new SearchResult(OkapiClient.getCachesByOwner(username, this));
+    }
+
+    @Override
+    public SearchResult searchByFinder(@NonNull String username, final @NonNull RecaptchaReceiver recaptchaReceiver) {
+        return new SearchResult(OkapiClient.getCachesByFinder(username, this));
     }
 
     @Override

@@ -104,6 +104,7 @@ final class OkapiClient {
     private static final String LOG_DATE = "date";
     private static final String LOG_USER = "user";
 
+    private static final String USER_UUID = "uuid";
     private static final String USER_USERNAME = "username";
     private static final String USER_CACHES_FOUND = "caches_found";
     private static final String USER_INFO_FIELDS = "username|caches_found";
@@ -146,6 +147,24 @@ final class OkapiClient {
         valueMap.put("center", centerString);
         valueMap.put("limit", "20");
         valueMap.put("radius", "200");
+
+        return requestCaches(connector, params, valueMap);
+    }
+
+    public static List<Geocache> getCachesByOwner(final String username, final OCApiConnector connector) {
+        final Parameters params = new Parameters("search_method", METHOD_SEARCH_ALL);
+        final Map<String, String> valueMap = new LinkedHashMap<String, String>();
+        final String uuid = getUserUUID(connector, username);
+        valueMap.put("owner_uuid", uuid);
+
+        return requestCaches(connector, params, valueMap);
+    }
+
+    public static List<Geocache> getCachesByFinder(final String username, final OCApiConnector connector) {
+        final Parameters params = new Parameters("search_method", METHOD_SEARCH_ALL);
+        final Map<String, String> valueMap = new LinkedHashMap<String, String>();
+        final String uuid = getUserUUID(connector, username);
+        valueMap.put("found_by", uuid);
 
         return requestCaches(connector, params, valueMap);
     }
@@ -696,6 +715,28 @@ final class OkapiClient {
             default:
                 return "";
         }
+    }
+
+    public static String getUserUUID(final OCApiConnector connector, final String userName) {
+        final Parameters params = new Parameters("fields", USER_UUID, USER_USERNAME, userName);
+
+        final JSONResult result = request(connector, OkapiService.SERVICE_USER_BY_USERNAME, params);
+        if (!result.isSuccess) {
+            final OkapiError error = new OkapiError(result.data);
+            Log.e("OkapiClient.getUserUUID: error getting user info: '" + error.getMessage() + "'");
+            return null;
+        }
+
+        JSONObject data = result.data;
+        if (!data.isNull(USER_UUID)) {
+            try {
+                return data.getString(USER_UUID);
+            } catch (final JSONException e) {
+                Log.e("OkapiClient.getUserUUID - uuid", e);
+            }
+        }
+
+        return null;
     }
 
     public static UserInfo getUserInfo(final OCApiLiveConnector connector) {
