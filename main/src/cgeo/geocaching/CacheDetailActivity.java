@@ -1026,17 +1026,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // data license
             final IConnector connector = ConnectorFactory.getConnector(cache);
-            if (connector != null) {
-                final String license = connector.getLicenseText(cache);
-                if (StringUtils.isNotBlank(license)) {
-                    view.findViewById(R.id.license_box).setVisibility(View.VISIBLE);
-                    final TextView licenseView = ((TextView) view.findViewById(R.id.license));
-                    licenseView.setText(Html.fromHtml(license), BufferType.SPANNABLE);
-                    licenseView.setClickable(true);
-                    licenseView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-                } else {
-                    view.findViewById(R.id.license_box).setVisibility(View.GONE);
-                }
+            final String license = connector.getLicenseText(cache);
+            if (StringUtils.isNotBlank(license)) {
+                view.findViewById(R.id.license_box).setVisibility(View.VISIBLE);
+                final TextView licenseView = ((TextView) view.findViewById(R.id.license));
+                licenseView.setText(Html.fromHtml(license), BufferType.SPANNABLE);
+                licenseView.setClickable(true);
+                licenseView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+            } else {
+                view.findViewById(R.id.license_box).setVisibility(View.GONE);
             }
 
             return view;

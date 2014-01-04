@@ -8,6 +8,7 @@ import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.utils.Version;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -20,7 +21,6 @@ import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
@@ -196,12 +196,10 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     private String getRawResourceString(final int resourceId) {
         final InputStream ins = res.openRawResource(resourceId);
-        final String result = new Scanner(ins, CharEncoding.UTF_8).useDelimiter("\\A").next();
-        try {
-            ins.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        final Scanner scanner = new Scanner(ins, CharEncoding.UTF_8);
+        final String result = scanner.useDelimiter("\\A").next();
+        IOUtils.closeQuietly(ins);
+        IOUtils.closeQuietly(scanner);
         return result;
     }
 

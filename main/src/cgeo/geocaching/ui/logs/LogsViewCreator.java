@@ -84,7 +84,7 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
 
         fillCountOrLocation(holder, log);
 
-        // logtext, avoid parsing HTML if not necessary
+        // log text, avoid parsing HTML if not necessary
         String logText = log.log;
         if (TextUtils.containsHtml(logText)) {
             logText = log.getDisplayText();
@@ -146,7 +146,7 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
 
     abstract protected boolean isValid();
 
-    /** Loads the Log Images outside the ui thread. */
+    /** Loads the Log Images outside the UI thread. */
 
     private class LogImageLoader extends AsyncTask<String, Progress, Spanned> {
         final private LogViewHolder holder;

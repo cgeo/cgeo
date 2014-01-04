@@ -5,8 +5,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 
-import org.apache.commons.lang3.StringUtils;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -66,9 +64,6 @@ public class CapabilitiesPreference extends AbstractAttributeBasedPrefence {
     public String createCapabilitiesMessage() {
         // TODO: this needs a better key for the connectors
         IConnector connector = ConnectorFactory.getConnector(connectorCode + "1234");
-        if (connector == null) {
-            return StringUtils.EMPTY;
-        }
         StringBuilder builder = new StringBuilder("<p>"
                 + TextUtils.htmlEncode(CgeoApplication.getInstance().getString(R.string.feature_description)) + "</p><ul>");
 

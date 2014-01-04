@@ -212,27 +212,27 @@ public abstract class AbstractConnector implements IConnector {
 
     @Override
     public final Collection<String> getCapabilities() {
-        ArrayList<String> builder = new ArrayList<String>();
-        addCapability(builder, ISearchByViewPort.class, R.string.feature_search_live_map);
-        addCapability(builder, ISearchByKeyword.class, R.string.feature_search_keyword);
-        addCapability(builder, ISearchByCenter.class, R.string.feature_search_center);
-        addCapability(builder, ISearchByGeocode.class, R.string.feature_search_geocode);
+        ArrayList<String> list = new ArrayList<String>();
+        addCapability(list, ISearchByViewPort.class, R.string.feature_search_live_map);
+        addCapability(list, ISearchByKeyword.class, R.string.feature_search_keyword);
+        addCapability(list, ISearchByCenter.class, R.string.feature_search_center);
+        addCapability(list, ISearchByGeocode.class, R.string.feature_search_geocode);
         if (supportsLogging()) {
-            builder.add(feature(R.string.feature_online_logging));
+            list.add(feature(R.string.feature_online_logging));
         }
         if (supportsLogImages()) {
-            builder.add(feature(R.string.feature_log_images));
+            list.add(feature(R.string.feature_log_images));
         }
         if (supportsPersonalNote()) {
-            builder.add(feature(R.string.feature_personal_notes));
+            list.add(feature(R.string.feature_personal_notes));
         }
         if (supportsOwnCoordinates()) {
-            builder.add(feature(R.string.feature_own_coordinates));
+            list.add(feature(R.string.feature_own_coordinates));
         }
         if (supportsWatchList()) {
-            builder.add(feature(R.string.feature_watch_list));
+            list.add(feature(R.string.feature_watch_list));
         }
-        return builder;
+        return list;
     }
 
     private void addCapability(final ArrayList<String> capabilities, final Class<? extends IConnector> clazz, final int featureResourceId) {

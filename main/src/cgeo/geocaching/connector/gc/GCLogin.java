@@ -100,7 +100,7 @@ public class GCLogin extends AbstractLogin {
             Log.i("Already logged in Geocaching.com as " + username + " (" + Settings.getMemberStatus() + ')');
             if (switchToEnglish(loginData) && retry) {
                 return login(false);
-            };
+            }
             return StatusCode.NO_ERROR; // logged in
         }
 
