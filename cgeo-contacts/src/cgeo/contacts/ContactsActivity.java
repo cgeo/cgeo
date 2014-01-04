@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.Gravity;
@@ -35,7 +36,14 @@ public final class ContactsActivity extends Activity {
             return;
         }
 
-        int contactId = getContactId(nickName);
+        // search by nickname
+        int contactId = getContactId(nickName, ContactsContract.Data.CONTENT_URI, ContactsContract.Data.CONTACT_ID, ContactsContract.CommonDataKinds.Nickname.NAME);
+
+        // search by display name
+        if (contactId == 0) {
+            contactId = getContactId(nickName, ContactsContract.Contacts.CONTENT_URI, BaseColumns._ID, ContactsContract.Contacts.DISPLAY_NAME);
+        }
+
         if (contactId == 0) {
             showToast(getString(R.string.contact_not_found, nickName));
             finish();
@@ -53,22 +61,22 @@ public final class ContactsActivity extends Activity {
         startActivity(intent);
     }
 
-    private int getContactId(final String searchName) {
+    private int getContactId(final String searchName, Uri uri, final String idColumnName, final String selectionColumnName) {
         int foundId = 0;
-        final String[] projection = new String[] { ContactsContract.Data.CONTACT_ID };
-        final String selection = ContactsContract.CommonDataKinds.Nickname.NAME + " = ? COLLATE NOCASE";
+        final String[] projection = new String[] { idColumnName };
+        final String selection = selectionColumnName + " = ? COLLATE NOCASE";
         final String[] selectionArgs = new String[] { searchName };
-        Cursor nicknameCursor = null;
+        Cursor cursor = null;
         try {
-            nicknameCursor = getContentResolver().query(ContactsContract.Data.CONTENT_URI, projection, selection, selectionArgs, null);
-            if (nicknameCursor != null && nicknameCursor.moveToNext()) {
-                foundId = nicknameCursor.getInt(0);
+            cursor = getContentResolver().query(uri, projection, selection, selectionArgs, null);
+            if (cursor != null && cursor.moveToNext()) {
+                foundId = cursor.getInt(0);
             }
         } catch (Exception e) {
             Log.e(LOG_TAG, "ContactsActivity.getContactId", e);
         } finally {
-            if (nicknameCursor != null) {
-                nicknameCursor.close();
+            if (cursor != null) {
+                cursor.close();
             }
         }
         return foundId;
