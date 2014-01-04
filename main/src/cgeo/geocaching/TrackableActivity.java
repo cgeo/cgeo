@@ -378,7 +378,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             final TextView owner = details.add(R.string.trackable_owner, res.getString(R.string.trackable_unknown));
             if (StringUtils.isNotBlank(trackable.getOwner())) {
                 owner.setText(Html.fromHtml(trackable.getOwner()), TextView.BufferType.SPANNABLE);
-                owner.setOnClickListener(new UserActionsClickListener());
+                owner.setOnClickListener(new UserActionsClickListener(trackable));
             }
 
             // trackable spotted
@@ -431,9 +431,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                         }
                     });
                 } else if (Trackable.SPOTTED_USER == trackable.getSpottedType()) {
-                    spotted.setOnClickListener(new UserNameClickListener(Html.fromHtml(trackable.getSpottedName()).toString()));
+                    spotted.setOnClickListener(new UserNameClickListener(trackable, Html.fromHtml(trackable.getSpottedName()).toString()));
                 } else if (Trackable.SPOTTED_OWNER == trackable.getSpottedType()) {
-                    spotted.setOnClickListener(new UserNameClickListener(Html.fromHtml(trackable.getOwner()).toString()));
+                    spotted.setOnClickListener(new UserNameClickListener(trackable, Html.fromHtml(trackable.getOwner()).toString()));
                 }
             }
 

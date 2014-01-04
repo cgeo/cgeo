@@ -64,7 +64,7 @@ public class TrackableLogsViewCreator extends LogsViewCreator {
 
     @Override
     protected UserActionsClickListener createUserActionsListener() {
-        return new UserActionsClickListener();
+        return new UserActionsClickListener(trackable);
     }
 
 }

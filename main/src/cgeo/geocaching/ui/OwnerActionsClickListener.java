@@ -1,6 +1,7 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.connector.ConnectorFactory;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -15,7 +16,7 @@ public class OwnerActionsClickListener extends AbstractUserClickListener {
     private final Geocache cache;
 
     public OwnerActionsClickListener(Geocache cache) {
-        super(cache.supportsUserActions());
+        super(ConnectorFactory.getConnector(cache).getUserActions());
         this.cache = cache;
     }
 

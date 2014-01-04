@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractListActivity;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
@@ -1463,7 +1464,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
-    public static void startActivityOwner(final AbstractActivity context, final String userName) {
+    public static void startActivityOwner(final Activity context, final String userName) {
         if (!isValidUsername(context, userName)) {
             return;
         }
@@ -1473,15 +1474,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
-    private static boolean isValidUsername(AbstractActivity context, String username) {
+    private static boolean isValidUsername(final Activity context, final String username) {
         if (StringUtils.isBlank(username)) {
-            context.showToast(CgeoApplication.getInstance().getString(R.string.warn_no_username));
+            ActivityMixin.showToast(context, R.string.warn_no_username);
             return false;
         }
         return true;
     }
 
-    public static void startActivityUserName(final AbstractActivity context, final String userName) {
+    public static void startActivityUserName(final Activity context, final String userName) {
         if (!isValidUsername(context, userName)) {
             return;
         }

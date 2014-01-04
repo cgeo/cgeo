@@ -1,11 +1,14 @@
 package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.Trackable;
+import cgeo.geocaching.connector.UserAction;
+import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCParser;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class TravelBugConnector extends AbstractTrackableConnector {
@@ -53,5 +56,12 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     @Override
     public String getTrackableCodeFromUrl(@NonNull String url) {
         return StringUtils.substringAfterLast(url, "?tracker=");
+    }
+
+    @Override
+    public @NonNull
+    List<UserAction> getUserActions() {
+        // travel bugs should have the same actions as GC caches
+        return GCConnector.getInstance().getUserActions();
     }
 }

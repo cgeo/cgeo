@@ -705,10 +705,6 @@ public class Geocache implements ICache, IWaypoint {
         return StringUtils.defaultIfBlank(personalNote, null);
     }
 
-    public boolean supportsUserActions() {
-        return getConnector().supportsUserActions();
-    }
-
     public boolean supportsCachesAround() {
         return getConnector() instanceof ISearchByCenter;
     }

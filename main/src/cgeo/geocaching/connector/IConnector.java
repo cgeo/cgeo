@@ -111,13 +111,6 @@ public interface IConnector {
     public String getLicenseText(final @NonNull Geocache cache);
 
     /**
-     * enable/disable user actions in cache details
-     *
-     * @return
-     */
-    public boolean supportsUserActions();
-
-    /**
      * return true if this is a ZIP file containing a GPX file
      *
      * @param fileName
@@ -251,8 +244,11 @@ public interface IConnector {
 
     /**
      * Get a user readable collection of all online features of this connector.
-     * 
+     *
      * @return
      */
     public Collection<String> getCapabilities();
+
+    public @NonNull
+    List<UserAction> getUserActions();
 }

@@ -1,9 +1,12 @@
 package cgeo.geocaching.connector;
 
+import cgeo.contacts.ContactsAddon;
+import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.UserAction.Context;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByKeyword;
@@ -11,6 +14,7 @@ import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.utils.RunnableWithArgument;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
@@ -97,11 +101,6 @@ public abstract class AbstractConnector implements IConnector {
     @Override
     public String getLicenseText(final @NonNull Geocache cache) {
         return null;
-    }
-
-    @Override
-    public boolean supportsUserActions() {
-        return false;
     }
 
     protected static boolean isNumericId(final String string) {
@@ -218,9 +217,6 @@ public abstract class AbstractConnector implements IConnector {
         addCapability(builder, ISearchByKeyword.class, R.string.feature_search_keyword);
         addCapability(builder, ISearchByCenter.class, R.string.feature_search_center);
         addCapability(builder, ISearchByGeocode.class, R.string.feature_search_geocode);
-        if (supportsUserActions()) {
-            builder.add(feature(R.string.feature_search_user));
-        }
         if (supportsLogging()) {
             builder.add(feature(R.string.feature_online_logging));
         }
@@ -248,4 +244,46 @@ public abstract class AbstractConnector implements IConnector {
     private static String feature(int featureResourceId) {
         return CgeoApplication.getInstance().getString(featureResourceId);
     }
+
+    @Override
+    public @NonNull
+    List<UserAction> getUserActions() {
+        return getDefaultUserActions();
+    }
+
+    /**
+     * @return user actions which are always available (independent of cache or trackable)
+     */
+    static @NonNull
+    public List<UserAction> getDefaultUserActions() {
+        final ArrayList<UserAction> actions = new ArrayList<UserAction>();
+        if (ContactsAddon.isAvailable()) {
+            actions.add(new UserAction(R.string.user_menu_open_contact, new RunnableWithArgument<UserAction.Context>() {
+
+                @Override
+                public void run(Context context) {
+                    ContactsAddon.openContactCard(context.activity, context.userName);
+                }
+            }));
+        }
+
+        actions.add(new UserAction(R.string.user_menu_view_hidden, new RunnableWithArgument<UserAction.Context>() {
+
+            @Override
+            public void run(Context context) {
+                CacheListActivity.startActivityOwner(context.activity, context.userName);
+            }
+        }));
+
+        actions.add(new UserAction(R.string.user_menu_view_found, new RunnableWithArgument<UserAction.Context>() {
+
+            @Override
+            public void run(Context context) {
+                CacheListActivity.startActivityUserName(context.activity, context.userName);
+            }
+        }));
+
+        return actions;
+    }
+
 }

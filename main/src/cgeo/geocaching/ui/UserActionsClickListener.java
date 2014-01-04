@@ -1,6 +1,8 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.Trackable;
+import cgeo.geocaching.connector.ConnectorFactory;
 
 import android.view.View;
 import android.widget.TextView;
@@ -11,15 +13,15 @@ import android.widget.TextView;
 public class UserActionsClickListener extends AbstractUserClickListener {
 
     public UserActionsClickListener(Geocache cache) {
-        super(cache.supportsUserActions());
+        super(ConnectorFactory.getConnector(cache).getUserActions());
     }
 
-    public UserActionsClickListener() {
-        super(true);
+    public UserActionsClickListener(Trackable trackable) {
+        super(ConnectorFactory.getConnector(trackable).getUserActions());
     }
 
     @Override
-    protected CharSequence getUserName(View view) {
+    protected String getUserName(View view) {
         return ((TextView) view).getText().toString();
     }
 }

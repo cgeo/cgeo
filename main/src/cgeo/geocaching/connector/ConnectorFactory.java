@@ -33,7 +33,7 @@ import java.util.Collections;
 import java.util.List;
 
 public final class ConnectorFactory {
-    private static final UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
+    private static final @NonNull UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
     private static final Collection<IConnector> CONNECTORS = Collections.unmodifiableCollection(Arrays.asList(new IConnector[] {
             GCConnector.getInstance(),
             ECConnector.getInstance(),
@@ -119,7 +119,8 @@ public final class ConnectorFactory {
         return false;
     }
 
-    public static IConnector getConnector(ICache cache) {
+    public static @NonNull
+    IConnector getConnector(ICache cache) {
         return getConnector(cache.getGeocode());
     }
 
@@ -137,7 +138,8 @@ public final class ConnectorFactory {
         return UNKNOWN_TRACKABLE_CONNECTOR; // avoid null checks by returning a non implementing connector
     }
 
-    public static IConnector getConnector(final String geocodeInput) {
+    public static @NonNull
+    IConnector getConnector(final String geocodeInput) {
         // this may come from user input
         final String geocode = StringUtils.trim(geocodeInput);
         if (geocode == null) {
