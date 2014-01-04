@@ -120,13 +120,13 @@
             </RelativeLayout>
 
             <EditText
-                android:id="@+id/username"
+                android:id="@+id/finder"
                 style="@style/edittext_full"
                 android:hint="@string/search_fbu_prefill"
                 android:imeOptions="actionGo" />
 
             <Button
-                android:id="@+id/search_username"
+                android:id="@+id/search_finder"
                 style="@style/button_full"
                 android:text="@string/search_fbu_button" />
             <!-- ** -->

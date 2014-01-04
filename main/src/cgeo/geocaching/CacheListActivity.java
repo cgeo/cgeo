@@ -30,7 +30,7 @@ import cgeo.geocaching.loaders.OfflineGeocacheListLoader;
 import cgeo.geocaching.loaders.OwnerGeocacheListLoader;
 import cgeo.geocaching.loaders.PocketGeocacheListLoader;
 import cgeo.geocaching.loaders.RemoveFromHistoryLoader;
-import cgeo.geocaching.loaders.UsernameGeocacheListLoader;
+import cgeo.geocaching.loaders.FinderGeocacheListLoader;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.Network;
@@ -1643,10 +1643,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     loader = new AddressGeocacheListLoader(app, address);
                 }
                 break;
-            case USERNAME:
+            case FINDER:
                 final String username = extras.getString(Intents.EXTRA_USERNAME);
                 rememberTerm(username);
-                loader = new UsernameGeocacheListLoader(app, username);
+                loader = new FinderGeocacheListLoader(app, username);
                 break;
             case OWNER:
                 final String ownerName = extras.getString(Intents.EXTRA_USERNAME);

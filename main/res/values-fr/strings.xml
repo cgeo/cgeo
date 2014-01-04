@@ -493,7 +493,8 @@
   <string name="feature_log_images">Joindre des images aux entrées de journal</string>
   <string name="feature_watch_list">Liste de suivi</string>
   <string name="feature_own_coordinates">Stockage de coordonnées modifiées</string>
-  <string name="feature_search_user">Recherche par propriétaire/découvreur</string>
+  <string name="feature_search_owner">Recherche par propriétaire</string>
+  <string name="feature_search_finder">Recherche par découvreur</string>
   <string name="feature_search_keyword">Recherche par mot clé</string>
   <string name="feature_search_live_map">Carte active</string>
   <string name="feature_search_center">Recherche par position</string>

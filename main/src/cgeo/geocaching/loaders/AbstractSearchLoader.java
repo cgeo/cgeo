@@ -23,7 +23,7 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
         COORDINATE,
         KEYWORD,
         ADDRESS,
-        USERNAME,
+        FINDER,
         OWNER,
         MAP,
         REMOVE_FROM_HISTORY,

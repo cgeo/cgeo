@@ -8,8 +8,10 @@ import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.UserAction.Context;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
+import cgeo.geocaching.connector.capability.ISearchByFinder;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByKeyword;
+import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
@@ -217,6 +219,8 @@ public abstract class AbstractConnector implements IConnector {
         addCapability(list, ISearchByKeyword.class, R.string.feature_search_keyword);
         addCapability(list, ISearchByCenter.class, R.string.feature_search_center);
         addCapability(list, ISearchByGeocode.class, R.string.feature_search_geocode);
+        addCapability(list, ISearchByOwner.class, R.string.feature_search_owner);
+        addCapability(list, ISearchByFinder.class, R.string.feature_search_finder);
         if (supportsLogging()) {
             list.add(feature(R.string.feature_online_logging));
         }
@@ -248,7 +252,28 @@ public abstract class AbstractConnector implements IConnector {
     @Override
     public @NonNull
     List<UserAction> getUserActions() {
-        return getDefaultUserActions();
+        List<UserAction> actions = getDefaultUserActions();
+
+        if (this instanceof ISearchByOwner) {
+            actions.add(new UserAction(R.string.user_menu_view_hidden, new RunnableWithArgument<UserAction.Context>() {
+
+                @Override
+                public void run(Context context) {
+                    CacheListActivity.startActivityOwner(context.activity, context.userName);
+                }
+            }));
+        }
+
+        if (this instanceof ISearchByFinder) {
+            actions.add(new UserAction(R.string.user_menu_view_found, new RunnableWithArgument<UserAction.Context>() {
+
+                @Override
+                public void run(Context context) {
+                    CacheListActivity.startActivityUserName(context.activity, context.userName);
+                }
+            }));
+        }
+        return actions;
     }
 
     /**
@@ -266,22 +291,6 @@ public abstract class AbstractConnector implements IConnector {
                 }
             }));
         }
-
-        actions.add(new UserAction(R.string.user_menu_view_hidden, new RunnableWithArgument<UserAction.Context>() {
-
-            @Override
-            public void run(Context context) {
-                CacheListActivity.startActivityOwner(context.activity, context.userName);
-            }
-        }));
-
-        actions.add(new UserAction(R.string.user_menu_view_found, new RunnableWithArgument<UserAction.Context>() {
-
-            @Override
-            public void run(Context context) {
-                CacheListActivity.startActivityUserName(context.activity, context.userName);
-            }
-        }));
 
         return actions;
     }

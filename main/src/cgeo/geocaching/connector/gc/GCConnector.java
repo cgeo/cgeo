@@ -13,8 +13,10 @@ import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
+import cgeo.geocaching.connector.capability.ISearchByFinder;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByKeyword;
+import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -40,7 +42,7 @@ import android.os.Handler;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ISearchByKeyword, ILogin, ICredentials {
+public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ISearchByKeyword, ILogin, ICredentials, ISearchByOwner, ISearchByFinder {
 
     private static final String CACHE_URL_SHORT = "http://coord.info/";
     // Double slash is used to force open in browser
@@ -392,6 +394,16 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
             }
         }));
         return actions;
+    }
+
+    @Override
+    public SearchResult searchByOwner(final @NonNull String username, final @NonNull RecaptchaReceiver recaptchaReceiver) {
+        return GCParser.searchByOwner(username, Settings.getCacheType(), Settings.isShowCaptcha(), recaptchaReceiver);
+    }
+
+    @Override
+    public SearchResult searchByFinder(final @NonNull String username, final @NonNull RecaptchaReceiver recaptchaReceiver) {
+        return GCParser.searchByUsername(username, Settings.getCacheType(), Settings.isShowCaptcha(), recaptchaReceiver);
     }
 
 }

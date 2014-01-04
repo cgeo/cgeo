@@ -6,7 +6,9 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
+import cgeo.geocaching.connector.capability.ISearchByFinder;
 import cgeo.geocaching.connector.capability.ISearchByKeyword;
+import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -71,6 +73,10 @@ public final class ConnectorFactory {
 
     private static final Collection<ISearchByKeyword> searchByKeywordConns = getMatchingConnectors(ISearchByKeyword.class);
 
+    private static final Collection<ISearchByOwner> SEARCH_BY_OWNER_CONNECTORS = getMatchingConnectors(ISearchByOwner.class);
+
+    private static final Collection<ISearchByFinder> SEARCH_BY_FINDER_CONNECTORS = getMatchingConnectors(ISearchByFinder.class);
+
     @SuppressWarnings("unchecked")
     private static <T extends IConnector> Collection<T> getMatchingConnectors(final Class<T> clazz) {
         final List<T> matching = new ArrayList<T>();
@@ -92,6 +98,14 @@ public final class ConnectorFactory {
 
     public static Collection<ISearchByKeyword> getSearchByKeywordConnectors() {
         return searchByKeywordConns;
+    }
+
+    public static Collection<ISearchByOwner> getSearchByOwnerConnectors() {
+        return SEARCH_BY_OWNER_CONNECTORS;
+    }
+
+    public static Collection<ISearchByFinder> getSearchByFinderConnectors() {
+        return SEARCH_BY_FINDER_CONNECTORS;
     }
 
     public static ILogin[] getActiveLiveConnectors() {

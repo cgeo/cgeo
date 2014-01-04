@@ -48,8 +48,8 @@ public class SearchActivity extends AbstractActivity {
     @InjectView(R.id.keyword) protected EditText keywordEditText;
     @InjectView(R.id.search_keyword) protected Button buttonSearchKeyword;
 
-    @InjectView(R.id.username) protected EditText userNameEditText;
-    @InjectView(R.id.search_username) protected Button buttonSearchUserName;
+    @InjectView(R.id.finder) protected EditText finderNameEditText;
+    @InjectView(R.id.search_finder) protected Button buttonSearchFinder;
 
     @InjectView(R.id.owner) protected EditText ownerNameEditText;
     @InjectView(R.id.search_owner) protected Button buttonSearchOwner;
@@ -192,11 +192,11 @@ public class SearchActivity extends AbstractActivity {
             }
         });
 
-        setSearchAction(userNameEditText, buttonSearchUserName, new Runnable() {
+        setSearchAction(finderNameEditText, buttonSearchFinder, new Runnable() {
 
             @Override
             public void run() {
-                findByUsernameFn();
+                findByFinderFn();
             }
         });
 
@@ -297,8 +297,8 @@ public class SearchActivity extends AbstractActivity {
         startActivity(addressesIntent);
     }
 
-    public final void findByUsernameFn() {
-        final String usernameText = StringUtils.trim(userNameEditText.getText().toString());
+    public final void findByFinderFn() {
+        final String usernameText = StringUtils.trim(finderNameEditText.getText().toString());
 
         if (StringUtils.isBlank(usernameText)) {
             Dialogs.message(this, R.string.warn_search_help_title, R.string.warn_search_help_user);
