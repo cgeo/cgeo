@@ -347,6 +347,7 @@
   <string name="settings_title_ec">Extremcaching.com</string>
   <string name="settings_activate_gc">Aktivieren</string>
   <string name="settings_activate_ec">Aktivieren</string>
+  <string name="settings_activate_ox">Aktivieren</string>
   <string name="settings_gc_legal_note">Mit Benutzung der Dienste von geocaching.com werden die Groundspeak-Nutzungsbedingungen (englisch) akzeptiert.</string>
   <string name="settings_info_facebook_login_title">Facebook-Login</string>
   <string name="settings_info_facebook_login">c:geo kann sich zwar nicht per Facebook bei Geocaching.com einloggen, aber es gibt eine einfache Abhilfe …</string>
@@ -506,7 +507,7 @@
   <string name="auth_again">Neustarten</string>
   <string name="auth_dialog_waiting">Warte auf %s…</string>
   <string name="auth_explain_short">Der folgende Prozess erlaubt <b>c:geo</b> auf %s zuzugreifen.</string>
-  <string name="auth_explain_long">Ein Klick auf \"c:geo autorisieren\" startet den Prozess. Dieser Prozess öffnet einen Webbrowser mit einer %s Seite, um sich dort einzuloggen und <b>c:geo</b> Zugriff zu erlauben.</string>
+  <string name="auth_explain_long">Ein Klick auf \"c:geo autorisieren\" startet den Prozess. Dieser Prozess öffnet einen Webbrowser mit einer %s Seite um sich dort einzuloggen und <b>c:geo</b> Zugriff zu erlauben.</string>
   <string name="auth_dialog_completed_twitter">c:geo ist nun autorisiert auf Twitter zu posten.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
@@ -804,6 +805,7 @@
   <string name="user_menu_view_found">Gefundene Caches</string>
   <string name="user_menu_open_browser">Profil im Browser öffnen</string>
   <string name="user_menu_send_message">Nachricht senden</string>
+  <string name="user_menu_open_contact">Öffne Adressbuch</string>
   <string name="navigation">Navigation</string>
   <string name="compass_title">Kompass</string>
   <string name="use_gps">Nur GPS nutzen</string>
