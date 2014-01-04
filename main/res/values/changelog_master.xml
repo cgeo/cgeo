@@ -4,11 +4,13 @@
   <string name="changelog_master" translatable="false">
     <b>Next feature release</b>\n
     <b>New Features:</b>\n
-    · Browse pocket queries online (Press menu on mainscreen)\n
+    · Browse pocket queries online (press menu on main screen)\n
     · c:geo widget for direct access to stored lists\n
-    · Support of extremcaching.com\n
+    · Support of extremcaching.com, with online searches and live map\n
+    · Search by owner/finder for opencaching websites\n
+    · better support of opencaching.com (Garmin)\n
     · Popup on map shows date of event caches\n
-    · Support GPX import from Google Drive\n
+    · GPX import from Google Drive, Dropbox, … (requires Android 4.4)\n
     · Show cache where a Geokrety is currently placed\n
     · Configurable twitter templates\n
     · Creating a new WP the type will be preset depending on the cache type\n 
@@ -17,10 +19,10 @@
     · Filtering caches which have a personal note\n
     · Include TB inventory in GPX export\n
     · New popularity ratio filter (percentage of favorite points)\n
-    · Support TB URLs for the QR-code scanner\n
-    · Limit inital zoom on live map to avoid huge area loading\n
+    · QR code scanner supports TB URLs\n
+    · Limit initial zoom on live map to avoid huge area loading\n
     · Preparation for new c:geo contacts plugin\n
-    · Support geokrety images\n
+    · Show geokrety image\n
     · Preparation for Pebble navigation app (authored by another developer)\n
     \n
      <b>Bugfixes:</b>\n
