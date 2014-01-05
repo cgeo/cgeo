@@ -2,7 +2,53 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-   <b>Next bugfix release</b>\n
+    <b>Next feature release</b>\n
+    <b>New Features:</b>\n
+    · Browse pocket queries online (press menu on main screen)\n
+    · c:geo widget for direct access to stored lists\n
+    · Support of extremcaching.com, with online searches and live map\n
+    · Search by owner/finder for opencaching websites\n
+    · better support of opencaching.com (Garmin)\n
+    · Popup on map shows date of event caches\n
+    · GPX import from Google Drive, Dropbox, … (requires Android 4.4)\n
+    · Show cache where a Geokrety is currently placed\n
+    · Configurable twitter templates\n
+    · Creating a new WP the type will be preset depending on the cache type\n 
+    · Show event date for OC event caches in search results\n
+    · Sorting caches by favorite point percentage\n
+    · Filtering caches which have a personal note\n
+    · Include TB inventory in GPX export\n
+    · New popularity ratio filter (percentage of favorite points)\n
+    · QR code scanner supports TB URLs\n
+    · Limit initial zoom on live map to avoid huge area loading\n
+    · Preparation for new c:geo contacts plugin\n
+    · Show geokrety image\n
+    · Preparation for Pebble navigation app (authored by another developer)\n
+    \n
+     <b>Bugfixes:</b>\n
+    · Reduce memory usage for OSM mapsforge to avoid crashes\n
+    · Optimize database access for faster live map loading\n
+    · Cache type filter was not applied for OC nearby search\n
+    · No cache coords if cache is at equator or prime meridian\n
+    · Parts of the compass not shown when using big fonts\n
+    · WP with special characters have not been shown\n
+    · Disallow deletion of all caches incl. list if a filter is in use\n
+    · OC authorization page not shown in light theme\n
+    · DirChooser not showing all dirs on some devices\n
+    · Allow manual path input in dirchooser\n
+    · Network timeout reduced to 30 seconds to avoid long waiting time\n
+    · Show as list also possible when map is not live\n
+    · Respect limit of 500 chars for personal note on gc.com on upload or merge\n
+    · GPX export did not export archived status\n
+    · Hint was not removed from stored caches if removed on website\n
+    · Short description was not removed from stored caches if removed on website\n
+    · Attribute was not removed from stored caches if removed from the website\n
+    · Fixed rare crash when logging an event cache\n
+    · Waypoints have sometimes been doubled when refreshing cache\n
+    · Preview image for logpicture was downscaled to wrong size\n
+    · Optimized login procedure and session management for gc.com\n
+    · Corrected attribute loading for opencaching.pl\n
+    · A lot of changes for more stability and usability\n
     · Personal note upload now only for PM\n
     · Find count not updated is user has found 1 cache\n
     \n
