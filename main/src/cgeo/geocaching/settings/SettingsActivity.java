@@ -1,6 +1,7 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SelectMapfileActivity;
@@ -19,8 +20,10 @@ import cgeo.geocaching.utils.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.openintents.intents.FileManagerIntents;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -121,6 +124,7 @@ public class SettingsActivity extends PreferenceActivity {
         initSend2CgeoPreferences();
         initServicePreferences();
         initNavigationMenuPreferences();
+        initMaintenanceButtons();
 
         for (int k : new int[] { R.string.pref_username, R.string.pref_password,
                 R.string.pref_pass_vote, R.string.pref_signature,
@@ -305,6 +309,35 @@ public class SettingsActivity extends PreferenceActivity {
             @Override
             public boolean onPreferenceClick(final Preference preference) {
                 DatabaseBackupUtils.restoreDatabase(SettingsActivity.this);
+                return true;
+            }
+        });
+    }
+
+    public void initMaintenanceButtons() {
+        Preference dirMaintenance = getPreference(R.string.pref_fakekey_preference_maintenance_directories);
+        dirMaintenance.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(final Preference preference) {
+                // disable the button, as the cleanup runs in background and should not be invoked a second time
+                preference.setEnabled(false);
+
+                Resources res = getResources();
+                final SettingsActivity activity = SettingsActivity.this;
+                final ProgressDialog dialog = ProgressDialog.show(activity, res.getString(R.string.init_maintenance), res.getString(R.string.init_maintenance_directories), true, false);
+                new Thread() {
+                    @Override
+                    public void run() {
+                        DataStore.removeObsoleteCacheDirectories();
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                dialog.dismiss();
+                            }
+                        });
+                    }
+                }.start();
+
                 return true;
             }
         });

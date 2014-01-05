@@ -60,6 +60,7 @@
     <string name="pref_fakekey_preference_backup_info">fakekey_preference_backup_info</string>
     <string name="pref_fakekey_preference_backup">fakekey_preference_backup</string>
     <string name="pref_fakekey_preference_restore">fakekey_preference_restore</string>
+    <string name="pref_fakekey_preference_maintenance_directories">pref_fakekey_preference_maintenance_directories</string>
     <string name="pref_dbonsdcard">dbonsdcard</string>
     <string name="pref_debug">debug</string>
     <!-- preferences used internally -->

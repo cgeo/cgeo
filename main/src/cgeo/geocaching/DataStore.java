@@ -811,12 +811,19 @@ public class DataStore {
 
     /**
      * Remove obsolete cache directories in c:geo private storage.
-     *
+     */
+    public static void removeObsoleteCacheDirectories() {
+        removeObsoleteCacheDirectories(database);
+    }
+
+    /**
+     * Remove obsolete cache directories in c:geo private storage.
+     * 
      * @param db
      *            the read-write database to use
      */
     private static void removeObsoleteCacheDirectories(final SQLiteDatabase db) {
-        final Pattern oldFilePattern = Pattern.compile("^[GC|TB|O][A-Z0-9]{4,7}$");
+        final Pattern oldFilePattern = Pattern.compile("^[GC|TB|EC|GK|O][A-Z0-9]{4,7}$");
         final SQLiteStatement select = db.compileStatement("select count(*) from " + dbTableCaches + " where geocode = ?");
         final File[] files = LocalStorage.getStorage().listFiles();
         final ArrayList<File> toRemove = new ArrayList<File>(files.length);
