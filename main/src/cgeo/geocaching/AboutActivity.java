@@ -195,11 +195,19 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
     }
 
     private String getRawResourceString(final int resourceId) {
-        final InputStream ins = res.openRawResource(resourceId);
-        final Scanner scanner = new Scanner(ins, CharEncoding.UTF_8);
-        final String result = scanner.useDelimiter("\\A").next();
-        IOUtils.closeQuietly(ins);
-        IOUtils.closeQuietly(scanner);
+        String result;
+        Scanner scanner = null;
+        try {
+            final InputStream ins = res.openRawResource(resourceId);
+            scanner = new Scanner(ins, CharEncoding.UTF_8);
+            result = scanner.useDelimiter("\\A").next();
+            IOUtils.closeQuietly(ins);
+            IOUtils.closeQuietly(scanner);
+        } finally {
+            if (scanner != null) {
+                scanner.close();
+            }
+        }
         return result;
     }
 
