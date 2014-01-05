@@ -53,105 +53,11 @@
     · Find count not updated is user has found 1 cache\n
     \n
     \n
-    <b>2013.10.23</b>\n
-    · Adapted to changes on gc.com (spoiler images)\n
-    · Possibility to manually select file path for maps\n
+    <a href="https://github.com/cgeo/cgeo/issues?milestone=21&amp;state=closed">Detailed list of all changes</a>\n
     \n
+    <b>Old releases</b>\n
+    · Please refer to the release notes on the <a href="http://www.cgeo.org">c:geo-website</a>.\n
     \n
-    <b>2013.09.19</b>\n
-    · Unscaled log picture now uploaded correctly\n
-    · GPS exhibit not recognized as event cache\n
-    · Lost and Found cache type not parsed\n
-    · Limit results of nearby search to 200km to avoid opencaching results far away\n
-    · Coordinates 0.0 on anywhere screen\n
-    · Default log options on event is Attended on the day of event\n
-    · Gcvote possible for event caches\n 
-    · Do not crash if cache contains Base64 encodings\n
-    · Do not include HTML code in translation\n
-    · Picture loading from opencaching.pl corrected\n
-    · Fixed crash when scaling log images\n
-    · Clicking TB holder name opened an invalid link\n
-    \n
-    \n
-    <b>2013.08.26</b>\n
-    · Corrected language check for Talking Compass\n
-    · Fall back to other map if selected map is not available any more\n
-    · Have new list active after list creation\n
-    · Settings in light skin on Android 2.3 are visible again\n
-    · Other small bug fixes\n
-    \n
-    \n
-    <b>2013.08.24</b>\n
-    <b>New Features:</b>\n
-    · Talking compass (select \"Start talking\" while compass is active)\n
-    · New menu structure for c:geo settings\n
-    · Implementation of OKAPI interface for opencaching.de\n
-      Support of live map, nearby search and online logging\n
-    · Support uploading and merging of personal note to gc.com\n
-    · Improved input method for editing personal note\n
-    · Toggle hiding of own or found caches directly from live map (map settings)\n
-    · Removed help function integration as it is no longer maintained by the author\n
-      You can still access it online. Link in \"About c:geo\"\n
-    · Added \"Pocket Query Creator\" to the list of useful apps\n
-    · Suport importing PQs created by \"Pocket Query Creator\"\n
-    · Detect if no internet connection is available when trying to download caches\n
-    · Added image scaling for log images to be uploaded\n
-    · Support hyperlinks in existing logbook entries\n
-    · New filter on nearby results to filter out stored caches\n
-    · Convert coordinates to different formats by clicking on them also for waypoints\n
-    · Use \"Today\" and \"Yesterday\" as date for logbook entries\n
-    · Support smilies also for trackable logs\n
-    · Starting Bike navigation for Google navigation added\n
-    · Support importing LOC files from waymarking.com\n
-    · Added Slovenian translation\n
-    · Support reloading the reCAPTCHA (basic members)\n
-    · Field note export \"since last export\" now uses the last export date from c:geo instead of the gc.com feature\n
-    · Show event date in search results\n
-    · Added filter for several distance ranges\n
-    · Added a tab viewer for \"About c:geo\"\n
-    · Enabled fast scrolling for cache lists\n
-    \n
-    <b>Bugfixes:</b>\n
-    · Adaption to changes on gc.com\n
-    · Improved filtering of found caches on live map\n
-    · Do not truncate the date in logbook entries\n
-    · Enable GPX import option also on virtual all caches list\n
-    · Support GeoTour attribute\n
-    · Support of Block Party cache type\n
-    · Support of GPS Adventure Exhibit cache type\n
-    · Circles on the map only for physical stages\n
-    · Overlay icons on map sized correctly on highres displays\n
-    · Cache archived status not correctly refreshed\n
-    · Bad title shown when invoking c:geo from email (import operation)\n
-    · Avoid crash when log images is too large\n
-    · Save cache before allowing to add or edit a personal note\n
-    · Automatically use log type \"Attended\" if the date of an event cache is in the past\n
-    · Use log type \"Note\" for event caches if they are already logged as \"Attended\"\n
-    · Avoid to accidentally set the log type to \"Needs archived\" while loading the log page is still in progress\n
-    · Ignore hiding of owned caches when explicitly searching for owned caches\n
-    · Do not allow to select \"..\" as valid source directory for files\n
-    · Exclude inaccessible directories from selection list\n
-    · Do not show the short description of an oc.de cache if it is identical to the long description\n
-    · Sorting of lists by cache name did not respect country specific characters\n
-    · Avoid crash when deleting all caches including the list\n
-    · Logging progress message keeps showing when tapping on the screen\n
-    · Try to additionally detect the waypoint type when reading out coordinates from the personal note\n
-    · Show the image uploaded with a log in the logbook without the need to refresh the cache before\n
-    · Improvements to GPX import and export\n
-    · Ask for list to save caches when importing GPX\n
-    · Show basic Geokrety information for OC caches\n
-    · Improved the map source selection for offline maps\n
-    · Avoid crashes when using the QR code scanner\n
-    · List sorting kept when returning from cache details\n
-    · Corrected list sorting if cache name contains numbers\n
-    · Set the default \"waypoint shown on live map\" limit to 10 as many users did not recognize this feature\n
-    · Fixed GPX import problem if geocode starts with numbers\n
-    · Fixed missing information in listing if mobile network uses a performance proxy\n
-    · Avoid jumping trail on live map if there is no GPS fix\n
-    · Workaround for fluctuating distances (android bug) with some Android 4.2.1 devices\n
-    \n
-    \n
-    <a href="https://github.com/cgeo/cgeo/issues?milestone=17&amp;state=closed">Detailed list of all changes</a>\n
     \n
     <b>Known Limitations/Bugs:</b>\n
     · Live map:\n
@@ -159,9 +65,5 @@
       Be aware: If navigation is started directly from live map it may also use the approximated coords!\n
       In fast mode the cache type might be wrong in rare cases\n
       On low zoom owned/found caches may not be hidden anymore\n
-    · Other:\n
-      On devices with HD display resolution OSM maps might not work. Please use Google maps in this case.\n
-    <b>Old releases</b>\n
-    · Please refer to the release notes on the <a href="http://www.cgeo.org">c:geo-website</a>.\n
-    \n</string>
+</string>
 </resources>
