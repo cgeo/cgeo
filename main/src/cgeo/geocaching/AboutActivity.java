@@ -202,7 +202,6 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             scanner = new Scanner(ins, CharEncoding.UTF_8);
             result = scanner.useDelimiter("\\A").next();
             IOUtils.closeQuietly(ins);
-            IOUtils.closeQuietly(scanner);
         } finally {
             if (scanner != null) {
                 scanner.close();
