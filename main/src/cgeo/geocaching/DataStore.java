@@ -323,12 +323,6 @@ public class DataStore {
             database = dbHelper.getWritableDatabase();
         } catch (Exception f) {
             Log.e("DataStore.init: unable to recreate database and open it for R/W", f);
-            if (Settings.isDbOnSDCard()) {
-                Log.i("DataStore.init: trying to switch to internal database");
-                Settings.setDbOnSDCard(false);
-                // Since the DB is now internal, we can retry the full procedure.
-                init();
-            }
         }
     }
 
