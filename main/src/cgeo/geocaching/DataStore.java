@@ -296,11 +296,24 @@ public class DataStore {
             return;
         }
 
+        final DbHelper dbHelper = new DbHelper(new DBContext(CgeoApplication.getInstance()));
         try {
-            final DbHelper dbHelper = new DbHelper(new DBContext(CgeoApplication.getInstance()));
             database = dbHelper.getWritableDatabase();
         } catch (Exception e) {
             Log.e("DataStore.init: unable to open database for R/W", e);
+            // Attempt to recreate the database if opening has failed
+            final File path = databasePath();
+            final File corruptedPath = new File(path + ".corrupted");
+                if (path.renameTo(corruptedPath)) {
+                    Log.i("DataStore.init: renamed " + path + " into " + corruptedPath);
+                    try {
+                        database = dbHelper.getWritableDatabase();
+                    } catch (Exception f) {
+                        Log.e("DataStore.init: unable to recreate database and open it for R/W", f);
+                    }
+                } else {
+                    Log.e("DataStore.init: unable to rename corrupted database");
+                }
         }
     }
 
