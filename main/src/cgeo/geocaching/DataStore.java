@@ -301,19 +301,34 @@ public class DataStore {
             database = dbHelper.getWritableDatabase();
         } catch (Exception e) {
             Log.e("DataStore.init: unable to open database for R/W", e);
-            // Attempt to recreate the database if opening has failed
-            final File path = databasePath();
-            final File corruptedPath = new File(path + ".corrupted");
-                if (path.renameTo(corruptedPath)) {
-                    Log.i("DataStore.init: renamed " + path + " into " + corruptedPath);
-                    try {
-                        database = dbHelper.getWritableDatabase();
-                    } catch (Exception f) {
-                        Log.e("DataStore.init: unable to recreate database and open it for R/W", f);
-                    }
-                } else {
-                    Log.e("DataStore.init: unable to rename corrupted database");
-                }
+            recreateDatabase(dbHelper);
+
+        }
+    }
+
+    /**
+     * Attempt to recreate the database if opening has failed
+     *
+     * @param dbHelper dbHelper to use to reopen the database
+     */
+    private static void recreateDatabase(final DbHelper dbHelper) {
+        final File dbPath = databasePath();
+        final File corruptedPath = new File(LocalStorage.getStorage(), dbPath.getName() + ".corrupted");
+        if (LocalStorage.copy(dbPath, corruptedPath)) {
+            Log.i("DataStore.init: renamed " + dbPath + " into " + corruptedPath);
+        } else {
+            Log.e("DataStore.init: unable to rename corrupted database");
+        }
+        try {
+            database = dbHelper.getWritableDatabase();
+        } catch (Exception f) {
+            Log.e("DataStore.init: unable to recreate database and open it for R/W", f);
+            if (Settings.isDbOnSDCard()) {
+                Log.i("DataStore.init: trying to switch to internal database");
+                Settings.setDbOnSDCard(false);
+                // Since the DB is now internal, we can retry the full procedure.
+                init();
+            }
         }
     }
 
