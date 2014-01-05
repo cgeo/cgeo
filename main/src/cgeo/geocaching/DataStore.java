@@ -2333,6 +2333,8 @@ public class DataStore {
 
             cursor.close();
 
+            geocodes = exceptCachesWithOfflineLog(geocodes);
+
             if (!geocodes.isEmpty()) {
                 Log.d("Database clean: removing " + geocodes.size() + " geocaches from listId=0");
                 removeCaches(geocodes, LoadFlags.REMOVE_ALL);
@@ -2343,6 +2345,33 @@ public class DataStore {
 
         Log.d("Database clean: finished");
         databaseCleaned = true;
+    }
+
+    /**
+     * remove all geocodes from the given list of geocodes where an offline log exists
+     *
+     * @param geocodes
+     * @return
+     */
+    private static Set<String> exceptCachesWithOfflineLog(Set<String> geocodes) {
+        if (geocodes.isEmpty()) {
+            return geocodes;
+        }
+
+        init();
+        final Cursor cursor = database.query(
+                dbTableLogsOffline,
+                new String[] { "geocode" },
+                null,
+                null,
+                null,
+                null,
+                null);
+
+        final List<String> geocodesWithOfflineLog = Arrays.asList(getFirstColumn(cursor));
+
+        geocodes.removeAll(geocodesWithOfflineLog);
+        return geocodes;
     }
 
     public static void removeAllFromCache() {
