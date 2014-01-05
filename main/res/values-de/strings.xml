@@ -1111,4 +1111,5 @@
     <item quantity="other">%s Favoriten</item>
   </plurals>
   <string name="percent_favorite_points">% Favoriten</string>
+  <string name="create_shortcut">Shortcut erstellen</string>
 </resources>
