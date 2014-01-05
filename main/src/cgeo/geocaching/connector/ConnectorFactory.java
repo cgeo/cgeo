@@ -27,6 +27,10 @@ import cgeo.geocaching.geopoint.Viewport;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import rx.Observable;
+import rx.concurrency.Schedulers;
+import rx.util.functions.Func1;
+import rx.util.functions.Func2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -176,14 +180,30 @@ public final class ConnectorFactory {
     }
 
     /** @see ISearchByViewPort#searchByViewport */
-    public static SearchResult searchByViewport(final @NonNull Viewport viewport, final MapTokens tokens) {
-        final SearchResult result = new SearchResult();
-        for (final ISearchByViewPort connector : searchByViewPortConns) {
-            if (connector.isActive()) {
-                result.addSearchResult(connector.searchByViewport(viewport, tokens));
+    public static Observable<SearchResult> searchByViewport(final @NonNull Viewport viewport, final MapTokens tokens) {
+        return Observable.from(searchByViewPortConns).filter(new Func1<ISearchByViewPort, Boolean>() {
+            @Override
+            public Boolean call(final ISearchByViewPort connector) {
+                return connector.isActive();
             }
-        }
-        return result;
+        }).parallel(new Func1<Observable<ISearchByViewPort>, Observable<SearchResult>>() {
+            @Override
+            public Observable<SearchResult> call(final Observable<ISearchByViewPort> connector) {
+                return connector.map(new Func1<ISearchByViewPort, SearchResult>() {
+                    @Override
+                    public SearchResult call(final ISearchByViewPort connector) {
+                        return connector.searchByViewport(viewport, tokens);
+                    }
+                });
+            }
+        }, Schedulers.threadPoolForIO()).reduce(new SearchResult(), new Func2<SearchResult, SearchResult, SearchResult>() {
+
+            @Override
+            public SearchResult call(final SearchResult result, final SearchResult searchResult) {
+                result.addSearchResult(searchResult);
+                return result;
+            }
+        });
     }
 
     public static String getGeocodeFromURL(final String url) {
