@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next feature release</b>\n
+    <b>2014.01.06</b>\n
     <b>New Features:</b>\n
     · Browse pocket queries online (press menu on main screen)\n
     · c:geo widget for direct access to stored lists\n
