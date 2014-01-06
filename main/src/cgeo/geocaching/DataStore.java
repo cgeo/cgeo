@@ -1555,6 +1555,9 @@ public class DataStore {
         if (loadFlags.contains(LoadFlag.LOAD_DB_MINIMAL) ||
                 loadFlags.contains(LoadFlag.LOAD_ATTRIBUTES) ||
                 loadFlags.contains(LoadFlag.LOAD_WAYPOINTS) ||
+                loadFlags.contains(LoadFlag.LOAD_SPOILERS) ||
+                loadFlags.contains(LoadFlag.LOAD_LOGS) ||
+                loadFlags.contains(LoadFlag.LOAD_INVENTORY) ||
                 loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
 
             final Set<Geocache> cachesFromDB = loadCachesFromGeocodes(remaining, loadFlags);
@@ -1624,6 +1627,32 @@ public class DataStore {
                     final List<Waypoint> waypoints = loadWaypoints(cache.getGeocode());
                     if (CollectionUtils.isNotEmpty(waypoints)) {
                         cache.setWaypoints(waypoints, false);
+                    }
+                }
+
+                if (loadFlags.contains(LoadFlag.LOAD_SPOILERS)) {
+                    final List<Image> spoilers = loadSpoilers(cache.getGeocode());
+                    cache.setSpoilers(spoilers);
+                }
+
+                if (loadFlags.contains(LoadFlag.LOAD_LOGS)) {
+                    cache.setLogs(loadLogs(cache.getGeocode()));
+                    final Map<LogType, Integer> logCounts = loadLogCounts(cache.getGeocode());
+                    if (MapUtils.isNotEmpty(logCounts)) {
+                        cache.getLogCounts().clear();
+                        cache.getLogCounts().putAll(logCounts);
+                    }
+                }
+
+                if (loadFlags.contains(LoadFlag.LOAD_INVENTORY)) {
+                    final List<Trackable> inventory = loadInventory(cache.getGeocode());
+                    if (CollectionUtils.isNotEmpty(inventory)) {
+                        if (cache.getInventory() == null) {
+                            cache.setInventory(new ArrayList<Trackable>());
+                        } else {
+                            cache.getInventory().clear();
+                        }
+                        cache.getInventory().addAll(inventory);
                     }
                 }
 

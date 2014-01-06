@@ -13,6 +13,9 @@ public interface LoadFlags {
         LOAD_DB_MINIMAL, // load minimal informations from DataBase
         LOAD_ATTRIBUTES,
         LOAD_WAYPOINTS,
+        LOAD_SPOILERS,
+        LOAD_LOGS,
+        LOAD_INVENTORY,
         LOAD_OFFLINE_LOG
     }
 
