@@ -308,6 +308,7 @@
             android:name="cgeo.geocaching.TrackableActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name" >
+            <!-- TravelBug URL via coord.info redirection -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -319,6 +320,19 @@
                     android:pathPrefix="/TB"
                     android:scheme="http" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.coord.info"
+                    android:pathPrefix="/TB"
+                    android:scheme="http" />
+            </intent-filter>
+            
+            <!-- TravelBug URL tracking page -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -341,6 +355,55 @@
                     android:pathPrefix="/track/details.aspx"
                     android:scheme="http" />
             </intent-filter>
+            
+            <!-- GeoKrety URLs -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="geokrety.org"
+                    android:pathPrefix="/konkret.php"
+                    android:scheme="http" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.geokrety.org"
+                    android:pathPrefix="/konkret.php"
+                    android:scheme="http" />
+            </intent-filter>
+            
+            <!-- Geokrety QR code URLs, not yet implemented
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="geokrety.org"
+                    android:pathPrefix="/m/qr.php"
+                    android:scheme="http" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.geokrety.org"
+                    android:pathPrefix="/m/qr.php"
+                    android:scheme="http" />
+            </intent-filter>
+            -->
         </activity>
         <activity
             android:name=".CompassActivity"

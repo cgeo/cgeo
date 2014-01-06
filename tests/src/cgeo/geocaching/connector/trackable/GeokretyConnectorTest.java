@@ -11,4 +11,17 @@ public class GeokretyConnectorTest extends TestCase {
         assertFalse(new GeokretyConnector().canHandleTrackable("UNKNOWN"));
     }
 
+    public static void testGetTrackableCodeFromUrl() throws Exception {
+        assertEquals("GK78FA", new GeokretyConnector().getTrackableCodeFromUrl("http://www.geokrety.org/konkret.php?id=30970"));
+        assertEquals("GK78FA", new GeokretyConnector().getTrackableCodeFromUrl("http://geokrety.org/konkret.php?id=30970"));
+    }
+
+    public static void testGeocode() throws Exception {
+        assertEquals("GK97C1", GeokretyConnector.geocode(38849));
+    }
+
+    public static void testGetId() throws Exception {
+        assertEquals(38849, GeokretyConnector.getId("GK97C1"));
+    }
+
 }

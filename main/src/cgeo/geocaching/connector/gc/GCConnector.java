@@ -285,7 +285,22 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     protected String getCacheUrlPrefix() {
-        return CACHE_URL_SHORT;
+        return null; // UNUSED
+    }
+
+    @Override
+    public String getGeocodeFromUrl(String url) {
+        // coord.info URLs
+        String code = StringUtils.substringAfterLast(url, "coord.info/");
+        if (code != null && canHandle(code)) {
+            return code;
+        }
+        // expanded geocaching.com URLs
+        code = StringUtils.substringBetween(url, "/geocache/", "_");
+        if (code != null && canHandle(code)) {
+            return code;
+        }
+        return null;
     }
 
     @Override

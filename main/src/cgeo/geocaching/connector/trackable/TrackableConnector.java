@@ -4,6 +4,7 @@ import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.UserAction;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import java.util.List;
 
@@ -21,7 +22,8 @@ public interface TrackableConnector {
 
     public Trackable searchTrackable(String geocode, String guid, String id);
 
-    public String getTrackableCodeFromUrl(final @NonNull String url);
+    public @Nullable
+    String getTrackableCodeFromUrl(final @NonNull String url);
 
     public @NonNull
     List<UserAction> getUserActions();

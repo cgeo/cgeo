@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.gc.GCParser;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -20,7 +21,7 @@ public class TravelBugConnector extends AbstractTrackableConnector {
 
     @Override
     public boolean canHandleTrackable(String geocode) {
-        return TravelBugConnector.PATTERN_TB_CODE.matcher(geocode).matches();
+        return TravelBugConnector.PATTERN_TB_CODE.matcher(geocode).matches() && !StringUtils.startsWithIgnoreCase(geocode, "GC");
     }
 
     @Override
@@ -54,8 +55,18 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     }
 
     @Override
-    public String getTrackableCodeFromUrl(@NonNull String url) {
-        return StringUtils.substringAfterLast(url, "?tracker=");
+    public @Nullable
+    String getTrackableCodeFromUrl(@NonNull String url) {
+        // coord.info URLs
+        String code = StringUtils.substringAfterLast(url, "coord.info/");
+        if (code != null && canHandleTrackable(code)) {
+            return code;
+        }
+        code = StringUtils.substringAfterLast(url, "?tracker=");
+        if (code != null && canHandleTrackable(code)) {
+            return code;
+        }
+        return null;
     }
 
     @Override

@@ -88,5 +88,11 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
     public static void testGetGeocodeFromUrl() {
         assertNull(GCConnector.getInstance().getGeocodeFromUrl("some string"));
         assertEquals("GC12ABC", GCConnector.getInstance().getGeocodeFromUrl("http://coord.info/GC12ABC"));
+        assertEquals("GC12ABC", GCConnector.getInstance().getGeocodeFromUrl("http://www.coord.info/GC12ABC"));
+        assertEquals("GC12ABC", GCConnector.getInstance().getGeocodeFromUrl("http://www.geocaching.com/geocache/GC12ABC_die-muhlen-im-schondratal-muhle-munchau"));
+        assertEquals("GC12ABC", GCConnector.getInstance().getGeocodeFromUrl("http://geocaching.com/geocache/GC12ABC_die-muhlen-im-schondratal-muhle-munchau"));
+
+        assertNull(GCConnector.getInstance().getGeocodeFromUrl("http://coord.info/TB1234"));
+        assertNull(GCConnector.getInstance().getGeocodeFromUrl("http://www.coord.info/TB1234"));
     }
 }

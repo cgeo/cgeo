@@ -38,4 +38,15 @@ public class TravelBugConnectorTest extends TestCase {
     private static TravelBugConnector getConnector() {
         return TravelBugConnector.getInstance();
     }
+
+    public static void testGetTrackableCodeFromUrl() throws Exception {
+        assertEquals("TB1234", TravelBugConnector.getInstance().getTrackableCodeFromUrl("http://coord.info/TB1234"));
+        assertEquals("TB1234", TravelBugConnector.getInstance().getTrackableCodeFromUrl("http://www.coord.info/TB1234"));
+        assertEquals("TB1234", TravelBugConnector.getInstance().getTrackableCodeFromUrl("http://geocaching.com/track/details.aspx?tracker=TB1234"));
+        assertEquals("TB1234", TravelBugConnector.getInstance().getTrackableCodeFromUrl("http://www.geocaching.com/track/details.aspx?tracker=TB1234"));
+
+        // do not match coord.info URLs of caches
+        assertNull(TravelBugConnector.getInstance().getTrackableCodeFromUrl("http://coord.info/GC1234"));
+        assertNull(TravelBugConnector.getInstance().getTrackableCodeFromUrl("http://www.coord.info/GC1234"));
+    }
 }

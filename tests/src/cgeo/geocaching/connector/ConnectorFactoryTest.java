@@ -63,8 +63,32 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
 
     public static void testGetGeocodeFromUrl() {
         assertEquals("GC34PLO", ConnectorFactory.getGeocodeFromURL("http://coord.info/GC34PLO"));
+        assertEquals("GC34PLO", ConnectorFactory.getGeocodeFromURL("http://www.coord.info/GC34PLO"));
         assertEquals("OX1234", ConnectorFactory.getGeocodeFromURL("http://www.opencaching.com/#!geocache/OX1234"));
+
+        assertEquals("GC12ABC", GCConnector.getInstance().getGeocodeFromUrl("http://coord.info/GC12ABC"));
+        assertEquals("GC12ABC", GCConnector.getInstance().getGeocodeFromUrl("http://www.coord.info/GC12ABC"));
+        assertEquals("GC12ABC", GCConnector.getInstance().getGeocodeFromUrl("http://www.geocaching.com/geocache/GC12ABC_die-muhlen-im-schondratal-muhle-munchau"));
+        assertEquals("GC12ABC", GCConnector.getInstance().getGeocodeFromUrl("http://geocaching.com/geocache/GC12ABC_die-muhlen-im-schondratal-muhle-munchau"));
+
+        // trackable URLs
+        assertNull(GCConnector.getInstance().getGeocodeFromUrl("http://coord.info/TB1234"));
+        assertNull(GCConnector.getInstance().getGeocodeFromUrl("http://www.coord.info/TB1234"));
+
         // make sure that a mixture of different connector and geocode is recognized as invalid
         assertNull(ConnectorFactory.getGeocodeFromURL("http://www.opencaching.com/#!geocache/" + "GC12345"));
+    }
+
+    public static void testGetTrackableFromURL() throws Exception {
+        assertEquals("GK78FA", ConnectorFactory.getTrackableFromURL("http://www.geokrety.org/konkret.php?id=30970"));
+        assertEquals("GK78FA", ConnectorFactory.getTrackableFromURL("http://geokrety.org/konkret.php?id=30970"));
+        assertEquals("TB1234", ConnectorFactory.getTrackableFromURL("http://coord.info/TB1234"));
+        assertEquals("TB1234", ConnectorFactory.getTrackableFromURL("http://www.coord.info/TB1234"));
+        assertEquals("TB1234", ConnectorFactory.getTrackableFromURL("http://geocaching.com/track/details.aspx?tracker=TB1234"));
+        assertEquals("TB1234", ConnectorFactory.getTrackableFromURL("http://www.geocaching.com/track/details.aspx?tracker=TB1234"));
+
+        // cache URLs
+        assertNull(ConnectorFactory.getTrackableFromURL("http://coord.info/GC1234"));
+        assertNull(ConnectorFactory.getTrackableFromURL("http://www.coord.info/GC1234"));
     }
 }

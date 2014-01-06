@@ -4,6 +4,10 @@ import cgeo.geocaching.Trackable;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.utils.Log;
 
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 import java.util.regex.Pattern;
 
 public class GeokretyConnector extends AbstractTrackableConnector {
@@ -29,7 +33,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
         return GeokretyParser.parse(page);
     }
 
-    private static int getId(String geocode) {
+    protected static int getId(String geocode) {
         try {
             final String hex = geocode.substring(2);
             return Integer.parseInt(hex, 16);
@@ -37,6 +41,27 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             Log.e("Trackable.getUrl", e);
         }
         return -1;
+    }
+
+    @Override
+    public @Nullable
+    String getTrackableCodeFromUrl(@NonNull String url) {
+        // http://geokrety.org/konkret.php?id=38545
+        String id = StringUtils.substringAfterLast(url, "konkret.php?id=");
+        if (StringUtils.isNumeric(id)) {
+            return geocode(Integer.parseInt(id));
+        }
+        return null;
+    }
+
+    /**
+     * Get geocode from geokrety id
+     *
+     * @param id
+     * @return
+     */
+    public static String geocode(final int id) {
+        return String.format("GK%04X", id);
     }
 
 }

@@ -37,8 +37,8 @@ public class GeokretyParser {
             public void start(Attributes attributes) {
                 try {
                     final String kretyId = attributes.getValue("id");
-                    if (StringUtils.isNotBlank(kretyId)) {
-                        trackable.setGeocode(geocode(Integer.parseInt(kretyId)));
+                    if (StringUtils.isNumeric(kretyId)) {
+                        trackable.setGeocode(GeokretyConnector.geocode(Integer.parseInt(kretyId)));
                     }
                     final String distance = attributes.getValue("dist");
                     if (StringUtils.isNotBlank(distance)) {
@@ -87,9 +87,5 @@ public class GeokretyParser {
                 return CgeoApplication.getInstance().getString(R.string.geokret_type_post);
         }
         return null;
-    }
-
-    protected static String geocode(final int id) {
-        return String.format("GK%04X", id);
     }
 }
