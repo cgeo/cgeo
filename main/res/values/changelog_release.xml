@@ -28,6 +28,7 @@
      <b>Bugfixes:</b>\n
     · Reduce memory usage for OSM mapsforge to avoid crashes\n
     · Optimize database access for faster live map loading\n
+    · In rare cases GPS was not switched off when leaving the app\n
     · Cache type filter was not applied for OC nearby search\n
     · No cache coords if cache is at equator or prime meridian\n
     · Parts of the compass not shown when using big fonts\n
