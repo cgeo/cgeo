@@ -11,6 +11,7 @@ public abstract class AbstractListActivity extends FragmentListActivity implemen
         IAbstractActivity {
 
     private boolean keepScreenOn = false;
+    private boolean paused = true;
 
     protected CgeoApplication app = null;
     protected Resources res = null;
@@ -83,5 +84,27 @@ public abstract class AbstractListActivity extends FragmentListActivity implemen
 
         // initialize action bar title with activity title
         ActivityMixin.setTitle(this, getTitle());
+    }
+
+    @Override
+    public void onResume() {
+        paused = false;
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        paused = true;
+    }
+
+    /**
+     * Check if the current activity is paused. This must be called and acted
+     * upon only from the UI thread.
+     *
+     * @return <code>true</code> if the current activity is paused
+     */
+    protected boolean isPaused() {
+        return paused;
     }
 }

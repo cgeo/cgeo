@@ -305,7 +305,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 showProgress(false);
                 progress.dismiss();
 
-                startGeoAndDir();
+                if (!isPaused()) {
+                    // If the current activity has been paused, then we do not want to fiddle with the
+                    // GPS and direction states. If the activity later gets resumed, its onResume()
+                    // function will take care of turning the GPS back on.
+                    startGeoAndDir();
+                }
             }
         }
     };
