@@ -93,7 +93,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static final int MAX_LIST_ITEMS = 1000;
 
     private static final int MSG_DONE = -1;
-    private static final int MSG_RESTART_GEO_AND_DIR = -2;
     private static final int MSG_CANCEL = -99;
 
     private static final int REQUEST_CODE_IMPORT_GPX = 1;
@@ -292,8 +291,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 if (threadDetails != null) {
                     threadDetails.kill();
                 }
-            } else if (msg.what == MSG_RESTART_GEO_AND_DIR) {
-                startGeoAndDir();
             } else {
                 if (search != null) {
                     final Set<Geocache> cacheListTmp = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
@@ -1158,7 +1155,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 }
             }
 
-            handler.sendEmptyMessage(MSG_RESTART_GEO_AND_DIR);
             handler.sendEmptyMessage(MSG_DONE);
         }
 
