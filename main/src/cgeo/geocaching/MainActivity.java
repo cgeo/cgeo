@@ -513,77 +513,61 @@ public class MainActivity extends AbstractActivity {
 
         @Override
         public void updateGeoData(final IGeoData geo) {
-            try {
-                if (geo.getCoords() != null) {
-                    if (!nearestView.isClickable()) {
-                        nearestView.setFocusable(true);
-                        nearestView.setClickable(true);
-                        nearestView.setOnClickListener(new OnClickListener() {
-                            @Override
-                            public void onClick(final View v) {
-                                cgeoFindNearest(v);
-                            }
-                        });
-                        nearestView.setBackgroundResource(R.drawable.main_nearby);
+            if (!nearestView.isClickable()) {
+                nearestView.setFocusable(true);
+                nearestView.setClickable(true);
+                nearestView.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(final View v) {
+                        cgeoFindNearest(v);
                     }
+                });
+                nearestView.setBackgroundResource(R.drawable.main_nearby);
+            }
 
-                    navType.setText(res.getString(geo.getLocationProvider().resourceId));
+            navType.setText(res.getString(geo.getLocationProvider().resourceId));
 
-                    if (geo.getAccuracy() >= 0) {
-                        int speed = Math.round(geo.getSpeed()) * 60 * 60 / 1000;
-                        navAccuracy.setText("±" + Units.getDistanceFromMeters(geo.getAccuracy()) + Formatter.SEPARATOR + Units.getSpeed(speed));
-                    } else {
-                        navAccuracy.setText(null);
-                    }
+            if (geo.getAccuracy() >= 0) {
+                int speed = Math.round(geo.getSpeed()) * 60 * 60 / 1000;
+                navAccuracy.setText("±" + Units.getDistanceFromMeters(geo.getAccuracy()) + Formatter.SEPARATOR + Units.getSpeed(speed));
+            } else {
+                navAccuracy.setText(null);
+            }
 
-                    if (Settings.isShowAddress()) {
-                        if (addCoords == null) {
-                            navLocation.setText(R.string.loc_no_addr);
-                        }
-                        if (addCoords == null || (geo.getCoords().distanceTo(addCoords) > 0.5)) {
-                            final Observable<String> address = Observable.create(new OnSubscribeFunc<String>() {
-                                @Override
-                                public Subscription onSubscribe(final Observer<? super String> observer) {
-                                    try {
-                                        addCoords = geo.getCoords();
-                                        final Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
-                                        final Geopoint coords = app.currentGeo().getCoords();
-                                        final List<Address> addresses = geocoder.getFromLocation(coords.getLatitude(), coords.getLongitude(), 1);
-                                        if (!addresses.isEmpty()) {
-                                            observer.onNext(formatAddress(addresses.get(0)));
-                                        }
-                                        observer.onCompleted();
-                                    } catch (final IOException e) {
-                                        observer.onError(e);
-                                    }
-                                    return Subscriptions.empty();
-                                }
-                            }).subscribeOn(Schedulers.threadPoolForIO());
-                            AndroidObservable.fromActivity(MainActivity.this, address)
-                                    .onErrorResumeNext(Observable.just(geo.getCoords().toString()))
-                                    .subscribe(new Action1<String>() {
-                                        @Override
-                                        public void call(final String address) {
-                                            navLocation.setText(address);
-                                        }
-                                    });
-                        }
-                    } else {
-                        navLocation.setText(geo.getCoords().toString());
-                    }
-                } else {
-                    if (nearestView.isClickable()) {
-                        nearestView.setFocusable(false);
-                        nearestView.setClickable(false);
-                        nearestView.setOnClickListener(null);
-                        nearestView.setBackgroundResource(R.drawable.main_nearby_disabled);
-                    }
-                    navType.setText(null);
-                    navAccuracy.setText(null);
-                    navLocation.setText(R.string.loc_trying);
+            if (Settings.isShowAddress()) {
+                if (addCoords == null) {
+                    navLocation.setText(R.string.loc_no_addr);
                 }
-            } catch (RuntimeException e) {
-                Log.w("Failed to update location.");
+                if (addCoords == null || (geo.getCoords().distanceTo(addCoords) > 0.5)) {
+                    final Observable<String> address = Observable.create(new OnSubscribeFunc<String>() {
+                        @Override
+                        public Subscription onSubscribe(final Observer<? super String> observer) {
+                            try {
+                                addCoords = geo.getCoords();
+                                final Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
+                                final Geopoint coords = app.currentGeo().getCoords();
+                                final List<Address> addresses = geocoder.getFromLocation(coords.getLatitude(), coords.getLongitude(), 1);
+                                if (!addresses.isEmpty()) {
+                                    observer.onNext(formatAddress(addresses.get(0)));
+                                }
+                                observer.onCompleted();
+                            } catch (final IOException e) {
+                                observer.onError(e);
+                            }
+                            return Subscriptions.empty();
+                        }
+                    }).subscribeOn(Schedulers.threadPoolForIO());
+                    AndroidObservable.fromActivity(MainActivity.this, address)
+                            .onErrorResumeNext(Observable.just(geo.getCoords().toString()))
+                            .subscribe(new Action1<String>() {
+                                @Override
+                                public void call(final String address) {
+                                    navLocation.setText(address);
+                                }
+                            });
+                }
+            } else {
+                navLocation.setText(geo.getCoords().toString());
             }
         }
     }
