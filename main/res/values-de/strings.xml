@@ -806,7 +806,7 @@
   <string name="user_menu_view_found">Gefundene Caches</string>
   <string name="user_menu_open_browser">Profil im Browser öffnen</string>
   <string name="user_menu_send_message">Nachricht senden</string>
-  <string name="user_menu_open_contact">Öffne Adressbuch</string>
+  <string name="user_menu_open_contact">Öffne Kontakt</string>
   <string name="navigation">Navigation</string>
   <string name="compass_title">Kompass</string>
   <string name="use_gps">Nur GPS nutzen</string>
