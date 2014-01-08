@@ -45,16 +45,6 @@ public class CgeoApplication extends Application {
         DataStore.removeAllFromCache();
     }
 
-    @Override
-    public void onTerminate() {
-        Log.d("Terminating c:geo…");
-
-        DataStore.clean();
-        DataStore.closeDb();
-
-        super.onTerminate();
-    }
-
     /**
      * Move the database to/from external cgdata in a new thread,
      * showing a progress window

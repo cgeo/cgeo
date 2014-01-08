@@ -2309,11 +2309,6 @@ public class DataStore {
         return new SearchResult(geocodes);
     }
 
-    /** delete caches from the DB store 3 days or more before */
-    public static void clean() {
-        clean(false);
-    }
-
     /**
      * Remove caches with listId = 0
      *
