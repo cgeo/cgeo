@@ -304,13 +304,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
                 showProgress(false);
                 progress.dismiss();
-
-                if (!isPaused()) {
-                    // If the current activity has been paused, then we do not want to fiddle with the
-                    // GPS and direction states. If the activity later gets resumed, its onResume()
-                    // function will take care of turning the GPS back on.
-                    startGeoAndDir();
-                }
             }
         }
     };
@@ -472,7 +465,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public void onResume() {
         super.onResume();
 
-        startGeoAndDir();
+        geoDirHandler.startGeo();
+        if (Settings.isLiveMap()) {
+            geoDirHandler.startDir();
+        }
 
         adapter.setSelectMode(false);
         setAdapterCurrentCoordinates(true);
@@ -503,8 +499,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     @Override
     public void onPause() {
-        removeGeoAndDir();
-
+        geoDirHandler.stopGeoAndDir();
         super.onPause();
     }
 
@@ -742,8 +737,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             public void run(IFilter selectedFilter) {
                 if (selectedFilter != null) {
                     setFilter(selectedFilter);
-                }
-                else {
+                } else {
                     // clear filter
                     setFilter(null);
                 }
@@ -973,17 +967,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         listFooter.setClickable(enableMore);
     }
 
-    private void startGeoAndDir() {
-        geoDirHandler.startGeo();
-        if (Settings.isLiveMap()) {
-            geoDirHandler.startDir();
-        }
-    }
-
-    private void removeGeoAndDir() {
-        geoDirHandler.stopGeoAndDir();
-    }
-
     private void importGpx() {
         GpxFileListActivity.startSubActivity(this, listId);
     }
@@ -1146,7 +1129,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         @Override
         public void run() {
-            removeGeoAndDir();
             // First refresh caches that do not yet have static maps to get them a chance to get a copy
             // before the limit expires, unless we do not want to store offline maps.
             final List<Geocache> allCaches = Settings.isStoreOfflineMaps() ?
@@ -1207,9 +1189,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         @Override
         public void run() {
-
-            removeGeoAndDir();
-
             int delay = -1;
             int times = 0;
 
@@ -1267,8 +1246,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
 
             handler.sendEmptyMessage(ret);
-
-            startGeoAndDir();
         }
     }
 
@@ -1283,9 +1260,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         @Override
         protected Void doInBackgroundInternal(Geocache[] caches) {
-            removeGeoAndDir();
             DataStore.markDropped(Arrays.asList(caches));
-            startGeoAndDir();
             return null;
         }
 
