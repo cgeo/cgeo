@@ -1675,7 +1675,7 @@ public class DataStore {
      * @return
      */
 
-    private static String buildCoordinateWhere(final String dbTable, final Viewport viewport) {
+    private static StringBuilder buildCoordinateWhere(final String dbTable, final Viewport viewport) {
         return viewport.resize(1.5).sqlWhere(dbTable);
     }
 
@@ -2265,7 +2265,7 @@ public class DataStore {
         }
 
         // viewport limitation
-        final StringBuilder selection = new StringBuilder(buildCoordinateWhere(dbTableCaches, viewport));
+        final StringBuilder selection = buildCoordinateWhere(dbTableCaches, viewport);
 
         // cacheType limitation
         String[] selectionArgs = null;
@@ -2870,7 +2870,7 @@ public class DataStore {
      */
 
     public static Set<Waypoint> loadWaypoints(final Viewport viewport, boolean excludeMine, boolean excludeDisabled, CacheType type) {
-        final StringBuilder where = new StringBuilder(buildCoordinateWhere(dbTableWaypoints, viewport));
+        final StringBuilder where = buildCoordinateWhere(dbTableWaypoints, viewport);
         if (excludeMine) {
             where.append(" and ").append(dbTableCaches).append(".found == 0");
         }
