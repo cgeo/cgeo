@@ -954,7 +954,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         boolean enableMore = (type != CacheListType.OFFLINE && cacheList.size() < MAX_LIST_ITEMS);
         if (enableMore && search != null) {
             final int count = search.getTotalCountGC();
-            enableMore = enableMore && count > 0 && cacheList.size() < count;
+            enableMore = count > 0 && cacheList.size() < count;
         }
 
         if (enableMore) {
@@ -985,7 +985,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             // provided to this method as a parameter.  Pull that uri using "resultData.getData()"
             if (data != null) {
                 final Uri uri = data.getData();
-                new GPXImporter(CacheListActivity.this, listId, importGpxAttachementFinishedHandler).importGPX(uri, null, getDisplayName(uri));
+                new GPXImporter(this, listId, importGpxAttachementFinishedHandler).importGPX(uri, null, getDisplayName(uri));
             }
         }
 
@@ -1172,7 +1172,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
-    private class LoadFromWebThread extends Thread {
+    private static class LoadFromWebThread extends Thread {
 
         final private Handler handler;
         final private int listIdLFW;
@@ -1645,8 +1645,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 break;
             case POCKET:
                 final String guid = extras.getString(Intents.EXTRA_POCKET_GUID);
-                final String pocket_name = extras.getString(Intents.EXTRA_NAME);
-                title = pocket_name;
+                title = extras.getString(Intents.EXTRA_NAME);
                 loader = new PocketGeocacheListLoader(app, guid);
                 break;
         }
