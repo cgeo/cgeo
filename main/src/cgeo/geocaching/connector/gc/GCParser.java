@@ -741,7 +741,7 @@ public abstract class GCParser {
         cache.parseWaypointsFromNote();
 
         // logs
-        cache.setLogs(loadLogsFromDetails(page, cache, false, true));
+        cache.setLogs(getLogsFromDetails(page, false));
 
         // last check for necessary cache conditions
         if (StringUtils.isBlank(cache.getGeocode())) {
@@ -1617,19 +1617,20 @@ public abstract class GCParser {
     }
 
     /**
-     * Load logs from a cache details page.
+     * Extract logs from a cache details page.
      *
      * @param page
      *            the text of the details page
-     * @param cache
-     *            the cache object to put the logs in
      * @param friends
-     *            retrieve friend logs
+     *            return friends logs only (will require a network request)
+     * @return a list of log entries or <code>null</code> if the logs could not be retrieved
+     *
      */
-    private static List<LogEntry> loadLogsFromDetails(final String page, final Geocache cache, final boolean friends, final boolean getDataFromPage) {
+    @Nullable
+    private static List<LogEntry> getLogsFromDetails(final String page, final boolean friends) {
         String rawResponse;
 
-        if (!getDataFromPage) {
+        if (friends) {
             final MatcherWrapper userTokenMatcher = new MatcherWrapper(GCConstants.PATTERN_USERTOKEN, page);
             if (!userTokenMatcher.find()) {
                 Log.e("GCParser.loadLogsFromDetails: unable to extract userToken");
@@ -1829,7 +1830,7 @@ public abstract class GCParser {
         if (Settings.isFriendLogsWanted()) {
             CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
             final List<LogEntry> allLogs = cache.getLogs();
-            final List<LogEntry> friendLogs = loadLogsFromDetails(page, cache, true, false);
+            final List<LogEntry> friendLogs = getLogsFromDetails(page, true);
             if (friendLogs != null) {
                 for (final LogEntry log : friendLogs) {
                     if (allLogs.contains(log)) {
