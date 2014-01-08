@@ -1380,8 +1380,7 @@ public abstract class GCParser {
     }
 
     private static boolean changeFavorite(final Geocache cache, final boolean add) {
-        final String page = requestHtmlPage(cache.getGeocode(), null, "n", "0");
-        final String userToken = TextUtils.getMatch(page, GCConstants.PATTERN_USERTOKEN, "");
+        final String userToken = getUserToken(cache);
         if (StringUtils.isEmpty(userToken)) {
             return false;
         }
@@ -1398,6 +1397,11 @@ public abstract class GCParser {
         }
         Log.e("GCParser.changeFavorite: cache not added/removed to/from favorites");
         return false;
+    }
+
+    private static String getUserToken(final Geocache cache) {
+        final String page = requestHtmlPage(cache.getGeocode(), null, "n", "0");
+        return TextUtils.getMatch(page, GCConstants.PATTERN_USERTOKEN, "");
     }
 
     /**
@@ -1860,8 +1864,7 @@ public abstract class GCParser {
     }
 
     public static boolean editModifiedCoordinates(Geocache cache, Geopoint wpt) {
-        final String page = requestHtmlPage(cache.getGeocode(), null, "n", "0");
-        final String userToken = TextUtils.getMatch(page, GCConstants.PATTERN_USERTOKEN, "");
+        final String userToken = getUserToken(cache);
         if (StringUtils.isEmpty(userToken)) {
             return false;
         }
@@ -1896,8 +1899,7 @@ public abstract class GCParser {
     }
 
     public static boolean uploadPersonalNote(Geocache cache) {
-        final String page = requestHtmlPage(cache.getGeocode(), null, "n", "0");
-        final String userToken = TextUtils.getMatch(page, GCConstants.PATTERN_USERTOKEN, "");
+        final String userToken = getUserToken(cache);
         if (StringUtils.isEmpty(userToken)) {
             return false;
         }
