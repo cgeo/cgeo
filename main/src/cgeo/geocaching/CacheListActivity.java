@@ -473,7 +473,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         adapter.setSelectMode(false);
         setAdapterCurrentCoordinates(true);
 
-        if (loadCachesHandler != null && search != null) {
+        if (search != null) {
             replaceCacheListFromSearch();
             loadCachesHandler.sendEmptyMessage(0);
         }
