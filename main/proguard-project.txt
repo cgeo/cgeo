@@ -13,6 +13,11 @@
 # apache.commons.collections has some bean related collections, which are undefined in Android
 -dontwarn java.beans.*
 
+# rxjava includes references to the test frameworks within their class files
+-dontwarn org.mockito.**
+-dontwarn org.junit.**
+-dontwarn org.robolectric.**
+
 #-dontnote org.apache.commons.logging.**
 
 -keep public class cgeo.geocaching.*

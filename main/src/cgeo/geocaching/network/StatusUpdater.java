@@ -1,21 +1,22 @@
 package cgeo.geocaching.network;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.utils.MemorySubject;
-import cgeo.geocaching.utils.PeriodicHandler;
-import cgeo.geocaching.utils.PeriodicHandler.PeriodicHandlerListener;
 import cgeo.geocaching.utils.Version;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import rx.Observable;
+import rx.concurrency.Schedulers;
+import rx.subjects.BehaviorSubject;
+import rx.util.functions.Func1;
 
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
-import android.os.Looper;
 
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
-public class StatusUpdater extends MemorySubject<StatusUpdater.Status> implements Runnable, PeriodicHandlerListener {
+public class StatusUpdater {
 
     static public class Status {
         final public String message;
@@ -30,24 +31,41 @@ public class StatusUpdater extends MemorySubject<StatusUpdater.Status> implement
             this.url = url;
         }
 
+        Status(final JSONObject response) {
+            message = get(response, "message");
+            messageId = get(response, "message_id");
+            icon = get(response, "icon");
+            url = get(response, "url");
+        }
+
         final static public Status closeoutStatus =
                 new Status("", "status_closeout_warning", "attribute_abandonedbuilding", "http://faq.cgeo.org/#7_69");
 
-        final static public Status defaultStatus() {
+        final static public Status defaultStatus(final Status upToDate) {
+            if (upToDate != null && upToDate.message != null) {
+                return upToDate;
+            }
             return VERSION.SDK_INT < VERSION_CODES.ECLAIR_MR1 ? closeoutStatus : null;
         }
     }
 
-    @Override
-    public void onPeriodic() {
-        final JSONObject response =
-                Network.requestJSON("http://status.cgeo.org/api/status.json",
-                        new Parameters("version_code", String.valueOf(Version.getVersionCode(CgeoApplication.getInstance())),
-                                "version_name", Version.getVersionName(CgeoApplication.getInstance()),
-                                "locale", Locale.getDefault().toString()));
-        if (response != null) {
-            notifyObservers(new Status(get(response, "message"), get(response, "message_id"), get(response, "icon"), get(response, "url")));
-        }
+    final static private Observable<Status> statusObservable =
+            Observable.interval(30, TimeUnit.MINUTES).startWith(-1L).flatMap(new Func1<Long, Observable<Status>>() {
+                @Override
+                public Observable<Status> call(Long id) {
+                    final JSONObject response =
+                            Network.requestJSON("http://status.cgeo.org/api/status.json",
+                                    new Parameters("version_code", String.valueOf(Version.getVersionCode(CgeoApplication.getInstance())),
+                                            "version_name", Version.getVersionName(CgeoApplication.getInstance()),
+                                            "locale", Locale.getDefault().toString()));
+                    return response != null ? Observable.just(Status.defaultStatus((new Status(response)))) : Observable.<Status>empty();
+                }
+            }).subscribeOn(Schedulers.threadPoolForIO());
+
+    final static public BehaviorSubject<Status> latestStatus = BehaviorSubject.create(Status.defaultStatus(null));
+
+    static {
+        statusObservable.subscribe(latestStatus);
     }
 
     private static String get(final JSONObject json, final String key) {
@@ -56,13 +74,6 @@ public class StatusUpdater extends MemorySubject<StatusUpdater.Status> implement
         } catch (final JSONException e) {
             return null;
         }
-    }
-
-    @Override
-    public void run() {
-        Looper.prepare();
-        new PeriodicHandler(1800000L, this).start();
-        Looper.loop();
     }
 
 }

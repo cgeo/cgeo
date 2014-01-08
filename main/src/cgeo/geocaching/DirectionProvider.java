@@ -1,9 +1,13 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.compatibility.Compatibility;
-import cgeo.geocaching.utils.MemorySubject;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import rx.Observable;
+import rx.Observable.OnSubscribeFunc;
+import rx.Observer;
+import rx.Subscription;
+import rx.observables.ConnectableObservable;
+import rx.subjects.BehaviorSubject;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,58 +16,61 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-public class DirectionProvider extends MemorySubject<Float> implements SensorEventListener {
+public class DirectionProvider implements OnSubscribeFunc<Float> {
 
     private final SensorManager sensorManager;
+    private final BehaviorSubject<Float> subject = BehaviorSubject.create(0.0f);
 
-    // Previous values signaled to observers to avoid re-sending the same value when the
-    // device doesn't change orientation. The orientation is usually given with a 1 degree
-    // precision by Android, so it is not uncommon to obtain exactly the same value several
-    // times.
-    private float previous = -1;
+    static public Observable<Float> create(final Context context) {
+        return new DirectionProvider((SensorManager) context.getSystemService(Context.SENSOR_SERVICE)).worker.refCount();
+    }
 
-    public DirectionProvider(final Context context) {
-        sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-
+    private DirectionProvider(final SensorManager sensorManager) {
+        this.sensorManager = sensorManager;
     }
 
     @Override
-    protected void onFirstObserver() {
-        @SuppressWarnings("deprecation")
-        // This will be removed when using a new location service. Until then, it is okay to be used.
-        final Sensor defaultSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
-        sensorManager.registerListener(this, defaultSensor, SensorManager.SENSOR_DELAY_NORMAL);
+    public Subscription onSubscribe(final Observer<? super Float> observer) {
+        return subject.distinctUntilChanged().subscribe(observer);
     }
 
-    @Override
-    protected void onLastObserver() {
-        sensorManager.unregisterListener(this);
-    }
+    private final ConnectableObservable<Float> worker = new ConnectableObservable<Float>(this) {
+        @Override
+        public Subscription connect() {
+            @SuppressWarnings("deprecation")
+            // This will be removed when using a new location service. Until then, it is okay to be used.
+            final Sensor defaultSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+            final SensorEventListener listener = new SensorEventListener() {
+                @Override
+                public void onSensorChanged(final SensorEvent event) {
+                    subject.onNext(event.values[0]);
+                }
 
-    @Override
-    public void onAccuracyChanged(final Sensor sensor, int accuracy) {
-        /*
-         * There is a bug in Android, which apparently causes this method to be called every
-         * time the sensor _value_ changed, even if the _accuracy_ did not change. So logging
-         * this event leads to the log being flooded with multiple entries _per second_,
-         * which I experienced when running cgeo in a building (with GPS and network being
-         * unreliable).
-         *
-         * See for example https://code.google.com/p/android/issues/detail?id=14792
-         */
+                @Override
+                public void onAccuracyChanged(final Sensor sensor, final int accuracy) {
+                /*
+                * There is a bug in Android, which apparently causes this method to be called every
+                * time the sensor _value_ changed, even if the _accuracy_ did not change. So logging
+                * this event leads to the log being flooded with multiple entries _per second_,
+                * which I experienced when running cgeo in a building (with GPS and network being
+                * unreliable).
+                *
+                * See for example https://code.google.com/p/android/issues/detail?id=14792
+                */
 
-        //Log.i(Settings.tag, "Compass' accuracy is low (" + accuracy + ")");
-    }
+                    //Log.i(Settings.tag, "Compass' accuracy is low (" + accuracy + ")");
+                }
+            };
 
-    @Override
-    @SuppressFBWarnings("FE_FLOATING_POINT_EQUALITY")
-    public void onSensorChanged(final SensorEvent event) {
-        final float direction = event.values[0];
-        if (direction != previous) {
-            notifyObservers(direction);
-            previous = direction;
+            sensorManager.registerListener(listener, defaultSensor, SensorManager.SENSOR_DELAY_NORMAL);
+            return new Subscription() {
+                @Override
+                public void unsubscribe() {
+                    sensorManager.unregisterListener(listener);
+                }
+            };
         }
-    }
+    };
 
     /**
      * Take the phone rotation (through a given activity) in account and adjust the direction.
@@ -72,6 +79,7 @@ public class DirectionProvider extends MemorySubject<Float> implements SensorEve
      * @param direction the unadjusted direction in degrees, in the [0, 360[ range
      * @return the adjusted direction in degrees, in the [0, 360[ range
      */
+
     public static float getDirectionNow(final Activity activity, final float direction) {
         return Compatibility.getDirectionNow(direction, activity);
     }

@@ -150,12 +150,13 @@ public class CompassActivity extends AbstractActivity {
         final CgeoApplication app = CgeoApplication.getInstance();
         final IGeoData geo = app.currentGeo();
         if (geo != null) {
-            geoDirHandler.update(geo);
+            geoDirHandler.updateGeoData(geo);
         }
         final Float dir = app.currentDirection();
         if (dir != null) {
-            geoDirHandler.update(dir);
+            geoDirHandler.updateDirection(dir);
         }
+
     }
 
     @Override

@@ -47,7 +47,7 @@ public class SpeechService extends Service implements OnInitListener {
 
     GeoDirHandler geoHandler = new GeoDirHandler() {
         @Override
-        protected void updateDirection(float newDirection) {
+        public void updateDirection(float newDirection) {
             if (CgeoApplication.getInstance().currentGeo().getSpeed() <= 5) {
                 direction = DirectionProvider.getDirectionNow(startingActivity, newDirection);
                 directionInitialized = true;
@@ -56,7 +56,7 @@ public class SpeechService extends Service implements OnInitListener {
         }
 
         @Override
-        protected void updateGeoData(cgeo.geocaching.IGeoData newGeo) {
+        public void updateGeoData(cgeo.geocaching.IGeoData newGeo) {
             position = newGeo.getCoords();
             positionInitialized = true;
             if (!Settings.isUseCompass() || newGeo.getSpeed() > 5) {
