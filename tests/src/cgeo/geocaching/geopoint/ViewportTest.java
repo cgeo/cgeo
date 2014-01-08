@@ -6,6 +6,7 @@ import android.test.AndroidTestCase;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 public class ViewportTest extends AndroidTestCase {
@@ -54,8 +55,17 @@ public class ViewportTest extends AndroidTestCase {
     }
 
     public static void testSqlWhere() {
-        assertEquals("latitude >= -1.0 and latitude <= 3.0 and longitude >= -2.0 and longitude <= 4.0", vpRef.sqlWhere(null));
-        assertEquals("t.latitude >= -1.0 and t.latitude <= 3.0 and t.longitude >= -2.0 and t.longitude <= 4.0", vpRef.sqlWhere("t"));
+        assertEquals("latitude >= -1.0 and latitude <= 3.0 and longitude >= -2.0 and longitude <= 4.0", vpRef.sqlWhere(null).toString());
+        assertEquals("t.latitude >= -1.0 and t.latitude <= 3.0 and t.longitude >= -2.0 and t.longitude <= 4.0", vpRef.sqlWhere("t").toString());
+        Locale current = null;
+        try {
+            current = Locale.getDefault();
+            Locale.setDefault(Locale.FRENCH);
+            assertEquals("1,0", String.format("%.2g", 1.0d));  // Control that we are in a locale with commma separator
+            assertEquals("t.latitude >= -1.0 and t.latitude <= 3.0 and t.longitude >= -2.0 and t.longitude <= 4.0", vpRef.sqlWhere("t").toString());
+        } finally {
+            Locale.setDefault(current);
+        }
     }
 
     public static void testEquals() {

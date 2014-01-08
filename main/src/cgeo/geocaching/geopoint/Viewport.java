@@ -3,10 +3,9 @@ package cgeo.geocaching.geopoint;
 import cgeo.geocaching.ICoordinates;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
-import java.util.Locale;
 import java.util.Set;
-
 
 
 public class Viewport {
@@ -104,11 +103,12 @@ public class Viewport {
      *            the database table to use as prefix, or null if no prefix is required
      * @return the string without the "where" keyword
      */
-    public String sqlWhere(final String dbTable) {
+    public StringBuilder sqlWhere(@Nullable final String dbTable) {
         final String prefix = dbTable == null ? "" : (dbTable + ".");
-        return String.format((Locale) null,
-                "%slatitude >= %s and %slatitude <= %s and %slongitude >= %s and %slongitude <= %s",
-                prefix, getLatitudeMin(), prefix, getLatitudeMax(), prefix, getLongitudeMin(), prefix, getLongitudeMax());
+        return new StringBuilder(prefix).append("latitude >= ").append(getLatitudeMin()).append(" and ")
+                .append(prefix).append("latitude <= ").append(getLatitudeMax()).append(" and ")
+                .append(prefix).append("longitude >= ").append(getLongitudeMin()).append(" and ")
+                .append(prefix).append("longitude <= ").append(getLongitudeMax());
     }
 
     /**
