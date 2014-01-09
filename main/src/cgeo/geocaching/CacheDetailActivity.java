@@ -176,24 +176,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.cache));
 
-        String geocode = null;
-
-        // TODO Why can it happen that search is not null? onCreate should be called only once and it is not set before.
-        if (search != null) {
-            cache = search.getFirstCacheFromResult(LoadFlags.LOAD_ALL_DB_ONLY);
-            if (cache != null && cache.getGeocode() != null) {
-                geocode = cache.getGeocode();
-            }
-        }
-
         // get parameters
         final Bundle extras = getIntent().getExtras();
         final Uri uri = getIntent().getData();
 
         // try to get data from extras
         String name = null;
+        String geocode = null;
         String guid = null;
-        if (geocode == null && extras != null) {
+        if (extras != null) {
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
             name = extras.getString(Intents.EXTRA_NAME);
             guid = extras.getString(Intents.EXTRA_GUID);
@@ -542,20 +533,19 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
                 updateStatusMsg((String) msg.obj);
             } else {
-                CacheDetailActivity activity = ((CacheDetailActivity) activityRef.get());
+                final CacheDetailActivity activity = ((CacheDetailActivity) activityRef.get());
                 if (activity == null) {
                     return;
                 }
-                SearchResult search = activity.getSearch();
-                if (search == null) {
+                if (activity.search == null) {
                     showToast(R.string.err_dwld_details_failed);
                     dismissProgress();
                     finishActivity();
                     return;
                 }
 
-                if (search.getError() != null) {
-                    activity.showToast(activity.getResources().getString(R.string.err_dwld_details_failed) + " " + search.getError().getErrorString(activity.getResources()) + ".");
+                if (activity.search.getError() != null) {
+                    activity.showToast(activity.getResources().getString(R.string.err_dwld_details_failed) + " " + activity.search.getError().getErrorString(activity.getResources()) + ".");
                     dismissProgress();
                     finishActivity();
                     return;
@@ -2253,10 +2243,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     public Geocache getCache() {
         return cache;
-    }
-
-    public SearchResult getSearch() {
-        return search;
     }
 
     private static class StoreCacheHandler extends SimpleCancellableHandler {

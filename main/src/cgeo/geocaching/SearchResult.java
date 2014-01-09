@@ -10,6 +10,7 @@ import cgeo.geocaching.gcvote.GCVote;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -228,6 +229,7 @@ public class SearchResult implements Parcelable {
         return result;
     }
 
+    @Nullable
     public Geocache getFirstCacheFromResult(final EnumSet<LoadFlag> loadFlags) {
         return CollectionUtils.isNotEmpty(geocodes) ? DataStore.loadCache(geocodes.iterator().next(), loadFlags) : null;
     }
