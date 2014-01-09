@@ -35,8 +35,7 @@
         android:gravity="center"
         android:orientation="vertical" >
 
-        <LinearLayout
-            style="@style/icon_mainscreen_row" >
+        <LinearLayout style="@style/icon_mainscreen_row" >
 
             <LinearLayout
                 style="@style/icon_mainscreen_cell"
@@ -52,8 +51,7 @@
                     android:text="@string/live_map_button" />
             </LinearLayout>
 
-            <LinearLayout
-                style="@style/icon_mainscreen_cell" >
+            <LinearLayout style="@style/icon_mainscreen_cell" >
 
                 <ImageView
                     android:id="@+id/nearest"
@@ -76,8 +74,7 @@
                     style="@style/icon_mainscreen_count"
                     android:textIsSelectable="false" />
 
-                <LinearLayout
-                    style="@style/icon_mainscreen_cell_counter" >
+                <LinearLayout style="@style/icon_mainscreen_cell_counter" >
 
                     <ImageView
                         android:id="@+id/search_offline"
@@ -91,8 +88,7 @@
             </RelativeLayout>
         </LinearLayout>
 
-        <LinearLayout
-            style="@style/icon_mainscreen_row" >
+        <LinearLayout style="@style/icon_mainscreen_row" >
 
             <LinearLayout
                 style="@style/icon_mainscreen_cell"
@@ -146,7 +142,6 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="6dip"
         android:layout_marginRight="6dip"
-        android:onClick="cgeoNavSettings"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -158,11 +153,13 @@
         <TextView
             android:id="@+id/nav_location"
             style="@style/location_current"
+            android:onClick="cgeoNavSettings"
             android:text="@string/loc_trying" />
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:onClick="cgeoNavSettings" >
 
             <TextView
                 android:id="@+id/nav_type"
