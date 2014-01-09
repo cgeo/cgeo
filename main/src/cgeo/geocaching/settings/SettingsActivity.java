@@ -146,7 +146,7 @@ public class SettingsActivity extends PreferenceActivity {
             }
         }
         getPreference(R.string.pref_fakekey_basicmembers_screen)
-                .setEnabled(!Settings.isPremiumMember());
+                .setEnabled(!Settings.isGCPremiumMember());
         redrawScreen(R.string.pref_fakekey_navigation_menu_screen);
     }
 
@@ -370,11 +370,11 @@ public class SettingsActivity extends PreferenceActivity {
 
     void initBasicMemberPreferences() {
         getPreference(R.string.pref_fakekey_basicmembers_screen)
-                .setEnabled(!Settings.isPremiumMember());
+                .setEnabled(!Settings.isGCPremiumMember());
         getPreference(R.string.pref_loaddirectionimg)
-                .setEnabled(!Settings.isPremiumMember());
+                .setEnabled(!Settings.isGCPremiumMember());
         getPreference(R.string.pref_showcaptcha)
-                .setEnabled(!Settings.isPremiumMember());
+                .setEnabled(!Settings.isGCPremiumMember());
 
         redrawScreen(R.string.pref_fakekey_services_screen);
     }

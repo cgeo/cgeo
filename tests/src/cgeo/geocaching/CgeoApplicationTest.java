@@ -112,7 +112,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     public static Geocache testSearchByGeocode(final String geocode) {
         final SearchResult search = Geocache.searchByGeocode(geocode, null, 0, true, null);
         assertNotNull(search);
-        if (Settings.isPremiumMember() || search.getError() == null) {
+        if (Settings.isGCPremiumMember() || search.getError() == null) {
             assertEquals(1, search.getGeocodes().size());
             assertTrue(search.getGeocodes().contains(geocode));
             return DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
@@ -138,14 +138,14 @@ public class CgeoApplicationTest extends CGeoTestCase {
      */
     private static void withMockedLoginDo(final Runnable runnable) {
         final ImmutablePair<String, String> login = Settings.getGcCredentials();
-        final String memberStatus = Settings.getMemberStatus();
+        final String memberStatus = Settings.getGCMemberStatus();
 
         try {
             runnable.run();
         } finally {
             // restore user and password
             TestSettings.setLogin(login.left, login.right);
-            Settings.setMemberStatus(memberStatus);
+            Settings.setGCMemberStatus(memberStatus);
             GCLogin.getInstance().login();
         }
     }
@@ -308,8 +308,8 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     assertTrue(search.getGeocodes().contains(mockedCache.getGeocode()));
                     Geocache parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
 
-                    assertEquals(Settings.isPremiumMember(), mockedCache.getCoords().equals(parsedCache.getCoords()));
-                    assertEquals(Settings.isPremiumMember(), parsedCache.isReliableLatLon());
+                    assertEquals(Settings.isGCPremiumMember(), mockedCache.getCoords().equals(parsedCache.getCoords()));
+                    assertEquals(Settings.isGCPremiumMember(), parsedCache.isReliableLatLon());
 
                     // check update after switch strategy to FAST
                     Settings.setLiveMapStrategy(Strategy.FAST);
@@ -320,8 +320,8 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     assertTrue(search.getGeocodes().contains(mockedCache.getGeocode()));
                     parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
 
-                    assertEquals(Settings.isPremiumMember(), mockedCache.getCoords().equals(parsedCache.getCoords()));
-                    assertEquals(Settings.isPremiumMember(), parsedCache.isReliableLatLon());
+                    assertEquals(Settings.isGCPremiumMember(), mockedCache.getCoords().equals(parsedCache.getCoords()));
+                    assertEquals(Settings.isGCPremiumMember(), parsedCache.isReliableLatLon());
 
                 } finally {
                     // restore user settings
@@ -421,7 +421,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
         GCLogin.getInstance().logout();
         // Modify login data to avoid an automatic login again
         TestSettings.setLogin("c:geo", "c:geo");
-        Settings.setMemberStatus("Basic member");
+        Settings.setGCMemberStatus("Basic member");
     }
 
 }

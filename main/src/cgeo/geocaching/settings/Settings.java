@@ -313,16 +313,16 @@ public class Settings {
         return getBoolean(R.string.pref_connectorOXActive, false);
     }
 
-    public static boolean isPremiumMember() {
+    public static boolean isGCPremiumMember() {
         // Basic Member, Premium Member, ???
-        return GCConstants.MEMBER_STATUS_PM.equalsIgnoreCase(Settings.getMemberStatus());
+        return GCConstants.MEMBER_STATUS_PM.equalsIgnoreCase(Settings.getGCMemberStatus());
     }
 
-    public static String getMemberStatus() {
+    public static String getGCMemberStatus() {
         return getString(R.string.pref_memberstatus, "");
     }
 
-    public static boolean setMemberStatus(final String memberStatus) {
+    public static boolean setGCMemberStatus(final String memberStatus) {
         if (StringUtils.isBlank(memberStatus)) {
             return remove(R.string.pref_memberstatus);
         }
@@ -478,7 +478,7 @@ public class Settings {
     }
 
     public static boolean getLoadDirImg() {
-        return !isPremiumMember() && getBoolean(R.string.pref_loaddirectionimg, true);
+        return !isGCPremiumMember() && getBoolean(R.string.pref_loaddirectionimg, true);
     }
 
     public static void setGcCustomDate(final String format) {
@@ -506,7 +506,7 @@ public class Settings {
     }
 
     public static boolean isShowCaptcha() {
-        return !isPremiumMember() && getBoolean(R.string.pref_showcaptcha, false);
+        return !isGCPremiumMember() && getBoolean(R.string.pref_showcaptcha, false);
     }
 
     public static boolean isExcludeDisabledCaches() {

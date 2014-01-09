@@ -97,7 +97,7 @@ public class GCLogin extends AbstractLogin {
         }
 
         if (getLoginStatus(loginData)) {
-            Log.i("Already logged in Geocaching.com as " + username + " (" + Settings.getMemberStatus() + ')');
+            Log.i("Already logged in Geocaching.com as " + username + " (" + Settings.getGCMemberStatus() + ')');
             if (switchToEnglish(loginData) && retry) {
                 return login(false);
             }
@@ -132,7 +132,7 @@ public class GCLogin extends AbstractLogin {
         assert loginData != null;  // Caught above
 
         if (getLoginStatus(loginData)) {
-            Log.i("Successfully logged in Geocaching.com as " + username + " (" + Settings.getMemberStatus() + ')');
+            Log.i("Successfully logged in Geocaching.com as " + username + " (" + Settings.getGCMemberStatus() + ')');
 
             if (switchToEnglish(loginData) && retry) {
                 return login(false);
@@ -204,9 +204,9 @@ public class GCLogin extends AbstractLogin {
                 Log.e("getLoginStatus: bad cache count", e);
             }
             setActualCachesFound(cachesCount);
-            Settings.setMemberStatus(TextUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, null));
+            Settings.setGCMemberStatus(TextUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, null));
             if ( page.contains(GCConstants.MEMBER_STATUS_RENEW) ) {
-                Settings.setMemberStatus(GCConstants.MEMBER_STATUS_PM);
+                Settings.setGCMemberStatus(GCConstants.MEMBER_STATUS_PM);
             }
             return true;
         }
@@ -259,9 +259,9 @@ public class GCLogin extends AbstractLogin {
             final String responseData = StringUtils.defaultString(Network.getResponseData(Network.getRequest("http://www.geocaching.com/my/")));
             final String profile = TextUtils.replaceWhitespace(responseData);
 
-            Settings.setMemberStatus(TextUtils.getMatch(profile, GCConstants.PATTERN_MEMBER_STATUS, true, null));
+            Settings.setGCMemberStatus(TextUtils.getMatch(profile, GCConstants.PATTERN_MEMBER_STATUS, true, null));
             if (profile.contains(GCConstants.MEMBER_STATUS_RENEW)) {
-                Settings.setMemberStatus(GCConstants.MEMBER_STATUS_PM);
+                Settings.setGCMemberStatus(GCConstants.MEMBER_STATUS_PM);
             }
 
             setActualCachesFound(Integer.parseInt(TextUtils.getMatch(profile, GCConstants.PATTERN_CACHES_FOUND, true, "-1").replaceAll("[,.]", "")));

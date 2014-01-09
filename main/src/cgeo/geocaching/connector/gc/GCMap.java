@@ -368,7 +368,7 @@ public class GCMap {
             }
         }
 
-        if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY) && Settings.isPremiumMember()) {
+        if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY) && Settings.isGCPremiumMember()) {
             final Geopoint center = viewport.getCenter();
             if ((lastSearchViewport == null) || !lastSearchViewport.contains(center)) {
                 //FIXME We don't have a RecaptchaReceiver!?

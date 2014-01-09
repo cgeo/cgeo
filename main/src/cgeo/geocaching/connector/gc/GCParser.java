@@ -282,7 +282,7 @@ public abstract class GCParser {
             recaptchaText = thread.getText();
         }
 
-        if (!cids.isEmpty() && (Settings.isPremiumMember() || showCaptcha) && ((thread == null || StringUtils.isBlank(thread.getChallenge())) || StringUtils.isNotBlank(recaptchaText))) {
+        if (!cids.isEmpty() && (Settings.isGCPremiumMember() || showCaptcha) && ((thread == null || StringUtils.isBlank(thread.getChallenge())) || StringUtils.isNotBlank(recaptchaText))) {
             Log.i("Trying to get .loc for " + cids.size() + " caches");
 
             try {

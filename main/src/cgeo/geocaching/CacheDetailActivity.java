@@ -1368,7 +1368,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final LinearLayout layout = (LinearLayout) view.findViewById(R.id.favpoint_box);
             final boolean supportsFavoritePoints = cache.supportsFavoritePoints();
             layout.setVisibility(supportsFavoritePoints ? View.VISIBLE : View.GONE);
-            if (!supportsFavoritePoints || cache.isOwner() || !Settings.isPremiumMember()) {
+            if (!supportsFavoritePoints || cache.isOwner() || !Settings.isGCPremiumMember()) {
                 return;
             }
             final Button buttonAdd = (Button) view.findViewById(R.id.add_to_favpoint);

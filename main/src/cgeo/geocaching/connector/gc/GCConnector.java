@@ -91,7 +91,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean supportsPersonalNote() {
-        return Settings.isPremiumMember();
+        return Settings.isGCPremiumMember();
     }
 
     @Override

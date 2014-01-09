@@ -273,7 +273,7 @@ public class MainActivity extends AbstractActivity {
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_pocket_queries).setVisible(Settings.isPremiumMember());
+        menu.findItem(R.id.menu_pocket_queries).setVisible(Settings.isGCPremiumMember());
         return true;
     }
 
@@ -297,7 +297,7 @@ public class MainActivity extends AbstractActivity {
                 startScannerApplication();
                 return true;
             case R.id.menu_pocket_queries:
-                if (!Settings.isPremiumMember()) {
+                if (!Settings.isGCPremiumMember()) {
                     return true;
                 }
                 new PocketQueryList.UserInterface(MainActivity.this).promptForListSelection(new RunnableWithArgument<PocketQueryList>() {

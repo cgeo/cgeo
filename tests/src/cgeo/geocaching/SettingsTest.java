@@ -27,7 +27,7 @@ public class SettingsTest extends ActivityInstrumentationTestCase2<MainActivity>
 
     public static void testSettings() {
         // unfortunately, several other tests depend on being a premium member and will fail if run by a basic member
-        assertEquals(GCConstants.MEMBER_STATUS_PM, Settings.getMemberStatus());
+        assertEquals(GCConstants.MEMBER_STATUS_PM, Settings.getGCMemberStatus());
     }
 
     public static void testDeviceHasNormalLogin() {
