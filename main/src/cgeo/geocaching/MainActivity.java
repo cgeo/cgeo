@@ -731,8 +731,10 @@ public class MainActivity extends AbstractActivity {
                 final Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
                 final Geopoint coords = app.currentGeo().getCoords();
                 addresses = geocoder.getFromLocation(coords.getLatitude(), coords.getLongitude(), 1);
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 Log.i("Failed to obtain address");
+            } catch (final IllegalArgumentException e) {
+                Log.w("ObtainAddressThread.run", e);
             }
 
             obtainAddressHandler.sendEmptyMessage(0);
