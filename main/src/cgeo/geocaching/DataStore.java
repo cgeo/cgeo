@@ -2320,11 +2320,11 @@ public class DataStore {
             return;
         }
 
-        init();
-
         Log.d("Database clean: started");
 
         try {
+            init();
+
             Cursor cursor;
             if (more) {
                 cursor = database.query(
