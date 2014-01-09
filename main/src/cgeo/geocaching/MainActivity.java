@@ -54,7 +54,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -551,7 +550,7 @@ public class MainActivity extends AbstractActivity {
                                     observer.onNext(formatAddress(addresses.get(0)));
                                 }
                                 observer.onCompleted();
-                            } catch (final IOException e) {
+                            } catch (final Exception e) {
                                 observer.onError(e);
                             }
                             return Subscriptions.empty();
