@@ -347,6 +347,9 @@ public abstract class GCParser {
         // attention: parseCacheFromText already stores implicitly through searchResult.addCache
         if (searchResult != null && !searchResult.getGeocodes().isEmpty()) {
             final Geocache cache = searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+            if (cache == null) {
+                return null;
+            }
             getExtraOnlineInfo(cache, page, handler);
             // too late: it is already stored through parseCacheFromText
             cache.setDetailedUpdatedNow();
