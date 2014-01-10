@@ -9,6 +9,16 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import rx.Observable;
+import rx.Observable.OnSubscribeFunc;
+import rx.Observer;
+import rx.Scheduler;
+import rx.Subscription;
+import rx.android.concurrency.AndroidSchedulers;
+import rx.concurrency.Schedulers;
+import rx.subscriptions.CompositeSubscription;
+import rx.subscriptions.Subscriptions;
+import rx.util.functions.Action1;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,7 +28,6 @@ import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.text.Html;
 import android.util.SparseArray;
 import android.view.ContextMenu;
@@ -36,11 +45,15 @@ import java.io.FileOutputStream;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class ImagesList {
 
     private BitmapDrawable currentDrawable;
     private Image currentImage;
+    private CompositeSubscription subscriptions = new CompositeSubscription();
 
     public enum ImageType {
         LogImages(R.string.cache_log_images_title),
@@ -69,6 +82,9 @@ public class ImagesList {
     private final String geocode;
     private LinearLayout imagesView;
 
+    private Scheduler downloadScheduler = Schedulers.executor(new ThreadPoolExecutor(5, 5, 5, TimeUnit.SECONDS,
+            new LinkedBlockingQueue<Runnable>()));
+
     public ImagesList(final Activity activity, final String geocode) {
         this.activity = activity;
         this.geocode = geocode;
@@ -80,7 +96,8 @@ public class ImagesList {
         imagesView = (LinearLayout) parentView.findViewById(R.id.spoiler_list);
 
         for (final Image img : images) {
-            LinearLayout rowView = (LinearLayout) inflater.inflate(R.layout.cache_image_item, null);
+            final LinearLayout rowView = (LinearLayout) inflater.inflate(R.layout.cache_image_item, null);
+            assert(rowView != null);
 
             if (StringUtils.isNotBlank(img.getTitle())) {
                 ((TextView) rowView.findViewById(R.id.title)).setText(Html.fromHtml(img.getTitle()));
@@ -93,66 +110,69 @@ public class ImagesList {
                 descView.setVisibility(View.VISIBLE);
             }
 
-            new AsyncImgLoader(rowView, img, offline).execute();
+            subscriptions.add(loadImage(img, offline)
+                    .subscribeOn(downloadScheduler)
+                    .observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<BitmapDrawable>() {
+                        @Override
+                        public void call(final BitmapDrawable image) {
+                            display(image, img, rowView);
+                        }
+                    }));
+
             imagesView.addView(rowView);
         }
     }
 
-    private class AsyncImgLoader extends AsyncTask<Void, Void, BitmapDrawable> {
-
-        final private LinearLayout view;
-        final private Image img;
-        final boolean offline;
-
-        public AsyncImgLoader(final LinearLayout view, final Image img, final boolean offline) {
-            this.view = view;
-            this.img = img;
-            this.offline = offline;
-        }
-
-        @Override
-        protected BitmapDrawable doInBackground(Void... params) {
-            final HtmlImage imgGetter = new HtmlImage(geocode, true, offline ? StoredList.STANDARD_LIST_ID : StoredList.TEMPORARY_LIST_ID, false);
-            return imgGetter.getDrawable(img.getUrl());
-        }
-
-        @Override
-        protected void onPostExecute(final BitmapDrawable image) {
-            if (image != null) {
-                bitmaps.add(image.getBitmap());
-                final ImageView imageView = (ImageView) inflater.inflate(R.layout.image_item, null);
-
-                final Rect bounds = image.getBounds();
-
-                imageView.setImageResource(R.drawable.image_not_loaded);
-                imageView.setClickable(true);
-                imageView.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View arg0) {
-                        viewImageInStandardApp(image);
-                    }
-                });
-                activity.registerForContextMenu(imageView);
-                imageView.setImageDrawable(image);
-                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                imageView.setLayoutParams(new LayoutParams(bounds.width(), bounds.height()));
-
-                view.findViewById(R.id.progress_bar).setVisibility(View.GONE);
-                view.addView(imageView);
-
-                imageView.setId(image.hashCode());
-                images.put(imageView.getId(), img);
+    private Observable<BitmapDrawable> loadImage(final Image img, final boolean offline) {
+        return Observable.create(new OnSubscribeFunc<BitmapDrawable>() {
+            @Override
+            public Subscription onSubscribe(final Observer<? super BitmapDrawable> observer) {
+                final HtmlImage imgGetter = new HtmlImage(geocode, true, offline ? StoredList.STANDARD_LIST_ID : StoredList.TEMPORARY_LIST_ID, false);
+                observer.onNext(imgGetter.getDrawable(img.getUrl()));
+                observer.onCompleted();
+                return Subscriptions.empty();
             }
+        });
+    }
+
+    private void display(final BitmapDrawable image, final Image img, final LinearLayout view) {
+        if (image != null) {
+            bitmaps.add(image.getBitmap());
+            final ImageView imageView = (ImageView) inflater.inflate(R.layout.image_item, null);
+            assert(imageView != null);
+
+            final Rect bounds = image.getBounds();
+
+            imageView.setImageResource(R.drawable.image_not_loaded);
+            imageView.setClickable(true);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View arg0) {
+                    viewImageInStandardApp(image);
+                }
+            });
+            activity.registerForContextMenu(imageView);
+            imageView.setImageDrawable(image);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setLayoutParams(new LayoutParams(bounds.width(), bounds.height()));
+
+            view.findViewById(R.id.progress_bar).setVisibility(View.GONE);
+            view.addView(imageView);
+
+            imageView.setId(image.hashCode());
+            images.put(imageView.getId(), img);
         }
     }
 
     public void removeAllViews() {
-        imagesView.removeAllViews();
         for (final Bitmap b : bitmaps) {
             b.recycle();
         }
         bitmaps.clear();
+
+        // Stop loading images if some are still in progress
+        subscriptions.unsubscribe();
+        imagesView.removeAllViews();
     }
 
     public void onCreateContextMenu(ContextMenu menu, View v) {
