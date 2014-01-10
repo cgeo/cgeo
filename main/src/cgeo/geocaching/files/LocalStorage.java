@@ -122,7 +122,7 @@ public final class LocalStorage {
      *            the geocode
      * @return the cache directory
      */
-    public static File getStorageDir(final String geocode) {
+    public static File getStorageDir(@Nullable final String geocode) {
         return storageDir(getStorage(), geocode);
     }
 
@@ -134,11 +134,11 @@ public final class LocalStorage {
      *            the geocode
      * @return the cache directory
      */
-    private static File getStorageSecDir(final String geocode) {
+    private static File getStorageSecDir(@Nullable final String geocode) {
         return storageDir(getStorageSec(), geocode);
     }
 
-    private static File storageDir(final File base, final String geocode) {
+    private static File storageDir(final File base, @Nullable final String geocode) {
         return new File(base, StringUtils.defaultIfEmpty(geocode, "_others"));
     }
 
@@ -155,7 +155,7 @@ public final class LocalStorage {
      *            true if an url was given, false if a file name was given
      * @return the file
      */
-    public static File getStorageFile(final String geocode, final String fileNameOrUrl, final boolean isUrl, final boolean createDirs) {
+    public static File getStorageFile(@Nullable final String geocode, final String fileNameOrUrl, final boolean isUrl, final boolean createDirs) {
         return buildFile(getStorageDir(geocode), fileNameOrUrl, isUrl, createDirs);
     }
 
