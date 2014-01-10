@@ -8,9 +8,11 @@ import org.eclipse.jdt.annotation.Nullable;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.ExifInterface;
 import android.net.Uri;
 
 import java.io.BufferedOutputStream;
@@ -153,18 +155,30 @@ public final class ImageUtils {
      */
     @Nullable
     public static Bitmap readDownsampledImage(@NonNull final String filePath, final int maxX, final int maxY) {
+        int orientation = ExifInterface.ORIENTATION_NORMAL;
+        try {
+            ExifInterface exif = new ExifInterface(filePath);
+            orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+        } catch (IOException e) {
+            Log.e("ImageUtils.readDownsampledImage", e);
+        }
         BitmapFactory.Options sizeOnlyOptions = new BitmapFactory.Options();
         sizeOnlyOptions.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(filePath, sizeOnlyOptions);
         final int myMaxXY = Math.max(sizeOnlyOptions.outHeight, sizeOnlyOptions.outWidth);
         final int maxXY = Math.max(maxX, maxY);
         final int sampleSize = myMaxXY / maxXY;
+        BitmapFactory.Options sampleOptions = new BitmapFactory.Options();
         if (sampleSize > 1) {
-            BitmapFactory.Options sampleOptions = new BitmapFactory.Options();
             sampleOptions.inSampleSize = sampleSize;
-            return BitmapFactory.decodeFile(filePath, sampleOptions);
         }
-        return BitmapFactory.decodeFile(filePath);
+        Bitmap result = BitmapFactory.decodeFile(filePath, sampleOptions);
+        if (orientation == ExifInterface.ORIENTATION_NORMAL) {
+            return result;
+        }
+        Matrix matrix = new Matrix();
+        matrix.postRotate(90);
+        return Bitmap.createBitmap(result, 0, 0, result.getWidth(), result.getHeight(), matrix, true);
     }
 
     /** Create a File for saving an image or video
