@@ -318,6 +318,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     @Override
+    public void onDestroy() {
+        if (imagesList != null) {
+            imagesList.removeAllViews();
+        }
+        super.onDestroy();
+    }
+
+    @Override
     public void onStop() {
         if (cache != null) {
             cache.setChangeNotificationHandler(null);
