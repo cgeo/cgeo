@@ -11,11 +11,6 @@ import cgeo.geocaching.Geocache;
 public class PopularityRatioComparator extends AbstractCacheComparator {
 
     @Override
-    protected boolean canCompare(final Geocache cache1, final Geocache cache2) {
-        return true;
-    }
-
-    @Override
     protected int compareCaches(final Geocache cache1, final Geocache cache2) {
 
         float ratio1 = 0.0f;

@@ -11,8 +11,8 @@ import org.apache.commons.lang3.StringUtils;
 public class NameComparator extends AbstractCacheComparator {
 
     @Override
-    protected boolean canCompare(Geocache cache1, Geocache cache2) {
-        return StringUtils.isNotBlank(cache1.getName()) && StringUtils.isNotBlank(cache2.getName());
+    protected boolean canCompare(Geocache cache) {
+        return StringUtils.isNotBlank(cache.getName());
     }
 
     @Override

@@ -9,8 +9,8 @@ import cgeo.geocaching.Geocache;
 public class SizeComparator extends AbstractCacheComparator {
 
     @Override
-    protected boolean canCompare(Geocache cache1, Geocache cache2) {
-        return cache1.getSize() != null && cache2.getSize() != null;
+    protected boolean canCompare(Geocache cache) {
+        return cache.getSize() != null;
     }
 
     @Override

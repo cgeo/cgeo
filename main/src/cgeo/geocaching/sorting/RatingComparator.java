@@ -9,11 +9,6 @@ import cgeo.geocaching.Geocache;
 public class RatingComparator extends AbstractCacheComparator {
 
     @Override
-    protected boolean canCompare(final Geocache cache1, final Geocache cache2) {
-        return true;
-    }
-
-    @Override
     protected int compareCaches(final Geocache cache1, final Geocache cache2) {
         final float rating1 = cache1.getRating();
         final float rating2 = cache2.getRating();

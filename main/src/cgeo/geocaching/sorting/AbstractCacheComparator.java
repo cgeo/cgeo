@@ -3,6 +3,7 @@ package cgeo.geocaching.sorting;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.utils.Log;
 
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * abstract super implementation for all cache comparators
@@ -13,25 +14,35 @@ public abstract class AbstractCacheComparator implements CacheComparator {
     @Override
     public final int compare(final Geocache cache1, final Geocache cache2) {
         try {
-            // first check that we have all necessary data for the comparison
-            if (!canCompare(cache1, cache2)) {
-                return 0;
+            final boolean canCompare1 = canCompare(cache1);
+            final boolean canCompare2 = canCompare(cache2);
+            if (!canCompare1) {
+                return canCompare2 ? 1 : fallbackToGeocode(cache1, cache2);
             }
-            return compareCaches(cache1, cache2);
-        } catch (Exception e) {
+            return canCompare2 ? compareCaches(cache1, cache2) : -1;
+        } catch (final Exception e) {
             Log.e("AbstractCacheComparator.compare", e);
+            // This may violate the Comparator interface if the exception is not systematic.
+            return fallbackToGeocode(cache1, cache2);
         }
-        return 0;
+    }
+
+    private static int fallbackToGeocode(final Geocache cache1, final Geocache cache2) {
+        return StringUtils.defaultString(cache1.getGeocode()).compareToIgnoreCase(StringUtils.defaultString(cache2.getGeocode()));
     }
 
     /**
-     * Check necessary preconditions (like missing fields) before running the comparison itself
+     * Check necessary preconditions (like missing fields) before running the comparison itself.
+     * Caches not filling the conditions will be placed last, sorted by Geocode.
      *
-     * @param cache1
-     * @param cache2
-     * @return
+     * The default returns <code>true</code> and can be overriden if needed in child classes.
+     *
+     * @param cache
+     * @return <code>true</code> if the cache holds the necessary data to be compared meaningfully
      */
-    protected abstract boolean canCompare(final Geocache cache1, final Geocache cache2);
+    protected boolean canCompare(final Geocache cache) {
+        return true;
+    }
 
     /**
      * Compares two caches. Logging and exception handling is implemented outside this method already.

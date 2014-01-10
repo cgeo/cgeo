@@ -5,8 +5,8 @@ import cgeo.geocaching.Geocache;
 public class FindsComparator extends AbstractCacheComparator {
 
     @Override
-    protected boolean canCompare(Geocache cache1, Geocache cache2) {
-        return cache1.getLogCounts() != null && cache2.getLogCounts() != null;
+    protected boolean canCompare(Geocache cache) {
+        return cache.getLogCounts() != null;
     }
 
     @Override

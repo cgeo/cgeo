@@ -36,11 +36,6 @@ public class DistanceComparator extends AbstractCacheComparator {
     }
 
     @Override
-    protected boolean canCompare(Geocache cache1, Geocache cache2) {
-        return true;
-    }
-
-    @Override
     protected int compareCaches(final Geocache cache1, final Geocache cache2) {
         calculateAllDistances();
         final Float distance1 = cache1.getDistance();

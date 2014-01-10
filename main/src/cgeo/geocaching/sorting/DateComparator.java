@@ -12,11 +12,6 @@ import java.util.Date;
 public class DateComparator extends AbstractCacheComparator {
 
     @Override
-    protected boolean canCompare(Geocache cache1, Geocache cache2) {
-        return true;
-    }
-
-    @Override
     protected int compareCaches(Geocache cache1, Geocache cache2) {
         final Date date1 = cache1.getHiddenDate();
         final Date date2 = cache2.getHiddenDate();
