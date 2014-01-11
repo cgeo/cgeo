@@ -556,7 +556,7 @@ public class MainActivity extends AbstractActivity {
                         }
                     }).subscribeOn(Schedulers.threadPoolForIO());
                     AndroidObservable.fromActivity(MainActivity.this, address)
-                            .onErrorResumeNext(Observable.just(geo.getCoords().toString()))
+                            .onErrorResumeNext(Observable.from(geo.getCoords().toString()))
                             .subscribe(new Action1<String>() {
                                 @Override
                                 public void call(final String address) {

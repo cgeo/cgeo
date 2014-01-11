@@ -58,7 +58,7 @@ public class StatusUpdater {
                                     new Parameters("version_code", String.valueOf(Version.getVersionCode(CgeoApplication.getInstance())),
                                             "version_name", Version.getVersionName(CgeoApplication.getInstance()),
                                             "locale", Locale.getDefault().toString()));
-                    return response != null ? Observable.just(Status.defaultStatus((new Status(response)))) : Observable.<Status>empty();
+                    return response != null ? Observable.from(Status.defaultStatus((new Status(response)))) : Observable.<Status>empty();
                 }
             }).subscribeOn(Schedulers.threadPoolForIO());
 
