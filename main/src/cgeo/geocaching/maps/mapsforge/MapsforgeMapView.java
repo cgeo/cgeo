@@ -16,6 +16,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 import org.mapsforge.android.maps.MapView;
 import org.mapsforge.android.maps.Projection;
 import org.mapsforge.android.maps.mapgenerator.MapGenerator;
@@ -50,7 +51,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public void draw(Canvas canvas) {
+    public void draw(@NonNull Canvas canvas) {
         try {
             // Google Maps and OSM Maps use different zoom levels for the same view.
             // Here we don't want the Google Maps compatible zoom level, but the actual one.

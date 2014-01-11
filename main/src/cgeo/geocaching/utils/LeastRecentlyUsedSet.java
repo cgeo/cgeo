@@ -1,5 +1,7 @@
 package cgeo.geocaching.utils;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.AbstractSet;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -42,6 +44,7 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
      *
      * @see HashSet
      */
+    @NonNull
     @Override
     public Iterator<E> iterator() {
         return map.keySet().iterator();

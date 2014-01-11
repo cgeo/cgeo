@@ -16,6 +16,8 @@
 
 package android.support.v4.app;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -215,7 +217,7 @@ public class FragmentListActivity extends FragmentActivity {
      *@see Activity#onRestoreInstanceState(Bundle)
      */
     @Override
-    protected void onRestoreInstanceState(Bundle state) {
+    protected void onRestoreInstanceState(@NonNull Bundle state) {
         ensureList();
         super.onRestoreInstanceState(state);
     }

@@ -1,5 +1,7 @@
 package cgeo.geocaching.ui;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.text.Spannable;
 import android.text.method.LinkMovementMethod;
 import android.view.MotionEvent;
@@ -26,7 +28,7 @@ public class AnchorAwareLinkMovementMethod extends LinkMovementMethod {
     }
 
     @Override
-    public boolean onTouchEvent(TextView widget, Spannable buffer, MotionEvent event) {
+    public boolean onTouchEvent(@NonNull TextView widget, @NonNull Spannable buffer, @NonNull MotionEvent event) {
         try {
             return super.onTouchEvent(widget, buffer, event);
         } catch (Exception e) {

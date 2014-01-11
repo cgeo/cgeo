@@ -6,6 +6,7 @@ import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 
 import com.google.android.maps.MapActivity;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -37,7 +38,7 @@ public class GoogleMapActivity extends MapActivity implements MapActivityImpl, F
     }
 
     @Override
-    protected void onSaveInstanceState(final Bundle outState) {
+    protected void onSaveInstanceState(@NonNull final Bundle outState) {
         mapBase.onSaveInstanceState(outState);
     }
 

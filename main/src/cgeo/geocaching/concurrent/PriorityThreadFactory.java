@@ -1,5 +1,7 @@
 package cgeo.geocaching.concurrent;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.concurrent.ThreadFactory;
 
 /**
@@ -12,8 +14,9 @@ public class PriorityThreadFactory implements ThreadFactory {
         this.priority = priority;
     }
 
+    @NonNull
     @Override
-    public Thread newThread(Runnable r) {
+    public Thread newThread(@NonNull Runnable r) {
         Thread result = new Thread(r);
         result.setPriority(this.priority);
         return result;

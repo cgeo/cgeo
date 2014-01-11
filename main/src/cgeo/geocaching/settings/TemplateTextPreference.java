@@ -6,6 +6,7 @@ import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -44,7 +45,7 @@ public class TemplateTextPreference extends DialogPreference {
     }
 
     @Override
-    protected void onBindDialogView(View view) {
+    protected void onBindDialogView(@NonNull View view) {
         settingsActivity = (SettingsActivity) this.getContext();
 
         editText = (EditText) view.findViewById(R.id.signature_dialog_text);

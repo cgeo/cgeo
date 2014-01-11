@@ -5,6 +5,7 @@ import cgeo.geocaching.maps.AbstractMap;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.mapsforge.android.maps.MapActivity;
 
 import android.app.Activity;
@@ -32,7 +33,7 @@ public class MapsforgeMapActivity extends MapActivity implements MapActivityImpl
     }
 
     @Override
-    protected void onSaveInstanceState(final Bundle outState) {
+    protected void onSaveInstanceState(@NonNull final Bundle outState) {
         mapBase.onSaveInstanceState(outState);
     }
 

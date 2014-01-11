@@ -19,6 +19,8 @@ package com.viewpagerindicator;
 
 import cgeo.geocaching.R;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -445,7 +447,7 @@ public class TitlePageIndicator extends View implements PageIndicator {
     }
 
     @Override
-    public boolean onTouchEvent(android.view.MotionEvent ev) {
+    public boolean onTouchEvent(@NonNull android.view.MotionEvent ev) {
         if ((mViewPager == null) || (mViewPager.getAdapter().getCount() == 0)) {
             return false;
         }
@@ -751,7 +753,7 @@ public class TitlePageIndicator extends View implements PageIndicator {
         }
 
         @Override
-        public void writeToParcel(Parcel dest, int flags) {
+        public void writeToParcel(@NonNull Parcel dest, int flags) {
             super.writeToParcel(dest, flags);
             dest.writeInt(currentPage);
         }
