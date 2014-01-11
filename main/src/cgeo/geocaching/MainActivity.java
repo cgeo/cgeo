@@ -106,7 +106,7 @@ public class MainActivity extends AbstractActivity {
                 if (conn.isLoggedIn()) {
                     userInfo.append(conn.getUserName());
                     if (conn.getCachesFound() >= 0) {
-                        userInfo.append(" (").append(String.valueOf(conn.getCachesFound())).append(')');
+                        userInfo.append(" (").append(conn.getCachesFound()).append(')');
                     }
                     userInfo.append(Formatter.SEPARATOR);
                 }

@@ -17,7 +17,7 @@ public enum CacheListType {
      */
     public final boolean canSwitch;
 
-    private CacheListType(final boolean canSwitch) {
+    CacheListType(final boolean canSwitch) {
         this.canSwitch = canSwitch;
     }
 }

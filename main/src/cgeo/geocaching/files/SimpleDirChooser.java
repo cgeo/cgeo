@@ -89,9 +89,9 @@ public class SimpleDirChooser extends AbstractListActivity {
     }
 
     public void editPath() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(SimpleDirChooser.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.simple_dir_chooser_current_path);
-        final EditText input = new EditText(SimpleDirChooser.this);
+        final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         input.setText(currentDir.getPath());
         builder.setView(input);
