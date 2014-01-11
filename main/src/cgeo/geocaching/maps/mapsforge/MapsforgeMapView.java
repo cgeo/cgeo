@@ -229,7 +229,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     @Override
     public void setMapTheme() {
         String customRenderTheme = Settings.getCustomRenderThemeFilePath();
-        if (!StringUtils.isEmpty(customRenderTheme)) {
+        if (StringUtils.isNotEmpty(customRenderTheme)) {
             try {
                 setRenderTheme(new File(customRenderTheme));
             } catch (FileNotFoundException e) {
