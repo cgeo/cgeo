@@ -17,5 +17,10 @@
         android:id="@+id/menu_cache_share_field"
         android:title="@string/cache_share_field">
     </item>
+    <item
+        android:id="@+id/menu_calendar"
+        android:title="@string/cache_menu_event"
+        android:visible="false">
+    </item>
 
 </menu>

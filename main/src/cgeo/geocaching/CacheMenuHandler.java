@@ -9,8 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 /**
- * Shared menu handling for all activities having menu items related to a cache.
- *
+ * Shared menu handling for all activities having menu items related to a cache. <br>
+ * TODO: replace by a fragment
+ * 
  */
 public class CacheMenuHandler extends AbstractUIFactory {
 

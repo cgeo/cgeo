@@ -39,6 +39,11 @@ public final class CacheDetailsCreator {
         parentView.removeAllViews();
     }
 
+    /**
+     * @param nameId
+     * @param value
+     * @return the view containing the displayed string (i.e. the right side one from the pair of "label": "value")
+     */
     public TextView add(final int nameId, final CharSequence value) {
         final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_information_item, null);
         final TextView nameView = (TextView) layout.findViewById(R.id.name);
@@ -188,14 +193,24 @@ public final class CacheDetailsCreator {
         if (!cache.isEventCache()) {
             return;
         }
+        addHiddenDate(cache);
+    }
+
+    public TextView addHiddenDate(final @NonNull Geocache cache) {
         final Date hiddenDate = cache.getHiddenDate();
         if (hiddenDate == null) {
-            return;
+            return null;
         }
         final long time = hiddenDate.getTime();
         if (time > 0) {
-            final String dateString = DateUtils.formatDateTime(CgeoApplication.getInstance().getBaseContext(), time, DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + Formatter.formatFullDate(time);
-            add(R.string.cache_event, dateString);
+            String dateString = Formatter.formatFullDate(time);
+            if (cache.isEventCache()) {
+                dateString = DateUtils.formatDateTime(CgeoApplication.getInstance().getBaseContext(), time, DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + dateString;
+            }
+            final TextView view = add(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden, dateString);
+            view.setId(R.id.date);
+            return view;
         }
+        return null;
     }
 }

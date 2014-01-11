@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+import cgeo.calendar.CalendarAddon;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.activity.Progress;
@@ -57,6 +58,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+
 import rx.Observable;
 import rx.Observable.OnSubscribeFunc;
 import rx.Observer;
@@ -87,7 +89,6 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.Spanned;
-import android.text.format.DateUtils;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
@@ -116,7 +117,6 @@ import android.widget.TextView.BufferType;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
@@ -388,6 +388,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 clickedItemText = ((TextView) view).getText();
                 buildDetailsContextMenu(menu, res.getString(R.string.cache_logs), false);
                 break;
+            case R.id.date: // event date
+                assert view instanceof TextView;
+                clickedItemText = ((TextView) view).getText();
+                buildDetailsContextMenu(menu, res.getString(R.string.cache_event), true);
+                menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
+                break;
             case R.id.waypoint:
                 menu.setHeaderTitle(selectedWaypoint.getName() + " (" + res.getString(R.string.waypoint) + ")");
                 getMenuInflater().inflate(R.menu.waypoint_options, menu);
@@ -489,6 +495,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     final HandlerResetCoordinates handler = new HandlerResetCoordinates(this, progressDialog, false);
                     new ResetCoordsThread(cache, handler, selectedWaypoint, true, false, progressDialog).start();
                 }
+                return true;
+            case R.id.menu_calendar:
+                CalendarAddon.addToCalendarWithIntent(this, cache);
                 return true;
             default:
                 break;
@@ -977,17 +986,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 ownerView.setOnClickListener(new OwnerActionsClickListener(cache));
             }
 
-            // cache hidden
-            final Date hiddenDate = cache.getHiddenDate();
-            if (hiddenDate != null) {
-                final long time = hiddenDate.getTime();
-                if (time > 0) {
-                    String dateString = Formatter.formatFullDate(time);
-                    if (cache.isEventCache()) {
-                        dateString = DateUtils.formatDateTime(CgeoApplication.getInstance().getBaseContext(), time, DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + dateString;
-                    }
-                    details.add(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden, dateString);
-                }
+            // hidden or event date
+            final TextView hiddenView = details.addHiddenDate(cache);
+            if (hiddenView != null) {
+                registerForContextMenu(hiddenView);
             }
 
             // cache location
