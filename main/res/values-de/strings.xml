@@ -821,6 +821,8 @@
   <string name="helper_calendar_title">c:geo Kalender Add-on</string>
   <string name="helper_calendar_missing">c:geo Kalender Add-on nicht installiert</string>
   <string name="helper_calendar_description">Ermöglicht die Übernahme von Event-Caches in den Kalender.</string>
+  <string name="helper_contacts_title">c:geo Kontakte Add-on</string>
+  <string name="helper_contacts_description">Ermöglicht das direkte Öffnen von Kontakten (aus dem eigenen Adressbuch) von Logeinträgen aus, so dass man Freunde einfacher um Hilfe fragen kann.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Sehr gute App für Online- und Offline-Karten (nur Rasterkarten) mit vielen weiteren Funktionen wie z.B. Trackaufzeichnung, POIs und vieles mehr.</string>
   <string name="helper_gpsstatus_title">GPS-Status</string>
