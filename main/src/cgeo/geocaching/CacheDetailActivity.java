@@ -46,7 +46,6 @@ import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
-import cgeo.geocaching.utils.RunnableWithArgument;
 import cgeo.geocaching.utils.SimpleCancellableHandler;
 import cgeo.geocaching.utils.SimpleHandler;
 import cgeo.geocaching.utils.TextUtils;
@@ -58,7 +57,6 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-
 import rx.Observable;
 import rx.Observable.OnSubscribeFunc;
 import rx.Observer;
@@ -66,6 +64,7 @@ import rx.Subscription;
 import rx.android.observables.AndroidObservable;
 import rx.concurrency.Schedulers;
 import rx.subscriptions.Subscriptions;
+import rx.util.functions.Action1;
 
 import android.R.color;
 import android.app.AlertDialog;
@@ -1058,9 +1057,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 if (Settings.getChooseList()) {
                     // let user select list to store cache in
                     new StoredList.UserInterface(CacheDetailActivity.this).promptForListSelection(R.string.list_title,
-                            new RunnableWithArgument<Integer>() {
+                            new Action1<Integer>() {
                                 @Override
-                                public void run(final Integer selectedListId) {
+                                public void call(final Integer selectedListId) {
                                     storeCache(selectedListId, new StoreCacheHandler(CacheDetailActivity.this, progress));
                                 }
                             }, true, StoredList.TEMPORARY_LIST_ID);
@@ -1309,9 +1308,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             @Override
             public void onClick(View view) {
                 new StoredList.UserInterface(CacheDetailActivity.this).promptForListSelection(R.string.list_title,
-                        new RunnableWithArgument<Integer>() {
+                        new Action1<Integer>() {
                             @Override
-                            public void run(final Integer selectedListId) {
+                            public void call(final Integer selectedListId) {
                                 switchListById(selectedListId);
                             }
                         }, true, cache.getListId());

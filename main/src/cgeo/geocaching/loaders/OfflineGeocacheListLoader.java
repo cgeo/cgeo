@@ -1,9 +1,9 @@
 package cgeo.geocaching.loaders;
 
-import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.DataStore;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.settings.Settings;
 
 import android.content.Context;
 

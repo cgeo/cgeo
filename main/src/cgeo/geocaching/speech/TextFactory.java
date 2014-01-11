@@ -2,9 +2,9 @@ package cgeo.geocaching.speech;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.IConversion;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
 
 import java.util.Locale;

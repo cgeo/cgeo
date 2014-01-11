@@ -2,7 +2,8 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.list.StoredList;
-import cgeo.geocaching.utils.RunnableWithArgument;
+
+import rx.util.functions.Action1;
 
 import android.content.Intent;
 import android.content.Intent.ShortcutIconResource;
@@ -21,10 +22,10 @@ public class CreateShortcutActivity extends AbstractActivity {
     }
 
     private void promptForShortcut() {
-        new StoredList.UserInterface(this).promptForListSelection(R.string.create_shortcut, new RunnableWithArgument<Integer>() {
+        new StoredList.UserInterface(this).promptForListSelection(R.string.create_shortcut, new Action1<Integer>() {
 
             @Override
-            public void run(final Integer listId) {
+            public void call(final Integer listId) {
                 final Intent shortcut = createShortcut(listId.intValue());
                 setResult(RESULT_OK, shortcut);
 

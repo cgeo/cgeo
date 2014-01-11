@@ -5,10 +5,10 @@ import cgeo.geocaching.DataStore;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.RunnableWithArgument;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import rx.util.functions.Action1;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -67,15 +67,15 @@ public final class StoredList extends AbstractList {
             res = app.getResources();
         }
 
-        public void promptForListSelection(final int titleId, @NonNull final RunnableWithArgument<Integer> runAfterwards) {
+        public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards) {
             promptForListSelection(titleId, runAfterwards, false, -1);
         }
 
-        public void promptForListSelection(final int titleId, @NonNull final RunnableWithArgument<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId) {
+        public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId) {
             promptForListSelection(titleId, runAfterwards, onlyConcreteLists, exceptListId, StringUtils.EMPTY);
         }
 
-        public void promptForListSelection(final int titleId, @NonNull final RunnableWithArgument<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId, final String newListName) {
+        public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId, final String newListName) {
             final List<AbstractList> lists = new ArrayList<AbstractList>();
             lists.addAll(getSortedLists());
 
@@ -109,7 +109,7 @@ public final class StoredList extends AbstractList {
                         promptForListCreation(runAfterwards, newListName);
                     }
                     else {
-                        runAfterwards.run(lists.get(itemId).id);
+                        runAfterwards.call(lists.get(itemId).id);
                     }
                 }
             });
@@ -138,17 +138,17 @@ public final class StoredList extends AbstractList {
             return lists;
         }
 
-        public void promptForListCreation(@NonNull final RunnableWithArgument<Integer> runAfterwards, String newListName) {
-            handleListNameInput(newListName, R.string.list_dialog_create_title, R.string.list_dialog_create, new RunnableWithArgument<String>() {
+        public void promptForListCreation(@NonNull final Action1<Integer> runAfterwards, String newListName) {
+            handleListNameInput(newListName, R.string.list_dialog_create_title, R.string.list_dialog_create, new Action1<String>() {
 
                 @Override
-                public void run(final String listName) {
+                public void call(final String listName) {
                     final int newId = DataStore.createList(listName);
                     new StoredList(newId, listName, 0);
 
                     if (newId >= DataStore.customListIdOffset) {
                         ActivityMixin.showToast(activity, res.getString(R.string.list_dialog_create_ok));
-                        runAfterwards.run(newId);
+                        runAfterwards.call(newId);
                     } else {
                         ActivityMixin.showToast(activity, res.getString(R.string.list_dialog_create_err));
                     }
@@ -156,15 +156,15 @@ public final class StoredList extends AbstractList {
             });
         }
 
-        private void handleListNameInput(final String defaultValue, int dialogTitle, int buttonTitle, final RunnableWithArgument<String> runnable) {
-            Dialogs.input(activity, dialogTitle, defaultValue, buttonTitle, new RunnableWithArgument<String>() {
+        private void handleListNameInput(final String defaultValue, int dialogTitle, int buttonTitle, final Action1<String> runnable) {
+            Dialogs.input(activity, dialogTitle, defaultValue, buttonTitle, new Action1<String>() {
 
                 @Override
-                public void run(final String input) {
+                public void call(final String input) {
                     // remove whitespaces added by autocompletion of Android keyboard
                     String listName = StringUtils.trim(input);
                     if (StringUtils.isNotBlank(listName)) {
-                        runnable.run(listName);
+                        runnable.call(listName);
                     }
                 }
             });
@@ -172,10 +172,10 @@ public final class StoredList extends AbstractList {
 
         public void promptForListRename(final int listId, @NonNull final Runnable runAfterRename) {
             final StoredList list = DataStore.getList(listId);
-            handleListNameInput(list.title, R.string.list_dialog_rename_title, R.string.list_dialog_rename, new RunnableWithArgument<String>() {
+            handleListNameInput(list.title, R.string.list_dialog_rename_title, R.string.list_dialog_rename, new Action1<String>() {
 
                 @Override
-                public void run(final String listName) {
+                public void call(final String listName) {
                     DataStore.renameList(listId, listName);
                     runAfterRename.run();
                 }

@@ -16,10 +16,10 @@ import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.utils.RunnableWithArgument;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import rx.util.functions.Action1;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -255,20 +255,20 @@ public abstract class AbstractConnector implements IConnector {
         List<UserAction> actions = getDefaultUserActions();
 
         if (this instanceof ISearchByOwner) {
-            actions.add(new UserAction(R.string.user_menu_view_hidden, new RunnableWithArgument<UserAction.Context>() {
+            actions.add(new UserAction(R.string.user_menu_view_hidden, new Action1<Context>() {
 
                 @Override
-                public void run(Context context) {
+                public void call(Context context) {
                     CacheListActivity.startActivityOwner(context.activity, context.userName);
                 }
             }));
         }
 
         if (this instanceof ISearchByFinder) {
-            actions.add(new UserAction(R.string.user_menu_view_found, new RunnableWithArgument<UserAction.Context>() {
+            actions.add(new UserAction(R.string.user_menu_view_found, new Action1<UserAction.Context>() {
 
                 @Override
-                public void run(Context context) {
+                public void call(Context context) {
                     CacheListActivity.startActivityUserName(context.activity, context.userName);
                 }
             }));
@@ -283,10 +283,10 @@ public abstract class AbstractConnector implements IConnector {
     public List<UserAction> getDefaultUserActions() {
         final ArrayList<UserAction> actions = new ArrayList<UserAction>();
         if (ContactsAddon.isAvailable()) {
-            actions.add(new UserAction(R.string.user_menu_open_contact, new RunnableWithArgument<UserAction.Context>() {
+            actions.add(new UserAction(R.string.user_menu_open_contact, new Action1<UserAction.Context>() {
 
                 @Override
-                public void run(Context context) {
+                public void call(Context context) {
                     ContactsAddon.openContactCard(context.activity, context.userName);
                 }
             }));

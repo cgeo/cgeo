@@ -11,7 +11,6 @@ import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
-
 import org.apache.commons.collections4.CollectionUtils;
 import org.eclipse.jdt.annotation.NonNull;
 

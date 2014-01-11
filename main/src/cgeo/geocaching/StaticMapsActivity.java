@@ -8,7 +8,6 @@ import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.Extra;
 import com.googlecode.androidannotations.annotations.OptionsItem;
 import com.googlecode.androidannotations.annotations.OptionsMenu;
-
 import org.apache.commons.collections4.CollectionUtils;
 
 import android.app.ProgressDialog;

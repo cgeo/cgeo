@@ -1,10 +1,10 @@
 package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.utils.RunnableWithArgument;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
+import rx.util.functions.Action1;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -310,7 +310,7 @@ public final class Dialogs {
      * @param okayListener
      *            listener to be run on okay
      */
-    public static void input(final Activity context, final int title, final String defaultValue, final int buttonTitle, final RunnableWithArgument<String> okayListener) {
+    public static void input(final Activity context, final int title, final String defaultValue, final int buttonTitle, final Action1<String> okayListener) {
         final EditText input = new EditText(context);
         input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_CLASS_TEXT);
         input.setText(defaultValue);
@@ -322,7 +322,7 @@ public final class Dialogs {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                okayListener.run(input.getText().toString());
+                okayListener.call(input.getText().toString());
             }
         });
         builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {

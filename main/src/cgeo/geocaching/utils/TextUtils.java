@@ -4,7 +4,6 @@
 package cgeo.geocaching.utils;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
 import org.eclipse.jdt.annotation.Nullable;
 
 import java.util.regex.Matcher;

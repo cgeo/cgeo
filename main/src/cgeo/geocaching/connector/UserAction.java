@@ -1,8 +1,7 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.utils.RunnableWithArgument;
-
 import org.eclipse.jdt.annotation.NonNull;
+import rx.util.functions.Action1;
 
 import android.app.Activity;
 
@@ -19,14 +18,15 @@ public class UserAction {
     }
 
     public final int displayResourceId;
-    private final @NonNull RunnableWithArgument<Context> runnable;
+    private final @NonNull
+    Action1<Context> runnable;
 
-    public UserAction(int displayResourceId, final @NonNull RunnableWithArgument<UserAction.Context> runnable) {
+    public UserAction(int displayResourceId, final @NonNull Action1<Context> runnable) {
         this.displayResourceId = displayResourceId;
         this.runnable = runnable;
     }
 
     public void run(Context context) {
-        runnable.run(context);
+        runnable.call(context);
     }
 }

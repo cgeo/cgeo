@@ -2,7 +2,6 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.gc.GCParser;
-import cgeo.geocaching.utils.RunnableWithArgument;
 
 import org.apache.commons.collections4.CollectionUtils;
 import rx.Observable;
@@ -46,7 +45,7 @@ public final class PocketQueryList {
         return name;
     }
 
-    public static void promptForListSelection(final Activity activity, final RunnableWithArgument<PocketQueryList> runAfterwards) {
+    public static void promptForListSelection(final Activity activity, final Action1<PocketQueryList> runAfterwards) {
         final Dialog waitDialog = ProgressDialog.show(activity, activity.getString(R.string.search_pocket_title), activity.getString(R.string.search_pocket_loading), true, true);
 
         AndroidObservable.fromActivity(activity, Observable.create(new OnSubscribeFunc<List<PocketQueryList>>() {
@@ -64,7 +63,7 @@ public final class PocketQueryList {
             }
         });
     }
-    private static void selectFromPocketQueries(final Activity activity, final List<PocketQueryList> pocketQueryList, final RunnableWithArgument<PocketQueryList> runAfterwards) {
+    private static void selectFromPocketQueries(final Activity activity, final List<PocketQueryList> pocketQueryList, final Action1<PocketQueryList> runAfterwards) {
         if (CollectionUtils.isEmpty(pocketQueryList)) {
             ActivityMixin.showToast(activity, activity.getString(R.string.warn_no_pocket_query_found));
             return;
@@ -82,7 +81,7 @@ public final class PocketQueryList {
                     @Override
                     public void onClick(final DialogInterface dialogInterface, final int itemId) {
                         dialogInterface.dismiss();
-                        runAfterwards.run(pocketQueryList.get(itemId));
+                        runAfterwards.call(pocketQueryList.get(itemId));
                     }
                 }).create().show();
     }

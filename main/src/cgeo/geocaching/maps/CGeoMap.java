@@ -38,11 +38,11 @@ import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RunnableWithArgument;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import rx.util.functions.Action1;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -661,9 +661,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     if (Settings.getChooseList()) {
                         // let user select list to store cache in
                         new StoredList.UserInterface(activity).promptForListSelection(R.string.list_title,
-                                new RunnableWithArgument<Integer>() {
+                                new Action1<Integer>() {
                                     @Override
-                                    public void run(final Integer selectedListId) {
+                                    public void call(final Integer selectedListId) {
                                         storeCaches(geocodes, selectedListId);
                                     }
                                 }, true, StoredList.TEMPORARY_LIST_ID);

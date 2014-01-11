@@ -5,7 +5,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RunnableWithArgument;
+
+import rx.util.functions.Action1;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -77,7 +78,7 @@ public final class FilterUserInterface {
         registry.add(new FactoryEntry(res.getString(resourceId), factoryClass));
     }
 
-    public void selectFilter(final RunnableWithArgument<IFilter> runAfterwards) {
+    public void selectFilter(final Action1<IFilter> runAfterwards) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.caches_filter_title);
 
@@ -89,7 +90,7 @@ public final class FilterUserInterface {
                 FactoryEntry entry = adapter.getItem(itemIndex);
                 // reset?
                 if (entry.filterFactory == null) {
-                    runAfterwards.run(null);
+                    runAfterwards.call(null);
                 }
                 else {
                     try {
@@ -105,10 +106,10 @@ public final class FilterUserInterface {
         builder.create().show();
     }
 
-    private void selectFromFactory(final IFilterFactory factory, final String menuTitle, final RunnableWithArgument<IFilter> runAfterwards) {
+    private void selectFromFactory(final IFilterFactory factory, final String menuTitle, final Action1<IFilter> runAfterwards) {
         final List<IFilter> filters = Collections.unmodifiableList(factory.getFilters());
         if (filters.size() == 1) {
-            runAfterwards.run(filters.get(0));
+            runAfterwards.call(filters.get(0));
             return;
         }
 
@@ -119,7 +120,7 @@ public final class FilterUserInterface {
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, final int item) {
-                runAfterwards.run(filters.get(item));
+                runAfterwards.call(filters.get(item));
             }
         });
 

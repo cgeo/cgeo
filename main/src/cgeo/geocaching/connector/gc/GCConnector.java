@@ -27,12 +27,12 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RunnableWithArgument;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import rx.util.functions.Action1;
 
 import android.content.Context;
 import android.content.Intent;
@@ -394,17 +394,17 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     public @NonNull
     List<UserAction> getUserActions() {
         List<UserAction> actions = super.getUserActions();
-        actions.add(new UserAction(R.string.user_menu_open_browser, new RunnableWithArgument<UserAction.Context>() {
+        actions.add(new UserAction(R.string.user_menu_open_browser, new Action1<UserAction.Context>() {
 
             @Override
-            public void run(cgeo.geocaching.connector.UserAction.Context context) {
+            public void call(cgeo.geocaching.connector.UserAction.Context context) {
                 context.activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + Network.encode(context.userName))));
             }
         }));
-        actions.add(new UserAction(R.string.user_menu_send_message, new RunnableWithArgument<UserAction.Context>() {
+        actions.add(new UserAction(R.string.user_menu_send_message, new Action1<UserAction.Context>() {
 
             @Override
-            public void run(cgeo.geocaching.connector.UserAction.Context context) {
+            public void call(cgeo.geocaching.connector.UserAction.Context context) {
                 context.activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/email/?u=" + Network.encode(context.userName))));
             }
         }));

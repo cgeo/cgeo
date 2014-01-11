@@ -18,7 +18,6 @@ import cgeo.geocaching.utils.Log;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
-
 import org.apache.commons.lang3.reflect.MethodUtils;
 
 import android.app.Activity;

@@ -1,7 +1,7 @@
 package cgeo.geocaching.enumerations;
 
-import cgeo.geocaching.R;
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 
 import java.util.EnumSet;
 

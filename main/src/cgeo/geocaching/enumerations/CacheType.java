@@ -1,8 +1,8 @@
 package cgeo.geocaching.enumerations;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.CgeoApplication;
 
 import java.util.Collections;
 import java.util.HashMap;

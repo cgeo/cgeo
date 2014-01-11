@@ -13,7 +13,6 @@ import menion.android.locus.addon.publiclib.geoData.Point;
 import menion.android.locus.addon.publiclib.geoData.PointGeocachingData;
 import menion.android.locus.addon.publiclib.geoData.PointGeocachingDataWaypoint;
 import menion.android.locus.addon.publiclib.geoData.PointsData;
-
 import org.apache.commons.lang3.time.FastDateFormat;
 
 import android.app.Activity;

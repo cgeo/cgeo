@@ -19,7 +19,6 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.DatabaseBackupUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RunnableWithArgument;
 import cgeo.geocaching.utils.Version;
 
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -299,10 +298,10 @@ public class MainActivity extends AbstractActivity {
                 if (!Settings.isGCPremiumMember()) {
                     return true;
                 }
-                PocketQueryList.promptForListSelection(this, new RunnableWithArgument<PocketQueryList>() {
+                PocketQueryList.promptForListSelection(this, new Action1<PocketQueryList>() {
 
                     @Override
-                    public void run(final PocketQueryList pql) {
+                    public void call(final PocketQueryList pql) {
                         CacheListActivity.startActivityPocket(MainActivity.this, pql);
                     }
                 });
@@ -375,10 +374,10 @@ public class MainActivity extends AbstractActivity {
 
             @Override
             public boolean onLongClick(final View v) {
-                new StoredList.UserInterface(MainActivity.this).promptForListSelection(R.string.list_title, new RunnableWithArgument<Integer>() {
+                new StoredList.UserInterface(MainActivity.this).promptForListSelection(R.string.list_title, new Action1<Integer>() {
 
                     @Override
-                    public void run(final Integer selectedListId) {
+                    public void call(final Integer selectedListId) {
                         Settings.saveLastList(selectedListId);
                         CacheListActivity.startActivityOffline(MainActivity.this);
                     }

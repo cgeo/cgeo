@@ -1,7 +1,7 @@
 package cgeo.geocaching.maps.google;
 
-import cgeo.geocaching.R;
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 import cgeo.geocaching.maps.AbstractMapProvider;
 import cgeo.geocaching.maps.AbstractMapSource;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;

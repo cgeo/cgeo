@@ -21,7 +21,6 @@ import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.Extra;
 import com.googlecode.androidannotations.annotations.InstanceState;
 import com.googlecode.androidannotations.annotations.ViewById;
-
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.ProgressDialog;

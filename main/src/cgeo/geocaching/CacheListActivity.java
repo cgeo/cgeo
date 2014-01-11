@@ -23,6 +23,7 @@ import cgeo.geocaching.loaders.AbstractSearchLoader;
 import cgeo.geocaching.loaders.AbstractSearchLoader.CacheListLoaderType;
 import cgeo.geocaching.loaders.AddressGeocacheListLoader;
 import cgeo.geocaching.loaders.CoordsGeocacheListLoader;
+import cgeo.geocaching.loaders.FinderGeocacheListLoader;
 import cgeo.geocaching.loaders.HistoryGeocacheListLoader;
 import cgeo.geocaching.loaders.KeywordGeocacheListLoader;
 import cgeo.geocaching.loaders.NextPageGeocacheListLoader;
@@ -30,7 +31,6 @@ import cgeo.geocaching.loaders.OfflineGeocacheListLoader;
 import cgeo.geocaching.loaders.OwnerGeocacheListLoader;
 import cgeo.geocaching.loaders.PocketGeocacheListLoader;
 import cgeo.geocaching.loaders.RemoveFromHistoryLoader;
-import cgeo.geocaching.loaders.FinderGeocacheListLoader;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.Network;
@@ -46,14 +46,13 @@ import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.DateUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RunnableWithArgument;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
-
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import rx.util.functions.Action1;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -451,10 +450,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void importGpxAttachement() {
-        new StoredList.UserInterface(this).promptForListSelection(R.string.gpx_import_select_list_title, new RunnableWithArgument<Integer>() {
+        new StoredList.UserInterface(this).promptForListSelection(R.string.gpx_import_select_list_title, new Action1<Integer>() {
 
             @Override
-            public void run(Integer listId) {
+            public void call(Integer listId) {
                 new GPXImporter(CacheListActivity.this, listId, importGpxAttachementFinishedHandler).importGPX();
                 switchListById(listId);
             }
@@ -670,9 +669,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 return true;
             case R.id.menu_sort:
                 final CacheComparator oldComparator = adapter.getCacheComparator();
-                new ComparatorUserInterface(this).selectComparator(oldComparator, new RunnableWithArgument<CacheComparator>() {
+                new ComparatorUserInterface(this).selectComparator(oldComparator, new Action1<CacheComparator>() {
                     @Override
-                    public void run(CacheComparator selectedComparator) {
+                    public void call(CacheComparator selectedComparator) {
                         // selecting the same sorting twice will toggle the order
                         if (selectedComparator != null && oldComparator != null && selectedComparator.getClass().equals(oldComparator.getClass())) {
                             adapter.toggleInverseSort();
@@ -732,9 +731,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      */
     @Override
     public void showFilterMenu(final View view) {
-        new FilterUserInterface(this).selectFilter(new RunnableWithArgument<IFilter>() {
+        new FilterUserInterface(this).selectFilter(new Action1<IFilter>() {
             @Override
-            public void run(IFilter selectedFilter) {
+            public void call(IFilter selectedFilter) {
                 if (selectedFilter != null) {
                     setFilter(selectedFilter);
                 } else {
@@ -787,10 +786,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void moveCachesToOtherList() {
-        new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list, new RunnableWithArgument<Integer>() {
+        new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list, new Action1<Integer>() {
 
             @Override
-            public void run(Integer newListId) {
+            public void call(Integer newListId) {
                 DataStore.moveToList(adapter.getCheckedOrAllCaches(), newListId);
                 adapter.setSelectMode(false);
 
@@ -844,10 +843,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 });
                 break;
             case R.id.menu_move_to_list:
-                new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list, new RunnableWithArgument<Integer>() {
+                new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list, new Action1<Integer>() {
 
                     @Override
-                    public void run(Integer newListId) {
+                    public void call(Integer newListId) {
                         DataStore.moveToList(Collections.singletonList(cache), newListId);
                         adapter.setSelectMode(false);
                         refreshCurrentList();
@@ -1021,9 +1020,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (Settings.getChooseList() && type != CacheListType.OFFLINE) {
             // let user select list to store cache in
             new StoredList.UserInterface(this).promptForListSelection(R.string.list_title,
-                    new RunnableWithArgument<Integer>() {
+                    new Action1<Integer>() {
                         @Override
-                        public void run(final Integer selectedListId) {
+                        public void call(final Integer selectedListId) {
                             refreshStored(caches, selectedListId);
                         }
                     }, true, StoredList.TEMPORARY_LIST_ID, newListName);
@@ -1324,11 +1323,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     @NonNull
-    private RunnableWithArgument<Integer> getListSwitchingRunnable() {
-        return new RunnableWithArgument<Integer>() {
+    private Action1<Integer> getListSwitchingRunnable() {
+        return new Action1<Integer>() {
 
             @Override
-            public void run(final Integer selectedListId) {
+            public void call(final Integer selectedListId) {
                 switchListById(selectedListId);
             }
         };

@@ -2,7 +2,8 @@ package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RunnableWithArgument;
+
+import rx.util.functions.Action1;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -70,7 +71,7 @@ public class ComparatorUserInterface {
         registry.add(new ComparatorEntry(res.getString(resourceId), comparatorClass));
     }
 
-    public void selectComparator(final CacheComparator current, final RunnableWithArgument<CacheComparator> runAfterwards) {
+    public void selectComparator(final CacheComparator current, final Action1<CacheComparator> runAfterwards) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.caches_sort_title);
 
@@ -85,11 +86,11 @@ public class ComparatorUserInterface {
                 ComparatorEntry entry = registry.get(itemIndex);
                 try {
                     if (entry.cacheComparator == null) {
-                        runAfterwards.run(null);
+                        runAfterwards.call(null);
                     }
                     else {
                         CacheComparator comparator = entry.cacheComparator.newInstance();
-                        runAfterwards.run(comparator);
+                        runAfterwards.call(comparator);
                     }
                 } catch (InstantiationException e) {
                     Log.e("selectComparator", e);

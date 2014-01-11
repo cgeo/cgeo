@@ -3,7 +3,6 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.activity.AbstractViewPagerActivity.PageViewCreator;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
