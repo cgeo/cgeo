@@ -23,8 +23,8 @@ public class OAuthPreference extends Preference {
         OCPL(R.string.pref_fakekey_ocpl_authorization, OCPLAuthorizationActivity.class),
         TWITTER(R.string.pref_fakekey_twitter_authorization, TwitterAuthorizationActivity.class);
 
-        public int prefKeyId;
-        public Class<?> authActivity;
+        public final int prefKeyId;
+        public final Class<?> authActivity;
 
         OAuthActivityMapping(int prefKeyId, Class<?> clazz) {
             this.prefKeyId = prefKeyId;
