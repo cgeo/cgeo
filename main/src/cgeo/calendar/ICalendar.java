@@ -14,6 +14,6 @@ public interface ICalendar {
     static final String PARAM_NOTE = "note"; // personal note
     static final String PARAM_NAME = "name"; // cache name
     static final String PARAM_LOCATION = "location"; // cache location, or empty string
-    static final String PARAM_COORDS = "coords"; // cache coords, or empty string
+    static final String PARAM_COORDS = "coords"; // cache coordinates, or empty string
     static final String PARAM_START_TIME_MINUTES = "time"; // time of start
 }
