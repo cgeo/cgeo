@@ -6,13 +6,16 @@
     and in the Java code as constants and avoid code duplication. 
     -->
 
-    <string name="pref_fakekey_main_screen">fakekey_main_screen</string>
-    <string name="pref_fakekey_services_screen">fakekey_services_screen</string>
-    <string name="pref_fakekey_basicmembers_screen">fakekey_basicmembers_screen</string>
+    <string name="preference_screen_main">fakekey_main_screen</string>
+    <string name="preference_screen_services">fakekey_services_screen</string>
+    <string name="preference_screen_basicmembers">fakekey_basicmembers_screen</string>
+    <string name="preference_screen_ocde">preference_screen_ocde</string>
+    <string name="preference_screen_ocpl">preference_screen_ocpl</string>
+    <string name="preference_screen_twitter">preference_screen_twitter</string>
+    <string name="preference_screen_navigation_menu">fakekey_navigation_menu_screen</string>
     <string name="pref_fakekey_ocde_authorization">fakekey_ocde_authorization</string>
     <string name="pref_fakekey_ocpl_authorization">fakekey_ocpl_authorization</string>
     <string name="pref_fakekey_twitter_authorization">fakekey_twitter_authorization</string>
-    <string name="pref_fakekey_navigation_menu_screen">fakekey_navigation_menu_screen</string>
     <string name="pref_connectorGCActive">connectorGCActive</string>
     <string name="pref_username">username</string>
     <string name="pref_password">password</string>

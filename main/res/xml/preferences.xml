@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cgeo="http://schemas.android.com/apk/res/cgeo.geocaching"
-    android:key="@string/pref_fakekey_main_screen" >
+    android:key="@string/preference_screen_main" >
 
     <PreferenceScreen
         android:icon="?attr/settings_cloud"
-        android:key="@string/pref_fakekey_services_screen"
+        android:key="@string/preference_screen_services"
         android:title="@string/settings_title_services" >
         <PreferenceCategory android:title="@string/settings_category_geocaching" >
             <PreferenceScreen android:title="@string/settings_title_gc" >
@@ -44,7 +44,7 @@
 
                     <PreferenceScreen
                         android:dependency="@string/pref_connectorGCActive"
-                        android:key="@string/pref_fakekey_basicmembers_screen"
+                        android:key="@string/preference_screen_basicmembers"
                         android:title="@string/settings_title_basicmembers" >
                         <CheckBoxPreference
                             android:defaultValue="false"
@@ -74,7 +74,9 @@
                         android:title="@string/settings_open_website" />
                 </PreferenceCategory>
             </PreferenceScreen>
-            <PreferenceScreen android:title="@string/init_oc" >
+            <PreferenceScreen
+                android:key="@string/preference_screen_ocde"
+                android:title="@string/init_oc" >
                 <PreferenceCategory android:title="@string/settings_settings" >
                     <CheckBoxPreference
                         android:defaultValue="false"
@@ -94,12 +96,15 @@
                     <cgeo.geocaching.settings.CapabilitiesPreference
                         android:title="@string/settings_features"
                         cgeo:connector="OC" />
+
                     <Preference
                         android:key="@string/pref_fakekey_ocde_website"
                         android:title="@string/settings_open_website" />
                 </PreferenceCategory>
             </PreferenceScreen>
-            <PreferenceScreen android:title="@string/init_oc_pl" >
+            <PreferenceScreen
+                android:key="@string/preference_screen_ocpl"
+                android:title="@string/init_oc_pl" >
                 <PreferenceCategory android:title="@string/settings_settings" >
                     <CheckBoxPreference
                         android:defaultValue="false"
@@ -119,12 +124,12 @@
                     <cgeo.geocaching.settings.CapabilitiesPreference
                         android:title="@string/settings_features"
                         cgeo:connector="OP" />
+
                     <Preference
                         android:key="@string/pref_fakekey_ocpl_website"
                         android:title="@string/settings_open_website" />
                 </PreferenceCategory>
             </PreferenceScreen>
-
             <PreferenceScreen android:title="@string/settings_title_ec" >
                 <PreferenceCategory android:title="@string/settings_settings" >
                     <CheckBoxPreference
@@ -150,30 +155,31 @@
                         android:key="@string/pref_ecpassword"
                         android:singleLine="true"
                         android:title="@string/init_password" />
+
                     <cgeo.geocaching.settings.CheckECCredentialsPreference
                         android:dependency="@string/pref_connectorECActive"
                         android:title="@string/init_login" />
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_title_appearance" >
-	                <ListPreference
-	                    android:dependency="@string/pref_connectorECActive"
-		                android:defaultValue="1"
-		                android:dialogTitle="@string/init_ec_icons"
-		                android:key="@string/pref_ec_icons"
-		                android:title="@string/init_ec_icons"
-	            		android:entries="@array/ECIcons"
-	            		android:entryValues="@array/ECIconsValues" />
+                    <ListPreference
+                        android:defaultValue="1"
+                        android:dependency="@string/pref_connectorECActive"
+                        android:dialogTitle="@string/init_ec_icons"
+                        android:entries="@array/ECIcons"
+                        android:entryValues="@array/ECIconsValues"
+                        android:key="@string/pref_ec_icons"
+                        android:title="@string/init_ec_icons" />
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
                     <cgeo.geocaching.settings.CapabilitiesPreference
                         android:title="@string/settings_features"
                         cgeo:connector="EC" />
+
                     <Preference
                         android:key="@string/pref_fakekey_ec_website"
                         android:title="@string/settings_open_website" />
                 </PreferenceCategory>
             </PreferenceScreen>
-
             <PreferenceScreen android:title="@string/settings_title_ox" >
                 <PreferenceCategory android:title="@string/settings_settings" >
                     <CheckBoxPreference
@@ -185,12 +191,12 @@
                     <cgeo.geocaching.settings.CapabilitiesPreference
                         android:title="@string/settings_features"
                         cgeo:connector="OX" />
+
                     <Preference
                         android:key="@string/pref_fakekey_ox_website"
                         android:title="@string/settings_open_website" />
                 </PreferenceCategory>
             </PreferenceScreen>
-
             <PreferenceScreen android:title="@string/init_gcvote" >
                 <PreferenceCategory android:title="@string/settings_settings" >
                     <cgeo.geocaching.settings.EditPasswordPreference
@@ -233,7 +239,9 @@
             </PreferenceScreen>
         </PreferenceCategory>
         <PreferenceCategory android:title="@string/settings_category_social" >
-            <PreferenceScreen android:title="@string/init_twitter" >
+            <PreferenceScreen
+                android:key="@string/preference_screen_twitter"
+                android:title="@string/init_twitter" >
                 <CheckBoxPreference
                     android:defaultValue="false"
                     android:key="@string/pref_twitter"
@@ -470,7 +478,7 @@
                 android:text="@string/init_navigation_menu_description" />
 
             <PreferenceScreen
-                android:key="@string/pref_fakekey_navigation_menu_screen"
+                android:key="@string/preference_screen_navigation_menu"
                 android:title="@string/settings_title_navigation_menu" >
                 <CheckBoxPreference
                     android:defaultValue="true"

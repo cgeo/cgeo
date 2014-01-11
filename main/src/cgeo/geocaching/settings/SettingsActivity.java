@@ -95,10 +95,10 @@ public class SettingsActivity extends PreferenceActivity {
         int gotoPage = intent.getIntExtra(INTENT_GOTO, 0);
         if (gotoPage == INTENT_GOTO_SERVICES) {
             // start with services screen
-            PreferenceScreen main = (PreferenceScreen) getPreference(R.string.pref_fakekey_main_screen);
+            PreferenceScreen main = (PreferenceScreen) getPreference(R.string.preference_screen_main);
             try {
                 if (main != null) {
-                    int index = getPreference(R.string.pref_fakekey_services_screen).getOrder();
+                    int index = getPreference(R.string.preference_screen_services).getOrder();
                     main.onItemClick(null, null, index, 0);
                 }
             } catch (RuntimeException e) {
@@ -145,9 +145,9 @@ public class SettingsActivity extends PreferenceActivity {
                 getPreference(appEnum.preferenceKey).setEnabled(true);
             }
         }
-        getPreference(R.string.pref_fakekey_basicmembers_screen)
+        getPreference(R.string.preference_screen_basicmembers)
                 .setEnabled(!Settings.isGCPremiumMember());
-        redrawScreen(R.string.pref_fakekey_navigation_menu_screen);
+        redrawScreen(R.string.preference_screen_navigation_menu);
     }
 
     private void initServicePreferences() {
@@ -369,21 +369,29 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
     void initBasicMemberPreferences() {
-        getPreference(R.string.pref_fakekey_basicmembers_screen)
+        getPreference(R.string.preference_screen_basicmembers)
                 .setEnabled(!Settings.isGCPremiumMember());
         getPreference(R.string.pref_loaddirectionimg)
                 .setEnabled(!Settings.isGCPremiumMember());
         getPreference(R.string.pref_showcaptcha)
                 .setEnabled(!Settings.isGCPremiumMember());
 
-        redrawScreen(R.string.pref_fakekey_services_screen);
+        redrawScreen(R.string.preference_screen_services);
     }
 
-    void redrawScreen(int key) {
-        PreferenceScreen screen = (PreferenceScreen) getPreference(key);
-        if (screen == null) {
+    /**
+     * Refresh a preference screen. Has no effect when called for a preference, that is not actually a preference
+     * screen.
+     *
+     * @param key
+     *            Key of a preference screen.
+     */
+    void redrawScreen(final int key) {
+        final Preference preference = getPreference(key);
+        if (!(preference instanceof PreferenceScreen)) {
             return;
         }
+        final PreferenceScreen screen = (PreferenceScreen) preference;
         ListAdapter adapter = screen.getRootAdapter();
         if (adapter instanceof BaseAdapter) {
             ((BaseAdapter) adapter).notifyDataSetChanged();
@@ -478,15 +486,15 @@ public class SettingsActivity extends PreferenceActivity {
                 break;
             case R.string.pref_fakekey_ocde_authorization:
                 setOCDEAuthTitle();
-                redrawScreen(R.string.pref_fakekey_services_screen);
+                redrawScreen(R.string.preference_screen_ocde);
                 break;
             case R.string.pref_fakekey_ocpl_authorization:
                 setOCPLAuthTitle();
-                redrawScreen(R.string.pref_fakekey_services_screen);
+                redrawScreen(R.string.preference_screen_ocpl);
                 break;
             case R.string.pref_fakekey_twitter_authorization:
                 setTwitterAuthTitle();
-                redrawScreen(R.string.pref_fakekey_services_screen);
+                redrawScreen(R.string.preference_screen_twitter);
                 break;
             default:
                 throw new IllegalArgumentException();
