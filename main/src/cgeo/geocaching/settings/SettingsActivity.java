@@ -625,6 +625,13 @@ public class SettingsActivity extends PreferenceActivity {
         preferenceActivity.addPreferencesFromResource(preferencesResId);
     }
 
+    @SuppressWarnings("deprecation")
+    @Override
+    public void setPreferenceScreen(PreferenceScreen preferenceScreen) {
+        // TODO replace with fragment based code
+        super.setPreferenceScreen(preferenceScreen);
+    }
+
     private static boolean isPreference(final Preference preference, int preferenceKeyId) {
         return getKey(preferenceKeyId).equals(preference.getKey());
     }
