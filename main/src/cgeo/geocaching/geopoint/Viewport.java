@@ -5,16 +5,15 @@ import cgeo.geocaching.ICoordinates;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import java.util.Set;
+import java.util.Collection;
 
-
-public class Viewport {
+public final class Viewport {
 
     public final @NonNull Geopoint center;
     public final @NonNull Geopoint bottomLeft;
     public final @NonNull Geopoint topRight;
 
-    public Viewport(final ICoordinates point1, final ICoordinates point2) {
+    public Viewport(final @NonNull ICoordinates point1, final @NonNull ICoordinates point2) {
         final Geopoint gp1 = point1.getCoords();
         final Geopoint gp2 = point2.getCoords();
         this.bottomLeft = new Geopoint(Math.min(gp1.getLatitude(), gp2.getLatitude()),
@@ -25,7 +24,7 @@ public class Viewport {
                 (gp1.getLongitude() + gp2.getLongitude()) / 2);
     }
 
-    public Viewport(final ICoordinates center, final double latSpan, final double lonSpan) {
+    public Viewport(final @NonNull ICoordinates center, final double latSpan, final double lonSpan) {
         this.center = center.getCoords();
         final double centerLat = this.center.getLatitude();
         final double centerLon = this.center.getLongitude();
@@ -71,7 +70,7 @@ public class Viewport {
      *            the coordinates to check
      * @return true if the point is contained in this viewport, false otherwise or if the point contains no coordinates
      */
-    public boolean contains(final ICoordinates point) {
+    public boolean contains(final @NonNull ICoordinates point) {
         final Geopoint coords = point.getCoords();
         return coords != null
                 && coords.getLongitudeE6() >= bottomLeft.getLongitudeE6()
@@ -92,7 +91,7 @@ public class Viewport {
      *            the other viewport
      * @return true if the vp is fully included into this one, false otherwise
      */
-    public boolean includes(final Viewport vp) {
+    public boolean includes(final @NonNull Viewport vp) {
         return contains(vp.bottomLeft) && contains(vp.topRight);
     }
 
@@ -130,7 +129,7 @@ public class Viewport {
      *            the point we want in the viewport
      * @return either the same or an expanded viewport
      */
-    public Viewport expand(final ICoordinates point) {
+    public Viewport expand(final @NonNull ICoordinates point) {
         if (contains(point)) {
             return this;
         }
@@ -152,18 +151,31 @@ public class Viewport {
      *            a set of points. Point with null coordinates (or null themselves) will be ignored
      * @return the smallest viewport containing the non-null coordinates, or null if no coordinates are non-null
      */
-    static public Viewport containing(final Set<? extends ICoordinates> points) {
-        Viewport viewport = null;
+    static public @Nullable
+    Viewport containing(final Collection<? extends ICoordinates> points) {
+        boolean valid = false;
+        double latMin = Double.MAX_VALUE;
+        double latMax = Double.MIN_VALUE;
+        double lonMin = Double.MAX_VALUE;
+        double lonMax = Double.MIN_VALUE;
         for (final ICoordinates point : points) {
-            if (point != null && point.getCoords() != null) {
-                if (viewport == null) {
-                    viewport = new Viewport(point, point);
-                } else {
-                    viewport = viewport.expand(point);
+            if (point != null) {
+                final Geopoint coords = point.getCoords();
+                if (coords != null) {
+                    valid = true;
+                    final double latitude = coords.getLatitude();
+                    final double longitude = coords.getLongitude();
+                    latMin = Math.min(latMin, latitude);
+                    latMax = Math.max(latMax, latitude);
+                    lonMin = Math.min(lonMin, longitude);
+                    lonMax = Math.max(lonMax, longitude);
                 }
             }
         }
-        return viewport;
+        if (!valid) {
+            return null;
+        }
+        return new Viewport(new Geopoint(latMin, lonMin), new Geopoint(latMax, lonMax));
     }
 
     @Override
