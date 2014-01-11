@@ -57,6 +57,13 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import rx.Observable;
+import rx.Observable.OnSubscribeFunc;
+import rx.Observer;
+import rx.Subscription;
+import rx.android.observables.AndroidObservable;
+import rx.concurrency.Schedulers;
+import rx.subscriptions.Subscriptions;
 
 import android.R.color;
 import android.app.AlertDialog;
@@ -1481,7 +1488,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // cache short description
             if (StringUtils.isNotBlank(cache.getShortDescription())) {
-                new LoadDescriptionTask(cache.getShortDescription(), view.findViewById(R.id.shortdesc), null, null).execute();
+                loadDescription(cache.getShortDescription(), (IndexOutOfBoundsAvoidingTextView) view.findViewById(R.id.shortdesc), null, null);
             }
 
             // long description
@@ -1608,7 +1615,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             showDesc.setOnClickListener(null);
             view.findViewById(R.id.loading).setVisibility(View.VISIBLE);
 
-            new LoadDescriptionTask(cache.getDescription(), view.findViewById(R.id.longdesc), view.findViewById(R.id.loading), view.findViewById(R.id.shortdesc)).execute();
+            loadDescription(cache.getDescription(), (IndexOutOfBoundsAvoidingTextView) view.findViewById(R.id.longdesc), view.findViewById(R.id.loading), view.findViewById(R.id.shortdesc));
         }
 
         private void warnPersonalNoteNeedsStoring() {
@@ -1649,138 +1656,131 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
      * <li>loading indicator view (View, may be null)</li>
      * </ol>
      */
-    private class LoadDescriptionTask extends AsyncTask<Object, Void, Void> {
-        private final View loadingIndicatorView;
-        private final IndexOutOfBoundsAvoidingTextView descriptionView;
-        private final String descriptionString;
-        private Spanned description;
-        private final View shortDescView;
 
-        public LoadDescriptionTask(final String description, final View descriptionView, final View loadingIndicatorView, final View shortDescView) {
-            assert descriptionView instanceof IndexOutOfBoundsAvoidingTextView;
-            this.descriptionString = description;
-            this.descriptionView = (IndexOutOfBoundsAvoidingTextView) descriptionView;
-            this.loadingIndicatorView = loadingIndicatorView;
-            this.shortDescView = shortDescView;
-        }
+    private void loadDescription(final String descriptionString, final IndexOutOfBoundsAvoidingTextView descriptionView, final View loadingIndicatorView, final View shortDescView) {
+        // The producer produces successives (without then with images) versions of the description.
+        final Observable<Spanned> producer = Observable.create(new OnSubscribeFunc<Spanned>() {
+            @Override
+            public Subscription onSubscribe(final Observer<? super Spanned> observer) {
+                try {
+                    // Fast preview: parse only HTML without loading any images
+                    final HtmlImageCounter imageCounter = new HtmlImageCounter();
+                    final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
+                    Spanned description = Html.fromHtml(descriptionString, imageCounter, unknownTagsHandler);
+                    addWarning(unknownTagsHandler, description);
+                    observer.onNext(description);
 
-        @Override
-        protected Void doInBackground(Object... params) {
-            try {
-                // Fast preview: parse only HTML without loading any images
-                final HtmlImageCounter imageCounter = new HtmlImageCounter();
-                final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
-                description = Html.fromHtml(descriptionString, imageCounter, unknownTagsHandler);
-                publishProgress();
+                    if (imageCounter.getImageCount() > 0) {
+                        // Complete view: parse again with loading images - if necessary ! If there are any images causing problems the user can see at least the preview
+                        description = Html.fromHtml(descriptionString, new HtmlImage(cache.getGeocode(), true, cache.getListId(), false), unknownTagsHandler);
+                        addWarning(unknownTagsHandler, description);
+                        observer.onNext(description);
+                    }
 
-                boolean needsRefresh = false;
-                if (imageCounter.getImageCount() > 0) {
-                    // Complete view: parse again with loading images - if necessary ! If there are any images causing problems the user can see at least the preview
-                    description = Html.fromHtml(descriptionString, new HtmlImage(cache.getGeocode(), true, cache.getListId(), false), unknownTagsHandler);
-                    needsRefresh = true;
+                    observer.onCompleted();
+                } catch (final Exception e) {
+                    Log.e("LoadDescriptionTask: ", e);
+                    observer.onError(e);
                 }
+                return Subscriptions.empty();
+            }
 
-                // If description has an HTML construct which may be problematic to render, add a note at the end of the long description.
-                // Technically, it may not be a table, but a pre, which has the same problems as a table, so the message is ok even though
-                // sometimes technically incorrect.
-                if (unknownTagsHandler.isProblematicDetected() && descriptionView != null) {
+            // If description has an HTML construct which may be problematic to render, add a note at the end of the long description.
+            // Technically, it may not be a table, but a pre, which has the same problems as a table, so the message is ok even though
+            // sometimes technically incorrect.
+            private void addWarning(final UnknownTagsHandler unknownTagsHandler, final Spanned description) {
+                if (unknownTagsHandler.isProblematicDetected()) {
                     final int startPos = description.length();
                     final IConnector connector = ConnectorFactory.getConnector(cache);
                     final Spanned tableNote = Html.fromHtml(res.getString(R.string.cache_description_table_note, "<a href=\"" + cache.getUrl() + "\">" + connector.getName() + "</a>"));
                     ((Editable) description).append("\n\n").append(tableNote);
                     ((Editable) description).setSpan(new StyleSpan(Typeface.ITALIC), startPos, description.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    needsRefresh = true;
                 }
-
-                if (needsRefresh) {
-                    publishProgress();
-                }
-            } catch (final Exception e) {
-                Log.e("LoadDescriptionTask: ", e);
             }
-            return null;
-        }
+        });
 
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            if (description == null) {
-                showToast(res.getString(R.string.err_load_descr_failed));
-                return;
-            }
-            if (StringUtils.isNotBlank(descriptionString)) {
-                try {
-                    descriptionView.setText(description, TextView.BufferType.SPANNABLE);
-                } catch (final Exception e) {
-                    // On 4.1, there is sometimes a crash on measuring the layout: https://code.google.com/p/android/issues/detail?id=35412
-                    Log.e("Android bug setting text: ", e);
-                    // remove the formatting by converting to a simple string
-                    descriptionView.setText(description.toString());
-                }
-                descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-                fixTextColor(descriptionView, descriptionString);
-                descriptionView.setVisibility(View.VISIBLE);
-                registerForContextMenu(descriptionView);
-
-                hideDuplicatedShortDescription();
-            }
-        }
-
-        /**
-         * Hide the short description, if it is contained somewhere at the start of the long description.
-         */
-        private void hideDuplicatedShortDescription() {
-            if (shortDescView != null) {
-                final String shortDescription = cache.getShortDescription();
-                if (StringUtils.isNotBlank(shortDescription)) {
-                    final int index = descriptionString.indexOf(shortDescription);
-                    if (index >= 0 && index < 200) {
-                        shortDescView.setVisibility(View.GONE);
+        AndroidObservable.fromActivity(this, producer.subscribeOn(Schedulers.threadPoolForIO()))
+                .subscribe(new Observer<Spanned>() {
+                    @Override
+                    public void onCompleted() {
+                        if (null != loadingIndicatorView) {
+                            loadingIndicatorView.setVisibility(View.GONE);
+                        }
                     }
-                }
-            }
-        }
 
-        @Override
-        protected void onPostExecute(Void result) {
-            if (null != loadingIndicatorView) {
-                loadingIndicatorView.setVisibility(View.GONE);
-            }
-        }
-
-        /**
-         * Handle caches with black font color in dark skin and white font color in light skin
-         * by changing background color of the view
-         *
-         * @param view
-         *            containing the text
-         * @param text
-         *            to be checked
-         */
-        private void fixTextColor(final TextView view, final String text) {
-            int backcolor;
-            if (Settings.isLightSkin()) {
-                backcolor = color.white;
-
-                for (final Pattern pattern : LIGHT_COLOR_PATTERNS) {
-                    final MatcherWrapper matcher = new MatcherWrapper(pattern, text);
-                    if (matcher.find()) {
-                        view.setBackgroundResource(color.darker_gray);
-                        return;
+                    @Override
+                    public void onError(final Throwable throwable) {
+                        showToast(res.getString(R.string.err_load_descr_failed));
                     }
-                }
-            } else {
-                backcolor = color.black;
 
-                for (final Pattern pattern : DARK_COLOR_PATTERNS) {
-                    final MatcherWrapper matcher = new MatcherWrapper(pattern, text);
-                    if (matcher.find()) {
-                        view.setBackgroundResource(color.darker_gray);
-                        return;
+                    @Override
+                    public void onNext(final Spanned description) {
+                        if (StringUtils.isNotBlank(descriptionString)) {
+                            try {
+                                descriptionView.setText(description, TextView.BufferType.SPANNABLE);
+                            } catch (final Exception e) {
+                                // On 4.1, there is sometimes a crash on measuring the layout: https://code.google.com/p/android/issues/detail?id=35412
+                                Log.e("Android bug setting text: ", e);
+                                // remove the formatting by converting to a simple string
+                                descriptionView.setText(description.toString());
+                            }
+                            descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+                            fixTextColor(descriptionString);
+                            descriptionView.setVisibility(View.VISIBLE);
+                            registerForContextMenu(descriptionView);
+
+                            hideDuplicatedShortDescription(descriptionString);
+                        }
                     }
-                }
-            }
-            view.setBackgroundResource(backcolor);
-        }
+
+                    /**
+                     * Hide the short description, if it is contained somewhere at the start of the long description.
+                     */
+                    private void hideDuplicatedShortDescription(final String descriptionString) {
+                        if (shortDescView != null) {
+                            final String shortDescription = cache.getShortDescription();
+                            if (StringUtils.isNotBlank(shortDescription)) {
+                                final int index = descriptionString.indexOf(shortDescription);
+                                if (index >= 0 && index < 200) {
+                                    shortDescView.setVisibility(View.GONE);
+                                }
+                            }
+                        }
+                    }
+
+                    /**
+                     * Handle caches with black font color in dark skin and white font color in light skin
+                     * by changing background color of the view
+                     *
+                     * @param text
+                     *            to be checked
+                     */
+                    private void fixTextColor(final String text) {
+                        int backcolor;
+                        if (Settings.isLightSkin()) {
+                            backcolor = color.white;
+
+                            for (final Pattern pattern : LIGHT_COLOR_PATTERNS) {
+                                final MatcherWrapper matcher = new MatcherWrapper(pattern, text);
+                                if (matcher.find()) {
+                                    descriptionView.setBackgroundResource(color.darker_gray);
+                                    return;
+                                }
+                            }
+                        } else {
+                            backcolor = color.black;
+
+                            for (final Pattern pattern : DARK_COLOR_PATTERNS) {
+                                final MatcherWrapper matcher = new MatcherWrapper(pattern, text);
+                                if (matcher.find()) {
+                                    descriptionView.setBackgroundResource(color.darker_gray);
+                                    return;
+                                }
+                            }
+                        }
+                        descriptionView.setBackgroundResource(backcolor);
+                    }
+                });
     }
 
     private class WaypointsViewCreator extends AbstractCachingPageViewCreator<ListView> {
