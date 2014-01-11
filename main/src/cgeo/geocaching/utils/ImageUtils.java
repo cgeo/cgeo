@@ -69,7 +69,7 @@ public final class ImageUtils {
      * @return BitmapDrawable The scaled image
      */
     @NonNull
-    public static BitmapDrawable scaleBitmapTo(@NonNull final Bitmap image, final int maxWidth, final int maxHeight) {
+    private static BitmapDrawable scaleBitmapTo(@NonNull final Bitmap image, final int maxWidth, final int maxHeight) {
         final CgeoApplication app = CgeoApplication.getInstance();
         Bitmap result = image;
         int width = image.getWidth();

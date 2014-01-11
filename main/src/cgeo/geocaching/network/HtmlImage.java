@@ -14,6 +14,7 @@ import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.androidextra.Base64;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -80,60 +81,31 @@ public class HtmlImage implements Html.ImageGetter {
         this.resources = CgeoApplication.getInstance().getResources();
     }
 
+    @Nullable
     @Override
     public BitmapDrawable getDrawable(final String url) {
         // Reject empty and counter images URL
         if (StringUtils.isBlank(url) || isCounter(url)) {
-            return new BitmapDrawable(resources, getTransparent1x1Image());
+            return getTransparent1x1Image(resources);
         }
 
         final boolean shared = url.contains("/images/icons/icon_");
         final String pseudoGeocode = shared ? SHARED : geocode;
 
-        Bitmap imagePre = loadImageFromStorage(url, pseudoGeocode, shared);
+        Bitmap image = loadImageFromStorage(url, pseudoGeocode, shared);
 
         // Download image and save it to the cache
-        if (imagePre == null) {
+        if (image == null) {
             final File file = LocalStorage.getStorageFile(pseudoGeocode, url, true, true);
             if (url.startsWith("data:image/")) {
                 if (url.contains(";base64,")) {
-                    // TODO: when we use SDK level 8 or above, we can use the streaming version of the base64
-                    // Android utilities.
-                    byte[] decoded = Base64.decode(StringUtils.substringAfter(url, ";base64,"), Base64.DEFAULT);
-                    OutputStream out = null;
-                    try {
-                        out = new FileOutputStream(file);
-                        out.write(decoded);
-                    } catch (final IOException e) {
-                        Log.e("HtmlImage.getDrawable: cannot write file for decoded inline image", e);
-                        return null;
-                    } finally {
-                        IOUtils.closeQuietly(out);
-                    }
+                    saveBase64ToFile(url, file);
                 } else {
                     Log.e("HtmlImage.getDrawable: unable to decode non-base64 inline image");
                     return null;
                 }
             } else {
-                final String absoluteURL = makeAbsoluteURL(url);
-
-                if (absoluteURL != null) {
-                    try {
-                        final HttpResponse httpResponse = Network.getRequest(absoluteURL, null, file);
-                        if (httpResponse != null) {
-                            final int statusCode = httpResponse.getStatusLine().getStatusCode();
-                            if (statusCode == 200) {
-                                LocalStorage.saveEntityToFile(httpResponse, file);
-                            } else if (statusCode == 304) {
-                                if (!file.setLastModified(System.currentTimeMillis())) {
-                                    makeFreshCopy(file);
-                                }
-                            }
-                        }
-                    } catch (Exception e) {
-                        Log.e("HtmlImage.getDrawable (downloading from web)", e);
-                    }
-                }
+                downloadOrRefreshCopy(url, file);
             }
         }
 
@@ -142,22 +114,56 @@ public class HtmlImage implements Html.ImageGetter {
         }
 
         // now load the newly downloaded image
-        if (imagePre == null) {
-            imagePre = loadImageFromStorage(url, pseudoGeocode, shared);
+        if (image == null) {
+            image = loadImageFromStorage(url, pseudoGeocode, shared);
         }
 
         // get image and return
-        if (imagePre == null) {
+        if (image == null) {
             Log.d("HtmlImage.getDrawable: Failed to obtain image");
 
-            if (returnErrorImage) {
-                imagePre = BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded);
-            } else {
-                imagePre = getTransparent1x1Image();
-            }
+            return returnErrorImage
+                    ? new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded))
+                    : getTransparent1x1Image(resources);
         }
 
-        return imagePre != null ? ImageUtils.scaleBitmapToFitDisplay(imagePre) : null;
+        return ImageUtils.scaleBitmapToFitDisplay(image);
+    }
+
+    private void downloadOrRefreshCopy(final String url, final File file) {
+        final String absoluteURL = makeAbsoluteURL(url);
+
+        if (absoluteURL != null) {
+            try {
+                final HttpResponse httpResponse = Network.getRequest(absoluteURL, null, file);
+                if (httpResponse != null) {
+                    final int statusCode = httpResponse.getStatusLine().getStatusCode();
+                    if (statusCode == 200) {
+                        LocalStorage.saveEntityToFile(httpResponse, file);
+                    } else if (statusCode == 304) {
+                        if (!file.setLastModified(System.currentTimeMillis())) {
+                            makeFreshCopy(file);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                Log.e("HtmlImage.downloadOrRefreshCopy", e);
+            }
+        }
+    }
+
+    private static void saveBase64ToFile(final String url, final File file) {
+        // TODO: when we use SDK level 8 or above, we can use the streaming version of the base64
+        // Android utilities.
+        OutputStream out = null;
+        try {
+            out = new FileOutputStream(file);
+            out.write(Base64.decode(StringUtils.substringAfter(url, ";base64,"), Base64.DEFAULT));
+        } catch (final IOException e) {
+            Log.e("HtmlImage.saveBase64ToFile: cannot write file for decoded inline image", e);
+        } finally {
+            IOUtils.closeQuietly(out);
+        }
     }
 
     /**
@@ -180,10 +186,11 @@ public class HtmlImage implements Html.ImageGetter {
         }
     }
 
-    private Bitmap getTransparent1x1Image() {
-        return BitmapFactory.decodeResource(resources, R.drawable.image_no_placement);
+    private BitmapDrawable getTransparent1x1Image(final Resources res) {
+        return new BitmapDrawable(res, BitmapFactory.decodeResource(resources, R.drawable.image_no_placement));
     }
 
+    @Nullable
     private Bitmap loadImageFromStorage(final String url, final String pseudoGeocode, final boolean forceKeep) {
         try {
             final File file = LocalStorage.getStorageFile(pseudoGeocode, url, true, false);
@@ -194,11 +201,12 @@ public class HtmlImage implements Html.ImageGetter {
             final File fileSec = LocalStorage.getStorageSecFile(pseudoGeocode, url, true);
             return loadCachedImage(fileSec, forceKeep);
         } catch (Exception e) {
-            Log.w("HtmlImage.getDrawable (reading cache)", e);
+            Log.w("HtmlImage.loadImageFromStorage", e);
         }
         return null;
     }
 
+    @Nullable
     private String makeAbsoluteURL(final String url) {
         // Check if uri is absolute or not, if not attach the connector hostname
         // FIXME: that should also include the scheme
@@ -222,6 +230,7 @@ public class HtmlImage implements Html.ImageGetter {
         return null;
     }
 
+    @Nullable
     private Bitmap loadCachedImage(final File file, final boolean forceKeep) {
         if (file.exists()) {
             if (listId >= StoredList.STANDARD_LIST_ID || file.lastModified() > (new Date().getTime() - (24 * 60 * 60 * 1000)) || forceKeep) {
