@@ -816,13 +816,7 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public boolean showSize() {
-        if (size == CacheSize.NOT_CHOSEN) {
-            return false;
-        }
-        if (isEventCache() || isVirtual()) {
-            return false;
-        }
-        return true;
+        return !(size == CacheSize.NOT_CHOSEN || isEventCache() || isVirtual());
     }
 
     public long getUpdated() {
