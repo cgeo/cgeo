@@ -8,9 +8,11 @@
 
     <string name="preference_screen_main">fakekey_main_screen</string>
     <string name="preference_screen_services">fakekey_services_screen</string>
+    <string name="preference_screen_gc">preference_screen_gc</string>
     <string name="preference_screen_basicmembers">fakekey_basicmembers_screen</string>
     <string name="preference_screen_ocde">preference_screen_ocde</string>
     <string name="preference_screen_ocpl">preference_screen_ocpl</string>
+    <string name="preference_screen_ec">preference_screen_ec</string>
     <string name="preference_screen_twitter">preference_screen_twitter</string>
     <string name="preference_screen_navigation_menu">fakekey_navigation_menu_screen</string>
     <string name="pref_fakekey_ocde_authorization">fakekey_ocde_authorization</string>

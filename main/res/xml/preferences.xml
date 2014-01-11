@@ -8,7 +8,9 @@
         android:key="@string/preference_screen_services"
         android:title="@string/settings_title_services" >
         <PreferenceCategory android:title="@string/settings_category_geocaching" >
-            <PreferenceScreen android:title="@string/settings_title_gc" >
+            <PreferenceScreen
+                android:key="@string/preference_screen_gc"
+                android:title="@string/settings_title_gc" >
                 <PreferenceCategory android:title="@string/settings_settings" >
                     <cgeo.geocaching.settings.CheckBoxWithPopupPreference
                         android:defaultValue="true"
@@ -130,7 +132,7 @@
                         android:title="@string/settings_open_website" />
                 </PreferenceCategory>
             </PreferenceScreen>
-            <PreferenceScreen android:title="@string/settings_title_ec" >
+            <PreferenceScreen android:title="@string/settings_title_ec" android:key="@string/preference_screen_ec">
                 <PreferenceCategory android:title="@string/settings_settings" >
                     <CheckBoxPreference
                         android:defaultValue="false"

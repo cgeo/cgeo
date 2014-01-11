@@ -55,8 +55,7 @@ import java.util.Locale;
  */
 public class SettingsActivity extends PreferenceActivity {
 
-    private static final String INTENT_GOTO = "GOTO";
-    private static final int INTENT_GOTO_SERVICES = 1;
+    private static final String INTENT_OPEN_SCREEN = "OPEN_SCREEN";
 
     /**
      * Enumeration for directory choosers. This is how we can retrieve information about the
@@ -92,18 +91,21 @@ public class SettingsActivity extends PreferenceActivity {
         initPreferences();
 
         Intent intent = getIntent();
-        int gotoPage = intent.getIntExtra(INTENT_GOTO, 0);
-        if (gotoPage == INTENT_GOTO_SERVICES) {
-            // start with services screen
-            PreferenceScreen main = (PreferenceScreen) getPreference(R.string.preference_screen_main);
-            try {
-                if (main != null) {
-                    int index = getPreference(R.string.preference_screen_services).getOrder();
-                    main.onItemClick(null, null, index, 0);
-                }
-            } catch (RuntimeException e) {
-                Log.e("could not open services preferences", e);
-            }
+        openInitialScreen(intent.getIntExtra(INTENT_OPEN_SCREEN, 0));
+    }
+
+    private void openInitialScreen(int initialScreen) {
+        if (initialScreen == 0) {
+            return;
+        }
+        PreferenceScreen screen = (PreferenceScreen) getPreference(initialScreen);
+        if (screen == null) {
+            return;
+        }
+        try {
+            setPreferenceScreen(screen);
+        } catch (RuntimeException e) {
+            Log.e("could not open preferences " + initialScreen, e);
         }
     }
 
@@ -440,9 +442,9 @@ public class SettingsActivity extends PreferenceActivity {
                         : R.string.settings_authorize));
     }
 
-    public static void jumpToServicesPage(final Context fromActivity) {
+    public static void openForScreen(final int preferenceScreenKey, final Context fromActivity) {
         final Intent intent = new Intent(fromActivity, SettingsActivity.class);
-        intent.putExtra(INTENT_GOTO, INTENT_GOTO_SERVICES);
+        intent.putExtra(INTENT_OPEN_SCREEN, preferenceScreenKey);
         fromActivity.startActivity(intent);
     }
 
