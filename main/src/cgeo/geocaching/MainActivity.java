@@ -299,7 +299,7 @@ public class MainActivity extends AbstractActivity {
                 if (!Settings.isGCPremiumMember()) {
                     return true;
                 }
-                new PocketQueryList.UserInterface(MainActivity.this).promptForListSelection(new RunnableWithArgument<PocketQueryList>() {
+                PocketQueryList.promptForListSelection(this, new RunnableWithArgument<PocketQueryList>() {
 
                     @Override
                     public void run(final PocketQueryList pql) {
