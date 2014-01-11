@@ -1475,6 +1475,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     protected class DescriptionViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
         @InjectView(R.id.personalnote) protected TextView personalNoteView;
+        @InjectView(R.id.shortdesc) protected IndexOutOfBoundsAvoidingTextView shortDescView;
+        @InjectView(R.id.longdesc) protected IndexOutOfBoundsAvoidingTextView longDescView;
+        @InjectView(R.id.show_description) protected Button showDesc;
+        @InjectView(R.id.loading) protected View loadingView;
 
         @Override
         public ScrollView getDispatchedView() {
@@ -1488,7 +1492,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // cache short description
             if (StringUtils.isNotBlank(cache.getShortDescription())) {
-                loadDescription(cache.getShortDescription(), (IndexOutOfBoundsAvoidingTextView) view.findViewById(R.id.shortdesc), null, null);
+                loadDescription(cache.getShortDescription(), shortDescView, null, null);
             }
 
             // long description
@@ -1496,7 +1500,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 if (Settings.isAutoLoadDescription()) {
                     loadLongDescription();
                 } else {
-                    final Button showDesc = (Button) view.findViewById(R.id.show_description);
                     showDesc.setVisibility(View.VISIBLE);
                     showDesc.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -1610,12 +1613,23 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         private void loadLongDescription() {
-            final Button showDesc = (Button) view.findViewById(R.id.show_description);
             showDesc.setVisibility(View.GONE);
             showDesc.setOnClickListener(null);
             view.findViewById(R.id.loading).setVisibility(View.VISIBLE);
 
-            loadDescription(cache.getDescription(), (IndexOutOfBoundsAvoidingTextView) view.findViewById(R.id.longdesc), view.findViewById(R.id.loading), view.findViewById(R.id.shortdesc));
+            final String longDescription = cache.getDescription();
+            loadDescription(longDescription, longDescView, loadingView, shortDescView);
+
+            // Hide the short description, if it is contained somewhere at the start of the long description.
+            if (shortDescView != null) {
+                final String shortDescription = cache.getShortDescription();
+                if (StringUtils.isNotBlank(shortDescription)) {
+                    final int index = longDescription.indexOf(shortDescription);
+                    if (index >= 0 && index < 200) {
+                        shortDescView.setVisibility(View.GONE);
+                    }
+                }
+            }
         }
 
         private void warnPersonalNoteNeedsStoring() {
@@ -1646,17 +1660,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     }
 
-    /**
-     * Loads the description in background. <br />
-     * <br />
-     * Params:
-     * <ol>
-     * <li>description string (String)</li>
-     * <li>target description view (TextView)</li>
-     * <li>loading indicator view (View, may be null)</li>
-     * </ol>
+   /**
+     * Load the description in the background.
+     * @param descriptionString the HTML description as retrieved from the connector
+     * @param descriptionView the view to fill
+     * @param loadingIndicatorView the loading indicator view, will be hidden when completed
+     * @param shortDescView the short description view, may be hidden if included in the long description
      */
-
     private void loadDescription(final String descriptionString, final IndexOutOfBoundsAvoidingTextView descriptionView, final View loadingIndicatorView, final View shortDescView) {
         // The producer produces successives (without then with images) versions of the description.
         final Observable<Spanned> producer = Observable.create(new OnSubscribeFunc<Spanned>() {
@@ -1728,23 +1738,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                             fixTextColor(descriptionString);
                             descriptionView.setVisibility(View.VISIBLE);
                             registerForContextMenu(descriptionView);
-
-                            hideDuplicatedShortDescription(descriptionString);
-                        }
-                    }
-
-                    /**
-                     * Hide the short description, if it is contained somewhere at the start of the long description.
-                     */
-                    private void hideDuplicatedShortDescription(final String descriptionString) {
-                        if (shortDescView != null) {
-                            final String shortDescription = cache.getShortDescription();
-                            if (StringUtils.isNotBlank(shortDescription)) {
-                                final int index = descriptionString.indexOf(shortDescription);
-                                if (index >= 0 && index < 200) {
-                                    shortDescView.setVisibility(View.GONE);
-                                }
-                            }
                         }
                     }
 
