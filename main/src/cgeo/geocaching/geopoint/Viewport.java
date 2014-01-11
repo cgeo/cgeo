@@ -155,9 +155,9 @@ public final class Viewport {
     Viewport containing(final Collection<? extends ICoordinates> points) {
         boolean valid = false;
         double latMin = Double.MAX_VALUE;
-        double latMax = Double.MIN_VALUE;
+        double latMax = -Double.MAX_VALUE;
         double lonMin = Double.MAX_VALUE;
-        double lonMax = Double.MIN_VALUE;
+        double lonMax = -Double.MAX_VALUE;
         for (final ICoordinates point : points) {
             if (point != null) {
                 final Geopoint coords = point.getCoords();
