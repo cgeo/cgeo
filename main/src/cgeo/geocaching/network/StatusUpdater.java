@@ -50,7 +50,7 @@ public class StatusUpdater {
     }
 
     final static private Observable<Status> statusObservable =
-            Observable.interval(30, TimeUnit.MINUTES).startWith(-1L).flatMap(new Func1<Long, Observable<Status>>() {
+            Observable.interval(1800, TimeUnit.SECONDS).startWith(-1L).flatMap(new Func1<Long, Observable<Status>>() {
                 @Override
                 public Observable<Status> call(Long id) {
                     final JSONObject response =
