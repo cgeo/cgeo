@@ -18,8 +18,8 @@ import cgeo.geocaching.utils.Log;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
+
 import org.apache.commons.lang3.reflect.MethodUtils;
-import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.Activity;
 import android.content.Context;
@@ -54,7 +54,7 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public void draw(@NonNull Canvas canvas) {
+    public void draw(final Canvas canvas) {
         try {
             if (getMapZoomLevel() > 22) { // to avoid too close zoom level (mostly on Samsung Galaxy S series)
                 getController().setZoom(22);

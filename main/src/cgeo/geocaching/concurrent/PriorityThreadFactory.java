@@ -16,7 +16,7 @@ public class PriorityThreadFactory implements ThreadFactory {
 
     @NonNull
     @Override
-    public Thread newThread(@NonNull Runnable r) {
+    public Thread newThread(Runnable r) {
         Thread result = new Thread(r);
         result.setPriority(this.priority);
         return result;

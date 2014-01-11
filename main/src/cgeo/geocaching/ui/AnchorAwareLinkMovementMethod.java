@@ -1,7 +1,5 @@
 package cgeo.geocaching.ui;
 
-import org.eclipse.jdt.annotation.NonNull;
-
 import android.text.Spannable;
 import android.text.method.LinkMovementMethod;
 import android.view.MotionEvent;
@@ -10,7 +8,7 @@ import android.widget.TextView;
 /**
  * <code>LinkMovementMethod</code> with built-in suppression of errors for links, where the URL cannot be handled
  * correctly by Android.
- * 
+ *
  */
 public class AnchorAwareLinkMovementMethod extends LinkMovementMethod {
 
@@ -28,7 +26,7 @@ public class AnchorAwareLinkMovementMethod extends LinkMovementMethod {
     }
 
     @Override
-    public boolean onTouchEvent(@NonNull TextView widget, @NonNull Spannable buffer, @NonNull MotionEvent event) {
+    public boolean onTouchEvent(TextView widget, Spannable buffer, MotionEvent event) {
         try {
             return super.onTouchEvent(widget, buffer, event);
         } catch (Exception e) {
