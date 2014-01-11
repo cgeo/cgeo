@@ -1493,7 +1493,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // cache short description
             if (StringUtils.isNotBlank(cache.getShortDescription())) {
-                loadDescription(cache.getShortDescription(), shortDescView, null, null);
+                loadDescription(cache.getShortDescription(), shortDescView, null);
             }
 
             // long description
@@ -1619,7 +1619,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             view.findViewById(R.id.loading).setVisibility(View.VISIBLE);
 
             final String longDescription = cache.getDescription();
-            loadDescription(longDescription, longDescView, loadingView, shortDescView);
+            loadDescription(longDescription, longDescView, loadingView);
 
             // Hide the short description, if it is contained somewhere at the start of the long description.
             if (shortDescView != null) {
@@ -1663,12 +1663,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
    /**
      * Load the description in the background.
-     * @param descriptionString the HTML description as retrieved from the connector
-     * @param descriptionView the view to fill
-     * @param loadingIndicatorView the loading indicator view, will be hidden when completed
-     * @param shortDescView the short description view, may be hidden if included in the long description
-     */
-    private void loadDescription(final String descriptionString, final IndexOutOfBoundsAvoidingTextView descriptionView, final View loadingIndicatorView, final View shortDescView) {
+    * @param descriptionString the HTML description as retrieved from the connector
+    * @param descriptionView the view to fill
+    * @param loadingIndicatorView the loading indicator view, will be hidden when completed
+    */
+    private void loadDescription(final String descriptionString, final IndexOutOfBoundsAvoidingTextView descriptionView, final View loadingIndicatorView) {
         // The producer produces successives (without then with images) versions of the description.
         final Observable<Spanned> producer = Observable.create(new OnSubscribeFunc<Spanned>() {
             @Override
@@ -1690,7 +1689,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
                     observer.onCompleted();
                 } catch (final Exception e) {
-                    Log.e("LoadDescriptionTask: ", e);
+                    Log.e("loadDescription", e);
                     observer.onError(e);
                 }
                 return Subscriptions.empty();
