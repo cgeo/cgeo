@@ -598,7 +598,6 @@
   <string name="cache_coordinates">Koordinate</string>
   <string name="cache_coordinates_original">Originalne koordiante</string>
   <string name="cache_spoiler_images_title">Spoiler slike</string>
-  <string name="cache_images_title">Slike</string>
   <string name="cache_log_types">Tipi zapisov</string>
   <string name="cache_coordinates_no">Zaklad nima koordinat.</string>
   <string name="cache_clear_history">Počisti zgodovino</string>

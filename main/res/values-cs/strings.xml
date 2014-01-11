@@ -599,7 +599,6 @@
   <string name="cache_coordinates">Souřadnice</string>
   <string name="cache_coordinates_original">Původní souřadnice</string>
   <string name="cache_spoiler_images_title">Obrázky s nápovědou</string>
-  <string name="cache_images_title">Obrázky</string>
   <string name="cache_log_types">Typy zápisů</string>
   <string name="cache_coordinates_no">Tato keš nemá souřadnice.</string>
   <string name="cache_clear_history">Vymazat historii</string>

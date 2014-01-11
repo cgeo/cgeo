@@ -503,7 +503,6 @@
   <string name="cache_coordinates">Koordináták</string>
   <string name="cache_coordinates_original">Eredeti koordináták</string>
   <string name="cache_spoiler_images_title">Spoiler képek</string>
-  <string name="cache_images_title">Képek</string>
   <string name="cache_log_types">Bejegyzés típusok</string>
   <string name="cache_coordinates_no">Ennek a ládának nincsenek koordinátái.</string>
   <string name="cache_clear_history">Előzmények törlése</string>

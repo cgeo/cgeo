@@ -77,11 +77,6 @@ public class GoogleCacheOverlay extends ItemizedOverlay<GoogleCacheOverlayItem> 
     }
 
     @Override
-    public Drawable superBoundCenter(Drawable markerIn) {
-        return ItemizedOverlay.boundCenter(markerIn);
-    }
-
-    @Override
     public Drawable superBoundCenterBottom(Drawable marker) {
         return ItemizedOverlay.boundCenterBottom(marker);
     }

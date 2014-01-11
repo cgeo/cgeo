@@ -599,7 +599,6 @@
   <string name="cache_coordinates">Coördinaten</string>
   <string name="cache_coordinates_original">Originele coordinaten</string>
   <string name="cache_spoiler_images_title">Spoiler afbeeldingen</string>
-  <string name="cache_images_title">Afbeeldingen</string>
   <string name="cache_log_types">Log types</string>
   <string name="cache_coordinates_no">Deze cache heeft geen coördinaten.</string>
   <string name="cache_clear_history">Maak geschiedenis leeg</string>

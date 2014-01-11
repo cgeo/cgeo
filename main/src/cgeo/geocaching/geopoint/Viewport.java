@@ -86,10 +86,10 @@ public final class Viewport {
 
     /**
      * Check whether another viewport is fully included into the current one.
-     *
+     * 
      * @param vp
      *            the other viewport
-     * @return true if the vp is fully included into this one, false otherwise
+     * @return true if the viewport is fully included into this one, false otherwise
      */
     public boolean includes(final @NonNull Viewport vp) {
         return contains(vp.bottomLeft) && contains(vp.topRight);
@@ -120,28 +120,6 @@ public final class Viewport {
     public @NonNull
     Viewport resize(final double factor) {
         return new Viewport(getCenter(), getLatitudeSpan() * factor, getLongitudeSpan() * factor);
-    }
-
-    /**
-     * Return a viewport that contains the current viewport as well as another point.
-     *
-     * @param point
-     *            the point we want in the viewport
-     * @return either the same or an expanded viewport
-     */
-    public Viewport expand(final @NonNull ICoordinates point) {
-        if (contains(point)) {
-            return this;
-        }
-
-        final Geopoint coords = point.getCoords();
-        final double latitude = coords.getLatitude();
-        final double longitude = coords.getLongitude();
-        final double latMin = Math.min(getLatitudeMin(), latitude);
-        final double latMax = Math.max(getLatitudeMax(), latitude);
-        final double lonMin = Math.min(getLongitudeMin(), longitude);
-        final double lonMax = Math.max(getLongitudeMax(), longitude);
-        return new Viewport(new Geopoint(latMin, lonMin), new Geopoint(latMax, lonMax));
     }
 
     /**

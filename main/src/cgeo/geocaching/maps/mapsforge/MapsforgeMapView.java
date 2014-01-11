@@ -11,7 +11,6 @@ import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
-import cgeo.geocaching.maps.interfaces.OverlayImpl;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
@@ -83,11 +82,6 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     @Override
     public Viewport getViewport() {
         return new Viewport(getMapViewCenter(), getLatitudeSpan() / 1e6, getLongitudeSpan() / 1e6);
-    }
-
-    @Override
-    public void addOverlay(OverlayImpl ovl) {
-        getOverlays().add((Overlay) ovl);
     }
 
     @Override

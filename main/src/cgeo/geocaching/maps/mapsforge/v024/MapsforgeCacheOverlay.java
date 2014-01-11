@@ -70,11 +70,6 @@ public class MapsforgeCacheOverlay extends ItemizedOverlay<MapsforgeCacheOverlay
     }
 
     @Override
-    public Drawable superBoundCenter(Drawable markerIn) {
-        return ItemizedOverlay.boundCenter(markerIn);
-    }
-
-    @Override
     public Drawable superBoundCenterBottom(Drawable marker) {
         return ItemizedOverlay.boundCenterBottom(marker);
     }

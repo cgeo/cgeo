@@ -599,7 +599,6 @@
   <string name="cache_coordinates">Współrzędne</string>
   <string name="cache_coordinates_original">Oryginalne współrzędne</string>
   <string name="cache_spoiler_images_title">Zdjęcia spoiler</string>
-  <string name="cache_images_title">Zdjęcia</string>
   <string name="cache_log_types">Rodzaj wpisu</string>
   <string name="cache_coordinates_no">Ta skrzynka nie ma współrzędnych GPS.</string>
   <string name="cache_clear_history">Usuń historię</string>

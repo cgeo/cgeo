@@ -164,15 +164,11 @@ public enum CacheAttribute {
     }
 
     private final static Map<String, CacheAttribute> FIND_BY_GCRAWNAME;
-    private final static SparseArray<CacheAttribute> FIND_BY_GCID = new SparseArray<CacheAttribute>();
     private final static SparseArray<CacheAttribute> FIND_BY_OCACODE = new SparseArray<CacheAttribute>();
     static {
         final HashMap<String, CacheAttribute> mapGcRawNames = new HashMap<String, CacheAttribute>();
         for (CacheAttribute attr : values()) {
             mapGcRawNames.put(attr.rawName, attr);
-            if (attr.gcid != NO_ID) {
-                FIND_BY_GCID.put(attr.gcid, attr);
-            }
             if (attr.ocacode != NO_ID) {
                 FIND_BY_OCACODE.put(attr.ocacode, attr);
             }
@@ -182,10 +178,6 @@ public enum CacheAttribute {
 
     public static CacheAttribute getByRawName(final String rawName) {
         return rawName != null ? FIND_BY_GCRAWNAME.get(rawName) : null;
-    }
-
-    public static CacheAttribute getByGcId(final int gcid) {
-        return FIND_BY_GCID.get(gcid);
     }
 
     public static CacheAttribute getByOcACode(final int ocAcode) {

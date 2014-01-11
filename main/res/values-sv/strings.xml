@@ -596,7 +596,6 @@
   <string name="cache_coordinates">Koordinater</string>
   <string name="cache_coordinates_original">Ursprungliga koordinater</string>
   <string name="cache_spoiler_images_title">Spoiler bilder</string>
-  <string name="cache_images_title">Bilder</string>
   <string name="cache_log_types">Loggtyper</string>
   <string name="cache_coordinates_no">Cachen saknar koordinater.</string>
   <string name="cache_clear_history">Rensa historik</string>

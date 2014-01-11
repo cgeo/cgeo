@@ -25,7 +25,7 @@ public class CacheAttributeTest extends AndroidTestCase {
 
     public static void testGetL10n() {
         final CacheAttribute attribute = CacheAttribute.HIKING;
-        // This test is language dependend. It does not make sense to test it
+        // This test is language dependent. It does not make sense to test it
         // with every attribute. We just want to know if getL10n works
         // correctly
         assertFalse("_yes and _no must not have the same translation",
@@ -37,7 +37,6 @@ public class CacheAttributeTest extends AndroidTestCase {
         assertTrue("Test cannot be run with this attribute", attribute.gcid >= 0);
         assertTrue("Test cannot be run with this attribute", attribute.ocacode >= 0);
         assertSame(CacheAttribute.getByRawName(attribute.rawName), attribute);
-        assertSame(CacheAttribute.getByGcId(attribute.gcid), attribute);
         assertSame(CacheAttribute.getByOcACode(attribute.ocacode), attribute);
     }
 

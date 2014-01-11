@@ -582,7 +582,6 @@
   <string name="cache_coordinates">座標</string>
   <string name="cache_coordinates_original">オリジナル座標</string>
   <string name="cache_spoiler_images_title">スポイラー画像</string>
-  <string name="cache_images_title">画像</string>
   <string name="cache_log_types">ログタイプ</string>
   <string name="cache_coordinates_no">このキャッシュに座標値はありません。</string>
   <string name="cache_clear_history">全履歴を削除</string>

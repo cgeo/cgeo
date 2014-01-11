@@ -606,7 +606,6 @@
   <string name="cache_coordinates">Coordenadas</string>
   <string name="cache_coordinates_original">Coordenadas originais</string>
   <string name="cache_spoiler_images_title">Imagens spoiler</string>
-  <string name="cache_images_title">Imagens</string>
   <string name="cache_log_types">Tipos de log</string>
   <string name="cache_coordinates_no">Esta cache não tem coordenadas.</string>
   <string name="cache_clear_history">Apagar histórico</string>

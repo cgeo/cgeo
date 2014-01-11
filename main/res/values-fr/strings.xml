@@ -651,7 +651,6 @@
   <string name="cache_coordinates">Coordonnées</string>
   <string name="cache_coordinates_original">Coordonnées d\'origine</string>
   <string name="cache_spoiler_images_title">Images indices</string>
-  <string name="cache_images_title">Images</string>
   <string name="cache_log_types">Types de visites</string>
   <string name="cache_coordinates_no">Cette cache n\'a pas de coordonnées.</string>
   <string name="cache_clear_history">Effacer l\'historique</string>

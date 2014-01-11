@@ -18,8 +18,6 @@ public interface ItemizedOverlayImpl extends OverlayImpl {
 
     void superSetLastFocusedItemIndex(int i);
 
-    Drawable superBoundCenter(Drawable markerIn);
-
     Drawable superBoundCenterBottom(Drawable marker);
 
     boolean superOnTap(int index);

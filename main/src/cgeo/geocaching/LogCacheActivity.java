@@ -151,7 +151,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             final TextView actionButton = (TextView) inventoryItem.findViewById(R.id.action);
             actionButton.setId(tb.id);
             actionButtons.put(actionButton.getId(), tb);
-            actionButton.setText(res.getString(tb.action.resourceId) + " ▼");
+            actionButton.setText(tb.action.getLabel() + " ▼");
             actionButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -632,11 +632,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         alert.create().show();
     }
 
-    private String[] getTBLogTypes() {
+    private static String[] getTBLogTypes() {
         final LogTypeTrackable[] logTypeValues = LogTypeTrackable.values();
         String[] logTypes = new String[logTypeValues.length];
         for (int i = 0; i < logTypes.length; i++) {
-            logTypes[i] = res.getString(logTypeValues[i].resourceId);
+            logTypes[i] = logTypeValues[i].getLabel();
         }
         return logTypes;
     }

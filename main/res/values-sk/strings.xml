@@ -504,7 +504,6 @@
   <string name="cache_coordinates">Súradnice</string>
   <string name="cache_coordinates_original">Pôvodné súradnice</string>
   <string name="cache_spoiler_images_title">Spoilerové obrázky</string>
-  <string name="cache_images_title">Obrázky</string>
   <string name="cache_log_types">Typy záznamov</string>
   <string name="cache_coordinates_no">Táto skrýša nemá žiadne súradnice.</string>
   <string name="cache_clear_history">Vymazať históriu</string>

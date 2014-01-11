@@ -22,8 +22,6 @@ public interface MapViewImpl {
 
     void clearOverlays();
 
-    void addOverlay(OverlayImpl ovl);
-
     MapControllerImpl getMapController();
 
     void destroyDrawingCache();

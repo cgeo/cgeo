@@ -47,10 +47,6 @@ public final class LogTemplateProvider {
             this.logEntry = logEntry;
         }
 
-        public LogContext(final boolean offline) {
-            this(null, null, offline);
-        }
-
         public LogContext(final Geocache cache, LogEntry logEntry, final boolean offline) {
             this.cache = cache;
             this.offline = offline;

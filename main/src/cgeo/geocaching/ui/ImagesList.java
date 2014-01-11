@@ -9,6 +9,7 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+
 import rx.Observable;
 import rx.Observable.OnSubscribeFunc;
 import rx.Observer;
@@ -57,8 +58,7 @@ public class ImagesList {
 
     public enum ImageType {
         LogImages(R.string.cache_log_images_title),
-        SpoilerImages(R.string.cache_spoiler_images_title),
-        AllImages(R.string.cache_images_title);
+        SpoilerImages(R.string.cache_spoiler_images_title);
 
         private final int titleResId;
 

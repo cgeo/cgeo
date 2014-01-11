@@ -86,16 +86,6 @@ public class ViewportTest extends AndroidTestCase {
         assertFalse(vpRef.includes(vpRef.resize(2.0)));
     }
 
-    public static void testExpands() {
-        assertEquals(vpRef, vpRef.expand(new Geopoint(0, 0)));
-        final Viewport vp1 = vpRef.expand(new Geopoint(-4.0, 0.0));
-        assertEquals(new Geopoint(-4.0, -2.0), vp1.bottomLeft);
-        assertEquals(new Geopoint(3.0, 4.0), vp1.topRight);
-        final Viewport vp2 = vpRef.expand(new Geopoint(-10.0, 10.0));
-        assertEquals(new Geopoint(-10.0, -2.0), vp2.bottomLeft);
-        assertEquals(new Geopoint(3.0, 10.0), vp2.topRight);
-    }
-
     public static void testContaining() {
         assertNull(Viewport.containing(Collections.singleton((ICoordinates) null)));
         final Set<Geopoint> points = new HashSet<Geopoint>();

@@ -1,11 +1,15 @@
 package cgeo.geocaching.enumerations;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.test.AndroidTestCase;
 
 public class LogTypeTrackableTest extends AndroidTestCase {
 
     public static void testFindById() {
-        assertEquals(LogTypeTrackable.DO_NOTHING, LogTypeTrackable.findById(12345));
+        for (LogTypeTrackable logTypeTrackable : LogTypeTrackable.values()) {
+            assertTrue(StringUtils.isNotEmpty(logTypeTrackable.getLabel()));
+        }
     }
 
 }

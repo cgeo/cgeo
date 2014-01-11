@@ -1,29 +1,22 @@
 package cgeo.geocaching.enumerations;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
 public enum LogTypeTrackable {
-    DO_NOTHING(0, "", R.string.log_tb_nothing),
-    VISITED(1, "_Visited", R.string.log_tb_visit),
-    DROPPED_OFF(2, "_DroppedOff", R.string.log_tb_drop);
+    DO_NOTHING("", R.string.log_tb_nothing),
+    VISITED("_Visited", R.string.log_tb_visit),
+    DROPPED_OFF("_DroppedOff", R.string.log_tb_drop);
 
-    final public int id;
     final public String action;
-    final public int resourceId;
+    final private int resourceId;
 
-    LogTypeTrackable(int id, String action, int resourceId) {
-        this.id = id;
+    LogTypeTrackable(String action, int resourceId) {
         this.action = action;
         this.resourceId = resourceId;
     }
 
-    public static LogTypeTrackable findById(int id) {
-        for (LogTypeTrackable logType : values()) {
-            if (logType.id == id) {
-                return logType;
-            }
-        }
-        return DO_NOTHING;
+    public String getLabel() {
+        return CgeoApplication.getInstance().getString(resourceId);
     }
-
 }
