@@ -9,16 +9,8 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-
-import rx.Observable;
-import rx.Observable.OnSubscribeFunc;
-import rx.Observer;
-import rx.Scheduler;
-import rx.Subscription;
 import rx.android.concurrency.AndroidSchedulers;
-import rx.concurrency.Schedulers;
 import rx.subscriptions.CompositeSubscription;
-import rx.subscriptions.Subscriptions;
 import rx.util.functions.Action1;
 
 import android.app.Activity;
@@ -46,9 +38,6 @@ import java.io.FileOutputStream;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 public class ImagesList {
 
@@ -82,9 +71,6 @@ public class ImagesList {
     private final String geocode;
     private LinearLayout imagesView;
 
-    private Scheduler downloadScheduler = Schedulers.executor(new ThreadPoolExecutor(5, 5, 5, TimeUnit.SECONDS,
-            new LinkedBlockingQueue<Runnable>()));
-
     public ImagesList(final Activity activity, final String geocode) {
         this.activity = activity;
         this.geocode = geocode;
@@ -92,8 +78,9 @@ public class ImagesList {
     }
 
     public void loadImages(final View parentView, final List<Image> images, final boolean offline) {
-
         imagesView = (LinearLayout) parentView.findViewById(R.id.spoiler_list);
+
+        final HtmlImage imgGetter = new HtmlImage(geocode, true, offline ? StoredList.STANDARD_LIST_ID : StoredList.TEMPORARY_LIST_ID, false);
 
         for (final Image img : images) {
             final LinearLayout rowView = (LinearLayout) inflater.inflate(R.layout.cache_image_item, null);
@@ -110,8 +97,7 @@ public class ImagesList {
                 descView.setVisibility(View.VISIBLE);
             }
 
-            subscriptions.add(loadImage(img, offline)
-                    .subscribeOn(downloadScheduler)
+            subscriptions.add(imgGetter.fetchDrawable(img.getUrl())
                     .observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<BitmapDrawable>() {
                         @Override
                         public void call(final BitmapDrawable image) {
@@ -121,18 +107,6 @@ public class ImagesList {
 
             imagesView.addView(rowView);
         }
-    }
-
-    private Observable<BitmapDrawable> loadImage(final Image img, final boolean offline) {
-        return Observable.create(new OnSubscribeFunc<BitmapDrawable>() {
-            @Override
-            public Subscription onSubscribe(final Observer<? super BitmapDrawable> observer) {
-                final HtmlImage imgGetter = new HtmlImage(geocode, true, offline ? StoredList.STANDARD_LIST_ID : StoredList.TEMPORARY_LIST_ID, false);
-                observer.onNext(imgGetter.getDrawable(img.getUrl()));
-                observer.onCompleted();
-                return Subscriptions.empty();
-            }
-        });
     }
 
     private void display(final BitmapDrawable image, final Image img, final LinearLayout view) {

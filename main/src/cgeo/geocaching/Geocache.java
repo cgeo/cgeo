@@ -1643,6 +1643,8 @@ public class Geocache implements ICache, IWaypoint {
 
             StaticMapsProvider.downloadMaps(cache);
 
+            imgGetter.waitForBackgroundLoading(handler);
+
             if (handler != null) {
                 handler.sendMessage(Message.obtain());
             }

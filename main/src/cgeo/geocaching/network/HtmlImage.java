@@ -6,6 +6,7 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
@@ -15,6 +16,16 @@ import ch.boye.httpclientandroidlib.androidextra.Base64;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
+import rx.Observable;
+import rx.Observable.OnSubscribeFunc;
+import rx.Observer;
+import rx.Scheduler;
+import rx.Subscription;
+import rx.concurrency.Schedulers;
+import rx.subjects.PublishSubject;
+import rx.subscriptions.CompositeSubscription;
+import rx.subscriptions.Subscriptions;
+import rx.util.functions.Func1;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -32,6 +43,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class HtmlImage implements Html.ImageGetter {
 
@@ -65,6 +81,14 @@ public class HtmlImage implements Html.ImageGetter {
     final private int maxHeight;
     final private Resources resources;
 
+    // Background loading
+    final private PublishSubject<Observable<String>> loading = PublishSubject.create();
+    final Observable<String> waitForEnd = Observable.merge(loading).publish().refCount();
+    final CompositeSubscription subscription = new CompositeSubscription(waitForEnd.subscribe());
+    final private Scheduler downloadScheduler = Schedulers.executor(new ThreadPoolExecutor(5, 5, 5, TimeUnit.SECONDS,
+            new LinkedBlockingQueue<Runnable>()));
+    final private Set<String> downloading = new HashSet<String>();
+
     public HtmlImage(final String geocode, final boolean returnErrorImage, final int listId, final boolean onlySave) {
         this.geocode = geocode;
         this.returnErrorImage = returnErrorImage;
@@ -84,6 +108,46 @@ public class HtmlImage implements Html.ImageGetter {
     @Nullable
     @Override
     public BitmapDrawable getDrawable(final String url) {
+        if (!onlySave) {
+            return loadDrawable(url);
+        } else {
+            synchronized(downloading) {
+                if (!downloading.contains(url)) {
+                    loading.onNext(fetchDrawable(url).map(new Func1<BitmapDrawable, String>() {
+                        @Override
+                        public String call(final BitmapDrawable bitmapDrawable) {
+                            return url;
+                        }
+                    }));
+                    downloading.add(url);
+                }
+                return null;
+            }
+        }
+    }
+
+    public Observable<BitmapDrawable> fetchDrawable(final String url) {
+        return Observable.create(new OnSubscribeFunc<BitmapDrawable>() {
+            @Override
+            public Subscription onSubscribe(final Observer<? super BitmapDrawable> observer) {
+                if (!subscription.isUnsubscribed()) {
+                    observer.onNext(loadDrawable(url));
+                }
+                observer.onCompleted();
+                return Subscriptions.empty();
+            }
+        }).subscribeOn(downloadScheduler);
+    }
+
+    public void waitForBackgroundLoading(@Nullable final CancellableHandler handler) {
+        if (handler != null) {
+            handler.unsubscribeIfCancelled(subscription);
+        }
+        loading.onCompleted();
+        waitForEnd.toBlockingObservable().lastOrDefault(null);
+    }
+
+    private BitmapDrawable loadDrawable(final String url) {
         // Reject empty and counter images URL
         if (StringUtils.isBlank(url) || isCounter(url)) {
             return getTransparent1x1Image(resources);

@@ -2,6 +2,9 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
 
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
+
 import android.os.Handler;
 import android.os.Message;
 
@@ -13,6 +16,7 @@ public abstract class CancellableHandler extends Handler {
 
     protected static final int UPDATE_LOAD_PROGRESS_DETAIL = 42186;
     private volatile boolean cancelled = false;
+    private static CompositeSubscription subscriptions = new CompositeSubscription();
 
     private static class CancelHolder {
         final Object payload;
@@ -30,9 +34,21 @@ public abstract class CancellableHandler extends Handler {
 
         if (message.obj instanceof CancelHolder) {
             cancelled = true;
+            subscriptions.unsubscribe();
             handleCancel(((CancelHolder) message.obj).payload);
         } else {
             handleRegularMessage(message);
+        }
+    }
+
+    /**
+     * Add a subscription to the list of subscriptions to be subscribed at cancellation time.
+     */
+    final public void unsubscribeIfCancelled(final Subscription subscription) {
+        subscriptions.add(subscription);
+        if (cancelled) {
+            // Protect against race conditions
+            subscriptions.unsubscribe();
         }
     }
 
