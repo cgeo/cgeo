@@ -2,6 +2,8 @@ package cgeo.geocaching.geopoint;
 
 import cgeo.geocaching.ICoordinates;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.test.AndroidTestCase;
 
 import java.util.Collections;
@@ -11,7 +13,8 @@ import java.util.Set;
 
 public class ViewportTest extends AndroidTestCase {
 
-    final private static Viewport vpRef = new Viewport(new Geopoint(-1.0, -2.0), new Geopoint(3.0, 4.0));
+    final private static @NonNull
+    Viewport vpRef = new Viewport(new Geopoint(-1.0, -2.0), new Geopoint(3.0, 4.0));
 
     public static void assertBounds(final Viewport vp) {
         assertEquals(new Geopoint(1.0, 1.0), vp.center);

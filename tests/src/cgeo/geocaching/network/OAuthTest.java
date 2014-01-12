@@ -1,5 +1,7 @@
 package cgeo.geocaching.network;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +28,8 @@ public class OAuthTest extends TestCase {
 
     public static void testUnreservedCharactersMustNotBeEncoded() {
         for (Character c : UNRESERVED) {
-            final String charAsString = String.valueOf(c);
+            final @NonNull
+            String charAsString = String.valueOf(c);
             assertEquals("wrong OAuth encoding for " + c, charAsString, OAuth.percentEncode(charAsString));
         }
     }
@@ -35,7 +38,8 @@ public class OAuthTest extends TestCase {
         for (int i = 32; i < 127; i++) {
             final Character c = (char) i;
             if (!UNRESERVED.contains(c)) {
-                final String charAsString = String.valueOf(c);
+                final @NonNull
+                String charAsString = String.valueOf(c);
                 final String encoded = OAuth.percentEncode(charAsString);
                 assertFalse("Character '" + charAsString + "' not encoded", charAsString.equals(encoded));
                 assertTrue(encoded.startsWith("%"));

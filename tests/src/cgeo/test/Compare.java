@@ -11,6 +11,8 @@ import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Date;
+
 public abstract class Compare {
 
     public static void assertCompareCaches(ICache expected, Geocache actual, boolean all) {
@@ -27,7 +29,9 @@ public abstract class Compare {
         assertEquals("Cache " + geocode + ": name wrong", expected.getName(), actual.getName());
         assertEquals("Cache " + geocode + ": guid wrong", expected.getGuid(), actual.getGuid());
         assertTrue("Cache " + geocode + ": fav points wrong", expected.getFavoritePoints() <= actual.getFavoritePoints());
-        assertEquals("Cache " + geocode + ": hidden date wrong", expected.getHiddenDate().toString(), actual.getHiddenDate().toString());
+        final Date hiddenDate = actual.getHiddenDate();
+        assertNotNull(hiddenDate);
+        assertEquals("Cache " + geocode + ": hidden date wrong", expected.getHiddenDate().toString(), hiddenDate.toString());
         assertEquals("Cache " + geocode + ": premium only wrong", expected.isPremiumMembersOnly(), actual.isPremiumMembersOnly());
 
         if (all) {
