@@ -1114,6 +1114,7 @@
   <string name="tts_oclock">%s heures</string>
   <string name="clipboard_copy_ok">Copié dans le presse-papiers</string>
   <string name="percent_favorite_points">%\ favoris</string>
+  <string name="cgeo_shortcut">c:geo raccourci</string>
   <string name="create_shortcut">Créer un raccourci</string>
   <string-array name="log_image_scales">
     <item>Taille originale</item>
