@@ -111,8 +111,8 @@
             android:name=".twitter.TwitterAuthorizationActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/auth_twitter"
-            android:windowSoftInputMode="stateHidden"
-            android:launchMode="singleTask" >
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -142,11 +142,11 @@
             android:label="@string/search_address_result"
             android:windowSoftInputMode="stateHidden" >
         </activity>
-        <activity 
+        <activity
             android:name=".settings.SettingsActivity"
+            android:configChanges="keyboardHidden|orientation"
             android:label="@string/settings_titlebar"
-            android:theme="@style/settings"
-            android:configChanges="keyboardHidden|orientation" >
+            android:theme="@style/settings" >
         </activity>
         <activity
             android:name=".CacheListActivity"
@@ -308,6 +308,7 @@
             android:name="cgeo.geocaching.TrackableActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name" >
+
             <!-- TravelBug URL via coord.info redirection -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -331,7 +332,7 @@
                     android:pathPrefix="/TB"
                     android:scheme="http" />
             </intent-filter>
-            
+
             <!-- TravelBug URL tracking page -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -355,7 +356,7 @@
                     android:pathPrefix="/track/details.aspx"
                     android:scheme="http" />
             </intent-filter>
-            
+
             <!-- GeoKrety URLs -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -379,8 +380,9 @@
                     android:pathPrefix="/konkret.php"
                     android:scheme="http" />
             </intent-filter>
-            
-            <!-- Geokrety QR code URLs, not yet implemented
+
+            <!--
+            Geokrety QR code URLs, not yet implemented
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -421,10 +423,6 @@
             android:label="@string/map_file_select_title" >
         </activity>
 
-        <provider
-            android:name=".apps.LocusDataStorageProvider"
-            android:authorities="cgeo.geocaching.apps.locusdatastorageprovider" />
-
         <activity
             android:name="WaypointPopup"
             android:configChanges="keyboardHidden|orientation"
@@ -450,8 +448,8 @@
             android:name=".connector.oc.OCDEAuthorizationActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
-            android:windowSoftInputMode="stateHidden"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -468,8 +466,8 @@
             android:name=".connector.oc.OCPLAuthorizationActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
-            android:windowSoftInputMode="stateHidden"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -486,10 +484,21 @@
             android:name=".CreateShortcutActivity"
             android:label="@string/cgeo_shortcut" >
             <intent-filter>
-                <action android:name="android.intent.action.CREATE_SHORTCUT"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
+        <!-- provide enhanced meta data for caches (and waypoints) when invoking Locus from c:geo -->
+        <provider
+            android:name=".apps.LocusDataStorageProvider"
+            android:authorities="cgeo.geocaching.apps.locusdatastorageprovider" />
+
+        <!-- search suggestions for the search bar at the top -->
+        <provider
+            android:name=".search.SuggestionProvider"
+            android:authorities="cgeo.geocaching.search.SuggestionProvider" />
     </application>
+
 </manifest>

@@ -29,4 +29,8 @@ public class Intents {
     public static final String EXTRA_WAYPOINT_ID = PREFIX + "waypoint_id";
     public static final String EXTRA_CACHELIST = PREFIX + "cache_list";
     public static final String EXTRA_POCKET_GUID = PREFIX + "pocket_guid";
+
+    private static final String PREFIX_ACTION = "cgeo.geocaching.intent.action.";
+    public static final String ACTION_GEOCACHE = PREFIX_ACTION + "GEOCACHE";
+    public static final String ACTION_TRACKABLE = PREFIX_ACTION + "TRACKABLE";
 }

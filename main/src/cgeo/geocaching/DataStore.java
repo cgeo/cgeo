@@ -25,17 +25,20 @@ import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
+import android.app.SearchManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
+import android.database.MatrixCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteDoneException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
+import android.provider.BaseColumns;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -818,7 +821,7 @@ public class DataStore {
 
     /**
      * Remove obsolete cache directories in c:geo private storage.
-     * 
+     *
      * @param db
      *            the read-write database to use
      */
@@ -3127,6 +3130,73 @@ public class DataStore {
         }
 
         return missingFromSearch;
+    }
+
+    public static Cursor findSuggestions(final String searchTerm) {
+        // require 3 characters, otherwise there are to many results
+        if (StringUtils.length(searchTerm) < 3) {
+            return null;
+        }
+        init();
+        final MatrixCursor resultCursor = new MatrixCursor(new String[] {
+                BaseColumns._ID,
+                SearchManager.SUGGEST_COLUMN_TEXT_1,
+                SearchManager.SUGGEST_COLUMN_TEXT_2,
+                SearchManager.SUGGEST_COLUMN_INTENT_ACTION,
+                SearchManager.SUGGEST_COLUMN_QUERY
+        });
+        try {
+            final String selectionArg = "%" + searchTerm + "%";
+            findCaches(resultCursor, selectionArg);
+            findTrackables(resultCursor, selectionArg);
+        } catch (final Exception e) {
+            Log.e("DataStore.loadBatchOfStoredGeocodes", e);
+        }
+        return resultCursor;
+    }
+
+    private static void findCaches(final MatrixCursor resultCursor, final String selectionArg) {
+        Cursor cursor = database.query(
+                dbTableCaches,
+                new String[] { "geocode", "name" },
+                "geocode IS NOT NULL AND geocode != '' AND (geocode LIKE ? OR name LIKE ?)",
+                new String[] { selectionArg, selectionArg },
+                null,
+                null,
+                "name");
+        while (cursor.moveToNext()) {
+            final String geocode = cursor.getString(0);
+            resultCursor.addRow(new String[] {
+                    String.valueOf(resultCursor.getCount()),
+                    cursor.getString(1),
+                    geocode,
+                    Intents.ACTION_GEOCACHE,
+                    geocode
+            });
+        }
+        cursor.close();
+    }
+
+    private static void findTrackables(final MatrixCursor resultCursor, final String selectionArg) {
+        Cursor cursor = database.query(
+                dbTableTrackables,
+                new String[] { "tbcode", "title" },
+                "tbcode IS NOT NULL AND tbcode != '' AND (tbcode LIKE ? OR title LIKE ?)",
+                new String[] { selectionArg, selectionArg },
+                null,
+                null,
+                "title");
+        while (cursor.moveToNext()) {
+            final String tbcode = cursor.getString(0);
+            resultCursor.addRow(new String[] {
+                    String.valueOf(resultCursor.getCount()),
+                    cursor.getString(1),
+                    tbcode,
+                    Intents.ACTION_TRACKABLE,
+                    tbcode
+            });
+        }
+        cursor.close();
     }
 
 }

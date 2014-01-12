@@ -60,9 +60,23 @@ public class SearchActivity extends AbstractActivity {
     @Override
     public final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final Intent intent = getIntent();
+
+        // search suggestion for a cache
+        if (Intents.ACTION_GEOCACHE.equals(intent.getAction())) {
+            CacheDetailActivity.startActivity(this, intent.getStringExtra(SearchManager.QUERY));
+            finish();
+            return;
+        }
+
+        // search suggestion for a trackable
+        if (Intents.ACTION_TRACKABLE.equals(intent.getAction())) {
+            TrackableActivity.startActivity(this, null, intent.getStringExtra(SearchManager.QUERY), null);
+            finish();
+            return;
+        }
 
         // search query
-        final Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             hideKeyboard();
             final String query = intent.getStringExtra(SearchManager.QUERY);

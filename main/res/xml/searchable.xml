@@ -6,6 +6,7 @@
     android:inputType="textNoSuggestions"
     android:label="@string/app_name"
     android:searchSettingsDescription="@string/search_bar_desc"
+    android:searchSuggestAuthority="cgeo.geocaching.search.SuggestionProvider"
     android:voiceSearchMode="showVoiceSearchButton|launchRecognizer" >
 
 </searchable>
