@@ -121,7 +121,6 @@
   <string name="translate_to_english">Prevedi v: angleščino</string>
   <string name="translate_length_warning">Prevod lahko spodleti zaradi velike količine besedila.</string>
   <string name="err_none">OK</string>
-  <string name="err_start">Komunikacija se ni začela</string>
   <string name="err_parse">Razčlenjevanje prijavne strani ni uspelo</string>
   <string name="err_server">Ni bilo mogoče vzpostaviti povezave z Geocaching.com. Spletna stran ali vaša povezava z internetom je lahko nedosegljiva.</string>
   <string name="err_login">Prijavni podatki niso shranjeni</string>
@@ -177,7 +176,6 @@
   <string name="err_log_load_data">c:geo ni mogel naložiti podatkov za zapis obiska.</string>
   <string name="err_log_load_data_again">c:geo ne more naložiti podatkov za zapis obiska. Ponovni poskus…</string>
   <string name="err_log_load_data_still">c:geo še vedno nalaga podatke za zapis obiska. Prosimo počakajte še trenutek.</string>
-  <string name="err_log_failed_server">c:geo ni mogel objaviti zapisa, ker se strežnik ne odziva.</string>
   <string name="err_log_post_failed">Izgleda, kot da zapis ni bil objavljen. Preverite na Geocaching.com.</string>
   <string name="err_logimage_post_failed">Izgleda, kot da slika ni bila naložena. Preverite na Geocaching.com.</string>
   <string name="err_search_address_forgot">c:geo je pozabil naslov, ki ste ga hoteli najti.</string>

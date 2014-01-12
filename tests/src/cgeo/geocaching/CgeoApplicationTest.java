@@ -366,7 +366,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     final Geocache cacheFromViewport = DataStore.loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
                     Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
                     Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cacheFromViewport.getCoords());
-                    assertFalse(cache.getCoords().isEqualTo(cacheFromViewport.getCoords(), 1e-3));
+                    assertFalse(cache.getCoords().distanceTo(cacheFromViewport.getCoords()) <= 1e-3);
                     // depending on the chosen strategy the coords can be reliable or not
                     assertEquals(testStrategy == Strategy.DETAILED, cacheFromViewport.isReliableLatLon());
 

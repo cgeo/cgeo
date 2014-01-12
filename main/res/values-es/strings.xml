@@ -114,7 +114,6 @@
   <string name="log_image_description">Descripción</string>
   <string name="log_image_scale">Redimensionamiento</string>
   <string name="err_none">Aceptar</string>
-  <string name="err_start">Comunicación no iniciada</string>
   <string name="err_parse">Error procesando la página de acceso</string>
   <string name="err_server">Error conectando a Geocaching.com (¿servidor o conexión caidos?)</string>
   <string name="err_login">No hay información de acceso guardada</string>
@@ -160,7 +159,6 @@
   <string name="err_log_load_data">Lo siento, c:geo no puede cargar los datos necesarios para registrar la visita.</string>
   <string name="err_log_load_data_again">Lo siento, c:geo no puede cargar los datos necesarios para registrar la visita. Intentándolo de nuevo.</string>
   <string name="err_log_load_data_still">c:geo sigue cargando datos para registrar el escondite. Debes esperar un poquito mas.</string>
-  <string name="err_log_failed_server">Lo siento, c:geo no ha podido enviar el registro porque el servidor no responde.</string>
   <string name="err_log_post_failed">Lo siento, c:geo no ha podido enviar el registro.</string>
   <string name="err_search_address_forgot">Lo siento, c:geo ha olvidado la dirección que buscabas.</string>
   <string name="err_parse_lat">Lo siento, c:geo no puede procesar la latitud.</string>

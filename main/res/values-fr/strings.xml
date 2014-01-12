@@ -121,7 +121,6 @@
   <string name="translate_to_english">Traduire en anglais</string>
   <string name="translate_length_warning">La traduction d\'un texte trop long peut échouer.</string>
   <string name="err_none">ok</string>
-  <string name="err_start">Communication non démarrée</string>
   <string name="err_parse">Échec login lecture page</string>
   <string name="err_server">Échec de la connexion à Geocaching.com (probléme de serveur ou de connexion?)</string>
   <string name="err_server_ec">Impossible de contacter Extremcaching.com. Le site web peut ne pas fonctionner ou votre connexion Internet peut être défectueuse.</string>
@@ -178,7 +177,6 @@
   <string name="err_log_load_data">c:geo ne peut pas charger les données pour enregistrer votre visite.</string>
   <string name="err_log_load_data_again">c:geo ne peut pas charger les données pour enregistrer votre visite. Essayer plus tard.</string>
   <string name="err_log_load_data_still">c:geo est en train de charger les données pour enregistrer votre visite. Veuillez patienter encore un peu.</string>
-  <string name="err_log_failed_server">c:geo n\'a pas réussi à charger les données pour enregistrer votre visite car le serveur ne répond pas.</string>
   <string name="err_log_post_failed">Il semble que votre visite n\'a pas été enregistrée. Veuillez vérifier sur le site Geocaching.com.</string>
   <string name="err_log_post_failed_ec">Il semble que votre visite n\'a pas été enregistrée. Veuillez vérifier sur le site Extremcaching.com.</string>
   <string name="err_logimage_post_failed">Il semble que l\'envoi de l\'image ait échoué. Veuillez vérifier sur le site Geocaching.com.</string>

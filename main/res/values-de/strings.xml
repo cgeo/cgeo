@@ -121,7 +121,6 @@
   <string name="translate_to_english">Übersetze in Englisch</string>
   <string name="translate_length_warning">Die Übersetzung kann bei sehr langen Texten evtl. fehlschlagen.</string>
   <string name="err_none">OK</string>
-  <string name="err_start">Kommunikation nicht gestartet</string>
   <string name="err_parse">Parsing der Anmeldung gescheitert</string>
   <string name="err_server">Verbindung zu Geocaching.com konnte nicht hergestellt werden (Server oder Verbindung inaktiv?)</string>
   <string name="err_server_ec">Verbindung zu Extremcaching.com konnte nicht hergestellt werden (Server oder Verbindung inaktiv?)</string>
@@ -178,7 +177,6 @@
   <string name="err_log_load_data">c:geo konnte die benötigten Daten nicht laden, um den Besuch zu loggen.</string>
   <string name="err_log_load_data_again">c:geo konnte die benötigten Daten nicht laden, um den Besuch zu loggen. Bitte erneut versuchen.</string>
   <string name="err_log_load_data_still">c:geo lädt gerade die benötigten Daten. Bitte kurz warten.</string>
-  <string name="err_log_failed_server">c:geo konnte Log nicht senden, weil der Server nicht antwortete.</string>
   <string name="err_log_post_failed">c:geo konnte Log nicht absenden.</string>
   <string name="err_log_post_failed_ec">Es scheint dass Ihr Log nicht hochgeladen werden konnte. Bitte prüfen Sie es auf Extremcaching.com nach.</string>
   <string name="err_logimage_post_failed">Es scheint dass Ihr Logfoto nicht hochgeladen werden konnte. Bitte prüfen Sie es auf Geocaching.com nach.</string>

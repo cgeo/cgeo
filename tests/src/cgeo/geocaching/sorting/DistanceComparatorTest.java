@@ -20,7 +20,7 @@ public class DistanceComparatorTest extends AndroidTestCase {
             }
             caches.add(cache);
         }
-        Collections.sort(caches, new DistanceComparator(new Geopoint(0, 0), caches));
+        Collections.sort(caches, new DistanceComparator(Geopoint.ZERO, caches));
     }
 
 }

@@ -48,10 +48,12 @@ import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+
 import rx.util.functions.Action1;
 
 import android.app.Activity;
@@ -394,7 +396,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (isInvokedFromAttachment()) {
             type = CacheListType.OFFLINE;
             if (coords == null) {
-                coords = new Geopoint(0.0, 0.0);
+                coords = Geopoint.ZERO;
             }
         }
 

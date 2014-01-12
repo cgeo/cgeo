@@ -19,7 +19,13 @@ public class GeoPointParserTest extends AndroidTestCase {
 
     public static void testFullCoordinates() {
         final Geopoint goal = new Geopoint(refLatitude, refLongitude);
-        assertTrue(goal.isEqualTo(GeopointParser.parse("N 49° 56.031 | E 8° 38.564"), 1e-6));
+        assertEquals(goal, GeopointParser.parse("N 49° 56.031 | E 8° 38.564"), 1e-6);
+    }
+
+    private static void assertEquals(final Geopoint expected, Geopoint actual, double tolerance) {
+        assertNotNull(expected);
+        assertNotNull(actual);
+        assertTrue(expected.distanceTo(actual) <= tolerance);
     }
 
     public static void testCoordinateMissingPart() {
@@ -48,18 +54,18 @@ public class GeoPointParserTest extends AndroidTestCase {
     public static void testVariousFormats() {
         final Geopoint goal1 = GeopointParser.parse("N 49° 43' 57\" | E 2 12' 35");
         final Geopoint goal2 = GeopointParser.parse("N 49 43.95 E2°12.5833333333");
-        assertTrue(goal1.isEqualTo(goal2, 1e-6));
+        assertEquals(goal1, goal2, 1e-6);
     }
 
     public static void testParseOurOwnSeparator() {
         final Geopoint separator = GeopointParser.parse("N 49° 43' 57\"" + Formatter.SEPARATOR + "E 2 12' 35");
         final Geopoint noSeparator = GeopointParser.parse("N 49 43.95 E2°12.5833333333");
-        assertTrue(separator.isEqualTo(noSeparator, 1e-6));
+        assertEquals(separator, noSeparator, 1e-6);
     }
 
     public static void testInSentence() {
         final Geopoint p1 = GeopointParser.parse("Station3: N51 21.523 / E07 02.680");
-        final Geopoint p2 = GeopointParser.parse("N51 21.523", "E07 02.680");
+        final Geopoint p2 = GeopointParser.parse("N51 21.523 E07 02.680");
         assertNotNull(p1);
         assertNotNull(p2);
         assertEquals(p1, p2);
@@ -106,6 +112,6 @@ public class GeoPointParserTest extends AndroidTestCase {
     }
 
     public static void testEquatorMeridian() {
-        assertEquals(new Geopoint(0, 0), GeopointParser.parse("00° 00.000 00° 00.000"));
+        assertEquals(Geopoint.ZERO, GeopointParser.parse("00° 00.000 00° 00.000"));
     }
 }

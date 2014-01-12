@@ -121,7 +121,6 @@
   <string name="translate_to_english">Przetłumacz na angielski</string>
   <string name="translate_length_warning">Tłumaczenie może nie udać się przy dużej ilości tekstu.</string>
   <string name="err_none">OK</string>
-  <string name="err_start">Komunikacja nie rozpoczeła się</string>
   <string name="err_parse">Nieudany odczyt strony logowania.</string>
   <string name="err_server">Nieudane połączenie z Geocaching.com. Strona albo Twoje połączenie internetowe nie działa.</string>
   <string name="err_login">Brak danych do logowania.</string>
@@ -177,7 +176,6 @@
   <string name="err_log_load_data">c:geo nie może załadować danych wymaganych do wpisania wizyty.</string>
   <string name="err_log_load_data_again">c:geo nie może załadować danych wymaganych do wpisania wizyty. Próbuję ponownie.</string>
   <string name="err_log_load_data_still">Nadal trwa ładowanie danych wymaganych do wpisu w dzienniku. Proszę czekać…</string>
-  <string name="err_log_failed_server">c:geo nie może dokonać wpisu ponieważ serwer nie odpowiada.</string>
   <string name="err_log_post_failed">Wygląda na to, że Twój wpis nie został zapisany. Proszę sprawdź na Geocaching.com.</string>
   <string name="err_logimage_post_failed">Wygląda na to, że Twój obraz nie został dodany. Proszę sprawdź to na Geocaching.com.</string>
   <string name="err_search_address_forgot">c:geo zapomniał adresu, którego szukałeś.</string>

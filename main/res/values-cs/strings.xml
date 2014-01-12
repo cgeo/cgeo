@@ -121,7 +121,6 @@
   <string name="translate_to_english">Přeložit do angličtiny</string>
   <string name="translate_length_warning">Při velkém množství textu může překládání selhat.</string>
   <string name="err_none">OK</string>
-  <string name="err_start">Komunikace nezačala</string>
   <string name="err_parse">Čtení přihlašovací obrazovky selhalo</string>
   <string name="err_server">Nelze se připojit na Geocaching.com. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu</string>
   <string name="err_login">Nejsou uloženy žádné přihlašovací údaje</string>
@@ -177,7 +176,6 @@
   <string name="err_log_load_data">c:geo nemůže načíst data požadovaná k zalogování návštěvy.</string>
   <string name="err_log_load_data_again">c:geo nemůže načíst data požadovaná k zalogování návštěvy. Zkouší to znovu.</string>
   <string name="err_log_load_data_still">c:geo stále načítá data požadovaná k odeslání Logu. Prosím, počkej ještě chvíli.</string>
-  <string name="err_log_failed_server">c:geo nemůže odeslat Log, protože server neodpovídá.</string>
   <string name="err_log_post_failed">Zdá se, že tvůj Log nebyl odeslán. Prosím, zkontroluj to na Geocaching.com.</string>
   <string name="err_logimage_post_failed">Zdá se, že tvůj obrázek nebyl nahrán. Zkontroluj to, prosím, na Geocaching.com.</string>
   <string name="err_search_address_forgot">c:geo zapomnělo hledanou adresu.</string>

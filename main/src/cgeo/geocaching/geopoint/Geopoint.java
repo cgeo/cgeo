@@ -4,6 +4,7 @@ import cgeo.geocaching.ICoordinates;
 import cgeo.geocaching.R;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.location.Location;
 import android.os.Build;
@@ -11,10 +12,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Abstraction of geographic point.
+ * Abstraction of geographic point. This class is immutable.
  */
 public final class Geopoint implements ICoordinates, Parcelable {
-    public static final Geopoint ZERO = new Geopoint(0.0, 0.0);
+    /**
+     * Reusable default object
+     */
+    public static final @NonNull Geopoint ZERO = new Geopoint(0.0, 0.0);
 
     private static final double DEG_TO_RAD = Math.PI / 180;
     private static final double RAD_TO_DEG = 180 / Math.PI;
@@ -64,7 +68,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
      *            longitude string to parse
      * @throws Geopoint.ParseException
      *             if any argument string cannot be parsed
-     * @see GeopointParser#parse(String, String)
      */
     public Geopoint(final String latText, final String lonText) {
         this(GeopointParser.parseLatitude(latText), GeopointParser.parseLongitude(lonText));
@@ -273,19 +276,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     }
 
     /**
-     * Checks if given Geopoint is similar to this Geopoint with tolerance.
-     *
-     * @param gp
-     *            Geopoint to check
-     * @param tolerance
-     *            tolerance in km
-     * @return true if similar, false otherwise
-     */
-    public boolean isEqualTo(Geopoint gp, double tolerance) {
-        return null != gp && distanceTo(gp) <= tolerance;
-    }
-
-    /**
      * Returns formatted coordinates.
      *
      * @param format
@@ -300,7 +290,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Returns formatted coordinates with default format.
      * Default format is decimalminutes, e.g. N 52° 36.123 E 010° 03.456
-     * 
+     *
      * @return formatted coordinates
      */
     @Override
@@ -365,7 +355,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
 
     /**
      * Get longitude character (E or W).
-     * 
+     *
      * @return
      */
     public char getLonDir() {

@@ -33,6 +33,7 @@ import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.UncertainProperty;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.lang3.BooleanUtils;
@@ -1363,17 +1364,6 @@ public class Geocache implements ICache, IWaypoint {
             }
         }
         return -1;
-    }
-
-    /**
-     * Retrieve a given waypoint.
-     *
-     * @param index
-     *            the index of the waypoint
-     * @return waypoint or <code>null</code> if index is out of range
-     */
-    public Waypoint getWaypoint(final int index) {
-        return index >= 0 && index < waypoints.size() ? waypoints.get(index) : null;
     }
 
     /**

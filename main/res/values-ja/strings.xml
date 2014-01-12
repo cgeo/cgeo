@@ -121,7 +121,6 @@
   <string name="translate_to_english">英語に翻訳</string>
   <string name="translate_length_warning">文章が長すぎるので翻訳できないかもしれません。</string>
   <string name="err_none">OK</string>
-  <string name="err_start">通信を始めることができませんでした</string>
   <string name="err_parse">ログインページの解析に失敗しました</string>
   <string name="err_server">Geocaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません。</string>
   <string name="err_login">ログイン情報が保存されていません</string>
@@ -177,7 +176,6 @@
   <string name="err_log_load_data">ログを書くのに必要なデータをロードすることができません。</string>
   <string name="err_log_load_data_again">ログを書くのに必要なデータをロードすることができません。もう一度やってみてください。</string>
   <string name="err_log_load_data_still">ログを投稿するのに必要なデータをまだロード中です。もう少しお待ちください。</string>
-  <string name="err_log_failed_server">サーバの反応がないのでログを投稿することができませんでした。</string>
   <string name="err_log_post_failed">ログを投稿することができなかったようです。Geocaching.comで確認してください。</string>
   <string name="err_logimage_post_failed">ログの添付画像がアップロードされなかったようです。Geocaching.comで確認してください。</string>
   <string name="err_search_address_forgot">c:geo forgot the address you tried to find.</string>

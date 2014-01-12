@@ -121,7 +121,6 @@
   <string name="translate_to_english">Traduzir para inglês</string>
   <string name="translate_length_warning">A tradução pode falhar se o texto fôr muito grande.</string>
   <string name="err_none">Ok</string>
-  <string name="err_start">Comunicação não iniciada</string>
   <string name="err_parse">Falha na análise da página de login</string>
   <string name="err_server">Falha na ligação a Geocaching.com (servidor ou ligação em baixo?)</string>
   <string name="err_login">Informação de login não gravada</string>
@@ -177,7 +176,6 @@
   <string name="err_log_load_data">O c:geo não consegue carregar os dados necessários para registar a sua visita.</string>
   <string name="err_log_load_data_again">O c:geo não consegue carregar os dados necessários para registar a sua visita. A tentar de novo.</string>
   <string name="err_log_load_data_still">O c:geo ainda está a carregar dados necessários para publicar o registo. Por favor espere mais um pouco.</string>
-  <string name="err_log_failed_server">O c:geo falhou a publicação do registo porque o servidor não responde.</string>
   <string name="err_log_post_failed">O c:geo falhou a publicação do registo.</string>
   <string name="err_logimage_post_failed">Parece que a sua imagem de registo não foi enviada. Por favor verifique em Geocaching.com.</string>
   <string name="err_search_address_forgot">O c:geo esqueceu o endereço que procura.</string>

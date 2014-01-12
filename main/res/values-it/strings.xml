@@ -121,7 +121,6 @@
   <string name="translate_to_english">Traduci in inglese</string>
   <string name="translate_length_warning">La traduzione può fallire quando c\'è molto testo.</string>
   <string name="err_none">OK</string>
-  <string name="err_start">Comunicazione non avviata</string>
   <string name="err_parse">Errore analizzando la pagina di login</string>
   <string name="err_server">Connessione fallita con Geocaching.com (server o connessione non disponibile?)</string>
   <string name="err_login">Informazioni di login non memorizzate</string>
@@ -177,7 +176,6 @@
   <string name="err_log_load_data">c:geo non riesce a caricare i dati necessari per salvare il log della tua visita.</string>
   <string name="err_log_load_data_again">c:geo non riesce a caricare i dati necessari per salvare il log della tua visita. Nuovo tentativo in corso.</string>
   <string name="err_log_load_data_still">c:geo sta ancora caricando i dati necessari per salvare il log. Per cortesia attendere ancora un pochino.</string>
-  <string name="err_log_failed_server">c:geo non è riuscito ad inviare il log perché il server non risponde.</string>
   <string name="err_log_post_failed">Sembra che il log non sia stato inviato. Prego verificare su Geocaching.com.</string>
   <string name="err_logimage_post_failed">Sembra che l\'immagine del tuo log non sia stata caricata. Si prega di controllare su Geocaching.com.</string>
   <string name="err_search_address_forgot">c:geo ha dimenticato l\'indirizzo che vuoi trovare.</string>

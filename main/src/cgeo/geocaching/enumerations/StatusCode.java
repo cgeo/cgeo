@@ -6,7 +6,6 @@ import android.content.res.Resources;
 
 public enum StatusCode {
 
-    COMMUNICATION_NOT_STARTED(R.string.err_start),
     NO_ERROR(R.string.err_none),
     LOG_SAVED(R.string.info_log_saved),
     LOGIN_PARSE_ERROR(R.string.err_parse),
@@ -24,7 +23,6 @@ public enum StatusCode {
     LOG_POST_ERROR(R.string.err_log_post_failed),
     LOG_POST_ERROR_EC(R.string.err_log_post_failed_ec),
     NO_LOG_TEXT(R.string.warn_log_text_fill),
-    NO_DATA_FROM_SERVER(R.string.err_log_failed_server),
     NOT_LOGGED_IN(R.string.init_login_popup_failed),
     LOGIMAGE_POST_ERROR(R.string.err_logimage_post_failed);
 

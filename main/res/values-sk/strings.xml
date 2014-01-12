@@ -105,7 +105,6 @@
   <string name="translate_to_english">Preložiť do angličtiny</string>
   <string name="translate_length_warning">Pre veľké texty môže preklad zlyhať.</string>
   <string name="err_none">Ok</string>
-  <string name="err_start">Komunikácia nezačala.</string>
   <string name="err_parse">Zlyhalo čítanie prihlasovacej stránky.</string>
   <string name="err_server">Zlyhalo pripojenie k serveru Geocaching.com (pripojenie, alebo server nefunkčný?)</string>
   <string name="err_login">Nie sú uložené žiadne prihlasovacie údaje.</string>
@@ -157,7 +156,6 @@
   <string name="err_log_load_data">c:geo nemôže načítať dáta potrebné pre zalogovanie návštevy.</string>
   <string name="err_log_load_data_again">c:geo nemôže načítať dáta potrebné pre zalogovanie návštevy. Skúša to znovu.</string>
   <string name="err_log_load_data_still">c:geo stále načítava dáta potrebné pre zalogovanie návštevy. Prosím, počkajte chvíľu.</string>
-  <string name="err_log_failed_server">c:geo nemohlo odoslať log, pretože server neodpovedá.</string>
   <string name="err_log_post_failed">c:geo nemohlo odoslať log.</string>
   <string name="err_search_address_forgot">c:geo zabudlo adresu, ktorú sa pokúšate nájsť.</string>
   <string name="err_parse_lat">c:geo nemôže dopočítať šírku.</string>

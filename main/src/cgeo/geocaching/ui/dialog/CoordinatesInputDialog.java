@@ -54,7 +54,7 @@ public class CoordinatesInputDialog extends NoTitleDialog {
         } else if (geo != null && geo.getCoords() != null) {
             this.gp = geo.getCoords();
         } else {
-            this.gp = new Geopoint(0.0, 0.0);
+            this.gp = Geopoint.ZERO;
         }
     }
 
@@ -396,7 +396,7 @@ public class CoordinatesInputDialog extends NoTitleDialog {
                     if (geo != null && geo.getCoords() != null) {
                         gp = geo.getCoords();
                     } else {
-                        gp = new Geopoint(0.0, 0.0);
+                        gp = Geopoint.ZERO;
                     }
                 }
             }

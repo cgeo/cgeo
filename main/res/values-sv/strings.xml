@@ -121,7 +121,6 @@
   <string name="translate_to_english">Översätt till engelska</string>
   <string name="translate_length_warning">Översättningen kan misslyckas med långa texter.</string>
   <string name="err_none">Ok</string>
-  <string name="err_start">Kommunikationen har inte påbörjats</string>
   <string name="err_parse">Misslyckades att analysera inloggningssidan</string>
   <string name="err_server">Misslyckades att ansluta till Geocaching.com. Hemsidan kan vara ur funktion eller så är det problem med din anslutning till Internet.</string>
   <string name="err_login">Inloggningsinformationen ej sparad</string>
@@ -177,7 +176,6 @@
   <string name="err_log_load_data">Tyvärr kan c:geo inte ladda information som krävs för att logga ditt besök.</string>
   <string name="err_log_load_data_again">Tyvärr kan c:geo inte ladda information som krävs för att logga ditt besök. Försöker igen.</string>
   <string name="err_log_load_data_still">c:geo laddar fortfarande data för att kunna posta loggen. Vänligen vänta en stund till.</string>
-  <string name="err_log_failed_server">Tyvärr misslyckades c:geo att posta loggen eftersom servern inte svarade.</string>
   <string name="err_log_post_failed">Tyvärr misslyckades c:geo att posta loggen.</string>
   <string name="err_logimage_post_failed">Det verkar som om din bild till loggen inte kunde laddas upp. Vänligen kontrollera den på Geocaching.com.</string>
   <string name="err_search_address_forgot">Tyvärr glömde c:geo adressen du sökte efter.</string>
