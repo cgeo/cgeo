@@ -8,9 +8,11 @@ import org.eclipse.jdt.annotation.Nullable;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.ExifInterface;
 import android.net.Uri;
 
 import java.io.BufferedOutputStream;
@@ -22,6 +24,13 @@ import java.util.Date;
 import java.util.Locale;
 
 public final class ImageUtils {
+    private static final int[] ORIENTATIONS = new int[] {
+            ExifInterface.ORIENTATION_ROTATE_90,
+            ExifInterface.ORIENTATION_ROTATE_180,
+            ExifInterface.ORIENTATION_ROTATE_270
+    };
+
+    private static final int[] ROTATION = new int[] { 90, 180, 270 };
 
     private ImageUtils() {
         // Do not let this class be instantiated, this is a utility class.
@@ -153,18 +162,32 @@ public final class ImageUtils {
      */
     @Nullable
     public static Bitmap readDownsampledImage(@NonNull final String filePath, final int maxX, final int maxY) {
-        BitmapFactory.Options sizeOnlyOptions = new BitmapFactory.Options();
+        int orientation = ExifInterface.ORIENTATION_NORMAL;
+        try {
+            final ExifInterface exif = new ExifInterface(filePath);
+            orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+        } catch (IOException e) {
+            Log.e("ImageUtils.readDownsampledImage", e);
+        }
+        final BitmapFactory.Options sizeOnlyOptions = new BitmapFactory.Options();
         sizeOnlyOptions.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(filePath, sizeOnlyOptions);
         final int myMaxXY = Math.max(sizeOnlyOptions.outHeight, sizeOnlyOptions.outWidth);
         final int maxXY = Math.max(maxX, maxY);
         final int sampleSize = myMaxXY / maxXY;
+        final BitmapFactory.Options sampleOptions = new BitmapFactory.Options();
         if (sampleSize > 1) {
-            BitmapFactory.Options sampleOptions = new BitmapFactory.Options();
             sampleOptions.inSampleSize = sampleSize;
-            return BitmapFactory.decodeFile(filePath, sampleOptions);
         }
-        return BitmapFactory.decodeFile(filePath);
+        final Bitmap decodedImage = BitmapFactory.decodeFile(filePath, sampleOptions);
+        for (int i = 0; i < ORIENTATIONS.length; i++) {
+            if (orientation == ORIENTATIONS[i]) {
+                final Matrix matrix = new Matrix();
+                matrix.postRotate(ROTATION[i]);
+                return Bitmap.createBitmap(decodedImage, 0, 0, decodedImage.getWidth(), decodedImage.getHeight(), matrix, true);
+            }
+        }
+        return decodedImage;
     }
 
     /** Create a File for saving an image or video
