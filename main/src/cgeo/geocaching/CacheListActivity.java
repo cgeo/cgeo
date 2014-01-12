@@ -43,6 +43,7 @@ import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
+import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.DateUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
@@ -94,7 +95,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static final int MAX_LIST_ITEMS = 1000;
 
     private static final int MSG_DONE = -1;
-    private static final int MSG_CANCEL = -99;
 
     private static final int REQUEST_CODE_IMPORT_GPX = 1;
 
@@ -112,8 +112,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private int detailTotal = 0;
     private int detailProgress = 0;
     private long detailProgressTime = 0L;
-    private LoadDetailsThread threadDetails = null;
-    private LoadFromWebThread threadWeb = null;
     private int listId = StoredList.TEMPORARY_LIST_ID; // Only meaningful for the OFFLINE type
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
 
@@ -268,10 +266,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
-    private final Handler loadDetailsHandler = new Handler() {
+    private final CancellableHandler loadDetailsHandler = new CancellableHandler() {
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleRegularMessage(Message msg) {
             setAdapter();
 
             if (msg.what > -1) {
@@ -287,10 +285,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     progress.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
                 } else {
                     progress.setMessage(res.getString(R.string.caches_downloading) + " " + minutesRemaining + " " + res.getQuantityString(R.plurals.caches_eta_mins, minutesRemaining));
-                }
-            } else if (msg.what == MSG_CANCEL) {
-                if (threadDetails != null) {
-                    threadDetails.kill();
                 }
             } else {
                 if (search != null) {
@@ -312,9 +306,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     /**
      * TODO Possibly parts should be a Thread not a Handler
      */
-    private final Handler downloadFromWebHandler = new Handler() {
+    private final CancellableHandler downloadFromWebHandler = new CancellableHandler() {
         @Override
-        public void handleMessage(Message msg) {
+        public void handleRegularMessage(Message msg) {
             setAdapter();
 
             adapter.notifyDataSetChanged();
@@ -334,10 +328,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 progress.dismiss();
                 showToast(res.getString(R.string.sendToCgeo_no_registration));
                 finish();
-            } else if (msg.what == MSG_CANCEL) {
-                if (threadWeb != null) {
-                    threadWeb.kill();
-                }
             } else {
                 adapter.setSelectMode(false);
 
@@ -347,19 +337,17 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
         }
     };
-    private final Handler clearOfflineLogsHandler = new Handler() {
+    private final CancellableHandler clearOfflineLogsHandler = new CancellableHandler() {
 
         @Override
-        public void handleMessage(Message msg) {
-            if (msg.what != MSG_CANCEL) {
-                adapter.setSelectMode(false);
+        public void handleRegularMessage(Message msg) {
+            adapter.setSelectMode(false);
 
-                refreshCurrentList();
+            refreshCurrentList();
 
-                replaceCacheListFromSearch();
+            replaceCacheListFromSearch();
 
-                progress.dismiss();
-            }
+            progress.dismiss();
         }
     };
 
@@ -724,7 +712,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     public void clearOfflineLogs() {
-        progress.show(this, null, res.getString(R.string.caches_clear_offlinelogs_progress), true, clearOfflineLogsHandler.obtainMessage(MSG_CANCEL));
+        progress.show(this, null, res.getString(R.string.caches_clear_offlinelogs_progress), true, clearOfflineLogsHandler.cancelMessage());
         new ClearOfflineLogsThread(clearOfflineLogsHandler).start();
     }
 
@@ -1046,12 +1034,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             message = res.getString(R.string.caches_downloading) + " " + etaTime + " " + res.getQuantityString(R.plurals.caches_eta_mins, etaTime);
         }
 
-        progress.show(this, null, message, ProgressDialog.STYLE_HORIZONTAL, loadDetailsHandler.obtainMessage(MSG_CANCEL));
+        progress.show(this, null, message, ProgressDialog.STYLE_HORIZONTAL, loadDetailsHandler.cancelMessage());
         progress.setMaxProgressAndReset(detailTotal);
 
         detailProgressTime = System.currentTimeMillis();
 
-        threadDetails = new LoadDetailsThread(loadDetailsHandler, caches, storeListId);
+        final LoadDetailsThread threadDetails = new LoadDetailsThread(loadDetailsHandler, caches, storeListId);
         threadDetails.start();
     }
 
@@ -1082,9 +1070,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         detailProgress = 0;
 
         showProgress(false);
-        progress.show(this, null, res.getString(R.string.web_import_waiting), true, downloadFromWebHandler.obtainMessage(MSG_CANCEL));
+        progress.show(this, null, res.getString(R.string.web_import_waiting), true, downloadFromWebHandler.cancelMessage());
 
-        threadWeb = new LoadFromWebThread(downloadFromWebHandler, listId);
+        final LoadFromWebThread threadWeb = new LoadFromWebThread(downloadFromWebHandler, listId);
         threadWeb.start();
     }
 
@@ -1111,21 +1099,16 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private class LoadDetailsThread extends Thread {
 
-        final private Handler handler;
+        final private CancellableHandler handler;
         final private int listIdLD;
-        private volatile boolean needToStop = false;
         final private List<Geocache> caches;
 
-        public LoadDetailsThread(Handler handlerIn, List<Geocache> caches, int listId) {
-            handler = handlerIn;
+        public LoadDetailsThread(CancellableHandler handler, List<Geocache> caches, int listId) {
+            this.handler = handler;
             this.caches = caches;
 
             // in case of online lists, set the list id to the standard list
             this.listIdLD = Math.max(listId, StoredList.STANDARD_LIST_ID);
-        }
-
-        public void kill() {
-            needToStop = true;
         }
 
         @Override
@@ -1156,7 +1139,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
          */
         private boolean refreshCache(Geocache cache) {
             try {
-                if (needToStop) {
+                if (handler.isCancelled()) {
                     throw new InterruptedException("Stopped storing process.");
                 }
                 detailProgress++;
@@ -1175,17 +1158,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private static class LoadFromWebThread extends Thread {
 
-        final private Handler handler;
+        final private CancellableHandler handler;
         final private int listIdLFW;
-        private volatile boolean needToStop = false;
 
-        public LoadFromWebThread(Handler handlerIn, int listId) {
-            handler = handlerIn;
+        public LoadFromWebThread(CancellableHandler handler, int listId) {
+            this.handler = handler;
             listIdLFW = StoredList.getConcreteList(listId);
-        }
-
-        public void kill() {
-            needToStop = true;
         }
 
         @Override
@@ -1194,7 +1172,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             int times = 0;
 
             int ret = MSG_DONE;
-            while (!needToStop && times < 3 * 60 / 5) { // maximum: 3 minutes, every 5 seconds
+            while (!handler.isCancelled() && times < 3 * 60 / 5) { // maximum: 3 minutes, every 5 seconds
                 //download new code
                 String deviceCode = Settings.getWebDeviceCode();
                 if (deviceCode == null) {
@@ -1218,7 +1196,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         //Server returned RG (registration) and this device no longer registered.
                         Settings.setWebNameCode(null, null);
                         ret = -3;
-                        needToStop = true;
+                        handler.cancel();
                         break;
                     } else {
                         delay = 0;
@@ -1228,7 +1206,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 }
                 if (responseFromWeb == null || responseFromWeb.getStatusLine().getStatusCode() != 200) {
                     ret = -2;
-                    needToStop = true;
+                    handler.cancel();
                     break;
                 }
 
