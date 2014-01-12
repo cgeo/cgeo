@@ -358,7 +358,8 @@
     <string name="list_dialog_remove_err">c:geo failed to remove the current list</string>
     <string name="list_dialog_rename_title">Rename list</string>
     <string name="list_dialog_rename">Rename</string>
-
+    <string name="list_not_available">List no longer available, switching to standard list</string>
+    
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Changelog</string>
