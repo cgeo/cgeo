@@ -28,10 +28,10 @@ public class OXGPXParser extends GPX10Parser {
     /**
      * The short description of OX caches contains "title by owner, type(T/D/Awesomeness)". That is a lot of
      * duplication.
-     * 
+     *
      * @param cache
      */
     private static void removeTitleFromShortDescription(final @NonNull Geocache cache) {
-        cache.setShortDescription(StringUtils.substringAfterLast(cache.getShortDescription(), ","));
+        cache.setShortDescription(StringUtils.trim(StringUtils.substringAfterLast(cache.getShortDescription(), ",")));
     }
 }
