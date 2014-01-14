@@ -878,28 +878,6 @@ public class DataStore {
         db.execSQL("drop table if exists " + dbTableTrackables);
     }
 
-    public static String[] getRecentGeocodesForSearch() {
-        init();
-
-        try {
-            long timestamp = System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED;
-            final Cursor cursor = database.query(
-                    dbTableCaches,
-                    new String[]{"geocode"},
-                    "(detailed = 1 and detailedupdate > ?) or reason > 0",
-                    new String[]{Long.toString(timestamp)},
-                    null,
-                    null,
-                    "detailedupdate desc",
-                    "100");
-
-            return getFirstColumn(cursor);
-        } catch (final Exception e) {
-            Log.e("DataStore.allDetailedThere", e);
-            return new String[0];
-        }
-    }
-
     public static boolean isThere(String geocode, String guid, boolean detailed, boolean checkTime) {
         init();
 
@@ -2931,21 +2909,6 @@ public class DataStore {
         return waypoints;
     }
 
-    public static String[] getTrackableCodes() {
-        init();
-
-        final Cursor cursor = database.query(
-                dbTableTrackables,
-                new String[] { "tbcode" },
-                null,
-                null,
-                null,
-                null,
-                "updated DESC",
-                "100");
-        return getFirstColumn(cursor);
-    }
-
     /**
      * Extract the first column of the cursor rows and close the cursor.
      *
@@ -3146,7 +3109,7 @@ public class DataStore {
                 SearchManager.SUGGEST_COLUMN_QUERY
         });
         try {
-            final String selectionArg = "%" + searchTerm + "%";
+            final String selectionArg = getSuggestionArgument(searchTerm);
             findCaches(resultCursor, selectionArg);
             findTrackables(resultCursor, selectionArg);
         } catch (final Exception e) {
@@ -3177,6 +3140,10 @@ public class DataStore {
         cursor.close();
     }
 
+    private static String getSuggestionArgument(String input) {
+        return "%" + StringUtils.trim(input) + "%";
+    }
+
     private static void findTrackables(final MatrixCursor resultCursor, final String selectionArg) {
         Cursor cursor = database.query(
                 dbTableTrackables,
@@ -3197,6 +3164,44 @@ public class DataStore {
             });
         }
         cursor.close();
+    }
+
+    public static String[] getSuggestions(final String table, final String column, final String input) {
+        Cursor cursor = database.query(
+                true,
+                table,
+                new String[] { column },
+                column + " LIKE ?",
+                new String[] { getSuggestionArgument(input) },
+                null,
+                null,
+                column,
+                null);
+        return getFirstColumn(cursor);
+    }
+
+    public static String[] getSuggestionsOwnerName(String input) {
+        return getSuggestions(dbTableCaches, "owner", input);
+    }
+
+    public static String[] getSuggestionsTrackableCode(String input) {
+        return getSuggestions(dbTableTrackables, "tbcode", input);
+    }
+
+    public static String[] getSuggestionsFinderName(String input) {
+        return getSuggestions(dbTableLogs, "author", input);
+    }
+
+    public static String[] getSuggestionsGeocode(String input) {
+        return getSuggestions(dbTableCaches, "geocode", input);
+    }
+
+    public static String[] getSuggestionsKeyword(String input) {
+        return getSuggestions(dbTableCaches, "name", input);
+    }
+
+    public static String[] getSuggestionsAddress(String input) {
+        return getSuggestions(dbTableCaches, "location", input);
     }
 
 }

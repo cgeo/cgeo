@@ -10,12 +10,15 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.search.AutoCompleteAdapter;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.EditUtils;
 
 import org.apache.commons.lang3.StringUtils;
+
+import rx.util.functions.Func1;
 
 import android.app.Activity;
 import android.app.SearchManager;
@@ -26,10 +29,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 
 import java.util.Locale;
 
@@ -39,19 +40,19 @@ public class SearchActivity extends AbstractActivity {
     @InjectView(R.id.buttonLongitude) protected Button buttonLongitude;
     @InjectView(R.id.search_coordinates) protected Button buttonSearchCoords;
 
-    @InjectView(R.id.address) protected EditText addressEditText;
+    @InjectView(R.id.address) protected AutoCompleteTextView addressEditText;
     @InjectView(R.id.search_address) protected Button buttonSearchAddress;
 
     @InjectView(R.id.geocode) protected AutoCompleteTextView geocodeEditText;
     @InjectView(R.id.display_geocode) protected Button buttonSearchGeocode;
 
-    @InjectView(R.id.keyword) protected EditText keywordEditText;
+    @InjectView(R.id.keyword) protected AutoCompleteTextView keywordEditText;
     @InjectView(R.id.search_keyword) protected Button buttonSearchKeyword;
 
-    @InjectView(R.id.finder) protected EditText finderNameEditText;
+    @InjectView(R.id.finder) protected AutoCompleteTextView finderNameEditText;
     @InjectView(R.id.search_finder) protected Button buttonSearchFinder;
 
-    @InjectView(R.id.owner) protected EditText ownerNameEditText;
+    @InjectView(R.id.owner) protected AutoCompleteTextView ownerNameEditText;
     @InjectView(R.id.search_owner) protected Button buttonSearchOwner;
 
     @InjectView(R.id.trackable) protected AutoCompleteTextView trackableEditText;
@@ -187,6 +188,12 @@ public class SearchActivity extends AbstractActivity {
             public void run() {
                 findByAddressFn();
             }
+        }, new Func1<String, String[]>() {
+
+            @Override
+            public String[] call(final String input) {
+                return DataStore.getSuggestionsAddress(input);
+            }
         });
 
         setSearchAction(geocodeEditText, buttonSearchGeocode, new Runnable() {
@@ -195,14 +202,25 @@ public class SearchActivity extends AbstractActivity {
             public void run() {
                 findByGeocodeFn();
             }
+        }, new Func1<String, String[]>() {
+
+            @Override
+            public String[] call(final String input) {
+                return DataStore.getSuggestionsGeocode(input);
+            }
         });
-        addHistoryEntries(geocodeEditText, DataStore.getRecentGeocodesForSearch());
 
         setSearchAction(keywordEditText, buttonSearchKeyword, new Runnable() {
 
             @Override
             public void run() {
                 findByKeywordFn();
+            }
+        }, new Func1<String, String[]>() {
+
+            @Override
+            public String[] call(final String input) {
+                return DataStore.getSuggestionsKeyword(input);
             }
         });
 
@@ -212,6 +230,12 @@ public class SearchActivity extends AbstractActivity {
             public void run() {
                 findByFinderFn();
             }
+        }, new Func1<String, String[]>() {
+
+            @Override
+            public String[] call(final String input) {
+                return DataStore.getSuggestionsFinderName(input);
+            }
         });
 
         setSearchAction(ownerNameEditText, buttonSearchOwner, new Runnable() {
@@ -219,6 +243,12 @@ public class SearchActivity extends AbstractActivity {
             @Override
             public void run() {
                 findByOwnerFn();
+            }
+        }, new Func1<String, String[]>() {
+
+            @Override
+            public String[] call(final String input) {
+                return DataStore.getSuggestionsOwnerName(input);
             }
         });
 
@@ -228,12 +258,16 @@ public class SearchActivity extends AbstractActivity {
             public void run() {
                 findTrackableFn();
             }
+        }, new Func1<String, String[]>() {
+
+            @Override
+            public String[] call(final String input) {
+                return DataStore.getSuggestionsTrackableCode(input);
+            }
         });
-        addHistoryEntries(trackableEditText, DataStore.getTrackableCodes());
-        disableSuggestions(trackableEditText);
     }
 
-    private static void setSearchAction(final EditText editText, final Button button, final Runnable runnable) {
+    private static void setSearchAction(final AutoCompleteTextView editText, final Button button, final Runnable runnable, final Func1<String, String[]> suggestionFunction) {
         EditUtils.setActionListener(editText, runnable);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -241,13 +275,7 @@ public class SearchActivity extends AbstractActivity {
                 runnable.run();
             }
         });
-    }
-
-    private void addHistoryEntries(final AutoCompleteTextView textView, final String[] entries) {
-        if (entries != null) {
-            final ArrayAdapter<String> historyAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, entries);
-            textView.setAdapter(historyAdapter);
-        }
+        editText.setAdapter(new AutoCompleteAdapter(editText.getContext(), android.R.layout.simple_dropdown_item_1line, suggestionFunction));
     }
 
     private class FindByCoordsAction implements OnClickListener {
