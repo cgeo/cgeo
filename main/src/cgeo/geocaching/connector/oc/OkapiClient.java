@@ -32,6 +32,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.FastDateFormat;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -151,19 +152,14 @@ final class OkapiClient {
     }
 
     public static List<Geocache> getCachesByOwner(final String username, final OCApiConnector connector) {
-        final Parameters params = new Parameters("search_method", METHOD_SEARCH_ALL);
-        final Map<String, String> valueMap = new LinkedHashMap<String, String>();
-        final @Nullable
-        String uuid = getUserUUID(connector, username);
-        if (StringUtils.isEmpty(uuid)) {
-            return Collections.emptyList();
-        }
-        valueMap.put("owner_uuid", uuid);
-
-        return requestCaches(connector, params, valueMap);
+        return getCachesByUser(username, connector, "owner_uuid");
     }
 
     public static List<Geocache> getCachesByFinder(final String username, final OCApiConnector connector) {
+        return getCachesByUser(username, connector, "found_by");
+    }
+
+    private static List<Geocache> getCachesByUser(final String username, final OCApiConnector connector, final String userRequestParam) {
         final Parameters params = new Parameters("search_method", METHOD_SEARCH_ALL);
         final Map<String, String> valueMap = new LinkedHashMap<String, String>();
         final @Nullable
@@ -171,7 +167,7 @@ final class OkapiClient {
         if (StringUtils.isEmpty(uuid)) {
             return Collections.emptyList();
         }
-        valueMap.put("found_by", uuid);
+        valueMap.put(userRequestParam, uuid);
 
         return requestCaches(connector, params, valueMap);
     }
