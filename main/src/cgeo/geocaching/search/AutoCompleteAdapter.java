@@ -15,7 +15,7 @@ import android.widget.Filter;
  */
 public class AutoCompleteAdapter extends ArrayAdapter<String> {
 
-    private String[] results;
+    private String[] suggestions;
     private final Func1<String, String[]> suggestionFunction;
 
     public AutoCompleteAdapter(Context context, int textViewResourceId, final Func1<String, String[]> suggestionFunction) {
@@ -25,12 +25,12 @@ public class AutoCompleteAdapter extends ArrayAdapter<String> {
 
     @Override
     public int getCount() {
-        return results.length;
+        return suggestions.length;
     }
 
     @Override
     public String getItem(int index) {
-        return results[index];
+        return suggestions[index];
     }
 
     @Override
@@ -45,18 +45,20 @@ public class AutoCompleteAdapter extends ArrayAdapter<String> {
                 }
                 String trimmed = StringUtils.trim(constraint.toString());
                 if (StringUtils.length(trimmed) >= 2) {
-                    results = suggestionFunction.call(trimmed);
+                    String[] newResults = suggestionFunction.call(trimmed);
 
-                    // Assign the data to the FilterResults
-                    filterResults.values = results;
-                    filterResults.count = results.length;
+                    // Assign the data to the FilterResults, but do not yet store in the global member.
+                    // Otherwise we might invalidate the adapter and cause an IllegalStateException.
+                    filterResults.values = newResults;
+                    filterResults.count = newResults.length;
                 }
                 return filterResults;
             }
 
             @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                if (results != null && results.count > 0) {
+            protected void publishResults(CharSequence constraint, FilterResults filterResults) {
+                if (filterResults != null && filterResults.count > 0) {
+                    suggestions = (String[]) filterResults.values;
                     notifyDataSetChanged();
                 }
                 else {
