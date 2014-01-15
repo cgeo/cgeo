@@ -154,7 +154,11 @@ final class OkapiClient {
     public static List<Geocache> getCachesByOwner(final String username, final OCApiConnector connector) {
         final Parameters params = new Parameters("search_method", METHOD_SEARCH_ALL);
         final Map<String, String> valueMap = new LinkedHashMap<String, String>();
-        final String uuid = getUserUUID(connector, username);
+        final @Nullable
+        String uuid = getUserUUID(connector, username);
+        if (StringUtils.isEmpty(uuid)) {
+            return Collections.emptyList();
+        }
         valueMap.put("owner_uuid", uuid);
 
         return requestCaches(connector, params, valueMap);
@@ -163,7 +167,11 @@ final class OkapiClient {
     public static List<Geocache> getCachesByFinder(final String username, final OCApiConnector connector) {
         final Parameters params = new Parameters("search_method", METHOD_SEARCH_ALL);
         final Map<String, String> valueMap = new LinkedHashMap<String, String>();
-        final String uuid = getUserUUID(connector, username);
+        final @Nullable
+        String uuid = getUserUUID(connector, username);
+        if (StringUtils.isEmpty(uuid)) {
+            return Collections.emptyList();
+        }
         valueMap.put("found_by", uuid);
 
         return requestCaches(connector, params, valueMap);
@@ -717,7 +725,8 @@ final class OkapiClient {
         }
     }
 
-    public static String getUserUUID(final OCApiConnector connector, final String userName) {
+    public static @Nullable
+    String getUserUUID(final OCApiConnector connector, final String userName) {
         final Parameters params = new Parameters("fields", USER_UUID, USER_USERNAME, userName);
 
         final JSONResult result = request(connector, OkapiService.SERVICE_USER_BY_USERNAME, params);
