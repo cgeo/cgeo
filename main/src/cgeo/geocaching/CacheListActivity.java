@@ -18,6 +18,7 @@ import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.filter.FilterUserInterface;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.loaders.AbstractSearchLoader;
 import cgeo.geocaching.loaders.AbstractSearchLoader.CacheListLoaderType;
@@ -1315,6 +1316,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     public void switchListById(int id) {
         if (id < 0) {
+            return;
+        }
+
+        if (id == PseudoList.HISTORY_LIST.id) {
+            CacheListActivity.startActivityHistory(this);
+            finish();
             return;
         }
 

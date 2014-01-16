@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 
 import rx.util.functions.Action1;
@@ -32,7 +33,7 @@ public class CreateShortcutActivity extends AbstractActivity {
                 // finish activity to return the shortcut
                 finish();
             }
-        });
+        }, false, PseudoList.HISTORY_LIST.id);
     }
 
     protected Intent createShortcut(int listId) {

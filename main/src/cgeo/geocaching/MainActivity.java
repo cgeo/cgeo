@@ -10,6 +10,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
+import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.settings.Settings;
@@ -23,7 +24,9 @@ import cgeo.geocaching.utils.Version;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+
 import org.apache.commons.lang3.StringUtils;
+
 import rx.Observable;
 import rx.Observable.OnSubscribeFunc;
 import rx.Observer;
@@ -381,7 +384,7 @@ public class MainActivity extends AbstractActivity {
                         Settings.saveLastList(selectedListId);
                         CacheListActivity.startActivityOffline(MainActivity.this);
                     }
-                });
+                }, false, PseudoList.HISTORY_LIST.id);
                 return true;
             }
         });

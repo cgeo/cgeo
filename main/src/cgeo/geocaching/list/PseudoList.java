@@ -17,6 +17,12 @@ public class PseudoList extends AbstractList {
      */
     public static final AbstractList NEW_LIST = new PseudoList(NEW_LIST_ID, R.string.list_menu_create);
 
+    private static final int HISTORY_LIST_ID = 4;
+    /**
+     * list entry to create a new list
+     */
+    public static final AbstractList HISTORY_LIST = new PseudoList(HISTORY_LIST_ID, R.string.menu_history);
+
     /**
      * private constructor to have all instances as constants in the class
      */

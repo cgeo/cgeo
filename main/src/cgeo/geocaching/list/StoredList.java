@@ -8,6 +8,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+
 import rx.util.functions.Action1;
 
 import android.app.Activity;
@@ -87,7 +88,12 @@ public final class StoredList extends AbstractList {
             }
 
             if (!onlyConcreteLists) {
-                lists.add(PseudoList.ALL_LIST);
+                if (exceptListId != PseudoList.ALL_LIST.id) {
+                    lists.add(PseudoList.ALL_LIST);
+                }
+                if (exceptListId != PseudoList.HISTORY_LIST.id) {
+                    lists.add(PseudoList.HISTORY_LIST);
+                }
             }
             lists.add(PseudoList.NEW_LIST);
 
@@ -197,7 +203,7 @@ public final class StoredList extends AbstractList {
      * Return the given list, if it is a concrete list. Return the default list otherwise.
      */
     public static int getConcreteList(int listId) {
-        if (listId == PseudoList.ALL_LIST.id || listId == TEMPORARY_LIST_ID) {
+        if (listId == PseudoList.ALL_LIST.id || listId == TEMPORARY_LIST_ID || listId == PseudoList.HISTORY_LIST.id) {
             return STANDARD_LIST_ID;
         }
         return listId;
