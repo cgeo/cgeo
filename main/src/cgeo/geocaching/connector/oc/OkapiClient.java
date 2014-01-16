@@ -75,7 +75,8 @@ final class OkapiClient {
     private static final String CACHE_STATUS_ARCHIVED = "Archived";
     private static final String CACHE_STATUS_DISABLED = "Temporarily unavailable";
     private static final String CACHE_IS_FOUND = "is_found";
-    private static final String CACHE_SIZE = "size";
+    private static final String CACHE_SIZE_DEPRECATED = "size";
+    private static final String CACHE_SIZE2 = "size2";
     private static final String CACHE_VOTES = "rating_votes";
     private static final String CACHE_NOTFOUNDS = "notfounds";
     private static final String CACHE_FOUNDS = "founds";
@@ -112,7 +113,7 @@ final class OkapiClient {
     // the several realms of possible fields for cache retrieval:
     // Core: for livemap requests (L3 - only with level 3 auth)
     // Additional: additional fields for full cache (L3 - only for level 3 auth, current - only for connectors with current api)
-    private static final String SERVICE_CACHE_CORE_FIELDS = "code|name|location|type|status|difficulty|terrain|size|date_hidden";
+    private static final String SERVICE_CACHE_CORE_FIELDS = "code|name|location|type|status|difficulty|terrain|size|size2|date_hidden";
     private static final String SERVICE_CACHE_CORE_L3_FIELDS = "is_found";
     private static final String SERVICE_CACHE_ADDITIONAL_FIELDS = "owner|founds|notfounds|rating|rating_votes|recommendations|description|hint|images|latest_logs|alt_wpts|attrnames|req_passwd";
     private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS = "gc_code|attribution_note|attr_acodes";
@@ -562,12 +563,25 @@ final class OkapiClient {
     }
 
     private static CacheSize getCacheSize(final JSONObject response) {
-        if (response.isNull(CACHE_SIZE)) {
+        if (response.isNull(CACHE_SIZE2)) {
+            return getCacheSizeDeprecated(response);
+        }
+        try {
+            final String size = response.getString(CACHE_SIZE2);
+            return CacheSize.getById(size);
+        } catch (JSONException e) {
+            Log.e("OkapiClient.getCacheSize", e);
+            return getCacheSizeDeprecated(response);
+        }
+    }
+
+    private static CacheSize getCacheSizeDeprecated(final JSONObject response) {
+        if (response.isNull(CACHE_SIZE_DEPRECATED)) {
             return CacheSize.NOT_CHOSEN;
         }
         double size = 0;
         try {
-            size = response.getDouble(CACHE_SIZE);
+            size = response.getDouble(CACHE_SIZE_DEPRECATED);
         } catch (final JSONException e) {
             Log.e("OkapiClient.getCacheSize", e);
         }
@@ -581,7 +595,7 @@ final class OkapiClient {
             case 4:
                 return CacheSize.LARGE;
             case 5:
-                return CacheSize.LARGE;
+                return CacheSize.VERY_LARGE;
             default:
                 break;
         }

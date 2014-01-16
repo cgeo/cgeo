@@ -12,30 +12,38 @@ import java.util.Map;
  * Enum listing cache sizes
  */
 public enum CacheSize {
-    MICRO("Micro", 1, R.string.cache_size_micro),
-    SMALL("Small", 2, R.string.cache_size_small),
-    REGULAR("Regular", 3, R.string.cache_size_regular),
-    LARGE("Large", 4, R.string.cache_size_large),
-    VIRTUAL("Virtual", 0, R.string.cache_size_virtual),
-    NOT_CHOSEN("Not chosen", 0, R.string.cache_size_notchosen),
-    OTHER("Other", 0, R.string.cache_size_other),
-    UNKNOWN("Unknown", 0, R.string.cache_size_unknown); // CacheSize not init. yet
+    NANO("Nano", 0, R.string.cache_size_nano, "nano"), // used by OC only
+    MICRO("Micro", 1, R.string.cache_size_micro, "micro"),
+    SMALL("Small", 2, R.string.cache_size_small, "small"),
+    REGULAR("Regular", 3, R.string.cache_size_regular, "regular"),
+    LARGE("Large", 4, R.string.cache_size_large, "large"),
+    VERY_LARGE("Very large", 5, R.string.cache_size_very_large, "xlarge"), // used by OC only
+    NOT_CHOSEN("Not chosen", 6, R.string.cache_size_notchosen, ""),
+    VIRTUAL("Virtual", 7, R.string.cache_size_virtual, "none"),
+    OTHER("Other", 8, R.string.cache_size_other, "other"),
+    UNKNOWN("Unknown", -1, R.string.cache_size_unknown, ""); // CacheSize not init. yet
 
     public final String id;
     public final int comparable;
     private final int stringId;
+    /**
+     * lookup for OC JSON requests (the numeric size is deprecated for OC)
+     */
+    private final String ocSize2;
 
-    CacheSize(String id, int comparable, int stringId) {
+    CacheSize(final String id, final int comparable, final int stringId, final String ocSize2) {
         this.id = id;
         this.comparable = comparable;
         this.stringId = stringId;
+        this.ocSize2 = ocSize2;
     }
 
     final private static Map<String, CacheSize> FIND_BY_ID;
     static {
         final HashMap<String, CacheSize> mapping = new HashMap<String, CacheSize>();
-        for (CacheSize cs : values()) {
+        for (final CacheSize cs : values()) {
             mapping.put(cs.id.toLowerCase(Locale.US), cs);
+            mapping.put(cs.ocSize2.toLowerCase(Locale.US), cs);
         }
         // add medium as additional string for Regular
         mapping.put("medium", CacheSize.REGULAR);
@@ -61,21 +69,21 @@ public enum CacheSize {
 
     /**
      * Bad GPX files can contain the container size encoded as number.
-     * 
+     *
      * @param id
      * @return
      */
     private static CacheSize getByNumber(final String id) {
         try {
-            int numerical = Integer.parseInt(id);
+            final int numerical = Integer.parseInt(id);
             if (numerical != 0) {
-                for (CacheSize size : CacheSize.values()) {
+                for (final CacheSize size : CacheSize.values()) {
                     if (size.comparable == numerical) {
                         return size;
                     }
                 }
             }
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
             // ignore, as this might be a number or not
         }
         return UNKNOWN;
@@ -85,4 +93,3 @@ public enum CacheSize {
         return CgeoApplication.getInstance().getBaseContext().getResources().getString(stringId);
     }
 }
-

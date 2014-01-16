@@ -30,8 +30,6 @@ public class CacheSizeTest extends AndroidTestCase {
 
     public static void testGetByIdNumeric() {
         assertEquals(CacheSize.REGULAR, CacheSize.getById("3"));
-        assertEquals(CacheSize.UNKNOWN, CacheSize.getById("0"));
-        assertEquals(CacheSize.UNKNOWN, CacheSize.getById("9"));
         assertEquals(CacheSize.UNKNOWN, CacheSize.getById("-1"));
     }
 }
