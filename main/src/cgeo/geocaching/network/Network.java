@@ -47,6 +47,7 @@ import android.net.Uri;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -423,6 +424,30 @@ public abstract class Network {
         }
 
         return null;
+    }
+
+    /**
+     * Get the input stream corresponding to a HTTP response if it exists.
+     *
+     * @param response a HTTP response, which can be null
+     * @return the input stream if the HTTP request is successful, <code>null</code> otherwise
+     */
+    @Nullable
+    public static InputStream getResponseStream(@Nullable final HttpResponse response) {
+        if (!isSuccess(response)) {
+            return null;
+        }
+        assert(response != null);
+        final HttpEntity entity = response.getEntity();
+        if (entity == null) {
+            return null;
+        }
+        try {
+            return entity.getContent();
+        } catch (final IOException e) {
+            Log.e("Network.getResponseStream", e);
+            return null;
+        }
     }
 
     @Nullable

@@ -92,20 +92,20 @@ public class RecaptchaHandler extends Handler {
                 Observable.defer(new Func0<Observable<? extends Bitmap>>() {
                     @Override
                     public Observable<? extends Bitmap> call() {
-                        InputStream is = null;
-                        try {
-                            final String url = "http://www.google.com/recaptcha/api/image?c=" + recaptchaReceiver.getChallenge();
-                            Log.d("Getting reCAPTCHA image from " + url);
-                            is = Network.getRequest(url).getEntity().getContent();
-                            final Bitmap img = BitmapFactory.decodeStream(is);
-                            IOUtils.closeQuietly(is);
-                            return Observable.from(img);
-                        } catch (final Exception e) {
-                            Log.e("RecaptchaHandler.getCaptcha", e);
-                            return Observable.error(e);
-                        } finally {
-                            IOUtils.closeQuietly(is);
+                        final String url = "http://www.google.com/recaptcha/api/image?c=" + recaptchaReceiver.getChallenge();
+                        final InputStream is = Network.getResponseStream(Network.getRequest(url));
+                        if (is != null) {
+                            try {
+                                final Bitmap img = BitmapFactory.decodeStream(is);
+                                return Observable.from(img);
+                            } catch (final Exception e) {
+                                Log.e("RecaptchaHandler.getCaptcha", e);
+                                return Observable.error(e);
+                            } finally {
+                                IOUtils.closeQuietly(is);
+                            }
                         }
+                        return Observable.empty();
                     }
                 }).subscribeOn(Schedulers.threadPoolForIO()));
     }
