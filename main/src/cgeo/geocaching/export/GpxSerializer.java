@@ -90,9 +90,14 @@ public final class GpxSerializer {
     private void exportBatch(final XmlSerializer gpx, Collection<String> geocodesOfBatch) throws IOException {
         final Set<Geocache> caches = DataStore.loadCaches(geocodesOfBatch, LoadFlags.LOAD_ALL_DB_ONLY);
         for (final Geocache cache : caches) {
+            final Geopoint coords = cache != null ? cache.getCoords() : null;
+            if (coords == null) {
+                // Export would be invalid without coordinates.
+                continue;
+            }
             gpx.startTag(PREFIX_GPX, "wpt");
-            gpx.attribute("", "lat", Double.toString(cache.getCoords().getLatitude()));
-            gpx.attribute("", "lon", Double.toString(cache.getCoords().getLongitude()));
+            gpx.attribute("", "lat", Double.toString(coords.getLatitude()));
+            gpx.attribute("", "lon", Double.toString(coords.getLongitude()));
 
             final Date hiddenDate = cache.getHiddenDate();
             if (hiddenDate != null) {
