@@ -110,7 +110,9 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-
+            if (position >= pageOrder.size()) {
+                return;
+            }
             final Page page = pageOrder.get(position);
 
             // Store the state of the view if the page supports it
