@@ -67,7 +67,7 @@ public abstract class GCParser {
     private final static SynchronizedDateFormat dateTbIn1 = new SynchronizedDateFormat("EEEEE, dd MMMMM yyyy", Locale.ENGLISH); // Saturday, 28 March 2009
     private final static SynchronizedDateFormat dateTbIn2 = new SynchronizedDateFormat("EEEEE, MMMMM dd, yyyy", Locale.ENGLISH); // Saturday, March 28, 2009
 
-    private static SearchResult parseSearch(final String url, final String pageContent, final boolean showCaptcha, RecaptchaReceiver thread) {
+    private static SearchResult parseSearch(final String url, final String pageContent, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
         if (StringUtils.isBlank(pageContent)) {
             Log.e("GCParser.parseSearch: No page given");
             return null;
@@ -85,12 +85,12 @@ public abstract class GCParser {
             final String recaptchaJsParam = TextUtils.getMatch(page, GCConstants.PATTERN_SEARCH_RECAPTCHA, false, null);
 
             if (recaptchaJsParam != null) {
-                thread.setKey(recaptchaJsParam.trim());
+                recaptchaReceiver.setKey(recaptchaJsParam.trim());
 
-                thread.fetchChallenge();
+                recaptchaReceiver.fetchChallenge();
             }
-            if (thread != null && StringUtils.isNotBlank(thread.getChallenge())) {
-                thread.notifyNeed();
+            if (recaptchaReceiver != null && StringUtils.isNotBlank(recaptchaReceiver.getChallenge())) {
+                recaptchaReceiver.notifyNeed();
             }
         }
 
@@ -276,12 +276,12 @@ public abstract class GCParser {
         }
 
         String recaptchaText = null;
-        if (thread != null && StringUtils.isNotBlank(thread.getChallenge())) {
-            thread.waitForUser();
-            recaptchaText = thread.getText();
+        if (recaptchaReceiver != null && StringUtils.isNotBlank(recaptchaReceiver.getChallenge())) {
+            recaptchaReceiver.waitForUser();
+            recaptchaText = recaptchaReceiver.getText();
         }
 
-        if (!cids.isEmpty() && (Settings.isGCPremiumMember() || showCaptcha) && ((thread == null || StringUtils.isBlank(thread.getChallenge())) || StringUtils.isNotBlank(recaptchaText))) {
+        if (!cids.isEmpty() && (Settings.isGCPremiumMember() || showCaptcha) && ((recaptchaReceiver == null || StringUtils.isBlank(recaptchaReceiver.getChallenge())) || StringUtils.isNotBlank(recaptchaText))) {
             Log.i("Trying to get .loc for " + cids.size() + " caches");
 
             try {
@@ -302,8 +302,8 @@ public abstract class GCParser {
                     params.put("CID", cid);
                 }
 
-                if (thread != null && StringUtils.isNotBlank(thread.getChallenge()) && StringUtils.isNotBlank(recaptchaText)) {
-                    params.put("recaptcha_challenge_field", thread.getChallenge());
+                if (StringUtils.isNotBlank(recaptchaText)) {
+                    params.put("recaptcha_challenge_field", recaptchaReceiver.getChallenge());
                     params.put("recaptcha_response_field", recaptchaText);
                 }
                 params.put("ctl00$ContentBody$uxDownloadLoc", "Download Waypoints");

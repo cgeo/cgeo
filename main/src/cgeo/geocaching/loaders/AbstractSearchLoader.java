@@ -14,6 +14,8 @@ import android.content.Context;
 import android.os.Handler;
 import android.support.v4.content.AsyncTaskLoader;
 
+import java.util.concurrent.CountDownLatch;
+
 public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult> implements RecaptchaReceiver {
 
     public enum CacheListLoaderType {
@@ -41,6 +43,7 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
     private String recaptchaText = null;
     private SearchResult search;
     private boolean loading;
+    private CountDownLatch latch = new CountDownLatch(1);
 
     public AbstractSearchLoader(Context context) {
         super(context);
@@ -77,8 +80,8 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
         forceLoad();
     }
 
-    public void setRecaptchaHandler(Handler recaptchaHandlerIn) {
-        recaptchaHandler = recaptchaHandlerIn;
+    public void setRecaptchaHandler(final Handler recaptchaHandler) {
+        this.recaptchaHandler = recaptchaHandler;
     }
 
     @Override
@@ -89,11 +92,9 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
     }
 
     @Override
-    public synchronized void waitForUser() {
+    public void waitForUser() {
         try {
-            while (getText() == null) {
-                wait();
-            }
+            latch.await();
         } catch (InterruptedException e) {
             Log.w("searchThread is not waiting for user…");
         }
@@ -105,16 +106,11 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
     }
 
     @Override
-    public String getKey() {
-        return recaptchaKey;
-    }
-
-    @Override
     public void fetchChallenge() {
         recaptchaChallenge = null;
 
         if (StringUtils.isNotEmpty(recaptchaKey)) {
-            final Parameters params = new Parameters("k", getKey());
+            final Parameters params = new Parameters("k", recaptchaKey);
             final String recaptchaJs = Network.getResponseData(Network.getRequest("http://www.google.com/recaptcha/api/challenge", params));
 
             if (StringUtils.isNotBlank(recaptchaJs)) {
@@ -129,17 +125,15 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
     }
 
     @Override
-    public synchronized void setText(String text) {
+    public void setText(String text) {
         recaptchaText = text;
-
-        notify();
+        latch.countDown();
     }
 
     @Override
     public synchronized String getText() {
         return recaptchaText;
     }
-
 
     @Override
     public void reset() {

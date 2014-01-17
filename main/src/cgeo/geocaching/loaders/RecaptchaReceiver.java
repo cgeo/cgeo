@@ -10,8 +10,6 @@ public interface RecaptchaReceiver {
 
     public void fetchChallenge();
 
-    public String getKey();
-
     public void setKey(String key);
 
     public void notifyNeed();
