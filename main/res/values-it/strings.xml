@@ -121,7 +121,6 @@
   <string name="translate_to_english">Traduci in inglese</string>
   <string name="translate_length_warning">La traduzione può fallire quando c\'è molto testo.</string>
   <string name="err_none">OK</string>
-  <string name="err_start">Comunicazione non avviata</string>
   <string name="err_parse">Errore analizzando la pagina di login</string>
   <string name="err_server">Connessione fallita con Geocaching.com (server o connessione non disponibile?)</string>
   <string name="err_server_ec">Impossibile contattare Extremcaching.com. Il sito Web potrebbe essere non attivoo la tua connessione internet non funziona.</string>
@@ -178,7 +177,6 @@
   <string name="err_log_load_data">c:geo non riesce a caricare i dati necessari per salvare il log della tua visita.</string>
   <string name="err_log_load_data_again">c:geo non riesce a caricare i dati necessari per salvare il log della tua visita. Nuovo tentativo in corso.</string>
   <string name="err_log_load_data_still">c:geo sta ancora caricando i dati necessari per salvare il log. Per cortesia attendere ancora un pochino.</string>
-  <string name="err_log_failed_server">c:geo non è riuscito ad inviare il log perché il server non risponde.</string>
   <string name="err_log_post_failed">Sembra che il log non sia stato inviato. Prego verificare su Geocaching.com.</string>
   <string name="err_log_post_failed_ec">Sembra che il tuo log non sia stato pubblicato. Controlla su Extremcaching.com.</string>
   <string name="err_logimage_post_failed">Sembra che l\'immagine del tuo log non sia stata caricata. Si prega di controllare su Geocaching.com.</string>
@@ -493,7 +491,6 @@
   <string name="feature_log_images">Immagini allegate ai Log</string>
   <string name="feature_watch_list">Watchlist</string>
   <string name="feature_own_coordinates">Memorizzazione delle coordinate modificate</string>
-  <string name="feature_search_user">Ricerca per proprietario/finder</string>
   <string name="feature_search_keyword">Ricerca per parola chiave</string>
   <string name="feature_search_live_map">Mappa Live</string>
   <string name="feature_search_center">Cerca per posizione</string>
@@ -650,7 +647,6 @@
   <string name="cache_coordinates">Coordinate</string>
   <string name="cache_coordinates_original">Coordinate originali</string>
   <string name="cache_spoiler_images_title">Immagini spoiler</string>
-  <string name="cache_images_title">Immagini</string>
   <string name="cache_log_types">Tipi di Log</string>
   <string name="cache_coordinates_no">Questo cache non ha coordinate.</string>
   <string name="cache_clear_history">Cancella cronologia</string>
@@ -758,7 +754,6 @@
   <string name="map_strategy_auto">In base alla tua velocità di movimento</string>
   <string name="map_strategy_detailed">Dettagliata</string>
   <string name="live_map_notification">Nella nuova Mappa Live le coordinate potrebbero non essere sempre precise. Coordinate possibilmente imprecise sono marcate da un cerchio arancione.\nAprendo i dettagli del cache o salvando il cache per uso offline farà calcolare sempre coordinate precise.\n\nInformazioni addizionali su tutte le modifiche si possono trovare nel menu \"Info su c:geo\" sulla pagina principale di questa app.</string>
-  <string name="live_map_note_dontshow">Non mostrare ancora</string>
   <string name="search_bar_hint">Cerca cache</string>
   <string name="search_bar_desc">Cache (geo code, parole chiave), oggetti Trackables (TB-code)</string>
   <string name="search_coordinates">Coordinate</string>
