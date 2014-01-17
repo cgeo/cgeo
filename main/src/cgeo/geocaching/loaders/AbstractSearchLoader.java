@@ -131,7 +131,7 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
     }
 
     @Override
-    public synchronized String getText() {
+    public String getText() {
         return recaptchaText;
     }
 
