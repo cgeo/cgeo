@@ -125,6 +125,6 @@ public final class ActivityMixin {
 
         editText.getText().replace(start, end, completeText);
         int newCursor = moveCursor ? start + completeText.length() : start;
-        editText.setSelection(newCursor, newCursor);
+        editText.setSelection(newCursor);
     }
 }

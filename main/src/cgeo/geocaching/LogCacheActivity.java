@@ -13,6 +13,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.dialog.DateDialog;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.DateUtils;
 import cgeo.geocaching.utils.Log;
@@ -301,6 +302,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         final EditText logView = (EditText) findViewById(R.id.log);
         if (StringUtils.isBlank(currentLogText()) && StringUtils.isNotBlank(text)) {
             logView.setText(text);
+            Dialogs.moveCursorToEnd(logView);
         }
 
         tweetCheck.setChecked(true);

@@ -1,6 +1,7 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -40,6 +41,7 @@ public class EditNoteDialog extends DialogFragment {
         String initialNote = getArguments().getString(ARGUMENT_INITIAL_NOTE);
         if (initialNote != null) {
             mEditText.setText(initialNote);
+            Dialogs.moveCursorToEnd(mEditText);
             getArguments().remove(ARGUMENT_INITIAL_NOTE);
         }
 

@@ -13,6 +13,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.dialog.DateDialog;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 
@@ -127,6 +128,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
             if (StringUtils.isNotBlank(extras.getString(Intents.EXTRA_TRACKING_CODE))) {
                 trackingEditText.setText(extras.getString(Intents.EXTRA_TRACKING_CODE));
+                Dialogs.moveCursorToEnd(trackingEditText);
             }
         }
 

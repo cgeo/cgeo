@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
+
 import rx.util.functions.Action1;
 
 import android.app.Activity;
@@ -298,7 +299,7 @@ public final class Dialogs {
 
     /**
      * Show a message dialog for input from the user. The okay button is only enabled on non empty input.
-     * 
+     *
      * @param context
      *            activity owning the dialog
      * @param title
@@ -357,8 +358,16 @@ public final class Dialogs {
         dialog.show();
         enableDialogButtonIfNotEmpty(dialog, defaultValue);
 
-        // position cursor after text
-        input.setSelection(input.getText().length());
+        moveCursorToEnd(input);
+    }
+
+    /**
+     * Move the cursor to the end of the input field.
+     *
+     * @param input
+     */
+    public static void moveCursorToEnd(final EditText input) {
+        input.setSelection(input.getText().length(), input.getText().length());
     }
 
     private static void enableDialogButtonIfNotEmpty(final AlertDialog dialog, final String input) {

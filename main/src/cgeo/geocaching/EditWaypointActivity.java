@@ -21,6 +21,7 @@ import com.googlecode.androidannotations.annotations.EActivity;
 import com.googlecode.androidannotations.annotations.Extra;
 import com.googlecode.androidannotations.annotations.InstanceState;
 import com.googlecode.androidannotations.annotations.ViewById;
+
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.ProgressDialog;
@@ -109,12 +110,14 @@ public class EditWaypointActivity extends AbstractActivity {
                             buttonLon.setText(waypoint.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE));
                         }
                         waypointName.setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.getName())).toString());
+                        Dialogs.moveCursorToEnd(waypointName);
                         if (TextUtils.containsHtml(waypoint.getNote())) {
                             note.setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.getNote())).toString());
                         }
                         else {
                             note.setText(StringUtils.trimToEmpty(waypoint.getNote()));
                         }
+                        Dialogs.moveCursorToEnd(note);
                     }
                     final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_ONLY);
                     setCoordsModificationVisibility(ConnectorFactory.getConnector(geocode), cache);

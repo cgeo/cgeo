@@ -2,6 +2,7 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 
@@ -49,6 +50,7 @@ public class TemplateTextPreference extends DialogPreference {
 
         editText = (EditText) view.findViewById(R.id.signature_dialog_text);
         editText.setText(getPersistedString(initialValue != null ? initialValue : StringUtils.EMPTY));
+        Dialogs.moveCursorToEnd(editText);
 
         Button button = (Button) view.findViewById(R.id.signature_templates);
         button.setOnClickListener(new View.OnClickListener() {

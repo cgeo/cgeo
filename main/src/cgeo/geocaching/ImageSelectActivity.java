@@ -5,6 +5,7 @@ import butterknife.InjectView;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -103,10 +104,12 @@ public class ImageSelectActivity extends AbstractActivity {
 
         if (StringUtils.isNotBlank(imageCaption)) {
             captionView.setText(imageCaption);
+            Dialogs.moveCursorToEnd(captionView);
         }
 
         if (StringUtils.isNotBlank(imageDescription)) {
             descriptionView.setText(imageDescription);
+            Dialogs.moveCursorToEnd(captionView);
         }
 
         scaleView.setSelection(scaleChoiceIndex);
