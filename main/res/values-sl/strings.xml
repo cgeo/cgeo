@@ -701,7 +701,6 @@
   <string name="map_strategy_auto">Odvisna od moje hitrosti</string>
   <string name="map_strategy_detailed">Podrobna</string>
   <string name="live_map_notification">Na zemljevidu s podatki v živo koordinate niso nujno točne. Nenatančne koordinate so označene z oranžnim krogom.\nČe odprete podrobnosti zaklada se bodo vedno naložile natančne koordinate\n\nVeč informacij o teh spremembah lahko dobite na strani \"O c:geo\" v aplikaciji.</string>
-  <string name="live_map_note_dontshow">Ne pokaži tega ponovno</string>
   <string name="search_bar_hint">Iskanje zakladov</string>
   <string name="search_bar_desc">Zakladi (geo koda, ključne besede), Sledljivčki (TB koda)</string>
   <string name="search_coordinates">Koordinate</string>

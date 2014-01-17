@@ -588,7 +588,6 @@
   <string name="map_strategy_auto">Podľa rýchlosti</string>
   <string name="map_strategy_detailed">Podrobná</string>
   <string name="live_map_notification">Na novej aktívnej mape nemusia byť súradnice vždy presné. Súradnice, ktoré môžu byť nepresné, sú označené oranžovým krúžkom.\nPo otvorení detailu skrýše, alebo po jej uložení pre použitie offline, sú získané vždy presné súradnice.\n\nViac informácií ku všetkým zmenám sa nachádzajú na stránke „O c:geo“ v aplikácii.</string>
-  <string name="live_map_note_dontshow">Nabudúce nezobrazovať</string>
   <string name="search_bar_hint">Hľadanie skrýš</string>
   <string name="search_bar_desc">Skrýše (GC kód, kľúčové slovo), trasovateľné predmety (TB-kód)</string>
   <string name="search_coordinates">Súradnice</string>

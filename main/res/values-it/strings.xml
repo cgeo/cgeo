@@ -711,7 +711,6 @@
   <string name="map_strategy_auto">In base alla tua velocità di movimento</string>
   <string name="map_strategy_detailed">Dettagliata</string>
   <string name="live_map_notification">Nella nuova Mappa Live le coordinate potrebbero non essere sempre precise. Coordinate possibilmente imprecise sono marcate da un cerchio arancione.\nAprendo i dettagli del cache o salvando il cache per uso offline farà calcolare sempre coordinate precise.\n\nInformazioni addizionali su tutte le modifiche si possono trovare nel menu \"Info su c:geo\" sulla pagina principale di questa app.</string>
-  <string name="live_map_note_dontshow">Non mostrare ancora</string>
   <string name="search_bar_hint">Cerca cache</string>
   <string name="search_bar_desc">Cache (geo code, parole chiave), oggetti Trackables (TB-code)</string>
   <string name="search_coordinates">Coordinate</string>

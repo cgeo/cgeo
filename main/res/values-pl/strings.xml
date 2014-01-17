@@ -702,7 +702,6 @@
   <string name="map_strategy_auto">Zależna od prędkości</string>
   <string name="map_strategy_detailed">Szczegółowa</string>
   <string name="live_map_notification">Na nowej mapie live, współrzędnie nie zawsze muszą być dokładne. Prawdopodobne niedokładne współrzędne są zaznaczane za pomocą pomarańczowych okręgów.\nOtworzenie współrzędnych skrzynki lub zapisanie skrzynki do użytku offline zawsze używa precyzyjnych współrzędnych.\n\nWięcej informacji na temat wszystkich zmian można odnaleźć na stronie \"O c:geo\" wewnątrz programu.</string>
-  <string name="live_map_note_dontshow">Nie pokazuj ponownie</string>
   <string name="search_bar_hint">Szukaj skrzynek</string>
   <string name="search_bar_desc">Skrzynki (GC-kod, słowo kluczowe), przedmioty podróżne (TB-kod)</string>
   <string name="search_coordinates">Współrzędne</string>

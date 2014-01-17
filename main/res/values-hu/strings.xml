@@ -587,7 +587,6 @@
   <string name="map_strategy_auto">Sebességfüggő</string>
   <string name="map_strategy_detailed">Részletes</string>
   <string name="live_map_notification">A koordináták az élő térképen nem mindig pontosak. A vélhetően pontatlan koordinátákat narancssárga kör jelöli.\nA geoláda részleteinek megnyitása vagy a geoláda mentése mindig pontos koordinátákkal történik.\n\nTovábbi információ az összes változásról a \"A c:georól\" oldalon található az appon belül.</string>
-  <string name="live_map_note_dontshow">Ne mutasd újra</string>
   <string name="search_bar_hint">Ládák keresése</string>
   <string name="search_bar_desc">Ládák (GC-kód, kulcsszó), Nyomonkövethető tárgyak (TB-kód)</string>
   <string name="search_coordinates">Koordináták</string>

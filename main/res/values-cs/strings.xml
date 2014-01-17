@@ -702,7 +702,6 @@
   <string name="map_strategy_auto">Závislá na rychlosti</string>
   <string name="map_strategy_detailed">Detailní</string>
   <string name="live_map_notification">Na nové Aktivní mapě nemusí být souřadnice vždy přesné. Případné nepřesné souřadnice jsou na mapě označeny oranžovým kruhem.\nPři otevření detailů keše nebo jejím uložení pro Offline použití jsou již souřadnice přesné.\n\nVíce informací o všech změnách lze najít na stránce \"O programu\" v aplikaci.</string>
-  <string name="live_map_note_dontshow">Příště nezobrazovat</string>
   <string name="search_bar_hint">Hledaní kešek</string>
   <string name="search_bar_desc">Keše (GC-kód, klíčové slovo), Sledovatelné předměty (TB-kód)</string>
   <string name="search_coordinates">Souřadnice</string>

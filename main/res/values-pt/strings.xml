@@ -709,7 +709,6 @@
   <string name="map_strategy_auto">Dependente da velocidade</string>
   <string name="map_strategy_detailed">Detalhado</string>
   <string name="live_map_notification">No novo mapa ao vivo as coordenadas podem nem sempre ser precisas. As coordenadas possivelmente imprecisas são marcadas com um círculo cor de laranja.\nAbrindo os detalhes da cache or gravando a cache para utilização offline fará com que obtenha as coordenadas precisas.\n\nMais informações em todas as alterações podem ser encontradas na página \"Sobre c:geo\" na aplicação.</string>
-  <string name="live_map_note_dontshow">Não mostrar novamente</string>
   <string name="search_bar_hint">Procurar caches</string>
   <string name="search_bar_desc">Caches (código-GC, palavra-chave), Trackables (código-TB)</string>
   <string name="search_coordinates">Coordenadas</string>

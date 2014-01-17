@@ -702,7 +702,6 @@
   <string name="map_strategy_auto">Afhankelijk van snelheid</string>
   <string name="map_strategy_detailed">Gedetailleerd</string>
   <string name="live_map_notification">Op de nieuwe live-kaart zullen coördinaten niet altijd exact zijn. Mogelijke onnauwkeurige coördinaten zijn aangegeven met een oranje cirkel.\nHet openen of opslaan van de cache zorgt ervoor dat de exacte coördinaten gebruikt worden.\n\nMeer informatie over de wijzigingen kan gevonden worden op de \"Over c:geo\" pagina in de app.</string>
-  <string name="live_map_note_dontshow">Laat niet nogmaals zien</string>
   <string name="search_bar_hint">Zoek naar caches</string>
   <string name="search_bar_desc">Caches (geo code, trefwoord), Trackables (TB-code)</string>
   <string name="search_coordinates">Coördinaten</string>
