@@ -405,7 +405,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         prepareFilterBar();
 
-        currentLoader = (AbstractSearchLoader) getSupportLoaderManager().initLoader(type.ordinal(), extras, this);
+        currentLoader = (AbstractSearchLoader) getSupportLoaderManager().initLoader(type.getLoaderId(), extras, this);
 
         // init
         if (CollectionUtils.isNotEmpty(cacheList)) {
@@ -1064,7 +1064,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
         final Bundle b = new Bundle();
         b.putStringArray(Intents.EXTRA_CACHELIST, geocodes);
-        getSupportLoaderManager().initLoader(CacheListLoaderType.REMOVE_FROM_HISTORY.ordinal(), b, this);
+        getSupportLoaderManager().initLoader(CacheListLoaderType.REMOVE_FROM_HISTORY.getLoaderId(), b, this);
     }
 
     public void importWeb() {
@@ -1283,7 +1283,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             showFooterLoadingCaches();
             listFooter.setOnClickListener(null);
 
-            getSupportLoaderManager().restartLoader(CacheListLoaderType.NEXT_PAGE.ordinal(), null, CacheListActivity.this);
+            getSupportLoaderManager().restartLoader(CacheListLoaderType.NEXT_PAGE.getLoaderId(), null, CacheListActivity.this);
         }
     }
 
@@ -1339,7 +1339,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         showFooterLoadingCaches();
         DataStore.moveToList(adapter.getCheckedCaches(), listId);
 
-        currentLoader = (OfflineGeocacheListLoader) getSupportLoaderManager().initLoader(CacheListType.OFFLINE.ordinal(), new Bundle(), this);
+        currentLoader = (OfflineGeocacheListLoader) getSupportLoaderManager().initLoader(CacheListType.OFFLINE.getLoaderId(), new Bundle(), this);
         currentLoader.reset();
         ((OfflineGeocacheListLoader) currentLoader).setListId(listId);
         ((OfflineGeocacheListLoader) currentLoader).setSearchCenter(coords);
@@ -1444,12 +1444,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return true;
     }
 
-    public static void startActivityUserName(final Activity context, final String userName) {
+    public static void startActivityFinder(final Activity context, final String userName) {
         if (!isValidUsername(context, userName)) {
             return;
         }
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
-        cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.USERNAME);
+        cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.FINDER);
         cachesIntent.putExtra(Intents.EXTRA_USERNAME, userName);
         context.startActivity(cachesIntent);
     }

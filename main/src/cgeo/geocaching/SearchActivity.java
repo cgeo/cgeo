@@ -347,7 +347,7 @@ public class SearchActivity extends AbstractActivity {
             return;
         }
 
-        CacheListActivity.startActivityUserName(this, usernameText);
+        CacheListActivity.startActivityFinder(this, usernameText);
     }
 
     private void findByOwnerFn() {

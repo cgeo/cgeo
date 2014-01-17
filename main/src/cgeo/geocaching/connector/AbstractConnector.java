@@ -269,7 +269,7 @@ public abstract class AbstractConnector implements IConnector {
 
                 @Override
                 public void call(Context context) {
-                    CacheListActivity.startActivityUserName(context.activity, context.userName);
+                    CacheListActivity.startActivityFinder(context.activity, context.userName);
                 }
             }));
         }

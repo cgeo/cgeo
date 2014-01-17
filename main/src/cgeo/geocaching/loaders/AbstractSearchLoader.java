@@ -28,6 +28,10 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
         MAP,
         REMOVE_FROM_HISTORY,
         NEXT_PAGE;
+
+        public int getLoaderId() {
+            return ordinal();
+        }
     }
 
     private Handler recaptchaHandler = null;
