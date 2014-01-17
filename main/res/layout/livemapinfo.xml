@@ -19,13 +19,6 @@
             android:textColor="?text_color"
             android:textSize="14sp" />
 
-        <CheckBox
-            android:id="@+id/live_map_hint_hide"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="@string/live_map_note_dontshow"
-            android:visibility="gone" />
     </LinearLayout>
 
 </ScrollView>

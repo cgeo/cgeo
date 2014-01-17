@@ -9,7 +9,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.ContextThemeWrapper;
 import android.view.View;
-import android.widget.CheckBox;
 
 public class LiveMapInfoDialogBuilder {
 
@@ -20,12 +19,7 @@ public class LiveMapInfoDialogBuilder {
         final View layout = View.inflate(new ContextThemeWrapper(activity, R.style.dark), R.layout.livemapinfo, null);
         builder.setView(layout);
 
-        final CheckBox checkBoxHide = (CheckBox) layout.findViewById(R.id.live_map_hint_hide);
-
         final int showCount = Settings.getLiveMapHintShowCount();
-        if (showCount > 2) {
-            checkBoxHide.setVisibility(View.VISIBLE);
-        }
         Settings.setLiveMapHintShowCount(showCount + 1);
 
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -33,10 +27,7 @@ public class LiveMapInfoDialogBuilder {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                CgeoApplication.getInstance().setLiveMapHintShown();
-                if (checkBoxHide.getVisibility() == View.VISIBLE && checkBoxHide.isChecked()) {
-                    Settings.setHideLiveHint(true);
-                }
+                CgeoApplication.getInstance().setLiveMapHintShownInThisSession();
             }
         });
         return builder.create();

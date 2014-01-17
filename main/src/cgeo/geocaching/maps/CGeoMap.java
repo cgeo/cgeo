@@ -42,6 +42,7 @@ import cgeo.geocaching.utils.Log;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import rx.util.functions.Action1;
 
 import android.app.Activity;
@@ -466,7 +467,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         prepareFilterBar();
 
-        if (!app.isLiveMapHintShown() && !Settings.getHideLiveMapHint()) {
+        if (!app.isLiveMapHintShownInThisSession() && !Settings.getHideLiveMapHint() && Settings.getLiveMapHintShowCount() <= 3) {
             LiveMapInfoDialogBuilder.create(activity).show();
         }
     }
