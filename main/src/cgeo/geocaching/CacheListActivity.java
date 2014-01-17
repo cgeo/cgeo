@@ -8,7 +8,7 @@ import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cachelist.CacheListAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
-import cgeo.geocaching.connector.gc.SearchHandler;
+import cgeo.geocaching.connector.gc.RecaptchaHandler;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -1643,7 +1643,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         showFooterLoadingCaches();
 
         if (loader != null) {
-            loader.setRecaptchaHandler(new SearchHandler(this, res, loader));
+            loader.setRecaptchaHandler(new RecaptchaHandler(this, loader));
         }
         return loader;
     }

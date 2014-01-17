@@ -2,6 +2,7 @@ package cgeo.geocaching.loaders;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.gc.GCConstants;
+import cgeo.geocaching.connector.gc.RecaptchaHandler;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.Log;
@@ -83,7 +84,7 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
     @Override
     public void notifyNeed() {
         if (recaptchaHandler != null) {
-            recaptchaHandler.sendEmptyMessage(1);
+            recaptchaHandler.sendEmptyMessage(RecaptchaHandler.SHOW_CAPTCHA);
         }
     }
 
