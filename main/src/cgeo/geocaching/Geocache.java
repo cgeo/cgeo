@@ -1816,4 +1816,8 @@ public class Geocache implements ICache, IWaypoint {
         return 0;
     }
 
+    public boolean applyDistanceRule() {
+        return (getType().applyDistanceRule() || hasUserModifiedCoords()) && getConnector() == GCConnector.getInstance();
+    }
+
 }

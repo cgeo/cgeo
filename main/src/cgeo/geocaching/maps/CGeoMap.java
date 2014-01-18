@@ -1610,7 +1610,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     }
 
     private CachesOverlayItemImpl getCacheItem(final Geocache cache) {
-        final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(cache, cache.getType().applyDistanceRule());
+        final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(cache, cache.applyDistanceRule());
 
         final int hashcode = new HashCodeBuilder()
                 .append(cache.isReliableLatLon())
