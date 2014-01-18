@@ -3167,16 +3167,10 @@ public class DataStore {
     }
 
     public static String[] getSuggestions(final String table, final String column, final String input) {
-        Cursor cursor = database.query(
-                true,
-                table,
-                new String[] { column },
-                column + " LIKE ?",
-                new String[] { getSuggestionArgument(input) },
-                null,
-                null,
-                column,
-                null);
+        Cursor cursor = database.rawQuery("SELECT DISTINCT " + column
+                + " FROM " + table
+                + " WHERE " + column + " LIKE ?"
+                + " ORDER BY " + column + " COLLATE NOCASE ASC;", new String[] { getSuggestionArgument(input) });
         return getFirstColumn(cursor);
     }
 
