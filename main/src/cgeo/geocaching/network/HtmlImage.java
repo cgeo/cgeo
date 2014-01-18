@@ -13,9 +13,11 @@ import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.androidextra.Base64;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
+
 import rx.Observable;
 import rx.Observable.OnSubscribeFunc;
 import rx.Observer;
@@ -110,19 +112,18 @@ public class HtmlImage implements Html.ImageGetter {
     public BitmapDrawable getDrawable(final String url) {
         if (!onlySave) {
             return loadDrawable(url);
-        } else {
-            synchronized(downloading) {
-                if (!downloading.contains(url)) {
-                    loading.onNext(fetchDrawable(url).map(new Func1<BitmapDrawable, String>() {
-                        @Override
-                        public String call(final BitmapDrawable bitmapDrawable) {
-                            return url;
-                        }
-                    }));
-                    downloading.add(url);
-                }
-                return null;
+        }
+        synchronized (downloading) {
+            if (!downloading.contains(url)) {
+                loading.onNext(fetchDrawable(url).map(new Func1<BitmapDrawable, String>() {
+                    @Override
+                    public String call(final BitmapDrawable bitmapDrawable) {
+                        return url;
+                    }
+                }));
+                downloading.add(url);
             }
+            return null;
         }
     }
 

@@ -302,7 +302,7 @@ public abstract class GCParser {
                     params.put("CID", cid);
                 }
 
-                if (StringUtils.isNotBlank(recaptchaText)) {
+                if (StringUtils.isNotBlank(recaptchaText) && recaptchaReceiver != null) {
                     params.put("recaptcha_challenge_field", recaptchaReceiver.getChallenge());
                     params.put("recaptcha_response_field", recaptchaText);
                 }

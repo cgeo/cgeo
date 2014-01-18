@@ -90,7 +90,10 @@ public final class GpxSerializer {
     private void exportBatch(final XmlSerializer gpx, Collection<String> geocodesOfBatch) throws IOException {
         final Set<Geocache> caches = DataStore.loadCaches(geocodesOfBatch, LoadFlags.LOAD_ALL_DB_ONLY);
         for (final Geocache cache : caches) {
-            final Geopoint coords = cache != null ? cache.getCoords() : null;
+            if (cache == null) {
+                continue;
+            }
+            final Geopoint coords = cache.getCoords();
             if (coords == null) {
                 // Export would be invalid without coordinates.
                 continue;
