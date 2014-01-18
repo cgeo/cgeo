@@ -117,6 +117,9 @@ public class LoggingUI extends AbstractUIFactory {
     }
 
     public static void onPrepareOptionsMenu(Menu menu, Geocache cache) {
+        if (cache == null) {
+            return;
+        }
         final MenuItem itemLog = menu.findItem(R.id.menu_log_visit);
         itemLog.setVisible(cache.supportsLogging() && !Settings.getLogOffline());
         itemLog.setEnabled(Settings.isLogin());

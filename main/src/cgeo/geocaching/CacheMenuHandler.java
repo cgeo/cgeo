@@ -56,6 +56,10 @@ public class CacheMenuHandler extends AbstractUIFactory {
     }
 
     public static void onPrepareOptionsMenu(final Menu menu, final Geocache cache) {
+        //
+        if (cache == null) {
+            return;
+        }
         final boolean hasCoords = cache.getCoords() != null;
         menu.findItem(R.id.menu_default_navigation).setVisible(hasCoords);
         menu.findItem(R.id.menu_navigate).setVisible(hasCoords);
