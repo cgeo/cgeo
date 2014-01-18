@@ -1,20 +1,22 @@
+# generated code
 bin/
 gen/
+annotation_gen/
+
+# vm crash logs
+hs_err_pid*.log
+
+# developer specific settings and credentials
+local.properties
+private.properties
+/crowdin/credentials
+/main/res/values/mapsapikey.xml
+
+# eclipse plugin settings which cannot be shared
+org.moreunit.prefs
+
 /main/project/localization/*.missing
 /main/project/attributes/drawable-mdpi/
 /main/project/attributes/iconlist1res.html
 /main/project/settings/drawable-mdpi/
-/main/local.properties
-/main/private.properties
-/main/res/values/mapsapikey.xml
-/tests/local.properties
-/tests/private.properties
-/tests/hs_err_pid*.log
-/cgeo-calendar/local.properties
-/cgeo-calendar/private.properties
-/cgeo-contacts/local.properties
-/cgeo-contacts/private.properties
-/crowdin/credentials
 .directory
-org.moreunit.prefs
-annotation_gen/
