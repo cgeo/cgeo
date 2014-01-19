@@ -27,8 +27,9 @@ import cgeo.geocaching.geopoint.Viewport;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import rx.Observable;
-import rx.concurrency.Schedulers;
+import rx.schedulers.Schedulers;
 import rx.util.functions.Func1;
 import rx.util.functions.Func2;
 
@@ -196,7 +197,7 @@ public final class ConnectorFactory {
                     }
                 });
             }
-        }, Schedulers.threadPoolForIO()).reduce(new SearchResult(), new Func2<SearchResult, SearchResult, SearchResult>() {
+        }, Schedulers.io()).reduce(new SearchResult(), new Func2<SearchResult, SearchResult, SearchResult>() {
 
             @Override
             public SearchResult call(final SearchResult result, final SearchResult searchResult) {
@@ -222,7 +223,7 @@ public final class ConnectorFactory {
 
     /**
      * Get the geocode of a trackable from a URL.
-     * 
+     *
      * @param url
      * @return {@code null} if the URL cannot be decoded
      */

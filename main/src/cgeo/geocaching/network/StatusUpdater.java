@@ -5,8 +5,9 @@ import cgeo.geocaching.utils.Version;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import rx.Observable;
-import rx.concurrency.Schedulers;
+import rx.schedulers.Schedulers;
 import rx.subjects.BehaviorSubject;
 import rx.util.functions.Func1;
 
@@ -60,7 +61,7 @@ public class StatusUpdater {
                                             "locale", Locale.getDefault().toString()));
                     return response != null ? Observable.from(Status.defaultStatus((new Status(response)))) : Observable.<Status>empty();
                 }
-            }).subscribeOn(Schedulers.threadPoolForIO());
+            }).subscribeOn(Schedulers.io());
 
     final static public BehaviorSubject<Status> latestStatus = BehaviorSubject.create(Status.defaultStatus(null));
 

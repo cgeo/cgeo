@@ -6,9 +6,10 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.io.IOUtils;
+
 import rx.Observable;
 import rx.android.observables.AndroidObservable;
-import rx.concurrency.Schedulers;
+import rx.schedulers.Schedulers;
 import rx.util.functions.Action1;
 import rx.util.functions.Func0;
 
@@ -107,7 +108,7 @@ public class RecaptchaHandler extends Handler {
                         }
                         return Observable.empty();
                     }
-                }).subscribeOn(Schedulers.threadPoolForIO()));
+                }).subscribeOn(Schedulers.io()));
     }
 
 }

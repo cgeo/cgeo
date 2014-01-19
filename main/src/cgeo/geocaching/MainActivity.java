@@ -32,7 +32,7 @@ import rx.Observable.OnSubscribeFunc;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.observables.AndroidObservable;
-import rx.concurrency.Schedulers;
+import rx.schedulers.Schedulers;
 import rx.subscriptions.Subscriptions;
 import rx.util.functions.Action1;
 
@@ -557,7 +557,7 @@ public class MainActivity extends AbstractActivity {
                             }
                             return Subscriptions.empty();
                         }
-                    }).subscribeOn(Schedulers.threadPoolForIO());
+                    }).subscribeOn(Schedulers.io());
                     AndroidObservable.fromActivity(MainActivity.this, address)
                             .onErrorResumeNext(Observable.from(geo.getCoords().toString()))
                             .subscribe(new Action1<String>() {

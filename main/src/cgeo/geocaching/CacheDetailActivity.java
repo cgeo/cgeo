@@ -57,12 +57,13 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+
 import rx.Observable;
 import rx.Observable.OnSubscribeFunc;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.observables.AndroidObservable;
-import rx.concurrency.Schedulers;
+import rx.schedulers.Schedulers;
 import rx.subscriptions.Subscriptions;
 import rx.util.functions.Action1;
 
@@ -1709,7 +1710,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
         });
 
-        AndroidObservable.fromActivity(this, producer.subscribeOn(Schedulers.threadPoolForIO()))
+        AndroidObservable.fromActivity(this, producer.subscribeOn(Schedulers.io()))
                 .subscribe(new Observer<Spanned>() {
                     @Override
                     public void onCompleted() {

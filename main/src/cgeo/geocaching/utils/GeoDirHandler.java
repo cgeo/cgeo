@@ -6,7 +6,7 @@ import cgeo.geocaching.settings.Settings;
 
 import rx.Observable;
 import rx.Subscription;
-import rx.android.concurrency.AndroidSchedulers;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.util.functions.Action1;
 
 import java.util.concurrent.TimeUnit;

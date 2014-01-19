@@ -4,12 +4,13 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.gc.GCParser;
 
 import org.apache.commons.collections4.CollectionUtils;
+
 import rx.Observable;
 import rx.Observable.OnSubscribeFunc;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.observables.AndroidObservable;
-import rx.concurrency.Schedulers;
+import rx.schedulers.Schedulers;
 import rx.subscriptions.Subscriptions;
 import rx.util.functions.Action1;
 
@@ -55,7 +56,7 @@ public final class PocketQueryList {
                 observer.onCompleted();
                 return Subscriptions.empty();
             }
-        }).subscribeOn(Schedulers.threadPoolForIO())).subscribe(new Action1<List<PocketQueryList>>() {
+        }).subscribeOn(Schedulers.io())).subscribe(new Action1<List<PocketQueryList>>() {
             @Override
             public void call(final List<PocketQueryList> pocketQueryLists) {
                 waitDialog.dismiss();

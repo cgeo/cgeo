@@ -370,6 +370,7 @@ public class Geocache implements ICache, IWaypoint {
      *            the other cache to compare this one to
      * @return true if both caches have the same content
      */
+    @SuppressWarnings("deprecation")
     @SuppressFBWarnings("FE_FLOATING_POINT_EQUALITY")
     private boolean isEqualTo(final Geocache other) {
         return detailed == other.detailed &&
