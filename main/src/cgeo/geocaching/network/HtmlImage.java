@@ -78,7 +78,6 @@ public class HtmlImage implements Html.ImageGetter {
     final private boolean returnErrorImage;
     final private int listId;
     final private boolean onlySave;
-    final private BitmapFactory.Options bfOptions;
     final private int maxWidth;
     final private int maxHeight;
     final private Resources resources;
@@ -96,10 +95,6 @@ public class HtmlImage implements Html.ImageGetter {
         this.returnErrorImage = returnErrorImage;
         this.listId = listId;
         this.onlySave = onlySave;
-
-        bfOptions = new BitmapFactory.Options();
-        bfOptions.inTempStorage = new byte[16 * 1024];
-        bfOptions.inPreferredConfig = Bitmap.Config.RGB_565;
 
         Point displaySize = Compatibility.getDisplaySize();
         this.maxWidth = displaySize.x - 25;
@@ -299,7 +294,10 @@ public class HtmlImage implements Html.ImageGetter {
     private Bitmap loadCachedImage(final File file, final boolean forceKeep) {
         if (file.exists()) {
             if (listId >= StoredList.STANDARD_LIST_ID || file.lastModified() > (new Date().getTime() - (24 * 60 * 60 * 1000)) || forceKeep) {
-                setSampleSize(file);
+                final BitmapFactory.Options bfOptions = new BitmapFactory.Options();
+                bfOptions.inTempStorage = new byte[16 * 1024];
+                bfOptions.inPreferredConfig = Bitmap.Config.RGB_565;
+                setSampleSize(file, bfOptions);
                 final Bitmap image = BitmapFactory.decodeFile(file.getPath(), bfOptions);
                 if (image == null) {
                     Log.e("Cannot decode bitmap from " + file.getPath());
@@ -310,7 +308,7 @@ public class HtmlImage implements Html.ImageGetter {
         return null;
     }
 
-    private void setSampleSize(final File file) {
+    private void setSampleSize(final File file, final BitmapFactory.Options bfOptions) {
         //Decode image size only
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;

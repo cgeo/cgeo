@@ -9,7 +9,7 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import rx.android.schedulers.AndroidSchedulers;
+import rx.android.observables.AndroidObservable;
 import rx.subscriptions.CompositeSubscription;
 import rx.util.functions.Action1;
 
@@ -97,14 +97,13 @@ public class ImagesList {
                 descView.setVisibility(View.VISIBLE);
             }
 
-            subscriptions.add(imgGetter.fetchDrawable(img.getUrl())
-                    .observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<BitmapDrawable>() {
+            subscriptions.add(AndroidObservable.fromActivity(activity, imgGetter.fetchDrawable(img.getUrl()))
+                    .subscribe(new Action1<BitmapDrawable>() {
                         @Override
                         public void call(final BitmapDrawable image) {
                             display(image, img, rowView);
                         }
                     }));
-
             imagesView.addView(rowView);
         }
     }
