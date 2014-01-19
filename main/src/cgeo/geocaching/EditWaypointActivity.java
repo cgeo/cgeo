@@ -17,10 +17,10 @@ import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
-import com.googlecode.androidannotations.annotations.EActivity;
-import com.googlecode.androidannotations.annotations.Extra;
-import com.googlecode.androidannotations.annotations.InstanceState;
-import com.googlecode.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.Extra;
+import org.androidannotations.annotations.InstanceState;
+import org.androidannotations.annotations.ViewById;
 
 import org.apache.commons.lang3.StringUtils;
 
