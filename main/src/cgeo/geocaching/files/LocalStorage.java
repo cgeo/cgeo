@@ -275,15 +275,18 @@ public final class LocalStorage {
             return false;
         }
 
+
         try {
             try {
-                final FileOutputStream fos = new FileOutputStream(targetFile);
+                final File tempFile = File.createTempFile("download", null, targetFile.getParentFile());
+                final FileOutputStream fos = new FileOutputStream(tempFile);
                 final boolean written = copy(inputStream, fos);
                 fos.close();
-                if (!written) {
-                    FileUtils.deleteIgnoringFailure(targetFile);
+                if (written) {
+                    return tempFile.renameTo(targetFile);
                 }
-                return written;
+                FileUtils.deleteIgnoringFailure(tempFile);
+                return false;
             } finally {
                 IOUtils.closeQuietly(inputStream);
             }
