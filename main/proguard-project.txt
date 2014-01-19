@@ -28,6 +28,7 @@
 -keep class ch.boye.httpclientandroidlib.client.HttpClient { *; }
 -dontnote ch.boye.httpclientandroidlib.**
 -dontwarn ch.boye.httpclientandroidlib.impl.auth.NegotiateScheme
+-dontwarn  org.springframework.**
 
 -keepclasseswithmembers class * {
     public <init>(android.content.Context, android.util.AttributeSet);
