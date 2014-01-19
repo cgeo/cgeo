@@ -6,6 +6,7 @@ import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.utils.SynchronizedDateFormat;
 
 import menion.android.locus.addon.publiclib.DisplayData;
 import menion.android.locus.addon.publiclib.LocusUtils;
@@ -13,7 +14,6 @@ import menion.android.locus.addon.publiclib.geoData.Point;
 import menion.android.locus.addon.publiclib.geoData.PointGeocachingData;
 import menion.android.locus.addon.publiclib.geoData.PointGeocachingDataWaypoint;
 import menion.android.locus.addon.publiclib.geoData.PointsData;
-import org.apache.commons.lang3.time.FastDateFormat;
 
 import android.app.Activity;
 import android.location.Location;
@@ -29,7 +29,7 @@ import java.util.Locale;
  * @see <a href="http://forum.asamm.cz/viewtopic.php?f=29&t=767">Locus forum</a>
  */
 public abstract class AbstractLocusApp extends AbstractApp {
-    private static final FastDateFormat ISO8601DATE = FastDateFormat.getInstance("yyyy-MM-dd'T'", Locale.US);
+    private static final SynchronizedDateFormat ISO8601DATE = new SynchronizedDateFormat("yyyy-MM-dd'T'", Locale.US);
 
     protected AbstractLocusApp(final String text, int id, final String intent) {
         super(text, id, intent);
@@ -121,7 +121,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
         pg.placedBy = cache.getOwnerDisplayName();
         final Date hiddenDate = cache.getHiddenDate();
         if (hiddenDate != null) {
-            pg.hidden = ISO8601DATE.format(hiddenDate.getTime());
+            pg.hidden = ISO8601DATE.format(hiddenDate);
         }
         int locusId = toLocusType(cache.getType());
         if (locusId != NO_LOCUS_ID) {

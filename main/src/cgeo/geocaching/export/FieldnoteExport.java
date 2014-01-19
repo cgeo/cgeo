@@ -14,11 +14,11 @@ import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.SynchronizedDateFormat;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.FastDateFormat;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -51,7 +51,7 @@ import java.util.TimeZone;
  */
 class FieldnoteExport extends AbstractExport {
     private static final File exportLocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/field-notes");
-    private static final FastDateFormat fieldNoteDateFormat = FastDateFormat.getInstance("yyyy-MM-dd'T'HH:mm:ss'Z'", TimeZone.getTimeZone("UTC"), Locale.US);
+    private static final SynchronizedDateFormat fieldNoteDateFormat = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", TimeZone.getTimeZone("UTC"), Locale.US);
 
     protected FieldnoteExport() {
         super(getString(R.string.export_fieldnotes));

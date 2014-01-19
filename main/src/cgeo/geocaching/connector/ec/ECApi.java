@@ -15,11 +15,12 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.SynchronizedDateFormat;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.FastDateFormat;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,7 +39,7 @@ public class ECApi {
     private static final String API_HOST = "https://extremcaching.com/exports/";
 
     private static final ECLogin ecLogin = ECLogin.getInstance();
-    private static final FastDateFormat LOG_DATE_FORMAT = FastDateFormat.getInstance("yyyy-MM-dd HH:mm:ss.SSSZ", TimeZone.getTimeZone("UTC"), Locale.US);
+    private static final SynchronizedDateFormat LOG_DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ", TimeZone.getTimeZone("UTC"), Locale.US);
 
     public static String getIdFromGeocode(final String geocode) {
         return StringUtils.removeStartIgnoreCase(geocode, "EC");

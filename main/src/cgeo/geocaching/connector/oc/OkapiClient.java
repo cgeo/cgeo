@@ -34,7 +34,6 @@ import cgeo.geocaching.utils.SynchronizedDateFormat;
 import ch.boye.httpclientandroidlib.HttpResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.FastDateFormat;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -61,7 +60,7 @@ final class OkapiClient {
 
     private static final char SEPARATOR = '|';
     private static final String SEPARATOR_STRING = Character.toString(SEPARATOR);
-    private static final FastDateFormat LOG_DATE_FORMAT = FastDateFormat.getInstance("yyyy-MM-dd HH:mm:ss.SSSZ", TimeZone.getTimeZone("UTC"), Locale.US);
+    private static final SynchronizedDateFormat LOG_DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ", TimeZone.getTimeZone("UTC"), Locale.US);
     private static final SynchronizedDateFormat ISO8601DATEFORMAT = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault());
 
     private static final String CACHE_ATTRNAMES = "attrnames";
