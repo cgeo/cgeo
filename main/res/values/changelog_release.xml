@@ -2,6 +2,12 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release</b>\n
+     <b>Bugfixes:</b>\n
+    · Upload new photo with correct orientation\n
+    · Choose another page if the latest active page does not exist\n
+    · Various stability bug fixes\n
+    \n
     <b>2014.01.06</b>\n
     <b>New Features:</b>\n
     · Browse pocket queries online (press menu on main screen)\n
