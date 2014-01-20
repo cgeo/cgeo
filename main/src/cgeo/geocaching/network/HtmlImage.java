@@ -13,11 +13,11 @@ import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.androidextra.Base64;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.jdt.annotation.Nullable;
-
 import rx.Observable;
 import rx.Observable.OnSubscribeFunc;
 import rx.Observer;
@@ -45,13 +45,22 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class HtmlImage implements Html.ImageGetter {
+
+    // This class implements an all-purpose image getter that can also be used as a ImageGetter interface
+    // when displaying caches. An instance mainly has three possible use cases:
+    //  - If onlySave is true, getDrawable() will return null immediately and will queue the image retrieval
+    //    and saving in the loading subject. Downloads will start in parallel when the blocking
+    //    waitForBackgroundLoading() method is called, and they can be cancelled through the given handler.
+    //  - If onlySave is false and the instance is called through fetchDrawable(), then an observable for the
+    //    given URL will be returned. This observable will emit the local copy of the image if it is present,
+    //    regardless of its freshness, then if needed an updated fresher copy after retrieving it from the network.
+    //  - If onlySave is false and the instance is used as an ImageGetter, only the final version of the
+    //    image will be returned.
 
     private static final String[] BLOCKED = new String[] {
             "gccounter.de",
@@ -86,9 +95,8 @@ public class HtmlImage implements Html.ImageGetter {
     final private PublishSubject<Observable<String>> loading = PublishSubject.create();
     final Observable<String> waitForEnd = Observable.merge(loading).publish().refCount();
     final CompositeSubscription subscription = new CompositeSubscription(waitForEnd.subscribe());
-    final private Scheduler downloadScheduler = Schedulers.executor(new ThreadPoolExecutor(5, 5, 5, TimeUnit.SECONDS,
+    final private Scheduler downloadScheduler = Schedulers.executor(new ThreadPoolExecutor(10, 10, 5, TimeUnit.SECONDS,
             new LinkedBlockingQueue<Runnable>()));
-    final private Set<String> downloading = new HashSet<String>();
 
     public HtmlImage(final String geocode, final boolean returnErrorImage, final int listId, final boolean onlySave) {
         this.geocode = geocode;
@@ -105,34 +113,94 @@ public class HtmlImage implements Html.ImageGetter {
     @Nullable
     @Override
     public BitmapDrawable getDrawable(final String url) {
-        if (!onlySave) {
-            return loadDrawable(url);
-        }
-        synchronized (downloading) {
-            if (!downloading.contains(url)) {
-                loading.onNext(fetchDrawable(url).map(new Func1<BitmapDrawable, String>() {
-                    @Override
-                    public String call(final BitmapDrawable bitmapDrawable) {
-                        return url;
-                    }
-                }));
-                downloading.add(url);
-            }
+        final Observable<BitmapDrawable> drawable = fetchDrawable(url);
+        if (onlySave) {
+            loading.onNext(drawable.map(new Func1<BitmapDrawable, String>() {
+                @Override
+                public String call(final BitmapDrawable bitmapDrawable) {
+                    return url;
+                }
+            }));
             return null;
+        } else {
+            return drawable.toBlockingObservable().lastOrDefault(null);
         }
     }
 
     public Observable<BitmapDrawable> fetchDrawable(final String url) {
-        return Observable.create(new OnSubscribeFunc<BitmapDrawable>() {
+        final boolean shared = url.contains("/images/icons/icon_");
+        final String pseudoGeocode = shared ? SHARED : geocode;
+
+        final Observable<Pair<BitmapDrawable, Boolean>> loadFromDisk =
+                Observable.create(new OnSubscribeFunc<Pair<BitmapDrawable, Boolean>>() {
+                    @Override
+                    public Subscription onSubscribe(final Observer<? super Pair<BitmapDrawable, Boolean>> observer) {
+                        final Pair<Bitmap, Boolean> loadResult = loadImageFromStorage(url, pseudoGeocode, shared);
+                        final Bitmap bitmap = loadResult.getLeft();
+                        observer.onNext(new ImmutablePair<BitmapDrawable, Boolean>(bitmap != null ?
+                                ImageUtils.scaleBitmapToFitDisplay(bitmap) :
+                                null,
+                                loadResult.getRight()));
+                        observer.onCompleted();
+                        return Subscriptions.empty();
+                    }
+                }).subscribeOn(Schedulers.computation());
+
+        final Observable<BitmapDrawable> downloadAndSave =
+                Observable.create(new OnSubscribeFunc<BitmapDrawable>() {
+                    @Override
+                    public Subscription onSubscribe(final Observer<? super BitmapDrawable> observer) {
+                        final File file = LocalStorage.getStorageFile(pseudoGeocode, url, true, true);
+                        if (url.startsWith("data:image/")) {
+                            if (url.contains(";base64,")) {
+                                saveBase64ToFile(url, file);
+                            } else {
+                                Log.e("HtmlImage.getDrawable: unable to decode non-base64 inline image");
+                                observer.onCompleted();
+                                return Subscriptions.empty();
+                            }
+                        } else {
+                            if (subscription.isUnsubscribed() || downloadOrRefreshCopy(url, file)) {
+                                // The existing copy was fresh enough or we were unsubscribed earlier.
+                                observer.onCompleted();
+                                return Subscriptions.empty();
+                            }
+                        }
+                        if (onlySave) {
+                            observer.onCompleted();
+                        } else {
+                            loadFromDisk.map(new Func1<Pair<BitmapDrawable, Boolean>, BitmapDrawable>() {
+                                @Override
+                                public BitmapDrawable call(final Pair<BitmapDrawable, Boolean> loadResult) {
+                                    final BitmapDrawable image = loadResult.getLeft();
+                                    if (image != null) {
+                                        return image;
+                                    } else {
+                                        return returnErrorImage ?
+                                                new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded)) :
+                                                getTransparent1x1Image(resources);
+                                    }
+                                }
+                            }).subscribe(observer);
+                        }
+                        return Subscriptions.empty();
+                    }
+                }).subscribeOn(downloadScheduler);
+
+        if (StringUtils.isBlank(url) || isCounter(url)) {
+            return Observable.from(getTransparent1x1Image(resources));
+        }
+
+        return loadFromDisk.switchMap(new Func1<Pair<BitmapDrawable, Boolean>, Observable<? extends BitmapDrawable>>() {
             @Override
-            public Subscription onSubscribe(final Observer<? super BitmapDrawable> observer) {
-                if (!subscription.isUnsubscribed()) {
-                    observer.onNext(loadDrawable(url));
+            public Observable<? extends BitmapDrawable> call(final Pair<BitmapDrawable, Boolean> loadResult) {
+                final BitmapDrawable bitmap = loadResult.getLeft();
+                if (loadResult.getRight()) {
+                    return Observable.from(bitmap);
                 }
-                observer.onCompleted();
-                return Subscriptions.empty();
+                return bitmap != null && !onlySave ? downloadAndSave.startWith(bitmap) : downloadAndSave;
             }
-        }).subscribeOn(downloadScheduler);
+        });
     }
 
     public void waitForBackgroundLoading(@Nullable final CancellableHandler handler) {
@@ -143,54 +211,14 @@ public class HtmlImage implements Html.ImageGetter {
         waitForEnd.toBlockingObservable().lastOrDefault(null);
     }
 
-    private BitmapDrawable loadDrawable(final String url) {
-        // Reject empty and counter images URL
-        if (StringUtils.isBlank(url) || isCounter(url)) {
-            return getTransparent1x1Image(resources);
-        }
-
-        final boolean shared = url.contains("/images/icons/icon_");
-        final String pseudoGeocode = shared ? SHARED : geocode;
-
-        Bitmap image = loadImageFromStorage(url, pseudoGeocode, shared);
-
-        // Download image and save it to the cache
-        if (image == null) {
-            final File file = LocalStorage.getStorageFile(pseudoGeocode, url, true, true);
-            if (url.startsWith("data:image/")) {
-                if (url.contains(";base64,")) {
-                    saveBase64ToFile(url, file);
-                } else {
-                    Log.e("HtmlImage.getDrawable: unable to decode non-base64 inline image");
-                    return null;
-                }
-            } else {
-                downloadOrRefreshCopy(url, file);
-            }
-        }
-
-        if (onlySave) {
-            return null;
-        }
-
-        // now load the newly downloaded image
-        if (image == null) {
-            image = loadImageFromStorage(url, pseudoGeocode, shared);
-        }
-
-        // get image and return
-        if (image == null) {
-            Log.d("HtmlImage.getDrawable: Failed to obtain image");
-
-            return returnErrorImage
-                    ? new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded))
-                    : getTransparent1x1Image(resources);
-        }
-
-        return ImageUtils.scaleBitmapToFitDisplay(image);
-    }
-
-    private void downloadOrRefreshCopy(final String url, final File file) {
+    /**
+     * Download or refresh the copy of <code>url</code> in <code>file</code>.
+     *
+     * @param url the url of the document
+     * @param file the file to save the document in
+     * @return <code>true</code> if the existing file was up-to-date, <code>false</code> otherwise
+     */
+    private boolean downloadOrRefreshCopy(final String url, final File file) {
         final String absoluteURL = makeAbsoluteURL(url);
 
         if (absoluteURL != null) {
@@ -204,12 +232,14 @@ public class HtmlImage implements Html.ImageGetter {
                         if (!file.setLastModified(System.currentTimeMillis())) {
                             makeFreshCopy(file);
                         }
+                        return true;
                     }
                 }
             } catch (Exception e) {
                 Log.e("HtmlImage.downloadOrRefreshCopy", e);
             }
         }
+        return false;
     }
 
     private static void saveBase64ToFile(final String url, final File file) {
@@ -250,12 +280,20 @@ public class HtmlImage implements Html.ImageGetter {
         return new BitmapDrawable(res, BitmapFactory.decodeResource(resources, R.drawable.image_no_placement));
     }
 
+    /**
+     * Load an image from primary or secondary storage.
+     *
+     * @param url the image URL
+     * @param pseudoGeocode the geocode or the shared name
+     * @param forceKeep keep the image if it is there, without checking its freshness
+     * @return <code>true</code> if the image was there and is fresh enough, <code>false</code> otherwise
+     */
     @Nullable
-    private Bitmap loadImageFromStorage(final String url, final String pseudoGeocode, final boolean forceKeep) {
+    private Pair<Bitmap, Boolean> loadImageFromStorage(final String url, final String pseudoGeocode, final boolean forceKeep) {
         try {
             final File file = LocalStorage.getStorageFile(pseudoGeocode, url, true, false);
-            final Bitmap image = loadCachedImage(file, forceKeep);
-            if (image != null) {
+            final Pair<Bitmap, Boolean> image = loadCachedImage(file, forceKeep);
+            if (image.getRight() || image.getLeft() != null) {
                 return image;
             }
             final File fileSec = LocalStorage.getStorageSecFile(pseudoGeocode, url, true);
@@ -263,7 +301,7 @@ public class HtmlImage implements Html.ImageGetter {
         } catch (Exception e) {
             Log.w("HtmlImage.loadImageFromStorage", e);
         }
-        return null;
+        return new ImmutablePair<Bitmap, Boolean>(null, false);
     }
 
     @Nullable
@@ -290,22 +328,36 @@ public class HtmlImage implements Html.ImageGetter {
         return null;
     }
 
+    /**
+     * Load a previously saved image.
+     *
+     * @param file the file on disk
+     * @param forceKeep keep the image if it is there, without checking its freshness
+     * @return a pair with <code>true</code> if the image was there and is fresh enough or <code>false</code> otherwise,
+     *         and the image (possibly <code>null</code> if the first component is <code>false</code> and the image
+     *         could not be loaded, or if the first component is <code>true</code> and <code>onlySave</code> is also
+     *         <code>true</code>)
+     */
     @Nullable
-    private Bitmap loadCachedImage(final File file, final boolean forceKeep) {
+    private Pair<Bitmap, Boolean> loadCachedImage(final File file, final boolean forceKeep) {
         if (file.exists()) {
-            if (listId >= StoredList.STANDARD_LIST_ID || file.lastModified() > (new Date().getTime() - (24 * 60 * 60 * 1000)) || forceKeep) {
-                final BitmapFactory.Options bfOptions = new BitmapFactory.Options();
-                bfOptions.inTempStorage = new byte[16 * 1024];
-                bfOptions.inPreferredConfig = Bitmap.Config.RGB_565;
-                setSampleSize(file, bfOptions);
-                final Bitmap image = BitmapFactory.decodeFile(file.getPath(), bfOptions);
-                if (image == null) {
-                    Log.e("Cannot decode bitmap from " + file.getPath());
-                }
-                return image;
+            final boolean freshEnough = listId >= StoredList.STANDARD_LIST_ID || file.lastModified() > (new Date().getTime() - (24 * 60 * 60 * 1000)) || forceKeep;
+            if (onlySave) {
+                return new ImmutablePair<Bitmap, Boolean>(null, true);
             }
+            final BitmapFactory.Options bfOptions = new BitmapFactory.Options();
+            bfOptions.inTempStorage = new byte[16 * 1024];
+            bfOptions.inPreferredConfig = Bitmap.Config.RGB_565;
+            setSampleSize(file, bfOptions);
+            final Bitmap image = BitmapFactory.decodeFile(file.getPath(), bfOptions);
+            if (image == null) {
+                Log.e("Cannot decode bitmap from " + file.getPath());
+                return new ImmutablePair<Bitmap, Boolean>(null, false);
+            }
+            return new ImmutablePair<Bitmap, Boolean>(image,
+                    freshEnough);
         }
-        return null;
+        return new ImmutablePair<Bitmap, Boolean>(null, false);
     }
 
     private void setSampleSize(final File file, final BitmapFactory.Options bfOptions) {

@@ -27,7 +27,6 @@ import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -97,22 +96,23 @@ public class ImagesList {
                 descView.setVisibility(View.VISIBLE);
             }
 
+            final ImageView imageView = (ImageView) inflater.inflate(R.layout.image_item, null);
+            assert(imageView != null);
             subscriptions.add(AndroidObservable.fromActivity(activity, imgGetter.fetchDrawable(img.getUrl()))
                     .subscribe(new Action1<BitmapDrawable>() {
                         @Override
                         public void call(final BitmapDrawable image) {
-                            display(image, img, rowView);
+                            display(imageView, image, img, rowView);
                         }
                     }));
+            rowView.addView(imageView);
             imagesView.addView(rowView);
         }
     }
 
-    private void display(final BitmapDrawable image, final Image img, final LinearLayout view) {
+    private void display(final ImageView imageView, final BitmapDrawable image, final Image img, final LinearLayout view) {
         if (image != null) {
             bitmaps.add(image.getBitmap());
-            final ImageView imageView = (ImageView) inflater.inflate(R.layout.image_item, null);
-            assert(imageView != null);
 
             final Rect bounds = image.getBounds();
 
@@ -127,13 +127,14 @@ public class ImagesList {
             activity.registerForContextMenu(imageView);
             imageView.setImageDrawable(image);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setLayoutParams(new LayoutParams(bounds.width(), bounds.height()));
+            imageView.setLayoutParams(new LinearLayout.LayoutParams(bounds.width(), bounds.height()));
 
             view.findViewById(R.id.progress_bar).setVisibility(View.GONE);
-            view.addView(imageView);
 
             imageView.setId(image.hashCode());
             images.put(imageView.getId(), img);
+
+            view.invalidate();
         }
     }
 
