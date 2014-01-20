@@ -1705,8 +1705,9 @@ public class Geocache implements ICache, IWaypoint {
             patterns.add(Pattern.compile("\\b(\\d{1,2})(?:\\.00)?\\s+" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
         }
 
+        final String searchText = getShortDescription() + ' ' + getDescription();
         for (Pattern pattern : patterns) {
-            final MatcherWrapper matcher = new MatcherWrapper(pattern, getDescription());
+            final MatcherWrapper matcher = new MatcherWrapper(pattern, searchText);
             while (matcher.find()) {
                 try {
                     final int hours = Integer.parseInt(matcher.group(1));

@@ -249,6 +249,14 @@ public class GeocacheTest extends CGeoTestCase {
         assertTime("from 11 to 13 " + timeHours, 11, 00);
     }
 
+    public static void testGuessEventTimeShortDescription() {
+        Geocache cache = new Geocache();
+        cache.setType(CacheType.EVENT);
+        cache.setDescription(StringUtils.EMPTY);
+        cache.setShortDescription("text 14:20 text");
+        assertEquals(String.valueOf(14 * 60 + 20), cache.guessEventTimeMinutes());
+    }
+
     private static void assertTime(final String description, final int hours, final int minutes) {
         final Geocache cache = new Geocache();
         cache.setDescription(description);
