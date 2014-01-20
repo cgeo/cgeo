@@ -17,6 +17,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import rx.Observable;
 import rx.Observable.OnSubscribeFunc;
@@ -288,7 +289,7 @@ public class HtmlImage implements Html.ImageGetter {
      * @param forceKeep keep the image if it is there, without checking its freshness
      * @return <code>true</code> if the image was there and is fresh enough, <code>false</code> otherwise
      */
-    @Nullable
+    @NonNull
     private Pair<Bitmap, Boolean> loadImageFromStorage(final String url, final String pseudoGeocode, final boolean forceKeep) {
         try {
             final File file = LocalStorage.getStorageFile(pseudoGeocode, url, true, false);
@@ -338,7 +339,7 @@ public class HtmlImage implements Html.ImageGetter {
      *         could not be loaded, or if the first component is <code>true</code> and <code>onlySave</code> is also
      *         <code>true</code>)
      */
-    @Nullable
+    @NonNull
     private Pair<Bitmap, Boolean> loadCachedImage(final File file, final boolean forceKeep) {
         if (file.exists()) {
             final boolean freshEnough = listId >= StoredList.STANDARD_LIST_ID || file.lastModified() > (new Date().getTime() - (24 * 60 * 60 * 1000)) || forceKeep;
