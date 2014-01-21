@@ -3122,8 +3122,8 @@ public class DataStore {
         Cursor cursor = database.query(
                 dbTableCaches,
                 new String[] { "geocode", "name" },
-                "geocode IS NOT NULL AND geocode != '' AND (geocode LIKE ? OR name LIKE ?)",
-                new String[] { selectionArg, selectionArg },
+                "geocode IS NOT NULL AND geocode != '' AND (geocode LIKE ? OR name LIKE ? OR owner LIKE ?)",
+                new String[] { selectionArg, selectionArg, selectionArg },
                 null,
                 null,
                 "name");
