@@ -333,7 +333,7 @@ public final class LocalStorage {
         return copyDone;
     }
 
-    private static boolean copy(final InputStream input, final OutputStream output) {
+    public static boolean copy(final InputStream input, final OutputStream output) {
         try {
             int length;
             final byte[] buffer = new byte[4096];

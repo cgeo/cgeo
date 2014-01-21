@@ -4,10 +4,12 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -15,6 +17,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.MediaStore.MediaColumns;
@@ -27,6 +31,10 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class ImageSelectActivity extends AbstractActivity {
 
@@ -216,8 +224,8 @@ public class ImageSelectActivity extends AbstractActivity {
             return;
         }
 
-        if (data != null) {
-            Uri selectedImage = data.getData();
+        final Uri selectedImage = data.getData();
+        if (Build.VERSION.SDK_INT < VERSION_CODES.KITKAT) {
             String[] filePathColumn = { MediaColumns.DATA };
 
             Cursor cursor = null;
@@ -247,7 +255,20 @@ public class ImageSelectActivity extends AbstractActivity {
 
             Log.d("SELECT IMAGE data = " + data.toString());
         } else {
-            Log.d("SELECT IMAGE data is null");
+            InputStream input = null;
+            OutputStream output = null;
+            try {
+                input = getContentResolver().openInputStream(selectedImage);
+                final File outputFile = ImageUtils.getOutputImageFile();
+                output = new FileOutputStream(outputFile);
+                LocalStorage.copy(input, output);
+                imageUri = Uri.fromFile(outputFile);
+            } catch (FileNotFoundException e) {
+                Log.e("ImageSelectActivity.onStartResult", e);
+            } finally {
+                IOUtils.closeQuietly(input);
+                IOUtils.closeQuietly(output);
+            }
         }
 
         if (requestCode == SELECT_NEW_IMAGE) {
