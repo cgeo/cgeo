@@ -4,6 +4,7 @@
   <string name="changelog_release" translatable="false">\n
     <b>Next bugfix release</b>\n
      <b>Bugfixes:</b>\n
+    · Select log photo from alternate sources on Android 4.4\n
     · Upload new photo with correct orientation\n
     · Choose another page if the latest active page does not exist\n
     · Various stability bug fixes\n
