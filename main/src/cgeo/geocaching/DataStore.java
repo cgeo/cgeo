@@ -3194,8 +3194,4 @@ public class DataStore {
         return getSuggestions(dbTableCaches, "name", input);
     }
 
-    public static String[] getSuggestionsAddress(String input) {
-        return getSuggestions(dbTableCaches, "location", input);
-    }
-
 }

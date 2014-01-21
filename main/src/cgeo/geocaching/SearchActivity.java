@@ -17,6 +17,8 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.EditUtils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import rx.util.functions.Func1;
 
@@ -188,13 +190,7 @@ public class SearchActivity extends AbstractActivity {
             public void run() {
                 findByAddressFn();
             }
-        }, new Func1<String, String[]>() {
-
-            @Override
-            public String[] call(final String input) {
-                return DataStore.getSuggestionsAddress(input);
-            }
-        });
+        }, null);
 
         setSearchAction(geocodeEditText, buttonSearchGeocode, new Runnable() {
 
@@ -267,7 +263,7 @@ public class SearchActivity extends AbstractActivity {
         });
     }
 
-    private static void setSearchAction(final AutoCompleteTextView editText, final Button button, final Runnable runnable, final Func1<String, String[]> suggestionFunction) {
+    private static void setSearchAction(final AutoCompleteTextView editText, final Button button, final @NonNull Runnable runnable, final @Nullable Func1<String, String[]> suggestionFunction) {
         EditUtils.setActionListener(editText, runnable);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -275,7 +271,9 @@ public class SearchActivity extends AbstractActivity {
                 runnable.run();
             }
         });
-        editText.setAdapter(new AutoCompleteAdapter(editText.getContext(), android.R.layout.simple_dropdown_item_1line, suggestionFunction));
+        if (suggestionFunction != null) {
+            editText.setAdapter(new AutoCompleteAdapter(editText.getContext(), android.R.layout.simple_dropdown_item_1line, suggestionFunction));
+        }
     }
 
     private class FindByCoordsAction implements OnClickListener {
