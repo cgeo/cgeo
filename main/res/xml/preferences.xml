@@ -201,6 +201,11 @@
             </PreferenceScreen>
             <PreferenceScreen android:title="@string/init_gcvote" >
                 <PreferenceCategory android:title="@string/settings_settings" >
+			        <CheckBoxPreference
+			            android:defaultValue="true"
+			            android:key="@string/pref_ratingwanted"
+			            android:summary="@string/init_summary_ratingwanted"
+			            android:title="@string/init_ratingwanted" />
                     <cgeo.geocaching.settings.EditPasswordPreference
                         android:dialogTitle="@string/init_password"
                         android:hint="@string/init_password"
@@ -315,11 +320,6 @@
             android:key="@string/pref_autoloaddesc"
             android:summary="@string/init_summary_autoload"
             android:title="@string/init_autoload" />
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="@string/pref_ratingwanted"
-            android:summary="@string/init_summary_ratingwanted"
-            android:title="@string/init_ratingwanted" />
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_friendlogswanted"
