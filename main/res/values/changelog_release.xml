@@ -2,6 +2,11 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+     <b>Next bugfix release</b>\n
+     <b>Bugfixes:</b>\n
+    · Twitter problem fixed\n
+    · ...
+    \n
     <b>2014.01.22</b>\n
      <b>Bugfixes:</b>\n
     · Select log photo from alternate sources on Android 4.4\n
