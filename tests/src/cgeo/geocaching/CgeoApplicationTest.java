@@ -26,7 +26,6 @@ import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.test.Compare;
 
-import junit.framework.Assert;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -34,6 +33,8 @@ import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import java.util.GregorianCalendar;
+
+import junit.framework.Assert;
 
 /**
  * The c:geo application test. It can be used for tests that require an
@@ -72,6 +73,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     public static void testSearchTrackable() {
         final Trackable tb = GCParser.searchTrackable("TB2J1VZ", null, null);
         assertNotNull(tb);
+        assert (tb != null); // eclipse bug
         // fix data
         assertEquals("aefffb86-099f-444f-b132-605436163aa8", tb.getGuid());
         assertEquals("TB2J1VZ", tb.getGeocode());
