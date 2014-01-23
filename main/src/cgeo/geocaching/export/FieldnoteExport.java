@@ -45,13 +45,14 @@ import java.util.TimeZone;
 /**
  * Exports offline logs in the Groundspeak Field Note format.<br>
  * <br>
- *
+ * 
  * Field Notes are simple plain text files, but poorly documented. Syntax:<br>
  * <code>GCxxxxx,yyyy-mm-ddThh:mm:ssZ,Found it,"logtext"</code>
  */
 class FieldnoteExport extends AbstractExport {
     private static final File exportLocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/field-notes");
     private static final SynchronizedDateFormat fieldNoteDateFormat = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", TimeZone.getTimeZone("UTC"), Locale.US);
+    private static int fieldNotesCount = 0;
 
     protected FieldnoteExport() {
         super(getString(R.string.export_fieldnotes));
@@ -89,7 +90,7 @@ class FieldnoteExport extends AbstractExport {
         builder.setPositiveButton(R.string.export, new DialogInterface.OnClickListener() {
 
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(final DialogInterface dialog, final int which) {
                 final boolean upload = uploadOption.isChecked();
                 final boolean onlyNew = onlyNewOption.isChecked();
                 Settings.setFieldNoteExportUpload(upload);
@@ -112,7 +113,7 @@ class FieldnoteExport extends AbstractExport {
 
         /**
          * Instantiates and configures the task for exporting field notes.
-         *
+         * 
          * @param activity
          *            optional: Show a progress bar and toasts
          * @param upload
@@ -121,14 +122,14 @@ class FieldnoteExport extends AbstractExport {
          *            Upload/export only new logs since last export
          */
         public ExportTask(final Activity activity, final boolean upload, final boolean onlyNew) {
-            super(activity, getProgressTitle(), getString(R.string.export_fieldnotes_creating));
+            super(activity, getProgressTitle(), getString(R.string.export_fieldnotes_creating), true);
             this.activity = activity;
             this.upload = upload;
             this.onlyNew = onlyNew;
         }
 
         @Override
-        protected Boolean doInBackgroundInternal(Geocache[] caches) {
+        protected Boolean doInBackgroundInternal(final Geocache[] caches) {
             final StringBuilder fieldNoteBuffer = new StringBuilder();
             try {
                 int i = 0;
@@ -212,7 +213,7 @@ class FieldnoteExport extends AbstractExport {
         }
 
         @Override
-        protected void onPostExecuteInternal(Boolean result) {
+        protected void onPostExecuteInternal(final Boolean result) {
             if (null != activity) {
                 if (result) {
                     Settings.setFieldnoteExportDate(System.currentTimeMillis());
@@ -229,18 +230,15 @@ class FieldnoteExport extends AbstractExport {
         }
 
         @Override
-        protected void onProgressUpdateInternal(int status) {
+        protected void onProgressUpdateInternal(final int status) {
             if (null != activity) {
-                if (STATUS_UPLOAD == status) {
-                    setMessage(getString(R.string.export_fieldnotes_uploading));
-                } else {
-                    setMessage(getString(R.string.export_fieldnotes_creating) + " (" + status + ')');
-                }
+                setMessage(getString(STATUS_UPLOAD == status ? R.string.export_fieldnotes_uploading : R.string.export_fieldnotes_creating) + " (" + fieldNotesCount + ')');
             }
         }
     }
 
     static void appendFieldNote(final StringBuilder fieldNoteBuffer, final Geocache cache, final LogEntry log) {
+        fieldNotesCount++;
         fieldNoteBuffer.append(cache.getGeocode())
                 .append(',')
                 .append(fieldNoteDateFormat.format(new Date(log.date)))
