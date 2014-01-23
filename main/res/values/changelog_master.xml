@@ -5,8 +5,11 @@
     <b>Next feature release</b>\n
     <b>New Features:</b>\n
      · Parallel loading from different platforms to speed up live map\n
+     · All GCVote related settings moved to Menu-Services-GCVote\n
     <b>Bugfixing:</b>\n
-     · \n
+     · Corrected wrong field note progress indication\n
+     · When using "external map" sometimes the position marker was not shown\m
+     · Circles on map now also shown for caches with final coords defined\n
      \n
      \n
   </string>
