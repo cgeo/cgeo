@@ -227,50 +227,54 @@ public class ImageSelectActivity extends AbstractActivity {
             return;
         }
 
-        final Uri selectedImage = data.getData();
-        if (Build.VERSION.SDK_INT < VERSION_CODES.KITKAT) {
-            String[] filePathColumn = { MediaColumns.DATA };
+        // null is an acceptable result if the image has been placed in the imageUri file by the
+        // camera application.
+        if (data != null) {
+            final Uri selectedImage = data.getData();
+            if (Build.VERSION.SDK_INT < VERSION_CODES.KITKAT) {
+                String[] filePathColumn = { MediaColumns.DATA };
 
-            Cursor cursor = null;
-            try {
-                cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-                if (cursor == null) {
+                Cursor cursor = null;
+                try {
+                    cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+                    if (cursor == null) {
+                        showFailure();
+                        return;
+                    }
+                    cursor.moveToFirst();
+
+                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    String filePath = cursor.getString(columnIndex);
+                    if (StringUtils.isBlank(filePath)) {
+                        showFailure();
+                        return;
+                    }
+                    imageUri = Uri.parse(filePath);
+                } catch (Exception e) {
+                    Log.e("ImageSelectActivity.onActivityResult", e);
                     showFailure();
-                    return;
+                } finally {
+                    if (cursor != null) {
+                        cursor.close();
+                    }
                 }
-                cursor.moveToFirst();
 
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                String filePath = cursor.getString(columnIndex);
-                if (StringUtils.isBlank(filePath)) {
-                    showFailure();
-                    return;
+                Log.d("SELECT IMAGE data = " + data.toString());
+            } else {
+                InputStream input = null;
+                OutputStream output = null;
+                try {
+                    input = getContentResolver().openInputStream(selectedImage);
+                    final File outputFile = ImageUtils.getOutputImageFile();
+                    output = new FileOutputStream(outputFile);
+                    LocalStorage.copy(input, output);
+                    imageUri = Uri.fromFile(outputFile);
+                } catch (FileNotFoundException e) {
+                    Log.e("ImageSelectActivity.onStartResult", e);
+                } finally {
+                    IOUtils.closeQuietly(input);
+                    IOUtils.closeQuietly(output);
                 }
-                imageUri = Uri.parse(filePath);
-            } catch (Exception e) {
-                Log.e("ImageSelectActivity.onActivityResult", e);
-                showFailure();
-            } finally {
-                if (cursor != null) {
-                    cursor.close();
-                }
-            }
-
-            Log.d("SELECT IMAGE data = " + data.toString());
-        } else {
-            InputStream input = null;
-            OutputStream output = null;
-            try {
-                input = getContentResolver().openInputStream(selectedImage);
-                final File outputFile = ImageUtils.getOutputImageFile();
-                output = new FileOutputStream(outputFile);
-                LocalStorage.copy(input, output);
-                imageUri = Uri.fromFile(outputFile);
-            } catch (FileNotFoundException e) {
-                Log.e("ImageSelectActivity.onStartResult", e);
-            } finally {
-                IOUtils.closeQuietly(input);
-                IOUtils.closeQuietly(output);
             }
         }
 
