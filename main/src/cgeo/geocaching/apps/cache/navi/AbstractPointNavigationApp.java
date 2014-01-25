@@ -8,6 +8,7 @@ import cgeo.geocaching.apps.AbstractApp;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import android.app.Activity;
+import android.content.Intent;
 
 /**
  * navigation app for simple point navigation (no differentiation between cache/waypoint/point)
@@ -48,5 +49,13 @@ abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNa
     @Override
     public boolean isEnabled(Waypoint waypoint) {
         return waypoint.getCoords() != null;
+    }
+
+    protected static void addIntentExtras(final Geocache cache, final Intent intent) {
+        intent.putExtra("difficulty", cache.getDifficulty());
+        intent.putExtra("terrain", cache.getTerrain());
+        intent.putExtra("name", cache.getName());
+        intent.putExtra("code", cache.getGeocode());
+        intent.putExtra("size", cache.getSize().getL10n());
     }
 }

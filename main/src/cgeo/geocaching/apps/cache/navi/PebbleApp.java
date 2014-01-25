@@ -9,7 +9,7 @@ import android.content.Intent;
 
 /**
  * Application for communication with the Pebble watch.
- * 
+ *
  */
 class PebbleApp extends AbstractPointNavigationApp {
 
@@ -33,11 +33,7 @@ class PebbleApp extends AbstractPointNavigationApp {
         final Intent pebbleIntent = new Intent(INTENT);
         pebbleIntent.putExtra("latitude", cache.getCoords().getLatitude());
         pebbleIntent.putExtra("longitude", cache.getCoords().getLongitude());
-        pebbleIntent.putExtra("difficulty", cache.getDifficulty());
-        pebbleIntent.putExtra("terrain", cache.getTerrain());
-        pebbleIntent.putExtra("name", cache.getName());
-        pebbleIntent.putExtra("code", cache.getGeocode());
-        pebbleIntent.putExtra("size", cache.getSize().getL10n());
+        addIntentExtras(cache, pebbleIntent);
         activity.startActivity(pebbleIntent);
     }
 
