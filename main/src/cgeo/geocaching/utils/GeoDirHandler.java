@@ -7,6 +7,8 @@ import cgeo.geocaching.settings.Settings;
 import rx.Observable;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import rx.util.functions.Action0;
 import rx.util.functions.Action1;
 
 import java.util.concurrent.TimeUnit;
@@ -99,12 +101,12 @@ public abstract class GeoDirHandler {
         if (geoSubscription != null) {
             final Subscription subscription = geoSubscription;
             geoSubscription = null;
-            Observable.interval(2500, TimeUnit.MILLISECONDS).take(1).subscribe(new Action1<Long>() {
+            Schedulers.newThread().schedule(new Action0() {
                 @Override
-                public void call(final Long aLong) {
+                public void call() {
                     subscription.unsubscribe();
                 }
-            });
+            }, 2500, TimeUnit.MILLISECONDS);
         }
     }
 
