@@ -464,6 +464,9 @@
   <string name="init_use_native_ua">Android-Browser</string>
   <string name="init_summary_use_native_ua">Als Android-Browser identifizieren. Löst Login-Probleme einiger Netzanbieter.</string>
   <string name="init_rendertheme_folder">Karten-Themes-Verzeichnis</string>
+  <string name="init_maintenance">Wartung</string>
+  <string name="init_maintenance_directories_note">c:geo speichert Bilder, Log-Bilder und weitere Dateien zu einem Cache in einem separaten Verzeichnis. In manchen Fällen (z.B. bei Sichern und Wiederherstellen der Datenbank) kann dieses Verzeichnis unnötige Daten enthalten, die gelöscht werden können.</string>
+  <string name="init_maintenance_directories">Verwaiste Daten löschen</string>
   <string name="settings_open_website">Öffne Webseite</string>
   <string name="settings_settings">Einstellungen</string>
   <string name="settings_information">Information</string>
