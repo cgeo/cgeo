@@ -539,7 +539,7 @@
     <string name="settings_ec_icons_oc">Like OC</string>
     <string name="settings_features">Supported Features</string>
     <string name="feature_description">The following <b>online</b> features of this website are supported in c:geo (in addition to the offline features):</string>
-    <string name="feature_personal_notes">Personal notes</string>
+    <string name="feature_personal_notes">Personal note</string>
     <string name="feature_online_logging">Online logging</string>
     <string name="feature_log_images">Attach images to logs</string>
     <string name="feature_watch_list">Watch list</string>
@@ -618,7 +618,7 @@
     <string name="cache_personal_note_upload_done">Personal note uploaded</string>
     <string name="cache_personal_note_upload_cancelled">Personal note upload cancelled</string>
     <string name="cache_personal_note_unstored">Cache not stored</string>
-    <string name="cache_personal_note_store">The cache will be stored first to enable personal notes.</string>
+    <string name="cache_personal_note_store">The cache will be stored first to allow a personal note.</string>
     <string name="cache_description">Description</string>
     <string name="cache_description_long">Long Description</string>
     <string name="cache_description_table_note">Description contains table formatting which may need to be viewed at %s to be seen correctly.</string>
