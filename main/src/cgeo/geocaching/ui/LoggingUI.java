@@ -122,7 +122,6 @@ public class LoggingUI extends AbstractUIFactory {
         }
         final MenuItem itemLog = menu.findItem(R.id.menu_log_visit);
         itemLog.setVisible(cache.supportsLogging() && !Settings.getLogOffline());
-        itemLog.setEnabled(Settings.isLogin());
 
         final MenuItem itemOffline = menu.findItem(R.id.menu_log_visit_offline);
         itemOffline.setVisible(cache.supportsLogging() && Settings.getLogOffline());
