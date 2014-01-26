@@ -11,6 +11,8 @@ import rx.Observer;
 import rx.Subscription;
 import rx.observables.ConnectableObservable;
 import rx.subjects.BehaviorSubject;
+import rx.subscriptions.Subscriptions;
+import rx.util.functions.Action0;
 
 import android.content.Context;
 import android.location.GpsSatellite;
@@ -148,14 +150,14 @@ class GeoDataProvider implements OnSubscribeFunc<IGeoData> {
                 }
             }
 
-            return new Subscription() {
+            return Subscriptions.create(new Action0() {
                 @Override
-                public void unsubscribe() {
+                public void call() {
                     geoManager.removeUpdates(networkListener);
                     geoManager.removeUpdates(gpsListener);
                     geoManager.removeGpsStatusListener(gpsStatusListener);
                 }
-            };
+            });
         }
     };
 

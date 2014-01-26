@@ -8,6 +8,8 @@ import rx.Observer;
 import rx.Subscription;
 import rx.observables.ConnectableObservable;
 import rx.subjects.BehaviorSubject;
+import rx.subscriptions.Subscriptions;
+import rx.util.functions.Action0;
 
 import android.app.Activity;
 import android.content.Context;
@@ -63,12 +65,12 @@ public class DirectionProvider implements OnSubscribeFunc<Float> {
             };
 
             sensorManager.registerListener(listener, defaultSensor, SensorManager.SENSOR_DELAY_NORMAL);
-            return new Subscription() {
+            return Subscriptions.create(new Action0() {
                 @Override
-                public void unsubscribe() {
+                public void call() {
                     sensorManager.unregisterListener(listener);
                 }
-            };
+            });
         }
     };
 
