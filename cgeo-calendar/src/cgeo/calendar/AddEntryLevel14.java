@@ -32,11 +32,12 @@ class AddEntryLevel14 extends AbstractAddEntry {
                 .putExtra("description", description)
                 .putExtra("hasAlarm", false)
                 .putExtra("eventTimezone", "UTC");
-        if (entry.getStartTimeMinutes() >= 0) {
-            intent.putExtra("beginTime", eventDate.getTime() + entry.getStartTimeMinutes() * 60000L);
-        }
-        else {
-            intent.putExtra("beginTime", eventDate.getTime() + 43200000);
+        final long eventTime = eventDate.getTime();
+        final int entryStartTimeMinutes = entry.getStartTimeMinutes();
+        if (entryStartTimeMinutes >= 0) {
+            intent.putExtra("beginTime", eventTime + entryStartTimeMinutes * 60000L);
+        } else {
+            intent.putExtra("beginTime", eventTime);
             intent.putExtra("allDay", true);
         }
         if (entry.getCoords().length() > 0) {

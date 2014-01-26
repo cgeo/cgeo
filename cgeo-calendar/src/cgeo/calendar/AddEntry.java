@@ -30,12 +30,13 @@ class AddEntry extends AbstractAddEntry {
         // values
         final ContentValues event = new ContentValues();
         event.put("calendar_id", calendarId);
-        if (entry.getStartTimeMinutes() >= 0) {
-            event.put("dtstart", eventDate.getTime() + entry.getStartTimeMinutes() * 60000L);
-        }
-        else {
-            event.put("dtstart", eventDate.getTime() + 43200000); // noon
-            event.put("dtend", eventDate.getTime() + 43200000 + 3600000); // + one hour
+        final long eventTime = eventDate.getTime();
+        final int entryStartTimeMinutes = entry.getStartTimeMinutes();
+        if (entryStartTimeMinutes >= 0) {
+            event.put("dtstart", eventTime + entryStartTimeMinutes * 60000L);
+        } else {
+            event.put("dtstart", eventTime); // midnight
+            event.put("dtend", eventTime + 86400000); // + one day
             event.put("allDay", 1);
         }
         event.put("eventTimezone", "UTC");
