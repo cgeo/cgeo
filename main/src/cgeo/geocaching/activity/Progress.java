@@ -1,6 +1,7 @@
 package cgeo.geocaching.activity;
 
 import cgeo.geocaching.ui.dialog.CustomProgressDialog;
+import cgeo.geocaching.utils.Log;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -28,7 +29,11 @@ public class Progress {
 
     public synchronized void dismiss() {
         if (dialog != null && dialog.isShowing()) {
-            dialog.dismiss();
+            try {
+                dialog.dismiss();
+            } catch (final Exception e) {
+                Log.e("Progress.dismiss", e);
+            }
         }
         dialog = null;
     }
