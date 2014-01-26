@@ -995,7 +995,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     public synchronized void startTimer() {
         if (coordsIntent != null) {
             // display just one point
-            (new DisplayPointThread()).start();
+            displayPoint(coordsIntent);
         } else {
             // start timer
             stopTimer();
@@ -1272,32 +1272,16 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         }
     }
 
-    /**
-     * Thread to display one point. Started on opening if in single mode.
-     */
-    private class DisplayPointThread extends Thread {
+    private void displayPoint(final Geopoint coords) {
+        final Waypoint waypoint = new Waypoint("some place", waypointTypeIntent != null ? waypointTypeIntent : WaypointType.WAYPOINT, false);
+        waypoint.setCoords(coords);
 
-        @Override
-        public void run() {
-            if (mapView == null || caches == null) {
-                return;
-            }
+        final CachesOverlayItemImpl item = getWaypointItem(waypoint);
+        overlayCaches.updateItems(item);
+        displayHandler.sendEmptyMessage(INVALIDATE_MAP);
+        displayHandler.sendEmptyMessage(UPDATE_TITLE);
 
-            if (coordsIntent != null) {
-                final Waypoint waypoint = new Waypoint("some place", waypointTypeIntent != null ? waypointTypeIntent : WaypointType.WAYPOINT, false);
-                waypoint.setCoords(coordsIntent);
-
-                final CachesOverlayItemImpl item = getWaypointItem(waypoint);
-                overlayCaches.updateItems(item);
-                displayHandler.sendEmptyMessage(INVALIDATE_MAP);
-
-                cachesCnt = 1;
-            } else {
-                cachesCnt = 0;
-            }
-
-            displayHandler.sendEmptyMessage(UPDATE_TITLE);
-        }
+        cachesCnt = 1;
     }
 
     private static abstract class DoRunnable implements Runnable {
