@@ -801,7 +801,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
      * @return true if a restart is needed, false otherwise
      */
     private boolean changeMapSource(final MapSource mapSource) {
-        final boolean restartRequired = !MapProviderFactory.isSameActivity(Settings.getMapSource(), mapSource);
+        final boolean restartRequired = !MapProviderFactory.isSameActivity(MapProviderFactory.getMapSource(currentSourceId), mapSource);
 
         Settings.setMapSource(mapSource);
         currentSourceId = mapSource.getNumericalId();
