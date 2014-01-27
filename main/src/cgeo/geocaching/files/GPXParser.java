@@ -524,6 +524,14 @@ public abstract class GPXParser extends FileParser {
                     parentCacheCode = body;
                 }
             });
+
+            gsak.getChild(gsakNamespace, "FavPoints").setEndTextElementListener(new EndTextElementListener() {
+
+                @Override
+                public void end(String favoritePoints) {
+                    cache.setFavoritePoints(Integer.parseInt(favoritePoints));
+                }
+            });
         }
 
         // c:geo extensions
