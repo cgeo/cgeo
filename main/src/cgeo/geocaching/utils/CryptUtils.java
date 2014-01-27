@@ -3,6 +3,7 @@ package cgeo.geocaching.utils;
 
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -66,6 +67,8 @@ public final class CryptUtils {
         }
     }
 
+    @SuppressWarnings("null")
+    @NonNull
     public static String rot13(String text) {
         if (text == null) {
             return StringUtils.EMPTY;

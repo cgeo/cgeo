@@ -54,8 +54,8 @@ public class Settings {
     private final static int unitsMetric = 1;
 
     // twitter api keys
-    private final static String keyConsumerPublic = CryptUtils.rot13("ESnsCvAv3kEupF1GCR3jGj");
-    private final static String keyConsumerSecret = CryptUtils.rot13("7vQWceACV9umEjJucmlpFe9FCMZSeqIqfkQ2BnhV9x");
+    private final static @NonNull String keyConsumerPublic = CryptUtils.rot13("ESnsCvAv3kEupF1GCR3jGj");
+    private final static @NonNull String keyConsumerSecret = CryptUtils.rot13("7vQWceACV9umEjJucmlpFe9FCMZSeqIqfkQ2BnhV9x");
 
     public enum CoordInputFormatEnum {
         Plain,
@@ -694,10 +694,12 @@ public class Settings {
         return getBoolean(R.string.pref_skin, false);
     }
 
+    @NonNull
     public static String getKeyConsumerPublic() {
         return keyConsumerPublic;
     }
 
+    @NonNull
     public static String getKeyConsumerSecret() {
         return keyConsumerSecret;
     }

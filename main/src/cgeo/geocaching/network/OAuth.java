@@ -3,6 +3,7 @@ package cgeo.geocaching.network;
 import cgeo.geocaching.utils.CryptUtils;
 
 import ch.boye.httpclientandroidlib.NameValuePair;
+
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -36,13 +37,14 @@ public class OAuth {
         }
 
         final String keysPacked = consumerSecret + "&" + StringUtils.defaultString(tokenSecret); // both even if empty some of them!
-        final String requestPacked = method + "&" + OAuth.percentEncode((https ? "https" : "http") + "://" + host + path) + "&" + OAuth.percentEncode(StringUtils.join(paramsEncoded.toArray(), '&'));
+        final @NonNull String joinedParams = StringUtils.join(paramsEncoded.toArray(), '&');
+        final String requestPacked = method + "&" + OAuth.percentEncode((https ? "https" : "http") + "://" + host + path) + "&" + OAuth.percentEncode(joinedParams);
         params.put("oauth_signature", CryptUtils.base64Encode(CryptUtils.hashHmac(requestPacked, keysPacked)));
     }
 
     /**
      * percent encode following http://tools.ietf.org/html/rfc5849#section-3.6
-     * 
+     *
      * @param url
      * @return
      */

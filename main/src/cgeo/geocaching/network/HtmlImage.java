@@ -13,12 +13,14 @@ import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.androidextra.Base64;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import rx.Observable;
 import rx.Observable.OnSubscribeFunc;
 import rx.Observer;
@@ -123,9 +125,8 @@ public class HtmlImage implements Html.ImageGetter {
                 }
             }));
             return null;
-        } else {
-            return drawable.toBlockingObservable().lastOrDefault(null);
         }
+        return drawable.toBlockingObservable().lastOrDefault(null);
     }
 
     public Observable<BitmapDrawable> fetchDrawable(final String url) {
@@ -176,11 +177,10 @@ public class HtmlImage implements Html.ImageGetter {
                                     final BitmapDrawable image = loadResult.getLeft();
                                     if (image != null) {
                                         return image;
-                                    } else {
-                                        return returnErrorImage ?
-                                                new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded)) :
-                                                getTransparent1x1Image(resources);
                                     }
+                                    return returnErrorImage ?
+                                            new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded)) :
+                                            getTransparent1x1Image(resources);
                                 }
                             }).subscribe(observer);
                         }

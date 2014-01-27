@@ -4,6 +4,8 @@ import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
 import cgeo.geocaching.maps.PositionAndScaleOverlay;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -26,6 +28,7 @@ public interface MapViewImpl {
 
     void destroyDrawingCache();
 
+    @NonNull
     GeoPointImpl getMapViewCenter();
 
     int getLatitudeSpan();
@@ -73,7 +76,7 @@ public interface MapViewImpl {
     /**
      * Indicates if the current map view supports different themes
      * for map rendering
-     * 
+     *
      * @return true - supports custom themes, false - does not support custom themes
      */
     boolean hasMapThemes();

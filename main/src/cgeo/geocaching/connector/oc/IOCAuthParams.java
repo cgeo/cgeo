@@ -1,5 +1,7 @@
 package cgeo.geocaching.connector.oc;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 public interface IOCAuthParams {
 
     /**
@@ -7,6 +9,7 @@ public interface IOCAuthParams {
      *
      * @return
      */
+    @NonNull
     String getSite();
 
     /**
@@ -63,5 +66,6 @@ public interface IOCAuthParams {
      *
      * @return
      */
+    @NonNull
     String getCallbackUri();
 }

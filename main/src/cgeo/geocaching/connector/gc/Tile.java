@@ -10,6 +10,8 @@ import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
@@ -110,6 +112,7 @@ public class Tile {
      * @see <a
      *      href="http://developers.cloudmade.com/projects/tiles/examples/convert-coordinates-to-tile-numbers">Cloudmade</a>
      */
+    @NonNull
     public Geopoint getCoord(UTFGridPosition pos) {
 
         double pixX = tileX * TILE_SIZE + pos.x * 4;
@@ -244,7 +247,7 @@ public class Tile {
         return null;
     }
 
-    public boolean containsPoint(final ICoordinates point) {
+    public boolean containsPoint(final @NonNull ICoordinates point) {
         return viewPort.contains(point);
     }
 

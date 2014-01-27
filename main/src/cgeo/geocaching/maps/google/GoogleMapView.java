@@ -18,6 +18,7 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 
 import org.apache.commons.lang3.reflect.MethodUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.Activity;
 import android.content.Context;
@@ -89,6 +90,7 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     }
 
     @Override
+    @NonNull
     public GeoPointImpl getMapViewCenter() {
         GeoPoint point = getMapCenter();
         return new GoogleGeoPoint(point.getLatitudeE6(), point.getLongitudeE6());

@@ -1,5 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.Locale;
 import java.util.regex.Pattern;
 
@@ -15,13 +17,13 @@ public final class GCConstants {
     static final String GC_URL = "http://www.geocaching.com/";
     static final String GC_TILE_URL = "http://tiles.geocaching.com/";
     /** Live Map */
-    public final static String URL_LIVE_MAP = GC_URL + "map/default.aspx";
+    public final static @NonNull String URL_LIVE_MAP = GC_URL + "map/default.aspx";
     /** Live Map pop-up */
-    public final static String URL_LIVE_MAP_DETAILS = GC_TILE_URL + "map.details";
+    public final static @NonNull String URL_LIVE_MAP_DETAILS = GC_TILE_URL + "map.details";
     /** Caches in a tile */
-    public final static String URL_MAP_INFO = GC_TILE_URL + "map.info";
+    public final static @NonNull String URL_MAP_INFO = GC_TILE_URL + "map.info";
     /** Tile itself */
-    public final static String URL_MAP_TILE = GC_TILE_URL + "map.png";
+    public final static @NonNull String URL_MAP_TILE = GC_TILE_URL + "map.png";
 
     /**
      * Patterns for parsing the result of a (detailed) search
