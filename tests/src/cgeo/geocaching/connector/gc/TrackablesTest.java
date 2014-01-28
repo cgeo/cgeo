@@ -48,27 +48,18 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         final List<LogEntry> log = trackable.getLogs();
         assertNotNull(log);
         assertEquals(10, log.size());
-        // log entry 4 has several images; just check first two
 
+        // log entry 4 has several images; just check the first one
         final List<Image> log4Images = log.get(4).getLogImages();
         assertNotNull(log4Images);
-        assertEquals(5, log4Images.size());
-        assertEquals("http://img.geocaching.com/track/log/large/f2e24c50-394c-4d74-8fb4-87298d8bff1d.jpg", log4Images.get(0).getUrl());
-        assertEquals("7b Welcome to Geowoodstock", log4Images.get(0).getTitle());
-        assertEquals("http://img.geocaching.com/track/log/large/b57c29c3-134e-4202-a2a1-69ce8920b055.jpg", log4Images.get(1).getUrl());
-        assertEquals("8 Crater Lake Natl Park Oregon", log4Images.get(1).getTitle());
-
-        // third log entry has one image
-        final List<Image> log5Images = log.get(5).getLogImages();
-        assertNotNull(log5Images);
-        assertEquals(1, log5Images.size());
-        assertEquals("http://img.geocaching.com/track/log/large/0096b42d-4d10-45fa-9be2-2d08c0d5cc61.jpg", log5Images.get(0).getUrl());
-        assertEquals("Traverski&#39;s GC Univ coin on tour", log5Images.get(0).getTitle());
+        assertEquals(1, log4Images.size());
+        assertEquals("http://imgcdn.geocaching.com/track/log/large/3dc286d2-671e-4502-937a-f1bd35a13813.jpg", log4Images.get(0).getUrl());
+        assertEquals("@Osaka", log4Images.get(0).getTitle());
 
         for (LogEntry entry : log) {
             assertFalse(entry.log.startsWith("<div>"));
         }
-        assertEquals("traveling", log.get(0).log);
+        assertEquals("Dropped in Una Bhan (GC49XCJ)", log.get(0).log);
     }
 
     public void testParseTrackableWithoutReleaseDate() {
@@ -131,12 +122,12 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testParseMarkMissing() {
-        final Trackable trackable = parseTrackable(R.raw.tb29ggq);
+        final Trackable trackable = parseTrackable(R.raw.tb3f206);
         assertNotNull(trackable);
         final List<LogEntry> logs = trackable.getLogs();
         assertNotNull(logs);
         assertFalse(logs.isEmpty());
-        final LogEntry marked = logs.get(4);
+        final LogEntry marked = logs.get(0);
         assertEquals(LogType.MARKED_MISSING, marked.type);
     }
 

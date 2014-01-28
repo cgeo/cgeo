@@ -58,7 +58,11 @@ public class GCConstantsTest extends AndroidTestCase {
     }
 
     public static void testTBWithSpecialChar() {
-        final String page = "<meta name=\"og:site_name\" content=\"Geocaching.com\" property=\"og:site_name\" /><meta name=\"og:type\" content=\"article\" property=\"og:type\" /><meta name=\"fb:app_id\" content=\"100167303362705\" property=\"fb:app_id\" /><meta name=\"og:url\" content=\"http://coord.info/TB4VPZD\" property=\"og:url\" /><meta name=\"og:description\" property=\"og:description\" /><meta name=\"og:image\" content=\"http://www.geocaching.com/images/facebook/wpttypes/24.png\" property=\"og:image\" /><meta name=\"og:title\" content=\"Schlauchen&amp;ravestorm\" property=\"og:title\" /></head>\n";
+        // Incidentally, the site incorrectly escapes the "&" into "&amp;"
+        final String page = "<span id=\"ctl00_ContentBody_lbHeading\">Schlauchen&amp;ravestorm</span>";
         assertEquals("Schlauchen&ravestorm", Html.fromHtml(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_NAME, "")).toString());
+        // Test with the current incorrect form as well
+        final String page2 = "<span id=\"ctl00_ContentBody_lbHeading\">Schlauchen&ravestorm</span>";
+        assertEquals("Schlauchen&ravestorm", Html.fromHtml(TextUtils.getMatch(page2, GCConstants.PATTERN_TRACKABLE_NAME, "")).toString());
     }
 }
