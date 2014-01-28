@@ -529,7 +529,12 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void end(String favoritePoints) {
-                    cache.setFavoritePoints(Integer.parseInt(favoritePoints));
+                    try {
+                        cache.setFavoritePoints(Integer.parseInt(favoritePoints));
+                    }
+                    catch (final NumberFormatException e) {
+                        Log.w("Failed to parse favorite points", e);
+                    }
                 }
             });
         }
