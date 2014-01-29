@@ -72,13 +72,13 @@
   <string name="log_tb_drop">Déposé ici</string>
   <string name="log_tb_changeall">Tout modifié</string>
   <string name="log_save">Enregistrer</string>
-  <string name="log_saving">Enregistrement en cours…</string>
-  <string name="log_saving_and_uploading">Envoi de la note et de l\'image…</string>
+  <string name="log_saving">Enregistrement en cours&#8230;</string>
+  <string name="log_saving_and_uploading">Envoi de la note et de l\'image&#8230;</string>
   <string name="log_clear">Effacer</string>
   <string name="log_post">Envoyer</string>
   <string name="log_post_rate">Envoyer &amp; noter</string>
   <string name="log_post_no_rate">Envoyer &amp; ne pas noter</string>
-  <string name="log_post_not_possible">Chargement de la page…</string>
+  <string name="log_post_not_possible">Chargement de la page&#8230;</string>
   <string name="log_add">Ajouter</string>
   <string name="log_rating">Note</string>
   <string name="log_no_rating">Pas de note</string>
@@ -121,6 +121,7 @@
   <string name="translate_to_english">Traduire en anglais</string>
   <string name="translate_length_warning">La traduction d\'un texte trop long peut échouer.</string>
   <string name="err_none">ok</string>
+  <string name="err_start">Communication non démarrée</string>
   <string name="err_parse">Échec login lecture page</string>
   <string name="err_server">Échec de la connexion à Geocaching.com (probléme de serveur ou de connexion?)</string>
   <string name="err_server_ec">Impossible de contacter Extremcaching.com. Le site web peut ne pas fonctionner ou votre connexion Internet peut être défectueuse.</string>
@@ -171,12 +172,13 @@
   <string name="err_point_unknown_position">c:geo ne peut pas savoir où vous êtes.</string>
   <string name="err_point_no_position_given_title">Information obligatoire</string>
   <string name="err_point_no_position_given">Remplissez au moins la latitude ou la longitude ou la distance et le relèvement. Vous pouvez aussi remplir tous les champs.</string>
-  <string name="err_point_curr_position_unavailable">c:geo ne connaît pas encore votre position. Veuillez patienter…</string>
+  <string name="err_point_curr_position_unavailable">c:geo ne connaît pas encore votre position. Veuillez patienter&#8230;</string>
   <string name="err_point_bear_and_dist_title">Besoin d\'aide?</string>
   <string name="err_point_bear_and_dist">Remplissez le relèvement et la distance. Le relèvement est l\'angle de 0 à 360 degrés par rapport au Nord. La distance est avec ou sans les unités.</string>
   <string name="err_log_load_data">c:geo ne peut pas charger les données pour enregistrer votre visite.</string>
   <string name="err_log_load_data_again">c:geo ne peut pas charger les données pour enregistrer votre visite. Essayer plus tard.</string>
   <string name="err_log_load_data_still">c:geo est en train de charger les données pour enregistrer votre visite. Veuillez patienter encore un peu.</string>
+  <string name="err_log_failed_server">c:geo n\'a pas réussi à charger les données pour enregistrer votre visite car le serveur ne répond pas.</string>
   <string name="err_log_post_failed">Il semble que votre visite n\'a pas été enregistrée. Veuillez vérifier sur le site Geocaching.com.</string>
   <string name="err_log_post_failed_ec">Il semble que votre visite n\'a pas été enregistrée. Veuillez vérifier sur le site Extremcaching.com.</string>
   <string name="err_logimage_post_failed">Il semble que l\'envoi de l\'image ait échoué. Veuillez vérifier sur le site Geocaching.com.</string>
@@ -235,9 +237,9 @@
   <string name="caches_no_cache">Aucune cache</string>
   <string name="caches_more_caches">Charger plus de caches</string>
   <string name="caches_more_caches_no">Pas d\'autres caches</string>
-  <string name="caches_more_caches_loading">Chargement des caches…</string>
+  <string name="caches_more_caches_loading">Chargement des caches&#8230;</string>
   <string name="caches_more_caches_currently">actuellement</string>
-  <string name="caches_downloading">Téléchargement des caches…\nRestant: </string>
+  <string name="caches_downloading">Téléchargement des caches&#8230;\nRestant: </string>
   <string name="caches_eta_ltm">Moins d\'une minute</string>
   <string name="caches_store_offline">Stocker localement</string>
   <string name="caches_store_selected">Stocker la sélection</string>
@@ -296,7 +298,7 @@
   <string name="caches_filter_personal_note">Avec une note personnelle</string>
   <string name="caches_filter_popularity">Favoris</string>
   <string name="caches_filter_popularity_ratio">Favoris [%]</string>
-  <string name="caches_removing_from_history">Effacer de l\'historique…</string>
+  <string name="caches_removing_from_history">Effacer de l\'historique&#8230;</string>
   <string name="caches_clear_offlinelogs">Effacer les entrées de carnet hors-ligne</string>
   <string name="caches_clear_offlinelogs_progress">Effacement des entrées de carnet hors-ligne</string>
   <string name="list_menu">Listes</string>
@@ -343,7 +345,7 @@
   <string name="settings_category_geocaching">Geocaching</string>
   <string name="settings_category_social">Réseaux sociaux</string>
   <string name="settings_category_logging_other">Options de carnets supplémentaires</string>
-  <string name="settings_goto_url_button">plus…</string>
+  <string name="settings_goto_url_button">plus&#8230;</string>
   <string name="settings_title_gc">Geocaching.com</string>
   <string name="settings_title_ec">Extremcaching.com</string>
   <string name="settings_title_ox">Opencaching.com (Garmin)</string>
@@ -352,7 +354,7 @@
   <string name="settings_activate_ox">Activer</string>
   <string name="settings_gc_legal_note">En utilisant les services de geocaching.com, vous acceptez les conditions d\'utilisation de Groundspeak.</string>
   <string name="settings_info_facebook_login_title">Connexion Facebook</string>
-  <string name="settings_info_facebook_login">Vous ne pouvez pas faire que c:geo se connecte à geocaching.com avec votre compte Facebook. Mais il existe une solution simple…</string>
+  <string name="settings_info_facebook_login">Vous ne pouvez pas faire que c:geo se connecte à geocaching.com avec votre compte Facebook. Mais il existe une solution simple&#8230;</string>
   <string name="settings_authorize">Autoriser c:geo</string>
   <string name="settings_reauthorize">Ré-autoriser c:geo</string>
   <string name="init_oc">Opencaching.de</string>
@@ -368,7 +370,7 @@
   <string name="init_password">Mot de passe</string>
   <string name="init_login">Vérification de l\'identifiant</string>
   <string name="init_login_popup">Connexion</string>
-  <string name="init_login_popup_working">Connexion…</string>
+  <string name="init_login_popup_working">Connexion&#8230;</string>
   <string name="init_login_popup_ok">Identifiants OK</string>
   <string name="init_login_popup_failed">Erreur de connexion</string>
   <string name="init_login_popup_failed_reason">Erreur de connexion: </string>
@@ -425,7 +427,7 @@
   <string name="init_summary_livelist">Afficher la direction des caches dans les listes</string>
   <string name="init_backup">Sauvegarde</string>
   <string name="init_backup_backup">Sauvegarde</string>
-  <string name="init_backup_running">Création de la copie de sauvegarde…</string>
+  <string name="init_backup_running">Création de la copie de sauvegarde&#8230;</string>
   <string name="init_backup_note">Noter que cette option va sauvegarder/restaurer la base de données contenant les caches et les étapes, pas les paramètres. vos informations d\'utilisateur (mots de passe) ne quitteront pas l\'application.</string>
   <string name="init_backup_restore">Restauration</string>
   <string name="init_backup_success">La base de données de c:geo a été sauvegardée dans un fichier</string>
@@ -433,7 +435,7 @@
   <string name="init_backup_unnecessary">La base de données est vide, sauvegarde non nécessaire.</string>
   <string name="init_restore_success">Restauration terminée.</string>
   <string name="init_restore_failed">Échec de la restauration.</string>
-  <string name="init_restore_running">Restauration de la base de données des caches…</string>
+  <string name="init_restore_running">Restauration de la base de données des caches&#8230;</string>
   <string name="init_restore_confirm">La base de données est vide. Voulez-vous restaurer la copie de sauvegarde ?</string>
   <string name="init_backup_last">Sauvegarde disponible depuis</string>
   <string name="init_backup_last_no">Il n\'y a pas de fichier avec une sauvegarde.</string>
@@ -491,8 +493,7 @@
   <string name="feature_log_images">Joindre des images aux entrées de journal</string>
   <string name="feature_watch_list">Liste de suivi</string>
   <string name="feature_own_coordinates">Stockage de coordonnées modifiées</string>
-  <string name="feature_search_owner">Recherche par propriétaire</string>
-  <string name="feature_search_finder">Recherche par découvreur</string>
+  <string name="feature_search_user">Recherche par propriétaire/découvreur</string>
   <string name="feature_search_keyword">Recherche par mot clé</string>
   <string name="feature_search_live_map">Carte active</string>
   <string name="feature_search_center">Recherche par position</string>
@@ -507,7 +508,7 @@
   <string name="init_sendToCgeo_name">Votre nom d\'appareil:</string>
   <string name="init_sendToCgeo_description"><b>Envoyer vers c:geo</b> permet de recevoir les caches directement depuis le site Geocaching.com en utilisant une extension pour Firefox ou Chrome. Après votre inscription, veuillez lire <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Pour utiliser send2cgeo, vous avez juste besoin de vous inscrire. c:geo fonctionnera aussi sans enregistrer votre appareil.</string>
   <string name="init_sendToCgeo_register">Demande d\'enregistrement</string>
-  <string name="init_sendToCgeo_registering">Enregistrer votre appareil pour \"Send to c:geo\"…</string>
+  <string name="init_sendToCgeo_registering">Enregistrer votre appareil pour \"Send to c:geo\"&#8230;</string>
   <string name="init_sendToCgeo_register_ok">Enregistrement réussi. Le code PIN est ####. Utiliser le sur le site de c:geo pour ajouter votre appareil dans votre navigateur.</string>
   <string name="init_sendToCgeo_register_fail">Échec de l\'enregistrement.</string>
   <string name="sendToCgeo_download_fail">c:geo n\'a pas pu charger les caches. Pas de connexion Internet ou problème avec le site send2c:geo.</string>
@@ -516,7 +517,7 @@
   <string name="auth_authorize">autorisation de c:geo</string>
   <string name="auth_start">début d\'autorisation</string>
   <string name="auth_again">redémarre</string>
-  <string name="auth_dialog_waiting">En attente de %s…</string>
+  <string name="auth_dialog_waiting">En attente de %s&#8230;</string>
   <string name="auth_explain_short">Le processus suivant autorisera <b>c:geo</b> à accéder à %s.</string>
   <string name="auth_explain_long">L\'appui sur \"Autoriser c:geo\" démarrera le processus. Un navigateur web ouvrira la page de %s. Vous pourrez vous connecter sur votre compte et en autoriser l\'accès à <b>c:geo</b>. C\'est tout.</string>
   <string name="auth_dialog_completed_twitter">c:geo est maintenant autorisé à poster sur Twitter.</string>
@@ -571,7 +572,7 @@
   <string name="cache_hint">Indice</string>
   <string name="cache_logs">Carnet de bord</string>
   <string name="cache_logsfriends">Carnet (amis)</string>
-  <string name="cache_dialog_loading_details">Chargement des détails…</string>
+  <string name="cache_dialog_loading_details">Chargement des détails&#8230;</string>
   <string name="cache_dialog_loading_details_status_loadpage">Chargement de la page</string>
   <string name="cache_dialog_loading_details_status_details">Analyse</string>
   <string name="cache_dialog_loading_details_status_spoilers">Images indices</string>
@@ -581,19 +582,19 @@
   <string name="cache_dialog_loading_details_status_cache">Sauvegarde des données</string>
   <string name="cache_dialog_loading_details_status_render">Préparation de la page</string>
   <string name="cache_dialog_offline_save_title">Hors ligne</string>
-  <string name="cache_dialog_offline_save_message">Enregistrement pour une utilisation hors ligne…</string>
+  <string name="cache_dialog_offline_save_message">Enregistrement pour une utilisation hors ligne&#8230;</string>
   <string name="cache_dialog_offline_drop_title">Hors ligne</string>
-  <string name="cache_dialog_offline_drop_message">Suppression des caches de la mémoire…</string>
+  <string name="cache_dialog_offline_drop_message">Suppression des caches de la mémoire&#8230;</string>
   <string name="cache_dialog_refresh_title">Recharger</string>
-  <string name="cache_dialog_refresh_message">Rechargement des détails…</string>
+  <string name="cache_dialog_refresh_message">Rechargement des détails&#8230;</string>
   <string name="cache_dialog_watchlist_add_title">Liste de suivi</string>
-  <string name="cache_dialog_watchlist_add_message">Ajout de la cache à votre liste de suivi…</string>
+  <string name="cache_dialog_watchlist_add_message">Ajout de la cache à votre liste de suivi&#8230;</string>
   <string name="cache_dialog_watchlist_remove_title">Liste de suivi</string>
-  <string name="cache_dialog_watchlist_remove_message">Retrait de la cache de votre liste de suivi…</string>
+  <string name="cache_dialog_watchlist_remove_message">Retrait de la cache de votre liste de suivi&#8230;</string>
   <string name="cache_dialog_favorite_add_title">Favori</string>
-  <string name="cache_dialog_favorite_add_message">Ajout de la cache à vos favoris…</string>
+  <string name="cache_dialog_favorite_add_message">Ajout de la cache à vos favoris&#8230;</string>
   <string name="cache_dialog_favorite_remove_title">Favori</string>
-  <string name="cache_dialog_favorite_remove_message">Suppression de la cache de vos favoris…</string>
+  <string name="cache_dialog_favorite_remove_message">Suppression de la cache de vos favoris&#8230;</string>
   <string name="cache_menu_navigate">Navigation</string>
   <string name="cache_menu_navigation_drive">Navigation (voiture)</string>
   <string name="cache_menu_navigation_walk">Navigation (piéton)</string>
@@ -649,6 +650,7 @@
   <string name="cache_coordinates">Coordonnées</string>
   <string name="cache_coordinates_original">Coordonnées d\'origine</string>
   <string name="cache_spoiler_images_title">Images indices</string>
+  <string name="cache_images_title">Images</string>
   <string name="cache_log_types">Types de visites</string>
   <string name="cache_coordinates_no">Cette cache n\'a pas de coordonnées.</string>
   <string name="cache_clear_history">Effacer l\'historique</string>
@@ -688,7 +690,7 @@
   <string name="gpx_import_android">Importation depuis Android</string>
   <string name="map_file_select_title">Choisir un fichier carte</string>
   <string name="web_import_title">Import depuis le web</string>
-  <string name="web_import_waiting">En attente de nouvelles caches depuis le web…</string>
+  <string name="web_import_waiting">En attente de nouvelles caches depuis le web&#8230;</string>
   <string name="web_downloading">Téléchargement</string>
   <string name="web_downloaded">Téléchargé</string>
   <string name="popup_more">Plus de détails</string>
@@ -706,17 +708,17 @@
   <string name="waypoint_note">Note</string>
   <string name="waypoint_visited">Marquer comme visité</string>
   <string name="waypoint_save">Sauver</string>
-  <string name="waypoint_loading">Chargement d\'une étape…</string>
+  <string name="waypoint_loading">Chargement d\'une étape&#8230;</string>
   <string name="waypoint_do_not_touch_cache_coordinates">Ne pas modifier les coordonnées de la cache</string>
   <string name="waypoint_set_as_cache_coords">Utiliser comme coordonnées de la cache dans c:geo</string>
   <string name="waypoint_save_and_modify_on_website">Utiliser comme coordonnées de la cache dans c:geo et sur le site web</string>
   <string name="waypoint_reset_cache_coords">Réinitialiser les coordonnées de la cache</string>
   <string name="waypoint_coordinates_has_been_reset_on_website">Les coordonnées de la cache ont été reinitialisées sur le site web.</string>
-  <string name="waypoint_coordinates_being_reset_on_website">Réinitialisation des coordonnées de la cache sur le site web…</string>
+  <string name="waypoint_coordinates_being_reset_on_website">Réinitialisation des coordonnées de la cache sur le site web&#8230;</string>
   <string name="waypoint_reset">Réinitialiser</string>
   <string name="waypoint_localy_reset_cache_coords">Réinitialiser dans c:geo</string>
   <string name="waypoint_reset_local_and_remote_cache_coords">Réinitialiser dans c:geo et sur le site web</string>
-  <string name="waypoint_being_saved">Étape en cours de sauvegarde…</string>
+  <string name="waypoint_being_saved">Étape en cours de sauvegarde&#8230;</string>
   <string name="waypoint_coordinates_couldnt_be_modified_on_website">Le site web n\'accepte pas la modification des coordonnées de la cache.</string>
   <string name="waypoint_coordinates_upload_error">Erreur lors de la modification des coordonnées sur le site web.</string>
   <string name="waypoint_coordinates_uploading_to_website">Envoi des coordonnées %s sur le site web.</string>
@@ -746,7 +748,7 @@
   <string name="map_live_enable">Activer Temps réel</string>
   <string name="map_live_disable">Désactiver Temps réel</string>
   <string name="map_static_title">Cartes statiques</string>
-  <string name="map_static_loading">Chargement des cartes statiques…</string>
+  <string name="map_static_loading">Chargement des cartes statiques&#8230;</string>
   <string name="map_token_err">Depuis que c:geo est capable de télécharger des données partielles, les coordonnées des caches peuvent être inexactes.</string>
   <string name="map_as_list">Lister les caches</string>
   <string name="map_strategy">Stratégie</string>
@@ -756,6 +758,7 @@
   <string name="map_strategy_auto">En fonction du déplacement</string>
   <string name="map_strategy_detailed">Détaillée</string>
   <string name="live_map_notification">Lors de l\'affichage de la carte active, certaines coordonnées de géocaches peuvent être imprécises et sont indiquées par un cercle orange.\nDemander les détails d\'une géocache ou la sauver pour une utilisation hors-ligne récupérera les coordonnées exactes.\n\nVous trouverez plus d\'informations sur les changements sur la page \"À propos de c:geo\".</string>
+  <string name="live_map_note_dontshow">Ne plus afficher</string>
   <string name="search_bar_hint">Recherche de caches</string>
   <string name="search_bar_desc">Caches (géocode, mot clé), Objets voyageurs (code TB)</string>
   <string name="search_coordinates">Coordonnées</string>
@@ -785,7 +788,7 @@
   <string name="search_pocket_loading">Chargement d\'une liste de Pocket Queries</string>
   <string name="search_pocket_select">Choisir la Pocket Query</string>
   <string name="trackable">Objet voyageur</string>
-  <string name="trackable_details_loading">Chargement des détails d\'un objet voyageur…</string>
+  <string name="trackable_details_loading">Chargement des détails d\'un objet voyageur&#8230;</string>
   <string name="trackable_log_touch">Toucher l\'objet</string>
   <string name="trackable_browser_open">Ouvrir dans un navigateur</string>
   <string name="trackable_goal">But</string>
@@ -854,10 +857,10 @@
   <string name="export_fieldnotes">Notes de terrain</string>
   <string name="export_fieldnotes_info">Les notes de terrain seront sauvées dans le dossier /sdcard/field-notes avec, comme nom de fichier, la date et l\'heure courantes.</string>
   <string name="export_fieldnotes_upload">Envoyer vers Geocaching.com</string>
-  <string name="export_fieldnotes_uploading">Envoi en cours…</string>
+  <string name="export_fieldnotes_uploading">Envoi en cours&#8230;</string>
   <string name="export_fieldnotes_upload_success">Envoi effectué avec succès</string>
   <string name="export_fieldnotes_onlynew">Uniquement les nouveautés depuis le dernier envoi</string>
-  <string name="export_fieldnotes_creating">Création des notes de terrain…</string>
+  <string name="export_fieldnotes_creating">Création des notes de terrain&#8230;</string>
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">Le fichier GPX sera exporté dans %1$s avec la date et l\'heure courantes comme nom de fichier.</string>
   <string name="export_gpx_to">Envoyer le GPX exporté vers</string>
@@ -1113,7 +1116,6 @@
   <string name="tts_oclock">%s heures</string>
   <string name="clipboard_copy_ok">Copié dans le presse-papiers</string>
   <string name="percent_favorite_points">%\ favoris</string>
-  <string name="cgeo_shortcut">c:geo raccourci</string>
   <string name="create_shortcut">Créer un raccourci</string>
   <string-array name="log_image_scales">
     <item>Taille originale</item>
