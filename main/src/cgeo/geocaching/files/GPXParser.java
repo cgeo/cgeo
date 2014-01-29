@@ -537,6 +537,14 @@ public abstract class GPXParser extends FileParser {
                     }
                 }
             });
+
+            gsak.getChild(gsakNamespace, "GcNote").setEndTextElementListener(new EndTextElementListener() {
+
+                @Override
+                public void end(final String personalNote) {
+                    cache.setPersonalNote(StringUtils.trim(personalNote));
+                }
+            });
         }
 
         // c:geo extensions

@@ -332,4 +332,12 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(258, cache.getFavoritePoints());
     }
 
+    public void testGsakPersonalNote() throws IOException, ParserException {
+        final List<Geocache> caches = readGPX10(R.raw.gc3t1xg_gsak);
+        assertNotNull(caches);
+        assertEquals(1, caches.size());
+        final Geocache cache = caches.get(0);
+        assertEquals("Personal Note Test", cache.getPersonalNote());
+    }
+
 }
