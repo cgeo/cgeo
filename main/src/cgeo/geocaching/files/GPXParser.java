@@ -500,73 +500,9 @@ public abstract class GPXParser extends FileParser {
         // for GPX 1.1 from extensions node
         final Element cacheParent = getCacheParent(waypoint);
 
-        // GSAK extensions
-        for (final String gsakNamespace : GSAK_NS) {
-            final Element gsak = cacheParent.getChild(gsakNamespace, "wptExtension");
-            gsak.getChild(gsakNamespace, "Watch").setEndTextElementListener(new EndTextElementListener() {
+        registerGsakExtensions(cacheParent);
 
-                @Override
-                public void end(String watchList) {
-                    cache.setOnWatchlist(Boolean.valueOf(watchList.trim()));
-                }
-            });
-
-            gsak.getChild(gsakNamespace, "UserData").setEndTextElementListener(new UserDataListener(1));
-
-            for (int i = 2; i <= 4; i++) {
-                gsak.getChild(gsakNamespace, "User" + i).setEndTextElementListener(new UserDataListener(i));
-            }
-
-            gsak.getChild(gsakNamespace, "Parent").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(String body) {
-                    parentCacheCode = body;
-                }
-            });
-
-            gsak.getChild(gsakNamespace, "FavPoints").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(String favoritePoints) {
-                    try {
-                        cache.setFavoritePoints(Integer.parseInt(favoritePoints));
-                    }
-                    catch (final NumberFormatException e) {
-                        Log.w("Failed to parse favorite points", e);
-                    }
-                }
-            });
-
-            gsak.getChild(gsakNamespace, "GcNote").setEndTextElementListener(new EndTextElementListener() {
-
-                @Override
-                public void end(final String personalNote) {
-                    cache.setPersonalNote(StringUtils.trim(personalNote));
-                }
-            });
-        }
-
-        // c:geo extensions
-        final Element cgeoVisited = cacheParent.getChild(CGEO_NS, "visited");
-
-        cgeoVisited.setEndTextElementListener(new EndTextElementListener() {
-
-            @Override
-            public void end(String visited) {
-                wptVisited = Boolean.valueOf(visited.trim());
-            }
-        });
-
-        final Element cgeoUserDefined = cacheParent.getChild(CGEO_NS, "userdefined");
-
-        cgeoUserDefined.setEndTextElementListener(new EndTextElementListener() {
-
-            @Override
-            public void end(String userDefined) {
-                wptUserDefined = Boolean.valueOf(userDefined.trim());
-            }
-        });
+        registerCgeoExtensions(cacheParent);
 
         // 3 different versions of the GC schema
         for (final String nsGC : GROUNDSPEAK_NAMESPACE) {
@@ -875,6 +811,94 @@ public abstract class GPXParser extends FileParser {
         } catch (final SAXException e) {
             throw new ParserException("Cannot parse .gpx file as GPX " + version + ": could not parse XML", e);
         }
+    }
+
+    /**
+     * Add listeners for GSAK extensions
+     *
+     * @param cacheParent
+     */
+    private void registerGsakExtensions(final Element cacheParent) {
+        for (final String gsakNamespace : GSAK_NS) {
+            final Element gsak = cacheParent.getChild(gsakNamespace, "wptExtension");
+            gsak.getChild(gsakNamespace, "Watch").setEndTextElementListener(new EndTextElementListener() {
+
+                @Override
+                public void end(String watchList) {
+                    cache.setOnWatchlist(Boolean.valueOf(watchList.trim()));
+                }
+            });
+
+            gsak.getChild(gsakNamespace, "UserData").setEndTextElementListener(new UserDataListener(1));
+
+            for (int i = 2; i <= 4; i++) {
+                gsak.getChild(gsakNamespace, "User" + i).setEndTextElementListener(new UserDataListener(i));
+            }
+
+            gsak.getChild(gsakNamespace, "Parent").setEndTextElementListener(new EndTextElementListener() {
+
+                @Override
+                public void end(String body) {
+                    parentCacheCode = body;
+                }
+            });
+
+            gsak.getChild(gsakNamespace, "FavPoints").setEndTextElementListener(new EndTextElementListener() {
+
+                @Override
+                public void end(String favoritePoints) {
+                    try {
+                        cache.setFavoritePoints(Integer.parseInt(favoritePoints));
+                    }
+                    catch (final NumberFormatException e) {
+                        Log.w("Failed to parse favorite points", e);
+                    }
+                }
+            });
+
+            gsak.getChild(gsakNamespace, "GcNote").setEndTextElementListener(new EndTextElementListener() {
+
+                @Override
+                public void end(final String personalNote) {
+                    cache.setPersonalNote(StringUtils.trim(personalNote));
+                }
+            });
+
+            gsak.getChild(gsakNamespace, "IsPremium").setEndTextElementListener(new EndTextElementListener() {
+
+                @Override
+                public void end(final String premium) {
+                    cache.setPremiumMembersOnly(Boolean.parseBoolean(premium));
+                }
+            });
+        }
+    }
+
+    /**
+     * Add listeners for c:geo extensions
+     * 
+     * @param cacheParent
+     */
+    private void registerCgeoExtensions(final Element cacheParent) {
+        final Element cgeoVisited = cacheParent.getChild(CGEO_NS, "visited");
+
+        cgeoVisited.setEndTextElementListener(new EndTextElementListener() {
+
+            @Override
+            public void end(String visited) {
+                wptVisited = Boolean.valueOf(visited.trim());
+            }
+        });
+
+        final Element cgeoUserDefined = cacheParent.getChild(CGEO_NS, "userdefined");
+
+        cgeoUserDefined.setEndTextElementListener(new EndTextElementListener() {
+
+            @Override
+            public void end(String userDefined) {
+                wptUserDefined = Boolean.valueOf(userDefined.trim());
+            }
+        });
     }
 
     /**

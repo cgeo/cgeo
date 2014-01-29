@@ -34,7 +34,7 @@ xmlns="http://www.topografix.com/GPX/1/0">
       <gsak:LastGpxDate>2014-01-26</gsak:LastGpxDate>
       <gsak:Code>GC3T1XG</gsak:Code>
       <gsak:Resolution></gsak:Resolution>
-      <gsak:IsPremium>false</gsak:IsPremium>
+      <gsak:IsPremium>true</gsak:IsPremium>
       <gsak:FavPoints>258</gsak:FavPoints>
       <gsak:GcNote>Personal Note Test</gsak:GcNote>
       <gsak:Guid>d09416d5-dba9-4347-86a6-12f7b5ef2fff</gsak:Guid>

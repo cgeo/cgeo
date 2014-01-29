@@ -325,19 +325,27 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals("Wasserleitung", cache.getHint());
     }
 
-    public void testGsakFavPoints() throws IOException, ParserException {
-        final List<Geocache> caches = readGPX10(R.raw.gc3t1xg_gsak);
+    private Geocache getFirstCache(int gpxResourceId) throws IOException, ParserException {
+        final List<Geocache> caches = readGPX10(gpxResourceId);
+        assertNotNull(caches);
         assertEquals(1, caches.size());
         final Geocache cache = caches.get(0);
+        return cache;
+    }
+
+    public void testGsakFavPoints() throws IOException, ParserException {
+        final Geocache cache = getFirstCache(R.raw.gc3t1xg_gsak);
         assertEquals(258, cache.getFavoritePoints());
     }
 
     public void testGsakPersonalNote() throws IOException, ParserException {
-        final List<Geocache> caches = readGPX10(R.raw.gc3t1xg_gsak);
-        assertNotNull(caches);
-        assertEquals(1, caches.size());
-        final Geocache cache = caches.get(0);
+        final Geocache cache = getFirstCache(R.raw.gc3t1xg_gsak);
         assertEquals("Personal Note Test", cache.getPersonalNote());
+    }
+
+    public void testGsakPremium() throws IOException, ParserException {
+        final Geocache cache = getFirstCache(R.raw.gc3t1xg_gsak);
+        assertTrue(cache.isPremiumMembersOnly());
     }
 
 }
