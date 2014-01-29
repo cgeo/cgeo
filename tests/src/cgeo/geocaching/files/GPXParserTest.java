@@ -325,4 +325,11 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals("Wasserleitung", cache.getHint());
     }
 
+    public void testGsakFavPoints() throws IOException, ParserException {
+        final List<Geocache> caches = readGPX10(R.raw.gc3t1xg_gsak);
+        assertEquals(1, caches.size());
+        final Geocache cache = caches.get(0);
+        assertEquals(258, cache.getFavoritePoints());
+    }
+
 }
