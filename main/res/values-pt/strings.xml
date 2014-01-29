@@ -121,6 +121,7 @@
   <string name="translate_to_english">Traduzir para inglês</string>
   <string name="translate_length_warning">A tradução pode falhar se o texto fôr muito grande.</string>
   <string name="err_none">Ok</string>
+  <string name="err_start">Comunicação não iniciada</string>
   <string name="err_parse">Falha na análise da página de login</string>
   <string name="err_server">Falha na ligação a Geocaching.com (servidor ou ligação em baixo?)</string>
   <string name="err_login">Informação de login não gravada</string>
@@ -176,6 +177,7 @@
   <string name="err_log_load_data">O c:geo não consegue carregar os dados necessários para registar a sua visita.</string>
   <string name="err_log_load_data_again">O c:geo não consegue carregar os dados necessários para registar a sua visita. A tentar de novo.</string>
   <string name="err_log_load_data_still">O c:geo ainda está a carregar dados necessários para publicar o registo. Por favor espere mais um pouco.</string>
+  <string name="err_log_failed_server">O c:geo falhou a publicação do registo porque o servidor não responde.</string>
   <string name="err_log_post_failed">O c:geo falhou a publicação do registo.</string>
   <string name="err_logimage_post_failed">Parece que a sua imagem de registo não foi enviada. Por favor verifique em Geocaching.com.</string>
   <string name="err_search_address_forgot">O c:geo esqueceu o endereço que procura.</string>
@@ -243,8 +245,6 @@
   <string name="caches_sort_difficulty">Dificuldade</string>
   <string name="caches_sort_terrain">Terreno</string>
   <string name="caches_sort_size">Tamanho</string>
-  <string name="caches_sort_favorites">Popularidade</string>
-  <string name="caches_sort_favorites_ratio">Popularidade [%]</string>
   <string name="caches_sort_name">Nome</string>
   <string name="caches_sort_geocode">Geo Código</string>
   <string name="caches_sort_rating">Pontuação</string>
@@ -338,7 +338,7 @@
   <string name="settings_activate_gc">Activar</string>
   <string name="settings_gc_legal_note">Quando você usa do serviço do geocaching.com, você aceita os termos de uso da Groundspeak.</string>
   <string name="settings_info_facebook_login_title">Facebook Login</string>
-  <string name="settings_info_facebook_login" tools:ignore="Typos">Não consegue que c:geo faça o login em geocaching.com com a sua conta do Facebook. Mas existe uma solução simples…</string>
+  <string name="settings_info_facebook_login">Não consegue que c:geo faça o login em geocaching.com com a sua conta do Facebook. Mas existe uma solução simples…</string>
   <string name="settings_authorize">Autorizar c:geo</string>
   <string name="settings_reauthorize">Reautorizar c:geo</string>
   <string name="init_oc">Opencaching.de</string>
@@ -604,6 +604,7 @@
   <string name="cache_coordinates">Coordenadas</string>
   <string name="cache_coordinates_original">Coordenadas originais</string>
   <string name="cache_spoiler_images_title">Imagens spoiler</string>
+  <string name="cache_images_title">Imagens</string>
   <string name="cache_log_types">Tipos de log</string>
   <string name="cache_coordinates_no">Esta cache não tem coordenadas.</string>
   <string name="cache_clear_history">Apagar histórico</string>
@@ -709,6 +710,7 @@
   <string name="map_strategy_auto">Dependente da velocidade</string>
   <string name="map_strategy_detailed">Detalhado</string>
   <string name="live_map_notification">No novo mapa ao vivo as coordenadas podem nem sempre ser precisas. As coordenadas possivelmente imprecisas são marcadas com um círculo cor de laranja.\nAbrindo os detalhes da cache or gravando a cache para utilização offline fará com que obtenha as coordenadas precisas.\n\nMais informações em todas as alterações podem ser encontradas na página \"Sobre c:geo\" na aplicação.</string>
+  <string name="live_map_note_dontshow">Não mostrar novamente</string>
   <string name="search_bar_hint">Procurar caches</string>
   <string name="search_bar_desc">Caches (código-GC, palavra-chave), Trackables (código-TB)</string>
   <string name="search_coordinates">Coordenadas</string>

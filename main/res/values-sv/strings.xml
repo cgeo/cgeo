@@ -121,8 +121,10 @@
   <string name="translate_to_english">Översätt till engelska</string>
   <string name="translate_length_warning">Översättningen kan misslyckas med långa texter.</string>
   <string name="err_none">Ok</string>
+  <string name="err_start">Kommunikationen har inte påbörjats</string>
   <string name="err_parse">Misslyckades att analysera inloggningssidan</string>
   <string name="err_server">Misslyckades att ansluta till Geocaching.com. Hemsidan kan vara ur funktion eller så är det problem med din anslutning till Internet.</string>
+  <string name="err_server_ec">Det gick inte att kontakta Extremcaching.com. Webbplatsen kan ha probblem eller så fungerar inte din internet-anslutning.</string>
   <string name="err_login">Inloggningsinformationen ej sparad</string>
   <string name="err_login_failed">Tyvärr kan c:geo inte logga in.</string>
   <string name="err_login_failed_toast">Tyvärr kan c:geo inte logga in. c:geo kommer att köra i offline läge med sparade cacher. Kontrollera dina inloggningsuppgifter och aktivera din internetanslutning.</string>
@@ -176,7 +178,9 @@
   <string name="err_log_load_data">Tyvärr kan c:geo inte ladda information som krävs för att logga ditt besök.</string>
   <string name="err_log_load_data_again">Tyvärr kan c:geo inte ladda information som krävs för att logga ditt besök. Försöker igen.</string>
   <string name="err_log_load_data_still">c:geo laddar fortfarande data för att kunna posta loggen. Vänligen vänta en stund till.</string>
+  <string name="err_log_failed_server">Tyvärr misslyckades c:geo att posta loggen eftersom servern inte svarade.</string>
   <string name="err_log_post_failed">Tyvärr misslyckades c:geo att posta loggen.</string>
+  <string name="err_log_post_failed_ec">Det verkar som att din logg inte kunde laddas upp. Kontrollera loggen på Extremcaching.com.</string>
   <string name="err_logimage_post_failed">Det verkar som om din bild till loggen inte kunde laddas upp. Vänligen kontrollera den på Geocaching.com.</string>
   <string name="err_search_address_forgot">Tyvärr glömde c:geo adressen du sökte efter.</string>
   <string name="err_parse_lat">Tyvärr kan c:geo inte tolka latitud.</string>
@@ -200,6 +204,8 @@
   <string name="warn_deprecated_mapfile">Den kartfil du använder är av en gammal version (0.2.4).\nVi rekommenderar att byta till en kartfil med version 0.3.0.\nNästa version av c:geo kommer inte hantera version 0.2.4.</string>
   <string name="warn_nonexistant_mapfile">Den angivna kartfilen finns inte.\nOffline-kartor kommer inte att vara tillgängliga.</string>
   <string name="warn_rendertheme_missing">Karttema kunde inte hittas.</string>
+  <string name="warn_pocket_query_select">Ingen Pocket query vald.</string>
+  <string name="warn_no_pocket_query_found">Ingen Pocket query hittades på nätet.</string>
   <string name="info_log_posted">c:geo har postat din logg.</string>
   <string name="info_log_saved">c:geo har sparat din logg.</string>
   <string name="info_log_cleared">Loggen har rensats.</string>
@@ -220,6 +226,8 @@
   <string name="menu_history">Hittade cacher</string>
   <string name="menu_filter">Filter</string>
   <string name="menu_scan_geo">Scanna geokod</string>
+  <string name="menu_pocket_queries">Pocket queries</string>
+  <string name="menu_scan_description">c:geo kan skanna geocoder som skrivits som QR-koder. Den nödvändiga appen är inte installerad. Vill du öppna Google Play för att installera den?</string>
   <string name="live_map_button">Live karta</string>
   <string name="caches_nearby_button">Nära</string>
   <string name="advanced_search_button">Sök</string>
@@ -287,6 +295,9 @@
   <string name="caches_filter_modified">Med tillagda koordinater</string>
   <string name="caches_filter_origin">Ursprung</string>
   <string name="caches_filter_distance">Avstånd</string>
+  <string name="caches_filter_personal_note">Med personlig anteckning</string>
+  <string name="caches_filter_popularity">Favoriter</string>
+  <string name="caches_filter_popularity_ratio">Favoriter [%]</string>
   <string name="caches_removing_from_history">Tar bort från historik…</string>
   <string name="caches_clear_offlinelogs">Rensa offline loggar</string>
   <string name="caches_clear_offlinelogs_progress">Rensar offline loggar</string>
@@ -325,6 +336,7 @@
   <string name="settings_title_map">Karta</string>
   <string name="settings_title_map_data">Kartdata</string>
   <string name="settings_title_map_content">Kartinnehåll</string>
+  <string name="settings_title_basicmembers">Inställningar för Basic Members</string>
   <string name="settings_title_navigation">Navigering</string>
   <string name="settings_title_system">System</string>
   <string name="settings_title_navigation_menu">Navigeringsmeny</string>
@@ -332,10 +344,16 @@
   <string name="settings_category_social">Sociala media</string>
   <string name="settings_category_logging_other">Andra loggningsinställningar</string>
   <string name="settings_goto_url_button">mer …</string>
+  <string name="settings_title_ec">Extremcaching.com</string>
+  <string name="settings_title_ox">Opencaching.com (Garmin)</string>
   <string name="settings_activate_gc">Aktivera</string>
+  <string name="settings_activate_ec">Aktivera</string>
+  <string name="settings_activate_ox">Aktivera</string>
   <string name="settings_gc_legal_note">Genom att använda tjänster hos geocaching.com godkänner du Groundspeaks användarvillkor.</string>
   <string name="settings_info_facebook_login_title">Facebook inloggning</string>
   <string name="settings_info_facebook_login">c:geo kan inte logga inte logga in på geocaching.com med ditt Facebook konto. Men det finns en enkel lösning …</string>
+  <string name="settings_authorize">Tillåt c:geo</string>
+  <string name="settings_reauthorize">Tillåt c:geo igen</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Aktivera</string>
   <string name="init_oc_de_description">Använd c:geo med opencaching.de för att söka efter cacher samt för att filtrera dina funna cacher.</string>
@@ -353,7 +371,10 @@
   <string name="init_login_popup_failed">Inloggning misslyckades</string>
   <string name="init_login_popup_failed_reason">Inloggning misslyckades:</string>
   <string name="init_login_popup_not_authorized">Ej godkänd</string>
+  <string name="init_login_popup_invalid_timestamp">Lokal tid ogiltig, justera enhetens tid</string>
+  <string name="init_login_popup_invalid_token">Tillstånd misslyckades, försök igen</string>
   <string name="init_signature">Signatur</string>
+  <string name="init_template_help">Markörer som [NAME] kommer att utvidgas senare när mallen används.</string>
   <string name="init_signature_template_button">Infoga makro</string>
   <string name="init_signature_template_date">Datum</string>
   <string name="init_signature_template_time">Tid</string>
@@ -361,6 +382,9 @@
   <string name="init_signature_template_user">Namn</string>
   <string name="init_signature_template_number">Nummer</string>
   <string name="init_signature_template_owner">Ägare</string>
+  <string name="init_signature_template_name">Namn</string>
+  <string name="init_signature_template_url">URL</string>
+  <string name="init_signature_template_log">Loggtext</string>
   <string name="init_ratingwanted">GCvote.com</string>
   <string name="init_summary_ratingwanted">Ladda cache betyg från GCvote.com</string>
   <string name="init_friendlogswanted">Vänners loggar</string>
@@ -416,6 +440,8 @@
   <string name="settings_info_themes_title">Info om kartteman</string>
   <string name="settings_info_themes">c:geo har stöd för anpassade teman för offline-kartor. Dessa kan användas för färgerna på kartan (t.ex. för nattläge) eller för att tydliggöra vissa objekt såsom cykelvägar eller höjdkurvor.</string>
   <string name="init_mapsource_select">Välj kartkälla</string>
+  <string name="settings_title_scale_map_text">Skala karttext</string>
+  <string name="settings_summary_scale_map_text">Skala textetiketter på offlinekartor enligt enheten dpi</string>
   <string name="init_map_directory_description">Katalog med offline-kartor</string>
   <string name="init_gpx_exportdir">GPX-exportkatalog</string>
   <string name="init_gpx_importdir">GPX-importkatalog</string>
@@ -451,6 +477,22 @@
   <string name="settings_open_website">Öppna hemsida</string>
   <string name="settings_settings">Inställningar</string>
   <string name="settings_information">Information</string>
+  <string name="settings_twitter_cache_message">Meddelande för hittad cache</string>
+  <string name="settings_twitter_trackable_message">Meddelande för hittad trackable</string>
+  <string name="init_ec_icons">Kartikoner</string>
+  <string name="settings_ec_icons_other">Egen stil</string>
+  <string name="settings_ec_icons_oc">Som OC</string>
+  <string name="settings_features">Funktioner som stöds</string>
+  <string name="feature_description">Följande <b>online</b> funktioner på denna webbplats stöds i c:geo (förutom offline funktionerna):</string>
+  <string name="feature_personal_notes">Personlig anteckning</string>
+  <string name="feature_online_logging">Online loggning</string>
+  <string name="feature_log_images">Bifoga bilder till loggar</string>
+  <string name="feature_own_coordinates">Lagring av modifierade koordinater</string>
+  <string name="feature_search_user">Sök efter ägare/hittare</string>
+  <string name="feature_search_keyword">Sök med nyckelord</string>
+  <string name="feature_search_live_map">Live karta</string>
+  <string name="feature_search_center">Sök efter position</string>
+  <string name="feature_search_geocode">Sök med geo-kod</string>
   <string name="map_source_google_map">Google: Map</string>
   <string name="map_source_google_satellite">Google: Satellit</string>
   <string name="map_source_osm_mapnik">OSM: Mapnik</string>
@@ -470,6 +512,10 @@
   <string name="auth_authorize">Koppla c:geo mot Twitter</string>
   <string name="auth_start">Påbörja koppling mot Twitter</string>
   <string name="auth_again">Koppla mot Twitter igen</string>
+  <string name="auth_dialog_waiting">Väntar på %s…</string>
+  <string name="auth_explain_short">Följande process kommer att tillåta <b>c:geo</b> att få tillgång till %s.</string>
+  <string name="auth_explain_long">Genom att trycka på knappen \"tillåt c:geo\" kommer processen att startas. Denna process kommer att öppna en webbläsare med %s sida. Logga in på den här sidan och låt <b>c:geo</b> komma åt ditt konto. Det är allt.</string>
+  <string name="auth_dialog_completed_twitter">c:geo är nu godkänd att posta på Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_dialog_completed_oc">c:geo är nu godkänd för att kommunicera med %s.</string>
   <string name="cache_offline">Offline</string>
@@ -492,6 +538,8 @@
   <string name="cache_log_image_default_title">Foto</string>
   <string name="cache_personal_note">Personlig anteckning</string>
   <string name="cache_personal_note_edit">Redigera</string>
+  <string name="cache_personal_note_limit">Gräns för personlig kommentar</string>
+  <string name="cache_personal_note_truncation">Denna personliga kommentar kommer att trunkeras efter %d tecken av Geocaching.com.</string>
   <string name="cache_personal_note_upload">Ladda upp</string>
   <string name="cache_personal_note_uploading">Laddar upp personlig anteckning</string>
   <string name="cache_personal_note_upload_done">Den personliga anteckning har laddats upp</string>
@@ -594,6 +642,7 @@
   <string name="cache_coordinates">Koordinater</string>
   <string name="cache_coordinates_original">Ursprungliga koordinater</string>
   <string name="cache_spoiler_images_title">Spoiler bilder</string>
+  <string name="cache_images_title">Bilder</string>
   <string name="cache_log_types">Loggtyper</string>
   <string name="cache_coordinates_no">Cachen saknar koordinater.</string>
   <string name="cache_clear_history">Rensa historik</string>
@@ -612,6 +661,7 @@
   <string name="file_title_searching">Söker</string>
   <string name="simple_dir_chooser_title">Välj katalog</string>
   <string name="simple_dir_chooser_current_path">Sökväg:</string>
+  <string name="simple_dir_chooser_invalid_path">Ogiltig sökväg</string>
   <string name="gpx_import_loading_caches">Läser in cacher från .gpx filen</string>
   <string name="gpx_import_loading_waypoints">Läser in punkter från .gpx file</string>
   <string name="gpx_import_store_static_maps">Sparar kartor</string>
@@ -629,6 +679,7 @@
   <string name="gpx_import_delete_title">Ta bort fil</string>
   <string name="gpx_import_delete_message">Vill du radera %s?</string>
   <string name="gpx_import_select_list_title">Importera GPX till lista</string>
+  <string name="gpx_import_android">Importera från Android</string>
   <string name="map_file_select_title">Välj kartfil</string>
   <string name="web_import_title">Importerar från webben</string>
   <string name="web_import_waiting">Väntar på nya cacher från webben…</string>
@@ -699,6 +750,7 @@
   <string name="map_strategy_auto">Hastighetsberoende (gps)</string>
   <string name="map_strategy_detailed">Exakta positioner</string>
   <string name="live_map_notification">I den nya Live kartan så är koordinaterna inte alltid exakta. En cache med potentiellt oexakta koordinater är markerad med en orange cirkel.\nGenom att visa detaljer för cachen eller genom att spara cachen för offline kommer alltid exakta koordinater att hämtas.\n\nMer information om alla förändringar finns på \"Om c:geo\" sidan, som kan nås från c:geo\'s startsida.</string>
+  <string name="live_map_note_dontshow">Visa inte mer</string>
   <string name="search_bar_hint">Sök cache/TB</string>
   <string name="search_bar_desc">Cache (GC-kod, nyckelord), Trackable (TB-kod)</string>
   <string name="search_coordinates">Koordinater</string>
@@ -724,6 +776,9 @@
   <string name="search_address_started">Söker efter platser</string>
   <string name="search_address_result">Hittade platser</string>
   <string name="search_own_caches">Sök egna cacher</string>
+  <string name="search_pocket_title">Pocket query</string>
+  <string name="search_pocket_loading">Laddar en lista med Pocket queries</string>
+  <string name="search_pocket_select">Välj Pocket query</string>
   <string name="trackable">Trackable</string>
   <string name="trackable_details_loading">Laddar detaljer om trackable…</string>
   <string name="trackable_log_touch">Logga</string>
@@ -756,6 +811,7 @@
   <string name="user_menu_view_found">Hittade cacher</string>
   <string name="user_menu_open_browser">Öppna profil i webbläsaren</string>
   <string name="user_menu_send_message">Skicka meddelande</string>
+  <string name="user_menu_open_contact">Öppna kontakt</string>
   <string name="navigation">Navigering</string>
   <string name="compass_title">Kompass</string>
   <string name="use_gps">Använd enbart GPS</string>
@@ -764,12 +820,15 @@
   <string name="destination_set">Sätt målpunkt</string>
   <string name="navigation_direct_navigation">Direkt navigering</string>
   <string name="navigation_target">Mål</string>
+  <string name="err_nav_no_coordinates">Kan inte starta navigering utan koordinater</string>
   <string name="license">Licens</string>
   <string name="license_show">Visa licens</string>
   <string name="license_dismiss">Avbryt</string>
   <string name="helper_calendar_title">c:geo kalendertillägg</string>
   <string name="helper_calendar_missing">c:geo kalendertillägg är inte installerat</string>
   <string name="helper_calendar_description">Gör det möjligt att exportera event till din kalender.</string>
+  <string name="helper_sendtocgeo_title">Skicka till c:geo (Send2cgeo)</string>
+  <string name="helper_sendtocgeo_description">Skicka till c:geo är ett tillägg till webbläsaren <strong>för din PC</strong>. När du bläddrar geocaching.com, kan du skicka cacher till din telefon med en knapptryckning i webbläsaren.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Ett enkelt program för att visa Online kartor men som också medger nedladdning av raster kartor för användning i Offline läge. Stödjer även inspelning av väg (track recording), POI hantering och många andra användbara funktioner.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
@@ -780,6 +839,8 @@
   <string name="helper_barcode_description">Det finns Greasemonkey-script och hemsidor som visar GC-koder som streckkoder/QR-koder. Med den här appen kan c:geo scanna in GC-koden direkt från skärmen på din dator.</string>
   <string name="helper_pocketquery_title">Pocket Query Creator</string>
   <string name="helper_pocketquery_description">Gör det enkelt att skapa och ladda ner Pocket Queries baserade på din position eller plats som väljs på kartan. Kräver Premium konto hos Geocaching.com.</string>
+  <string name="helper_google_translate_title">Google Översätt</string>
+  <string name="helper_google_translate_description">Om du hämtar översättningspaket i Google Translate appen, kan du enkelt översätta cachebeskrivningar i c:geo med en lång tryckning på cache-beskrivningstexten (även utan Internet-anslutning).</string>
   <string name="addon_missing_title">Tillägg saknas</string>
   <string name="addon_download_prompt">Hämta det nu från Google Play.</string>
   <string name="export">Exportera</string>
@@ -821,6 +882,8 @@
   <string name="tts_one_oclock">Klockan ett</string>
   <string name="tts_oclock">Klockan %s</string>
   <string name="clipboard_copy_ok">Kopierat till urklipp</string>
+  <string name="percent_favorite_points">%\  favoriter</string>
+  <string name="create_shortcut">Skapa genväg</string>
   <string-array name="log_image_scales">
     <item>Ingen skalning</item>
     <item>512 px</item>

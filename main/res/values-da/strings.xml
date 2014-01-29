@@ -53,6 +53,7 @@
   <string name="log_clear">Fjern</string>
   <string name="log_webcam">Webcamfoto taget</string>
   <string name="err_none">Ok</string>
+  <string name="err_start">Forbindelse ikke oprettet</string>
   <string name="err_parse">Login-side kan ikke indlæses</string>
   <string name="err_server">Kan ikke forbinde til Geocaching.com (server eller forbindelsesfejl?)</string>
   <string name="err_login">Ingen login gemt</string>

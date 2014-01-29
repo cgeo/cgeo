@@ -121,6 +121,7 @@
   <string name="translate_to_english">Traduire en anglais</string>
   <string name="translate_length_warning">La traduction d\'un texte trop long peut échouer.</string>
   <string name="err_none">ok</string>
+  <string name="err_start">Communication non démarrée</string>
   <string name="err_parse">Échec login lecture page</string>
   <string name="err_server">Échec de la connexion à Geocaching.com (probléme de serveur ou de connexion?)</string>
   <string name="err_server_ec">Impossible de contacter Extremcaching.com. Le site web peut ne pas fonctionner ou votre connexion Internet peut être défectueuse.</string>
@@ -177,6 +178,7 @@
   <string name="err_log_load_data">c:geo ne peut pas charger les données pour enregistrer votre visite.</string>
   <string name="err_log_load_data_again">c:geo ne peut pas charger les données pour enregistrer votre visite. Essayer plus tard.</string>
   <string name="err_log_load_data_still">c:geo est en train de charger les données pour enregistrer votre visite. Veuillez patienter encore un peu.</string>
+  <string name="err_log_failed_server">c:geo n\'a pas réussi à charger les données pour enregistrer votre visite car le serveur ne répond pas.</string>
   <string name="err_log_post_failed">Il semble que votre visite n\'a pas été enregistrée. Veuillez vérifier sur le site Geocaching.com.</string>
   <string name="err_log_post_failed_ec">Il semble que votre visite n\'a pas été enregistrée. Veuillez vérifier sur le site Extremcaching.com.</string>
   <string name="err_logimage_post_failed">Il semble que l\'envoi de l\'image ait échoué. Veuillez vérifier sur le site Geocaching.com.</string>
@@ -491,8 +493,7 @@
   <string name="feature_log_images">Joindre des images aux entrées de journal</string>
   <string name="feature_watch_list">Liste de suivi</string>
   <string name="feature_own_coordinates">Stockage de coordonnées modifiées</string>
-  <string name="feature_search_owner">Recherche par propriétaire</string>
-  <string name="feature_search_finder">Recherche par découvreur</string>
+  <string name="feature_search_user">Recherche par propriétaire/découvreur</string>
   <string name="feature_search_keyword">Recherche par mot clé</string>
   <string name="feature_search_live_map">Carte active</string>
   <string name="feature_search_center">Recherche par position</string>
@@ -649,6 +650,7 @@
   <string name="cache_coordinates">Coordonnées</string>
   <string name="cache_coordinates_original">Coordonnées d\'origine</string>
   <string name="cache_spoiler_images_title">Images indices</string>
+  <string name="cache_images_title">Images</string>
   <string name="cache_log_types">Types de visites</string>
   <string name="cache_coordinates_no">Cette cache n\'a pas de coordonnées.</string>
   <string name="cache_clear_history">Effacer l\'historique</string>
@@ -756,6 +758,7 @@
   <string name="map_strategy_auto">En fonction du déplacement</string>
   <string name="map_strategy_detailed">Détaillée</string>
   <string name="live_map_notification">Lors de l\'affichage de la carte active, certaines coordonnées de géocaches peuvent être imprécises et sont indiquées par un cercle orange.\nDemander les détails d\'une géocache ou la sauver pour une utilisation hors-ligne récupérera les coordonnées exactes.\n\nVous trouverez plus d\'informations sur les changements sur la page \"À propos de c:geo\".</string>
+  <string name="live_map_note_dontshow">Ne plus afficher</string>
   <string name="search_bar_hint">Recherche de caches</string>
   <string name="search_bar_desc">Caches (géocode, mot clé), Objets voyageurs (code TB)</string>
   <string name="search_coordinates">Coordonnées</string>
@@ -1113,7 +1116,6 @@
   <string name="tts_oclock">%s heures</string>
   <string name="clipboard_copy_ok">Copié dans le presse-papiers</string>
   <string name="percent_favorite_points">%\ favoris</string>
-  <string name="cgeo_shortcut">c:geo raccourci</string>
   <string name="create_shortcut">Créer un raccourci</string>
   <string-array name="log_image_scales">
     <item>Taille originale</item>
