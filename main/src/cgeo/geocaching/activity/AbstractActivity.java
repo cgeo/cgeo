@@ -7,12 +7,10 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.settings.Settings;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 public abstract class AbstractActivity extends FragmentActivity implements IAbstractActivity {
@@ -96,7 +94,7 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
         // create view variables
         ButterKnife.inject(this);
     }
-    
+
     private void initializeCommonFields() {
         // initialize commonly used members
         res = this.getResources();
@@ -116,6 +114,10 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
     }
 
     protected void hideKeyboard() {
-        ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+        new Keyboard(this).hide();
+    }
+
+    public void showKeyboard(final View view) {
+        new Keyboard(this).show(view);
     }
 }
