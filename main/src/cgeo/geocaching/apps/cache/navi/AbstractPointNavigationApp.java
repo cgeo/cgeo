@@ -51,11 +51,21 @@ abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNa
         return waypoint.getCoords() != null;
     }
 
-    protected static void addIntentExtras(final Geocache cache, final Intent intent) {
+    protected static void addIntentExtras(final Intent intent, final Waypoint waypoint) {
+        intent.putExtra("name", waypoint.getName());
+        intent.putExtra("code", waypoint.getGeocode());
+    }
+
+    protected static void addIntentExtras(final Intent intent, final Geocache cache) {
         intent.putExtra("difficulty", cache.getDifficulty());
         intent.putExtra("terrain", cache.getTerrain());
         intent.putExtra("name", cache.getName());
         intent.putExtra("code", cache.getGeocode());
         intent.putExtra("size", cache.getSize().getL10n());
+    }
+
+    protected static void addCoordinates(final Intent intent, final Geopoint coords) {
+        intent.putExtra("latitude", coords.getLatitude());
+        intent.putExtra("longitude", coords.getLongitude());
     }
 }
