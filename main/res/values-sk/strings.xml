@@ -105,6 +105,7 @@
   <string name="translate_to_english">Preložiť do angličtiny</string>
   <string name="translate_length_warning">Pre veľké texty môže preklad zlyhať.</string>
   <string name="err_none">Ok</string>
+  <string name="err_start">Komunikácia nezačala.</string>
   <string name="err_parse">Zlyhalo čítanie prihlasovacej stránky.</string>
   <string name="err_server">Zlyhalo pripojenie k serveru Geocaching.com (pripojenie, alebo server nefunkčný?)</string>
   <string name="err_login">Nie sú uložené žiadne prihlasovacie údaje.</string>
@@ -156,6 +157,7 @@
   <string name="err_log_load_data">c:geo nemôže načítať dáta potrebné pre zalogovanie návštevy.</string>
   <string name="err_log_load_data_again">c:geo nemôže načítať dáta potrebné pre zalogovanie návštevy. Skúša to znovu.</string>
   <string name="err_log_load_data_still">c:geo stále načítava dáta potrebné pre zalogovanie návštevy. Prosím, počkajte chvíľu.</string>
+  <string name="err_log_failed_server">c:geo nemohlo odoslať log, pretože server neodpovedá.</string>
   <string name="err_log_post_failed">c:geo nemohlo odoslať log.</string>
   <string name="err_search_address_forgot">c:geo zabudlo adresu, ktorú sa pokúšate nájsť.</string>
   <string name="err_parse_lat">c:geo nemôže dopočítať šírku.</string>
@@ -220,8 +222,6 @@
   <string name="caches_sort_difficulty">náročnosti</string>
   <string name="caches_sort_terrain">terénu</string>
   <string name="caches_sort_size">veľkosti</string>
-  <string name="caches_sort_favorites">obľúbenosti</string>
-  <string name="caches_sort_favorites_ratio">obľúbenosti [%]</string>
   <string name="caches_sort_name">názvu</string>
   <string name="caches_sort_geocode">Geokódu</string>
   <string name="caches_sort_rating">hodnotenia</string>
@@ -502,6 +502,7 @@
   <string name="cache_coordinates">Súradnice</string>
   <string name="cache_coordinates_original">Pôvodné súradnice</string>
   <string name="cache_spoiler_images_title">Spoilerové obrázky</string>
+  <string name="cache_images_title">Obrázky</string>
   <string name="cache_log_types">Typy záznamov</string>
   <string name="cache_coordinates_no">Táto skrýša nemá žiadne súradnice.</string>
   <string name="cache_clear_history">Vymazať históriu</string>
@@ -588,6 +589,7 @@
   <string name="map_strategy_auto">Podľa rýchlosti</string>
   <string name="map_strategy_detailed">Podrobná</string>
   <string name="live_map_notification">Na novej aktívnej mape nemusia byť súradnice vždy presné. Súradnice, ktoré môžu byť nepresné, sú označené oranžovým krúžkom.\nPo otvorení detailu skrýše, alebo po jej uložení pre použitie offline, sú získané vždy presné súradnice.\n\nViac informácií ku všetkým zmenám sa nachádzajú na stránke „O c:geo“ v aplikácii.</string>
+  <string name="live_map_note_dontshow">Nabudúce nezobrazovať</string>
   <string name="search_bar_hint">Hľadanie skrýš</string>
   <string name="search_bar_desc">Skrýše (GC kód, kľúčové slovo), trasovateľné predmety (TB-kód)</string>
   <string name="search_coordinates">Súradnice</string>
@@ -675,8 +677,8 @@
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">Súbor GPX bude exportovaný do %1$s s názvom súboru podľa aktuálneho dátumu a času.</string>
   <string name="export_gpx_to">Odoslať exportovaný GPS do</string>
-  <string name="attribute_dogs_yes">Psy povolené</string>
-  <string name="attribute_dogs_no">Psy nepovolené</string>
+  <string name="attribute_dogs_yes">Psi povolené</string>
+  <string name="attribute_dogs_no">Psi nepovolené</string>
   <string name="attribute_bicycles_yes">Bicykle povolené</string>
   <string name="attribute_bicycles_no">Bicykle nepovolené</string>
   <string name="attribute_motorcycles_yes">Motorky povolené</string>

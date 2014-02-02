@@ -121,8 +121,10 @@
   <string name="translate_to_english">Przetłumacz na angielski</string>
   <string name="translate_length_warning">Tłumaczenie może nie udać się przy dużej ilości tekstu.</string>
   <string name="err_none">OK</string>
+  <string name="err_start">Komunikacja nie rozpoczeła się</string>
   <string name="err_parse">Nieudany odczyt strony logowania.</string>
   <string name="err_server">Nieudane połączenie z Geocaching.com. Strona albo Twoje połączenie internetowe nie działa.</string>
+  <string name="err_server_ec">Nieudane połączenie z Extremcaching.com. Strona może być w tej chwili niedostępna, bądź połączenie internetowe nie działa właściwie.</string>
   <string name="err_login">Brak danych do logowania.</string>
   <string name="err_login_failed">c:geo nie może zalogować się.</string>
   <string name="err_login_failed_toast">c:geo nie może zalogować się. c:geo pracuje offline z zapisanymi skrzynkami. Sprawdź dane logowania i połączenie z internetem.</string>
@@ -176,7 +178,9 @@
   <string name="err_log_load_data">c:geo nie może załadować danych wymaganych do wpisania wizyty.</string>
   <string name="err_log_load_data_again">c:geo nie może załadować danych wymaganych do wpisania wizyty. Próbuję ponownie.</string>
   <string name="err_log_load_data_still">Nadal trwa ładowanie danych wymaganych do wpisu w dzienniku. Proszę czekać…</string>
+  <string name="err_log_failed_server">c:geo nie może dokonać wpisu ponieważ serwer nie odpowiada.</string>
   <string name="err_log_post_failed">Wygląda na to, że Twój wpis nie został zapisany. Proszę sprawdź na Geocaching.com.</string>
+  <string name="err_log_post_failed_ec">Wygląda na to, że wpis nie został wysłany. Proszę sprawdzić to na stronie Extremcaching.com.</string>
   <string name="err_logimage_post_failed">Wygląda na to, że Twój obraz nie został dodany. Proszę sprawdź to na Geocaching.com.</string>
   <string name="err_search_address_forgot">c:geo zapomniał adresu, którego szukałeś.</string>
   <string name="err_parse_lat">c:geo nie może obliczyć szerokości geograficznej.</string>
@@ -200,6 +204,8 @@
   <string name="warn_deprecated_mapfile">Używasz przestarzałego pliku mapy w wersji 0.2.4.\nRozważ przejście na wersję mapy 0.3.0.\nNiedługo c:geo przestanie wspierać wersję 0.2.4.</string>
   <string name="warn_nonexistant_mapfile">Wybrany plik z mapą nie istnieje.\nMapy offline są niedostępne.</string>
   <string name="warn_rendertheme_missing">Nie znaleziono tytułu mapy.</string>
+  <string name="warn_pocket_query_select">Nie wybrano Pocket query.</string>
+  <string name="warn_no_pocket_query_found">Nie znaleziono Pocket query online.</string>
   <string name="info_log_posted">Wpis został wysłany.</string>
   <string name="info_log_saved">Wpis został zapisany.</string>
   <string name="info_log_cleared">Wpis został usunięty.</string>
@@ -220,11 +226,13 @@
   <string name="menu_history">Historia</string>
   <string name="menu_filter">Filter</string>
   <string name="menu_scan_geo">Zeskanuj geokod</string>
-  <string name="live_map_button">Mapa Live</string>
+  <string name="menu_pocket_queries">Pocket queries</string>
+  <string name="menu_scan_description">c:geo może skanować geokody, które są wydrukowane jako kody QR. Wymagana aplikacja nie jest zainstalowana. Czy chcesz otworzyć Google Play i ją zainstalować?</string>
+  <string name="live_map_button">Mapa online</string>
   <string name="caches_nearby_button">Najbliższe</string>
   <string name="advanced_search_button">Szukaj</string>
   <string name="stored_caches_button">Zapisane</string>
-  <string name="any_button">Gdziekolwiek</string>
+  <string name="any_button">Współrzędne</string>
   <string name="unknown_scan">c:geo nie znalazł żadnego GC-kodu w wynikach skanowania.</string>
   <string name="caches_no_cache">Brak skrzynki</string>
   <string name="caches_more_caches">Więcej skrzynek</string>
@@ -243,8 +251,8 @@
   <string name="caches_sort_difficulty">trudności</string>
   <string name="caches_sort_terrain">terenu</string>
   <string name="caches_sort_size">rozmiaru</string>
-  <string name="caches_sort_favorites">popularności</string>
-  <string name="caches_sort_favorites_ratio">popularności [%]</string>
+  <string name="caches_sort_favorites">Ulubione</string>
+  <string name="caches_sort_favorites_ratio">Ulubione [%]</string>
   <string name="caches_sort_name">nazwy</string>
   <string name="caches_sort_geocode">Kod skrytki</string>
   <string name="caches_sort_rating">oceny</string>
@@ -287,6 +295,9 @@
   <string name="caches_filter_modified">Zmiany koordynatów </string>
   <string name="caches_filter_origin">Źródło</string>
   <string name="caches_filter_distance">Odległość</string>
+  <string name="caches_filter_personal_note">Zawiera notatkę</string>
+  <string name="caches_filter_popularity">Ulubione</string>
+  <string name="caches_filter_popularity_ratio">Ulubione [%]</string>
   <string name="caches_removing_from_history">Usuwam z Historii…</string>
   <string name="caches_clear_offlinelogs">Usuń logi offline</string>
   <string name="caches_clear_offlinelogs_progress">Usuwanie logów offline</string>
@@ -326,6 +337,7 @@
   <string name="settings_title_map_data">Dane mapy</string>
   <string name="settings_title_map_content">Zawartość mapy</string>
   <string name="settings_title_gpx">GPX</string>
+  <string name="settings_title_basicmembers">Opcje dla podstawowego członkowstwa</string>
   <string name="settings_title_navigation">Nawigacja</string>
   <string name="settings_title_system">System</string>
   <string name="settings_title_navigation_menu">Menu nawigacji</string>
@@ -335,10 +347,16 @@
   <string name="settings_category_logging_other">Inne opcje logowania</string>
   <string name="settings_goto_url_button">więcej …</string>
   <string name="settings_title_gc">Geocaching.com</string>
+  <string name="settings_title_ec">Extremcaching.com</string>
+  <string name="settings_title_ox">Opencaching.com (Garmin)</string>
   <string name="settings_activate_gc">Aktywuj</string>
+  <string name="settings_activate_ec">Aktywuj</string>
+  <string name="settings_activate_ox">Aktywuj</string>
   <string name="settings_gc_legal_note">Używając serwisu geocaching.com, akceptujesz postanowienia licencyjne Groundspeak.</string>
   <string name="settings_info_facebook_login_title">Facebook Login</string>
   <string name="settings_info_facebook_login">Nie możesz zmusić c:geo aby zalogował się do geocaching.com przy pomocy Twojego konta Facebook. Jednakże istnieje proste rozwiązanie …</string>
+  <string name="settings_authorize">Autoryzuj c:geo</string>
+  <string name="settings_reauthorize">Autoryzuj c:geo ponownie</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Aktywuj</string>
   <string name="init_oc_de_description">Autoryzuj c:geo z opencaching.de aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
@@ -357,7 +375,10 @@
   <string name="init_login_popup_failed">Logowanie nie powiodło się</string>
   <string name="init_login_popup_failed_reason">Logowanie nie powiodło się, ponieważ </string>
   <string name="init_login_popup_not_authorized">Brak autoryzacji</string>
+  <string name="init_login_popup_invalid_timestamp">Czas lokalny nieprawidłowy, ustaw właściwy czas urządzenia</string>
+  <string name="init_login_popup_invalid_token">Autoryzacja nieprawidłowa, spróbuj ponownie</string>
   <string name="init_signature">Podpis</string>
+  <string name="init_template_help">Tagi jak np. [NAZWA] będą używane w przyszłości.</string>
   <string name="init_signature_template_button">Wstaw szablon</string>
   <string name="init_signature_template_date">Data</string>
   <string name="init_signature_template_time">Czas</string>
@@ -365,6 +386,9 @@
   <string name="init_signature_template_user">Użytkownik</string>
   <string name="init_signature_template_number">Numer</string>
   <string name="init_signature_template_owner">Właściciel</string>
+  <string name="init_signature_template_name">Nazwa</string>
+  <string name="init_signature_template_url">URL</string>
+  <string name="init_signature_template_log">Wpis</string>
   <string name="init_ratingwanted">Załaduj ocenę skrzynki z GCvote.com</string>
   <string name="init_summary_ratingwanted">Załaduj ocenę skrzynki z GCvote.com</string>
   <string name="init_friendlogswanted">Załaduj dodatkowy dziennik dla wpisów od przyjaciół</string>
@@ -420,6 +444,8 @@
   <string name="settings_info_themes_title">Informacje na temat Map Themes</string>
   <string name="settings_info_themes">c:geo wspiera motywy dla map offline. Mogą być używane by zmienić kolorystykę mapy (np. aby uzyskać tryb nocny) lub by zaznaczyć wybrane obiekty jak ścieżki rowerowe lub izolinie.</string>
   <string name="init_mapsource_select">Wybierz źródło mapy</string>
+  <string name="settings_title_scale_map_text">Tekst skali mapy</string>
+  <string name="settings_summary_scale_map_text">Dostosowuj tekst skali mapy offline do dpi urządzenia</string>
   <string name="init_map_directory_description">Katalog z mapami offline</string>
   <string name="init_gpx_exportdir">Katalog do eksportu plików GPX</string>
   <string name="init_gpx_importdir">Katalog do importu plików GPX</string>
@@ -452,6 +478,26 @@
   <string name="init_use_native_ua">Identyfikuj jako przeglądarka Android. Rozwiązuje problemy z logowaniem w niektórych sieciach.</string>
   <string name="init_summary_use_native_ua">Identyfikuj jako przeglądarka Android. Rozwiązuje problemy z logowaniem w niektórych sieciach.</string>
   <string name="init_rendertheme_folder">Katalog z motywami map</string>
+  <string name="settings_open_website">Otwórz stronę</string>
+  <string name="settings_settings">Ustawienia</string>
+  <string name="settings_information">Informacje</string>
+  <string name="settings_twitter_cache_message">Wiadomość o znalezieniu skrzynki</string>
+  <string name="settings_twitter_trackable_message">Wiadomość o znalezieniu przedmiotu podróżnego</string>
+  <string name="init_ec_icons">Ikony mapy</string>
+  <string name="settings_ec_icons_other">Własny styl</string>
+  <string name="settings_ec_icons_oc">Jak na OC</string>
+  <string name="settings_features">Obsługiwane funkcje</string>
+  <string name="feature_description">Podane funkcje <b>online</b> na tej stronie są wspierane przez c:geo (w porównaniu do funkcji offline):</string>
+  <string name="feature_personal_notes">Osobiste notatki</string>
+  <string name="feature_online_logging">Wpisy online</string>
+  <string name="feature_log_images">Załączanie zdjęć do logów</string>
+  <string name="feature_watch_list">Listy obserwowanych skrzynek</string>
+  <string name="feature_own_coordinates">Przechowywanie zmodyfikowanych współrzędnych</string>
+  <string name="feature_search_user">Szukanie po założycielu/znalazcy</string>
+  <string name="feature_search_keyword">Szukanie po słowie kluczowym</string>
+  <string name="feature_search_live_map">Mapa skrzynek online</string>
+  <string name="feature_search_center">Szukanie po lokalizacji</string>
+  <string name="feature_search_geocode">Szukanie po numerze skrzynki</string>
   <string name="map_source_google_map">Google: Mapa</string>
   <string name="map_source_google_satellite">Google: Satelita</string>
   <string name="map_source_osm_mapnik">OSM: Mapnik</string>
@@ -471,6 +517,10 @@
   <string name="auth_authorize">Autoryzacja c:geo</string>
   <string name="auth_start">Rozpoczynam autoryzację</string>
   <string name="auth_again">Rozpoczynam ponownie autoryzację</string>
+  <string name="auth_dialog_waiting">Czekanie na %s…</string>
+  <string name="auth_explain_short">Wybrany proces pozwoli na dostęp <b>c:geo</b> do %s.</string>
+  <string name="auth_explain_long">Naciśnięcie \"autoryzuj c:geo\" rozpocznie proces autoryzacji. Zostanie otwarte okno przeglądarki ze stroną %s. Zaloguj się na tej stronie i zezwól <b>c:geo</b> na dostęp do konta.</string>
+  <string name="auth_dialog_completed_twitter">c:geo jest teraz autoryzowane do zamieszczania postów na Twitterze.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
   <string name="auth_dialog_completed_oc">c:geo został zautoryzowany by komunikować się z %s.</string>
@@ -485,7 +535,7 @@
   <string name="cache_offline_time_mins_few">przed kilkoma minutami</string>
   <string name="cache_offline_time_hour">przed jedną godziną</string>
   <string name="cache_offline_time_hours">przed godzinami</string>
-  <string name="cache_offline_time_days">przed kilkoma dniami</string>
+  <string name="cache_offline_time_days">dni temu</string>
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Atrybuty</string>
   <string name="cache_inventory">Inwentarz</string>
@@ -494,6 +544,8 @@
   <string name="cache_log_image_default_title">Zdjęcie</string>
   <string name="cache_personal_note">Notatka osobista</string>
   <string name="cache_personal_note_edit">Edytuj</string>
+  <string name="cache_personal_note_limit">Limit znaków notatki osobistej</string>
+  <string name="cache_personal_note_truncation">Osobista notatka będzie ucięta po przekroczeniu %d znaków na Geocaching.com.</string>
   <string name="cache_personal_note_upload">Wyślij</string>
   <string name="cache_personal_note_uploading">Wysyłam osobistą notatkę</string>
   <string name="cache_personal_note_upload_done">Notatka osobista wysłana</string>
@@ -559,7 +611,7 @@
   <string name="cache_menu_visit">Wpisz wizytę</string>
   <string name="cache_menu_visit_offline">Wpisz wizytę offline</string>
   <string name="cache_menu_spoilers">Zdjęcia spoiler</string>
-  <string name="cache_menu_around">Skrzynki w okręgu</string>
+  <string name="cache_menu_around">Skrzynki w pobliżu</string>
   <string name="cache_menu_event">Dodaj do kalendarza</string>
   <string name="cache_menu_details">Szczegóły</string>
   <string name="cache_menu_refresh">Odśwież</string>
@@ -570,6 +622,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_cachebeacon">Cache Beacon</string>
   <string name="cache_menu_navigon">Navigon</string>
+  <string name="cache_menu_pebble">Zegarek Pebble</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Zapamiętany wpis</string>
   <string name="cache_status_found">Znaleziona</string>
@@ -597,6 +650,7 @@
   <string name="cache_coordinates">Współrzędne</string>
   <string name="cache_coordinates_original">Oryginalne współrzędne</string>
   <string name="cache_spoiler_images_title">Zdjęcia spoiler</string>
+  <string name="cache_images_title">Zdjęcia</string>
   <string name="cache_log_types">Rodzaj wpisu</string>
   <string name="cache_coordinates_no">Ta skrzynka nie ma współrzędnych GPS.</string>
   <string name="cache_clear_history">Usuń historię</string>
@@ -615,6 +669,7 @@
   <string name="file_title_searching">Szukam</string>
   <string name="simple_dir_chooser_title">Wybierz katalog</string>
   <string name="simple_dir_chooser_current_path">Ścieżka:</string>
+  <string name="simple_dir_chooser_invalid_path">Nieprawidłowa ścieżka</string>
   <string name="gpx_import_loading_caches">Ładuję skrzynki z pliku GPX</string>
   <string name="gpx_import_loading_waypoints">Ładuję plik z punktami nawigacji</string>
   <string name="gpx_import_store_static_maps">Zapisuję mapy statyczne</string>
@@ -632,6 +687,7 @@
   <string name="gpx_import_delete_title">Usuń plik</string>
   <string name="gpx_import_delete_message">Czy na pewno chcesz usunąć %s?</string>
   <string name="gpx_import_select_list_title">Importuj GPX do listy</string>
+  <string name="gpx_import_android">Import z Androida</string>
   <string name="map_file_select_title">Wybierz plik z mapą</string>
   <string name="web_import_title">Import z internetu</string>
   <string name="web_import_waiting">Czekam na nowe skrzynki z internetu…</string>
@@ -642,7 +698,7 @@
   <string name="waypoint_cache_coordinates">Współrzędne skrzynki</string>
   <string name="waypoint_custom">Zdefiniowane przez użytkownika</string>
   <string name="waypoint_my_coordinates">Moje współrzędne</string>
-  <string name="waypoint_bearing">Kierunek w °</string>
+  <string name="waypoint_bearing">Kierunek w stopniach</string>
   <string name="waypoint_distance">Odległość</string>
   <string name="waypoint_name">Nazwa</string>
   <string name="waypoint_edit">Edytuj</string>
@@ -678,7 +734,7 @@
   <string name="waypoint_coordinate_formats_plain">zwykłe</string>
   <string name="visit_tweet">Wyślij informację do Twitter</string>
   <string name="map_map">Mapa</string>
-  <string name="map_live">Mapa Live</string>
+  <string name="map_live">Mapa online</string>
   <string name="map_view_map">Widok mapy</string>
   <string name="map_modes">Tryb mapy</string>
   <string name="map_trail_show">Pokaż szlak</string>
@@ -689,19 +745,20 @@
   <string name="map_mycaches_hide">Ukryj własne/znalezione skrzynki</string>
   <string name="map_theme_builtin">Domyślny</string>
   <string name="map_theme_select">Wybierz motyw mapy</string>
-  <string name="map_live_enable">Włącz live</string>
-  <string name="map_live_disable">Wyłącz live</string>
+  <string name="map_live_enable">Włącz online</string>
+  <string name="map_live_disable">Wyłącz online</string>
   <string name="map_static_title">Mapa statyczna</string>
   <string name="map_static_loading">Ładuję mapę statyczną…</string>
   <string name="map_token_err">W związku z tym, że c:geo ma możliwość pobrania tylko częściowych danych, współrzędne GPS mogą być niedokładne.</string>
   <string name="map_as_list">Pokaż w postaci listy</string>
   <string name="map_strategy">Strategia</string>
-  <string name="map_strategy_title">Strategia mapy Live</string>
+  <string name="map_strategy_title">Strategia mapy online</string>
   <string name="map_strategy_fastest">Najszybsza</string>
   <string name="map_strategy_fast">Szybka</string>
   <string name="map_strategy_auto">Zależna od prędkości</string>
   <string name="map_strategy_detailed">Szczegółowa</string>
   <string name="live_map_notification">Na nowej mapie live, współrzędnie nie zawsze muszą być dokładne. Prawdopodobne niedokładne współrzędne są zaznaczane za pomocą pomarańczowych okręgów.\nOtworzenie współrzędnych skrzynki lub zapisanie skrzynki do użytku offline zawsze używa precyzyjnych współrzędnych.\n\nWięcej informacji na temat wszystkich zmian można odnaleźć na stronie \"O c:geo\" wewnątrz programu.</string>
+  <string name="live_map_note_dontshow">Nie pokazuj ponownie</string>
   <string name="search_bar_hint">Szukaj skrzynek</string>
   <string name="search_bar_desc">Skrzynki (GC-kod, słowo kluczowe), przedmioty podróżne (TB-kod)</string>
   <string name="search_coordinates">Współrzędne</string>
@@ -727,6 +784,9 @@
   <string name="search_address_started">Wyszukiwanie miejsc</string>
   <string name="search_address_result">Znalezione miejsca</string>
   <string name="search_own_caches">Szukaj moich skrzynek</string>
+  <string name="search_pocket_title">Pocket Query</string>
+  <string name="search_pocket_loading">Wczytywanie listy Pocket Queries</string>
+  <string name="search_pocket_select">Wybierz Pocket Queries</string>
   <string name="trackable">Przedmiot podróżny</string>
   <string name="trackable_details_loading">Ładuje szczegóły przedmiotu podróżnego…</string>
   <string name="trackable_log_touch">Wpisz odkrycie</string>
@@ -759,6 +819,7 @@
   <string name="user_menu_view_found">Znalezione skrzynki</string>
   <string name="user_menu_open_browser">Otwórz profil w przeglądarce</string>
   <string name="user_menu_send_message">Wyślij wiadomość</string>
+  <string name="user_menu_open_contact">Otwórz wizytówkę kontaktu</string>
   <string name="navigation">Nawigacja</string>
   <string name="compass_title">Kompas</string>
   <string name="use_gps">Użyj tylko GPS</string>
@@ -767,12 +828,15 @@
   <string name="destination_set">Ustaw cel</string>
   <string name="navigation_direct_navigation">Bezpośrednia nawigacja</string>
   <string name="navigation_target">Cel</string>
+  <string name="err_nav_no_coordinates">Nie można rozpocząć nawigacji - brak współrzędnych</string>
   <string name="license">Licencja</string>
   <string name="license_show">Pokaż licencję</string>
   <string name="license_dismiss">Odmów</string>
   <string name="helper_calendar_title">Dodatek Kalendarz c:geo</string>
   <string name="helper_calendar_missing">Dodatek Kalendarz c:geo nie jest zainstalowany.</string>
   <string name="helper_calendar_description">Umożliwia Tobie eksport skrzynek Wydarzenie do kalendarza w Twoim urządzeniu.</string>
+  <string name="helper_sendtocgeo_title">Wyślij do c:geo</string>
+  <string name="helper_sendtocgeo_description">Wyślij do c:geo jest rozszerzeniem do przeglądarki <strong>na komputer</strong>. Podczas przeglądania Geocaching.com pozwala na wysłanie skrzynek bezpośrednio do telefonu, za pomocą jednego przycisku w przeglądarce.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Bardzo dobra aplikacja do oglądania map online, która pozwala na pobieranie ich bezpośrednio do trybu offline (tylko mapy rastrowe). Pozwala także na zapisywanie ścieżek, obsługę POI oraz ma wiele innych przydatnych funkcji.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
@@ -783,6 +847,8 @@
   <string name="helper_barcode_description">Istnieją skrypty i strony WWW, które umożliwiają wyświetlanie GC-kodu jako kodu kreskowego. Z tym programem c:geo może czytać te GC-kody bezpośrednio z ekranu Twojego komputera.</string>
   <string name="helper_pocketquery_title">Kreator Pocket Query</string>
   <string name="helper_pocketquery_description">Pozwala na łatwe tworzenie i pobieranie Pocket Queries wyśrodkowanych w Twoim aktualnym położeniu lub wybranym punkcie mapy. Wymaga konta Premium w Geocaching.com.</string>
+  <string name="helper_google_translate_title">Tłumacz Google</string>
+  <string name="helper_google_translate_description">Jeśli pobierzesz paczki tłumaczeń w aplikacji Google Tłumacz, będziesz mógł łatwo tłumaczyć opisy skrzynek przytrzymując na nich palcem chwilę dłużej (bez połączenia z internetem).</string>
   <string name="addon_missing_title">Brakujący dodatek</string>
   <string name="addon_download_prompt">Pobierz teraz z Google Play.</string>
   <string name="export">Eksport</string>
@@ -990,6 +1056,38 @@
   <string name="attribute_unknown_no">Nie ma żadnego nieznanego atrybutu</string>
   <string name="attribute_geotour_yes">Część GeoTour</string>
   <string name="attribute_geotour_no">Nie jest częścią GeoTour</string>
+  <string name="attribute_kids_2_yes">Można zabrać dzieci</string>
+  <string name="attribute_kids_2_no">Nie zabieraj dzieci</string>
+  <string name="attribute_historic_site_yes">Miejsce historyczne</string>
+  <string name="attribute_historic_site_no">To nie jest miejsce historyczne</string>
+  <string name="attribute_magnetic_yes">Skrzynka magnetyczna</string>
+  <string name="attribute_magnetic_no">To nie jest skrzynka magnetyczna</string>
+  <string name="attribute_usb_cache_yes">Skrzynka Dead Drop</string>
+  <string name="attribute_usb_cache_no">To nie jest skrzynka Dead Drop</string>
+  <string name="attribute_shovel_yes">Zakopana</string>
+  <string name="attribute_shovel_no">Nie potrzebna łopatka</string>
+  <string name="attribute_specific_access_yes">Dostępna o określonych godzinach (może wymagać opłaty)</string>
+  <string name="attribute_specific_access_no">Dostępna zawsze</string>
+  <string name="attribute_pedestrian_only_yes">Dostępna tylko pieszo</string>
+  <string name="attribute_pedestrian_only_no">Dostępna różnymi środkami lokomocji</string>
+  <string name="attribute_nature_cache_yes">Umiejscowiona na łonie natury (góry, lasy, rzeki itp.)</string>
+  <string name="attribute_nature_cache_no">Nie jest ukryta na łonie natury</string>
+  <string name="attribute_byop_yes">Weź coś do pisania</string>
+  <string name="attribute_byop_no">Własny długopis niewymagany</string>
+  <string name="attribute_safari_cache_yes">Skrzynka bez lokalizacji</string>
+  <string name="attribute_safari_cache_no">To nie jest skrzynka bez lokalizacji</string>
+  <string name="attribute_quick_cache_yes">Szybka skrzynka</string>
+  <string name="attribute_quick_cache_no">Zajmuje więcej czasu</string>
+  <string name="attribute_wherigo_yes">Skrzynka Wherigo</string>
+  <string name="attribute_wherigo_no">Nie jest skrzynką Wherigo</string>
+  <string name="attribute_audio_cache_yes">Opis skrzynki zawiera plik audio</string>
+  <string name="attribute_audio_cache_no">Opis skrzynki nie zawiera pliku audio</string>
+  <string name="attribute_geohotel_yes">Hotel Geokretów</string>
+  <string name="attribute_geohotel_no">Nie jest hotelem Geokretów</string>
+  <string name="attribute_survey_marker_yes">W pobliżu punkt geodezyjny</string>
+  <string name="attribute_survey_marker_no">W pobliżu nie ma punktu geodezyjnego</string>
+  <string name="attribute_offset_cache_yes">Skrzynka Offset</string>
+  <string name="attribute_offset_cache_no">Nie jest to skrzynka Offset</string>
   <string name="quote">Aby uczynić geocaching prostszym, a użytkowników bardziej leniwymi.</string>
   <string name="powered_by">carnero</string>
   <string name="support">Support: <a href="">support@cgeo.org</a></string>
@@ -1017,6 +1115,8 @@
   <string name="tts_one_oclock">pierwsza</string>
   <string name="tts_oclock">%s</string>
   <string name="clipboard_copy_ok">Skopiowano do schowka</string>
+  <string name="percent_favorite_points">%\ ulubionych</string>
+  <string name="create_shortcut">Utwórz skrót</string>
   <string-array name="log_image_scales">
     <item>Brak skalowania</item>
     <item>512 px</item>
@@ -1063,5 +1163,10 @@
     <item quantity="one">wczoraj</item>
     <item quantity="few">%d dni temu</item>
     <item quantity="other">%d dni temu</item>
+  </plurals>
+  <plurals name="favorite_points">
+    <item quantity="one">%s ulubiony</item>
+    <item quantity="few">%s ulubione</item>
+    <item quantity="other">%s ulubionych</item>
   </plurals>
 </resources>

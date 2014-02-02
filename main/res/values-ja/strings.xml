@@ -121,6 +121,7 @@
   <string name="translate_to_english">英語に翻訳</string>
   <string name="translate_length_warning">文章が長すぎるので翻訳できないかもしれません。</string>
   <string name="err_none">OK</string>
+  <string name="err_start">通信を始めることができませんでした</string>
   <string name="err_parse">ログインページの解析に失敗しました</string>
   <string name="err_server">Geocaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません。</string>
   <string name="err_login">ログイン情報が保存されていません</string>
@@ -176,6 +177,7 @@
   <string name="err_log_load_data">ログを書くのに必要なデータをロードすることができません。</string>
   <string name="err_log_load_data_again">ログを書くのに必要なデータをロードすることができません。もう一度やってみてください。</string>
   <string name="err_log_load_data_still">ログを投稿するのに必要なデータをまだロード中です。もう少しお待ちください。</string>
+  <string name="err_log_failed_server">サーバの反応がないのでログを投稿することができませんでした。</string>
   <string name="err_log_post_failed">ログを投稿することができなかったようです。Geocaching.comで確認してください。</string>
   <string name="err_logimage_post_failed">ログの添付画像がアップロードされなかったようです。Geocaching.comで確認してください。</string>
   <string name="err_search_address_forgot">c:geo forgot the address you tried to find.</string>
@@ -243,7 +245,6 @@
   <string name="caches_sort_difficulty">難易度</string>
   <string name="caches_sort_terrain">地形</string>
   <string name="caches_sort_size">サイズ</string>
-  <string name="caches_sort_favorites">人気</string>
   <string name="caches_sort_name">名前</string>
   <string name="caches_sort_geocode">GCコード</string>
   <string name="caches_sort_rating">評価</string>
@@ -321,7 +322,6 @@
   <string name="settings_title_map_data">地図データ</string>
   <string name="settings_title_map_content">地図表示</string>
   <string name="settings_title_gpx">GPX</string>
-  <string name="settings_title_basicmembers">ベーシック会員</string>
   <string name="settings_title_navigation">ナビゲーション</string>
   <string name="settings_title_system">システム</string>
   <string name="settings_category_browser">ブラウザ</string>
@@ -580,6 +580,7 @@
   <string name="cache_coordinates">座標</string>
   <string name="cache_coordinates_original">オリジナル座標</string>
   <string name="cache_spoiler_images_title">スポイラー画像</string>
+  <string name="cache_images_title">画像</string>
   <string name="cache_log_types">ログタイプ</string>
   <string name="cache_coordinates_no">このキャッシュに座標値はありません。</string>
   <string name="cache_clear_history">全履歴を削除</string>
@@ -685,6 +686,7 @@
   <string name="map_strategy_auto">自動(移動速度に依存)</string>
   <string name="map_strategy_detailed">詳細(「速い」+詳細)</string>
   <string name="live_map_notification">現バージョンではオンライン地図の座標は正確とは限りません。不正確と思われる座標のキャッシュはオレンジ色の丸で表示されます。\nキャッシュの詳細を表示したりオフライン用に保存する際には正確な座標を取得します。\n\n詳しくはアプリ内の「c:geoについて」の変更履歴(英語)をご覧ください。</string>
+  <string name="live_map_note_dontshow">再び表示しない</string>
   <string name="search_bar_hint">キャッシュ検索</string>
   <string name="search_bar_desc">キャッシュ(GCコード,キーワード), トラッカブル(TBコード)</string>
   <string name="search_coordinates">座標</string>

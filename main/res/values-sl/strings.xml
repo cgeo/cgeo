@@ -121,6 +121,7 @@
   <string name="translate_to_english">Prevedi v: angleščino</string>
   <string name="translate_length_warning">Prevod lahko spodleti zaradi velike količine besedila.</string>
   <string name="err_none">OK</string>
+  <string name="err_start">Komunikacija se ni začela</string>
   <string name="err_parse">Razčlenjevanje prijavne strani ni uspelo</string>
   <string name="err_server">Ni bilo mogoče vzpostaviti povezave z Geocaching.com. Spletna stran ali vaša povezava z internetom je lahko nedosegljiva.</string>
   <string name="err_login">Prijavni podatki niso shranjeni</string>
@@ -176,6 +177,7 @@
   <string name="err_log_load_data">c:geo ni mogel naložiti podatkov za zapis obiska.</string>
   <string name="err_log_load_data_again">c:geo ne more naložiti podatkov za zapis obiska. Ponovni poskus…</string>
   <string name="err_log_load_data_still">c:geo še vedno nalaga podatke za zapis obiska. Prosimo počakajte še trenutek.</string>
+  <string name="err_log_failed_server">c:geo ni mogel objaviti zapisa, ker se strežnik ne odziva.</string>
   <string name="err_log_post_failed">Izgleda, kot da zapis ni bil objavljen. Preverite na Geocaching.com.</string>
   <string name="err_logimage_post_failed">Izgleda, kot da slika ni bila naložena. Preverite na Geocaching.com.</string>
   <string name="err_search_address_forgot">c:geo je pozabil naslov, ki ste ga hoteli najti.</string>
@@ -243,8 +245,6 @@
   <string name="caches_sort_difficulty">Težavnost</string>
   <string name="caches_sort_terrain">Teren</string>
   <string name="caches_sort_size">Velikost</string>
-  <string name="caches_sort_favorites">Številu favoritov</string>
-  <string name="caches_sort_favorites_ratio">Številu favoritov [%]</string>
   <string name="caches_sort_name">Imenu</string>
   <string name="caches_sort_geocode">Geo kodi</string>
   <string name="caches_sort_rating">Glasovih</string>
@@ -339,6 +339,8 @@
   <string name="settings_gc_legal_note">Za uporabo storitev Geocaching.com se morate strinjati s pogoji uporabe podjetja Groundspeak.</string>
   <string name="settings_info_facebook_login_title">Prijava s Facebookom</string>
   <string name="settings_info_facebook_login">V c:geo se ne morete prijaviti s Facebook računom, obstaja pa druga enostavna rešitev…</string>
+  <string name="settings_authorize">Poveži c:geo</string>
+  <string name="settings_reauthorize">Ponovno poveži c:geo</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Aktiviraj</string>
   <string name="init_oc_de_description">Poveži c:geo z opencaching.de za iskanje zakladov in dostop in filter najdenih zakladov.</string>
@@ -416,9 +418,12 @@
   <string name="init_backup_last">Varnostna kopija je na voljo iz</string>
   <string name="init_backup_last_no">Varnostna kopija ne obstaja.</string>
   <string name="settings_info_offline_maps_title">Zemljevidi brez povezave</string>
+  <string name="settings_info_offline_maps">c:geo podpira uporabo zemljevidov brez povezave. Zemljevide lahko prenesete iz Mapsforge-ove strani ali si jih naredite sami iz OSM podatkov. Če želite uporabljati zemljevide brez povezave morate najprej izbrati imenik, kjer se zemljevidi nahajajo.</string>
   <string name="settings_info_themes_title">Teme zemljevidov</string>
   <string name="settings_info_themes">c:geo omogoča prikaz različnih tem zemljevidov brez povezave. Teme so uporabljene za spremembo barvnih shem (npr. temni nočni zemljevid) ali za poudarek objektov, kot na primer kolesarske poti ali plastnice na zemljevidu.</string>
   <string name="init_mapsource_select">Izberi vir zemljevidov</string>
+  <string name="settings_title_scale_map_text">Prilagodi velikost pisave na zemljevidu</string>
+  <string name="settings_summary_scale_map_text">Prilagodi velikost pisave na zemljevidu glede na ločljivost zaslona vaše naprave</string>
   <string name="init_map_directory_description">Mapa z zemljevidi</string>
   <string name="init_gpx_exportdir">Mapa za izvoz GPX datotek</string>
   <string name="init_gpx_importdir">Mapa za uvoz GPX datotek</string>
@@ -451,6 +456,9 @@
   <string name="init_use_native_ua">Android brskalnik</string>
   <string name="init_summary_use_native_ua">c:geo naj se strežniku predstavi kot Android brskalnik. Ta možnost reši problem prijave pri nekaterih ponudnikih omrežja.</string>
   <string name="init_rendertheme_folder">Mapa s temami zemljevidov</string>
+  <string name="settings_open_website">Odpri spletno stran</string>
+  <string name="settings_settings">Nastavitve</string>
+  <string name="settings_information">Informacije</string>
   <string name="map_source_google_map">Google: Cestni zemljevid</string>
   <string name="map_source_google_satellite">Google: Satelitska slika</string>
   <string name="map_source_osm_mapnik">OSM: Mapnik</string>
@@ -470,6 +478,10 @@
   <string name="auth_authorize">Poveži c:geo s Twitterjem</string>
   <string name="auth_start">Začni z avtorizacijo</string>
   <string name="auth_again">Ponovno začni</string>
+  <string name="auth_dialog_waiting">Čakam na %s…</string>
+  <string name="auth_explain_short">Naslednji postopek bo omogočil <b>c:geo</b>tu dostop do %s.</string>
+  <string name="auth_explain_long">S pritiskom na gumb \"poveži c:geo\" se bo začel postopek. Postopek bo najprej odprl spletno stran %s. Prijavite se na to spletno stran in dovolite <b>c:geo</b>tu dostop do vašega računa. To je vse.</string>
+  <string name="auth_dialog_completed_twitter">c:geo je sedaj povezan s Twitterjem za objavo sporočil.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
   <string name="auth_dialog_completed_oc">c:geo je sedaj povezan z %s.</string>
@@ -596,6 +608,7 @@
   <string name="cache_coordinates">Koordinate</string>
   <string name="cache_coordinates_original">Originalne koordiante</string>
   <string name="cache_spoiler_images_title">Spoiler slike</string>
+  <string name="cache_images_title">Slike</string>
   <string name="cache_log_types">Tipi zapisov</string>
   <string name="cache_coordinates_no">Zaklad nima koordinat.</string>
   <string name="cache_clear_history">Počisti zgodovino</string>
@@ -701,6 +714,7 @@
   <string name="map_strategy_auto">Odvisna od moje hitrosti</string>
   <string name="map_strategy_detailed">Podrobna</string>
   <string name="live_map_notification">Na zemljevidu s podatki v živo koordinate niso nujno točne. Nenatančne koordinate so označene z oranžnim krogom.\nČe odprete podrobnosti zaklada se bodo vedno naložile natančne koordinate\n\nVeč informacij o teh spremembah lahko dobite na strani \"O c:geo\" v aplikaciji.</string>
+  <string name="live_map_note_dontshow">Ne pokaži tega ponovno</string>
   <string name="search_bar_hint">Iskanje zakladov</string>
   <string name="search_bar_desc">Zakladi (geo koda, ključne besede), Sledljivčki (TB koda)</string>
   <string name="search_coordinates">Koordinate</string>
@@ -766,6 +780,7 @@
   <string name="destination_set">Nastavi destinacijo</string>
   <string name="navigation_direct_navigation">Direktna navigacija</string>
   <string name="navigation_target">Cilj</string>
+  <string name="err_nav_no_coordinates">Ne morem začeti navigacije brez koordinat</string>
   <string name="license">Licenca</string>
   <string name="license_show">Pokaži licenco</string>
   <string name="license_dismiss">Zapri</string>
