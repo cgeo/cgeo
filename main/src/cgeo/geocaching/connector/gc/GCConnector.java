@@ -10,6 +10,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.UserAction;
+import cgeo.geocaching.connector.capability.FieldNotesCapability;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
@@ -23,6 +24,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -32,6 +34,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import rx.util.functions.Action1;
 
 import android.content.Context;
@@ -39,10 +42,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
 
+import java.io.File;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ISearchByKeyword, ILogin, ICredentials, ISearchByOwner, ISearchByFinder {
+public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ISearchByKeyword, ILogin, ICredentials, ISearchByOwner, ISearchByFinder, FieldNotesCapability {
 
     private static final String CACHE_URL_SHORT = "http://coord.info/";
     // Double slash is used to force open in browser
@@ -419,6 +423,42 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public SearchResult searchByFinder(final @NonNull String username, final @NonNull RecaptchaReceiver recaptchaReceiver) {
         return GCParser.searchByUsername(username, Settings.getCacheType(), Settings.isShowCaptcha(), recaptchaReceiver);
+    }
+
+    @Override
+    public boolean uploadFieldNotes(final File exportFile) {
+        if (!GCLogin.getInstance().isActualLoginStatus()) {
+            // no need to upload (possibly large file) if we're not logged in
+            final StatusCode loginState = GCLogin.getInstance().login();
+            if (loginState != StatusCode.NO_ERROR) {
+                Log.e("FieldnoteExport.ExportTask upload: Login failed");
+            }
+        }
+
+        final String uri = "http://www.geocaching.com/my/uploadfieldnotes.aspx";
+        final String page = GCLogin.getInstance().getRequestLogged(uri, null);
+
+        if (StringUtils.isBlank(page)) {
+            Log.e("FieldnoteExport.ExportTask get page: No data from server");
+            return false;
+        }
+
+        final String[] viewstates = GCLogin.getViewstates(page);
+
+        final Parameters uploadParams = new Parameters(
+                "__EVENTTARGET", "",
+                "__EVENTARGUMENT", "",
+                "ctl00$ContentBody$btnUpload", "Upload Field Note");
+
+        GCLogin.putViewstates(uploadParams, viewstates);
+
+        Network.getResponseData(Network.postRequest(uri, uploadParams, "ctl00$ContentBody$FieldNoteLoader", "text/plain", exportFile));
+
+        if (StringUtils.isBlank(page)) {
+            Log.e("FieldnoteExport.ExportTask upload: No data from server");
+            return false;
+        }
+        return true;
     }
 
 }

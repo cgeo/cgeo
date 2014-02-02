@@ -1,12 +1,20 @@
 package cgeo.geocaching.utils;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 
 import android.os.Handler;
 import android.os.Message;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.List;
 
 /**
@@ -125,5 +133,24 @@ public final class FileUtils {
             Log.e("Could not make directories " + file.getAbsolutePath());
         }
         return success;
+    }
+
+    public static boolean writeFileUTF16(File file, String content) {
+        // TODO: replace by some apache.commons IOUtils or FileUtils code
+        Writer fileWriter = null;
+        BufferedOutputStream buffer = null;
+        try {
+            final OutputStream os = new FileOutputStream(file);
+            buffer = new BufferedOutputStream(os);
+            fileWriter = new OutputStreamWriter(buffer, CharEncoding.UTF_16);
+            fileWriter.write(content.toString());
+        } catch (final IOException e) {
+            Log.e("FieldnoteExport.ExportTask export", e);
+            return false;
+        } finally {
+            IOUtils.closeQuietly(fileWriter);
+            IOUtils.closeQuietly(buffer);
+        }
+        return true;
     }
 }
