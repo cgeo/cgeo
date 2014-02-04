@@ -72,7 +72,7 @@
   <string name="log_post">Odoslať log</string>
   <string name="log_post_rate">Odoslať log a hlasovať</string>
   <string name="log_post_no_rate">Odoslať log a nehlasovať</string>
-  <string name="log_post_not_possible">Načítanie stránky s logmi…</string>
+  <string name="log_post_not_possible">Načítanie stránky s logmi&#8230;</string>
   <string name="log_add">Pridať</string>
   <string name="log_rating">Hlasovať</string>
   <string name="log_no_rating">Nehlasovať</string>
@@ -150,7 +150,7 @@
   <string name="err_point_unknown_position">c:geo nevie, kde ste.</string>
   <string name="err_point_no_position_given_title">popis je požadovaný</string>
   <string name="err_point_no_position_given">Vyplňte aspoň šírku alebo dĺžku alebo vzdialenosť a smer. Môžete tiež vyplniť všetky štyri polia.</string>
-  <string name="err_point_curr_position_unavailable">c:geo stále nemá aktuálnu polohu. Prosím, čakajte…</string>
+  <string name="err_point_curr_position_unavailable">c:geo stále nemá aktuálnu polohu. Prosím, čakajte&#8230;</string>
   <string name="err_point_bear_and_dist_title">Potrebujete poradiť?</string>
   <string name="err_point_bear_and_dist">Vyplňte smer a vzdialenosť. Uhol je uhol 0 – 360 stupňov vzhľadom k severu. Vzdialenosť môže byť s, alebo bez jednotiek.</string>
   <string name="err_log_load_data">c:geo nemôže načítať dáta potrebné pre zalogovanie návštevy.</string>
@@ -206,9 +206,9 @@
   <string name="caches_no_cache">Žiadne ďalšie skrýše</string>
   <string name="caches_more_caches">Ďalšie skrýše</string>
   <string name="caches_more_caches_no">Žiadne ďalšie skrýše</string>
-  <string name="caches_more_caches_loading">Načítanie skrýš…</string>
+  <string name="caches_more_caches_loading">Načítanie skrýš&#8230;</string>
   <string name="caches_more_caches_currently">momentálne</string>
-  <string name="caches_downloading">Sťahovanie skrýš…\nOdhad:</string>
+  <string name="caches_downloading">Sťahovanie skrýš&#8230;\nOdhad:</string>
   <string name="caches_eta_ltm">menej než minúta</string>
   <string name="caches_store_offline">Uložiť offline</string>
   <string name="caches_store_selected">Uložiť vybraté</string>
@@ -261,7 +261,7 @@
   <string name="caches_filter_track">s trasovateľnými predmetmi</string>
   <string name="caches_filter_clear">vymazať filtre</string>
   <string name="caches_filter_modified">S upravenými súradnicami</string>
-  <string name="caches_removing_from_history">Odstraňovanie z histórie…</string>
+  <string name="caches_removing_from_history">Odstraňovanie z histórie&#8230;</string>
   <string name="list_menu">Zoznam</string>
   <string name="list_menu_create">Vytvoriť nový zoznam</string>
   <string name="list_menu_drop">Zahodiť aktuálny zoznam</string>
@@ -292,7 +292,7 @@
   <string name="init_password">heslo</string>
   <string name="init_login">Kontrola prihlásenia</string>
   <string name="init_login_popup">Prihlasovanie</string>
-  <string name="init_login_popup_working">Prihlasovanie na Geocaching.com…</string>
+  <string name="init_login_popup_working">Prihlasovanie na Geocaching.com&#8230;</string>
   <string name="init_login_popup_ok">Prihlásenie úspešné</string>
   <string name="init_login_popup_failed">Prihlásenie neúspešné</string>
   <string name="init_login_popup_failed_reason">Prihlásenie neúspešné: </string>
@@ -340,7 +340,7 @@
   <string name="init_summary_livelist">Zobrazovať smer v zozname skrýš</string>
   <string name="init_backup">Záloha</string>
   <string name="init_backup_backup">Zálohovať</string>
-  <string name="init_backup_running">Vytváranie zálohy databázy skrýš…</string>
+  <string name="init_backup_running">Vytváranie zálohy databázy skrýš&#8230;</string>
   <string name="init_backup_note">Táto voľba zálohuje/obnoví databázu zo skrýšami a trasami, bez nastavení. Vaše údaje pre prihlásenie (heslá) neopustia túto aplikáciu.</string>
   <string name="init_backup_restore">Obnoviť</string>
   <string name="init_backup_success">Databáza c:geo bola úspešne skopírovaná do súboru</string>
@@ -348,7 +348,7 @@
   <string name="init_backup_unnecessary">Databáza je prázdna, záloha nie je potrebná.</string>
   <string name="init_restore_success">Úspešne obnovené.</string>
   <string name="init_restore_failed">Obnova zlyhala.</string>
-  <string name="init_restore_running">Obnovovanie databázy skrýš…</string>
+  <string name="init_restore_running">Obnovovanie databázy skrýš&#8230;</string>
   <string name="init_restore_confirm">Databáza je prázdna. Chcete ju obnoviť zo zálohy?</string>
   <string name="init_backup_last">Posledná dostupná záloha</string>
   <string name="init_backup_last_no">Neexistuje súbor zo zálohou.</string>
@@ -390,7 +390,7 @@
   <string name="init_sendToCgeo_name">Názov vášho zariadenia</string>
   <string name="init_sendToCgeo_description">Poslanie do c:geo umožní prijímanie skrýš priamo z geocaching webu použitím špeciálneho rozšírenia do Firefoxu či Chrome. Pred registráciou si prosím prečítajte <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registrovať sa potrebujete iba ak budete používať send2cgeo. C:geo bude fungovať i bez registrovaného zariadenia.</string>
   <string name="init_sendToCgeo_register">Žiadosť o registráciu</string>
-  <string name="init_sendToCgeo_registering">Registrácia zariadenia pre „Poslať do c:geo“…</string>
+  <string name="init_sendToCgeo_registering">Registrácia zariadenia pre „Poslať do c:geo“&#8230;</string>
   <string name="init_sendToCgeo_register_ok">Registrácia úspešná. PIN kód je ####. Použite ho na stránkach c:geo pre pridanie tohto zariadenia do vášho prehliadača.</string>
   <string name="init_sendToCgeo_register_fail">Registrácia zlyhala.</string>
   <string name="sendToCgeo_download_fail">c:geo sa nepodarilo stiahnuť skrýše. Nie je dostupné pripojenie k Internetu, alebo send2c:geo je nedostupné.</string>
@@ -436,7 +436,7 @@
   <string name="cache_hint">Nápoveda</string>
   <string name="cache_logs">Logbook</string>
   <string name="cache_logsfriends">Logbook (priatelia)</string>
-  <string name="cache_dialog_loading_details">Načítanie detailov skrýše…</string>
+  <string name="cache_dialog_loading_details">Načítanie detailov skrýše&#8230;</string>
   <string name="cache_dialog_loading_details_status_loadpage">Načítanie stránky</string>
   <string name="cache_dialog_loading_details_status_details">Spracovanie detailov</string>
   <string name="cache_dialog_loading_details_status_spoilers">Načítanie spoilerových obrázkov</string>
@@ -446,15 +446,15 @@
   <string name="cache_dialog_loading_details_status_cache">Kešovanie údajov</string>
   <string name="cache_dialog_loading_details_status_render">Vykreslovanie pohľadu</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
-  <string name="cache_dialog_offline_save_message">Ukladanie skrýše pre použitie offline…</string>
+  <string name="cache_dialog_offline_save_message">Ukladanie skrýše pre použitie offline&#8230;</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>
-  <string name="cache_dialog_offline_drop_message">Odstraňovanie skrýše z pamäte zariadenia…</string>
+  <string name="cache_dialog_offline_drop_message">Odstraňovanie skrýše z pamäte zariadenia&#8230;</string>
   <string name="cache_dialog_refresh_title">Aktualizácia</string>
-  <string name="cache_dialog_refresh_message">Aktualizujem detaily skrýše…</string>
+  <string name="cache_dialog_refresh_message">Aktualizujem detaily skrýše&#8230;</string>
   <string name="cache_dialog_watchlist_add_title">Zoznam sledovaných</string>
-  <string name="cache_dialog_watchlist_add_message">Pridávanie skrýše do vášho zoznamu sledovaných…</string>
+  <string name="cache_dialog_watchlist_add_message">Pridávanie skrýše do vášho zoznamu sledovaných&#8230;</string>
   <string name="cache_dialog_watchlist_remove_title">Zoznam sledovaných</string>
-  <string name="cache_dialog_watchlist_remove_message">Odstraňovanie skrýše zo zoznamu sledovaných…</string>
+  <string name="cache_dialog_watchlist_remove_message">Odstraňovanie skrýše zo zoznamu sledovaných&#8230;</string>
   <string name="cache_menu_navigate">Navigovať</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Mapa</string>
@@ -537,7 +537,7 @@
   <string name="gpx_import_delete_message">Chcete zmazať %s?</string>
   <string name="map_file_select_title">Výber mapového súboru</string>
   <string name="web_import_title">Import z webu</string>
-  <string name="web_import_waiting">Čakanie na nové skrýše z webu…</string>
+  <string name="web_import_waiting">Čakanie na nové skrýše z webu&#8230;</string>
   <string name="web_downloading">Preberanie</string>
   <string name="web_downloaded">Prebrané</string>
   <string name="popup_more">Viac detailov</string>
@@ -554,7 +554,7 @@
   <string name="waypoint_add_title">Nový bod trasy</string>
   <string name="waypoint_note">poznámka</string>
   <string name="waypoint_save">Uložiť</string>
-  <string name="waypoint_loading">Načítanie bodu trasy…</string>
+  <string name="waypoint_loading">Načítanie bodu trasy&#8230;</string>
   <string name="waypoint_done">Hotovo</string>
   <string name="waypoint_duplicate">Duplikovať</string>
   <string name="waypoint_copy_of">Kópia</string>
@@ -578,7 +578,7 @@
   <string name="map_live_enable">Povoliť aktuálnu polohu</string>
   <string name="map_live_disable">Zakázať aktuálnu polohu</string>
   <string name="map_static_title">Statické mapy</string>
-  <string name="map_static_loading">Načítanie statických máp…</string>
+  <string name="map_static_loading">Načítanie statických máp&#8230;</string>
   <string name="map_token_err">Pretože c:geo bola schopná stiahnuť iba čiastočné údaje, súradnice skrýš môžu byť nepresné.</string>
   <string name="map_as_list">Zobraziť ako zoznam</string>
   <string name="map_strategy">Stratégia</string>
@@ -614,7 +614,7 @@
   <string name="search_address_result">Nájdené miesta</string>
   <string name="search_own_caches">Hľadať v mojich skrýšach</string>
   <string name="trackable">Trasovateľné predmety</string>
-  <string name="trackable_details_loading">Načítanie detailov trasovateľných predmetov…</string>
+  <string name="trackable_details_loading">Načítanie detailov trasovateľných predmetov&#8230;</string>
   <string name="trackable_log_touch">Hlásenie zhliadnutia</string>
   <string name="trackable_browser_open">Otvoriť v prehliadači</string>
   <string name="trackable_goal">Cieľ</string>
@@ -668,15 +668,15 @@
   <string name="export_fieldnotes">Poznámky</string>
   <string name="export_fieldnotes_info">Poznámky budú exportované do /sdcard/field-notes s aktuálnym dátumom a časom ako názov súboru.</string>
   <string name="export_fieldnotes_upload">Nahrať na geocaching.com</string>
-  <string name="export_fieldnotes_uploading">Nahrávanie…</string>
+  <string name="export_fieldnotes_uploading">Nahrávanie&#8230;</string>
   <string name="export_fieldnotes_upload_success">Nahranie na geocaching.com bolo úspešné</string>
   <string name="export_fieldnotes_onlynew">Iba od posledného exportu</string>
-  <string name="export_fieldnotes_creating">Vytváranie poznámok…</string>
+  <string name="export_fieldnotes_creating">Vytváranie poznámok&#8230;</string>
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">Súbor GPX bude exportovaný do %1$s s názvom súboru podľa aktuálneho dátumu a času.</string>
   <string name="export_gpx_to">Odoslať exportovaný GPS do</string>
-  <string name="attribute_dogs_yes">Psy povolené</string>
-  <string name="attribute_dogs_no">Psy nepovolené</string>
+  <string name="attribute_dogs_yes">Psi povolené</string>
+  <string name="attribute_dogs_no">Psi nepovolené</string>
   <string name="attribute_bicycles_yes">Bicykle povolené</string>
   <string name="attribute_bicycles_no">Bicykle nepovolené</string>
   <string name="attribute_motorcycles_yes">Motorky povolené</string>
