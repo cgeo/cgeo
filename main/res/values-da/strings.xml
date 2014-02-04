@@ -53,6 +53,7 @@
   <string name="log_clear">Fjern</string>
   <string name="log_webcam">Webcamfoto taget</string>
   <string name="err_none">Ok</string>
+  <string name="err_start">Forbindelse ikke oprettet</string>
   <string name="err_parse">Login-side kan ikke indlæses</string>
   <string name="err_server">Kan ikke forbinde til Geocaching.com (server eller forbindelsesfejl?)</string>
   <string name="err_login">Ingen login gemt</string>
@@ -91,7 +92,7 @@
   <string name="caches_no_cache">Ingen cache</string>
   <string name="caches_more_caches">Flere cacher</string>
   <string name="caches_more_caches_no">Ikke flere cacher</string>
-  <string name="caches_downloading">Henter cacher…\nETA: </string>
+  <string name="caches_downloading">Henter cacher&#8230;\nETA: </string>
   <string name="caches_eta_ltm">Under et minut</string>
   <string name="caches_store_offline">Gem Offline</string>
   <string name="caches_on_map">Vis på kort</string>
@@ -144,13 +145,13 @@
   <string name="cache_waypoints_add">Tilføj waypoint</string>
   <string name="cache_hint">Hint</string>
   <string name="cache_logs">Logbog</string>
-  <string name="cache_dialog_loading_details">Indlæser cachedetaljer…</string>
+  <string name="cache_dialog_loading_details">Indlæser cachedetaljer&#8230;</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
-  <string name="cache_dialog_offline_save_message">Gemmer cache til offlinebrug…</string>
+  <string name="cache_dialog_offline_save_message">Gemmer cache til offlinebrug&#8230;</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>
-  <string name="cache_dialog_offline_drop_message">Fjerner cache fra hukommelsen…</string>
+  <string name="cache_dialog_offline_drop_message">Fjerner cache fra hukommelsen&#8230;</string>
   <string name="cache_dialog_refresh_title">Genindlæs</string>
-  <string name="cache_dialog_refresh_message">Genindlæser cachedetaljer…</string>
+  <string name="cache_dialog_refresh_message">Genindlæser cachedetaljer&#8230;</string>
   <string name="cache_menu_navigate">Naviger</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Vis på kort</string>
