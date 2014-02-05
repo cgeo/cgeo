@@ -248,7 +248,7 @@
   <string name="caches_sort_distance">distance</string>
   <string name="caches_sort_difficulty">difficulté</string>
   <string name="caches_sort_terrain">terrain</string>
-  <string name="caches_sort_size">taille</string>
+  <string name="caches_sort_size">Taille</string>
   <string name="caches_sort_favorites">Favoris</string>
   <string name="caches_sort_favorites_ratio">Favoris [%]</string>
   <string name="caches_sort_name">nom</string>
@@ -272,7 +272,7 @@
   <string name="caches_drop_all_ask">Effacer les caches de la liste courante ?</string>
   <string name="caches_drop_stored">Effacer les caches stockées</string>
   <string name="caches_drop_progress">Suppression des caches en cours</string>
-  <string name="caches_drop_all_and_list">Suppression des caches et de la liste</string>
+  <string name="caches_drop_all_and_list">Suppr. caches et liste</string>
   <string name="caches_delete_events">Effacer les événements précédents</string>
   <string name="caches_refresh_selected">Rafraîchir les caches sélectionnées</string>
   <string name="caches_refresh_all">Tout rafraîchir</string>
@@ -286,9 +286,9 @@
   <string name="caches_recaptcha_continue">Continuer</string>
   <string name="caches_filter">Filtrer</string>
   <string name="caches_filter_title">Filtrer selon</string>
-  <string name="caches_filter_size">taille</string>
-  <string name="caches_filter_type">type</string>
-  <string name="caches_filter_track">avec des trackables</string>
+  <string name="caches_filter_size">Taille</string>
+  <string name="caches_filter_type">Type</string>
+  <string name="caches_filter_track">Avec des objets voyageurs</string>
   <string name="caches_filter_clear">effacer les filtres</string>
   <string name="caches_filter_modified">Avec les coordonnées modifiées</string>
   <string name="caches_filter_origin">Avec les coordonées originales</string>
@@ -491,12 +491,12 @@
   <string name="feature_log_images">Joindre des images aux entrées de journal</string>
   <string name="feature_watch_list">Liste de suivi</string>
   <string name="feature_own_coordinates">Stockage de coordonnées modifiées</string>
-  <string name="feature_search_owner">Recherche par propriétaire</string>
-  <string name="feature_search_finder">Recherche par découvreur</string>
   <string name="feature_search_keyword">Recherche par mot clé</string>
   <string name="feature_search_live_map">Carte active</string>
   <string name="feature_search_center">Recherche par position</string>
   <string name="feature_search_geocode">Recherche par géocode</string>
+  <string name="feature_search_owner">Recherche par propriétaire</string>
+  <string name="feature_search_finder">Recherche par découvreur</string>
   <string name="map_source_google_map">Google Maps : plan</string>
   <string name="map_source_google_satellite">Google Maps : satellite</string>
   <string name="map_source_osm_mapnik">OSM : rendu Mapnik</string>
