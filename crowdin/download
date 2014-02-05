@@ -62,6 +62,11 @@ _do wget "http://api.crowdin.net/api/project/cgeo/download/all.zip?key=${CROWDIN
      || die "crowdin download failed."
 _do unzip -o ${ZIPFILE} || die "unzip of ${ZIPFILE} failed."
 
+# fix unicode entities for ellipsis character
+for f in */*/*values-*/strings.xml; do
+  sed -i 's/&#8230;/…/g' $f
+done
+
 # check for changes
 if [ -z "`git diff`" ]; then
     debug "no changes, finishing."

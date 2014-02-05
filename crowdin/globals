@@ -37,7 +37,7 @@ debug () { echo "`date +%Y-%m-%d.%H:%M:%S` `basename $0`: $@"; }
 # use this function for executing commands.
 _do () { debug "$@"; eval "$@"; }
 
-require_tools git curl wget unzip
+require_tools git curl wget unzip sed
 
 git rev-parse --show-toplevel >& /dev/null || die "Please start this script from within a repo. Aborting."
 cd "`git rev-parse --show-toplevel`"
