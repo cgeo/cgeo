@@ -67,6 +67,9 @@ for f in */*/*values-*/strings.xml; do
   sed -i 's/&#8230;/…/g' $f
 done
 
+# apply local patches to particular strings
+. "`dirname $0`/local-patches"
+
 # check for changes
 if [ -z "`git diff`" ]; then
     debug "no changes, finishing."

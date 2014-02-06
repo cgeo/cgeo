@@ -1,0 +1,14 @@
+#
+# This file contains special handlings that must be done on
+# crowdin strings. For example, some sentences must get a
+# ignore-typo flag so that lint does not give a false
+# positive.
+#
+# All the fixes should be idempotent so that this script can be applied
+# to the fixed version as well.
+
+# Fix a lint confusion between Portuguese word "com" and "geocaching.com"
+# name, which can be flagged as a repetition of the same word.
+
+sed -i -e '/geocaching\.com com/s/\(<string name="[^"]*"\)>/\1 tools:ignore="Typos">/' \
+  main/res/values-pt/strings.xml
