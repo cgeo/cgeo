@@ -824,6 +824,7 @@
   <string name="helper_calendar_missing">c:geo kalendertillägg är inte installerat</string>
   <string name="helper_calendar_description">Gör det möjligt att exportera event till din kalender.</string>
   <string name="helper_sendtocgeo_title">Skicka till c:geo (Send2cgeo)</string>
+  <string name="helper_contacts_title">c:geo - Kontakttillägg</string>
   <string name="helper_sendtocgeo_description">Skicka till c:geo är ett tillägg till webbläsaren <strong>för din PC</strong>. När du bläddrar geocaching.com, kan du skicka cacher till din telefon med en knapptryckning i webbläsaren.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Ett enkelt program för att visa Online kartor men som också medger nedladdning av raster kartor för användning i Offline läge. Stödjer även inspelning av väg (track recording), POI hantering och många andra användbara funktioner.</string>

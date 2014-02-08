@@ -785,6 +785,7 @@
   <string name="helper_calendar_title">c:geo kalender add-on</string>
   <string name="helper_calendar_missing">c:geo kalender add-on niet geïnstalleerd.</string>
   <string name="helper_calendar_description">Maakt het mogelijk om Geocaching events in je kalender op te slaan.</string>
+  <string name="helper_contacts_title">c:geo contacten-plug-in</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Simpele bruikbare applicatie om online kaarten weer te geven en deze voor offline gebruik te downloaden (alleen rasterkarten). Ook ondersteuning voor track recording, poi afhandeling en vele andere handige functies.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>

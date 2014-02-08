@@ -37,6 +37,8 @@
   <string name="cache_size_virtual">Virtual</string>
   <string name="cache_size_notchosen">Não especificado</string>
   <string name="cache_size_unknown">Desconhecido</string>
+  <string name="cache_size_nano">Nano</string>
+  <string name="cache_size_very_large">Muito grande</string>
   <string name="wp_final">Localização final</string>
   <string name="wp_stage">Estado da multi-cache</string>
   <string name="wp_puzzle">Pergunta para a resposta</string>
@@ -123,6 +125,7 @@
   <string name="err_none">Ok</string>
   <string name="err_parse">Falha na análise da página de login</string>
   <string name="err_server">Falha na ligação a Geocaching.com (servidor ou ligação em baixo?)</string>
+  <string name="err_server_ec">Não é possível entrar em contato com Extremcaching.com. O site pode estar em baixo ou sua conexão de internet não está a funcionar.</string>
   <string name="err_login">Informação de login não gravada</string>
   <string name="err_login_failed">O c:geo não consegue fazer login.</string>
   <string name="err_login_failed_toast">O c:geo não consegue fazer login. O c:geo funciona offline com as caches Arquivadas. Verifique as definições de login ou habilite a ligação de dados.</string>
@@ -177,6 +180,7 @@
   <string name="err_log_load_data_again">O c:geo não consegue carregar os dados necessários para registar a sua visita. A tentar de novo.</string>
   <string name="err_log_load_data_still">O c:geo ainda está a carregar dados necessários para publicar o registo. Por favor espere mais um pouco.</string>
   <string name="err_log_post_failed">O c:geo falhou a publicação do registo.</string>
+  <string name="err_log_post_failed_ec">Parece que o seu  log não foi publicado. Por favor verifique-o em Extremcaching.com.</string>
   <string name="err_logimage_post_failed">Parece que a sua imagem de registo não foi enviada. Por favor verifique em Geocaching.com.</string>
   <string name="err_search_address_forgot">O c:geo esqueceu o endereço que procura.</string>
   <string name="err_parse_lat">O c:geo não consegue analisar a latitue.</string>
@@ -200,6 +204,8 @@
   <string name="warn_deprecated_mapfile">Está a utilizar um ficheiro de mapa de uma versão obsoleta.\nConsidere mudar o mapa para a versão 0.3.0.\nNa próxima versão vamos deixar de suportar a 0.2.4.</string>
   <string name="warn_nonexistant_mapfile">O ficheiro de mapa selecionado não existe.\nMapas offline não estão disponíveis.</string>
   <string name="warn_rendertheme_missing">Tema de mapa não encontrado.</string>
+  <string name="warn_pocket_query_select">Nenhuma pocket query selecionada.</string>
+  <string name="warn_no_pocket_query_found">Nenhuma pocket query encontrada on-line.</string>
   <string name="info_log_posted">O c:geo publicou o registo com sucesso.</string>
   <string name="info_log_saved">O c:geo gravou o registo com sucesso.</string>
   <string name="info_log_cleared">O registo foi limpo.</string>
@@ -220,6 +226,7 @@
   <string name="menu_history">Histórico</string>
   <string name="menu_filter">Filtro</string>
   <string name="menu_scan_geo">Scan geocode</string>
+  <string name="menu_pocket_queries">Pocket queries</string>
   <string name="live_map_button">Ao vivo</string>
   <string name="caches_nearby_button">Por perto</string>
   <string name="advanced_search_button">Pesquisar</string>
@@ -781,6 +788,7 @@
   <string name="helper_calendar_title">Add on calendário para c:geo </string>
   <string name="helper_calendar_missing">Add on calendário para o c:geo não está instalado.</string>
   <string name="helper_calendar_description">Permite exportar caches evento para o calendário do seu dispositivo.</string>
+  <string name="helper_contacts_title">c:geo - plugin contactos</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Aplicação simples e útil, que mostra mapas online e permite transferi-los directamente para o modo offline (apenas mapas raster). Também suporta a gravação de caminhos, gestão de PDI e muitas outras funções úteis.</string>
   <string name="helper_gpsstatus_title">Estado do GPS</string>

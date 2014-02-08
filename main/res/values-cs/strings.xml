@@ -37,6 +37,8 @@
   <string name="cache_size_virtual">Virtuální</string>
   <string name="cache_size_notchosen">Nezvolena</string>
   <string name="cache_size_unknown">Neznámá</string>
+  <string name="cache_size_nano">Nano</string>
+  <string name="cache_size_very_large">Velmi velká</string>
   <string name="wp_final">Cíl</string>
   <string name="wp_stage">Část multi-keše</string>
   <string name="wp_puzzle">Otázka</string>
@@ -318,6 +320,7 @@
   <string name="list_dialog_remove_err">c:geo nedokázalo odstranit aktuální seznam</string>
   <string name="list_dialog_rename_title">Přejmenovat seznam</string>
   <string name="list_dialog_rename">Přejmenovat</string>
+  <string name="list_not_available">Seznam již není dostupný, přepínání na výchozí seznam</string>
   <string name="about_version">Verze</string>
   <string name="about_changelog">Změny</string>
   <string name="about_donate">Podpora vývoje</string>
@@ -476,6 +479,9 @@
   <string name="init_use_native_ua">Identifikovat se jako webový prohlížeč Android. Řeší problémy v některých sítích.</string>
   <string name="init_summary_use_native_ua">Identifikovat se jako webový prohlížeč Android. Řeší problémy v některých sítích.</string>
   <string name="init_rendertheme_folder">Složka témat mapy</string>
+  <string name="init_maintenance">Údržba</string>
+  <string name="init_maintenance_directories_note">c:geo ukládá obrázky, obrázky z logů a další soubory vázané ke keši v samostatném adresáři. V některých případech (jako import/export databáze) může tento adresář obsahovat staré soubory, které se zde dají smazat.</string>
+  <string name="init_maintenance_directories">Odstranit osamocené soubory</string>
   <string name="settings_open_website">Otevřít webovou stránku</string>
   <string name="settings_settings">Nastavení</string>
   <string name="settings_information">Informace</string>
@@ -486,6 +492,7 @@
   <string name="settings_ec_icons_oc">Jako OC</string>
   <string name="settings_features">Podporované funkce</string>
   <string name="feature_description">V c:geo (kromě offline funkcí) jsou podporovány následující <b>online</b> funkce tohoto webu:</string>
+  <string name="feature_personal_notes">Osobní poznámka</string>
   <string name="feature_online_logging">Zalogování online</string>
   <string name="feature_log_images">Připojit k logům obrázky</string>
   <string name="feature_watch_list">Sledované</string>
@@ -494,6 +501,8 @@
   <string name="feature_search_live_map">Aktivní mapa</string>
   <string name="feature_search_center">Hledat podle pozice</string>
   <string name="feature_search_geocode">Hledat podle geokódu</string>
+  <string name="feature_search_owner">Hledat podle vlastníka</string>
+  <string name="feature_search_finder">Hledat podle nálezce</string>
   <string name="map_source_google_map">Google: Mapa</string>
   <string name="map_source_google_satellite">Google: Satelitní</string>
   <string name="map_source_osm_mapnik">OSM: Mapnik</string>
@@ -666,8 +675,8 @@
   <string name="simple_dir_chooser_current_path">Cesta:</string>
   <string name="simple_dir_chooser_invalid_path">Chybná cesta</string>
   <string name="gpx_import_loading_caches">Nahrávání keší z .GPX souboru</string>
-  <string name="gpx_import_loading_waypoints">Načítám soubor s Body trasy</string>
-  <string name="gpx_import_store_static_maps">Ukládám statické mapy</string>
+  <string name="gpx_import_loading_waypoints">Načítání souboru s Body trasy</string>
+  <string name="gpx_import_store_static_maps">Ukládání statických map</string>
   <string name="gpx_import_caches_imported">Keše importovány</string>
   <string name="gpx_import_static_maps_skipped">Stažení statických map zrušeno</string>
   <string name="gpx_import_title_static_maps">Uložit statické mapy</string>
@@ -830,6 +839,8 @@
   <string name="helper_calendar_missing">Doplněk pro c:geo - Kalendář není nainstalován.</string>
   <string name="helper_calendar_description">Umožňuje exportovat události keší do tvého kalendáře.</string>
   <string name="helper_sendtocgeo_title">Poslat do c:geo</string>
+  <string name="helper_contacts_title">c:geo - kontakty (doplněk)</string>
+  <string name="helper_contacts_description">Umožňuje otevřít vizitku (z tvého seznamu kontaktů) přímo z logu keše, můžeš tak snadněji kontaktovat kamarády o pomoc.</string>
   <string name="helper_sendtocgeo_description">Odeslat do c:geo (Send to c:geo) je rozšíření prohlížeče <strong>pro tvůj počítač</strong>. Umožňuje zaslání keše do tvého mobilního zařízení jediným klepnutím, přímo z prohlížeče, při procházení webu Geocaching.com.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Jednoduše použitelná aplikace zobrazující Online mapy a dovolující je přímo stahovat pro Offline použití (pouze rastrové mapy). Také podporuje záznam trasy, zpracování bodů zájmu a další užitečné funkce.</string>
@@ -854,7 +865,7 @@
   <string name="export_fieldnotes_uploading">Nahrávání…</string>
   <string name="export_fieldnotes_upload_success">Nahrávání na geocaching.com bylo úspěšné</string>
   <string name="export_fieldnotes_onlynew">Jen od předchozího nahrání</string>
-  <string name="export_fieldnotes_creating">Vytvářím soubor poznámek z terénu…</string>
+  <string name="export_fieldnotes_creating">Vytváření souboru poznámek z terénu…</string>
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">GPX soubor bude exportován do %1$s s názvem souboru podle aktuálního data a času.</string>
   <string name="export_gpx_to">Odeslat GPX</string>
@@ -1110,6 +1121,7 @@
   <string name="tts_oclock">%s hodin</string>
   <string name="clipboard_copy_ok">Zkopírováno do schránky</string>
   <string name="percent_favorite_points">%\ oblíbené</string>
+  <string name="cgeo_shortcut">c:geo zástupce</string>
   <string name="create_shortcut">Vytvořit zástupce</string>
   <string-array name="log_image_scales">
     <item>Bez měřítka</item>
