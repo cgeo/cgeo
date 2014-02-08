@@ -37,6 +37,8 @@
   <string name="cache_size_virtual">virtual</string>
   <string name="cache_size_notchosen">non selezionato</string>
   <string name="cache_size_unknown">sconosciuto</string>
+  <string name="cache_size_nano">Nano</string>
+  <string name="cache_size_very_large">Molto grande</string>
   <string name="wp_final">Destinazione finale</string>
   <string name="wp_stage">Step intermedio multi-cache</string>
   <string name="wp_puzzle">Quesito da risolvere</string>
@@ -318,6 +320,7 @@
   <string name="list_dialog_remove_err">c:geo non è riuscito a rimuovere la lista corrente</string>
   <string name="list_dialog_rename_title">Rinomina lista</string>
   <string name="list_dialog_rename">Rinomina</string>
+  <string name="list_not_available">Elenco non più disponibile, passo a elenco standard</string>
   <string name="about_version">Versione</string>
   <string name="about_changelog">Modifiche</string>
   <string name="about_donate">Donazioni</string>
@@ -476,6 +479,9 @@
   <string name="init_use_native_ua">Browser Android</string>
   <string name="init_summary_use_native_ua">Identifica come browser Android. Risolve alcuni problemi di login con alcuni provider di rete.</string>
   <string name="init_rendertheme_folder">Directory per i temi mappa</string>
+  <string name="init_maintenance">Manutenzione</string>
+  <string name="init_maintenance_directories_note">c:geo memorizza immagini, immagini log e altri file (correlati a un cache) in una cartella separata. In alcuni casi (es.: dopo import/esport del database) questa cartella potrebbe contenere file obsoleti, che possono essere cancellati da qui.</string>
+  <string name="init_maintenance_directories">Elimina file orfani</string>
   <string name="settings_open_website">Apri il sito</string>
   <string name="settings_settings">Impostazioni</string>
   <string name="settings_information">Informazioni</string>
@@ -495,6 +501,8 @@
   <string name="feature_search_live_map">Mappa Live</string>
   <string name="feature_search_center">Cerca per posizione</string>
   <string name="feature_search_geocode">Cerca per geocode</string>
+  <string name="feature_search_owner">Cerca per proprietario</string>
+  <string name="feature_search_finder">Cerca per ricercatore</string>
   <string name="map_source_google_map">Google: Map</string>
   <string name="map_source_google_satellite">Google: Satellite</string>
   <string name="map_source_osm_mapnik">OSM: Mapnik</string>
@@ -831,6 +839,8 @@
   <string name="helper_calendar_missing">c:geo calendario add-on non installato</string>
   <string name="helper_calendar_description">Permette di esportare gli eventi cache nel calendario del tuo dispositivo.</string>
   <string name="helper_sendtocgeo_title">Send to c:geo</string>
+  <string name="helper_contacts_title">c:geo - plugin Contatti</string>
+  <string name="helper_contacts_description">Consente di aprire una scheda contatto (della tua rubrica) direttamente da un log, per permetterti di chiedere aiuto agli amici più facilmente.</string>
   <string name="helper_sendtocgeo_description">Send to c:geo è un\'estensione del browser <strong>per il tuo PC</strong>. Durante la navigazione su geocaching.com, è possibile inviare i cache al vostro smartphone con il clic di un pulsante direttamente all\'interno del browser.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Applicazione semplice da usare che mostra mappe online permettendo di scaricarle direttamente per l\'uso offline (solo mappe raster). Supporta inoltra la registrazione di traccia, gestione dei waypoints e altre utili funzioni.</string>
@@ -1111,6 +1121,7 @@
   <string name="tts_oclock">a ore %s</string>
   <string name="clipboard_copy_ok">Copiato nella clipboard</string>
   <string name="percent_favorite_points">%\  preferiti</string>
+  <string name="cgeo_shortcut">collegamento a c:geo</string>
   <string name="create_shortcut">Crea collegamento</string>
   <string-array name="log_image_scales">
     <item>Dimensioni originali</item>
