@@ -5,10 +5,7 @@ import cgeo.geocaching.R;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-import java.util.Collections;
-import java.util.List;
-
-class TrackablesFilter extends AbstractFilter implements IFilterFactory {
+class TrackablesFilter extends AbstractFilter {
     public TrackablesFilter() {
         super(R.string.caches_filter_track);
     }
@@ -16,12 +13,6 @@ class TrackablesFilter extends AbstractFilter implements IFilterFactory {
     @Override
     public boolean accepts(@NonNull final Geocache cache) {
         return cache.hasTrackables();
-    }
-
-    @Override
-    @NonNull
-    public List<TrackablesFilter> getFilters() {
-        return Collections.singletonList(this);
     }
 
 }

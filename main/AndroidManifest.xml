@@ -975,6 +975,11 @@
 
         </activity>
 
+        <activity
+            android:name=".filter.FilterActivity_"
+            android:label="@string/caches_filter_title" >
+        </activity>
+        
         <!-- provide enhanced meta data for caches (and waypoints) when invoking Locus from c:geo -->
         <provider
             android:name="menion.android.locus.LocusDataStorageProvider"

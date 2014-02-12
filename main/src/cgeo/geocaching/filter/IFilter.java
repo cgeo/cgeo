@@ -12,9 +12,11 @@ public interface IFilter {
     String getName();
 
     /**
-     * @return true if the filter accepts the cache, false otherwise
+     * @return {@code true} if the filter accepts the cache, false otherwise
      */
     boolean accepts(@NonNull final Geocache cache);
 
     void filter(@NonNull final List<Geocache> list);
+
+    int getImageId();
 }

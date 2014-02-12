@@ -47,4 +47,9 @@ abstract class AbstractFilter implements IFilter {
     public String toString() {
         return getName();
     }
+
+    @Override
+    public int getImageId() {
+        return 0;
+    }
 }

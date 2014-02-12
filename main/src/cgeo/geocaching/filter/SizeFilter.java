@@ -41,6 +41,6 @@ class SizeFilter extends AbstractFilter {
             }
             return filters;
         }
-
     }
+
 }

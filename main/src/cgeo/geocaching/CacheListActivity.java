@@ -21,7 +21,7 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.export.FieldnoteExport;
 import cgeo.geocaching.export.GpxExport;
 import cgeo.geocaching.files.GPXImporter;
-import cgeo.geocaching.filter.FilterUserInterface;
+import cgeo.geocaching.filter.FilterActivity;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.list.ListNameMemento;
@@ -809,12 +809,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      */
     @Override
     public void showFilterMenu(final View view) {
-        new FilterUserInterface(this).selectFilter(new Action1<IFilter>() {
-            @Override
-            public void call(@Nullable final IFilter selectedFilter) {
-                setFilter(selectedFilter);
-            }
-        });
+        FilterActivity.selectFilter(this);
     }
 
     private void setComparator(final CacheComparator comparator) {
@@ -1058,6 +1053,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 final Uri uri = data.getData();
                 new GPXImporter(this, listId, importGpxAttachementFinishedHandler).importGPX(uri, null, getDisplayName(uri));
             }
+        }
+        else if (requestCode == FilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
+            final int[] filterIndex = data.getIntArrayExtra(FilterActivity.EXTRA_FILTER_RESULT);
+            setFilter(FilterActivity.getFilterFromPosition(filterIndex[0], filterIndex[1]));
         }
 
         refreshCurrentList();

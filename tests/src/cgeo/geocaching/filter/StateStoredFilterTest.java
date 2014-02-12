@@ -4,20 +4,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.filter.StateFilter.StateNotStoredFilter;
-import cgeo.geocaching.filter.StateFilter.StateStoredFilter;
 
 public class StateStoredFilterTest extends CGeoTestCase {
 
-    private StateFilter.StateStoredFilter storedFilter;
-    private StateFilter.StateNotStoredFilter notStoredFilter;
+    private StateFilterFactory.StateStoredFilter storedFilter;
+    private StateFilterFactory.StateNotStoredFilter notStoredFilter;
     private Geocache cache;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        storedFilter = new StateStoredFilter();
-        notStoredFilter = new StateNotStoredFilter();
+        storedFilter = new StateFilterFactory.StateStoredFilter();
+        notStoredFilter = new StateFilterFactory.StateNotStoredFilter();
         cache = new Geocache();
     }
 
