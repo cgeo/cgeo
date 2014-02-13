@@ -1,6 +1,9 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.geopoint.Geopoint;
+
+import android.content.Intent;
 
 class RadarApp extends AbstractRadarApp {
 
@@ -9,6 +12,12 @@ class RadarApp extends AbstractRadarApp {
 
     RadarApp() {
         super(getString(R.string.cache_menu_radar), R.id.cache_app_radar, INTENT, PACKAGE_NAME);
+    }
+
+    @Override
+    protected void addCoordinates(final Intent intent, final Geopoint coords) {
+        intent.putExtra("latitude", (float) coords.getLatitude());
+        intent.putExtra("longitude", (float) coords.getLongitude());
     }
 
 }

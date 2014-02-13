@@ -41,4 +41,5 @@ public abstract class AbstractRadarApp extends AbstractPointNavigationApp {
         activity.startActivity(intent);
     }
 
+    protected abstract void addCoordinates(final Intent intent, final Geopoint point);
 }

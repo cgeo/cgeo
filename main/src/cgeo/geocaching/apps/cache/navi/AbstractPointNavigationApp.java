@@ -63,9 +63,4 @@ abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNa
         intent.putExtra("code", cache.getGeocode());
         intent.putExtra("size", cache.getSize().getL10n());
     }
-
-    protected static void addCoordinates(final Intent intent, final Geopoint coords) {
-        intent.putExtra("latitude", (float) coords.getLatitude());
-        intent.putExtra("longitude", (float) coords.getLongitude());
-    }
 }
