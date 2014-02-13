@@ -378,8 +378,8 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     search = ConnectorFactory.searchByViewport(viewport, INVALID_TOKEN).toBlockingObservable().single();
 
                     assertNotNull(search);
-                    // depending on the chosen strategy the cache is part of the search or not
-                    assertEquals(testStrategy == Strategy.DETAILED, search.getGeocodes().contains(cache.getGeocode()));
+                    // In the meantime, premium-member caches are also shown on map when not logged in
+                    assertTrue(search.getGeocodes().contains(cache.getGeocode()));
 
                 } finally {
                     Settings.setLiveMapStrategy(strategy);
