@@ -290,8 +290,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     waitDialog.dismiss();
                     waitDialog.setOnCancelListener(null);
                 }
-
-                geoDirUpdate.startDir();
             }
         }
 
@@ -300,8 +298,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             if (loadDetailsThread != null) {
                 loadDetailsThread.stopIt();
             }
-
-            geoDirUpdate.startDir();
         }
     }
 
@@ -496,7 +492,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     public void onResume() {
         super.onResume();
 
-        addGeoDirObservers();
+        geoDirUpdate.startGeoAndDir();
 
         if (!CollectionUtils.isEmpty(dirtyCaches)) {
             for (String geocode : dirtyCaches) {
@@ -516,18 +512,10 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         startTimer();
     }
 
-    private void addGeoDirObservers() {
-        geoDirUpdate.startGeoAndDir();
-    }
-
-    private void deleteGeoDirObservers() {
-        geoDirUpdate.stopGeoAndDir();
-    }
-
     @Override
     public void onPause() {
         stopTimer();
-        deleteGeoDirObservers();
+        geoDirUpdate.stopGeoAndDir();
         savePrefs();
 
         if (mapView != null) {
@@ -1328,8 +1316,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     if (loadDetailsThread != null) {
                         loadDetailsThread.stopIt();
                     }
-
-                    geoDirUpdate.startDir();
                 } catch (Exception e) {
                     Log.e("CGeoMap.storeCaches.onCancel", e);
                 }
@@ -1377,8 +1363,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 return;
             }
 
-            deleteGeoDirObservers();
-
             for (final String geocode : geocodes) {
                 try {
                     if (handler.isCancelled()) {
@@ -1402,7 +1386,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
             // we're done
             handler.sendEmptyMessage(FINISHED_LOADING_DETAILS);
-            addGeoDirObservers();
         }
     }
 
