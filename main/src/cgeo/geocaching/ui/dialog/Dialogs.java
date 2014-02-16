@@ -1,6 +1,7 @@
 package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
@@ -10,12 +11,14 @@ import rx.util.functions.Action1;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.view.ContextThemeWrapper;
 import android.view.WindowManager;
 import android.widget.EditText;
 
@@ -312,11 +315,12 @@ public final class Dialogs {
      *            listener to be run on okay
      */
     public static void input(final Activity context, final int title, final String defaultValue, final int buttonTitle, final Action1<String> okayListener) {
-        final EditText input = new EditText(context);
+        final Context themedContext = new ContextThemeWrapper(context, R.style.dark);
+        final EditText input = new EditText(themedContext);
         input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_CLASS_TEXT);
         input.setText(defaultValue);
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
         builder.setTitle(title);
         builder.setView(input);
         builder.setPositiveButton(buttonTitle, new OnClickListener() {
