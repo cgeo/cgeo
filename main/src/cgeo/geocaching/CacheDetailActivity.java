@@ -78,7 +78,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -934,7 +933,17 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_details_page, null);
 
             // Start loading preview map
-            new PreviewMapTask().execute((Void) null);
+            AndroidObservable.fromActivity(CacheDetailActivity.this, previewMap.subscribeOn(Schedulers.io())).subscribe(new Action1<BitmapDrawable>() {
+                @Override
+                public void call(final BitmapDrawable image) {
+                    final Bitmap bitmap = image.getBitmap();
+                    if (bitmap != null && bitmap.getWidth() > 10) {
+                        final ImageView imageView = (ImageView) view.findViewById(R.id.map_preview);
+                        imageView.setImageDrawable(image);
+                        view.findViewById(R.id.map_preview_box).setVisibility(View.VISIBLE);
+                    }
+                }
+            });
 
             detailsList = (LinearLayout) view.findViewById(R.id.details_list);
             final CacheDetailsCreator details = new CacheDetailsCreator(CacheDetailActivity.this, detailsList);
@@ -1421,53 +1430,33 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 box.setVisibility(View.GONE);
             }
         }
+    }
 
-        private class PreviewMapTask extends AsyncTask<Void, Void, BitmapDrawable> {
-            @Override
-            protected BitmapDrawable doInBackground(Void... parameters) {
-                try {
-                    // persistent preview from storage
-                    Bitmap image = decode(cache);
+    private Observable<BitmapDrawable> previewMap = Observable.create(new OnSubscribe<BitmapDrawable>() {
+        @Override
+        public void call(final Subscriber<? super BitmapDrawable> subscriber) {
+            try {
+                // persistent preview from storage
+                Bitmap image = StaticMapsProvider.getPreviewMap(cache);
 
-                    if (image == null) {
-                        if (Settings.isStoreOfflineMaps()) {
-                            StaticMapsProvider.storeCachePreviewMap(cache);
-                            image = decode(cache);
-                        }
-                    }
-
-                    return image != null ? ImageUtils.scaleBitmapToFitDisplay(image) : null;
-                } catch (final Exception e) {
-                    Log.w("CacheDetailActivity.PreviewMapTask", e);
-                    return null;
-                }
-            }
-
-            private Bitmap decode(final Geocache cache) {
-                return StaticMapsProvider.getPreviewMap(cache.getGeocode());
-            }
-
-            @Override
-            protected void onPostExecute(BitmapDrawable image) {
                 if (image == null) {
-                    return;
-                }
-
-                try {
-                    final Bitmap bitmap = image.getBitmap();
-                    if (bitmap == null || bitmap.getWidth() <= 10) {
-                        return;
+                    if (Settings.isStoreOfflineMaps()) {
+                        StaticMapsProvider.storeCachePreviewMap(cache);
+                        image = StaticMapsProvider.getPreviewMap(cache);
                     }
-
-                    final ImageView imageView = (ImageView) view.findViewById(R.id.map_preview);
-                    imageView.setImageDrawable(image);
-                    view.findViewById(R.id.map_preview_box).setVisibility(View.VISIBLE);
-                } catch (final Exception e) {
-                    Log.e("CacheDetailActivity.PreviewMapTask", e);
                 }
+
+                if (image != null) {
+                    subscriber.onNext(ImageUtils.scaleBitmapToFitDisplay(image));
+                }
+                subscriber.onCompleted();
+            } catch (final Exception e) {
+                Log.w("CacheDetailActivity.previewMap", e);
+                subscriber.onError(e);
             }
         }
-    }
+
+    });
 
     protected class DescriptionViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 

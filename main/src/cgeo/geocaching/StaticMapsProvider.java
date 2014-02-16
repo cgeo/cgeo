@@ -298,8 +298,8 @@ public final class StaticMapsProvider {
         return true;
     }
 
-    public static Bitmap getPreviewMap(final String geocode) {
-        return decodeFile(StaticMapsProvider.getMapFile(geocode, PREFIX_PREVIEW, false));
+    public static Bitmap getPreviewMap(final Geocache cache) {
+        return decodeFile(StaticMapsProvider.getMapFile(cache.getGeocode(), PREFIX_PREVIEW, false));
     }
 
     public static Bitmap getWaypointMap(final String geocode, final Waypoint waypoint, final int level) {
