@@ -165,7 +165,7 @@ public class Geocache implements ICache, IWaypoint {
      *
      * @param gpxParser
      */
-    public Geocache(GPXParser gpxParser) {
+    public Geocache(@SuppressWarnings("unused") GPXParser gpxParser) {
         setReliableLatLon(true);
         setAttributes(Collections.<String> emptyList());
         setWaypoints(Collections.<Waypoint> emptyList(), false);
