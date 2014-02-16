@@ -936,9 +936,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_details_page, null);
 
             // Start loading preview map
-            if (Settings.isStoreOfflineMaps()) {
-                new PreviewMapTask().execute((Void) null);
-            }
+            new PreviewMapTask().execute((Void) null);
 
             detailsList = (LinearLayout) view.findViewById(R.id.details_list);
             final CacheDetailsCreator details = new CacheDetailsCreator(CacheDetailActivity.this, detailsList);
@@ -1434,14 +1432,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     Bitmap image = decode(cache);
 
                     if (image == null) {
-                        StaticMapsProvider.storeCachePreviewMap(cache);
-                        image = decode(cache);
-                        if (image == null) {
-                            return null;
+                        if (Settings.isStoreOfflineMaps()) {
+                            StaticMapsProvider.storeCachePreviewMap(cache);
+                            image = decode(cache);
                         }
                     }
 
-                    return ImageUtils.scaleBitmapToFitDisplay(image);
+                    return image != null ? ImageUtils.scaleBitmapToFitDisplay(image) : null;
                 } catch (final Exception e) {
                     Log.w("CacheDetailActivity.PreviewMapTask", e);
                     return null;
