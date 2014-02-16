@@ -57,14 +57,12 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-
 import rx.Observable;
-import rx.Observable.OnSubscribeFunc;
+import rx.Observable.OnSubscribe;
 import rx.Observer;
-import rx.Subscription;
+import rx.Subscriber;
 import rx.android.observables.AndroidObservable;
 import rx.schedulers.Schedulers;
-import rx.subscriptions.Subscriptions;
 import rx.util.functions.Action1;
 
 import android.R.color;
@@ -1667,30 +1665,29 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     */
     private void loadDescription(final String descriptionString, final IndexOutOfBoundsAvoidingTextView descriptionView, final View loadingIndicatorView) {
         // The producer produces successives (without then with images) versions of the description.
-        final Observable<Spanned> producer = Observable.create(new OnSubscribeFunc<Spanned>() {
+        final Observable<Spanned> producer = Observable.create(new OnSubscribe<Spanned>() {
             @Override
-            public Subscription onSubscribe(final Observer<? super Spanned> observer) {
+            public void call(final Subscriber<? super Spanned> subscriber) {
                 try {
                     // Fast preview: parse only HTML without loading any images
                     final HtmlImageCounter imageCounter = new HtmlImageCounter();
                     final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
                     Spanned description = Html.fromHtml(descriptionString, imageCounter, unknownTagsHandler);
                     addWarning(unknownTagsHandler, description);
-                    observer.onNext(description);
+                    subscriber.onNext(description);
 
                     if (imageCounter.getImageCount() > 0) {
                         // Complete view: parse again with loading images - if necessary ! If there are any images causing problems the user can see at least the preview
                         description = Html.fromHtml(descriptionString, new HtmlImage(cache.getGeocode(), true, cache.getListId(), false), unknownTagsHandler);
                         addWarning(unknownTagsHandler, description);
-                        observer.onNext(description);
+                        subscriber.onNext(description);
                     }
 
-                    observer.onCompleted();
+                    subscriber.onCompleted();
                 } catch (final Exception e) {
                     Log.e("loadDescription", e);
-                    observer.onError(e);
+                    subscriber.onError(e);
                 }
-                return Subscriptions.empty();
             }
 
             // If description has an HTML construct which may be problematic to render, add a note at the end of the long description.

@@ -24,16 +24,12 @@ import cgeo.geocaching.utils.Version;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-
 import org.apache.commons.lang3.StringUtils;
-
 import rx.Observable;
-import rx.Observable.OnSubscribeFunc;
-import rx.Observer;
-import rx.Subscription;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
 import rx.android.observables.AndroidObservable;
 import rx.schedulers.Schedulers;
-import rx.subscriptions.Subscriptions;
 import rx.util.functions.Action1;
 
 import android.app.AlertDialog;
@@ -540,22 +536,21 @@ public class MainActivity extends AbstractActivity {
                     navLocation.setText(R.string.loc_no_addr);
                 }
                 if (addCoords == null || (geo.getCoords().distanceTo(addCoords) > 0.5)) {
-                    final Observable<String> address = Observable.create(new OnSubscribeFunc<String>() {
+                    final Observable<String> address = Observable.create(new OnSubscribe<String>() {
                         @Override
-                        public Subscription onSubscribe(final Observer<? super String> observer) {
+                        public void call(final Subscriber<? super String> subscriber) {
                             try {
                                 addCoords = geo.getCoords();
                                 final Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
                                 final Geopoint coords = app.currentGeo().getCoords();
                                 final List<Address> addresses = geocoder.getFromLocation(coords.getLatitude(), coords.getLongitude(), 1);
                                 if (!addresses.isEmpty()) {
-                                    observer.onNext(formatAddress(addresses.get(0)));
+                                    subscriber.onNext(formatAddress(addresses.get(0)));
                                 }
-                                observer.onCompleted();
+                                subscriber.onCompleted();
                             } catch (final Exception e) {
-                                observer.onError(e);
+                                subscriber.onError(e);
                             }
-                            return Subscriptions.empty();
                         }
                     }).subscribeOn(Schedulers.io());
                     AndroidObservable.fromActivity(MainActivity.this, address)

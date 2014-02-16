@@ -4,14 +4,11 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.gc.GCParser;
 
 import org.apache.commons.collections4.CollectionUtils;
-
 import rx.Observable;
-import rx.Observable.OnSubscribeFunc;
-import rx.Observer;
-import rx.Subscription;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
 import rx.android.observables.AndroidObservable;
 import rx.schedulers.Schedulers;
-import rx.subscriptions.Subscriptions;
 import rx.util.functions.Action1;
 
 import android.app.Activity;
@@ -49,12 +46,11 @@ public final class PocketQueryList {
     public static void promptForListSelection(final Activity activity, final Action1<PocketQueryList> runAfterwards) {
         final Dialog waitDialog = ProgressDialog.show(activity, activity.getString(R.string.search_pocket_title), activity.getString(R.string.search_pocket_loading), true, true);
 
-        AndroidObservable.fromActivity(activity, Observable.create(new OnSubscribeFunc<List<PocketQueryList>>() {
+        AndroidObservable.fromActivity(activity, Observable.create(new OnSubscribe<List<PocketQueryList>>() {
             @Override
-            public Subscription onSubscribe(final Observer<? super List<PocketQueryList>> observer) {
-                observer.onNext(GCParser.searchPocketQueryList());
-                observer.onCompleted();
-                return Subscriptions.empty();
+            public void call(final Subscriber<? super List<PocketQueryList>> subscriber) {
+                subscriber.onNext(GCParser.searchPocketQueryList());
+                subscriber.onCompleted();
             }
         }).subscribeOn(Schedulers.io())).subscribe(new Action1<List<PocketQueryList>>() {
             @Override

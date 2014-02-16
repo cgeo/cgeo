@@ -4,10 +4,10 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.settings.Settings;
 
+import rx.Scheduler;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import rx.util.functions.Action0;
 import rx.util.functions.Action1;
 
 import java.util.concurrent.TimeUnit;
@@ -100,9 +100,9 @@ public abstract class GeoDirHandler {
         if (geoSubscription != null) {
             final Subscription subscription = geoSubscription;
             geoSubscription = null;
-            Schedulers.newThread().schedule(new Action0() {
+            Schedulers.newThread().schedule(new Action1<Scheduler.Inner>() {
                 @Override
-                public void call() {
+                public void call(final Scheduler.Inner inner) {
                     subscription.unsubscribe();
                 }
             }, 2500, TimeUnit.MILLISECONDS);

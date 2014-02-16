@@ -6,8 +6,8 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 import rx.Observable;
-import rx.Observable.OnSubscribeFunc;
-import rx.Observer;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
 import rx.Subscription;
 import rx.observables.ConnectableObservable;
 import rx.subjects.BehaviorSubject;
@@ -22,7 +22,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
-class GeoDataProvider implements OnSubscribeFunc<IGeoData> {
+class GeoDataProvider implements OnSubscribe<IGeoData> {
 
     private static final String LAST_LOCATION_PSEUDO_PROVIDER = "last";
     private final LocationManager geoManager;
@@ -129,8 +129,8 @@ class GeoDataProvider implements OnSubscribeFunc<IGeoData> {
     }
 
     @Override
-    public Subscription onSubscribe(final Observer<? super IGeoData> observer) {
-        return subject.subscribe(observer);
+    public void call(final Subscriber<? super IGeoData> subscriber) {
+        subject.subscribe(subscriber);
     }
 
     final ConnectableObservable<IGeoData> worker = new ConnectableObservable<IGeoData>(this) {

@@ -3,8 +3,8 @@ package cgeo.geocaching;
 import cgeo.geocaching.compatibility.Compatibility;
 
 import rx.Observable;
-import rx.Observable.OnSubscribeFunc;
-import rx.Observer;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
 import rx.Subscription;
 import rx.observables.ConnectableObservable;
 import rx.subjects.BehaviorSubject;
@@ -18,7 +18,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-public class DirectionProvider implements OnSubscribeFunc<Float> {
+public class DirectionProvider implements OnSubscribe<Float> {
 
     private final SensorManager sensorManager;
     private final BehaviorSubject<Float> subject = BehaviorSubject.create(0.0f);
@@ -32,8 +32,8 @@ public class DirectionProvider implements OnSubscribeFunc<Float> {
     }
 
     @Override
-    public Subscription onSubscribe(final Observer<? super Float> observer) {
-        return subject.distinctUntilChanged().subscribe(observer);
+    public void call(final Subscriber<? super Float> subscriber) {
+        subject.distinctUntilChanged().subscribe(subscriber);
     }
 
     private final ConnectableObservable<Float> worker = new ConnectableObservable<Float>(this) {

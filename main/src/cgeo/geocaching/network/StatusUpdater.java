@@ -5,11 +5,10 @@ import cgeo.geocaching.utils.Version;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import rx.Observable;
+import rx.Scheduler;
 import rx.schedulers.Schedulers;
 import rx.subjects.BehaviorSubject;
-import rx.util.functions.Func1;
+import rx.util.functions.Action1;
 
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
@@ -50,23 +49,22 @@ public class StatusUpdater {
         }
     }
 
-    final static private Observable<Status> statusObservable =
-            Observable.interval(1800, TimeUnit.SECONDS).startWith(-1L).flatMap(new Func1<Long, Observable<Status>>() {
-                @Override
-                public Observable<Status> call(Long id) {
-                    final JSONObject response =
-                            Network.requestJSON("http://status.cgeo.org/api/status.json",
-                                    new Parameters("version_code", String.valueOf(Version.getVersionCode(CgeoApplication.getInstance())),
-                                            "version_name", Version.getVersionName(CgeoApplication.getInstance()),
-                                            "locale", Locale.getDefault().toString()));
-                    return response != null ? Observable.from(Status.defaultStatus((new Status(response)))) : Observable.<Status>empty();
-                }
-            }).subscribeOn(Schedulers.io());
-
     final static public BehaviorSubject<Status> latestStatus = BehaviorSubject.create(Status.defaultStatus(null));
 
     static {
-        statusObservable.subscribe(latestStatus);
+        Schedulers.io().schedulePeriodically(new Action1<Scheduler.Inner>() {
+            @Override
+            public void call(final Scheduler.Inner inner) {
+                final JSONObject response =
+                        Network.requestJSON("http://status.cgeo.org/api/status.json",
+                                new Parameters("version_code", String.valueOf(Version.getVersionCode(CgeoApplication.getInstance())),
+                                        "version_name", Version.getVersionName(CgeoApplication.getInstance()),
+                                        "locale", Locale.getDefault().toString()));
+                if (response != null) {
+                    latestStatus.onNext(Status.defaultStatus(new Status(response)));
+                }
+            }
+        }, 0, 1800, TimeUnit.SECONDS);
     }
 
     private static String get(final JSONObject json, final String key) {
