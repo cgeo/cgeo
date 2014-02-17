@@ -26,6 +26,7 @@ import rx.Subscriber;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 import rx.subscriptions.CompositeSubscription;
+import rx.util.functions.Func0;
 import rx.util.functions.Func1;
 
 import android.content.res.Resources;
@@ -141,30 +142,30 @@ public class HtmlImage implements Html.ImageGetter {
                                 loadResult.getRight()));
                         subscriber.onCompleted();
                     }
-                }).subscribeOn(Schedulers.computation());
+                });
 
         final Observable<BitmapDrawable> downloadAndSave =
-                Observable.create(new OnSubscribe<BitmapDrawable>() {
+                Observable.defer(new Func0<Observable<? extends BitmapDrawable>>() {
                     @Override
-                    public void call(final Subscriber<? super BitmapDrawable> subscriber) {
+                    public Observable<? extends BitmapDrawable> call() {
                         final File file = LocalStorage.getStorageFile(pseudoGeocode, url, true, true);
                         if (url.startsWith("data:image/")) {
                             if (url.contains(";base64,")) {
                                 saveBase64ToFile(url, file);
                             } else {
                                 Log.e("HtmlImage.getDrawable: unable to decode non-base64 inline image");
-                                subscriber.onCompleted();
+                                return Observable.empty();
                             }
                         } else {
                             if (subscription.isUnsubscribed() || downloadOrRefreshCopy(url, file)) {
                                 // The existing copy was fresh enough or we were unsubscribed earlier.
-                                subscriber.onCompleted();
+                                return Observable.empty();
                             }
                         }
                         if (onlySave) {
-                            subscriber.onCompleted();
+                            return Observable.empty();
                         } else {
-                            loadFromDisk.map(new Func1<Pair<BitmapDrawable, Boolean>, BitmapDrawable>() {
+                            return loadFromDisk.map(new Func1<Pair<BitmapDrawable, Boolean>, BitmapDrawable>() {
                                 @Override
                                 public BitmapDrawable call(final Pair<BitmapDrawable, Boolean> loadResult) {
                                     final BitmapDrawable image = loadResult.getLeft();
@@ -175,10 +176,10 @@ public class HtmlImage implements Html.ImageGetter {
                                             new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded)) :
                                             getTransparent1x1Image(resources);
                                 }
-                            }).subscribe(subscriber);
+                            });
                         }
                     }
-                }).subscribeOn(downloadScheduler);
+                });
 
         if (StringUtils.isBlank(url) || isCounter(url)) {
             return Observable.from(getTransparent1x1Image(resources));
@@ -193,7 +194,7 @@ public class HtmlImage implements Html.ImageGetter {
                 }
                 return bitmap != null && !onlySave ? downloadAndSave.startWith(bitmap) : downloadAndSave;
             }
-        });
+        }).subscribeOn(downloadScheduler);
     }
 
     public void waitForBackgroundLoading(@Nullable final CancellableHandler handler) {

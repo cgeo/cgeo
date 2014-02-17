@@ -100,17 +100,11 @@ public class ImagesList {
             assert(imageView != null);
             subscriptions.add(AndroidObservable.fromActivity(activity, imgGetter.fetchDrawable(img.getUrl()))
                     .subscribe(new Action1<BitmapDrawable>() {
-                                   @Override
-                                   public void call(final BitmapDrawable image) {
-                                       display(imageView, image, img, rowView);
-                                   }
-                               }, new Action1<Throwable>() {
-                                   @Override
-                                   public void call(final Throwable e) {
-                                       // Ignore error due to interruptions.
-                                       // FIXME: why is this necessary?
-                                   }
-                               }));
+                        @Override
+                        public void call(final BitmapDrawable image) {
+                            display(imageView, image, img, rowView);
+                        }
+                    }));
             rowView.addView(imageView);
             imagesView.addView(rowView);
         }
