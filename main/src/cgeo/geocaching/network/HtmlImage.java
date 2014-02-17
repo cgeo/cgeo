@@ -22,11 +22,12 @@ import org.eclipse.jdt.annotation.Nullable;
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Scheduler;
+import rx.Scheduler.Inner;
 import rx.Subscriber;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 import rx.subscriptions.CompositeSubscription;
-import rx.util.functions.Func0;
+import rx.util.functions.Action1;
 import rx.util.functions.Func1;
 
 import android.content.res.Resources;
@@ -126,75 +127,90 @@ public class HtmlImage implements Html.ImageGetter {
         return drawable.toBlockingObservable().lastOrDefault(null);
     }
 
+    // Caches are loaded from disk on Schedulers.computation() to avoid using more threads than processors
+    // on the phone while decoding the image. Downloads happen on downloadScheduler, in parallel with image
+    // decoding.
     public Observable<BitmapDrawable> fetchDrawable(final String url) {
         final boolean shared = url.contains("/images/icons/icon_");
         final String pseudoGeocode = shared ? SHARED : geocode;
-
-        final Observable<Pair<BitmapDrawable, Boolean>> loadFromDisk =
-                Observable.create(new OnSubscribe<Pair<BitmapDrawable, Boolean>>() {
-                    @Override
-                    public void call(final Subscriber<? super Pair<BitmapDrawable, Boolean>> subscriber) {
-                        final Pair<Bitmap, Boolean> loadResult = loadImageFromStorage(url, pseudoGeocode, shared);
-                        final Bitmap bitmap = loadResult.getLeft();
-                        subscriber.onNext(new ImmutablePair<BitmapDrawable, Boolean>(bitmap != null ?
-                                ImageUtils.scaleBitmapToFitDisplay(bitmap) :
-                                null,
-                                loadResult.getRight()));
-                        subscriber.onCompleted();
-                    }
-                });
-
-        final Observable<BitmapDrawable> downloadAndSave =
-                Observable.defer(new Func0<Observable<? extends BitmapDrawable>>() {
-                    @Override
-                    public Observable<? extends BitmapDrawable> call() {
-                        final File file = LocalStorage.getStorageFile(pseudoGeocode, url, true, true);
-                        if (url.startsWith("data:image/")) {
-                            if (url.contains(";base64,")) {
-                                saveBase64ToFile(url, file);
-                            } else {
-                                Log.e("HtmlImage.getDrawable: unable to decode non-base64 inline image");
-                                return Observable.empty();
-                            }
-                        } else {
-                            if (subscription.isUnsubscribed() || downloadOrRefreshCopy(url, file)) {
-                                // The existing copy was fresh enough or we were unsubscribed earlier.
-                                return Observable.empty();
-                            }
-                        }
-                        if (onlySave) {
-                            return Observable.empty();
-                        } else {
-                            return loadFromDisk.map(new Func1<Pair<BitmapDrawable, Boolean>, BitmapDrawable>() {
-                                @Override
-                                public BitmapDrawable call(final Pair<BitmapDrawable, Boolean> loadResult) {
-                                    final BitmapDrawable image = loadResult.getLeft();
-                                    if (image != null) {
-                                        return image;
-                                    }
-                                    return returnErrorImage ?
-                                            new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded)) :
-                                            getTransparent1x1Image(resources);
-                                }
-                            });
-                        }
-                    }
-                });
 
         if (StringUtils.isBlank(url) || isCounter(url)) {
             return Observable.from(getTransparent1x1Image(resources));
         }
 
-        return loadFromDisk.switchMap(new Func1<Pair<BitmapDrawable, Boolean>, Observable<? extends BitmapDrawable>>() {
+        return Observable.create(new OnSubscribe<BitmapDrawable>() {
             @Override
-            public Observable<? extends BitmapDrawable> call(final Pair<BitmapDrawable, Boolean> loadResult) {
-                final BitmapDrawable bitmap = loadResult.getLeft();
-                if (loadResult.getRight()) {
-                    return Observable.from(bitmap);
-                }
-                return bitmap != null && !onlySave ? downloadAndSave.startWith(bitmap) : downloadAndSave;
+            public void call(final Subscriber<? super BitmapDrawable> subscriber) {
+                Schedulers.computation().schedule(new Action1<Inner>() {
+                    @Override
+                    public void call(final Inner inner) {
+                        final Pair<BitmapDrawable, Boolean> loaded = loadFromDisk();
+                        final BitmapDrawable bitmap = loaded.getLeft();
+                        if (loaded.getRight()) {
+                            subscriber.onNext(bitmap);
+                            subscriber.onCompleted();
+                            return;
+                        }
+                        if (bitmap != null && !onlySave) {
+                            subscriber.onNext(bitmap);
+                        }
+                        downloadScheduler.schedule(new Action1<Inner>() {
+                            @Override
+                            public void call(final Inner inner) {
+                                downloadAndSave(subscriber);
+                            }
+                        });
+                    }
+                });
             }
-        }).subscribeOn(downloadScheduler);
+
+            private Pair<BitmapDrawable, Boolean> loadFromDisk() {
+                final Pair<Bitmap, Boolean> loadResult = loadImageFromStorage(url, pseudoGeocode, shared);
+                final Bitmap bitmap = loadResult.getLeft();
+                return new ImmutablePair<BitmapDrawable, Boolean>(bitmap != null ?
+                        ImageUtils.scaleBitmapToFitDisplay(bitmap) :
+                        null,
+                        loadResult.getRight());
+            }
+
+            private void downloadAndSave(final Subscriber<? super BitmapDrawable> subscriber) {
+                final File file = LocalStorage.getStorageFile(pseudoGeocode, url, true, true);
+                if (url.startsWith("data:image/")) {
+                    if (url.contains(";base64,")) {
+                        saveBase64ToFile(url, file);
+                    } else {
+                        Log.e("HtmlImage.getDrawable: unable to decode non-base64 inline image");
+                        subscriber.onCompleted();
+                        return;
+                    }
+                } else {
+                    if (subscription.isUnsubscribed() || downloadOrRefreshCopy(url, file)) {
+                        // The existing copy was fresh enough or we were unsubscribed earlier.
+                        subscriber.onCompleted();
+                        return;
+                    }
+                }
+                if (onlySave) {
+                    subscriber.onCompleted();
+                } else {
+                    Schedulers.computation().schedule(new Action1<Inner>() {
+                        @Override
+                        public void call(final Inner inner) {
+                            final Pair<BitmapDrawable, Boolean> loaded = loadFromDisk();
+                            final BitmapDrawable image = loaded.getLeft();
+                            if (image != null) {
+                                subscriber.onNext(image);
+                            } else {
+                                subscriber.onNext(returnErrorImage ?
+                                        new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded)) :
+                                        getTransparent1x1Image(resources));
+                            }
+                            subscriber.onCompleted();
+                        }
+                    });
+                }
+            }
+        });
     }
 
     public void waitForBackgroundLoading(@Nullable final CancellableHandler handler) {
