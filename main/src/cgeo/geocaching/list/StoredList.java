@@ -9,7 +9,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
-import rx.util.functions.Action1;
+import rx.functions.Action1;
 
 import android.app.Activity;
 import android.app.AlertDialog;

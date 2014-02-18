@@ -2,7 +2,7 @@ package cgeo.geocaching.search;
 
 import org.apache.commons.lang3.StringUtils;
 
-import rx.util.functions.Func1;
+import rx.functions.Func1;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;

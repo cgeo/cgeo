@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import rx.Scheduler;
 import rx.schedulers.Schedulers;
 import rx.subjects.BehaviorSubject;
-import rx.util.functions.Action1;
+import rx.functions.Action1;
 
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;

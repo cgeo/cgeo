@@ -30,8 +30,8 @@ import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Observable;
 import rx.schedulers.Schedulers;
-import rx.util.functions.Func1;
-import rx.util.functions.Func2;
+import rx.functions.Func1;
+import rx.functions.Func2;
 
 import java.util.ArrayList;
 import java.util.Arrays;

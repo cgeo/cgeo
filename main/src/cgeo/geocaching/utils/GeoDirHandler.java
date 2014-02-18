@@ -8,7 +8,7 @@ import rx.Scheduler;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import rx.util.functions.Action1;
+import rx.functions.Action1;
 
 import java.util.concurrent.TimeUnit;
 

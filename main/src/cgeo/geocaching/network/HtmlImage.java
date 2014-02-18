@@ -27,8 +27,8 @@ import rx.Subscriber;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 import rx.subscriptions.CompositeSubscription;
-import rx.util.functions.Action1;
-import rx.util.functions.Func1;
+import rx.functions.Action1;
+import rx.functions.Func1;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;

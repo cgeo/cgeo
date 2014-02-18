@@ -11,7 +11,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import rx.android.observables.AndroidObservable;
 import rx.subscriptions.CompositeSubscription;
-import rx.util.functions.Action1;
+import rx.functions.Action1;
 
 import android.app.Activity;
 import android.content.Intent;

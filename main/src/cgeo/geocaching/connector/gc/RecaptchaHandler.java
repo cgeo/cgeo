@@ -10,8 +10,8 @@ import org.apache.commons.io.IOUtils;
 import rx.Observable;
 import rx.android.observables.AndroidObservable;
 import rx.schedulers.Schedulers;
-import rx.util.functions.Action1;
-import rx.util.functions.Func0;
+import rx.functions.Action1;
+import rx.functions.Func0;
 
 import android.app.Activity;
 import android.app.AlertDialog;

@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector;
 
 import org.eclipse.jdt.annotation.NonNull;
-import rx.util.functions.Action1;
+import rx.functions.Action1;
 
 import android.app.Activity;
 

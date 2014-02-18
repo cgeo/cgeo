@@ -3,7 +3,7 @@ package cgeo.geocaching.sorting;
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.Log;
 
-import rx.util.functions.Action1;
+import rx.functions.Action1;
 
 import android.app.Activity;
 import android.app.AlertDialog;

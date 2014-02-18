@@ -4,7 +4,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 
-import rx.util.functions.Action1;
+import rx.functions.Action1;
 
 import android.content.Intent;
 import android.content.Intent.ShortcutIconResource;

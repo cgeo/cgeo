@@ -35,7 +35,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import rx.util.functions.Action1;
+import rx.functions.Action1;
 
 import android.content.Context;
 import android.content.Intent;

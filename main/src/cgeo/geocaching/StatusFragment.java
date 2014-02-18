@@ -6,7 +6,7 @@ import cgeo.geocaching.utils.Log;
 
 import rx.Subscription;
 import rx.android.observables.AndroidObservable;
-import rx.util.functions.Action1;
+import rx.functions.Action1;
 
 import android.content.Intent;
 import android.content.res.Resources;

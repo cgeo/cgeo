@@ -6,7 +6,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
-import rx.util.functions.Action1;
+import rx.functions.Action1;
 
 import android.app.Activity;
 import android.app.AlertDialog;

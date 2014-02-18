@@ -20,7 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import rx.util.functions.Func1;
+import rx.functions.Func1;
 
 import android.app.Activity;
 import android.app.SearchManager;

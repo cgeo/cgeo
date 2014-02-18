@@ -30,7 +30,7 @@ import rx.Observable.OnSubscribe;
 import rx.Subscriber;
 import rx.android.observables.AndroidObservable;
 import rx.schedulers.Schedulers;
-import rx.util.functions.Action1;
+import rx.functions.Action1;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;

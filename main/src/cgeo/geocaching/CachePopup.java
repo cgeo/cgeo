@@ -11,7 +11,7 @@ import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
-import rx.util.functions.Action1;
+import rx.functions.Action1;
 
 import android.content.Context;
 import android.content.Intent;

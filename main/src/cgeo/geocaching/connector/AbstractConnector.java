@@ -19,7 +19,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
-import rx.util.functions.Action1;
+import rx.functions.Action1;
 
 import java.util.ArrayList;
 import java.util.Collection;

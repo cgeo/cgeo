@@ -9,7 +9,7 @@ import rx.Subscription;
 import rx.observables.ConnectableObservable;
 import rx.subjects.BehaviorSubject;
 import rx.subscriptions.Subscriptions;
-import rx.util.functions.Action0;
+import rx.functions.Action0;
 
 import android.app.Activity;
 import android.content.Context;
