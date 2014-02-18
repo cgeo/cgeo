@@ -41,7 +41,7 @@ public enum LogType {
     MOVE_INVENTORY(70, "70", "unused_inventory", "", R.string.log_moveinventory),
     RETRACT(25, "25", "retract listing", "", R.string.log_retractlisting),
     MARKED_MISSING(16, "16", "marked missing", "", R.string.log_marked_missing, R.drawable.mark_red),
-    OC_TEAM_COMMENT(83, "", "", "OC Team comment", R.string.log_oc_team_comment),
+    OC_TEAM_COMMENT(83, "", "X1", "OC Team comment", R.string.log_oc_team_comment),
     UNKNOWN(0, "unknown", "", "", R.string.err_unknown, R.drawable.mark_red); // LogType not init. yet
 
     public final int id;
