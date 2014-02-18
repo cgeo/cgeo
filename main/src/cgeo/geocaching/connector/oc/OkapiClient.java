@@ -485,6 +485,30 @@ final class OkapiClient {
         if ("Didn't find it".equalsIgnoreCase(logType)) {
             return LogType.DIDNT_FIND_IT;
         }
+        if ("Will attend".equalsIgnoreCase(logType)) {
+            return LogType.WILL_ATTEND;
+        }
+        if ("Attended".equalsIgnoreCase(logType)) {
+            return LogType.ATTENDED;
+        }
+        if ("Temporarily unavailable".equalsIgnoreCase(logType)) {
+            return LogType.TEMP_DISABLE_LISTING;
+        }
+        if ("Ready to search".equalsIgnoreCase(logType)) {
+            return LogType.ENABLE_LISTING;
+        }
+        if ("Archived".equalsIgnoreCase(logType)) {
+            return LogType.ARCHIVE;
+        }
+        if ("Needs maintenance".equalsIgnoreCase(logType)) {
+            return LogType.NEEDS_MAINTENANCE;
+        }
+        if ("Moved".equalsIgnoreCase(logType)) {
+            return LogType.UPDATE_COORDINATES;
+        }
+        if ("OC Team comment".equalsIgnoreCase(logType)) {
+            return LogType.POST_REVIEWER_NOTE;
+        }
         return LogType.NOTE;
     }
 

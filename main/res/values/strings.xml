@@ -131,6 +131,7 @@
     <string name="log_image_scale">Scaling</string>
     <string name="log_password_title">Log Password:</string>
     <string name="log_hint_log_password">Enter your log password</string>
+    <string name="log_oc_team_comment">OC Team comment</string>
 
     <string-array name="log_image_scales">
         <item>No scaling</item>
