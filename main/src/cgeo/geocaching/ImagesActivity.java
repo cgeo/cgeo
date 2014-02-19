@@ -24,6 +24,7 @@ public class ImagesActivity extends AbstractActivity {
     private ArrayList<Image> imageNames;
     private ImagesList imagesList;
     private ImageType imgType = ImageType.SpoilerImages;
+    private String geocode;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,12 +45,12 @@ public class ImagesActivity extends AbstractActivity {
             return;
         }
 
+        this.geocode = geocode;
+
         // init
         setTheme();
         setContentView(R.layout.images_activity);
         setTitle(res.getString(imgType.getTitle()));
-
-        imagesList = new ImagesList(this, geocode);
 
         imageNames = extras.getParcelableArrayList(Intents.EXTRA_IMAGES);
         if (CollectionUtils.isEmpty(imageNames)) {
@@ -65,6 +66,7 @@ public class ImagesActivity extends AbstractActivity {
     @Override
     public void onStart() {
         super.onStart();
+        imagesList = new ImagesList(this, geocode);
         imagesList.loadImages(findViewById(R.id.spoiler_list), imageNames, offline);
     }
 
@@ -72,6 +74,7 @@ public class ImagesActivity extends AbstractActivity {
     public void onStop() {
         // Reclaim native memory faster than the finalizers would
         imagesList.removeAllViews();
+        imagesList = null;
         super.onStop();
     }
 
