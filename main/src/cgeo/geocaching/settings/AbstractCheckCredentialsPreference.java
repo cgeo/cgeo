@@ -38,7 +38,7 @@ public abstract class AbstractCheckCredentialsPreference extends AbstractClickab
 
     protected abstract ImmutablePair<String, String> getCredentials();
 
-    protected abstract Object login();
+    protected abstract ImmutablePair<StatusCode, Drawable> login();
 
     private class LoginCheckClickListener implements OnPreferenceClickListener {
         final private SettingsActivity activity;
@@ -65,22 +65,22 @@ public abstract class AbstractCheckCredentialsPreference extends AbstractClickab
             loginDialog.setCancelable(false);
             Cookies.clearCookies();
 
-            AndroidObservable.fromActivity(activity, Observable.defer(new Func0<Observable<?>>() {
+            AndroidObservable.fromActivity(activity, Observable.defer(new Func0<Observable<ImmutablePair<StatusCode, Drawable>>>() {
                 @Override
-                public Observable<?> call() {
+                public Observable<ImmutablePair<StatusCode, Drawable>> call() {
                     return Observable.from(login());
                 }
-            }).subscribeOn(Schedulers.io())).subscribe(new Action1<Object>() {
+            }).subscribeOn(Schedulers.io())).subscribe(new Action1<ImmutablePair<StatusCode, Drawable>>() {
                 @Override
-                public void call(final Object obj) {
+                public void call(final ImmutablePair<StatusCode, Drawable> loginInfo) {
                     loginDialog.dismiss();
-                    if (obj == null || obj instanceof Drawable) {
-                        Dialogs.message(activity, R.string.init_login_popup, R.string.init_login_popup_ok, (Drawable) obj);
+                    if (loginInfo.getLeft() == StatusCode.NO_ERROR) {
+                        Dialogs.message(activity, R.string.init_login_popup, R.string.init_login_popup_ok, loginInfo.getRight());
                     } else {
                         Dialogs.message(activity, R.string.init_login_popup,
                                 res.getString(R.string.init_login_popup_failed_reason)
                                         + " "
-                                        + ((StatusCode) obj).getErrorString(res)
+                                        + loginInfo.getLeft().getErrorString(res)
                                         + ".");
                     }
                     activity.initBasicMemberPreferences();

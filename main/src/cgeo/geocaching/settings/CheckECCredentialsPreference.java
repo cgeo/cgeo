@@ -7,6 +7,7 @@ import cgeo.geocaching.enumerations.StatusCode;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 
 public class CheckECCredentialsPreference extends AbstractCheckCredentialsPreference {
@@ -25,12 +26,7 @@ public class CheckECCredentialsPreference extends AbstractCheckCredentialsPrefer
     }
 
     @Override
-    protected Object login() {
-        final StatusCode loginResult = ECLogin.getInstance().login();
-        Object payload = loginResult;
-        if (loginResult == StatusCode.NO_ERROR) {
-            payload = null;
-        }
-        return payload;
+    protected ImmutablePair<StatusCode, Drawable> login() {
+        return new ImmutablePair<StatusCode, Drawable>(ECLogin.getInstance().login(), null);
     }
 }

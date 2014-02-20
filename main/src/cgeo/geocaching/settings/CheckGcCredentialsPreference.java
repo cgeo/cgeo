@@ -6,6 +6,7 @@ import cgeo.geocaching.enumerations.StatusCode;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 
 public class CheckGcCredentialsPreference extends AbstractCheckCredentialsPreference {
@@ -24,13 +25,14 @@ public class CheckGcCredentialsPreference extends AbstractCheckCredentialsPrefer
     }
 
     @Override
-    protected Object login() {
+    protected ImmutablePair<StatusCode, Drawable> login() {
         final StatusCode loginResult = GCLogin.getInstance().login();
-        Object payload = loginResult;
-        if (loginResult == StatusCode.NO_ERROR) {
-            GCLogin.detectGcCustomDate();
-            payload = GCLogin.getInstance().downloadAvatarAndGetMemberStatus();
+        switch (loginResult) {
+            case NO_ERROR:
+                GCLogin.detectGcCustomDate();
+                return new ImmutablePair<StatusCode, Drawable>(StatusCode.NO_ERROR, GCLogin.getInstance().downloadAvatarAndGetMemberStatus());
+            default:
+                return new ImmutablePair<StatusCode, Drawable>(loginResult, null);
         }
-        return payload;
     }
 }
