@@ -19,14 +19,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.preference.Preference;
 import android.util.AttributeSet;
-import android.view.View;
-import android.view.ViewGroup;
 
-public abstract class AbstractCheckCredentialsPreference extends Preference {
-
-    public AbstractCheckCredentialsPreference(Context context) {
-        super(context);
-    }
+public abstract class AbstractCheckCredentialsPreference extends AbstractClickablePreference {
 
     public AbstractCheckCredentialsPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -37,9 +31,8 @@ public abstract class AbstractCheckCredentialsPreference extends Preference {
     }
 
     @Override
-    protected View onCreateView(ViewGroup parent) {
-        setOnPreferenceClickListener(new LoginCheckClickListener());
-        return super.onCreateView(parent);
+    protected OnPreferenceClickListener getOnPreferenceClickListener(final SettingsActivity activity) {
+        return new LoginCheckClickListener(activity);
     }
 
     protected abstract ImmutablePair<String, String> getCredentials();
@@ -47,8 +40,13 @@ public abstract class AbstractCheckCredentialsPreference extends Preference {
     protected abstract Object login();
 
     private class LoginCheckClickListener implements OnPreferenceClickListener {
-        private Resources res;
-        private SettingsActivity activity;
+        final private Resources res;
+        final private SettingsActivity activity;
+
+        LoginCheckClickListener(final SettingsActivity activity) {
+            this.activity = activity;
+            this.res = activity.getResources();
+        }
 
         private ProgressDialog loginDialog;
         @SuppressLint("HandlerLeak")
@@ -84,10 +82,7 @@ public abstract class AbstractCheckCredentialsPreference extends Preference {
 
         @Override
         public boolean onPreferenceClick(Preference preference) {
-            this.activity = (SettingsActivity) AbstractCheckCredentialsPreference.this.getContext();
-            this.res = activity.getResources();
-
-            ImmutablePair<String, String> credentials = getCredentials();
+            final ImmutablePair<String, String> credentials = getCredentials();
 
             // check credentials for validity
             if (StringUtils.isBlank(credentials.getLeft())

@@ -10,10 +10,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.preference.Preference;
 import android.util.AttributeSet;
-import android.view.View;
-import android.view.ViewGroup;
 
-public class OAuthPreference extends Preference {
+public class OAuthPreference extends AbstractClickablePreference {
 
     private static final int NO_KEY = -1;
 
@@ -44,11 +42,6 @@ public class OAuthPreference extends Preference {
         return OAuthActivityMapping.NONE;
     }
 
-    public OAuthPreference(Context context) {
-        super(context);
-        this.oAuthMapping = getAuthorization();
-    }
-
     public OAuthPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.oAuthMapping = getAuthorization();
@@ -60,10 +53,9 @@ public class OAuthPreference extends Preference {
     }
 
     @Override
-    protected View onCreateView(ViewGroup parent) {
-        final SettingsActivity activity = (SettingsActivity) getContext();
-
-        setOnPreferenceClickListener(new OnPreferenceClickListener() {
+    protected OnPreferenceClickListener getOnPreferenceClickListener(final SettingsActivity activity) {
+        activity.setOcAuthTitle(oAuthMapping.prefKeyId);
+        return new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 if (oAuthMapping.authActivity != null) {
@@ -74,9 +66,7 @@ public class OAuthPreference extends Preference {
                 }
                 return false; // no shared preference has to be changed
             }
-        });
+        };
 
-        activity.setOcAuthTitle(oAuthMapping.prefKeyId);
-        return super.onCreateView(parent);
     }
 }

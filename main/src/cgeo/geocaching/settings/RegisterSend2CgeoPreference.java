@@ -19,14 +19,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.preference.Preference;
 import android.util.AttributeSet;
-import android.view.View;
-import android.view.ViewGroup;
 
-public class RegisterSend2CgeoPreference extends Preference {
-
-    public RegisterSend2CgeoPreference(Context context) {
-        super(context);
-    }
+public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
 
     public RegisterSend2CgeoPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -37,10 +31,8 @@ public class RegisterSend2CgeoPreference extends Preference {
     }
 
     @Override
-    protected View onCreateView(ViewGroup parent) {
-        final SettingsActivity activity = (SettingsActivity) getContext();
-
-        setOnPreferenceClickListener(new OnPreferenceClickListener() {
+    protected OnPreferenceClickListener getOnPreferenceClickListener(final SettingsActivity activity) {
+        return new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 // satisfy static code analysis
@@ -100,8 +92,7 @@ public class RegisterSend2CgeoPreference extends Preference {
 
                 return true;
             }
-        });
-        return super.onCreateView(parent);
+        };
     }
 
 }
