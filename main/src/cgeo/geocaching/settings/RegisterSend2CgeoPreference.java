@@ -9,20 +9,20 @@ import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 import org.apache.commons.lang3.StringUtils;
+import rx.Observable;
+import rx.android.observables.AndroidObservable;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.schedulers.Schedulers;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
 import android.preference.Preference;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
 public class RegisterSend2CgeoPreference extends Preference {
-
-    ProgressDialog progressDialog;
-    SettingsActivity activity;
 
     public RegisterSend2CgeoPreference(Context context) {
         super(context);
@@ -36,40 +36,9 @@ public class RegisterSend2CgeoPreference extends Preference {
         super(context, attrs, defStyle);
     }
 
-    private Handler webAuthHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            // satisfy static code analysis
-            if (activity == null) {
-                return;
-            }
-
-            try {
-                if (progressDialog != null && progressDialog.isShowing()) {
-                    progressDialog.dismiss();
-                }
-
-                if (msg.what > 0) {
-                    Dialogs.message(activity, R.string.init_sendToCgeo,
-                            activity.getString(R.string.init_sendToCgeo_register_ok)
-                                    .replace("####", String.valueOf(msg.what)));
-                } else {
-                    Dialogs.message(activity, R.string.init_sendToCgeo, R.string.init_sendToCgeo_register_fail);
-                }
-            } catch (Exception e) {
-                ActivityMixin.showToast(activity, R.string.init_sendToCgeo_register_fail);
-                Log.e("SettingsActivity.webHandler", e);
-            }
-
-            if (progressDialog != null && progressDialog.isShowing()) {
-                progressDialog.dismiss();
-            }
-        }
-    };
-
     @Override
     protected View onCreateView(ViewGroup parent) {
-        activity = (SettingsActivity) getContext();
+        final SettingsActivity activity = (SettingsActivity) getContext();
 
         setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
@@ -87,38 +56,47 @@ public class RegisterSend2CgeoPreference extends Preference {
                     return false;
                 }
 
-                progressDialog = ProgressDialog.show(activity,
+                final ProgressDialog progressDialog = ProgressDialog.show(activity,
                         activity.getString(R.string.init_sendToCgeo),
                         activity.getString(R.string.init_sendToCgeo_registering), true);
                 progressDialog.setCancelable(false);
 
-                (new Thread() {
+                AndroidObservable.fromActivity(activity,
+                        Observable.defer(new Func0<Observable<Integer>>() {
+                            @Override
+                            public Observable<Integer> call() {
+                                final String nam = StringUtils.defaultString(deviceName);
+                                final String cod = StringUtils.defaultString(deviceCode);
 
-                    @Override
-                    public void run() {
-                        int pin = 0;
+                                final Parameters params = new Parameters("name", nam, "code", cod);
+                                HttpResponse response = Network.getRequest("http://send2.cgeo.org/auth.html", params);
 
-                        final String nam = StringUtils.defaultString(deviceName);
-                        final String cod = StringUtils.defaultString(deviceCode);
+                                if (response != null && response.getStatusLine().getStatusCode() == 200) {
+                                    //response was OK
+                                    final String[] strings = StringUtils.split(Network.getResponseData(response), ',');
+                                    Settings.setWebNameCode(nam, strings[0]);
+                                    try {
+                                        return Observable.from(Integer.parseInt(strings[1].trim()));
+                                    } catch (final Exception e) {
+                                        Log.e("RegisterSend2CgeoPreference", e);
+                                    }
+                                }
 
-                        final Parameters params = new Parameters("name", nam, "code", cod);
-                        HttpResponse response = Network.getRequest("http://send2.cgeo.org/auth.html", params);
-
-                        if (response != null && response.getStatusLine().getStatusCode() == 200) {
-                            //response was OK
-                            String[] strings = StringUtils.split(Network.getResponseData(response), ',');
-                            try {
-                                pin = Integer.parseInt(strings[1].trim());
-                            } catch (Exception e) {
-                                Log.e("webDialog", e);
+                                return Observable.empty();
                             }
-                            String code = strings[0];
-                            Settings.setWebNameCode(nam, code);
+                        }).firstOrDefault(0).subscribeOn(Schedulers.io())).subscribe(new Action1<Integer>() {
+                    @Override
+                    public void call(final Integer pin) {
+                        progressDialog.dismiss();
+                        if (pin > 0) {
+                            Dialogs.message(activity, R.string.init_sendToCgeo,
+                                    activity.getString(R.string.init_sendToCgeo_register_ok)
+                                            .replace("####", String.valueOf(pin)));
+                        } else {
+                            Dialogs.message(activity, R.string.init_sendToCgeo, R.string.init_sendToCgeo_register_fail);
                         }
-
-                        webAuthHandler.sendEmptyMessage(pin);
                     }
-                }).start();
+                });
 
                 return true;
             }
