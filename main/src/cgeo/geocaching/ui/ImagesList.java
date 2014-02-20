@@ -9,9 +9,12 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import rx.Subscription;
 import rx.android.observables.AndroidObservable;
-import rx.subscriptions.CompositeSubscription;
+import rx.functions.Action0;
 import rx.functions.Action1;
+import rx.subscriptions.CompositeSubscription;
+import rx.subscriptions.Subscriptions;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -42,7 +45,6 @@ public class ImagesList {
 
     private BitmapDrawable currentDrawable;
     private Image currentImage;
-    private CompositeSubscription subscriptions = new CompositeSubscription();
 
     public enum ImageType {
         LogImages(R.string.cache_log_images_title),
@@ -76,7 +78,24 @@ public class ImagesList {
         inflater = activity.getLayoutInflater();
     }
 
-    public void loadImages(final View parentView, final List<Image> images, final boolean offline) {
+    /**
+     * Load images into a view.
+     *
+     * @param parentView a view to load the images into
+     * @param images the images to load
+     * @param offline <tt>true</tt> if the images must be stored for offline use
+     * @return a subscription which, when unsubscribed, interrupts the loading and clears up resources
+     */
+    public Subscription loadImages(final View parentView, final List<Image> images, final boolean offline) {
+        // Start with a fresh subscription because of this method can be called several times if the
+        // englobing activity is stopped/restarted.
+        final CompositeSubscription subscriptions = new CompositeSubscription(Subscriptions.create(new Action0() {
+            @Override
+            public void call() {
+                removeAllViews();
+            }
+        }));
+
         imagesView = (LinearLayout) parentView.findViewById(R.id.spoiler_list);
 
         final HtmlImage imgGetter = new HtmlImage(geocode, true, offline ? StoredList.STANDARD_LIST_ID : StoredList.TEMPORARY_LIST_ID, false);
@@ -108,6 +127,8 @@ public class ImagesList {
             rowView.addView(imageView);
             imagesView.addView(rowView);
         }
+
+        return subscriptions;
     }
 
     private void display(final ImageView imageView, final BitmapDrawable image, final Image img, final LinearLayout view) {
@@ -138,14 +159,13 @@ public class ImagesList {
         }
     }
 
-    public void removeAllViews() {
+    private void removeAllViews() {
         for (final Bitmap b : bitmaps) {
             b.recycle();
         }
         bitmaps.clear();
+        images.clear();
 
-        // Stop loading images if some are still in progress
-        subscriptions.unsubscribe();
         imagesView.removeAllViews();
     }
 

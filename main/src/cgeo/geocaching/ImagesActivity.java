@@ -6,6 +6,7 @@ import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.ImagesList.ImageType;
 
 import org.apache.commons.collections4.CollectionUtils;
+import rx.Subscription;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,9 +23,9 @@ public class ImagesActivity extends AbstractActivity {
 
     private boolean offline;
     private ArrayList<Image> imageNames;
-    private ImagesList imagesList;
     private ImageType imgType = ImageType.SpoilerImages;
-    private String geocode;
+    private ImagesList imagesList;
+    private Subscription subscription;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,12 +46,12 @@ public class ImagesActivity extends AbstractActivity {
             return;
         }
 
-        this.geocode = geocode;
-
         // init
         setTheme();
         setContentView(R.layout.images_activity);
         setTitle(res.getString(imgType.getTitle()));
+
+        imagesList = new ImagesList(this, geocode);
 
         imageNames = extras.getParcelableArrayList(Intents.EXTRA_IMAGES);
         if (CollectionUtils.isEmpty(imageNames)) {
@@ -61,20 +62,19 @@ public class ImagesActivity extends AbstractActivity {
 
         offline = DataStore.isOffline(geocode, null) && (imgType == ImageType.SpoilerImages
                 || Settings.isStoreLogImages());
+
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        imagesList = new ImagesList(this, geocode);
-        imagesList.loadImages(findViewById(R.id.spoiler_list), imageNames, offline);
+        subscription = imagesList.loadImages(findViewById(R.id.spoiler_list), imageNames, offline);
     }
 
     @Override
     public void onStop() {
         // Reclaim native memory faster than the finalizers would
-        imagesList.removeAllViews();
-        imagesList = null;
+        subscription.unsubscribe();
         super.onStop();
     }
 
