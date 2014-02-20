@@ -11,10 +11,6 @@ import android.util.AttributeSet;
 
 public class CheckECCredentialsPreference extends AbstractCheckCredentialsPreference {
 
-    public CheckECCredentialsPreference(Context context) {
-        super(context);
-    }
-
     public CheckECCredentialsPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
