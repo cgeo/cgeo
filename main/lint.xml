@@ -6,6 +6,9 @@
     <issue id="ExportedContentProvider" severity="ignore" />
     <issue id="InvalidPackage" severity="ignore" />
     <issue id="MissingTranslation" severity="ignore" />
+    <issue id="MissingQuantity">
+        <ignore path="res/values-pl/strings.xml" />
+    </issue>
     <issue id="Registered" severity="ignore" />
     <issue id="UnusedResources">
         <ignore path="res/drawable-mdpi/attribute_maintenance.png" />
