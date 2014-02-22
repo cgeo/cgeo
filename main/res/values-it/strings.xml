@@ -119,6 +119,7 @@
   <string name="log_image_scale">Ridimensiona</string>
   <string name="log_password_title">Log Password:</string>
   <string name="log_hint_log_password">Inserisci la password per il log</string>
+  <string name="log_oc_team_comment">Commenti del Team OC</string>
   <string name="translate_to_sys_lang">Traduci in %s</string>
   <string name="translate_to_english">Traduci in inglese</string>
   <string name="translate_length_warning">La traduzione può fallire quando c\'è molto testo.</string>
