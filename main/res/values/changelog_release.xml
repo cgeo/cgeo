@@ -3,7 +3,8 @@
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
      <b>Next bugfix release:</b>\n
-    · …\n
+     <b>Bugfixes:</b>\n
+    · Geocodes are always case insensitive\n
     \n
      <b>2014.02.04:</b>\n
     · Reinstate parsing of trackable name and owner after gc.com change\n
