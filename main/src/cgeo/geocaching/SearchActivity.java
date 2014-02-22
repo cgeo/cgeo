@@ -331,7 +331,7 @@ public class SearchActivity extends AbstractActivity {
             return;
         }
 
-        CacheDetailActivity.startActivity(this, geocodeText);
+        CacheDetailActivity.startActivity(this, geocodeText.toUpperCase());
     }
 
     private void findTrackableFn() {
