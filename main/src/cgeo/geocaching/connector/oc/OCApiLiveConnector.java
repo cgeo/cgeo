@@ -173,4 +173,10 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
         final Geopoint currentPos = CgeoApplication.getInstance().currentGeo().getCoords();
         return new SearchResult(OkapiClient.getCachesNamed(currentPos, name, this));
     }
+
+    @Override
+    public boolean isSearchForMyCaches(String username) {
+        return StringUtils.equalsIgnoreCase(username, getUserName());
+    }
+
 }

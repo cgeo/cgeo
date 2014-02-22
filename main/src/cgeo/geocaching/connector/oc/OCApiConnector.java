@@ -90,4 +90,16 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
     public int getTokenSecretPrefKeyId() {
         return 0;
     }
+
+    /**
+     * Checks if a search based on a user name targets the current user
+     * 
+     * @param username
+     *            Name of the user the query is searching after
+     * @return True - search target and current is same, False - current user not known or not the same as username
+     */
+    @SuppressWarnings("static-method")
+    public boolean isSearchForMyCaches(String username) {
+        return false;
+    }
 }

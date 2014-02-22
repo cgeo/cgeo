@@ -148,7 +148,7 @@ final class OkapiClient {
         valueMap.put("limit", "20");
         valueMap.put("radius", "200");
 
-        return requestCaches(connector, params, valueMap);
+        return requestCaches(connector, params, valueMap, false);
     }
 
     public static List<Geocache> getCachesByOwner(final String username, final OCApiConnector connector) {
@@ -169,7 +169,7 @@ final class OkapiClient {
         }
         valueMap.put(userRequestParam, uuid);
 
-        return requestCaches(connector, params, valueMap);
+        return requestCaches(connector, params, valueMap, connector.isSearchForMyCaches(username));
     }
 
     public static List<Geocache> getCachesNamed(final Geopoint center, final String namePart, final OCApiConnector connector) {
@@ -190,16 +190,16 @@ final class OkapiClient {
 
         // full wildcard search, maybe we need to change this after some testing and evaluation
         valueMap.put("name", "*" + namePart + "*");
-        return requestCaches(connector, params, valueMap);
+        return requestCaches(connector, params, valueMap, false);
     }
 
-    private static List<Geocache> requestCaches(final OCApiConnector connector, final Parameters params, final Map<String, String> valueMap) {
+    private static List<Geocache> requestCaches(final OCApiConnector connector, final Parameters params, final Map<String, String> valueMap, final boolean my) {
         // if a global type filter is set, and OKAPI does not know that type, then return an empty list instead of all caches
         if (Settings.getCacheType() != CacheType.ALL && StringUtils.isBlank(getFilterFromType())) {
             return Collections.emptyList();
         }
 
-        addFilterParams(valueMap, connector);
+        addFilterParams(valueMap, connector, my);
         params.add("search_params", new JSONObject(valueMap).toString());
         addRetrieveParams(params, connector);
 
@@ -229,7 +229,7 @@ final class OkapiClient {
         final Map<String, String> valueMap = new LinkedHashMap<String, String>();
         valueMap.put("bbox", bboxString);
 
-        return requestCaches(connector, params, valueMap);
+        return requestCaches(connector, params, valueMap, false);
     }
 
     public static boolean setWatchState(final Geocache cache, final boolean watched, final OCApiConnector connector) {
@@ -720,11 +720,11 @@ final class OkapiClient {
         return "en";
     }
 
-    private static void addFilterParams(final Map<String, String> valueMap, final OCApiConnector connector) {
+    private static void addFilterParams(final Map<String, String> valueMap, final OCApiConnector connector, final boolean my) {
         if (!Settings.isExcludeDisabledCaches()) {
             valueMap.put("status", "Available|Temporarily unavailable");
         }
-        if (Settings.isExcludeMyCaches() && connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
+        if (!my && Settings.isExcludeMyCaches() && connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
             valueMap.put("exclude_my_own", "true");
             valueMap.put("found_status", "notfound_only");
         }
@@ -823,7 +823,7 @@ final class OkapiClient {
 
     /**
      * Retrieves error information from an unsuccessful Okapi-response
-     * 
+     *
      * @param response
      *            response containing an error object
      * @return OkapiError object with detailed information
