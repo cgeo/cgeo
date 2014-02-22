@@ -127,7 +127,6 @@
   <string name="err_server">Nieudane połączenie z Geocaching.com. Strona albo Twoje połączenie internetowe nie działa.</string>
   <string name="err_server_ec">Nieudane połączenie z Extremcaching.com. Strona może być w tej chwili niedostępna, bądź połączenie internetowe nie działa właściwie.</string>
   <string name="err_login">Brak danych do logowania.</string>
-  <string name="err_login_failed">c:geo nie może zalogować się.</string>
   <string name="err_login_failed_toast">c:geo nie może zalogować się. c:geo pracuje offline z zapisanymi skrzynkami. Sprawdź dane logowania i połączenie z internetem.</string>
   <string name="err_unknown">Nieznany błąd</string>
   <string name="err_comm">Nieznany błąd w komunikacji</string>

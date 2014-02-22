@@ -124,7 +124,6 @@
   <string name="err_parse">Razčlenjevanje prijavne strani ni uspelo</string>
   <string name="err_server">Ni bilo mogoče vzpostaviti povezave z Geocaching.com. Spletna stran ali vaša povezava z internetom je lahko nedosegljiva.</string>
   <string name="err_login">Prijavni podatki niso shranjeni</string>
-  <string name="err_login_failed">c:geo se ne more prijaviti.</string>
   <string name="err_login_failed_toast">c:geo se ne more prijaviti. c:geo lahko deluje v načinu brez povezave s shranjenimi zakladi. Preverite vaše prijavne podatke in internetno povezavo.</string>
   <string name="err_unknown">Neznana napaka</string>
   <string name="err_comm">Neznana napaka v komunikaciji</string>

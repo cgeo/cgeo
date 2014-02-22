@@ -121,7 +121,6 @@
   <string name="err_parse">Error procesando la página de acceso</string>
   <string name="err_server">Error conectando a Geocaching.com (¿servidor o conexión caidos?)</string>
   <string name="err_login">No hay información de acceso guardada</string>
-  <string name="err_login_failed">Lo siento, c:geo no puede conectarse.</string>
   <string name="err_login_failed_toast">c:geo no puede iniciar sesión. c:geo puede funcionar sin conexión con los caches que hayan sido almacenados. Comprueba las opciones de inicio de sesión o active la conexión a internet.</string>
   <string name="err_unknown">Error desconocido</string>
   <string name="err_comm">Error de comunicación desconocido</string>

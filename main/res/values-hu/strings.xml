@@ -108,7 +108,6 @@
   <string name="err_parse">Hiba a belépőoldalon</string>
   <string name="err_server">Hiba a kapcsolatban a geocaching.com-mal (a szerver vagy a kapcsolat nem működik?)</string>
   <string name="err_login">Nincs mentett belépési adat</string>
-  <string name="err_login_failed">Sajnos a c:geo nem tud belépni.</string>
   <string name="err_login_failed_toast"> Sajnos a c:geo nem tud belépni. A c:geo hálózat nélküli módban van. Ellenőrizd a belépési adataid a bállításoknál vagy engedélyezd az internet kapcsolatot.</string>
   <string name="err_unknown">Ismeretlen hiba</string>
   <string name="err_comm">Ismeretlen kommunikációs hiba</string>

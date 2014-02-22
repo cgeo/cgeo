@@ -72,7 +72,6 @@
   <string name="err_parse">Klarte ikke å lese innloggings-siden</string>
   <string name="err_server">Klarte ikke å koble til Geocaching.com (server eller tilkobling nede?)</string>
   <string name="err_login">Ingen innloggings-opplysninger lagret</string>
-  <string name="err_login_failed">Beklager, c:geo kan ikke logge inn.</string>
   <string name="err_unknown">Ukjent feil</string>
   <string name="err_comm">Ukjent tilkoblings-feil</string>
   <string name="err_missing_auth">Brukernavn eller passord er ikke oppgitt.</string>

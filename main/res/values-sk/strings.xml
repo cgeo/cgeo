@@ -108,7 +108,6 @@
   <string name="err_parse">Zlyhalo čítanie prihlasovacej stránky.</string>
   <string name="err_server">Zlyhalo pripojenie k serveru Geocaching.com (pripojenie, alebo server nefunkčný?)</string>
   <string name="err_login">Nie sú uložené žiadne prihlasovacie údaje.</string>
-  <string name="err_login_failed">prepáčte, ale c:geo sa nemôže prihlásiť.</string>
   <string name="err_login_failed_toast">Prepáčte, c:geo sa nepodarilo prihlásiť. c:geo funguje v offline režime. Skontrolujte vaše prihlasovacie údaje v nastaveniach, alebo povoľte pripojenie k Internetu.</string>
   <string name="err_unknown">Neznáma chyba</string>
   <string name="err_comm">Neznáma chyba pri komunikácii</string>

@@ -127,7 +127,6 @@
   <string name="err_server">Nelze se připojit na Geocaching.com. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu</string>
   <string name="err_server_ec">Nelze se připojit na Extremcaching.com. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu.</string>
   <string name="err_login">Nejsou uloženy žádné přihlašovací údaje</string>
-  <string name="err_login_failed">c:geo se nemůže přihlásit.</string>
   <string name="err_login_failed_toast">Nelze se přihlásit. c:geo bude pracovat Offline s uloženými informacemi. Zkontroluj nastavení přihlašování a připojení k Internetu.</string>
   <string name="err_unknown">Neznámá chyba</string>
   <string name="err_comm">Neznámá komunikační chyba</string>

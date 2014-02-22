@@ -127,7 +127,6 @@
   <string name="err_server">Misslyckades att ansluta till Geocaching.com. Hemsidan kan vara ur funktion eller så är det problem med din anslutning till Internet.</string>
   <string name="err_server_ec">Det gick inte att kontakta Extremcaching.com. Webbplatsen kan ha problem eller så fungerar inte din internet-anslutning.</string>
   <string name="err_login">Inloggningsinformationen ej sparad</string>
-  <string name="err_login_failed">Tyvärr kan c:geo inte logga in.</string>
   <string name="err_login_failed_toast">Tyvärr kan c:geo inte logga in. c:geo kommer att köra i offline läge med sparade cacher. Kontrollera dina inloggningsuppgifter och aktivera din internetanslutning.</string>
   <string name="err_unknown">Okänt fel</string>
   <string name="err_comm">Okänt kommunikationsfel</string>

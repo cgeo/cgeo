@@ -127,7 +127,6 @@
   <string name="err_server">Verbindung zu Geocaching.com konnte nicht hergestellt werden (Server oder Verbindung inaktiv?)</string>
   <string name="err_server_ec">Verbindung zu Extremcaching.com konnte nicht hergestellt werden (Server oder Verbindung inaktiv?)</string>
   <string name="err_login">Keine Anmeldedaten gespeichert.</string>
-  <string name="err_login_failed">Login fehlgeschlagen.</string>
   <string name="err_login_failed_toast">c:geo konnte sich nicht einloggen und arbeitet im Offline-Modus. Bitte die Login-Daten in den Einstellungen überprüfen oder eine Internetverbindung herstellen.</string>
   <string name="err_unknown">Unbekannter Fehler</string>
   <string name="err_comm">Unbekannter Kommunikationsfehler</string>

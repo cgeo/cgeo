@@ -128,7 +128,6 @@
   <string name="err_server">Connessione fallita con Geocaching.com (server o connessione non disponibile?)</string>
   <string name="err_server_ec">Impossibile contattare Extremcaching.com. Il sito Web potrebbe essere non attivoo la tua connessione internet non funziona.</string>
   <string name="err_login">Informazioni di login non memorizzate</string>
-  <string name="err_login_failed">c:geo non può effettuare login.</string>
   <string name="err_login_failed_toast">c:geo non può effettuare login. Attivata la modalità offline. Verificare le informazioni di login nelle impostazioni o abilitare una connessione internet.</string>
   <string name="err_unknown">Errore sconosciuto</string>
   <string name="err_comm">Errore sconosciuto di comunicazione</string>
