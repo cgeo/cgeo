@@ -822,6 +822,21 @@ final class OkapiClient {
     }
 
     /**
+     * Retrieves error information from an unsuccessful Okapi-response
+     * 
+     * @param response
+     *            response containing an error object
+     * @return OkapiError object with detailed information
+     */
+    public static OkapiError decodeErrorResponse(HttpResponse response) {
+        final JSONResult result = new JSONResult(response);
+        if (!result.isSuccess) {
+            return new OkapiError(result.data);
+        }
+        return new OkapiError(new JSONObject());
+    }
+
+    /**
      * Encapsulates response state and content of an HTTP-request that expects a JSON result. <code>isSuccess</code> is
      * only true, if the response state was success and <code>data</code> is not null.
      */

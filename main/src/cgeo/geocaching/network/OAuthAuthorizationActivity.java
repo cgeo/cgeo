@@ -7,9 +7,11 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 
+import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.ParseException;
 import ch.boye.httpclientandroidlib.client.entity.UrlEncodedFormEntity;
 import ch.boye.httpclientandroidlib.util.EntityUtils;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
@@ -32,6 +34,10 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
     public static final int NOT_AUTHENTICATED = 0;
     public static final int AUTHENTICATED = 1;
+
+    private static final int STATUS_ERROR = 0;
+    private static final int STATUS_SUCCESS = 1;
+    private static final int STATUS_ERROR_EXT_MSG = 2;
 
     @NonNull final private String host;
     @NonNull final private String pathRequest;
@@ -61,8 +67,12 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
             startButton.setOnClickListener(new StartListener());
             startButton.setEnabled(true);
 
-            if (msg.what == 1) {
+            if (msg.what == STATUS_SUCCESS) {
                 startButton.setText(getAuthAgain());
+            } else if (msg.what == STATUS_ERROR_EXT_MSG) {
+                String errMsg = getErrAuthInitialize();
+                errMsg += msg.obj != null ? "\n" + msg.obj.toString() : "";
+                showToast(errMsg);
             } else {
                 showToast(getErrAuthInitialize());
                 startButton.setText(getAuthStart());
@@ -160,37 +170,49 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         params.put("oauth_callback", callback);
         final String method = "GET";
         OAuth.signOAuth(host, pathRequest, method, https, params, null, null, consumerKey, consumerSecret);
-        final String line = Network.getResponseData(Network.getRequest(getUrlPrefix() + host + pathRequest, params));
+        final HttpResponse response = Network.getRequest(getUrlPrefix() + host + pathRequest, params);
 
-        int status = 0;
-        if (StringUtils.isNotBlank(line)) {
-            assert line != null;
-            final MatcherWrapper paramsMatcher1 = new MatcherWrapper(paramsPattern1, line);
-            if (paramsMatcher1.find()) {
-                OAtoken = paramsMatcher1.group(1);
-            }
-            final MatcherWrapper paramsMatcher2 = new MatcherWrapper(paramsPattern2, line);
-            if (paramsMatcher2.find()) {
-                OAtokenSecret = paramsMatcher2.group(1);
-            }
+        if (Network.isSuccess(response)) {
+            final String line = Network.getResponseData(Network.getRequest(getUrlPrefix() + host + pathRequest, params));
 
-            if (StringUtils.isNotBlank(OAtoken) && StringUtils.isNotBlank(OAtokenSecret)) {
-                setTempTokens(OAtoken, OAtokenSecret);
-                try {
-                    final Parameters paramsBrowser = new Parameters();
-                    paramsBrowser.put("oauth_token", OAtoken);
-                    final String encodedParams = EntityUtils.toString(new UrlEncodedFormEntity(paramsBrowser));
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getUrlPrefix() + host + pathAuthorize + "?" + encodedParams)));
-                    status = 1;
-                } catch (ParseException e) {
-                    Log.e("OAuthAuthorizationActivity.requestToken", e);
-                } catch (IOException e) {
-                    Log.e("OAuthAuthorizationActivity.requestToken", e);
+            int status = STATUS_ERROR;
+            if (StringUtils.isNotBlank(line)) {
+                assert line != null;
+                final MatcherWrapper paramsMatcher1 = new MatcherWrapper(paramsPattern1, line);
+                if (paramsMatcher1.find()) {
+                    OAtoken = paramsMatcher1.group(1);
+                }
+                final MatcherWrapper paramsMatcher2 = new MatcherWrapper(paramsPattern2, line);
+                if (paramsMatcher2.find()) {
+                    OAtokenSecret = paramsMatcher2.group(1);
+                }
+
+                if (StringUtils.isNotBlank(OAtoken) && StringUtils.isNotBlank(OAtokenSecret)) {
+                    setTempTokens(OAtoken, OAtokenSecret);
+                    try {
+                        final Parameters paramsBrowser = new Parameters();
+                        paramsBrowser.put("oauth_token", OAtoken);
+                        final String encodedParams = EntityUtils.toString(new UrlEncodedFormEntity(paramsBrowser));
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getUrlPrefix() + host + pathAuthorize + "?" + encodedParams)));
+                        status = STATUS_SUCCESS;
+                    } catch (ParseException e) {
+                        Log.e("OAuthAuthorizationActivity.requestToken", e);
+                    } catch (IOException e) {
+                        Log.e("OAuthAuthorizationActivity.requestToken", e);
+                    }
                 }
             }
-        }
 
-        requestTokenHandler.sendEmptyMessage(status);
+            requestTokenHandler.sendEmptyMessage(status);
+        } else {
+            final String extErrMsg = getExtendedErrorMsg(response);
+            if (StringUtils.isNotBlank(extErrMsg)) {
+                final Message msg = requestTokenHandler.obtainMessage(STATUS_ERROR_EXT_MSG, extErrMsg);
+                requestTokenHandler.sendMessage(msg);
+            } else {
+                requestTokenHandler.sendEmptyMessage(STATUS_ERROR);
+            }
+        }
     }
 
     private void changeToken(final String verifier) {
@@ -303,6 +325,18 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
     protected String getErrAuthProcess() {
         return res.getString(R.string.err_auth_process);
+    }
+
+    /**
+     * Allows deriving classes to check the response for error messages specific to their OAuth implementation
+     *
+     * @param response
+     *            The error response of the token request
+     * @return String with a more detailed error message (user-facing, localized), can be empty
+     */
+    @SuppressWarnings("static-method")
+    protected String getExtendedErrorMsg(HttpResponse response) {
+        return StringUtils.EMPTY;
     }
 
     protected String getAuthDialogWait() {

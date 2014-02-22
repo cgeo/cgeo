@@ -2,9 +2,13 @@ package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.oc.OkapiError.OkapiErrors;
 import cgeo.geocaching.network.OAuthAuthorizationActivity;
 import cgeo.geocaching.settings.Settings;
 
+import ch.boye.httpclientandroidlib.HttpResponse;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -50,6 +54,18 @@ public abstract class OCAuthorizationActivity extends OAuthAuthorizationActivity
     @Override
     protected String getAuthDialogCompleted() {
         return res.getString(R.string.auth_dialog_completed_oc, getAuthTitle());
+    }
+
+    /**
+     * Return an extended error in case of an invalid time stamp
+     */
+    @Override
+    protected String getExtendedErrorMsg(HttpResponse response) {
+        OkapiError error = OkapiClient.decodeErrorResponse(response);
+        if (error.getResult() == OkapiErrors.INVALID_TIMESTAMP) {
+            return res.getString(R.string.init_login_popup_invalid_timestamp);
+        }
+        return StringUtils.EMPTY;
     }
 
 }
