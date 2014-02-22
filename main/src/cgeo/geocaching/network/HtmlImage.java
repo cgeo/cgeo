@@ -13,22 +13,24 @@ import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.androidextra.Base64;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Scheduler;
 import rx.Scheduler.Inner;
 import rx.Subscriber;
+import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 import rx.subscriptions.CompositeSubscription;
-import rx.functions.Action1;
-import rx.functions.Func1;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -131,12 +133,13 @@ public class HtmlImage implements Html.ImageGetter {
     // on the phone while decoding the image. Downloads happen on downloadScheduler, in parallel with image
     // decoding.
     public Observable<BitmapDrawable> fetchDrawable(final String url) {
-        final boolean shared = url.contains("/images/icons/icon_");
-        final String pseudoGeocode = shared ? SHARED : geocode;
 
         if (StringUtils.isBlank(url) || isCounter(url)) {
             return Observable.from(getTransparent1x1Image(resources));
         }
+
+        final boolean shared = url.contains("/images/icons/icon_");
+        final String pseudoGeocode = shared ? SHARED : geocode;
 
         return Observable.create(new OnSubscribe<BitmapDrawable>() {
             @Override
