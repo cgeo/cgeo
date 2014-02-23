@@ -119,6 +119,7 @@
   <string name="log_image_scale">Mise à l\'échelle</string>
   <string name="log_password_title">Mot de passe du carnet :</string>
   <string name="log_hint_log_password">Entrez votre mot de passe pour le carnet</string>
+  <string name="log_oc_team_comment">Commentaire de l\'équipe OC</string>
   <string name="translate_to_sys_lang">Traduire en %s</string>
   <string name="translate_to_english">Traduire en anglais</string>
   <string name="translate_length_warning">La traduction d\'un texte trop long peut échouer.</string>
