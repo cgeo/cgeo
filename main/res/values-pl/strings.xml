@@ -119,6 +119,7 @@
   <string name="log_image_scale">Skalowanie obrazu</string>
   <string name="log_password_title">Hasło do logu:</string>
   <string name="log_hint_log_password">Wpisz hasło do logu</string>
+  <string name="log_oc_team_comment">Wpis (notatka) wykonana przez członka oficjalnego teamu odpowiedniego serwisu opencaching. Ma on podobny cel jak wpis recenzenta geocaching.com.</string>
   <string name="translate_to_sys_lang">Przetłumacz na %s</string>
   <string name="translate_to_english">Przetłumacz na angielski</string>
   <string name="translate_length_warning">Tłumaczenie może nie udać się przy dużej ilości tekstu.</string>
