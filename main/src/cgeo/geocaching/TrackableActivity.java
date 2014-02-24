@@ -18,8 +18,10 @@ import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.UserActionsClickListener;
 import cgeo.geocaching.ui.UserNameClickListener;
 import cgeo.geocaching.ui.logs.TrackableLogsViewCreator;
+import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import org.apache.commons.lang3.StringUtils;
@@ -34,6 +36,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -108,6 +111,8 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             }
         }
     };
+
+    private CharSequence clickedItemText = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -189,6 +194,77 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         createViewPager(0, null);
         final LoadTrackableThread thread = new LoadTrackableThread(loadTrackableHandler, geocode, guid, id);
         thread.start();
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo info) {
+        super.onCreateContextMenu(menu, view, info);
+        final int viewId = view.getId();
+        switch (viewId) {
+            case R.id.value: // name, TB-code, origin, released, distance
+                assert view instanceof TextView;
+                clickedItemText = ((TextView) view).getText();
+                final String itemTitle = (String) ((TextView) ((View) view.getParent()).findViewById(R.id.name)).getText();
+                buildDetailsContextMenu(menu, itemTitle, true);
+                break;
+            case R.id.goal:
+                assert view instanceof TextView;
+                clickedItemText = ((TextView) view).getText();
+                buildDetailsContextMenu(menu, res.getString(R.string.trackable_goal), false);
+                break;
+            case R.id.details:
+                assert view instanceof TextView;
+                clickedItemText = ((TextView) view).getText();
+                buildDetailsContextMenu(menu, res.getString(R.string.trackable_details), false);
+                break;
+            case R.id.log:
+                assert view instanceof TextView;
+                clickedItemText = ((TextView) view).getText();
+                buildDetailsContextMenu(menu, res.getString(R.string.cache_logs), false);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void buildDetailsContextMenu(ContextMenu menu, String fieldTitle, boolean copyOnly) {
+        menu.setHeaderTitle(fieldTitle);
+        getMenuInflater().inflate(R.menu.details_context, menu);
+        menu.findItem(R.id.menu_translate_to_sys_lang).setVisible(!copyOnly);
+        if (!copyOnly) {
+            if (clickedItemText.length() > TranslationUtils.TRANSLATION_TEXT_LENGTH_WARN) {
+                showToast(res.getString(R.string.translate_length_warning));
+            }
+            menu.findItem(R.id.menu_translate_to_sys_lang).setTitle(res.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()));
+        }
+        final boolean localeIsEnglish = StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage());
+        menu.findItem(R.id.menu_translate_to_english).setVisible(!copyOnly && !localeIsEnglish);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        // detail fields
+            case R.id.menu_copy:
+                ClipboardUtils.copyToClipboard(clickedItemText);
+                showToast(res.getString(R.string.clipboard_copy_ok));
+                return true;
+            case R.id.menu_translate_to_sys_lang:
+                TranslationUtils.startActivityTranslate(this, Locale.getDefault().getLanguage(), HtmlUtils.extractText(clickedItemText));
+                return true;
+            case R.id.menu_translate_to_english:
+                TranslationUtils.startActivityTranslate(this, Locale.ENGLISH.getLanguage(), HtmlUtils.extractText(clickedItemText));
+                return true;
+            case R.id.menu_cache_share_field:
+                final Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, clickedItemText.toString());
+                startActivity(Intent.createChooser(intent, res.getText(R.string.cache_share_field)));
+                return true;
+            default:
+                break;
+        }
+        return onOptionsItemSelected(item);
     }
 
     @Override
@@ -362,7 +438,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             }
 
             // trackable name
-            details.add(R.string.trackable_name, StringUtils.isNotBlank(trackable.getName()) ? Html.fromHtml(trackable.getName()).toString() : res.getString(R.string.trackable_unknown));
+            registerForContextMenu(details.add(R.string.trackable_name, StringUtils.isNotBlank(trackable.getName()) ? Html.fromHtml(trackable.getName()).toString() : res.getString(R.string.trackable_unknown)));
 
             // trackable type
             String tbType;
@@ -374,7 +450,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             details.add(R.string.trackable_type, tbType);
 
             // trackable geocode
-            details.add(R.string.trackable_code, trackable.getGeocode());
+            registerForContextMenu(details.add(R.string.trackable_code, trackable.getGeocode()));
 
             // trackable owner
             final TextView owner = details.add(R.string.trackable_owner, res.getString(R.string.trackable_unknown));
@@ -443,16 +519,17 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             if (StringUtils.isNotBlank(trackable.getOrigin())) {
                 final TextView origin = details.add(R.string.trackable_origin, "");
                 origin.setText(Html.fromHtml(trackable.getOrigin()), TextView.BufferType.SPANNABLE);
+                registerForContextMenu(origin);
             }
 
             // trackable released
             if (trackable.getReleased() != null) {
-                details.add(R.string.trackable_released, Formatter.formatDate(trackable.getReleased().getTime()));
+                registerForContextMenu(details.add(R.string.trackable_released, Formatter.formatDate(trackable.getReleased().getTime())));
             }
 
             // trackable distance
             if (trackable.getDistance() >= 0) {
-                details.add(R.string.trackable_distance, Units.getDistanceFromKilometers(trackable.getDistance()));
+                registerForContextMenu(details.add(R.string.trackable_distance, Units.getDistanceFromKilometers(trackable.getDistance())));
             }
 
             // trackable goal
@@ -461,6 +538,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 goalTextView.setVisibility(View.VISIBLE);
                 goalTextView.setText(Html.fromHtml(trackable.getGoal(), new HtmlImage(geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
                 goalTextView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+                registerForContextMenu(goalTextView);
             }
 
             // trackable details
@@ -469,6 +547,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 detailsTextView.setVisibility(View.VISIBLE);
                 detailsTextView.setText(Html.fromHtml(trackable.getDetails(), new HtmlImage(geocode, true, 0, false), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
                 detailsTextView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+                registerForContextMenu(detailsTextView);
             }
 
             // trackable image
