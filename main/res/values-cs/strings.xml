@@ -119,6 +119,7 @@
   <string name="log_image_scale">Měřítko</string>
   <string name="log_password_title">Logovací heslo:</string>
   <string name="log_hint_log_password">Zadej své logovací heslo</string>
+  <string name="log_oc_team_comment">Komentář týmu OC</string>
   <string name="translate_to_sys_lang">Přeložit do %s</string>
   <string name="translate_to_english">Přeložit do angličtiny</string>
   <string name="translate_length_warning">Při velkém množství textu může překládání selhat.</string>
