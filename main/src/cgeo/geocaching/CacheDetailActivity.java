@@ -39,17 +39,14 @@ import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.logs.CacheLogsViewCreator;
 import cgeo.geocaching.utils.CancellableHandler;
-import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
-import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.SimpleCancellableHandler;
 import cgeo.geocaching.utils.SimpleHandler;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -419,25 +416,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
+        if (onClipboardItemSelected(item, clickedItemText)) {
+            return true;
+        }
         switch (item.getItemId()) {
-        // detail fields
-            case R.id.menu_copy:
-                ClipboardUtils.copyToClipboard(clickedItemText);
-                showToast(res.getString(R.string.clipboard_copy_ok));
-                return true;
-            case R.id.menu_translate_to_sys_lang:
-                TranslationUtils.startActivityTranslate(this, Locale.getDefault().getLanguage(), HtmlUtils.extractText(clickedItemText));
-                return true;
-            case R.id.menu_translate_to_english:
-                TranslationUtils.startActivityTranslate(this, Locale.ENGLISH.getLanguage(), HtmlUtils.extractText(clickedItemText));
-                return true;
-            case R.id.menu_cache_share_field:
-                final Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, clickedItemText.toString());
-                startActivity(Intent.createChooser(intent, res.getText(R.string.cache_share_field)));
-                return true;
-                // waypoints
+            // waypoints
             case R.id.menu_waypoint_edit:
                 if (selectedWaypoint != null) {
                     EditWaypointActivity.startActivityEditWaypoint(this, cache, selectedWaypoint.getId());

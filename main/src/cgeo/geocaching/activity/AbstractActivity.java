@@ -7,14 +7,18 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.TranslationUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -140,5 +144,29 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
         }
         final boolean localeIsEnglish = StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage());
         menu.findItem(R.id.menu_translate_to_english).setVisible(!copyOnly && !localeIsEnglish);
+    }
+
+    protected boolean onClipboardItemSelected(final MenuItem item, final CharSequence clickedItemText) {
+        switch (item.getItemId()) {
+            // detail fields
+            case R.id.menu_copy:
+                ClipboardUtils.copyToClipboard(clickedItemText);
+                showToast(res.getString(R.string.clipboard_copy_ok));
+                return true;
+            case R.id.menu_translate_to_sys_lang:
+                TranslationUtils.startActivityTranslate(this, Locale.getDefault().getLanguage(), HtmlUtils.extractText(clickedItemText));
+                return true;
+            case R.id.menu_translate_to_english:
+                TranslationUtils.startActivityTranslate(this, Locale.ENGLISH.getLanguage(), HtmlUtils.extractText(clickedItemText));
+                return true;
+            case R.id.menu_cache_share_field:
+                final Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, clickedItemText.toString());
+                startActivity(Intent.createChooser(intent, res.getText(R.string.cache_share_field)));
+                return true;
+            default:
+                return false;
+        }
     }
 }

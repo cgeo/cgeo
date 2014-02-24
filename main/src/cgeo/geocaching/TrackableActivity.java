@@ -18,10 +18,8 @@ import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.UserActionsClickListener;
 import cgeo.geocaching.ui.UserNameClickListener;
 import cgeo.geocaching.ui.logs.TrackableLogsViewCreator;
-import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import org.apache.commons.lang3.StringUtils;
@@ -223,28 +221,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        // detail fields
-            case R.id.menu_copy:
-                ClipboardUtils.copyToClipboard(clickedItemText);
-                showToast(res.getString(R.string.clipboard_copy_ok));
-                return true;
-            case R.id.menu_translate_to_sys_lang:
-                TranslationUtils.startActivityTranslate(this, Locale.getDefault().getLanguage(), HtmlUtils.extractText(clickedItemText));
-                return true;
-            case R.id.menu_translate_to_english:
-                TranslationUtils.startActivityTranslate(this, Locale.ENGLISH.getLanguage(), HtmlUtils.extractText(clickedItemText));
-                return true;
-            case R.id.menu_cache_share_field:
-                final Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, clickedItemText.toString());
-                startActivity(Intent.createChooser(intent, res.getText(R.string.cache_share_field)));
-                return true;
-            default:
-                break;
-        }
-        return onOptionsItemSelected(item);
+        return onClipboardItemSelected(item, clickedItemText) || onOptionsItemSelected(item);
     }
 
     @Override
