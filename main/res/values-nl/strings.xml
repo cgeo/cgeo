@@ -37,6 +37,8 @@
   <string name="cache_size_virtual">Virtual</string>
   <string name="cache_size_notchosen">not chosen</string>
   <string name="cache_size_unknown">Onbekend</string>
+  <string name="cache_size_nano">Nano</string>
+  <string name="cache_size_very_large">Erg Groot</string>
   <string name="wp_final">Eindbestemming</string>
   <string name="wp_stage">Multi-cache punt</string>
   <string name="wp_puzzle">Vraag voor antwoord</string>
@@ -123,6 +125,7 @@
   <string name="err_none">Ok</string>
   <string name="err_parse">Login pagina verwerken mislukt</string>
   <string name="err_server">Verbinding met Geocaching.com mislukt (geen verbinding of server niet bereikbaar)</string>
+  <string name="err_server_ec">Verbinding maken met Extremcaching.com is mislukt (geen verbinding of server niet bereikbaar).</string>
   <string name="err_login">Geen login informatie opgeslagen</string>
   <string name="err_login_failed_toast">Sorry, c:geo kan niet inloggen. c:geo werkt in offline modus. Controleer je gebruikersnaam en wachtwoord en/of zet de internetverbinding aan.</string>
   <string name="err_unknown">Onbekende fout</string>
@@ -176,6 +179,7 @@
   <string name="err_log_load_data_again">Sorry, c:geo kan data om bezoek te loggen niet laden. Bezig nogmaals te proberen.</string>
   <string name="err_log_load_data_still">c:geo is nog steeds bezig om data te laden om bezoek te loggen. Graag nog even geduld.</string>
   <string name="err_log_post_failed">Sorry, het is c:geo niet gelukt het log te posten.</string>
+  <string name="err_log_post_failed_ec">Het lijkt erop dat uw log niet werd gepost. Controleer het op Extremcaching.com.</string>
   <string name="err_logimage_post_failed">Het lijkt erop dat uw log-foto niet geüpload is. Controleer het op Geocaching.com.</string>
   <string name="err_search_address_forgot">Sorry, c:geo is het adres dat je zoekt vergeten.</string>
   <string name="err_parse_lat">Sorry, c:geo kan breedtegraad niet verwerken.</string>
@@ -199,6 +203,8 @@
   <string name="warn_deprecated_mapfile">Je gebruikt een verouderd 0.2.4 mapbestand.\nJe word aangeraden naar een 0.3.0 mapbestand over te schakelen.\nOndersteuning voor de 0.2.4 versie zal in de volgende versie verdwijnen.</string>
   <string name="warn_nonexistant_mapfile">Het geselecteerde mapbestand bestaat niet.\nOffline kaarten zijn niet beschikbaar.</string>
   <string name="warn_rendertheme_missing">Map thema niet gevonden.</string>
+  <string name="warn_pocket_query_select">Geen Pocket query geselecteerd.</string>
+  <string name="warn_no_pocket_query_found">Geen Pocket query online gevonden.</string>
   <string name="info_log_posted">c:geo heeft log succesvol gepost.</string>
   <string name="info_log_saved">c:geo heeft log succesvol opgeslagen.</string>
   <string name="info_log_cleared">Log is gewist.</string>
@@ -219,6 +225,7 @@
   <string name="menu_history">Geschiedenis</string>
   <string name="menu_filter">Filter</string>
   <string name="menu_scan_geo">Scan geocode</string>
+  <string name="menu_pocket_queries">Pocket queries</string>
   <string name="live_map_button">Live kaart</string>
   <string name="caches_nearby_button">Dichtbij</string>
   <string name="advanced_search_button">Zoeken</string>
