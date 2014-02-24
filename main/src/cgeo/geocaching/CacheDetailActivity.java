@@ -354,12 +354,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 assert view instanceof TextView;
                 clickedItemText = ((TextView) view).getText();
                 final String itemTitle = (String) ((TextView) ((View) view.getParent()).findViewById(R.id.name)).getText();
-                buildDetailsContextMenu(menu, itemTitle, true);
+                buildDetailsContextMenu(menu, clickedItemText, itemTitle, true);
                 break;
             case R.id.shortdesc:
                 assert view instanceof TextView;
                 clickedItemText = ((TextView) view).getText();
-                buildDetailsContextMenu(menu, res.getString(R.string.cache_description), false);
+                buildDetailsContextMenu(menu, clickedItemText, res.getString(R.string.cache_description), false);
                 break;
             case R.id.longdesc:
                 assert view instanceof TextView;
@@ -370,27 +370,27 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 } else {
                     clickedItemText = shortDesc + "\n\n" + ((TextView) view).getText();
                 }
-                buildDetailsContextMenu(menu, res.getString(R.string.cache_description), false);
+                buildDetailsContextMenu(menu, clickedItemText, res.getString(R.string.cache_description), false);
                 break;
             case R.id.personalnote:
                 assert view instanceof TextView;
                 clickedItemText = ((TextView) view).getText();
-                buildDetailsContextMenu(menu, res.getString(R.string.cache_personal_note), true);
+                buildDetailsContextMenu(menu, clickedItemText, res.getString(R.string.cache_personal_note), true);
                 break;
             case R.id.hint:
                 assert view instanceof TextView;
                 clickedItemText = ((TextView) view).getText();
-                buildDetailsContextMenu(menu, res.getString(R.string.cache_hint), false);
+                buildDetailsContextMenu(menu, clickedItemText, res.getString(R.string.cache_hint), false);
                 break;
             case R.id.log:
                 assert view instanceof TextView;
                 clickedItemText = ((TextView) view).getText();
-                buildDetailsContextMenu(menu, res.getString(R.string.cache_logs), false);
+                buildDetailsContextMenu(menu, clickedItemText, res.getString(R.string.cache_logs), false);
                 break;
             case R.id.date: // event date
                 assert view instanceof TextView;
                 clickedItemText = ((TextView) view).getText();
-                buildDetailsContextMenu(menu, res.getString(R.string.cache_event), true);
+                buildDetailsContextMenu(menu, clickedItemText, res.getString(R.string.cache_event), true);
                 menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
                 break;
             case R.id.waypoint:
@@ -415,20 +415,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
                 break;
         }
-    }
-
-    private void buildDetailsContextMenu(ContextMenu menu, String fieldTitle, boolean copyOnly) {
-        menu.setHeaderTitle(fieldTitle);
-        getMenuInflater().inflate(R.menu.details_context, menu);
-        menu.findItem(R.id.menu_translate_to_sys_lang).setVisible(!copyOnly);
-        if (!copyOnly) {
-            if (clickedItemText.length() > TranslationUtils.TRANSLATION_TEXT_LENGTH_WARN) {
-                showToast(res.getString(R.string.translate_length_warning));
-            }
-            menu.findItem(R.id.menu_translate_to_sys_lang).setTitle(res.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()));
-        }
-        final boolean localeIsEnglish = StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage());
-        menu.findItem(R.id.menu_translate_to_english).setVisible(!copyOnly && !localeIsEnglish);
     }
 
     @Override

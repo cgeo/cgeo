@@ -3,15 +3,22 @@ package cgeo.geocaching.activity;
 import butterknife.ButterKnife;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.TranslationUtils;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.ContextMenu;
 import android.view.View;
 import android.widget.EditText;
+
+import java.util.Locale;
 
 public abstract class AbstractActivity extends FragmentActivity implements IAbstractActivity {
 
@@ -119,5 +126,19 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
 
     public void showKeyboard(final View view) {
         new Keyboard(this).show(view);
+    }
+
+    protected void buildDetailsContextMenu(final ContextMenu menu, final CharSequence clickedItemText, final String fieldTitle, final boolean copyOnly) {
+        menu.setHeaderTitle(fieldTitle);
+        getMenuInflater().inflate(R.menu.details_context, menu);
+        menu.findItem(R.id.menu_translate_to_sys_lang).setVisible(!copyOnly);
+        if (!copyOnly) {
+            if (clickedItemText.length() > TranslationUtils.TRANSLATION_TEXT_LENGTH_WARN) {
+                showToast(res.getString(R.string.translate_length_warning));
+            }
+            menu.findItem(R.id.menu_translate_to_sys_lang).setTitle(res.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()));
+        }
+        final boolean localeIsEnglish = StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage());
+        menu.findItem(R.id.menu_translate_to_english).setVisible(!copyOnly && !localeIsEnglish);
     }
 }

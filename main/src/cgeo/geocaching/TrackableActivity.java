@@ -205,40 +205,26 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 assert view instanceof TextView;
                 clickedItemText = ((TextView) view).getText();
                 final String itemTitle = (String) ((TextView) ((View) view.getParent()).findViewById(R.id.name)).getText();
-                buildDetailsContextMenu(menu, itemTitle, true);
+                buildDetailsContextMenu(menu, clickedItemText, itemTitle, true);
                 break;
             case R.id.goal:
                 assert view instanceof TextView;
                 clickedItemText = ((TextView) view).getText();
-                buildDetailsContextMenu(menu, res.getString(R.string.trackable_goal), false);
+                buildDetailsContextMenu(menu, clickedItemText, res.getString(R.string.trackable_goal), false);
                 break;
             case R.id.details:
                 assert view instanceof TextView;
                 clickedItemText = ((TextView) view).getText();
-                buildDetailsContextMenu(menu, res.getString(R.string.trackable_details), false);
+                buildDetailsContextMenu(menu, clickedItemText, res.getString(R.string.trackable_details), false);
                 break;
             case R.id.log:
                 assert view instanceof TextView;
                 clickedItemText = ((TextView) view).getText();
-                buildDetailsContextMenu(menu, res.getString(R.string.cache_logs), false);
+                buildDetailsContextMenu(menu, clickedItemText, res.getString(R.string.cache_logs), false);
                 break;
             default:
                 break;
         }
-    }
-
-    private void buildDetailsContextMenu(ContextMenu menu, String fieldTitle, boolean copyOnly) {
-        menu.setHeaderTitle(fieldTitle);
-        getMenuInflater().inflate(R.menu.details_context, menu);
-        menu.findItem(R.id.menu_translate_to_sys_lang).setVisible(!copyOnly);
-        if (!copyOnly) {
-            if (clickedItemText.length() > TranslationUtils.TRANSLATION_TEXT_LENGTH_WARN) {
-                showToast(res.getString(R.string.translate_length_warning));
-            }
-            menu.findItem(R.id.menu_translate_to_sys_lang).setTitle(res.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()));
-        }
-        final boolean localeIsEnglish = StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage());
-        menu.findItem(R.id.menu_translate_to_english).setVisible(!copyOnly && !localeIsEnglish);
     }
 
     @Override
