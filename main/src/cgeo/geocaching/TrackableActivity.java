@@ -200,26 +200,20 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo info) {
         super.onCreateContextMenu(menu, view, info);
         final int viewId = view.getId();
+        assert view instanceof TextView;
+        clickedItemText = ((TextView) view).getText();
         switch (viewId) {
             case R.id.value: // name, TB-code, origin, released, distance
-                assert view instanceof TextView;
-                clickedItemText = ((TextView) view).getText();
                 final String itemTitle = (String) ((TextView) ((View) view.getParent()).findViewById(R.id.name)).getText();
                 buildDetailsContextMenu(menu, clickedItemText, itemTitle, true);
                 break;
             case R.id.goal:
-                assert view instanceof TextView;
-                clickedItemText = ((TextView) view).getText();
                 buildDetailsContextMenu(menu, clickedItemText, res.getString(R.string.trackable_goal), false);
                 break;
             case R.id.details:
-                assert view instanceof TextView;
-                clickedItemText = ((TextView) view).getText();
                 buildDetailsContextMenu(menu, clickedItemText, res.getString(R.string.trackable_details), false);
                 break;
             case R.id.log:
-                assert view instanceof TextView;
-                clickedItemText = ((TextView) view).getText();
                 buildDetailsContextMenu(menu, clickedItemText, res.getString(R.string.cache_logs), false);
                 break;
             default:
