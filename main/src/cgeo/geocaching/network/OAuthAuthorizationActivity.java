@@ -73,6 +73,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
                 String errMsg = getErrAuthInitialize();
                 errMsg += msg.obj != null ? "\n" + msg.obj.toString() : "";
                 showToast(errMsg);
+                startButton.setText(getAuthStart());
             } else {
                 showToast(getErrAuthInitialize());
                 startButton.setText(getAuthStart());
@@ -173,7 +174,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         final HttpResponse response = Network.getRequest(getUrlPrefix() + host + pathRequest, params);
 
         if (Network.isSuccess(response)) {
-            final String line = Network.getResponseData(Network.getRequest(getUrlPrefix() + host + pathRequest, params));
+            final String line = Network.getResponseData(response);
 
             int status = STATUS_ERROR;
             if (StringUtils.isNotBlank(line)) {
