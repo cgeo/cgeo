@@ -5,12 +5,12 @@
   <string name="cache">Cache</string>
   <string name="detail">Detaljer</string>
   <string name="search">Sök</string>
-  <string name="helpers">Bra program att installera</string>
+  <string name="helpers">Användbara appar</string>
   <string name="about">Om c:geo</string>
   <string name="latitude">Latitud</string>
   <string name="longitude">Longitud</string>
   <string name="action_bar_share_title">Skicka cachens länk via</string>
-  <string name="settings_titlebar">c:geo Inställningar</string>
+  <string name="settings_titlebar">Inställningar för c:geo</string>
   <string name="all_types">Alla typer av cacher</string>
   <string name="traditional">Traditionell cache</string>
   <string name="multi">Multi-cache</string>
@@ -119,6 +119,7 @@
   <string name="log_image_scale">Skalning</string>
   <string name="log_password_title">Logglösenord:</string>
   <string name="log_hint_log_password">Ange ditt lösenord för loggning</string>
+  <string name="log_oc_team_comment">Meddelande från OC Team</string>
   <string name="translate_to_sys_lang">Översätt till %s</string>
   <string name="translate_to_english">Översätt till engelska</string>
   <string name="translate_length_warning">Översättningen kan misslyckas med långa texter.</string>
@@ -379,7 +380,7 @@
   <string name="init_signature_template_date">Datum</string>
   <string name="init_signature_template_time">Tid</string>
   <string name="init_signature_template_datetime">Datum &amp; Tid</string>
-  <string name="init_signature_template_user">Namn</string>
+  <string name="init_signature_template_user">Ditt namn</string>
   <string name="init_signature_template_number">Nummer</string>
   <string name="init_signature_template_owner">Ägare</string>
   <string name="init_signature_template_name">Namn</string>
