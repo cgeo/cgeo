@@ -39,7 +39,7 @@ public class Progress {
     }
 
     public synchronized void show(final Context context, final String title, final String message, final boolean indeterminate, final Message cancelMessage) {
-        if (dialog == null) {
+        if (!isShowing()) {
             createProgressDialog(context, title, message, cancelMessage);
             dialog.setIndeterminate(indeterminate);
             dialog.show();
@@ -47,7 +47,7 @@ public class Progress {
     }
 
     public synchronized void show(final Context context, final String title, final String message, final int style, final Message cancelMessage) {
-        if (dialog == null) {
+        if (!isShowing()) {
             createProgressDialog(context, title, message, cancelMessage);
             dialog.setProgressStyle(style);
             dialog.show();
