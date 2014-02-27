@@ -14,7 +14,6 @@ import ch.boye.httpclientandroidlib.HttpRequestInterceptor;
 import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.HttpResponseInterceptor;
 import ch.boye.httpclientandroidlib.NameValuePair;
-import ch.boye.httpclientandroidlib.ProtocolException;
 import ch.boye.httpclientandroidlib.client.HttpClient;
 import ch.boye.httpclientandroidlib.client.entity.GzipDecompressingEntity;
 import ch.boye.httpclientandroidlib.client.entity.UrlEncodedFormEntity;
@@ -27,7 +26,7 @@ import ch.boye.httpclientandroidlib.entity.mime.MultipartEntity;
 import ch.boye.httpclientandroidlib.entity.mime.content.FileBody;
 import ch.boye.httpclientandroidlib.entity.mime.content.StringBody;
 import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
-import ch.boye.httpclientandroidlib.impl.client.DefaultRedirectStrategy;
+import ch.boye.httpclientandroidlib.impl.client.LaxRedirectStrategy;
 import ch.boye.httpclientandroidlib.params.BasicHttpParams;
 import ch.boye.httpclientandroidlib.params.CoreConnectionPNames;
 import ch.boye.httpclientandroidlib.params.CoreProtocolPNames;
@@ -86,26 +85,7 @@ public abstract class Network {
         final DefaultHttpClient client = new DefaultHttpClient();
         client.setCookieStore(Cookies.cookieStore);
         client.setParams(clientParams);
-
-        client.setRedirectStrategy(new DefaultRedirectStrategy() {
-            @Override
-            public boolean isRedirected(HttpRequest request, HttpResponse response, HttpContext context) {
-                boolean isRedirect = false;
-                try {
-                    isRedirect = super.isRedirected(request, response, context);
-                } catch (final ProtocolException e) {
-                    Log.e("httpclient.isRedirected: unable to check for redirection", e);
-                }
-                if (!isRedirect) {
-                    final int responseCode = response.getStatusLine().getStatusCode();
-                    if (responseCode == 301 || responseCode == 302) {
-                        return true;
-                    }
-                }
-                return isRedirect;
-            }
-        });
-
+        client.setRedirectStrategy(new LaxRedirectStrategy());
         client.addRequestInterceptor(new HttpRequestInterceptor() {
 
             @Override
