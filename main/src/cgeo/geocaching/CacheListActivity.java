@@ -1384,7 +1384,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      * @param view
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void goMap(View view) {
+    public void goMap(@SuppressWarnings("unused") View view) {
         if (search == null || CollectionUtils.isEmpty(cacheList)) {
             showToast(res.getString(R.string.warn_no_cache_coord));
 
