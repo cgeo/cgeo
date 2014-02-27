@@ -204,7 +204,7 @@ public class GCLogin extends AbstractLogin {
             }
             setActualCachesFound(cachesCount);
             Settings.setGCMemberStatus(TextUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, null));
-            if ( page.contains(GCConstants.MEMBER_STATUS_RENEW) ) {
+            if (page.contains(GCConstants.MEMBER_STATUS_RENEW)) {
                 Settings.setGCMemberStatus(GCConstants.MEMBER_STATUS_PM);
             }
             return true;
