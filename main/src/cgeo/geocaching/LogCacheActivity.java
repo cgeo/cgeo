@@ -477,6 +477,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
 
         updateTweetBox(type);
+        updateLogPasswordBox(type);
 
         updatePostButtonText();
     }
