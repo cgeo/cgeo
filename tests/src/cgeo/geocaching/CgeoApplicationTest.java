@@ -237,10 +237,10 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
             @Override
             public void run() {
-                final SearchResult search = GCParser.searchByCoords(new Geopoint("N 52° 24.972 E 009° 35.647"), CacheType.MYSTERY, false, null);
+                final SearchResult search = GCParser.searchByCoords(new Geopoint("N 50° 06.654 E 008° 39.777"), CacheType.MYSTERY, false, null);
                 assertNotNull(search);
                 assertTrue(20 <= search.getGeocodes().size());
-                assertTrue(search.getGeocodes().contains("GC1RMM2"));
+                assertTrue(search.getGeocodes().contains("GC1HBMY"));
             }
         });
     }
