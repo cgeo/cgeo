@@ -1440,6 +1440,10 @@ public abstract class GCParser {
 
         // trackable geocode
         trackable.setGeocode(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GEOCODE, true, StringUtils.upperCase(possibleTrackingcode)));
+        if (trackable.getGeocode() == null) {
+            Log.e("GCParser.parseTrackable: could not figure out trackable geocode");
+            return null;
+        }
 
         // trackable id
         trackable.setGuid(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GUID, true, trackable.getGuid()));
