@@ -1052,7 +1052,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         }
                     }
 
-                    yield();
                 } catch (Exception e) {
                     Log.w("CGeoMap.LoadTimer.run", e);
                 }
@@ -1379,9 +1378,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     detailProgress++;
                     handler.sendEmptyMessage(UPDATE_PROGRESS);
                 }
-
-                // FIXME: what does this yield() do here?
-                yield();
             }
 
             // we're done

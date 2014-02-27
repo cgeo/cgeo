@@ -1187,12 +1187,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     if (response != null && response.length() > 2) {
                         delay = 1;
                         handler.sendMessage(handler.obtainMessage(1, response));
-                        yield();
 
                         Geocache.storeCache(null, response, listIdLFW, false, null);
 
                         handler.sendMessage(handler.obtainMessage(2, response));
-                        yield();
                     } else if ("RG".equals(response)) {
                         //Server returned RG (registration) and this device no longer registered.
                         Settings.setWebNameCode(null, null);
@@ -1202,7 +1200,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     } else {
                         delay = 0;
                         handler.sendEmptyMessage(0);
-                        yield();
                     }
                 }
                 if (responseFromWeb == null || responseFromWeb.getStatusLine().getStatusCode() != 200) {
@@ -1212,7 +1209,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 }
 
                 try {
-                    yield();
                     if (delay == 0) {
                         sleep(5000); //No caches 5s
                         times++;
