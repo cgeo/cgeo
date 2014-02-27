@@ -96,6 +96,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static final int MAX_LIST_ITEMS = 1000;
 
     private static final int MSG_DONE = -1;
+    private static final int MSG_SERVER_FAIL = -2;
+    private static final int MSG_NO_REGISTRATION = -3;
+    private static final int MSG_WAITING = 0;
+    private static final int MSG_LOADING = 1;
+    private static final int MSG_LOADED = 2;
 
     private static final int REQUEST_CODE_IMPORT_GPX = 1;
 
@@ -314,27 +319,32 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             adapter.notifyDataSetChanged();
 
-            if (msg.what == 0) { //no caches
-                progress.setMessage(res.getString(R.string.web_import_waiting));
-            } else if (msg.what == 1) { //cache downloading
-                progress.setMessage(res.getString(R.string.web_downloading) + " " + msg.obj + '…');
-            } else if (msg.what == 2) { //Cache downloaded
-                progress.setMessage(res.getString(R.string.web_downloaded) + " " + msg.obj + '…');
-                refreshCurrentList();
-            } else if (msg.what == -2) {
-                progress.dismiss();
-                showToast(res.getString(R.string.sendToCgeo_download_fail));
-                finish();
-            } else if (msg.what == -3) {
-                progress.dismiss();
-                showToast(res.getString(R.string.sendToCgeo_no_registration));
-                finish();
-            } else {
-                adapter.setSelectMode(false);
-
-                replaceCacheListFromSearch();
-
-                progress.dismiss();
+            switch (msg.what) {
+                case MSG_WAITING:  //no caches
+                    progress.setMessage(res.getString(R.string.web_import_waiting));
+                    break;
+                case MSG_LOADING:  //cache downloading
+                    progress.setMessage(res.getString(R.string.web_downloading) + " " + msg.obj + '…');
+                    break;
+                case MSG_LOADED:  //Cache downloaded
+                    progress.setMessage(res.getString(R.string.web_downloaded) + " " + msg.obj + '…');
+                    refreshCurrentList();
+                    break;
+                case MSG_SERVER_FAIL:
+                    progress.dismiss();
+                    showToast(res.getString(R.string.sendToCgeo_download_fail));
+                    finish();
+                    break;
+                case MSG_NO_REGISTRATION:
+                    progress.dismiss();
+                    showToast(res.getString(R.string.sendToCgeo_no_registration));
+                    finish();
+                    break;
+                default:  // MSG_DONE
+                    adapter.setSelectMode(false);
+                    replaceCacheListFromSearch();
+                    progress.dismiss();
+                    break;
             }
         }
     };
@@ -1169,59 +1179,43 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         @Override
         public void run() {
-            int delay = -1;
-            int times = 0;
+            final long startTime = System.currentTimeMillis();
 
-            int ret = MSG_DONE;
-            while (!handler.isCancelled() && times < 3 * 60 / 5) { // maximum: 3 minutes, every 5 seconds
-                //download new code
-                String deviceCode = Settings.getWebDeviceCode();
-                if (deviceCode == null) {
-                    deviceCode = "";
-                }
-                final Parameters params = new Parameters("code", deviceCode);
+            final String deviceCode = StringUtils.defaultString(Settings.getWebDeviceCode());
+            final Parameters params = new Parameters("code", deviceCode);
+            while (!handler.isCancelled() && System.currentTimeMillis() - startTime < 3 * 60000) { // maximum: 3 minutes
+                // Download new code
                 final HttpResponse responseFromWeb = Network.getRequest("http://send2.cgeo.org/read.html", params);
 
                 if (responseFromWeb != null && responseFromWeb.getStatusLine().getStatusCode() == 200) {
                     final String response = Network.getResponseData(responseFromWeb);
                     if (response != null && response.length() > 2) {
-                        delay = 1;
-                        handler.sendMessage(handler.obtainMessage(1, response));
+                        handler.sendMessage(handler.obtainMessage(MSG_LOADING, response));
 
                         Geocache.storeCache(null, response, listIdLFW, false, null);
 
-                        handler.sendMessage(handler.obtainMessage(2, response));
+                        handler.sendMessage(handler.obtainMessage(MSG_LOADED, response));
                     } else if ("RG".equals(response)) {
                         //Server returned RG (registration) and this device no longer registered.
                         Settings.setWebNameCode(null, null);
-                        ret = -3;
+                        handler.sendEmptyMessage(MSG_NO_REGISTRATION);
                         handler.cancel();
                         break;
                     } else {
-                        delay = 0;
-                        handler.sendEmptyMessage(0);
+                        try {
+                            sleep(5000); // Wait for 5s if no cache found
+                        } catch (final InterruptedException e) {
+                        }
+                        handler.sendEmptyMessage(MSG_WAITING);
                     }
-                }
-                if (responseFromWeb == null || responseFromWeb.getStatusLine().getStatusCode() != 200) {
-                    ret = -2;
+                } else {
+                    handler.sendEmptyMessage(MSG_SERVER_FAIL);
                     handler.cancel();
                     break;
                 }
-
-                try {
-                    if (delay == 0) {
-                        sleep(5000); //No caches 5s
-                        times++;
-                    } else {
-                        sleep(500); //Cache was loaded 0.5s
-                        times = 0;
-                    }
-                } catch (final InterruptedException e) {
-                    Log.e("CacheListActivity.LoadFromWebThread.sleep", e);
-                }
             }
 
-            handler.sendEmptyMessage(ret);
+            handler.sendEmptyMessage(MSG_DONE);
         }
     }
 
