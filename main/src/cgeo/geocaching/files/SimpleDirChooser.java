@@ -57,8 +57,7 @@ public class SimpleDirChooser extends AbstractListActivity {
         fill(currentDir);
 
         okButton = (Button) findViewById(R.id.simple_dir_chooser_ok);
-        okButton.setEnabled(false);
-        okButton.setVisibility(View.INVISIBLE);
+        resetOkButton();
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,6 +131,7 @@ public class SimpleDirChooser extends AbstractListActivity {
 
     private void fill(File dir) {
         lastPosition = -1;
+        resetOkButton();
         EditText path = (EditText) findViewById(R.id.simple_dir_chooser_path);
         path.setText(this.getResources().getString(R.string.simple_dir_chooser_current_path) + " " + dir.getAbsolutePath());
         final File[] dirs = dir.listFiles(new DirOnlyFilenameFilter());
@@ -148,6 +148,13 @@ public class SimpleDirChooser extends AbstractListActivity {
         }
         this.adapter = new FileArrayAdapter(this, R.layout.simple_dir_item, listDirs);
         this.setListAdapter(adapter);
+    }
+
+    private void resetOkButton() {
+        if (okButton != null) {
+            okButton.setEnabled(false);
+            okButton.setVisibility(View.INVISIBLE);
+        }
     }
 
     public class FileArrayAdapter extends ArrayAdapter<Option> {
