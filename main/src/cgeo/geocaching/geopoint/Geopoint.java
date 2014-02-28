@@ -55,8 +55,8 @@ public final class Geopoint implements ICoordinates, Parcelable {
      */
     public Geopoint(final String text) {
         final Geopoint parsed = GeopointParser.parse(text);
-        this.latitude = parsed.latitude;
-        this.longitude = parsed.longitude;
+        latitude = parsed.latitude;
+        longitude = parsed.longitude;
     }
 
     /**

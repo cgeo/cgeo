@@ -57,7 +57,6 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -1371,58 +1370,11 @@ public class Geocache implements ICache, IWaypoint {
      * Detect coordinates in the personal note and convert them to user defined waypoints. Works by rule of thumb.
      */
     public void parseWaypointsFromNote() {
-        try {
-            if (StringUtils.isBlank(getPersonalNote())) {
-                return;
-            }
-            final Pattern coordPattern = Pattern.compile("\\b[nNsS]{1}\\s*\\d"); // begin of coordinates
-            int count = 1;
-            String note = getPersonalNote();
-            MatcherWrapper matcher = new MatcherWrapper(coordPattern, note);
-            while (matcher.find()) {
-                try {
-                    final Geopoint point = new Geopoint(note.substring(matcher.start()));
-                    // Coords must have non zero latitude and longitude, at least one part shall have fractional degrees,
-                    // and there must exist no waypoint with the same coordinates already.
-                    if (point.getLatitudeE6() != 0 && point.getLongitudeE6() != 0 &&
-                            ((point.getLatitudeE6() % 1000) != 0 || (point.getLongitudeE6() % 1000) != 0) &&
-                            !hasIdenticalWaypoint(point)) {
-                        final String name = CgeoApplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
-                        final String potentialWaypointType = note.substring(Math.max(0, matcher.start() - 15));
-                        final Waypoint waypoint = new Waypoint(name, parseWaypointType(potentialWaypointType), false);
-                        waypoint.setCoords(point);
-                        addOrChangeWaypoint(waypoint, false);
-                        count++;
-                    }
-                } catch (final Geopoint.ParseException e) {
-                    // ignore
-                }
-
-                note = note.substring(matcher.start() + 1);
-                matcher = new MatcherWrapper(coordPattern, note);
-            }
-        } catch (final Exception e) {
-            Log.e("Geocache.parseWaypointsFromNote", e);
-        }
-    }
-
-    /**
-     * Detect waypoint types in the personal note text. It works by rule of thumb only.
-     */
-    private static WaypointType parseWaypointType(final String input) {
-        final String lowerInput = StringUtils.substring(input, 0, 20).toLowerCase(Locale.getDefault());
-        for (final WaypointType wpType : WaypointType.values()) {
-            if (lowerInput.contains(wpType.getL10n().toLowerCase(Locale.getDefault()))) {
-                return wpType;
-            }
-            if (lowerInput.contains(wpType.id)) {
-                return wpType;
-            }
-            if (lowerInput.contains(wpType.name().toLowerCase(Locale.US))) {
-                return wpType;
+        for (final Waypoint waypoint : Waypoint.parseWaypointsFromNote(StringUtils.defaultString(getPersonalNote()))) {
+            if (!hasIdenticalWaypoint(waypoint.getCoords())) {
+                addOrChangeWaypoint(waypoint, false);
             }
         }
-        return WaypointType.WAYPOINT;
     }
 
     private boolean hasIdenticalWaypoint(final Geopoint point) {
