@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -11,6 +12,10 @@ import cgeo.geocaching.gcvote.GCVote;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
+import rx.Observable;
+import rx.functions.Func1;
+import rx.functions.Func2;
+import rx.schedulers.Schedulers;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -294,6 +299,27 @@ public class SearchResult implements Parcelable {
             setViewstates(other.getViewstates());
             setTotalCountGC(other.getTotalCountGC());
         }
+    }
+
+    public static <C extends IConnector> SearchResult parallelCombineActive(final Collection<C> connectors,
+                                                                            final Func1<C, SearchResult> func) {
+        return Observable.from(connectors).parallel(new Func1<Observable<C>, Observable<SearchResult>>() {
+            @Override
+            public Observable<SearchResult> call(final Observable<C> cObservable) {
+                return cObservable.flatMap(new Func1<C, Observable<? extends SearchResult>>() {
+                    @Override
+                    public Observable<? extends SearchResult> call(final C c) {
+                        return c.isActive() ? Observable.from(func.call(c)) : Observable.<SearchResult>empty();
+                    }
+                });
+            }
+        }, Schedulers.io()).reduce(new SearchResult(), new Func2<SearchResult, SearchResult, SearchResult>() {
+            @Override
+            public SearchResult call(final SearchResult searchResult, final SearchResult searchResult2) {
+                searchResult.addSearchResult(searchResult2);
+                return searchResult;
+            }
+        }).toBlockingObservable().first();
     }
 
 }

@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import org.eclipse.jdt.annotation.NonNull;
+import rx.functions.Func1;
 
 import android.content.Context;
 
@@ -19,16 +20,13 @@ public class CoordsGeocacheListLoader extends AbstractSearchLoader {
 
     @Override
     public SearchResult runSearch() {
-
-        SearchResult search = new SearchResult();
-
-        for (ISearchByCenter centerConn : ConnectorFactory.getSearchByCenterConnectors()) {
-            if (centerConn.isActive()) {
-                search.addSearchResult(centerConn.searchByCenter(coords, this));
-            }
-        }
-
-        return search;
+        return SearchResult.parallelCombineActive(ConnectorFactory.getSearchByCenterConnectors(),
+                new Func1<ISearchByCenter, SearchResult>() {
+                    @Override
+                    public SearchResult call(final ISearchByCenter connector) {
+                        return connector.searchByCenter(coords, CoordsGeocacheListLoader.this);
+                    }
+                });
     }
 
 }

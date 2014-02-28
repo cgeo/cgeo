@@ -5,6 +5,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ISearchByKeyword;
 
 import org.eclipse.jdt.annotation.NonNull;
+import rx.functions.Func1;
 
 import android.content.Context;
 
@@ -19,15 +20,13 @@ public class KeywordGeocacheListLoader extends AbstractSearchLoader {
 
     @Override
     public SearchResult runSearch() {
-        SearchResult searchResult = new SearchResult();
-
-        for (ISearchByKeyword connector : ConnectorFactory.getSearchByKeywordConnectors()) {
-            if (connector.isActive()) {
-                searchResult.addSearchResult(connector.searchByKeyword(keyword, this));
-            }
-        }
-
-        return searchResult;
+        return SearchResult.parallelCombineActive(ConnectorFactory.getSearchByKeywordConnectors(),
+                new Func1<ISearchByKeyword, SearchResult>() {
+                    @Override
+                    public SearchResult call(final ISearchByKeyword connector) {
+                        return connector.searchByKeyword(keyword, KeywordGeocacheListLoader.this);
+                    }
+                });
     }
 
 }

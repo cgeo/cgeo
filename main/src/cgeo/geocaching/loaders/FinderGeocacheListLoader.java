@@ -5,6 +5,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ISearchByFinder;
 
 import org.eclipse.jdt.annotation.NonNull;
+import rx.functions.Func1;
 
 import android.content.Context;
 
@@ -19,15 +20,13 @@ public class FinderGeocacheListLoader extends AbstractSearchLoader {
 
     @Override
     public SearchResult runSearch() {
-        SearchResult searchResult = new SearchResult();
-
-        for (ISearchByFinder connector : ConnectorFactory.getSearchByFinderConnectors()) {
-            if (connector.isActive()) {
-                searchResult.addSearchResult(connector.searchByFinder(username, this));
-            }
-        }
-
-        return searchResult;
+        return SearchResult.parallelCombineActive(ConnectorFactory.getSearchByFinderConnectors(),
+                new Func1<ISearchByFinder, SearchResult>() {
+                    @Override
+                    public SearchResult call(final ISearchByFinder connector) {
+                        return connector.searchByFinder(username, FinderGeocacheListLoader.this);
+                    }
+                });
     }
 
 }
