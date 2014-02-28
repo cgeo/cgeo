@@ -439,22 +439,6 @@ public class Geocache implements ICache, IWaypoint {
         return hidden.compareTo(cal.getTime()) >= 0;
     }
 
-    /**
-     * Checks if a page contains the guid of a cache
-     *
-     * @param page
-     *            the page to search in, may be null
-     * @return true if the page contains the guid of the cache, false otherwise
-     */
-    public boolean isGuidContainedInPage(final String page) {
-        if (StringUtils.isBlank(page) || StringUtils.isBlank(guid)) {
-            return false;
-        }
-        final Boolean found = Pattern.compile(guid, Pattern.CASE_INSENSITIVE).matcher(page).find();
-        Log.i("Geocache.isGuidContainedInPage: guid '" + guid + "' " + (found ? "" : "not ") + "found");
-        return found;
-    }
-
     public boolean isEventCache() {
         return cacheType.getValue().isEvent();
     }

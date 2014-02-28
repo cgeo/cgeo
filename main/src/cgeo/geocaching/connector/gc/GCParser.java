@@ -62,6 +62,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 public abstract class GCParser {
     private final static SynchronizedDateFormat dateTbIn1 = new SynchronizedDateFormat("EEEEE, dd MMMMM yyyy", Locale.ENGLISH); // Saturday, 28 March 2009
@@ -1310,7 +1311,7 @@ public abstract class GCParser {
             return false; // error
         }
 
-        final boolean guidOnPage = cache.isGuidContainedInPage(page);
+        final boolean guidOnPage = isGuidContainedInPage(cache, page);
         if (guidOnPage) {
             Log.i("GCParser.addToWatchlist: cache is on watchlist");
             cache.setOnWatchlist(true);
@@ -1344,7 +1345,7 @@ public abstract class GCParser {
         GCLogin.transferViewstates(page, params);
 
         page = Network.getResponseData(Network.postRequest(uri, params));
-        final boolean guidOnPage = cache.isGuidContainedInPage(page);
+        final boolean guidOnPage = isGuidContainedInPage(cache, page);
         if (!guidOnPage) {
             Log.i("GCParser.removeFromWatchlist: cache removed from watchlist");
             cache.setOnWatchlist(false);
@@ -1352,6 +1353,21 @@ public abstract class GCParser {
             Log.e("GCParser.removeFromWatchlist: cache not removed from watchlist");
         }
         return !guidOnPage; // on watch list (=error) / not on watch list
+    }
+
+    /**
+     * Checks if a page contains the guid of a cache
+     *
+     * @param cache the geocache
+     * @param page
+     *            the page to search in, may be null
+     * @return true if the page contains the guid of the cache, false otherwise
+     */
+    private static boolean isGuidContainedInPage(final Geocache cache, final String page) {
+        if (StringUtils.isBlank(page) || StringUtils.isBlank(cache.getGuid())) {
+            return false;
+        }
+        return Pattern.compile(cache.getGuid(), Pattern.CASE_INSENSITIVE).matcher(page).find();
     }
 
     @Nullable
