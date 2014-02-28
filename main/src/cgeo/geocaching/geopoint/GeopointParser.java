@@ -57,7 +57,6 @@ class GeopointParser {
      */
     public static Geopoint parse(final String text) {
         final ResultWrapper latitudeWrapper = parseHelper(text, LatLon.LAT);
-        final double lat = latitudeWrapper.result;
         // cut away the latitude part when parsing the longitude
         final ResultWrapper longitudeWrapper = parseHelper(text.substring(latitudeWrapper.matcherPos + latitudeWrapper.matcherLength), LatLon.LON);
 
@@ -65,7 +64,14 @@ class GeopointParser {
             throw new Geopoint.ParseException("Distance between latitude and longitude text is to large.", LatLon.LON);
         }
 
+        final double lat = latitudeWrapper.result;
         final double lon = longitudeWrapper.result;
+        if (lat > 90 || lat < -90) {
+            throw new Geopoint.ParseException(text, LatLon.LAT);
+        }
+        if (lon > 180 || lon < -180) {
+            throw new Geopoint.ParseException(text, LatLon.LON);
+        }
         return new Geopoint(lat, lon);
     }
 
