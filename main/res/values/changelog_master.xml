@@ -8,12 +8,15 @@
      · All GCVote related settings moved to Menu-Services-GCVote\n
      · Support of some GSAK specific GPX contents\n
      · Create waypoint from personal note also for OC caches\n
+     · Copy and translate operations also for TB information\n
     <b>Bugfixing:</b>\n
      · Corrected wrong field note progress indication\n
      · When using "external map" sometimes the position marker was not shown\m
      · Circles on map now also shown for caches with final coords defined\n
      · Adding event caches to calendar corrected for events without starting time\n
      · Logging of OC caches was not possible if no GC login data was stored\n
+     · TB details have been empty if HTML syntax was incorrect\n
+     · Swipe left from cache details not working in some cases\n
      \n
      \n
   </string>
