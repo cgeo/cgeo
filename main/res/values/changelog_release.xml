@@ -4,7 +4,12 @@
   <string name="changelog_release" translatable="false">\n
      <b>Next bugfix release:</b>\n
      <b>Bugfixes:</b>\n
+    · OC-login was not possible if no GC-login stored\n
     · Geocodes are always case insensitive\n
+    · Fixed crashes in dir chooser\n
+    · Log password field missing for OC if changing log type\n
+    · Send2cgeo import screen not shown on second import start\n
+    · Fixed parsing of waypoints from personal note if no valid coords stored\n
     \n
      <b>2014.02.04:</b>\n
     · Reinstate parsing of trackable name and owner after gc.com change\n
