@@ -90,6 +90,11 @@ public enum LogType {
     }
 
     public static LogType getByIconName(final String imageType) {
+        // Special case for post reviewer note, which appears sometimes as 18.png (in individual entries) or as 68.png
+        // (in logs counts).
+        if ("68".equals(imageType)) {
+            return POST_REVIEWER_NOTE;
+        }
         final LogType result = imageType != null ? LogType.FIND_BY_ICONNAME.get(imageType.toLowerCase(Locale.US).trim()) : null;
         if (result == null) {
             return UNKNOWN;
