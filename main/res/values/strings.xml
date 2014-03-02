@@ -77,6 +77,7 @@
     <string name="log_needs_archived">Needs Archived</string>
     <string name="log_discovered">Discovered</string>
     <string name="log_reviewer">Reviewer Note</string>
+    <string name="log_submit_for_review">Submit for Review</string>
     <string name="log_retractlisting">Retract Listing</string>
     <string name="log_marked_missing">Marked Missing</string>
     <string name="log_tb_nothing">Do Nothing</string>
