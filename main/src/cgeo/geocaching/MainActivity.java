@@ -413,7 +413,8 @@ public class MainActivity extends AbstractActivity {
 
             @Override
             public boolean onLongClick(final View v) {
-                selectGlobalTypeFilter();
+                Settings.setCacheType(CacheType.ALL);
+                setFilterTitle();
                 return true;
             }
         });
