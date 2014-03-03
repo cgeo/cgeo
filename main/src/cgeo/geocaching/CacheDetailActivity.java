@@ -25,6 +25,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.ui.CompassMiniView;
 import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.EditNoteDialog;
@@ -38,6 +39,7 @@ import cgeo.geocaching.ui.OwnerActionsClickListener;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.logs.CacheLogsViewCreator;
+import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
@@ -105,6 +107,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
@@ -142,6 +145,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private SearchResult search;
 
     private final GeoDirHandler locationUpdater = new GeoDirHandler() {
+
+        private float azimuth = 0;
+
         @Override
         public void updateGeoData(final IGeoData geo) {
             if (cacheDistanceView == null) {
@@ -151,7 +157,39 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (geo.getCoords() != null && cache != null && cache.getCoords() != null) {
                 cacheDistanceView.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(cache.getCoords())));
                 cacheDistanceView.bringToFront();
+
+                if (directionView != null){
+                    updateCompass(geo);
+                }
             }
+        }
+
+        private void updateCompass(IGeoData geo) {
+            directionView.updateCurrentCoords(geo.getCoords());
+            if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
+                setActualHeading(geo.getBearing());
+            }
+        }
+
+        @Override
+        public void updateDirection(float direction) {
+            if (!Settings.isLiveList() || directionView == null){
+                return;
+            }
+
+            if (app.currentGeo().getSpeed() <= 5) { // use compass when speed is lower than 18 km/h) {
+                final float northHeading = DirectionProvider.getDirectionNow(CacheDetailActivity.this, direction);
+                setActualHeading(northHeading);
+            }
+        }
+
+        private void setActualHeading(final float direction) {
+            if (Math.abs(AngleUtils.difference(azimuth, direction)) < 5) {
+                return;
+            }
+
+            azimuth = direction;
+            directionView.updateAzimuth(azimuth);
         }
     };
 
@@ -164,6 +202,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     // some views that must be available from everywhere // TODO: Reference can block GC?
     private TextView cacheDistanceView;
+
+    private CompassMiniView directionView;
 
     protected ImagesList imagesList;
     private Subscription imagesSubscription;
@@ -318,6 +358,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             refreshOnResume = false;
         }
         locationUpdater.startGeo();
+        if (Settings.isLiveMap()) {
+            locationUpdater.startDir();
+        }
     }
 
     @Override
@@ -936,6 +979,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             details.addDistance(cache, cacheDistanceView);
             cacheDistanceView = details.getValueView();
+
+            if (Settings.isLiveList()) {
+                directionView = details.addDirection(cache, (RelativeLayout) cacheDistanceView.getParent());
+            }
 
             details.addDifficulty(cache);
             details.addTerrain(cache);

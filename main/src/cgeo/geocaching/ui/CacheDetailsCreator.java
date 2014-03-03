@@ -189,6 +189,13 @@ public final class CacheDetailsCreator {
         add(R.string.cache_distance, text);
     }
 
+    public CompassMiniView addDirection(Geocache cache, RelativeLayout parent) {
+        final CompassMiniView directionView = (CompassMiniView) parent.findViewById(R.id.direction);
+        directionView.setTargetCoords(cache.getCoords());
+        directionView.setVisibility(View.VISIBLE);
+        return directionView;
+    }
+
     public void addEventDate(@NonNull Geocache cache) {
         if (!cache.isEventCache()) {
             return;
