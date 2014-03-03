@@ -381,7 +381,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public void onPause() {
-        locationUpdater.stopGeo();
+        locationUpdater.stopGeoAndDir();
         super.onPause();
     }
 

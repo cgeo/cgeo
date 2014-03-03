@@ -198,7 +198,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity implements 
 
     @Override
     public void onPause() {
-        geoUpdate.stopGeo();
+        geoUpdate.stopGeoAndDir();
         super.onPause();
     }
 
