@@ -1828,6 +1828,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             // note
             final TextView noteView = holder.noteView;
             if (StringUtils.isNotBlank(wpt.getNote())) {
+                noteView.setOnClickListener(new DecryptTextClickListener(noteView));
                 noteView.setVisibility(View.VISIBLE);
                 if (TextUtils.containsHtml(wpt.getNote())) {
                     noteView.setText(Html.fromHtml(wpt.getNote()), TextView.BufferType.SPANNABLE);
