@@ -9,6 +9,8 @@
      · Support of some GSAK specific GPX contents\n
      · Create waypoint from personal note also for OC caches\n
      · Copy and translate operations also for TB information\n
+     · Decrypt waypoint note by tapping on it\n
+     · Long press filter button in main menu to reset it\n
     <b>Bugfixing:</b>\n
      · Corrected wrong field note progress indication\n
      · When using "external map" sometimes the position marker was not shown\m
