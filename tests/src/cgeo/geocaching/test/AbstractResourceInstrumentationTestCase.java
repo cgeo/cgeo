@@ -36,14 +36,19 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
     }
 
     protected String getFileContent(int resourceId) {
-        final InputStream ins = getResourceStream(resourceId);
-        final String result = new Scanner(ins).useDelimiter("\\A").next();
+        Scanner scanner = null;
         try {
-            ins.close();
-        } catch (IOException e) {
+            final InputStream ins = getResourceStream(resourceId);
+            scanner = new Scanner(ins);
+            return scanner.useDelimiter("\\A").next();
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (scanner != null) {
+                scanner.close();
+            }
         }
-        return result;
+        return null;
     }
 
     protected void copyResourceToFile(int resourceId, File file) throws IOException {
