@@ -15,6 +15,7 @@
       <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" generated="true" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="cgeo" exported="" scope="TEST" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -33,7 +34,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="cgeo" exported="" scope="TEST" />
     <orderEntry type="jdk" jdkName="Android 2.2 Google APIs" jdkType="Android SDK" />
     <orderEntry type="module-library" scope="PROVIDED">
       <library>

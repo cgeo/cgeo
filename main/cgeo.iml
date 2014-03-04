@@ -14,7 +14,18 @@
       <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/thirdparty" isTestSource="false" />
     </content>
-    <orderEntry type="library" exported="" name="libs" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library name="libs">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/libs" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/libs" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/libs" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/libs/src" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
     <orderEntry type="jdk" jdkName="Android 4.4.2 Google APIs" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" exported="" scope="PROVIDED">
@@ -28,6 +39,16 @@
         </SOURCES>
         <jarDirectory url="file://$MODULE_DIR$/compile-libs" recursive="false" />
         <jarDirectory url="file://$MODULE_DIR$/compile-libs" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/libs" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/libs" recursive="false" />
       </library>
     </orderEntry>
   </component>
