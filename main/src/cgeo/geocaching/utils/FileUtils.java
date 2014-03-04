@@ -143,7 +143,7 @@ public final class FileUtils {
             final OutputStream os = new FileOutputStream(file);
             buffer = new BufferedOutputStream(os);
             fileWriter = new OutputStreamWriter(buffer, CharEncoding.UTF_16);
-            fileWriter.write(content.toString());
+            fileWriter.write(content);
         } catch (final IOException e) {
             Log.e("FieldnoteExport.ExportTask export", e);
             return false;
