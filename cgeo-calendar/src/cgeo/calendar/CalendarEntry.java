@@ -11,6 +11,7 @@ import android.text.style.ImageSpan;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.Calendar;
 import java.util.Date;
 
 class CalendarEntry {
@@ -80,12 +81,13 @@ class CalendarEntry {
      */
     protected Date parseDate() {
         try {
-            final Date eventDate = new Date(Long.parseLong(getHiddenDate()));
-            eventDate.setHours(0);
-            eventDate.setMinutes(0);
-            eventDate.setSeconds(0);
+            Calendar cal = Calendar.getInstance();
+            cal.setTimeInMillis(Long.parseLong(getHiddenDate()));
+            cal.set(Calendar.HOUR_OF_DAY, 0);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
 
-            return eventDate;
+            return cal.getTime();
         } catch (NumberFormatException e) {
             // cannot happen normally, but static code analysis does not know
         }
