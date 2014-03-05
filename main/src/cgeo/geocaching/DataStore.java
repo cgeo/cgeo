@@ -2334,23 +2334,21 @@ public class DataStore {
      * @param geocodes
      * @return
      */
-    private static Set<String> exceptCachesWithOfflineLog(Set<String> geocodes) {
+    private static Set<String> exceptCachesWithOfflineLog(final Set<String> geocodes) {
         if (geocodes.isEmpty()) {
             return geocodes;
         }
 
-        init();
-        final Cursor cursor = database.query(
-                dbTableLogsOffline,
+        final List<String> geocodesWithOfflineLog = queryToColl(dbTableLogsOffline,
                 new String[] { "geocode" },
                 null,
                 null,
                 null,
                 null,
-                null);
-
-        final List<String> geocodesWithOfflineLog = Arrays.asList(getFirstColumn(cursor));
-
+                null,
+                null,
+                new LinkedList<String>(),
+                GET_STRING_0);
         geocodes.removeAll(geocodesWithOfflineLog);
         return geocodes;
     }
@@ -2874,16 +2872,6 @@ public class DataStore {
         });
     }
 
-    /**
-     * Extract the first column of the cursor rows and close the cursor.
-     *
-     * @param cursor a database cursor
-     * @return the first column of each row
-     */
-    private static String[] getFirstColumn(final Cursor cursor) {
-        return cursorToColl(cursor, new LinkedList<String>(), GET_STRING_0).toArray(new String[cursor.getCount()]);
-    }
-
     public static void saveChangedCache(Geocache cache) {
         DataStore.saveCache(cache, cache.getStorageLocation().contains(StorageLocation.DATABASE) ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.SAVE_CACHE));
     }
@@ -3131,7 +3119,7 @@ public class DataStore {
                 + " FROM " + table
                 + " WHERE " + column + " LIKE ?"
                 + " ORDER BY " + column + " COLLATE NOCASE ASC;", new String[] { getSuggestionArgument(input) });
-        return getFirstColumn(cursor);
+        return cursorToColl(cursor, new LinkedList<String>(), GET_STRING_0).toArray(new String[cursor.getCount()]);
     }
 
     public static String[] getSuggestionsOwnerName(String input) {
