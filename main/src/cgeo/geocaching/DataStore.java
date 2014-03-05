@@ -2176,7 +2176,7 @@ public class DataStore {
             }
         } catch (final Exception e) {
             Log.e("DataStore.loadBatchOfStoredGeocodes", e);
-            return Collections.EMPTY_SET;
+            return Collections.emptySet();
         }
     }
 
@@ -2207,7 +2207,7 @@ public class DataStore {
             Log.e("DataStore.loadBatchOfHistoricGeocodes", e);
         }
 
-        return Collections.EMPTY_SET;
+        return Collections.emptySet();
     }
 
     /** Retrieve all stored caches from DB */
