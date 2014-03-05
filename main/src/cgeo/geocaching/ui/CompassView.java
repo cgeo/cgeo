@@ -2,8 +2,6 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.AngleUtils;
-import cgeo.geocaching.utils.PeriodicHandler;
-import cgeo.geocaching.utils.PeriodicHandler.PeriodicHandlerListener;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,8 +12,14 @@ import android.graphics.PaintFlagsDrawFilter;
 import android.util.AttributeSet;
 import android.util.FloatMath;
 import android.view.View;
+import rx.Scheduler;
+import rx.Subscription;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
-public class CompassView extends View implements PeriodicHandlerListener {
+import java.util.concurrent.TimeUnit;
+
+public class CompassView extends View {
 
     private Context context = null;
     private Bitmap compassUnderlay = null;
@@ -49,7 +53,7 @@ public class CompassView extends View implements PeriodicHandlerListener {
     private int compassOverlayWidth = 0;
     private int compassOverlayHeight = 0;
     private boolean initialDisplay;
-    private final PeriodicHandler redrawHandler = new PeriodicHandler(40, this);
+    private Subscription periodicUpdate;
 
     public CompassView(Context contextIn) {
         super(contextIn);
@@ -83,12 +87,26 @@ public class CompassView extends View implements PeriodicHandlerListener {
         synchronized (this) {
             initialDisplay = true;
         }
-        redrawHandler.start();
+        periodicUpdate = Schedulers.io().schedulePeriodically(new Action1<Scheduler.Inner>() {
+            @Override
+            public void call(final Scheduler.Inner inner) {
+                synchronized (CompassView.this) {
+                    final float newAzimuthShown = smoothUpdate(northMeasured, azimuthShown);
+                    final float newCacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
+                    if (Math.abs(AngleUtils.difference(azimuthShown, newAzimuthShown)) >= 2 ||
+                            Math.abs(AngleUtils.difference(cacheHeadingShown, newCacheHeadingShown)) >= 2) {
+                        azimuthShown = newAzimuthShown;
+                        cacheHeadingShown = newCacheHeadingShown;
+                        postInvalidate();
+                    }
+                }
+            }
+        }, 0, 40, TimeUnit.MILLISECONDS);
     }
 
     @Override
     public void onDetachedFromWindow() {
-        redrawHandler.stop();
+        periodicUpdate.unsubscribe();
         super.onDetachedFromWindow();
 
         if (compassUnderlay != null) {
@@ -147,20 +165,6 @@ public class CompassView extends View implements PeriodicHandlerListener {
         }
 
         return AngleUtils.normalize(actual + offset);
-    }
-
-    @Override
-    public synchronized void onPeriodic() {
-        final float newAzimuthShown = smoothUpdate(northMeasured, azimuthShown);
-        final float newCacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
-        if (Math.abs(AngleUtils.difference(azimuthShown, newAzimuthShown)) >= 2 ||
-                Math.abs(AngleUtils.difference(cacheHeadingShown, newCacheHeadingShown)) >= 2) {
-            synchronized(this) {
-                azimuthShown = newAzimuthShown;
-                cacheHeadingShown = newCacheHeadingShown;
-            }
-            invalidate();
-        }
     }
 
     @Override
