@@ -317,7 +317,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
                     // check update after switch strategy to FAST
                     Settings.setLiveMapStrategy(Strategy.FAST);
-                    Tile.Cache.removeFromTileCache(mockedCache);
+                    Tile.cache.removeFromTileCache(mockedCache);
 
                     search = ConnectorFactory.searchByViewport(viewport, tokens).toBlockingObservable().single();
                     assertNotNull(search);
@@ -354,7 +354,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     // non premium cache
                     MockedCache cache = new GC2CJPF();
                     deleteCacheFromDBAndLogout(cache.getGeocode());
-                    Tile.Cache.removeFromTileCache(cache);
+                    Tile.cache.removeFromTileCache(cache);
                     Settings.setCacheType(CacheType.ALL);
 
                     Viewport viewport = new Viewport(cache, 0.003, 0.003);

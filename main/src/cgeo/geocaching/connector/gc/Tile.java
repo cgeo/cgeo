@@ -5,11 +5,10 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.utils.LeastRecentlyUsedMap;
+import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
-
 import org.eclipse.jdt.annotation.NonNull;
 
 import android.graphics.Bitmap;
@@ -17,7 +16,6 @@ import android.graphics.BitmapFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -44,6 +42,8 @@ public class Tile {
             NUMBER_OF_PIXELS[z] = TILE_SIZE * 1 << z;
         }
     }
+
+    public static TileCache cache = new TileCache();
 
     private final int tileX;
     private final int tileY;
@@ -301,31 +301,18 @@ public class Tile {
         return tiles;
     }
 
-    public static class Cache {
-        private final static LeastRecentlyUsedMap<Integer, Tile> tileCache = new LeastRecentlyUsedMap.LruCache<Integer, Tile>(64);
+    public static class TileCache extends LeastRecentlyUsedSet<Tile> {
 
-        public static void removeFromTileCache(final ICoordinates point) {
-            if (point != null) {
-                Collection<Tile> tiles = new ArrayList<Tile>(tileCache.values());
-                for (Tile tile : tiles) {
-                    if (tile.containsPoint(point)) {
-                        tileCache.remove(tile.hashCode());
-                    }
+        public TileCache() {
+            super(64);
+        }
+
+        public void removeFromTileCache(@NonNull final ICoordinates point) {
+            for (final Tile tile : new ArrayList<Tile>(this)) {
+                if (tile.containsPoint(point)) {
+                    remove(tile);
                 }
             }
         }
-
-        public static boolean contains(final Tile tile) {
-            return tileCache.containsKey(tile.hashCode());
-        }
-
-        public static void add(final Tile tile) {
-            tileCache.put(tile.hashCode(), tile);
-        }
-
-        public static void clear() {
-            tileCache.clear();
-        }
     }
-
 }

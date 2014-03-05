@@ -675,7 +675,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 markersInvalidated = true;
                 ActivityMixin.invalidateOptionsMenu(activity);
                 if (!Settings.isExcludeMyCaches()) {
-                    Tile.Cache.clear();
+                    Tile.cache.clear();
                 }
                 return true;
             case R.id.menu_theme_mode:

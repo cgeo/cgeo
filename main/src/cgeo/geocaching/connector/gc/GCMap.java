@@ -305,7 +305,7 @@ public class GCMap {
 
             for (Tile tile : tiles) {
 
-                if (!Tile.Cache.contains(tile)) {
+                if (!Tile.cache.contains(tile)) {
                     final Parameters params = new Parameters(
                             "x", String.valueOf(tile.getX()),
                             "y", String.valueOf(tile.getY()),
@@ -351,7 +351,7 @@ public class GCMap {
                         else {
                             searchResult.addSearchResult(search);
                         }
-                        Tile.Cache.add(tile);
+                        Tile.cache.add(tile);
                     }
 
                     // release native bitmap memory

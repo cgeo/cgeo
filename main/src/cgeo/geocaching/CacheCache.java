@@ -106,7 +106,7 @@ public class CacheCache {
             // FIXME: as above, we sometimes get caches with null coordinates, that may then provoke
             // a NullPointerException down the invocation chain.
             if (removed.getCoords() != null) {
-                Tile.Cache.removeFromTileCache(removed);
+                Tile.cache.removeFromTileCache(removed);
             }
         }
     }
