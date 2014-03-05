@@ -294,18 +294,22 @@ public class DataStore {
     private static boolean newlyCreatedDatabase = false;
     private static boolean databaseCleaned = false;
 
-    public synchronized static void init() {
+    public static void init() {
         if (database != null) {
             return;
         }
 
-        final DbHelper dbHelper = new DbHelper(new DBContext(CgeoApplication.getInstance()));
-        try {
-            database = dbHelper.getWritableDatabase();
-        } catch (Exception e) {
-            Log.e("DataStore.init: unable to open database for R/W", e);
-            recreateDatabase(dbHelper);
-
+        synchronized(DataStore.class) {
+            if (database != null) {
+                return;
+            }
+            final DbHelper dbHelper = new DbHelper(new DBContext(CgeoApplication.getInstance()));
+            try {
+                database = dbHelper.getWritableDatabase();
+            } catch (Exception e) {
+                Log.e("DataStore.init: unable to open database for R/W", e);
+                recreateDatabase(dbHelper);
+            }
         }
     }
 
