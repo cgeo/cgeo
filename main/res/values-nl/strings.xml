@@ -226,6 +226,7 @@
   <string name="menu_filter">Filter</string>
   <string name="menu_scan_geo">Scan geocode</string>
   <string name="menu_pocket_queries">Pocket queries</string>
+  <string name="menu_scan_description">c:geo kan geocodes scannen die als QR code weergegeven zijn. De noodzakelijke app is niet geïnstalleerd. Wil je Google Play openen om de app te installeren?</string>
   <string name="live_map_button">Live kaart</string>
   <string name="caches_nearby_button">Dichtbij</string>
   <string name="advanced_search_button">Zoeken</string>
@@ -293,6 +294,9 @@
   <string name="caches_filter_modified">Met aangepaste coordinaten</string>
   <string name="caches_filter_origin">Oorsprong</string>
   <string name="caches_filter_distance">Afstand</string>
+  <string name="caches_filter_personal_note">Met privé cachenotitie</string>
+  <string name="caches_filter_popularity">Favorieten</string>
+  <string name="caches_filter_popularity_ratio">Favorieten [%]</string>
   <string name="caches_removing_from_history">Verwijderen uit geschiedenis…</string>
   <string name="caches_clear_offlinelogs">Verwijderen offline logs</string>
   <string name="caches_clear_offlinelogs_progress">Offline logs worden verwijderd</string>
@@ -315,6 +319,7 @@
   <string name="list_dialog_remove_err">c:geo kon de huidige lijst niet verwijderen</string>
   <string name="list_dialog_rename_title">Hernoem lijst</string>
   <string name="list_dialog_rename">Hernoem</string>
+  <string name="list_not_available">Lijst is niet langer beschikbaar, wissel naar standaard lijst</string>
   <string name="about_version">Versie</string>
   <string name="about_changelog">Changelog</string>
   <string name="about_donate">Doneren</string>
@@ -332,6 +337,7 @@
   <string name="settings_title_map_data">Kaartgegevens</string>
   <string name="settings_title_map_content">Kaartinhoud</string>
   <string name="settings_title_gpx">GPX</string>
+  <string name="settings_title_basicmembers">Opties voor Basis leden</string>
   <string name="settings_title_navigation">Navigatie</string>
   <string name="settings_title_system">Systeem</string>
   <string name="settings_title_navigation_menu">Navigatiemenu</string>
@@ -373,6 +379,7 @@
   <string name="init_signature_template_user">Gebruiker</string>
   <string name="init_signature_template_number">Nummer</string>
   <string name="init_signature_template_owner">Eigenaar</string>
+  <string name="init_signature_template_log">Log tekst</string>
   <string name="init_ratingwanted">GCvote.com waardering</string>
   <string name="init_summary_ratingwanted">Laad cachewaardering van GCvote.com</string>
   <string name="init_friendlogswanted">Lange omschrijving</string>
@@ -462,9 +469,21 @@
   <string name="init_use_native_ua">Identificeer als Android browser</string>
   <string name="init_summary_use_native_ua">Identificeer als Android browser (lost loginproblemen bij sommige mobiele aanbieders op).</string>
   <string name="init_rendertheme_folder">Kaart thema\'s directorie</string>
+  <string name="init_maintenance">Onderhoud</string>
+  <string name="init_maintenance_directories_note">c:geo slaat diverse bestanden die bij een cache horen op in een afzonderlijke map. In sommige gevallen (zoals bij importeren/exporteren van de database) kan deze map verouderde bestanden bevatten. Deze kunnen hier verwijderd worden.</string>
   <string name="settings_open_website">Open website</string>
   <string name="settings_settings">Instellingen</string>
   <string name="settings_information">Informatie</string>
+  <string name="settings_twitter_cache_message">Bericht voor een gevonden cache</string>
+  <string name="settings_twitter_trackable_message">Bericht voor een gevonden trackable</string>
+  <string name="feature_description">De volgende <b>online</b> functies van deze website worden ondersteund in c:geo (naast de offline functies):</string>
+  <string name="feature_personal_notes">Persoonlijke aantekening</string>
+  <string name="feature_log_images">Voeg afbeeldingen toe aan de log</string>
+  <string name="feature_own_coordinates">Opslaan van aangepaste coördinaten</string>
+  <string name="feature_search_center">Zoek op locatie</string>
+  <string name="feature_search_geocode">Zoek op geocode</string>
+  <string name="feature_search_owner">Zoek op eigenaar</string>
+  <string name="feature_search_finder">Zoek op vinder</string>
   <string name="map_source_google_map">Google: Map</string>
   <string name="map_source_google_satellite">Google: Satellite</string>
   <string name="map_source_osm_mapnik">OSM: Mapnik</string>
@@ -511,6 +530,8 @@
   <string name="cache_log_image_default_title">Foto</string>
   <string name="cache_personal_note">Persoonlijke notitie</string>
   <string name="cache_personal_note_edit">Wijzig</string>
+  <string name="cache_personal_note_limit">Privé cachenotitie limiet</string>
+  <string name="cache_personal_note_truncation">Deze privé cachenotitie zal na %d karakters worden afgekapt door Geocaching.com.</string>
   <string name="cache_personal_note_upload">Uploaden</string>
   <string name="cache_personal_note_uploading">Uploading persoonlijke notitie</string>
   <string name="cache_personal_note_upload_done">Persoonlijke notitie geupload</string>
@@ -587,6 +608,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_cachebeacon">Cache baken</string>
   <string name="cache_menu_navigon">Navigon</string>
+  <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Log opgeslagen</string>
   <string name="cache_status_found">Gevonden</string>
@@ -632,6 +654,7 @@
   <string name="file_title_searching">Bezig met zoeken</string>
   <string name="simple_dir_chooser_title">Kies directory</string>
   <string name="simple_dir_chooser_current_path">Pad:</string>
+  <string name="simple_dir_chooser_invalid_path">Ongeldig pad</string>
   <string name="gpx_import_loading_caches">Caches laden van .gpx bestand</string>
   <string name="gpx_import_loading_waypoints">Waypoints laden van .gpx bestand</string>
   <string name="gpx_import_store_static_maps">Opslaan statische kaarten</string>
@@ -649,6 +672,7 @@
   <string name="gpx_import_delete_title">Verwijder bestand</string>
   <string name="gpx_import_delete_message">Weet je zeker dat je %s wil verwijderen?</string>
   <string name="gpx_import_select_list_title">Importeer GPX naar lijst</string>
+  <string name="gpx_import_android">Importeer van Android</string>
   <string name="map_file_select_title">Selecteer mapbestand</string>
   <string name="web_import_title">Importeer van web</string>
   <string name="web_import_waiting">Aan het wachten voor nieuwe caches van het web…</string>
@@ -744,6 +768,8 @@
   <string name="search_address_started">Zoeken naar plaatsen</string>
   <string name="search_address_result">Gevonden plaatsen</string>
   <string name="search_own_caches">Zoek mijn eigen caches</string>
+  <string name="search_pocket_title">Pocket Query</string>
+  <string name="search_pocket_select">Kies Pocket Query</string>
   <string name="trackable">Trackable</string>
   <string name="trackable_details_loading">Bezig met laden van trackable details…</string>
   <string name="trackable_log_touch">Log aanraking</string>
@@ -776,6 +802,7 @@
   <string name="user_menu_view_found">Caches gevonden</string>
   <string name="user_menu_open_browser">Open profiel in browser</string>
   <string name="user_menu_send_message">Verstuur bericht</string>
+  <string name="user_menu_open_contact">Open contactkaart</string>
   <string name="navigation">Navigatie</string>
   <string name="compass_title">Kompas</string>
   <string name="use_gps">Gebruik alleen GPS</string>
@@ -1009,6 +1036,8 @@
   <string name="attribute_unknown_no">Geen onbekend attribuut aanwezig</string>
   <string name="attribute_geotour_yes">Onderdeel van GeoTour</string>
   <string name="attribute_geotour_no">Geen onderdeel van GeoTour</string>
+  <string name="attribute_audio_cache_yes">Beschrijving bevat een audio bestand</string>
+  <string name="attribute_audio_cache_no">Geen audiobestand in de beschrijving</string>
   <string name="quote">Om geocahing makkelijker te maken en gebruikers luier te maken.</string>
   <string name="powered_by">carnero</string>
   <string name="support">Support: <a href="">support@cgeo.org</a></string>
