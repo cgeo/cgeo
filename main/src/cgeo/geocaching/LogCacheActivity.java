@@ -65,7 +65,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private LayoutInflater inflater = null;
     private Geocache cache = null;
-    private String cacheid = null;
     private String geocode = null;
     private String text = null;
     private List<LogType> possibleLogTypes = new ArrayList<LogType>();
@@ -231,15 +230,13 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         // Get parameters from intent and basic cache information from database
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            cacheid = extras.getString(EXTRAS_ID);
             geocode = extras.getString(EXTRAS_GEOCODE);
-        }
-
-        if ((StringUtils.isBlank(cacheid)) && StringUtils.isNotBlank(geocode)) {
-            cacheid = DataStore.getCacheidForGeocode(geocode);
-        }
-        if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(cacheid)) {
-            geocode = DataStore.getGeocodeForGuid(cacheid);
+            if (StringUtils.isBlank(geocode)) {
+                final String cacheid = extras.getString(EXTRAS_ID);
+                if (StringUtils.isNotBlank(cacheid)) {
+                    geocode = DataStore.getGeocodeForGuid(cacheid);
+                }
+            }
         }
 
         cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
