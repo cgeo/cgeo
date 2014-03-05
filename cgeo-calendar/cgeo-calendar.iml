@@ -3,7 +3,6 @@
   <component name="FacetManager">
     <facet type="android" name="Android">
       <configuration>
-        <option name="RUN_PROGUARD" value="true" />
         <proGuardCfgFiles>
           <file>file://$MODULE_DIR$/proguard-project.txt</file>
         </proGuardCfgFiles>
