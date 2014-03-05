@@ -24,6 +24,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import rx.functions.Func1;
 
 import android.app.SearchManager;
 import android.content.ContentValues;
@@ -50,6 +51,7 @@ import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -69,6 +71,13 @@ public class DataStore {
         CACHE,
         DATABASE,
     }
+
+    private static final Func1<Cursor,String> GET_STRING_0 = new Func1<Cursor, String>() {
+        @Override
+        public String call(final Cursor cursor) {
+            return cursor.getString(0);
+        }
+    };
 
     // Columns and indices for the cache data
     private static final String QUERY_CACHE_DATA =
@@ -1743,27 +1752,16 @@ public class DataStore {
             return null;
         }
 
-        init();
-
-        final ArrayList<String> attributes = new ArrayList<String>();
-
-        final Cursor cursor = database.query(
-                dbTableAttributes,
+        return queryToColl(dbTableAttributes,
                 new String[]{"attribute"},
                 "geocode = ?",
                 new String[]{geocode},
                 null,
                 null,
                 null,
-                "100");
-
-        while (cursor.moveToNext()) {
-            attributes.add(cursor.getString(0));
-        }
-
-        cursor.close();
-
-        return attributes;
+                "100",
+                new LinkedList<String>(),
+                GET_STRING_0);
     }
 
     public static Waypoint loadWaypoint(int id) {
@@ -1797,27 +1795,21 @@ public class DataStore {
             return null;
         }
 
-        init();
-
-        final List<Waypoint> waypoints = new ArrayList<Waypoint>();
-
-        final Cursor cursor = database.query(
-                dbTableWaypoints,
+        return queryToColl(dbTableWaypoints,
                 WAYPOINT_COLUMNS,
                 "geocode = ?",
                 new String[]{geocode},
                 null,
                 null,
                 "_id",
-                "100");
-
-        while (cursor.moveToNext()) {
-            waypoints.add(createWaypointFromDatabaseContent(cursor));
-        }
-
-        cursor.close();
-
-        return waypoints;
+                "100",
+                new LinkedList<Waypoint>(),
+                new Func1<Cursor, Waypoint>() {
+                    @Override
+                    public Waypoint call(final Cursor cursor) {
+                        return createWaypointFromDatabaseContent(cursor);
+                    }
+                });
     }
 
     private static Waypoint createWaypointFromDatabaseContent(final Cursor cursor) {
@@ -1842,27 +1834,21 @@ public class DataStore {
             return null;
         }
 
-        init();
-
-        final List<Image> spoilers = new ArrayList<Image>();
-
-        final Cursor cursor = database.query(
-                dbTableSpoilers,
+        return queryToColl(dbTableSpoilers,
                 new String[]{"url", "title", "description"},
                 "geocode = ?",
                 new String[]{geocode},
                 null,
                 null,
                 null,
-                "100");
-
-        while (cursor.moveToNext()) {
-            spoilers.add(new Image(cursor.getString(0), cursor.getString(1), cursor.getString(2)));
-        }
-
-        cursor.close();
-
-        return spoilers;
+                "100",
+                new LinkedList<Image>(),
+                new Func1<Cursor, Image>() {
+                    @Override
+                    public Image call(final Cursor cursor) {
+                        return new Image(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+                    }
+                });
     }
 
     /**
@@ -1872,31 +1858,21 @@ public class DataStore {
      * @return A list of previously entered destinations or an empty list.
      */
     public static List<Destination> loadHistoryOfSearchedLocations() {
-        init();
-
-        final Cursor cursor = database.query(dbTableSearchDestionationHistory,
+        return queryToColl(dbTableSearchDestionationHistory,
                 new String[]{"_id", "date", "latitude", "longitude"},
-                null,
+                "latitude IS NOT NULL AND longitude IS NOT NULL",
                 null,
                 null,
                 null,
                 "date desc",
-                "100");
-
-        final List<Destination> destinations = new LinkedList<Destination>();
-
-        while (cursor.moveToNext()) {
-            final Destination dest = new Destination(cursor.getLong(0), cursor.getLong(1), getCoords(cursor, 2, 3));
-
-            // If coordinates are non-existent or invalid, do not consider this point.
-            if (dest.getCoords() != null) {
-                destinations.add(dest);
-            }
-        }
-
-        cursor.close();
-
-        return destinations;
+                "100",
+                new LinkedList<Destination>(),
+                new Func1<Cursor, Destination>() {
+                    @Override
+                    public Destination call(final Cursor cursor) {
+                        return new Destination(cursor.getLong(0), cursor.getLong(1), getCoords(cursor, 2, 3));
+                    }
+                });
     }
 
     public static boolean clearSearchedDestinations() {
@@ -2122,6 +2098,32 @@ public class DataStore {
         return 0;
     }
 
+    private static<T, U extends Collection<? super T>> U queryToColl(@NonNull final String table,
+                                                                     final String[] columns,
+                                                                     final String selection,
+                                                                     final String[] selectionArgs,
+                                                                     final String groupBy,
+                                                                     final String having,
+                                                                     final String orderBy,
+                                                                     final String limit,
+                                                                     final U result,
+                                                                     final Func1<? super Cursor, ? extends T> func) {
+        init();
+        final Cursor cursor = database.query(table, columns, selection, selectionArgs, groupBy, having, orderBy, limit);
+        return cursorToColl(cursor, result, func);
+    }
+
+    private static <T, U extends Collection<? super T>> U cursorToColl(final Cursor cursor, final U result, final Func1<? super Cursor, ? extends T> func) {
+        try {
+            while (cursor.moveToNext()) {
+                result.add(func.call(cursor));
+            }
+            return result;
+        } finally {
+            cursor.close();
+        }
+    }
+
     /**
      * Return a batch of stored geocodes.
      *
@@ -2135,10 +2137,6 @@ public class DataStore {
         if (cacheType == null) {
             throw new IllegalArgumentException("cacheType must not be null");
         }
-        init();
-
-        final Set<String> geocodes = new HashSet<String>();
-
         final StringBuilder selection = new StringBuilder();
 
         selection.append("reason ");
@@ -2152,10 +2150,8 @@ public class DataStore {
         }
 
         try {
-            Cursor cursor;
             if (coords != null) {
-                cursor = database.query(
-                        dbTableCaches,
+                return queryToColl(dbTableCaches,
                         new String[]{"geocode", "(abs(latitude-" + String.format((Locale) null, "%.6f", coords.getLatitude()) +
                                 ") + abs(longitude-" + String.format((Locale) null, "%.6f", coords.getLongitude()) + ")) as dif"},
                         selection.toString(),
@@ -2163,35 +2159,28 @@ public class DataStore {
                         null,
                         null,
                         "dif",
-                        null);
+                        null,
+                        new HashSet<String>(),
+                        GET_STRING_0);
             } else {
-                cursor = database.query(
-                        dbTableCaches,
+                return queryToColl(dbTableCaches,
                         new String[]{"geocode"},
                         selection.toString(),
                         selectionArgs,
                         null,
                         null,
-                        "geocode");
+                        "geocode",
+                        null,
+                        new HashSet<String>(),
+                        GET_STRING_0);
             }
-
-            while (cursor.moveToNext()) {
-                geocodes.add(cursor.getString(0));
-            }
-
-            cursor.close();
         } catch (final Exception e) {
             Log.e("DataStore.loadBatchOfStoredGeocodes", e);
+            return Collections.EMPTY_SET;
         }
-
-        return geocodes;
     }
 
     private static Set<String> loadBatchOfHistoricGeocodes(final boolean detailedOnly, final CacheType cacheType) {
-        init();
-
-        final Set<String> geocodes = new HashSet<String>();
-
         final StringBuilder selection = new StringBuilder("visiteddate > 0");
 
         if (detailedOnly) {
@@ -2204,24 +2193,21 @@ public class DataStore {
         }
 
         try {
-            final Cursor cursor = database.query(
-                    dbTableCaches,
+            return queryToColl(dbTableCaches,
                     new String[]{"geocode"},
                     selection.toString(),
                     selectionArgs,
                     null,
                     null,
                     "visiteddate",
-                    null);
-            while (cursor.moveToNext()) {
-                geocodes.add(cursor.getString(0));
-            }
-            cursor.close();
+                    null,
+                    new HashSet<String>(),
+                    GET_STRING_0);
         } catch (Exception e) {
             Log.e("DataStore.loadBatchOfHistoricGeocodes", e);
         }
 
-        return geocodes;
+        return Collections.EMPTY_SET;
     }
 
     /** Retrieve all stored caches from DB */
@@ -2247,8 +2233,6 @@ public class DataStore {
      * @return Set with geocodes
      */
     private static SearchResult loadInViewport(final boolean stored, final Viewport viewport, final CacheType cacheType) {
-        init();
-
         final Set<String> geocodes = new HashSet<String>();
 
         // if not stored only, get codes from CacheCache as well
@@ -2272,26 +2256,21 @@ public class DataStore {
         }
 
         try {
-            final Cursor cursor = database.query(
-                    dbTableCaches,
+            return new SearchResult(queryToColl(dbTableCaches,
                     new String[]{"geocode"},
                     selection.toString(),
                     selectionArgs,
                     null,
                     null,
                     null,
-                    "500");
-
-            while (cursor.moveToNext()) {
-                geocodes.add(cursor.getString(0));
-            }
-
-            cursor.close();
+                    "500",
+                    geocodes,
+                    GET_STRING_0));
         } catch (final Exception e) {
             Log.e("DataStore.loadInViewport", e);
         }
 
-        return new SearchResult(geocodes);
+        return new SearchResult();
     }
 
     /**
@@ -2308,39 +2287,32 @@ public class DataStore {
         Log.d("Database clean: started");
 
         try {
-            init();
-
-            Cursor cursor;
+            Set<String> geocodes = new HashSet<String>();
             if (more) {
-                cursor = database.query(
-                        dbTableCaches,
+                queryToColl(dbTableCaches,
                         new String[]{"geocode"},
                         "reason = 0",
                         null,
                         null,
                         null,
                         null,
-                        null);
+                        null,
+                        geocodes,
+                        GET_STRING_0);
             } else {
-                long timestamp = System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED;
-                String timestampString = Long.toString(timestamp);
-                cursor = database.query(
-                        dbTableCaches,
+                final long timestamp = System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED;
+                final String timestampString = Long.toString(timestamp);
+                queryToColl(dbTableCaches,
                         new String[]{"geocode"},
                         "reason = 0 and detailed < ? and detailedupdate < ? and visiteddate < ?",
                         new String[]{timestampString, timestampString, timestampString},
                         null,
                         null,
                         null,
-                        null);
+                        null,
+                        geocodes,
+                        GET_STRING_0);
             }
-
-            Set<String> geocodes = new HashSet<String>();
-            while (cursor.moveToNext()) {
-                geocodes.add(cursor.getString(0));
-            }
-
-            cursor.close();
 
             geocodes = exceptCachesWithOfflineLog(geocodes);
 
@@ -2579,16 +2551,13 @@ public class DataStore {
         lists.add(new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) PreparedStatements.getCountCachesOnStandardList().simpleQueryForLong()));
 
         try {
-            String query = "SELECT l._id as _id, l.title as title, COUNT(c._id) as count" +
+            final String query = "SELECT l._id as _id, l.title as title, COUNT(c._id) as count" +
                     " FROM " + dbTableLists + " l LEFT OUTER JOIN " + dbTableCaches + " c" +
                     " ON l._id + " + customListIdOffset + " = c.reason" +
                     " GROUP BY l._id" +
                     " ORDER BY l.title COLLATE NOCASE ASC";
 
-            final Cursor cursor = database.rawQuery(query, null);
-            ArrayList<StoredList> storedLists = getListsFromCursor(cursor);
-            lists.addAll(storedLists);
-            cursor.close();
+            lists.addAll(getListsFromCursor(database.rawQuery(query, null)));
         } catch (final Exception e) {
             Log.e("DataStore.readLists", e);
         }
@@ -2599,14 +2568,13 @@ public class DataStore {
         final int indexId = cursor.getColumnIndex("_id");
         final int indexTitle = cursor.getColumnIndex("title");
         final int indexCount = cursor.getColumnIndex("count");
-        final ArrayList<StoredList> result = new ArrayList<StoredList>();
-        while (cursor.moveToNext()) {
-            final int count = indexCount != -1 ? cursor.getInt(indexCount) : 0;
-            final StoredList list = new StoredList(cursor.getInt(indexId) + customListIdOffset, cursor.getString(indexTitle), count);
-            result.add(list);
-        }
-        cursor.close();
-        return result;
+        return cursorToColl(cursor, new ArrayList<StoredList>(), new Func1<Cursor, StoredList>() {
+            @Override
+            public StoredList call(final Cursor cursor) {
+                final int count = indexCount != -1 ? cursor.getInt(indexCount) : 0;
+                return new StoredList(cursor.getInt(indexId) + customListIdOffset, cursor.getString(indexTitle), count);
+            }
+        });
     }
 
     public static StoredList getList(int id) {
@@ -2858,22 +2826,17 @@ public class DataStore {
      * Creates the WHERE clause for matching multiple geocodes. This automatically converts all given codes to
      * UPPERCASE.
      */
-    private static StringBuilder whereGeocodeIn(Set<String> geocodes) {
-        final StringBuilder where = new StringBuilder();
-
-        if (geocodes != null && !geocodes.isEmpty()) {
-            StringBuilder all = new StringBuilder();
-            for (String geocode : geocodes) {
-                if (all.length() > 0) {
-                    all.append(',');
-                }
-                all.append(DatabaseUtils.sqlEscapeString(StringUtils.upperCase(geocode)));
+    private static StringBuilder whereGeocodeIn(final Collection<String> geocodes) {
+        final StringBuilder whereExpr = new StringBuilder("geocode in (");
+        final Iterator<String> iterator = geocodes.iterator();
+        while (true) {
+            whereExpr.append(DatabaseUtils.sqlEscapeString(StringUtils.upperCase(iterator.next())));
+            if (!iterator.hasNext()) {
+                break;
             }
-
-            where.append("geocode in (").append(all).append(')');
+            whereExpr.append(',');
         }
-
-        return where;
+        return whereExpr.append(')');
     }
 
     /**
@@ -2896,7 +2859,6 @@ public class DataStore {
         if (type != CacheType.ALL) {
             where.append(" and ").append(dbTableCaches).append(".type == '").append(type.id).append('\'');
         }
-        init();
 
         final StringBuilder query = new StringBuilder("SELECT ");
         for (int i = 0; i < WAYPOINT_COLUMNS.length; i++) {
@@ -2904,13 +2866,12 @@ public class DataStore {
         }
         query.append(" FROM ").append(dbTableWaypoints).append(", ").append(dbTableCaches).append(" WHERE ").append(dbTableWaypoints).append(".geocode == ").append(dbTableCaches).append(".geocode and ").append(where);
 
-        final Set<Waypoint> waypoints = new HashSet<Waypoint>();
-        final Cursor cursor = database.rawQuery(query.toString(), null);
-        while (cursor.moveToNext()) {
-            waypoints.add(createWaypointFromDatabaseContent(cursor));
-        }
-        cursor.close();
-        return waypoints;
+        return cursorToColl(database.rawQuery(query.toString(), null), new HashSet<Waypoint>(), new Func1<Cursor, Waypoint>() {
+            @Override
+            public Waypoint call(final Cursor cursor) {
+                return createWaypointFromDatabaseContent(cursor);
+            }
+        });
     }
 
     /**
@@ -2920,12 +2881,7 @@ public class DataStore {
      * @return the first column of each row
      */
     private static String[] getFirstColumn(final Cursor cursor) {
-        final String[] result = new String[cursor.getCount()];
-        for (int i = 0; cursor.moveToNext(); i++) {
-            result[i] = cursor.getString(0);
-        }
-        cursor.close();
-        return result;
+        return cursorToColl(cursor, new LinkedList<String>(), GET_STRING_0).toArray(new String[cursor.getCount()]);
     }
 
     public static void saveChangedCache(Geocache cache) {
