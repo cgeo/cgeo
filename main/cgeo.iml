@@ -3,6 +3,10 @@
   <component name="FacetManager">
     <facet type="android" name="Android">
       <configuration>
+        <option name="RUN_PROGUARD" value="true" />
+        <proGuardCfgFiles>
+          <file>file://$MODULE_DIR$/proguard-project.txt</file>
+        </proGuardCfgFiles>
         <includeAssetsFromLibraries>true</includeAssetsFromLibraries>
       </configuration>
     </facet>
@@ -26,7 +30,7 @@
         <jarDirectory url="file://$MODULE_DIR$/libs/src" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
-    <orderEntry type="jdk" jdkName="Android 4.4.2 Google APIs" jdkType="Android SDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" exported="" scope="PROVIDED">
       <library name="compile-libs">

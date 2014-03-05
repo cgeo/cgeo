@@ -34,7 +34,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="jdk" jdkName="Android 2.2 Google APIs" jdkType="Android SDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="module-library" scope="PROVIDED">
       <library>
         <CLASSES>
