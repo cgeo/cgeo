@@ -149,7 +149,7 @@ public class Tile {
         int zoom = (int) Math.floor(
                 Math.log(360.0 * numberOfTiles / (2.0 * Math.abs(left.getLongitude() - right.getLongitude())))
                         / Math.log(2)
-                );
+        );
 
         Tile tileLeft = new Tile(left, zoom);
         Tile tileRight = new Tile(right, zoom);
@@ -302,6 +302,8 @@ public class Tile {
     }
 
     public static class TileCache extends LeastRecentlyUsedSet<Tile> {
+
+        private static final long serialVersionUID = -1942301031192719547L;
 
         public TileCache() {
             super(64);
