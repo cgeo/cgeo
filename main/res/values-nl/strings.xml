@@ -66,7 +66,6 @@
   <string name="log_unarchived">Gedearchiveerd</string>
   <string name="log_needs_archived">Dient te worden gearchiveerd</string>
   <string name="log_discovered">Ontdekt</string>
-  <string name="log_reviewer">Recensent notitie</string>
   <string name="log_retractlisting">Plaatsing teruggetrokken</string>
   <string name="log_marked_missing">Als ontbrekend gemarkeerd</string>
   <string name="log_tb_nothing">Niets doen</string>
@@ -119,6 +118,7 @@
   <string name="log_image_scale">Schalen</string>
   <string name="log_password_title">Log wachtwoord:</string>
   <string name="log_hint_log_password">Voer Login Wachtwoord</string>
+  <string name="log_oc_team_comment">OC Team commentaar</string>
   <string name="translate_to_sys_lang">Vertaal naar %s</string>
   <string name="translate_to_english">Vertaal naar engels</string>
   <string name="translate_length_warning">Vertaling kan mislukken bij grote stukken tekst.</string>
@@ -347,7 +347,11 @@
   <string name="settings_category_logging_other">Andere opties voor log</string>
   <string name="settings_goto_url_button">meer…</string>
   <string name="settings_title_gc">Geocaching.com</string>
+  <string name="settings_title_ec">Extremcaching.com</string>
+  <string name="settings_title_ox">Opencaching.com (Garmin)</string>
   <string name="settings_activate_gc">Activeren</string>
+  <string name="settings_activate_ec">Activeren</string>
+  <string name="settings_activate_ox">Activeren</string>
   <string name="settings_gc_legal_note">Met het gebruik van de dienst van geocaching.com, accepteert u de gebruiksvoorwaarden van Groundspeak.</string>
   <string name="settings_info_facebook_login_title">Facebook Login</string>
   <string name="settings_info_facebook_login">U kunt c:geo login aanbrengen in geocaching.com met uw Facebook-account. Maar er is een eenvoudige alternatieve oplossing…</string>
@@ -371,7 +375,10 @@
   <string name="init_login_popup_failed">Inloggen mislukt.</string>
   <string name="init_login_popup_failed_reason">Inloggen mislukt omdat </string>
   <string name="init_login_popup_not_authorized">Niet geautoriseerd</string>
+  <string name="init_login_popup_invalid_timestamp">Lokale tijd ongeldig, pas apparaat tijd aan</string>
+  <string name="init_login_popup_invalid_token">Autorisatie ongeldig, opnieuw autoriseren</string>
   <string name="init_signature">Handtekening</string>
+  <string name="init_template_help">Samenvoeg velden zoals [NAME] worden later ingevuld bij gebruik van deze sjabloon.</string>
   <string name="init_signature_template_button">Voeg template toe</string>
   <string name="init_signature_template_date">Datum</string>
   <string name="init_signature_template_time">Tijd</string>
@@ -379,6 +386,8 @@
   <string name="init_signature_template_user">Gebruiker</string>
   <string name="init_signature_template_number">Nummer</string>
   <string name="init_signature_template_owner">Eigenaar</string>
+  <string name="init_signature_template_name">Naam</string>
+  <string name="init_signature_template_url">URL</string>
   <string name="init_signature_template_log">Log tekst</string>
   <string name="init_ratingwanted">GCvote.com waardering</string>
   <string name="init_summary_ratingwanted">Laad cachewaardering van GCvote.com</string>
@@ -431,15 +440,15 @@
   <string name="init_backup_last">Backup beschikbaar van</string>
   <string name="init_backup_last_no">Er is geen bestand met een backup.</string>
   <string name="settings_info_offline_maps_title">Info over offline kaarten</string>
-  <string name="settings_info_offline_maps">c:geo ondersteund kaarten voor offline gebruik. Je kunt deze kaarten downloaden van Mapsforge of zelfs je eigen kaarten maken vanuit openbare OSM data. Hiervoor moet je eerst de offline kaarten directorie voor selecteren om offline kaarten te kunnen gebruiken.</string>
+  <string name="settings_info_offline_maps">c:geo ondersteund kaarten voor offline gebruik. Je kunt deze kaarten downloaden van Mapsforge of zelfs je eigen kaarten maken vanuit openbare OSM data. Hiervoor moet je eerst de offline kaarten map selecteren om offline kaarten te kunnen gebruiken.</string>
   <string name="settings_info_themes_title">Info over kaart thema\'s</string>
   <string name="settings_info_themes">c:geo ondersteund aangepaste thema\'s voor offline kaarten. Deze kunnen worden gebruikt voor het aanpassen om kleurstijlen van de kaart (bijv. een nachtmodus) of het accentueren van bepaalde objecten zoals fietspaden of hoogtelijnen op de kaart.</string>
   <string name="init_mapsource_select">Selecteer kaartbron</string>
   <string name="settings_title_scale_map_text">Tekst op kaart schalen</string>
   <string name="settings_summary_scale_map_text">Tekst labels op offline kaart schalen n.a.v. DPI apparaat</string>
-  <string name="init_map_directory_description">Directory met offline kaarten</string>
-  <string name="init_gpx_exportdir">GPX Export Directory</string>
-  <string name="init_gpx_importdir">GPX Import Directory</string>
+  <string name="init_map_directory_description">Map met offline kaarten</string>
+  <string name="init_gpx_exportdir">GPX Export map</string>
+  <string name="init_gpx_importdir">GPX Import map</string>
   <string name="init_maptrail">Pad tonen</string>
   <string name="init_summary_maptrail">Laat pad op kaart zien</string>
   <string name="init_share_after_export">Open deel-menu na GPX export</string>
@@ -468,18 +477,27 @@
   <string name="init_summary_plain_logs">Laat logs zien zonder kleuren.</string>
   <string name="init_use_native_ua">Identificeer als Android browser</string>
   <string name="init_summary_use_native_ua">Identificeer als Android browser (lost loginproblemen bij sommige mobiele aanbieders op).</string>
-  <string name="init_rendertheme_folder">Kaart thema\'s directorie</string>
+  <string name="init_rendertheme_folder">Kaart thema\'s map</string>
   <string name="init_maintenance">Onderhoud</string>
   <string name="init_maintenance_directories_note">c:geo slaat diverse bestanden die bij een cache horen op in een afzonderlijke map. In sommige gevallen (zoals bij importeren/exporteren van de database) kan deze map verouderde bestanden bevatten. Deze kunnen hier verwijderd worden.</string>
+  <string name="init_maintenance_directories">Verweesde bestanden verwijderen</string>
   <string name="settings_open_website">Open website</string>
   <string name="settings_settings">Instellingen</string>
   <string name="settings_information">Informatie</string>
   <string name="settings_twitter_cache_message">Bericht voor een gevonden cache</string>
   <string name="settings_twitter_trackable_message">Bericht voor een gevonden trackable</string>
+  <string name="init_ec_icons">Kaartpictogrammen</string>
+  <string name="settings_ec_icons_other">Eigen stijl</string>
+  <string name="settings_ec_icons_oc">Zoals OC</string>
+  <string name="settings_features">Ondersteunde functies</string>
   <string name="feature_description">De volgende <b>online</b> functies van deze website worden ondersteund in c:geo (naast de offline functies):</string>
   <string name="feature_personal_notes">Persoonlijke aantekening</string>
+  <string name="feature_online_logging">Online loggen</string>
   <string name="feature_log_images">Voeg afbeeldingen toe aan de log</string>
+  <string name="feature_watch_list">Watchlist</string>
   <string name="feature_own_coordinates">Opslaan van aangepaste coördinaten</string>
+  <string name="feature_search_keyword">Zoeken op zoekterm</string>
+  <string name="feature_search_live_map">Live kaart</string>
   <string name="feature_search_center">Zoek op locatie</string>
   <string name="feature_search_geocode">Zoek op geocode</string>
   <string name="feature_search_owner">Zoek op eigenaar</string>
@@ -490,7 +508,7 @@
   <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
   <string name="map_source_osm_offline">Offline</string>
   <string name="init_sendToCgeo">Verstuur naar c:geo</string>
-  <string name="settings_info_send2cgeo_title">Informatie over send2cgeo</string>
+  <string name="settings_info_send2cgeo_title">Informatie over send2c:geo</string>
   <string name="init_sendToCgeo_name">Jouw apparaatnaam</string>
   <string name="init_sendToCgeo_description"><b>Send2c:geo</b> zorgt ervoor dat je caches direct vanaf de geocaching website kan ontvangen door middel van een plugin in je webbrowser (Chrome of Firefox). Lees het volgende voordat je registreert <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registratie is alleen nodig als je send2cgeo wil gebruiken. c:geo werkt ook zonder het registreren van je apparaat.</string>
   <string name="init_sendToCgeo_register">Verstuur registratieverzoek</string>
@@ -652,7 +670,7 @@
   <string name="file_list_no_files">Sorry, c:geo heeft geen bestanden gevonden.</string>
   <string name="file_searching">Zoeken naar overeenkomende bestanden</string>
   <string name="file_title_searching">Bezig met zoeken</string>
-  <string name="simple_dir_chooser_title">Kies directory</string>
+  <string name="simple_dir_chooser_title">Kies map</string>
   <string name="simple_dir_chooser_current_path">Pad:</string>
   <string name="simple_dir_chooser_invalid_path">Ongeldig pad</string>
   <string name="gpx_import_loading_caches">Caches laden van .gpx bestand</string>
@@ -769,6 +787,7 @@
   <string name="search_address_result">Gevonden plaatsen</string>
   <string name="search_own_caches">Zoek mijn eigen caches</string>
   <string name="search_pocket_title">Pocket Query</string>
+  <string name="search_pocket_loading">Een lijst van Pocket Queries laden</string>
   <string name="search_pocket_select">Kies Pocket Query</string>
   <string name="trackable">Trackable</string>
   <string name="trackable_details_loading">Bezig met laden van trackable details…</string>
@@ -818,7 +837,10 @@
   <string name="helper_calendar_title">c:geo kalender add-on</string>
   <string name="helper_calendar_missing">c:geo kalender add-on niet geïnstalleerd.</string>
   <string name="helper_calendar_description">Maakt het mogelijk om Geocaching events in je kalender op te slaan.</string>
+  <string name="helper_sendtocgeo_title">Verzend naar c:geo</string>
   <string name="helper_contacts_title">c:geo contacten-plug-in</string>
+  <string name="helper_contacts_description">Maakt het mogelijk een contactpersoon (uit je adresboek) te openen rechtstreeks vanuit een log, zodat je vrienden makkelijker om hulp kunt vragen.</string>
+  <string name="helper_sendtocgeo_description">Verzenden naar c:geo is een browserextensie <strong>voor uw PC</strong>. Tijdens het browsen op geocaching.com, kunt u caches verzenden naar uw smartphone met een klik direct in de browser.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Simpele bruikbare applicatie om online kaarten weer te geven en deze voor offline gebruik te downloaden (alleen rasterkarten). Ook ondersteuning voor track recording, poi afhandeling en vele andere handige functies.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
@@ -829,6 +851,8 @@
   <string name="helper_barcode_description">Er zijn Greasemonkey scripts en websites beschikbaar die een geocode als barcode weergeven. Met deze applicatie kan c:geo deze geocode direct van het computerscherm lezen.</string>
   <string name="helper_pocketquery_title">Pocket Query Creator</string>
   <string name="helper_pocketquery_description">Makkelijk Pocket Query\'s maken en downloaden gericht op uw huidige positie of een punt geselecteerd van een kaart. Vereist een Premium account van Geocaching.com.</string>
+  <string name="helper_google_translate_title">Google Translate</string>
+  <string name="helper_google_translate_description">Als je vertaal pakketten in de Google Translate app download, kan je eenvoudig een cache omschrijving vertalen in c:geo door een lange tik op deze omschrijvingstekst (zonder een internet verbinding).</string>
   <string name="addon_missing_title">Add-On ontbreekt</string>
   <string name="addon_download_prompt">Haal de add-on nu op van Google Play.</string>
   <string name="export">Export</string>
@@ -1036,8 +1060,38 @@
   <string name="attribute_unknown_no">Geen onbekend attribuut aanwezig</string>
   <string name="attribute_geotour_yes">Onderdeel van GeoTour</string>
   <string name="attribute_geotour_no">Geen onderdeel van GeoTour</string>
+  <string name="attribute_kids_2_yes">Neem je kinderen mee</string>
+  <string name="attribute_kids_2_no">Neem je kinderen niet mee</string>
+  <string name="attribute_historic_site_yes">Historische plaats</string>
+  <string name="attribute_historic_site_no">Geen historische plaats</string>
+  <string name="attribute_magnetic_yes">Magnetische cache</string>
+  <string name="attribute_magnetic_no">Geen magnetische cache</string>
+  <string name="attribute_usb_cache_yes">Dead drop USB cache</string>
+  <string name="attribute_usb_cache_no">Geen dead drop USB cache</string>
+  <string name="attribute_shovel_yes">Mogelijk een schep nodig</string>
+  <string name="attribute_shovel_no">Geen schep nodig</string>
+  <string name="attribute_specific_access_yes">Beschikbaar op aangegeven tijden (toegangsvergoeding mogelijk)</string>
+  <string name="attribute_specific_access_no">Altijd beschikbaar</string>
+  <string name="attribute_pedestrian_only_yes">Alleen te voet toegankelijk</string>
+  <string name="attribute_pedestrian_only_no">Niet alleen te voet toegankelijk</string>
+  <string name="attribute_nature_cache_yes">Verborgen in een natuurlijke omgeving (bossen, bergen, etc.)</string>
+  <string name="attribute_nature_cache_no">Niet verborgen in een natuurlijke omgeving</string>
+  <string name="attribute_byop_yes">Neem iets te schrijven mee</string>
+  <string name="attribute_byop_no">Eigen schrijfwaar niet nodig</string>
+  <string name="attribute_safari_cache_yes">Reverse cache</string>
+  <string name="attribute_safari_cache_no">Geen reverse cache</string>
+  <string name="attribute_quick_cache_yes">Oppikker</string>
+  <string name="attribute_quick_cache_no">Geen oppikker</string>
+  <string name="attribute_wherigo_yes">Wherigo cache</string>
+  <string name="attribute_wherigo_no">Geen Wherigo cache</string>
   <string name="attribute_audio_cache_yes">Beschrijving bevat een audio bestand</string>
   <string name="attribute_audio_cache_no">Geen audiobestand in de beschrijving</string>
+  <string name="attribute_geohotel_yes">GeoHotel cache</string>
+  <string name="attribute_geohotel_no">Geen GeoHotel cache</string>
+  <string name="attribute_survey_marker_yes">Nabij een Survey Marker</string>
+  <string name="attribute_survey_marker_no">Niet nabij een Survey Marker</string>
+  <string name="attribute_offset_cache_yes">Offset cache</string>
+  <string name="attribute_offset_cache_no">Geen offset cache</string>
   <string name="quote">Om geocahing makkelijker te maken en gebruikers luier te maken.</string>
   <string name="powered_by">carnero</string>
   <string name="support">Support: <a href="">support@cgeo.org</a></string>
@@ -1065,6 +1119,9 @@
   <string name="tts_one_oclock">één uur</string>
   <string name="tts_oclock">%s uur</string>
   <string name="clipboard_copy_ok">Gekopieerd naar klembord</string>
+  <string name="percent_favorite_points">%\ favorieten</string>
+  <string name="cgeo_shortcut">c:geo snelkoppeling</string>
+  <string name="create_shortcut">Maak snelkoppeling</string>
   <string-array name="log_image_scales">
     <item>Niet schalen</item>
     <item>512 px</item>
@@ -1103,5 +1160,9 @@
   <plurals name="days_ago">
     <item quantity="one">Gisteren</item>
     <item quantity="other">%d dagen geleden</item>
+  </plurals>
+  <plurals name="favorite_points">
+    <item quantity="one">%s favoriet</item>
+    <item quantity="other">%s favorieten</item>
   </plurals>
 </resources>

@@ -66,7 +66,6 @@
   <string name="log_unarchived">Aus dem Archiv geholt</string>
   <string name="log_needs_archived">Sollte archiviert werden</string>
   <string name="log_discovered">Gesehen</string>
-  <string name="log_reviewer">Review-Notiz</string>
   <string name="log_retractlisting">Listing zurückgezogen</string>
   <string name="log_marked_missing">Als verloren gemeldet</string>
   <string name="log_tb_nothing">Keine Aktion</string>
@@ -509,7 +508,7 @@
   <string name="map_source_osm_cyclemap">OSM: Radfahrerkarte</string>
   <string name="map_source_osm_offline">Offline</string>
   <string name="init_sendToCgeo">Send to c:geo</string>
-  <string name="settings_info_send2cgeo_title">Info zu send2cgeo</string>
+  <string name="settings_info_send2cgeo_title">Info zu send2:cgeo</string>
   <string name="init_sendToCgeo_name">Name des Endgerätes</string>
   <string name="init_sendToCgeo_description">Send to c:geo erlaubt es, mit einem speziellen Plugin für Firefox oder Chrome, Caches direkt von der Geocachingseite zu empfangen. Bitte dazu die Details vor einer Registrierung auf <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a> durchlesen.</string>
   <string name="init_sendToCgeo_register">Registrierung anfordern</string>

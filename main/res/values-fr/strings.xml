@@ -66,7 +66,6 @@
   <string name="log_unarchived">Désarchivée</string>
   <string name="log_needs_archived">Nécessite d\'être archivée</string>
   <string name="log_discovered">Découverte</string>
-  <string name="log_reviewer">Note du relecteur</string>
   <string name="log_retractlisting">Retirer l\'entrée</string>
   <string name="log_marked_missing">Marquer comme absente</string>
   <string name="log_tb_nothing">Ne fait rien</string>

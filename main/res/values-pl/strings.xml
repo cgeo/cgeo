@@ -66,7 +66,6 @@
   <string name="log_unarchived">Nie jest zarchiwizowana</string>
   <string name="log_needs_archived">Powinna zostać zarchiwizowana</string>
   <string name="log_discovered">Odkryta</string>
-  <string name="log_reviewer">Sprawdzona</string>
   <string name="log_retractlisting">Wycofaj listing</string>
   <string name="log_marked_missing">Oznacz jako zaginiona</string>
   <string name="log_tb_nothing">Nie rób nic</string>
