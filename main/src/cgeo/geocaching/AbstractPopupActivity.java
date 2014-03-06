@@ -10,7 +10,9 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.ui.CompassMiniView;
 import cgeo.geocaching.ui.LoggingUI;
+import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 
@@ -26,6 +28,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public abstract class AbstractPopupActivity extends AbstractActivity implements CacheMenuHandler.ActivityInterface {
@@ -35,9 +38,12 @@ public abstract class AbstractPopupActivity extends AbstractActivity implements 
     protected CacheDetailsCreator details;
 
     private TextView cacheDistance = null;
+    private CompassMiniView directionView;
     private final int layout;
 
     private final GeoDirHandler geoUpdate = new GeoDirHandler() {
+
+        private float azimuth = 0;
 
         @Override
         public void updateGeoData(final IGeoData geo) {
@@ -45,11 +51,44 @@ public abstract class AbstractPopupActivity extends AbstractActivity implements 
                 if (geo.getCoords() != null && cache != null && cache.getCoords() != null) {
                     cacheDistance.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(cache.getCoords())));
                     cacheDistance.bringToFront();
+
+                    if (directionView != null){
+                        updateCompass(geo);
+                    }
                 }
                 onUpdateGeoData(geo);
             } catch (final RuntimeException e) {
                 Log.w("Failed to UpdateLocation location.");
             }
+        }
+
+        private void updateCompass(IGeoData geo) {
+            directionView.updateCurrentCoords(geo.getCoords());
+            if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
+                setActualHeading(geo.getBearing());
+            }
+        }
+
+
+        @Override
+        public void updateDirection(float direction) {
+            if (!Settings.isLiveList() || directionView == null){
+                return;
+            }
+
+            if (app.currentGeo().getSpeed() <= 5) { // use compass when speed is lower than 18 km/h) {
+                final float northHeading = DirectionProvider.getDirectionNow(AbstractPopupActivity.this, direction);
+                setActualHeading(northHeading);
+            }
+        }
+
+        private void setActualHeading(final float direction) {
+            if (Math.abs(AngleUtils.difference(azimuth, direction)) < 5) {
+                return;
+            }
+
+            azimuth = direction;
+            directionView.updateAzimuth(azimuth);
         }
     };
 
@@ -159,7 +198,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity implements 
 
     @Override
     public void onPause() {
-        geoUpdate.stopGeo();
+        geoUpdate.stopGeoAndDir();
         super.onPause();
     }
 
@@ -184,6 +223,9 @@ public abstract class AbstractPopupActivity extends AbstractActivity implements 
         super.onResume();
         init();
         geoUpdate.startGeo();
+        if (Settings.isLiveMap()) {
+            geoUpdate.startDir();
+        }
     }
 
     @Override
@@ -213,6 +255,10 @@ public abstract class AbstractPopupActivity extends AbstractActivity implements 
 
         details.addDistance(cache, cacheDistance);
         cacheDistance = details.getValueView();
+
+        if (Settings.isLiveList()) {
+            directionView = details.addDirection(cache, (RelativeLayout) cacheDistance.getParent());
+        }
 
         details.addDifficulty(cache);
         details.addTerrain(cache);
