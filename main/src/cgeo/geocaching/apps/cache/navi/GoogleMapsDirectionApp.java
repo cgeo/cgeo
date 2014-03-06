@@ -1,7 +1,7 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.IGeoData;
+import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.MapProviderFactory;

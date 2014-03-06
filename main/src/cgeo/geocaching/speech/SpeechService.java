@@ -5,8 +5,9 @@ import cgeo.geocaching.DirectionProvider;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.GeoDirHandler;
+import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -56,7 +57,7 @@ public class SpeechService extends Service implements OnInitListener {
         }
 
         @Override
-        public void updateGeoData(cgeo.geocaching.IGeoData newGeo) {
+        public void updateGeoData(IGeoData newGeo) {
             position = newGeo.getCoords();
             positionInitialized = true;
             if (!Settings.isUseCompass() || newGeo.getSpeed() > 5) {

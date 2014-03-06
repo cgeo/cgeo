@@ -1,14 +1,13 @@
-package cgeo.geocaching.utils;
+package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.settings.Settings;
 
 import rx.Scheduler;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 import java.util.concurrent.TimeUnit;
 

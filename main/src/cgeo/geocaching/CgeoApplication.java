@@ -1,5 +1,8 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.sensors.DirectionProvider;
+import cgeo.geocaching.sensors.GeoDataProvider;
+import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
 

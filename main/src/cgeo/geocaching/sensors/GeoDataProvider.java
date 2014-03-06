@@ -1,7 +1,5 @@
-package cgeo.geocaching;
+package cgeo.geocaching.sensors;
 
-import cgeo.geocaching.enumerations.LocationProviderType;
-import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -9,10 +7,10 @@ import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
 import rx.Subscription;
+import rx.functions.Action0;
 import rx.observables.ConnectableObservable;
 import rx.subjects.BehaviorSubject;
 import rx.subscriptions.Subscriptions;
-import rx.functions.Action0;
 
 import android.content.Context;
 import android.location.GpsSatellite;
@@ -22,7 +20,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
-class GeoDataProvider implements OnSubscribe<IGeoData> {
+public class GeoDataProvider implements OnSubscribe<IGeoData> {
 
     private static final String LAST_LOCATION_PSEUDO_PROVIDER = "last";
     private final LocationManager geoManager;
@@ -49,64 +47,6 @@ class GeoDataProvider implements OnSubscribe<IGeoData> {
 
         public boolean isValid() {
             return location != null;
-        }
-    }
-
-    private static class GeoData extends Location implements IGeoData {
-        public boolean gpsEnabled = false;
-        public int satellitesVisible = 0;
-        public int satellitesFixed = 0;
-
-        GeoData(final Location location, final boolean gpsEnabled, final int satellitesVisible, final int satellitesFixed) {
-            super(location);
-            this.gpsEnabled = gpsEnabled;
-            this.satellitesVisible = satellitesVisible;
-            this.satellitesFixed = satellitesFixed;
-        }
-
-        @Override
-        public Location getLocation() {
-            return this;
-        }
-
-        private static LocationProviderType getLocationProviderType(final String provider) {
-            if (provider.equals(LocationManager.GPS_PROVIDER)) {
-                return LocationProviderType.GPS;
-            }
-            if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
-                return LocationProviderType.NETWORK;
-            }
-            return LocationProviderType.LAST;
-        }
-
-        @Override
-        public LocationProviderType getLocationProvider() {
-            return getLocationProviderType(getProvider());
-        }
-
-        @Override
-        public Geopoint getCoords() {
-            return new Geopoint(this);
-        }
-
-        @Override
-        public boolean getGpsEnabled() {
-            return gpsEnabled;
-        }
-
-        @Override
-        public int getSatellitesVisible() {
-            return satellitesVisible;
-        }
-
-        @Override
-        public int getSatellitesFixed() {
-            return satellitesFixed;
-        }
-
-        @Override
-        public boolean isPseudoLocation() {
-            return StringUtils.equals(getProvider(), GeoDataProvider.LAST_LOCATION_PSEUDO_PROVIDER);
         }
     }
 
@@ -189,7 +129,7 @@ class GeoDataProvider implements OnSubscribe<IGeoData> {
         }
         // Start with an historical GeoData just in case someone queries it before we get
         // a chance to get any information.
-        return new GeoData(initialLocation, false, 0, 0);
+        return new GeoData(initialLocation, false, 0, 0, true);
     }
 
     private static void copyCoords(final Location target, final Location source) {
@@ -297,7 +237,8 @@ class GeoDataProvider implements OnSubscribe<IGeoData> {
 
         // We do not necessarily get signalled when satellites go to 0/0.
         final int visible = gpsLocation.isRecent() ? satellitesVisible : 0;
-        final IGeoData current = new GeoData(locationData.location, gpsEnabled, visible, satellitesFixed);
+        final boolean pseudoLocation = StringUtils.equals(locationData.location.getProvider(), LAST_LOCATION_PSEUDO_PROVIDER);
+        final IGeoData current = new GeoData(locationData.location, gpsEnabled, visible, satellitesFixed, pseudoLocation);
         subject.onNext(current);
     }
 

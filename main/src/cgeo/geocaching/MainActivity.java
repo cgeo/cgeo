@@ -13,12 +13,13 @@ import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.DatabaseBackupUtils;
-import cgeo.geocaching.utils.GeoDirHandler;
+import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
 
