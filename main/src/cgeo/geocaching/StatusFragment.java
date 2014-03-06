@@ -81,9 +81,9 @@ public class StatusFragment extends Fragment {
     }
 
     @Override
-    public void onDestroy() {
+    public void onDestroyView() {
         statusSubscription.unsubscribe();
-        super.onDestroy();
+        super.onDestroyView();
     }
 
 }
