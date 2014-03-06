@@ -345,7 +345,7 @@
   <string name="settings_category_geocaching">Geocaching</string>
   <string name="settings_category_social">Sociálne médiá</string>
   <string name="settings_category_logging_other">Ďalšie možnosti logovania</string>
-  <string name="settings_goto_url_button">viac...</string>
+  <string name="settings_goto_url_button">viac…</string>
   <string name="settings_title_gc">Geocaching.com</string>
   <string name="settings_title_ec">Extremcaching.com</string>
   <string name="settings_title_ox">Opencaching.com (Garmin)</string>
@@ -596,9 +596,9 @@
   <string name="cache_dialog_watchlist_remove_title">Zoznam sledovaných</string>
   <string name="cache_dialog_watchlist_remove_message">Odstraňovanie skrýše zo zoznamu sledovaných…</string>
   <string name="cache_dialog_favorite_add_title">Obľúbené</string>
-  <string name="cache_dialog_favorite_add_message">Cache pridaná do obľúbených...</string>
+  <string name="cache_dialog_favorite_add_message">Cache pridaná do obľúbených…</string>
   <string name="cache_dialog_favorite_remove_title">Obľúbené</string>
-  <string name="cache_dialog_favorite_remove_message">Odstránenie cache z obľúbených...</string>
+  <string name="cache_dialog_favorite_remove_message">Odstránenie cache z obľúbených…</string>
   <string name="cache_menu_navigate">Navigovať</string>
   <string name="cache_menu_navigation_drive">Navigácia (auto)</string>
   <string name="cache_menu_navigation_walk">Navigácia (pešo)</string>
@@ -717,11 +717,11 @@
   <string name="waypoint_save_and_modify_on_website">Nastaviť ako súradnice cache v c:geo a na webových stránkach</string>
   <string name="waypoint_reset_cache_coords">Reštartovať súradnice cache</string>
   <string name="waypoint_coordinates_has_been_reset_on_website">Súradnice cache boli obnovené na webových stránkach.</string>
-  <string name="waypoint_coordinates_being_reset_on_website">Obnovujem súradnice cache na webových stránkach...</string>
+  <string name="waypoint_coordinates_being_reset_on_website">Obnovujem súradnice cache na webových stránkach…</string>
   <string name="waypoint_reset">Obnoviť</string>
   <string name="waypoint_localy_reset_cache_coords">Reset v c:geo</string>
   <string name="waypoint_reset_local_and_remote_cache_coords">Reset v c:geo a na webových stránkach</string>
-  <string name="waypoint_being_saved">Trasový bod je uložený...</string>
+  <string name="waypoint_being_saved">Trasový bod je uložený…</string>
   <string name="waypoint_coordinates_couldnt_be_modified_on_website">Web nepodporuje úpravu súradníc cache.</string>
   <string name="waypoint_coordinates_upload_error">Pri úprave súradníc na webových stránkach sa vyskytla chyba.</string>
   <string name="waypoint_coordinates_uploading_to_website">Nahrávanie súradníc %s na webových stránkach.</string>
