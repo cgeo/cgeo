@@ -43,7 +43,7 @@ public class Tile {
         }
     }
 
-    public static TileCache cache = new TileCache();
+    public final static TileCache cache = new TileCache();
 
     private final int tileX;
     private final int tileY;
