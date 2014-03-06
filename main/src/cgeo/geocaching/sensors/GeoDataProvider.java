@@ -5,11 +5,15 @@ import cgeo.geocaching.utils.Log;
 import org.apache.commons.lang3.StringUtils;
 import rx.Observable;
 import rx.Observable.OnSubscribe;
+import rx.Scheduler.Inner;
 import rx.Subscriber;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
+import rx.functions.Action1;
 import rx.observables.ConnectableObservable;
 import rx.subjects.BehaviorSubject;
+import rx.subscriptions.CompositeSubscription;
 import rx.subscriptions.Subscriptions;
 
 import android.content.Context;
@@ -19,6 +23,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+
+import java.util.concurrent.TimeUnit;
 
 public class GeoDataProvider implements OnSubscribe<IGeoData> {
 
@@ -76,28 +82,40 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
     final ConnectableObservable<IGeoData> worker = new ConnectableObservable<IGeoData>(this) {
         @Override
         public Subscription connect() {
-            final GpsStatus.Listener gpsStatusListener = new GpsStatusListener();
-            geoManager.addGpsStatusListener(gpsStatusListener);
-
-            final Listener networkListener = new Listener(LocationManager.NETWORK_PROVIDER, netLocation);
-            final Listener gpsListener = new Listener(LocationManager.GPS_PROVIDER, gpsLocation);
-
-            for (final Listener listener : new Listener[] { networkListener, gpsListener }) {
-                try {
-                    geoManager.requestLocationUpdates(listener.locationProvider, 0, 0, listener);
-                } catch (final Exception e) {
-                    Log.w("There is no location provider " + listener.locationProvider);
-                }
-            }
-
-            return Subscriptions.create(new Action0() {
+            final CompositeSubscription subscription = new CompositeSubscription();
+            AndroidSchedulers.mainThread().schedule(new Action1<Inner>() {
                 @Override
-                public void call() {
-                    geoManager.removeUpdates(networkListener);
-                    geoManager.removeUpdates(gpsListener);
-                    geoManager.removeGpsStatusListener(gpsStatusListener);
+                public void call(final Inner inner) {
+                    final GpsStatus.Listener gpsStatusListener = new GpsStatusListener();
+                    geoManager.addGpsStatusListener(gpsStatusListener);
+
+                    final Listener networkListener = new Listener(LocationManager.NETWORK_PROVIDER, netLocation);
+                    final Listener gpsListener = new Listener(LocationManager.GPS_PROVIDER, gpsLocation);
+
+                    for (final Listener listener : new Listener[] { networkListener, gpsListener }) {
+                        try {
+                            geoManager.requestLocationUpdates(listener.locationProvider, 0, 0, listener);
+                        } catch (final Exception e) {
+                            Log.w("There is no location provider " + listener.locationProvider);
+                        }
+                    }
+
+                    subscription.add(Subscriptions.create(new Action0() {
+                        @Override
+                        public void call() {
+                            AndroidSchedulers.mainThread().schedule(new Action1<Inner>() {
+                                @Override
+                                public void call(final Inner inner) {
+                                    geoManager.removeUpdates(networkListener);
+                                    geoManager.removeUpdates(gpsListener);
+                                    geoManager.removeGpsStatusListener(gpsStatusListener);
+                                }
+                            }, 2500, TimeUnit.MILLISECONDS);
+                        }
+                    }));
                 }
             });
+            return subscription;
         }
     };
 

@@ -143,7 +143,7 @@ public class MainActivity extends AbstractActivity {
         private int satellitesVisible = 0;
 
         @Override
-        public void updateGeoData(final IGeoData data) {
+        public void updateGeoDir(final IGeoData data, final float dir) {
             if (data.getGpsEnabled() == gpsEnabled &&
                     data.getSatellitesFixed() == satellitesFixed &&
                     data.getSatellitesVisible() == satellitesVisible) {
@@ -215,8 +215,8 @@ public class MainActivity extends AbstractActivity {
     @Override
     public void onResume() {
         super.onResume();
-        locationUpdater.startGeo();
-        satellitesHandler.startGeo();
+        locationUpdater.start();
+        satellitesHandler.start();
         updateUserInfoHandler.sendEmptyMessage(-1);
         startBackgroundLogin();
         init();
@@ -257,8 +257,8 @@ public class MainActivity extends AbstractActivity {
     @Override
     public void onPause() {
         initialized = false;
-        locationUpdater.stopGeo();
-        satellitesHandler.stopGeo();
+        locationUpdater.stop();
+        satellitesHandler.stop();
         super.onPause();
     }
 
@@ -511,7 +511,7 @@ public class MainActivity extends AbstractActivity {
     private class UpdateLocation extends GeoDirHandler {
 
         @Override
-        public void updateGeoData(final IGeoData geo) {
+        public void updateGeoDir(final IGeoData geo, final float dir) {
             if (!nearestView.isClickable()) {
                 nearestView.setFocusable(true);
                 nearestView.setClickable(true);

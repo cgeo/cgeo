@@ -3,126 +3,59 @@ package cgeo.geocaching.sensors;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.settings.Settings;
 
-import rx.Scheduler;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.schedulers.Schedulers;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * GeoData and Direction handler.
  * <p>
- * To use this class, override at least one of {@link #updateDirection(float)} or {@link #updateGeoData(IGeoData)}. You
- * need to start the handler using one of
- * <ul>
- * <li>{@link #startDir()}</li>
- * <li>{@link #startGeo()}</li>
- * <li>{@link #startGeoAndDir()}</li>
- * </ul>
- * A good place might be the {@code onResume} method of the Activity. Stop the Handler accordingly in {@code onPause}.
- * </p>
+ * To use this class, override {@link #updateGeoDir(IGeoData, Float)}. You need to start the handler using
+ * {@link #start()}. A good place to do so might be the {@code onResume} method of the Activity. Stop the Handler
+ * accordingly in {@code onPause}.
  */
 public abstract class GeoDirHandler {
     private static final CgeoApplication app = CgeoApplication.getInstance();
 
-    private Subscription dirSubscription = null;
-    private Subscription geoSubscription = null;
+    private Subscription subscription = null;
 
     /**
-     * Update method called when new IGeoData is available.
+     * Update method called when new data is available.
      *
-     * @param data
-     *            the new data
-     */
-    public void updateGeoData(final IGeoData data) {
-        // Override this in children
-    }
-
-    /**
-     * Update method called when new direction data is available.
+     * @param geoData the new geographical data
+     * @param direction the new direction
      *
-     * @param direction
-     *            the new direction
+     * If the device goes fast enough, or if the compass use is not enabled in the settings,
+     * the GPS direction information will be used instead of the compass one.
      */
-    public void updateDirection(final float direction) {
-        // Override this in children
+    public void updateGeoDir(@SuppressWarnings("unused") final IGeoData geoData, @SuppressWarnings("unused") final float direction) {
     }
 
-    /**
-     * Register the current GeoDirHandler for GeoData information.
-     */
-    public synchronized void startGeo() {
-        geoSubscription = app.currentGeoObject()
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<IGeoData>() {
-                    @Override
-                    public void call(final IGeoData geoData) {
-                        updateGeoData(geoData);
-                    }
-                });
-    }
-
-    /**
-     * Register the current GeoDirHandler for direction information if the preferences
-     * allow it.
-     */
-    public synchronized void startDir() {
-        if (Settings.isUseCompass()) {
-            dirSubscription = app.currentDirObject()
-                    .subscribeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Action1<Float>() {
-                        @Override
-                        public void call(final Float direction) {
-                            updateDirection(direction);
-                        }
-                    });
-        }
+    private void handleGeoDir(final ImmutablePair<IGeoData, Float> geoDir) {
+        final IGeoData geoData = geoDir.left;
+        final boolean useGPSBearing = !Settings.isUseCompass() || geoData.getSpeed() > 5;
+        updateGeoDir(geoData, useGPSBearing ? geoData.getBearing() : geoDir.right);
     }
 
     /**
      * Register the current GeoDirHandler for GeoData and direction information (if the
      * preferences allow it).
      */
-    public void startGeoAndDir() {
-        startGeo();
-        startDir();
+    public void start() {
+        subscription = app.geoDirObservable().subscribe(new Action1<ImmutablePair<IGeoData, Float>>() {
+            @Override
+            public void call(final ImmutablePair<IGeoData, Float> geoDir) {
+                handleGeoDir(geoDir);
+            }
+        }, AndroidSchedulers.mainThread());
     }
 
     /**
      * Unregister the current GeoDirHandler for GeoData information.
      */
-    public synchronized void stopGeo() {
-        // Delay the unsubscription by 2.5 seconds, so that another activity has
-        // the time to subscribe and the GPS receiver will not be turned down.
-        if (geoSubscription != null) {
-            final Subscription subscription = geoSubscription;
-            geoSubscription = null;
-            Schedulers.newThread().schedule(new Action1<Scheduler.Inner>() {
-                @Override
-                public void call(final Scheduler.Inner inner) {
-                    subscription.unsubscribe();
-                }
-            }, 2500, TimeUnit.MILLISECONDS);
-        }
+    public void stop() {
+        subscription.unsubscribe();
     }
 
-    /**
-     * Unregister the current GeoDirHandler for direction information.
-     */
-    public synchronized void stopDir() {
-        if (dirSubscription != null) {
-            dirSubscription.unsubscribe();
-            dirSubscription = null;
-        }
-    }
-
-    /**
-     * Unregister the current GeoDirHandler for GeoData and direction information.
-     */
-    public void stopGeoAndDir() {
-        stopGeo();
-        stopDir();
-    }
 }

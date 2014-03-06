@@ -235,13 +235,13 @@ public class NavigateAnyPointActivity extends AbstractActivity {
     @Override
     public void onResume() {
         super.onResume();
-        geoDirHandler.startGeo();
+        geoDirHandler.start();
         init();
     }
 
     @Override
     public void onPause() {
-        geoDirHandler.stopGeo();
+        geoDirHandler.stop();
         super.onPause();
     }
 
@@ -455,7 +455,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
         @Override
-        public void updateGeoData(final IGeoData geo) {
+        public void updateGeoDir(final IGeoData geo, final float dir) {
             try {
                 latButton.setHint(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
                 lonButton.setHint(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));

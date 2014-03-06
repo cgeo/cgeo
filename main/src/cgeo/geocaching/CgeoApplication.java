@@ -6,7 +6,9 @@ import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import rx.Observable;
+import rx.functions.Func2;
 
 import android.app.Activity;
 import android.app.Application;
@@ -23,6 +25,7 @@ public class CgeoApplication extends Application {
     public boolean showLoginToast = true; //login toast shown just once.
     private boolean liveMapHintShownInThisSession = false; // livemap hint has been shown
     private static CgeoApplication instance;
+    private Observable<ImmutablePair<IGeoData,Float>> geoDir;
 
     public CgeoApplication() {
         setInstance(this);
@@ -69,34 +72,32 @@ public class CgeoApplication extends Application {
         }.start();
     }
 
-    public Observable<IGeoData> currentGeoObject() {
-        if (geo == null) {
+    public Observable<ImmutablePair<IGeoData, Float>> geoDirObservable() {
+        if (geoDir == null) {
             synchronized(this) {
-                if (geo == null) {
-                    geo = GeoDataProvider.create(this);
+                if (geoDir == null) {
+                    geoDir = Observable.combineLatest(GeoDataProvider.create(this), DirectionProvider.create(this), new Func2<IGeoData, Float, ImmutablePair<IGeoData, Float>>() {
+                        @Override
+                        public ImmutablePair<IGeoData, Float> call(final IGeoData geoData, final Float dir) {
+                            return new ImmutablePair<IGeoData, Float>(geoData, dir);
+                        }
+                    });
                 }
             }
         }
-        return geo;
+        return geoDir;
+    }
+
+    private ImmutablePair<IGeoData, Float> currentGeoDir() {
+        return geoDirObservable().first().toBlockingObservable().single();
     }
 
     public IGeoData currentGeo() {
-        return currentGeoObject().first().toBlockingObservable().single();
-    }
-
-    public Observable<Float> currentDirObject() {
-        if (dir == null) {
-            synchronized(this) {
-                if (dir == null) {
-                    dir = DirectionProvider.create(this);
-                }
-            }
-        }
-        return dir;
+        return currentGeoDir().left;
     }
 
     public Float currentDirection() {
-        return currentDirObject().first().toBlockingObservable().single();
+        return currentGeoDir().right;
     }
 
     public boolean isLiveMapHintShownInThisSession() {

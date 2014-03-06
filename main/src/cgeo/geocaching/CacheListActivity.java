@@ -123,24 +123,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
 
         @Override
-        public void updateGeoData(final IGeoData geo) {
+        public void updateGeoDir(final IGeoData geo, final float dir) {
             if (geo.getCoords() != null) {
                 adapter.setActualCoordinates(geo.getCoords());
-            }
-            if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
-                adapter.setActualHeading(geo.getBearing());
-            }
-        }
-
-        @Override
-        public void updateDirection(final float direction) {
-            if (!Settings.isLiveList()) {
-                return;
-            }
-
-            if (app.currentGeo().getSpeed() <= 5) { // use compass when speed is lower than 18 km/h) {
-                final float northHeading = DirectionProvider.getDirectionNow(CacheListActivity.this, direction);
-                adapter.setActualHeading(northHeading);
+                if (Settings.isLiveList()) {
+                    adapter.setActualHeading(dir);
+                }
             }
         }
 
@@ -466,10 +454,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public void onResume() {
         super.onResume();
 
-        geoDirHandler.startGeo();
-        if (Settings.isLiveMap()) {
-            geoDirHandler.startDir();
-        }
+        geoDirHandler.start();
 
         adapter.setSelectMode(false);
         setAdapterCurrentCoordinates(true);
@@ -500,7 +485,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     @Override
     public void onPause() {
-        geoDirHandler.stopGeoAndDir();
+        geoDirHandler.stop();
         super.onPause();
     }
 

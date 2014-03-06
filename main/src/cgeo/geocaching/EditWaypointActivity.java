@@ -204,12 +204,12 @@ public class EditWaypointActivity extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        geoDirHandler.startGeo();
+        geoDirHandler.start();
     }
 
     @Override
     public void onPause() {
-        geoDirHandler.stopGeo();
+        geoDirHandler.stop();
         super.onPause();
     }
 
@@ -264,7 +264,7 @@ public class EditWaypointActivity extends AbstractActivity {
 
     final private GeoDirHandler geoDirHandler = new GeoDirHandler() {
         @Override
-        public void updateGeoData(final IGeoData geo) {
+        public void updateGeoDir(final IGeoData geo, final float dir) {
             if (geo.getCoords() == null) {
                 return;
             }

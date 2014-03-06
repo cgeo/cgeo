@@ -7,10 +7,10 @@ import android.location.Location;
 import android.location.LocationManager;
 
 class GeoData extends Location implements IGeoData {
-    public final boolean gpsEnabled;
-    public final int satellitesVisible;
-    public final int satellitesFixed;
-    public final boolean pseudoLocation;
+    private final boolean gpsEnabled;
+    private final int satellitesVisible;
+    private final int satellitesFixed;
+    private final boolean pseudoLocation;
 
     GeoData(final Location location, final boolean gpsEnabled, final int satellitesVisible, final int satellitesFixed, final boolean pseudoLocation) {
         super(location);
