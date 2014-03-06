@@ -66,6 +66,8 @@
   <string name="log_unarchived">Odarchivována</string>
   <string name="log_needs_archived">Vyžaduje archivaci</string>
   <string name="log_discovered">Spatřen</string>
+  <string name="log_reviewer">Poznámka revírníka</string>
+  <string name="log_submit_for_review">Na revizi</string>
   <string name="log_retractlisting">Vrácení Listingu</string>
   <string name="log_marked_missing">Označeno za ztracené</string>
   <string name="log_tb_nothing">Beze změny</string>
