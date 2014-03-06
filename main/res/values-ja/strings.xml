@@ -64,7 +64,6 @@
   <string name="log_unarchived">アーカイブから戻った</string>
   <string name="log_needs_archived">アーカイブされるべき</string>
   <string name="log_discovered">発見した</string>
-  <string name="log_reviewer">レビューノート</string>
   <string name="log_retractlisting">Retract Listing</string>
   <string name="log_marked_missing">行方不明としてマーク</string>
   <string name="log_tb_nothing">何もしない</string>

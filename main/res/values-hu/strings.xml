@@ -61,7 +61,6 @@
   <string name="log_archived">Arhiválva</string>
   <string name="log_needs_archived">Arhiválás szükséges</string>
   <string name="log_discovered">Felfedezve</string>
-  <string name="log_reviewer">Moderátor jegyzet</string>
   <string name="log_tb_nothing">Ne csinálj semmit</string>
   <string name="log_tb_visit">Látogatás</string>
   <string name="log_tb_drop">Ládába helyezés</string>

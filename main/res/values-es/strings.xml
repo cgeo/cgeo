@@ -63,7 +63,6 @@
   <string name="log_unarchived">Desarchivado</string>
   <string name="log_needs_archived">Necesita ser archivado</string>
   <string name="log_discovered">Descubierto</string>
-  <string name="log_reviewer">Nota del revisor</string>
   <string name="log_retractlisting">Retirar ficha del escondite</string>
   <string name="log_marked_missing">Marcado como perdido</string>
   <string name="log_tb_nothing">No hacer nada</string>
