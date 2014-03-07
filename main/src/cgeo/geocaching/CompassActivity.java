@@ -8,12 +8,14 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.sensors.DirectionProvider;
+import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.ui.CompassView;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.LoggingUI;
-import cgeo.geocaching.utils.GeoDirHandler;
+import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -119,12 +121,12 @@ public class CompassActivity extends AbstractActivity {
         super.onResume();
 
         // sensor and geolocation manager
-        geoDirHandler.startGeoAndDir();
+        geoDirHandler.start();
     }
 
     @Override
     public void onPause() {
-        geoDirHandler.stopGeoAndDir();
+        geoDirHandler.stop();
         super.onPause();
     }
 
@@ -150,13 +152,8 @@ public class CompassActivity extends AbstractActivity {
         final CgeoApplication app = CgeoApplication.getInstance();
         final IGeoData geo = app.currentGeo();
         if (geo != null) {
-            geoDirHandler.updateGeoData(geo);
+            geoDirHandler.updateGeoDir(geo, app.currentDirection());
         }
-        final Float dir = app.currentDirection();
-        if (dir != null) {
-            geoDirHandler.updateDirection(dir);
-        }
-
     }
 
     @Override
@@ -198,11 +195,6 @@ public class CompassActivity extends AbstractActivity {
                 boolean oldSetting = Settings.isUseCompass();
                 Settings.setUseCompass(!oldSetting);
                 invalidateOptionsMenuCompatible();
-                if (oldSetting) {
-                    geoDirHandler.stopDir();
-                } else {
-                    geoDirHandler.startDir();
-                }
                 return true;
             case R.id.menu_edit_destination:
                 Intent pointIntent = new Intent(this, NavigateAnyPointActivity.class);
@@ -274,7 +266,7 @@ public class CompassActivity extends AbstractActivity {
 
     private GeoDirHandler geoDirHandler = new GeoDirHandler() {
         @Override
-        public void updateGeoData(final IGeoData geo) {
+        public void updateGeoDir(final IGeoData geo, final float dir) {
             try {
                 if (geo.getCoords() != null) {
                     if (geo.getSatellitesVisible() >= 0) {
@@ -299,18 +291,9 @@ public class CompassActivity extends AbstractActivity {
                     navLocation.setText(res.getString(R.string.loc_trying));
                 }
 
-                if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
-                    updateNorthHeading(geo.getBearing());
-                }
+                updateNorthHeading(DirectionProvider.getDirectionNow(CompassActivity.this, dir));
             } catch (RuntimeException e) {
                 Log.w("Failed to LocationUpdater location.");
-            }
-        }
-
-        @Override
-        public void updateDirection(final float direction) {
-            if (app.currentGeo().getSpeed() <= 5) { // use compass when speed is lower than 18 km/h
-                updateNorthHeading(DirectionProvider.getDirectionNow(CompassActivity.this, direction));
             }
         }
     };

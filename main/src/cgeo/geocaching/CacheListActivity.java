@@ -36,6 +36,7 @@ import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.ComparatorUserInterface;
@@ -46,7 +47,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.DateUtils;
-import cgeo.geocaching.utils.GeoDirHandler;
+import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
@@ -122,24 +123,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
 
         @Override
-        public void updateGeoData(final IGeoData geo) {
+        public void updateGeoDir(final IGeoData geo, final float dir) {
             if (geo.getCoords() != null) {
                 adapter.setActualCoordinates(geo.getCoords());
-            }
-            if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
-                adapter.setActualHeading(geo.getBearing());
-            }
-        }
-
-        @Override
-        public void updateDirection(final float direction) {
-            if (!Settings.isLiveList()) {
-                return;
-            }
-
-            if (app.currentGeo().getSpeed() <= 5) { // use compass when speed is lower than 18 km/h) {
-                final float northHeading = DirectionProvider.getDirectionNow(CacheListActivity.this, direction);
-                adapter.setActualHeading(northHeading);
+                if (Settings.isLiveList()) {
+                    adapter.setActualHeading(dir);
+                }
             }
         }
 
@@ -465,10 +454,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public void onResume() {
         super.onResume();
 
-        geoDirHandler.startGeo();
-        if (Settings.isLiveMap()) {
-            geoDirHandler.startDir();
-        }
+        geoDirHandler.start();
 
         adapter.setSelectMode(false);
         setAdapterCurrentCoordinates(true);
@@ -499,7 +485,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     @Override
     public void onPause() {
-        geoDirHandler.stopGeoAndDir();
+        geoDirHandler.stop();
         super.onPause();
     }
 

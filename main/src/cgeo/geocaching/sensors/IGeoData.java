@@ -1,4 +1,4 @@
-package cgeo.geocaching;
+package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.enumerations.LocationProviderType;
 import cgeo.geocaching.geopoint.Geopoint;

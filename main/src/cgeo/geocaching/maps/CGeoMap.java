@@ -3,9 +3,7 @@ package cgeo.geocaching.maps;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DataStore;
-import cgeo.geocaching.DirectionProvider;
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Waypoint;
@@ -31,18 +29,18 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
+import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.LiveMapInfoDialogBuilder;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CancellableHandler;
-import cgeo.geocaching.utils.GeoDirHandler;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import rx.functions.Action1;
 
 import android.app.Activity;
@@ -492,7 +490,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     public void onResume() {
         super.onResume();
 
-        geoDirUpdate.startGeoAndDir();
+        geoDirUpdate.start();
 
         if (!CollectionUtils.isEmpty(dirtyCaches)) {
             for (String geocode : dirtyCaches) {
@@ -515,7 +513,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     @Override
     public void onPause() {
         stopTimer();
-        geoDirUpdate.stopGeoAndDir();
+        geoDirUpdate.stop();
         savePrefs();
 
         if (mapView != null) {
@@ -887,26 +885,14 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         private long timeLastPositionOverlayCalculation = 0;
 
         @Override
-        public void updateGeoData(final IGeoData geo) {
+        public void updateGeoDir(final IGeoData geo, final float dir) {
             if (geo.isPseudoLocation()) {
                 locationValid = false;
             } else {
                 locationValid = true;
 
                 currentLocation = geo.getLocation();
-
-                if (!Settings.isUseCompass() || geo.getSpeed() > 5) { // use GPS when speed is higher than 18 km/h
-                    currentHeading = geo.getBearing();
-                }
-
-                repaintPositionOverlay();
-            }
-        }
-
-        @Override
-        public void updateDirection(final float direction) {
-            if (app.currentGeo().getSpeed() <= 5) { // use compass when speed is lower than 18 km/h
-                currentHeading = DirectionProvider.getDirectionNow(activity, direction);
+                currentHeading = dir;
                 repaintPositionOverlay();
             }
         }

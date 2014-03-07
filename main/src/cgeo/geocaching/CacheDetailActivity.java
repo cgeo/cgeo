@@ -21,6 +21,7 @@ import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
@@ -40,7 +41,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.logs.CacheLogsViewCreator;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
-import cgeo.geocaching.utils.GeoDirHandler;
+import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -143,7 +144,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     private final GeoDirHandler locationUpdater = new GeoDirHandler() {
         @Override
-        public void updateGeoData(final IGeoData geo) {
+        public void updateGeoDir(final IGeoData geo, final float dir) {
             if (cacheDistanceView == null) {
                 return;
             }
@@ -317,7 +318,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             notifyDataSetChanged();
             refreshOnResume = false;
         }
-        locationUpdater.startGeo();
+        locationUpdater.start();
     }
 
     @Override
@@ -338,7 +339,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public void onPause() {
-        locationUpdater.stopGeo();
+        locationUpdater.stop();
         super.onPause();
     }
 

@@ -1,12 +1,11 @@
 package cgeo.geocaching.speech;
 
-import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.DirectionProvider;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.GeoDirHandler;
+import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -42,28 +41,32 @@ public class SpeechService extends Service implements OnInitListener {
     private boolean initialized = false;
     protected float direction;
     protected Geopoint position;
-    protected boolean directionInitialized = !Settings.isUseCompass(); // don't wait for magnetometer, if it shall not be used
-    protected boolean positionInitialized = false;
 
-    GeoDirHandler geoHandler = new GeoDirHandler() {
+    final GeoDirHandler geoDirHandler = new GeoDirHandler() {
         @Override
-        public void updateDirection(float newDirection) {
-            if (CgeoApplication.getInstance().currentGeo().getSpeed() <= 5) {
-                direction = DirectionProvider.getDirectionNow(startingActivity, newDirection);
-                directionInitialized = true;
-                updateCompass();
-            }
-        }
-
-        @Override
-        public void updateGeoData(cgeo.geocaching.IGeoData newGeo) {
+        public void updateGeoDir(final IGeoData newGeo, final float newDirection) {
             position = newGeo.getCoords();
-            positionInitialized = true;
-            if (!Settings.isUseCompass() || newGeo.getSpeed() > 5) {
-                direction = newGeo.getBearing();
-                directionInitialized = true;
+            direction = newDirection;
+            // avoid any calculation, if the delay since the last output is not long enough
+            final long now = System.currentTimeMillis();
+            if (now - lastSpeechTime <= SPEECH_MINPAUSE_SECONDS * 1000) {
+                return;
             }
-            updateCompass();
+
+            // to speak, we want max pause to have elapsed or distance to geopoint to have changed by a given amount
+            final float distance = position.distanceTo(target);
+            if (now - lastSpeechTime <= SPEECH_MAXPAUSE_SECONDS * 1000) {
+                if (Math.abs(lastSpeechDistance - distance) < getDeltaForDistance(distance)) {
+                    return;
+                }
+            }
+
+            final String text = TextFactory.getText(position, target, direction);
+            if (StringUtils.isNotEmpty(text)) {
+                lastSpeechTime = System.currentTimeMillis();
+                lastSpeechDistance = distance;
+                speak(text);
+            }
         }
     };
     /**
@@ -76,34 +79,6 @@ public class SpeechService extends Service implements OnInitListener {
     @Override
     public IBinder onBind(Intent intent) {
         return null;
-    }
-
-    protected void updateCompass() {
-        // make sure we have both sensor values before talking
-        if (!positionInitialized || !directionInitialized) {
-            return;
-        }
-
-        // avoid any calculation, if the delay since the last output is not long enough
-        final long now = System.currentTimeMillis();
-        if (now - lastSpeechTime <= SPEECH_MINPAUSE_SECONDS * 1000) {
-            return;
-        }
-
-        // to speak, we want max pause to have elapsed or distance to geopoint to have changed by a given amount
-        final float distance = position.distanceTo(target);
-        if (now - lastSpeechTime <= SPEECH_MAXPAUSE_SECONDS * 1000) {
-            if (Math.abs(lastSpeechDistance - distance) < getDeltaForDistance(distance)) {
-                return;
-            }
-        }
-
-        final String text = TextFactory.getText(position, target, direction);
-        if (StringUtils.isNotEmpty(text)) {
-            lastSpeechTime = System.currentTimeMillis();
-            lastSpeechDistance = distance;
-            speak(text);
-        }
     }
 
     /**
@@ -131,7 +106,7 @@ public class SpeechService extends Service implements OnInitListener {
 
     @Override
     public void onDestroy() {
-        geoHandler.stopGeoAndDir();
+        geoDirHandler.stop();
         if (tts != null) {
             tts.stop();
             tts.shutdown();
@@ -157,7 +132,8 @@ public class SpeechService extends Service implements OnInitListener {
         if (switchLocale == TextToSpeech.LANG_MISSING_DATA) {
             startingActivity.startActivity(new Intent(Engine.ACTION_INSTALL_TTS_DATA));
             return;
-        } else if (switchLocale == TextToSpeech.LANG_NOT_SUPPORTED) {
+        }
+        if (switchLocale == TextToSpeech.LANG_NOT_SUPPORTED) {
             Log.e("Current languge not supported by text to speech.");
             ActivityMixin.showToast(startingActivity, R.string.err_tts_lang_not_supported);
             return;
@@ -165,11 +141,7 @@ public class SpeechService extends Service implements OnInitListener {
 
         initialized = true;
 
-        if (Settings.isUseCompass()) {
-            geoHandler.startGeoAndDir();
-        } else {
-            geoHandler.startGeo();
-        }
+        geoDirHandler.start();
     }
 
     @Override
