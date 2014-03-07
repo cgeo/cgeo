@@ -66,6 +66,7 @@
   <string name="log_unarchived">Uarkivert</string>
   <string name="log_needs_archived">Bør arkiveres</string>
   <string name="log_discovered">Oppdaget</string>
+  <string name="log_submit_for_review">Send til gjennomgang</string>
   <string name="log_retractlisting">Fjern oppføringen</string>
   <string name="log_marked_missing">Merket som forsvunnet</string>
   <string name="log_tb_nothing">Ikke gjør noe</string>
@@ -125,9 +126,9 @@
   <string name="err_none">Ok</string>
   <string name="err_parse">Klarte ikke å lese innloggingssiden</string>
   <string name="err_server">Klarte ikke å koble til Geocaching.com (server eller tilkobling nede?)</string>
-  <string name="err_server_ec">Får ikke kontakt med Extremcaching.com. Nettstedet kan være nede eller Internett-tilkoblingen fungerer ikke.</string>
+  <string name="err_server_ec">Får ikke kontakt med Extremcaching.com. Nettstedet kan være nede eller Internettilkoblingen fungerer ikke.</string>
   <string name="err_login">Ingen innloggingsopplysninger lagret</string>
-  <string name="err_login_failed_toast">c:geo kan ikke logge inn. c:geo fungerer frakoblet med lagrede cacher. Sjekk innlogging-innstillinger eller aktiver Internett-forbindelsen.</string>
+  <string name="err_login_failed_toast">c:geo kan ikke logge inn. c:geo fungerer frakoblet med lagrede cacher. Sjekk innloggingsinnstillinger eller aktiver Internettforbindelsen.</string>
   <string name="err_unknown">Ukjent feil</string>
   <string name="err_comm">Ukjent tilkoblingsfeil</string>
   <string name="err_missing_auth">Brukernavn eller passord er ikke oppgitt.</string>
@@ -256,7 +257,7 @@
   <string name="caches_sort_geocode">GC-kode</string>
   <string name="caches_sort_rating">Rangering</string>
   <string name="caches_sort_vote">Avstemming (egen rangering)</string>
-  <string name="caches_sort_inventory">Antall reisevenner</string>
+  <string name="caches_sort_inventory">Antall sporbare</string>
   <string name="caches_sort_date_hidden">Dato gjemt</string>
   <string name="caches_sort_date_logged">Dato logget</string>
   <string name="caches_sort_finds">Antall funn</string>
@@ -511,7 +512,7 @@
   <string name="init_sendToCgeo_registering">Registrerer din enhet for Send2c:geo…</string>
   <string name="init_sendToCgeo_register_ok">Registreringen var vellykket. PIN-kode er ####. Bruk denne på nettsiden til c:geo for å koble denne enheten til nettleseren.</string>
   <string name="init_sendToCgeo_register_fail">Registrering mislyktes.</string>
-  <string name="sendToCgeo_download_fail">c:geo kunne ikke laste ned cacher. Ingen internettilkobling, eller send2c:geo er nede.</string>
+  <string name="sendToCgeo_download_fail">c:geo kunne ikke laste ned cacher. Ingen Internettilkobling, eller send2c:geo er nede.</string>
   <string name="sendToCgeo_no_registration">c:geo kunne ikke laste ned cacher. Registrering for send2c:geo har utløpt. Registrer deg på nytt i innstillingene.</string>
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Godkjenn c:geo</string>
@@ -802,7 +803,7 @@
   <string name="trackable_origin">Start</string>
   <string name="trackable_unknown">Ukjent</string>
   <string name="trackable_released">Sluppet</string>
-  <string name="trackable_distance">Reisedistanse</string>
+  <string name="trackable_distance">Reiselengde</string>
   <string name="trackable_touch">Touch</string>
   <string name="trackable_not_activated">Den sporbare er ikke aktivert</string>
   <string name="geokret_type_traditional">Tradisjonell</string>
@@ -846,7 +847,7 @@
   <string name="helper_pocketquery_title">Pocket Query Creator</string>
   <string name="helper_pocketquery_description">Gjør det enkelt å lage og laste ned Pocket Queries basert på din posisjon eller et sted på kartet. Krever Premium-konto på geocaching.com.</string>
   <string name="helper_google_translate_title">Google Oversetter</string>
-  <string name="helper_google_translate_description">Hvis du laster ned oversettelsespakker i Google Oversetter-appen kan du enkelt oversette cachebeskrivelsen i c:geo ved å trykke lenge på teksten (uten å ha tilgang til internett).</string>
+  <string name="helper_google_translate_description">Hvis du laster ned oversettelsespakker i Google Oversetter-appen kan du enkelt oversette cachebeskrivelsen i c:geo ved å trykke lenge på teksten (uten å ha tilgang til Internett).</string>
   <string name="addon_missing_title">Manglende tillegg</string>
   <string name="addon_download_prompt">Last ned nå fra Google Play.</string>
   <string name="export">Eksporter</string>
