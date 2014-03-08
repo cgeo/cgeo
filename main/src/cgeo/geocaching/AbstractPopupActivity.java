@@ -8,10 +8,11 @@ import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteRating;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
+import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.LoggingUI;
-import cgeo.geocaching.utils.GeoDirHandler;
+import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -40,7 +41,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity implements 
     private final GeoDirHandler geoUpdate = new GeoDirHandler() {
 
         @Override
-        public void updateGeoData(final IGeoData geo) {
+        public void updateGeoDir(final IGeoData geo, final float dir) {
             try {
                 if (geo.getCoords() != null && cache != null && cache.getCoords() != null) {
                     cacheDistance.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(cache.getCoords())));
@@ -159,7 +160,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity implements 
 
     @Override
     public void onPause() {
-        geoUpdate.stopGeo();
+        geoUpdate.stop();
         super.onPause();
     }
 
@@ -183,7 +184,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity implements 
     public void onResume() {
         super.onResume();
         init();
-        geoUpdate.startGeo();
+        geoUpdate.start();
     }
 
     @Override
@@ -255,7 +256,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity implements 
      * @param view
      *            unused here but needed since this method is referenced from XML layout
      */
-    public final void goDefaultNavigation(View view) {
+    public final void goDefaultNavigation(@SuppressWarnings("unused") View view) {
         navigateTo();
         finish();
     }

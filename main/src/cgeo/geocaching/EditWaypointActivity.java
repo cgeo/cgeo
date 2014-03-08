@@ -10,10 +10,11 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.GeoDirHandler;
+import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
@@ -203,12 +204,12 @@ public class EditWaypointActivity extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        geoDirHandler.startGeo();
+        geoDirHandler.start();
     }
 
     @Override
     public void onPause() {
-        geoDirHandler.stopGeo();
+        geoDirHandler.stop();
         super.onPause();
     }
 
@@ -263,7 +264,7 @@ public class EditWaypointActivity extends AbstractActivity {
 
     final private GeoDirHandler geoDirHandler = new GeoDirHandler() {
         @Override
-        public void updateGeoData(final IGeoData geo) {
+        public void updateGeoDir(final IGeoData geo, final float dir) {
             if (geo.getCoords() == null) {
                 return;
             }
