@@ -66,6 +66,7 @@
   <string name="log_unarchived">Desarquivada</string>
   <string name="log_needs_archived">Precisa de arquivamento</string>
   <string name="log_discovered">Descoberta</string>
+  <string name="log_submit_for_review">Enviar para revisão</string>
   <string name="log_retractlisting">Retirar Lista</string>
   <string name="log_marked_missing">Marcado em falta</string>
   <string name="log_tb_nothing">Não fazer nada</string>
