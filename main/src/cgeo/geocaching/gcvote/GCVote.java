@@ -69,7 +69,7 @@ public final class GCVote {
      * @param geocodes
      * @return
      */
-    public static Map<String, GCVoteRating> getRating(final List<String> guids, final List<String> geocodes) {
+    private static Map<String, GCVoteRating> getRating(final List<String> guids, final List<String> geocodes) {
         if (guids == null && geocodes == null) {
             return null;
         }
