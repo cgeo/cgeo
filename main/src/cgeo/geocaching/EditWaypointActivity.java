@@ -202,14 +202,11 @@ public class EditWaypointActivity extends AbstractActivity {
 
     @Override
     public void onResume() {
-        super.onResume();
-
-        geoDirHandler.start();
+        super.onResume(geoDirHandler.start());
     }
 
     @Override
     public void onPause() {
-        geoDirHandler.stop();
         super.onPause();
     }
 

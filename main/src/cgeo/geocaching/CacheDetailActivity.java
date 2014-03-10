@@ -312,13 +312,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public void onResume() {
-        super.onResume();
+        super.onResume(locationUpdater.start());
 
         if (refreshOnResume) {
             notifyDataSetChanged();
             refreshOnResume = false;
         }
-        locationUpdater.start();
     }
 
     @Override
@@ -339,7 +338,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public void onPause() {
-        locationUpdater.stop();
         super.onPause();
     }
 

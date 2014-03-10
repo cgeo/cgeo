@@ -52,6 +52,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import rx.subscriptions.Subscriptions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -214,9 +215,7 @@ public class MainActivity extends AbstractActivity {
 
     @Override
     public void onResume() {
-        super.onResume();
-        locationUpdater.start();
-        satellitesHandler.start();
+        super.onResume(Subscriptions.from(locationUpdater.start(), satellitesHandler.start()));
         updateUserInfoHandler.sendEmptyMessage(-1);
         startBackgroundLogin();
         init();
@@ -257,8 +256,6 @@ public class MainActivity extends AbstractActivity {
     @Override
     public void onPause() {
         initialized = false;
-        locationUpdater.stop();
-        satellitesHandler.stop();
         super.onPause();
     }
 

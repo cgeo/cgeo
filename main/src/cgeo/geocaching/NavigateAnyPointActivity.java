@@ -234,14 +234,12 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
     @Override
     public void onResume() {
-        super.onResume();
-        geoDirHandler.start();
+        super.onResume(geoDirHandler.start());
         init();
     }
 
     @Override
     public void onPause() {
-        geoDirHandler.stop();
         super.onPause();
     }
 

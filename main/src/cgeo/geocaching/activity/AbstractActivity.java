@@ -21,6 +21,8 @@ import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import rx.Subscription;
+import rx.subscriptions.Subscriptions;
 
 import java.util.Locale;
 
@@ -29,6 +31,7 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
     protected CgeoApplication app = null;
     protected Resources res = null;
     private boolean keepScreenOn = false;
+    private Subscription resumeSubscription = Subscriptions.empty();
 
     protected AbstractActivity() {
         this(false);
@@ -69,6 +72,16 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initializeCommonFields();
+    }
+
+    public void onResume(final Subscription resumeSubscription) {
+        super.onResume();
+        this.resumeSubscription = resumeSubscription;
+    }
+
+    @Override
+    public void onPause() {
+        resumeSubscription.unsubscribe();
     }
 
     protected static void disableSuggestions(final EditText edit) {

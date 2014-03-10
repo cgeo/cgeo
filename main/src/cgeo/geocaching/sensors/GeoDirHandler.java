@@ -42,13 +42,14 @@ public abstract class GeoDirHandler {
      * Register the current GeoDirHandler for GeoData and direction information (if the
      * preferences allow it).
      */
-    public void start() {
+    public Subscription start() {
         subscription = app.geoDirObservable().subscribe(new Action1<ImmutablePair<IGeoData, Float>>() {
             @Override
             public void call(final ImmutablePair<IGeoData, Float> geoDir) {
                 handleGeoDir(geoDir);
             }
         }, AndroidSchedulers.mainThread());
+        return subscription;
     }
 
     /**

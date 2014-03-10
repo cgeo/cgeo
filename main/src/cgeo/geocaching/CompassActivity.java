@@ -118,15 +118,11 @@ public class CompassActivity extends AbstractActivity {
 
     @Override
     public void onResume() {
-        super.onResume();
-
-        // sensor and geolocation manager
-        geoDirHandler.start();
+        super.onResume(geoDirHandler.start());
     }
 
     @Override
     public void onPause() {
-        geoDirHandler.stop();
         super.onPause();
     }
 
