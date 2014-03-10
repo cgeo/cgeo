@@ -66,6 +66,8 @@
   <string name="log_unarchived">Återöppnad</string>
   <string name="log_needs_archived">Behöver arkiveras</string>
   <string name="log_discovered">Såg den</string>
+  <string name="log_reviewer">Meddelande från reviewern</string>
+  <string name="log_submit_for_review">Skicka för granskning</string>
   <string name="log_retractlisting">Återkallad</string>
   <string name="log_marked_missing">Markerad saknad</string>
   <string name="log_tb_nothing">Gör inget</string>
@@ -336,14 +338,17 @@
   <string name="settings_title_map">Karta</string>
   <string name="settings_title_map_data">Kartdata</string>
   <string name="settings_title_map_content">Kartinnehåll</string>
+  <string name="settings_title_gpx">GPX</string>
   <string name="settings_title_basicmembers">Inställningar för Basic Members</string>
   <string name="settings_title_navigation">Navigering</string>
   <string name="settings_title_system">System</string>
   <string name="settings_title_navigation_menu">Navigeringsmeny</string>
   <string name="settings_category_browser">Webbläsare</string>
+  <string name="settings_category_geocaching">Geocaching</string>
   <string name="settings_category_social">Sociala media</string>
   <string name="settings_category_logging_other">Andra loggningsinställningar</string>
   <string name="settings_goto_url_button">mer …</string>
+  <string name="settings_title_gc">Geocaching.com</string>
   <string name="settings_title_ec">Extremcaching.com</string>
   <string name="settings_title_ox">Opencaching.com (Garmin)</string>
   <string name="settings_activate_gc">Aktivera</string>
@@ -357,6 +362,7 @@
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Aktivera</string>
   <string name="init_oc_de_description">Använd c:geo med opencaching.de för att söka efter cacher samt för att filtrera dina funna cacher.</string>
+  <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Aktivera</string>
   <string name="init_oc_pl_description">Använd c:geo med opencaching.pl för att söka efter cacher samt för att filtrera dina funna cacher.</string>
   <string name="init_gcvote">GCvote.com</string>
@@ -522,6 +528,7 @@
   <string name="auth_explain_long">Genom att trycka på knappen \"tillåt c:geo\" kommer processen att startas. Denna process kommer att öppna en webbläsare med %s sida. Logga in på den här sidan och låt <b>c:geo</b> komma åt ditt konto. Det är allt.</string>
   <string name="auth_dialog_completed_twitter">c:geo är nu godkänd att posta på Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
+  <string name="auth_ocpl">opencaching.pl</string>
   <string name="auth_dialog_completed_oc">c:geo är nu godkänd för att kommunicera med %s.</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Uppdatera</string>
@@ -620,6 +627,7 @@
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_cachebeacon">Cache Beacon</string>
+  <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Sparad logg</string>
@@ -1095,6 +1103,7 @@
   <string name="nutshellmanual">Manual: <a href="">c:geo in a Nutshell</a></string>
   <string name="market">Android: <a href="">c:geo på Google Play</a></string>
   <string name="about_twitter">Ska <b>c:geo</b> publicera ny status på Twitter varje gång en cache loggas?</string>
+  <string name="faq">FAQ: <a href="">faq.cgeo.org</a></string>
   <string name="status_new_release" tools:ignore="UnusedResources">Ny officiell version finns tillgänglig.\nKlicka för att installera.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Nytt nattligt bygge finns tillgängligt.\nKlicka för att installera.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Ny kandidat till officiellt bygge finns tillgängligt.\nKlicka för att installera.</string>
