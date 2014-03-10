@@ -19,8 +19,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CgeoApplication extends Application {
 
-    private volatile Observable<IGeoData> geo;
-    private volatile Observable<Float> dir;
     private boolean forceRelog = false; // c:geo needs to log into cache providers
     public boolean showLoginToast = true; //login toast shown just once.
     private boolean liveMapHintShownInThisSession = false; // livemap hint has been shown
