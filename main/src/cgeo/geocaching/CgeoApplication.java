@@ -70,18 +70,14 @@ public class CgeoApplication extends Application {
         }.start();
     }
 
-    public Observable<ImmutablePair<IGeoData, Float>> geoDirObservable() {
+    public synchronized Observable<ImmutablePair<IGeoData, Float>> geoDirObservable() {
         if (geoDir == null) {
-            synchronized(this) {
-                if (geoDir == null) {
-                    geoDir = Observable.combineLatest(GeoDataProvider.create(this), DirectionProvider.create(this), new Func2<IGeoData, Float, ImmutablePair<IGeoData, Float>>() {
-                        @Override
-                        public ImmutablePair<IGeoData, Float> call(final IGeoData geoData, final Float dir) {
-                            return new ImmutablePair<IGeoData, Float>(geoData, dir);
-                        }
-                    });
+            geoDir = Observable.combineLatest(GeoDataProvider.create(this), DirectionProvider.create(this), new Func2<IGeoData, Float, ImmutablePair<IGeoData, Float>>() {
+                @Override
+                public ImmutablePair<IGeoData, Float> call(final IGeoData geoData, final Float dir) {
+                    return new ImmutablePair<IGeoData, Float>(geoData, dir);
                 }
-            }
+            });
         }
         return geoDir;
     }
