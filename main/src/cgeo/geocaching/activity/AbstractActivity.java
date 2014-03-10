@@ -82,6 +82,7 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
     @Override
     public void onPause() {
         resumeSubscription.unsubscribe();
+        super.onPause();
     }
 
     protected static void disableSuggestions(final EditText edit) {

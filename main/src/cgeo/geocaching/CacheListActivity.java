@@ -57,6 +57,7 @@ import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
+import rx.Subscription;
 import rx.functions.Action1;
 
 import android.app.Activity;
@@ -135,6 +136,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     };
     private ContextMenuInfo lastMenuInfo;
     private String contextMenuGeocode = "";
+    private Subscription resumeSubscription;
 
     // FIXME: This method has mostly been replaced by the loaders. But it still contains a license agreement check.
     public void handleCachesLoaded() {
@@ -454,7 +456,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public void onResume() {
         super.onResume();
 
-        geoDirHandler.start();
+        resumeSubscription = geoDirHandler.start();
 
         adapter.setSelectMode(false);
         setAdapterCurrentCoordinates(true);
@@ -485,7 +487,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     @Override
     public void onPause() {
-        geoDirHandler.stop();
+        resumeSubscription.unsubscribe();
         super.onPause();
     }
 

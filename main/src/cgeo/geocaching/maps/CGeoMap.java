@@ -41,6 +41,8 @@ import cgeo.geocaching.utils.Log;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import rx.Scheduler;
+import rx.Subscription;
 import rx.functions.Action1;
 
 import android.app.Activity;
@@ -67,6 +69,9 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.TextView;
 import android.widget.ViewSwitcher.ViewFactory;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
+import rx.subscriptions.Subscriptions;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -87,6 +92,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     /** max. number of caches displayed in the Live Map */
     public static final int MAX_CACHES = 500;
+    private CompositeSubscription resumeSubscription;
 
     /** Controls the behavior of the map */
     public enum MapMode {
@@ -144,7 +150,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private Viewport viewport = null;
     private int zoom = -100;
     // threads
-    private LoadTimer loadTimer = null;
+    private Subscription loadTimer;
     private LoadDetails loadDetailsThread = null;
     /** Time of last {@link LoadRunnable} run */
     private volatile long loadThreadRun = 0L;
@@ -489,8 +495,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     @Override
     public void onResume() {
         super.onResume();
-
-        geoDirUpdate.start();
+        resumeSubscription = Subscriptions.from(geoDirUpdate.start(), startTimer());
 
         if (!CollectionUtils.isEmpty(dirtyCaches)) {
             for (String geocode : dirtyCaches) {
@@ -506,14 +511,11 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             // Update display
             displayExecutor.execute(new DisplayRunnable(mapView.getViewport()));
         }
-
-        startTimer();
     }
 
     @Override
     public void onPause() {
-        stopTimer();
-        geoDirUpdate.stop();
+        resumeSubscription.unsubscribe();
         savePrefs();
 
         if (mapView != null) {
@@ -966,47 +968,25 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
      * Starts the {@link LoadTimer}.
      */
 
-    public synchronized void startTimer() {
+    private Subscription startTimer() {
         if (coordsIntent != null) {
             // display just one point
             displayPoint(coordsIntent);
+            loadTimer = Subscriptions.empty();
         } else {
-            // start timer
-            stopTimer();
-            loadTimer = new LoadTimer();
-            loadTimer.start();
+            loadTimer = startLoadTimer();
         }
-    }
-
-    private synchronized void stopTimer() {
-        if (loadTimer != null) {
-            loadTimer.stopIt();
-            loadTimer = null;
-        }
+        return loadTimer;
     }
 
     /**
      * loading timer Triggers every 250ms and checks for viewport change and starts a {@link LoadRunnable}.
      */
-    private class LoadTimer extends Thread {
-
-        public LoadTimer() {
-            super("Load Timer");
-        }
-
-        private volatile boolean stop = false;
-
-        public void stopIt() {
-            stop = true;
-        }
-
-        @Override
-        public void run() {
-
-            while (!stop) {
+    private Subscription startLoadTimer() {
+        return Schedulers.newThread().schedulePeriodically(new Action1<Scheduler.Inner>() {
+            @Override
+            public void call(Scheduler.Inner inner) {
                 try {
-                    sleep(250);
-
                     if (mapView != null) {
                         // get current viewport
                         final Viewport viewportNow = mapView.getViewport();
@@ -1039,17 +1019,22 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     }
 
                 } catch (Exception e) {
-                    Log.w("CGeoMap.LoadTimer.run", e);
+                    Log.w("CGeoMap.startLoadtimer.start", e);
                 }
             }
-        }
+        }, 250, 250, TimeUnit.MILLISECONDS);
+    }
 
-        public boolean isLoading() {
-            return loadExecutor.getActiveCount() > 0 ||
-                    downloadExecutor.getActiveCount() > 0 ||
-                    displayExecutor.getActiveCount() > 0;
-        }
-
+    /**
+     * get if map is loading something
+     *
+     * @return
+     */
+    public boolean isLoading() {
+        return !loadTimer.isUnsubscribed() &&
+                (loadExecutor.getActiveCount() > 0 ||
+                        downloadExecutor.getActiveCount() > 0 ||
+                        displayExecutor.getActiveCount() > 0);
     }
 
     /**
@@ -1264,19 +1249,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         protected DoRunnable(final Viewport viewport) {
             this.viewport = viewport;
         }
-    }
-
-    /**
-     * get if map is loading something
-     *
-     * @return
-     */
-    private synchronized boolean isLoading() {
-        if (loadTimer != null) {
-            return loadTimer.isLoading();
-        }
-
-        return false;
     }
 
     /**

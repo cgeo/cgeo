@@ -17,6 +17,7 @@ import android.os.IBinder;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.Engine;
 import android.speech.tts.TextToSpeech.OnInitListener;
+import rx.Subscription;
 
 import java.util.Locale;
 
@@ -75,6 +76,7 @@ public class SpeechService extends Service implements OnInitListener {
     private long lastSpeechTime = 0;
     private float lastSpeechDistance = 0.0f;
     private Geopoint target;
+    private Subscription initSubscription;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -106,7 +108,7 @@ public class SpeechService extends Service implements OnInitListener {
 
     @Override
     public void onDestroy() {
-        geoDirHandler.stop();
+        initSubscription.unsubscribe();
         if (tts != null) {
             tts.stop();
             tts.shutdown();
@@ -141,7 +143,7 @@ public class SpeechService extends Service implements OnInitListener {
 
         initialized = true;
 
-        geoDirHandler.start();
+        initSubscription = geoDirHandler.start();
     }
 
     @Override

@@ -18,8 +18,6 @@ import rx.functions.Action1;
 public abstract class GeoDirHandler {
     private static final CgeoApplication app = CgeoApplication.getInstance();
 
-    private Subscription subscription = null;
-
     /**
      * Update method called when new data is available.
      *
@@ -43,20 +41,12 @@ public abstract class GeoDirHandler {
      * preferences allow it).
      */
     public Subscription start() {
-        subscription = app.geoDirObservable().subscribe(new Action1<ImmutablePair<IGeoData, Float>>() {
+        return app.geoDirObservable().subscribe(new Action1<ImmutablePair<IGeoData, Float>>() {
             @Override
             public void call(final ImmutablePair<IGeoData, Float> geoDir) {
                 handleGeoDir(geoDir);
             }
         }, AndroidSchedulers.mainThread());
-        return subscription;
-    }
-
-    /**
-     * Unregister the current GeoDirHandler for GeoData information.
-     */
-    public void stop() {
-        subscription.unsubscribe();
     }
 
 }
