@@ -52,7 +52,7 @@
   <string name="log_published">Publisert</string>
   <string name="log_enabled">Aktivert</string>
   <string name="log_disabled">Deaktivert</string>
-  <string name="log_attend">Har tenkt å komme</string>
+  <string name="log_attend">Har tenkt å delta</string>
   <string name="log_attended">Deltok</string>
   <string name="log_retrieved">Tatt fra plassen den skulle være</string>
   <string name="log_placed">Lagt ut</string>
@@ -530,7 +530,7 @@
   <string name="cache_offline_store">Lagre</string>
   <string name="cache_offline_stored">Lagret på enheten for</string>
   <string name="cache_offline_not_ready">Kan ikke brukes\noffline (ikke lagret)</string>
-  <string name="cache_offline_time_about">om</string>
+  <string name="cache_offline_time_about">omtrent</string>
   <string name="cache_offline_time_mins">minutter siden</string>
   <string name="cache_offline_time_mins_few">en liten stund siden</string>
   <string name="cache_offline_time_hour">én time siden</string>
@@ -571,7 +571,7 @@
   <string name="cache_waypoints_add">Legg til veipunkter</string>
   <string name="cache_hint">Hint</string>
   <string name="cache_logs">Loggbok</string>
-  <string name="cache_logsfriends">Logger (venner)</string>
+  <string name="cache_logsfriends">Loggbok (venner)</string>
   <string name="cache_dialog_loading_details">Laster cachens detaljer…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Laster siden</string>
   <string name="cache_dialog_loading_details_status_details">Behandler detaljer</string>
@@ -1130,6 +1130,10 @@
   <plurals name="cache_counts">
     <item quantity="one">Én cache</item>
     <item quantity="other">%1$d cacher</item>
+  </plurals>
+  <plurals name="waypoints">
+    <item quantity="one">1 veipunkt</item>
+    <item quantity="other">%d veipunkter</item>
   </plurals>
   <plurals name="tts_miles">
     <item quantity="one">%s engelsk mil</item>
