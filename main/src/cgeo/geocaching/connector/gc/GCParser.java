@@ -37,7 +37,6 @@ import cgeo.geocaching.utils.TextUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -290,15 +289,7 @@ public abstract class GCParser {
                 final Parameters params = new Parameters(
                         "__EVENTTARGET", "",
                         "__EVENTARGUMENT", "");
-                if (ArrayUtils.isNotEmpty(searchResult.viewstates)) {
-                    params.put("__VIEWSTATE", searchResult.viewstates[0]);
-                    if (searchResult.viewstates.length > 1) {
-                        for (int i = 1; i < searchResult.viewstates.length; i++) {
-                            params.put("__VIEWSTATE" + i, searchResult.viewstates[i]);
-                        }
-                        params.put("__VIEWSTATEFIELDCOUNT", String.valueOf(searchResult.viewstates.length));
-                    }
-                }
+                GCLogin.putViewstates(params, searchResult.viewstates);
                 for (final String cid : cids) {
                     params.put("CID", cid);
                 }
