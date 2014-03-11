@@ -33,13 +33,16 @@ import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.UncertainProperty;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
+import rx.Scheduler;
+import rx.Scheduler.Inner;
+import rx.Subscription;
+import rx.functions.Action1;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -1495,7 +1498,17 @@ public class Geocache implements ICache, IWaypoint {
         }
     }
 
-    public void refresh(int newListId, CancellableHandler handler) {
+    public Subscription refresh(final int newListId, final CancellableHandler handler, final Scheduler scheduler) {
+        return scheduler.schedule(new Action1<Inner>() {
+            @Override
+            public void call(final Inner inner) {
+                refreshSynchronous(newListId, handler);
+                handler.sendEmptyMessage(CancellableHandler.DONE);
+            }
+        });
+    }
+
+    public void refreshSynchronous(final int newListId, final CancellableHandler handler) {
         DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
         storeCache(null, geocode, newListId, true, handler);
     }

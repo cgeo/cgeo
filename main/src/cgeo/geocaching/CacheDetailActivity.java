@@ -889,8 +889,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          */
         private LinearLayout detailsList;
 
-        // TODO Do we need this thread-references?
-        private RefreshCacheThread refreshThread;
         private Thread watchlistThread;
 
         @Override
@@ -1063,27 +1061,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
                 progress.show(CacheDetailActivity.this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
 
-                if (refreshThread != null) {
-                    refreshThread.interrupt();
-                }
-
-                refreshThread = new RefreshCacheThread(refreshCacheHandler);
-                refreshThread.start();
-            }
-        }
-
-        private class RefreshCacheThread extends Thread {
-            final private CancellableHandler handler;
-
-            public RefreshCacheThread(final CancellableHandler handler) {
-                this.handler = handler;
-            }
-
-            @Override
-            public void run() {
-                cache.refresh(cache.getListId(), handler);
-                refreshThread = null;
-                handler.sendEmptyMessage(0);
+                cache.refresh(cache.getListId(), refreshCacheHandler, Schedulers.io());
             }
         }
 

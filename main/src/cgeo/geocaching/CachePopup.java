@@ -12,6 +12,7 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 import android.content.Context;
 import android.content.Intent;
@@ -159,21 +160,7 @@ public class CachePopup extends AbstractPopupActivity {
 
             final StoreCacheHandler refreshCacheHandler = new StoreCacheHandler(R.string.cache_dialog_offline_save_message);
             progress.show(CachePopup.this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
-            new RefreshCacheThread(refreshCacheHandler).start();
-        }
-    }
-
-    private class RefreshCacheThread extends Thread {
-        final private CancellableHandler handler;
-
-        public RefreshCacheThread(final CancellableHandler handler) {
-            this.handler = handler;
-        }
-
-        @Override
-        public void run() {
-            cache.refresh(cache.getListId(), handler);
-            handler.sendEmptyMessage(0);
+            cache.refresh(cache.getListId(), refreshCacheHandler, Schedulers.io());
         }
     }
 
