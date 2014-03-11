@@ -806,9 +806,10 @@
   <string name="trackable_touch">Touch</string>
   <string name="trackable_not_activated">Den sporbare er ikke aktivert</string>
   <string name="geokret_type_traditional">Tradisjonell</string>
+  <string name="geokret_type_book_or_media">Bok eller elektronisk medium</string>
   <string name="geokret_type_human">Menneske</string>
   <string name="geokret_type_coin">Mynt</string>
-  <string name="geokret_type_post">Mail</string>
+  <string name="geokret_type_post">Postkort/brev</string>
   <string name="user_menu_title">Om</string>
   <string name="user_menu_view_hidden">Cachene gjemt</string>
   <string name="user_menu_view_found">Cachene funnet</string>
