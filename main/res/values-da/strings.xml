@@ -63,7 +63,6 @@
   <string name="err_detail_cache">Beklager, c:geo kan ikke vise denne cache.</string>
   <string name="err_detail_cache_find">Beklager, c:geo kan ikke vise denne cache</string>
   <string name="err_detail_cache_find_some">Beklager, c:geo kan ikke vise denne cache.</string>
-  <string name="err_detail_cache_forgot">Beklager, c:geo husker ikke hvilken cache du ønskede.</string>
   <string name="err_detail_no_spoiler">c:geo fandt ingen spoilerbilleder til denne cache.</string>
   <string name="err_detail_no_map_static">c:geo fandt ingen statiske kort til denne cache.</string>
   <string name="err_application_no">c:geo kan ikke finde en passende applikation.</string>

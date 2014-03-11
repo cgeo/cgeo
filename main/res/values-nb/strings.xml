@@ -143,7 +143,6 @@
   <string name="err_detail_cache_find">Beklager, c:geo klarte ikke å finne cachen</string>
   <string name="err_detail_cache_find_some">Beklager, c:geo klarte ikke å finne den forespurte cachen.</string>
   <string name="err_detail_cache_find_any">Beklager, c:geo klarte ikke finne geocacher.</string>
-  <string name="err_detail_cache_forgot">Beklager, c:geo glemte hvilken cache du ønsket.</string>
   <string name="err_detail_google_maps_limit_reached">c:geo kunne ikke laste ned statiske kart. Det kan skyldes at Google Maps API-grensen er nådd.</string>
   <string name="err_detail_no_spoiler">c:geo fant ingen bilder for denne cachen.</string>
   <string name="err_detail_no_map_static">c:geo fant ingen statiske kart for denne cachen.</string>

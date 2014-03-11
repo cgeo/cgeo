@@ -143,7 +143,6 @@
   <string name="err_detail_cache_find">c:geo ne peut pas trouver de caches</string>
   <string name="err_detail_cache_find_some">c:geo ne peut pas trouver cette cache.</string>
   <string name="err_detail_cache_find_any">c:geo ne peut pas trouver de caches.</string>
-  <string name="err_detail_cache_forgot">c:geo a oublié la cache demandée.</string>
   <string name="err_detail_google_maps_limit_reached">c:geo n\'a pas pu charger les cartes statiques. La limite de Google Maps est peut être temporairement atteinte.</string>
   <string name="err_detail_no_spoiler">c:geo n\'a pas trouvé d\'image indice pour cette cache.</string>
   <string name="err_detail_no_map_static">c:geo n\'a pas trouvé de cartes statiques pour cette cache.</string>

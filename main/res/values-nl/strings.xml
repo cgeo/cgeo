@@ -144,7 +144,6 @@
   <string name="err_detail_cache_find">Sorry, c:geo kan de geocache niet vinden.</string>
   <string name="err_detail_cache_find_some">Sorry, c:geo kan die geocache niet vinden.</string>
   <string name="err_detail_cache_find_any">Sorry, c:geo kan geen enkele geocache vinden.</string>
-  <string name="err_detail_cache_forgot">Sorry, c:geo is kwijt welke geocache je wilde openen.</string>
   <string name="err_detail_google_maps_limit_reached">c:geo kon de statische kaarten niet downloaden. Wellicht dat de Google Maps limiet is bereikt.</string>
   <string name="err_detail_no_spoiler">c:geo heeft geen spoiler images gevonden voor deze cache.</string>
   <string name="err_detail_no_map_static">c:geo heeft geen statische kaarten gevonden voor deze cache.</string>

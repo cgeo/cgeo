@@ -138,7 +138,6 @@
   <string name="err_detail_cache_find">キャッシュ情報が見つかりません。</string>
   <string name="err_detail_cache_find_some">キャッシュ情報が見つかりません。</string>
   <string name="err_detail_cache_find_any">キャッシュ情報が一つも見つかりません。</string>
-  <string name="err_detail_cache_forgot">c:geo forgot which geocache you want.</string>
   <string name="err_detail_google_maps_limit_reached">オフライン用の地図のダウンロードに失敗しました。大量のデータをダウンロードしたと判断されGoogleマップ側に制限されたかもしれません。</string>
   <string name="err_detail_no_spoiler">このキャッシュのスポイラー画像を見つけることができませんでした。</string>
   <string name="err_detail_no_map_static">このキャッシュのオフライン地図を見つけることができませんでした。</string>

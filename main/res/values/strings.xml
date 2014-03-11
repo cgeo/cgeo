@@ -168,7 +168,6 @@
     <string name="err_detail_cache_find">c:geo can\'t find geocache</string>
     <string name="err_detail_cache_find_some">c:geo can\'t find that geocache.</string>
     <string name="err_detail_cache_find_any">c:geo can\'t find any geocaches.</string>
-    <string name="err_detail_cache_forgot">c:geo forgot which geocache you want.</string>
     <string name="err_detail_google_maps_limit_reached">c:geo failed to download static maps. Maybe the Google Maps API limit was reached.</string>
     <string name="err_detail_no_spoiler">c:geo found no spoiler images for this cache.</string>
     <string name="err_detail_no_map_static">c:geo found no static maps for this cache.</string>

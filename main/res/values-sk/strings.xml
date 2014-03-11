@@ -144,7 +144,6 @@
   <string name="err_detail_cache_find">Prepáčte, c:geo nemôže nájsť skrýšu</string>
   <string name="err_detail_cache_find_some">Prepáčte, c:geo nemôže nájsť požadovanú skrýšu.</string>
   <string name="err_detail_cache_find_any">Prepáčte, c:geo nemôže nájsť žiadnu skrýšu.</string>
-  <string name="err_detail_cache_forgot">Prepáčte, c:geo zabudlo, akú skrýšu chcete zobraziť.</string>
   <string name="err_detail_google_maps_limit_reached">c:geo sa nepodarilo prevziať statické mapy. Je možné, že bol dosiahnutý limit Google mapy.</string>
   <string name="err_detail_no_spoiler">c:geo nenašla pre túto skrýšu žiaden spoilerový obrázok.</string>
   <string name="err_detail_no_map_static">c:geo nenašla žiadnu statickú mapu pre túto skrýšu.</string>

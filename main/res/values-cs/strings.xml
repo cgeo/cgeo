@@ -144,7 +144,6 @@
   <string name="err_detail_cache_find">c:geo nemůže najít geokeš</string>
   <string name="err_detail_cache_find_some">c:geo nemůže najít tuto geokeš.</string>
   <string name="err_detail_cache_find_any">c:geo nemůže najít žádnou geokeš.</string>
-  <string name="err_detail_cache_forgot">c:geo zapomnělo, jakou keš chceš zobrazit.</string>
   <string name="err_detail_google_maps_limit_reached">c:geo nemůže stáhnout statické mapy. Možná byl dosažen limit Google map.</string>
   <string name="err_detail_no_spoiler">c:geo nenašlo žádný obrázek pro tuto keš.</string>
   <string name="err_detail_no_map_static">c:geo nenašlo žádné statické mapy pro tuto keš.</string>

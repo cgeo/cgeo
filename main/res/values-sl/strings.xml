@@ -142,7 +142,6 @@
   <string name="err_detail_cache_find">c:geo ni našel zaklada</string>
   <string name="err_detail_cache_find_some">c:geo ni našel tega zaklada.</string>
   <string name="err_detail_cache_find_any">c:geo ni našel nobenega zaklada.</string>
-  <string name="err_detail_cache_forgot">c:geo je pozabil kateri zaklad hočete.</string>
   <string name="err_detail_google_maps_limit_reached">c:geo ni mogel naložiti statičnih zemljevidov. Verjetno je presežena omejitev Googlovih zemljevidov.</string>
   <string name="err_detail_no_spoiler">c:geo ni našel spoiler slik za ta zaklad.</string>
   <string name="err_detail_no_map_static">c:geo ni našel statičnih zemljevidov za ta zaklad.</string>

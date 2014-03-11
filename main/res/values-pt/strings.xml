@@ -143,7 +143,6 @@
   <string name="err_detail_cache_find">O c:geo não encontra a geocache</string>
   <string name="err_detail_cache_find_some">O c:geo não encontra essa geocache.</string>
   <string name="err_detail_cache_find_any">O c:geo não encontra qualquer geocache.</string>
-  <string name="err_detail_cache_forgot">O c:geo esqueceu a geocache pretendida.</string>
   <string name="err_detail_google_maps_limit_reached">O c:geo falhou no download dos mapas. Talvez o tenha atingido o limite do Google Maps.</string>
   <string name="err_detail_no_spoiler">O c:geo não encontrou images spoiler para esta cache.</string>
   <string name="err_detail_no_map_static">O c:geo não encontrou mapas estáticos para esta cache.</string>

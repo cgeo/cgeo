@@ -121,7 +121,6 @@
   <string name="err_detail_cache_find">Sajnáljuk, a c:geo nem találja a geoládát.</string>
   <string name="err_detail_cache_find_some">Sajnáljuk, a c:geo nem találja azt a geoládát.</string>
   <string name="err_detail_cache_find_any">Sajnáljuk, a c:geo nem talál geoládákat.</string>
-  <string name="err_detail_cache_forgot">Sajnáljuk, a c:geo elfelejtette melyik geoládát szeretnéd.</string>
   <string name="err_detail_google_maps_limit_reached">A c:geonak nem sikerült letölteni a statikus térképeket. Lehet hogy elérted a Google Maps limitjét.</string>
   <string name="err_detail_no_spoiler">A c:geo nem talált spoiler képeket ehhez a ládához.</string>
   <string name="err_detail_no_map_static">A c:geo nem talált statikus térképeket ehhez a ládához.</string>
