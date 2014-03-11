@@ -8,11 +8,11 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import rx.Observable;
 import rx.android.observables.AndroidObservable;
 import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.schedulers.Schedulers;
+import rx.util.async.Async;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -65,12 +65,12 @@ public abstract class AbstractCheckCredentialsPreference extends AbstractClickab
             loginDialog.setCancelable(false);
             Cookies.clearCookies();
 
-            AndroidObservable.fromActivity(activity, Observable.defer(new Func0<Observable<ImmutablePair<StatusCode, Drawable>>>() {
+            AndroidObservable.fromActivity(activity, Async.start(new Func0<ImmutablePair<StatusCode, Drawable>>() {
                 @Override
-                public Observable<ImmutablePair<StatusCode, Drawable>> call() {
-                    return Observable.from(login());
+                public ImmutablePair<StatusCode, Drawable> call() {
+                    return login();
                 }
-            }).subscribeOn(Schedulers.io())).subscribe(new Action1<ImmutablePair<StatusCode, Drawable>>() {
+            }, Schedulers.io())).subscribe(new Action1<ImmutablePair<StatusCode, Drawable>>() {
                 @Override
                 public void call(final ImmutablePair<StatusCode, Drawable> loginInfo) {
                     loginDialog.dismiss();
