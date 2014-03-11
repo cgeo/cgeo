@@ -21,7 +21,6 @@ import cgeo.test.Compare;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import android.os.Handler;
 import android.test.suitebuilder.annotation.MediumTest;
 
 import java.util.ArrayList;
@@ -157,7 +156,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         cache.setGeocode("GC2ZN4G");
         // upload coordinates
         GCParser.editModifiedCoordinates(cache, new Geopoint("N51 21.544", "E07 02.566"));
-        cache.drop(new Handler());
+        cache.dropSynchronous();
         final String page = GCParser.requestHtmlPage(cache.getGeocode(), null, "n", "0");
         final Geocache cache2 = GCParser.parseCacheFromText(page, null).getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
         assertNotNull(cache2);
@@ -166,7 +165,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(new Geopoint("N51 21.544", "E07 02.566"), cache2.getCoords());
         // delete coordinates
         GCParser.deleteModifiedCoordinates(cache2);
-        cache2.drop(new Handler());
+        cache2.dropSynchronous();
         final String page2 = GCParser.requestHtmlPage(cache.getGeocode(), null, "n", "0");
         final Geocache cache3 = GCParser.parseCacheFromText(page2, null).getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
         assertNotNull(cache3);

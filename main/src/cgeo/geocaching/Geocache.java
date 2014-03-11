@@ -1445,15 +1445,23 @@ public class Geocache implements ICache, IWaypoint {
         return "cache";
     }
 
-    public void drop(Handler handler) {
-        try {
-            DataStore.markDropped(Collections.singletonList(this));
-            DataStore.removeCache(getGeocode(), EnumSet.of(RemoveFlag.REMOVE_CACHE));
+    public Subscription drop(final Handler handler, final Scheduler scheduler) {
+        return scheduler.schedule(new Action1<Inner>() {
+            @Override
+            public void call(final Inner inner) {
+                try {
+                    dropSynchronous();
+                    handler.sendMessage(Message.obtain());
+                } catch (final Exception e) {
+                    Log.e("cache.drop: ", e);
+                }
+            }
+        });
+    }
 
-            handler.sendMessage(Message.obtain());
-        } catch (final Exception e) {
-            Log.e("cache.drop: ", e);
-        }
+    public void dropSynchronous() {
+        DataStore.markDropped(Collections.singletonList(this));
+        DataStore.removeCache(getGeocode(), EnumSet.of(RemoveFlag.REMOVE_CACHE));
     }
 
     public void checkFields() {

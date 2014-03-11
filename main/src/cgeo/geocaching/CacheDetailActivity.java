@@ -1074,20 +1074,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
 
                 progress.show(CacheDetailActivity.this, res.getString(R.string.cache_dialog_offline_drop_title), res.getString(R.string.cache_dialog_offline_drop_message), true, null);
-                new DropCacheThread(new ChangeNotificationHandler(CacheDetailActivity.this, progress)).start();
-            }
-        }
-
-        private class DropCacheThread extends Thread {
-            private Handler handler;
-
-            public DropCacheThread(Handler handler) {
-                this.handler = handler;
-            }
-
-            @Override
-            public void run() {
-                cache.drop(this.handler);
+                cache.drop(new ChangeNotificationHandler(CacheDetailActivity.this, progress), Schedulers.io());
             }
         }
 

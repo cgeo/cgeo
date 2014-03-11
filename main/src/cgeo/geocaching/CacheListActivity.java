@@ -828,7 +828,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         adapter.notifyDataSetChanged();
                         refreshCurrentList();
                     }
-                });
+                }, Schedulers.io());
                 break;
             case R.id.menu_move_to_list:
                 new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list, new Action1<Integer>() {

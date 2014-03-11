@@ -174,20 +174,7 @@ public class CachePopup extends AbstractPopupActivity {
 
             final DropCacheHandler dropCacheHandler = new DropCacheHandler();
             progress.show(CachePopup.this, res.getString(R.string.cache_dialog_offline_drop_title), res.getString(R.string.cache_dialog_offline_drop_message), true, null);
-            new DropCacheThread(dropCacheHandler).start();
-        }
-    }
-
-    private class DropCacheThread extends Thread {
-        final private Handler handler;
-
-        public DropCacheThread(Handler handlerIn) {
-            handler = handlerIn;
-        }
-
-        @Override
-        public void run() {
-            cache.drop(handler);
+            cache.drop(dropCacheHandler, Schedulers.io());
         }
     }
 
