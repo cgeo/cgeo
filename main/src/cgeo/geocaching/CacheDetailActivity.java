@@ -58,6 +58,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Observer;
+import rx.Scheduler.Inner;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.observables.AndroidObservable;
@@ -300,8 +301,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
         });
 
-        // Initialization done. Let's load the data with the given information.
-        new LoadCacheThread(geocode, guid, loadCacheHandler).start();
+        final String realGeocode = geocode;
+        final String realGuid = guid;
+        Schedulers.io().schedule(new Action1<Inner>() {
+            @Override
+            public void call(final Inner inner) {
+                search = Geocache.searchByGeocode(realGeocode, StringUtils.isBlank(realGeocode) ? realGuid : null, 0, false, loadCacheHandler);
+                loadCacheHandler.sendMessage(Message.obtain());
+            }
+        });
     }
 
     @Override
@@ -598,37 +606,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         // rendering done! remove progress popup if any there
         invalidateOptionsMenuCompatible();
         progress.dismiss();
-    }
-
-    /**
-     * Loads the cache with the given geocode or guid.
-     */
-    private class LoadCacheThread extends Thread {
-
-        private CancellableHandler handler = null;
-        private String geocode;
-        private String guid;
-
-        public LoadCacheThread(final String geocode, final String guid, final CancellableHandler handlerIn) {
-            handler = handlerIn;
-
-            if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
-                showToast(res.getString(R.string.err_detail_cache_forgot));
-
-                progress.dismiss();
-                finish();
-                return;
-            }
-
-            this.geocode = geocode;
-            this.guid = guid;
-        }
-
-        @Override
-        public void run() {
-            search = Geocache.searchByGeocode(geocode, StringUtils.isBlank(geocode) ? guid : null, 0, false, handler);
-            handler.sendMessage(Message.obtain());
-        }
     }
 
     /**
@@ -2233,33 +2210,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
-    private StoreCacheThread storeThread;
-
-    private class StoreCacheThread extends Thread {
-        final private int listId;
-        final private CancellableHandler handler;
-
-        public StoreCacheThread(final int listId, final CancellableHandler handler) {
-            this.listId = listId;
-            this.handler = handler;
-        }
-
-        @Override
-        public void run() {
-            cache.store(listId, handler);
-            storeThread = null;
-        }
-    }
-
     protected void storeCache(final int listId, final StoreCacheHandler storeCacheHandler) {
         progress.show(this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
-
-        if (storeThread != null) {
-            storeThread.interrupt();
-        }
-
-        storeThread = new StoreCacheThread(listId, storeCacheHandler);
-        storeThread.start();
+        Schedulers.io().schedule(new Action1<Inner>() {
+            @Override
+            public void call(final Inner inner) {
+                cache.store(listId, storeCacheHandler);
+            }
+        });
     }
 
     private static final class StoreCachePersonalNoteHandler extends StoreCacheHandler {

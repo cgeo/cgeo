@@ -11,6 +11,7 @@ import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
+import rx.Scheduler.Inner;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
@@ -125,23 +126,13 @@ public class CachePopup extends AbstractPopupActivity {
         protected void storeCache(final int listId) {
             final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(R.string.cache_dialog_offline_save_message);
             progress.show(CachePopup.this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
-            new StoreCacheThread(listId, storeCacheHandler).start();
-        }
-    }
-
-    private class StoreCacheThread extends Thread {
-        final private int listId;
-        final private CancellableHandler handler;
-
-        public StoreCacheThread(final int listId, final CancellableHandler handler) {
-            this.listId = listId;
-            this.handler = handler;
-        }
-
-        @Override
-        public void run() {
-            cache.store(listId, handler);
-            invalidateOptionsMenuCompatible();
+            Schedulers.io().schedule(new Action1<Inner>() {
+                @Override
+                public void call(final Inner inner) {
+                    cache.store(listId, storeCacheHandler);
+                    invalidateOptionsMenuCompatible();
+                }
+            });
         }
     }
 
