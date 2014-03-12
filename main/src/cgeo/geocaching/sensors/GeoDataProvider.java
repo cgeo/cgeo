@@ -25,7 +25,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class GeoDataProvider implements OnSubscribe<IGeoData> {
 
@@ -81,7 +80,14 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
     }
 
     final ConnectableObservable<IGeoData> worker = new ConnectableObservable<IGeoData>(this) {
-        final private AtomicInteger debugCounter = new AtomicInteger(0);
+        private int debugSessionCounter = 0;
+
+        private final Object lock = new Object();
+        private int count = 0;
+
+        final private GpsStatus.Listener gpsStatusListener = new GpsStatusListener();
+        final private Listener networkListener = new Listener(LocationManager.NETWORK_PROVIDER, netLocation);
+        final private Listener gpsListener = new Listener(LocationManager.GPS_PROVIDER, gpsLocation);
 
         @Override
         public Subscription connect() {
@@ -89,33 +95,34 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
             AndroidSchedulers.mainThread().schedule(new Action1<Inner>() {
                 @Override
                 public void call(final Inner inner) {
-                    final String counter = " (" + debugCounter.incrementAndGet() + ")";
-                    Log.d("GeoDataProvider: starting the GPS and network listeners" + counter);
-                    final GpsStatus.Listener gpsStatusListener = new GpsStatusListener();
-                    geoManager.addGpsStatusListener(gpsStatusListener);
-
-                    final Listener networkListener = new Listener(LocationManager.NETWORK_PROVIDER, netLocation);
-                    final Listener gpsListener = new Listener(LocationManager.GPS_PROVIDER, gpsLocation);
-
-                    for (final Listener listener : new Listener[] { networkListener, gpsListener }) {
-                        try {
-                            geoManager.requestLocationUpdates(listener.locationProvider, 0, 0, listener);
-                        } catch (final Exception e) {
-                            Log.w("There is no location provider " + listener.locationProvider);
+                    synchronized(lock) {
+                        if (count++ == 0) {
+                            Log.d("GeoDataProvider: starting the GPS and network listeners" + " (" + ++debugSessionCounter + ")");
+                            geoManager.addGpsStatusListener(gpsStatusListener);
+                            for (final Listener listener : new Listener[] { networkListener, gpsListener }) {
+                                try {
+                                    geoManager.requestLocationUpdates(listener.locationProvider, 0, 0, listener);
+                                } catch (final Exception e) {
+                                    Log.w("There is no location provider " + listener.locationProvider);
+                                }
+                            }
                         }
                     }
 
                     subscription.add(Subscriptions.create(new Action0() {
                         @Override
                         public void call() {
-                            Log.d("GeoDataProvider: registering the stop of GPS and network listeners in 2.5s" + counter);
                             AndroidSchedulers.mainThread().schedule(new Action1<Inner>() {
                                 @Override
                                 public void call(final Inner inner) {
-                                    Log.d("GeoDataProvider: stopping the GPS and network listeners" + counter);
-                                    geoManager.removeUpdates(networkListener);
-                                    geoManager.removeUpdates(gpsListener);
-                                    geoManager.removeGpsStatusListener(gpsStatusListener);
+                                    synchronized (lock) {
+                                        if (--count == 0) {
+                                            Log.d("GeoDataProvider: stopping the GPS and network listeners" + " (" + debugSessionCounter + ")");
+                                            geoManager.removeUpdates(networkListener);
+                                            geoManager.removeUpdates(gpsListener);
+                                            geoManager.removeGpsStatusListener(gpsStatusListener);
+                                        }
+                                    }
                                 }
                             }, 2500, TimeUnit.MILLISECONDS);
                         }
