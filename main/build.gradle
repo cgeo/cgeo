@@ -1,0 +1,354 @@
+apply plugin: 'android'
+apply plugin: 'android-apt'
+apply plugin: 'findbugs'
+
+/*
+Before use unit test :
+Replace all custom namepace with xmlns:cgeo="http://schemas.android.com/apk/res-auto"
+
+
+Usage :
+
+check dependencies :
+gradle dependencies main:dependencies
+
+build & test:
+gradle clean assembleDebug connectedAndroidTest
+
+debug:
+gradle  connectedAndroidTest --debug --stacktrace
+
+for CI? :
+gradle deviceCheck
+gradle connectedCheck
+
+ */
+//Testing guide : http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Testing
+//https://github.com/stephanenicolas/Quality-Tools-for-Android
+
+def AAVersion = '3.0.1'
+def RXVersion = '0.17.0-RC6'
+group = 'cgeo.geocaching'
+version = '0.0.1'
+
+android {
+    compileSdkVersion "Google Inc.:Google APIs:19"
+    //compileSdkVersion 19
+    buildToolsVersion "19.0.3"
+
+    def Properties versionProps = new Properties()
+    versionProps.load(new FileInputStream(file('version.properties')))
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+
+    defaultConfig {
+        minSdkVersion 7
+        targetSdkVersion 19
+        versionName versionProps['name']
+        versionCode versionProps['code'].toInteger()
+
+        // NOTE: must match the package in the test directory and must be different from the app package
+        testPackageName "cgeo.geocaching.test"
+
+        // standard android test runner
+        //testInstrumentationRunner "android.test.InstrumentationTestRunner"
+        testInstrumentationRunner "com.zutubi.android.junitreport.JUnitReportTestRunner"
+
+        //testHandlingProfiling true
+        testFunctionalTest true
+    }
+
+    //Conditional signin
+    //Uncomment and set the 4 key properties (#key.store, ...) in gradle.properties
+    signingConfigs {
+        release {
+            //not sure?
+            keyAlias 'cgeo'
+        }
+    }
+    if (project.hasProperty('key.store') &&
+            project.hasProperty('key.store.password') &&
+            project.hasProperty('key.alias.password')) {
+        android.signingConfigs.release.storeFile = file(project.property('key.store'))
+        android.signingConfigs.release.storePassword = property('key.store.password')
+        android.signingConfigs.release.keyPassword = property('key.alias')
+        android.signingConfigs.release.keyAlias = property('key.alias.password')
+    } else {
+        buildTypes.release.signingConfig = null
+    }
+
+    buildTypes {
+        debug {
+            //packageNameSuffix ".debug"
+            //zipAlign = true
+            debuggable true
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), '../tests/proguard.cfg'
+            versionNameSuffix " Debug " + versionProps['betaNumber']
+        }
+        release {
+            debuggable true
+            runProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    testBuildType "debug" //the default BuildType
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            //java.srcDirs = ['src', 'thirdparty', 'annotation_gen']
+            java.srcDirs = ['src', 'thirdparty']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+        //new instrumentTest name
+        androidTest.setRoot('../tests')
+        androidTest{
+            manifest.srcFile '../tests/AndroidManifest.xml'
+            java.srcDirs = ['../tests/java']
+            res.srcDirs = ['../tests/res', 'res']
+            resources.srcDirs = ['../tests/res', 'res']
+        }
+    }
+    testOptions {
+        resultsDir = "$project.buildDir/build/test-results"
+    }
+
+    lintOptions {
+        //checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+}
+
+dependencies {
+    apt( "org.androidannotations:androidannotations:$AAVersion"){
+        exclude module:'androidannotations-api'
+    }
+    compile "org.androidannotations:androidannotations-api:$AAVersion"
+
+    compile files('libs/httpclientandroidlib-1.1.2.jar')
+    compile files('libs/locus-api-4.0.jar')
+    //https://mapsforge.googlecode.com/files/mapsforge-map-0.2.4.jar
+    compile files('libs/mapsforge-map-0.2.4.jar')
+    compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
+
+    compile 'com.android.support:support-v4:19.0.1'
+
+    compile 'com.jakewharton:butterknife:4.0.1'
+    compile 'org.apache.commons:commons-collections4:4.0'
+    compile 'org.apache.commons:commons-lang3:3.2.1'
+    compile 'commons-io:commons-io:2.4'
+    compile 'com.google.code.findbugs:annotations:2.0.3'
+
+    compile "com.netflix.rxjava:rxjava-core:$RXVersion"
+    compile "com.netflix.rxjava:rxjava-android:$RXVersion"
+    compile "com.netflix.rxjava:rxjava-async-util:$RXVersion"
+
+    //TEST
+    //compile files('compile-libs/androidannotations-3.0.1.jar')
+    //compile files('compile-libs/findbugs-ant.jar')
+    //compile files('compile-libs/findbugs-jsr305.jar')  //CheckForNull conflict with com.google.code.findbugs:annotations
+    compile files('compile-libs/org.eclipse.jdt.annotation_1.1.0.v20130513-1648.jar')
+
+    //Robotium / Robolectric??
+    androidTestCompile files('../tests/libs/android-junit-report-1.5.8.jar')
+    androidTestCompile files('../tests/libs/robotium-solo-3.6.jar')
+    //androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.0.1'
+}
+
+/*
+ ANDROID ANNOTATIONS
+ */
+
+apt {
+    arguments {
+        androidManifestFile variant.processResources.manifestFile
+        resourcePackageName 'cgeo.geocaching'
+
+        // If you're using Android NBS flavors you should use the following line instead of hard-coded packageName
+        // resourcePackageName android.defaultConfig.packageName
+
+        // You can set optional annotation processing options here, like these commented options:
+        // logLevel 'INFO'
+        // logFile '/var/log/aa.log'
+    }
+}
+
+/*
+ FINDBUGS
+
+ Usage : gradle check
+
+ */
+
+//http://www.gradle.org/docs/current/dsl/org.gradle.api.plugins.quality.FindBugsExtension.html
+findbugs {
+    toolVersion = "2.0.1"
+    //sourceSets = [sourceSets.main]
+    ignoreFailures = true
+    reportsDir = file("$project.buildDir/reports")
+    effort = "max"
+    reportLevel = "high"
+    //visitors = ["FindSqlInjection", "SwitchFallthrough"]
+    //omitVisitors = ["FindNonShortCircuit"]
+    //includeFilter = file("$rootProject.projectDir/project/findbugs/inclusions.xml")
+    excludeFilter = file("$rootProject.projectDir/project/findbugs/exclusions.xml")
+
+}
+
+/*
+*
+*
+* END of useful build
+* Following task are for samples
+*
+ */
+
+task logInfo {
+    logging.captureStandardOutput LogLevel.INFO
+    doFirst {
+        println 'A task message which is logged at INFO level'
+    }
+}
+
+/*
+ UNIT TEST
+ */
+/*
+sourceSets {
+    unitTest {
+        java.srcDir file('../tests/src')
+        //java.srcDirs =  ['src', 'thirdparty', 'annotation_gen', '../tests']
+        resources.srcDir file('../tests/res')
+        //manifest.srcFile '../tests/AndroidManifest.xml'
+    }
+}
+dependencies {
+    //unitTestCompile files("$project.buildDir/classes/release")
+    unitTestCompile files("$project.buildDir/classes/debug")
+    unitTestCompile 'junit:junit:4.8.2'
+    unitTestCompile 'com.google.android:android-test:4.1.1.4'
+
+    unitTestCompile 'com.googlecode.androidannotations:androidannotations-api:2.7.1'
+    unitTestCompile 'com.jakewharton:butterknife:4.0.1'
+    unitTestCompile 'org.apache.commons:commons-collections4:4.0'
+    unitTestCompile 'commons-io:commons-io:2.4'
+    unitTestCompile 'org.apache.commons:commons-lang3:3.2.1'
+    unitTestCompile 'com.google.code.findbugs:annotations:2.0.3'
+    unitTestCompile 'com.netflix.rxjava:rxjava-core:0.17.0-RC6'
+    unitTestCompile 'com.netflix.rxjava:rxjava-android:0.17.0-RC6'
+}
+
+// extend the runtime
+configurations {
+    unitTestCompile.extendsFrom runtime
+    unitTestRuntime.extendsFrom unitTestCompile
+}
+
+// add the unitTest task
+//task unitTest(type:Test, dependsOn: assemble) {
+task unitTest(type:Test, dependsOn: assembleDebug) {
+    description = "run unit tests"
+    testClassesDir = project.sourceSets.unitTest.output.classesDir
+    classpath = project.sourceSets.unitTest.runtimeClasspath
+}
+// bind to check
+check.dependsOn unitTest
+//build.dependsOn unitTest
+*/
+
+//run gradle compileTest
+
+/*
+ PLACEHOLDER
+ */
+
+//Not working...copy templates/keys.xml in res/values for the moment
+task prep() {
+    /*
+    requiredProperties "maps.api.key", "maps.api.key.market", "ocde.okapi.consumer.key", "ocde.okapi.consumer.secret", "ocpl.okapi.consumer.key", "ocpl.okapi.consumer.secret"
+    doFirst {
+        logger.info("prep... ")
+
+        copy {
+            from "templates"
+            include "*.xml"
+            into "res/values"
+            filter(org.apache.tools.ant.filters.ReplaceTokens, tokens:  project.ext.filterTokens)
+        }
+    }
+    */
+}
+task prep2() {
+/*
+        //http://goo.gl/bqnwjJ
+        copy{
+            from("${buildDir}/manifests"){
+                include "${variant.dirName}/AndroidManifest.xml"
+            }
+            into("${buildDir}/manifests/$variant.name")
+
+            // define a variable for your key:
+            def gmaps_key = "<your-key>"
+
+            filter{
+                String line -> line.replaceAll("<meta-data android:name=\"com.google.android.maps.v2.API_KEY\" android:value=\"\"/>",
+                                               "<meta-data android:name=\"com.google.android.maps.v2.API_KEY\" android:value=\"" + gmaps_key + "\"/>")
+            }
+
+            // set the path to the modified Manifest:
+            variant.processResources.manifestFile = file("${buildDir}/manifests/${variant.name}/${variant.dirName}/AndroidManifest.xml")
+        }
+
+
+         */
+}
+
+android.applicationVariants.all{ variant ->
+    variant.mergeResources.doLast{
+        logger.info("rootProject.projectDir="+rootProject.projectDir)
+        prep{}
+    }
+}
+
+//http://blog.futurice.com/android_unit_testing_in_ides_and_ci_environments
+task addTest {
+    def src = ['tests/java']
+    def file = file("app.iml")
+
+    doLast {
+        try {
+            def parsedXml = (new XmlParser()).parse(file)
+            def node = parsedXml.component[1].content[0]
+            src.each {
+                def path = 'file://$MODULE_DIR$/' + "${it}"
+                def set = node.find { it.@url == path }
+                if (set == null) {
+                    new Node(node, 'sourceFolder', ['url': 'file://$MODULE_DIR$/' + "${it}", 'isTestSource': "true"])
+                    def writer = new StringWriter()
+                    new XmlNodePrinter(new PrintWriter(writer)).print(parsedXml)
+                    file.text = writer.toString()
+                }
+            }
+        } catch (FileNotFoundException e) {
+            // nop, iml not found
+        }
+    }
+}
+/*
+// always do the addtest on prebuild
+gradle.projectsEvaluated {
+    preBuild.dependsOn(addTest)
+}*/
