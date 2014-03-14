@@ -29,7 +29,9 @@ import android.graphics.Bitmap;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -318,17 +320,13 @@ public class GCMap {
                     if (Settings.isExcludeMyCaches()) { // works only for PM
                         params.put("hf", "1", "hh", "1"); // hide found, hide hidden
                     }
-                    if (Settings.getCacheType() == CacheType.TRADITIONAL) {
-                        params.put("ect", "9,5,3,6,453,13,1304,137,11,4,8,1858"); // 2 = tradi 3 = multi 8 = mystery
-                    } else if (Settings.getCacheType() == CacheType.MULTI) {
-                        params.put("ect", "9,5,2,6,453,13,1304,137,11,4,8,1858");
-                    } else if (Settings.getCacheType() == CacheType.MYSTERY) {
-                        params.put("ect", "9,5,3,6,453,13,1304,137,11,4,2,1858");
+                    // ect: exclude cache type (probably), comma separated list
+                    if (Settings.getCacheType() != CacheType.ALL) {
+                        params.put("ect", getCacheTypeFilter(Settings.getCacheType()));
                     }
                     if (tile.getZoomLevel() != 14) {
                         params.put("_", String.valueOf(System.currentTimeMillis()));
                     }
-                    // TODO: other types t.b.d
 
                     // The PNG must be requested first, otherwise the following request would always return with 204 - No Content
                     Bitmap bitmap = Tile.requestMapTile(params);
@@ -382,5 +380,70 @@ public class GCMap {
         }
 
         return searchResult;
+    }
+
+    /**
+     * Creates a list of caches types to filter on the live map (exclusion string)
+     * 
+     * @param typeToDisplay
+     *            - cache type to omit from exclusion list so it gets displayed
+     * @return
+     * 
+     *         cache types for live map filter:
+     *         2 = traditional, 9 = ape, 5 = letterbox
+     *         3 = multi
+     *         6 = event, 453 = mega, 13 = cito, 1304 = gps adventures
+     *         4 = virtual, 11 = webcam, 137 = earth
+     *         8 = mystery, 1858 = whereigo
+     */
+    private static String getCacheTypeFilter(CacheType typeToDisplay) {
+        Set<String> filterTypes = new HashSet<String>();
+        // Put all types in set, remove what should be visible in a second step
+        filterTypes.addAll(Arrays.asList("2", "9", "5", "3", "6", "453", "13", "1304", "4", "11", "137", "8", "1858"));
+        switch (typeToDisplay) {
+            case TRADITIONAL:
+                filterTypes.remove("2");
+                break;
+            case PROJECT_APE:
+                filterTypes.remove("9");
+                break;
+            case LETTERBOX:
+                filterTypes.remove("5");
+                break;
+            case MULTI:
+                filterTypes.remove("3");
+                break;
+            case EVENT:
+                filterTypes.remove("6");
+                break;
+            case MEGA_EVENT:
+                filterTypes.remove("453");
+                break;
+            case CITO:
+                filterTypes.remove("13");
+                break;
+            case GPS_EXHIBIT:
+                filterTypes.remove("1304");
+                break;
+            case VIRTUAL:
+                filterTypes.remove("4");
+                break;
+            case WEBCAM:
+                filterTypes.remove("11");
+                break;
+            case EARTH:
+                filterTypes.remove("137");
+                break;
+            case MYSTERY:
+                filterTypes.remove("8");
+                break;
+            case WHERIGO:
+                filterTypes.remove("1858");
+                break;
+            default:
+                // nothing to remove otherwise
+        }
+
+        return StringUtils.join(filterTypes.toArray(), ",");
     }
 }
