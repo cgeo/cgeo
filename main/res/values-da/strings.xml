@@ -78,7 +78,9 @@
   <string name="log_stars_2">2 stjerner</string>
   <string name="log_stars_25">2,5 stjerner</string>
   <string name="log_stars_3">3 stjerner</string>
+  <string name="log_stars_35">3,5 stjerner</string>
   <string name="log_stars_4">4 stjerner</string>
+  <string name="log_stars_45">4,5 stjerner</string>
   <string name="log_stars_5">5 stjerner</string>
   <string name="log_stars_15_description">Temmelig dårlig</string>
   <string name="log_stars_2_description">Under gennemsnittet</string>
