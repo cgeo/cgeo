@@ -25,6 +25,9 @@ import cgeo.geocaching.utils.UnknownTagsHandler;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import rx.android.observables.AndroidObservable;
+import rx.android.observables.ViewObservable;
+import rx.functions.Action1;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -514,41 +517,21 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
                 trackableImage.setImageResource(R.drawable.image_not_loaded);
                 trackableImage.setClickable(true);
-                trackableImage.setOnClickListener(new View.OnClickListener() {
-
+                ViewObservable.clicks(trackableImage, false).subscribe(new Action1<View>() {
                     @Override
-                    public void onClick(View arg0) {
+                    public void call(final View view) {
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getImage())));
                     }
                 });
 
-                // try to load image
-                final Handler handler = new Handler() {
-
-                    @Override
-                    public void handleMessage(Message message) {
-                        final BitmapDrawable image = (BitmapDrawable) message.obj;
-                        if (image != null) {
-                            trackableImage.setImageDrawable((BitmapDrawable) message.obj);
-                        }
-                    }
-                };
-
-                new Thread() {
-
-                    @Override
-                    public void run() {
-                        try {
-                            final HtmlImage imgGetter = new HtmlImage(geocode, true, 0, false);
-
-                            final BitmapDrawable image = imgGetter.getDrawable(trackable.getImage());
-                            final Message message = handler.obtainMessage(0, image);
-                            handler.sendMessage(message);
-                        } catch (final Exception e) {
-                            Log.e("TrackableActivity.DetailsViewCreator.ImageGetterThread: ", e);
-                        }
-                    }
-                }.start();
+                AndroidObservable.fromActivity(TrackableActivity.this,
+                        new HtmlImage(geocode, true, 0, false).fetchDrawable(trackable.getImage()))
+                        .subscribe(new Action1<BitmapDrawable>() {
+                            @Override
+                            public void call(final BitmapDrawable bitmapDrawable) {
+                                trackableImage.setImageDrawable(bitmapDrawable);
+                            }
+                        });
 
                 imageView.addView(trackableImage);
             }
