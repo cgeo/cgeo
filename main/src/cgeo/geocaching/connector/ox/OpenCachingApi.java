@@ -1,17 +1,21 @@
 package cgeo.geocaching.connector.ox;
 
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
 import java.util.Collection;
@@ -55,38 +59,81 @@ public class OpenCachingApi {
     }
 
     public static Collection<Geocache> searchByCenter(final @NonNull Geopoint center) {
-        final HttpResponse response = getRequest(API_URL_CACHES_GPX,
-                new Parameters(
-                        "log_limit", "0",
-                        "hint", "false",
-                        "description", "none",
-                        "limit", "20",
-                        "center", center.format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA)));
-        return importCachesFromResponse(response, false);
+        final Parameters queryParameters = new Parameters(
+                "log_limit", "0",
+                "hint", "false",
+                "description", "none",
+                "limit", "20",
+                "center", center.format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA));
+        if (addTypeFilter(queryParameters)) {
+            final HttpResponse response = getRequest(API_URL_CACHES_GPX, queryParameters);
+
+            return importCachesFromResponse(response, false);
+        }
+        return Collections.emptyList();
     }
 
+    /**
+     * Adds filter for the global cache type to the query parameters.
+     * Returns false if the type doesn't exist on OX and thus would exclude all caches.
+     *
+     * @param queryParameters
+     *            Parameters to modify
+     * @return True - query possible, False - no query, all caches excluded
+     */
+    private static boolean addTypeFilter(Parameters queryParameters) {
+        boolean doQuery = true;
+        if (Settings.getCacheType() != CacheType.ALL) {
+            String typeFilter;
+            switch (Settings.getCacheType()) {
+                case TRADITIONAL:
+                    typeFilter = "Traditional Cache";
+                    break;
+                case MULTI:
+                    typeFilter = "Multi-cache";
+                    break;
+                case MYSTERY:
+                    typeFilter = "Unknown Cache";
+                    break;
+                case VIRTUAL:
+                    typeFilter = "Virtual Cache";
+                    break;
+                default:
+                    typeFilter = StringUtils.EMPTY;
+                    doQuery = false;
+            }
+            queryParameters.add("type", typeFilter);
+        }
+        return doQuery;
+    }
 
     public static Collection<Geocache> searchByBoundingBox(final @NonNull Viewport viewport) {
         final String bbox = viewport.bottomLeft.format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA) + "," + viewport.topRight.format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA);
-        final HttpResponse response = getRequest(API_URL_CACHES_GPX,
-                new Parameters(
-                        "log_limit", "0",
-                        "hint", "false",
-                        "description", "none",
-                        "limit", "100",
-                        "bbox", bbox));
-        return importCachesFromResponse(response, false);
+        final Parameters queryParameters = new Parameters(
+                "log_limit", "0",
+                "hint", "false",
+                "description", "none",
+                "limit", "100",
+                "bbox", bbox);
+        if (addTypeFilter(queryParameters)) {
+            final HttpResponse response = getRequest(API_URL_CACHES_GPX, queryParameters);
+            return importCachesFromResponse(response, false);
+        }
+        return Collections.emptyList();
     }
 
     public static Collection<Geocache> searchByKeyword(final @NonNull String name) {
-        final HttpResponse response = getRequest(API_URL_CACHES_GPX,
-                new Parameters(
-                        "log_limit", "5",
-                        "hint", "false",
-                        "description", "none",
-                        "limit", "100",
-                        "name", name));
-        return importCachesFromResponse(response, false);
+        final Parameters queryParameters = new Parameters(
+                "log_limit", "5",
+                "hint", "false",
+                "description", "none",
+                "limit", "100",
+                "name", name);
+        if (addTypeFilter(queryParameters)) {
+            final HttpResponse response = getRequest(API_URL_CACHES_GPX, queryParameters);
+            return importCachesFromResponse(response, false);
+        }
+        return Collections.emptyList();
     }
 
 }
