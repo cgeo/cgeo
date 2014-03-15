@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.DateUtils;
+import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -85,7 +86,7 @@ public final class LogEntry {
         final List<String> titles = new ArrayList<String>(5);
         for (Image image : getLogImages()) {
             if (StringUtils.isNotBlank(image.getTitle())) {
-                titles.add(image.getTitle());
+                titles.add(HtmlUtils.extractText(image.getTitle()));
             }
         }
         if (titles.isEmpty()) {
