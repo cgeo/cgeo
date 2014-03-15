@@ -3,19 +3,13 @@ package cgeo.geocaching;
 import cgeo.geocaching.sensors.DirectionProvider;
 import cgeo.geocaching.sensors.GeoDataProvider;
 import cgeo.geocaching.sensors.IGeoData;
-import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import rx.Observable;
 import rx.functions.Func2;
 
-import android.app.Activity;
 import android.app.Application;
-import android.app.ProgressDialog;
-import android.content.res.Resources;
-
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CgeoApplication extends Application {
 
@@ -41,33 +35,6 @@ public class CgeoApplication extends Application {
     public void onLowMemory() {
         Log.i("Cleaning applications cache.");
         DataStore.removeAllFromCache();
-    }
-
-    /**
-     * Move the database to/from external cgdata in a new thread,
-     * showing a progress window
-     *
-     * @param fromActivity
-     */
-    public void moveDatabase(final Activity fromActivity) {
-        final Resources res = this.getResources();
-        final ProgressDialog dialog = ProgressDialog.show(fromActivity, res.getString(R.string.init_dbmove_dbmove), res.getString(R.string.init_dbmove_running), true, false);
-        final AtomicBoolean atomic = new AtomicBoolean(false);
-        new Thread() {
-            @Override
-            public void run() {
-                atomic.set(DataStore.moveDatabase());
-                fromActivity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        dialog.dismiss();
-                        boolean success = atomic.get();
-                        String message = success ? res.getString(R.string.init_dbmove_success) : res.getString(R.string.init_dbmove_failed);
-                        Dialogs.message(fromActivity, R.string.init_dbmove_dbmove, message);
-                    }
-                });
-            }
-        }.start();
     }
 
     public synchronized Observable<ImmutablePair<IGeoData, Float>> geoDirObservable() {

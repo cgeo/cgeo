@@ -17,6 +17,7 @@ import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -24,8 +25,15 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import rx.android.observables.AndroidObservable;
+import rx.functions.Action1;
+import rx.functions.Func0;
 import rx.functions.Func1;
+import rx.schedulers.Schedulers;
+import rx.util.async.Async;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.ContentValues;
 import android.content.Context;
@@ -377,30 +385,47 @@ public class DataStore {
         return target.getPath();
     }
 
-    public static boolean moveDatabase() {
-        if (!LocalStorage.isExternalStorageAvailable()) {
-            Log.w("Database was not moved: external memory not available");
-            return false;
-        }
+    /**
+     * Move the database to/from external cgdata in a new thread,
+     * showing a progress window
+     *
+     * @param fromActivity
+     */
+    public static void moveDatabase(final Activity fromActivity) {
+        final ProgressDialog dialog = ProgressDialog.show(fromActivity, fromActivity.getString(R.string.init_dbmove_dbmove), fromActivity.getString(R.string.init_dbmove_running), true, false);
+        AndroidObservable.fromActivity(fromActivity, Async.fromFunc0(new Func0<Boolean>() {
+            @Override
+            public Boolean call() {
+                if (!LocalStorage.isExternalStorageAvailable()) {
+                    Log.w("Database was not moved: external memory not available");
+                    return false;
+                }
+                closeDb();
 
-        closeDb();
+                final File source = databasePath();
+                final File target = databaseAlternatePath();
+                if (!LocalStorage.copy(source, target)) {
+                    Log.e("Database could not be moved to " + target);
+                    init();
+                    return false;
+                }
+                if (!FileUtils.delete(source)) {
+                    Log.e("Original database could not be deleted during move");
+                }
+                Settings.setDbOnSDCard(!Settings.isDbOnSDCard());
+                Log.i("Database was moved to " + target);
 
-        final File source = databasePath();
-        final File target = databaseAlternatePath();
-
-        if (!LocalStorage.copy(source, target)) {
-            Log.e("Database could not be moved to " + target);
-            init();
-            return false;
-        }
-
-        if (!FileUtils.delete(source)) {
-            Log.e("Original database could not be deleted during move");
-        }
-        Settings.setDbOnSDCard(!Settings.isDbOnSDCard());
-        Log.i("Database was moved to " + target);
-        init();
-        return true;
+                init();
+                return true;
+            }
+        })).subscribeOn(Schedulers.io()).subscribe(new Action1<Boolean>() {
+            @Override
+            public void call(final Boolean success) {
+                dialog.dismiss();
+                final String message = success ? fromActivity.getString(R.string.init_dbmove_success) : fromActivity.getString(R.string.init_dbmove_failed);
+                Dialogs.message(fromActivity, R.string.init_dbmove_dbmove, message);
+            }
+        });
     }
 
     private static File databasePath(final boolean internal) {

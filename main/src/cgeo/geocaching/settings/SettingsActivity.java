@@ -351,9 +351,8 @@ public class SettingsActivity extends PreferenceActivity {
         p.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(final Preference preference) {
-                boolean oldValue = Settings.isDbOnSDCard();
-                ((CgeoApplication) SettingsActivity.this.getApplication())
-                        .moveDatabase(SettingsActivity.this);
+                final boolean oldValue = Settings.isDbOnSDCard();
+                DataStore.moveDatabase(SettingsActivity.this);
                 return oldValue != Settings.isDbOnSDCard();
             }
         });
