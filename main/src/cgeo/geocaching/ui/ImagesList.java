@@ -39,7 +39,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
 
 public class ImagesList {
 
@@ -86,7 +85,7 @@ public class ImagesList {
      * @param offline <tt>true</tt> if the images must be stored for offline use
      * @return a subscription which, when unsubscribed, interrupts the loading and clears up resources
      */
-    public Subscription loadImages(final View parentView, final List<Image> images, final boolean offline) {
+    public Subscription loadImages(final View parentView, final Collection<Image> images, final boolean offline) {
         // Start with a fresh subscription because of this method can be called several times if the
         // englobing activity is stopped/restarted.
         final CompositeSubscription subscriptions = new CompositeSubscription(Subscriptions.create(new Action0() {
