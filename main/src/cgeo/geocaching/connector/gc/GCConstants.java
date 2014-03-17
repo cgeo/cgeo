@@ -159,7 +159,7 @@ public final class GCConstants {
     public final static Pattern PATTERN_VIEWSTATEFIELDCOUNT = Pattern.compile("id=\"__VIEWSTATEFIELDCOUNT\"[^(value)]+value=\"(\\d+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     public final static Pattern PATTERN_VIEWSTATES = Pattern.compile("id=\"__VIEWSTATE(\\d*)\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     public final static Pattern PATTERN_USERTOKEN = Pattern.compile("userToken\\s*=\\s*'([^']+)'");
-    public final static Pattern PATTERN_LIST_PQ = Pattern.compile(Pattern.quote("(") + "(\\d+)" + Pattern.quote(")") + ".*?guid=([^\"]*)\".*?>([^<]*)<");
+    public final static Pattern PATTERN_LIST_PQ = Pattern.compile(Pattern.quote("(") + "(\\d+)" + Pattern.quote(")") + ".+?guid=(.+?)\".*?title=\"(.+?)\"");
 
     /** Live Map since 14.02.2012 */
     public final static Pattern PATTERN_USERSESSION = Pattern.compile("UserSession\\('([^']+)'");
