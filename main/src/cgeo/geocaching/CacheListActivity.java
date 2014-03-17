@@ -694,9 +694,23 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 clearOfflineLogs();
                 invalidateOptionsMenuCompatible();
                 return true;
+            case R.id.menu_cache_list_app:
+                if (search == null || CollectionUtils.isEmpty(cacheList)) {
+                    showToast(res.getString(R.string.warn_no_cache_coord));
+                    return false;
+                }
+                return CacheListAppFactory.onMenuItemSelected(item, cacheList, this, getFilteredSearch());
             default:
                 return CacheListAppFactory.onMenuItemSelected(item, cacheList, this, search);
         }
+    }
+
+    private SearchResult getFilteredSearch() {
+        final Set<String> geocodes = new HashSet<String>();
+        for (final Geocache cache : adapter.getFilteredList()) {
+            geocodes.add(cache.getGeocode());
+        }
+        return new SearchResult(geocodes);
     }
 
     public void deletePastEvents() {
