@@ -77,7 +77,6 @@ import android.support.v4.content.Loader;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -111,7 +110,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     /** The list of shown caches shared with Adapter. Don't manipulate outside of main thread only with Handler */
     private final List<Geocache> cacheList = new ArrayList<Geocache>();
     private CacheListAdapter adapter = null;
-    private LayoutInflater inflater = null;
     private View listFooter = null;
     private TextView listFooterText = null;
     private final Progress progress = new Progress();
@@ -140,7 +138,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     // FIXME: This method has mostly been replaced by the loaders. But it still contains a license agreement check.
     public void handleCachesLoaded() {
         try {
-            setAdapter();
+            updateAdapter();
 
             updateTitle();
 
@@ -266,7 +264,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         @Override
         public void handleRegularMessage(Message msg) {
-            setAdapter();
+            updateAdapter();
 
             if (msg.what > -1) {
                 cacheList.get(msg.what).setStatusChecked(false);
@@ -305,7 +303,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private final CancellableHandler downloadFromWebHandler = new CancellableHandler() {
         @Override
         public void handleRegularMessage(Message msg) {
-            setAdapter();
+            updateAdapter();
 
             adapter.notifyDataSetChanged();
 
@@ -401,7 +399,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         });
 
         setTitle(title);
-        setAdapter();
+        initAdapter();
 
         prepareFilterBar();
 
@@ -421,6 +419,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             importGpxAttachement();
         }
     }
+
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -894,51 +893,35 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return super.onKeyDown(keyCode, event);
     }
 
-    private void setAdapter() {
-        if (listFooter == null) {
-            if (inflater == null) {
-                inflater = getLayoutInflater();
-            }
-            listFooter = inflater.inflate(R.layout.cacheslist_footer, null);
-            listFooter.setClickable(true);
-            listFooter.setOnClickListener(new MoreCachesListener());
+    private void initAdapter() {
+        final ListView list = getListView();
+        adapter = new CacheListAdapter(this, cacheList, type);
+        setListAdapter(adapter);
+        adapter.forceSort();
+        registerForContextMenu(list);
+        list.setLongClickable(true);
 
-            listFooterText = (TextView) listFooter.findViewById(R.id.more_caches);
+        listFooter = getLayoutInflater().inflate(R.layout.cacheslist_footer, null);
+        listFooter.setClickable(true);
+        listFooter.setOnClickListener(new MoreCachesListener());
+        listFooterText = (TextView) listFooter.findViewById(R.id.more_caches);
+        list.addFooterView(listFooter);
+    }
 
-            getListView().addFooterView(listFooter);
-        }
-
-        if (adapter == null) {
-            final ListView list = getListView();
-
-            registerForContextMenu(list);
-            list.setLongClickable(true);
-
-            adapter = new CacheListAdapter(this, cacheList, type);
-            setListAdapter(adapter);
-        } else {
-            adapter.notifyDataSetChanged();
-        }
+    private void updateAdapter() {
+        adapter.notifyDataSetChanged();
         adapter.forceSort();
         adapter.reFilter();
     }
 
     private void showFooterLoadingCaches() {
-        if (listFooter == null) {
-            return;
-        }
-
         listFooterText.setText(res.getString(R.string.caches_more_caches_loading));
         listFooter.setClickable(false);
         listFooter.setOnClickListener(null);
     }
 
     private void showFooterMoreCaches() {
-        if (listFooter == null) {
-            return;
-        }
-
-        boolean enableMore = (type != CacheListType.OFFLINE && cacheList.size() < MAX_LIST_ITEMS);
+        boolean enableMore = type != CacheListType.OFFLINE && cacheList.size() < MAX_LIST_ITEMS;
         if (enableMore && search != null) {
             final int count = search.getTotalCountGC();
             enableMore = count > 0 && cacheList.size() < count;
