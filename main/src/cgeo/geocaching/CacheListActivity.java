@@ -899,7 +899,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         setListAdapter(adapter);
         adapter.forceSort();
         registerForContextMenu(list);
-        list.setLongClickable(true);
 
         listFooter = getLayoutInflater().inflate(R.layout.cacheslist_footer, null);
         listFooter.setClickable(true);
