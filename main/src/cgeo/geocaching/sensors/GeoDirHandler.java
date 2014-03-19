@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.settings.Settings;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
+
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -11,7 +12,7 @@ import rx.functions.Action1;
 /**
  * GeoData and Direction handler.
  * <p>
- * To use this class, override {@link #updateGeoDir(IGeoData, Float)}. You need to start the handler using
+ * To use this class, override {@link #updateGeoDir(IGeoData, float)}. You need to start the handler using
  * {@link #start()}. A good place to do so might be the {@code onResume} method of the Activity. Stop the Handler
  * accordingly in {@code onPause}.
  */

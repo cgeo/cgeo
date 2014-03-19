@@ -25,6 +25,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+
 import rx.android.observables.AndroidObservable;
 import rx.functions.Action1;
 import rx.functions.Func0;
@@ -149,19 +150,19 @@ public class DataStore {
     private static SQLiteDatabase database = null;
     private static final int dbVersion = 68;
     public static final int customListIdOffset = 10;
-    private static final String dbName = "data";
-    private static final String dbTableCaches = "cg_caches";
-    private static final String dbTableLists = "cg_lists";
-    private static final String dbTableAttributes = "cg_attributes";
-    private static final String dbTableWaypoints = "cg_waypoints";
-    private static final String dbTableSpoilers = "cg_spoilers";
-    private static final String dbTableLogs = "cg_logs";
-    private static final String dbTableLogCount = "cg_logCount";
-    private static final String dbTableLogImages = "cg_logImages";
-    private static final String dbTableLogsOffline = "cg_logs_offline";
-    private static final String dbTableTrackables = "cg_trackables";
-    private static final String dbTableSearchDestionationHistory = "cg_search_destination_history";
-    private static final String dbCreateCaches = ""
+    private static final @NonNull String dbName = "data";
+    private static final @NonNull String dbTableCaches = "cg_caches";
+    private static final @NonNull String dbTableLists = "cg_lists";
+    private static final @NonNull String dbTableAttributes = "cg_attributes";
+    private static final @NonNull String dbTableWaypoints = "cg_waypoints";
+    private static final @NonNull String dbTableSpoilers = "cg_spoilers";
+    private static final @NonNull String dbTableLogs = "cg_logs";
+    private static final @NonNull String dbTableLogCount = "cg_logCount";
+    private static final @NonNull String dbTableLogImages = "cg_logImages";
+    private static final @NonNull String dbTableLogsOffline = "cg_logs_offline";
+    private static final @NonNull String dbTableTrackables = "cg_trackables";
+    private static final @NonNull String dbTableSearchDestionationHistory = "cg_search_destination_history";
+    private static final @NonNull String dbCreateCaches = ""
             + "create table " + dbTableCaches + " ("
             + "_id integer primary key autoincrement, "
             + "updated long not null, "
@@ -2187,18 +2188,17 @@ public class DataStore {
                         null,
                         new HashSet<String>(),
                         GET_STRING_0);
-            } else {
-                return queryToColl(dbTableCaches,
-                        new String[]{"geocode"},
-                        selection.toString(),
-                        selectionArgs,
-                        null,
-                        null,
-                        "geocode",
-                        null,
-                        new HashSet<String>(),
-                        GET_STRING_0);
             }
+            return queryToColl(dbTableCaches,
+                    new String[] { "geocode" },
+                    selection.toString(),
+                    selectionArgs,
+                    null,
+                    null,
+                    "geocode",
+                    null,
+                    new HashSet<String>(),
+                    GET_STRING_0);
         } catch (final Exception e) {
             Log.e("DataStore.loadBatchOfStoredGeocodes", e);
             return Collections.emptySet();
