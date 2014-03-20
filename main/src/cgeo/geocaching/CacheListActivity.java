@@ -696,7 +696,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_cache_list_app:
-                if (!isThereAnyCacheToShowOnMap()) {
+                if (!cacheToShow()) {
                     return false;
                 }
                 return CacheListAppFactory.onMenuItemSelected(item, cacheList, this, getFilteredSearch());
@@ -705,7 +705,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
-    private boolean isThereAnyCacheToShowOnMap() {
+    private boolean cacheToShow() {
         if (search == null || CollectionUtils.isEmpty(cacheList)) {
             showToast(res.getString(R.string.warn_no_cache_coord));
             return false;
@@ -1377,7 +1377,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      *            unused here but needed since this method is referenced from XML layout
      */
     public void goMap(@SuppressWarnings("unused") View view) {
-        if (!isThereAnyCacheToShowOnMap()) {
+        if (!cacheToShow()) {
             return;
         }
 
