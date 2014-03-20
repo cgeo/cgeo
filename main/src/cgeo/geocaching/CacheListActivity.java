@@ -51,10 +51,12 @@ import cgeo.geocaching.utils.DateUtils;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+
 import rx.Subscription;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -695,14 +697,21 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_cache_list_app:
-                if (search == null || CollectionUtils.isEmpty(cacheList)) {
-                    showToast(res.getString(R.string.warn_no_cache_coord));
+                if (!isThereAnyCacheToShowOnMap()) {
                     return false;
                 }
                 return CacheListAppFactory.onMenuItemSelected(item, cacheList, this, getFilteredSearch());
             default:
                 return CacheListAppFactory.onMenuItemSelected(item, cacheList, this, search);
         }
+    }
+
+    private boolean isThereAnyCacheToShowOnMap() {
+        if (search == null || CollectionUtils.isEmpty(cacheList)) {
+            showToast(res.getString(R.string.warn_no_cache_coord));
+            return false;
+        }
+        return true;
     }
 
     private SearchResult getFilteredSearch() {
@@ -1386,19 +1395,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      *            unused here but needed since this method is referenced from XML layout
      */
     public void goMap(@SuppressWarnings("unused") View view) {
-        if (search == null || CollectionUtils.isEmpty(cacheList)) {
-            showToast(res.getString(R.string.warn_no_cache_coord));
-
+        if (!isThereAnyCacheToShowOnMap()) {
             return;
         }
 
         // apply filter settings (if there's a filter)
-        final Set<String> geocodes = new HashSet<String>();
-        for (final Geocache cache : adapter.getFilteredList()) {
-            geocodes.add(cache.getGeocode());
-        }
-
-        final SearchResult searchToUse = new SearchResult(geocodes);
+        final SearchResult searchToUse = getFilteredSearch();
         final int count = searchToUse.getCount();
         String mapTitle = title;
         if (count > 0) {
