@@ -3,7 +3,13 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.AngleUtils;
 
+import rx.Scheduler;
+import rx.Subscription;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
+
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -12,10 +18,6 @@ import android.graphics.PaintFlagsDrawFilter;
 import android.util.AttributeSet;
 import android.util.FloatMath;
 import android.view.View;
-import rx.Scheduler;
-import rx.Subscription;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 import java.util.concurrent.TimeUnit;
 
@@ -67,10 +69,11 @@ public class CompassView extends View {
 
     @Override
     public void onAttachedToWindow() {
-        compassUnderlay = BitmapFactory.decodeResource(context.getResources(), R.drawable.compass_underlay);
-        compassRose = BitmapFactory.decodeResource(context.getResources(), R.drawable.compass_rose);
-        compassArrow = BitmapFactory.decodeResource(context.getResources(), R.drawable.compass_arrow);
-        compassOverlay = BitmapFactory.decodeResource(context.getResources(), R.drawable.compass_overlay);
+        final Resources res = context.getResources();
+        compassUnderlay = BitmapFactory.decodeResource(res, R.drawable.compass_underlay);
+        compassRose = BitmapFactory.decodeResource(res, R.drawable.compass_rose);
+        compassArrow = BitmapFactory.decodeResource(res, R.drawable.compass_arrow);
+        compassOverlay = BitmapFactory.decodeResource(res, R.drawable.compass_overlay);
 
         compassUnderlayWidth = compassUnderlay.getWidth();
         compassUnderlayHeight = compassUnderlay.getWidth();
