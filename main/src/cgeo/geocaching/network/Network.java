@@ -64,14 +64,14 @@ public abstract class Network {
     private final static HttpParams clientParams = new BasicHttpParams();
 
     static {
-        Network.clientParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, CharEncoding.UTF_8);
-        Network.clientParams.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
-        Network.clientParams.setParameter(CoreConnectionPNames.SO_TIMEOUT, 90000);
-        Network.clientParams.setParameter(ClientPNames.HANDLE_REDIRECTS,  true);
+        clientParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, CharEncoding.UTF_8);
+        clientParams.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
+        clientParams.setParameter(CoreConnectionPNames.SO_TIMEOUT, 90000);
+        clientParams.setParameter(ClientPNames.HANDLE_REDIRECTS,  true);
     }
 
     private static String hidePassword(final String message) {
-        return message.replaceAll(Network.PATTERN_PASSWORD, "password=***");
+        return message.replaceAll(PATTERN_PASSWORD, "password=***");
     }
 
     private static HttpClient getHttpClient() {
@@ -216,7 +216,7 @@ public abstract class Network {
             request.setHeader(header.getName(), header.getValue());
         }
         request.getParams().setParameter(CoreProtocolPNames.USER_AGENT,
-                Settings.getUseNativeUa() ? Network.NATIVE_USER_AGENT : Network.PC_USER_AGENT);
+                Settings.getUseNativeUa() ? NATIVE_USER_AGENT : PC_USER_AGENT);
     }
 
     /**
@@ -229,22 +229,22 @@ public abstract class Network {
      */
     @Nullable
     private static HttpResponse doLogRequest(final HttpRequestBase request) {
-        final String reqLogStr = request.getMethod() + " " + Network.hidePassword(request.getURI().toString());
+        final String reqLogStr = request.getMethod() + " " + hidePassword(request.getURI().toString());
         Log.d(reqLogStr);
 
-        final HttpClient client = Network.getHttpClient();
+        final HttpClient client = getHttpClient();
         final long before = System.currentTimeMillis();
         try {
             final HttpResponse response = client.execute(request);
             int status = response.getStatusLine().getStatusCode();
             if (status == 200) {
-                Log.d(status + Network.formatTimeSpan(before) + reqLogStr);
+                Log.d(status + formatTimeSpan(before) + reqLogStr);
             } else {
-                Log.w(status + " [" + response.getStatusLine().getReasonPhrase() + "]" + Network.formatTimeSpan(before) + reqLogStr);
+                Log.w(status + " [" + response.getStatusLine().getReasonPhrase() + "]" + formatTimeSpan(before) + reqLogStr);
             }
             return response;
         } catch (final IOException e) {
-            final String timeSpan = Network.formatTimeSpan(before);
+            final String timeSpan = formatTimeSpan(before);
             Log.w("Failure" + timeSpan + reqLogStr + " (" + e.toString() + ")");
         }
 
@@ -354,7 +354,7 @@ public abstract class Network {
     @Nullable
     public static JSONObject requestJSON(final String uri, @Nullable final Parameters params) {
         final HttpResponse response = request("GET", uri, params, new Parameters("Accept", "application/json, text/javascript, */*; q=0.01"), null);
-        final String responseData = Network.getResponseData(response, false);
+        final String responseData = getResponseData(response, false);
         if (responseData != null) {
             try {
                 return new JSONObject(responseData);
@@ -411,7 +411,7 @@ public abstract class Network {
      */
     @Nullable
     public static String getResponseData(@Nullable final HttpResponse response) {
-        return Network.getResponseData(response, true);
+        return getResponseData(response, true);
     }
 
     @Nullable
@@ -438,7 +438,7 @@ public abstract class Network {
 
     @Nullable
     public static String rfc3986URLEncode(String text) {
-        final String encoded = Network.encode(text);
+        final String encoded = encode(text);
         return encoded != null ? StringUtils.replace(encoded.replace("+", "%20"), "%7E", "~") : null;
     }
 
