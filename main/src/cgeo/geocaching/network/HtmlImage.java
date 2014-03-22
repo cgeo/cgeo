@@ -132,7 +132,7 @@ public class HtmlImage implements Html.ImageGetter {
     // decoding.
     public Observable<BitmapDrawable> fetchDrawable(final String url) {
 
-        if (StringUtils.isBlank(url) || isCounter(url)) {
+        if (StringUtils.isBlank(url) || ImageUtils.containsPattern(url, BLOCKED)) {
             return Observable.from(getTransparent1x1Image(resources));
         }
 
@@ -394,12 +394,4 @@ public class HtmlImage implements Html.ImageGetter {
         bfOptions.inSampleSize = scale;
     }
 
-    private static boolean isCounter(final String url) {
-        for (String entry : BLOCKED) {
-            if (StringUtils.containsIgnoreCase(url, entry)) {
-                return true;
-            }
-        }
-        return false;
-    }
 }

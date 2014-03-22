@@ -3,6 +3,7 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.compatibility.Compatibility;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -224,5 +225,21 @@ public final class ImageUtils {
             return null;
         }
         return Uri.fromFile(file);
+    }
+
+    /**
+     * Check if the URL contains one of the given substrings.
+     *
+     * @param url the URL to check
+     * @param patterns a list of substrings to check against
+     * @return <tt>true</tt> if the URL contains at least one of the patterns, <tt>false</tt> otherwise
+     */
+    public static boolean containsPattern(final String url, final String[] patterns) {
+        for (String entry : patterns) {
+            if (StringUtils.containsIgnoreCase(url, entry)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

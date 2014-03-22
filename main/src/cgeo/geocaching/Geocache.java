@@ -25,6 +25,7 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LazyInitializedList;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
@@ -158,6 +159,10 @@ public class Geocache implements ICache, IWaypoint {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
     private Handler changeNotificationHandler = null;
+
+    // Images whose URL contains one of those patterns will not be available on the Images tab
+    // for opening into an external application.
+    private final String[] NO_EXTERNAL = new String[]{"geocheck.org"};
 
     /**
      * Create a new cache. To be used everywhere except for the GPX parser
@@ -1723,7 +1728,7 @@ public class Geocache implements ICache, IWaypoint {
         Html.fromHtml(getDescription(), new ImageGetter() {
             @Override
             public Drawable getDrawable(final String source) {
-                if (!urls.contains(source)) {
+                if (!urls.contains(source) && !ImageUtils.containsPattern(source, NO_EXTERNAL)) {
                     images.add(new Image(source, geocode));
                     urls.add(source);
                 }
