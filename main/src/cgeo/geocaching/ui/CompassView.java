@@ -5,8 +5,8 @@ import cgeo.geocaching.utils.AngleUtils;
 
 import rx.Scheduler;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -87,21 +87,18 @@ public class CompassView extends View {
         setfil = new PaintFlagsDrawFilter(0, Paint.FILTER_BITMAP_FLAG);
         remfil = new PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG, 0);
 
-        synchronized (this) {
-            initialDisplay = true;
-        }
-        periodicUpdate = Schedulers.io().schedulePeriodically(new Action1<Scheduler.Inner>() {
+        initialDisplay = true;
+
+        periodicUpdate = AndroidSchedulers.mainThread().schedulePeriodically(new Action1<Scheduler.Inner>() {
             @Override
             public void call(final Scheduler.Inner inner) {
-                synchronized (CompassView.this) {
-                    final float newAzimuthShown = smoothUpdate(northMeasured, azimuthShown);
-                    final float newCacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
-                    if (Math.abs(AngleUtils.difference(azimuthShown, newAzimuthShown)) >= 2 ||
-                            Math.abs(AngleUtils.difference(cacheHeadingShown, newCacheHeadingShown)) >= 2) {
-                        azimuthShown = newAzimuthShown;
-                        cacheHeadingShown = newCacheHeadingShown;
-                        postInvalidate();
-                    }
+                final float newAzimuthShown = smoothUpdate(northMeasured, azimuthShown);
+                final float newCacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
+                if (Math.abs(AngleUtils.difference(azimuthShown, newAzimuthShown)) >= 2 ||
+                        Math.abs(AngleUtils.difference(cacheHeadingShown, newCacheHeadingShown)) >= 2) {
+                    azimuthShown = newAzimuthShown;
+                    cacheHeadingShown = newCacheHeadingShown;
+                    invalidate();
                 }
             }
         }, 0, 40, TimeUnit.MILLISECONDS);
@@ -129,20 +126,26 @@ public class CompassView extends View {
         }
     }
 
-    public synchronized void updateNorth(float northHeadingIn, float cacheHeadingIn) {
+    /**
+     * Update north and cache headings. This method may only be called on the UI thread.
+     *
+     * @param northHeading the north direction (rotation of the rose)
+     * @param cacheHeading the cache direction (extra rotation of the needle)
+     */
+    public void updateNorth(final float northHeading, final float cacheHeading) {
         if (initialDisplay) {
             // We will force the compass to move brutally if this is the first
             // update since it is visible.
-            azimuthShown = northHeadingIn;
-            cacheHeadingShown = cacheHeadingIn;
+            azimuthShown = northHeading;
+            cacheHeadingShown = cacheHeading;
 
             // it may take some time to get an initial direction measurement for the device
-            if (northHeadingIn != 0.0) {
+            if (northHeading != 0.0) {
                 initialDisplay = false;
             }
         }
-        northMeasured = northHeadingIn;
-        cacheHeadingMeasured = cacheHeadingIn;
+        northMeasured = northHeading;
+        cacheHeadingMeasured = cacheHeading;
     }
 
     /**
@@ -172,17 +175,9 @@ public class CompassView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        // use local synchronized variables to avoid them being changed from the device during drawing
-        float azimuthDrawn;
-        float headingDrawn;
 
-        synchronized (this) {
-            azimuthDrawn = azimuthShown;
-            headingDrawn = cacheHeadingShown;
-        }
-
-        final float azimuthTemp = azimuthDrawn;
-        final float azimuthRelative = AngleUtils.normalize(azimuthTemp - headingDrawn);
+        final float azimuthTemp = azimuthShown;
+        final float azimuthRelative = AngleUtils.normalize(azimuthTemp - cacheHeadingShown);
 
         // compass margins
         final int canvasCenterX = (compassRoseWidth / 2) + ((getWidth() - compassRoseWidth) / 2);

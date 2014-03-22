@@ -20,7 +20,7 @@ public abstract class GeoDirHandler {
     private static final CgeoApplication app = CgeoApplication.getInstance();
 
     /**
-     * Update method called when new data is available.
+     * Update method called when new data is available. This method is called on the UI thread.
      *
      * @param geoData the new geographical data
      * @param direction the new direction
