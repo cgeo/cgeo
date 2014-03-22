@@ -394,7 +394,7 @@ public class DataStore {
      */
     public static void moveDatabase(final Activity fromActivity) {
         final ProgressDialog dialog = ProgressDialog.show(fromActivity, fromActivity.getString(R.string.init_dbmove_dbmove), fromActivity.getString(R.string.init_dbmove_running), true, false);
-        AndroidObservable.fromActivity(fromActivity, Async.fromFunc0(new Func0<Boolean>() {
+        AndroidObservable.bindActivity(fromActivity, Async.fromFunc0(new Func0<Boolean>() {
             @Override
             public Boolean call() {
                 if (!LocalStorage.isExternalStorageAvailable()) {

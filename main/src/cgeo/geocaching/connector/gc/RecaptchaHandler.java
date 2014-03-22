@@ -89,7 +89,7 @@ public class RecaptchaHandler extends Handler {
     }
 
     private Observable<Bitmap> getCaptcha() {
-        return AndroidObservable.fromActivity(activity,
+        return AndroidObservable.bindActivity(activity,
                 Observable.defer(new Func0<Observable<? extends Bitmap>>() {
                     @Override
                     public Observable<? extends Bitmap> call() {

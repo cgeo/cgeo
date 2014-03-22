@@ -524,7 +524,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                     }
                 });
 
-                AndroidObservable.fromActivity(TrackableActivity.this,
+                AndroidObservable.bindActivity(TrackableActivity.this,
                         new HtmlImage(geocode, true, 0, false).fetchDrawable(trackable.getImage()))
                         .subscribe(new Action1<BitmapDrawable>() {
                             @Override

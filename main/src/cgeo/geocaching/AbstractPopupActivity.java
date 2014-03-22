@@ -80,7 +80,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity implements 
         if (!cache.supportsGCVote()) {
             return;
         }
-        AndroidObservable.fromActivity(this, Observable.defer(new Func0<Observable<GCVoteRating>>() {
+        AndroidObservable.bindActivity(this, Observable.defer(new Func0<Observable<GCVoteRating>>() {
             @Override
             public Observable<GCVoteRating> call() {
                 final GCVoteRating rating = GCVote.getRating(cache.getGuid(), geocode);

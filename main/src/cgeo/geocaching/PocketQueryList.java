@@ -46,7 +46,7 @@ public final class PocketQueryList {
     public static void promptForListSelection(final Activity activity, final Action1<PocketQueryList> runAfterwards) {
         final Dialog waitDialog = ProgressDialog.show(activity, activity.getString(R.string.search_pocket_title), activity.getString(R.string.search_pocket_loading), true, true);
 
-        AndroidObservable.fromActivity(activity, Observable.create(new OnSubscribe<List<PocketQueryList>>() {
+        AndroidObservable.bindActivity(activity, Observable.create(new OnSubscribe<List<PocketQueryList>>() {
             @Override
             public void call(final Subscriber<? super List<PocketQueryList>> subscriber) {
                 subscriber.onNext(GCParser.searchPocketQueryList());

@@ -116,7 +116,7 @@ public class ImagesList {
 
             final ImageView imageView = (ImageView) inflater.inflate(R.layout.image_item, null);
             assert(imageView != null);
-            subscriptions.add(AndroidObservable.fromActivity(activity, imgGetter.fetchDrawable(img.getUrl()))
+            subscriptions.add(AndroidObservable.bindActivity(activity, imgGetter.fetchDrawable(img.getUrl()))
                     .subscribe(new Action1<BitmapDrawable>() {
                         @Override
                         public void call(final BitmapDrawable image) {

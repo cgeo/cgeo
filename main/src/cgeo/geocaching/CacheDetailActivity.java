@@ -878,7 +878,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_details_page, null);
 
             // Start loading preview map
-            AndroidObservable.fromActivity(CacheDetailActivity.this, previewMap.subscribeOn(Schedulers.io())).subscribe(new Action1<BitmapDrawable>() {
+            AndroidObservable.bindActivity(CacheDetailActivity.this, previewMap.subscribeOn(Schedulers.io())).subscribe(new Action1<BitmapDrawable>() {
                 @Override
                 public void call(final BitmapDrawable image) {
                     final Bitmap bitmap = image.getBitmap();
@@ -1605,7 +1605,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
         });
 
-        AndroidObservable.fromActivity(this, producer.subscribeOn(Schedulers.io()))
+        AndroidObservable.bindActivity(this, producer.subscribeOn(Schedulers.io()))
                 .subscribe(new Observer<Spanned>() {
                     @Override
                     public void onCompleted() {

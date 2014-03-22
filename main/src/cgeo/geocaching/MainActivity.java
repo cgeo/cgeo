@@ -13,13 +13,13 @@ import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.DatabaseBackupUtils;
-import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
 
@@ -30,8 +30,9 @@ import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
 import rx.android.observables.AndroidObservable;
-import rx.schedulers.Schedulers;
 import rx.functions.Action1;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.Subscriptions;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -52,7 +53,6 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import rx.subscriptions.Subscriptions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -552,7 +552,7 @@ public class MainActivity extends AbstractActivity {
                             }
                         }
                     }).subscribeOn(Schedulers.io());
-                    AndroidObservable.fromActivity(MainActivity.this, address)
+                    AndroidObservable.bindActivity(MainActivity.this, address)
                             .onErrorResumeNext(Observable.from(geo.getCoords().toString()))
                             .subscribe(new Action1<String>() {
                                 @Override

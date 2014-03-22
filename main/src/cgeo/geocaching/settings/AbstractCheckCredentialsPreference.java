@@ -65,7 +65,7 @@ public abstract class AbstractCheckCredentialsPreference extends AbstractClickab
             loginDialog.setCancelable(false);
             Cookies.clearCookies();
 
-            AndroidObservable.fromActivity(activity, Async.start(new Func0<ImmutablePair<StatusCode, Drawable>>() {
+            AndroidObservable.bindActivity(activity, Async.start(new Func0<ImmutablePair<StatusCode, Drawable>>() {
                 @Override
                 public ImmutablePair<StatusCode, Drawable> call() {
                     return login();

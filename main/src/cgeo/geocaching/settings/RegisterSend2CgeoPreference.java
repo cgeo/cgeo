@@ -53,7 +53,7 @@ public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
                         activity.getString(R.string.init_sendToCgeo_registering), true);
                 progressDialog.setCancelable(false);
 
-                AndroidObservable.fromActivity(activity,
+                AndroidObservable.bindActivity(activity,
                         Observable.defer(new Func0<Observable<Integer>>() {
                             @Override
                             public Observable<Integer> call() {
