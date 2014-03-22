@@ -419,6 +419,7 @@
   <string name="settings_ec_icons_oc">Kaip OC</string>
   <string name="settings_features">Palaikomos funkcijos</string>
   <string name="feature_online_logging">Registravimas prisijungus</string>
+  <string name="feature_log_images">Pridėti nuotraukas prie įrašų</string>
   <string name="feature_watch_list">Žiūrėti sąrašą</string>
   <string name="feature_search_keyword">Paieška pagal raktinį žodžį</string>
   <string name="feature_search_center">Paieška pagal poziciją</string>
@@ -497,14 +498,42 @@
   <string name="cache_menu_streetview">Gatvės vaizdas</string>
   <string name="cache_menu_browser">Atidaryti naršyklėje</string>
   <string name="cache_menu_visit_offline">Registruoti neprisijungus</string>
+  <string name="cache_menu_around">Slėptuvės aplink</string>
+  <string name="cache_menu_event">Pridėti į kalendorių</string>
   <string name="cache_menu_details">Informacija</string>
+  <string name="cache_menu_refresh">Atnaujinti</string>
   <string name="cache_menu_share">Bendrinti slėptuvę</string>
   <string name="cache_menu_move_list">Perkelti į kitą sąrašą</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_status_offline_log">Išsaugotas įrašas</string>
+  <string name="cache_status_found">Rasta</string>
+  <string name="cache_status_archived">Suarchyvuota</string>
+  <string name="cache_status_disabled">Išjungta</string>
+  <string name="cache_status_premium">Tik Premium nariams</string>
+  <string name="cache_status_not_premium">Visų narių prieiga</string>
+  <string name="cache_status_stored">Išsaugota</string>
+  <string name="cache_status_not_stored">Neišsaugota</string>
+  <string name="cache_geocode">Geo kodas</string>
+  <string name="cache_name">Pavadinimas</string>
+  <string name="cache_type">Tipas</string>
+  <string name="cache_size">Dydis</string>
+  <string name="cache_distance">Atstumas</string>
+  <string name="cache_difficulty">Sunkumas</string>
+  <string name="cache_terrain">Vietovė</string>
+  <string name="cache_rating">Reitingas</string>
+  <string name="cache_own_rating">Jūsų reitingas</string>
+  <string name="cache_rating_of">iš</string>
   <string name="cache_favorite">Favoritas</string>
+  <string name="cache_owner">Savininkas</string>
+  <string name="cache_hidden">Paslėpta</string>
+  <string name="cache_event">Data</string>
+  <string name="cache_location">Vieta</string>
+  <string name="cache_coordinates">Koordinatės</string>
+  <string name="cache_coordinates_original">Originaliosios koordinatės</string>
+  <string name="cache_log_types">Įrašų tipai</string>
   <string name="cache_clear_history">Išvalyti istoriją</string>
   <string name="cache_remove_from_history">Pašalinti iš istorijos</string>
+  <string name="cache_share_field">Bendrinti</string>
   <string name="cache_listed_on">Sąraše %s</string>
   <string name="file_searching_in">Ieškoma failų\n</string>
   <string name="file_list_no_files">c:geo nerandai tinkamų failų.</string>
@@ -608,7 +637,9 @@
   <string name="export_failed">Eksportuoti nepavyko</string>
   <string name="export_fieldnotes_upload">Įkelti į geocaching.com</string>
   <string name="export_fieldnotes_uploading">Įkeliama…</string>
+  <string name="export_gpx">GPX</string>
   <string name="attribute_other_cache_yes">Kiti slėptuvės tipai</string>
+  <string name="powered_by">carnero</string>
   <string name="support">Palaikymas: <a href="">support@cgeo.org</a></string>
   <string name="website">Tiklapis: <a href="">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="">c:geo page</a></string>
