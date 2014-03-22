@@ -13,14 +13,12 @@ import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.androidextra.Base64;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Scheduler;
@@ -144,7 +142,8 @@ public class HtmlImage implements Html.ImageGetter {
         return Observable.create(new OnSubscribe<BitmapDrawable>() {
             @Override
             public void call(final Subscriber<? super BitmapDrawable> subscriber) {
-                Schedulers.computation().schedule(new Action1<Inner>() {
+                subscription.add(subscriber);
+                subscriber.add(Schedulers.computation().schedule(new Action1<Inner>() {
                     @Override
                     public void call(final Inner inner) {
                         final Pair<BitmapDrawable, Boolean> loaded = loadFromDisk();
@@ -157,14 +156,14 @@ public class HtmlImage implements Html.ImageGetter {
                         if (bitmap != null && !onlySave) {
                             subscriber.onNext(bitmap);
                         }
-                        downloadScheduler.schedule(new Action1<Inner>() {
+                        subscriber.add(downloadScheduler.schedule(new Action1<Inner>() {
                             @Override
                             public void call(final Inner inner) {
                                 downloadAndSave(subscriber);
                             }
-                        });
+                        }));
                     }
-                });
+                }));
             }
 
             private Pair<BitmapDrawable, Boolean> loadFromDisk() {
@@ -187,7 +186,7 @@ public class HtmlImage implements Html.ImageGetter {
                         return;
                     }
                 } else {
-                    if (subscription.isUnsubscribed() || downloadOrRefreshCopy(url, file)) {
+                    if (subscriber.isUnsubscribed() || downloadOrRefreshCopy(url, file)) {
                         // The existing copy was fresh enough or we were unsubscribed earlier.
                         subscriber.onCompleted();
                         return;
