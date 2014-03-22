@@ -23,12 +23,8 @@ final public class CompassMiniView extends View {
     /**
      * remember the last state of drawing so we can avoid repainting for very small changes
      */
-    private float lastDrawingAzimuth;
+    private float lastDrawnAzimuth;
 
-    /**
-     * lazy initialized bitmap resource depending on selected skin
-     */
-    private static int arrowSkin = 0;
     /**
      * bitmap shared by all instances of the view
      */
@@ -52,46 +48,30 @@ final public class CompassMiniView extends View {
     private static final int ARROW_BITMAP_SIZE = 21;
     private static final PaintFlagsDrawFilter FILTER_SET = new PaintFlagsDrawFilter(0, Paint.FILTER_BITMAP_FLAG);
     private static final float MINIMUM_ROTATION_DEGREES_FOR_REPAINT = 5;
+    private float azimuthRelative;
 
     public CompassMiniView(Context context) {
         super(context);
-        initializeResources(context);
     }
 
     public CompassMiniView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initializeResources(context);
     }
 
-    private static void initializeResources(final Context context) {
-        if (arrowSkin == 0) {
-            if (Settings.isLightSkin()) {
-                arrowSkin = R.drawable.compass_arrow_mini_black;
-            } else {
-                arrowSkin = R.drawable.compass_arrow_mini_white;
-            }
-        }
-        if (compassArrow == null) {
-            compassArrow = BitmapFactory.decodeResource(context.getResources(), arrowSkin);
+    @Override
+    public void onAttachedToWindow() {
+        if (instances++ == 0) {
+            compassArrow = BitmapFactory.decodeResource(getResources(), Settings.isLightSkin() ? R.drawable.compass_arrow_mini_black : R.drawable.compass_arrow_mini_white);
             compassArrowWidth = compassArrow.getWidth();
             compassArrowHeight = compassArrow.getWidth();
         }
     }
 
     @Override
-    public void onAttachedToWindow() {
-        instances++;
-    }
-
-    @Override
     public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        instances--;
-        if (instances == 0) {
-            if (compassArrow != null) {
-                compassArrow.recycle();
-                compassArrow = null;
-            }
+        if (--instances == 0) {
+            compassArrow.recycle();
         }
     }
 
@@ -123,10 +103,10 @@ final public class CompassMiniView extends View {
             return;
         }
 
-        float azimuthRelative = calculateAzimuthRelative();
+        azimuthRelative = AngleUtils.normalize(azimuth - heading);
 
         // avoid updates on very small changes, which are not visible to the user
-        float change = Math.abs(azimuthRelative - lastDrawingAzimuth);
+        float change = Math.abs(azimuthRelative - lastDrawnAzimuth);
         if (change < MINIMUM_ROTATION_DEGREES_FOR_REPAINT) {
             return;
         }
@@ -142,8 +122,7 @@ final public class CompassMiniView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        float azimuthRelative = calculateAzimuthRelative();
-        lastDrawingAzimuth = azimuthRelative;
+        lastDrawnAzimuth = azimuthRelative;
 
         // compass margins
         final int canvasCenterX = getWidth() / 2;
@@ -155,10 +134,6 @@ final public class CompassMiniView extends View {
         canvas.setDrawFilter(FILTER_SET);
         canvas.rotate(-azimuthRelative, canvasCenterX, canvasCenterY);
         canvas.drawBitmap(compassArrow, marginLeft, marginTop, null);
-    }
-
-    private float calculateAzimuthRelative() {
-        return AngleUtils.normalize(azimuth - heading);
     }
 
     @Override
