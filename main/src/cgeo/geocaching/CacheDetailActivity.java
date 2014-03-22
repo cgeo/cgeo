@@ -21,6 +21,7 @@ import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
@@ -41,7 +42,6 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.logs.CacheLogsViewCreator;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
-import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -1513,7 +1513,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         private void loadLongDescription() {
             showDesc.setVisibility(View.GONE);
             showDesc.setOnClickListener(null);
-            view.findViewById(R.id.loading).setVisibility(View.VISIBLE);
+            loadingView.setVisibility(View.VISIBLE);
 
             final String longDescription = cache.getDescription();
             loadDescription(longDescription, longDescView, loadingView);
