@@ -3,6 +3,8 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TextView;
@@ -26,8 +28,8 @@ public class DistanceView extends TextView {
         cacheCoords = cacheCoordsIn;
     }
 
-    public void update(final Geopoint coords) {
-        if (cacheCoords == null || coords == null) {
+    public void update(@NonNull final Geopoint coords) {
+        if (cacheCoords == null) {
             return;
         }
         setText(Units.getDistanceFromKilometers(coords.distanceTo(cacheCoords)));

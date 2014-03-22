@@ -216,7 +216,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      * @throws GeopointException
      *             if there is an error in distance calculation
      */
-    public float distanceTo(final ICoordinates point) {
+    public float distanceTo(@NonNull final ICoordinates point) {
         final Geopoint otherCoords = point.getCoords();
         if (DISTANCE_BROKEN) {
             return (float) (getDistance(latitude, longitude, otherCoords.latitude, otherCoords.longitude) / 1000);

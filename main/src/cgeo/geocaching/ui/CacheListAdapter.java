@@ -24,6 +24,7 @@ import cgeo.geocaching.utils.Log;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.Activity;
 import android.content.res.Resources;
@@ -279,7 +280,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         notifyDataSetChanged();
     }
 
-    public void setActualCoordinates(final Geopoint coords) {
+    public void setActualCoordinates(@NonNull final Geopoint coords) {
         this.coords = coords;
         updateSortByDistance();
 

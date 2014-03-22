@@ -5,6 +5,8 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -107,8 +109,8 @@ final public class CompassMiniView extends View {
         updateDirection();
     }
 
-    public void updateCurrentCoords(final Geopoint currentCoords) {
-        if (currentCoords == null || targetCoords == null) {
+    public void updateCurrentCoords(@NonNull final Geopoint currentCoords) {
+        if (targetCoords == null) {
             return;
         }
 
