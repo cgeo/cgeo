@@ -1325,7 +1325,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         currentLoader.reset();
         ((OfflineGeocacheListLoader) currentLoader).setListId(listId);
         ((OfflineGeocacheListLoader) currentLoader).setSearchCenter(coords);
-        adapter.setComparator(null); // delete current sorting
         currentLoader.startLoading();
 
         invalidateOptionsMenuCompatible();
