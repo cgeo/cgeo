@@ -25,7 +25,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
-
 import rx.android.observables.AndroidObservable;
 import rx.functions.Action1;
 import rx.functions.Func0;
@@ -2419,6 +2418,7 @@ public class DataStore {
                 database.delete(dbTableCaches, baseWhereClause, null);
                 database.delete(dbTableAttributes, baseWhereClause, null);
                 database.delete(dbTableSpoilers, baseWhereClause, null);
+                database.delete(dbTableLogImages, "log_id IN (SELECT _id FROM " + dbTableLogs + " WHERE " + baseWhereClause + ")", null);
                 database.delete(dbTableLogs, baseWhereClause, null);
                 database.delete(dbTableLogCount, baseWhereClause, null);
                 database.delete(dbTableLogsOffline, baseWhereClause, null);
