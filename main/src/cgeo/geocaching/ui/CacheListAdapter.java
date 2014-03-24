@@ -5,12 +5,12 @@ import butterknife.InjectView;
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.DistanceComparator;
@@ -55,7 +55,7 @@ import java.util.Set;
 public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
     private LayoutInflater inflater = null;
-    private CacheComparator cacheComparator = null;
+    private static CacheComparator cacheComparator = null;
     private Geopoint coords;
     private float azimuth = 0;
     private long lastSort = 0L;
@@ -170,7 +170,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         inverseSort = !inverseSort;
     }
 
-    public CacheComparator getCacheComparator() {
+    public static CacheComparator getCacheComparator() {
         return cacheComparator;
     }
 
@@ -326,7 +326,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         return comparator;
     }
 
-    private boolean isSortedByDistance() {
+    private static boolean isSortedByDistance() {
         return cacheComparator == null || cacheComparator instanceof DistanceComparator;
     }
 
