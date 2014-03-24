@@ -657,7 +657,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 showFilterMenu(null);
                 return true;
             case R.id.menu_sort:
-                final CacheComparator oldComparator = adapter.getCacheComparator();
+                final CacheComparator oldComparator = CacheListAdapter.getCacheComparator();
                 new ComparatorUserInterface(this).selectComparator(oldComparator, new Action1<CacheComparator>() {
                     @Override
                     public void call(CacheComparator selectedComparator) {
