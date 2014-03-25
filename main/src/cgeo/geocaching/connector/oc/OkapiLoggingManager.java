@@ -12,6 +12,7 @@ import cgeo.geocaching.enumerations.StatusCode;
 import android.net.Uri;
 
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 public class OkapiLoggingManager extends AbstractLoggingManager {
@@ -19,6 +20,7 @@ public class OkapiLoggingManager extends AbstractLoggingManager {
     private final OCApiLiveConnector connector;
     private final Geocache cache;
     private LogCacheActivity activity;
+    private boolean hasLoaderError = true;
 
     public OkapiLoggingManager(final LogCacheActivity activity, final OCApiLiveConnector connector, final Geocache cache) {
         this.connector = connector;
@@ -28,6 +30,9 @@ public class OkapiLoggingManager extends AbstractLoggingManager {
 
     @Override
     public final void init() {
+        if (connector.isLoggedIn()) {
+            hasLoaderError = false;
+        }
         activity.onLoadFinished();
     }
 
@@ -45,7 +50,15 @@ public class OkapiLoggingManager extends AbstractLoggingManager {
 
     @Override
     public List<LogType> getPossibleLogTypes() {
+        if (hasLoaderError) {
+            return Collections.emptyList();
+        }
         return connector.getPossibleLogTypes(cache);
+    }
+
+    @Override
+    public boolean hasLoaderError() {
+        return hasLoaderError;
     }
 
 }
