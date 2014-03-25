@@ -67,7 +67,6 @@ public final class CryptUtils {
         }
     }
 
-    @SuppressWarnings("null")
     @NonNull
     public static String rot13(String text) {
         if (text == null) {

@@ -44,7 +44,6 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
      *
      * @see HashSet
      */
-    @SuppressWarnings("null")
     @NonNull
     @Override
     public Iterator<E> iterator() {

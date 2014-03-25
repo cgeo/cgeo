@@ -314,7 +314,6 @@ public class ImageSelectActivity extends AbstractActivity {
             return;
         }
 
-        @SuppressWarnings("null")
         final Bitmap bitmap = ImageUtils.readAndScaleImageToFitDisplay(imageUri.getPath());
         imagePreview.setImageBitmap(bitmap);
         imagePreview.setVisibility(View.VISIBLE);
