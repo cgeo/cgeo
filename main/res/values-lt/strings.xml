@@ -349,8 +349,10 @@
   <string name="settings_reauthorize">Registruoti c:geo dar kartą</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Aktyvuoti</string>
+  <string name="init_oc_de_description">Registruokite c:geo su opencaching.de tam, kad galėtumėt ieškoti slėptuvių ir prieiti/filtruoti rastas slėptuves.</string>
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Aktyvuoti</string>
+  <string name="init_oc_pl_description">Registruokite c:geo su opencaching.pl tam, kad galėtumėt ieškoti slėptuvių ir prieiti/filtruoti rastas slėptuves.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktyvuoti</string>
@@ -955,7 +957,7 @@
   <string name="attribute_webcam_no">Nėra internetinės kameros</string>
   <string name="attribute_in_water_yes">Vandenyje</string>
   <string name="attribute_in_water_no">Ne vandenyje</string>
-  <string name="attribute_no_gps_yes">Be GPS (letterboxes, kompasas šokinėja,...)</string>
+  <string name="attribute_no_gps_yes">Be GPS (letterboxes, kompasas šokinėja,…)</string>
   <string name="attribute_no_gps_no">Su GPS</string>
   <string name="attribute_overnight_yes">Reikia pasilikti nakvynei</string>
   <string name="attribute_overnight_no">Nereikia pasilikti nakvynei</string>
@@ -1010,6 +1012,9 @@
   <string name="market">Android: <a href="">c:geo on Google Play</a></string>
   <string name="status_new_release" tools:ignore="UnusedResources">Galima nauja versija. \nSpauskite įdiegti.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Galima nauja naktinė versija.\nSpauskite įdiegti.</string>
+  <string name="status_new_rc" tools:ignore="UnusedResources">Galima nauja versija. \nSpauskite įdiegti.</string>
+  <string name="status_geocaching_change" tools:ignore="UnusedResources">Geocaching.com svetainės pakeitimai sugadino c:geo.\nMes tai tvarkome, patikrinkite tai vėliau.</string>
+  <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Geocaching.com svetainės pakeitimai sugadino žemėlapio gyvai funkcijas.\nMes tai tvarkome, patikrinkite tai vėliau.</string>
   <string name="tts_service">Kalbantis kompasas</string>
   <string name="tts_start">Kalbėti</string>
   <string name="tts_stop">Nekalbėti</string>
