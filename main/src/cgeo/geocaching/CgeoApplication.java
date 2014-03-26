@@ -39,12 +39,15 @@ public class CgeoApplication extends Application {
 
     public synchronized Observable<ImmutablePair<IGeoData, Float>> geoDirObservable() {
         if (geoDir == null) {
-            geoDir = Observable.combineLatest(GeoDataProvider.create(this), DirectionProvider.create(this), new Func2<IGeoData, Float, ImmutablePair<IGeoData, Float>>() {
+            final Observable<IGeoData> geo = GeoDataProvider.create(this);
+            final Observable<Float> dir = DirectionProvider.create(this);
+            final Observable<ImmutablePair<IGeoData, Float>> combined = Observable.combineLatest(geo, dir, new Func2<IGeoData, Float, ImmutablePair<IGeoData, Float>>() {
                 @Override
                 public ImmutablePair<IGeoData, Float> call(final IGeoData geoData, final Float dir) {
-                    return new ImmutablePair<IGeoData, Float>(geoData, dir);
+                    return ImmutablePair.of(geoData, dir);
                 }
             });
+            geoDir = combined.publish().refCount();
         }
         return geoDir;
     }

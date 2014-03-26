@@ -1,7 +1,9 @@
 package cgeo.geocaching.sensors;
 
+import android.os.*;
 import cgeo.geocaching.utils.Log;
 
+import cgeo.geocaching.utils.StartableHandlerThread;
 import org.apache.commons.lang3.StringUtils;
 import rx.Observable;
 import rx.Observable.OnSubscribe;
@@ -22,7 +24,6 @@ import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Bundle;
 
 import java.util.concurrent.TimeUnit;
 
@@ -33,6 +34,11 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
     private final LocationData gpsLocation = new LocationData();
     private final LocationData netLocation = new LocationData();
     private final BehaviorSubject<IGeoData> subject;
+    private static final StartableHandlerThread handlerThread =
+            new StartableHandlerThread("GeoDataProvider thread", android.os.Process.THREAD_PRIORITY_BACKGROUND);
+    static {
+        handlerThread.start();
+    }
 
     public boolean gpsEnabled = false;
     public int satellitesVisible = 0;
@@ -92,7 +98,7 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
         @Override
         public Subscription connect() {
             final CompositeSubscription subscription = new CompositeSubscription();
-            AndroidSchedulers.mainThread().schedule(new Action1<Inner>() {
+            AndroidSchedulers.handlerThread(handlerThread.getHandler()).schedule(new Action1<Inner>() {
                 @Override
                 public void call(final Inner inner) {
                     synchronized(lock) {
@@ -112,7 +118,7 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
                     subscription.add(Subscriptions.create(new Action0() {
                         @Override
                         public void call() {
-                            AndroidSchedulers.mainThread().schedule(new Action1<Inner>() {
+                            AndroidSchedulers.handlerThread(handlerThread.getHandler()).schedule(new Action1<Inner>() {
                                 @Override
                                 public void call(final Inner inner) {
                                     synchronized (lock) {

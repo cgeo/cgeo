@@ -1,15 +1,13 @@
 package cgeo.geocaching.sensors;
 
+import android.os.Process;
 import cgeo.geocaching.compatibility.Compatibility;
 
+import cgeo.geocaching.utils.StartableHandlerThread;
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
-import rx.Subscription;
-import rx.observables.ConnectableObservable;
 import rx.subjects.BehaviorSubject;
-import rx.subscriptions.Subscriptions;
-import rx.functions.Action0;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,39 +15,24 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.*;
 
-public class DirectionProvider implements OnSubscribe<Float> {
+public class DirectionProvider {
 
-    private final SensorManager sensorManager;
-    private final BehaviorSubject<Float> subject = BehaviorSubject.create(0.0f);
+    private static final BehaviorSubject<Float> subject = BehaviorSubject.create(0.0f);
 
-    static public Observable<Float> create(final Context context) {
-        return new DirectionProvider((SensorManager) context.getSystemService(Context.SENSOR_SERVICE)).worker.refCount();
-    }
+    static class Listener implements SensorEventListener, StartableHandlerThread.Callback {
 
-    private DirectionProvider(final SensorManager sensorManager) {
-        this.sensorManager = sensorManager;
-    }
+        private int count = 0;
+        private SensorManager sensorManager;
 
-    @Override
-    public void call(final Subscriber<? super Float> subscriber) {
-        subject.distinctUntilChanged().subscribe(subscriber);
-    }
-
-    private final ConnectableObservable<Float> worker = new ConnectableObservable<Float>(this) {
         @Override
-        public Subscription connect() {
-            @SuppressWarnings("deprecation")
-            // This will be removed when using a new location service. Until then, it is okay to be used.
-            final Sensor defaultSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
-            final SensorEventListener listener = new SensorEventListener() {
-                @Override
-                public void onSensorChanged(final SensorEvent event) {
-                    subject.onNext(event.values[0]);
-                }
+        public void onSensorChanged(final SensorEvent event) {
+            subject.onNext(event.values[0]);
+        }
 
-                @Override
-                public void onAccuracyChanged(final Sensor sensor, final int accuracy) {
+        @Override
+        public void onAccuracyChanged(final Sensor sensor, final int accuracy) {
                 /*
                 * There is a bug in Android, which apparently causes this method to be called every
                 * time the sensor _value_ changed, even if the _accuracy_ did not change. So logging
@@ -60,19 +43,43 @@ public class DirectionProvider implements OnSubscribe<Float> {
                 * See for example https://code.google.com/p/android/issues/detail?id=14792
                 */
 
-                    //Log.i(Settings.tag, "Compass' accuracy is low (" + accuracy + ")");
-                }
-            };
-
-            sensorManager.registerListener(listener, defaultSensor, SensorManager.SENSOR_DELAY_NORMAL);
-            return Subscriptions.create(new Action0() {
-                @Override
-                public void call() {
-                    sensorManager.unregisterListener(listener);
-                }
-            });
+            //Log.i(Settings.tag, "Compass' accuracy is low (" + accuracy + ")");
         }
-    };
+
+        // This will be removed when using a new location service. Until then, it is okay to be used.
+        @SuppressWarnings("deprecation")
+        @Override
+        public void start(final Context context, final Handler handler) {
+            if (++count == 1) {
+                sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+                sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION), SensorManager.SENSOR_DELAY_NORMAL, handler);
+            }
+        }
+
+        @Override
+        public void stop() {
+            if (--count == 0) {
+                sensorManager.unregisterListener(this);
+            }
+        }
+
+    }
+
+    private static final StartableHandlerThread handlerThread =
+            new StartableHandlerThread("DirectionProvider thread", Process.THREAD_PRIORITY_BACKGROUND, new Listener());
+    static {
+      handlerThread.start();
+    }
+
+    static public Observable<Float> create(final Context context) {
+        return Observable.create(new OnSubscribe<Float>() {
+            @Override
+            public void call(final Subscriber<? super Float> subscriber) {
+                handlerThread.start(subscriber, context);
+                subject.subscribe(subscriber);
+            }
+        });
+    }
 
     /**
      * Take the phone rotation (through a given activity) in account and adjust the direction.

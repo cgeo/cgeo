@@ -42,12 +42,12 @@ public abstract class GeoDirHandler {
      * preferences allow it).
      */
     public Subscription start() {
-        return app.geoDirObservable().subscribe(new Action1<ImmutablePair<IGeoData, Float>>() {
+        return app.geoDirObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<ImmutablePair<IGeoData, Float>>() {
             @Override
             public void call(final ImmutablePair<IGeoData, Float> geoDir) {
                 handleGeoDir(geoDir);
             }
-        }, AndroidSchedulers.mainThread());
+        });
     }
 
 }
