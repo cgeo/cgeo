@@ -5,6 +5,7 @@ import rx.Subscriber;
 import rx.functions.Action0;
 import rx.subscriptions.Subscriptions;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -25,6 +26,8 @@ public class StartableHandlerThread extends HandlerThread {
         public void stop();
     }
 
+    // The handler and the thread are intimely linked, there will be no leak.
+    @SuppressLint("HandlerLeak")
     private class StartableHandler extends Handler {
         public StartableHandler() {
             super(StartableHandlerThread.this.getLooper());
