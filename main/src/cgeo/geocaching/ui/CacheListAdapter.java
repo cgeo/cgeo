@@ -70,6 +70,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     final private Resources res;
     /** Resulting list of caches */
     final private List<Geocache> list;
+    private boolean eventsOnly;
     private boolean inverseSort = false;
 
     private static final int SWIPE_MIN_DISTANCE = 60;
@@ -122,9 +123,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         this.res = activity.getResources();
         this.list = list;
         this.cacheListType = cacheListType;
-        if (cacheListType == CacheListType.HISTORY) {
-            cacheComparator = new VisitComparator();
-        }
+        checkEvents();
 
         final Drawable modifiedCoordinatesMarker = activity.getResources().getDrawable(R.drawable.marker_usermodifiedcoords);
         for (final CacheType cacheType : CacheType.values()) {
@@ -170,8 +169,18 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         inverseSort = !inverseSort;
     }
 
-    public static CacheComparator getCacheComparator() {
+    public CacheComparator getCacheComparator() {
+        if (isHistory()) {
+            return VisitComparator.singleton;
+        }
+        if (cacheComparator == null && eventsOnly) {
+            return EventDateComparator.singleton;
+        }
         return cacheComparator;
+    }
+
+    private boolean isHistory() {
+        return cacheListType == CacheListType.HISTORY;
     }
 
     public Geocache findCacheByGeocode(String geocode) {
@@ -274,7 +283,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
             updateSortByDistance();
         }
         else {
-            Collections.sort(list, getPotentialInversion(cacheComparator));
+            Collections.sort(list, getPotentialInversion(getCacheComparator()));
         }
 
         notifyDataSetChanged();
@@ -326,8 +335,9 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         return comparator;
     }
 
-    private static boolean isSortedByDistance() {
-        return cacheComparator == null || cacheComparator instanceof DistanceComparator;
+    private boolean isSortedByDistance() {
+        final CacheComparator comparator = getCacheComparator();
+        return comparator == null || comparator instanceof DistanceComparator;
     }
 
     public void setActualHeading(final float direction) {
@@ -481,7 +491,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         }
         holder.favorite.setBackgroundResource(favoriteBack);
 
-        if (cacheListType == CacheListType.HISTORY && cache.getVisitedDate() > 0) {
+        if (isHistory() && cache.getVisitedDate() > 0) {
             holder.info.setText(Formatter.formatCacheInfoHistory(cache));
         } else {
             holder.info.setText(Formatter.formatCacheInfoLong(cache, cacheListType));
@@ -644,28 +654,13 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         return list.size();
     }
 
-    public void setInitialComparator() {
-        // will be called repeatedly when coming back to the list, therefore check first for an already existing sorting
-        if (cacheComparator != null) {
-            return;
-        }
-        CacheComparator comparator = null; // a null comparator will automatically sort by distance
-        if (cacheListType == CacheListType.HISTORY) {
-            comparator = new VisitComparator();
-        } else {
-            if (CollectionUtils.isNotEmpty(list)) {
-                boolean eventsOnly = true;
-                for (final Geocache cache : list) {
-                    if (!cache.isEventCache()) {
-                        eventsOnly = false;
-                        break;
-                    }
-                }
-                if (eventsOnly) {
-                    comparator = new EventDateComparator();
-                }
+    public void checkEvents() {
+        eventsOnly = true;
+        for (final Geocache cache : list) {
+            if (!cache.isEventCache()) {
+                eventsOnly = false;
+                return;
             }
         }
-        setComparator(comparator);
     }
 }

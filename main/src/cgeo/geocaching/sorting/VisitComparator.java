@@ -8,6 +8,8 @@ import cgeo.geocaching.Geocache;
  */
 public class VisitComparator extends AbstractCacheComparator {
 
+    final static public VisitComparator singleton = new VisitComparator();
+
     @Override
     protected int compareCaches(final Geocache cache1, final Geocache cache2) {
         return Long.valueOf(cache2.getVisitedDate()).compareTo(cache1.getVisitedDate());

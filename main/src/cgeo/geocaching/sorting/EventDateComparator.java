@@ -5,4 +5,6 @@ package cgeo.geocaching.sorting;
  */
 public class EventDateComparator extends DateComparator {
 
+    final static public EventDateComparator singleton = new EventDateComparator();
+
 }
