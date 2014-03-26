@@ -44,6 +44,9 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import rx.Scheduler;
 import rx.Subscription;
 import rx.functions.Action1;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
+import rx.subscriptions.Subscriptions;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -69,9 +72,6 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.TextView;
 import android.widget.ViewSwitcher.ViewFactory;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
-import rx.subscriptions.Subscriptions;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -495,7 +495,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     @Override
     public void onResume() {
         super.onResume();
-        resumeSubscription = Subscriptions.from(geoDirUpdate.start(), startTimer());
+        resumeSubscription = Subscriptions.from(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR), startTimer());
 
         if (!CollectionUtils.isEmpty(dirtyCaches)) {
             for (String geocode : dirtyCaches) {

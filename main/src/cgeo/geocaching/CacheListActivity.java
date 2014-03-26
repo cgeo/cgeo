@@ -123,12 +123,17 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
 
         @Override
-        public void updateGeoDir(final IGeoData geo, final float dir) {
-            if (geo.getCoords() != null) {
-                adapter.setActualCoordinates(geo.getCoords());
-                if (Settings.isLiveList()) {
-                    adapter.setActualHeading(dir);
-                }
+        public void updateDirection(final float direction) {
+            if (Settings.isLiveList()) {
+                adapter.setActualHeading(direction);
+            }
+        }
+
+        @Override
+        public void updateGeoData(final IGeoData geoData) {
+            final Geopoint coords = geoData.getCoords();
+            if (coords != null) {
+                adapter.setActualCoordinates(coords);
             }
         }
 
@@ -456,7 +461,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public void onResume() {
         super.onResume();
 
-        resumeSubscription = geoDirHandler.start();
+        resumeSubscription = geoDirHandler.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.UPDATE_DIRECTION);
 
         adapter.setSelectMode(false);
         setAdapterCurrentCoordinates(true);

@@ -145,7 +145,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     private final GeoDirHandler locationUpdater = new GeoDirHandler() {
         @Override
-        public void updateGeoDir(final IGeoData geo, final float dir) {
+        public void updateGeoData(final IGeoData geo) {
             if (cacheDistanceView == null) {
                 return;
             }
@@ -320,7 +320,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public void onResume() {
-        super.onResume(locationUpdater.start());
+        super.onResume(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA));
 
         if (refreshOnResume) {
             notifyDataSetChanged();

@@ -3,12 +3,13 @@ package cgeo.geocaching.speech;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
+import rx.Subscription;
 
 import android.app.Activity;
 import android.app.Service;
@@ -17,7 +18,6 @@ import android.os.IBinder;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.Engine;
 import android.speech.tts.TextToSpeech.OnInitListener;
-import rx.Subscription;
 
 import java.util.Locale;
 
@@ -143,7 +143,7 @@ public class SpeechService extends Service implements OnInitListener {
 
         initialized = true;
 
-        initSubscription = geoDirHandler.start();
+        initSubscription = geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR);
     }
 
     @Override

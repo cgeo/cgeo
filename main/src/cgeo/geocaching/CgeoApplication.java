@@ -5,9 +5,9 @@ import cgeo.geocaching.sensors.GeoDataProvider;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.utils.Log;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import rx.Observable;
-import rx.functions.Func2;
+import rx.functions.Action1;
+import rx.observables.ConnectableObservable;
 
 import android.app.Application;
 
@@ -17,7 +17,10 @@ public class CgeoApplication extends Application {
     public boolean showLoginToast = true; //login toast shown just once.
     private boolean liveMapHintShownInThisSession = false; // livemap hint has been shown
     private static CgeoApplication instance;
-    private Observable<ImmutablePair<IGeoData,Float>> geoDir;
+    private Observable<IGeoData> geoDataObservable;
+    private Observable<Float> directionObservable;
+    private volatile IGeoData currentGeo = null;
+    private volatile float currentDirection = 0.0f;
 
     public CgeoApplication() {
         setInstance(this);
@@ -37,31 +40,40 @@ public class CgeoApplication extends Application {
         DataStore.removeAllFromCache();
     }
 
-    public synchronized Observable<ImmutablePair<IGeoData, Float>> geoDirObservable() {
-        if (geoDir == null) {
-            final Observable<IGeoData> geo = GeoDataProvider.create(this);
-            final Observable<Float> dir = DirectionProvider.create(this);
-            final Observable<ImmutablePair<IGeoData, Float>> combined = Observable.combineLatest(geo, dir, new Func2<IGeoData, Float, ImmutablePair<IGeoData, Float>>() {
-                @Override
-                public ImmutablePair<IGeoData, Float> call(final IGeoData geoData, final Float dir) {
-                    return ImmutablePair.of(geoData, dir);
-                }
-            });
-            geoDir = combined.publish().refCount();
+    public synchronized Observable<IGeoData> geoDataObservable() {
+        if (geoDataObservable == null) {
+            final ConnectableObservable<IGeoData> onDemand = GeoDataProvider.create(this).publish();
+            onDemand.subscribe(new Action1<IGeoData>() {
+                                  @Override
+                                  public void call(final IGeoData geoData) {
+                                      currentGeo = geoData;
+                                  }
+                              });
+            geoDataObservable = onDemand.refCount();
         }
-        return geoDir;
+        return geoDataObservable;
     }
 
-    private ImmutablePair<IGeoData, Float> currentGeoDir() {
-        return geoDirObservable().first().toBlockingObservable().single();
+    public synchronized Observable<Float> directionObservable() {
+        if (directionObservable == null) {
+            final ConnectableObservable<Float> onDemand = DirectionProvider.create(this).publish();
+            onDemand.subscribe(new Action1<Float>() {
+                                  @Override
+                                  public void call(final Float direction) {
+                                      currentDirection = direction;
+                                  }
+                              });
+            directionObservable = onDemand.refCount();
+        }
+        return directionObservable;
     }
 
     public IGeoData currentGeo() {
-        return currentGeoDir().left;
+        return currentGeo != null ? currentGeo : geoDataObservable().toBlockingObservable().first();
     }
 
-    public Float currentDirection() {
-        return currentGeoDir().right;
+    public float currentDirection() {
+        return currentDirection;
     }
 
     public boolean isLiveMapHintShownInThisSession() {

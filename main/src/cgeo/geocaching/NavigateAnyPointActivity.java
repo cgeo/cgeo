@@ -234,7 +234,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
     @Override
     public void onResume() {
-        super.onResume(geoDirHandler.start());
+        super.onResume(geoDirHandler.start(GeoDirHandler.UPDATE_GEODATA));
         init();
     }
 
@@ -453,7 +453,7 @@ public class NavigateAnyPointActivity extends AbstractActivity {
 
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
         @Override
-        public void updateGeoDir(final IGeoData geo, final float dir) {
+        public void updateGeoData(final IGeoData geo) {
             try {
                 latButton.setHint(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
                 lonButton.setHint(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));

@@ -46,7 +46,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity implements 
     private final GeoDirHandler geoUpdate = new GeoDirHandler() {
 
         @Override
-        public void updateGeoDir(final IGeoData geo, final float dir) {
+        public void updateGeoData(final IGeoData geo) {
             try {
                 if (geo.getCoords() != null && cache != null && cache.getCoords() != null) {
                     cacheDistance.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(cache.getCoords())));
@@ -182,7 +182,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity implements 
 
     @Override
     public void onResume() {
-        super.onResume(geoUpdate.start());
+        super.onResume(geoUpdate.start(GeoDirHandler.UPDATE_GEODATA));
         init();
     }
 
