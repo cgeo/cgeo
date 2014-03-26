@@ -1,13 +1,14 @@
 package cgeo.geocaching.utils;
 
-import android.content.Context;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Message;
 import org.eclipse.jdt.annotation.NonNull;
 import rx.Subscriber;
 import rx.functions.Action0;
 import rx.subscriptions.Subscriptions;
+
+import android.content.Context;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Message;
 
 /**
  * Derivated class of {@link android.os.HandlerThread} with an exposed handler and a start/stop mechanism
@@ -56,13 +57,9 @@ public class StartableHandlerThread extends HandlerThread {
         this(name, priority, null);
     }
 
-    public Handler getHandler() {
+    public synchronized Handler getHandler() {
         if (handler == null) {
-            synchronized(this) {
-                if (handler == null) {
-                    handler = new StartableHandler();
-                }
-            }
+            handler = new StartableHandler();
         }
         return handler;
     }
