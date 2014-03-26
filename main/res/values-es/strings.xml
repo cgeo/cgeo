@@ -598,11 +598,13 @@
   <string name="map_trail_hide">Ocultar rastro</string>
   <string name="map_circles_show">Mostrar círculos</string>
   <string name="map_circles_hide">Ocultar círculos</string>
+  <string name="map_theme_builtin">Por defecto</string>
   <string name="map_live_enable">Activar en vivo</string>
   <string name="map_live_disable">Desactivar en vivo</string>
   <string name="map_static_title">Mapas estáticos</string>
   <string name="map_static_loading">Cargando mapas estáticos…</string>
   <string name="map_token_err">Dado que c:geo sólo es capaz de descargar datos parciales, la coordenadas de algunso escondites pueden ser inexactas.</string>
+  <string name="map_as_list">Mostrar como lista</string>
   <string name="map_strategy_fastest">Más rápido</string>
   <string name="map_strategy_fast">Rápido</string>
   <string name="map_strategy_detailed">Detallado</string>
