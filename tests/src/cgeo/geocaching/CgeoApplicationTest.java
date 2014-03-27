@@ -90,7 +90,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
         // Following data can change over time
         assertTrue(tb.getDistance() >= 10617.8f);
         assertTrue(tb.getLogs().size() >= 10);
-        assertTrue(Trackable.SPOTTED_CACHE == tb.getSpottedType() || Trackable.SPOTTED_USER == tb.getSpottedType());
+        assertTrue(Trackable.SPOTTED_CACHE == tb.getSpottedType() || Trackable.SPOTTED_USER == tb.getSpottedType() || Trackable.SPOTTED_UNKNOWN == tb.getSpottedType());
         // no assumption possible: assertEquals("faa2d47d-19ea-422f-bec8-318fc82c8063", tb.getSpottedGuid());
         // no assumption possible: assertEquals("Nice place for a break cache", tb.getSpottedName());
 
