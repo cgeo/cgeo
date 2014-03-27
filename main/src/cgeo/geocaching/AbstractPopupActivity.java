@@ -91,6 +91,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity implements 
             public void call(final GCVoteRating rating) {
                 cache.setRating(rating.getRating());
                 cache.setVotes(rating.getVotes());
+                DataStore.saveChangedCache(cache);
                 details.addRating(cache);
             }
         });
