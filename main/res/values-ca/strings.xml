@@ -159,7 +159,7 @@
   <string name="err_load_descr_failed">El c:geo no pot carregar la descripció.</string>
   <string name="err_location_unknown">El c:geo no sap la ubicació del catxé.</string>
   <string name="err_missing_device_name">Introduïu un nom de dispositiu abans de registrar-vos.</string>
-  <string name="err_favorite_failed">S\'ha produït un error al canviar l\'estat de favorit.</string>
+  <string name="err_favorite_failed">S\'ha produït un error al canviar l\'estat de preferit.</string>
   <string name="err_select_logimage_failed">S\'ha produït un error en seleccionar una imatge pel registre.</string>
   <string name="err_acquire_image_failed">S\'ha produït un error a l\'adquirir una imatge.</string>
   <string name="err_tb_display">El c:geo no pot mostrar el traçable que volíeu. És realment un traçable?</string>
@@ -172,15 +172,15 @@
   <string name="err_point_unknown_position">El c:geo no pot reconèixer on ets.</string>
   <string name="err_point_no_position_given_title">Cal informació</string>
   <string name="err_point_no_position_given">Ompliu la latitud i la longitud o la distància i la direcció. També podeu omplir els quatre camps.</string>
-  <string name="err_point_curr_position_unavailable">El c:geo encara no té les coordenades actuals. Si us plau, espereu una estona…</string>
+  <string name="err_point_curr_position_unavailable">El c:geo encara no té les coordenades actuals. Espereu una estona…</string>
   <string name="err_point_bear_and_dist_title">Necessiteu ajuda?</string>
   <string name="err_point_bear_and_dist">Ompliu el rumb i la distància. El rumb son angles del 0º al 360º respecte al Nord. La distància no necessita unitats.</string>
   <string name="err_log_load_data">El c:geo no pot carregar les dades necessàries per registrar la visita.</string>
   <string name="err_log_load_data_again">El c:geo no pot carregar les dades necessàries per registrar la visita. Torneu a intentar-ho.</string>
   <string name="err_log_load_data_still">El c:geo encara està carregant les dades necessàries per enviar el registre. Si us plau, espereu una estona més.</string>
-  <string name="err_log_post_failed">Sembla que el vostre registre no s\'ha publicat. Si us plau, comproveu-ho a geocaching.com.</string>
-  <string name="err_log_post_failed_ec">Sembla que el vostre registre no s\'ha publicat. Si us plau, comproveu-ho a Extremcaching.com.</string>
-  <string name="err_logimage_post_failed">Sembla que la vostra imatge del registre no s\'ha carregat. Si us plau, comproveu-ho a geocaching.com.</string>
+  <string name="err_log_post_failed">Sembla que el vostre registre no s\'ha publicat. Comproveu-ho a geocaching.com.</string>
+  <string name="err_log_post_failed_ec">Sembla que el registre no s\'ha publicat. Comproveu-ho a Extremcaching.com.</string>
+  <string name="err_logimage_post_failed">Sembla que la  imatge de registre no ha estat guardada. Comproveu-ho a Geocaching.com.</string>
   <string name="err_search_address_forgot">El c:geo ha oblidat l\'adreça que intentaves trobar.</string>
   <string name="err_parse_lat">El c:geo no pot calcular la latitud.</string>
   <string name="err_parse_lon">El c:geo no pot calcular la longitud.</string>
@@ -192,7 +192,7 @@
   <string name="warn_no_keyword">No s\'ha indicat cap paraula clau.</string>
   <string name="warn_no_username">No s\'ha indicat el nom de l\'usuari.</string>
   <string name="warn_search_help_title">Necessiteu ajuda?</string>
-  <string name="warn_search_help_address">Introdueix una adreça o el nom d\'un lloc. Per exemple l\'adreça \"Av. Amadeus Vives, 27, La Pineda\", o un nom de municipi com \"Colldejou\" o el nom d\'algun lloc com per exemple \"Pont del Diable\".</string>
+  <string name="warn_search_help_address">Introduiu una adreça o el nom d\'un lloc. Per exemple l\'adreça \"Av. Amadeus Vives, 27, La Pineda\", o un nom de municipi com \"Colldejou\" o el nom d\'algun lloc com per exemple \"Pont del Diable\".</string>
   <string name="warn_search_help_gccode">Introduïu el codi d\'un catxé, Per exemple \"GC482R5\".</string>
   <string name="warn_search_help_keyword">Introduïu tot o part del nom d\'un catxé. Per exemple \"Mega2013\".</string>
   <string name="warn_search_help_user">Introduïu el nom d\'usuari de Geocaching.com.</string>
@@ -201,7 +201,7 @@
   <string name="warn_load_images">El c:geo no ha pogut carregar les imatges.</string>
   <string name="warn_invalid_mapfile">El fitxer de mapa seleccionat no és un fitxer vàlid de mapa mapsforge versió 0.3.0 . \nEls mapes fora de línia no estan disponibles.</string>
   <string name="warn_deprecated_mapfile">Esteu utilitzant una versió obsoleta del fitxer de mapes (0.2.4).\nConsidereu canviar a una versió de mapa 0.3.0. \nDeixarem de donar suport a la versió 0.2.4 en la propera versió.</string>
-  <string name="warn_nonexistant_mapfile">No existeix l\'arxiu de mapa seleccionat. \nNo estan disponibles els mapes sense connexió.</string>
+  <string name="warn_nonexistant_mapfile">No existeix el fitxer de mapa seleccionat. \nNo estan disponibles els mapes fora línia.</string>
   <string name="warn_rendertheme_missing">No s\'ha trobat l\'esquema de colors del mapa.</string>
   <string name="warn_pocket_query_select">No hi ha cap pocket query seleccionada.</string>
   <string name="warn_no_pocket_query_found">No s\'ha trobat cap pocket query en línia.</string>
@@ -231,7 +231,7 @@
   <string name="caches_nearby_button">Propers</string>
   <string name="advanced_search_button">Cerca</string>
   <string name="stored_caches_button">Desats</string>
-  <string name="any_button">Ves a...</string>
+  <string name="any_button">Ves a…</string>
   <string name="unknown_scan">No s\'ha trobat cap geocodi en el resultat de l\'exploració.</string>
   <string name="caches_no_cache">Aquí no hi ha catxés</string>
   <string name="caches_more_caches">Carrega més catxés</string>
