@@ -2,8 +2,28 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-     <b>Next bugfix release:</b>\n
-     <b>Bugfixes:</b>\n
+    <b>Next bugfix release:</b>\n
+    <b>New features:</b>\n
+    · New languages: Catalan, Lithuanian, Romanian\n
+    · Parallel loading from different platforms to speed up live map\n
+    · All GCVote related settings moved to Menu-Services-GCVote\n
+    · Support of some GSAK specific GPX contents\n
+    · Create waypoint from personal note also for OC caches\n
+    · Copy and translate operations also for TB information\n
+    · Decrypt waypoint note by tapping on it\n
+    · Long press filter button in main menu to reset it\n
+    · List sorting now permanent during session\n
+    · Also include embedded images on image tab\n
+    <b>Bugfixing:</b>\n
+    · Corrected wrong field note progress indication\n
+    · When using "external map" sometimes the position marker was not shown\m
+    · Circles on map now also shown for caches with final coords defined\n
+    · Adding event caches to calendar corrected for events without starting time\n
+    · Logging of OC caches was not possible if no GC login data was stored\n
+    · TB details have been empty if HTML syntax was incorrect\n
+    · Swipe left from cache details not working in some cases\n
+    · Database optimizations\n
+    · Filtered list was not shown on map\n
     · OC-login was not possible if no GC-login stored\n
     · Geocodes are always case insensitive\n
     · Fixed crashes in dir chooser\n
