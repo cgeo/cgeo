@@ -231,7 +231,7 @@
   <string name="caches_nearby_button">Propers</string>
   <string name="advanced_search_button">Cerca</string>
   <string name="stored_caches_button">Desats</string>
-  <string name="any_button">Ves a…</string>
+  <string name="any_button">Vés a…</string>
   <string name="unknown_scan">No s\'ha trobat cap geocodi en el resultat de l\'exploració.</string>
   <string name="caches_no_cache">Aquí no hi ha catxés</string>
   <string name="caches_more_caches">Carrega més catxés</string>
@@ -561,7 +561,7 @@
   <string name="cache_description_table_note">La descripció conté un format que pot necessitar visualitzar-se a %s per a veure\'s correctament.</string>
   <string name="cache_watchlist_on">Aquest catxé és a la vostra llista de seguiment.</string>
   <string name="cache_watchlist_not_on">Aquest catxé no és a la vostra llista de seguiment.</string>
-  <string name="cache_watchlist_add">Afegeix a la llista de seguiment</string>
+  <string name="cache_watchlist_add">Afegeix al seguiment</string>
   <string name="cache_watchlist_remove">Esborra de la llista de seguiment</string>
   <string name="cache_favpoint_on">Aquest catxé és un dels vostres favorits.</string>
   <string name="cache_favpoint_not_on">Aquest catxé no és un dels vostres preferits.</string>
@@ -756,11 +756,11 @@
   <string name="map_as_list">Mostra-ho com una llista</string>
   <string name="map_strategy">Estratègia</string>
   <string name="map_strategy_title">Estratègia del mapa en viu</string>
-  <string name="map_strategy_fastest">El més ràpid</string>
-  <string name="map_strategy_fast">Ràpid</string>
+  <string name="map_strategy_fastest">La més ràpida</string>
+  <string name="map_strategy_fast">Ràpida</string>
   <string name="map_strategy_auto">Sensible a la velocitat</string>
-  <string name="map_strategy_detailed">Detallat</string>
-  <string name="live_map_notification">Les Coordenades al mapa en viu poden no ser precises. Possiblement les coordenades imprecises estan marcades amb un cercle taronja.\nObrint els detalls del catxé o guardant el catxé per a ús fora de línia  obtindrem les coordenades precises.\n\nMés informació a la pàgina \"Quant al c:geo\" dins de l\'app.</string>
+  <string name="map_strategy_detailed">Detallada</string>
+  <string name="live_map_notification">Les coordenades al mapa en viu poden no ser precises. Possiblement les coordenades imprecises estan marcades amb un cercle taronja.\nObrint els detalls del catxé o guardant el catxé per a ús fora de línia  obtindreu les coordenades precises.\n\nPodeu trobar més informació a la pàgina \"Quant al c:geo\" dins de l\'aplicació.</string>
   <string name="search_bar_hint">Cerca de catxés</string>
   <string name="search_bar_desc">Catxés (codi del catxé, paraula clau), Traçables (codi TB)</string>
   <string name="search_coordinates">Coordenades</string>
