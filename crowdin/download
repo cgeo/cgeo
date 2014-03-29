@@ -17,17 +17,25 @@ GITHUB_PR_TITLE="crowdin: New translations"
 PR_EXISTS=0
 DDATE=`date +"%Y-%m-%d %H:%M:%S"`
 ZIPFILE=all.zip
+# default base branch
+BASE_BRANCH=master
 
 finish () {
     debug "cleaning up"
     # revert everything until last commit
     _do git branch | grep -q "\* ${BRANCH}" && ( _do git checkout . ; _do git reset ; )
-    _do git checkout master || exit 1
+    _do git checkout ${BASE_BRANCH} || exit 1
     [[ -f ${ZIPFILE} ]] && _do rm "${ZIPFILE}"
 }
 
-# update master
-_do git pull upstream master || die "couldn't git pull upstream master."
+# check if different base branch has been set
+if [ $# -eq 1 ]; then
+    debug "Setting BASE_BRANCH to $1"
+    BASE_BRANCH=$1
+fi
+
+# update BASE_BRANCH
+_do git pull upstream ${BASE_BRANCH} || die "couldn't git pull upstream ${BASE_BRANCH}."
 
 # check for existing PR
 _do curl -i --get "https://api.github.com/repos/cgeo/cgeo/pulls" -o "${OUT}" \
@@ -38,7 +46,7 @@ grep -qF "${GITHUB_PR_TITLE}" "${OUT}" && PR_EXISTS=1
 if [ $PR_EXISTS -eq 0 ]; then
     debug "We don't have an open Pull Request on github."
     # remove branch if exists
-    _do git checkout master || die "Couldn't git checkout master."
+    _do git checkout ${BASE_BRANCH} || die "Couldn't git checkout ${BASE_BRANCH}."
     _do git branch -D "${BRANCH}"
 else
     debug "We have an open Pull Request on github."
@@ -79,13 +87,13 @@ fi
 
 # upload changes to github
 AMEND=""
-[[ ! -z "`git log master..${BRANCH}`" ]] && AMEND="--amend"
+[[ ! -z "`git log ${BASE_BRANCH}..${BRANCH}`" ]] && AMEND="--amend"
 _do git commit -a "${AMEND}" -m \"${GITHUB_PR_TITLE}\" || die "commit failed."
 _do git push -f origin "${BRANCH}" || die "git push failed."
 
 # create pull request
 if [ $PR_EXISTS -eq 0 ]; then
-    _do curl -i -u "${GITHUB_USER}:${GITHUB_PASSWORD}" -d \'{\"title\":\"${GITHUB_PR_TITLE}\",\"body\":\"downloaded ${DDATE}\",\"head\":\"${GITHUB_USER}:${BRANCH}\",\"base\":\"master\"}\' "https://api.github.com/repos/cgeo/cgeo/pulls" -o "${OUT}" || die "creating the pull request failed."
+    _do curl -i -u "${GITHUB_USER}:${GITHUB_PASSWORD}" -d \'{\"title\":\"${GITHUB_PR_TITLE}\",\"body\":\"downloaded ${DDATE}\",\"head\":\"${GITHUB_USER}:${BRANCH}\",\"base\":\"${BASE_BRANCH}\"}\' "https://api.github.com/repos/cgeo/cgeo/pulls" -o "${OUT}" || die "creating the pull request failed."
     grep -q "201 Created" "${OUT}" || die "pull request not created."
 fi
 
