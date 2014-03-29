@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Google Maps -->
     <string name="maps_api_key" translatable="false">@maps.api.key@</string>
 
@@ -10,4 +10,16 @@
     <!-- Opencaching.pl -->
     <string name="oc_pl_okapi_consumer_key" translatable="false">@ocpl.okapi.consumer.key@</string>
     <string name="oc_pl_okapi_consumer_secret" translatable="false">@ocpl.okapi.consumer.secret@</string>
+	<!-- disable unused resource warning until remaining implementation has been merged -->
+    <!-- Opencaching.us -->
+    <string name="oc_us_okapi_consumer_key" translatable="false" tools:ignore="UnusedResources">@ocus.okapi.consumer.key@</string>
+    <string name="oc_us_okapi_consumer_secret" translatable="false" tools:ignore="UnusedResources">@ocus.okapi.consumer.secret@</string>
+
+    <!-- Opencaching.nl -->
+    <string name="oc_nl_okapi_consumer_key" translatable="false" tools:ignore="UnusedResources">@ocnl.okapi.consumer.key@</string>
+    <string name="oc_nl_okapi_consumer_secret" translatable="false" tools:ignore="UnusedResources">@ocnl.okapi.consumer.secret@</string>
+
+    <!-- Opencaching.ro -->
+    <string name="oc_ro_okapi_consumer_key" translatable="false" tools:ignore="UnusedResources">@ocro.okapi.consumer.key@</string>
+    <string name="oc_ro_okapi_consumer_secret" translatable="false" tools:ignore="UnusedResources">@ocro.okapi.consumer.secret@</string>
 </resources>

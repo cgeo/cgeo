@@ -112,6 +112,12 @@
                 <filter token="ocde.okapi.consumer.secret" value="${ocde.okapi.consumer.secret}"/>
                 <filter token="ocpl.okapi.consumer.key" value="${ocpl.okapi.consumer.key}"/>
                 <filter token="ocpl.okapi.consumer.secret" value="${ocpl.okapi.consumer.secret}"/>
+                <filter token="ocus.okapi.consumer.key" value="${ocus.okapi.consumer.key}"/>
+                <filter token="ocus.okapi.consumer.secret" value="${ocus.okapi.consumer.secret}"/>
+                <filter token="ocnl.okapi.consumer.key" value="${ocnl.okapi.consumer.key}"/>
+                <filter token="ocnl.okapi.consumer.secret" value="${ocnl.okapi.consumer.secret}"/>
+                <filter token="ocro.okapi.consumer.key" value="${ocro.okapi.consumer.key}"/>
+                <filter token="ocro.okapi.consumer.secret" value="${ocro.okapi.consumer.secret}"/>
             </filterset>
         </copy>
     </target>
