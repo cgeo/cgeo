@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next feature release:</b>\n
+    <b>2013.03.30</b>\n
     <b>New features:</b>\n
     · New languages: Catalan, Lithuanian, Romanian\n
     · Parallel loading from different platforms to speed up live map\n
