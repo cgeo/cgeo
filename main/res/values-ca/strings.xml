@@ -561,8 +561,8 @@
   <string name="cache_description_table_note">La descripció conté un format que pot necessitar visualitzar-se a %s per a veure\'s correctament.</string>
   <string name="cache_watchlist_on">Aquest catxé és a la vostra llista de seguiment.</string>
   <string name="cache_watchlist_not_on">Aquest catxé no és a la vostra llista de seguiment.</string>
-  <string name="cache_watchlist_add">Afegeix al seguiment</string>
-  <string name="cache_watchlist_remove">Esborra de la llista de seguiment</string>
+  <string name="cache_watchlist_add">Posa\'l al seguiment</string>
+  <string name="cache_watchlist_remove">Treu del seguiment</string>
   <string name="cache_favpoint_on">Aquest catxé és un dels vostres favorits.</string>
   <string name="cache_favpoint_not_on">Aquest catxé no és un dels vostres preferits.</string>
   <string name="cache_favpoint_add">Afegeix</string>

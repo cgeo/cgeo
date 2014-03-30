@@ -732,7 +732,7 @@
   <string name="waypoint_duplicate">Dubliuoti</string>
   <string name="waypoint_copy_of">Kopija</string>
   <string name="search_history">Istorija</string>
-  <string name="search_history_empty">Jokių ankstesnių tikslų</string>
+  <string name="search_history_empty">Nėra ankstesnių tikslų</string>
   <string name="search_remove_destination">Tikslas pašalintas</string>
   <string name="search_clear_history">Išvalyti istoriją</string>
   <string name="search_history_cleared">Istorija išvalyta</string>
