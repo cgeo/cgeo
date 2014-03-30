@@ -2,8 +2,8 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next feature release:</b>\n
     <b>2014.03.30:</b>\n
+    <b>New features:</b>\n
     · New languages: Catalan, Lithuanian, Romanian\n
     · Parallel loading from different platforms to speed up live map\n
     · All GCVote related settings moved to Menu-Services-GCVote\n
@@ -16,7 +16,7 @@
     · Also include embedded images on image tab\n
     <b>Bugfixing:</b>\n
     · Corrected wrong field note progress indication\n
-    · When using "external map" sometimes the position marker was not shown\m
+    · When using "external map" sometimes the position marker was not shown\n
     · Circles on map now also shown for caches with final coords defined\n
     · Adding event caches to calendar corrected for events without starting time\n
     · Logging of OC caches was not possible if no GC login data was stored\n
