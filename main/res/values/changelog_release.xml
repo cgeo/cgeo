@@ -16,7 +16,7 @@
     · Also include embedded images on image tab\n
     <b>Bugfixing:</b>\n
     · Corrected wrong field note progress indication\n
-    · When using "external map" sometimes the position marker was not shown\m
+    · When using "external map" sometimes the position marker was not shown\n
     · Circles on map now also shown for caches with final coords defined\n
     · Adding event caches to calendar corrected for events without starting time\n
     · Logging of OC caches was not possible if no GC login data was stored\n
