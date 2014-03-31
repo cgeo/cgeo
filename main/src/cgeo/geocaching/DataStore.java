@@ -2344,14 +2344,14 @@ public class DataStore {
                 Log.d("Database clean: removing " + geocodes.size() + " geocaches from listId=0");
                 removeCaches(geocodes, LoadFlags.REMOVE_ALL);
             }
+
+            // This cleanup needs to be kept in place for about one year so that older log images records are
+            // cleaned. TO BE REMOVED AFTER 2015-03-24.
+            Log.d("Database clean: removing obsolete log images records");
+            database.delete(dbTableLogImages, "log_id NOT IN (SELECT _id FROM " + dbTableLogs + ")", null);
         } catch (final Exception e) {
             Log.w("DataStore.clean", e);
         }
-
-        // This cleanup needs to be kept in place for about one year so that older log images records are
-        // cleaned. TO BE REMOVED AFTER 2015-03-24.
-        Log.d("Database clean: removing obsolete log images records");
-        database.delete(dbTableLogImages, "log_id NOT IN (SELECT _id FROM " + dbTableLogs + ")", null);
 
         Log.d("Database clean: finished");
         databaseCleaned = true;
