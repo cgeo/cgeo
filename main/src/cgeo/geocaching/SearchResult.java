@@ -1,6 +1,5 @@
 package cgeo.geocaching;
 
-import android.os.Build;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.CacheType;
@@ -304,35 +303,23 @@ public class SearchResult implements Parcelable {
 
     public static <C extends IConnector> SearchResult parallelCombineActive(final Collection<C> connectors,
                                                                             final Func1<C, SearchResult> func) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
-            return Observable.from(connectors).parallel(new Func1<Observable<C>, Observable<SearchResult>>() {
-                @Override
-                public Observable<SearchResult> call(final Observable<C> cObservable) {
-                    return cObservable.flatMap(new Func1<C, Observable<? extends SearchResult>>() {
-                        @Override
-                        public Observable<? extends SearchResult> call(final C c) {
-                            return c.isActive() ? Observable.from(func.call(c)) : Observable.<SearchResult>empty();
-                        }
-                    });
-                }
-            }, Schedulers.io()).reduce(new SearchResult(), new Func2<SearchResult, SearchResult, SearchResult>() {
-                @Override
-                public SearchResult call(final SearchResult searchResult, final SearchResult searchResult2) {
-                    searchResult.addSearchResult(searchResult2);
-                    return searchResult;
-                }
-            }).toBlockingObservable().first();
-        } else {
-            // Use a slower, sequential version for Android < 2.3, where parallel() does not work correctly
-            // because of missing Java method (here, Dequeue#offerLast).
-            final SearchResult result = new SearchResult();
-            for (final C connector : connectors) {
-                if (connector.isActive()) {
-                    result.addSearchResult(func.call(connector));
-                }
+        return Observable.from(connectors).parallel(new Func1<Observable<C>, Observable<SearchResult>>() {
+            @Override
+            public Observable<SearchResult> call(final Observable<C> cObservable) {
+                return cObservable.flatMap(new Func1<C, Observable<? extends SearchResult>>() {
+                    @Override
+                    public Observable<? extends SearchResult> call(final C c) {
+                        return c.isActive() ? Observable.from(func.call(c)) : Observable.<SearchResult>empty();
+                    }
+                });
             }
-            return result;
-        }
+        }, Schedulers.io()).reduce(new SearchResult(), new Func2<SearchResult, SearchResult, SearchResult>() {
+            @Override
+            public SearchResult call(final SearchResult searchResult, final SearchResult searchResult2) {
+                searchResult.addSearchResult(searchResult2);
+                return searchResult;
+            }
+        }).toBlockingObservable().first();
     }
 
 }
