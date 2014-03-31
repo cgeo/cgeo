@@ -2,6 +2,8 @@ package cgeo.geocaching.compatibility;
 
 import cgeo.geocaching.MainActivity;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.test.ActivityInstrumentationTestCase2;
 
 import junit.framework.Assert;
@@ -10,6 +12,7 @@ public class CompatibilityTest extends ActivityInstrumentationTestCase2<MainActi
 
     private MainActivity activity;
 
+    @TargetApi(Build.VERSION_CODES.FROYO)
     public CompatibilityTest() {
         super(MainActivity.class);
     }
