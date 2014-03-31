@@ -28,10 +28,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import rx.Observable;
-import rx.schedulers.Schedulers;
 import rx.functions.Func1;
-import rx.functions.Func2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -181,28 +178,11 @@ public final class ConnectorFactory {
     }
 
     /** @see ISearchByViewPort#searchByViewport */
-    public static Observable<SearchResult> searchByViewport(final @NonNull Viewport viewport, final MapTokens tokens) {
-        return Observable.from(searchByViewPortConns).filter(new Func1<ISearchByViewPort, Boolean>() {
+    public static SearchResult searchByViewport(final @NonNull Viewport viewport, final MapTokens tokens) {
+        return SearchResult.parallelCombineActive(searchByViewPortConns, new Func1<ISearchByViewPort, SearchResult>() {
             @Override
-            public Boolean call(final ISearchByViewPort connector) {
-                return connector.isActive();
-            }
-        }).parallel(new Func1<Observable<ISearchByViewPort>, Observable<SearchResult>>() {
-            @Override
-            public Observable<SearchResult> call(final Observable<ISearchByViewPort> connector) {
-                return connector.map(new Func1<ISearchByViewPort, SearchResult>() {
-                    @Override
-                    public SearchResult call(final ISearchByViewPort connector) {
-                        return connector.searchByViewport(viewport, tokens);
-                    }
-                });
-            }
-        }, Schedulers.io()).reduce(new SearchResult(), new Func2<SearchResult, SearchResult, SearchResult>() {
-
-            @Override
-            public SearchResult call(final SearchResult result, final SearchResult searchResult) {
-                result.addSearchResult(searchResult);
-                return result;
+            public SearchResult call(ISearchByViewPort connector) {
+                return connector.searchByViewport(viewport, tokens);
             }
         });
     }

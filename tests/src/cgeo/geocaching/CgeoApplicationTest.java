@@ -307,7 +307,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
                     // check coords for DETAILED
                     Settings.setLiveMapStrategy(Strategy.DETAILED);
-                    SearchResult search = ConnectorFactory.searchByViewport(viewport, tokens).toBlockingObservable().single();
+                    SearchResult search = ConnectorFactory.searchByViewport(viewport, tokens);
                     assertNotNull(search);
                     assertTrue(search.getGeocodes().contains(mockedCache.getGeocode()));
                     Geocache parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
@@ -319,7 +319,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     Settings.setLiveMapStrategy(Strategy.FAST);
                     Tile.cache.removeFromTileCache(mockedCache);
 
-                    search = ConnectorFactory.searchByViewport(viewport, tokens).toBlockingObservable().single();
+                    search = ConnectorFactory.searchByViewport(viewport, tokens);
                     assertNotNull(search);
                     assertTrue(search.getGeocodes().contains(mockedCache.getGeocode()));
                     parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
@@ -358,7 +358,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     Settings.setCacheType(CacheType.ALL);
 
                     Viewport viewport = new Viewport(cache, 0.003, 0.003);
-                    SearchResult search = ConnectorFactory.searchByViewport(viewport, INVALID_TOKEN).toBlockingObservable().single();
+                    SearchResult search = ConnectorFactory.searchByViewport(viewport, INVALID_TOKEN);
 
                     assertNotNull(search);
                     assertTrue(search.getGeocodes().contains(cache.getGeocode()));
@@ -375,7 +375,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     deleteCacheFromDBAndLogout(cache.getGeocode());
 
                     viewport = new Viewport(cache, 0.003, 0.003);
-                    search = ConnectorFactory.searchByViewport(viewport, INVALID_TOKEN).toBlockingObservable().single();
+                    search = ConnectorFactory.searchByViewport(viewport, INVALID_TOKEN);
 
                     assertNotNull(search);
                     // In the meantime, premium-member caches are also shown on map when not logged in
