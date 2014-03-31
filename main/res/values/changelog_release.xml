@@ -2,6 +2,12 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>2014.03.31:</b>\n
+    <b>Bugfixing:</b>\n
+    · Make it again compatible with Android before 2.3.\n
+    · Fix a bug with downloading of preview maps.\n
+    \n
+    \n
     <b>2014.03.30:</b>\n
     <b>New features:</b>\n
     · New languages: Catalan, Lithuanian, Romanian\n
