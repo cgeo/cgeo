@@ -34,7 +34,7 @@ public class StatusUpdater extends MemorySubject<StatusUpdater.Status> implement
                 new Status("", "status_closeout_warning", "attribute_abandonedbuilding", "http://faq.cgeo.org/#7_69");
 
         final static public Status defaultStatus() {
-            return VERSION.SDK_INT < VERSION_CODES.ECLAIR_MR1 ? closeoutStatus : null;
+            return VERSION.SDK_INT < VERSION_CODES.GINGERBREAD ? closeoutStatus : null;
         }
     }
 
