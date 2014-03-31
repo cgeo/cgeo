@@ -15,7 +15,8 @@ import android.widget.Filter;
  */
 public class AutoCompleteAdapter extends ArrayAdapter<String> {
 
-    private String[] suggestions;
+    private final String[] EMPTY = new String[0];
+    private String[] suggestions = EMPTY;
     private final Func1<String, String[]> suggestionFunction;
 
     public AutoCompleteAdapter(Context context, int textViewResourceId, final Func1<String, String[]> suggestionFunction) {
