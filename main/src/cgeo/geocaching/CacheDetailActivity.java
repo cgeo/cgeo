@@ -1352,7 +1352,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 Bitmap image = StaticMapsProvider.getPreviewMap(cache);
 
                 if (image == null) {
-                    if (Settings.isStoreOfflineMaps()) {
+                    if (Settings.isStoreOfflineMaps() && cache.getCoords() != null) {
                         StaticMapsProvider.storeCachePreviewMap(cache);
                         image = StaticMapsProvider.getPreviewMap(cache);
                     }
