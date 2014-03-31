@@ -1,7 +1,6 @@
 package cgeo.geocaching.search;
 
 import org.apache.commons.lang3.StringUtils;
-
 import rx.functions.Func1;
 
 import android.content.Context;
@@ -35,7 +34,7 @@ public class AutoCompleteAdapter extends ArrayAdapter<String> {
 
     @Override
     public Filter getFilter() {
-        Filter filter = new Filter() {
+        return new Filter() {
 
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
@@ -66,6 +65,5 @@ public class AutoCompleteAdapter extends ArrayAdapter<String> {
                 }
             }
         };
-        return filter;
     }
 }
