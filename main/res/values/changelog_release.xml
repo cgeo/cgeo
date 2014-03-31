@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-     <b>Next bugfix release:</b>\n
+     <b>2014.04.01:</b>\n
      <b>Bugfixes:</b>\n
     · OC-login was not possible if no GC-login stored\n
     · Geocodes are always case insensitive\n
