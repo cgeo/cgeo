@@ -1414,19 +1414,14 @@ public class Geocache implements ICache, IWaypoint {
 
     @Override
     public int hashCode() {
-        return geocode.hashCode() * name.hashCode();
+        return StringUtils.defaultString(geocode).hashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof Geocache)) {
-            return false;
-        }
+        // TODO: explain the following line or remove this non-standard equality method
         // just compare the geocode even if that is not what "equals" normally does
-        return StringUtils.isNotBlank(geocode) && geocode.equals(((Geocache) obj).geocode);
+        return this == obj || (obj instanceof Geocache && StringUtils.isNotEmpty(geocode) && geocode.equals(((Geocache) obj).geocode));
     }
 
     public void store(CancellableHandler handler) {
