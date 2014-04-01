@@ -15,6 +15,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Environment;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -200,8 +201,8 @@ public final class ImageUtils {
     public static File getOutputImageFile() {
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
+        final File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "cgeo");
 
-        File mediaStorageDir = new File(Compatibility.getExternalPictureDir(), "cgeo");
         // This location works best if you want the created images to be shared
         // between applications and persist after your app has been uninstalled.
 

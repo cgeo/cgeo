@@ -8,7 +8,6 @@ import cgeo.geocaching.SelectMapfileActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.files.SimpleDirChooser;
@@ -21,6 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.openintents.intents.FileManagerIntents;
 
 import android.app.ProgressDialog;
+import android.app.backup.BackupManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -111,7 +111,8 @@ public class SettingsActivity extends PreferenceActivity {
 
     @Override
     protected void onPause() {
-        Compatibility.dataChanged(getPackageName());
+        Log.i("Requesting settings backup with settings manager");
+        BackupManager.dataChanged(getPackageName());
         super.onPause();
     }
 

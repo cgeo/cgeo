@@ -1,9 +1,8 @@
 package cgeo.geocaching.sensors;
 
-import android.os.Process;
-import cgeo.geocaching.compatibility.Compatibility;
-
+import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.StartableHandlerThread;
+
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
@@ -15,7 +14,9 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.*;
+import android.os.Handler;
+import android.os.Process;
+import android.view.Surface;
 
 public class DirectionProvider {
 
@@ -24,8 +25,8 @@ public class DirectionProvider {
     static class Listener implements SensorEventListener, StartableHandlerThread.Callback {
 
         private int count = 0;
-        private SensorManager sensorManager;
 
+        private SensorManager sensorManager;
         @Override
         public void onSensorChanged(final SensorEvent event) {
             subject.onNext(event.values[0]);
@@ -67,10 +68,10 @@ public class DirectionProvider {
 
     private static final StartableHandlerThread handlerThread =
             new StartableHandlerThread("DirectionProvider thread", Process.THREAD_PRIORITY_BACKGROUND, new Listener());
+
     static {
       handlerThread.start();
     }
-
     static public Observable<Float> create(final Context context) {
         return Observable.create(new OnSubscribe<Float>() {
             @Override
@@ -90,7 +91,20 @@ public class DirectionProvider {
      */
 
     public static float getDirectionNow(final Activity activity, final float direction) {
-        return Compatibility.getDirectionNow(direction, activity);
+        return AngleUtils.normalize(direction + getRotationOffset(activity));
+    }
+
+    private static int getRotationOffset(final Activity activity) {
+        switch (activity.getWindowManager().getDefaultDisplay().getRotation()) {
+            case Surface.ROTATION_90:
+                return 90;
+            case Surface.ROTATION_180:
+                return 180;
+            case Surface.ROTATION_270:
+                return 270;
+            default:
+                return 0;
+        }
     }
 
 }
