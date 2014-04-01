@@ -1008,7 +1008,7 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">Na voljo je nova preizkusna različica.\nKliknite za namestitev.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Spremembe na spletni strani Geocaching.com so povzročile, da c:geo ne deluje popolno.\nŽe delamo na tem! Poskusite ponovno čez nekaj časa.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Spremembe na spletni strani Geocaching.com so povzročile, da zemljevid zakladov ne deluje več.\nŽe delamo na tem! Poskusite ponovno čez nekaj časa.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Izgleda da uporabljate android s starejšo različico od 2.1. Naslednje različice aplikacije c:geo morda ne bodo več podprte za vašo različico Androida.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Izgleda da uporabljate android s starejšo različico od 2.3. Naslednje različice aplikacije c:geo morda ne bodo več podprte za vašo različico Androida.</string>
   <string name="tts_service">Glasovni kompas</string>
   <string name="tts_start">Začni glasovno navigacijo</string>
   <string name="tts_stop">Ustavi glasovno navigacijo</string>

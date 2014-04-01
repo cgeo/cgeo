@@ -991,7 +991,7 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">新しいRCバージョンがあります。\nクリックしてインストールしてください。</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">geocaching.comが更新されましたがc:geoはまだ未対応です。\n現在、作業中です。しばらくお待ちください。</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">geocaching.comが更新されましたがオンライン地図機能はまだ未対応です。\n現在、作業中です。しばらくお待ちください。</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Android OS 2.1未満のバージョンをご使用中ですね。申し訳ありませんがc:geoは次期リリースからOS2.1必須になりますので使用できなくなります。</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Android OS 2.3未満のバージョンをご使用中ですね。申し訳ありませんがc:geoは次期リリースからOS2.1必須になりますので使用できなくなります。</string>
   <string name="tts_service">Talking compass</string>
   <string name="tts_start">音声案内開始</string>
   <string name="tts_stop">音声案内終了</string>

@@ -1017,7 +1017,7 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">Nova \'release candidate\' disponível .\nClique para instalar.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Alterações recentes em geocaching.com fizeram com que c:geo funcione mal.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Alterações recentes em geocaching.com fizeram com o mapa ao vivo não funcione bem.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Parece estar a utilizar uma versão do Android inferior a 2.1. Futuras versões do c: geo podem deixar de ficar disponíveis para o seu dispositivo.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Parece estar a utilizar uma versão do Android inferior a 2.3. Futuras versões do c: geo podem deixar de ficar disponíveis para o seu dispositivo.</string>
   <string name="tts_service">Bússola que fala</string>
   <string name="tts_start">Comece a falar</string>
   <string name="tts_stop">Páre de falar</string>

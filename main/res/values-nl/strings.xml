@@ -1009,7 +1009,7 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">Nieuwe release-candidaad beschikbaar.\nTik om te installeren.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Recente aanpassingen op geocaching.com zorgen dat c:geo niet meer (100%) correct werkt.\nWe werken aan het probleem, controleer binnenkort nogmaals.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Recente aanpassingen op geocaching.com zorgen dat de live-kaart niet meer werkt.\nWe werken aan het probleem, controleer binnenkort nogmaals.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">U lijkt te worden met behulp van een versie van Android ouder dan 2.1. Toekomstige versies van c:geo mogelijk niet meer beschikbaar voor uw apparaat.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">U lijkt te worden met behulp van een versie van Android ouder dan 2.3. Toekomstige versies van c:geo mogelijk niet meer beschikbaar voor uw apparaat.</string>
   <string name="tts_service">Praten kompas</string>
   <string name="tts_start">Begin met praten</string>
   <string name="tts_stop">Stoppen met praten</string>

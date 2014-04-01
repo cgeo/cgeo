@@ -1009,7 +1009,7 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">Dostępny nowy kandydat na nową wersję.\nKliknij aby zainstalować.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły c:geo.\nPracujemy nad tym, sprawdź ponownie niedługo.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły funkcjonalność map Live.\nWe are working on it, Pracujemy nad tym, sprawdź ponownie niedługo.</string>
-  <string name="status_closeout_warning" tools:ignore="UnusedResources">Wygląda, że używasz wersji Android starszej niż 2.1. Następne wydania c:geo mogą być niedostępne dla Twojego urządzenia.</string>
+  <string name="status_closeout_warning" tools:ignore="UnusedResources">Wygląda, że używasz wersji Android starszej niż 2.3. Następne wydania c:geo mogą być niedostępne dla Twojego urządzenia.</string>
   <string name="tts_service">Mówiący kompas</string>
   <string name="tts_start">Zacznij mówić</string>
   <string name="tts_stop">Przestań mówić</string>
