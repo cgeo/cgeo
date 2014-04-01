@@ -4,10 +4,10 @@ import butterknife.ButterKnife;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.TranslationUtils;
 
@@ -86,11 +86,16 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
     }
 
     protected static void disableSuggestions(final EditText edit) {
-        Compatibility.disableSuggestions(edit);
+        EditUtils.disableSuggestions(edit);
     }
 
     protected void restartActivity() {
-        Compatibility.restartActivity(this);
+        final Intent intent = getIntent();
+        overridePendingTransition(0, 0);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(intent);
     }
 
     @Override

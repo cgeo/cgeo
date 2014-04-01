@@ -5,11 +5,11 @@ import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.Settings.CoordInputFormatEnum;
+import cgeo.geocaching.utils.EditUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -103,14 +103,14 @@ public class CoordinatesInputDialog extends NoTitleDialog {
         eLonSec.addTextChangedListener(new TextChanged(eLonSec));
         eLonSub.addTextChangedListener(new TextChanged(eLonSub));
 
-        Compatibility.disableSuggestions(eLatDeg);
-        Compatibility.disableSuggestions(eLatMin);
-        Compatibility.disableSuggestions(eLatSec);
-        Compatibility.disableSuggestions(eLatSub);
-        Compatibility.disableSuggestions(eLonDeg);
-        Compatibility.disableSuggestions(eLonMin);
-        Compatibility.disableSuggestions(eLonSec);
-        Compatibility.disableSuggestions(eLonSub);
+        EditUtils.disableSuggestions(eLatDeg);
+        EditUtils.disableSuggestions(eLatMin);
+        EditUtils.disableSuggestions(eLatSec);
+        EditUtils.disableSuggestions(eLatSub);
+        EditUtils.disableSuggestions(eLonDeg);
+        EditUtils.disableSuggestions(eLonMin);
+        EditUtils.disableSuggestions(eLonSec);
+        EditUtils.disableSuggestions(eLonSub);
 
         bLat.setOnClickListener(new ButtonClickListener());
         bLon.setOnClickListener(new ButtonClickListener());

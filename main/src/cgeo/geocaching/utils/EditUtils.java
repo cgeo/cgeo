@@ -1,5 +1,6 @@
 package cgeo.geocaching.utils;
 
+import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -41,4 +42,9 @@ public final class EditUtils {
 
     }
 
+    public static void disableSuggestions(EditText edit) {
+        edit.setInputType(edit.getInputType()
+                | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
+                | InputType.TYPE_TEXT_VARIATION_FILTER);
+    }
 }
