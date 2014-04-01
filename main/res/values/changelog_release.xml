@@ -2,11 +2,16 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>2014.04.01:</b>\n
+    <b>Bugfixing:</b>\n
+    · Remove support of Android versions older than 2.3\n
+      (Split to a legacy version available for v2.1 and v2.2)\n
+    · Fixed some possible crash scenarios\n
+    \n
     <b>2014.03.31:</b>\n
     <b>Bugfixing:</b>\n
-    · Make it again compatible with Android before 2.3.\n
-    · Fix a bug with downloading of preview maps.\n
-    \n
+    · Make it again compatible with Android before 2.3\n
+    · Fix a bug with downloading of preview maps\n
     \n
     <b>2014.03.30:</b>\n
     <b>New features:</b>\n
