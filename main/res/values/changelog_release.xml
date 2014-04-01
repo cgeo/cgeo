@@ -5,7 +5,7 @@
     <b>2014.04.01:</b>\n
     <b>Bugfixing:</b>\n
     · Remove support of Android versions older than 2.3\n
-      (Split to a legcy version available for v2.1 and v2.2)\n
+      (Split to a legacy version available for v2.1 and v2.2)\n
     · Fixed some possible crash scenarios\n
     \n
     <b>2014.03.31:</b>\n
