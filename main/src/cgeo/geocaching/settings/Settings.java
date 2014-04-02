@@ -462,7 +462,7 @@ public class Settings {
     }
 
     public static CoordInputFormatEnum getCoordInputFormat() {
-        return CoordInputFormatEnum.fromInt(getInt(R.string.pref_coordinputformat, 0));
+        return CoordInputFormatEnum.fromInt(getInt(R.string.pref_coordinputformat, CoordInputFormatEnum.Min.ordinal()));
     }
 
     public static void setCoordInputFormat(final CoordInputFormatEnum format) {
