@@ -3044,27 +3044,24 @@ public class DataStore {
 
         // get cached CacheListActivity
         final Set<String> cachedGeocodes = new HashSet<String>();
-        for (Tile tile : tiles) {
+        for (final Tile tile : tiles) {
             cachedGeocodes.addAll(cacheCache.getInViewport(tile.getViewport(), CacheType.ALL));
         }
         // remove found in search result
         cachedGeocodes.removeAll(searchResult.getGeocodes());
 
         // check remaining against viewports
-        Set<String> missingFromSearch = new HashSet<String>();
-        for (String geocode : cachedGeocodes) {
+        final Set<String> missingFromSearch = new HashSet<String>();
+        for (final String geocode : cachedGeocodes) {
             if (connector.canHandle(geocode)) {
-                Geocache geocache = cacheCache.getCacheFromCache(geocode);
-                if (geocache.getCoordZoomLevel() <= maxZoom) {
-                    boolean found = false;
-                    for (Tile tile : tiles) {
+                final Geocache geocache = cacheCache.getCacheFromCache(geocode);
+                // TODO: parallel searches seem to have the potential to make some caches be expunged from the CacheCache (see issue #3716).
+                if (geocache != null && geocache.getCoordZoomLevel() <= maxZoom) {
+                    for (final Tile tile : tiles) {
                         if (tile.containsPoint(geocache)) {
-                            found = true;
+                            missingFromSearch.add(geocode);
                             break;
                         }
-                    }
-                    if (found) {
-                        missingFromSearch.add(geocode);
                     }
                 }
             }
