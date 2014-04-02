@@ -9,6 +9,7 @@ import ch.boye.httpclientandroidlib.Header;
 import ch.boye.httpclientandroidlib.HttpResponse;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import android.os.Environment;
@@ -361,9 +362,13 @@ public final class LocalStorage {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
     }
 
-    public static boolean deleteDirectory(File path) {
-        if (path.exists()) {
-            for (final File file : path.listFiles()) {
+    public static boolean deleteDirectory(@NonNull final File dir) {
+        final File[] files = dir.listFiles();
+
+        // Although we are called on an existing directory, it might have been removed concurrently
+        // in the meantime, for example by the user or by another cleanup task.
+        if (files != null) {
+            for (final File file : files) {
                 if (file.isDirectory()) {
                     deleteDirectory(file);
                 } else {
@@ -372,7 +377,7 @@ public final class LocalStorage {
             }
         }
 
-        return FileUtils.delete(path);
+        return FileUtils.delete(dir);
     }
 
     /**
