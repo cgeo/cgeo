@@ -29,6 +29,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,11 +51,18 @@ public final class ConnectorFactory {
             new OCConnector("OpenCaching.IT", "www.opencaching.it", "OC"),
             new OCConnector("OpenCaching.JP", "www.opencaching.jp", "OJ"),
             new OCConnector("OpenCaching.NO/SE", "www.opencaching.se", "OS"),
-            new OCApiConnector("OpenCaching.NL", "www.opencaching.nl", "OB", "PdzU8jzIlcfMADXaYN8j", "CC BY-SA 3.0", ApiSupport.current),
+            new OCApiLiveConnector("opencaching.nl", "www.opencaching.nl", "OB", "CC BY-SA 3.0",
+                    R.string.oc_nl_okapi_consumer_key, R.string.oc_nl_okapi_consumer_secret,
+                    R.string.pref_connectorOCNLActive, R.string.pref_ocnl_tokenpublic, R.string.pref_ocnl_tokensecret, ApiSupport.current),
             new OCApiLiveConnector("opencaching.pl", "www.opencaching.pl", "OP", "CC BY-SA 3.0",
                     R.string.oc_pl_okapi_consumer_key, R.string.oc_pl_okapi_consumer_secret,
                     R.string.pref_connectorOCPLActive, R.string.pref_ocpl_tokenpublic, R.string.pref_ocpl_tokensecret, ApiSupport.current),
-            new OCApiConnector("OpenCaching.US", "www.opencaching.us", "OU", "pTsYAYSXFcfcRQnYE6uA", "CC BY-NC-SA 2.5", ApiSupport.current),
+            new OCApiLiveConnector("opencaching.us", "www.opencaching.us", "OU", "CC BY-NC-SA 2.5",
+                    R.string.oc_us_okapi_consumer_key, R.string.oc_us_okapi_consumer_secret,
+                    R.string.pref_connectorOCUSActive, R.string.pref_ocus_tokenpublic, R.string.pref_ocus_tokensecret, ApiSupport.current),
+            new OCApiLiveConnector("opencaching.ro", "oc.opencaching.ro", "OR", "CC BY-SA 3.0",
+                    R.string.oc_ro_okapi_consumer_key, R.string.oc_ro_okapi_consumer_secret,
+                    R.string.pref_connectorOCROActive, R.string.pref_ocro_tokenpublic, R.string.pref_ocro_tokensecret, ApiSupport.current),
             new OXConnector(),
             new GeocachingAustraliaConnector(),
             new GeopeitusConnector(),

@@ -156,11 +156,17 @@ public class SettingsActivity extends PreferenceActivity {
     private void initServicePreferences() {
         getPreference(R.string.pref_connectorOCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         getPreference(R.string.pref_connectorOCPLActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
+        getPreference(R.string.pref_connectorOCNLActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
+        getPreference(R.string.pref_connectorOCUSActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
+        getPreference(R.string.pref_connectorOCROActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         getPreference(R.string.pref_connectorGCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         getPreference(R.string.pref_connectorECActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         setWebsite(R.string.pref_fakekey_gc_website, GCConnector.getInstance().getHost());
         setWebsite(R.string.pref_fakekey_ocde_website, "opencaching.de");
         setWebsite(R.string.pref_fakekey_ocpl_website, "opencaching.pl");
+        setWebsite(R.string.pref_fakekey_ocnl_website, "opencaching.nl");
+        setWebsite(R.string.pref_fakekey_ocus_website, "opencaching.us");
+        setWebsite(R.string.pref_fakekey_ocro_website, "opencaching.ro");
         setWebsite(R.string.pref_fakekey_ec_website, "extremcaching.com");
         setWebsite(R.string.pref_fakekey_gcvote_website, "gcvote.com");
         setWebsite(R.string.pref_fakekey_sendtocgeo_website, "send2.cgeo.org");
@@ -413,6 +419,15 @@ public class SettingsActivity extends PreferenceActivity {
             case R.string.pref_fakekey_ocpl_authorization:
                 setOCPLAuthTitle();
                 break;
+            case R.string.pref_fakekey_ocnl_authorization:
+                setOCNLAuthTitle();
+                break;
+            case R.string.pref_fakekey_ocus_authorization:
+                setOCUSAuthTitle();
+                break;
+            case R.string.pref_fakekey_ocro_authorization:
+                setOCROAuthTitle();
+                break;
             case R.string.pref_fakekey_twitter_authorization:
                 setTwitterAuthTitle();
                 break;
@@ -431,6 +446,27 @@ public class SettingsActivity extends PreferenceActivity {
     void setOCPLAuthTitle() {
         getPreference(R.string.pref_fakekey_ocpl_authorization)
                 .setTitle(getString(Settings.hasOCAuthorization(R.string.pref_ocpl_tokenpublic, R.string.pref_ocpl_tokensecret)
+                        ? R.string.settings_reauthorize
+                        : R.string.settings_authorize));
+    }
+
+    void setOCNLAuthTitle() {
+        getPreference(R.string.pref_fakekey_ocnl_authorization)
+                .setTitle(getString(Settings.hasOCAuthorization(R.string.pref_ocnl_tokenpublic, R.string.pref_ocnl_tokensecret)
+                        ? R.string.settings_reauthorize
+                        : R.string.settings_authorize));
+    }
+
+    void setOCUSAuthTitle() {
+        getPreference(R.string.pref_fakekey_ocus_authorization)
+                .setTitle(getString(Settings.hasOCAuthorization(R.string.pref_ocus_tokenpublic, R.string.pref_ocus_tokensecret)
+                        ? R.string.settings_reauthorize
+                        : R.string.settings_authorize));
+    }
+
+    void setOCROAuthTitle() {
+        getPreference(R.string.pref_fakekey_ocro_authorization)
+                .setTitle(getString(Settings.hasOCAuthorization(R.string.pref_ocro_tokenpublic, R.string.pref_ocro_tokensecret)
                         ? R.string.settings_reauthorize
                         : R.string.settings_authorize));
     }
@@ -494,6 +530,18 @@ public class SettingsActivity extends PreferenceActivity {
                 setOCPLAuthTitle();
                 redrawScreen(R.string.preference_screen_ocpl);
                 break;
+            case R.string.pref_fakekey_ocnl_authorization:
+                setOCNLAuthTitle();
+                redrawScreen(R.string.preference_screen_ocnl);
+                break;
+            case R.string.pref_fakekey_ocus_authorization:
+                setOCUSAuthTitle();
+                redrawScreen(R.string.preference_screen_ocus);
+                break;
+            case R.string.pref_fakekey_ocro_authorization:
+                setOCROAuthTitle();
+                redrawScreen(R.string.preference_screen_ocro);
+                break;
             case R.string.pref_fakekey_twitter_authorization:
                 setTwitterAuthTitle();
                 redrawScreen(R.string.preference_screen_twitter);
@@ -535,7 +583,13 @@ public class SettingsActivity extends PreferenceActivity {
                 }
                 Settings.setMapSource(mapSource);
                 preference.setSummary(mapSource.getName());
-            } else if (isPreference(preference, R.string.pref_connectorOCActive) || isPreference(preference, R.string.pref_connectorOCPLActive) || isPreference(preference, R.string.pref_connectorGCActive) || isPreference(preference, R.string.pref_connectorECActive)) {
+            } else if (isPreference(preference, R.string.pref_connectorOCActive)
+                    || isPreference(preference, R.string.pref_connectorOCPLActive)
+                    || isPreference(preference, R.string.pref_connectorOCNLActive)
+                    || isPreference(preference, R.string.pref_connectorOCUSActive)
+                    || isPreference(preference, R.string.pref_connectorOCROActive)
+                    || isPreference(preference, R.string.pref_connectorGCActive)
+                    || isPreference(preference, R.string.pref_connectorECActive)) {
                 // // reset log-in status if connector activation was changed
                 CgeoApplication.getInstance().forceRelog();
             } else if (preference instanceof ListPreference) {

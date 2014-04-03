@@ -411,6 +411,15 @@
     <string name="init_oc_pl">Opencaching.pl</string>
     <string name="settings_activate_oc_pl">Activate</string>
     <string name="init_oc_pl_description">Authorize c:geo with opencaching.pl to search for caches and access/filter your found caches.</string>
+    <string name="init_oc_nl">Opencaching.nl</string>
+    <string name="settings_activate_oc_nl">Activate</string>
+    <string name="init_oc_nl_description">Authorize c:geo with opencaching.nl to search for caches and access/filter your found caches.</string>
+    <string name="init_oc_us">Opencaching.us</string>
+    <string name="settings_activate_oc_us">Activate</string>
+    <string name="init_oc_us_description">Authorize c:geo with opencaching.us to search for caches and access/filter your found caches.</string>
+    <string name="init_oc_ro">Opencaching.ro</string>
+    <string name="settings_activate_oc_ro">Activate</string>
+    <string name="init_oc_ro_description">Authorize c:geo with opencaching.ro to search for caches and access/filter your found caches.</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="settings_activate_twitter">Activate</string>
@@ -583,6 +592,9 @@
     <!-- auth opencaching -->
     <string name="auth_ocde">opencaching.de</string>
     <string name="auth_ocpl">opencaching.pl</string>
+    <string name="auth_ocnl">opencaching.nl</string>
+    <string name="auth_ocus">opencaching.us</string>
+    <string name="auth_ocro">opencaching.ro</string>
     <string name="auth_dialog_completed_oc">c:geo is now authorized to interact with %s.</string>
 
     <!-- cache -->

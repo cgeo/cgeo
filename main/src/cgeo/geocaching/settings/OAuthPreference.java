@@ -3,7 +3,10 @@ package cgeo.geocaching.settings;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.oc.OCDEAuthorizationActivity;
+import cgeo.geocaching.connector.oc.OCNLAuthorizationActivity;
 import cgeo.geocaching.connector.oc.OCPLAuthorizationActivity;
+import cgeo.geocaching.connector.oc.OCROAuthorizationActivity;
+import cgeo.geocaching.connector.oc.OCUSAuthorizationActivity;
 import cgeo.geocaching.twitter.TwitterAuthorizationActivity;
 
 import android.content.Context;
@@ -19,6 +22,9 @@ public class OAuthPreference extends AbstractClickablePreference {
         NONE(NO_KEY, null),
         OCDE(R.string.pref_fakekey_ocde_authorization, OCDEAuthorizationActivity.class),
         OCPL(R.string.pref_fakekey_ocpl_authorization, OCPLAuthorizationActivity.class),
+        OCNL(R.string.pref_fakekey_ocnl_authorization, OCNLAuthorizationActivity.class),
+        OCUS(R.string.pref_fakekey_ocus_authorization, OCUSAuthorizationActivity.class),
+        OCRO(R.string.pref_fakekey_ocro_authorization, OCROAuthorizationActivity.class),
         TWITTER(R.string.pref_fakekey_twitter_authorization, TwitterAuthorizationActivity.class);
 
         public final int prefKeyId;

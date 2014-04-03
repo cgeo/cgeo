@@ -481,6 +481,60 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".connector.oc.OCNLAuthorizationActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.cgeo.org"
+                    android:pathPrefix="/opencaching.nl/"
+                    android:scheme="callback" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".connector.oc.OCUSAuthorizationActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.cgeo.org"
+                    android:pathPrefix="/opencaching.us/"
+                    android:scheme="callback" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".connector.oc.OCROAuthorizationActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.cgeo.org"
+                    android:pathPrefix="/opencaching.ro/"
+                    android:scheme="callback" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".CreateShortcutActivity"
             android:label="@string/cgeo_shortcut" >
             <intent-filter>

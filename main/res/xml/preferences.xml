@@ -132,6 +132,90 @@
                         android:title="@string/settings_open_website" />
                 </PreferenceCategory>
             </PreferenceScreen>
+            <PreferenceScreen
+                android:key="@string/preference_screen_ocnl"
+                android:title="@string/init_oc_nl" >
+                <PreferenceCategory android:title="@string/settings_settings" >
+                    <CheckBoxPreference
+                        android:defaultValue="false"
+                        android:key="@string/pref_connectorOCNLActive"
+                        android:title="@string/settings_activate_oc_nl" />
+
+                    <cgeo.geocaching.settings.TextPreference
+                        android:dependency="@string/pref_connectorOCNLActive"
+                        android:layout="@layout/text_preference"
+                        android:text="@string/init_oc_nl_description" />
+
+                    <cgeo.geocaching.settings.OAuthPreference
+                        android:dependency="@string/pref_connectorOCNLActive"
+                        android:key="@string/pref_fakekey_ocnl_authorization" />
+                </PreferenceCategory>
+                <PreferenceCategory android:title="@string/settings_information" >
+                    <cgeo.geocaching.settings.CapabilitiesPreference
+                        android:title="@string/settings_features"
+                        cgeo:connector="OB" />
+
+                    <Preference
+                        android:key="@string/pref_fakekey_ocnl_website"
+                        android:title="@string/settings_open_website" />
+                </PreferenceCategory>
+            </PreferenceScreen>
+            <PreferenceScreen
+                android:key="@string/preference_screen_ocus"
+                android:title="@string/init_oc_us" >
+                <PreferenceCategory android:title="@string/settings_settings" >
+                    <CheckBoxPreference
+                        android:defaultValue="false"
+                        android:key="@string/pref_connectorOCUSActive"
+                        android:title="@string/settings_activate_oc_us" />
+
+                    <cgeo.geocaching.settings.TextPreference
+                        android:dependency="@string/pref_connectorOCUSActive"
+                        android:layout="@layout/text_preference"
+                        android:text="@string/init_oc_us_description" />
+
+                    <cgeo.geocaching.settings.OAuthPreference
+                        android:dependency="@string/pref_connectorOCUSActive"
+                        android:key="@string/pref_fakekey_ocus_authorization" />
+                </PreferenceCategory>
+                <PreferenceCategory android:title="@string/settings_information" >
+                    <cgeo.geocaching.settings.CapabilitiesPreference
+                        android:title="@string/settings_features"
+                        cgeo:connector="OU" />
+
+                    <Preference
+                        android:key="@string/pref_fakekey_ocus_website"
+                        android:title="@string/settings_open_website" />
+                </PreferenceCategory>
+            </PreferenceScreen>
+            <PreferenceScreen
+                android:key="@string/preference_screen_ocro"
+                android:title="@string/init_oc_ro" >
+                <PreferenceCategory android:title="@string/settings_settings" >
+                    <CheckBoxPreference
+                        android:defaultValue="false"
+                        android:key="@string/pref_connectorOCROActive"
+                        android:title="@string/settings_activate_oc_ro" />
+
+                    <cgeo.geocaching.settings.TextPreference
+                        android:dependency="@string/pref_connectorOCROActive"
+                        android:layout="@layout/text_preference"
+                        android:text="@string/init_oc_ro_description" />
+
+                    <cgeo.geocaching.settings.OAuthPreference
+                        android:dependency="@string/pref_connectorOCROActive"
+                        android:key="@string/pref_fakekey_ocro_authorization" />
+                </PreferenceCategory>
+                <PreferenceCategory android:title="@string/settings_information" >
+                    <cgeo.geocaching.settings.CapabilitiesPreference
+                        android:title="@string/settings_features"
+                        cgeo:connector="OR" />
+
+                    <Preference
+                        android:key="@string/pref_fakekey_ocro_website"
+                        android:title="@string/settings_open_website" />
+                </PreferenceCategory>
+            </PreferenceScreen>
             <PreferenceScreen android:title="@string/settings_title_ec" android:key="@string/preference_screen_ec">
                 <PreferenceCategory android:title="@string/settings_settings" >
                     <CheckBoxPreference
