@@ -1,12 +1,14 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.Header;
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
@@ -45,18 +47,64 @@ public final class LocalStorage {
     public final static String cache = ".cgeo";
 
     private static File internalStorageBase;
+    private static File offlineCacheDirectory;
 
     private LocalStorage() {
         // utility class
     }
 
     /**
-     * Return the primary storage cache root (external media if mounted, phone otherwise).
+     * Return the primary storage cache root.
      *
      * @return the root of the cache directory
      */
     public static File getStorage() {
-        return getStorageSpecific(false);
+        if (offlineCacheDirectory != null) {
+            return offlineCacheDirectory;
+        }
+        String offlineCacheDirectoryPath = Settings.getOfflineCacheDirectory();
+        if (setOfflineCacheDirectory(offlineCacheDirectoryPath)) {
+            return offlineCacheDirectory;
+        }
+        offlineCacheDirectoryPath = getExternalStorageBase().getPath();
+        if (setOfflineCacheDirectory(offlineCacheDirectoryPath)) {
+            return offlineCacheDirectory;
+        }
+        offlineCacheDirectoryPath = getInternalStorageBase().getPath();
+        if (setOfflineCacheDirectory(offlineCacheDirectoryPath)) {
+            return offlineCacheDirectory;
+        }
+        return null;
+    }
+
+    /**
+     * Tries to set new offline cache directory path.
+     *
+     * @param newDirPath
+     *            The new path
+     * @return true / false success or no success to set path
+     */
+    public static boolean setOfflineCacheDirectory(final String newDirPath) {
+        if (offlineCacheDirectory != null && newDirPath.compareTo(offlineCacheDirectory.getPath()) == 0) {
+            return true;
+        }
+        final File newCgeoDir = new File(newDirPath);
+        if (newCgeoDir.exists() && newCgeoDir.canWrite()) {
+            offlineCacheDirectory = newCgeoDir;
+            Settings.setOfflineCacheDirectory(newDirPath);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns the default storage cache root (external media if mounted, phone otherwise).
+     *
+     * @return
+     */
+    public static String getDefaultOfflineCacheDirectoryPath() {
+        final File defaultOfflineCacheDirectory = getStorageSpecific(false);
+        return defaultOfflineCacheDirectory.getPath();
     }
 
     /**
@@ -75,7 +123,7 @@ public final class LocalStorage {
     }
 
     public static File getExternalDbDirectory() {
-        return getExternalStorageBase();
+        return getStorage();
     }
 
     public static File getInternalDbDirectory() {

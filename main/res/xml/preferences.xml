@@ -609,15 +609,26 @@
                 android:key="@string/pref_fakekey_preference_restore"
                 android:title="@string/init_backup_restore" />
         </PreferenceCategory>
-        <PreferenceCategory android:title="@string/init_dbonsdcard_title" >
+        <PreferenceCategory android:title="@string/init_offline_cache_directory_title" >
+            <cgeo.geocaching.settings.InfoPreference
+                android:text="@string/settings_info_offline_cache_directory"
+                android:title="@string/settings_info_offline_cache_directory_title"
+                cgeo:url="@string/settings_offline_cache_directory_url"
+                cgeo:urlButton="@string/settings_goto_url_button" />
+
+            <Preference
+                android:key="@string/pref_offline_cache_directory"
+                android:title="@string/init_offline_cache_directory" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/init_db_at_cache_dir_title" >
             <cgeo.geocaching.settings.TextPreference
                 android:layout="@layout/text_preference"
-                android:text="@string/init_dbonsdcard_note" />
+                android:text="@string/init_db_at_cache_dir_note" />
 
             <CheckBoxPreference
                 android:defaultValue="false"
                 android:key="@string/pref_dbonsdcard"
-                android:title="@string/init_dbonsdcard" />
+                android:title="@string/init_db_at_cache_dir" />
         </PreferenceCategory>
         <PreferenceCategory android:title="@string/init_maintenance" >
             <cgeo.geocaching.settings.TextPreference

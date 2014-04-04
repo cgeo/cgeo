@@ -11,6 +11,7 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCLogin;
+import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.files.SimpleDirChooser;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
@@ -20,6 +21,7 @@ import cgeo.geocaching.utils.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.openintents.intents.FileManagerIntents;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -67,7 +69,9 @@ public class SettingsActivity extends PreferenceActivity {
                 Environment.getExternalStorageDirectory().getPath() + "/gpx", false),
         GPX_EXPORT_DIR(2, R.string.pref_gpxExportDir,
                 Environment.getExternalStorageDirectory().getPath() + "/gpx", true),
-        THEMES_DIR(3, R.string.pref_renderthemepath, "", false);
+        THEMES_DIR(3, R.string.pref_renderthemepath, "", false),
+        OFFLINE_CACHE_DIR(4, R.string.pref_offline_cache_directory, LocalStorage.getDefaultOfflineCacheDirectoryPath(), true);
+
         public final int requestCode;
         public final int keyId;
         public final String defaultValue;
@@ -134,8 +138,9 @@ public class SettingsActivity extends PreferenceActivity {
                 R.string.pref_gpxExportDir, R.string.pref_gpxImportDir,
                 R.string.pref_mapDirectory, R.string.pref_defaultNavigationTool,
                 R.string.pref_defaultNavigationTool2, R.string.pref_webDeviceName,
-                R.string.pref_fakekey_preference_backup_info, R.string.pref_twitter_cache_message, R.string.pref_twitter_trackable_message,
-                R.string.pref_ecusername, R.string.pref_ecpassword, R.string.pref_ec_icons }) {
+                R.string.pref_fakekey_preference_backup_info, R.string.pref_twitter_cache_message,
+                R.string.pref_twitter_trackable_message, R.string.pref_ecusername,
+                R.string.pref_ecpassword, R.string.pref_ec_icons, R.string.pref_offline_cache_directory }) {
             bindSummaryToStringValue(k);
         }
         getPreference(R.string.pref_units).setDefaultValue(Settings.getImperialUnitsDefault());
@@ -351,9 +356,10 @@ public class SettingsActivity extends PreferenceActivity {
         p.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(final Preference preference) {
-                final boolean oldValue = Settings.isDbOnSDCard();
-                DataStore.moveDatabase(SettingsActivity.this);
-                return oldValue != Settings.isDbOnSDCard();
+                final boolean isOnSdCard = Settings.isDbAtCacheDir();
+                Settings.setDbAtCacheDir(!isOnSdCard);
+                DataStore.moveDatabase(SettingsActivity.this, !isOnSdCard);
+                return true;
             }
         });
     }
@@ -456,7 +462,14 @@ public class SettingsActivity extends PreferenceActivity {
 
         for (DirChooserType dct : DirChooserType.values()) {
             if (requestCode == dct.requestCode) {
-                setChosenDirectory(dct, data);
+                if (dct.keyId == R.string.pref_offline_cache_directory) {
+                    final File sourcePath = new File(Settings.getOfflineCacheDirectory());
+                    setChosenDirectory(dct, data);
+                    final File targetPath = new File(data.getData().getPath());
+                    changeOfflineCacheDirectory(SettingsActivity.this, sourcePath, targetPath);
+                } else {
+                    setChosenDirectory(dct, data);
+                }
                 return;
             }
         }
@@ -499,6 +512,16 @@ public class SettingsActivity extends PreferenceActivity {
                 break;
             default:
                 throw new IllegalArgumentException();
+        }
+    }
+
+    /**
+     * Change the offline cache directory. If isDbOnSdCard is true, the db file will be moved
+     * to the target cache directory.
+     */
+    private static final void changeOfflineCacheDirectory(final Activity fromActivity, final File sourceDirectory, final File targetDirectory) {
+        if (LocalStorage.setOfflineCacheDirectory(Settings.getOfflineCacheDirectory()) && Settings.isDbAtCacheDir()) {
+            DataStore.moveDatabase(fromActivity, sourceDirectory, targetDirectory);
         }
     }
 
