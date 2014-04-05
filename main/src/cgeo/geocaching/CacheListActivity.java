@@ -36,6 +36,7 @@ import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.sensors.DirectionProvider;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
@@ -125,7 +126,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         @Override
         public void updateDirection(final float direction) {
             if (Settings.isLiveList()) {
-                adapter.setActualHeading(direction);
+                adapter.setActualHeading(DirectionProvider.getDirectionNow(CacheListActivity.this, direction));
             }
         }
 
