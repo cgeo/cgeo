@@ -45,6 +45,7 @@ import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.RxUtils;
 import cgeo.geocaching.utils.SimpleCancellableHandler;
 import cgeo.geocaching.utils.SimpleHandler;
 import cgeo.geocaching.utils.TextUtils;
@@ -61,7 +62,6 @@ import rx.Observer;
 import rx.Scheduler.Inner;
 import rx.Subscriber;
 import rx.Subscription;
-import rx.android.observables.AndroidObservable;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
@@ -878,7 +878,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_details_page, null);
 
             // Start loading preview map
-            AndroidObservable.bindActivity(CacheDetailActivity.this, previewMap.subscribeOn(Schedulers.io())).subscribe(new Action1<BitmapDrawable>() {
+            RxUtils.subscribeOnIOThenUI(previewMap, new Action1<BitmapDrawable>() {
                 @Override
                 public void call(final BitmapDrawable image) {
                     final Bitmap bitmap = image.getBitmap();
@@ -1605,71 +1605,70 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
         });
 
-        AndroidObservable.bindActivity(this, producer.subscribeOn(Schedulers.io()))
-                .subscribe(new Observer<Spanned>() {
-                    @Override
-                    public void onCompleted() {
-                        if (null != loadingIndicatorView) {
-                            loadingIndicatorView.setVisibility(View.GONE);
+        RxUtils.subscribeOnIOThenUI(producer, new Observer<Spanned>() {
+            @Override
+            public void onCompleted() {
+                if (null != loadingIndicatorView) {
+                    loadingIndicatorView.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onError(final Throwable throwable) {
+                showToast(res.getString(R.string.err_load_descr_failed));
+            }
+
+            @Override
+            public void onNext(final Spanned description) {
+                if (StringUtils.isNotBlank(descriptionString)) {
+                    try {
+                        descriptionView.setText(description, TextView.BufferType.SPANNABLE);
+                    } catch (final Exception e) {
+                        // On 4.1, there is sometimes a crash on measuring the layout: https://code.google.com/p/android/issues/detail?id=35412
+                        Log.e("Android bug setting text: ", e);
+                        // remove the formatting by converting to a simple string
+                        descriptionView.setText(description.toString());
+                    }
+                    descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+                    fixTextColor(descriptionString);
+                    descriptionView.setVisibility(View.VISIBLE);
+                    registerForContextMenu(descriptionView);
+                }
+            }
+
+            /**
+             * Handle caches with black font color in dark skin and white font color in light skin
+             * by changing background color of the view
+             *
+             * @param text
+             *            to be checked
+             */
+            private void fixTextColor(final String text) {
+                int backcolor;
+                if (Settings.isLightSkin()) {
+                    backcolor = color.white;
+
+                    for (final Pattern pattern : LIGHT_COLOR_PATTERNS) {
+                        final MatcherWrapper matcher = new MatcherWrapper(pattern, text);
+                        if (matcher.find()) {
+                            descriptionView.setBackgroundResource(color.darker_gray);
+                            return;
                         }
                     }
+                } else {
+                    backcolor = color.black;
 
-                    @Override
-                    public void onError(final Throwable throwable) {
-                        showToast(res.getString(R.string.err_load_descr_failed));
-                    }
-
-                    @Override
-                    public void onNext(final Spanned description) {
-                        if (StringUtils.isNotBlank(descriptionString)) {
-                            try {
-                                descriptionView.setText(description, TextView.BufferType.SPANNABLE);
-                            } catch (final Exception e) {
-                                // On 4.1, there is sometimes a crash on measuring the layout: https://code.google.com/p/android/issues/detail?id=35412
-                                Log.e("Android bug setting text: ", e);
-                                // remove the formatting by converting to a simple string
-                                descriptionView.setText(description.toString());
-                            }
-                            descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-                            fixTextColor(descriptionString);
-                            descriptionView.setVisibility(View.VISIBLE);
-                            registerForContextMenu(descriptionView);
+                    for (final Pattern pattern : DARK_COLOR_PATTERNS) {
+                        final MatcherWrapper matcher = new MatcherWrapper(pattern, text);
+                        if (matcher.find()) {
+                            descriptionView.setBackgroundResource(color.darker_gray);
+                            return;
                         }
                     }
-
-                    /**
-                     * Handle caches with black font color in dark skin and white font color in light skin
-                     * by changing background color of the view
-                     *
-                     * @param text
-                     *            to be checked
-                     */
-                    private void fixTextColor(final String text) {
-                        int backcolor;
-                        if (Settings.isLightSkin()) {
-                            backcolor = color.white;
-
-                            for (final Pattern pattern : LIGHT_COLOR_PATTERNS) {
-                                final MatcherWrapper matcher = new MatcherWrapper(pattern, text);
-                                if (matcher.find()) {
-                                    descriptionView.setBackgroundResource(color.darker_gray);
-                                    return;
-                                }
-                            }
-                        } else {
-                            backcolor = color.black;
-
-                            for (final Pattern pattern : DARK_COLOR_PATTERNS) {
-                                final MatcherWrapper matcher = new MatcherWrapper(pattern, text);
-                                if (matcher.find()) {
-                                    descriptionView.setBackgroundResource(color.darker_gray);
-                                    return;
-                                }
-                            }
-                        }
-                        descriptionView.setBackgroundResource(backcolor);
-                    }
-                });
+                }
+                descriptionView.setBackgroundResource(backcolor);
+            }
+        });
     }
 
     private class WaypointsViewCreator extends AbstractCachingPageViewCreator<ListView> {

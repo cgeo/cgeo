@@ -10,6 +10,7 @@ import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.androidextra.Base64;
@@ -127,9 +128,8 @@ public class HtmlImage implements Html.ImageGetter {
         return drawable.toBlockingObservable().lastOrDefault(null);
     }
 
-    // Caches are loaded from disk on Schedulers.computation() to avoid using more threads than processors
-    // on the phone while decoding the image. Downloads happen on downloadScheduler, in parallel with image
-    // decoding.
+    // Caches are loaded from disk on a computation scheduler to avoid using more threads than cores while decoding
+    // the image. Downloads happen on downloadScheduler, in parallel with image decoding.
     public Observable<BitmapDrawable> fetchDrawable(final String url) {
 
         if (StringUtils.isBlank(url) || ImageUtils.containsPattern(url, BLOCKED)) {
@@ -143,7 +143,7 @@ public class HtmlImage implements Html.ImageGetter {
             @Override
             public void call(final Subscriber<? super BitmapDrawable> subscriber) {
                 subscription.add(subscriber);
-                subscriber.add(Schedulers.computation().schedule(new Action1<Inner>() {
+                subscriber.add(RxUtils.computationScheduler.schedule(new Action1<Inner>() {
                     @Override
                     public void call(final Inner inner) {
                         final Pair<BitmapDrawable, Boolean> loaded = loadFromDisk();
@@ -195,7 +195,7 @@ public class HtmlImage implements Html.ImageGetter {
                 if (onlySave) {
                     subscriber.onCompleted();
                 } else {
-                    Schedulers.computation().schedule(new Action1<Inner>() {
+                    RxUtils.computationScheduler.schedule(new Action1<Inner>() {
                         @Override
                         public void call(final Inner inner) {
                             final Pair<BitmapDrawable, Boolean> loaded = loadFromDisk();

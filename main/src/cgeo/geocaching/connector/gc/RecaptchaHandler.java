@@ -4,12 +4,10 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.io.IOUtils;
-
 import rx.Observable;
-import rx.android.observables.AndroidObservable;
-import rx.schedulers.Schedulers;
 import rx.functions.Action1;
 import rx.functions.Func0;
 
@@ -39,17 +37,36 @@ public class RecaptchaHandler extends Handler {
     }
 
     private void loadChallenge(final ImageView imageView, final View reloadButton) {
-        getCaptcha().subscribe(new Action1<Bitmap>() {
+        final Observable<Bitmap> captcha = Observable.defer(new Func0<Observable<? extends Bitmap>>() {
+            @Override
+            public Observable<? extends Bitmap> call() {
+                final String url = "http://www.google.com/recaptcha/api/image?c=" + recaptchaReceiver.getChallenge();
+                final InputStream is = Network.getResponseStream(Network.getRequest(url));
+                if (is != null) {
+                    try {
+                        final Bitmap img = BitmapFactory.decodeStream(is);
+                        return Observable.from(img);
+                    } catch (final Exception e) {
+                        Log.e("RecaptchaHandler.getCaptcha", e);
+                        return Observable.error(e);
+                    } finally {
+                        IOUtils.closeQuietly(is);
+                    }
+                }
+                return Observable.empty();
+            }
+        });
+        RxUtils.subscribeOnIOThenUI(captcha, new Action1<Bitmap>() {
             @Override
             public void call(final Bitmap bitmap) {
                 imageView.setImageBitmap(bitmap);
             }
         }, new Action1<Throwable>() {
-                                   @Override
-                                   public void call(final Throwable throwable) {
-                                       // Do nothing
-                                   }
-                               });
+            @Override
+            public void call(final Throwable throwable) {
+                // Do nothing
+            }
+        });
         reloadButton.setEnabled(true);
     }
 
@@ -89,26 +106,25 @@ public class RecaptchaHandler extends Handler {
     }
 
     private Observable<Bitmap> getCaptcha() {
-        return AndroidObservable.bindActivity(activity,
-                Observable.defer(new Func0<Observable<? extends Bitmap>>() {
-                    @Override
-                    public Observable<? extends Bitmap> call() {
-                        final String url = "http://www.google.com/recaptcha/api/image?c=" + recaptchaReceiver.getChallenge();
-                        final InputStream is = Network.getResponseStream(Network.getRequest(url));
-                        if (is != null) {
-                            try {
-                                final Bitmap img = BitmapFactory.decodeStream(is);
-                                return Observable.from(img);
-                            } catch (final Exception e) {
-                                Log.e("RecaptchaHandler.getCaptcha", e);
-                                return Observable.error(e);
-                            } finally {
-                                IOUtils.closeQuietly(is);
-                            }
-                        }
-                        return Observable.empty();
+        return Observable.defer(new Func0<Observable<? extends Bitmap>>() {
+            @Override
+            public Observable<? extends Bitmap> call() {
+                final String url = "http://www.google.com/recaptcha/api/image?c=" + recaptchaReceiver.getChallenge();
+                final InputStream is = Network.getResponseStream(Network.getRequest(url));
+                if (is != null) {
+                    try {
+                        final Bitmap img = BitmapFactory.decodeStream(is);
+                        return Observable.from(img);
+                    } catch (final Exception e) {
+                        Log.e("RecaptchaHandler.getCaptcha", e);
+                        return Observable.error(e);
+                    } finally {
+                        IOUtils.closeQuietly(is);
                     }
-                }).subscribeOn(Schedulers.io()));
+                }
+                return Observable.empty();
+            }
+        });
     }
 
 }

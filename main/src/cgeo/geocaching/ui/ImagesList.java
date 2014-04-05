@@ -6,11 +6,11 @@ import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import rx.Subscription;
-import rx.android.observables.AndroidObservable;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.subscriptions.CompositeSubscription;
@@ -116,13 +116,12 @@ public class ImagesList {
 
             final ImageView imageView = (ImageView) inflater.inflate(R.layout.image_item, null);
             assert(imageView != null);
-            subscriptions.add(AndroidObservable.bindActivity(activity, imgGetter.fetchDrawable(img.getUrl()))
-                    .subscribe(new Action1<BitmapDrawable>() {
-                        @Override
-                        public void call(final BitmapDrawable image) {
-                            display(imageView, image, img, rowView);
-                        }
-                    }));
+            subscriptions.add(RxUtils.subscribeThenUI(imgGetter.fetchDrawable(img.getUrl()), new Action1<BitmapDrawable>() {
+                @Override
+                public void call(final BitmapDrawable image) {
+                    display(imageView, image, img, rowView);
+                }
+            }));
             rowView.addView(imageView);
             imagesView.addView(rowView);
         }

@@ -14,13 +14,12 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import rx.Observable;
-import rx.android.observables.AndroidObservable;
 import rx.functions.Action1;
 import rx.functions.Func0;
-import rx.schedulers.Schedulers;
 
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -80,13 +79,13 @@ public abstract class AbstractPopupActivity extends AbstractActivity implements 
         if (!cache.supportsGCVote()) {
             return;
         }
-        AndroidObservable.bindActivity(this, Observable.defer(new Func0<Observable<GCVoteRating>>() {
+        RxUtils.subscribeOnIOThenUI(Observable.defer(new Func0<Observable<GCVoteRating>>() {
             @Override
             public Observable<GCVoteRating> call() {
                 final GCVoteRating rating = GCVote.getRating(cache.getGuid(), geocode);
                 return rating != null ? Observable.just(rating) : Observable.<GCVoteRating>empty();
             }
-        }).subscribeOn(Schedulers.io())).subscribe(new Action1<GCVoteRating>() {
+        }), new Action1<GCVoteRating>() {
             @Override
             public void call(final GCVoteRating rating) {
                 cache.setRating(rating.getRating());

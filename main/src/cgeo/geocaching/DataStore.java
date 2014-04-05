@@ -20,16 +20,15 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
-import rx.android.observables.AndroidObservable;
 import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 import rx.util.async.Async;
 
 import android.app.Activity;
@@ -393,7 +392,7 @@ public class DataStore {
      */
     public static void moveDatabase(final Activity fromActivity) {
         final ProgressDialog dialog = ProgressDialog.show(fromActivity, fromActivity.getString(R.string.init_dbmove_dbmove), fromActivity.getString(R.string.init_dbmove_running), true, false);
-        AndroidObservable.bindActivity(fromActivity, Async.fromFunc0(new Func0<Boolean>() {
+        RxUtils.subscribeOnIOThenUI(Async.fromCallable(new Func0<Boolean>() {
             @Override
             public Boolean call() {
                 if (!LocalStorage.isExternalStorageAvailable()) {
@@ -418,7 +417,7 @@ public class DataStore {
                 init();
                 return true;
             }
-        })).subscribeOn(Schedulers.io()).subscribe(new Action1<Boolean>() {
+        }), new Action1<Boolean>() {
             @Override
             public void call(final Boolean success) {
                 dialog.dismiss();

@@ -2,13 +2,12 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.gc.GCParser;
+import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.collections4.CollectionUtils;
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
-import rx.android.observables.AndroidObservable;
-import rx.schedulers.Schedulers;
 import rx.functions.Action1;
 
 import android.app.Activity;
@@ -46,13 +45,13 @@ public final class PocketQueryList {
     public static void promptForListSelection(final Activity activity, final Action1<PocketQueryList> runAfterwards) {
         final Dialog waitDialog = ProgressDialog.show(activity, activity.getString(R.string.search_pocket_title), activity.getString(R.string.search_pocket_loading), true, true);
 
-        AndroidObservable.bindActivity(activity, Observable.create(new OnSubscribe<List<PocketQueryList>>() {
+        RxUtils.subscribeOnIOThenUI(Observable.create(new OnSubscribe<List<PocketQueryList>>() {
             @Override
             public void call(final Subscriber<? super List<PocketQueryList>> subscriber) {
                 subscriber.onNext(GCParser.searchPocketQueryList());
                 subscriber.onCompleted();
             }
-        }).subscribeOn(Schedulers.io())).subscribe(new Action1<List<PocketQueryList>>() {
+        }), new Action1<List<PocketQueryList>>() {
             @Override
             public void call(final List<PocketQueryList> pocketQueryLists) {
                 waitDialog.dismiss();

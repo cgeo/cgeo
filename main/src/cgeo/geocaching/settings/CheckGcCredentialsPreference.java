@@ -25,14 +25,14 @@ public class CheckGcCredentialsPreference extends AbstractCheckCredentialsPrefer
     }
 
     @Override
-    protected ImmutablePair<StatusCode, Drawable> login() {
+    protected ImmutablePair<StatusCode, ? extends Drawable> login() {
         final StatusCode loginResult = GCLogin.getInstance().login();
         switch (loginResult) {
             case NO_ERROR:
                 GCLogin.detectGcCustomDate();
-                return new ImmutablePair<StatusCode, Drawable>(StatusCode.NO_ERROR, GCLogin.getInstance().downloadAvatarAndGetMemberStatus());
+                return ImmutablePair.of(StatusCode.NO_ERROR, GCLogin.getInstance().downloadAvatarAndGetMemberStatus());
             default:
-                return new ImmutablePair<StatusCode, Drawable>(loginResult, null);
+                return ImmutablePair.of(loginResult, null);
         }
     }
 }
