@@ -42,7 +42,7 @@ public class CgeoApplication extends Application {
 
     public synchronized Observable<IGeoData> geoDataObservable() {
         if (geoDataObservable == null) {
-            final ConnectableObservable<IGeoData> onDemand = GeoDataProvider.create(this).publish();
+            final ConnectableObservable<IGeoData> onDemand = GeoDataProvider.create(this).replay(1);
             onDemand.subscribe(new Action1<IGeoData>() {
                                   @Override
                                   public void call(final IGeoData geoData) {
@@ -56,7 +56,7 @@ public class CgeoApplication extends Application {
 
     public synchronized Observable<Float> directionObservable() {
         if (directionObservable == null) {
-            final ConnectableObservable<Float> onDemand = DirectionProvider.create(this).publish();
+            final ConnectableObservable<Float> onDemand = DirectionProvider.create(this).replay(1);
             onDemand.subscribe(new Action1<Float>() {
                                   @Override
                                   public void call(final Float direction) {
