@@ -33,6 +33,7 @@ public final class ImageUtils {
     };
 
     private static final int[] ROTATION = new int[] { 90, 180, 270 };
+    private static final int MAX_DISPLAY_IMAGE_XY = 800;
 
     private ImageUtils() {
         // Do not let this class be instantiated, this is a utility class.
@@ -62,8 +63,9 @@ public final class ImageUtils {
     @Nullable
     public static Bitmap readAndScaleImageToFitDisplay(@NonNull final String filename) {
         Point displaySize = Compatibility.getDisplaySize();
-        final int maxWidth = displaySize.x - 25;
-        final int maxHeight = displaySize.y - 25;
+        // restrict image size to 800 x 800 to prevent OOM on tablets
+        final int maxWidth = Math.min(displaySize.x - 25, MAX_DISPLAY_IMAGE_XY);
+        final int maxHeight = Math.min(displaySize.y - 25, MAX_DISPLAY_IMAGE_XY);
         final Bitmap image = readDownsampledImage(filename, maxWidth, maxHeight);
         if (image == null) {
             return null;
