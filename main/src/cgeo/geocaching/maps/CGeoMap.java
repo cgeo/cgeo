@@ -895,7 +895,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 locationValid = true;
 
                 currentLocation = geo.getLocation();
-                currentHeading = DirectionProvider.getDirectionNow(activity, dir);
+                currentHeading = DirectionProvider.getDirectionNow(dir);
                 repaintPositionOverlay();
             }
         }

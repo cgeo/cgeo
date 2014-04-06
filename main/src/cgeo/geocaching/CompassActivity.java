@@ -287,7 +287,7 @@ public class CompassActivity extends AbstractActivity {
                     navLocation.setText(res.getString(R.string.loc_trying));
                 }
 
-                updateNorthHeading(DirectionProvider.getDirectionNow(CompassActivity.this, dir));
+                updateNorthHeading(DirectionProvider.getDirectionNow(dir));
             } catch (RuntimeException e) {
                 Log.w("Failed to LocationUpdater location.");
             }

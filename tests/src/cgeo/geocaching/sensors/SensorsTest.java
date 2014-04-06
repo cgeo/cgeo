@@ -21,7 +21,7 @@ public class SensorsTest extends ActivityInstrumentationTestCase2<MainActivity> 
     }
 
     public void testGetDirectionNow() {
-        final float angle = DirectionProvider.getDirectionNow(activity, 1.0f);
+        final float angle = DirectionProvider.getDirectionNow(1.0f);
         Assert.assertTrue(angle == 1.0f || angle == 91.0f || angle == 181.0f || angle == 271.0f);
     }
 
