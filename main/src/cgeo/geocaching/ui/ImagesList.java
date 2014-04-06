@@ -30,12 +30,14 @@ import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -140,7 +142,7 @@ public class ImagesList {
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
-                    viewImageInStandardApp(image);
+                    viewImageInStandardApp(img, image);
                 }
             });
             activity.registerForContextMenu(imageView);
@@ -180,7 +182,7 @@ public class ImagesList {
     public boolean onContextItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.image_open_file:
-                viewImageInStandardApp(currentDrawable);
+                viewImageInStandardApp(currentImage, currentDrawable);
                 return true;
             case R.id.image_open_browser:
                 if (currentImage != null) {
@@ -192,26 +194,35 @@ public class ImagesList {
         }
     }
 
-    private void viewImageInStandardApp(final BitmapDrawable image) {
+    private static String mimeTypeForUrl(final String url) {
+        return StringUtils.defaultString(MimeTypeMap.getSingleton().getMimeTypeFromExtension(MimeTypeMap.getFileExtensionFromUrl(url)), "image/*");
+    }
+
+    private static File saveToTemporaryJPGFile(final BitmapDrawable image) throws FileNotFoundException {
         final File file = LocalStorage.getStorageFile(null, "temp.jpg", false, true);
         BufferedOutputStream stream = null;
         try {
             stream = new BufferedOutputStream(new FileOutputStream(file));
             image.getBitmap().compress(CompressFormat.JPEG, 100, stream);
-        } catch (Exception e) {
-            Log.e("ImagesList.viewImageInStandardApp", e);
-            return;
         } finally {
             IOUtils.closeQuietly(stream);
         }
+        file.deleteOnExit();
+        return file;
+    }
 
-        final Intent intent = new Intent();
-        intent.setAction(android.content.Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(file), "image/jpeg");
-        activity.startActivity(intent);
-
-        if (file.exists()) {
-            file.deleteOnExit();
+    private void viewImageInStandardApp(final Image img, final BitmapDrawable image) {
+        try {
+            final Intent intent = new Intent().setAction(android.content.Intent.ACTION_VIEW);
+            final File file = LocalStorage.getStorageFile(geocode, img.getUrl(), true, true);
+            if (file.exists()) {
+                intent.setDataAndType(Uri.fromFile(file), mimeTypeForUrl(img.getUrl()));
+            } else {
+                intent.setDataAndType(Uri.fromFile(saveToTemporaryJPGFile(image)), "image/jpeg");
+            }
+            activity.startActivity(intent);
+        } catch (Exception e) {
+            Log.e("ImagesList.viewImageInStandardApp", e);
         }
     }
 
