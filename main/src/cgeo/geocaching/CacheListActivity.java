@@ -126,7 +126,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         @Override
         public void updateDirection(final float direction) {
             if (Settings.isLiveList()) {
-                adapter.setActualHeading(DirectionProvider.getDirectionNow(CacheListActivity.this, direction));
+                adapter.setActualHeading(DirectionProvider.getDirectionNow(direction));
             }
         }
 

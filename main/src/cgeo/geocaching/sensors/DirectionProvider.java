@@ -1,25 +1,29 @@
 package cgeo.geocaching.sensors;
 
-import android.os.Process;
-import cgeo.geocaching.compatibility.Compatibility;
-
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.StartableHandlerThread;
+
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
 import rx.subjects.BehaviorSubject;
 
-import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.*;
+import android.os.Handler;
+import android.os.Process;
+import android.view.Surface;
+import android.view.WindowManager;
 
 public class DirectionProvider {
 
     private static final BehaviorSubject<Float> subject = BehaviorSubject.create(0.0f);
+
+    private static final WindowManager windowManager = (WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
 
     static class Listener implements SensorEventListener, StartableHandlerThread.Callback {
 
@@ -84,13 +88,29 @@ public class DirectionProvider {
     /**
      * Take the phone rotation (through a given activity) in account and adjust the direction.
      *
-     * @param activity the activity to consider when computing the rotation
      * @param direction the unadjusted direction in degrees, in the [0, 360[ range
      * @return the adjusted direction in degrees, in the [0, 360[ range
      */
 
-    public static float getDirectionNow(final Activity activity, final float direction) {
-        return Compatibility.getDirectionNow(direction, activity);
+    public static float getDirectionNow(final float direction) {
+        return AngleUtils.normalize(direction + getRotationOffset());
+    }
+
+    static float reverseDirectionNow(final float direction) {
+        return AngleUtils.normalize(direction - getRotationOffset());
+    }
+
+    private static int getRotationOffset() {
+        switch (windowManager.getDefaultDisplay().getRotation()) {
+            case Surface.ROTATION_90:
+                return 90;
+            case Surface.ROTATION_180:
+                return 180;
+            case Surface.ROTATION_270:
+                return 270;
+            default:
+                return 0;
+        }
     }
 
 }

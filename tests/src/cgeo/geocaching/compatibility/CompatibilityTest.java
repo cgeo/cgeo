@@ -26,7 +26,7 @@ public class CompatibilityTest extends ActivityInstrumentationTestCase2<MainActi
     }
 
     public void testGetDirectionNow() {
-        final float angle = Compatibility.getDirectionNow(1.0f, activity);
+        final float angle = DirectionProvider.getDirectionNow(1.0f);
         Assert.assertTrue(angle == 1.0f || angle == 91.0f || angle == 181.0f || angle == 271.0f);
     }
 

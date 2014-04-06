@@ -18,6 +18,10 @@ import rx.subscriptions.CompositeSubscription;
  * To use this class, override {@link #updateGeoDir(IGeoData, float)}. You need to start the handler using
  * {@link #start()}. A good place to do so might be the {@code onResume} method of the Activity. Stop the Handler
  * accordingly in {@code onPause}.
+ *
+ * The direction is always relative to the top of the device (natural direction), and that it must
+ * be fixed using {@link DirectionProvider#getDirectionNow(float)}. When the direction is derived from the GPS,
+ * it is altered so that the fix can still be applied as if the information came from the compass.
  */
 public abstract class GeoDirHandler {
 
@@ -71,7 +75,7 @@ public abstract class GeoDirHandler {
 
     private static float fixDirection(final IGeoData geoData, final float direction) {
         final boolean useGPSBearing = !Settings.isUseCompass() || geoData.getSpeed() > 5;
-        return useGPSBearing ? geoData.getBearing() : direction;
+        return useGPSBearing ? DirectionProvider.reverseDirectionNow(geoData.getBearing()) : direction;
     }
 
     /**
