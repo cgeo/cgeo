@@ -48,10 +48,6 @@
 # The backup agent class is not called from our code.
 -keep public class cgeo.geocaching.backup.CentralBackupAgent
 
--keepclassmembers class cgeo.geocaching.compatibility.AndroidLevel8 {
-    public static <methods>;
-}
-
 # Butter knife view injection, see http://jakewharton.github.io/butterknife/
 -dontwarn butterknife.internal.**
 -keep class **$$ViewInjector { *; }
