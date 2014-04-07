@@ -379,6 +379,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
         final TouchListener touchListener = new TouchListener(cache, v);
         v.setOnClickListener(touchListener);
+        v.setOnLongClickListener(touchListener);
         v.setOnTouchListener(touchListener);
 
         holder.checkbox.setVisibility(selectMode ? View.VISIBLE : View.GONE);
@@ -535,11 +536,10 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         }
     }
 
-    private class TouchListener implements View.OnClickListener, View.OnTouchListener {
+    private class TouchListener implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
 
-        private boolean touch = true;
-        private final GestureDetector gestureDetector;
         private final Geocache cache;
+        private final GestureDetector gestureDetector;
 
         public TouchListener(final Geocache cache, final View view) {
             this.cache = cache;
@@ -547,33 +547,28 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
             gestureDetector = new GestureDetector(getContext(), dGesture);
         }
 
-        // tap on item
         @Override
-        public void onClick(View view) {
-            if (!touch) {
-                touch = true;
-                return;
-            }
-
+        public void onClick(final View view) {
             if (isSelectMode()) {
                 cache.setStatusChecked(!cache.isStatusChecked());
                 notifyDataSetChanged();
-                return;
+            } else {
+                CacheDetailActivity.startActivity(getContext(), cache.getGeocode(), cache.getName());
             }
+        }
 
-            // load cache details
-            CacheDetailActivity.startActivity(getContext(), cache.getGeocode(), cache.getName());
+        // long tap on item
+        @Override
+        public boolean onLongClick(final View view) {
+            view.showContextMenu();
+            return true;
         }
 
         // swipe on item
         @Override
-        public boolean onTouch(View view, MotionEvent event) {
-            if (gestureDetector.onTouchEvent(event)) {
-                touch = false;
-                return true;
-            }
+        public boolean onTouch(final View view, final MotionEvent event) {
+            return gestureDetector.onTouchEvent(event);
 
-            return false;
         }
     }
 
@@ -585,12 +580,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         public FlingGesture(final Geocache cache, final View view) {
             this.cache = cache;
             this.view = view;
-        }
-
-        // long tap on item
-        @Override
-        public void onLongPress(MotionEvent e) {
-            view.showContextMenu();
         }
 
         @Override
