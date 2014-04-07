@@ -308,7 +308,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     /**
      * TODO Possibly parts should be a Thread not a Handler
      */
-    private final CancellableHandler downloadFromWebHandler = new CancellableHandler() {
+    private class DownloadFromWebHandler extends CancellableHandler {
         @Override
         public void handleRegularMessage(Message msg) {
             updateAdapter();
@@ -343,7 +343,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     break;
             }
         }
-    };
+    }
+
     private final CancellableHandler clearOfflineLogsHandler = new CancellableHandler() {
 
         @Override
@@ -1079,6 +1080,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         detailProgress = 0;
 
         showProgress(false);
+        final DownloadFromWebHandler downloadFromWebHandler = new DownloadFromWebHandler();
         progress.show(this, null, res.getString(R.string.web_import_waiting), true, downloadFromWebHandler.cancelMessage());
 
         final LoadFromWebThread threadWeb = new LoadFromWebThread(downloadFromWebHandler, listId);
