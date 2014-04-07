@@ -146,7 +146,7 @@
   <string name="err_detail_cache_find_some">c:geo neranda šios slėptuvės.</string>
   <string name="err_detail_cache_find_any">c:geo neranda slėptuvių.</string>
   <string name="err_detail_google_maps_limit_reached">c:geo nepavyko atsisiųsti statinių žemėlapių. Galbūt pasiekėte Google Maps API limitą.</string>
-  <string name="err_detail_no_spoiler">c:geo nerado paslėptų nuotraukų šiai slėptuvei.</string>
+  <string name="err_detail_no_spoiler">c:geo nerado užuominų nuotraukų šiai slėptuvei.</string>
   <string name="err_detail_no_map_static">c:geo nerado žemėlapio šiai slėptuvei.</string>
   <string name="err_detail_not_load_map_static">c:geo nepavyko įkelti statinių žemėlapių.</string>
   <string name="err_detail_still_working">Vis dar dirba su kita užduotimi.</string>
@@ -201,9 +201,9 @@
   <string name="warn_search_help_tb">Įveskite keliauninko kodą. Pvz. \"TB5303E\".</string>
   <string name="warn_log_text_fill">Prašome įrašyti įrašo tekstą.</string>
   <string name="warn_load_images">c:geo nepavyko įkelti nuotraukų.</string>
-  <string name="warn_invalid_mapfile">Pasirinktas žemėlapio failas nėra mapsforge 0.3.0 versijos failas.\nŽemėlapiai naudojami neprisijungus yra nepasiekiami.</string>
+  <string name="warn_invalid_mapfile">Pasirinktas žemėlapio failas nėra mapsforge 0.3.0 versijos failas.\nIšsaugoti žemėlapiai yra nepasiekiami.</string>
   <string name="warn_deprecated_mapfile">Jūs naudojate pasenusią žemėlapio versiją (0.2.4).\nSiūlome atsinaujinti žemėlapį į 0.3.0 versiją.\nNuo sekančio leidimo versija 0.2.4 nebebus palaikoma.</string>
-  <string name="warn_nonexistant_mapfile">Pasirinktas žemėlapio failas neegzistuoja.\nŽemėlapiai naudojami neprisijungus yra nepasiekiami.</string>
+  <string name="warn_nonexistant_mapfile">Pasirinktas žemėlapio failas neegzistuoja.\nIšsaugoti žemėlapiai yra nepasiekiami.</string>
   <string name="warn_rendertheme_missing">Nerasta žemėlapio tema.</string>
   <string name="warn_pocket_query_select">Nepasirinktas Kišeninis sąrašas.</string>
   <string name="warn_no_pocket_query_found">Internete nerastas Kišeninis sąrašas.</string>
@@ -414,7 +414,7 @@
   <string name="init_disabled">Atmesti išjungtas</string>
   <string name="init_summary_disabled">Atmesti išjungtas slėptuves</string>
   <string name="init_offline">Statiniai žemėlapiai</string>
-  <string name="init_summary_offline">Išsaugoti slėptuvės statinį žemėlapį naudojimui neprisijungus</string>
+  <string name="init_summary_offline">Išsaugoti slėptuvių statinius žemėlapius naudojimui neprisijungus</string>
   <string name="init_offline_wp">Statiniai žemėlapiai (PT)</string>
   <string name="init_summary_offline_wp">Išsaugoti papildomų taškų statinius žemėlapius naudojimui neprisijungus</string>
   <string name="init_save_log_img">Išsaugoti nuotraukas</string>
@@ -444,7 +444,7 @@
   <string name="settings_info_offline_maps_title">Informacija apie išsaugotus žemėlapius</string>
   <string name="settings_info_offline_maps">c:geo palaiko išsaugotus žemėlapius kurie veikia be interneto. Žemėlapius galite atsisiųsti iš Mapsforge arba susikurti nuosavus naudodami OSM duomenis. Norėdami įgalinti tokių žemėlapių palaikymą jūs turite pasirinkti katalogą jiems saugoti.</string>
   <string name="settings_info_themes_title">Informacija apie žemėlapio temas</string>
-  <string name="settings_info_themes">c:geo palaiko išsaugotų žemėlapių temas. Jos gali keisti žemėlapio spalvų stilių (pvz. naktinis stilius) arba atkreipti dėmesį į tam tikrus objektus, kaip dviračių takai arba aukščio linijos žemėlapyje.</string>
+  <string name="settings_info_themes">c:geo palaiko temas skirtas išsaugotiems žemėlapiams. Jos gali keisti žemėlapio spalvų stilių (pvz. naktinis stilius) arba atkreipti dėmesį į tam tikrus objektus, kaip dviračių takai arba aukščio linijos žemėlapyje.</string>
   <string name="init_mapsource_select">Pasirinkite žemėlapio šaltinį</string>
   <string name="settings_title_scale_map_text">Teksto dydis žemėlapyje</string>
   <string name="settings_summary_scale_map_text">Teksto dydis išsaugotame žemėlapyje nustatomas automatiškai pagal prietaiso dpi</string>
@@ -454,7 +454,7 @@
   <string name="init_maptrail">Rodyti pėdsaką</string>
   <string name="init_summary_maptrail">Rodyti pėdsaką žemėlapyje</string>
   <string name="init_share_after_export">Po GPX eksportavimo atidaryti bendrinimo meniu</string>
-  <string name="init_trackautovisit">Apsilankyti</string>
+  <string name="init_trackautovisit">Apsilankyti su keliauninkais</string>
   <string name="init_summary_trackautovisit">Automatiškai nustatyti keliauninkus kaip \"Apsilankė\"</string>
   <string name="init_sigautoinsert">Įterpti automatiškai</string>
   <string name="init_loaddirectionimg">Krypties paveikslėlis</string>
@@ -514,10 +514,10 @@
   <string name="init_sendToCgeo_name">Jūsų prietaiso pavadinimas</string>
   <string name="init_sendToCgeo_description"><b>Send2c:geo</b> leidžia jums siųsti slėptuves į Android įrenginį tiesiogiai iš geocaching.com naudojant specialius Firefox ar Chrome priedus. Prieš registruodamiesi, pažiūrėkite <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registruotis reikia tik tuomet jei norite naudotis send2c:geo. c:geo veiks įprastai ir be prietaiso registravimo.</string>
   <string name="init_sendToCgeo_register">Prašyti registracijos</string>
-  <string name="init_sendToCgeo_registering">Registruojamas prietaisas prie Send2c:geo…</string>
+  <string name="init_sendToCgeo_registering">Prietaisas registruojamas su Send2c:geo…</string>
   <string name="init_sendToCgeo_register_ok">Registracija sėkminga. PIN kodas ####. Naudokite jį c:geo svetainėje ir susiekite prietaisą su jūsų naršykle.</string>
   <string name="init_sendToCgeo_register_fail">Registracija nepavyko.</string>
-  <string name="sendToCgeo_download_fail">c:geo Nepavyko atsisiųsti slėptuvių. Nėra interneto ryšio, ar send2c:geo neveikia.</string>
+  <string name="sendToCgeo_download_fail">c:geo nepavyko atsisiųsti slėptuvių. Nėra interneto ryšio arba neveikia send2c:geo.</string>
   <string name="sendToCgeo_no_registration">c:geo nepavyko atsisiųsti slėptuvių. send2c:geo registracijos galiojimo laikas pasibaigė. Prašome registruotis Nustatymuose.</string>
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Leisti c:geo prisijungti</string>
@@ -560,7 +560,7 @@
   <string name="cache_personal_note_store">Rašyti asmeninę pastabą galima tik išsaugotos slėptuvės aprašyme.</string>
   <string name="cache_description">Aprašymas</string>
   <string name="cache_description_long">Ilgas aprašymas</string>
-  <string name="cache_description_table_note">Aprašymas turi lentelės formatavimą, kad peržiūrėti teisingai gali tekti apsilankyti adresu %s.</string>
+  <string name="cache_description_table_note">Aprašymas turi lentelės formatavimą ir norint pamatyti jį atvaizduotą teisingai gali tekti apsilankyti %s.</string>
   <string name="cache_watchlist_on">Ši slėptuvė yra stebimų slėptuvių sąraše.</string>
   <string name="cache_watchlist_not_on">Šios slėptuvės nėra stebimų slėptuvių sąraše.</string>
   <string name="cache_watchlist_add">Stebėti</string>
@@ -581,7 +581,7 @@
   <string name="cache_dialog_loading_details">Įkeliama slėptuvės informacija…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Įkeliamas puslapis</string>
   <string name="cache_dialog_loading_details_status_details">Apdorojama informacija</string>
-  <string name="cache_dialog_loading_details_status_spoilers">Įkeliamos paslėptos nuotraukos</string>
+  <string name="cache_dialog_loading_details_status_spoilers">Įkeliamos užuominos nuotraukos</string>
   <string name="cache_dialog_loading_details_status_logs">Įkeliami įrašai</string>
   <string name="cache_dialog_loading_details_status_waypoints">Apdorojami papildomi taškai</string>
   <string name="cache_dialog_loading_details_status_gcvote">Įkeliama GCVote informacija</string>
@@ -616,7 +616,7 @@
   <string name="cache_menu_browser">Atidaryti naršyklėje</string>
   <string name="cache_menu_visit">Registruoti</string>
   <string name="cache_menu_visit_offline">Registruoti neprisijungus</string>
-  <string name="cache_menu_spoilers">Paslėptos nuotraukos</string>
+  <string name="cache_menu_spoilers">Užuominų nuotraukos</string>
   <string name="cache_menu_around">Slėptuvės aplink</string>
   <string name="cache_menu_event">Įtraukti į kalendorių</string>
   <string name="cache_menu_details">Informacija</string>
@@ -655,7 +655,7 @@
   <string name="cache_location">Vieta</string>
   <string name="cache_coordinates">Koordinatės</string>
   <string name="cache_coordinates_original">Originaliosios koordinatės</string>
-  <string name="cache_spoiler_images_title">Paslėptos nuotraukos</string>
+  <string name="cache_spoiler_images_title">Užuominų nuotraukos</string>
   <string name="cache_log_types">Įrašų tipai</string>
   <string name="cache_coordinates_no">Ši slėptuvė neturi koordinačių.</string>
   <string name="cache_clear_history">Išvalyti istoriją</string>
@@ -665,7 +665,7 @@
   <string name="cache_image_open_file">Atidaryti kaip failą</string>
   <string name="cache_image_open_browser">Atidaryti naršyklėje</string>
   <string name="cache_share_field">Bendrinti</string>
-  <string name="cache_time_full_hours">valanda</string>
+  <string name="cache_time_full_hours">valanda (-os)</string>
   <string name="cache_listed_on">Publikuota %s</string>
   <string name="file_searching_in">Ieškoma failų\n</string>
   <string name="file_searching_sdcard_in">Numatytame kataloge failų nerasta:\n%1$s\n\nIeškoma failų visoje SD kortelėje:\n</string>
@@ -738,7 +738,7 @@
   <string name="search_history_cleared">Istorija išvalyta</string>
   <string name="waypoint_coordinate_formats_plain">Paprastas</string>
   <string name="visit_tweet">Skelbti radybas Twitter paskytoje</string>
-  <string name="map_map">Žemėlapis</string>
+  <string name="map_map">Išsaugotos slėptuvės</string>
   <string name="map_live">Slėptuvės iš interneto</string>
   <string name="map_view_map">Žemėlapio šaltinis</string>
   <string name="map_modes">Žemėlapio nustatymai</string>
@@ -750,11 +750,11 @@
   <string name="map_mycaches_hide">Slėpti savo/rastas slėptuves</string>
   <string name="map_theme_builtin">Numatyta</string>
   <string name="map_theme_select">Pasirinkti žemėlapio temą</string>
-  <string name="map_live_enable">Slėptuvės\ntiesiogiai</string>
-  <string name="map_live_disable">Slėptuvės\nnetiesiogiai</string>
+  <string name="map_live_enable">Slėptuvės tiesiogiai</string>
+  <string name="map_live_disable">Slėptuvės netiesiogiai</string>
   <string name="map_static_title">Statinis žemėlapis</string>
   <string name="map_static_loading">Įkeliamas statinis žemėlapis…</string>
-  <string name="map_token_err">Kadangi c:geo nepavyko atsisiųsti duomenų, slėptuvės koordinatės gali būti netikslios.</string>
+  <string name="map_token_err">Slėptuvės koordinatės gali būti netikslios nes c:geo nepavyko atsisiųsti duomenų.</string>
   <string name="map_as_list">Rodyti kaip sąrašą</string>
   <string name="map_strategy">Strategija</string>
   <string name="map_strategy_title">Tiesioginio žemėlapio strategija</string>
@@ -844,7 +844,7 @@
   <string name="helper_contacts_description">Leidžia tiesiai iš įrašo atidaryti kontakto kortelę (iš jūsų adresų knygos), kad galėtumėte susisiekti su draugais paprašyti pagalbos.</string>
   <string name="helper_sendtocgeo_description">Send to c:geo yra <strong>jūsų kompiuterio</strong> naršyklės priedas . Kai naršote geocaching.com, jūs galite siųsti slėptuves į savo išmanųjį telefoną tiesiog naršyklės viduje paspausdami mygtuką.</string>
   <string name="helper_locus_title">Locus</string>
-  <string name="helper_locus_description">Patogi programa, kuri rodo interneto žemėlapius ir suteikia galimybę atsisiųsti juos tiesiai į prietaisą (tik rastrinus žemėlapius). Taip pat palaiko nukeliauto kelio įrašymą, lankytinų vietų valdymą ir daug kitų naudingų funkcijų.</string>
+  <string name="helper_locus_description">Patogi programa, kuri rodo žemėlapius tiesiai iš interneto ir suteikia galimybę atsisiųsti juos į prietaisą (tik rastrinius žemėlapius). Ji taip pat palaiko nukeliauto kelio įrašymą, lankytinų vietų valdymą ir turi daug kitų naudingų funkcijų.</string>
   <string name="helper_gpsstatus_title">GPS statusas</string>
   <string name="helper_gpsstatus_description">Kartu su c:geo galite naudoti šioje programoje esantį radarą. Ji taip pat siūlo daug kitos su GPS susijusios informacijos.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
