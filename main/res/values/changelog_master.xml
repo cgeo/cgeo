@@ -2,5 +2,10 @@
 <resources>
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
+    <b>Next feature release:</b>\n
+    <b>New features:</b>\n
+    · Changed initial coordinate format for waypoints to MinDec\n
+    <b>Bugfixing:</b>\n
+    · Improved long click detection in lists\n
   </string>
 </resources>
