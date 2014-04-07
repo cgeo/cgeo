@@ -543,10 +543,10 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
         public TouchListener(final Geocache cache, final View view) {
             this.cache = cache;
-            final FlingGesture dGesture = new FlingGesture(cache, view);
-            gestureDetector = new GestureDetector(getContext(), dGesture);
+            gestureDetector = new GestureDetector(getContext(), new FlingGesture(cache));
         }
 
+        // Tap on item
         @Override
         public void onClick(final View view) {
             if (isSelectMode()) {
@@ -557,14 +557,14 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
             }
         }
 
-        // long tap on item
+        // Long tap on item
         @Override
         public boolean onLongClick(final View view) {
             view.showContextMenu();
             return true;
         }
 
-        // swipe on item
+        // Swipe on item
         @Override
         public boolean onTouch(final View view, final MotionEvent event) {
             return gestureDetector.onTouchEvent(event);
@@ -575,11 +575,9 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     private class FlingGesture extends GestureDetector.SimpleOnGestureListener {
 
         private final Geocache cache;
-        private final View view;
 
-        public FlingGesture(final Geocache cache, final View view) {
+        public FlingGesture(final Geocache cache) {
             this.cache = cache;
-            this.view = view;
         }
 
         @Override
