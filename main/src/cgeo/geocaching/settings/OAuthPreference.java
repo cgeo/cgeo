@@ -2,11 +2,9 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.connector.oc.OCDEAuthorizationActivity;
-import cgeo.geocaching.connector.oc.OCNLAuthorizationActivity;
-import cgeo.geocaching.connector.oc.OCPLAuthorizationActivity;
-import cgeo.geocaching.connector.oc.OCROAuthorizationActivity;
-import cgeo.geocaching.connector.oc.OCUSAuthorizationActivity;
+import cgeo.geocaching.connector.oc.OCAuthParams;
+import cgeo.geocaching.connector.oc.OCAuthorizationActivity;
+import cgeo.geocaching.network.OAuthAuthorizationActivity.OAuthParameters;
 import cgeo.geocaching.twitter.TwitterAuthorizationActivity;
 
 import android.content.Context;
@@ -19,20 +17,22 @@ public class OAuthPreference extends AbstractClickablePreference {
     private static final int NO_KEY = -1;
 
     private enum OAuthActivityMapping {
-        NONE(NO_KEY, null),
-        OCDE(R.string.pref_fakekey_ocde_authorization, OCDEAuthorizationActivity.class),
-        OCPL(R.string.pref_fakekey_ocpl_authorization, OCPLAuthorizationActivity.class),
-        OCNL(R.string.pref_fakekey_ocnl_authorization, OCNLAuthorizationActivity.class),
-        OCUS(R.string.pref_fakekey_ocus_authorization, OCUSAuthorizationActivity.class),
-        OCRO(R.string.pref_fakekey_ocro_authorization, OCROAuthorizationActivity.class),
-        TWITTER(R.string.pref_fakekey_twitter_authorization, TwitterAuthorizationActivity.class);
+        NONE(NO_KEY, null, null),
+        OCDE(R.string.pref_fakekey_ocde_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_DE_AUTH_PARAMS),
+        OCPL(R.string.pref_fakekey_ocpl_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_PL_AUTH_PARAMS),
+        OCNL(R.string.pref_fakekey_ocnl_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_NL_AUTH_PARAMS),
+        OCUS(R.string.pref_fakekey_ocus_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_US_AUTH_PARAMS),
+        OCRO(R.string.pref_fakekey_ocro_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_RO_AUTH_PARAMS),
+        TWITTER(R.string.pref_fakekey_twitter_authorization, TwitterAuthorizationActivity.class, TwitterAuthorizationActivity.TWITTER_OAUTH_PARAMS);
 
         public final int prefKeyId;
         public final Class<?> authActivity;
+        public final OAuthParameters authParams;
 
-        OAuthActivityMapping(int prefKeyId, Class<?> clazz) {
+        OAuthActivityMapping(int prefKeyId, Class<?> authActivity, OAuthParameters authParams) {
             this.prefKeyId = prefKeyId;
-            this.authActivity = clazz;
+            this.authActivity = authActivity;
+            this.authParams = authParams;
         }
     }
 
@@ -64,9 +64,10 @@ public class OAuthPreference extends AbstractClickablePreference {
         return new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                if (oAuthMapping.authActivity != null) {
+                if (oAuthMapping.authActivity != null && oAuthMapping.authParams != null) {
                     Intent authIntent = new Intent(preference.getContext(),
                             oAuthMapping.authActivity);
+                    oAuthMapping.authParams.setOAuthExtras(authIntent);
                     activity.startActivityForResult(authIntent,
                             oAuthMapping.prefKeyId);
                 }

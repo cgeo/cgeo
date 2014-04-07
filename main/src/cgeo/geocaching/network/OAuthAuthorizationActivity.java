@@ -2,8 +2,10 @@ package cgeo.geocaching.network;
 
 import butterknife.InjectView;
 
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.utils.BundleUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 
@@ -39,14 +41,14 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     private static final int STATUS_SUCCESS = 1;
     private static final int STATUS_ERROR_EXT_MSG = 2;
 
-    @NonNull final private String host;
-    @NonNull final private String pathRequest;
-    @NonNull final private String pathAuthorize;
-    @NonNull final private String pathAccess;
-    private final boolean https;
-    @NonNull final private String consumerKey;
-    @NonNull final private String consumerSecret;
-    @NonNull final private String callback;
+    @NonNull private String host = StringUtils.EMPTY;
+    @NonNull private String pathRequest = StringUtils.EMPTY;
+    @NonNull private String pathAuthorize = StringUtils.EMPTY;
+    @NonNull private String pathAccess = StringUtils.EMPTY;
+    private boolean https = false;
+    @NonNull private String consumerKey = StringUtils.EMPTY;
+    @NonNull private String consumerSecret = StringUtils.EMPTY;
+    @NonNull private String callback = StringUtils.EMPTY;
     private String OAtoken = null;
     private String OAtokenSecret = null;
     private final Pattern paramsPattern1 = Pattern.compile("oauth_token=([a-zA-Z0-9\\-\\_.]+)");
@@ -56,6 +58,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     @InjectView(R.id.auth_2) protected TextView auth_2;
     private ProgressDialog requestTokenDialog = null;
     private ProgressDialog changeTokensDialog = null;
+
     private Handler requestTokenHandler = new Handler() {
 
         @Override
@@ -81,6 +84,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         }
 
     };
+
     private Handler changeTokensHandler = new Handler() {
 
         @Override
@@ -100,28 +104,21 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         }
     };
 
-    public OAuthAuthorizationActivity
-            (@NonNull String host,
-             @NonNull String pathRequest,
-             @NonNull String pathAuthorize,
-             @NonNull String pathAccess,
-             boolean https,
-             @NonNull String consumerKey,
-             @NonNull String consumerSecret,
-             @NonNull String callback) {
-        this.host = host;
-        this.pathRequest = pathRequest;
-        this.pathAuthorize = pathAuthorize;
-        this.pathAccess = pathAccess;
-        this.https = https;
-        this.consumerKey = consumerKey;
-        this.consumerSecret = consumerSecret;
-        this.callback = callback;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.authorization_activity, true);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            host = BundleUtils.getString(extras, Intents.EXTRA_OAUTH_HOST, host);
+            pathRequest = BundleUtils.getString(extras, Intents.EXTRA_OAUTH_PATH_REQUEST, pathRequest);
+            pathAuthorize = BundleUtils.getString(extras, Intents.EXTRA_OAUTH_PATH_AUTHORIZE, pathAuthorize);
+            pathAccess = BundleUtils.getString(extras, Intents.EXTRA_OAUTH_PATH_ACCESS, pathAccess);
+            https = extras.getBoolean(Intents.EXTRA_OAUTH_HTTPS, https);
+            consumerKey = BundleUtils.getString(extras, Intents.EXTRA_OAUTH_CONSUMER_KEY, consumerKey);
+            consumerSecret = BundleUtils.getString(extras, Intents.EXTRA_OAUTH_CONSUMER_SECRET, consumerSecret);
+            callback = BundleUtils.getString(extras, Intents.EXTRA_OAUTH_CALLBACK, callback);
+        }
 
         setTitle(getAuthTitle());
 
@@ -354,5 +351,48 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
     protected String getAuthAuthorize() {
         return res.getString(R.string.auth_authorize, getAuthTitle());
+    }
+
+    public static class OAuthParameters {
+        @NonNull public final String host;
+        @NonNull public final String pathRequest;
+        @NonNull public final String pathAuthorize;
+        @NonNull public final String pathAccess;
+        public final boolean https;
+        @NonNull public final String consumerKey;
+        @NonNull public final String consumerSecret;
+        @NonNull public final String callback;
+
+        public OAuthParameters(@NonNull String host,
+                @NonNull String pathRequest,
+                @NonNull String pathAuthorize,
+                @NonNull String pathAccess,
+                boolean https,
+                @NonNull String consumerKey,
+                @NonNull String consumerSecret,
+                @NonNull String callback) {
+            this.host = host;
+            this.pathRequest = pathRequest;
+            this.pathAuthorize = pathAuthorize;
+            this.pathAccess = pathAccess;
+            this.https = https;
+            this.consumerKey = consumerKey;
+            this.consumerSecret = consumerSecret;
+            this.callback = callback;
+        }
+
+        public void setOAuthExtras(Intent intent) {
+            if (intent != null) {
+                intent.putExtra(Intents.EXTRA_OAUTH_HOST, host);
+                intent.putExtra(Intents.EXTRA_OAUTH_PATH_REQUEST, pathRequest);
+                intent.putExtra(Intents.EXTRA_OAUTH_PATH_AUTHORIZE, pathAuthorize);
+                intent.putExtra(Intents.EXTRA_OAUTH_PATH_ACCESS, pathAccess);
+                intent.putExtra(Intents.EXTRA_OAUTH_HTTPS, https);
+                intent.putExtra(Intents.EXTRA_OAUTH_CONSUMER_KEY, consumerKey);
+                intent.putExtra(Intents.EXTRA_OAUTH_CONSUMER_SECRET, consumerSecret);
+                intent.putExtra(Intents.EXTRA_OAUTH_CALLBACK, callback);
+            }
+        }
+
     }
 }

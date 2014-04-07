@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector.oc;
 
-import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.oc.OkapiError.OkapiErrors;
 import cgeo.geocaching.network.OAuthAuthorizationActivity;
@@ -12,43 +12,51 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.Nullable;
 
-public abstract class OCAuthorizationActivity extends OAuthAuthorizationActivity {
+import android.os.Bundle;
 
-    final IOCAuthParams authParams;
+public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
 
-    public OCAuthorizationActivity(IOCAuthParams authParams) {
-        super(authParams.getSite(),
-                "/okapi/services/oauth/request_token",
-                "/okapi/services/oauth/authorize",
-                "/okapi/services/oauth/access_token",
-                false,
-                CgeoApplication.getInstance().getResources().getString(authParams.getCKResId()),
-                CgeoApplication.getInstance().getResources().getString(authParams.getCSResId()),
-                authParams.getCallbackUri());
-        this.authParams = authParams;
+    private int titleResId;
+    private int tokenPublicPrefKey;
+    private int tokenSecretPrefKey;
+    private int tempTokenPublicPrefKey;
+    private int tempTokenSecretPrefKey;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            titleResId = extras.getInt(Intents.EXTRA_OAUTH_TITLE_RES_ID);
+            tokenPublicPrefKey = extras.getInt(Intents.EXTRA_OAUTH_TOKEN_PUBLIC_KEY);
+            tokenSecretPrefKey = extras.getInt(Intents.EXTRA_OAUTH_TOKEN_SECRET_KEY);
+            tempTokenPublicPrefKey = extras.getInt(Intents.EXTRA_OAUTH_TEMP_TOKEN_KEY_PREF);
+            tempTokenSecretPrefKey = extras.getInt(Intents.EXTRA_OAUTH_TEMP_TOKEN_SECRET_PREF);
+        }
+        super.onCreate(savedInstanceState);
     }
 
     @Override
     protected ImmutablePair<String, String> getTempTokens() {
-        return Settings.getTokenPair(authParams.getTempTokenPublicPrefKey(), authParams.getTempTokenSecretPrefKey());
+        return Settings.getTokenPair(tempTokenPublicPrefKey, tempTokenSecretPrefKey);
     }
 
     @Override
     protected void setTempTokens(@Nullable final String tokenPublic, @Nullable final String tokenSecret) {
-        Settings.setTokens(authParams.getTempTokenPublicPrefKey(), tokenPublic, authParams.getTempTokenSecretPrefKey(), tokenSecret);
+        Settings.setTokens(tempTokenPublicPrefKey, tokenPublic, tempTokenSecretPrefKey, tokenSecret);
     }
 
     @Override
     protected void setTokens(@Nullable final String tokenPublic, @Nullable final String tokenSecret, final boolean enable) {
-        Settings.setTokens(authParams.getTokenPublicPrefKey(), tokenPublic, authParams.getTokenSecretPrefKey(), tokenSecret);
+        Settings.setTokens(tokenPublicPrefKey, tokenPublic, tokenSecretPrefKey, tokenSecret);
         if (tokenPublic != null) {
-            Settings.setTokens(authParams.getTempTokenPublicPrefKey(), null, authParams.getTempTokenSecretPrefKey(), null);
+            Settings.setTokens(tempTokenPublicPrefKey, null, tempTokenSecretPrefKey, null);
         }
     }
 
     @Override
     protected String getAuthTitle() {
-        return res.getString(authParams.getAuthTitleResId());
+        return res.getString(titleResId);
     }
 
     @Override
@@ -67,5 +75,4 @@ public abstract class OCAuthorizationActivity extends OAuthAuthorizationActivity
         }
         return StringUtils.EMPTY;
     }
-
 }

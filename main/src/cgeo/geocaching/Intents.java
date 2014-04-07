@@ -33,4 +33,20 @@ public class Intents {
     private static final String PREFIX_ACTION = "cgeo.geocaching.intent.action.";
     public static final String ACTION_GEOCACHE = PREFIX_ACTION + "GEOCACHE";
     public static final String ACTION_TRACKABLE = PREFIX_ACTION + "TRACKABLE";
+
+    private static final String PREFIX_OAUTH = "cgeo.geocaching.intent.oauth.";
+    public static final String EXTRA_OAUTH_HOST = PREFIX_OAUTH + "host";
+    public static final String EXTRA_OAUTH_PATH_REQUEST = PREFIX_OAUTH + "request";
+    public static final String EXTRA_OAUTH_PATH_AUTHORIZE = PREFIX_OAUTH + "authorize";
+    public static final String EXTRA_OAUTH_PATH_ACCESS = PREFIX_OAUTH + "access";
+    public static final String EXTRA_OAUTH_HTTPS = PREFIX_OAUTH + "https";
+    public static final String EXTRA_OAUTH_CONSUMER_KEY = PREFIX_OAUTH + "ConsumerKey";
+    public static final String EXTRA_OAUTH_CONSUMER_SECRET = PREFIX_OAUTH + "ConsumerSecret";
+    public static final String EXTRA_OAUTH_CALLBACK = PREFIX_OAUTH + "callback";
+
+    public static final String EXTRA_OAUTH_TITLE_RES_ID = PREFIX_OAUTH + "titleresId";
+    public static final String EXTRA_OAUTH_TEMP_TOKEN_KEY_PREF = PREFIX_OAUTH + "tempKeyPref";
+    public static final String EXTRA_OAUTH_TEMP_TOKEN_SECRET_PREF = PREFIX_OAUTH + "tempSecretPref";
+    public static final String EXTRA_OAUTH_TOKEN_PUBLIC_KEY = PREFIX_OAUTH + "publicTokenPref";
+    public static final String EXTRA_OAUTH_TOKEN_SECRET_KEY = PREFIX_OAUTH + "secretTokenPref";
 }

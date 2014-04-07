@@ -29,7 +29,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,7 +59,7 @@ public final class ConnectorFactory {
             new OCApiLiveConnector("opencaching.us", "www.opencaching.us", "OU", "CC BY-NC-SA 2.5",
                     R.string.oc_us_okapi_consumer_key, R.string.oc_us_okapi_consumer_secret,
                     R.string.pref_connectorOCUSActive, R.string.pref_ocus_tokenpublic, R.string.pref_ocus_tokensecret, ApiSupport.current),
-            new OCApiLiveConnector("opencaching.ro", "oc.opencaching.ro", "OR", "CC BY-SA 3.0",
+            new OCApiLiveConnector("opencaching.ro", "www.opencaching.ro", "OR", "CC BY-SA 3.0",
                     R.string.oc_ro_okapi_consumer_key, R.string.oc_ro_okapi_consumer_secret,
                     R.string.pref_connectorOCROActive, R.string.pref_ocro_tokenpublic, R.string.pref_ocro_tokensecret, ApiSupport.current),
             new OXConnector(),

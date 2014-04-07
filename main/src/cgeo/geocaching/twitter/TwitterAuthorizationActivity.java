@@ -9,16 +9,15 @@ import org.eclipse.jdt.annotation.Nullable;
 
 public class TwitterAuthorizationActivity extends OAuthAuthorizationActivity {
 
-    public TwitterAuthorizationActivity() {
-        super("api.twitter.com",
-                "/oauth/request_token",
-                "/oauth/authorize",
-                "/oauth/access_token",
-                true,
-                Settings.getKeyConsumerPublic(),
-                Settings.getKeyConsumerSecret(),
-                "callback://www.cgeo.org/twitter/");
-    }
+    public static final OAuthParameters TWITTER_OAUTH_PARAMS = new OAuthParameters(
+            "api.twitter.com",
+            "/oauth/request_token",
+            "/oauth/authorize",
+            "/oauth/access_token",
+            true,
+            Settings.getKeyConsumerPublic(),
+            Settings.getKeyConsumerSecret(),
+            "callback://www.cgeo.org/twitter/");
 
     @Override
     protected final ImmutablePair<String, String> getTempTokens() {
