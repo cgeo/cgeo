@@ -240,12 +240,12 @@
   <string name="caches_more_caches_no">Daugiau slėptuvių nėra</string>
   <string name="caches_more_caches_loading">Įkeliamos slėptuvės…</string>
   <string name="caches_more_caches_currently">dabar</string>
-  <string name="caches_downloading">Atsisiunčiamos slėptuvės…\nužtruks: </string>
-  <string name="caches_eta_ltm">Mažiau nei minutę</string>
+  <string name="caches_downloading">Atsisiunčiamos slėptuvės…\nužtruks </string>
+  <string name="caches_eta_ltm">mažiau nei minutę</string>
   <string name="caches_store_offline">Išsaugoti slėptuves</string>
   <string name="caches_store_selected">Išsaugoti pasirinktas</string>
   <string name="caches_history">Istorija</string>
-  <string name="caches_on_map">Rodyti\nžemėlapyje</string>
+  <string name="caches_on_map">Žemėlapyje</string>
   <string name="caches_sort">Rūšiuoti</string>
   <string name="caches_sort_title">Rūšiuoti pagal</string>
   <string name="caches_sort_distance">Atstumą</string>
@@ -422,7 +422,7 @@
   <string name="init_units">Imperiniai vienetai</string>
   <string name="init_summary_units">Vietoje metrinių vienetų naudoti imperinius vienetus</string>
   <string name="init_log_offline">Registravimas neprisijungus</string>
-  <string name="init_summary_log_offline">Įjungti registravimą neprisijungus (nebus rodomas įrašo langas, nebus įkeltas įrašas)</string>
+  <string name="init_summary_log_offline">Įjungti registravimą neprisijungus (nebus rodomas registravimo langas, nebus įkeltas įrašas)</string>
   <string name="init_choose_list">Klausti sąrašo</string>
   <string name="init_summary_choose_list">Klausti kuriame sąraše išsaugoti slėptuvę</string>
   <string name="init_livelist">Rodyti kryptį</string>
@@ -1132,8 +1132,8 @@
     <item>1024 px</item>
   </string-array>
   <plurals name="caches_eta_mins">
-    <item quantity="one">minutė</item>
-    <item quantity="few">minutės</item>
+    <item quantity="one">minutę</item>
+    <item quantity="few">minutes</item>
     <item quantity="other">minučių</item>
   </plurals>
   <plurals name="cache_counts">

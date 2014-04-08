@@ -364,6 +364,15 @@
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Aktiviere</string>
   <string name="init_oc_pl_description">Autorisiere c:geo auf opencaching.pl zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
+  <string name="init_oc_nl">Opencaching.nl</string>
+  <string name="settings_activate_oc_nl">Aktivieren</string>
+  <string name="init_oc_nl_description">Autorisiere c:geo auf opencaching.nl zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
+  <string name="init_oc_us">Opencaching.us</string>
+  <string name="settings_activate_oc_us">Aktivieren</string>
+  <string name="init_oc_us_description">Autorisiere c:geo auf opencaching.us zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
+  <string name="init_oc_ro">Opencaching.ro</string>
+  <string name="settings_activate_oc_ro">Aktivieren</string>
+  <string name="init_oc_ro_description">Autorisiere c:geo auf opencaching.ro zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivieren</string>
