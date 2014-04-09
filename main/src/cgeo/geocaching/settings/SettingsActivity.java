@@ -154,6 +154,7 @@ public class SettingsActivity extends PreferenceActivity {
         redrawScreen(R.string.preference_screen_navigation_menu);
     }
 
+    @SuppressWarnings("deprecation")
     private void initServicePreferences() {
         getPreference(R.string.pref_connectorOCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         getPreference(R.string.pref_connectorOCPLActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
