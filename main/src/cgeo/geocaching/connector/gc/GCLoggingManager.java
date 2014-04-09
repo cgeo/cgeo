@@ -88,6 +88,13 @@ public class GCLoggingManager extends AbstractLoggingManager implements LoaderMa
                     date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE),
                     log, trackableLogs);
 
+            if (postResult.left == StatusCode.NO_ERROR) {
+                if (logType == LogType.TEMP_DISABLE_LISTING) {
+                    cache.setDisabled(true);
+                } else if (logType == LogType.ENABLE_LISTING) {
+                    cache.setDisabled(false);
+                }
+            }
             return new LogResult(postResult.left, postResult.right);
         } catch (Exception e) {
             Log.e("GCLoggingManager.postLog", e);
