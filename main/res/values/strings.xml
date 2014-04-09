@@ -434,6 +434,7 @@
     <string name="init_login_popup_not_authorized">Not authorized</string>
     <string name="init_login_popup_invalid_timestamp">Local time invalid, adjust device time</string>
     <string name="init_login_popup_invalid_token">Authorization invalid, re-authorize</string>
+    <string name="settings_service_active">Active</string>
     <string name="init_signature">Signature</string>
     <string name="init_template_help">Placeholder strings like [NAME] will be expanded later when this template is used.</string>
     <string name="init_signature_template_button">Insert Template</string>

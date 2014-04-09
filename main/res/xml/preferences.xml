@@ -266,7 +266,7 @@
                         android:title="@string/settings_open_website" />
                 </PreferenceCategory>
             </PreferenceScreen>
-            <PreferenceScreen android:title="@string/settings_title_ox" >
+            <PreferenceScreen android:title="@string/settings_title_ox" android:key="@string/preference_screen_ox">
                 <PreferenceCategory android:title="@string/settings_settings" >
                     <CheckBoxPreference
                         android:defaultValue="false"

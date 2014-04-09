@@ -171,6 +171,12 @@ public class SettingsActivity extends PreferenceActivity {
         setWebsite(R.string.pref_fakekey_ec_website, "extremcaching.com");
         setWebsite(R.string.pref_fakekey_gcvote_website, "gcvote.com");
         setWebsite(R.string.pref_fakekey_sendtocgeo_website, "send2.cgeo.org");
+        for (OCPreferenceKeys key : OCPreferenceKeys.values()) {
+            setServiceScreenSummary(getPreferenceManager(), key.isActivePrefId);
+        }
+        setServiceScreenSummary(getPreferenceManager(), R.string.pref_connectorGCActive);
+        setServiceScreenSummary(getPreferenceManager(), R.string.pref_connectorOXActive);
+        setServiceScreenSummary(getPreferenceManager(), R.string.pref_connectorECActive);
     }
 
     private void setWebsite(final int preferenceKey, final String host) {
@@ -182,6 +188,36 @@ public class SettingsActivity extends PreferenceActivity {
                 return true;
             }
         });
+    }
+
+    private static String getServiceSummary(boolean status) {
+        return status ? CgeoApplication.getInstance().getString(R.string.settings_service_active) : StringUtils.EMPTY;
+    }
+
+    private static void setServiceScreenSummary(PreferenceManager preferenceManager, final int preferenceKey) {
+
+        String summary = StringUtils.EMPTY;
+
+        switch (preferenceKey) {
+            case R.string.pref_connectorGCActive:
+                summary = getServiceSummary(Settings.isGCConnectorActive());
+                preferenceManager.findPreference(getKey(R.string.preference_screen_gc)).setSummary(summary);
+                break;
+            case R.string.pref_connectorOXActive:
+                summary = getServiceSummary(Settings.isOXConnectorActive());
+                preferenceManager.findPreference(getKey(R.string.preference_screen_ox)).setSummary(summary);
+                break;
+            case R.string.pref_connectorECActive:
+                summary = getServiceSummary(Settings.isECConnectorActive());
+                preferenceManager.findPreference(getKey(R.string.preference_screen_ec)).setSummary(summary);
+                break;
+            default:
+                if (OCPreferenceKeys.isOCPreference(preferenceKey)) {
+                    OCPreferenceKeys prefKey = OCPreferenceKeys.getById(preferenceKey);
+                    summary = getServiceSummary(Settings.isOCConnectorActive(prefKey.isActivePrefId));
+                    preferenceManager.findPreference(getKey(prefKey.prefScreenId)).setSummary(summary);
+                }
+        }
     }
 
     private static String getKey(final int prefKeyId) {
@@ -397,6 +433,10 @@ public class SettingsActivity extends PreferenceActivity {
      */
     void redrawScreen(final int key) {
         final Preference preference = getPreference(key);
+        redrawScreen(preference);
+    }
+
+    static void redrawScreen(final Preference preference) {
         if (!(preference instanceof PreferenceScreen)) {
             return;
         }
@@ -591,7 +631,19 @@ public class SettingsActivity extends PreferenceActivity {
                     || isPreference(preference, R.string.pref_connectorOCROActive)
                     || isPreference(preference, R.string.pref_connectorGCActive)
                     || isPreference(preference, R.string.pref_connectorECActive)) {
-                // // reset log-in status if connector activation was changed
+                // update summary
+                boolean boolVal = ((Boolean) value).booleanValue();
+                String summary = getServiceSummary(boolVal);
+                if (OCPreferenceKeys.isOCPreference(preference.getKey())) {
+                    OCPreferenceKeys prefKey = OCPreferenceKeys.getByKey(preference.getKey());
+                    preference.getPreferenceManager().findPreference(getKey(prefKey.prefScreenId)).setSummary(summary);
+                } else if (isPreference(preference, R.string.pref_connectorGCActive)) {
+                    preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_gc)).setSummary(summary);
+                } else if (isPreference(preference, R.string.pref_connectorECActive)) {
+                    preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_ec)).setSummary(summary);
+                }
+                redrawScreen(preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_services)));
+                // reset log-in status if connector activation was changed
                 CgeoApplication.getInstance().forceRelog();
             } else if (preference instanceof ListPreference) {
                 // For list preferences, look up the correct display value in
