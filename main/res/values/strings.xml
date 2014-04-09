@@ -1233,6 +1233,7 @@
     <string name="status_new_rc" tools:ignore="UnusedResources">New release candidate available.\nClick to install.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Recent changes on geocaching.com broke c:geo.\nWe are working on it, check again soon.</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Recent changes on geocaching.com broke the live map feature.\nWe are working on it, check again soon.</string>
+    <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com is under maintenance.\nYou might run into various issues.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">You appear to be using a version of Android older than 2.1. Future releases of c:geo might no longer be available for your device.</string>
 
     <!-- text-to-speech for compass view -->
