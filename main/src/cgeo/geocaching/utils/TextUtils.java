@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 public final class TextUtils {
 
     public static final Charset CHARSET_UTF8 = Charset.forName("UTF-8");
+    public static final Charset CHARSET_ASCII = Charset.forName("US-ASCII");
 
     private static final Pattern PATTERN_REMOVE_NONPRINTABLE = Pattern.compile("\\p{Cntrl}");
 

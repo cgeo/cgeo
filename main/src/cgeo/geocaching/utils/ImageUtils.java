@@ -278,7 +278,7 @@ public final class ImageUtils {
     public static void decodeBase64ToStream(final String inString, final OutputStream out) throws IOException {
         Base64InputStream in = null;
         try {
-            in = new Base64InputStream(new ByteArrayInputStream(inString.getBytes()), Base64.DEFAULT);
+            in = new Base64InputStream(new ByteArrayInputStream(inString.getBytes(TextUtils.CHARSET_ASCII)), Base64.DEFAULT);
             IOUtils.copy(in, out);
         } finally {
             IOUtils.closeQuietly(in);
