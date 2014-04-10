@@ -154,7 +154,6 @@ public class SettingsActivity extends PreferenceActivity {
         redrawScreen(R.string.preference_screen_navigation_menu);
     }
 
-    @SuppressWarnings("deprecation")
     private void initServicePreferences() {
         getPreference(R.string.pref_connectorOCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         getPreference(R.string.pref_connectorOCPLActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
@@ -738,6 +737,13 @@ public class SettingsActivity extends PreferenceActivity {
     public void setPreferenceScreen(PreferenceScreen preferenceScreen) {
         // TODO replace with fragment based code
         super.setPreferenceScreen(preferenceScreen);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public PreferenceManager getPreferenceManager() {
+        // TODO replace with fragment based code
+        return super.getPreferenceManager();
     }
 
     private static boolean isPreference(final Preference preference, int preferenceKeyId) {
