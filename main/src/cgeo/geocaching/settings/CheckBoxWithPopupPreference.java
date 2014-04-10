@@ -18,6 +18,7 @@ public class CheckBoxWithPopupPreference extends CheckBoxPreference {
     private String text;
     private String url;
     private String urlButton;
+    private OnPreferenceChangeListener baseOnPrefChangeListener = null;
 
     public CheckBoxWithPopupPreference(Context context) {
         super(context);
@@ -53,10 +54,17 @@ public class CheckBoxWithPopupPreference extends CheckBoxPreference {
     @Override
     protected View onCreateView(ViewGroup parent) {
 
+        if (baseOnPrefChangeListener == null) {
+            baseOnPrefChangeListener = getOnPreferenceChangeListener();
+        }
+
         // show dialog when checkbox enabled
         setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(final Preference preference, Object newValue) {
+                if (baseOnPrefChangeListener != null) {
+                    baseOnPrefChangeListener.onPreferenceChange(preference, newValue);
+                }
                 if (!(Boolean) newValue) {
                     return true;
                 }

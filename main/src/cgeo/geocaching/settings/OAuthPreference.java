@@ -60,7 +60,7 @@ public class OAuthPreference extends AbstractClickablePreference {
 
     @Override
     protected OnPreferenceClickListener getOnPreferenceClickListener(final SettingsActivity activity) {
-        activity.setOcAuthTitle(oAuthMapping.prefKeyId);
+        activity.setAuthTitle(oAuthMapping.prefKeyId);
         return new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
