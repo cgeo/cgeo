@@ -13,7 +13,6 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
-import ch.boye.httpclientandroidlib.androidextra.Base64;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -43,9 +42,6 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Date;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -172,14 +168,15 @@ public class HtmlImage implements Html.ImageGetter {
                 return new ImmutablePair<BitmapDrawable, Boolean>(bitmap != null ?
                         ImageUtils.scaleBitmapToFitDisplay(bitmap) :
                         null,
-                        loadResult.getRight());
+                        loadResult.getRight()
+                );
             }
 
             private void downloadAndSave(final Subscriber<? super BitmapDrawable> subscriber) {
                 final File file = LocalStorage.getStorageFile(pseudoGeocode, url, true, true);
                 if (url.startsWith("data:image/")) {
                     if (url.contains(";base64,")) {
-                        saveBase64ToFile(url, file);
+                        ImageUtils.decodeBase64ToFile(StringUtils.substringAfter(url, ";base64,"), file);
                     } else {
                         Log.e("HtmlImage.getDrawable: unable to decode non-base64 inline image");
                         subscriber.onCompleted();
@@ -252,20 +249,6 @@ public class HtmlImage implements Html.ImageGetter {
             }
         }
         return false;
-    }
-
-    private static void saveBase64ToFile(final String url, final File file) {
-        // TODO: when we use SDK level 8 or above, we can use the streaming version of the base64
-        // Android utilities.
-        OutputStream out = null;
-        try {
-            out = new FileOutputStream(file);
-            out.write(Base64.decode(StringUtils.substringAfter(url, ";base64,"), Base64.DEFAULT));
-        } catch (final IOException e) {
-            Log.e("HtmlImage.saveBase64ToFile: cannot write file for decoded inline image", e);
-        } finally {
-            IOUtils.closeQuietly(out);
-        }
     }
 
     /**

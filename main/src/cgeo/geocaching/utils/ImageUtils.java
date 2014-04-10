@@ -3,6 +3,7 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.compatibility.Compatibility;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -16,11 +17,15 @@ import android.graphics.drawable.BitmapDrawable;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
+import android.util.Base64;
+import android.util.Base64InputStream;
 
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -244,5 +249,39 @@ public final class ImageUtils {
             }
         }
         return false;
+    }
+
+    /**
+     * Decode a base64-encoded string and save the result into a file.
+     *
+     * @param inString the encoded string
+     * @param outFile the file to save the decoded result into
+     */
+    public static void decodeBase64ToFile(final String inString, final File outFile) {
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(outFile);
+            decodeBase64ToStream(inString, out);
+        } catch (final IOException e) {
+            Log.e("HtmlImage.decodeBase64ToFile: cannot write file for decoded inline image", e);
+        } finally {
+            IOUtils.closeQuietly(out);
+        }
+    }
+
+    /**
+     * Decode a base64-encoded string and save the result into a stream.
+     *
+     * @param inString the encoded string
+     * @param outFile the file to save the decoded result into
+     */
+    public static void decodeBase64ToStream(final String inString, final OutputStream out) throws IOException {
+        Base64InputStream in = null;
+        try {
+            in = new Base64InputStream(new ByteArrayInputStream(inString.getBytes()), Base64.DEFAULT);
+            IOUtils.copy(in, out);
+        } finally {
+            IOUtils.closeQuietly(in);
+        }
     }
 }
