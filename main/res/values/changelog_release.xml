@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-     <b>Next legacy release</b>\n
+     <b>2014.04.10-legacy:</b>\n
      <b>Bugfixes:</b>\n
      · Corrected the closeout warning:\n
        Only devices with an Android version below 2.3 are affected\n
