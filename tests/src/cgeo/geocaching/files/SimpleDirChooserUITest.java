@@ -8,11 +8,13 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.suitebuilder.annotation.Suppress;
 import android.widget.CheckBox;
 
 import java.util.ArrayList;
 
 @TargetApi(Build.VERSION_CODES.FROYO)
+@Suppress
 public class SimpleDirChooserUITest extends ActivityInstrumentationTestCase2<SimpleDirChooser> {
 
     private Solo solo;
