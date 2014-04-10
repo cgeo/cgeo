@@ -364,6 +364,15 @@
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Aktivace</string>
   <string name="init_oc_pl_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.pl.</string>
+  <string name="init_oc_nl">Opencaching.nl</string>
+  <string name="settings_activate_oc_nl">Aktivace</string>
+  <string name="init_oc_nl_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.nl.</string>
+  <string name="init_oc_us">Opencaching.us</string>
+  <string name="settings_activate_oc_us">Aktivace</string>
+  <string name="init_oc_us_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.us.</string>
+  <string name="init_oc_ro">Opencaching.ro</string>
+  <string name="settings_activate_oc_ro">Aktivace</string>
+  <string name="init_oc_ro_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.ro.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivace</string>
@@ -528,6 +537,9 @@
   <string name="auth_dialog_completed_twitter">c:geo nyní může posílat zprávy na Tvůj Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
+  <string name="auth_ocnl">opencaching.nl</string>
+  <string name="auth_ocus">opencaching.us</string>
+  <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_dialog_completed_oc">c:geo je nyní autorizováno pro interakce s %s.</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Obnovit</string>
