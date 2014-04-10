@@ -66,6 +66,7 @@
   <string name="log_unarchived">Désarchivée</string>
   <string name="log_needs_archived">Nécessite d\'être archivée</string>
   <string name="log_discovered">Découverte</string>
+  <string name="log_reviewer">Note du relecteur</string>
   <string name="log_submit_for_review">Soumettre pour examen</string>
   <string name="log_retractlisting">Retirer l\'entrée</string>
   <string name="log_marked_missing">Marquer comme absente</string>
@@ -363,6 +364,15 @@
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Activer</string>
   <string name="init_oc_pl_description">Autoriser c:geo à utiliser opencaching.pl pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
+  <string name="init_oc_nl">Opencaching.nl</string>
+  <string name="settings_activate_oc_nl">Activer</string>
+  <string name="init_oc_nl_description">Autoriser c:geo à utiliser opencaching.nl pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
+  <string name="init_oc_us">Opencaching.us</string>
+  <string name="settings_activate_oc_us">Activer</string>
+  <string name="init_oc_us_description">Autoriser c:geo à utiliser opencaching.us pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
+  <string name="init_oc_ro">Opencaching.ro</string>
+  <string name="settings_activate_oc_ro">Activer</string>
+  <string name="init_oc_ro_description">Autoriser c:geo à utiliser opencaching.ro pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activer</string>

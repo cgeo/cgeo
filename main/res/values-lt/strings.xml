@@ -66,6 +66,7 @@
   <string name="log_unarchived">Išarchyvuota</string>
   <string name="log_needs_archived">Reikia archyvuoti</string>
   <string name="log_discovered">Atrastas</string>
+  <string name="log_reviewer">Prižiūrėtojo pastaba</string>
   <string name="log_submit_for_review">Pateikti peržiūrai</string>
   <string name="log_retractlisting">Panaikinti publikavimą</string>
   <string name="log_marked_missing">Pažymėtas dingusiu</string>
