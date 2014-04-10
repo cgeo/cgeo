@@ -6,6 +6,7 @@ package cgeo.geocaching.utils;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.eclipse.jdt.annotation.Nullable;
 
+import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,6 +14,8 @@ import java.util.regex.Pattern;
  * Misc. utils. All methods don't use Android specific stuff to use these methods in plain JUnit tests.
  */
 public final class TextUtils {
+
+    public static final Charset CHARSET_UTF8 = Charset.forName("UTF-8");
 
     private static final Pattern PATTERN_REMOVE_NONPRINTABLE = Pattern.compile("\\p{Cntrl}");
 
