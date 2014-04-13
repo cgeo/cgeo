@@ -10,6 +10,8 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.view.Menu;
 import android.view.SubMenu;
@@ -51,7 +53,7 @@ public class MapProviderFactory {
         return mapSources;
     }
 
-    public static boolean isSameActivity(final MapSource source1, final MapSource source2) {
+    public static boolean isSameActivity(@NonNull final MapSource source1, @NonNull final MapSource source2) {
         final MapProvider provider1 = source1.getMapProvider();
         final MapProvider provider2 = source2.getMapProvider();
         return provider1 == provider2 && provider1.isSameActivity(source1, source2);
@@ -75,6 +77,7 @@ public class MapProviderFactory {
      * @param id the map source id
      * @return the map source, or <tt>null</tt> if <tt>id</tt> does not correspond to a registered map source
      */
+    @Nullable
     public static MapSource getMapSource(int id) {
         for (MapSource mapSource : mapSources) {
             if (mapSource.getNumericalId() == id) {

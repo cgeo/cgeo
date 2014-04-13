@@ -42,6 +42,7 @@ import cgeo.geocaching.utils.Log;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.eclipse.jdt.annotation.NonNull;
 import rx.Scheduler;
 import rx.Subscription;
 import rx.functions.Action1;
@@ -785,15 +786,16 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     /**
      * Restart the current activity if the map provider has changed, or change the map source if needed.
      *
-     * @param mapSource
+     * @param newSource
      *            the new map source, which can be the same as the current one
      * @return true if a restart is needed, false otherwise
      */
-    private boolean changeMapSource(final MapSource mapSource) {
-        final boolean restartRequired = !MapProviderFactory.isSameActivity(MapProviderFactory.getMapSource(currentSourceId), mapSource);
+    private boolean changeMapSource(@NonNull final MapSource newSource) {
+        final MapSource oldSource = MapProviderFactory.getMapSource(currentSourceId);
+        final boolean restartRequired = oldSource == null || !MapProviderFactory.isSameActivity(oldSource, newSource);
 
-        Settings.setMapSource(mapSource);
-        currentSourceId = mapSource.getNumericalId();
+        Settings.setMapSource(newSource);
+        currentSourceId = newSource.getNumericalId();
 
         if (restartRequired) {
             mapRestart();
