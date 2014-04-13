@@ -189,11 +189,13 @@ public final class ImageUtils {
             sampleOptions.inSampleSize = sampleSize;
         }
         final Bitmap decodedImage = BitmapFactory.decodeFile(filePath, sampleOptions);
-        for (int i = 0; i < ORIENTATIONS.length; i++) {
-            if (orientation == ORIENTATIONS[i]) {
-                final Matrix matrix = new Matrix();
-                matrix.postRotate(ROTATION[i]);
-                return Bitmap.createBitmap(decodedImage, 0, 0, decodedImage.getWidth(), decodedImage.getHeight(), matrix, true);
+        if (decodedImage != null) {
+            for (int i = 0; i < ORIENTATIONS.length; i++) {
+                if (orientation == ORIENTATIONS[i]) {
+                    final Matrix matrix = new Matrix();
+                    matrix.postRotate(ROTATION[i]);
+                    return Bitmap.createBitmap(decodedImage, 0, 0, decodedImage.getWidth(), decodedImage.getHeight(), matrix, true);
+                }
             }
         }
         return decodedImage;
