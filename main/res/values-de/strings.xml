@@ -387,6 +387,7 @@
   <string name="init_login_popup_not_authorized">Nicht autorisiert</string>
   <string name="init_login_popup_invalid_timestamp">Lokale Zeit ungültig, Gerätezeit einstellen</string>
   <string name="init_login_popup_invalid_token">Genehmigung ungültig, Neu aktivieren</string>
+  <string name="settings_service_active">Aktiv</string>
   <string name="init_signature">Signatur</string>
   <string name="init_template_help">Platzhalter-Zeichenfolgen wie [NAME] werden später erweitert, wenn diese Vorlage verwendet wird.</string>
   <string name="init_signature_template_button">Platzhalter einfügen</string>

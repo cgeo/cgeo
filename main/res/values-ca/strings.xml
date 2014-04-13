@@ -66,6 +66,7 @@
   <string name="log_unarchived">Desarxivat</string>
   <string name="log_needs_archived">Necessita ser arxivat</string>
   <string name="log_discovered">Descobert</string>
+  <string name="log_reviewer">Nota del revisor</string>
   <string name="log_submit_for_review">Envia per ser revisat</string>
   <string name="log_retractlisting">Retira la pàgina del catxé</string>
   <string name="log_marked_missing">Marcat com a perdut</string>
@@ -363,6 +364,15 @@
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Activa</string>
   <string name="init_oc_pl_description">Autoritza al c:geo a  buscar catxés i accedir/filtrar els teus catxés trobats de opencaching.pl.</string>
+  <string name="init_oc_nl">Opencaching.nl</string>
+  <string name="settings_activate_oc_nl">Activa</string>
+  <string name="init_oc_nl_description">Autoritza al c:geo a opencaching.pl per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
+  <string name="init_oc_us">Opencaching.us</string>
+  <string name="settings_activate_oc_us">Activa</string>
+  <string name="init_oc_us_description">Autoritza al c:geo a opencaching.us per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
+  <string name="init_oc_ro">Opencaching.ro</string>
+  <string name="settings_activate_oc_ro">Activa</string>
+  <string name="init_oc_ro_description">Autoritza al c:geo a opencaching.ro per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activa</string>
@@ -527,6 +537,9 @@
   <string name="auth_dialog_completed_twitter">El c:geo ara està autoritzat a publicar al Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
+  <string name="auth_ocnl">opencaching.nl</string>
+  <string name="auth_ocus">opencaching.us</string>
+  <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_dialog_completed_oc">El c:geo ara està autoritzat a interactuar amb %s.</string>
   <string name="cache_offline">Fora de línia</string>
   <string name="cache_offline_refresh">Actualitza</string>
