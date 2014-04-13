@@ -2891,7 +2891,9 @@ public class DataStore {
         for (int i = 0; i < WAYPOINT_COLUMNS.length; i++) {
             query.append(i > 0 ? ", " : "").append(dbTableWaypoints).append('.').append(WAYPOINT_COLUMNS[i]).append(' ');
         }
-        query.append(" FROM ").append(dbTableWaypoints).append(", ").append(dbTableCaches).append(" WHERE ").append(dbTableWaypoints).append(".geocode == ").append(dbTableCaches).append(".geocode and ").append(where);
+        query.append(" FROM ").append(dbTableWaypoints).append(", ").append(dbTableCaches).append(" WHERE ").append(dbTableWaypoints)
+                .append(".geocode == ").append(dbTableCaches).append(".geocode and ").append(where)
+                .append(" LIMIT " + (Settings.SHOW_WP_THRESHOLD_MAX * 2));  // Hardcoded limit to avoid memory overflow
 
         return cursorToColl(database.rawQuery(query.toString(), null), new HashSet<Waypoint>(), new Func1<Cursor, Waypoint>() {
             @Override
