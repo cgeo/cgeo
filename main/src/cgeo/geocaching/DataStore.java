@@ -20,6 +20,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MiscUtils;
 import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -1312,7 +1313,7 @@ public class DataStore {
      */
     private static void removeOutdatedWaypointsOfCache(final @NonNull Geocache cache, final @NonNull Collection<String> remainingWaypointIds) {
         final String idList = StringUtils.join(remainingWaypointIds, ',');
-        database.delete(dbTableWaypoints, "geocode = ? AND _id NOT in (" + idList + ")", new String[] { cache.getGeocode() });
+        database.delete(dbTableWaypoints, "geocode = ? AND _id NOT in (" + idList + ")", new String[]{cache.getGeocode()});
     }
 
     /**
@@ -1557,8 +1558,8 @@ public class DataStore {
             return new HashSet<Geocache>();
         }
 
-        Set<Geocache> result = new HashSet<Geocache>();
-        Set<String> remaining = new HashSet<String>(geocodes);
+        final Set<Geocache> result = new HashSet<Geocache>();
+        final List<String> remaining = new LinkedList<String>(geocodes);
 
         if (loadFlags.contains(LoadFlag.LOAD_CACHE_BEFORE)) {
             for (String geocode : new HashSet<String>(remaining)) {
@@ -1578,7 +1579,7 @@ public class DataStore {
                 loadFlags.contains(LoadFlag.LOAD_INVENTORY) ||
                 loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
 
-            final Set<Geocache> cachesFromDB = loadCachesFromGeocodes(remaining, loadFlags);
+            final Collection<Geocache> cachesFromDB = loadCachesFromGeocodes(remaining, loadFlags);
             result.addAll(cachesFromDB);
             for (final Geocache cache : cachesFromDB) {
                 remaining.remove(cache.getGeocode());
@@ -1604,15 +1605,11 @@ public class DataStore {
     /**
      * Load caches.
      *
-     * @param geocodes
+     * @param allGeocodes
      * @param loadFlags
      * @return Set of loaded caches. Never null.
      */
-    private static Set<Geocache> loadCachesFromGeocodes(final Set<String> geocodes, final EnumSet<LoadFlag> loadFlags) {
-        if (CollectionUtils.isEmpty(geocodes)) {
-            return Collections.emptySet();
-        }
-
+    private static Collection<Geocache> loadCachesFromGeocodes(final List<String> allGeocodes, final EnumSet<LoadFlag> loadFlags) {
         // do not log the entire collection of geo codes to the debug log. This can be more than 100 KB of text for large lists!
         init();
 
@@ -1627,68 +1624,73 @@ public class DataStore {
         }
 
         query.append(" WHERE ").append(dbTableCaches).append('.');
-        query.append(DataStore.whereGeocodeIn(geocodes));
 
-        Cursor cursor = database.rawQuery(query.toString(), null);
-        try {
-            final Set<Geocache> caches = new HashSet<Geocache>();
-            int logIndex = -1;
+        final String queryBegin = query.toString();
+        final List<Geocache> result = new ArrayList<Geocache>(allGeocodes.size());
 
-            while (cursor.moveToNext()) {
-                Geocache cache = DataStore.createCacheFromDatabaseContent(cursor);
+        for (List<String> geocodes: MiscUtils.buffer(allGeocodes, 50)) {
+            final Cursor cursor = database.rawQuery(queryBegin + DataStore.whereGeocodeIn(geocodes), null);
+            try {
+                final Set<Geocache> caches = new HashSet<Geocache>();
+                int logIndex = -1;
 
-                if (loadFlags.contains(LoadFlag.LOAD_ATTRIBUTES)) {
-                    cache.setAttributes(loadAttributes(cache.getGeocode()));
-                }
+                while (cursor.moveToNext()) {
+                    final Geocache cache = DataStore.createCacheFromDatabaseContent(cursor);
 
-                if (loadFlags.contains(LoadFlag.LOAD_WAYPOINTS)) {
-                    final List<Waypoint> waypoints = loadWaypoints(cache.getGeocode());
-                    if (CollectionUtils.isNotEmpty(waypoints)) {
-                        cache.setWaypoints(waypoints, false);
+                    if (loadFlags.contains(LoadFlag.LOAD_ATTRIBUTES)) {
+                        cache.setAttributes(loadAttributes(cache.getGeocode()));
                     }
-                }
 
-                if (loadFlags.contains(LoadFlag.LOAD_SPOILERS)) {
-                    final List<Image> spoilers = loadSpoilers(cache.getGeocode());
-                    cache.setSpoilers(spoilers);
-                }
-
-                if (loadFlags.contains(LoadFlag.LOAD_LOGS)) {
-                    cache.setLogs(loadLogs(cache.getGeocode()));
-                    final Map<LogType, Integer> logCounts = loadLogCounts(cache.getGeocode());
-                    if (MapUtils.isNotEmpty(logCounts)) {
-                        cache.getLogCounts().clear();
-                        cache.getLogCounts().putAll(logCounts);
-                    }
-                }
-
-                if (loadFlags.contains(LoadFlag.LOAD_INVENTORY)) {
-                    final List<Trackable> inventory = loadInventory(cache.getGeocode());
-                    if (CollectionUtils.isNotEmpty(inventory)) {
-                        if (cache.getInventory() == null) {
-                            cache.setInventory(new ArrayList<Trackable>());
-                        } else {
-                            cache.getInventory().clear();
+                    if (loadFlags.contains(LoadFlag.LOAD_WAYPOINTS)) {
+                        final List<Waypoint> waypoints = loadWaypoints(cache.getGeocode());
+                        if (CollectionUtils.isNotEmpty(waypoints)) {
+                            cache.setWaypoints(waypoints, false);
                         }
-                        cache.getInventory().addAll(inventory);
                     }
-                }
 
-                if (loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
-                    if (logIndex < 0) {
-                        logIndex = cursor.getColumnIndex("log");
+                    if (loadFlags.contains(LoadFlag.LOAD_SPOILERS)) {
+                        final List<Image> spoilers = loadSpoilers(cache.getGeocode());
+                        cache.setSpoilers(spoilers);
                     }
-                    cache.setLogOffline(!cursor.isNull(logIndex));
-                }
-                cache.addStorageLocation(StorageLocation.DATABASE);
-                cacheCache.putCacheInCache(cache);
 
-                caches.add(cache);
+                    if (loadFlags.contains(LoadFlag.LOAD_LOGS)) {
+                        cache.setLogs(loadLogs(cache.getGeocode()));
+                        final Map<LogType, Integer> logCounts = loadLogCounts(cache.getGeocode());
+                        if (MapUtils.isNotEmpty(logCounts)) {
+                            cache.getLogCounts().clear();
+                            cache.getLogCounts().putAll(logCounts);
+                        }
+                    }
+
+                    if (loadFlags.contains(LoadFlag.LOAD_INVENTORY)) {
+                        final List<Trackable> inventory = loadInventory(cache.getGeocode());
+                        if (CollectionUtils.isNotEmpty(inventory)) {
+                            if (cache.getInventory() == null) {
+                                cache.setInventory(new ArrayList<Trackable>());
+                            } else {
+                                cache.getInventory().clear();
+                            }
+                            cache.getInventory().addAll(inventory);
+                        }
+                    }
+
+                    if (loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
+                        if (logIndex < 0) {
+                            logIndex = cursor.getColumnIndex("log");
+                        }
+                        cache.setLogOffline(!cursor.isNull(logIndex));
+                    }
+                    cache.addStorageLocation(StorageLocation.DATABASE);
+                    cacheCache.putCacheInCache(cache);
+
+                    caches.add(cache);
+                }
+                result.addAll(caches);
+            } finally {
+                cursor.close();
             }
-            return caches;
-        } finally {
-            cursor.close();
         }
+        return result;
     }
 
 
