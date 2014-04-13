@@ -146,7 +146,7 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
         new Keyboard(this).show(view);
     }
 
-    protected void buildDetailsContextMenu(final ContextMenu menu, final CharSequence clickedItemText, final String fieldTitle, final boolean copyOnly) {
+    protected void buildDetailsContextMenu(final ContextMenu menu, final CharSequence clickedItemText, final CharSequence fieldTitle, final boolean copyOnly) {
         menu.setHeaderTitle(fieldTitle);
         getMenuInflater().inflate(R.menu.details_context, menu);
         menu.findItem(R.id.menu_translate_to_sys_lang).setVisible(!copyOnly);

@@ -357,7 +357,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             case R.id.value: // coordinates, gc-code, name
                 assert view instanceof TextView;
                 clickedItemText = ((TextView) view).getText();
-                final String itemTitle = (String) ((TextView) ((View) view.getParent()).findViewById(R.id.name)).getText();
+                final CharSequence itemTitle = ((TextView) ((View) view.getParent()).findViewById(R.id.name)).getText();
                 buildDetailsContextMenu(menu, clickedItemText, itemTitle, true);
                 break;
             case R.id.shortdesc:
