@@ -1179,11 +1179,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         @Override
         public void run() {
-            final long startTime = System.currentTimeMillis();
+            long baseTime = System.currentTimeMillis();
 
             final String deviceCode = StringUtils.defaultString(Settings.getWebDeviceCode());
             final Parameters params = new Parameters("code", deviceCode);
-            while (!handler.isCancelled() && System.currentTimeMillis() - startTime < 3 * 60000) { // maximum: 3 minutes
+            while (!handler.isCancelled() && System.currentTimeMillis() - baseTime < 3 * 60000) { // maximum: 3 minutes
                 // Download new code
                 final HttpResponse responseFromWeb = Network.getRequest("http://send2.cgeo.org/read.html", params);
 
@@ -1195,6 +1195,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         Geocache.storeCache(null, response, listIdLFW, false, null);
 
                         handler.sendMessage(handler.obtainMessage(MSG_LOADED, response));
+                        baseTime = System.currentTimeMillis();
                     } else if ("RG".equals(response)) {
                         //Server returned RG (registration) and this device no longer registered.
                         Settings.setWebNameCode(null, null);
