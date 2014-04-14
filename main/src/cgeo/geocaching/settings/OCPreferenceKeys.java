@@ -29,13 +29,13 @@ public enum OCPreferenceKeys {
             R.string.pref_ocro_tokenpublic, R.string.pref_ocro_tokensecret, OCAuthParams.OC_RO_AUTH_PARAMS);
 
 
-    private OCPreferenceKeys(final String siteId, final int isActivePrefId, final int prefScreenId, final int websitePrefId,
-            final int authPrefId, final int publicTokenPrefId, final int privateTokenPrefId, final OCAuthParams authParams) {
+    private OCPreferenceKeys(final String siteId, final int isActivePrefId, final int prefScreenId, final int authPrefId,
+            final int websitePrefId, final int publicTokenPrefId, final int privateTokenPrefId, final OCAuthParams authParams) {
         this.siteId = siteId;
         this.isActivePrefId = isActivePrefId;
         this.prefScreenId = prefScreenId;
-        this.websitePrefId = websitePrefId;
         this.authPrefId = authPrefId;
+        this.websitePrefId = websitePrefId;
         this.publicTokenPrefId = publicTokenPrefId;
         this.privateTokenPrefId = privateTokenPrefId;
         this.authParams = authParams;
