@@ -66,6 +66,7 @@
   <string name="log_unarchived">Desarquivada</string>
   <string name="log_needs_archived">Precisa de arquivamento</string>
   <string name="log_discovered">Descoberta</string>
+  <string name="log_reviewer">Nota de revisão</string>
   <string name="log_submit_for_review">Enviar para revisão</string>
   <string name="log_retractlisting">Retirar Lista</string>
   <string name="log_marked_missing">Marcado em falta</string>
@@ -363,6 +364,15 @@
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Activar</string>
   <string name="init_oc_pl_description">Autorizar c:geo com opencaching.pl para pesquisar por caches e aceder/filtrar as suas caches encontradas.</string>
+  <string name="init_oc_nl">Opencaching.nl</string>
+  <string name="settings_activate_oc_nl">Activar</string>
+  <string name="init_oc_nl_description">Permitir que c:geo pesquise, aceda e filtre as suas caches encontradas em opencaching.pl.</string>
+  <string name="init_oc_us">Opencaching.us</string>
+  <string name="settings_activate_oc_us">Activar</string>
+  <string name="init_oc_us_description">Permitir que c:geo pesquise, aceda e filtre as suas caches encontradas em opencaching.us.</string>
+  <string name="init_oc_ro">Opencaching.ro</string>
+  <string name="settings_activate_oc_ro">Activar</string>
+  <string name="init_oc_ro_description">Permitir que c:geo pesquise, aceda e filtre as suas caches encontradas em opencaching.ro.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activar</string>
@@ -377,6 +387,7 @@
   <string name="init_login_popup_not_authorized">Não autorizado</string>
   <string name="init_login_popup_invalid_timestamp">Hora local inválida, altere a hora do aparelho</string>
   <string name="init_login_popup_invalid_token">Autorização inválida, re-autorizar</string>
+  <string name="settings_service_active">Activo</string>
   <string name="init_signature">Assinatura</string>
   <string name="init_template_help">Sequências de caracteres como [nome] serão expandidas mais tarde quando este formato for usado.</string>
   <string name="init_signature_template_button">Inserir modelo</string>
@@ -1107,6 +1118,7 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">Nova \'release candidate\' disponível .\nClique para instalar.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Alterações recentes em geocaching.com fizeram com que c:geo funcione mal.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Alterações recentes em geocaching.com fizeram com o mapa ao vivo não funcione bem.\nEstamos a trabalhar nisto, verifique de novo mais tarde.</string>
+  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com está em manutenção.\nPode encontrar algumas dificuldades de comunicação.</string>
   <string name="status_closeout_warning" tools:ignore="UnusedResources">Parece estar a utilizar uma versão do Android inferior a 2.1. Futuras versões do c: geo podem deixar de ficar disponíveis para o seu dispositivo.</string>
   <string name="tts_service">Bússola que fala</string>
   <string name="tts_start">Comece a falar</string>

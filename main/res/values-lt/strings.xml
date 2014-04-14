@@ -383,6 +383,7 @@
   <string name="init_login_popup_not_authorized">Prisijungimas neleistinas</string>
   <string name="init_login_popup_invalid_timestamp">Neteisingas vietinis laikas, nustatykite prietaiso laiką</string>
   <string name="init_login_popup_invalid_token">Blogas prisijungimo leidimas, leiskite prisijungti dar kartą</string>
+  <string name="settings_service_active">Aktyvuota</string>
   <string name="init_signature">Parašas</string>
   <string name="init_template_help">Tokie kodai kaip [NAME] bus vėliau išskleidžiami, kai juos panaudosite įrašuose.</string>
   <string name="init_signature_template_button">Įterpti šabloną</string>
@@ -1104,11 +1105,12 @@
   <string name="nutshellmanual">Vadovas: <a href="">c:geo in a Nutshell</a></string>
   <string name="market">Android: <a href="">c:geo on Google Play</a></string>
   <string name="about_twitter">Kaskart registruojant slėptuvę <b>c:geo</b> paskelbs nauja statusą Twitter paskyroje.</string>
-  <string name="status_new_release" tools:ignore="UnusedResources">Galima nauja versija. \nSpauskite kad įdiegti.</string>
-  <string name="status_new_nightly" tools:ignore="UnusedResources">Galima nauja naktinė versija.\nSpauskite kad įdiegti.</string>
-  <string name="status_new_rc" tools:ignore="UnusedResources">Galima nauja versija. \nSpauskite kad įdiegti.</string>
+  <string name="status_new_release" tools:ignore="UnusedResources">Galima nauja versija. \nPaspauskite čia ir įdiekite.</string>
+  <string name="status_new_nightly" tools:ignore="UnusedResources">Galima nauja naktinė versija.\nPaspauskite čia ir įdiekite.</string>
+  <string name="status_new_rc" tools:ignore="UnusedResources">Galima nauja versija. \nPaspauskite čia ir įdiekite.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Geocaching.com svetainės pakeitimai sugadino c:geo.\nMes tai tvarkome, patikrinkite tai vėliau.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Geocaching.com svetainės pakeitimai sugadino tiesioginio žemėlapio funkcijas.\nMes tai tvarkome, patikrinkite tai vėliau.</string>
+  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com tinklapyje vyksta priežiūros darbai.\nJums gali kilti įvairių problemų.</string>
   <string name="status_closeout_warning" tools:ignore="UnusedResources">Panašu, kad jūs naudojate senesnė nei 2.1 Android versiją. Ateityje c:geo gali nebeveikti jūsų prietaise.</string>
   <string name="tts_service">Kalbantis kompasas</string>
   <string name="tts_start">Kalbėti</string>

@@ -387,6 +387,7 @@
   <string name="init_login_popup_not_authorized">Niet geautoriseerd</string>
   <string name="init_login_popup_invalid_timestamp">Lokale tijd ongeldig, pas apparaat tijd aan</string>
   <string name="init_login_popup_invalid_token">Autorisatie ongeldig, opnieuw autoriseren</string>
+  <string name="settings_service_active">Actief</string>
   <string name="init_signature">Handtekening</string>
   <string name="init_template_help">Samenvoeg velden zoals [NAME] worden later ingevuld bij gebruik van deze sjabloon.</string>
   <string name="init_signature_template_button">Voeg template toe</string>
