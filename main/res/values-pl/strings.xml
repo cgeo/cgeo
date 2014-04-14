@@ -66,6 +66,7 @@
   <string name="log_unarchived">Nie jest zarchiwizowana</string>
   <string name="log_needs_archived">Powinna zostać zarchiwizowana</string>
   <string name="log_discovered">Odkryta</string>
+  <string name="log_reviewer">Notatka z przeglądu</string>
   <string name="log_submit_for_review">Wyślij do przeglądu</string>
   <string name="log_retractlisting">Wycofaj listing</string>
   <string name="log_marked_missing">Oznacz jako zaginiona</string>
@@ -363,6 +364,12 @@
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Aktywuj</string>
   <string name="init_oc_pl_description">Autoryzuj c:geo z opencaching.pl aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
+  <string name="settings_activate_oc_nl">Aktywuj</string>
+  <string name="init_oc_nl_description">Autoryzuj c:geo z opencaching.nl aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
+  <string name="settings_activate_oc_us">Aktywuj</string>
+  <string name="init_oc_us_description">Autoryzuj c:geo z opencaching.us aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
+  <string name="settings_activate_oc_ro">Aktywuj</string>
+  <string name="init_oc_ro_description">Autoryzuj c:geo z opencaching.ro aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktywuj</string>
@@ -377,6 +384,7 @@
   <string name="init_login_popup_not_authorized">Brak autoryzacji</string>
   <string name="init_login_popup_invalid_timestamp">Czas lokalny nieprawidłowy, ustaw właściwy czas urządzenia</string>
   <string name="init_login_popup_invalid_token">Autoryzacja nieprawidłowa, spróbuj ponownie</string>
+  <string name="settings_service_active">Aktywna</string>
   <string name="init_signature">Podpis</string>
   <string name="init_template_help">Tagi jak np. [NAZWA] będą używane w przyszłości.</string>
   <string name="init_signature_template_button">Wstaw szablon</string>
@@ -538,7 +546,7 @@
   <string name="cache_offline_time_mins">minut temu</string>
   <string name="cache_offline_time_mins_few">przed kilkoma minutami</string>
   <string name="cache_offline_time_hour">przed jedną godziną</string>
-  <string name="cache_offline_time_hours">przed godzinami</string>
+  <string name="cache_offline_time_hours">godzin temu</string>
   <string name="cache_offline_time_days">dni temu</string>
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Atrybuty</string>
@@ -1107,6 +1115,7 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">Dostępny nowy kandydat na nową wersję.\nKliknij aby zainstalować.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły c:geo.\nPracujemy nad tym, sprawdź ponownie niedługo.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ostatnie zmiany na geocaching.com popsuły funkcjonalność map online.\nPracujemy nad tym, sprawdź ponownie niedługo.</string>
+  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com jest w trakcie konserwacji.\nMogą wystąpić różnorodne problemy.</string>
   <string name="status_closeout_warning" tools:ignore="UnusedResources">Wygląda, że używasz wersji Android starszej niż 2.1. Następne wydania c:geo mogą być niedostępne dla Twojego urządzenia.</string>
   <string name="tts_service">Mówiący kompas</string>
   <string name="tts_start">Zacznij mówić</string>
