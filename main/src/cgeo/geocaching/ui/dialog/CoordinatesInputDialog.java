@@ -359,7 +359,8 @@ public class CoordinatesInputDialog extends NoTitleDialog {
                         current = new Geopoint(latDir, latDeg, latMin, latSec, latSecFrac, lonDir, lonDeg, lonMin, lonSec, lonSecFrac);
                         break;
                     case Plain:
-                        // This case has been handled above
+                        // This case has been handled above. Help FindBugs by asserting that current cannot be null even here
+                        assert current != null;
                 }
             }
             if (current.isValid()) {
