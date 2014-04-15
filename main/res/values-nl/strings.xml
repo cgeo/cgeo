@@ -538,6 +538,9 @@
   <string name="auth_dialog_completed_twitter">c:geo is nu gekoppeld met Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
+  <string name="auth_ocnl">opencaching.nl</string>
+  <string name="auth_ocus">opencaching.us</string>
+  <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_dialog_completed_oc">c:geo is nu gekoppeld met %s.</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Verversen</string>
@@ -1118,6 +1121,7 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">Nieuwe release-candidaad beschikbaar.\nTik om te installeren.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Recente aanpassingen op geocaching.com zorgen dat c:geo niet meer (100%) correct werkt.\nWe werken aan het probleem, controleer binnenkort nogmaals.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Recente aanpassingen op geocaching.com zorgen dat de live-kaart niet meer werkt.\nWe werken aan het probleem, controleer binnenkort nogmaals.</string>
+  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com is in onderhoud.\nJe kan verschillende problemen ondervinden.</string>
   <string name="status_closeout_warning" tools:ignore="UnusedResources">U lijkt gebruik te maken van een versie van Android ouder dan 2.1. Toekomstige versies van c:geo zijn mogelijk niet meer beschikbaar voor uw apparaat.</string>
   <string name="tts_service">Pratend kompas</string>
   <string name="tts_start">Begin met praten</string>
