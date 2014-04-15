@@ -572,4 +572,31 @@ public final class Geopoint implements ICoordinates, Parcelable {
         return angdeg * DEG_TO_RAD;
     }
 
+    /**
+     * Check whether a latitude built from user supplied data is valid. We accept both N90/S90.
+     *
+     * @return <tt>true</tt> if the latitude looks valid, <tt>false</tt> otherwise
+     */
+    public static boolean isValidLatitude(final double latitude) {
+        return latitude >= -90 && latitude <= 90;
+    }
+
+    /**
+     * Check whether a lo bngitudeuilt from user supplied data is valid. We accept both E180/W180.
+     *
+     * @return <tt>true</tt> if the longitude looks valid, <tt>false</tt> otherwise
+     */
+    public static boolean isValidLongitude(final double longitude) {
+        return longitude >= -180 && longitude <= 180;
+    }
+
+    /**
+     * Check whether a geopoint built from user supplied data is valid. We accept both N90/S90 and E180/W180.
+     *
+     * @return <tt>true</tt> if the geopoint looks valid, <tt>false</tt> otherwise
+     */
+    public boolean isValid() {
+        return isValidLatitude(latitude) && isValidLongitude(longitude);
+    }
+
 }
