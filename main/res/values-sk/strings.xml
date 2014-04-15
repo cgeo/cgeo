@@ -364,6 +364,15 @@
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Aktivovať</string>
   <string name="init_oc_pl_description">Povoliť c:geo s opencaching.pl na vyhľadávanie keší a zoznam/filter nájdených keší.</string>
+  <string name="init_oc_nl">Opencaching.nl</string>
+  <string name="settings_activate_oc_nl">Aktivovať</string>
+  <string name="init_oc_nl_description">Povoliť c:geo s opencaching.nl na vyhľadávanie keší a zoznam/filter nájdených keší.</string>
+  <string name="init_oc_us">Opencaching.us</string>
+  <string name="settings_activate_oc_us">Aktivovať</string>
+  <string name="init_oc_us_description">Povoliť c:geo s opencaching.us na vyhľadávanie keší a zoznam/filter nájdených keší.</string>
+  <string name="init_oc_ro">Opencaching.ro</string>
+  <string name="settings_activate_oc_ro">Aktivovať</string>
+  <string name="init_oc_ro_description">Povoliť c:geo s opencaching.ro na vyhľadávanie keší a zoznam/filter nájdených keší.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivovať</string>
@@ -378,6 +387,7 @@
   <string name="init_login_popup_not_authorized">Nie je povolené</string>
   <string name="init_login_popup_invalid_timestamp">Neplatný miestny čas, nastav čas zariadenia</string>
   <string name="init_login_popup_invalid_token">Neplatné prihlásenie, prihláste sa znovu</string>
+  <string name="settings_service_active">Aktívne</string>
   <string name="init_signature">Podpis</string>
   <string name="init_template_help">Zástupný znak reťazca ako [NAME] sa realizuje neskôr keď použijete túto šablónu.</string>
   <string name="init_signature_template_button">Vložiť šablónu</string>
@@ -1108,6 +1118,7 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">Je dostupná nová verzia „release candidate“.\nKliknite pre inštaláciu.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Nedávne zmeny na geocaching.com znefunkčnili c:geo.\nPracujeme na tom, skúste skontrolovať aktualizácie onedlho.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nedávne zmeny na geocaching.com znefunkčnili aktívnu mapu.\nPracujeme na tom, skúste skontrolovať aktualizácie onedlho.</string>
+  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Prebieha údržba na Geocaching.com \n Môžu nastať rôzne problémy.</string>
   <string name="status_closeout_warning" tools:ignore="UnusedResources">Zdá sa, že používate verziu Android staršiu ako 2.1. Budúce verzie z c:geo už nemusia byť k dispozícii pre vaše zariadenie.</string>
   <string name="tts_service">Hovoriacy kompas</string>
   <string name="tts_start">Začať hovoriť</string>

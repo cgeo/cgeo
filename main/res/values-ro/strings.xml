@@ -66,6 +66,7 @@
   <string name="log_unarchived">Dezarhivată</string>
   <string name="log_needs_archived">Ar trebui arhivată</string>
   <string name="log_discovered">Descoperit</string>
+  <string name="log_reviewer">Observaţii cenzor</string>
   <string name="log_submit_for_review">Trimite pentru aprobare</string>
   <string name="log_retractlisting">Retrage cutie</string>
   <string name="log_marked_missing">Marcat \"pierdut\"</string>
@@ -386,6 +387,7 @@
   <string name="init_login_popup_not_authorized">Neautorizat</string>
   <string name="init_login_popup_invalid_timestamp">Ora dispozitivului nu este validă, reglaţi data şi ora</string>
   <string name="init_login_popup_invalid_token">Autorizare invalidă, încercaţi din nou</string>
+  <string name="settings_service_active">Activ</string>
   <string name="init_signature">Semnătură</string>
   <string name="init_template_help">Denumirile delimitate precum [NAME] vor fi înlocuite ulterior atunci când acest şablon va fi folosit.</string>
   <string name="init_signature_template_button">Introdu şablon</string>
@@ -1118,6 +1120,7 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">A apărut o un candidat pentru o versiune nouă.\nApasă aici pentru a instala.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Modificările recente de pe geocaching.com fac c:geo nefuncţional.\nLucrăm la asta, revin-o.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Modificările recente de pe geocaching.com fac harta nefuncţională.\nLucrăm la asta, revin-o.</string>
+  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Se efectuează lucrări de întreţinere la geocaching.com.\nEste posibil ca în această perioadă să apară diverse probleme.</string>
   <string name="status_closeout_warning" tools:ignore="UnusedResources">Foloseşti o versiune de Android mai veche de 2.1. Versiuni ulterioare a c:geo s-ar putea să nu mai fie disponibile pentru dispozitivul tău.</string>
   <string name="tts_service">Busolă vorbitoare</string>
   <string name="tts_start">Vorbeşte</string>

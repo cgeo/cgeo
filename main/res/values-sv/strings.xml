@@ -364,6 +364,15 @@
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Aktivera</string>
   <string name="init_oc_pl_description">Använd c:geo med opencaching.pl för att söka efter cacher samt för att filtrera dina funna cacher.</string>
+  <string name="init_oc_nl">Opencaching.nl</string>
+  <string name="settings_activate_oc_nl">Aktivera</string>
+  <string name="init_oc_nl_description">Använd c:geo med opencaching.nl för att söka efter cacher samt för att filtrera dina funna cacher.</string>
+  <string name="init_oc_us">Opencaching.us</string>
+  <string name="settings_activate_oc_us">Aktivera</string>
+  <string name="init_oc_us_description">Använd c:geo med opencaching.us för att söka efter cacher samt för att filtrera dina funna cacher.</string>
+  <string name="init_oc_ro">Opencaching.ro</string>
+  <string name="settings_activate_oc_ro">Aktivera</string>
+  <string name="init_oc_ro_description">Använd c:geo med opencaching.ro för att söka efter cacher samt för att filtrera dina funna cacher.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivera</string>
@@ -378,6 +387,7 @@
   <string name="init_login_popup_not_authorized">Ej godkänd</string>
   <string name="init_login_popup_invalid_timestamp">Lokal tid ogiltig, justera enhetens tid</string>
   <string name="init_login_popup_invalid_token">Tillstånd misslyckades, försök igen</string>
+  <string name="settings_service_active">Aktiv</string>
   <string name="init_signature">Signatur</string>
   <string name="init_template_help">Markörer som [NAME] kommer att utvidgas senare när mallen används.</string>
   <string name="init_signature_template_button">Infoga makro</string>
@@ -528,6 +538,9 @@
   <string name="auth_dialog_completed_twitter">c:geo är nu godkänd att posta på Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
+  <string name="auth_ocnl">opencaching.nl</string>
+  <string name="auth_ocus">opencaching.us</string>
+  <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_dialog_completed_oc">c:geo är nu godkänd för att kommunicera med %s.</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Uppdatera</string>
@@ -1108,6 +1121,7 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">Ny kandidat till officiellt bygge finns tillgängligt.\nKlicka för att installera.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Ändringar som gjorts på geocaching.com har gjort så att c:geo inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Ändringar som gjorts på geocaching.com har gjort så att Live kartan inte fungerar.\nVi jobbar för att lösa problemen, försök igen om en stund.</string>
+  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com utför underhåll.\nDu kan råka ut för olika problem.</string>
   <string name="status_closeout_warning" tools:ignore="UnusedResources">Du verkar använda en version av Android som är äldre än 2.1. Framtida versioner av c:geo kommer troligtvis inte fungera på din telefon.</string>
   <string name="tts_service">Talande kompass</string>
   <string name="tts_start">Starta tal</string>

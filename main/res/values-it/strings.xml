@@ -363,7 +363,13 @@
   <string name="init_oc_de_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.de</string>
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Attiva</string>
-  <string name="init_oc_pl_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.de.</string>
+  <string name="init_oc_pl_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.pl.</string>
+  <string name="settings_activate_oc_nl">Attiva</string>
+  <string name="init_oc_nl_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.nl.</string>
+  <string name="settings_activate_oc_us">Attiva</string>
+  <string name="init_oc_us_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.us.</string>
+  <string name="settings_activate_oc_ro">Attiva</string>
+  <string name="init_oc_ro_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.ro.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Attiva</string>
@@ -378,6 +384,7 @@
   <string name="init_login_popup_not_authorized">Non autorizzato</string>
   <string name="init_login_popup_invalid_timestamp">Ora locale non valida, regolare l\'orologio del dispositivo</string>
   <string name="init_login_popup_invalid_token">Autorizzazione non valida, ri-autorizzare</string>
+  <string name="settings_service_active">Attiva</string>
   <string name="init_signature">Firma</string>
   <string name="init_template_help">Stringhe segnaposto come [NAME] saranno espanse più tardi, quando verrà utilizzato questo modello.</string>
   <string name="init_signature_template_button">Stringhe speciali</string>
@@ -1108,6 +1115,7 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">Una nuova release candidate è disponibile.\nClicca per installarla.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato c:geo.\nCi stiamo lavorando, riprova più tardi.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Modifiche recenti al sito geocaching hanno disattivato la mappa live.\nCi stiamo lavorando, riprova più tardi.</string>
+  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com è sotto manutenzione. \nCi potrebbero essere dei problemi di collegamento.</string>
   <string name="status_closeout_warning" tools:ignore="UnusedResources">Sembra che tu stia utilizzando una versione di Android precedente alla 2.1. Le future versioni di c:geo potrebbero non supportare il tuo dispositivo.</string>
   <string name="tts_service">Bussola parlante</string>
   <string name="tts_start">Start voce</string>

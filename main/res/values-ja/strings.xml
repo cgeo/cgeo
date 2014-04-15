@@ -37,6 +37,8 @@
   <string name="cache_size_virtual">バーチャル</string>
   <string name="cache_size_notchosen">未選択</string>
   <string name="cache_size_unknown">不明</string>
+  <string name="cache_size_nano">ナノ</string>
+  <string name="cache_size_very_large">ベリーラージ</string>
   <string name="wp_final">最終座標</string>
   <string name="wp_stage">マルチキャッシュのステージ</string>
   <string name="wp_puzzle">質問に対する答え</string>
@@ -122,6 +124,7 @@
   <string name="err_none">OK</string>
   <string name="err_parse">ログインページの解析に失敗しました</string>
   <string name="err_server">Geocaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません。</string>
+  <string name="err_server_ec">Extremcaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません。</string>
   <string name="err_login">ログイン情報が保存されていません</string>
   <string name="err_login_failed_toast">ログインできません。保存済みキャッシュのみでオフラインで動作します。 ログインの設定を確認したりネット接続を有効にしてください。</string>
   <string name="err_unknown">未知のエラー</string>
@@ -174,6 +177,7 @@
   <string name="err_log_load_data_again">ログを書くのに必要なデータをロードすることができません。もう一度やってみてください。</string>
   <string name="err_log_load_data_still">ログを投稿するのに必要なデータをまだロード中です。もう少しお待ちください。</string>
   <string name="err_log_post_failed">ログを投稿することができなかったようです。Geocaching.comで確認してください。</string>
+  <string name="err_log_post_failed_ec">ログを投稿することができなかったようです。Extremcaching.comで確認してください。</string>
   <string name="err_logimage_post_failed">ログの添付画像がアップロードされなかったようです。Geocaching.comで確認してください。</string>
   <string name="err_search_address_forgot">c:geo forgot the address you tried to find.</string>
   <string name="err_parse_lat">緯度の解析ができません。</string>
@@ -217,6 +221,7 @@
   <string name="menu_history">履歴</string>
   <string name="menu_filter">フィルター</string>
   <string name="menu_scan_geo">QRコードスキャン</string>
+  <string name="menu_scan_description">QRコードにしたGCコードをスキャンできますが必要なアプリがインストールされていません。Google Playからインストールしますか?</string>
   <string name="live_map_button">地図</string>
   <string name="caches_nearby_button">近く</string>
   <string name="advanced_search_button">検索</string>
@@ -241,6 +246,7 @@
   <string name="caches_sort_terrain">地形</string>
   <string name="caches_sort_size">サイズ</string>
   <string name="caches_sort_favorites">人気</string>
+  <string name="caches_sort_favorites_ratio">お気に入り [%]</string>
   <string name="caches_sort_name">名前</string>
   <string name="caches_sort_geocode">GCコード</string>
   <string name="caches_sort_rating">評価</string>
@@ -282,6 +288,10 @@
   <string name="caches_filter_clear">フィルターをクリア</string>
   <string name="caches_filter_modified">座標の更新あり</string>
   <string name="caches_filter_origin">Origin</string>
+  <string name="caches_filter_distance">距離</string>
+  <string name="caches_filter_personal_note">パーソナルノート付き</string>
+  <string name="caches_filter_popularity">お気に入り</string>
+  <string name="caches_filter_popularity_ratio">お気に入り [%]</string>
   <string name="caches_removing_from_history">履歴から削除中…</string>
   <string name="caches_clear_offlinelogs">全てのオフラインログを削除</string>
   <string name="caches_clear_offlinelogs_progress">全てのオフラインログを削除中</string>
@@ -309,6 +319,9 @@
   <string name="about_donate">寄付</string>
   <string name="about_donation_more">開発に\n寄付する</string>
   <string name="about_contributors">貢献者</string>
+  <string name="about_license">ライセンス</string>
+  <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
+  <string name="about_help">ヘルプ</string>
   <string name="settings_title_services">サービス</string>
   <string name="settings_title_appearance">外観</string>
   <string name="settings_title_cachedetails">キャッシュの詳細</string>
@@ -321,16 +334,27 @@
   <string name="settings_title_basicmembers">ベーシック会員</string>
   <string name="settings_title_navigation">ナビゲーション</string>
   <string name="settings_title_system">システム</string>
+  <string name="settings_title_navigation_menu">ナビゲーションメニュー</string>
   <string name="settings_category_browser">ブラウザ</string>
+  <string name="settings_category_social">ソーシャルメディア</string>
   <string name="settings_category_logging_other">他のオプション</string>
   <string name="settings_goto_url_button">詳細…</string>
   <string name="settings_title_gc">Geocaching.com</string>
+  <string name="settings_title_ec">Extremcaching.com</string>
+  <string name="settings_title_ox">Opencaching.com (Garmin)</string>
   <string name="settings_activate_gc">有効化</string>
+  <string name="settings_activate_ec">有効化</string>
+  <string name="settings_activate_ox">有効化</string>
+  <string name="settings_gc_legal_note">Geocaching.comを使うにはGroundspeak利用規約に同意している必要があります。</string>
   <string name="settings_info_facebook_login_title">Facebook Login</string>
   <string name="settings_info_facebook_login">c:geoからFacebookのアカウントでgeocaching.comにログインすることはできません。 しかし簡単に回避することはできます…</string>
+  <string name="settings_authorize">c:geoを認証</string>
+  <string name="settings_reauthorize">再度c:geoを認証</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">有効化</string>
   <string name="init_oc_de_description">キャッシュを検索したり見つけたキャッシュにアクセス/フィルタリングしたりするためにc:geoにopencaching.deを認証させる。</string>
+  <string name="settings_activate_oc_pl">有効化</string>
+  <string name="init_oc_pl_description">キャッシュを検索したり見つけたキャッシュにアクセス/フィルタリングしたりするためにc:geoにopencaching.plを認証させる。</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">有効化</string>
@@ -343,6 +367,8 @@
   <string name="init_login_popup_failed">ログイン失敗</string>
   <string name="init_login_popup_failed_reason">ログインに失敗しました。原因: </string>
   <string name="init_login_popup_not_authorized">認証できませんでした</string>
+  <string name="init_login_popup_invalid_timestamp">デバイスの時刻が正しくありません。時刻の設定をしてください。</string>
+  <string name="init_login_popup_invalid_token">認証できませんでした。再度認証してください。</string>
   <string name="init_signature">署名</string>
   <string name="init_signature_template_button">テンプレートを挿入</string>
   <string name="init_signature_template_date">日付</string>
@@ -351,6 +377,8 @@
   <string name="init_signature_template_user">ユーザ名</string>
   <string name="init_signature_template_number">キャッシュ数</string>
   <string name="init_signature_template_owner">オーナー</string>
+  <string name="init_signature_template_name">名前</string>
+  <string name="init_signature_template_url">URL</string>
   <string name="init_ratingwanted">GCvote評価</string>
   <string name="init_summary_ratingwanted">キャッシュの評価をGCvote.comから取得</string>
   <string name="init_friendlogswanted">友達のログページ</string>
@@ -402,6 +430,7 @@
   <string name="init_backup_last">前回バックアップ日時:</string>
   <string name="init_backup_last_no">まだバックアップを取ったことがありません。</string>
   <string name="settings_info_offline_maps_title">オフライン地図について</string>
+  <string name="settings_info_offline_maps">オフライン用の地図に対応しています。Mapsforgeからダウンロードした地図やOSMのデータから自作した地図などを使用できます。最初にオフライン地図フォルダを選択しておく必要があります。</string>
   <string name="settings_info_themes_title">オフライン地図のテーマについて</string>
   <string name="settings_info_themes">オフライン地図用のテーマが使用できます。カラースタイル(ナイトビュー用など)を変更したり、自転車道など特定のオブジェクトをハイライトしたり、高度線を表示したりすることができます。</string>
   <string name="init_mapsource_select">地図の選択</string>
@@ -422,6 +451,7 @@
   <string name="init_default_navigation_tool_2_description">2番目にお好きなナビツールを選択できます。キャッシュ情報のタイトルの右隣にあるナビアイコンを長押しすると起動できます。</string>
   <string name="init_debug_title">デバッグ情報</string>
   <string name="init_debug_note">c:geoのデバッグ情報を作成することができます。これは一般のユーザには役に立たないかもしれませんが、開発者には不具合の原因を調べるのに必要です。その時は下のチェックボックスをオンにしてログファイルを開発者に送ってください。詳しくは<a href="http://faq.cgeo.org/#1_11">c:geo FAQ - How do I send log to developers</a>(英語)をご覧ください。</string>
+  <string name="init_debug">デバッグ情報を作成する</string>
   <string name="init_dbonsdcard_title">データベースの保存場所</string>
   <string name="init_dbonsdcard_note">c:geoのデータベースを外部メディア(SDカード)に保存することもできます。その場合は端末の内蔵メモリの空き容量は増えますが、c:geoはSDカードなしでは使用できなくなり動作も少し遅くなるかもしれません。</string>
   <string name="init_dbonsdcard">SDカードにデータベースを保存</string>
@@ -434,6 +464,11 @@
   <string name="init_use_native_ua">Androidブラウザ</string>
   <string name="init_summary_use_native_ua">OSにブラウザとして認識させる\n(特定のインターネットプロバイダ経由でログインできない場合にチェックしてください。)</string>
   <string name="init_rendertheme_folder">オフライン地図のテーマ用フォルダ</string>
+  <string name="init_maintenance">メンテナンス</string>
+  <string name="settings_settings">設定</string>
+  <string name="feature_personal_notes">パーソナルノート</string>
+  <string name="feature_log_images">ログに画像を添付する</string>
+  <string name="feature_watch_list">ウォッチリスト</string>
   <string name="map_source_google_map">Googleマップ:地図</string>
   <string name="map_source_google_satellite">Googleマップ:航空写真</string>
   <string name="map_source_osm_mapnik">OpenStreetMap:Mapnik</string>
@@ -453,6 +488,7 @@
   <string name="auth_authorize">c:geoを認証</string>
   <string name="auth_start">認証を開始</string>
   <string name="auth_again">再度認証を開始</string>
+  <string name="auth_dialog_completed_twitter">c:geoはTwitterにポストするための認証を受けました。</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_dialog_completed_oc">c:geoは%sと連携するための認証を受けました。</string>
   <string name="cache_offline">オフライン</string>
@@ -475,6 +511,8 @@
   <string name="cache_log_image_default_title">写真</string>
   <string name="cache_personal_note">パーソナルノート</string>
   <string name="cache_personal_note_edit">編集</string>
+  <string name="cache_personal_note_limit">パーソナルノートの制限</string>
+  <string name="cache_personal_note_truncation">このパーソナルノートはGeocaching.comにより %d 文字以降は切り捨てられます。</string>
   <string name="cache_personal_note_upload">アップロード</string>
   <string name="cache_personal_note_uploading">パーソナルノートをアップロード中</string>
   <string name="cache_personal_note_upload_done">パーソナルノートをアップロードしました</string>
@@ -612,6 +650,7 @@
   <string name="gpx_import_delete_title">ファイル削除</string>
   <string name="gpx_import_delete_message">%sを削除しますか?</string>
   <string name="gpx_import_select_list_title">GPXファイルをリストへインポート</string>
+  <string name="gpx_import_android">アンドロイド端末からインポート</string>
   <string name="map_file_select_title">地図ファイルの選択</string>
   <string name="web_import_title">Webからインポート(Send 2 c:geo経由)</string>
   <string name="web_import_waiting">Webから新しいキャッシュ情報を確認中…</string>
@@ -739,6 +778,7 @@
   <string name="user_menu_view_found">見つけたキャッシュ</string>
   <string name="user_menu_open_browser">ブラウザでプロフィールを開く</string>
   <string name="user_menu_send_message">メッセージを送信</string>
+  <string name="user_menu_open_contact">連絡先を開く</string>
   <string name="navigation">ナビゲーション</string>
   <string name="compass_title">コンパス</string>
   <string name="use_gps">GPSのみ使用</string>
@@ -747,12 +787,16 @@
   <string name="destination_set">目的地を入力</string>
   <string name="navigation_direct_navigation">Direct Navigation</string>
   <string name="navigation_target">Target</string>
+  <string name="err_nav_no_coordinates">座標値が未入力なのでナビゲーションが開始できません</string>
   <string name="license">ライセンス</string>
   <string name="license_show">ライセンスを表示</string>
   <string name="license_dismiss">閉じる</string>
   <string name="helper_calendar_title">c:geo - カレンダーアドオン</string>
   <string name="helper_calendar_missing">c:geo - カレンダーアドオンはインストールされていません。</string>
   <string name="helper_calendar_description">イベントキャッシュをカレンダーアプリに登録することができます。</string>
+  <string name="helper_sendtocgeo_title">Send to c:geo</string>
+  <string name="helper_contacts_title">c:geo - 連絡先アドオン</string>
+  <string name="helper_sendtocgeo_description">Send to c:geoは<strong>PC用</strong>ブラウザの拡張機能です。PCのブラウザで表示してるキャッシュ情報をアンドロイド端末に直接送ることができます。</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">シンプルで役に立つ地図アプリ。オフライン用に地図を直接ダウンロード(画像データのみ)することができます。軌跡(GPSログ)を記録したり、POIを扱ったり、その他もたくさん便利な機能があります。</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
@@ -763,6 +807,9 @@
   <string name="helper_barcode_description">GCコードをQRコードで表示するGreasemonkeyスクリプトやサイトがあります。このアプリを使えばパソコンの画面から直接GCコードを読み込むことができます。</string>
   <string name="helper_pocketquery_title">Pocket Query Creator</string>
   <string name="helper_pocketquery_description">現在地や地図上の指定した地点で簡単にポケット・クエリを作成できます。Geocaching.comのプレミアム会員である必要があります。</string>
+  <string name="helper_google_translate_title">Google 翻訳</string>
+  <string name="helper_google_translate_description">キャッシュの詳細でロングタップすればGoogle翻訳アプリで簡単に翻訳できます。
+Google翻訳アプリで各言語の辞書をダウンロードしておけばオフラインでも使用できます。</string>
   <string name="addon_missing_title">アドオンが見つかりません</string>
   <string name="addon_download_prompt">Google Playからインストールしますか?</string>
   <string name="export">エクスポート</string>
@@ -1002,4 +1049,16 @@
     <item>800 px</item>
     <item>1024 px</item>
   </string-array>
+  <plurals name="caches_eta_mins">
+    <item quantity="other">分</item>
+  </plurals>
+  <plurals name="cache_counts">
+    <item quantity="other">%1$d キャッシュ</item>
+  </plurals>
+  <plurals name="waypoints">
+    <item quantity="other">%d ウェイポイント</item>
+  </plurals>
+  <plurals name="tts_kilometers">
+    <item quantity="other">%s キロメートル</item>
+  </plurals>
 </resources>

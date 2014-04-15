@@ -387,6 +387,7 @@
   <string name="init_login_popup_not_authorized">La connexió no ha estat autoritzada</string>
   <string name="init_login_popup_invalid_timestamp">L\'hora local és incorrecta, ajusta l\'hora del teu dispositiu</string>
   <string name="init_login_popup_invalid_token">L\'autorització no és vàlida, torneu a autoritzar</string>
+  <string name="settings_service_active">Actiu</string>
   <string name="init_signature">Signatura</string>
   <string name="init_template_help">Les cadenes de marcadors de posició com [NAME] s\'expandiran més tard quan feu servir aquesta plantilla.</string>
   <string name="init_signature_template_button">Insereix una plantilla</string>
@@ -1120,6 +1121,7 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">Nova versió candidate disponible.\nCliqueu per instal·lar-la.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Uns canvis recents a geocaching.com han espatllat el c:geo.\nHi estem treballant, torneu-ho a provar aviat.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Uns canvis recents a geocaching.com han espatllat la funcionalitat del mapa en viu.\nHi estem treballant, torneu-ho a provar aviat.</string>
+  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">El web de geocaching.com està en manteniment.\nPer aquest motiu podeu tenir alguna dificultat.</string>
   <string name="status_closeout_warning" tools:ignore="UnusedResources">Sembla que esteu utilitzant una versió d\'Android 2.1 o inferior. Futures versions del c:geo poden no estar disponibles per al vostre dispositiu.</string>
   <string name="tts_service">Brúixola parlant</string>
   <string name="tts_start">Comença a parlar</string>
