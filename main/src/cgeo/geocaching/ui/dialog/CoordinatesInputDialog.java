@@ -249,7 +249,9 @@ public class CoordinatesInputDialog extends NoTitleDialog {
                 default:
                     break;
             }
-            calc(true);
+
+            // This will serve as a reminder to the user that the current coordinates might not be valid
+            areCurrentCoordinatesValid(true);
         }
     }
 
@@ -325,49 +327,52 @@ public class CoordinatesInputDialog extends NoTitleDialog {
 
     }
 
-    private boolean calc(final boolean signalError) {
+    private boolean areCurrentCoordinatesValid(final boolean signalError) {
         try {
+            Geopoint current = null;
             if (currentFormat == CoordInputFormatEnum.Plain) {
-                gp = new Geopoint(eLat.getText().toString(), eLon.getText().toString());
+                current = new Geopoint(eLat.getText().toString(), eLon.getText().toString());
+            } else {
+                final String latDir = bLat.getText().toString();
+                final String lonDir = bLon.getText().toString();
+                final String latDeg = eLatDeg.getText().toString();
+                final String lonDeg = eLonDeg.getText().toString();
+                final String latDegFrac = eLatMin.getText().toString();
+                final String lonDegFrac = eLonMin.getText().toString();
+                final String latMin = eLatMin.getText().toString();
+                final String lonMin = eLonMin.getText().toString();
+                final String latMinFrac = eLatSec.getText().toString();
+                final String lonMinFrac = eLonSec.getText().toString();
+                final String latSec = eLatSec.getText().toString();
+                final String lonSec = eLonSec.getText().toString();
+                final String latSecFrac = eLatSub.getText().toString();
+                final String lonSecFrac = eLonSub.getText().toString();
+
+                switch (currentFormat) {
+                    case Deg:
+                        current = new Geopoint(latDir, latDeg, latDegFrac, lonDir, lonDeg, lonDegFrac);
+                        break;
+                    case Min:
+                        current = new Geopoint(latDir, latDeg, latMin, latMinFrac, lonDir, lonDeg, lonMin, lonMinFrac);
+                        break;
+                    case Sec:
+                        current = new Geopoint(latDir, latDeg, latMin, latSec, latSecFrac, lonDir, lonDeg, lonMin, lonSec, lonSecFrac);
+                        break;
+                    case Plain:
+                        // This case has been handled above
+                }
+            }
+            if (current.isValid()) {
+                gp = current;
                 return true;
             }
-
-            final String latDir = bLat.getText().toString();
-            final String lonDir = bLon.getText().toString();
-            final String latDeg = eLatDeg.getText().toString();
-            final String lonDeg = eLonDeg.getText().toString();
-            final String latDegFrac = eLatMin.getText().toString();
-            final String lonDegFrac = eLonMin.getText().toString();
-            final String latMin = eLatMin.getText().toString();
-            final String lonMin = eLonMin.getText().toString();
-            final String latMinFrac = eLatSec.getText().toString();
-            final String lonMinFrac = eLonSec.getText().toString();
-            final String latSec = eLatSec.getText().toString();
-            final String lonSec = eLonSec.getText().toString();
-            final String latSecFrac = eLatSub.getText().toString();
-            final String lonSecFrac = eLonSub.getText().toString();
-
-            switch (currentFormat) {
-                case Deg:
-                    gp = new Geopoint(latDir, latDeg, latDegFrac, lonDir, lonDeg, lonDegFrac);
-                    break;
-                case Min:
-                    gp = new Geopoint(latDir, latDeg, latMin, latMinFrac, lonDir, lonDeg, lonMin, lonMinFrac);
-                    break;
-                case Sec:
-                    gp = new Geopoint(latDir, latDeg, latMin, latSec, latSecFrac, lonDir, lonDeg, lonMin, lonSec, lonSecFrac);
-                    break;
-                case Plain:
-                    // This case has been handled above
-            }
         } catch (final Geopoint.ParseException e) {
-            if (signalError) {
-                context.showToast(context.getResources().getString(R.string.err_parse_lat_lon));
-            }
-            return false;
+            // Signaled and returned below
         }
-
-        return true;
+        if (signalError) {
+            context.showToast(context.getResources().getString(R.string.err_parse_lat_lon));
+        }
+        return false;
     }
 
     public int getMaxLengthFromCurrentField(final EditText editText) {
@@ -392,7 +397,7 @@ public class CoordinatesInputDialog extends NoTitleDialog {
 
                 // Start new format with an acceptable value: either the current one
                 // entered by the user, else our current coordinates, else (0,0).
-                if (!calc(false)) {
+                if (!areCurrentCoordinatesValid(false)) {
                     if (geo != null && geo.getCoords() != null) {
                         gp = geo.getCoords();
                     } else {
@@ -444,7 +449,7 @@ public class CoordinatesInputDialog extends NoTitleDialog {
 
         @Override
         public void onClick(View v) {
-            if (!calc(true)) {
+            if (!areCurrentCoordinatesValid(true)) {
                 return;
             }
             if (gp != null) {
