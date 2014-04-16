@@ -66,6 +66,8 @@
   <string name="log_unarchived">Vzet iz arhiva</string>
   <string name="log_needs_archived">Potrebuje arhiviranje</string>
   <string name="log_discovered">Odkrit</string>
+  <string name="log_reviewer">Zapis recenzenta</string>
+  <string name="log_submit_for_review">Pošlji recenzentu</string>
   <string name="log_retractlisting">Preklicana objava</string>
   <string name="log_marked_missing">Označen kot izgubljen</string>
   <string name="log_tb_nothing">Brez akcije</string>
@@ -362,6 +364,12 @@
   <string name="init_oc_pl">Opencaching.pl</string>
   <string name="settings_activate_oc_pl">Aktiviraj</string>
   <string name="init_oc_pl_description">Poveži c:geo z opencaching.pl za iskanje zakladov in dostop in filter najdenih zakladov.</string>
+  <string name="settings_activate_oc_nl">Aktiviraj</string>
+  <string name="init_oc_nl_description">Poveži c:geo z opencaching.nl za iskanje zakladov in dostop in filter najdenih zakladov.</string>
+  <string name="settings_activate_oc_us">Aktiviraj</string>
+  <string name="init_oc_us_description">Poveži c:geo z opencaching.us za iskanje zakladov in dostop in filter najdenih zakladov.</string>
+  <string name="settings_activate_oc_ro">Aktiviraj</string>
+  <string name="init_oc_ro_description">Poveži c:geo z opencaching.ro za iskanje zakladov in dostop in filter najdenih zakladov.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktiviraj</string>
@@ -376,6 +384,7 @@
   <string name="init_login_popup_not_authorized">Ni avtoriziran</string>
   <string name="init_login_popup_invalid_timestamp">Lokalni čas ni veljaven, nastavite trenutni čas na napravi</string>
   <string name="init_login_popup_invalid_token">Neveljavna avtorizacija. Poskusite ponovno</string>
+  <string name="settings_service_active">Aktivno</string>
   <string name="init_signature">Podpis</string>
   <string name="init_template_help">Spremenljivke kot na primer [NAME] bodo razširjene kasneje.</string>
   <string name="init_signature_template_button">Vnesi predlogo</string>
@@ -1106,6 +1115,7 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">Na voljo je nova preizkusna različica.\nKliknite za namestitev.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Spremembe na spletni strani Geocaching.com so povzročile, da c:geo ne deluje popolno.\nŽe delamo na tem! Poskusite ponovno čez nekaj časa.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Spremembe na spletni strani Geocaching.com so povzročile, da zemljevid zakladov ne deluje več.\nŽe delamo na tem! Poskusite ponovno čez nekaj časa.</string>
+  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Trenutno poteka vzdrževanje spletne strani geocaching.com.\nMorda boste imeli težave pri povezovanju.</string>
   <string name="status_closeout_warning" tools:ignore="UnusedResources">Izgleda da uporabljate android s starejšo različico od 2.1. Naslednje različice aplikacije c:geo morda ne bodo več podprte za vašo različico Androida.</string>
   <string name="tts_service">Glasovni kompas</string>
   <string name="tts_start">Začni glasovno navigacijo</string>

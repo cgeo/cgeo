@@ -387,6 +387,7 @@
   <string name="init_login_popup_not_authorized">Non autorisé</string>
   <string name="init_login_popup_invalid_timestamp">Heure locale invalide, réglez votre appareil</string>
   <string name="init_login_popup_invalid_token">Autorisation non valide, ré-autoriser</string>
+  <string name="settings_service_active">Activé</string>
   <string name="init_signature">Signature</string>
   <string name="init_template_help">Les constructions comme [NAME] seront développées lors de l\'utilisation du modèle.</string>
   <string name="init_signature_template_button">Insérer un modèle</string>
@@ -1117,6 +1118,7 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">Nouvelle version candidate disponible.\nCliquer pour installer.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé c:geo.\nNous sommes en train de nous en occuper.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Des changements récents sur Geocaching.com ont cassé la carte active.\nNous sommes en train de nous en occuper.</string>
+  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Maintenant en cours sur geocaching.com.\nIl se peut que vous rencontriez des problèmes.</string>
   <string name="status_closeout_warning" tools:ignore="UnusedResources">Vous utilisez une version d\'Android inférieure à 2.1. Les futures versions de c:geo pourront ne pas être disponibles pour votre appareil.</string>
   <string name="tts_service">Boussole parlante</string>
   <string name="tts_start">Commencer à parler</string>
