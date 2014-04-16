@@ -2,6 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next release:</b>\n
     <b>New features:</b>\n
     · Support of opencaching.nl, opencaching.us, opencaching.ro\n
     · Changed initial coordinate format for waypoints to MinDec\n
@@ -14,51 +15,8 @@
     · Fixed wrong arrow direction on live map and list in landscape mode\n
     · Fixed several possible crashes\n
     \n
-    <b>2014.04.01:</b>\n
-    <b>Bugfixing:</b>\n
-    · Remove support of Android versions older than 2.3\n
-      (Split to a legacy version available for v2.1 and v2.2)\n
-    · Fixed some possible crash scenarios\n
     \n
-    <b>2014.03.31:</b>\n
-    <b>Bugfixing:</b>\n
-    · Make it again compatible with Android before 2.3\n
-    · Fix a bug with downloading of preview maps\n
-    \n
-    <b>2014.03.30:</b>\n
-    <b>New features:</b>\n
-    · New languages: Catalan, Lithuanian, Romanian\n
-    · Parallel loading from different platforms to speed up live map\n
-    · All GCVote related settings moved to Menu-Services-GCVote\n
-    · Support of some GSAK specific GPX contents\n
-    · Create waypoint from personal note also for OC caches\n
-    · Copy and translate operations also for TB information\n
-    · Decrypt waypoint note by tapping on it\n
-    · Long press filter button in main menu to reset it\n
-    · List sorting now permanent during session\n
-    · Also include embedded images on image tab\n
-    <b>Bugfixing:</b>\n
-    · Corrected wrong field note progress indication\n
-    · When using "external map" sometimes the position marker was not shown\n
-    · Circles on map now also shown for caches with final coords defined\n
-    · Adding event caches to calendar corrected for events without starting time\n
-    · Logging of OC caches was not possible if no GC login data was stored\n
-    · TB details have been empty if HTML syntax was incorrect\n
-    · Swipe left from cache details not working in some cases\n
-    · Database optimizations\n
-    · Filtered list was not shown on map\n
-    · OC-login was not possible if no GC-login stored\n
-    · Geocodes are always case insensitive\n
-    · Fixed crashes in dir chooser\n
-    · Log password field missing for OC if changing log type\n
-    · Send2cgeo import screen not shown on second import start\n
-    · Fixed parsing of waypoints from personal note if no valid coords stored\n
-    · Special log types for unpublished caches now recognized correct\n
-    · HTML entities in image titles are properly decoded\n
-    · Pocket queries in status "to be deleted" now shown in list\n
-    \n
-    \n
-    <a href="https://github.com/cgeo/cgeo/issues?milestone=24&amp;state=closed">Detailed list of all changes</a>\n
+    <a href="https://github.com/cgeo/cgeo/issues?milestone=29&amp;state=closed">Detailed list of all changes</a>\n
     \n
     <b>Old releases</b>\n
     · Please refer to the release notes on the <a href="http://www.cgeo.org">c:geo-website</a>.\n
