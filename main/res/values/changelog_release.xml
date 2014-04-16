@@ -9,11 +9,10 @@
     \n
     <b>Bugfixing:</b>\n
     · Improved long click detection in lists\n
-    · A lot of fixes for crash scenarios\n
     · Import from web does not work if started a second time\n
     · Reduce log picture preview size to avoid crashes on tablets\n
     · Fixed wrong arrow direction on live map and list in landscape mode\n
-    · Fixed several possible crashes\n
+    · Fixed several possible crash scenarios\n
     \n
     \n
     <a href="https://github.com/cgeo/cgeo/issues?milestone=29&amp;state=closed">Detailed list of all changes</a>\n
