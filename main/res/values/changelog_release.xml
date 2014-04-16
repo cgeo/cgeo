@@ -2,8 +2,13 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release:</b>\n
+    <b>New features:</b>\n
+    · Support of opencaching.nl, opencaching.us, opencaching.ro\n
+    · Changed initial coordinate format for waypoints to MinDec\n
+    \n
     <b>Bugfixing:</b>\n
+    · Improved long click detection in lists\n
+    · A lot of fixes for crash scenarios\n
     · Import from web does not work if started a second time\n
     · Reduce log picture preview size to avoid crashes on tablets\n
     · Fixed wrong arrow direction on live map and list in landscape mode\n

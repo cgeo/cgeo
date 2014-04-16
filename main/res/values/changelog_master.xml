@@ -2,12 +2,5 @@
 <resources>
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
-    <b>Next feature release:</b>\n
-    <b>New features:</b>\n
-    · Support of opencaching.nl, opencaching.us, opencaching.ro\n
-    · Changed initial coordinate format for waypoints to MinDec\n
-    <b>Bugfixing:</b>\n
-    · Improved long click detection in lists\n
-    · A lot of fixes for crash scenarios\n
   </string>
 </resources>
