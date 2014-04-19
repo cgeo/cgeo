@@ -273,9 +273,11 @@ public final class ImageUtils {
 
     /**
      * Decode a base64-encoded string and save the result into a stream.
-     *
-     * @param inString the encoded string
-     * @param outFile the file to save the decoded result into
+     * 
+     * @param inString
+     *            the encoded string
+     * @param out
+     *            the stream to save the decoded result into
      */
     public static void decodeBase64ToStream(final String inString, final OutputStream out) throws IOException {
         Base64InputStream in = null;

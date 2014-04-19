@@ -1,14 +1,15 @@
 package cgeo.geocaching.utils;
 
-import junit.framework.TestCase;
-
 import java.util.LinkedList;
 import java.util.List;
+
+import junit.framework.TestCase;
 
 public class MiscUtilsTest extends TestCase {
 
     public static void testBufferEmpty() {
-        for (final List<String> s: MiscUtils.buffer(new LinkedList<String>(), 10)) {
+        for (@SuppressWarnings("unused")
+        final List<String> s : MiscUtils.buffer(new LinkedList<String>(), 10)) {
             fail("empty collection should not iterate");
         }
     }

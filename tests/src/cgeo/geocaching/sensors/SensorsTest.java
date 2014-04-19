@@ -2,13 +2,11 @@ package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.MainActivity;
 
-import junit.framework.Assert;
-
 import android.test.ActivityInstrumentationTestCase2;
 
-public class SensorsTest extends ActivityInstrumentationTestCase2<MainActivity> {
+import junit.framework.Assert;
 
-    private MainActivity activity;
+public class SensorsTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
     public SensorsTest() {
         super(MainActivity.class);
@@ -17,10 +15,9 @@ public class SensorsTest extends ActivityInstrumentationTestCase2<MainActivity> 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        activity = getActivity();
     }
 
-    public void testGetDirectionNow() {
+    public static void testGetDirectionNow() {
         final float angle = DirectionProvider.getDirectionNow(1.0f);
         Assert.assertTrue(angle == 1.0f || angle == 91.0f || angle == 181.0f || angle == 271.0f);
     }
