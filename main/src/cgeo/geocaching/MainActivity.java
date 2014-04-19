@@ -26,7 +26,9 @@ import cgeo.geocaching.utils.Version;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+
 import org.apache.commons.lang3.StringUtils;
+
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
@@ -569,7 +571,7 @@ public class MainActivity extends AbstractActivity {
      * @param v
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void cgeoFindOnMap(@SuppressWarnings("unused") final View v) {
+    public void cgeoFindOnMap(final View v) {
         findOnMap.setPressed(true);
         CGeoMap.startActivityLiveMap(this);
     }
@@ -578,7 +580,7 @@ public class MainActivity extends AbstractActivity {
      * @param v
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void cgeoFindNearest(@SuppressWarnings("unused") final View v) {
+    public void cgeoFindNearest(final View v) {
         if (app.currentGeo().getCoords() == null) {
             return;
         }
@@ -591,7 +593,7 @@ public class MainActivity extends AbstractActivity {
      * @param v
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void cgeoFindByOffline(@SuppressWarnings("unused") final View v) {
+    public void cgeoFindByOffline(final View v) {
         findByOffline.setPressed(true);
         CacheListActivity.startActivityOffline(this);
     }
@@ -600,7 +602,7 @@ public class MainActivity extends AbstractActivity {
      * @param v
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void cgeoSearch(@SuppressWarnings("unused") final View v) {
+    public void cgeoSearch(final View v) {
         advanced.setPressed(true);
         startActivity(new Intent(this, SearchActivity.class));
     }
@@ -609,7 +611,7 @@ public class MainActivity extends AbstractActivity {
      * @param v
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void cgeoPoint(@SuppressWarnings("unused") final View v) {
+    public void cgeoPoint(final View v) {
         any.setPressed(true);
         startActivity(new Intent(this, NavigateAnyPointActivity.class));
     }
@@ -618,7 +620,7 @@ public class MainActivity extends AbstractActivity {
      * @param v
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void cgeoFilter(@SuppressWarnings("unused") final View v) {
+    public void cgeoFilter(final View v) {
         filter.setPressed(true);
         filter.performClick();
     }
@@ -627,7 +629,7 @@ public class MainActivity extends AbstractActivity {
      * @param v
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void cgeoNavSettings(@SuppressWarnings("unused") final View v) {
+    public void cgeoNavSettings(final View v) {
         startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
     }
 
@@ -708,7 +710,7 @@ public class MainActivity extends AbstractActivity {
      * @param view
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void showAbout(@SuppressWarnings("unused") final View view) {
+    public void showAbout(final View view) {
         startActivity(new Intent(this, AboutActivity.class));
     }
 
@@ -716,7 +718,7 @@ public class MainActivity extends AbstractActivity {
      * @param view
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void goSearch(@SuppressWarnings("unused") final View view) {
+    public void goSearch(final View view) {
         onSearchRequested();
     }
 

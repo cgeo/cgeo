@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.settings.Settings;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
+
 import rx.Observable;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -37,7 +38,7 @@ public abstract class GeoDirHandler {
      *
      * @param geoData the new geographical data
      */
-    public void updateGeoData(@SuppressWarnings("unused") final IGeoData geoData) {
+    public void updateGeoData(final IGeoData geoData) {
     }
 
     /**
@@ -46,7 +47,7 @@ public abstract class GeoDirHandler {
      *
      * @param direction the new direction
      */
-    public void updateDirection(@SuppressWarnings("unused") final float direction) {
+    public void updateDirection(final float direction) {
     }
 
     /**
@@ -59,7 +60,7 @@ public abstract class GeoDirHandler {
      * If the device goes fast enough, or if the compass use is not enabled in the settings,
      * the GPS direction information will be used instead of the compass one.
      */
-    public void updateGeoDir(@SuppressWarnings("unused") final IGeoData geoData, @SuppressWarnings("unused") final float direction) {
+    public void updateGeoDir(final IGeoData geoData, final float direction) {
     }
 
     private static Observable<Float> fixedDirection() {

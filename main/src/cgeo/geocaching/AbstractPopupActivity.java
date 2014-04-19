@@ -17,6 +17,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.lang3.StringUtils;
+
 import rx.Observable;
 import rx.functions.Action1;
 import rx.functions.Func0;
@@ -255,7 +256,7 @@ public abstract class AbstractPopupActivity extends AbstractActivity implements 
      * @param view
      *            unused here but needed since this method is referenced from XML layout
      */
-    public final void goDefaultNavigation(@SuppressWarnings("unused") View view) {
+    public final void goDefaultNavigation(View view) {
         navigateTo();
         finish();
     }

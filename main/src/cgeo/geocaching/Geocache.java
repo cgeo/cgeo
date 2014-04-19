@@ -34,12 +34,14 @@ import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.UncertainProperty;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
+
 import rx.Scheduler;
 import rx.Scheduler.Inner;
 import rx.Subscription;
@@ -177,7 +179,7 @@ public class Geocache implements ICache, IWaypoint {
      *
      * @param gpxParser
      */
-    public Geocache(@SuppressWarnings("unused") GPXParser gpxParser) {
+    public Geocache(GPXParser gpxParser) {
         setReliableLatLon(true);
         setAttributes(Collections.<String> emptyList());
         setWaypoints(Collections.<Waypoint> emptyList(), false);

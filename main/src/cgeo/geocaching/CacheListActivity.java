@@ -1384,7 +1384,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      * @param view
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void goMap(@SuppressWarnings("unused") View view) {
+    public void goMap(View view) {
         if (!cacheToShow()) {
             return;
         }
