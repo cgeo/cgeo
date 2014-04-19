@@ -121,6 +121,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
 
     }
 
+    @SuppressWarnings("static-method")
     protected boolean requireFiles() {
         return true;
     }

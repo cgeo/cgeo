@@ -150,7 +150,9 @@ public final class StoredList extends AbstractList {
                 @Override
                 public void call(final String listName) {
                     final int newId = DataStore.createList(listName);
-                    new StoredList(newId, listName, 0);
+
+                    // We need to update the list cache by creating a new object here.
+                    @SuppressWarnings("unused") StoredList list = new StoredList(newId, listName, 0);
 
                     if (newId >= DataStore.customListIdOffset) {
                         ActivityMixin.showToast(activity, res.getString(R.string.list_dialog_create_ok));

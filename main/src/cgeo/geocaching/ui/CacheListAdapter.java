@@ -377,7 +377,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
         final boolean lightSkin = Settings.isLightSkin();
 
-        final TouchListener touchListener = new TouchListener(cache, v);
+        final TouchListener touchListener = new TouchListener(cache);
         v.setOnClickListener(touchListener);
         v.setOnLongClickListener(touchListener);
         v.setOnTouchListener(touchListener);
@@ -541,7 +541,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         private final Geocache cache;
         private final GestureDetector gestureDetector;
 
-        public TouchListener(final Geocache cache, final View view) {
+        public TouchListener(final Geocache cache) {
             this.cache = cache;
             gestureDetector = new GestureDetector(getContext(), new FlingGesture(cache));
         }
