@@ -21,18 +21,17 @@ import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.DatabaseBackupUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils;
 import cgeo.geocaching.utils.Version;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-
 import org.apache.commons.lang3.StringUtils;
-
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
+import rx.android.observables.AndroidObservable;
 import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 import rx.subscriptions.Subscriptions;
 
 import android.app.AlertDialog;
@@ -553,13 +552,13 @@ public class MainActivity extends AbstractActivity {
                             }
                         }
                     });
-                    RxUtils.subscribeOnIOThenUI(address.onErrorResumeNext(Observable.from(geo.getCoords().toString())),
-                            new Action1<String>() {
+                    AndroidObservable.bindActivity(MainActivity.this, address.onErrorResumeNext(Observable.from(geo.getCoords().toString())))
+                            .subscribe(new Action1<String>() {
                                 @Override
                                 public void call(final String address) {
                                     navLocation.setText(address);
                                 }
-                            });
+                            }, Schedulers.io());
                 }
             } else {
                 navLocation.setText(geo.getCoords().toString());

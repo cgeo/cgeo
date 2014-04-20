@@ -3,10 +3,11 @@ package cgeo.geocaching;
 import cgeo.geocaching.network.StatusUpdater;
 import cgeo.geocaching.network.StatusUpdater.Status;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils;
 
 import rx.Subscription;
+import rx.android.observables.AndroidObservable;
 import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -30,53 +31,53 @@ public class StatusFragment extends Fragment {
         final ViewGroup statusGroup = (ViewGroup) inflater.inflate(R.layout.status, container, false);
         final ImageView statusIcon = (ImageView) statusGroup.findViewById(R.id.status_icon);
         final TextView statusMessage = (TextView) statusGroup.findViewById(R.id.status_message);
-        statusSubscription = RxUtils.subscribeOnIOThenUI(StatusUpdater.latestStatus, new Action1<Status>() {
-            @Override
-            public void call(final Status status) {
-                if (status == null) {
-                    statusGroup.setVisibility(View.INVISIBLE);
-                    return;
-                }
-
-                final Resources res = getResources();
-                final String packageName = getActivity().getPackageName();
-
-                if (status.icon != null) {
-                    final int iconId = res.getIdentifier(status.icon, "drawable", packageName);
-                    if (iconId != 0) {
-                        statusIcon.setImageResource(iconId);
-                        statusIcon.setVisibility(View.VISIBLE);
-                    } else {
-                        Log.w("StatusHandler: could not find icon corresponding to @drawable/" + status.icon);
-                        statusIcon.setVisibility(View.GONE);
-                    }
-                } else {
-                    statusIcon.setVisibility(View.GONE);
-                }
-
-                String message = status.message;
-                if (status.messageId != null) {
-                    final int messageId = res.getIdentifier(status.messageId, "string", packageName);
-                    if (messageId != 0) {
-                        message = res.getString(messageId);
-                    }
-                }
-
-                statusMessage.setText(message);
-                statusGroup.setVisibility(View.VISIBLE);
-
-                if (status.url != null) {
-                    statusGroup.setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(final View v) {
-                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(status.url)));
+        statusSubscription = AndroidObservable.bindFragment(this, StatusUpdater.latestStatus).subscribe(new Action1<Status>() {
+                    @Override
+                    public void call(final Status status) {
+                        if (status == null) {
+                            statusGroup.setVisibility(View.INVISIBLE);
+                            return;
                         }
-                    });
-                } else {
-                    statusGroup.setClickable(false);
-                }
-            }
-        });
+
+                        final Resources res = getResources();
+                        final String packageName = getActivity().getPackageName();
+
+                        if (status.icon != null) {
+                            final int iconId = res.getIdentifier(status.icon, "drawable", packageName);
+                            if (iconId != 0) {
+                                statusIcon.setImageResource(iconId);
+                                statusIcon.setVisibility(View.VISIBLE);
+                            } else {
+                                Log.w("StatusHandler: could not find icon corresponding to @drawable/" + status.icon);
+                                statusIcon.setVisibility(View.GONE);
+                            }
+                        } else {
+                            statusIcon.setVisibility(View.GONE);
+                        }
+
+                        String message = status.message;
+                        if (status.messageId != null) {
+                            final int messageId = res.getIdentifier(status.messageId, "string", packageName);
+                            if (messageId != 0) {
+                                message = res.getString(messageId);
+                            }
+                        }
+
+                        statusMessage.setText(message);
+                        statusGroup.setVisibility(View.VISIBLE);
+
+                        if (status.url != null) {
+                            statusGroup.setOnClickListener(new OnClickListener() {
+                                @Override
+                                public void onClick(final View v) {
+                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(status.url)));
+                                }
+                            });
+                        } else {
+                            statusGroup.setClickable(false);
+                        }
+                    }
+                }, Schedulers.io());
         return statusGroup;
     }
 

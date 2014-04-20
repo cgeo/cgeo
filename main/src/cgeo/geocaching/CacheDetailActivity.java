@@ -45,7 +45,6 @@ import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
-import cgeo.geocaching.utils.RxUtils;
 import cgeo.geocaching.utils.SimpleCancellableHandler;
 import cgeo.geocaching.utils.SimpleHandler;
 import cgeo.geocaching.utils.TextUtils;
@@ -62,6 +61,7 @@ import rx.Observer;
 import rx.Scheduler.Inner;
 import rx.Subscriber;
 import rx.Subscription;
+import rx.android.observables.AndroidObservable;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
@@ -878,7 +878,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_details_page, null);
 
             // Start loading preview map
-            RxUtils.subscribeOnIOThenUI(previewMap, new Action1<BitmapDrawable>() {
+            AndroidObservable.bindActivity(CacheDetailActivity.this, previewMap).subscribe(new Action1<BitmapDrawable>() {
                 @Override
                 public void call(final BitmapDrawable image) {
                     final Bitmap bitmap = image.getBitmap();
@@ -888,7 +888,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         view.findViewById(R.id.map_preview_box).setVisibility(View.VISIBLE);
                     }
                 }
-            });
+            }, Schedulers.io());
 
             detailsList = (LinearLayout) view.findViewById(R.id.details_list);
             final CacheDetailsCreator details = new CacheDetailsCreator(CacheDetailActivity.this, detailsList);
@@ -1605,7 +1605,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
         });
 
-        RxUtils.subscribeOnIOThenUI(producer, new Observer<Spanned>() {
+        AndroidObservable.bindActivity(this, producer).subscribe(new Observer<Spanned>() {
             @Override
             public void onCompleted() {
                 if (null != loadingIndicatorView) {
@@ -1668,7 +1668,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
                 descriptionView.setBackgroundResource(backcolor);
             }
-        });
+        }, Schedulers.io());
     }
 
     private class WaypointsViewCreator extends AbstractCachingPageViewCreator<ListView> {
