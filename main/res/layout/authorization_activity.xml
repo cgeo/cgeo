@@ -5,8 +5,6 @@
     android:orientation="vertical"
     android:visibility="visible" >
 
-    <include layout="@layout/actionbar" />
-
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

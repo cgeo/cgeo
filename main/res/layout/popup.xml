@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="?background_color_transparent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    tools:context=".CachePopup">
 
-    <LinearLayout style="@style/action_bar" >
-
-        <include layout="@layout/actionbar_title_no_home" />
-
-        <include layout="@layout/actionbar_button_compass" />
-    </LinearLayout>
-
+    <include layout="@layout/actionbar_popup" />
     <ScrollView
         android:id="@+id/details_list_box"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="4dip" >
 
@@ -50,6 +46,7 @@
 
                 <TextView
                     android:id="@+id/offline_text"
+                    tools:text="@string/cache_offline_not_ready"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"

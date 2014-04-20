@@ -5,10 +5,12 @@ import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 
 import android.app.Activity;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 
 /**
  * Base class for the map activity. Delegates base class calls to the
@@ -31,7 +33,11 @@ public abstract class AbstractMap {
     }
 
     public void onCreate(Bundle savedInstanceState) {
+
         mapActivity.superOnCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
+            mapActivity.getActivity().requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        }
     }
 
     public void onResume() {

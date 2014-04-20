@@ -36,6 +36,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.ActionBar;
 import android.text.Html;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -322,9 +323,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     }
 
     private static class TrackableIconHandler extends Handler {
-        final private TextView view;
+        final private ActionBar view;
 
-        public TrackableIconHandler(TextView viewIn) {
+        public TrackableIconHandler(ActionBar viewIn) {
             view = viewIn;
         }
 
@@ -333,7 +334,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             final BitmapDrawable image = (BitmapDrawable) message.obj;
             if (image != null && view != null) {
                 image.setBounds(0, 0, view.getHeight(), view.getHeight());
-                view.setCompoundDrawables(image, null, null, null);
+                view.setIcon(image);
             }
         }
     }
@@ -392,7 +393,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
             // action bar icon
             if (StringUtils.isNotBlank(trackable.getIconUrl())) {
-                final TrackableIconHandler iconHandler = new TrackableIconHandler(((TextView) findViewById(R.id.actionbar_title)));
+                final TrackableIconHandler iconHandler = new TrackableIconHandler(getSupportActionBar());
                 final TrackableIconThread iconThread = new TrackableIconThread(trackable.getIconUrl(), iconHandler);
                 iconThread.start();
             }
