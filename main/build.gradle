@@ -27,14 +27,14 @@ gradle connectedCheck
 //https://github.com/stephanenicolas/Quality-Tools-for-Android
 
 def AAVersion = '3.0.1'
-def RXVersion = '0.17.0-RC6'
+def RXVersion = '0.18.3'
 group = 'cgeo.geocaching'
 version = '0.0.1'
 
 android {
     compileSdkVersion "Google Inc.:Google APIs:19"
     //compileSdkVersion 19
-    buildToolsVersion "19.0.3"
+    buildToolsVersion "19.1.0"
 
     def Properties versionProps = new Properties()
     versionProps.load(new FileInputStream(file('version.properties')))
@@ -48,7 +48,7 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 7
+        minSdkVersion 9
         targetSdkVersion 19
         versionName versionProps['name']
         versionCode versionProps['code'].toInteger()
@@ -64,24 +64,12 @@ android {
         testFunctionalTest true
     }
 
-    //Conditional signin
+    //Conditional signing
     //Uncomment and set the 4 key properties (#key.store, ...) in gradle.properties
     signingConfigs {
-        release {
-            //not sure?
-            keyAlias 'cgeo'
-        }
+        release 
     }
-    if (project.hasProperty('key.store') &&
-            project.hasProperty('key.store.password') &&
-            project.hasProperty('key.alias.password')) {
-        android.signingConfigs.release.storeFile = file(project.property('key.store'))
-        android.signingConfigs.release.storePassword = property('key.store.password')
-        android.signingConfigs.release.keyPassword = property('key.alias')
-        android.signingConfigs.release.keyAlias = property('key.alias.password')
-    } else {
-        buildTypes.release.signingConfig = null
-    }
+
 
     buildTypes {
         debug {
@@ -132,11 +120,24 @@ android {
 
 }
 
+if (project.hasProperty('key.store') &&
+        project.hasProperty('key.store.password') &&
+        project.hasProperty('key.alias.password')) {
+     android.signingConfigs.release.storeFile = file(project.property('key.store'))
+     android.signingConfigs.release.storePassword = property('key.store.password')
+     android.signingConfigs.release.keyPassword = property('key.alias.password')
+     android.signingConfigs.release.keyAlias = property('key.alias')
+} else {
+   android.buildTypes.release.signingConfig = null
+}
+
 dependencies {
     apt( "org.androidannotations:androidannotations:$AAVersion"){
         exclude module:'androidannotations-api'
     }
     compile "org.androidannotations:androidannotations-api:$AAVersion"
+
+    compile project(":mapswithme-api")
 
     compile files('libs/httpclientandroidlib-1.1.2.jar')
     compile files('libs/locus-api-4.0.jar')
@@ -144,9 +145,9 @@ dependencies {
     compile files('libs/mapsforge-map-0.2.4.jar')
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
 
-    compile 'com.android.support:support-v4:19.0.1'
+    compile 'com.android.support:appcompat-v7:19.1.0'
 
-    compile 'com.jakewharton:butterknife:4.0.1'
+    compile 'com.jakewharton:butterknife:5.0.0'
     compile 'org.apache.commons:commons-collections4:4.0'
     compile 'org.apache.commons:commons-lang3:3.2.1'
     compile 'commons-io:commons-io:2.4'
