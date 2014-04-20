@@ -6,10 +6,10 @@ import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+
 import rx.Subscription;
 import rx.android.observables.AndroidObservable;
 import rx.functions.Action0;
