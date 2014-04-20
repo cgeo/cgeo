@@ -4,15 +4,6 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <LinearLayout style="@style/action_bar" >
-
-        <include layout="@layout/actionbar_title" />
-
-        <include layout="@layout/actionbar_progress" />
-
-        <include layout="@layout/actionbar_button_map" />
-    </LinearLayout>
-
     <include layout="@layout/filter_bar" />
 
     <RelativeLayout
@@ -29,14 +20,15 @@
             android:indeterminate="true"
             android:indeterminateOnly="true" />
     </RelativeLayout>
+    <!--android:background="?background_color"
+    android:cacheColorHint="?background_color"-->
 
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_margin="0dip"
-        android:background="?background_color"
-        android:cacheColorHint="?background_color"
+
         android:dividerHeight="1dip"
         android:padding="0dip"
         android:visibility="gone"

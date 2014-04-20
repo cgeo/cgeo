@@ -1,44 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cgeo="http://schemas.android.com/apk/res-auto">
+
+
+
 
     <item
         android:id="@+id/menu_default_navigation"
         android:icon="@drawable/ic_menu_compass"
+        cgeo:showAsAction="ifRoom|withText"
         android:title="@string/cache_menu_navigate"> <!-- will be replaced -->
     </item>
     <item
         android:id="@+id/menu_navigate"
         android:icon="@drawable/ic_menu_mapmode"
+        cgeo:showAsAction="ifRoom|withText"
         android:title="@string/cache_menu_navigate">
     </item>
     <item
         android:id="@+id/menu_calendar"
         android:icon="@drawable/ic_menu_agenda"
+        cgeo:showAsAction="ifRoom|withText"
         android:title="@string/cache_menu_event">
     </item>
     <item
         android:id="@+id/menu_log_visit_offline"
         android:icon="@drawable/ic_menu_edit"
+        cgeo:showAsAction="ifRoom|withText"
         android:title="@string/cache_menu_visit_offline">
     </item>
     <item
         android:id="@+id/menu_log_visit"
         android:icon="@drawable/ic_menu_edit"
+        cgeo:showAsAction="ifRoom|withText"
         android:title="@string/cache_menu_visit">
     </item>
     <item
         android:id="@+id/menu_caches_around"
         android:icon="@drawable/ic_menu_rotate"
+        cgeo:showAsAction="ifRoom|withText"
         android:title="@string/cache_menu_around">
     </item>
     <item
         android:id="@+id/menu_show_in_browser"
         android:icon="@drawable/ic_menu_info_details"
+        cgeo:showAsAction="ifRoom|withText"
         android:title="@string/cache_menu_browser">
     </item>
     <item
         android:id="@+id/menu_share"
         android:icon="@drawable/ic_menu_share"
+        cgeo:showAsAction="ifRoom|withText"
         android:title="@string/cache_menu_share">
     </item>
     

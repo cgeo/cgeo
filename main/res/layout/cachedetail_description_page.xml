@@ -9,6 +9,8 @@
         android:orientation="vertical"
         android:padding="4dip" >
 
+
+
         <!-- Short description -->
 
         <cgeo.geocaching.ui.IndexOutOfBoundsAvoidingTextView

@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractListActivity;
+import cgeo.geocaching.activity.ActionBarListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.activity.Progress;
@@ -83,6 +84,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -376,7 +378,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         setTheme();
+
         setContentView(R.layout.cacheslist_activity);
 
         // get parameters
@@ -397,15 +401,16 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         // Add the list selection in code. This way we can leave the XML layout of the action bar the same as for other activities.
-        final View titleBar = findViewById(R.id.actionbar_title);
-        titleBar.setClickable(true);
-        titleBar.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                selectList();
-            }
-        });
+        /* TODO: FIX THIS for ActionBar */
+//        final View titleBar = findViewById(R.id.actionbar_title);
+//        titleBar.setClickable(true);
+//        titleBar.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                selectList();
+//            }
+//        });
 
         setTitle(title);
         initAdapter();
@@ -615,6 +620,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (super.onOptionsItemSelected(item))
+            return true;
         switch (item.getItemId()) {
             case R.id.menu_switch_select_mode:
                 adapter.switchSelectMode();

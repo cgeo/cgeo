@@ -3,12 +3,14 @@ package cgeo.geocaching.activity;
 import butterknife.ButterKnife;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.HtmlUtils;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.TranslationUtils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -17,16 +19,19 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
 
 import java.util.Locale;
 
-public abstract class AbstractActivity extends FragmentActivity implements IAbstractActivity {
+public abstract class AbstractActivity extends ActionBarActivity implements IAbstractActivity {
 
     protected CgeoApplication app = null;
     protected Resources res = null;
@@ -43,11 +48,7 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
 
     @Override
     final public void goHome(final View view) {
-        ActivityMixin.goHome(this);
-    }
-
-    final protected void setTitle(final String title) {
-        ActivityMixin.setTitle(this, title);
+        ActivityMixin.navigateToMain(this);
     }
 
     final protected void showProgress(final boolean show) {
@@ -71,7 +72,19 @@ public abstract class AbstractActivity extends FragmentActivity implements IAbst
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+
         initializeCommonFields();
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId()== android.R.id.home) {
+            ActivityMixin.navigateToMain(this);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void onResume(final Subscription resumeSubscription) {

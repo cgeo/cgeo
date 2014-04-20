@@ -102,6 +102,10 @@
         <item name="android:text">c:geo</item>
     </style>
 
+    <style name="actionbar_myposition">
+        <item name="android:button">@drawable/ic_menu_myposition</item>
+    </style>
+
     <!-- button: full width -->
     <style name="button_full" parent="button">
         <item name="android:layout_width">fill_parent</item>

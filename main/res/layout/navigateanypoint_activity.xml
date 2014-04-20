@@ -5,8 +5,6 @@
     android:background="?background_color"
     android:orientation="vertical" >
 
-    <include layout="@layout/actionbar" />
-
     <ListView
         android:id="@+id/historyList"
         android:layout_width="match_parent"

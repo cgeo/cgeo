@@ -5,17 +5,6 @@
     android:layout_height="fill_parent"
     android:layout_gravity="center" >
 
-    <LinearLayout style="@style/action_bar" >
-
-        <ImageView
-            style="@style/action_bar_icon_cgeo"
-            android:onClick="showAbout" />
-
-        <TextView style="@style/action_bar_title" />
-
-        <include layout="@layout/actionbar_button_search" />
-    </LinearLayout>
-
     <fragment
         android:id="@+id/status"
         android:name="cgeo.geocaching.StatusFragment"

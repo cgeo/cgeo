@@ -5,6 +5,7 @@ import cgeo.geocaching.network.Network;
 
 import org.apache.commons.lang3.StringUtils;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -51,7 +52,7 @@ public final class TranslationUtils {
      * @param text
      *            The text to be translated
      */
-    public static void startActivityTranslate(final AbstractActivity context, final String toLang, final String text) {
+    public static void startActivityTranslate(final Activity context, final String toLang, final String text) {
         context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(buildTranslationURI(toLang, text))));
     }
 }

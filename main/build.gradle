@@ -48,7 +48,7 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 7
+        minSdkVersion 10
         targetSdkVersion 19
         versionName versionProps['name']
         versionCode versionProps['code'].toInteger()
@@ -146,7 +146,8 @@ dependencies {
     compile files('libs/mapsforge-map-0.2.4.jar')
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
 
-    compile 'com.android.support:support-v4:19.0.1'
+    compile 'com.android.support:support-v4:19.1.0'
+    compile 'com.android.support:appcompat-v7:19.1.0'
 
     compile 'com.jakewharton:butterknife:5.0.0'
     compile 'org.apache.commons:commons-collections4:4.0'

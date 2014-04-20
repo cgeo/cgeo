@@ -5,13 +5,19 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.settings.Settings;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -20,35 +26,28 @@ import android.widget.Toast;
 
 public final class ActivityMixin {
 
-    public final static void goHome(final Activity fromActivity) {
-        final Intent intent = new Intent(fromActivity, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-        fromActivity.startActivity(intent);
-        fromActivity.finish();
-    }
-
     public static void setTitle(final Activity activity, final CharSequence text) {
         if (StringUtils.isBlank(text)) {
             return;
         }
 
-        final TextView title = (TextView) activity.findViewById(R.id.actionbar_title);
-        if (title != null) {
-            title.setText(text);
+        if  (((ActionBarActivity) activity).getSupportActionBar() != null) {
+                ((ActionBarActivity) activity).getSupportActionBar().setTitle(text);
         }
     }
 
-    public static void showProgress(final Activity activity, final boolean show) {
+
+    public static void showProgress(final ActionBarActivity activity, final boolean show) {
         if (activity == null) {
             return;
         }
 
-        final ProgressBar progress = (ProgressBar) activity.findViewById(R.id.actionbar_progress);
-        if (show) {
-            progress.setVisibility(View.VISIBLE);
-        } else {
-            progress.setVisibility(View.GONE);
+        // FIXME: I have no idea why it works in some activities and horrible breaks in ohters
+        try {
+            activity.setSupportProgressBarIndeterminate(show);
+            activity.setSupportProgressBarIndeterminateVisibility(show);
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
         }
     }
 
@@ -62,11 +61,12 @@ public final class ActivityMixin {
 
     public static int getDialogTheme() {
         // Light theme dialogs don't work on Android Api < 11
-        if (Settings.isLightSkin() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+        // The compat theme should fix this
+        if (Settings.isLightSkin()) {
             return R.style.popup_light;
+        } else {
+            return R.style.popup_dark;
         }
-
-        return R.style.popup_dark;
     }
 
     public static void showToast(final Activity activity, final int resId) {
@@ -126,5 +126,10 @@ public final class ActivityMixin {
         editText.getText().replace(start, end, completeText);
         int newCursor = moveCursor ? start + completeText.length() : start;
         editText.setSelection(newCursor);
+    }
+
+    public static void navigateToMain(Activity activity) {
+        final Intent main = new Intent(activity, MainActivity.class);
+        NavUtils.navigateUpTo(activity, main);
     }
 }

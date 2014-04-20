@@ -101,6 +101,7 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewParent;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -283,15 +284,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         } catch (final RuntimeException e) {
             // nothing, we lost the window
         }
-
-        final ImageView defaultNavigationImageView = (ImageView) findViewById(R.id.defaultNavigation);
-        defaultNavigationImageView.setOnLongClickListener(new OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                startDefaultNavigation2();
-                return true;
-            }
-        });
 
         final int pageToOpen = savedInstanceState != null ?
                 savedInstanceState.getInt(STATE_PAGE_INDEX, 0) :
@@ -520,7 +512,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
         }
 
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     private final static class LoadCacheHandler extends SimpleCancellableHandler {
@@ -599,7 +591,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         } else {
             setTitle(cache.getGeocode());
         }
-        ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cache.getType().markerId), null, null, null);
+
+        getSupportActionBar().setIcon(getResources().getDrawable(cache.getType().markerId));
 
         // reset imagesList so Images view page will be redrawn
         imagesList = null;
@@ -615,13 +608,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
      */
     private void startDefaultNavigation() {
         NavigationAppFactory.startDefaultNavigationApplication(1, this, cache);
-    }
-
-    /**
-     * Tries to navigate to the {@link Geocache} of this activity.
-     */
-    private void startDefaultNavigation2() {
-        NavigationAppFactory.startDefaultNavigationApplication(2, this, cache);
     }
 
     /**
@@ -2097,10 +2083,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         throw new IllegalStateException(); // cannot happen as long as switch case is enum complete
     }
 
-    static void updateOfflineBox(final View view, final Geocache cache, final Resources res,
-            final OnClickListener refreshCacheClickListener,
-            final OnClickListener dropCacheClickListener,
-            final OnClickListener storeCacheClickListener) {
+    public static void updateOfflineBox(final View view, final Geocache cache, final Resources res,
+                                        final OnClickListener refreshCacheClickListener,
+                                        final OnClickListener dropCacheClickListener,
+                                        final OnClickListener storeCacheClickListener) {
         // offline use
         final TextView offlineText = (TextView) view.findViewById(R.id.offline_text);
         final Button offlineRefresh = (Button) view.findViewById(R.id.offline_refresh);

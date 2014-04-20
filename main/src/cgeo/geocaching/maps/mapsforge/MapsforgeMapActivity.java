@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps.mapsforge;
 
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.maps.AbstractMap;
 import cgeo.geocaching.maps.CGeoMap;
@@ -8,10 +9,12 @@ import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 import org.mapsforge.android.maps.MapActivity;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 
 public class MapsforgeMapActivity extends MapActivity implements MapActivityImpl, FilteredActivity {
 
@@ -28,6 +31,9 @@ public class MapsforgeMapActivity extends MapActivity implements MapActivityImpl
 
     @Override
     protected void onCreate(Bundle icicle) {
+        // TODO: Move to a more sane place
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB)
+            requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         mapBase.onCreate(icicle);
     }
 
