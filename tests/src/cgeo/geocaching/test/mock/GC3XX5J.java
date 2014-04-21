@@ -5,6 +5,7 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.settings.Settings;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -132,5 +133,10 @@ public class GC3XX5J extends MockedCache {
     @Override
     public String getShortDescription() {
         return "Kadar zbolimo nam pomaga...<br /> <br /> When we get sick, they are helpful...";
+    }
+
+    @Override
+    public boolean isFound() {
+        return Settings.getUsername().equals("mucek4");
     }
 }
