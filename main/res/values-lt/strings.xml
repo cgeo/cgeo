@@ -559,7 +559,7 @@
   <string name="cache_personal_note_upload">Įkelti</string>
   <string name="cache_personal_note_uploading">Įkeliama asmeninė pastaba</string>
   <string name="cache_personal_note_upload_done">Asmeninė pastaba įkelta</string>
-  <string name="cache_personal_note_upload_cancelled">Atšauktas asmeninės pastabos įkėlimas</string>
+  <string name="cache_personal_note_upload_cancelled">Asmeninės pastabos įkėlimas atšauktas</string>
   <string name="cache_personal_note_unstored">Slėptuvė neišsaugota</string>
   <string name="cache_personal_note_store">Rašyti asmeninę pastabą galima tik išsaugotos slėptuvės aprašyme.</string>
   <string name="cache_description">Aprašymas</string>
@@ -787,7 +787,7 @@
   <string name="search_tb_hint">Keliauninko identifikavimas</string>
   <string name="search_tb_button">Ieškoti keliauninko</string>
   <string name="search_destination">Tikslas</string>
-  <string name="search_direction_rel">Nuo šios pozicijos</string>
+  <string name="search_direction_rel">Nuo šios vietos</string>
   <string name="search_address_started">Ieškoma vietų</string>
   <string name="search_address_result">Rastos vietos</string>
   <string name="search_own_caches">Ieškoti mano slėptuvių</string>
@@ -835,7 +835,7 @@
   <string name="destination_set">Nustatyti tikslą</string>
   <string name="navigation_direct_navigation">Tiesioginė navigacija</string>
   <string name="navigation_target">Tikslas</string>
-  <string name="err_nav_no_coordinates">Negalima pradėti navigacijos, nenurodytos koordinatės</string>
+  <string name="err_nav_no_coordinates">Be koordinačių navigacijos pradėti neįmanoma</string>
   <string name="license">Licencija</string>
   <string name="license_show">Rodyti licenciją</string>
   <string name="license_dismiss">Atmesti</string>
@@ -872,7 +872,7 @@
   <string name="export_fieldnotes_creating">Kuriami Lauko užrašai…</string>
   <string name="export_gpx">GPX</string>
   <string name="export_gpx_info">GPX failas bus eksportuotas į %1$s su dabartine data ir laiku failo pavadinime.</string>
-  <string name="export_gpx_to">Siųsti eksportuotą GPX į</string>
+  <string name="export_gpx_to">Siųsti eksportuotą GPX</string>
   <string name="attribute_dogs_yes">Galima su šunimi</string>
   <string name="attribute_dogs_no">Negalima su šunimi</string>
   <string name="attribute_bicycles_yes">Galima su dviračiu</string>
@@ -961,7 +961,7 @@
   <string name="attribute_skiis_no">Lygumų slidės nereikalingos</string>
   <string name="attribute_s_tool_yes">Reikalingi specialūs įrankiai</string>
   <string name="attribute_s_tool_no">Specialūs įrankiai nereikalingi</string>
-  <string name="attribute_wirelessbeacon_yes">Yra belaidžio ryšio švyturys</string>
+  <string name="attribute_wirelessbeacon_yes">Yra bevielio ryšio švyturys</string>
   <string name="attribute_wirelessbeacon_no">Belaidžio ryšio švyturio nėra</string>
   <string name="attribute_treeclimbing_yes">Reikia lipti į medį</string>
   <string name="attribute_treeclimbing_no">Į medį lipti nereikia</string>
