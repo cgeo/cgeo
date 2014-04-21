@@ -1,14 +1,11 @@
 package cgeo.geocaching.filter;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 
 import android.content.res.Resources;
 
-import java.util.EnumSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -29,11 +26,7 @@ class AttributeFilter extends AbstractFilter {
 
     @Override
     public boolean accepts(final Geocache cache) {
-        Geocache fullCache = DataStore.loadCache(cache.getGeocode(), EnumSet.of(LoadFlag.LOAD_ATTRIBUTES));
-        if (fullCache == null) {
-            fullCache = cache;
-        }
-        return fullCache.getAttributes().contains(attribute);
+        return cache.getAttributes().contains(attribute);
     }
 
     public static class Factory implements IFilterFactory {
