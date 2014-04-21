@@ -60,10 +60,10 @@ import rx.Observable.OnSubscribe;
 import rx.Observer;
 import rx.Scheduler.Inner;
 import rx.Subscriber;
-import rx.Subscription;
 import rx.android.observables.AndroidObservable;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 import android.R.color;
 import android.app.AlertDialog;
@@ -168,7 +168,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private TextView cacheDistanceView;
 
     protected ImagesList imagesList;
-    private Subscription imagesSubscription;
+    private CompositeSubscription createSubscriptions;
     /**
      * waypoint selected in context menu. This variable will be gone when the waypoint context menu is a fragment.
      */
@@ -177,6 +177,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.cachedetail_activity);
+
+        createSubscriptions = new CompositeSubscription();
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.cache));
@@ -330,9 +332,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public void onDestroy() {
-        if (imagesList != null) {
-            imagesSubscription.unsubscribe();
-        }
+        createSubscriptions.unsubscribe();
         super.onDestroy();
     }
 
@@ -649,7 +649,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return;
         }
         imagesList = new ImagesList(this, cache.getGeocode());
-        imagesSubscription = imagesList.loadImages(imageView, cache.getImages(), false);
+        createSubscriptions.add(imagesList.loadImages(imageView, cache.getImages(), false));
     }
 
     public static void startActivity(final Context context, final String geocode) {

@@ -9,7 +9,6 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-
 import rx.Subscription;
 import rx.android.observables.AndroidObservable;
 import rx.functions.Action0;
@@ -119,12 +118,12 @@ public class ImagesList {
 
             final ImageView imageView = (ImageView) inflater.inflate(R.layout.image_item, null);
             assert(imageView != null);
-            AndroidObservable.bindActivity(activity, imgGetter.fetchDrawable(img.getUrl())).subscribe(new Action1<BitmapDrawable>() {
+            subscriptions.add(AndroidObservable.bindActivity(activity, imgGetter.fetchDrawable(img.getUrl())).subscribe(new Action1<BitmapDrawable>() {
                 @Override
                 public void call(final BitmapDrawable image) {
                     display(imageView, image, img, rowView);
                 }
-            });
+            }));
             rowView.addView(imageView);
             imagesView.addView(rowView);
         }
