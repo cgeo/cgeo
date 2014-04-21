@@ -72,7 +72,8 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         CACHE_BEACON(new CacheBeaconApp(), 14, R.string.pref_navigation_menu_cache_beacon),
         GCC(new GccApp(), 15, R.string.pref_navigation_menu_gcc),
         WHERE_YOU_GO(new WhereYouGoApp(), 16, R.string.pref_navigation_menu_where_you_go),
-        PEBBLE(new PebbleApp(), 17, R.string.pref_navigation_menu_pebble);
+        PEBBLE(new PebbleApp(), 17, R.string.pref_navigation_menu_pebble),
+        MAPSWITHME(new MapsWithMeApp(), 22, R.string.pref_navigation_menu_mapswithme);
 
         NavigationAppsEnum(final App app, final int id, final int preferenceKey) {
             this.app = app;

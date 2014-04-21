@@ -320,6 +320,7 @@
     <string name="caches_move_all">Move all</string>
     <string name="caches_map_locus">Locus</string>
     <string name="caches_map_locus_export">Export to Locus</string>
+    <string name="caches_map_mapswithme">MapsWithMe</string>
     <string name="caches_recaptcha_title">reCAPTCHA</string>
     <string name="caches_recaptcha_explanation">Please enter the text you see in the image. This enables downloading of cache coordinates, which can be disabled in Settings.</string>
     <string name="caches_recaptcha_hint">Text from image</string>
@@ -709,6 +710,7 @@
     <string name="cache_menu_cachebeacon">Cache Beacon</string>
     <string name="cache_menu_navigon">Navigon</string>
     <string name="cache_menu_pebble">Pebble</string>
+    <string name="cache_menu_mapswithme">MapsWithMe</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Saved Log</string>
     <string name="cache_status_found">Found</string>

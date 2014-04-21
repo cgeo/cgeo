@@ -24,5 +24,6 @@
     <item name="cache_app_show_static_maps" type="id"/>
     <item name="cache_app_locus" type="id"/>
     <item name="cache_app_pebble" type="id"/>
-
+    <item name="cache_app_mapswithme" type="id"/>
+    
 </resources>

@@ -8,6 +8,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.apps.cachelist.MapsWithMeCacheListApp;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -55,6 +56,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Observer;
@@ -195,6 +197,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
             name = extras.getString(Intents.EXTRA_NAME);
             guid = extras.getString(Intents.EXTRA_GUID);
+        }
+
+        // integration with MapsWithMe
+        if (StringUtils.isEmpty(geocode)) {
+            geocode = MapsWithMeCacheListApp.getCacheFromMapsWithMe(this, getIntent());
         }
 
         // try to get data from URI

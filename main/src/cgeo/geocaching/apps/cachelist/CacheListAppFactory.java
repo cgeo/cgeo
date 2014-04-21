@@ -21,7 +21,8 @@ public final class CacheListAppFactory extends AbstractAppFactory {
         public static final CacheListApp[] apps = {
                 new InternalCacheListMap(),
                 new LocusShowCacheListApp(),
-                new LocusExportCacheListApp()
+                new LocusExportCacheListApp(),
+                new MapsWithMeCacheListApp()
         };
     }
 
