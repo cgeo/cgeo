@@ -30,6 +30,7 @@ public class DirectionProvider {
         private int count = 0;
 
         private SensorManager sensorManager;
+
         @Override
         public void onSensorChanged(final SensorEvent event) {
             subject.onNext(event.values[0]);
@@ -71,6 +72,30 @@ public class DirectionProvider {
             }
         }
 
+        /**
+         * Assume that there is an orientation sensor, unless we have really checked that
+         */
+        private boolean hasSensor = true;
+
+        /**
+         * Flag for one time check if there is a sensor.
+         */
+        private boolean hasSensorChecked = false;
+
+        public boolean hasSensor(Context context) {
+            if (hasSensorChecked == false) {
+                hasSensor = getOrientationSensor(context) != null;
+            }
+            return hasSensor;
+        }
+
+        // This will be removed when using a new location service. Until then, it is okay to be used.
+        @SuppressWarnings("deprecation")
+        private Sensor getOrientationSensor(final Context context) {
+            sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+            return sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+        }
+
     }
 
     private static final StartableHandlerThread handlerThread =
@@ -87,23 +112,6 @@ public class DirectionProvider {
                 subject.subscribe(subscriber);
             }
         });
-    }
-
-    /**
-     * Assume that there is an orientation sensor, unless we have really checked that
-     */
-    private static boolean hasSensor = true;
-
-    /**
-     * Flag for one time check if there is a sensor.
-     */
-    private static boolean hasSensorChecked = false;
-
-    public static boolean hasSensor(Context context) {
-        if (hasSensorChecked == false) {
-            hasSensor = getOrientationSensor(context) != null;
-        }
-        return hasSensor;
     }
 
     /**
@@ -132,13 +140,6 @@ public class DirectionProvider {
             default:
                 return 0;
         }
-    }
-
-    // This will be removed when using a new location service. Until then, it is okay to be used.
-    @SuppressWarnings("deprecation")
-    private static Sensor getOrientationSensor(final Context context) {
-        SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-        return sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
     }
 
 }
