@@ -44,7 +44,7 @@ public class LazyInitialilzedListTest extends AndroidTestCase {
 
     public static void testCallOnce() {
         final MyList l = new MyList(0);
-        assertEquals("call() must not called prematurely", 0, l.getCounter());
+        assertEquals("call() must not be called prematurely", 0, l.getCounter());
         l.size();
         assertEquals("call() must be called when needed", 1, l.getCounter());
         l.size();
