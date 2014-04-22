@@ -3,6 +3,7 @@ package cgeo.contacts;
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -17,6 +18,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.Gravity;
 import android.widget.Toast;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -132,13 +134,13 @@ public final class ContactsActivity extends Activity {
         try {
             final String param = uri.getQueryParameter(paramKey);
             if (param == null) {
-                return "";
+                return StringUtils.EMPTY;
             }
             return URLDecoder.decode(param, CharEncoding.UTF_8).trim();
         } catch (UnsupportedEncodingException e) {
             Log.e(LOG_TAG, "ContactsActivity.getParameter", e);
         }
-        return "";
+        return StringUtils.EMPTY;
     }
 
 }
