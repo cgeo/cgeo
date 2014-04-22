@@ -27,7 +27,7 @@ gradle connectedCheck
 //https://github.com/stephanenicolas/Quality-Tools-for-Android
 
 def AAVersion = '3.0.1'
-def RXVersion = '0.17.0-RC6'
+def RXVersion = '0.17.6'
 group = 'cgeo.geocaching'
 version = '0.0.1'
 
@@ -145,11 +145,10 @@ dependencies {
     //https://mapsforge.googlecode.com/files/mapsforge-map-0.2.4.jar
     compile files('libs/mapsforge-map-0.2.4.jar')
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
-    compile files('libs/')
 
     compile 'com.android.support:support-v4:19.0.1'
 
-    compile 'com.jakewharton:butterknife:4.0.1'
+    compile 'com.jakewharton:butterknife:5.0.0'
     compile 'org.apache.commons:commons-collections4:4.0'
     compile 'org.apache.commons:commons-lang3:3.2.1'
     compile 'commons-io:commons-io:2.4'
