@@ -1,5 +1,7 @@
 package cgeo.geocaching.geopoint;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.ui.Formatter;
 
 import android.test.AndroidTestCase;
@@ -12,7 +14,7 @@ public class GeoPointFormatterTest extends AndroidTestCase {
         final String format = GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA, point);
         assertEquals("50.000000,5.000000", format);
         final String formatMinute = GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW, point);
-        assertEquals("N 50° 00.000 E 005° 00.000", formatMinute);
+        assertThat(formatMinute).isEqualTo("N 50° 00.000 E 005° 00.000");
         final String formatSecond = GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECSECOND, point).replaceAll(",", ".");
         assertEquals(formatSecond, "N 50° 00' 00.000\"" + Formatter.SEPARATOR + "E 005° 00' 00.000\"", formatSecond);
     }

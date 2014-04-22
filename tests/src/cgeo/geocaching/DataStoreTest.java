@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.Tile;
@@ -31,16 +33,16 @@ public class DataStoreTest extends CGeoTestCase {
         cache1.setGeocode("Cache 1");
         final Geocache cache2 = new Geocache();
         cache2.setGeocode("Cache 2");
-        assertNotNull(cache2);
+        assertThat(cache2).isNotNull();
 
         try {
 
             // create lists
             listId1 = DataStore.createList("DataStore Test");
-            assertTrue(listId1 > StoredList.STANDARD_LIST_ID);
+            assertThat(listId1 > StoredList.STANDARD_LIST_ID).isTrue();
             listId2 = DataStore.createList("DataStoreTest");
-            assertTrue(listId2 > StoredList.STANDARD_LIST_ID);
-            assertTrue(DataStore.getLists().size() >= 2);
+            assertThat(listId2 > StoredList.STANDARD_LIST_ID).isTrue();
+            assertThat(DataStore.getLists().size() >= 2).isTrue();
 
             cache1.setDetailed(true);
             cache1.setListId(listId1);
@@ -50,21 +52,21 @@ public class DataStoreTest extends CGeoTestCase {
             // save caches to DB (cache1=listId1, cache2=listId1)
             DataStore.saveCache(cache1, LoadFlags.SAVE_ALL);
             DataStore.saveCache(cache2, LoadFlags.SAVE_ALL);
-            assertTrue(DataStore.getAllCachesCount() >= 2);
+            assertThat(DataStore.getAllCachesCount() >= 2).isTrue();
 
             // rename list (cache1=listId1, cache2=listId1)
             assertEquals(1, DataStore.renameList(listId1, "DataStore Test (renamed)"));
 
             // get list
             final StoredList list1 = DataStore.getList(listId1);
-            assertEquals("DataStore Test (renamed)", list1.title);
+            assertThat(list1.title).isEqualTo("DataStore Test (renamed)");
 
             // move to list (cache1=listId2, cache2=listId2)
             DataStore.moveToList(Collections.singletonList(cache1), listId2);
             assertEquals(1, DataStore.getAllStoredCachesCount(CacheType.ALL, listId2));
 
             // remove list (cache1=listId2, cache2=listId2)
-            assertTrue(DataStore.removeList(listId1));
+            assertThat(DataStore.removeList(listId1)).isTrue();
 
             // mark dropped (cache1=1, cache2=0)
             DataStore.markDropped(Collections.singletonList(cache2));
@@ -121,8 +123,8 @@ public class DataStoreTest extends CGeoTestCase {
         try {
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
             final Geocache loadedCache = DataStore.loadCache(GEOCODE_CACHE, LoadFlags.LOAD_ALL_DB_ONLY);
-            assertNotNull("Cache was not saved!", loadedCache);
-            assertEquals(1, loadedCache.getInventory().size());
+            assertThat(loadedCache).overridingErrorMessage("Cache was not saved.").isNotNull();
+            assertThat(loadedCache.getInventory()).hasSize(1);
         } finally {
             DataStore.removeCache(GEOCODE_CACHE, LoadFlags.REMOVE_ALL);
         }
@@ -134,7 +136,7 @@ public class DataStoreTest extends CGeoTestCase {
         final String GEOCODE_CACHE = "TEST";
         final String upperCase = GEOCODE_CACHE;
         final String lowerCase = StringUtils.lowerCase(upperCase);
-        assertFalse(upperCase.equals(lowerCase));
+        assertThat(upperCase.equals(lowerCase)).isFalse();
 
         // create cache and trackable
         final Geocache cache = new Geocache();
@@ -143,14 +145,14 @@ public class DataStoreTest extends CGeoTestCase {
 
         try {
             final Geocache oldCache = DataStore.loadCache(upperCase, LoadFlags.LOAD_ALL_DB_ONLY);
-            assertNull("Database contained old cache!", oldCache);
+            assertThat(oldCache).as("Old cache").isNull();
 
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
             final Geocache cacheWithOriginalCode = DataStore.loadCache(upperCase, LoadFlags.LOAD_ALL_DB_ONLY);
-            assertNotNull("Cache was not saved correctly!", cacheWithOriginalCode);
+            assertThat(cacheWithOriginalCode).overridingErrorMessage("Cache was not saved correctly!").isNotNull();
 
             final Geocache cacheLowerCase = DataStore.loadCache(lowerCase, LoadFlags.LOAD_ALL_DB_ONLY);
-            assertNotNull("Could not find cache by case insensitive geocode", cacheLowerCase);
+            assertThat(cacheLowerCase).overridingErrorMessage("Could not find cache by case insensitive geocode").isNotNull();
 
         } finally {
             DataStore.removeCache(upperCase, LoadFlags.REMOVE_ALL);
@@ -159,11 +161,10 @@ public class DataStoreTest extends CGeoTestCase {
 
     // Loading logs for an empty geocode should return an empty list, not null!
     public static void testLoadLogsFromEmptyGeocode() {
-
         final List<LogEntry> logs = DataStore.loadLogs("");
 
-        assertNotNull("Logs must not be null", logs);
-        assertEquals("Logs from empty geocode must be empty", 0, logs.size());
+        assertThat(logs).as("Logs for empty geocode").isNotNull();
+        assertThat(logs).as("Logs for empty geocode").isEmpty();
     }
 
     public static void testLoadCacheHistory() {
@@ -171,7 +172,7 @@ public class DataStoreTest extends CGeoTestCase {
         int allCaches = 0;
         for (CacheType cacheType : CacheType.values()) {
             SearchResult historyOfType = DataStore.getHistoryOfCaches(false, cacheType);
-            assertNotNull(historyOfType);
+            assertThat(historyOfType).isNotNull();
             if (cacheType != CacheType.ALL) {
                 sumCaches += historyOfType.getCount();
             } else {
@@ -179,9 +180,9 @@ public class DataStoreTest extends CGeoTestCase {
             }
         }
         // check that sum of types equals 'all'
-        assertEquals(sumCaches, allCaches);
+        assertThat(allCaches).isEqualTo(sumCaches);
         // check that two different routines behave the same
-        assertEquals(DataStore.getAllHistoryCachesCount(), sumCaches);
+        assertThat(sumCaches).isEqualTo(DataStore.getAllHistoryCachesCount());
     }
 
     public static void testCachedMissing() {
@@ -219,11 +220,11 @@ public class DataStoreTest extends CGeoTestCase {
 
         Set<String> filteredGeoCodes = DataStore.getCachedMissingFromSearch(search, tiles, GCConnector.getInstance(), Tile.ZOOMLEVEL_MIN_PERSONALIZED - 1);
 
-        assertTrue(filteredGeoCodes.contains(inTileLowZoom.getGeocode()));
-        assertFalse(filteredGeoCodes.contains(inTileHighZoom.getGeocode()));
-        assertFalse(filteredGeoCodes.contains(otherConnector.getGeocode()));
-        assertFalse(filteredGeoCodes.contains(outTile.getGeocode()));
-        assertFalse(filteredGeoCodes.contains(main.getGeocode()));
+        assertThat(filteredGeoCodes.contains(inTileLowZoom.getGeocode())).isTrue();
+        assertThat(filteredGeoCodes.contains(inTileHighZoom.getGeocode())).isFalse();
+        assertThat(filteredGeoCodes.contains(otherConnector.getGeocode())).isFalse();
+        assertThat(filteredGeoCodes.contains(outTile.getGeocode())).isFalse();
+        assertThat(filteredGeoCodes.contains(main.getGeocode())).isFalse();
 
     }
 }

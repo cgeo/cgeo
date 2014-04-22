@@ -1,5 +1,7 @@
 package cgeo.geocaching.geopoint;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.ICoordinates;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -38,66 +40,66 @@ public class ViewportTest extends AndroidTestCase {
     }
 
     public static void testMinMax() {
-        assertEquals(-1.0, vpRef.getLatitudeMin());
-        assertEquals(3.0, vpRef.getLatitudeMax());
-        assertEquals(-2.0, vpRef.getLongitudeMin());
-        assertEquals(4.0, vpRef.getLongitudeMax());
+        assertThat(vpRef.getLatitudeMin()).isEqualTo(-1.0);
+        assertThat(vpRef.getLatitudeMax()).isEqualTo(3.0);
+        assertThat(vpRef.getLongitudeMin()).isEqualTo(-2.0);
+        assertThat(vpRef.getLongitudeMax()).isEqualTo(4.0);
     }
 
     public static void testSpans() {
-        assertEquals(4.0, vpRef.getLatitudeSpan());
-        assertEquals(6.0, vpRef.getLongitudeSpan());
+        assertThat(vpRef.getLatitudeSpan()).isEqualTo(4.0);
+        assertThat(vpRef.getLongitudeSpan()).isEqualTo(6.0);
     }
 
     public static void testInViewport() {
-        assertFalse(vpRef.contains(new Geopoint(-2.0, -2.0)));
-        assertFalse(vpRef.contains(new Geopoint(4.0, 4.0)));
-        assertTrue(vpRef.contains(Geopoint.ZERO));
-        assertTrue(vpRef.contains(new Geopoint(-1.0, -2.0)));
-        assertTrue(vpRef.contains(new Geopoint(3.0, 4.0)));
+        assertThat(vpRef.contains(new Geopoint(-2.0, -2.0))).isFalse();
+        assertThat(vpRef.contains(new Geopoint(4.0, 4.0))).isFalse();
+        assertThat(vpRef.contains(Geopoint.ZERO)).isTrue();
+        assertThat(vpRef.contains(new Geopoint(-1.0, -2.0))).isTrue();
+        assertThat(vpRef.contains(new Geopoint(3.0, 4.0))).isTrue();
     }
 
     public static void testSqlWhere() {
-        assertEquals("latitude >= -1.0 and latitude <= 3.0 and longitude >= -2.0 and longitude <= 4.0", vpRef.sqlWhere(null).toString());
-        assertEquals("t.latitude >= -1.0 and t.latitude <= 3.0 and t.longitude >= -2.0 and t.longitude <= 4.0", vpRef.sqlWhere("t").toString());
+        assertThat(vpRef.sqlWhere(null).toString()).isEqualTo("latitude >= -1.0 and latitude <= 3.0 and longitude >= -2.0 and longitude <= 4.0");
+        assertThat(vpRef.sqlWhere("t").toString()).isEqualTo("t.latitude >= -1.0 and t.latitude <= 3.0 and t.longitude >= -2.0 and t.longitude <= 4.0");
         Locale current = null;
         try {
             current = Locale.getDefault();
             Locale.setDefault(Locale.FRENCH);
             assertEquals("1,0", String.format("%.2g", 1.0d));  // Control that we are in a locale with commma separator
-            assertEquals("t.latitude >= -1.0 and t.latitude <= 3.0 and t.longitude >= -2.0 and t.longitude <= 4.0", vpRef.sqlWhere("t").toString());
+            assertThat(vpRef.sqlWhere("t").toString()).isEqualTo("t.latitude >= -1.0 and t.latitude <= 3.0 and t.longitude >= -2.0 and t.longitude <= 4.0");
         } finally {
             Locale.setDefault(current);
         }
     }
 
     public static void testEquals() {
-        assertEquals(vpRef, vpRef);
+        assertThat(vpRef).isEqualTo(vpRef);
         assertEquals(vpRef, new Viewport(vpRef.bottomLeft, vpRef.topRight));
-        assertFalse(vpRef.equals(new Viewport(new Geopoint(0.0, 0.0), 1.0, 1.0)));
+        assertThat(vpRef.equals(new Viewport(new Geopoint(0.0, 0.0), 1.0, 1.0))).isFalse();
     }
 
     public static void testResize() {
-        assertEquals(vpRef, vpRef.resize(1.0));
+        assertThat(vpRef.resize(1.0)).isEqualTo(vpRef);
         assertEquals(new Viewport(new Geopoint(-3.0, -5.0), new Geopoint(5.0, 7.0)), vpRef.resize(2.0));
         assertEquals(new Viewport(new Geopoint(0.0, -0.5), new Geopoint(2.0, 2.5)), vpRef.resize(0.5));
     }
 
     public static void testIncludes() {
-        assertTrue(vpRef.includes(vpRef));
-        assertTrue(vpRef.includes(vpRef.resize(0.5)));
-        assertFalse(vpRef.includes(vpRef.resize(2.0)));
+        assertThat(vpRef.includes(vpRef)).isTrue();
+        assertThat(vpRef.includes(vpRef.resize(0.5))).isTrue();
+        assertThat(vpRef.includes(vpRef.resize(2.0))).isFalse();
     }
 
     public static void testContaining() {
-        assertNull(Viewport.containing(Collections.singleton((ICoordinates) null)));
+        assertThat(Viewport.containing(Collections.singleton((ICoordinates) null))).isNull();
         final Set<Geopoint> points = new HashSet<Geopoint>();
         points.add(vpRef.bottomLeft);
         assertEquals(new Viewport(vpRef.bottomLeft, vpRef.bottomLeft), Viewport.containing(points));
         points.add(vpRef.topRight);
-        assertEquals(vpRef, Viewport.containing(points));
+        assertThat(Viewport.containing(points)).isEqualTo(vpRef);
         points.add(vpRef.center);
-        assertEquals(vpRef, Viewport.containing(points));
+        assertThat(Viewport.containing(points)).isEqualTo(vpRef);
     }
 
 }

@@ -1,8 +1,10 @@
 package cgeo.geocaching.ui;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.enumerations.WaypointType;
 
 import android.test.AndroidTestCase;
@@ -24,7 +26,7 @@ public class FormatterTest extends AndroidTestCase {
     }
 
     private static void assertFormatting(Waypoint waypoint, String expected) {
-        assertEquals(expected, Formatter.formatWaypointInfo(waypoint));
+        assertThat(Formatter.formatWaypointInfo(waypoint)).isEqualTo(expected);
     }
 
 }

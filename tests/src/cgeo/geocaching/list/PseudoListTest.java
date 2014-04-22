@@ -1,5 +1,6 @@
 package cgeo.geocaching.list;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import junit.framework.TestCase;
 
 public class PseudoListTest extends TestCase {
@@ -7,12 +8,12 @@ public class PseudoListTest extends TestCase {
     public static void testGetTitleAndCount() throws Exception {
         final String title = PseudoList.ALL_LIST.getTitleAndCount();
         for (int i = 0; i < title.length(); i++) {
-            assertFalse("pseudo lists shall not have a number shown in their title", Character.isDigit(title.charAt(i)));
+            assertThat(Character.isDigit(title.charAt(i))).overridingErrorMessage("pseudo lists shall not have a number shown in their title").isFalse();
         }
     }
 
     public static void testIsConcrete() throws Exception {
-        assertFalse("pseudo lists are not concrete lists", PseudoList.ALL_LIST.isConcrete());
+        assertThat(PseudoList.ALL_LIST.isConcrete()).overridingErrorMessage("pseudo lists are not concrete lists").isFalse();
     }
 
 }

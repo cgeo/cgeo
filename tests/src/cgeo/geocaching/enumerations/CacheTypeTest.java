@@ -1,5 +1,7 @@
 package cgeo.geocaching.enumerations;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.Geocache;
 
 import android.test.AndroidTestCase;
@@ -9,32 +11,32 @@ import java.util.Locale;
 public class CacheTypeTest extends AndroidTestCase {
 
     public static void testGetById() {
-        assertEquals(CacheType.UNKNOWN, CacheType.getById(""));
-        assertEquals(CacheType.UNKNOWN, CacheType.getById(null));
-        assertEquals(CacheType.UNKNOWN, CacheType.getById("random garbage"));
-        assertEquals(CacheType.WHERIGO, CacheType.getById("wherigo"));
+        assertThat(CacheType.getById("")).isEqualTo(CacheType.UNKNOWN);
+        assertThat(CacheType.getById(null)).isEqualTo(CacheType.UNKNOWN);
+        assertThat(CacheType.getById("random garbage")).isEqualTo(CacheType.UNKNOWN);
+        assertThat(CacheType.getById("wherigo")).isEqualTo(CacheType.WHERIGO);
     }
 
     public static void testGetByPattern() {
-        assertEquals(CacheType.UNKNOWN, CacheType.getByPattern(""));
-        assertEquals(CacheType.UNKNOWN, CacheType.getByPattern(null));
-        assertEquals(CacheType.UNKNOWN, CacheType.getByPattern("random garbage"));
-        assertEquals(CacheType.CITO, CacheType.getByPattern("cache in trash out event"));
+        assertThat(CacheType.getByPattern("")).isEqualTo(CacheType.UNKNOWN);
+        assertThat(CacheType.getByPattern(null)).isEqualTo(CacheType.UNKNOWN);
+        assertThat(CacheType.getByPattern("random garbage")).isEqualTo(CacheType.UNKNOWN);
+        assertThat(CacheType.getByPattern("cache in trash out event")).isEqualTo(CacheType.CITO);
     }
 
     public static void testGetByIdComplete() {
         for (CacheType type : CacheType.values()) {
-            assertEquals(type, CacheType.getById(type.id));
-            assertEquals(type, CacheType.getById(type.id.toLowerCase(Locale.US)));
-            assertEquals(type, CacheType.getById(type.id.toUpperCase(Locale.US)));
+            assertThat(CacheType.getById(type.id)).isEqualTo(type);
+            assertThat(CacheType.getById(type.id.toLowerCase(Locale.US))).isEqualTo(type);
+            assertThat(CacheType.getById(type.id.toUpperCase(Locale.US))).isEqualTo(type);
         }
     }
 
     public static void testGetByPatternComplete() {
         for (CacheType type : CacheType.values()) {
-            assertEquals(type, CacheType.getByPattern(type.pattern));
-            assertEquals(type, CacheType.getByPattern(type.pattern.toLowerCase(Locale.US)));
-            assertEquals(type, CacheType.getByPattern(type.pattern.toUpperCase(Locale.US)));
+            assertThat(CacheType.getByPattern(type.pattern)).isEqualTo(type);
+            assertThat(CacheType.getByPattern(type.pattern.toLowerCase(Locale.US))).isEqualTo(type);
+            assertThat(CacheType.getByPattern(type.pattern.toUpperCase(Locale.US))).isEqualTo(type);
         }
     }
 
@@ -42,8 +44,8 @@ public class CacheTypeTest extends AndroidTestCase {
         final Geocache traditional = new Geocache();
         traditional.setType(CacheType.TRADITIONAL);
 
-        assertTrue(CacheType.ALL.contains(traditional));
-        assertTrue(CacheType.TRADITIONAL.contains(traditional));
-        assertFalse(CacheType.MYSTERY.contains(traditional));
+        assertThat(CacheType.ALL.contains(traditional)).isTrue();
+        assertThat(CacheType.TRADITIONAL.contains(traditional)).isTrue();
+        assertThat(CacheType.MYSTERY.contains(traditional)).isFalse();
     }
 }

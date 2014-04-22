@@ -1,5 +1,7 @@
 package cgeo.geocaching.connector.oc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 
@@ -12,13 +14,13 @@ public class OCConnectorTest extends TestCase {
      */
     public static void testCanHandleNew5DigitCodes() {
         final IConnector ocConnector = getOcDeConnector();
-        assertTrue(ocConnector.canHandle("OCFFFF"));
-        assertTrue(ocConnector.canHandle("OC10000"));
+        assertThat(ocConnector.canHandle("OCFFFF")).isTrue();
+        assertThat(ocConnector.canHandle("OC10000")).isTrue();
     }
 
     private static IConnector getOcDeConnector() {
         final IConnector ocConnector = ConnectorFactory.getConnector("OCXXX");
-        assertTrue(ocConnector.getHost().contains(".de"));
+        assertThat(ocConnector.getHost().contains(".de")).isTrue();
         return ocConnector;
     }
 

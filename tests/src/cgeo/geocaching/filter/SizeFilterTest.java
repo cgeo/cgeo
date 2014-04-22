@@ -1,5 +1,7 @@
 package cgeo.geocaching.filter;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -27,23 +29,23 @@ public class SizeFilterTest extends CGeoTestCase {
     }
 
     public void testAccepts() {
-        assertTrue(microFilter.accepts(micro));
-        assertFalse(microFilter.accepts(regular));
+        assertThat(microFilter.accepts(micro)).isTrue();
+        assertThat(microFilter.accepts(regular)).isFalse();
     }
 
     public static void testGetAllFilters() {
         final int expectedSizes = CacheSize.values().length - 1; // hide "UNKNOWN"
-        assertEquals(expectedSizes, new SizeFilter.Factory().getFilters().size());
+        assertThat(new SizeFilter.Factory().getFilters()).hasSize(expectedSizes);
     }
 
     public void testFilter() {
         final ArrayList<Geocache> list = new ArrayList<Geocache>();
         list.add(regular);
         list.add(micro);
-        assertEquals(2, list.size());
+        assertThat(list).hasSize(2);
 
         microFilter.filter(list);
-        assertEquals(1, list.size());
+        assertThat(list).hasSize(1);
     }
 
 }

@@ -1,5 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.TextUtils;
 
@@ -48,13 +50,13 @@ public class GCConstantsTest extends AndroidTestCase {
         GCLogin.getInstance().logout();
         GCLogin.getInstance().setActualCachesFound(0);
         GCLogin.getInstance().login();
-        assertTrue(GCLogin.getInstance().getActualCachesFound() > 0);
+        assertThat(GCLogin.getInstance().getActualCachesFound() > 0).isTrue();
     }
 
     public static void testConstants() {
         final String session = "userSession = new Groundspeak.Map.UserSession('aKWZ', userOptions:'XPTf', sessionToken:'123pNKwdktYGZL0xd-I7yqA6nm_JE1BDUtM4KcOkifin2TRCMutBd_PZE14Ohpffs2ZgkTnxTSnxYpBigK4hBA2', subscriberType: 3, enablePersonalization: true });";
         assertEquals("aKWZ", TextUtils.getMatch(session, GCConstants.PATTERN_USERSESSION, ""));
-        assertTrue(TextUtils.getMatch(session, GCConstants.PATTERN_SESSIONTOKEN, "").startsWith("123pNK"));
+        assertThat(TextUtils.getMatch(session, GCConstants.PATTERN_SESSIONTOKEN, "").startsWith("123pNK")).isTrue();
     }
 
     public static void testTBWithSpecialChar() {

@@ -1,5 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
@@ -18,7 +20,7 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 88, 124, 14).getType());
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 228, 104, 14).getType());
         assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 52, 92, 14).getType());
-        assertTrue(parseMapPNG(bitmap, 108, 112, 14).isFound());
+        assertThat(parseMapPNG(bitmap, 108, 112, 14).isFound()).isTrue();
     }
 
     private Bitmap getBitmap(int resourceId) {
@@ -80,52 +82,52 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
         found = parseMapPNG(bitmap, 240, 140, 12).isFound() ? found + 1 : found;
         found = parseMapPNG(bitmap, 211, 127, 12).isFound() ? found + 1 : found;
 
-        assertEquals(7, multi);
-        assertEquals(7, mystery);
-        assertEquals(7, tradi);
-        assertEquals(4, found);
+        assertThat(multi).isEqualTo(7);
+        assertThat(mystery).isEqualTo(7);
+        assertThat(tradi).isEqualTo(7);
+        assertThat(found).isEqualTo(4);
     }
 
     public void testParseExtraMap1() {
         final Bitmap bitmap = getBitmap(R.raw.map1);
-        assertTrue(parseMapPNG(bitmap, 128, 168, 12).isFound()); // GC3AT8B
+        assertThat(parseMapPNG(bitmap, 128, 168, 12).isFound()).isTrue(); // GC3AT8B
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 172, 164, 12).getType()); // GC39EXB
-        assertTrue(parseMapPNG(bitmap, 164, 156, 12).isFound()); // GC30M7M
+        assertThat(parseMapPNG(bitmap, 164, 156, 12).isFound()).isTrue(); // GC30M7M
         assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 204, 72, 12).getType()); // GC3AN5Z
-        assertTrue(parseMapPNG(bitmap, 188, 92, 12).isFound()); // GC37T3R
-        assertTrue(parseMapPNG(bitmap, 164, 132, 12).isFound()); // GC34JME
+        assertThat(parseMapPNG(bitmap, 188, 92, 12).isFound()).isTrue(); // GC37T3R
+        assertThat(parseMapPNG(bitmap, 164, 132, 12).isFound()).isTrue(); // GC34JME
         assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 176, 148, 12).getType()); // GC37TCY
         assertEquals(CacheType.EARTH, parseMapPNG(bitmap, 180, 136, 12).getType()); // GC3947Z
-        assertTrue(parseMapPNG(bitmap, 164, 100, 12).isFound()); // GC2ZY3X
-        assertTrue(parseMapPNG(bitmap, 52, 104, 12).isFound()); // GC29RCW
-        assertTrue(parseMapPNG(bitmap, 168, 88, 12).isFound()); // GC264JZ
-        assertTrue(parseMapPNG(bitmap, 168, 140, 12).isFound()); // GC37RRV
+        assertThat(parseMapPNG(bitmap, 164, 100, 12).isFound()).isTrue(); // GC2ZY3X
+        assertThat(parseMapPNG(bitmap, 52, 104, 12).isFound()).isTrue(); // GC29RCW
+        assertThat(parseMapPNG(bitmap, 168, 88, 12).isFound()).isTrue(); // GC264JZ
+        assertThat(parseMapPNG(bitmap, 168, 140, 12).isFound()).isTrue(); // GC37RRV
     }
 
     public void testParseExtraMap2() {
         final Bitmap bitmap = getBitmap(R.raw.map2);
 
-        assertTrue(parseMapPNG(bitmap, 132, 136, 12).isFound()); // GC3JDBW
-        assertTrue(parseMapPNG(bitmap, 68, 24, 12).isFound()); // GC2T0AH
-        assertTrue(parseMapPNG(bitmap, 176, 232, 12).isOwner()); // GC2RPBX
-        assertTrue(parseMapPNG(bitmap, 148, 60, 12).isFound()); // GC31FY6
-        assertTrue(parseMapPNG(bitmap, 216, 20, 12).isFound()); // GC2KP3M
-        assertTrue(parseMapPNG(bitmap, 212, 184, 12).isOwner()); // GC30W3K
-        assertTrue(parseMapPNG(bitmap, 148, 72, 12).isOwner()); // GC2RPAZ
-        assertTrue(parseMapPNG(bitmap, 216, 48, 12).isOwner()); // GC2RP8W
-        assertTrue(parseMapPNG(bitmap, 212, 60, 12).isFound()); // GC3CC97
-        assertTrue(parseMapPNG(bitmap, 148, 100, 12).isOwner()); // GC2RPAT
-        assertTrue(parseMapPNG(bitmap, 104, 136, 12).isFound()); // GC3AE31
-        assertTrue(parseMapPNG(bitmap, 52, 96, 12).isOwner()); // GC2RPCH
-        assertTrue(parseMapPNG(bitmap, 172, 156, 12).isOwner()); // GC2RQ07
-        assertTrue(parseMapPNG(bitmap, 116, 56, 12).isFound()); // GC3AYR2
-        assertTrue(parseMapPNG(bitmap, 208, 68, 12).isOwner()); // GC2RP93
-        assertTrue(parseMapPNG(bitmap, 200, 52, 12).isOwner()); // GC2RPAA
-        assertTrue(parseMapPNG(bitmap, 208, 44, 12).isFound()); // GC3HE15
-        assertTrue(parseMapPNG(bitmap, 112, 76, 12).isOwner()); // GC2RPBE
-        assertTrue(parseMapPNG(bitmap, 232, 192, 12).isOwner()); // GC2E1KF
-        assertTrue(parseMapPNG(bitmap, 184, 76, 12).isFound()); // GC2NK5R
-        assertTrue(parseMapPNG(bitmap, 132, 148, 12).isOwner()); // GC2RPBC
+        assertThat(parseMapPNG(bitmap, 132, 136, 12).isFound()).isTrue(); // GC3JDBW
+        assertThat(parseMapPNG(bitmap, 68, 24, 12).isFound()).isTrue(); // GC2T0AH
+        assertThat(parseMapPNG(bitmap, 176, 232, 12).isOwner()).isTrue(); // GC2RPBX
+        assertThat(parseMapPNG(bitmap, 148, 60, 12).isFound()).isTrue(); // GC31FY6
+        assertThat(parseMapPNG(bitmap, 216, 20, 12).isFound()).isTrue(); // GC2KP3M
+        assertThat(parseMapPNG(bitmap, 212, 184, 12).isOwner()).isTrue(); // GC30W3K
+        assertThat(parseMapPNG(bitmap, 148, 72, 12).isOwner()).isTrue(); // GC2RPAZ
+        assertThat(parseMapPNG(bitmap, 216, 48, 12).isOwner()).isTrue(); // GC2RP8W
+        assertThat(parseMapPNG(bitmap, 212, 60, 12).isFound()).isTrue(); // GC3CC97
+        assertThat(parseMapPNG(bitmap, 148, 100, 12).isOwner()).isTrue(); // GC2RPAT
+        assertThat(parseMapPNG(bitmap, 104, 136, 12).isFound()).isTrue(); // GC3AE31
+        assertThat(parseMapPNG(bitmap, 52, 96, 12).isOwner()).isTrue(); // GC2RPCH
+        assertThat(parseMapPNG(bitmap, 172, 156, 12).isOwner()).isTrue(); // GC2RQ07
+        assertThat(parseMapPNG(bitmap, 116, 56, 12).isFound()).isTrue(); // GC3AYR2
+        assertThat(parseMapPNG(bitmap, 208, 68, 12).isOwner()).isTrue(); // GC2RP93
+        assertThat(parseMapPNG(bitmap, 200, 52, 12).isOwner()).isTrue(); // GC2RPAA
+        assertThat(parseMapPNG(bitmap, 208, 44, 12).isFound()).isTrue(); // GC3HE15
+        assertThat(parseMapPNG(bitmap, 112, 76, 12).isOwner()).isTrue(); // GC2RPBE
+        assertThat(parseMapPNG(bitmap, 232, 192, 12).isOwner()).isTrue(); // GC2E1KF
+        assertThat(parseMapPNG(bitmap, 184, 76, 12).isFound()).isTrue(); // GC2NK5R
+        assertThat(parseMapPNG(bitmap, 132, 148, 12).isOwner()).isTrue(); // GC2RPBC
     }
 
     public void testParseExtraMap3() {
@@ -179,7 +181,7 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 44, 72, 12).getType()); // GC10W91
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 104, 36, 12).getType()); // GCRC1W
         assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 88, 36, 12).getType()); // GC30PQF
-        assertTrue(parseMapPNG(bitmap, 116, 36, 12).isFound()); // GC17VWA
+        assertThat(parseMapPNG(bitmap, 116, 36, 12).isFound()).isTrue(); // GC17VWA
         assertEquals(CacheType.EARTH, parseMapPNG(bitmap, 28, 56, 12).getType()); // GC1E6A6
         assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 96, 72, 12).getType()); // GCMVAC
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 140, 48, 12).getType()); // GCZPE4
@@ -212,7 +214,7 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 104, 88, 12).getType()); // GC1FKZY
         assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 56, 248, 12).getType()); // GC2Y5Z4
         assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 72, 32, 12).getType()); // GC395J6
-        assertTrue(parseMapPNG(bitmap, 180, 4, 12).isFound()); // GC21MFG
+        assertThat(parseMapPNG(bitmap, 180, 4, 12).isFound()).isTrue(); // GC21MFG
         assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 96, 100, 12).getType()); // GC1W45E
         assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 144, 160, 12).getType()); // GC37BA1
         assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 12, 4, 12).getType()); // GC1K8KR
@@ -237,7 +239,7 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 92, 192, 12).getType()); // GC11D9P
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 52, 84, 12).getType()); // GC2M693
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 176, 196, 12).getType()); // GCZHVE
-        assertTrue(parseMapPNG(bitmap, 140, 108, 12).isFound()); // GC1Q5PW
+        assertThat(parseMapPNG(bitmap, 140, 108, 12).isFound()).isTrue(); // GC1Q5PW
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 108, 148, 12).getType()); // GC2ZR0C
         assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 168, 8, 12).getType()); // GCYWQH
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 196, 92, 12).getType()); // GC39VXN
@@ -245,15 +247,15 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 168, 28, 12).getType()); // GC2H1TG
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 240, 52, 12).getType()); // GC2QTXT
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 152, 148, 12).getType()); // GC3E7QD
-        assertTrue(parseMapPNG(bitmap, 160, 60, 12).isFound()); // GC2J3G9
-        assertTrue(parseMapPNG(bitmap, 160, 100, 12).isFound()); // GC2327G
+        assertThat(parseMapPNG(bitmap, 160, 60, 12).isFound()).isTrue(); // GC2J3G9
+        assertThat(parseMapPNG(bitmap, 160, 100, 12).isFound()).isTrue(); // GC2327G
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 136, 32, 12).getType()); // GC2JVEH
         assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 208, 164, 12).getType()); // GC1NN15
         assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 84, 244, 12).getType()); // GC3E5JP
         assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 172, 16, 12).getType()); // GC1Z581
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 104, 20, 12).getType()); // GC2MENX
         assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 144, 60, 12).getType()); // GC1V3MG
-        assertTrue(parseMapPNG(bitmap, 228, 56, 12).isFound()); // GC36WZN
+        assertThat(parseMapPNG(bitmap, 228, 56, 12).isFound()).isTrue(); // GC36WZN
         assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 144, 212, 12).getType()); // GCR9GB
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 180, 68, 12).getType()); // GC3JZ1K
         assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 228, 104, 12).getType()); // GCQ95T
@@ -264,7 +266,7 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 84, 128, 12).getType()); // GC2XQ6C
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 248, 164, 12).getType()); // GC3B1JK
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 232, 84, 12).getType()); // GC3AT8J
-        assertTrue(parseMapPNG(bitmap, 160, 88, 12).isFound()); // GC2MB4P
+        assertThat(parseMapPNG(bitmap, 160, 88, 12).isFound()).isTrue(); // GC2MB4P
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 132, 20, 12).getType()); // GC2NW3F
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 56, 132, 12).getType()); // GC22ERA
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 28, 32, 12).getType()); // GC2EFFK
@@ -289,7 +291,7 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 220, 48, 12).getType()); // GC1HQ8Y
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 136, 176, 12).getType()); // GC310B7
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 132, 232, 12).getType()); // GC12CR5
-        assertTrue(parseMapPNG(bitmap, 240, 40, 12).isFound()); // GC24GW1
+        assertThat(parseMapPNG(bitmap, 240, 40, 12).isFound()).isTrue(); // GC24GW1
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 140, 116, 12).getType()); // GC2YYE7
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 124, 144, 12).getType()); // GC111RZ
         assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 48, 128, 12).getType()); // GC13A7V
@@ -302,7 +304,7 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 108, 168, 12).getType()); // GC3C043
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 232, 28, 12).getType()); // GC1TEAR
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 200, 204, 12).getType()); // GC3AKFV
-        assertTrue(parseMapPNG(bitmap, 228, 28, 12).isFound()); // GC2NMPR
+        assertThat(parseMapPNG(bitmap, 228, 28, 12).isFound()).isTrue(); // GC2NMPR
         //assertEquals(CacheType.VIRTUAL, parseMapPNG(bitmap, 232, 252, 12).getType()); // GC1AH0N - False detection
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 220, 188, 12).getType()); // GC1ZXDK
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 168, 212, 12).getType()); // GC3A919
@@ -339,7 +341,7 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 248, 56, 12).getType()); // GC1N11P
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 100, 180, 12).getType()); // GCM6AE
         assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 220, 124, 12).getType()); // GC2A1RQ
-        assertTrue(parseMapPNG(bitmap, 212, 4, 12).isFound()); // GC1TVKE
+        assertThat(parseMapPNG(bitmap, 212, 4, 12).isFound()).isTrue(); // GC1TVKE
         assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 28, 212, 12).getType()); // GC2A1RR
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 128, 84, 12).getType()); // GC16AWC
         assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 220, 16, 12).getType()); // GC282V9
@@ -365,7 +367,7 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 120, 172, 12).getType()); // GC3B30A
         assertEquals(CacheType.TRADITIONAL, parseMapPNG(bitmap, 104, 92, 12).getType()); // GC2GY9D
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 128, 120, 12).getType()); // GC2Y90M
-        assertTrue(parseMapPNG(bitmap, 204, 40, 12).isFound()); // GC1BZ6P
+        assertThat(parseMapPNG(bitmap, 204, 40, 12).isFound()).isTrue(); // GC1BZ6P
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 56, 76, 12).getType()); // GC10K7X
         assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 196, 108, 12).getType()); // GC1F0R5
         assertEquals(CacheType.MYSTERY, parseMapPNG(bitmap, 120, 196, 12).getType()); // GC1KQQW
@@ -386,13 +388,13 @@ public class IconDecoderTest extends AbstractResourceInstrumentationTestCase {
 
     public void testParseExtraMapall14() {
         final Bitmap bitmap = getBitmap(R.raw.map_all14);
-        assertTrue(parseMapPNG(bitmap, 40, 16, 14).isFound());
-        assertTrue(parseMapPNG(bitmap, 72, 16, 14).isFound());
-        assertTrue(parseMapPNG(bitmap, 100, 16, 14).isFound());
-        assertTrue(parseMapPNG(bitmap, 128, 16, 14).isFound());
-        assertTrue(parseMapPNG(bitmap, 44, 44, 14).isOwner());
-        assertTrue(parseMapPNG(bitmap, 76, 44, 14).isOwner());
-        assertTrue(parseMapPNG(bitmap, 132, 44, 14).isOwner());
+        assertThat(parseMapPNG(bitmap, 40, 16, 14).isFound()).isTrue();
+        assertThat(parseMapPNG(bitmap, 72, 16, 14).isFound()).isTrue();
+        assertThat(parseMapPNG(bitmap, 100, 16, 14).isFound()).isTrue();
+        assertThat(parseMapPNG(bitmap, 128, 16, 14).isFound()).isTrue();
+        assertThat(parseMapPNG(bitmap, 44, 44, 14).isOwner()).isTrue();
+        assertThat(parseMapPNG(bitmap, 76, 44, 14).isOwner()).isTrue();
+        assertThat(parseMapPNG(bitmap, 132, 44, 14).isOwner()).isTrue();
         assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 40, 72, 14).getType());
         assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 72, 72, 14).getType());
         assertEquals(CacheType.MULTI, parseMapPNG(bitmap, 100, 72, 14).getType());

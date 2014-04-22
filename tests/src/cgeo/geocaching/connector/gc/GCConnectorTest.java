@@ -1,5 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TravelBugConnector;
@@ -27,17 +29,17 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
             {
                 final Viewport viewport = new Viewport(new Geopoint("N 52° 25.369 E 9° 35.499"), new Geopoint("N 52° 25.600 E 9° 36.200"));
                 final SearchResult searchResult = ConnectorFactory.searchByViewport(viewport, tokens);
-                assertNotNull(searchResult);
-                assertFalse(searchResult.isEmpty());
-                assertTrue(searchResult.getGeocodes().contains("GC4ER5H"));
+                assertThat(searchResult).isNotNull();
+                assertThat(searchResult.isEmpty()).isFalse();
+                assertThat(searchResult.getGeocodes().contains("GC4ER5H")).isTrue();
                 // 22.10.13: Changed from GC211WG (archived) to GC4ER5H  in same area
             }
 
             {
                 final Viewport viewport = new Viewport(new Geopoint("N 52° 24.000 E 9° 34.500"), new Geopoint("N 52° 26.000 E 9° 38.500"));
                 final SearchResult searchResult = ConnectorFactory.searchByViewport(viewport, tokens);
-                assertNotNull(searchResult);
-                assertTrue(searchResult.getGeocodes().contains("GC4ER5H"));
+                assertThat(searchResult).isNotNull();
+                assertThat(searchResult.getGeocodes().contains("GC4ER5H")).isTrue();
             }
         } finally {
             // restore user settings
@@ -47,19 +49,19 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public static void testCanHandle() {
-        assertTrue(GCConnector.getInstance().canHandle("GC2MEGA"));
-        assertFalse(GCConnector.getInstance().canHandle("OXZZZZZ"));
+        assertThat(GCConnector.getInstance().canHandle("GC2MEGA")).isTrue();
+        assertThat(GCConnector.getInstance().canHandle("OXZZZZZ")).isFalse();
     }
 
     /**
      * functionality moved to {@link TravelBugConnector}
      */
     public static void testCanNotHandleTrackablesAnymore() {
-        assertFalse(GCConnector.getInstance().canHandle("TB3F651"));
+        assertThat(GCConnector.getInstance().canHandle("TB3F651")).isFalse();
     }
 
     public static void testBaseCodings() {
-        assertEquals(2045702, GCConstants.gccodeToGCId("GC2MEGA"));
+        assertThat(GCConstants.gccodeToGCId("GC2MEGA")).isEqualTo(2045702);
     }
 
     /** Tile computation with different zoom levels */
@@ -81,18 +83,18 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
     }
 
     private static void assertTileAt(int x, int y, final Tile tile) {
-        assertEquals(x, tile.getX());
-        assertEquals(y, tile.getY());
+        assertThat(tile.getX()).isEqualTo(x);
+        assertThat(tile.getY()).isEqualTo(y);
     }
 
     public static void testGetGeocodeFromUrl() {
-        assertNull(GCConnector.getInstance().getGeocodeFromUrl("some string"));
-        assertEquals("GC12ABC", GCConnector.getInstance().getGeocodeFromUrl("http://coord.info/GC12ABC"));
-        assertEquals("GC12ABC", GCConnector.getInstance().getGeocodeFromUrl("http://www.coord.info/GC12ABC"));
-        assertEquals("GC12ABC", GCConnector.getInstance().getGeocodeFromUrl("http://www.geocaching.com/geocache/GC12ABC_die-muhlen-im-schondratal-muhle-munchau"));
-        assertEquals("GC12ABC", GCConnector.getInstance().getGeocodeFromUrl("http://geocaching.com/geocache/GC12ABC_die-muhlen-im-schondratal-muhle-munchau"));
+        assertThat(GCConnector.getInstance().getGeocodeFromUrl("some string")).isNull();
+        assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://coord.info/GC12ABC")).isEqualTo("GC12ABC");
+        assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://www.coord.info/GC12ABC")).isEqualTo("GC12ABC");
+        assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://www.geocaching.com/geocache/GC12ABC_die-muhlen-im-schondratal-muhle-munchau")).isEqualTo("GC12ABC");
+        assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://geocaching.com/geocache/GC12ABC_die-muhlen-im-schondratal-muhle-munchau")).isEqualTo("GC12ABC");
 
-        assertNull(GCConnector.getInstance().getGeocodeFromUrl("http://coord.info/TB1234"));
-        assertNull(GCConnector.getInstance().getGeocodeFromUrl("http://www.coord.info/TB1234"));
+        assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://coord.info/TB1234")).isNull();
+        assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://www.coord.info/TB1234")).isNull();
     }
 }

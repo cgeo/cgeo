@@ -1,5 +1,7 @@
 package cgeo.geocaching.export;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
@@ -42,7 +44,7 @@ public class ExportTest extends CGeoTestCase {
             DataStore.removeCache(cache.getGeocode(), LoadFlags.REMOVE_ALL);
         }
 
-        assertNotNull(result);
+        assertThat(result).isNotNull();
 
         FileUtils.deleteIgnoringFailure(result);
     }

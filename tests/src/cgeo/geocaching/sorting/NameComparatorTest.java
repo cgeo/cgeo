@@ -1,5 +1,7 @@
 package cgeo.geocaching.sorting;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.Geocache;
 
 import android.test.AndroidTestCase;
@@ -45,20 +47,20 @@ public class NameComparatorTest extends AndroidTestCase {
         }
         Collections.sort(caches, comp);
         for (int i = 0; i < caches.size(); i++) {
-            assertEquals(names[i], caches.get(i).getName());
+            assertThat(caches.get(i).getName()).isEqualTo(names[i]);
         }
     }
 
     public void testNumericalWithSuffix() {
         assertSorted(new NamedCache("abc123def"), new NamedCache("abc123xyz"));
-        assertEquals("abc000123def000456", (new NamedCache("abc123def456")).getNameForSorting());
+        assertThat((new NamedCache("abc123def456")).getNameForSorting()).isEqualTo("abc000123def000456");
     }
 
     private void assertSorted(final Geocache cache1, final Geocache cache2) {
-        assertTrue(comp.compare(cache1, cache2) < 0);
+        assertThat(comp.compare(cache1, cache2) < 0).isTrue();
     }
 
     private void assertNotSorted(final Geocache cache1, final Geocache cache2) {
-        assertTrue(comp.compare(cache1, cache2) > 0);
+        assertThat(comp.compare(cache1, cache2) > 0).isTrue();
     }
 }

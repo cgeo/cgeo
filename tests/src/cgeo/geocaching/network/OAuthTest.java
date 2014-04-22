@@ -1,5 +1,7 @@
 package cgeo.geocaching.network;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.eclipse.jdt.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -41,13 +43,13 @@ public class OAuthTest extends TestCase {
                 final @NonNull
                 String charAsString = String.valueOf(c);
                 final String encoded = OAuth.percentEncode(charAsString);
-                assertFalse("Character '" + charAsString + "' not encoded", charAsString.equals(encoded));
-                assertTrue(encoded.startsWith("%"));
+                assertThat(charAsString).overridingErrorMessage("Character '" + charAsString + "' not encoded").isNotEqualTo(encoded);
+                assertThat(encoded).startsWith("%");
             }
         }
     }
 
     public static void testAsterisk() {
-        assertFalse("*".equals(OAuth.percentEncode("*")));
+        assertThat("*".equals(OAuth.percentEncode("*"))).isFalse();
     }
 }

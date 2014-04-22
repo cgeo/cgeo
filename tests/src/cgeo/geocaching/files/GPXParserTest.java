@@ -1,5 +1,7 @@
 package cgeo.geocaching.files;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
@@ -36,20 +38,20 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
 
     private Geocache testGPXVersion(final int resourceId) throws IOException, ParserException {
         final List<Geocache> caches = readGPX10(resourceId);
-        assertNotNull(caches);
-        assertEquals(1, caches.size());
+        assertThat(caches).isNotNull();
+        assertThat(caches).hasSize(1);
         final Geocache cache = caches.get(0);
-        assertEquals("GC1BKP3", cache.getGeocode());
-        assertEquals("9946f030-a514-46d8-a050-a60e92fd2e1a", cache.getGuid());
-        assertEquals(CacheType.TRADITIONAL, cache.getType());
-        assertEquals(false, cache.isArchived());
-        assertEquals(false, cache.isDisabled());
-        assertEquals("Die Schatzinsel / treasure island", cache.getName());
-        assertEquals("Die unbesiegbaren Geo - Geparden", cache.getOwnerDisplayName());
-        assertEquals("Die unbesiegbaren Geo - Geparden", cache.getOwnerUserId());
-        assertEquals(CacheSize.MICRO, cache.getSize());
-        assertEquals(1.0f, cache.getDifficulty());
-        assertEquals(5.0f, cache.getTerrain());
+        assertThat(cache.getGeocode()).isEqualTo("GC1BKP3");
+        assertThat(cache.getGuid()).isEqualTo("9946f030-a514-46d8-a050-a60e92fd2e1a");
+        assertThat(cache.getType()).isEqualTo(CacheType.TRADITIONAL);
+        assertThat(cache.isArchived()).isEqualTo(false);
+        assertThat(cache.isDisabled()).isEqualTo(false);
+        assertThat(cache.getName()).isEqualTo("Die Schatzinsel / treasure island");
+        assertThat(cache.getOwnerDisplayName()).isEqualTo("Die unbesiegbaren Geo - Geparden");
+        assertThat(cache.getOwnerUserId()).isEqualTo("Die unbesiegbaren Geo - Geparden");
+        assertThat(cache.getSize()).isEqualTo(CacheSize.MICRO);
+        assertThat(cache.getDifficulty()).isEqualTo(1.0f);
+        assertThat(cache.getTerrain()).isEqualTo(5.0f);
         assertEquals("Baden-Württemberg, Germany", cache.getLocation());
         assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel.\nA old dream of my childhood, a treasure on a lonely island.", cache.getShortDescription());
         assertEquals(new Geopoint(48.859683, 9.1874), cache.getCoords());
@@ -58,47 +60,47 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
 
     public void testGPXVersion101() throws IOException, ParserException {
         final Geocache cache = testGPXVersion(R.raw.gc1bkp3_gpx101);
-        assertNotNull(cache.getAttributes());
-        assertEquals(10, cache.getAttributes().size());
+        assertThat(cache.getAttributes()).isNotNull();
+        assertThat(cache.getAttributes()).hasSize(10);
     }
 
     public void testOC() throws IOException, ParserException {
         final List<Geocache> caches = readGPX10(R.raw.oc5952_gpx);
         final Geocache cache = caches.get(0);
-        assertEquals("OC5952", cache.getGeocode());
-        assertEquals(CacheType.TRADITIONAL, cache.getType());
-        assertEquals(false, cache.isArchived());
-        assertEquals(false, cache.isDisabled());
-        assertEquals("Die Schatzinsel / treasure island", cache.getName());
-        assertEquals("Die unbesiegbaren Geo - Geparden", cache.getOwnerDisplayName());
-        assertEquals("Die unbesiegbaren Geo - Geparden", cache.getOwnerUserId());
-        assertEquals(CacheSize.SMALL, cache.getSize());
-        assertEquals(1.0f, cache.getDifficulty());
-        assertEquals(4.0f, cache.getTerrain());
+        assertThat(cache.getGeocode()).isEqualTo("OC5952");
+        assertThat(cache.getType()).isEqualTo(CacheType.TRADITIONAL);
+        assertThat(cache.isArchived()).isEqualTo(false);
+        assertThat(cache.isDisabled()).isEqualTo(false);
+        assertThat(cache.getName()).isEqualTo("Die Schatzinsel / treasure island");
+        assertThat(cache.getOwnerDisplayName()).isEqualTo("Die unbesiegbaren Geo - Geparden");
+        assertThat(cache.getOwnerUserId()).isEqualTo("Die unbesiegbaren Geo - Geparden");
+        assertThat(cache.getSize()).isEqualTo(CacheSize.SMALL);
+        assertThat(cache.getDifficulty()).isEqualTo(1.0f);
+        assertThat(cache.getTerrain()).isEqualTo(4.0f);
         assertEquals("Baden-Württemberg, Germany", cache.getLocation());
         assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel. A old dream of my childhood, a treasure on a lonely is", cache.getShortDescription());
         assertEquals(new Geopoint(48.85968, 9.18740), cache.getCoords());
-        assertTrue(cache.isReliableLatLon());
+        assertThat(cache.isReliableLatLon()).isTrue();
     }
 
     public void testGc31j2h() throws IOException, ParserException {
         removeCacheCompletely("GC31J2H");
         final List<Geocache> caches = readGPX10(R.raw.gc31j2h);
-        assertEquals(1, caches.size());
+        assertThat(caches).hasSize(1);
         final Geocache cache = caches.get(0);
 
         assertGc31j2h(cache);
-        assertSame(cache, caches.get(0));
+        assertThat(caches.get(0)).isSameAs(cache);
 
         // no waypoints without importing waypoint file
-        assertEquals(0, cache.getWaypoints().size());
-        assertTrue(cache.isReliableLatLon());
+        assertThat(cache.getWaypoints()).isEmpty();
+        assertThat(cache.isReliableLatLon()).isTrue();
     }
 
     public void testGc31j2hWpts() throws IOException, ParserException {
         removeCacheCompletely("GC31J2H");
         final List<Geocache> caches = readGPX10(R.raw.gc31j2h, R.raw.gc31j2h_wpts);
-        assertEquals(1, caches.size());
+        assertThat(caches).hasSize(1);
         final Geocache cache = caches.get(0);
         assertGc31j2h(cache);
         assertGc31j2hWaypoints(cache);
@@ -106,56 +108,56 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
 
     public void testGc31j2hWptsWithoutCache() throws IOException, ParserException {
         final List<Geocache> caches = readGPX10(R.raw.gc31j2h_wpts);
-        assertEquals(0, caches.size());
+        assertThat(caches).isEmpty();
     }
 
     public static void testConvertWaypointSym2Type() {
-        assertEquals(WaypointType.WAYPOINT, GPXParser.convertWaypointSym2Type("unknown sym"));
+        assertThat(GPXParser.convertWaypointSym2Type("unknown sym")).isEqualTo(WaypointType.WAYPOINT);
 
-        assertEquals(WaypointType.PARKING, GPXParser.convertWaypointSym2Type("Parking area"));
-        assertEquals(WaypointType.STAGE, GPXParser.convertWaypointSym2Type("Stages of a multicache"));
-        assertEquals(WaypointType.PUZZLE, GPXParser.convertWaypointSym2Type("Question to answer"));
-        assertEquals(WaypointType.TRAILHEAD, GPXParser.convertWaypointSym2Type("Trailhead"));
-        assertEquals(WaypointType.FINAL, GPXParser.convertWaypointSym2Type("Final location"));
-        assertEquals(WaypointType.WAYPOINT, GPXParser.convertWaypointSym2Type("Reference point"));
+        assertThat(GPXParser.convertWaypointSym2Type("Parking area")).isEqualTo(WaypointType.PARKING);
+        assertThat(GPXParser.convertWaypointSym2Type("Stages of a multicache")).isEqualTo(WaypointType.STAGE);
+        assertThat(GPXParser.convertWaypointSym2Type("Question to answer")).isEqualTo(WaypointType.PUZZLE);
+        assertThat(GPXParser.convertWaypointSym2Type("Trailhead")).isEqualTo(WaypointType.TRAILHEAD);
+        assertThat(GPXParser.convertWaypointSym2Type("Final location")).isEqualTo(WaypointType.FINAL);
+        assertThat(GPXParser.convertWaypointSym2Type("Reference point")).isEqualTo(WaypointType.WAYPOINT);
 
-        assertEquals(WaypointType.PARKING, GPXParser.convertWaypointSym2Type(WaypointType.PARKING.getL10n()));
+        assertThat(GPXParser.convertWaypointSym2Type(WaypointType.PARKING.getL10n())).isEqualTo(WaypointType.PARKING);
     }
 
     private static void assertGc31j2h(final Geocache cache) {
-        assertEquals("GC31J2H", cache.getGeocode());
-        assertEquals("Hockenheimer City-Brunnen", cache.getName());
-        assertTrue("Hockenheimer City-Brunnen by vptsz, Multi-cache (2/1)", cache.getShortDescription().startsWith("Kurzer informativer Multi entlang der Brunnen"));
-        assertTrue(cache.getDescription().startsWith("Cachemobile können kostenfrei am Messplatz geparkt werden."));
-        assertTrue(cache.hasTrackables());
+        assertThat(cache.getGeocode()).isEqualTo("GC31J2H");
+        assertThat(cache.getName()).isEqualTo("Hockenheimer City-Brunnen");
+        assertThat(cache.getShortDescription()).startsWith("Kurzer informativer Multi entlang der Brunnen");
+        assertThat(cache.getDescription()).startsWith("Cachemobile können kostenfrei am Messplatz geparkt werden.");
+        assertThat(cache.hasTrackables()).isTrue();
         assertEquals(2.0f, cache.getDifficulty(), 0.01f);
         assertEquals(1.0f, cache.getTerrain(), 0.01f);
         final Geopoint refCoordinates = new Geopoint("N 49° 19.122", "E 008° 32.739");
-        assertEquals(refCoordinates, cache.getCoords());
-        assertEquals("vptsz", cache.getOwnerDisplayName());
-        assertEquals("vptsz", cache.getOwnerUserId());
-        assertEquals(CacheSize.SMALL, cache.getSize());
-        assertEquals(CacheType.MULTI, cache.getType());
-        assertFalse(cache.isArchived());
-        assertFalse(cache.isDisabled());
-        assertFalse(cache.isEventCache());
-        assertFalse(cache.isPremiumMembersOnly());
-        assertFalse(cache.isOwner());
-        assertTrue(cache.isFound());
-        assertEquals("Station3: Der zerbrochene Stein zählt doppelt.\nFinal: Oben neben dem Tor", cache.getHint());
+        assertThat(cache.getCoords()).isEqualTo(refCoordinates);
+        assertThat(cache.getOwnerDisplayName()).isEqualTo("vptsz");
+        assertThat(cache.getOwnerUserId()).isEqualTo("vptsz");
+        assertThat(cache.getSize()).isEqualTo(CacheSize.SMALL);
+        assertThat(cache.getType()).isEqualTo(CacheType.MULTI);
+        assertThat(cache.isArchived()).isFalse();
+        assertThat(cache.isDisabled()).isFalse();
+        assertThat(cache.isEventCache()).isFalse();
+        assertThat(cache.isPremiumMembersOnly()).isFalse();
+        assertThat(cache.isOwner()).isFalse();
+        assertThat(cache.isFound()).isTrue();
+        assertThat(cache.getHint()).isEqualTo("Station3: Der zerbrochene Stein zählt doppelt.\nFinal: Oben neben dem Tor");
         // logs
-        assertEquals(6, cache.getLogs().size());
+        assertThat(cache.getLogs()).hasSize(6);
         final LogEntry log = cache.getLogs().get(5);
-        assertEquals("Geoteufel", log.author);
-        assertEquals(parseTime("2011-09-11T07:00:00Z"), log.date);
-        assertEquals(-1, log.found);
+        assertThat(log.author).isEqualTo("Geoteufel");
+        assertThat(log.date).isEqualTo(parseTime("2011-09-11T07:00:00Z"));
+        assertThat(log.found).isEqualTo(-1);
         assertEquals("Sehr schöne Runde und wir haben wieder etwas Neues über Hockenheim gelernt. Super Tarnung.\nTFTC, Geoteufel", log.log);
-        assertFalse(log.isOwn());
-        assertEquals(log.log, log.getDisplayText());
-        assertTrue(log.daysSinceLog() > 700);
+        assertThat(log.isOwn()).isFalse();
+        assertThat(log.getDisplayText()).isEqualTo(log.log);
+        assertThat(log.daysSinceLog() > 700).isTrue();
 
         // following info is not contained in pocket query gpx file
-        assertEquals(0, cache.getAttributes().size());
+        assertThat(cache.getAttributes()).isEmpty();
     }
 
     private static long parseTime(final String time) {
@@ -167,25 +169,25 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     private static void assertGc31j2hWaypoints(final Geocache cache) {
-        assertNotNull(cache.getWaypoints());
-        assertEquals(2, cache.getWaypoints().size());
+        assertThat(cache.getWaypoints()).isNotNull();
+        assertThat(cache.getWaypoints()).hasSize(2);
         Waypoint wp = cache.getWaypoints().get(0);
-        assertEquals("GC31J2H", wp.getGeocode());
-        assertEquals("00", wp.getPrefix());
-        assertEquals("---", wp.getLookup());
-        assertEquals("Parkplatz", wp.getName());
-        assertEquals("Kostenfreies Parken (je nach Parkreihe Parkscheibe erforderlich)", wp.getNote());
-        assertEquals(WaypointType.PARKING, wp.getWaypointType());
+        assertThat(wp.getGeocode()).isEqualTo("GC31J2H");
+        assertThat(wp.getPrefix()).isEqualTo("00");
+        assertThat(wp.getLookup()).isEqualTo("---");
+        assertThat(wp.getName()).isEqualTo("Parkplatz");
+        assertThat(wp.getNote()).isEqualTo("Kostenfreies Parken (je nach Parkreihe Parkscheibe erforderlich)");
+        assertThat(wp.getWaypointType()).isEqualTo(WaypointType.PARKING);
         assertEquals(49.317517, wp.getCoords().getLatitude(), 0.000001);
         assertEquals(8.545083, wp.getCoords().getLongitude(), 0.000001);
 
         wp = cache.getWaypoints().get(1);
-        assertEquals("GC31J2H", wp.getGeocode());
-        assertEquals("S1", wp.getPrefix());
-        assertEquals("---", wp.getLookup());
-        assertEquals("Station 1", wp.getName());
+        assertThat(wp.getGeocode()).isEqualTo("GC31J2H");
+        assertThat(wp.getPrefix()).isEqualTo("S1");
+        assertThat(wp.getLookup()).isEqualTo("---");
+        assertThat(wp.getName()).isEqualTo("Station 1");
         assertEquals("Ein zweiter Wegpunkt, der nicht wirklich existiert sondern nur zum Testen gedacht ist.", wp.getNote());
-        assertEquals(WaypointType.STAGE, wp.getWaypointType());
+        assertThat(wp.getWaypointType()).isEqualTo(WaypointType.STAGE);
         assertEquals(49.317500, wp.getCoords().getLatitude(), 0.000001);
         assertEquals(8.545100, wp.getCoords().getLongitude(), 0.000001);
     }
@@ -206,7 +208,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
             final InputStream instream = getResourceStream(resourceId);
             try {
                 Collection<Geocache> caches = parser.parse(instream, null);
-                assertNotNull(caches);
+                assertThat(caches).isNotNull();
                 for (Geocache cache : caches) {
                     result.add(cache.getGeocode());
                 }
@@ -232,24 +234,24 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
 
     public void testSelfmadeGPXWithoutGeocodes() throws Exception {
         final List<Geocache> caches = readGPX11(R.raw.no_connector);
-        assertEquals(13, caches.size());
+        assertThat(caches).hasSize(13);
     }
 
     public void testTexasChallenge2012() throws Exception {
         final List<Geocache> caches = readGPX10(R.raw.challenge);
         // previously these caches overwrote each other during parsing
-        assertEquals(130, caches.size());
+        assertThat(caches).hasSize(130);
     }
 
     public void testGeoToad() throws Exception {
         final List<Geocache> caches = readGPX10(R.raw.geotoad);
-        assertEquals(2, caches.size());
+        assertThat(caches).hasSize(2);
         final List<String> codes = new ArrayList<String>();
         for (Geocache cache : caches) {
             codes.add(cache.getGeocode());
         }
-        assertTrue(codes.contains("GC2KN6K"));
-        assertTrue(codes.contains("GC1T3MK"));
+        assertThat(codes.contains("GC2KN6K")).isTrue();
+        assertThat(codes.contains("GC1T3MK")).isTrue();
     }
 
     public void testLazyLogLoading() throws IOException, ParserException {
@@ -257,14 +259,14 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         final String geocode = "GC31J2H";
         removeCacheCompletely(geocode);
         final List<Geocache> caches = readGPX10(R.raw.lazy);
-        assertEquals(1, caches.size());
+        assertThat(caches).hasSize(1);
         DataStore.removeAllFromCache();
         // load only the minimum cache, it has several members missing
         final Geocache minimalCache = DataStore.loadCache(geocode, EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
 
         // now check that we load lazy members on demand
-        assertFalse(minimalCache.getAttributes().isEmpty());
-        assertFalse(minimalCache.getLogs().isEmpty());
+        assertThat(minimalCache.getAttributes().isEmpty()).isFalse();
+        assertThat(minimalCache.getLogs().isEmpty()).isFalse();
 
         removeCacheCompletely(geocode);
     }
@@ -275,27 +277,27 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
 
         // first import
         List<Geocache> caches = readGPX10(R.raw.lazy);
-        assertEquals(1, caches.size());
-        assertEquals(6, caches.get(0).getLogs().size());
+        assertThat(caches).hasSize(1);
+        assertThat(caches.get(0).getLogs()).hasSize(6);
 
         // second import
         caches = readGPX10(R.raw.lazy);
-        assertEquals(1, caches.size());
-        assertEquals(6, caches.get(0).getLogs().size());
+        assertThat(caches).hasSize(1);
+        assertThat(caches.get(0).getLogs()).hasSize(6);
 
         removeCacheCompletely(geocode);
     }
 
     public void testWaymarking() throws Exception {
         final List<Geocache> caches = readGPX10(R.raw.waymarking_gpx);
-        assertEquals(1, caches.size());
+        assertThat(caches).hasSize(1);
         final Geocache waymark = caches.get(0);
-        assertNotNull(waymark);
-        assertEquals("WM7BM7", waymark.getGeocode());
-        assertEquals("Roman water pipe Kornwestheim", waymark.getName());
-        assertTrue(StringUtils.isNotBlank(waymark.getUrl())); // connector must be able to create it
-        assertEquals(CacheType.UNKNOWN, waymark.getType());
-        assertEquals(CacheSize.UNKNOWN, waymark.getSize());
+        assertThat(waymark).isNotNull();
+        assertThat(waymark.getGeocode()).isEqualTo("WM7BM7");
+        assertThat(waymark.getName()).isEqualTo("Roman water pipe Kornwestheim");
+        assertThat(StringUtils.isNotBlank(waymark.getUrl())).isTrue(); // connector must be able to create it
+        assertThat(waymark.getType()).isEqualTo(CacheType.UNKNOWN);
+        assertThat(waymark.getSize()).isEqualTo(CacheSize.UNKNOWN);
     }
 
     /**
@@ -303,49 +305,49 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
      */
     public void testGCTour() throws Exception {
         final List<Geocache> caches = readGPX10(R.raw.gctour_gpx);
-        assertEquals(54, caches.size());
+        assertThat(caches).hasSize(54);
     }
 
     public void testOX() throws IOException, ParserException {
         final List<Geocache> caches = readGPX10(R.raw.ox1ry0y_gpx);
-        assertEquals(1, caches.size());
+        assertThat(caches).hasSize(1);
         final Geocache cache = caches.get(0);
-        assertEquals("OX1RY0Y", cache.getGeocode());
-        assertEquals(CacheType.TRADITIONAL, cache.getType());
-        assertEquals(false, cache.isArchived());
-        assertEquals(false, cache.isDisabled());
-        assertEquals("Kornwestheim und die Römer", cache.getName());
-        assertEquals("Thomas&Dani", cache.getOwnerDisplayName());
-        assertEquals(CacheSize.SMALL, cache.getSize());
-        assertEquals(1.5f, cache.getDifficulty());
-        assertEquals(1.0f, cache.getTerrain());
-        assertTrue(cache.getDescription().startsWith("Dieses sind die Reste einer in Kornwestheim gefundenen"));
+        assertThat(cache.getGeocode()).isEqualTo("OX1RY0Y");
+        assertThat(cache.getType()).isEqualTo(CacheType.TRADITIONAL);
+        assertThat(cache.isArchived()).isEqualTo(false);
+        assertThat(cache.isDisabled()).isEqualTo(false);
+        assertThat(cache.getName()).isEqualTo("Kornwestheim und die Römer");
+        assertThat(cache.getOwnerDisplayName()).isEqualTo("Thomas&Dani");
+        assertThat(cache.getSize()).isEqualTo(CacheSize.SMALL);
+        assertThat(cache.getDifficulty()).isEqualTo(1.5f);
+        assertThat(cache.getTerrain()).isEqualTo(1.0f);
+        assertThat(cache.getDescription().startsWith("Dieses sind die Reste einer in Kornwestheim gefundenen")).isTrue();
         assertEquals(new Geopoint(48.8642167, 9.1836), cache.getCoords());
-        assertTrue(cache.isReliableLatLon());
-        assertEquals("Wasserleitung", cache.getHint());
+        assertThat(cache.isReliableLatLon()).isTrue();
+        assertThat(cache.getHint()).isEqualTo("Wasserleitung");
     }
 
     private Geocache getFirstCache(int gpxResourceId) throws IOException, ParserException {
         final List<Geocache> caches = readGPX10(gpxResourceId);
-        assertNotNull(caches);
-        assertEquals(1, caches.size());
+        assertThat(caches).isNotNull();
+        assertThat(caches).hasSize(1);
         final Geocache cache = caches.get(0);
         return cache;
     }
 
     public void testGsakFavPoints() throws IOException, ParserException {
         final Geocache cache = getFirstCache(R.raw.gc3t1xg_gsak);
-        assertEquals(258, cache.getFavoritePoints());
+        assertThat(cache.getFavoritePoints()).isEqualTo(258);
     }
 
     public void testGsakPersonalNote() throws IOException, ParserException {
         final Geocache cache = getFirstCache(R.raw.gc3t1xg_gsak);
-        assertEquals("Personal Note Test", cache.getPersonalNote());
+        assertThat(cache.getPersonalNote()).isEqualTo("Personal Note Test");
     }
 
     public void testGsakPremium() throws IOException, ParserException {
         final Geocache cache = getFirstCache(R.raw.gc3t1xg_gsak);
-        assertTrue(cache.isPremiumMembersOnly());
+        assertThat(cache.isPremiumMembersOnly()).isTrue();
     }
 
 }

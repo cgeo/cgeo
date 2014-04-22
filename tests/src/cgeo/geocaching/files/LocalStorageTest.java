@@ -1,18 +1,16 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.files.LocalStorage;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import android.test.AndroidTestCase;
-
-import junit.framework.Assert;
 
 public class LocalStorageTest extends AndroidTestCase {
 
     public static void testGetExtension() {
-        Assert.assertEquals("", LocalStorage.getExtension("foo/bar/xyzzy"));
-        Assert.assertEquals(".jpg", LocalStorage.getExtension("foo/bar/xyzzy.jpg"));
-        Assert.assertEquals(".jpeg", LocalStorage.getExtension("foo/bar/xyzzy.jpeg"));
-        Assert.assertEquals("", LocalStorage.getExtension("foo/bar/xyzzy.mjpeg"));
+        assertThat(LocalStorage.getExtension("foo/bar/xyzzy")).isEqualTo("");
+        assertThat(LocalStorage.getExtension("foo/bar/xyzzy.jpg")).isEqualTo(".jpg");
+        assertThat(LocalStorage.getExtension("foo/bar/xyzzy.jpeg")).isEqualTo(".jpeg");
+        assertThat(LocalStorage.getExtension("foo/bar/xyzzy.mjpeg")).isEqualTo("");
     }
 
 }

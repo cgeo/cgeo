@@ -1,5 +1,7 @@
 package cgeo.geocaching.utils;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 
 import java.util.Calendar;
@@ -14,7 +16,7 @@ public class LogTemplateProviderTest extends TestCase {
 
         // This test can occasionally fail if the current year changes right after the next line.
         final String currentYear = Integer.toString(Calendar.YEAR);
-        assertTrue(LogTemplateProvider.applyTemplates("[DATE]", new LogContext(null, null, true)).contains(currentYear));
+        assertThat(LogTemplateProvider.applyTemplates("[DATE]", new LogContext(null, null, true)).contains(currentYear)).isTrue();
     }
 
 }

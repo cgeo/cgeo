@@ -1,5 +1,7 @@
 package cgeo.geocaching.utils;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.Geocache;
 
 import java.util.Map;
@@ -47,39 +49,39 @@ public class LeastRecentlyUsedMapTest extends AbstractLRUTest {
     public static void testRemoveEldestEntry() {
         final LeastRecentlyUsedMap<String, Geocache> cache = new LeastRecentlyUsedMap.LruCache<String, Geocache>(10);
         final Geocache first = new Geocache();
-        assertNull(cache.put("1", first));
+        assertThat(cache.put("1", first)).isNull();
 
         final Geocache second = new Geocache();
-        assertNull(cache.put("2", second));
+        assertThat(cache.put("2", second)).isNull();
 
-        assertEquals(2, cache.size());
-        assertTrue(cache.containsKey("1"));
-        assertTrue(cache.containsValue(first));
-        assertTrue(cache.containsKey("2"));
-        assertTrue(cache.containsValue(second));
+        assertThat(cache).hasSize(2);
+        assertThat(cache.containsKey("1")).isTrue();
+        assertThat(cache.containsValue(first)).isTrue();
+        assertThat(cache.containsKey("2")).isTrue();
+        assertThat(cache.containsValue(second)).isTrue();
 
         for (int i = 3; i <= 10; i++) {
-            assertNull(cache.put(Integer.toString(i), new Geocache()));
+            assertThat(cache.put(Integer.toString(i), new Geocache())).isNull();
         }
 
-        assertEquals(10, cache.size());
-        assertTrue(cache.containsKey("1"));
-        assertTrue(cache.containsValue(first));
-        assertTrue(cache.containsKey("2"));
-        assertTrue(cache.containsValue(second));
+        assertThat(cache).hasSize(10);
+        assertThat(cache.containsKey("1")).isTrue();
+        assertThat(cache.containsValue(first)).isTrue();
+        assertThat(cache.containsKey("2")).isTrue();
+        assertThat(cache.containsValue(second)).isTrue();
 
-        assertNotNull(cache.remove("1")); // just replacing the old entry would not work
-        assertNull(cache.put("1", new Geocache()));
-        assertNull(cache.put("11", new Geocache()));
+        assertThat(cache.remove("1")).isNotNull(); // just replacing the old entry would not work
+        assertThat(cache.put("1", new Geocache())).isNull();
+        assertThat(cache.put("11", new Geocache())).isNull();
 
-        assertEquals(10, cache.size());
+        assertThat(cache).hasSize(10);
 
         // first has been overwritten by new value, but key must be in, because it is very new
-        assertTrue(cache.containsKey("1"));
+        assertThat(cache.containsKey("1")).isTrue();
 
         // second has been overwritten by 11
-        assertFalse(cache.containsKey("2"));
-        assertTrue(cache.containsKey("11"));
+        assertThat(cache.containsKey("2")).isFalse();
+        assertThat(cache.containsKey("11")).isTrue();
     }
 
 }

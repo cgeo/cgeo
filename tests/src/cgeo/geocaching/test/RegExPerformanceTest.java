@@ -1,5 +1,7 @@
 package cgeo.geocaching.test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.test.mock.GC1ZXX2;
 import cgeo.geocaching.test.mock.GC2CJPF;
 import cgeo.geocaching.test.mock.GC2JVEH;
@@ -98,7 +100,7 @@ public class RegExPerformanceTest extends TestCase {
             String page = cache.getData();
             String result1 = TextUtils.getMatch(page, p1, true, "");
             String result2 = TextUtils.getMatch(page, p2, true, "");
-            assertEquals(result1, result2);
+            assertThat(result2).isEqualTo(result1);
 
             long diff1, diff2;
 

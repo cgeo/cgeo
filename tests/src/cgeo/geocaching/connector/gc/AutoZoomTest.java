@@ -1,5 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 
@@ -15,13 +17,13 @@ public class AutoZoomTest extends TestCase {
 
         int zoom = Tile.calcZoomLat(bottomLeft, topRight, 2);
 
-        assertTrue(Math.abs(new Tile(bottomLeft, zoom).getY() - new Tile(topRight, zoom).getY()) == 1);
-        assertTrue(Math.abs(new Tile(bottomLeft, zoom + 1).getY() - new Tile(topRight, zoom + 1).getY()) > 1);
+        assertThat(Math.abs(new Tile(bottomLeft, zoom).getY() - new Tile(topRight, zoom).getY()) == 1).isTrue();
+        assertThat(Math.abs(new Tile(bottomLeft, zoom + 1).getY() - new Tile(topRight, zoom + 1).getY()) > 1).isTrue();
 
         zoom = Tile.calcZoomLon(bottomLeft, topRight, 2);
 
-        assertTrue(new Tile(bottomLeft, zoom).getX() + 1 == new Tile(topRight, zoom).getX());
-        assertTrue(new Tile(bottomLeft, zoom + 1).getX() + 1 < new Tile(topRight, zoom + 1).getX());
+        assertThat(new Tile(bottomLeft, zoom).getX() + 1 == new Tile(topRight, zoom).getX()).isTrue();
+        assertThat(new Tile(bottomLeft, zoom + 1).getX() + 1 < new Tile(topRight, zoom + 1).getX()).isTrue();
 
     }
 
@@ -31,13 +33,13 @@ public class AutoZoomTest extends TestCase {
 
         int zoom = Tile.calcZoomLat(bottomLeft, topRight, 3);
 
-        assertTrue(Math.abs(new Tile(bottomLeft, zoom).getY() - new Tile(topRight, zoom).getY()) >= 2);
-        assertTrue(Math.abs(new Tile(bottomLeft, zoom + 1).getY() - new Tile(topRight, zoom + 1).getY()) > 2);
+        assertThat(Math.abs(new Tile(bottomLeft, zoom).getY() - new Tile(topRight, zoom).getY()) >= 2).isTrue();
+        assertThat(Math.abs(new Tile(bottomLeft, zoom + 1).getY() - new Tile(topRight, zoom + 1).getY()) > 2).isTrue();
 
         zoom = Tile.calcZoomLon(bottomLeft, topRight, 3);
 
-        assertTrue(Math.abs(new Tile(bottomLeft, zoom).getX() - new Tile(topRight, zoom).getX()) >= 2);
-        assertTrue(Math.abs(new Tile(bottomLeft, zoom + 1).getX() - new Tile(topRight, zoom + 1).getX()) > 2);
+        assertThat(Math.abs(new Tile(bottomLeft, zoom).getX() - new Tile(topRight, zoom).getX()) >= 2).isTrue();
+        assertThat(Math.abs(new Tile(bottomLeft, zoom + 1).getX() - new Tile(topRight, zoom + 1).getX()) > 2).isTrue();
 
     }
 
@@ -47,7 +49,7 @@ public class AutoZoomTest extends TestCase {
 
         final Set<Tile> tiles = Tile.getTilesForViewport(new Viewport(bottomLeft, topRight));
 
-        assertEquals(2, tiles.size());
+        assertThat(tiles).hasSize(2);
     }
 
     public static void testTiles2x3() {
@@ -56,7 +58,7 @@ public class AutoZoomTest extends TestCase {
 
         final Set<Tile> tiles = Tile.getTilesForViewport(new Viewport(bottomLeft, topRight), 3, Tile.ZOOMLEVEL_MIN);
 
-        assertEquals(6, tiles.size());
+        assertThat(tiles).hasSize(6);
     }
 
     public static void testTilesZoom13() {
@@ -65,6 +67,6 @@ public class AutoZoomTest extends TestCase {
 
         final Set<Tile> tiles = Tile.getTilesForViewport(new Viewport(bottomLeft, topRight), 3, 13);
 
-        assertEquals(16, tiles.size());
+        assertThat(tiles).hasSize(16);
     }
 }

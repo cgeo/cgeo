@@ -1,5 +1,7 @@
 package cgeo.geocaching.utils;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,7 +23,7 @@ public class MiscUtilsTest extends TestCase {
         }
         int count = 0;
         for (final List<Integer> subList: MiscUtils.buffer(list, 10)) {
-            assertEquals("each sublist has the right size", 10, subList.size());
+            assertThat(subList).hasSize(10);
             assertEquals("sublist has the right content", count * 10, (int) subList.get(0));
             count++;
         }
@@ -35,7 +37,7 @@ public class MiscUtilsTest extends TestCase {
         }
         int count = 0;
         for (final List<Integer> subList: MiscUtils.buffer(list, 10)) {
-            assertTrue("each sublist has no more than the allowed number of arguments", subList.size() <= 10);
+            assertThat(subList.size()).overridingErrorMessage("each sublist has no more than the allowed number of arguments").isLessThanOrEqualTo(10);
             count += subList.size();
         }
         assertEquals("all the elements were seen", 48, count);

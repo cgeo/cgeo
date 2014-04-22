@@ -1,48 +1,49 @@
 package cgeo.geocaching.geopoint;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.offset;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.test.AndroidTestCase;
-
-import junit.framework.Assert;
 
 public class GeopointTest extends AndroidTestCase {
 
     public static void testCreation() {
         final Geopoint gp = new Geopoint(48.2, 3.5);
-        Assert.assertEquals(48.2, gp.getLatitude(), 1e-8);
-        Assert.assertEquals(3.5, gp.getLongitude(), 1e-8);
+        assertThat(gp.getLatitude()).isEqualTo(48.2, offset(1e-8));
+        assertThat(gp.getLongitude()).isEqualTo(3.5, offset(1e-8));
     }
 
     public static void testCreationWithParsing() {
         final Geopoint gp = new Geopoint("N 52° 25,111 E 009° 39,111");
-        Assert.assertEquals(52.41852, gp.getLatitude(), 1e-4);
-        Assert.assertEquals(9.65185, gp.getLongitude(), 1e-4);
+        assertThat(gp.getLatitude()).isEqualTo(52.41852, offset(1e-4));
+        assertThat(gp.getLongitude()).isEqualTo(9.65185, offset(1e-4));
     }
 
     public static void testCreationAtLimit() {
         // No exception should be raised.
         final Geopoint gp1 = new Geopoint(90.0, 10.0);
-        Assert.assertEquals(90, gp1.getLatitude(), 1e-8);
+        assertThat(gp1.getLatitude()).isEqualTo(90, offset(1e-8));
 
         final Geopoint gp2 = new Geopoint(-90.0, 10.0);
-        Assert.assertEquals(-90, gp2.getLatitude(), 1e-8);
+        assertThat(gp2.getLatitude()).isEqualTo(-90, offset(1e-8));
 
         final Geopoint gp3 = new Geopoint(10.0, 180.0);
-        Assert.assertEquals(180, gp3.getLongitude(), 1e-8);
+        assertThat(gp3.getLongitude()).isEqualTo(180, offset(1e-8));
     }
 
     public static void testEqual() {
         final Geopoint gp1 = new Geopoint(48.2, 2.31);
-        Assert.assertTrue(gp1.equals(gp1));
+        assertThat(gp1.equals(gp1)).isTrue();
         final Geopoint gp2 = new Geopoint(48.3, 2.31);
-        Assert.assertFalse(gp1.equals(gp2));
+        assertThat(gp1.equals(gp2)).isFalse();
     }
 
     public static void testGetE6() {
         final Geopoint gp = new Geopoint(41.2, -3.4);
-        Assert.assertEquals(41200000.0, gp.getLatitudeE6(), 1e-6);
-        Assert.assertEquals(-3400000.0, gp.getLongitudeE6(), 1e-6);
+        assertThat((double) gp.getLatitudeE6()).isEqualTo(41200000.0, offset(1e-6));
+        assertThat((double) gp.getLongitudeE6()).isEqualTo(-3400000.0, offset(1e-6));
     }
 
     public static void testBearingDistance() {
@@ -53,18 +54,18 @@ public class GeopointTest extends AndroidTestCase {
 
         // broken distance calculation in 4.2.1
         if (Build.VERSION.SDK_INT == 17) {
-            Assert.assertEquals(110.83107, d12, 1e-6);
+            assertThat((double) d12).isEqualTo(110.83107, offset(1e-6));
         }
         else {
-            Assert.assertEquals(110.967995, d12, 1e-6);
+            assertThat((double) d12).isEqualTo(110.967995, offset(1e-6));
         }
 
-        Assert.assertEquals(d12, gp2.distanceTo(gp1), 1e-6);
+        assertThat((double) gp2.distanceTo(gp1)).isEqualTo(d12, offset(1e-6));
 
         // Bearing in both directions cannot be added, as this is
         // the initial bearing of the path in both cases.
-        Assert.assertEquals(287.162, gp1.bearingTo(gp2), 1e-3);
-        Assert.assertEquals(107.715, gp2.bearingTo(gp1), 1e-3);
+        assertThat((double) gp1.bearingTo(gp2)).isEqualTo(287.162, offset(1e-3));
+        assertThat((double) gp2.bearingTo(gp1)).isEqualTo(107.715, offset(1e-3));
     }
 
     public static void testParcelable() {
@@ -72,7 +73,7 @@ public class GeopointTest extends AndroidTestCase {
         final String KEY = "geopoint";
         final Bundle bundle = new Bundle();
         bundle.putParcelable(KEY, gp);
-        assertEquals(gp, bundle.getParcelable(KEY));
+        assertThat(bundle.getParcelable(KEY)).isEqualTo(gp);
     }
 
     public static void testDDD() {
@@ -84,7 +85,7 @@ public class GeopointTest extends AndroidTestCase {
         final Geopoint gp1a = new Geopoint(String.valueOf(gp1.getLatDir()), String.valueOf(gp1.getLatDeg()), String.valueOf(gp1.getLatDegFrac()),
                 String.valueOf(gp1.getLonDir()), String.valueOf(gp1.getLonDeg()), String.valueOf(gp1.getLonDegFrac()));
 
-        Assert.assertTrue(gp1a.equals(gp1));
+        assertThat(gp1a).isEqualTo(gp1);
 
         // case 2
         final Geopoint gp2 = new Geopoint(51.34567d, 13.87654d);
@@ -94,7 +95,7 @@ public class GeopointTest extends AndroidTestCase {
         final Geopoint gp2a = new Geopoint(String.valueOf(gp2.getLatDir()), String.valueOf(gp2.getLatDeg()), String.valueOf(gp2.getLatDegFrac()),
                 String.valueOf(gp2.getLonDir()), String.valueOf(gp2.getLonDeg()), String.valueOf(gp2.getLonDegFrac()));
 
-        Assert.assertTrue(gp2a.equals(gp2));
+        assertThat(gp2a).isEqualTo(gp2);
 
         // case 3
         final Geopoint gp3 = new Geopoint(51.29999833333333d, 13.8d);
@@ -118,17 +119,17 @@ public class GeopointTest extends AndroidTestCase {
     }
 
     private static void checkDDD(Geopoint gp, char latDir, int latDeg, int latDegFrac, char lonDir, int lonDeg, int lonDegFrac) {
-        Assert.assertEquals(latDir, gp.getLatDir());
-        Assert.assertEquals(latDeg, gp.getLatDeg());
-        Assert.assertEquals(latDegFrac, gp.getLatDegFrac());
-        Assert.assertEquals(lonDir, gp.getLonDir());
-        Assert.assertEquals(lonDeg, gp.getLonDeg());
-        Assert.assertEquals(lonDegFrac, gp.getLonDegFrac());
+        assertThat(gp.getLatDir()).isEqualTo(latDir);
+        assertThat(gp.getLatDeg()).isEqualTo(latDeg);
+        assertThat(gp.getLatDegFrac()).isEqualTo(latDegFrac);
+        assertThat(gp.getLonDir()).isEqualTo(lonDir);
+        assertThat(gp.getLonDeg()).isEqualTo(lonDeg);
+        assertThat(gp.getLonDegFrac()).isEqualTo(lonDegFrac);
     }
 
     private static void checkTolerance(Geopoint gp1, Geopoint gp2, double tolerance) {
-        Assert.assertTrue(Math.abs(gp1.getLatitude() - gp2.getLatitude()) <= tolerance);
-        Assert.assertTrue(Math.abs(gp1.getLongitude() - gp2.getLongitude()) <= tolerance);
+        assertThat(Math.abs(gp1.getLatitude() - gp2.getLatitude()) <= tolerance).isTrue();
+        assertThat(Math.abs(gp1.getLongitude() - gp2.getLongitude()) <= tolerance).isTrue();
     }
 
     public static void testDMM() {
@@ -140,7 +141,7 @@ public class GeopointTest extends AndroidTestCase {
         final Geopoint gp1a = new Geopoint(String.valueOf(gp1.getLatDir()), String.valueOf(gp1.getLatDeg()), String.valueOf(gp1.getLatMin()), String.valueOf(gp1.getLatMinFrac()),
                 String.valueOf(gp1.getLonDir()), String.valueOf(gp1.getLonDeg()), String.valueOf(gp1.getLonMin()), String.valueOf(gp1.getLonMinFrac()));
 
-        Assert.assertTrue(gp1a.equals(gp1));
+        assertThat(gp1a).isEqualTo(gp1);
 
         // case 2
         final Geopoint gp2 = new Geopoint(51.34567d, 13.87654d);
@@ -174,14 +175,14 @@ public class GeopointTest extends AndroidTestCase {
     }
 
     private static void checkDMM(Geopoint gp, char latDir, int latDeg, int latMin, int latMinFrac, char lonDir, int lonDeg, int lonMin, int lonMinFrac) {
-        Assert.assertEquals(latDir, gp.getLatDir());
-        Assert.assertEquals(latDeg, gp.getLatDeg());
-        Assert.assertEquals(latMin, gp.getLatMin());
-        Assert.assertEquals(latMinFrac, gp.getLatMinFrac());
-        Assert.assertEquals(lonDir, gp.getLonDir());
-        Assert.assertEquals(lonDeg, gp.getLonDeg());
-        Assert.assertEquals(lonMin, gp.getLonMin());
-        Assert.assertEquals(lonMinFrac, gp.getLonMinFrac());
+        assertThat(gp.getLatDir()).isEqualTo(latDir);
+        assertThat(gp.getLatDeg()).isEqualTo(latDeg);
+        assertThat(gp.getLatMin()).isEqualTo(latMin);
+        assertThat(gp.getLatMinFrac()).isEqualTo(latMinFrac);
+        assertThat(gp.getLonDir()).isEqualTo(lonDir);
+        assertThat(gp.getLonDeg()).isEqualTo(lonDeg);
+        assertThat(gp.getLonMin()).isEqualTo(lonMin);
+        assertThat(gp.getLonMinFrac()).isEqualTo(lonMinFrac);
     }
 
     public static void testDMS() {
@@ -193,7 +194,7 @@ public class GeopointTest extends AndroidTestCase {
         final Geopoint gp1a = new Geopoint(String.valueOf(gp1.getLatDir()), String.valueOf(gp1.getLatDeg()), String.valueOf(gp1.getLatMin()), String.valueOf(gp1.getLatSec()), String.valueOf(gp1.getLatSecFrac()),
                 String.valueOf(gp1.getLonDir()), String.valueOf(gp1.getLonDeg()), String.valueOf(gp1.getLonMin()), String.valueOf(gp1.getLonSec()), String.valueOf(gp1.getLonSecFrac()));
 
-        Assert.assertTrue(gp1a.equals(gp1));
+        assertThat(gp1a).isEqualTo(gp1);
 
         // case 2
         final Geopoint gp2 = new Geopoint(51.34567d, 13.87654d);
@@ -227,22 +228,22 @@ public class GeopointTest extends AndroidTestCase {
     }
 
     private static void checkDMS(Geopoint gp, char latDir, int latDeg, int latMin, int latSec, int latSecFrac, char lonDir, int lonDeg, int lonMin, int lonSec, int lonSecFrac) {
-        Assert.assertEquals(latDir, gp.getLatDir());
-        Assert.assertEquals(latDeg, gp.getLatDeg());
-        Assert.assertEquals(latMin, gp.getLatMin());
-        Assert.assertEquals(latSec, gp.getLatSec());
-        Assert.assertEquals(latSecFrac, gp.getLatSecFrac());
-        Assert.assertEquals(lonDir, gp.getLonDir());
-        Assert.assertEquals(lonDeg, gp.getLonDeg());
-        Assert.assertEquals(lonMin, gp.getLonMin());
-        Assert.assertEquals(lonSec, gp.getLonSec());
-        Assert.assertEquals(lonSecFrac, gp.getLonSecFrac());
+        assertThat(gp.getLatDir()).isEqualTo(latDir);
+        assertThat(gp.getLatDeg()).isEqualTo(latDeg);
+        assertThat(gp.getLatMin()).isEqualTo(latMin);
+        assertThat(gp.getLatSec()).isEqualTo(latSec);
+        assertThat(gp.getLatSecFrac()).isEqualTo(latSecFrac);
+        assertThat(gp.getLonDir()).isEqualTo(lonDir);
+        assertThat(gp.getLonDeg()).isEqualTo(lonDeg);
+        assertThat(gp.getLonMin()).isEqualTo(lonMin);
+        assertThat(gp.getLonSec()).isEqualTo(lonSec);
+        assertThat(gp.getLonSecFrac()).isEqualTo(lonSecFrac);
     }
 
     private static void assertParseException(Runnable runnable) {
         try {
             runnable.run();
-            Assert.fail("Should have thrown Geopoint.ParseException");
+            fail("Should have thrown Geopoint.ParseException");
         } catch (Geopoint.ParseException e) {
             //success
         }

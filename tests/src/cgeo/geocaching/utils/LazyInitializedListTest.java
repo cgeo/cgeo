@@ -1,9 +1,11 @@
 package cgeo.geocaching.utils;
 
-import junit.framework.TestCase;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import junit.framework.TestCase;
 
 public class LazyInitializedListTest extends TestCase {
 
@@ -16,16 +18,16 @@ public class LazyInitializedListTest extends TestCase {
 
     public static void testAccess() {
         final LazyInitializedList<String> list = new MockedLazyInitializedList();
-        assertTrue(list.isEmpty());
+        assertThat(list.isEmpty()).isTrue();
         list.add("Test");
-        assertFalse(list.isEmpty());
-        assertEquals(1, list.size());
+        assertThat(list.isEmpty()).isFalse();
+        assertThat(list).hasSize(1);
         int iterations = 0;
         for (String element : list) {
-            assertEquals("Test", element);
+            assertThat(element).isEqualTo("Test");
             iterations++;
         }
-        assertEquals(1, iterations);
+        assertThat(iterations).isEqualTo(1);
     }
 
 }

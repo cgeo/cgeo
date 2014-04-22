@@ -1,5 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.Image;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.Trackable;
@@ -15,74 +17,74 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
 
     public void testLogPageWithTrackables() {
         final List<TrackableLog> tbLogs = GCParser.parseTrackableLog(getFileContent(R.raw.log_with_2tb));
-        assertNotNull(tbLogs);
-        assertEquals(2, tbLogs.size());
+        assertThat(tbLogs).isNotNull();
+        assertThat(tbLogs).hasSize(2);
         final TrackableLog log = tbLogs.get(0);
-        assertEquals("Steffen's Kaiserwagen", log.name);
-        assertEquals("1QG1EE", log.trackCode);
+        assertThat(log.name).isEqualTo("Steffen's Kaiserwagen");
+        assertThat(log.trackCode).isEqualTo("1QG1EE");
     }
 
     public void testLogPageWithoutTrackables() {
         final List<TrackableLog> tbLogs = GCParser.parseTrackableLog(getFileContent(R.raw.log_without_tb));
-        assertNotNull(tbLogs);
-        assertEquals(0, tbLogs.size());
+        assertThat(tbLogs).isNotNull();
+        assertThat(tbLogs).isEmpty();
     }
 
     public void testTrackable() {
         final Trackable trackable = getTB2R124();
-        assertEquals("TB2R124", trackable.getGeocode());
-        assertEquals("Bor. Dortmund - FC Schalke 04", trackable.getName());
-        assertEquals("Spiridon Lui", trackable.getOwner());
+        assertThat(trackable.getGeocode()).isEqualTo("TB2R124");
+        assertThat(trackable.getName()).isEqualTo("Bor. Dortmund - FC Schalke 04");
+        assertThat(trackable.getOwner()).isEqualTo("Spiridon Lui");
     }
 
     public void testTrackableWithoutImage() {
         final Trackable trackable = getTB2R124();
-        assertNull(trackable.getImage());
-        assertNotNull(trackable.getDetails());
+        assertThat(trackable.getImage()).isNull();
+        assertThat(trackable.getDetails()).isNotNull();
     }
 
     public void testTrackableWithLogImages() {
         final Trackable trackable = getTBXATG();
-        assertEquals("TBXATG", trackable.getGeocode());
+        assertThat(trackable.getGeocode()).isEqualTo("TBXATG");
 
         final List<LogEntry> log = trackable.getLogs();
-        assertNotNull(log);
-        assertEquals(10, log.size());
+        assertThat(log).isNotNull();
+        assertThat(log).hasSize(10);
 
         // log entry 4 has several images; just check the first one
         final List<Image> log4Images = log.get(4).getLogImages();
-        assertNotNull(log4Images);
-        assertEquals(1, log4Images.size());
-        assertEquals("http://imgcdn.geocaching.com/track/log/large/3dc286d2-671e-4502-937a-f1bd35a13813.jpg", log4Images.get(0).getUrl());
-        assertEquals("@Osaka", log4Images.get(0).getTitle());
+        assertThat(log4Images).isNotNull();
+        assertThat(log4Images).hasSize(1);
+        assertThat(log4Images.get(0).getUrl()).isEqualTo("http://imgcdn.geocaching.com/track/log/large/3dc286d2-671e-4502-937a-f1bd35a13813.jpg");
+        assertThat(log4Images.get(0).getTitle()).isEqualTo("@Osaka");
 
         for (LogEntry entry : log) {
-            assertFalse(entry.log.startsWith("<div>"));
+            assertThat(entry.log.startsWith("<div>")).isFalse();
         }
-        assertEquals("Dropped in Una Bhan (GC49XCJ)", log.get(0).log);
+        assertThat(log.get(0).log).isEqualTo("Dropped in Una Bhan (GC49XCJ)");
     }
 
     public void testParseTrackableWithoutReleaseDate() {
         final Trackable trackable = parseTrackable(R.raw.tb14wfv);
-        assertNotNull(trackable);
-        assertEquals("The Brickster", trackable.getName());
-        assertEquals("Adrian C", trackable.getOwner());
-        assertTrue(trackable.getGoal().startsWith("I'm on the run from the law."));
-        assertTrue(trackable.getGoal().endsWith("what I've seen."));
-        assertTrue(trackable.getDistance() >= 11663.5f);
+        assertThat(trackable).isNotNull();
+        assertThat(trackable.getName()).isEqualTo("The Brickster");
+        assertThat(trackable.getOwner()).isEqualTo("Adrian C");
+        assertThat(trackable.getGoal().startsWith("I'm on the run from the law.")).isTrue();
+        assertThat(trackable.getGoal().endsWith("what I've seen.")).isTrue();
+        assertThat(trackable.getDistance() >= 11663.5f).isTrue();
         // the next two items are normally available for trackables, but not for this one, so explicitly test for null
-        assertNull(trackable.getReleased());
-        assertNull(trackable.getOrigin());
+        assertThat(trackable.getReleased()).isNull();
+        assertThat(trackable.getOrigin()).isNull();
     }
 
     public void testParseRelativeLink() {
         final Trackable trackable = parseTrackable(R.raw.tb4cwjx);
-        assertNotNull(trackable);
-        assertEquals("The Golden Lisa", trackable.getName());
+        assertThat(trackable).isNotNull();
+        assertThat(trackable.getName()).isEqualTo("The Golden Lisa");
         final String goal = trackable.getGoal();
-        assertNotNull(goal);
-        assertFalse(goal.contains(".."));
-        assertTrue(goal.contains("href=\"http://www.geocaching.com/seek/cache_details.aspx?wp=GC3B7PD#\""));
+        assertThat(goal).isNotNull();
+        assertThat(goal.contains("..")).isFalse();
+        assertThat(goal.contains("href=\"http://www.geocaching.com/seek/cache_details.aspx?wp=GC3B7PD#\"")).isTrue();
     }
 
     public void testParseSpeedManagerCompressedTrackable() {
@@ -93,27 +95,27 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
     }
 
     private static void assertTB54VJJ(final Trackable trackable) {
-        assertNotNull(trackable);
-        assertEquals("Krtek - Der kleine Maulwurf", trackable.getName());
+        assertThat(trackable).isNotNull();
+        assertThat(trackable.getName()).isEqualTo("Krtek - Der kleine Maulwurf");
         final String goal = trackable.getGoal();
-        assertNotNull(goal);
-        assertTrue(goal.startsWith("Bei meinem Besitzer auf der Couch"));
-        assertTrue(goal.endsWith("Geocachern zusammen fotografieren."));
+        assertThat(goal).isNotNull();
+        assertThat(goal.startsWith("Bei meinem Besitzer auf der Couch")).isTrue();
+        assertThat(goal.endsWith("Geocachern zusammen fotografieren.")).isTrue();
         assertEquals("Der kleine Maulwurf in etwas gr&ouml;&szlig;er :-)", trackable.getDetails());
-        assertEquals("TB54VJJ", trackable.getGeocode());
+        assertThat(trackable.getGeocode()).isEqualTo("TB54VJJ");
         assertEquals("Nordrhein-Westfalen, Germany", trackable.getOrigin());
-        assertEquals("Lineflyer", trackable.getOwner());
+        assertThat(trackable.getOwner()).isEqualTo("Lineflyer");
         // the icon url is manipulated during compression
-        assertTrue(trackable.getIconUrl().endsWith("www.geocaching.com/images/wpttypes/21.gif"));
-        assertTrue(trackable.getImage().endsWith("img.geocaching.com/track/display/d9a475fa-da90-43ec-aec0-92afe26163e1.jpg"));
-        assertEquals("d11a3e3d-7db0-4d43-87f2-7893238844a6", trackable.getOwnerGuid());
-        assertNull(trackable.getSpottedGuid());
-        assertEquals(Trackable.SPOTTED_OWNER, trackable.getSpottedType());
-        assertNotNull(trackable.getReleased());
-        assertEquals("Travel Bug Dog Tag", trackable.getType());
+        assertThat(trackable.getIconUrl().endsWith("www.geocaching.com/images/wpttypes/21.gif")).isTrue();
+        assertThat(trackable.getImage().endsWith("img.geocaching.com/track/display/d9a475fa-da90-43ec-aec0-92afe26163e1.jpg")).isTrue();
+        assertThat(trackable.getOwnerGuid()).isEqualTo("d11a3e3d-7db0-4d43-87f2-7893238844a6");
+        assertThat(trackable.getSpottedGuid()).isNull();
+        assertThat(trackable.getSpottedType()).isEqualTo(Trackable.SPOTTED_OWNER);
+        assertThat(trackable.getReleased()).isNotNull();
+        assertThat(trackable.getType()).isEqualTo("Travel Bug Dog Tag");
         final List<LogEntry> logs = trackable.getLogs();
-        assertNotNull(logs);
-        assertEquals(10, logs.size());
+        assertThat(logs).isNotNull();
+        assertThat(logs).hasSize(10);
     }
 
     private Trackable parseTrackable(int trackablePage) {
@@ -123,12 +125,12 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
 
     public void testParseMarkMissing() {
         final Trackable trackable = parseTrackable(R.raw.tb3f206);
-        assertNotNull(trackable);
+        assertThat(trackable).isNotNull();
         final List<LogEntry> logs = trackable.getLogs();
-        assertNotNull(logs);
-        assertFalse(logs.isEmpty());
+        assertThat(logs).isNotNull();
+        assertThat(logs.isEmpty()).isFalse();
         final LogEntry marked = logs.get(0);
-        assertEquals(LogType.MARKED_MISSING, marked.type);
+        assertThat(marked.type).isEqualTo(LogType.MARKED_MISSING);
     }
 
     private Trackable getTB2R124() {
@@ -141,7 +143,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
 
     public void testParseTrackableNotExisting() {
         final Trackable trackable = GCParser.parseTrackable(getFileContent(R.raw.tb_not_existing), null);
-        assertNull(trackable);
+        assertThat(trackable).isNull();
     }
 
 }

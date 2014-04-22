@@ -1,5 +1,7 @@
 package cgeo.geocaching.connector.ec;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
@@ -11,16 +13,16 @@ import junit.framework.TestCase;
 public class ECConnectorTest extends TestCase {
 
     public static void testCanHandle() throws Exception {
-        assertTrue(ECConnector.getInstance().canHandle("EC380"));
-        assertFalse(ECConnector.getInstance().canHandle("GC380"));
-        assertFalse("faked EC codes must be handled during the import, otherwise GCECxxxx codes belong to 2 connectors", ECConnector.getInstance().canHandle("GCEC380"));
+        assertThat(ECConnector.getInstance().canHandle("EC380")).isTrue();
+        assertThat(ECConnector.getInstance().canHandle("GC380")).isFalse();
+        assertThat(ECConnector.getInstance().canHandle("GCEC380")).overridingErrorMessage("faked EC codes must be handled during the import, otherwise GCECxxxx codes belong to 2 connectors").isFalse();
     }
 
     public static void testGetPossibleLogTypes() throws Exception {
         final List<LogType> possibleLogTypes = ECConnector.getInstance().getPossibleLogTypes(createCache());
-        assertNotNull(possibleLogTypes);
-        assertFalse(possibleLogTypes.isEmpty());
-        assertTrue(possibleLogTypes.contains(LogType.FOUND_IT));
+        assertThat(possibleLogTypes).isNotNull();
+        assertThat(possibleLogTypes).isNotEmpty();
+        assertThat(possibleLogTypes).contains(LogType.FOUND_IT);
     }
 
     private static Geocache createCache() {

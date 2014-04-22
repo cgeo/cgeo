@@ -1,5 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
@@ -20,7 +22,7 @@ public class WaypointsTest extends CGeoTestCase {
 
     private static Geocache downloadCache(final String geocode) {
         final SearchResult searchResult = Geocache.searchByGeocode(geocode, null, 0, true, handler);
-        assertEquals(1, searchResult.getCount());
+        assertThat(searchResult.getCount()).isEqualTo(1);
         return searchResult.getFirstCacheFromResult(LoadFlags.LOAD_WAYPOINTS);
     }
 
@@ -28,8 +30,8 @@ public class WaypointsTest extends CGeoTestCase {
         // Check that repeated loads of "GC33HXE" hold the right number of waypoints (issue #2430).
         final String GEOCODE = "GC33HXE";
         DataStore.removeCache(GEOCODE, LoadFlags.REMOVE_ALL);
-        assertEquals(9, downloadCache(GEOCODE).getWaypoints().size());
-        assertEquals(9, downloadCache(GEOCODE).getWaypoints().size());
+        assertThat(downloadCache(GEOCODE).getWaypoints()).hasSize(9);
+        assertThat(downloadCache(GEOCODE).getWaypoints()).hasSize(9);
     }
 
 }

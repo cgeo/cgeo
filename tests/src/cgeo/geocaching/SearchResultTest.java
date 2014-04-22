@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import android.os.Parcel;
 import android.test.AndroidTestCase;
 
@@ -12,9 +14,9 @@ public class SearchResultTest extends AndroidTestCase {
         geocodes.add("GC12345");
         geocodes.add("GC23456");
         final SearchResult searchResult = new SearchResult(geocodes);
-        assertEquals(2, searchResult.getCount());
-        assertEquals(2, searchResult.getTotalCountGC());
-        assertTrue(searchResult.getGeocodes().contains("GC12345"));
+        assertThat(searchResult.getCount()).isEqualTo(2);
+        assertThat(searchResult.getTotalCountGC()).isEqualTo(2);
+        assertThat(searchResult.getGeocodes().contains("GC12345")).isTrue();
     }
 
     public static void testParcel() {
@@ -37,14 +39,14 @@ public class SearchResultTest extends AndroidTestCase {
 
         parcel.recycle();
 
-        assertEquals(3, receive.getCount());
-        assertEquals(2, receive.getFilteredGeocodes().size());
+        assertThat(receive.getCount()).isEqualTo(3);
+        assertThat(receive.getFilteredGeocodes()).hasSize(2);
 
-        assertTrue(receive.getGeocodes().contains("GC12345"));
-        assertFalse(receive.getGeocodes().contains("GC45678"));
+        assertThat(receive.getGeocodes().contains("GC12345")).isTrue();
+        assertThat(receive.getGeocodes().contains("GC45678")).isFalse();
 
-        assertFalse(receive.getFilteredGeocodes().contains("GC12345"));
-        assertTrue(receive.getFilteredGeocodes().contains("GC45678"));
+        assertThat(receive.getFilteredGeocodes().contains("GC12345")).isFalse();
+        assertThat(receive.getFilteredGeocodes().contains("GC45678")).isTrue();
     }
 
     public static void testAddSearchResult() {
@@ -62,14 +64,14 @@ public class SearchResultTest extends AndroidTestCase {
         newSearch.addGeocode("GC01234");
         newSearch.addSearchResult(search);
 
-        assertEquals(4, newSearch.getCount());
-        assertEquals(2, newSearch.getFilteredGeocodes().size());
+        assertThat(newSearch.getCount()).isEqualTo(4);
+        assertThat(newSearch.getFilteredGeocodes()).hasSize(2);
 
-        assertTrue(newSearch.getGeocodes().contains("GC12345"));
-        assertTrue(newSearch.getGeocodes().contains("GC01234"));
-        assertFalse(newSearch.getGeocodes().contains("GC45678"));
+        assertThat(newSearch.getGeocodes().contains("GC12345")).isTrue();
+        assertThat(newSearch.getGeocodes().contains("GC01234")).isTrue();
+        assertThat(newSearch.getGeocodes().contains("GC45678")).isFalse();
 
-        assertFalse(newSearch.getFilteredGeocodes().contains("GC12345"));
-        assertTrue(newSearch.getFilteredGeocodes().contains("GC45678"));
+        assertThat(newSearch.getFilteredGeocodes().contains("GC12345")).isFalse();
+        assertThat(newSearch.getFilteredGeocodes().contains("GC45678")).isTrue();
     }
 }

@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.list.StoredList;
 
@@ -14,7 +16,7 @@ public class PersonalNoteTest extends TestCase {
         Geocache cache = new Geocache();
         cache.setPersonalNote(testString);
         PersonalNote parsedNote = new PersonalNote(cache);
-        assertEquals(testString, parsedNote.toString());
+        assertThat(parsedNote.toString()).isEqualTo(testString);
         assertPersonalNote(parsedNote, "Simple cgeo note", "Simple provider note");
 
     }
@@ -24,7 +26,7 @@ public class PersonalNoteTest extends TestCase {
         Geocache cache = new Geocache();
         cache.setPersonalNote(testString);
         PersonalNote parsedNote = new PersonalNote(cache);
-        assertEquals(testString, parsedNote.toString());
+        assertThat(parsedNote.toString()).isEqualTo(testString);
         assertPersonalNote(parsedNote, null, "Simple provider note");
     }
 
@@ -47,7 +49,7 @@ public class PersonalNoteTest extends TestCase {
         Geocache cache = new Geocache();
         cache.setPersonalNote(testString);
         PersonalNote parsedNote = new PersonalNote(cache);
-        assertEquals("Simple cgeo note", parsedNote.toString());
+        assertThat(parsedNote.toString()).isEqualTo("Simple cgeo note");
         assertPersonalNote(parsedNote, null, "Simple cgeo note");
     }
 
@@ -60,7 +62,7 @@ public class PersonalNoteTest extends TestCase {
         cache2.setPersonalNote("cgeo note\n--\nProvider note");
         PersonalNote otherNote = new PersonalNote(cache2);
         PersonalNote result = myNote.mergeWith(otherNote);
-        assertEquals("cgeo note\n--\nSimple provider note", result.toString());
+        assertThat(result.toString()).isEqualTo("cgeo note\n--\nSimple provider note");
         assertPersonalNote(result, "cgeo note", "Simple provider note");
     }
 
@@ -73,15 +75,15 @@ public class PersonalNoteTest extends TestCase {
         cache2.setPersonalNote("Provider note");
         PersonalNote otherNote = new PersonalNote(cache2);
         PersonalNote result = myNote.mergeWith(otherNote);
-        assertEquals("Simple cgeo note\n--\nSimple provider note", result.toString());
+        assertThat(result.toString()).isEqualTo("Simple cgeo note\n--\nSimple provider note");
         assertPersonalNote(result, "Simple cgeo note", "Simple provider note");
         result = otherNote.mergeWith(myNote);
-        assertEquals("Simple cgeo note\n--\nProvider note", result.toString());
+        assertThat(result.toString()).isEqualTo("Simple cgeo note\n--\nProvider note");
         assertPersonalNote(result, "Simple cgeo note", "Provider note");
     }
 
     private static void assertPersonalNote(final PersonalNote note, final String cgeoNote, final String providerNote) {
-        assertEquals(cgeoNote, note.getCgeoNote());
-        assertEquals(providerNote, note.getProviderNote());
+        assertThat(note.getCgeoNote()).isEqualTo(cgeoNote);
+        assertThat(note.getProviderNote()).isEqualTo(providerNote);
     }
 }

@@ -1,5 +1,7 @@
 package cgeo.geocaching.utils;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.org.kxml2.io.KXmlSerializer;
 
 import org.apache.commons.lang3.CharEncoding;
@@ -37,7 +39,7 @@ public class XmlUtilsTest extends TestCase {
     private void assertXmlEquals(final String expected) throws IOException {
         xml.endDocument();
         xml.flush();
-        assertEquals("<?xml version='1.0' encoding='UTF-8' ?>" + expected, stringWriter.toString());
+        assertThat(stringWriter.toString()).isEqualTo("<?xml version='1.0' encoding='UTF-8' ?>" + expected);
     }
 
     public void testMultipleTexts() throws Exception {

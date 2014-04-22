@@ -1,5 +1,7 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
 
 import java.util.HashSet;
@@ -13,7 +15,7 @@ public class NavigationAppFactoryTest extends TestCase {
         for (NavigationAppsEnum navigationApp : NavigationAppsEnum.values()) {
             idSet.add(navigationApp.id);
         }
-        assertEquals("Duplicate id in " + NavigationAppsEnum.class.getSimpleName(), NavigationAppsEnum.values().length, idSet.size());
+        assertThat(idSet).doesNotHaveDuplicates();
     }
 
 }

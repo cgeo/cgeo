@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import android.annotation.TargetApi;
 import android.test.ActivityInstrumentationTestCase2;
 
@@ -61,10 +63,10 @@ public class GpxFileListActivityTest extends ActivityInstrumentationTestCase2<Gp
     }
 
     private void assertImport(String fileName) {
-        assertTrue(importGpxActivity.filenameBelongsToList(fileName));
+        assertThat(importGpxActivity.filenameBelongsToList(fileName)).isTrue();
     }
 
     private void denyImport(String fileName) {
-        assertFalse(importGpxActivity.filenameBelongsToList(fileName));
+        assertThat(importGpxActivity.filenameBelongsToList(fileName)).isFalse();
     }
 }

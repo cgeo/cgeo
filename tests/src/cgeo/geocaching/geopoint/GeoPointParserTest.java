@@ -1,5 +1,7 @@
 package cgeo.geocaching.geopoint;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.ui.Formatter;
 
 import android.test.AndroidTestCase;
@@ -23,9 +25,9 @@ public class GeoPointParserTest extends AndroidTestCase {
     }
 
     private static void assertEquals(final Geopoint expected, Geopoint actual, double tolerance) {
-        assertNotNull(expected);
-        assertNotNull(actual);
-        assertTrue(expected.distanceTo(actual) <= tolerance);
+        assertThat(expected).isNotNull();
+        assertThat(actual).isNotNull();
+        assertThat(expected.distanceTo(actual) <= tolerance).isTrue();
     }
 
     public static void testCoordinateMissingPart() {
@@ -36,7 +38,7 @@ public class GeoPointParserTest extends AndroidTestCase {
         } catch (Geopoint.ParseException e) {
             // expected
         }
-        assertNull(point);
+        assertThat(point).isNull();
     }
 
     public static void testSouth() {
@@ -66,9 +68,9 @@ public class GeoPointParserTest extends AndroidTestCase {
     public static void testInSentence() {
         final Geopoint p1 = GeopointParser.parse("Station3: N51 21.523 / E07 02.680");
         final Geopoint p2 = GeopointParser.parse("N51 21.523 E07 02.680");
-        assertNotNull(p1);
-        assertNotNull(p2);
-        assertEquals(p1, p2);
+        assertThat(p1).isNotNull();
+        assertThat(p2).isNotNull();
+        assertThat(p2).isEqualTo(p1);
     }
 
     public static void testUnrelatedParts() {
@@ -78,7 +80,7 @@ public class GeoPointParserTest extends AndroidTestCase {
         } catch (Geopoint.ParseException e) {
             // expected
         }
-        assertNull(point);
+        assertThat(point).isNull();
     }
 
     public static void testComma() {
@@ -86,9 +88,9 @@ public class GeoPointParserTest extends AndroidTestCase {
                 "E 15° 53' 41,68''");
         final Geopoint pointDot = GeopointParser.parse("N 46° 27' 55.65''\n" +
                 "E 15° 53' 41.68''");
-        assertNotNull(pointComma);
-        assertNotNull(pointDot);
-        assertEquals(pointComma, pointDot);
+        assertThat(pointComma).isNotNull();
+        assertThat(pointDot).isNotNull();
+        assertThat(pointDot).isEqualTo(pointComma);
     }
 
     public static void testBlankAddedByAutocorrectionDot() {
@@ -112,6 +114,6 @@ public class GeoPointParserTest extends AndroidTestCase {
     }
 
     public static void testEquatorMeridian() {
-        assertEquals(Geopoint.ZERO, GeopointParser.parse("00° 00.000 00° 00.000"));
+        assertThat(GeopointParser.parse("00° 00.000 00° 00.000")).isEqualTo(Geopoint.ZERO);
     }
 }

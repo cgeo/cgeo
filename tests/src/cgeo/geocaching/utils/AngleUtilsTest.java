@@ -1,17 +1,19 @@
 package cgeo.geocaching.utils;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import android.test.AndroidTestCase;
 
 public class AngleUtilsTest extends AndroidTestCase {
 
     public static void testNormalize() {
-        assertEquals(0.0f, AngleUtils.normalize(0));
-        assertEquals(0.0f, AngleUtils.normalize(360));
-        assertEquals(0.0f, AngleUtils.normalize(720));
-        assertEquals(0.0f, AngleUtils.normalize(-360));
-        assertEquals(0.0f, AngleUtils.normalize(-720));
-        assertEquals(1.0f, AngleUtils.normalize(721));
-        assertEquals(359.0f, AngleUtils.normalize(-721));
+        assertThat(AngleUtils.normalize(0)).isEqualTo(0.0f);
+        assertThat(AngleUtils.normalize(360)).isEqualTo(0.0f);
+        assertThat(AngleUtils.normalize(720)).isEqualTo(0.0f);
+        assertThat(AngleUtils.normalize(-360)).isEqualTo(0.0f);
+        assertThat(AngleUtils.normalize(-720)).isEqualTo(0.0f);
+        assertThat(AngleUtils.normalize(721)).isEqualTo(1.0f);
+        assertThat(AngleUtils.normalize(-721)).isEqualTo(359.0f);
     }
 
     public static void testDifference() {

@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -45,9 +47,9 @@ public class StaticMapsProviderTest extends TestCase {
 
             // make sure we don't have stale downloads
             deleteCacheDirectory(geocode);
-            assertFalse(StaticMapsProvider.hasStaticMap(cache));
-            assertFalse(StaticMapsProvider.hasStaticMapForWaypoint(geocode, theFinal));
-            assertFalse(StaticMapsProvider.hasStaticMapForWaypoint(geocode, trailhead));
+            assertThat(StaticMapsProvider.hasStaticMap(cache)).isFalse();
+            assertThat(StaticMapsProvider.hasStaticMapForWaypoint(geocode, theFinal)).isFalse();
+            assertThat(StaticMapsProvider.hasStaticMapForWaypoint(geocode, trailhead)).isFalse();
 
             // download
             StaticMapsProvider.downloadMaps(cache);
@@ -59,13 +61,13 @@ public class StaticMapsProviderTest extends TestCase {
             }
 
             // check download
-            assertTrue(StaticMapsProvider.hasStaticMap(cache));
-            assertTrue(StaticMapsProvider.hasStaticMapForWaypoint(geocode, theFinal));
-            assertTrue(StaticMapsProvider.hasStaticMapForWaypoint(geocode, trailhead));
+            assertThat(StaticMapsProvider.hasStaticMap(cache)).isTrue();
+            assertThat(StaticMapsProvider.hasStaticMapForWaypoint(geocode, theFinal)).isTrue();
+            assertThat(StaticMapsProvider.hasStaticMapForWaypoint(geocode, trailhead)).isTrue();
 
             // waypoint static maps hashcode dependent
             trailhead.setCoords(new Geopoint(lat + 0.24d + 2, lon + 0.25d + 2));
-            assertFalse(StaticMapsProvider.hasStaticMapForWaypoint(geocode, trailhead));
+            assertThat(StaticMapsProvider.hasStaticMapForWaypoint(geocode, trailhead)).isFalse();
         } finally {
             TestSettings.setStoreOfflineWpMaps(backupStoreWP);
             TestSettings.setStoreOfflineMaps(backupStore);

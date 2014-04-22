@@ -1,5 +1,7 @@
 package cgeo.geocaching.geopoint;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
@@ -20,7 +22,7 @@ public class UnitsTest extends CGeoTestCase {
     // Make method non-static so that Settings is initialized
     @SuppressWarnings("static-method")
     public void testDistance() {
-        assertEquals("?", Units.getDistanceFromKilometers(null));
+        assertThat(Units.getDistanceFromKilometers(null)).isEqualTo("?");
         final boolean savedImperial = Settings.isUseImperialUnits();
         try {
             TestSettings.setUseImperialUnits(false);
@@ -43,7 +45,7 @@ public class UnitsTest extends CGeoTestCase {
     // Make method non-static so that Settings is initialized
     @SuppressWarnings("static-method")
     public void testSpeed() {
-        assertEquals("?", Units.getDistanceFromKilometers(null));
+        assertThat(Units.getDistanceFromKilometers(null)).isEqualTo("?");
         final boolean savedImperial = Settings.isUseImperialUnits();
         try {
             TestSettings.setUseImperialUnits(false);

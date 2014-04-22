@@ -1,5 +1,7 @@
 package cgeo.geocaching.filter;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.Geocache;
 
@@ -14,11 +16,11 @@ public class DifficultyFilterTest extends CGeoTestCase {
 
         final DifficultyFilter easyFilter = new DifficultyFilter(1);
 
-        assertTrue(easyFilter.accepts(easy));
-        assertFalse(easyFilter.accepts(hard));
+        assertThat(easyFilter.accepts(easy)).isTrue();
+        assertThat(easyFilter.accepts(hard)).isFalse();
     }
 
     public static void testAllFilters() {
-        assertTrue(new DifficultyFilter.Factory().getFilters().size() == 5); // difficulty ranges from 1 to 5
+        assertThat(new DifficultyFilter.Factory().getFilters().size() == 5).isTrue(); // difficulty ranges from 1 to 5
     }
 }

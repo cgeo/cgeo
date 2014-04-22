@@ -1,5 +1,7 @@
 package cgeo.geocaching.utils;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.Geocache;
 
 import java.util.Set;
@@ -29,38 +31,38 @@ public class LeastRecentlyUsedSetTest extends AbstractLRUTest {
         final LeastRecentlyUsedSet<Geocache> caches = new LeastRecentlyUsedSet<Geocache>(10);
         final Geocache first = new Geocache();
         first.setGeocode("1");
-        assertTrue(caches.add(first));
+        assertThat(caches.add(first)).isTrue();
 
         final Geocache second = new Geocache();
         second.setGeocode("2");
-        assertTrue(caches.add(second));
+        assertThat(caches.add(second)).isTrue();
 
-        assertEquals(2, caches.size());
-        assertTrue(caches.contains(first));
-        assertTrue(caches.contains(second));
+        assertThat(caches).hasSize(2);
+        assertThat(caches.contains(first)).isTrue();
+        assertThat(caches.contains(second)).isTrue();
 
         // adding first cache again does not change set
-        assertFalse(caches.add(first));
-        assertEquals(2, caches.size());
+        assertThat(caches.add(first)).isFalse();
+        assertThat(caches).hasSize(2);
 
         for (int i = 3; i <= 10; i++) {
             final Geocache cache = new Geocache();
             cache.setGeocode(Integer.toString(i));
-            assertTrue(caches.add(cache));
+            assertThat(caches.add(cache)).isTrue();
         }
 
-        assertEquals(10, caches.size());
-        assertTrue(caches.contains(first));
-        assertTrue(caches.contains(second));
+        assertThat(caches).hasSize(10);
+        assertThat(caches.contains(first)).isTrue();
+        assertThat(caches.contains(second)).isTrue();
 
         final Geocache c11 = new Geocache();
         c11.setGeocode("11");
-        assertTrue(caches.add(c11));
+        assertThat(caches.add(c11)).isTrue();
 
-        assertEquals(10, caches.size());
+        assertThat(caches).hasSize(10);
 
         // first was used again, there second is the oldest and has been overwritten by 11
-        assertTrue(caches.contains(first));
-        assertFalse(caches.contains(second));
+        assertThat(caches.contains(first)).isTrue();
+        assertThat(caches.contains(second)).isFalse();
     }
 }

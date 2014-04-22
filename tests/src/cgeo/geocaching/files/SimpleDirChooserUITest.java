@@ -1,5 +1,7 @@
 package cgeo.geocaching.files;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.Intents;
 
 import com.robotium.solo.Solo;
@@ -47,8 +49,8 @@ public class SimpleDirChooserUITest extends ActivityInstrumentationTestCase2<Sim
         final int lastIndex = getCurrentCheckBoxes().size() - 1;
 
         solo.clickOnCheckBox(lastIndex);
-        assertTrue(solo.isCheckBoxChecked(lastIndex));
-        assertFalse(solo.isCheckBoxChecked(0));
+        assertThat(solo.isCheckBoxChecked(lastIndex)).isTrue();
+        assertThat(solo.isCheckBoxChecked(0)).isFalse();
         assertChecked("Clicked last checkbox", 1);
 
         solo.scrollUp();
@@ -61,10 +63,10 @@ public class SimpleDirChooserUITest extends ActivityInstrumentationTestCase2<Sim
         pause();
         solo.clickOnCheckBox(0);
         assertChecked("Clicked first checkbox", 1);
-        assertTrue(solo.isCheckBoxChecked(0));
+        assertThat(solo.isCheckBoxChecked(0)).isTrue();
         solo.clickOnCheckBox(1);
         assertChecked("Clicked second checkbox", 1);
-        assertTrue(solo.isCheckBoxChecked(1));
+        assertThat(solo.isCheckBoxChecked(1)).isTrue();
     }
 
     private static void pause() throws InterruptedException {
@@ -73,8 +75,8 @@ public class SimpleDirChooserUITest extends ActivityInstrumentationTestCase2<Sim
 
     private void assertChecked(String message, int expectedChecked) {
         final ArrayList<CheckBox> boxes = getCurrentCheckBoxes();
-        assertNotNull("Could not get checkboxes", boxes);
-        assertTrue("There are no checkboxes", boxes.size() > 1);
+        assertThat(boxes).as("Checkboxes").isNotNull();
+        assertThat(boxes.size()).as("number of checkboxes").isGreaterThan(1);
         int checked = 0;
         for (int i = 0; i < boxes.size(); i++) {
             if (solo.isCheckBoxChecked(i)) {

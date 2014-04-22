@@ -1,5 +1,7 @@
 package cgeo.geocaching.enumerations;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import android.test.AndroidTestCase;
 
 public class CacheAttributeTest extends AndroidTestCase {
@@ -7,18 +9,18 @@ public class CacheAttributeTest extends AndroidTestCase {
     public static void testTrimAttributeName() {
         for (CacheAttribute attribute : CacheAttribute.values()) {
             final String rawName = attribute.rawName;
-            assertTrue("bad attribute name " + rawName, CacheAttribute.trimAttributeName(rawName).equals(rawName));
+            assertThat(CacheAttribute.trimAttributeName(rawName)).as("attribute name").isEqualTo(rawName);
         }
     }
 
     public static void testIds() {
         for (CacheAttribute attribute : CacheAttribute.values()) {
             if (attribute != CacheAttribute.UNKNOWN) {
-                assertTrue(attribute.rawName != null);
-                assertTrue(attribute.rawName.length() > 0);
-                assertTrue(attribute.drawableId != 0);
-                assertTrue(attribute.stringIdYes != 0);
-                assertTrue(attribute.stringIdNo != 0);
+                assertThat(attribute.rawName != null).isTrue();
+                assertThat(attribute.rawName.length() > 0).isTrue();
+                assertThat(attribute.drawableId != 0).isTrue();
+                assertThat(attribute.stringIdYes != 0).isTrue();
+                assertThat(attribute.stringIdNo != 0).isTrue();
             }
         }
     }
@@ -34,18 +36,18 @@ public class CacheAttributeTest extends AndroidTestCase {
 
     public static void testGetBy() {
         final CacheAttribute attribute = CacheAttribute.HIKING; // an attribute that is present in GC and OC
-        assertTrue("Test cannot be run with this attribute", attribute.gcid >= 0);
-        assertTrue("Test cannot be run with this attribute", attribute.ocacode >= 0);
-        assertSame(CacheAttribute.getByRawName(attribute.rawName), attribute);
-        assertSame(CacheAttribute.getByOcACode(attribute.ocacode), attribute);
+        assertThat(attribute.gcid).overridingErrorMessage("Test cannot be run with this attribute").isGreaterThanOrEqualTo(0);
+        assertThat(attribute.ocacode).overridingErrorMessage("Test cannot be run with this attribute").isGreaterThanOrEqualTo(0);
+        assertThat(attribute).isSameAs(CacheAttribute.getByRawName(attribute.rawName));
+        assertThat(attribute).isSameAs(CacheAttribute.getByOcACode(attribute.ocacode));
     }
 
     public static void testIsEnabled() {
         final CacheAttribute attribute = CacheAttribute.HIKING;
         final String hiking_yes = attribute.getAttributeName(true);
         final String hiking_no = attribute.getAttributeName(false);
-        assertTrue(CacheAttribute.isEnabled(hiking_yes));
-        assertFalse(CacheAttribute.isEnabled(hiking_no));
+        assertThat(CacheAttribute.isEnabled(hiking_yes)).isTrue();
+        assertThat(CacheAttribute.isEnabled(hiking_no)).isFalse();
     }
 
 }

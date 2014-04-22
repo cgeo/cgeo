@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
@@ -25,11 +27,11 @@ public class GeocacheTest extends CGeoTestCase {
     public static void testCanBeAddedToCalendar() {
         final Date today = new Date();
         final Geocache cacheToday = new MockedEventCache(today);
-        assertTrue(cacheToday.canBeAddedToCalendar());
+        assertThat(cacheToday.canBeAddedToCalendar()).isTrue();
 
         final Date yesterday = new Date(today.getTime() - 86400 * 1000);
         final MockedEventCache cacheYesterday = new MockedEventCache(yesterday);
-        assertFalse(cacheYesterday.canBeAddedToCalendar());
+        assertThat(cacheYesterday.canBeAddedToCalendar()).isFalse();
     }
 
     public static void testEquality() {
@@ -37,22 +39,22 @@ public class GeocacheTest extends CGeoTestCase {
         final Geocache two = new Geocache();
 
         // identity
-        assertTrue(one.equals(one));
+        assertThat(one.equals(one)).isTrue();
 
         // different objects without geocode shall not be equal
-        assertFalse(one.equals(two));
+        assertThat(one.equals(two)).isFalse();
 
         one.setGeocode("geocode");
         two.setGeocode("geocode");
 
         // different objects with same geocode shall be equal
-        assertTrue(one.equals(two));
+        assertThat(one.equals(two)).isTrue();
     }
 
     public static void testGeocodeUppercase() {
         final Geocache cache = new Geocache();
         cache.setGeocode("gc1234");
-        assertEquals("GC1234", cache.getGeocode());
+        assertThat(cache.getGeocode()).isEqualTo("GC1234");
     }
 
     public final void testUpdateWaypointFromNote() {
@@ -78,12 +80,12 @@ public class GeocacheTest extends CGeoTestCase {
                 cache.setPersonalNote(note);
                 cache.parseWaypointsFromNote();
                 final List<Waypoint> waypoints = cache.getWaypoints();
-                assertNotNull(waypoints);
-                assertEquals(expectedWaypoints, waypoints.size());
+                assertThat(waypoints).isNotNull();
+                assertThat(waypoints).hasSize(expectedWaypoints);
                 final Waypoint waypoint = waypoints.get(0);
-                assertEquals(new Geopoint("N51 13.888 E007 03.444"), waypoint.getCoords());
-                //            assertEquals("Test", waypoint.getNote());
-                assertEquals(CgeoApplication.getInstance().getString(R.string.cache_personal_note) + " 1", waypoint.getName());
+                assertThat(waypoint.getCoords()).isEqualTo(new Geopoint("N51 13.888 E007 03.444"));
+                //            assertThat(waypoint.getNote()).isEqualTo("Test");
+                assertThat(waypoint.getName()).isEqualTo(CgeoApplication.getInstance().getString(R.string.cache_personal_note) + " 1");
                 cache.store(StoredList.TEMPORARY_LIST_ID, null);
             }
             removeCacheCompletely(geocode);
@@ -117,8 +119,8 @@ public class GeocacheTest extends CGeoTestCase {
 
         download.gatherMissingFrom(stored);
 
-        assertTrue("Detailed not merged correctly", download.isDetailed());
-        assertFalse("Disabled not merged correctly", download.isDisabled());
+        assertThat(download.isDetailed()).as("merged detailed").isTrue();
+        assertThat(download.isDisabled()).as("merged disabled").isFalse();
         assertEquals("Type not merged correctly", CacheType.MULTI, download.getType());
         assertEquals("Longitude not merged correctly", 9.0, download.getCoords().getLongitude(), 0.1);
         assertEquals("Latitude not merged correctly", 41.0, download.getCoords().getLatitude(), 0.1);
@@ -144,8 +146,8 @@ public class GeocacheTest extends CGeoTestCase {
 
         livemap.gatherMissingFrom(stored);
 
-        assertTrue("Detailed not merged correctly", livemap.isDetailed());
-        assertTrue("Disabled not merged correctly", livemap.isDisabled());
+        assertThat(livemap.isDetailed()).as("merged detailed").isTrue();
+        assertThat(livemap.isDisabled()).as("merged disabled").isTrue();
         assertEquals("Type not merged correctly", CacheType.TRADITIONAL, livemap.getType());
         assertEquals("Longitude not merged correctly", 8.0, livemap.getCoords().getLongitude(), 0.1);
         assertEquals("Latitude not merged correctly", 40.0, livemap.getCoords().getLatitude(), 0.1);
@@ -208,7 +210,7 @@ public class GeocacheTest extends CGeoTestCase {
         assertEquals("Type not merged correctly", CacheType.MULTI, popup.getType());
         assertEquals("Longitude not merged correctly", 8.0, popup.getCoords().getLongitude(), 0.1);
         assertEquals("Latitude not merged correctly", 40.0, popup.getCoords().getLatitude(), 0.1);
-        assertTrue("Found not merged correctly", popup.isFound());
+        assertThat(popup.isFound()).overridingErrorMessage("Found not merged correctly").isTrue();
         assertEquals("Zoomlevel not merged correctly", 12, popup.getCoordZoomLevel());
     }
 
@@ -231,7 +233,7 @@ public class GeocacheTest extends CGeoTestCase {
     public static void testNameForSorting() {
         Geocache cache = new Geocache();
         cache.setName("GR8 01-01");
-        assertEquals("GR000008 000001-000001", cache.getNameForSorting());
+        assertThat(cache.getNameForSorting()).isEqualTo("GR000008 000001-000001");
     }
 
     public static void testGuessEventTime() {
@@ -255,7 +257,7 @@ public class GeocacheTest extends CGeoTestCase {
         cache.setType(CacheType.EVENT);
         cache.setDescription(StringUtils.EMPTY);
         cache.setShortDescription("text 14:20 text");
-        assertEquals(String.valueOf(14 * 60 + 20), cache.guessEventTimeMinutes());
+        assertThat(cache.guessEventTimeMinutes()).isEqualTo(String.valueOf(14 * 60 + 20));
     }
 
     private static void assertTime(final String description, final int hours, final int minutes) {
@@ -263,45 +265,45 @@ public class GeocacheTest extends CGeoTestCase {
         cache.setDescription(description);
         cache.setType(CacheType.EVENT);
         final int minutesAfterMidnight = hours * 60 + minutes;
-        assertEquals(String.valueOf(minutesAfterMidnight), cache.guessEventTimeMinutes());
+        assertThat(cache.guessEventTimeMinutes()).isEqualTo(String.valueOf(minutesAfterMidnight));
     }
 
     private static void assertNoTime(final String description) {
         final Geocache cache = new Geocache();
         cache.setDescription(description);
         cache.setType(CacheType.EVENT);
-        assertNull(cache.guessEventTimeMinutes());
+        assertThat(cache.guessEventTimeMinutes()).isNull();
     }
 
     public static void testGetPossibleLogTypes() throws Exception {
         Geocache gcCache = new Geocache();
         gcCache.setGeocode("GC123");
         gcCache.setType(CacheType.WEBCAM);
-        assertTrue(gcCache.getPossibleLogTypes().contains(LogType.WEBCAM_PHOTO_TAKEN));
-        assertTrue("GC caches can have maintenance logs", gcCache.getPossibleLogTypes().contains(LogType.NEEDS_MAINTENANCE));
+        assertThat(gcCache.getPossibleLogTypes()).as("possible GC cache log types").contains(LogType.WEBCAM_PHOTO_TAKEN);
+        assertThat(gcCache.getPossibleLogTypes()).as("possible GC cache log types").contains(LogType.NEEDS_MAINTENANCE);
 
         Geocache ocCache = new Geocache();
         ocCache.setGeocode("OC1234");
         ocCache.setType(CacheType.TRADITIONAL);
-        assertFalse("A traditional cache cannot have a webcam log", ocCache.getPossibleLogTypes().contains(LogType.WEBCAM_PHOTO_TAKEN));
-        assertFalse("OC caches have no maintenance log type", ocCache.getPossibleLogTypes().contains(LogType.NEEDS_MAINTENANCE));
+        assertThat(ocCache.getPossibleLogTypes()).as("traditional cache possible log types").doesNotContain(LogType.WEBCAM_PHOTO_TAKEN);
+        assertThat(ocCache.getPossibleLogTypes()).as("OC cache possible log types").doesNotContain(LogType.NEEDS_MAINTENANCE);
     }
 
     public static void testLogTypeEventPast() throws Exception {
         Calendar today = Calendar.getInstance();
         today.add(Calendar.DAY_OF_MONTH, -1);
-        assertEquals(LogType.ATTENDED, createEventCache(today).getDefaultLogType());
+        assertThat(createEventCache(today).getDefaultLogType()).isEqualTo(LogType.ATTENDED);
     }
 
     public static void testLogTypeEventToday() throws Exception {
         Calendar today = Calendar.getInstance();
-        assertEquals(LogType.ATTENDED, createEventCache(today).getDefaultLogType());
+        assertThat(createEventCache(today).getDefaultLogType()).isEqualTo(LogType.ATTENDED);
     }
 
     public static void testLogTypeEventFuture() throws Exception {
         Calendar today = Calendar.getInstance();
         today.add(Calendar.DAY_OF_MONTH, 1);
-        assertEquals(LogType.WILL_ATTEND, createEventCache(today).getDefaultLogType());
+        assertThat(createEventCache(today).getDefaultLogType()).isEqualTo(LogType.WILL_ATTEND);
     }
 
     private static Geocache createEventCache(Calendar calendar) {

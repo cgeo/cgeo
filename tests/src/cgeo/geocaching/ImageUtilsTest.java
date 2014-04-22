@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.ImageUtils;
@@ -7,7 +9,6 @@ import cgeo.geocaching.utils.ImageUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 
 public class ImageUtilsTest extends AbstractResourceInstrumentationTestCase {
 
@@ -18,13 +19,12 @@ public class ImageUtilsTest extends AbstractResourceInstrumentationTestCase {
         ImageUtils.decodeBase64ToStream(icon64, outputStream);
         final byte[] decodedImage = outputStream.toByteArray();
         outputStream.close();
-        assertEquals("decoded image has the right size", 409, decodedImage.length);
+        assertThat(decodedImage.length).as("decoded image size").isEqualTo(409);
         final InputStream originalStream = getResourceStream(R.raw.small_file);
         final byte[] originalImage = new byte[409];
         assertEquals("original image has the right size (consistency check)", 409, originalStream.read(originalImage));
         originalStream.close();
-        assertTrue("decoded base64 image is similar to original file data",
-                Arrays.equals(originalImage, decodedImage));
+        assertThat(decodedImage).as("decoded base64 image").isEqualTo(originalImage);
     }
 
 }

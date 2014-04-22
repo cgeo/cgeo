@@ -1,5 +1,7 @@
 package cgeo.geocaching.filter;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.filter.StateFilter.StateNotStoredFilter;
@@ -20,8 +22,8 @@ public class StateStoredFilterTest extends CGeoTestCase {
     }
 
     public void testAccepts() {
-        assertFalse(storedFilter.accepts(cache));
-        assertTrue(notStoredFilter.accepts(cache));
+        assertThat(storedFilter.accepts(cache)).isFalse();
+        assertThat(notStoredFilter.accepts(cache)).isTrue();
     }
 
 }

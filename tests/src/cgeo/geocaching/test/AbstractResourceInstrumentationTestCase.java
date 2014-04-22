@@ -1,5 +1,7 @@
 package cgeo.geocaching.test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
@@ -71,14 +73,14 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
     protected void setUp() throws Exception {
         super.setUp();
         temporaryListId = DataStore.createList("Temporary unit testing");
-        assertTrue(temporaryListId != StoredList.TEMPORARY_LIST_ID);
-        assertTrue(temporaryListId != StoredList.STANDARD_LIST_ID);
+        assertThat(temporaryListId != StoredList.TEMPORARY_LIST_ID).isTrue();
+        assertThat(temporaryListId != StoredList.STANDARD_LIST_ID).isTrue();
     }
 
     @Override
     protected void tearDown() throws Exception {
         final SearchResult search = DataStore.getBatchOfStoredCaches(null, CacheType.ALL, temporaryListId);
-        assertNotNull(search);
+        assertThat(search).isNotNull();
         DataStore.removeCaches(search.getGeocodes(), LoadFlags.REMOVE_ALL);
         DataStore.removeList(temporaryListId);
         super.tearDown();
@@ -93,8 +95,8 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
         try {
             GPX10Parser parser = new GPX10Parser(StoredList.TEMPORARY_LIST_ID);
             Collection<Geocache> caches = parser.parse(instream, null);
-            assertNotNull(caches);
-            assertFalse(caches.isEmpty());
+            assertThat(caches).isNotNull();
+            assertThat(caches.isEmpty()).isFalse();
             return caches.iterator().next();
         } finally {
             instream.close();

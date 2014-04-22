@@ -1,5 +1,7 @@
 package cgeo.geocaching.test.mock;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.Image;
 import cgeo.geocaching.Trackable;
@@ -32,13 +34,13 @@ public abstract class MockedCache implements ICache {
     }
 
     public String getMockedDataUser() {
-        Assert.assertTrue(StringUtils.isNotBlank(this.mockedDataUser));
+        assertThat(StringUtils.isNotBlank(this.mockedDataUser)).isTrue();
         return mockedDataUser;
     }
 
     public void setMockedDataUser(String mockedDataUser) {
         this.mockedDataUser = mockedDataUser;
-        Assert.assertTrue(StringUtils.isNotBlank(this.mockedDataUser));
+        assertThat(StringUtils.isNotBlank(this.mockedDataUser)).isTrue();
     }
 
     public static String getDateFormat() {

@@ -1,5 +1,7 @@
 package cgeo.geocaching.export;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.files.GPX10Parser;
 import cgeo.geocaching.files.ParserException;
@@ -22,15 +24,14 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
     public static void testWriteEmptyGPX() throws Exception {
         final StringWriter writer = new StringWriter();
         new GpxSerializer().writeGPX(Collections.<String> emptyList(), writer, null);
-        assertEquals("<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>" +
+        assertThat(writer.getBuffer().toString()).isEqualTo("<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>" +
                 "<gpx version=\"1.0\" creator=\"c:geo - http://www.cgeo.org/\" " +
                 "xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd " +
                 "http://www.groundspeak.com/cache/1/0 http://www.groundspeak.com/cache/1/0/1/cache.xsd " +
                 "http://www.gsak.net/xmlv1/4 http://www.gsak.net/xmlv1/4/gsak.xsd\" " +
                 "xmlns=\"http://www.topografix.com/GPX/1/0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
                 "xmlns:groundspeak=\"http://www.groundspeak.com/cache/1/0\" xmlns:gsak=\"http://www.gsak.net/xmlv1/4\" " +
-                "xmlns:cgeo=\"http://www.cgeo.org/wptext/1/0\" />",
-                writer.getBuffer().toString());
+                "xmlns:cgeo=\"http://www.cgeo.org/wptext/1/0\" />");
     }
 
     public void testProgressReporting() throws IOException, ParserException {
@@ -38,7 +39,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         final StringWriter writer = new StringWriter();
 
         Geocache cache = loadCacheFromResource(R.raw.gc1bkp3_gpx101);
-        assertNotNull(cache);
+        assertThat(cache).isNotNull();
 
         new GpxSerializer().writeGPX(Collections.singletonList("GC1BKP3"), writer, new GpxSerializer.ProgressListener() {
 
@@ -60,21 +61,21 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         final String geocode = "GC1BKP3";
         final int cacheResource = R.raw.gc1bkp3_gpx101;
         final Geocache cache = loadCacheFromResource(cacheResource);
-        assertNotNull(cache);
+        assertThat(cache).isNotNull();
 
         final String gpxFirst = getGPXFromCache(geocode);
 
-        assertTrue(gpxFirst.length() > 0);
+        assertThat(gpxFirst.length() > 0).isTrue();
 
         final GPX10Parser parser = new GPX10Parser(StoredList.TEMPORARY_LIST_ID);
 
         final InputStream stream = new ByteArrayInputStream(gpxFirst.getBytes(CharEncoding.UTF_8));
         Collection<Geocache> caches = parser.parse(stream, null);
-        assertNotNull(caches);
-        assertEquals(1, caches.size());
+        assertThat(caches).isNotNull();
+        assertThat(caches).hasSize(1);
 
         final String gpxSecond = getGPXFromCache(geocode);
-        assertEquals(replaceLogIds(gpxFirst), replaceLogIds(gpxSecond));
+        assertThat(replaceLogIds(gpxSecond)).isEqualTo(replaceLogIds(gpxFirst));
     }
 
     private static String replaceLogIds(String gpx) {

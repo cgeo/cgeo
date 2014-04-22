@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 
@@ -37,13 +39,13 @@ public class WaypointTest extends AndroidTestCase {
     }
 
     private static void assertOrdered(Waypoint first, Waypoint second) {
-        assertTrue(Waypoint.WAYPOINT_COMPARATOR.compare(first, second) < 0);
+        assertThat(Waypoint.WAYPOINT_COMPARATOR.compare(first, second) < 0).isTrue();
     }
 
     public static void testGeocode() {
         final Waypoint waypoint = new Waypoint("Test waypoint", WaypointType.PARKING, false);
         waypoint.setGeocode("p1");
-        assertEquals("P1", waypoint.getGeocode());
+        assertThat(waypoint.getGeocode()).isEqualTo("P1");
     }
 
     public static void testParseNoWaypointFromNote() {
@@ -59,21 +61,21 @@ public class WaypointTest extends AndroidTestCase {
                 "M 7\n" +
                 "N 5\n" +
                 "5 IFG 257";
-        assertTrue(Waypoint.parseWaypointsFromNote(note).isEmpty());
+        assertThat(Waypoint.parseWaypointsFromNote(note).isEmpty()).isTrue();
     }
 
     public static void testParseWaypointFromNote() {
         final String note = "Dummy note\nn 45° 3.5 e 27° 7.5\nNothing else";
         final Collection<Waypoint> waypoints = Waypoint.parseWaypointsFromNote(note);
-        assertEquals(1, waypoints.size());
+        assertThat(waypoints).hasSize(1);
         final Geopoint coords = waypoints.iterator().next().getCoords();
-        assertEquals(45, coords.getLatDeg());
-        assertEquals(3.5, coords.getLatMinRaw());
-        assertEquals(27, coords.getLonDeg());
-        assertEquals(7.5, coords.getLonMinRaw());
+        assertThat(coords.getLatDeg()).isEqualTo(45);
+        assertThat(coords.getLatMinRaw()).isEqualTo(3.5);
+        assertThat(coords.getLonDeg()).isEqualTo(27);
+        assertThat(coords.getLonMinRaw()).isEqualTo(7.5);
         final String note2 = "Waypoint on two lines\nN 45°3.5\nE 27°7.5\nNothing else";
         final Collection<Waypoint> waypoints2 = Waypoint.parseWaypointsFromNote(note2);
-        assertEquals(1, waypoints2.size());
-        assertEquals(coords, waypoints2.iterator().next().getCoords());
+        assertThat(waypoints2).hasSize(1);
+        assertThat(waypoints2.iterator().next().getCoords()).isEqualTo(coords);
     }
 }

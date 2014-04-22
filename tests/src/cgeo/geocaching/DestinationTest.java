@@ -1,10 +1,10 @@
 package cgeo.geocaching;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.geopoint.Geopoint;
 
 import android.test.AndroidTestCase;
-
-import junit.framework.Assert;
 
 public class DestinationTest extends AndroidTestCase {
 
@@ -17,9 +17,9 @@ public class DestinationTest extends AndroidTestCase {
     }
 
     public void testSomething() {
-        Assert.assertEquals(1, dest.getId());
-        Assert.assertEquals(10000, dest.getDate());
-        Assert.assertEquals(52.5, dest.getCoords().getLatitude());
-        Assert.assertEquals(9.33, dest.getCoords().getLongitude());
+        assertThat(dest.getId()).isEqualTo(1);
+        assertThat(dest.getDate()).isEqualTo(10000);
+        assertThat(dest.getCoords().getLatitude()).isEqualTo(52.5);
+        assertThat(dest.getCoords().getLongitude()).isEqualTo(9.33);
     }
 }

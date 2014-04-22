@@ -1,5 +1,7 @@
 package cgeo.geocaching.filter;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.enumerations.CacheType;
@@ -25,28 +27,28 @@ public class TypeFilterTest extends CGeoTestCase {
     }
 
     public void testAccepts() {
-        assertTrue(traditionalFilter.accepts(traditional));
-        assertFalse(traditionalFilter.accepts(mystery));
+        assertThat(traditionalFilter.accepts(traditional)).isTrue();
+        assertThat(traditionalFilter.accepts(mystery)).isFalse();
     }
 
     public void testFilter() {
         final ArrayList<Geocache> list = new ArrayList<Geocache>();
         traditionalFilter.filter(list);
-        assertEquals(0, list.size());
+        assertThat(list).isEmpty();
 
         list.add(traditional);
         list.add(mystery);
-        assertEquals(2, list.size());
+        assertThat(list).hasSize(2);
 
         traditionalFilter.filter(list);
-        assertEquals(1, list.size());
-        assertTrue(list.contains(traditional));
+        assertThat(list).hasSize(1);
+        assertThat(list.contains(traditional)).isTrue();
 
     }
 
     public static void testGetAllFilters() {
         final int expectedEntries = CacheType.values().length - 1; // hide "all"
-        assertEquals(expectedEntries, new TypeFilter.Factory().getFilters().size());
+        assertThat(new TypeFilter.Factory().getFilters()).hasSize(expectedEntries);
     }
 
 }
