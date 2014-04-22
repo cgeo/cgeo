@@ -42,17 +42,17 @@ public final class ContactsActivity extends Activity {
         }
 
         // search by nickname, exact
-        List<Pair<Integer, String>> contacts = getContactId(nickName, ContactsContract.Data.CONTENT_URI, ContactsContract.Data.CONTACT_ID, ContactsContract.CommonDataKinds.Nickname.NAME, false);
+        List<Pair<Integer, String>> contacts = getContacts(nickName, ContactsContract.Data.CONTENT_URI, ContactsContract.Data.CONTACT_ID, ContactsContract.CommonDataKinds.Nickname.NAME, false);
 
         // search by display name, exact
         if (contacts.isEmpty()) {
-            contacts = getContactId(nickName, ContactsContract.Contacts.CONTENT_URI, BaseColumns._ID, ContactsContract.Contacts.DISPLAY_NAME, false);
+            contacts = getContacts(nickName, ContactsContract.Contacts.CONTENT_URI, BaseColumns._ID, ContactsContract.Contacts.DISPLAY_NAME, false);
         }
 
         // search by contained name parts
         if (contacts.isEmpty()) {
-            contacts.addAll(getContactId(nickName, ContactsContract.Data.CONTENT_URI, ContactsContract.Data.CONTACT_ID, ContactsContract.CommonDataKinds.Nickname.NAME, true));
-            contacts.addAll(getContactId(nickName, ContactsContract.Contacts.CONTENT_URI, BaseColumns._ID, ContactsContract.Contacts.DISPLAY_NAME, true));
+            contacts.addAll(getContacts(nickName, ContactsContract.Data.CONTENT_URI, ContactsContract.Data.CONTACT_ID, ContactsContract.CommonDataKinds.Nickname.NAME, true));
+            contacts.addAll(getContacts(nickName, ContactsContract.Contacts.CONTENT_URI, BaseColumns._ID, ContactsContract.Contacts.DISPLAY_NAME, true));
         }
 
         if (contacts.isEmpty()) {
@@ -97,7 +97,7 @@ public final class ContactsActivity extends Activity {
         finish();
     }
 
-    private List<Pair<Integer, String>> getContactId(final @NonNull String searchName, Uri uri, final @NonNull String idColumnName, final @NonNull String selectionColumnName, boolean like) {
+    private List<Pair<Integer, String>> getContacts(final @NonNull String searchName, Uri uri, final @NonNull String idColumnName, final @NonNull String selectionColumnName, boolean like) {
         final String[] projection = new String[] { idColumnName, selectionColumnName };
         final String selection = selectionColumnName + (like ? " LIKE" : " =") + " ? COLLATE NOCASE";
         final String[] selectionArgs = new String[] { like ? "%" + searchName + "%" : searchName };
