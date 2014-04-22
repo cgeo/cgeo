@@ -85,6 +85,7 @@ public class DirectionProvider {
         public boolean hasSensor(Context context) {
             if (hasSensorChecked == false) {
                 hasSensor = getOrientationSensor(context) != null;
+                hasSensorChecked = true;
             }
             return hasSensor;
         }
