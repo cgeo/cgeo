@@ -54,14 +54,21 @@ public class DirectionProvider {
         @SuppressWarnings("deprecation")
         @Override
         public void start(final Context context, final Handler handler) {
+            if (!hasSensor(context)) {
+                return;
+            }
             if (++count == 1) {
                 sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-                sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION), SensorManager.SENSOR_DELAY_NORMAL, handler);
+                Sensor orientationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+                sensorManager.registerListener(this, orientationSensor, SensorManager.SENSOR_DELAY_NORMAL, handler);
             }
         }
 
         @Override
         public void stop() {
+            if (!hasSensor) {
+                return;
+            }
             if (--count == 0) {
                 sensorManager.unregisterListener(this);
             }
@@ -83,6 +90,24 @@ public class DirectionProvider {
                 subject.subscribe(subscriber);
             }
         });
+    }
+
+    /**
+     * Assume that there is an orientation sensor, unless we have really checked that
+     */
+    private static boolean hasSensor = true;
+
+    /**
+     * Flag for one time check if there is a sensor.
+     */
+    private static boolean hasSensorChecked = false;
+
+    public static boolean hasSensor(Context context) {
+        if (hasSensorChecked == false) {
+            SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+            hasSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION) != null;
+        }
+        return hasSensor;
     }
 
     /**
