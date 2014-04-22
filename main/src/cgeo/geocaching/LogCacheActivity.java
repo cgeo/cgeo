@@ -3,7 +3,6 @@ package cgeo.geocaching;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
@@ -341,25 +340,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private void setDefaultValues() {
         date = Calendar.getInstance();
         rating = GCVote.NO_RATING;
-        if (cache.isEventCache()) {
-            final Date eventDate = cache.getHiddenDate();
-            boolean expired = DateUtils.isPastEvent(cache);
-
-            if (cache.hasOwnLog(LogType.WILL_ATTEND) || expired) {
-                typeSelected = cache.hasOwnLog(LogType.ATTENDED) ? LogType.NOTE : LogType.ATTENDED;
-            } else {
-                typeSelected = LogType.WILL_ATTEND;
-            }
-            // it this is an attended event log, use the event date by default instead of the current date
-            if (expired && typeSelected == LogType.ATTENDED) {
-                date.setTime(eventDate);
-            }
-        } else {
-            if (cache.isFound()) {
-                typeSelected = LogType.NOTE;
-            } else {
-                typeSelected = cache.getType() == CacheType.WEBCAM ? LogType.WEBCAM_PHOTO_TAKEN : LogType.FOUND_IT;
-            }
+        typeSelected = cache.getDefaultLogType();
+        // it this is an attended event log, use the event date by default instead of the current date
+        if (cache.isEventCache() && DateUtils.isPastEvent(cache) && typeSelected == LogType.ATTENDED) {
+            date.setTime(cache.getHiddenDate());
         }
         text = null;
         imageCaption = StringUtils.EMPTY;

@@ -25,6 +25,7 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.DateUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LazyInitializedList;
 import cgeo.geocaching.utils.Log;
@@ -1806,6 +1807,25 @@ public class Geocache implements ICache, IWaypoint {
 
     public boolean applyDistanceRule() {
         return (getType().applyDistanceRule() || hasUserModifiedCoords()) && getConnector() == GCConnector.getInstance();
+    }
+
+    public LogType getDefaultLogType() {
+        if (isEventCache()) {
+            final Date eventDate = getHiddenDate();
+            boolean expired = DateUtils.isPastEvent(this);
+
+            if (hasOwnLog(LogType.WILL_ATTEND) || expired || (eventDate != null && DateUtils.daysSince(eventDate.getTime()) == 0)) {
+                return hasOwnLog(LogType.ATTENDED) ? LogType.NOTE : LogType.ATTENDED;
+            }
+            return LogType.WILL_ATTEND;
+        }
+        if (isFound()) {
+            return LogType.NOTE;
+        }
+        if (getType() == CacheType.WEBCAM) {
+            return LogType.WEBCAM_PHOTO_TAKEN;
+        }
+        return LogType.FOUND_IT;
     }
 
 }

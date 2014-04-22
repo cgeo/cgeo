@@ -9,6 +9,7 @@ import cgeo.geocaching.list.StoredList;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -284,5 +285,29 @@ public class GeocacheTest extends CGeoTestCase {
         ocCache.setType(CacheType.TRADITIONAL);
         assertFalse("A traditional cache cannot have a webcam log", ocCache.getPossibleLogTypes().contains(LogType.WEBCAM_PHOTO_TAKEN));
         assertFalse("OC caches have no maintenance log type", ocCache.getPossibleLogTypes().contains(LogType.NEEDS_MAINTENANCE));
+    }
+
+    public static void testLogTypeEventPast() throws Exception {
+        Calendar today = Calendar.getInstance();
+        today.add(Calendar.DAY_OF_MONTH, -1);
+        assertEquals(LogType.ATTENDED, createEventCache(today).getDefaultLogType());
+    }
+
+    public static void testLogTypeEventToday() throws Exception {
+        Calendar today = Calendar.getInstance();
+        assertEquals(LogType.ATTENDED, createEventCache(today).getDefaultLogType());
+    }
+
+    public static void testLogTypeEventFuture() throws Exception {
+        Calendar today = Calendar.getInstance();
+        today.add(Calendar.DAY_OF_MONTH, 1);
+        assertEquals(LogType.WILL_ATTEND, createEventCache(today).getDefaultLogType());
+    }
+
+    private static Geocache createEventCache(Calendar calendar) {
+        Geocache cache = new Geocache();
+        cache.setType(CacheType.EVENT);
+        cache.setHidden(calendar.getTime());
+        return cache;
     }
 }
