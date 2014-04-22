@@ -50,16 +50,13 @@ public class DirectionProvider {
             //Log.i(Settings.tag, "Compass' accuracy is low (" + accuracy + ")");
         }
 
-        // This will be removed when using a new location service. Until then, it is okay to be used.
-        @SuppressWarnings("deprecation")
         @Override
         public void start(final Context context, final Handler handler) {
             if (!hasSensor(context)) {
                 return;
             }
             if (++count == 1) {
-                sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-                Sensor orientationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+                Sensor orientationSensor = getOrientationSensor(context);
                 sensorManager.registerListener(this, orientationSensor, SensorManager.SENSOR_DELAY_NORMAL, handler);
             }
         }
@@ -104,8 +101,7 @@ public class DirectionProvider {
 
     public static boolean hasSensor(Context context) {
         if (hasSensorChecked == false) {
-            SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-            hasSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION) != null;
+            hasSensor = getOrientationSensor(context) != null;
         }
         return hasSensor;
     }
@@ -136,6 +132,13 @@ public class DirectionProvider {
             default:
                 return 0;
         }
+    }
+
+    // This will be removed when using a new location service. Until then, it is okay to be used.
+    @SuppressWarnings("deprecation")
+    private static Sensor getOrientationSensor(final Context context) {
+        SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        return sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
     }
 
 }
