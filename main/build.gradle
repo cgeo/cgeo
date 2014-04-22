@@ -138,11 +138,14 @@ dependencies {
     }
     compile "org.androidannotations:androidannotations-api:$AAVersion"
 
+    compile project(":mapswithme-api")
+
     compile files('libs/httpclientandroidlib-1.1.2.jar')
     compile files('libs/locus-api-4.0.jar')
     //https://mapsforge.googlecode.com/files/mapsforge-map-0.2.4.jar
     compile files('libs/mapsforge-map-0.2.4.jar')
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
+    compile files('libs/')
 
     compile 'com.android.support:support-v4:19.0.1'
 
