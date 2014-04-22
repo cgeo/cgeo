@@ -54,6 +54,7 @@
         <jarDirectory url="file://$MODULE_DIR$/libs" recursive="false" />
       </library>
     </orderEntry>
+    <orderEntry type="module" module-name="mapswithme-api" exported="" />
   </component>
 </module>
 
