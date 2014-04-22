@@ -1,5 +1,7 @@
 package cgeo.geocaching.utils;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.enumerations.CacheType;
 
@@ -13,7 +15,7 @@ public class DateUtilsTest extends TestCase {
         final Calendar start = Calendar.getInstance();
         for (int hour = 0; hour < 24; hour++) {
             start.set(Calendar.HOUR_OF_DAY, hour);
-            assertEquals(0, DateUtils.daysSince(start.getTimeInMillis()));
+            assertThat(DateUtils.daysSince(start.getTimeInMillis())).isEqualTo(0);
         }
     }
 
@@ -35,7 +37,7 @@ public class DateUtilsTest extends TestCase {
         cache.setType(CacheType.EVENT);
 
         cache.setHidden(start.getTime());
-        assertEquals(expectedPast, DateUtils.isPastEvent(cache));
+        assertThat(DateUtils.isPastEvent(cache)).isEqualTo(expectedPast);
     }
 
 }
