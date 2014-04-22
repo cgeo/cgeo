@@ -54,7 +54,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     @SuppressWarnings("static-method")
     @SmallTest
     public void testPreconditions() {
-        assertEquals(StatusCode.NO_ERROR, GCLogin.getInstance().login());
+        assertEquals("Login to Geocaching.com failed", StatusCode.NO_ERROR, GCLogin.getInstance().login());
     }
 
     /**
