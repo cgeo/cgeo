@@ -66,6 +66,7 @@
   <string name="log_unarchived">Uarkivert</string>
   <string name="log_needs_archived">Bør arkiveres</string>
   <string name="log_discovered">Oppdaget</string>
+  <string name="log_reviewer">Beskjed fra reviewer</string>
   <string name="log_submit_for_review">Send til gjennomgang</string>
   <string name="log_retractlisting">Fjern oppføringen</string>
   <string name="log_marked_missing">Merket som forsvunnet</string>
@@ -359,6 +360,12 @@
   <string name="init_oc_de_description">Gi c:geo tilgang til å bruke opencaching.de for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
   <string name="settings_activate_oc_pl">Aktiver</string>
   <string name="init_oc_pl_description">Gi c:geo tilgang til å bruke opencaching.pl for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
+  <string name="settings_activate_oc_nl">Aktiver</string>
+  <string name="init_oc_nl_description">Gi c:geo tilgang til å bruke opencaching.nl for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
+  <string name="settings_activate_oc_us">Aktiver</string>
+  <string name="init_oc_us_description">Gi c:geo tilgang til å bruke opencaching.us for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
+  <string name="settings_activate_oc_ro">Aktiver</string>
+  <string name="init_oc_ro_description">Gi c:geo tilgang til å bruke opencaching.ro for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
   <string name="init_gcvote">GCVote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktiver</string>
@@ -373,6 +380,7 @@
   <string name="init_login_popup_not_authorized">Ikke godkjent</string>
   <string name="init_login_popup_invalid_timestamp">Lokal tid er ugyldig. Still klokken på enheten</string>
   <string name="init_login_popup_invalid_token">Godkjenning ugyldig, prøv å godkjenn på nytt</string>
+  <string name="settings_service_active">Aktiv</string>
   <string name="init_signature">Signatur</string>
   <string name="init_template_help">Plassholdere, slik som [NAME], vil bli erstattet senere når denne malen blir brukt.</string>
   <string name="init_signature_template_button">Sett inn mal</string>
@@ -1100,6 +1108,7 @@
   <string name="status_new_rc" tools:ignore="UnusedResources">Ny \"release candidate\" er tilgjengelig.\nKlikk for å installere.</string>
   <string name="status_geocaching_change" tools:ignore="UnusedResources">Nylige endringer på geocaching.com har medført at c:geo ikke virker.\nVi jobber med å løste problemet. Forsøk igjen senere.</string>
   <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Nylige endringer på geocaching.com har gjort at live-kartet ikke fungerer.\nVi jobber med saken. Prøv igjen senere.</string>
+  <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">Geocaching.com er nede på grunn av vedlikehold. \nDet kan oppstå ymse problemer.</string>
   <string name="status_closeout_warning" tools:ignore="UnusedResources">Det ser ut som du bruker en versjon av Android som er eldre enn 2.1. Fremtidige utgivelser av c:geo vil trolig ikke virke på din enhet.</string>
   <string name="tts_service">Talende kompass</string>
   <string name="tts_start">Start tale</string>
