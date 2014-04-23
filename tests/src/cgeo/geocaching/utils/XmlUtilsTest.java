@@ -15,6 +15,7 @@ import junit.framework.TestCase;
 public class XmlUtilsTest extends TestCase {
 
     private XmlSerializer xml;
+
     private StringWriter stringWriter;
 
     @Override
