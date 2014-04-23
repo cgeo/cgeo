@@ -9,7 +9,7 @@ import android.test.AndroidTestCase;
 import java.util.LinkedList;
 import java.util.List;
 
-public class LazyInitialilzedListTest extends AndroidTestCase {
+public class LazyInitializedListTest extends AndroidTestCase {
 
     private static final int MAKE_NULL = -1;
     private static final int MAKE_EXCEPTION = -2;
