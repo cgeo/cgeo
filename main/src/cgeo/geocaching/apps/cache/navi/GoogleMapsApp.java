@@ -5,6 +5,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -29,8 +31,10 @@ class GoogleMapsApp extends AbstractPointNavigationApp {
 
     private static void navigate(Activity activity, Geopoint point, String label) {
         try {
-            final String geoLocation = "geo:" + point.getLatitude() + "," + point.getLongitude();
-            final String query = point.getLatitude() + "," + point.getLongitude() + "(" + label + ")";
+            String latitude = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, point);
+            String longitude = GeopointFormatter.format(Format.LON_DECDEGREE_RAW, point);
+            final String geoLocation = "geo:" + latitude + "," + longitude;
+            final String query = latitude + "," + longitude + "(" + label + ")";
             final String uriString = geoLocation + "?q=" + Uri.encode(query);
             activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uriString)));
             return;
