@@ -10,8 +10,8 @@ import junit.framework.TestCase;
 public class MiscUtilsTest extends TestCase {
 
     public static void testBufferEmpty() {
-        for (@SuppressWarnings("unused")
-        final List<String> s : MiscUtils.buffer(new LinkedList<String>(), 10)) {
+        for (final List<String> s : MiscUtils.buffer(new LinkedList<String>(), 10)) {
+            assertThat(s).isNotNull(); // only to silence findbugs and the compiler
             fail("empty collection should not iterate");
         }
     }
@@ -24,10 +24,10 @@ public class MiscUtilsTest extends TestCase {
         int count = 0;
         for (final List<Integer> subList: MiscUtils.buffer(list, 10)) {
             assertThat(subList).hasSize(10);
-            assertEquals("sublist has the right content", count * 10, (int) subList.get(0));
+            assertThat(subList.get(0)).as("sublist content").isEqualTo(count * 10);
             count++;
         }
-        assertEquals("there are the right number of sublists", 5, count);
+        assertThat(count).isEqualTo(5);
     }
 
     public static void testNonMultiple() {
