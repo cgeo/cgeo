@@ -52,7 +52,9 @@ public class MapsWithMeCacheListApp extends AbstractApp implements CacheListApp 
         final MWMResponse mwmResponse = MWMResponse.extractFromIntent(context, intent);
         if (mwmResponse != null) {
             final MWMPoint point = mwmResponse.getPoint();
-            return point.getId();
+            if (point != null) {
+                return point.getId();
+            }
         }
         return null;
     }
