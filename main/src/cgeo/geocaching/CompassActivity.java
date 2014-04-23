@@ -122,11 +122,6 @@ public class CompassActivity extends AbstractActivity {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
     public void onDestroy() {
         compassView.destroyDrawingCache();
         SpeechService.stopService(this);

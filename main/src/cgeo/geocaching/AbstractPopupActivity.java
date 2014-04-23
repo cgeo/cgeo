@@ -16,6 +16,7 @@ import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
+
 import rx.Observable;
 import rx.android.observables.AndroidObservable;
 import rx.functions.Action1;
@@ -158,11 +159,6 @@ public abstract class AbstractPopupActivity extends AbstractActivity implements 
         }
 
         return true;
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
     }
 
     @Override

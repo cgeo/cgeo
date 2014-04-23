@@ -10,11 +10,11 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
@@ -22,7 +22,6 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.InstanceState;
 import org.androidannotations.annotations.ViewById;
-
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.ProgressDialog;
@@ -203,11 +202,6 @@ public class EditWaypointActivity extends AbstractActivity {
     @Override
     public void onResume() {
         super.onResume(geoDirHandler.start(GeoDirHandler.UPDATE_GEODATA));
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
     }
 
     private void initializeWaypointTypeSelector() {

@@ -352,11 +352,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo info) {
         super.onCreateContextMenu(menu, view, info);
         final int viewId = view.getId();

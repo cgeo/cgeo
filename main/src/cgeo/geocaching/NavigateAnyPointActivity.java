@@ -9,13 +9,13 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -236,11 +236,6 @@ public class NavigateAnyPointActivity extends AbstractActivity {
     public void onResume() {
         super.onResume(geoDirHandler.start(GeoDirHandler.UPDATE_GEODATA));
         init();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
     }
 
     private void init() {
