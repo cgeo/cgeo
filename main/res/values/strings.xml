@@ -24,6 +24,7 @@
     <string name="letterbox">Letterbox Hybrid</string>
     <string name="event">Event Cache</string>
     <string name="mega">Mega-Event Cache</string>
+    <string name="giga">Giga-Event Cache</string>
     <string name="earth">Earthcache</string>
     <string name="cito">Cache In Trash Out Event</string>
     <string name="webcam">Webcam Cache</string>

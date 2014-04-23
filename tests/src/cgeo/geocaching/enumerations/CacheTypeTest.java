@@ -48,4 +48,14 @@ public class CacheTypeTest extends AndroidTestCase {
         assertThat(CacheType.TRADITIONAL.contains(traditional)).isTrue();
         assertThat(CacheType.MYSTERY.contains(traditional)).isFalse();
     }
+
+    public static void testEventCacheTypes() throws Exception {
+        assertThat(CacheType.EVENT.isEvent()).isTrue();
+        assertThat(CacheType.MEGA_EVENT.isEvent()).isTrue();
+        assertThat(CacheType.GIGA_EVENT.isEvent()).isTrue();
+        assertThat(CacheType.BLOCK_PARTY.isEvent()).isTrue();
+        assertThat(CacheType.CITO.isEvent()).isTrue();
+        assertThat(CacheType.LOSTANDFOUND.isEvent()).isTrue();
+        assertThat(CacheType.TRADITIONAL.isEvent()).isFalse();
+    }
 }
