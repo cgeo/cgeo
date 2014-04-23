@@ -264,13 +264,6 @@
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="about_twitter">Skal <b>c:geo</b> sende status til Twitter hvergang du logger en cache?</string>
-  <string-array name="log_image_scales">
-    <item>No scaling</item>
-    <item>512 px</item>
-    <item>640 px</item>
-    <item>800 px</item>
-    <item>1024 px</item>
-  </string-array>
   <plurals name="cache_counts">
     <item quantity="one">En cache</item>
     <item quantity="other">%1$d cacher</item>
