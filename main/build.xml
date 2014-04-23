@@ -80,7 +80,8 @@
 			output="xml" 
 			outputFile="reports/findbugs.xml" 
 			excludefilter="project/findbugs/exclusions.xml"
-			effort="max">
+			effort="max"
+			reportLevel="low">
 			<auxClasspath path="${project.target.android.jar}" />
 			<class location="${out.dir}" />
 		</findbugs>
