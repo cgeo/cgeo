@@ -199,7 +199,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             guid = extras.getString(Intents.EXTRA_GUID);
         }
 
-        // integration with MapsWithMe
+        // When clicking a cache in MapsWithMe, we get back a PendingIntent
         if (StringUtils.isEmpty(geocode)) {
             geocode = MapsWithMeCacheListApp.getCacheFromMapsWithMe(this, getIntent());
         }
