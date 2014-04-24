@@ -453,7 +453,7 @@
   <string name="init_backup_last">Backup verfügbar vom</string>
   <string name="init_backup_last_no">Keine Datei mit Datenbanksicherung gefunden.</string>
   <string name="settings_info_offline_maps_title">Info zu Offline-Karten</string>
-  <string name="settings_info_offline_maps">c:ego ermöglicht es Offline-Karten zu verwenden. Die Karten können bei Mapsforge heruntergeladen werden oder es können eigene Karten aus OSM-Daten erstellt werden. Es mus zuerst ein Verzeichnis mit Offline-Karten gewählt werden, bevor eine Offline-Karte ausgewählt werden kann.</string>
+  <string name="settings_info_offline_maps">c:ego ermöglicht es Offline-Karten zu verwenden. Die Karten können bei Mapsforge heruntergeladen werden oder es können eigene Karten aus OSM-Daten erstellt werden. Es muss zuerst ein Verzeichnis mit Offline-Karten angegeben werden, bevor eine Offline-Karte ausgewählt werden kann.</string>
   <string name="settings_info_themes_title">Info zu Karten-Themes</string>
   <string name="settings_info_themes">c:geo kann eigene Karten-Themes für Offline-Karten verwenden. Du kannst sie benutzen, um die Farbauswahl der Karte (z. B. für eine Nachtansicht) zu verändern oder um bestimmte Objekte wie Radwege oder Höhenlinien hervorzuheben.</string>
   <string name="init_mapsource_select">Kartenquelle wählen</string>

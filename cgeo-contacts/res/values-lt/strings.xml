@@ -3,4 +3,5 @@
 <resources>
   <string name="app_name">c:geo - kontaktai (įskiepis)</string>
   <string name="contact_not_found">Kontaktas su %s vardu/pravarde nerastas. Pirmiausia įtraukite jį į savo kontaktų programėlę.</string>
+  <string name="multiple_matches">Daugiau nei vienas atitikmuo</string>
 </resources>

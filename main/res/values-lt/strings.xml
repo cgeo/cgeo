@@ -17,6 +17,7 @@
   <string name="letterbox">Letterbox Hybrid slėptuvė</string>
   <string name="event">Renginys</string>
   <string name="mega">Mega renginys</string>
+  <string name="giga">Giga-renginys</string>
   <string name="earth">Earthcache
 </string>
   <string name="cito">Aplinkos tvarkymo renginys</string>
@@ -282,6 +283,7 @@
   <string name="caches_move_all">Perkelti visas</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Eksportuoti į Locus</string>
+  <string name="caches_map_mapswithme">MapsWithMe</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Prašome įvesti tekstą kurį matote paveikslėlyje. Tai leis atsisiųsti slėptuvės koordinates ir tai galima išjungti Nustatymuose.</string>
   <string name="caches_recaptcha_hint">Tekstas iš paveikslėlio</string>
@@ -632,6 +634,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_cachebeacon">Cache Beacon</string>
   <string name="cache_menu_pebble">Pebble</string>
+  <string name="cache_menu_mapswithme">MapsWithMe</string>
   <string name="cache_status">Būsena</string>
   <string name="cache_status_offline_log">Įrašas išsaugotas</string>
   <string name="cache_status_found">Rasta</string>
