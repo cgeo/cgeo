@@ -142,7 +142,12 @@ public abstract class AbstractConnector implements IConnector {
 
     @Override
     public String getLongCacheUrl(final @NonNull Geocache cache) {
-        return getCacheUrl(cache);
+        return getCacheBrowserUrl(cache);
+    }
+
+    @Override
+    public String getCgeoCacheUrl(@NonNull Geocache cache) {
+        return getLongCacheUrl(cache);
     }
 
     @Override

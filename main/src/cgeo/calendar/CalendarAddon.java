@@ -30,7 +30,7 @@ public class CalendarAddon {
                     ICalendar.PARAM_NAME, cache.getName(),
                     ICalendar.PARAM_NOTE, StringUtils.defaultString(cache.getPersonalNote()),
                     ICalendar.PARAM_HIDDEN_DATE, hiddenDate != null ? String.valueOf(hiddenDate.getTime()) : StringUtils.EMPTY,
-                    ICalendar.PARAM_URL, StringUtils.defaultString(cache.getUrl()),
+                    ICalendar.PARAM_URL, StringUtils.defaultString(cache.getBrowserUrl()),
                     ICalendar.PARAM_COORDS, cache.getCoords() == null ? "" : cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW),
                     ICalendar.PARAM_LOCATION, StringUtils.defaultString(cache.getLocation()),
                     ICalendar.PARAM_SHORT_DESC, StringUtils.defaultString(cache.getShortDescription()),

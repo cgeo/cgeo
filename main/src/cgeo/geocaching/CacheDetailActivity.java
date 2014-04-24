@@ -97,11 +97,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewParent;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -594,6 +592,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         getSupportActionBar().setIcon(getResources().getDrawable(cache.getType().markerId));
 
+        // if we have a newer Android device setup Android Beam for easy cache sharing
+        initializeAndroidBeam(
+                new ActivitySharingInterface() {
+                    @Override
+                    public String getUri() {
+                        return cache.getCgeoUrl();
+                    }
+                }
+        );
+
         // reset imagesList so Images view page will be redrawn
         imagesList = null;
         reinitializeViewPager();
@@ -602,6 +610,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         invalidateOptionsMenuCompatible();
         progress.dismiss();
     }
+
 
     /**
      * Tries to navigate to the {@link Geocache} of this activity.
@@ -1586,7 +1595,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 if (unknownTagsHandler.isProblematicDetected()) {
                     final int startPos = description.length();
                     final IConnector connector = ConnectorFactory.getConnector(cache);
-                    final Spanned tableNote = Html.fromHtml(res.getString(R.string.cache_description_table_note, "<a href=\"" + cache.getUrl() + "\">" + connector.getName() + "</a>"));
+                    final Spanned tableNote = Html.fromHtml(res.getString(R.string.cache_description_table_note, "<a href=\"" + cache.getBrowserUrl() + "\">" + connector.getName() + "</a>"));
                     ((Editable) description).append("\n\n").append(tableNote);
                     ((Editable) description).setSpan(new StyleSpan(Typeface.ITALIC), startPos, description.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
