@@ -5,7 +5,10 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.ui.AbstractUIFactory;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -75,6 +78,11 @@ public class CacheMenuHandler extends AbstractUIFactory {
         menu.findItem(R.id.menu_show_in_browser).setVisible(cache.canOpenInBrowser());
 
         menu.findItem(R.id.menu_default_navigation).setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
+
+        MenuItem shareItem = menu.findItem(R.id.menu_share);
+        ShareActionProvider shareActionProvider = (ShareActionProvider)
+                MenuItemCompat.getActionProvider(shareItem);
+        shareActionProvider.setShareIntent(cache.getIntent());
     }
 
     public static void addMenuItems(MenuInflater inflater, Menu menu, Geocache cache) {
