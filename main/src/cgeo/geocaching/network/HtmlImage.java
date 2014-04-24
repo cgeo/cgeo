@@ -25,10 +25,12 @@ import rx.Scheduler;
 import rx.Scheduler.Inner;
 import rx.Subscriber;
 import rx.functions.Action1;
+import rx.functions.Func0;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 import rx.subscriptions.CompositeSubscription;
+import rx.util.async.Async;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -130,6 +132,18 @@ public class HtmlImage implements Html.ImageGetter {
 
         if (StringUtils.isBlank(url) || ImageUtils.containsPattern(url, BLOCKED)) {
             return Observable.from(getTransparent1x1Image(resources));
+        }
+
+        // Explicit local file URLs are loaded from the filesystem regardless of their age. The IO part is short
+        // enough to make the whole operation on the computation scheduler.
+        if (url.startsWith("file://")) {
+            return Async.fromCallable(new Func0<BitmapDrawable>() {
+                @Override
+                public BitmapDrawable call() {
+                    final Bitmap bitmap = loadCachedImage(new File(url.substring(7)), true).getLeft();
+                    return bitmap != null ? ImageUtils.scaleBitmapToFitDisplay(bitmap) : null;
+                }
+            }, RxUtils.computationScheduler);
         }
 
         final boolean shared = url.contains("/images/icons/icon_");
