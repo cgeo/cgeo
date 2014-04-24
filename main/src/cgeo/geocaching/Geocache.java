@@ -53,11 +53,13 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
 import android.text.Html.ImageGetter;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -779,10 +781,9 @@ public class Geocache implements ICache, IWaypoint {
 
     @Override
     public List<Image> getSpoilers() {
-        if (spoilers == null) {
-            return Collections.emptyList();
-        }
-        return Collections.unmodifiableList(spoilers);
+        final List<Image> allSpoilers = new LinkedList<Image>(CollectionUtils.emptyIfNull(spoilers));
+        addLocalSpoilersTo(allSpoilers);
+        return allSpoilers;
     }
 
     @Override
@@ -1747,6 +1748,23 @@ public class Geocache implements ICache, IWaypoint {
         }
         addDescriptionImagesUrls(result);
         return result;
+    }
+
+    // add spoilers stored locally in /sdcard/GeocacheSpoilers
+    private void addLocalSpoilersTo(final List<Image> spoilers) {
+        if (StringUtils.length(geocode) >= 2) {
+            final String suffix = StringUtils.right(geocode, 2);
+            final File baseDir = new File(Environment.getExternalStorageDirectory().toString(), "GeocacheSpoilers");
+            final File lastCharDir = new File(baseDir, suffix.substring(1));
+            final File secondToLastCharDir = new File(lastCharDir, suffix.substring(0, 1));
+            final File finalDir = new File(secondToLastCharDir, getGeocode());
+            final File[] files = finalDir.listFiles();
+            if (files != null) {
+                for (final File image : files) {
+                    spoilers.add(new Image("file://" + image.getAbsolutePath(), image.getName()));
+                }
+            }
+        }
     }
 
     public void setDetailedUpdatedNow() {
