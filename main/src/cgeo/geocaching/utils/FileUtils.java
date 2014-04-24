@@ -153,4 +153,32 @@ public final class FileUtils {
         }
         return true;
     }
+
+    /**
+     * Check if the URL represents a file on the local file system.
+     *
+     * @return <tt>true</tt> if the URL scheme is <tt>file</tt>, <tt>false</tt> otherwise
+     */
+    public static boolean isFileUrl(final String url) {
+        return StringUtils.startsWith(url, "file://");
+    }
+
+    /**
+     * Build an URL from a file name.
+     *
+     * @param file a local file name
+     * @return an URL with the <tt>file</tt> scheme
+     */
+    public static String fileToUrl(final File file) {
+        return "file://" + file.getAbsolutePath();
+    }
+
+    /**
+     * Local file name when {@link #isLocalFile()} is <tt>true</tt>.
+     *
+     * @return the local file
+     */
+    public static File urlToFile(final String url) {
+        return new File(StringUtils.substring(url, 7));
+    }
 }

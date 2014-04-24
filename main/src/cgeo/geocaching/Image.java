@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.utils.FileUtils;
+
 import org.apache.commons.lang3.StringUtils;
 
 import android.content.Context;
@@ -90,5 +92,23 @@ public class Image implements Parcelable {
         }
 
         return "???";
+    }
+
+    /**
+     * Check if the URL represents a file on the local file system.
+     *
+     * @return <tt>true</tt> if the URL scheme is <tt>file</tt>, <tt>false</tt> otherwise
+     */
+    public boolean isLocalFile() {
+        return FileUtils.isFileUrl(url);
+    }
+
+    /**
+     * Local file name when {@link #isLocalFile()} is <tt>true</tt>.
+     *
+     * @return the local file
+     */
+    public File localFile() {
+        return FileUtils.urlToFile(url);
     }
 }
