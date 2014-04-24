@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/actionbar_mylocation_on" android:state_checked="true"/>
-    <item android:drawable="@drawable/actionbar_mylocation_off" android:state_checked="false" />
+    <item android:drawable="@drawable/ic_menu_mylocation" android:state_checked="true"/>
+    <item android:drawable="@drawable/ic_menu_mylocation_off" android:state_checked="false" />
 </selector>
