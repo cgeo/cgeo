@@ -782,7 +782,6 @@ public class Geocache implements ICache, IWaypoint {
     @Override
     public List<Image> getSpoilers() {
         final List<Image> allSpoilers = new LinkedList<Image>(CollectionUtils.emptyIfNull(spoilers));
-        addLocalSpoilersTo(allSpoilers);
         return allSpoilers;
     }
 
@@ -1739,6 +1738,7 @@ public class Geocache implements ICache, IWaypoint {
     public Collection<Image> getImages() {
         final LinkedList<Image> result = new LinkedList<Image>();
         result.addAll(getSpoilers());
+        addLocalSpoilersTo(result);
         for (final LogEntry log : getLogs()) {
             result.addAll(log.getLogImages());
         }
