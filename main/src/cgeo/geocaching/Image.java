@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.File;
+
 public class Image implements Parcelable {
     private final String url;
     private final String title;
@@ -21,6 +23,10 @@ public class Image implements Parcelable {
 
     public Image(final String url, final String title) {
         this(url, title, null);
+    }
+
+    public Image(final File file) {
+        this("file://" + file.getAbsolutePath(), file.getName(), null);
     }
 
     public Image(final Parcel in) {
