@@ -214,7 +214,7 @@ public class ImagesList {
     private void viewImageInStandardApp(final Image img, final BitmapDrawable image) {
         try {
             final Intent intent = new Intent().setAction(android.content.Intent.ACTION_VIEW);
-            final File file = LocalStorage.getStorageFile(geocode, img.getUrl(), true, true);
+            final File file = img.isLocalFile() ? img.localFile() : LocalStorage.getStorageFile(geocode, img.getUrl(), true, true);
             if (file.exists()) {
                 intent.setDataAndType(Uri.fromFile(file), mimeTypeForUrl(img.getUrl()));
             } else {
