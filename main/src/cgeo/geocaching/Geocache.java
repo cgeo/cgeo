@@ -37,6 +37,7 @@ import cgeo.geocaching.utils.UncertainProperty;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
@@ -781,9 +782,7 @@ public class Geocache implements ICache, IWaypoint {
 
     @Override
     public List<Image> getSpoilers() {
-        final List<Image> allSpoilers = new LinkedList<Image>(CollectionUtils.emptyIfNull(spoilers));
-        addLocalSpoilersTo(allSpoilers);
-        return allSpoilers;
+        return ListUtils.unmodifiableList(ListUtils.emptyIfNull(spoilers));
     }
 
     @Override
@@ -1739,6 +1738,7 @@ public class Geocache implements ICache, IWaypoint {
     public Collection<Image> getImages() {
         final LinkedList<Image> result = new LinkedList<Image>();
         result.addAll(getSpoilers());
+        addLocalSpoilersTo(result);
         for (final LogEntry log : getLogs()) {
             result.addAll(log.getLogImages());
         }
