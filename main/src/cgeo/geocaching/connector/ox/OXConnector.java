@@ -35,7 +35,7 @@ public class OXConnector extends AbstractConnector implements ISearchByCenter, I
     }
 
     @Override
-    public String getCacheUrl(@NonNull Geocache cache) {
+    public String getCacheBrowserUrl(@NonNull Geocache cache) {
         return getCacheUrlPrefix() + cache.getGeocode();
     }
 
@@ -52,7 +52,7 @@ public class OXConnector extends AbstractConnector implements ISearchByCenter, I
     @Override
     public String getLicenseText(@NonNull Geocache cache) {
         // NOT TO BE TRANSLATED
-        return "<a href=\"" + getCacheUrl(cache) + "\">" + getName() + "</a> data licensed under the Creative Commons CC-BY-SA 3.0 License";
+        return "<a href=\"" + getCacheBrowserUrl(cache) + "\">" + getName() + "</a> data licensed under the Creative Commons CC-BY-SA 3.0 License";
     }
 
     @Override

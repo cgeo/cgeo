@@ -39,7 +39,7 @@ public class OCConnector extends AbstractConnector {
     }
 
     @Override
-    public String getCacheUrl(@NonNull Geocache cache) {
+    public String getCacheBrowserUrl(@NonNull Geocache cache) {
         return getCacheUrlPrefix() + cache.getGeocode();
     }
 

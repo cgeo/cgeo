@@ -202,11 +202,11 @@ public final class LogTemplateProvider {
             public String getValue(LogContext context) {
                 Trackable trackable = context.getTrackable();
                 if (trackable != null) {
-                    return trackable.getUrl();
+                    return trackable.getBrowserUrl();
                 }
                 Geocache cache = context.getCache();
                 if (cache != null) {
-                    return cache.getUrl();
+                    return cache.getBrowserUrl();
                 }
                 return StringUtils.EMPTY;
             }

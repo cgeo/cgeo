@@ -14,7 +14,7 @@ public class GeopeitusConnector extends AbstractConnector {
     }
 
     @Override
-    public String getCacheUrl(final @NonNull Geocache cache) {
+    public String getCacheBrowserUrl(final @NonNull Geocache cache) {
         return getCacheUrlPrefix() + StringUtils.stripStart(cache.getGeocode().substring(2), "0");
     }
 
