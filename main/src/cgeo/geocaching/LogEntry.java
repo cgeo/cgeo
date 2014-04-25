@@ -14,6 +14,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * Entry in a log book. This object should not be referenced directly from a Geocache object to reduce the memory usage
+ * of the Geocache objects.
+ * 
+ */
 public final class LogEntry {
 
     private static final Pattern PATTERN_REMOVE_COLORS = Pattern.compile("</?font.*?>", Pattern.CASE_INSENSITIVE);

@@ -42,6 +42,7 @@ import org.apache.commons.collections4.Predicate;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Scheduler;
@@ -78,6 +79,10 @@ import java.util.regex.Pattern;
 
 /**
  * Internal c:geo representation of a "cache"
+ */
+/**
+ * @author kep9fe
+ *
  */
 public class Geocache implements ICache, IWaypoint {
 
@@ -144,12 +149,7 @@ public class Geocache implements ICache, IWaypoint {
         }
     };
     private List<Image> spoilers = null;
-    private final LazyInitializedList<LogEntry> logs = new LazyInitializedList<LogEntry>() {
-        @Override
-        public List<LogEntry> call() {
-            return DataStore.loadLogs(geocode);
-        }
-    };
+
     private List<Trackable> inventory = null;
     private Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
     private boolean userModifiedCoords = false;
@@ -187,7 +187,6 @@ public class Geocache implements ICache, IWaypoint {
         setReliableLatLon(true);
         setAttributes(Collections.<String> emptyList());
         setWaypoints(Collections.<Waypoint> emptyList(), false);
-        setLogs(Collections.<LogEntry> emptyList());
     }
 
     public void setChangeNotificationHandler(Handler newNotificationHandler) {
@@ -355,12 +354,6 @@ public class Geocache implements ICache, IWaypoint {
             inventory = other.inventory;
             inventoryItems = other.inventoryItems;
         }
-        if (logs.isEmpty()) { // keep last known logs if none
-            logs.clear();
-            if (other.logs != null) {
-                logs.addAll(other.logs);
-            }
-        }
         if (logCounts.isEmpty()) {
             logCounts = other.logCounts;
         }
@@ -427,7 +420,6 @@ public class Geocache implements ICache, IWaypoint {
                 attributes == other.attributes &&
                 waypoints == other.waypoints &&
                 spoilers == other.spoilers &&
-                logs == other.logs &&
                 inventory == other.inventory &&
                 logCounts == other.logCounts &&
                 ObjectUtils.equals(logOffline, other.logOffline) &&
@@ -1008,37 +1000,29 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     /**
-     * @return never <code>null</code>
+     * The list of logs is immutable, because it is directly fetched from the database on demand, and not stored at this
+     * object. If you want to modify logs, you have to load all logs of the cache, create a new list from the existing
+     * list and store that new list in the database.
+     *
+     * @return immutable list of logs
      */
+    @NonNull
     public List<LogEntry> getLogs() {
-        // It is important to return the underlying list here and not the lazily initialized one,
-        // because database manipulation may erase the existing logs before methods are called
-        // on the previous logs, when updating the saved logs for example.
-        return logs.getUnderlyingList();
+        return DataStore.loadLogs(geocode);
     }
 
     /**
-     * @return only the logs of friends, never <code>null</code>
+     * @return only the logs of friends
      */
+    @NonNull
     public List<LogEntry> getFriendsLogs() {
         final ArrayList<LogEntry> friendLogs = new ArrayList<LogEntry>();
-        for (final LogEntry log : logs) {
+        for (final LogEntry log : getLogs()) {
             if (log.friend) {
                 friendLogs.add(log);
             }
         }
         return Collections.unmodifiableList(friendLogs);
-    }
-
-    /**
-     * @param logs
-     *            the log entries
-     */
-    public void setLogs(List<LogEntry> logs) {
-        this.logs.clear();
-        if (logs != null) {
-            this.logs.addAll(logs);
-        }
     }
 
     public boolean isLogOffline() {

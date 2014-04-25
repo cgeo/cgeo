@@ -372,7 +372,6 @@ final class OkapiClient {
             }
 
             cache.setAttributes(parseAttributes(response.getJSONArray(CACHE_ATTRNAMES), response.optJSONArray(CACHE_ATTR_ACODES)));
-            cache.setLogs(parseLogs(response.getJSONArray(CACHE_LATEST_LOGS)));
             //TODO: Store license per cache
             //cache.setLicense(response.getString("attribution_note"));
             cache.setWaypoints(parseWaypoints(response.getJSONArray(CACHE_WPTS)), false);
@@ -388,6 +387,7 @@ final class OkapiClient {
             cache.setDetailedUpdatedNow();
             // save full detailed caches
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+            DataStore.saveLogsWithoutTransaction(cache.getGeocode(), parseLogs(response.getJSONArray(CACHE_LATEST_LOGS)));
         } catch (final JSONException e) {
             Log.e("OkapiClient.parseCache", e);
         }

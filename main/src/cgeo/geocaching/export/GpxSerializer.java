@@ -239,12 +239,13 @@ public final class GpxSerializer {
     }
 
     private void writeLogs(final Geocache cache) throws IOException {
-        if (cache.getLogs().isEmpty()) {
+        List<LogEntry> logs = cache.getLogs();
+        if (logs.isEmpty()) {
             return;
         }
         gpx.startTag(PREFIX_GROUNDSPEAK, "logs");
 
-        for (final LogEntry log : cache.getLogs()) {
+        for (final LogEntry log : logs) {
             gpx.startTag(PREFIX_GROUNDSPEAK, "log");
             gpx.attribute("", "id", Integer.toString(log.id));
 

@@ -25,6 +25,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+
 import rx.android.observables.AndroidObservable;
 import rx.functions.Action1;
 import rx.functions.Func0;
@@ -1188,7 +1189,6 @@ public class DataStore {
             saveAttributesWithoutTransaction(cache);
             saveWaypointsWithoutTransaction(cache);
             saveSpoilersWithoutTransaction(cache);
-            saveLogsWithoutTransaction(cache.getGeocode(), cache.getLogs());
             saveLogCountsWithoutTransaction(cache);
             saveInventoryWithoutTransaction(cache.getGeocode(), cache.getInventory());
 
@@ -1421,7 +1421,7 @@ public class DataStore {
         }
     }
 
-    private static void saveLogsWithoutTransaction(final String geocode, final List<LogEntry> logs) {
+    public static void saveLogsWithoutTransaction(final String geocode, final List<LogEntry> logs) {
         // TODO delete logimages referring these logs
         database.delete(dbTableLogs, "geocode = ?", new String[]{geocode});
 
@@ -1655,7 +1655,6 @@ public class DataStore {
                 }
 
                 if (loadFlags.contains(LoadFlag.LOAD_LOGS)) {
-                    cache.setLogs(loadLogs(cache.getGeocode()));
                     final Map<LogType, Integer> logCounts = loadLogCounts(cache.getGeocode());
                     if (MapUtils.isNotEmpty(logCounts)) {
                         cache.getLogCounts().clear();
@@ -1917,6 +1916,11 @@ public class DataStore {
         return false;
     }
 
+    /**
+     * @param geocode
+     * @return an immutable, non null list of logs
+     */
+    @NonNull
     public static List<LogEntry> loadLogs(String geocode) {
         List<LogEntry> logs = new ArrayList<LogEntry>();
 
@@ -1952,7 +1956,7 @@ public class DataStore {
 
         cursor.close();
 
-        return logs;
+        return Collections.unmodifiableList(logs);
     }
 
     public static Map<LogType, Integer> loadLogCounts(String geocode) {

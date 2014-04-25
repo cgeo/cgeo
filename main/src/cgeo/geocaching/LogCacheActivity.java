@@ -515,16 +515,20 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 final LogResult logResult = loggingManager.postLog(cache, typeSelected, date, log, logPwd, trackables);
 
                 if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
-                    final LogEntry logNow = new LogEntry(date.getTimeInMillis(), typeSelected, log);
-
-                    cache.getLogs().add(0, logNow);
-
+                    // update geocache in DB
                     if (typeSelected == LogType.FOUND_IT || typeSelected == LogType.ATTENDED) {
                         cache.setFound(true);
                         cache.setVisitedDate(new Date().getTime());
                     }
-
                     DataStore.saveChangedCache(cache);
+
+                    // update logs in DB
+                    ArrayList<LogEntry> newLogs = new ArrayList<LogEntry>(cache.getLogs());
+                    final LogEntry logNow = new LogEntry(date.getTimeInMillis(), typeSelected, log);
+                    newLogs.add(0, logNow);
+                    DataStore.saveLogsWithoutTransaction(cache.getGeocode(), newLogs);
+
+                    // update offline log in DB
                     cache.clearOfflineLog();
 
                     if (typeSelected == LogType.FOUND_IT) {
@@ -541,7 +545,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                         final String uploadedImageUrl = imageResult.getImageUri();
                         if (StringUtils.isNotEmpty(uploadedImageUrl)) {
                             logNow.addLogImage(new Image(uploadedImageUrl, imageCaption, imageDescription));
-                            DataStore.saveChangedCache(cache);
+                            DataStore.saveLogsWithoutTransaction(cache.getGeocode(), newLogs);
                         }
                         return imageResult.getPostResult();
                     }

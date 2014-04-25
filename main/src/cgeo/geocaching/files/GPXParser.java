@@ -42,6 +42,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -99,6 +100,7 @@ public abstract class GPXParser extends FileParser {
     private String parentCacheCode = null;
     private boolean wptVisited = false;
     private boolean wptUserDefined = false;
+    private List<LogEntry> logs = new ArrayList<LogEntry>();
 
     /**
      * Parser result. Maps geocode to cache.
@@ -334,6 +336,7 @@ public abstract class GPXParser extends FileParser {
                     // finally store the cache in the database
                     result.add(geocode);
                     DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+                    DataStore.saveLogsWithoutTransaction(cache.getGeocode(), logs);
 
                     // avoid the cachecache using lots of memory for caches which the user did not actually look at
                     DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
@@ -757,7 +760,7 @@ public abstract class GPXParser extends FileParser {
                 @Override
                 public void end() {
                     if (log.type != LogType.UNKNOWN) {
-                        cache.getLogs().add(log);
+                        logs.add(log);
                     }
                 }
             });
@@ -876,7 +879,7 @@ public abstract class GPXParser extends FileParser {
 
     /**
      * Add listeners for c:geo extensions
-     * 
+     *
      * @param cacheParent
      */
     private void registerCgeoExtensions(final Element cacheParent) {
@@ -985,6 +988,7 @@ public abstract class GPXParser extends FileParser {
         parentCacheCode = null;
         wptVisited = false;
         wptUserDefined = false;
+        logs = new ArrayList<LogEntry>();
 
         cache = new Geocache(this);
 

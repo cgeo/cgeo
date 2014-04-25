@@ -36,6 +36,7 @@ import cgeo.geocaching.utils.SynchronizedDateFormat;
 import cgeo.geocaching.utils.TextUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -723,9 +724,6 @@ public abstract class GCParser {
 
         cache.parseWaypointsFromNote();
 
-        // logs
-        cache.setLogs(getLogsFromDetails(page, false));
-
         // last check for necessary cache conditions
         if (StringUtils.isBlank(cache.getGeocode())) {
             searchResult.setError(StatusCode.UNKNOWN_ERROR);
@@ -734,6 +732,7 @@ public abstract class GCParser {
 
         cache.setDetailedUpdatedNow();
         searchResult.addAndPutInCache(Collections.singletonList(cache));
+        DataStore.saveLogsWithoutTransaction(cache.getGeocode(), getLogsFromDetails(page, false));
         return searchResult;
     }
 
@@ -1831,16 +1830,18 @@ public abstract class GCParser {
         //cache.setLogs(loadLogsFromDetails(page, cache, false));
         if (Settings.isFriendLogsWanted()) {
             CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
-            final List<LogEntry> allLogs = cache.getLogs();
             final List<LogEntry> friendLogs = getLogsFromDetails(page, true);
-            if (friendLogs != null) {
+            if (friendLogs != null && !friendLogs.isEmpty()) {
+                // create new list, as the existing log list is immutable
+                ArrayList<LogEntry> mergedLogs = new ArrayList<LogEntry>(cache.getLogs());
                 for (final LogEntry log : friendLogs) {
-                    if (allLogs.contains(log)) {
-                        allLogs.get(allLogs.indexOf(log)).friend = true;
+                    if (mergedLogs.contains(log)) {
+                        mergedLogs.get(mergedLogs.indexOf(log)).friend = true;
                     } else {
-                        cache.getLogs().add(log);
+                        mergedLogs.add(log);
                     }
                 }
+                DataStore.saveLogsWithoutTransaction(cache.getGeocode(), mergedLogs);
             }
         }
 
