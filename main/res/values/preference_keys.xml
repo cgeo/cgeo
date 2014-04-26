@@ -46,6 +46,7 @@
     <string name="pref_showaddress">showaddress</string>
     <string name="pref_useenglish">useenglish</string>
     <string name="pref_units">units</string>
+    <string name="pref_alwaysshowoverflowmenu">alwaysshowoverflowmenu</string>
     <string name="pref_autoloaddesc">autoloaddesc</string>
     <string name="pref_ratingwanted">ratingwanted</string>
     <string name="pref_friendlogswanted">friendlogswanted</string>
@@ -168,4 +169,5 @@
     <string name="pref_twitter_cache_message">twitter_cache_message</string>
     <string name="pref_twitter_trackable_message">twitter_trackable_message</string>
     <string name="pref_ec_icons">ec_icons</string>
+    <string name="pref_appearance">pref_appearence</string>
 </resources>

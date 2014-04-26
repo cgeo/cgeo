@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.sensors.DirectionProvider;
 import cgeo.geocaching.sensors.GeoDataProvider;
 import cgeo.geocaching.sensors.IGeoData;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import rx.Observable;
@@ -10,6 +11,9 @@ import rx.functions.Action1;
 import rx.observables.ConnectableObservable;
 
 import android.app.Application;
+import android.view.ViewConfiguration;
+
+import java.lang.reflect.Field;
 
 import java.io.IOException;
 import java.lang.Thread.UncaughtExceptionHandler;
@@ -64,6 +68,24 @@ public class CgeoApplication extends Application {
     public static CgeoApplication getInstance() {
         return instance;
     }
+
+    @Override
+    public void onCreate() {
+        if (Settings.isAlwaysShowOverlfowMenu()) {
+            try {
+                ViewConfiguration config = ViewConfiguration.get(this);
+                Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+
+                if (menuKeyField != null) {
+                    menuKeyField.setAccessible(true);
+                    menuKeyField.setBoolean(config, false);
+                }
+            } catch (Exception ex) {
+                // Ignore
+            }
+        }
+    }
+
 
     @Override
     public void onLowMemory() {
