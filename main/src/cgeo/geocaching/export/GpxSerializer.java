@@ -34,7 +34,7 @@ public final class GpxSerializer {
     public static final String PREFIX_XSI = "http://www.w3.org/2001/XMLSchema-instance";
     public static final String PREFIX_GPX = "http://www.topografix.com/GPX/1/0";
     public static final String PREFIX_GROUNDSPEAK = "http://www.groundspeak.com/cache/1/0";
-    public static final String PREFIX_GSAK = "http://www.gsak.net/xmlv1/4";
+    public static final String PREFIX_GSAK = "http://www.gsak.net/xmlv1/6";
     public static final String PREFIX_CGEO = "http://www.cgeo.org/wptext/1/0";
 
     /**
@@ -74,7 +74,7 @@ public final class GpxSerializer {
         gpx.attribute(PREFIX_XSI, "schemaLocation",
                 PREFIX_GPX + " http://www.topografix.com/GPX/1/0/gpx.xsd " +
                         PREFIX_GROUNDSPEAK + " http://www.groundspeak.com/cache/1/0/1/cache.xsd " +
-                        PREFIX_GSAK + " http://www.gsak.net/xmlv1/4/gsak.xsd");
+                        PREFIX_GSAK + " http://www.gsak.net/xmlv1/6/gsak.xsd");
 
         // Split the overall set of geocodes into small chunks. That is a compromise between memory efficiency (because
         // we don't load all caches fully into memory) and speed (because we don't query each cache separately).
@@ -129,8 +129,8 @@ public final class GpxSerializer {
                     "container", cache.getSize().id,
                     "difficulty", Float.toString(cache.getDifficulty()),
                     "terrain", Float.toString(cache.getTerrain()),
-                    "country", cache.getLocation(),
-                    "state", "",
+                    "country", getCountry(cache),
+                    "state", getState(cache),
                     "encoded_hints", cache.getHint());
 
             writeAttributes(cache);
@@ -149,6 +149,9 @@ public final class GpxSerializer {
             writeTravelBugs(cache);
 
             gpx.endTag(PREFIX_GROUNDSPEAK, "cache");
+
+            writeGSAK(cache);
+
             gpx.endTag(PREFIX_GPX, "wpt");
 
             writeWaypoints(cache);
@@ -158,6 +161,25 @@ public final class GpxSerializer {
                 progressListener.publishProgress(countExported);
             }
         }
+    }
+
+    private void writeGSAK(final Geocache cache) throws IOException {
+        gpx.startTag(PREFIX_GSAK, "wptExtension");
+        XmlUtils.multipleTexts(gpx, PREFIX_GSAK,
+                "IsPremium", gpxBoolean(cache.isPremiumMembersOnly()),
+                "FavPoints", Integer.toString(cache.getFavoritePoints()),
+                "Watch", gpxBoolean(cache.isOnWatchlist()),
+                "GcNote", StringUtils.trimToEmpty(cache.getPersonalNote()));
+        gpx.endTag(PREFIX_GSAK, "wptExtension");
+    }
+
+    /**
+     * @param boolFlag
+     * @return XML schema compliant boolean representation of the boolean flag. This must be either true, false, 0 or 1,
+     *         but no other value (also not upper case True/False).
+     */
+    private static String gpxBoolean(boolean boolFlag) {
+        return boolFlag ? "true" : "false";
     }
 
     private void writeWaypoints(final Geocache cache) throws IOException {
@@ -318,4 +340,27 @@ public final class GpxSerializer {
         gpx.endTag(PREFIX_GROUNDSPEAK, "attributes");
     }
 
+    public static String getState(final Geocache cache) {
+        return getLocationPart(cache, 0);
+    }
+
+    private static String getLocationPart(final Geocache cache, int partIndex) {
+        final String location = cache.getLocation();
+        if (StringUtils.contains(location, ", ")) {
+            final String[] parts = StringUtils.split(location, ',');
+            if (parts.length == 2) {
+                return StringUtils.trim(parts[partIndex]);
+            }
+        }
+        return StringUtils.EMPTY;
+    }
+
+    public static String getCountry(final Geocache cache) {
+        String country = getLocationPart(cache, 1);
+        if (StringUtils.isNotEmpty(country)) {
+            return country;
+        }
+        // fall back to returning everything, but only for the country
+        return cache.getLocation();
+    }
 }

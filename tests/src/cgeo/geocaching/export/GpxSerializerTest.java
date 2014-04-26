@@ -28,9 +28,9 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
                 "<gpx version=\"1.0\" creator=\"c:geo - http://www.cgeo.org/\" " +
                 "xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd " +
                 "http://www.groundspeak.com/cache/1/0 http://www.groundspeak.com/cache/1/0/1/cache.xsd " +
-                "http://www.gsak.net/xmlv1/4 http://www.gsak.net/xmlv1/4/gsak.xsd\" " +
+                "http://www.gsak.net/xmlv1/6 http://www.gsak.net/xmlv1/6/gsak.xsd\" " +
                 "xmlns=\"http://www.topografix.com/GPX/1/0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
-                "xmlns:groundspeak=\"http://www.groundspeak.com/cache/1/0\" xmlns:gsak=\"http://www.gsak.net/xmlv1/4\" " +
+                "xmlns:groundspeak=\"http://www.groundspeak.com/cache/1/0\" xmlns:gsak=\"http://www.gsak.net/xmlv1/6\" " +
                 "xmlns:cgeo=\"http://www.cgeo.org/wptext/1/0\" />");
     }
 
@@ -86,6 +86,37 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         final StringWriter writer = new StringWriter();
         new GpxSerializer().writeGPX(Collections.singletonList(geocode), writer, null);
         return writer.toString();
+    }
+
+    public static void testStateFromStateCountry() throws Exception {
+        Geocache cache = withLocation("state, country");
+        assertThat(GpxSerializer.getState(cache)).isEqualTo("state");
+    }
+
+    public static void testCountryFromStateCountry() throws Exception {
+        Geocache cache = withLocation("state, country");
+        assertThat(GpxSerializer.getCountry(cache)).isEqualTo("country");
+    }
+
+    public static void testCountryFromCountryOnly() throws Exception {
+        Geocache cache = withLocation("somewhere");
+        assertThat(GpxSerializer.getCountry(cache)).isEqualTo("somewhere");
+    }
+
+    public static void testStateFromCountryOnly() throws Exception {
+        Geocache cache = withLocation("somewhere");
+        assertThat(GpxSerializer.getState(cache)).isEmpty();
+    }
+
+    public static void testCountryFromExternalCommaString() throws Exception {
+        Geocache cache = withLocation("first,second"); // this was not created by c:geo, therefore don't split it
+        assertThat(GpxSerializer.getState(cache)).isEmpty();
+    }
+
+    private static Geocache withLocation(final String location) {
+        Geocache cache = new Geocache();
+        cache.setLocation(location);
+        return cache;
     }
 
 }
