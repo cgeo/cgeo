@@ -36,6 +36,16 @@ public class PseudoList extends AbstractList {
     }
 
     @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    public int getCount() {
+        return -1;
+    }
+
+    @Override
     public boolean isConcrete() {
         return false;
     }

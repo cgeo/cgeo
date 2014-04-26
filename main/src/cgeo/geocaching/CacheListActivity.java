@@ -2,7 +2,6 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractListActivity;
-import cgeo.geocaching.activity.ActionBarListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.activity.Progress;
@@ -19,6 +18,7 @@ import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.filter.FilterUserInterface;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.loaders.AbstractSearchLoader;
@@ -33,7 +33,6 @@ import cgeo.geocaching.loaders.OfflineGeocacheListLoader;
 import cgeo.geocaching.loaders.OwnerGeocacheListLoader;
 import cgeo.geocaching.loaders.PocketGeocacheListLoader;
 import cgeo.geocaching.loaders.RemoveFromHistoryLoader;
-import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -70,6 +69,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -78,14 +78,17 @@ import android.os.Message;
 import android.provider.OpenableColumns;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.app.ActionBar;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
+import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -144,6 +147,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private ContextMenuInfo lastMenuInfo;
     private String contextMenuGeocode = "";
     private Subscription resumeSubscription;
+    private ViewGroup mCustomTitleView;
 
     // FIXME: This method has mostly been replaced by the loaders. But it still contains a license agreement check.
     public void handleCachesLoaded() {
@@ -254,20 +258,30 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
+    private static String getCacheNumberString(Resources res, int count)
+    {
+        return res.getQuantityString(R.plurals.cache_counts, count, count);
+    }
+
     protected void updateTitle() {
-        final ArrayList<Integer> numbers = new ArrayList<Integer>();
+
+        getSupportActionBar().setTitle(title);
+
+        final ArrayList<String> numbers = new ArrayList<String>();
         if (adapter.isFiltered()) {
-            numbers.add(adapter.getCount());
+            numbers.add(getCacheNumberString(getResources(), adapter.getCount()));
         }
         if (search != null) {
-            numbers.add(search.getCount());
+            numbers.add(getCacheNumberString(getResources(), search.getCount()));
         }
         if (numbers.isEmpty()) {
-            setTitle(title);
+            getSupportActionBar().setSubtitle(null);
         }
         else {
-            setTitle(title + " [" + StringUtils.join(numbers, '/') + ']');
+            getSupportActionBar().setSubtitle(StringUtils.join(numbers, '/'));
         }
+        
+        refreshSpinnerAdapter();
     }
 
     private final CancellableHandler loadDetailsHandler = new CancellableHandler() {
@@ -400,22 +414,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
         }
 
-        // Add the list selection in code. This way we can leave the XML layout of the action bar the same as for other activities.
-        /* TODO: FIX THIS for ActionBar */
-//        final View titleBar = findViewById(R.id.actionbar_title);
-//        titleBar.setClickable(true);
-//        titleBar.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                selectList();
-//            }
-//        });
-
         setTitle(title);
+
         initAdapter();
 
         prepareFilterBar();
+
+        if (type.canSwitch) {
+            initActionBarSpinner();
+        }
 
         currentLoader = (AbstractSearchLoader) getSupportLoaderManager().initLoader(type.getLoaderId(), extras, this);
 
@@ -432,8 +439,94 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (isInvokedFromAttachment()) {
             importGpxAttachement();
         }
+
+
+
     }
 
+    static class CacheArrayAdapter extends ArrayAdapter<AbstractList> {
+
+        static class ViewHolder {
+            TextView title;
+            TextView subtitle;
+        }
+
+        private final Context mContext;
+
+        public CacheArrayAdapter(Context context, int resource) {
+            super(context, resource);
+            mContext = context;
+        }
+
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        public View getCustomView(int position, View convertView, ViewGroup parent) {
+
+            LayoutInflater inflater =
+                    (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+
+            ViewHolder holder;
+            if (convertView == null) {
+                convertView = inflater.inflate(R.layout.cachelist_spinneritem, null);
+                holder = new ViewHolder();
+                holder.title = (TextView) convertView.findViewById(android.R.id.text1);
+                holder.subtitle = (TextView) convertView.findViewById(android.R.id.text2);
+
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            AbstractList list = getItem(position);
+            holder.title.setText(list.getTitle());
+            if (list.getCount() >= 0) {
+                holder.subtitle.setVisibility(View.VISIBLE);
+                holder.subtitle.setText(getCacheNumberString(mContext.getResources(),list.getCount()));
+            } else
+                holder.subtitle.setVisibility(View.GONE);
+
+            return convertView;
+        }
+    }
+
+    CacheArrayAdapter mCacheListSpinnerAdapter;
+
+    private void initActionBarSpinner() {
+        mCacheListSpinnerAdapter = new CacheArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item);
+        getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setListNavigationCallbacks(mCacheListSpinnerAdapter, new ActionBar.OnNavigationListener() {
+            @Override
+            public boolean onNavigationItemSelected(int i, long l) {
+                int newListId = mCacheListSpinnerAdapter.getItem(i).id;
+                if (newListId != listId)
+                    switchListById(newListId);
+                return true;
+            }
+        });
+    }
+
+    private void refreshSpinnerAdapter() {
+        mCacheListSpinnerAdapter.clear();
+
+        AbstractList list = AbstractList.getListById(listId);
+
+        for (AbstractList l: StoredList.UserInterface.getMenuLists(false, PseudoList.NEW_LIST.id))
+            mCacheListSpinnerAdapter.add(l);
+
+        getSupportActionBar().setSelectedNavigationItem(mCacheListSpinnerAdapter.getPosition(list));
+    }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -650,6 +743,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 return false;
             case R.id.menu_create_list:
                 new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(), newListName);
+                refreshSpinnerAdapter();
                 invalidateOptionsMenuCompatible();
                 return false;
             case R.id.menu_drop_list:
@@ -1359,6 +1453,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private void removeListInternal() {
         if (DataStore.removeList(listId)) {
             showToast(res.getString(R.string.list_dialog_remove_ok));
+            refreshSpinnerAdapter();
             switchListById(StoredList.STANDARD_LIST_ID);
         } else {
             showToast(res.getString(R.string.list_dialog_remove_err));
@@ -1387,26 +1482,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         });
     }
 
-    /**
-     * @param view
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void goMap(View view) {
-        if (!cacheToShow()) {
-            return;
-        }
-
-        // apply filter settings (if there's a filter)
-        final SearchResult searchToUse = getFilteredSearch();
-        final int count = searchToUse.getCount();
-        String mapTitle = title;
-        if (count > 0) {
-            mapTitle = title + " [" + count + "]";
-        }
-        CGeoMap.startActivitySearch(this, searchToUse, mapTitle);
-    }
-
     private void refreshCurrentList() {
+        refreshSpinnerAdapter();
         switchListById(listId);
     }
 
@@ -1569,6 +1646,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 break;
             case HISTORY:
                 title = res.getString(R.string.caches_history);
+                listId = PseudoList.HISTORY_LIST.id;
                 loader = new HistoryGeocacheListLoader(app, coords);
                 break;
             case NEAREST:
@@ -1628,7 +1706,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 loader = new PocketGeocacheListLoader(app, guid);
                 break;
         }
-        setTitle(title);
+        //setTitle(title);
         showProgress(true);
         showFooterLoadingCaches();
 
