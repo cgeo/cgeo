@@ -23,6 +23,8 @@ import java.util.List;
  */
 public final class FileUtils {
 
+    private static final String FILE_PROTOCOL = "file://";
+
     private FileUtils() {
         // utility class
     }
@@ -160,7 +162,7 @@ public final class FileUtils {
      * @return <tt>true</tt> if the URL scheme is <tt>file</tt>, <tt>false</tt> otherwise
      */
     public static boolean isFileUrl(final String url) {
-        return StringUtils.startsWith(url, "file://");
+        return StringUtils.startsWith(url, FILE_PROTOCOL);
     }
 
     /**
@@ -170,15 +172,15 @@ public final class FileUtils {
      * @return an URL with the <tt>file</tt> scheme
      */
     public static String fileToUrl(final File file) {
-        return "file://" + file.getAbsolutePath();
+        return FILE_PROTOCOL + file.getAbsolutePath();
     }
 
     /**
-     * Local file name when {@link #isLocalFile()} is <tt>true</tt>.
-     *
+     * Local file name when {@link #isFileUrl(String)} is <tt>true</tt>.
+     * 
      * @return the local file
      */
     public static File urlToFile(final String url) {
-        return new File(StringUtils.substring(url, 7));
+        return new File(StringUtils.substring(url, FILE_PROTOCOL.length()));
     }
 }
