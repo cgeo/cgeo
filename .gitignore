@@ -20,3 +20,7 @@ org.moreunit.prefs
 /main/project/attributes/iconlist1res.html
 /main/project/settings/drawable-mdpi/
 .directory
+.gradle/
+.idea/libraries/
+main/build/
+mapswithme-api/build/

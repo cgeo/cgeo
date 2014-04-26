@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <include layout="@layout/actionbar" />
+    <include layout="@layout/actionbar_maps" />
 
     <ListView
         android:id="@android:id/list"

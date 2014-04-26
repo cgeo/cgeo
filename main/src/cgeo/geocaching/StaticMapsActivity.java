@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.utils.Log;
@@ -25,7 +26,7 @@ import java.util.List;
 
 @EActivity
 @OptionsMenu(R.menu.static_maps_activity_options)
-public class StaticMapsActivity extends AbstractActivity {
+public class StaticMapsActivity extends AbstractActionBarActivity {
 
     private static final String EXTRAS_WAYPOINT = "waypoint";
     private static final String EXTRAS_DOWNLOAD = "download";
@@ -169,10 +170,12 @@ public class StaticMapsActivity extends AbstractActivity {
     }
 
     public static void startActivity(final Context activity, final String geocode, final boolean download, final Waypoint waypoint) {
+      /* FIXME
         StaticMapsActivity_.IntentBuilder_ builder = StaticMapsActivity_.intent(activity).geocode(geocode).download(download);
         if (waypoint != null) {
             builder.waypointId(waypoint.getId());
         }
         builder.start();
+        */
     }
 }

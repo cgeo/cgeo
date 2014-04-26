@@ -38,8 +38,12 @@ public class Trackable implements ILogable {
     private List<LogEntry> logs = new ArrayList<LogEntry>();
     private String trackingcode = null;
 
-    public String getUrl() {
-        return getConnector().getUrl(this);
+    public String getBrowserUrl() {
+        return getConnector().getBrowserUrl(this);
+    }
+
+    public String getCgeoUrl() {
+        return getConnector().getCgeoUrl(this);
     }
 
     private TrackableConnector getConnector() {

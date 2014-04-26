@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.settings.Settings;
@@ -37,7 +38,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public class ImageSelectActivity extends AbstractActivity {
+public class ImageSelectActivity extends AbstractActionBarActivity {
 
     @InjectView(R.id.caption) protected EditText captionView;
     @InjectView(R.id.description) protected EditText descriptionView;

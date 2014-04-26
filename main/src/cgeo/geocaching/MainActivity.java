@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ILogin;
@@ -37,6 +38,7 @@ import rx.subscriptions.Subscriptions;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -45,11 +47,14 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -61,7 +66,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
-public class MainActivity extends AbstractActivity {
+public class MainActivity extends AbstractActionBarActivity {
     @InjectView(R.id.nav_satellites) protected TextView navSatellites;
     @InjectView(R.id.filter_button_title)protected TextView filterTitle;
     @InjectView(R.id.map) protected ImageView findOnMap;
@@ -189,6 +194,10 @@ public class MainActivity extends AbstractActivity {
     public void onCreate(final Bundle savedInstanceState) {
         // don't call the super implementation with the layout argument, as that would set the wrong theme
         super.onCreate(savedInstanceState);
+
+        // Disable the up navigation for this activity
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
         setContentView(R.layout.main_activity);
         ButterKnife.inject(this);
 
@@ -262,6 +271,11 @@ public class MainActivity extends AbstractActivity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.main_activity_options, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        MenuItem searchItem = menu.findItem(R.id.menu_gosearch);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
         return true;
     }
 
@@ -302,6 +316,9 @@ public class MainActivity extends AbstractActivity {
                         CacheListActivity.startActivityPocket(MainActivity.this, pql);
                     }
                 });
+                return true;
+            case R.id.menu_gosearch:
+                onSearchRequested();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -712,13 +729,4 @@ public class MainActivity extends AbstractActivity {
     public void showAbout(final View view) {
         startActivity(new Intent(this, AboutActivity.class));
     }
-
-    /**
-     * @param view
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void goSearch(final View view) {
-        onSearchRequested();
-    }
-
 }

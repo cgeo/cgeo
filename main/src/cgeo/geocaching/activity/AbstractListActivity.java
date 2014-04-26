@@ -1,13 +1,18 @@
 package cgeo.geocaching.activity;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.MainActivity;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.FragmentListActivity;
+import android.support.v4.app.NavUtils;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 
-public abstract class AbstractListActivity extends FragmentListActivity implements
+public abstract class AbstractListActivity extends ActionBarListActivity implements
         IAbstractActivity {
 
     private boolean keepScreenOn = false;
@@ -25,7 +30,7 @@ public abstract class AbstractListActivity extends FragmentListActivity implemen
 
     @Override
     final public void goHome(View view) {
-        ActivityMixin.goHome(this);
+        ActivityMixin.navigateToMain(this);
     }
 
     final public void showProgress(final boolean show) {
@@ -40,7 +45,7 @@ public abstract class AbstractListActivity extends FragmentListActivity implemen
     public final void showToast(String text) {
         ActivityMixin.showToast(this, text);
     }
-
+    
     @Override
     public final void showShortToast(String text) {
         ActivityMixin.showShortToast(this, text);
@@ -49,7 +54,24 @@ public abstract class AbstractListActivity extends FragmentListActivity implemen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+
         initializeCommonFields();
+        initUpAction();
+    }
+
+    protected void initUpAction()
+    {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId()== android.R.id.home) {
+            ActivityMixin.navigateToMain(this);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void initializeCommonFields() {

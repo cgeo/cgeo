@@ -5,8 +5,6 @@
     android:background="?background_color"
     android:orientation="vertical" >
 
-    <include layout="@layout/actionbar" />
-    
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

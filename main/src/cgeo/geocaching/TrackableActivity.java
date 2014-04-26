@@ -36,6 +36,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.ActionBar;
 import android.text.Html;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -110,6 +111,16 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             if (waitDialog != null) {
                 waitDialog.dismiss();
             }
+
+            // if we have a newer Android device setup Android Beam for easy cache sharing
+            initializeAndroidBeam(
+                    new ActivitySharingInterface() {
+                        @Override
+                        public String getUri() {
+                            return trackable.getCgeoUrl();
+                        }
+                    }
+            );
         }
     };
 
@@ -240,7 +251,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 LogTrackableActivity.startActivity(this, trackable);
                 return true;
             case R.id.menu_browser_trackable:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getUrl())));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getBrowserUrl())));
                 return true;
             default:
                 return false;
@@ -251,7 +262,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     public boolean onPrepareOptionsMenu(Menu menu) {
         if (trackable != null) {
             menu.findItem(R.id.menu_log_touch).setEnabled(StringUtils.isNotBlank(geocode) && trackable.isLoggable());
-            menu.findItem(R.id.menu_browser_trackable).setEnabled(StringUtils.isNotBlank(trackable.getUrl()));
+            menu.findItem(R.id.menu_browser_trackable).setEnabled(StringUtils.isNotBlank(trackable.getBrowserUrl()));
         }
         return super.onPrepareOptionsMenu(menu);
     }
@@ -322,9 +333,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     }
 
     private static class TrackableIconHandler extends Handler {
-        final private TextView view;
+        final private ActionBar view;
 
-        public TrackableIconHandler(TextView viewIn) {
+        public TrackableIconHandler(ActionBar viewIn) {
             view = viewIn;
         }
 
@@ -333,7 +344,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             final BitmapDrawable image = (BitmapDrawable) message.obj;
             if (image != null && view != null) {
                 image.setBounds(0, 0, view.getHeight(), view.getHeight());
-                view.setCompoundDrawables(image, null, null, null);
+                view.setIcon(image);
             }
         }
     }
@@ -392,7 +403,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
             // action bar icon
             if (StringUtils.isNotBlank(trackable.getIconUrl())) {
-                final TrackableIconHandler iconHandler = new TrackableIconHandler(((TextView) findViewById(R.id.actionbar_title)));
+                final TrackableIconHandler iconHandler = new TrackableIconHandler(getSupportActionBar());
                 final TrackableIconThread iconThread = new TrackableIconThread(trackable.getIconUrl(), iconHandler);
                 iconThread.start();
             }

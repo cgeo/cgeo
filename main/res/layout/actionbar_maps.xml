@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/action_bar" >
+
+        <ImageView
+            style="@style/action_bar_action"
+            android:onClick="goHome" />
+
+        <View style="@style/action_bar_separator" />
+
+        <TextView
+            android:id="@+id/actionbar_title"
+            style="@style/action_bar_title" />
+
+    <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/actionbar_progress"
+        style="@style/action_bar_progress"
+        android:visibility="gone" />
+    <View style="@style/action_bar_separator" />
+
+    <FrameLayout         style="@style/action_bar_action">
+        <CheckBox
+            android:layout_gravity="right"
+            android:id="@+id/my_position"
+            android:button="@drawable/ic_menu_myposition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false" />
+    </FrameLayout>
+
+
+</LinearLayout>

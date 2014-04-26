@@ -97,7 +97,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewParent;
@@ -271,15 +270,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         } catch (final RuntimeException e) {
             // nothing, we lost the window
         }
-
-        final ImageView defaultNavigationImageView = (ImageView) findViewById(R.id.defaultNavigation);
-        defaultNavigationImageView.setOnLongClickListener(new OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                startDefaultNavigation2();
-                return true;
-            }
-        });
 
         final int pageToOpen = savedInstanceState != null ?
                 savedInstanceState.getInt(STATE_PAGE_INDEX, 0) :
@@ -510,7 +500,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
         }
 
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     private static final class CacheDetailsGeoDirHandler extends GeoDirHandler {
@@ -613,7 +603,18 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         } else {
             setTitle(cache.getGeocode());
         }
-        ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cache.getType().markerId), null, null, null);
+
+        getSupportActionBar().setIcon(getResources().getDrawable(cache.getType().markerId));
+
+        // if we have a newer Android device setup Android Beam for easy cache sharing
+        initializeAndroidBeam(
+                new ActivitySharingInterface() {
+                    @Override
+                    public String getUri() {
+                        return cache.getCgeoUrl();
+                    }
+                }
+        );
 
         // reset imagesList so Images view page will be redrawn
         imagesList = null;
@@ -624,18 +625,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         progress.dismiss();
     }
 
+
     /**
      * Tries to navigate to the {@link Geocache} of this activity.
      */
     private void startDefaultNavigation() {
         NavigationAppFactory.startDefaultNavigationApplication(1, this, cache);
-    }
-
-    /**
-     * Tries to navigate to the {@link Geocache} of this activity.
-     */
-    private void startDefaultNavigation2() {
-        NavigationAppFactory.startDefaultNavigationApplication(2, this, cache);
     }
 
     /**
@@ -1614,7 +1609,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 if (unknownTagsHandler.isProblematicDetected()) {
                     final int startPos = description.length();
                     final IConnector connector = ConnectorFactory.getConnector(cache);
-                    final Spanned tableNote = Html.fromHtml(res.getString(R.string.cache_description_table_note, "<a href=\"" + cache.getUrl() + "\">" + connector.getName() + "</a>"));
+                    final Spanned tableNote = Html.fromHtml(res.getString(R.string.cache_description_table_note, "<a href=\"" + cache.getBrowserUrl() + "\">" + connector.getName() + "</a>"));
                     ((Editable) description).append("\n\n").append(tableNote);
                     ((Editable) description).setSpan(new StyleSpan(Typeface.ITALIC), startPos, description.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
@@ -2111,10 +2106,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         throw new IllegalStateException(); // cannot happen as long as switch case is enum complete
     }
 
-    static void updateOfflineBox(final View view, final Geocache cache, final Resources res,
-            final OnClickListener refreshCacheClickListener,
-            final OnClickListener dropCacheClickListener,
-            final OnClickListener storeCacheClickListener) {
+    public static void updateOfflineBox(final View view, final Geocache cache, final Resources res,
+                                        final OnClickListener refreshCacheClickListener,
+                                        final OnClickListener dropCacheClickListener,
+                                        final OnClickListener storeCacheClickListener) {
         // offline use
         final TextView offlineText = (TextView) view.findViewById(R.id.offline_text);
         final Button offlineRefresh = (Button) view.findViewById(R.id.offline_refresh);

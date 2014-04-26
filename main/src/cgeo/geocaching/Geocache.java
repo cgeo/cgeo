@@ -503,7 +503,7 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     private String getCacheUrl() {
-        return getConnector().getCacheUrl(this);
+        return getConnector().getCacheBrowserUrl(this);
     }
 
     private String getBrowserCacheUrl() {
@@ -709,6 +709,12 @@ public class Geocache implements ICache, IWaypoint {
             return;
         }
 
+        final Intent intent = getIntent();
+
+        fromActivity.startActivity(Intent.createChooser(intent, res.getText(R.string.action_bar_share_title)));
+    }
+
+    public Intent getIntent() {
         final StringBuilder subject = new StringBuilder("Geocache ");
         subject.append(geocode);
         if (StringUtils.isNotBlank(name)) {
@@ -718,14 +724,15 @@ public class Geocache implements ICache, IWaypoint {
         final Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT, subject.toString());
-        intent.putExtra(Intent.EXTRA_TEXT, getUrl());
-
-        fromActivity.startActivity(Intent.createChooser(intent, res.getText(R.string.action_bar_share_title)));
+        intent.putExtra(Intent.EXTRA_TEXT, getBrowserUrl());
+        return intent;
     }
 
-    public String getUrl() {
-        return getConnector().getCacheUrl(this);
+    public String getBrowserUrl() {
+        return getConnector().getCacheBrowserUrl(this);
     }
+
+    public String getCgeoUrl() { return getConnector().getCgeoCacheUrl(this); }
 
     public boolean supportsGCVote() {
         return StringUtils.startsWithIgnoreCase(geocode, "GC");

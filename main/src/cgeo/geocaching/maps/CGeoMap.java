@@ -51,6 +51,7 @@ import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 import rx.subscriptions.Subscriptions;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -61,18 +62,23 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBarActivity;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.CheckBox;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ViewSwitcher.ViewFactory;
 
@@ -184,7 +190,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private int detailProgress = 0;
     private long detailProgressTime = 0L;
     // views
-    private ImageSwitcher myLocSwitch = null;
+    private CheckBox myLocSwitch = null;
 
     /** Controls the map behaviour */
     private MapMode mapMode = null;
@@ -240,7 +246,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         title.append('[').append(lastSearchResult.getUrl()).append(']');
                     }
 
-                    ActivityMixin.setTitle(activity, title.toString());
+                    setTitle(title.toString());
                     break;
                 case INVALIDATE_MAP:
                     mapView.repaintRequired(null);
@@ -251,6 +257,23 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             }
         }
     };
+
+    private void setTitle(String title) {
+        /* Compatibily for the old Action Bar, only used by the maps activity at the moment */
+        final TextView titleview = (TextView) activity.findViewById(R.id.actionbar_title);
+        if (titleview != null) {
+            titleview.setText(title);
+
+        }
+        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB))
+            setTitleHoneyComb(title);
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    private void setTitleHoneyComb(String title) {
+        activity.getActionBar().setTitle(title);
+    }
+
     /** Updates the progress. */
     final private Handler showProgressHandler = new Handler() {
 
@@ -262,14 +285,32 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
             if (what == HIDE_PROGRESS) {
                 if (--counter == 0) {
-                    ActivityMixin.showProgress(activity, false);
+                    showProgress(false);
                 }
             } else if (what == SHOW_PROGRESS) {
-                ActivityMixin.showProgress(activity, true);
+                showProgress(true);
                 counter++;
             }
         }
+
+        private void showProgress(boolean show) {
+            final ProgressBar progress = (ProgressBar) activity.findViewById(R.id.actionbar_progress);
+            if (progress != null) {
+                if (show) {
+                    progress.setVisibility(View.VISIBLE);
+                } else {
+                    progress.setVisibility(View.GONE);
+
+                }
+            }
+            if (Build.VERSION.SDK_INT >= 11) {
+                activity.setProgressBarIndeterminate(show);
+                activity.setProgressBarIndeterminateVisibility(true);
+            }
+        }
     };
+
+
 
     final private class LoadDetailsHandler extends CancellableHandler {
 
@@ -418,10 +459,16 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         ActivityMixin.keepScreenOn(activity, true);
 
+
         // set layout
-        ActivityMixin.setTheme(activity);
+        //ActivityMixin.setTheme(activity);
+        // TODO: set a proper theme
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
+            activity.setTheme(android.R.style.Theme_Holo);
+            activity.getActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         activity.setContentView(mapProvider.getMapLayoutId());
-        ActivityMixin.setTitle(activity, res.getString(R.string.map_map));
+        setTitle(res.getString(R.string.map_map));
 
         // initialize map
         mapView = (MapViewImpl) activity.findViewById(mapProvider.getMapViewId());
@@ -462,19 +509,26 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             centerMap(geocodeIntent, searchIntent, coordsIntent, mapStateIntent);
         }
 
-        // prepare my location button
-        myLocSwitch = (ImageSwitcher) activity.findViewById(R.id.my_position);
-        myLocSwitch.setFactory(this);
-        myLocSwitch.setInAnimation(activity, android.R.anim.fade_in);
-        myLocSwitch.setOutAnimation(activity, android.R.anim.fade_out);
-        myLocSwitch.setOnClickListener(new MyLocationListener());
-        switchMyLocationButton();
 
+        CheckBox locSwitch = (CheckBox) activity.findViewById(R.id.my_position);
+        if (locSwitch!=null) {
+            initMyLocationSwitchButton(locSwitch);
+        }
         prepareFilterBar();
 
         if (!app.isLiveMapHintShownInThisSession() && !Settings.getHideLiveMapHint() && Settings.getLiveMapHintShowCount() <= 3) {
             LiveMapInfoDialogBuilder.create(activity).show();
         }
+    }
+
+    private void initMyLocationSwitchButton(CheckBox locSwitch) {
+        myLocSwitch = locSwitch;
+        /* TODO: Switch back to ImageSwitcher for animations?
+        myLocSwitch.setFactory(this);
+        myLocSwitch.setInAnimation(activity, android.R.anim.fade_in);
+        myLocSwitch.setOutAnimation(activity, android.R.anim.fade_out); */
+        myLocSwitch.setOnClickListener(new MyLocationListener());
+        switchMyLocationButton();
     }
 
     /**
@@ -541,6 +595,19 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         final SubMenu subMenuStrategy = menu.findItem(R.id.submenu_strategy).getSubMenu();
         subMenuStrategy.setHeaderTitle(res.getString(R.string.map_strategy_title));
+
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
+            /* if we have an Actionbar find the my position toggle */
+            MenuItem item = menu.findItem(R.id.menu_toggle_mypos);
+            myLocSwitch = new CheckBox(activity);
+            myLocSwitch.setButtonDrawable(R.drawable.ic_menu_myposition);
+            item.setActionView(myLocSwitch);
+            initMyLocationSwitchButton(myLocSwitch);
+        } else {
+            // Already on the fake Actionbar
+            menu.removeItem(R.id.menu_toggle_mypos);
+        }
         return true;
     }
 
@@ -617,6 +684,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     public boolean onOptionsItemSelected(MenuItem item) {
         final int id = item.getItemId();
         switch (id) {
+            case android.R.id.home:
+                ActivityMixin.navigateToMain(activity);
+                return true;
             case R.id.menu_trail_mode:
                 Settings.setMapTrail(!Settings.isMapTrail());
                 mapView.repaintRequired(overlayPositionAndScale);
@@ -1461,11 +1531,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     // switch My Location button image
     private void switchMyLocationButton() {
+        myLocSwitch.setChecked(followMyLocation);
         if (followMyLocation) {
-            myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_on);
             myLocationInMiddle(app.currentGeo());
-        } else {
-            myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_off);
         }
     }
 
@@ -1494,7 +1562,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     // close activity and open homescreen
     @Override
     public void goHome(View view) {
-        ActivityMixin.goHome(activity);
+        ActivityMixin.navigateToMain(activity);
     }
 
     @Override

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/action_bar" >
+
+        <TextView
+            android:id="@+id/actionbar_title"
+            style="@style/action_bar_title" />
+
+    <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/actionbar_progress"
+        style="@style/action_bar_progress"
+        android:visibility="gone" />
+    <View style="@style/action_bar_separator" />
+
+
+    <ImageView
+        android:id="@+id/defaultNavigation"
+        style="@style/action_bar_action"
+        android:longClickable="true"
+        android:src="@drawable/actionbar_compass_dark" />
+
+    <View style="@style/action_bar_separator" />
+
+    <ImageView
+        android:id="@+id/overflowActionBar"
+        style="@style/action_bar_action"
+        android:longClickable="true"
+        android:src="@drawable/abc_ic_menu_moreoverflow_normal_holo_dark" />
+</LinearLayout>

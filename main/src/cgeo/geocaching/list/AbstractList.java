@@ -20,6 +20,10 @@ public abstract class AbstractList {
 
     public abstract boolean isConcrete();
 
+    public abstract String getTitle();
+
+    public abstract int getCount();
+
     @Nullable
     public static AbstractList getListById(int listId) {
         return LISTS.get(listId);
