@@ -145,19 +145,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     private SearchResult search;
 
-    private final GeoDirHandler locationUpdater = new GeoDirHandler() {
-        @Override
-        public void updateGeoData(final IGeoData geo) {
-            if (cacheDistanceView == null) {
-                return;
-            }
-
-            if (geo.getCoords() != null && cache != null && cache.getCoords() != null) {
-                cacheDistanceView.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(cache.getCoords())));
-                cacheDistanceView.bringToFront();
-            }
-        }
-    };
+    private GeoDirHandler locationUpdater;
 
     private CharSequence clickedItemText = null;
 
@@ -319,6 +307,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 loadCacheHandler.sendMessage(Message.obtain());
             }
         });
+
+        locationUpdater = new CacheDetailsGeoDirHandler(this);
     }
 
     @Override
@@ -521,6 +511,30 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         return true;
+    }
+
+    private static final class CacheDetailsGeoDirHandler extends GeoDirHandler {
+        private final WeakReference<CacheDetailActivity> activityRef;
+
+        public CacheDetailsGeoDirHandler(final CacheDetailActivity activity) {
+            this.activityRef = new WeakReference<CacheDetailActivity>(activity);
+        }
+
+        @Override
+        public void updateGeoData(final IGeoData geo) {
+            final CacheDetailActivity activity = activityRef.get();
+            if (activity == null) {
+                return;
+            }
+            if (activity.cacheDistanceView == null) {
+                return;
+            }
+
+            if (geo.getCoords() != null && activity.cache != null && activity.cache.getCoords() != null) {
+                activity.cacheDistanceView.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(activity.cache.getCoords())));
+                activity.cacheDistanceView.bringToFront();
+            }
+        }
     }
 
     private final static class LoadCacheHandler extends SimpleCancellableHandler {
