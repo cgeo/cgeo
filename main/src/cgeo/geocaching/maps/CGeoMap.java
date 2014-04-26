@@ -43,6 +43,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.eclipse.jdt.annotation.NonNull;
+
 import rx.Scheduler;
 import rx.Subscription;
 import rx.functions.Action1;
@@ -76,6 +77,7 @@ import android.widget.TextView;
 import android.widget.ViewSwitcher.ViewFactory;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumSet;
@@ -136,7 +138,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private Activity activity = null;
     private MapViewImpl mapView = null;
     private CgeoApplication app = null;
-    final private GeoDirHandler geoDirUpdate = new UpdateLoc();
+    final private GeoDirHandler geoDirUpdate;
     private SearchResult searchIntent = null;
     private String geocodeIntent = null;
     private Geopoint coordsIntent = null;
@@ -328,6 +330,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     public CGeoMap(MapActivityImpl activity) {
         super(activity);
+        geoDirUpdate = new UpdateLoc(this);
     }
 
     protected void countVisibleCaches() {
@@ -873,7 +876,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     }
 
     // class: update location
-    private class UpdateLoc extends GeoDirHandler {
+    private static class UpdateLoc extends GeoDirHandler {
         // use the following constants for fine tuning - find good compromise between smooth updates and as less updates as possible
 
         // minimum time in milliseconds between position overlay updates
@@ -888,6 +891,14 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         float currentHeading;
 
         private long timeLastPositionOverlayCalculation = 0;
+        /**
+         * weak reference to the outer class
+         */
+        private final WeakReference<CGeoMap> map;
+
+        public UpdateLoc(CGeoMap map) {
+            this.map = new WeakReference<CGeoMap>(map);
+        }
 
         @Override
         public void updateGeoDir(final IGeoData geo, final float dir) {
@@ -911,24 +922,27 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 timeLastPositionOverlayCalculation = currentTimeMillis;
 
                 try {
-                    if (mapView != null) {
-                        if (overlayPositionAndScale == null) {
-                            overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay(activity);
-                        }
-
-                        boolean needsRepaintForDistance = needsRepaintForDistance();
-                        boolean needsRepaintForHeading = needsRepaintForHeading();
-
-                        if (needsRepaintForDistance) {
-                            if (followMyLocation) {
-                                centerMap(new Geopoint(currentLocation));
+                    CGeoMap cgeoMapRef = map.get();
+                    if (cgeoMapRef != null) {
+                        if (cgeoMapRef.mapView != null) {
+                            if (cgeoMapRef.overlayPositionAndScale == null) {
+                                cgeoMapRef.overlayPositionAndScale = cgeoMapRef.mapView.createAddPositionAndScaleOverlay(cgeoMapRef.activity);
                             }
-                        }
 
-                        if (needsRepaintForDistance || needsRepaintForHeading) {
-                            overlayPositionAndScale.setCoordinates(currentLocation);
-                            overlayPositionAndScale.setHeading(currentHeading);
-                            mapView.repaintRequired(overlayPositionAndScale);
+                            boolean needsRepaintForDistance = needsRepaintForDistance();
+                            boolean needsRepaintForHeading = needsRepaintForHeading();
+
+                            if (needsRepaintForDistance) {
+                                if (cgeoMapRef.followMyLocation) {
+                                    cgeoMapRef.centerMap(new Geopoint(currentLocation));
+                                }
+                            }
+
+                            if (needsRepaintForDistance || needsRepaintForHeading) {
+                                cgeoMapRef.overlayPositionAndScale.setCoordinates(currentLocation);
+                                cgeoMapRef.overlayPositionAndScale.setHeading(currentHeading);
+                                cgeoMapRef.mapView.repaintRequired(cgeoMapRef.overlayPositionAndScale);
+                            }
                         }
                     }
                 } catch (RuntimeException e) {
@@ -938,16 +952,23 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         }
 
         boolean needsRepaintForHeading() {
-            return Math.abs(AngleUtils.difference(currentHeading, overlayPositionAndScale.getHeading())) > MIN_HEADING_DELTA;
+            final CGeoMap cgeoMapRef = map.get();
+            if (cgeoMapRef == null) {
+                return false;
+            }
+            return Math.abs(AngleUtils.difference(currentHeading, cgeoMapRef.overlayPositionAndScale.getHeading())) > MIN_HEADING_DELTA;
         }
 
         boolean needsRepaintForDistance() {
-
             if (!locationValid) {
                 return false;
             }
 
-            final Location lastLocation = overlayPositionAndScale.getCoordinates();
+            final CGeoMap cgeoMapRef = map.get();
+            if (cgeoMapRef == null) {
+                return false;
+            }
+            final Location lastLocation = cgeoMapRef.overlayPositionAndScale.getCoordinates();
 
             float dist = Float.MAX_VALUE;
             if (lastLocation != null) {
@@ -955,11 +976,11 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             }
 
             final float[] mapDimension = new float[1];
-            if (mapView.getWidth() < mapView.getHeight()) {
-                final double span = mapView.getLongitudeSpan() / 1e6;
+            if (cgeoMapRef.mapView.getWidth() < cgeoMapRef.mapView.getHeight()) {
+                final double span = cgeoMapRef.mapView.getLongitudeSpan() / 1e6;
                 Location.distanceBetween(currentLocation.getLatitude(), currentLocation.getLongitude(), currentLocation.getLatitude(), currentLocation.getLongitude() + span, mapDimension);
             } else {
-                final double span = mapView.getLatitudeSpan() / 1e6;
+                final double span = cgeoMapRef.mapView.getLatitudeSpan() / 1e6;
                 Location.distanceBetween(currentLocation.getLatitude(), currentLocation.getLongitude(), currentLocation.getLatitude() + span, currentLocation.getLongitude(), mapDimension);
             }
 
