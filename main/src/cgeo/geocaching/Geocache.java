@@ -1734,11 +1734,11 @@ public class Geocache implements ICache, IWaypoint {
         return result;
     }
 
-    // add spoilers stored locally in /sdcard/GeocacheSpoilers
+    // Add spoilers stored locally in /sdcard/GeocachePhotos
     private void addLocalSpoilersTo(final List<Image> spoilers) {
         if (StringUtils.length(geocode) >= 2) {
             final String suffix = StringUtils.right(geocode, 2);
-            final File baseDir = new File(Environment.getExternalStorageDirectory().toString(), "GeocacheSpoilers");
+            final File baseDir = new File(Environment.getExternalStorageDirectory().toString(), "GeocachePhotos");
             final File lastCharDir = new File(baseDir, suffix.substring(1));
             final File secondToLastCharDir = new File(lastCharDir, suffix.substring(0, 1));
             final File finalDir = new File(secondToLastCharDir, getGeocode());
