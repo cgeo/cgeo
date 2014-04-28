@@ -2,17 +2,11 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>2014.04.19:</b>\n
-    <b>New features:</b>\n
-    · Support of opencaching.nl, opencaching.us, opencaching.ro\n
-    · Changed initial coordinate format for waypoints to MinDec\n
-    \n
+    <b>2014.04.29:</b>\n
     <b>Bugfixing:</b>\n
-    · Improved long click detection in lists\n
-    · Import from web does not work if started a second time\n
-    · Reduce log picture preview size to avoid crashes on tablets\n
-    · Fixed wrong arrow direction on live map and list in landscape mode\n
-    · Fixed several possible crash scenarios\n
+    · Fixed a number of crash scenarios/instabilities due to memory issues\n
+    · Fixed problems when calling some external navigation apps\n
+    · Fixed a crash when starting with a readonly cache directory\n
     \n
     \n
     <a href="https://github.com/cgeo/cgeo/issues?milestone=29&amp;state=closed">Detailed list of all changes</a>\n
