@@ -23,6 +23,7 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -833,18 +834,20 @@ public class DataStore {
          * introduced with release on 2012-05-24.
          */
         private static void removeDoubleUnderscoreMapFiles() {
-            File[] geocodeDirs = LocalStorage.getStorage().listFiles();
-            final FilenameFilter filter = new FilenameFilter() {
-                @Override
-                public boolean accept(File dir, String filename) {
-                    return filename.startsWith("map_") && filename.contains("__");
-                }
-            };
-            for (final File dir : geocodeDirs) {
-                final File[] wrongFiles = dir.listFiles(filter);
-                if (wrongFiles != null) {
-                    for (final File wrongFile : wrongFiles) {
-                        FileUtils.deleteIgnoringFailure(wrongFile);
+            final File[] geocodeDirs = LocalStorage.getStorage().listFiles();
+            if (ArrayUtils.isNotEmpty(geocodeDirs)) {
+                final FilenameFilter filter = new FilenameFilter() {
+                    @Override
+                    public boolean accept(File dir, String filename) {
+                        return filename.startsWith("map_") && filename.contains("__");
+                    }
+                };
+                for (final File dir : geocodeDirs) {
+                    final File[] wrongFiles = dir.listFiles(filter);
+                    if (wrongFiles != null) {
+                        for (final File wrongFile : wrongFiles) {
+                            FileUtils.deleteIgnoringFailure(wrongFile);
+                        }
                     }
                 }
             }
@@ -865,43 +868,48 @@ public class DataStore {
      *            the read-write database to use
      */
     private static void removeObsoleteCacheDirectories(final SQLiteDatabase db) {
-        final Pattern oldFilePattern = Pattern.compile("^[GC|TB|EC|GK|O][A-Z0-9]{4,7}$");
-        final SQLiteStatement select = db.compileStatement("select count(*) from " + dbTableCaches + " where geocode = ?");
         final File[] files = LocalStorage.getStorage().listFiles();
-        final ArrayList<File> toRemove = new ArrayList<File>(files.length);
-        for (final File file : files) {
-            if (file.isDirectory()) {
-                final String geocode = file.getName();
-                if (oldFilePattern.matcher(geocode).find()) {
-                    select.bindString(1, geocode);
-                    if (select.simpleQueryForLong() == 0) {
-                        toRemove.add(file);
+        if (ArrayUtils.isNotEmpty(files)) {
+            final Pattern oldFilePattern = Pattern.compile("^[GC|TB|EC|GK|O][A-Z0-9]{4,7}$");
+            final SQLiteStatement select = db.compileStatement("select count(*) from " + dbTableCaches + " where geocode = ?");
+            final ArrayList<File> toRemove = new ArrayList<File>(files.length);
+            for (final File file : files) {
+                if (file.isDirectory()) {
+                    final String geocode = file.getName();
+                    if (oldFilePattern.matcher(geocode).find()) {
+                        select.bindString(1, geocode);
+                        if (select.simpleQueryForLong() == 0) {
+                            toRemove.add(file);
+                        }
                     }
                 }
             }
-        }
 
-        // Use a background thread for the real removal to avoid keeping the database locked
-        // if we are called from within a transaction.
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (final File dir : toRemove) {
-                    Log.i("Removing obsolete cache directory for " + dir.getName());
-                    LocalStorage.deleteDirectory(dir);
+            // Use a background thread for the real removal to avoid keeping the database locked
+            // if we are called from within a transaction.
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    for (final File dir : toRemove) {
+                        Log.i("Removing obsolete cache directory for " + dir.getName());
+                        LocalStorage.deleteDirectory(dir);
+                    }
                 }
-            }
-        }).start();
+            }).start();
+        }
     }
 
     /*
      * Remove empty directories created in the secondary storage area.
      */
     private static void removeSecEmptyDirs() {
-        for (final File file : LocalStorage.getStorageSec().listFiles()) {
-            if (file.isDirectory()) {
-                // This will silently fail if the directory is not empty.
-                FileUtils.deleteIgnoringFailure(file);
+        final File[] files = LocalStorage.getStorageSec().listFiles();
+        if (ArrayUtils.isNotEmpty(files)) {
+            for (final File file : files) {
+                if (file.isDirectory()) {
+                    // This will silently fail if the directory is not empty.
+                    FileUtils.deleteIgnoringFailure(file);
+                }
             }
         }
     }

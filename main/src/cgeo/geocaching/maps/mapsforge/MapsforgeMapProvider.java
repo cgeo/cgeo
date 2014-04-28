@@ -12,6 +12,7 @@ import cgeo.geocaching.maps.mapsforge.v024.MapsforgeMapItemFactory024;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.android.maps.mapgenerator.MapGeneratorInternal;
 import org.mapsforge.map.reader.MapDatabase;
@@ -59,14 +60,17 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         if (directory.isDirectory()) {
             try {
                 ArrayList<String> mapFileList = new ArrayList<String>();
-                for (File file : directory.listFiles()) {
-                    if (file.getName().endsWith(".map")) {
-                        if (MapsforgeMapProvider.isValidMapFile(file.getAbsolutePath())) {
-                            mapFileList.add(file.getAbsolutePath());
+                final File[] files = directory.listFiles();
+                if (ArrayUtils.isNotEmpty(files)) {
+                    for (File file : files) {
+                        if (file.getName().endsWith(".map")) {
+                            if (MapsforgeMapProvider.isValidMapFile(file.getAbsolutePath())) {
+                                mapFileList.add(file.getAbsolutePath());
+                            }
                         }
                     }
+                    Collections.sort(mapFileList, String.CASE_INSENSITIVE_ORDER);
                 }
-                Collections.sort(mapFileList, String.CASE_INSENSITIVE_ORDER);
                 return mapFileList;
             } catch (Exception e) {
                 Log.e("MapsforgeMapProvider.getOfflineMaps: ", e);
