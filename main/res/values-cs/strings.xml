@@ -281,6 +281,7 @@
   <string name="caches_move_all">Přesunout všechny</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Exportovat do Locusu</string>
+  <string name="caches_map_mapswithme">MapsWithMe</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Prosím, opiš text z obrázku. Je to nutné ke stažení souřadnic keší. Je to volitelné a může být vypnuto v Nastavení.</string>
   <string name="caches_recaptcha_hint">Text z obrázku</string>
@@ -640,6 +641,7 @@
   <string name="cache_menu_cachebeacon">Cache Beacon</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
+  <string name="cache_menu_mapswithme">MapsWithMe</string>
   <string name="cache_status">Stav</string>
   <string name="cache_status_offline_log">Připravený Log</string>
   <string name="cache_status_found">Nalezena</string>

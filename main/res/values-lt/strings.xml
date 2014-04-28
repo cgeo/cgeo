@@ -16,7 +16,7 @@
   <string name="mystery">Mystery slėptuvė</string>
   <string name="letterbox">Letterbox Hybrid slėptuvė</string>
   <string name="event">Renginys</string>
-  <string name="mega">Mega renginys</string>
+  <string name="mega">Mega-renginys</string>
   <string name="giga">Giga-renginys</string>
   <string name="earth">Earthcache
 </string>
@@ -851,15 +851,15 @@
   <string name="helper_sendtocgeo_description">Send to c:geo yra <strong>jūsų kompiuterio</strong> naršyklės priedas . Kai naršote geocaching.com, jūs galite siųsti slėptuves į savo išmanųjį telefoną tiesiog naršyklės viduje paspausdami mygtuką.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Patogi programa, kuri rodo žemėlapius tiesiai iš interneto ir suteikia galimybę atsisiųsti juos į prietaisą (tik rastrinius žemėlapius). Ji taip pat palaiko nukeliauto kelio įrašymą, lankytinų vietų valdymą ir turi daug kitų naudingų funkcijų.</string>
-  <string name="helper_gpsstatus_title">GPS statusas</string>
+  <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">Kartu su c:geo galite naudoti šioje programoje esantį radarą. Ji taip pat siūlo daug kitos su GPS susijusios informacijos.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Leidžia naudoti išorinį GPS imtuvą tikslesnėms koordinatėms gauti ir taupyti jūsų prietaiso bateriją.</string>
-  <string name="helper_barcode_title">Brūkšninių kodų skaitytuvas</string>
+  <string name="helper_barcode_title">Barcode Scanner</string>
   <string name="helper_barcode_description">Egzistuoja Greasemonkey įskiepiai ir svetainės, kurios  geo kodus paverčia brūkšniniu kodu. Su šia programa c:geo gali nuskaityti tokius kodus tiesiai iš kompiuterio ekrano.</string>
-  <string name="helper_pocketquery_title">Kišeninių sąrašų kūrėjas</string>
+  <string name="helper_pocketquery_title">Pocket Query Creator</string>
   <string name="helper_pocketquery_description">Leidžia lengvai sukurti ir atsisiųsti Kišeninius sąrašus pagal jūsų buvimo vietą arba pasirinktą tašką žemėlapyje. Būtina Premium narystė Geocaching.com.</string>
-  <string name="helper_google_translate_title">Google vertėjas</string>
+  <string name="helper_google_translate_title">\"Google\" vertėjas</string>
   <string name="helper_google_translate_description">Atsisiuntę vertimo paketą Google Translate programai galėsite lengvai išversti slėptuvės aprašymus ilgai paspaudę ant slėptuvės aprašymo teksto (tam nereikės interneto ryšio).</string>
   <string name="addon_missing_title">Trūksta įskiepio</string>
   <string name="addon_download_prompt">Parsisiųsti iš Google Play dabar.</string>

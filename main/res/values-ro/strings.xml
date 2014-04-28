@@ -18,6 +18,7 @@
   <string name="letterbox">Hibrid cutie-poştală</string>
   <string name="event">Eveniment</string>
   <string name="mega">Mega-eveniment</string>
+  <string name="giga">Giga-Eveniment</string>
   <string name="earth">Earthcache</string>
   <string name="cito">Eveniment \"Caută Cutie Curăţă Gunoiul\" (CITO)</string>
   <string name="webcam">Cameră web</string>
@@ -282,6 +283,7 @@
   <string name="caches_move_all">Mută toate cutiile</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Exportă către Locus</string>
+  <string name="caches_map_mapswithme">MapsWithMe</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Tastează textul din imagine. Aceasta permite descărcarea coordonatelor cutiilor, acest lucru poate fi dezactivat în Opţiuni.</string>
   <string name="caches_recaptcha_hint">Textul din imagine</string>
@@ -640,6 +642,7 @@
   <string name="cache_menu_cachebeacon">Cutie Baliză</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Ceas \"Pebble\"</string>
+  <string name="cache_menu_mapswithme">MapsWithMe</string>
   <string name="cache_status">Stare</string>
   <string name="cache_status_offline_log">Jurnal salvat</string>
   <string name="cache_status_found">Găsit</string>
