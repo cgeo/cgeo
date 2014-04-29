@@ -2,11 +2,18 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>2014.04.29:</b>\n
+    <b>2014.04.30:</b>\n
+    <b>New features:</b>\n
+    · Support new cache-type: Giga-Event\n
+    · Integrate with MapsWithMe\n
+    · Import external spoiler images from a Garmin-style file structure\n
+    · Support more details in GPX export\n
     <b>Bugfixing:</b>\n
     · Fixed a number of crash scenarios/instabilities due to memory issues\n
     · Fixed problems when calling some external navigation apps\n
     · Fixed a crash when starting with a readonly cache directory\n
+    · Have "attended" as default log type on day of event\n
+    · Improved contact matching\n
     \n
     \n
     <a href="https://github.com/cgeo/cgeo/issues?milestone=29&amp;state=closed">Detailed list of all changes</a>\n
