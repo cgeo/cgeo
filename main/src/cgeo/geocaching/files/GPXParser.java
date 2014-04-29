@@ -23,6 +23,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 
+import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -34,8 +35,10 @@ import android.sax.RootElement;
 import android.sax.StartElementListener;
 import android.util.Xml;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -809,7 +812,8 @@ public abstract class GPXParser extends FileParser {
 
         try {
             progressStream = new ProgressInputStream(stream);
-            Xml.parse(progressStream, Xml.Encoding.UTF_8, root.getContentHandler());
+            BufferedReader reader = new BufferedReader(new InputStreamReader(progressStream, CharEncoding.UTF_8));
+            Xml.parse(new InvalidXMLCharacterFilterReader(reader), root.getContentHandler());
             return DataStore.loadCaches(result, EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
         } catch (final SAXException e) {
             throw new ParserException("Cannot parse .gpx file as GPX " + version + ": could not parse XML", e);
