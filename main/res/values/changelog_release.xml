@@ -12,8 +12,7 @@
     · Fixed a number of crash scenarios/instabilities due to memory issues\n
     · Fixed problems when calling some external navigation apps\n
     · Fixed a crash when starting with a readonly cache directory\n
-    · Have "attended" as default log type on day of event\n
-    · Improved contact matching\n
+    · Have <b>attended</b> as default log type on day of event\n
     \n
     \n
     <a href="https://github.com/cgeo/cgeo/issues?milestone=29&amp;state=closed">Detailed list of all changes</a>\n
