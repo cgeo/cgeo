@@ -18,6 +18,7 @@
   <string name="letterbox">Letterbox</string>
   <string name="event">Trobada</string>
   <string name="mega">Mega</string>
+  <string name="giga">Giga</string>
   <string name="earth">Earthcatxé</string>
   <string name="cito">Trobada CITO</string>
   <string name="webcam">Webcam</string>
@@ -282,6 +283,7 @@
   <string name="caches_move_all">Mou-ho tot</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Exporta al Locus</string>
+  <string name="caches_map_mapswithme">MapsWithMe</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Introduïu el text de la imatge. Això permet la baixada de les coordenades del catxé, que es pot desactivar a la configuració.</string>
   <string name="caches_recaptcha_hint">Text de la imatge</string>
@@ -641,6 +643,7 @@
   <string name="cache_menu_cachebeacon">Catxé de balisa</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
+  <string name="cache_menu_mapswithme">MapsWithMe</string>
   <string name="cache_status">Estat</string>
   <string name="cache_status_offline_log">Registre desat</string>
   <string name="cache_status_found">Trobat</string>
