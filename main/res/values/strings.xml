@@ -715,6 +715,7 @@
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Saved Log</string>
     <string name="cache_status_found">Found</string>
+    <string name="cache_not_status_found">Not Found</string>
     <string name="cache_status_archived">Archived</string>
     <string name="cache_status_disabled">Disabled</string>
     <string name="cache_status_premium">Premium Members only</string>
