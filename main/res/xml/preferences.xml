@@ -407,8 +407,8 @@
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_friendlogswanted"
-            android:summary="@string/init_summary_friendlogswanted"
-            android:title="@string/init_friendlogswanted" />
+            android:summary="@string/init_summary_friends_and_own_logs_wanted"
+            android:title="@string/init_friends_and_own_logs_wanted" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_opendetailslastpage"
