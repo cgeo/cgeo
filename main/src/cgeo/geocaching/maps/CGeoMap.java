@@ -1373,7 +1373,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
         List<Geocache> removeList = new ArrayList<Geocache>();
         for (Geocache cache : caches) {
-            if ((excludeMine && cache.isFound()) || (excludeMine && cache.isOwner()) || (excludeDisabled && cache.isDisabled())) {
+            if ((excludeMine && cache.isFound()) || (excludeMine && cache.isOwner()) || (excludeDisabled && cache.isDisabled()) || (excludeDisabled && cache.isArchived())) {
                 removeList.add(cache);
             }
         }

@@ -12,6 +12,7 @@ import cgeo.geocaching.gcvote.GCVote;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
+
 import rx.Observable;
 import rx.functions.Func1;
 import rx.functions.Func2;
@@ -218,7 +219,7 @@ public class SearchResult implements Parcelable {
         int excluded = 0;
         for (Geocache cache : caches) {
             // Is there any reason to exclude the cache from the list?
-            final boolean excludeCache = (excludeDisabled && cache.isDisabled()) ||
+            final boolean excludeCache = (excludeDisabled && (cache.isDisabled() || cache.isArchived())) ||
                     (excludeMine && (cache.isOwner() || cache.isFound())) ||
                     (!cacheType.contains(cache));
             if (excludeCache) {

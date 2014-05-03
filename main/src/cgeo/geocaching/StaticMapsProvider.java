@@ -11,6 +11,7 @@ import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -213,7 +214,7 @@ public final class StaticMapsProvider {
         url.append("marker_cache_").append(cache.getType().id);
         if (cache.isFound()) {
             url.append("_found");
-        } else if (cache.isDisabled()) {
+        } else if (cache.isDisabled() || cache.isArchived()) {
             url.append("_disabled");
         }
         url.append(".png");

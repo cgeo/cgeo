@@ -2895,6 +2895,7 @@ public class DataStore {
         }
         if (excludeDisabled) {
             where.append(" and ").append(dbTableCaches).append(".disabled == 0");
+            where.append(" and ").append(dbTableCaches).append(".archived == 0");
         }
         if (type != CacheType.ALL) {
             where.append(" and ").append(dbTableCaches).append(".type == '").append(type.id).append('\'');
