@@ -402,8 +402,6 @@
   <string name="init_signature_template_log">Text logu</string>
   <string name="init_ratingwanted">Načítat hodnocení keše z GCvote.com</string>
   <string name="init_summary_ratingwanted">Načítat hodnocení keše z GCvote.com</string>
-  <string name="init_friendlogswanted">Načítat doplňkový Logbook s logy od kámošů</string>
-  <string name="init_summary_friendlogswanted">Načítat doplňkový Logbook s logy od kámošů</string>
   <string name="init_openlastdetailspage">Otevřít detaily na naposledy použité stránce</string>
   <string name="init_summary_openlastdetailspage">Otevřít detaily na naposledy použité stránce</string>
   <string name="init_autoload">Automaticky načítat dlouhý popis</string>
@@ -589,7 +587,6 @@
   <string name="cache_waypoints_add">Přidat Bod trasy</string>
   <string name="cache_hint">Nápověda</string>
   <string name="cache_logs">Logbook</string>
-  <string name="cache_logsfriends">Logbook (Přátelé)</string>
   <string name="cache_dialog_loading_details">Načítání detailů keše…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Načítání stránky</string>
   <string name="cache_dialog_loading_details_status_details">Zpracovávání podrobností</string>

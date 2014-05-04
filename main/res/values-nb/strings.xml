@@ -395,8 +395,6 @@
   <string name="init_signature_template_log">Loggtekst</string>
   <string name="init_ratingwanted">GCvote-rangering</string>
   <string name="init_summary_ratingwanted">Last rangering for cachen fra GCvote.com</string>
-  <string name="init_friendlogswanted">Vis venners logger</string>
-  <string name="init_summary_friendlogswanted">Vis flere logger fra venner</string>
   <string name="init_openlastdetailspage">Sist brukte fane</string>
   <string name="init_summary_openlastdetailspage">Åpne detaljsiden til cacher på den siste brukte fanen</string>
   <string name="init_autoload">Last full beskrivelse automatisk</string>
@@ -578,7 +576,6 @@
   <string name="cache_waypoints_add">Legg til veipunkter</string>
   <string name="cache_hint">Hint</string>
   <string name="cache_logs">Loggbok</string>
-  <string name="cache_logsfriends">Loggbok (venner)</string>
   <string name="cache_dialog_loading_details">Laster cachens detaljer…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Laster siden</string>
   <string name="cache_dialog_loading_details_status_details">Behandler detaljer</string>

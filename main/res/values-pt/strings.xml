@@ -402,8 +402,6 @@
   <string name="init_signature_template_log">Texto de registo</string>
   <string name="init_ratingwanted">Carregar a pontuação da cache de GCvote.com</string>
   <string name="init_summary_ratingwanted">Carregar a pontuação da cache de GCvote.com</string>
-  <string name="init_friendlogswanted">Carregar página adicional de registos de amigos</string>
-  <string name="init_summary_friendlogswanted">Carregar página adicional de registos de amigos</string>
   <string name="init_openlastdetailspage">Abrir detalhes da última página vizualizada</string>
   <string name="init_summary_openlastdetailspage">Abrir detalhes da última página vizualizada</string>
   <string name="init_autoload">Carregar automaticamente a descrição longa</string>
@@ -586,7 +584,6 @@
   <string name="cache_waypoints_add">Adicionar ponto de referência</string>
   <string name="cache_hint">Pista</string>
   <string name="cache_logs">Logbook</string>
-  <string name="cache_logsfriends">Logbook (Amigos)</string>
   <string name="cache_dialog_loading_details">A carregar os detalhes da cache…</string>
   <string name="cache_dialog_loading_details_status_loadpage">A carregar a página</string>
   <string name="cache_dialog_loading_details_status_details">A processar os detalhes</string>

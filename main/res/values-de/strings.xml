@@ -404,8 +404,8 @@
   <string name="init_signature_template_log">Log text</string>
   <string name="init_ratingwanted">GCvote-Bewertung</string>
   <string name="init_summary_ratingwanted">Lade Cache-Bewertung von GCvote.com</string>
-  <string name="init_friendlogswanted">Logs von Freunden zeigen</string>
-  <string name="init_summary_friendlogswanted">Lade zusätzliche Logbuch-Seite für Logs von Freunden</string>
+  <string name="init_friends_and_own_logs_wanted">Eigene und Logs von Freunden zeigen</string>
+  <string name="init_summary_friends_and_own_logs_wanted">Lade zusätzliche Logbuch-Seiten für eigene und Logs von Freunden</string>
   <string name="init_openlastdetailspage">Zuletzt genutzte Seite</string>
   <string name="init_summary_openlastdetailspage">Öffne Details mit zuletzt genutzter Seite</string>
   <string name="init_autoload">Ausführliche Beschreibung</string>
@@ -588,7 +588,7 @@
   <string name="cache_waypoints_add">Wegpunkt hinzufügen</string>
   <string name="cache_hint">Hinweis</string>
   <string name="cache_logs">Logbuch</string>
-  <string name="cache_logsfriends">Logbuch (Freunde)</string>
+  <string name="cache_logs_friends_and_own">Logbuch (Freunde/Eigene)</string>
   <string name="cache_dialog_loading_details">Lade Cache-Details…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Lade Seite</string>
   <string name="cache_dialog_loading_details_status_details">Verarbeite Details</string>
@@ -644,6 +644,7 @@
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Gespeicherter Log</string>
   <string name="cache_status_found">Gefunden</string>
+  <string name="cache_not_status_found">Nicht gefunden</string>
   <string name="cache_status_archived">Archiviert</string>
   <string name="cache_status_disabled">Deaktiviert</string>
   <string name="cache_status_premium">Nur für Premium-Mitglieder</string>

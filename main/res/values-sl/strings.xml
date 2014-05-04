@@ -399,8 +399,6 @@
   <string name="init_signature_template_log">Vsebina zapisa</string>
   <string name="init_ratingwanted">GCvote ocene</string>
   <string name="init_summary_ratingwanted">Naloži ocene iz GCvote.com</string>
-  <string name="init_friendlogswanted">Naloži zapise prijateljev</string>
-  <string name="init_summary_friendlogswanted">Naloži tudi posebno stran zapisov mojih prijateljev</string>
   <string name="init_openlastdetailspage">Odpri nazadnje odprto stran</string>
   <string name="init_summary_openlastdetailspage">Pri podrobnostih zaklada vedno odpri zadnjo uporabljeno stran</string>
   <string name="init_autoload">Prikaži celoten opis</string>
@@ -583,7 +581,6 @@
   <string name="cache_waypoints_add">Dodaj točko</string>
   <string name="cache_hint">Namig</string>
   <string name="cache_logs">Dnevnik zapisov</string>
-  <string name="cache_logsfriends">Zapisi prijateljev</string>
   <string name="cache_dialog_loading_details">Nalaganje podatkov zaklada…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Nalaganje strani</string>
   <string name="cache_dialog_loading_details_status_details">Obdelujem podatke</string>

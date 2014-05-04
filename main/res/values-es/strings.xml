@@ -381,7 +381,6 @@
   <string name="init_signature_template_name">Nombre</string>
   <string name="init_signature_template_url">URL</string>
   <string name="init_ratingwanted">Clasificación de GCvote</string>
-  <string name="init_friendlogswanted">Mostrar registros de amigos</string>
   <string name="init_openlastdetailspage">Detalles de la última página</string>
   <string name="init_autoload">Autocargar descripción larga</string>
   <string name="init_summary_autoload">Autocargar descripción larga</string>

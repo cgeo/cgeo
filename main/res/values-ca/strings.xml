@@ -404,8 +404,6 @@
   <string name="init_signature_template_log">Text del registre</string>
   <string name="init_ratingwanted">Valoració del GCvote</string>
   <string name="init_summary_ratingwanted">Descarrega la valoració des de GCvote.com</string>
-  <string name="init_friendlogswanted">Mostra els registres d\'amics</string>
-  <string name="init_summary_friendlogswanted">Mostra els registres dels amics a una altra pàgina</string>
   <string name="init_openlastdetailspage">Obre l\'última pàgina de detalls</string>
   <string name="init_summary_openlastdetailspage">Obre els detalls amb l\'última pàgina utilitzada</string>
   <string name="init_autoload">Descripció llarga</string>
@@ -591,7 +589,6 @@
   <string name="cache_waypoints_add">Afegeix una fita</string>
   <string name="cache_hint">Pista</string>
   <string name="cache_logs">Llibre de registre</string>
-  <string name="cache_logsfriends">Llibre de registre (Amics)</string>
   <string name="cache_dialog_loading_details">S\'està carregant els detalls del catxé…</string>
   <string name="cache_dialog_loading_details_status_loadpage">S\'està carregant la pàgina</string>
   <string name="cache_dialog_loading_details_status_details">S\'està processant els detalls</string>
