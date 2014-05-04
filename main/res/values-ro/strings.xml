@@ -404,8 +404,6 @@
   <string name="init_signature_template_log">Text însemnare</string>
   <string name="init_ratingwanted">Voturi GCvote</string>
   <string name="init_summary_ratingwanted">Încarcă voturi de la GCvote.com</string>
-  <string name="init_friendlogswanted">Arată însemnările prietenilor</string>
-  <string name="init_summary_friendlogswanted">Afişează o pagină suplimentară cu însemnări de la prieteni</string>
   <string name="init_openlastdetailspage">Ultima pagină cu detalii</string>
   <string name="init_summary_openlastdetailspage">Arată detaliile de pe ultima pagină afişată</string>
   <string name="init_autoload">Descriere completă</string>
@@ -590,7 +588,6 @@
   <string name="cache_waypoints_add">Adaugă punct</string>
   <string name="cache_hint">Indiciu</string>
   <string name="cache_logs">Jurnal</string>
-  <string name="cache_logsfriends">Jurnal (Prieteni)</string>
   <string name="cache_dialog_loading_details">Încărcare detaliile cutiei…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Încărcare pagină</string>
   <string name="cache_dialog_loading_details_status_details">Prelucrare detalii</string>

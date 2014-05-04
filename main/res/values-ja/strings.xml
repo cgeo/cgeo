@@ -381,8 +381,6 @@
   <string name="init_signature_template_url">URL</string>
   <string name="init_ratingwanted">GCvote評価</string>
   <string name="init_summary_ratingwanted">キャッシュの評価をGCvote.comから取得</string>
-  <string name="init_friendlogswanted">友達のログページ</string>
-  <string name="init_summary_friendlogswanted">友達の書いたログを別ページに表示</string>
   <string name="init_openlastdetailspage">最後に表示したページ</string>
   <string name="init_summary_openlastdetailspage">キャッシュ情報の表示では最後に表示したページを開く</string>
   <string name="init_autoload">詳細表示</string>
@@ -538,7 +536,6 @@
   <string name="cache_waypoints_add">ウェイポイントを追加</string>
   <string name="cache_hint">ヒント</string>
   <string name="cache_logs">ログブック</string>
-  <string name="cache_logsfriends">ログブック(友達)</string>
   <string name="cache_dialog_loading_details">キャッシュの詳細をロード中…</string>
   <string name="cache_dialog_loading_details_status_loadpage">ページをロード中</string>
   <string name="cache_dialog_loading_details_status_details">詳細を処理中</string>

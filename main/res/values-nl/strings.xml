@@ -402,8 +402,6 @@
   <string name="init_signature_template_log">Log tekst</string>
   <string name="init_ratingwanted">GCvote.com waardering</string>
   <string name="init_summary_ratingwanted">Laad cachewaardering van GCvote.com</string>
-  <string name="init_friendlogswanted">Lange omschrijving</string>
-  <string name="init_summary_friendlogswanted">Laad extra logbook pagina voor logs van vrienden</string>
   <string name="init_openlastdetailspage">Laad details met laatst gebruikte pagina</string>
   <string name="init_summary_openlastdetailspage">Laad details met laatst gebruikte pagina</string>
   <string name="init_autoload">Lange omschrijving</string>
@@ -589,7 +587,6 @@
   <string name="cache_waypoints_add">Waypoint toevoegen</string>
   <string name="cache_hint">Hint</string>
   <string name="cache_logs">Logboek</string>
-  <string name="cache_logsfriends">Logboek (vrienden)</string>
   <string name="cache_dialog_loading_details">Cache details laden…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Pagina laden</string>
   <string name="cache_dialog_loading_details_status_details">Verwerken details</string>

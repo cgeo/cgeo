@@ -399,8 +399,6 @@
   <string name="init_signature_template_log">Testo di Log</string>
   <string name="init_ratingwanted">Rating da GCvote.com</string>
   <string name="init_summary_ratingwanted">Carica il rating del cache da GCvote.com</string>
-  <string name="init_friendlogswanted">Visualizza log dei miei amici</string>
-  <string name="init_summary_friendlogswanted">Carica logbook addizionale con i log dei miei amici</string>
   <string name="init_openlastdetailspage">Carica ultima pagina usata nei dettagli</string>
   <string name="init_summary_openlastdetailspage">Ricorda l\'ultima pagina usata nei dettagli</string>
   <string name="init_autoload">Descrizione estesa</string>
@@ -583,7 +581,6 @@
   <string name="cache_waypoints_add">Aggiungi waypoint</string>
   <string name="cache_hint">Aiuto (spoiler)</string>
   <string name="cache_logs">Logbook</string>
-  <string name="cache_logsfriends">Log amici</string>
   <string name="cache_dialog_loading_details">Caricamento dettagli del cache…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Caricamento pagina</string>
   <string name="cache_dialog_loading_details_status_details">Elaborazione dettagli</string>

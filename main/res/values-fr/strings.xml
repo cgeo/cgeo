@@ -402,8 +402,6 @@
   <string name="init_signature_template_log">Texte du journal</string>
   <string name="init_ratingwanted">Charger la note depuis GCvote.com</string>
   <string name="init_summary_ratingwanted">Charger la note depuis GCvote.com</string>
-  <string name="init_friendlogswanted">Charger le carnet (amis)</string>
-  <string name="init_summary_friendlogswanted">Charger le carnet (amis)</string>
   <string name="init_openlastdetailspage">Réouvrir les détails à la dernière page ouverte</string>
   <string name="init_summary_openlastdetailspage">Réouvrir les détails à la dernière page ouverte</string>
   <string name="init_autoload">Afficher automatiquement les descriptions longues</string>
@@ -586,7 +584,6 @@
   <string name="cache_waypoints_add">Ajouter une étape</string>
   <string name="cache_hint">Indice</string>
   <string name="cache_logs">Carnet de bord</string>
-  <string name="cache_logsfriends">Carnet (amis)</string>
   <string name="cache_dialog_loading_details">Chargement des détails…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Chargement de la page</string>
   <string name="cache_dialog_loading_details_status_details">Analyse</string>

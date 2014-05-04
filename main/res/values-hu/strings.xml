@@ -302,8 +302,6 @@
   <string name="init_signature_template_owner">Tulajdonos</string>
   <string name="init_ratingwanted">Értékelés betöltése a GCvote.com-ról</string>
   <string name="init_summary_ratingwanted">Értékelés betöltése a GCvote.com-ról</string>
-  <string name="init_friendlogswanted">További logbook oldal betöltése a barátok logjainak.</string>
-  <string name="init_summary_friendlogswanted">További logbook oldal betöltése a barátok logjainak.</string>
   <string name="init_openlastdetailspage">Az utoljára használt oldal részleteinek betöltése</string>
   <string name="init_summary_openlastdetailspage">Az utoljára használt oldal részleteinek betöltése</string>
   <string name="init_autoload">Hosszú leírás automatikus betöltése</string>
@@ -431,7 +429,6 @@
   <string name="cache_waypoints_add">Útpont hozzáadása</string>
   <string name="cache_hint">Segítség</string>
   <string name="cache_logs">Láda napló</string>
-  <string name="cache_logsfriends">Logbook (Barátok)</string>
   <string name="cache_dialog_loading_details">Láda adatainak betöltése…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Oldal betöltése</string>
   <string name="cache_dialog_loading_details_status_details">Részletek feldolgozása</string>

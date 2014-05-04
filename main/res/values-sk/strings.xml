@@ -402,8 +402,6 @@
   <string name="init_signature_template_log">Zápis do logu</string>
   <string name="init_ratingwanted">Načítať hodnotenie skrýše z GCvote.com</string>
   <string name="init_summary_ratingwanted">Načítať hodnotenie skrýše z GCvote.com</string>
-  <string name="init_friendlogswanted">Načítať dodatočnú stránku s logmi od priateľov</string>
-  <string name="init_summary_friendlogswanted">Načítať dodatočnú stránku s logmi od priateľov</string>
   <string name="init_openlastdetailspage">Otvoriť detaily na naposledy použitej stránke</string>
   <string name="init_summary_openlastdetailspage">Otvoriť detaily na naposledy použitej stránke</string>
   <string name="init_autoload">Automatické načítanie dlhého popisu</string>
@@ -586,7 +584,6 @@
   <string name="cache_waypoints_add">Pridať bod</string>
   <string name="cache_hint">Nápoveda</string>
   <string name="cache_logs">Logbook</string>
-  <string name="cache_logsfriends">Logbook (priatelia)</string>
   <string name="cache_dialog_loading_details">Načítanie detailov skrýše…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Načítanie stránky</string>
   <string name="cache_dialog_loading_details_status_details">Spracovanie detailov</string>

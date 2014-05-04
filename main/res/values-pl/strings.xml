@@ -399,8 +399,6 @@
   <string name="init_signature_template_log">Wpis</string>
   <string name="init_ratingwanted">Załaduj ocenę skrzynki z GCvote.com</string>
   <string name="init_summary_ratingwanted">Załaduj ocenę skrzynki z GCvote.com</string>
-  <string name="init_friendlogswanted">Załaduj dodatkowy dziennik dla wpisów od przyjaciół</string>
-  <string name="init_summary_friendlogswanted">Załaduj dodatkowy dziennik dla wpisów od przyjaciół</string>
   <string name="init_openlastdetailspage">Otwórz szczegóły ostatnio używanej strony</string>
   <string name="init_summary_openlastdetailspage">Otwórz szczegóły ostatnio używanej strony</string>
   <string name="init_autoload">Automatyczne ładowanie długich opisów</string>
@@ -583,7 +581,6 @@
   <string name="cache_waypoints_add">Dodaj punkt nawigacji</string>
   <string name="cache_hint">Wskazówka</string>
   <string name="cache_logs">Dziennik</string>
-  <string name="cache_logsfriends">Dziennik (Przyjaciele)</string>
   <string name="cache_dialog_loading_details">Ładuję szczegóły skrzynki…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Ładuję stronę</string>
   <string name="cache_dialog_loading_details_status_details">Przetwarzam szczegóły</string>

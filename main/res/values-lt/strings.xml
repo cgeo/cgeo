@@ -400,8 +400,6 @@
   <string name="init_signature_template_log">Įrašo tekstas</string>
   <string name="init_ratingwanted">GCvote reitingas</string>
   <string name="init_summary_ratingwanted">Įkelti slėptuvės reitingą iš GCvote.com</string>
-  <string name="init_friendlogswanted">Rodyti draugų įrašus</string>
-  <string name="init_summary_friendlogswanted">Rodyti papildomą draugų įrašų puslapį</string>
   <string name="init_openlastdetailspage">Paskutinis naudotas puslapis</string>
   <string name="init_summary_openlastdetailspage">Atidaryti kitą slėptuvę nuo paskutinio naudoto puslapio</string>
   <string name="init_autoload">Ilgas aprašymas</string>
@@ -583,7 +581,6 @@
   <string name="cache_waypoints_add">Pridėti papildomą tašką</string>
   <string name="cache_hint">Užuomina</string>
   <string name="cache_logs">Įrašai</string>
-  <string name="cache_logsfriends">Draugų įrašai</string>
   <string name="cache_dialog_loading_details">Įkeliama slėptuvės informacija…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Įkeliamas puslapis</string>
   <string name="cache_dialog_loading_details_status_details">Apdorojama informacija</string>
