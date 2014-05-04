@@ -681,7 +681,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         DETAILS(R.string.detail),
         DESCRIPTION(R.string.cache_description),
         LOGS(R.string.cache_logs),
-        LOGSFRIENDS(R.string.cache_logsfriends),
+        LOGSFRIENDS(R.string.cache_logs_friends_and_own),
         WAYPOINTS(R.string.cache_waypoints),
         INVENTORY(R.string.cache_inventory),
         IMAGES(R.string.cache_images);

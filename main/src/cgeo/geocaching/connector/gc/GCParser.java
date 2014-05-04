@@ -732,7 +732,7 @@ public abstract class GCParser {
 
         cache.setDetailedUpdatedNow();
         searchResult.addAndPutInCache(Collections.singletonList(cache));
-        DataStore.saveLogsWithoutTransaction(cache.getGeocode(), getLogsFromDetails(page, false));
+        DataStore.saveLogsWithoutTransaction(cache.getGeocode(), getLogsFromDetails(page));
         return searchResult;
     }
 
@@ -1622,55 +1622,73 @@ public abstract class GCParser {
      *
      * @param page
      *            the text of the details page
-     * @param friends
-     *            return friends logs only (will require a network request)
      * @return a list of log entries or <code>null</code> if the logs could not be retrieved
      *
      */
     @Nullable
-    private static List<LogEntry> getLogsFromDetails(final String page, final boolean friends) {
-        String rawResponse;
-
-        if (friends) {
-            final MatcherWrapper userTokenMatcher = new MatcherWrapper(GCConstants.PATTERN_USERTOKEN, page);
-            if (!userTokenMatcher.find()) {
-                Log.e("GCParser.loadLogsFromDetails: unable to extract userToken");
-                return null;
-            }
-
-            final String userToken = userTokenMatcher.group(1);
-            final Parameters params = new Parameters(
-                    "tkn", userToken,
-                    "idx", "1",
-                    "num", String.valueOf(GCConstants.NUMBER_OF_LOGS),
-                    "decrypt", "true",
-                    // "sp", Boolean.toString(personal), // personal logs
-                    "sf", Boolean.toString(friends));
-
-            final HttpResponse response = Network.getRequest("http://www.geocaching.com/seek/geocache.logbook", params);
-            if (response == null) {
-                Log.e("GCParser.loadLogsFromDetails: cannot log logs, response is null");
-                return null;
-            }
-            final int statusCode = response.getStatusLine().getStatusCode();
-            if (statusCode != 200) {
-                Log.e("GCParser.loadLogsFromDetails: error " + statusCode + " when requesting log information");
-                return null;
-            }
-            rawResponse = Network.getResponseData(response);
-            if (rawResponse == null) {
-                Log.e("GCParser.loadLogsFromDetails: unable to read whole response");
-                return null;
-            }
-        } else {
-            // extract embedded JSON data from page
-            rawResponse = TextUtils.getMatch(page, GCConstants.PATTERN_LOGBOOK, "");
-        }
-
-        return parseLogs(friends, rawResponse);
+    private static List<LogEntry> getLogsFromDetails(final String page) {
+        // extract embedded JSON data from page
+        String rawResponse = TextUtils.getMatch(page, GCConstants.PATTERN_LOGBOOK, "");
+        return parseLogs(false, rawResponse);
     }
 
-    private static List<LogEntry> parseLogs(final boolean friends, String rawResponse) {
+    private enum SpecialLogs {
+        FRIENDS("sf"),
+        OWN("sp");
+
+        String paramName;
+
+        private SpecialLogs(String paramName) {
+            this.paramName = paramName;
+        }
+
+        private String getParamName() {
+            return this.paramName;
+        }
+    }
+
+    /**
+     * Extract special logs (friends, own) through seperate request.
+     *
+     * @param page
+     *            The page to extrat userToken from
+     * @param logType
+     *            The logType to request
+     * @return List<LogEntry> The list
+     */
+    private static List<LogEntry> getSpecialLogs(final String page, final SpecialLogs logType) {
+        final MatcherWrapper userTokenMatcher = new MatcherWrapper(GCConstants.PATTERN_USERTOKEN, page);
+        if (!userTokenMatcher.find()) {
+            Log.e("GCParser.loadLogsFromDetails: unable to extract userToken");
+            return null;
+        }
+
+        final String userToken = userTokenMatcher.group(1);
+        final Parameters params = new Parameters(
+                "tkn", userToken,
+                "idx", "1",
+                "num", String.valueOf(GCConstants.NUMBER_OF_LOGS),
+                logType.getParamName(), Boolean.toString(Boolean.TRUE),
+                "decrypt", "true");
+        final HttpResponse response = Network.getRequest("http://www.geocaching.com/seek/geocache.logbook", params);
+        if (response == null) {
+            Log.e("GCParser.loadLogsFromDetails: cannot log logs, response is null");
+            return null;
+        }
+        final int statusCode = response.getStatusLine().getStatusCode();
+        if (statusCode != 200) {
+            Log.e("GCParser.loadLogsFromDetails: error " + statusCode + " when requesting log information");
+            return null;
+        }
+        String rawResponse = Network.getResponseData(response);
+        if (rawResponse == null) {
+            Log.e("GCParser.loadLogsFromDetails: unable to read whole response");
+            return null;
+        }
+        return parseLogs(true, rawResponse);
+    }
+
+    private static List<LogEntry> parseLogs(final boolean markAsFriendsLog, String rawResponse) {
         final List<LogEntry> logs = new ArrayList<LogEntry>();
 
         // for non logged in users the log book is not shown
@@ -1713,7 +1731,7 @@ public abstract class GCParser {
                         LogType.getByIconName(logIconName),
                         logText);
                 logDone.found = entry.getInt("GeocacheFindCount");
-                logDone.friend = friends;
+                logDone.friend = markAsFriendsLog;
 
                 final JSONArray images = entry.getJSONArray("Images");
                 for (int i = 0; i < images.length(); i++) {
@@ -1830,17 +1848,10 @@ public abstract class GCParser {
         //cache.setLogs(loadLogsFromDetails(page, cache, false));
         if (Settings.isFriendLogsWanted()) {
             CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
-            final List<LogEntry> friendLogs = getLogsFromDetails(page, true);
-            if (friendLogs != null && !friendLogs.isEmpty()) {
-                // create new list, as the existing log list is immutable
-                ArrayList<LogEntry> mergedLogs = new ArrayList<LogEntry>(cache.getLogs());
-                for (final LogEntry log : friendLogs) {
-                    if (mergedLogs.contains(log)) {
-                        mergedLogs.get(mergedLogs.indexOf(log)).friend = true;
-                    } else {
-                        mergedLogs.add(log);
-                    }
-                }
+            final List<LogEntry> friendLogs = getSpecialLogs(page, SpecialLogs.FRIENDS);
+            final List<LogEntry> ownLogs = getSpecialLogs(page, SpecialLogs.OWN);
+            final List<LogEntry> mergedLogs = new ArrayList<LogEntry>(cache.getLogs());
+            if (mergeFriendsLogs(mergedLogs, friendLogs) | mergeFriendsLogs(mergedLogs, ownLogs)) {
                 DataStore.saveLogsWithoutTransaction(cache.getGeocode(), mergedLogs);
             }
         }
@@ -1857,6 +1868,30 @@ public abstract class GCParser {
                 cache.setMyVote(rating.getMyVote());
             }
         }
+    }
+
+    /**
+     * Merge log entries and mark them as friends logs (personal and friends) to identify
+     * them on friends/personal logs tab.
+     *
+     * @param mergedLogs
+     *            the list to merge logs with
+     * @param logsToMerge
+     *            the list of logs to merge
+     * @return true / false merged done
+     */
+    private static boolean mergeFriendsLogs(final List<LogEntry> mergedLogs, List<LogEntry> logsToMerge) {
+        if (logsToMerge != null && !logsToMerge.isEmpty()) {
+            for (final LogEntry log : logsToMerge) {
+                if (mergedLogs.contains(log)) {
+                    mergedLogs.get(mergedLogs.indexOf(log)).friend = true;
+                } else {
+                    mergedLogs.add(log);
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     public static boolean uploadModifiedCoordinates(Geocache cache, Geopoint wpt) {
