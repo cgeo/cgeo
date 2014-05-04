@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.oc;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.ICache;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ILoggingManager;
@@ -146,6 +147,11 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
             userInfo = new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.NOT_SUPPORTED);
         }
         return userInfo.getStatus() == UserInfoStatus.SUCCESSFUL;
+    }
+
+    @Override
+    public boolean isOwner(ICache cache) {
+        return StringUtils.equals(cache.getOwnerDisplayName(), getUserName());
     }
 
     @Override
