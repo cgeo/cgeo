@@ -240,7 +240,7 @@
   <string name="caches_more_caches_no">Daugiau slėptuvių nėra</string>
   <string name="caches_more_caches_loading">Įkeliamos slėptuvės…</string>
   <string name="caches_more_caches_currently">dabar</string>
-  <string name="caches_downloading">Atsisiunčiamos slėptuvės…\nUžtruks</string>
+  <string name="caches_downloading">Atnaujinamos slėptuvės…\nUžtruks</string>
   <string name="caches_eta_ltm">mažiau nei minutę</string>
   <string name="caches_store_offline">Išsaugoti slėptuves</string>
   <string name="caches_store_selected">Išsaugoti pasirinktas</string>
@@ -400,6 +400,8 @@
   <string name="init_signature_template_log">Įrašo tekstas</string>
   <string name="init_ratingwanted">GCvote reitingas</string>
   <string name="init_summary_ratingwanted">Įkelti slėptuvės reitingą iš GCvote.com</string>
+  <string name="init_friends_and_own_logs_wanted">Rodyti draugų/savo</string>
+  <string name="init_summary_friends_and_own_logs_wanted">Rodyti papildomą draugų ir savų įrašų puslapį</string>
   <string name="init_openlastdetailspage">Paskutinis naudotas puslapis</string>
   <string name="init_summary_openlastdetailspage">Atidaryti kitą slėptuvę nuo paskutinio naudoto puslapio</string>
   <string name="init_autoload">Ilgas aprašymas</string>
@@ -581,6 +583,7 @@
   <string name="cache_waypoints_add">Pridėti papildomą tašką</string>
   <string name="cache_hint">Užuomina</string>
   <string name="cache_logs">Įrašai</string>
+  <string name="cache_logs_friends_and_own">Draugų/savi įrašai</string>
   <string name="cache_dialog_loading_details">Įkeliama slėptuvės informacija…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Įkeliamas puslapis</string>
   <string name="cache_dialog_loading_details_status_details">Apdorojama informacija</string>
@@ -595,7 +598,7 @@
   <string name="cache_dialog_offline_drop_title">Pašalinti</string>
   <string name="cache_dialog_offline_drop_message">Slėptuvė pašalinama iš prietaiso atminties…</string>
   <string name="cache_dialog_refresh_title">Atnaujinti</string>
-  <string name="cache_dialog_refresh_message">Slėptuvės informacija atsiunčiama iš naujo…</string>
+  <string name="cache_dialog_refresh_message">Atnaujinama slėptuvės informacija…</string>
   <string name="cache_dialog_watchlist_add_title">Įtraukti į stebimų slėptuvių sąrašą</string>
   <string name="cache_dialog_watchlist_add_message">Slėptuvė įtraukiama į stebimų slėptuvių sąrašą…</string>
   <string name="cache_dialog_watchlist_remove_title">Pašalinti iš stebimų slėptuvių sąrašo</string>
@@ -635,6 +638,7 @@
   <string name="cache_status">Būsena</string>
   <string name="cache_status_offline_log">Įrašas išsaugotas</string>
   <string name="cache_status_found">Rasta</string>
+  <string name="cache_not_status_found">Nerasta</string>
   <string name="cache_status_archived">Suarchyvuota</string>
   <string name="cache_status_disabled">Išjungta</string>
   <string name="cache_status_premium">Tik Premium nariams</string>
