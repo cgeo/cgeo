@@ -2,20 +2,23 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release:</b>\n
+    · New: 
+    · Fix:
+    \n
+    \n
     <b>2014.04.30:</b>\n
-    <b>New features:</b>\n
-    · Support new cache-type: Giga-Event\n
-    · Integrate with MapsWithMe\n
-    · Import external spoiler images from a Garmin-style file structure\n
-    · Support more details in GPX export\n
-    <b>Bugfixing:</b>\n
-    · Fixed a number of crash scenarios/instabilities due to memory issues\n
-    · Fixed problems when calling some external navigation apps\n
-    · Fixed a crash when starting with a readonly cache directory\n
-    · Have <b>attended</b> as default log type on day of event\n
+    · New: Support new cache type: Giga Event\n
+    · New: Integrate with MapsWithMe\n
+    · New: Import external spoiler images from a Garmin-style file structure\n
+    · New: Support more details in GPX export\n
+    · Fix: A number of crash scenarios/instabilities due to memory issues\n
+    · Fix: Problems when calling some external navigation apps\n
+    · Fix: Crash when starting with a readonly cache directory\n
+    · New: Have <b>attended</b> as default log type on day of event\n
     \n
     \n
-    <a href="https://github.com/cgeo/cgeo/issues?milestone=29&amp;state=closed">Detailed list of all changes</a>\n
+    <a href="https://github.com/cgeo/cgeo/issues?milestone=30&amp;state=closed">Detailed list of all changes</a>\n
     \n
     <b>Old releases</b>\n
     · Please refer to the release notes on the <a href="http://www.cgeo.org">c:geo-website</a>.\n
