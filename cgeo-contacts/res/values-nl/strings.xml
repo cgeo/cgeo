@@ -3,4 +3,5 @@
 <resources>
   <string name="app_name">c:geo contacten (plug-in)</string>
   <string name="contact_not_found">Contact met alias/bijnaam %s niet gevonden. Voeg hem (eerst) toe aan je telefoon-contacten.</string>
+  <string name="multiple_matches">Meerdere overeenkomsten</string>
 </resources>
