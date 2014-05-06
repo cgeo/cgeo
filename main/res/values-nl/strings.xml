@@ -18,6 +18,7 @@
   <string name="letterbox">Letterbox hybrid</string>
   <string name="event">Event cache</string>
   <string name="mega">Mega-event cache</string>
+  <string name="giga">Giga-Event Cache</string>
   <string name="earth">Earthcache</string>
   <string name="cito">Cache in trash out event</string>
   <string name="webcam">Webcam cache</string>
@@ -282,6 +283,7 @@
   <string name="caches_move_all">Verplaats alle</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Exporteer naar Locus</string>
+  <string name="caches_map_mapswithme">MapsWithMe</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Vul de tekst uit de afbeelding in. Dit is nodig voor het downloaden van de coördinaten van de caches. Dit is optioneel en kan in de instellingen uitgeschakeld worden.</string>
   <string name="caches_recaptcha_hint">Tekst uit de afbeelding</string>
@@ -402,6 +404,8 @@
   <string name="init_signature_template_log">Log tekst</string>
   <string name="init_ratingwanted">GCvote.com waardering</string>
   <string name="init_summary_ratingwanted">Laad cachewaardering van GCvote.com</string>
+  <string name="init_friends_and_own_logs_wanted">Toon eigen/van vrienden</string>
+  <string name="init_summary_friends_and_own_logs_wanted">Toon additionele logboek pagina voor eigen en vrienden logs</string>
   <string name="init_openlastdetailspage">Laad details met laatst gebruikte pagina</string>
   <string name="init_summary_openlastdetailspage">Laad details met laatst gebruikte pagina</string>
   <string name="init_autoload">Lange omschrijving</string>
@@ -587,6 +591,7 @@
   <string name="cache_waypoints_add">Waypoint toevoegen</string>
   <string name="cache_hint">Hint</string>
   <string name="cache_logs">Logboek</string>
+  <string name="cache_logs_friends_and_own">Vrienden/Eigen Logs</string>
   <string name="cache_dialog_loading_details">Cache details laden…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Pagina laden</string>
   <string name="cache_dialog_loading_details_status_details">Verwerken details</string>
@@ -638,9 +643,11 @@
   <string name="cache_menu_cachebeacon">Cache baken</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
+  <string name="cache_menu_mapswithme">MapsWithMe</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Log opgeslagen</string>
   <string name="cache_status_found">Gevonden</string>
+  <string name="cache_not_status_found">Niet gevonden</string>
   <string name="cache_status_archived">Gearchiveerd</string>
   <string name="cache_status_disabled">Uitgeschakeld</string>
   <string name="cache_status_premium">Alleen voor premium leden</string>
