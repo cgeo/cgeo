@@ -18,6 +18,7 @@
   <string name="letterbox">Hybrydowa Letterbox</string>
   <string name="event">Wydarzenie</string>
   <string name="mega">Mega-Wydarzenie</string>
+  <string name="giga">Giga-Wydarzenie</string>
   <string name="earth">Earthcache</string>
   <string name="cito">CITO</string>
   <string name="webcam">Skrzynka Webcam</string>
@@ -213,7 +214,7 @@
   <string name="info_select_logimage_cancelled">Wybór obrazu został anulowany.</string>
   <string name="info_stored_image">Nowy obraz zapisany w:</string>
   <string name="info_storing_static_maps">Próbuję zapisać mapy statyczne</string>
-  <string name="loc_last">Ostatnia znana pozycja</string>
+  <string name="loc_last">Ostatnia pozycja</string>
   <string name="loc_net">Sieć</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
@@ -299,8 +300,8 @@
   <string name="caches_filter_popularity">Ulubione</string>
   <string name="caches_filter_popularity_ratio">Ulubione [%]</string>
   <string name="caches_removing_from_history">Usuwam z Historii…</string>
-  <string name="caches_clear_offlinelogs">Usuń logi offline</string>
-  <string name="caches_clear_offlinelogs_progress">Usuwanie logów offline</string>
+  <string name="caches_clear_offlinelogs">Usuń wpisy offline</string>
+  <string name="caches_clear_offlinelogs_progress">Usuwanie wpisów offline</string>
   <string name="list_menu">Lista</string>
   <string name="list_menu_create">Utwórz nową listę</string>
   <string name="list_menu_drop">Usuń aktualną listę</string>
@@ -399,6 +400,8 @@
   <string name="init_signature_template_log">Wpis</string>
   <string name="init_ratingwanted">Załaduj ocenę skrzynki z GCvote.com</string>
   <string name="init_summary_ratingwanted">Załaduj ocenę skrzynki z GCvote.com</string>
+  <string name="init_friends_and_own_logs_wanted">Pokaż przyjaciół/własne</string>
+  <string name="init_summary_friends_and_own_logs_wanted">Wyświetl dodatkowy dziennik dla wpisów własnych i przyjaciół</string>
   <string name="init_openlastdetailspage">Otwórz szczegóły ostatnio używanej strony</string>
   <string name="init_summary_openlastdetailspage">Otwórz szczegóły ostatnio używanej strony</string>
   <string name="init_autoload">Automatyczne ładowanie długich opisów</string>
@@ -499,7 +502,7 @@
   <string name="feature_description">Podane funkcje <b>online</b> na tej stronie są wspierane przez c:geo (w porównaniu do funkcji offline):</string>
   <string name="feature_personal_notes">Notatka osobista</string>
   <string name="feature_online_logging">Wpisy online</string>
-  <string name="feature_log_images">Załączanie zdjęć do logów</string>
+  <string name="feature_log_images">Załączanie zdjęć do wpisów</string>
   <string name="feature_watch_list">Listy obserwowanych skrzynek</string>
   <string name="feature_own_coordinates">Przechowywanie zmodyfikowanych współrzędnych</string>
   <string name="feature_search_keyword">Szukanie po słowie kluczowym</string>
@@ -581,6 +584,7 @@
   <string name="cache_waypoints_add">Dodaj punkt nawigacji</string>
   <string name="cache_hint">Wskazówka</string>
   <string name="cache_logs">Dziennik</string>
+  <string name="cache_logs_friends_and_own">Wpisy przyjaciół/własne</string>
   <string name="cache_dialog_loading_details">Ładuję szczegóły skrzynki…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Ładuję stronę</string>
   <string name="cache_dialog_loading_details_status_details">Przetwarzam szczegóły</string>
@@ -635,6 +639,7 @@
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Zapamiętany wpis</string>
   <string name="cache_status_found">Znaleziona</string>
+  <string name="cache_not_status_found">Nie znaleziono</string>
   <string name="cache_status_archived">Zarchiwizowana</string>
   <string name="cache_status_disabled">Niedostępna</string>
   <string name="cache_status_premium">Tylko dla użytkowników Premium</string>
