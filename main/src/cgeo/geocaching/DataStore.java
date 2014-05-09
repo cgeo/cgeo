@@ -2361,6 +2361,10 @@ public class DataStore {
             // cleaned. TO BE REMOVED AFTER 2015-03-24.
             Log.d("Database clean: removing obsolete log images records");
             database.delete(dbTableLogImages, "log_id NOT IN (SELECT _id FROM " + dbTableLogs + ")", null);
+
+            // Try to reclaim unused space by compacting the database.
+            Log.d("Database clean: vacuuming the freed space");
+            database.execSQL("VACUUM");
         } catch (final Exception e) {
             Log.w("DataStore.clean", e);
         }
