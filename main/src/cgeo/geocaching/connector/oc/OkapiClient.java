@@ -328,8 +328,11 @@ final class OkapiClient {
             parseCoreCache(response, cache);
 
             // not used: url
-            final JSONObject owner = response.getJSONObject(CACHE_OWNER);
-            cache.setOwnerDisplayName(parseUser(owner));
+            final JSONObject ownerObject = response.getJSONObject(CACHE_OWNER);
+            final String owner = parseUser(ownerObject);
+            cache.setOwnerDisplayName(owner);
+            // OpenCaching has no distinction between user id and user display name. Set the ID anyway to simplify c:geo workflows.
+            cache.setOwnerUserId(owner);
 
             cache.getLogCounts().put(LogType.FOUND_IT, response.getInt(CACHE_FOUNDS));
             cache.getLogCounts().put(LogType.DIDNT_FIND_IT, response.getInt(CACHE_NOTFOUNDS));
