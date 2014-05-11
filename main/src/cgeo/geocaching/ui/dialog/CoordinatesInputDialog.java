@@ -1,17 +1,18 @@
 package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.Settings.CoordInputFormatEnum;
 import cgeo.geocaching.utils.EditUtils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -25,9 +26,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.lang.ref.WeakReference;
+
 public class CoordinatesInputDialog extends NoTitleDialog {
 
-    final private AbstractActivity context;
+    final private WeakReference<AbstractActivity> context;
     final private IGeoData geo;
     final private Geocache cache;
     private Geopoint gp;
@@ -43,9 +46,9 @@ public class CoordinatesInputDialog extends NoTitleDialog {
 
     private CoordInputFormatEnum currentFormat = null;
 
-    public CoordinatesInputDialog(final AbstractActivity context, final Geocache cache, final Geopoint gp, final IGeoData geo) {
+    public CoordinatesInputDialog(final @NonNull AbstractActivity context, final Geocache cache, final Geopoint gp, final IGeoData geo) {
         super(context, ActivityMixin.getDialogTheme());
-        this.context = context;
+        this.context = new WeakReference<AbstractActivity>(context);
         this.geo = geo;
         this.cache = cache;
 
@@ -66,7 +69,7 @@ public class CoordinatesInputDialog extends NoTitleDialog {
 
         final Spinner spinner = (Spinner) findViewById(R.id.spinnerCoordinateFormats);
         final ArrayAdapter<CharSequence> adapter =
-                ArrayAdapter.createFromResource(context,
+                ArrayAdapter.createFromResource(context.get(),
                         R.array.waypoint_coordinate_formats,
                         android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -371,7 +374,8 @@ public class CoordinatesInputDialog extends NoTitleDialog {
             // Signaled and returned below
         }
         if (signalError) {
-            context.showToast(context.getResources().getString(R.string.err_parse_lat_lon));
+            final AbstractActivity activity = context.get();
+            activity.showToast(activity.getResources().getString(R.string.err_parse_lat_lon));
         }
         return false;
     }
@@ -423,7 +427,8 @@ public class CoordinatesInputDialog extends NoTitleDialog {
         @Override
         public void onClick(View v) {
             if (geo == null || geo.getCoords() == null) {
-                context.showToast(context.getResources().getString(R.string.err_point_unknown_position));
+                final AbstractActivity activity = context.get();
+                activity.showToast(activity.getResources().getString(R.string.err_point_unknown_position));
                 return;
             }
 
@@ -437,7 +442,8 @@ public class CoordinatesInputDialog extends NoTitleDialog {
         @Override
         public void onClick(View v) {
             if (cache == null || cache.getCoords() == null) {
-                context.showToast(context.getResources().getString(R.string.err_location_unknown));
+                final AbstractActivity activity = context.get();
+                activity.showToast(activity.getResources().getString(R.string.err_location_unknown));
                 return;
             }
 
