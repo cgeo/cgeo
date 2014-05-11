@@ -3165,7 +3165,7 @@ public class DataStore {
     }
 
     public static String[] getSuggestionsOwnerName(String input) {
-        return getSuggestions(dbTableCaches, "owner", input);
+        return getSuggestions(dbTableCaches, "owner_real", input);
     }
 
     public static String[] getSuggestionsTrackableCode(String input) {
