@@ -1323,6 +1323,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         listId = list.id;
         title = list.title;
+        type = CacheListType.OFFLINE;
 
         Settings.saveLastList(listId);
 
