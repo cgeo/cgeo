@@ -971,8 +971,8 @@
   <string name="attribute_skiis_no">Langlauf-Ski nicht erforderlich</string>
   <string name="attribute_s_tool_yes">Besondere Werkzeuge erforderlich</string>
   <string name="attribute_s_tool_no">Keine besonderen Werkzeuge erforderlich</string>
-  <string name="attribute_wirelessbeacon_yes">Cache mit Funk-Sender (Chirp)</string>
-  <string name="attribute_wirelessbeacon_no">Kein Cache mit Funk-Sender (Chirp)</string>
+  <string name="attribute_wirelessbeacon_yes">Funk-Sender</string>
+  <string name="attribute_wirelessbeacon_no">Ohne Funk-Sender</string>
   <string name="attribute_treeclimbing_yes">Auf Bäume klettern erforderlich</string>
   <string name="attribute_treeclimbing_no">Auf Bäume klettern nicht erforderlich</string>
   <string name="attribute_poisonoak_yes">Giftige Pflanzen</string>
