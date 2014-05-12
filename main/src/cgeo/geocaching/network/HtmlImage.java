@@ -13,21 +13,20 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import rx.Observable;
 import rx.Observable.OnSubscribe;
-import rx.Scheduler;
-import rx.Scheduler.Inner;
 import rx.Subscriber;
-import rx.functions.Action1;
+import rx.functions.Action0;
 import rx.functions.Func0;
 import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 import rx.subscriptions.CompositeSubscription;
 
@@ -44,6 +43,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Date;
+import java.util.concurrent.Executor;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -94,8 +94,7 @@ public class HtmlImage implements Html.ImageGetter {
     final private PublishSubject<Observable<String>> loading = PublishSubject.create();
     final Observable<String> waitForEnd = Observable.merge(loading).publish().refCount();
     final CompositeSubscription subscription = new CompositeSubscription(waitForEnd.subscribe());
-    final private Scheduler downloadScheduler = Schedulers.executor(new ThreadPoolExecutor(10, 10, 5, TimeUnit.SECONDS,
-            new LinkedBlockingQueue<Runnable>()));
+    final private Executor downloadExecutor = new ThreadPoolExecutor(10, 10, 5, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
 
     public HtmlImage(final String geocode, final boolean returnErrorImage, final int listId, final boolean onlySave) {
         this.geocode = geocode;
@@ -152,9 +151,9 @@ public class HtmlImage implements Html.ImageGetter {
             @Override
             public void call(final Subscriber<? super BitmapDrawable> subscriber) {
                 subscription.add(subscriber);
-                subscriber.add(RxUtils.computationScheduler.schedule(new Action1<Inner>() {
+                subscriber.add(RxUtils.computationScheduler.createWorker().schedule(new Action0() {
                     @Override
-                    public void call(final Inner inner) {
+                    public void call() {
                         final Pair<BitmapDrawable, Boolean> loaded = loadFromDisk();
                         final BitmapDrawable bitmap = loaded.getLeft();
                         if (loaded.getRight()) {
@@ -165,12 +164,11 @@ public class HtmlImage implements Html.ImageGetter {
                         if (bitmap != null && !onlySave) {
                             subscriber.onNext(bitmap);
                         }
-                        subscriber.add(downloadScheduler.schedule(new Action1<Inner>() {
-                            @Override
-                            public void call(final Inner inner) {
+                        downloadExecutor.execute(new Runnable() {
+                            @Override public void run() {
                                 downloadAndSave(subscriber);
                             }
-                        }));
+                        });
                     }
                 }));
             }
@@ -205,9 +203,9 @@ public class HtmlImage implements Html.ImageGetter {
                 if (onlySave) {
                     subscriber.onCompleted();
                 } else {
-                    RxUtils.computationScheduler.schedule(new Action1<Inner>() {
+                    RxUtils.computationScheduler.createWorker().schedule(new Action0() {
                         @Override
-                        public void call(final Inner inner) {
+                        public void call() {
                             final Pair<BitmapDrawable, Boolean> loaded = loadFromDisk();
                             final BitmapDrawable image = loaded.getLeft();
                             if (image != null) {

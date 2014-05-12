@@ -56,13 +56,12 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Observer;
-import rx.Scheduler.Inner;
 import rx.Subscriber;
 import rx.android.observables.AndroidObservable;
+import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
@@ -300,9 +299,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         final String realGeocode = geocode;
         final String realGuid = guid;
-        Schedulers.io().schedule(new Action1<Inner>() {
+        Schedulers.io().createWorker().schedule(new Action0() {
             @Override
-            public void call(final Inner inner) {
+            public void call() {
                 search = Geocache.searchByGeocode(realGeocode, StringUtils.isBlank(realGeocode) ? realGuid : null, 0, false, loadCacheHandler);
                 loadCacheHandler.sendMessage(Message.obtain());
             }
@@ -2227,9 +2226,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     protected void storeCache(final int listId, final StoreCacheHandler storeCacheHandler) {
         progress.show(this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
-        Schedulers.io().schedule(new Action1<Inner>() {
+        Schedulers.io().createWorker().schedule(new Action0() {
             @Override
-            public void call(final Inner inner) {
+            public void call() {
                 cache.store(listId, storeCacheHandler);
             }
         });

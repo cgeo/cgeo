@@ -3,10 +3,9 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.AngleUtils;
 
-import rx.Scheduler;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
+import rx.functions.Action0;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -88,9 +87,9 @@ public class CompassView extends View {
 
         initialDisplay = true;
 
-        periodicUpdate = AndroidSchedulers.mainThread().schedulePeriodically(new Action1<Scheduler.Inner>() {
+        periodicUpdate = AndroidSchedulers.mainThread().createWorker().schedulePeriodically(new Action0() {
             @Override
-            public void call(final Scheduler.Inner inner) {
+            public void call() {
                 final float newAzimuthShown = smoothUpdate(northMeasured, azimuthShown);
                 final float newCacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
                 if (Math.abs(AngleUtils.difference(azimuthShown, newAzimuthShown)) >= 2 ||

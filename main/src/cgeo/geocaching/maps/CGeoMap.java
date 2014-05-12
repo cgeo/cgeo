@@ -43,9 +43,8 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.eclipse.jdt.annotation.NonNull;
-
-import rx.Scheduler;
 import rx.Subscription;
+import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
@@ -1007,9 +1006,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
      * loading timer Triggers every 250ms and checks for viewport change and starts a {@link LoadRunnable}.
      */
     private Subscription startLoadTimer() {
-        return Schedulers.newThread().schedulePeriodically(new Action1<Scheduler.Inner>() {
+        return Schedulers.newThread().createWorker().schedulePeriodically(new Action0() {
             @Override
-            public void call(Scheduler.Inner inner) {
+            public void call() {
                 try {
                     if (mapView != null) {
                         // get current viewport

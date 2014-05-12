@@ -35,7 +35,6 @@ import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.UncertainProperty;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.collections4.Predicate;
@@ -44,11 +43,9 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-
 import rx.Scheduler;
-import rx.Scheduler.Inner;
 import rx.Subscription;
-import rx.functions.Action1;
+import rx.functions.Action0;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -1438,9 +1435,9 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public Subscription drop(final Handler handler, final Scheduler scheduler) {
-        return scheduler.schedule(new Action1<Inner>() {
+        return scheduler.createWorker().schedule(new Action0() {
             @Override
-            public void call(final Inner inner) {
+            public void call() {
                 try {
                     dropSynchronous();
                     handler.sendMessage(Message.obtain());
@@ -1499,9 +1496,9 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public Subscription refresh(final int newListId, final CancellableHandler handler, final Scheduler scheduler) {
-        return scheduler.schedule(new Action1<Inner>() {
+        return scheduler.createWorker().schedule(new Action0() {
             @Override
-            public void call(final Inner inner) {
+            public void call() {
                 refreshSynchronous(newListId, handler);
                 handler.sendEmptyMessage(CancellableHandler.DONE);
             }

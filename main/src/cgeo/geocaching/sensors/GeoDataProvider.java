@@ -1,18 +1,15 @@
 package cgeo.geocaching.sensors;
 
-import android.os.*;
 import cgeo.geocaching.utils.Log;
-
 import cgeo.geocaching.utils.StartableHandlerThread;
+
 import org.apache.commons.lang3.StringUtils;
 import rx.Observable;
 import rx.Observable.OnSubscribe;
-import rx.Scheduler.Inner;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
-import rx.functions.Action1;
 import rx.observables.ConnectableObservable;
 import rx.subjects.BehaviorSubject;
 import rx.subscriptions.CompositeSubscription;
@@ -24,6 +21,7 @@ import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Bundle;
 
 import java.util.concurrent.TimeUnit;
 
@@ -98,9 +96,9 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
         @Override
         public Subscription connect() {
             final CompositeSubscription subscription = new CompositeSubscription();
-            AndroidSchedulers.handlerThread(handlerThread.getHandler()).schedule(new Action1<Inner>() {
+            AndroidSchedulers.handlerThread(handlerThread.getHandler()).createWorker().schedule(new Action0() {
                 @Override
-                public void call(final Inner inner) {
+                public void call() {
                     synchronized(lock) {
                         if (count++ == 0) {
                             Log.d("GeoDataProvider: starting the GPS and network listeners" + " (" + ++debugSessionCounter + ")");
@@ -118,9 +116,9 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
                     subscription.add(Subscriptions.create(new Action0() {
                         @Override
                         public void call() {
-                            AndroidSchedulers.handlerThread(handlerThread.getHandler()).schedule(new Action1<Inner>() {
+                            AndroidSchedulers.handlerThread(handlerThread.getHandler()).createWorker().schedule(new Action0() {
                                 @Override
-                                public void call(final Inner inner) {
+                                public void call() {
                                     synchronized (lock) {
                                         if (--count == 0) {
                                             Log.d("GeoDataProvider: stopping the GPS and network listeners" + " (" + debugSessionCounter + ")");
