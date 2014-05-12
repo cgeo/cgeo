@@ -11,6 +11,9 @@ import rx.observables.ConnectableObservable;
 
 import android.app.Application;
 
+import java.io.IOException;
+import java.lang.Thread.UncaughtExceptionHandler;
+
 public class CgeoApplication extends Application {
 
     private boolean forceRelog = false; // c:geo needs to log into cache providers
@@ -21,6 +24,34 @@ public class CgeoApplication extends Application {
     private Observable<Float> directionObservable;
     private volatile IGeoData currentGeo = null;
     private volatile float currentDirection = 0.0f;
+
+    private static final UncaughtExceptionHandler defaultHandler;
+
+    static {
+        defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
+
+        Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler() {
+
+            @Override
+            public void uncaughtException(Thread thread, Throwable ex) {
+                Log.e("UncaughtException", ex);
+                Throwable exx = ex;
+                while (exx.getCause() != null) {
+                    exx = exx.getCause();
+                }
+                if (exx.getClass().equals(OutOfMemoryError.class))
+                {
+                    try {
+                        Log.e("OutOfMemory");
+                        android.os.Debug.dumpHprofData("/sdcard/dump.hprof");
+                    } catch (IOException e) {
+                        Log.e("Error writing dump", e);
+                    }
+                }
+                defaultHandler.uncaughtException(thread, ex);
+            }
+        });
+    }
 
     public CgeoApplication() {
         setInstance(this);
