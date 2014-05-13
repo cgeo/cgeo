@@ -45,6 +45,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -377,7 +378,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
         final boolean lightSkin = Settings.isLightSkin();
 
-        final TouchListener touchListener = new TouchListener(cache);
+        final TouchListener touchListener = new TouchListener(cache, this);
         v.setOnClickListener(touchListener);
         v.setOnLongClickListener(touchListener);
         v.setOnTouchListener(touchListener);
@@ -536,24 +537,30 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         }
     }
 
-    private class TouchListener implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
+    private static class TouchListener implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
 
         private final Geocache cache;
         private final GestureDetector gestureDetector;
+        private final @NonNull WeakReference<CacheListAdapter> adapterRef;
 
-        public TouchListener(final Geocache cache) {
+        public TouchListener(final Geocache cache, final @NonNull CacheListAdapter adapter) {
             this.cache = cache;
-            gestureDetector = new GestureDetector(getContext(), new FlingGesture(cache));
+            gestureDetector = new GestureDetector(adapter.getContext(), new FlingGesture(cache, adapter));
+            adapterRef = new WeakReference<CacheListAdapter>(adapter);
         }
 
         // Tap on item
         @Override
         public void onClick(final View view) {
-            if (isSelectMode()) {
+            final CacheListAdapter adapter = adapterRef.get();
+            if (adapter == null) {
+                return;
+            }
+            if (adapter.isSelectMode()) {
                 cache.setStatusChecked(!cache.isStatusChecked());
-                notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
             } else {
-                CacheDetailActivity.startActivity(getContext(), cache.getGeocode(), cache.getName());
+                CacheDetailActivity.startActivity(adapter.getContext(), cache.getGeocode(), cache.getName());
             }
         }
 
@@ -572,12 +579,14 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         }
     }
 
-    private class FlingGesture extends GestureDetector.SimpleOnGestureListener {
+    private static class FlingGesture extends GestureDetector.SimpleOnGestureListener {
 
         private final Geocache cache;
+        private final @NonNull WeakReference<CacheListAdapter> adapterRef;
 
-        public FlingGesture(final Geocache cache) {
+        public FlingGesture(final Geocache cache, final @NonNull CacheListAdapter adapter) {
             this.cache = cache;
+            adapterRef = new WeakReference<CacheListAdapter>(adapter);
         }
 
         @Override
@@ -586,11 +595,15 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
                 if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH) {
                     return false;
                 }
+                final CacheListAdapter adapter = adapterRef.get();
+                if (adapter == null) {
+                    return false;
+                }
 
                 // left to right swipe
                 if ((e2.getX() - e1.getX()) > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > Math.abs(velocityY)) {
-                    if (!selectMode) {
-                        switchSelectMode();
+                    if (!adapter.selectMode) {
+                        adapter.switchSelectMode();
                         cache.setStatusChecked(true);
                     }
                     return true;
@@ -598,8 +611,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
                 // right to left swipe
                 if ((e1.getX() - e2.getX()) > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > Math.abs(velocityY)) {
-                    if (selectMode) {
-                        switchSelectMode();
+                    if (adapter.selectMode) {
+                        adapter.switchSelectMode();
                     }
                     return true;
                 }
