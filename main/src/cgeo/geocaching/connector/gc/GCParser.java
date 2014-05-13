@@ -50,7 +50,9 @@ import org.json.JSONObject;
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
+import rx.functions.Action1;
 import rx.functions.Func0;
+import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 
 import android.net.Uri;
@@ -1865,12 +1867,14 @@ public abstract class GCParser {
     }
 
     private static void getExtraOnlineInfo(final Geocache cache, final String page, final CancellableHandler handler) {
+        // This method starts the page parsing for logs in the background, as well as retrieve the friends and own logs
+        // if requested. It merges them and stores them in the background, while the rating is retrieved if needed and
+        // stored. Then we wait for the log merging and saving to be completed before returning.
         if (CancellableHandler.isCancelled(handler)) {
             return;
         }
 
-        //cache.setLogs(loadLogsFromDetails(page, cache, false));
-        // final logs = getLogsFromDetails(page).toBlockingObservable().toIterable();
+        final Observable<LogEntry> logs = getLogsFromDetails(page).subscribeOn(Schedulers.computation());
         Observable<LogEntry> specialLogs;
         if (Settings.isFriendLogsWanted()) {
             CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
@@ -1880,14 +1884,22 @@ public abstract class GCParser {
             CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
             specialLogs = Observable.empty();
         }
-        final List<LogEntry> mergedLogs = new ArrayList<LogEntry>(getLogsFromDetails(page).toList().toBlockingObservable().single());
-        mergeFriendsLogs(mergedLogs, specialLogs.toBlockingObservable().toIterable());
-        DataStore.saveLogsWithoutTransaction(cache.getGeocode(), mergedLogs);
+        final Observable<List<LogEntry>> mergedLogs = Observable.zip(logs.toList(), specialLogs.toList(),
+                new Func2<List<LogEntry>, List<LogEntry>, List<LogEntry>>() {
+                    @Override
+                    public List<LogEntry> call(final List<LogEntry> logEntries, final List<LogEntry> specialLogEntries) {
+                        mergeFriendsLogs(logEntries, specialLogEntries);
+                        return logEntries;
+                    }
+                }).cache();
+        mergedLogs.subscribe(new Action1<List<LogEntry>>() {
+                                 @Override
+                                 public void call(final List<LogEntry> logEntries) {
+                                     DataStore.saveLogsWithoutTransaction(cache.getGeocode(), logEntries);
+                                 }
+                             });
 
-        if (Settings.isRatingWanted()) {
-            if (CancellableHandler.isCancelled(handler)) {
-                return;
-            }
+        if (Settings.isRatingWanted() && !CancellableHandler.isCancelled(handler)) {
             CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_gcvote);
             final GCVoteRating rating = GCVote.getRating(cache.getGuid(), cache.getGeocode());
             if (rating != null) {
@@ -1896,6 +1908,9 @@ public abstract class GCParser {
                 cache.setMyVote(rating.getMyVote());
             }
         }
+
+        // Wait for completion of logs parsing, retrieving and merging
+        mergedLogs.toBlockingObservable().last();
     }
 
     /**
