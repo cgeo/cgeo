@@ -58,15 +58,19 @@ public enum CacheType {
 
     private final static Map<String, CacheType> FIND_BY_ID;
     private final static Map<String, CacheType> FIND_BY_PATTERN;
+    private final static Map<String, CacheType> FIND_BY_GUID;
     static {
         final HashMap<String, CacheType> mappingId = new HashMap<String, CacheType>();
         final HashMap<String, CacheType> mappingPattern = new HashMap<String, CacheType>();
+        final HashMap<String, CacheType> mappingGuid = new HashMap<String, CacheType>();
         for (CacheType ct : values()) {
             mappingId.put(ct.id, ct);
             mappingPattern.put(ct.pattern.toLowerCase(Locale.US), ct);
+            mappingGuid.put(ct.guid, ct);
         }
         FIND_BY_ID = Collections.unmodifiableMap(mappingId);
         FIND_BY_PATTERN = Collections.unmodifiableMap(mappingPattern);
+        FIND_BY_GUID = Collections.unmodifiableMap(mappingGuid);
     }
 
     public static CacheType getById(final String id) {
@@ -79,6 +83,14 @@ public enum CacheType {
 
     public static CacheType getByPattern(final String pattern) {
         final CacheType result = (pattern != null) ? CacheType.FIND_BY_PATTERN.get(pattern.toLowerCase(Locale.US).trim()) : null;
+        if (result == null) {
+            return UNKNOWN;
+        }
+        return result;
+    }
+
+    public static CacheType getByGuid(final String id) {
+        final CacheType result = (id != null) ? CacheType.FIND_BY_GUID.get(id) : null;
         if (result == null) {
             return UNKNOWN;
         }
