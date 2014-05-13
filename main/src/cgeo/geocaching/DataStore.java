@@ -1429,17 +1429,13 @@ public class DataStore {
         }
     }
 
-    public static void saveLogsWithoutTransaction(final String geocode, final List<LogEntry> logs) {
+    public static void saveLogsWithoutTransaction(final String geocode, final Iterable<LogEntry> logs) {
         // TODO delete logimages referring these logs
         database.delete(dbTableLogs, "geocode = ?", new String[]{geocode});
 
-        if (logs.isEmpty()) {
-            return;
-        }
-
-        SQLiteStatement insertLog = PreparedStatements.getInsertLog();
+        final SQLiteStatement insertLog = PreparedStatements.getInsertLog();
         final long timestamp = System.currentTimeMillis();
-        for (LogEntry log : logs) {
+        for (final LogEntry log : logs) {
             insertLog.bindString(1, geocode);
             insertLog.bindLong(2, timestamp);
             insertLog.bindLong(3, log.type.id);
@@ -1448,10 +1444,10 @@ public class DataStore {
             insertLog.bindLong(6, log.date);
             insertLog.bindLong(7, log.found);
             insertLog.bindLong(8, log.friend ? 1 : 0);
-            long logId = insertLog.executeInsert();
+            final long logId = insertLog.executeInsert();
             if (log.hasLogImages()) {
-                SQLiteStatement insertImage = PreparedStatements.getInsertLogImage();
-                for (Image img : log.getLogImages()) {
+                final SQLiteStatement insertImage = PreparedStatements.getInsertLogImage();
+                for (final Image img : log.getLogImages()) {
                     insertImage.bindLong(1, logId);
                     insertImage.bindString(2, img.getTitle());
                     insertImage.bindString(3, img.getUrl());
