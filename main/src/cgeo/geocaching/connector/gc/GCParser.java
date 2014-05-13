@@ -341,32 +341,50 @@ public abstract class GCParser {
     }
 
     static SearchResult parseCache(final String page, final CancellableHandler handler) {
-        final SearchResult searchResult = parseCacheFromText(page, handler);
+        final ImmutablePair<StatusCode, Geocache> parsed = parseCacheFromText(page, handler);
         // attention: parseCacheFromText already stores implicitly through searchResult.addCache
-        if (searchResult != null && !searchResult.getGeocodes().isEmpty()) {
-            final Geocache cache = searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
-            if (cache == null) {
-                return null;
-            }
-            getExtraOnlineInfo(cache, page, handler);
-            // too late: it is already stored through parseCacheFromText
-            cache.setDetailedUpdatedNow();
-            if (CancellableHandler.isCancelled(handler)) {
-                return null;
-            }
-
-            // save full detailed caches
-            CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_cache);
-            DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
-
-            // update progress message so user knows we're still working. This is more of a place holder than
-            // actual indication of what the program is doing
-            CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_render);
+        if (parsed.left != StatusCode.NO_ERROR) {
+            return new SearchResult(parsed.left);
         }
-        return searchResult;
+
+        final Geocache cache = parsed.right;
+        getExtraOnlineInfo(cache, page, handler);
+        // too late: it is already stored through parseCacheFromText
+        cache.setDetailedUpdatedNow();
+        if (CancellableHandler.isCancelled(handler)) {
+            return null;
+        }
+
+        // save full detailed caches
+        CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_cache);
+        DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+
+        // update progress message so user knows we're still working. This is more of a place holder than
+        // actual indication of what the program is doing
+        CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_render);
+        return new SearchResult(cache);
     }
 
-    static SearchResult parseCacheFromText(final String pageIn, final CancellableHandler handler) {
+    static SearchResult parseAndSaveCacheFromText(final String page, @NonNull final CancellableHandler handler) {
+        final ImmutablePair<StatusCode, Geocache> parsed = parseCacheFromText(page, handler);
+        final SearchResult result = new SearchResult(parsed.left);
+        if (parsed.left == StatusCode.NO_ERROR) {
+            result.addAndPutInCache(Collections.singletonList(parsed.right));
+            DataStore.saveLogsWithoutTransaction(parsed.right.getGeocode(), getLogsFromDetails(page).toBlockingObservable().toIterable());
+        }
+        return result;
+    }
+
+    /**
+     * Parse cache from text and return either an error code or a cache object in a pair. Note that inline logs are
+     * not parsed nor saved, while the cache itself is.
+     *
+     * @param pageIn the page text to parse
+     * @param handler the handler to send the progress notifications to
+     * @return a pair, with a {@link StatusCode} on the left, and a non-nulll cache objet on the right
+     *          iff the status code is {@link StatusCode.NO_ERROR}.
+     */
+    static private ImmutablePair<StatusCode, Geocache> parseCacheFromText(final String pageIn, @NonNull final CancellableHandler handler) {
         CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_details);
 
         if (StringUtils.isBlank(pageIn)) {
@@ -374,22 +392,17 @@ public abstract class GCParser {
             return null;
         }
 
-        final SearchResult searchResult = new SearchResult();
-
         if (pageIn.contains(GCConstants.STRING_UNPUBLISHED_OTHER) || pageIn.contains(GCConstants.STRING_UNPUBLISHED_FROM_SEARCH)) {
-            searchResult.setError(StatusCode.UNPUBLISHED_CACHE);
-            return searchResult;
+            return ImmutablePair.of(StatusCode.UNPUBLISHED_CACHE, null);
         }
 
         if (pageIn.contains(GCConstants.STRING_PREMIUMONLY_1) || pageIn.contains(GCConstants.STRING_PREMIUMONLY_2)) {
-            searchResult.setError(StatusCode.PREMIUM_ONLY);
-            return searchResult;
+            return ImmutablePair.of(StatusCode.PREMIUM_ONLY, null);
         }
 
         final String cacheName = Html.fromHtml(TextUtils.getMatch(pageIn, GCConstants.PATTERN_NAME, true, "")).toString();
         if (GCConstants.STRING_UNKNOWN_ERROR.equalsIgnoreCase(cacheName)) {
-            searchResult.setError(StatusCode.UNKNOWN_ERROR);
-            return searchResult;
+            return ImmutablePair.of(StatusCode.UNKNOWN_ERROR, null);
         }
 
         // first handle the content with line breaks, then trim everything for easier matching and reduced memory consumption in parsed fields
@@ -732,14 +745,11 @@ public abstract class GCParser {
 
         // last check for necessary cache conditions
         if (StringUtils.isBlank(cache.getGeocode())) {
-            searchResult.setError(StatusCode.UNKNOWN_ERROR);
-            return searchResult;
+            return ImmutablePair.of(StatusCode.UNKNOWN_ERROR, null);
         }
 
         cache.setDetailedUpdatedNow();
-        searchResult.addAndPutInCache(Collections.singletonList(cache));
-        DataStore.saveLogsWithoutTransaction(cache.getGeocode(), getLogsFromDetails(page).toBlockingObservable().toIterable());
-        return searchResult;
+        return ImmutablePair.of(StatusCode.NO_ERROR, cache);
     }
 
     private static String getNumberString(final String numberWithPunctuation) {
@@ -1860,15 +1870,19 @@ public abstract class GCParser {
         }
 
         //cache.setLogs(loadLogsFromDetails(page, cache, false));
+        // final logs = getLogsFromDetails(page).toBlockingObservable().toIterable();
+        Observable<LogEntry> specialLogs;
         if (Settings.isFriendLogsWanted()) {
             CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
-            final Observable<LogEntry> specialLogs = Observable.merge(getSpecialLogs(page, SpecialLogs.FRIENDS),
+            specialLogs = Observable.merge(getSpecialLogs(page, SpecialLogs.FRIENDS),
                     getSpecialLogs(page, SpecialLogs.OWN));
-            final List<LogEntry> mergedLogs = new ArrayList<LogEntry>(cache.getLogs());
-            if (mergeFriendsLogs(mergedLogs, specialLogs.toBlockingObservable().toIterable())) {
-                DataStore.saveLogsWithoutTransaction(cache.getGeocode(), mergedLogs);
-            }
+        } else {
+            CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
+            specialLogs = Observable.empty();
         }
+        final List<LogEntry> mergedLogs = new ArrayList<LogEntry>(getLogsFromDetails(page).toList().toBlockingObservable().single());
+        mergeFriendsLogs(mergedLogs, specialLogs.toBlockingObservable().toIterable());
+        DataStore.saveLogsWithoutTransaction(cache.getGeocode(), mergedLogs);
 
         if (Settings.isRatingWanted()) {
             if (CancellableHandler.isCancelled(handler)) {
@@ -1892,19 +1906,15 @@ public abstract class GCParser {
      *            the list to merge logs with
      * @param logsToMerge
      *            the list of logs to merge
-     * @return true / false merged done
      */
-    private static boolean mergeFriendsLogs(final List<LogEntry> mergedLogs, final Iterable<LogEntry> logsToMerge) {
-        boolean modified = false;
+    private static void mergeFriendsLogs(final List<LogEntry> mergedLogs, final Iterable<LogEntry> logsToMerge) {
         for (final LogEntry log : logsToMerge) {
-            modified = true;
             if (mergedLogs.contains(log)) {
                 mergedLogs.get(mergedLogs.indexOf(log)).friend = true;
             } else {
                 mergedLogs.add(log);
             }
         }
-        return modified;
     }
 
     public static boolean uploadModifiedCoordinates(Geocache cache, Geopoint wpt) {

@@ -61,6 +61,14 @@ public class SearchResult implements Parcelable {
     }
 
     /**
+     * Build a new empty search result with an error status.
+     */
+    public SearchResult(final StatusCode statusCode) {
+        this();
+        error = statusCode;
+    }
+
+    /**
      * Copy a search result, for example to apply different filters on it.
      *
      * @param searchResult the original search result, which cannot be null
