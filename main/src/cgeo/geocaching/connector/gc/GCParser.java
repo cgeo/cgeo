@@ -1640,10 +1640,10 @@ public abstract class GCParser {
      *
      * @param page
      *            the text of the details page
-     * @return a list of log entries or <code>null</code> if the logs could not be retrieved
+     * @return a list of log entries which will be empty if the logs could not be retrieved
      *
      */
-    @Nullable
+    @NonNull
     private static Observable<LogEntry> getLogsFromDetails(final String page) {
         // extract embedded JSON data from page
         return parseLogs(false, TextUtils.getMatch(page, GCConstants.PATTERN_LOGBOOK, ""));
