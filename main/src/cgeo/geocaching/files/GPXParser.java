@@ -899,6 +899,13 @@ public abstract class GPXParser extends FileParser {
         if ("final location".equalsIgnoreCase(sym)) {
             return WaypointType.FINAL;
         }
+        // renamed waypoint types
+        if ("Physical Stage".equalsIgnoreCase(sym)) {
+            return WaypointType.STAGE;
+        }
+        if ("Virtual Stage".equalsIgnoreCase(sym)) {
+            return WaypointType.PUZZLE;
+        }
         // this is not fully correct, but lets also look for localized waypoint types
         for (final WaypointType waypointType : WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL) {
             final String localized = waypointType.getL10n();

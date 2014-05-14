@@ -104,6 +104,28 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertGc31j2hWaypoints(cache);
     }
 
+    public void testRenamedWaypointTypes() throws IOException, ParserException {
+        removeCacheCompletely("GC31J2H");
+        final List<Geocache> caches = readGPX10(R.raw.renamed_waypoints, R.raw.renamed_waypoints_wpts);
+        assertEquals(25, caches.size());
+        // multi waypoint (now "physical stage")
+        Geocache cache = caches.get(12);
+        assertEquals("GC3NBDE", cache.getGeocode());
+        List<Waypoint> waypoints = cache.getWaypoints();
+        assertFalse(waypoints.isEmpty());
+        Waypoint waypoint = waypoints.get(1);
+        assertNotNull(waypoint);
+        assertEquals(WaypointType.STAGE, waypoint.getWaypointType());
+        // mystery waypoint - now "virtual stage"
+        cache = caches.get(15);
+        assertEquals("GC16CBG", cache.getGeocode());
+        waypoints = cache.getWaypoints();
+        assertFalse(waypoints.isEmpty());
+        waypoint = waypoints.get(1);
+        assertNotNull(waypoint);
+        assertEquals(WaypointType.PUZZLE, waypoint.getWaypointType());
+    }
+
     public void testGc31j2hWptsWithoutCache() throws IOException, ParserException {
         final List<Geocache> caches = readGPX10(R.raw.gc31j2h_wpts);
         assertEquals(0, caches.size());
@@ -120,6 +142,9 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(WaypointType.WAYPOINT, GPXParser.convertWaypointSym2Type("Reference point"));
 
         assertEquals(WaypointType.PARKING, GPXParser.convertWaypointSym2Type(WaypointType.PARKING.getL10n()));
+        // new names of multi and mystery stages
+        assertEquals(WaypointType.STAGE, GPXParser.convertWaypointSym2Type("Physical Stage"));
+        assertEquals(WaypointType.PUZZLE, GPXParser.convertWaypointSym2Type("Virtual Stage"));
     }
 
     private static void assertGc31j2h(final Geocache cache) {
