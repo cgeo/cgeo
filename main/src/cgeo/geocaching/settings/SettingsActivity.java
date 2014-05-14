@@ -189,7 +189,7 @@ public class SettingsActivity extends PreferenceActivity {
 
     private static void setServiceScreenSummary(PreferenceManager preferenceManager, final int preferenceKey) {
 
-        String summary = StringUtils.EMPTY;
+        String summary;
 
         switch (preferenceKey) {
             case R.string.pref_connectorGCActive:
@@ -582,7 +582,7 @@ public class SettingsActivity extends PreferenceActivity {
                     || isPreference(preference, R.string.pref_connectorOXActive)
                     || isPreference(preference, R.string.pref_connectorECActive)) {
                 // update summary
-                boolean boolVal = ((Boolean) value).booleanValue();
+                final boolean boolVal = (Boolean) value;
                 String summary = getServiceSummary(boolVal);
                 if (OCPreferenceKeys.isOCPreference(preference.getKey())) {
                     OCPreferenceKeys prefKey = OCPreferenceKeys.getByKey(preference.getKey());

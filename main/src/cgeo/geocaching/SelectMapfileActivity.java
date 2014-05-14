@@ -115,8 +115,7 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
         }
 
         if (requestCode == REQUEST_DIRECTORY) {
-            final String directory = new File(data.getData().getPath()).getAbsolutePath();
-            mapFile = directory;
+            mapFile = new File(data.getData().getPath()).getAbsolutePath();
             close();
         }
     }

@@ -52,6 +52,5 @@ public abstract class AbstractCachingPageViewCreator<ViewClass extends View> imp
      */
     @Override
     public void setViewState(@NonNull Bundle state) {
-        return;
     }
 }

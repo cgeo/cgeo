@@ -24,22 +24,15 @@ class PopularityRatioFilter extends AbstractFilter {
 
     @Override
     public boolean accepts(final Geocache cache) {
+        final int finds = getFindsCount(cache);
 
-        int finds;
-        int favorites;
-        float ratio;
-
-        finds = getFindsCount(cache);
-
-        // prevent division by zero
-        if (finds == 0) {
+        if (finds == 0) {   // Prevent division by zero
             return false;
         }
 
-        favorites = cache.getFavoritePoints();
-        ratio = ((float) favorites / (float) finds) * 100.0f;
-
-        return (ratio > minRatio) && (ratio <= maxRatio);
+        final int favorites = cache.getFavoritePoints();
+        final float ratio = 100.0f * favorites / finds;
+        return ratio > minRatio && ratio <= maxRatio;
     }
 
     private static int getFindsCount(Geocache cache) {

@@ -27,7 +27,7 @@ public class CreateShortcutActivity extends AbstractActivity {
 
             @Override
             public void call(final Integer listId) {
-                final Intent shortcut = createShortcut(listId.intValue());
+                final Intent shortcut = createShortcut(listId);
                 setResult(RESULT_OK, shortcut);
 
                 // finish activity to return the shortcut

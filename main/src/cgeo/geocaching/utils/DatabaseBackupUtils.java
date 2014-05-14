@@ -10,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.res.Resources;
 
 import java.io.File;
@@ -53,7 +52,6 @@ public class DatabaseBackupUtils {
     }
 
     public static boolean createBackup(final Activity activity, final Runnable runAfterwards) {
-        final Context context = activity;
         // avoid overwriting an existing backup with an empty database
         // (can happen directly after reinstalling the app)
         if (DataStore.getAllCachesCount() == 0) {
@@ -61,9 +59,9 @@ public class DatabaseBackupUtils {
             return false;
         }
 
-        final ProgressDialog dialog = ProgressDialog.show(context,
-                context.getString(R.string.init_backup),
-                context.getString(R.string.init_backup_running), true, false);
+        final ProgressDialog dialog = ProgressDialog.show(activity,
+                activity.getString(R.string.init_backup),
+                activity.getString(R.string.init_backup_running), true, false);
         new Thread() {
             @Override
             public void run() {
@@ -75,9 +73,9 @@ public class DatabaseBackupUtils {
                         Dialogs.message(activity,
                                 R.string.init_backup_backup,
                                 backupFileName != null
-                                        ? context.getString(R.string.init_backup_success)
+                                        ? activity.getString(R.string.init_backup_success)
                                                 + "\n" + backupFileName
-                                        : context.getString(R.string.init_backup_failed));
+                                        : activity.getString(R.string.init_backup_failed));
                         if (runAfterwards != null) {
                             runAfterwards.run();
                         }

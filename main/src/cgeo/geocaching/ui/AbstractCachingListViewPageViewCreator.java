@@ -51,7 +51,6 @@ public abstract class AbstractCachingListViewPageViewCreator extends AbstractCac
         int logViewPosition = state.getInt(STATE_POSITION);
         int logViewPositionFromTop = state.getInt(STATE_POSITION_FROM_TOP);
         view.setSelectionFromTop(logViewPosition, logViewPositionFromTop);
-        return;
     }
 
 }
