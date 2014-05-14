@@ -1,0 +1,923 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gpx xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" creator="Groundspeak, Inc. All Rights Reserved. http://www.groundspeak.com" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.groundspeak.com/cache/1/0 http://www.groundspeak.com/cache/1/0/cache.xsd" xmlns="http://www.topografix.com/GPX/1/0">
+  <name>Waypoints for Cache Listings Generated from Geocaching.com</name>
+  <desc>This is a list of supporting waypoints for caches generated from Geocaching.com</desc>
+  <author>Various users from Geocaching.com</author>
+  <email>contact@geocaching.com</email>
+  <url>http://www.geocaching.com</url>
+  <urlname>Geocaching - High Tech Treasure Hunting</urlname>
+  <time>2014-05-14T14:57:59.9265846Z</time>
+  <keywords>cache, geocache, waypoints</keywords>
+  <bounds minlat="51.231933" minlon="6.730183" maxlat="51.3019" maxlon="6.8523" />
+  <wpt lat="51.25925" lon="6.76365">
+    <time>2008-04-27T07:14:53.417</time>
+    <name>P012MHC</name>
+    <cmt />
+    <desc>Parken</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=a2bdfa67-9b04-47a6-a286-7e79e9080a33</url>
+    <urlname>Parken</urlname>
+    <sym>Parking Area</sym>
+    <type>Waypoint|Parking Area</type>
+  </wpt>
+  <wpt lat="51.255517" lon="6.76685">
+    <time>2007-05-03T13:59:47.533</time>
+    <name>P112MHC</name>
+    <cmt>Hier findet ihr drei Städtenamen. Summiert die Anzahl aller Buchstaben zu A</cmt>
+    <desc>Findling</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=bb467c5e-f621-4b74-9891-9315d10abc38</url>
+    <urlname>Findling</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.258167" lon="6.763883">
+    <time>2007-05-03T14:01:48.08</time>
+    <name>P212MHC</name>
+    <cmt>Notiert die Anzahl der Worte der Inschriften auf dem Mahnmal als B</cmt>
+    <desc>Mahnmal</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=8ce103bb-96d0-4644-a83c-eddaf1de2279</url>
+    <urlname>Mahnmal</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.2878" lon="6.822883">
+    <time>2007-05-21T12:05:52.513</time>
+    <name>S21308V</name>
+    <cmt />
+    <desc>Stage2</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=4a89db68-8c99-4944-9834-717a11b5c54d</url>
+    <urlname>Stage2</urlname>
+    <sym>Reference Point</sym>
+    <type>Waypoint|Reference Point</type>
+  </wpt>
+  <wpt lat="51.2835" lon="6.825967">
+    <time>2007-05-21T12:06:52.17</time>
+    <name>S31308V</name>
+    <cmt />
+    <desc>Stage3</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=ff0394ca-2cef-486a-b853-bd25c5feb328</url>
+    <urlname>Stage3</urlname>
+    <sym>Reference Point</sym>
+    <type>Waypoint|Reference Point</type>
+  </wpt>
+  <wpt lat="51.282183" lon="6.82595">
+    <time>2007-05-21T12:08:01.28</time>
+    <name>S41308V</name>
+    <cmt />
+    <desc>Stage4</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=a641aac9-ef35-4e32-a5bf-6f42b4efd5ed</url>
+    <urlname>Stage4</urlname>
+    <sym>Reference Point</sym>
+    <type>Waypoint|Reference Point</type>
+  </wpt>
+  <wpt lat="51.281217" lon="6.828167">
+    <time>2007-05-21T12:08:54.45</time>
+    <name>S51308V</name>
+    <cmt />
+    <desc>Stage5</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=3866666a-3316-4e7e-955f-1b1aaf595e22</url>
+    <urlname>Stage5</urlname>
+    <sym>Reference Point</sym>
+    <type>Waypoint|Reference Point</type>
+  </wpt>
+  <wpt lat="51.279467" lon="6.82425">
+    <time>2007-05-21T12:09:49.327</time>
+    <name>S61308V</name>
+    <cmt />
+    <desc>Stage6</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=77f3cb8e-41f7-43c7-84d1-f0cf945beb1e</url>
+    <urlname>Stage6</urlname>
+    <sym>Reference Point</sym>
+    <type>Waypoint|Reference Point</type>
+  </wpt>
+  <wpt lat="51.280583" lon="6.8207">
+    <time>2007-05-21T12:10:46.403</time>
+    <name>S71308V</name>
+    <cmt />
+    <desc>Stage7</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=b2ce6327-080d-453b-8056-b28f7422ff93</url>
+    <urlname>Stage7</urlname>
+    <sym>Reference Point</sym>
+    <type>Waypoint|Reference Point</type>
+  </wpt>
+  <wpt lat="51.2836" lon="6.819117">
+    <time>2007-05-21T12:11:30.92</time>
+    <name>S81308V</name>
+    <cmt />
+    <desc>Stage8</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=5b4b376a-5914-47a9-93cb-e0bfc3286b39</url>
+    <urlname>Stage8</urlname>
+    <sym>Reference Point</sym>
+    <type>Waypoint|Reference Point</type>
+  </wpt>
+  <wpt lat="51.283933" lon="6.817033">
+    <time>2007-05-21T12:12:21.013</time>
+    <name>S91308V</name>
+    <cmt />
+    <desc>Stage9</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=a1253313-ec96-4df3-b586-74cce57d10f6</url>
+    <urlname>Stage9</urlname>
+    <sym>Reference Point</sym>
+    <type>Waypoint|Reference Point</type>
+  </wpt>
+  <wpt lat="51.28415" lon="6.814733">
+    <time>2007-05-21T12:13:20.263</time>
+    <name>T11308V</name>
+    <cmt />
+    <desc>Stage10</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=d9835716-967c-4be9-b160-d106a147f763</url>
+    <urlname>Stage10</urlname>
+    <sym>Reference Point</sym>
+    <type>Waypoint|Reference Point</type>
+  </wpt>
+  <wpt lat="51.2866" lon="6.818533">
+    <time>2007-10-02T04:45:33.88</time>
+    <name>0016CBG</name>
+    <cmt>Parken am Erholungspark Volkardey</cmt>
+    <desc>SS_Park</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=f48df608-bbe9-488e-9460-41835c6e2ae7</url>
+    <urlname>SS_Park</urlname>
+    <sym>Parking Area</sym>
+    <type>Waypoint|Parking Area</type>
+  </wpt>
+  <wpt lat="51.283783" lon="6.81755">
+    <time>2007-10-03T08:19:32.647</time>
+    <name>0116CBG</name>
+    <cmt>Welche Nummer trägt diese Station des Ökopfades? Dies sei (A)
+Wie schwer darf man sein um hierhin zu gelangen? Dies sei (B)</cmt>
+    <desc>SS_1</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=bc0ba0de-daca-4d71-93fa-3d23d6c7ce06</url>
+    <urlname>SS_1</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.297" lon="6.847333">
+    <time>2009-05-03T12:18:54.147</time>
+    <name>011QXN0</name>
+    <cmt />
+    <desc>Parkhaus</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=9416bab2-e07f-4473-b069-89e60ce1053d</url>
+    <urlname>Parkhaus</urlname>
+    <sym>Parking Area</sym>
+    <type>Waypoint|Parking Area</type>
+  </wpt>
+  <wpt lat="51.298183" lon="6.847517">
+    <time>2009-05-03T12:09:59.377</time>
+    <name>021QXN0</name>
+    <cmt />
+    <desc>Trinsenturm</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=308ad35c-f522-49b0-9fac-17ee145dac1a</url>
+    <urlname>Trinsenturm</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.2988" lon="6.85065">
+    <time>2009-05-03T12:10:56.69</time>
+    <name>031QXN0</name>
+    <cmt />
+    <desc>Dicke Turm</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=1fd81879-88e2-4637-93ac-6a9cd8e97fad</url>
+    <urlname>Dicke Turm</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.2972" lon="6.8523">
+    <time>2009-05-03T12:11:43.307</time>
+    <name>041QXN0</name>
+    <cmt />
+    <desc>Kornsturm</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=4374d0eb-7ea7-4890-9ac5-fea6d15812c9</url>
+    <urlname>Kornsturm</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.286517" lon="6.8183">
+    <time>2009-05-13T01:32:50.057</time>
+    <name>001RA0A</name>
+    <cmt />
+    <desc>Parkplatz</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=06b8208e-946c-48f3-842b-4c5d188e35af</url>
+    <urlname>Parkplatz</urlname>
+    <sym>Parking Area</sym>
+    <type>Waypoint|Parking Area</type>
+  </wpt>
+  <wpt lat="51.286367" lon="6.819733">
+    <time>2009-05-13T01:35:04.86</time>
+    <name>011RA0A</name>
+    <cmt />
+    <desc>Station 1</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=6c7c8262-519e-4ee0-ac21-ee781a4c1fa5</url>
+    <urlname>Station 1</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.2878" lon="6.822883">
+    <time>2009-05-13T01:37:39.49</time>
+    <name>021RA0A</name>
+    <cmt />
+    <desc>Station 2</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=e473789a-a06c-42e4-b355-c1c11625a631</url>
+    <urlname>Station 2</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.285583" lon="6.824883">
+    <time>2009-05-13T01:40:20.8</time>
+    <name>031RA0A</name>
+    <cmt />
+    <desc>Station 3</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=6e2fe6d6-0ba6-48cd-a934-9003870dd449</url>
+    <urlname>Station 3</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.281683" lon="6.827667">
+    <time>2009-05-13T01:42:47.853</time>
+    <name>051RA0A</name>
+    <cmt />
+    <desc>Station 5</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=d2c8db13-786f-4a75-b2dd-06b5802abade</url>
+    <urlname>Station 5</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.2664" lon="6.827083">
+    <time>2009-07-31T16:01:03.093</time>
+    <name>001WEWW</name>
+    <cmt />
+    <desc>GC1WEWW</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=88dd875b-16c6-430d-8a2c-b6a67d4a66db</url>
+    <urlname>GC1WEWW</urlname>
+    <sym>Parking Area</sym>
+    <type>Waypoint|Parking Area</type>
+  </wpt>
+  <wpt lat="51.2681" lon="6.832667">
+    <time>2009-08-01T02:58:43.243</time>
+    <name>011WEWW</name>
+    <cmt>Die erste Station</cmt>
+    <desc>ST1</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=dae13559-8e71-46c8-8f3e-05ccde5b54d5</url>
+    <urlname>ST1</urlname>
+    <sym>Physical Stage</sym>
+    <type>Waypoint|Physical Stage</type>
+  </wpt>
+  <wpt lat="51.258" lon="6.798833">
+    <time>2010-02-28T04:32:33.153</time>
+    <name>B124DT0</name>
+    <cmt />
+    <desc>Rostiges Wort ...</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=7ab33596-8844-4c6d-857d-649ad3bd6565</url>
+    <urlname>Rostiges Wort ...</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.265" lon="6.847917">
+    <time>2010-06-30T00:44:32.627</time>
+    <name>002ARVR</name>
+    <cmt>Sollten diese alle besetzt sein, dann fahre am Segelflughafen paralel ein paar Meter weiter, dort sind dann noch mehr.</cmt>
+    <desc>Parkplatz</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=3a7f0926-716e-4da5-b375-58bbf04c884c</url>
+    <urlname>Parkplatz</urlname>
+    <sym>Parking Area</sym>
+    <type>Waypoint|Parking Area</type>
+  </wpt>
+  <wpt lat="51.258633" lon="6.840833">
+    <time>2010-06-30T01:02:17.547</time>
+    <name>032ARVR</name>
+    <cmt>Nach den ersten beiden Schulstunden kommt immer erst eine Pause.</cmt>
+    <desc>Pause</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=b89b0a55-afd4-46f3-b8b1-015b64f99f2e</url>
+    <urlname>Pause</urlname>
+    <sym>Reference Point</sym>
+    <type>Waypoint|Reference Point</type>
+  </wpt>
+  <wpt lat="51.257317" lon="6.75395">
+    <time>2010-09-08T09:15:35.057</time>
+    <name>A12EVNV</name>
+    <cmt>Welche Nummer hat die Blumenachse ? 
+Das Ergebnis ist A.</cmt>
+    <desc>Blumenachse</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=6b76e4a7-54f1-46ff-8edb-9a8da7530e28</url>
+    <urlname>Blumenachse</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.257517" lon="6.750467">
+    <time>2010-09-08T09:18:10.793</time>
+    <name>B22EVNV</name>
+    <cmt>Wieviel Ausströmer hat die mittlere Ebene des Springbrunnens ?
+Das Ergebnis ist B.</cmt>
+    <desc>Ausströmer</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=b731f173-e7bd-4665-bcf6-20c374419069</url>
+    <urlname>Ausströmer</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.257817" lon="6.747633">
+    <time>2010-09-08T09:22:12.713</time>
+    <name>C32EVNV</name>
+    <cmt>Welche Baumart ist das ? 
+Der 2. Buchstabe ist die gesuchte Zahl C. (z.B a:1, b:2 usw.)</cmt>
+    <desc>Baum</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=c69b0d4d-15d0-4e62-9550-328558bda51f</url>
+    <urlname>Baum</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.258017" lon="6.74425">
+    <time>2010-09-08T09:25:00.887</time>
+    <name>D42EVNV</name>
+    <cmt>Aus wieviel Teilen besteht dieses Gebilde ?
+Das Ergebnis ist D.</cmt>
+    <desc>Gebilde</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=252d6954-1619-48e3-9cda-4aa61e99d84d</url>
+    <urlname>Gebilde</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.256633" lon="6.7437">
+    <time>2010-09-08T09:28:28.59</time>
+    <name>E52EVNV</name>
+    <cmt>Wieviel Stufen führen nach unten? 1.Obere Ebene wird mitgezählt.
+Das Ergebnis ist E.</cmt>
+    <desc>Stufen</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=0ac39f64-6c74-4a26-a0aa-aa641d35b942</url>
+    <urlname>Stufen</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.28635" lon="6.818767">
+    <time>2010-10-21T12:21:17.14</time>
+    <name>002GVWT</name>
+    <cmt>Der große Parkplatz - aber an heißen Sommertagen kann es auch hier voll werden.</cmt>
+    <desc>Parkplatz</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=e731d23b-9113-439b-bedc-7b65f58f032b</url>
+    <urlname>Parkplatz</urlname>
+    <sym>Parking Area</sym>
+    <type>Waypoint|Parking Area</type>
+  </wpt>
+  <wpt lat="51.2794" lon="6.824983">
+    <time>2010-10-17T12:28:29.437</time>
+    <name>022GVWT</name>
+    <cmt />
+    <desc>Startkoordinate</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=86206c07-dc0b-4bd4-8e5b-d60831be8c4b</url>
+    <urlname>Startkoordinate</urlname>
+    <sym>Reference Point</sym>
+    <type>Waypoint|Reference Point</type>
+  </wpt>
+  <wpt lat="51.2804" lon="6.823017">
+    <time>2010-10-17T12:32:18.797</time>
+    <name>S12GVWT</name>
+    <cmt>1. Station</cmt>
+    <desc>1. Station</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=0249cf96-6c4d-4f8b-bc60-6f222667c5f0</url>
+    <urlname>1. Station</urlname>
+    <sym>Physical Stage</sym>
+    <type>Waypoint|Physical Stage</type>
+  </wpt>
+  <wpt lat="51.2663" lon="6.827233">
+    <time>2011-04-01T06:37:47.027</time>
+    <name>012RAAR</name>
+    <cmt />
+    <desc>Kostenfrei Parken</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=33b98a47-430d-49fc-8ab1-a2b7a6342e2d</url>
+    <urlname>Kostenfrei Parken</urlname>
+    <sym>Parking Area</sym>
+    <type>Waypoint|Parking Area</type>
+  </wpt>
+  <wpt lat="51.264983" lon="6.828383">
+    <time>2011-04-01T06:38:41.73</time>
+    <name>S12RAAR</name>
+    <cmt />
+    <desc>GC2RAAR Stage 1</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=ce0cad8b-b09b-4ecf-af43-6ab592b765ee</url>
+    <urlname>GC2RAAR Stage 1</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.262217" lon="6.82785">
+    <time>2011-04-01T06:39:51.387</time>
+    <name>S22RAAR</name>
+    <cmt />
+    <desc>GC2RAAR Stage 2</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=36b04c1d-b9d7-4800-84d4-7524cab08e52</url>
+    <urlname>GC2RAAR Stage 2</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.258933" lon="6.826117">
+    <time>2011-04-01T06:42:37.217</time>
+    <name>S32RAAR</name>
+    <cmt />
+    <desc>GC2RAAR Stage 3</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=0ad39731-1223-4c5a-93a0-1d9f9d25bfd4</url>
+    <urlname>GC2RAAR Stage 3</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.255083" lon="6.828867">
+    <time>2011-04-01T06:43:12.2</time>
+    <name>S42RAAR</name>
+    <cmt />
+    <desc>GC2RAAR Stage 4</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=ba27abd2-8fd2-4820-906e-42e78410fca7</url>
+    <urlname>GC2RAAR Stage 4</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.257983" lon="6.832967">
+    <time>2011-04-01T06:43:46.747</time>
+    <name>S52RAAR</name>
+    <cmt />
+    <desc>GC2RAAR Stage 5</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=fa14f322-68a8-4660-945c-72ec41d97b85</url>
+    <urlname>GC2RAAR Stage 5</urlname>
+    <sym>Physical Stage</sym>
+    <type>Waypoint|Physical Stage</type>
+  </wpt>
+  <wpt lat="51.260567" lon="6.833117">
+    <time>2011-04-01T06:44:30.683</time>
+    <name>S62RAAR</name>
+    <cmt />
+    <desc>GC2RAAR Stage 6</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=0cf82e09-868e-43fa-87b3-75bcb911ffd2</url>
+    <urlname>GC2RAAR Stage 6</urlname>
+    <sym>Physical Stage</sym>
+    <type>Waypoint|Physical Stage</type>
+  </wpt>
+  <wpt lat="51.264467" lon="6.833517">
+    <time>2011-04-01T06:45:02.933</time>
+    <name>S72RAAR</name>
+    <cmt />
+    <desc>GC2RAAR Stage 7</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=9d3f14dd-cc30-4a64-b9d8-1cc4b7d334d9</url>
+    <urlname>GC2RAAR Stage 7</urlname>
+    <sym>Physical Stage</sym>
+    <type>Waypoint|Physical Stage</type>
+  </wpt>
+  <wpt lat="51.270817" lon="6.730183">
+    <time>2011-04-05T14:11:51.86</time>
+    <name>KP2RM0W</name>
+    <cmt />
+    <desc>Parken</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=4ab92205-70bd-4fca-b1de-43cd9babd066</url>
+    <urlname>Parken</urlname>
+    <sym>Parking Area</sym>
+    <type>Waypoint|Parking Area</type>
+  </wpt>
+  <wpt lat="51.271383" lon="6.733983">
+    <time>2011-04-05T14:14:45.783</time>
+    <name>S12RM0W</name>
+    <cmt />
+    <desc>GC2RM0W Stage 1</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=2e0000db-ffc8-46ef-94b9-24623bd308a2</url>
+    <urlname>GC2RM0W Stage 1</urlname>
+    <sym>Physical Stage</sym>
+    <type>Waypoint|Physical Stage</type>
+  </wpt>
+  <wpt lat="51.27125" lon="6.734667">
+    <time>2011-04-05T14:15:34.94</time>
+    <name>S22RM0W</name>
+    <cmt />
+    <desc>GC2RM0W Stage 2</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=8429dd27-a8d2-4a60-8b9f-8cd7e14ae23e</url>
+    <urlname>GC2RM0W Stage 2</urlname>
+    <sym>Physical Stage</sym>
+    <type>Waypoint|Physical Stage</type>
+  </wpt>
+  <wpt lat="51.272533" lon="6.732667">
+    <time>2011-04-05T14:16:10.033</time>
+    <name>S32RM0W</name>
+    <cmt />
+    <desc>GC2RM0W Stage 3</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=d1ec9a52-58d5-4d5c-8eb0-abb0a7bb4ba7</url>
+    <urlname>GC2RM0W Stage 3</urlname>
+    <sym>Physical Stage</sym>
+    <type>Waypoint|Physical Stage</type>
+  </wpt>
+  <wpt lat="51.271983" lon="6.732183">
+    <time>2011-04-05T14:16:32.673</time>
+    <name>S42RM0W</name>
+    <cmt />
+    <desc>GC2RM0W Stage 4</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=1cbeff5c-98c7-48c6-acf2-decf6a71512d</url>
+    <urlname>GC2RM0W Stage 4</urlname>
+    <sym>Physical Stage</sym>
+    <type>Waypoint|Physical Stage</type>
+  </wpt>
+  <wpt lat="51.2715" lon="6.732667">
+    <time>2011-04-05T14:17:01.063</time>
+    <name>S52RM0W</name>
+    <cmt />
+    <desc>GC2RM0W Stage 5</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=7e357d2c-b1b1-4e00-83ca-e64b3403a0ed</url>
+    <urlname>GC2RM0W Stage 5</urlname>
+    <sym>Physical Stage</sym>
+    <type>Waypoint|Physical Stage</type>
+  </wpt>
+  <wpt lat="51.261" lon="6.7685">
+    <time>2011-07-17T14:27:11.263</time>
+    <name>PK30BZQ</name>
+    <cmt />
+    <desc>GC30BZQ Parking</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=d1b11962-b2bb-49a1-ab19-e0b2d4e70146</url>
+    <urlname>GC30BZQ Parking</urlname>
+    <sym>Parking Area</sym>
+    <type>Waypoint|Parking Area</type>
+  </wpt>
+  <wpt lat="51.261283" lon="6.769417">
+    <time>2011-07-17T14:28:26.91</time>
+    <name>S130BZQ</name>
+    <cmt />
+    <desc>GC30BZQ Stage 1</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=e7b2343c-d66a-44a8-8ba1-c0d6506de814</url>
+    <urlname>GC30BZQ Stage 1</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.2409" lon="6.752133">
+    <time>2011-08-02T15:15:12.8</time>
+    <name>R031CWK</name>
+    <cmt />
+    <desc>Parken</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=24dd5486-b5e5-4166-b7c5-6b364c565327</url>
+    <urlname>Parken</urlname>
+    <sym>Parking Area</sym>
+    <type>Waypoint|Parking Area</type>
+  </wpt>
+  <wpt lat="51.238483" lon="6.7583">
+    <time>2011-08-02T15:17:10.323</time>
+    <name>R131CWK</name>
+    <cmt />
+    <desc>Station</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=f2d91e20-750e-4730-bd22-54de1a96d4d9</url>
+    <urlname>Station</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.23305" lon="6.759417">
+    <time>2011-08-02T15:20:15.717</time>
+    <name>R231CWK</name>
+    <cmt />
+    <desc>Station</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=f72ed488-d9eb-4147-aef9-20f81752809a</url>
+    <urlname>Station</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.234733" lon="6.75515">
+    <time>2011-08-02T15:21:26.73</time>
+    <name>R331CWK</name>
+    <cmt />
+    <desc>Station</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=a0019153-3b24-4b53-8cea-7da8e380fe80</url>
+    <urlname>Station</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.231933" lon="6.752217">
+    <time>2011-08-02T15:22:40.39</time>
+    <name>R431CWK</name>
+    <cmt />
+    <desc>Station</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=f6cf3916-c609-4adc-86d9-7f8132f85790</url>
+    <urlname>Station</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.233583" lon="6.749617">
+    <time>2011-08-02T15:23:42.587</time>
+    <name>R531CWK</name>
+    <cmt />
+    <desc>Station</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=a30b8af4-b9ed-446a-914a-a4caa58f8bea</url>
+    <urlname>Station</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.236967" lon="6.749383">
+    <time>2011-08-02T15:24:37.987</time>
+    <name>R631CWK</name>
+    <cmt />
+    <desc>Station</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=a1071cda-4fec-443e-9594-e8fa497d87ee</url>
+    <urlname>Station</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.239017" lon="6.74615">
+    <time>2011-08-02T15:25:43.897</time>
+    <name>R731CWK</name>
+    <cmt />
+    <desc>Station</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=d9d490db-353d-4056-91e5-cabe35959673</url>
+    <urlname>Station</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.297967" lon="6.847633">
+    <time>2011-08-14T03:39:02.86</time>
+    <name>013264H</name>
+    <cmt />
+    <desc>Station 1</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=20c537ad-6cef-4bea-bc63-ad3efeffe525</url>
+    <urlname>Station 1</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.295417" lon="6.8498">
+    <time>2011-08-14T03:39:49.463</time>
+    <name>023264H</name>
+    <cmt />
+    <desc>Station 2</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=4e397756-501e-46d4-912b-aca47f50c81b</url>
+    <urlname>Station 2</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.292867" lon="6.84815">
+    <time>2011-08-14T03:40:36.577</time>
+    <name>033264H</name>
+    <cmt />
+    <desc>Station 3</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=e4b091a7-50ac-4435-8185-f2d95ee5a6d2</url>
+    <urlname>Station 3</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.272833" lon="6.8325">
+    <time>2012-01-31T14:05:40.667</time>
+    <name>PK395EC</name>
+    <cmt />
+    <desc>GC395EC Parking</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=e7f831a3-2442-4625-a773-5b6970d9959f</url>
+    <urlname>GC395EC Parking</urlname>
+    <sym>Parking Area</sym>
+    <type>Waypoint|Parking Area</type>
+  </wpt>
+  <wpt lat="51.273367" lon="6.831833">
+    <time>2012-01-31T14:07:50.583</time>
+    <name>S0395EC</name>
+    <cmt>Drehe eine Runde. Gehe zunächst zu den Banken Deines Vertrauens. Im Umkreis von 30 Metern findest Du zwei unabhängige Banken. Hole Dir das Geld für Deine Ausrüstung.  Du brauchst Dollar. 
+
+N51°16.Hut 
+E006°49.Peitsche
+
+ACHTUNG: Listing gilt ab 2.6.2012. Die alte Bank wurde ausgeraubt und dann geschlossen</cmt>
+    <desc>Die Bank</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=495732f0-b70f-41e5-89ae-6f5fc6fdd7d8</url>
+    <urlname>Die Bank</urlname>
+    <sym>Trailhead</sym>
+    <type>Waypoint|Trailhead</type>
+  </wpt>
+  <wpt lat="51.288667" lon="6.79795">
+    <time>2012-03-26T22:47:55.44</time>
+    <name>MM3FGVH</name>
+    <cmt />
+    <desc>Station 1</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=e54ee2c7-47f7-49d0-b618-2b330c98c1cf</url>
+    <urlname>Station 1</urlname>
+    <sym>Physical Stage</sym>
+    <type>Waypoint|Physical Stage</type>
+  </wpt>
+  <wpt lat="51.294417" lon="6.7615">
+    <time>2012-04-18T08:02:42.67</time>
+    <name>013HC0P</name>
+    <cmt />
+    <desc>GC3HC0P Stage 1</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=3554d150-6b39-4cd7-8d15-8481552b4eb8</url>
+    <urlname>GC3HC0P Stage 1</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.296967" lon="6.758433">
+    <time>2012-04-18T06:54:09.85</time>
+    <name>PA3HC0P</name>
+    <cmt />
+    <desc>Straßenrand Zeppenheimer Straße</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=d564acdd-bc97-4d7d-b768-870db1062260</url>
+    <urlname>Straßenrand Zeppenheimer Straße</urlname>
+    <sym>Parking Area</sym>
+    <type>Waypoint|Parking Area</type>
+  </wpt>
+  <wpt lat="51.300467" lon="6.796783">
+    <time>2012-05-21T05:47:28.887</time>
+    <name>013KX98</name>
+    <cmt>Durchschnittliches natürliches Alter: ____ = J</cmt>
+    <desc>Linde</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=efaa0096-6148-4c65-b08a-1fb694ab621b</url>
+    <urlname>Linde</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.29965" lon="6.7978">
+    <time>2012-05-21T05:49:12.51</time>
+    <name>023KX98</name>
+    <cmt>Wie viele Früchte sind max. an einem Stiel zu finden? ____ = O</cmt>
+    <desc>Stieleiche</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=1a7810dd-bf96-443b-9bb2-a0fe1f06fcae</url>
+    <urlname>Stieleiche</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.299133" lon="6.79825">
+    <time>2012-05-21T05:51:20.443</time>
+    <name>033KX98</name>
+    <cmt>Wie hoch wird die Roterle? ____ = M</cmt>
+    <desc>Roterle</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=5424a4ff-9452-413a-ac08-87b69192a7b3</url>
+    <urlname>Roterle</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.2978" lon="6.7995">
+    <time>2012-05-21T05:53:14.59</time>
+    <name>043KX98</name>
+    <cmt>Wie hoch kann der Strauch werden? ____ = P</cmt>
+    <desc>Wolliger Schneeball</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=16728d78-925a-4c21-8b5c-648bc31642a9</url>
+    <urlname>Wolliger Schneeball</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.29615" lon="6.8003">
+    <time>2012-05-21T05:54:42.073</time>
+    <name>053KX98</name>
+    <cmt>Durchschnittliches natürliches Alter: ____ = D</cmt>
+    <desc>Buche</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=f16e0f40-3e2e-44e0-a408-9fa73e4a4831</url>
+    <urlname>Buche</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.295533" lon="6.800617">
+    <time>2012-05-21T05:55:38.947</time>
+    <name>063KX98</name>
+    <cmt>Natürliches Vorkommen bis zu einer Höhe von? ____ = I</cmt>
+    <desc>Hainbuche</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=586ac365-e8c7-415f-bcce-4120c1f9f20d</url>
+    <urlname>Hainbuche</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.295017" lon="6.800517">
+    <time>2012-05-21T05:58:02.843</time>
+    <name>073KX98</name>
+    <cmt>Wie alter war die Kiefer im Jahre 1995? ____ = A</cmt>
+    <desc>Anatomie eines Baumes</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=712f49f6-490a-4844-a25c-6616e5713d55</url>
+    <urlname>Anatomie eines Baumes</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.295283" lon="6.79825">
+    <time>2012-05-21T05:59:37.477</time>
+    <name>083KX98</name>
+    <cmt>In welchem Jahrhundert wurde sie in Europa eingeführt? ____ = L</cmt>
+    <desc>Roteiche</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=9dc682bd-b96d-4447-96fe-8f1972b3fbdf</url>
+    <urlname>Roteiche</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.294683" lon="6.796967">
+    <time>2012-05-21T06:00:30.243</time>
+    <name>093KX98</name>
+    <cmt>Wie hoch wird die Birke? ____ = C</cmt>
+    <desc>Birke</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=9501121f-c140-4d6b-85c9-a42aca1e1919</url>
+    <urlname>Birke</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.29435" lon="6.7963">
+    <time>2012-05-21T06:02:40.57</time>
+    <name>103KX98</name>
+    <cmt>Wie hoch kann es als dieser kleiner Baum werden? ____ = K</cmt>
+    <desc>Pfaffenhütchen</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=bc5875fc-4d0f-4119-a1d0-65f441be5ce6</url>
+    <urlname>Pfaffenhütchen</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.294667" lon="6.794733">
+    <time>2012-05-21T06:03:29.523</time>
+    <name>113KX98</name>
+    <cmt>Auf wie vielen Kontinenten ist er beheimatet? ____ = H</cmt>
+    <desc>Gemeine Schneeball</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=20797c15-0e37-4e39-9124-1b5e523ff2dd</url>
+    <urlname>Gemeine Schneeball</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.2944" lon="6.793367">
+    <time>2012-05-21T06:04:19.117</time>
+    <name>123KX98</name>
+    <cmt>Wie viele Arten umfasst die Gattung Sambucus etwa? ____ = N</cmt>
+    <desc>Schwarzer Holunder</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=abd653b4-ac3d-48e9-bba3-116585aa8cf8</url>
+    <urlname>Schwarzer Holunder</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.295567" lon="6.791217">
+    <time>2012-05-21T06:05:05.657</time>
+    <name>133KX98</name>
+    <cmt>Wie hoch kann er unter günstigen Bedingungen werden? ____ = G</cmt>
+    <desc>Feldahorn</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=a84dddd1-3fa8-4779-8ae3-a7f3c2ae93e8</url>
+    <urlname>Feldahorn</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.297117" lon="6.79285">
+    <time>2012-05-21T06:06:01.83</time>
+    <name>143KX98</name>
+    <cmt>Wie alt kann der Faulbaum werden? ____ = F</cmt>
+    <desc>Faulbaum</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=18c7f215-f702-4cea-85aa-a3a0dc4a851a</url>
+    <urlname>Faulbaum</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.298183" lon="6.794083">
+    <time>2012-05-21T06:06:45.95</time>
+    <name>153KX98</name>
+    <cmt>Wie viele Ahornarten gibt es etwa in der nördl. gemäßigten Zone? ____ = B</cmt>
+    <desc>Bergahorn</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=8b0e11a5-a0a4-447f-8930-e8c293f51bde</url>
+    <urlname>Bergahorn</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.2999" lon="6.795883">
+    <time>2012-05-21T06:07:24.853</time>
+    <name>163KX98</name>
+    <cmt>Bis zu welcher Höhe ist die Esche anzutreffen? ____ = E</cmt>
+    <desc>Esche</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=cc2a8b71-deef-4fa2-98a1-7cb54fac5fdb</url>
+    <urlname>Esche</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.3019" lon="6.797467">
+    <time>2012-05-21T05:46:11.26</time>
+    <name>PK3KX98</name>
+    <cmt>Kostenloser Parkplatz</cmt>
+    <desc>Wanderparkplatz</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=631f3c3c-b832-4698-94b9-c55b1d000db0</url>
+    <urlname>Wanderparkplatz</urlname>
+    <sym>Parking Area</sym>
+    <type>Waypoint|Parking Area</type>
+  </wpt>
+  <wpt lat="51.266583" lon="6.784817">
+    <time>2012-06-22T09:49:42.647</time>
+    <name>003NBDE</name>
+    <cmt />
+    <desc>PARKEN</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=ffaa8e45-59b7-4512-aa61-ae211ef46155</url>
+    <urlname>PARKEN</urlname>
+    <sym>Parking Area</sym>
+    <type>Waypoint|Parking Area</type>
+  </wpt>
+  <wpt lat="51.2665" lon="6.784417">
+    <time>2012-06-22T14:27:36.99</time>
+    <name>013NBDE</name>
+    <cmt />
+    <desc>Station 1</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=6b62f35b-b5e9-4523-aab5-fc518708049d</url>
+    <urlname>Station 1</urlname>
+    <sym>Physical Stage</sym>
+    <type>Waypoint|Physical Stage</type>
+  </wpt>
+  <wpt lat="51.2425" lon="6.829717">
+    <time>2012-06-25T10:38:10.14</time>
+    <name>PK3NYX0</name>
+    <cmt />
+    <desc>GC3NYX0 Parking</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=817a4da8-422a-41dd-adae-be3bddcf975d</url>
+    <urlname>GC3NYX0 Parking</urlname>
+    <sym>Parking Area</sym>
+    <type>Waypoint|Parking Area</type>
+  </wpt>
+  <wpt lat="51.243033" lon="6.829233">
+    <time>2012-06-25T10:39:46.683</time>
+    <name>S13NYX0</name>
+    <cmt />
+    <desc>GC3NYX0 Stage 1</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=1e279450-3d5f-47d2-b284-c370d250728b</url>
+    <urlname>GC3NYX0 Stage 1</urlname>
+    <sym>Virtual Stage</sym>
+    <type>Waypoint|Virtual Stage</type>
+  </wpt>
+  <wpt lat="51.283717" lon="6.824683">
+    <time>2013-04-21T01:32:53.463</time>
+    <name>T14A9EW</name>
+    <cmt>Was sprach "Robin Hood" bei den ??? im Superpapagei?</cmt>
+    <desc>Anfang</desc>
+    <url>http://www.geocaching.com/seek/wpt.aspx?WID=ac927bd7-63a9-4457-ad0f-25fb4bf88354</url>
+    <urlname>Anfang</urlname>
+    <sym>Reference Point</sym>
+    <type>Waypoint|Reference Point</type>
+  </wpt>
+</gpx>

@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>2013.05.14:</b>\n
+    <b>2014.05.14:</b>\n
     · Fix: Adapting to changes on geocaching.com\n
     \n
     <b>2014.04.30:</b>\n

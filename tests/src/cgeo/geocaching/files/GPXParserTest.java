@@ -106,6 +106,28 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertGc31j2hWaypoints(cache);
     }
 
+    public void testRenamedWaypointTypes() throws IOException, ParserException {
+        removeCacheCompletely("GC31J2H");
+        final List<Geocache> caches = readGPX10(R.raw.renamed_waypoints, R.raw.renamed_waypoints_wpts);
+        assertThat(caches).hasSize(25);
+        // multi waypoint (now "physical stage")
+        Geocache cache = caches.get(12);
+        assertThat(cache.getGeocode()).isEqualTo("GC3NBDE");
+        List<Waypoint> waypoints = cache.getWaypoints();
+        assertThat(waypoints).isNotEmpty();
+        Waypoint waypoint = waypoints.get(1);
+        assertThat(waypoint).isNotNull();
+        assertThat(waypoint.getWaypointType()).isEqualTo(WaypointType.STAGE);
+        // mystery waypoint - now "virtual stage"
+        cache = caches.get(15);
+        assertThat(cache.getGeocode()).isEqualTo("GC16CBG");
+        waypoints = cache.getWaypoints();
+        assertThat(waypoints).isNotEmpty();
+        waypoint = waypoints.get(1);
+        assertThat(waypoint).isNotNull();
+        assertThat(waypoint.getWaypointType()).isEqualTo(WaypointType.PUZZLE);
+    }
+
     public void testGc31j2hWptsWithoutCache() throws IOException, ParserException {
         final List<Geocache> caches = readGPX10(R.raw.gc31j2h_wpts);
         assertThat(caches).isEmpty();
@@ -122,6 +144,9 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(GPXParser.convertWaypointSym2Type("Reference point")).isEqualTo(WaypointType.WAYPOINT);
 
         assertThat(GPXParser.convertWaypointSym2Type(WaypointType.PARKING.getL10n())).isEqualTo(WaypointType.PARKING);
+        // new names of multi and mystery stages
+        assertThat(GPXParser.convertWaypointSym2Type("Physical Stage")).isEqualTo(WaypointType.STAGE);
+        assertThat(GPXParser.convertWaypointSym2Type("Virtual Stage")).isEqualTo(WaypointType.PUZZLE);
     }
 
     private static void assertGc31j2h(final Geocache cache) {
