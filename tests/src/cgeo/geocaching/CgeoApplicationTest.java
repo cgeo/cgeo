@@ -158,6 +158,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     public static void testSearchByGeocodeNotLoggedIn() {
         withMockedLoginDo(new Runnable() {
 
+            @Override
             public void run() {
                 // non premium cache
                 MockedCache cache = new GC2CJPF();
@@ -193,6 +194,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     public static void testSearchErrorOccured() {
         withMockedLoginDo(new Runnable() {
 
+            @Override
             public void run() {
                 // non premium cache
                 final MockedCache cache = new GC1ZXX2();
@@ -342,6 +344,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     public static void testSearchByViewportNotLoggedIn() {
         withMockedLoginDo(new Runnable() {
 
+            @Override
             public void run() {
                 final Strategy strategy = Settings.getLiveMapStrategy();
                 final Strategy testStrategy = Strategy.FAST; // FASTEST, FAST or DETAILED for tests

@@ -150,6 +150,7 @@ public abstract class MockedCache implements ICache {
         return getName();
     }
 
+    @Override
     public Geopoint getCoords() {
         return coords;
     }

@@ -52,10 +52,6 @@ public class ExportTest extends CGeoTestCase {
 
     private static class GpxExportTester extends GpxExport {
 
-        protected GpxExportTester() {
-            super();
-        }
-
         public File testExportSync(List<Geocache> caches) throws InterruptedException, ExecutionException {
             final ArrayList<String> geocodes = new ArrayList<String>(caches.size());
             for (final Geocache cache : caches) {

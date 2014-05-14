@@ -17,6 +17,7 @@ public class InvalidXMLCharacterFilterReaderTest extends AndroidTestCase {
         final AtomicReference<String> description = new AtomicReference<String>();
         root.setEndTextElementListener(new EndTextElementListener() {
 
+            @Override
             public void end(String body) {
                 description.set(body);
             }
