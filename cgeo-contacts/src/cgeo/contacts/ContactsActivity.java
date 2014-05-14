@@ -67,7 +67,7 @@ public final class ContactsActivity extends Activity {
             selectContact(contacts);
         }
         else {
-            int contactId = contacts.get(0).first.intValue();
+            int contactId = contacts.get(0).first;
             openContactAndFinish(contactId);
         }
     }
@@ -83,7 +83,7 @@ public final class ContactsActivity extends Activity {
                 .setItems(items, new OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
-                        int contactId = contacts.get(which).first.intValue();
+                        int contactId = contacts.get(which).first;
                         dialog.dismiss();
                         openContactAndFinish(contactId);
                     }
@@ -111,7 +111,7 @@ public final class ContactsActivity extends Activity {
             while (cursor != null && cursor.moveToNext()) {
                 int foundId = cursor.getInt(0);
                 String foundName = cursor.getString(1);
-                result.add(new Pair<Integer, String>(Integer.valueOf(foundId), foundName));
+                result.add(new Pair<Integer, String>(foundId, foundName));
             }
         } catch (Exception e) {
             Log.e(LOG_TAG, "ContactsActivity.getContactId", e);
