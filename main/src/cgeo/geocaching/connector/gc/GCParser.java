@@ -367,7 +367,7 @@ public abstract class GCParser {
         return new SearchResult(cache);
     }
 
-    static SearchResult parseAndSaveCacheFromText(final String page, @NonNull final CancellableHandler handler) {
+    static SearchResult parseAndSaveCacheFromText(final String page, @Nullable final CancellableHandler handler) {
         final ImmutablePair<StatusCode, Geocache> parsed = parseCacheFromText(page, handler);
         final SearchResult result = new SearchResult(parsed.left);
         if (parsed.left == StatusCode.NO_ERROR) {
@@ -386,7 +386,7 @@ public abstract class GCParser {
      * @return a pair, with a {@link StatusCode} on the left, and a non-nulll cache objet on the right
      *          iff the status code is {@link StatusCode.NO_ERROR}.
      */
-    static private ImmutablePair<StatusCode, Geocache> parseCacheFromText(final String pageIn, @NonNull final CancellableHandler handler) {
+    static private ImmutablePair<StatusCode, Geocache> parseCacheFromText(final String pageIn, @Nullable final CancellableHandler handler) {
         CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_details);
 
         if (StringUtils.isBlank(pageIn)) {
