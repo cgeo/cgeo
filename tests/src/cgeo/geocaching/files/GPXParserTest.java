@@ -109,7 +109,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         final List<Geocache> caches = readGPX10(R.raw.renamed_waypoints, R.raw.renamed_waypoints_wpts);
         assertEquals(25, caches.size());
         // multi waypoint (now "physical stage")
-        Geocache cache = caches.get(12);
+        Geocache cache = caches.get(0);
         assertEquals("GC3NBDE", cache.getGeocode());
         List<Waypoint> waypoints = cache.getWaypoints();
         assertFalse(waypoints.isEmpty());
@@ -117,7 +117,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertNotNull(waypoint);
         assertEquals(WaypointType.STAGE, waypoint.getWaypointType());
         // mystery waypoint - now "virtual stage"
-        cache = caches.get(15);
+        cache = caches.get(19);
         assertEquals("GC16CBG", cache.getGeocode());
         waypoints = cache.getWaypoints();
         assertFalse(waypoints.isEmpty());
