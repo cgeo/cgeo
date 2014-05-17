@@ -8,16 +8,16 @@ import cgeo.geocaching.test.R;
 import org.eclipse.jdt.annotation.NonNull;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.net.Uri;
 
 public class FileTypeDetectorTest extends AbstractResourceInstrumentationTestCase {
 
-    private static class FileContentProvider extends ContentResolver {
+    private static class FileContentResolver extends ContentResolver {
 
-        public FileContentProvider() {
-            super(null);
+        public FileContentResolver(Context context) {
+            super(context);
         }
-
     }
 
     public void testUnknown() throws Exception {
@@ -46,6 +46,7 @@ public class FileTypeDetectorTest extends AbstractResourceInstrumentationTestCas
 
     private void assertFileType(final int resourceId, final @NonNull FileType fileType) {
         final Uri resourceURI = getResourceURI(resourceId);
-        assertThat(new FileTypeDetector(resourceURI, new FileContentProvider()).getFileType()).isEqualTo(fileType);
+        final FileContentResolver contentResolver = new FileContentResolver(getInstrumentation().getContext());
+        assertThat(new FileTypeDetector(resourceURI, contentResolver).getFileType()).isEqualTo(fileType);
     }
 }
