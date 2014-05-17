@@ -12,7 +12,9 @@ import cgeo.geocaching.files.GPX10Parser;
 import cgeo.geocaching.files.ParserException;
 import cgeo.geocaching.list.StoredList;
 
+import android.content.ContentResolver;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.test.InstrumentationTestCase;
 
 import java.io.File;
@@ -101,5 +103,10 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
         } finally {
             instream.close();
         }
+    }
+
+    protected Uri getResourceURI(int resId) {
+        Resources resources = getInstrumentation().getContext().getResources();
+        return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + resources.getResourcePackageName(resId) + '/' + resources.getResourceTypeName(resId) + '/' + resources.getResourceEntryName(resId));
     }
 }

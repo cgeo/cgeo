@@ -14,6 +14,7 @@ import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import android.app.Activity;
@@ -93,46 +94,77 @@ public class GPXImporter {
      *
      * @param uri
      *            URI of the file to import
-     * @param knownMimeType
-     * @param knownPathName
+     * @param mimeType
+     * @param pathName
      */
-    public void importGPX(final Uri uri, final @Nullable String knownMimeType, final @Nullable String knownPathName) {
+    public void importGPX(final Uri uri, final @Nullable String mimeType, final @Nullable String pathName) {
         final ContentResolver contentResolver = fromActivity.getContentResolver();
-        String mimeType = knownMimeType;
-        final String pathName = knownPathName != null ? knownPathName : uri.getPath();
-
-        // if mimetype can't be determined (e.g. for emulators email app), derive it from uri file extension
-        // contentResolver.getType(uri) doesn't help but throws exception for emulators email app
-        //   Permission Denial: reading com.android.email.provider.EmailProvider uri
-        // Google search says: there is no solution for this problem
-        // Gmail doesn't work at all, see #967
-        if (mimeType == null) {
-            if (StringUtils.endsWithIgnoreCase(pathName, GPX_FILE_EXTENSION) || StringUtils.endsWithIgnoreCase(pathName, LOC_FILE_EXTENSION)) {
-                mimeType = "application/xml";
-            } else {
-                // if we can't determine a better type, default to zip import
-                // emulator email sends e.g. content://com.android.email.attachmentprovider/1/1/RAW, mimetype=null
-                mimeType = "application/zip";
-            }
-        }
 
         Log.i("importGPX: " + uri + ", mimetype=" + mimeType);
-        if (GPX_MIME_TYPES.contains(mimeType)) {
-            if (StringUtils.endsWithIgnoreCase(pathName, LOC_FILE_EXTENSION)) {
-                new ImportLocAttachmentThread(uri, contentResolver, listId, importStepHandler, progressHandler).start();
-            } else {
-                new ImportGpxAttachmentThread(uri, contentResolver, listId, importStepHandler, progressHandler).start();
-            }
-        } else if (ZIP_MIME_TYPES.contains(mimeType)) {
-            new ImportGpxZipAttachmentThread(uri, contentResolver, listId, importStepHandler, progressHandler).start();
-        } else {
-            importFinished();
-        }
-    }
+		@NonNull
+		FileType fileType = new FileTypeDetector(uri, contentResolver)
+				.getFileType();
 
-    /**
-     * Import GPX provided via intent of activity that instantiated this GPXImporter.
-     */
+		if (fileType == FileType.UNKNOWN) {
+			fileType = getFileTypeFromPathName(pathName);
+		}
+		if (fileType == FileType.UNKNOWN) {
+			fileType = getFileTypeFromMimeType(mimeType);
+		}
+
+		ImportThread importer = getImporterFromFileType(uri, contentResolver,
+				fileType);
+
+		if (importer != null) {
+			importer.start();
+		} else {
+			importFinished();
+		}
+	}
+
+	private static @NonNull FileType getFileTypeFromPathName(
+			final String pathName) {
+        if (StringUtils.endsWithIgnoreCase(pathName, GPX_FILE_EXTENSION)) {
+        		return FileType.GPX;
+        }
+
+	if (StringUtils.endsWithIgnoreCase(pathName, LOC_FILE_EXTENSION)) {
+		return FileType.LOC;
+	}
+		return FileType.UNKNOWN;
+	}
+
+	private static @NonNull FileType getFileTypeFromMimeType(
+			final String mimeType) {
+        if (GPX_MIME_TYPES.contains(mimeType)) {
+			return FileType.GPX;
+        } else if (ZIP_MIME_TYPES.contains(mimeType)) {
+			return FileType.ZIP;
+		}
+		return FileType.UNKNOWN;
+	}
+
+	private ImportThread getImporterFromFileType(Uri uri,
+			ContentResolver contentResolver, FileType fileType) {
+		switch (fileType) {
+		case ZIP:
+			return new ImportGpxZipAttachmentThread(uri, contentResolver,
+					listId, importStepHandler, progressHandler);
+		case GPX:
+			return new ImportGpxAttachmentThread(uri, contentResolver, listId,
+					importStepHandler, progressHandler);
+		case LOC:
+			return new ImportLocAttachmentThread(uri, contentResolver, listId,
+					importStepHandler, progressHandler);
+		default:
+			return null;
+		}
+	}
+
+	/**
+	 * Import GPX provided via intent of activity that instantiated this
+	 * GPXImporter.
+	 */
     public void importGPX() {
         final Intent intent = fromActivity.getIntent();
         final Uri uri = intent.getData();
