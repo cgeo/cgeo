@@ -26,10 +26,8 @@ public class CgeoApplication extends Application {
     private volatile IGeoData currentGeo = null;
     private volatile float currentDirection = 0.0f;
 
-    private static final UncaughtExceptionHandler defaultHandler;
-
     static {
-        defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
+        final UncaughtExceptionHandler defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
 
         Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler() {
 
@@ -40,13 +38,10 @@ public class CgeoApplication extends Application {
                 while (exx.getCause() != null) {
                     exx = exx.getCause();
                 }
-                if (exx.getClass().equals(OutOfMemoryError.class))
-                {
+                if (exx.getClass().equals(OutOfMemoryError.class)) {
                     try {
                         Log.e("OutOfMemory");
-						android.os.Debug.dumpHprofData(Environment
-								.getExternalStorageDirectory().getPath()
-								+ "/dump.hprof");
+                        android.os.Debug.dumpHprofData(Environment.getExternalStorageDirectory().getPath() + "/dump.hprof");
                     } catch (IOException e) {
                         Log.e("Error writing dump", e);
                     }

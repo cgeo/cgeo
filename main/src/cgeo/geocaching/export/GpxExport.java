@@ -167,8 +167,7 @@ class GpxExport extends AbstractExport {
                 if (exportFile != null) {
                     ActivityMixin.showToast(activity, getName() + ' ' + getString(R.string.export_exportedto) + ": " + exportFile.toString());
                     if (Settings.getShareAfterExport()) {
-						ShareUtils.share(activity, exportFile,
-								"application/xml", R.string.export_gpx_to);
+                        ShareUtils.share(activity, exportFile, "application/xml", R.string.export_gpx_to);
                     }
                 } else {
                     ActivityMixin.showToast(activity, getString(R.string.export_failed));
