@@ -1019,21 +1019,25 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return;
         }
 
-        if (Settings.getChooseList() && type != CacheListType.OFFLINE) {
+        if (Settings.getChooseList() && (type != CacheListType.OFFLINE && type != CacheListType.HISTORY)) {
             // let user select list to store cache in
             new StoredList.UserInterface(this).promptForListSelection(R.string.list_title,
                     new Action1<Integer>() {
                         @Override
                         public void call(final Integer selectedListId) {
-                            refreshStored(caches, selectedListId);
+                            // in case of online lists, set the list id to a concrete list now
+                            for (Geocache geocache : caches) {
+                                geocache.setListId(selectedListId);
+                            }
+                            refreshStoredInternal(caches);
                         }
                     }, true, StoredList.TEMPORARY_LIST_ID, newListName);
         } else {
-            refreshStored(caches, this.listId);
+            refreshStoredInternal(caches);
         }
     }
 
-    private void refreshStored(final List<Geocache> caches, final int storeListId) {
+    private void refreshStoredInternal(final List<Geocache> caches) {
         detailProgress = 0;
 
         showProgress(false);
@@ -1051,7 +1055,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         detailProgressTime = System.currentTimeMillis();
 
-        final LoadDetailsThread threadDetails = new LoadDetailsThread(loadDetailsHandler, caches, storeListId);
+        final LoadDetailsThread threadDetails = new LoadDetailsThread(loadDetailsHandler, caches);
         threadDetails.start();
     }
 
@@ -1124,15 +1128,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private class LoadDetailsThread extends Thread {
 
         final private CancellableHandler handler;
-        final private int listIdLD;
         final private List<Geocache> caches;
 
-        public LoadDetailsThread(CancellableHandler handler, List<Geocache> caches, int listId) {
+        public LoadDetailsThread(CancellableHandler handler, List<Geocache> caches) {
             this.handler = handler;
             this.caches = caches;
-
-            // in case of online lists, set the list id to the standard list
-            this.listIdLD = Math.max(listId, StoredList.STANDARD_LIST_ID);
         }
 
         @Override
@@ -1167,7 +1167,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     throw new InterruptedException("Stopped storing process.");
                 }
                 detailProgress++;
-                cache.refreshSynchronous(listIdLD, null);
+                cache.refreshSynchronous(null);
                 handler.sendEmptyMessage(cacheList.indexOf(cache));
             } catch (final InterruptedException e) {
                 Log.i(e.getMessage());

@@ -44,7 +44,7 @@ public class OkapiClientTest extends CGeoTestCase {
         assertThat(cache.getWaypoints()).hasSize(3);
 
         // load again
-        cache.refreshSynchronous(cache.getListId(), null);
+        cache.refreshSynchronous(null);
         assertThat(cache.getWaypoints()).hasSize(3);
     }
 

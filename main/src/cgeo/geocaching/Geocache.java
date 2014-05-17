@@ -1496,19 +1496,19 @@ public class Geocache implements ICache, IWaypoint {
         }
     }
 
-    public Subscription refresh(final int newListId, final CancellableHandler handler, final Scheduler scheduler) {
+    public Subscription refresh(final CancellableHandler handler, final Scheduler scheduler) {
         return scheduler.createWorker().schedule(new Action0() {
             @Override
             public void call() {
-                refreshSynchronous(newListId, handler);
+                refreshSynchronous(handler);
                 handler.sendEmptyMessage(CancellableHandler.DONE);
             }
         });
     }
 
-    public void refreshSynchronous(final int newListId, final CancellableHandler handler) {
+    public void refreshSynchronous(final CancellableHandler handler) {
         DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
-        storeCache(null, geocode, newListId, true, handler);
+        storeCache(null, geocode, listId, true, handler);
     }
 
     public static void storeCache(Geocache origCache, String geocode, int listId, boolean forceRedownload, CancellableHandler handler) {

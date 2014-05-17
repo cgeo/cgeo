@@ -11,6 +11,7 @@ import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
+
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -151,7 +152,7 @@ public class CachePopup extends AbstractPopupActivity {
 
             final StoreCacheHandler refreshCacheHandler = new StoreCacheHandler(R.string.cache_dialog_offline_save_message);
             progress.show(CachePopup.this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
-            cache.refresh(cache.getListId(), refreshCacheHandler, Schedulers.io());
+            cache.refresh(refreshCacheHandler, Schedulers.io());
         }
     }
 
