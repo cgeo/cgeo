@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,6 +28,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page> {
+
+    private static final String EXTRA_ABOUT_STARTPAGE = "cgeo.geocaching.extra.about.startpage";
 
     class LicenseViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
@@ -142,7 +145,13 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.viewpager_activity);
-        createViewPager(0, null);
+
+        int startPage = Page.VERSION.ordinal();
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            startPage = extras.getInt(EXTRA_ABOUT_STARTPAGE, startPage);
+        }
+        createViewPager(startPage, null);
         reinitializeViewPager();
     }
 
@@ -208,6 +217,12 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             }
         }
         return result;
+    }
+
+    public static void showChangeLog(Context fromActivity) {
+        final Intent intent = new Intent(fromActivity, AboutActivity.class);
+        intent.putExtra(EXTRA_ABOUT_STARTPAGE, Page.CHANGELOG.ordinal());
+        fromActivity.startActivity(intent);
     }
 
 }

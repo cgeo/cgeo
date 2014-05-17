@@ -1008,4 +1008,12 @@ public class Settings {
         return getString(R.string.pref_ec_icons, "1");
     }
 
+    /* Store last version for the changelog display */
+    public static int getLastChangelogVersion() {
+        return getInt(R.string.pref_changelog_last_version, 0);
+    }
+
+    public static void setLastChangelogVersion(int version) {
+        putInt(R.string.pref_changelog_last_version, version);
+    }
 }
