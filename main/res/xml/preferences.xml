@@ -733,6 +733,9 @@
                 android:defaultValue="false"
                 android:key="@string/pref_debug"
                 android:title="@string/init_debug" />
+            <Preference
+                android:key="@string/pref_memory_dump"
+                android:title="@string/init_create_memory_dump" />
         </PreferenceCategory>
     </PreferenceScreen>
 

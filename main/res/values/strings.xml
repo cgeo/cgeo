@@ -541,6 +541,9 @@
     <string name="init_maintenance">Maintenance</string>
     <string name="init_maintenance_directories_note">c:geo stores images, log images and other files related to a cache in a separate directory. In some cases (like importing/exporting the database) this directory may contain outdated files, which can be deleted here.</string>
     <string name="init_maintenance_directories">Delete orphaned files</string>
+    <string name="init_create_memory_dump">Create memory dump</string>
+    <string name="init_memory_dump">Memory dump</string>
+    <string name="init_memory_dumped">Memory dumped to %s</string>
     <string name="settings_open_website">Open website</string>
     <string name="settings_settings">Settings</string>
     <string name="settings_information">Information</string>

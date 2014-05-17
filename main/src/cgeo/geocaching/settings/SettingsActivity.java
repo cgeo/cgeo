@@ -14,6 +14,7 @@ import cgeo.geocaching.files.SimpleDirChooser;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.utils.DatabaseBackupUtils;
+import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -380,6 +381,15 @@ public class SettingsActivity extends PreferenceActivity {
                 return true;
             }
         });
+		Preference memoryDumpPref = getPreference(R.string.pref_memory_dump);
+		memoryDumpPref
+				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+					@Override public boolean onPreferenceClick(
+							Preference preference) {
+						DebugUtils.createMemoryDump(SettingsActivity.this);
+						return true;
+					}
+				});
     }
 
     private void initDbLocationPreference() {

@@ -10,6 +10,7 @@ import rx.functions.Action1;
 import rx.observables.ConnectableObservable;
 
 import android.app.Application;
+import android.os.Environment;
 
 import java.io.IOException;
 import java.lang.Thread.UncaughtExceptionHandler;
@@ -43,7 +44,9 @@ public class CgeoApplication extends Application {
                 {
                     try {
                         Log.e("OutOfMemory");
-                        android.os.Debug.dumpHprofData("/sdcard/dump.hprof");
+						android.os.Debug.dumpHprofData(Environment
+								.getExternalStorageDirectory().getPath()
+								+ "/dump.hprof");
                     } catch (IOException e) {
                         Log.e("Error writing dump", e);
                     }

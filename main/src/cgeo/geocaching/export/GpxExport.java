@@ -8,6 +8,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.ShareUtils;
 
 import org.apache.commons.lang3.CharEncoding;
 
@@ -15,8 +16,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Environment;
 import android.view.ContextThemeWrapper;
 import android.view.View;
@@ -168,11 +167,8 @@ class GpxExport extends AbstractExport {
                 if (exportFile != null) {
                     ActivityMixin.showToast(activity, getName() + ' ' + getString(R.string.export_exportedto) + ": " + exportFile.toString());
                     if (Settings.getShareAfterExport()) {
-                        final Intent shareIntent = new Intent();
-                        shareIntent.setAction(Intent.ACTION_SEND);
-                        shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(exportFile));
-                        shareIntent.setType("application/xml");
-                        activity.startActivity(Intent.createChooser(shareIntent, getString(R.string.export_gpx_to)));
+						ShareUtils.share(activity, exportFile,
+								"application/xml", R.string.export_gpx_to);
                     }
                 } else {
                     ActivityMixin.showToast(activity, getString(R.string.export_failed));
