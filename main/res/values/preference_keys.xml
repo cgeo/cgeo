@@ -19,6 +19,7 @@
     <string name="preference_screen_ox">preference_screen_ox</string>
     <string name="preference_screen_twitter">preference_screen_twitter</string>
     <string name="preference_screen_navigation_menu">fakekey_navigation_menu_screen</string>
+    <string name="preference_screen_sendtocgeo">preference_screen_sendtocgeo</string>
     <string name="pref_fakekey_ocde_authorization">fakekey_ocde_authorization</string>
     <string name="pref_fakekey_ocpl_authorization">fakekey_ocpl_authorization</string>
     <string name="pref_fakekey_ocnl_authorization">fakekey_ocnl_authorization</string>
@@ -167,5 +168,4 @@
     <string name="pref_twitter_cache_message">twitter_cache_message</string>
     <string name="pref_twitter_trackable_message">twitter_trackable_message</string>
     <string name="pref_ec_icons">ec_icons</string>
-
 </resources>

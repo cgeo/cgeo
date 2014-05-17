@@ -216,7 +216,9 @@
                         android:title="@string/settings_open_website" />
                 </PreferenceCategory>
             </PreferenceScreen>
-            <PreferenceScreen android:title="@string/settings_title_ec" android:key="@string/preference_screen_ec">
+            <PreferenceScreen
+                android:key="@string/preference_screen_ec"
+                android:title="@string/settings_title_ec" >
                 <PreferenceCategory android:title="@string/settings_settings" >
                     <CheckBoxPreference
                         android:defaultValue="false"
@@ -266,7 +268,9 @@
                         android:title="@string/settings_open_website" />
                 </PreferenceCategory>
             </PreferenceScreen>
-            <PreferenceScreen android:title="@string/settings_title_ox" android:key="@string/preference_screen_ox">
+            <PreferenceScreen
+                android:key="@string/preference_screen_ox"
+                android:title="@string/settings_title_ox" >
                 <PreferenceCategory android:title="@string/settings_settings" >
                     <CheckBoxPreference
                         android:defaultValue="false"
@@ -285,11 +289,12 @@
             </PreferenceScreen>
             <PreferenceScreen android:title="@string/init_gcvote" >
                 <PreferenceCategory android:title="@string/settings_settings" >
-			        <CheckBoxPreference
-			            android:defaultValue="true"
-			            android:key="@string/pref_ratingwanted"
-			            android:summary="@string/init_summary_ratingwanted"
-			            android:title="@string/init_ratingwanted" />
+                    <CheckBoxPreference
+                        android:defaultValue="true"
+                        android:key="@string/pref_ratingwanted"
+                        android:summary="@string/init_summary_ratingwanted"
+                        android:title="@string/init_ratingwanted" />
+
                     <cgeo.geocaching.settings.EditPasswordPreference
                         android:dialogTitle="@string/init_password"
                         android:hint="@string/init_password"
@@ -305,7 +310,9 @@
                         android:title="@string/settings_open_website" />
                 </PreferenceCategory>
             </PreferenceScreen>
-            <PreferenceScreen android:title="@string/init_sendToCgeo" >
+            <PreferenceScreen
+                android:key="@string/preference_screen_sendtocgeo"
+                android:title="@string/init_sendToCgeo" >
                 <PreferenceCategory android:title="@string/settings_settings" >
                     <EditTextPreference
                         android:dialogTitle="@string/init_sendToCgeo_name"

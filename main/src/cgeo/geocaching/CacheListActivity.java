@@ -40,6 +40,7 @@ import cgeo.geocaching.sensors.DirectionProvider;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.ComparatorUserInterface;
 import cgeo.geocaching.ui.CacheListAdapter;
@@ -67,6 +68,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -543,7 +545,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setVisible(menu, R.id.menu_export, !isEmpty && (isHistory || isOffline));
             setVisible(menu, R.id.menu_remove_from_history, !isEmpty && isHistory);
             setVisible(menu, R.id.menu_clear_offline_logs, !isEmpty && containsOfflineLogs() && (isHistory || isOffline));
-            setVisible(menu, R.id.menu_import_web, isOffline && Settings.getWebDeviceCode() != null);
+            setVisible(menu, R.id.menu_import_web, isOffline);
             setVisible(menu, R.id.menu_import_gpx, isOffline);
             setVisible(menu, R.id.menu_refresh_stored_top, !isOffline && !isEmpty);
 
@@ -1077,8 +1079,19 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     public void importWeb() {
-        detailProgress = 0;
+        // menu is also shown with no device connected
+        if (Settings.getWebDeviceCode() == null) {
+            Dialogs.confirm(this, R.string.web_import_title, R.string.init_sendToCgeo_description, new OnClickListener() {
 
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    SettingsActivity.openForScreen(R.string.preference_screen_sendtocgeo, CacheListActivity.this);
+                }
+            });
+            return;
+        }
+
+        detailProgress = 0;
         showProgress(false);
         final DownloadFromWebHandler downloadFromWebHandler = new DownloadFromWebHandler();
         progress.show(this, null, res.getString(R.string.web_import_waiting), true, downloadFromWebHandler.cancelMessage());
