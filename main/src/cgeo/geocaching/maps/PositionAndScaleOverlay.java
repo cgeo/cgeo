@@ -5,7 +5,6 @@ import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 
-import android.app.Activity;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.location.Location;
@@ -18,10 +17,10 @@ public class PositionAndScaleOverlay implements GeneralOverlay {
     PositionDrawer positionDrawer = null;
     ScaleDrawer scaleDrawer = null;
 
-    public PositionAndScaleOverlay(Activity activity, OverlayImpl ovlImpl) {
+    public PositionAndScaleOverlay(OverlayImpl ovlImpl) {
         this.ovlImpl = ovlImpl;
-        positionDrawer = new PositionDrawer(activity);
-        scaleDrawer = new ScaleDrawer(activity);
+        positionDrawer = new PositionDrawer();
+        scaleDrawer = new ScaleDrawer();
     }
 
     public void setCoordinates(Location coordinatesIn) {

@@ -8,7 +8,6 @@ import cgeo.geocaching.maps.interfaces.OverlayImpl;
 import org.mapsforge.android.maps.Projection;
 import org.mapsforge.android.maps.overlay.Overlay;
 
-import android.app.Activity;
 import android.graphics.Canvas;
 import android.graphics.Point;
 
@@ -20,8 +19,8 @@ public class MapsforgeOverlay extends Overlay implements OverlayImpl {
     private PositionAndScaleOverlay overlayBase = null;
     private Lock lock = new ReentrantLock();
 
-    public MapsforgeOverlay(Activity activityIn) {
-        overlayBase = new PositionAndScaleOverlay(activityIn, this);
+    public MapsforgeOverlay() {
+        overlayBase = new PositionAndScaleOverlay(this);
     }
 
     @Override

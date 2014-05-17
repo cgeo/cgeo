@@ -24,7 +24,6 @@ import org.mapsforge.android.maps.mapgenerator.MapGeneratorInternal;
 import org.mapsforge.android.maps.overlay.Overlay;
 import org.mapsforge.core.GeoPoint;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
@@ -105,8 +104,8 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public PositionAndScaleOverlay createAddPositionAndScaleOverlay(Activity activity) {
-        MapsforgeOverlay ovl = new MapsforgeOverlay(activity);
+    public PositionAndScaleOverlay createAddPositionAndScaleOverlay() {
+        MapsforgeOverlay ovl = new MapsforgeOverlay();
         getOverlays().add(ovl);
         return (PositionAndScaleOverlay) ovl.getBase();
     }

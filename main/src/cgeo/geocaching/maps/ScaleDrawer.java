@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -7,12 +8,13 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-import android.app.Activity;
+import android.content.Context;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 public class ScaleDrawer {
     private static final double SCALE_WIDTH_FACTOR = 1.0 / 2.5;
@@ -22,9 +24,10 @@ public class ScaleDrawer {
     private BlurMaskFilter blur = null;
     private float pixelDensity = 0;
 
-    public ScaleDrawer(Activity activity) {
+    public ScaleDrawer() {
         DisplayMetrics metrics = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        WindowManager windowManager = (WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
+        windowManager.getDefaultDisplay().getMetrics(metrics);
         pixelDensity = metrics.density;
     }
 

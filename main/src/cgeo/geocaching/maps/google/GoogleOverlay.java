@@ -8,7 +8,6 @@ import cgeo.geocaching.maps.interfaces.OverlayImpl;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 
-import android.app.Activity;
 import android.graphics.Canvas;
 
 import java.util.concurrent.locks.Lock;
@@ -19,8 +18,8 @@ public class GoogleOverlay extends Overlay implements OverlayImpl {
     private PositionAndScaleOverlay overlayBase = null;
     private Lock lock = new ReentrantLock();
 
-    public GoogleOverlay(Activity activityIn) {
-        overlayBase = new PositionAndScaleOverlay(activityIn, this);
+    public GoogleOverlay() {
+        overlayBase = new PositionAndScaleOverlay(this);
     }
 
     @Override

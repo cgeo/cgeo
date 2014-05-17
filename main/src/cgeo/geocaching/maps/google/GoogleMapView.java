@@ -20,7 +20,6 @@ import com.google.android.maps.MapView;
 import org.apache.commons.lang3.reflect.MethodUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
@@ -120,9 +119,9 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public PositionAndScaleOverlay createAddPositionAndScaleOverlay(Activity activity) {
+    public PositionAndScaleOverlay createAddPositionAndScaleOverlay() {
 
-        GoogleOverlay ovl = new GoogleOverlay(activity);
+        GoogleOverlay ovl = new GoogleOverlay();
         getOverlays().add(ovl);
         return (PositionAndScaleOverlay) ovl.getBase();
     }

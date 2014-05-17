@@ -43,6 +43,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.eclipse.jdt.annotation.NonNull;
+
 import rx.Subscription;
 import rx.functions.Action0;
 import rx.functions.Action1;
@@ -438,7 +439,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         }
 
         if (overlayPositionAndScale == null) {
-            overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay(activity);
+            overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay();
             if (trailHistory != null) {
                 overlayPositionAndScale.setHistory(trailHistory);
             }
@@ -925,7 +926,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     if (cgeoMapRef != null) {
                         if (cgeoMapRef.mapView != null) {
                             if (cgeoMapRef.overlayPositionAndScale == null) {
-                                cgeoMapRef.overlayPositionAndScale = cgeoMapRef.mapView.createAddPositionAndScaleOverlay(cgeoMapRef.activity);
+                                cgeoMapRef.overlayPositionAndScale = cgeoMapRef.mapView.createAddPositionAndScaleOverlay();
                             }
 
                             boolean needsRepaintForDistance = needsRepaintForDistance();

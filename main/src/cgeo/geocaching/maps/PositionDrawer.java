@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -7,7 +8,6 @@ import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.settings.Settings;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -36,11 +36,9 @@ public class PositionDrawer {
     private PaintFlagsDrawFilter setfil = null;
     private PaintFlagsDrawFilter remfil = null;
     private PositionHistory positionHistory = new PositionHistory();
-    private Activity activity;
     private MapItemFactory mapItemFactory;
 
-    public PositionDrawer(Activity activity) {
-        this.activity = activity;
+    public PositionDrawer() {
         this.mapItemFactory = Settings.getMapProvider().getMapItemFactory();
     }
 
@@ -144,7 +142,7 @@ public class PositionDrawer {
         }
 
         if (arrow == null) {
-            arrow = BitmapFactory.decodeResource(activity.getResources(), R.drawable.my_location_chevron);
+            arrow = BitmapFactory.decodeResource(CgeoApplication.getInstance().getResources(), R.drawable.my_location_chevron);
             widthArrowHalf = arrow.getWidth() / 2;
             heightArrowHalf = arrow.getHeight() / 2;
         }

@@ -17,6 +17,7 @@ import android.graphics.PaintFlagsDrawFilter;
 import android.util.AttributeSet;
 import android.view.View;
 
+import java.lang.ref.WeakReference;
 import java.util.concurrent.TimeUnit;
 
 public class CompassView extends View {
@@ -55,9 +56,38 @@ public class CompassView extends View {
     private boolean initialDisplay;
     private Subscription periodicUpdate;
 
+    private static final class UpdateAction implements Action0 {
+
+        private final WeakReference<CompassView> compassViewRef;
+
+        private UpdateAction(CompassView view) {
+            this.compassViewRef = new WeakReference<CompassView>(view);
+        }
+
+        @Override
+        public void call() {
+            final CompassView compassView = compassViewRef.get();
+            if (compassView == null) {
+                return;
+            }
+            compassView.updateGraphics();
+        }
+    }
+
     public CompassView(Context contextIn) {
         super(contextIn);
         context = contextIn;
+    }
+
+    public void updateGraphics() {
+        final float newAzimuthShown = smoothUpdate(northMeasured, azimuthShown);
+        final float newCacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
+        if (Math.abs(AngleUtils.difference(azimuthShown, newAzimuthShown)) >= 2 ||
+                Math.abs(AngleUtils.difference(cacheHeadingShown, newCacheHeadingShown)) >= 2) {
+            azimuthShown = newAzimuthShown;
+            cacheHeadingShown = newCacheHeadingShown;
+            invalidate();
+        }
     }
 
     public CompassView(Context contextIn, AttributeSet attrs) {
@@ -87,24 +117,13 @@ public class CompassView extends View {
 
         initialDisplay = true;
 
-        periodicUpdate = AndroidSchedulers.mainThread().createWorker().schedulePeriodically(new Action0() {
-            @Override
-            public void call() {
-                final float newAzimuthShown = smoothUpdate(northMeasured, azimuthShown);
-                final float newCacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
-                if (Math.abs(AngleUtils.difference(azimuthShown, newAzimuthShown)) >= 2 ||
-                        Math.abs(AngleUtils.difference(cacheHeadingShown, newCacheHeadingShown)) >= 2) {
-                    azimuthShown = newAzimuthShown;
-                    cacheHeadingShown = newCacheHeadingShown;
-                    invalidate();
-                }
-            }
-        }, 0, 40, TimeUnit.MILLISECONDS);
+        periodicUpdate = AndroidSchedulers.mainThread().createWorker().schedulePeriodically(new UpdateAction(this), 0, 40, TimeUnit.MILLISECONDS);
     }
 
     @Override
     public void onDetachedFromWindow() {
         periodicUpdate.unsubscribe();
+
         super.onDetachedFromWindow();
 
         if (compassUnderlay != null) {
