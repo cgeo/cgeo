@@ -151,7 +151,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
 
     @Override
     public boolean isOwner(ICache cache) {
-        return StringUtils.equals(cache.getOwnerDisplayName(), getUserName());
+        return StringUtils.isNotEmpty(getUserName()) && StringUtils.equals(cache.getOwnerDisplayName(), getUserName());
     }
 
     @Override

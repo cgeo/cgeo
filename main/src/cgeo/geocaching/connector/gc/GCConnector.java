@@ -192,8 +192,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean isOwner(final ICache cache) {
-        return StringUtils.equalsIgnoreCase(cache.getOwnerUserId(), Settings.getUsername());
-
+        final String user = Settings.getUsername();
+        return StringUtils.isNotEmpty(user) && StringUtils.equalsIgnoreCase(cache.getOwnerUserId(), user);
     }
 
     @Override
