@@ -3,7 +3,7 @@ package cgeo.geocaching;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
@@ -37,7 +37,7 @@ import android.widget.Button;
 
 import java.util.Locale;
 
-public class SearchActivity extends AbstractActivity {
+public class SearchActivity extends AbstractActionBarActivity {
 
     @InjectView(R.id.buttonLatitude) protected Button buttonLatitude;
     @InjectView(R.id.buttonLongitude) protected Button buttonLongitude;

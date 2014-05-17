@@ -78,25 +78,7 @@ public final class StoredList extends AbstractList {
         }
 
         public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId, final String newListName) {
-            final List<AbstractList> lists = new ArrayList<AbstractList>();
-            lists.addAll(getSortedLists());
-
-            if (exceptListId > StoredList.TEMPORARY_LIST_ID) {
-                StoredList exceptList = DataStore.getList(exceptListId);
-                if (exceptList != null) {
-                    lists.remove(exceptList);
-                }
-            }
-
-            if (!onlyConcreteLists) {
-                if (exceptListId != PseudoList.ALL_LIST.id) {
-                    lists.add(PseudoList.ALL_LIST);
-                }
-                if (exceptListId != PseudoList.HISTORY_LIST.id) {
-                    lists.add(PseudoList.HISTORY_LIST);
-                }
-            }
-            lists.add(PseudoList.NEW_LIST);
+            final List<AbstractList> lists = getMenuLists(onlyConcreteLists, exceptListId);
 
             final List<CharSequence> listsTitle = new ArrayList<CharSequence>();
             for (AbstractList list : lists) {
@@ -122,6 +104,31 @@ public final class StoredList extends AbstractList {
                 }
             });
             builder.create().show();
+        }
+
+        public static List<AbstractList> getMenuLists(boolean onlyConcreteLists, int exceptListId) {
+            final List<AbstractList> lists = new ArrayList<AbstractList>();
+            lists.addAll(getSortedLists());
+
+            if (exceptListId > StoredList.TEMPORARY_LIST_ID) {
+                StoredList exceptList = DataStore.getList(exceptListId);
+                if (exceptList != null) {
+                    lists.remove(exceptList);
+                }
+            }
+
+            if (!onlyConcreteLists) {
+                if (exceptListId != PseudoList.ALL_LIST.id) {
+                    lists.add(PseudoList.ALL_LIST);
+                }
+                if (exceptListId != PseudoList.HISTORY_LIST.id) {
+                    lists.add(PseudoList.HISTORY_LIST);
+                }
+            }
+            if (exceptListId != PseudoList.NEW_LIST.id) {
+                lists.add(PseudoList.NEW_LIST);
+            }
+            return lists;
         }
 
         @NonNull
@@ -203,12 +210,16 @@ public final class StoredList extends AbstractList {
     }
 
     /**
-     * Get the list title. This method is not public by intention to make clients use the {@link UserInterface} class.
-     *
-     * @return
+     * Get the list title.
      */
-    protected String getTitle() {
+    @Override
+    public String getTitle() {
         return title;
+    }
+
+    @Override
+    public int getCount() {
+        return count;
     }
 
     /**

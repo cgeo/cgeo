@@ -1,6 +1,6 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.ImagesList.ImageType;
@@ -19,7 +19,7 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImagesActivity extends AbstractActivity {
+public class ImagesActivity extends AbstractActionBarActivity {
 
     private boolean offline;
     private ArrayList<Image> imageNames;

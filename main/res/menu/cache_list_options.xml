@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cgeo="http://schemas.android.com/apk/res-auto">
 
+    <item
+        android:id="@+id/menu_show_on_map"
+        android:icon="@drawable/actionbar_map"
+        cgeo:showAsAction="ifRoom"
+        android:title="@string/caches_on_map">
+    </item>
     <item
         android:id="@+id/menu_filter"
         android:icon="@drawable/ic_menu_filter"
+        cgeo:showAsAction="ifRoom|withText"
         android:title="@string/caches_filter">
     </item>
     <item
         android:id="@+id/menu_sort"
         android:icon="@drawable/ic_menu_sort_alphabetically"
+        cgeo:showAsAction="ifRoom|withText"
         android:title="@string/caches_sort">
     </item>
     <item

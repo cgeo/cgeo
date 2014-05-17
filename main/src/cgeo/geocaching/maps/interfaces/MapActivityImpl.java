@@ -34,5 +34,4 @@ public interface MapActivityImpl {
     boolean superOnOptionsItemSelected(MenuItem item);
 
     public abstract void goHome(View view);
-
 }
