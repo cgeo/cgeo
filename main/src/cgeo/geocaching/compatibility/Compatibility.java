@@ -8,35 +8,39 @@ import android.os.Build;
 
 public final class Compatibility {
 
-    private final static int sdkVersion = Build.VERSION.SDK_INT;
+    private static final int SDK_VERSION = Build.VERSION.SDK_INT;
 
-    private final static AndroidLevel11Interface level11;
-    private final static AndroidLevel13Interface level13;
-    private final static AndroidLevel19Interface level19;
+    private static final AndroidLevel11Interface LEVEL_11;
+    private static final AndroidLevel13Interface LEVEL_13;
+    private static final AndroidLevel19Interface LEVEL_19;
 
     static {
-        level11 = sdkVersion >= 11 ? new AndroidLevel11() : new AndroidLevel11Emulation();
-        level13 = sdkVersion >= 13 ? new AndroidLevel13() : new AndroidLevel13Emulation();
-        level19 = sdkVersion >= 19 ? new AndroidLevel19() : new AndroidLevel19Emulation();
+        LEVEL_11 = SDK_VERSION >= 11 ? new AndroidLevel11() : new AndroidLevel11Emulation();
+        LEVEL_13 = SDK_VERSION >= 13 ? new AndroidLevel13() : new AndroidLevel13Emulation();
+        LEVEL_19 = SDK_VERSION >= 19 ? new AndroidLevel19() : new AndroidLevel19Emulation();
+    }
+
+    private Compatibility() {
+        // utility class
     }
 
     public static void invalidateOptionsMenu(final Activity activity) {
-        level11.invalidateOptionsMenu(activity);
+        LEVEL_11.invalidateOptionsMenu(activity);
     }
 
     public static int getDisplayWidth() {
-        return level13.getDisplayWidth();
+        return LEVEL_13.getDisplayWidth();
     }
 
     public static Point getDisplaySize() {
-        return level13.getDisplaySize();
+        return LEVEL_13.getDisplaySize();
     }
 
     public static void importGpxFromStorageAccessFramework(final @NonNull Activity activity, int requestCodeImportGpx) {
-        level19.importGpxFromStorageAccessFramework(activity, requestCodeImportGpx);
+        LEVEL_19.importGpxFromStorageAccessFramework(activity, requestCodeImportGpx);
     }
 
     public static boolean isStorageAccessFrameworkAvailable() {
-        return sdkVersion >= 19;
+        return SDK_VERSION >= 19;
     }
 }

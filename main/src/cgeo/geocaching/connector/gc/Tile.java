@@ -9,6 +9,7 @@ import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.eclipse.jdt.annotation.NonNull;
 
 import android.graphics.Bitmap;
@@ -88,10 +89,6 @@ public class Tile {
      *
      */
     private static int calcY(final Geopoint origin, final int zoomlevel) {
-
-        // double latRad = Math.toRadians(origin.getLatitude());
-        // return (int) ((1 - (Math.log(Math.tan(latRad) + (1 / Math.cos(latRad))) / Math.PI)) / 2 * numberOfTiles);
-
         // Optimization from Bing
         double sinLatRad = Math.sin(Math.toRadians(origin.getLatitude()));
         // The cut of the fractional part instead of rounding to the nearest integer is intentional and part of the algorithm

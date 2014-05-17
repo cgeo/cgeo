@@ -8,6 +8,11 @@ import android.content.Intent;
 import android.net.Uri;
 
 public class ContactsAddon {
+
+    private ContactsAddon() {
+        // utility class
+    }
+
     public static void openContactCard(Activity context, String userName) {
         final Parameters params = new Parameters(
                 IContacts.PARAM_NAME, userName

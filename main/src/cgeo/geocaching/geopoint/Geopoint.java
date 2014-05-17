@@ -556,15 +556,14 @@ public final class Geopoint implements ICoordinates, Parcelable {
      * Gets distance in meters (workaround for 4.2.1 JIT bug).
      */
     public static double getDistance(double lat1, double lon1, double lat2, double lon2) {
-        double earthRadius = 6372.8; // for haversine use R = 6372.8 km instead of 6371 km
+        // for haversine use R = 6372.8 km instead of 6371 km
+        double earthRadius = 6372.8;
         double dLat = toRadians(lat2 - lat1);
         double dLon = toRadians(lon2 - lon1);
         double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
                 Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
                 Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        //double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        //return R * c * 1000;
-        // simplify haversine:
+        // simplify haversine
         return (2 * earthRadius * 1000 * Math.asin(Math.sqrt(a)));
     }
 
@@ -582,8 +581,8 @@ public final class Geopoint implements ICoordinates, Parcelable {
     }
 
     /**
-     * Check whether a lo bngitudeuilt from user supplied data is valid. We accept both E180/W180.
-     *
+     * Check whether a longitude from user supplied data is valid. We accept both E180/W180.
+     * 
      * @return <tt>true</tt> if the longitude looks valid, <tt>false</tt> otherwise
      */
     public static boolean isValidLongitude(final double longitude) {

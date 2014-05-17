@@ -146,30 +146,6 @@ public class GCMap {
                 throw new JSONException("No data inside JSON");
             }
 
-            /*
-             * Optimization: the grid can get ignored. The keys are the grid position in the format x_y
-             * It's not used at the moment due to optimizations
-             * But maybe we need it some day...
-             *
-             * // attach all keys with the cache positions in the tile
-             * Map<String, UTFGridPosition> keyPositions = new HashMap<String, UTFGridPosition>(); // JSON key, (x/y) in
-             * grid
-             * for (int y = 0; y < grid.length(); y++) {
-             * String rowUTF8 = grid.getString(y);
-             * if (rowUTF8.length() != (UTFGrid.GRID_MAXX + 1)) {
-             * throw new JSONException("Grid has wrong size");
-             * }
-             *
-             * for (int x = 0; x < UTFGrid.GRID_MAXX; x++) {
-             * char c = rowUTF8.charAt(x);
-             * if (c != ' ') {
-             * short id = UTFGrid.getUTFGridId(c);
-             * keyPositions.put(keys.getString(id), new UTFGridPosition(x, y));
-             * }
-             * }
-             * }
-             */
-
             // iterate over the data and construct all caches in this tile
             Map<String, List<UTFGridPosition>> positions = new HashMap<String, List<UTFGridPosition>>(); // JSON id as key
             Map<String, List<UTFGridPosition>> singlePositions = new HashMap<String, List<UTFGridPosition>>(); // JSON id as key

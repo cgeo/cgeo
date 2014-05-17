@@ -23,8 +23,8 @@ class NavigonApp extends AbstractPointNavigationApp {
         /*
          * Long/Lat are float values in decimal degree format (+-DDD.DDDDD).
          * Example:
-         * intent.putExtra(INTENT_EXTRA_KEY_LATITUDE, 46.12345f);
-         * intent.putExtra(INTENT_EXTRA_KEY_LONGITUDE, 23.12345f);
+         * intent.putExtra(INTENT_EXTRA_KEY_LATITUDE, 46.12345f)
+         * intent.putExtra(INTENT_EXTRA_KEY_LONGITUDE, 23.12345f)
          */
         intent.putExtra(INTENT_EXTRA_KEY_LATITUDE, (float) point.getLatitude());
         intent.putExtra(INTENT_EXTRA_KEY_LONGITUDE, (float) point.getLongitude());

@@ -144,7 +144,6 @@ public abstract class GCParser {
 
                 while (matcherGuidAndDisabled.find()) {
                     if (matcherGuidAndDisabled.groupCount() > 0) {
-                        //cache.setGuid(matcherGuidAndDisabled.group(1));
                         if (matcherGuidAndDisabled.group(2) != null) {
                             cache.setName(Html.fromHtml(matcherGuidAndDisabled.group(2).trim()).toString());
                         }
