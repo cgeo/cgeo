@@ -20,12 +20,6 @@ public class AbstractActionBarActivity extends AbstractActivity {
         showProgress(false);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState, int resourceLayoutID, boolean useDialogTheme) {
-        super.onCreate(savedInstanceState, resourceLayoutID, useDialogTheme);
-        initUpAction();
-        showProgress(false);
-    }
 
     private void initUpAction() {
        getSupportActionBar().setDisplayHomeAsUpEnabled(true);

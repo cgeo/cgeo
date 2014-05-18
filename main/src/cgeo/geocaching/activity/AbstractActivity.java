@@ -114,21 +114,14 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
     }
 
     protected void onCreate(final Bundle savedInstanceState, final int resourceLayoutID) {
-        onCreate(savedInstanceState, resourceLayoutID, false);
-    }
-
-    protected void onCreate(final Bundle savedInstanceState, final int resourceLayoutID, boolean useDialogTheme) {
 
         super.onCreate(savedInstanceState);
 
         initializeCommonFields();
 
         // non declarative part of layout
-        if (useDialogTheme) {
-            setTheme(ActivityMixin.getDialogTheme());
-        } else {
-            setTheme();
-        }
+        setTheme();
+
         setContentView(resourceLayoutID);
 
         // create view variables
