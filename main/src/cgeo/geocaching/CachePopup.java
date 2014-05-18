@@ -5,10 +5,6 @@ import cgeo.geocaching.activity.ActivityMixin;
 
 import org.apache.commons.lang3.StringUtils;
 
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,9 +13,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Window;
 
-/**
- * Created by arne on 23.04.2014.
- */
 public class CachePopup extends AbstractActivity {
 
     protected String geocode = null;

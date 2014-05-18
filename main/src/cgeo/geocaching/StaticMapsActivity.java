@@ -11,7 +11,6 @@ import org.androidannotations.annotations.OptionsMenu;
 import org.apache.commons.collections4.CollectionUtils;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
@@ -166,15 +165,5 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
         }
         showToast(res.getString(R.string.err_detail_not_load_map_static));
         return false;
-    }
-
-    public static void startActivity(final Context activity, final String geocode, final boolean download, final Waypoint waypoint) {
-      /* FIXME
-        StaticMapsActivity_.IntentBuilder_ builder = StaticMapsActivity_.intent(activity).geocode(geocode).download(download);
-        if (waypoint != null) {
-            builder.waypointId(waypoint.getId());
-        }
-        builder.start();
-        */
     }
 }

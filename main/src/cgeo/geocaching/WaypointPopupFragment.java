@@ -48,7 +48,7 @@ public class WaypointPopupFragment extends AbstractDialogFragment {
     }
 
     @Override
-    public void onUpdateGeoData(IGeoData geo) {
+    protected void onUpdateGeoData(IGeoData geo) {
         if (geo.getCoords() != null && waypoint != null && waypoint.getCoords() != null) {
             waypointDistance.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(waypoint.getCoords())));
             waypointDistance.bringToFront();

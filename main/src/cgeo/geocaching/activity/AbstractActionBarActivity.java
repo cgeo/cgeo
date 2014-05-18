@@ -27,8 +27,7 @@ public class AbstractActionBarActivity extends AbstractActivity {
         showProgress(false);
     }
 
-    private void initUpAction()
-    {
+    private void initUpAction() {
        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }
