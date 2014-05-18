@@ -291,7 +291,8 @@ public class MainActivity extends AbstractActionBarActivity {
         final int id = item.getItemId();
         switch (id) {
             case android.R.id.home:
-                // do nothing in case of home button click
+                // this activity must handle the home navigation different than all others
+                showAbout(null);
                 return true;
             case R.id.menu_about:
                 showAbout(null);
