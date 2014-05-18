@@ -1,6 +1,6 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -19,7 +19,7 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.widget.EditText;
 
-public abstract class AbstractLoggingActivity extends AbstractActivity {
+public abstract class AbstractLoggingActivity extends AbstractActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {

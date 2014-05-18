@@ -30,7 +30,7 @@ import java.util.Map;
  *            Enum listing all available pages of this activity. The pages available at a certain point of time are
  *            defined by overriding {@link #getOrderedPages()}.
  */
-public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends AbstractActivity {
+public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends AbstractActionBarActivity {
 
     /**
      * A {@link List} of all available pages.

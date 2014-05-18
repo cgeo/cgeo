@@ -5,7 +5,11 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.ui.AbstractUIFactory;
 
 import android.app.Activity;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 /**
@@ -19,7 +23,7 @@ public class CacheMenuHandler extends AbstractUIFactory {
      * Methods to be implemented by the activity to react to the cache menu selections.
      *
      */
-    protected interface ActivityInterface {
+    interface ActivityInterface {
         public void navigateTo();
 
         public void showNavigationMenu();
@@ -29,8 +33,14 @@ public class CacheMenuHandler extends AbstractUIFactory {
     }
 
     public static boolean onMenuItemSelected(MenuItem item, CacheMenuHandler.ActivityInterface activityInterface, Geocache cache) {
-        assert activityInterface instanceof Activity;
-        final Activity activity = (Activity) activityInterface;
+        assert activityInterface instanceof Activity || activityInterface instanceof Fragment;
+        final Activity activity;
+        if (activityInterface instanceof Activity) {
+            activity = (Activity) activityInterface;
+        } else {
+            activity = ((Fragment)activityInterface).getActivity();
+        }
+
         switch (item.getItemId()) {
             case R.id.menu_default_navigation:
                 activityInterface.navigateTo();
@@ -68,10 +78,22 @@ public class CacheMenuHandler extends AbstractUIFactory {
         menu.findItem(R.id.menu_show_in_browser).setVisible(cache.canOpenInBrowser());
 
         menu.findItem(R.id.menu_default_navigation).setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
+
+        MenuItem shareItem = menu.findItem(R.id.menu_share);
+        ShareActionProvider shareActionProvider = (ShareActionProvider)
+                MenuItemCompat.getActionProvider(shareItem);
+        if(shareActionProvider != null) {
+            shareActionProvider.setShareIntent(cache.getIntent());
+        }
+
+    }
+
+    public static void addMenuItems(MenuInflater inflater, Menu menu, Geocache cache) {
+        inflater.inflate(R.menu.cache_options, menu);
+        onPrepareOptionsMenu(menu, cache);
     }
 
     public static void addMenuItems(Activity activity, Menu menu, Geocache cache) {
-        activity.getMenuInflater().inflate(R.menu.cache_options, menu);
-        onPrepareOptionsMenu(menu, cache);
+        addMenuItems(activity.getMenuInflater(), menu, cache);
     }
 }

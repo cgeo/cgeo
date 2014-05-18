@@ -1,15 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="cgeo_main" parent="android:style/Theme.Wallpaper.NoTitleBar">
+
+    <style name="cgeo_main" parent="@style/Theme.AppCompat">
+
+        <!-- copy the style elements of the Wallpaper theme since AppCombat has no Wallpaper theme -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowShowWallpaper">true</item>
+
 
         <!-- system elements -->
         <item name="android:windowContentOverlay">@null</item>
+
+   </style>
+
+   <style name="cgeo" parent="@style/Theme.AppCompat">
+
+
+       <item name="android:buttonStyle">@style/button</item>
+       <item name="android:editTextStyle">@style/edittext</item>
+       <item name="android:windowContentOverlay">@null</item>
+
+        <!-- own values: colors -->
+        <item name="just_color">@color/just_black</item>
+        <item name="text_color_link">@color/link</item>
+        <item name="button_color_enabled">@color/button_enabled</item>
+        <item name="button_color_disabled">@color/button_disabled</item>
     </style>
 
-    <style name="cgeo" parent="android:style/Theme.NoTitleBar">
 
-        <!-- system elements -->
+    <!-- Identical to cgeo aside from different parent style -->
+    <style name="cgeo_light" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+
+
         <item name="android:buttonStyle">@style/button</item>
         <item name="android:editTextStyle">@style/edittext</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -20,6 +44,8 @@
         <item name="button_color_enabled">@color/button_enabled</item>
         <item name="button_color_disabled">@color/button_disabled</item>
     </style>
+
+
 
     <style name="dark" parent="cgeo">
 
@@ -50,7 +76,7 @@
         <item name="compass">0</item>
     </style>
 
-    <style name="light" parent="cgeo">
+    <style name="light" parent="cgeo_light">
 
         <!-- own values: colors -->
         <item name="android:windowBackground">@color/just_white</item>
@@ -80,16 +106,35 @@
         <item name="compass">1</item>
     </style>
 
-    <style name="cgeo_popup" parent="android:style/Theme.Dialog">
+    
+    <style name="Theme.AppCompat.Translucent.Light" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+    </style>
 
+
+    <style name="Theme.AppCompat.Translucent" parent="Theme.AppCompat">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+    </style>
+
+    <style name="cgeo_popup" parent="Theme.AppCompat.Translucent.Light">
         <!-- system elements -->
         <item name="android:buttonStyle">@style/button</item>
         <item name="android:editTextStyle">@style/edittext</item>
         <item name="android:windowNoTitle">true</item>
-    </style>
+     </style>
 
     <!-- TODO: Popup probably doesn't need all these fields set. Should delete unnecessary ones. -->
-    <style name="popup_dark" parent="cgeo_popup">
+    <style name="popup_dark" parent="Theme.AppCompat.Translucent">
+        <!-- system elements -->
+        <item name="android:buttonStyle">@style/button</item>
+        <item name="android:editTextStyle">@style/edittext</item>
+        <item name="android:windowNoTitle">true</item>
 
         <!-- own values: colors -->
         <item name="just_color">@color/just_black</item>
@@ -153,7 +198,7 @@
         <item name="compass">1</item>
     </style>
     
-    <style name="settings" parent="android:Theme">
+    <style name="settings" parent="@style/Theme.AppCompat">
         <item name="settings_cloud">@drawable/settings_cloud_white</item>
         <item name="settings_details">@drawable/settings_details_white</item>
         <item name="settings_eye">@drawable/settings_eye_white</item>
@@ -165,7 +210,7 @@
         <item name="settings_info_icon">@drawable/settings_info_icon_white</item>
     </style>
 
-    <style name="settings.light" parent="android:Theme.Light">
+    <style name="settings.light" parent="@style/Theme.AppCompat.Light">
         <item name="settings_cloud">@drawable/settings_cloud_black</item>
         <item name="settings_details">@drawable/settings_details_black</item>
         <item name="settings_eye">@drawable/settings_eye_black</item>

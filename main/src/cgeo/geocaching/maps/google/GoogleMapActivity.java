@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps.google;
 
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.maps.AbstractMap;
 import cgeo.geocaching.maps.CGeoMap;
@@ -97,6 +98,11 @@ public class GoogleMapActivity extends MapActivity implements MapActivityImpl, F
     }
 
     @Override
+    public void goHome(View view) {
+        ActivityMixin.navigateToMain(this);
+    }
+
+    @Override
     public void superOnResume() {
         super.onResume();
     }
@@ -114,12 +120,6 @@ public class GoogleMapActivity extends MapActivity implements MapActivityImpl, F
     @Override
     public boolean superOnPrepareOptionsMenu(Menu menu) {
         return super.onPrepareOptionsMenu(menu);
-    }
-
-    // close activity and open homescreen
-    @Override
-    public void goHome(View view) {
-        mapBase.goHome(view);
     }
 
     @Override

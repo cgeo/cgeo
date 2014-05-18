@@ -557,6 +557,10 @@ public class Settings {
         return getBoolean(R.string.pref_units, getImperialUnitsDefault());
     }
 
+    public static boolean isAlwaysShowOverlfowMenu() {
+        return getBoolean(R.string.pref_alwaysshowoverflowmenu, false);
+    }
+
     static boolean getImperialUnitsDefault() {
         final String countryCode = Locale.getDefault().getCountry();
         return "US".equals(countryCode)  // USA

@@ -3,7 +3,7 @@ package cgeo.geocaching;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.ui.AbstractViewHolder;
 
 import android.app.Activity;
@@ -18,7 +18,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class UsefulAppsActivity extends AbstractActivity {
+public class UsefulAppsActivity extends AbstractActionBarActivity {
 
     @InjectView(R.id.apps_list) protected ListView list;
 

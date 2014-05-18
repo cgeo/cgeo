@@ -4,14 +4,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <LinearLayout style="@style/action_bar" >
-
-        <include layout="@layout/actionbar_title" />
-
-        <include layout="@layout/actionbar_progress" />
-
-        <include layout="@layout/actionbar_button_myposition" />
-    </LinearLayout>
+    <include layout="@layout/actionbar_maps" />
 
     <include layout="@layout/filter_bar" />
 
