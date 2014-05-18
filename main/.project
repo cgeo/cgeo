@@ -27,15 +27,7 @@
 		</buildCommand>
 	</buildSpec>
 	<natures>
-		<nature>org.sonar.ide.eclipse.core.sonarNature</nature>
 		<nature>com.android.ide.eclipse.adt.AndroidNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>testlink</name>
-			<type>2</type>
-			<location>/home/bananeweizen/workspaces/egit</location>
-		</link>
-	</linkedResources>
 </projectDescription>
