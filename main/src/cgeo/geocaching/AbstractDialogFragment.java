@@ -269,7 +269,12 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         }
     };
 
-    public void onUpdateGeoData(final IGeoData geo) {
+    /**
+     * @param geo
+     *            location
+     */
+    protected void onUpdateGeoData(final IGeoData geo) {
+        // do nothing by default
     }
 
     @Override
