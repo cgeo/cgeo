@@ -11,12 +11,6 @@
         cgeo:actionViewClass="android.support.v7.widget.SearchView"
         cgeo:showAsAction="collapseActionView|always"/>
     <item
-        android:id="@+id/menu_settings"
-        android:icon="@drawable/ic_menu_preferences"
-        android:title="@string/menu_settings"
-        cgeo:showAsAction="ifRoom">
-    </item>
-    <item
         android:id="@+id/menu_history"
         android:icon="@drawable/ic_menu_recent_history"
         android:title="@string/menu_history"
@@ -26,6 +20,12 @@
         android:id="@+id/menu_pocket_queries"
         android:icon="@drawable/ic_menu_account_list"
         android:title="@string/menu_pocket_queries"
+        cgeo:showAsAction="ifRoom">
+    </item>
+    <item
+        android:id="@+id/menu_settings"
+        android:icon="@drawable/ic_menu_preferences"
+        android:title="@string/menu_settings"
         cgeo:showAsAction="ifRoom">
     </item>
     <item
