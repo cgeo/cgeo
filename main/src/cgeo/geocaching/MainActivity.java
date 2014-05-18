@@ -290,6 +290,9 @@ public class MainActivity extends AbstractActionBarActivity {
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int id = item.getItemId();
         switch (id) {
+            case android.R.id.home:
+                // do nothing in case of home button click
+                return true;
             case R.id.menu_about:
                 showAbout(null);
                 return true;
