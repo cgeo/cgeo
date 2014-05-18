@@ -1,49 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:cgeo="http://schemas.android.com/apk/res-auto">
+    xmlns:cgeo="http://schemas.android.com/apk/res-auto" >
 
     <!-- TODO: use ic_action_search -->
     <item
-        style="@style/action_bar_action"
         android:id="@+id/menu_gosearch"
-        cgeo:showAsAction="always"
+        style="@style/action_bar_action"
+        android:icon="@drawable/actionbar_search"
+        android:title="@string/search_bar_hint"
         cgeo:actionViewClass="android.support.v7.widget.SearchView"
-        android:icon="@drawable/actionbar_search" />
-
+        cgeo:showAsAction="collapseActionView|always"/>
     <item
         android:id="@+id/menu_settings"
         android:icon="@drawable/ic_menu_preferences"
-        cgeo:showAsAction="ifRoom"
-        android:title="@string/menu_settings">
+        android:title="@string/menu_settings"
+        cgeo:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_history"
         android:icon="@drawable/ic_menu_recent_history"
-        cgeo:showAsAction="ifRoom"
-        android:title="@string/menu_history">
+        android:title="@string/menu_history"
+        cgeo:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_pocket_queries"
         android:icon="@drawable/ic_menu_account_list"
-        cgeo:showAsAction="ifRoom"
-        android:title="@string/menu_pocket_queries">
+        android:title="@string/menu_pocket_queries"
+        cgeo:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_helpers"
         android:icon="@drawable/ic_menu_shopping"
-        cgeo:showAsAction="ifRoom|"
-        android:title="@string/menu_helpers">
+        android:title="@string/menu_helpers"
+        cgeo:showAsAction="ifRoom|">
     </item>
     <item
         android:id="@+id/menu_scan"
         android:icon="@drawable/ic_menu_barcode"
-        cgeo:showAsAction="ifRoom"
-        android:title="@string/menu_scan_geo">
+        android:title="@string/menu_scan_geo"
+        cgeo:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_about"
         android:icon="@drawable/ic_menu_info_details"
-        cgeo:showAsAction="ifRoom"
-        android:title="@string/menu_about">
+        android:title="@string/menu_about"
+        cgeo:showAsAction="ifRoom">
     </item>
+
 </menu>
