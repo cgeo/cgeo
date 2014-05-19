@@ -3,9 +3,11 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
+    · New: Implemented actionbar menus\n
     · New: Show also own logs on friend log page\n
     · New: Filter for caches which are not found\n
-    · New: Show \"Import from web\" also if not yet registered\n
+    · New: Show "Import from web" also if not yet registered\n
+    · New: Popup list of changes on first start after upgrade\n
     · New: Debugging option to save memory dumps on user demand\n
     · Fix: Hiding own caches on opencaching\n
     · Fix: Webcam caches not marked as found after posting log\n
