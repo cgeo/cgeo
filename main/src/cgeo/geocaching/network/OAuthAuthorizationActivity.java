@@ -5,6 +5,7 @@ import butterknife.InjectView;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.utils.BundleUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -32,7 +33,7 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.util.regex.Pattern;
 
-public abstract class OAuthAuthorizationActivity extends AbstractActionBarActivity {
+public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
     public static final int NOT_AUTHENTICATED = 0;
     public static final int AUTHENTICATED = 1;
@@ -106,7 +107,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActionBarActivi
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.authorization_activity, true);
+        super.onCreate(savedInstanceState, R.layout.authorization_activity);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
