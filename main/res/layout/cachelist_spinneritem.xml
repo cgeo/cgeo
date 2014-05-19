@@ -5,18 +5,18 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="?attr/dropdownListPreferredItemHeight"
     android:minHeight="?attr/dropdownListPreferredItemHeight"
-    style="?attr/spinnerDropDownItemStyle"
     android:layout_gravity="left|center_vertical"
+    style="?attr/spinnerDropDownItemStyle"
     >
 
 
     <TextView
         android:id="@android:id/text1"
-        android:textAppearance="?android:attr/textAppearanceMedium"
         tools:text="This is the title"
         android:singleLine="true"
         android:ellipsize="marquee"
         android:layout_width="match_parent"
+        style="?attr/titleTextStyle"
         android:layout_height="wrap_content" />
 
 
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:singleLine="true"
         android:ellipsize="marquee"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        style="?attr/subtitleTextStyle"
         tools:text="This is the subtitle"
         android:id="@android:id/text2" />
 
