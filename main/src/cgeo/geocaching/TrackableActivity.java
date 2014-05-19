@@ -96,9 +96,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 geocode = trackable.getGeocode();
 
                 if (StringUtils.isNotBlank(trackable.getName())) {
-                    setTitle(Html.fromHtml(trackable.getName()).toString());
+                    getSupportActionBar().setTitle(Html.fromHtml(trackable.getName()).toString());
                 } else {
-                    setTitle(trackable.getName());
+                    getSupportActionBar().setTitle(trackable.getName());
                 }
 
                 invalidateOptionsMenuCompatible();
@@ -121,7 +121,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         super.onCreate(savedInstanceState, R.layout.viewpager_activity);
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
-        setTitle(res.getString(R.string.trackable));
+        getSupportActionBar().setTitle(res.getString(R.string.trackable));
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
