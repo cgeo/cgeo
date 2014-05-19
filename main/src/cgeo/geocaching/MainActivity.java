@@ -213,6 +213,8 @@ public class MainActivity extends AbstractActionBarActivity {
         Log.i("Starting " + getPackageName() + ' ' + version + " a.k.a " + Version.getVersionName(this));
 
         init();
+
+        checkShowChangelog();
     }
 
     @Override
@@ -723,6 +725,16 @@ public class MainActivity extends AbstractActionBarActivity {
             if (version > 0) {
                 Settings.setVersion(version);
             }
+        }
+    }
+
+    private void checkShowChangelog() {
+        int lastVersion = Settings.getLastChangelogVersion();
+        int version = Version.getVersionCode(this);
+        Settings.setLastChangelogVersion(version);
+        // don't show change log after new install...
+        if (lastVersion > 0 && version != lastVersion) {
+            AboutActivity.showChangeLog(this);
         }
     }
 
