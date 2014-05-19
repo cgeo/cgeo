@@ -33,6 +33,10 @@
     <!-- Identical to cgeo aside from different parent style -->
     <style name="cgeo_light" parent="@style/Theme.AppCompat.Light.DarkActionBar">
 
+        <!-- For some reason we get the non inversed texts here (bug in abc?), explicitly set text styles -->
+        <item name="titleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionMode.Title.Inverse</item>
+        <item name="subtitleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle.Inverse</item>
+
 
         <item name="android:buttonStyle">@style/button</item>
         <item name="android:editTextStyle">@style/edittext</item>
