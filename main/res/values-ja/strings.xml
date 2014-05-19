@@ -118,6 +118,13 @@
   <string name="log_image_scale">拡大縮小</string>
   <string name="log_password_title">Log Password:</string>
   <string name="log_hint_log_password">Enter your log password</string>
+  <string-array name="log_image_scales">
+    <item>実サイズ</item>
+    <item>512 px</item>
+    <item>640 px</item>
+    <item>800 px</item>
+    <item>1024 px</item>
+  </string-array>
   <string name="translate_to_sys_lang">%sに翻訳</string>
   <string name="translate_to_english">英語に翻訳</string>
   <string name="translate_length_warning">文章が長すぎるので翻訳できないかもしれません。</string>
@@ -235,6 +242,9 @@
   <string name="caches_more_caches_currently">現在</string>
   <string name="caches_downloading">キャッシュ情報をダウンロード中…\n残り時間: </string>
   <string name="caches_eta_ltm">1分以内</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="other">分</item>
+  </plurals>
   <string name="caches_store_offline">オフライン用に保存</string>
   <string name="caches_store_selected">選択したキャッシュを保存</string>
   <string name="caches_history">履歴</string>
@@ -489,6 +499,9 @@
   <string name="auth_dialog_completed_twitter">c:geoはTwitterにポストするための認証を受けました。</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_dialog_completed_oc">c:geoは%sと連携するための認証を受けました。</string>
+  <plurals name="cache_counts">
+    <item quantity="other">%1$d キャッシュ</item>
+  </plurals>
   <string name="cache_offline">オフライン</string>
   <string name="cache_offline_refresh">更新</string>
   <string name="cache_offline_drop">削除</string>
@@ -533,6 +546,9 @@
   <string name="cache_list_unknown">Not in a list</string>
   <string name="cache_images">画像</string>
   <string name="cache_waypoints">ウェイポイント</string>
+  <plurals name="waypoints">
+    <item quantity="other">%d ウェイポイント</item>
+  </plurals>
   <string name="cache_waypoints_add">ウェイポイントを追加</string>
   <string name="cache_hint">ヒント</string>
   <string name="cache_logs">ログブック</string>
@@ -1033,29 +1049,13 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
   <string name="tts_start">音声案内開始</string>
   <string name="tts_stop">音声案内終了</string>
   <string name="tts_one_kilometer">1 km</string>
+  <plurals name="tts_kilometers">
+    <item quantity="other">%s キロメートル</item>
+  </plurals>
   <string name="tts_one_meter">1 m</string>
   <string name="tts_one_mile">1 マイル</string>
   <string name="tts_one_foot">1 フィート</string>
   <string name="tts_one_oclock">1 時</string>
   <string name="tts_oclock">%s 時</string>
   <string name="clipboard_copy_ok">クリップボードにコピーしました</string>
-  <string-array name="log_image_scales">
-    <item>実サイズ</item>
-    <item>512 px</item>
-    <item>640 px</item>
-    <item>800 px</item>
-    <item>1024 px</item>
-  </string-array>
-  <plurals name="caches_eta_mins">
-    <item quantity="other">分</item>
-  </plurals>
-  <plurals name="cache_counts">
-    <item quantity="other">%1$d キャッシュ</item>
-  </plurals>
-  <plurals name="waypoints">
-    <item quantity="other">%d ウェイポイント</item>
-  </plurals>
-  <plurals name="tts_kilometers">
-    <item quantity="other">%s キロメートル</item>
-  </plurals>
 </resources>

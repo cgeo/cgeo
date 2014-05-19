@@ -122,6 +122,13 @@
   <string name="log_password_title">Log-Passwort:</string>
   <string name="log_hint_log_password">Log-Passwort eingeben</string>
   <string name="log_oc_team_comment">OC Team Bemerkung</string>
+  <string-array name="log_image_scales">
+    <item>Keine Skalierung</item>
+    <item>512 px</item>
+    <item>640 px</item>
+    <item>800 px</item>
+    <item>1024 px</item>
+  </string-array>
   <string name="translate_to_sys_lang">Übersetze in %s</string>
   <string name="translate_to_english">Übersetze in Englisch</string>
   <string name="translate_length_warning">Die Übersetzung kann bei sehr langen Texten evtl. fehlschlagen.</string>
@@ -242,6 +249,10 @@
   <string name="caches_more_caches_currently">aktuell</string>
   <string name="caches_downloading">Lade Caches…\nGeschätzte Zeit: </string>
   <string name="caches_eta_ltm">Weniger als eine Minute</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="one">Minute</item>
+    <item quantity="other">Minuten</item>
+  </plurals>
   <string name="caches_store_offline">Für Offline speichern</string>
   <string name="caches_store_selected">Ausgewählte speichern</string>
   <string name="caches_history">Verlauf</string>
@@ -494,6 +505,9 @@
   <string name="init_maintenance">Wartung</string>
   <string name="init_maintenance_directories_note">c:geo speichert Bilder, Log-Bilder und weitere Dateien zu einem Cache in einem separaten Verzeichnis. In manchen Fällen (z.B. bei Sichern und Wiederherstellen der Datenbank) kann dieses Verzeichnis unnötige Daten enthalten, die gelöscht werden können.</string>
   <string name="init_maintenance_directories">Verwaiste Daten löschen</string>
+  <string name="init_create_memory_dump">Erzeuge ein Speicherabbild</string>
+  <string name="init_memory_dump">Speicherabbild</string>
+  <string name="init_memory_dumped">Speicherabbild in %s gespeichert</string>
   <string name="settings_open_website">Webseite öffnen</string>
   <string name="settings_settings">Einstellungen</string>
   <string name="settings_information">Information</string>
@@ -541,6 +555,10 @@
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
   <string name="auth_dialog_completed_oc">c:geo ist nun autorisiert, Caches zu laden und auf %s zu loggen.</string>
+  <plurals name="cache_counts">
+    <item quantity="one">Ein Cache</item>
+    <item quantity="other">%1$d Caches</item>
+  </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Aktualisieren</string>
   <string name="cache_offline_drop">Löschen</string>
@@ -585,6 +603,10 @@
   <string name="cache_list_unknown">In keiner Liste</string>
   <string name="cache_images">Bilder</string>
   <string name="cache_waypoints">Wegpunkte</string>
+  <plurals name="waypoints">
+    <item quantity="one">1 Wegpunkt</item>
+    <item quantity="other">%d Wegpunkte</item>
+  </plurals>
   <string name="cache_waypoints_add">Wegpunkt hinzufügen</string>
   <string name="cache_hint">Hinweis</string>
   <string name="cache_logs">Logbuch</string>
@@ -1129,50 +1151,28 @@
   <string name="tts_stop">Stoppe Sprache</string>
   <string name="err_tts_lang_not_supported">Die aktuelle Sprache wird von TTS nicht unterstützt.</string>
   <string name="tts_one_kilometer">ein Kilometer</string>
-  <string name="tts_one_meter">ein Meter</string>
-  <string name="tts_one_mile">eine Meile</string>
-  <string name="tts_one_foot">ein Fuß</string>
-  <string name="tts_one_oclock">ein Uhr</string>
-  <string name="tts_oclock">%s Uhr</string>
-  <string name="clipboard_copy_ok">In Zwischenablage kopiert</string>
-  <string name="percent_favorite_points">% Favoriten</string>
-  <string name="cgeo_shortcut">c:geo Shortcut</string>
-  <string name="create_shortcut">Shortcut erstellen</string>
-  <string-array name="log_image_scales">
-    <item>Keine Skalierung</item>
-    <item>512 px</item>
-    <item>640 px</item>
-    <item>800 px</item>
-    <item>1024 px</item>
-  </string-array>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">Minute</item>
-    <item quantity="other">Minuten</item>
-  </plurals>
-  <plurals name="cache_counts">
-    <item quantity="one">Ein Cache</item>
-    <item quantity="other">%1$d Caches</item>
-  </plurals>
-  <plurals name="waypoints">
-    <item quantity="one">1 Wegpunkt</item>
-    <item quantity="other">%d Wegpunkte</item>
-  </plurals>
   <plurals name="tts_kilometers">
     <item quantity="one">%s Kilometer</item>
     <item quantity="other">%s Kilometer</item>
   </plurals>
+  <string name="tts_one_meter">ein Meter</string>
   <plurals name="tts_meters">
     <item quantity="one">%s Meter</item>
     <item quantity="other">%s Meter</item>
   </plurals>
+  <string name="tts_one_mile">eine Meile</string>
   <plurals name="tts_miles">
     <item quantity="one">%s Meile</item>
     <item quantity="other">%s Meilen</item>
   </plurals>
+  <string name="tts_one_foot">ein Fuß</string>
   <plurals name="tts_feet">
     <item quantity="one">%s Fuß</item>
     <item quantity="other">%s Fuß</item>
   </plurals>
+  <string name="tts_one_oclock">ein Uhr</string>
+  <string name="tts_oclock">%s Uhr</string>
+  <string name="clipboard_copy_ok">In Zwischenablage kopiert</string>
   <plurals name="days_ago">
     <item quantity="one">gestern</item>
     <item quantity="other">vor %d Tagen</item>
@@ -1181,4 +1181,7 @@
     <item quantity="one">%s Favorit</item>
     <item quantity="other">%s Favoriten</item>
   </plurals>
+  <string name="percent_favorite_points">% Favoriten</string>
+  <string name="cgeo_shortcut">c:geo Shortcut</string>
+  <string name="create_shortcut">Shortcut erstellen</string>
 </resources>

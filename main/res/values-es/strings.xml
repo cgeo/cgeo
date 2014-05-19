@@ -120,6 +120,13 @@
   <string name="log_password_title">Contraseña:</string>
   <string name="log_hint_log_password">Introduzca su contraseña</string>
   <string name="log_oc_team_comment">Comentario equipo OC</string>
+  <string-array name="log_image_scales">
+    <item>Sin redimensionar</item>
+    <item>512 px</item>
+    <item>640 px</item>
+    <item>800 px</item>
+    <item>1024 px</item>
+  </string-array>
   <string name="translate_to_sys_lang">Traducir al %s</string>
   <string name="translate_to_english">Traducir al inglés</string>
   <string name="translate_length_warning">La traducción podría fallar con un texto muy largo.</string>
@@ -240,6 +247,10 @@
   <string name="caches_more_caches_currently">actualmente</string>
   <string name="caches_downloading">Descargando escondites…\nFaltan: </string>
   <string name="caches_eta_ltm">Menos de un minuto</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="one">minuto</item>
+    <item quantity="other">minutos</item>
+  </plurals>
   <string name="caches_store_offline">Usar sin conexión luego</string>
   <string name="caches_store_selected">Almacenamiento seleccionado</string>
   <string name="caches_history">Historial</string>
@@ -462,6 +473,10 @@
   <string name="auth_again">Volver a iniciar</string>
   <string name="auth_dialog_waiting">Esperando a %s…</string>
   <string name="auth_ocde">Opencaching.de</string>
+  <plurals name="cache_counts">
+    <item quantity="one">Un escondite</item>
+    <item quantity="other">%1$d Escondites</item>
+  </plurals>
   <string name="cache_offline">Desconectado</string>
   <string name="cache_offline_refresh">Actualizar</string>
   <string name="cache_offline_drop">Tirar</string>
@@ -848,19 +863,4 @@
   <string name="tts_oclock">%s en punto</string>
   <string name="clipboard_copy_ok">Copiado al portapapeles</string>
   <string name="percent_favorite_points">% \ favoritos</string>
-  <string-array name="log_image_scales">
-    <item>Sin redimensionar</item>
-    <item>512 px</item>
-    <item>640 px</item>
-    <item>800 px</item>
-    <item>1024 px</item>
-  </string-array>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">minuto</item>
-    <item quantity="other">minutos</item>
-  </plurals>
-  <plurals name="cache_counts">
-    <item quantity="one">Un escondite</item>
-    <item quantity="other">%1$d Escondites</item>
-  </plurals>
 </resources>

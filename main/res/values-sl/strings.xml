@@ -121,6 +121,13 @@
   <string name="log_password_title">Geslo zapisa:</string>
   <string name="log_hint_log_password">Vnesite geslo zapisa</string>
   <string name="log_oc_team_comment">Komentar ekipe OC</string>
+  <string-array name="log_image_scales">
+    <item>Brez skaliranja</item>
+    <item>512 px</item>
+    <item>640 px</item>
+    <item>800 px</item>
+    <item>1024 px</item>
+  </string-array>
   <string name="translate_to_sys_lang">Prevedi v: %s</string>
   <string name="translate_to_english">Prevedi v: angleščino</string>
   <string name="translate_length_warning">Prevod lahko spodleti zaradi velike količine besedila.</string>
@@ -241,6 +248,12 @@
   <string name="caches_more_caches_currently">trenutno</string>
   <string name="caches_downloading">Nalagam zaklade…\nČas do konca: </string>
   <string name="caches_eta_ltm">manj kot minuta</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="one">minuta</item>
+    <item quantity="two">minuti</item>
+    <item quantity="few">minute</item>
+    <item quantity="other">minut</item>
+  </plurals>
   <string name="caches_store_offline">Shrani</string>
   <string name="caches_store_selected">Shrani izbrane</string>
   <string name="caches_history">Zgodovina</string>
@@ -534,6 +547,12 @@
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
   <string name="auth_dialog_completed_oc">c:geo je sedaj povezan z %s.</string>
+  <plurals name="cache_counts">
+    <item quantity="one">%1$d zaklad</item>
+    <item quantity="two">%1$d zaklada</item>
+    <item quantity="few">%1$d zakladi</item>
+    <item quantity="other">%1$d zakladov</item>
+  </plurals>
   <string name="cache_offline">Brez povezave</string>
   <string name="cache_offline_refresh">Osveži</string>
   <string name="cache_offline_drop">Izbriši</string>
@@ -578,6 +597,12 @@
   <string name="cache_list_unknown">Ni v seznamu</string>
   <string name="cache_images">Slike</string>
   <string name="cache_waypoints">Dodatne točke</string>
+  <plurals name="waypoints">
+    <item quantity="one">%d dodatna točka</item>
+    <item quantity="two">%d dodatni točki</item>
+    <item quantity="few">%d dodatne točke</item>
+    <item quantity="other">%d dodatnih točk</item>
+  </plurals>
   <string name="cache_waypoints_add">Dodaj točko</string>
   <string name="cache_hint">Namig</string>
   <string name="cache_logs">Dnevnik zapisov</string>
@@ -1119,64 +1144,36 @@
   <string name="tts_stop">Ustavi glasovno navigacijo</string>
   <string name="err_tts_lang_not_supported">Trenutno izbrani jezik ni podprt s storitvijo pretvorbe besedila v govor.</string>
   <string name="tts_one_kilometer">en kilometer</string>
-  <string name="tts_one_meter">en meter</string>
-  <string name="tts_one_mile">ena milja</string>
-  <string name="tts_one_foot">en čevelj</string>
-  <string name="tts_one_oclock">one o\'clock</string>
-  <string name="tts_oclock">%s o\'clock</string>
-  <string name="clipboard_copy_ok">Skopirano v odložišče</string>
-  <string name="percent_favorite_points">%\ favoritov</string>
-  <string name="cgeo_shortcut">Bližnjica c:geo</string>
-  <string name="create_shortcut">Ustvari bližnjico</string>
-  <string-array name="log_image_scales">
-    <item>Brez skaliranja</item>
-    <item>512 px</item>
-    <item>640 px</item>
-    <item>800 px</item>
-    <item>1024 px</item>
-  </string-array>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">minuta</item>
-    <item quantity="two">minuti</item>
-    <item quantity="few">minute</item>
-    <item quantity="other">minut</item>
-  </plurals>
-  <plurals name="cache_counts">
-    <item quantity="one">%1$d zaklad</item>
-    <item quantity="two">%1$d zaklada</item>
-    <item quantity="few">%1$d zakladi</item>
-    <item quantity="other">%1$d zakladov</item>
-  </plurals>
-  <plurals name="waypoints">
-    <item quantity="one">%d dodatna točka</item>
-    <item quantity="two">%d dodatni točki</item>
-    <item quantity="few">%d dodatne točke</item>
-    <item quantity="other">%d dodatnih točk</item>
-  </plurals>
   <plurals name="tts_kilometers">
     <item quantity="one">%s kilometer</item>
     <item quantity="two">%s kilometra</item>
     <item quantity="few">%s kilometrov</item>
     <item quantity="other">%s kilometrov</item>
   </plurals>
+  <string name="tts_one_meter">en meter</string>
   <plurals name="tts_meters">
     <item quantity="one">%s meter</item>
     <item quantity="two">%s metra</item>
     <item quantity="few">%s metri</item>
     <item quantity="other">%s metrov</item>
   </plurals>
+  <string name="tts_one_mile">ena milja</string>
   <plurals name="tts_miles">
     <item quantity="one">%s milja</item>
     <item quantity="two">%s milji</item>
     <item quantity="few">%s milj</item>
     <item quantity="other">%s milj</item>
   </plurals>
+  <string name="tts_one_foot">en čevelj</string>
   <plurals name="tts_feet">
     <item quantity="one">%s čevelj</item>
     <item quantity="two">%s čevlja</item>
     <item quantity="few">%s čevljev</item>
     <item quantity="other">%s čevljev</item>
   </plurals>
+  <string name="tts_one_oclock">one o\'clock</string>
+  <string name="tts_oclock">%s o\'clock</string>
+  <string name="clipboard_copy_ok">Skopirano v odložišče</string>
   <plurals name="days_ago">
     <item quantity="one">Pred %d dnevom</item>
     <item quantity="two">Pred %d dnevoma</item>
@@ -1189,4 +1186,7 @@
     <item quantity="few">%s favoritov</item>
     <item quantity="other">%s favoritov</item>
   </plurals>
+  <string name="percent_favorite_points">%\ favoritov</string>
+  <string name="cgeo_shortcut">Bližnjica c:geo</string>
+  <string name="create_shortcut">Ustvari bližnjico</string>
 </resources>
