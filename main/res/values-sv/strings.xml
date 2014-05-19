@@ -122,6 +122,13 @@
   <string name="log_password_title">Logglösenord:</string>
   <string name="log_hint_log_password">Ange ditt lösenord för loggning</string>
   <string name="log_oc_team_comment">Meddelande från OC Team</string>
+  <string-array name="log_image_scales">
+    <item>Ingen skalning</item>
+    <item>512 px</item>
+    <item>640 px</item>
+    <item>800 px</item>
+    <item>1024 px</item>
+  </string-array>
   <string name="translate_to_sys_lang">Översätt till %s</string>
   <string name="translate_to_english">Översätt till engelska</string>
   <string name="translate_length_warning">Översättningen kan misslyckas med långa texter.</string>
@@ -242,6 +249,10 @@
   <string name="caches_more_caches_currently">nu</string>
   <string name="caches_downloading">Laddar ner cacher…\nTid kvar: </string>
   <string name="caches_eta_ltm">mindre än en minut</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="one">minut</item>
+    <item quantity="other">minuter</item>
+  </plurals>
   <string name="caches_store_offline">Spara för Offline</string>
   <string name="caches_store_selected">Spara valda</string>
   <string name="caches_history">Senast hittade cacher</string>
@@ -544,6 +555,10 @@
   <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_dialog_completed_oc">c:geo är nu godkänd för att kommunicera med %s.</string>
+  <plurals name="cache_counts">
+    <item quantity="one">En cache</item>
+    <item quantity="other">%1$d cacher</item>
+  </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Uppdatera</string>
   <string name="cache_offline_drop">Radera</string>
@@ -588,6 +603,10 @@
   <string name="cache_list_unknown">Ej i någon lista</string>
   <string name="cache_images">Bilder</string>
   <string name="cache_waypoints">Punkter</string>
+  <plurals name="waypoints">
+    <item quantity="one">1 Punkt</item>
+    <item quantity="other">%d Punkter</item>
+  </plurals>
   <string name="cache_waypoints_add">Lägg till punkt</string>
   <string name="cache_hint">Tips</string>
   <string name="cache_logs">Loggbok</string>
@@ -1132,52 +1151,33 @@
   <string name="tts_stop">Stoppa tal</string>
   <string name="err_tts_lang_not_supported">Detta språk hanteras inte av text-to-speech.</string>
   <string name="tts_one_kilometer">en kilometer</string>
-  <string name="tts_one_meter">en meter</string>
-  <string name="tts_one_mile">en engelsk mil</string>
-  <string name="tts_one_foot">en fot</string>
-  <string name="tts_one_oclock">Klockan ett</string>
-  <string name="tts_oclock">Klockan %s</string>
-  <string name="clipboard_copy_ok">Kopierat till urklipp</string>
-  <string name="percent_favorite_points">%\  favoriter</string>
-  <string name="cgeo_shortcut">c:geo genväg</string>
-  <string name="create_shortcut">Skapa genväg</string>
-  <string-array name="log_image_scales">
-    <item>Ingen skalning</item>
-    <item>512 px</item>
-    <item>640 px</item>
-    <item>800 px</item>
-    <item>1024 px</item>
-  </string-array>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">minut</item>
-    <item quantity="other">minuter</item>
-  </plurals>
-  <plurals name="cache_counts">
-    <item quantity="one">En cache</item>
-    <item quantity="other">%1$d cacher</item>
-  </plurals>
-  <plurals name="waypoints">
-    <item quantity="one">1 Punkt</item>
-    <item quantity="other">%d Punkter</item>
-  </plurals>
   <plurals name="tts_kilometers">
     <item quantity="one">%s kilometer</item>
     <item quantity="other">%s kilometer</item>
   </plurals>
+  <string name="tts_one_meter">en meter</string>
   <plurals name="tts_meters">
     <item quantity="one">%s meter</item>
     <item quantity="other">%s meter</item>
   </plurals>
+  <string name="tts_one_mile">en engelsk mil</string>
   <plurals name="tts_miles">
     <item quantity="one">%s engelsk mil</item>
     <item quantity="other">%s engelsk mil</item>
   </plurals>
+  <string name="tts_one_foot">en fot</string>
   <plurals name="tts_feet">
     <item quantity="one">%s fot</item>
     <item quantity="other">%s fot</item>
   </plurals>
+  <string name="tts_one_oclock">Klockan ett</string>
+  <string name="tts_oclock">Klockan %s</string>
+  <string name="clipboard_copy_ok">Kopierat till urklipp</string>
   <plurals name="days_ago">
     <item quantity="one">igår</item>
     <item quantity="other">%d dagar sedan</item>
   </plurals>
+  <string name="percent_favorite_points">%\  favoriter</string>
+  <string name="cgeo_shortcut">c:geo genväg</string>
+  <string name="create_shortcut">Skapa genväg</string>
 </resources>

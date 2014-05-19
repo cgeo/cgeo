@@ -161,6 +161,10 @@
   <string name="auth_authorize">Godkend c:geo</string>
   <string name="auth_start">Start godkendelse</string>
   <string name="auth_again">Start igen</string>
+  <plurals name="cache_counts">
+    <item quantity="one">En cache</item>
+    <item quantity="other">%1$d cacher</item>
+  </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Genindlæs</string>
   <string name="cache_offline_drop">Fjern</string>
@@ -264,8 +268,4 @@
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="about_twitter">Skal <b>c:geo</b> sende status til Twitter hvergang du logger en cache?</string>
-  <plurals name="cache_counts">
-    <item quantity="one">En cache</item>
-    <item quantity="other">%1$d cacher</item>
-  </plurals>
 </resources>

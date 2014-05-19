@@ -122,6 +122,13 @@
   <string name="log_password_title">Log wachtwoord:</string>
   <string name="log_hint_log_password">Voer Login Wachtwoord</string>
   <string name="log_oc_team_comment">OC Team commentaar</string>
+  <string-array name="log_image_scales">
+    <item>Niet schalen</item>
+    <item>512 px</item>
+    <item>640 px</item>
+    <item>800 px</item>
+    <item>1024 px</item>
+  </string-array>
   <string name="translate_to_sys_lang">Vertaal naar %s</string>
   <string name="translate_to_english">Vertaal naar engels</string>
   <string name="translate_length_warning">Vertaling kan mislukken bij grote stukken tekst.</string>
@@ -242,6 +249,10 @@
   <string name="caches_more_caches_currently">op dit moment</string>
   <string name="caches_downloading">Caches aan het downloaden…\nGeschatte tijd: </string>
   <string name="caches_eta_ltm">Minder dan een minuut</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="one">minuut</item>
+    <item quantity="other">minuten</item>
+  </plurals>
   <string name="caches_store_offline">Opslaan voor Offline gebruik</string>
   <string name="caches_store_selected">Geselecteerden opslaan</string>
   <string name="caches_history">Geschiedenis</string>
@@ -544,6 +555,10 @@
   <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_dialog_completed_oc">c:geo is nu gekoppeld met %s.</string>
+  <plurals name="cache_counts">
+    <item quantity="one">Een cache</item>
+    <item quantity="other">%1$d Caches</item>
+  </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Verversen</string>
   <string name="cache_offline_drop">Laten vervallen</string>
@@ -588,6 +603,10 @@
   <string name="cache_list_unknown">Niet in een lijst</string>
   <string name="cache_images">Afbeeldingen</string>
   <string name="cache_waypoints">Waypoints</string>
+  <plurals name="waypoints">
+    <item quantity="one">1 Waypoint</item>
+    <item quantity="other">%d Waypoints</item>
+  </plurals>
   <string name="cache_waypoints_add">Waypoint toevoegen</string>
   <string name="cache_hint">Hint</string>
   <string name="cache_logs">Logboek</string>
@@ -1132,50 +1151,28 @@
   <string name="tts_stop">Stop met praten</string>
   <string name="err_tts_lang_not_supported">De huidige taal wordt niet ondersteund door tekst naar spraak.</string>
   <string name="tts_one_kilometer">één kilometer</string>
-  <string name="tts_one_meter">één meter</string>
-  <string name="tts_one_mile">één mijl</string>
-  <string name="tts_one_foot">één voet</string>
-  <string name="tts_one_oclock">één uur</string>
-  <string name="tts_oclock">%s uur</string>
-  <string name="clipboard_copy_ok">Gekopieerd naar klembord</string>
-  <string name="percent_favorite_points">%\ favorieten</string>
-  <string name="cgeo_shortcut">c:geo snelkoppeling</string>
-  <string name="create_shortcut">Maak snelkoppeling</string>
-  <string-array name="log_image_scales">
-    <item>Niet schalen</item>
-    <item>512 px</item>
-    <item>640 px</item>
-    <item>800 px</item>
-    <item>1024 px</item>
-  </string-array>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">minuut</item>
-    <item quantity="other">minuten</item>
-  </plurals>
-  <plurals name="cache_counts">
-    <item quantity="one">Een cache</item>
-    <item quantity="other">%1$d Caches</item>
-  </plurals>
-  <plurals name="waypoints">
-    <item quantity="one">1 Waypoint</item>
-    <item quantity="other">%d Waypoints</item>
-  </plurals>
   <plurals name="tts_kilometers">
     <item quantity="one">%s kilometer</item>
     <item quantity="other">%s kilometer</item>
   </plurals>
+  <string name="tts_one_meter">één meter</string>
   <plurals name="tts_meters">
     <item quantity="one">%s meter</item>
     <item quantity="other">%s meter</item>
   </plurals>
+  <string name="tts_one_mile">één mijl</string>
   <plurals name="tts_miles">
     <item quantity="one">%s mijl</item>
     <item quantity="other">%s mijl</item>
   </plurals>
+  <string name="tts_one_foot">één voet</string>
   <plurals name="tts_feet">
     <item quantity="one">%s voet</item>
     <item quantity="other">%s voeten</item>
   </plurals>
+  <string name="tts_one_oclock">één uur</string>
+  <string name="tts_oclock">%s uur</string>
+  <string name="clipboard_copy_ok">Gekopieerd naar klembord</string>
   <plurals name="days_ago">
     <item quantity="one">Gisteren</item>
     <item quantity="other">%d dagen geleden</item>
@@ -1184,4 +1181,7 @@
     <item quantity="one">%s favoriet</item>
     <item quantity="other">%s favorieten</item>
   </plurals>
+  <string name="percent_favorite_points">%\ favorieten</string>
+  <string name="cgeo_shortcut">c:geo snelkoppeling</string>
+  <string name="create_shortcut">Maak snelkoppeling</string>
 </resources>

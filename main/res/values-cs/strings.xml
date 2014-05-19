@@ -120,6 +120,13 @@
   <string name="log_password_title">Logovací heslo:</string>
   <string name="log_hint_log_password">Zadej své logovací heslo</string>
   <string name="log_oc_team_comment">Komentář týmu OC</string>
+  <string-array name="log_image_scales">
+    <item>Bez měřítka</item>
+    <item>512 px</item>
+    <item>640 px</item>
+    <item>800 px</item>
+    <item>1024 px</item>
+  </string-array>
   <string name="translate_to_sys_lang">Přeložit do %s</string>
   <string name="translate_to_english">Přeložit do angličtiny</string>
   <string name="translate_length_warning">Při velkém množství textu může překládání selhat.</string>
@@ -240,6 +247,11 @@
   <string name="caches_more_caches_currently">aktuálně</string>
   <string name="caches_downloading">Stahování keší…\nETA:</string>
   <string name="caches_eta_ltm">Méně než minutu</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="one">minuta</item>
+    <item quantity="few">minuty</item>
+    <item quantity="other">minuty</item>
+  </plurals>
   <string name="caches_store_offline">Uložit pro offline</string>
   <string name="caches_store_selected">Uložit vybrané</string>
   <string name="caches_history">Historie</string>
@@ -1135,16 +1147,4 @@
   <string name="percent_favorite_points">%\ oblíbené</string>
   <string name="cgeo_shortcut">c:geo zástupce</string>
   <string name="create_shortcut">Vytvořit zástupce</string>
-  <string-array name="log_image_scales">
-    <item>Bez měřítka</item>
-    <item>512 px</item>
-    <item>640 px</item>
-    <item>800 px</item>
-    <item>1024 px</item>
-  </string-array>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">minuta</item>
-    <item quantity="few">minuty</item>
-    <item quantity="other">minuty</item>
-  </plurals>
 </resources>

@@ -121,6 +121,13 @@
   <string name="log_password_title">Password do registo:</string>
   <string name="log_hint_log_password">Inserira a password do registo</string>
   <string name="log_oc_team_comment">Comentário da OC Team</string>
+  <string-array name="log_image_scales">
+    <item>Não dimensionar</item>
+    <item>512 px</item>
+    <item>640 px</item>
+    <item>800 px</item>
+    <item>1024 px</item>
+  </string-array>
   <string name="translate_to_sys_lang">Traduzir para %s</string>
   <string name="translate_to_english">Traduzir para inglês</string>
   <string name="translate_length_warning">A tradução pode falhar se o texto fôr muito grande.</string>
@@ -241,6 +248,10 @@
   <string name="caches_more_caches_currently">actualmente</string>
   <string name="caches_downloading">Downloading caches…\nETE: </string>
   <string name="caches_eta_ltm">Menos de um minuto</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="one">minuto</item>
+    <item quantity="other">minutos</item>
+  </plurals>
   <string name="caches_store_offline">Arquivar para uso offline</string>
   <string name="caches_store_selected">Arquivar selecionadas</string>
   <string name="caches_history">Histórico</string>
@@ -537,6 +548,10 @@
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">Opencaching.pl</string>
   <string name="auth_dialog_completed_oc">c:geo está agora autorizado a interagir com %s.</string>
+  <plurals name="cache_counts">
+    <item quantity="one">Uma cache</item>
+    <item quantity="other">%1$d Caches</item>
+  </plurals>
   <string name="cache_offline">Arquivo</string>
   <string name="cache_offline_refresh">Actualizar</string>
   <string name="cache_offline_drop">Apagar</string>
@@ -581,6 +596,10 @@
   <string name="cache_list_unknown">Não está numa lista</string>
   <string name="cache_images">Imagens</string>
   <string name="cache_waypoints">Pontos de referência</string>
+  <plurals name="waypoints">
+    <item quantity="one">1 Waypoint</item>
+    <item quantity="other">%d Waypoints</item>
+  </plurals>
   <string name="cache_waypoints_add">Adicionar ponto de referência</string>
   <string name="cache_hint">Pista</string>
   <string name="cache_logs">Logbook</string>
@@ -1122,52 +1141,33 @@
   <string name="tts_stop">Páre de falar</string>
   <string name="err_tts_lang_not_supported">A linguagem corrente não é suportada pelo texto em fala.</string>
   <string name="tts_one_kilometer">um quilômetro</string>
-  <string name="tts_one_meter">um metro</string>
-  <string name="tts_one_mile">uma milha</string>
-  <string name="tts_one_foot">um pé</string>
-  <string name="tts_one_oclock">uma hora</string>
-  <string name="tts_oclock">%s horas</string>
-  <string name="clipboard_copy_ok">Copiado para a área de transferência</string>
-  <string name="percent_favorite_points">%\  favoritos</string>
-  <string name="cgeo_shortcut">Atalho c:geo</string>
-  <string name="create_shortcut">Criar atalho</string>
-  <string-array name="log_image_scales">
-    <item>Não dimensionar</item>
-    <item>512 px</item>
-    <item>640 px</item>
-    <item>800 px</item>
-    <item>1024 px</item>
-  </string-array>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">minuto</item>
-    <item quantity="other">minutos</item>
-  </plurals>
-  <plurals name="cache_counts">
-    <item quantity="one">Uma cache</item>
-    <item quantity="other">%1$d Caches</item>
-  </plurals>
-  <plurals name="waypoints">
-    <item quantity="one">1 Waypoint</item>
-    <item quantity="other">%d Waypoints</item>
-  </plurals>
   <plurals name="tts_kilometers">
     <item quantity="one">%s quilômetros</item>
     <item quantity="other">%s quilômetros</item>
   </plurals>
+  <string name="tts_one_meter">um metro</string>
   <plurals name="tts_meters">
     <item quantity="one">%s metro</item>
     <item quantity="other">%s metros</item>
   </plurals>
+  <string name="tts_one_mile">uma milha</string>
   <plurals name="tts_miles">
     <item quantity="one">%s milha</item>
     <item quantity="other">%s milhas</item>
   </plurals>
+  <string name="tts_one_foot">um pé</string>
   <plurals name="tts_feet">
     <item quantity="one">%s pé</item>
     <item quantity="other">%s pés</item>
   </plurals>
+  <string name="tts_one_oclock">uma hora</string>
+  <string name="tts_oclock">%s horas</string>
+  <string name="clipboard_copy_ok">Copiado para a área de transferência</string>
   <plurals name="days_ago">
     <item quantity="one">ontem</item>
     <item quantity="other">%d dias atrás</item>
   </plurals>
+  <string name="percent_favorite_points">%\  favoritos</string>
+  <string name="cgeo_shortcut">Atalho c:geo</string>
+  <string name="create_shortcut">Criar atalho</string>
 </resources>

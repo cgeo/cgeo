@@ -122,6 +122,13 @@
   <string name="log_password_title">Contrasenya d\'accés:</string>
   <string name="log_hint_log_password">Introduïu la contrasenya d\'accés</string>
   <string name="log_oc_team_comment">Comentari de l\'equip OC</string>
+  <string-array name="log_image_scales">
+    <item>Sense escala</item>
+    <item>512 px</item>
+    <item>640 px</item>
+    <item>800 px</item>
+    <item>1024 px</item>
+  </string-array>
   <string name="translate_to_sys_lang">Tradueix a %s</string>
   <string name="translate_to_english">Tradueix a l\'anglès</string>
   <string name="translate_length_warning">La traducció pot fallar amb una gran quantitat de text.</string>
@@ -242,6 +249,10 @@
   <string name="caches_more_caches_currently">actualment</string>
   <string name="caches_downloading">S\'estan descarregant els catxés…\nETA:  </string>
   <string name="caches_eta_ltm">Menys d\'un minut</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="one">minut</item>
+    <item quantity="other">minuts</item>
+  </plurals>
   <string name="caches_store_offline">Desa per usar fora de línia</string>
   <string name="caches_store_selected">Desa els seleccionats</string>
   <string name="caches_history">Historial</string>
@@ -404,6 +415,8 @@
   <string name="init_signature_template_log">Text del registre</string>
   <string name="init_ratingwanted">Valoració del GCvote</string>
   <string name="init_summary_ratingwanted">Descarrega la valoració des de GCvote.com</string>
+  <string name="init_friends_and_own_logs_wanted">Mostra els dels amics i els propis</string>
+  <string name="init_summary_friends_and_own_logs_wanted">Visualitza una pàgina addicional del llibre de registre pels registres dels amics i els propis</string>
   <string name="init_openlastdetailspage">Obre l\'última pàgina de detalls</string>
   <string name="init_summary_openlastdetailspage">Obre els detalls amb l\'última pàgina utilitzada</string>
   <string name="init_autoload">Descripció llarga</string>
@@ -524,7 +537,7 @@
   <string name="init_sendToCgeo_description"><b>Send2c:geo</b> us permet enviar els catxés al vostre aparell Android directament des de Geocaching.com utilitzant un complement especial per al Firefox o pel Chrome. Abans de registrar-vos veieu <a href="http://send2.cgeo.org/"> http://send2.cgeo.org/</a>. Només cal que us registreu si voleu utilitzar el send2c:geo.</string>
   <string name="init_sendToCgeo_register">Sol·licita registre</string>
   <string name="init_sendToCgeo_registering">S\'està registrant el dispositiu per Send2c:geo…</string>
-  <string name="init_sendToCgeo_register_ok">Us heu registrat correctament. El codi PIN és # # #. Utilitzeu-lo al web del c:geo per connectar aquest dispositiu al navegador.</string>
+  <string name="init_sendToCgeo_register_ok">Us heu registrat correctament. El codi PIN és ####. Utilitzeu-lo al web del c:geo per connectar aquest dispositiu al navegador.</string>
   <string name="init_sendToCgeo_register_fail">S\'ha produït un error en el registre del sendToCgeo.</string>
   <string name="sendToCgeo_download_fail">El c:geo ha fallat al descarregar els catxés. No hi ha connexió a Internet o el send2c:geo no funciona.</string>
   <string name="sendToCgeo_no_registration">S\'ha produït un error descarregant els catxés. El registre a send2c:geo ha caducat. Registreu-vos de nou a la configuració.</string>
@@ -542,6 +555,10 @@
   <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_dialog_completed_oc">El c:geo ara està autoritzat a interactuar amb %s.</string>
+  <plurals name="cache_counts">
+    <item quantity="one">Un catxé</item>
+    <item quantity="other">%1$d catxés</item>
+  </plurals>
   <string name="cache_offline">Fora de línia</string>
   <string name="cache_offline_refresh">Actualitza</string>
   <string name="cache_offline_drop">Esborra</string>
@@ -586,9 +603,14 @@
   <string name="cache_list_unknown">No està a cap llista</string>
   <string name="cache_images">Imatges</string>
   <string name="cache_waypoints">Fites</string>
+  <plurals name="waypoints">
+    <item quantity="one">1 fita</item>
+    <item quantity="other">%d fites</item>
+  </plurals>
   <string name="cache_waypoints_add">Afegeix una fita</string>
   <string name="cache_hint">Pista</string>
   <string name="cache_logs">Llibre de registre</string>
+  <string name="cache_logs_friends_and_own">Registres dels amics o propis</string>
   <string name="cache_dialog_loading_details">S\'està carregant els detalls del catxé…</string>
   <string name="cache_dialog_loading_details_status_loadpage">S\'està carregant la pàgina</string>
   <string name="cache_dialog_loading_details_status_details">S\'està processant els detalls</string>
@@ -644,6 +666,7 @@
   <string name="cache_status">Estat</string>
   <string name="cache_status_offline_log">Registre desat</string>
   <string name="cache_status_found">Trobat</string>
+  <string name="cache_not_status_found">No s\'ha trobat</string>
   <string name="cache_status_archived">Arxivat</string>
   <string name="cache_status_disabled">Desactivat</string>
   <string name="cache_status_premium">Només per membres Premium</string>
@@ -1128,50 +1151,28 @@
   <string name="tts_stop">Deixa de parlar</string>
   <string name="err_tts_lang_not_supported">La llengua actual no és compatible amb la síntesi de veu.</string>
   <string name="tts_one_kilometer">un quilòmetre</string>
-  <string name="tts_one_meter">un metre</string>
-  <string name="tts_one_mile">una milla</string>
-  <string name="tts_one_foot">un peu</string>
-  <string name="tts_one_oclock">la una en punt</string>
-  <string name="tts_oclock">%s en punt</string>
-  <string name="clipboard_copy_ok">S\'ha copiat al portapapers</string>
-  <string name="percent_favorite_points">% \ preferits</string>
-  <string name="cgeo_shortcut">Drecera del c:geo</string>
-  <string name="create_shortcut">Crea una drecera</string>
-  <string-array name="log_image_scales">
-    <item>Sense escala</item>
-    <item>512 px</item>
-    <item>640 px</item>
-    <item>800 px</item>
-    <item>1024 px</item>
-  </string-array>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">minut</item>
-    <item quantity="other">minuts</item>
-  </plurals>
-  <plurals name="cache_counts">
-    <item quantity="one">Un catxé</item>
-    <item quantity="other">%1$d catxés</item>
-  </plurals>
-  <plurals name="waypoints">
-    <item quantity="one">1 fita</item>
-    <item quantity="other">%d fites</item>
-  </plurals>
   <plurals name="tts_kilometers">
     <item quantity="one">%s quilòmetre</item>
     <item quantity="other">%s quilòmetres</item>
   </plurals>
+  <string name="tts_one_meter">un metre</string>
   <plurals name="tts_meters">
     <item quantity="one">%s metre</item>
     <item quantity="other">%s metres</item>
   </plurals>
+  <string name="tts_one_mile">una milla</string>
   <plurals name="tts_miles">
     <item quantity="one">%s milla</item>
     <item quantity="other">%s milles</item>
   </plurals>
+  <string name="tts_one_foot">un peu</string>
   <plurals name="tts_feet">
     <item quantity="one">%s peu</item>
     <item quantity="other">%s peus</item>
   </plurals>
+  <string name="tts_one_oclock">la una en punt</string>
+  <string name="tts_oclock">%s en punt</string>
+  <string name="clipboard_copy_ok">S\'ha copiat al portapapers</string>
   <plurals name="days_ago">
     <item quantity="one">ahir</item>
     <item quantity="other">fa %d dies</item>
@@ -1180,4 +1181,7 @@
     <item quantity="one">%s preferit</item>
     <item quantity="other">%s preferits</item>
   </plurals>
+  <string name="percent_favorite_points">% \ preferits</string>
+  <string name="cgeo_shortcut">Drecera del c:geo</string>
+  <string name="create_shortcut">Crea una drecera</string>
 </resources>

@@ -121,6 +121,13 @@
   <string name="log_password_title">Prihlásiť heslo:</string>
   <string name="log_hint_log_password">Zadajte svoje logovacie heslo</string>
   <string name="log_oc_team_comment">Komentár tímu OC</string>
+  <string-array name="log_image_scales">
+    <item>Bez zmeny mierky</item>
+    <item>512 px</item>
+    <item>640 px</item>
+    <item>800 px</item>
+    <item>1024 px</item>
+  </string-array>
   <string name="translate_to_sys_lang">Preložiť do jazyka %s</string>
   <string name="translate_to_english">Preložiť do angličtiny</string>
   <string name="translate_length_warning">Pre veľké texty môže preklad zlyhať.</string>
@@ -581,6 +588,11 @@
   <string name="cache_list_unknown">Nie je v zozname</string>
   <string name="cache_images">Obrázky</string>
   <string name="cache_waypoints">Body trasy</string>
+  <plurals name="waypoints">
+    <item quantity="one">1 bod trasy</item>
+    <item quantity="few">%d body trasy</item>
+    <item quantity="other">%d bodov trasy</item>
+  </plurals>
   <string name="cache_waypoints_add">Pridať bod</string>
   <string name="cache_hint">Nápoveda</string>
   <string name="cache_logs">Logbook</string>
@@ -1122,47 +1134,32 @@
   <string name="tts_stop">Prestať hovoriť</string>
   <string name="err_tts_lang_not_supported">Aktuálny jazyk nepodporuje prevod textu na reč.</string>
   <string name="tts_one_kilometer">jeden kilometer</string>
-  <string name="tts_one_meter">jeden meter</string>
-  <string name="tts_one_mile">jedna míľa</string>
-  <string name="tts_one_foot">jedna stopa</string>
-  <string name="tts_one_oclock">jedna hodina</string>
-  <string name="tts_oclock">%s hodín</string>
-  <string name="clipboard_copy_ok">Skopírované do schránky</string>
-  <string name="percent_favorite_points">% \ obľúbených</string>
-  <string name="cgeo_shortcut">c:Geo odkaz</string>
-  <string name="create_shortcut">Vytvoriť odkaz</string>
-  <string-array name="log_image_scales">
-    <item>Bez zmeny mierky</item>
-    <item>512 px</item>
-    <item>640 px</item>
-    <item>800 px</item>
-    <item>1024 px</item>
-  </string-array>
-  <plurals name="waypoints">
-    <item quantity="one">1 bod trasy</item>
-    <item quantity="few">%d body trasy</item>
-    <item quantity="other">%d bodov trasy</item>
-  </plurals>
   <plurals name="tts_kilometers">
     <item quantity="one">%s kilometer</item>
     <item quantity="few">%s kilometre</item>
     <item quantity="other">%s kilometrov</item>
   </plurals>
+  <string name="tts_one_meter">jeden meter</string>
   <plurals name="tts_meters">
     <item quantity="one">%s meter</item>
     <item quantity="few">%s metre</item>
     <item quantity="other">%s metrov</item>
   </plurals>
+  <string name="tts_one_mile">jedna míľa</string>
   <plurals name="tts_miles">
     <item quantity="one">%s míľa</item>
     <item quantity="few">%s míľ</item>
     <item quantity="other">%s míľ</item>
   </plurals>
+  <string name="tts_one_foot">jedna stopa</string>
   <plurals name="tts_feet">
     <item quantity="one">%s stopa</item>
     <item quantity="few">%s stopy</item>
     <item quantity="other">%s stôp</item>
   </plurals>
+  <string name="tts_one_oclock">jedna hodina</string>
+  <string name="tts_oclock">%s hodín</string>
+  <string name="clipboard_copy_ok">Skopírované do schránky</string>
   <plurals name="days_ago">
     <item quantity="one">včera</item>
     <item quantity="few">pred %d dňami</item>
@@ -1173,4 +1170,7 @@
     <item quantity="few">%s obľúbené</item>
     <item quantity="other">%s obľúbených</item>
   </plurals>
+  <string name="percent_favorite_points">% \ obľúbených</string>
+  <string name="cgeo_shortcut">c:Geo odkaz</string>
+  <string name="create_shortcut">Vytvoriť odkaz</string>
 </resources>
