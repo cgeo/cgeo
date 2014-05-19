@@ -5,13 +5,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    <LinearLayout style="@style/action_bar" >
-
-        <TextView
-            style="@style/action_bar_title"
-            android:text="@string/cache_coordinates" />
-    </LinearLayout>
-
     <ScrollView
         android:id="@+id/scroller"
         android:layout_width="fill_parent"
