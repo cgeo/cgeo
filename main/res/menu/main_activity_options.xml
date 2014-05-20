@@ -6,7 +6,7 @@
     <item
         android:id="@+id/menu_gosearch"
         style="@style/action_bar_action"
-        android:icon="@drawable/actionbar_search"
+        android:icon="@drawable/abc_ic_search"
         android:title="@string/search_bar_hint"
         cgeo:actionViewClass="android.support.v7.widget.SearchView"
         cgeo:showAsAction="collapseActionView|always"/>
