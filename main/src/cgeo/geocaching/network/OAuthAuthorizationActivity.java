@@ -4,7 +4,6 @@ import butterknife.InjectView;
 
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.utils.BundleUtils;
 import cgeo.geocaching.utils.Log;

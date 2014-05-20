@@ -22,7 +22,7 @@ public class TravelBugConnectorTest extends TestCase {
     public static void testGetUrl() {
         final Trackable trackable = new Trackable();
         trackable.setGeocode("TB2345");
-        assertThat(getConnector().getUrl(trackable)).isEqualTo("http://www.geocaching.com//track/details.aspx?tracker=TB2345");
+        assertThat(getConnector().getBrowserUrl(trackable)).isEqualTo("http://www.geocaching.com//track/details.aspx?tracker=TB2345");
     }
 
     public static void testOnlineSearchBySecretCode() {

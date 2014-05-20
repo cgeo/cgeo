@@ -320,7 +320,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(waymark).isNotNull();
         assertThat(waymark.getGeocode()).isEqualTo("WM7BM7");
         assertThat(waymark.getName()).isEqualTo("Roman water pipe Kornwestheim");
-        assertThat(StringUtils.isNotBlank(waymark.getUrl())).isTrue(); // connector must be able to create it
+        assertThat(StringUtils.isNotBlank(waymark.getBrowserUrl())).isTrue(); // connector must be able to create it
         assertThat(waymark.getType()).isEqualTo(CacheType.UNKNOWN);
         assertThat(waymark.getSize()).isEqualTo(CacheSize.UNKNOWN);
     }

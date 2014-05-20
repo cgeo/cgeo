@@ -3,7 +3,6 @@ package cgeo.geocaching.ui.dialog;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.sensors.IGeoData;
@@ -12,9 +11,7 @@ import cgeo.geocaching.settings.Settings.CoordInputFormatEnum;
 import cgeo.geocaching.utils.EditUtils;
 
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.annotation.NonNull;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.Editable;
@@ -29,8 +26,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import java.lang.ref.WeakReference;
 
 public class CoordinatesInputDialog extends DialogFragment {
 
