@@ -37,7 +37,7 @@ import android.widget.Button;
 
 import java.util.Locale;
 
-public class SearchActivity extends AbstractActionBarActivity {
+public class SearchActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
 
     @InjectView(R.id.buttonLatitude) protected Button buttonLatitude;
     @InjectView(R.id.buttonLongitude) protected Button buttonLongitude;
@@ -290,16 +290,15 @@ public class SearchActivity extends AbstractActionBarActivity {
     }
 
     private void updateCoordinates() {
-        final CoordinatesInputDialog coordsDialog = new CoordinatesInputDialog(null, null, app.currentGeo());
+        final CoordinatesInputDialog coordsDialog = CoordinatesInputDialog.getInstance(null, null, app.currentGeo());
         coordsDialog.setCancelable(true);
-        coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate() {
-            @Override
-            public void update(final Geopoint gp) {
-                buttonLatitude.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
-                buttonLongitude.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
-            }
-        });
-        coordsDialog.show(getSupportFragmentManager(),"wpedit_dialog");
+        coordsDialog.show(getSupportFragmentManager(), "wpedit_dialog");
+    }
+
+    @Override
+    public void updateCoordinates(final Geopoint gp) {
+        buttonLatitude.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
+        buttonLongitude.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
     }
 
     private void findByCoordsFn() {

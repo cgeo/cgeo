@@ -48,7 +48,7 @@ import java.util.EnumSet;
 import java.util.List;
 
 @EActivity
-public class EditWaypointActivity extends AbstractActionBarActivity {
+public class EditWaypointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
     private static final ArrayList<WaypointType> POSSIBLE_WAYPOINT_TYPES = new ArrayList<WaypointType>(WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL);
 
     @ViewById(R.id.buttonLatitude) protected Button buttonLat;
@@ -294,17 +294,18 @@ public class EditWaypointActivity extends AbstractActionBarActivity {
                 // button text is blank when creating new waypoint
             }
             Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
-            CoordinatesInputDialog coordsDialog = new CoordinatesInputDialog(cache, gp, app.currentGeo());
+            CoordinatesInputDialog coordsDialog = CoordinatesInputDialog.getInstance(cache, gp, app.currentGeo());
             coordsDialog.setCancelable(true);
-            coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate() {
-                @Override
-                public void update(final Geopoint gp) {
-                    buttonLat.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
-                    buttonLon.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
-                }
-            });
             coordsDialog.show(getSupportFragmentManager(),"wpeditdialog");
         }
+
+
+    }
+
+    @Override
+    public void updateCoordinates(Geopoint gp) {
+        buttonLat.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
+        buttonLon.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
     }
 
     public static final int SUCCESS = 0;

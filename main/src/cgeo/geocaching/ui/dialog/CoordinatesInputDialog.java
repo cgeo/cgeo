@@ -29,9 +29,9 @@ import android.widget.TextView;
 
 public class CoordinatesInputDialog extends DialogFragment {
 
-    final private IGeoData geo;
-    final private Geocache cache;
     private Geopoint gp;
+    private Geopoint gpinitial;
+    private Geopoint cacheCoords;
 
     private EditText eLat, eLon;
     private Button bLat, bLon;
@@ -40,22 +40,54 @@ public class CoordinatesInputDialog extends DialogFragment {
     private TextView tLatSep1, tLatSep2, tLatSep3;
     private TextView tLonSep1, tLonSep2, tLonSep3;
 
-    private CoordinateUpdate cuListener;
-
     private CoordInputFormatEnum currentFormat = null;
 
-    public CoordinatesInputDialog(final Geocache cache, final Geopoint gp, final IGeoData geo) {
 
-        this.geo = geo;
-        this.cache = cache;
+    private static final String GEOPOINT_ARG = "GEOPOINT";
+    private static final String GEOPOINT_INTIAL_ARG = "GEOPOINT_INITIAL";
+    private static final String CACHECOORDS_ARG = "CACHECOORDS";
+
+
+    public static CoordinatesInputDialog getInstance(final Geocache cache, final Geopoint gp, final IGeoData geo) {
+
+        Bundle args = new Bundle();
 
         if (gp != null) {
-            this.gp = gp;
+            args.putParcelable(GEOPOINT_ARG, gp);
         } else if (geo != null && geo.getCoords() != null) {
-            this.gp = geo.getCoords();
+            args.putParcelable(GEOPOINT_ARG, geo.getCoords());
         } else {
-            this.gp = Geopoint.ZERO;
+            args.putParcelable(GEOPOINT_ARG, Geopoint.ZERO);
         }
+
+        if (geo !=null)
+            args.putParcelable(GEOPOINT_INTIAL_ARG, geo.getCoords());
+
+        if (cache != null)
+            args.putParcelable(CACHECOORDS_ARG, cache.getCoords());
+
+        CoordinatesInputDialog cid = new CoordinatesInputDialog();
+        cid.setArguments(args);
+        return cid;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        gp = getArguments().getParcelable(GEOPOINT_ARG);
+        gpinitial = getArguments().getParcelable(GEOPOINT_INTIAL_ARG);
+        cacheCoords = getArguments().getParcelable(CACHECOORDS_ARG);
+
+        if (savedInstanceState != null && savedInstanceState.getParcelable(GEOPOINT_ARG)!=null)
+            gp = savedInstanceState.getParcelable(GEOPOINT_ARG);
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // TODO: if current input is not commited in gp, read the current input into gp
+        outState.putParcelable(GEOPOINT_ARG, gp);
     }
 
     @Override
@@ -117,11 +149,13 @@ public class CoordinatesInputDialog extends DialogFragment {
         final Button buttonCurrent = (Button) v.findViewById(R.id.current);
         buttonCurrent.setOnClickListener(new CurrentListener());
         final Button buttonCache = (Button) v.findViewById(R.id.cache);
-        if (cache != null) {
+
+        if (cacheCoords != null) {
             buttonCache.setOnClickListener(new CacheListener());
         } else {
             buttonCache.setVisibility(View.GONE);
         }
+
         final Button buttonDone = (Button) v.findViewById(R.id.done);
         buttonDone.setOnClickListener(new InputDoneListener());
 
@@ -403,8 +437,8 @@ public class CoordinatesInputDialog extends DialogFragment {
                 // Start new format with an acceptable value: either the current one
                 // entered by the user, else our current coordinates, else (0,0).
                 if (!areCurrentCoordinatesValid(false)) {
-                    if (geo != null && geo.getCoords() != null) {
-                        gp = geo.getCoords();
+                    if (gpinitial != null) {
+                        gp = gpinitial;
                     } else {
                         gp = Geopoint.ZERO;
                     }
@@ -426,13 +460,13 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         @Override
         public void onClick(View v) {
-            if (geo == null || geo.getCoords() == null) {
+            if (gpinitial == null) {
                 final AbstractActivity activity = (AbstractActivity) getActivity();
                 activity.showToast(activity.getResources().getString(R.string.err_point_unknown_position));
                 return;
             }
 
-            gp = geo.getCoords();
+            gp = gpinitial;
             updateGUI();
         }
     }
@@ -441,16 +475,17 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         @Override
         public void onClick(View v) {
-            if (cache == null || cache.getCoords() == null) {
+            if (cacheCoords == null) {
                 final AbstractActivity activity = (AbstractActivity) getActivity();
                 activity.showToast(activity.getResources().getString(R.string.err_location_unknown));
                 return;
             }
 
-            gp = cache.getCoords();
+            gp = cacheCoords;
             updateGUI();
         }
     }
+
 
     private class InputDoneListener implements View.OnClickListener {
 
@@ -460,18 +495,14 @@ public class CoordinatesInputDialog extends DialogFragment {
                 return;
             }
             if (gp != null) {
-                cuListener.update(gp);
+                ((CoordinateUpdate) getActivity()).updateCoordinates(gp);
             }
             dismiss();
         }
     }
 
-    public void setOnCoordinateUpdate(CoordinateUpdate cu) {
-        cuListener = cu;
-    }
-
     public interface CoordinateUpdate {
-        public void update(final Geopoint gp);
+        public void updateCoordinates(final Geopoint gp);
     }
 
 }
