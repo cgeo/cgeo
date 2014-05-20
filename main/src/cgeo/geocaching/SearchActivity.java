@@ -290,7 +290,7 @@ public class SearchActivity extends AbstractActionBarActivity {
     }
 
     private void updateCoordinates() {
-        final CoordinatesInputDialog coordsDialog = new CoordinatesInputDialog(SearchActivity.this, null, null, app.currentGeo());
+        final CoordinatesInputDialog coordsDialog = new CoordinatesInputDialog(null, null, app.currentGeo());
         coordsDialog.setCancelable(true);
         coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate() {
             @Override
@@ -299,7 +299,7 @@ public class SearchActivity extends AbstractActionBarActivity {
                 buttonLongitude.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
             }
         });
-        coordsDialog.show();
+        coordsDialog.show(getSupportFragmentManager(),"wpedit_dialog");
     }
 
     private void findByCoordsFn() {

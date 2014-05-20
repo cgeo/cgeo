@@ -240,9 +240,9 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
         @Override
         public void onClick(View arg0) {
-            final Dialog dateDialog = new DateDialog(LogTrackableActivity.this, LogTrackableActivity.this, date);
+            final DateDialog dateDialog = DateDialog.getInstance(date);
             dateDialog.setCancelable(true);
-            dateDialog.show();
+            dateDialog.show(getSupportFragmentManager(),"date_dialog");
         }
     }
 

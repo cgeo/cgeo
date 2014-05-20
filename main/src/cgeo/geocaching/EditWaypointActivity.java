@@ -294,7 +294,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity {
                 // button text is blank when creating new waypoint
             }
             Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
-            CoordinatesInputDialog coordsDialog = new CoordinatesInputDialog(EditWaypointActivity.this, cache, gp, app.currentGeo());
+            CoordinatesInputDialog coordsDialog = new CoordinatesInputDialog(cache, gp, app.currentGeo());
             coordsDialog.setCancelable(true);
             coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate() {
                 @Override
@@ -303,7 +303,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity {
                     buttonLon.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
                 }
             });
-            coordsDialog.show();
+            coordsDialog.show(getSupportFragmentManager(),"wpeditdialog");
         }
     }
 

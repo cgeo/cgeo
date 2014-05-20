@@ -278,7 +278,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity {
             if (latButton.getText().length() > 0 && lonButton.getText().length() > 0) {
                 gp = new Geopoint(latButton.getText().toString() + " " + lonButton.getText().toString());
             }
-            CoordinatesInputDialog coordsDialog = new CoordinatesInputDialog(NavigateAnyPointActivity.this, null, gp, app.currentGeo());
+            CoordinatesInputDialog coordsDialog = new CoordinatesInputDialog(null, gp, app.currentGeo());
             coordsDialog.setCancelable(true);
             coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate() {
                 @Override
@@ -288,7 +288,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity {
                     changed = true;
                 }
             });
-            coordsDialog.show();
+            coordsDialog.show(getSupportFragmentManager(),"wpedit_dialog");
         }
     }
 

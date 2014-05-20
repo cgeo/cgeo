@@ -485,9 +485,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
         @Override
         public void onClick(View arg0) {
-            final Dialog dateDialog = new DateDialog(LogCacheActivity.this, LogCacheActivity.this, date);
+            final DateDialog dateDialog = DateDialog.getInstance(date);
             dateDialog.setCancelable(true);
-            dateDialog.show();
+            dateDialog.show(getSupportFragmentManager(), "date_dialog");
         }
     }
 
