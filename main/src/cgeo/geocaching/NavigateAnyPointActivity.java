@@ -44,7 +44,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class NavigateAnyPointActivity extends AbstractActionBarActivity {
+public class NavigateAnyPointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
 
     @InjectView(R.id.historyList) protected ListView historyListView;
 
@@ -278,18 +278,17 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity {
             if (latButton.getText().length() > 0 && lonButton.getText().length() > 0) {
                 gp = new Geopoint(latButton.getText().toString() + " " + lonButton.getText().toString());
             }
-            CoordinatesInputDialog coordsDialog = new CoordinatesInputDialog(null, gp, app.currentGeo());
+            CoordinatesInputDialog coordsDialog = CoordinatesInputDialog.getInstance(null, gp, app.currentGeo());
             coordsDialog.setCancelable(true);
-            coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate() {
-                @Override
-                public void update(Geopoint gp) {
-                    latButton.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
-                    lonButton.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
-                    changed = true;
-                }
-            });
             coordsDialog.show(getSupportFragmentManager(),"wpedit_dialog");
         }
+
+    }
+    @Override
+    public void updateCoordinates(Geopoint gp) {
+        latButton.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
+        lonButton.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
+        changed = true;
     }
 
     private static class ChangeDistanceUnit implements OnItemSelectedListener {
