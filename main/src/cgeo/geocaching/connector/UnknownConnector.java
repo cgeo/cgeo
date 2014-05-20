@@ -14,7 +14,7 @@ public class UnknownConnector extends AbstractConnector {
     }
 
     @Override
-    public String getCacheUrl(@NonNull Geocache cache) {
+    public String getCacheBrowserUrl(@NonNull Geocache cache) {
         return null; // we have no url for these caches
     }
 

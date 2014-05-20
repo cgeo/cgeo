@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.trackable;
 
+import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.UserAction;
 
@@ -19,6 +20,11 @@ public abstract class AbstractTrackableConnector implements TrackableConnector {
     public @Nullable
     String getTrackableCodeFromUrl(@NonNull String url) {
         return null;
+    }
+
+    @Override
+    public String getCgeoUrl(Trackable trackable) {
+        return getBrowserUrl(trackable);
     }
 
     @Override

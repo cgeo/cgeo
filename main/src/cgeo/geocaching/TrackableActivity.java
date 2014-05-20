@@ -111,6 +111,16 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             if (waitDialog != null) {
                 waitDialog.dismiss();
             }
+
+            // if we have a newer Android device setup Android Beam for easy cache sharing
+            initializeAndroidBeam(
+                    new ActivitySharingInterface() {
+                        @Override
+                        public String getUri() {
+                            return trackable.getCgeoUrl();
+                        }
+                    }
+            );
         }
     };
 
@@ -241,7 +251,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 LogTrackableActivity.startActivity(this, trackable);
                 return true;
             case R.id.menu_browser_trackable:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getUrl())));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getBrowserUrl())));
                 return true;
             default:
                 return false;
@@ -252,7 +262,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     public boolean onPrepareOptionsMenu(Menu menu) {
         if (trackable != null) {
             menu.findItem(R.id.menu_log_touch).setEnabled(StringUtils.isNotBlank(geocode) && trackable.isLoggable());
-            menu.findItem(R.id.menu_browser_trackable).setEnabled(StringUtils.isNotBlank(trackable.getUrl()));
+            menu.findItem(R.id.menu_browser_trackable).setEnabled(StringUtils.isNotBlank(trackable.getBrowserUrl()));
         }
         return super.onPrepareOptionsMenu(menu);
     }

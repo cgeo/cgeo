@@ -16,8 +16,14 @@ import org.apache.commons.lang3.StringUtils;
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
+import android.nfc.NfcAdapter;
+import android.nfc.NfcEvent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
@@ -190,5 +196,35 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
             default:
                 return false;
         }
+    }
+
+    // Do not support older devices than Android 4.0
+    // Although there even are 2.3 devices  (Nexus S)
+    // these are so few that we don't want to deal with the older (non Android Beam) API
+
+    public interface ActivitySharingInterface {
+        /** Return an URL that represent the current activity for sharing */
+        public String getUri();
+    }
+
+    protected void initializeAndroidBeam(ActivitySharingInterface sharingInterface) {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+            initializeICSAndroidBeam(sharingInterface);
+    }
+
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    protected void initializeICSAndroidBeam(final ActivitySharingInterface sharingInterface) {
+        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        if (nfcAdapter == null) {
+            return;
+        }
+        nfcAdapter.setNdefPushMessageCallback(new NfcAdapter.CreateNdefMessageCallback() {
+            @Override
+            public NdefMessage createNdefMessage(NfcEvent event) {
+                NdefRecord record = NdefRecord.createUri(sharingInterface.getUri());
+                return new NdefMessage(new NdefRecord[]{record});
+            }
+        }, this);
+
     }
 }

@@ -25,7 +25,12 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     }
 
     @Override
-    public String getUrl(Trackable trackable) {
+    public String getCgeoUrl(Trackable trackable) {
+        return getBrowserUrl(trackable).replace("//", "/");
+    }
+
+    @Override
+    public String getBrowserUrl(Trackable trackable) {
         return "http://www.geocaching.com//track/details.aspx?tracker=" + trackable.getGeocode();
     }
 

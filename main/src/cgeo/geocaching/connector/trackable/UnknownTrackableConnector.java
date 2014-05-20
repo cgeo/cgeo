@@ -12,7 +12,7 @@ public class UnknownTrackableConnector extends AbstractTrackableConnector {
     }
 
     @Override
-    public String getUrl(Trackable trackable) {
+    public String getBrowserUrl(Trackable trackable) {
         return StringUtils.EMPTY;
     }
 
