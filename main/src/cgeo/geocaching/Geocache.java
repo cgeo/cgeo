@@ -501,7 +501,7 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     private String getCacheUrl() {
-        return getConnector().getCacheBrowserUrl(this);
+        return getConnector().getCacheUrl(this);
     }
 
     private String getBrowserCacheUrl() {
@@ -722,16 +722,14 @@ public class Geocache implements ICache, IWaypoint {
         final Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT, subject.toString());
-        intent.putExtra(Intent.EXTRA_TEXT, getBrowserUrl());
+        intent.putExtra(Intent.EXTRA_TEXT, getUrl());
 
         return intent;
     }
 
-    public String getBrowserUrl() {
-        return getConnector().getCacheBrowserUrl(this);
+    public String getUrl() {
+        return getConnector().getCacheUrl(this);
     }
-
-    public String getCgeoUrl() { return getConnector().getCgeoCacheUrl(this); }
 
     public boolean supportsGCVote() {
         return StringUtils.startsWithIgnoreCase(geocode, "GC");

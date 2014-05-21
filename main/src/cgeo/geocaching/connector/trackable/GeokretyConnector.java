@@ -20,7 +20,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     }
 
     @Override
-    public String getBrowserUrl(Trackable trackable) {
+    public String getUrl(Trackable trackable) {
         return "http://geokrety.org/konkret.php?id=" + getId(trackable.getGeocode());
     }
 
@@ -38,7 +38,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             final String hex = geocode.substring(2);
             return Integer.parseInt(hex, 16);
         } catch (final NumberFormatException e) {
-            Log.e("Trackable.getBrowserUrl", e);
+            Log.e("Trackable.getUrl", e);
         }
         return -1;
     }

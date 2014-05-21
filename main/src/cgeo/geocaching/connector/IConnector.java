@@ -34,15 +34,7 @@ public interface IConnector {
      * @param cache
      * @return
      */
-    public String getCacheBrowserUrl(final @NonNull Geocache cache);
-
-    /**
-     * Get the URL that will default to CGEO opening the cache
-     *
-     * @param cache
-     * @return
-     */
-    public String getCgeoCacheUrl(final @NonNull Geocache cache);
+    public String getCacheUrl(final @NonNull Geocache cache);
 
     /**
      * get long browser URL for the given cache

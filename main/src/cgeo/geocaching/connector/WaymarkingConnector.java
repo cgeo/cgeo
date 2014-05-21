@@ -14,7 +14,7 @@ public class WaymarkingConnector extends AbstractConnector {
     }
 
     @Override
-    public String getCacheBrowserUrl(@NonNull Geocache cache) {
+    public String getCacheUrl(@NonNull Geocache cache) {
         return getCacheUrlPrefix() + cache.getGeocode();
     }
 
