@@ -229,7 +229,7 @@
   <string name="loc_no_addr">Adresse unbekannt</string>
   <string name="loc_gps_disabled">GPS nicht aktiv</string>
   <string name="menu_centerposition">Zentriere meine Position</string>
-  <string name="menu_about">über c:geo</string>
+  <string name="menu_about">Über c:geo</string>
   <string name="menu_helpers">Nützliche Apps</string>
   <string name="menu_settings">Einstellungen</string>
   <string name="menu_history">Verlauf</string>
@@ -682,7 +682,7 @@
   <string name="cache_size">Größe</string>
   <string name="cache_distance">Entfernung</string>
   <string name="cache_difficulty">Schwierigkeit</string>
-  <string name="cache_terrain">Terrain</string>
+  <string name="cache_terrain">Gelände</string>
   <string name="cache_rating">Bewertung</string>
   <string name="cache_own_rating">Eigene Bewertung</string>
   <string name="cache_rating_of">von</string>
