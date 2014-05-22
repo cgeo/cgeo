@@ -30,7 +30,6 @@
     </item>
     <item
         android:id="@+id/menu_store_caches"
-        android:enabled="false"
         android:icon="@drawable/ic_menu_set_as"
         cgeo:showAsAction="ifRoom|withText"
         android:title="@string/caches_store_offline">

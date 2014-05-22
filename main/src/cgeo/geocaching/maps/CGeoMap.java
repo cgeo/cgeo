@@ -617,7 +617,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         for (MapSource mapSource : MapProviderFactory.getMapSources()) {
             final MenuItem menuItem = menu.findItem(mapSource.getNumericalId());
             if (menuItem != null) {
-                menuItem.setEnabled(mapSource.isAvailable());
+                menuItem.setVisible(mapSource.isAvailable());
             }
         }
 
@@ -644,7 +644,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             }
 
             final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
-            menu.findItem(R.id.menu_store_caches).setEnabled(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport) && new SearchResult(geocodesInViewport).hasUnsavedCaches());
+            menu.findItem(R.id.menu_store_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport) && new SearchResult(geocodesInViewport).hasUnsavedCaches());
 
             item = menu.findItem(R.id.menu_circle_mode); // show circles
             if (overlayCaches != null && overlayCaches.getCircles()) {
@@ -656,9 +656,9 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
             item = menu.findItem(R.id.menu_theme_mode); // show theme selection
             item.setVisible(mapView.hasMapThemes());
 
-            menu.findItem(R.id.menu_as_list).setEnabled(!isLoading());
+            menu.findItem(R.id.menu_as_list).setVisible(!isLoading());
 
-            menu.findItem(R.id.submenu_strategy).setEnabled(isLiveEnabled);
+            menu.findItem(R.id.submenu_strategy).setVisible(isLiveEnabled);
 
             switch (Settings.getLiveMapStrategy()) {
                 case FASTEST:

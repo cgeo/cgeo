@@ -327,7 +327,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
             menu.findItem(R.id.menu_default_navigation).setVisible(visible);
             menu.findItem(R.id.menu_caches_around).setVisible(visible);
 
-            menu.findItem(R.id.menu_clear_history).setEnabled(!getHistoryOfSearchedLocations().isEmpty());
+            menu.findItem(R.id.menu_clear_history).setVisible(!getHistoryOfSearchedLocations().isEmpty());
         } catch (RuntimeException e) {
             // nothing
         }

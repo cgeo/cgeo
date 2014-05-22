@@ -25,6 +25,7 @@ import cgeo.geocaching.utils.UnknownTagsHandler;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+
 import rx.android.observables.AndroidObservable;
 import rx.android.observables.ViewObservable;
 import rx.functions.Action1;
@@ -261,8 +262,8 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         if (trackable != null) {
-            menu.findItem(R.id.menu_log_touch).setEnabled(StringUtils.isNotBlank(geocode) && trackable.isLoggable());
-            menu.findItem(R.id.menu_browser_trackable).setEnabled(StringUtils.isNotBlank(trackable.getBrowserUrl()));
+            menu.findItem(R.id.menu_log_touch).setVisible(StringUtils.isNotBlank(geocode) && trackable.isLoggable());
+            menu.findItem(R.id.menu_browser_trackable).setVisible(StringUtils.isNotBlank(trackable.getBrowserUrl()));
         }
         return super.onPrepareOptionsMenu(menu);
     }
