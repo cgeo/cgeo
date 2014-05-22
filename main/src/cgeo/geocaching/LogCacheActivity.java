@@ -524,6 +524,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     // update logs in DB
                     ArrayList<LogEntry> newLogs = new ArrayList<LogEntry>(cache.getLogs());
                     final LogEntry logNow = new LogEntry(date.getTimeInMillis(), typeSelected, log);
+                    logNow.friend = true;
                     newLogs.add(0, logNow);
                     DataStore.saveLogsWithoutTransaction(cache.getGeocode(), newLogs);
 
