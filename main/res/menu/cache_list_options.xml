@@ -101,27 +101,15 @@
         </menu>
     </item>
     <item
-        android:id="@+id/submenu_manage_lists"
-        android:icon="@drawable/ic_menu_more"
-        android:title="@string/list_menu">
-        <menu>
-            <item
-                android:id="@+id/menu_create_list"
-                android:title="@string/list_menu_create">
-            </item>
-            <item
-                android:id="@+id/menu_drop_list"
-                android:title="@string/list_menu_drop">
-            </item>
-            <item
-                android:id="@+id/menu_rename_list"
-                android:title="@string/list_menu_rename">
-            </item>
-            <item
-                android:id="@+id/menu_switch_list"
-                android:title="@string/list_menu_change">
-            </item>
-        </menu>
+         android:id="@+id/menu_create_list"
+         android:title="@string/list_menu_create">
     </item>
-
+    <item
+         android:id="@+id/menu_drop_list"
+         android:title="@string/list_menu_drop">
+    </item>
+    <item
+         android:id="@+id/menu_rename_list"
+         android:title="@string/list_menu_rename">
+    </item>
 </menu>

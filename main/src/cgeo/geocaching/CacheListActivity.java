@@ -640,7 +640,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             setVisible(menu, R.id.menu_switch_select_mode, !isEmpty);
             setVisible(menu, R.id.submenu_manage, (isHistory && !isEmpty) || isOffline);
-            setVisible(menu, R.id.submenu_manage_lists, isOffline);
+
+            setVisible(menu, R.id.menu_create_list, isOffline);
 
             setVisible(menu, R.id.menu_sort, !isEmpty && !isHistory);
             setVisible(menu, R.id.menu_refresh_stored, !isEmpty && (isConcrete || type != CacheListType.OFFLINE));
@@ -676,8 +677,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             menu.findItem(R.id.menu_drop_list).setVisible(isNonDefaultList);
             menu.findItem(R.id.menu_rename_list).setVisible(isNonDefaultList);
 
-            final boolean multipleLists = DataStore.getLists().size() >= 2;
-            menu.findItem(R.id.menu_switch_list).setVisible(multipleLists);
             menu.findItem(R.id.menu_move_to_list).setVisible(!isEmpty);
 
             setMenuItemLabel(menu, R.id.menu_remove_from_history, R.string.cache_remove_from_history, R.string.cache_clear_history);
@@ -769,10 +768,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 return false;
             case R.id.menu_invert_selection:
                 adapter.invertSelection();
-                invalidateOptionsMenuCompatible();
-                return false;
-            case R.id.menu_switch_list:
-                selectList();
                 invalidateOptionsMenuCompatible();
                 return false;
             case R.id.menu_filter:
@@ -1411,13 +1406,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             final View loading = findViewById(R.id.loading);
             loading.setVisibility(View.GONE);
         }
-    }
-
-    public void selectList() {
-        if (!type.canSwitch) {
-            return;
-        }
-        new StoredList.UserInterface(this).promptForListSelection(R.string.list_title, getListSwitchingRunnable());
     }
 
     @NonNull
