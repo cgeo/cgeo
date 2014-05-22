@@ -32,7 +32,7 @@
         android:id="@+id/menu_helpers"
         android:icon="@drawable/ic_menu_shopping"
         android:title="@string/menu_helpers"
-        cgeo:showAsAction="ifRoom|">
+        cgeo:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_scan"
