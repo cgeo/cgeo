@@ -317,7 +317,6 @@
   <string name="list_menu">Llista</string>
   <string name="list_menu_create">Crea una llista nova</string>
   <string name="list_menu_drop">Elimina la llista actual</string>
-  <string name="list_menu_change">Canvia de llista</string>
   <string name="list_menu_rename">Reanomena la llista actual</string>
   <string name="list_title">Trieu una llista</string>
   <string name="list_inbox">Desats</string>

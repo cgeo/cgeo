@@ -319,7 +319,6 @@
   <string name="list_menu">Sąrašas</string>
   <string name="list_menu_create">Sukurti naują sąrašą</string>
   <string name="list_menu_drop">Išmesti dabartinį sąrašą</string>
-  <string name="list_menu_change">Pakeisti sąrašą</string>
   <string name="list_menu_rename">Pervadinti dabartinį sąrašą</string>
   <string name="list_title">Pasirinkti sąrašą</string>
   <string name="list_inbox">Išsaugota</string>

@@ -315,7 +315,6 @@
   <string name="list_menu">Liste</string>
   <string name="list_menu_create">Opprett ny liste</string>
   <string name="list_menu_drop">Fjern liste</string>
-  <string name="list_menu_change">Endre liste</string>
   <string name="list_menu_rename">Endre navn på listen</string>
   <string name="list_title">Velg en liste</string>
   <string name="list_inbox">Lagret</string>

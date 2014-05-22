@@ -261,7 +261,6 @@
   <string name="list_menu">Lista</string>
   <string name="list_menu_create">Új lista létrehozása</string>
   <string name="list_menu_drop">Jelenlegi lista elvetése</string>
-  <string name="list_menu_change">Lista megváltoztatása</string>
   <string name="list_menu_rename">Az aktuális lista átnevezése</string>
   <string name="list_title">Válassz listát</string>
   <string name="list_inbox">Mentett</string>

@@ -315,7 +315,6 @@
   <string name="list_menu">Listes</string>
   <string name="list_menu_create">Nouvelle liste</string>
   <string name="list_menu_drop">Effacer la liste courante</string>
-  <string name="list_menu_change">Changer de liste</string>
   <string name="list_menu_rename">Renommer la liste courante</string>
   <string name="list_title">Choisir une liste</string>
   <string name="list_inbox">Enregistrées</string>

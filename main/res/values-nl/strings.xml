@@ -317,7 +317,6 @@
   <string name="list_menu">Lijst</string>
   <string name="list_menu_create">Maak nieuwe lijst</string>
   <string name="list_menu_drop">Verwijder huidige lijst</string>
-  <string name="list_menu_change">Pas lijst aan</string>
   <string name="list_menu_rename">Hernoem huidige lijst</string>
   <string name="list_title">Selecteer een lijst</string>
   <string name="list_inbox">Opgeslagen</string>

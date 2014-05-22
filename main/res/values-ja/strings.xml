@@ -308,7 +308,6 @@
   <string name="list_menu">リスト</string>
   <string name="list_menu_create">新しいリストを作成</string>
   <string name="list_menu_drop">このリストを消去</string>
-  <string name="list_menu_change">別のリストにする</string>
   <string name="list_menu_rename">このリスト名を変更</string>
   <string name="list_title">リストの選択</string>
   <string name="list_inbox">保存済み</string>

@@ -314,7 +314,6 @@
   <string name="list_menu">Lista</string>
   <string name="list_menu_create">Crear nueva lista</string>
   <string name="list_menu_drop">Borrar lista actual</string>
-  <string name="list_menu_change">Cambiar lista</string>
   <string name="list_menu_rename">Renombrar la lista actual</string>
   <string name="list_title">Escoger lista</string>
   <string name="list_inbox">Guardadas</string>

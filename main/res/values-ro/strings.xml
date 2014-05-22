@@ -313,7 +313,6 @@
   <string name="list_menu">Liste</string>
   <string name="list_menu_create">Crează listă nouă</string>
   <string name="list_menu_drop">Şterge lista curentă</string>
-  <string name="list_menu_change">Schimbă lista</string>
   <string name="list_menu_rename">Redenumeşte lista curentă</string>
   <string name="list_title">Alege o listă</string>
   <string name="list_inbox">Salvate</string>

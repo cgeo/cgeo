@@ -316,7 +316,6 @@
   <string name="list_menu">Seznam</string>
   <string name="list_menu_create">Vytvořit nový seznam</string>
   <string name="list_menu_drop">Smazat aktuální seznam</string>
-  <string name="list_menu_change">Změnit seznam</string>
   <string name="list_menu_rename">Přejmenovat aktuální seznam</string>
   <string name="list_title">Vyber seznam</string>
   <string name="list_inbox">Uložené</string>
