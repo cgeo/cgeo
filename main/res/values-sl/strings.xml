@@ -314,7 +314,6 @@
   <string name="caches_removing_from_history">Brišem iz zgodovine…</string>
   <string name="caches_clear_offlinelogs">Izbriši shranjene zapise</string>
   <string name="caches_clear_offlinelogs_progress">Izbris shranjenih zapisov</string>
-  <string name="list_menu">Seznam</string>
   <string name="list_menu_create">Ustvari nov seznam</string>
   <string name="list_menu_drop">Izbriši trenutni seznam</string>
   <string name="list_title">Izberi seznam</string>

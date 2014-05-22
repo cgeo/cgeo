@@ -312,7 +312,6 @@
   <string name="caches_removing_from_history">A remover do histórico…</string>
   <string name="caches_clear_offlinelogs">Limpar registos offline</string>
   <string name="caches_clear_offlinelogs_progress">A limpar registos offline</string>
-  <string name="list_menu">Listas</string>
   <string name="list_menu_create">Criar nova lista</string>
   <string name="list_menu_drop">Apagar lista actual</string>
   <string name="list_menu_rename">Mudar o nome da lista corrente.</string>

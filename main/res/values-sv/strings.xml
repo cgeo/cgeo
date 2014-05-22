@@ -314,7 +314,6 @@
   <string name="caches_removing_from_history">Tar bort från historik…</string>
   <string name="caches_clear_offlinelogs">Rensa offline loggar</string>
   <string name="caches_clear_offlinelogs_progress">Rensar offline loggar</string>
-  <string name="list_menu">Listor</string>
   <string name="list_menu_create">Skapa en ny lista</string>
   <string name="list_menu_drop">Ta bort den här listan</string>
   <string name="list_title">Välj en lista</string>

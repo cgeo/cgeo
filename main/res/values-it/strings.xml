@@ -312,7 +312,6 @@
   <string name="caches_removing_from_history">Rimozione dalla cronologia…</string>
   <string name="caches_clear_offlinelogs">Cancella i log offline</string>
   <string name="caches_clear_offlinelogs_progress">Cancellazione logs offline</string>
-  <string name="list_menu">Lista</string>
   <string name="list_menu_create">Crea nuova lista</string>
   <string name="list_menu_drop">Elimina la lista corrente</string>
   <string name="list_menu_rename">Rinomina la lista corrente</string>

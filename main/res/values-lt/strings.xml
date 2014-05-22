@@ -316,7 +316,6 @@
   <string name="caches_removing_from_history">Pašalinama iš Istorijos…</string>
   <string name="caches_clear_offlinelogs">Išvalyti išsaugotus įrašus</string>
   <string name="caches_clear_offlinelogs_progress">Išvalomi išsaugoti įrašai</string>
-  <string name="list_menu">Sąrašas</string>
   <string name="list_menu_create">Sukurti naują sąrašą</string>
   <string name="list_menu_drop">Išmesti dabartinį sąrašą</string>
   <string name="list_menu_rename">Pervadinti dabartinį sąrašą</string>

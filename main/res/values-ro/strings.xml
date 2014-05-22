@@ -310,7 +310,6 @@
   <string name="caches_removing_from_history">Şterge din istoric…</string>
   <string name="caches_clear_offlinelogs">Şterge însemnări stocate local</string>
   <string name="caches_clear_offlinelogs_progress">Ştergere însemnări stocate local</string>
-  <string name="list_menu">Liste</string>
   <string name="list_menu_create">Crează listă nouă</string>
   <string name="list_menu_drop">Şterge lista curentă</string>
   <string name="list_menu_rename">Redenumeşte lista curentă</string>

@@ -305,7 +305,6 @@
   <string name="caches_removing_from_history">履歴から削除中…</string>
   <string name="caches_clear_offlinelogs">全てのオフラインログを削除</string>
   <string name="caches_clear_offlinelogs_progress">全てのオフラインログを削除中</string>
-  <string name="list_menu">リスト</string>
   <string name="list_menu_create">新しいリストを作成</string>
   <string name="list_menu_drop">このリストを消去</string>
   <string name="list_menu_rename">このリスト名を変更</string>

@@ -314,7 +314,6 @@
   <string name="caches_removing_from_history">Verwijderen uit geschiedenis…</string>
   <string name="caches_clear_offlinelogs">Verwijderen offline logs</string>
   <string name="caches_clear_offlinelogs_progress">Offline logs worden verwijderd</string>
-  <string name="list_menu">Lijst</string>
   <string name="list_menu_create">Maak nieuwe lijst</string>
   <string name="list_menu_drop">Verwijder huidige lijst</string>
   <string name="list_menu_rename">Hernoem huidige lijst</string>

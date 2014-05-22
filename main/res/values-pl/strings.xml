@@ -314,7 +314,6 @@
   <string name="caches_removing_from_history">Usuwam z Historii…</string>
   <string name="caches_clear_offlinelogs">Usuń wpisy offline</string>
   <string name="caches_clear_offlinelogs_progress">Usuwanie wpisów offline</string>
-  <string name="list_menu">Lista</string>
   <string name="list_menu_create">Utwórz nową listę</string>
   <string name="list_menu_drop">Usuń aktualną listę</string>
   <string name="list_menu_rename">Zmień nazwę aktualnej listy</string>

@@ -312,7 +312,6 @@
   <string name="caches_removing_from_history">Fjerner fra historikken…</string>
   <string name="caches_clear_offlinelogs">Fjern offline-logger</string>
   <string name="caches_clear_offlinelogs_progress">Fjerner offline-logger</string>
-  <string name="list_menu">Liste</string>
   <string name="list_menu_create">Opprett ny liste</string>
   <string name="list_menu_drop">Fjern liste</string>
   <string name="list_menu_rename">Endre navn på listen</string>

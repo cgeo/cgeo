@@ -258,7 +258,6 @@
   <string name="caches_filter_clear">szűrők törlése</string>
   <string name="caches_filter_modified">Módosított koordinátákkal</string>
   <string name="caches_removing_from_history">Eltávolítás a Előzményekből…</string>
-  <string name="list_menu">Lista</string>
   <string name="list_menu_create">Új lista létrehozása</string>
   <string name="list_menu_drop">Jelenlegi lista elvetése</string>
   <string name="list_menu_rename">Az aktuális lista átnevezése</string>
