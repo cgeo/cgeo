@@ -311,6 +311,7 @@
   <string name="caches_removing_from_history">Borrando del historial…</string>
   <string name="caches_clear_offlinelogs">Borrar registros sin conexión</string>
   <string name="caches_clear_offlinelogs_progress">Borrando registros sin conexión</string>
+  <string name="list_menu_create">Crear nueva lista</string>
   <string name="list_menu_drop">Borrar lista actual</string>
   <string name="list_menu_rename">Renombrar la lista actual</string>
   <string name="list_title">Escoger lista</string>

@@ -316,6 +316,7 @@
   <string name="caches_clear_offlinelogs_progress">Rensar offline loggar</string>
   <string name="list_menu_create">Skapa en ny lista</string>
   <string name="list_menu_drop">Ta bort den här listan</string>
+  <string name="list_menu_rename">Byt namn på den här listan</string>
   <string name="list_title">Välj en lista</string>
   <string name="list_inbox">Sparade</string>
   <string name="list_all_lists">Alla cacher</string>
