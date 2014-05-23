@@ -51,11 +51,11 @@ public class Units {
         return getDistanceFromKilometers(meters / 1000f);
     }
 
-    public static String getSpeed(float kilometersPerHour) {
-        final String speed = getDistanceFromKilometers(kilometersPerHour);
-        if (speed.endsWith("mi")) {
-            return speed.substring(0, speed.length() - 2) + "mph";
+    public static String getSpeed(final float kilometersPerHour) {
+        if (Settings.isUseImperialUnits()) {
+            return String.format("%.0f mph", kilometersPerHour / IConversion.MILES_TO_KILOMETER);
+        } else {
+            return String.format("%.0f km/h", kilometersPerHour);
         }
-        return speed + (!Settings.isUseImperialUnits() ? "/h" : "ph");
     }
 }

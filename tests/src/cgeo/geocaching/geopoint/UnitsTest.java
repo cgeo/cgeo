@@ -51,13 +51,13 @@ public class UnitsTest extends CGeoTestCase {
             TestSettings.setUseImperialUnits(false);
             assertSpeed("123 km/h", 122.782f);
             assertSpeed("123 km/h", 123.456f);
-            assertSpeed("12.3 km/h", 12.3456f);
-            assertSpeed("1.23 km/h", 1.23456f);
-            assertSpeed("123 m/h", 0.123456f);
+            assertSpeed("12 km/h", 12.3456f);
+            assertSpeed("1 km/h", 1.23456f);
+            assertSpeed("0 km/h", 0.123456f);
             TestSettings.setUseImperialUnits(true);
-            assertSpeed("76.7 mph", 123.456f);
-            assertSpeed("7.67 mph", 12.3456f);
-            assertSpeed("0.77 mph", 1.23456f);
+            assertSpeed("77 mph", 123.456f);
+            assertSpeed("8 mph", 12.3456f);
+            assertSpeed("1 mph", 1.23456f);
         } finally {
             TestSettings.setUseImperialUnits(savedImperial);
         }
