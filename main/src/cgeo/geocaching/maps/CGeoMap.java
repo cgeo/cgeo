@@ -214,50 +214,62 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     // handlers
     /** Updates the titles */
-    final private Handler displayHandler = new Handler() {
+    private final static class DisplayHandler extends Handler {
+
+        private final WeakReference<CGeoMap> mapRef;
+
+        public DisplayHandler(@NonNull final CGeoMap map) {
+            this.mapRef = new WeakReference<CGeoMap>(map);
+        }
 
         @Override
         public void handleMessage(Message msg) {
             final int what = msg.what;
+            final CGeoMap map = mapRef.get();
+            if (map == null) {
+                return;
+            }
 
             switch (what) {
                 case UPDATE_TITLE:
                     // set title
                     final StringBuilder title = new StringBuilder();
 
-                    if (mapMode == MapMode.LIVE && isLiveEnabled) {
-                        title.append(res.getString(R.string.map_live));
+                    if (map.mapMode == MapMode.LIVE && map.isLiveEnabled) {
+                        title.append(map.res.getString(R.string.map_live));
                     } else {
-                        title.append(mapTitle);
+                        title.append(map.mapTitle);
                     }
 
-                    countVisibleCaches();
-                    if (caches != null && !caches.isEmpty() && !mapTitle.contains("[")) {
-                        title.append(" [").append(cachesCnt);
-                        if (cachesCnt != caches.size()) {
-                            title.append('/').append(caches.size());
+                    map.countVisibleCaches();
+                    if (map.caches != null && !map.caches.isEmpty() && !map.mapTitle.contains("[")) {
+                        title.append(" [").append(map.cachesCnt);
+                        if (map.cachesCnt != map.caches.size()) {
+                            title.append('/').append(map.caches.size());
                         }
                         title.append(']');
                     }
 
-                    if (Settings.isDebug() && lastSearchResult != null && StringUtils.isNotBlank(lastSearchResult.getUrl())) {
-                        title.append('[').append(lastSearchResult.getUrl()).append(']');
+                    if (Settings.isDebug() && map.lastSearchResult != null && StringUtils.isNotBlank(map.lastSearchResult.getUrl())) {
+                        title.append('[').append(map.lastSearchResult.getUrl()).append(']');
                     }
 
-                    setTitle(title.toString());
+                    map.setTitle(title.toString());
                     break;
                 case INVALIDATE_MAP:
-                    mapView.repaintRequired(null);
+                    map.mapView.repaintRequired(null);
                     break;
 
                 default:
                     break;
             }
         }
-    };
+    }
+
+    final private Handler displayHandler = new DisplayHandler(this);
 
     private void setTitle(String title) {
-        /* Compatibily for the old Action Bar, only used by the maps activity at the moment */
+        /* Compatibility for the old Action Bar, only used by the maps activity at the moment */
         final TextView titleview = (TextView) activity.findViewById(R.id.actionbar_title);
         if (titleview != null) {
             titleview.setText(title);
@@ -274,9 +286,13 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     }
 
     /** Updates the progress. */
-    final private Handler showProgressHandler = new Handler() {
-
+    private static final class ShowProgressHandler extends Handler {
         private int counter = 0;
+        @NonNull private final WeakReference<CGeoMap> mapRef;
+
+        public ShowProgressHandler(@NonNull final CGeoMap map) {
+            this.mapRef = new WeakReference<CGeoMap>(map);
+        }
 
         @Override
         public void handleMessage(Message msg) {
@@ -293,7 +309,12 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         }
 
         private void showProgress(boolean show) {
-            final ProgressBar progress = (ProgressBar) activity.findViewById(R.id.actionbar_progress);
+            final CGeoMap map = mapRef.get();
+            if (map == null) {
+                return;
+            }
+
+            final ProgressBar progress = (ProgressBar) map.activity.findViewById(R.id.actionbar_progress);
             if (progress != null) {
                 if (show) {
                     progress.setVisibility(View.VISIBLE);
@@ -303,12 +324,12 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                 }
             }
             if (Build.VERSION.SDK_INT >= 11) {
-                activity.setProgressBarIndeterminateVisibility(show);
+                map.activity.setProgressBarIndeterminateVisibility(show);
             }
         }
-    };
+    }
 
-
+    final private Handler showProgressHandler = new ShowProgressHandler(this);
 
     final private class LoadDetailsHandler extends CancellableHandler {
 
@@ -1073,50 +1094,63 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         return loadTimer;
     }
 
+    private static final class LoadTimerAction implements Action0 {
+
+        @NonNull private final WeakReference<CGeoMap> mapRef;
+
+        public LoadTimerAction(@NonNull final CGeoMap map) {
+            this.mapRef = new WeakReference<CGeoMap>(map);
+        }
+
+        @Override
+        public void call() {
+            final CGeoMap map = mapRef.get();
+            if (map == null) {
+                return;
+            }
+            try {
+                if (map.mapView != null) {
+                    // get current viewport
+                    final Viewport viewportNow = map.mapView.getViewport();
+                    // Since zoomNow is used only for local comparison purposes,
+                    // it is ok to use the Google Maps compatible zoom level of OSM Maps
+                    final int zoomNow = map.mapView.getMapZoomLevel();
+
+                    // check if map moved or zoomed
+                    //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
+                    final boolean moved = map.markersInvalidated || (map.isLiveEnabled && !map.downloaded) || (map.viewport == null) || zoomNow != map.zoom ||
+                            (mapMoved(map.viewport, viewportNow) && (map.cachesCnt <= 0 || CollectionUtils.isEmpty(map.caches) || !map.viewport.includes(viewportNow)));
+
+                    // update title on any change
+                    if (moved || !viewportNow.equals(map.viewport)) {
+                        map.displayHandler.sendEmptyMessage(UPDATE_TITLE);
+                    }
+                    map.zoom = zoomNow;
+
+                    // save new values
+                    if (moved) {
+                        map.markersInvalidated = false;
+
+                        long currentTime = System.currentTimeMillis();
+
+                        if (1000 < (currentTime - map.loadThreadRun)) {
+                            map.viewport = viewportNow;
+                            loadExecutor.execute(map.new LoadRunnable(map.viewport));
+                        }
+                    }
+                }
+
+            } catch (Exception e) {
+                Log.w("CGeoMap.startLoadtimer.start", e);
+            }
+        }
+    }
+
     /**
      * loading timer Triggers every 250ms and checks for viewport change and starts a {@link LoadRunnable}.
      */
     private Subscription startLoadTimer() {
-        return Schedulers.newThread().createWorker().schedulePeriodically(new Action0() {
-            @Override
-            public void call() {
-                try {
-                    if (mapView != null) {
-                        // get current viewport
-                        final Viewport viewportNow = mapView.getViewport();
-                        // Since zoomNow is used only for local comparison purposes,
-                        // it is ok to use the Google Maps compatible zoom level of OSM Maps
-                        final int zoomNow = mapView.getMapZoomLevel();
-
-                        // check if map moved or zoomed
-                        //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
-                        final boolean moved = markersInvalidated || (isLiveEnabled && !downloaded) || (viewport == null) || zoomNow != zoom ||
-                                (mapMoved(viewport, viewportNow) && (cachesCnt <= 0 || CollectionUtils.isEmpty(caches) || !viewport.includes(viewportNow)));
-
-                        // update title on any change
-                        if (moved || !viewportNow.equals(viewport)) {
-                            displayHandler.sendEmptyMessage(UPDATE_TITLE);
-                        }
-                        zoom = zoomNow;
-
-                        // save new values
-                        if (moved) {
-                            markersInvalidated = false;
-
-                            long currentTime = System.currentTimeMillis();
-
-                            if (1000 < (currentTime - loadThreadRun)) {
-                                viewport = viewportNow;
-                                loadExecutor.execute(new LoadRunnable(viewport));
-                            }
-                        }
-                    }
-
-                } catch (Exception e) {
-                    Log.w("CGeoMap.startLoadtimer.start", e);
-                }
-            }
-        }, 250, 250, TimeUnit.MILLISECONDS);
+        return Schedulers.newThread().createWorker().schedulePeriodically(new LoadTimerAction(this), 250, 250, TimeUnit.MILLISECONDS);
     }
 
     /**
