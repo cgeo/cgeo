@@ -10,6 +10,7 @@ import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.maps.MapProviderFactory;
@@ -188,6 +189,9 @@ public class Settings {
             // defaults for gpx directories
             e.putString(getKey(R.string.pref_gpxImportDir), getGpxImportDir());
             e.putString(getKey(R.string.pref_gpxExportDir), getGpxExportDir());
+
+            // defaults for cgeo directories
+            e.putString(getKey(R.string.pref_offline_cache_directory), getOfflineCacheDirectory());
 
             e.putInt(getKey(R.string.pref_settingsversion), 2); // mark migrated
             e.commit();
@@ -846,12 +850,20 @@ public class Settings {
         putInt(R.string.pref_livemaphintshowcount, showCount);
     }
 
-    public static boolean isDbOnSDCard() {
+    public static String getOfflineCacheDirectory() {
+        return getString(R.string.pref_offline_cache_directory, LocalStorage.getDefaultOfflineCacheDirectoryPath());
+    }
+
+    public static void setOfflineCacheDirectory(final String cgeoDir) {
+        putString(R.string.pref_offline_cache_directory, cgeoDir);
+    }
+
+    public static boolean isDbAtCacheDir() {
         return getBoolean(R.string.pref_dbonsdcard, false);
     }
 
-    public static void setDbOnSDCard(final boolean dbOnSDCard) {
-        putBoolean(R.string.pref_dbonsdcard, dbOnSDCard);
+    public static void setDbAtCacheDir(final boolean dbAtCacheDir) {
+        putBoolean(R.string.pref_dbonsdcard, dbAtCacheDir);
     }
 
     public static String getGpxExportDir() {

@@ -393,31 +393,46 @@ public class DataStore {
      *
      * @param fromActivity
      */
-    public static void moveDatabase(final Activity fromActivity) {
+    public static void moveDatabase(final Activity fromActivity, final boolean internalToExternal) {
+        final File sourcePath = internalToExternal ? LocalStorage.getInternalDbDirectory() : LocalStorage.getExternalDbDirectory();
+        final File targetPath = internalToExternal ? LocalStorage.getExternalDbDirectory() : LocalStorage.getInternalDbDirectory();
+        moveDatabase(fromActivity, sourcePath, targetPath);
+    }
+
+    /**
+     * Move the database to/from external cgdata in a new thread,
+     * showing a progress window
+     *
+     * @param fromActivity
+     */
+    public static void moveDatabase(final Activity fromActivity, final File sourcePath, final File targetPath) {
         final ProgressDialog dialog = ProgressDialog.show(fromActivity, fromActivity.getString(R.string.init_dbmove_dbmove), fromActivity.getString(R.string.init_dbmove_running), true, false);
         AndroidObservable.bindActivity(fromActivity, Async.fromCallable(new Func0<Boolean>() {
             @Override
             public Boolean call() {
-                if (!LocalStorage.isExternalStorageAvailable()) {
-                    Log.w("Database was not moved: external memory not available");
+                if (!(targetPath.exists() && targetPath.canRead() && targetPath.canWrite())) {
+                    Log.w("Database was not moved: target not available");
                     return false;
                 }
-                closeDb();
+                File sourceDbFile = new File(sourcePath, dbName);
+                File targetDbFile = new File(targetPath, dbName);
 
-                final File source = databasePath();
-                final File target = databaseAlternatePath();
-                if (!LocalStorage.copy(source, target)) {
-                    Log.e("Database could not be moved to " + target);
+                if (targetDbFile.exists()) {
+                    if (!FileUtils.delete(targetDbFile)) {
+                        Log.e("Existing target database file could not be deleted during move");
+                    }
+                }
+                closeDb();
+                if (!LocalStorage.copy(sourceDbFile, targetDbFile)) {
+                    Log.e("Database could not be moved to " + targetDbFile + " continue using " + sourceDbFile);
                     init();
                     return false;
                 }
-                if (!FileUtils.delete(source)) {
+                if (!FileUtils.delete(sourceDbFile)) {
                     Log.e("Original database could not be deleted during move");
                 }
-                Settings.setDbOnSDCard(!Settings.isDbOnSDCard());
-                Log.i("Database was moved to " + target);
-
                 init();
+                Log.i("Database was moved to " + targetDbFile);
                 return true;
             }
         })).subscribe(new Action1<Boolean>() {
@@ -435,11 +450,11 @@ public class DataStore {
     }
 
     private static File databasePath() {
-        return databasePath(!Settings.isDbOnSDCard());
+        return databasePath(!Settings.isDbAtCacheDir());
     }
 
     private static File databaseAlternatePath() {
-        return databasePath(Settings.isDbOnSDCard());
+        return databasePath(Settings.isDbAtCacheDir());
     }
 
     public static boolean restoreDatabaseInternal() {

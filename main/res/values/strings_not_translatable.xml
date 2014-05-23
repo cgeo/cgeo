@@ -38,7 +38,8 @@
     <string name="settings_themes_url" translatable="false">http://faq.cgeo.org/#3_26</string>
     <string name="settings_send2cgeo_url" translatable="false">http://send2.cgeo.org/</string>
     <string name="settings_facebook_login_url" translatable="false">http://faq.cgeo.org/#1_38</string>
-
+    <string name="settings_offline_cache_directory_url" translatable="false">http://faq.cgeo.org/#7_67</string>
+    
     <!-- contributors -->
     <string name="contributors" translatable="false">
     · <a href="http://carnero.cc/">carnero</a> as the father of c:geo\n
