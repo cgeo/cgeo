@@ -4,6 +4,8 @@ import cgeo.geocaching.settings.Settings;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import java.util.Locale;
+
 public class Units {
 
     public static ImmutablePair<Double, String> scaleDistance(final double distanceKilometers) {
@@ -53,9 +55,8 @@ public class Units {
 
     public static String getSpeed(final float kilometersPerHour) {
         if (Settings.isUseImperialUnits()) {
-            return String.format("%.0f mph", kilometersPerHour / IConversion.MILES_TO_KILOMETER);
-        } else {
-            return String.format("%.0f km/h", kilometersPerHour);
+            return String.format(Locale.US, "%.0f mph", kilometersPerHour / IConversion.MILES_TO_KILOMETER);
         }
+        return String.format(Locale.US, "%.0f km/h", kilometersPerHour);
     }
 }

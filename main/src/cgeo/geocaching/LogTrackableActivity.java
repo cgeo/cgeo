@@ -20,7 +20,6 @@ import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
