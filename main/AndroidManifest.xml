@@ -477,6 +477,12 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.SimpleWebviewActivity"
+                android:label="c:geo internal browser"
+                android:icon="@drawable/ic_launcher_browser">
+
+        </activity>
+
         <!-- provide enhanced meta data for caches (and waypoints) when invoking Locus from c:geo -->
         <provider
             android:name=".apps.LocusDataStorageProvider"
