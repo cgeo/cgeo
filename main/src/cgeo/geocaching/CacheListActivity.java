@@ -1038,11 +1038,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         registerForContextMenu(list);
         adapter = new CacheListAdapter(this, cacheList, type);
 
-        listFooter = getLayoutInflater().inflate(R.layout.cacheslist_footer, null);
-        listFooter.setClickable(true);
-        listFooter.setOnClickListener(new MoreCachesListener());
-        listFooterText = (TextView) listFooter.findViewById(R.id.more_caches);
-        list.addFooterView(listFooter);
+        if (listFooter == null) {
+            listFooter = getLayoutInflater().inflate(R.layout.cacheslist_footer, null);
+            listFooter.setClickable(true);
+            listFooter.setOnClickListener(new MoreCachesListener());
+            listFooterText = (TextView) listFooter.findViewById(R.id.more_caches);
+            list.addFooterView(listFooter);
+        }
         setListAdapter(adapter);
         adapter.forceSort();
     }
@@ -1440,6 +1442,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         type = CacheListType.OFFLINE;
 
         Settings.saveLastList(listId);
+
+        initAdapter();
 
         showProgress(true);
         showFooterLoadingCaches();
