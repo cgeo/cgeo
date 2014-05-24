@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.WindowManager;
@@ -24,11 +25,13 @@ public final class ActivityMixin {
             return;
         }
 
-        if  (((ActionBarActivity) activity).getSupportActionBar() != null) {
-                ((ActionBarActivity) activity).getSupportActionBar().setTitle(text);
+        if (activity instanceof ActionBarActivity) {
+            final ActionBar actionBar = ((ActionBarActivity) activity).getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setTitle(text);
+            }
         }
     }
-
 
     public static void showProgress(final ActionBarActivity activity, final boolean show) {
         if (activity == null) {

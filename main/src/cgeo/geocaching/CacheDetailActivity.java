@@ -599,9 +599,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         // action bar: title and icon
         if (StringUtils.isNotBlank(cache.getName())) {
-            getSupportActionBar().setTitle(cache.getName() + " (" + cache.getGeocode() + ')');
+            setTitle(cache.getName() + " (" + cache.getGeocode() + ')');
         } else {
-            getSupportActionBar().setTitle(cache.getGeocode());
+            setTitle(cache.getGeocode());
         }
 
         getSupportActionBar().setIcon(getResources().getDrawable(cache.getType().markerId));

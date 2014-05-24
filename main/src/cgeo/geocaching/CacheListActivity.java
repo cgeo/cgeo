@@ -267,7 +267,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     protected void updateTitle() {
 
-        getSupportActionBar().setTitle(title);
+        setTitle(title);
 
         final ArrayList<String> numbers = new ArrayList<String>();
         if (adapter.isFiltered()) {
