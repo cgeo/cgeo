@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps.mapsforge.v024;
 
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.maps.AbstractMap;
 import cgeo.geocaching.maps.CGeoMap;
@@ -111,10 +112,9 @@ public class MapsforgeMapActivity024 extends MapActivity implements MapActivityI
         return super.onPrepareOptionsMenu(menu);
     }
 
-    // close activity and open homescreen
     @Override
-    public void goHome(View view) {
-        mapBase.goHome(view);
+    public void navigateUp(View view) {
+        ActivityMixin.navigateUp(this);
     }
 
     @Override

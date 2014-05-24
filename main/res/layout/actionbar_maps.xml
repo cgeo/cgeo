@@ -13,7 +13,7 @@
     <ImageView
         style="@style/action_bar_action"
         android:layout_marginLeft="-13dp"
-        android:onClick="goHome" />
+        android:onClick="navigateUp" />
 
     <View style="@style/action_bar_separator" />
 

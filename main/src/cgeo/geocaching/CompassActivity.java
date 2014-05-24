@@ -217,7 +217,7 @@ public class CompassActivity extends AbstractActionBarActivity {
                     return true;
                 }
         }
-        return false;
+        return super.onOptionsItemSelected(item);
     }
 
     private void setTitle() {

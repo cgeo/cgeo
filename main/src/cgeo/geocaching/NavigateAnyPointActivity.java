@@ -361,9 +361,8 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
             case R.id.menu_navigate:
                 NavigationAppFactory.showNavigationMenu(this, null, null, coords);
                 return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
+        return super.onOptionsItemSelected(item);
     }
 
     private void addToHistory(final Geopoint coords) {

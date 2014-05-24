@@ -1,15 +1,16 @@
 package cgeo.geocaching.activity;
 
-import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.settings.Settings;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.WindowManager;
@@ -114,8 +115,26 @@ public final class ActivityMixin {
         editText.setSelection(newCursor);
     }
 
-    public static void navigateToMain(Activity activity) {
-        final Intent main = new Intent(activity, MainActivity.class);
-        NavUtils.navigateUpTo(activity, main);
+    public static boolean navigateUp(@NonNull final Activity activity) {
+        // see http://developer.android.com/training/implementing-navigation/ancestral.html
+        Intent upIntent = NavUtils.getParentActivityIntent(activity);
+        if (upIntent == null) {
+            activity.finish();
+            return true;
+        }
+        if (NavUtils.shouldUpRecreateTask(activity, upIntent)) {
+            // This activity is NOT part of this app's task, so create a new task
+            // when navigating up, with a synthesized back stack.
+            TaskStackBuilder.create(activity)
+                    // Add all of this activity's parents to the back stack
+                    .addNextIntentWithParentStack(upIntent)
+                    // Navigate up to the closest parent
+                    .startActivities();
+        } else {
+            // This activity is part of this app's task, so simply
+            // navigate up to the logical parent activity.
+            NavUtils.navigateUpTo(activity, upIntent);
+        }
+        return true;
     }
 }

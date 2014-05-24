@@ -49,11 +49,6 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         this.keepScreenOn = keepScreenOn;
     }
 
-    @Override
-    final public void goHome(final View view) {
-        ActivityMixin.navigateToMain(this);
-    }
-
     final protected void showProgress(final boolean show) {
         ActivityMixin.showProgress(this, show);
     }
@@ -83,9 +78,8 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId()== android.R.id.home) {
-            ActivityMixin.navigateToMain(this);
-            return true;
+        if (item.getItemId() == android.R.id.home) {
+            return ActivityMixin.navigateUp(this);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -208,8 +202,9 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
     }
 
     protected void initializeAndroidBeam(ActivitySharingInterface sharingInterface) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             initializeICSAndroidBeam(sharingInterface);
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)

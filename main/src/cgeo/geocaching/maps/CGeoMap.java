@@ -706,7 +706,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         final int id = item.getItemId();
         switch (id) {
             case android.R.id.home:
-                ActivityMixin.navigateToMain(activity);
+                ActivityMixin.navigateUp(activity);
                 return true;
             case R.id.menu_trail_mode:
                 Settings.setMapTrail(!Settings.isMapTrail());
@@ -1591,12 +1591,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     // make geopoint
     private GeoPointImpl makeGeoPoint(final Geopoint coords) {
         return mapItemFactory.getGeoPointBase(coords);
-    }
-
-    // close activity and open homescreen
-    @Override
-    public void goHome(View view) {
-        ActivityMixin.navigateToMain(activity);
     }
 
     @Override

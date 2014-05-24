@@ -5,7 +5,6 @@ import cgeo.geocaching.CgeoApplication;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 
 public abstract class AbstractListActivity extends ActionBarListActivity implements
@@ -24,11 +23,6 @@ public abstract class AbstractListActivity extends ActionBarListActivity impleme
         this.keepScreenOn = keepScreenOn;
     }
 
-    @Override
-    final public void goHome(View view) {
-        ActivityMixin.navigateToMain(this);
-    }
-
     final public void showProgress(final boolean show) {
         ActivityMixin.showProgress(this, show);
     }
@@ -41,7 +35,7 @@ public abstract class AbstractListActivity extends ActionBarListActivity impleme
     public final void showToast(String text) {
         ActivityMixin.showToast(this, text);
     }
-    
+
     @Override
     public final void showShortToast(String text) {
         ActivityMixin.showShortToast(this, text);
@@ -56,16 +50,14 @@ public abstract class AbstractListActivity extends ActionBarListActivity impleme
         initUpAction();
     }
 
-    protected void initUpAction()
-    {
+    protected void initUpAction() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId()== android.R.id.home) {
-            ActivityMixin.navigateToMain(this);
-            return true;
+            return ActivityMixin.navigateUp(this);
         }
         return super.onOptionsItemSelected(item);
     }

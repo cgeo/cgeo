@@ -98,8 +98,8 @@ public class GoogleMapActivity extends MapActivity implements MapActivityImpl, F
     }
 
     @Override
-    public void goHome(View view) {
-        ActivityMixin.navigateToMain(this);
+    public void navigateUp(View view) {
+        ActivityMixin.navigateUp(this);
     }
 
     @Override

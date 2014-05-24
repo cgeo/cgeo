@@ -79,7 +79,7 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
             return true;
         }
 
-        return false;
+        return super.onOptionsItemSelected(item);
     }
 
     protected abstract LogContext getLogContext();

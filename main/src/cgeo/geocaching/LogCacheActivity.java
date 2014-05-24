@@ -410,10 +410,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (super.onOptionsItemSelected(item)) {
-            return true;
-        }
-
         final int id = item.getItemId();
         if (id >= 10 && id <= 19) {
             rating = (id - 9) / 2.0f;
@@ -423,8 +419,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             updatePostButtonText();
             return true;
         }
-
-        return false;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

@@ -9,7 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 
 /**
@@ -69,8 +68,6 @@ public abstract class AbstractMap {
     public boolean onOptionsItemSelected(MenuItem item) {
         return mapActivity.superOnOptionsItemSelected(item);
     }
-
-    public abstract void goHome(View view);
 
     public abstract void onSaveInstanceState(final Bundle outState);
 

@@ -254,9 +254,8 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             case R.id.menu_browser_trackable:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getBrowserUrl())));
                 return true;
-            default:
-                return false;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

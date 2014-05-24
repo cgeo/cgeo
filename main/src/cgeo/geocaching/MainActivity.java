@@ -326,9 +326,8 @@ public class MainActivity extends AbstractActionBarActivity {
             case R.id.menu_gosearch:
                 onSearchRequested();
                 return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
+        return super.onOptionsItemSelected(item);
     }
 
     private void startScannerApplication() {
