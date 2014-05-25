@@ -106,7 +106,6 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     public void onStart() {
         super.onStart();
         geocode = getArguments().getString(GEOCODE_ARG);
-        init();
     }
 
 
