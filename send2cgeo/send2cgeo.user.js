@@ -2,13 +2,12 @@
 // @name           Send to c:geo
 // @namespace      http://send2.cgeo.org/
 // @description    Add button "Send to c:geo" to geocaching.com
-// @grant		   none
-// @include        /^https?://www\.geocaching\.com/seek/cache_details.*$/
-// @include        /^https?://www\.geocaching\.com/map/.*$/
-// @include        /^https?://www\.geocaching\.com/map/.*$/
-// @include        /^https?://www\.geocaching\.com/geocache/.*$/
-// @include        /^https?://www\.geocaching\.com/my/recentlyviewedcaches.*$/
-// @include        /^https?://www\.geocaching\.com/seek/nearest.*$/
+// @grant          none
+// @include        http://www.geocaching.com/seek/cache_details*
+// @include        https://www.geocaching.com/map/*
+// @include        http://www.geocaching.com/geocache/*
+// @include        http://www.geocaching.com/my/recentlyviewedcaches*
+// @include        http://www.geocaching.com/seek/nearest*
 // @icon           http://send2.cgeo.org/content/images/logo.png
 // @downloadURL    https://send2.cgeo.org/send2cgeo.user.js
 // @updateURL      https://send2.cgeo.org/send2cgeo.user.js
