@@ -2,14 +2,17 @@
 // @name           Send to c:geo
 // @namespace      http://send2.cgeo.org/
 // @description    Add button "Send to c:geo" to geocaching.com
-// @include        http://www.geocaching.com/seek/cache_details*
-// @include        http://www.geocaching.com/map/*
-// @include        http://www.geocaching.com/geocache/*
-// @include        http://www.geocaching.com/my/recentlyviewedcaches*
-// @include        http://www.geocaching.com/seek/nearest*
+// @grant		   none
+// @include        /^https?://www\.geocaching\.com/seek/cache_details.*$/
+// @include        /^https?://www\.geocaching\.com/map/.*$/
+// @include        /^https?://www\.geocaching\.com/map/.*$/
+// @include        /^https?://www\.geocaching\.com/geocache/.*$/
+// @include        /^https?://www\.geocaching\.com/my/recentlyviewedcaches.*$/
+// @include        /^https?://www\.geocaching\.com/seek/nearest.*$/
 // @icon           http://send2.cgeo.org/content/images/logo.png
-// @updateURL      http://send2.cgeo.org/send2cgeo.user.js
-// @version        0.29
+// @downloadURL    https://send2.cgeo.org/send2cgeo.user.js
+// @updateURL      https://send2.cgeo.org/send2cgeo.user.js
+// @version        0.30
 // ==/UserScript==
 
 // Inserts javascript that will be called by the s2cgeo button. The closure
@@ -29,7 +32,7 @@ s.textContent =  '(' + function() {
     $('#send2cgeo iframe')
       .hide()
       .unbind('load')
-      .attr('src', 'http://send2.cgeo.org/add.html?cache='+code)
+      .attr('src', 'https://send2.cgeo.org/add.html?cache='+code)
       .load(function() {
         // hide "please wait text" and show iframe
         $('#send2cgeo div').hide();
@@ -62,9 +65,9 @@ s.textContent =  '(' + function() {
 
   if(map !== null) {
     // geocaching.com map view
-    var html = 'Log Visit</span></a> <br /> '
+    var html = 'Log Visit</span></a>'
              + '<a class="lnk ui-block-b" '
-             + 'href="http://send2.cgeo.org/add.html?cache={{=gc}}" '
+             + 'href="https://send2.cgeo.org/add.html?cache={{=gc}}" '
              + 'onclick="window.s2geo(\'{{=gc}}\'); return false;" '
              + 'class="lnk">'
              + '<img src="/images/sendtogps/sendtogps_icon.png" '
@@ -77,7 +80,7 @@ s.textContent =  '(' + function() {
     var GCCode = $('#ctl00_ContentBody_CoordInfoLinkControl1_uxCoordInfoCode')
                   .html();
 
-    var html = ' | <input type="button" '
+    var html = '<input type="button" '
              + 'value="Send to c:geo" '
              + 'onclick="window.s2geo(\''+GCCode+'\'); '
              + 'return false;" '
@@ -100,6 +103,6 @@ s.textContent =  '(' + function() {
   }
 } + ')();';
 
-// Inject Script. Can’t use jQuery yet, because the page is not
+// Inject Script. Can't use jQuery yet, because the page is not
 // accessible from Tampermonkey
 document.getElementsByTagName("head")[0].appendChild(s);
