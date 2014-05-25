@@ -38,16 +38,23 @@ public class GoogleMapView extends MapView implements MapViewImpl {
 
     public GoogleMapView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        gestureDetector = new GestureDetector(context, new GestureListener());
+        initialize(context);
     }
 
     public GoogleMapView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        gestureDetector = new GestureDetector(context, new GestureListener());
+        initialize(context);
     }
 
     public GoogleMapView(Context context, String apiKey) {
         super(context, apiKey);
+        initialize(context);
+    }
+
+    private void initialize(Context context) {
+        if (isInEditMode()) {
+            return;
+        }
         gestureDetector = new GestureDetector(context, new GestureListener());
     }
 

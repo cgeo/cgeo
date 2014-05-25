@@ -42,6 +42,13 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
 
     public MapsforgeMapView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        initialize(context);
+    }
+
+    private void initialize(Context context) {
+        if (isInEditMode()) {
+            return;
+        }
         gestureDetector = new GestureDetector(context, new GestureListener());
         if (Settings.isScaleMapsforgeText()) {
             this.setTextScale(getResources().getDisplayMetrics().density);

@@ -36,6 +36,13 @@ public class MapsforgeMapView024 extends MapView implements MapViewImpl {
 
     public MapsforgeMapView024(Context context, AttributeSet attrs) {
         super(context, attrs);
+        initialize(context);
+    }
+
+    private void initialize(Context context) {
+        if (isInEditMode()) {
+            return;
+        }
         gestureDetector = new GestureDetector(context, new GestureListener());
     }
 
