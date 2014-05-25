@@ -85,13 +85,10 @@ import android.support.v7.app.ActionBar;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -260,7 +257,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
-    private static String getCacheNumberString(Resources res, int count)
+    static String getCacheNumberString(Resources res, int count)
     {
         return res.getQuantityString(R.plurals.cache_counts, count, count);
     }
@@ -446,68 +443,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     }
 
-    static class CacheArrayAdapter extends ArrayAdapter<AbstractList> {
-
-        static class ViewHolder {
-            TextView title;
-            TextView subtitle;
-        }
-
-        private final Context mContext;
-
-        public CacheArrayAdapter(Context context, int resource) {
-            super(context, resource);
-            mContext = context;
-        }
-
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            return getCustomView(position, convertView, parent);
-        }
-
-
-        @Override
-        public View getDropDownView(int position, View convertView, ViewGroup parent) {
-            return getCustomView(position, convertView, parent);
-        }
-
-        public View getCustomView(final int position, final View convertView, final ViewGroup parent) {
-
-            View resultView = convertView;
-            LayoutInflater inflater =
-                    (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-
-            ViewHolder holder;
-            if (resultView == null) {
-                resultView = inflater.inflate(R.layout.cachelist_spinneritem, parent, false);
-                holder = new ViewHolder();
-                holder.title = (TextView) resultView.findViewById(android.R.id.text1);
-                holder.subtitle = (TextView) resultView.findViewById(android.R.id.text2);
-
-                resultView.setTag(holder);
-            } else {
-                holder = (ViewHolder) resultView.getTag();
-            }
-
-            AbstractList list = getItem(position);
-            holder.title.setText(list.getTitle());
-            if (list.getCount() >= 0) {
-                holder.subtitle.setVisibility(View.VISIBLE);
-                holder.subtitle.setText(getCacheNumberString(mContext.getResources(),list.getCount()));
-            } else {
-                holder.subtitle.setVisibility(View.GONE);
-            }
-
-            return resultView;
-        }
-    }
-
-    CacheArrayAdapter mCacheListSpinnerAdapter;
+    /**
+     * Action bar spinner adapter. {@code null} for list types that don't allow switching (search results, ...).
+     */
+    CacheListSpinnerAdapter mCacheListSpinnerAdapter;
 
     private void initActionBarSpinner() {
-        mCacheListSpinnerAdapter = new CacheArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item);
+        mCacheListSpinnerAdapter = new CacheListSpinnerAdapter(this, R.layout.support_simple_spinner_dropdown_item);
         getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setListNavigationCallbacks(mCacheListSpinnerAdapter, new ActionBar.OnNavigationListener() {
