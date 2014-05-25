@@ -14,19 +14,6 @@
         android:title="@string/cache_menu_navigate">
     </item>
     <item
-        android:id="@+id/menu_share"
-        android:icon="@drawable/ic_menu_share"
-        cgeo:showAsAction="ifRoom"
-        cgeo:actionProviderClass="android.support.v7.widget.ShareActionProvider"
-        android:title="@string/cache_menu_share">
-    </item>
-    <item
-        android:id="@+id/menu_calendar"
-        android:icon="@drawable/ic_menu_agenda"
-        cgeo:showAsAction="ifRoom"
-        android:title="@string/cache_menu_event">
-    </item>
-    <item
         android:id="@+id/menu_log_visit_offline"
         android:icon="@drawable/ic_menu_edit"
         cgeo:showAsAction="ifRoom"
@@ -37,6 +24,12 @@
         android:icon="@drawable/ic_menu_edit"
         cgeo:showAsAction="ifRoom"
         android:title="@string/cache_menu_visit">
+    </item>
+    <item
+        android:id="@+id/menu_calendar"
+        android:icon="@drawable/ic_menu_agenda"
+        cgeo:showAsAction="ifRoom"
+        android:title="@string/cache_menu_event">
     </item>
     <item
         android:id="@+id/menu_caches_around"
@@ -50,6 +43,13 @@
         cgeo:showAsAction="ifRoom"
         android:title="@string/cache_menu_browser">
     </item>
-
+    <item
+        android:id="@+id/menu_share"
+        android:icon="@drawable/ic_menu_share"
+        cgeo:showAsAction="ifRoom"
+        cgeo:actionProviderClass="android.support.v7.widget.ShareActionProvider"
+        android:title="@string/cache_menu_share">
+    </item>
+    
     
 </menu>
