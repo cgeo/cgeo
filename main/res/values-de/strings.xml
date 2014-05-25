@@ -236,7 +236,7 @@
   <string name="menu_filter">Filter</string>
   <string name="menu_scan_geo">Geocode scannen</string>
   <string name="menu_pocket_queries">Pocket Queries</string>
-  <string name="menu_scan_description">c:geo kann Geocodes, die als QR code abgebildet sind scannen. Die dafür notwendige App ist nicht installiert. Wollen sie Google Play öffnen, um sie zu installieren?</string>
+  <string name="menu_scan_description">c:geo kann Geocodes scannen, die als QR-Code abgebildet sind. Die dafür notwendige App ist nicht installiert. Möchten Sie Google Play öffnen, um sie zu installieren?</string>
   <string name="live_map_button">Live-Karte</string>
   <string name="caches_nearby_button">In der Nähe</string>
   <string name="advanced_search_button">Suche</string>
