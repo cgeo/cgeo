@@ -310,7 +310,7 @@
   <string name="caches_clear_offlinelogs_progress">Vymazanie logov v režime offline</string>
   <string name="list_menu_create">Vytvoriť nový zoznam</string>
   <string name="list_menu_drop">Zahodiť aktuálny zoznam</string>
-  <string name="list_menu_rename">Premenovať tento zoznam</string>
+  <string name="list_menu_rename">Premenovať tento zoznam</string>
   <string name="list_title">Výber zoznamu</string>
   <string name="list_inbox">Uložené</string>
   <string name="list_all_lists">Všetky skrýše</string>
