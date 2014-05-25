@@ -1716,6 +1716,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
         showProgress(false);
         hideLoading();
+        invalidateOptionsMenuCompatible();
     }
 
     @Override

@@ -1,7 +1,6 @@
 package cgeo.geocaching.activity;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.settings.Settings;
 
 import org.apache.commons.lang3.StringUtils;
@@ -9,6 +8,7 @@ import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.ActionBar;
@@ -88,7 +88,12 @@ public final class ActivityMixin {
     }
 
     public static void invalidateOptionsMenu(Activity activity) {
-        Compatibility.invalidateOptionsMenu(activity);
+        if (activity instanceof ActionBarActivity) {
+            ((ActionBarActivity) activity).supportInvalidateOptionsMenu();
+        }
+        else {
+            ActivityCompat.invalidateOptionsMenu(activity);
+        }
     }
 
     /**
