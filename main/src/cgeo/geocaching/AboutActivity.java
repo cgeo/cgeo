@@ -87,7 +87,6 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @InjectView(R.id.website) protected TextView website;
         @InjectView(R.id.facebook) protected TextView facebook;
         @InjectView(R.id.twitter) protected TextView twitter;
-        @InjectView(R.id.nutshellmanual) protected TextView nutshellmanual;
         @InjectView(R.id.market) protected TextView market;
         @InjectView(R.id.faq) protected TextView faq;
 
@@ -99,7 +98,6 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             setClickListener(website, "http://www.cgeo.org/");
             setClickListener(facebook, "http://www.facebook.com/pages/cgeo/297269860090");
             setClickListener(twitter, "http://twitter.com/android_gc");
-            setClickListener(nutshellmanual, "http://manual.cgeo.org/");
             setClickListener(faq, "http://faq.cgeo.org/");
             market.setOnClickListener(new View.OnClickListener() {
 
