@@ -1681,7 +1681,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 loader = new PocketGeocacheListLoader(app, guid);
                 break;
         }
-        setTitle(title);
+        updateTitle();
         showProgress(true);
         showFooterLoadingCaches();
 
