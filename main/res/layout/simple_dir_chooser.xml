@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="?background_color"
@@ -63,6 +64,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/buttonLayout"
-        android:layout_below="@+id/headerLayout" />
+        android:layout_below="@+id/headerLayout"
+        tools:listitem="@layout/simple_dir_item" />
 
 </RelativeLayout>

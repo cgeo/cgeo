@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:orientation="vertical" >
+    tools:context=".settings.SettingsActivity" >
 
-    <TextView 
+    <TextView
         android:id="@+id/textPreferenceText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall" />
-    <TextView 
+
+    <TextView
         android:id="@+id/textPreferenceSummary"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
-        android:visibility="gone"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:visibility="gone" />
 
 </LinearLayout>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainscreen"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -13,7 +14,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="16dip"
         android:layout_marginRight="16dip"
-        android:layout_marginTop="60dip" />
+        android:layout_marginTop="60dip"
+        tools:layout="@layout/status" />
     <!-- ** -->
 
     <LinearLayout
