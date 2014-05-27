@@ -464,7 +464,6 @@
   <string name="cache_menu_refresh">Frissítés</string>
   <string name="cache_menu_share">Láda megosztása</string>
   <string name="cache_menu_move_list">Mozgatás másik listára</string>
-  <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_cachebeacon">Geoláda jelzőbója</string>

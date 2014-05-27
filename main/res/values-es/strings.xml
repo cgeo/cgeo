@@ -533,7 +533,6 @@
   <string name="cache_menu_refresh">Actualizar</string>
   <string name="cache_menu_share">Compartir escondite</string>
   <string name="cache_menu_move_list">Mover a otra lista</string>
-  <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_status">Estado</string>

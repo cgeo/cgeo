@@ -646,7 +646,6 @@
   <string name="cache_menu_refresh">Recharger</string>
   <string name="cache_menu_share">Partager la cache</string>
   <string name="cache_menu_move_list">Déplacer dans une autre liste</string>
-  <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_cachebeacon">Cache Beacon</string>

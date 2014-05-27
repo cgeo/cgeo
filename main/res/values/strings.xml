@@ -710,7 +710,6 @@
     <string name="cache_menu_refresh">Refresh</string>
     <string name="cache_menu_share">Share cache</string>
     <string name="cache_menu_move_list">Move to different list</string>
-    <string name="cache_menu_gcc">GCC</string>
     <string name="cache_menu_whereyougo">WhereYouGo</string>
     <string name="cache_menu_oruxmaps">OruxMaps</string>
     <string name="cache_menu_cachebeacon">Cache Beacon</string>

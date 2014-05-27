@@ -668,11 +668,6 @@
                 <CheckBoxPreference
                     android:defaultValue="true"
                     android:enabled="false"
-                    android:key="@string/pref_navigation_menu_gcc"
-                    android:title="@string/cache_menu_gcc" />
-                <CheckBoxPreference
-                    android:defaultValue="true"
-                    android:enabled="false"
                     android:key="@string/pref_navigation_menu_where_you_go"
                     android:title="@string/cache_menu_whereyougo" />
                 <CheckBoxPreference

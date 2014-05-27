@@ -654,7 +654,6 @@
   <string name="cache_menu_refresh">Verversen</string>
   <string name="cache_menu_share">Deel cache</string>
   <string name="cache_menu_move_list">Verplaats naar andere lijst</string>
-  <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_cachebeacon">Cache baken</string>

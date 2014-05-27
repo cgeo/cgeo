@@ -8,7 +8,6 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.apps.App;
 import cgeo.geocaching.apps.cache.CacheBeaconApp;
-import cgeo.geocaching.apps.cache.GccApp;
 import cgeo.geocaching.apps.cache.WhereYouGoApp;
 import cgeo.geocaching.apps.cache.navi.GoogleNavigationApp.GoogleNavigationBikeApp;
 import cgeo.geocaching.apps.cache.navi.GoogleNavigationApp.GoogleNavigationDrivingApp;
@@ -70,7 +69,6 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         GOOGLE_MAPS_DIRECTIONS(new GoogleMapsDirectionApp(), 13, R.string.pref_navigation_menu_google_maps_directions),
 
         CACHE_BEACON(new CacheBeaconApp(), 14, R.string.pref_navigation_menu_cache_beacon),
-        GCC(new GccApp(), 15, R.string.pref_navigation_menu_gcc),
         WHERE_YOU_GO(new WhereYouGoApp(), 16, R.string.pref_navigation_menu_where_you_go),
         PEBBLE(new PebbleApp(), 17, R.string.pref_navigation_menu_pebble),
         MAPSWITHME(new MapsWithMeApp(), 22, R.string.pref_navigation_menu_mapswithme);
