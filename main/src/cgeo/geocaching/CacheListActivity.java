@@ -589,7 +589,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setVisible(menu, R.id.menu_refresh_stored, !isEmpty && (isConcrete || type != CacheListType.OFFLINE));
             setVisible(menu, R.id.menu_drop_caches, !isEmpty && isOffline);
             setVisible(menu, R.id.menu_drop_caches_and_list, isConcrete && !isEmpty && isOffline);
-            setVisible(menu, R.id.menu_delete_events, isConcrete && !isEmpty && containsEvents());
+            setVisible(menu, R.id.menu_delete_events, isConcrete && !isEmpty && containsPastEvents());
             setVisible(menu, R.id.menu_move_to_list, isOffline && !isEmpty);
             setVisible(menu, R.id.menu_export, !isEmpty && (isHistory || isOffline));
             setVisible(menu, R.id.menu_remove_from_history, !isEmpty && isHistory);
@@ -631,9 +631,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return true;
     }
 
-    private boolean containsEvents() {
+    private boolean containsPastEvents() {
         for (final Geocache cache : adapter.getCheckedOrAllCaches()) {
-            if (cache.isEventCache()) {
+            if (DateUtils.isPastEvent(cache)) {
                 return true;
             }
         }
