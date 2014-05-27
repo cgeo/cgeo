@@ -1132,7 +1132,6 @@
   <string name="website">Hemsida: <a href="">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="">c:geo</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="nutshellmanual">Manual: <a href="">c:geo in a Nutshell</a></string>
   <string name="market">Android: <a href="">c:geo på Google Play</a></string>
   <string name="about_twitter">Ska <b>c:geo</b> publicera ny status på Twitter varje gång en cache loggas?</string>
   <string name="faq">FAQ: <a href="">faq.cgeo.org</a></string>

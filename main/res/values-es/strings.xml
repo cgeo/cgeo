@@ -848,7 +848,6 @@
   <string name="website">Web: <a href="">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="nutshellmanual">Manual: <a href="">c:geo en breve</a></string>
   <string name="about_twitter">¿Debe <b>c:geo</b> publicar el nuevo estado en Twitter cuando registras un escondite?</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Nueva versión disponible. \nClick para instalar.</string>
   <string name="tts_start">Empezar a hablar</string>

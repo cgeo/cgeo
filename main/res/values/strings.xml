@@ -1231,7 +1231,6 @@
     <string name="website">Website: <a href="">cgeo.org</a></string>
     <string name="facebook">Facebook: <a href="">c:geo page</a></string>
     <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-    <string name="nutshellmanual">Manual: <a href="">c:geo in a Nutshell</a></string>
     <string name="market">Android: <a href="">c:geo on Google Play</a></string>
     <string name="about_twitter">Should <b>c:geo</b> publish a new status on Twitter every time you log a cache?</string>
     <string name="faq">FAQ: <a href="">faq.cgeo.org</a></string>

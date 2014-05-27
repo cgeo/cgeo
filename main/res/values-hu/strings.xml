@@ -801,7 +801,6 @@
   <string name="website">Weboldal: <a href="">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="nutshellmanual">Kézikönyv: <a href="">A c:geo dióhéjban</a></string>
   <string name="about_twitter">Akarod, hogy <b>c:geo</b> új bejegyzést írjon Twitterre mindig mikor egy ládát megtalálsz?</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Új kiadás található.\nKattints a telepítéshez.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Új napi verzió található.\nKattints a telepítéshez.</string>

@@ -1033,7 +1033,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
   <string name="website">Webサイト: <a href="">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="nutshellmanual">マニュアル: <a href="">c:geo マニュアル(英語)</a></string>
   <string name="market">Android: <a href="">Google Playのc:geo</a></string>
   <string name="about_twitter">キャッシュのログを書いたら<b>c:geo</b>にTwitterでつぶやいてほしい?</string>
   <string name="status_new_release" tools:ignore="UnusedResources">新しいバージョンがあります。\nクリックしてインストールしてください。</string>

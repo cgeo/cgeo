@@ -1131,7 +1131,6 @@
   <string name="website">Tinklapis: <a href="">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="nutshellmanual">Vadovas: <a href="">c:geo in a Nutshell</a></string>
   <string name="market">Android: <a href="">c:geo on Google Play</a></string>
   <string name="about_twitter">Kaskart registruojant slėptuvę <b>c:geo</b> paskelbs nauja statusą Twitter paskyroje.</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Galima nauja versija. \nPaspauskite čia ir įdiekite.</string>

@@ -1122,7 +1122,6 @@
   <string name="website">site: <a href="">cgeo.org</a></string>
   <string name="facebook">facebook: <a href="">page c:geo</a></string>
   <string name="twitter">twitter: <a href="">@android_GC</a></string>
-  <string name="nutshellmanual">Manuel: <a href="">c:geo en bref</a></string>
   <string name="market">Android: <a href="">c:geo sur Google Play</a></string>
   <string name="about_twitter">Voulez-vous publier un nouveau statut sur Twitter à chaque nouvelle cache découverte sous <b>c:geo</b>?</string>
   <string name="faq">FAQ: <a href="">faq.cgeo.org</a></string>
