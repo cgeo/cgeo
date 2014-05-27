@@ -32,14 +32,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
+import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -51,7 +50,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     static final String EXTRAS_GEOCODE = "geocode";
     static final String EXTRAS_ID = "id";
 
-    private static final int SUBMENU_VOTE = 3;
     private static final String SAVED_STATE_RATING = "cgeo.geocaching.saved_state_rating";
     private static final String SAVED_STATE_TYPE = "cgeo.geocaching.saved_state_type";
     private static final String SAVED_STATE_DATE = "cgeo.geocaching.saved_state_date";
@@ -252,6 +250,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         tweetCheck = (CheckBox) findViewById(R.id.tweet);
         logPasswordBox = (LinearLayout) findViewById(R.id.log_password_box);
 
+        final RatingBar ratingBar = (RatingBar) findViewById(R.id.gcvoteRating);
+        initializeRatingBar(ratingBar);
+
         // initialize with default values
         setDefaultValues();
 
@@ -336,6 +337,27 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         loggingManager.init();
     }
 
+    private void initializeRatingBar(RatingBar ratingBar) {
+        final TextView label = (TextView) findViewById(R.id.gcvoteLabel);
+        if (GCVote.isVotingPossible(cache)) {
+            ratingBar.setVisibility(View.VISIBLE);
+            label.setVisibility(View.VISIBLE);
+        }
+        ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float stars, boolean fromUser) {
+                // 0.5 is not a valid rating, therefore we must limit
+                rating = GCVote.isValidRating(stars) ? stars : 0;
+                if (rating < stars) {
+                    ratingBar.setRating(rating);
+                }
+                label.setText(GCVote.getDescription(rating));
+                updatePostButtonText();
+            }
+        });
+    }
+
     private void setDefaultValues() {
         date = Calendar.getInstance();
         rating = GCVote.NO_RATING;
@@ -378,48 +400,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     public void onStop() {
         saveLog(false);
         super.onStop();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
-        super.onCreateOptionsMenu(menu);
-
-        final SubMenu menuStars = menu.addSubMenu(0, SUBMENU_VOTE, 0, res.getString(R.string.log_rating)).setIcon(R.drawable.ic_menu_sort_by_size);
-        menuStars.add(0, 10, 0, res.getString(R.string.log_no_rating));
-        menuStars.add(0, 19, 0, res.getString(R.string.log_stars_5) + " (" + res.getString(R.string.log_stars_5_description) + ")");
-        menuStars.add(0, 18, 0, res.getString(R.string.log_stars_45) + " (" + res.getString(R.string.log_stars_45_description) + ")");
-        menuStars.add(0, 17, 0, res.getString(R.string.log_stars_4) + " (" + res.getString(R.string.log_stars_4_description) + ")");
-        menuStars.add(0, 16, 0, res.getString(R.string.log_stars_35) + " (" + res.getString(R.string.log_stars_35_description) + ")");
-        menuStars.add(0, 15, 0, res.getString(R.string.log_stars_3) + " (" + res.getString(R.string.log_stars_3_description) + ")");
-        menuStars.add(0, 14, 0, res.getString(R.string.log_stars_25) + " (" + res.getString(R.string.log_stars_25_description) + ")");
-        menuStars.add(0, 13, 0, res.getString(R.string.log_stars_2) + " (" + res.getString(R.string.log_stars_2_description) + ")");
-        menuStars.add(0, 12, 0, res.getString(R.string.log_stars_15) + " (" + res.getString(R.string.log_stars_15_description) + ")");
-        menuStars.add(0, 11, 0, res.getString(R.string.log_stars_1) + " (" + res.getString(R.string.log_stars_1_description) + ")");
-
-        return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-
-        menu.findItem(SUBMENU_VOTE).setVisible(GCVote.isVotingPossible(cache));
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        final int id = item.getItemId();
-        if (id >= 10 && id <= 19) {
-            rating = (id - 9) / 2.0f;
-            if (!GCVote.isValidRating(rating)) {
-                rating = GCVote.NO_RATING;
-            }
-            updatePostButtonText();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
