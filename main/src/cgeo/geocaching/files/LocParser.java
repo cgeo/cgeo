@@ -117,8 +117,8 @@ public final class LocParser extends FileParser {
 
     @Override
     public Collection<Geocache> parse(InputStream stream, CancellableHandler progressHandler) throws IOException, ParserException {
-        // TODO: progress reporting happens during reading stream only, not during parsing
-        String streamContent = readStream(stream, progressHandler).toString();
+        final String streamContent = readStream(stream, null).toString();
+        final int maxSize = streamContent.length();
         final Map<String, Geocache> coords = parseCoordinates(streamContent);
         final List<Geocache> caches = new ArrayList<Geocache>();
         for (Entry<String, Geocache> entry : coords.entrySet()) {
@@ -136,6 +136,7 @@ public final class LocParser extends FileParser {
             cache.setListId(listId);
             cache.setDetailed(true);
             cache.store(null);
+            progressHandler.sendMessage(progressHandler.obtainMessage(0, maxSize * caches.size() / coords.size(), 0));
         }
         Log.i("Caches found in .loc file: " + caches.size());
         return caches;
