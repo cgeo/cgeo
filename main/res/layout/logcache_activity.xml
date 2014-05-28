@@ -120,12 +120,6 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/image_btn"
-                style="@style/button_full"
-                android:text="@string/log_image_attach" />
-
-
             <RelativeLayout style="@style/separator_horizontal_layout" >
 
                 <View style="@style/separator_horizontal" />

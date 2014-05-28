@@ -32,6 +32,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -213,6 +214,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
 
         cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        invalidateOptionsMenuCompatible();
         possibleLogTypes = cache.getPossibleLogTypes();
 
         if (StringUtils.isNotBlank(cache.getName())) {
@@ -253,7 +255,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(cache, null)), false);
             }
         }
-        updateImageButton();
         enablePostButton(false);
 
         final Button typeButton = (Button) findViewById(R.id.type);
@@ -279,15 +280,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         tweetCheck.setChecked(true);
         updateTweetBox(typeSelected);
         updateLogPasswordBox(typeSelected);
-
-        final Button imageButton = (Button) findViewById(R.id.image_btn);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                selectImage();
-            }
-        });
 
         final Button saveButton = (Button) findViewById(R.id.save);
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -358,8 +350,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         logView.setText(StringUtils.EMPTY);
         final EditText logPasswordView = (EditText) findViewById(R.id.log_password);
         logPasswordView.setText(StringUtils.EMPTY);
-
-        updateImageButton();
 
         showToast(res.getString(R.string.info_log_cleared));
     }
@@ -627,19 +617,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 // Image capture failed, advise user
                 showToast(getResources().getString(R.string.err_select_logimage_failed));
             }
-            updateImageButton();
-
-        }
-    }
-
-    private void updateImageButton() {
-        final Button imageButton = (Button) findViewById(R.id.image_btn);
-        if (cache.supportsLogImages()) {
-            imageButton.setVisibility(View.VISIBLE);
-            imageButton.setText(StringUtils.isNotBlank(imageUri.getPath()) ?
-                res.getString(R.string.log_image_edit) : res.getString(R.string.log_image_attach));
-        } else {
-            imageButton.setVisibility(View.GONE);
         }
     }
 
@@ -649,7 +626,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             case R.id.menu_send:
                 sendLog();
                 return true;
-
+            case R.id.menu_image:
+                selectImage();
+                return true;
             default:
                 break;
         }
@@ -667,5 +646,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     R.string.log_saving_and_uploading);
             new Poster(LogCacheActivity.this, message).execute(currentLogText(), currentLogPassword());
         }
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.menu_image).setVisible(cache.supportsLogImages());
+        return super.onPrepareOptionsMenu(menu);
     }
 }
