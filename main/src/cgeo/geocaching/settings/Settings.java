@@ -374,7 +374,7 @@ public class Settings {
     }
 
     public static String getSignature() {
-        return getString(R.string.pref_signature, null);
+        return getString(R.string.pref_signature, StringUtils.EMPTY);
     }
 
     public static boolean setCookieStore(final String cookies) {

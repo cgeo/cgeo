@@ -221,6 +221,12 @@ public final class LogTemplateProvider {
                 return StringUtils.EMPTY;
             }
         });
+        templates.add(new LogTemplate("SIGNATURE", R.string.init_signature) {
+            @Override
+            public String getValue(LogContext context) {
+                return StringUtils.defaultString(Settings.getSignature());
+            }
+        });
         return templates;
     }
 

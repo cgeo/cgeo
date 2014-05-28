@@ -1289,5 +1289,6 @@
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo shortcut</string>
     <string name="create_shortcut">Create shortcut</string>
+    <string name="send">Send</string>
 
 </resources>

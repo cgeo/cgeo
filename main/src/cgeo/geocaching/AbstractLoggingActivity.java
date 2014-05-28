@@ -7,12 +7,9 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCSmiliesProvider;
 import cgeo.geocaching.connector.gc.GCSmiliesProvider.Smiley;
 import cgeo.geocaching.connector.trackable.TravelBugConnector;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
-
-import org.apache.commons.lang3.StringUtils;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,9 +37,6 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        final boolean signatureAvailable = StringUtils.isNotBlank(Settings.getSignature());
-        menu.findItem(R.id.menu_signature).setVisible(signatureAvailable);
-
         boolean smileyVisible = false;
         final Geocache cache = getLogContext().getCache();
         if (cache != null && ConnectorFactory.getConnector(cache).equals(GCConnector.getInstance())) {
@@ -61,11 +55,6 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         final int id = item.getItemId();
-
-        if (id == R.id.menu_signature) {
-            insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), getLogContext()), true);
-            return true;
-        }
 
         final LogTemplate template = LogTemplateProvider.getTemplate(id);
         if (template != null) {

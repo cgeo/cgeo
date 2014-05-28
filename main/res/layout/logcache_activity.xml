@@ -125,10 +125,6 @@
                 style="@style/button_full"
                 android:text="@string/log_image_attach" />
 
-            <Button
-                android:id="@+id/post"
-                style="@style/button_full"
-                android:text="@string/log_post" />
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
 

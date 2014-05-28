@@ -32,6 +32,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -65,7 +66,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private String text = null;
     private List<LogType> possibleLogTypes = new ArrayList<LogType>();
     private List<TrackableLog> trackables = null;
-    private Button postButton = null;
     private CheckBox tweetCheck = null;
     private LinearLayout tweetBox = null;
     private LinearLayout logPasswordBox = null;
@@ -81,6 +81,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private String imageCaption;
     private String imageDescription;
     private Uri imageUri;
+    private boolean sendButtonEnabled;
 
 
     public void onLoadFinished() {
@@ -191,32 +192,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     private void enablePostButton(boolean enabled) {
-        postButton.setEnabled(enabled);
-        if (enabled) {
-            postButton.setOnClickListener(new PostListener());
-        }
-        else {
-            postButton.setOnTouchListener(null);
-            postButton.setOnClickListener(null);
-        }
-        updatePostButtonText();
-    }
-
-    private void updatePostButtonText() {
-        postButton.setText(getPostButtonText());
-    }
-
-    private String getPostButtonText() {
-        if (!postButton.isEnabled()) {
-            return res.getString(R.string.log_post_not_possible);
-        }
-        if (!GCVote.isVotingPossible(cache)) {
-            return res.getString(R.string.log_post);
-        }
-        if (GCVote.isValidRating(rating)) {
-            return res.getString(R.string.log_post_rate) + " " + GCVote.getRatingText(rating) + "*";
-        }
-        return res.getString(R.string.log_post_no_rate);
+        sendButtonEnabled = enabled;
+        invalidateOptionsMenuCompatible();
     }
 
     @Override
@@ -245,7 +222,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
 
         // Get ids for later use
-        postButton = (Button) findViewById(R.id.post);
         tweetBox = (LinearLayout) findViewById(R.id.tweet_box);
         tweetCheck = (CheckBox) findViewById(R.id.tweet);
         logPasswordBox = (LinearLayout) findViewById(R.id.log_password_box);
@@ -277,7 +253,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(cache, null)), false);
             }
         }
-        updatePostButtonText();
         updateImageButton();
         enablePostButton(false);
 
@@ -353,7 +328,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     ratingBar.setRating(rating);
                 }
                 label.setText(GCVote.getDescription(rating));
-                updatePostButtonText();
             }
         });
     }
@@ -435,8 +409,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
         updateTweetBox(type);
         updateLogPasswordBox(type);
-
-        updatePostButtonText();
     }
 
     private void updateTweetBox(LogType type) {
@@ -462,16 +434,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             final DateDialog dateDialog = DateDialog.getInstance(date);
             dateDialog.setCancelable(true);
             dateDialog.show(getSupportFragmentManager(), "date_dialog");
-        }
-    }
-
-    private class PostListener implements View.OnClickListener {
-        @Override
-        public void onClick(View arg0) {
-            final String message = res.getString(StringUtils.isBlank(imageUri.getPath()) ?
-                    R.string.log_saving :
-                    R.string.log_saving_and_uploading);
-            new Poster(LogCacheActivity.this, message).execute(currentLogText(), currentLogPassword());
         }
     }
 
@@ -678,6 +640,32 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 res.getString(R.string.log_image_edit) : res.getString(R.string.log_image_attach));
         } else {
             imageButton.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_send:
+                sendLog();
+                return true;
+
+            default:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void sendLog() {
+        if (!sendButtonEnabled) {
+            Dialogs.message(this, R.string.log_post_not_possible);
+        }
+        else {
+            final String message = res.getString(StringUtils.isBlank(imageUri.getPath()) ?
+                    R.string.log_saving :
+                    R.string.log_saving_and_uploading);
+            new Poster(LogCacheActivity.this, message).execute(currentLogText(), currentLogPassword());
         }
     }
 }

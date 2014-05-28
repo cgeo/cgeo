@@ -218,7 +218,19 @@ public final class Dialogs {
 
     /**
      * Show a message dialog with a single "OK" button.
-     *
+     * 
+     * @param context
+     *            activity owning the dialog
+     * @param message
+     *            message dialog content
+     */
+    public static void message(final Activity context, final int message) {
+        message(context, null, getString(message));
+    }
+
+    /**
+     * Show a message dialog with a single "OK" button.
+     * 
      * @param context
      *            activity owning the dialog
      * @param title
