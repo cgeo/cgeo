@@ -27,7 +27,7 @@
     </item>
     <item
         android:id="@+id/menu_calendar"
-        android:icon="@drawable/ic_menu_agenda"
+        android:icon="@drawable/ic_menu_my_calendar"
         cgeo:showAsAction="ifRoom"
         android:title="@string/cache_menu_event">
     </item>
