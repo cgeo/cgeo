@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/menu_show_on_map"
-        android:icon="@drawable/actionbar_map"
+        android:icon="@drawable/ic_menu_mapmode"
         cgeo:showAsAction="ifRoom"
         android:title="@string/caches_on_map">
     </item>
