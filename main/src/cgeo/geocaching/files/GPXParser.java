@@ -25,6 +25,8 @@ import cgeo.geocaching.utils.SynchronizedDateFormat;
 
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -270,7 +272,7 @@ public abstract class GPXParser extends FileParser {
     }
 
     @Override
-    public Collection<Geocache> parse(final InputStream stream, final CancellableHandler progressHandler) throws IOException, ParserException {
+    public Collection<Geocache> parse(@NonNull final InputStream stream, @Nullable final CancellableHandler progressHandler) throws IOException, ParserException {
         resetCache();
         final RootElement root = new RootElement(namespace, "gpx");
         final Element waypoint = root.getChild(namespace, "wpt");

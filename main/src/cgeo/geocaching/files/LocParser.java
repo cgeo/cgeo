@@ -12,6 +12,8 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -116,7 +118,7 @@ public final class LocParser extends FileParser {
     }
 
     @Override
-    public Collection<Geocache> parse(InputStream stream, CancellableHandler progressHandler) throws IOException, ParserException {
+    public Collection<Geocache> parse(@NonNull final InputStream stream, @Nullable final CancellableHandler progressHandler) throws IOException, ParserException {
         final String streamContent = readStream(stream, null).toString();
         final int maxSize = streamContent.length();
         final Map<String, Geocache> coords = parseCoordinates(streamContent);
@@ -136,7 +138,9 @@ public final class LocParser extends FileParser {
             cache.setListId(listId);
             cache.setDetailed(true);
             cache.store(null);
-            progressHandler.sendMessage(progressHandler.obtainMessage(0, maxSize * caches.size() / coords.size(), 0));
+            if (progressHandler != null) {
+                progressHandler.sendMessage(progressHandler.obtainMessage(0, maxSize * caches.size() / coords.size(), 0));
+            }
         }
         Log.i("Caches found in .loc file: " + caches.size());
         return caches;
