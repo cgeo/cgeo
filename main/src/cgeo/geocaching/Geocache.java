@@ -79,10 +79,6 @@ import java.util.regex.Pattern;
 /**
  * Internal c:geo representation of a "cache"
  */
-/**
- * @author kep9fe
- *
- */
 public class Geocache implements ICache, IWaypoint {
 
     private static final int OWN_WP_PREFIX_OFFSET = 17;
