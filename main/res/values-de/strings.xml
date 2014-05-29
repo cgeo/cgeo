@@ -657,6 +657,7 @@
   <string name="cache_menu_refresh">Aktualisieren</string>
   <string name="cache_menu_share">Weiterleiten</string>
   <string name="cache_menu_move_list">Auf andere Liste verschieben</string>
+  <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_cachebeacon">Cache Beacon</string>
@@ -1135,6 +1136,7 @@
   <string name="website">Webseite: <a href="">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
+  <string name="nutshellmanual">Benutzung: <a href="">c:geo Kurzanleitung</a></string>
   <string name="market">Android: <a href="">c:geo auf Google Play</a></string>
   <string name="about_twitter">Soll jeder neue Fund auf Twitter veröffentlicht werden, wenn er über <b>c:geo</b> geloggt wird?</string>
   <string name="faq">FAQ: <a href="">faq.cgeo.org</a></string>

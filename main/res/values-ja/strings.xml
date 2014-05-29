@@ -595,6 +595,7 @@
   <string name="cache_menu_refresh">更新</string>
   <string name="cache_menu_share">キャッシュを共有</string>
   <string name="cache_menu_move_list">他のリストに移動</string>
+  <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_cachebeacon">キャッシュビーコン</string>
@@ -1033,6 +1034,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
   <string name="website">Webサイト: <a href="">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
+  <string name="nutshellmanual">マニュアル: <a href="">c:geo マニュアル(英語)</a></string>
   <string name="market">Android: <a href="">Google Playのc:geo</a></string>
   <string name="about_twitter">キャッシュのログを書いたら<b>c:geo</b>にTwitterでつぶやいてほしい?</string>
   <string name="status_new_release" tools:ignore="UnusedResources">新しいバージョンがあります。\nクリックしてインストールしてください。</string>

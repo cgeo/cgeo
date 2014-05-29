@@ -639,6 +639,7 @@
   <string name="cache_menu_refresh">Obnoviť</string>
   <string name="cache_menu_share">Zdielať skrýšu</string>
   <string name="cache_menu_move_list">Presunúť do iného zoznamu</string>
+  <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_cachebeacon">Cache Beacon</string>
@@ -1115,6 +1116,7 @@
   <string name="website">Web: <a href="">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
+  <string name="nutshellmanual">Manuál: <a href="">c:geo v kocke</a></string>
   <string name="market">Android: <a href=""> c:geo na Google Play</a></string>
   <string name="about_twitter">Chcete, aby <b>c:geo</b> napísalo na váš Twitter vždy keď zapíšete nájdenie skrýše?</string>
   <string name="faq">FAQ: <a href="">faq.cgeo.org</a></string>

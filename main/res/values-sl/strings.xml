@@ -649,6 +649,7 @@
   <string name="cache_menu_refresh">Osveži</string>
   <string name="cache_menu_share">Deli povezavo</string>
   <string name="cache_menu_move_list">Premakni v drug seznam</string>
+  <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_cachebeacon">Cache Beacon</string>
@@ -1125,6 +1126,7 @@
   <string name="website">Spletna stran: <a href="">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="">c:geo stran</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
+  <string name="nutshellmanual">Priročnik: <a href="">c:geo na kratko</a></string>
   <string name="market">Android: <a href="">c:geo na Google Play</a></string>
   <string name="about_twitter">Naj <b>c:geo</b> objavi nov status na Twitter, ko objavite nov zapis pri zakladu?</string>
   <string name="faq">Pogosto zastavljena vprašanja: <a href="">faq.cgeo.org</a></string>
