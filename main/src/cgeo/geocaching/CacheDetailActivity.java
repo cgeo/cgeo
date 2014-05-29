@@ -46,6 +46,7 @@ import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.RxUtils;
 import cgeo.geocaching.utils.SimpleCancellableHandler;
 import cgeo.geocaching.utils.SimpleHandler;
 import cgeo.geocaching.utils.TextUtils;
@@ -1341,7 +1342,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
                 if (image == null) {
                     if (Settings.isStoreOfflineMaps() && cache.getCoords() != null) {
-                        StaticMapsProvider.storeCachePreviewMap(cache);
+                        RxUtils.waitForCompletion(StaticMapsProvider.storeCachePreviewMap(cache));
                         image = StaticMapsProvider.getPreviewMap(cache);
                     }
                 }

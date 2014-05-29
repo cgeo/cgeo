@@ -12,6 +12,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
@@ -226,7 +227,7 @@ public class GPXImporter {
                 final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
                 if (cache != null) {
                     Log.d("GPXImporter.ImportThread.importStaticMaps start downloadMaps for cache " + geocode);
-                    StaticMapsProvider.downloadMaps(cache);
+                    RxUtils.waitForCompletion(StaticMapsProvider.downloadMaps(cache));
                 } else {
                     Log.d("GPXImporter.ImportThread.importStaticMaps: no data found for " + geocode);
                 }

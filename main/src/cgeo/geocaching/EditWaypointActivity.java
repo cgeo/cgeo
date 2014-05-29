@@ -443,7 +443,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                         if (!StaticMapsProvider.hasAllStaticMapsForWaypoint(geocode, waypoint)) {
                             StaticMapsProvider.removeWpStaticMaps(oldWaypoint, geocode);
                             if (Settings.isStoreOfflineWpMaps()) {
-                                StaticMapsProvider.storeWaypointStaticMap(cache, waypoint, false);
+                                StaticMapsProvider.storeWaypointStaticMap(cache, waypoint).subscribe();
                             }
                         }
                         if (modifyLocal.isChecked() || modifyBoth.isChecked()) {

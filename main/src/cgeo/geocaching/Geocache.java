@@ -33,6 +33,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.RxUtils;
 import cgeo.geocaching.utils.UncertainProperty;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -1607,9 +1608,7 @@ public class Geocache implements ICache, IWaypoint {
                 return;
             }
 
-            StaticMapsProvider.downloadMaps(cache);
-
-            imgGetter.waitForBackgroundLoading(handler);
+            RxUtils.waitForCompletion(StaticMapsProvider.downloadMaps(cache), imgGetter.waitForEndObservable(handler));
 
             if (handler != null) {
                 handler.sendMessage(Message.obtain());

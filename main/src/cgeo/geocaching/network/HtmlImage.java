@@ -92,7 +92,7 @@ public class HtmlImage implements Html.ImageGetter {
 
     // Background loading
     final private PublishSubject<Observable<String>> loading = PublishSubject.create();
-    final Observable<String> waitForEnd = Observable.merge(loading).publish().refCount();
+    final private Observable<String> waitForEnd = Observable.merge(loading).publish().refCount();
     final CompositeSubscription subscription = new CompositeSubscription(waitForEnd.subscribe());
     final private Executor downloadExecutor = new ThreadPoolExecutor(10, 10, 5, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
 
@@ -223,12 +223,12 @@ public class HtmlImage implements Html.ImageGetter {
         });
     }
 
-    public void waitForBackgroundLoading(@Nullable final CancellableHandler handler) {
+    public Observable<String> waitForEndObservable(@Nullable final CancellableHandler handler) {
         if (handler != null) {
             handler.unsubscribeIfCancelled(subscription);
         }
         loading.onCompleted();
-        waitForEnd.toBlockingObservable().lastOrDefault(null);
+        return waitForEnd;
     }
 
     /**

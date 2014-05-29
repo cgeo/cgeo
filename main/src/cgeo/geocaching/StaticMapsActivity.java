@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
@@ -152,7 +153,7 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         if (waypointId == null) {
             showToast(res.getString(R.string.info_storing_static_maps));
-            StaticMapsProvider.storeCacheStaticMap(cache, true);
+            RxUtils.waitForCompletion(StaticMapsProvider.storeCacheStaticMap(cache));
             return cache.hasStaticMap();
         }
         final Waypoint waypoint = cache.getWaypointById(waypointId);
@@ -160,7 +161,7 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
             showToast(res.getString(R.string.info_storing_static_maps));
             // refresh always removes old waypoint files
             StaticMapsProvider.removeWpStaticMaps(waypoint, geocode);
-            StaticMapsProvider.storeWaypointStaticMap(cache, waypoint, true);
+            RxUtils.waitForCompletion(StaticMapsProvider.storeWaypointStaticMap(cache, waypoint));
             return StaticMapsProvider.hasStaticMapForWaypoint(geocode, waypoint);
         }
         showToast(res.getString(R.string.err_detail_not_load_map_static));
