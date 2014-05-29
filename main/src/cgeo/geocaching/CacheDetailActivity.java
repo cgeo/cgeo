@@ -84,6 +84,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.view.ActionMode;
 import android.text.Editable;
 import android.text.Html;
 import android.text.Spannable;
@@ -97,6 +98,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewParent;
@@ -336,49 +338,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         super.onCreateContextMenu(menu, view, info);
         final int viewId = view.getId();
         switch (viewId) {
-            case R.id.value: // coordinates, gc-code, name
-                assert view instanceof TextView;
-                clickedItemText = ((TextView) view).getText();
-                final CharSequence itemTitle = ((TextView) ((View) view.getParent()).findViewById(R.id.name)).getText();
-                buildDetailsContextMenu(menu, clickedItemText, itemTitle, true);
-                break;
-            case R.id.shortdesc:
-                assert view instanceof TextView;
-                clickedItemText = ((TextView) view).getText();
-                buildDetailsContextMenu(menu, clickedItemText, res.getString(R.string.cache_description), false);
-                break;
-            case R.id.longdesc:
-                assert view instanceof TextView;
-                // combine short and long description
-                final String shortDesc = cache.getShortDescription();
-                if (StringUtils.isBlank(shortDesc)) {
-                    clickedItemText = ((TextView) view).getText();
-                } else {
-                    clickedItemText = shortDesc + "\n\n" + ((TextView) view).getText();
-                }
-                buildDetailsContextMenu(menu, clickedItemText, res.getString(R.string.cache_description), false);
-                break;
-            case R.id.personalnote:
-                assert view instanceof TextView;
-                clickedItemText = ((TextView) view).getText();
-                buildDetailsContextMenu(menu, clickedItemText, res.getString(R.string.cache_personal_note), true);
-                break;
-            case R.id.hint:
-                assert view instanceof TextView;
-                clickedItemText = ((TextView) view).getText();
-                buildDetailsContextMenu(menu, clickedItemText, res.getString(R.string.cache_hint), false);
-                break;
-            case R.id.log:
-                assert view instanceof TextView;
-                clickedItemText = ((TextView) view).getText();
-                buildDetailsContextMenu(menu, clickedItemText, res.getString(R.string.cache_logs), false);
-                break;
-            case R.id.date: // event date
-                assert view instanceof TextView;
-                clickedItemText = ((TextView) view).getText();
-                buildDetailsContextMenu(menu, clickedItemText, res.getString(R.string.cache_event), true);
-                menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
-                break;
             case R.id.waypoint:
                 menu.setHeaderTitle(selectedWaypoint.getName() + " (" + res.getString(R.string.waypoint) + ")");
                 getMenuInflater().inflate(R.menu.waypoint_options, menu);
@@ -405,9 +364,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        if (onClipboardItemSelected(item, clickedItemText)) {
-            return true;
-        }
         switch (item.getItemId()) {
             // waypoints
             case R.id.menu_waypoint_edit:
@@ -913,10 +869,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 span.setSpan(new ForegroundColorSpan(res.getColor(R.color.archived_cache_color)), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
-            registerForContextMenu(details.add(R.string.cache_name, span));
+            addContextMenu(details.add(R.string.cache_name, span));
             details.add(R.string.cache_type, cache.getType().getL10n());
             details.addSize(cache);
-            registerForContextMenu(details.add(R.string.cache_geocode, cache.getGeocode()));
+            addContextMenu(details.add(R.string.cache_geocode, cache.getGeocode()));
             details.addCacheState(cache);
 
             details.addDistance(cache, cacheDistanceView);
@@ -950,7 +906,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             // hidden or event date
             final TextView hiddenView = details.addHiddenDate(cache);
             if (hiddenView != null) {
-                registerForContextMenu(hiddenView);
+                addContextMenu(hiddenView);
             }
 
             // cache location
@@ -962,7 +918,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (cache.getCoords() != null) {
                 final TextView valueView = details.add(R.string.cache_coordinates, cache.getCoords().toString());
                 valueView.setOnClickListener(new CoordinatesFormatSwitcher(cache.getCoords()));
-                registerForContextMenu(valueView);
+                addContextMenu(valueView);
             }
 
             // cache attributes
@@ -1422,7 +1378,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             // cache personal note
             setPersonalNote(personalNoteView, cache.getPersonalNote());
             personalNoteView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-            registerForContextMenu(personalNoteView);
+            addContextMenu(personalNoteView);
             final Button personalNoteEdit = (Button) view.findViewById(R.id.edit_personalnote);
             personalNoteEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -1473,7 +1429,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 hintView.setOnClickListener(new DecryptTextClickListener(hintView));
                 hintBoxView.setOnClickListener(new DecryptTextClickListener(hintView));
                 hintBoxView.setClickable(true);
-                registerForContextMenu(hintView);
+                addContextMenu(hintView);
             } else {
                 hintView.setVisibility(View.GONE);
                 hintView.setClickable(false);
@@ -1643,7 +1599,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                     fixTextColor(descriptionString);
                     descriptionView.setVisibility(View.VISIBLE);
-                    registerForContextMenu(descriptionView);
+                    addContextMenu(descriptionView);
                 }
             }
 
@@ -1807,7 +1763,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
             });
 
-            registerForContextMenu(rowView);
+            addContextMenu(rowView);
             rowView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -1894,6 +1850,86 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         cachesIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
         cachesIntent.putExtra(Intents.EXTRA_NAME, cacheName);
         context.startActivity(cachesIntent);
+    }
+
+    public void addContextMenu(final View view) {
+        view.setOnLongClickListener(new OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View v) {
+                startSupportActionMode(new ActionMode.Callback() {
+
+                    @Override
+                    public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+                        switch (view.getId()) {
+                            case R.id.value: // coordinates, gc-code, name
+                                assert view instanceof TextView;
+                                clickedItemText = ((TextView) view).getText();
+                                final CharSequence itemTitle = ((TextView) ((View) view.getParent()).findViewById(R.id.name)).getText();
+                                buildDetailsContextMenu(actionMode, menu, clickedItemText, itemTitle, true);
+                                return true;
+                            case R.id.shortdesc:
+                                assert view instanceof TextView;
+                                clickedItemText = ((TextView) view).getText();
+                                buildDetailsContextMenu(actionMode, menu, clickedItemText, res.getString(R.string.cache_description), false);
+                                return true;
+                            case R.id.longdesc:
+                                assert view instanceof TextView;
+                                // combine short and long description
+                                final String shortDesc = cache.getShortDescription();
+                                if (StringUtils.isBlank(shortDesc)) {
+                                    clickedItemText = ((TextView) view).getText();
+                                } else {
+                                    clickedItemText = shortDesc + "\n\n" + ((TextView) view).getText();
+                                }
+                                buildDetailsContextMenu(actionMode, menu, clickedItemText, res.getString(R.string.cache_description), false);
+                                return true;
+                            case R.id.personalnote:
+                                assert view instanceof TextView;
+                                clickedItemText = ((TextView) view).getText();
+                                buildDetailsContextMenu(actionMode, menu, clickedItemText, res.getString(R.string.cache_personal_note), true);
+                                return true;
+                            case R.id.hint:
+                                assert view instanceof TextView;
+                                clickedItemText = ((TextView) view).getText();
+                                buildDetailsContextMenu(actionMode, menu, clickedItemText, res.getString(R.string.cache_hint), false);
+                                return true;
+                            case R.id.log:
+                                assert view instanceof TextView;
+                                clickedItemText = ((TextView) view).getText();
+                                buildDetailsContextMenu(actionMode, menu, clickedItemText, res.getString(R.string.cache_logs), false);
+                                return true;
+                            case R.id.date: // event date
+                                assert view instanceof TextView;
+                                clickedItemText = ((TextView) view).getText();
+                                buildDetailsContextMenu(actionMode, menu, clickedItemText, res.getString(R.string.cache_event), true);
+                                menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
+                                return true;
+                        }
+                        return false;
+                    }
+
+                    @Override
+                    public void onDestroyActionMode(ActionMode actionMode) {
+                        // do nothing
+                    }
+
+                    @Override
+                    public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+                        actionMode.getMenuInflater().inflate(R.menu.details_context, menu);
+
+                        // Return true so that the action mode is shown
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+                        return onClipboardItemSelected(actionMode, menuItem, clickedItemText);
+                    }
+                });
+                return false;
+            }
+        });
     }
 
     public static void startActivityGuid(final Context context, final String guid, final String cacheName) {

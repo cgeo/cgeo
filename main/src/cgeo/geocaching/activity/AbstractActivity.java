@@ -12,6 +12,7 @@ import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.TranslationUtils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
@@ -26,7 +27,8 @@ import android.nfc.NfcEvent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.ContextMenu;
+import android.support.v7.view.ActionMode;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -154,9 +156,8 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         new Keyboard(this).show(view);
     }
 
-    protected void buildDetailsContextMenu(final ContextMenu menu, final CharSequence clickedItemText, final CharSequence fieldTitle, final boolean copyOnly) {
-        menu.setHeaderTitle(fieldTitle);
-        getMenuInflater().inflate(R.menu.details_context, menu);
+    protected void buildDetailsContextMenu(final ActionMode actionMode, final Menu menu, final CharSequence clickedItemText, final CharSequence fieldTitle, final boolean copyOnly) {
+        actionMode.setTitle(fieldTitle);
         menu.findItem(R.id.menu_translate_to_sys_lang).setVisible(!copyOnly);
         if (!copyOnly) {
             if (clickedItemText.length() > TranslationUtils.TRANSLATION_TEXT_LENGTH_WARN) {
@@ -168,24 +169,28 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         menu.findItem(R.id.menu_translate_to_english).setVisible(!copyOnly && !localeIsEnglish);
     }
 
-    protected boolean onClipboardItemSelected(final MenuItem item, final CharSequence clickedItemText) {
+    protected boolean onClipboardItemSelected(@NonNull final ActionMode actionMode, final MenuItem item, final CharSequence clickedItemText) {
         switch (item.getItemId()) {
             // detail fields
             case R.id.menu_copy:
                 ClipboardUtils.copyToClipboard(clickedItemText);
                 showToast(res.getString(R.string.clipboard_copy_ok));
+                actionMode.finish();
                 return true;
             case R.id.menu_translate_to_sys_lang:
                 TranslationUtils.startActivityTranslate(this, Locale.getDefault().getLanguage(), HtmlUtils.extractText(clickedItemText));
+                actionMode.finish();
                 return true;
             case R.id.menu_translate_to_english:
                 TranslationUtils.startActivityTranslate(this, Locale.ENGLISH.getLanguage(), HtmlUtils.extractText(clickedItemText));
+                actionMode.finish();
                 return true;
             case R.id.menu_cache_share_field:
                 final Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
                 intent.putExtra(Intent.EXTRA_TEXT, clickedItemText.toString());
                 startActivity(Intent.createChooser(intent, res.getText(R.string.cache_share_field)));
+                actionMode.finish();
                 return true;
             default:
                 return false;
