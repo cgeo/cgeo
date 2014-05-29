@@ -643,6 +643,7 @@
   <string name="cache_menu_refresh">Aggiorna</string>
   <string name="cache_menu_share">Condividi cache</string>
   <string name="cache_menu_move_list">Muovi in un\'altra lista</string>
+  <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_cachebeacon">Cache Beacon</string>
@@ -1119,6 +1120,7 @@
   <string name="website">Sito: <a href="">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="">Pagina c:geo</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
+  <string name="nutshellmanual">Manuale: <a href="">c:geo in a Nutshell</a></string>
   <string name="market">Android: <a href="">c:geo su Google Play</a></string>
   <string name="about_twitter">Può <b>c:geo</b> pubblicare su Twitter ogni volta che logghi un cache?</string>
   <string name="faq">FAQ: <a href="">faq.cgeo.org</a></string>

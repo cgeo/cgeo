@@ -642,6 +642,7 @@
   <string name="cache_menu_refresh">Obnovit</string>
   <string name="cache_menu_share">Sdílet keš</string>
   <string name="cache_menu_move_list">Přesunout do jiného seznamu</string>
+  <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_cachebeacon">Cache Beacon</string>
@@ -1119,6 +1120,7 @@
   <string name="website">Stránka: <a href="">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="">Stránka c:geo</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
+  <string name="nutshellmanual">Návod: <a href="">c:geo v Nutshell</a></string>
   <string name="market">Android: <a href="">c:geo na Google Play</a></string>
   <string name="about_twitter">Má <b>c:geo</b> publikovat nový status na Twitteru vždy, když zaloguješ keš?</string>
   <string name="faq">FAQ: <a href="">faq.cgeo.org</a></string>

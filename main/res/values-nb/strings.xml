@@ -638,6 +638,7 @@
   <string name="cache_menu_refresh">Oppdater</string>
   <string name="cache_menu_share">Del cachen</string>
   <string name="cache_menu_move_list">Flytt til annen liste</string>
+  <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_cachebeacon">Cache Beacon</string>
@@ -1113,6 +1114,7 @@
   <string name="website">web-side: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
+  <string name="nutshellmanual">Bruksanvisning: <a href="">c:geo in a Nutshell</a></string>
   <string name="market">Android: <a href="">c:geo i Google Play</a></string>
   <string name="about_twitter">Ønsker du at <b>c:geo</b> skal poste en status på Twitter hver gang du logger ett funn via <b>c:geo</b>?</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Ny versjon tilgjengelig. \nKlikk for å installere.</string>
