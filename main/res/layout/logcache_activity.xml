@@ -119,35 +119,6 @@
                     android:textColor="?text_color"
                     android:textSize="14sp" />
             </LinearLayout>
-
-            <RelativeLayout style="@style/separator_horizontal_layout" >
-
-                <View style="@style/separator_horizontal" />
-
-                <TextView
-                    style="@style/separator_horizontal_headline"
-                    android:text="@string/cache_log_offline" />
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <Button
-                    android:id="@+id/save"
-                    style="@style/button_full"
-                    android:layout_width="0dip"
-                    android:layout_weight="1"
-                    android:text="@string/log_save" />
-
-                <Button
-                    android:id="@+id/clear"
-                    style="@style/button_full"
-                    android:layout_width="0dip"
-                    android:layout_weight="1"
-                    android:text="@string/log_clear" />
-            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout

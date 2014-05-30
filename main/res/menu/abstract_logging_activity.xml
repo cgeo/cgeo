@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:cgeo="http://schemas.android.com/apk/res-auto">
+    xmlns:cgeo="http://schemas.android.com/apk/res-auto" >
 
     <item
         android:id="@+id/menu_send"
+        android:enabled="true"
         android:icon="@drawable/ic_menu_send"
         android:title="@string/send"
-        android:enabled="true"
-        cgeo:showAsAction="ifRoom|withText">  <!-- enabled=true, we show a message if logging is not possible -->
+        cgeo:showAsAction="ifRoom|withText"> <!-- enabled=true, we show a message if logging is not possible -->
     </item>
     <item
         android:id="@+id/menu_templates"
@@ -30,6 +30,20 @@
         android:title="@string/log_smilies"
         cgeo:showAsAction="ifRoom|withText">
         <menu /> <!-- filled dynamically -->
+    </item>
+    <item
+        android:id="@+id/save"
+        android:icon="@drawable/ic_menu_save"
+        android:title="@string/log_save"
+        android:visible="false"
+        cgeo:showAsAction="ifRoom|withText">
+    </item>
+    <item
+        android:id="@+id/clear"
+        android:icon="@drawable/ic_menu_delete"
+        android:title="@string/log_clear"
+        android:visible="false"
+        cgeo:showAsAction="ifRoom|withText">
     </item>
 
 </menu>
