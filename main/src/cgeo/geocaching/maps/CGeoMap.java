@@ -96,7 +96,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Class representing the Map in c:geo
  */
-public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFactory {
+public class CGeoMap extends AbstractMap implements ViewFactory {
 
     /** max. number of caches displayed in the Live Map */
     public static final int MAX_CACHES = 500;
@@ -496,7 +496,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         mapView.setBuiltInZoomControls(true);
         mapView.displayZoomControls(true);
         mapView.preLoad();
-        mapView.setOnDragListener(this);
+        mapView.setOnDragListener(new MapDragListener(this));
 
         // initialize overlays
         mapView.clearOverlays();
@@ -547,7 +547,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         myLocSwitch.setFactory(this);
         myLocSwitch.setInAnimation(activity, android.R.anim.fade_in);
         myLocSwitch.setOutAnimation(activity, android.R.anim.fade_out); */
-        myLocSwitch.setOnClickListener(new MyLocationListener());
+        myLocSwitch.setOnClickListener(new MyLocationListener(this));
         switchMyLocationButton();
     }
 
@@ -1572,16 +1572,47 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     }
 
     // set my location listener
-    private class MyLocationListener implements View.OnClickListener {
+    private static class MyLocationListener implements View.OnClickListener {
+
+        private final WeakReference<CGeoMap> mapRef;
+
+        public MyLocationListener(@NonNull final CGeoMap map) {
+            mapRef = new WeakReference<CGeoMap>(map);
+        }
+
         @Override
         public void onClick(View view) {
-            followMyLocation = !followMyLocation;
-            switchMyLocationButton();
+            final CGeoMap map = mapRef.get();
+            if (map != null) {
+                map.onFollowMyLocationClicked();
+            }
         }
     }
 
-    @Override
-    public void onDrag() {
+    private void onFollowMyLocationClicked() {
+        followMyLocation = !followMyLocation;
+        switchMyLocationButton();
+    }
+
+    public static class MapDragListener implements OnMapDragListener {
+
+        private final WeakReference<CGeoMap> mapRef;
+
+        public MapDragListener(@NonNull final CGeoMap map) {
+            mapRef = new WeakReference<CGeoMap>(map);
+        }
+
+        @Override
+        public void onDrag() {
+            final CGeoMap map = mapRef.get();
+            if (map != null) {
+                map.onDrag();
+            }
+        }
+
+    }
+
+    private void onDrag() {
         if (followMyLocation) {
             followMyLocation = false;
             switchMyLocationButton();
