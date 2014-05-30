@@ -23,7 +23,7 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
         getMenuInflater().inflate(R.menu.abstract_logging_activity, menu);
 
         final SubMenu menuLog = menu.findItem(R.id.menu_templates).getSubMenu();
-        for (final LogTemplate template : LogTemplateProvider.getTemplates()) {
+        for (final LogTemplate template : LogTemplateProvider.getTemplatesWithSignature()) {
             menuLog.add(0, template.getItemId(), 0, template.getResourceId());
         }
 
@@ -36,7 +36,7 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
+    public boolean onPrepareOptionsMenu(final Menu menu) {
         boolean smileyVisible = false;
         final Geocache cache = getLogContext().getCache();
         if (cache != null && ConnectorFactory.getConnector(cache).equals(GCConnector.getInstance())) {
@@ -53,7 +53,7 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         final int id = item.getItemId();
 
         final LogTemplate template = LogTemplateProvider.getTemplate(id);
@@ -73,7 +73,7 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
 
     protected abstract LogContext getLogContext();
 
-    protected void insertIntoLog(String newText, final boolean moveCursor) {
+    protected void insertIntoLog(final String newText, final boolean moveCursor) {
         final EditText log = (EditText) findViewById(R.id.log);
         ActivityMixin.insertAtPosition(log, newText, moveCursor);
     }
