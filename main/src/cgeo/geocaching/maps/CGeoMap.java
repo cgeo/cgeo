@@ -43,6 +43,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Subscription;
 import rx.functions.Action0;
@@ -175,7 +176,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private static final int[][] INSET_USERMODIFIEDCOORDS = { { 21, 28, 0, 0 }, { 19, 25, 0, 0 }, { 25, 33, 0, 0 } }; // bottom right, 12x12 / 26x26 / 35x35
     private static final int[][] INSET_PERSONALNOTE = { { 0, 28, 21, 0 }, { 0, 25, 19, 0 }, { 0, 33, 25, 0 } }; // bottom left, 12x12 / 26x26 / 35x35
 
-    private SparseArray<LayerDrawable> overlaysCache = new SparseArray<LayerDrawable>();
+    private final SparseArray<LayerDrawable> overlaysCache = new SparseArray<LayerDrawable>();
     /** Count of caches currently visible */
     private int cachesCnt = 0;
     /** List of caches in the viewport */
@@ -190,7 +191,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     // views
     private CheckBox myLocSwitch = null;
 
-    /** Controls the map behaviour */
+    /** Controls the map behavior */
     private MapMode mapMode = null;
     /** Live mode enabled for map. **/
     private boolean isLiveEnabled;
@@ -223,7 +224,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(final Message msg) {
             final int what = msg.what;
             final CGeoMap map = mapRef.get();
             if (map == null) {
@@ -268,7 +269,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     final private Handler displayHandler = new DisplayHandler(this);
 
-    private void setTitle(String title) {
+    private void setTitle(final String title) {
         /* Compatibility for the old Action Bar, only used by the maps activity at the moment */
         final TextView titleview = (TextView) activity.findViewById(R.id.actionbar_title);
         if (titleview != null) {
@@ -281,7 +282,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private void setTitleHoneyComb(String title) {
+    private void setTitleHoneyComb(final String title) {
         activity.getActionBar().setTitle(title);
     }
 
@@ -295,7 +296,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(final Message msg) {
             final int what = msg.what;
 
             if (what == HIDE_PROGRESS) {
@@ -308,7 +309,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             }
         }
 
-        private void showProgress(boolean show) {
+        private void showProgress(final boolean show) {
             final CGeoMap map = mapRef.get();
             if (map == null) {
                 return;
@@ -334,10 +335,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     final private class LoadDetailsHandler extends CancellableHandler {
 
         @Override
-        public void handleRegularMessage(Message msg) {
+        public void handleRegularMessage(final Message msg) {
             if (msg.what == UPDATE_PROGRESS) {
                 if (waitDialog != null) {
-                    int secondsElapsed = (int) ((System.currentTimeMillis() - detailProgressTime) / 1000);
+                    final int secondsElapsed = (int) ((System.currentTimeMillis() - detailProgressTime) / 1000);
                     int secondsRemaining;
                     if (detailProgress > 0) {
                         secondsRemaining = (detailTotal - detailProgress) * secondsElapsed / detailProgress;
@@ -349,7 +350,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                     if (secondsRemaining < 40) {
                         waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
                     } else {
-                        int minsRemaining = secondsRemaining / 60;
+                        final int minsRemaining = secondsRemaining / 60;
                         waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + minsRemaining + " " + res.getQuantityString(R.plurals.caches_eta_mins, minsRemaining));
                     }
                 }
@@ -372,7 +373,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     final private Handler noMapTokenHandler = new Handler() {
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(final Message msg) {
             if (!noMapTokenShowed) {
                 ActivityMixin.showToast(activity, res.getString(R.string.map_token_err));
 
@@ -388,7 +389,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     /* Current source id */
     private int currentSourceId;
 
-    public CGeoMap(MapActivityImpl activity) {
+    public CGeoMap(final MapActivityImpl activity) {
         super(activity);
         geoDirUpdate = new UpdateLoc(this);
     }
@@ -423,7 +424,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // class init
@@ -431,7 +432,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         activity = this.getActivity();
         app = (CgeoApplication) activity.getApplication();
 
-        int countBubbleCnt = DataStore.getAllCachesCount();
+        final int countBubbleCnt = DataStore.getAllCachesCount();
         caches = new LeastRecentlyUsedSet<Geocache>(MAX_CACHES + countBubbleCnt);
 
         final MapProvider mapProvider = Settings.getMapProvider();
@@ -530,7 +531,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
 
 
-        CheckBox locSwitch = (CheckBox) activity.findViewById(R.id.my_position);
+        final CheckBox locSwitch = (CheckBox) activity.findViewById(R.id.my_position);
         if (locSwitch!=null) {
             initMyLocationSwitchButton(locSwitch);
         }
@@ -541,7 +542,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
     }
 
-    private void initMyLocationSwitchButton(CheckBox locSwitch) {
+    private void initMyLocationSwitchButton(final CheckBox locSwitch) {
         myLocSwitch = locSwitch;
         /* TODO: Switch back to ImageSwitcher for animations?
         myLocSwitch.setFactory(this);
@@ -563,7 +564,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private void prepareFilterBar() {
         // show the filter warning bar if the filter is set
         if (Settings.getCacheType() != CacheType.ALL) {
-            String cacheType = Settings.getCacheType().getL10n();
+            final String cacheType = Settings.getCacheType().getL10n();
             ((TextView) activity.findViewById(R.id.filter_text)).setText(cacheType);
             activity.findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
         } else {
@@ -577,8 +578,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         resumeSubscription = Subscriptions.from(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR), startTimer());
 
         if (!CollectionUtils.isEmpty(dirtyCaches)) {
-            for (String geocode : dirtyCaches) {
-                Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
+            for (final String geocode : dirtyCaches) {
+                final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
                 if (cache != null) {
                     // new collection type needs to remove first
                     caches.remove(cache);
@@ -588,7 +589,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             }
             dirtyCaches.clear();
             // Update display
-            displayExecutor.execute(new DisplayRunnable(mapView.getViewport()));
+            displayExecutor.execute(new DisplayRunnable(this));
         }
     }
 
@@ -608,7 +609,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         // menu inflation happens in Google/Mapsforge specific classes
         super.onCreateOptionsMenu(menu);
 
@@ -620,7 +621,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
             /* if we have an Actionbar find the my position toggle */
-            MenuItem item = menu.findItem(R.id.menu_toggle_mypos);
+            final MenuItem item = menu.findItem(R.id.menu_toggle_mypos);
             myLocSwitch = new CheckBox(activity);
             myLocSwitch.setButtonDrawable(R.drawable.ic_menu_myposition);
             item.setActionView(myLocSwitch);
@@ -633,9 +634,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
+    public boolean onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        for (MapSource mapSource : MapProviderFactory.getMapSources()) {
+        for (final MapSource mapSource : MapProviderFactory.getMapSources()) {
             final MenuItem menuItem = menu.findItem(mapSource.getNumericalId());
             if (menuItem != null) {
                 menuItem.setVisible(mapSource.isAvailable());
@@ -694,7 +695,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 default: // DETAILED
                     menu.findItem(R.id.menu_strategy_detailed).setChecked(true);
             }
-        } catch (RuntimeException e) {
+        } catch (final RuntimeException e) {
             Log.e("CGeoMap.onPrepareOptionsMenu", e);
         }
 
@@ -702,7 +703,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         final int id = item.getItemId();
         switch (id) {
             case android.R.id.home:
@@ -817,16 +818,16 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         final File[] themeFiles = Settings.getMapThemeFiles();
 
         String currentTheme = StringUtils.EMPTY;
-        String currentThemePath = Settings.getCustomRenderThemeFilePath();
+        final String currentThemePath = Settings.getCustomRenderThemeFilePath();
         if (StringUtils.isNotEmpty(currentThemePath)) {
-            File currentThemeFile = new File(currentThemePath);
+            final File currentThemeFile = new File(currentThemePath);
             currentTheme = currentThemeFile.getName();
         }
 
-        List<String> names = new ArrayList<String>();
+        final List<String> names = new ArrayList<String>();
         names.add(res.getString(R.string.map_theme_builtin));
         int currentItem = 0;
-        for (File file : themeFiles) {
+        for (final File file : themeFiles) {
             if (currentTheme.equalsIgnoreCase(file.getName())) {
                 currentItem = names.size();
             }
@@ -835,7 +836,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         final int selectedItem = currentItem;
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
         builder.setTitle(R.string.map_theme_select);
 
@@ -843,7 +844,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 new DialogInterface.OnClickListener() {
 
                     @Override
-                    public void onClick(DialogInterface dialog, int newItem) {
+                    public void onClick(final DialogInterface dialog, final int newItem) {
                         if (newItem != selectedItem) {
                             // Adjust index because of <default> selection
                             if (newItem > 0) {
@@ -909,7 +910,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         activity.finish();
 
         // prepare information to restart a similar view
-        Intent mapIntent = new Intent(activity, Settings.getMapProvider().getMapClass());
+        final Intent mapIntent = new Intent(activity, Settings.getMapProvider().getMapClass());
 
         mapIntent.putExtra(EXTRAS_SEARCH, searchIntent);
         mapIntent.putExtra(EXTRAS_GEOCODE, geocodeIntent);
@@ -987,7 +988,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
          */
         private final WeakReference<CGeoMap> map;
 
-        public UpdateLoc(CGeoMap map) {
+        public UpdateLoc(final CGeoMap map) {
             this.map = new WeakReference<CGeoMap>(map);
         }
 
@@ -1013,15 +1014,15 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 timeLastPositionOverlayCalculation = currentTimeMillis;
 
                 try {
-                    CGeoMap cgeoMapRef = map.get();
+                    final CGeoMap cgeoMapRef = map.get();
                     if (cgeoMapRef != null) {
                         if (cgeoMapRef.mapView != null) {
                             if (cgeoMapRef.overlayPositionAndScale == null) {
                                 cgeoMapRef.overlayPositionAndScale = cgeoMapRef.mapView.createAddPositionAndScaleOverlay();
                             }
 
-                            boolean needsRepaintForDistance = needsRepaintForDistance();
-                            boolean needsRepaintForHeading = needsRepaintForHeading();
+                            final boolean needsRepaintForDistance = needsRepaintForDistance();
+                            final boolean needsRepaintForHeading = needsRepaintForHeading();
 
                             if (needsRepaintForDistance) {
                                 if (cgeoMapRef.followMyLocation) {
@@ -1036,7 +1037,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                             }
                         }
                     }
-                } catch (RuntimeException e) {
+                } catch (final RuntimeException e) {
                     Log.w("Failed to update location.");
                 }
             }
@@ -1131,16 +1132,16 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                     if (moved) {
                         map.markersInvalidated = false;
 
-                        long currentTime = System.currentTimeMillis();
+                        final long currentTime = System.currentTimeMillis();
 
                         if (1000 < (currentTime - map.loadThreadRun)) {
                             map.viewport = viewportNow;
-                            loadExecutor.execute(map.new LoadRunnable(map.viewport));
+                            loadExecutor.execute(new LoadRunnable(map));
                         }
                     }
                 }
 
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.w("CGeoMap.startLoadtimer.start", e);
             }
         }
@@ -1170,79 +1171,87 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
      * started by {@link LoadTimer}
      */
 
-    private class LoadRunnable extends DoRunnable {
+    private static class LoadRunnable extends DoRunnable {
 
-        public LoadRunnable(final Viewport viewport) {
-            super(viewport);
+        public LoadRunnable(@NonNull final CGeoMap map) {
+            super(map);
         }
 
         @Override
         public void run() {
-            try {
-                showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
-                loadThreadRun = System.currentTimeMillis();
-
-                SearchResult searchResult;
-                if (mapMode == MapMode.LIVE) {
-                    searchResult = isLiveEnabled ? new SearchResult() : new SearchResult(DataStore.loadStoredInViewport(viewport, Settings.getCacheType()));
-                } else {
-                    // map started from another activity
-                    searchResult = searchIntent != null ? new SearchResult(searchIntent) : new SearchResult();
-                    if (geocodeIntent != null) {
-                        searchResult.addGeocode(geocodeIntent);
-                    }
-                }
-                // live mode search result
-                if (isLiveEnabled) {
-                    searchResult.addSearchResult(DataStore.loadCachedInViewport(viewport, Settings.getCacheType()));
-                }
-
-                downloaded = true;
-                Set<Geocache> cachesFromSearchResult = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
-                // update the caches
-                // new collection type needs to remove first
-                caches.removeAll(cachesFromSearchResult);
-                caches.addAll(cachesFromSearchResult);
-
-                final boolean excludeMine = Settings.isExcludeMyCaches();
-                final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
-                if (mapMode == MapMode.LIVE) {
-                    CGeoMap.filter(caches);
-                }
-                countVisibleCaches();
-                if (cachesCnt < Settings.getWayPointsThreshold() || geocodeIntent != null) {
-                    // we don't want to see any stale waypoints
-                    waypoints.clear();
-                    if (isLiveEnabled || mapMode == MapMode.LIVE
-                            || mapMode == MapMode.COORDS) {
-                        //All visible waypoints
-                        CacheType type = Settings.getCacheType();
-                        Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(viewport, excludeMine, excludeDisabled, type);
-                        waypoints.addAll(waypointsInViewport);
-                    }
-                    else {
-                        //All waypoints from the viewed caches
-                        for (Geocache c : caches.getAsList()) {
-                            waypoints.addAll(c.getWaypoints());
-                        }
-                    }
-                }
-                else {
-                    // we don't want to see any stale waypoints when above threshold
-                    waypoints.clear();
-                }
-
-                //render
-                displayExecutor.execute(new DisplayRunnable(viewport));
-
-                if (isLiveEnabled) {
-                    downloadExecutor.execute(new DownloadRunnable(viewport));
-                }
-                lastSearchResult = searchResult;
-            } finally {
-                showProgressHandler.sendEmptyMessage(HIDE_PROGRESS); // hide progress
+            final CGeoMap map = getMap();
+            if (map != null) {
+                map.doLoadRun();
             }
         }
+    }
+
+    private void doLoadRun() {
+        try {
+            showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
+            loadThreadRun = System.currentTimeMillis();
+
+            SearchResult searchResult;
+            if (mapMode == MapMode.LIVE) {
+                searchResult = isLiveEnabled ? new SearchResult() : new SearchResult(DataStore.loadStoredInViewport(viewport, Settings.getCacheType()));
+            } else {
+                // map started from another activity
+                searchResult = searchIntent != null ? new SearchResult(searchIntent) : new SearchResult();
+                if (geocodeIntent != null) {
+                    searchResult.addGeocode(geocodeIntent);
+                }
+            }
+            // live mode search result
+            if (isLiveEnabled) {
+                searchResult.addSearchResult(DataStore.loadCachedInViewport(viewport, Settings.getCacheType()));
+            }
+
+            downloaded = true;
+            final Set<Geocache> cachesFromSearchResult = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
+            // update the caches
+            // new collection type needs to remove first
+            caches.removeAll(cachesFromSearchResult);
+            caches.addAll(cachesFromSearchResult);
+
+            final boolean excludeMine = Settings.isExcludeMyCaches();
+            final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
+            if (mapMode == MapMode.LIVE) {
+                CGeoMap.filter(caches);
+            }
+            countVisibleCaches();
+            if (cachesCnt < Settings.getWayPointsThreshold() || geocodeIntent != null) {
+                // we don't want to see any stale waypoints
+                waypoints.clear();
+                if (isLiveEnabled || mapMode == MapMode.LIVE
+                        || mapMode == MapMode.COORDS) {
+                    //All visible waypoints
+                    final CacheType type = Settings.getCacheType();
+                    final Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(viewport, excludeMine, excludeDisabled, type);
+                    waypoints.addAll(waypointsInViewport);
+                }
+                else {
+                    //All waypoints from the viewed caches
+                    for (final Geocache c : caches.getAsList()) {
+                        waypoints.addAll(c.getWaypoints());
+                    }
+                }
+            }
+            else {
+                // we don't want to see any stale waypoints when above threshold
+                waypoints.clear();
+            }
+
+            //render
+            displayExecutor.execute(new DisplayRunnable(this));
+
+            if (isLiveEnabled) {
+                downloadExecutor.execute(new DownloadRunnable(this));
+            }
+            lastSearchResult = searchResult;
+        } finally {
+            showProgressHandler.sendEmptyMessage(HIDE_PROGRESS); // hide progress
+        }
+
     }
 
     /**
@@ -1250,111 +1259,125 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
      * Started by {@link LoadRunnable}.
      */
 
-    private class DownloadRunnable extends DoRunnable {
+    private static class DownloadRunnable extends DoRunnable {
 
-        public DownloadRunnable(final Viewport viewport) {
-            super(viewport);
+        public DownloadRunnable(final CGeoMap map) {
+            super(map);
         }
 
         @Override
         public void run() {
-            try {
-                showProgressHandler.sendEmptyMessage(SHOW_PROGRESS); // show progress
-                if (Settings.isGCConnectorActive()) {
-                    if (tokens == null) {
-                        tokens = GCLogin.getInstance().getMapTokens();
-                        if (noMapTokenHandler != null && (StringUtils.isEmpty(tokens.getUserSession()) || StringUtils.isEmpty(tokens.getSessionToken()))) {
-                            tokens = null;
-                            noMapTokenHandler.sendEmptyMessage(0);
-                        }
+            final CGeoMap map = getMap();
+            if (map != null) {
+                map.doDownloadRun();
+            }
+        }
+    }
+
+    private void doDownloadRun() {
+        try {
+            showProgressHandler.sendEmptyMessage(SHOW_PROGRESS); // show progress
+            if (Settings.isGCConnectorActive()) {
+                if (tokens == null) {
+                    tokens = GCLogin.getInstance().getMapTokens();
+                    if (noMapTokenHandler != null && (StringUtils.isEmpty(tokens.getUserSession()) || StringUtils.isEmpty(tokens.getSessionToken()))) {
+                        tokens = null;
+                        noMapTokenHandler.sendEmptyMessage(0);
                     }
                 }
-                final SearchResult searchResult = ConnectorFactory.searchByViewport(viewport.resize(0.8), tokens);
-                downloaded = true;
-
-                Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-                CGeoMap.filter(result);
-                // update the caches
-                // first remove filtered out
-                final Set<String> filteredCodes = searchResult.getFilteredGeocodes();
-                Log.d("Filtering out " + filteredCodes.size() + " caches: " + filteredCodes.toString());
-                caches.removeAll(DataStore.loadCaches(filteredCodes, LoadFlags.LOAD_CACHE_ONLY));
-                DataStore.removeCaches(filteredCodes, EnumSet.of(RemoveFlag.REMOVE_CACHE));
-                // new collection type needs to remove first to refresh
-                caches.removeAll(result);
-                caches.addAll(result);
-                lastSearchResult = searchResult;
-
-                //render
-                displayExecutor.execute(new DisplayRunnable(viewport));
-
-            } catch (ThreadDeath e) {
-                Log.d("DownloadThread stopped");
-                displayHandler.sendEmptyMessage(UPDATE_TITLE);
-            } finally {
-                showProgressHandler.sendEmptyMessage(HIDE_PROGRESS); // hide progress
             }
+            final SearchResult searchResult = ConnectorFactory.searchByViewport(viewport.resize(0.8), tokens);
+            downloaded = true;
+
+            final Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+            CGeoMap.filter(result);
+            // update the caches
+            // first remove filtered out
+            final Set<String> filteredCodes = searchResult.getFilteredGeocodes();
+            Log.d("Filtering out " + filteredCodes.size() + " caches: " + filteredCodes.toString());
+            caches.removeAll(DataStore.loadCaches(filteredCodes, LoadFlags.LOAD_CACHE_ONLY));
+            DataStore.removeCaches(filteredCodes, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+            // new collection type needs to remove first to refresh
+            caches.removeAll(result);
+            caches.addAll(result);
+            lastSearchResult = searchResult;
+
+            //render
+            displayExecutor.execute(new DisplayRunnable(this));
+
+        } catch (final ThreadDeath e) {
+            Log.d("DownloadThread stopped");
+            displayHandler.sendEmptyMessage(UPDATE_TITLE);
+        } finally {
+            showProgressHandler.sendEmptyMessage(HIDE_PROGRESS); // hide progress
         }
     }
 
     /**
      * Thread to Display (down)loaded caches. Started by {@link LoadRunnable} and {@link DownloadRunnable}
      */
-    private class DisplayRunnable extends DoRunnable {
+    private static class DisplayRunnable extends DoRunnable {
 
-        public DisplayRunnable(final Viewport viewport) {
-            super(viewport);
+        public DisplayRunnable(@NonNull final CGeoMap map) {
+            super(map);
         }
 
         @Override
         public void run() {
-            try {
-                showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
-                if (mapView == null || caches == null) {
-                    throw new ThreadDeath();
-                }
+            final CGeoMap map = getMap();
+            if (map != null) {
+                map.doDisplayRun();
+            }
+        }
+    }
 
-                // display caches
-                final List<Geocache> cachesToDisplay = caches.getAsList();
-                final List<Waypoint> waypointsToDisplay = new ArrayList<Waypoint>(waypoints);
-                final List<CachesOverlayItemImpl> itemsToDisplay = new ArrayList<CachesOverlayItemImpl>();
+    private void doDisplayRun() {
+        try {
+            showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
+            if (mapView == null || caches == null) {
+                throw new ThreadDeath();
+            }
 
-                if (!cachesToDisplay.isEmpty()) {
-                    // Only show waypoints for single view or setting
-                    // when less than showWaypointsthreshold Caches shown
-                    if (mapMode == MapMode.SINGLE || (cachesCnt < Settings.getWayPointsThreshold())) {
-                        for (Waypoint waypoint : waypointsToDisplay) {
+            // display caches
+            final List<Geocache> cachesToDisplay = caches.getAsList();
+            final List<Waypoint> waypointsToDisplay = new ArrayList<Waypoint>(waypoints);
+            final List<CachesOverlayItemImpl> itemsToDisplay = new ArrayList<CachesOverlayItemImpl>();
 
-                            if (waypoint == null || waypoint.getCoords() == null) {
-                                continue;
-                            }
+            if (!cachesToDisplay.isEmpty()) {
+                // Only show waypoints for single view or setting
+                // when less than showWaypointsthreshold Caches shown
+                if (mapMode == MapMode.SINGLE || (cachesCnt < Settings.getWayPointsThreshold())) {
+                    for (final Waypoint waypoint : waypointsToDisplay) {
 
-                            itemsToDisplay.add(getWaypointItem(waypoint));
-                        }
-                    }
-                    for (Geocache cache : cachesToDisplay) {
-
-                        if (cache == null || cache.getCoords() == null) {
+                        if (waypoint == null || waypoint.getCoords() == null) {
                             continue;
                         }
-                        itemsToDisplay.add(getCacheItem(cache));
+
+                        itemsToDisplay.add(getWaypointItem(waypoint));
                     }
+                }
+                for (final Geocache cache : cachesToDisplay) {
 
-                    overlayCaches.updateItems(itemsToDisplay);
-                    displayHandler.sendEmptyMessage(INVALIDATE_MAP);
-
-                } else {
-                    overlayCaches.updateItems(itemsToDisplay);
-                    displayHandler.sendEmptyMessage(INVALIDATE_MAP);
+                    if (cache == null || cache.getCoords() == null) {
+                        continue;
+                    }
+                    itemsToDisplay.add(getCacheItem(cache));
                 }
 
-                displayHandler.sendEmptyMessage(UPDATE_TITLE);
-            } catch (ThreadDeath e) {
-                Log.d("DisplayThread stopped");
-                displayHandler.sendEmptyMessage(UPDATE_TITLE);
-            } finally {
-                showProgressHandler.sendEmptyMessage(HIDE_PROGRESS);
+                overlayCaches.updateItems(itemsToDisplay);
+                displayHandler.sendEmptyMessage(INVALIDATE_MAP);
+
+            } else {
+                overlayCaches.updateItems(itemsToDisplay);
+                displayHandler.sendEmptyMessage(INVALIDATE_MAP);
             }
+
+            displayHandler.sendEmptyMessage(UPDATE_TITLE);
+        } catch (final ThreadDeath e) {
+            Log.d("DisplayThread stopped");
+            displayHandler.sendEmptyMessage(UPDATE_TITLE);
+        } finally {
+            showProgressHandler.sendEmptyMessage(HIDE_PROGRESS);
         }
     }
 
@@ -1372,10 +1395,15 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     private static abstract class DoRunnable implements Runnable {
 
-        final protected Viewport viewport;
+        private final WeakReference<CGeoMap> mapRef;
 
-        protected DoRunnable(final Viewport viewport) {
-            this.viewport = viewport;
+        protected DoRunnable(@NonNull final CGeoMap map) {
+            mapRef = new WeakReference<CGeoMap>(map);
+        }
+
+        protected @Nullable
+        final CGeoMap getMap() {
+            return mapRef.get();
         }
     }
 
@@ -1385,7 +1413,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
      * @param listId
      *            the list to store the caches in
      */
-    private void storeCaches(List<String> geocodes, int listId) {
+    private void storeCaches(final List<String> geocodes, final int listId) {
         final LoadDetailsHandler loadDetailsHandler = new LoadDetailsHandler();
 
         waitDialog = new ProgressDialog(activity);
@@ -1396,19 +1424,19 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
             @Override
-            public void onCancel(DialogInterface arg0) {
+            public void onCancel(final DialogInterface arg0) {
                 try {
                     if (loadDetailsThread != null) {
                         loadDetailsThread.stopIt();
                     }
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     Log.e("CGeoMap.storeCaches.onCancel", e);
                 }
             }
         });
 
-        float etaTime = detailTotal * 7.0f / 60.0f;
-        int roundedEta = Math.round(etaTime);
+        final float etaTime = detailTotal * 7.0f / 60.0f;
+        final int roundedEta = Math.round(etaTime);
         if (etaTime < 0.4) {
             waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
         } else {
@@ -1457,7 +1485,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                     if (!DataStore.isOffline(geocode, null)) {
                         Geocache.storeCache(null, geocode, listId, false, handler);
                     }
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     Log.e("CGeoMap.LoadDetails.run", e);
                 } finally {
                     // one more cache over
@@ -1471,12 +1499,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
     }
 
-    private static synchronized void filter(Collection<Geocache> caches) {
-        boolean excludeMine = Settings.isExcludeMyCaches();
-        boolean excludeDisabled = Settings.isExcludeDisabledCaches();
+    private static synchronized void filter(final Collection<Geocache> caches) {
+        final boolean excludeMine = Settings.isExcludeMyCaches();
+        final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
 
-        List<Geocache> removeList = new ArrayList<Geocache>();
-        for (Geocache cache : caches) {
+        final List<Geocache> removeList = new ArrayList<Geocache>();
+        for (final Geocache cache : caches) {
             if ((excludeMine && cache.isFound()) || (excludeMine && cache.isOwner()) || (excludeDisabled && cache.isDisabled()) || (excludeDisabled && cache.isArchived())) {
                 removeList.add(cache);
             }
@@ -1514,14 +1542,14 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     }
 
     // move map to view results of searchIntent
-    private void centerMap(String geocodeCenter, final SearchResult searchCenter, final Geopoint coordsCenter, int[] mapState) {
+    private void centerMap(final String geocodeCenter, final SearchResult searchCenter, final Geopoint coordsCenter, final int[] mapState) {
         final MapControllerImpl mapController = mapView.getMapController();
 
         if (!centered && mapState != null) {
             try {
                 mapController.setCenter(mapItemFactory.getGeoPointBase(new Geopoint(mapState[0] / 1.0e6, mapState[1] / 1.0e6)));
                 setZoom(mapState[2]);
-            } catch (RuntimeException e) {
+            } catch (final RuntimeException e) {
                 Log.e("centermap", e);
             }
 
@@ -1545,7 +1573,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 if (viewport.getLatitudeSpan() != 0 && viewport.getLongitudeSpan() != 0) {
                     mapController.zoomToSpan((int) (viewport.getLatitudeSpan() * 1e6), (int) (viewport.getLongitudeSpan() * 1e6));
                 }
-            } catch (RuntimeException e) {
+            } catch (final RuntimeException e) {
                 Log.e("centermap", e);
             }
 
@@ -1554,7 +1582,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         } else if (!centered && coordsCenter != null) {
             try {
                 mapController.setCenter(makeGeoPoint(coordsCenter));
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.e("centermap", e);
             }
 
@@ -1581,7 +1609,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
 
         @Override
-        public void onClick(View view) {
+        public void onClick(final View view) {
             final CGeoMap map = mapRef.get();
             if (map != null) {
                 map.onFollowMyLocationClicked();
@@ -1626,7 +1654,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     @Override
     public View makeView() {
-        ImageView imageView = new ImageView(activity);
+        final ImageView imageView = new ImageView(activity);
         imageView.setScaleType(ScaleType.CENTER);
         imageView.setLayoutParams(new ImageSwitcher.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         return imageView;
@@ -1764,7 +1792,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     private CachesOverlayItemImpl getWaypointItem(final Waypoint waypoint) {
         final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(waypoint, waypoint.getWaypointType().applyDistanceRule());
-        Drawable marker = getResources().getDrawable(!waypoint.isVisited() ? R.drawable.marker : R.drawable.marker_transparent);
+        final Drawable marker = getResources().getDrawable(!waypoint.isVisited() ? R.drawable.marker : R.drawable.marker_transparent);
         final Drawable[] layers = new Drawable[] {
                 marker,
                 getResources().getDrawable(waypoint.getWaypointType().markerId)
