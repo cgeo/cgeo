@@ -1,0 +1,6 @@
+include ':main'
+//include ':send2cgeo'
+include ':cgeo-calendar'
+include ':cgeo-contacts'
+//include ':settings'
+include ':mapswithme-api'
