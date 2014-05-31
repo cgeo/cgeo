@@ -165,7 +165,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 dialog.setNegativeButton(res.getString(R.string.license_dismiss), new DialogInterface.OnClickListener() {
 
                     @Override
-                    public void onClick(DialogInterface dialog, int id) {
+                    public void onClick(final DialogInterface dialog, final int id) {
                         Cookies.clearCookies();
                         dialog.cancel();
                     }
@@ -173,7 +173,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 dialog.setPositiveButton(res.getString(R.string.license_show), new DialogInterface.OnClickListener() {
 
                     @Override
-                    public void onClick(DialogInterface dialog, int id) {
+                    public void onClick(final DialogInterface dialog, final int id) {
                         Cookies.clearCookies();
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/software/agreement.aspx?ID=0")));
                     }
@@ -217,12 +217,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private static class LoadCachesHandler extends WeakReferenceHandler<CacheListActivity> {
 
-        protected LoadCachesHandler(CacheListActivity activity) {
+        protected LoadCachesHandler(final CacheListActivity activity) {
             super(activity);
         }
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(final Message msg) {
             final CacheListActivity activity = getActivity();
             if (activity == null) {
                 return;
@@ -257,36 +257,20 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
-    static String getCacheNumberString(Resources res, int count)
-    {
+    private String getCacheNumberString(final Resources res, final int count) {
         return res.getQuantityString(R.plurals.cache_counts, count, count);
     }
 
     protected void updateTitle() {
-
         setTitle(title);
-
-        final ArrayList<String> numbers = new ArrayList<String>();
-        if (adapter.isFiltered()) {
-            numbers.add(getCacheNumberString(getResources(), adapter.getCount()));
-        }
-        if (search != null) {
-            numbers.add(getCacheNumberString(getResources(), search.getCount()));
-        }
-        if (numbers.isEmpty()) {
-            getSupportActionBar().setSubtitle(null);
-        }
-        else {
-            getSupportActionBar().setSubtitle(StringUtils.join(numbers, '/'));
-        }
-
+        getSupportActionBar().setSubtitle(getCurrentSubtitle());
         refreshSpinnerAdapter();
     }
 
     private final CancellableHandler loadDetailsHandler = new CancellableHandler() {
 
         @Override
-        public void handleRegularMessage(Message msg) {
+        public void handleRegularMessage(final Message msg) {
             updateAdapter();
 
             if (msg.what > -1) {
@@ -325,7 +309,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      */
     private class DownloadFromWebHandler extends CancellableHandler {
         @Override
-        public void handleRegularMessage(Message msg) {
+        public void handleRegularMessage(final Message msg) {
             updateAdapter();
 
             adapter.notifyDataSetChanged();
@@ -363,7 +347,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private final CancellableHandler clearOfflineLogsHandler = new CancellableHandler() {
 
         @Override
-        public void handleRegularMessage(Message msg) {
+        public void handleRegularMessage(final Message msg) {
             adapter.setSelectMode(false);
 
             refreshCurrentList();
@@ -376,7 +360,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private final Handler importGpxAttachementFinishedHandler = new Handler() {
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(final Message msg) {
             refreshCurrentList();
         }
     };
@@ -388,7 +372,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
@@ -454,8 +438,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setListNavigationCallbacks(mCacheListSpinnerAdapter, new ActionBar.OnNavigationListener() {
             @Override
-            public boolean onNavigationItemSelected(int i, long l) {
-                int newListId = mCacheListSpinnerAdapter.getItem(i).id;
+            public boolean onNavigationItemSelected(final int i, final long l) {
+                final int newListId = mCacheListSpinnerAdapter.getItem(i).id;
                 if (newListId != listId) {
                     switchListById(newListId);
                 }
@@ -471,9 +455,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
         mCacheListSpinnerAdapter.clear();
 
-        AbstractList list = AbstractList.getListById(listId);
+        final AbstractList list = AbstractList.getListById(listId);
 
-        for (AbstractList l: StoredList.UserInterface.getMenuLists(false, PseudoList.NEW_LIST.id)) {
+        for (final AbstractList l: StoredList.UserInterface.getMenuLists(false, PseudoList.NEW_LIST.id)) {
             mCacheListSpinnerAdapter.add(l);
         }
 
@@ -481,7 +465,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         if (currentLoader != null && currentLoader.isLoading()) {
             showFooterLoadingCaches();
@@ -502,7 +486,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         new StoredList.UserInterface(this).promptForListSelection(R.string.gpx_import_select_list_title, new Action1<Integer>() {
 
             @Override
-            public void call(Integer listId) {
+            public void call(final Integer listId) {
                 new GPXImporter(CacheListActivity.this, listId, importGpxAttachementFinishedHandler).importGPX();
                 switchListById(listId);
             }
@@ -549,7 +533,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.cache_list_options, menu);
 
         CacheListAppFactory.addMenuItems(menu, this, res);
@@ -562,7 +546,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
+    public boolean onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
         final boolean isHistory = type == CacheListType.HISTORY;
@@ -663,7 +647,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         if (super.onOptionsItemSelected(item)) {
             return true;
         }
@@ -719,7 +703,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 final CacheComparator oldComparator = adapter.getCacheComparator();
                 new ComparatorUserInterface(this).selectComparator(oldComparator, new Action1<CacheComparator>() {
                     @Override
-                    public void call(CacheComparator selectedComparator) {
+                    public void call(final CacheComparator selectedComparator) {
                         // selecting the same sorting twice will toggle the order
                         if (selectedComparator != null && oldComparator != null && selectedComparator.getClass().equals(oldComparator.getClass())) {
                             adapter.toggleInverseSort();
@@ -802,7 +786,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public void showFilterMenu(final View view) {
         new FilterUserInterface(this).selectFilter(new Action1<IFilter>() {
             @Override
-            public void call(IFilter selectedFilter) {
+            public void call(final IFilter selectedFilter) {
                 if (selectedFilter != null) {
                     setFilter(selectedFilter);
                 } else {
@@ -858,7 +842,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list, new Action1<Integer>() {
 
             @Override
-            public void call(Integer newListId) {
+            public void call(final Integer newListId) {
                 DataStore.moveToList(adapter.getCheckedOrAllCaches(), newListId);
                 adapter.setSelectMode(false);
 
@@ -868,7 +852,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     @Override
-    public boolean onContextItemSelected(MenuItem item) {
+    public boolean onContextItemSelected(final MenuItem item) {
         ContextMenu.ContextMenuInfo info = item.getMenuInfo();
 
         // restore menu info for sub menu items, see
@@ -905,7 +889,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             case R.id.menu_drop_cache:
                 cache.drop(new Handler() {
                     @Override
-                    public void handleMessage(Message msg) {
+                    public void handleMessage(final Message msg) {
                         adapter.notifyDataSetChanged();
                         refreshCurrentList();
                     }
@@ -915,7 +899,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list, new Action1<Integer>() {
 
                     @Override
-                    public void call(Integer newListId) {
+                    public void call(final Integer newListId) {
                         DataStore.moveToList(Collections.singletonList(cache), newListId);
                         adapter.setSelectMode(false);
                         refreshCurrentList();
@@ -956,7 +940,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return adapter.findCacheByGeocode(contextMenuGeocode);
     }
 
-    private boolean setFilter(IFilter filter) {
+    private boolean setFilter(final IFilter filter) {
         adapter.setFilter(filter);
         prepareFilterBar();
         updateTitle();
@@ -965,7 +949,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
+    public boolean onKeyDown(final int keyCode, final KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (adapter.isSelectMode()) {
                 adapter.setSelectMode(false);
@@ -1029,7 +1013,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_CODE_IMPORT_GPX && resultCode == Activity.RESULT_OK) {
@@ -1045,7 +1029,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         refreshCurrentList();
     }
 
-    private String getDisplayName(Uri uri) {
+    private String getDisplayName(final Uri uri) {
         Cursor cursor = null;
         try {
             cursor = getContentResolver().query(uri, new String[] { OpenableColumns.DISPLAY_NAME }, null, null, null);
@@ -1078,7 +1062,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         @Override
                         public void call(final Integer selectedListId) {
                             // in case of online lists, set the list id to a concrete list now
-                            for (Geocache geocache : caches) {
+                            for (final Geocache geocache : caches) {
                                 geocache.setListId(selectedListId);
                             }
                             refreshStoredInternal(caches);
@@ -1112,11 +1096,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     public void removeFromHistoryCheck() {
-        int message = (adapter != null && adapter.getCheckedCount() > 0) ? R.string.cache_remove_from_history
+        final int message = (adapter != null && adapter.getCheckedCount() > 0) ? R.string.cache_remove_from_history
                 : R.string.cache_clear_history;
         Dialogs.confirmYesNo(this, R.string.caches_removing_from_history, message, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int id) {
+            public void onClick(final DialogInterface dialog, final int id) {
                 removeFromHistory();
                 dialog.cancel();
             }
@@ -1140,7 +1124,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             Dialogs.confirm(this, R.string.web_import_title, R.string.init_sendToCgeo_description, new OnClickListener() {
 
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
+                public void onClick(final DialogInterface dialog, final int which) {
                     SettingsActivity.openForScreen(R.string.preference_screen_sendtocgeo, CacheListActivity.this);
                 }
             });
@@ -1157,18 +1141,18 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     public void dropStored(final boolean removeListAfterwards) {
-        int message = (adapter.getCheckedCount() > 0) ? R.string.caches_drop_selected_ask : R.string.caches_drop_all_ask;
+        final int message = (adapter.getCheckedCount() > 0) ? R.string.caches_drop_selected_ask : R.string.caches_drop_all_ask;
         Dialogs.confirmYesNo(this, R.string.caches_drop_stored, message, new DialogInterface.OnClickListener() {
 
             @Override
-            public void onClick(DialogInterface dialog, int id) {
+            public void onClick(final DialogInterface dialog, final int id) {
                 dropSelected(removeListAfterwards);
                 dialog.cancel();
             }
         });
     }
 
-    public void dropSelected(boolean removeListAfterwards) {
+    public void dropSelected(final boolean removeListAfterwards) {
         final List<Geocache> selected = adapter.getCheckedOrAllCaches();
         new DropDetailsTask(removeListAfterwards).execute(selected.toArray(new Geocache[selected.size()]));
     }
@@ -1182,7 +1166,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final private CancellableHandler handler;
         final private List<Geocache> caches;
 
-        public LoadDetailsThread(CancellableHandler handler, List<Geocache> caches) {
+        public LoadDetailsThread(final CancellableHandler handler, final List<Geocache> caches) {
             this.handler = handler;
             this.caches = caches;
         }
@@ -1213,7 +1197,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
          * @return
          *         <code>false</code> if the storing was interrupted, <code>true</code> otherwise
          */
-        private boolean refreshCache(Geocache cache) {
+        private boolean refreshCache(final Geocache cache) {
             try {
                 if (handler.isCancelled()) {
                     throw new InterruptedException("Stopped storing process.");
@@ -1237,7 +1221,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final private CancellableHandler handler;
         final private int listIdLFW;
 
-        public LoadFromWebThread(CancellableHandler handler, int listId) {
+        public LoadFromWebThread(final CancellableHandler handler, final int listId) {
             this.handler = handler;
             listIdLFW = StoredList.getConcreteList(listId);
         }
@@ -1289,19 +1273,19 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         private final boolean removeListAfterwards;
 
-        public DropDetailsTask(boolean removeListAfterwards) {
+        public DropDetailsTask(final boolean removeListAfterwards) {
             super(CacheListActivity.this, null, res.getString(R.string.caches_drop_progress), true);
             this.removeListAfterwards = removeListAfterwards;
         }
 
         @Override
-        protected Void doInBackgroundInternal(Geocache[] caches) {
+        protected Void doInBackgroundInternal(final Geocache[] caches) {
             DataStore.markDropped(Arrays.asList(caches));
             return null;
         }
 
         @Override
-        protected void onPostExecuteInternal(Void result) {
+        protected void onPostExecuteInternal(final Void result) {
             // remove list in UI because of toast
             if (removeListAfterwards) {
                 removeList(false);
@@ -1319,7 +1303,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final private Handler handler;
         final private List<Geocache> selected;
 
-        public ClearOfflineLogsThread(Handler handlerIn) {
+        public ClearOfflineLogsThread(final Handler handlerIn) {
             handler = handlerIn;
             selected = adapter.getCheckedOrAllCaches();
         }
@@ -1334,7 +1318,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private class MoreCachesListener implements View.OnClickListener {
 
         @Override
-        public void onClick(View arg0) {
+        public void onClick(final View arg0) {
             showProgress(true);
             showFooterLoadingCaches();
             listFooter.setOnClickListener(null);
@@ -1363,7 +1347,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         };
     }
 
-    public void switchListById(int id) {
+    public void switchListById(final int id) {
         if (id < 0) {
             return;
         }
@@ -1436,7 +1420,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         // ask him, if there are caches on the list
         Dialogs.confirm(this, R.string.list_dialog_remove_title, R.string.list_dialog_remove_description, R.string.list_dialog_remove, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int whichButton) {
+            public void onClick(final DialogInterface dialog, final int whichButton) {
                 removeListInternal();
             }
         });
@@ -1522,7 +1506,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
-    public static void startActivityHistory(Context context) {
+    public static void startActivityHistory(final Context context) {
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
         cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.HISTORY);
         context.startActivity(cachesIntent);
@@ -1546,7 +1530,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
-    private static boolean isValidCoords(AbstractActivity context, Geopoint coords) {
+    private static boolean isValidCoords(final AbstractActivity context, final Geopoint coords) {
         if (coords == null) {
             context.showToast(CgeoApplication.getInstance().getString(R.string.warn_no_coordinates));
             return false;
@@ -1588,7 +1572,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     // Loaders
 
     @Override
-    public Loader<SearchResult> onCreateLoader(int type, Bundle extras) {
+    public Loader<SearchResult> onCreateLoader(final int type, final Bundle extras) {
         if (type >= CacheListLoaderType.values().length) {
             throw new IllegalArgumentException("invalid loader type " + type);
         }
@@ -1691,7 +1675,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return loader;
     }
 
-    private void rememberTerm(String term) {
+    private void rememberTerm(final String term) {
         // set the title of the activity
         title = term;
         // and remember this term for potential use in list creation
@@ -1699,7 +1683,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     @Override
-    public void onLoadFinished(Loader<SearchResult> arg0, SearchResult searchIn) {
+    public void onLoadFinished(final Loader<SearchResult> arg0, final SearchResult searchIn) {
         // The database search was moved into the UI call intentionally. If this is done before the runOnUIThread,
         // then we have 2 sets of caches in memory. This can lead to OOM for huge cache lists.
         if (searchIn != null) {
@@ -1720,7 +1704,38 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     @Override
-    public void onLoaderReset(Loader<SearchResult> arg0) {
+    public void onLoaderReset(final Loader<SearchResult> arg0) {
         //Not interesting
+    }
+
+    /**
+     * Allow the title bar spinner to show the same subtitle like the activity itself would show.
+     *
+     * @param list
+     * @return
+     */
+    public CharSequence getCacheListSubtitle(@NonNull final AbstractList list) {
+        // if this is the current list, be aware of filtering
+        if (list.id == listId) {
+            return getCurrentSubtitle();
+        }
+        // otherwise return the overall number
+        return getCacheNumberString(getResources(), list.getCount());
+    }
+
+    /**
+     * Calculate the subtitle of the current list depending on (optional) filters.
+     *
+     * @return
+     */
+    private CharSequence getCurrentSubtitle() {
+        final ArrayList<String> numbers = new ArrayList<String>();
+        if (adapter.isFiltered()) {
+            numbers.add(getCacheNumberString(getResources(), adapter.getCount()));
+        }
+        if (search != null) {
+            numbers.add(getCacheNumberString(getResources(), search.getCount()));
+        }
+        return numbers.isEmpty() ? null : StringUtils.join(numbers, '/');
     }
 }

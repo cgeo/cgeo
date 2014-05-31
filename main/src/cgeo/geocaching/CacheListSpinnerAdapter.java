@@ -16,30 +16,30 @@ class CacheListSpinnerAdapter extends ArrayAdapter<AbstractList> {
         TextView subtitle;
     }
 
-    private final Context mContext;
+    private final CacheListActivity cacheListActivity;
 
-    public CacheListSpinnerAdapter(Context context, int resource) {
+    public CacheListSpinnerAdapter(final CacheListActivity context, final int resource) {
         super(context, resource);
-        mContext = context;
+        cacheListActivity = context;
     }
 
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, final ViewGroup parent) {
         return getCustomView(position, convertView, parent);
     }
 
 
     @Override
-    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+    public View getDropDownView(final int position, final View convertView, final ViewGroup parent) {
         return getCustomView(position, convertView, parent);
     }
 
     public View getCustomView(final int position, final View convertView, final ViewGroup parent) {
 
         View resultView = convertView;
-        LayoutInflater inflater =
-                (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final LayoutInflater inflater =
+                (LayoutInflater) cacheListActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 
         CacheListSpinnerAdapter.ViewHolder holder;
@@ -54,11 +54,11 @@ class CacheListSpinnerAdapter extends ArrayAdapter<AbstractList> {
             holder = (CacheListSpinnerAdapter.ViewHolder) resultView.getTag();
         }
 
-        AbstractList list = getItem(position);
+        final AbstractList list = getItem(position);
         holder.title.setText(list.getTitle());
         if (list.getCount() >= 0) {
             holder.subtitle.setVisibility(View.VISIBLE);
-            holder.subtitle.setText(CacheListActivity.getCacheNumberString(mContext.getResources(),list.getCount()));
+            holder.subtitle.setText(cacheListActivity.getCacheListSubtitle(list));
         } else {
             holder.subtitle.setVisibility(View.GONE);
         }
