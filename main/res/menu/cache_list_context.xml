@@ -33,6 +33,7 @@
     <item
         android:id="@+id/menu_drop_cache"
         cgeo:showAsAction="ifRoom|withText"
+        android:icon="@drawable/ic_menu_delete"
         android:title="@string/cache_offline_drop">
     </item>
     <item
@@ -48,11 +49,13 @@
     <item
         android:id="@+id/menu_refresh"
         cgeo:showAsAction="ifRoom|withText"
+        android:icon="@drawable/ic_menu_refresh"
         android:title="@string/cache_menu_refresh">
     </item>
     <item
         android:id="@+id/menu_store_cache"
         cgeo:showAsAction="ifRoom|withText"
+        android:icon="@drawable/ic_menu_save"
         android:title="@string/cache_offline_store">
     </item>
 

@@ -166,7 +166,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private Waypoint selectedWaypoint;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.cachedetail_activity);
 
         createSubscriptions = new CompositeSubscription();
@@ -279,7 +279,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         createViewPager(pageToOpen, new OnPageSelectedListener() {
 
             @Override
-            public void onPageSelected(int position) {
+            public void onPageSelected(final int position) {
                 if (Settings.isOpenLastDetailsPage()) {
                     Settings.setLastDetailsPage(position);
                 }
@@ -334,7 +334,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo info) {
+    public void onCreateContextMenu(final ContextMenu menu, final View view, final ContextMenu.ContextMenuInfo info) {
         super.onCreateContextMenu(menu, view, info);
         final int viewId = view.getId();
         switch (viewId) {
@@ -363,7 +363,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     @Override
-    public boolean onContextItemSelected(MenuItem item) {
+    public boolean onContextItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             // waypoints
             case R.id.menu_waypoint_edit:
@@ -422,20 +422,23 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         CacheMenuHandler.addMenuItems(this, menu, cache);
         return true;
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
+    public boolean onPrepareOptionsMenu(final Menu menu) {
         CacheMenuHandler.onPrepareOptionsMenu(menu, cache);
         LoggingUI.onPrepareOptionsMenu(menu, cache);
+        menu.findItem(R.id.menu_store).setVisible(!cache.isOffline());
+        menu.findItem(R.id.menu_delete).setVisible(cache.isOffline());
+        menu.findItem(R.id.menu_refresh).setVisible(cache.isOffline());
         return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         if (CacheMenuHandler.onMenuItemSelected(item, this, cache)) {
             return true;
         }
@@ -443,9 +446,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         final int menuItem = item.getItemId();
 
         switch (menuItem) {
-            case 0:
-                // no menu selected, but a new sub menu shown
-                return false;
+            case R.id.menu_delete:
+                dropCache();
+                return true;
+            case R.id.menu_store:
+                storeCache();
+                return true;
+            case R.id.menu_refresh:
+                refreshCache();
+                return true;
             default:
                 if (NavigationAppFactory.onMenuItemSelected(item, this, cache)) {
                     return true;
@@ -485,7 +494,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     private final static class LoadCacheHandler extends SimpleCancellableHandler {
 
-        public LoadCacheHandler(CacheDetailActivity activity, Progress progress) {
+        public LoadCacheHandler(final CacheDetailActivity activity, final Progress progress) {
             super(activity, progress);
         }
 
@@ -520,7 +529,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         private void updateStatusMsg(final String msg) {
-            CacheDetailActivity activity = ((CacheDetailActivity) activityRef.get());
+            final CacheDetailActivity activity = ((CacheDetailActivity) activityRef.get());
             if (activity == null) {
                 return;
             }
@@ -592,14 +601,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     /**
      * Wrapper for the referenced method in the xml-layout.
      */
-    public void goDefaultNavigation(@SuppressWarnings("unused") View view) {
+    public void goDefaultNavigation(@SuppressWarnings("unused") final View view) {
         startDefaultNavigation();
     }
 
     /**
      * referenced from XML view
      */
-    public void showNavigationMenu(@SuppressWarnings("unused") View view) {
+    public void showNavigationMenu(@SuppressWarnings("unused") final View view) {
         NavigationAppFactory.showNavigationMenu(this, cache, null, null, true, true);
     }
 
@@ -674,7 +683,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             attributeBox.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(final View v) {
                     // toggle between attribute icons and descriptions
                     toggleAttributeDisplay(attributeBox, attributeBoxMaxWidth);
                 }
@@ -699,7 +708,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          * lazy-creates the layout holding the icons of the caches attributes
          * and makes it visible
          */
-        private void showAttributeIcons(LinearLayout attribBox, int parentWidth) {
+        private void showAttributeIcons(final LinearLayout attribBox, final int parentWidth) {
             if (attributeIconsLayout == null) {
                 attributeIconsLayout = createAttributeIconsLayout(parentWidth);
                 // no matching icons found? show text
@@ -717,7 +726,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          * lazy-creates the layout holding the descriptions of the caches attributes
          * and makes it visible
          */
-        private void showAttributeDescriptions(LinearLayout attribBox) {
+        private void showAttributeDescriptions(final LinearLayout attribBox) {
             if (attributeDescriptionsLayout == null) {
                 attributeDescriptionsLayout = createAttributeDescriptionsLayout();
             }
@@ -729,7 +738,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         /**
          * toggle attribute descriptions and icons
          */
-        private void toggleAttributeDisplay(LinearLayout attribBox, int parentWidth) {
+        private void toggleAttributeDisplay(final LinearLayout attribBox, final int parentWidth) {
             // Don't toggle when there are no icons to show.
             if (noAttributeIconsFound) {
                 return;
@@ -743,7 +752,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
         }
 
-        private ViewGroup createAttributeIconsLayout(int parentWidth) {
+        private ViewGroup createAttributeIconsLayout(final int parentWidth) {
             final LinearLayout rows = new LinearLayout(CacheDetailActivity.this);
             rows.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
             rows.setOrientation(LinearLayout.VERTICAL);
@@ -808,7 +817,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             for (String attributeName : cache.getAttributes()) {
                 final boolean enabled = CacheAttribute.isEnabled(attributeName);
                 // search for a translation of the attribute
-                CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
+                final CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
                 if (attrib != null) {
                     attributeName = attrib.getL10n(enabled);
                 }
@@ -821,6 +830,54 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             attribView.setText(buffer);
 
             return descriptions;
+        }
+    }
+
+    private void refreshCache() {
+        if (progress.isShowing()) {
+            showToast(res.getString(R.string.err_detail_still_working));
+            return;
+        }
+
+        if (!Network.isNetworkConnected(getApplicationContext())) {
+            showToast(getString(R.string.err_server));
+            return;
+        }
+
+        final RefreshCacheHandler refreshCacheHandler = new RefreshCacheHandler(CacheDetailActivity.this, progress);
+
+        progress.show(CacheDetailActivity.this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
+
+        cache.refresh(refreshCacheHandler, Schedulers.io());
+    }
+
+    private void dropCache() {
+        if (progress.isShowing()) {
+            showToast(res.getString(R.string.err_detail_still_working));
+            return;
+        }
+
+        progress.show(CacheDetailActivity.this, res.getString(R.string.cache_dialog_offline_drop_title), res.getString(R.string.cache_dialog_offline_drop_message), true, null);
+        cache.drop(new ChangeNotificationHandler(CacheDetailActivity.this, progress), Schedulers.io());
+    }
+
+    private void storeCache() {
+        if (progress.isShowing()) {
+            showToast(res.getString(R.string.err_detail_still_working));
+            return;
+        }
+
+        if (Settings.getChooseList()) {
+            // let user select list to store cache in
+            new StoredList.UserInterface(CacheDetailActivity.this).promptForListSelection(R.string.list_title,
+                    new Action1<Integer>() {
+                        @Override
+                        public void call(final Integer selectedListId) {
+                            storeCache(selectedListId, new StoreCacheHandler(CacheDetailActivity.this, progress));
+                        }
+                    }, true, StoredList.TEMPORARY_LIST_ID);
+        } else {
+            storeCache(StoredList.TEMPORARY_LIST_ID, new StoreCacheHandler(CacheDetailActivity.this, progress));
         }
     }
 
@@ -966,59 +1023,23 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         private class StoreCacheClickListener implements View.OnClickListener {
             @Override
-            public void onClick(View arg0) {
-                if (progress.isShowing()) {
-                    showToast(res.getString(R.string.err_detail_still_working));
-                    return;
-                }
-
-                if (Settings.getChooseList()) {
-                    // let user select list to store cache in
-                    new StoredList.UserInterface(CacheDetailActivity.this).promptForListSelection(R.string.list_title,
-                            new Action1<Integer>() {
-                                @Override
-                                public void call(final Integer selectedListId) {
-                                    storeCache(selectedListId, new StoreCacheHandler(CacheDetailActivity.this, progress));
-                                }
-                            }, true, StoredList.TEMPORARY_LIST_ID);
-                } else {
-                    storeCache(StoredList.TEMPORARY_LIST_ID, new StoreCacheHandler(CacheDetailActivity.this, progress));
-                }
+            public void onClick(final View arg0) {
+                storeCache();
             }
 
         }
 
         private class RefreshCacheClickListener implements View.OnClickListener {
             @Override
-            public void onClick(View arg0) {
-                if (progress.isShowing()) {
-                    showToast(res.getString(R.string.err_detail_still_working));
-                    return;
-                }
-
-                if (!Network.isNetworkConnected(getApplicationContext())) {
-                    showToast(getString(R.string.err_server));
-                    return;
-                }
-
-                final RefreshCacheHandler refreshCacheHandler = new RefreshCacheHandler(CacheDetailActivity.this, progress);
-
-                progress.show(CacheDetailActivity.this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
-
-                cache.refresh(refreshCacheHandler, Schedulers.io());
+            public void onClick(final View arg0) {
+                refreshCache();
             }
         }
 
         private class DropCacheClickListener implements View.OnClickListener {
             @Override
-            public void onClick(View arg0) {
-                if (progress.isShowing()) {
-                    showToast(res.getString(R.string.err_detail_still_working));
-                    return;
-                }
-
-                progress.show(CacheDetailActivity.this, res.getString(R.string.cache_dialog_offline_drop_title), res.getString(R.string.cache_dialog_offline_drop_message), true, null);
-                cache.drop(new ChangeNotificationHandler(CacheDetailActivity.this, progress), Schedulers.io());
+            public void onClick(final View arg0) {
+                dropCache();
             }
         }
 
@@ -1026,7 +1047,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          * Abstract Listener for add / remove buttons for watchlist
          */
         private abstract class AbstractWatchlistClickListener implements View.OnClickListener {
-            public void doExecute(int titleId, int messageId, Thread thread) {
+            public void doExecute(final int titleId, final int messageId, final Thread thread) {
                 if (progress.isShowing()) {
                     showToast(res.getString(R.string.err_watchlist_still_managing));
                     return;
@@ -1047,7 +1068,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          */
         private class AddToWatchlistClickListener extends AbstractWatchlistClickListener {
             @Override
-            public void onClick(View arg0) {
+            public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_watchlist_add_title,
                         R.string.cache_dialog_watchlist_add_message,
                         new WatchlistAddThread(new SimpleUpdateHandler(CacheDetailActivity.this, progress)));
@@ -1059,7 +1080,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          */
         private class RemoveFromWatchlistClickListener extends AbstractWatchlistClickListener {
             @Override
-            public void onClick(View arg0) {
+            public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_watchlist_remove_title,
                         R.string.cache_dialog_watchlist_remove_message,
                         new WatchlistRemoveThread(new SimpleUpdateHandler(CacheDetailActivity.this, progress)));
@@ -1070,7 +1091,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         private class WatchlistAddThread extends Thread {
             private final Handler handler;
 
-            public WatchlistAddThread(Handler handler) {
+            public WatchlistAddThread(final Handler handler) {
                 this.handler = handler;
             }
 
@@ -1082,7 +1103,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     msg = Message.obtain(handler, MESSAGE_SUCCEEDED);
                 } else {
                     msg = Message.obtain(handler, MESSAGE_FAILED);
-                    Bundle bundle = new Bundle();
+                    final Bundle bundle = new Bundle();
                     bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, res.getString(R.string.err_watchlist_failed));
                     msg.setData(bundle);
                 }
@@ -1094,7 +1115,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         private class WatchlistRemoveThread extends Thread {
             private final Handler handler;
 
-            public WatchlistRemoveThread(Handler handler) {
+            public WatchlistRemoveThread(final Handler handler) {
                 this.handler = handler;
             }
 
@@ -1106,7 +1127,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     msg = Message.obtain(handler, MESSAGE_SUCCEEDED);
                 } else {
                     msg = Message.obtain(handler, MESSAGE_FAILED);
-                    Bundle bundle = new Bundle();
+                    final Bundle bundle = new Bundle();
                     bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, res.getString(R.string.err_watchlist_failed));
                     msg.setData(bundle);
                 }
@@ -1118,7 +1139,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         private class FavoriteAddThread extends Thread {
             private final Handler handler;
 
-            public FavoriteAddThread(Handler handler) {
+            public FavoriteAddThread(final Handler handler) {
                 this.handler = handler;
             }
 
@@ -1130,7 +1151,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     msg = Message.obtain(handler, MESSAGE_SUCCEEDED);
                 } else {
                     msg = Message.obtain(handler, MESSAGE_FAILED);
-                    Bundle bundle = new Bundle();
+                    final Bundle bundle = new Bundle();
                     bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, res.getString(R.string.err_favorite_failed));
                     msg.setData(bundle);
                 }
@@ -1142,7 +1163,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         private class FavoriteRemoveThread extends Thread {
             private final Handler handler;
 
-            public FavoriteRemoveThread(Handler handler) {
+            public FavoriteRemoveThread(final Handler handler) {
                 this.handler = handler;
             }
 
@@ -1154,7 +1175,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     msg = Message.obtain(handler, MESSAGE_SUCCEEDED);
                 } else {
                     msg = Message.obtain(handler, MESSAGE_FAILED);
-                    Bundle bundle = new Bundle();
+                    final Bundle bundle = new Bundle();
                     bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, res.getString(R.string.err_favorite_failed));
                     msg.setData(bundle);
                 }
@@ -1167,7 +1188,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          */
         private class FavoriteAddClickListener extends AbstractWatchlistClickListener {
             @Override
-            public void onClick(View arg0) {
+            public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_favorite_add_title,
                         R.string.cache_dialog_favorite_add_message,
                         new FavoriteAddThread(new SimpleUpdateHandler(CacheDetailActivity.this, progress)));
@@ -1179,7 +1200,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          */
         private class FavoriteRemoveClickListener extends AbstractWatchlistClickListener {
             @Override
-            public void onClick(View arg0) {
+            public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_favorite_remove_title,
                         R.string.cache_dialog_favorite_remove_message,
                         new FavoriteRemoveThread(new SimpleUpdateHandler(CacheDetailActivity.this, progress)));
@@ -1191,7 +1212,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          */
         private class ChangeListClickListener implements View.OnClickListener {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 new StoredList.UserInterface(CacheDetailActivity.this).promptForListSelection(R.string.list_title,
                         new Action1<Integer>() {
                             @Override
@@ -1208,7 +1229,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          * @param listId
          *            the ID of the list
          */
-        public void switchListById(int listId) {
+        public void switchListById(final int listId) {
             if (listId < 0) {
                 return;
             }
@@ -1311,7 +1332,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
-    private Observable<BitmapDrawable> previewMap = Observable.create(new OnSubscribe<BitmapDrawable>() {
+    private final Observable<BitmapDrawable> previewMap = Observable.create(new OnSubscribe<BitmapDrawable>() {
         @Override
         public void call(final Subscriber<? super BitmapDrawable> subscriber) {
             try {
@@ -1368,7 +1389,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     showDesc.setVisibility(View.VISIBLE);
                     showDesc.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(View arg0) {
+                        public void onClick(final View arg0) {
                             loadLongDescription();
                         }
                     });
@@ -1382,7 +1403,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final Button personalNoteEdit = (Button) view.findViewById(R.id.edit_personalnote);
             personalNoteEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(final View v) {
                     if (cache.isOffline()) {
                         editPersonalNote(cache, CacheDetailActivity.this);
                     } else {
@@ -1395,7 +1416,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 personalNoteUpload.setVisibility(View.VISIBLE);
                 personalNoteUpload.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onClick(final View v) {
                         if (StringUtils.length(cache.getPersonalNote()) > GCConstants.PERSONAL_NOTE_MAX_CHARS) {
                             warnPersonalNoteExceedsLimit();
                         } else {
@@ -1444,7 +1465,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 spoilerlinkView.setClickable(true);
                 spoilerlinkView.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View arg0) {
+                    public void onClick(final View arg0) {
                         if (cache == null || CollectionUtils.isEmpty(cache.getSpoilers())) {
                             showToast(res.getString(R.string.err_detail_no_spoiler));
                             return;
@@ -1467,7 +1488,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         private void uploadPersonalNote() {
             final SimpleCancellableHandler myHandler = new SimpleCancellableHandler(CacheDetailActivity.this, progress);
 
-            Message cancelMessage = myHandler.cancelMessage(res.getString(R.string.cache_personal_note_upload_cancelled));
+            final Message cancelMessage = myHandler.cancelMessage(res.getString(R.string.cache_personal_note_upload_cancelled));
             progress.show(CacheDetailActivity.this, res.getString(R.string.cache_personal_note_uploading), res.getString(R.string.cache_personal_note_uploading), true, cancelMessage);
 
             if (currentThread != null) {
@@ -1502,7 +1523,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     new DialogInterface.OnClickListener() {
 
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
+                public void onClick(final DialogInterface dialog, final int which) {
                     dialog.dismiss();
                     storeCache(StoredList.STANDARD_LIST_ID, new StoreCachePersonalNoteHandler(CacheDetailActivity.this, progress));
                 }
@@ -1515,7 +1536,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     new DialogInterface.OnClickListener() {
 
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        public void onClick(final DialogInterface dialog, final int which) {
                             dialog.dismiss();
                             uploadPersonalNote();
                         }
@@ -1654,12 +1675,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             view = (ListView) getLayoutInflater().inflate(R.layout.cachedetail_waypoints_page, null);
             view.setClickable(true);
-            View addWaypointButton = getLayoutInflater().inflate(R.layout.cachedetail_waypoints_footer, null);
+            final View addWaypointButton = getLayoutInflater().inflate(R.layout.cachedetail_waypoints_footer, null);
             view.addFooterView(addWaypointButton);
             addWaypointButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
-                public void onClick(View v) {
+                public void onClick(final View v) {
                     EditWaypointActivity.startActivityAddWaypoint(CacheDetailActivity.this, cache);
                     refreshOnResume = true;
                 }
@@ -1667,7 +1688,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             view.setAdapter(new ArrayAdapter<Waypoint>(CacheDetailActivity.this, R.layout.waypoint_item, sortedWaypoints) {
                 @Override
-                public View getView(int position, View convertView, ViewGroup parent) {
+                public View getView(final int position, final View convertView, final ViewGroup parent) {
                     View rowView = convertView;
                     if (null == rowView) {
                         rowView = getLayoutInflater().inflate(R.layout.waypoint_item, null);
@@ -1688,7 +1709,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return view;
         }
 
-        protected void fillViewHolder(View rowView, final WaypointViewHolder holder, final Waypoint wpt) {
+        protected void fillViewHolder(final View rowView, final WaypointViewHolder holder, final Waypoint wpt) {
             // coordinates
             final TextView coordinatesView = holder.coordinatesView;
             if (null != wpt.getCoords()) {
@@ -1751,13 +1772,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final View wpNavView = holder.wpNavView;
             wpNavView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(final View v) {
                     NavigationAppFactory.startDefaultNavigationApplication(1, CacheDetailActivity.this, wpt);
                 }
             });
             wpNavView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
-                public boolean onLongClick(View v) {
+                public boolean onLongClick(final View v) {
                     NavigationAppFactory.startDefaultNavigationApplication(2, CacheDetailActivity.this, wpt);
                     return true;
                 }
@@ -1766,7 +1787,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             addContextMenu(rowView);
             rowView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(final View v) {
                     selectedWaypoint = wpt;
                     openContextMenu(v);
                 }
@@ -1774,7 +1795,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             rowView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
-                public boolean onLongClick(View v) {
+                public boolean onLongClick(final View v) {
                     selectedWaypoint = wpt;
                     EditWaypointActivity.startActivityEditWaypoint(CacheDetailActivity.this, cache, wpt.getId());
                     refreshOnResume = true;
@@ -1787,7 +1808,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final WaypointType waypointType = wpt.getWaypointType();
             final Drawable icon;
             if (wpt.isVisited()) {
-                LayerDrawable ld = new LayerDrawable(new Drawable[] {
+                final LayerDrawable ld = new LayerDrawable(new Drawable[] {
                         res.getDrawable(waypointType.markerId),
                         res.getDrawable(R.drawable.tick) });
                 ld.setLayerInset(0, 0, 0, VISITED_INSET, VISITED_INSET);
@@ -1816,7 +1837,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             view.setAdapter(new ArrayAdapter<Trackable>(CacheDetailActivity.this, R.layout.simple_list_item_1, cache.getInventory()));
             view.setOnItemClickListener(new OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                public void onItemClick(final AdapterView<?> arg0, final View arg1, final int arg2, final long arg3) {
                     final Object selection = arg0.getItemAtPosition(arg2);
                     if (selection instanceof Trackable) {
                         final Trackable trackable = (Trackable) selection;
@@ -1856,11 +1877,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         view.setOnLongClickListener(new OnLongClickListener() {
 
             @Override
-            public boolean onLongClick(View v) {
+            public boolean onLongClick(final View v) {
                 startSupportActionMode(new ActionMode.Callback() {
 
                     @Override
-                    public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+                    public boolean onPrepareActionMode(final ActionMode actionMode, final Menu menu) {
                         switch (view.getId()) {
                             case R.id.value: // coordinates, gc-code, name
                                 assert view instanceof TextView;
@@ -1910,12 +1931,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     }
 
                     @Override
-                    public void onDestroyActionMode(ActionMode actionMode) {
+                    public void onDestroyActionMode(final ActionMode actionMode) {
                         // do nothing
                     }
 
                     @Override
-                    public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+                    public boolean onCreateActionMode(final ActionMode actionMode, final Menu menu) {
                         actionMode.getMenuInflater().inflate(R.menu.details_context, menu);
 
                         // Return true so that the action mode is shown
@@ -1923,7 +1944,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     }
 
                     @Override
-                    public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+                    public boolean onActionItemClicked(final ActionMode actionMode, final MenuItem menuItem) {
                         return onClipboardItemSelected(actionMode, menuItem, clickedItemText);
                     }
                 });
@@ -1951,7 +1972,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         builder.setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
 
             @Override
-            public void onClick(DialogInterface dialog, final int which) {
+            public void onClick(final DialogInterface dialog, final int which) {
                 dialog.dismiss();
                 final ProgressDialog progressDialog = ProgressDialog.show(CacheDetailActivity.this, getString(R.string.cache), getString(R.string.waypoint_reset), true);
                 final HandlerResetCoordinates handler = new HandlerResetCoordinates(CacheDetailActivity.this, progressDialog, which == 1);
@@ -1967,14 +1988,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         private final ProgressDialog progressDialog;
         private final boolean resetRemote;
 
-        protected HandlerResetCoordinates(CacheDetailActivity activity, ProgressDialog progressDialog, boolean resetRemote) {
+        protected HandlerResetCoordinates(final CacheDetailActivity activity, final ProgressDialog progressDialog, final boolean resetRemote) {
             super(activity);
             this.progressDialog = progressDialog;
             this.resetRemote = resetRemote;
         }
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(final Message msg) {
             if (msg.what == ResetCoordsThread.LOCAL) {
                 localFinished = true;
             } else {
@@ -2003,7 +2024,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         public static final int LOCAL = 0;
         public static final int ON_WEBSITE = 1;
 
-        public ResetCoordsThread(Geocache cache, Handler handler, final Waypoint wpt, boolean local, boolean remote, final ProgressDialog progress) {
+        public ResetCoordsThread(final Geocache cache, final Handler handler, final Waypoint wpt, final boolean local, final boolean remote, final ProgressDialog progress) {
             this.cache = cache;
             this.handler = handler;
             this.local = local;
@@ -2063,19 +2084,19 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         private Geocache cache = null;
         private CancellableHandler handler = null;
 
-        public UploadPersonalNoteThread(Geocache cache, CancellableHandler handler) {
+        public UploadPersonalNoteThread(final Geocache cache, final CancellableHandler handler) {
             this.cache = cache;
             this.handler = handler;
         }
 
         @Override
         public void run() {
-            IConnector con = ConnectorFactory.getConnector(cache);
+            final IConnector con = ConnectorFactory.getConnector(cache);
             if (con.supportsPersonalNote()) {
                 con.uploadPersonalNote(cache);
             }
-            Message msg = Message.obtain();
-            Bundle bundle = new Bundle();
+            final Message msg = Message.obtain();
+            final Bundle bundle = new Bundle();
             bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, res.getString(R.string.cache_personal_note_upload_done));
             msg.setData(bundle);
             handler.sendMessage(msg);
@@ -2083,7 +2104,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     @Override
-    protected String getTitle(Page page) {
+    protected String getTitle(final Page page) {
         // show number of waypoints directly in waypoint title
         if (page == Page.WAYPOINTS) {
             final int waypointCount = cache.getWaypoints().size();
@@ -2115,7 +2136,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     @Override
-    protected AbstractViewPagerActivity.PageViewCreator createViewCreator(Page page) {
+    protected AbstractViewPagerActivity.PageViewCreator createViewCreator(final Page page) {
         switch (page) {
             case DETAILS:
                 return new DetailsViewCreator();
@@ -2191,12 +2212,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     private static class StoreCacheHandler extends SimpleCancellableHandler {
 
-        public StoreCacheHandler(CacheDetailActivity activity, Progress progress) {
+        public StoreCacheHandler(final CacheDetailActivity activity, final Progress progress) {
             super(activity, progress);
         }
 
         @Override
-        public void handleRegularMessage(Message msg) {
+        public void handleRegularMessage(final Message msg) {
             if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
                 updateStatusMsg(R.string.cache_dialog_offline_save_message, (String) msg.obj);
             } else {
@@ -2207,12 +2228,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     private static final class RefreshCacheHandler extends SimpleCancellableHandler {
 
-        public RefreshCacheHandler(CacheDetailActivity activity, Progress progress) {
+        public RefreshCacheHandler(final CacheDetailActivity activity, final Progress progress) {
             super(activity, progress);
         }
 
         @Override
-        public void handleRegularMessage(Message msg) {
+        public void handleRegularMessage(final Message msg) {
             if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
                 updateStatusMsg(R.string.cache_dialog_refresh_message, (String) msg.obj);
             } else {
@@ -2223,24 +2244,24 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     private static final class ChangeNotificationHandler extends SimpleHandler {
 
-        public ChangeNotificationHandler(CacheDetailActivity activity, Progress progress) {
+        public ChangeNotificationHandler(final CacheDetailActivity activity, final Progress progress) {
             super(activity, progress);
         }
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(final Message msg) {
             notifyDatasetChanged(activityRef);
         }
     }
 
     private static final class SimpleUpdateHandler extends SimpleHandler {
 
-        public SimpleUpdateHandler(CacheDetailActivity activity, Progress progress) {
+        public SimpleUpdateHandler(final CacheDetailActivity activity, final Progress progress) {
             super(activity, progress);
         }
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(final Message msg) {
             if (msg.what == MESSAGE_FAILED) {
                 super.handleMessage(msg);
             } else {
@@ -2249,8 +2270,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
-    private static void notifyDatasetChanged(WeakReference<AbstractActivity> activityRef) {
-        CacheDetailActivity activity = ((CacheDetailActivity) activityRef.get());
+    private static void notifyDatasetChanged(final WeakReference<AbstractActivity> activityRef) {
+        final CacheDetailActivity activity = ((CacheDetailActivity) activityRef.get());
         if (activity != null) {
             activity.notifyDataSetChanged();
         }
@@ -2268,17 +2289,17 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     private static final class StoreCachePersonalNoteHandler extends StoreCacheHandler {
 
-        public StoreCachePersonalNoteHandler(CacheDetailActivity activity, Progress progress) {
+        public StoreCachePersonalNoteHandler(final CacheDetailActivity activity, final Progress progress) {
             super(activity, progress);
         }
 
         @Override
-        public void handleRegularMessage(Message msg) {
+        public void handleRegularMessage(final Message msg) {
             if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
                 updateStatusMsg(R.string.cache_dialog_offline_save_message, (String) msg.obj);
             } else {
                 dismissProgress();
-                CacheDetailActivity activity = (CacheDetailActivity) activityRef.get();
+                final CacheDetailActivity activity = (CacheDetailActivity) activityRef.get();
                 if (activity != null) {
                     editPersonalNote(activity.getCache(), activity);
                 }
@@ -2288,12 +2309,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     public static void editPersonalNote(final Geocache cache, final CacheDetailActivity activity) {
         if (cache.isOffline()) {
-            EditNoteDialogListener editNoteDialogListener = new EditNoteDialogListener() {
+            final EditNoteDialogListener editNoteDialogListener = new EditNoteDialogListener() {
                 @Override
                 public void onFinishEditNoteDialog(final String note) {
                     cache.setPersonalNote(note);
                     cache.parseWaypointsFromNote();
-                    TextView personalNoteView = (TextView) activity.findViewById(R.id.personalnote);
+                    final TextView personalNoteView = (TextView) activity.findViewById(R.id.personalnote);
                     setPersonalNote(personalNoteView, note);
                     DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                     activity.notifyDataSetChanged();
