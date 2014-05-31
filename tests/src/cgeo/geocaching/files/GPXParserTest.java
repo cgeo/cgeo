@@ -16,8 +16,6 @@ import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
@@ -320,7 +318,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(waymark).isNotNull();
         assertThat(waymark.getGeocode()).isEqualTo("WM7BM7");
         assertThat(waymark.getName()).isEqualTo("Roman water pipe Kornwestheim");
-        assertThat(StringUtils.isNotBlank(waymark.getBrowserUrl())).isTrue(); // connector must be able to create it
+        assertThat(waymark.getUrl()).isNotEmpty(); // connector must be able to create it
         assertThat(waymark.getType()).isEqualTo(CacheType.UNKNOWN);
         assertThat(waymark.getSize()).isEqualTo(CacheSize.UNKNOWN);
     }
