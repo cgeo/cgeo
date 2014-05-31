@@ -157,7 +157,7 @@ public class Waypoint implements IWaypoint {
     }
 
     public String getUrl() {
-        return "http://www.geocaching.com//seek/cache_details.aspx?wp=" + geocode;
+        return "http://www.geocaching.com/seek/cache_details.aspx?wp=" + geocode;
     }
 
     @Override

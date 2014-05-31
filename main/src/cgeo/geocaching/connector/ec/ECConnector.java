@@ -68,7 +68,7 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public String getCacheBrowserUrl(@NonNull Geocache cache) {
+    public String getCacheUrl(@NonNull Geocache cache) {
         return CACHE_URL + cache.getGeocode().replace("EC", "");
     }
 
@@ -178,7 +178,7 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public String getLicenseText(final @NonNull Geocache cache) {
         // NOT TO BE TRANSLATED
-        return "© " + cache.getOwnerDisplayName() + ", <a href=\"" + getCacheBrowserUrl(cache) + "\">" + getName() + "</a>, CC BY-NC-ND 3.0, alle Logeinträge © jeweiliger Autor";
+        return "© " + cache.getOwnerDisplayName() + ", <a href=\"" + getCacheUrl(cache) + "\">" + getName() + "</a>, CC BY-NC-ND 3.0, alle Logeinträge © jeweiliger Autor";
     }
 
     @Override

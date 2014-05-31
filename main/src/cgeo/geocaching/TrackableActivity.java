@@ -120,7 +120,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                     new ActivitySharingInterface() {
                         @Override
                         public String getUri() {
-                            return trackable.getCgeoUrl();
+                            return trackable.getUrl();
                         }
                     }
             );
@@ -228,7 +228,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 LogTrackableActivity.startActivity(this, trackable);
                 return true;
             case R.id.menu_browser_trackable:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getBrowserUrl())));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getUrl())));
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -238,7 +238,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     public boolean onPrepareOptionsMenu(Menu menu) {
         if (trackable != null) {
             menu.findItem(R.id.menu_log_touch).setVisible(StringUtils.isNotBlank(geocode) && trackable.isLoggable());
-            menu.findItem(R.id.menu_browser_trackable).setVisible(StringUtils.isNotBlank(trackable.getBrowserUrl()));
+            menu.findItem(R.id.menu_browser_trackable).setVisible(StringUtils.isNotBlank(trackable.getUrl()));
         }
         return super.onPrepareOptionsMenu(menu);
     }

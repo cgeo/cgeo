@@ -50,7 +50,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     private static final String CACHE_URL_SHORT = "http://coord.info/";
     // Double slash is used to force open in browser
-    private static final String CACHE_URL_LONG = "http://www.geocaching.com//seek/cache_details.aspx?wp=";
+    private static final String CACHE_URL_LONG = "http://www.geocaching.com/seek/cache_details.aspx?wp=";
     /**
      * Pocket queries downloaded from the website use a numeric prefix. The pocket query creator Android app adds a
      * verbatim "pocketquery" prefix.
@@ -84,17 +84,12 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public String getCgeoCacheUrl(@NonNull Geocache cache) {
-        return getLongCacheUrl(cache).replace("//", "/");
-    }
-
-    @Override
     public String getLongCacheUrl(@NonNull Geocache cache) {
         return CACHE_URL_LONG + cache.getGeocode();
     }
 
     @Override
-    public String getCacheBrowserUrl(@NonNull Geocache cache) {
+    public String getCacheUrl(@NonNull Geocache cache) {
         return CACHE_URL_SHORT + cache.getGeocode();
     }
 

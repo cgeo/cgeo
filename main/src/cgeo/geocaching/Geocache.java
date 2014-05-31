@@ -1,7 +1,9 @@
 package cgeo.geocaching;
 
+import android.os.Parcelable;
 import cgeo.geocaching.DataStore.StorageLocation;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.activity.SimpleWebviewActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ILoggingManager;
@@ -493,11 +495,27 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public void openInBrowser(Activity fromActivity) {
-        fromActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getBrowserCacheUrl())));
+        Intent viewIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getUrl()));
+
+        // Check if cgeo is the default, show the chooser to let the user choose a browser
+        if (viewIntent.resolveActivity(fromActivity.getPackageManager()).getPackageName().equals(fromActivity.getPackageName())) {
+            Intent chooser = Intent.createChooser(viewIntent, fromActivity.getString(R.string.cache_menu_browser));
+
+            Intent internalBrowser = new Intent(fromActivity, SimpleWebviewActivity.class);
+            internalBrowser.setData(Uri.parse(getUrl()));
+
+            chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Parcelable[] {internalBrowser});
+
+
+            fromActivity.startActivity(chooser);
+        }
+        else
+            fromActivity.startActivity(viewIntent);
     }
 
+
     private String getCacheUrl() {
-        return getConnector().getCacheBrowserUrl(this);
+        return getConnector().getCacheUrl(this);
     }
 
     private String getBrowserCacheUrl() {
@@ -718,16 +736,16 @@ public class Geocache implements ICache, IWaypoint {
         final Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT, subject.toString());
-        intent.putExtra(Intent.EXTRA_TEXT, getBrowserUrl());
+        intent.putExtra(Intent.EXTRA_TEXT, getUrl());
 
         return intent;
     }
 
-    public String getBrowserUrl() {
-        return getConnector().getCacheBrowserUrl(this);
+    public String getUrl() {
+        return getConnector().getCacheUrl(this);
     }
 
-    public String getCgeoUrl() { return getConnector().getCgeoCacheUrl(this); }
+    public String getCgeoUrl() { return getConnector().getCacheUrl(this); }
 
     public boolean supportsGCVote() {
         return StringUtils.startsWithIgnoreCase(geocode, "GC");

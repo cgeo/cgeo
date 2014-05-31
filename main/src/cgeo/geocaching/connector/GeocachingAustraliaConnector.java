@@ -14,7 +14,7 @@ public class GeocachingAustraliaConnector extends AbstractConnector {
     }
 
     @Override
-    public String getCacheBrowserUrl(final @NonNull Geocache cache) {
+    public String getCacheUrl(final @NonNull Geocache cache) {
         return getCacheUrlPrefix() + cache.getGeocode();
     }
 
