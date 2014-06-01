@@ -548,9 +548,7 @@
   <string name="map_view_map">Térkép nézet</string>
   <string name="map_modes">Térkép módok</string>
   <string name="map_trail_show">Ösvény mutatása</string>
-  <string name="map_trail_hide">Ösvény elrejtése</string>
   <string name="map_circles_show">Körök mutatása</string>
-  <string name="map_circles_hide">Körök elrejtése</string>
   <string name="map_theme_builtin">Alapértelmezett</string>
   <string name="map_theme_select">Válassz térképtémát</string>
   <string name="map_live_enable">Élő mód engedélyezése</string>

@@ -99,7 +99,6 @@
   <string name="log_smilies">Emoticonos</string>
   <string name="log_image">Imagen</string>
   <string name="log_image_attach">Adjuntar imagen</string>
-  <string name="log_image_edit">Editar imagen</string>
   <string name="log_image_stored">Galería</string>
   <string name="log_image_camera">Tomar foto</string>
   <string name="log_image_caption">Título</string>
@@ -594,9 +593,7 @@
   <string name="map_view_map">Ver mapa</string>
   <string name="map_modes">Configuración del mapa</string>
   <string name="map_trail_show">Mostrar rastro</string>
-  <string name="map_trail_hide">Ocultar rastro</string>
   <string name="map_circles_show">Mostrar círculos</string>
-  <string name="map_circles_hide">Ocultar círculos</string>
   <string name="map_theme_builtin">Por defecto</string>
   <string name="map_live_enable">Activar en vivo</string>
   <string name="map_live_disable">Desactivar en vivo</string>

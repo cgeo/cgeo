@@ -101,7 +101,6 @@
   <string name="log_smilies">Smilies</string>
   <string name="log_image">Imagine</string>
   <string name="log_image_attach">Ataşează imagine</string>
-  <string name="log_image_edit">Modifică imagine</string>
   <string name="log_image_stored">Existentă</string>
   <string name="log_image_camera">Nouă</string>
   <string name="log_image_caption">Titlu</string>
@@ -746,10 +745,7 @@
   <string name="map_view_map">Hărţi</string>
   <string name="map_modes">Opţiuni hărţi</string>
   <string name="map_trail_show">Arată traseu</string>
-  <string name="map_trail_hide">Ascunde traseu</string>
   <string name="map_circles_show">Arată cercurile</string>
-  <string name="map_circles_hide">Ascunde cercurile</string>
-  <string name="map_mycaches_show">Arată geocutiile mele/găsite</string>
   <string name="map_mycaches_hide">Ascunde geocutiile mele/găsite</string>
   <string name="map_theme_builtin">Implicit</string>
   <string name="map_theme_select">Alege un stil pentru hartă</string>

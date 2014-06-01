@@ -101,7 +101,6 @@
   <string name="log_smilies">Uśmiechy</string>
   <string name="log_image">Obraz</string>
   <string name="log_image_attach">Załącz obraz</string>
-  <string name="log_image_edit">Edytuj obraz</string>
   <string name="log_image_stored">Zapisany</string>
   <string name="log_image_camera">Nowy</string>
   <string name="log_image_caption">Podpis</string>
@@ -758,10 +757,7 @@
   <string name="map_view_map">Widok mapy</string>
   <string name="map_modes">Tryb mapy</string>
   <string name="map_trail_show">Pokaż szlak</string>
-  <string name="map_trail_hide">Ukryj szlak</string>
   <string name="map_circles_show">Pokaż okręgi</string>
-  <string name="map_circles_hide">Ukryj okręgi</string>
-  <string name="map_mycaches_show">Pokazuj własne/znalezione skrzynki</string>
   <string name="map_mycaches_hide">Ukryj własne/znalezione skrzynki</string>
   <string name="map_theme_builtin">Domyślny</string>
   <string name="map_theme_select">Wybierz motyw mapy</string>

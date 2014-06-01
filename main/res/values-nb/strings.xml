@@ -100,7 +100,6 @@
   <string name="log_smilies">Smilefjes</string>
   <string name="log_image">Bilde</string>
   <string name="log_image_attach">Legg ved bilde</string>
-  <string name="log_image_edit">Rediger bilde</string>
   <string name="log_image_stored">Eksisterende</string>
   <string name="log_image_camera">Nytt</string>
   <string name="log_image_caption">Bildetekst</string>
@@ -744,10 +743,7 @@
   <string name="map_view_map">Kart</string>
   <string name="map_modes">Kartinnstillinger</string>
   <string name="map_trail_show">Vis spor</string>
-  <string name="map_trail_hide">Skjul spor</string>
   <string name="map_circles_show">Vis sirkler</string>
-  <string name="map_circles_hide">Skjul sirkler</string>
-  <string name="map_mycaches_show">Vis egne og funnede cacher</string>
   <string name="map_mycaches_hide">Skjul egne og funnede cacher</string>
   <string name="map_theme_builtin">Standard</string>
   <string name="map_theme_select">Velg karttema</string>

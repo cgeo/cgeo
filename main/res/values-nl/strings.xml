@@ -101,7 +101,6 @@
   <string name="log_smilies">Smilies</string>
   <string name="log_image">Foto</string>
   <string name="log_image_attach">Foto koppelen</string>
-  <string name="log_image_edit">Foto bewerken</string>
   <string name="log_image_stored">Bestaande</string>
   <string name="log_image_camera">Nieuw</string>
   <string name="log_image_caption">Bijschrift</string>
@@ -763,10 +762,7 @@
   <string name="map_view_map">Kaart weergave</string>
   <string name="map_modes">Kaartinstellingen</string>
   <string name="map_trail_show">Toon spoor</string>
-  <string name="map_trail_hide">Verberg spoor</string>
   <string name="map_circles_show">Laat cirkels zien</string>
-  <string name="map_circles_hide">Verberg cirkels</string>
-  <string name="map_mycaches_show">Tonen eigen/gevonden caches</string>
   <string name="map_mycaches_hide">Verbergen eigen/gevonden caches</string>
   <string name="map_theme_builtin">Standaard</string>
   <string name="map_theme_select">Selecteer mapthema</string>

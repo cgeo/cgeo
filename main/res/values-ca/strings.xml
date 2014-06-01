@@ -101,7 +101,6 @@
   <string name="log_smilies">Emoticones</string>
   <string name="log_image">Imatge</string>
   <string name="log_image_attach">Adjunta una imatge</string>
-  <string name="log_image_edit">Edita la imatge</string>
   <string name="log_image_stored">Existent</string>
   <string name="log_image_camera">Nou</string>
   <string name="log_image_caption">Títol</string>
@@ -763,10 +762,7 @@
   <string name="map_view_map">Tria el mapa</string>
   <string name="map_modes">Configuració del mapa</string>
   <string name="map_trail_show">Mostra la ruta</string>
-  <string name="map_trail_hide">Amaga la ruta</string>
   <string name="map_circles_show">Mostra els cercles</string>
-  <string name="map_circles_hide">Amaga els cercles</string>
-  <string name="map_mycaches_show">Mostra els catxés propis/trobats</string>
   <string name="map_mycaches_hide">Amaga els catxés propis/trobats</string>
   <string name="map_theme_builtin">Per defecte</string>
   <string name="map_theme_select">Trieu els detalls del mapa</string>

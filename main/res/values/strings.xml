@@ -113,7 +113,6 @@
     <string name="log_smilies">Smilies</string>
     <string name="log_image">Image</string>
     <string name="log_image_attach">Attach Image</string>
-    <string name="log_image_edit">Edit Image</string>
     <string name="log_image_stored">Existing</string>
     <string name="log_image_camera">New</string>
     <string name="log_image_caption">Caption</string>
@@ -840,10 +839,7 @@
     <string name="map_view_map">Map view</string>
     <string name="map_modes">Map settings</string>
     <string name="map_trail_show">Show trail</string>
-    <string name="map_trail_hide">Hide trail</string>
     <string name="map_circles_show">Show circles</string>
-    <string name="map_circles_hide">Hide circles</string>
-    <string name="map_mycaches_show">Show own/found caches</string>
     <string name="map_mycaches_hide">Hide own/found caches</string>
     <string name="map_theme_builtin">Default</string>
     <string name="map_theme_select">Select map theme</string>

@@ -100,7 +100,6 @@
   <string name="log_smilies">Faccine</string>
   <string name="log_image">Immagine</string>
   <string name="log_image_attach">Aggiungi immagine</string>
-  <string name="log_image_edit">Modifica immagine</string>
   <string name="log_image_stored">Esistente</string>
   <string name="log_image_camera">Nuova</string>
   <string name="log_image_caption">Didascalia</string>
@@ -750,10 +749,7 @@
   <string name="map_view_map">Scegli mappa</string>
   <string name="map_modes">Modi mappa</string>
   <string name="map_trail_show">Mostra scia</string>
-  <string name="map_trail_hide">Nasconde scia</string>
   <string name="map_circles_show">Mostra area cache</string>
-  <string name="map_circles_hide">Nascondi area cache</string>
-  <string name="map_mycaches_show">Visualizza cache tuoi o che hai trovato</string>
   <string name="map_mycaches_hide">Nascondi i tuoi cache o che hai trovato</string>
   <string name="map_theme_builtin">Tema predefinito</string>
   <string name="map_theme_select">Scegli un tema mappa</string>

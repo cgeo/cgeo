@@ -101,7 +101,6 @@
   <string name="log_smilies">Sourillards</string>
   <string name="log_image">Image</string>
   <string name="log_image_attach">Ajouter une image</string>
-  <string name="log_image_edit">Éditer l\'image</string>
   <string name="log_image_stored">Existante</string>
   <string name="log_image_camera">Nouvelle</string>
   <string name="log_image_caption">Légende</string>
@@ -769,10 +768,7 @@
   <string name="map_view_map">Voir carte</string>
   <string name="map_modes">Marqueurs</string>
   <string name="map_trail_show">Afficher le parcours</string>
-  <string name="map_trail_hide">Cacher le parcours</string>
   <string name="map_circles_show">Afficher les cercles</string>
-  <string name="map_circles_hide">Cacher les cercles</string>
-  <string name="map_mycaches_show">Montrer les caches placées/trouvées</string>
   <string name="map_mycaches_hide">Cacher les caches placées/trouvées</string>
   <string name="map_theme_builtin">Défault</string>
   <string name="map_theme_select">Sélectionner le thème</string>

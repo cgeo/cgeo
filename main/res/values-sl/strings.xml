@@ -100,7 +100,6 @@
   <string name="log_smilies">Smeškoti</string>
   <string name="log_image">Slika</string>
   <string name="log_image_attach">Dodaj sliko</string>
-  <string name="log_image_edit">Uredi sliko</string>
   <string name="log_image_stored">Obstoječa</string>
   <string name="log_image_camera">Nova</string>
   <string name="log_image_caption">Naslov</string>
@@ -756,10 +755,7 @@
   <string name="map_view_map">Pogled zemljevida</string>
   <string name="map_modes">Možnosti</string>
   <string name="map_trail_show">Pokaži sled</string>
-  <string name="map_trail_hide">Skrij sled</string>
   <string name="map_circles_show">Pokaži kroge</string>
-  <string name="map_circles_hide">Skrij kroge</string>
-  <string name="map_mycaches_show">Pokaži lastne ali najdene zaklade</string>
   <string name="map_mycaches_hide">Skrij lastne ali najdene zaklade</string>
   <string name="map_theme_builtin">Privzeto</string>
   <string name="map_theme_select">Izberi temo zemljevida</string>

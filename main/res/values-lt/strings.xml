@@ -101,7 +101,6 @@
   <string name="log_smilies">Šypsenėlės</string>
   <string name="log_image">Nuotrauka</string>
   <string name="log_image_attach">Pridėti nuotrauką</string>
-  <string name="log_image_edit">Taisyti nuotrauką</string>
   <string name="log_image_stored">Esamą</string>
   <string name="log_image_camera">Naują</string>
   <string name="log_image_caption">Antraštė</string>
@@ -763,10 +762,7 @@
   <string name="map_view_map">Žemėlapio šaltinis</string>
   <string name="map_modes">Žemėlapio nustatymai</string>
   <string name="map_trail_show">Rodyti pėdsaką</string>
-  <string name="map_trail_hide">Slėpti pėdsaką</string>
   <string name="map_circles_show">Rodyti apskritimus</string>
-  <string name="map_circles_hide">Slėpti apskritimus</string>
-  <string name="map_mycaches_show">Rodyti savo/rastas slėptuves</string>
   <string name="map_mycaches_hide">Slėpti savo/rastas slėptuves</string>
   <string name="map_theme_builtin">Numatyta</string>
   <string name="map_theme_select">Pasirinkti žemėlapio temą</string>

@@ -98,7 +98,6 @@
   <string name="log_smilies">スマイルマーク</string>
   <string name="log_image">画像</string>
   <string name="log_image_attach">画像を添付</string>
-  <string name="log_image_edit">添付画像を変更</string>
   <string name="log_image_stored">ファイル選択</string>
   <string name="log_image_camera">撮影</string>
   <string name="log_image_caption">タイトル</string>
@@ -699,10 +698,7 @@
   <string name="map_view_map">地図の変更</string>
   <string name="map_modes">表示切替</string>
   <string name="map_trail_show">軌跡を表示</string>
-  <string name="map_trail_hide">軌跡を非表示</string>
   <string name="map_circles_show">0.1マイル円を表示</string>
-  <string name="map_circles_hide">円を非表示</string>
-  <string name="map_mycaches_show">所有/見つけたキャッシュを表示</string>
   <string name="map_mycaches_hide">所有/見つけたキャッシュを非表示</string>
   <string name="map_theme_builtin">デフォルト</string>
   <string name="map_theme_select">地図のテーマを選択</string>

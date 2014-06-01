@@ -100,7 +100,6 @@
   <string name="log_smilies">Smilies</string>
   <string name="log_image">Imagem</string>
   <string name="log_image_attach">Anexar Imagem</string>
-  <string name="log_image_edit">Editar Imagem</string>
   <string name="log_image_stored">Existente</string>
   <string name="log_image_camera">Nova</string>
   <string name="log_image_caption">Título</string>
@@ -753,10 +752,7 @@
   <string name="map_view_map">Vista de mapa</string>
   <string name="map_modes">Modos de mapa</string>
   <string name="map_trail_show">Mostrar caminho</string>
-  <string name="map_trail_hide">Esconder caminho</string>
   <string name="map_circles_show">Mostrar círculos</string>
-  <string name="map_circles_hide">Esconder círculos</string>
-  <string name="map_mycaches_show">Mostrar caches encontradas e minhas</string>
   <string name="map_mycaches_hide">Esconder caches encontradas e minhas</string>
   <string name="map_theme_builtin">Padrão</string>
   <string name="map_theme_select">Selecione o tema de mapa</string>

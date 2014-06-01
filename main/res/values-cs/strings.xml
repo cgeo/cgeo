@@ -99,7 +99,6 @@
   <string name="log_smilies">Smajlíci</string>
   <string name="log_image">Obrázek</string>
   <string name="log_image_attach">Připojit obrázek</string>
-  <string name="log_image_edit">Upravit obrázek</string>
   <string name="log_image_stored">Existující</string>
   <string name="log_image_camera">Nový</string>
   <string name="log_image_caption">Titulek</string>
@@ -750,10 +749,7 @@
   <string name="map_view_map">Vybrat typ mapy</string>
   <string name="map_modes">Režimy mapy</string>
   <string name="map_trail_show">Zobrazit záznam trasy</string>
-  <string name="map_trail_hide">Skrýt záznam trasy</string>
   <string name="map_circles_show">Zobrazit kruhy</string>
-  <string name="map_circles_hide">Skrýt kruhy</string>
-  <string name="map_mycaches_show">Zobrazovat vlastní/nalezené keše</string>
   <string name="map_mycaches_hide">Skrývat vlastní/nalezené keše</string>
   <string name="map_theme_builtin">Výchozí</string>
   <string name="map_theme_select">Vyber téma mapy</string>

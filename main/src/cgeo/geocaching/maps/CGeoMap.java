@@ -645,11 +645,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         try {
             MenuItem item = menu.findItem(R.id.menu_trail_mode);
-            if (Settings.isMapTrail()) {
-                item.setTitle(res.getString(R.string.map_trail_hide));
-            } else {
-                item.setTitle(res.getString(R.string.map_trail_show));
-            }
+            item.setChecked(Settings.isMapTrail());
 
             item = menu.findItem(R.id.menu_map_live); // live map
             if (isLiveEnabled) {
@@ -659,21 +655,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             }
 
             item = menu.findItem(R.id.menu_mycaches_mode); // own & found caches
-            if (Settings.isExcludeMyCaches()) {
-                item.setTitle(res.getString(R.string.map_mycaches_show));
-            } else {
-                item.setTitle(res.getString(R.string.map_mycaches_hide));
-            }
+            item.setChecked(Settings.isExcludeMyCaches());
 
             final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
             menu.findItem(R.id.menu_store_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport) && new SearchResult(geocodesInViewport).hasUnsavedCaches());
 
             item = menu.findItem(R.id.menu_circle_mode); // show circles
-            if (overlayCaches != null && overlayCaches.getCircles()) {
-                item.setTitle(res.getString(R.string.map_circles_hide));
-            } else {
-                item.setTitle(res.getString(R.string.map_circles_show));
-            }
+            item.setChecked(overlayCaches != null && overlayCaches.getCircles());
 
             item = menu.findItem(R.id.menu_theme_mode); // show theme selection
             item.setVisible(mapView.hasMapThemes());

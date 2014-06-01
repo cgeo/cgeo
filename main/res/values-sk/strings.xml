@@ -100,7 +100,6 @@
   <string name="log_smilies">Smajlíci</string>
   <string name="log_image">Obrázok</string>
   <string name="log_image_attach">Pripojiť obrázok</string>
-  <string name="log_image_edit">Upraviť obrázok</string>
   <string name="log_image_stored">Existujúci</string>
   <string name="log_image_camera">Nový</string>
   <string name="log_image_caption">Titulok</string>
@@ -746,10 +745,7 @@
   <string name="map_view_map">Zobrazenie mapy</string>
   <string name="map_modes">Režimy mapy</string>
   <string name="map_trail_show">Zobraziť záznam trasy</string>
-  <string name="map_trail_hide">Skryť záznam trasy</string>
   <string name="map_circles_show">Zobraziť kruhy</string>
-  <string name="map_circles_hide">Skryť kruhy</string>
-  <string name="map_mycaches_show">Zobraziť vlastné/nájdené cache</string>
   <string name="map_mycaches_hide">Skryť vlastné/nájdené cache</string>
   <string name="map_theme_builtin">Predvolené</string>
   <string name="map_theme_select">Vybrať tému mapy</string>

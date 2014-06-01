@@ -101,7 +101,6 @@
   <string name="log_smilies">Smileys</string>
   <string name="log_image">Bild</string>
   <string name="log_image_attach">Lägg till bild</string>
-  <string name="log_image_edit">Redigera bild</string>
   <string name="log_image_stored">Från fil</string>
   <string name="log_image_camera">Ny</string>
   <string name="log_image_caption">Bildtext</string>
@@ -763,10 +762,7 @@
   <string name="map_view_map">Karttyp</string>
   <string name="map_modes">Kartlägen</string>
   <string name="map_trail_show">Visa spår</string>
-  <string name="map_trail_hide">Dölj spår</string>
   <string name="map_circles_show">Visa cirklar</string>
-  <string name="map_circles_hide">Dölj cirklar</string>
-  <string name="map_mycaches_show">Visa egna/funna cacher</string>
   <string name="map_mycaches_hide">Dölj egna/funna cacher</string>
   <string name="map_theme_builtin">Standard</string>
   <string name="map_theme_select">Välj karttema</string>
