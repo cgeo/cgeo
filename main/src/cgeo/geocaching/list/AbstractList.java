@@ -22,7 +22,7 @@ public abstract class AbstractList {
 
     public abstract String getTitle();
 
-    public abstract int getCount();
+    public abstract int getNumberOfCaches();
 
     @Nullable
     public static AbstractList getListById(int listId) {

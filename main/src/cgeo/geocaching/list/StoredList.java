@@ -218,7 +218,7 @@ public final class StoredList extends AbstractList {
     }
 
     @Override
-    public int getCount() {
+    public int getNumberOfCaches() {
         return count;
     }
 

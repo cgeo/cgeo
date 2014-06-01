@@ -56,7 +56,7 @@ class CacheListSpinnerAdapter extends ArrayAdapter<AbstractList> {
 
         final AbstractList list = getItem(position);
         holder.title.setText(list.getTitle());
-        if (list.getCount() >= 0) {
+        if (list.getNumberOfCaches() >= 0) {
             holder.subtitle.setVisibility(View.VISIBLE);
             holder.subtitle.setText(cacheListActivity.getCacheListSubtitle(list));
         } else {

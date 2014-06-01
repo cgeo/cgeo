@@ -1719,7 +1719,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return getCurrentSubtitle();
         }
         // otherwise return the overall number
-        return getCacheNumberString(getResources(), list.getCount());
+        final int numberOfCaches = list.getNumberOfCaches();
+        if (numberOfCaches < 0) {
+            return StringUtils.EMPTY;
+        }
+        return getCacheNumberString(getResources(), numberOfCaches);
     }
 
     /**
