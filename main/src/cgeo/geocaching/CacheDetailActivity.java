@@ -589,6 +589,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         // rendering done! remove progress popup if any there
         invalidateOptionsMenuCompatible();
         progress.dismiss();
+
+        Settings.addCacheToHistory(cache.getGeocode());
     }
 
 

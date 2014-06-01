@@ -39,6 +39,7 @@ import android.preference.PreferenceManager;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -47,6 +48,7 @@ import java.util.Locale;
  */
 public class Settings {
 
+    private static final char HISTORY_SEPARATOR = ',';
     public static final int SHOW_WP_THRESHOLD_DEFAULT = 10;
     public static final int SHOW_WP_THRESHOLD_MAX = 50;
     private static final int MAP_SOURCE_DEFAULT = GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
@@ -63,7 +65,7 @@ public class Settings {
         Min,
         Sec;
 
-        public static CoordInputFormatEnum fromInt(int id) {
+        public static CoordInputFormatEnum fromInt(final int id) {
             final CoordInputFormatEnum[] values = CoordInputFormatEnum.values();
             if (id < 0 || id >= values.length) {
                 return Min;
@@ -91,7 +93,7 @@ public class Settings {
 
     private static void migrateSettings() {
         // migrate from non standard file location and integer based boolean types
-        int oldVersion = getInt(R.string.pref_settingsversion, 0);
+        final int oldVersion = getInt(R.string.pref_settingsversion, 0);
         if (oldVersion < 1) {
             final String oldPreferencesName = "cgeo.pref";
             final SharedPreferences old = CgeoApplication.getInstance().getSharedPreferences(oldPreferencesName, Context.MODE_PRIVATE);
@@ -173,13 +175,13 @@ public class Settings {
             e.putInt(getKey(R.string.pref_showwaypointsthreshold), wpThreshold);
 
             // KEY_MAP_SOURCE must be string, because it is the key for a ListPreference now
-            int ms = sharedPrefs.getInt(getKey(R.string.pref_mapsource), MAP_SOURCE_DEFAULT);
+            final int ms = sharedPrefs.getInt(getKey(R.string.pref_mapsource), MAP_SOURCE_DEFAULT);
             e.remove(getKey(R.string.pref_mapsource));
             e.putString(getKey(R.string.pref_mapsource), String.valueOf(ms));
 
             // navigation tool ids must be string, because ListPreference uses strings as keys
-            int dnt1 = sharedPrefs.getInt(getKey(R.string.pref_defaultNavigationTool), NavigationAppsEnum.COMPASS.id);
-            int dnt2 = sharedPrefs.getInt(getKey(R.string.pref_defaultNavigationTool2), NavigationAppsEnum.INTERNAL_MAP.id);
+            final int dnt1 = sharedPrefs.getInt(getKey(R.string.pref_defaultNavigationTool), NavigationAppsEnum.COMPASS.id);
+            final int dnt2 = sharedPrefs.getInt(getKey(R.string.pref_defaultNavigationTool2), NavigationAppsEnum.INTERNAL_MAP.id);
             e.remove(getKey(R.string.pref_defaultNavigationTool));
             e.remove(getKey(R.string.pref_defaultNavigationTool2));
             e.putString(getKey(R.string.pref_defaultNavigationTool), String.valueOf(dnt1));
@@ -258,7 +260,7 @@ public class Settings {
         return sharedPrefs.contains(getKey(prefKeyId));
     }
 
-    public static void setLanguage(boolean useEnglish) {
+    public static void setLanguage(final boolean useEnglish) {
         final Configuration config = new Configuration();
         config.locale = useEnglish ? Locale.ENGLISH : Locale.getDefault();
         final Resources resources = CgeoApplication.getInstance().getResources();
@@ -346,11 +348,11 @@ public class Settings {
         }
     }
 
-    public static boolean isOCConnectorActive(int isActivePrefKeyId) {
+    public static boolean isOCConnectorActive(final int isActivePrefKeyId) {
         return getBoolean(isActivePrefKeyId, false);
     }
 
-    public static boolean hasOCAuthorization(int tokenPublicPrefKeyId, int tokenSecretPrefKeyId) {
+    public static boolean hasOCAuthorization(final int tokenPublicPrefKeyId, final int tokenSecretPrefKeyId) {
         return StringUtils.isNotBlank(getString(tokenPublicPrefKeyId, ""))
                 && StringUtils.isNotBlank(getString(tokenSecretPrefKeyId, ""));
     }
@@ -424,7 +426,7 @@ public class Settings {
     }
 
     public static boolean setMapFile(final String mapFile) {
-        boolean result = putString(R.string.pref_mapfile, mapFile);
+        final boolean result = putString(R.string.pref_mapfile, mapFile);
         if (mapFile != null) {
             setMapFileDirectory(new File(mapFile).getParent());
         }
@@ -444,7 +446,7 @@ public class Settings {
     }
 
     public static boolean setMapFileDirectory(final String mapFileDirectory) {
-        boolean result = putString(R.string.pref_mapDirectory, mapFileDirectory);
+        final boolean result = putString(R.string.pref_mapDirectory, mapFileDirectory);
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
         return result;
     }
@@ -628,6 +630,7 @@ public class Settings {
     private final static int MAPNIK = 1;
     private final static int CYCLEMAP = 3;
     private final static int OFFLINE = 4;
+    private static final int HISTORY_SIZE = 10;
 
     /**
      * convert old preference ids for maps (based on constant values) into new hash based ids
@@ -680,8 +683,8 @@ public class Settings {
 
     public static Geopoint getAnyCoordinates() {
         if (contains(R.string.pref_anylatitude) && contains(R.string.pref_anylongitude)) {
-            float lat = getFloat(R.string.pref_anylatitude, 0);
-            float lon = getFloat(R.string.pref_anylongitude, 0);
+            final float lat = getFloat(R.string.pref_anylatitude, 0);
+            final float lon = getFloat(R.string.pref_anylongitude, 0);
             return new Geopoint(lat, lon);
         }
         return null;
@@ -764,7 +767,7 @@ public class Settings {
     }
 
     public static void setTwitterTokens(@Nullable final String tokenPublic,
-            @Nullable final String tokenSecret, boolean enableTwitter) {
+            @Nullable final String tokenSecret, final boolean enableTwitter) {
         putString(R.string.pref_twitter_token_public, tokenPublic);
         putString(R.string.pref_twitter_token_secret, tokenSecret);
         if (tokenPublic != null) {
@@ -781,8 +784,8 @@ public class Settings {
     }
 
     public static ImmutablePair<String, String> getTempToken() {
-        String tokenPublic = getString(R.string.pref_temp_twitter_token_public, null);
-        String tokenSecret = getString(R.string.pref_temp_twitter_token_secret, null);
+        final String tokenPublic = getString(R.string.pref_temp_twitter_token_public, null);
+        final String tokenSecret = getString(R.string.pref_temp_twitter_token_secret, null);
         return new ImmutablePair<String, String>(tokenPublic, tokenSecret);
     }
 
@@ -893,8 +896,8 @@ public class Settings {
     }
 
     public static File[] getMapThemeFiles() {
-        File directory = new File(Settings.getCustomRenderThemeBaseFolder());
-        List<File> result = new ArrayList<File>();
+        final File directory = new File(Settings.getCustomRenderThemeBaseFolder());
+        final List<File> result = new ArrayList<File>();
         FileUtils.listDir(result, directory, new ExtensionsBasedFileSelector(new String[] { "xml" }), null);
 
         return result.toArray(new File[result.size()]);
@@ -902,13 +905,13 @@ public class Settings {
 
     private static class ExtensionsBasedFileSelector extends FileSelector {
         private final String[] extensions;
-        public ExtensionsBasedFileSelector(String[] extensions) {
+        public ExtensionsBasedFileSelector(final String[] extensions) {
             this.extensions = extensions;
         }
         @Override
-        public boolean isSelected(File file) {
-            String filename = file.getName();
-            for (String ext : extensions) {
+        public boolean isSelected(final File file) {
+            final String filename = file.getName();
+            for (final String ext : extensions) {
                 if (StringUtils.endsWithIgnoreCase(filename, ext)) {
                     return true;
                 }
@@ -974,7 +977,7 @@ public class Settings {
         putLong(R.string.pref_fieldNoteExportDate, date);
     }
 
-    public static boolean isUseNavigationApp(NavigationAppsEnum navApp) {
+    public static boolean isUseNavigationApp(final NavigationAppsEnum navApp) {
         return getBoolean(navApp.preferenceKey, true);
     }
 
@@ -983,7 +986,7 @@ public class Settings {
      *
      * @param upload
      */
-    public static void setFieldNoteExportUpload(boolean upload) {
+    public static void setFieldNoteExportUpload(final boolean upload) {
         putBoolean(R.string.pref_fieldNoteExportUpload, upload);
     }
 
@@ -996,7 +999,7 @@ public class Settings {
      *
      * @param onlyNew
      */
-    public static void setFieldNoteExportOnlyNew(boolean onlyNew) {
+    public static void setFieldNoteExportOnlyNew(final boolean onlyNew) {
         putBoolean(R.string.pref_fieldNoteExportOnlyNew, onlyNew);
     }
 
@@ -1013,7 +1016,20 @@ public class Settings {
         return getInt(R.string.pref_changelog_last_version, 0);
     }
 
-    public static void setLastChangelogVersion(int version) {
+    public static void setLastChangelogVersion(final int version) {
         putInt(R.string.pref_changelog_last_version, version);
+    }
+
+    public static List<String> getLastOpenedCaches() {
+        final List<String> history = Arrays.asList(StringUtils.split(getString(R.string.pref_caches_history, StringUtils.EMPTY), HISTORY_SEPARATOR));
+        return history.subList(0, Math.min(HISTORY_SIZE, history.size()));
+    }
+
+    public static void addCacheToHistory(@NonNull final String geocode) {
+        final ArrayList<String> history = new ArrayList<String>(getLastOpenedCaches());
+        // bring entry to front, if it already existed
+        history.remove(geocode);
+        history.add(0, geocode);
+        putString(R.string.pref_caches_history, StringUtils.join(history, HISTORY_SEPARATOR));
     }
 }

@@ -1,6 +1,7 @@
 package cgeo.geocaching.search;
 
 import cgeo.geocaching.DataStore;
+import cgeo.geocaching.Geocache;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -11,8 +12,6 @@ import android.database.Cursor;
 import android.net.Uri;
 
 public class SuggestionProvider extends ContentProvider {
-
-    private static Cursor lastCursor;
 
     @Override
     public boolean onCreate() {
@@ -29,14 +28,21 @@ public class SuggestionProvider extends ContentProvider {
         final String searchTerm = uri.getLastPathSegment();
         // can be empty when deleting the query
         if (StringUtils.equals(searchTerm, SearchManager.SUGGEST_URI_PATH_QUERY)) {
-            return lastCursor;
+            return getLastOpenedCaches();
         }
         return getSuggestions(searchTerm);
     }
 
+    private static Cursor getLastOpenedCaches() {
+        final SearchSuggestionCursor resultCursor = new SearchSuggestionCursor();
+        for (final Geocache geocache : DataStore.getLastOpenedCaches()) {
+            resultCursor.addCache(geocache.getGeocode(), geocache.getName());
+        }
+        return resultCursor;
+    }
+
     private static Cursor getSuggestions(final String searchTerm) {
-        lastCursor = DataStore.findSuggestions(searchTerm);
-        return lastCursor;
+        return DataStore.findSuggestions(searchTerm);
     }
 
     @Override
