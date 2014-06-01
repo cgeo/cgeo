@@ -36,7 +36,7 @@ public class SuggestionProvider extends ContentProvider {
     private static Cursor getLastOpenedCaches() {
         final SearchSuggestionCursor resultCursor = new SearchSuggestionCursor();
         for (final Geocache geocache : DataStore.getLastOpenedCaches()) {
-            resultCursor.addCache(geocache.getGeocode(), geocache.getName());
+            resultCursor.addCache(geocache.getGeocode(), geocache.getName(), geocache.getType().id);
         }
         return resultCursor;
     }

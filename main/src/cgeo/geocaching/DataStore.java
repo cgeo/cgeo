@@ -3101,7 +3101,7 @@ public class DataStore {
     private static void findCaches(final SearchSuggestionCursor resultCursor, final String selectionArg) {
         final Cursor cursor = database.query(
                 dbTableCaches,
-                new String[] { "geocode", "name" },
+                new String[] { "geocode", "name", "type" },
                 "geocode IS NOT NULL AND geocode != '' AND (geocode LIKE ? OR name LIKE ? OR owner LIKE ?)",
                 new String[] { selectionArg, selectionArg, selectionArg },
                 null,
@@ -3110,7 +3110,8 @@ public class DataStore {
         while (cursor.moveToNext()) {
             final String geocode = cursor.getString(0);
             final String cacheName = cursor.getString(1);
-            resultCursor.addCache(geocode, cacheName);
+            final String type = cursor.getString(2);
+            resultCursor.addCache(geocode, cacheName, type);
         }
         cursor.close();
     }
