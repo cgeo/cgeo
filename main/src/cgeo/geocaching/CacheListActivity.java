@@ -433,6 +433,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      */
     CacheListSpinnerAdapter mCacheListSpinnerAdapter;
 
+    /**
+     * remember current filter when switching between lists, so it can be re-applied afterwards
+     */
+    private IFilter currentFilter = null;
+
     private void initActionBarSpinner() {
         mCacheListSpinnerAdapter = new CacheListSpinnerAdapter(this, R.layout.support_simple_spinner_dropdown_item);
         getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
@@ -937,6 +942,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private boolean setFilter(final IFilter filter) {
+        currentFilter = filter;
         adapter.setFilter(filter);
         prepareFilterBar();
         updateTitle();
@@ -959,6 +965,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final ListView list = getListView();
         registerForContextMenu(list);
         adapter = new CacheListAdapter(this, cacheList, type);
+        adapter.setFilter(currentFilter);
 
         if (listFooter == null) {
             listFooter = getLayoutInflater().inflate(R.layout.cacheslist_footer, null);
