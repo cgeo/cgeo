@@ -432,9 +432,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     public boolean onPrepareOptionsMenu(final Menu menu) {
         CacheMenuHandler.onPrepareOptionsMenu(menu, cache);
         LoggingUI.onPrepareOptionsMenu(menu, cache);
-        menu.findItem(R.id.menu_store).setVisible(!cache.isOffline());
-        menu.findItem(R.id.menu_delete).setVisible(cache.isOffline());
-        menu.findItem(R.id.menu_refresh).setVisible(cache.isOffline());
+        menu.findItem(R.id.menu_store).setVisible(cache != null && !cache.isOffline());
+        menu.findItem(R.id.menu_delete).setVisible(cache != null && cache.isOffline());
+        menu.findItem(R.id.menu_refresh).setVisible(cache != null && cache.isOffline());
         return super.onPrepareOptionsMenu(menu);
     }
 
