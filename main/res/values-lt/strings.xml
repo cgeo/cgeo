@@ -245,7 +245,7 @@
   <string name="caches_store_offline">Išsaugoti slėptuves</string>
   <string name="caches_store_selected">Išsaugoti pasirinktas</string>
   <string name="caches_history">Istorija</string>
-  <string name="caches_on_map">Žemėlapyje</string>
+  <string name="caches_on_map">Rodyti žemėlapyje</string>
   <string name="caches_sort">Rūšiuoti</string>
   <string name="caches_sort_title">Rūšiuoti pagal</string>
   <string name="caches_sort_distance">Atstumą</string>

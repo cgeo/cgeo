@@ -18,7 +18,7 @@
   <string name="letterbox">Boîtes aux lettres hybrides</string>
   <string name="event">Événements</string>
   <string name="mega">Méga-événements</string>
-  <string name="giga">Giga-événement</string>
+  <string name="giga">Giga-événements</string>
   <string name="earth">Earthcache</string>
   <string name="cito">Cache in trash out</string>
   <string name="webcam">Webcams</string>
@@ -282,7 +282,6 @@
   <string name="caches_move_all">Tout déplacer</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Exporter vers Locus</string>
-  <string name="caches_map_mapswithme">MapsWithMe</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Recopier le texte se trouvant dans l\'image pour charger les coordonnées des caches. Cette étape peut être désactivée dans les Paramètres.</string>
   <string name="caches_recaptcha_hint">Texte de l\'image</string>
@@ -542,9 +541,6 @@
   <string name="auth_dialog_completed_twitter">c:geo est maintenant autorisé à poster sur Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
-  <string name="auth_ocnl">opencaching.nl</string>
-  <string name="auth_ocus">opencaching.us</string>
-  <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_dialog_completed_oc">c:geo est désormais autorisé à interagir avec %s.</string>
   <plurals name="cache_counts">
     <item quantity="one">%1$d cache</item>
@@ -652,7 +648,6 @@
   <string name="cache_menu_cachebeacon">Cache Beacon</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
-  <string name="cache_menu_mapswithme">MapsWithMe</string>
   <string name="cache_status">Statut</string>
   <string name="cache_status_offline_log">Visite sauvée hors-ligne</string>
   <string name="cache_status_found">Trouvée</string>
