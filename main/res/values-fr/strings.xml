@@ -18,6 +18,7 @@
   <string name="letterbox">Boîtes aux lettres hybrides</string>
   <string name="event">Événements</string>
   <string name="mega">Méga-événements</string>
+  <string name="giga">Giga-événement</string>
   <string name="earth">Earthcache</string>
   <string name="cito">Cache in trash out</string>
   <string name="webcam">Webcams</string>
@@ -79,9 +80,21 @@
   <string name="log_saving_and_uploading">Envoi de la note et de l\'image…</string>
   <string name="log_clear">Effacer</string>
   <string name="log_post">Envoyer</string>
+  <string name="log_post_rate">Envoyer &amp; noter</string>
+  <string name="log_post_no_rate">Envoyer &amp; ne pas noter</string>
   <string name="log_post_not_possible">Chargement de la page…</string>
   <string name="log_add">Ajouter</string>
+  <string name="log_rating">Note</string>
   <string name="log_no_rating">Pas de note</string>
+  <string name="log_stars_1">1 étoile</string>
+  <string name="log_stars_15">1,5 étoiles</string>
+  <string name="log_stars_2">2 étoiles</string>
+  <string name="log_stars_25">2,5 étoiles</string>
+  <string name="log_stars_3">3 étoiles</string>
+  <string name="log_stars_35">3,5 étoiles</string>
+  <string name="log_stars_4">4 étoiles</string>
+  <string name="log_stars_45">4,5 étoiles</string>
+  <string name="log_stars_5">5 étoiles</string>
   <string name="log_stars_1_description">faible</string>
   <string name="log_stars_15_description">plutôt faible</string>
   <string name="log_stars_2_description">en dessous de la moyenne</string>
@@ -215,6 +228,7 @@
   <string name="loc_trying">Localisation en cours…</string>
   <string name="loc_no_addr">Adresse inconnue</string>
   <string name="loc_gps_disabled">GPS désactivé</string>
+  <string name="menu_centerposition">Centrer sur ma position</string>
   <string name="menu_about">À propos de c:geo</string>
   <string name="menu_helpers">Utilitaires</string>
   <string name="menu_settings">Paramètres</string>
@@ -281,6 +295,7 @@
   <string name="caches_move_all">Tout déplacer</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Exporter vers Locus</string>
+  <string name="caches_map_mapswithme">MapsWithMe</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Recopier le texte se trouvant dans l\'image pour charger les coordonnées des caches. Cette étape peut être désactivée dans les Paramètres.</string>
   <string name="caches_recaptcha_hint">Texte de l\'image</string>
@@ -399,6 +414,8 @@
   <string name="init_signature_template_log">Texte du journal</string>
   <string name="init_ratingwanted">Charger la note depuis GCvote.com</string>
   <string name="init_summary_ratingwanted">Charger la note depuis GCvote.com</string>
+  <string name="init_friends_and_own_logs_wanted">Montrer vos entrées / amis</string>
+  <string name="init_summary_friends_and_own_logs_wanted">Afficher une page de carnet supplémentaire avec vos entrées de carnet et celles de vos amis</string>
   <string name="init_openlastdetailspage">Réouvrir les détails à la dernière page ouverte</string>
   <string name="init_summary_openlastdetailspage">Réouvrir les détails à la dernière page ouverte</string>
   <string name="init_autoload">Afficher automatiquement les descriptions longues</string>
@@ -410,6 +427,8 @@
   <string name="init_captcha">Afficher le CAPTCHA si nécessaire</string>
   <string name="init_summary_captcha">Afficher le CAPTCHA si nécessaire</string>
   <string name="init_useenglish">Utiliser l\'anglais dans c:geo\n(redémarrage nécessaire)</string>
+  <string name="init_showoverflowmenu">Toujours afficher le menu</string>
+  <string name="init_showoverflow_summary">Toujours afficher le symbole pour obtenir le menu (trois points⋮) même si l\'appareil a un bouton menu (redémarrage nécessaire)</string>
   <string name="init_summary_useenglish">Utiliser l\'anglais dans c:geo\n(redémarrage nécessaire)</string>
   <string name="init_exclude">Exclure mes caches et les caches trouvées</string>
   <string name="init_summary_exclude">Exclure mes caches et les caches trouvées</string>
@@ -487,6 +506,9 @@
   <string name="init_maintenance">Maintenance</string>
   <string name="init_maintenance_directories_note">c:geo stocke les images et les autres fichiers associés à une géocache dans un dossier dédié. Dans certains cas (comme l\'importation/exportation de la base de données), ce dossier peut contenir des fichiers obsolètes, qui peuvent être supprimés ici.</string>
   <string name="init_maintenance_directories">Supprimer les fichiers orphelins</string>
+  <string name="init_create_memory_dump">Créer une image mémoire</string>
+  <string name="init_memory_dump">Image mémoire</string>
+  <string name="init_memory_dumped">Mémoire copiée dans %s</string>
   <string name="settings_open_website">Ouvrir le site dans un navigateur</string>
   <string name="settings_settings">Paramètres</string>
   <string name="settings_information">Information</string>
@@ -533,9 +555,12 @@
   <string name="auth_dialog_completed_twitter">c:geo est maintenant autorisé à poster sur Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
+  <string name="auth_ocnl">opencaching.nl</string>
+  <string name="auth_ocus">opencaching.us</string>
+  <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_dialog_completed_oc">c:geo est désormais autorisé à interagir avec %s.</string>
   <plurals name="cache_counts">
-    <item quantity="one">une cache</item>
+    <item quantity="one">%1$d cache</item>
     <item quantity="other">%1$d caches</item>
   </plurals>
   <string name="cache_offline">Hors ligne</string>
@@ -589,6 +614,7 @@
   <string name="cache_waypoints_add">Ajouter une étape</string>
   <string name="cache_hint">Indice</string>
   <string name="cache_logs">Carnet de bord</string>
+  <string name="cache_logs_friends_and_own">Vous / amis</string>
   <string name="cache_dialog_loading_details">Chargement des détails…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Chargement de la page</string>
   <string name="cache_dialog_loading_details_status_details">Analyse</string>
@@ -634,14 +660,17 @@
   <string name="cache_menu_refresh">Recharger</string>
   <string name="cache_menu_share">Partager la cache</string>
   <string name="cache_menu_move_list">Déplacer dans une autre liste</string>
+  <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_cachebeacon">Cache Beacon</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
+  <string name="cache_menu_mapswithme">MapsWithMe</string>
   <string name="cache_status">Statut</string>
   <string name="cache_status_offline_log">Visite sauvée hors-ligne</string>
   <string name="cache_status_found">Trouvée</string>
+  <string name="cache_not_status_found">Pas trouvée</string>
   <string name="cache_status_archived">Archivée</string>
   <string name="cache_status_disabled">Désactivée</string>
   <string name="cache_status_premium">Membres privilégiés seulement</string>
@@ -1110,6 +1139,7 @@
   <string name="website">site: <a href="">cgeo.org</a></string>
   <string name="facebook">facebook: <a href="">page c:geo</a></string>
   <string name="twitter">twitter: <a href="">@android_GC</a></string>
+  <string name="nutshellmanual">Manuel: <a href="">c:geo en bref</a></string>
   <string name="market">Android: <a href="">c:geo sur Google Play</a></string>
   <string name="about_twitter">Voulez-vous publier un nouveau statut sur Twitter à chaque nouvelle cache découverte sous <b>c:geo</b>?</string>
   <string name="faq">FAQ: <a href="">faq.cgeo.org</a></string>
