@@ -1,18 +1,20 @@
 package cgeo.geocaching.loaders;
 
 import cgeo.geocaching.DataStore;
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.settings.Settings;
 
 import android.content.Context;
+import android.os.Bundle;
 
 public class OfflineGeocacheListLoader extends AbstractSearchLoader {
 
-    private int listId;
-    private Geopoint searchCenter;
+    private final int listId;
+    private final Geopoint searchCenter;
 
-    public OfflineGeocacheListLoader(Context context, Geopoint searchCenter, int listId) {
+    public OfflineGeocacheListLoader(final Context context, final Geopoint searchCenter, final int listId) {
         super(context);
         this.searchCenter = searchCenter;
         this.listId = listId;
@@ -23,12 +25,14 @@ public class OfflineGeocacheListLoader extends AbstractSearchLoader {
         return DataStore.getBatchOfStoredCaches(searchCenter, Settings.getCacheType(), listId);
     }
 
-    public void setListId(int listId) {
-        this.listId = listId;
-    }
-
-    public void setSearchCenter(Geopoint searchCenter) {
-        this.searchCenter = searchCenter;
+    /**
+     * @param listId
+     * @return the bundle needed for querying the LoaderManager for the offline list with the given id
+     */
+    public static Bundle getBundleForList(final int listId) {
+        final Bundle bundle = new Bundle();
+        bundle.putInt(Intents.EXTRA_LIST_ID, listId);
+        return bundle;
     }
 
 }

@@ -59,6 +59,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Subscription;
 import rx.functions.Action1;
@@ -786,13 +787,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public void showFilterMenu(final View view) {
         new FilterUserInterface(this).selectFilter(new Action1<IFilter>() {
             @Override
-            public void call(final IFilter selectedFilter) {
-                if (selectedFilter != null) {
-                    setFilter(selectedFilter);
-                } else {
-                    // clear filter
-                    setFilter(null);
-                }
+            public void call(@Nullable final IFilter selectedFilter) {
+                setFilter(selectedFilter);
             }
         });
     }
@@ -1375,11 +1371,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         showFooterLoadingCaches();
         DataStore.moveToList(adapter.getCheckedCaches(), listId);
 
-        currentLoader = (OfflineGeocacheListLoader) getSupportLoaderManager().initLoader(CacheListType.OFFLINE.getLoaderId(), new Bundle(), this);
-        currentLoader.reset();
-        ((OfflineGeocacheListLoader) currentLoader).setListId(listId);
-        ((OfflineGeocacheListLoader) currentLoader).setSearchCenter(coords);
-        currentLoader.startLoading();
+        currentLoader = (OfflineGeocacheListLoader) getSupportLoaderManager().restartLoader(CacheListType.OFFLINE.getLoaderId(), OfflineGeocacheListLoader.getBundleForList(listId), this);
 
         invalidateOptionsMenuCompatible();
     }
