@@ -1,9 +1,11 @@
 package cgeo.geocaching.activity;
 
+import cgeo.geocaching.R;
+
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import cgeo.geocaching.R;
 
 public class SimpleWebviewActivity extends AbstractActionBarActivity {
 
@@ -11,13 +13,15 @@ public class SimpleWebviewActivity extends AbstractActionBarActivity {
 
     class SimplelWebviewClient extends WebViewClient {
         @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+        public boolean shouldOverrideUrlLoading(final WebView view, final String url) {
             webview.loadUrl(url);
             return true;
         }
     }
+
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.internal_browser);
 
         webview = (WebView) findViewById(R.id.webview);
