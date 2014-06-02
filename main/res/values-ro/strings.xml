@@ -215,6 +215,7 @@
   <string name="loc_trying">Încerc să determin poziţia</string>
   <string name="loc_no_addr">Adresă necunoscută</string>
   <string name="loc_gps_disabled">GPS inactiv</string>
+  <string name="menu_centerposition">Centrează pe poziţia mea</string>
   <string name="menu_about">Despre c:geo</string>
   <string name="menu_helpers">Programe utilitare</string>
   <string name="menu_settings">Setări</string>
@@ -396,6 +397,8 @@
   <string name="init_signature_template_log">Text însemnare</string>
   <string name="init_ratingwanted">Voturi GCvote</string>
   <string name="init_summary_ratingwanted">Încarcă voturi de la GCvote.com</string>
+  <string name="init_friends_and_own_logs_wanted">Arată ale mele/ale prietenilor</string>
+  <string name="init_summary_friends_and_own_logs_wanted">Afişează pagină de jurnal separată pentru însemnările proprii şi ale prietenilor</string>
   <string name="init_openlastdetailspage">Ultima pagină cu detalii</string>
   <string name="init_summary_openlastdetailspage">Arată detaliile de pe ultima pagină afişată</string>
   <string name="init_autoload">Descriere completă</string>
@@ -407,6 +410,8 @@
   <string name="init_captcha">Arată CAPTCHA</string>
   <string name="init_summary_captcha">Arată CAPTCHA dacă este necesar (doar Basic Member)</string>
   <string name="init_useenglish">Foloseşte limba engleză</string>
+  <string name="init_showoverflowmenu">Afişează întotdeauna meniul suprapus</string>
+  <string name="init_showoverflow_summary">Afişează întotdeauna meniul suprapus (trei puncte ⋮) chiar dacă dispozitivul are buton pentru meniu (necesită repornirea aplicaţiei)</string>
   <string name="init_summary_useenglish">Foloseşte limba engleză în c:geo (Aplicaţia trebuie repornită)</string>
   <string name="init_exclude">Exclude Găsite şi Ale mele</string>
   <string name="init_summary_exclude">Exclude cutiile găsite şi cele proprii</string>
@@ -484,6 +489,9 @@
   <string name="init_maintenance">Întreţinere</string>
   <string name="init_maintenance_directories_note">c:geo salvează imagini, imagini din însemnări şi alte fişiere legate de o geocutie într-un dosar separat. Este posibil ca în unele cazuri (precum import/export al bazei de date) acest dosar să conţină fişiere vechi ce pot fi şterse aici.</string>
   <string name="init_maintenance_directories">Şterge fişierele devenite inutile</string>
+  <string name="init_create_memory_dump">Creează un extras de memorie copie după memoria folosită de aplicaţie</string>
+  <string name="init_memory_dump">Extras de memorie</string>
+  <string name="init_memory_dumped">Extras de memorie salvat în %s</string>
   <string name="settings_open_website">Intră pe site</string>
   <string name="settings_settings">Opţiuni</string>
   <string name="settings_information">Informaţii</string>
@@ -580,6 +588,7 @@
   <string name="cache_waypoints_add">Adaugă punct</string>
   <string name="cache_hint">Indiciu</string>
   <string name="cache_logs">Jurnal</string>
+  <string name="cache_logs_friends_and_own">Însemnări proprii/de la prieteni</string>
   <string name="cache_dialog_loading_details">Încărcare detaliile cutiei…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Încărcare pagină</string>
   <string name="cache_dialog_loading_details_status_details">Prelucrare detalii</string>
@@ -634,6 +643,7 @@
   <string name="cache_status">Stare</string>
   <string name="cache_status_offline_log">Jurnal salvat</string>
   <string name="cache_status_found">Găsit</string>
+  <string name="cache_not_status_found">Nu a fost găsită</string>
   <string name="cache_status_archived">Arhivată</string>
   <string name="cache_status_disabled">Inactivă</string>
   <string name="cache_status_premium">Doar membrii Premium</string>
@@ -1123,4 +1133,5 @@
   <string name="percent_favorite_points">%\  favorite</string>
   <string name="cgeo_shortcut">legătură la c:geo</string>
   <string name="create_shortcut">Crează scurtătură</string>
+  <string name="send">Trimite</string>
 </resources>
