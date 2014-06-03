@@ -135,6 +135,13 @@ public final class LogTemplateProvider {
 
             @Override
             public String getValue(final LogContext context) {
+                final Geocache cache = context.getCache();
+                if (cache != null) {
+                    final IConnector connector = ConnectorFactory.getConnector(cache);
+                    if (connector instanceof ILogin) {
+                        return ((ILogin) connector).getUserName();
+                    }
+                }
                 return Settings.getUsername();
             }
         });
