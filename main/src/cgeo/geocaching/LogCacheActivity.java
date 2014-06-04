@@ -304,6 +304,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 label.setText(GCVote.getDescription(rating));
             }
         });
+        ratingBar.setRating(cache.getMyVote());
     }
 
     private void setDefaultValues() {
