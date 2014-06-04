@@ -225,6 +225,7 @@
     <string name="info_select_logimage_cancelled">Image selection or capture was cancelled.</string>
     <string name="info_stored_image">New image saved to:</string>
     <string name="info_storing_static_maps">Trying to store static maps</string>
+    <string name="info_cache_saved">The cache has been stored locally</string>
 
     <!-- location service -->
     <string name="loc_last">Last known</string>

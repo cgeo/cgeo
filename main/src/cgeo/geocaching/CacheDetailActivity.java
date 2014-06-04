@@ -369,17 +369,20 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             // waypoints
             case R.id.menu_waypoint_edit:
                 if (selectedWaypoint != null) {
+                    ensureSaved();
                     EditWaypointActivity.startActivityEditWaypoint(this, cache, selectedWaypoint.getId());
                     refreshOnResume = true;
                 }
                 return true;
             case R.id.menu_waypoint_duplicate:
+                ensureSaved();
                 if (cache.duplicateWaypoint(selectedWaypoint)) {
                     DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                     notifyDataSetChanged();
                 }
                 return true;
             case R.id.menu_waypoint_delete:
+                ensureSaved();
                 if (cache.deleteWaypoint(selectedWaypoint)) {
                     DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
                     notifyDataSetChanged();
@@ -401,10 +404,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
                 return true;
             case R.id.menu_waypoint_reset_cache_coords:
+                ensureSaved();
                 if (ConnectorFactory.getConnector(cache).supportsOwnCoordinates()) {
                     createResetCacheCoordinatesDialog(cache, selectedWaypoint).show();
-                }
-                else {
+                } else {
                     final ProgressDialog progressDialog = ProgressDialog.show(this, getString(R.string.cache), getString(R.string.waypoint_reset), true);
                     final HandlerResetCoordinates handler = new HandlerResetCoordinates(this, progressDialog, false);
                     new ResetCoordsThread(cache, handler, selectedWaypoint, true, false, progressDialog).start();
@@ -1662,6 +1665,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }, Schedulers.io());
     }
 
+    private void ensureSaved() {
+        if (!cache.isOffline()) {
+            showToast(getString(R.string.info_cache_saved));
+            cache.setListId(StoredList.STANDARD_LIST_ID);
+            DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+        }
+    }
+
     private class WaypointsViewCreator extends AbstractCachingPageViewCreator<ListView> {
         private final int VISITED_INSET = (int) (6.6f * CgeoApplication.getInstance().getResources().getDisplayMetrics().density + 0.5f);
 
@@ -1684,6 +1695,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
                 @Override
                 public void onClick(final View v) {
+                    ensureSaved();
                     EditWaypointActivity.startActivityAddWaypoint(CacheDetailActivity.this, cache);
                     refreshOnResume = true;
                 }
@@ -1800,6 +1812,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 @Override
                 public boolean onLongClick(final View v) {
                     selectedWaypoint = wpt;
+                    ensureSaved();
                     EditWaypointActivity.startActivityEditWaypoint(CacheDetailActivity.this, cache, wpt.getId());
                     refreshOnResume = true;
                     return true;
