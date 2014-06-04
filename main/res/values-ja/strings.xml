@@ -513,8 +513,6 @@
   <string name="cache_personal_note_uploading">パーソナルノートをアップロード中</string>
   <string name="cache_personal_note_upload_done">パーソナルノートをアップロードしました</string>
   <string name="cache_personal_note_upload_cancelled">パーソナルノートのアップロードをキャンセルしました</string>
-  <string name="cache_personal_note_unstored">キャッシュ情報が保存されていません</string>
-  <string name="cache_personal_note_store">パーソナルノートを有効にするためにキャッシュ情報を保存します。</string>
   <string name="cache_description">説明</string>
   <string name="cache_description_long">全て表示</string>
   <string name="cache_description_table_note">キャッシュ情報の説明にはhtmlを使ったテーブル表が含まれています。正しく表示するには%sで開く必要があるかもしれません。</string>

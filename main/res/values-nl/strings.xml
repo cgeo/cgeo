@@ -570,8 +570,6 @@
   <string name="cache_personal_note_uploading">Uploading persoonlijke notitie</string>
   <string name="cache_personal_note_upload_done">Persoonlijke notitie geupload</string>
   <string name="cache_personal_note_upload_cancelled">Persoonlijk notitie uploaden geannulleerd</string>
-  <string name="cache_personal_note_unstored">Cache niet opgeslagen</string>
-  <string name="cache_personal_note_store">De cache zal eerst opgeslagen worden om persoonlijke notities toe te kunnen voegen.</string>
   <string name="cache_description">Omschrijving</string>
   <string name="cache_description_long">Lange omschrijving</string>
   <string name="cache_description_table_note">Omschrijving bevat een tabel-layout welke misschien op %s bekeken moet worden.</string>

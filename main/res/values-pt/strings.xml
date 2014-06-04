@@ -563,8 +563,6 @@
   <string name="cache_personal_note_uploading">A enviar nota pessoal</string>
   <string name="cache_personal_note_upload_done">Nota pessoal enviada</string>
   <string name="cache_personal_note_upload_cancelled">Envio de nota pessoal cancelado</string>
-  <string name="cache_personal_note_unstored">Cache não guaradada</string>
-  <string name="cache_personal_note_store">A cache vai ser guardada primeiro para permitir notas pessoais.</string>
   <string name="cache_description">Descrição</string>
   <string name="cache_description_long">Descrição longa</string>
   <string name="cache_description_table_note">A descrição contém a formatação da tabela que pode ser necessário para ser vista correctamente em %s.</string>

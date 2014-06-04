@@ -572,8 +572,6 @@
   <string name="cache_personal_note_uploading">Envoi de la note personnelle</string>
   <string name="cache_personal_note_upload_done">Note personnelle envoyée</string>
   <string name="cache_personal_note_upload_cancelled">Envoi de la note personnelle annulé</string>
-  <string name="cache_personal_note_unstored">Cache non sauvegardée localement</string>
-  <string name="cache_personal_note_store">La cache va être sauvegardée localement avant d\'autoriser les notes personnelles.</string>
   <string name="cache_description">Description</string>
   <string name="cache_description_long">Description longue</string>
   <string name="cache_description_table_note">La description contient des informations de formattages qui nécessitent possiblement d\'être vues sur le site %s pour être affichées correctement.</string>

@@ -570,8 +570,6 @@
   <string name="cache_personal_note_uploading">Įkeliama asmeninė pastaba</string>
   <string name="cache_personal_note_upload_done">Asmeninė pastaba įkelta</string>
   <string name="cache_personal_note_upload_cancelled">Asmeninės pastabos įkėlimas atšauktas</string>
-  <string name="cache_personal_note_unstored">Slėptuvė neišsaugota</string>
-  <string name="cache_personal_note_store">Rašyti asmeninę pastabą galima tik išsaugotos slėptuvės aprašyme.</string>
   <string name="cache_description">Aprašymas</string>
   <string name="cache_description_long">Ilgas aprašymas</string>
   <string name="cache_description_table_note">Aprašymas turi lentelės formatavimą ir norint pamatyti jį atvaizduotą teisingai gali tekti apsilankyti %s.</string>

@@ -570,8 +570,6 @@
   <string name="cache_personal_note_uploading">S\'està pujant la nota personal</string>
   <string name="cache_personal_note_upload_done">S\'ha pujat la nota personal</string>
   <string name="cache_personal_note_upload_cancelled">S\'ha cancel·lat la pujada de la nota personal</string>
-  <string name="cache_personal_note_unstored">El catxé no s\'ha desat</string>
-  <string name="cache_personal_note_store">El catxé es desa en primer lloc per permetre una nota personal.</string>
   <string name="cache_description">Descripció</string>
   <string name="cache_description_long">Descripció llarga</string>
   <string name="cache_description_table_note">La descripció conté un format que pot necessitar visualitzar-se a %s per a veure\'s correctament.</string>

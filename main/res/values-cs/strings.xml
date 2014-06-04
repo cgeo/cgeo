@@ -563,8 +563,6 @@
   <string name="cache_personal_note_uploading">Nahrávání osobní poznámky</string>
   <string name="cache_personal_note_upload_done">Osobní poznámka nahrána</string>
   <string name="cache_personal_note_upload_cancelled">Nahrávání osobní poznámky přerušeno</string>
-  <string name="cache_personal_note_unstored">Keš neuložena</string>
-  <string name="cache_personal_note_store">Keš bude nejdříve uložena kvůli povolení osobních poznámek.</string>
   <string name="cache_description">Popis</string>
   <string name="cache_description_long">Dlouhý popis</string>
   <string name="cache_description_table_note">Popis obsahuje tabulkové formátování, které je pravděpodobně nutné prohlížet na %s, aby bylo správně zobrazené.</string>

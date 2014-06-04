@@ -555,8 +555,6 @@
   <string name="cache_personal_note_uploading">Nahrať osobnú poznámku</string>
   <string name="cache_personal_note_upload_done">Osobná poznámka nahraná</string>
   <string name="cache_personal_note_upload_cancelled">Nahrávanie osobnej poznámky zrušené</string>
-  <string name="cache_personal_note_unstored">Cache nie je uložená</string>
-  <string name="cache_personal_note_store">Cache sa najskôr uložia aby sa povolila osobná poznámka.</string>
   <string name="cache_description">Popis</string>
   <string name="cache_description_long">Dlhý popis</string>
   <string name="cache_description_table_note">Popis obsahuje formátovanie tabuľky, ktorý môže byť pre správne zobrazenie potrebné otvoriť v %s.</string>

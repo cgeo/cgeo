@@ -567,8 +567,6 @@
   <string name="cache_personal_note_uploading">Încărcare notă personală</string>
   <string name="cache_personal_note_upload_done">Nota personală a fost încărcată</string>
   <string name="cache_personal_note_upload_cancelled">Încărcarea notei personale a fost anulată</string>
-  <string name="cache_personal_note_unstored">Cutia nu este salvată</string>
-  <string name="cache_personal_note_store">Cutia va fi mai întâi salvată pentru a permite adăugarea de note personale.</string>
   <string name="cache_description">Descriere</string>
   <string name="cache_description_long">Descriere completă</string>
   <string name="cache_description_table_note">Descrierea conţine tabele sau formatări care ar trebui vizualizate aici %s pentru a fi afişate corect.</string>

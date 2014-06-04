@@ -570,8 +570,6 @@
   <string name="cache_personal_note_uploading">Laddar upp personlig anteckning</string>
   <string name="cache_personal_note_upload_done">Den personliga anteckning har laddats upp</string>
   <string name="cache_personal_note_upload_cancelled">Uppladdningen av personliga anteckning avbruten</string>
-  <string name="cache_personal_note_unstored">Cachen ej sparad</string>
-  <string name="cache_personal_note_store">Cachen kommer att sparas först för att kunna hantera personlig anteckning.</string>
   <string name="cache_description">Beskrivning</string>
   <string name="cache_description_long">Lång beskrivning</string>
   <string name="cache_description_table_note">Beskrivningen innehåller tabellformatering som eventuellt behöver läsas på %s för att se korrekt ut.</string>

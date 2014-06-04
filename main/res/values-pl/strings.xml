@@ -565,8 +565,6 @@
   <string name="cache_personal_note_uploading">Wysyłam osobistą notatkę</string>
   <string name="cache_personal_note_upload_done">Notatka osobista wysłana</string>
   <string name="cache_personal_note_upload_cancelled">Wysyłanie notatki osobistej anulowane</string>
-  <string name="cache_personal_note_unstored">Skrzynka nie jest zapisana</string>
-  <string name="cache_personal_note_store">Skrzynka będzie najpierw zapisana aby umożliwić dodawanie notatek osobistych.</string>
   <string name="cache_description">Opis</string>
   <string name="cache_description_long">Długi opis</string>
   <string name="cache_description_table_note">Opis zawiera formatowanie w formie tabeli, które w celu poprawnego wyświetlania może wymagać odwiedzenia %s.</string>

@@ -573,8 +573,6 @@
   <string name="cache_personal_note_uploading">Persönliche Notiz wird gesendet</string>
   <string name="cache_personal_note_upload_done">Persönliche Notiz wurde hochgeladen</string>
   <string name="cache_personal_note_upload_cancelled">Hochladen der Notiz abgebrochen</string>
-  <string name="cache_personal_note_unstored">Cache noch nicht gespeichert</string>
-  <string name="cache_personal_note_store">Der Cache wird zunächst gespeichert, damit die persönliche Notiz möglich ist.</string>
   <string name="cache_description">Beschreibung</string>
   <string name="cache_description_long">Ausführliche Beschreibung</string>
   <string name="cache_description_table_note">Diese Beschreibung enthält Tabellenelemente, die evtl. nur auf %s korrekt angezeigt werden.</string>

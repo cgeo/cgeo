@@ -555,8 +555,6 @@
   <string name="cache_personal_note_uploading">Laster opp personlig cachenotat</string>
   <string name="cache_personal_note_upload_done">Personlig cachenotat er lastet opp</string>
   <string name="cache_personal_note_upload_cancelled">Personlig cachenotat ble avbrutt under opplasting</string>
-  <string name="cache_personal_note_unstored">Cachen er ikke lagret</string>
-  <string name="cache_personal_note_store">Cachen vil bli lagret for å skrive personlig cachenotat.</string>
   <string name="cache_description">Beskrivelse</string>
   <string name="cache_description_long">Full beskrivelse</string>
   <string name="cache_description_table_note">Beskrivelsen inneholder tabellformatering og må åpnes på %s for å vises riktig.</string>

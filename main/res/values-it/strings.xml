@@ -560,8 +560,6 @@
   <string name="cache_personal_note_uploading">Nota personale in caricamento</string>
   <string name="cache_personal_note_upload_done">Nota personale caricata</string>
   <string name="cache_personal_note_upload_cancelled">Caricamento nota personale annullato</string>
-  <string name="cache_personal_note_unstored">Cache non salvati</string>
-  <string name="cache_personal_note_store">Il cache verrà prima salvato per abilitare le note personali.</string>
   <string name="cache_description">Descrizione</string>
   <string name="cache_description_long">Descrizione estesa</string>
   <string name="cache_description_table_note">La descrizione contiene una tabella formattata in modo tale che potresti aver bisogno di andare su %s per vederla correttamente.</string>

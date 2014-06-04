@@ -1410,11 +1410,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             personalNoteEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
-                    if (cache.isOffline()) {
-                        editPersonalNote(cache, CacheDetailActivity.this);
-                    } else {
-                        warnPersonalNoteNeedsStoring();
-                    }
+                    ensureSaved();
+                    editPersonalNote(cache, CacheDetailActivity.this);
                 }
             });
             final Button personalNoteUpload = (Button) view.findViewById(R.id.upload_personalnote);
@@ -1522,19 +1519,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     }
                 }
             }
-        }
-
-        private void warnPersonalNoteNeedsStoring() {
-            Dialogs.confirm(CacheDetailActivity.this, R.string.cache_personal_note_unstored, R.string.cache_personal_note_store,
-                    new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(final DialogInterface dialog, final int which) {
-                    dialog.dismiss();
-                    storeCache(StoredList.STANDARD_LIST_ID, new StoreCachePersonalNoteHandler(CacheDetailActivity.this, progress));
-                }
-
-            });
         }
 
         private void warnPersonalNoteExceedsLimit() {

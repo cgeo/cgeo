@@ -564,8 +564,6 @@
   <string name="cache_personal_note_uploading">Nalagam lastno opombo na spletno stran</string>
   <string name="cache_personal_note_upload_done">Lastna opomba je bila uspešno naložena na spletno stran</string>
   <string name="cache_personal_note_upload_cancelled">Nalaganje lastne opombe je bilo preklicano</string>
-  <string name="cache_personal_note_unstored">Zaklad ni shranjen</string>
-  <string name="cache_personal_note_store">Za vklop opomb bo zaklad najprej shranjen na napravo.</string>
   <string name="cache_description">Opis</string>
   <string name="cache_description_long">Daljši opis</string>
   <string name="cache_description_table_note">Opis vsebuje oblikovanje s tabelami. Za pravilen prikaz opisa bo mogoče potrebno obiskati %s.</string>

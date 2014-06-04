@@ -625,8 +625,6 @@
     <string name="cache_personal_note_uploading">Uploading personal note</string>
     <string name="cache_personal_note_upload_done">Personal note uploaded</string>
     <string name="cache_personal_note_upload_cancelled">Personal note upload cancelled</string>
-    <string name="cache_personal_note_unstored">Cache not stored</string>
-    <string name="cache_personal_note_store">The cache will be stored first to allow a personal note.</string>
     <string name="cache_description">Description</string>
     <string name="cache_description_long">Long Description</string>
     <string name="cache_description_table_note">Description contains table formatting which may need to be viewed at %s to be seen correctly.</string>
