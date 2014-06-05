@@ -707,6 +707,16 @@
                 android:key="@string/pref_fakekey_preference_restore"
                 android:title="@string/init_backup_restore" />
         </PreferenceCategory>
+        <PreferenceCategory android:title="@string/init_offline_cache_directory_title" >
+            <cgeo.geocaching.settings.InfoPreference
+                android:text="@string/init_offline_cache_directory_note"
+                android:title="@string/init_offline_cache_directory_label"
+                cgeo:url="@string/settings_offline_cache_directory_url"
+                cgeo:urlButton="@string/settings_goto_url_button" />
+            <Preference
+                android:key="@string/pref_offline_cache_directory"
+                android:title="@string/init_offline_cache_directory" />
+        </PreferenceCategory>
         <PreferenceCategory android:title="@string/init_dbonsdcard_title" >
             <cgeo.geocaching.settings.TextPreference
                 android:layout="@layout/text_preference"

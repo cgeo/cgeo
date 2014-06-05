@@ -38,6 +38,7 @@
     <string name="settings_themes_url" translatable="false">http://faq.cgeo.org/#3_26</string>
     <string name="settings_send2cgeo_url" translatable="false">http://send2.cgeo.org/</string>
     <string name="settings_facebook_login_url" translatable="false">http://faq.cgeo.org/#1_38</string>
+    <string name="settings_offline_cache_directory_url" translatable="false">http://faq.cgeo.org/#7_67</string>
 
     <!-- contributors -->
     <string name="contributors" translatable="false">
@@ -64,7 +65,7 @@
     · <a href="http://www.geocaching.com/profile/?guid=231070d8-b6f4-4d14-8d5a-b8bdcb19b78e">KiwiStone</a> (code, localization DE)\n
     · <a href="http://www.geocaching.com/email/?guid=d11a3e3d-7db0-4d43-87f2-7893238844a6">Lineflyer</a> (tester, support, localization DE)\n
     · Ludovic Valente (localization FR)\n
-    · marco-jacob (code, loc. DE)\n
+    · marco-dev (code, loc. DE)\n
     · MichielK (code, loc. NL)\n
     · <a href="http://www.linkedin.com/in/mieczyslawtorchala">Mieczyslaw Torchala</a> (localization PL)\n
     · mucek4 (code, open source project leader)\n

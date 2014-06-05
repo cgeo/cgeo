@@ -523,6 +523,10 @@
     <string name="init_dbmove_running">Moving Database</string>
     <string name="init_dbmove_success">Successfully moved the database.</string>
     <string name="init_dbmove_failed">Failed to move database</string>
+    <string name="init_offline_cache_directory_title">Cache directory</string>
+    <string name="init_offline_cache_directory_note">You may set the directory where c:geo caches files for offline usage. We suggest to copy the cache directory (e.g. /mnt/sdcard/.cgeo) to the desired location first (e.g. /mnt/extSdCard/cgeo). If you remove the SD card, c:geo will automatically fall back to internal cache directory.</string>
+    <string name="init_offline_cache_directory">Set cache directory</string>
+    <string name="init_offline_cache_directory_label">Choose cache directory</string>
     <string name="init_plain_logs">Plain Logs</string>
     <string name="init_summary_plain_logs">Display log entries without colors</string>
     <string name="init_use_native_ua">Android browser</string>

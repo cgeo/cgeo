@@ -10,6 +10,7 @@ import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.maps.MapProviderFactory;
@@ -154,6 +155,9 @@ public class Settings {
             e.putBoolean(getKey(R.string.pref_debug), old.getBoolean(getKey(R.string.pref_debug), false));
             e.putBoolean(getKey(R.string.pref_hidelivemaphint), old.getInt(getKey(R.string.pref_hidelivemaphint), 0) != 0);
             e.putInt(getKey(R.string.pref_livemaphintshowcount), old.getInt(getKey(R.string.pref_livemaphintshowcount), 0));
+
+            // defaults for cgeo directories
+            e.putString(getKey(R.string.pref_offline_cache_directory), getOfflineCacheDirectory());
 
             e.putInt(getKey(R.string.pref_settingsversion), 1); // mark migrated
             e.commit();
@@ -847,6 +851,14 @@ public class Settings {
 
     public static void setLiveMapHintShowCount(final int showCount) {
         putInt(R.string.pref_livemaphintshowcount, showCount);
+    }
+
+    public static String getOfflineCacheDirectory() {
+        return getString(R.string.pref_offline_cache_directory, LocalStorage.getDefaultOfflineCacheDirectoryPath());
+    }
+
+    public static void setOfflineCacheDirectory(final String cgeoDir) {
+        putString(R.string.pref_offline_cache_directory, cgeoDir);
     }
 
     public static boolean isDbOnSDCard() {
