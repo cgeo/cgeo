@@ -208,6 +208,7 @@
   <string name="info_select_logimage_cancelled">Fotoauswahl oder -erstellung abgebrochen.</string>
   <string name="info_stored_image">Neues Foto gespeichert nach:</string>
   <string name="info_storing_static_maps">Versuche, statische Karten zu speichern</string>
+  <string name="info_cache_saved">Der Cache wurde gespeichert</string>
   <string name="loc_last">Letzte Position</string>
   <string name="loc_net">Netzwerk</string>
   <string name="loc_gps">GPS</string>
@@ -1165,4 +1166,5 @@
   <string name="percent_favorite_points">% Favoriten</string>
   <string name="cgeo_shortcut">c:geo Shortcut</string>
   <string name="create_shortcut">Shortcut erstellen</string>
+  <string name="send">Senden</string>
 </resources>
