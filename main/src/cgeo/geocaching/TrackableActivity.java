@@ -78,7 +78,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     private final Handler loadTrackableHandler = new Handler() {
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(final Message msg) {
             if (trackable == null) {
                 if (waitDialog != null) {
                     waitDialog.dismiss();
@@ -134,7 +134,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     private ActionMode currentActionMode;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.viewpager_activity);
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
@@ -216,13 +216,13 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.trackable_activity, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_log_touch:
                 LogTrackableActivity.startActivity(this, trackable);
@@ -235,7 +235,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
+    public boolean onPrepareOptionsMenu(final Menu menu) {
         if (trackable != null) {
             menu.findItem(R.id.menu_log_touch).setVisible(StringUtils.isNotBlank(geocode) && trackable.isLoggable());
             menu.findItem(R.id.menu_browser_trackable).setVisible(StringUtils.isNotBlank(trackable.getUrl()));
@@ -249,7 +249,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         final private String guid;
         final private String id;
 
-        public LoadTrackableThread(Handler handlerIn, String geocodeIn, String guidIn, String idIn) {
+        public LoadTrackableThread(final Handler handlerIn, final String geocodeIn, final String guidIn, final String idIn) {
             handler = handlerIn;
             geocode = geocodeIn;
             guid = guidIn;
@@ -261,14 +261,12 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             if (StringUtils.isNotEmpty(geocode)) {
                 trackable = DataStore.loadTrackable(geocode);
 
-                if (trackable == null || trackable.isLoggable()) {
-                    // iterate over the connectors as some codes may be handled by multiple connectors
-                    for (final TrackableConnector trackableConnector : ConnectorFactory.getTrackableConnectors()) {
-                        if (trackableConnector.canHandleTrackable(geocode)) {
-                            trackable = trackableConnector.searchTrackable(geocode, guid, id);
-                            if (trackable != null) {
-                                break;
-                            }
+                // iterate over the connectors as some codes may be handled by multiple connectors
+                for (final TrackableConnector trackableConnector : ConnectorFactory.getTrackableConnectors()) {
+                    if (trackableConnector.canHandleTrackable(geocode)) {
+                        trackable = trackableConnector.searchTrackable(geocode, guid, id);
+                        if (trackable != null) {
+                            break;
                         }
                     }
                 }
@@ -285,7 +283,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         final private String url;
         final private Handler handler;
 
-        public TrackableIconThread(String urlIn, Handler handlerIn) {
+        public TrackableIconThread(final String urlIn, final Handler handlerIn) {
             url = urlIn;
             handler = handlerIn;
         }
@@ -311,12 +309,12 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     private static class TrackableIconHandler extends Handler {
         final private ActionBar view;
 
-        public TrackableIconHandler(ActionBar viewIn) {
+        public TrackableIconHandler(final ActionBar viewIn) {
             view = viewIn;
         }
 
         @Override
-        public void handleMessage(Message message) {
+        public void handleMessage(final Message message) {
             final BitmapDrawable image = (BitmapDrawable) message.obj;
             if (image != null && view != null) {
                 image.setBounds(0, 0, view.getHeight(), view.getHeight());
@@ -335,7 +333,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     }
 
     @Override
-    protected PageViewCreator createViewCreator(Page page) {
+    protected PageViewCreator createViewCreator(final Page page) {
         switch (page) {
             case DETAILS:
                 return new DetailsViewCreator();
@@ -346,7 +344,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     }
 
     @Override
-    protected String getTitle(Page page) {
+    protected String getTitle(final Page page) {
         return res.getString(page.resId);
     }
 
@@ -442,7 +440,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 if (Trackable.SPOTTED_CACHE == trackable.getSpottedType()) {
                     spotted.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(View arg0) {
+                        public void onClick(final View arg0) {
                             if (StringUtils.isNotBlank(trackable.getSpottedGuid())) {
                                 CacheDetailActivity.startActivityGuid(TrackableActivity.this, trackable.getSpottedGuid(), trackable.getSpottedName());
                             }
@@ -529,7 +527,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         view.setOnLongClickListener(new OnLongClickListener() {
 
             @Override
-            public boolean onLongClick(View v) {
+            public boolean onLongClick(final View v) {
                 return startContextualActionBar(view);
             }
         });
@@ -537,7 +535,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         view.setOnClickListener(new OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 startContextualActionBar(view);
             }
         });
@@ -550,7 +548,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         currentActionMode = startSupportActionMode(new ActionMode.Callback() {
 
             @Override
-            public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+            public boolean onPrepareActionMode(final ActionMode actionMode, final Menu menu) {
                 final int viewId = view.getId();
                 assert view instanceof TextView;
                 clickedItemText = ((TextView) view).getText();
@@ -573,18 +571,18 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             }
 
             @Override
-            public void onDestroyActionMode(ActionMode actionMode) {
+            public void onDestroyActionMode(final ActionMode actionMode) {
                 currentActionMode = null;
             }
 
             @Override
-            public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+            public boolean onCreateActionMode(final ActionMode actionMode, final Menu menu) {
                 actionMode.getMenuInflater().inflate(R.menu.details_context, menu);
                 return true;
             }
 
             @Override
-            public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+            public boolean onActionItemClicked(final ActionMode actionMode, final MenuItem menuItem) {
                 return onClipboardItemSelected(actionMode, menuItem, clickedItemText);
             }
         });
