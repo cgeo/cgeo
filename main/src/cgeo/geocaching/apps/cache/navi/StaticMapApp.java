@@ -13,22 +13,22 @@ class StaticMapApp extends AbstractStaticMapsApp {
     }
 
     @Override
-    public boolean isEnabled(Geocache cache) {
-        return cache.hasStaticMap();
+    public boolean isEnabled(final Geocache cache) {
+        return cache.isOffline() && cache.hasStaticMap();
     }
 
     @Override
-    public boolean isEnabled(Waypoint waypoint) {
+    public boolean isEnabled(final Waypoint waypoint) {
         return hasStaticMap(waypoint);
     }
 
     @Override
-    public void navigate(Activity activity, Geocache cache) {
+    public void navigate(final Activity activity, final Geocache cache) {
         invokeStaticMaps(activity, cache, null, false);
     }
 
     @Override
-    public void navigate(Activity activity, Waypoint waypoint) {
+    public void navigate(final Activity activity, final Waypoint waypoint) {
         invokeStaticMaps(activity, null, waypoint, false);
     }
 }
