@@ -259,7 +259,6 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         @Override
         public void run() {
             if (StringUtils.isNotEmpty(geocode)) {
-                trackable = DataStore.loadTrackable(geocode);
 
                 // iterate over the connectors as some codes may be handled by multiple connectors
                 for (final TrackableConnector trackableConnector : ConnectorFactory.getTrackableConnectors()) {
@@ -269,6 +268,10 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                             break;
                         }
                     }
+                }
+                // Check local storage (offline case)
+                if (trackable == null) {
+                    trackable = DataStore.loadTrackable(geocode);
                 }
             }
             // fall back to GC search by GUID
