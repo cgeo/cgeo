@@ -5,7 +5,7 @@
     <item
         android:id="@+id/menu_switch_compass_gps"
         android:icon="@drawable/ic_menu_compass"
-        cgeo:showAsAction="ifRoom|withText"
+        cgeo:showAsAction="never|withText"
         android:title="@string/use_gps"> <!-- will be replaced in code -->
     </item>
     <item
