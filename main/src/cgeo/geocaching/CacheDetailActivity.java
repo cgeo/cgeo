@@ -2287,26 +2287,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         });
     }
 
-    private static final class StoreCachePersonalNoteHandler extends StoreCacheHandler {
-
-        public StoreCachePersonalNoteHandler(final CacheDetailActivity activity, final Progress progress) {
-            super(activity, progress);
-        }
-
-        @Override
-        public void handleRegularMessage(final Message msg) {
-            if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
-                updateStatusMsg(R.string.cache_dialog_offline_save_message, (String) msg.obj);
-            } else {
-                dismissProgress();
-                final CacheDetailActivity activity = (CacheDetailActivity) activityRef.get();
-                if (activity != null) {
-                    editPersonalNote(activity.getCache(), activity);
-                }
-            }
-        }
-    }
-
     public static void editPersonalNote(final Geocache cache, final CacheDetailActivity activity) {
         if (cache.isOffline()) {
             final EditNoteDialogListener editNoteDialogListener = new EditNoteDialogListener() {
