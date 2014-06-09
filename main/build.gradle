@@ -33,6 +33,7 @@ version = '0.0.1'
 
 android {
     compileSdkVersion "Google Inc.:Google APIs:19"
+    //compileSdkVersion "Google Inc.:Google APIs (x86 System Image):19"
     //compileSdkVersion 19
     buildToolsVersion "19.1.0"
 
@@ -45,6 +46,7 @@ android {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'
+        exclude 'AndroidManifest.xml'
     }
 
     defaultConfig {
@@ -67,7 +69,7 @@ android {
     //Conditional signing
     //Uncomment and set the 4 key properties (#key.store, ...) in gradle.properties
     signingConfigs {
-        release 
+        release
     }
 
 
@@ -147,6 +149,9 @@ dependencies {
 
     compile 'com.android.support:appcompat-v7:19.1.0'
 
+    compile ('com.viewpagerindicator:library:2.4.1'){
+        exclude module: 'support-v4'
+    }
     compile 'com.jakewharton:butterknife:5.0.0'
     compile 'org.apache.commons:commons-collections4:4.0'
     compile 'org.apache.commons:commons-lang3:3.2.1'

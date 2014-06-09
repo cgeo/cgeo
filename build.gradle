@@ -5,16 +5,21 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.10.+'
+        classpath 'com.android.tools.build:gradle:0.11.+'
         // the latest version of the android-apt plugin
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.1'
         //gradle-properties
        // classpath 'net.saliman:gradle-properties-plugin:1.2.0'
+
+        //classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.10.+'
     }
 }
 
 allprojects {
     //apply plugin: 'properties'
+
+    //apply plugin: 'android-sdk-manager'
+    //apply plugin: 'android'
 
     repositories {
         mavenCentral()
