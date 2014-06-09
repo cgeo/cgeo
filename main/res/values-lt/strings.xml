@@ -208,6 +208,7 @@
   <string name="info_select_logimage_cancelled">Nuotraukos pasirinkimas ar fotografavimas buvo atšauktas.</string>
   <string name="info_stored_image">Nauja nuotrauka įrašyta į:</string>
   <string name="info_storing_static_maps">Bandoma išsaugoti statinius žemėlapius</string>
+  <string name="info_cache_saved">Slėptuvė buvo išsaugota lokaliai</string>
   <string name="loc_last">Paskutinė žinoma vieta</string>
   <string name="loc_net">Tinklas</string>
   <string name="loc_gps">GPS</string>
