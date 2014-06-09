@@ -75,7 +75,7 @@ public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
 
                         return Observable.empty();
                     }
-                }).firstOrDefault(0)).subscribe(new Action1<Integer>() {
+                }).firstOrDefault(0)).subscribeOn(Schedulers.io()).subscribe(new Action1<Integer>() {
                     @Override
                     public void call(final Integer pin) {
                         progressDialog.dismiss();
@@ -87,7 +87,7 @@ public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
                             Dialogs.message(activity, R.string.init_sendToCgeo, R.string.init_sendToCgeo_register_fail);
                         }
                     }
-                }, Schedulers.io());
+                });
 
                 return true;
             }

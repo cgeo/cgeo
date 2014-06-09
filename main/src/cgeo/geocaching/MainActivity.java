@@ -572,12 +572,13 @@ public class MainActivity extends AbstractActionBarActivity {
                         }
                     });
                     AndroidObservable.bindActivity(MainActivity.this, address.onErrorResumeNext(Observable.from(geo.getCoords().toString())))
+                            .subscribeOn(Schedulers.io())
                             .subscribe(new Action1<String>() {
                                 @Override
                                 public void call(final String address) {
                                     navLocation.setText(address);
                                 }
-                            }, Schedulers.io());
+                            });
                 }
             } else {
                 navLocation.setText(geo.getCoords().toString());

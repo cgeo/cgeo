@@ -4,12 +4,14 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.StartableHandlerThread;
 
 import org.apache.commons.lang3.StringUtils;
+
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
+import rx.functions.Action1;
 import rx.observables.ConnectableObservable;
 import rx.subjects.BehaviorSubject;
 import rx.subscriptions.CompositeSubscription;
@@ -94,7 +96,7 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
         final private Listener gpsListener = new Listener(LocationManager.GPS_PROVIDER, gpsLocation);
 
         @Override
-        public Subscription connect() {
+        public void connect(Action1<? super Subscription> connection) {
             final CompositeSubscription subscription = new CompositeSubscription();
             AndroidSchedulers.handlerThread(handlerThread.getHandler()).createWorker().schedule(new Action0() {
                 @Override
@@ -133,7 +135,7 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
                     }));
                 }
             });
-            return subscription;
+            connection.call(subscription);
         }
     };
 

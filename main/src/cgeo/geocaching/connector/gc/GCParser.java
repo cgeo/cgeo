@@ -371,7 +371,7 @@ public abstract class GCParser {
         final SearchResult result = new SearchResult(parsed.left);
         if (parsed.left == StatusCode.NO_ERROR) {
             result.addAndPutInCache(Collections.singletonList(parsed.right));
-            DataStore.saveLogsWithoutTransaction(parsed.right.getGeocode(), getLogsFromDetails(page).toBlockingObservable().toIterable());
+            DataStore.saveLogsWithoutTransaction(parsed.right.getGeocode(), getLogsFromDetails(page).toBlocking().toIterable());
         }
         return result;
     }
@@ -1909,7 +1909,7 @@ public abstract class GCParser {
         }
 
         // Wait for completion of logs parsing, retrieving and merging
-        mergedLogs.toBlockingObservable().last();
+        mergedLogs.toBlocking().last();
     }
 
     /**

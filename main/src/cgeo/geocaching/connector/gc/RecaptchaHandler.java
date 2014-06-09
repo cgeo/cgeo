@@ -57,7 +57,7 @@ public class RecaptchaHandler extends Handler {
                 return Observable.empty();
             }
         });
-        AndroidObservable.bindActivity(activity, captcha).subscribe(new Action1<Bitmap>() {
+        AndroidObservable.bindActivity(activity, captcha).subscribeOn(Schedulers.io()).subscribe(new Action1<Bitmap>() {
             @Override
             public void call(final Bitmap bitmap) {
                 imageView.setImageBitmap(bitmap);
@@ -67,7 +67,7 @@ public class RecaptchaHandler extends Handler {
             public void call(final Throwable throwable) {
                 // Do nothing
             }
-        }, Schedulers.io());
+        });
         reloadButton.setEnabled(true);
     }
 

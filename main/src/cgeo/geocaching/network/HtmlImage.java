@@ -121,7 +121,7 @@ public class HtmlImage implements Html.ImageGetter {
             }));
             return null;
         }
-        return drawable.toBlockingObservable().lastOrDefault(null);
+        return drawable.toBlocking().lastOrDefault(null);
     }
 
     // Caches are loaded from disk on a computation scheduler to avoid using more threads than cores while decoding

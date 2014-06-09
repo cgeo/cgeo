@@ -52,13 +52,13 @@ public final class PocketQueryList {
                 subscriber.onNext(GCParser.searchPocketQueryList());
                 subscriber.onCompleted();
             }
-        })).subscribe(new Action1<List<PocketQueryList>>() {
+        })).subscribeOn(Schedulers.io()).subscribe(new Action1<List<PocketQueryList>>() {
             @Override
             public void call(final List<PocketQueryList> pocketQueryLists) {
                 waitDialog.dismiss();
                 selectFromPocketQueries(activity, pocketQueryLists, runAfterwards);
             }
-        }, Schedulers.io());
+        });
     }
     private static void selectFromPocketQueries(final Activity activity, final List<PocketQueryList> pocketQueryList, final Action1<PocketQueryList> runAfterwards) {
         if (CollectionUtils.isEmpty(pocketQueryList)) {

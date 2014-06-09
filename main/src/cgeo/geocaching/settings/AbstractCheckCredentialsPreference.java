@@ -70,7 +70,7 @@ public abstract class AbstractCheckCredentialsPreference extends AbstractClickab
                 public ImmutablePair<StatusCode, ? extends Drawable> call() {
                     return login();
                 }
-            })).subscribe(new Action1<ImmutablePair<StatusCode, ? extends Drawable>>() {
+            })).subscribeOn(Schedulers.io()).subscribe(new Action1<ImmutablePair<StatusCode, ? extends Drawable>>() {
                 @Override
                 public void call(final ImmutablePair<StatusCode, ? extends Drawable> loginInfo) {
                     loginDialog.dismiss();
@@ -86,7 +86,7 @@ public abstract class AbstractCheckCredentialsPreference extends AbstractClickab
                     }
                     activity.initBasicMemberPreferences();
                 }
-            }, Schedulers.io());
+            });
 
             return false; // no shared preference has to be changed
         }

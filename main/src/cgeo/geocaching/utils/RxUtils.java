@@ -18,6 +18,6 @@ public class RxUtils {
     }
 
     public static void waitForCompletion(final Observable<?>... observables) {
-        waitForCompletion(Observable.merge(observables).toBlockingObservable());
+        waitForCompletion(Observable.merge(observables).toBlocking());
     }
 }

@@ -420,14 +420,14 @@ public class DataStore {
                 init();
                 return true;
             }
-        })).subscribe(new Action1<Boolean>() {
+        })).subscribeOn(Schedulers.io()).subscribe(new Action1<Boolean>() {
             @Override
             public void call(final Boolean success) {
                 dialog.dismiss();
                 final String message = success ? fromActivity.getString(R.string.init_dbmove_success) : fromActivity.getString(R.string.init_dbmove_failed);
                 Dialogs.message(fromActivity, R.string.init_dbmove_dbmove, message);
             }
-        }, Schedulers.io());
+        });
     }
 
     private static File databasePath(final boolean internal) {

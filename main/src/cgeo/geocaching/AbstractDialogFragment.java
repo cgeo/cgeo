@@ -194,7 +194,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
                 final GCVoteRating rating = GCVote.getRating(cache.getGuid(), geocode);
                 return rating != null ? Observable.just(rating) : Observable.<GCVoteRating>empty();
             }
-        })).subscribe(new Action1<GCVoteRating>() {
+        })).subscribeOn(Schedulers.io()).subscribe(new Action1<GCVoteRating>() {
             @Override
             public void call(final GCVoteRating rating) {
                 cache.setRating(rating.getRating());
@@ -202,7 +202,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
                 DataStore.saveChangedCache(cache);
                 details.addRating(cache);
             }
-        }, Schedulers.io());
+        });
     }
 
     protected final void addCacheDetails() {

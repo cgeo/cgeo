@@ -330,7 +330,7 @@ public class SearchResult implements Parcelable {
                 searchResult.addSearchResult(searchResult2);
                 return searchResult;
             }
-        }).toBlockingObservable().first();
+        }).toBlocking().first();
     }
 
 }

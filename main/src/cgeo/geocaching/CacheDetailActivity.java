@@ -908,17 +908,18 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_details_page, null);
 
             // Start loading preview map
-            AndroidObservable.bindActivity(CacheDetailActivity.this, previewMap).subscribe(new Action1<BitmapDrawable>() {
-                @Override
-                public void call(final BitmapDrawable image) {
-                    final Bitmap bitmap = image.getBitmap();
-                    if (bitmap != null && bitmap.getWidth() > 10) {
-                        final ImageView imageView = (ImageView) view.findViewById(R.id.map_preview);
-                        imageView.setImageDrawable(image);
-                        view.findViewById(R.id.map_preview_box).setVisibility(View.VISIBLE);
-                    }
-                }
-            }, Schedulers.io());
+            AndroidObservable.bindActivity(CacheDetailActivity.this, previewMap).subscribeOn(Schedulers.io())
+                    .subscribe(new Action1<BitmapDrawable>() {
+                        @Override
+                        public void call(final BitmapDrawable image) {
+                            final Bitmap bitmap = image.getBitmap();
+                            if (bitmap != null && bitmap.getWidth() > 10) {
+                                final ImageView imageView = (ImageView) view.findViewById(R.id.map_preview);
+                                imageView.setImageDrawable(image);
+                                view.findViewById(R.id.map_preview_box).setVisibility(View.VISIBLE);
+                            }
+                        }
+                    });
 
             detailsList = (LinearLayout) view.findViewById(R.id.details_list);
             final CacheDetailsCreator details = new CacheDetailsCreator(CacheDetailActivity.this, detailsList);
@@ -1572,7 +1573,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
         });
 
-        AndroidObservable.bindActivity(this, producer).subscribe(new Observer<Spanned>() {
+        AndroidObservable.bindActivity(this, producer).subscribeOn(Schedulers.io()).subscribe(new Observer<Spanned>() {
             @Override
             public void onCompleted() {
                 if (null != loadingIndicatorView) {
@@ -1636,7 +1637,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
                 descriptionView.setBackgroundResource(backcolor);
             }
-        }, Schedulers.io());
+        });
     }
 
     /**

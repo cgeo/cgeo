@@ -31,7 +31,8 @@ public class StatusFragment extends Fragment {
         final ViewGroup statusGroup = (ViewGroup) inflater.inflate(R.layout.status, container, false);
         final ImageView statusIcon = (ImageView) statusGroup.findViewById(R.id.status_icon);
         final TextView statusMessage = (TextView) statusGroup.findViewById(R.id.status_message);
-        statusSubscription = AndroidObservable.bindFragment(this, StatusUpdater.latestStatus).subscribe(new Action1<Status>() {
+        statusSubscription = AndroidObservable.bindFragment(this, StatusUpdater.latestStatus).subscribeOn(Schedulers.io())
+                .subscribe(new Action1<Status>() {
                     @Override
                     public void call(final Status status) {
                         if (status == null) {
@@ -77,7 +78,7 @@ public class StatusFragment extends Fragment {
                             statusGroup.setClickable(false);
                         }
                     }
-                }, Schedulers.io());
+                });
         return statusGroup;
     }
 

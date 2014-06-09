@@ -119,7 +119,7 @@ public class CgeoApplication extends Application {
     }
 
     public IGeoData currentGeo() {
-        return currentGeo != null ? currentGeo : geoDataObservable().toBlockingObservable().first();
+        return currentGeo != null ? currentGeo : geoDataObservable().toBlocking().first();
     }
 
     public float currentDirection() {
