@@ -1083,7 +1083,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         return loadTimer;
     }
 
-    private static final class LoadTimerAction implements Action0 {
+    private static final class LoadTimerAction implements Action0, Subscription {
+
+        private volatile boolean isUnsubscribed = false;
 
         @NonNull private final WeakReference<CGeoMap> mapRef;
 
@@ -1098,7 +1100,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 return;
             }
             try {
-                if (map.mapView != null) {
+                if (map.mapView != null && !isUnsubscribed) {
                     // get current viewport
                     final Viewport viewportNow = map.mapView.getViewport();
                     // Since zoomNow is used only for local comparison purposes,
@@ -1132,6 +1134,20 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             } catch (final Exception e) {
                 Log.w("CGeoMap.startLoadtimer.start", e);
             }
+
+            if (!isUnsubscribed) {
+                Schedulers.newThread().createWorker().schedule(this, 250, TimeUnit.MILLISECONDS);
+            }
+        }
+
+        @Override
+        public void unsubscribe() {
+            isUnsubscribed = true;
+        }
+
+        @Override
+        public boolean isUnsubscribed() {
+            return isUnsubscribed;
         }
     }
 
@@ -1139,7 +1155,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
      * loading timer Triggers every 250ms and checks for viewport change and starts a {@link LoadRunnable}.
      */
     private Subscription startLoadTimer() {
-        return Schedulers.newThread().createWorker().schedulePeriodically(new LoadTimerAction(this), 250, 250, TimeUnit.MILLISECONDS);
+        // We cannot use schedulePeriodically with RxJava 0.19 and earlier because the unsubscription
+        // mechanism fails. As a consequence, we reschedule periodically by hand as long as we are not
+        // unsubscribed. There may be a small drift, but it has no consequence.
+        final LoadTimerAction action = new LoadTimerAction(this);
+        Schedulers.newThread().createWorker().schedule(action, 250, TimeUnit.MILLISECONDS);
+        return action;
     }
 
     /**
