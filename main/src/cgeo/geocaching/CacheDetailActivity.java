@@ -1508,17 +1508,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             final String longDescription = cache.getDescription();
             loadDescription(longDescription, longDescView, loadingView);
-
-            // Hide the short description, if it is contained somewhere at the start of the long description.
-            if (shortDescView != null) {
-                final String shortDescription = cache.getShortDescription();
-                if (StringUtils.isNotBlank(shortDescription)) {
-                    final int index = longDescription.indexOf(shortDescription);
-                    if (index >= 0 && index < 200) {
-                        shortDescView.setVisibility(View.GONE);
-                    }
-                }
-            }
         }
 
         private void warnPersonalNoteExceedsLimit() {
@@ -1611,6 +1600,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     fixTextColor(descriptionString);
                     descriptionView.setVisibility(View.VISIBLE);
                     addContextMenu(descriptionView);
+                    potentiallyHideShortDescription();
                 }
             }
 
@@ -1647,6 +1637,27 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 descriptionView.setBackgroundResource(backcolor);
             }
         }, Schedulers.io());
+    }
+
+    /**
+     * Hide the short description, if it is contained somewhere at the start of the long description.
+     */
+    public void potentiallyHideShortDescription() {
+        final View shortView = ButterKnife.findById(this, R.id.shortdesc);
+        if (shortView == null) {
+            return;
+        }
+        if (shortView.getVisibility() == View.GONE) {
+            return;
+        }
+        final String shortDescription = cache.getShortDescription();
+        if (StringUtils.isNotBlank(shortDescription)) {
+            final int index = StringUtils.indexOf(cache.getDescription(), shortDescription);
+            // allow up to 200 characters of HTML formatting
+            if (index >= 0 && index < 200) {
+                shortView.setVisibility(View.GONE);
+            }
+        }
     }
 
     private void ensureSaved() {
