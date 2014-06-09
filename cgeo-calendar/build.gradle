@@ -1,0 +1,29 @@
+apply plugin: 'android'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.1.0"
+
+
+
+    defaultConfig {
+        minSdkVersion 9
+        targetSdkVersion 19
+        versionName "1.2"
+        versionCode 3
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+    }
+}
+
+dependencies {
+    // The dependency to the ICalnder interface from the main project is missing
+    // compile project(":main") is not working
+}

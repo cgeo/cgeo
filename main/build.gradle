@@ -27,7 +27,7 @@ gradle connectedCheck
 //https://github.com/stephanenicolas/Quality-Tools-for-Android
 
 def AAVersion = '3.0.1'
-def RXVersion = '0.18.3'
+def RXVersion = '0.19.0'
 group = 'cgeo.geocaching'
 version = '0.0.1'
 
@@ -54,7 +54,7 @@ android {
         versionCode versionProps['code'].toInteger()
 
         // NOTE: must match the package in the test directory and must be different from the app package
-        testPackageName "cgeo.geocaching.test"
+        testApplicationId "cgeo.geocaching.test"
 
         // standard android test runner
         //testInstrumentationRunner "android.test.InstrumentationTestRunner"
