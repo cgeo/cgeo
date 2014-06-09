@@ -6,6 +6,8 @@ import butterknife.InjectView;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ILogin;
+import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -242,6 +244,10 @@ public class MainActivity extends AbstractActionBarActivity {
                 new Thread() {
                     @Override
                     public void run() {
+                        if (mustLogin && conn == GCConnector.getInstance()) {
+                            // Properly log out from geocaching.com
+                            GCLogin.getInstance().logout();
+                        }
                         conn.login(firstLoginHandler, MainActivity.this);
                         updateUserInfoHandler.sendEmptyMessage(-1);
                     }

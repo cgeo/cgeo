@@ -9,7 +9,6 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.connector.gc.GCConnector;
-import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.files.SimpleDirChooser;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
@@ -646,9 +645,6 @@ public class SettingsActivity extends PreferenceActivity {
             // TODO: do not special case geocaching.com here
             if ((isPreference(preference, R.string.pref_username) && !stringValue.equals(Settings.getUsername())) || (isPreference(preference, R.string.pref_password) && !stringValue.equals(Settings.getGcCredentials().getRight()))) {
                 // reset log-in if gc user or password is changed
-                if (GCLogin.getInstance().isActualLoginStatus()) {
-                    GCLogin.getInstance().logout();
-                }
                 CgeoApplication.getInstance().forceRelog();
             }
             return true;
