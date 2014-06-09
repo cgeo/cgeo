@@ -135,7 +135,6 @@
     <string name="pref_navigation_menu_google_walk">navigationGoogleWalk</string>
     <string name="pref_navigation_menu_google_bike">navigationGoogleBike</string>
     <string name="pref_navigation_menu_google_maps_directions">navigationMapsDirections</string>
-    <string name="pref_navigation_menu_cache_beacon">navigationCacheBeacon</string>
     <string name="pref_navigation_menu_where_you_go">navigationWhereYouGo</string>
     <string name="pref_navigation_menu_pebble">navigationPebble</string>
     <string name="pref_navigation_menu_mapswithme">navigationMapsWithMe</string>

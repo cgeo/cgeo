@@ -7,7 +7,6 @@ import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.apps.App;
-import cgeo.geocaching.apps.cache.CacheBeaconApp;
 import cgeo.geocaching.apps.cache.WhereYouGoApp;
 import cgeo.geocaching.apps.cache.navi.GoogleNavigationApp.GoogleNavigationBikeApp;
 import cgeo.geocaching.apps.cache.navi.GoogleNavigationApp.GoogleNavigationDrivingApp;
@@ -68,7 +67,6 @@ public final class NavigationAppFactory extends AbstractAppFactory {
          */
         GOOGLE_MAPS_DIRECTIONS(new GoogleMapsDirectionApp(), 13, R.string.pref_navigation_menu_google_maps_directions),
 
-        CACHE_BEACON(new CacheBeaconApp(), 14, R.string.pref_navigation_menu_cache_beacon),
         WHERE_YOU_GO(new WhereYouGoApp(), 16, R.string.pref_navigation_menu_where_you_go),
         PEBBLE(new PebbleApp(), 17, R.string.pref_navigation_menu_pebble),
         MAPSWITHME(new MapsWithMeApp(), 22, R.string.pref_navigation_menu_mapswithme);
@@ -180,7 +178,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         builder.setTitle(R.string.cache_menu_navigate);
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int item) {
+            public void onClick(final DialogInterface dialog, final int item) {
                 final NavigationAppsEnum selectedItem = adapter.getItem(item);
                 invokeNavigation(activity, cache, waypoint, destination, selectedItem.app);
             }
@@ -228,27 +226,27 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @param cache
      * @return
      */
-    public static boolean onMenuItemSelected(final MenuItem item, Activity activity, Geocache cache) {
+    public static boolean onMenuItemSelected(final MenuItem item, final Activity activity, final Geocache cache) {
         final App menuItem = getAppFromMenuItem(item);
         navigateCache(activity, cache, menuItem);
         return menuItem != null;
     }
 
-    private static void navigateCache(Activity activity, Geocache cache, @Nullable App app) {
+    private static void navigateCache(final Activity activity, final Geocache cache, @Nullable final App app) {
         if (app instanceof CacheNavigationApp) {
             final CacheNavigationApp cacheApp = (CacheNavigationApp) app;
             cacheApp.navigate(activity, cache);
         }
     }
 
-    private static void navigateWaypoint(Activity activity, Waypoint waypoint, @Nullable App app) {
+    private static void navigateWaypoint(final Activity activity, final Waypoint waypoint, @Nullable final App app) {
         if (app instanceof WaypointNavigationApp) {
             final WaypointNavigationApp waypointApp = (WaypointNavigationApp) app;
             waypointApp.navigate(activity, waypoint);
         }
     }
 
-    private static void navigateGeopoint(Activity activity, Geopoint destination, App app) {
+    private static void navigateGeopoint(final Activity activity, final Geopoint destination, final App app) {
         if (app instanceof GeopointNavigationApp) {
             final GeopointNavigationApp geopointApp = (GeopointNavigationApp) app;
             geopointApp.navigate(activity, destination);
@@ -256,7 +254,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     }
 
     @Nullable
-    private static App getAppFromMenuItem(MenuItem item) {
+    private static App getAppFromMenuItem(final MenuItem item) {
         final int id = item.getItemId();
         for (final NavigationAppsEnum navApp : NavigationAppsEnum.values()) {
             if (navApp.id == id) {
@@ -274,7 +272,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @param activity
      * @param cache
      */
-    public static void startDefaultNavigationApplication(int defaultNavigation, Activity activity, Geocache cache) {
+    public static void startDefaultNavigationApplication(final int defaultNavigation, final Activity activity, final Geocache cache) {
         if (cache == null || cache.getCoords() == null) {
             ActivityMixin.showToast(activity, CgeoApplication.getInstance().getString(R.string.err_location_unknown));
             return;
@@ -283,7 +281,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         navigateCache(activity, cache, getDefaultNavigationApplication(defaultNavigation));
     }
 
-    private static App getDefaultNavigationApplication(int defaultNavigation) {
+    private static App getDefaultNavigationApplication(final int defaultNavigation) {
         if (defaultNavigation == 2) {
             return getNavigationAppForId(Settings.getDefaultNavigationTool2());
         }
@@ -296,7 +294,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @param activity
      * @param waypoint
      */
-    public static void startDefaultNavigationApplication(int defaultNavigation, Activity activity, Waypoint waypoint) {
+    public static void startDefaultNavigationApplication(final int defaultNavigation, final Activity activity, final Waypoint waypoint) {
         if (waypoint == null || waypoint.getCoords() == null) {
             ActivityMixin.showToast(activity, CgeoApplication.getInstance().getString(R.string.err_location_unknown));
             return;
@@ -310,7 +308,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @param activity
      * @param destination
      */
-    public static void startDefaultNavigationApplication(int defaultNavigation, Activity activity, final Geopoint destination) {
+    public static void startDefaultNavigationApplication(final int defaultNavigation, final Activity activity, final Geopoint destination) {
         if (destination == null) {
             ActivityMixin.showToast(activity, CgeoApplication.getInstance().getString(R.string.err_location_unknown));
             return;
