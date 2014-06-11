@@ -16,9 +16,9 @@ public class GCConstantsTest extends AndroidTestCase {
 
     public static void testLocation() {
         // GC37GFJ
-        assertEquals("Bretagne, France", parseLocation("    <span id=\"ctl00_ContentBody_Location\">In Bretagne, France</span><br />"));
+        assertThat(parseLocation("    <span id=\"ctl00_ContentBody_Location\">In Bretagne, France</span><br />")).isEqualTo("Bretagne, France");
         // GCV2R9
-        assertEquals("California, United States", parseLocation("<span id=\"ctl00_ContentBody_Location\">In <a href=\"/map/beta/default.aspx?lat=37.4354&lng=-122.07745&z=16\" title=\"View Map\">California, United States</a></span><br />"));
+        assertThat(parseLocation("<span id=\"ctl00_ContentBody_Location\">In <a href=\"/map/beta/default.aspx?lat=37.4354&lng=-122.07745&z=16\" title=\"View Map\">California, United States</a></span><br />")).isEqualTo("California, United States");
     }
 
     private static String parseLocation(final String html) {
@@ -55,16 +55,16 @@ public class GCConstantsTest extends AndroidTestCase {
 
     public static void testConstants() {
         final String session = "userSession = new Groundspeak.Map.UserSession('aKWZ', userOptions:'XPTf', sessionToken:'123pNKwdktYGZL0xd-I7yqA6nm_JE1BDUtM4KcOkifin2TRCMutBd_PZE14Ohpffs2ZgkTnxTSnxYpBigK4hBA2', subscriberType: 3, enablePersonalization: true });";
-        assertEquals("aKWZ", TextUtils.getMatch(session, GCConstants.PATTERN_USERSESSION, ""));
+        assertThat(TextUtils.getMatch(session, GCConstants.PATTERN_USERSESSION, "")).isEqualTo("aKWZ");
         assertThat(TextUtils.getMatch(session, GCConstants.PATTERN_SESSIONTOKEN, "").startsWith("123pNK")).isTrue();
     }
 
     public static void testTBWithSpecialChar() {
         // Incidentally, the site incorrectly escapes the "&" into "&amp;"
         final String page = "<span id=\"ctl00_ContentBody_lbHeading\">Schlauchen&amp;ravestorm</span>";
-        assertEquals("Schlauchen&ravestorm", Html.fromHtml(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_NAME, "")).toString());
+        assertThat(Html.fromHtml(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_NAME, "")).toString()).isEqualTo("Schlauchen&ravestorm");
         // Test with the current incorrect form as well
         final String page2 = "<span id=\"ctl00_ContentBody_lbHeading\">Schlauchen&ravestorm</span>";
-        assertEquals("Schlauchen&ravestorm", Html.fromHtml(TextUtils.getMatch(page2, GCConstants.PATTERN_TRACKABLE_NAME, "")).toString());
+        assertThat(Html.fromHtml(TextUtils.getMatch(page2, GCConstants.PATTERN_TRACKABLE_NAME, "")).toString()).isEqualTo("Schlauchen&ravestorm");
     }
 }

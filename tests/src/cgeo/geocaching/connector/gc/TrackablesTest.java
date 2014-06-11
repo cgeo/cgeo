@@ -101,9 +101,9 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertThat(goal).isNotNull();
         assertThat(goal.startsWith("Bei meinem Besitzer auf der Couch")).isTrue();
         assertThat(goal.endsWith("Geocachern zusammen fotografieren.")).isTrue();
-        assertEquals("Der kleine Maulwurf in etwas gr&ouml;&szlig;er :-)", trackable.getDetails());
+        assertThat(trackable.getDetails()).isEqualTo("Der kleine Maulwurf in etwas gr&ouml;&szlig;er :-)");
         assertThat(trackable.getGeocode()).isEqualTo("TB54VJJ");
-        assertEquals("Nordrhein-Westfalen, Germany", trackable.getOrigin());
+        assertThat(trackable.getOrigin()).isEqualTo("Nordrhein-Westfalen, Germany");
         assertThat(trackable.getOwner()).isEqualTo("Lineflyer");
         // the icon url is manipulated during compression
         assertThat(trackable.getIconUrl().endsWith("www.geocaching.com/images/wpttypes/21.gif")).isTrue();

@@ -66,7 +66,7 @@ public class ViewportTest extends AndroidTestCase {
         try {
             current = Locale.getDefault();
             Locale.setDefault(Locale.FRENCH);
-            assertEquals("1,0", String.format("%.2g", 1.0d));  // Control that we are in a locale with commma separator
+            assertThat(String.format("%.2g", 1.0d)).isEqualTo("1,0"); // Control that we are in a locale with comma separator
             assertThat(vpRef.sqlWhere("t").toString()).isEqualTo("t.latitude >= -1.0 and t.latitude <= 3.0 and t.longitude >= -2.0 and t.longitude <= 4.0");
         } finally {
             Locale.setDefault(current);
