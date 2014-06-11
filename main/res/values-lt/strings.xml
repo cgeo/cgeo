@@ -412,8 +412,6 @@
   <string name="init_captcha">Rodyti CAPTCHA</string>
   <string name="init_summary_captcha">Jei reikia rodyti CAPTCHA (tik baziniams nariams)</string>
   <string name="init_useenglish">Anglu kalba</string>
-  <string name="init_showoverflowmenu">Visada rodyti papildomą meniu</string>
-  <string name="init_showoverflow_summary">Visada rodyti papildomą meniu (trys taškai ⋮) net jei prietaisas turi meniu mygtuką (reikia pakartotinai paleisti)</string>
   <string name="init_summary_useenglish">Naudoti anglų kalbą (reikia pakartotinai paleisti)</string>
   <string name="init_exclude">Atmesti savo ir rastas</string>
   <string name="init_summary_exclude">Atmesti nuosavas ir rastas slėptuves</string>

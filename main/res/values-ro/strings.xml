@@ -410,8 +410,6 @@
   <string name="init_captcha">Arată CAPTCHA</string>
   <string name="init_summary_captcha">Arată CAPTCHA dacă este necesar (doar Basic Member)</string>
   <string name="init_useenglish">Foloseşte limba engleză</string>
-  <string name="init_showoverflowmenu">Afişează întotdeauna meniul suprapus</string>
-  <string name="init_showoverflow_summary">Afişează întotdeauna meniul suprapus (trei puncte ⋮) chiar dacă dispozitivul are buton pentru meniu (necesită repornirea aplicaţiei)</string>
   <string name="init_summary_useenglish">Foloseşte limba engleză în c:geo (Aplicaţia trebuie repornită)</string>
   <string name="init_exclude">Exclude Găsite şi Ale mele</string>
   <string name="init_summary_exclude">Exclude cutiile găsite şi cele proprii</string>

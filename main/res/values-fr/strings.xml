@@ -413,8 +413,6 @@
   <string name="init_captcha">Afficher le CAPTCHA si nécessaire</string>
   <string name="init_summary_captcha">Afficher le CAPTCHA si nécessaire</string>
   <string name="init_useenglish">Utiliser l\'anglais dans c:geo\n(redémarrage nécessaire)</string>
-  <string name="init_showoverflowmenu">Toujours afficher le menu</string>
-  <string name="init_showoverflow_summary">Toujours afficher le symbole pour obtenir le menu (trois points⋮) même si l\'appareil a un bouton menu (redémarrage nécessaire)</string>
   <string name="init_summary_useenglish">Utiliser l\'anglais dans c:geo\n(redémarrage nécessaire)</string>
   <string name="init_exclude">Exclure mes caches et les caches trouvées</string>
   <string name="init_summary_exclude">Exclure mes caches et les caches trouvées</string>

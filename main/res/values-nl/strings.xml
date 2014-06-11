@@ -415,8 +415,6 @@
   <string name="init_captcha">Tonen CAPTCHA</string>
   <string name="init_summary_captcha">Laat CAPTCHA zien indien noodzakelijk</string>
   <string name="init_useenglish">Use English language</string>
-  <string name="init_showoverflowmenu">Altijd overloop menu tonen</string>
-  <string name="init_showoverflow_summary">Altijd het overloop menu (drie puntjes ⋮) tonen zelfs als het apparaat een menu-knop heeft (opnieuw opstarten noodzakelijk)</string>
   <string name="init_summary_useenglish">Use English inside c:geo\n(restart needed)</string>
   <string name="init_exclude">Eigen en gevonden caches uitsluiten</string>
   <string name="init_summary_exclude">Eigen en gevonden caches uitsluiten</string>

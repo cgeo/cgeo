@@ -415,8 +415,6 @@
   <string name="init_captcha">Zeige CAPTCHA</string>
   <string name="init_summary_captcha">Zeige CAPTCHA wenn notwendig (nur Basic Member)</string>
   <string name="init_useenglish">Auf Englisch</string>
-  <string name="init_showoverflowmenu">Menü-Symbol immer anzeigen</string>
-  <string name="init_showoverflow_summary">Zeigt das Menü-Symbol (Drei Punkte ⋮) auch an wenn das Gerät eine Menütaste hat (Neustart benötigt)</string>
   <string name="init_summary_useenglish">c:geo auf Englisch nutzen (Neustart erforderlich)</string>
   <string name="init_exclude">Eigene und gefundene Caches</string>
   <string name="init_summary_exclude">Eigene und gefundene Caches ausblenden</string>

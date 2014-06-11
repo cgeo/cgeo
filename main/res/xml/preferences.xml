@@ -403,12 +403,6 @@
             android:key="@string/pref_units"
             android:summary="@string/init_summary_units"
             android:title="@string/init_units" />
-        <!-- this preference is only shown on < 4.4 devices, 4.4 unconditionally enables it -->
-        <CheckBoxPreference
-            android:title="@string/init_showoverflowmenu"
-            android:summary="@string/init_showoverflow_summary"
-            android:key="@string/pref_alwaysshowoverflowmenu"
-            android:defaultValue="false" />
     </PreferenceScreen>
     <PreferenceScreen
         android:icon="?attr/settings_details"

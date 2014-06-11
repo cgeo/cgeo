@@ -452,8 +452,6 @@
     <string name="init_captcha">Show CAPTCHA</string>
     <string name="init_summary_captcha">Show CAPTCHA if necessary (only Basic Member)</string>
     <string name="init_useenglish">Use English</string>
-    <string name="init_showoverflowmenu">Always show overflow menu</string>
-    <string name="init_showoverflow_summary">Always show the overflow menu (three dots ⋮) even if the device has a menu button (Restart needed)</string>
     <string name="init_summary_useenglish">Use English language for c:geo (Restart needed)</string>
     <string name="init_exclude">Exclude Own and Found</string>
     <string name="init_summary_exclude">Exclude caches you own or have found</string>
