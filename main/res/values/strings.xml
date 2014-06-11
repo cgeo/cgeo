@@ -335,6 +335,7 @@
     <string name="list_menu_create">Create new list</string>
     <string name="list_menu_drop">Drop current list</string>
     <string name="list_menu_rename">Rename current list</string>
+    <string name="list_menu_import">Import</string>
     <string name="list_title">Pick a list</string>
     <string name="list_inbox">Stored</string>
     <string name="list_all_lists">All caches</string>

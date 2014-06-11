@@ -42,11 +42,6 @@
         android:title="@string/cache_menu_move_list">
     </item>
     <item
-        android:id="@+id/menu_export"
-        cgeo:showAsAction="ifRoom|withText"
-        android:title="@string/export">
-    </item>
-    <item
         android:id="@+id/menu_refresh"
         cgeo:showAsAction="ifRoom|withText"
         android:icon="@drawable/ic_menu_refresh"

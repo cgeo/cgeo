@@ -34,9 +34,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-class GpxExport extends AbstractExport {
+public class GpxExport extends AbstractExport {
 
-    protected GpxExport() {
+    public GpxExport() {
         super(getString(R.string.export_gpx));
     }
 
@@ -70,7 +70,7 @@ class GpxExport extends AbstractExport {
 
         shareOption.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 Settings.setShareAfterExport(shareOption.isChecked());
             }
         });
@@ -78,7 +78,7 @@ class GpxExport extends AbstractExport {
         builder.setPositiveButton(R.string.export, new DialogInterface.OnClickListener() {
 
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(final DialogInterface dialog, final int which) {
                 dialog.dismiss();
                 new ExportTask(activity).execute(geocodes);
             }
@@ -116,7 +116,7 @@ class GpxExport extends AbstractExport {
         }
 
         @Override
-        protected File doInBackgroundInternal(String[] geocodes) {
+        protected File doInBackgroundInternal(final String[] geocodes) {
             // quick check for being able to write the GPX file
             if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                 return null;

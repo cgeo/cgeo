@@ -13,7 +13,8 @@ import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.export.ExportFactory;
+import cgeo.geocaching.export.FieldnoteExport;
+import cgeo.geocaching.export.GpxExport;
 import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.filter.FilterUserInterface;
 import cgeo.geocaching.filter.IFilter;
@@ -581,7 +582,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setVisible(menu, R.id.menu_drop_caches_and_list, isConcrete && !isEmpty && isOffline);
             setVisible(menu, R.id.menu_delete_events, isConcrete && !isEmpty && containsPastEvents());
             setVisible(menu, R.id.menu_move_to_list, isOffline && !isEmpty);
-            setVisible(menu, R.id.menu_export, !isEmpty && (isHistory || isOffline));
             setVisible(menu, R.id.menu_remove_from_history, !isEmpty && isHistory);
             setVisible(menu, R.id.menu_clear_offline_logs, !isEmpty && containsOfflineLogs() && (isHistory || isOffline));
             setVisible(menu, R.id.menu_import_web, isOffline);
@@ -612,7 +612,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             menu.findItem(R.id.menu_move_to_list).setVisible(!isEmpty);
 
             setMenuItemLabel(menu, R.id.menu_remove_from_history, R.string.cache_remove_from_history, R.string.cache_clear_history);
-            setMenuItemLabel(menu, R.id.menu_export, R.string.export, R.string.export);
             menu.findItem(R.id.menu_import_android).setVisible(Compatibility.isStorageAccessFrameworkAvailable() && isOffline);
         } catch (final RuntimeException e) {
             Log.e("CacheListActivity.onPrepareOptionsMenu", e);
@@ -724,10 +723,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 return true;
             case R.id.menu_import_web:
                 importWeb();
-                return false;
-            case R.id.menu_export:
-                ExportFactory.showExportMenu(adapter.getCheckedOrAllCaches(), this);
-                return false;
+                return true;
+            case R.id.menu_export_gpx:
+                new GpxExport().export(adapter.getCheckedOrAllCaches(), this);
+                return true;
+            case R.id.menu_export_fieldnotes:
+                new FieldnoteExport().export(adapter.getCheckedOrAllCaches(), this);
+                return true;
             case R.id.menu_remove_from_history:
                 removeFromHistoryCheck();
                 invalidateOptionsMenuCompatible();
@@ -832,7 +834,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final boolean isOffline = cache.isOffline();
         menu.findItem(R.id.menu_drop_cache).setVisible(isOffline);
         menu.findItem(R.id.menu_move_to_list).setVisible(isOffline);
-        menu.findItem(R.id.menu_export).setVisible(isOffline);
         menu.findItem(R.id.menu_refresh).setVisible(isOffline);
         menu.findItem(R.id.menu_store_cache).setVisible(!isOffline);
 
@@ -911,9 +912,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             case R.id.menu_refresh:
                 refreshStored(Collections.singletonList(cache));
                 break;
-            case R.id.menu_export:
-                ExportFactory.showExportMenu(Collections.singletonList(cache), this);
-                return false;
             default:
                 // we must remember the menu info for the sub menu, there is a bug
                 // in Android:

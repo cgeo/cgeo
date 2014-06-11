@@ -60,22 +60,6 @@
                 android:title="@string/caches_clear_offlinelogs">
             </item>
             <item
-                android:id="@+id/menu_import_gpx"
-                android:title="@string/gpx_import_title">
-            </item>
-            <item
-                android:id="@+id/menu_import_web"
-                android:title="@string/web_import_title">
-            </item>
-            <item
-                android:id="@+id/menu_import_android"
-                android:title="@string/gpx_import_android">
-            </item>
-            <item
-                android:id="@+id/menu_export"
-                android:title="@string/export">
-            </item>
-            <item
                 android:id="@+id/menu_remove_from_history"
                 android:title="@string/cache_clear_history">
             </item>
@@ -111,5 +95,37 @@
     <item
          android:id="@+id/menu_rename_list"
          android:title="@string/list_menu_rename">
+    </item>
+    <item
+        cgeo:showAsAction="never|withText"
+        android:title="@string/list_menu_import">
+        <menu>
+    		<item
+                android:id="@+id/menu_import_gpx"
+                android:title="@string/gpx_import_title">
+            </item>
+            <item
+                android:id="@+id/menu_import_web"
+                android:title="@string/web_import_title">
+            </item>
+            <item
+                android:id="@+id/menu_import_android"
+                android:title="@string/gpx_import_android">
+            </item>
+        </menu>
+    </item>
+    <item
+        cgeo:showAsAction="never|withText"
+        android:title="@string/export">
+        <menu>
+    		<item
+                android:id="@+id/menu_export_gpx"
+                android:title="@string/export_gpx">
+            </item>
+            <item
+                android:id="@+id/menu_export_fieldnotes"
+                android:title="@string/export_fieldnotes">
+            </item>
+        </menu>
     </item>
 </menu>

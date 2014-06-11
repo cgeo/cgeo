@@ -29,11 +29,11 @@ import java.util.List;
  * Exports offline logs in the Groundspeak Field Note format.
  *
  */
-class FieldnoteExport extends AbstractExport {
+public class FieldnoteExport extends AbstractExport {
     private static final File exportLocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/field-notes");
     private static int fieldNotesCount = 0;
 
-    protected FieldnoteExport() {
+    public FieldnoteExport() {
         super(getString(R.string.export_fieldnotes));
     }
 
@@ -110,7 +110,7 @@ class FieldnoteExport extends AbstractExport {
         @Override
         protected Boolean doInBackgroundInternal(final Geocache[] caches) {
             // export field notes separately for each connector, so the file can be uploaded to the respective site afterwards
-            for (IConnector connector : ConnectorFactory.getConnectors()) {
+            for (final IConnector connector : ConnectorFactory.getConnectors()) {
                 if (connector instanceof FieldNotesCapability) {
                     exportFieldNotes((FieldNotesCapability) connector, caches);
                 }
@@ -118,7 +118,7 @@ class FieldnoteExport extends AbstractExport {
             return true;
         }
 
-        private boolean exportFieldNotes(final FieldNotesCapability connector, Geocache[] caches) {
+        private boolean exportFieldNotes(final FieldNotesCapability connector, final Geocache[] caches) {
             final FieldNotes fieldNotes = new FieldNotes();
             try {
                 int i = 0;
