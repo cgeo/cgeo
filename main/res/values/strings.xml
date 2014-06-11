@@ -923,6 +923,7 @@
     <!-- navigation -->
     <string name="navigation">Navigation</string>
     <string name="compass_title">Compass</string>
+    <string name="compass_sensors">Active Sensors</string>
     <string name="use_gps">Use GPS only</string>
     <string name="use_compass">Use GPS and Compass</string>
     <string name="destination_select">Select destination</string>

@@ -150,7 +150,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.compass_activity_options, menu);
-        menu.findItem(R.id.menu_switch_compass_gps).setVisible(hasMagneticFieldSensor);
+        menu.findItem(R.id.menu_compass_sensor).setVisible(hasMagneticFieldSensor);
         final SubMenu subMenu = menu.findItem(R.id.menu_select_destination).getSubMenu();
         if (coordinates.size() > 1) {
             for (int i = 0; i < coordinates.size(); i++) {
@@ -169,7 +169,12 @@ public class CompassActivity extends AbstractActionBarActivity {
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_switch_compass_gps).setTitle(res.getString(Settings.isUseCompass() ? R.string.use_gps : R.string.use_compass));
+        if (Settings.isUseCompass()) {
+            menu.findItem(R.id.menu_compass_sensor_magnetic).setChecked(true);
+        }
+        else {
+            menu.findItem(R.id.menu_compass_sensor_gps).setChecked(true);
+        }
         menu.findItem(R.id.menu_tts_start).setVisible(!SpeechService.isRunning());
         menu.findItem(R.id.menu_tts_stop).setVisible(SpeechService.isRunning());
         return true;
@@ -182,9 +187,12 @@ public class CompassActivity extends AbstractActionBarActivity {
             case R.id.menu_map:
                 CGeoMap.startActivityCoords(this, dstCoords, null, null);
                 return true;
-            case R.id.menu_switch_compass_gps:
-                final boolean oldSetting = Settings.isUseCompass();
-                Settings.setUseCompass(!oldSetting);
+            case R.id.menu_compass_sensor_gps:
+                Settings.setUseCompass(false);
+                invalidateOptionsMenuCompatible();
+                return true;
+            case R.id.menu_compass_sensor_magnetic:
+                Settings.setUseCompass(true);
                 invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_tts_start:
