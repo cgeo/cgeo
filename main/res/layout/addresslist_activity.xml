@@ -12,8 +12,10 @@
         android:layout_margin="0dip"
         android:background="?background_color"
         android:cacheColorHint="?background_color"
+        android:clipToPadding="false"
         android:dividerHeight="1dip"
         android:padding="0dip"
+        android:scrollbarStyle="outsideOverlay"
         tools:listitem="@layout/addresslist_item" />
 
 </LinearLayout>

@@ -7,7 +7,7 @@
     <Button
         android:id="@+id/select_dir"
         style="@style/button_full"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <ListView
         android:id="@android:id/list"
@@ -16,7 +16,9 @@
         android:layout_margin="0dip"
         android:background="?background_color"
         android:cacheColorHint="?background_color"
+        android:clipToPadding="false"
         android:dividerHeight="1dip"
-        android:padding="0dip" />
+        android:padding="0dip"
+        android:scrollbarStyle="outsideOverlay" />
 
 </LinearLayout>

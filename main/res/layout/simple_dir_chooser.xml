@@ -65,6 +65,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/buttonLayout"
         android:layout_below="@+id/headerLayout"
+        android:clipToPadding="false"
+        android:scrollbarStyle="outsideOverlay"
         tools:listitem="@layout/simple_dir_item" />
 
 </RelativeLayout>

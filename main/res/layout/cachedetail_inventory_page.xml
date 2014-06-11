@@ -2,6 +2,8 @@
 <ListView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:cacheColorHint="?background_color" >
+    android:cacheColorHint="?background_color"
+    android:clipToPadding="false"
+    android:scrollbarStyle="outsideOverlay" >
 
 </ListView>

@@ -28,9 +28,11 @@
         android:layout_margin="0dip"
         android:background="?background_color"
         android:cacheColorHint="?background_color"
+        android:clipToPadding="false"
         android:dividerHeight="1dip"
+        android:fastScrollEnabled="true"
         android:padding="0dip"
-        android:visibility="gone"
-        android:fastScrollEnabled="true" />
+        android:scrollbarStyle="outsideOverlay"
+        android:visibility="gone" />
 
 </LinearLayout>
