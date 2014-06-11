@@ -208,6 +208,7 @@
   <string name="info_select_logimage_cancelled">Foto selectie of opname is geannuleerd.</string>
   <string name="info_stored_image">Nieuwe foto opgeslagen in:</string>
   <string name="info_storing_static_maps">Proberen statische kaarten op te slaan</string>
+  <string name="info_cache_saved">De cache is lokaal opgeslagen</string>
   <string name="loc_last">Laatst bekende</string>
   <string name="loc_net">Netwerk</string>
   <string name="loc_gps">GPS</string>
@@ -215,6 +216,7 @@
   <string name="loc_trying">Proberen te lokaliseren</string>
   <string name="loc_no_addr">Adres onbekend</string>
   <string name="loc_gps_disabled">GPS uitgeschakeld</string>
+  <string name="menu_centerposition">Centreer op mijn positie</string>
   <string name="menu_about">Over c:geo</string>
   <string name="menu_helpers">Hulpprogramma\'s</string>
   <string name="menu_settings">Instellingen</string>
@@ -413,6 +415,8 @@
   <string name="init_captcha">Tonen CAPTCHA</string>
   <string name="init_summary_captcha">Laat CAPTCHA zien indien noodzakelijk</string>
   <string name="init_useenglish">Use English language</string>
+  <string name="init_showoverflowmenu">Altijd overloop menu tonen</string>
+  <string name="init_showoverflow_summary">Altijd het overloop menu (drie puntjes ⋮) tonen zelfs als het apparaat een menu-knop heeft (opnieuw opstarten noodzakelijk)</string>
   <string name="init_summary_useenglish">Use English inside c:geo\n(restart needed)</string>
   <string name="init_exclude">Eigen en gevonden caches uitsluiten</string>
   <string name="init_summary_exclude">Eigen en gevonden caches uitsluiten</string>
@@ -490,6 +494,9 @@
   <string name="init_maintenance">Onderhoud</string>
   <string name="init_maintenance_directories_note">c:geo slaat diverse bestanden die bij een cache horen op in een afzonderlijke map. In sommige gevallen (zoals bij importeren/exporteren van de database) kan deze map verouderde bestanden bevatten. Deze kunnen hier verwijderd worden.</string>
   <string name="init_maintenance_directories">Verweesde bestanden verwijderen</string>
+  <string name="init_create_memory_dump">Geheugendump maken</string>
+  <string name="init_memory_dump">Geheugendump</string>
+  <string name="init_memory_dumped">Geheugen gedumpt naar %s</string>
   <string name="settings_open_website">Open website</string>
   <string name="settings_settings">Instellingen</string>
   <string name="settings_information">Informatie</string>
@@ -1161,4 +1168,5 @@
   <string name="percent_favorite_points">%\ favorieten</string>
   <string name="cgeo_shortcut">c:geo snelkoppeling</string>
   <string name="create_shortcut">Maak snelkoppeling</string>
+  <string name="send">Verzenden</string>
 </resources>
