@@ -829,7 +829,6 @@
   <string name="use_gps">Usa Nord solo da GPS</string>
   <string name="use_compass">Usa Nord da GPS e bussola</string>
   <string name="destination_select">Scegli destinazione</string>
-  <string name="destination_set">Attiva destinazione</string>
   <string name="navigation_direct_navigation">Navigazione diretta</string>
   <string name="navigation_target">Destinazione</string>
   <string name="err_nav_no_coordinates">Non è possibile avviare la navigazione senza coordinate</string>

@@ -823,7 +823,6 @@
   <string name="use_gps">Bruk GPS</string>
   <string name="use_compass">Bruk kompass</string>
   <string name="destination_select">Velg destinasjon</string>
-  <string name="destination_set">Sett destinasjon</string>
   <string name="navigation_direct_navigation">Direkte navigering</string>
   <string name="navigation_target">Mål</string>
   <string name="err_nav_no_coordinates">Kan ikke starte navigering uten koordinater</string>

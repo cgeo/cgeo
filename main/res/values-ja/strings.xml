@@ -775,7 +775,6 @@
   <string name="use_gps">GPSのみ使用</string>
   <string name="use_compass">GPSとコンパスを使用</string>
   <string name="destination_select">目的地を選択</string>
-  <string name="destination_set">目的地を入力</string>
   <string name="navigation_direct_navigation">Direct Navigation</string>
   <string name="navigation_target">Target</string>
   <string name="err_nav_no_coordinates">座標値が未入力なのでナビゲーションが開始できません</string>

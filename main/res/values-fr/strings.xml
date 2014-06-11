@@ -843,7 +843,6 @@
   <string name="use_gps">Utiliser GPS</string>
   <string name="use_compass">Utiliser la boussole</string>
   <string name="destination_select">Choisir une destination</string>
-  <string name="destination_set">Définir une destination</string>
   <string name="navigation_direct_navigation">Navigation directe</string>
   <string name="navigation_target">Cible</string>
   <string name="err_nav_no_coordinates">Impossible de démarrer la navigation en l\'absence de coordonnées</string>

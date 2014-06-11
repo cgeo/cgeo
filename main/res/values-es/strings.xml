@@ -664,7 +664,6 @@
   <string name="use_gps">Solo usar GPS</string>
   <string name="use_compass">Usar GPS y brújula</string>
   <string name="destination_select">Seleccionar destino</string>
-  <string name="destination_set">Elegir destino</string>
   <string name="navigation_target">Objetivo</string>
   <string name="license">Licencia</string>
   <string name="license_show">Mostrar licencia</string>

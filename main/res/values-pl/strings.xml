@@ -837,7 +837,6 @@
   <string name="use_gps">Użyj tylko GPS</string>
   <string name="use_compass">Użyj GPS i kompasu</string>
   <string name="destination_select">Wybierz cel</string>
-  <string name="destination_set">Ustaw cel</string>
   <string name="navigation_direct_navigation">Bezpośrednia nawigacja</string>
   <string name="navigation_target">Cel</string>
   <string name="err_nav_no_coordinates">Nie można rozpocząć nawigacji - brak współrzędnych</string>

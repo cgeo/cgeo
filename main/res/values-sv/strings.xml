@@ -842,7 +842,6 @@
   <string name="use_gps">Använd enbart GPS</string>
   <string name="use_compass">Använd GPS och kompass</string>
   <string name="destination_select">Välj målpunkt</string>
-  <string name="destination_set">Sätt målpunkt</string>
   <string name="navigation_direct_navigation">Direkt navigering</string>
   <string name="navigation_target">Mål</string>
   <string name="err_nav_no_coordinates">Kan inte starta navigering utan koordinater</string>

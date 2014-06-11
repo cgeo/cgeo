@@ -846,7 +846,6 @@
   <string name="use_gps">Nur GPS nutzen</string>
   <string name="use_compass">GPS und Kompass nutzen</string>
   <string name="destination_select">Ziel auswählen</string>
-  <string name="destination_set">Ziel setzen</string>
   <string name="navigation_direct_navigation">Direkte Navigation</string>
   <string name="navigation_target">Ziel</string>
   <string name="err_nav_no_coordinates">Die Navigation kann ohne Koordinaten nicht gestartet werden</string>

@@ -849,7 +849,6 @@
   <string name="use_gps">Gebruik alleen GPS</string>
   <string name="use_compass">Gebruik GPS en kompas</string>
   <string name="destination_select">Selecteer bestemming</string>
-  <string name="destination_set">Zet bestemming</string>
   <string name="navigation_direct_navigation">Directe navigatie</string>
   <string name="navigation_target">Doel</string>
   <string name="err_nav_no_coordinates">Kan navigatie niet starten zonder coördinaten</string>

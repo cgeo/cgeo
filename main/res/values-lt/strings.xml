@@ -843,7 +843,6 @@
   <string name="use_gps">Naudoti tik GPS</string>
   <string name="use_compass">Naudoti GPS ir kompasą</string>
   <string name="destination_select">Pasirinkite tikslą</string>
-  <string name="destination_set">Nustatyti tikslą</string>
   <string name="navigation_direct_navigation">Tiesioginė navigacija</string>
   <string name="navigation_target">Tikslas</string>
   <string name="err_nav_no_coordinates">Be koordinačių navigacijos pradėti neįmanoma</string>

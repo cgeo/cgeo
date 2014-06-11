@@ -829,7 +829,6 @@
   <string name="use_gps">Použít GPS</string>
   <string name="use_compass">Použít kompas</string>
   <string name="destination_select">Vyber cíl</string>
-  <string name="destination_set">Cíl nastaven</string>
   <string name="navigation_direct_navigation">Přímá navigace</string>
   <string name="navigation_target">Cíl</string>
   <string name="err_nav_no_coordinates">Nelze spustit navigaci bez souřadnic</string>

@@ -835,7 +835,6 @@
   <string name="use_gps">Foloseşte doar GPS-ul</string>
   <string name="use_compass">Foloseşte GPS-ul şi busola</string>
   <string name="destination_select">Alege destinaţia</string>
-  <string name="destination_set">Alege destinaţia</string>
   <string name="navigation_direct_navigation">Navigare directă</string>
   <string name="navigation_target">Ţintă</string>
   <string name="err_nav_no_coordinates">Nu se poate porni navigarea fără coordonate</string>

@@ -842,7 +842,6 @@
   <string name="use_gps">Usa només el GPS</string>
   <string name="use_compass">Usa el GPS i la brúixola</string>
   <string name="destination_select">Tria destinació</string>
-  <string name="destination_set">Fixa destinació</string>
   <string name="navigation_direct_navigation">Navegació directa</string>
   <string name="navigation_target">Objectiu</string>
   <string name="err_nav_no_coordinates">No es pot iniciar la navegació sense les coordenades</string>

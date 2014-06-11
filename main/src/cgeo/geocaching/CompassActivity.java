@@ -187,12 +187,6 @@ public class CompassActivity extends AbstractActionBarActivity {
                 Settings.setUseCompass(!oldSetting);
                 invalidateOptionsMenuCompatible();
                 return true;
-            case R.id.menu_edit_destination:
-                final Intent pointIntent = new Intent(this, NavigateAnyPointActivity.class);
-                startActivity(pointIntent);
-
-                finish();
-                return true;
             case R.id.menu_tts_start:
                 SpeechService.startService(this, dstCoords);
                 invalidateOptionsMenuCompatible();

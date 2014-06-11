@@ -835,7 +835,6 @@
   <string name="use_gps">Uporabi samo GPS</string>
   <string name="use_compass">Uporabi GPS in kompas</string>
   <string name="destination_select">Izbira destinacije</string>
-  <string name="destination_set">Nastavi destinacijo</string>
   <string name="navigation_direct_navigation">Direktna navigacija</string>
   <string name="navigation_target">Cilj</string>
   <string name="err_nav_no_coordinates">Ne morem začeti navigacije brez koordinat</string>
