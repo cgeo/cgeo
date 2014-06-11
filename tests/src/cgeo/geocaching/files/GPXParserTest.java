@@ -373,4 +373,16 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(cache.isPremiumMembersOnly()).isTrue();
     }
 
+    public void testGPXMysteryType() throws IOException, ParserException {
+        final List<Geocache> caches = readGPX10(R.raw.tc2012);
+        Geocache mystery = null;
+        for (Geocache geocache : caches) {
+            if (geocache.getName().equals("U017")) {
+                mystery = geocache;
+            }
+        }
+        assertThat(mystery).isNotNull();
+        assert (mystery != null);
+        assertThat(mystery.getType()).isEqualTo(CacheType.MYSTERY);
+    }
 }
