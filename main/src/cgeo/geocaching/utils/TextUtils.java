@@ -4,11 +4,13 @@
 package cgeo.geocaching.utils;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import org.eclipse.jdt.annotation.Nullable;
 
 import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.zip.CRC32;
 
 /**
  * Misc. utils. All methods don't use Android specific stuff to use these methods in plain JUnit tests.
@@ -52,7 +54,7 @@ public final class TextUtils {
                 result = matcher.group(group);
             }
             if (null != result) {
-                Matcher remover = PATTERN_REMOVE_NONPRINTABLE.matcher(result);
+                final Matcher remover = PATTERN_REMOVE_NONPRINTABLE.matcher(result);
                 result = remover.replaceAll(" ");
 
                 return trim ? new String(result).trim() : new String(result);
@@ -134,7 +136,7 @@ public final class TextUtils {
         data.getChars(0, length, chars, 0);
         int resultSize = 0;
         boolean lastWasWhitespace = true;
-        for (char c : chars) {
+        for (final char c : chars) {
             if (c == ' ' || c == '\n' || c == '\r' || c == '\t') {
                 if (!lastWasWhitespace) {
                     chars[resultSize++] = ' ';
@@ -167,8 +169,20 @@ public final class TextUtils {
      * @return
      */
     public static String removeControlCharacters(final String input) {
-        Matcher remover = PATTERN_REMOVE_NONPRINTABLE.matcher(input);
+        final Matcher remover = PATTERN_REMOVE_NONPRINTABLE.matcher(input);
         return remover.replaceAll(" ").trim();
     }
 
+    /**
+     * Calculate a simple checksum for change-checking (not usable for security/cryptography!)
+     * 
+     * @param input
+     *            String to check
+     * @return resulting checksum
+     */
+    public static long checksum(final String input) {
+        final CRC32 checksum = new CRC32();
+        checksum.update(input.getBytes());
+        return checksum.getValue();
+    }
 }

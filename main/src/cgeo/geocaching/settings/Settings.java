@@ -1007,13 +1007,13 @@ public class Settings {
         return getString(R.string.pref_ec_icons, "1");
     }
 
-    /* Store last version for the changelog display */
-    public static int getLastChangelogVersion() {
-        return getInt(R.string.pref_changelog_last_version, 0);
+    /* Store last checksum of changelog for changelog display */
+    public static long getLastChangelogChecksum() {
+        return getLong(R.string.pref_changelog_last_checksum, 0);
     }
 
-    public static void setLastChangelogVersion(final int version) {
-        putInt(R.string.pref_changelog_last_version, version);
+    public static void setLastChangelogChecksum(final long checksum) {
+        putLong(R.string.pref_changelog_last_checksum, checksum);
     }
 
     public static List<String> getLastOpenedCaches() {

@@ -168,6 +168,6 @@
     <string name="pref_ec_icons">ec_icons</string>
     <string name="pref_memory_dump">memory_dump</string>
     <string name="pref_appearance">pref_appearance</string>
-    <string name="pref_changelog_last_version">changelog_last_version</string>
+    <string name="pref_changelog_last_checksum">changelog_last_checksum</string>
     <string name="pref_caches_history">caches_history</string>
 </resources>

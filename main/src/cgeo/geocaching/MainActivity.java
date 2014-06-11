@@ -23,6 +23,7 @@ import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.DatabaseBackupUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
 
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -732,11 +733,11 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     private void checkShowChangelog() {
-        final int lastVersion = Settings.getLastChangelogVersion();
-        final int version = Version.getVersionCode(this);
-        Settings.setLastChangelogVersion(version);
+        final long lastChecksum = Settings.getLastChangelogChecksum();
+        final long checksum = TextUtils.checksum(getString(R.string.changelog_master) + getString(R.string.changelog_release));
+        Settings.setLastChangelogChecksum(checksum);
         // don't show change log after new install...
-        if (lastVersion > 0 && version != lastVersion) {
+        if (lastChecksum > 0 && lastChecksum != checksum) {
             AboutActivity.showChangeLog(this);
         }
     }
