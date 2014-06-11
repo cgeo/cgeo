@@ -80,6 +80,7 @@ final class OkapiClient {
     private static final String CACHE_VOTES = "rating_votes";
     private static final String CACHE_NOTFOUNDS = "notfounds";
     private static final String CACHE_FOUNDS = "founds";
+    private static final String CACHE_WILLATTENDS = "willattends";
     private static final String CACHE_HIDDEN = "date_hidden";
     private static final String CACHE_LATEST_LOGS = "latest_logs";
     private static final String CACHE_IMAGE_URL = "url";
@@ -121,7 +122,7 @@ final class OkapiClient {
     private static final String SERVICE_CACHE_CORE_FIELDS = "code|name|location|type|status|difficulty|terrain|size|size2|date_hidden|trackables_count";
     private static final String SERVICE_CACHE_CORE_L3_FIELDS = "is_found";
     private static final String SERVICE_CACHE_ADDITIONAL_FIELDS = "owner|founds|notfounds|rating|rating_votes|recommendations|description|hint|images|latest_logs|alt_wpts|attrnames|req_passwd|trackables";
-    private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS = "gc_code|attribution_note|attr_acodes";
+    private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS = "gc_code|attribution_note|attr_acodes|willattends";
     private static final String SERVICE_CACHE_ADDITIONAL_L3_FIELDS = "is_watched|my_notes";
 
     private static final String METHOD_SEARCH_ALL = "services/caches/search/all";
@@ -342,6 +343,8 @@ final class OkapiClient {
 
             cache.getLogCounts().put(LogType.FOUND_IT, response.getInt(CACHE_FOUNDS));
             cache.getLogCounts().put(LogType.DIDNT_FIND_IT, response.getInt(CACHE_NOTFOUNDS));
+            // only current Api
+            cache.getLogCounts().put(LogType.WILL_ATTEND, response.optInt(CACHE_WILLATTENDS));
 
             if (!response.isNull(CACHE_RATING)) {
                 cache.setRating((float) response.getDouble(CACHE_RATING));

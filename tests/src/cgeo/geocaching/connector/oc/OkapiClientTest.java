@@ -6,6 +6,7 @@ import cgeo.CGeoTestCase;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.enumerations.LogType;
 
 public class OkapiClientTest extends CGeoTestCase {
 
@@ -46,6 +47,15 @@ public class OkapiClientTest extends CGeoTestCase {
         // load again
         cache.refreshSynchronous(null);
         assertThat(cache.getWaypoints()).hasSize(3);
+    }
+
+    public static void testOCWillAttendLogs() {
+        final String geoCode = "OC10CB8";
+
+        removeCacheCompletely(geoCode);
+        Geocache cache = OkapiClient.getCache(geoCode);
+        assertThat(cache).as("Cache from OKAPI").isNotNull();
+        assertThat(cache.getLogCounts().get(LogType.WILL_ATTEND)).isGreaterThan(0);
     }
 
 }
