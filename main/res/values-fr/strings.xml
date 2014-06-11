@@ -559,7 +559,6 @@
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Attributs</string>
   <string name="cache_inventory">Inventaire</string>
-  <string name="cache_log_offline">Visite hors-ligne</string>
   <string name="cache_log_images_title">Image de la visite</string>
   <string name="cache_log_image_default_title">Photo</string>
   <string name="cache_personal_note">Note personnelle</string>

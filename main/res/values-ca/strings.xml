@@ -559,7 +559,6 @@
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Atributs</string>
   <string name="cache_inventory">Inventari</string>
-  <string name="cache_log_offline">Registre fora línia</string>
   <string name="cache_log_images_title">Imatges del registre</string>
   <string name="cache_log_image_default_title">Foto</string>
   <string name="cache_personal_note">Nota personal</string>

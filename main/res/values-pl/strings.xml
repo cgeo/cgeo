@@ -554,7 +554,6 @@
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Atrybuty</string>
   <string name="cache_inventory">Inwentarz</string>
-  <string name="cache_log_offline">Wpis offline</string>
   <string name="cache_log_images_title">Zdjęcie z wpisu</string>
   <string name="cache_log_image_default_title">Zdjęcie</string>
   <string name="cache_personal_note">Notatka osobista</string>

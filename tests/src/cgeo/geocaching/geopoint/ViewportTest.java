@@ -6,6 +6,7 @@ import cgeo.geocaching.ICoordinates;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import android.annotation.SuppressLint;
 import android.test.AndroidTestCase;
 
 import java.util.Collections;
@@ -59,6 +60,7 @@ public class ViewportTest extends AndroidTestCase {
         assertThat(vpRef.contains(new Geopoint(3.0, 4.0))).isTrue();
     }
 
+    @SuppressLint("DefaultLocale")
     public static void testSqlWhere() {
         assertThat(vpRef.sqlWhere(null).toString()).isEqualTo("latitude >= -1.0 and latitude <= 3.0 and longitude >= -2.0 and longitude <= 4.0");
         assertThat(vpRef.sqlWhere("t").toString()).isEqualTo("t.latitude >= -1.0 and t.latitude <= 3.0 and t.longitude >= -2.0 and t.longitude <= 4.0");

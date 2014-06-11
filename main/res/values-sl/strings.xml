@@ -553,7 +553,6 @@
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Atributi</string>
   <string name="cache_inventory">Inventar</string>
-  <string name="cache_log_offline">Shranjen zapis</string>
   <string name="cache_log_images_title">Slike</string>
   <string name="cache_log_image_default_title">Slika</string>
   <string name="cache_personal_note">Lastna opomba</string>

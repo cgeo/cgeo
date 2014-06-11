@@ -169,7 +169,6 @@
   <string name="cache_offline_time_days">dage siden</string>
   <string name="cache_attributes">Attributter</string>
   <string name="cache_inventory">Inventar</string>
-  <string name="cache_log_offline">Offline log</string>
   <string name="cache_description">Beskrivelse</string>
   <string name="cache_description_long">Lang beskrivelse</string>
   <string name="cache_waypoints">Waypoints</string>

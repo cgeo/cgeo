@@ -558,7 +558,6 @@
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Atributai</string>
   <string name="cache_inventory">Inventorius</string>
-  <string name="cache_log_offline">Įrašas neprisijungus</string>
   <string name="cache_log_images_title">Nuotraukos iš įrašo</string>
   <string name="cache_log_image_default_title">Nuotrauka</string>
   <string name="cache_personal_note">Asmeninė pastaba</string>
