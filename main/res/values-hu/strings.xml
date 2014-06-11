@@ -221,13 +221,6 @@
   <string name="caches_select_invert">Kijelölés invertálása</string>
   <string name="caches_nearby">Közeli</string>
   <string name="caches_manage">Kezelés</string>
-  <string name="caches_drop_selected">Kiválasztott törlése</string>
-  <string name="caches_drop_selected_ask">El szeretnéd távolítani a kiválasztott ládákat az eszközről?</string>
-  <string name="caches_drop_all">Az összes törlése</string>
-  <string name="caches_drop_all_ask">Szeretnél eltávolítani minden ládát a jelenlegi listáról?</string>
-  <string name="caches_drop_stored">Tároltak elvetése</string>
-  <string name="caches_drop_progress">Ládák eltávolítása</string>
-  <string name="caches_drop_all_and_list">Az összes térlése és a lista eltávolítása.</string>
   <string name="caches_refresh_selected">Kijelöltek frissítése</string>
   <string name="caches_refresh_all">Mind frissítése</string>
   <string name="caches_move_selected">Kijelöltek mozgatása</string>

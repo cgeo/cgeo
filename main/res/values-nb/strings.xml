@@ -266,13 +266,6 @@
   <string name="caches_select_invert">Inverter merking</string>
   <string name="caches_nearby">I nærheten</string>
   <string name="caches_manage">Administrer</string>
-  <string name="caches_drop_selected">Fjern valgte</string>
-  <string name="caches_drop_selected_ask">Vil du slette de valgte cachene fra enheten?</string>
-  <string name="caches_drop_all">Fjern alle</string>
-  <string name="caches_drop_all_ask">Vil du slette alle cacher fra enheten?</string>
-  <string name="caches_drop_stored">Fjern lagrede</string>
-  <string name="caches_drop_progress">Fjerner cacher</string>
-  <string name="caches_drop_all_and_list">Fjern alle cacher og fjern liste</string>
   <string name="caches_delete_events">Slett gamle eventer</string>
   <string name="caches_refresh_selected">Oppdater valgte</string>
   <string name="caches_refresh_all">Oppdater alle</string>

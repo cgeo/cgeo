@@ -269,13 +269,6 @@
   <string name="caches_select_invert">Selectie omkeren</string>
   <string name="caches_nearby">Nabij</string>
   <string name="caches_manage">Beheer</string>
-  <string name="caches_drop_selected">Drop geselecteerde</string>
-  <string name="caches_drop_selected_ask">Wil je de geselecteerde caches verwijderen van het apparaat?</string>
-  <string name="caches_drop_all">Alles verwijderen</string>
-  <string name="caches_drop_all_ask">Wil je alle caches van het apparaat verwijderen?</string>
-  <string name="caches_drop_stored">Verwijder opgeslagen</string>
-  <string name="caches_drop_progress">Caches worden verwijderd</string>
-  <string name="caches_drop_all_and_list">Alle verwijderen en lijst verwijderen</string>
   <string name="caches_delete_events">Verwijder afgelopen evenementen</string>
   <string name="caches_refresh_selected">Ververs geselecteerden</string>
   <string name="caches_refresh_all">Ververs alle</string>

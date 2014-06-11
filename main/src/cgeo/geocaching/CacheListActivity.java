@@ -596,7 +596,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             final boolean isNonDefaultList = isConcrete && listId != StoredList.STANDARD_LIST_ID;
 
             if (isOffline || type == CacheListType.HISTORY) { // only offline list
-                setMenuItemLabel(menu, R.id.menu_drop_caches, R.string.caches_drop_selected, R.string.caches_drop_all);
+                setMenuItemLabel(menu, R.id.menu_drop_caches, R.string.caches_remove_selected, R.string.caches_remove_all);
                 setMenuItemLabel(menu, R.id.menu_refresh_stored, R.string.caches_refresh_selected, R.string.caches_refresh_all);
                 setMenuItemLabel(menu, R.id.menu_move_to_list, R.string.caches_move_selected, R.string.caches_move_all);
             } else { // search and global list (all other than offline and history)
@@ -1144,8 +1144,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     public void dropStored(final boolean removeListAfterwards) {
-        final int message = (adapter.getCheckedCount() > 0) ? R.string.caches_drop_selected_ask : R.string.caches_drop_all_ask;
-        Dialogs.confirmYesNo(this, R.string.caches_drop_stored, message, new DialogInterface.OnClickListener() {
+        final int titleId = (adapter.getCheckedCount() > 0) ? R.string.caches_remove_selected : R.string.caches_remove_all;
+        final int messageId = (adapter.getCheckedCount() > 0) ? R.string.caches_remove_selected_confirm : R.string.caches_remove_all_confirm;
+        final String message = getString(messageId, adapter.getCheckedOrAllCount());
+        Dialogs.confirmYesNo(this, titleId, message, new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(final DialogInterface dialog, final int id) {
@@ -1277,7 +1279,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         private final boolean removeListAfterwards;
 
         public DropDetailsTask(final boolean removeListAfterwards) {
-            super(CacheListActivity.this, null, res.getString(R.string.caches_drop_progress), true);
+            super(CacheListActivity.this, null, res.getString(R.string.caches_remove_progress), true);
             this.removeListAfterwards = removeListAfterwards;
         }
 

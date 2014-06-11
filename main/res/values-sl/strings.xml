@@ -268,13 +268,6 @@
   <string name="caches_select_invert">Obrni izbor</string>
   <string name="caches_nearby">Blizu</string>
   <string name="caches_manage">Upravljaj</string>
-  <string name="caches_drop_selected">Izbriši izbrane</string>
-  <string name="caches_drop_selected_ask">Ali želite izbrisati izbrane zaklade?</string>
-  <string name="caches_drop_all">Izbriši vse</string>
-  <string name="caches_drop_all_ask">Ali želite izbrisati vse zaklade iz tega seznama?</string>
-  <string name="caches_drop_stored">Izbriši shranjene</string>
-  <string name="caches_drop_progress">Izbris zakladov</string>
-  <string name="caches_drop_all_and_list">Izbriši vse in odstrani seznam</string>
   <string name="caches_delete_events">Izbriši pretekla srečanja</string>
   <string name="caches_refresh_selected">Osveži izbrane</string>
   <string name="caches_refresh_all">Osveži vse</string>

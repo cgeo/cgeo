@@ -267,13 +267,6 @@
   <string name="caches_select_invert">Inverteix la selecció</string>
   <string name="caches_nearby">Propers</string>
   <string name="caches_manage">Administra</string>
-  <string name="caches_drop_selected">Elimina els seleccionats</string>
-  <string name="caches_drop_selected_ask">Voleu suprimir els catxés seleccionats del dispositiu?</string>
-  <string name="caches_drop_all">Esborra\'ls tots</string>
-  <string name="caches_drop_all_ask">Voleu suprimir tots els catxés de la llista actual?</string>
-  <string name="caches_drop_stored">Esborra els desats</string>
-  <string name="caches_drop_progress">S\'estan eliminant els catxés</string>
-  <string name="caches_drop_all_and_list">Esborra\'ls tots i suprimeix la llista</string>
   <string name="caches_delete_events">Elimina trobades passades</string>
   <string name="caches_refresh_selected">Actualitza els seleccionats</string>
   <string name="caches_refresh_all">Actualitza-ho tot</string>

@@ -267,13 +267,6 @@
   <string name="caches_select_invert">Invertera valda</string>
   <string name="caches_nearby">Nära</string>
   <string name="caches_manage">Hantera</string>
-  <string name="caches_drop_selected">Ta bort valda</string>
-  <string name="caches_drop_selected_ask">Vill du ta bort valda cacher från enheten?</string>
-  <string name="caches_drop_all">Ta bort alla</string>
-  <string name="caches_drop_all_ask">Vill du ta bort alla cacher från enheten?</string>
-  <string name="caches_drop_stored">Ta bort sparade</string>
-  <string name="caches_drop_progress">Tar bort cacher</string>
-  <string name="caches_drop_all_and_list">Ta bort listan och dess cacher</string>
   <string name="caches_delete_events">Ta bort gamla event</string>
   <string name="caches_refresh_selected">Uppdatera valda</string>
   <string name="caches_refresh_all">Uppdatera alla</string>

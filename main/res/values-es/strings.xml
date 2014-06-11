@@ -265,13 +265,6 @@
   <string name="caches_select_invert">Invertir selección</string>
   <string name="caches_nearby">Cercanos</string>
   <string name="caches_manage">Gestionar</string>
-  <string name="caches_drop_selected">Descartar los seleccionados</string>
-  <string name="caches_drop_selected_ask">¿Quieres borrar los escondites seleccionados del dispositivo?</string>
-  <string name="caches_drop_all">Descartar todos</string>
-  <string name="caches_drop_all_ask">¿Quieres borrar todos los escondites guardados en el dispositivo?</string>
-  <string name="caches_drop_stored">Descartar guardados</string>
-  <string name="caches_drop_progress">Borrando escondites</string>
-  <string name="caches_drop_all_and_list">Descartar todos y borrar lista</string>
   <string name="caches_delete_events">Borrar eventos pasados</string>
   <string name="caches_refresh_selected">Actualizar seleccionados</string>
   <string name="caches_refresh_all">Actualizar todos</string>

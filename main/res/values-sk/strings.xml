@@ -262,13 +262,6 @@
   <string name="caches_select_invert">Inverzný výber</string>
   <string name="caches_nearby">V okolí</string>
   <string name="caches_manage">Správa</string>
-  <string name="caches_drop_selected">Zmazať vybrané</string>
-  <string name="caches_drop_selected_ask">Naozaj chcete zmazať vybraté skrýše zo zariadenia?</string>
-  <string name="caches_drop_all">Zmazať všetky</string>
-  <string name="caches_drop_all_ask">Naozaj chcete zmazať všetky skrýše zo zariadenia?</string>
-  <string name="caches_drop_stored">Zmazať uložené</string>
-  <string name="caches_drop_progress">Odstraňovanie skrýš</string>
-  <string name="caches_drop_all_and_list">Zmazať všetky a odstrániť zoznam</string>
   <string name="caches_delete_events">Odstrániť minulé záznamy</string>
   <string name="caches_refresh_selected">Obnoviť vybraté</string>
   <string name="caches_refresh_all">Obnoviť všetky</string>

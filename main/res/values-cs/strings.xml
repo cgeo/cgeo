@@ -266,13 +266,6 @@
   <string name="caches_select_invert">Invertovat výběr</string>
   <string name="caches_nearby">Blízké</string>
   <string name="caches_manage">Správa</string>
-  <string name="caches_drop_selected">Smazat vybrané</string>
-  <string name="caches_drop_selected_ask">Opravdu chceš smazat vybrané keše z přístroje?</string>
-  <string name="caches_drop_all">Smazat vše</string>
-  <string name="caches_drop_all_ask">Opravdu chceš smazat všechny keše z tohoto seznamu?</string>
-  <string name="caches_drop_stored">Smazat uložené</string>
-  <string name="caches_drop_progress">Odstraňování keší</string>
-  <string name="caches_drop_all_and_list">Vymazat všechny a zrušit seznam</string>
   <string name="caches_delete_events">Vymazat staré události</string>
   <string name="caches_refresh_selected">Aktualizovat vybrané</string>
   <string name="caches_refresh_all">Aktualizovat vše</string>

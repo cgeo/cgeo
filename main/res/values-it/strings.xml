@@ -266,13 +266,6 @@
   <string name="caches_select_invert">Inverti selezione</string>
   <string name="caches_nearby">Qui vicino</string>
   <string name="caches_manage">Gestisci</string>
-  <string name="caches_drop_selected">Elimina selezionati</string>
-  <string name="caches_drop_selected_ask">Vuoi rimuovere i cache selezionati dal dispositivo?</string>
-  <string name="caches_drop_all">Elimina tutti</string>
-  <string name="caches_drop_all_ask">Vuoi rimuovere tutti i cache dalla lista corrente?</string>
-  <string name="caches_drop_stored">Elimina i cache salvati</string>
-  <string name="caches_drop_progress">Eliminazione dei cache</string>
-  <string name="caches_drop_all_and_list">Elimina tutti ed elimina la lista</string>
   <string name="caches_delete_events">Cancella eventi passati</string>
   <string name="caches_refresh_selected">Aggiorna i cache selezionati</string>
   <string name="caches_refresh_all">Aggiorna tutti</string>

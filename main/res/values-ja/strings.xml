@@ -259,13 +259,6 @@
   <string name="caches_select_invert">選択を反転</string>
   <string name="caches_nearby">現在地の近く</string>
   <string name="caches_manage">管理</string>
-  <string name="caches_drop_selected">選択したキャッシュを削除</string>
-  <string name="caches_drop_selected_ask">選択したキャッシュをデバイスから削除しますか?</string>
-  <string name="caches_drop_all">全て削除</string>
-  <string name="caches_drop_all_ask">全てのキャッシュをデバイスから削除しますか?</string>
-  <string name="caches_drop_stored">削除</string>
-  <string name="caches_drop_progress">キャッシュを削除中</string>
-  <string name="caches_drop_all_and_list">全て削除し、リストも消去</string>
   <string name="caches_delete_events">過去のイベントを削除</string>
   <string name="caches_refresh_selected">選択したキャッシュを更新</string>
   <string name="caches_refresh_all">全てのキャッシュを更新</string>

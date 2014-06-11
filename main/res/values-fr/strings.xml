@@ -268,13 +268,6 @@
   <string name="caches_select_invert">Inverser la sélection</string>
   <string name="caches_nearby">Proches</string>
   <string name="caches_manage">Gérer</string>
-  <string name="caches_drop_selected">Effacer les caches sélectionnées</string>
-  <string name="caches_drop_selected_ask">Effacer les caches sélectionnées du téléphone ?</string>
-  <string name="caches_drop_all">Tout effacer</string>
-  <string name="caches_drop_all_ask">Effacer les caches de la liste courante ?</string>
-  <string name="caches_drop_stored">Effacer les caches stockées</string>
-  <string name="caches_drop_progress">Suppression des caches en cours</string>
-  <string name="caches_drop_all_and_list">Suppr. caches et liste</string>
   <string name="caches_delete_events">Effacer les événements précédents</string>
   <string name="caches_refresh_selected">Rafraîchir les caches sélectionnées</string>
   <string name="caches_refresh_all">Tout rafraîchir</string>

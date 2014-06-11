@@ -268,13 +268,6 @@
   <string name="caches_select_invert">Odwróć zaznaczenie</string>
   <string name="caches_nearby">Najbliższe</string>
   <string name="caches_manage">Zarządzaj</string>
-  <string name="caches_drop_selected">Usuń wybrane</string>
-  <string name="caches_drop_selected_ask">Czy na pewno chcesz usunąć wybrane skrzynki z pamięci?</string>
-  <string name="caches_drop_all">Usuń wszystkie</string>
-  <string name="caches_drop_all_ask">Czy na pewno chcesz usunąć wszystkie skrzynki z pamięci?</string>
-  <string name="caches_drop_stored">Usuń zapisane</string>
-  <string name="caches_drop_progress">Usuwanie skrzynek</string>
-  <string name="caches_drop_all_and_list">Usuń wszystkie skrzynki i listę</string>
   <string name="caches_delete_events">Usuń minione wydarzenia</string>
   <string name="caches_refresh_selected">Odśwież wybrane</string>
   <string name="caches_refresh_all">Odśwież wszystkie</string>

@@ -264,13 +264,6 @@
   <string name="caches_select_invert">Inversează selecţia</string>
   <string name="caches_nearby">În apropiere</string>
   <string name="caches_manage">Gestionează</string>
-  <string name="caches_drop_selected">Şterge cutiile selectate</string>
-  <string name="caches_drop_selected_ask">Vrei să ştergi cutiile selectate din dispozitiv?</string>
-  <string name="caches_drop_all">Şterge tot</string>
-  <string name="caches_drop_all_ask">Vrei să ştergi toate cutiile din lista curenă?</string>
-  <string name="caches_drop_stored">Şterge cutiile stocate</string>
-  <string name="caches_drop_progress">Ştergere cutii…</string>
-  <string name="caches_drop_all_and_list">Şterge lista şi toate cutiile</string>
   <string name="caches_delete_events">Şterge evenimentele trecute</string>
   <string name="caches_refresh_selected">Reîncarcă cutiile selectate</string>
   <string name="caches_refresh_all">Reîncarcă toate cutiile</string>
