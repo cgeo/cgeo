@@ -146,7 +146,9 @@ dependencies {
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
 
     compile 'com.android.support:appcompat-v7:19.1.0'
-
+    compile ('com.viewpagerindicator:library:2.4.1'){
+        exclude module: 'support-v4'
+    }
     compile 'com.jakewharton:butterknife:5.0.0'
     compile 'org.apache.commons:commons-collections4:4.0'
     compile 'org.apache.commons:commons-lang3:3.2.1'
