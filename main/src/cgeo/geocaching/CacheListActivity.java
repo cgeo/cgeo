@@ -44,7 +44,7 @@ import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.sorting.CacheComparator;
-import cgeo.geocaching.sorting.ComparatorUserInterface;
+import cgeo.geocaching.sorting.SortActionProvider;
 import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.ui.WeakReferenceHandler;
@@ -83,6 +83,7 @@ import android.os.Message;
 import android.provider.OpenableColumns;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -439,6 +440,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      */
     private IFilter currentFilter = null;
 
+    private SortActionProvider sortProvider;
+
     private void initActionBarSpinner() {
         mCacheListSpinnerAdapter = new CacheListSpinnerAdapter(this, R.layout.support_simple_spinner_dropdown_item);
         getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
@@ -544,7 +547,25 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         getMenuInflater().inflate(R.menu.cache_list_options, menu);
 
         CacheListAppFactory.addMenuItems(menu, this, res);
+        sortProvider = (SortActionProvider) MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_sort));
+        sortProvider.setSelection(adapter.getCacheComparator());
+        sortProvider.setClickListener(new Action1<CacheComparator>() {
 
+            @Override
+            public void call(final CacheComparator selectedComparator) {
+                final CacheComparator oldComparator = adapter.getCacheComparator();
+                // selecting the same sorting twice will toggle the order
+                if (selectedComparator != null && oldComparator != null && selectedComparator.getClass().equals(oldComparator.getClass())) {
+                    adapter.toggleInverseSort();
+                }
+                else {
+                    // always reset the inversion for a new sorting criteria
+                    adapter.resetInverseSort();
+                }
+                setComparator(selectedComparator);
+                sortProvider.setSelection(selectedComparator);
+            }
+        });
         return true;
     }
 
@@ -703,23 +724,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 return false;
             case R.id.menu_filter:
                 showFilterMenu(null);
-                return true;
-            case R.id.menu_sort:
-                final CacheComparator oldComparator = adapter.getCacheComparator();
-                new ComparatorUserInterface(this).selectComparator(oldComparator, new Action1<CacheComparator>() {
-                    @Override
-                    public void call(final CacheComparator selectedComparator) {
-                        // selecting the same sorting twice will toggle the order
-                        if (selectedComparator != null && oldComparator != null && selectedComparator.getClass().equals(oldComparator.getClass())) {
-                            adapter.toggleInverseSort();
-                        }
-                        else {
-                            // always reset the inversion for a new sorting criteria
-                            adapter.resetInverseSort();
-                        }
-                        setComparator(selectedComparator);
-                    }
-                });
                 return true;
             case R.id.menu_import_web:
                 importWeb();

@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:cgeo="http://schemas.android.com/apk/res-auto">
+    xmlns:cgeo="http://schemas.android.com/apk/res-auto" >
 
     <item
         android:id="@+id/menu_show_on_map"
         android:icon="@drawable/ic_menu_mapmode"
-        cgeo:showAsAction="ifRoom"
-        android:title="@string/caches_on_map">
+        android:title="@string/caches_on_map"
+        cgeo:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_filter"
         android:icon="@drawable/ic_menu_filter"
-        cgeo:showAsAction="ifRoom|withText"
-        android:title="@string/caches_filter">
+        android:title="@string/caches_filter"
+        cgeo:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_sort"
+        android:actionProviderClass="cgeo.geocaching.sorting.SortActionProvider"
         android:icon="@drawable/ic_menu_sort_alphabetically"
-        cgeo:showAsAction="ifRoom|withText"
-        android:title="@string/caches_sort">
+        android:showAsAction="always"
+        android:title="@string/caches_sort"
+        cgeo:actionProviderClass="cgeo.geocaching.sorting.SortActionProvider"
+        cgeo:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_switch_select_mode"
@@ -81,26 +84,26 @@
         android:icon="@drawable/ic_menu_mapmode"
         android:title="@string/caches_on_map"
         android:visible="false">
-        <menu >
+        <menu>
         </menu>
     </item>
     <item
-         android:id="@+id/menu_create_list"
-         android:title="@string/list_menu_create">
+        android:id="@+id/menu_create_list"
+        android:title="@string/list_menu_create">
     </item>
     <item
-         android:id="@+id/menu_drop_list"
-         android:title="@string/list_menu_drop">
+        android:id="@+id/menu_drop_list"
+        android:title="@string/list_menu_drop">
     </item>
     <item
-         android:id="@+id/menu_rename_list"
-         android:title="@string/list_menu_rename">
+        android:id="@+id/menu_rename_list"
+        android:title="@string/list_menu_rename">
     </item>
     <item
-        cgeo:showAsAction="never|withText"
-        android:title="@string/list_menu_import">
+        android:title="@string/list_menu_import"
+        cgeo:showAsAction="never|withText">
         <menu>
-    		<item
+            <item
                 android:id="@+id/menu_import_gpx"
                 android:title="@string/gpx_import_title">
             </item>
@@ -115,10 +118,10 @@
         </menu>
     </item>
     <item
-        cgeo:showAsAction="never|withText"
-        android:title="@string/export">
+        android:title="@string/export"
+        cgeo:showAsAction="never|withText">
         <menu>
-    		<item
+            <item
                 android:id="@+id/menu_export_gpx"
                 android:title="@string/export_gpx">
             </item>
@@ -128,4 +131,5 @@
             </item>
         </menu>
     </item>
+
 </menu>
