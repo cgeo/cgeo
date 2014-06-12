@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cgeo.geocaching"
     android:installLocation="auto"
-    android:versionCode="20140334"
-    android:versionName="2014.05.14" >
+    android:versionCode="20140335"
+    android:versionName="2014.06.12-legacy" >
 
     <uses-sdk
         android:minSdkVersion="7"
