@@ -51,10 +51,6 @@
                 android:title="@string/caches_remove_all">
             </item>
             <item
-                android:id="@+id/menu_drop_caches_and_list"
-                android:title="@string/caches_remove_all_and_list">
-            </item>
-            <item
                 android:id="@+id/menu_delete_events"
                 android:title="@string/caches_delete_events">
             </item>

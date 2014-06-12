@@ -600,7 +600,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setVisible(menu, R.id.menu_sort, !isEmpty && !isHistory);
             setVisible(menu, R.id.menu_refresh_stored, !isEmpty && (isConcrete || type != CacheListType.OFFLINE));
             setVisible(menu, R.id.menu_drop_caches, !isEmpty && isOffline);
-            setVisible(menu, R.id.menu_drop_caches_and_list, isConcrete && !isEmpty && isOffline);
             setVisible(menu, R.id.menu_delete_events, isConcrete && !isEmpty && containsPastEvents());
             setVisible(menu, R.id.menu_move_to_list, isOffline && !isEmpty);
             setVisible(menu, R.id.menu_remove_from_history, !isEmpty && isHistory);
@@ -623,9 +622,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             } else { // search and global list (all other than offline and history)
                 setMenuItemLabel(menu, R.id.menu_refresh_stored, R.string.caches_store_selected, R.string.caches_store_offline);
             }
-
-            // make combined list deletion only possible when there are no filters, as that leads to confusion for the hidden caches
-            menu.findItem(R.id.menu_drop_caches_and_list).setVisible(isOffline && !hasSelection && isNonDefaultList && !adapter.isFiltered() && Settings.getCacheType() == CacheType.ALL);
 
             menu.findItem(R.id.menu_drop_list).setVisible(isNonDefaultList);
             menu.findItem(R.id.menu_rename_list).setVisible(isNonDefaultList);
@@ -691,11 +687,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_drop_caches:
-                dropStored(false);
-                invalidateOptionsMenuCompatible();
-                return false;
-            case R.id.menu_drop_caches_and_list:
-                dropStored(true);
+                dropStored();
                 invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_import_gpx:
@@ -712,7 +704,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 invalidateOptionsMenuCompatible();
                 return false;
             case R.id.menu_drop_list:
-                removeList(true);
+                removeList(false);
                 invalidateOptionsMenuCompatible();
                 return false;
             case R.id.menu_rename_list:
@@ -783,7 +775,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 deletion.add(cache);
             }
         }
-        new DropDetailsTask(false).execute(deletion.toArray(new Geocache[deletion.size()]));
+        new DropDetailsTask().execute(deletion.toArray(new Geocache[deletion.size()]));
     }
 
     public void clearOfflineLogs() {
@@ -1145,7 +1137,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         threadWeb.start();
     }
 
-    public void dropStored(final boolean removeListAfterwards) {
+    public void dropStored() {
         final int titleId = (adapter.getCheckedCount() > 0) ? R.string.caches_remove_selected : R.string.caches_remove_all;
         final int messageId = (adapter.getCheckedCount() > 0) ? R.string.caches_remove_selected_confirm : R.string.caches_remove_all_confirm;
         final String message = getString(messageId, adapter.getCheckedOrAllCount());
@@ -1153,15 +1145,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             @Override
             public void onClick(final DialogInterface dialog, final int id) {
-                dropSelected(removeListAfterwards);
+                final List<Geocache> selected = adapter.getCheckedOrAllCaches();
+                new DropDetailsTask().execute(selected.toArray(new Geocache[selected.size()]));
                 dialog.cancel();
             }
         });
-    }
-
-    public void dropSelected(final boolean removeListAfterwards) {
-        final List<Geocache> selected = adapter.getCheckedOrAllCaches();
-        new DropDetailsTask(removeListAfterwards).execute(selected.toArray(new Geocache[selected.size()]));
     }
 
     /**
@@ -1278,11 +1266,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private class DropDetailsTask extends AsyncTaskWithProgress<Geocache, Void> {
 
-        private final boolean removeListAfterwards;
-
-        public DropDetailsTask(final boolean removeListAfterwards) {
+        public DropDetailsTask() {
             super(CacheListActivity.this, null, res.getString(R.string.caches_remove_progress), true);
-            this.removeListAfterwards = removeListAfterwards;
         }
 
         @Override
@@ -1293,11 +1278,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         @Override
         protected void onPostExecuteInternal(final Void result) {
-            // remove list in UI because of toast
-            if (removeListAfterwards) {
-                removeList(false);
-            }
-
             adapter.setSelectMode(false);
             refreshCurrentList();
             replaceCacheListFromSearch();
@@ -1410,12 +1390,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private void removeList(final boolean askForConfirmation) {
         // if there are no caches on this list, don't bother the user with questions.
         // there is no harm in deleting the list, he could recreate it easily
-        if (CollectionUtils.isEmpty(cacheList)) {
-            removeListInternal();
-            return;
-        }
-
-        if (!askForConfirmation) {
+        if (!askForConfirmation && CollectionUtils.isEmpty(cacheList)) {
             removeListInternal();
             return;
         }
