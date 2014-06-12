@@ -11,9 +11,11 @@ import rx.observables.ConnectableObservable;
 
 import android.app.Application;
 import android.os.Environment;
+import android.view.ViewConfiguration;
 
 import java.io.IOException;
 import java.lang.Thread.UncaughtExceptionHandler;
+import java.lang.reflect.Field;
 
 public class CgeoApplication extends Application {
 
@@ -61,6 +63,21 @@ public class CgeoApplication extends Application {
 
     public static CgeoApplication getInstance() {
         return instance;
+    }
+
+    @Override
+    public void onCreate() {
+        try {
+            final ViewConfiguration config = ViewConfiguration.get(this);
+            final Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+
+            if (menuKeyField != null) {
+                menuKeyField.setAccessible(true);
+                menuKeyField.setBoolean(config, false);
+            }
+        } catch (final Exception ex) {
+            // Ignore
+        }
     }
 
     @Override
