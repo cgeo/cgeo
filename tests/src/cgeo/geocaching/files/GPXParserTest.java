@@ -350,4 +350,16 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals("Wasserleitung", cache.getHint());
     }
 
+    public void testGPXMysteryType() throws IOException, ParserException {
+        final List<Geocache> caches = readGPX10(R.raw.tc2012);
+        Geocache mystery = null;
+        for (Geocache geocache : caches) {
+            if (geocache.getName().equals("U017")) {
+                mystery = geocache;
+            }
+        }
+        assertNotNull(mystery);
+        assert (mystery != null);
+        assertEquals(CacheType.MYSTERY, mystery.getType());
+    }
 }
