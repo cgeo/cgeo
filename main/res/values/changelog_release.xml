@@ -2,6 +2,10 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+      <b>2014.06.12-legacy:</b>\n
+    · Fix: Adapting to changes on gc.com\n
+    · Fix: Do not crop static maps to prevent the copyright notice being cut off\n
+    \n
      <b>2014.05.15-legacy:</b>\n
      <b>Bugfixes:</b>\n
      · Adapting to changes on geocaching.com\n
