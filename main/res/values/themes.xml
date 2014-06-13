@@ -1,21 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="cgeo_main.ActionBarStyle" parent="cgeo.ActionBarStyle">
+        <item name="android:background">@drawable/actionbar_dark_bg_main</item>
+        <item name="background">@drawable/actionbar_dark_bg_main</item>
+    </style>
 
 
-    <style name="cgeo_main" parent="@style/Theme.AppCompat">
+    <style name="cgeo_main.base" parent="@style/Theme.AppCompat">
 
         <!-- copy the style elements of the Wallpaper theme since AppCombat has no Wallpaper theme -->
-        <item name="android:windowBackground">@color/background_main_transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowShowWallpaper">true</item>
 
-
         <!-- system elements -->
         <item name="android:windowContentOverlay">@null</item>
+        <item name="actionBarStyle">@style/cgeo_main.ActionBarStyle</item>
 
    </style>
 
-   <style name="cgeo" parent="@style/Theme.AppCompat">
+
+    <style name="cgeo_main" parent="cgeo_main.base">
+        <item name="actionBarStyle">@style/cgeo_main.ActionBarStyle</item>
+        <item name="android:actionBarStyle" tools:ignore="NewApi">@style/cgeo_main.ActionBarStyle</item>
+    </style>
+
+    <style name="cgeo.Widget.AppCompat.Base.ProgressBar.Small" parent="android:Widget.ProgressBar.Small">
+        <item name="background">@color/just_white</item>
+    </style>
+
+
+    <style name="cgeo.ActionBarStyle" parent="Widget.AppCompat.Base.ActionBar">
+        <item name="indeterminateProgressStyle">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Small</item>
+        <item name="android:indeterminateProgressStyle" tools:ignore="NewApi">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Small</item>
+
+    </style>
+
+   <style name="cgeo.base" parent="@style/Theme.AppCompat">
 
 
        <item name="android:buttonStyle">@style/button</item>
@@ -27,7 +49,15 @@
         <item name="text_color_link">@color/link</item>
         <item name="button_color_enabled">@color/button_enabled</item>
         <item name="button_color_disabled">@color/button_disabled</item>
+
+   </style>
+
+    <style name="cgeo" parent="cgeo.base">
+        <item name="actionBarStyle">@style/cgeo.ActionBarStyle</item>
+        <item name="android:actionBarStyle"  tools:ignore="NewApi">@style/cgeo.ActionBarStyle</item>
     </style>
+
+
 
 
     <!-- Identical to cgeo aside from different parent style -->
