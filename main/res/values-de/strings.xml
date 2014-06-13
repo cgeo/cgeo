@@ -268,6 +268,11 @@
   <string name="caches_select_invert">Auswahl invertieren</string>
   <string name="caches_nearby">In der Nähe</string>
   <string name="caches_manage">Verwalten</string>
+  <string name="caches_remove_all">Alle löschen</string>
+  <string name="caches_remove_all_confirm">Sollen alle %s Caches gelöscht werden?</string>
+  <string name="caches_remove_selected">Ausgewählte löschen</string>
+  <string name="caches_remove_selected_confirm">Sollen die %s Caches gelöscht werden?</string>
+  <string name="caches_remove_progress">Entferne Caches…</string>
   <string name="caches_delete_events">Vergangene Events löschen</string>
   <string name="caches_refresh_selected">Ausgewählte aktualisieren</string>
   <string name="caches_refresh_all">Alle aktualisieren</string>
@@ -298,6 +303,7 @@
   <string name="list_menu_create">Neue Liste</string>
   <string name="list_menu_drop">Aktuelle Liste löschen</string>
   <string name="list_menu_rename">Aktuelle Liste umbenennen</string>
+  <string name="list_menu_import">Importieren</string>
   <string name="list_title">Liste wählen</string>
   <string name="list_inbox">Standardliste</string>
   <string name="list_all_lists">Alle</string>
@@ -832,6 +838,7 @@
   <string name="user_menu_open_contact">Kontakt öffnen</string>
   <string name="navigation">Navigation</string>
   <string name="compass_title">Kompass</string>
+  <string name="compass_sensors">Aktive Sensoren</string>
   <string name="use_gps">Nur GPS nutzen</string>
   <string name="use_compass">GPS und Kompass nutzen</string>
   <string name="destination_select">Ziel auswählen</string>
