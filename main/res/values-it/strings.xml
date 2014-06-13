@@ -17,6 +17,7 @@
   <string name="letterbox">Letterbox hybrid</string>
   <string name="event">Cache Evento</string>
   <string name="mega">Mega-event cache</string>
+  <string name="giga">Giga-event cache</string>
   <string name="earth">Earthcache</string>
   <string name="cito">Evento Cache In Trash Out</string>
   <string name="webcam">Webcam cache</string>
@@ -206,6 +207,7 @@
   <string name="info_select_logimage_cancelled">Selezione o cattura immagine annulata.</string>
   <string name="info_stored_image">Nuova immagine salvata su:</string>
   <string name="info_storing_static_maps">Tento di salvare le mappe statiche</string>
+  <string name="info_cache_saved">Il cache è stato salvato localmente</string>
   <string name="loc_last">Ultima nota</string>
   <string name="loc_net">Network</string>
   <string name="loc_gps">GPS</string>
@@ -213,6 +215,7 @@
   <string name="loc_trying">Localizzazione in corso</string>
   <string name="loc_no_addr">Indirizzo sconosciuto</string>
   <string name="loc_gps_disabled">GPS non attivo</string>
+  <string name="menu_centerposition">Centra sulla mia posizione</string>
   <string name="menu_about">Info su c:geo</string>
   <string name="menu_helpers">Programmi utili</string>
   <string name="menu_settings">Impostazioni</string>
@@ -387,6 +390,8 @@
   <string name="init_signature_template_log">Testo di Log</string>
   <string name="init_ratingwanted">Rating da GCvote.com</string>
   <string name="init_summary_ratingwanted">Carica il rating del cache da GCvote.com</string>
+  <string name="init_friends_and_own_logs_wanted">Visualizza i tuoi/dei tuoi amici</string>
+  <string name="init_summary_friends_and_own_logs_wanted">Visualizza una pagina di log addizionale per i log dei tuoi amici e i tuoi log</string>
   <string name="init_openlastdetailspage">Carica ultima pagina usata nei dettagli</string>
   <string name="init_summary_openlastdetailspage">Ricorda l\'ultima pagina usata nei dettagli</string>
   <string name="init_autoload">Descrizione estesa</string>
@@ -475,6 +480,9 @@
   <string name="init_maintenance">Manutenzione</string>
   <string name="init_maintenance_directories_note">c:geo memorizza immagini, immagini log e altri file (correlati a un cache) in una cartella separata. In alcuni casi (es.: dopo import/esport del database) questa cartella potrebbe contenere file obsoleti, che possono essere cancellati da qui.</string>
   <string name="init_maintenance_directories">Elimina file orfani</string>
+  <string name="init_create_memory_dump">Salva la memoria del programma</string>
+  <string name="init_memory_dump">Salvataggio memoria</string>
+  <string name="init_memory_dumped">Memoria salvata in %s</string>
   <string name="settings_open_website">Apri il sito</string>
   <string name="settings_settings">Impostazioni</string>
   <string name="settings_information">Informazioni</string>
@@ -574,6 +582,7 @@
   <string name="cache_waypoints_add">Aggiungi waypoint</string>
   <string name="cache_hint">Aiuto (spoiler)</string>
   <string name="cache_logs">Logbook</string>
+  <string name="cache_logs_friends_and_own">Log tuoi e degli amici</string>
   <string name="cache_dialog_loading_details">Caricamento dettagli del cache…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Caricamento pagina</string>
   <string name="cache_dialog_loading_details_status_details">Elaborazione dettagli</string>
@@ -626,6 +635,7 @@
   <string name="cache_status">Stato</string>
   <string name="cache_status_offline_log">Log salvato</string>
   <string name="cache_status_found">Trovato</string>
+  <string name="cache_not_status_found">Non trovato</string>
   <string name="cache_status_archived">Archiviato</string>
   <string name="cache_status_disabled">Non attivo</string>
   <string name="cache_status_premium">Solo per utenti Premium</string>
@@ -1138,4 +1148,5 @@
   <string name="percent_favorite_points">%\  preferiti</string>
   <string name="cgeo_shortcut">collegamento a c:geo</string>
   <string name="create_shortcut">Crea collegamento</string>
+  <string name="send">Invia</string>
 </resources>
