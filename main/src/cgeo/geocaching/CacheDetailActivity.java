@@ -550,6 +550,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     private void notifyDataSetChanged() {
+        // This might get called asynchronically when the activity is shut down
+        if (isFinishing())
+            return;
+
         if (search == null) {
             return;
         }
