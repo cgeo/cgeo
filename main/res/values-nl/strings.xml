@@ -9,7 +9,6 @@
   <string name="about">Over c:geo</string>
   <string name="latitude">Breedtegraad</string>
   <string name="longitude">Lengtegraad</string>
-  <string name="action_bar_share_title">Deel link naar cache</string>
   <string name="settings_titlebar">c:geo Instellingen</string>
   <string name="all_types">Alle cache types</string>
   <string name="traditional">Traditionele cache</string>

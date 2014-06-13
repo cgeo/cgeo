@@ -9,7 +9,6 @@
   <string name="about">Über c:geo</string>
   <string name="latitude">Breitengrad</string>
   <string name="longitude">Längengrad</string>
-  <string name="action_bar_share_title">Link versenden</string>
   <string name="settings_titlebar">c:geo Einstellungen</string>
   <string name="all_types">Alle Caches</string>
   <string name="traditional">Traditional-Cache</string>

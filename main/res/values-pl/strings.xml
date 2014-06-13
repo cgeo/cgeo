@@ -9,7 +9,6 @@
   <string name="about">O c:geo</string>
   <string name="latitude">Szerokość geograficzna</string>
   <string name="longitude">Długość geograficzna</string>
-  <string name="action_bar_share_title">Podziel się linkiem do skrzynki</string>
   <string name="settings_titlebar">c:geo Ustawienia</string>
   <string name="all_types">Wszystkie typy skrzynek</string>
   <string name="traditional">Tradycyjna</string>

@@ -9,7 +9,6 @@
   <string name="about">Om c:geo</string>
   <string name="latitude">Breddegrad</string>
   <string name="longitude">Lengdegrad</string>
-  <string name="action_bar_share_title">Del linken til cachen</string>
   <string name="settings_titlebar">c:geo-innstillinger</string>
   <string name="all_types">Alle cachetyper</string>
   <string name="traditional">Tradisjonell cache</string>

@@ -713,17 +713,7 @@ public class Geocache implements ICache, IWaypoint {
         return getConnector() instanceof ISearchByCenter;
     }
 
-    public void shareCache(final Activity fromActivity, final Resources res) {
-        if (geocode == null) {
-            return;
-        }
-
-        final Intent intent = getIntent();
-
-        fromActivity.startActivity(Intent.createChooser(intent, res.getText(R.string.action_bar_share_title)));
-    }
-
-    public Intent getIntent() {
+    public Intent getShareIntent() {
         final StringBuilder subject = new StringBuilder("Geocache ");
         subject.append(geocode);
         if (StringUtils.isNotBlank(name)) {

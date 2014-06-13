@@ -9,7 +9,6 @@
   <string name="about">c:geoについて</string>
   <string name="latitude">緯度</string>
   <string name="longitude">経度</string>
-  <string name="action_bar_share_title">キャッシュのリンクを共有</string>
   <string name="settings_titlebar">c:geo 設定</string>
   <string name="all_types">全てのタイプのキャッシュ</string>
   <string name="traditional">トラディショナルキャッシュ</string>

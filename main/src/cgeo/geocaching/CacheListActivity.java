@@ -612,7 +612,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 menu.findItem(R.id.menu_refresh_stored_top).setTitle(R.string.caches_store_offline);
             }
 
-            final boolean hasSelection = adapter != null && adapter.getCheckedCount() > 0;
             final boolean isNonDefaultList = isConcrete && listId != StoredList.STANDARD_LIST_ID;
 
             if (isOffline || type == CacheListType.HISTORY) { // only offline list

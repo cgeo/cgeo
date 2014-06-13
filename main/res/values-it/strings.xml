@@ -9,7 +9,6 @@
   <string name="about">Info c:geo</string>
   <string name="latitude">Latitudine</string>
   <string name="longitude">Longitudine</string>
-  <string name="action_bar_share_title">Condividi link al cache</string>
   <string name="settings_titlebar">Impostazioni di c:geo</string>
   <string name="all_types">Tutti i tipi di cache</string>
   <string name="traditional">Traditional cache</string>

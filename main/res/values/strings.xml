@@ -13,7 +13,6 @@
     <string name="longitude">Longitude</string>
 
     <!-- actionbar -->
-    <string name="action_bar_share_title">Share link to cache</string>
     <string name="settings_titlebar">c:geo Settings</string>
     
     <!-- caches -->
