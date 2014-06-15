@@ -345,7 +345,7 @@
   <string name="settings_activate_ox">Aktivera</string>
   <string name="settings_gc_legal_note">Genom att använda tjänster hos geocaching.com godkänner du Groundspeaks användarvillkor.</string>
   <string name="settings_info_facebook_login_title">Facebook inloggning</string>
-  <string name="settings_info_facebook_login">c:geo kan inte logga inte logga in på geocaching.com med ditt Facebook konto. Men det finns en enkel lösning …</string>
+  <string name="settings_info_facebook_login">c:geo kan inte logga inte logga in på geocaching.com med ditt Facebook konto. Men det finns en enkel lösning…</string>
   <string name="settings_authorize">Tillåt c:geo</string>
   <string name="settings_reauthorize">Tillåt c:geo igen</string>
   <string name="init_oc">Opencaching.de</string>
