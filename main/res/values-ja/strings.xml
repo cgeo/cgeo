@@ -334,7 +334,6 @@
   <string name="settings_activate_ox">有効化</string>
   <string name="settings_gc_legal_note">Geocaching.comを使うにはGroundspeak利用規約に同意している必要があります。</string>
   <string name="settings_info_facebook_login_title">Facebook Login</string>
-  <string name="settings_info_facebook_login">c:geoからFacebookのアカウントでgeocaching.comにログインすることはできません。 しかし簡単に回避することはできます…</string>
   <string name="settings_authorize">c:geoを認証</string>
   <string name="settings_reauthorize">再度c:geoを認証</string>
   <string name="init_oc">Opencaching.de</string>

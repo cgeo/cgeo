@@ -269,6 +269,11 @@
   <string name="caches_select_invert">Žymėti priešingai</string>
   <string name="caches_nearby">Netoliese</string>
   <string name="caches_manage">Valdyti</string>
+  <string name="caches_remove_all">Pašalinti visas</string>
+  <string name="caches_remove_all_confirm">Ar norite pašalinti visas %s slėptuves iš dabartinio sąrašo?</string>
+  <string name="caches_remove_selected">Pašalinti pasirinktą</string>
+  <string name="caches_remove_selected_confirm">Ar norite pašalinti pasirinktas %s slėptuves iš prietaiso?</string>
+  <string name="caches_remove_progress">Pašalinamos slėptuvės</string>
   <string name="caches_delete_events">Ištrinti praeities įvykius</string>
   <string name="caches_refresh_selected">Atnaujinti pasirinktas</string>
   <string name="caches_refresh_all">Atnaujinti visas</string>
@@ -299,6 +304,7 @@
   <string name="list_menu_create">Sukurti naują sąrašą</string>
   <string name="list_menu_drop">Išmesti dabartinį sąrašą</string>
   <string name="list_menu_rename">Pervadinti dabartinį sąrašą</string>
+  <string name="list_menu_import">Importuoti</string>
   <string name="list_title">Pasirinkti sąrašą</string>
   <string name="list_inbox">Išsaugota</string>
   <string name="list_all_lists">Visos slėptuvės</string>
@@ -345,7 +351,7 @@
   <string name="settings_activate_ox">Aktyvuoti</string>
   <string name="settings_gc_legal_note">Naudodamiesi geocaching.com paslaugomis, Jūs sutinkate su Groundspeak naudojimo taisyklėmis.</string>
   <string name="settings_info_facebook_login_title">Facebook prisijungimas</string>
-  <string name="settings_info_facebook_login">c:geo negali prisijungti prie geocaching.com su jūsų Facebook paskyra. Bet yra paprastas problemos sprendimas …</string>
+  <string name="settings_info_facebook_login">c:geo negali prisijungti prie geocaching.com su jūsų Facebook paskyra. Bet yra paprastas problemos sprendimas…</string>
   <string name="settings_authorize">Leisti c:geo prisijungti</string>
   <string name="settings_reauthorize">Dar kartą leisti c:geo prisijungti</string>
   <string name="init_oc">Opencaching.de</string>
@@ -829,6 +835,7 @@
   <string name="user_menu_open_contact">Atidaryti kontakto kortelę</string>
   <string name="navigation">Navigacija</string>
   <string name="compass_title">Kompasas</string>
+  <string name="compass_sensors">Aktyvuoti sensorius</string>
   <string name="use_gps">Naudoti tik GPS</string>
   <string name="use_compass">Naudoti GPS ir kompasą</string>
   <string name="destination_select">Pasirinkite tikslą</string>

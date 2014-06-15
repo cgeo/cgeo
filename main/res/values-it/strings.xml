@@ -346,7 +346,7 @@
   <string name="settings_activate_ox">Attiva</string>
   <string name="settings_gc_legal_note">Per usare i servizi di Geocaching.com, si applicano i termini e le condizioni del Contratto Groundspeak che deve essere approvato dall\'utente.</string>
   <string name="settings_info_facebook_login_title">Facebook Login</string>
-  <string name="settings_info_facebook_login">Con il tuo account di Facebook non puoi fare login su geocaching.com. Ma c\'è una soluzione semplice …</string>
+  <string name="settings_info_facebook_login">Con il tuo account di Facebook non puoi fare login su geocaching.com. Ma c\'è una soluzione semplice…</string>
   <string name="settings_authorize">Autorizza c:geo</string>
   <string name="settings_reauthorize">Autorizza nuovamente c:geo</string>
   <string name="init_oc">Opencaching.de</string>
