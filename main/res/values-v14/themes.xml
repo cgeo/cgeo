@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Holo Style is only available for ICS+ -->
+
+    <style name="cgeo.ActionBarStyle" parent="Widget.AppCompat.Base.ActionBar">
+        <item name="android:indeterminateProgressStyle">@android:style/Widget.Holo.ProgressBar.Small</item>
+    </style>
+
+</resources>

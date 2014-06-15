@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 
-    <color name="background_main_transparent">#D0000000</color>
     <color name="just_white">#FFFFFFFF</color>
     <color name="just_black">#FF000000</color>
     <color name="background_dark">#FF000000</color>
