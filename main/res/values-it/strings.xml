@@ -268,6 +268,11 @@
   <string name="caches_select_invert">Inverti selezione</string>
   <string name="caches_nearby">Qui vicino</string>
   <string name="caches_manage">Gestisci</string>
+  <string name="caches_remove_all">Elimina tutti</string>
+  <string name="caches_remove_all_confirm">Vuoi rimuovere tutti i %s cache dalla lista corrente?</string>
+  <string name="caches_remove_selected">Elimina selezionati</string>
+  <string name="caches_remove_selected_confirm">Vuoi rimuovere i %s cache selezionati dal dispositivo?</string>
+  <string name="caches_remove_progress">Eliminazione dei cache</string>
   <string name="caches_delete_events">Cancella eventi passati</string>
   <string name="caches_refresh_selected">Aggiorna i cache selezionati</string>
   <string name="caches_refresh_all">Aggiorna tutti</string>
@@ -297,6 +302,7 @@
   <string name="list_menu_create">Crea nuova lista</string>
   <string name="list_menu_drop">Elimina la lista corrente</string>
   <string name="list_menu_rename">Rinomina la lista corrente</string>
+  <string name="list_menu_import">Importazione</string>
   <string name="list_title">Seleziona una lista</string>
   <string name="list_inbox">Salvate</string>
   <string name="list_all_lists">Tutti i cache</string>
@@ -827,6 +833,7 @@
   <string name="user_menu_open_contact">Aprire scheda contatto</string>
   <string name="navigation">Navigazione</string>
   <string name="compass_title">Bussola</string>
+  <string name="compass_sensors">Sensori attivi</string>
   <string name="use_gps">Usa Nord solo da GPS</string>
   <string name="use_compass">Usa Nord da GPS e bussola</string>
   <string name="destination_select">Scegli destinazione</string>

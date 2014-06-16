@@ -296,6 +296,7 @@
   <string name="list_menu_create">Vytvořit nový seznam</string>
   <string name="list_menu_drop">Smazat aktuální seznam</string>
   <string name="list_menu_rename">Přejmenovat aktuální seznam</string>
+  <string name="list_menu_import">Import</string>
   <string name="list_title">Vyber seznam</string>
   <string name="list_inbox">Uložené</string>
   <string name="list_all_lists">Všechny keše</string>
@@ -448,6 +449,7 @@
   <string name="init_map_directory_description">Složka s offline mapami</string>
   <string name="init_gpx_exportdir">Složka pro GPX export</string>
   <string name="init_gpx_importdir">Složka pro GPX import</string>
+  <string name="init_maptrail">Zobrazovat trasu cesty</string>
   <string name="init_summary_maptrail">Zobrazovat na mapě trasu cesty</string>
   <string name="init_share_after_export">Po exportování GPX otevřít menu sdílení</string>
   <string name="init_trackautovisit">Nastavit TB na \"Navštíveno\"</string>
