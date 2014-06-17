@@ -54,6 +54,16 @@ public class CacheMenuHandler extends AbstractUIFactory {
             case R.id.menu_show_in_browser:
                 cache.openInBrowser(activity);
                 return true;
+            case R.id.menu_share:
+                /* If the share menu is a shareActionProvider do nothing and let the share ActionProvider do the work */
+                final ShareActionProvider shareActionProvider = (ShareActionProvider)
+                        MenuItemCompat.getActionProvider(item);
+                if (shareActionProvider == null) {
+                    cache.shareCache(activity, res);
+                    return true;
+                } else {
+                    return false;
+                }
             case R.id.menu_calendar:
                 CalendarAddon.addToCalendarWithIntent(activity, cache);
                 return true;
