@@ -1027,7 +1027,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         }
                     }, true, StoredList.TEMPORARY_LIST_ID, newListName);
         } else {
-            refreshStored(caches, this.listId);
+            if (type != CacheListType.OFFLINE) {
+                refreshStored(caches, StoredList.STANDARD_LIST_ID);
+            } else {
+                refreshStored(caches, this.listId);
+            }
         }
     }
 
