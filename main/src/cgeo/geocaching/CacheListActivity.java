@@ -1065,6 +1065,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         }
                     }, true, StoredList.TEMPORARY_LIST_ID, newListName);
         } else {
+            if (type != CacheListType.OFFLINE) {
+                for (final Geocache geocache : caches) {
+                    if (geocache.getListId() == StoredList.TEMPORARY_LIST_ID) {
+                        geocache.setListId(StoredList.STANDARD_LIST_ID);
+                    }
+                }
+            }
             refreshStoredInternal(caches);
         }
     }
