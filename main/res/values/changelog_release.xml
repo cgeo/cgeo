@@ -2,6 +2,9 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release:</b>\n
+    · Fix: Caches not stored if \"Ask for list\" is disabled\n
+    \n
     <b>2014.06.11:</b>\n
     · Fix: Adapting to changes on gc.com\n
     · Fix: New gc.com GPX waypoint types recognized\n
