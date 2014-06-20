@@ -551,8 +551,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     private void notifyDataSetChanged() {
         // This might get called asynchronically when the activity is shut down
-        if (isFinishing())
+        if (isFinishing()) {
             return;
+        }
 
         if (search == null) {
             return;
@@ -1709,6 +1710,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         rowView = getLayoutInflater().inflate(R.layout.waypoint_item, null);
                         rowView.setClickable(true);
                         rowView.setLongClickable(true);
+                        registerForContextMenu(rowView);
                     }
                     WaypointViewHolder holder = (WaypointViewHolder) rowView.getTag();
                     if (null == holder) {
@@ -1804,7 +1806,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 @Override
                 public void onClick(final View v) {
                     selectedWaypoint = wpt;
-                    openContextMenu(v);
+                    ensureSaved();
+                    EditWaypointActivity.startActivityEditWaypoint(CacheDetailActivity.this, cache, wpt.getId());
+                    refreshOnResume = true;
                 }
             });
 
@@ -1812,9 +1816,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 @Override
                 public boolean onLongClick(final View v) {
                     selectedWaypoint = wpt;
-                    ensureSaved();
-                    EditWaypointActivity.startActivityEditWaypoint(CacheDetailActivity.this, cache, wpt.getId());
-                    refreshOnResume = true;
+                    openContextMenu(v);
                     return true;
                 }
             });
