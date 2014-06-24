@@ -207,6 +207,7 @@
   <string name="info_select_logimage_cancelled">La selecció d\'imatge o captura s\'ha cancel·lat.</string>
   <string name="info_stored_image">La nova imatge s\'ha desat a:</string>
   <string name="info_storing_static_maps">S\'està intentant desar els mapes estàtics</string>
+  <string name="info_cache_saved">El catxé ha estat desat localment</string>
   <string name="loc_last">Última coneguda</string>
   <string name="loc_net">Xarxa</string>
   <string name="loc_gps">GPS</string>
@@ -214,6 +215,7 @@
   <string name="loc_trying">Intentant ubicar</string>
   <string name="loc_no_addr">L\'adreça és desconeguda</string>
   <string name="loc_gps_disabled">El GPS està desactivat</string>
+  <string name="menu_centerposition">Centra a la meva posició</string>
   <string name="menu_about">Quant al c:geo</string>
   <string name="menu_helpers">Programes d\'utilitat</string>
   <string name="menu_settings">Configuració</string>
@@ -266,6 +268,11 @@
   <string name="caches_select_invert">Inverteix la selecció</string>
   <string name="caches_nearby">Propers</string>
   <string name="caches_manage">Administra</string>
+  <string name="caches_remove_all">Suprimeix-los tots</string>
+  <string name="caches_remove_all_confirm">Voleu suprimir tots els %s catxés de la llista actual?</string>
+  <string name="caches_remove_selected">Suprimeix els seleccionats</string>
+  <string name="caches_remove_selected_confirm">Voleu suprimir del dispositiu els %s catxés seleccionats?</string>
+  <string name="caches_remove_progress">S\'estan eliminant els catxés</string>
   <string name="caches_delete_events">Elimina trobades passades</string>
   <string name="caches_refresh_selected">Actualitza els seleccionats</string>
   <string name="caches_refresh_all">Actualitza-ho tot</string>
@@ -296,6 +303,7 @@
   <string name="list_menu_create">Crea una llista nova</string>
   <string name="list_menu_drop">Elimina la llista actual</string>
   <string name="list_menu_rename">Reanomena la llista actual</string>
+  <string name="list_menu_import">Importa</string>
   <string name="list_title">Trieu una llista</string>
   <string name="list_inbox">Desats</string>
   <string name="list_all_lists">Tots els catxés</string>
@@ -482,6 +490,9 @@
   <string name="init_maintenance">Manteniment</string>
   <string name="init_maintenance_directories_note">El c:geo desa les imatges, el imatges dels registres i altres fitxers relacionats amb un catxé a un directori separat. En alguns casos (com important/exportant la base de dades) aquest directori pot contenir fitxers antiquats, que es poden suprimir aquí.</string>
   <string name="init_maintenance_directories">Suprimeix els arxius orfes</string>
+  <string name="init_create_memory_dump">Crea un buidat de memòria</string>
+  <string name="init_memory_dump">Buidat de memòria</string>
+  <string name="init_memory_dumped">S\'ha creat el buidat de memòria al %s</string>
   <string name="settings_open_website">Obre el lloc web</string>
   <string name="settings_settings">Configuració</string>
   <string name="settings_information">Informació</string>
@@ -830,6 +841,7 @@
   <string name="user_menu_open_contact">Obre targeta del contacte</string>
   <string name="navigation">Navegació</string>
   <string name="compass_title">Brúixola</string>
+  <string name="compass_sensors">Sensors actius</string>
   <string name="use_gps">Usa només el GPS</string>
   <string name="use_compass">Usa el GPS i la brúixola</string>
   <string name="destination_select">Tria destinació</string>
@@ -1151,4 +1163,5 @@
   <string name="percent_favorite_points">% \ preferits</string>
   <string name="cgeo_shortcut">Drecera del c:geo</string>
   <string name="create_shortcut">Crea una drecera</string>
+  <string name="send">Envia</string>
 </resources>

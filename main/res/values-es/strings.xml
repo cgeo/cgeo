@@ -345,6 +345,7 @@
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Activar</string>
   <string name="settings_activate_oc_pl">Activar</string>
+  <string name="settings_activate_oc_ro">Activar</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activar</string>
@@ -359,6 +360,7 @@
   <string name="init_login_popup_not_authorized">No autorizado</string>
   <string name="init_login_popup_invalid_timestamp">Hora local inválida, ajuste la hora de nuevo</string>
   <string name="init_login_popup_invalid_token">Autorización inválida, volver a autorizar</string>
+  <string name="settings_service_active">Activo</string>
   <string name="init_signature">Firma</string>
   <string name="init_signature_template_button">Insertar plantilla</string>
   <string name="init_signature_template_date">Fecha</string>
@@ -369,6 +371,7 @@
   <string name="init_signature_template_owner">Propietario</string>
   <string name="init_signature_template_name">Nombre</string>
   <string name="init_signature_template_url">URL</string>
+  <string name="init_signature_template_log">Texto de registro</string>
   <string name="init_ratingwanted">Clasificación de GCvote</string>
   <string name="init_openlastdetailspage">Detalles de la última página</string>
   <string name="init_autoload">Autocargar descripción larga</string>
