@@ -17,6 +17,7 @@
   <string name="letterbox">Letterbox Hybrid</string>
   <string name="event">Stretnutie</string>
   <string name="mega">Mega-Event Cache</string>
+  <string name="giga">Giga-Event Cache</string>
   <string name="earth">Earthcache</string>
   <string name="cito">\"Upracme si\" stretnutie</string>
   <string name="webcam">Web kamerová</string>
@@ -206,6 +207,7 @@
   <string name="info_select_logimage_cancelled">Výber obrázka alebo fotenie bolo zrušené.</string>
   <string name="info_stored_image">Nový obrázok uložený do:</string>
   <string name="info_storing_static_maps">ukladanie statických máp</string>
+  <string name="info_cache_saved">Cache bola uložená v zariadení</string>
   <string name="loc_last">posledná známa</string>
   <string name="loc_net">sieť</string>
   <string name="loc_gps">GPS</string>
@@ -213,6 +215,7 @@
   <string name="loc_trying">zisťovanie pozície</string>
   <string name="loc_no_addr">neznáma adresa</string>
   <string name="loc_gps_disabled">GPS zakázaná</string>
+  <string name="menu_centerposition">Vycentrovať na moju polohu</string>
   <string name="menu_about">O aplikácii</string>
   <string name="menu_helpers">Pomocné programy</string>
   <string name="menu_settings">Nastavenia</string>
@@ -261,6 +264,9 @@
   <string name="caches_select_invert">Inverzný výber</string>
   <string name="caches_nearby">V okolí</string>
   <string name="caches_manage">Správa</string>
+  <string name="caches_remove_all">Odstrániť všetky</string>
+  <string name="caches_remove_selected">Odstrániť vybraté</string>
+  <string name="caches_remove_selected_confirm">Chcete odstrániť %s vybraté cache z vášho zariadenia?</string>
   <string name="caches_delete_events">Odstrániť minulé záznamy</string>
   <string name="caches_refresh_selected">Obnoviť vybraté</string>
   <string name="caches_refresh_all">Obnoviť všetky</string>
@@ -268,6 +274,7 @@
   <string name="caches_move_all">Presunúť všetky</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Exportovať do Locus</string>
+  <string name="caches_map_mapswithme">MapsWithMe</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Opíšte text z obrázku. Je to dôležité pre stiahnutie súradníc skrýš. Túto vlastnosť je možné vypnúť v Nastaveniach.</string>
   <string name="caches_recaptcha_hint">Text z obrázku</string>
@@ -290,6 +297,7 @@
   <string name="list_menu_create">Vytvoriť nový zoznam</string>
   <string name="list_menu_drop">Zahodiť aktuálny zoznam</string>
   <string name="list_menu_rename">Premenovať tento zoznam</string>
+  <string name="list_menu_import">Import</string>
   <string name="list_title">Výber zoznamu</string>
   <string name="list_inbox">Uložené</string>
   <string name="list_all_lists">Všetky skrýše</string>
@@ -386,6 +394,8 @@
   <string name="init_signature_template_log">Zápis do logu</string>
   <string name="init_ratingwanted">Načítať hodnotenie skrýše z GCvote.com</string>
   <string name="init_summary_ratingwanted">Načítať hodnotenie skrýše z GCvote.com</string>
+  <string name="init_friends_and_own_logs_wanted">Zobraziť priateľov / vlastné</string>
+  <string name="init_summary_friends_and_own_logs_wanted">Zobraziť ďalšie stránky pre logy priateľov a vlastné logy</string>
   <string name="init_openlastdetailspage">Otvoriť detaily na naposledy použitej stránke</string>
   <string name="init_summary_openlastdetailspage">Otvoriť detaily na naposledy použitej stránke</string>
   <string name="init_autoload">Automatické načítanie dlhého popisu</string>
@@ -474,6 +484,9 @@
   <string name="init_maintenance">Údržba</string>
   <string name="init_maintenance_directories_note">c:Geo ukladá obrázky, log obrázky a ďalšie súbory súvisiace s cache v samostatnom adresári. V niektorých prípadoch (ako import/export databázy) Tento adresár môže obsahovať neaktuálne súbory, ktoré môžete zmazať tu.</string>
   <string name="init_maintenance_directories">Odstrániť osirelé súbory</string>
+  <string name="init_create_memory_dump">Vytvorenie výpisu pamäte</string>
+  <string name="init_memory_dump">Výpis pamäte</string>
+  <string name="init_memory_dumped">Výpis pamäte uložiť do %s</string>
   <string name="settings_open_website">Otvoriť stránku</string>
   <string name="settings_settings">Nastavenia</string>
   <string name="settings_information">Informácia</string>
@@ -570,6 +583,7 @@
   <string name="cache_waypoints_add">Pridať bod</string>
   <string name="cache_hint">Nápoveda</string>
   <string name="cache_logs">Logbook</string>
+  <string name="cache_logs_friends_and_own">Logy priateľov/vlastné</string>
   <string name="cache_dialog_loading_details">Načítanie detailov skrýše…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Načítanie stránky</string>
   <string name="cache_dialog_loading_details_status_details">Spracovanie detailov</string>
@@ -622,6 +636,7 @@
   <string name="cache_status">Stav</string>
   <string name="cache_status_offline_log">Uložený log</string>
   <string name="cache_status_found">Nájdená</string>
+  <string name="cache_not_status_found">Nebol nájdený</string>
   <string name="cache_status_archived">Archivovaná</string>
   <string name="cache_status_disabled">Zrušená</string>
   <string name="cache_status_premium">Iba pre platiacich používateľov</string>
@@ -813,6 +828,7 @@
   <string name="user_menu_open_contact">Otvoriť kartu kontaktu</string>
   <string name="navigation">Navigácia</string>
   <string name="compass_title">Kompas</string>
+  <string name="compass_sensors">Aktívne senzory</string>
   <string name="use_gps">Použiť iba GPS</string>
   <string name="use_compass">Použiť GPS a kompas</string>
   <string name="destination_select">Vyberte cieľ</string>
@@ -1140,4 +1156,5 @@
   <string name="percent_favorite_points">% \ obľúbených</string>
   <string name="cgeo_shortcut">c:Geo odkaz</string>
   <string name="create_shortcut">Vytvoriť odkaz</string>
+  <string name="send">Odoslať</string>
 </resources>

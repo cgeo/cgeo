@@ -222,7 +222,7 @@
   <string name="menu_pocket_queries">Zbirke Pocket Query</string>
   <string name="menu_scan_description">c:geo lahko skenira GC kodo, ki je izpisana kot QR koda. Za to potrebujete aplikacijo, ki ni nameščena. Ali jo želite odpreti v Google Play in jo namestiti?</string>
   <string name="live_map_button">Zemljevid</string>
-  <string name="caches_nearby_button">Blizu</string>
+  <string name="caches_nearby_button">V bližini</string>
   <string name="advanced_search_button">Iskanje</string>
   <string name="stored_caches_button">Shranjeni</string>
   <string name="any_button">Destinacije</string>
@@ -265,7 +265,7 @@
   <string name="caches_select_mode">Način izbiranja</string>
   <string name="caches_select_mode_exit">Izhod iz načina izbiranja</string>
   <string name="caches_select_invert">Obrni izbor</string>
-  <string name="caches_nearby">Blizu</string>
+  <string name="caches_nearby">V bližini</string>
   <string name="caches_manage">Upravljaj</string>
   <string name="caches_delete_events">Izbriši pretekla srečanja</string>
   <string name="caches_refresh_selected">Osveži izbrane</string>
