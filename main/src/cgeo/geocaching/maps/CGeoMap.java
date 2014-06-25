@@ -45,6 +45,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
+import rx.Scheduler;
 import rx.Subscription;
 import rx.functions.Action0;
 import rx.functions.Action1;
@@ -1087,10 +1088,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         private volatile boolean isUnsubscribed = false;
 
+        private Scheduler.Worker worker;
+
         @NonNull private final WeakReference<CGeoMap> mapRef;
 
-        public LoadTimerAction(@NonNull final CGeoMap map) {
+        public LoadTimerAction(@NonNull final CGeoMap map, final Scheduler.Worker worker) {
             this.mapRef = new WeakReference<CGeoMap>(map);
+            this.worker = worker;
         }
 
         @Override
@@ -1136,13 +1140,20 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             }
 
             if (!isUnsubscribed) {
-                Schedulers.newThread().createWorker().schedule(this, 250, TimeUnit.MILLISECONDS);
+                if (worker == null) {
+                    worker = Schedulers.newThread().createWorker();
+                }
+                worker.schedule(this, 250, TimeUnit.MILLISECONDS);
             }
         }
 
         @Override
         public void unsubscribe() {
             isUnsubscribed = true;
+            if (worker != null) {
+                worker.unsubscribe();
+                worker = null;
+            }
         }
 
         @Override
@@ -1158,8 +1169,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         // We cannot use schedulePeriodically with RxJava 0.19 and earlier because the unsubscription
         // mechanism fails. As a consequence, we reschedule periodically by hand as long as we are not
         // unsubscribed. There may be a small drift, but it has no consequence.
-        final LoadTimerAction action = new LoadTimerAction(this);
-        Schedulers.newThread().createWorker().schedule(action, 250, TimeUnit.MILLISECONDS);
+        final Scheduler.Worker worker = Schedulers.newThread().createWorker();
+        final LoadTimerAction action = new LoadTimerAction(this, worker);
+        worker.schedule(action, 250, TimeUnit.MILLISECONDS);
         return action;
     }
 
