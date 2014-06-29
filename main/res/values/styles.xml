@@ -300,7 +300,7 @@
 
     <!-- author of a log item -->
     <style name="logitem_author">
-        <item name="android:id">@+id/author</item>
+        <item name="android:id">@id/author</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentLeft">true</item>
