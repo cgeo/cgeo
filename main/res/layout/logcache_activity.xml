@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:background="?background_color"
     android:orientation="vertical"
-    android:padding="4dip" >
+    android:padding="4dip" xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -67,7 +67,9 @@
                     style="@style/edittext_full"
                     android:hint="@string/log_hint_log_password"
                     android:inputType="text"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    tools:ignore="TextFields" />
+
             </LinearLayout>
 
             <RatingBar
