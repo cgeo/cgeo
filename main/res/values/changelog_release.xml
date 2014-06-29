@@ -4,6 +4,7 @@
   <string name="changelog_release" translatable="false">\n
     <b>Next bugfix release:</b>\n
     · Fix: Caches not stored if \"Ask for list\" is disabled\n
+    · Fix: Use \"Unknown\" instead of \"Mystery\" in GPX export to ensure backward compatibility\n
     \n
     <b>2014.06.11:</b>\n
     · Fix: Adapting to changes on gc.com\n
