@@ -27,7 +27,7 @@ gradle connectedCheck
 //https://github.com/stephanenicolas/Quality-Tools-for-Android
 
 def AAVersion = '3.0.1'
-def RXVersion = '0.19.0'
+def RXVersion = '0.19.2'
 group = 'cgeo.geocaching'
 version = '0.0.1'
 
@@ -147,9 +147,9 @@ dependencies {
 
     compile 'com.android.support:appcompat-v7:19.1.0'
 
-    compile 'com.jakewharton:butterknife:5.0.0'
+    compile 'com.jakewharton:butterknife:5.1.1'
     compile 'org.apache.commons:commons-collections4:4.0'
-    compile 'org.apache.commons:commons-lang3:3.2.1'
+    compile 'org.apache.commons:commons-lang3:3.3.2'
     compile 'commons-io:commons-io:2.4'
     compile 'com.google.code.findbugs:annotations:2.0.3'
 
@@ -242,14 +242,14 @@ dependencies {
     unitTestCompile 'junit:junit:4.8.2'
     unitTestCompile 'com.google.android:android-test:4.1.1.4'
 
-    unitTestCompile 'com.googlecode.androidannotations:androidannotations-api:2.7.1'
-    unitTestCompile 'com.jakewharton:butterknife:4.0.1'
+    unitTestCompile 'com.googlecode.androidannotations:androidannotations-api:$AAVersion'
+    unitTestCompile 'com.jakewharton:butterknife:5.1.1'
     unitTestCompile 'org.apache.commons:commons-collections4:4.0'
     unitTestCompile 'commons-io:commons-io:2.4'
-    unitTestCompile 'org.apache.commons:commons-lang3:3.2.1'
+    unitTestCompile 'org.apache.commons:commons-lang3:3.3.2'
     unitTestCompile 'com.google.code.findbugs:annotations:2.0.3'
-    unitTestCompile 'com.netflix.rxjava:rxjava-core:0.17.0-RC6'
-    unitTestCompile 'com.netflix.rxjava:rxjava-android:0.17.0-RC6'
+    unitTestCompile 'com.netflix.rxjava:rxjava-core:$RXVersion'
+    unitTestCompile 'com.netflix.rxjava:rxjava-android:$RXVersion'
 }
 
 // extend the runtime
