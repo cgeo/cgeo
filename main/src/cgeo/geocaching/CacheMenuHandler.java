@@ -15,7 +15,7 @@ import android.view.MenuItem;
 /**
  * Shared menu handling for all activities having menu items related to a cache. <br>
  * TODO: replace by a fragment
- * 
+ *
  */
 public class CacheMenuHandler extends AbstractUIFactory {
 
@@ -61,9 +61,8 @@ public class CacheMenuHandler extends AbstractUIFactory {
                 if (shareActionProvider == null) {
                     cache.shareCache(activity, res);
                     return true;
-                } else {
-                    return false;
                 }
+                return false;
             case R.id.menu_calendar:
                 CalendarAddon.addToCalendarWithIntent(activity, cache);
                 return true;
