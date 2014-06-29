@@ -63,7 +63,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     private boolean selectMode = false;
     private IFilter currentFilter = null;
     private List<Geocache> originalList = null;
-    private boolean isLiveList = Settings.isLiveList();
+    private final boolean isLiveList = Settings.isLiveList();
 
     final private Set<CompassMiniView> compasses = new LinkedHashSet<CompassMiniView>();
     final private Set<DistanceView> distances = new LinkedHashSet<DistanceView>();
@@ -110,12 +110,12 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         @InjectView(R.id.direction) protected CompassMiniView direction;
         @InjectView(R.id.dirimg) protected ImageView dirImg;
 
-        public ViewHolder(View view) {
+        public ViewHolder(final View view) {
             super(view);
         }
     }
 
-    public CacheListAdapter(final Activity activity, final List<Geocache> list, CacheListType cacheListType) {
+    public CacheListAdapter(final Activity activity, final List<Geocache> list, final CacheListType cacheListType) {
         super(activity, 0, list);
         final IGeoData currentGeo = CgeoApplication.getInstance().currentGeo();
         if (currentGeo != null) {
@@ -133,10 +133,10 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
             gcIconDrawables.put(hashCode, activity.getResources().getDrawable(cacheType.markerId));
             // icon with flag for user modified coordinates
             hashCode = getIconHashCode(cacheType, true);
-            Drawable[] layers = new Drawable[2];
+            final Drawable[] layers = new Drawable[2];
             layers[0] = activity.getResources().getDrawable(cacheType.markerId);
             layers[1] = modifiedCoordinatesMarker;
-            LayerDrawable ld = new LayerDrawable(layers);
+            final LayerDrawable ld = new LayerDrawable(layers);
             ld.setLayerInset(1,
                     layers[0].getIntrinsicWidth() - layers[1].getIntrinsicWidth(),
                     layers[0].getIntrinsicHeight() - layers[1].getIntrinsicHeight(),
@@ -184,7 +184,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         return cacheListType == CacheListType.HISTORY;
     }
 
-    public Geocache findCacheByGeocode(String geocode) {
+    public Geocache findCacheByGeocode(final String geocode) {
         for (int i = 0; i < getCount(); i++) {
             if (getItem(i).getGeocode().equalsIgnoreCase(geocode)) {
                 return getItem(i);
@@ -240,7 +240,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
     public int getCheckedCount() {
         int checked = 0;
-        for (Geocache cache : list) {
+        for (final Geocache cache : list) {
             if (cache.isStatusChecked()) {
                 checked++;
             }
@@ -268,7 +268,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     }
 
     public void invertSelection() {
-        for (Geocache cache : list) {
+        for (final Geocache cache : list) {
             cache.setStatusChecked(!cache.isStatusChecked());
         }
         notifyDataSetChanged();
@@ -369,7 +369,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
         final ViewHolder holder;
         if (v == null) {
-            v = inflater.inflate(R.layout.cacheslist_item, null);
+            v = inflater.inflate(R.layout.cacheslist_item, parent, false);
 
             holder = new ViewHolder(v);
         } else {
@@ -502,7 +502,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         return v;
     }
 
-    private static Drawable getCacheIcon(Geocache cache) {
+    private static Drawable getCacheIcon(final Geocache cache) {
         int hashCode = getIconHashCode(cache.getType(), cache.hasUserModifiedCoords() || cache.hasFinalDefined());
         final Drawable drawable = gcIconDrawables.get(hashCode);
         if (drawable != null) {
@@ -525,12 +525,12 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
         private final Geocache cache;
 
-        public SelectionCheckBoxListener(Geocache cache) {
+        public SelectionCheckBoxListener(final Geocache cache) {
             this.cache = cache;
         }
 
         @Override
-        public void onClick(View view) {
+        public void onClick(final View view) {
             assert view instanceof CheckBox;
             final boolean checkNow = ((CheckBox) view).isChecked();
             cache.setStatusChecked(checkNow);
@@ -590,7 +590,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         }
 
         @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float velocityX, final float velocityY) {
             try {
                 if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH) {
                     return false;
@@ -616,7 +616,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
                     }
                     return true;
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.w("CacheListAdapter.FlingGesture.onFling", e);
             }
 
@@ -630,7 +630,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
     public List<Geocache> getCheckedCaches() {
         final ArrayList<Geocache> result = new ArrayList<Geocache>();
-        for (Geocache cache : list) {
+        for (final Geocache cache : list) {
             if (cache.isStatusChecked()) {
                 result.add(cache);
             }

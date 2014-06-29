@@ -23,6 +23,7 @@ import android.os.AsyncTask;
 import android.text.Html;
 import android.text.Spanned;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,19 +35,19 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
 
     protected final AbstractActivity activity;
 
-    public LogsViewCreator(AbstractActivity activity) {
+    public LogsViewCreator(final AbstractActivity activity) {
         this.activity = activity;
     }
 
     @Override
-    public ListView getDispatchedView() {
+    public ListView getDispatchedView(final ViewGroup parentView) {
         if (!isValid()) {
             return null;
         }
 
         final List<LogEntry> logs = getLogs();
 
-        view = (ListView) activity.getLayoutInflater().inflate(R.layout.logs_page, null);
+        view = (ListView) activity.getLayoutInflater().inflate(R.layout.logs_page, parentView, false);
         addHeaderView();
         view.setAdapter(new ArrayAdapter<LogEntry>(activity, R.layout.logs_item, logs) {
 
@@ -54,7 +55,7 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
             public View getView(final int position, final View convertView, final android.view.ViewGroup parent) {
                 View rowView = convertView;
                 if (null == rowView) {
-                    rowView = activity.getLayoutInflater().inflate(R.layout.logs_item, null);
+                    rowView = activity.getLayoutInflater().inflate(R.layout.logs_item, parent, false);
                 }
                 LogViewHolder holder = (LogViewHolder) rowView.getTag();
                 if (null == holder) {
@@ -71,7 +72,7 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
         return view;
     }
 
-    protected void fillViewHolder(final View convertView, LogViewHolder holder, final LogEntry log) {
+    protected void fillViewHolder(final View convertView, final LogViewHolder holder, final LogEntry log) {
         if (log.date > 0) {
             holder.date.setText(Formatter.formatShortDateVerbally(log.date));
             holder.date.setVisibility(View.VISIBLE);
@@ -108,7 +109,7 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
             holder.images.setVisibility(View.VISIBLE);
             holder.images.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(final View v) {
                     ImagesActivity.startActivityLogImages(activity, getGeocode(), new ArrayList<Image>(log.getLogImages()));
                 }
             });
@@ -152,18 +153,18 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
         final private LogViewHolder holder;
         final private int position;
 
-        public LogImageLoader(LogViewHolder holder) {
+        public LogImageLoader(final LogViewHolder holder) {
             this.holder = holder;
             this.position = holder.getPosition();
         }
 
         @Override
-        protected Spanned doInBackground(String... logtext) {
+        protected Spanned doInBackground(final String... logtext) {
             return Html.fromHtml(logtext[0], new HtmlImage(getGeocode(), false, StoredList.STANDARD_LIST_ID, false), null); //, TextView.BufferType.SPANNABLE)
         }
 
         @Override
-        protected void onPostExecute(Spanned result) {
+        protected void onPostExecute(final Spanned result) {
             // Ensure that this holder and its view still references the right item before updating the text.
             if (position == holder.getPosition()) {
                 holder.text.setText(result);

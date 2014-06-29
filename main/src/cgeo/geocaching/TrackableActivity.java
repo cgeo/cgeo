@@ -46,6 +46,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -372,8 +373,8 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         @InjectView(R.id.image) protected LinearLayout imageView;
 
         @Override
-        public ScrollView getDispatchedView() {
-            view = (ScrollView) getLayoutInflater().inflate(R.layout.trackable_details_view, null);
+        public ScrollView getDispatchedView(final ViewGroup parentView) {
+            view = (ScrollView) getLayoutInflater().inflate(R.layout.trackable_details_view, parentView, false);
             ButterKnife.inject(this, view);
 
             final CacheDetailsCreator details = new CacheDetailsCreator(TrackableActivity.this, detailsList);
@@ -501,7 +502,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             // trackable image
             if (StringUtils.isNotBlank(trackable.getImage())) {
                 imageBox.setVisibility(View.VISIBLE);
-                final ImageView trackableImage = (ImageView) inflater.inflate(R.layout.trackable_image, null);
+                final ImageView trackableImage = (ImageView) inflater.inflate(R.layout.trackable_image, imageView, false);
 
                 trackableImage.setImageResource(R.drawable.image_not_loaded);
                 trackableImage.setClickable(true);

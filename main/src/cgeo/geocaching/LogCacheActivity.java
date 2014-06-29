@@ -142,7 +142,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         inventoryView.removeAllViews();
 
         for (final TrackableLog tb : trackables) {
-            final LinearLayout inventoryItem = (LinearLayout) inflater.inflate(R.layout.logcache_trackable_item, null);
+            final LinearLayout inventoryItem = (LinearLayout) inflater.inflate(R.layout.logcache_trackable_item, inventoryView, false);
 
             ((TextView) inventoryItem.findViewById(R.id.trackcode)).setText(tb.trackCode);
             ((TextView) inventoryItem.findViewById(R.id.name)).setText(tb.name);

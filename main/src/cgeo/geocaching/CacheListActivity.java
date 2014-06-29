@@ -955,17 +955,17 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void initAdapter() {
-        final ListView list = getListView();
-        registerForContextMenu(list);
+        final ListView listView = getListView();
+        registerForContextMenu(listView);
         adapter = new CacheListAdapter(this, cacheList, type);
         adapter.setFilter(currentFilter);
 
         if (listFooter == null) {
-            listFooter = getLayoutInflater().inflate(R.layout.cacheslist_footer, null);
+            listFooter = getLayoutInflater().inflate(R.layout.cacheslist_footer, listView, false);
             listFooter.setClickable(true);
             listFooter.setOnClickListener(new MoreCachesListener());
             listFooterText = (TextView) listFooter.findViewById(R.id.more_caches);
-            list.addFooterView(listFooter);
+            listView.addFooterView(listFooter);
         }
         setListAdapter(adapter);
         adapter.forceSort();

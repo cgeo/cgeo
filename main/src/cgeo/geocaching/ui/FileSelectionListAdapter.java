@@ -22,7 +22,7 @@ public class FileSelectionListAdapter extends ArrayAdapter<File> {
     private final IFileSelectionView parentView;
     private final LayoutInflater inflater;
 
-    public FileSelectionListAdapter(IFileSelectionView parentIn, List<File> listIn) {
+    public FileSelectionListAdapter(final IFileSelectionView parentIn, final List<File> listIn) {
         super(parentIn.getContext(), 0, listIn);
 
         parentView = parentIn;
@@ -36,19 +36,19 @@ public class FileSelectionListAdapter extends ArrayAdapter<File> {
             return null;
         }
 
-        File file = getItem(position);
+        final File file = getItem(position);
 
         View v = rowView;
 
         ViewHolder holder;
         if (v == null) {
-            v = inflater.inflate(R.layout.mapfile_item, null);
+            v = inflater.inflate(R.layout.mapfile_item, parent, false);
             holder = new ViewHolder(v);
         } else {
             holder = (ViewHolder) v.getTag();
         }
 
-        String currentFile = parentView.getCurrentFile();
+        final String currentFile = parentView.getCurrentFile();
         if (currentFile != null && file.equals(new File(currentFile))) {
             holder.filename.setTypeface(holder.filename.getTypeface(), Typeface.BOLD);
         } else {
@@ -67,13 +67,13 @@ public class FileSelectionListAdapter extends ArrayAdapter<File> {
     private class TouchListener implements View.OnClickListener {
         private File file = null;
 
-        public TouchListener(File fileIn) {
+        public TouchListener(final File fileIn) {
             file = fileIn;
         }
 
         // tap on item
         @Override
-        public void onClick(View view) {
+        public void onClick(final View view) {
             parentView.setCurrentFile(file.toString());
             parentView.close();
         }
@@ -83,7 +83,7 @@ public class FileSelectionListAdapter extends ArrayAdapter<File> {
         @InjectView(R.id.mapfilepath) protected TextView filepath;
         @InjectView(R.id.mapfilename) protected TextView filename;
 
-        public ViewHolder(View view) {
+        public ViewHolder(final View view) {
             super(view);
         }
     }

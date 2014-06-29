@@ -62,7 +62,7 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
                 } else {
                     showStaticMaps();
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.e("StaticMapsActivity.loadMapsHandler", e);
             }
         }
@@ -83,7 +83,7 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
 
         for (final Bitmap image : maps) {
             if (image != null) {
-                final ImageView map = (ImageView) inflater.inflate(R.layout.staticmaps_activity_item, null);
+                final ImageView map = (ImageView) inflater.inflate(R.layout.staticmaps_activity_item, smapsView, false);
                 map.setImageBitmap(image);
                 smapsView.addView(map);
             }
@@ -127,7 +127,7 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
                                     maps.add(image);
                                 }
                             }
-                        } catch (Exception e) {
+                        } catch (final Exception e) {
                             Log.e("StaticMapsActivity.LoadMapsThread.run", e);
                         }
                     }
@@ -137,7 +137,7 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
                 }
 
                 loadMapsHandler.sendMessage(Message.obtain());
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.e("StaticMapsActivity.LoadMapsThread.run", e);
             }
         }

@@ -631,7 +631,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (creator == null) {
             return;
         }
-        final View imageView = creator.getView();
+        final View imageView = creator.getView(null);
         if (imageView == null) {
             return;
         }
@@ -739,7 +739,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          */
         private void showAttributeDescriptions(final LinearLayout attribBox) {
             if (attributeDescriptionsLayout == null) {
-                attributeDescriptionsLayout = createAttributeDescriptionsLayout();
+                attributeDescriptionsLayout = createAttributeDescriptionsLayout(attribBox);
             }
             attribBox.removeAllViews();
             attribBox.addView(attributeDescriptionsLayout);
@@ -777,7 +777,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 // check if another attribute icon fits in this row
                 attributeRow.measure(0, 0);
                 final int rowWidth = attributeRow.getMeasuredWidth();
-                final FrameLayout fl = (FrameLayout) getLayoutInflater().inflate(R.layout.attribute_image, null);
+                final FrameLayout fl = (FrameLayout) getLayoutInflater().inflate(R.layout.attribute_image, attributeRow, false);
                 final ImageView iv = (ImageView) fl.getChildAt(0);
                 if ((parentWidth - rowWidth) < iv.getLayoutParams().width) {
                     // make a new row
@@ -785,20 +785,20 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     rows.addView(attributeRow);
                 }
 
-                final boolean strikethru = !CacheAttribute.isEnabled(attributeName);
+                final boolean strikeThrough = !CacheAttribute.isEnabled(attributeName);
                 final CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
                 if (attrib != null) {
                     noAttributeIconsFound = false;
                     Drawable d = res.getDrawable(attrib.drawableId);
                     iv.setImageDrawable(d);
                     // strike through?
-                    if (strikethru) {
-                        // generate strikethru image with same properties as attribute image
-                        final ImageView strikethruImage = new ImageView(CacheDetailActivity.this);
-                        strikethruImage.setLayoutParams(iv.getLayoutParams());
+                    if (strikeThrough) {
+                        // generate strike through image with same properties as attribute image
+                        final ImageView strikeThroughImage = new ImageView(CacheDetailActivity.this);
+                        strikeThroughImage.setLayoutParams(iv.getLayoutParams());
                         d = res.getDrawable(R.drawable.attribute__strikethru);
-                        strikethruImage.setImageDrawable(d);
-                        fl.addView(strikethruImage);
+                        strikeThroughImage.setImageDrawable(d);
+                        fl.addView(strikeThroughImage);
                     }
                 } else {
                     final Drawable d = res.getDrawable(R.drawable.attribute_unknown);
@@ -819,9 +819,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return rowLayout;
         }
 
-        private ViewGroup createAttributeDescriptionsLayout() {
+        private ViewGroup createAttributeDescriptionsLayout(final LinearLayout parentView) {
             final LinearLayout descriptions = (LinearLayout) getLayoutInflater().inflate(
-                    R.layout.attribute_descriptions, null);
+                    R.layout.attribute_descriptions, parentView, false);
             final TextView attribView = (TextView) descriptions.getChildAt(0);
 
             final StringBuilder buffer = new StringBuilder();
@@ -904,13 +904,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         private Thread watchlistThread;
 
         @Override
-        public ScrollView getDispatchedView() {
+        public ScrollView getDispatchedView(final ViewGroup parentView) {
             if (cache == null) {
                 // something is really wrong
                 return null;
             }
 
-            view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_details_page, null);
+            view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_details_page, parentView, false);
 
             // Start loading preview map
             AndroidObservable.bindActivity(CacheDetailActivity.this, previewMap).subscribeOn(Schedulers.io())
@@ -1379,13 +1379,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         @InjectView(R.id.loading) protected View loadingView;
 
         @Override
-        public ScrollView getDispatchedView() {
+        public ScrollView getDispatchedView(final ViewGroup parentView) {
             if (cache == null) {
                 // something is really wrong
                 return null;
             }
 
-            view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_description_page, null);
+            view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_description_page, parentView, false);
             ButterKnife.inject(this, view);
 
             // cache short description
@@ -1678,7 +1678,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         private final int VISITED_INSET = (int) (6.6f * CgeoApplication.getInstance().getResources().getDisplayMetrics().density + 0.5f);
 
         @Override
-        public ListView getDispatchedView() {
+        public ListView getDispatchedView(final ViewGroup parentView) {
             if (cache == null) {
                 // something is really wrong
                 return null;
@@ -1688,9 +1688,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final List<Waypoint> sortedWaypoints = new ArrayList<Waypoint>(cache.getWaypoints());
             Collections.sort(sortedWaypoints, Waypoint.WAYPOINT_COMPARATOR);
 
-            view = (ListView) getLayoutInflater().inflate(R.layout.cachedetail_waypoints_page, null);
+            view = (ListView) getLayoutInflater().inflate(R.layout.cachedetail_waypoints_page, parentView, false);
             view.setClickable(true);
-            final View addWaypointButton = getLayoutInflater().inflate(R.layout.cachedetail_waypoints_footer, null);
+            final View addWaypointButton = getLayoutInflater().inflate(R.layout.cachedetail_waypoints_footer, view, false);
             view.addFooterView(addWaypointButton);
             addWaypointButton.setOnClickListener(new View.OnClickListener() {
 
@@ -1707,7 +1707,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 public View getView(final int position, final View convertView, final ViewGroup parent) {
                     View rowView = convertView;
                     if (null == rowView) {
-                        rowView = getLayoutInflater().inflate(R.layout.waypoint_item, null);
+                        rowView = getLayoutInflater().inflate(R.layout.waypoint_item, parent, false);
                         rowView.setClickable(true);
                         rowView.setLongClickable(true);
                         registerForContextMenu(rowView);
@@ -1842,13 +1842,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private class InventoryViewCreator extends AbstractCachingPageViewCreator<ListView> {
 
         @Override
-        public ListView getDispatchedView() {
+        public ListView getDispatchedView(final ViewGroup parentView) {
             if (cache == null) {
                 // something is really wrong
                 return null;
             }
 
-            view = (ListView) getLayoutInflater().inflate(R.layout.cachedetail_inventory_page, null);
+            view = (ListView) getLayoutInflater().inflate(R.layout.cachedetail_inventory_page, parentView, false);
 
             // TODO: fix layout, then switch back to Android-resource and delete copied one
             // this copy is modified to respect the text color
@@ -1871,12 +1871,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private class ImagesViewCreator extends AbstractCachingPageViewCreator<View> {
 
         @Override
-        public View getDispatchedView() {
+        public View getDispatchedView(final ViewGroup parentView) {
             if (cache == null) {
                 return null; // something is really wrong
             }
 
-            view = getLayoutInflater().inflate(R.layout.cachedetail_images_page, null);
+            view = getLayoutInflater().inflate(R.layout.cachedetail_images_page, parentView, false);
             if (imagesList == null && isCurrentPage(Page.IMAGES)) {
                 loadCacheImages();
             }
