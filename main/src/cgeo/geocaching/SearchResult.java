@@ -272,7 +272,7 @@ public class SearchResult implements Parcelable {
         for (Geocache geocache : caches) {
             addGeocode(geocache.getGeocode());
         }
-        DataStore.saveCaches(caches, EnumSet.of(SaveFlag.SAVE_CACHE));
+        DataStore.saveCaches(caches, EnumSet.of(SaveFlag.CACHE));
     }
 
     public boolean isEmpty() {

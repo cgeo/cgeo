@@ -358,7 +358,7 @@ public abstract class GCParser {
 
         // save full detailed caches
         CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_cache);
-        DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+        DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
 
         // update progress message so user knows we're still working. This is more of a place holder than
         // actual indication of what the program is doing

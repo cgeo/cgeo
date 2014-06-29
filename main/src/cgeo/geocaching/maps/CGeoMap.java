@@ -1317,7 +1317,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             final Set<String> filteredCodes = searchResult.getFilteredGeocodes();
             Log.d("Filtering out " + filteredCodes.size() + " caches: " + filteredCodes.toString());
             caches.removeAll(DataStore.loadCaches(filteredCodes, LoadFlags.LOAD_CACHE_ONLY));
-            DataStore.removeCaches(filteredCodes, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+            DataStore.removeCaches(filteredCodes, EnumSet.of(RemoveFlag.CACHE));
             // new collection type needs to remove first to refresh
             caches.removeAll(result);
             caches.addAll(result);

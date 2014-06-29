@@ -1122,7 +1122,7 @@ public class DataStore {
 
             // Only save the cache in the database if it is requested by the caller and
             // the cache contains detailed information.
-            if (saveFlags.contains(SaveFlag.SAVE_DB) && cache.isDetailed() && dbUpdateRequired) {
+            if (saveFlags.contains(SaveFlag.DB) && cache.isDetailed() && dbUpdateRequired) {
                 toBeStored.add(cache);
             }
         }
@@ -1565,7 +1565,7 @@ public class DataStore {
         final Set<Geocache> result = new HashSet<Geocache>();
         final Set<String> remaining = new HashSet<String>(geocodes);
 
-        if (loadFlags.contains(LoadFlag.LOAD_CACHE_BEFORE)) {
+        if (loadFlags.contains(LoadFlag.CACHE_BEFORE)) {
             for (final String geocode : new HashSet<String>(remaining)) {
                 final Geocache cache = cacheCache.getCacheFromCache(geocode);
                 if (cache != null) {
@@ -1575,13 +1575,13 @@ public class DataStore {
             }
         }
 
-        if (loadFlags.contains(LoadFlag.LOAD_DB_MINIMAL) ||
-                loadFlags.contains(LoadFlag.LOAD_ATTRIBUTES) ||
-                loadFlags.contains(LoadFlag.LOAD_WAYPOINTS) ||
-                loadFlags.contains(LoadFlag.LOAD_SPOILERS) ||
-                loadFlags.contains(LoadFlag.LOAD_LOGS) ||
-                loadFlags.contains(LoadFlag.LOAD_INVENTORY) ||
-                loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
+        if (loadFlags.contains(LoadFlag.DB_MINIMAL) ||
+                loadFlags.contains(LoadFlag.ATTRIBUTES) ||
+                loadFlags.contains(LoadFlag.WAYPOINTS) ||
+                loadFlags.contains(LoadFlag.SPOILERS) ||
+                loadFlags.contains(LoadFlag.LOGS) ||
+                loadFlags.contains(LoadFlag.INVENTORY) ||
+                loadFlags.contains(LoadFlag.OFFLINE_LOG)) {
 
             final Set<Geocache> cachesFromDB = loadCachesFromGeocodes(remaining, loadFlags);
             result.addAll(cachesFromDB);
@@ -1590,7 +1590,7 @@ public class DataStore {
             }
         }
 
-        if (loadFlags.contains(LoadFlag.LOAD_CACHE_AFTER)) {
+        if (loadFlags.contains(LoadFlag.CACHE_AFTER)) {
             for (final String geocode : new HashSet<String>(remaining)) {
                 final Geocache cache = cacheCache.getCacheFromCache(geocode);
                 if (cache != null) {
@@ -1622,12 +1622,12 @@ public class DataStore {
         init();
 
         final StringBuilder query = new StringBuilder(QUERY_CACHE_DATA);
-        if (loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
+        if (loadFlags.contains(LoadFlag.OFFLINE_LOG)) {
             query.append(',').append(dbTableLogsOffline).append(".log");
         }
 
         query.append(" FROM ").append(dbTableCaches);
-        if (loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
+        if (loadFlags.contains(LoadFlag.OFFLINE_LOG)) {
             query.append(" LEFT OUTER JOIN ").append(dbTableLogsOffline).append(" ON ( ").append(dbTableCaches).append(".geocode == ").append(dbTableLogsOffline).append(".geocode) ");
         }
 
@@ -1642,23 +1642,23 @@ public class DataStore {
             while (cursor.moveToNext()) {
                 final Geocache cache = DataStore.createCacheFromDatabaseContent(cursor);
 
-                if (loadFlags.contains(LoadFlag.LOAD_ATTRIBUTES)) {
+                if (loadFlags.contains(LoadFlag.ATTRIBUTES)) {
                     cache.setAttributes(loadAttributes(cache.getGeocode()));
                 }
 
-                if (loadFlags.contains(LoadFlag.LOAD_WAYPOINTS)) {
+                if (loadFlags.contains(LoadFlag.WAYPOINTS)) {
                     final List<Waypoint> waypoints = loadWaypoints(cache.getGeocode());
                     if (CollectionUtils.isNotEmpty(waypoints)) {
                         cache.setWaypoints(waypoints, false);
                     }
                 }
 
-                if (loadFlags.contains(LoadFlag.LOAD_SPOILERS)) {
+                if (loadFlags.contains(LoadFlag.SPOILERS)) {
                     final List<Image> spoilers = loadSpoilers(cache.getGeocode());
                     cache.setSpoilers(spoilers);
                 }
 
-                if (loadFlags.contains(LoadFlag.LOAD_LOGS)) {
+                if (loadFlags.contains(LoadFlag.LOGS)) {
                     final Map<LogType, Integer> logCounts = loadLogCounts(cache.getGeocode());
                     if (MapUtils.isNotEmpty(logCounts)) {
                         cache.getLogCounts().clear();
@@ -1666,7 +1666,7 @@ public class DataStore {
                     }
                 }
 
-                if (loadFlags.contains(LoadFlag.LOAD_INVENTORY)) {
+                if (loadFlags.contains(LoadFlag.INVENTORY)) {
                     final List<Trackable> inventory = loadInventory(cache.getGeocode());
                     if (CollectionUtils.isNotEmpty(inventory)) {
                         if (cache.getInventory() == null) {
@@ -1678,7 +1678,7 @@ public class DataStore {
                     }
                 }
 
-                if (loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
+                if (loadFlags.contains(LoadFlag.OFFLINE_LOG)) {
                     if (logIndex < 0) {
                         logIndex = cursor.getColumnIndex("log");
                     }
@@ -2412,13 +2412,13 @@ public class DataStore {
 
         init();
 
-        if (removeFlags.contains(RemoveFlag.REMOVE_CACHE)) {
+        if (removeFlags.contains(RemoveFlag.CACHE)) {
             for (final String geocode : geocodes) {
                 cacheCache.removeCacheFromCache(geocode);
             }
         }
 
-        if (removeFlags.contains(RemoveFlag.REMOVE_DB)) {
+        if (removeFlags.contains(RemoveFlag.DB)) {
             // Drop caches from the database
             final ArrayList<String> quotedGeocodes = new ArrayList<String>(geocodes.size());
             for (final String geocode : geocodes) {
@@ -2436,7 +2436,7 @@ public class DataStore {
                 database.delete(dbTableLogCount, baseWhereClause, null);
                 database.delete(dbTableLogsOffline, baseWhereClause, null);
                 String wayPointClause = baseWhereClause;
-                if (!removeFlags.contains(RemoveFlag.REMOVE_OWN_WAYPOINTS_ONLY_FOR_TESTING)) {
+                if (!removeFlags.contains(RemoveFlag.OWN_WAYPOINTS_ONLY_FOR_TESTING)) {
                     wayPointClause += " and type <> 'own'";
                 }
                 database.delete(dbTableWaypoints, wayPointClause, null);
@@ -2914,7 +2914,7 @@ public class DataStore {
     }
 
     public static void saveChangedCache(final Geocache cache) {
-        DataStore.saveCache(cache, cache.getStorageLocation().contains(StorageLocation.DATABASE) ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.SAVE_CACHE));
+        DataStore.saveCache(cache, cache.getStorageLocation().contains(StorageLocation.DATABASE) ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.CACHE));
     }
 
     private static class PreparedStatements {
@@ -3045,7 +3045,7 @@ public class DataStore {
 
     public static boolean saveWaypoint(final int id, final String geocode, final Waypoint waypoint) {
         if (DataStore.saveWaypointInternal(id, geocode, waypoint)) {
-            DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+            DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.CACHE));
             return true;
         }
         return false;

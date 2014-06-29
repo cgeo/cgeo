@@ -205,7 +205,7 @@ public class ECApi {
             cache.setTerrain((float) response.getDouble("terrain"));
             cache.setSize(CacheSize.getById(response.getString("size")));
             cache.setFound(response.getInt("found") == 1);
-            DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_CACHE));
+            DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
         } catch (final JSONException e) {
             Log.e("ECApi.parseCache", e);
             return null;

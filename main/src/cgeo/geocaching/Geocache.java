@@ -1325,7 +1325,7 @@ public class Geocache implements ICache, IWaypoint {
             final int index = getWaypointIndex(waypoint);
             waypoints.remove(index);
             DataStore.deleteWaypoint(waypoint.getId());
-            DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+            DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.CACHE));
             // Check status if Final is defined
             if (waypoint.isFinalWithCoords()) {
                 resetFinalDefined();
@@ -1345,7 +1345,7 @@ public class Geocache implements ICache, IWaypoint {
         final int index = getWaypointIndex(waypoint);
         waypoints.remove(index);
         DataStore.deleteWaypoint(waypoint.getId());
-        DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+        DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.CACHE));
         resetFinalDefined();
     }
 
@@ -1469,7 +1469,7 @@ public class Geocache implements ICache, IWaypoint {
 
     public void dropSynchronous() {
         DataStore.markDropped(Collections.singletonList(this));
-        DataStore.removeCache(getGeocode(), EnumSet.of(RemoveFlag.REMOVE_CACHE));
+        DataStore.removeCache(getGeocode(), EnumSet.of(RemoveFlag.CACHE));
     }
 
     public void checkFields() {
@@ -1525,7 +1525,7 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public void refreshSynchronous(final CancellableHandler handler) {
-        DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+        DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.CACHE));
         storeCache(null, geocode, listId, true, handler);
     }
 
@@ -1601,7 +1601,7 @@ public class Geocache implements ICache, IWaypoint {
             }
 
             cache.setListId(listId);
-            DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
 
             if (CancellableHandler.isCancelled(handler)) {
                 return;
@@ -1698,7 +1698,7 @@ public class Geocache implements ICache, IWaypoint {
      * @return
      */
     public boolean hasAttribute(final CacheAttribute attribute, final boolean yes) {
-        Geocache fullCache = DataStore.loadCache(getGeocode(), EnumSet.of(LoadFlag.LOAD_ATTRIBUTES));
+        Geocache fullCache = DataStore.loadCache(getGeocode(), EnumSet.of(LoadFlag.ATTRIBUTES));
         if (fullCache == null) {
             fullCache = this;
         }

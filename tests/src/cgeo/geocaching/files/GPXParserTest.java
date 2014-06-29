@@ -285,7 +285,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(caches).hasSize(1);
         DataStore.removeAllFromCache();
         // load only the minimum cache, it has several members missing
-        final Geocache minimalCache = DataStore.loadCache(geocode, EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
+        final Geocache minimalCache = DataStore.loadCache(geocode, EnumSet.of(LoadFlag.DB_MINIMAL));
 
         // now check that we load lazy members on demand
         assertThat(minimalCache.getAttributes()).isNotEmpty();

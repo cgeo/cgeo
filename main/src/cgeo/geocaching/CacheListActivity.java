@@ -260,7 +260,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
-    private String getCacheNumberString(final Resources res, final int count) {
+    private static String getCacheNumberString(final Resources res, final int count) {
         return res.getQuantityString(R.plurals.cache_counts, count, count);
     }
 

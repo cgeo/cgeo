@@ -377,14 +377,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             case R.id.menu_waypoint_duplicate:
                 ensureSaved();
                 if (cache.duplicateWaypoint(selectedWaypoint)) {
-                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
                     notifyDataSetChanged();
                 }
                 return true;
             case R.id.menu_waypoint_delete:
                 ensureSaved();
                 if (cache.deleteWaypoint(selectedWaypoint)) {
-                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
                     notifyDataSetChanged();
                 }
                 return true;
@@ -2098,7 +2098,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
-    private class UploadPersonalNoteThread extends Thread {
+    private static class UploadPersonalNoteThread extends Thread {
         private Geocache cache = null;
         private CancellableHandler handler = null;
 
@@ -2115,7 +2115,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
             final Message msg = Message.obtain();
             final Bundle bundle = new Bundle();
-            bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, res.getString(R.string.cache_personal_note_upload_done));
+            bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, CgeoApplication.getInstance().getString(R.string.cache_personal_note_upload_done));
             msg.setData(bundle);
             handler.sendMessage(msg);
         }
@@ -2314,7 +2314,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     cache.parseWaypointsFromNote();
                     final TextView personalNoteView = (TextView) activity.findViewById(R.id.personalnote);
                     setPersonalNote(personalNoteView, note);
-                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
                     activity.notifyDataSetChanged();
                 }
             };

@@ -340,11 +340,11 @@ public abstract class GPXParser extends FileParser {
 
                     // finally store the cache in the database
                     result.add(geocode);
-                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
                     DataStore.saveLogsWithoutTransaction(cache.getGeocode(), logs);
 
                     // avoid the cachecache using lots of memory for caches which the user did not actually look at
-                    DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+                    DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.CACHE));
                     showProgressMessage(progressHandler, progressStream.getProgress());
                 } else if (StringUtils.isNotBlank(cache.getName())
                         && StringUtils.containsIgnoreCase(type, "waypoint")) {
@@ -388,7 +388,7 @@ public abstract class GPXParser extends FileParser {
                         newPoints.add(waypoint);
                         Waypoint.mergeWayPoints(newPoints, mergedWayPoints, true);
                         cacheForWaypoint.setWaypoints(newPoints, false);
-                        DataStore.saveCache(cacheForWaypoint, EnumSet.of(SaveFlag.SAVE_DB));
+                        DataStore.saveCache(cacheForWaypoint, EnumSet.of(SaveFlag.DB));
                         showProgressMessage(progressHandler, progressStream.getProgress());
                     }
                 }
@@ -816,7 +816,7 @@ public abstract class GPXParser extends FileParser {
             progressStream = new ProgressInputStream(stream);
             BufferedReader reader = new BufferedReader(new InputStreamReader(progressStream, CharEncoding.UTF_8));
             Xml.parse(new InvalidXMLCharacterFilterReader(reader), root.getContentHandler());
-            return DataStore.loadCaches(result, EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
+            return DataStore.loadCaches(result, EnumSet.of(LoadFlag.DB_MINIMAL));
         } catch (final SAXException e) {
             throw new ParserException("Cannot parse .gpx file as GPX " + version + ": could not parse XML", e);
         }

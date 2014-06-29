@@ -297,9 +297,7 @@ final class OkapiClient {
             final JSONObject cachesResponse = response.getJSONObject("results");
             if (cachesResponse != null) {
                 final List<Geocache> caches = new ArrayList<Geocache>(cachesResponse.length());
-                @SuppressWarnings("unchecked")
-                final
-                Iterator<String> keys = cachesResponse.keys();
+                final Iterator<String> keys = cachesResponse.keys();
                 while (keys.hasNext()) {
                     final String key = keys.next();
                     final Geocache cache = parseSmallCache(cachesResponse.getJSONObject(key));
@@ -320,7 +318,7 @@ final class OkapiClient {
 
             parseCoreCache(response, cache);
 
-            DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_CACHE));
+            DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
         } catch (final JSONException e) {
             Log.e("OkapiClient.parseSmallCache", e);
         }
@@ -401,7 +399,7 @@ final class OkapiClient {
 
             cache.setDetailedUpdatedNow();
             // save full detailed caches
-            DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
             DataStore.saveLogsWithoutTransaction(cache.getGeocode(), parseLogs(response.getJSONArray(CACHE_LATEST_LOGS)));
         } catch (final JSONException e) {
             Log.e("OkapiClient.parseCache", e);

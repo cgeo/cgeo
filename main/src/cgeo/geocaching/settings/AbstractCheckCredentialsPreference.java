@@ -41,31 +41,31 @@ public abstract class AbstractCheckCredentialsPreference extends AbstractClickab
     protected abstract ImmutablePair<StatusCode, ? extends Drawable> login();
 
     private class LoginCheckClickListener implements OnPreferenceClickListener {
-        final private SettingsActivity activity;
+        final private SettingsActivity settingsActivity;
 
         LoginCheckClickListener(final SettingsActivity activity) {
-            this.activity = activity;
+            this.settingsActivity = activity;
         }
 
         @Override
         public boolean onPreferenceClick(Preference preference) {
-            final Resources res = activity.getResources();
+            final Resources res = settingsActivity.getResources();
             final ImmutablePair<String, String> credentials = getCredentials();
 
             // check credentials for validity
             if (StringUtils.isBlank(credentials.getLeft())
                     || StringUtils.isBlank(credentials.getRight())) {
-                ActivityMixin.showToast(activity, R.string.err_missing_auth);
+                ActivityMixin.showToast(settingsActivity, R.string.err_missing_auth);
                 return false;
             }
 
-            final ProgressDialog loginDialog = ProgressDialog.show(activity,
+            final ProgressDialog loginDialog = ProgressDialog.show(settingsActivity,
                     res.getString(R.string.init_login_popup),
                     res.getString(R.string.init_login_popup_working), true);
             loginDialog.setCancelable(false);
             Cookies.clearCookies();
 
-            AndroidObservable.bindActivity(activity, Async.start(new Func0<ImmutablePair<StatusCode, ? extends Drawable>>() {
+            AndroidObservable.bindActivity(settingsActivity, Async.start(new Func0<ImmutablePair<StatusCode, ? extends Drawable>>() {
                 @Override
                 public ImmutablePair<StatusCode, ? extends Drawable> call() {
                     return login();
@@ -75,16 +75,16 @@ public abstract class AbstractCheckCredentialsPreference extends AbstractClickab
                 public void call(final ImmutablePair<StatusCode, ? extends Drawable> loginInfo) {
                     loginDialog.dismiss();
                     if (loginInfo.getLeft() == StatusCode.NO_ERROR) {
-                        Dialogs.message(activity, R.string.init_login_popup, R.string.init_login_popup_ok, loginInfo.getRight());
+                        Dialogs.message(settingsActivity, R.string.init_login_popup, R.string.init_login_popup_ok, loginInfo.getRight());
                     } else {
-                        Dialogs.message(activity, R.string.init_login_popup,
+                        Dialogs.message(settingsActivity, R.string.init_login_popup,
                                 res.getString(R.string.init_login_popup_failed_reason)
                                         + " "
                                         + loginInfo.getLeft().getErrorString(res)
                                         + "."
                         );
                     }
-                    activity.initBasicMemberPreferences();
+                    settingsActivity.initBasicMemberPreferences();
                 }
             });
 
