@@ -235,8 +235,8 @@
   <string name="caches_downloading">Downloading caches…\nETE: </string>
   <string name="caches_eta_ltm">Menos de um minuto</string>
   <plurals name="caches_eta_mins">
-    <item quantity="one">minuto</item>
-    <item quantity="other">minutos</item>
+    <item quantity="one">%d minuto</item>
+    <item quantity="other">%d minutos</item>
   </plurals>
   <string name="caches_store_offline">Arquivar para uso offline</string>
   <string name="caches_store_selected">Arquivar selecionadas</string>

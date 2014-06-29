@@ -265,8 +265,8 @@
     <string name="caches_eta_ltm">Less than a minute</string>
 
     <plurals name="caches_eta_mins">
-        <item quantity="one">minute</item>
-        <item quantity="other">minutes</item>
+        <item quantity="one">%d minute</item>
+        <item quantity="other">%d minutes</item>
     </plurals>
 
     <string name="caches_store_offline">Store Offline</string>

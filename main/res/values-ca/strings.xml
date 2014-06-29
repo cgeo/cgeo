@@ -238,8 +238,8 @@
   <string name="caches_downloading">S\'estan descarregant els catxés…\nETA:  </string>
   <string name="caches_eta_ltm">Menys d\'un minut</string>
   <plurals name="caches_eta_mins">
-    <item quantity="one">minut</item>
-    <item quantity="other">minuts</item>
+    <item quantity="one">%d minut</item>
+    <item quantity="other">%d minuts</item>
   </plurals>
   <string name="caches_store_offline">Desa per usar fora de línia</string>
   <string name="caches_store_selected">Desa els seleccionats</string>

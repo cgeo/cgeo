@@ -238,8 +238,8 @@
   <string name="caches_downloading">Caches aan het downloaden…\nGeschatte tijd: </string>
   <string name="caches_eta_ltm">Minder dan een minuut</string>
   <plurals name="caches_eta_mins">
-    <item quantity="one">minuut</item>
-    <item quantity="other">minuten</item>
+    <item quantity="one">%d minuut</item>
+    <item quantity="other">%d minuten</item>
   </plurals>
   <string name="caches_store_offline">Opslaan voor Offline gebruik</string>
   <string name="caches_store_selected">Geselecteerden opslaan</string>

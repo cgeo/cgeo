@@ -236,8 +236,8 @@
   <string name="caches_downloading">Laddar ner cacher…\nTid kvar: </string>
   <string name="caches_eta_ltm">mindre än en minut</string>
   <plurals name="caches_eta_mins">
-    <item quantity="one">minut</item>
-    <item quantity="other">minuter</item>
+    <item quantity="one">%d minut</item>
+    <item quantity="other">%d minuter</item>
   </plurals>
   <string name="caches_store_offline">Spara för Offline</string>
   <string name="caches_store_selected">Spara valda</string>

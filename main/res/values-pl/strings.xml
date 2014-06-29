@@ -236,9 +236,9 @@
   <string name="caches_downloading">Pobieram skrzynki…\nSzacowany czas: </string>
   <string name="caches_eta_ltm">Mniej niż minuta</string>
   <plurals name="caches_eta_mins">
-    <item quantity="one">minuta</item>
-    <item quantity="few">minuty</item>
-    <item quantity="other">minut</item>
+    <item quantity="one">%d minuta</item>
+    <item quantity="few">%d minuty</item>
+    <item quantity="other">%d minut</item>
   </plurals>
   <string name="caches_store_offline">Zapisz offline</string>
   <string name="caches_store_selected">Zapisz wybrane</string>

@@ -237,8 +237,8 @@
   <string name="caches_downloading">Téléchargement des caches…\nRestant: </string>
   <string name="caches_eta_ltm">Moins d\'une minute</string>
   <plurals name="caches_eta_mins">
-    <item quantity="one">minute</item>
-    <item quantity="other">minutes</item>
+    <item quantity="one">%d minute</item>
+    <item quantity="other">%d minutes</item>
   </plurals>
   <string name="caches_store_offline">Stocker localement</string>
   <string name="caches_store_selected">Stocker la sélection</string>
@@ -578,7 +578,7 @@
   <string name="cache_images">Images</string>
   <string name="cache_waypoints">Étapes</string>
   <plurals name="waypoints">
-    <item quantity="one">1 étape</item>
+    <item quantity="one">%d étape</item>
     <item quantity="other">%d étapes</item>
   </plurals>
   <string name="cache_waypoints_add">Ajouter une étape</string>
@@ -1140,7 +1140,7 @@
   <string name="tts_oclock">%s heures</string>
   <string name="clipboard_copy_ok">Copié dans le presse-papiers</string>
   <plurals name="days_ago">
-    <item quantity="one">hier</item>
+    <item quantity="one" tools:ignore="ImpliedQuantity">hier</item>
     <item quantity="other">il y a %d jours</item>
   </plurals>
   <plurals name="favorite_points">
