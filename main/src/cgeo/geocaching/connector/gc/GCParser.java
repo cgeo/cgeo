@@ -758,15 +758,12 @@ public abstract class GCParser {
             return search;
         }
 
-        // As in the original code, remove the query string
-        final String uri = Uri.parse(url).buildUpon().query(null).build().toString();
-
         final Parameters params = new Parameters(
                 "__EVENTTARGET", "ctl00$ContentBody$pgrBottom$ctl08",
                 "__EVENTARGUMENT", "");
         GCLogin.putViewstates(params, viewstates);
 
-        final String page = GCLogin.getInstance().postRequestLogged(uri, params);
+        final String page = GCLogin.getInstance().postRequestLogged(url, params);
         if (!GCLogin.getInstance().getLoginStatus(page)) {
             Log.e("GCParser.postLogTrackable: Can not log in geocaching");
             return search;
