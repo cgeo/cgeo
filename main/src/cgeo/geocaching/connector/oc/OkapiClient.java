@@ -297,11 +297,14 @@ final class OkapiClient {
             final JSONObject cachesResponse = response.getJSONObject("results");
             if (cachesResponse != null) {
                 final List<Geocache> caches = new ArrayList<Geocache>(cachesResponse.length());
-                final Iterator<String> keys = cachesResponse.keys();
+                final Iterator<?> keys = cachesResponse.keys();
                 while (keys.hasNext()) {
-                    final String key = keys.next();
-                    final Geocache cache = parseSmallCache(cachesResponse.getJSONObject(key));
-                    caches.add(cache);
+                    final Object next = keys.next();
+                    if (next instanceof String) {
+                        final String key = (String) next;
+                        final Geocache cache = parseSmallCache(cachesResponse.getJSONObject(key));
+                        caches.add(cache);
+                    }
                 }
                 return caches;
             }
