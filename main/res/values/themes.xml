@@ -52,16 +52,8 @@
 
    </style>
 
-    <style name="cgeo" parent="cgeo.base">
-        <item name="actionBarStyle">@style/cgeo.ActionBarStyle</item>
-        <item name="android:actionBarStyle"  tools:ignore="NewApi">@style/cgeo.ActionBarStyle</item>
-    </style>
-
-
-
-
-    <!-- Identical to cgeo aside from different parent style -->
-    <style name="cgeo_light" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <!-- Identical to cgeo.base aside from different parent style and bug fixes-->
+    <style name="cgeo.base.light" parent="@style/Theme.AppCompat.Light.DarkActionBar">
 
         <!-- For some reason we get the non inversed texts here (bug in abc?), explicitly set text styles -->
         <item name="titleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionMode.Title.Inverse</item>
@@ -79,10 +71,18 @@
         <item name="button_color_disabled">@color/button_disabled</item>
     </style>
 
+    <style name="cgeo" parent="cgeo.base">
+        <item name="actionBarStyle">@style/cgeo.ActionBarStyle</item>
+        <item name="android:actionBarStyle"  tools:ignore="NewApi">@style/cgeo.ActionBarStyle</item>
+    </style>
+
+    <style name="cgeo_light" parent="cgeo.base.light">
+        <item name="actionBarStyle">@style/cgeo.ActionBarStyle</item>
+        <item name="android:actionBarStyle"  tools:ignore="NewApi">@style/cgeo.ActionBarStyle</item>
+    </style>
 
 
     <style name="dark" parent="cgeo">
-
         <!-- own values: colors -->
         <item name="text_color">@color/text_dark</item>
         <item name="text_color_headline">@color/text_headline_dark</item>
@@ -98,9 +98,6 @@
         <item name="input">@drawable/input_bcg_dark</item>
         <item name="inventory">@drawable/inventory_background_dark</item>
         <item name="favorite">@drawable/favorite_background_dark</item>
-        <item name="favorite_r">@drawable/favorite_background_red_dark</item>
-        <item name="favorite_o">@drawable/favorite_background_orange_dark</item>
-        <item name="favorite_g">@drawable/favorite_background_green_dark</item>
         <item name="close">@drawable/map_close_dark</item>
         <item name="log_img_icon">@drawable/log_img_dark</item>
         <item name="actionbar_compass">@drawable/actionbar_compass_dark</item>
@@ -128,9 +125,6 @@
         <item name="input">@drawable/input_bcg_light</item>
         <item name="inventory">@drawable/inventory_background_light</item>
         <item name="favorite">@drawable/favorite_background_light</item>
-        <item name="favorite_r">@drawable/favorite_background_red_light</item>
-        <item name="favorite_o">@drawable/favorite_background_orange_light</item>
-        <item name="favorite_g">@drawable/favorite_background_green_light</item>
         <item name="close">@drawable/map_close_light</item>
         <item name="log_img_icon">@drawable/log_img_light</item>
         <item name="actionbar_compass">@drawable/actionbar_compass_light</item>
@@ -189,5 +183,5 @@
         <item name="settings_sdcard">@drawable/settings_sdcard_black</item>
         <item name="settings_info_icon">@drawable/settings_info_icon_black</item>
     </style>
-    
+
 </resources>
