@@ -8,4 +8,15 @@
         <item name="android:minHeight">32dip</item>
         <item name="android:maxHeight">32dip</item>
     </style>
+
+    <style name="cgeo_light" parent="cgeo.base.light">
+        <item name="actionBarStyle">@style/cgeo.ActionBarStyle.Light.Inverse</item>
+        <item name="android:actionBarStyle" >@style/cgeo.ActionBarStyle.Light.Inverse</item>
+    </style>
+
+    <style name="cgeo" parent="cgeo.base">
+        <item name="android:actionBarStyle">@style/cgeo.ActionBarStyle</item>
+    </style>
+
+
 </resources>

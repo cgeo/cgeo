@@ -49,18 +49,16 @@
     </style>
 
    <style name="cgeo.base" parent="@style/Theme.AppCompat">
-
-
        <item name="android:buttonStyle">@style/button</item>
        <item name="android:editTextStyle">@style/edittext</item>
        <item name="android:windowContentOverlay">@null</item>
+       <item name="actionBarStyle">@style/cgeo.ActionBarStyle</item>
 
         <!-- own values: colors -->
         <item name="just_color">@color/just_black</item>
         <item name="text_color_link">@color/link</item>
         <item name="button_color_enabled">@color/button_enabled</item>
         <item name="button_color_disabled">@color/button_disabled</item>
-
    </style>
 
     <!-- Identical to cgeo.base aside from different parent style and bug fixes-->
@@ -74,23 +72,43 @@
         <item name="android:buttonStyle">@style/button</item>
         <item name="android:editTextStyle">@style/edittext</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="actionBarStyle">@style/cgeo.ActionBarStyle.Light.Inverse</item>
 
         <!-- own values: colors -->
         <item name="just_color">@color/just_black</item>
         <item name="text_color_link">@color/link</item>
         <item name="button_color_enabled">@color/button_enabled</item>
         <item name="button_color_disabled">@color/button_disabled</item>
+
     </style>
 
     <style name="cgeo" parent="cgeo.base">
-        <item name="actionBarStyle">@style/cgeo.ActionBarStyle</item>
-        <item name="android:actionBarStyle"  tools:ignore="NewApi">@style/cgeo.ActionBarStyle</item>
     </style>
 
     <style name="cgeo_light" parent="cgeo.base.light">
-        <item name="actionBarStyle">@style/cgeo.ActionBarStyle.Light.Inverse</item>
-        <item name="android:actionBarStyle"  tools:ignore="NewApi">@style/cgeo.ActionBarStyle.Light.Inverse</item>
+
     </style>
+
+    <!-- Gingerbreads' Dialog style without the colors but with white backgound -->
+    <style name="DialogWindowTitle">
+        <item name="android:maxLines">1</item>
+        <item name="android:scrollHorizontally">true</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.DialogWindowTitle</item>
+    </style>
+
+    <style name="DialogFixGingerbread">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowTitleStyle">@style/DialogWindowTitle</item>
+        <item name="android:windowIsFloating">true</item>
+
+        <item name="android:windowBackground">@color/just_white</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+    </style>
+
+
 
 
     <style name="dark" parent="cgeo">
@@ -121,7 +139,6 @@
     <style name="light" parent="cgeo_light">
 
         <!-- own values: colors -->
-        <item name="android:windowBackground">@color/just_white</item> 
         <item name="text_color">@color/text_light</item>
         <item name="text_color_headline">@color/text_headline_light</item>
         <item name="text_color_grey">@color/text_grey_light</item>
