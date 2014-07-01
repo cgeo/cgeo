@@ -2,8 +2,10 @@
 <resources>
     <!-- Holo Style is only available for ICS+ -->
 
-    <style name="cgeo.ActionBarStyle" parent="Widget.AppCompat.Base.ActionBar">
-        <item name="android:indeterminateProgressStyle">@android:style/Widget.Holo.ProgressBar.Small</item>
+    <style name="cgeo.Widget.AppCompat.Base.ProgressBar.Medium" parent="android:Widget.Holo.ProgressBar">
+        <item name="android:minWidth">32dip</item>
+        <item name="android:maxWidth">32dip</item>
+        <item name="android:minHeight">32dip</item>
+        <item name="android:maxHeight">32dip</item>
     </style>
-
 </resources>

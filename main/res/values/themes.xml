@@ -18,7 +18,10 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="actionBarStyle">@style/cgeo_main.ActionBarStyle</item>
 
-   </style>
+        <!-- KitKat's transperent navigation -->
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowTranslucentNavigation" tools:ignore="NewApi">true</item>
+    </style>
 
 
     <style name="cgeo_main" parent="cgeo_main.base">
@@ -26,15 +29,23 @@
         <item name="android:actionBarStyle" tools:ignore="NewApi">@style/cgeo_main.ActionBarStyle</item>
     </style>
 
-    <style name="cgeo.Widget.AppCompat.Base.ProgressBar.Small" parent="android:Widget.ProgressBar.Small">
-        <item name="background">@color/just_white</item>
+    <style name="cgeo.Widget.AppCompat.Base.ProgressBar.Medium" parent="android:Widget.ProgressBar">
+        <item name="android:minWidth">32dip</item>
+        <item name="android:maxWidth">32dip</item>
+        <item name="android:minHeight">32dip</item>
+        <item name="android:maxHeight">32dip</item>
     </style>
 
 
     <style name="cgeo.ActionBarStyle" parent="Widget.AppCompat.Base.ActionBar">
-        <item name="indeterminateProgressStyle">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Small</item>
-        <item name="android:indeterminateProgressStyle" tools:ignore="NewApi">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Small</item>
+        <item name="indeterminateProgressStyle">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Medium</item>
+        <item name="android:indeterminateProgressStyle" tools:ignore="NewApi">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Medium</item>
+    </style>
 
+
+    <style name="cgeo.ActionBarStyle.Light.Inverse" parent="Widget.AppCompat.Light.Base.ActionBar.Solid.Inverse">
+        <item name="indeterminateProgressStyle">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Medium</item>
+        <item name="android:indeterminateProgressStyle" tools:ignore="NewApi">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Medium</item>
     </style>
 
    <style name="cgeo.base" parent="@style/Theme.AppCompat">
@@ -77,8 +88,8 @@
     </style>
 
     <style name="cgeo_light" parent="cgeo.base.light">
-        <item name="actionBarStyle">@style/cgeo.ActionBarStyle</item>
-        <item name="android:actionBarStyle"  tools:ignore="NewApi">@style/cgeo.ActionBarStyle</item>
+        <item name="actionBarStyle">@style/cgeo.ActionBarStyle.Light.Inverse</item>
+        <item name="android:actionBarStyle"  tools:ignore="NewApi">@style/cgeo.ActionBarStyle.Light.Inverse</item>
     </style>
 
 
@@ -148,6 +159,7 @@
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@android:style/Animation</item>
+
     </style>
 
     <style name="cgeo_popup" parent="cgeo.Translucent.Light">

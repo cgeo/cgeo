@@ -483,10 +483,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
 
         // set layout
-        //ActivityMixin.setTheme(activity);
-        // TODO: set a proper theme
+        ActivityMixin.setTheme(activity);
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
-            activity.setTheme(android.R.style.Theme_Holo);
             activity.getActionBar().setDisplayHomeAsUpEnabled(true);
         }
         activity.setContentView(mapProvider.getMapLayoutId());
