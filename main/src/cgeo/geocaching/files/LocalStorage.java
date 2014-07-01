@@ -1,12 +1,14 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.Header;
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
@@ -46,18 +48,105 @@ public final class LocalStorage {
     public final static String cache = ".cgeo";
 
     private static File internalStorageBase;
+    private static File offlineCacheDirectory;
+    private static File dbBackupDirectory;
 
     private LocalStorage() {
         // utility class
     }
 
     /**
-     * Return the primary storage cache root (external media if mounted, phone otherwise).
+     * Return the primary storage cache root.
      *
      * @return the root of the cache directory
      */
     public static File getStorage() {
-        return getStorageSpecific(false);
+        if (offlineCacheDirectory != null) {
+            if (offlineCacheDirectory.exists() && offlineCacheDirectory.canWrite()) {
+                return offlineCacheDirectory;
+            }
+            offlineCacheDirectory = null;
+        }
+        String offlineCacheDirectoryPath = Settings.getOfflineCacheDirectory();
+        if (setOfflineCacheDirectory(offlineCacheDirectoryPath)) {
+            return offlineCacheDirectory;
+        }
+        offlineCacheDirectoryPath = getExternalStorageBase().getPath();
+        if (setOfflineCacheDirectory(offlineCacheDirectoryPath)) {
+            return offlineCacheDirectory;
+        }
+
+        offlineCacheDirectoryPath = getInternalStorageBase().getPath();
+        if (setOfflineCacheDirectory(offlineCacheDirectoryPath)) {
+            return offlineCacheDirectory;
+        }
+        return null;
+    }
+
+    /**
+     * Checks if the offline cache directory is accessible.
+     *
+     * @return true/false
+     */
+    public static boolean isOfflineCacheDirectoryAccessible() {
+        if (offlineCacheDirectory != null) {
+            return offlineCacheDirectory.exists() && offlineCacheDirectory.canWrite();
+        }
+        final String cacheDirectoryPath = Settings.getOfflineCacheDirectory();
+        final File newCacheDir = new File(cacheDirectoryPath);
+        return newCacheDir.exists() && newCacheDir.canWrite();
+    }
+
+    /**
+     * Return the storage place for db backup directory.
+     *
+     * @return the db backup directory
+     */
+    public static File getDbBackupDirectory() {
+        if (dbBackupDirectory != null) {
+            return dbBackupDirectory;
+        }
+        final File tempBackupDirectory = getExternalStorageBase();
+        if (!tempBackupDirectory.exists()) {
+            if (!FileUtils.mkdirs(tempBackupDirectory)) {
+                return null;
+            }
+        }
+        if (tempBackupDirectory.exists() && tempBackupDirectory.canWrite()) {
+            dbBackupDirectory = tempBackupDirectory;
+            return dbBackupDirectory;
+        }
+        return null;
+    }
+
+    /**
+     * Tries to set new offline cache directory path.
+     *
+     * @param newDirPath
+     *            The new path
+     * @return true / false success or no success to set path
+     */
+    public static boolean setOfflineCacheDirectory(final String newDirPath) {
+        if (offlineCacheDirectory != null && newDirPath.compareTo(offlineCacheDirectory.getPath()) == 0) {
+            return true;
+        }
+        final File newCgeoDir = new File(newDirPath);
+        if (newCgeoDir.exists() && newCgeoDir.canWrite()) {
+            offlineCacheDirectory = newCgeoDir;
+            Settings.setOfflineCacheDirectory(newDirPath);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns the default storage cache root (external media if mounted, phone otherwise).
+     *
+     * @return
+     */
+    public static String getDefaultOfflineCacheDirectoryPath() {
+        final File defaultOfflineCacheDirectory = getStorageSpecific(false);
+        return defaultOfflineCacheDirectory.getPath();
     }
 
     /**
@@ -69,7 +158,7 @@ public final class LocalStorage {
         return getStorageSpecific(true);
     }
 
-    private static File getStorageSpecific(boolean secondary) {
+    private static File getStorageSpecific(final boolean secondary) {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) ^ secondary ?
                 getExternalStorageBase() :
                 new File(getInternalStorageBase(), LocalStorage.cache);
@@ -202,7 +291,7 @@ public final class LocalStorage {
             saveHeader(HEADER_ETAG, saved ? response : null, targetFile);
             saveHeader(HEADER_LAST_MODIFIED, saved ? response : null, targetFile);
             return saved;
-        } catch (IOException e) {
+        } catch (final IOException e) {
             Log.e("LocalStorage.saveEntityToFile", e);
         }
 
@@ -291,7 +380,7 @@ public final class LocalStorage {
             } finally {
                 IOUtils.closeQuietly(inputStream);
             }
-        } catch (IOException e) {
+        } catch (final IOException e) {
             Log.e("LocalStorage.saveToFile", e);
             FileUtils.deleteIgnoringFailure(targetFile);
         }
@@ -321,10 +410,10 @@ public final class LocalStorage {
             // close here already to catch any issue with closing
             input.close();
             output.close();
-        } catch (FileNotFoundException e) {
+        } catch (final FileNotFoundException e) {
             Log.e("LocalStorage.copy: could not copy file", e);
             return false;
-        } catch (IOException e) {
+        } catch (final IOException e) {
             Log.e("LocalStorage.copy: could not copy file", e);
             return false;
         } finally {
@@ -345,7 +434,7 @@ public final class LocalStorage {
             }
             // Flushing is only necessary if the stream is not immediately closed afterwards.
             // We rely on all callers to do that correctly outside of this method
-        } catch (IOException e) {
+        } catch (final IOException e) {
             Log.e("LocalStorage.copy: error when copying data", e);
             return false;
         }
@@ -398,7 +487,7 @@ public final class LocalStorage {
                 if (!FileUtils.delete(file)) {
                     Log.w("LocalStorage.deleteFilesPrefix: Can't delete file " + file.getName());
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.e("LocalStorage.deleteFilesPrefix", e);
             }
         }
@@ -417,7 +506,7 @@ public final class LocalStorage {
     public static File[] getFilesWithPrefix(final String geocode, final String filenamePrefix) {
         final FilenameFilter filter = new FilenameFilter() {
             @Override
-            public boolean accept(File dir, String filename) {
+            public boolean accept(final File dir, final String filename) {
                 return filename.startsWith(filenamePrefix);
             }
         };
@@ -430,10 +519,10 @@ public final class LocalStorage {
      */
     public static List<File> getStorages() {
 
-        String extStorage = Environment.getExternalStorageDirectory().getAbsolutePath();
-        List<File> storages = new ArrayList<File>();
+        final String extStorage = Environment.getExternalStorageDirectory().getAbsolutePath();
+        final List<File> storages = new ArrayList<File>();
         storages.add(new File(extStorage));
-        File file = new File(FILE_SYSTEM_TABLE_PATH);
+        final File file = new File(FILE_SYSTEM_TABLE_PATH);
         if (file.canRead()) {
             Reader fr = null;
             BufferedReader br = null;
@@ -443,11 +532,11 @@ public final class LocalStorage {
                 String s = br.readLine();
                 while (s != null) {
                     if (s.startsWith("dev_mount")) {
-                        String[] tokens = StringUtils.split(s);
+                        final String[] tokens = StringUtils.split(s);
                         if (tokens.length >= 3) {
-                            String path = tokens[2]; // mountpoint
+                            final String path = tokens[2]; // mountpoint
                             if (!extStorage.equals(path)) {
-                                File directory = new File(path);
+                                final File directory = new File(path);
                                 if (directory.exists() && directory.isDirectory()) {
                                     storages.add(directory);
                                 }
@@ -456,7 +545,7 @@ public final class LocalStorage {
                     }
                     s = br.readLine();
                 }
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 Log.e("Could not get additional mount points for user content. " +
                         "Proceeding with external storage only (" + extStorage + ")");
             } finally {

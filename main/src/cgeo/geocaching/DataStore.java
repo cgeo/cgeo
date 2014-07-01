@@ -364,7 +364,11 @@ public class DataStore {
     }
 
     public static File getBackupFileInternal() {
-        return new File(LocalStorage.getStorage(), "cgeo.sqlite");
+        final File backupDir = LocalStorage.getDbBackupDirectory();
+        if (backupDir == null) {
+            return null;
+        }
+        return new File(backupDir, "cgeo.sqlite");
     }
 
     public static String backupDatabaseInternal() {
@@ -374,6 +378,10 @@ public class DataStore {
         }
 
         final File target = getBackupFileInternal();
+        if (target == null) {
+            Log.w("Database wasn't backed up: no write access");
+            return null;
+        }
         closeDb();
         final boolean backupDone = LocalStorage.copy(databasePath(), target);
         init();
@@ -449,6 +457,10 @@ public class DataStore {
         }
 
         final File sourceFile = getBackupFileInternal();
+        if (sourceFile == null) {
+            Log.w("Database wasn't restored: not readable");
+            return false;
+        }
         closeDb();
         final boolean restoreDone = LocalStorage.copy(sourceFile, databasePath());
         init();

@@ -78,6 +78,7 @@
     <string name="pref_fakekey_preference_restore">fakekey_preference_restore</string>
     <string name="pref_fakekey_preference_maintenance_directories">pref_fakekey_preference_maintenance_directories</string>
     <string name="pref_dbonsdcard">dbonsdcard</string>
+    <string name="pref_offline_cache_directory">offlineCacheDirectory</string>
     <string name="pref_debug">debug</string>
     <!-- preferences used internally -->
     <string name="pref_temp_twitter_token_secret">temp-token-secret</string>
