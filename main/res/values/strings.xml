@@ -217,6 +217,8 @@
     <string name="warn_rendertheme_missing">Map theme not found.</string>
     <string name="warn_pocket_query_select">No Pocket query selected.</string>
     <string name="warn_no_pocket_query_found">No Pocket query found online.</string>
+    <string name="warn_offline_cache_dir_title">Offline cache directory not accessible</string>
+    <string name="warn_offline_cache_dir_text">The offline cache directory is no longer accessible, so we are using default now. Maybe the sdcard is removed or the set cache directory was deleted or became readonly.</string>
     <string name="info_log_posted">c:geo successfully submitted the log.</string>
     <string name="info_log_saved">c:geo successfully saved the log.</string>
     <string name="info_log_cleared">Log was cleared.</string>
@@ -519,6 +521,10 @@
     <string name="init_dbmove_running">Moving Database</string>
     <string name="init_dbmove_success">Successfully moved the database.</string>
     <string name="init_dbmove_failed">Failed to move database</string>
+    <string name="init_offline_cache_directory_title">Cache directory</string>
+    <string name="init_offline_cache_directory_note">You may set the directory where c:geo caches files for offline usage. We suggest to copy the cache directory (e.g. /mnt/sdcard/.cgeo) to the desired location first (e.g. /mnt/extSdCard/cgeo). If you remove the SD card, c:geo will automatically fall back to internal cache directory.</string>
+    <string name="init_offline_cache_directory">Set cache directory</string>
+    <string name="init_offline_cache_directory_label">Choose cache directory</string>
     <string name="init_plain_logs">Plain Logs</string>
     <string name="init_summary_plain_logs">Display log entries without colors</string>
     <string name="init_use_native_ua">Android browser</string>
