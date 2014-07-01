@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cgeo="http://schemas.android.com/apk/res-auto" >
-
     <item
         android:id="@+id/menu_toggle_mypos"
         android:icon="@drawable/ic_menu_myposition"
@@ -12,6 +11,7 @@
         android:id="@+id/menu_select_mapview"
         android:icon="@drawable/ic_menu_mapmode"
         android:title="@string/map_view_map"
+        android:showAsAction="ifRoom|withText"
         cgeo:showAsAction="ifRoom|withText">
         <menu>
             <group
@@ -20,22 +20,27 @@
             </group>
         </menu>
     </item>
+
+
     <item
         android:id="@+id/menu_map_live"
         android:icon="@drawable/ic_menu_refresh"
         android:title="@string/map_live_disable"
+        android:showAsAction="ifRoom|withText"
         cgeo:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_store_caches"
         android:icon="@drawable/ic_menu_set_as"
         android:title="@string/caches_store_offline"
+        android:showAsAction="ifRoom|withText"
         cgeo:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/submenu_modes"
         android:icon="@drawable/ic_menu_mark"
         android:title="@string/map_modes"
+        android:showAsAction="ifRoom|withText"
         cgeo:showAsAction="ifRoom|withText">
         <menu>
             <item
@@ -65,6 +70,7 @@
         android:id="@+id/menu_theme_mode"
         android:icon="@drawable/ic_menu_preferences"
         android:title="@string/map_theme_select"
+        android:showAsAction="ifRoom|withText"
         cgeo:showAsAction="ifRoom|withText">
     </item>
     <item
