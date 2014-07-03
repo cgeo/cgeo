@@ -26,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.eclipse.jdt.annotation.NonNull;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -572,6 +573,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         }
 
         // Swipe on item
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public boolean onTouch(final View view, final MotionEvent event) {
             return gestureDetector.onTouchEvent(event);

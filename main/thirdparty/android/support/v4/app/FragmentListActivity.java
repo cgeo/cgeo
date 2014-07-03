@@ -18,6 +18,8 @@ package android.support.v4.app;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -51,31 +53,31 @@ import android.widget.ListView;
  * The following code demonstrates an (ugly) custom screen layout. It has a list
  * with a green background, and an alternate red "no data" message.
  * </p>
- * 
+ *
  * <pre>
  * &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
  * &lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
  *         android:orientation=&quot;vertical&quot;
- *         android:layout_width=&quot;fill_parent&quot; 
+ *         android:layout_width=&quot;fill_parent&quot;
  *         android:layout_height=&quot;fill_parent&quot;
  *         android:paddingLeft=&quot;8dp&quot;
  *         android:paddingRight=&quot;8dp&quot;&gt;
- * 
+ *
  *     &lt;ListView android:id=&quot;@id/android:list&quot;
- *               android:layout_width=&quot;fill_parent&quot; 
+ *               android:layout_width=&quot;fill_parent&quot;
  *               android:layout_height=&quot;fill_parent&quot;
  *               android:background=&quot;#00FF00&quot;
  *               android:layout_weight=&quot;1&quot;
  *               android:drawSelectorOnTop=&quot;false&quot;/&gt;
- * 
+ *
  *     &lt;TextView android:id=&quot;@id/android:empty&quot;
- *               android:layout_width=&quot;fill_parent&quot; 
+ *               android:layout_width=&quot;fill_parent&quot;
  *               android:layout_height=&quot;fill_parent&quot;
  *               android:background=&quot;#FF0000&quot;
  *               android:text=&quot;No data&quot;/&gt;
  * &lt;/LinearLayout&gt;
  * </pre>
- * 
+ *
  * <p>
  * <strong>Row Layout</strong>
  * </p>
@@ -96,27 +98,27 @@ import android.widget.ListView;
  * source for the resource two_line_list_item, which displays two data
  * fields,one above the other, for each list row.
  * </p>
- * 
+ *
  * <pre>
  * &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
  * &lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
  *     android:layout_width=&quot;fill_parent&quot;
  *     android:layout_height=&quot;wrap_content&quot;
  *     android:orientation=&quot;vertical&quot;&gt;
- * 
+ *
  *     &lt;TextView android:id=&quot;@+id/text1&quot;
  *         android:textSize=&quot;16sp&quot;
  *         android:textStyle=&quot;bold&quot;
  *         android:layout_width=&quot;fill_parent&quot;
  *         android:layout_height=&quot;wrap_content&quot;/&gt;
- * 
+ *
  *     &lt;TextView android:id=&quot;@+id/text2&quot;
  *         android:textSize=&quot;16sp&quot;
  *         android:layout_width=&quot;fill_parent&quot;
  *         android:layout_height=&quot;wrap_content&quot;/&gt;
  * &lt;/LinearLayout&gt;
  * </pre>
- * 
+ *
  * <p>
  * You must identify the data bound to each TextView object in this layout. The
  * syntax for this is discussed in the next section.
@@ -137,40 +139,40 @@ import android.widget.ListView;
  * Contacts provider for all contacts, then binding the Name and Company fields
  * to a two line row layout in the activity's ListView.
  * </p>
- * 
+ *
  * <pre>
  * public class MyListAdapter extends FragmentListActivity {
- * 
+ *
  *     &#064;Override
  *     protected void onCreate(Bundle savedInstanceState){
  *         super.onCreate(savedInstanceState);
- * 
+ *
  *         // We'll define a custom screen layout here (the one shown above), but
  *         // typically, you could just use the standard FragmentListActivity layout.
  *         setContentView(R.layout.custom_list_activity_view);
- * 
+ *
  *         // Query for all people contacts using the {@link android.provider.Contacts.People} convenience class.
  *         // Put a managed wrapper around the retrieved cursor so we don't have to worry about
  *         // requerying or closing it as the activity changes state.
  *         mCursor = this.getContentResolver().query(People.CONTENT_URI, null, null, null, null);
  *         startManagingCursor(mCursor);
- * 
- *         // Now create a new list adapter bound to the cursor. 
+ *
+ *         // Now create a new list adapter bound to the cursor.
  *         // SimpleListAdapter is designed for binding to a Cursor.
  *         ListAdapter adapter = new SimpleCursorAdapter(
  *                 this, // Context.
- *                 android.R.layout.two_line_list_item,  // Specify the row template to use (here, two columns bound to the two retrieved cursor 
+ *                 android.R.layout.two_line_list_item,  // Specify the row template to use (here, two columns bound to the two retrieved cursor
  * rows).
  *                 mCursor,                                              // Pass in the cursor to bind to.
  *                 new String[] {People.NAME, People.COMPANY},           // Array of cursor columns to bind to.
  *                 new int[] {android.R.id.text1, android.R.id.text2});  // Parallel array of which template objects to bind to those columns.
- * 
+ *
  *         // Bind to our new adapter.
  *         setListAdapter(adapter);
  *     }
  * }
  * </pre>
- * 
+ *
  * @see #setListAdapter
  * @see android.widget.ListView
  */
@@ -186,38 +188,38 @@ public class FragmentListActivity extends FragmentActivity {
      */
     protected ListView mList;
 
-    private Handler mHandler = new Handler();
+    private final Handler mHandler = new Handler();
     private boolean mFinishedStart = false;
 
-    private Runnable mRequestFocus = new Runnable() {
+    private final Runnable mRequestFocus = new Runnable() {
         @Override
         public void run() {
             mList.focusableViewAvailable(mList);
         }
     };
-    
+
     /**
      * This method will be called when an item in the list is selected.
      * Subclasses should override. Subclasses can call
      * getListView().getItemAtPosition(position) if they need to access the
      * data associated with the selected item.
-     * 
+     *
      * @param l The ListView where the click happened
      * @param v The view that was clicked within the ListView
      * @param position The position of the view in the list
      * @param id The row id of the item that was clicked
      */
-    protected void onListItemClick(ListView l, View v, int position, long id) {
+    protected void onListItemClick(final ListView l, final View v, final int position, final long id) {
     }
-    
+
     /**
      * Ensures the list view has been created before Activity restores all
      * of the view states.
-     * 
+     *
      *@see Activity#onRestoreInstanceState(Bundle)
      */
     @Override
-    protected void onRestoreInstanceState(@NonNull Bundle state) {
+    protected void onRestoreInstanceState(@NonNull final Bundle state) {
         ensureList();
         super.onRestoreInstanceState(state);
     }
@@ -225,13 +227,13 @@ public class FragmentListActivity extends FragmentActivity {
     /**
      * Updates the screen state (current list and other views) when the
      * content changes.
-     * 
+     *
      * @see Activity#onContentChanged()
      */
     @Override
     public void onContentChanged() {
         super.onContentChanged();
-        View emptyView = findViewById(android.R.id.empty);
+        final View emptyView = findViewById(android.R.id.empty);
         mList = (ListView)findViewById(android.R.id.list);
         if (mList == null) {
             throw new RuntimeException(
@@ -252,7 +254,7 @@ public class FragmentListActivity extends FragmentActivity {
     /**
      * Provide the cursor for the list view.
      */
-    public void setListAdapter(ListAdapter adapter) {
+    public void setListAdapter(final ListAdapter adapter) {
         synchronized (this) {
             ensureList();
             mAdapter = adapter;
@@ -263,10 +265,10 @@ public class FragmentListActivity extends FragmentActivity {
     /**
      * Set the currently selected list item to the specified
      * position with the adapter's data
-     * 
+     *
      * @param position
      */
-    public void setSelection(int position) {
+    public void setSelection(final int position) {
         mList.setSelection(position);
     }
 
@@ -291,7 +293,7 @@ public class FragmentListActivity extends FragmentActivity {
         ensureList();
         return mList;
     }
-    
+
     /**
      * Get the ListAdapter associated with this activity's ListView.
      */
@@ -299,17 +301,18 @@ public class FragmentListActivity extends FragmentActivity {
         return mAdapter;
     }
 
+    @SuppressLint("InlinedApi")
     private void ensureList() {
         if (mList != null) {
             return;
         }
         setContentView(android.R.layout.list_content);
-        
+
     }
 
-    private AdapterView.OnItemClickListener mOnClickListener = new AdapterView.OnItemClickListener() {
+    private final AdapterView.OnItemClickListener mOnClickListener = new AdapterView.OnItemClickListener() {
         @Override
-        public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+        public void onItemClick(final AdapterView<?> parent, final View v, final int position, final long id)
         {
             onListItemClick((ListView)parent, v, position, id);
         }
