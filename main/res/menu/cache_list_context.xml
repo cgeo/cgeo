@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:cgeo="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/menu_default_navigation"
@@ -11,45 +11,45 @@
         android:id="@+id/menu_navigate"
         android:icon="@drawable/ic_menu_mapmode"
         android:title="@string/cache_menu_navigate"
-        cgeo:showAsAction="ifRoom|withText">
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_cache_details"
         android:title="@string/cache_menu_details"
-        cgeo:showAsAction="ifRoom|withText">
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_log_visit_offline"
         android:icon="@drawable/ic_menu_edit"
-        cgeo:showAsAction="ifRoom|withText"
+        app:showAsAction="ifRoom|withText"
         android:title="@string/cache_menu_visit_offline">
     </item>
     <item
         android:id="@+id/menu_log_visit"
         android:icon="@drawable/ic_menu_edit"
-        cgeo:showAsAction="ifRoom|withText"
+        app:showAsAction="ifRoom|withText"
         android:title="@string/cache_menu_visit">
     </item>
     <item
         android:id="@+id/menu_drop_cache"
-        cgeo:showAsAction="ifRoom|withText"
+        app:showAsAction="ifRoom|withText"
         android:icon="@drawable/ic_menu_delete"
         android:title="@string/cache_offline_drop">
     </item>
     <item
         android:id="@+id/menu_move_to_list"
-        cgeo:showAsAction="ifRoom|withText"
+        app:showAsAction="ifRoom|withText"
         android:title="@string/cache_menu_move_list">
     </item>
     <item
         android:id="@+id/menu_refresh"
-        cgeo:showAsAction="ifRoom|withText"
+        app:showAsAction="ifRoom|withText"
         android:icon="@drawable/ic_menu_refresh"
         android:title="@string/cache_menu_refresh">
     </item>
     <item
         android:id="@+id/menu_store_cache"
-        cgeo:showAsAction="ifRoom|withText"
+        app:showAsAction="ifRoom|withText"
         android:icon="@drawable/ic_menu_save"
         android:title="@string/cache_offline_store">
     </item>

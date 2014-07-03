@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:cgeo="http://schemas.android.com/apk/res/cgeo.geocaching"
+    xmlns:app="http://schemas.android.com/apk/res/cgeo.geocaching"
     android:key="@string/preference_screen_main" >
 
     <PreferenceScreen
@@ -16,10 +16,10 @@
                         android:defaultValue="true"
                         android:key="@string/pref_connectorGCActive"
                         android:title="@string/settings_activate_gc"
-                        cgeo:text="@string/settings_gc_legal_note"
-                        cgeo:title="@string/settings_title_gc"
-                        cgeo:url="@string/settings_gc_legal_note_url"
-                        cgeo:urlButton="@string/settings_goto_url_button" />
+                        app:text="@string/settings_gc_legal_note"
+                        app:title="@string/settings_title_gc"
+                        app:url="@string/settings_gc_legal_note_url"
+                        app:urlButton="@string/settings_goto_url_button" />
 
                     <EditTextPreference
                         android:dependency="@string/pref_connectorGCActive"
@@ -63,13 +63,13 @@
                 <PreferenceCategory android:title="@string/settings_information" >
                     <cgeo.geocaching.settings.CapabilitiesPreference
                         android:title="@string/settings_features"
-                        cgeo:connector="GC" />
+                        app:connector="GC" />
 
                     <cgeo.geocaching.settings.InfoPreference
                         android:text="@string/settings_info_facebook_login"
                         android:title="@string/settings_info_facebook_login_title"
-                        cgeo:url="@string/settings_facebook_login_url"
-                        cgeo:urlButton="@string/settings_goto_url_button" />
+                        app:url="@string/settings_facebook_login_url"
+                        app:urlButton="@string/settings_goto_url_button" />
 
                     <Preference
                         android:key="@string/pref_fakekey_gc_website"
@@ -97,7 +97,7 @@
                 <PreferenceCategory android:title="@string/settings_information" >
                     <cgeo.geocaching.settings.CapabilitiesPreference
                         android:title="@string/settings_features"
-                        cgeo:connector="OC" />
+                        app:connector="OC" />
 
                     <Preference
                         android:key="@string/pref_fakekey_ocde_website"
@@ -125,7 +125,7 @@
                 <PreferenceCategory android:title="@string/settings_information" >
                     <cgeo.geocaching.settings.CapabilitiesPreference
                         android:title="@string/settings_features"
-                        cgeo:connector="OP" />
+                        app:connector="OP" />
 
                     <Preference
                         android:key="@string/pref_fakekey_ocpl_website"
@@ -153,7 +153,7 @@
                 <PreferenceCategory android:title="@string/settings_information" >
                     <cgeo.geocaching.settings.CapabilitiesPreference
                         android:title="@string/settings_features"
-                        cgeo:connector="OB" />
+                        app:connector="OB" />
 
                     <Preference
                         android:key="@string/pref_fakekey_ocnl_website"
@@ -181,7 +181,7 @@
                 <PreferenceCategory android:title="@string/settings_information" >
                     <cgeo.geocaching.settings.CapabilitiesPreference
                         android:title="@string/settings_features"
-                        cgeo:connector="OU" />
+                        app:connector="OU" />
 
                     <Preference
                         android:key="@string/pref_fakekey_ocus_website"
@@ -209,7 +209,7 @@
                 <PreferenceCategory android:title="@string/settings_information" >
                     <cgeo.geocaching.settings.CapabilitiesPreference
                         android:title="@string/settings_features"
-                        cgeo:connector="OR" />
+                        app:connector="OR" />
 
                     <Preference
                         android:key="@string/pref_fakekey_ocro_website"
@@ -261,7 +261,7 @@
                 <PreferenceCategory android:title="@string/settings_information" >
                     <cgeo.geocaching.settings.CapabilitiesPreference
                         android:title="@string/settings_features"
-                        cgeo:connector="EC" />
+                        app:connector="EC" />
 
                     <Preference
                         android:key="@string/pref_fakekey_ec_website"
@@ -280,7 +280,7 @@
                 <PreferenceCategory android:title="@string/settings_information" >
                     <cgeo.geocaching.settings.CapabilitiesPreference
                         android:title="@string/settings_features"
-                        cgeo:connector="OX" />
+                        app:connector="OX" />
 
                     <Preference
                         android:key="@string/pref_fakekey_ox_website"
@@ -327,8 +327,8 @@
                     <cgeo.geocaching.settings.InfoPreference
                         android:text="@string/init_sendToCgeo_description"
                         android:title="@string/settings_info_send2cgeo_title"
-                        cgeo:url="@string/settings_send2cgeo_url"
-                        cgeo:urlButton="@string/settings_goto_url_button" />
+                        app:url="@string/settings_send2cgeo_url"
+                        app:urlButton="@string/settings_goto_url_button" />
 
                     <Preference
                         android:key="@string/pref_fakekey_sendtocgeo_website"
@@ -451,8 +451,8 @@
             <cgeo.geocaching.settings.InfoPreference
                 android:text="@string/settings_info_offline_maps"
                 android:title="@string/settings_info_offline_maps_title"
-                cgeo:url="@string/settings_offline_maps_url"
-                cgeo:urlButton="@string/settings_goto_url_button" />
+                app:url="@string/settings_offline_maps_url"
+                app:urlButton="@string/settings_goto_url_button" />
 
             <Preference
                 android:key="@string/pref_mapDirectory"
@@ -461,8 +461,8 @@
             <cgeo.geocaching.settings.InfoPreference
                 android:text="@string/settings_info_themes"
                 android:title="@string/settings_info_themes_title"
-                cgeo:url="@string/settings_themes_url"
-                cgeo:urlButton="@string/settings_goto_url_button" />
+                app:url="@string/settings_themes_url"
+                app:urlButton="@string/settings_goto_url_button" />
 
             <Preference
                 android:key="@string/pref_renderthemepath"

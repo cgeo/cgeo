@@ -1,76 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:cgeo="http://schemas.android.com/apk/res-auto" >
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <item
         android:id="@+id/menu_default_navigation"
         android:icon="@drawable/ic_menu_compass"
         android:title="@string/cache_menu_navigate"
-        cgeo:showAsAction="ifRoom"> <!-- will be replaced -->
+        app:showAsAction="ifRoom"> <!-- will be replaced -->
     </item>
     <item
         android:id="@+id/menu_navigate"
         android:icon="@drawable/ic_menu_mapmode"
         android:title="@string/cache_menu_navigate"
-        cgeo:showAsAction="ifRoom">
+        app:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_log_visit_offline"
         android:icon="@drawable/ic_menu_edit"
         android:title="@string/cache_menu_visit_offline"
-        cgeo:showAsAction="ifRoom">
+        app:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_log_visit"
         android:icon="@drawable/ic_menu_edit"
         android:title="@string/cache_menu_visit"
-        cgeo:showAsAction="ifRoom">
+        app:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_calendar"
         android:icon="@drawable/ic_menu_my_calendar"
         android:title="@string/cache_menu_event"
-        cgeo:showAsAction="ifRoom">
+        app:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_caches_around"
         android:icon="@drawable/ic_menu_rotate"
         android:title="@string/cache_menu_around"
-        cgeo:showAsAction="ifRoom">
+        app:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_show_in_browser"
         android:icon="@drawable/ic_menu_info_details"
         android:title="@string/cache_menu_browser"
-        cgeo:showAsAction="ifRoom">
+        app:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_store"
         android:icon="@drawable/ic_menu_save"
         android:title="@string/cache_offline_store"
         android:visible="false"
-        cgeo:showAsAction="ifRoom">
+        app:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_refresh"
         android:icon="@drawable/ic_menu_refresh"
         android:title="@string/cache_offline_refresh"
         android:visible="false"
-        cgeo:showAsAction="ifRoom">
+        app:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_delete"
         android:icon="@drawable/ic_menu_delete"
         android:title="@string/cache_offline_drop"
         android:visible="false"
-        cgeo:showAsAction="ifRoom">
+        app:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_share"
         android:icon="@drawable/ic_menu_share"
         android:title="@string/cache_menu_share"
-        cgeo:actionProviderClass="android.support.v7.widget.ShareActionProvider"
-        cgeo:showAsAction="ifRoom">
+        app:actionProviderClass="android.support.v7.widget.ShareActionProvider"
+        app:showAsAction="ifRoom">
     </item>
 
 </menu>
