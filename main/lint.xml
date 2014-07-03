@@ -11,6 +11,7 @@
     </issue>
     <issue id="MissingTranslation" severity="ignore" />
     <issue id="Registered" severity="ignore" />
+    <issue id="UnusedAttribute" severity="ignore" />
     <issue id="UnusedResources">
         <ignore path="res/drawable-mdpi/attribute_maintenance.png" />
         <ignore path="res/values/vpi__colors.xml" />
