@@ -243,7 +243,6 @@
   <string name="caches_history">Histórico</string>
   <string name="caches_on_map">Mostrar no mapa</string>
   <string name="caches_sort">Ordenar</string>
-  <string name="caches_sort_title">Ordenar por</string>
   <string name="caches_sort_distance">Distância</string>
   <string name="caches_sort_difficulty">Dificuldade</string>
   <string name="caches_sort_terrain">Terreno</string>

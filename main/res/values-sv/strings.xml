@@ -244,7 +244,6 @@
   <string name="caches_history">Senast hittade cacher</string>
   <string name="caches_on_map">Visa på karta</string>
   <string name="caches_sort">Sortering</string>
-  <string name="caches_sort_title">Sortera efter</string>
   <string name="caches_sort_distance">Avstånd</string>
   <string name="caches_sort_difficulty">Svårighet</string>
   <string name="caches_sort_terrain">Terräng</string>

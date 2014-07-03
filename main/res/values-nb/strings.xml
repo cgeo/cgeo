@@ -243,7 +243,6 @@
   <string name="caches_history">Historikk</string>
   <string name="caches_on_map">Vis på kartet</string>
   <string name="caches_sort">Sorter</string>
-  <string name="caches_sort_title">Sorter etter</string>
   <string name="caches_sort_distance">Avstand</string>
   <string name="caches_sort_difficulty">Vanskelighet</string>
   <string name="caches_sort_terrain">Terreng</string>

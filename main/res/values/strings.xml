@@ -274,7 +274,6 @@
     <string name="caches_history">History</string>
     <string name="caches_on_map">Show on map</string>
     <string name="caches_sort">Sort</string>
-    <string name="caches_sort_title">Sort by</string>
     <string name="caches_sort_distance">Distance</string>
     <string name="caches_sort_difficulty">Difficulty</string>
     <string name="caches_sort_terrain">Terrain</string>

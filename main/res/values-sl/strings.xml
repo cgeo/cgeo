@@ -245,7 +245,6 @@
   <string name="caches_history">Zgodovina</string>
   <string name="caches_on_map">Pokaži na zemljevidu</string>
   <string name="caches_sort">Razvrsti</string>
-  <string name="caches_sort_title">Razvrsti po</string>
   <string name="caches_sort_distance">Razdalja</string>
   <string name="caches_sort_difficulty">Težavnost</string>
   <string name="caches_sort_terrain">Teren</string>

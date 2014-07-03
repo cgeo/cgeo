@@ -199,7 +199,6 @@
   <string name="caches_history">Előzmények</string>
   <string name="caches_on_map">Mutasd meg térképen</string>
   <string name="caches_sort">Rendezés</string>
-  <string name="caches_sort_title">Rendezés eszerint</string>
   <string name="caches_sort_distance">távolság</string>
   <string name="caches_sort_difficulty">nehézség</string>
   <string name="caches_sort_terrain">terep</string>

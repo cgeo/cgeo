@@ -246,7 +246,6 @@
   <string name="caches_history">Historial</string>
   <string name="caches_on_map">Mostra al mapa</string>
   <string name="caches_sort">Ordena</string>
-  <string name="caches_sort_title">Ordena per</string>
   <string name="caches_sort_distance">Distància</string>
   <string name="caches_sort_difficulty">Dificultat</string>
   <string name="caches_sort_terrain">Terreny</string>

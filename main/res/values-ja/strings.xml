@@ -236,7 +236,6 @@
   <string name="caches_history">履歴</string>
   <string name="caches_on_map">地図で表示</string>
   <string name="caches_sort">並び替え</string>
-  <string name="caches_sort_title">並び替え</string>
   <string name="caches_sort_distance">距離</string>
   <string name="caches_sort_difficulty">難易度</string>
   <string name="caches_sort_terrain">地形</string>

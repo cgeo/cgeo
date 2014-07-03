@@ -246,7 +246,6 @@
   <string name="caches_history">Verlauf</string>
   <string name="caches_on_map">Zeige auf Karte</string>
   <string name="caches_sort">Sortierung</string>
-  <string name="caches_sort_title">Sortieren nach</string>
   <string name="caches_sort_distance">Entfernung</string>
   <string name="caches_sort_difficulty">Schwierigkeit</string>
   <string name="caches_sort_terrain">Gelände</string>

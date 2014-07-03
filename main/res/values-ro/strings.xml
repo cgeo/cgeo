@@ -241,7 +241,6 @@
   <string name="caches_history">Istoric</string>
   <string name="caches_on_map">Arată pe hartă</string>
   <string name="caches_sort">Sortare</string>
-  <string name="caches_sort_title">Sortare după</string>
   <string name="caches_sort_distance">Distanţă</string>
   <string name="caches_sort_difficulty">Dificultate</string>
   <string name="caches_sort_terrain">Teren</string>
