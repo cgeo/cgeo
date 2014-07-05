@@ -3,7 +3,6 @@ package cgeo.geocaching.ui.dialog;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.sensors.IGeoData;
@@ -53,7 +52,7 @@ public class CoordinatesInputDialog extends DialogFragment {
 
     public static CoordinatesInputDialog getInstance(final Geocache cache, final Geopoint gp, final IGeoData geo) {
 
-        Bundle args = new Bundle();
+        final Bundle args = new Bundle();
 
         if (gp != null) {
             args.putParcelable(GEOPOINT_ARG, gp);
@@ -63,33 +62,37 @@ public class CoordinatesInputDialog extends DialogFragment {
             args.putParcelable(GEOPOINT_ARG, Geopoint.ZERO);
         }
 
-        if (geo !=null)
+        if (geo !=null) {
             args.putParcelable(GEOPOINT_INTIAL_ARG, geo.getCoords());
+        }
 
-        if (cache != null)
+        if (cache != null) {
             args.putParcelable(CACHECOORDS_ARG, cache.getCoords());
+        }
 
-        CoordinatesInputDialog cid = new CoordinatesInputDialog();
+        final CoordinatesInputDialog cid = new CoordinatesInputDialog();
         cid.setArguments(args);
         return cid;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         gp = getArguments().getParcelable(GEOPOINT_ARG);
         gpinitial = getArguments().getParcelable(GEOPOINT_INTIAL_ARG);
         cacheCoords = getArguments().getParcelable(CACHECOORDS_ARG);
 
-        if (savedInstanceState != null && savedInstanceState.getParcelable(GEOPOINT_ARG)!=null)
+        if (savedInstanceState != null && savedInstanceState.getParcelable(GEOPOINT_ARG)!=null) {
             gp = savedInstanceState.getParcelable(GEOPOINT_ARG);
+        }
 
-        if (VERSION.SDK_INT < VERSION_CODES.HONEYCOMB && Settings.isLightSkin())
+        if (VERSION.SDK_INT < VERSION_CODES.HONEYCOMB && Settings.isLightSkin()) {
             setStyle(STYLE_NORMAL, R.style.DialogFixGingerbread);
+        }
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
         // TODO: if current input is not commited in gp, read the current input into gp
         outState.putParcelable(GEOPOINT_ARG, gp);
@@ -99,7 +102,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         getDialog().setTitle(R.string.cache_coordinates);
 
-        View v = inflater.inflate(R.layout.coordinatesinput_dialog, container, false);
+        final View v = inflater.inflate(R.layout.coordinatesinput_dialog, container, false);
         final Spinner spinner = (Spinner) v.findViewById(R.id.spinnerCoordinateFormats);
         final ArrayAdapter<CharSequence> adapter =
                 ArrayAdapter.createFromResource(getActivity(),
@@ -268,7 +271,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     private class ButtonClickListener implements View.OnClickListener {
 
         @Override
-        public void onClick(View view) {
+        public void onClick(final View view) {
             assert view instanceof Button;
             final Button button = (Button) view;
             final CharSequence text = button.getText();
@@ -301,12 +304,12 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         private final EditText editText;
 
-        public TextChanged(EditText editText) {
+        public TextChanged(final EditText editText) {
             this.editText = editText;
         }
 
         @Override
-        public void afterTextChanged(Editable s) {
+        public void afterTextChanged(final Editable s) {
             /*
              * Max lengths, depending on currentFormat
              *
@@ -360,11 +363,11 @@ public class CoordinatesInputDialog extends DialogFragment {
         }
 
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
         }
 
         @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
         }
 
     }
@@ -435,7 +438,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     private class CoordinateFormatListener implements OnItemSelectedListener {
 
         @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        public void onItemSelected(final AdapterView<?> parent, final View view, final int pos, final long id) {
             // Ignore first call, which comes from onCreate()
             if (currentFormat != null) {
 
@@ -456,7 +459,7 @@ public class CoordinatesInputDialog extends DialogFragment {
         }
 
         @Override
-        public void onNothingSelected(AdapterView<?> arg0) {
+        public void onNothingSelected(final AdapterView<?> arg0) {
         }
 
     }
@@ -464,7 +467,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     private class CurrentListener implements View.OnClickListener {
 
         @Override
-        public void onClick(View v) {
+        public void onClick(final View v) {
             if (gpinitial == null) {
                 final AbstractActivity activity = (AbstractActivity) getActivity();
                 activity.showToast(activity.getResources().getString(R.string.err_point_unknown_position));
@@ -479,7 +482,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     private class CacheListener implements View.OnClickListener {
 
         @Override
-        public void onClick(View v) {
+        public void onClick(final View v) {
             if (cacheCoords == null) {
                 final AbstractActivity activity = (AbstractActivity) getActivity();
                 activity.showToast(activity.getResources().getString(R.string.err_location_unknown));
@@ -495,7 +498,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     private class InputDoneListener implements View.OnClickListener {
 
         @Override
-        public void onClick(View v) {
+        public void onClick(final View v) {
             if (!areCurrentCoordinatesValid(true)) {
                 return;
             }
