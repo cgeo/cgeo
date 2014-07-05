@@ -11,6 +11,7 @@ import cgeo.geocaching.geopoint.Units;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.text.format.DateUtils;
@@ -26,6 +27,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+// TODO The suppression of this lint finding is bad. But to fix it, someone needs to rework the layout of the cache
+// details also, not just only change the code here.
+@SuppressLint("InflateParams")
 public final class CacheDetailsCreator {
     private final Activity activity;
     private final ViewGroup parentView;
@@ -45,7 +49,7 @@ public final class CacheDetailsCreator {
      * @return the view containing the displayed string (i.e. the right side one from the pair of "label": "value")
      */
     public TextView add(final int nameId, final CharSequence value) {
-        final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_information_item, parentView, false);
+        final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_information_item, null, false);
         final TextView nameView = (TextView) layout.findViewById(R.id.name);
         nameView.setText(res.getString(nameId));
         lastValueView = (TextView) layout.findViewById(R.id.value);
@@ -63,7 +67,7 @@ public final class CacheDetailsCreator {
     }
 
     public RelativeLayout addStars(final int nameId, final float value, final int max) {
-        final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_information_item, parentView, false);
+        final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_information_item, null, false);
         final TextView nameView = (TextView) layout.findViewById(R.id.name);
         lastValueView = (TextView) layout.findViewById(R.id.value);
         final LinearLayout layoutStars = (LinearLayout) layout.findViewById(R.id.stars);
