@@ -24,9 +24,6 @@
     <attr name="input" format="integer" />
     <attr name="inventory" format="integer" />
     <attr name="favorite" format="integer" />
-    <attr name="favorite_r" format="integer" />
-    <attr name="favorite_o" format="integer" />
-    <attr name="favorite_g" format="integer" />
     <attr name="close" format="integer" />
     <attr name="log_img_icon" format="integer" />
     <attr name="actionbar_compass" format="integer" />

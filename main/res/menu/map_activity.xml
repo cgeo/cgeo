@@ -11,6 +11,7 @@
     <item
         android:id="@+id/menu_select_mapview"
         android:icon="@drawable/ic_menu_mapmode"
+        android:showAsAction="ifRoom|withText"
         android:title="@string/map_view_map"
         app:showAsAction="ifRoom|withText">
         <menu>
@@ -23,18 +24,21 @@
     <item
         android:id="@+id/menu_map_live"
         android:icon="@drawable/ic_menu_refresh"
+        android:showAsAction="ifRoom|withText"
         android:title="@string/map_live_disable"
         app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_store_caches"
         android:icon="@drawable/ic_menu_set_as"
+        android:showAsAction="ifRoom|withText"
         android:title="@string/caches_store_offline"
         app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/submenu_modes"
         android:icon="@drawable/ic_menu_mark"
+        android:showAsAction="ifRoom|withText"
         android:title="@string/map_modes"
         app:showAsAction="ifRoom|withText">
         <menu>
@@ -64,6 +68,7 @@
     <item
         android:id="@+id/menu_theme_mode"
         android:icon="@drawable/ic_menu_preferences"
+        android:showAsAction="ifRoom|withText"
         android:title="@string/map_theme_select"
         app:showAsAction="ifRoom|withText">
     </item>
