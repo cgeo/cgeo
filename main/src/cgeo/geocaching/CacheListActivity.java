@@ -518,7 +518,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         // refresh standard list if it has changed (new caches downloaded)
-        if (type == CacheListType.OFFLINE && listId >= StoredList.STANDARD_LIST_ID && search != null) {
+        if (type == CacheListType.OFFLINE && (listId >= StoredList.STANDARD_LIST_ID || listId == PseudoList.ALL_LIST.id) && search != null) {
             final SearchResult newSearch = DataStore.getBatchOfStoredCaches(coords, Settings.getCacheType(), listId);
             if (newSearch.getTotalCountGC() != search.getTotalCountGC()) {
                 refreshCurrentList();
@@ -1351,13 +1351,17 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return;
         }
 
-        final StoredList list = DataStore.getList(id);
-        if (list == null) {
-            return;
+        if (id == PseudoList.ALL_LIST.id) {
+            listId = id;
+            title = res.getString(R.string.list_all_lists);
+        } else {
+            final StoredList list = DataStore.getList(id);
+            if (list == null) {
+                return;
+            }
+            listId = list.id;
+            title = list.title;
         }
-
-        listId = list.id;
-        title = list.title;
         type = CacheListType.OFFLINE;
 
         Settings.saveLastList(listId);
@@ -1567,11 +1571,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 // open either the requested or the last list
                 if (extras.containsKey(Intents.EXTRA_LIST_ID)) {
                     listId = extras.getInt(Intents.EXTRA_LIST_ID);
-                }
-                else {
+                } else {
                     listId = Settings.getLastList();
                 }
-                if (listId <= StoredList.TEMPORARY_LIST_ID) {
+                if (listId == PseudoList.ALL_LIST.id) {
+                    title = res.getString(R.string.list_all_lists);
+                } else if (listId <= StoredList.TEMPORARY_LIST_ID) {
                     listId = StoredList.STANDARD_LIST_ID;
                     title = res.getString(R.string.stored_caches_button);
                 } else {
