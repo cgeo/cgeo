@@ -45,7 +45,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import rx.Scheduler;
 import rx.Subscription;
 import rx.functions.Action0;
 import rx.functions.Action1;
@@ -1082,17 +1081,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         return loadTimer;
     }
 
-    private static final class LoadTimerAction implements Action0, Subscription {
-
-        private volatile boolean isUnsubscribed = false;
-
-        private Scheduler.Worker worker;
+    private static final class LoadTimerAction implements Action0 {
 
         @NonNull private final WeakReference<CGeoMap> mapRef;
 
-        public LoadTimerAction(@NonNull final CGeoMap map, final Scheduler.Worker worker) {
+        public LoadTimerAction(@NonNull final CGeoMap map) {
             this.mapRef = new WeakReference<CGeoMap>(map);
-            this.worker = worker;
         }
 
         @Override
@@ -1102,7 +1096,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 return;
             }
             try {
-                if (map.mapView != null && !isUnsubscribed) {
+                if (map.mapView != null) {
                     // get current viewport
                     final Viewport viewportNow = map.mapView.getViewport();
                     // Since zoomNow is used only for local comparison purposes,
@@ -1136,27 +1130,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             } catch (final Exception e) {
                 Log.w("CGeoMap.startLoadtimer.start", e);
             }
-
-            if (!isUnsubscribed) {
-                if (worker == null) {
-                    worker = Schedulers.newThread().createWorker();
-                }
-                worker.schedule(this, 250, TimeUnit.MILLISECONDS);
-            }
-        }
-
-        @Override
-        public void unsubscribe() {
-            isUnsubscribed = true;
-            if (worker != null) {
-                worker.unsubscribe();
-                worker = null;
-            }
-        }
-
-        @Override
-        public boolean isUnsubscribed() {
-            return isUnsubscribed;
         }
     }
 
@@ -1164,13 +1137,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
      * loading timer Triggers every 250ms and checks for viewport change and starts a {@link LoadRunnable}.
      */
     private Subscription startLoadTimer() {
-        // We cannot use schedulePeriodically with RxJava 0.19 and earlier because the unsubscription
-        // mechanism fails. As a consequence, we reschedule periodically by hand as long as we are not
-        // unsubscribed. There may be a small drift, but it has no consequence.
-        final Scheduler.Worker worker = Schedulers.newThread().createWorker();
-        final LoadTimerAction action = new LoadTimerAction(this, worker);
-        worker.schedule(action, 250, TimeUnit.MILLISECONDS);
-        return action;
+        return Schedulers.newThread().createWorker().schedulePeriodically(new LoadTimerAction(this), 0, 250, TimeUnit.MILLISECONDS);
     }
 
     /**
