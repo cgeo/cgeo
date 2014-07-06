@@ -1,12 +1,13 @@
 package cgeo.geocaching.network;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.utils.RxUtils;
 import cgeo.geocaching.utils.Version;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import rx.functions.Action0;
-import rx.schedulers.Schedulers;
 import rx.subjects.BehaviorSubject;
 
 import android.os.Build.VERSION;
@@ -51,7 +52,7 @@ public class StatusUpdater {
     final static public BehaviorSubject<Status> latestStatus = BehaviorSubject.create(Status.defaultStatus(null));
 
     static {
-        Schedulers.io().createWorker().schedulePeriodically(new Action0() {
+        RxUtils.networkScheduler.createWorker().schedulePeriodically(new Action0() {
             @Override
             public void call() {
                 final JSONObject response =

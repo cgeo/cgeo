@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.io.IOUtils;
 
@@ -11,7 +12,6 @@ import rx.Observable;
 import rx.android.observables.AndroidObservable;
 import rx.functions.Action1;
 import rx.functions.Func0;
-import rx.schedulers.Schedulers;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -59,7 +59,7 @@ public class RecaptchaHandler extends Handler {
                 return Observable.empty();
             }
         });
-        AndroidObservable.bindActivity(activity, captcha).subscribeOn(Schedulers.io()).subscribe(new Action1<Bitmap>() {
+        AndroidObservable.bindActivity(activity, captcha).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<Bitmap>() {
             @Override
             public void call(final Bitmap bitmap) {
                 imageView.setImageBitmap(bitmap);

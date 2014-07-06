@@ -8,6 +8,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 
@@ -16,7 +17,6 @@ import org.eclipse.jdt.annotation.NonNull;
 
 import rx.Observable;
 import rx.functions.Action0;
-import rx.schedulers.Schedulers;
 import rx.util.async.Async;
 
 import android.graphics.Bitmap;
@@ -94,7 +94,7 @@ public final class StaticMapsProvider {
                     }
                 }
             }
-        }, prefix, Schedulers.io());
+        }, prefix, RxUtils.networkScheduler);
     }
 
     private static int limitSize(final int imageSize) {

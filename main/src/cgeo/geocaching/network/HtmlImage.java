@@ -43,10 +43,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Date;
-import java.util.concurrent.Executor;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 public class HtmlImage implements Html.ImageGetter {
 
@@ -94,7 +90,6 @@ public class HtmlImage implements Html.ImageGetter {
     final private PublishSubject<Observable<String>> loading = PublishSubject.create();
     final private Observable<String> waitForEnd = Observable.merge(loading).publish().refCount();
     final CompositeSubscription subscription = new CompositeSubscription(waitForEnd.subscribe());
-    final private Executor downloadExecutor = new ThreadPoolExecutor(10, 10, 5, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
 
     public HtmlImage(final String geocode, final boolean returnErrorImage, final int listId, final boolean onlySave) {
         this.geocode = geocode;
@@ -164,8 +159,8 @@ public class HtmlImage implements Html.ImageGetter {
                         if (bitmap != null && !onlySave) {
                             subscriber.onNext(bitmap);
                         }
-                        downloadExecutor.execute(new Runnable() {
-                            @Override public void run() {
+                        RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+                            @Override public void call() {
                                 downloadAndSave(subscriber);
                             }
                         });
@@ -193,12 +188,10 @@ public class HtmlImage implements Html.ImageGetter {
                         subscriber.onCompleted();
                         return;
                     }
-                } else {
-                    if (subscriber.isUnsubscribed() || downloadOrRefreshCopy(url, file)) {
+                } else if (subscriber.isUnsubscribed() || downloadOrRefreshCopy(url, file)) {
                         // The existing copy was fresh enough or we were unsubscribed earlier.
                         subscriber.onCompleted();
                         return;
-                    }
                 }
                 if (onlySave) {
                     subscriber.onCompleted();

@@ -8,6 +8,7 @@ import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
+import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -17,7 +18,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import rx.Observable;
 import rx.functions.Func1;
 import rx.functions.Func2;
-import rx.schedulers.Schedulers;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -324,7 +324,7 @@ public class SearchResult implements Parcelable {
                     }
                 });
             }
-        }, Schedulers.io()).reduce(new SearchResult(), new Func2<SearchResult, SearchResult, SearchResult>() {
+        }, RxUtils.networkScheduler).reduce(new SearchResult(), new Func2<SearchResult, SearchResult, SearchResult>() {
             @Override
             public SearchResult call(final SearchResult searchResult, final SearchResult searchResult2) {
                 searchResult.addSearchResult(searchResult2);

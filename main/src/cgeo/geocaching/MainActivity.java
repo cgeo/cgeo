@@ -23,6 +23,7 @@ import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.DatabaseBackupUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
 
@@ -36,7 +37,6 @@ import rx.Observable.OnSubscribe;
 import rx.Subscriber;
 import rx.android.observables.AndroidObservable;
 import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 import rx.subscriptions.Subscriptions;
 
 import android.app.AlertDialog;
@@ -579,7 +579,7 @@ public class MainActivity extends AbstractActionBarActivity {
                         }
                     });
                     AndroidObservable.bindActivity(MainActivity.this, address.onErrorResumeNext(Observable.from(geo.getCoords().toString())))
-                            .subscribeOn(Schedulers.io())
+                            .subscribeOn(RxUtils.networkScheduler)
                             .subscribe(new Action1<String>() {
                                 @Override
                                 public void call(final String address) {

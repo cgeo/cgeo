@@ -65,7 +65,6 @@ import rx.Subscriber;
 import rx.android.observables.AndroidObservable;
 import rx.functions.Action0;
 import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
 import android.R.color;
@@ -293,7 +292,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         final String realGeocode = geocode;
         final String realGuid = guid;
-        Schedulers.io().createWorker().schedule(new Action0() {
+        RxUtils.networkScheduler.createWorker().schedule(new Action0() {
             @Override
             public void call() {
                 search = Geocache.searchByGeocode(realGeocode, StringUtils.isBlank(realGeocode) ? realGuid : null, 0, false, loadCacheHandler);
@@ -859,7 +858,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         progress.show(CacheDetailActivity.this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
 
-        cache.refresh(refreshCacheHandler, Schedulers.io());
+        cache.refresh(refreshCacheHandler, RxUtils.networkScheduler);
     }
 
     private void dropCache() {
@@ -869,7 +868,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         progress.show(CacheDetailActivity.this, res.getString(R.string.cache_dialog_offline_drop_title), res.getString(R.string.cache_dialog_offline_drop_message), true, null);
-        cache.drop(new ChangeNotificationHandler(CacheDetailActivity.this, progress), Schedulers.io());
+        cache.drop(new ChangeNotificationHandler(CacheDetailActivity.this, progress), RxUtils.networkScheduler);
     }
 
     private void storeCache() {
@@ -913,7 +912,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_details_page, parentView, false);
 
             // Start loading preview map
-            AndroidObservable.bindActivity(CacheDetailActivity.this, previewMap).subscribeOn(Schedulers.io())
+            AndroidObservable.bindActivity(CacheDetailActivity.this, previewMap).subscribeOn(RxUtils.networkScheduler)
                     .subscribe(new Action1<BitmapDrawable>() {
                         @Override
                         public void call(final BitmapDrawable image) {
@@ -1578,7 +1577,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
         });
 
-        AndroidObservable.bindActivity(this, producer).subscribeOn(Schedulers.io()).subscribe(new Observer<Spanned>() {
+        AndroidObservable.bindActivity(this, producer).subscribeOn(RxUtils.networkScheduler).subscribe(new Observer<Spanned>() {
             @Override
             public void onCompleted() {
                 if (null != loadingIndicatorView) {
@@ -2297,7 +2296,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     protected void storeCache(final int listId, final StoreCacheHandler storeCacheHandler) {
         progress.show(this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
-        Schedulers.io().createWorker().schedule(new Action0() {
+        RxUtils.networkScheduler.createWorker().schedule(new Action0() {
             @Override
             public void call() {
                 cache.store(listId, storeCacheHandler);

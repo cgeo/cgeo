@@ -32,6 +32,7 @@ import cgeo.geocaching.ui.DirectionImage;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.RxUtils;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 import cgeo.geocaching.utils.TextUtils;
 
@@ -53,7 +54,6 @@ import rx.Subscriber;
 import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.functions.Func2;
-import rx.schedulers.Schedulers;
 
 import android.net.Uri;
 import android.text.Html;
@@ -1703,7 +1703,7 @@ public abstract class GCParser {
                 }
                 return parseLogs(true, rawResponse);
             }
-        }).subscribeOn(Schedulers.io());
+        }).subscribeOn(RxUtils.networkScheduler);
     }
 
     private static Observable<LogEntry> parseLogs(final boolean markAsFriendsLog, final String rawResponse) {
@@ -1870,7 +1870,7 @@ public abstract class GCParser {
             return;
         }
 
-        final Observable<LogEntry> logs = getLogsFromDetails(page).subscribeOn(Schedulers.computation());
+        final Observable<LogEntry> logs = getLogsFromDetails(page).subscribeOn(RxUtils.computationScheduler);
         Observable<LogEntry> specialLogs;
         if (Settings.isFriendLogsWanted()) {
             CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);

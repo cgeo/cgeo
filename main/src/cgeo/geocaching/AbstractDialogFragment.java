@@ -14,13 +14,13 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 
 import rx.Observable;
 import rx.Subscription;
 import rx.android.observables.AndroidObservable;
 import rx.functions.Action1;
 import rx.functions.Func0;
-import rx.schedulers.Schedulers;
 import rx.subscriptions.Subscriptions;
 
 import android.annotation.TargetApi;
@@ -194,7 +194,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
                 final GCVoteRating rating = GCVote.getRating(cache.getGuid(), geocode);
                 return rating != null ? Observable.just(rating) : Observable.<GCVoteRating>empty();
             }
-        })).subscribeOn(Schedulers.io()).subscribe(new Action1<GCVoteRating>() {
+        })).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<GCVoteRating>() {
             @Override
             public void call(final GCVoteRating rating) {
                 cache.setRating(rating.getRating());

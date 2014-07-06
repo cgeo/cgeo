@@ -5,13 +5,14 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+
 import rx.android.observables.AndroidObservable;
 import rx.functions.Action1;
 import rx.functions.Func0;
-import rx.schedulers.Schedulers;
 import rx.util.async.Async;
 
 import android.app.ProgressDialog;
@@ -70,7 +71,7 @@ public abstract class AbstractCheckCredentialsPreference extends AbstractClickab
                 public ImmutablePair<StatusCode, ? extends Drawable> call() {
                     return login();
                 }
-            })).subscribeOn(Schedulers.io()).subscribe(new Action1<ImmutablePair<StatusCode, ? extends Drawable>>() {
+            })).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<ImmutablePair<StatusCode, ? extends Drawable>>() {
                 @Override
                 public void call(final ImmutablePair<StatusCode, ? extends Drawable> loginInfo) {
                     loginDialog.dismiss();
