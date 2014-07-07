@@ -67,7 +67,7 @@ public final class StaticMapsProvider {
         if (width > GOOGLE_MAPS_MAX_SIZE) {
             scale = 2;
         }
-        final float aspectRatio = width / height;
+        final float aspectRatio = width / (float) height;
         final int requestWidth = Math.min(width / scale, GOOGLE_MAPS_MAX_SIZE);
         final int requestHeight = (aspectRatio > 1) ? Math.round(requestWidth / aspectRatio) : requestWidth;
         final int requestScale = scale;
