@@ -119,6 +119,8 @@
                 <filter token="ocnl.okapi.consumer.secret" value="${ocnl.okapi.consumer.secret}"/>
                 <filter token="ocro.okapi.consumer.key" value="${ocro.okapi.consumer.key}"/>
                 <filter token="ocro.okapi.consumer.secret" value="${ocro.okapi.consumer.secret}"/>
+                <filter token="ocuk.okapi.consumer.key" value="${ocuk.okapi.consumer.key}"/>
+                <filter token="ocuk.okapi.consumer.secret" value="${ocuk.okapi.consumer.secret}"/>
             </filterset>
         </copy>
     </target>
