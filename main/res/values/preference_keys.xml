@@ -15,6 +15,7 @@
     <string name="preference_screen_ocnl">preference_screen_ocnl</string>
     <string name="preference_screen_ocus">preference_screen_ocus</string>
     <string name="preference_screen_ocro">preference_screen_ocro</string>
+    <string name="preference_screen_ocuk">preference_screen_ocuk</string>
     <string name="preference_screen_ec">preference_screen_ec</string>
     <string name="preference_screen_ox">preference_screen_ox</string>
     <string name="preference_screen_twitter">preference_screen_twitter</string>
@@ -25,6 +26,7 @@
     <string name="pref_fakekey_ocnl_authorization">fakekey_ocnl_authorization</string>
     <string name="pref_fakekey_ocus_authorization">fakekey_ocus_authorization</string>
     <string name="pref_fakekey_ocro_authorization">fakekey_ocro_authorization</string>
+    <string name="pref_fakekey_ocuk_authorization">fakekey_ocuk_authorization</string>
     <string name="pref_fakekey_twitter_authorization">fakekey_twitter_authorization</string>
     <string name="pref_connectorGCActive">connectorGCActive</string>
     <string name="pref_username">username</string>
@@ -34,6 +36,7 @@
     <string name="pref_connectorOCNLActive">connectorOCNLActive</string>
     <string name="pref_connectorOCUSActive">connectorOCUSActive</string>
     <string name="pref_connectorOCROActive">connectorOCROActive</string>
+    <string name="pref_connectorOCUKActive">connectorOCUKActive</string>
     <string name="pref_ecusername">ecusername</string>
     <string name="pref_ecpassword">ecpassword</string>
     <string name="pref_connectorECActive">connectorECActive</string>
@@ -153,12 +156,17 @@
     <string name="pref_ocro_tokenpublic">ocro_tokenpublic</string>
     <string name="pref_temp_ocro_token_secret">ocro-temp-token-secret</string>
     <string name="pref_temp_ocro_token_public">ocro-temp-token-public</string>
+    <string name="pref_ocuk_tokensecret">ocuk_tokensecret</string>
+    <string name="pref_ocuk_tokenpublic">ocuk_tokenpublic</string>
+    <string name="pref_temp_ocuk_token_secret">ocuk-temp-token-secret</string>
+    <string name="pref_temp_ocuk_token_public">ocuk-temp-token-public</string>
     <string name="pref_fakekey_gc_website">fakekey_gc_website</string>
     <string name="pref_fakekey_ocde_website">fakekey_ocde_website</string>
     <string name="pref_fakekey_ocpl_website">fakekey_ocpl_website</string>
     <string name="pref_fakekey_ocnl_website">fakekey_ocnl_website</string>
     <string name="pref_fakekey_ocus_website">fakekey_ocus_website</string>
     <string name="pref_fakekey_ocro_website">fakekey_ocro_website</string>
+    <string name="pref_fakekey_ocuk_website">fakekey_ocuk_website</string>
     <string name="pref_fakekey_ec_website">fakekey_ec_website</string>
     <string name="pref_fakekey_ox_website">fakekey_ox_website</string>
     <string name="pref_fakekey_gcvote_website">fakekey_gcvote_website</string>

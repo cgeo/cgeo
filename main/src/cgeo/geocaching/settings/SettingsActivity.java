@@ -462,6 +462,7 @@ public class SettingsActivity extends PreferenceActivity {
             case R.string.pref_fakekey_ocnl_authorization:
             case R.string.pref_fakekey_ocus_authorization:
             case R.string.pref_fakekey_ocro_authorization:
+            case R.string.pref_fakekey_ocuk_authorization:
                 setOCAuthTitle(OCPreferenceKeys.getByAuthId(prefKeyId));
                 break;
             case R.string.pref_fakekey_twitter_authorization:
@@ -537,6 +538,7 @@ public class SettingsActivity extends PreferenceActivity {
             case R.string.pref_fakekey_ocnl_authorization:
             case R.string.pref_fakekey_ocus_authorization:
             case R.string.pref_fakekey_ocro_authorization:
+            case R.string.pref_fakekey_ocuk_authorization:
                 final OCPreferenceKeys key = OCPreferenceKeys.getByAuthId(requestCode);
                 if (key != null) {
                     setOCAuthTitle(key);
@@ -589,6 +591,7 @@ public class SettingsActivity extends PreferenceActivity {
                     || isPreference(preference, R.string.pref_connectorOCNLActive)
                     || isPreference(preference, R.string.pref_connectorOCUSActive)
                     || isPreference(preference, R.string.pref_connectorOCROActive)
+                    || isPreference(preference, R.string.pref_connectorOCUKActive)
                     || isPreference(preference, R.string.pref_connectorGCActive)
                     || isPreference(preference, R.string.pref_connectorOXActive)
                     || isPreference(preference, R.string.pref_connectorECActive)) {

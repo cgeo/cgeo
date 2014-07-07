@@ -26,7 +26,10 @@ public enum OCPreferenceKeys {
             R.string.pref_ocnl_tokenpublic, R.string.pref_ocnl_tokensecret, OCAuthParams.OC_NL_AUTH_PARAMS),
     OC_RO("oc.ro", R.string.pref_connectorOCROActive, R.string.preference_screen_ocro,
             R.string.pref_fakekey_ocro_authorization, R.string.pref_fakekey_ocro_website,
-            R.string.pref_ocro_tokenpublic, R.string.pref_ocro_tokensecret, OCAuthParams.OC_RO_AUTH_PARAMS);
+            R.string.pref_ocro_tokenpublic, R.string.pref_ocro_tokensecret, OCAuthParams.OC_RO_AUTH_PARAMS),
+    OC_UK("oc.uk", R.string.pref_connectorOCUKActive, R.string.preference_screen_ocuk,
+            R.string.pref_fakekey_ocuk_authorization, R.string.pref_fakekey_ocuk_website,
+            R.string.pref_ocuk_tokenpublic, R.string.pref_ocuk_tokensecret, OCAuthParams.OC_UK_AUTH_PARAMS);
 
 
     private OCPreferenceKeys(final String siteId, final int isActivePrefId, final int prefScreenId, final int authPrefId,
@@ -48,8 +51,8 @@ public enum OCPreferenceKeys {
     static {
         FIND_BY_ISACTIVE_ID = new SparseArray<OCPreferenceKeys>(values().length);
         FIND_BY_AUTH_PREF_ID = new SparseArray<OCPreferenceKeys>(values().length);
-        Map<String, OCPreferenceKeys> byIsactiveKey = new HashMap<String, OCPreferenceKeys>();
-        for (OCPreferenceKeys key : values()) {
+        final Map<String, OCPreferenceKeys> byIsactiveKey = new HashMap<String, OCPreferenceKeys>();
+        for (final OCPreferenceKeys key : values()) {
             FIND_BY_ISACTIVE_ID.put(key.isActivePrefId, key);
             FIND_BY_AUTH_PREF_ID.put(key.authPrefId, key);
             byIsactiveKey.put(CgeoApplication.getInstance().getString(key.isActivePrefId), key);

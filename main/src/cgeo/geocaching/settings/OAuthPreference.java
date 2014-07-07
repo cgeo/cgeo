@@ -23,13 +23,14 @@ public class OAuthPreference extends AbstractClickablePreference {
         OCNL(R.string.pref_fakekey_ocnl_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_NL_AUTH_PARAMS),
         OCUS(R.string.pref_fakekey_ocus_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_US_AUTH_PARAMS),
         OCRO(R.string.pref_fakekey_ocro_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_RO_AUTH_PARAMS),
+        OCUK(R.string.pref_fakekey_ocuk_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_UK_AUTH_PARAMS),
         TWITTER(R.string.pref_fakekey_twitter_authorization, TwitterAuthorizationActivity.class, TwitterAuthorizationActivity.TWITTER_OAUTH_PARAMS);
 
         public final int prefKeyId;
         public final Class<?> authActivity;
         public final OAuthParameters authParams;
 
-        OAuthActivityMapping(int prefKeyId, Class<?> authActivity, OAuthParameters authParams) {
+        OAuthActivityMapping(final int prefKeyId, final Class<?> authActivity, final OAuthParameters authParams) {
             this.prefKeyId = prefKeyId;
             this.authActivity = authActivity;
             this.authParams = authParams;
@@ -40,7 +41,7 @@ public class OAuthPreference extends AbstractClickablePreference {
 
     private OAuthActivityMapping getAuthorization() {
         final String prefKey = getKey();
-        for (OAuthActivityMapping auth : OAuthActivityMapping.values()) {
+        for (final OAuthActivityMapping auth : OAuthActivityMapping.values()) {
             if (auth.prefKeyId != NO_KEY && prefKey.equals(CgeoApplication.getInstance().getString(auth.prefKeyId))) {
                 return auth;
             }
@@ -48,12 +49,12 @@ public class OAuthPreference extends AbstractClickablePreference {
         return OAuthActivityMapping.NONE;
     }
 
-    public OAuthPreference(Context context, AttributeSet attrs) {
+    public OAuthPreference(final Context context, final AttributeSet attrs) {
         super(context, attrs);
         this.oAuthMapping = getAuthorization();
     }
 
-    public OAuthPreference(Context context, AttributeSet attrs, int defStyle) {
+    public OAuthPreference(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
         this.oAuthMapping = getAuthorization();
     }
@@ -63,9 +64,9 @@ public class OAuthPreference extends AbstractClickablePreference {
         activity.setAuthTitle(oAuthMapping.prefKeyId);
         return new OnPreferenceClickListener() {
             @Override
-            public boolean onPreferenceClick(Preference preference) {
+            public boolean onPreferenceClick(final Preference preference) {
                 if (oAuthMapping.authActivity != null && oAuthMapping.authParams != null) {
-                    Intent authIntent = new Intent(preference.getContext(),
+                    final Intent authIntent = new Intent(preference.getContext(),
                             oAuthMapping.authActivity);
                     oAuthMapping.authParams.setOAuthExtras(authIntent);
                     activity.startActivityForResult(authIntent,
