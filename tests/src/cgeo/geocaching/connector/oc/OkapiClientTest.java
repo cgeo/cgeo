@@ -50,7 +50,7 @@ public class OkapiClientTest extends CGeoTestCase {
     }
 
     public static void testOCWillAttendLogs() {
-        final String geoCode = "OC10CB8";
+        final String geoCode = "OC6465";
 
         removeCacheCompletely(geoCode);
         Geocache cache = OkapiClient.getCache(geoCode);
