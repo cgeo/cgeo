@@ -993,9 +993,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (enableMore) {
             listFooterText.setText(res.getString(R.string.caches_more_caches) + " (" + res.getString(R.string.caches_more_caches_currently) + ": " + cacheList.size() + ")");
             listFooter.setOnClickListener(new MoreCachesListener());
-        } else {
+        } else if (type != CacheListType.OFFLINE) {
             listFooterText.setText(res.getString(CollectionUtils.isEmpty(cacheList) ? R.string.caches_no_cache : R.string.caches_more_caches_no));
             listFooter.setOnClickListener(null);
+        } else {
+            // hide footer completely after online-list was loaded
+            listFooter.setVisibility(View.GONE);
         }
         listFooter.setClickable(enableMore);
     }
@@ -1314,7 +1317,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         public void onClick(final View arg0) {
             showProgress(true);
             showFooterLoadingCaches();
-            listFooter.setOnClickListener(null);
 
             getSupportLoaderManager().restartLoader(CacheListLoaderType.NEXT_PAGE.getLoaderId(), null, CacheListActivity.this);
         }
