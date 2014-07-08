@@ -14,6 +14,8 @@
     · New: Load Greokrety inventory for OC caches\n
     · New: Autosave caches if user modifies waypoints\n
     · New: Show recently viewed caches when clicking search icon on main screen\n
+    · New: Add support for opencaching.co.uk\n
+    · New: Improved sorting of waypoints depending on waypoint category\n
     · Fix: Hiding own caches on opencaching\n
     · Fix: Webcam caches not marked as found after posting log\n
     · Fix: Archived caches now also hidden if hiding disabled caches is active\n
@@ -24,6 +26,9 @@
     · Fix: Speed now always shown in km or miles per hour\n
     · Fix: USER template now shows the correct username for the site where the cache is hosted\n
     · Fix: Keep filter active if user switches the list\n
+    · Fix: Cache names with special chars not shown\n
+    · Fix: Improve static maps resolution and scaling depending on the screen resolution\n
+    · Fix: Will attend logs not counted in log summary of OC caches\n
     \n
     \n
   </string>
