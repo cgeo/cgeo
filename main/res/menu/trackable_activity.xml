@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/menu_log_touch"
-        android:icon="@drawable/ic_menu_agenda"
+        android:icon="@drawable/ic_menu_edit"
         app:showAsAction="ifRoom|withText"
         android:title="@string/trackable_log_touch">
     </item>
