@@ -72,11 +72,6 @@
                 android:textColor="?text_color"
                 android:textSize="14sp" />
         </LinearLayout>
-
-        <Button
-            android:id="@+id/post"
-            style="@style/button_full"
-            android:text="@string/log_post" />
     </LinearLayout>
 
 </ScrollView>
