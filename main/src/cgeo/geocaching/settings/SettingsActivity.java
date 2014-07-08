@@ -170,6 +170,14 @@ public class SettingsActivity extends PreferenceActivity {
         setServiceScreenSummary(getPreferenceManager(), R.string.pref_connectorGCActive);
         setServiceScreenSummary(getPreferenceManager(), R.string.pref_connectorOXActive);
         setServiceScreenSummary(getPreferenceManager(), R.string.pref_connectorECActive);
+        registerForSummaryAndUpdate(R.string.preference_screen_sendtocgeo);
+        registerForSummaryAndUpdate(R.string.preference_screen_gcvote);
+    }
+
+    private void registerForSummaryAndUpdate(final int preferenceKey) {
+        getPreference(preferenceKey).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
+        // force an immediate update
+        VALUE_CHANGE_LISTENER.onPreferenceChange(getPreference(preferenceKey), StringUtils.EMPTY);
     }
 
     private void setWebsite(final int preferenceKey, final String host) {
@@ -631,6 +639,10 @@ public class SettingsActivity extends PreferenceActivity {
                     text = preference.getContext().getString(R.string.init_backup_last_no);
                 }
                 preference.setSummary(text);
+            } else if (isPreference(preference, R.string.preference_screen_sendtocgeo)) {
+                preference.setSummary(getServiceSummary(Settings.isRegisteredForSend2cgeo()));
+            } else if (isPreference(preference, R.string.preference_screen_gcvote)) {
+                preference.setSummary(getServiceSummary(Settings.isRatingWanted()));
             } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.

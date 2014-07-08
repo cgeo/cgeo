@@ -1126,7 +1126,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     public void importWeb() {
         // menu is also shown with no device connected
-        if (Settings.getWebDeviceCode() == null) {
+        if (!Settings.isRegisteredForSend2cgeo()) {
             Dialogs.confirm(this, R.string.web_import_title, R.string.init_sendToCgeo_description, new OnClickListener() {
 
                 @Override

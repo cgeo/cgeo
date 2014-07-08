@@ -21,6 +21,7 @@
     <string name="preference_screen_twitter">preference_screen_twitter</string>
     <string name="preference_screen_navigation_menu">fakekey_navigation_menu_screen</string>
     <string name="preference_screen_sendtocgeo">preference_screen_sendtocgeo</string>
+    <string name="preference_screen_gcvote">preference_screen_gcvote</string>
     <string name="pref_fakekey_ocde_authorization">fakekey_ocde_authorization</string>
     <string name="pref_fakekey_ocpl_authorization">fakekey_ocpl_authorization</string>
     <string name="pref_fakekey_ocnl_authorization">fakekey_ocnl_authorization</string>

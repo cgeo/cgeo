@@ -714,6 +714,10 @@ public class Settings {
         return getString(R.string.pref_webDeviceCode, null);
     }
 
+    public static boolean isRegisteredForSend2cgeo() {
+        return getWebDeviceCode() != null;
+    }
+
     public static String getWebDeviceName() {
         return getString(R.string.pref_webDeviceName, android.os.Build.MODEL);
     }

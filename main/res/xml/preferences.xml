@@ -315,7 +315,9 @@
                         android:title="@string/settings_open_website" />
                 </PreferenceCategory>
             </PreferenceScreen>
-            <PreferenceScreen android:title="@string/init_gcvote" >
+            <PreferenceScreen
+                android:key="@string/preference_screen_gcvote"
+                android:title="@string/init_gcvote" >
                 <PreferenceCategory android:title="@string/settings_settings" >
                     <CheckBoxPreference
                         android:defaultValue="true"
