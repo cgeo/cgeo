@@ -496,7 +496,7 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public void openInBrowser(final Activity fromActivity) {
-        final Intent viewIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getUrl()));
+        final Intent viewIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getLongUrl()));
 
         // Check if cgeo is the default, show the chooser to let the user choose a browser
         if (viewIntent.resolveActivity(fromActivity.getPackageManager()).getPackageName().equals(fromActivity.getPackageName())) {
@@ -739,6 +739,10 @@ public class Geocache implements ICache, IWaypoint {
 
     public String getUrl() {
         return getConnector().getCacheUrl(this);
+    }
+
+    public String getLongUrl() {
+        return getConnector().getLongCacheUrl(this);
     }
 
     public String getCgeoUrl() { return getConnector().getCacheUrl(this); }
