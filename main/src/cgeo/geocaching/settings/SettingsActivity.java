@@ -170,14 +170,9 @@ public class SettingsActivity extends PreferenceActivity {
         setServiceScreenSummary(getPreferenceManager(), R.string.pref_connectorGCActive);
         setServiceScreenSummary(getPreferenceManager(), R.string.pref_connectorOXActive);
         setServiceScreenSummary(getPreferenceManager(), R.string.pref_connectorECActive);
-        registerForSummaryAndUpdate(R.string.preference_screen_sendtocgeo);
-        registerForSummaryAndUpdate(R.string.preference_screen_gcvote);
-    }
-
-    private void registerForSummaryAndUpdate(final int preferenceKey) {
-        getPreference(preferenceKey).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
-        // force an immediate update
-        VALUE_CHANGE_LISTENER.onPreferenceChange(getPreference(preferenceKey), StringUtils.EMPTY);
+        getPreference(R.string.preference_screen_gcvote).setSummary(getServiceSummary(Settings.isRatingWanted()));
+        getPreference(R.string.pref_ratingwanted).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
+        getPreference(R.string.preference_screen_sendtocgeo).setSummary(getServiceSummary(Settings.isRegisteredForSend2cgeo()));
     }
 
     private void setWebsite(final int preferenceKey, final String host) {
@@ -567,8 +562,12 @@ public class SettingsActivity extends PreferenceActivity {
      * to reflect its new value.
      */
     private static final Preference.OnPreferenceChangeListener VALUE_CHANGE_LISTENER = new Preference.OnPreferenceChangeListener() {
+
+        private PreferenceManager preferenceManager;
+
         @Override
         public boolean onPreferenceChange(final Preference preference, final Object value) {
+            preferenceManager = preference.getPreferenceManager();
             final String stringValue = value.toString();
 
             if (isPreference(preference, R.string.pref_mapsource)) {
@@ -639,10 +638,9 @@ public class SettingsActivity extends PreferenceActivity {
                     text = preference.getContext().getString(R.string.init_backup_last_no);
                 }
                 preference.setSummary(text);
-            } else if (isPreference(preference, R.string.preference_screen_sendtocgeo)) {
-                preference.setSummary(getServiceSummary(Settings.isRegisteredForSend2cgeo()));
-            } else if (isPreference(preference, R.string.preference_screen_gcvote)) {
-                preference.setSummary(getServiceSummary(Settings.isRatingWanted()));
+            } else if (isPreference(preference, R.string.pref_ratingwanted)) {
+                findPreference(R.string.preference_screen_gcvote).setSummary(getServiceSummary((Boolean) value));
+                redrawScreen(findPreference(R.string.preference_screen_services));
             } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
@@ -655,6 +653,11 @@ public class SettingsActivity extends PreferenceActivity {
             }
             return true;
         }
+
+        private Preference findPreference(final int preferenceKeyResourceId) {
+            return preferenceManager.findPreference(getKey(preferenceKeyResourceId));
+        }
+
     };
 
     /**
