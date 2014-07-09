@@ -157,21 +157,25 @@ public class SettingsActivity extends PreferenceActivity {
         for (final OCPreferenceKeys key : OCPreferenceKeys.values()) {
             getPreference(key.isActivePrefId).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
             setWebsite(key.websitePrefId, key.authParams.host);
-            setServiceScreenSummary(getPreferenceManager(), key.isActivePrefId);
+            getPreference(key.prefScreenId).setSummary(getServiceSummary(Settings.isOCConnectorActive(key.isActivePrefId)));
         }
         getPreference(R.string.pref_connectorGCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
-        getPreference(R.string.pref_connectorOXActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
-        getPreference(R.string.pref_connectorECActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         setWebsite(R.string.pref_fakekey_gc_website, GCConnector.getInstance().getHost());
+        getPreference(R.string.preference_screen_gc).setSummary(getServiceSummary(Settings.isGCConnectorActive()));
+
+        getPreference(R.string.pref_connectorOXActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         setWebsite(R.string.pref_fakekey_ox_website, "opencaching.com");
+        getPreference(R.string.preference_screen_ox).setSummary(getServiceSummary(Settings.isOXConnectorActive()));
+
+        getPreference(R.string.pref_connectorECActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         setWebsite(R.string.pref_fakekey_ec_website, "extremcaching.com");
-        setWebsite(R.string.pref_fakekey_gcvote_website, "gcvote.com");
-        setWebsite(R.string.pref_fakekey_sendtocgeo_website, "send2.cgeo.org");
-        setServiceScreenSummary(getPreferenceManager(), R.string.pref_connectorGCActive);
-        setServiceScreenSummary(getPreferenceManager(), R.string.pref_connectorOXActive);
-        setServiceScreenSummary(getPreferenceManager(), R.string.pref_connectorECActive);
-        getPreference(R.string.preference_screen_gcvote).setSummary(getServiceSummary(Settings.isRatingWanted()));
+        getPreference(R.string.preference_screen_ec).setSummary(getServiceSummary(Settings.isECConnectorActive()));
+
         getPreference(R.string.pref_ratingwanted).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
+        setWebsite(R.string.pref_fakekey_gcvote_website, "gcvote.com");
+        getPreference(R.string.preference_screen_gcvote).setSummary(getServiceSummary(Settings.isRatingWanted()));
+
+        setWebsite(R.string.pref_fakekey_sendtocgeo_website, "send2.cgeo.org");
         getPreference(R.string.preference_screen_sendtocgeo).setSummary(getServiceSummary(Settings.isRegisteredForSend2cgeo()));
     }
 
@@ -188,32 +192,6 @@ public class SettingsActivity extends PreferenceActivity {
 
     private static String getServiceSummary(final boolean status) {
         return status ? CgeoApplication.getInstance().getString(R.string.settings_service_active) : StringUtils.EMPTY;
-    }
-
-    private static void setServiceScreenSummary(final PreferenceManager preferenceManager, final int preferenceKey) {
-
-        String summary;
-
-        switch (preferenceKey) {
-            case R.string.pref_connectorGCActive:
-                summary = getServiceSummary(Settings.isGCConnectorActive());
-                preferenceManager.findPreference(getKey(R.string.preference_screen_gc)).setSummary(summary);
-                break;
-            case R.string.pref_connectorOXActive:
-                summary = getServiceSummary(Settings.isOXConnectorActive());
-                preferenceManager.findPreference(getKey(R.string.preference_screen_ox)).setSummary(summary);
-                break;
-            case R.string.pref_connectorECActive:
-                summary = getServiceSummary(Settings.isECConnectorActive());
-                preferenceManager.findPreference(getKey(R.string.preference_screen_ec)).setSummary(summary);
-                break;
-            default:
-                if (OCPreferenceKeys.isOCPreference(preferenceKey)) {
-                    final OCPreferenceKeys prefKey = OCPreferenceKeys.getById(preferenceKey);
-                    summary = getServiceSummary(Settings.isOCConnectorActive(prefKey.isActivePrefId));
-                    preferenceManager.findPreference(getKey(prefKey.prefScreenId)).setSummary(summary);
-                }
-        }
     }
 
     private static String getKey(final int prefKeyId) {
