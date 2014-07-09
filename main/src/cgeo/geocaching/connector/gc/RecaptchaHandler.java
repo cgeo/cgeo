@@ -1,5 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.R;
 import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.network.Network;
@@ -80,9 +82,9 @@ public class RecaptchaHandler extends Handler {
             final AlertDialog.Builder dlg = new AlertDialog.Builder(activity);
             final View view = activity.getLayoutInflater().inflate(R.layout.recaptcha_dialog, null, false);
 
-            final ImageView imageView = (ImageView) view.findViewById(R.id.image);
+            final ImageView imageView = ButterKnife.findById(view, R.id.image);
 
-            final ImageButton reloadButton = (ImageButton) view.findViewById(R.id.button_recaptcha_refresh);
+            final ImageButton reloadButton = ButterKnife.findById(view, R.id.button_recaptcha_refresh);
             reloadButton.setEnabled(false);
             reloadButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -99,7 +101,8 @@ public class RecaptchaHandler extends Handler {
             dlg.setNeutralButton(activity.getString(R.string.caches_recaptcha_continue), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(final DialogInterface dialog, final int id) {
-                    final String text = ((EditText) view.findViewById(R.id.text)).getText().toString();
+                    final EditText editText = ButterKnife.findById(view, R.id.text);
+                    final String text = editText.getText().toString();
                     recaptchaReceiver.setText(text);
                     dialog.cancel();
                 }

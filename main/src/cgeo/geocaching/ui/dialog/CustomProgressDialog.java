@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -19,31 +18,27 @@ import java.lang.reflect.Method;
  */
 public class CustomProgressDialog extends ProgressDialog {
 
-    public CustomProgressDialog(Context context) {
+    public CustomProgressDialog(final Context context) {
         super(context, ActivityMixin.getDialogTheme());
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         try {
-            Method method = TextView.class.getMethod("setVisibility", Integer.TYPE);
+            final Method method = TextView.class.getMethod("setVisibility", Integer.TYPE);
 
-            Field[] fields = this.getClass().getSuperclass().getDeclaredFields();
+            final Field[] fields = this.getClass().getSuperclass().getDeclaredFields();
 
-            for (Field field : fields) {
+            for (final Field field : fields) {
                 if (field.getName().equalsIgnoreCase("mProgressNumber")) {
                     field.setAccessible(true);
-                    TextView textView = (TextView) field.get(this);
+                    final TextView textView = (TextView) field.get(this);
                     method.invoke(textView, View.GONE);
                 }
             }
-        } catch (NoSuchMethodException e) {
-            Log.e("Failed to invoke the progressDialog method 'setVisibility' and set 'mProgressNumber' to GONE.", e);
-        } catch (IllegalAccessException e) {
-            Log.e("Failed to invoke the progressDialog method 'setVisibility' and set 'mProgressNumber' to GONE.", e);
-        } catch (InvocationTargetException e) {
+        } catch (final ReflectiveOperationException e) {
             Log.e("Failed to invoke the progressDialog method 'setVisibility' and set 'mProgressNumber' to GONE.", e);
         }
     }

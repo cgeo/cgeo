@@ -1,5 +1,7 @@
 package cgeo.geocaching.ui;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.Image;
 import cgeo.geocaching.R;
 import cgeo.geocaching.files.LocalStorage;
@@ -98,7 +100,7 @@ public class ImagesList {
             }
         }));
 
-        imagesView = (LinearLayout) parentView.findViewById(R.id.spoiler_list);
+        imagesView = ButterKnife.findById(parentView, R.id.spoiler_list);
 
         final HtmlImage imgGetter = new HtmlImage(geocode, true, offline ? StoredList.STANDARD_LIST_ID : StoredList.TEMPORARY_LIST_ID, false);
 
@@ -107,12 +109,13 @@ public class ImagesList {
             assert(rowView != null);
 
             if (StringUtils.isNotBlank(img.getTitle())) {
-                ((TextView) rowView.findViewById(R.id.title)).setText(Html.fromHtml(img.getTitle()));
+                final TextView titleView = ButterKnife.findById(rowView, R.id.title);
+                titleView.setText(Html.fromHtml(img.getTitle()));
                 rowView.findViewById(R.id.titleLayout).setVisibility(View.VISIBLE);
             }
 
             if (StringUtils.isNotBlank(img.getDescription())) {
-                final TextView descView = (TextView) rowView.findViewById(R.id.description);
+                final TextView descView = ButterKnife.findById(rowView, R.id.description);
                 descView.setText(Html.fromHtml(img.getDescription()), TextView.BufferType.SPANNABLE);
                 descView.setVisibility(View.VISIBLE);
             }

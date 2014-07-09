@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
@@ -70,7 +72,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private CheckBox tweetCheck = null;
     private LinearLayout tweetBox = null;
     private LinearLayout logPasswordBox = null;
-    private boolean tbChanged = false;
     private SparseArray<TrackableLog> actionButtons;
 
     private ILoggingManager loggingManager;
@@ -124,7 +125,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         if (Settings.isTrackableAutoVisit()) {
             for (final TrackableLog trackable : trackables) {
                 trackable.action = LogTypeTrackable.VISITED;
-                tbChanged = true;
             }
         }
     }
@@ -144,9 +144,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         for (final TrackableLog tb : trackables) {
             final LinearLayout inventoryItem = (LinearLayout) inflater.inflate(R.layout.logcache_trackable_item, inventoryView, false);
 
-            ((TextView) inventoryItem.findViewById(R.id.trackcode)).setText(tb.trackCode);
-            ((TextView) inventoryItem.findViewById(R.id.name)).setText(tb.name);
-            final TextView actionButton = (TextView) inventoryItem.findViewById(R.id.action);
+            final TextView codeView = ButterKnife.findById(inventoryItem, R.id.trackcode);
+            codeView.setText(tb.trackCode);
+            final TextView nameView = ButterKnife.findById(inventoryItem, R.id.name);
+            nameView.setText(tb.name);
+            final TextView actionButton = ButterKnife.findById(inventoryItem, R.id.action);
             actionButton.setId(tb.id);
             actionButtons.put(actionButton.getId(), tb);
             actionButton.setText(tb.action.getLabel() + " ▼");
@@ -179,7 +181,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         if (inventoryView.getChildCount() > 1) {
             final LinearLayout inventoryChangeAllView = (LinearLayout) findViewById(R.id.inventory_changeall);
 
-            final Button changeButton = (Button) inventoryChangeAllView.findViewById(R.id.changebutton);
+            final Button changeButton = ButterKnife.findById(inventoryChangeAllView, R.id.changebutton);
             changeButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -374,12 +376,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         typeSelected = type;
         typeButton.setText(typeSelected.getL10n());
 
-        if (LogType.FOUND_IT == type && !tbChanged) {
-            // TODO: change action
-        } else if (LogType.FOUND_IT != type && !tbChanged) {
-            // TODO: change action
-        }
-
         updateTweetBox(type);
         updateLogPasswordBox(type);
     }
@@ -522,7 +518,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 for (final TrackableLog tb : trackables) {
                     tb.action = logType;
                 }
-                tbChanged = true;
                 updateTrackablesList();
                 dialog.dismiss();
             }
@@ -570,7 +565,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             @Override
             public void onClick(final DialogInterface dialog, final int position) {
                 final LogTypeTrackable logType = LogTypeTrackable.values()[position];
-                tbChanged = true;
                 trackableLog.action = logType;
                 Log.i("Trackable " + trackableLog.trackCode + " (" + trackableLog.name + ") has new action: #" + logType);
                 updateTrackablesList();

@@ -1,5 +1,7 @@
 package cgeo.geocaching.ui;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -27,10 +29,10 @@ public class EditNoteDialog extends DialogFragment {
     private EditText mEditText;
     private EditNoteDialogListener listener;
 
-    public static EditNoteDialog newInstance(final String initialNote, EditNoteDialogListener listener) {
-        EditNoteDialog dialog = new EditNoteDialog();
+    public static EditNoteDialog newInstance(final String initialNote, final EditNoteDialogListener listener) {
+        final EditNoteDialog dialog = new EditNoteDialog();
 
-        Bundle arguments = new Bundle();
+        final Bundle arguments = new Bundle();
         arguments.putString(EditNoteDialog.ARGUMENT_INITIAL_NOTE, initialNote);
         dialog.setArguments(arguments);
         dialog.listener = listener;
@@ -39,24 +41,24 @@ public class EditNoteDialog extends DialogFragment {
     }
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(final Bundle savedInstanceState) {
         final @NonNull FragmentActivity activity = getActivity();
-        View view = View.inflate(new ContextThemeWrapper(activity, R.style.dark), R.layout.fragment_edit_note, null);
-        mEditText = (EditText) view.findViewById(R.id.note);
-        String initialNote = getArguments().getString(ARGUMENT_INITIAL_NOTE);
+        final View view = View.inflate(new ContextThemeWrapper(activity, R.style.dark), R.layout.fragment_edit_note, null);
+        mEditText = ButterKnife.findById(view, R.id.note);
+        final String initialNote = getArguments().getString(ARGUMENT_INITIAL_NOTE);
         if (initialNote != null) {
             mEditText.setText(initialNote);
             Dialogs.moveCursorToEnd(mEditText);
             getArguments().remove(ARGUMENT_INITIAL_NOTE);
         }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.cache_personal_note);
         builder.setView(view);
         builder.setPositiveButton(android.R.string.ok,
                 new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int whichButton) {
+                    public void onClick(final DialogInterface dialog, final int whichButton) {
                         listener.onFinishEditNoteDialog(mEditText.getText().toString());
                         dialog.dismiss();
                     }
@@ -64,7 +66,7 @@ public class EditNoteDialog extends DialogFragment {
         builder.setNegativeButton(android.R.string.cancel,
                 new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int whichButton) {
+                    public void onClick(final DialogInterface dialog, final int whichButton) {
                         dialog.dismiss();
                     }
                 });

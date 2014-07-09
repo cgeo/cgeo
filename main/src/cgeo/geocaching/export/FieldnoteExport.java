@@ -1,5 +1,7 @@
 package cgeo.geocaching.export;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
@@ -57,9 +59,9 @@ public class FieldnoteExport extends AbstractExport {
         final View layout = View.inflate(new ContextThemeWrapper(activity, R.style.dark), R.layout.fieldnote_export_dialog, null);
         builder.setView(layout);
 
-        final CheckBox uploadOption = (CheckBox) layout.findViewById(R.id.upload);
+        final CheckBox uploadOption = ButterKnife.findById(layout, R.id.upload);
         uploadOption.setChecked(Settings.getFieldNoteExportUpload());
-        final CheckBox onlyNewOption = (CheckBox) layout.findViewById(R.id.onlynew);
+        final CheckBox onlyNewOption = ButterKnife.findById(layout, R.id.onlynew);
         onlyNewOption.setChecked(Settings.getFieldNoteExportOnlyNew());
 
         if (Settings.getFieldnoteExportDate() > 0) {

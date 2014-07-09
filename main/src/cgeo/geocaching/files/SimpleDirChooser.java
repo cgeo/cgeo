@@ -1,5 +1,7 @@
 package cgeo.geocaching.files;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractListActivity;
@@ -45,7 +47,7 @@ public class SimpleDirChooser extends AbstractListActivity {
     private boolean chooseForWriting = false;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final Bundle extras = getIntent().getExtras();
         currentDir = dirContaining(extras.getString(Intents.EXTRA_START_DIR));
@@ -60,27 +62,27 @@ public class SimpleDirChooser extends AbstractListActivity {
         resetOkButton();
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 setResult(RESULT_OK, new Intent()
                         .setData(Uri.fromFile(new File(currentDir, adapter.getItem(lastPosition).getName()))));
                 finish();
             }
         });
 
-        Button cancelButton = (Button) findViewById(R.id.simple_dir_chooser_cancel);
+        final Button cancelButton = (Button) findViewById(R.id.simple_dir_chooser_cancel);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
+            public void onClick(final View v) {
+                final Intent intent = new Intent();
                 setResult(RESULT_CANCELED, intent);
                 finish();
             }
         });
 
-        EditText pathField = (EditText) findViewById(R.id.simple_dir_chooser_path);
+        final EditText pathField = (EditText) findViewById(R.id.simple_dir_chooser_path);
         pathField.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 editPath();
             }
 
@@ -88,7 +90,7 @@ public class SimpleDirChooser extends AbstractListActivity {
     }
 
     public void editPath() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.simple_dir_chooser_current_path);
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_TEXT);
@@ -96,9 +98,9 @@ public class SimpleDirChooser extends AbstractListActivity {
         builder.setView(input);
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String pathText = input.getText().toString();
-                File newPathDir = new File(pathText);
+            public void onClick(final DialogInterface dialog, final int which) {
+                final String pathText = input.getText().toString();
+                final File newPathDir = new File(pathText);
                 if (newPathDir.exists() && newPathDir.isDirectory()) {
                     currentDir = newPathDir;
                     fill(currentDir);
@@ -109,7 +111,7 @@ public class SimpleDirChooser extends AbstractListActivity {
         });
         builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(final DialogInterface dialog, final int which) {
                 dialog.cancel();
             }
         });
@@ -129,18 +131,18 @@ public class SimpleDirChooser extends AbstractListActivity {
                 Environment.getExternalStorageDirectory();
     }
 
-    private void fill(File dir) {
+    private void fill(final File dir) {
         lastPosition = -1;
         resetOkButton();
-        EditText path = (EditText) findViewById(R.id.simple_dir_chooser_path);
+        final EditText path = (EditText) findViewById(R.id.simple_dir_chooser_path);
         path.setText(this.getResources().getString(R.string.simple_dir_chooser_current_path) + " " + dir.getAbsolutePath());
         final File[] dirs = dir.listFiles(new DirOnlyFilenameFilter());
-        List<Option> listDirs = new ArrayList<Option>();
+        final List<Option> listDirs = new ArrayList<Option>();
         try {
-            for (File currentDir : dirs) {
+            for (final File currentDir : dirs) {
                 listDirs.add(new Option(currentDir.getName(), currentDir.getAbsolutePath(), currentDir.canWrite()));
             }
-        } catch (RuntimeException e) {
+        } catch (final RuntimeException e) {
         }
         Collections.sort(listDirs, Option.NAME_COMPARATOR);
         if (dir.getParent() != null) {
@@ -159,11 +161,11 @@ public class SimpleDirChooser extends AbstractListActivity {
 
     public class FileArrayAdapter extends ArrayAdapter<Option> {
 
-        private Context context;
-        private int id;
-        private List<Option> items;
+        private final Context context;
+        private final int id;
+        private final List<Option> items;
 
-        public FileArrayAdapter(Context context, int simpleDirItemResId, List<Option> objects) {
+        public FileArrayAdapter(final Context context, final int simpleDirItemResId, final List<Option> objects) {
             super(context, simpleDirItemResId, objects);
             this.context = context;
             this.id = simpleDirItemResId;
@@ -171,26 +173,26 @@ public class SimpleDirChooser extends AbstractListActivity {
         }
 
         @Override
-        public Option getItem(int index) {
+        public Option getItem(final int index) {
             return items.get(index);
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, final View convertView, final ViewGroup parent) {
             View v = convertView;
             if (v == null) {
-                LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 v = vi.inflate(id, null);
             }
 
             final Option option = items.get(position);
             if (option != null) {
-                TextView t1 = (TextView) v.findViewById(R.id.TextView01);
+                final TextView t1 = ButterKnife.findById(v, R.id.TextView01);
                 if (t1 != null) {
                     t1.setOnClickListener(new OnTextViewClickListener(position));
                     t1.setText(option.getName());
                 }
-                CheckBox check = (CheckBox) v.findViewById(R.id.CheckBox);
+                final CheckBox check = ButterKnife.findById(v, R.id.CheckBox);
                 if (check != null) {
                     if (!chooseForWriting || option.isWriteable()) {
                         check.setOnClickListener(new OnCheckBoxClickListener(position));
@@ -206,20 +208,20 @@ public class SimpleDirChooser extends AbstractListActivity {
     }
 
     public class OnTextViewClickListener implements OnClickListener {
-        private int position;
+        private final int position;
 
-        OnTextViewClickListener(int position) {
+        OnTextViewClickListener(final int position) {
             this.position = position;
         }
 
         @Override
-        public void onClick(View arg0) {
-            Option option = adapter.getItem(position);
+        public void onClick(final View arg0) {
+            final Option option = adapter.getItem(position);
             if (option.getName().equals(PARENT_DIR)) {
                 currentDir = new File(option.getPath());
                 fill(currentDir);
             } else {
-                File dir = new File(option.getPath());
+                final File dir = new File(option.getPath());
                 if (dir.list(new DirOnlyFilenameFilter()).length > 0) {
                     currentDir = dir;
                     fill(currentDir);
@@ -229,16 +231,16 @@ public class SimpleDirChooser extends AbstractListActivity {
     }
 
     public class OnCheckBoxClickListener implements OnClickListener {
-        private int position;
+        private final int position;
 
-        OnCheckBoxClickListener(int position) {
+        OnCheckBoxClickListener(final int position) {
             this.position = position;
         }
 
         @Override
-        public void onClick(View arg0) {
-            Option lastOption = (lastPosition > -1) ? adapter.getItem(lastPosition) : null;
-            Option currentOption = adapter.getItem(position);
+        public void onClick(final View arg0) {
+            final Option lastOption = (lastPosition > -1) ? adapter.getItem(lastPosition) : null;
+            final Option currentOption = adapter.getItem(position);
             if (lastOption != null) {
                 lastOption.setChecked(false);
             }
@@ -264,13 +266,13 @@ public class SimpleDirChooser extends AbstractListActivity {
         private static Comparator<Option> NAME_COMPARATOR = new Comparator<SimpleDirChooser.Option>() {
 
             @Override
-            public int compare(Option lhs, Option rhs) {
+            public int compare(final Option lhs, final Option rhs) {
                 return String.CASE_INSENSITIVE_ORDER.compare(lhs.name, rhs.name);
             }
 
         };
 
-        public Option(String name, String path, boolean writeable) {
+        public Option(final String name, final String path, final boolean writeable) {
             this.name = name;
             this.path = path;
             this.writeable = writeable;
@@ -288,7 +290,7 @@ public class SimpleDirChooser extends AbstractListActivity {
             return this.checked;
         }
 
-        public void setChecked(boolean checked) {
+        public void setChecked(final boolean checked) {
             this.checked = checked;
         }
 
@@ -300,8 +302,8 @@ public class SimpleDirChooser extends AbstractListActivity {
     public static class DirOnlyFilenameFilter implements FilenameFilter {
 
         @Override
-        public boolean accept(File dir, String filename) {
-            File file = new File(dir, filename);
+        public boolean accept(final File dir, final String filename) {
+            final File file = new File(dir, filename);
             return file.isDirectory() && file.canRead();
         }
 

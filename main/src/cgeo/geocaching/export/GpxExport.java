@@ -1,5 +1,7 @@
 package cgeo.geocaching.export;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
@@ -61,10 +63,10 @@ public class GpxExport extends AbstractExport {
         final View layout = View.inflate(new ContextThemeWrapper(activity, R.style.dark), R.layout.gpx_export_dialog, null);
         builder.setView(layout);
 
-        final TextView text = (TextView) layout.findViewById(R.id.info);
+        final TextView text = ButterKnife.findById(layout, R.id.info);
         text.setText(getString(R.string.export_gpx_info, Settings.getGpxExportDir()));
 
-        final CheckBox shareOption = (CheckBox) layout.findViewById(R.id.share);
+        final CheckBox shareOption = ButterKnife.findById(layout, R.id.share);
 
         shareOption.setChecked(Settings.getShareAfterExport());
 

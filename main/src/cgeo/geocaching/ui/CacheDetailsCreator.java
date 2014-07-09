@@ -1,5 +1,7 @@
 package cgeo.geocaching.ui;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
@@ -50,9 +52,9 @@ public final class CacheDetailsCreator {
      */
     public TextView add(final int nameId, final CharSequence value) {
         final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_information_item, null, false);
-        final TextView nameView = (TextView) layout.findViewById(R.id.name);
+        final TextView nameView = ButterKnife.findById(layout, R.id.name);
         nameView.setText(res.getString(nameId));
-        lastValueView = (TextView) layout.findViewById(R.id.value);
+        lastValueView = ButterKnife.findById(layout, R.id.value);
         lastValueView.setText(value);
         parentView.addView(layout);
         return lastValueView;
@@ -68,9 +70,9 @@ public final class CacheDetailsCreator {
 
     public RelativeLayout addStars(final int nameId, final float value, final int max) {
         final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_information_item, null, false);
-        final TextView nameView = (TextView) layout.findViewById(R.id.name);
-        lastValueView = (TextView) layout.findViewById(R.id.value);
-        final LinearLayout layoutStars = (LinearLayout) layout.findViewById(R.id.stars);
+        final TextView nameView = ButterKnife.findById(layout, R.id.name);
+        lastValueView = ButterKnife.findById(layout, R.id.value);
+        final LinearLayout layoutStars = ButterKnife.findById(layout, R.id.stars);
 
         nameView.setText(activity.getResources().getString(nameId));
         lastValueView.setText(String.format("%.1f", value) + ' ' + activity.getResources().getString(R.string.cache_rating_of) + " " + String.format("%d", max));
@@ -123,7 +125,7 @@ public final class CacheDetailsCreator {
         if (cache.getRating() > 0) {
             final RelativeLayout itemLayout = addStars(R.string.cache_rating, cache.getRating());
             if (cache.getVotes() > 0) {
-                final TextView itemAddition = (TextView) itemLayout.findViewById(R.id.addition);
+                final TextView itemAddition = ButterKnife.findById(itemLayout, R.id.addition);
                 itemAddition.setText("(" + cache.getVotes() + ")");
                 itemAddition.setVisibility(View.VISIBLE);
             }

@@ -1,5 +1,7 @@
 package cgeo.geocaching.ui.dialog;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
@@ -103,7 +105,7 @@ public class CoordinatesInputDialog extends DialogFragment {
         getDialog().setTitle(R.string.cache_coordinates);
 
         final View v = inflater.inflate(R.layout.coordinatesinput_dialog, container, false);
-        final Spinner spinner = (Spinner) v.findViewById(R.id.spinnerCoordinateFormats);
+        final Spinner spinner = ButterKnife.findById(v, R.id.spinnerCoordinateFormats);
         final ArrayAdapter<CharSequence> adapter =
                 ArrayAdapter.createFromResource(getActivity(),
                         R.array.waypoint_coordinate_formats,
@@ -113,25 +115,25 @@ public class CoordinatesInputDialog extends DialogFragment {
         spinner.setSelection(Settings.getCoordInputFormat().ordinal());
         spinner.setOnItemSelectedListener(new CoordinateFormatListener());
 
-        bLat = (Button) v.findViewById(R.id.ButtonLat);
-        eLat = (EditText) v.findViewById(R.id.latitude);
-        eLatDeg = (EditText) v.findViewById(R.id.EditTextLatDeg);
-        eLatMin = (EditText) v.findViewById(R.id.EditTextLatMin);
-        eLatSec = (EditText) v.findViewById(R.id.EditTextLatSec);
-        eLatSub = (EditText) v.findViewById(R.id.EditTextLatSecFrac);
-        tLatSep1 = (TextView) v.findViewById(R.id.LatSeparator1);
-        tLatSep2 = (TextView) v.findViewById(R.id.LatSeparator2);
-        tLatSep3 = (TextView) v.findViewById(R.id.LatSeparator3);
+        bLat = ButterKnife.findById(v, R.id.ButtonLat);
+        eLat = ButterKnife.findById(v, R.id.latitude);
+        eLatDeg = ButterKnife.findById(v, R.id.EditTextLatDeg);
+        eLatMin = ButterKnife.findById(v, R.id.EditTextLatMin);
+        eLatSec = ButterKnife.findById(v, R.id.EditTextLatSec);
+        eLatSub = ButterKnife.findById(v, R.id.EditTextLatSecFrac);
+        tLatSep1 = ButterKnife.findById(v, R.id.LatSeparator1);
+        tLatSep2 = ButterKnife.findById(v, R.id.LatSeparator2);
+        tLatSep3 = ButterKnife.findById(v, R.id.LatSeparator3);
 
-        bLon = (Button) v.findViewById(R.id.ButtonLon);
-        eLon = (EditText) v.findViewById(R.id.longitude);
-        eLonDeg = (EditText) v.findViewById(R.id.EditTextLonDeg);
-        eLonMin = (EditText) v.findViewById(R.id.EditTextLonMin);
-        eLonSec = (EditText) v.findViewById(R.id.EditTextLonSec);
-        eLonSub = (EditText) v.findViewById(R.id.EditTextLonSecFrac);
-        tLonSep1 = (TextView) v.findViewById(R.id.LonSeparator1);
-        tLonSep2 = (TextView) v.findViewById(R.id.LonSeparator2);
-        tLonSep3 = (TextView) v.findViewById(R.id.LonSeparator3);
+        bLon = ButterKnife.findById(v, R.id.ButtonLon);
+        eLon = ButterKnife.findById(v, R.id.longitude);
+        eLonDeg = ButterKnife.findById(v, R.id.EditTextLonDeg);
+        eLonMin = ButterKnife.findById(v, R.id.EditTextLonMin);
+        eLonSec = ButterKnife.findById(v, R.id.EditTextLonSec);
+        eLonSub = ButterKnife.findById(v, R.id.EditTextLonSecFrac);
+        tLonSep1 = ButterKnife.findById(v, R.id.LonSeparator1);
+        tLonSep2 = ButterKnife.findById(v, R.id.LonSeparator2);
+        tLonSep3 = ButterKnife.findById(v, R.id.LonSeparator3);
 
         eLatDeg.addTextChangedListener(new TextChanged(eLatDeg));
         eLatMin.addTextChangedListener(new TextChanged(eLatMin));
@@ -154,9 +156,9 @@ public class CoordinatesInputDialog extends DialogFragment {
         bLat.setOnClickListener(new ButtonClickListener());
         bLon.setOnClickListener(new ButtonClickListener());
 
-        final Button buttonCurrent = (Button) v.findViewById(R.id.current);
+        final Button buttonCurrent = ButterKnife.findById(v, R.id.current);
         buttonCurrent.setOnClickListener(new CurrentListener());
-        final Button buttonCache = (Button) v.findViewById(R.id.cache);
+        final Button buttonCache = ButterKnife.findById(v, R.id.cache);
 
         if (cacheCoords != null) {
             buttonCache.setOnClickListener(new CacheListener());
@@ -164,7 +166,7 @@ public class CoordinatesInputDialog extends DialogFragment {
             buttonCache.setVisibility(View.GONE);
         }
 
-        final Button buttonDone = (Button) v.findViewById(R.id.done);
+        final Button buttonDone = ButterKnife.findById(v, R.id.done);
         buttonDone.setOnClickListener(new InputDoneListener());
 
         return v;

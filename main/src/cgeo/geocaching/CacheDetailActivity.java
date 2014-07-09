@@ -918,14 +918,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         public void call(final BitmapDrawable image) {
                             final Bitmap bitmap = image.getBitmap();
                             if (bitmap != null && bitmap.getWidth() > 10) {
-                                final ImageView imageView = (ImageView) view.findViewById(R.id.map_preview);
+                                final ImageView imageView = ButterKnife.findById(view, R.id.map_preview);
                                 imageView.setImageDrawable(image);
                                 view.findViewById(R.id.map_preview_box).setVisibility(View.VISIBLE);
                             }
                         }
                     });
 
-            detailsList = (LinearLayout) view.findViewById(R.id.details_list);
+            detailsList = ButterKnife.findById(view, R.id.details_list);
             final CacheDetailsCreator details = new CacheDetailsCreator(CacheDetailActivity.this, detailsList);
 
             // cache name (full name)
@@ -991,28 +991,29 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // cache attributes
             if (!cache.getAttributes().isEmpty()) {
-                new AttributeViewBuilder().fillView((LinearLayout) view.findViewById(R.id.attributes_innerbox));
+                final LinearLayout innerLayout = ButterKnife.findById(view, R.id.attributes_innerbox);
+                new AttributeViewBuilder().fillView(innerLayout);
                 view.findViewById(R.id.attributes_box).setVisibility(View.VISIBLE);
             }
 
             updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener());
 
             // watchlist
-            final Button buttonWatchlistAdd = (Button) view.findViewById(R.id.add_to_watchlist);
-            final Button buttonWatchlistRemove = (Button) view.findViewById(R.id.remove_from_watchlist);
+            final Button buttonWatchlistAdd = ButterKnife.findById(view, R.id.add_to_watchlist);
+            final Button buttonWatchlistRemove = ButterKnife.findById(view, R.id.remove_from_watchlist);
             buttonWatchlistAdd.setOnClickListener(new AddToWatchlistClickListener());
             buttonWatchlistRemove.setOnClickListener(new RemoveFromWatchlistClickListener());
             updateWatchlistBox();
 
             // favorite points
-            final Button buttonFavPointAdd = (Button) view.findViewById(R.id.add_to_favpoint);
-            final Button buttonFavPointRemove = (Button) view.findViewById(R.id.remove_from_favpoint);
+            final Button buttonFavPointAdd = ButterKnife.findById(view, R.id.add_to_favpoint);
+            final Button buttonFavPointRemove = ButterKnife.findById(view, R.id.remove_from_favpoint);
             buttonFavPointAdd.setOnClickListener(new FavoriteAddClickListener());
             buttonFavPointRemove.setOnClickListener(new FavoriteRemoveClickListener());
             updateFavPointBox();
 
             // list
-            final Button buttonChangeList = (Button) view.findViewById(R.id.change_list);
+            final Button buttonChangeList = ButterKnife.findById(view, R.id.change_list);
             buttonChangeList.setOnClickListener(new ChangeListClickListener());
             updateListBox();
 
@@ -1021,7 +1022,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final String license = connector.getLicenseText(cache);
             if (StringUtils.isNotBlank(license)) {
                 view.findViewById(R.id.license_box).setVisibility(View.VISIBLE);
-                final TextView licenseView = ((TextView) view.findViewById(R.id.license));
+                final TextView licenseView = (ButterKnife.findById(view, R.id.license));
                 licenseView.setText(Html.fromHtml(license), BufferType.SPANNABLE);
                 licenseView.setClickable(true);
                 licenseView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
@@ -1254,15 +1255,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          * shows/hides buttons, sets text in watchlist box
          */
         private void updateWatchlistBox() {
-            final LinearLayout layout = (LinearLayout) view.findViewById(R.id.watchlist_box);
+            final LinearLayout layout = ButterKnife.findById(view, R.id.watchlist_box);
             final boolean supportsWatchList = cache.supportsWatchList();
             layout.setVisibility(supportsWatchList ? View.VISIBLE : View.GONE);
             if (!supportsWatchList) {
                 return;
             }
-            final Button buttonAdd = (Button) view.findViewById(R.id.add_to_watchlist);
-            final Button buttonRemove = (Button) view.findViewById(R.id.remove_from_watchlist);
-            final TextView text = (TextView) view.findViewById(R.id.watchlist_text);
+            final Button buttonAdd = ButterKnife.findById(view, R.id.add_to_watchlist);
+            final Button buttonRemove = ButterKnife.findById(view, R.id.remove_from_watchlist);
+            final TextView text = ButterKnife.findById(view, R.id.watchlist_text);
 
             if (cache.isOnWatchlist() || cache.isOwner()) {
                 buttonAdd.setVisibility(View.GONE);
@@ -1288,15 +1289,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          * shows/hides buttons, sets text in watchlist box
          */
         private void updateFavPointBox() {
-            final LinearLayout layout = (LinearLayout) view.findViewById(R.id.favpoint_box);
+            final LinearLayout layout = ButterKnife.findById(view, R.id.favpoint_box);
             final boolean supportsFavoritePoints = cache.supportsFavoritePoints();
             layout.setVisibility(supportsFavoritePoints ? View.VISIBLE : View.GONE);
             if (!supportsFavoritePoints || cache.isOwner() || !Settings.isGCPremiumMember()) {
                 return;
             }
-            final Button buttonAdd = (Button) view.findViewById(R.id.add_to_favpoint);
-            final Button buttonRemove = (Button) view.findViewById(R.id.remove_from_favpoint);
-            final TextView text = (TextView) view.findViewById(R.id.favpoint_text);
+            final Button buttonAdd = ButterKnife.findById(view, R.id.add_to_favpoint);
+            final Button buttonRemove = ButterKnife.findById(view, R.id.remove_from_favpoint);
+            final TextView text = ButterKnife.findById(view, R.id.favpoint_text);
 
             if (cache.isFavorite()) {
                 buttonAdd.setVisibility(View.GONE);
@@ -1328,7 +1329,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 box.setVisibility(View.VISIBLE);
 
                 // update text
-                final TextView text = (TextView) view.findViewById(R.id.list_text);
+                final TextView text = ButterKnife.findById(view, R.id.list_text);
                 final StoredList list = DataStore.getList(cache.getListId());
                 if (list != null) {
                     text.setText(res.getString(R.string.cache_list_text) + " " + list.title);
@@ -1411,7 +1412,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             setPersonalNote(personalNoteView, cache.getPersonalNote());
             personalNoteView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             addContextMenu(personalNoteView);
-            final Button personalNoteEdit = (Button) view.findViewById(R.id.edit_personalnote);
+            final Button personalNoteEdit = ButterKnife.findById(view, R.id.edit_personalnote);
             personalNoteEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
@@ -1419,7 +1420,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     editPersonalNote(cache, CacheDetailActivity.this);
                 }
             });
-            final Button personalNoteUpload = (Button) view.findViewById(R.id.upload_personalnote);
+            final Button personalNoteUpload = ButterKnife.findById(view, R.id.upload_personalnote);
             if (cache.isOffline() && ConnectorFactory.getConnector(cache).supportsPersonalNote()) {
                 personalNoteUpload.setVisibility(View.VISIBLE);
                 personalNoteUpload.setOnClickListener(new View.OnClickListener() {
@@ -1444,7 +1445,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 hintBoxView.setVisibility(View.GONE);
             }
 
-            final TextView hintView = ((TextView) view.findViewById(R.id.hint));
+            final TextView hintView = (ButterKnife.findById(view, R.id.hint));
             if (StringUtils.isNotBlank(cache.getHint())) {
                 if (TextUtils.containsHtml(cache.getHint())) {
                     hintView.setText(Html.fromHtml(cache.getHint(), new HtmlImage(cache.getGeocode(), false, cache.getListId(), false), null), TextView.BufferType.SPANNABLE);
@@ -1467,7 +1468,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 hintBoxView.setOnClickListener(null);
             }
 
-            final TextView spoilerlinkView = ((TextView) view.findViewById(R.id.hint_spoilerlink));
+            final TextView spoilerlinkView = (ButterKnife.findById(view, R.id.hint_spoilerlink));
             if (CollectionUtils.isNotEmpty(cache.getSpoilers())) {
                 spoilerlinkView.setVisibility(View.VISIBLE);
                 spoilerlinkView.setClickable(true);
@@ -2185,9 +2186,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                                         final OnClickListener dropCacheClickListener,
                                         final OnClickListener storeCacheClickListener) {
         // offline use
-        final TextView offlineText = (TextView) view.findViewById(R.id.offline_text);
-        final Button offlineRefresh = (Button) view.findViewById(R.id.offline_refresh);
-        final Button offlineStore = (Button) view.findViewById(R.id.offline_store);
+        final TextView offlineText = ButterKnife.findById(view, R.id.offline_text);
+        final Button offlineRefresh = ButterKnife.findById(view, R.id.offline_refresh);
+        final Button offlineStore = ButterKnife.findById(view, R.id.offline_store);
 
         if (cache.isOffline()) {
             final long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
@@ -2311,7 +2312,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 public void onFinishEditNoteDialog(final String note) {
                     cache.setPersonalNote(note);
                     cache.parseWaypointsFromNote();
-                    final TextView personalNoteView = (TextView) activity.findViewById(R.id.personalnote);
+                    final TextView personalNoteView = ButterKnife.findById(activity, R.id.personalnote);
                     setPersonalNote(personalNoteView, note);
                     DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
                     activity.notifyDataSetChanged();

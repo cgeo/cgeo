@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -964,7 +966,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             listFooter = getLayoutInflater().inflate(R.layout.cacheslist_footer, listView, false);
             listFooter.setClickable(true);
             listFooter.setOnClickListener(new MoreCachesListener());
-            listFooterText = (TextView) listFooter.findViewById(R.id.more_caches);
+            listFooterText = ButterKnife.findById(listFooter, R.id.more_caches);
             listView.addFooterView(listFooter);
         }
         setListAdapter(adapter);

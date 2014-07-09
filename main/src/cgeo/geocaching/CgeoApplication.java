@@ -57,13 +57,12 @@ public class CgeoApplication extends Application {
         try {
             final ViewConfiguration config = ViewConfiguration.get(this);
             final Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
-
-            if (menuKeyField != null) {
-                menuKeyField.setAccessible(true);
-                menuKeyField.setBoolean(config, false);
-            }
-        } catch (final Exception ex) {
-            // Ignore
+            menuKeyField.setAccessible(true);
+            menuKeyField.setBoolean(config, false);
+        } catch (final ReflectiveOperationException ex) {
+            // ignore
+        } catch (final IllegalArgumentException e) {
+            // ignore
         }
     }
 

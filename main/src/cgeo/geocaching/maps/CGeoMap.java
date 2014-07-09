@@ -1,5 +1,7 @@
 package cgeo.geocaching.maps;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DataStore;
@@ -49,7 +51,6 @@ import rx.Subscription;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
 import rx.subscriptions.Subscriptions;
 
 import android.annotation.TargetApi;
@@ -101,7 +102,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     /** max. number of caches displayed in the Live Map */
     public static final int MAX_CACHES = 500;
-    private CompositeSubscription resumeSubscription;
+    /**
+     * initialization with an empty subscription to make static code analysis tools more happy
+     */
+    private Subscription resumeSubscription = Subscriptions.empty();
 
     /** Controls the behavior of the map */
     public enum MapMode {
@@ -271,7 +275,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     private void setTitle(final String title) {
         /* Compatibility for the old Action Bar, only used by the maps activity at the moment */
-        final TextView titleview = (TextView) activity.findViewById(R.id.actionbar_title);
+        final TextView titleview = ButterKnife.findById(activity, R.id.actionbar_title);
         if (titleview != null) {
             titleview.setText(title);
 
@@ -529,7 +533,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
 
 
-        final CheckBox locSwitch = (CheckBox) activity.findViewById(R.id.my_position);
+        final CheckBox locSwitch = ButterKnife.findById(activity, R.id.my_position);
         if (locSwitch!=null) {
             initMyLocationSwitchButton(locSwitch);
         }
@@ -563,7 +567,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         // show the filter warning bar if the filter is set
         if (Settings.getCacheType() != CacheType.ALL) {
             final String cacheType = Settings.getCacheType().getL10n();
-            ((TextView) activity.findViewById(R.id.filter_text)).setText(cacheType);
+            final TextView filterTitleView = ButterKnife.findById(activity, R.id.filter_text);
+            filterTitleView.setText(cacheType);
             activity.findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
         } else {
             activity.findViewById(R.id.filter_bar).setVisibility(View.GONE);
