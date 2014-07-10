@@ -9,7 +9,6 @@
   <string name="about">c:geoについて</string>
   <string name="latitude">緯度</string>
   <string name="longitude">経度</string>
-  <string name="action_bar_share_title">キャッシュのリンクを共有</string>
   <string name="settings_titlebar">c:geo 設定</string>
   <string name="all_types">全てのタイプのキャッシュ</string>
   <string name="traditional">トラディショナルキャッシュ</string>
@@ -77,21 +76,9 @@
   <string name="log_saving_and_uploading">ログと画像を送信中…</string>
   <string name="log_clear">消去</string>
   <string name="log_post">ログの投稿</string>
-  <string name="log_post_rate">ログの投稿と評価:</string>
-  <string name="log_post_no_rate">ログの投稿(未評価)</string>
   <string name="log_post_not_possible">ログのページをロード中…</string>
   <string name="log_add">挿入</string>
-  <string name="log_rating">評価</string>
   <string name="log_no_rating">未評価</string>
-  <string name="log_stars_1">星1つ</string>
-  <string name="log_stars_15">星1.5</string>
-  <string name="log_stars_2">星2つ</string>
-  <string name="log_stars_25">星2.5</string>
-  <string name="log_stars_3">星3つ</string>
-  <string name="log_stars_35">星3.5</string>
-  <string name="log_stars_4">星4つ</string>
-  <string name="log_stars_45">星4.5</string>
-  <string name="log_stars_5">星5つ</string>
   <string name="log_stars_1_description">お粗末</string>
   <string name="log_stars_15_description">見劣りする</string>
   <string name="log_stars_2_description">平均以下</string>
@@ -110,7 +97,6 @@
   <string name="log_smilies">スマイルマーク</string>
   <string name="log_image">画像</string>
   <string name="log_image_attach">画像を添付</string>
-  <string name="log_image_edit">添付画像を変更</string>
   <string name="log_image_stored">ファイル選択</string>
   <string name="log_image_camera">撮影</string>
   <string name="log_image_caption">タイトル</string>
@@ -118,6 +104,13 @@
   <string name="log_image_scale">拡大縮小</string>
   <string name="log_password_title">Log Password:</string>
   <string name="log_hint_log_password">Enter your log password</string>
+  <string-array name="log_image_scales">
+    <item>実サイズ</item>
+    <item>512 px</item>
+    <item>640 px</item>
+    <item>800 px</item>
+    <item>1024 px</item>
+  </string-array>
   <string name="translate_to_sys_lang">%sに翻訳</string>
   <string name="translate_to_english">英語に翻訳</string>
   <string name="translate_length_warning">文章が長すぎるので翻訳できないかもしれません。</string>
@@ -235,6 +228,9 @@
   <string name="caches_more_caches_currently">現在</string>
   <string name="caches_downloading">キャッシュ情報をダウンロード中…\n残り時間: </string>
   <string name="caches_eta_ltm">1分以内</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="other">分</item>
+  </plurals>
   <string name="caches_store_offline">オフライン用に保存</string>
   <string name="caches_store_selected">選択したキャッシュを保存</string>
   <string name="caches_history">履歴</string>
@@ -262,13 +258,6 @@
   <string name="caches_select_invert">選択を反転</string>
   <string name="caches_nearby">現在地の近く</string>
   <string name="caches_manage">管理</string>
-  <string name="caches_drop_selected">選択したキャッシュを削除</string>
-  <string name="caches_drop_selected_ask">選択したキャッシュをデバイスから削除しますか?</string>
-  <string name="caches_drop_all">全て削除</string>
-  <string name="caches_drop_all_ask">全てのキャッシュをデバイスから削除しますか?</string>
-  <string name="caches_drop_stored">削除</string>
-  <string name="caches_drop_progress">キャッシュを削除中</string>
-  <string name="caches_drop_all_and_list">全て削除し、リストも消去</string>
   <string name="caches_delete_events">過去のイベントを削除</string>
   <string name="caches_refresh_selected">選択したキャッシュを更新</string>
   <string name="caches_refresh_all">全てのキャッシュを更新</string>
@@ -295,10 +284,8 @@
   <string name="caches_removing_from_history">履歴から削除中…</string>
   <string name="caches_clear_offlinelogs">全てのオフラインログを削除</string>
   <string name="caches_clear_offlinelogs_progress">全てのオフラインログを削除中</string>
-  <string name="list_menu">リスト</string>
   <string name="list_menu_create">新しいリストを作成</string>
   <string name="list_menu_drop">このリストを消去</string>
-  <string name="list_menu_change">別のリストにする</string>
   <string name="list_menu_rename">このリスト名を変更</string>
   <string name="list_title">リストの選択</string>
   <string name="list_inbox">保存済み</string>
@@ -381,8 +368,6 @@
   <string name="init_signature_template_url">URL</string>
   <string name="init_ratingwanted">GCvote評価</string>
   <string name="init_summary_ratingwanted">キャッシュの評価をGCvote.comから取得</string>
-  <string name="init_friendlogswanted">友達のログページ</string>
-  <string name="init_summary_friendlogswanted">友達の書いたログを別ページに表示</string>
   <string name="init_openlastdetailspage">最後に表示したページ</string>
   <string name="init_summary_openlastdetailspage">キャッシュ情報の表示では最後に表示したページを開く</string>
   <string name="init_autoload">詳細表示</string>
@@ -491,6 +476,9 @@
   <string name="auth_dialog_completed_twitter">c:geoはTwitterにポストするための認証を受けました。</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_dialog_completed_oc">c:geoは%sと連携するための認証を受けました。</string>
+  <plurals name="cache_counts">
+    <item quantity="other">%1$d キャッシュ</item>
+  </plurals>
   <string name="cache_offline">オフライン</string>
   <string name="cache_offline_refresh">更新</string>
   <string name="cache_offline_drop">削除</string>
@@ -506,7 +494,6 @@
   <string name="cache_premium">プレミアム会員</string>
   <string name="cache_attributes">属性</string>
   <string name="cache_inventory">目録</string>
-  <string name="cache_log_offline">オフラインログ</string>
   <string name="cache_log_images_title">ログの添付画像</string>
   <string name="cache_log_image_default_title">写真</string>
   <string name="cache_personal_note">パーソナルノート</string>
@@ -517,8 +504,6 @@
   <string name="cache_personal_note_uploading">パーソナルノートをアップロード中</string>
   <string name="cache_personal_note_upload_done">パーソナルノートをアップロードしました</string>
   <string name="cache_personal_note_upload_cancelled">パーソナルノートのアップロードをキャンセルしました</string>
-  <string name="cache_personal_note_unstored">キャッシュ情報が保存されていません</string>
-  <string name="cache_personal_note_store">パーソナルノートを有効にするためにキャッシュ情報を保存します。</string>
   <string name="cache_description">説明</string>
   <string name="cache_description_long">全て表示</string>
   <string name="cache_description_table_note">キャッシュ情報の説明にはhtmlを使ったテーブル表が含まれています。正しく表示するには%sで開く必要があるかもしれません。</string>
@@ -535,10 +520,12 @@
   <string name="cache_list_unknown">Not in a list</string>
   <string name="cache_images">画像</string>
   <string name="cache_waypoints">ウェイポイント</string>
+  <plurals name="waypoints">
+    <item quantity="other">%d ウェイポイント</item>
+  </plurals>
   <string name="cache_waypoints_add">ウェイポイントを追加</string>
   <string name="cache_hint">ヒント</string>
   <string name="cache_logs">ログブック</string>
-  <string name="cache_logsfriends">ログブック(友達)</string>
   <string name="cache_dialog_loading_details">キャッシュの詳細をロード中…</string>
   <string name="cache_dialog_loading_details_status_loadpage">ページをロード中</string>
   <string name="cache_dialog_loading_details_status_details">詳細を処理中</string>
@@ -584,10 +571,8 @@
   <string name="cache_menu_refresh">更新</string>
   <string name="cache_menu_share">キャッシュを共有</string>
   <string name="cache_menu_move_list">他のリストに移動</string>
-  <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
-  <string name="cache_menu_cachebeacon">キャッシュビーコン</string>
   <string name="cache_status">状態</string>
   <string name="cache_status_offline_log">保存済みのログ</string>
   <string name="cache_status_found">見つかった</string>
@@ -701,10 +686,7 @@
   <string name="map_view_map">地図の変更</string>
   <string name="map_modes">表示切替</string>
   <string name="map_trail_show">軌跡を表示</string>
-  <string name="map_trail_hide">軌跡を非表示</string>
   <string name="map_circles_show">0.1マイル円を表示</string>
-  <string name="map_circles_hide">円を非表示</string>
-  <string name="map_mycaches_show">所有/見つけたキャッシュを表示</string>
   <string name="map_mycaches_hide">所有/見つけたキャッシュを非表示</string>
   <string name="map_theme_builtin">デフォルト</string>
   <string name="map_theme_select">地図のテーマを選択</string>
@@ -784,7 +766,6 @@
   <string name="use_gps">GPSのみ使用</string>
   <string name="use_compass">GPSとコンパスを使用</string>
   <string name="destination_select">目的地を選択</string>
-  <string name="destination_set">目的地を入力</string>
   <string name="navigation_direct_navigation">Direct Navigation</string>
   <string name="navigation_target">Target</string>
   <string name="err_nav_no_coordinates">座標値が未入力なのでナビゲーションが開始できません</string>
@@ -1023,7 +1004,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
   <string name="website">Webサイト: <a href="">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="nutshellmanual">マニュアル: <a href="">c:geo マニュアル(英語)</a></string>
   <string name="market">Android: <a href="">Google Playのc:geo</a></string>
   <string name="about_twitter">キャッシュのログを書いたら<b>c:geo</b>にTwitterでつぶやいてほしい?</string>
   <string name="status_new_release" tools:ignore="UnusedResources">新しいバージョンがあります。\nクリックしてインストールしてください。</string>
@@ -1036,29 +1016,13 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
   <string name="tts_start">音声案内開始</string>
   <string name="tts_stop">音声案内終了</string>
   <string name="tts_one_kilometer">1 km</string>
+  <plurals name="tts_kilometers">
+    <item quantity="other">%s キロメートル</item>
+  </plurals>
   <string name="tts_one_meter">1 m</string>
   <string name="tts_one_mile">1 マイル</string>
   <string name="tts_one_foot">1 フィート</string>
   <string name="tts_one_oclock">1 時</string>
   <string name="tts_oclock">%s 時</string>
   <string name="clipboard_copy_ok">クリップボードにコピーしました</string>
-  <string-array name="log_image_scales">
-    <item>実サイズ</item>
-    <item>512 px</item>
-    <item>640 px</item>
-    <item>800 px</item>
-    <item>1024 px</item>
-  </string-array>
-  <plurals name="caches_eta_mins">
-    <item quantity="other">分</item>
-  </plurals>
-  <plurals name="cache_counts">
-    <item quantity="other">%1$d キャッシュ</item>
-  </plurals>
-  <plurals name="waypoints">
-    <item quantity="other">%d ウェイポイント</item>
-  </plurals>
-  <plurals name="tts_kilometers">
-    <item quantity="other">%s キロメートル</item>
-  </plurals>
 </resources>

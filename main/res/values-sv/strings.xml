@@ -9,7 +9,6 @@
   <string name="about">Om c:geo</string>
   <string name="latitude">Latitud</string>
   <string name="longitude">Longitud</string>
-  <string name="action_bar_share_title">Skicka cachens länk via</string>
   <string name="settings_titlebar">Inställningar för c:geo</string>
   <string name="all_types">Alla typer av cacher</string>
   <string name="traditional">Traditionell cache</string>
@@ -18,6 +17,7 @@
   <string name="letterbox">Letterbox hybrid</string>
   <string name="event">Event cache</string>
   <string name="mega">Mega-event cache</string>
+  <string name="giga">Giga-Event Cache</string>
   <string name="earth">Earthcache</string>
   <string name="cito">Cache in trash out event</string>
   <string name="webcam">Webcam cache</string>
@@ -79,21 +79,9 @@
   <string name="log_saving_and_uploading">Sparar logg och laddar upp bild…</string>
   <string name="log_clear">Rensa</string>
   <string name="log_post">Posta logg</string>
-  <string name="log_post_rate">Posta logg &amp; ge betyget</string>
-  <string name="log_post_no_rate">Posta logg utan betyg</string>
   <string name="log_post_not_possible">Laddar loggningssida…</string>
   <string name="log_add">Lägg till</string>
-  <string name="log_rating">Betyg</string>
   <string name="log_no_rating">Inget betyg</string>
-  <string name="log_stars_1">1 stjärna</string>
-  <string name="log_stars_15">1.5 stjärnor</string>
-  <string name="log_stars_2">2 stjärnor</string>
-  <string name="log_stars_25">2.5 stjärnor</string>
-  <string name="log_stars_3">3 stjärnor</string>
-  <string name="log_stars_35">3.5 stjärnor</string>
-  <string name="log_stars_4">4 stjärnor</string>
-  <string name="log_stars_45">4.5 stjärnor</string>
-  <string name="log_stars_5">5 stjärnor</string>
   <string name="log_stars_1_description">Dålig</string>
   <string name="log_stars_15_description">Halvdålig</string>
   <string name="log_stars_2_description">Under medel</string>
@@ -112,7 +100,6 @@
   <string name="log_smilies">Smileys</string>
   <string name="log_image">Bild</string>
   <string name="log_image_attach">Lägg till bild</string>
-  <string name="log_image_edit">Redigera bild</string>
   <string name="log_image_stored">Från fil</string>
   <string name="log_image_camera">Ny</string>
   <string name="log_image_caption">Bildtext</string>
@@ -121,6 +108,13 @@
   <string name="log_password_title">Logglösenord:</string>
   <string name="log_hint_log_password">Ange ditt lösenord för loggning</string>
   <string name="log_oc_team_comment">Meddelande från OC Team</string>
+  <string-array name="log_image_scales">
+    <item>Ingen skalning</item>
+    <item>512 px</item>
+    <item>640 px</item>
+    <item>800 px</item>
+    <item>1024 px</item>
+  </string-array>
   <string name="translate_to_sys_lang">Översätt till %s</string>
   <string name="translate_to_english">Översätt till engelska</string>
   <string name="translate_length_warning">Översättningen kan misslyckas med långa texter.</string>
@@ -241,6 +235,10 @@
   <string name="caches_more_caches_currently">nu</string>
   <string name="caches_downloading">Laddar ner cacher…\nTid kvar: </string>
   <string name="caches_eta_ltm">mindre än en minut</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="one">minut</item>
+    <item quantity="other">minuter</item>
+  </plurals>
   <string name="caches_store_offline">Spara för Offline</string>
   <string name="caches_store_selected">Spara valda</string>
   <string name="caches_history">Senast hittade cacher</string>
@@ -268,13 +266,6 @@
   <string name="caches_select_invert">Invertera valda</string>
   <string name="caches_nearby">Nära</string>
   <string name="caches_manage">Hantera</string>
-  <string name="caches_drop_selected">Ta bort valda</string>
-  <string name="caches_drop_selected_ask">Vill du ta bort valda cacher från enheten?</string>
-  <string name="caches_drop_all">Ta bort alla</string>
-  <string name="caches_drop_all_ask">Vill du ta bort alla cacher från enheten?</string>
-  <string name="caches_drop_stored">Ta bort sparade</string>
-  <string name="caches_drop_progress">Tar bort cacher</string>
-  <string name="caches_drop_all_and_list">Ta bort listan och dess cacher</string>
   <string name="caches_delete_events">Ta bort gamla event</string>
   <string name="caches_refresh_selected">Uppdatera valda</string>
   <string name="caches_refresh_all">Uppdatera alla</string>
@@ -282,6 +273,7 @@
   <string name="caches_move_all">Flytta alla</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Exportera till Locus</string>
+  <string name="caches_map_mapswithme">MapsWithMe</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Skriv texten som syns i bilden. Det krävs för att hämta koordinaterna för cacherna i listan. Det går att fortsätta ändå (men med sämre funktionalitet).</string>
   <string name="caches_recaptcha_hint">Text från bilden</string>
@@ -301,10 +293,8 @@
   <string name="caches_removing_from_history">Tar bort från historik…</string>
   <string name="caches_clear_offlinelogs">Rensa offline loggar</string>
   <string name="caches_clear_offlinelogs_progress">Rensar offline loggar</string>
-  <string name="list_menu">Listor</string>
   <string name="list_menu_create">Skapa en ny lista</string>
   <string name="list_menu_drop">Ta bort den här listan</string>
-  <string name="list_menu_change">Byt lista</string>
   <string name="list_menu_rename">Byt namn på den här listan</string>
   <string name="list_title">Välj en lista</string>
   <string name="list_inbox">Sparade</string>
@@ -355,7 +345,7 @@
   <string name="settings_activate_ox">Aktivera</string>
   <string name="settings_gc_legal_note">Genom att använda tjänster hos geocaching.com godkänner du Groundspeaks användarvillkor.</string>
   <string name="settings_info_facebook_login_title">Facebook inloggning</string>
-  <string name="settings_info_facebook_login">c:geo kan inte logga inte logga in på geocaching.com med ditt Facebook konto. Men det finns en enkel lösning …</string>
+  <string name="settings_info_facebook_login">c:geo kan inte logga inte logga in på geocaching.com med ditt Facebook konto. Men det finns en enkel lösning…</string>
   <string name="settings_authorize">Tillåt c:geo</string>
   <string name="settings_reauthorize">Tillåt c:geo igen</string>
   <string name="init_oc">Opencaching.de</string>
@@ -402,8 +392,8 @@
   <string name="init_signature_template_log">Loggtext</string>
   <string name="init_ratingwanted">GCvote.com</string>
   <string name="init_summary_ratingwanted">Ladda cache betyg från GCvote.com</string>
-  <string name="init_friendlogswanted">Vänners loggar</string>
-  <string name="init_summary_friendlogswanted">Ladda extra sida med loggbok för dina vänner</string>
+  <string name="init_friends_and_own_logs_wanted">Visa vänners/egna</string>
+  <string name="init_summary_friends_and_own_logs_wanted">Visa en extra loggbok med dina vänners och egna loggar</string>
   <string name="init_openlastdetailspage">Visning av cachedetaljer</string>
   <string name="init_summary_openlastdetailspage">Visa senaste använda delsidan när detaljer öppnas</string>
   <string name="init_autoload">Cachebeskrivning</string>
@@ -542,6 +532,10 @@
   <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_dialog_completed_oc">c:geo är nu godkänd för att kommunicera med %s.</string>
+  <plurals name="cache_counts">
+    <item quantity="one">En cache</item>
+    <item quantity="other">%1$d cacher</item>
+  </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Uppdatera</string>
   <string name="cache_offline_drop">Radera</string>
@@ -557,7 +551,6 @@
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Attribut</string>
   <string name="cache_inventory">Innehåll</string>
-  <string name="cache_log_offline">Offline logg</string>
   <string name="cache_log_images_title">Loggbild</string>
   <string name="cache_log_image_default_title">Foto</string>
   <string name="cache_personal_note">Personlig anteckning</string>
@@ -568,8 +561,6 @@
   <string name="cache_personal_note_uploading">Laddar upp personlig anteckning</string>
   <string name="cache_personal_note_upload_done">Den personliga anteckning har laddats upp</string>
   <string name="cache_personal_note_upload_cancelled">Uppladdningen av personliga anteckning avbruten</string>
-  <string name="cache_personal_note_unstored">Cachen ej sparad</string>
-  <string name="cache_personal_note_store">Cachen kommer att sparas först för att kunna hantera personlig anteckning.</string>
   <string name="cache_description">Beskrivning</string>
   <string name="cache_description_long">Lång beskrivning</string>
   <string name="cache_description_table_note">Beskrivningen innehåller tabellformatering som eventuellt behöver läsas på %s för att se korrekt ut.</string>
@@ -586,10 +577,14 @@
   <string name="cache_list_unknown">Ej i någon lista</string>
   <string name="cache_images">Bilder</string>
   <string name="cache_waypoints">Punkter</string>
+  <plurals name="waypoints">
+    <item quantity="one">1 Punkt</item>
+    <item quantity="other">%d Punkter</item>
+  </plurals>
   <string name="cache_waypoints_add">Lägg till punkt</string>
   <string name="cache_hint">Tips</string>
   <string name="cache_logs">Loggbok</string>
-  <string name="cache_logsfriends">Loggbok (Vänner)</string>
+  <string name="cache_logs_friends_and_own">Vänners/egna loggar</string>
   <string name="cache_dialog_loading_details">Laddar detaljer om cachen…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Hämtar från gc.com</string>
   <string name="cache_dialog_loading_details_status_details">Analyserar cacheinformation</string>
@@ -635,15 +630,15 @@
   <string name="cache_menu_refresh">Uppdatera</string>
   <string name="cache_menu_share">Skicka länk</string>
   <string name="cache_menu_move_list">Flytta till annan lista</string>
-  <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
-  <string name="cache_menu_cachebeacon">Cache Beacon</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
+  <string name="cache_menu_mapswithme">MapsWithMe</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Sparad logg</string>
   <string name="cache_status_found">Hittad</string>
+  <string name="cache_not_status_found">Ej hittad</string>
   <string name="cache_status_archived">Arkiverad</string>
   <string name="cache_status_disabled">Inaktiverad</string>
   <string name="cache_status_premium">Enbart för Premium medlemmar</string>
@@ -755,10 +750,7 @@
   <string name="map_view_map">Karttyp</string>
   <string name="map_modes">Kartlägen</string>
   <string name="map_trail_show">Visa spår</string>
-  <string name="map_trail_hide">Dölj spår</string>
   <string name="map_circles_show">Visa cirklar</string>
-  <string name="map_circles_hide">Dölj cirklar</string>
-  <string name="map_mycaches_show">Visa egna/funna cacher</string>
   <string name="map_mycaches_hide">Dölj egna/funna cacher</string>
   <string name="map_theme_builtin">Standard</string>
   <string name="map_theme_select">Välj karttema</string>
@@ -841,7 +833,6 @@
   <string name="use_gps">Använd enbart GPS</string>
   <string name="use_compass">Använd GPS och kompass</string>
   <string name="destination_select">Välj målpunkt</string>
-  <string name="destination_set">Sätt målpunkt</string>
   <string name="navigation_direct_navigation">Direkt navigering</string>
   <string name="navigation_target">Mål</string>
   <string name="err_nav_no_coordinates">Kan inte starta navigering utan koordinater</string>
@@ -1112,7 +1103,6 @@
   <string name="website">Hemsida: <a href="">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="">c:geo</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="nutshellmanual">Manual: <a href="">c:geo in a Nutshell</a></string>
   <string name="market">Android: <a href="">c:geo på Google Play</a></string>
   <string name="about_twitter">Ska <b>c:geo</b> publicera ny status på Twitter varje gång en cache loggas?</string>
   <string name="faq">FAQ: <a href="">faq.cgeo.org</a></string>
@@ -1128,52 +1118,33 @@
   <string name="tts_stop">Stoppa tal</string>
   <string name="err_tts_lang_not_supported">Detta språk hanteras inte av text-to-speech.</string>
   <string name="tts_one_kilometer">en kilometer</string>
-  <string name="tts_one_meter">en meter</string>
-  <string name="tts_one_mile">en engelsk mil</string>
-  <string name="tts_one_foot">en fot</string>
-  <string name="tts_one_oclock">Klockan ett</string>
-  <string name="tts_oclock">Klockan %s</string>
-  <string name="clipboard_copy_ok">Kopierat till urklipp</string>
-  <string name="percent_favorite_points">%\  favoriter</string>
-  <string name="cgeo_shortcut">c:geo genväg</string>
-  <string name="create_shortcut">Skapa genväg</string>
-  <string-array name="log_image_scales">
-    <item>Ingen skalning</item>
-    <item>512 px</item>
-    <item>640 px</item>
-    <item>800 px</item>
-    <item>1024 px</item>
-  </string-array>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">minut</item>
-    <item quantity="other">minuter</item>
-  </plurals>
-  <plurals name="cache_counts">
-    <item quantity="one">En cache</item>
-    <item quantity="other">%1$d cacher</item>
-  </plurals>
-  <plurals name="waypoints">
-    <item quantity="one">1 Punkt</item>
-    <item quantity="other">%d Punkter</item>
-  </plurals>
   <plurals name="tts_kilometers">
     <item quantity="one">%s kilometer</item>
     <item quantity="other">%s kilometer</item>
   </plurals>
+  <string name="tts_one_meter">en meter</string>
   <plurals name="tts_meters">
     <item quantity="one">%s meter</item>
     <item quantity="other">%s meter</item>
   </plurals>
+  <string name="tts_one_mile">en engelsk mil</string>
   <plurals name="tts_miles">
     <item quantity="one">%s engelsk mil</item>
     <item quantity="other">%s engelsk mil</item>
   </plurals>
+  <string name="tts_one_foot">en fot</string>
   <plurals name="tts_feet">
     <item quantity="one">%s fot</item>
     <item quantity="other">%s fot</item>
   </plurals>
+  <string name="tts_one_oclock">Klockan ett</string>
+  <string name="tts_oclock">Klockan %s</string>
+  <string name="clipboard_copy_ok">Kopierat till urklipp</string>
   <plurals name="days_ago">
     <item quantity="one">igår</item>
     <item quantity="other">%d dagar sedan</item>
   </plurals>
+  <string name="percent_favorite_points">%\  favoriter</string>
+  <string name="cgeo_shortcut">c:geo genväg</string>
+  <string name="create_shortcut">Skapa genväg</string>
 </resources>

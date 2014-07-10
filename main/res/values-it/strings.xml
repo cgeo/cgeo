@@ -9,7 +9,6 @@
   <string name="about">Info c:geo</string>
   <string name="latitude">Latitudine</string>
   <string name="longitude">Longitudine</string>
-  <string name="action_bar_share_title">Condividi link al cache</string>
   <string name="settings_titlebar">Impostazioni di c:geo</string>
   <string name="all_types">Tutti i tipi di cache</string>
   <string name="traditional">Traditional cache</string>
@@ -18,6 +17,7 @@
   <string name="letterbox">Letterbox hybrid</string>
   <string name="event">Cache Evento</string>
   <string name="mega">Mega-event cache</string>
+  <string name="giga">Giga-event cache</string>
   <string name="earth">Earthcache</string>
   <string name="cito">Evento Cache In Trash Out</string>
   <string name="webcam">Webcam cache</string>
@@ -79,21 +79,9 @@
   <string name="log_saving_and_uploading">Invio log e immagine…</string>
   <string name="log_clear">Azzera</string>
   <string name="log_post">Invia log</string>
-  <string name="log_post_rate">Invia log + voto</string>
-  <string name="log_post_no_rate">Invia log senza voto</string>
   <string name="log_post_not_possible">Connessione…</string>
   <string name="log_add">Aggiungi</string>
-  <string name="log_rating">Voto</string>
   <string name="log_no_rating">Nessun voto</string>
-  <string name="log_stars_1">1 stella</string>
-  <string name="log_stars_15">1.5 stelle</string>
-  <string name="log_stars_2">2 stelle</string>
-  <string name="log_stars_25">2.5 stelle</string>
-  <string name="log_stars_3">3 stelle</string>
-  <string name="log_stars_35">3.5 stelle</string>
-  <string name="log_stars_4">4 stelle</string>
-  <string name="log_stars_45">4.5 stelle</string>
-  <string name="log_stars_5">5 stelle</string>
   <string name="log_stars_1_description">proprio brutto</string>
   <string name="log_stars_15_description">abbastanza brutto</string>
   <string name="log_stars_2_description">bruttino</string>
@@ -112,7 +100,6 @@
   <string name="log_smilies">Faccine</string>
   <string name="log_image">Immagine</string>
   <string name="log_image_attach">Aggiungi immagine</string>
-  <string name="log_image_edit">Modifica immagine</string>
   <string name="log_image_stored">Esistente</string>
   <string name="log_image_camera">Nuova</string>
   <string name="log_image_caption">Didascalia</string>
@@ -121,6 +108,13 @@
   <string name="log_password_title">Log Password:</string>
   <string name="log_hint_log_password">Inserisci la password per il log</string>
   <string name="log_oc_team_comment">Commenti del Team OC</string>
+  <string-array name="log_image_scales">
+    <item>Dimensioni originali</item>
+    <item>512 px</item>
+    <item>640 px</item>
+    <item>800 px</item>
+    <item>1024 px</item>
+  </string-array>
   <string name="translate_to_sys_lang">Traduci in %s</string>
   <string name="translate_to_english">Traduci in inglese</string>
   <string name="translate_length_warning">La traduzione può fallire quando c\'è molto testo.</string>
@@ -213,6 +207,7 @@
   <string name="info_select_logimage_cancelled">Selezione o cattura immagine annulata.</string>
   <string name="info_stored_image">Nuova immagine salvata su:</string>
   <string name="info_storing_static_maps">Tento di salvare le mappe statiche</string>
+  <string name="info_cache_saved">Il cache è stato salvato localmente</string>
   <string name="loc_last">Ultima nota</string>
   <string name="loc_net">Network</string>
   <string name="loc_gps">GPS</string>
@@ -220,6 +215,7 @@
   <string name="loc_trying">Localizzazione in corso</string>
   <string name="loc_no_addr">Indirizzo sconosciuto</string>
   <string name="loc_gps_disabled">GPS non attivo</string>
+  <string name="menu_centerposition">Centra sulla mia posizione</string>
   <string name="menu_about">Info su c:geo</string>
   <string name="menu_helpers">Programmi utili</string>
   <string name="menu_settings">Impostazioni</string>
@@ -241,6 +237,10 @@
   <string name="caches_more_caches_currently">attualmente</string>
   <string name="caches_downloading">Download cache in corso…\nETA: </string>
   <string name="caches_eta_ltm">Meno di un minuto</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="one">minuto</item>
+    <item quantity="other">minuti</item>
+  </plurals>
   <string name="caches_store_offline">Salva per Offline</string>
   <string name="caches_store_selected">Salva selezionati</string>
   <string name="caches_history">Cronologia</string>
@@ -268,13 +268,11 @@
   <string name="caches_select_invert">Inverti selezione</string>
   <string name="caches_nearby">Qui vicino</string>
   <string name="caches_manage">Gestisci</string>
-  <string name="caches_drop_selected">Elimina selezionati</string>
-  <string name="caches_drop_selected_ask">Vuoi rimuovere i cache selezionati dal dispositivo?</string>
-  <string name="caches_drop_all">Elimina tutti</string>
-  <string name="caches_drop_all_ask">Vuoi rimuovere tutti i cache dalla lista corrente?</string>
-  <string name="caches_drop_stored">Elimina i cache salvati</string>
-  <string name="caches_drop_progress">Eliminazione dei cache</string>
-  <string name="caches_drop_all_and_list">Elimina tutti ed elimina la lista</string>
+  <string name="caches_remove_all">Elimina tutti</string>
+  <string name="caches_remove_all_confirm">Vuoi rimuovere tutti i %s cache dalla lista corrente?</string>
+  <string name="caches_remove_selected">Elimina selezionati</string>
+  <string name="caches_remove_selected_confirm">Vuoi rimuovere i %s cache selezionati dal dispositivo?</string>
+  <string name="caches_remove_progress">Eliminazione dei cache</string>
   <string name="caches_delete_events">Cancella eventi passati</string>
   <string name="caches_refresh_selected">Aggiorna i cache selezionati</string>
   <string name="caches_refresh_all">Aggiorna tutti</string>
@@ -301,11 +299,10 @@
   <string name="caches_removing_from_history">Rimozione dalla cronologia…</string>
   <string name="caches_clear_offlinelogs">Cancella i log offline</string>
   <string name="caches_clear_offlinelogs_progress">Cancellazione logs offline</string>
-  <string name="list_menu">Lista</string>
   <string name="list_menu_create">Crea nuova lista</string>
   <string name="list_menu_drop">Elimina la lista corrente</string>
-  <string name="list_menu_change">Cambia lista</string>
   <string name="list_menu_rename">Rinomina la lista corrente</string>
+  <string name="list_menu_import">Importazione</string>
   <string name="list_title">Seleziona una lista</string>
   <string name="list_inbox">Salvate</string>
   <string name="list_all_lists">Tutti i cache</string>
@@ -355,7 +352,7 @@
   <string name="settings_activate_ox">Attiva</string>
   <string name="settings_gc_legal_note">Per usare i servizi di Geocaching.com, si applicano i termini e le condizioni del Contratto Groundspeak che deve essere approvato dall\'utente.</string>
   <string name="settings_info_facebook_login_title">Facebook Login</string>
-  <string name="settings_info_facebook_login">Con il tuo account di Facebook non puoi fare login su geocaching.com. Ma c\'è una soluzione semplice …</string>
+  <string name="settings_info_facebook_login">Con il tuo account di Facebook non puoi fare login su geocaching.com. Ma c\'è una soluzione semplice…</string>
   <string name="settings_authorize">Autorizza c:geo</string>
   <string name="settings_reauthorize">Autorizza nuovamente c:geo</string>
   <string name="init_oc">Opencaching.de</string>
@@ -399,8 +396,8 @@
   <string name="init_signature_template_log">Testo di Log</string>
   <string name="init_ratingwanted">Rating da GCvote.com</string>
   <string name="init_summary_ratingwanted">Carica il rating del cache da GCvote.com</string>
-  <string name="init_friendlogswanted">Visualizza log dei miei amici</string>
-  <string name="init_summary_friendlogswanted">Carica logbook addizionale con i log dei miei amici</string>
+  <string name="init_friends_and_own_logs_wanted">Visualizza i tuoi/dei tuoi amici</string>
+  <string name="init_summary_friends_and_own_logs_wanted">Visualizza una pagina di log addizionale per i log dei tuoi amici e i tuoi log</string>
   <string name="init_openlastdetailspage">Carica ultima pagina usata nei dettagli</string>
   <string name="init_summary_openlastdetailspage">Ricorda l\'ultima pagina usata nei dettagli</string>
   <string name="init_autoload">Descrizione estesa</string>
@@ -489,6 +486,9 @@
   <string name="init_maintenance">Manutenzione</string>
   <string name="init_maintenance_directories_note">c:geo memorizza immagini, immagini log e altri file (correlati a un cache) in una cartella separata. In alcuni casi (es.: dopo import/esport del database) questa cartella potrebbe contenere file obsoleti, che possono essere cancellati da qui.</string>
   <string name="init_maintenance_directories">Elimina file orfani</string>
+  <string name="init_create_memory_dump">Salva la memoria del programma</string>
+  <string name="init_memory_dump">Salvataggio memoria</string>
+  <string name="init_memory_dumped">Memoria salvata in %s</string>
   <string name="settings_open_website">Apri il sito</string>
   <string name="settings_settings">Impostazioni</string>
   <string name="settings_information">Informazioni</string>
@@ -536,6 +536,10 @@
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
   <string name="auth_dialog_completed_oc">c:geo è ora autorizzato ad accedere a %s.</string>
+  <plurals name="cache_counts">
+    <item quantity="one">Un cache</item>
+    <item quantity="other">%1$d cache</item>
+  </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Aggiorna</string>
   <string name="cache_offline_drop">Elimina</string>
@@ -551,7 +555,6 @@
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Attributi</string>
   <string name="cache_inventory">Oggetti</string>
-  <string name="cache_log_offline">Log Offline</string>
   <string name="cache_log_images_title">Immagini Log</string>
   <string name="cache_log_image_default_title">Foto</string>
   <string name="cache_personal_note">Note personali</string>
@@ -562,8 +565,6 @@
   <string name="cache_personal_note_uploading">Nota personale in caricamento</string>
   <string name="cache_personal_note_upload_done">Nota personale caricata</string>
   <string name="cache_personal_note_upload_cancelled">Caricamento nota personale annullato</string>
-  <string name="cache_personal_note_unstored">Cache non salvati</string>
-  <string name="cache_personal_note_store">Il cache verrà prima salvato per abilitare le note personali.</string>
   <string name="cache_description">Descrizione</string>
   <string name="cache_description_long">Descrizione estesa</string>
   <string name="cache_description_table_note">La descrizione contiene una tabella formattata in modo tale che potresti aver bisogno di andare su %s per vederla correttamente.</string>
@@ -580,10 +581,14 @@
   <string name="cache_list_unknown">Non in una lista</string>
   <string name="cache_images">Immagini</string>
   <string name="cache_waypoints">Waypoints</string>
+  <plurals name="waypoints">
+    <item quantity="one">1 Waypoint</item>
+    <item quantity="other">%d Waypoint</item>
+  </plurals>
   <string name="cache_waypoints_add">Aggiungi waypoint</string>
   <string name="cache_hint">Aiuto (spoiler)</string>
   <string name="cache_logs">Logbook</string>
-  <string name="cache_logsfriends">Log amici</string>
+  <string name="cache_logs_friends_and_own">Log tuoi e degli amici</string>
   <string name="cache_dialog_loading_details">Caricamento dettagli del cache…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Caricamento pagina</string>
   <string name="cache_dialog_loading_details_status_details">Elaborazione dettagli</string>
@@ -629,15 +634,14 @@
   <string name="cache_menu_refresh">Aggiorna</string>
   <string name="cache_menu_share">Condividi cache</string>
   <string name="cache_menu_move_list">Muovi in un\'altra lista</string>
-  <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
-  <string name="cache_menu_cachebeacon">Cache Beacon</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_status">Stato</string>
   <string name="cache_status_offline_log">Log salvato</string>
   <string name="cache_status_found">Trovato</string>
+  <string name="cache_not_status_found">Non trovato</string>
   <string name="cache_status_archived">Archiviato</string>
   <string name="cache_status_disabled">Non attivo</string>
   <string name="cache_status_premium">Solo per utenti Premium</string>
@@ -749,10 +753,7 @@
   <string name="map_view_map">Scegli mappa</string>
   <string name="map_modes">Modi mappa</string>
   <string name="map_trail_show">Mostra scia</string>
-  <string name="map_trail_hide">Nasconde scia</string>
   <string name="map_circles_show">Mostra area cache</string>
-  <string name="map_circles_hide">Nascondi area cache</string>
-  <string name="map_mycaches_show">Visualizza cache tuoi o che hai trovato</string>
   <string name="map_mycaches_hide">Nascondi i tuoi cache o che hai trovato</string>
   <string name="map_theme_builtin">Tema predefinito</string>
   <string name="map_theme_select">Scegli un tema mappa</string>
@@ -832,10 +833,10 @@
   <string name="user_menu_open_contact">Aprire scheda contatto</string>
   <string name="navigation">Navigazione</string>
   <string name="compass_title">Bussola</string>
+  <string name="compass_sensors">Sensori attivi</string>
   <string name="use_gps">Usa Nord solo da GPS</string>
   <string name="use_compass">Usa Nord da GPS e bussola</string>
   <string name="destination_select">Scegli destinazione</string>
-  <string name="destination_set">Attiva destinazione</string>
   <string name="navigation_direct_navigation">Navigazione diretta</string>
   <string name="navigation_target">Destinazione</string>
   <string name="err_nav_no_coordinates">Non è possibile avviare la navigazione senza coordinate</string>
@@ -1106,7 +1107,6 @@
   <string name="website">Sito: <a href="">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="">Pagina c:geo</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="nutshellmanual">Manuale: <a href="">c:geo in a Nutshell</a></string>
   <string name="market">Android: <a href="">c:geo su Google Play</a></string>
   <string name="about_twitter">Può <b>c:geo</b> pubblicare su Twitter ogni volta che logghi un cache?</string>
   <string name="faq">FAQ: <a href="">faq.cgeo.org</a></string>
@@ -1122,50 +1122,28 @@
   <string name="tts_stop">Stop voce</string>
   <string name="err_tts_lang_not_supported">Il linguaggio attivo non è supportato dal modulo di sintesi vocale.</string>
   <string name="tts_one_kilometer">un chilometro</string>
-  <string name="tts_one_meter">un metro</string>
-  <string name="tts_one_mile">un miglio</string>
-  <string name="tts_one_foot">un piede</string>
-  <string name="tts_one_oclock">a ore una</string>
-  <string name="tts_oclock">a ore %s</string>
-  <string name="clipboard_copy_ok">Copiato nella clipboard</string>
-  <string name="percent_favorite_points">%\  preferiti</string>
-  <string name="cgeo_shortcut">collegamento a c:geo</string>
-  <string name="create_shortcut">Crea collegamento</string>
-  <string-array name="log_image_scales">
-    <item>Dimensioni originali</item>
-    <item>512 px</item>
-    <item>640 px</item>
-    <item>800 px</item>
-    <item>1024 px</item>
-  </string-array>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">minuto</item>
-    <item quantity="other">minuti</item>
-  </plurals>
-  <plurals name="cache_counts">
-    <item quantity="one">Un cache</item>
-    <item quantity="other">%1$d cache</item>
-  </plurals>
-  <plurals name="waypoints">
-    <item quantity="one">1 Waypoint</item>
-    <item quantity="other">%d Waypoint</item>
-  </plurals>
   <plurals name="tts_kilometers">
     <item quantity="one">un chilometro</item>
     <item quantity="other">%s chilometri</item>
   </plurals>
+  <string name="tts_one_meter">un metro</string>
   <plurals name="tts_meters">
     <item quantity="one">un metro</item>
     <item quantity="other">%s metri</item>
   </plurals>
+  <string name="tts_one_mile">un miglio</string>
   <plurals name="tts_miles">
     <item quantity="one">un miglio</item>
     <item quantity="other">%s miglia</item>
   </plurals>
+  <string name="tts_one_foot">un piede</string>
   <plurals name="tts_feet">
     <item quantity="one">un piede</item>
     <item quantity="other">%s piedi</item>
   </plurals>
+  <string name="tts_one_oclock">a ore una</string>
+  <string name="tts_oclock">a ore %s</string>
+  <string name="clipboard_copy_ok">Copiato nella clipboard</string>
   <plurals name="days_ago">
     <item quantity="one">ieri</item>
     <item quantity="other">%d giorni fa</item>
@@ -1174,4 +1152,8 @@
     <item quantity="one">%s preferito</item>
     <item quantity="other">%s preferiti</item>
   </plurals>
+  <string name="percent_favorite_points">%\  preferiti</string>
+  <string name="cgeo_shortcut">collegamento a c:geo</string>
+  <string name="create_shortcut">Crea collegamento</string>
+  <string name="send">Invia</string>
 </resources>
