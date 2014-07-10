@@ -9,7 +9,6 @@
   <string name="about">Despre c:geo</string>
   <string name="latitude">Latitudine</string>
   <string name="longitude">Longitudine</string>
-  <string name="action_bar_share_title">Distribuie adresa cutiei</string>
   <string name="settings_titlebar">Configuraţii c:geo</string>
   <string name="all_types">Toate tipurile de cutii</string>
   <string name="traditional">Tradiţională</string>
@@ -80,21 +79,9 @@
   <string name="log_saving_and_uploading">Trimitre jurnal şi încarcare poze…</string>
   <string name="log_clear">Şterge</string>
   <string name="log_post">Trimite Însemnare</string>
-  <string name="log_post_rate">Trimite Însemnare &amp; Votează</string>
-  <string name="log_post_no_rate">Trimite Însemnare &amp; Fără Vot</string>
   <string name="log_post_not_possible">Încărcare pagină însemnări…</string>
   <string name="log_add">Adaugă</string>
-  <string name="log_rating">Vot</string>
   <string name="log_no_rating">Fără voturi</string>
-  <string name="log_stars_1">1 stea</string>
-  <string name="log_stars_15">1,5 stele</string>
-  <string name="log_stars_2">2 stele</string>
-  <string name="log_stars_25">2,5 stele</string>
-  <string name="log_stars_3">3 stele</string>
-  <string name="log_stars_35">3,5 stele</string>
-  <string name="log_stars_4">4 stele</string>
-  <string name="log_stars_45">4,5 stele</string>
-  <string name="log_stars_5">5 stele</string>
   <string name="log_stars_1_description">Foarte slabă</string>
   <string name="log_stars_15_description">Slabă</string>
   <string name="log_stars_2_description">Slăbuţă</string>
@@ -113,7 +100,6 @@
   <string name="log_smilies">Smilies</string>
   <string name="log_image">Imagine</string>
   <string name="log_image_attach">Ataşează imagine</string>
-  <string name="log_image_edit">Modifică imagine</string>
   <string name="log_image_stored">Existentă</string>
   <string name="log_image_camera">Nouă</string>
   <string name="log_image_caption">Titlu</string>
@@ -122,6 +108,13 @@
   <string name="log_password_title">Parolă:</string>
   <string name="log_hint_log_password">Introdu parola pentru jurnal</string>
   <string name="log_oc_team_comment">Comentariu din partea echipei OC</string>
+  <string-array name="log_image_scales">
+    <item>Fără redimensionare</item>
+    <item>512 px</item>
+    <item>640 px</item>
+    <item>800 px</item>
+    <item>1024 px</item>
+  </string-array>
   <string name="translate_to_sys_lang">Tradu în limba %s</string>
   <string name="translate_to_english">Tradu în limba engleză</string>
   <string name="translate_length_warning">Traducerea poate fi incompletă în cazul unui text mare.</string>
@@ -221,6 +214,7 @@
   <string name="loc_trying">Încerc să determin poziţia</string>
   <string name="loc_no_addr">Adresă necunoscută</string>
   <string name="loc_gps_disabled">GPS inactiv</string>
+  <string name="menu_centerposition">Centrează pe poziţia mea</string>
   <string name="menu_about">Despre c:geo</string>
   <string name="menu_helpers">Programe utilitare</string>
   <string name="menu_settings">Setări</string>
@@ -269,13 +263,6 @@
   <string name="caches_select_invert">Inversează selecţia</string>
   <string name="caches_nearby">În apropiere</string>
   <string name="caches_manage">Gestionează</string>
-  <string name="caches_drop_selected">Şterge cutiile selectate</string>
-  <string name="caches_drop_selected_ask">Vrei să ştergi cutiile selectate din dispozitiv?</string>
-  <string name="caches_drop_all">Şterge tot</string>
-  <string name="caches_drop_all_ask">Vrei să ştergi toate cutiile din lista curenă?</string>
-  <string name="caches_drop_stored">Şterge cutiile stocate</string>
-  <string name="caches_drop_progress">Ştergere cutii…</string>
-  <string name="caches_drop_all_and_list">Şterge lista şi toate cutiile</string>
   <string name="caches_delete_events">Şterge evenimentele trecute</string>
   <string name="caches_refresh_selected">Reîncarcă cutiile selectate</string>
   <string name="caches_refresh_all">Reîncarcă toate cutiile</string>
@@ -303,10 +290,8 @@
   <string name="caches_removing_from_history">Şterge din istoric…</string>
   <string name="caches_clear_offlinelogs">Şterge însemnări stocate local</string>
   <string name="caches_clear_offlinelogs_progress">Ştergere însemnări stocate local</string>
-  <string name="list_menu">Liste</string>
   <string name="list_menu_create">Crează listă nouă</string>
   <string name="list_menu_drop">Şterge lista curentă</string>
-  <string name="list_menu_change">Schimbă lista</string>
   <string name="list_menu_rename">Redenumeşte lista curentă</string>
   <string name="list_title">Alege o listă</string>
   <string name="list_inbox">Salvate</string>
@@ -404,8 +389,8 @@
   <string name="init_signature_template_log">Text însemnare</string>
   <string name="init_ratingwanted">Voturi GCvote</string>
   <string name="init_summary_ratingwanted">Încarcă voturi de la GCvote.com</string>
-  <string name="init_friendlogswanted">Arată însemnările prietenilor</string>
-  <string name="init_summary_friendlogswanted">Afişează o pagină suplimentară cu însemnări de la prieteni</string>
+  <string name="init_friends_and_own_logs_wanted">Arată ale mele/ale prietenilor</string>
+  <string name="init_summary_friends_and_own_logs_wanted">Afişează pagină de jurnal separată pentru însemnările proprii şi ale prietenilor</string>
   <string name="init_openlastdetailspage">Ultima pagină cu detalii</string>
   <string name="init_summary_openlastdetailspage">Arată detaliile de pe ultima pagină afişată</string>
   <string name="init_autoload">Descriere completă</string>
@@ -494,6 +479,9 @@
   <string name="init_maintenance">Întreţinere</string>
   <string name="init_maintenance_directories_note">c:geo salvează imagini, imagini din însemnări şi alte fişiere legate de o geocutie într-un dosar separat. Este posibil ca în unele cazuri (precum import/export al bazei de date) acest dosar să conţină fişiere vechi ce pot fi şterse aici.</string>
   <string name="init_maintenance_directories">Şterge fişierele devenite inutile</string>
+  <string name="init_create_memory_dump">Creează un extras de memorie copie după memoria folosită de aplicaţie</string>
+  <string name="init_memory_dump">Extras de memorie</string>
+  <string name="init_memory_dumped">Extras de memorie salvat în %s</string>
   <string name="settings_open_website">Intră pe site</string>
   <string name="settings_settings">Opţiuni</string>
   <string name="settings_information">Informaţii</string>
@@ -558,7 +546,6 @@
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Atribute</string>
   <string name="cache_inventory">Inventar</string>
-  <string name="cache_log_offline">Însemnare stocată local</string>
   <string name="cache_log_images_title">Imagini însemnare</string>
   <string name="cache_log_image_default_title">Foto</string>
   <string name="cache_personal_note">Notă personală</string>
@@ -569,8 +556,6 @@
   <string name="cache_personal_note_uploading">Încărcare notă personală</string>
   <string name="cache_personal_note_upload_done">Nota personală a fost încărcată</string>
   <string name="cache_personal_note_upload_cancelled">Încărcarea notei personale a fost anulată</string>
-  <string name="cache_personal_note_unstored">Cutia nu este salvată</string>
-  <string name="cache_personal_note_store">Cutia va fi mai întâi salvată pentru a permite adăugarea de note personale.</string>
   <string name="cache_description">Descriere</string>
   <string name="cache_description_long">Descriere completă</string>
   <string name="cache_description_table_note">Descrierea conţine tabele sau formatări care ar trebui vizualizate aici %s pentru a fi afişate corect.</string>
@@ -590,7 +575,7 @@
   <string name="cache_waypoints_add">Adaugă punct</string>
   <string name="cache_hint">Indiciu</string>
   <string name="cache_logs">Jurnal</string>
-  <string name="cache_logsfriends">Jurnal (Prieteni)</string>
+  <string name="cache_logs_friends_and_own">Însemnări proprii/de la prieteni</string>
   <string name="cache_dialog_loading_details">Încărcare detaliile cutiei…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Încărcare pagină</string>
   <string name="cache_dialog_loading_details_status_details">Prelucrare detalii</string>
@@ -636,16 +621,15 @@
   <string name="cache_menu_refresh">Împrospătează</string>
   <string name="cache_menu_share">Distribuie geocutie</string>
   <string name="cache_menu_move_list">Mută în altă listă</string>
-  <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
-  <string name="cache_menu_cachebeacon">Cutie Baliză</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Ceas \"Pebble\"</string>
   <string name="cache_menu_mapswithme">MapsWithMe</string>
   <string name="cache_status">Stare</string>
   <string name="cache_status_offline_log">Jurnal salvat</string>
   <string name="cache_status_found">Găsit</string>
+  <string name="cache_not_status_found">Nu a fost găsită</string>
   <string name="cache_status_archived">Arhivată</string>
   <string name="cache_status_disabled">Inactivă</string>
   <string name="cache_status_premium">Doar membrii Premium</string>
@@ -757,10 +741,7 @@
   <string name="map_view_map">Hărţi</string>
   <string name="map_modes">Opţiuni hărţi</string>
   <string name="map_trail_show">Arată traseu</string>
-  <string name="map_trail_hide">Ascunde traseu</string>
   <string name="map_circles_show">Arată cercurile</string>
-  <string name="map_circles_hide">Ascunde cercurile</string>
-  <string name="map_mycaches_show">Arată geocutiile mele/găsite</string>
   <string name="map_mycaches_hide">Ascunde geocutiile mele/găsite</string>
   <string name="map_theme_builtin">Implicit</string>
   <string name="map_theme_select">Alege un stil pentru hartă</string>
@@ -843,7 +824,6 @@
   <string name="use_gps">Foloseşte doar GPS-ul</string>
   <string name="use_compass">Foloseşte GPS-ul şi busola</string>
   <string name="destination_select">Alege destinaţia</string>
-  <string name="destination_set">Alege destinaţia</string>
   <string name="navigation_direct_navigation">Navigare directă</string>
   <string name="navigation_target">Ţintă</string>
   <string name="err_nav_no_coordinates">Nu se poate porni navigarea fără coordonate</string>
@@ -1114,7 +1094,6 @@
   <string name="website">Site: <a href="">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="">pagina c:geo</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="nutshellmanual">Manual: <a href="">c:geo într-o coajă de nucă</a></string>
   <string name="market">Android: <a href="">c:geo pe Google Play</a></string>
   <string name="about_twitter">Ar trebui ca <b>c:geo</b> să publice un statut nou pe Twitter de fiecare dată când scrii o însemnare pentru o geocutie?</string>
   <string name="faq">FAQ: <a href="">faq.cgeo.org</a></string>
@@ -1139,11 +1118,5 @@
   <string name="percent_favorite_points">%\  favorite</string>
   <string name="cgeo_shortcut">legătură la c:geo</string>
   <string name="create_shortcut">Crează scurtătură</string>
-  <string-array name="log_image_scales">
-    <item>Fără redimensionare</item>
-    <item>512 px</item>
-    <item>640 px</item>
-    <item>800 px</item>
-    <item>1024 px</item>
-  </string-array>
+  <string name="send">Trimite</string>
 </resources>

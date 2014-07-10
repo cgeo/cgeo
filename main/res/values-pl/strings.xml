@@ -9,7 +9,6 @@
   <string name="about">O c:geo</string>
   <string name="latitude">Szerokość geograficzna</string>
   <string name="longitude">Długość geograficzna</string>
-  <string name="action_bar_share_title">Podziel się linkiem do skrzynki</string>
   <string name="settings_titlebar">c:geo Ustawienia</string>
   <string name="all_types">Wszystkie typy skrzynek</string>
   <string name="traditional">Tradycyjna</string>
@@ -18,6 +17,7 @@
   <string name="letterbox">Hybrydowa Letterbox</string>
   <string name="event">Wydarzenie</string>
   <string name="mega">Mega-Wydarzenie</string>
+  <string name="giga">Giga-Wydarzenie</string>
   <string name="earth">Earthcache</string>
   <string name="cito">CITO</string>
   <string name="webcam">Skrzynka Webcam</string>
@@ -79,21 +79,9 @@
   <string name="log_saving_and_uploading">Zapisuję w dzienniku i wysyłam zdjęcie…</string>
   <string name="log_clear">Wyczyść</string>
   <string name="log_post">Wpisz do dziennika</string>
-  <string name="log_post_rate">Wpisz do dziennika &amp; oceń</string>
-  <string name="log_post_no_rate">Wpisz do dziennika &amp; nie oceniaj</string>
   <string name="log_post_not_possible">Ładuję dziennik…</string>
   <string name="log_add">Dodaj</string>
-  <string name="log_rating">Ocena</string>
   <string name="log_no_rating">Bez oceny</string>
-  <string name="log_stars_1">1 gwiazdka</string>
-  <string name="log_stars_15">1,5 gwiazdki</string>
-  <string name="log_stars_2">2 gwiazdki</string>
-  <string name="log_stars_25">2,5 gwiazdki</string>
-  <string name="log_stars_3">3 gwiazdki</string>
-  <string name="log_stars_35">3,5 gwiazdki</string>
-  <string name="log_stars_4">4 gwiazdki</string>
-  <string name="log_stars_45">4,5 gwiazdki</string>
-  <string name="log_stars_5">5 gwiazdek</string>
   <string name="log_stars_1_description">Słaba</string>
   <string name="log_stars_15_description">Raczej słaba</string>
   <string name="log_stars_2_description">Poniżej średniej</string>
@@ -112,7 +100,6 @@
   <string name="log_smilies">Uśmiechy</string>
   <string name="log_image">Obraz</string>
   <string name="log_image_attach">Załącz obraz</string>
-  <string name="log_image_edit">Edytuj obraz</string>
   <string name="log_image_stored">Zapisany</string>
   <string name="log_image_camera">Nowy</string>
   <string name="log_image_caption">Podpis</string>
@@ -121,6 +108,13 @@
   <string name="log_password_title">Hasło do logu:</string>
   <string name="log_hint_log_password">Wpisz hasło do logu</string>
   <string name="log_oc_team_comment">Komentarz zespołu OC</string>
+  <string-array name="log_image_scales">
+    <item>Brak skalowania</item>
+    <item>512 px</item>
+    <item>640 px</item>
+    <item>800 px</item>
+    <item>1024 px</item>
+  </string-array>
   <string name="translate_to_sys_lang">Przetłumacz na %s</string>
   <string name="translate_to_english">Przetłumacz na angielski</string>
   <string name="translate_length_warning">Tłumaczenie może nie udać się przy dużej ilości tekstu.</string>
@@ -213,7 +207,7 @@
   <string name="info_select_logimage_cancelled">Wybór obrazu został anulowany.</string>
   <string name="info_stored_image">Nowy obraz zapisany w:</string>
   <string name="info_storing_static_maps">Próbuję zapisać mapy statyczne</string>
-  <string name="loc_last">Ostatnia znana pozycja</string>
+  <string name="loc_last">Ostatnia pozycja</string>
   <string name="loc_net">Sieć</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
@@ -241,6 +235,11 @@
   <string name="caches_more_caches_currently">Obecnie</string>
   <string name="caches_downloading">Pobieram skrzynki…\nSzacowany czas: </string>
   <string name="caches_eta_ltm">Mniej niż minuta</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="one">minuta</item>
+    <item quantity="few">minuty</item>
+    <item quantity="other">minut</item>
+  </plurals>
   <string name="caches_store_offline">Zapisz offline</string>
   <string name="caches_store_selected">Zapisz wybrane</string>
   <string name="caches_history">Historia</string>
@@ -268,13 +267,6 @@
   <string name="caches_select_invert">Odwróć zaznaczenie</string>
   <string name="caches_nearby">Najbliższe</string>
   <string name="caches_manage">Zarządzaj</string>
-  <string name="caches_drop_selected">Usuń wybrane</string>
-  <string name="caches_drop_selected_ask">Czy na pewno chcesz usunąć wybrane skrzynki z pamięci?</string>
-  <string name="caches_drop_all">Usuń wszystkie</string>
-  <string name="caches_drop_all_ask">Czy na pewno chcesz usunąć wszystkie skrzynki z pamięci?</string>
-  <string name="caches_drop_stored">Usuń zapisane</string>
-  <string name="caches_drop_progress">Usuwanie skrzynek</string>
-  <string name="caches_drop_all_and_list">Usuń wszystkie skrzynki i listę</string>
   <string name="caches_delete_events">Usuń minione wydarzenia</string>
   <string name="caches_refresh_selected">Odśwież wybrane</string>
   <string name="caches_refresh_all">Odśwież wszystkie</string>
@@ -299,12 +291,10 @@
   <string name="caches_filter_popularity">Ulubione</string>
   <string name="caches_filter_popularity_ratio">Ulubione [%]</string>
   <string name="caches_removing_from_history">Usuwam z Historii…</string>
-  <string name="caches_clear_offlinelogs">Usuń logi offline</string>
-  <string name="caches_clear_offlinelogs_progress">Usuwanie logów offline</string>
-  <string name="list_menu">Lista</string>
+  <string name="caches_clear_offlinelogs">Usuń wpisy offline</string>
+  <string name="caches_clear_offlinelogs_progress">Usuwanie wpisów offline</string>
   <string name="list_menu_create">Utwórz nową listę</string>
   <string name="list_menu_drop">Usuń aktualną listę</string>
-  <string name="list_menu_change">Zmień listę</string>
   <string name="list_menu_rename">Zmień nazwę aktualnej listy</string>
   <string name="list_title">Wybierz listę</string>
   <string name="list_inbox">Zapisane</string>
@@ -355,7 +345,7 @@
   <string name="settings_activate_ox">Aktywuj</string>
   <string name="settings_gc_legal_note">Używając serwisu geocaching.com, akceptujesz postanowienia licencyjne Groundspeak.</string>
   <string name="settings_info_facebook_login_title">Facebook Login</string>
-  <string name="settings_info_facebook_login">Nie możesz zmusić c:geo aby zalogował się do geocaching.com przy pomocy Twojego konta Facebook. Jednakże istnieje proste rozwiązanie …</string>
+  <string name="settings_info_facebook_login">Nie możesz zmusić c:geo aby zalogował się do geocaching.com przy pomocy Twojego konta Facebook. Jednakże istnieje proste rozwiązanie…</string>
   <string name="settings_authorize">Autoryzuj c:geo</string>
   <string name="settings_reauthorize">Autoryzuj c:geo ponownie</string>
   <string name="init_oc">Opencaching.de</string>
@@ -399,8 +389,8 @@
   <string name="init_signature_template_log">Wpis</string>
   <string name="init_ratingwanted">Załaduj ocenę skrzynki z GCvote.com</string>
   <string name="init_summary_ratingwanted">Załaduj ocenę skrzynki z GCvote.com</string>
-  <string name="init_friendlogswanted">Załaduj dodatkowy dziennik dla wpisów od przyjaciół</string>
-  <string name="init_summary_friendlogswanted">Załaduj dodatkowy dziennik dla wpisów od przyjaciół</string>
+  <string name="init_friends_and_own_logs_wanted">Pokaż przyjaciół/własne</string>
+  <string name="init_summary_friends_and_own_logs_wanted">Wyświetl dodatkowy dziennik dla wpisów własnych i przyjaciół</string>
   <string name="init_openlastdetailspage">Otwórz szczegóły ostatnio używanej strony</string>
   <string name="init_summary_openlastdetailspage">Otwórz szczegóły ostatnio używanej strony</string>
   <string name="init_autoload">Automatyczne ładowanie długich opisów</string>
@@ -501,7 +491,7 @@
   <string name="feature_description">Podane funkcje <b>online</b> na tej stronie są wspierane przez c:geo (w porównaniu do funkcji offline):</string>
   <string name="feature_personal_notes">Notatka osobista</string>
   <string name="feature_online_logging">Wpisy online</string>
-  <string name="feature_log_images">Załączanie zdjęć do logów</string>
+  <string name="feature_log_images">Załączanie zdjęć do wpisów</string>
   <string name="feature_watch_list">Listy obserwowanych skrzynek</string>
   <string name="feature_own_coordinates">Przechowywanie zmodyfikowanych współrzędnych</string>
   <string name="feature_search_keyword">Szukanie po słowie kluczowym</string>
@@ -536,6 +526,11 @@
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
   <string name="auth_dialog_completed_oc">c:geo został zautoryzowany by komunikować się z %s.</string>
+  <plurals name="cache_counts">
+    <item quantity="one">Jedna skrzynka</item>
+    <item quantity="few">%1$d skrzynki</item>
+    <item quantity="other">%1$d skrzynek</item>
+  </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Odśwież</string>
   <string name="cache_offline_drop">Usuń</string>
@@ -551,7 +546,6 @@
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Atrybuty</string>
   <string name="cache_inventory">Inwentarz</string>
-  <string name="cache_log_offline">Wpis offline</string>
   <string name="cache_log_images_title">Zdjęcie z wpisu</string>
   <string name="cache_log_image_default_title">Zdjęcie</string>
   <string name="cache_personal_note">Notatka osobista</string>
@@ -562,8 +556,6 @@
   <string name="cache_personal_note_uploading">Wysyłam osobistą notatkę</string>
   <string name="cache_personal_note_upload_done">Notatka osobista wysłana</string>
   <string name="cache_personal_note_upload_cancelled">Wysyłanie notatki osobistej anulowane</string>
-  <string name="cache_personal_note_unstored">Skrzynka nie jest zapisana</string>
-  <string name="cache_personal_note_store">Skrzynka będzie najpierw zapisana aby umożliwić dodawanie notatek osobistych.</string>
   <string name="cache_description">Opis</string>
   <string name="cache_description_long">Długi opis</string>
   <string name="cache_description_table_note">Opis zawiera formatowanie w formie tabeli, które w celu poprawnego wyświetlania może wymagać odwiedzenia %s.</string>
@@ -580,10 +572,15 @@
   <string name="cache_list_unknown">Nie znajduje się na liście</string>
   <string name="cache_images">Zdjęcia</string>
   <string name="cache_waypoints">Punkty nawigacji</string>
+  <plurals name="waypoints">
+    <item quantity="one">1 punkt</item>
+    <item quantity="few">%d punkty</item>
+    <item quantity="other">%d punktów nawigacji</item>
+  </plurals>
   <string name="cache_waypoints_add">Dodaj punkt nawigacji</string>
   <string name="cache_hint">Wskazówka</string>
   <string name="cache_logs">Dziennik</string>
-  <string name="cache_logsfriends">Dziennik (Przyjaciele)</string>
+  <string name="cache_logs_friends_and_own">Wpisy przyjaciół/własne</string>
   <string name="cache_dialog_loading_details">Ładuję szczegóły skrzynki…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Ładuję stronę</string>
   <string name="cache_dialog_loading_details_status_details">Przetwarzam szczegóły</string>
@@ -629,15 +626,14 @@
   <string name="cache_menu_refresh">Odśwież</string>
   <string name="cache_menu_share">Podziel się skrzynką</string>
   <string name="cache_menu_move_list">Przenieś do innej listy</string>
-  <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
-  <string name="cache_menu_cachebeacon">Cache Beacon</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Zegarek Pebble</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Zapamiętany wpis</string>
   <string name="cache_status_found">Znaleziona</string>
+  <string name="cache_not_status_found">Nie znaleziono</string>
   <string name="cache_status_archived">Zarchiwizowana</string>
   <string name="cache_status_disabled">Niedostępna</string>
   <string name="cache_status_premium">Tylko dla użytkowników Premium</string>
@@ -749,10 +745,7 @@
   <string name="map_view_map">Widok mapy</string>
   <string name="map_modes">Tryb mapy</string>
   <string name="map_trail_show">Pokaż szlak</string>
-  <string name="map_trail_hide">Ukryj szlak</string>
   <string name="map_circles_show">Pokaż okręgi</string>
-  <string name="map_circles_hide">Ukryj okręgi</string>
-  <string name="map_mycaches_show">Pokazuj własne/znalezione skrzynki</string>
   <string name="map_mycaches_hide">Ukryj własne/znalezione skrzynki</string>
   <string name="map_theme_builtin">Domyślny</string>
   <string name="map_theme_select">Wybierz motyw mapy</string>
@@ -835,7 +828,6 @@
   <string name="use_gps">Użyj tylko GPS</string>
   <string name="use_compass">Użyj GPS i kompasu</string>
   <string name="destination_select">Wybierz cel</string>
-  <string name="destination_set">Ustaw cel</string>
   <string name="navigation_direct_navigation">Bezpośrednia nawigacja</string>
   <string name="navigation_target">Cel</string>
   <string name="err_nav_no_coordinates">Nie można rozpocząć nawigacji - brak współrzędnych</string>
@@ -1106,7 +1098,6 @@
   <string name="website">Website: <a href="">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="">c:geo strona</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="nutshellmanual">Podręcznik: <a href="">c:geo skrócona instrukcja obsługi</a></string>
   <string name="market">Android: <a href="">c:geo w Google Play</a></string>
   <string name="about_twitter">Czy chczesz aby <b>c:geo</b> publikował nowy status na Twitter za każdym razem kiedy znajdziesz skrzynkę?</string>
   <string name="faq">FAQ: <a href="">faq.cgeo.org</a></string>
@@ -1122,57 +1113,32 @@
   <string name="tts_stop">Przestań mówić</string>
   <string name="err_tts_lang_not_supported">Aktualny język nie jest wspierany przez text-to-speech.</string>
   <string name="tts_one_kilometer">jeden kilometr</string>
-  <string name="tts_one_meter">jeden metr</string>
-  <string name="tts_one_mile">jedna mila</string>
-  <string name="tts_one_foot">jedna stopa</string>
-  <string name="tts_one_oclock">pierwsza</string>
-  <string name="tts_oclock">%s</string>
-  <string name="clipboard_copy_ok">Skopiowano do schowka</string>
-  <string name="percent_favorite_points">%\ ulubionych</string>
-  <string name="cgeo_shortcut">skrót do c:geo</string>
-  <string name="create_shortcut">Utwórz skrót</string>
-  <string-array name="log_image_scales">
-    <item>Brak skalowania</item>
-    <item>512 px</item>
-    <item>640 px</item>
-    <item>800 px</item>
-    <item>1024 px</item>
-  </string-array>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">minuta</item>
-    <item quantity="few">minuty</item>
-    <item quantity="other">minut</item>
-  </plurals>
-  <plurals name="cache_counts">
-    <item quantity="one">Jedna skrzynka</item>
-    <item quantity="few">%1$d skrzynki</item>
-    <item quantity="other">%1$d skrzynek</item>
-  </plurals>
-  <plurals name="waypoints">
-    <item quantity="one">1 punkt</item>
-    <item quantity="few">%d punkty</item>
-    <item quantity="other">%d punktów nawigacji</item>
-  </plurals>
   <plurals name="tts_kilometers">
     <item quantity="one">%s kilometr</item>
     <item quantity="few">%s kilometry</item>
     <item quantity="other">%s kilometrów</item>
   </plurals>
+  <string name="tts_one_meter">jeden metr</string>
   <plurals name="tts_meters">
     <item quantity="one">%s metr</item>
     <item quantity="few">%s metry</item>
     <item quantity="other">%s metrów</item>
   </plurals>
+  <string name="tts_one_mile">jedna mila</string>
   <plurals name="tts_miles">
     <item quantity="one">%s mila</item>
     <item quantity="few">%s mile</item>
     <item quantity="other">%s mil</item>
   </plurals>
+  <string name="tts_one_foot">jedna stopa</string>
   <plurals name="tts_feet">
     <item quantity="one">%s stopa</item>
     <item quantity="few">%s stopy</item>
     <item quantity="other">%s stóp</item>
   </plurals>
+  <string name="tts_one_oclock">pierwsza</string>
+  <string name="tts_oclock">%s</string>
+  <string name="clipboard_copy_ok">Skopiowano do schowka</string>
   <plurals name="days_ago">
     <item quantity="one">wczoraj</item>
     <item quantity="few">%d dni temu</item>
@@ -1183,4 +1149,7 @@
     <item quantity="few">%s ulubione</item>
     <item quantity="other">%s ulubionych</item>
   </plurals>
+  <string name="percent_favorite_points">%\ ulubionych</string>
+  <string name="cgeo_shortcut">skrót do c:geo</string>
+  <string name="create_shortcut">Utwórz skrót</string>
 </resources>

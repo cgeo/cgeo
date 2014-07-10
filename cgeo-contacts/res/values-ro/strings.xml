@@ -3,4 +3,5 @@
 <resources>
   <string name="app_name">c:geo - contacte (extensie)</string>
   <string name="contact_not_found">Contactul cu numele/alias-ul %s nu a fost găsit. Adaugă-l mai întâi în aplicaţia de contacte.</string>
+  <string name="multiple_matches">Mai multe rezultate</string>
 </resources>
