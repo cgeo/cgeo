@@ -80,7 +80,9 @@ public class Settings {
         migrateSettings();
         final boolean isDebug = sharedPrefs.getBoolean(getKey(R.string.pref_debug), false);
         Log.setDebug(isDebug);
-        CgeoApplication.dumpOnOutOfMemory(isDebug);
+        if (isDebug) {
+            CgeoApplication.dumpOnOutOfMemory(isDebug);
+        }
     }
 
     /**
