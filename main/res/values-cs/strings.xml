@@ -443,7 +443,7 @@
   <string name="settings_info_offline_maps_title">Info o Offline mapách</string>
   <string name="settings_info_offline_maps">c:geo podporuje používání offline map. Mapy si můžeš stáhnout z Mapsforge a nebo si vytvořit vlastní z dat Open Street Map (OSM). Aby bylo možné offline mapy používat, musíš nejprve zvolit místo jejich uložení.</string>
   <string name="settings_info_themes_title">Info o stylech mapy</string>
-  <string name="settings_info_themes">c:geo podporuje vlastní styly pro offline mapy. Ty mohou být použity pro změnu barevného stylu mapy (např. noční mapa), pro zvýranění důležitých objektů (jako jsou např. cykloztezky) nebo pro určení šířky čar.</string>
+  <string name="settings_info_themes">c:geo podporuje vlastní styly pro offline mapy. Ty mohou být použity pro změnu barevného stylu mapy (např. noční mapa), pro zvýraznění důležitých objektů (jako jsou např. cykloztezky) nebo pro určení šířky čar.</string>
   <string name="init_mapsource_select">Vyber mapový zdroj</string>
   <string name="settings_title_scale_map_text">Měřítko textu mapy</string>
   <string name="settings_summary_scale_map_text">Velikost textových popisků offline mapy dle DPI zařízení</string>
