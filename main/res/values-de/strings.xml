@@ -370,6 +370,8 @@
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Aktivieren</string>
   <string name="init_oc_ro_description">Autorisiere c:geo auf opencaching.ro zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
+  <string name="settings_activate_oc_uk">Aktivieren</string>
+  <string name="init_oc_uk_description">Autorisiere c:geo auf opencaching.org.uk zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivieren</string>
