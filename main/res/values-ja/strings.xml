@@ -228,9 +228,6 @@
   <string name="caches_more_caches_currently">現在</string>
   <string name="caches_downloading">キャッシュ情報をダウンロード中…\n残り時間: </string>
   <string name="caches_eta_ltm">1分以内</string>
-  <plurals name="caches_eta_mins">
-    <item quantity="other">%d 分</item>
-  </plurals>
   <string name="caches_store_offline">オフライン用に保存</string>
   <string name="caches_store_selected">選択したキャッシュを保存</string>
   <string name="caches_history">履歴</string>

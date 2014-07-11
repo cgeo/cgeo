@@ -234,10 +234,6 @@
   <string name="caches_more_caches_currently">for øyeblikket</string>
   <string name="caches_downloading">Laster ned cacher…\nETA: </string>
   <string name="caches_eta_ltm">Mindre enn ett minutt</string>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">%d minutt</item>
-    <item quantity="other">%d minutter</item>
-  </plurals>
   <string name="caches_store_offline">Lagre for offline-bruk</string>
   <string name="caches_store_selected">Lagre valgte</string>
   <string name="caches_history">Historikk</string>

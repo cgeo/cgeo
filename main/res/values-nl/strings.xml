@@ -237,10 +237,6 @@
   <string name="caches_more_caches_currently">op dit moment</string>
   <string name="caches_downloading">Caches aan het downloaden…\nGeschatte tijd: </string>
   <string name="caches_eta_ltm">Minder dan een minuut</string>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">%d minuut</item>
-    <item quantity="other">%d minuten</item>
-  </plurals>
   <string name="caches_store_offline">Opslaan voor Offline gebruik</string>
   <string name="caches_store_selected">Geselecteerden opslaan</string>
   <string name="caches_history">Geschiedenis</string>
@@ -267,6 +263,11 @@
   <string name="caches_select_invert">Selectie omkeren</string>
   <string name="caches_nearby">Nabij</string>
   <string name="caches_manage">Beheer</string>
+  <string name="caches_remove_all">Verwijder alles</string>
+  <string name="caches_remove_all_confirm">Wil je alle %s caches uit de huidige lijst verwijderen?</string>
+  <string name="caches_remove_selected">Selectie verwijderen</string>
+  <string name="caches_remove_selected_confirm">Wil je de geselecteerde %s caches verwijderen van uw apparaat?</string>
+  <string name="caches_remove_progress">Caches worden verwijderd</string>
   <string name="caches_delete_events">Verwijder afgelopen evenementen</string>
   <string name="caches_refresh_selected">Ververs geselecteerden</string>
   <string name="caches_refresh_all">Ververs alle</string>
@@ -297,6 +298,7 @@
   <string name="list_menu_create">Maak nieuwe lijst</string>
   <string name="list_menu_drop">Verwijder huidige lijst</string>
   <string name="list_menu_rename">Hernoem huidige lijst</string>
+  <string name="list_menu_import">Importeer</string>
   <string name="list_title">Selecteer een lijst</string>
   <string name="list_inbox">Opgeslagen</string>
   <string name="list_all_lists">Alle caches</string>
@@ -834,6 +836,7 @@
   <string name="user_menu_open_contact">Open contactkaart</string>
   <string name="navigation">Navigatie</string>
   <string name="compass_title">Kompas</string>
+  <string name="compass_sensors">Actieve sensoren</string>
   <string name="use_gps">Gebruik alleen GPS</string>
   <string name="use_compass">Gebruik GPS en kompas</string>
   <string name="destination_select">Selecteer bestemming</string>

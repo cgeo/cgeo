@@ -237,10 +237,6 @@
   <string name="caches_more_caches_currently">aktuell</string>
   <string name="caches_downloading">Lade Caches…\nGeschätzte Zeit: </string>
   <string name="caches_eta_ltm">Weniger als eine Minute</string>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">%d Minute</item>
-    <item quantity="other">%d Minuten</item>
-  </plurals>
   <string name="caches_store_offline">Für Offline speichern</string>
   <string name="caches_store_selected">Ausgewählte speichern</string>
   <string name="caches_history">Verlauf</string>
