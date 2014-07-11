@@ -577,7 +577,7 @@
   <string name="cache_images">Images</string>
   <string name="cache_waypoints">Étapes</string>
   <plurals name="waypoints">
-    <item quantity="one">%d étape</item>
+    <item quantity="one">1 étape</item>
     <item quantity="other">%d étapes</item>
   </plurals>
   <string name="cache_waypoints_add">Ajouter une étape</string>
@@ -1139,7 +1139,7 @@
   <string name="tts_oclock">%s heures</string>
   <string name="clipboard_copy_ok">Copié dans le presse-papiers</string>
   <plurals name="days_ago">
-    <item quantity="one" tools:ignore="ImpliedQuantity">hier</item>
+    <item quantity="one">hier</item>
     <item quantity="other">il y a %d jours</item>
   </plurals>
   <plurals name="favorite_points">
