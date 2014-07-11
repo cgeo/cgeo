@@ -237,11 +237,6 @@
   <string name="caches_more_caches_currently">dabar</string>
   <string name="caches_downloading">Atnaujinamos slėptuvės…\nUžtruks</string>
   <string name="caches_eta_ltm">mažiau nei minutę</string>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">%d minutę</item>
-    <item quantity="few">%d minutes</item>
-    <item quantity="other">%d minučių</item>
-  </plurals>
   <string name="caches_store_offline">Išsaugoti slėptuves</string>
   <string name="caches_store_selected">Išsaugoti pasirinktas</string>
   <string name="caches_history">Istorija</string>
@@ -582,7 +577,7 @@
   <string name="cache_images">Nuotraukos</string>
   <string name="cache_waypoints">Papildomi taškai</string>
   <plurals name="waypoints">
-    <item quantity="one">%d papildomas taškas</item>
+    <item quantity="one">1papildomas taškas</item>
     <item quantity="few">%d papildomi taškai</item>
     <item quantity="other">%d papildomų taškų</item>
   </plurals>
@@ -1148,7 +1143,7 @@
   <string name="tts_oclock">%s o\'clock</string>
   <string name="clipboard_copy_ok">Nukopijuota į mainų sritį</string>
   <plurals name="days_ago">
-    <item quantity="one" tools:ignore="ImpliedQuantity">vakar</item>
+    <item quantity="one">vakar</item>
     <item quantity="few">%d dienas atgal</item>
     <item quantity="other">%d dienų atgal</item>
   </plurals>
