@@ -5,6 +5,8 @@
     <b>Next bugfix release:</b>\n
     · Fix: Caches not stored if \"Ask for list\" is disabled\n
     · Fix: Use \"Unknown\" instead of \"Mystery\" in GPX export to ensure backward compatibility\n
+    · Fix: Avatar not shown in login confirmation screen\n
+    · Fix: Loading more than 40 caches in search results\n
     \n
     <b>2014.06.11:</b>\n
     · Fix: Adapting to changes on gc.com\n
