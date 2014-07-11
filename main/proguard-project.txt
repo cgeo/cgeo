@@ -18,6 +18,9 @@
 -dontwarn org.junit.**
 -dontwarn org.robolectric.**
 
+# rxjava internal references sun.misc.Unsafe
+-dontwarn sun.misc.Unsafe
+
 #-dontnote org.apache.commons.logging.**
 
 -keep public class cgeo.geocaching.*
