@@ -3,4 +3,5 @@
 <resources>
   <string name="app_name">c:geo - contacts (add-on)</string>
   <string name="contact_not_found">Contatto con alias/nickname %s non trovato. Aggiungilo prima nei tuoi contatti.</string>
+  <string name="multiple_matches">Risultati multipli</string>
 </resources>
