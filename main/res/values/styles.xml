@@ -130,7 +130,7 @@
         <item name="android:layout_marginRight">10dip</item>
         <item name="android:layout_marginBottom">5dip</item>
         <item name="android:textColor">@color/text_dark</item>
-        <item name="android:textColorHint">@color/text_hint_dark</item>
+        <item name="android:textColorHint">?text_color_hint</item>
         <item name="android:background">@drawable/input_bcg_dark</item>
     </style>
 
