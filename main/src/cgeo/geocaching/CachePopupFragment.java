@@ -195,7 +195,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
 
     @Override
     public void showNavigationMenu() {
-        // TODO
+        NavigationAppFactory.showNavigationMenu(getActivity(), cache, null, null, true, true);
     }
 
 
