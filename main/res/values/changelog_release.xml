@@ -2,6 +2,9 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+      <b>2014.07.12-legacy:</b>\n
+    · Fix: Caches not stored if \"Ask for list\" is disabled\n
+    \n
       <b>2014.06.12-legacy:</b>\n
     · Fix: Adapting to changes on gc.com\n
     · Fix: Do not crop static maps to prevent the copyright notice being cut off\n
