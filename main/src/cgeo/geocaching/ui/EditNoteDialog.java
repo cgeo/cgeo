@@ -4,13 +4,17 @@ import butterknife.ButterKnife;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
 import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -43,7 +47,14 @@ public class EditNoteDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
         final @NonNull FragmentActivity activity = getActivity();
-        final View view = View.inflate(new ContextThemeWrapper(activity, R.style.dark), R.layout.fragment_edit_note, null);
+
+        final Context themedContext;
+        if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB)
+            themedContext = new ContextThemeWrapper(activity, R.style.dark);
+        else
+            themedContext = activity;
+
+        final View view = View.inflate(themedContext, R.layout.fragment_edit_note, null);
         mEditText = ButterKnife.findById(view, R.id.note);
         final String initialNote = getArguments().getString(ARGUMENT_INITIAL_NOTE);
         if (initialNote != null) {

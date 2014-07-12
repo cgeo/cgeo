@@ -2,6 +2,7 @@ package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.settings.Settings;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
@@ -15,6 +16,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.drawable.Drawable;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -327,7 +330,13 @@ public final class Dialogs {
      *            listener to be run on okay
      */
     public static void input(final Activity context, final int title, final String defaultValue, final int buttonTitle, final Action1<String> okayListener) {
-        final Context themedContext = new ContextThemeWrapper(context, R.style.dark);
+        final Context themedContext;
+
+        if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB)
+            themedContext = new ContextThemeWrapper(context, R.style.dark);
+        else
+            themedContext = context;
+
         final EditText input = new EditText(themedContext);
         input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_CLASS_TEXT);
         input.setText(defaultValue);
