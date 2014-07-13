@@ -367,6 +367,8 @@
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Aktyvuoti</string>
   <string name="init_oc_ro_description">Leiskite c:geo prisijungti prie opencaching.ro tam, kad galėtumėt ieškoti slėptuvių ir prieiti/filtruoti rastas slėptuves.</string>
+  <string name="settings_activate_oc_uk">Aktyvuoti</string>
+  <string name="init_oc_uk_description">Leiskite c:geo prisijungti prie opencaching.org.uk tam, kad galėtumėt ieškoti slėptuvių ir prieiti/filtruoti rastas slėptuves.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktyvuoti</string>
@@ -582,7 +584,7 @@
   <string name="cache_images">Nuotraukos</string>
   <string name="cache_waypoints">Papildomi taškai</string>
   <plurals name="waypoints">
-    <item quantity="one">%d papildomas taškas</item>
+    <item quantity="one">1papildomas taškas</item>
     <item quantity="few">%d papildomi taškai</item>
     <item quantity="other">%d papildomų taškų</item>
   </plurals>
@@ -1148,7 +1150,7 @@
   <string name="tts_oclock">%s o\'clock</string>
   <string name="clipboard_copy_ok">Nukopijuota į mainų sritį</string>
   <plurals name="days_ago">
-    <item quantity="one" tools:ignore="ImpliedQuantity">vakar</item>
+    <item quantity="one">vakar</item>
     <item quantity="few">%d dienas atgal</item>
     <item quantity="other">%d dienų atgal</item>
   </plurals>
