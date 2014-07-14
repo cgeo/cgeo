@@ -4,13 +4,14 @@
 
 
 
-    <solid android:color="#44000000" />
+    <solid android:color="#9900FF00" />
 
     <corners android:radius="1dp"
         android:bottomLeftRadius="5dp"
         android:bottomRightRadius="0dp"
         android:topLeftRadius="0dp"
         android:topRightRadius="0dp"
-       />
+        />
+
 
 </shape>
