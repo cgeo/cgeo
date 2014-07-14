@@ -473,24 +473,13 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         } else {
             favoriteBack = R.drawable.favorite_background_dark;
         }
-        final float myVote = cache.getMyVote();
-        if (myVote > 0) { // use my own rating for display, if I have voted
-            if (myVote >= 4) {
-                favoriteBack = RATING_BACKGROUND[2];
-            } else if (myVote >= 3) {
-                favoriteBack = RATING_BACKGROUND[1];
-            } else if (myVote > 0) {
-                favoriteBack = RATING_BACKGROUND[0];
-            }
-        } else {
-            final float rating = cache.getRating();
-            if (rating >= 3.5) {
-                favoriteBack = RATING_BACKGROUND[2];
-            } else if (rating >= 2.1) {
-                favoriteBack = RATING_BACKGROUND[1];
-            } else if (rating > 0.0) {
-                favoriteBack = RATING_BACKGROUND[0];
-            }
+        final float rating = cache.getRating();
+        if (rating >= 3.5) {
+            favoriteBack = RATING_BACKGROUND[2];
+        } else if (rating >= 2.1) {
+            favoriteBack = RATING_BACKGROUND[1];
+        } else if (rating > 0.0) {
+            favoriteBack = RATING_BACKGROUND[0];
         }
         holder.favorite.setBackgroundResource(favoriteBack);
 
