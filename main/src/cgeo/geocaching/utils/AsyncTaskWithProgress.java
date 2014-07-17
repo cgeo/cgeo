@@ -127,7 +127,7 @@ public abstract class AsyncTaskWithProgress<Params, Result> extends AsyncTask<Pa
         progress.setMessage(message);
     }
 
-    @SafeVarargs
+    @SuppressWarnings("unchecked")
     @Override
     protected final Result doInBackground(final Params... params) {
         if (params != null) {
