@@ -93,7 +93,7 @@ public class Geocache implements ICache, IWaypoint {
     private String geocode = "";
     private String cacheId = "";
     private String guid = "";
-    private UncertainProperty<CacheType> cacheType = new UncertainProperty<CacheType>(CacheType.UNKNOWN, Tile.ZOOMLEVEL_MIN - 1);
+    private UncertainProperty<CacheType> cacheType = new UncertainProperty<>(CacheType.UNKNOWN, Tile.ZOOMLEVEL_MIN - 1);
     private String name = "";
     private String ownerDisplayName = "";
     private String ownerUserId = "";
@@ -111,7 +111,7 @@ public class Geocache implements ICache, IWaypoint {
      * lazy initialized
      */
     private String location = null;
-    private UncertainProperty<Geopoint> coords = new UncertainProperty<Geopoint>(null);
+    private UncertainProperty<Geopoint> coords = new UncertainProperty<>(null);
     private boolean reliableLatLon = false;
     private String personalNote = null;
     /**
@@ -149,7 +149,7 @@ public class Geocache implements ICache, IWaypoint {
     private List<Image> spoilers = null;
 
     private List<Trackable> inventory = null;
-    private Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
+    private Map<LogType, Integer> logCounts = new HashMap<>();
     private boolean userModifiedCoords = false;
     // temporary values
     private boolean statusChecked = false;
@@ -336,7 +336,7 @@ public class Geocache implements ICache, IWaypoint {
             this.setWaypoints(other.waypoints, false);
         }
         else {
-            final ArrayList<Waypoint> newPoints = new ArrayList<Waypoint>(waypoints);
+            final ArrayList<Waypoint> newPoints = new ArrayList<>(waypoints);
             Waypoint.mergeWayPoints(newPoints, other.waypoints, false);
             this.setWaypoints(newPoints, false);
         }
@@ -787,7 +787,7 @@ public class Geocache implements ICache, IWaypoint {
 
     public void addSpoiler(final Image spoiler) {
         if (spoilers == null) {
-            spoilers = new ArrayList<Image>();
+            spoilers = new ArrayList<>();
         }
         spoilers.add(spoiler);
     }
@@ -912,7 +912,7 @@ public class Geocache implements ICache, IWaypoint {
      * @param coords
      */
     public void setCoords(final Geopoint coords) {
-        this.coords = new UncertainProperty<Geopoint>(coords);
+        this.coords = new UncertainProperty<>(coords);
     }
 
     /**
@@ -922,7 +922,7 @@ public class Geocache implements ICache, IWaypoint {
      * @param zoomlevel
      */
     public void setCoords(final Geopoint coords, final int zoomlevel) {
-        this.coords = new UncertainProperty<Geopoint>(coords, zoomlevel);
+        this.coords = new UncertainProperty<>(coords, zoomlevel);
     }
 
     /**
@@ -1036,7 +1036,7 @@ public class Geocache implements ICache, IWaypoint {
      */
     @NonNull
     public List<LogEntry> getFriendsLogs() {
-        final ArrayList<LogEntry> friendLogs = new ArrayList<LogEntry>();
+        final ArrayList<LogEntry> friendLogs = new ArrayList<>();
         for (final LogEntry log : getLogs()) {
             if (log.friend) {
                 friendLogs.add(log);
@@ -1169,14 +1169,14 @@ public class Geocache implements ICache, IWaypoint {
         if (cacheType == null || CacheType.ALL == cacheType) {
             throw new IllegalArgumentException("Illegal cache type");
         }
-        this.cacheType = new UncertainProperty<CacheType>(cacheType);
+        this.cacheType = new UncertainProperty<>(cacheType);
     }
 
     public void setType(final CacheType cacheType, final int zoomlevel) {
         if (cacheType == null || CacheType.ALL == cacheType) {
             throw new IllegalArgumentException("Illegal cache type");
         }
-        this.cacheType = new UncertainProperty<CacheType>(cacheType, zoomlevel);
+        this.cacheType = new UncertainProperty<>(cacheType, zoomlevel);
     }
 
     public boolean hasDifficulty() {
@@ -1243,7 +1243,7 @@ public class Geocache implements ICache, IWaypoint {
      */
     private void assignUniquePrefix(final Waypoint waypoint) {
         // gather existing prefixes
-        final Set<String> assignedPrefixes = new HashSet<String>();
+        final Set<String> assignedPrefixes = new HashSet<>();
         for (final Waypoint wp : waypoints) {
             assignedPrefixes.add(wp.getPrefix());
         }
@@ -1661,7 +1661,7 @@ public class Geocache implements ICache, IWaypoint {
         }
 
         final String hourLocalized = CgeoApplication.getInstance().getString(R.string.cache_time_full_hours);
-        final ArrayList<Pattern> patterns = new ArrayList<Pattern>();
+        final ArrayList<Pattern> patterns = new ArrayList<>();
 
         // 12:34
         patterns.add(Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)\\b"));
@@ -1721,7 +1721,7 @@ public class Geocache implements ICache, IWaypoint {
     };
 
     private void addDescriptionImagesUrls(final Collection<Image> images) {
-        final Set<String> urls = new LinkedHashSet<String>();
+        final Set<String> urls = new LinkedHashSet<>();
         for (final Image image : images) {
             urls.add(image.getUrl());
         }
@@ -1738,13 +1738,13 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public Collection<Image> getImages() {
-        final LinkedList<Image> result = new LinkedList<Image>();
+        final LinkedList<Image> result = new LinkedList<>();
         result.addAll(getSpoilers());
         addLocalSpoilersTo(result);
         for (final LogEntry log : getLogs()) {
             result.addAll(log.getLogImages());
         }
-        final Set<String> urls = new HashSet<String>(result.size());
+        final Set<String> urls = new HashSet<>(result.size());
         for (final Image image : result) {
             urls.add(image.getUrl());
         }

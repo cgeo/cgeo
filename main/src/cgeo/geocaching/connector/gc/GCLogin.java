@@ -50,7 +50,7 @@ public class GCLogin extends AbstractLogin {
                 "dd/MM/yyyy"
         };
 
-        final Map<String, SimpleDateFormat> map = new HashMap<String, SimpleDateFormat>();
+        final Map<String, SimpleDateFormat> map = new HashMap<>();
 
         for (final String format : formats) {
             map.put(format, new SimpleDateFormat(format, Locale.ENGLISH));

@@ -68,11 +68,11 @@ public class ImagesList {
     private LayoutInflater inflater = null;
     private final Activity activity;
     // We could use a Set here, but we will insert no duplicates, so there is no need to check for uniqueness.
-    private final Collection<Bitmap> bitmaps = new LinkedList<Bitmap>();
+    private final Collection<Bitmap> bitmaps = new LinkedList<>();
     /**
      * map image view id to image
      */
-    private final SparseArray<Image> images = new SparseArray<Image>();
+    private final SparseArray<Image> images = new SparseArray<>();
     private final String geocode;
     private LinearLayout imagesView;
 

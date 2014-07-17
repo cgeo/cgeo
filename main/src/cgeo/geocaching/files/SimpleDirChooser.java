@@ -137,7 +137,7 @@ public class SimpleDirChooser extends AbstractListActivity {
         final EditText path = (EditText) findViewById(R.id.simple_dir_chooser_path);
         path.setText(this.getResources().getString(R.string.simple_dir_chooser_current_path) + " " + dir.getAbsolutePath());
         final File[] dirs = dir.listFiles(new DirOnlyFilenameFilter());
-        final List<Option> listDirs = new ArrayList<Option>();
+        final List<Option> listDirs = new ArrayList<>();
         try {
             for (final File currentDir : dirs) {
                 listDirs.add(new Option(currentDir.getName(), currentDir.getAbsolutePath(), currentDir.canWrite()));

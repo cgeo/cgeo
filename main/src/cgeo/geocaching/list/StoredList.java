@@ -64,7 +64,7 @@ public final class StoredList extends AbstractList {
         private final Resources res;
 
         public UserInterface(final @NonNull Activity activity) {
-            this.activityRef = new WeakReference<Activity>(activity);
+            this.activityRef = new WeakReference<>(activity);
             app = CgeoApplication.getInstance();
             res = app.getResources();
         }
@@ -80,7 +80,7 @@ public final class StoredList extends AbstractList {
         public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId, final String newListName) {
             final List<AbstractList> lists = getMenuLists(onlyConcreteLists, exceptListId);
 
-            final List<CharSequence> listsTitle = new ArrayList<CharSequence>();
+            final List<CharSequence> listsTitle = new ArrayList<>();
             for (AbstractList list : lists) {
                 listsTitle.add(list.getTitleAndCount());
             }
@@ -107,7 +107,7 @@ public final class StoredList extends AbstractList {
         }
 
         public static List<AbstractList> getMenuLists(boolean onlyConcreteLists, int exceptListId) {
-            final List<AbstractList> lists = new ArrayList<AbstractList>();
+            final List<AbstractList> lists = new ArrayList<>();
             lists.addAll(getSortedLists());
 
             if (exceptListId > StoredList.TEMPORARY_LIST_ID) {

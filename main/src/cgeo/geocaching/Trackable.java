@@ -35,7 +35,7 @@ public class Trackable implements ILogable {
     private String goal = null;
     private String details = null;
     private String image = null;
-    private List<LogEntry> logs = new ArrayList<LogEntry>();
+    private List<LogEntry> logs = new ArrayList<>();
     private String trackingcode = null;
 
     public String getUrl() {
@@ -215,7 +215,7 @@ public class Trackable implements ILogable {
     }
 
     static public List<LogType> getPossibleLogTypes() {
-        final List<LogType> logTypes = new ArrayList<LogType>();
+        final List<LogType> logTypes = new ArrayList<>();
         logTypes.add(LogType.RETRIEVED_IT);
         logTypes.add(LogType.GRABBED_IT);
         logTypes.add(LogType.NOTE);

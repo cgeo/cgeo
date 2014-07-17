@@ -101,7 +101,7 @@ public final class CacheDetailsCreator {
 
     public void addCacheState(final Geocache cache) {
         if (cache.isLogOffline() || cache.isArchived() || cache.isDisabled() || cache.isPremiumMembersOnly() || cache.isFound()) {
-            final List<String> states = new ArrayList<String>(5);
+            final List<String> states = new ArrayList<>(5);
             if (cache.isLogOffline()) {
                 states.add(res.getString(R.string.cache_status_offline_log));
             }

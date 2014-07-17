@@ -27,7 +27,7 @@ import java.util.List;
 public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> extends AbstractListActivity {
     private static final int MSG_SEARCH_WHOLE_SD_CARD = 1;
 
-    private final List<File> files = new ArrayList<File>();
+    private final List<File> files = new ArrayList<>();
     private T adapter = null;
     private ProgressDialog waitDialog = null;
     private SearchFilesThread searchingThread = null;
@@ -51,7 +51,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
         }
 
         private String getDefaultFolders() {
-            final ArrayList<String> names = new ArrayList<String>();
+            final ArrayList<String> names = new ArrayList<>();
             for (File dir : getExistingBaseFolders()) {
                 names.add(dir.getPath());
             }
@@ -152,7 +152,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
 
         @Override
         public void run() {
-            final List<File> list = new ArrayList<File>();
+            final List<File> list = new ArrayList<>();
 
             try {
                 if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
@@ -213,7 +213,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
     }
 
     protected List<File> getExistingBaseFolders() {
-        ArrayList<File> result = new ArrayList<File>();
+        ArrayList<File> result = new ArrayList<>();
         for (final File dir : getBaseFolders()) {
             if (dir.exists() && dir.isDirectory()) {
                 result.add(dir);

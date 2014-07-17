@@ -68,8 +68,8 @@ public enum LogType {
     private final static Map<String, LogType> FIND_BY_ICONNAME;
     private final static Map<String, LogType> FIND_BY_TYPE;
     static {
-        final HashMap<String, LogType> mappingPattern = new HashMap<String, LogType>();
-        final HashMap<String, LogType> mappingType = new HashMap<String, LogType>();
+        final HashMap<String, LogType> mappingPattern = new HashMap<>();
+        final HashMap<String, LogType> mappingType = new HashMap<>();
         for (LogType lt : values()) {
             if (lt.iconName != null) {
                 mappingPattern.put(lt.iconName, lt);

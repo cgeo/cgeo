@@ -872,7 +872,7 @@ public class DataStore {
         if (ArrayUtils.isNotEmpty(files)) {
             final Pattern oldFilePattern = Pattern.compile("^[GC|TB|EC|GK|O][A-Z0-9]{4,7}$");
             final SQLiteStatement select = db.compileStatement("select count(*) from " + dbTableCaches + " where geocode = ?");
-            final ArrayList<File> toRemove = new ArrayList<File>(files.length);
+            final ArrayList<File> toRemove = new ArrayList<>(files.length);
             for (final File file : files) {
                 if (file.isDirectory()) {
                     final String geocode = file.getName();
@@ -1086,8 +1086,8 @@ public class DataStore {
         if (CollectionUtils.isEmpty(caches)) {
             return;
         }
-        final ArrayList<String> cachesFromDatabase = new ArrayList<String>();
-        final HashMap<String, Geocache> existingCaches = new HashMap<String, Geocache>();
+        final ArrayList<String> cachesFromDatabase = new ArrayList<>();
+        final HashMap<String, Geocache> existingCaches = new HashMap<>();
 
         // first check which caches are in the memory cache
         for (final Geocache cache : caches) {
@@ -1106,7 +1106,7 @@ public class DataStore {
             existingCaches.put(cacheFromDatabase.getGeocode(), cacheFromDatabase);
         }
 
-        final ArrayList<Geocache> toBeStored = new ArrayList<Geocache>();
+        final ArrayList<Geocache> toBeStored = new ArrayList<>();
         // Merge with the data already stored in the CacheCache or in the database if
         // the cache had not been loaded before, and update the CacheCache.
         // Also, a DB update is required if the merge data comes from the CacheCache
@@ -1282,7 +1282,7 @@ public class DataStore {
 
         final List<Waypoint> waypoints = cache.getWaypoints();
         if (CollectionUtils.isNotEmpty(waypoints)) {
-            final ArrayList<String> currentWaypointIds = new ArrayList<String>();
+            final ArrayList<String> currentWaypointIds = new ArrayList<>();
             final ContentValues values = new ContentValues();
             final long timeStamp = System.currentTimeMillis();
             for (final Waypoint oneWaypoint : waypoints) {
@@ -1559,14 +1559,14 @@ public class DataStore {
      */
     public static Set<Geocache> loadCaches(final Collection<String> geocodes, final EnumSet<LoadFlag> loadFlags) {
         if (CollectionUtils.isEmpty(geocodes)) {
-            return new HashSet<Geocache>();
+            return new HashSet<>();
         }
 
-        final Set<Geocache> result = new HashSet<Geocache>();
-        final Set<String> remaining = new HashSet<String>(geocodes);
+        final Set<Geocache> result = new HashSet<>();
+        final Set<String> remaining = new HashSet<>(geocodes);
 
         if (loadFlags.contains(LoadFlag.CACHE_BEFORE)) {
-            for (final String geocode : new HashSet<String>(remaining)) {
+            for (final String geocode : new HashSet<>(remaining)) {
                 final Geocache cache = cacheCache.getCacheFromCache(geocode);
                 if (cache != null) {
                     result.add(cache);
@@ -1591,7 +1591,7 @@ public class DataStore {
         }
 
         if (loadFlags.contains(LoadFlag.CACHE_AFTER)) {
-            for (final String geocode : new HashSet<String>(remaining)) {
+            for (final String geocode : new HashSet<>(remaining)) {
                 final Geocache cache = cacheCache.getCacheFromCache(geocode);
                 if (cache != null) {
                     result.add(cache);
@@ -1636,7 +1636,7 @@ public class DataStore {
 
         final Cursor cursor = database.rawQuery(query.toString(), null);
         try {
-            final Set<Geocache> caches = new HashSet<Geocache>();
+            final Set<Geocache> caches = new HashSet<>();
             int logIndex = -1;
 
             while (cursor.moveToNext()) {
@@ -1926,7 +1926,7 @@ public class DataStore {
      */
     @NonNull
     public static List<LogEntry> loadLogs(final String geocode) {
-        final List<LogEntry> logs = new ArrayList<LogEntry>();
+        final List<LogEntry> logs = new ArrayList<>();
 
         if (StringUtils.isBlank(geocode)) {
             return logs;
@@ -1970,7 +1970,7 @@ public class DataStore {
 
         init();
 
-        final Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
+        final Map<LogType, Integer> logCounts = new HashMap<>();
 
         final Cursor cursor = database.query(
                 dbTableLogCount,
@@ -1998,7 +1998,7 @@ public class DataStore {
 
         init();
 
-        final List<Trackable> trackables = new ArrayList<Trackable>();
+        final List<Trackable> trackables = new ArrayList<>();
 
         final Cursor cursor = database.query(
                 dbTableTrackables,
@@ -2265,7 +2265,7 @@ public class DataStore {
      * @return Set with geocodes
      */
     private static SearchResult loadInViewport(final boolean stored, final Viewport viewport, final CacheType cacheType) {
-        final Set<String> geocodes = new HashSet<String>();
+        final Set<String> geocodes = new HashSet<>();
 
         // if not stored only, get codes from CacheCache as well
         if (!stored) {
@@ -2319,7 +2319,7 @@ public class DataStore {
         Log.d("Database clean: started");
 
         try {
-            Set<String> geocodes = new HashSet<String>();
+            Set<String> geocodes = new HashSet<>();
             if (more) {
                 queryToColl(dbTableCaches,
                         new String[]{"geocode"},
@@ -2420,7 +2420,7 @@ public class DataStore {
 
         if (removeFlags.contains(RemoveFlag.DB)) {
             // Drop caches from the database
-            final ArrayList<String> quotedGeocodes = new ArrayList<String>(geocodes.size());
+            final ArrayList<String> quotedGeocodes = new ArrayList<>(geocodes.size());
             for (final String geocode : geocodes) {
                 quotedGeocodes.add(DatabaseUtils.sqlEscapeString(geocode));
             }
@@ -2528,7 +2528,7 @@ public class DataStore {
 
         init();
 
-        final Set<String> geocodes = new HashSet<String>(caches.size());
+        final Set<String> geocodes = new HashSet<>(caches.size());
         for (final Geocache cache : caches) {
             geocodes.add(cache.getGeocode());
             cache.setLogOffline(false);
@@ -2583,7 +2583,7 @@ public class DataStore {
         init();
 
         final Resources res = CgeoApplication.getInstance().getResources();
-        final List<StoredList> lists = new ArrayList<StoredList>();
+        final List<StoredList> lists = new ArrayList<>();
         lists.add(new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) PreparedStatements.getCountCachesOnStandardList().simpleQueryForLong()));
 
         try {
@@ -2919,7 +2919,7 @@ public class DataStore {
 
     private static class PreparedStatements {
 
-        private static HashMap<String, SQLiteStatement> statements = new HashMap<String, SQLiteStatement>();
+        private static HashMap<String, SQLiteStatement> statements = new HashMap<>();
 
         public static SQLiteStatement getMoveToStandardList() {
             return getStatement("MoveToStandardList", "UPDATE " + dbTableCaches + " SET reason = " + StoredList.STANDARD_LIST_ID + " WHERE reason = ?");
@@ -3054,7 +3054,7 @@ public class DataStore {
     public static Set<String> getCachedMissingFromSearch(final SearchResult searchResult, final Set<Tile> tiles, final IConnector connector, final int maxZoom) {
 
         // get cached CacheListActivity
-        final Set<String> cachedGeocodes = new HashSet<String>();
+        final Set<String> cachedGeocodes = new HashSet<>();
         for (final Tile tile : tiles) {
             cachedGeocodes.addAll(cacheCache.getInViewport(tile.getViewport(), CacheType.ALL));
         }
@@ -3062,7 +3062,7 @@ public class DataStore {
         cachedGeocodes.removeAll(searchResult.getGeocodes());
 
         // check remaining against viewports
-        final Set<String> missingFromSearch = new HashSet<String>();
+        final Set<String> missingFromSearch = new HashSet<>();
         for (final String geocode : cachedGeocodes) {
             if (connector.canHandle(geocode)) {
                 final Geocache geocache = cacheCache.getCacheFromCache(geocode);
@@ -3179,7 +3179,7 @@ public class DataStore {
         final Set<Geocache> cachesSet = DataStore.loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
 
         // order result set by time again
-        final ArrayList<Geocache> caches = new ArrayList<Geocache>(cachesSet);
+        final ArrayList<Geocache> caches = new ArrayList<>(cachesSet);
         Collections.sort(caches, new Comparator<Geocache>() {
 
             @Override

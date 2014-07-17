@@ -1,6 +1,5 @@
 package cgeo.geocaching.ui.logs;
 
-import cgeo.geocaching.Image;
 import cgeo.geocaching.ImagesActivity;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
@@ -110,7 +109,7 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
             holder.images.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
-                    ImagesActivity.startActivityLogImages(activity, getGeocode(), new ArrayList<Image>(log.getLogImages()));
+                    ImagesActivity.startActivityLogImages(activity, getGeocode(), new ArrayList<>(log.getLogImages()));
                 }
             });
         } else {

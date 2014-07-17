@@ -28,7 +28,7 @@ public class Units {
                 units = "m";
             }
         }
-        return new ImmutablePair<Double, String>(distance, units);
+        return new ImmutablePair<>(distance, units);
     }
 
     public static String getDistanceFromKilometers(final Float distanceKilometers) {

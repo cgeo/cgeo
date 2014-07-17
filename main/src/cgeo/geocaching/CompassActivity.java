@@ -56,7 +56,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     private static final String EXTRAS_NAME = "name";
     private static final String EXTRAS_GEOCODE = "geocode";
     private static final String EXTRAS_CACHE_INFO = "cacheinfo";
-    private static final List<IWaypoint> coordinates = new ArrayList<IWaypoint>();
+    private static final List<IWaypoint> coordinates = new ArrayList<>();
 
     /**
      * Destination of the compass, or null (if the compass is used for a waypoint only).

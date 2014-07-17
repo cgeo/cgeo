@@ -98,7 +98,7 @@ public class GpxExport extends AbstractExport {
     }
 
     private static String[] getGeocodes(final List<Geocache> caches) {
-        final ArrayList<String> allGeocodes = new ArrayList<String>(caches.size());
+        final ArrayList<String> allGeocodes = new ArrayList<>(caches.size());
         for (final Geocache geocache : caches) {
             allGeocodes.add(geocache.getGeocode());
         }
@@ -132,7 +132,7 @@ public class GpxExport extends AbstractExport {
                 return null;
             }
 
-            final List<String> allGeocodes = new ArrayList<String>(Arrays.asList(geocodes));
+            final List<String> allGeocodes = new ArrayList<>(Arrays.asList(geocodes));
 
             setMessage(CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts, allGeocodes.size(), allGeocodes.size()));
 

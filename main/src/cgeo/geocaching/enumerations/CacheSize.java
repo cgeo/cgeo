@@ -40,7 +40,7 @@ public enum CacheSize {
 
     final private static Map<String, CacheSize> FIND_BY_ID;
     static {
-        final HashMap<String, CacheSize> mapping = new HashMap<String, CacheSize>();
+        final HashMap<String, CacheSize> mapping = new HashMap<>();
         for (final CacheSize cs : values()) {
             mapping.put(cs.id.toLowerCase(Locale.US), cs);
             mapping.put(cs.ocSize2.toLowerCase(Locale.US), cs);

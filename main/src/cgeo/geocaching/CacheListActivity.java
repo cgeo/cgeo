@@ -121,7 +121,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private Geopoint coords = null;
     private SearchResult search = null;
     /** The list of shown caches shared with Adapter. Don't manipulate outside of main thread only with Handler */
-    private final List<Geocache> cacheList = new ArrayList<Geocache>();
+    private final List<Geocache> cacheList = new ArrayList<>();
     private CacheListAdapter adapter = null;
     private View listFooter = null;
     private TextView listFooterText = null;
@@ -762,7 +762,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private SearchResult getFilteredSearch() {
-        final Set<String> geocodes = new HashSet<String>();
+        final Set<String> geocodes = new HashSet<>();
         for (final Geocache cache : adapter.getFilteredList()) {
             geocodes.add(cache.getGeocode());
         }
@@ -770,7 +770,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     public void deletePastEvents() {
-        final List<Geocache> deletion = new ArrayList<Geocache>();
+        final List<Geocache> deletion = new ArrayList<>();
         for (final Geocache cache : adapter.getCheckedOrAllCaches()) {
             if (DateUtils.isPastEvent(cache)) {
                 deletion.add(cache);
@@ -1726,7 +1726,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      * @return
      */
     private CharSequence getCurrentSubtitle() {
-        final ArrayList<String> numbers = new ArrayList<String>();
+        final ArrayList<String> numbers = new ArrayList<>();
         if (adapter.isFiltered()) {
             numbers.add(getCacheNumberString(getResources(), adapter.getCount()));
         }

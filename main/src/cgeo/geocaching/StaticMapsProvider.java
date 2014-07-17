@@ -115,7 +115,7 @@ public final class StaticMapsProvider {
         // TODO Check if this is also OK, was width -25
         final Point displaySize = Compatibility.getDisplaySize();
 
-        final List<Observable<String>> downloaders = new LinkedList<Observable<String>>();
+        final List<Observable<String>> downloaders = new LinkedList<>();
 
         if (Settings.isStoreOfflineMaps() && cache.getCoords() != null) {
             downloaders.add(storeCachePreviewMap(cache));
@@ -145,7 +145,7 @@ public final class StaticMapsProvider {
      */
     private static Observable<String> refreshAllWpStaticMaps(final Geocache cache, final int width, final int height) {
         LocalStorage.deleteFilesWithPrefix(cache.getGeocode(), MAP_FILENAME_PREFIX + WAYPOINT_PREFIX);
-        final List<Observable<String>> downloaders = new LinkedList<Observable<String>>();
+        final List<Observable<String>> downloaders = new LinkedList<>();
         for (final Waypoint waypoint : cache.getWaypoints()) {
             downloaders.add(storeWaypointStaticMap(cache.getGeocode(), width, height, waypoint));
         }

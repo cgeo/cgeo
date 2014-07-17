@@ -27,6 +27,6 @@ public class CheckECCredentialsPreference extends AbstractCheckCredentialsPrefer
 
     @Override
     protected ImmutablePair<StatusCode, Drawable> login() {
-        return new ImmutablePair<StatusCode, Drawable>(ECLogin.getInstance().login(), null);
+        return new ImmutablePair<>(ECLogin.getInstance().login(), null);
     }
 }

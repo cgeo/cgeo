@@ -31,11 +31,11 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
     public LeastRecentlyUsedSet(int maxEntries, int initialCapacity, float loadFactor) {
         // because we don't use any Map.get() methods from the Set, BOUNDED and LRU_CACHE have the exact same Behaviour
         // So we use LRU_CACHE mode because it should perform a bit better (as it doesn't re-add explicitly)
-        map = new LeastRecentlyUsedMap.LruCache<E, Object>(maxEntries, initialCapacity, loadFactor);
+        map = new LeastRecentlyUsedMap.LruCache<>(maxEntries, initialCapacity, loadFactor);
     }
 
     public LeastRecentlyUsedSet(int maxEntries) {
-        map = new LeastRecentlyUsedMap.LruCache<E, Object>(maxEntries);
+        map = new LeastRecentlyUsedMap.LruCache<>(maxEntries);
     }
 
     /**
@@ -157,7 +157,7 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
      * @return List based clone of the set
      */
     public synchronized List<E> getAsList() {
-        return new ArrayList<E>(this);
+        return new ArrayList<>(this);
     }
 
     /**
@@ -200,7 +200,7 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
         final float loadFactor = s.readFloat();
         final int maxEntries = s.readInt();
 
-        map = new LeastRecentlyUsedMap.LruCache<E, Object>(maxEntries, capacity, loadFactor);
+        map = new LeastRecentlyUsedMap.LruCache<>(maxEntries, capacity, loadFactor);
 
         // Read in size
         final int size = s.readInt();

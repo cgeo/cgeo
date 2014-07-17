@@ -105,12 +105,12 @@ public abstract class GPXParser extends FileParser {
     private String parentCacheCode = null;
     private boolean wptVisited = false;
     private boolean wptUserDefined = false;
-    private List<LogEntry> logs = new ArrayList<LogEntry>();
+    private List<LogEntry> logs = new ArrayList<>();
 
     /**
      * Parser result. Maps geocode to cache.
      */
-    private final Set<String> result = new HashSet<String>(100);
+    private final Set<String> result = new HashSet<>(100);
     private ProgressInputStream progressStream;
     /**
      * URL contained in the header of the GPX file. Used to guess where the file is coming from.
@@ -381,10 +381,10 @@ public abstract class GPXParser extends FileParser {
                         waypoint.setCoords(cache.getCoords());
                         waypoint.setNote(cache.getDescription());
                         waypoint.setVisited(wptVisited);
-                        final ArrayList<Waypoint> mergedWayPoints = new ArrayList<Waypoint>();
+                        final ArrayList<Waypoint> mergedWayPoints = new ArrayList<>();
                         mergedWayPoints.addAll(cacheForWaypoint.getWaypoints());
 
-                        final ArrayList<Waypoint> newPoints = new ArrayList<Waypoint>();
+                        final ArrayList<Waypoint> newPoints = new ArrayList<>();
                         newPoints.add(waypoint);
                         Waypoint.mergeWayPoints(newPoints, mergedWayPoints, true);
                         cacheForWaypoint.setWaypoints(newPoints, false);
@@ -1001,7 +1001,7 @@ public abstract class GPXParser extends FileParser {
         parentCacheCode = null;
         wptVisited = false;
         wptUserDefined = false;
-        logs = new ArrayList<LogEntry>();
+        logs = new ArrayList<>();
 
         cache = new Geocache(this);
 

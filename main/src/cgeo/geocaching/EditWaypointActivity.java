@@ -49,7 +49,7 @@ import java.util.List;
 
 @EActivity
 public class EditWaypointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
-    private static final ArrayList<WaypointType> POSSIBLE_WAYPOINT_TYPES = new ArrayList<WaypointType>(WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL);
+    private static final ArrayList<WaypointType> POSSIBLE_WAYPOINT_TYPES = new ArrayList<>(WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL);
 
     @ViewById(R.id.buttonLatitude) protected Button buttonLat;
     @ViewById(R.id.buttonLongitude) protected Button buttonLon;
@@ -159,11 +159,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         addWaypoint.setOnClickListener(new SaveWaypointListener());
 
-        List<String> wayPointNames = new ArrayList<String>();
+        List<String> wayPointNames = new ArrayList<>();
         for (WaypointType wpt : WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL) {
             wayPointNames.add(wpt.getL10n());
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, wayPointNames);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, wayPointNames);
         waypointName.setAdapter(adapter);
 
         if (savedInstanceState != null) {
@@ -205,7 +205,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     }
 
     private void initializeWaypointTypeSelector() {
-        ArrayAdapter<WaypointType> wpAdapter = new ArrayAdapter<WaypointType>(this, android.R.layout.simple_spinner_item, POSSIBLE_WAYPOINT_TYPES.toArray(new WaypointType[POSSIBLE_WAYPOINT_TYPES.size()]));
+        ArrayAdapter<WaypointType> wpAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, POSSIBLE_WAYPOINT_TYPES.toArray(new WaypointType[POSSIBLE_WAYPOINT_TYPES.size()]));
         wpAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         waypointTypeSelector.setAdapter(wpAdapter);
 
@@ -247,7 +247,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     }
 
     private void initializeDistanceUnitSelector() {
-        distanceUnits = new ArrayList<String>(Arrays.asList(res.getStringArray(R.array.distance_units)));
+        distanceUnits = new ArrayList<>(Arrays.asList(res.getStringArray(R.array.distance_units)));
         if (initViews) {
             distanceUnitSelector.setSelection(Settings.isUseImperialUnits() ? 2 : 0); //0:m, 2:ft
         }

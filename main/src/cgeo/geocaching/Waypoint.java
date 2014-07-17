@@ -89,7 +89,7 @@ public class Waypoint implements IWaypoint {
 
     public static void mergeWayPoints(final List<Waypoint> newPoints, final List<Waypoint> oldPoints, final boolean forceMerge) {
         // Build a map of new waypoints for faster subsequent lookups
-        final Map<String, Waypoint> newPrefixes = new HashMap<String, Waypoint>(newPoints.size());
+        final Map<String, Waypoint> newPrefixes = new HashMap<>(newPoints.size());
         for (final Waypoint waypoint : newPoints) {
             newPrefixes.put(waypoint.getPrefix(), waypoint);
         }
@@ -302,7 +302,7 @@ public class Waypoint implements IWaypoint {
      * @return a collection of found waypoints
      */
     public static Collection<Waypoint> parseWaypointsFromNote(@NonNull final String initialNote) {
-        final List<Waypoint> waypoints = new LinkedList<Waypoint>();
+        final List<Waypoint> waypoints = new LinkedList<>();
         final Pattern COORDPATTERN = Pattern.compile("\\b[nNsS]{1}\\s*\\d"); // begin of coordinates
 
         String note = initialNote;

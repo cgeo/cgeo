@@ -298,7 +298,7 @@ public class Tile {
      * @return
      */
     protected static Set<Tile> getTilesForViewport(final Viewport viewport, final int tilesOnAxis, final int minZoom) {
-        Set<Tile> tiles = new HashSet<Tile>();
+        Set<Tile> tiles = new HashSet<>();
         int zoom = Math.max(
                 Math.min(Tile.calcZoomLon(viewport.bottomLeft, viewport.topRight, tilesOnAxis),
                         Tile.calcZoomLat(viewport.bottomLeft, viewport.topRight, tilesOnAxis)),
@@ -331,7 +331,7 @@ public class Tile {
         }
 
         public void removeFromTileCache(@NonNull final ICoordinates point) {
-            for (final Tile tile : new ArrayList<Tile>(this)) {
+            for (final Tile tile : new ArrayList<>(this)) {
                 if (tile.containsPoint(point)) {
                     remove(tile);
                 }

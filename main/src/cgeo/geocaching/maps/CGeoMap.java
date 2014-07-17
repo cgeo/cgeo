@@ -180,13 +180,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private static final int[][] INSET_USERMODIFIEDCOORDS = { { 21, 28, 0, 0 }, { 19, 25, 0, 0 }, { 25, 33, 0, 0 } }; // bottom right, 12x12 / 26x26 / 35x35
     private static final int[][] INSET_PERSONALNOTE = { { 0, 28, 21, 0 }, { 0, 25, 19, 0 }, { 0, 33, 25, 0 } }; // bottom left, 12x12 / 26x26 / 35x35
 
-    private final SparseArray<LayerDrawable> overlaysCache = new SparseArray<LayerDrawable>();
+    private final SparseArray<LayerDrawable> overlaysCache = new SparseArray<>();
     /** Count of caches currently visible */
     private int cachesCnt = 0;
     /** List of caches in the viewport */
     private LeastRecentlyUsedSet<Geocache> caches = null;
     /** List of waypoints in the viewport */
-    private final LeastRecentlyUsedSet<Waypoint> waypoints = new LeastRecentlyUsedSet<Waypoint>(MAX_CACHES);
+    private final LeastRecentlyUsedSet<Waypoint> waypoints = new LeastRecentlyUsedSet<>(MAX_CACHES);
     // storing for offline
     private ProgressDialog waitDialog = null;
     private int detailTotal = 0;
@@ -203,18 +203,18 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private boolean markersInvalidated = false; // previous state for loadTimer
     private boolean centered = false; // if map is already centered
     private boolean alreadyCentered = false; // -""- for setting my location
-    private static final Set<String> dirtyCaches = new HashSet<String>();
+    private static final Set<String> dirtyCaches = new HashSet<>();
     /**
      * if live map is enabled, this is the minimum zoom level, independent of the stored setting
      */
     private static final int MIN_LIVEMAP_ZOOM = 12;
 
     // Thread pooling
-    private static BlockingQueue<Runnable> displayQueue = new ArrayBlockingQueue<Runnable>(1);
+    private static BlockingQueue<Runnable> displayQueue = new ArrayBlockingQueue<>(1);
     private static ThreadPoolExecutor displayExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, displayQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
-    private static BlockingQueue<Runnable> downloadQueue = new ArrayBlockingQueue<Runnable>(1);
+    private static BlockingQueue<Runnable> downloadQueue = new ArrayBlockingQueue<>(1);
     private static ThreadPoolExecutor downloadExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, downloadQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
-    private static BlockingQueue<Runnable> loadQueue = new ArrayBlockingQueue<Runnable>(1);
+    private static BlockingQueue<Runnable> loadQueue = new ArrayBlockingQueue<>(1);
     private static ThreadPoolExecutor loadExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, loadQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
 
     // handlers
@@ -224,7 +224,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         private final WeakReference<CGeoMap> mapRef;
 
         public DisplayHandler(@NonNull final CGeoMap map) {
-            this.mapRef = new WeakReference<CGeoMap>(map);
+            this.mapRef = new WeakReference<>(map);
         }
 
         @Override
@@ -296,7 +296,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         @NonNull private final WeakReference<CGeoMap> mapRef;
 
         public ShowProgressHandler(@NonNull final CGeoMap map) {
-            this.mapRef = new WeakReference<CGeoMap>(map);
+            this.mapRef = new WeakReference<>(map);
         }
 
         @Override
@@ -437,7 +437,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         app = (CgeoApplication) activity.getApplication();
 
         final int countBubbleCnt = DataStore.getAllCachesCount();
-        caches = new LeastRecentlyUsedSet<Geocache>(MAX_CACHES + countBubbleCnt);
+        caches = new LeastRecentlyUsedSet<>(MAX_CACHES + countBubbleCnt);
 
         final MapProvider mapProvider = Settings.getMapProvider();
         mapItemFactory = mapProvider.getMapItemFactory();
@@ -718,7 +718,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             case R.id.menu_store_caches:
                 if (!isLoading()) {
                     final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
-                    final List<String> geocodes = new ArrayList<String>();
+                    final List<String> geocodes = new ArrayList<>();
 
                     for (final String geocode : geocodesInViewport) {
                         if (!DataStore.isOffline(geocode, null)) {
@@ -815,7 +815,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             currentTheme = currentThemeFile.getName();
         }
 
-        final List<String> names = new ArrayList<String>();
+        final List<String> names = new ArrayList<>();
         names.add(res.getString(R.string.map_theme_builtin));
         int currentItem = 0;
         for (final File file : themeFiles) {
@@ -856,7 +856,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
      * @return a non-null Set of geocodes corresponding to the caches that are shown on screen.
      */
     private Set<String> getGeocodesForCachesInViewport() {
-        final Set<String> geocodes = new HashSet<String>();
+        final Set<String> geocodes = new HashSet<>();
         final List<Geocache> cachesProtected = caches.getAsList();
 
         final Viewport viewport = mapView.getViewport();
@@ -980,7 +980,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         private final WeakReference<CGeoMap> map;
 
         public UpdateLoc(final CGeoMap map) {
-            this.map = new WeakReference<CGeoMap>(map);
+            this.map = new WeakReference<>(map);
         }
 
         @Override
@@ -1091,7 +1091,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         @NonNull private final WeakReference<CGeoMap> mapRef;
 
         public LoadTimerAction(@NonNull final CGeoMap map) {
-            this.mapRef = new WeakReference<CGeoMap>(map);
+            this.mapRef = new WeakReference<>(map);
         }
 
         @Override
@@ -1331,8 +1331,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
             // display caches
             final List<Geocache> cachesToDisplay = caches.getAsList();
-            final List<Waypoint> waypointsToDisplay = new ArrayList<Waypoint>(waypoints);
-            final List<CachesOverlayItemImpl> itemsToDisplay = new ArrayList<CachesOverlayItemImpl>();
+            final List<Waypoint> waypointsToDisplay = new ArrayList<>(waypoints);
+            final List<CachesOverlayItemImpl> itemsToDisplay = new ArrayList<>();
 
             if (!cachesToDisplay.isEmpty()) {
                 // Only show waypoints for single view or setting
@@ -1389,7 +1389,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         private final WeakReference<CGeoMap> mapRef;
 
         protected DoRunnable(@NonNull final CGeoMap map) {
-            mapRef = new WeakReference<CGeoMap>(map);
+            mapRef = new WeakReference<>(map);
         }
 
         protected @Nullable
@@ -1494,7 +1494,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         final boolean excludeMine = Settings.isExcludeMyCaches();
         final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
 
-        final List<Geocache> removeList = new ArrayList<Geocache>();
+        final List<Geocache> removeList = new ArrayList<>();
         for (final Geocache cache : caches) {
             if ((excludeMine && cache.isFound()) || (excludeMine && cache.isOwner()) || (excludeDisabled && cache.isDisabled()) || (excludeDisabled && cache.isArchived())) {
                 removeList.add(cache);
@@ -1596,7 +1596,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         private final WeakReference<CGeoMap> mapRef;
 
         public MyLocationListener(@NonNull final CGeoMap map) {
-            mapRef = new WeakReference<CGeoMap>(map);
+            mapRef = new WeakReference<>(map);
         }
 
         @Override
@@ -1618,7 +1618,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         private final WeakReference<CGeoMap> mapRef;
 
         public MapDragListener(@NonNull final CGeoMap map) {
-            mapRef = new WeakReference<CGeoMap>(map);
+            mapRef = new WeakReference<>(map);
         }
 
         @Override
@@ -1726,8 +1726,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     private LayerDrawable createCacheItem(final Geocache cache, final int hashcode) {
         // Set initial capacities to the maximum of layers and insets to avoid dynamic reallocation
-        final ArrayList<Drawable> layers = new ArrayList<Drawable>(9);
-        final ArrayList<int[]> insets = new ArrayList<int[]>(8);
+        final ArrayList<Drawable> layers = new ArrayList<>(9);
+        final ArrayList<int[]> insets = new ArrayList<>(8);
 
         // background: disabled or not
         final Drawable marker = getResources().getDrawable(cache.getMapMarkerId());

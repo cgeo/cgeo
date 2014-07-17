@@ -73,7 +73,7 @@ public final class ContactsActivity extends Activity {
     }
 
     private void selectContact(final List<Pair<Integer, String>> contacts) {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         for (Pair<Integer, String> p : contacts) {
             list.add(p.second);
         }
@@ -105,13 +105,13 @@ public final class ContactsActivity extends Activity {
         final String[] selectionArgs = new String[] { like ? "%" + searchName + "%" : searchName };
         Cursor cursor = null;
 
-        List<Pair<Integer, String>> result = new ArrayList<Pair<Integer, String>>();
+        List<Pair<Integer, String>> result = new ArrayList<>();
         try {
             cursor = getContentResolver().query(uri, projection, selection, selectionArgs, null);
             while (cursor != null && cursor.moveToNext()) {
                 int foundId = cursor.getInt(0);
                 String foundName = cursor.getString(1);
-                result.add(new Pair<Integer, String>(foundId, foundName));
+                result.add(new Pair<>(foundId, foundName));
             }
         } catch (Exception e) {
             Log.e(LOG_TAG, "ContactsActivity.getContactId", e);

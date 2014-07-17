@@ -52,7 +52,7 @@ class PopularityRatioFilter extends AbstractFilter {
 
         @Override
         public List<IFilter> getFilters() {
-            final List<IFilter> filters = new ArrayList<IFilter>(RATIOS.length);
+            final List<IFilter> filters = new ArrayList<>(RATIOS.length);
             for (int i = 0; i < RATIOS.length; i++) {
                 final int minRange = RATIOS[i];
                 final int maxRange = Integer.MAX_VALUE;

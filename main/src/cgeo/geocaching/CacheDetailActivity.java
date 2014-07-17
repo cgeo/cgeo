@@ -475,7 +475,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         private final WeakReference<CacheDetailActivity> activityRef;
 
         public CacheDetailsGeoDirHandler(final CacheDetailActivity activity) {
-            this.activityRef = new WeakReference<CacheDetailActivity>(activity);
+            this.activityRef = new WeakReference<>(activity);
         }
 
         @Override
@@ -1685,7 +1685,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             // sort waypoints: PP, Sx, FI, OWN
-            final List<Waypoint> sortedWaypoints = new ArrayList<Waypoint>(cache.getWaypoints());
+            final List<Waypoint> sortedWaypoints = new ArrayList<>(cache.getWaypoints());
             Collections.sort(sortedWaypoints, Waypoint.WAYPOINT_COMPARATOR);
 
             view = (ListView) getLayoutInflater().inflate(R.layout.cachedetail_waypoints_page, parentView, false);
@@ -1852,7 +1852,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // TODO: fix layout, then switch back to Android-resource and delete copied one
             // this copy is modified to respect the text color
-            view.setAdapter(new ArrayAdapter<Trackable>(CacheDetailActivity.this, R.layout.simple_list_item_1, cache.getInventory()));
+            view.setAdapter(new ArrayAdapter<>(CacheDetailActivity.this, R.layout.simple_list_item_1, cache.getInventory()));
             view.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(final AdapterView<?> arg0, final View arg1, final int arg2, final long arg3) {
@@ -2133,7 +2133,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     protected Pair<List<? extends Page>, Integer> getOrderedPages() {
-        final ArrayList<Page> pages = new ArrayList<Page>();
+        final ArrayList<Page> pages = new ArrayList<>();
         pages.add(Page.WAYPOINTS);
         pages.add(Page.DETAILS);
         final int detailsIndex = pages.size() - 1;

@@ -60,9 +60,9 @@ public enum CacheType {
     private final static Map<String, CacheType> FIND_BY_PATTERN;
     private final static Map<String, CacheType> FIND_BY_GUID;
     static {
-        final HashMap<String, CacheType> mappingId = new HashMap<String, CacheType>();
-        final HashMap<String, CacheType> mappingPattern = new HashMap<String, CacheType>();
-        final HashMap<String, CacheType> mappingGuid = new HashMap<String, CacheType>();
+        final HashMap<String, CacheType> mappingId = new HashMap<>();
+        final HashMap<String, CacheType> mappingPattern = new HashMap<>();
+        final HashMap<String, CacheType> mappingGuid = new HashMap<>();
         for (CacheType ct : values()) {
             mappingId.put(ct.id, ct);
             mappingPattern.put(ct.pattern.toLowerCase(Locale.US), ct);

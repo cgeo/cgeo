@@ -67,7 +67,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private Geocache cache = null;
     private String geocode = null;
     private String text = null;
-    private List<LogType> possibleLogTypes = new ArrayList<LogType>();
+    private List<LogType> possibleLogTypes = new ArrayList<>();
     private List<TrackableLog> trackables = null;
     private CheckBox tweetCheck = null;
     private LinearLayout tweetBox = null;
@@ -136,7 +136,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         if (inflater == null) {
             inflater = getLayoutInflater();
         }
-        actionButtons = new SparseArray<TrackableLog>();
+        actionButtons = new SparseArray<>();
 
         final LinearLayout inventoryView = (LinearLayout) findViewById(R.id.inventory);
         inventoryView.removeAllViews();
@@ -428,7 +428,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     DataStore.saveChangedCache(cache);
 
                     // update logs in DB
-                    final ArrayList<LogEntry> newLogs = new ArrayList<LogEntry>(cache.getLogs());
+                    final ArrayList<LogEntry> newLogs = new ArrayList<>(cache.getLogs());
                     final LogEntry logNow = new LogEntry(date.getTimeInMillis(), typeSelected, log);
                     logNow.friend = true;
                     newLogs.add(0, logNow);
@@ -536,7 +536,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private void selectLogType() {
         // use a local copy of the possible types, as that one might be modified in the background by the loader
-        final ArrayList<LogType> possible = new ArrayList<LogType>(possibleLogTypes);
+        final ArrayList<LogType> possible = new ArrayList<>(possibleLogTypes);
 
         final Builder alert = new AlertDialog.Builder(this);
         final String[] choices = new String[possible.size()];

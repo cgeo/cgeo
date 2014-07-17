@@ -354,7 +354,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     @Override
     protected Pair<List<? extends Page>, Integer> getOrderedPages() {
-        final List<Page> pages = new ArrayList<TrackableActivity.Page>();
+        final List<Page> pages = new ArrayList<>();
         pages.add(Page.DETAILS);
         if (!trackable.getLogs().isEmpty()) {
             pages.add(Page.LOGS);

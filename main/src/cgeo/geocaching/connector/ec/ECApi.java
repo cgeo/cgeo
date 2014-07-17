@@ -177,7 +177,7 @@ public class ECApi {
                 }
                 final JSONArray json = new JSONArray(data);
                 final int len = json.length();
-                final List<Geocache> caches = new ArrayList<Geocache>(len);
+                final List<Geocache> caches = new ArrayList<>(len);
                 for (int i = 0; i < len; i++) {
                     final Geocache cache = parseCache(json.getJSONObject(i));
                     if (cache != null) {

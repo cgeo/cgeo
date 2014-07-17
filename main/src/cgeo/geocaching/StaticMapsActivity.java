@@ -35,7 +35,7 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
     @Extra(EXTRAS_WAYPOINT) Integer waypointId = null;
     @Extra(EXTRAS_GEOCODE) String geocode = null;
 
-    private final List<Bitmap> maps = new ArrayList<Bitmap>();
+    private final List<Bitmap> maps = new ArrayList<>();
     private LayoutInflater inflater = null;
     private ProgressDialog waitDialog = null;
     private LinearLayout smapsView = null;

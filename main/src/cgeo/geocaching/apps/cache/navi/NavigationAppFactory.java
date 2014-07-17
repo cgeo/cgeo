@@ -140,7 +140,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     public static void showNavigationMenu(final Activity activity,
             final Geocache cache, final Waypoint waypoint, final Geopoint destination,
             final boolean showInternalMap, final boolean showDefaultNavigation) {
-        final List<NavigationAppsEnum> items = new ArrayList<NavigationAppFactory.NavigationAppsEnum>();
+        final List<NavigationAppsEnum> items = new ArrayList<>();
         final int defaultNavigationTool = Settings.getDefaultNavigationTool();
         for (final NavigationAppsEnum navApp : getInstalledNavigationApps()) {
             if ((showInternalMap || !(navApp.app instanceof InternalMap)) &&
@@ -172,7 +172,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
          * Using an ArrayAdapter with list of NavigationAppsEnum items avoids
          * handling between mapping list positions allows us to do dynamic filtering of the list based on use case.
          */
-        final ArrayAdapter<NavigationAppsEnum> adapter = new ArrayAdapter<NavigationAppsEnum>(activity, android.R.layout.select_dialog_item, items);
+        final ArrayAdapter<NavigationAppsEnum> adapter = new ArrayAdapter<>(activity, android.R.layout.select_dialog_item, items);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.cache_menu_navigate);
@@ -193,7 +193,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @return
      */
     public static List<NavigationAppsEnum> getInstalledNavigationApps() {
-        final List<NavigationAppsEnum> installedNavigationApps = new ArrayList<NavigationAppsEnum>();
+        final List<NavigationAppsEnum> installedNavigationApps = new ArrayList<>();
         for (final NavigationAppsEnum appEnum : NavigationAppsEnum.values()) {
             if (appEnum.app.isInstalled()) {
                 installedNavigationApps.add(appEnum);
@@ -208,7 +208,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @return
      */
     public static List<NavigationAppsEnum> getInstalledDefaultNavigationApps() {
-        final List<NavigationAppsEnum> installedNavigationApps = new ArrayList<NavigationAppsEnum>();
+        final List<NavigationAppsEnum> installedNavigationApps = new ArrayList<>();
         for (final NavigationAppsEnum appEnum : NavigationAppsEnum.values()) {
             if (appEnum.app.isInstalled() && appEnum.app.isUsableAsDefaultNavigationApp()) {
                 installedNavigationApps.add(appEnum);

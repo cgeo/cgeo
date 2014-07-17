@@ -29,7 +29,7 @@ class SizeFilter extends AbstractFilter {
         @Override
         public List<IFilter> getFilters() {
             final CacheSize[] cacheSizes = CacheSize.values();
-            final List<IFilter> filters = new LinkedList<IFilter>();
+            final List<IFilter> filters = new LinkedList<>();
             for (CacheSize cacheSize : cacheSizes) {
                 if (cacheSize != CacheSize.UNKNOWN) {
                     filters.add(new SizeFilter(cacheSize));

@@ -78,7 +78,7 @@ public class LoggingUI extends AbstractUIFactory {
         final LogType currentLogType = currentLog == null ? null : currentLog.type;
 
         final List<LogType> logTypes = cache.getPossibleLogTypes();
-        final ArrayList<LogTypeEntry> list = new ArrayList<LogTypeEntry>();
+        final ArrayList<LogTypeEntry> list = new ArrayList<>();
         for (LogType logType : logTypes) {
             list.add(new LogTypeEntry(logType, null, logType == currentLogType));
         }
@@ -90,7 +90,7 @@ public class LoggingUI extends AbstractUIFactory {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.cache_menu_visit_offline);
 
-        final ArrayAdapter<LogTypeEntry> adapter = new ArrayAdapter<LogTypeEntry>(activity, android.R.layout.select_dialog_item, list);
+        final ArrayAdapter<LogTypeEntry> adapter = new ArrayAdapter<>(activity, android.R.layout.select_dialog_item, list);
 
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             @Override

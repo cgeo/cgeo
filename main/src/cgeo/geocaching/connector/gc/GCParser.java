@@ -82,7 +82,7 @@ public abstract class GCParser {
             return null;
         }
 
-        final List<String> cids = new ArrayList<String>();
+        final List<String> cids = new ArrayList<>();
         String page = pageContent;
 
         final SearchResult searchResult = new SearchResult();
@@ -129,7 +129,7 @@ public abstract class GCParser {
         final int rows_count = rows.length;
 
         int excludedCaches = 0;
-        final ArrayList<Geocache> caches = new ArrayList<Geocache>();
+        final ArrayList<Geocache> caches = new ArrayList<>();
         for (int z = 1; z < rows_count; z++) {
             final Geocache cache = new Geocache();
             final String row = rows[z];
@@ -552,7 +552,7 @@ public abstract class GCParser {
             if (null != attributesPre) {
                 final MatcherWrapper matcherAttributesInside = new MatcherWrapper(GCConstants.PATTERN_ATTRIBUTESINSIDE, attributesPre);
 
-                final ArrayList<String> attributes = new ArrayList<String>();
+                final ArrayList<String> attributes = new ArrayList<>();
                 while (matcherAttributesInside.find()) {
                     if (matcherAttributesInside.groupCount() > 1 && !matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
                         // by default, use the tooltip of the attribute
@@ -798,7 +798,7 @@ public abstract class GCParser {
         }
 
         // search results don't need to be filtered so load GCVote ratings here
-        GCVote.loadRatings(new ArrayList<Geocache>(searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB)));
+        GCVote.loadRatings(new ArrayList<>(searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB)));
 
         // save to application
         search.setError(searchResult.getError());
@@ -1002,7 +1002,7 @@ public abstract class GCParser {
             return Collections.emptyList();
         }
 
-        List<PocketQueryList> list = new ArrayList<PocketQueryList>();
+        List<PocketQueryList> list = new ArrayList<>();
 
         final MatcherWrapper matcherPocket = new MatcherWrapper(GCConstants.PATTERN_LIST_PQ, subPage);
 
@@ -1037,12 +1037,12 @@ public abstract class GCParser {
             final String log, final List<TrackableLog> trackables) {
         if (GCLogin.isEmpty(viewstates)) {
             Log.e("GCParser.postLog: No viewstate given");
-            return new ImmutablePair<StatusCode, String>(StatusCode.LOG_POST_ERROR, "");
+            return new ImmutablePair<>(StatusCode.LOG_POST_ERROR, "");
         }
 
         if (StringUtils.isBlank(log)) {
             Log.e("GCParser.postLog: No log text given");
-            return new ImmutablePair<StatusCode, String>(StatusCode.NO_LOG_TEXT, "");
+            return new ImmutablePair<>(StatusCode.NO_LOG_TEXT, "");
         }
 
         final String logInfo = log.replace("\n", "\r\n").trim(); // windows' eol and remove leading and trailing whitespaces
@@ -1089,7 +1089,7 @@ public abstract class GCParser {
         String page = GCLogin.getInstance().postRequestLogged(uri, params);
         if (!GCLogin.getInstance().getLoginStatus(page)) {
             Log.e("GCParser.postLog: Cannot log in geocaching");
-            return new ImmutablePair<StatusCode, String>(StatusCode.NOT_LOGGED_IN, "");
+            return new ImmutablePair<>(StatusCode.NOT_LOGGED_IN, "");
         }
 
         // maintenance, archived needs to be confirmed
@@ -1102,7 +1102,7 @@ public abstract class GCParser {
 
                 if (GCLogin.isEmpty(viewstatesConfirm)) {
                     Log.e("GCParser.postLog: No viewstate for confirm log");
-                    return new ImmutablePair<StatusCode, String>(StatusCode.LOG_POST_ERROR, "");
+                    return new ImmutablePair<>(StatusCode.LOG_POST_ERROR, "");
                 }
 
                 params.clear();
@@ -1159,14 +1159,14 @@ public abstract class GCParser {
 
                 final String logID = TextUtils.getMatch(page, GCConstants.PATTERN_LOG_IMAGE_UPLOAD, "");
 
-                return new ImmutablePair<StatusCode, String>(StatusCode.NO_ERROR, logID);
+                return new ImmutablePair<>(StatusCode.NO_ERROR, logID);
             }
         } catch (final Exception e) {
             Log.e("GCParser.postLog.check", e);
         }
 
         Log.e("GCParser.postLog: Failed to post log because of unknown error");
-        return new ImmutablePair<StatusCode, String>(StatusCode.LOG_POST_ERROR, "");
+        return new ImmutablePair<>(StatusCode.LOG_POST_ERROR, "");
     }
 
     /**
@@ -1188,7 +1188,7 @@ public abstract class GCParser {
         final String page = GCLogin.getInstance().getRequestLogged(uri, null);
         if (StringUtils.isBlank(page)) {
             Log.e("GCParser.uploadLogImage: No data from server");
-            return new ImmutablePair<StatusCode, String>(StatusCode.UNKNOWN_ERROR, null);
+            return new ImmutablePair<>(StatusCode.UNKNOWN_ERROR, null);
         }
         assert page != null;
 
@@ -1780,7 +1780,7 @@ public abstract class GCParser {
             return Collections.emptyList();
         }
 
-        final List<LogType> types = new ArrayList<LogType>();
+        final List<LogType> types = new ArrayList<>();
 
         final MatcherWrapper typeBoxMatcher = new MatcherWrapper(GCConstants.PATTERN_TYPEBOX, page);
         if (typeBoxMatcher.find() && typeBoxMatcher.groupCount() > 0) {
@@ -1824,7 +1824,7 @@ public abstract class GCParser {
             return null;
         }
 
-        final List<TrackableLog> trackableLogs = new ArrayList<TrackableLog>();
+        final List<TrackableLog> trackableLogs = new ArrayList<>();
 
         final MatcherWrapper trackableMatcher = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE, page);
         while (trackableMatcher.find()) {

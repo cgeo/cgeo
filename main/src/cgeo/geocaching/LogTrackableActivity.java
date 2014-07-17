@@ -47,7 +47,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     @InjectView(R.id.tweet) protected CheckBox tweetCheck;
     @InjectView(R.id.tweet_box) protected LinearLayout tweetBox;
 
-    private List<LogType> possibleLogTypes = new ArrayList<LogType>();
+    private List<LogType> possibleLogTypes = new ArrayList<>();
     private ProgressDialog waitDialog = null;
     private String guid = null;
     private String geocode = null;

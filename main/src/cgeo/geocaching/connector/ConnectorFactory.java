@@ -89,7 +89,7 @@ public final class ConnectorFactory {
 
     @SuppressWarnings("unchecked")
     private static <T extends IConnector> Collection<T> getMatchingConnectors(final Class<T> clazz) {
-        final List<T> matching = new ArrayList<T>();
+        final List<T> matching = new ArrayList<>();
         for (final IConnector connector : CONNECTORS) {
             if (clazz.isInstance(connector)) {
                 matching.add((T) connector);
@@ -119,7 +119,7 @@ public final class ConnectorFactory {
     }
 
     public static ILogin[] getActiveLiveConnectors() {
-        final List<ILogin> liveConns = new ArrayList<ILogin>();
+        final List<ILogin> liveConns = new ArrayList<>();
         for (final IConnector conn : CONNECTORS) {
             if (conn instanceof ILogin && conn.isActive()) {
                 liveConns.add((ILogin) conn);

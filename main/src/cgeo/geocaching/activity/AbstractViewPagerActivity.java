@@ -38,17 +38,17 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
      *
      * TODO Move to adapter
      */
-    private final List<Page> pageOrder = new ArrayList<Page>();
+    private final List<Page> pageOrder = new ArrayList<>();
 
     /**
      * Instances of all {@link PageViewCreator}.
      */
-    private final Map<Page, PageViewCreator> viewCreators = new HashMap<Page, PageViewCreator>();
+    private final Map<Page, PageViewCreator> viewCreators = new HashMap<>();
 
     /**
      * Store the states of the page views to be able to persist them when destroyed and reinstantiated again
      */
-    private final Map<Page, Bundle> viewStates = new HashMap<Page, Bundle>();
+    private final Map<Page, Bundle> viewStates = new HashMap<>();
     /**
      * The {@link ViewPager} for this activity.
      */

@@ -75,8 +75,8 @@ public class SearchResult implements Parcelable {
      * @param searchResult the original search result, which cannot be null
      */
     public SearchResult(final SearchResult searchResult) {
-        geocodes = new HashSet<String>(searchResult.geocodes);
-        filteredGeocodes = new HashSet<String>(searchResult.filteredGeocodes);
+        geocodes = new HashSet<>(searchResult.geocodes);
+        filteredGeocodes = new HashSet<>(searchResult.filteredGeocodes);
         error = searchResult.error;
         url = searchResult.url;
         viewstates = searchResult.viewstates;
@@ -93,9 +93,9 @@ public class SearchResult implements Parcelable {
      *            from a web page)
      */
     public SearchResult(final Collection<String> geocodes, final int totalCountGC) {
-        this.geocodes = new HashSet<String>(geocodes.size());
+        this.geocodes = new HashSet<>(geocodes.size());
         this.geocodes.addAll(geocodes);
-        this.filteredGeocodes = new HashSet<String>();
+        this.filteredGeocodes = new HashSet<>();
         this.setTotalCountGC(totalCountGC);
     }
 
@@ -109,12 +109,12 @@ public class SearchResult implements Parcelable {
     }
 
     public SearchResult(final Parcel in) {
-        final ArrayList<String> list = new ArrayList<String>();
+        final ArrayList<String> list = new ArrayList<>();
         in.readStringList(list);
-        geocodes = new HashSet<String>(list);
-        final ArrayList<String> filteredList = new ArrayList<String>();
+        geocodes = new HashSet<>(list);
+        final ArrayList<String> filteredList = new ArrayList<>();
         in.readStringList(filteredList);
-        filteredGeocodes = new HashSet<String>(filteredList);
+        filteredGeocodes = new HashSet<>(filteredList);
         error = (StatusCode) in.readSerializable();
         url = in.readString();
         final int length = in.readInt();
@@ -224,7 +224,7 @@ public class SearchResult implements Parcelable {
 
         SearchResult result = new SearchResult(this);
         result.geocodes.clear();
-        final ArrayList<Geocache> includedCaches = new ArrayList<Geocache>();
+        final ArrayList<Geocache> includedCaches = new ArrayList<>();
         final Set<Geocache> caches = DataStore.loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
         int excluded = 0;
         for (Geocache cache : caches) {

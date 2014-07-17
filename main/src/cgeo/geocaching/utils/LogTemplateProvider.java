@@ -108,7 +108,7 @@ public final class LogTemplateProvider {
      * @return all templates, but not the signature template itself
      */
     public static ArrayList<LogTemplate> getTemplatesWithoutSignature() {
-        final ArrayList<LogTemplate> templates = new ArrayList<LogTemplateProvider.LogTemplate>();
+        final ArrayList<LogTemplate> templates = new ArrayList<>();
         templates.add(new LogTemplate("DATE", R.string.init_signature_template_date) {
 
             @Override

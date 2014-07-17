@@ -55,7 +55,7 @@ public final class LocParser extends FileParser {
         final Map<String, Geocache> cidCoords = parseCoordinates(fileContent);
 
         // save found cache coordinates
-        final HashSet<String> contained = new HashSet<String>();
+        final HashSet<String> contained = new HashSet<>();
         for (String geocode : searchResult.getGeocodes()) {
             if (cidCoords.containsKey(geocode)) {
                 contained.add(geocode);
@@ -82,7 +82,7 @@ public final class LocParser extends FileParser {
     }
 
     static Map<String, Geocache> parseCoordinates(final String fileContent) {
-        final Map<String, Geocache> coords = new HashMap<String, Geocache>();
+        final Map<String, Geocache> coords = new HashMap<>();
         if (StringUtils.isBlank(fileContent)) {
             return coords;
         }
@@ -122,7 +122,7 @@ public final class LocParser extends FileParser {
         final String streamContent = readStream(stream, null).toString();
         final int maxSize = streamContent.length();
         final Map<String, Geocache> coords = parseCoordinates(streamContent);
-        final List<Geocache> caches = new ArrayList<Geocache>();
+        final List<Geocache> caches = new ArrayList<>();
         for (Entry<String, Geocache> entry : coords.entrySet()) {
             Geocache coord = entry.getValue();
             if (StringUtils.isBlank(coord.getGeocode()) || StringUtils.isBlank(coord.getName())) {

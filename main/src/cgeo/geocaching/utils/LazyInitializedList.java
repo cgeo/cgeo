@@ -65,7 +65,7 @@ public abstract class LazyInitializedList<ElementType> extends AbstractList<Elem
 
     @Override
     public void clear() {
-        list = new ArrayList<ElementType>();
+        list = new ArrayList<>();
     }
 
 }

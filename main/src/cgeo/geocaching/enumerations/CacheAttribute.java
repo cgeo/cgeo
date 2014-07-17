@@ -164,9 +164,9 @@ public enum CacheAttribute {
     }
 
     private final static Map<String, CacheAttribute> FIND_BY_GCRAWNAME;
-    private final static SparseArray<CacheAttribute> FIND_BY_OCACODE = new SparseArray<CacheAttribute>();
+    private final static SparseArray<CacheAttribute> FIND_BY_OCACODE = new SparseArray<>();
     static {
-        final HashMap<String, CacheAttribute> mapGcRawNames = new HashMap<String, CacheAttribute>();
+        final HashMap<String, CacheAttribute> mapGcRawNames = new HashMap<>();
         for (CacheAttribute attr : values()) {
             mapGcRawNames.put(attr.rawName, attr);
             if (attr.ocacode != NO_ID) {

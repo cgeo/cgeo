@@ -74,7 +74,7 @@ public class GCMap {
                 throw new JSONException("No data inside JSON");
             }
 
-            final ArrayList<Geocache> caches = new ArrayList<Geocache>();
+            final ArrayList<Geocache> caches = new ArrayList<>();
             for (int j = 0; j < dataArray.length(); j++) {
                 final Geocache cache = new Geocache();
 
@@ -122,7 +122,7 @@ public class GCMap {
 
         try {
 
-            final LeastRecentlyUsedMap<String, String> nameCache = new LeastRecentlyUsedMap.LruCache<String, String>(2000); // JSON id, cache name
+            final LeastRecentlyUsedMap<String, String> nameCache = new LeastRecentlyUsedMap.LruCache<>(2000); // JSON id, cache name
 
             if (StringUtils.isEmpty(data)) {
                 throw new JSONException("No page given");
@@ -150,8 +150,8 @@ public class GCMap {
             }
 
             // iterate over the data and construct all caches in this tile
-            Map<String, List<UTFGridPosition>> positions = new HashMap<String, List<UTFGridPosition>>(); // JSON id as key
-            Map<String, List<UTFGridPosition>> singlePositions = new HashMap<String, List<UTFGridPosition>>(); // JSON id as key
+            Map<String, List<UTFGridPosition>> positions = new HashMap<>(); // JSON id as key
+            Map<String, List<UTFGridPosition>> singlePositions = new HashMap<>(); // JSON id as key
 
             for (int i = 1; i < keys.length(); i++) { // index 0 is empty
                 String key = keys.getString(i);
@@ -167,9 +167,9 @@ public class GCMap {
                         List<UTFGridPosition> singleListOfPositions = singlePositions.get(id);
 
                         if (listOfPositions == null) {
-                            listOfPositions = new ArrayList<UTFGridPosition>();
+                            listOfPositions = new ArrayList<>();
                             positions.put(id, listOfPositions);
-                            singleListOfPositions = new ArrayList<UTFGridPosition>();
+                            singleListOfPositions = new ArrayList<>();
                             singlePositions.put(id, singleListOfPositions);
                         }
 
@@ -182,7 +182,7 @@ public class GCMap {
                 }
             }
 
-            final ArrayList<Geocache> caches = new ArrayList<Geocache>();
+            final ArrayList<Geocache> caches = new ArrayList<>();
             for (Entry<String, List<UTFGridPosition>> entry : positions.entrySet()) {
                 String id = entry.getKey();
                 List<UTFGridPosition> pos = entry.getValue();
@@ -378,7 +378,7 @@ public class GCMap {
      *         8 = mystery, 1858 = whereigo
      */
     private static String getCacheTypeFilter(CacheType typeToDisplay) {
-        Set<String> filterTypes = new HashSet<String>();
+        Set<String> filterTypes = new HashSet<>();
         // Put all types in set, remove what should be visible in a second step
         filterTypes.addAll(Arrays.asList("2", "9", "5", "3", "6", "453", "13", "1304", "4", "11", "137", "8", "1858"));
         switch (typeToDisplay) {

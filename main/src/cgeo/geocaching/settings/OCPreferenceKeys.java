@@ -49,9 +49,9 @@ public enum OCPreferenceKeys {
     private static final SparseArray<OCPreferenceKeys> FIND_BY_AUTH_PREF_ID;
 
     static {
-        FIND_BY_ISACTIVE_ID = new SparseArray<OCPreferenceKeys>(values().length);
-        FIND_BY_AUTH_PREF_ID = new SparseArray<OCPreferenceKeys>(values().length);
-        final Map<String, OCPreferenceKeys> byIsactiveKey = new HashMap<String, OCPreferenceKeys>();
+        FIND_BY_ISACTIVE_ID = new SparseArray<>(values().length);
+        FIND_BY_AUTH_PREF_ID = new SparseArray<>(values().length);
+        final Map<String, OCPreferenceKeys> byIsactiveKey = new HashMap<>();
         for (final OCPreferenceKeys key : values()) {
             FIND_BY_ISACTIVE_ID.put(key.isActivePrefId, key);
             FIND_BY_AUTH_PREF_ID.put(key.authPrefId, key);

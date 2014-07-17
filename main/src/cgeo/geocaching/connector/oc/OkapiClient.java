@@ -151,7 +151,7 @@ final class OkapiClient {
     public static List<Geocache> getCachesAround(final Geopoint center, final OCApiConnector connector) {
         final String centerString = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, center) + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, center);
         final Parameters params = new Parameters("search_method", METHOD_SEARCH_NEAREST);
-        final Map<String, String> valueMap = new LinkedHashMap<String, String>();
+        final Map<String, String> valueMap = new LinkedHashMap<>();
         valueMap.put("center", centerString);
         valueMap.put("limit", "20");
         valueMap.put("radius", "200");
@@ -169,7 +169,7 @@ final class OkapiClient {
 
     private static List<Geocache> getCachesByUser(final String username, final OCApiConnector connector, final String userRequestParam) {
         final Parameters params = new Parameters("search_method", METHOD_SEARCH_ALL);
-        final Map<String, String> valueMap = new LinkedHashMap<String, String>();
+        final Map<String, String> valueMap = new LinkedHashMap<>();
         final @Nullable
         String uuid = getUserUUID(connector, username);
         if (StringUtils.isEmpty(uuid)) {
@@ -181,7 +181,7 @@ final class OkapiClient {
     }
 
     public static List<Geocache> getCachesNamed(final Geopoint center, final String namePart, final OCApiConnector connector) {
-        final Map<String, String> valueMap = new LinkedHashMap<String, String>();
+        final Map<String, String> valueMap = new LinkedHashMap<>();
         final Parameters params;
 
         // search around current position, if there is a position
@@ -234,7 +234,7 @@ final class OkapiClient {
                 + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, viewport.topRight)
                 + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, viewport.topRight);
         final Parameters params = new Parameters("search_method", METHOD_SEARCH_BBOX);
-        final Map<String, String> valueMap = new LinkedHashMap<String, String>();
+        final Map<String, String> valueMap = new LinkedHashMap<>();
         valueMap.put("bbox", bboxString);
 
         return requestCaches(connector, params, valueMap, false);
@@ -297,7 +297,7 @@ final class OkapiClient {
             // Get and iterate result list
             final JSONObject cachesResponse = response.getJSONObject("results");
             if (cachesResponse != null) {
-                final List<Geocache> caches = new ArrayList<Geocache>(cachesResponse.length());
+                final List<Geocache> caches = new ArrayList<>(cachesResponse.length());
                 final Iterator<?> keys = cachesResponse.keys();
                 while (keys.hasNext()) {
                     final Object next = keys.next();
@@ -462,7 +462,7 @@ final class OkapiClient {
                         parseLogType(logResponse.getString(LOG_TYPE)),
                         logResponse.getString(LOG_COMMENT).trim());
                 if (result == null) {
-                    result = new ArrayList<LogEntry>();
+                    result = new ArrayList<>();
                 }
                 result.add(log);
             } catch (final JSONException e) {
@@ -486,7 +486,7 @@ final class OkapiClient {
                     wpt.setCoords(pt);
                 }
                 if (result == null) {
-                    result = new ArrayList<Waypoint>();
+                    result = new ArrayList<>();
                 }
                 wpt.setPrefix(wpt.getName());
                 result.add(wpt);
@@ -501,7 +501,7 @@ final class OkapiClient {
         if (trackablesJson.length() == 0) {
             return Collections.emptyList();
         }
-        final List<Trackable> result = new ArrayList<Trackable>();
+        final List<Trackable> result = new ArrayList<>();
         for (int i = 0; i < trackablesJson.length(); i++) {
             try {
                 final JSONObject trackableResponse = trackablesJson.getJSONObject(i);
@@ -599,7 +599,7 @@ final class OkapiClient {
 
     private static List<String> parseAttributes(final JSONArray nameList, final JSONArray acodeList) {
 
-        final List<String> result = new ArrayList<String>();
+        final List<String> result = new ArrayList<>();
 
         for (int i = 0; i < nameList.length(); i++) {
             try {

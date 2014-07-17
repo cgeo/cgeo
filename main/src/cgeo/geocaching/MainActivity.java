@@ -127,7 +127,7 @@ public class MainActivity extends AbstractActionBarActivity {
     };
 
     private static String formatAddress(final Address address) {
-        final ArrayList<String> addressParts = new ArrayList<String>();
+        final ArrayList<String> addressParts = new ArrayList<>();
 
         final String countryName = address.getCountryName();
         if (countryName != null) {
@@ -451,7 +451,7 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     protected void selectGlobalTypeFilter() {
-        final List<CacheType> cacheTypes = new ArrayList<CacheType>();
+        final List<CacheType> cacheTypes = new ArrayList<>();
 
         //first add the most used types
         cacheTypes.add(CacheType.ALL);
@@ -460,7 +460,7 @@ public class MainActivity extends AbstractActionBarActivity {
         cacheTypes.add(CacheType.MYSTERY);
 
         // then add all other cache types sorted alphabetically
-        final List<CacheType> sorted = new ArrayList<CacheType>();
+        final List<CacheType> sorted = new ArrayList<>();
         sorted.addAll(Arrays.asList(CacheType.values()));
         sorted.removeAll(cacheTypes);
 

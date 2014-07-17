@@ -171,7 +171,7 @@ public class HtmlImage implements Html.ImageGetter {
             private Pair<BitmapDrawable, Boolean> loadFromDisk() {
                 final Pair<Bitmap, Boolean> loadResult = loadImageFromStorage(url, pseudoGeocode, shared);
                 final Bitmap bitmap = loadResult.getLeft();
-                return new ImmutablePair<BitmapDrawable, Boolean>(bitmap != null ?
+                return new ImmutablePair<>(bitmap != null ?
                         ImageUtils.scaleBitmapToFitDisplay(bitmap) :
                         null,
                         loadResult.getRight()
@@ -300,7 +300,7 @@ public class HtmlImage implements Html.ImageGetter {
         } catch (Exception e) {
             Log.w("HtmlImage.loadImageFromStorage", e);
         }
-        return new ImmutablePair<Bitmap, Boolean>(null, false);
+        return new ImmutablePair<>(null, false);
     }
 
     @Nullable
@@ -342,7 +342,7 @@ public class HtmlImage implements Html.ImageGetter {
         if (file.exists()) {
             final boolean freshEnough = listId >= StoredList.STANDARD_LIST_ID || file.lastModified() > (new Date().getTime() - (24 * 60 * 60 * 1000)) || forceKeep;
             if (onlySave) {
-                return new ImmutablePair<Bitmap, Boolean>(null, true);
+                return new ImmutablePair<>(null, true);
             }
             final BitmapFactory.Options bfOptions = new BitmapFactory.Options();
             bfOptions.inTempStorage = new byte[16 * 1024];
@@ -351,12 +351,12 @@ public class HtmlImage implements Html.ImageGetter {
             final Bitmap image = BitmapFactory.decodeFile(file.getPath(), bfOptions);
             if (image == null) {
                 Log.e("Cannot decode bitmap from " + file.getPath());
-                return new ImmutablePair<Bitmap, Boolean>(null, false);
+                return new ImmutablePair<>(null, false);
             }
-            return new ImmutablePair<Bitmap, Boolean>(image,
+            return new ImmutablePair<>(image,
                     freshEnough);
         }
-        return new ImmutablePair<Bitmap, Boolean>(null, false);
+        return new ImmutablePair<>(null, false);
     }
 
     private void setSampleSize(final File file, final BitmapFactory.Options bfOptions) {

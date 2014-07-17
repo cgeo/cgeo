@@ -62,7 +62,7 @@ public class CompassView extends View {
         private final WeakReference<CompassView> compassViewRef;
 
         private UpdateAction(final CompassView view) {
-            this.compassViewRef = new WeakReference<CompassView>(view);
+            this.compassViewRef = new WeakReference<>(view);
         }
 
         @Override

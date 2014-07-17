@@ -66,8 +66,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     private List<Geocache> originalList = null;
     private final boolean isLiveList = Settings.isLiveList();
 
-    final private Set<CompassMiniView> compasses = new LinkedHashSet<CompassMiniView>();
-    final private Set<DistanceView> distances = new LinkedHashSet<DistanceView>();
+    final private Set<CompassMiniView> compasses = new LinkedHashSet<>();
+    final private Set<DistanceView> distances = new LinkedHashSet<>();
     final private CacheListType cacheListType;
     final private Resources res;
     /** Resulting list of caches */
@@ -77,7 +77,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
     private static final int SWIPE_MIN_DISTANCE = 60;
     private static final int SWIPE_MAX_OFF_PATH = 100;
-    private static final SparseArray<Drawable> gcIconDrawables = new SparseArray<Drawable>();
+    private static final SparseArray<Drawable> gcIconDrawables = new SparseArray<>();
     /**
      * time in milliseconds after which the list may be resorted due to position updates
      */
@@ -200,7 +200,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     public void reFilter() {
         if (currentFilter != null) {
             // Back up the list again
-            originalList = new ArrayList<Geocache>(list);
+            originalList = new ArrayList<>(list);
 
             currentFilter.filter(list);
         }
@@ -212,7 +212,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     public void setFilter(final IFilter filter) {
         // Backup current caches list if it isn't backed up yet
         if (originalList == null) {
-            originalList = new ArrayList<Geocache>(list);
+            originalList = new ArrayList<>(list);
         }
 
         // If there is already a filter in place, this is a request to change or clear the filter, so we have to
@@ -319,7 +319,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         if (coords == null) {
             return;
         }
-        final ArrayList<Geocache> oldList = new ArrayList<Geocache>(list);
+        final ArrayList<Geocache> oldList = new ArrayList<>(list);
         Collections.sort(list, getPotentialInversion(new DistanceComparator(coords, list)));
 
         // avoid an update if the list has not changed due to location update
@@ -547,7 +547,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         public TouchListener(final Geocache cache, final @NonNull CacheListAdapter adapter) {
             this.cache = cache;
             gestureDetector = new GestureDetector(adapter.getContext(), new FlingGesture(cache, adapter));
-            adapterRef = new WeakReference<CacheListAdapter>(adapter);
+            adapterRef = new WeakReference<>(adapter);
         }
 
         // Tap on item
@@ -588,7 +588,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
         public FlingGesture(final Geocache cache, final @NonNull CacheListAdapter adapter) {
             this.cache = cache;
-            adapterRef = new WeakReference<CacheListAdapter>(adapter);
+            adapterRef = new WeakReference<>(adapter);
         }
 
         @Override
@@ -631,7 +631,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     }
 
     public List<Geocache> getCheckedCaches() {
-        final ArrayList<Geocache> result = new ArrayList<Geocache>();
+        final ArrayList<Geocache> result = new ArrayList<>();
         for (final Geocache cache : list) {
             if (cache.isStatusChecked()) {
                 result.add(cache);
@@ -645,7 +645,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         if (!result.isEmpty()) {
             return result;
         }
-        return new ArrayList<Geocache>(list);
+        return new ArrayList<>(list);
     }
 
     public int getCheckedOrAllCount() {

@@ -21,7 +21,7 @@ import java.util.List;
 
 public class MapProviderFactory {
 
-    private final static ArrayList<MapSource> mapSources = new ArrayList<MapSource>();
+    private final static ArrayList<MapSource> mapSources = new ArrayList<>();
 
     static {
         // add GoogleMapProvider only if google api is available in order to support x86 android emulator
@@ -108,7 +108,7 @@ public class MapProviderFactory {
      * remove offline map sources after changes of the settings
      */
     public static void deleteOfflineMapSources() {
-        final ArrayList<MapSource> deletion = new ArrayList<MapSource>();
+        final ArrayList<MapSource> deletion = new ArrayList<>();
         for (MapSource mapSource : mapSources) {
             if (mapSource instanceof MapsforgeMapProvider.OfflineMapSource) {
                 deletion.add(mapSource);

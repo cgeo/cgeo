@@ -43,7 +43,7 @@ public final class CalendarActivity extends Activity {
 
     /**
      * Adds the cache to the Android-calendar if it is an event.
-     * 
+     *
      * @param entry
      */
     private void selectCalendarForAdding(final CalendarEntry entry) {
@@ -58,7 +58,7 @@ public final class CalendarActivity extends Activity {
             return;
         }
 
-        final SparseArray<String> calendars = new SparseArray<String>();
+        final SparseArray<String> calendars = new SparseArray<>();
         cursor.moveToFirst();
 
         final int indexId = cursor.getColumnIndex("_id");

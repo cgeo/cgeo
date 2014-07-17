@@ -35,7 +35,7 @@ public final class GCVote {
     private static final Pattern PATTERN_VOTE_ELEMENT = Pattern.compile("<vote ([^>]+)>", Pattern.CASE_INSENSITIVE);
 
     private static final int MAX_CACHED_RATINGS = 1000;
-    private static final LeastRecentlyUsedMap<String, GCVoteRating> RATINGS_CACHE = new LeastRecentlyUsedMap.LruCache<String, GCVoteRating>(MAX_CACHED_RATINGS);
+    private static final LeastRecentlyUsedMap<String, GCVoteRating> RATINGS_CACHE = new LeastRecentlyUsedMap.LruCache<>(MAX_CACHED_RATINGS);
     private static final float MIN_RATING = 1;
     private static final float MAX_RATING = 5;
 
@@ -76,7 +76,7 @@ public final class GCVote {
             return null;
         }
 
-        final Map<String, GCVoteRating> ratings = new HashMap<String, GCVoteRating>();
+        final Map<String, GCVoteRating> ratings = new HashMap<>();
 
         try {
             final Parameters params = new Parameters();
@@ -261,7 +261,7 @@ public final class GCVote {
      */
     private static @NonNull
     ArrayList<String> getVotableGeocodes(final @NonNull Collection<Geocache> caches) {
-        final ArrayList<String> geocodes = new ArrayList<String>(caches.size());
+        final ArrayList<String> geocodes = new ArrayList<>(caches.size());
         for (final Geocache cache : caches) {
             String geocode = cache.getGeocode();
             if (StringUtils.isNotBlank(geocode) && cache.supportsGCVote()) {

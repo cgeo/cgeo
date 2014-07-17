@@ -53,7 +53,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
         // adds the log counts
         final Map<LogType, Integer> logCounts = getCache().getLogCounts();
         if (logCounts != null) {
-            final List<Entry<LogType, Integer>> sortedLogCounts = new ArrayList<Entry<LogType, Integer>>(logCounts.size());
+            final List<Entry<LogType, Integer>> sortedLogCounts = new ArrayList<>(logCounts.size());
             for (final Entry<LogType, Integer> entry : logCounts.entrySet()) {
                 // it may happen that the label is unknown -> then avoid any output for this type
                 if (entry.getKey() != LogType.PUBLISH_LISTING && entry.getKey().getL10n() != null) {
@@ -71,7 +71,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
                     }
                 });
 
-                final ArrayList<String> labels = new ArrayList<String>(sortedLogCounts.size());
+                final ArrayList<String> labels = new ArrayList<>(sortedLogCounts.size());
                 for (final Entry<LogType, Integer> pair : sortedLogCounts) {
                     labels.add(pair.getValue() + "× " + pair.getKey().getL10n());
                 }

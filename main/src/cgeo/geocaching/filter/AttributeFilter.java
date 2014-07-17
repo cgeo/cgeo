@@ -36,7 +36,7 @@ class AttributeFilter extends AbstractFilter {
             final String packageName = CgeoApplication.getInstance().getBaseContext().getPackageName();
             final Resources res = CgeoApplication.getInstance().getResources();
 
-            final List<IFilter> filters = new LinkedList<IFilter>();
+            final List<IFilter> filters = new LinkedList<>();
             for (final String id: res.getStringArray(R.array.attribute_ids)) {
                 filters.add(new AttributeFilter(getName("attribute_" + id, res, packageName), id));
             }

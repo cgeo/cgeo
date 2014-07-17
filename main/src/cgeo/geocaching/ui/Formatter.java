@@ -121,7 +121,7 @@ public abstract class Formatter {
     }
 
     public static String formatCacheInfoLong(Geocache cache, CacheListType cacheListType) {
-        final ArrayList<String> infos = new ArrayList<String>();
+        final ArrayList<String> infos = new ArrayList<>();
         if (StringUtils.isNotBlank(cache.getGeocode())) {
             infos.add(cache.getGeocode());
         }
@@ -138,7 +138,7 @@ public abstract class Formatter {
     }
 
     public static String formatCacheInfoShort(Geocache cache) {
-        final ArrayList<String> infos = new ArrayList<String>();
+        final ArrayList<String> infos = new ArrayList<>();
         addShortInfos(cache, infos);
         return StringUtils.join(infos, Formatter.SEPARATOR);
     }
@@ -163,7 +163,7 @@ public abstract class Formatter {
     }
 
     public static String formatCacheInfoHistory(Geocache cache) {
-        final ArrayList<String> infos = new ArrayList<String>(3);
+        final ArrayList<String> infos = new ArrayList<>(3);
         infos.add(StringUtils.upperCase(cache.getGeocode()));
         infos.add(Formatter.formatDate(cache.getVisitedDate()));
         infos.add(Formatter.formatTime(cache.getVisitedDate()));
@@ -171,7 +171,7 @@ public abstract class Formatter {
     }
 
     public static String formatWaypointInfo(Waypoint waypoint) {
-        final List<String> infos = new ArrayList<String>(3);
+        final List<String> infos = new ArrayList<>(3);
         WaypointType waypointType = waypoint.getWaypointType();
         if (waypointType != WaypointType.OWN && waypointType != null) {
             infos.add(waypointType.getL10n());

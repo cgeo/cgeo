@@ -26,7 +26,7 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
 
     private static final int MENU_GROUP = 1;
     private final Context mContext;
-    private final ArrayList<ComparatorEntry> registry = new ArrayList<ComparatorEntry>(20);
+    private final ArrayList<ComparatorEntry> registry = new ArrayList<>(20);
     /**
      * Callback triggered on selecting a new sort order.
      */

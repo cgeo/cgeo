@@ -297,10 +297,10 @@ public class Settings {
         final String password = getString(connector.getPasswordPreferenceKey(), null);
 
         if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-            return new ImmutablePair<String, String>(StringUtils.EMPTY, StringUtils.EMPTY);
+            return new ImmutablePair<>(StringUtils.EMPTY, StringUtils.EMPTY);
         }
 
-        return new ImmutablePair<String, String>(username, password);
+        return new ImmutablePair<>(username, password);
     }
 
     public static String getUsername() {
@@ -336,7 +336,7 @@ public class Settings {
     }
 
     public static ImmutablePair<String, String> getTokenPair(final int tokenPublicPrefKey, final int tokenSecretPrefKey) {
-        return new ImmutablePair<String, String>(getString(tokenPublicPrefKey, null), getString(tokenSecretPrefKey, null));
+        return new ImmutablePair<>(getString(tokenPublicPrefKey, null), getString(tokenSecretPrefKey, null));
     }
 
     public static void setTokens(final int tokenPublicPrefKey, @Nullable final String tokenPublic, final int tokenSecretPrefKey, @Nullable final String tokenSecret) {
@@ -376,7 +376,7 @@ public class Settings {
             return null;
         }
 
-        return new ImmutablePair<String, String>(username, password);
+        return new ImmutablePair<>(username, password);
     }
 
     public static String getSignature() {
@@ -790,7 +790,7 @@ public class Settings {
     public static ImmutablePair<String, String> getTempToken() {
         final String tokenPublic = getString(R.string.pref_temp_twitter_token_public, null);
         final String tokenSecret = getString(R.string.pref_temp_twitter_token_secret, null);
-        return new ImmutablePair<String, String>(tokenPublic, tokenSecret);
+        return new ImmutablePair<>(tokenPublic, tokenSecret);
     }
 
     public static int getVersion() {
@@ -901,7 +901,7 @@ public class Settings {
 
     public static File[] getMapThemeFiles() {
         final File directory = new File(Settings.getCustomRenderThemeBaseFolder());
-        final List<File> result = new ArrayList<File>();
+        final List<File> result = new ArrayList<>();
         FileUtils.listDir(result, directory, new ExtensionsBasedFileSelector(new String[] { "xml" }), null);
 
         return result.toArray(new File[result.size()]);
@@ -1030,7 +1030,7 @@ public class Settings {
     }
 
     public static void addCacheToHistory(@NonNull final String geocode) {
-        final ArrayList<String> history = new ArrayList<String>(getLastOpenedCaches());
+        final ArrayList<String> history = new ArrayList<>(getLastOpenedCaches());
         // bring entry to front, if it already existed
         history.remove(geocode);
         history.add(0, geocode);

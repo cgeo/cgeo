@@ -24,7 +24,7 @@ class TerrainFilter extends AbstractRangeFilter {
 
         @Override
         public List<IFilter> getFilters() {
-            final ArrayList<IFilter> filters = new ArrayList<IFilter>(TERRAIN_MAX);
+            final ArrayList<IFilter> filters = new ArrayList<>(TERRAIN_MAX);
             for (int terrain = TERRAIN_MIN; terrain <= TERRAIN_MAX; terrain++) {
                 filters.add(new TerrainFilter(terrain));
             }
