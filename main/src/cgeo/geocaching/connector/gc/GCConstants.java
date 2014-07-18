@@ -170,7 +170,7 @@ public final class GCConstants {
     public final static String STRING_PREMIUMONLY_2 = "Sorry, the owner of this listing has made it viewable to Premium Members only.";
     public final static String STRING_PREMIUMONLY_1 = "has chosen to make this cache listing visible to Premium Members only.";
     public final static String STRING_UNPUBLISHED_OTHER = "you cannot view this cache listing until it has been published";
-    public final static String STRING_UNPUBLISHED_FROM_SEARCH = "UnpublishedCacheSearchWidget";
+    public final static String STRING_UNPUBLISHED_FROM_SEARCH = "class=\"UnpublishedCacheSearchWidge\"";
     public final static String STRING_UNKNOWN_ERROR = "An Error Has Occurred";
     public final static String STRING_DISABLED = "<li>This cache is temporarily unavailable.";
     public final static String STRING_ARCHIVED = "<li>This cache has been archived,";
