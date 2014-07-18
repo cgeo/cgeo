@@ -2,6 +2,9 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>2014.07.18:</b>\n
+    · Fix: Allegedly only \"unpublished\" caches for some users on some mobile networks\n
+    \n
     <b>2014.07.12:</b>\n
     · Fix: Caches not stored if \"Ask for list\" is disabled\n
     · Fix: Use \"Unknown\" instead of \"Mystery\" in GPX export to ensure backward compatibility\n
