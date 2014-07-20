@@ -84,18 +84,10 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
      */
     private static final int PAUSE_BETWEEN_LIST_SORT = 1000;
 
-    private static final int[] RATING_BACKGROUND = new int[3];
-    static {
-        if (Settings.isLightSkin()) {
-            RATING_BACKGROUND[0] = R.drawable.favorite_background_red_light;
-            RATING_BACKGROUND[1] = R.drawable.favorite_background_orange_light;
-            RATING_BACKGROUND[2] = R.drawable.favorite_background_green_light;
-        } else {
-            RATING_BACKGROUND[0] = R.drawable.favorite_background_red_dark;
-            RATING_BACKGROUND[1] = R.drawable.favorite_background_orange_dark;
-            RATING_BACKGROUND[2] = R.drawable.favorite_background_green_dark;
-        }
-    }
+    private static final int[] RATING_BACKGROUND ={
+       R.drawable.favorite_background_red,
+       R.drawable.favorite_background_orange,
+       R.drawable.favorite_background_green};
 
     /**
      * view holder for the cache list adapter
