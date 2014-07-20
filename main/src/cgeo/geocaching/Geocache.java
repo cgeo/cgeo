@@ -11,6 +11,7 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.Tile;
+import cgeo.geocaching.connector.gc.UncertainProperty;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -34,7 +35,6 @@ import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.RxUtils;
-import cgeo.geocaching.utils.UncertainProperty;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 

@@ -14,8 +14,8 @@ import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.ui.CompassView;
-import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.LoggingUI;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;

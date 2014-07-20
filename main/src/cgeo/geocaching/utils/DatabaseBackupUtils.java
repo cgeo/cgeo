@@ -3,7 +3,6 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
-import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
 import org.apache.commons.lang3.StringUtils;

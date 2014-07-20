@@ -11,8 +11,8 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.FieldNotesCapability;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;

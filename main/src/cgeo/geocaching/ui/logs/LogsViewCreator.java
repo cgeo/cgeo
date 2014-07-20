@@ -10,9 +10,9 @@ import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.ui.AbstractCachingListViewPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.DecryptTextClickListener;
-import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.HtmlImageCounter;
 import cgeo.geocaching.ui.UserActionsClickListener;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 

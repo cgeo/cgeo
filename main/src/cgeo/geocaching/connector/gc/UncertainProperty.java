@@ -1,6 +1,5 @@
-package cgeo.geocaching.utils;
+package cgeo.geocaching.connector.gc;
 
-import cgeo.geocaching.connector.gc.Tile;
 
 /**
  * Property with certainty. When merging properties, the one with higher certainty wins.

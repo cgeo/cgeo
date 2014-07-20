@@ -19,6 +19,7 @@ import cgeo.geocaching.sorting.InverseComparator;
 import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.DateUtils;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections4.CollectionUtils;

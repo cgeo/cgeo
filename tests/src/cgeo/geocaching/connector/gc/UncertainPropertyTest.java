@@ -1,4 +1,6 @@
-package cgeo.geocaching.utils;
+package cgeo.geocaching.connector.gc;
+
+import cgeo.geocaching.connector.gc.UncertainProperty;
 
 import junit.framework.TestCase;
 

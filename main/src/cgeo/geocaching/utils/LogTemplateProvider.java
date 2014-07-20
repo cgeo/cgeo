@@ -8,7 +8,6 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.ui.Formatter;
 
 import org.apache.commons.lang3.StringUtils;
 
