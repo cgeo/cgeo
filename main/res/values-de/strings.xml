@@ -279,7 +279,6 @@
   <string name="caches_move_all">Alle verschieben</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Exportieren nach Locus</string>
-  <string name="caches_map_mapswithme">MapsWithMe</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Bitte Text vom Bild abschreiben. Wichtig, um Koordinaten des Caches laden zu können. Dies ist optional und kann in den Einstellungen deaktiviert werden.</string>
   <string name="caches_recaptcha_hint">Text vom Bild</string>
@@ -643,7 +642,6 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble Smartwatch</string>
-  <string name="cache_menu_mapswithme">MapsWithMe</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Gespeicherter Log</string>
   <string name="cache_status_found">Gefunden</string>
