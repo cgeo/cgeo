@@ -84,4 +84,7 @@
     <!-- cache menu -->
     <string name="cache_menu_sygic" translatable="false">Sygic</string>
 
+    <string name="caches_map_mapswithme" translatable="false">Maps.me</string>
+    <string name="cache_menu_mapswithme" translatable="false">Maps.me</string>
+
 </resources>

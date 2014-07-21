@@ -273,7 +273,6 @@
   <string name="caches_move_all">Presunúť všetky</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_map_locus_export">Exportovať do Locus</string>
-  <string name="caches_map_mapswithme">MapsWithMe</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Opíšte text z obrázku. Je to dôležité pre stiahnutie súradníc skrýš. Túto vlastnosť je možné vypnúť v Nastaveniach.</string>
   <string name="caches_recaptcha_hint">Text z obrázku</string>
