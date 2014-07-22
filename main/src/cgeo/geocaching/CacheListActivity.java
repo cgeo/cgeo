@@ -606,8 +606,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setVisible(menu, R.id.menu_move_to_list, isOffline && !isEmpty);
             setVisible(menu, R.id.menu_remove_from_history, !isEmpty && isHistory);
             setVisible(menu, R.id.menu_clear_offline_logs, !isEmpty && containsOfflineLogs() && (isHistory || isOffline));
+            setVisible(menu, R.id.menu_import, isOffline);
             setVisible(menu, R.id.menu_import_web, isOffline);
             setVisible(menu, R.id.menu_import_gpx, isOffline);
+            setVisible(menu, R.id.menu_export, !isEmpty);
             setVisible(menu, R.id.menu_refresh_stored_top, !isOffline && !isEmpty);
 
             if (!isOffline && !isHistory) {

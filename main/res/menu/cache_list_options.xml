@@ -96,6 +96,7 @@
         android:title="@string/list_menu_rename">
     </item>
     <item
+        android:id="@+id/menu_import"
         android:title="@string/list_menu_import"
         app:showAsAction="never|withText">
         <menu>
@@ -114,6 +115,7 @@
         </menu>
     </item>
     <item
+        android:id="@+id/menu_export"
         android:title="@string/export"
         app:showAsAction="never|withText">
         <menu>
