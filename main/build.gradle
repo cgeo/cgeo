@@ -27,7 +27,7 @@ gradle connectedCheck
 //https://github.com/stephanenicolas/Quality-Tools-for-Android
 
 def AAVersion = '3.0.1'
-def RXVersion = '0.19.2'
+def RXVersion = '0.19.6'
 group = 'cgeo.geocaching'
 version = '0.0.1'
 

@@ -9,7 +9,7 @@ updatelib () {
   vendor="$1"
   name="$2"
   version="$3"
-  rm -f $name*.jar src/$name*.jar
+  rm -f $name*.jar src/$name*.jar $name*.jar.properties
   l=$name-$version.jar
   wget -O $l "http://search.maven.org/remotecontent?filepath=$vendor/$name/$version/$l"
   s=$name-$version-sources.jar
@@ -21,6 +21,13 @@ updatelib () {
   git add $l src/$s src/$d $l.properties
 }
 
+fixgradle() {
+  var="$1"
+  version="$2"
+  sed -i "/def $var =/s/.*/def $var = '$version'/" ../build.gradle
+}
+
 updatelib com/netflix/rxjava rxjava-core $RXJAVA
 updatelib com/netflix/rxjava rxjava-android $RXJAVA
 updatelib com/netflix/rxjava rxjava-async-util $RXJAVA
+fixgradle RXVersion $RXJAVA
