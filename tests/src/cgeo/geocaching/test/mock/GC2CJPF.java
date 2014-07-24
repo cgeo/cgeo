@@ -66,7 +66,7 @@ public class GC2CJPF extends MockedCache {
 
     @Override
     public String getDescription() {
-        return "Kleiner Multi über 7 Stationen";
+        return "<a href=\"http://www.kinderwald.de/\"><b>http://www.kinderwald.de/</b></a><br/><br/>Kleiner Multi über 7 Stationen";
     }
 
     @Override
