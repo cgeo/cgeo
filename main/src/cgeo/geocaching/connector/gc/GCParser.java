@@ -544,7 +544,12 @@ public abstract class GCParser {
         cache.setShortDescription(TextUtils.getMatch(page, GCConstants.PATTERN_SHORTDESC, true, ""));
 
         // cache description
-        cache.setDescription(TextUtils.getMatch(page, GCConstants.PATTERN_DESC, true, ""));
+        final String longDescription = TextUtils.getMatch(page, GCConstants.PATTERN_DESC, true, "");
+        String relatedWebPage = TextUtils.getMatch(page, GCConstants.PATTERN_RELATED_WEB_PAGE, true, "");
+        if (StringUtils.isNotEmpty(relatedWebPage)) {
+            relatedWebPage = String.format("<a href=\"%s\"><b>%s</b></a><br/><br/>", relatedWebPage, relatedWebPage);
+        }
+        cache.setDescription(relatedWebPage + longDescription);
 
         // cache attributes
         try {
