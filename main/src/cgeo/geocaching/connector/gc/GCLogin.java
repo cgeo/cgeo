@@ -35,7 +35,7 @@ public class GCLogin extends AbstractLogin {
 
     private static final String DEFAULT_CUSTOM_DATE_FORMAT = "MM/dd/yyyy";
 
-    private final static String ENGLISH = "<a href=\"#\">English&#9660;</a>";
+    private final static String ENGLISH = "<a href=\"#\">English &#9660;</a>";
 
     private final static Map<String, SimpleDateFormat> GC_CUSTOM_DATE_FORMATS;
     public static final String LANGUAGE_CHANGE_URI = "http://www.geocaching.com/my/souvenirs.aspx";
