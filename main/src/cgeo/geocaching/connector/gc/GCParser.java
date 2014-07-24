@@ -1086,8 +1086,9 @@ public abstract class GCParser {
         }
 
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/log.aspx").encodedQuery("ID=" + cacheid).build().toString();
-        String page = GCLogin.getInstance().postRequestLogged(uri, params);
-        if (!GCLogin.getInstance().getLoginStatus(page)) {
+        final GCLogin gcLogin = GCLogin.getInstance();
+        String page = gcLogin.postRequestLogged(uri, params);
+        if (!gcLogin.getLoginStatus(page)) {
             Log.e("GCParser.postLog: Cannot log in geocaching");
             return new ImmutablePair<>(StatusCode.NOT_LOGGED_IN, "");
         }
@@ -1151,10 +1152,10 @@ public abstract class GCParser {
                     DataStore.saveVisitDate(geocode);
                 }
 
-                GCLogin.getInstance().getLoginStatus(page);
+                gcLogin.getLoginStatus(page);
                 // the log-successful-page contains still the old value
-                if (GCLogin.getInstance().getActualCachesFound() >= 0) {
-                    GCLogin.getInstance().setActualCachesFound(GCLogin.getInstance().getActualCachesFound() + 1);
+                if (gcLogin.getActualCachesFound() >= 0) {
+                    gcLogin.setActualCachesFound(gcLogin.getActualCachesFound() + 1);
                 }
 
                 final String logID = TextUtils.getMatch(page, GCConstants.PATTERN_LOG_IMAGE_UPLOAD, "");
