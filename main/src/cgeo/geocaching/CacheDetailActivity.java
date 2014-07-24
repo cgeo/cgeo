@@ -32,7 +32,6 @@ import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.EditNoteDialog;
 import cgeo.geocaching.ui.EditNoteDialog.EditNoteDialogListener;
-import cgeo.geocaching.ui.HtmlImageCounter;
 import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.IndexOutOfBoundsAvoidingTextView;
 import cgeo.geocaching.ui.LoggingUI;
@@ -60,7 +59,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import rx.Observable;
 import rx.Observable.OnSubscribe;
-import rx.Observer;
 import rx.Subscriber;
 import rx.android.observables.AndroidObservable;
 import rx.functions.Action0;
@@ -1531,118 +1529,76 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     }
 
-   /**
+    // If description has an HTML construct which may be problematic to render, add a note at the end of the long description.
+    // Technically, it may not be a table, but a pre, which has the same problems as a table, so the message is ok even though
+    // sometimes technically incorrect.
+    private void addWarning(final UnknownTagsHandler unknownTagsHandler, final Spanned description) {
+        if (unknownTagsHandler.isProblematicDetected()) {
+            final int startPos = description.length();
+            final IConnector connector = ConnectorFactory.getConnector(cache);
+            final Spanned tableNote = Html.fromHtml(res.getString(R.string.cache_description_table_note, "<a href=\"" + cache.getUrl() + "\">" + connector.getName() + "</a>"));
+            ((Editable) description).append("\n\n").append(tableNote);
+            ((Editable) description).setSpan(new StyleSpan(Typeface.ITALIC), startPos, description.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+    }
+    /**
      * Load the description in the background.
-    * @param descriptionString the HTML description as retrieved from the connector
-    * @param descriptionView the view to fill
-    * @param loadingIndicatorView the loading indicator view, will be hidden when completed
-    */
+     * @param descriptionString the HTML description as retrieved from the connector
+     * @param descriptionView the view to fill
+     * @param loadingIndicatorView the loading indicator view, will be hidden when completed
+     */
     private void loadDescription(final String descriptionString, final IndexOutOfBoundsAvoidingTextView descriptionView, final View loadingIndicatorView) {
-        // The producer produces successives (without then with images) versions of the description.
-        final Observable<Spanned> producer = Observable.create(new OnSubscribe<Spanned>() {
-            @Override
-            public void call(final Subscriber<? super Spanned> subscriber) {
+        try {
+            final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
+            final Spanned description = Html.fromHtml(descriptionString, new HtmlImage(cache.getGeocode(), true, cache.getListId(), false, descriptionView), unknownTagsHandler);
+            addWarning(unknownTagsHandler, description);
+            if (StringUtils.isNotBlank(descriptionString)) {
                 try {
-                    // Fast preview: parse only HTML without loading any images
-                    final HtmlImageCounter imageCounter = new HtmlImageCounter();
-                    final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
-                    Spanned description = Html.fromHtml(descriptionString, imageCounter, unknownTagsHandler);
-                    addWarning(unknownTagsHandler, description);
-                    subscriber.onNext(description);
-
-                    if (imageCounter.getImageCount() > 0) {
-                        // Complete view: parse again with loading images - if necessary ! If there are any images causing problems the user can see at least the preview
-                        description = Html.fromHtml(descriptionString, new HtmlImage(cache.getGeocode(), true, cache.getListId(), false), unknownTagsHandler);
-                        addWarning(unknownTagsHandler, description);
-                        subscriber.onNext(description);
-                    }
-
-                    subscriber.onCompleted();
+                    descriptionView.setText(description, TextView.BufferType.SPANNABLE);
                 } catch (final Exception e) {
-                    Log.e("loadDescription", e);
-                    subscriber.onError(e);
+                    // On 4.1, there is sometimes a crash on measuring the layout: https://code.google.com/p/android/issues/detail?id=35412
+                    Log.e("Android bug setting text: ", e);
+                    // remove the formatting by converting to a simple string
+                    descriptionView.setText(description.toString());
+                }
+                descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+                fixTextColor(descriptionString, descriptionView);
+                descriptionView.setVisibility(View.VISIBLE);
+                addContextMenu(descriptionView);
+                potentiallyHideShortDescription();
+            }
+            if (null != loadingIndicatorView) {
+                loadingIndicatorView.setVisibility(View.GONE);
+            }
+        } catch (final Exception e) {
+            showToast(res.getString(R.string.err_load_descr_failed));
+        }
+    }
+
+    private static void fixTextColor(final String descriptionString, final IndexOutOfBoundsAvoidingTextView descriptionView) {
+        int backcolor;
+        if (Settings.isLightSkin()) {
+            backcolor = color.white;
+
+            for (final Pattern pattern : LIGHT_COLOR_PATTERNS) {
+                final MatcherWrapper matcher = new MatcherWrapper(pattern, descriptionString);
+                if (matcher.find()) {
+                    descriptionView.setBackgroundResource(color.darker_gray);
+                    return;
                 }
             }
+        } else {
+            backcolor = color.black;
 
-            // If description has an HTML construct which may be problematic to render, add a note at the end of the long description.
-            // Technically, it may not be a table, but a pre, which has the same problems as a table, so the message is ok even though
-            // sometimes technically incorrect.
-            private void addWarning(final UnknownTagsHandler unknownTagsHandler, final Spanned description) {
-                if (unknownTagsHandler.isProblematicDetected()) {
-                    final int startPos = description.length();
-                    final IConnector connector = ConnectorFactory.getConnector(cache);
-                    final Spanned tableNote = Html.fromHtml(res.getString(R.string.cache_description_table_note, "<a href=\"" + cache.getUrl() + "\">" + connector.getName() + "</a>"));
-                    ((Editable) description).append("\n\n").append(tableNote);
-                    ((Editable) description).setSpan(new StyleSpan(Typeface.ITALIC), startPos, description.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            for (final Pattern pattern : DARK_COLOR_PATTERNS) {
+                final MatcherWrapper matcher = new MatcherWrapper(pattern, descriptionString);
+                if (matcher.find()) {
+                    descriptionView.setBackgroundResource(color.darker_gray);
+                    return;
                 }
             }
-        });
-
-        AndroidObservable.bindActivity(this, producer).subscribeOn(RxUtils.networkScheduler).subscribe(new Observer<Spanned>() {
-            @Override
-            public void onCompleted() {
-                if (null != loadingIndicatorView) {
-                    loadingIndicatorView.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void onError(final Throwable throwable) {
-                showToast(res.getString(R.string.err_load_descr_failed));
-            }
-
-            @Override
-            public void onNext(final Spanned description) {
-                if (StringUtils.isNotBlank(descriptionString)) {
-                    try {
-                        descriptionView.setText(description, TextView.BufferType.SPANNABLE);
-                    } catch (final Exception e) {
-                        // On 4.1, there is sometimes a crash on measuring the layout: https://code.google.com/p/android/issues/detail?id=35412
-                        Log.e("Android bug setting text: ", e);
-                        // remove the formatting by converting to a simple string
-                        descriptionView.setText(description.toString());
-                    }
-                    descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-                    fixTextColor(descriptionString);
-                    descriptionView.setVisibility(View.VISIBLE);
-                    addContextMenu(descriptionView);
-                    potentiallyHideShortDescription();
-                }
-            }
-
-            /**
-             * Handle caches with black font color in dark skin and white font color in light skin
-             * by changing background color of the view
-             *
-             * @param text
-             *            to be checked
-             */
-            private void fixTextColor(final String text) {
-                int backcolor;
-                if (Settings.isLightSkin()) {
-                    backcolor = color.white;
-
-                    for (final Pattern pattern : LIGHT_COLOR_PATTERNS) {
-                        final MatcherWrapper matcher = new MatcherWrapper(pattern, text);
-                        if (matcher.find()) {
-                            descriptionView.setBackgroundResource(color.darker_gray);
-                            return;
-                        }
-                    }
-                } else {
-                    backcolor = color.black;
-
-                    for (final Pattern pattern : DARK_COLOR_PATTERNS) {
-                        final MatcherWrapper matcher = new MatcherWrapper(pattern, text);
-                        if (matcher.find()) {
-                            descriptionView.setBackgroundResource(color.darker_gray);
-                            return;
-                        }
-                    }
-                }
-                descriptionView.setBackgroundResource(backcolor);
-            }
-        });
+        }
+        descriptionView.setBackgroundResource(backcolor);
     }
 
     /**
