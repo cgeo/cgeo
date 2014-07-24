@@ -3,10 +3,13 @@ package cgeo.geocaching.ui.dialog;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.ImageUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
 
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 
 import android.app.Activity;
@@ -246,7 +249,7 @@ public final class Dialogs {
     }
 
     /**
-     * Show a message dialog with a single "OK" button and an icon.
+     * Show a message dialog with a single "OK" button and an eventual icon.
      *
      * @param context
      *            activity owning the dialog
@@ -254,10 +257,10 @@ public final class Dialogs {
      *            message dialog title
      * @param message
      *            message dialog content
-     * @param icon
-     *            message dialog title icon
+     * @param iconObservable
+     *            observable (may be <tt>null</tt>) containing the icon(s) to set
      */
-    public static void message(final Activity context, final @Nullable String title, final String message, final @Nullable Drawable icon) {
+    public static void message(final Activity context, final @Nullable String title, final String message, final Observable<Drawable> iconObservable) {
         Builder builder = new AlertDialog.Builder(context)
                 .setMessage(message)
                 .setCancelable(true)
@@ -265,10 +268,18 @@ public final class Dialogs {
         if (title != null) {
             builder.setTitle(title);
         }
-        if (icon != null) {
-            builder.setIcon(icon);
+        builder.setIcon(ImageUtils.getTransparent1x1Drawable(context.getResources()));
+
+        final AlertDialog dialog = builder.create();
+        if (iconObservable != null) {
+            iconObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Drawable>() {
+                @Override
+                public void call(final Drawable drawable) {
+                    dialog.setIcon(drawable);
+                }
+            });
         }
-        builder.create().show();
+        dialog.show();
     }
 
     /**
@@ -311,8 +322,8 @@ public final class Dialogs {
      * @param icon
      *            message dialog title icon
      */
-    public static void message(final Activity context, final int title, final int message, final @Nullable Drawable icon) {
-        message(context, getString(title), getString(message), icon);
+    public static void message(final Activity context, final int title, final int message, final Observable<Drawable> iconObservable) {
+        message(context, getString(title), getString(message), iconObservable);
     }
 
     /**

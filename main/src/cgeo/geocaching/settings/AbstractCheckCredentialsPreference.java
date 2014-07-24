@@ -10,6 +10,7 @@ import cgeo.geocaching.utils.RxUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import rx.Observable;
 import rx.android.observables.AndroidObservable;
 import rx.functions.Action1;
 import rx.functions.Func0;
@@ -39,7 +40,14 @@ public abstract class AbstractCheckCredentialsPreference extends AbstractClickab
 
     protected abstract ImmutablePair<String, String> getCredentials();
 
-    protected abstract ImmutablePair<StatusCode, ? extends Drawable> login();
+    /**
+     * Try to login.
+     *
+     * @return A pair containing the status code, and, if the status code is
+     * <tt>NO_ERROR</tt>, an observable (or <tt>null</tt>) wihch may emit
+     * the avatar for the user (every drawable will be shown in place of the previous one).
+     */
+    protected abstract ImmutablePair<StatusCode, Observable<Drawable>> login();
 
     private class LoginCheckClickListener implements OnPreferenceClickListener {
         final private SettingsActivity settingsActivity;
@@ -66,14 +74,14 @@ public abstract class AbstractCheckCredentialsPreference extends AbstractClickab
             loginDialog.setCancelable(false);
             Cookies.clearCookies();
 
-            AndroidObservable.bindActivity(settingsActivity, Async.start(new Func0<ImmutablePair<StatusCode, ? extends Drawable>>() {
+            AndroidObservable.bindActivity(settingsActivity, Async.start(new Func0<ImmutablePair<StatusCode, Observable<Drawable>>>() {
                 @Override
-                public ImmutablePair<StatusCode, ? extends Drawable> call() {
+                public ImmutablePair<StatusCode, Observable<Drawable>> call() {
                     return login();
                 }
-            })).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<ImmutablePair<StatusCode, ? extends Drawable>>() {
+            })).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<ImmutablePair<StatusCode, Observable<Drawable>>>() {
                 @Override
-                public void call(final ImmutablePair<StatusCode, ? extends Drawable> loginInfo) {
+                public void call(final ImmutablePair<StatusCode, Observable<Drawable>> loginInfo) {
                     loginDialog.dismiss();
                     if (loginInfo.getLeft() == StatusCode.NO_ERROR) {
                         Dialogs.message(settingsActivity, R.string.init_login_popup, R.string.init_login_popup_ok, loginInfo.getRight());

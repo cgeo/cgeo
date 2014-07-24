@@ -6,6 +6,8 @@ import cgeo.geocaching.enumerations.StatusCode;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import rx.Observable;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -26,7 +28,7 @@ public class CheckECCredentialsPreference extends AbstractCheckCredentialsPrefer
     }
 
     @Override
-    protected ImmutablePair<StatusCode, Drawable> login() {
+    protected ImmutablePair<StatusCode, Observable<Drawable>> login() {
         return new ImmutablePair<>(ECLogin.getInstance().login(), null);
     }
 }

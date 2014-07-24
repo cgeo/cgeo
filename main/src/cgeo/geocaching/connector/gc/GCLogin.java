@@ -14,13 +14,18 @@ import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import android.graphics.drawable.BitmapDrawable;
+import rx.Observable;
+import rx.functions.Func0;
+import rx.util.async.Async;
+
+import android.graphics.drawable.Drawable;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -253,7 +258,7 @@ public class GCLogin extends AbstractLogin {
         return false;
     }
 
-    public BitmapDrawable downloadAvatarAndGetMemberStatus() {
+    public Observable<Drawable> downloadAvatarAndGetMemberStatus() {
         try {
             final String responseData = StringUtils.defaultString(Network.getResponseData(Network.getRequest("http://www.geocaching.com/my/")));
             final String profile = TextUtils.replaceWhitespace(responseData);
@@ -267,8 +272,13 @@ public class GCLogin extends AbstractLogin {
 
             final String avatarURL = TextUtils.getMatch(profile, GCConstants.PATTERN_AVATAR_IMAGE_PROFILE_PAGE, false, null);
             if (null != avatarURL) {
-                final HtmlImage imgGetter = new HtmlImage("", false, 0, false);
-                return imgGetter.getDrawable(avatarURL.replace("avatar", "user/large"));
+                return Async.start(new Func0<Drawable>() {
+                    @Override
+                    public Drawable call() {
+                        final HtmlImage imgGetter = new HtmlImage("", false, 0, false);
+                        return imgGetter.getDrawable(avatarURL.replace("avatar", "user/large"));
+                    }
+                });
             }
             // No match? There may be no avatar set by user.
             Log.d("No avatar set for user");
