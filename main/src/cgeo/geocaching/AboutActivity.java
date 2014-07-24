@@ -95,7 +95,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         public ScrollView getDispatchedView(final ViewGroup parentView) {
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_help_page, parentView, false);
             ButterKnife.inject(this, view);
-            setClickListener(support, "mailto:support@cgeo.org");
+            setClickListener(support, "mailto:support@cgeo.org?subject=" + Uri.encode("cgeo " + Version.getVersionName(AboutActivity.this)));
             setClickListener(website, "http://www.cgeo.org/");
             setClickListener(facebook, "http://www.facebook.com/pages/cgeo/297269860090");
             setClickListener(twitter, "http://twitter.com/android_gc");
