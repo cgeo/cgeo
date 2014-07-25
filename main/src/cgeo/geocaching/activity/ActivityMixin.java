@@ -60,26 +60,47 @@ public final class ActivityMixin {
         return R.style.popup_dark;
     }
 
+    /**
+     * Show a long toast message to the user. This can be called from any thread.
+     *
+     * @param activity the activity the user is facing
+     * @param resId the message
+     */
     public static void showToast(final Activity activity, final int resId) {
         ActivityMixin.showToast(activity, activity.getString(resId));
     }
 
-    public static void showToast(final Activity activity, final String text) {
+    private static void postShowToast(final Activity activity, final String text, final int toastDuration) {
         if (StringUtils.isNotBlank(text)) {
-            Toast toast = Toast.makeText(activity, text, Toast.LENGTH_LONG);
-
-            toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
-            toast.show();
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    final Toast toast = Toast.makeText(activity, text, toastDuration);
+                    toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
+                    toast.show();
+                }
+            });
         }
     }
 
-    public static void showShortToast(final Activity activity, final String text) {
-        if (StringUtils.isNotBlank(text)) {
-            Toast toast = Toast.makeText(activity, text, Toast.LENGTH_SHORT);
+    /**
+     * Show a long toast message to the user. This can be called from any thread.
+     *
+     * @param activity the activity the user is facing
+     * @param text the message
+     */
+    public static void showToast(final Activity activity, final String text) {
+        postShowToast(activity, text, Toast.LENGTH_LONG);
+    }
 
-            toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
-            toast.show();
-        }
+    /**
+     * Show a short toast message to the user. This can be called from any thread.
+     *
+     * @param activity the activity the user is facing
+     * @param text the message
+     */
+    public static void showShortToast(final Activity activity, final String text) {
+        postShowToast(activity, text, Toast.LENGTH_SHORT);
     }
 
     public static void keepScreenOn(final Activity abstractActivity, boolean keepScreenOn) {
