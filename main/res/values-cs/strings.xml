@@ -206,6 +206,7 @@
   <string name="info_select_logimage_cancelled">Výběr nebo focení obrázku pro Log bylo zrušeno.</string>
   <string name="info_stored_image">Nový obrázek uložen do:</string>
   <string name="info_storing_static_maps">Pokus o uložení statických map</string>
+  <string name="info_cache_saved">Keš uložena pro lokální použití</string>
   <string name="loc_last">Poslední známá</string>
   <string name="loc_net">Síť</string>
   <string name="loc_gps">GPS</string>
@@ -213,6 +214,7 @@
   <string name="loc_trying">Zjišťování pozice</string>
   <string name="loc_no_addr">Neznámá adresa</string>
   <string name="loc_gps_disabled">GPS zakázáno</string>
+  <string name="menu_centerposition">Vycentrovat na mou polohu</string>
   <string name="menu_about">O programu</string>
   <string name="menu_helpers">Pomocné programy</string>
   <string name="menu_settings">Nastavení</string>
@@ -243,6 +245,7 @@
   <string name="caches_store_selected">Uložit vybrané</string>
   <string name="caches_history">Historie</string>
   <string name="caches_on_map">Zobrazit na mapě</string>
+  <string name="caches_sort">Řazení</string>
   <string name="caches_sort_distance">Vzdálenosti</string>
   <string name="caches_sort_difficulty">Obtížnosti</string>
   <string name="caches_sort_terrain">Terénu</string>
@@ -265,7 +268,9 @@
   <string name="caches_nearby">Blízké</string>
   <string name="caches_manage">Správa</string>
   <string name="caches_remove_all">Odstranit vše</string>
+  <string name="caches_remove_all_confirm">Opravdu chceš smazat všechny keše (%s) z tohoto seznamu?</string>
   <string name="caches_remove_selected">Odstranit vybrané</string>
+  <string name="caches_remove_selected_confirm">Opravdu chceš smazat vybrané keše (%s) z přístroje?</string>
   <string name="caches_remove_progress">Odstraňování keší</string>
   <string name="caches_delete_events">Vymazat staré události</string>
   <string name="caches_refresh_selected">Aktualizovat vybrané</string>
@@ -364,6 +369,8 @@
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Aktivovat</string>
   <string name="init_oc_ro_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.ro.</string>
+  <string name="settings_activate_oc_uk">Aktivovat</string>
+  <string name="init_oc_uk_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.org.uk.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Povolit</string>
@@ -393,6 +400,8 @@
   <string name="init_signature_template_log">Text logu</string>
   <string name="init_ratingwanted">Načítat hodnocení</string>
   <string name="init_summary_ratingwanted">Načítat hodnocení keší z GCvote.com</string>
+  <string name="init_friends_and_own_logs_wanted">Zobrazovat mé logy a logy přátel</string>
+  <string name="init_summary_friends_and_own_logs_wanted">Zobrazovat další Logbook s mými logy a logy přátel</string>
   <string name="init_openlastdetailspage">Otevřít poslední stránku</string>
   <string name="init_summary_openlastdetailspage">Otevřít detaily keše na naposledy použité stránce</string>
   <string name="init_autoload">Dlouhý popis</string>
@@ -465,6 +474,7 @@
   <string name="init_navigation_menu_description">Zde můžeš zvolit, které z dostupných metod navigace budou zobrazovány v navigačním menu keše nebo bodu trasy. Nedostupné nástroje nejsou na tomto zařízení nainstalovány.</string>
   <string name="init_debug_title">Ladící informace</string>
   <string name="init_debug_note">c:geo může generovat mnoho ladících informací. Tyto informace nejsou pro běžné uživatele užitečné, ale pro vývojáře mohou být užitečné při hledání problému. V případě potřeby zaškrtni tuto volbu a pošli jim vygenerovaný soubor.</string>
+  <string name="init_debug">Aktivovat ladící protokolování</string>
   <string name="init_dbonsdcard_title">Umístění databáze</string>
   <string name="init_dbonsdcard_note">Databáze c:geo může být umístěna na SD kartě. Ušetříš tím část interní paměti, avšak za cenu případného snížení rychlosti aplikace. Bez SD karty aplikace nebude následně fungovat.</string>
   <string name="init_dbonsdcard">Databáze na SD kartě</string>
@@ -480,6 +490,9 @@
   <string name="init_maintenance">Údržba</string>
   <string name="init_maintenance_directories_note">c:geo ukládá obrázky, obrázky z logů a další soubory vázané ke keši v samostatném adresáři. V některých případech (jako import/export databáze) může tento adresář obsahovat staré soubory, které se zde dají smazat.</string>
   <string name="init_maintenance_directories">Odstranit osamocené soubory</string>
+  <string name="init_create_memory_dump">Vytvořit výpis paměti</string>
+  <string name="init_memory_dump">Výpis stavu paměti</string>
+  <string name="init_memory_dumped">Paměť vypsána do %s</string>
   <string name="settings_open_website">Otevřít webovou stránku</string>
   <string name="settings_settings">Nastavení</string>
   <string name="settings_information">Informace</string>
@@ -571,9 +584,15 @@
   <string name="cache_list_unknown">Není v seznamu</string>
   <string name="cache_images">Obrázky</string>
   <string name="cache_waypoints">Body trasy</string>
+  <plurals name="waypoints">
+    <item quantity="one">1 bod trasy</item>
+    <item quantity="few">%d bodů trasy</item>
+    <item quantity="other">%d body trasy</item>
+  </plurals>
   <string name="cache_waypoints_add">Přidat Bod trasy</string>
   <string name="cache_hint">Nápověda</string>
   <string name="cache_logs">Logbook</string>
+  <string name="cache_logs_friends_and_own">Moje logy a logy přátel</string>
   <string name="cache_dialog_loading_details">Načítání detailů keše…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Načítání stránky</string>
   <string name="cache_dialog_loading_details_status_details">Zpracovávání podrobností</string>
@@ -626,6 +645,7 @@
   <string name="cache_status">Stav</string>
   <string name="cache_status_offline_log">Připravený Log</string>
   <string name="cache_status_found">Nalezena</string>
+  <string name="cache_not_status_found">Nenalezeno</string>
   <string name="cache_status_archived">Archivována</string>
   <string name="cache_status_disabled">Deaktivována</string>
   <string name="cache_status_premium">Pouze pro prémiové uživatele</string>
@@ -817,6 +837,7 @@
   <string name="user_menu_open_contact">Otevřít kartu kontaktu</string>
   <string name="navigation">Navigace</string>
   <string name="compass_title">Kompas</string>
+  <string name="compass_sensors">Aktivovat senzory</string>
   <string name="use_gps">Použít GPS</string>
   <string name="use_compass">Použít kompas</string>
   <string name="destination_select">Vyber cíl</string>
@@ -1114,4 +1135,5 @@
   <string name="percent_favorite_points">%\ oblíbené</string>
   <string name="cgeo_shortcut">c:geo zástupce</string>
   <string name="create_shortcut">Vytvořit zástupce</string>
+  <string name="send">Odeslat</string>
 </resources>

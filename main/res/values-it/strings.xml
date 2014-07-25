@@ -366,6 +366,8 @@
   <string name="init_oc_us_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.us.</string>
   <string name="settings_activate_oc_ro">Attiva</string>
   <string name="init_oc_ro_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.ro.</string>
+  <string name="settings_activate_oc_uk">Attiva</string>
+  <string name="init_oc_uk_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.org.uk.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Attiva</string>

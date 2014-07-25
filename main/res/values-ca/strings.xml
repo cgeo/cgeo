@@ -369,6 +369,8 @@
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Activa</string>
   <string name="init_oc_ro_description">Autoritza al c:geo a opencaching.ro per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
+  <string name="settings_activate_oc_uk">Activa</string>
+  <string name="init_oc_uk_description">Autoritza al c:geo a opencaching.org.uk per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activa</string>

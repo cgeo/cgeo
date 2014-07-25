@@ -207,6 +207,7 @@
   <string name="info_select_logimage_cancelled">La sélection ou l\'acquisition de l\'image a été annulée.</string>
   <string name="info_stored_image">Nouvelle image sauvée dans :</string>
   <string name="info_storing_static_maps">Sauvegarde des cartes statiques</string>
+  <string name="info_cache_saved">La cache a été stockée en local</string>
   <string name="loc_last">Aucun</string>
   <string name="loc_net">Réseau</string>
   <string name="loc_gps">Gps</string>
@@ -266,6 +267,11 @@
   <string name="caches_select_invert">Inverser la sélection</string>
   <string name="caches_nearby">Proches</string>
   <string name="caches_manage">Gérer</string>
+  <string name="caches_remove_all">Tout supprimer</string>
+  <string name="caches_remove_all_confirm">Voulez-vous supprimer les %s caches de votre liste actuelle ?</string>
+  <string name="caches_remove_selected">Supprimer la sélection</string>
+  <string name="caches_remove_selected_confirm">Voulez-vous supprimer de votre appareil les %s caches sélectionnées ?</string>
+  <string name="caches_remove_progress">Suppression des caches en cours</string>
   <string name="caches_delete_events">Effacer les événements précédents</string>
   <string name="caches_refresh_selected">Rafraîchir les caches sélectionnées</string>
   <string name="caches_refresh_all">Tout rafraîchir</string>
@@ -295,6 +301,7 @@
   <string name="list_menu_create">Nouvelle liste</string>
   <string name="list_menu_drop">Effacer la liste courante</string>
   <string name="list_menu_rename">Renommer la liste courante</string>
+  <string name="list_menu_import">Importer</string>
   <string name="list_title">Choisir une liste</string>
   <string name="list_inbox">Enregistrées</string>
   <string name="list_all_lists">Toutes les caches</string>
@@ -362,6 +369,8 @@
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Activer</string>
   <string name="init_oc_ro_description">Autoriser c:geo à utiliser opencaching.ro pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
+  <string name="settings_activate_oc_uk">Activer</string>
+  <string name="init_oc_uk_description">Autoriser c:geo à utiliser opencaching.org.uk pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activer</string>
@@ -577,7 +586,7 @@
   <string name="cache_images">Images</string>
   <string name="cache_waypoints">Étapes</string>
   <plurals name="waypoints">
-    <item quantity="one">%d étape</item>
+    <item quantity="one">1 étape</item>
     <item quantity="other">%d étapes</item>
   </plurals>
   <string name="cache_waypoints_add">Ajouter une étape</string>
@@ -828,6 +837,7 @@
   <string name="user_menu_open_contact">Ouvrir la fiche du contact</string>
   <string name="navigation">Navigation</string>
   <string name="compass_title">Boussole</string>
+  <string name="compass_sensors">Capteurs actifs</string>
   <string name="use_gps">Utiliser GPS</string>
   <string name="use_compass">Utiliser la boussole</string>
   <string name="destination_select">Choisir une destination</string>
@@ -1139,7 +1149,7 @@
   <string name="tts_oclock">%s heures</string>
   <string name="clipboard_copy_ok">Copié dans le presse-papiers</string>
   <plurals name="days_ago">
-    <item quantity="one" tools:ignore="ImpliedQuantity">hier</item>
+    <item quantity="one">hier</item>
     <item quantity="other">il y a %d jours</item>
   </plurals>
   <plurals name="favorite_points">
@@ -1149,4 +1159,5 @@
   <string name="percent_favorite_points">%\ favoris</string>
   <string name="cgeo_shortcut">c:geo raccourci</string>
   <string name="create_shortcut">Créer un raccourci</string>
+  <string name="send">Envoyer</string>
 </resources>

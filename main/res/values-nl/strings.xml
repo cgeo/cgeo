@@ -29,13 +29,13 @@
   <string name="gps">Gps adventures exhibit</string>
   <string name="block">Groundspeak Block Party</string>
   <string name="unknown">Onbekend type</string>
-  <string name="cache_size_micro">micro</string>
-  <string name="cache_size_small">small</string>
-  <string name="cache_size_regular">regular</string>
-  <string name="cache_size_large">large</string>
-  <string name="cache_size_other">other</string>
+  <string name="cache_size_micro">Micro</string>
+  <string name="cache_size_small">Small</string>
+  <string name="cache_size_regular">Regular</string>
+  <string name="cache_size_large">Large</string>
+  <string name="cache_size_other">Other</string>
   <string name="cache_size_virtual">Virtual</string>
-  <string name="cache_size_notchosen">not chosen</string>
+  <string name="cache_size_notchosen">Niet gekozen</string>
   <string name="cache_size_unknown">Onbekend</string>
   <string name="cache_size_nano">Nano</string>
   <string name="cache_size_very_large">Erg Groot</string>
@@ -369,6 +369,9 @@
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Activeren</string>
   <string name="init_oc_ro_description">c:geo Autoriseren met opencaching.ro naar caches te zoeken en je gevonden caches te benaderen/filteren.</string>
+  <string name="init_oc_uk">Opencaching.org.uk</string>
+  <string name="settings_activate_oc_uk">Activeren</string>
+  <string name="init_oc_uk_description">c:geo authoriseren met opencaching.org.uk om naar caches te zoeken en het filteren van gevonden caches.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activeren</string>
@@ -540,6 +543,7 @@
   <string name="auth_ocnl">opencaching.nl</string>
   <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
+  <string name="auth_ocuk">opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:geo is nu gekoppeld met %s.</string>
   <plurals name="cache_counts">
     <item quantity="one">Een cache</item>
