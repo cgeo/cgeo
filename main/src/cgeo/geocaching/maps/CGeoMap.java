@@ -374,17 +374,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
     }
 
-    final private Handler noMapTokenHandler = new Handler() {
-
-        @Override
-        public void handleMessage(final Message msg) {
-            if (!noMapTokenShowed) {
-                ActivityMixin.showToast(activity, res.getString(R.string.map_token_err));
-
-                noMapTokenShowed = true;
-            }
-        }
-    };
     /**
      * calling activities can set the map title via extras
      */
@@ -1271,9 +1260,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             if (Settings.isGCConnectorActive()) {
                 if (tokens == null) {
                     tokens = GCLogin.getInstance().getMapTokens();
-                    if (noMapTokenHandler != null && (StringUtils.isEmpty(tokens.getUserSession()) || StringUtils.isEmpty(tokens.getSessionToken()))) {
+                    if (StringUtils.isEmpty(tokens.getUserSession()) || StringUtils.isEmpty(tokens.getSessionToken())) {
                         tokens = null;
-                        noMapTokenHandler.sendEmptyMessage(0);
+                        if (!noMapTokenShowed) {
+                            ActivityMixin.showToast(activity, res.getString(R.string.map_token_err));
+                            noMapTokenShowed = true;
+                        }
                     }
                 }
             }
