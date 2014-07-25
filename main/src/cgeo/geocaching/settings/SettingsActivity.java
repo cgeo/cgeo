@@ -62,7 +62,7 @@ public class SettingsActivity extends PreferenceActivity {
      * directory and preference key in onActivityResult() easily just by knowing
      * the result code.
      */
-    private static enum DirChooserType {
+    private enum DirChooserType {
         GPX_IMPORT_DIR(1, R.string.pref_gpxImportDir,
                 Environment.getExternalStorageDirectory().getPath() + "/gpx", false),
         GPX_EXPORT_DIR(2, R.string.pref_gpxExportDir,

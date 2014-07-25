@@ -628,7 +628,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             final String message = res.getString(StringUtils.isBlank(imageUri.getPath()) ?
                     R.string.log_saving :
                     R.string.log_saving_and_uploading);
-            new Poster(LogCacheActivity.this, message).execute(currentLogText(), currentLogPassword());
+            new Poster(this, message).execute(currentLogText(), currentLogPassword());
         }
     }
 

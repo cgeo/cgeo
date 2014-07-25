@@ -347,7 +347,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
     private void sendLog() {
         if (!gettingViewstate) {
-            waitDialog = ProgressDialog.show(LogTrackableActivity.this, null, res.getString(R.string.log_saving), true);
+            waitDialog = ProgressDialog.show(this, null, res.getString(R.string.log_saving), true);
             waitDialog.setCancelable(true);
 
             Settings.setTrackableAction(typeSelected.id);

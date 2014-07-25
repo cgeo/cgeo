@@ -32,8 +32,8 @@ public enum OCPreferenceKeys {
             R.string.pref_ocuk_tokenpublic, R.string.pref_ocuk_tokensecret, OCAuthParams.OC_UK_AUTH_PARAMS);
 
 
-    private OCPreferenceKeys(final String siteId, final int isActivePrefId, final int prefScreenId, final int authPrefId,
-            final int websitePrefId, final int publicTokenPrefId, final int privateTokenPrefId, final OCAuthParams authParams) {
+    OCPreferenceKeys(final String siteId, final int isActivePrefId, final int prefScreenId, final int authPrefId,
+                     final int websitePrefId, final int publicTokenPrefId, final int privateTokenPrefId, final OCAuthParams authParams) {
         this.siteId = siteId;
         this.isActivePrefId = isActivePrefId;
         this.prefScreenId = prefScreenId;

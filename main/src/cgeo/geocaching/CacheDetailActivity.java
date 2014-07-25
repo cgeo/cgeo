@@ -852,9 +852,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return;
         }
 
-        final RefreshCacheHandler refreshCacheHandler = new RefreshCacheHandler(CacheDetailActivity.this, progress);
+        final RefreshCacheHandler refreshCacheHandler = new RefreshCacheHandler(this, progress);
 
-        progress.show(CacheDetailActivity.this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
+        progress.show(this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
 
         cache.refresh(refreshCacheHandler, RxUtils.networkScheduler);
     }
@@ -865,8 +865,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return;
         }
 
-        progress.show(CacheDetailActivity.this, res.getString(R.string.cache_dialog_offline_drop_title), res.getString(R.string.cache_dialog_offline_drop_message), true, null);
-        cache.drop(new ChangeNotificationHandler(CacheDetailActivity.this, progress), RxUtils.networkScheduler);
+        progress.show(this, res.getString(R.string.cache_dialog_offline_drop_title), res.getString(R.string.cache_dialog_offline_drop_message), true, null);
+        cache.drop(new ChangeNotificationHandler(this, progress), RxUtils.networkScheduler);
     }
 
     private void storeCache() {
@@ -877,7 +877,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         if (Settings.getChooseList()) {
             // let user select list to store cache in
-            new StoredList.UserInterface(CacheDetailActivity.this).promptForListSelection(R.string.list_title,
+            new StoredList.UserInterface(this).promptForListSelection(R.string.list_title,
                     new Action1<Integer>() {
                         @Override
                         public void call(final Integer selectedListId) {
@@ -885,7 +885,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         }
                     }, true, StoredList.TEMPORARY_LIST_ID);
         } else {
-            storeCache(StoredList.TEMPORARY_LIST_ID, new StoreCacheHandler(CacheDetailActivity.this, progress));
+            storeCache(StoredList.TEMPORARY_LIST_ID, new StoreCacheHandler(this, progress));
         }
     }
 
