@@ -66,6 +66,8 @@ public class CgeoApplication extends Application {
         } catch (final IllegalAccessException e) {
             // ignore
         }
+        // ensure initialization of lists
+        DataStore.getLists();
     }
 
     @Override
