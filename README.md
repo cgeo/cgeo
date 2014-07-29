@@ -54,9 +54,9 @@ If the workspace directory name contains a space and leads to errors in the -dex
 5. edit `local.properties` (see comments in the file)
 6. copy `./main/templates/keys.xml` to `./main/res/values/`
 7. edit `./main/res/values/keys.xml` and insert several keys (see comments in the file)
-7.a) Google Maps API key 
-7.b) request your personal consumer key and secret at [opencaching.de OKAPI signup](http://www.opencaching.de/okapi/signup.html)
-7.c) request your personal consumer key and secret at [opencaching.pl OKAPI signup](http://www.opencaching.pl/okapi/signup.html)
+  * Google Maps API key (you can leave it empty, but then Google Maps don't work)
+  * request your personal consumer key and secret at [opencaching.de OKAPI signup](http://www.opencaching.de/okapi/signup.html)
+  * request your personal consumer key and secret at [opencaching.pl OKAPI signup](http://www.opencaching.pl/okapi/signup.html)
 
 ### Building with Ant ###
 
