@@ -161,7 +161,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     // map status data
     private boolean followMyLocation = false;
     private Viewport viewport = null;
-    private int zoom = -100;
     // threads
     private Subscription loadTimer;
     private LoadDetails loadDetailsThread = null;
@@ -1078,6 +1077,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private static final class LoadTimerAction implements Action0 {
 
         @NonNull private final WeakReference<CGeoMap> mapRef;
+        private int previousZoom = -100;
 
         public LoadTimerAction(@NonNull final CGeoMap map) {
             this.mapRef = new WeakReference<>(map);
@@ -1099,14 +1099,14 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
                     // check if map moved or zoomed
                     //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
-                    final boolean moved = map.markersInvalidated || (map.isLiveEnabled && !map.downloaded) || (map.viewport == null) || zoomNow != map.zoom ||
+                    final boolean moved = map.markersInvalidated || (map.isLiveEnabled && !map.downloaded) || (map.viewport == null) || zoomNow != previousZoom ||
                             (mapMoved(map.viewport, viewportNow) && (map.cachesCnt <= 0 || CollectionUtils.isEmpty(map.caches) || !map.viewport.includes(viewportNow)));
 
                     // update title on any change
                     if (moved || !viewportNow.equals(map.viewport)) {
                         map.displayHandler.sendEmptyMessage(UPDATE_TITLE);
                     }
-                    map.zoom = zoomNow;
+                    previousZoom = zoomNow;
 
                     // save new values
                     if (moved) {
