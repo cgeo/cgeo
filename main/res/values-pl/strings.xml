@@ -412,7 +412,6 @@
   <string name="init_units">Używaj angielskich jednostek miary\n(mile)</string>
   <string name="init_summary_units">Używaj angielskich jednostek miary\n(mile)</string>
   <string name="init_log_offline">Włącz logowanie offline\n(Nie pokazuj ekranu logowania online, nie wysyłaj logu online)</string>
-  <string name="init_summary_log_offline">Włącz logowanie offline\n(Nie pokazuj ekranu logowania online, nie wysyłaj logu online)</string>
   <string name="init_choose_list">Zapytaj o listę</string>
   <string name="init_summary_choose_list">Zapytaj o listę podczas zapisywania skrzynek</string>
   <string name="init_livelist">Pokazuj kierunek do skrzynek na liście</string>

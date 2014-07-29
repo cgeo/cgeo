@@ -429,7 +429,6 @@
   <string name="init_units">Utilitza les unitats imperials (milles/peus)</string>
   <string name="init_summary_units">Utilitza unitats imperials (milles/peus) en lloc d\'unitats mètriques (quilòmetres/metres)</string>
   <string name="init_log_offline">Registre fora de línia</string>
-  <string name="init_summary_log_offline">Habilita el registre fora de línia (No es mostrarà la pantalla de registre en línia i no enviarà els registres)</string>
   <string name="init_choose_list">Demana una llista</string>
   <string name="init_summary_choose_list">Demana a quina llista cal desar els catxés</string>
   <string name="init_livelist">Mostra la direcció</string>

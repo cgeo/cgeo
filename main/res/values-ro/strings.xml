@@ -416,7 +416,6 @@
   <string name="init_units">Unităţi de măsură imperiale</string>
   <string name="init_summary_units">Foloseşte unităţi de măsură imperiale în loc de sistemul metric</string>
   <string name="init_log_offline">Însemnări salvate local</string>
-  <string name="init_summary_log_offline">Activează însemnări stocate local (Nu va afişa ecranul pentru postarea de însemnări, nu va posta însemnări)</string>
   <string name="init_choose_list">Cere listă</string>
   <string name="init_summary_choose_list">Întreabă în care listă vor fi salvate cutiile</string>
   <string name="init_livelist">Arată direcţia</string>

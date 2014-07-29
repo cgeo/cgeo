@@ -394,7 +394,6 @@
   <string name="init_units">マイル/フィート表示</string>
   <string name="init_summary_units">距離をメートルの代わりにマイル/フィートで表示</string>
   <string name="init_log_offline">オフラインログ</string>
-  <string name="init_summary_log_offline">ログ書きをオフライン専用にする\n(ログを書く際にオンラインでの投稿をしない。このチェックを外してもオフライン用に保存することはできます。)</string>
   <string name="init_choose_list">リストを選択</string>
   <string name="init_summary_choose_list">キャッシュ情報の保存時にリストを選択するダイアログを表示</string>
   <string name="init_livelist">方向を表示</string>
