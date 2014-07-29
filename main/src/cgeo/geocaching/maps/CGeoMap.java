@@ -1380,6 +1380,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             return mapRef.get();
         }
 
+        @Override
         final public void run() {
             final CGeoMap map = mapRef.get();
             if (map != null) {
