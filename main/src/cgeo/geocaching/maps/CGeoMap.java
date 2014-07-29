@@ -45,7 +45,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Subscription;
 import rx.functions.Action0;
@@ -1337,11 +1336,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         protected DoRunnable(@NonNull final CGeoMap map) {
             mapRef = new WeakReference<>(map);
-        }
-
-        protected @Nullable
-        final CGeoMap getMap() {
-            return mapRef.get();
         }
 
         @Override
