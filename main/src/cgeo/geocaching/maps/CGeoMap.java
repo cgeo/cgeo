@@ -160,7 +160,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private boolean noMapTokenShowed = false;
     // map status data
     private boolean followMyLocation = false;
-    private Viewport viewport = null;
     // threads
     private Subscription loadTimer;
     private LoadDetails loadDetailsThread = null;
@@ -1078,6 +1077,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         @NonNull private final WeakReference<CGeoMap> mapRef;
         private int previousZoom = -100;
+        private Viewport previousViewport;
 
         public LoadTimerAction(@NonNull final CGeoMap map) {
             this.mapRef = new WeakReference<>(map);
@@ -1099,11 +1099,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
                     // check if map moved or zoomed
                     //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
-                    final boolean moved = map.markersInvalidated || (map.isLiveEnabled && !map.downloaded) || (map.viewport == null) || zoomNow != previousZoom ||
-                            (mapMoved(map.viewport, viewportNow) && (map.cachesCnt <= 0 || CollectionUtils.isEmpty(map.caches) || !map.viewport.includes(viewportNow)));
+                    final boolean moved = map.markersInvalidated || (map.isLiveEnabled && !map.downloaded) || (previousViewport == null) || zoomNow != previousZoom ||
+                            (mapMoved(previousViewport, viewportNow) && (map.cachesCnt <= 0 || CollectionUtils.isEmpty(map.caches) || !previousViewport.includes(viewportNow)));
 
                     // update title on any change
-                    if (moved || !viewportNow.equals(map.viewport)) {
+                    if (moved || !viewportNow.equals(previousViewport)) {
                         map.displayHandler.sendEmptyMessage(UPDATE_TITLE);
                     }
                     previousZoom = zoomNow;
@@ -1115,7 +1115,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                         final long currentTime = System.currentTimeMillis();
 
                         if (1000 < (currentTime - map.loadThreadRun)) {
-                            map.viewport = viewportNow;
+                            previousViewport = viewportNow;
                             loadExecutor.execute(new LoadRunnable(map));
                         }
                     }
@@ -1170,7 +1170,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
             SearchResult searchResult;
             if (mapMode == MapMode.LIVE) {
-                searchResult = isLiveEnabled ? new SearchResult() : new SearchResult(DataStore.loadStoredInViewport(viewport, Settings.getCacheType()));
+                searchResult = isLiveEnabled ? new SearchResult() : new SearchResult(DataStore.loadStoredInViewport(mapView.getViewport(), Settings.getCacheType()));
             } else {
                 // map started from another activity
                 searchResult = searchIntent != null ? new SearchResult(searchIntent) : new SearchResult();
@@ -1180,7 +1180,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             }
             // live mode search result
             if (isLiveEnabled) {
-                searchResult.addSearchResult(DataStore.loadCachedInViewport(viewport, Settings.getCacheType()));
+                searchResult.addSearchResult(DataStore.loadCachedInViewport(mapView.getViewport(), Settings.getCacheType()));
             }
 
             downloaded = true;
@@ -1203,7 +1203,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                         || mapMode == MapMode.COORDS) {
                     //All visible waypoints
                     final CacheType type = Settings.getCacheType();
-                    final Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(viewport, excludeMine, excludeDisabled, type);
+                    final Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(mapView.getViewport(), excludeMine, excludeDisabled, type);
                     waypoints.addAll(waypointsInViewport);
                 }
                 else {
@@ -1263,7 +1263,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                     }
                 }
             }
-            final SearchResult searchResult = ConnectorFactory.searchByViewport(viewport.resize(0.8), tokens);
+            final SearchResult searchResult = ConnectorFactory.searchByViewport(mapView.getViewport().resize(0.8), tokens);
             downloaded = true;
 
             final Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
