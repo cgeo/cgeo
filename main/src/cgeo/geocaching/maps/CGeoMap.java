@@ -1158,11 +1158,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
 
         @Override
-        public void run() {
-            final CGeoMap map = getMap();
-            if (map != null) {
-                map.doLoadRun();
-            }
+        public void runWithMap(final CGeoMap map) {
+            map.doLoadRun();
         }
     }
 
@@ -1246,11 +1243,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
 
         @Override
-        public void run() {
-            final CGeoMap map = getMap();
-            if (map != null) {
-                map.doDownloadRun();
-            }
+        public void runWithMap(final CGeoMap map) {
+            map.doDownloadRun();
         }
     }
 
@@ -1306,11 +1300,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
 
         @Override
-        public void run() {
-            final CGeoMap map = getMap();
-            if (map != null) {
-                map.doDisplayRun();
-            }
+        public void runWithMap(final CGeoMap map) {
+            map.doDisplayRun();
         }
     }
 
@@ -1388,6 +1379,15 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         final CGeoMap getMap() {
             return mapRef.get();
         }
+
+        final public void run() {
+            final CGeoMap map = mapRef.get();
+            if (map != null) {
+                runWithMap(map);
+            }
+        }
+
+        abstract protected void runWithMap(final CGeoMap map);
     }
 
     /**
