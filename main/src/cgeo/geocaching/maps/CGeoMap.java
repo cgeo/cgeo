@@ -966,10 +966,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         /**
          * weak reference to the outer class
          */
-        private final WeakReference<CGeoMap> map;
+        private final WeakReference<CGeoMap> mapRef;
 
         public UpdateLoc(final CGeoMap map) {
-            this.map = new WeakReference<>(map);
+            mapRef = new WeakReference<>(map);
         }
 
         @Override
@@ -994,26 +994,26 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 timeLastPositionOverlayCalculation = currentTimeMillis;
 
                 try {
-                    final CGeoMap cgeoMapRef = map.get();
-                    if (cgeoMapRef != null) {
-                        if (cgeoMapRef.mapView != null) {
-                            if (cgeoMapRef.overlayPositionAndScale == null) {
-                                cgeoMapRef.overlayPositionAndScale = cgeoMapRef.mapView.createAddPositionAndScaleOverlay();
+                    final CGeoMap map = mapRef.get();
+                    if (map != null) {
+                        if (map.mapView != null) {
+                            if (map.overlayPositionAndScale == null) {
+                                map.overlayPositionAndScale = map.mapView.createAddPositionAndScaleOverlay();
                             }
 
                             final boolean needsRepaintForDistance = needsRepaintForDistance();
                             final boolean needsRepaintForHeading = needsRepaintForHeading();
 
                             if (needsRepaintForDistance) {
-                                if (cgeoMapRef.followMyLocation) {
-                                    cgeoMapRef.centerMap(new Geopoint(currentLocation));
+                                if (map.followMyLocation) {
+                                    map.centerMap(new Geopoint(currentLocation));
                                 }
                             }
 
                             if (needsRepaintForDistance || needsRepaintForHeading) {
-                                cgeoMapRef.overlayPositionAndScale.setCoordinates(currentLocation);
-                                cgeoMapRef.overlayPositionAndScale.setHeading(currentHeading);
-                                cgeoMapRef.mapView.repaintRequired(cgeoMapRef.overlayPositionAndScale);
+                                map.overlayPositionAndScale.setCoordinates(currentLocation);
+                                map.overlayPositionAndScale.setHeading(currentHeading);
+                                map.mapView.repaintRequired(map.overlayPositionAndScale);
                             }
                         }
                     }
@@ -1024,11 +1024,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
 
         boolean needsRepaintForHeading() {
-            final CGeoMap cgeoMapRef = map.get();
-            if (cgeoMapRef == null) {
+            final CGeoMap map = mapRef.get();
+            if (map == null) {
                 return false;
             }
-            return Math.abs(AngleUtils.difference(currentHeading, cgeoMapRef.overlayPositionAndScale.getHeading())) > MIN_HEADING_DELTA;
+            return Math.abs(AngleUtils.difference(currentHeading, map.overlayPositionAndScale.getHeading())) > MIN_HEADING_DELTA;
         }
 
         boolean needsRepaintForDistance() {
@@ -1036,11 +1036,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 return false;
             }
 
-            final CGeoMap cgeoMapRef = map.get();
-            if (cgeoMapRef == null) {
+            final CGeoMap map = mapRef.get();
+            if (map == null) {
                 return false;
             }
-            final Location lastLocation = cgeoMapRef.overlayPositionAndScale.getCoordinates();
+            final Location lastLocation = map.overlayPositionAndScale.getCoordinates();
 
             float dist = Float.MAX_VALUE;
             if (lastLocation != null) {
@@ -1048,11 +1048,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             }
 
             final float[] mapDimension = new float[1];
-            if (cgeoMapRef.mapView.getWidth() < cgeoMapRef.mapView.getHeight()) {
-                final double span = cgeoMapRef.mapView.getLongitudeSpan() / 1e6;
+            if (map.mapView.getWidth() < map.mapView.getHeight()) {
+                final double span = map.mapView.getLongitudeSpan() / 1e6;
                 Location.distanceBetween(currentLocation.getLatitude(), currentLocation.getLongitude(), currentLocation.getLatitude(), currentLocation.getLongitude() + span, mapDimension);
             } else {
-                final double span = cgeoMapRef.mapView.getLatitudeSpan() / 1e6;
+                final double span = map.mapView.getLatitudeSpan() / 1e6;
                 Location.distanceBetween(currentLocation.getLatitude(), currentLocation.getLongitude(), currentLocation.getLatitude() + span, currentLocation.getLongitude(), mapDimension);
             }
 
