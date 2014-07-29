@@ -270,7 +270,7 @@
   <string name="caches_remove_all">Ta bort alla</string>
   <string name="caches_remove_all_confirm">Vill du ta bort alla %s cacher från denna lista?</string>
   <string name="caches_remove_selected">Ta bort valda</string>
-  <string name="caches_remove_selected_confirm">Vill du ta bort de %s markerade % cacherna från enheten?</string>
+  <string name="caches_remove_selected_confirm">Vill du ta bort de %s markerade cacherna från enheten?</string>
   <string name="caches_remove_progress">Tar bort cacher</string>
   <string name="caches_delete_events">Ta bort gamla event</string>
   <string name="caches_refresh_selected">Uppdatera valda</string>
