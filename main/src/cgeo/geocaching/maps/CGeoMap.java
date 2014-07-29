@@ -142,11 +142,17 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private static final String BUNDLE_LIVE_ENABLED = "liveEnabled";
     private static final String BUNDLE_TRAIL_HISTORY = "trailHistory";
 
-    private Resources res = null;
-    private MapItemFactory mapItemFactory = null;
-    private Activity activity = null;
-    private MapViewImpl mapView = null;
-    private CgeoApplication app = null;
+    // Those are initialized in onCreate() and will never be null afterwards
+    private Resources res;
+    private Activity activity;
+    private CgeoApplication app;
+    private MapItemFactory mapItemFactory;
+    private String mapTitle;
+    private LeastRecentlyUsedSet<Geocache> caches;
+    private MapViewImpl mapView;
+    private CachesOverlay overlayCaches;
+    private PositionAndScaleOverlay overlayPositionAndScale;
+
     final private GeoDirHandler geoDirUpdate;
     private SearchResult searchIntent = null;
     private String geocodeIntent = null;
@@ -167,22 +173,17 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private volatile long loadThreadRun = 0L;
     //Interthread communication flag
     private volatile boolean downloaded = false;
-    // overlays
-    private CachesOverlay overlayCaches = null;
-    private PositionAndScaleOverlay overlayPositionAndScale = null;
     // data for overlays
     private static final int[][] INSET_RELIABLE = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }; // center, 33x40 / 45x51 / 60x68
     private static final int[][] INSET_TYPE = { { 5, 8, 6, 10 }, { 4, 4, 5, 11 }, { 4, 4, 5, 11 } }; // center, 22x22 / 36x36
     private static final int[][] INSET_OWN = { { 21, 0, 0, 26 }, { 25, 0, 0, 35 }, { 40, 0, 0, 48 } }; // top right, 12x12 / 16x16 / 20x20
     private static final int[][] INSET_FOUND = { { 0, 0, 21, 28 }, { 0, 0, 25, 35 }, { 0, 0, 40, 48 } }; // top left, 12x12 / 16x16 / 20x20
     private static final int[][] INSET_USERMODIFIEDCOORDS = { { 21, 28, 0, 0 }, { 19, 25, 0, 0 }, { 25, 33, 0, 0 } }; // bottom right, 12x12 / 26x26 / 35x35
-    private static final int[][] INSET_PERSONALNOTE = { { 0, 28, 21, 0 }, { 0, 25, 19, 0 }, { 0, 33, 25, 0 } }; // bottom left, 12x12 / 26x26 / 35x35
 
+    private static final int[][] INSET_PERSONALNOTE = { { 0, 28, 21, 0 }, { 0, 25, 19, 0 }, { 0, 33, 25, 0 } }; // bottom left, 12x12 / 26x26 / 35x35
     private final SparseArray<LayerDrawable> overlaysCache = new SparseArray<>();
     /** Count of caches currently visible */
     private int cachesCnt = 0;
-    /** List of caches in the viewport */
-    private LeastRecentlyUsedSet<Geocache> caches = null;
     /** List of waypoints in the viewport */
     private final LeastRecentlyUsedSet<Waypoint> waypoints = new LeastRecentlyUsedSet<>(MAX_CACHES);
     // storing for offline
@@ -190,9 +191,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private int detailTotal = 0;
     private int detailProgress = 0;
     private long detailProgressTime = 0L;
+
     // views
     private CheckBox myLocSwitch = null;
-
     /** Controls the map behavior */
     private MapMode mapMode = null;
     /** Live mode enabled for map. **/
@@ -202,21 +203,22 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private boolean centered = false; // if map is already centered
     private boolean alreadyCentered = false; // -""- for setting my location
     private static final Set<String> dirtyCaches = new HashSet<>();
+
     /**
      * if live map is enabled, this is the minimum zoom level, independent of the stored setting
      */
     private static final int MIN_LIVEMAP_ZOOM = 12;
-
     // Thread pooling
     private static BlockingQueue<Runnable> displayQueue = new ArrayBlockingQueue<>(1);
     private static ThreadPoolExecutor displayExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, displayQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
     private static BlockingQueue<Runnable> downloadQueue = new ArrayBlockingQueue<>(1);
     private static ThreadPoolExecutor downloadExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, downloadQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
     private static BlockingQueue<Runnable> loadQueue = new ArrayBlockingQueue<>(1);
-    private static ThreadPoolExecutor loadExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, loadQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
 
+    private static ThreadPoolExecutor loadExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, loadQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
     // handlers
     /** Updates the titles */
+
     private final static class DisplayHandler extends Handler {
 
         private final WeakReference<CGeoMap> mapRef;
@@ -224,7 +226,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         public DisplayHandler(@NonNull final CGeoMap map) {
             this.mapRef = new WeakReference<>(map);
         }
-
         @Override
         public void handleMessage(final Message msg) {
             final int what = msg.what;
@@ -245,7 +246,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                     }
 
                     map.countVisibleCaches();
-                    if (map.caches != null && !map.caches.isEmpty() && !map.mapTitle.contains("[")) {
+                    if (!map.caches.isEmpty() && !map.mapTitle.contains("[")) {
                         title.append(" [").append(map.cachesCnt);
                         if (map.cachesCnt != map.caches.size()) {
                             title.append('/').append(map.caches.size());
@@ -267,6 +268,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                     break;
             }
         }
+
     }
 
     final private Handler displayHandler = new DisplayHandler(this);
@@ -287,10 +289,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private void setTitleHoneyComb(final String title) {
         activity.getActionBar().setTitle(title);
     }
-
     /** Updates the progress. */
     private static final class ShowProgressHandler extends Handler {
         private int counter = 0;
+
         @NonNull private final WeakReference<CGeoMap> mapRef;
 
         public ShowProgressHandler(@NonNull final CGeoMap map) {
@@ -310,7 +312,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 counter++;
             }
         }
-
         private void showProgress(final boolean show) {
             final CGeoMap map = mapRef.get();
             if (map == null) {
@@ -330,6 +331,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 map.activity.setProgressBarIndeterminateVisibility(show);
             }
         }
+
     }
 
     final private Handler showProgressHandler = new ShowProgressHandler(this);
@@ -363,19 +365,14 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 }
             }
         }
-
         @Override
         public void handleCancel(final Object extra) {
             if (loadDetailsThread != null) {
                 loadDetailsThread.stopIt();
             }
         }
-    }
 
-    /**
-     * calling activities can set the map title via extras
-     */
-    private String mapTitle;
+    }
 
     /* Current source id */
     private int currentSourceId;
@@ -408,9 +405,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         outState.putInt(BUNDLE_MAP_SOURCE, currentSourceId);
         outState.putIntArray(BUNDLE_MAP_STATE, currentMapState());
         outState.putBoolean(BUNDLE_LIVE_ENABLED, isLiveEnabled);
-        if (overlayPositionAndScale != null) {
-            outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY, overlayPositionAndScale.getHistory());
-        }
+        outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY, overlayPositionAndScale.getHistory());
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -491,15 +486,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         // initialize overlays
         mapView.clearOverlays();
 
-        if (overlayCaches == null) {
-            overlayCaches = mapView.createAddMapOverlay(mapView.getContext(), getResources().getDrawable(R.drawable.marker));
-        }
-
-        if (overlayPositionAndScale == null) {
-            overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay();
-            if (trailHistory != null) {
-                overlayPositionAndScale.setHistory(trailHistory);
-            }
+        overlayCaches = mapView.createAddMapOverlay(mapView.getContext(), getResources().getDrawable(R.drawable.marker));
+        overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay();
+        if (trailHistory != null) {
+            overlayPositionAndScale.setHistory(trailHistory);
         }
 
         mapView.repaintRequired(null);
@@ -588,9 +578,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         resumeSubscription.unsubscribe();
         savePrefs();
 
-        if (mapView != null) {
-            mapView.destroyDrawingCache();
-        }
+        mapView.destroyDrawingCache();
 
         overlaysCache.clear();
 
@@ -651,7 +639,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             menu.findItem(R.id.menu_store_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport) && new SearchResult(geocodesInViewport).hasUnsavedCaches());
 
             item = menu.findItem(R.id.menu_circle_mode); // show circles
-            item.setChecked(overlayCaches != null && overlayCaches.getCircles());
+            item.setChecked(overlayCaches.getCircles());
 
             item = menu.findItem(R.id.menu_theme_mode); // show theme selection
             item.setVisible(mapView.hasMapThemes());
@@ -737,10 +725,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 }
                 return true;
             case R.id.menu_circle_mode:
-                if (overlayCaches == null) {
-                    return false;
-                }
-
                 overlayCaches.switchCircles();
                 mapView.repaintRequired(overlayCaches);
                 ActivityMixin.invalidateOptionsMenu(activity);
@@ -872,7 +856,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         if (restartRequired) {
             mapRestart();
-        } else if (mapView != null) {
+        } else if (mapView != null) {  // changeMapSource can be called by onCreate()
             mapView.setMapSource();
             ActivityMixin.invalidateOptionsMenu(activity);
         }
@@ -915,10 +899,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
      * @return the current map state as an array of int, or null if no map state is available
      */
     private int[] currentMapState() {
-        if (mapView == null) {
-            return mapStateIntent;
-        }
-
         final GeoPointImpl mapCenter = mapView.getMapViewCenter();
         return new int[] {
                 mapCenter.getLatitudeE6(),
@@ -930,10 +910,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     }
 
     private void savePrefs() {
-        if (mapView == null) {
-            return;
-        }
-
         Settings.setMapZoom(mapView.getMapZoomLevel());
         Settings.setMapCenter(mapView.getMapViewCenter());
     }
@@ -994,25 +970,19 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 try {
                     final CGeoMap map = mapRef.get();
                     if (map != null) {
-                        if (map.mapView != null) {
-                            if (map.overlayPositionAndScale == null) {
-                                map.overlayPositionAndScale = map.mapView.createAddPositionAndScaleOverlay();
-                            }
+                        final boolean needsRepaintForDistance = needsRepaintForDistance();
+                        final boolean needsRepaintForHeading = needsRepaintForHeading();
 
-                            final boolean needsRepaintForDistance = needsRepaintForDistance();
-                            final boolean needsRepaintForHeading = needsRepaintForHeading();
-
-                            if (needsRepaintForDistance) {
-                                if (map.followMyLocation) {
-                                    map.centerMap(new Geopoint(currentLocation));
-                                }
+                        if (needsRepaintForDistance) {
+                            if (map.followMyLocation) {
+                                map.centerMap(new Geopoint(currentLocation));
                             }
+                        }
 
-                            if (needsRepaintForDistance || needsRepaintForHeading) {
-                                map.overlayPositionAndScale.setCoordinates(currentLocation);
-                                map.overlayPositionAndScale.setHeading(currentHeading);
-                                map.mapView.repaintRequired(map.overlayPositionAndScale);
-                            }
+                        if (needsRepaintForDistance || needsRepaintForHeading) {
+                            map.overlayPositionAndScale.setCoordinates(currentLocation);
+                            map.overlayPositionAndScale.setHeading(currentHeading);
+                            map.mapView.repaintRequired(map.overlayPositionAndScale);
                         }
                     }
                 } catch (final RuntimeException e) {
@@ -1090,37 +1060,34 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 return;
             }
             try {
-                if (map.mapView != null) {
-                    // get current viewport
-                    final Viewport viewportNow = map.mapView.getViewport();
-                    // Since zoomNow is used only for local comparison purposes,
-                    // it is ok to use the Google Maps compatible zoom level of OSM Maps
-                    final int zoomNow = map.mapView.getMapZoomLevel();
+                // get current viewport
+                final Viewport viewportNow = map.mapView.getViewport();
+                // Since zoomNow is used only for local comparison purposes,
+                // it is ok to use the Google Maps compatible zoom level of OSM Maps
+                final int zoomNow = map.mapView.getMapZoomLevel();
 
-                    // check if map moved or zoomed
-                    //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
-                    final boolean moved = map.markersInvalidated || (map.isLiveEnabled && !map.downloaded) || (previousViewport == null) || zoomNow != previousZoom ||
-                            (mapMoved(previousViewport, viewportNow) && (map.cachesCnt <= 0 || CollectionUtils.isEmpty(map.caches) || !previousViewport.includes(viewportNow)));
+                // check if map moved or zoomed
+                //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
+                final boolean moved = map.markersInvalidated || (map.isLiveEnabled && !map.downloaded) || (previousViewport == null) || zoomNow != previousZoom ||
+                        (mapMoved(previousViewport, viewportNow) && (map.cachesCnt <= 0 || CollectionUtils.isEmpty(map.caches) || !previousViewport.includes(viewportNow)));
 
-                    // update title on any change
-                    if (moved || !viewportNow.equals(previousViewport)) {
-                        map.displayHandler.sendEmptyMessage(UPDATE_TITLE);
-                    }
-                    previousZoom = zoomNow;
+                // update title on any change
+                if (moved || !viewportNow.equals(previousViewport)) {
+                    map.displayHandler.sendEmptyMessage(UPDATE_TITLE);
+                }
+                previousZoom = zoomNow;
 
-                    // save new values
-                    if (moved) {
-                        map.markersInvalidated = false;
+                // save new values
+                if (moved) {
+                    map.markersInvalidated = false;
 
-                        final long currentTime = System.currentTimeMillis();
+                    final long currentTime = System.currentTimeMillis();
 
-                        if (1000 < (currentTime - map.loadThreadRun)) {
-                            previousViewport = viewportNow;
-                            loadExecutor.execute(new LoadRunnable(map));
-                        }
+                    if (1000 < (currentTime - map.loadThreadRun)) {
+                        previousViewport = viewportNow;
+                        loadExecutor.execute(new LoadRunnable(map));
                     }
                 }
-
             } catch (final Exception e) {
                 Log.w("CGeoMap.startLoadtimer.start", e);
             }
@@ -1308,9 +1275,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private void doDisplayRun() {
         try {
             showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
-            if (mapView == null || caches == null) {
-                throw new ThreadDeath();
-            }
 
             // display caches
             final List<Geocache> cachesToDisplay = caches.getAsList();
@@ -1506,9 +1470,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     // center map to desired location
     private void centerMap(final Geopoint coords) {
         if (coords == null) {
-            return;
-        }
-        if (mapView == null) {
             return;
         }
 
