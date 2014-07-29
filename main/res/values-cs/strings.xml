@@ -429,7 +429,6 @@
   <string name="init_units">Používat imperiální jednotky</string>
   <string name="init_summary_units">Používat imperiální jednotky vzdálenosti</string>
   <string name="init_log_offline">Povolit offline logování</string>
-  <string name="init_summary_log_offline">Povolit Offline logování\n(Při logování nezobrazovat online logovací obrazovku a neodesílat Log na server)</string>
   <string name="init_choose_list">Ptát se na seznam</string>
   <string name="init_summary_choose_list">Ptát se na seznam pro uložení keše</string>
   <string name="init_livelist">Zobrazovat směr</string>

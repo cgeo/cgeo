@@ -430,7 +430,6 @@
   <string name="init_units">Gebruik imperiale stelsel voor afstanden</string>
   <string name="init_summary_units">Gebruik imperiale stelsel i.p.v. metrische stelsel</string>
   <string name="init_log_offline">Offline loggen</string>
-  <string name="init_summary_log_offline">Als er gelogd word, doe dit altijd offline (Laat het online log scherm niet zien en verzend de log niet)</string>
   <string name="init_choose_list">Vraag naar lijst</string>
   <string name="init_summary_choose_list">Vraag naar lijst voor opslaan caches</string>
   <string name="init_livelist">Toon richting</string>

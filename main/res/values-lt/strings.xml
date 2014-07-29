@@ -426,7 +426,6 @@
   <string name="init_units">Imperiniai vienetai</string>
   <string name="init_summary_units">Vietoje metrinių vienetų naudoti imperinius vienetus</string>
   <string name="init_log_offline">Registravimas neprisijungus</string>
-  <string name="init_summary_log_offline">Įjungti registravimą neprisijungus (nebus rodomas registravimo langas, nebus įkeltas įrašas)</string>
   <string name="init_choose_list">Klausti sąrašo</string>
   <string name="init_summary_choose_list">Klausti kuriame sąraše išsaugoti slėptuvę</string>
   <string name="init_livelist">Rodyti kryptį</string>

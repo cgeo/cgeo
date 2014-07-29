@@ -426,7 +426,6 @@
   <string name="init_units">Usa sistema imperiale</string>
   <string name="init_summary_units">Usa miglia/piedi invece del sistema metrico</string>
   <string name="init_log_offline">Log offline</string>
-  <string name="init_summary_log_offline">Attiva log offline (non visualizzerà lo schermo di log online, non invierà subito il log)</string>
   <string name="init_choose_list">Chiedi lista</string>
   <string name="init_summary_choose_list">Chiedi la lista quando salvi un cache</string>
   <string name="init_livelist">Visualizza direzione</string>

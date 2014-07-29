@@ -409,7 +409,6 @@
   <string name="init_units">Anglosaške merske enote</string>
   <string name="init_summary_units">Uporabi anglosaške merske enote namesto metričnih</string>
   <string name="init_log_offline">Zapisovanje brez povezave</string>
-  <string name="init_summary_log_offline">Vklopi način brez povezave pri zapisih\n(Ne pošlji zapisa na strežnik)</string>
   <string name="init_choose_list">Vprašaj za seznam</string>
   <string name="init_summary_choose_list">Pri shranjevanju zaklada za delo brez povezave vprašaj za seznam</string>
   <string name="init_livelist">Pokaži smeri</string>

@@ -425,7 +425,6 @@
   <string name="init_units">Používať imperiálne jednotky vzdialenosti</string>
   <string name="init_summary_units">Používať imperiálne jednotky vzdialenosti</string>
   <string name="init_log_offline">Pri zaznamenávaní vždy použiť offline režim (nezobrazovať online obrazovku počas zaznamenávania, neposielať záznam online)</string>
-  <string name="init_summary_log_offline">Pri zaznamenávaní vždy použiť offline režim (nezobrazovať online obrazovku počas zaznamenávania, neposielať záznam online)</string>
   <string name="init_choose_list">Požiadaj o zoznam</string>
   <string name="init_summary_choose_list">Opýtať sa v ktorom zozname uložiť cache</string>
   <string name="init_livelist">Zobrazovať smer v zozname skrýš</string>

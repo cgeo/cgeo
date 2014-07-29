@@ -409,7 +409,6 @@
   <string name="init_units">Bruk britiske måleenheter (fot og engelsk mil)</string>
   <string name="init_summary_units">Bruk imperialistiske måleenheter</string>
   <string name="init_log_offline">Offline logging</string>
-  <string name="init_summary_log_offline">Aktiver offline-logging (vil ikke vise online-logging og vil ikke laste opp logger)</string>
   <string name="init_choose_list">Spør etter liste</string>
   <string name="init_summary_choose_list">Spør etter hvilken liste cachene skal lagres i</string>
   <string name="init_livelist">Vis cachers retning i listen</string>
