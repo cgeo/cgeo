@@ -207,6 +207,7 @@
   <string name="info_select_logimage_cancelled">Val av bild avbröts.</string>
   <string name="info_stored_image">Ny bild sparad som:</string>
   <string name="info_storing_static_maps">Försöker ladda ner statiska kartor</string>
+  <string name="info_cache_saved">Cachen har lagrats lokalt</string>
   <string name="loc_last">Senast kända</string>
   <string name="loc_net">Nätverk</string>
   <string name="loc_gps">GPS</string>
@@ -214,6 +215,7 @@
   <string name="loc_trying">Försöker hitta plats</string>
   <string name="loc_no_addr">Okänd adress</string>
   <string name="loc_gps_disabled">GPS avstängd</string>
+  <string name="menu_centerposition">Centrera på min plats</string>
   <string name="menu_about">Om c:geo</string>
   <string name="menu_helpers">Tilläggsprogram</string>
   <string name="menu_settings">Inställningar</string>
@@ -265,6 +267,11 @@
   <string name="caches_select_invert">Invertera valda</string>
   <string name="caches_nearby">Nära</string>
   <string name="caches_manage">Hantera</string>
+  <string name="caches_remove_all">Ta bort alla</string>
+  <string name="caches_remove_all_confirm">Vill du ta bort alla %s cacher från denna lista?</string>
+  <string name="caches_remove_selected">Ta bort valda</string>
+  <string name="caches_remove_selected_confirm">Vill du ta bort de %s markerade % cacherna från enheten?</string>
+  <string name="caches_remove_progress">Tar bort cacher</string>
   <string name="caches_delete_events">Ta bort gamla event</string>
   <string name="caches_refresh_selected">Uppdatera valda</string>
   <string name="caches_refresh_all">Uppdatera alla</string>
@@ -294,6 +301,7 @@
   <string name="list_menu_create">Skapa en ny lista</string>
   <string name="list_menu_drop">Ta bort den här listan</string>
   <string name="list_menu_rename">Byt namn på den här listan</string>
+  <string name="list_menu_import">Importera</string>
   <string name="list_title">Välj en lista</string>
   <string name="list_inbox">Sparade</string>
   <string name="list_all_lists">Alla cacher</string>
@@ -361,6 +369,9 @@
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Aktivera</string>
   <string name="init_oc_ro_description">Använd c:geo med opencaching.ro för att söka efter cacher samt för att filtrera dina funna cacher.</string>
+  <string name="init_oc_uk">Opencaching.org.uk</string>
+  <string name="settings_activate_oc_uk">Aktivera</string>
+  <string name="init_oc_uk_description">Använd c:geo med opencaching.org.uk för att söka efter cacher samt för att filtrera dina funna cacher.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivera</string>
@@ -480,6 +491,9 @@
   <string name="init_maintenance">Underhåll</string>
   <string name="init_maintenance_directories_note">c:geo lagrar bilder, loggbilder och andra filer relaterade till en cache i en separat katalog. I vissa fall (som vid importering/exportering av databasen) kan denna katalog innehålla inaktuella filer, som kan tas bort här.</string>
   <string name="init_maintenance_directories">Ta bort överblivna filer</string>
+  <string name="init_create_memory_dump">Skapa minnesdump</string>
+  <string name="init_memory_dump">Minnesdump</string>
+  <string name="init_memory_dumped">Minnet sparat till %s</string>
   <string name="settings_open_website">Öppna hemsida</string>
   <string name="settings_settings">Inställningar</string>
   <string name="settings_information">Information</string>
@@ -529,6 +543,7 @@
   <string name="auth_ocnl">opencaching.nl</string>
   <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
+  <string name="auth_ocuk">opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:geo är nu godkänd för att kommunicera med %s.</string>
   <plurals name="cache_counts">
     <item quantity="one">En cache</item>
@@ -827,6 +842,7 @@
   <string name="user_menu_open_contact">Öppna kontakt</string>
   <string name="navigation">Navigering</string>
   <string name="compass_title">Kompass</string>
+  <string name="compass_sensors">Aktiva sensorer</string>
   <string name="use_gps">Använd enbart GPS</string>
   <string name="use_compass">Använd GPS och kompass</string>
   <string name="destination_select">Välj målpunkt</string>
@@ -1144,4 +1160,5 @@
   <string name="percent_favorite_points">%\  favoriter</string>
   <string name="cgeo_shortcut">c:geo genväg</string>
   <string name="create_shortcut">Skapa genväg</string>
+  <string name="send">Skicka</string>
 </resources>

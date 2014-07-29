@@ -429,7 +429,7 @@
   <string name="init_units">Imperiale Einheiten</string>
   <string name="init_summary_units">Imperiale Einheiten (Meilen/Fuß)</string>
   <string name="init_log_offline">Offline loggen</string>
-  <string name="init_summary_log_offline">Offline loggen aktivieren (Dialog für Online-Log wird nicht angezeigt beim loggen, Logs werden nicht hochgeladen)</string>
+  <string name="init_summary_log_offline">Offline loggen aktivieren (Dialog für Online-Log wird beim loggen nicht angezeigt, Logs werden nicht hochgeladen)</string>
   <string name="init_choose_list">Nach Liste fragen</string>
   <string name="init_summary_choose_list">Beim Speichern von Caches nach Liste fragen</string>
   <string name="init_livelist">Richtung zum Cache</string>

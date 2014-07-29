@@ -429,7 +429,7 @@
   <string name="init_units">Utiliser des unités de distance impériales</string>
   <string name="init_summary_units">Utiliser des unités de distance impériales</string>
   <string name="init_log_offline">Toujours utiliser le mode hors-ligne, même si connecté.</string>
-  <string name="init_summary_log_offline">Toujours utiliser le mode hors-ligne, même si connecté.</string>
+  <string name="init_summary_log_offline">Toujours utiliser le mode hors-ligne, même si connecté</string>
   <string name="init_choose_list">Demander dans quelle liste sauver les caches.</string>
   <string name="init_summary_choose_list">Demander dans quelle liste sauver les caches.</string>
   <string name="init_livelist">Afficher la direction des caches dans les listes</string>
