@@ -416,6 +416,7 @@
   <string name="init_units">Utilizar distância nas unidades do sistema imperial</string>
   <string name="init_summary_units">Utilizar distância nas unidades do sistema imperial</string>
   <string name="init_log_offline">Activar registo offline\n(Não mostrar o registo online quando fôr registar, não enviar o registo online)</string>
+  <string name="init_summary_log_offline">Activar registo offline\n(Não mostrar o registo online quando fôr registar, não enviar o registo online)</string>
   <string name="init_choose_list">Pedir Lista</string>
   <string name="init_summary_choose_list">Pedir lista quando guarda as caches</string>
   <string name="init_livelist">Mostrar a direcção para a cache na lista</string>
