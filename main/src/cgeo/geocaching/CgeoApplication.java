@@ -8,6 +8,9 @@ import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import rx.Observable;
 import rx.functions.Action1;
 import rx.observables.ConnectableObservable;
@@ -28,6 +31,7 @@ public class CgeoApplication extends Application {
     private Observable<Status> gpsStatusObservable;
     private volatile IGeoData currentGeo = null;
     private volatile float currentDirection = 0.0f;
+    private boolean isGooglePlayServicesAvailable = false;
 
     public static void dumpOnOutOfMemory(final boolean enable) {
 
@@ -66,6 +70,11 @@ public class CgeoApplication extends Application {
         }
         // ensure initialization of lists
         DataStore.getLists();
+        // Check if Google Play services is available
+        if (GooglePlayServicesUtil.isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS) {
+            isGooglePlayServicesAvailable = true;
+        }
+        Log.i("Google Play services are " + (isGooglePlayServicesAvailable ? "" : "not ") + "available");
     }
 
     @Override
@@ -142,6 +151,10 @@ public class CgeoApplication extends Application {
      */
     public void forceRelog() {
         forceRelog = true;
+    }
+
+    public boolean isGooglePlayServicesAvailable() {
+        return isGooglePlayServicesAvailable;
     }
 
 }
