@@ -44,7 +44,7 @@
         <jarDirectory url="file://$MODULE_DIR$/compile-libs" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="" scope="PROVIDED">
+    <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
           <root url="file://$MODULE_DIR$/libs" />
@@ -56,6 +56,7 @@
     </orderEntry>
     <orderEntry type="module" module-name="mapswithme-api" exported="" />
     <orderEntry type="module" module-name="android-support-v7-appcompat" exported="" />
+    <orderEntry type="module" module-name="google-play-services_lib" exported="" />
   </component>
 </module>
 
