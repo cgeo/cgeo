@@ -38,7 +38,6 @@ import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.text.Html;
-import android.view.View;
 import android.widget.TextView;
 
 import java.io.BufferedInputStream;
@@ -115,7 +114,7 @@ public class HtmlImage implements Html.ImageGetter {
         this.onlySave = onlySave;
         this.view = view;
 
-        Point displaySize = Compatibility.getDisplaySize();
+        final Point displaySize = Compatibility.getDisplaySize();
         this.maxWidth = displaySize.x - 25;
         this.maxHeight = displaySize.y - 25;
         this.resources = CgeoApplication.getInstance().getResources();
@@ -125,7 +124,7 @@ public class HtmlImage implements Html.ImageGetter {
      * Create a new HtmlImage object with different behaviours depending on <tt>onlySave</tt> value. No view object
      * will be tied to this HtmlImage.
      *
-     * For documentation, see {@link #HtmlImage(String, boolean, int, boolean, View)}.
+     * For documentation, see {@link #HtmlImage(String, boolean, int, boolean, TextView)}.
      */
     public HtmlImage(final String geocode, final boolean returnErrorImage, final int listId, final boolean onlySave) {
         this(geocode, returnErrorImage, listId, onlySave, null);
@@ -133,9 +132,10 @@ public class HtmlImage implements Html.ImageGetter {
 
     /**
      * Retrieve and optionally display an image.
-     * See {@link #HtmlImage(String, boolean, int, boolean, android.view.View)} for the various behaviours.
+     * See {@link #HtmlImage(String, boolean, int, boolean, TextView)} for the various behaviours.
      *
-     * @param url the URL to fetch from cache or network
+     * @param url
+     *            the URL to fetch from cache or network
      * @return a drawable containing the image, or <tt>null</tt> if <tt>onlySave</tt> is <tt>true</tt>
      */
     @Nullable
@@ -286,7 +286,7 @@ public class HtmlImage implements Html.ImageGetter {
                         return true;
                     }
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.e("HtmlImage.downloadOrRefreshCopy", e);
             }
         }
@@ -331,7 +331,7 @@ public class HtmlImage implements Html.ImageGetter {
             }
             final File fileSec = LocalStorage.getStorageSecFile(pseudoGeocode, url, true);
             return loadCachedImage(fileSec, forceKeep);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Log.w("HtmlImage.loadImageFromStorage", e);
         }
         return new ImmutablePair<>(null, false);
@@ -395,14 +395,14 @@ public class HtmlImage implements Html.ImageGetter {
 
     private void setSampleSize(final File file, final BitmapFactory.Options bfOptions) {
         //Decode image size only
-        BitmapFactory.Options options = new BitmapFactory.Options();
+        final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
 
         BufferedInputStream stream = null;
         try {
             stream = new BufferedInputStream(new FileInputStream(file));
             BitmapFactory.decodeStream(stream, null, options);
-        } catch (FileNotFoundException e) {
+        } catch (final FileNotFoundException e) {
             Log.e("HtmlImage.setSampleSize", e);
         } finally {
             IOUtils.closeQuietly(stream);
