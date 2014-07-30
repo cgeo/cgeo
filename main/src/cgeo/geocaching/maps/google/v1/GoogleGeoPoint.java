@@ -1,4 +1,4 @@
-package cgeo.geocaching.maps.google;
+package cgeo.geocaching.maps.google.v1;
 
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;

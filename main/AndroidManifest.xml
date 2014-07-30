@@ -206,7 +206,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".maps.google.GoogleMapActivity"
+            android:name=".maps.google.v1.GoogleMapActivity"
             android:label="@string/map_map" >
         </activity>
         <activity

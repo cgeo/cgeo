@@ -1,4 +1,4 @@
-package cgeo.geocaching.maps.google;
+package cgeo.geocaching.maps.google.v1;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;

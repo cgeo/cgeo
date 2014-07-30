@@ -13,7 +13,7 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.maps.MapProviderFactory;
-import cgeo.geocaching.maps.google.GoogleMapProvider;
+import cgeo.geocaching.maps.google.v1.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;

@@ -35,7 +35,7 @@
             android:id="@+id/map"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            class="cgeo.geocaching.maps.google.GoogleMapView"
+            class="cgeo.geocaching.maps.google.v1.GoogleMapView"
             android:apiKey="@string/maps_api_key"
             android:clickable="true"
             android:enabled="true"

@@ -1,4 +1,4 @@
-package cgeo.geocaching.maps.google;
+package cgeo.geocaching.maps.google.v1;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 

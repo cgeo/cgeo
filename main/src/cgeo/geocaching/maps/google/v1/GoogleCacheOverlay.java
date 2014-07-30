@@ -1,4 +1,4 @@
-package cgeo.geocaching.maps.google;
+package cgeo.geocaching.maps.google.v1;
 
 import cgeo.geocaching.maps.CachesOverlay;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
