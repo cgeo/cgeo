@@ -17,6 +17,7 @@
   <string name="letterbox">Letterbox hybrid</string>
   <string name="event">Eventcache</string>
   <string name="mega">Megaevent-cache</string>
+  <string name="giga">Gigaevent</string>
   <string name="earth">Earthcache</string>
   <string name="cito">\"Cache in trash out\"-event</string>
   <string name="webcam">Webkameracache</string>
@@ -206,6 +207,7 @@
   <string name="info_select_logimage_cancelled">Valg av bilde ble avbrutt.</string>
   <string name="info_stored_image">Nytt bilde lagret til:</string>
   <string name="info_storing_static_maps">Forsøker å lagre statisk kart</string>
+  <string name="info_cache_saved">Cachen er nå lagret lokalt</string>
   <string name="loc_last">Sist sett</string>
   <string name="loc_net">Nettverk</string>
   <string name="loc_gps">GPS</string>
@@ -213,6 +215,7 @@
   <string name="loc_trying">Prøver å lokalisere</string>
   <string name="loc_no_addr">Ukjent adresse</string>
   <string name="loc_gps_disabled">GPS deaktivert</string>
+  <string name="menu_centerposition">Midtstill kartet på min posisjon</string>
   <string name="menu_about">Om c:geo</string>
   <string name="menu_helpers">Verktøyprogrammer</string>
   <string name="menu_settings">Instillinger</string>
@@ -264,6 +267,11 @@
   <string name="caches_select_invert">Inverter merking</string>
   <string name="caches_nearby">I nærheten</string>
   <string name="caches_manage">Administrer</string>
+  <string name="caches_remove_all">Fjern alle</string>
+  <string name="caches_remove_all_confirm">Vil du fjerne alle %s cacher fra gjeldende liste?</string>
+  <string name="caches_remove_selected">Fjern valgte</string>
+  <string name="caches_remove_selected_confirm">Vil du slette de %s merkede cachene fra enheten?</string>
+  <string name="caches_remove_progress">Fjerner cacher</string>
   <string name="caches_delete_events">Slett gamle eventer</string>
   <string name="caches_refresh_selected">Oppdater valgte</string>
   <string name="caches_refresh_all">Oppdater alle</string>
@@ -293,6 +301,7 @@
   <string name="list_menu_create">Opprett ny liste</string>
   <string name="list_menu_drop">Fjern liste</string>
   <string name="list_menu_rename">Endre navn på listen</string>
+  <string name="list_menu_import">Importer</string>
   <string name="list_title">Velg en liste</string>
   <string name="list_inbox">Lagret</string>
   <string name="list_all_lists">Alle cacher</string>
@@ -353,6 +362,8 @@
   <string name="init_oc_us_description">Gi c:geo tilgang til å bruke opencaching.us for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
   <string name="settings_activate_oc_ro">Aktiver</string>
   <string name="init_oc_ro_description">Gi c:geo tilgang til å bruke opencaching.ro for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
+  <string name="settings_activate_oc_uk">Aktiver</string>
+  <string name="init_oc_uk_description">Gi c:geo tilgang til å bruke opencaching.org.uk for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
   <string name="init_gcvote">GCVote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktiver</string>
@@ -382,6 +393,8 @@
   <string name="init_signature_template_log">Loggtekst</string>
   <string name="init_ratingwanted">GCvote-rangering</string>
   <string name="init_summary_ratingwanted">Last rangering for cachen fra GCvote.com</string>
+  <string name="init_friends_and_own_logs_wanted">Vis venners / egne</string>
+  <string name="init_summary_friends_and_own_logs_wanted">Vis ekstra loggbokside for venners og egne logger</string>
   <string name="init_openlastdetailspage">Sist brukte fane</string>
   <string name="init_summary_openlastdetailspage">Åpne detaljsiden til cacher på den siste brukte fanen</string>
   <string name="init_autoload">Last full beskrivelse automatisk</string>
@@ -470,6 +483,9 @@
   <string name="init_maintenance">Vedlikehold</string>
   <string name="init_maintenance_directories_note">c:geo lagrer bilder, loggbilder og andre filer knyttet til en cache i en egen mappe. I noen situasjoner (som importering/eksportering av databasen) vil denne mappen inneholde utdaterte filer som kan slettes her.</string>
   <string name="init_maintenance_directories">Slett utdaterte filer</string>
+  <string name="init_create_memory_dump">Opprett minnedump</string>
+  <string name="init_memory_dump">Minnedump</string>
+  <string name="init_memory_dumped">Minne dumpet til %s</string>
   <string name="settings_open_website">Åpne nettside</string>
   <string name="settings_settings">Innstillinger</string>
   <string name="settings_information">Informasjon</string>
@@ -568,6 +584,7 @@
   <string name="cache_waypoints_add">Legg til veipunkter</string>
   <string name="cache_hint">Hint</string>
   <string name="cache_logs">Loggbok</string>
+  <string name="cache_logs_friends_and_own">Venners/egne logger</string>
   <string name="cache_dialog_loading_details">Laster cachens detaljer…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Laster siden</string>
   <string name="cache_dialog_loading_details_status_details">Behandler detaljer</string>
@@ -619,6 +636,7 @@
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Logg lagret</string>
   <string name="cache_status_found">Funnet</string>
+  <string name="cache_not_status_found">Ikke funnet</string>
   <string name="cache_status_archived">Arkivert</string>
   <string name="cache_status_disabled">Deaktivert</string>
   <string name="cache_status_premium">Kun for premium-medlemmer</string>
@@ -810,6 +828,7 @@
   <string name="user_menu_open_contact">Åpne kontaktinfo</string>
   <string name="navigation">Navigasjon</string>
   <string name="compass_title">Kompass</string>
+  <string name="compass_sensors">Aktive sensorer</string>
   <string name="use_gps">Bruk GPS</string>
   <string name="use_compass">Bruk kompass</string>
   <string name="destination_select">Velg destinasjon</string>
@@ -1122,4 +1141,5 @@
   <string name="percent_favorite_points">%\  favoritter</string>
   <string name="cgeo_shortcut">c:geo-snartvei</string>
   <string name="create_shortcut">Opprett snarvei</string>
+  <string name="send">Send</string>
 </resources>
