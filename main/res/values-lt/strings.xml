@@ -583,7 +583,7 @@
   <string name="cache_images">Nuotraukos</string>
   <string name="cache_waypoints">Papildomi taškai</string>
   <plurals name="waypoints">
-    <item quantity="one">1papildomas taškas</item>
+    <item quantity="one">%d papildomas taškas</item>
     <item quantity="few">%d papildomi taškai</item>
     <item quantity="other">%d papildomų taškų</item>
   </plurals>
@@ -1148,7 +1148,7 @@
   <string name="tts_oclock">%s o\'clock</string>
   <string name="clipboard_copy_ok">Nukopijuota į mainų sritį</string>
   <plurals name="days_ago">
-    <item quantity="one">vakar</item>
+    <item quantity="one">%d dieną atgal</item>
     <item quantity="few">%d dienas atgal</item>
     <item quantity="other">%d dienų atgal</item>
   </plurals>
