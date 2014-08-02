@@ -78,6 +78,7 @@
   <string name="log_saving">Siunčiamas įrašas…</string>
   <string name="log_saving_and_uploading">Siunčiamas įrašas ir įkeliama nuotrauka…</string>
   <string name="log_clear">Išvalyti</string>
+  <string name="log_post">Siųsti įrašą</string>
   <string name="log_post_not_possible">Įkeliamas įrašo puslapis…</string>
   <string name="log_add">Pridėti</string>
   <string name="log_no_rating">Nėra reitingo</string>

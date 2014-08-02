@@ -78,6 +78,7 @@
   <string name="log_saving">Log wird gesendet…</string>
   <string name="log_saving_and_uploading">Log und Bild werden gesendet…</string>
   <string name="log_clear">Leeren</string>
+  <string name="log_post">Loggen</string>
   <string name="log_post_not_possible">Lade Log-Seite…</string>
   <string name="log_add">Hinzufügen</string>
   <string name="log_no_rating">Keine Bewertung</string>

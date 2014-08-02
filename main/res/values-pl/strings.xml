@@ -78,6 +78,7 @@
   <string name="log_saving">Zapisuję w dzienniku…</string>
   <string name="log_saving_and_uploading">Zapisuję w dzienniku i wysyłam zdjęcie…</string>
   <string name="log_clear">Wyczyść</string>
+  <string name="log_post">Wpisz do dziennika</string>
   <string name="log_post_not_possible">Ładuję dziennik…</string>
   <string name="log_add">Dodaj</string>
   <string name="log_no_rating">Bez oceny</string>

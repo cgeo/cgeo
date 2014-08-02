@@ -77,6 +77,7 @@
   <string name="log_saving">Odesílání Logu…</string>
   <string name="log_saving_and_uploading">Odesílání Logu a nahrávání obrázku…</string>
   <string name="log_clear">Vyčistit</string>
+  <string name="log_post">Odeslat Log</string>
   <string name="log_post_not_possible">Načítání stránky s Logovacím formulářem…</string>
   <string name="log_add">Přidat</string>
   <string name="log_no_rating">Bez hodnocení</string>

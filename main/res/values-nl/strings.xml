@@ -78,6 +78,7 @@
   <string name="log_saving">Log opslaan…</string>
   <string name="log_saving_and_uploading">Verzenden van log en uploaden foto…</string>
   <string name="log_clear">Wissen</string>
+  <string name="log_post">Verzend log</string>
   <string name="log_post_not_possible">Laden Log Pagina…</string>
   <string name="log_add">Toevoegen</string>
   <string name="log_no_rating">Geen beoordeling</string>

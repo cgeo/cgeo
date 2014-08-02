@@ -78,6 +78,7 @@
   <string name="log_saving">Lagrer logg…</string>
   <string name="log_saving_and_uploading">Sender logg og laster opp bilde…</string>
   <string name="log_clear">Tøm</string>
+  <string name="log_post">Last opp loggen</string>
   <string name="log_post_not_possible">Laster loggsiden…</string>
   <string name="log_add">Legg til</string>
   <string name="log_no_rating">Ingen rangering</string>

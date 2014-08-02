@@ -77,6 +77,7 @@
   <string name="log_saving">A gravar o registo…</string>
   <string name="log_saving_and_uploading">A enviar o registo e a imagem…</string>
   <string name="log_clear">Limpar</string>
+  <string name="log_post">Publicar o registo</string>
   <string name="log_post_not_possible">A carregar página de registo…</string>
   <string name="log_add">Adicionar</string>
   <string name="log_no_rating">Não votar</string>
@@ -341,7 +342,7 @@
   <string name="settings_activate_ox">Activar</string>
   <string name="settings_gc_legal_note">Quando você usa do serviço do geocaching.com, você aceita os termos de uso da Groundspeak.</string>
   <string name="settings_info_facebook_login_title">Facebook Login</string>
-  <string name="settings_info_facebook_login" tools:ignore="Typos">Não consegue que c:geo faça o login em geocaching.com com a sua conta do Facebook. Mas existe uma solução simples…</string>
+  <string name="settings_info_facebook_login">Não consegue que c:geo faça o login em geocaching.com com a sua conta do Facebook. Mas existe uma solução simples…</string>
   <string name="settings_authorize">Autorizar c:geo</string>
   <string name="settings_reauthorize">Reautorizar c:geo</string>
   <string name="init_oc">Opencaching.de</string>

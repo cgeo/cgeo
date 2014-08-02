@@ -78,6 +78,7 @@
   <string name="log_saving">Sparar logg…</string>
   <string name="log_saving_and_uploading">Sparar logg och laddar upp bild…</string>
   <string name="log_clear">Rensa</string>
+  <string name="log_post">Posta logg</string>
   <string name="log_post_not_possible">Laddar loggningssida…</string>
   <string name="log_add">Lägg till</string>
   <string name="log_no_rating">Inget betyg</string>

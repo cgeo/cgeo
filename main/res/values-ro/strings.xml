@@ -78,6 +78,7 @@
   <string name="log_saving">Trimitere jurnal…</string>
   <string name="log_saving_and_uploading">Trimitre jurnal şi încarcare poze…</string>
   <string name="log_clear">Şterge</string>
+  <string name="log_post">Trimite Însemnare</string>
   <string name="log_post_not_possible">Încărcare pagină însemnări…</string>
   <string name="log_add">Adaugă</string>
   <string name="log_no_rating">Fără voturi</string>

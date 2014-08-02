@@ -76,6 +76,7 @@
   <string name="log_saving">Enviando registo…</string>
   <string name="log_saving_and_uploading">Enviando registro y subiendo imagen…</string>
   <string name="log_clear">Limpiar</string>
+  <string name="log_post">Enviar registro</string>
   <string name="log_post_not_possible">Cargando página de registro…</string>
   <string name="log_add">Añadir</string>
   <string name="log_no_rating">Sin puntuación</string>
