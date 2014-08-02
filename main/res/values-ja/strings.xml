@@ -75,7 +75,6 @@
   <string name="log_saving">ログを送信中…</string>
   <string name="log_saving_and_uploading">ログと画像を送信中…</string>
   <string name="log_clear">消去</string>
-  <string name="log_post">ログの投稿</string>
   <string name="log_post_not_possible">ログのページをロード中…</string>
   <string name="log_add">挿入</string>
   <string name="log_no_rating">未評価</string>

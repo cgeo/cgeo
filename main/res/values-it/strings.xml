@@ -78,7 +78,6 @@
   <string name="log_saving">Invio log…</string>
   <string name="log_saving_and_uploading">Invio log e immagine…</string>
   <string name="log_clear">Azzera</string>
-  <string name="log_post">Invia log</string>
   <string name="log_post_not_possible">Connessione…</string>
   <string name="log_add">Aggiungi</string>
   <string name="log_no_rating">Nessun voto</string>

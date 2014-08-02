@@ -78,7 +78,6 @@
   <string name="log_saving">S\'està enviant el registre…</string>
   <string name="log_saving_and_uploading">S\'està enviant el registre i pujant la imatge…</string>
   <string name="log_clear">Esborra</string>
-  <string name="log_post">Envia el registre</string>
   <string name="log_post_not_possible">S\'està carregant la pàgina del registre…</string>
   <string name="log_add">Afegeix</string>
   <string name="log_no_rating">Sense puntuació</string>
