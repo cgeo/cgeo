@@ -56,6 +56,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Observable;
 import rx.Observable.OnSubscribe;
@@ -169,12 +170,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         createSubscriptions = new CompositeSubscription();
 
-        // set title in code, as the activity needs a hard coded title due to the intent filters
-        setTitle(res.getString(R.string.cache));
-
-        // avoid showing the traditional cache icon from the standard action bar (it may later change to the actual type icon)
-        getSupportActionBar().setIcon(android.R.color.transparent);
-
         // get parameters
         final Bundle extras = getIntent().getExtras();
         final Uri uri = getIntent().getData();
@@ -259,6 +254,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             finish();
             return;
         }
+
+        // if we open this cache from a search, let's properly initialize the title bar, even if we don't have cache details
+        cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_ONLY);
+        updateTitleBar(geocode);
 
         final LoadCacheHandler loadCacheHandler = new LoadCacheHandler(this, progress);
 
@@ -571,14 +570,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         // allow cache to notify CacheDetailActivity when it changes so it can be reloaded
         cache.setChangeNotificationHandler(new ChangeNotificationHandler(this, progress));
 
-        // action bar: title and icon
-        if (StringUtils.isNotBlank(cache.getName())) {
-            setTitle(cache.getName() + " (" + cache.getGeocode() + ')');
-        } else {
-            setTitle(cache.getGeocode());
-        }
-
-        getSupportActionBar().setIcon(getResources().getDrawable(cache.getType().markerId));
+        updateTitleBar(null);
 
         // if we have a newer Android device setup Android Beam for easy cache sharing
         initializeAndroidBeam(
@@ -601,6 +593,21 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         Settings.addCacheToHistory(cache.getGeocode());
     }
 
+    private void updateTitleBar(@Nullable final String geocode) {
+        if (cache == null) {
+            setTitle(StringUtils.isBlank(geocode) ? res.getString(R.string.cache) : geocode);
+            // avoid showing the traditional cache icon from the standard action bar (it may later change to the actual type icon)
+            getSupportActionBar().setIcon(android.R.color.transparent);
+        }
+        else {
+            if (StringUtils.isNotBlank(cache.getName())) {
+                setTitle(cache.getName() + " (" + cache.getGeocode() + ')');
+            } else {
+                setTitle(cache.getGeocode());
+            }
+            getSupportActionBar().setIcon(getResources().getDrawable(cache.getType().markerId));
+        }
+    }
 
     /**
      * Tries to navigate to the {@link Geocache} of this activity.
