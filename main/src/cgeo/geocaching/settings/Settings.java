@@ -612,7 +612,7 @@ public class Settings {
         mapSource = MapProviderFactory.getMapSource(id);
         if (mapSource != null) {
             // don't use offline maps if the map file is not valid
-            if ((!(mapSource instanceof OfflineMapSource)) || (isValidMapFile())) {
+            if (!(mapSource instanceof OfflineMapSource) || isValidMapFile()) {
                 return mapSource;
             }
         }
