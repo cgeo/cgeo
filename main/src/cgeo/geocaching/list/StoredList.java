@@ -68,10 +68,6 @@ public final class StoredList extends AbstractList {
             res = app.getResources();
         }
 
-        public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards) {
-            promptForListSelection(titleId, runAfterwards, false, -1);
-        }
-
         public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId) {
             promptForListSelection(titleId, runAfterwards, onlyConcreteLists, exceptListId, StringUtils.EMPTY);
         }

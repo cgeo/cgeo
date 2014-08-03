@@ -1041,27 +1041,6 @@ public class DataStore {
         return null;
     }
 
-    public static String getCacheidForGeocode(final String geocode) {
-        if (StringUtils.isBlank(geocode)) {
-            return null;
-        }
-        init();
-
-        try {
-            final SQLiteStatement description = PreparedStatements.getCacheIdOfGeocode();
-            synchronized (description) {
-                description.bindString(1, geocode);
-                return description.simpleQueryForString();
-            }
-        } catch (final SQLiteDoneException e) {
-            // Do nothing, it only means we have no information on the cache
-        } catch (final Exception e) {
-            Log.e("DataStore.getCacheidForGeocode", e);
-        }
-
-        return null;
-    }
-
     /**
      * Save/store a cache to the CacheCache
      *
