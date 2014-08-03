@@ -10,6 +10,7 @@ import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.sensors.DirectionProvider;
 import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.sensors.GpsStatusProvider.Status;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
@@ -20,6 +21,9 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
+
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 
 import android.content.Context;
 import android.content.Intent;
@@ -118,7 +122,8 @@ public class CompassActivity extends AbstractActionBarActivity {
 
     @Override
     public void onResume() {
-        super.onResume(geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR));
+        super.onResume(geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR),
+                app.gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(gpsStatusHandler));
     }
 
     @Override
@@ -259,16 +264,22 @@ public class CompassActivity extends AbstractActionBarActivity {
         headingView.setText(Math.round(cacheHeading) + "°");
     }
 
+    private final Action1<Status> gpsStatusHandler = new Action1<Status>() {
+        @Override
+        public void call(final Status gpsStatus) {
+            if (gpsStatus.satellitesVisible >= 0) {
+                navSatellites.setText(res.getString(R.string.loc_sat) + ": " + gpsStatus.satellitesFixed + "/" + gpsStatus.satellitesVisible);
+            } else {
+                navSatellites.setText("");
+            }
+        }
+    };
+
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
         @Override
         public void updateGeoDir(final IGeoData geo, final float dir) {
             try {
                 if (geo.getCoords() != null) {
-                    if (geo.getSatellitesVisible() >= 0) {
-                        navSatellites.setText(res.getString(R.string.loc_sat) + ": " + geo.getSatellitesFixed() + "/" + geo.getSatellitesVisible());
-                    } else {
-                        navSatellites.setText("");
-                    }
                     navType.setText(res.getString(geo.getLocationProvider().resourceId));
 
                     if (geo.getAccuracy() >= 0) {

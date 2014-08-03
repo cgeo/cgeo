@@ -16,6 +16,8 @@ import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.sensors.GpsStatusProvider;
+import cgeo.geocaching.sensors.GpsStatusProvider.Status;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
@@ -36,8 +38,8 @@ import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
 import rx.android.observables.AndroidObservable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.subscriptions.Subscriptions;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -145,37 +147,16 @@ public class MainActivity extends AbstractActionBarActivity {
         return StringUtils.join(addressParts, ", ");
     }
 
-    private class SatellitesHandler extends GeoDirHandler {
-
-        private boolean gpsEnabled = false;
-        private int satellitesFixed = 0;
-        private int satellitesVisible = 0;
-
+    private final Action1<GpsStatusProvider.Status> satellitesHandler = new Action1<Status>() {
         @Override
-        public void updateGeoData(final IGeoData data) {
-            if (data.getGpsEnabled() == gpsEnabled &&
-                    data.getSatellitesFixed() == satellitesFixed &&
-                    data.getSatellitesVisible() == satellitesVisible) {
-                return;
-            }
-            gpsEnabled = data.getGpsEnabled();
-            satellitesFixed = data.getSatellitesFixed();
-            satellitesVisible = data.getSatellitesVisible();
-
-            if (gpsEnabled) {
-                if (satellitesFixed > 0) {
-                    navSatellites.setText(res.getString(R.string.loc_sat) + ": " + satellitesFixed + '/' + satellitesVisible);
-                } else if (satellitesVisible >= 0) {
-                    navSatellites.setText(res.getString(R.string.loc_sat) + ": 0/" + satellitesVisible);
-                }
+        public void call(final Status gpsStatus) {
+            if (gpsStatus.gpsEnabled) {
+                navSatellites.setText(res.getString(R.string.loc_sat) + ": " + gpsStatus.satellitesFixed + '/' + gpsStatus.satellitesVisible);
             } else {
                 navSatellites.setText(res.getString(R.string.loc_gps_disabled));
             }
         }
-
-    }
-
-    private final SatellitesHandler satellitesHandler = new SatellitesHandler();
+    };
 
     private final Handler firstLoginHandler = new Handler() {
 
@@ -229,7 +210,8 @@ public class MainActivity extends AbstractActionBarActivity {
 
     @Override
     public void onResume() {
-        super.onResume(Subscriptions.from(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA), satellitesHandler.start(GeoDirHandler.UPDATE_GEODATA)));
+        super.onResume(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA),
+                app.gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(satellitesHandler));
         updateUserInfoHandler.sendEmptyMessage(-1);
         startBackgroundLogin();
         init();

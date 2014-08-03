@@ -2,6 +2,8 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.sensors.DirectionProvider;
 import cgeo.geocaching.sensors.GeoDataProvider;
+import cgeo.geocaching.sensors.GpsStatusProvider;
+import cgeo.geocaching.sensors.GpsStatusProvider.Status;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
@@ -23,6 +25,7 @@ public class CgeoApplication extends Application {
     private static CgeoApplication instance;
     private Observable<IGeoData> geoDataObservable;
     private Observable<Float> directionObservable;
+    private Observable<Status> gpsStatusObservable;
     private volatile IGeoData currentGeo = null;
     private volatile float currentDirection = 0.0f;
 
@@ -102,6 +105,14 @@ public class CgeoApplication extends Application {
             directionObservable = onDemand.refCount();
         }
         return directionObservable;
+    }
+
+    public synchronized Observable<Status> gpsStatusObservable() {
+        if (gpsStatusObservable == null) {
+            final ConnectableObservable<Status> onDemand = GpsStatusProvider.create(this).replay(1);
+            gpsStatusObservable = onDemand.refCount();
+        }
+        return gpsStatusObservable;
     }
 
     public IGeoData currentGeo() {

@@ -16,14 +16,13 @@ import rx.subscriptions.CompositeSubscription;
 import rx.subscriptions.Subscriptions;
 
 import android.content.Context;
-import android.location.GpsSatellite;
-import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class GeoDataProvider implements OnSubscribe<IGeoData> {
 
@@ -36,10 +35,6 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
     static {
         handlerThread.start();
     }
-
-    public boolean gpsEnabled = false;
-    public int satellitesVisible = 0;
-    public int satellitesFixed = 0;
 
     private static class LocationData {
         public Location location;
@@ -83,12 +78,8 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
     }
 
     final ConnectableObservable<IGeoData> worker = new ConnectableObservable<IGeoData>(this) {
-        private int debugSessionCounter = 0;
+        private final AtomicInteger count = new AtomicInteger(0);
 
-        private final Object lock = new Object();
-        private int count = 0;
-
-        final private GpsStatus.Listener gpsStatusListener = new GpsStatusListener();
         final private Listener networkListener = new Listener(LocationManager.NETWORK_PROVIDER, netLocation);
         final private Listener gpsListener = new Listener(LocationManager.GPS_PROVIDER, gpsLocation);
 
@@ -98,16 +89,13 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
             AndroidSchedulers.handlerThread(handlerThread.getHandler()).createWorker().schedule(new Action0() {
                 @Override
                 public void call() {
-                    synchronized(lock) {
-                        if (count++ == 0) {
-                            Log.d("GeoDataProvider: starting the GPS and network listeners" + " (" + ++debugSessionCounter + ")");
-                            geoManager.addGpsStatusListener(gpsStatusListener);
-                            for (final Listener listener : new Listener[] { networkListener, gpsListener }) {
-                                try {
-                                    geoManager.requestLocationUpdates(listener.locationProvider, 0, 0, listener);
-                                } catch (final Exception e) {
-                                    Log.w("There is no location provider " + listener.locationProvider);
-                                }
+                    if (count.getAndIncrement() == 0) {
+                        Log.d("GeoDataProvider: starting the GPS and network listeners");
+                        for (final Listener listener : new Listener[]{networkListener, gpsListener}) {
+                            try {
+                                geoManager.requestLocationUpdates(listener.locationProvider, 0, 0, listener);
+                            } catch (final Exception e) {
+                                Log.w("There is no location provider " + listener.locationProvider);
                             }
                         }
                     }
@@ -118,13 +106,10 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
                             AndroidSchedulers.handlerThread(handlerThread.getHandler()).createWorker().schedule(new Action0() {
                                 @Override
                                 public void call() {
-                                    synchronized (lock) {
-                                        if (--count == 0) {
-                                            Log.d("GeoDataProvider: stopping the GPS and network listeners" + " (" + debugSessionCounter + ")");
-                                            geoManager.removeUpdates(networkListener);
-                                            geoManager.removeUpdates(gpsListener);
-                                            geoManager.removeGpsStatusListener(gpsStatusListener);
-                                        }
+                                    if (count.decrementAndGet() == 0) {
+                                        Log.d("GeoDataProvider: stopping the GPS and network listeners");
+                                        geoManager.removeUpdates(networkListener);
+                                        geoManager.removeUpdates(gpsListener);
                                     }
                                 }
                             }, 2500, TimeUnit.MILLISECONDS);
@@ -164,7 +149,7 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
         }
         // Start with an historical GeoData just in case someone queries it before we get
         // a chance to get any information.
-        return new GeoData(initialLocation, false, 0, 0);
+        return new GeoData(initialLocation);
     }
 
     private static void copyCoords(final Location target, final Location source) {
@@ -203,54 +188,6 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
         }
     }
 
-    private final class GpsStatusListener implements GpsStatus.Listener {
-
-        @Override
-        public void onGpsStatusChanged(final int event) {
-            boolean changed = false;
-            switch (event) {
-                case GpsStatus.GPS_EVENT_FIRST_FIX:
-                case GpsStatus.GPS_EVENT_SATELLITE_STATUS: {
-                    final GpsStatus status = geoManager.getGpsStatus(null);
-                    int visible = 0;
-                    int fixed = 0;
-                    for (final GpsSatellite satellite : status.getSatellites()) {
-                        if (satellite.usedInFix()) {
-                            fixed++;
-                        }
-                        visible++;
-                    }
-                    if (visible != satellitesVisible || fixed != satellitesFixed) {
-                        satellitesVisible = visible;
-                        satellitesFixed = fixed;
-                        changed = true;
-                    }
-                    break;
-                }
-                case GpsStatus.GPS_EVENT_STARTED:
-                    if (!gpsEnabled) {
-                        gpsEnabled = true;
-                        changed = true;
-                    }
-                    break;
-                case GpsStatus.GPS_EVENT_STOPPED:
-                    if (gpsEnabled) {
-                        gpsEnabled = false;
-                        satellitesFixed = 0;
-                        satellitesVisible = 0;
-                        changed = true;
-                    }
-                    break;
-                default:
-                    throw new IllegalStateException();
-            }
-
-            if (changed) {
-                selectBest();
-            }
-        }
-    }
-
     private LocationData best() {
         if (gpsLocation.isRecent() || !netLocation.isValid()) {
             return gpsLocation.isValid() ? gpsLocation : null;
@@ -271,8 +208,7 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
         }
 
         // We do not necessarily get signalled when satellites go to 0/0.
-        final int visible = gpsLocation.isRecent() ? satellitesVisible : 0;
-        final IGeoData current = new GeoData(locationData.location, gpsEnabled, visible, satellitesFixed);
+        final IGeoData current = new GeoData(locationData.location);
         subject.onNext(current);
     }
 

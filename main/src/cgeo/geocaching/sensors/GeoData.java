@@ -7,15 +7,9 @@ import android.location.Location;
 import android.location.LocationManager;
 
 class GeoData extends Location implements IGeoData {
-    private final boolean gpsEnabled;
-    private final int satellitesVisible;
-    private final int satellitesFixed;
 
-    GeoData(final Location location, final boolean gpsEnabled, final int satellitesVisible, final int satellitesFixed) {
+    GeoData(final Location location) {
         super(location);
-        this.gpsEnabled = gpsEnabled;
-        this.satellitesVisible = satellitesVisible;
-        this.satellitesFixed = satellitesFixed;
     }
 
     @Override
@@ -41,20 +35,5 @@ class GeoData extends Location implements IGeoData {
     @Override
     public Geopoint getCoords() {
         return new Geopoint(this);
-    }
-
-    @Override
-    public boolean getGpsEnabled() {
-        return gpsEnabled;
-    }
-
-    @Override
-    public int getSatellitesVisible() {
-        return satellitesVisible;
-    }
-
-    @Override
-    public int getSatellitesFixed() {
-        return satellitesFixed;
     }
 }

@@ -14,7 +14,4 @@ public interface IGeoData {
     public float getBearing();
     public float getSpeed();
     public float getAccuracy();
-    public boolean getGpsEnabled();
-    public int getSatellitesVisible();
-    public int getSatellitesFixed();
 }
