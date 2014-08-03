@@ -11,14 +11,12 @@ public class OOMDumpingUncaughtExceptionHandler implements UncaughtExceptionHand
     private boolean defaultReplaced = false;
 
     public static boolean activateHandler() {
-
         final OOMDumpingUncaughtExceptionHandler handler = new OOMDumpingUncaughtExceptionHandler();
 
         return handler.activate();
     }
 
     private boolean activate() {
-
         defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
 
         // replace default handler if that has not been done already
@@ -34,10 +32,8 @@ public class OOMDumpingUncaughtExceptionHandler implements UncaughtExceptionHand
     }
 
     public static boolean resetToDefault() {
-
-        boolean defaultResetted = false;
-
         final UncaughtExceptionHandler unspecificHandler = Thread.getDefaultUncaughtExceptionHandler();
+        boolean defaultResetted = unspecificHandler != null;
 
         if (unspecificHandler instanceof OOMDumpingUncaughtExceptionHandler) {
             final OOMDumpingUncaughtExceptionHandler handler = (OOMDumpingUncaughtExceptionHandler) unspecificHandler;
@@ -48,7 +44,6 @@ public class OOMDumpingUncaughtExceptionHandler implements UncaughtExceptionHand
     }
 
     private boolean reset() {
-
         final boolean resetted = defaultReplaced;
 
         if (defaultReplaced) {
