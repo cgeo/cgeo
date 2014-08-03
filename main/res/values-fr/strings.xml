@@ -78,7 +78,6 @@
   <string name="log_saving">Enregistrement en cours…</string>
   <string name="log_saving_and_uploading">Envoi de la note et de l\'image…</string>
   <string name="log_clear">Effacer</string>
-  <string name="log_post">Envoyer</string>
   <string name="log_post_not_possible">Chargement de la page…</string>
   <string name="log_add">Ajouter</string>
   <string name="log_no_rating">Pas de note</string>
