@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release:</b>\n
+    <b>2014.07.27:</b>\n
     · Fix: Slow login on gc.com\n
     · Fix: Usernames with &lt; or &gt; have not been able to login\n
     · Fix: Support mails sent from cgeo will contain version info in subject\n
