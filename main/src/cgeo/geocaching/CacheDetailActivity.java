@@ -172,6 +172,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.cache));
 
+        // avoid showing the traditional cache icon from the standard action bar (it may later change to the actual type icon)
+        getSupportActionBar().setIcon(android.R.color.transparent);
+
         // get parameters
         final Bundle extras = getIntent().getExtras();
         final Uri uri = getIntent().getData();
