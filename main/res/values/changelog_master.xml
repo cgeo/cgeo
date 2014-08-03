@@ -3,8 +3,8 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
-    · New: Implemented actionbar menus\n
-    · New: Show also own logs on friend log page\n
+    · New: Actionbar menus (<b>long press action buttons for a description</b>)\n
+    · New: Show also own logs on friends log page\n
     · New: Navigate - WhereYouGo will invoke automatic cartridge download in WhereYouGo\n
     · New: Filter for caches which are not found\n
     · New: Show "Import from web" also if not yet registered\n
