@@ -105,11 +105,11 @@ public class GpsStatusProvider implements OnSubscribe<Status> {
                     if (visible == latest.satellitesVisible && fixed == latest.satellitesFixed) {
                         return;
                     }
-                    latest = new Status(latest.gpsEnabled, visible, fixed);
+                    latest = new Status(true, visible, fixed);
                     break;
                 }
                 case GpsStatus.GPS_EVENT_STARTED:
-                    latest = new Status(true, latest.satellitesVisible, latest.satellitesFixed);
+                    latest = new Status(true, 0, 0);
                     break;
                 case GpsStatus.GPS_EVENT_STOPPED:
                     latest = new Status(false, 0, 0);
