@@ -29,7 +29,7 @@ public class AddressListAdapter extends ArrayAdapter<Address> {
         @InjectView(R.id.label) protected TextView label;
         @InjectView(R.id.distance) protected TextView distance;
 
-        public ViewHolder(View view) {
+        public ViewHolder(final View view) {
             super(view);
         }
     }
@@ -49,7 +49,7 @@ public class AddressListAdapter extends ArrayAdapter<Address> {
         // holder pattern implementation
         final ViewHolder holder;
         if (view == null) {
-            view = inflater.inflate(R.layout.addresslist_item, null);
+            view = inflater.inflate(R.layout.addresslist_item, parent, false);
             holder = new ViewHolder(view);
         } else {
             holder = (ViewHolder) view.getTag();
@@ -81,7 +81,7 @@ public class AddressListAdapter extends ArrayAdapter<Address> {
 
     private static CharSequence getAddressText(final Address address) {
         final int maxIndex = address.getMaxAddressLineIndex();
-        final ArrayList<String> lines = new ArrayList<String>();
+        final ArrayList<String> lines = new ArrayList<>();
         for (int i = 0; i <= maxIndex; i++) {
             final String line = address.getAddressLine(i);
             if (StringUtils.isNotBlank(line)) {

@@ -43,51 +43,33 @@
     <string name="contributors" translatable="false">
     · <a href="http://carnero.cc/">carnero</a> as the father of c:geo\n
     \n
-    · 0xErnie (localization DE)\n
-    · <a href="mailto:bazsy@freemail.hu">Balazs Szabo (Bazsy1983)</a> (loc. HU)\n
-    · Bananeweizen (code, loc. DE)\n
-    · blafoo (code, localization DE)\n
-    · Bonemaro (tester)\n
-    · BudBundi (localization DE, tester)\n
+    · Bananeweizen (code)\n
+    · blafoo (code)\n
     · campbeb (code)\n
-    · Charles (localization FR)\n
-    · Denny (localization DA)\n
     · Eisbehr (code)\n
-    · F. Coello (localization ES)\n
     · Filipe C. (code)\n
-    · <a href="http://www.hunterthornsberry.com">Hunter275</a> (tester)\n
     · <a href="http://iirojappinen.com/">Iiro Jäppinen</a> (graphic)\n
-    · inkantis (localization PL)\n
     · <a href="http://www.jaytech.cz/">Jan Žatecký</a> (graphic)\n
     · <a href="http://joachim-wilke.de/">JoWi24</a> (code)\n
     · <a href="http://github.com/koem">Karsten Priegnitz</a> (code, artwork computation)\n
-    · <a href="http://www.geocaching.com/profile/?guid=231070d8-b6f4-4d14-8d5a-b8bdcb19b78e">KiwiStone</a> (code, localization DE)\n
-    · <a href="http://www.geocaching.com/email/?guid=d11a3e3d-7db0-4d43-87f2-7893238844a6">Lineflyer</a> (tester, support, localization DE)\n
-    · Ludovic Valente (localization FR)\n
-    · marco-jacob (code, loc. DE)\n
-    · MichielK (code, loc. NL)\n
-    · <a href="http://www.linkedin.com/in/mieczyslawtorchala">Mieczyslaw Torchala</a> (localization PL)\n
+    · <a href="http://www.geocaching.com/profile/?guid=231070d8-b6f4-4d14-8d5a-b8bdcb19b78e">KiwiStone</a> (code)\n
+    · <a href="http://www.geocaching.com/email/?guid=d11a3e3d-7db0-4d43-87f2-7893238844a6">Lineflyer</a> (tester, support)\n
+    · marco-dev (code)\n
+    · MichielK (code)\n
     · mucek4 (code, open source project leader)\n
-    · ncorreia (code, localization PT)\n
-    · Pascal (localization NL)\n
-    · Pavol Babinčák (code, loc. SK)\n
-    · Peter (localization HU)\n
+    · ncorreia (code)\n
+    · Pavol Babinčák (code)\n
     · <a href="https://github.com/Portree-Kid">Portree Kid</a> (code)\n
-    · <a href="mailto:regiprogi@gmail.com">R3Gi</a> (localization CZ)\n
     · Rainer S. (code)\n
-    · Ray (code, loc. JA)\n
-    · <a href="http://seromenho.com/">Ricardo Seromenho</a> (localization PT)\n
-    · RoadRunner- (code, loc. DE)\n
-    · <a href="http://www.blueskysoftware.it/">RomNexus6</a> (localization IT)\n
-    · <a href="http://www.sammyshp.de/">SammysHP</a> (code, localization DE)\n
-    · <a href="http://www.rfc1149.net/sam.html">Samuel Tardieu</a> (code, localization FR)\n
-    · serenity (localization DE)\n
-    · Shan, a.k.a. ShakurNO (localization NO)\n
-    · Shizo87 (tester)\n
+    · Ray (code)\n
+    · RoadRunner- (code)\n
+    · <a href="http://www.sammyshp.de/">SammysHP</a> (code)\n
+    · <a href="http://www.rfc1149.net/sam.html">Samuel Tardieu</a> (code)\n
+    · Arne Schwabe (code)\n
     · stephanme/Geoteufel (code)\n
-    · thiasB (code, loc. DE EN)\n
-    · YraFyra (code, loc. SV)\n
-    · zenobios (code, loc. DE EN)\n
+    · thiasB (code)\n
+    · YraFyra (code)\n
+    · zenobios (code)\n
     \n
     · Special thanks to all our translation contributors on <a href="https://crowdin.net/project/cgeo">Crowdin.net</a>!\n
     \n
@@ -101,5 +83,8 @@
 
     <!-- cache menu -->
     <string name="cache_menu_sygic" translatable="false">Sygic</string>
+
+    <string name="caches_map_mapswithme" translatable="false">Maps.me</string>
+    <string name="cache_menu_mapswithme" translatable="false">Maps.me</string>
 
 </resources>

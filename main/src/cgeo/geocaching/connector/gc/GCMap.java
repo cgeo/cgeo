@@ -15,7 +15,7 @@ import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.ui.Formatter;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.Log;
 
@@ -24,6 +24,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import rx.Observable;
+import rx.functions.Func2;
 
 import android.graphics.Bitmap;
 
@@ -49,7 +52,7 @@ public class GCMap {
             final Parameters params = new Parameters("i", geocodeList, "_", String.valueOf(System.currentTimeMillis()));
             params.add("app", "cgeo");
             final String referer = GCConstants.URL_LIVE_MAP_DETAILS;
-            final String data = StringUtils.defaultString(Tile.requestMapInfo(referer, params, referer));
+            final String data = StringUtils.defaultString(Tile.requestMapInfo(referer, params, referer).toBlocking().first());
 
             // Example JSON information
             // {"status":"success",
@@ -71,7 +74,7 @@ public class GCMap {
                 throw new JSONException("No data inside JSON");
             }
 
-            final ArrayList<Geocache> caches = new ArrayList<Geocache>();
+            final ArrayList<Geocache> caches = new ArrayList<>();
             for (int j = 0; j < dataArray.length(); j++) {
                 final Geocache cache = new Geocache();
 
@@ -119,7 +122,7 @@ public class GCMap {
 
         try {
 
-            final LeastRecentlyUsedMap<String, String> nameCache = new LeastRecentlyUsedMap.LruCache<String, String>(2000); // JSON id, cache name
+            final LeastRecentlyUsedMap<String, String> nameCache = new LeastRecentlyUsedMap.LruCache<>(2000); // JSON id, cache name
 
             if (StringUtils.isEmpty(data)) {
                 throw new JSONException("No page given");
@@ -146,33 +149,9 @@ public class GCMap {
                 throw new JSONException("No data inside JSON");
             }
 
-            /*
-             * Optimization: the grid can get ignored. The keys are the grid position in the format x_y
-             * It's not used at the moment due to optimizations
-             * But maybe we need it some day...
-             *
-             * // attach all keys with the cache positions in the tile
-             * Map<String, UTFGridPosition> keyPositions = new HashMap<String, UTFGridPosition>(); // JSON key, (x/y) in
-             * grid
-             * for (int y = 0; y < grid.length(); y++) {
-             * String rowUTF8 = grid.getString(y);
-             * if (rowUTF8.length() != (UTFGrid.GRID_MAXX + 1)) {
-             * throw new JSONException("Grid has wrong size");
-             * }
-             *
-             * for (int x = 0; x < UTFGrid.GRID_MAXX; x++) {
-             * char c = rowUTF8.charAt(x);
-             * if (c != ' ') {
-             * short id = UTFGrid.getUTFGridId(c);
-             * keyPositions.put(keys.getString(id), new UTFGridPosition(x, y));
-             * }
-             * }
-             * }
-             */
-
             // iterate over the data and construct all caches in this tile
-            Map<String, List<UTFGridPosition>> positions = new HashMap<String, List<UTFGridPosition>>(); // JSON id as key
-            Map<String, List<UTFGridPosition>> singlePositions = new HashMap<String, List<UTFGridPosition>>(); // JSON id as key
+            Map<String, List<UTFGridPosition>> positions = new HashMap<>(); // JSON id as key
+            Map<String, List<UTFGridPosition>> singlePositions = new HashMap<>(); // JSON id as key
 
             for (int i = 1; i < keys.length(); i++) { // index 0 is empty
                 String key = keys.getString(i);
@@ -188,9 +167,9 @@ public class GCMap {
                         List<UTFGridPosition> singleListOfPositions = singlePositions.get(id);
 
                         if (listOfPositions == null) {
-                            listOfPositions = new ArrayList<UTFGridPosition>();
+                            listOfPositions = new ArrayList<>();
                             positions.put(id, listOfPositions);
-                            singleListOfPositions = new ArrayList<UTFGridPosition>();
+                            singleListOfPositions = new ArrayList<>();
                             singlePositions.put(id, singleListOfPositions);
                         }
 
@@ -203,7 +182,7 @@ public class GCMap {
                 }
             }
 
-            final ArrayList<Geocache> caches = new ArrayList<Geocache>();
+            final ArrayList<Geocache> caches = new ArrayList<>();
             for (Entry<String, List<UTFGridPosition>> entry : positions.entrySet()) {
                 String id = entry.getKey();
                 List<UTFGridPosition> pos = entry.getValue();
@@ -289,7 +268,7 @@ public class GCMap {
      *            Strategy for data retrieval and parsing, @see Strategy
      * @return
      */
-    private static SearchResult searchByViewport(final Viewport viewport, final MapTokens tokens, Strategy strategy) {
+    private static SearchResult searchByViewport(final Viewport viewport, final MapTokens tokens, final Strategy strategy) {
         Log.d("GCMap.searchByViewport" + viewport.toString());
 
         final SearchResult searchResult = new SearchResult();
@@ -305,8 +284,7 @@ public class GCMap {
                 searchResult.setUrl(new StringBuilder().append(tiles.iterator().next().getZoomLevel()).append(Formatter.SEPARATOR).append(searchResult.getUrl()).toString());
             }
 
-            for (Tile tile : tiles) {
-
+            for (final Tile tile : tiles) {
                 if (!Tile.cache.contains(tile)) {
                     final Parameters params = new Parameters(
                             "x", String.valueOf(tile.getX()),
@@ -329,34 +307,37 @@ public class GCMap {
                     }
 
                     // The PNG must be requested first, otherwise the following request would always return with 204 - No Content
-                    Bitmap bitmap = Tile.requestMapTile(params);
+                    final Observable<Bitmap> bitmapObs = Tile.requestMapTile(params);
+                    final Observable<String> dataObs = Tile.requestMapInfo(GCConstants.URL_MAP_INFO, params, GCConstants.URL_LIVE_MAP);
+                    Observable.zip(bitmapObs, dataObs, new Func2<Bitmap, String, Void>() {
+                        @Override
+                        public Void call(final Bitmap bitmap, final String data) {
+                            final boolean validBitmap = bitmap != null && bitmap.getWidth() == Tile.TILE_SIZE && bitmap.getHeight() == Tile.TILE_SIZE;
 
-                    // Check bitmap size
-                    if (bitmap != null && (bitmap.getWidth() != Tile.TILE_SIZE ||
-                            bitmap.getHeight() != Tile.TILE_SIZE)) {
-                        bitmap.recycle();
-                        bitmap = null;
-                    }
+                            if (StringUtils.isEmpty(data)) {
+                                Log.w("GCMap.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
+                            } else {
+                                final SearchResult search = GCMap.parseMapJSON(data, tile, validBitmap ? bitmap : null, strategy);
+                                if (CollectionUtils.isEmpty(search.getGeocodes())) {
+                                    Log.e("GCMap.searchByViewport: No cache parsed for viewport " + viewport);
+                                } else {
+                                    synchronized (searchResult) {
+                                        searchResult.addSearchResult(search);
+                                    }
+                                }
+                                synchronized (Tile.cache) {
+                                    Tile.cache.add(tile);
+                                }
+                            }
 
-                    String data = Tile.requestMapInfo(GCConstants.URL_MAP_INFO, params, GCConstants.URL_LIVE_MAP);
-                    if (StringUtils.isEmpty(data)) {
-                        Log.w("GCMap.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
-                    } else {
-                        final SearchResult search = GCMap.parseMapJSON(data, tile, bitmap, strategy);
-                        if (CollectionUtils.isEmpty(search.getGeocodes())) {
-                            Log.e("GCMap.searchByViewport: No cache parsed for viewport " + viewport);
+                            // release native bitmap memory
+                            if (bitmap != null) {
+                                bitmap.recycle();
+                            }
+
+                            return null;
                         }
-                        else {
-                            searchResult.addSearchResult(search);
-                        }
-                        Tile.cache.add(tile);
-                    }
-
-                    // release native bitmap memory
-                    if (bitmap != null) {
-                        bitmap.recycle();
-                    }
-
+                    }).toBlocking().single();
                 }
             }
 
@@ -397,7 +378,7 @@ public class GCMap {
      *         8 = mystery, 1858 = whereigo
      */
     private static String getCacheTypeFilter(CacheType typeToDisplay) {
-        Set<String> filterTypes = new HashSet<String>();
+        Set<String> filterTypes = new HashSet<>();
         // Put all types in set, remove what should be visible in a second step
         filterTypes.addAll(Arrays.asList("2", "9", "5", "3", "6", "453", "13", "1304", "4", "11", "137", "8", "1858"));
         switch (typeToDisplay) {

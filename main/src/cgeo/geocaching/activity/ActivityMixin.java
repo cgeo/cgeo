@@ -1,55 +1,47 @@
 package cgeo.geocaching.activity;
 
-import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.settings.Settings;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Build;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public final class ActivityMixin {
-
-    public final static void goHome(final Activity fromActivity) {
-        final Intent intent = new Intent(fromActivity, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-        fromActivity.startActivity(intent);
-        fromActivity.finish();
-    }
 
     public static void setTitle(final Activity activity, final CharSequence text) {
         if (StringUtils.isBlank(text)) {
             return;
         }
 
-        final TextView title = (TextView) activity.findViewById(R.id.actionbar_title);
-        if (title != null) {
-            title.setText(text);
+        if (activity instanceof ActionBarActivity) {
+            final ActionBar actionBar = ((ActionBarActivity) activity).getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setTitle(text);
+            }
         }
     }
 
-    public static void showProgress(final Activity activity, final boolean show) {
+    public static void showProgress(final ActionBarActivity activity, final boolean show) {
         if (activity == null) {
             return;
         }
 
-        final ProgressBar progress = (ProgressBar) activity.findViewById(R.id.actionbar_progress);
-        if (show) {
-            progress.setVisibility(View.VISIBLE);
-        } else {
-            progress.setVisibility(View.GONE);
-        }
+        activity.setSupportProgressBarIndeterminateVisibility(show);
+
     }
 
     public static void setTheme(final Activity activity) {
@@ -62,33 +54,53 @@ public final class ActivityMixin {
 
     public static int getDialogTheme() {
         // Light theme dialogs don't work on Android Api < 11
-        if (Settings.isLightSkin() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+        if (Settings.isLightSkin() && VERSION.SDK_INT >= VERSION_CODES.HONEYCOMB) {
             return R.style.popup_light;
         }
-
         return R.style.popup_dark;
     }
 
+    /**
+     * Show a long toast message to the user. This can be called from any thread.
+     *
+     * @param activity the activity the user is facing
+     * @param resId the message
+     */
     public static void showToast(final Activity activity, final int resId) {
         ActivityMixin.showToast(activity, activity.getString(resId));
     }
 
-    public static void showToast(final Activity activity, final String text) {
+    private static void postShowToast(final Activity activity, final String text, final int toastDuration) {
         if (StringUtils.isNotBlank(text)) {
-            Toast toast = Toast.makeText(activity, text, Toast.LENGTH_LONG);
-
-            toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
-            toast.show();
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    final Toast toast = Toast.makeText(activity, text, toastDuration);
+                    toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
+                    toast.show();
+                }
+            });
         }
     }
 
-    public static void showShortToast(final Activity activity, final String text) {
-        if (StringUtils.isNotBlank(text)) {
-            Toast toast = Toast.makeText(activity, text, Toast.LENGTH_SHORT);
+    /**
+     * Show a long toast message to the user. This can be called from any thread.
+     *
+     * @param activity the activity the user is facing
+     * @param text the message
+     */
+    public static void showToast(final Activity activity, final String text) {
+        postShowToast(activity, text, Toast.LENGTH_LONG);
+    }
 
-            toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
-            toast.show();
-        }
+    /**
+     * Show a short toast message to the user. This can be called from any thread.
+     *
+     * @param activity the activity the user is facing
+     * @param text the message
+     */
+    public static void showShortToast(final Activity activity, final String text) {
+        postShowToast(activity, text, Toast.LENGTH_SHORT);
     }
 
     public static void keepScreenOn(final Activity abstractActivity, boolean keepScreenOn) {
@@ -98,7 +110,12 @@ public final class ActivityMixin {
     }
 
     public static void invalidateOptionsMenu(Activity activity) {
-        Compatibility.invalidateOptionsMenu(activity);
+        if (activity instanceof ActionBarActivity) {
+            ((ActionBarActivity) activity).supportInvalidateOptionsMenu();
+        }
+        else {
+            ActivityCompat.invalidateOptionsMenu(activity);
+        }
     }
 
     /**
@@ -126,5 +143,28 @@ public final class ActivityMixin {
         editText.getText().replace(start, end, completeText);
         int newCursor = moveCursor ? start + completeText.length() : start;
         editText.setSelection(newCursor);
+    }
+
+    public static boolean navigateUp(@NonNull final Activity activity) {
+        // see http://developer.android.com/training/implementing-navigation/ancestral.html
+        Intent upIntent = NavUtils.getParentActivityIntent(activity);
+        if (upIntent == null) {
+            activity.finish();
+            return true;
+        }
+        if (NavUtils.shouldUpRecreateTask(activity, upIntent)) {
+            // This activity is NOT part of this app's task, so create a new task
+            // when navigating up, with a synthesized back stack.
+            TaskStackBuilder.create(activity)
+                    // Add all of this activity's parents to the back stack
+                    .addNextIntentWithParentStack(upIntent)
+                    // Navigate up to the closest parent
+                    .startActivities();
+        } else {
+            // This activity is part of this app's task, so simply
+            // navigate up to the logical parent activity.
+            NavUtils.navigateUpTo(activity, upIntent);
+        }
+        return true;
     }
 }

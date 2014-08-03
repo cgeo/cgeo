@@ -4,6 +4,8 @@ import cgeo.geocaching.settings.Settings;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import java.util.Locale;
+
 public class Units {
 
     public static ImmutablePair<Double, String> scaleDistance(final double distanceKilometers) {
@@ -26,7 +28,7 @@ public class Units {
                 units = "m";
             }
         }
-        return new ImmutablePair<Double, String>(distance, units);
+        return new ImmutablePair<>(distance, units);
     }
 
     public static String getDistanceFromKilometers(final Float distanceKilometers) {
@@ -51,11 +53,10 @@ public class Units {
         return getDistanceFromKilometers(meters / 1000f);
     }
 
-    public static String getSpeed(float kilometersPerHour) {
-        final String speed = getDistanceFromKilometers(kilometersPerHour);
-        if (speed.endsWith("mi")) {
-            return speed.substring(0, speed.length() - 2) + "mph";
+    public static String getSpeed(final float kilometersPerHour) {
+        if (Settings.isUseImperialUnits()) {
+            return String.format(Locale.US, "%.0f mph", kilometersPerHour / IConversion.MILES_TO_KILOMETER);
         }
-        return speed + (!Settings.isUseImperialUnits() ? "/h" : "ph");
+        return String.format(Locale.US, "%.0f km/h", kilometersPerHour);
     }
 }

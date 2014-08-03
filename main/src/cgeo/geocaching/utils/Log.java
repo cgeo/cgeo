@@ -16,6 +16,10 @@ public final class Log {
 
     private static final String TAG = "cgeo";
 
+    private static final class StackTraceDebug extends RuntimeException {
+        final static private long serialVersionUID = 27058374L;
+    }
+
     /**
      * The debug flag is cached here so that we don't need to access the settings every time we have to evaluate it.
      */
@@ -117,6 +121,19 @@ public final class Log {
             Log.e("logToFile: cannot write to " + file, e);
         } finally {
             IOUtils.closeQuietly(writer);
+        }
+    }
+
+    /**
+     * Log a debug message with the actual stack trace.
+     *
+     * @param msg the debug message
+     */
+    public static void logStackTrace(final String msg) {
+        try {
+            throw new StackTraceDebug();
+        } catch (final StackTraceDebug dbg) {
+            Log.d(msg, dbg);
         }
     }
 }

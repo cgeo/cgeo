@@ -1,115 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="?background_color"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:padding="4dip" >
 
-    <LinearLayout style="@style/action_bar" >
-
-        <include layout="@layout/actionbar_title" />
-
-        <include layout="@layout/actionbar_progress" />
-    </LinearLayout>
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:padding="4dip" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+
+            <View style="@style/separator_horizontal" />
+
+            <TextView
+                style="@style/separator_horizontal_headline"
+                android:text="@string/log_image" />
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_marginTop="10dip"
+            android:orientation="horizontal" >
 
-            <RelativeLayout style="@style/separator_horizontal_layout" >
+            <Button
+                android:id="@+id/stored"
+                style="@style/button_full"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:text="@string/log_image_stored" />
 
-                <View style="@style/separator_horizontal" />
-
-                <TextView
-                    style="@style/separator_horizontal_headline"
-                    android:text="@string/log_image" />
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
-                android:orientation="horizontal" >
-
-                <Button
-                    android:id="@+id/stored"
-                    style="@style/button_full"
-                    android:layout_width="0dip"
-                    android:layout_weight="1"
-                    android:text="@string/log_image_stored" />
-
-                <Button
-                    android:id="@+id/camera"
-                    style="@style/button_full"
-                    android:layout_width="0dip"
-                    android:layout_weight="1"
-                    android:text="@string/log_image_camera" />
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/image_preview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dip"
-                android:layout_marginTop="5dip"
-                android:background="#000000"
-                android:padding="1dp"
-                android:visibility="gone" />
-
-            <EditText
-                android:id="@+id/caption"
-                style="@style/edittext_full"
-                android:layout_height="wrap_content"
-                android:hint="@string/log_image_caption"
-                android:inputType="textCapSentences"
-                android:maxLength="50"
-                android:minLines="1"
-                android:singleLine="false" />
-
-            <EditText
-                android:id="@+id/description"
-                style="@style/edittext_full"
-                android:layout_height="wrap_content"
-                android:hint="@string/log_image_description"
-                android:inputType="textMultiLine|textCapSentences"
-                android:maxLength="250"
-                android:minLines="5"
-                android:singleLine="false" />
-
-            <Spinner
-                android:id="@+id/logImageScale"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:entries="@array/log_image_scales"
-                android:prompt="@string/log_image_scale" />
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <Button
-                    android:id="@+id/save"
-                    style="@style/button_full"
-                    android:layout_width="0dip"
-                    android:layout_weight="1"
-                    android:text="@android:string/yes" />
-
-                <Button
-                    android:id="@+id/cancel"
-                    style="@style/button_full"
-                    android:layout_width="0dip"
-                    android:layout_weight="1"
-                    android:text="@android:string/no" />
-            </LinearLayout>
+            <Button
+                android:id="@+id/camera"
+                style="@style/button_full"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:text="@string/log_image_camera" />
         </LinearLayout>
-    </ScrollView>
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/image_preview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:background="#000000"
+            android:padding="1dp"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/caption"
+            style="@style/edittext_full"
+            android:layout_height="wrap_content"
+            android:hint="@string/log_image_caption"
+            android:inputType="textCapSentences"
+            android:maxLength="50"
+            android:minLines="1"
+            android:singleLine="false" />
+
+        <EditText
+            android:id="@+id/description"
+            style="@style/edittext_full"
+            android:layout_height="wrap_content"
+            android:hint="@string/log_image_description"
+            android:inputType="textMultiLine|textCapSentences"
+            android:maxLength="250"
+            android:minLines="5"
+            android:singleLine="false" />
+
+        <Spinner
+            android:id="@+id/logImageScale"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/log_image_scales"
+            android:prompt="@string/log_image_scale" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/save"
+                style="@style/button_full"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:text="@android:string/yes" />
+
+            <Button
+                android:id="@+id/cancel"
+                style="@style/button_full"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:text="@android:string/no" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

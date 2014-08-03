@@ -2,7 +2,7 @@ package cgeo.geocaching.geopoint;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.ui.Formatter;
+import cgeo.geocaching.utils.Formatter;
 
 import android.test.AndroidTestCase;
 
@@ -12,7 +12,7 @@ public class GeoPointFormatterTest extends AndroidTestCase {
         // From issue #2624: coordinate is wrong near to a confluence point
         final Geopoint point = new Geopoint(49.9999999999999, 5.0);
         final String format = GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA, point);
-        assertEquals("50.000000,5.000000", format);
+        assertThat(format).isEqualTo("50.000000,5.000000");
         final String formatMinute = GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW, point);
         assertThat(formatMinute).isEqualTo("N 50° 00.000 E 005° 00.000");
         final String formatSecond = GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECSECOND, point).replaceAll(",", ".");

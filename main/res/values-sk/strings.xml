@@ -9,7 +9,6 @@
   <string name="about">O aplikácii</string>
   <string name="latitude">Zemepisná šírka</string>
   <string name="longitude">Zemepisná dĺžka</string>
-  <string name="action_bar_share_title">Zdieľať odkaz ku skrýši</string>
   <string name="settings_titlebar">c:geo Nastavenie</string>
   <string name="all_types">Všetky typy</string>
   <string name="traditional">Tradičná skrýša</string>
@@ -18,6 +17,7 @@
   <string name="letterbox">Letterbox Hybrid</string>
   <string name="event">Stretnutie</string>
   <string name="mega">Mega-Event Cache</string>
+  <string name="giga">Giga-Event Cache</string>
   <string name="earth">Earthcache</string>
   <string name="cito">\"Upracme si\" stretnutie</string>
   <string name="webcam">Web kamerová</string>
@@ -78,22 +78,9 @@
   <string name="log_saving">Ukladanie logu</string>
   <string name="log_saving_and_uploading">Odosielanie logu a nahrávanie obrázku…</string>
   <string name="log_clear">Vyčistiť</string>
-  <string name="log_post">Odoslať log</string>
-  <string name="log_post_rate">Odoslať log a hlasovať</string>
-  <string name="log_post_no_rate">Odoslať log a nehlasovať</string>
   <string name="log_post_not_possible">Načítanie stránky s logmi…</string>
   <string name="log_add">Pridať</string>
-  <string name="log_rating">Hlasovať</string>
   <string name="log_no_rating">Nehlasovať</string>
-  <string name="log_stars_1">1 hviezdička</string>
-  <string name="log_stars_15">1,5 hviezdičky</string>
-  <string name="log_stars_2">2 hviezdičky</string>
-  <string name="log_stars_25">2,5 hviezdičky</string>
-  <string name="log_stars_3">3 hviezdičky</string>
-  <string name="log_stars_35">3,5 hviezdičky</string>
-  <string name="log_stars_4">4 hviezdičky</string>
-  <string name="log_stars_45">4,5 hviezdičky</string>
-  <string name="log_stars_5">5 hviezdičiek</string>
   <string name="log_stars_1_description">slabé</string>
   <string name="log_stars_15_description">dosť slabé</string>
   <string name="log_stars_2_description">podpriemerné</string>
@@ -112,7 +99,6 @@
   <string name="log_smilies">Smajlíci</string>
   <string name="log_image">Obrázok</string>
   <string name="log_image_attach">Pripojiť obrázok</string>
-  <string name="log_image_edit">Upraviť obrázok</string>
   <string name="log_image_stored">Existujúci</string>
   <string name="log_image_camera">Nový</string>
   <string name="log_image_caption">Titulok</string>
@@ -121,6 +107,13 @@
   <string name="log_password_title">Prihlásiť heslo:</string>
   <string name="log_hint_log_password">Zadajte svoje logovacie heslo</string>
   <string name="log_oc_team_comment">Komentár tímu OC</string>
+  <string-array name="log_image_scales">
+    <item>Bez zmeny mierky</item>
+    <item>512 px</item>
+    <item>640 px</item>
+    <item>800 px</item>
+    <item>1024 px</item>
+  </string-array>
   <string name="translate_to_sys_lang">Preložiť do jazyka %s</string>
   <string name="translate_to_english">Preložiť do angličtiny</string>
   <string name="translate_length_warning">Pre veľké texty môže preklad zlyhať.</string>
@@ -213,6 +206,7 @@
   <string name="info_select_logimage_cancelled">Výber obrázka alebo fotenie bolo zrušené.</string>
   <string name="info_stored_image">Nový obrázok uložený do:</string>
   <string name="info_storing_static_maps">ukladanie statických máp</string>
+  <string name="info_cache_saved">Cache bola uložená v zariadení</string>
   <string name="loc_last">posledná známa</string>
   <string name="loc_net">sieť</string>
   <string name="loc_gps">GPS</string>
@@ -220,6 +214,7 @@
   <string name="loc_trying">zisťovanie pozície</string>
   <string name="loc_no_addr">neznáma adresa</string>
   <string name="loc_gps_disabled">GPS zakázaná</string>
+  <string name="menu_centerposition">Vycentrovať na moju polohu</string>
   <string name="menu_about">O aplikácii</string>
   <string name="menu_helpers">Pomocné programy</string>
   <string name="menu_settings">Nastavenia</string>
@@ -246,7 +241,6 @@
   <string name="caches_history">História</string>
   <string name="caches_on_map">Zobraziť na mape</string>
   <string name="caches_sort">Zoradiť</string>
-  <string name="caches_sort_title">Zoradiť podľa</string>
   <string name="caches_sort_distance">vzdialenosti</string>
   <string name="caches_sort_difficulty">náročnosti</string>
   <string name="caches_sort_terrain">terénu</string>
@@ -268,13 +262,11 @@
   <string name="caches_select_invert">Inverzný výber</string>
   <string name="caches_nearby">V okolí</string>
   <string name="caches_manage">Správa</string>
-  <string name="caches_drop_selected">Zmazať vybrané</string>
-  <string name="caches_drop_selected_ask">Naozaj chcete zmazať vybraté skrýše zo zariadenia?</string>
-  <string name="caches_drop_all">Zmazať všetky</string>
-  <string name="caches_drop_all_ask">Naozaj chcete zmazať všetky skrýše zo zariadenia?</string>
-  <string name="caches_drop_stored">Zmazať uložené</string>
-  <string name="caches_drop_progress">Odstraňovanie skrýš</string>
-  <string name="caches_drop_all_and_list">Zmazať všetky a odstrániť zoznam</string>
+  <string name="caches_remove_all">Odstrániť všetky</string>
+  <string name="caches_remove_all_confirm">Chcete odstrániť všetky %s cache z aktuálneho zoznamu?</string>
+  <string name="caches_remove_selected">Odstrániť vybraté</string>
+  <string name="caches_remove_selected_confirm">Chcete odstrániť %s vybraté cache z vášho zariadenia?</string>
+  <string name="caches_remove_progress">Odstraňovanie cache</string>
   <string name="caches_delete_events">Odstrániť minulé záznamy</string>
   <string name="caches_refresh_selected">Obnoviť vybraté</string>
   <string name="caches_refresh_all">Obnoviť všetky</string>
@@ -301,11 +293,10 @@
   <string name="caches_removing_from_history">Odstraňovanie z histórie…</string>
   <string name="caches_clear_offlinelogs">Vymazať offline záznamy</string>
   <string name="caches_clear_offlinelogs_progress">Vymazanie logov v režime offline</string>
-  <string name="list_menu">Zoznam</string>
   <string name="list_menu_create">Vytvoriť nový zoznam</string>
   <string name="list_menu_drop">Zahodiť aktuálny zoznam</string>
-  <string name="list_menu_change">Zmeniť zoznam</string>
   <string name="list_menu_rename">Premenovať tento zoznam</string>
+  <string name="list_menu_import">Import</string>
   <string name="list_title">Výber zoznamu</string>
   <string name="list_inbox">Uložené</string>
   <string name="list_all_lists">Všetky skrýše</string>
@@ -373,6 +364,8 @@
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Aktivovať</string>
   <string name="init_oc_ro_description">Povoliť c:geo s opencaching.ro na vyhľadávanie keší a zoznam/filter nájdených keší.</string>
+  <string name="settings_activate_oc_uk">Aktivovať</string>
+  <string name="init_oc_uk_description">Povoliť c:geo s opencaching.org.uk na vyhľadávanie keší a zoznam/filter nájdených keší.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivovať</string>
@@ -402,8 +395,8 @@
   <string name="init_signature_template_log">Zápis do logu</string>
   <string name="init_ratingwanted">Načítať hodnotenie skrýše z GCvote.com</string>
   <string name="init_summary_ratingwanted">Načítať hodnotenie skrýše z GCvote.com</string>
-  <string name="init_friendlogswanted">Načítať dodatočnú stránku s logmi od priateľov</string>
-  <string name="init_summary_friendlogswanted">Načítať dodatočnú stránku s logmi od priateľov</string>
+  <string name="init_friends_and_own_logs_wanted">Zobraziť priateľov / vlastné</string>
+  <string name="init_summary_friends_and_own_logs_wanted">Zobraziť ďalšie stránky pre logy priateľov a vlastné logy</string>
   <string name="init_openlastdetailspage">Otvoriť detaily na naposledy použitej stránke</string>
   <string name="init_summary_openlastdetailspage">Otvoriť detaily na naposledy použitej stránke</string>
   <string name="init_autoload">Automatické načítanie dlhého popisu</string>
@@ -492,6 +485,9 @@
   <string name="init_maintenance">Údržba</string>
   <string name="init_maintenance_directories_note">c:Geo ukladá obrázky, log obrázky a ďalšie súbory súvisiace s cache v samostatnom adresári. V niektorých prípadoch (ako import/export databázy) Tento adresár môže obsahovať neaktuálne súbory, ktoré môžete zmazať tu.</string>
   <string name="init_maintenance_directories">Odstrániť osirelé súbory</string>
+  <string name="init_create_memory_dump">Vytvorenie výpisu pamäte</string>
+  <string name="init_memory_dump">Výpis pamäte</string>
+  <string name="init_memory_dumped">Výpis pamäte uložiť do %s</string>
   <string name="settings_open_website">Otvoriť stránku</string>
   <string name="settings_settings">Nastavenia</string>
   <string name="settings_information">Informácia</string>
@@ -554,7 +550,6 @@
   <string name="cache_premium">platený účet</string>
   <string name="cache_attributes">Atribúty</string>
   <string name="cache_inventory">Obsah</string>
-  <string name="cache_log_offline">Offline log</string>
   <string name="cache_log_images_title">Obrázok z logu</string>
   <string name="cache_log_image_default_title">Fotografia</string>
   <string name="cache_personal_note">Osobná poznámka</string>
@@ -565,8 +560,6 @@
   <string name="cache_personal_note_uploading">Nahrať osobnú poznámku</string>
   <string name="cache_personal_note_upload_done">Osobná poznámka nahraná</string>
   <string name="cache_personal_note_upload_cancelled">Nahrávanie osobnej poznámky zrušené</string>
-  <string name="cache_personal_note_unstored">Cache nie je uložená</string>
-  <string name="cache_personal_note_store">Cache sa najskôr uložia aby sa povolila osobná poznámka.</string>
   <string name="cache_description">Popis</string>
   <string name="cache_description_long">Dlhý popis</string>
   <string name="cache_description_table_note">Popis obsahuje formátovanie tabuľky, ktorý môže byť pre správne zobrazenie potrebné otvoriť v %s.</string>
@@ -583,10 +576,15 @@
   <string name="cache_list_unknown">Nie je v zozname</string>
   <string name="cache_images">Obrázky</string>
   <string name="cache_waypoints">Body trasy</string>
+  <plurals name="waypoints">
+    <item quantity="one">1 bod trasy</item>
+    <item quantity="few">%d body trasy</item>
+    <item quantity="other">%d bodov trasy</item>
+  </plurals>
   <string name="cache_waypoints_add">Pridať bod</string>
   <string name="cache_hint">Nápoveda</string>
   <string name="cache_logs">Logbook</string>
-  <string name="cache_logsfriends">Logbook (priatelia)</string>
+  <string name="cache_logs_friends_and_own">Logy priateľov/vlastné</string>
   <string name="cache_dialog_loading_details">Načítanie detailov skrýše…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Načítanie stránky</string>
   <string name="cache_dialog_loading_details_status_details">Spracovanie detailov</string>
@@ -632,15 +630,14 @@
   <string name="cache_menu_refresh">Obnoviť</string>
   <string name="cache_menu_share">Zdielať skrýšu</string>
   <string name="cache_menu_move_list">Presunúť do iného zoznamu</string>
-  <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
-  <string name="cache_menu_cachebeacon">Cache Beacon</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_status">Stav</string>
   <string name="cache_status_offline_log">Uložený log</string>
   <string name="cache_status_found">Nájdená</string>
+  <string name="cache_not_status_found">Nebol nájdený</string>
   <string name="cache_status_archived">Archivovaná</string>
   <string name="cache_status_disabled">Zrušená</string>
   <string name="cache_status_premium">Iba pre platiacich používateľov</string>
@@ -752,10 +749,7 @@
   <string name="map_view_map">Zobrazenie mapy</string>
   <string name="map_modes">Režimy mapy</string>
   <string name="map_trail_show">Zobraziť záznam trasy</string>
-  <string name="map_trail_hide">Skryť záznam trasy</string>
   <string name="map_circles_show">Zobraziť kruhy</string>
-  <string name="map_circles_hide">Skryť kruhy</string>
-  <string name="map_mycaches_show">Zobraziť vlastné/nájdené cache</string>
   <string name="map_mycaches_hide">Skryť vlastné/nájdené cache</string>
   <string name="map_theme_builtin">Predvolené</string>
   <string name="map_theme_select">Vybrať tému mapy</string>
@@ -835,10 +829,10 @@
   <string name="user_menu_open_contact">Otvoriť kartu kontaktu</string>
   <string name="navigation">Navigácia</string>
   <string name="compass_title">Kompas</string>
+  <string name="compass_sensors">Aktívne senzory</string>
   <string name="use_gps">Použiť iba GPS</string>
   <string name="use_compass">Použiť GPS a kompas</string>
   <string name="destination_select">Vyberte cieľ</string>
-  <string name="destination_set">Nastaviť cieľ</string>
   <string name="navigation_direct_navigation">Priama navigácia</string>
   <string name="navigation_target">Cieľ</string>
   <string name="err_nav_no_coordinates">Nemožno spustiť navigáciu bez súradníc</string>
@@ -1109,7 +1103,6 @@
   <string name="website">Web: <a href="">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="nutshellmanual">Manuál: <a href="">c:geo v kocke</a></string>
   <string name="market">Android: <a href=""> c:geo na Google Play</a></string>
   <string name="about_twitter">Chcete, aby <b>c:geo</b> napísalo na váš Twitter vždy keď zapíšete nájdenie skrýše?</string>
   <string name="faq">FAQ: <a href="">faq.cgeo.org</a></string>
@@ -1125,47 +1118,32 @@
   <string name="tts_stop">Prestať hovoriť</string>
   <string name="err_tts_lang_not_supported">Aktuálny jazyk nepodporuje prevod textu na reč.</string>
   <string name="tts_one_kilometer">jeden kilometer</string>
-  <string name="tts_one_meter">jeden meter</string>
-  <string name="tts_one_mile">jedna míľa</string>
-  <string name="tts_one_foot">jedna stopa</string>
-  <string name="tts_one_oclock">jedna hodina</string>
-  <string name="tts_oclock">%s hodín</string>
-  <string name="clipboard_copy_ok">Skopírované do schránky</string>
-  <string name="percent_favorite_points">% \ obľúbených</string>
-  <string name="cgeo_shortcut">c:Geo odkaz</string>
-  <string name="create_shortcut">Vytvoriť odkaz</string>
-  <string-array name="log_image_scales">
-    <item>Bez zmeny mierky</item>
-    <item>512 px</item>
-    <item>640 px</item>
-    <item>800 px</item>
-    <item>1024 px</item>
-  </string-array>
-  <plurals name="waypoints">
-    <item quantity="one">1 bod trasy</item>
-    <item quantity="few">%d body trasy</item>
-    <item quantity="other">%d bodov trasy</item>
-  </plurals>
   <plurals name="tts_kilometers">
     <item quantity="one">%s kilometer</item>
     <item quantity="few">%s kilometre</item>
     <item quantity="other">%s kilometrov</item>
   </plurals>
+  <string name="tts_one_meter">jeden meter</string>
   <plurals name="tts_meters">
     <item quantity="one">%s meter</item>
     <item quantity="few">%s metre</item>
     <item quantity="other">%s metrov</item>
   </plurals>
+  <string name="tts_one_mile">jedna míľa</string>
   <plurals name="tts_miles">
     <item quantity="one">%s míľa</item>
     <item quantity="few">%s míľ</item>
     <item quantity="other">%s míľ</item>
   </plurals>
+  <string name="tts_one_foot">jedna stopa</string>
   <plurals name="tts_feet">
     <item quantity="one">%s stopa</item>
     <item quantity="few">%s stopy</item>
     <item quantity="other">%s stôp</item>
   </plurals>
+  <string name="tts_one_oclock">jedna hodina</string>
+  <string name="tts_oclock">%s hodín</string>
+  <string name="clipboard_copy_ok">Skopírované do schránky</string>
   <plurals name="days_ago">
     <item quantity="one">včera</item>
     <item quantity="few">pred %d dňami</item>
@@ -1176,4 +1154,8 @@
     <item quantity="few">%s obľúbené</item>
     <item quantity="other">%s obľúbených</item>
   </plurals>
+  <string name="percent_favorite_points">% \ obľúbených</string>
+  <string name="cgeo_shortcut">c:Geo odkaz</string>
+  <string name="create_shortcut">Vytvoriť odkaz</string>
+  <string name="send">Odoslať</string>
 </resources>

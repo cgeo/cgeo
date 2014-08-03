@@ -18,6 +18,11 @@ import android.net.Uri;
 import java.util.Date;
 
 public class CalendarAddon {
+
+    private CalendarAddon() {
+        // utility class
+    }
+
     public static boolean isAvailable() {
         return ProcessUtils.isIntentAvailable(ICalendar.INTENT, Uri.parse(ICalendar.URI_SCHEME + "://" + ICalendar.URI_HOST));
     }

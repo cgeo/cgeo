@@ -9,7 +9,6 @@
   <string name="about">O c:geo</string>
   <string name="latitude">Geog. širina</string>
   <string name="longitude">Geog. dolžina</string>
-  <string name="action_bar_share_title">Deli povezavo do zaklada</string>
   <string name="settings_titlebar">c:geo nastavitve</string>
   <string name="all_types">Vsi tipi zakladov</string>
   <string name="traditional">Tradicionalni zakladi</string>
@@ -78,22 +77,9 @@
   <string name="log_saving">Pošiljam…</string>
   <string name="log_saving_and_uploading">Pošiljam zapis in nalagam sliko…</string>
   <string name="log_clear">Počisti</string>
-  <string name="log_post">Pošlji</string>
-  <string name="log_post_rate">Pošlji in oceni</string>
-  <string name="log_post_no_rate">Pošlji in ne oceni</string>
   <string name="log_post_not_possible">Nalagam stran…</string>
   <string name="log_add">Dodaj</string>
-  <string name="log_rating">Ocena</string>
   <string name="log_no_rating">Brez ocene</string>
-  <string name="log_stars_1">1 zvezdica</string>
-  <string name="log_stars_15">1.5 zvezdice</string>
-  <string name="log_stars_2">2 zvezdici</string>
-  <string name="log_stars_25">2.5 zvezdici</string>
-  <string name="log_stars_3">3 zvezdice</string>
-  <string name="log_stars_35">3.5 zvezdice</string>
-  <string name="log_stars_4">4 zvezdice</string>
-  <string name="log_stars_45">4.5 zvezdice</string>
-  <string name="log_stars_5">5 zvezdic</string>
   <string name="log_stars_1_description">Zelo slabo</string>
   <string name="log_stars_15_description">Slabo</string>
   <string name="log_stars_2_description">Pod povprečjem</string>
@@ -112,7 +98,6 @@
   <string name="log_smilies">Smeškoti</string>
   <string name="log_image">Slika</string>
   <string name="log_image_attach">Dodaj sliko</string>
-  <string name="log_image_edit">Uredi sliko</string>
   <string name="log_image_stored">Obstoječa</string>
   <string name="log_image_camera">Nova</string>
   <string name="log_image_caption">Naslov</string>
@@ -121,6 +106,13 @@
   <string name="log_password_title">Geslo zapisa:</string>
   <string name="log_hint_log_password">Vnesite geslo zapisa</string>
   <string name="log_oc_team_comment">Komentar ekipe OC</string>
+  <string-array name="log_image_scales">
+    <item>Brez skaliranja</item>
+    <item>512 px</item>
+    <item>640 px</item>
+    <item>800 px</item>
+    <item>1024 px</item>
+  </string-array>
   <string name="translate_to_sys_lang">Prevedi v: %s</string>
   <string name="translate_to_english">Prevedi v: angleščino</string>
   <string name="translate_length_warning">Prevod lahko spodleti zaradi velike količine besedila.</string>
@@ -229,7 +221,7 @@
   <string name="menu_pocket_queries">Zbirke Pocket Query</string>
   <string name="menu_scan_description">c:geo lahko skenira GC kodo, ki je izpisana kot QR koda. Za to potrebujete aplikacijo, ki ni nameščena. Ali jo želite odpreti v Google Play in jo namestiti?</string>
   <string name="live_map_button">Zemljevid</string>
-  <string name="caches_nearby_button">Blizu</string>
+  <string name="caches_nearby_button">V bližini</string>
   <string name="advanced_search_button">Iskanje</string>
   <string name="stored_caches_button">Shranjeni</string>
   <string name="any_button">Destinacije</string>
@@ -246,7 +238,6 @@
   <string name="caches_history">Zgodovina</string>
   <string name="caches_on_map">Pokaži na zemljevidu</string>
   <string name="caches_sort">Razvrsti</string>
-  <string name="caches_sort_title">Razvrsti po</string>
   <string name="caches_sort_distance">Razdalja</string>
   <string name="caches_sort_difficulty">Težavnost</string>
   <string name="caches_sort_terrain">Teren</string>
@@ -266,15 +257,8 @@
   <string name="caches_select_mode">Način izbiranja</string>
   <string name="caches_select_mode_exit">Izhod iz načina izbiranja</string>
   <string name="caches_select_invert">Obrni izbor</string>
-  <string name="caches_nearby">Blizu</string>
+  <string name="caches_nearby">V bližini</string>
   <string name="caches_manage">Upravljaj</string>
-  <string name="caches_drop_selected">Izbriši izbrane</string>
-  <string name="caches_drop_selected_ask">Ali želite izbrisati izbrane zaklade?</string>
-  <string name="caches_drop_all">Izbriši vse</string>
-  <string name="caches_drop_all_ask">Ali želite izbrisati vse zaklade iz tega seznama?</string>
-  <string name="caches_drop_stored">Izbriši shranjene</string>
-  <string name="caches_drop_progress">Izbris zakladov</string>
-  <string name="caches_drop_all_and_list">Izbriši vse in odstrani seznam</string>
   <string name="caches_delete_events">Izbriši pretekla srečanja</string>
   <string name="caches_refresh_selected">Osveži izbrane</string>
   <string name="caches_refresh_all">Osveži vse</string>
@@ -301,10 +285,8 @@
   <string name="caches_removing_from_history">Brišem iz zgodovine…</string>
   <string name="caches_clear_offlinelogs">Izbriši shranjene zapise</string>
   <string name="caches_clear_offlinelogs_progress">Izbris shranjenih zapisov</string>
-  <string name="list_menu">Seznam</string>
   <string name="list_menu_create">Ustvari nov seznam</string>
   <string name="list_menu_drop">Izbriši trenutni seznam</string>
-  <string name="list_menu_change">Spremeni seznam</string>
   <string name="list_menu_rename">Preimenuj trenutni seznam</string>
   <string name="list_title">Izberi seznam</string>
   <string name="list_inbox">Shranjeni</string>
@@ -399,8 +381,6 @@
   <string name="init_signature_template_log">Vsebina zapisa</string>
   <string name="init_ratingwanted">GCvote ocene</string>
   <string name="init_summary_ratingwanted">Naloži ocene iz GCvote.com</string>
-  <string name="init_friendlogswanted">Naloži zapise prijateljev</string>
-  <string name="init_summary_friendlogswanted">Naloži tudi posebno stran zapisov mojih prijateljev</string>
   <string name="init_openlastdetailspage">Odpri nazadnje odprto stran</string>
   <string name="init_summary_openlastdetailspage">Pri podrobnostih zaklada vedno odpri zadnjo uporabljeno stran</string>
   <string name="init_autoload">Prikaži celoten opis</string>
@@ -536,6 +516,12 @@
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
   <string name="auth_dialog_completed_oc">c:geo je sedaj povezan z %s.</string>
+  <plurals name="cache_counts">
+    <item quantity="one">%1$d zaklad</item>
+    <item quantity="two">%1$d zaklada</item>
+    <item quantity="few">%1$d zakladi</item>
+    <item quantity="other">%1$d zakladov</item>
+  </plurals>
   <string name="cache_offline">Brez povezave</string>
   <string name="cache_offline_refresh">Osveži</string>
   <string name="cache_offline_drop">Izbriši</string>
@@ -551,7 +537,6 @@
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Atributi</string>
   <string name="cache_inventory">Inventar</string>
-  <string name="cache_log_offline">Shranjen zapis</string>
   <string name="cache_log_images_title">Slike</string>
   <string name="cache_log_image_default_title">Slika</string>
   <string name="cache_personal_note">Lastna opomba</string>
@@ -562,8 +547,6 @@
   <string name="cache_personal_note_uploading">Nalagam lastno opombo na spletno stran</string>
   <string name="cache_personal_note_upload_done">Lastna opomba je bila uspešno naložena na spletno stran</string>
   <string name="cache_personal_note_upload_cancelled">Nalaganje lastne opombe je bilo preklicano</string>
-  <string name="cache_personal_note_unstored">Zaklad ni shranjen</string>
-  <string name="cache_personal_note_store">Za vklop opomb bo zaklad najprej shranjen na napravo.</string>
   <string name="cache_description">Opis</string>
   <string name="cache_description_long">Daljši opis</string>
   <string name="cache_description_table_note">Opis vsebuje oblikovanje s tabelami. Za pravilen prikaz opisa bo mogoče potrebno obiskati %s.</string>
@@ -580,10 +563,15 @@
   <string name="cache_list_unknown">Ni v seznamu</string>
   <string name="cache_images">Slike</string>
   <string name="cache_waypoints">Dodatne točke</string>
+  <plurals name="waypoints">
+    <item quantity="one">%d dodatna točka</item>
+    <item quantity="two">%d dodatni točki</item>
+    <item quantity="few">%d dodatne točke</item>
+    <item quantity="other">%d dodatnih točk</item>
+  </plurals>
   <string name="cache_waypoints_add">Dodaj točko</string>
   <string name="cache_hint">Namig</string>
   <string name="cache_logs">Dnevnik zapisov</string>
-  <string name="cache_logsfriends">Zapisi prijateljev</string>
   <string name="cache_dialog_loading_details">Nalaganje podatkov zaklada…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Nalaganje strani</string>
   <string name="cache_dialog_loading_details_status_details">Obdelujem podatke</string>
@@ -629,10 +617,8 @@
   <string name="cache_menu_refresh">Osveži</string>
   <string name="cache_menu_share">Deli povezavo</string>
   <string name="cache_menu_move_list">Premakni v drug seznam</string>
-  <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
-  <string name="cache_menu_cachebeacon">Cache Beacon</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_status">Status</string>
@@ -749,10 +735,7 @@
   <string name="map_view_map">Pogled zemljevida</string>
   <string name="map_modes">Možnosti</string>
   <string name="map_trail_show">Pokaži sled</string>
-  <string name="map_trail_hide">Skrij sled</string>
   <string name="map_circles_show">Pokaži kroge</string>
-  <string name="map_circles_hide">Skrij kroge</string>
-  <string name="map_mycaches_show">Pokaži lastne ali najdene zaklade</string>
   <string name="map_mycaches_hide">Skrij lastne ali najdene zaklade</string>
   <string name="map_theme_builtin">Privzeto</string>
   <string name="map_theme_select">Izberi temo zemljevida</string>
@@ -835,7 +818,6 @@
   <string name="use_gps">Uporabi samo GPS</string>
   <string name="use_compass">Uporabi GPS in kompas</string>
   <string name="destination_select">Izbira destinacije</string>
-  <string name="destination_set">Nastavi destinacijo</string>
   <string name="navigation_direct_navigation">Direktna navigacija</string>
   <string name="navigation_target">Cilj</string>
   <string name="err_nav_no_coordinates">Ne morem začeti navigacije brez koordinat</string>
@@ -1106,7 +1088,6 @@
   <string name="website">Spletna stran: <a href="">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="">c:geo stran</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="nutshellmanual">Priročnik: <a href="">c:geo na kratko</a></string>
   <string name="market">Android: <a href="">c:geo na Google Play</a></string>
   <string name="about_twitter">Naj <b>c:geo</b> objavi nov status na Twitter, ko objavite nov zapis pri zakladu?</string>
   <string name="faq">Pogosto zastavljena vprašanja: <a href="">faq.cgeo.org</a></string>
@@ -1122,64 +1103,36 @@
   <string name="tts_stop">Ustavi glasovno navigacijo</string>
   <string name="err_tts_lang_not_supported">Trenutno izbrani jezik ni podprt s storitvijo pretvorbe besedila v govor.</string>
   <string name="tts_one_kilometer">en kilometer</string>
-  <string name="tts_one_meter">en meter</string>
-  <string name="tts_one_mile">ena milja</string>
-  <string name="tts_one_foot">en čevelj</string>
-  <string name="tts_one_oclock">one o\'clock</string>
-  <string name="tts_oclock">%s o\'clock</string>
-  <string name="clipboard_copy_ok">Skopirano v odložišče</string>
-  <string name="percent_favorite_points">%\ favoritov</string>
-  <string name="cgeo_shortcut">Bližnjica c:geo</string>
-  <string name="create_shortcut">Ustvari bližnjico</string>
-  <string-array name="log_image_scales">
-    <item>Brez skaliranja</item>
-    <item>512 px</item>
-    <item>640 px</item>
-    <item>800 px</item>
-    <item>1024 px</item>
-  </string-array>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">minuta</item>
-    <item quantity="two">minuti</item>
-    <item quantity="few">minute</item>
-    <item quantity="other">minut</item>
-  </plurals>
-  <plurals name="cache_counts">
-    <item quantity="one">%1$d zaklad</item>
-    <item quantity="two">%1$d zaklada</item>
-    <item quantity="few">%1$d zakladi</item>
-    <item quantity="other">%1$d zakladov</item>
-  </plurals>
-  <plurals name="waypoints">
-    <item quantity="one">%d dodatna točka</item>
-    <item quantity="two">%d dodatni točki</item>
-    <item quantity="few">%d dodatne točke</item>
-    <item quantity="other">%d dodatnih točk</item>
-  </plurals>
   <plurals name="tts_kilometers">
     <item quantity="one">%s kilometer</item>
     <item quantity="two">%s kilometra</item>
     <item quantity="few">%s kilometrov</item>
     <item quantity="other">%s kilometrov</item>
   </plurals>
+  <string name="tts_one_meter">en meter</string>
   <plurals name="tts_meters">
     <item quantity="one">%s meter</item>
     <item quantity="two">%s metra</item>
     <item quantity="few">%s metri</item>
     <item quantity="other">%s metrov</item>
   </plurals>
+  <string name="tts_one_mile">ena milja</string>
   <plurals name="tts_miles">
     <item quantity="one">%s milja</item>
     <item quantity="two">%s milji</item>
     <item quantity="few">%s milj</item>
     <item quantity="other">%s milj</item>
   </plurals>
+  <string name="tts_one_foot">en čevelj</string>
   <plurals name="tts_feet">
     <item quantity="one">%s čevelj</item>
     <item quantity="two">%s čevlja</item>
     <item quantity="few">%s čevljev</item>
     <item quantity="other">%s čevljev</item>
   </plurals>
+  <string name="tts_one_oclock">one o\'clock</string>
+  <string name="tts_oclock">%s o\'clock</string>
+  <string name="clipboard_copy_ok">Skopirano v odložišče</string>
   <plurals name="days_ago">
     <item quantity="one">Pred %d dnevom</item>
     <item quantity="two">Pred %d dnevoma</item>
@@ -1192,4 +1145,7 @@
     <item quantity="few">%s favoritov</item>
     <item quantity="other">%s favoritov</item>
   </plurals>
+  <string name="percent_favorite_points">%\ favoritov</string>
+  <string name="cgeo_shortcut">Bližnjica c:geo</string>
+  <string name="create_shortcut">Ustvari bližnjico</string>
 </resources>

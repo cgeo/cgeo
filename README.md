@@ -1,4 +1,5 @@
-[c:geo](http://www.cgeo.org) is a simple yet powerful unofficial geocaching client for Android devices. In contrast to other similar applications, c:geo doesn't require a web browser nor file exports. You can just go geocaching with your phone and without any home preparation or worries. Of course, you can go without paying - it's free.
+[c:geo](http://www.cgeo.org) is an open source, full-featured, always ready-to-go client for geocaching.com (unofficial) and offers basic support for other geocaching platforms.
+It does not require a web browser or exports - just download and start right away.
 
 You want to contribute?
 -----------------------
@@ -53,9 +54,9 @@ If the workspace directory name contains a space and leads to errors in the -dex
 5. edit `local.properties` (see comments in the file)
 6. copy `./main/templates/keys.xml` to `./main/res/values/`
 7. edit `./main/res/values/keys.xml` and insert several keys (see comments in the file)
-7.a) Google Maps API key 
-7.b) request your personal consumer key and secret at [opencaching.de OKAPI signup](http://www.opencaching.de/okapi/signup.html)
-7.c) request your personal consumer key and secret at [opencaching.pl OKAPI signup](http://www.opencaching.pl/okapi/signup.html)
+  * Google Maps API key (you can leave it empty, but then Google Maps don't work)
+  * request your personal consumer key and secret at [opencaching.de OKAPI signup](http://www.opencaching.de/okapi/signup.html)
+  * request your personal consumer key and secret at [opencaching.pl OKAPI signup](http://www.opencaching.pl/okapi/signup.html)
 
 ### Building with Ant ###
 

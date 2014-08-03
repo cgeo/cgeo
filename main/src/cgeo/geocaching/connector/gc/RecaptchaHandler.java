@@ -1,17 +1,21 @@
 package cgeo.geocaching.connector.gc;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.R;
 import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.io.IOUtils;
+
 import rx.Observable;
 import rx.android.observables.AndroidObservable;
 import rx.functions.Action1;
 import rx.functions.Func0;
-import rx.schedulers.Schedulers;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -57,7 +61,7 @@ public class RecaptchaHandler extends Handler {
                 return Observable.empty();
             }
         });
-        AndroidObservable.bindActivity(activity, captcha).subscribe(new Action1<Bitmap>() {
+        AndroidObservable.bindActivity(activity, captcha).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<Bitmap>() {
             @Override
             public void call(final Bitmap bitmap) {
                 imageView.setImageBitmap(bitmap);
@@ -67,23 +71,24 @@ public class RecaptchaHandler extends Handler {
             public void call(final Throwable throwable) {
                 // Do nothing
             }
-        }, Schedulers.io());
+        });
         reloadButton.setEnabled(true);
     }
 
+    @SuppressLint("InflateParams")
     @Override
-    public void handleMessage(Message msg) {
+    public void handleMessage(final Message msg) {
         if (msg.what == SHOW_CAPTCHA) {
             final AlertDialog.Builder dlg = new AlertDialog.Builder(activity);
-            final View view = activity.getLayoutInflater().inflate(R.layout.recaptcha_dialog, null);
+            final View view = activity.getLayoutInflater().inflate(R.layout.recaptcha_dialog, null, false);
 
-            final ImageView imageView = (ImageView) view.findViewById(R.id.image);
+            final ImageView imageView = ButterKnife.findById(view, R.id.image);
 
-            final ImageButton reloadButton = (ImageButton) view.findViewById(R.id.button_recaptcha_refresh);
+            final ImageButton reloadButton = ButterKnife.findById(view, R.id.button_recaptcha_refresh);
             reloadButton.setEnabled(false);
             reloadButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(final View v) {
                     recaptchaReceiver.fetchChallenge();
                     loadChallenge(imageView, reloadButton);
                 }
@@ -95,8 +100,9 @@ public class RecaptchaHandler extends Handler {
             dlg.setView(view);
             dlg.setNeutralButton(activity.getString(R.string.caches_recaptcha_continue), new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int id) {
-                    final String text = ((EditText) view.findViewById(R.id.text)).getText().toString();
+                public void onClick(final DialogInterface dialog, final int id) {
+                    final EditText editText = ButterKnife.findById(view, R.id.text);
+                    final String text = editText.getText().toString();
                     recaptchaReceiver.setText(text);
                     dialog.cancel();
                 }

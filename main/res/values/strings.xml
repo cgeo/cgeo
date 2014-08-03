@@ -13,7 +13,6 @@
     <string name="longitude">Longitude</string>
 
     <!-- actionbar -->
-    <string name="action_bar_share_title">Share link to cache</string>
     <string name="settings_titlebar">c:geo Settings</string>
     
     <!-- caches -->
@@ -91,22 +90,9 @@
     <string name="log_saving">Sending log…</string>
     <string name="log_saving_and_uploading">Sending log and uploading image…</string>
     <string name="log_clear">Clear</string>
-    <string name="log_post">Submit Log</string>
-    <string name="log_post_rate">Submit Log &amp; Rate</string>
-    <string name="log_post_no_rate">Submit Log &amp; Do not Rate</string>
     <string name="log_post_not_possible">Loading Log Page…</string>
     <string name="log_add">Add</string>
-    <string name="log_rating">Rating</string>
     <string name="log_no_rating">No rating</string>
-    <string name="log_stars_1">1 Star</string>
-    <string name="log_stars_15">1.5 Stars</string>
-    <string name="log_stars_2">2 Stars</string>
-    <string name="log_stars_25">2.5 Stars</string>
-    <string name="log_stars_3">3 Stars</string>
-    <string name="log_stars_35">3.5 Stars</string>
-    <string name="log_stars_4">4 Stars</string>
-    <string name="log_stars_45">4.5 Stars</string>
-    <string name="log_stars_5">5 Stars</string>
     <string name="log_stars_1_description">Poor</string>
     <string name="log_stars_15_description">Fairly poor</string>
     <string name="log_stars_2_description">Below average</string>
@@ -125,7 +111,6 @@
     <string name="log_smilies">Smilies</string>
     <string name="log_image">Image</string>
     <string name="log_image_attach">Attach Image</string>
-    <string name="log_image_edit">Edit Image</string>
     <string name="log_image_stored">Existing</string>
     <string name="log_image_camera">New</string>
     <string name="log_image_caption">Caption</string>
@@ -238,6 +223,7 @@
     <string name="info_select_logimage_cancelled">Image selection or capture was cancelled.</string>
     <string name="info_stored_image">New image saved to:</string>
     <string name="info_storing_static_maps">Trying to store static maps</string>
+    <string name="info_cache_saved">The cache has been stored locally</string>
 
     <!-- location service -->
     <string name="loc_last">Last known</string>
@@ -247,6 +233,8 @@
     <string name="loc_trying">Trying to Locate</string>
     <string name="loc_no_addr">Unknown address</string>
     <string name="loc_gps_disabled">GPS disabled</string>
+    <string name="menu_centerposition">Center on my position</string>
+
 
     <!-- standard menu -->
     <string name="menu_about">About c:geo</string>
@@ -276,8 +264,8 @@
     <string name="caches_eta_ltm">Less than a minute</string>
 
     <plurals name="caches_eta_mins">
-        <item quantity="one">minute</item>
-        <item quantity="other">minutes</item>
+        <item quantity="one">%d minute</item>
+        <item quantity="other">%d minutes</item>
     </plurals>
 
     <string name="caches_store_offline">Store Offline</string>
@@ -285,7 +273,6 @@
     <string name="caches_history">History</string>
     <string name="caches_on_map">Show on map</string>
     <string name="caches_sort">Sort</string>
-    <string name="caches_sort_title">Sort by</string>
     <string name="caches_sort_distance">Distance</string>
     <string name="caches_sort_difficulty">Difficulty</string>
     <string name="caches_sort_terrain">Terrain</string>
@@ -307,13 +294,11 @@
     <string name="caches_select_invert">Invert selection</string>
     <string name="caches_nearby">Nearby</string>
     <string name="caches_manage">Manage</string>
-    <string name="caches_drop_selected">Drop selected</string>
-    <string name="caches_drop_selected_ask">Do you want to remove the selected caches from your device?</string>
-    <string name="caches_drop_all">Drop all</string>
-    <string name="caches_drop_all_ask">Do you want to remove all caches from current list?</string>
-    <string name="caches_drop_stored">Drop stored</string>
-    <string name="caches_drop_progress">Removing caches</string>
-    <string name="caches_drop_all_and_list">Drop all and remove list</string>
+    <string name="caches_remove_all">Remove all</string>
+    <string name="caches_remove_all_confirm">Do you want to remove all %s caches from current list?</string>
+    <string name="caches_remove_selected">Remove selected</string>
+    <string name="caches_remove_selected_confirm">Do you want to remove the selected %s caches from your device?</string>
+    <string name="caches_remove_progress">Removing caches</string>
     <string name="caches_delete_events">Delete past events</string>
     <string name="caches_refresh_selected">Refresh selected</string>
     <string name="caches_refresh_all">Refresh all</string>
@@ -321,7 +306,6 @@
     <string name="caches_move_all">Move all</string>
     <string name="caches_map_locus">Locus</string>
     <string name="caches_map_locus_export">Export to Locus</string>
-    <string name="caches_map_mapswithme">MapsWithMe</string>
     <string name="caches_recaptcha_title">reCAPTCHA</string>
     <string name="caches_recaptcha_explanation">Please enter the text you see in the image. This enables downloading of cache coordinates, which can be disabled in Settings.</string>
     <string name="caches_recaptcha_hint">Text from image</string>
@@ -343,11 +327,10 @@
     <string name="caches_clear_offlinelogs_progress">Clearing offline logs</string>
 
     <!-- caches lists -->
-    <string name="list_menu">List</string>
     <string name="list_menu_create">Create new list</string>
     <string name="list_menu_drop">Drop current list</string>
-    <string name="list_menu_change">Change list</string>
     <string name="list_menu_rename">Rename current list</string>
+    <string name="list_menu_import">Import</string>
     <string name="list_title">Pick a list</string>
     <string name="list_inbox">Stored</string>
     <string name="list_all_lists">All caches</string>
@@ -404,7 +387,7 @@
     <string name="settings_activate_ox">Activate</string>
     <string name="settings_gc_legal_note">With using the service of geocaching.com, you accept the Groundspeak Terms of Use.</string>
     <string name="settings_info_facebook_login_title">Facebook Login</string>
-    <string name="settings_info_facebook_login">You can\'t make c:geo login to geocaching.com with your Facebook account. But there is a simple workaround …</string>
+    <string name="settings_info_facebook_login">You can\'t make c:geo login to geocaching.com with your Facebook account. But there is a simple workaround…</string>
     <string name="settings_authorize">Authorize c:geo</string>
     <string name="settings_reauthorize">Authorize c:geo again</string>
     <string name="init_oc">Opencaching.de</string>
@@ -422,6 +405,9 @@
     <string name="init_oc_ro">Opencaching.ro</string>
     <string name="settings_activate_oc_ro">Activate</string>
     <string name="init_oc_ro_description">Authorize c:geo with opencaching.ro to search for caches and access/filter your found caches.</string>
+    <string name="init_oc_uk">Opencaching.org.uk</string>
+    <string name="settings_activate_oc_uk">Activate</string>
+    <string name="init_oc_uk_description">Authorize c:geo with opencaching.org.uk to search for caches and access/filter your found caches.</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="settings_activate_twitter">Activate</string>
@@ -451,8 +437,8 @@
     <string name="init_signature_template_log">Log text</string>
     <string name="init_ratingwanted">GCvote Rating</string>
     <string name="init_summary_ratingwanted">Load cache rating from GCvote.com</string>
-    <string name="init_friendlogswanted">Show Friends\' Logs</string>
-    <string name="init_summary_friendlogswanted">Display additional logbook page for logs from friends</string>
+    <string name="init_friends_and_own_logs_wanted">Show Friends\'/Own</string>
+    <string name="init_summary_friends_and_own_logs_wanted">Display additional logbook page for friends\' and own logs</string>
     <string name="init_openlastdetailspage">Last Details Page</string>
     <string name="init_summary_openlastdetailspage">Open details with last used page</string>
     <string name="init_autoload">Long Description</string>
@@ -480,7 +466,7 @@
     <string name="init_units">Use Imperial Units</string>
     <string name="init_summary_units">Use Imperial Units instead of Metric Units</string>
     <string name="init_log_offline">Offline Logging</string>
-    <string name="init_summary_log_offline">Enable Offline Logging (Wont\'t show online log screen when logging, won\'t upload logs)</string>
+    <string name="init_summary_log_offline">Enable Offline Logging (Won\'t show online log screen when logging, won\'t upload logs)</string>
     <string name="init_choose_list">Ask for List</string>
     <string name="init_summary_choose_list">Ask which list to store caches in</string>
     <string name="init_livelist">Show Direction</string>
@@ -541,6 +527,9 @@
     <string name="init_maintenance">Maintenance</string>
     <string name="init_maintenance_directories_note">c:geo stores images, log images and other files related to a cache in a separate directory. In some cases (like importing/exporting the database) this directory may contain outdated files, which can be deleted here.</string>
     <string name="init_maintenance_directories">Delete orphaned files</string>
+    <string name="init_create_memory_dump">Create memory dump</string>
+    <string name="init_memory_dump">Memory dump</string>
+    <string name="init_memory_dumped">Memory dumped to %s</string>
     <string name="settings_open_website">Open website</string>
     <string name="settings_settings">Settings</string>
     <string name="settings_information">Information</string>
@@ -598,6 +587,7 @@
     <string name="auth_ocnl">opencaching.nl</string>
     <string name="auth_ocus">opencaching.us</string>
     <string name="auth_ocro">opencaching.ro</string>
+    <string name="auth_ocuk">opencaching.org.uk</string>
     <string name="auth_dialog_completed_oc">c:geo is now authorized to interact with %s.</string>
 
     <!-- cache -->
@@ -621,7 +611,6 @@
     <string name="cache_premium">Premium</string>
     <string name="cache_attributes">Attributes</string>
     <string name="cache_inventory">Inventory</string>
-    <string name="cache_log_offline">Offline Log</string>
     <string name="cache_log_images_title">Log images</string>
     <string name="cache_log_image_default_title">Photo</string>
     <string name="cache_personal_note">Personal note</string>
@@ -632,8 +621,6 @@
     <string name="cache_personal_note_uploading">Uploading personal note</string>
     <string name="cache_personal_note_upload_done">Personal note uploaded</string>
     <string name="cache_personal_note_upload_cancelled">Personal note upload cancelled</string>
-    <string name="cache_personal_note_unstored">Cache not stored</string>
-    <string name="cache_personal_note_store">The cache will be stored first to allow a personal note.</string>
     <string name="cache_description">Description</string>
     <string name="cache_description_long">Long Description</string>
     <string name="cache_description_table_note">Description contains table formatting which may need to be viewed at %s to be seen correctly.</string>
@@ -659,7 +646,7 @@
     <string name="cache_waypoints_add">Add Waypoint</string>
     <string name="cache_hint">Hint</string>
     <string name="cache_logs">Logbook</string>
-    <string name="cache_logsfriends">Logbook (Friends)</string>
+    <string name="cache_logs_friends_and_own">Friends/Own Logs</string>
     <string name="cache_dialog_loading_details">Loading cache details…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Loading page</string>
     <string name="cache_dialog_loading_details_status_details">Processing details</string>
@@ -705,16 +692,14 @@
     <string name="cache_menu_refresh">Refresh</string>
     <string name="cache_menu_share">Share cache</string>
     <string name="cache_menu_move_list">Move to different list</string>
-    <string name="cache_menu_gcc">GCC</string>
     <string name="cache_menu_whereyougo">WhereYouGo</string>
     <string name="cache_menu_oruxmaps">OruxMaps</string>
-    <string name="cache_menu_cachebeacon">Cache Beacon</string>
     <string name="cache_menu_navigon">Navigon</string>
     <string name="cache_menu_pebble">Pebble</string>
-    <string name="cache_menu_mapswithme">MapsWithMe</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Saved Log</string>
     <string name="cache_status_found">Found</string>
+    <string name="cache_not_status_found">Not Found</string>
     <string name="cache_status_archived">Archived</string>
     <string name="cache_status_disabled">Disabled</string>
     <string name="cache_status_premium">Premium Members only</string>
@@ -847,10 +832,7 @@
     <string name="map_view_map">Map view</string>
     <string name="map_modes">Map settings</string>
     <string name="map_trail_show">Show trail</string>
-    <string name="map_trail_hide">Hide trail</string>
     <string name="map_circles_show">Show circles</string>
-    <string name="map_circles_hide">Hide circles</string>
-    <string name="map_mycaches_show">Show own/found caches</string>
     <string name="map_mycaches_hide">Hide own/found caches</string>
     <string name="map_theme_builtin">Default</string>
     <string name="map_theme_select">Select map theme</string>
@@ -939,10 +921,10 @@
     <!-- navigation -->
     <string name="navigation">Navigation</string>
     <string name="compass_title">Compass</string>
+    <string name="compass_sensors">Active Sensors</string>
     <string name="use_gps">Use GPS only</string>
     <string name="use_compass">Use GPS and Compass</string>
     <string name="destination_select">Select destination</string>
-    <string name="destination_set">Set destination</string>
     <string name="navigation_direct_navigation">Direct Navigation</string>
     <string name="navigation_target">Target</string>
     <string name="err_nav_no_coordinates">Cannot start navigation with no coordinates</string>
@@ -1226,7 +1208,6 @@
     <string name="website">Website: <a href="">cgeo.org</a></string>
     <string name="facebook">Facebook: <a href="">c:geo page</a></string>
     <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-    <string name="nutshellmanual">Manual: <a href="">c:geo in a Nutshell</a></string>
     <string name="market">Android: <a href="">c:geo on Google Play</a></string>
     <string name="about_twitter">Should <b>c:geo</b> publish a new status on Twitter every time you log a cache?</string>
     <string name="faq">FAQ: <a href="">faq.cgeo.org</a></string>
@@ -1285,4 +1266,6 @@
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo shortcut</string>
     <string name="create_shortcut">Create shortcut</string>
+    <string name="send">Send</string>
+
 </resources>

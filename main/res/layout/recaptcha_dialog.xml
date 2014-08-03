@@ -43,7 +43,7 @@
         android:layout_margin="7dip"
         android:paddingLeft="3dip"
         android:text="@string/caches_recaptcha_explanation"
-        android:textColor="@color/text_grey_dark"
+        android:textColor="?text_color_hint"
         android:textSize="12sp" />
 
 </LinearLayout>

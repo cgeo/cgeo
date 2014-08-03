@@ -4,12 +4,16 @@ import cgeo.geocaching.sensors.DirectionProvider;
 import cgeo.geocaching.sensors.GeoDataProvider;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
 
 import rx.Observable;
 import rx.functions.Action1;
 import rx.observables.ConnectableObservable;
 
 import android.app.Application;
+import android.view.ViewConfiguration;
+
+import java.lang.reflect.Field;
 
 public class CgeoApplication extends Application {
 
@@ -22,6 +26,20 @@ public class CgeoApplication extends Application {
     private volatile IGeoData currentGeo = null;
     private volatile float currentDirection = 0.0f;
 
+    public static void dumpOnOutOfMemory(final boolean enable) {
+
+        if (enable) {
+
+            if (!OOMDumpingUncaughtExceptionHandler.activateHandler()) {
+                Log.e("OOM dumping handler not activated (either a problem occured or it was already active)");
+            }
+        } else {
+            if (!OOMDumpingUncaughtExceptionHandler.resetToDefault()) {
+                Log.e("OOM dumping handler not resetted (either a problem occured or it was not active)");
+            }
+        }
+    }
+
     public CgeoApplication() {
         setInstance(this);
     }
@@ -32,6 +50,24 @@ public class CgeoApplication extends Application {
 
     public static CgeoApplication getInstance() {
         return instance;
+    }
+
+    @Override
+    public void onCreate() {
+        try {
+            final ViewConfiguration config = ViewConfiguration.get(this);
+            final Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+            menuKeyField.setAccessible(true);
+            menuKeyField.setBoolean(config, false);
+        } catch (final IllegalArgumentException e) {
+            // ignore
+        } catch (final NoSuchFieldException e) {
+            // ignore
+        } catch (final IllegalAccessException e) {
+            // ignore
+        }
+        // ensure initialization of lists
+        DataStore.getLists();
     }
 
     @Override
@@ -69,7 +105,7 @@ public class CgeoApplication extends Application {
     }
 
     public IGeoData currentGeo() {
-        return currentGeo != null ? currentGeo : geoDataObservable().toBlockingObservable().first();
+        return currentGeo != null ? currentGeo : geoDataObservable().toBlocking().first();
     }
 
     public float currentDirection() {

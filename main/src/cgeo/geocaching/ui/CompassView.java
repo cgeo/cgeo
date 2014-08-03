@@ -3,10 +3,10 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.AngleUtils;
 
-import rx.Scheduler;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
+import rx.functions.Action0;
+import rx.subscriptions.Subscriptions;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -18,6 +18,7 @@ import android.graphics.PaintFlagsDrawFilter;
 import android.util.AttributeSet;
 import android.view.View;
 
+import java.lang.ref.WeakReference;
 import java.util.concurrent.TimeUnit;
 
 public class CompassView extends View {
@@ -54,14 +55,43 @@ public class CompassView extends View {
     private int compassOverlayWidth = 0;
     private int compassOverlayHeight = 0;
     private boolean initialDisplay;
-    private Subscription periodicUpdate;
+    private Subscription periodicUpdate = Subscriptions.empty();
 
-    public CompassView(Context contextIn) {
+    private static final class UpdateAction implements Action0 {
+
+        private final WeakReference<CompassView> compassViewRef;
+
+        private UpdateAction(final CompassView view) {
+            this.compassViewRef = new WeakReference<>(view);
+        }
+
+        @Override
+        public void call() {
+            final CompassView compassView = compassViewRef.get();
+            if (compassView == null) {
+                return;
+            }
+            compassView.updateGraphics();
+        }
+    }
+
+    public CompassView(final Context contextIn) {
         super(contextIn);
         context = contextIn;
     }
 
-    public CompassView(Context contextIn, AttributeSet attrs) {
+    public void updateGraphics() {
+        final float newAzimuthShown = smoothUpdate(northMeasured, azimuthShown);
+        final float newCacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
+        if (Math.abs(AngleUtils.difference(azimuthShown, newAzimuthShown)) >= 2 ||
+                Math.abs(AngleUtils.difference(cacheHeadingShown, newCacheHeadingShown)) >= 2) {
+            azimuthShown = newAzimuthShown;
+            cacheHeadingShown = newCacheHeadingShown;
+            invalidate();
+        }
+    }
+
+    public CompassView(final Context contextIn, final AttributeSet attrs) {
         super(contextIn, attrs);
         context = contextIn;
     }
@@ -88,24 +118,13 @@ public class CompassView extends View {
 
         initialDisplay = true;
 
-        periodicUpdate = AndroidSchedulers.mainThread().schedulePeriodically(new Action1<Scheduler.Inner>() {
-            @Override
-            public void call(final Scheduler.Inner inner) {
-                final float newAzimuthShown = smoothUpdate(northMeasured, azimuthShown);
-                final float newCacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
-                if (Math.abs(AngleUtils.difference(azimuthShown, newAzimuthShown)) >= 2 ||
-                        Math.abs(AngleUtils.difference(cacheHeadingShown, newCacheHeadingShown)) >= 2) {
-                    azimuthShown = newAzimuthShown;
-                    cacheHeadingShown = newCacheHeadingShown;
-                    invalidate();
-                }
-            }
-        }, 0, 40, TimeUnit.MILLISECONDS);
+        periodicUpdate = AndroidSchedulers.mainThread().createWorker().schedulePeriodically(new UpdateAction(this), 0, 40, TimeUnit.MILLISECONDS);
     }
 
     @Override
     public void onDetachedFromWindow() {
         periodicUpdate.unsubscribe();
+
         super.onDetachedFromWindow();
 
         if (compassUnderlay != null) {
@@ -156,7 +175,7 @@ public class CompassView extends View {
      *            the actual value
      * @return the new value
      */
-    static protected float smoothUpdate(float goal, float actual) {
+    static protected float smoothUpdate(final float goal, final float actual) {
         final double diff = AngleUtils.difference(actual, goal);
 
         double offset = 0;
@@ -173,7 +192,7 @@ public class CompassView extends View {
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(final Canvas canvas) {
 
         final float azimuthTemp = azimuthShown;
         final float azimuthRelative = AngleUtils.normalize(azimuthTemp - cacheHeadingShown);
@@ -218,11 +237,11 @@ public class CompassView extends View {
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    protected void onMeasure(final int widthMeasureSpec, final int heightMeasureSpec) {
         setMeasuredDimension(measureWidth(widthMeasureSpec), measureHeight(heightMeasureSpec));
     }
 
-    private int measureWidth(int measureSpec) {
+    private int measureWidth(final int measureSpec) {
         final int specMode = MeasureSpec.getMode(measureSpec);
         final int specSize = MeasureSpec.getSize(measureSpec);
 
@@ -238,7 +257,7 @@ public class CompassView extends View {
         return desired;
     }
 
-    private int measureHeight(int measureSpec) {
+    private int measureHeight(final int measureSpec) {
         // The duplicated code in measureHeight and measureWidth cannot be avoided.
         // Those methods must be efficient, therefore we cannot extract the code differences and unify the remainder.
         final int specMode = MeasureSpec.getMode(measureSpec);

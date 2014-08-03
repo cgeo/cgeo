@@ -4,10 +4,10 @@ import cgeo.geocaching.CgeoApplication;
 
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v4.app.FragmentListActivity;
-import android.view.View;
+import android.view.MenuItem;
+import android.view.Window;
 
-public abstract class AbstractListActivity extends FragmentListActivity implements
+public abstract class AbstractListActivity extends ActionBarListActivity implements
         IAbstractActivity {
 
     private boolean keepScreenOn = false;
@@ -21,11 +21,6 @@ public abstract class AbstractListActivity extends FragmentListActivity implemen
 
     protected AbstractListActivity(final boolean keepScreenOn) {
         this.keepScreenOn = keepScreenOn;
-    }
-
-    @Override
-    final public void goHome(View view) {
-        ActivityMixin.goHome(this);
     }
 
     final public void showProgress(final boolean show) {
@@ -49,7 +44,22 @@ public abstract class AbstractListActivity extends FragmentListActivity implemen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+
         initializeCommonFields();
+        initUpAction();
+    }
+
+    protected void initUpAction() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId()== android.R.id.home) {
+            return ActivityMixin.navigateUp(this);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void initializeCommonFields() {

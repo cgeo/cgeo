@@ -21,7 +21,6 @@ import org.mapsforge.android.mapsold.MapViewMode;
 import org.mapsforge.android.mapsold.Overlay;
 import org.mapsforge.android.mapsold.Projection;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
@@ -37,6 +36,13 @@ public class MapsforgeMapView024 extends MapView implements MapViewImpl {
 
     public MapsforgeMapView024(Context context, AttributeSet attrs) {
         super(context, attrs);
+        initialize(context);
+    }
+
+    private void initialize(Context context) {
+        if (isInEditMode()) {
+            return;
+        }
         gestureDetector = new GestureDetector(context, new GestureListener());
     }
 
@@ -96,8 +102,8 @@ public class MapsforgeMapView024 extends MapView implements MapViewImpl {
     }
 
     @Override
-    public PositionAndScaleOverlay createAddPositionAndScaleOverlay(Activity activity) {
-        MapsforgeOverlay ovl = new MapsforgeOverlay(activity);
+    public PositionAndScaleOverlay createAddPositionAndScaleOverlay() {
+        MapsforgeOverlay ovl = new MapsforgeOverlay();
         getOverlays().add(ovl);
         return (PositionAndScaleOverlay) ovl.getBase();
     }

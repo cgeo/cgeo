@@ -31,7 +31,7 @@ public class OAuth {
                 "oauth_version", "1.0");
         params.sort();
 
-        final List<String> paramsEncoded = new ArrayList<String>();
+        final List<String> paramsEncoded = new ArrayList<>();
         for (final NameValuePair nameValue : params) {
             paramsEncoded.add(nameValue.getName() + "=" + OAuth.percentEncode(nameValue.getValue()));
         }

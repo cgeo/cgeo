@@ -1,0 +1,27 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.12.+'
+        // the latest version of the android-apt plugin
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.1'
+        //gradle-properties
+       // classpath 'net.saliman:gradle-properties-plugin:1.2.0'
+    }
+}
+
+allprojects {
+    //apply plugin: 'properties'
+
+    repositories {
+        mavenCentral()
+    }
+    //ant.properties : java.compilerargs=-Xlint
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint"
+    }
+}
+

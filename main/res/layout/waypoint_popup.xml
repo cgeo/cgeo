@@ -5,12 +5,7 @@
     android:background="?background_color_transparent"
     android:orientation="vertical" >
 
-    <LinearLayout style="@style/action_bar" >
-
-        <include layout="@layout/actionbar_title_no_home" />
-
-        <include layout="@layout/actionbar_button_compass" />
-    </LinearLayout>
+     <include layout="@layout/actionbar_popup" />
 
     <ScrollView
         android:id="@+id/details_list_box"

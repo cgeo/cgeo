@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainscreen"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_gravity="center" >
-
-    <LinearLayout style="@style/action_bar" >
-
-        <ImageView
-            style="@style/action_bar_icon_cgeo"
-            android:onClick="showAbout" />
-
-        <TextView style="@style/action_bar_title" />
-
-        <include layout="@layout/actionbar_button_search" />
-    </LinearLayout>
 
     <fragment
         android:id="@+id/status"
@@ -24,7 +14,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="16dip"
         android:layout_marginRight="16dip"
-        android:layout_marginTop="60dip" />
+        android:layout_marginTop="60dip"
+        tools:layout="@layout/status" />
     <!-- ** -->
 
     <LinearLayout

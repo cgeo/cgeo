@@ -7,9 +7,15 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.eclipse.jdt.annotation.NonNull;
+
+import rx.Observable;
+import rx.functions.Func0;
+import rx.util.async.Async;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -88,10 +94,6 @@ public class Tile {
      *
      */
     private static int calcY(final Geopoint origin, final int zoomlevel) {
-
-        // double latRad = Math.toRadians(origin.getLatitude());
-        // return (int) ((1 - (Math.log(Math.tan(latRad) + (1 / Math.cos(latRad))) / Math.PI)) / 2 * numberOfTiles);
-
         // Optimization from Bing
         double sinLatRad = Math.sin(Math.toRadians(origin.getLatitude()));
         // The cut of the fractional part instead of rounding to the nearest integer is intentional and part of the algorithm
@@ -231,20 +233,39 @@ public class Tile {
         return toString().hashCode();
     }
 
-    /** Request JSON informations for a tile */
-    public static String requestMapInfo(final String url, final Parameters params, final String referer) {
-        return Network.getResponseData(Network.getRequest(url, params, new Parameters("Referer", referer)));
+    /** Request JSON informations for a tile. Return as soon as the request has been made, before the answer has been
+     * read.
+     *
+     * @return An observable with one element, which may be <tt>null</tt>.
+     */
+    public static Observable<String> requestMapInfo(final String url, final Parameters params, final String referer) {
+        final HttpResponse response = Network.getRequest(url, params, new Parameters("Referer", referer));
+        return Async.start(new Func0<String>() {
+            @Override
+            public String call() {
+                return Network.getResponseData(response);
+            }
+        }, RxUtils.networkScheduler);
     }
 
-    /** Request .png image for a tile. */
-    public static Bitmap requestMapTile(final Parameters params) {
+    /** Request .png image for a tile. Return as soon as the request has been made, before the answer has been
+     * read and processed.
+     *
+     * @return An observable with one element, which may be <tt>null</tt>.
+     */
+    public static Observable<Bitmap> requestMapTile(final Parameters params) {
         final HttpResponse response = Network.getRequest(GCConstants.URL_MAP_TILE, params, new Parameters("Referer", GCConstants.URL_LIVE_MAP));
-        try {
-            return response != null ? BitmapFactory.decodeStream(response.getEntity().getContent()) : null;
-        } catch (IOException e) {
-            Log.e("Tile.requestMapTile() ", e);
-        }
-        return null;
+        return Async.start(new Func0<Bitmap>() {
+            @Override
+            public Bitmap call() {
+                try {
+                    return response != null ? BitmapFactory.decodeStream(response.getEntity().getContent()) : null;
+                } catch (IOException e) {
+                    Log.e("Tile.requestMapTile() ", e);
+                    return null;
+                }
+            }
+        }, RxUtils.computationScheduler);
     }
 
     public boolean containsPoint(final @NonNull ICoordinates point) {
@@ -277,7 +298,7 @@ public class Tile {
      * @return
      */
     protected static Set<Tile> getTilesForViewport(final Viewport viewport, final int tilesOnAxis, final int minZoom) {
-        Set<Tile> tiles = new HashSet<Tile>();
+        Set<Tile> tiles = new HashSet<>();
         int zoom = Math.max(
                 Math.min(Tile.calcZoomLon(viewport.bottomLeft, viewport.topRight, tilesOnAxis),
                         Tile.calcZoomLat(viewport.bottomLeft, viewport.topRight, tilesOnAxis)),
@@ -310,7 +331,7 @@ public class Tile {
         }
 
         public void removeFromTileCache(@NonNull final ICoordinates point) {
-            for (final Tile tile : new ArrayList<Tile>(this)) {
+            for (final Tile tile : new ArrayList<>(this)) {
                 if (tile.containsPoint(point)) {
                     remove(tile);
                 }

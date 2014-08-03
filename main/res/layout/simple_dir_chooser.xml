@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="?background_color"
@@ -42,20 +43,20 @@
         android:paddingTop="10dip" >
 
         <Button
-            android:id="@+id/simple_dir_chooser_ok"
-            style="@style/button_full"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@android:string/ok" />
-
-        <Button
             android:id="@+id/simple_dir_chooser_cancel"
             style="@style/button_full"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@android:string/cancel" />
+
+        <Button
+            android:id="@+id/simple_dir_chooser_ok"
+            style="@style/button_full"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@android:string/ok" />
     </LinearLayout>
 
     <ListView
@@ -63,6 +64,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/buttonLayout"
-        android:layout_below="@+id/headerLayout" />
+        android:layout_below="@+id/headerLayout"
+        android:clipToPadding="false"
+        android:scrollbarStyle="outsideOverlay"
+        tools:listitem="@layout/simple_dir_item" />
 
 </RelativeLayout>

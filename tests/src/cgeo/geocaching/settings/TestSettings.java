@@ -48,4 +48,8 @@ public final class TestSettings extends Settings {
         putString(R.string.pref_twitter_trackable_message, template);
     }
 
+    public static void setSignature(final String signature) {
+        putString(R.string.pref_signature, signature);
+    }
+
 }

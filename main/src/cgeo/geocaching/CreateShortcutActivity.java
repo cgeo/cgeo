@@ -1,6 +1,6 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 
@@ -10,7 +10,7 @@ import android.content.Intent;
 import android.content.Intent.ShortcutIconResource;
 import android.os.Bundle;
 
-public class CreateShortcutActivity extends AbstractActivity {
+public class CreateShortcutActivity extends AbstractActionBarActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class CreateShortcutActivity extends AbstractActivity {
 
             @Override
             public void call(final Integer listId) {
-                final Intent shortcut = createShortcut(listId.intValue());
+                final Intent shortcut = createShortcut(listId);
                 setResult(RESULT_OK, shortcut);
 
                 // finish activity to return the shortcut

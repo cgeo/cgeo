@@ -35,7 +35,7 @@ public abstract class IconDecoder {
             return false; //out of image position
         }
 
-        int numberOfDetections = 7; //for level 12 and 13;
+        int numberOfDetections = 7; //for level 12 and 13
         if (zoomlevel < 12) {
             numberOfDetections = 5;
         }

@@ -5,15 +5,15 @@
     android:background="?background_color"
     android:orientation="vertical" >
 
-    <include layout="@layout/actionbar" />
-
     <ListView
         android:id="@+id/historyList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:cacheColorHint="?background_color"
+        android:clipToPadding="false"
         android:footerDividersEnabled="false"
-        android:headerDividersEnabled="false" >
+        android:headerDividersEnabled="false"
+        android:scrollbarStyle="outsideOverlay" >
     </ListView>
 
 </LinearLayout>

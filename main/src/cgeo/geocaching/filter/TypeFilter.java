@@ -29,7 +29,7 @@ class TypeFilter extends AbstractFilter {
         @Override
         public List<IFilter> getFilters() {
             final CacheType[] types = CacheType.values();
-            final List<IFilter> filters = new LinkedList<IFilter>();
+            final List<IFilter> filters = new LinkedList<>();
             for (CacheType cacheType : types) {
                 if (cacheType != CacheType.ALL) {
                     filters.add(new TypeFilter(cacheType));

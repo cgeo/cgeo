@@ -1,6 +1,6 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheType;
@@ -48,8 +48,8 @@ import java.util.EnumSet;
 import java.util.List;
 
 @EActivity
-public class EditWaypointActivity extends AbstractActivity {
-    private static final ArrayList<WaypointType> POSSIBLE_WAYPOINT_TYPES = new ArrayList<WaypointType>(WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL);
+public class EditWaypointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
+    private static final ArrayList<WaypointType> POSSIBLE_WAYPOINT_TYPES = new ArrayList<>(WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL);
 
     @ViewById(R.id.buttonLatitude) protected Button buttonLat;
     @ViewById(R.id.buttonLongitude) protected Button buttonLon;
@@ -159,11 +159,11 @@ public class EditWaypointActivity extends AbstractActivity {
 
         addWaypoint.setOnClickListener(new SaveWaypointListener());
 
-        List<String> wayPointNames = new ArrayList<String>();
+        List<String> wayPointNames = new ArrayList<>();
         for (WaypointType wpt : WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL) {
             wayPointNames.add(wpt.getL10n());
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, wayPointNames);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, wayPointNames);
         waypointName.setAdapter(adapter);
 
         if (savedInstanceState != null) {
@@ -205,7 +205,7 @@ public class EditWaypointActivity extends AbstractActivity {
     }
 
     private void initializeWaypointTypeSelector() {
-        ArrayAdapter<WaypointType> wpAdapter = new ArrayAdapter<WaypointType>(this, android.R.layout.simple_spinner_item, POSSIBLE_WAYPOINT_TYPES.toArray(new WaypointType[POSSIBLE_WAYPOINT_TYPES.size()]));
+        ArrayAdapter<WaypointType> wpAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, POSSIBLE_WAYPOINT_TYPES.toArray(new WaypointType[POSSIBLE_WAYPOINT_TYPES.size()]));
         wpAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         waypointTypeSelector.setAdapter(wpAdapter);
 
@@ -247,7 +247,7 @@ public class EditWaypointActivity extends AbstractActivity {
     }
 
     private void initializeDistanceUnitSelector() {
-        distanceUnits = new ArrayList<String>(Arrays.asList(res.getStringArray(R.array.distance_units)));
+        distanceUnits = new ArrayList<>(Arrays.asList(res.getStringArray(R.array.distance_units)));
         if (initViews) {
             distanceUnitSelector.setSelection(Settings.isUseImperialUnits() ? 2 : 0); //0:m, 2:ft
         }
@@ -294,17 +294,18 @@ public class EditWaypointActivity extends AbstractActivity {
                 // button text is blank when creating new waypoint
             }
             Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
-            CoordinatesInputDialog coordsDialog = new CoordinatesInputDialog(EditWaypointActivity.this, cache, gp, app.currentGeo());
+            CoordinatesInputDialog coordsDialog = CoordinatesInputDialog.getInstance(cache, gp, app.currentGeo());
             coordsDialog.setCancelable(true);
-            coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate() {
-                @Override
-                public void update(final Geopoint gp) {
-                    buttonLat.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
-                    buttonLon.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
-                }
-            });
-            coordsDialog.show();
+            coordsDialog.show(getSupportFragmentManager(),"wpeditdialog");
         }
+
+
+    }
+
+    @Override
+    public void updateCoordinates(Geopoint gp) {
+        buttonLat.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
+        buttonLon.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
     }
 
     public static final int SUCCESS = 0;
@@ -438,11 +439,11 @@ public class EditWaypointActivity extends AbstractActivity {
                     }
                     Waypoint oldWaypoint = cache.getWaypointById(id);
                     if (cache.addOrChangeWaypoint(waypoint, true)) {
-                        DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+                        DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
                         if (!StaticMapsProvider.hasAllStaticMapsForWaypoint(geocode, waypoint)) {
                             StaticMapsProvider.removeWpStaticMaps(oldWaypoint, geocode);
                             if (Settings.isStoreOfflineWpMaps()) {
-                                StaticMapsProvider.storeWaypointStaticMap(cache, waypoint, false);
+                                StaticMapsProvider.storeWaypointStaticMap(cache, waypoint).subscribe();
                             }
                         }
                         if (modifyLocal.isChecked() || modifyBoth.isChecked()) {

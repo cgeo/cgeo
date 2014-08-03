@@ -25,7 +25,7 @@ class RMapsApp extends AbstractPointNavigationApp {
     }
 
     private static void navigate(Activity activity, Geopoint coords, String code, String name) {
-        final ArrayList<String> locations = new ArrayList<String>();
+        final ArrayList<String> locations = new ArrayList<>();
         locations.add(coords.format(Format.LAT_LON_DECDEGREE_COMMA) + ";" + code + ";" + name);
         final Intent intent = new Intent(INTENT);
         intent.putStringArrayListExtra("locations", locations);

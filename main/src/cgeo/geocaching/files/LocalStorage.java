@@ -431,7 +431,7 @@ public final class LocalStorage {
     public static List<File> getStorages() {
 
         String extStorage = Environment.getExternalStorageDirectory().getAbsolutePath();
-        List<File> storages = new ArrayList<File>();
+        List<File> storages = new ArrayList<>();
         storages.add(new File(extStorage));
         File file = new File(FILE_SYSTEM_TABLE_PATH);
         if (file.canRead()) {

@@ -7,44 +7,29 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 /**
- * Modified progress dialog class which allows hiding the absolute numbers
+ * Modified progress dialog class which allows hiding the absolute numbers.
  *
  */
 public class CustomProgressDialog extends ProgressDialog {
 
-    public CustomProgressDialog(Context context) {
+    public CustomProgressDialog(final Context context) {
         super(context, ActivityMixin.getDialogTheme());
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         try {
-            Method method = TextView.class.getMethod("setVisibility", Integer.TYPE);
-
-            Field[] fields = this.getClass().getSuperclass().getDeclaredFields();
-
-            for (Field field : fields) {
-                if (field.getName().equalsIgnoreCase("mProgressNumber")) {
-                    field.setAccessible(true);
-                    TextView textView = (TextView) field.get(this);
-                    method.invoke(textView, View.GONE);
-                }
-            }
-        } catch (NoSuchMethodException e) {
-            Log.e("Failed to invoke the progressDialog method 'setVisibility' and set 'mProgressNumber' to GONE.", e);
-        } catch (IllegalAccessException e) {
-            Log.e("Failed to invoke the progressDialog method 'setVisibility' and set 'mProgressNumber' to GONE.", e);
-        } catch (InvocationTargetException e) {
-            Log.e("Failed to invoke the progressDialog method 'setVisibility' and set 'mProgressNumber' to GONE.", e);
+            // Field is private, make it accessible through reflection before hiding it.
+            final Field field = getClass().getSuperclass().getDeclaredField("mProgressNumber");
+            field.setAccessible(true);
+            ((View) field.get(this)).setVisibility(View.GONE);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            Log.e("Failed to find the progressDialog field 'mProgressNumber'", e);
         }
     }
 }

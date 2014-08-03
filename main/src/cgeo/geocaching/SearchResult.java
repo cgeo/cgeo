@@ -8,14 +8,16 @@ import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
+import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import rx.Observable;
 import rx.functions.Func1;
 import rx.functions.Func2;
-import rx.schedulers.Schedulers;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -60,13 +62,21 @@ public class SearchResult implements Parcelable {
     }
 
     /**
+     * Build a new empty search result with an error status.
+     */
+    public SearchResult(final StatusCode statusCode) {
+        this();
+        error = statusCode;
+    }
+
+    /**
      * Copy a search result, for example to apply different filters on it.
      *
      * @param searchResult the original search result, which cannot be null
      */
     public SearchResult(final SearchResult searchResult) {
-        geocodes = new HashSet<String>(searchResult.geocodes);
-        filteredGeocodes = new HashSet<String>(searchResult.filteredGeocodes);
+        geocodes = new HashSet<>(searchResult.geocodes);
+        filteredGeocodes = new HashSet<>(searchResult.filteredGeocodes);
         error = searchResult.error;
         url = searchResult.url;
         viewstates = searchResult.viewstates;
@@ -83,9 +93,9 @@ public class SearchResult implements Parcelable {
      *            from a web page)
      */
     public SearchResult(final Collection<String> geocodes, final int totalCountGC) {
-        this.geocodes = new HashSet<String>(geocodes.size());
+        this.geocodes = new HashSet<>(geocodes.size());
         this.geocodes.addAll(geocodes);
-        this.filteredGeocodes = new HashSet<String>();
+        this.filteredGeocodes = new HashSet<>();
         this.setTotalCountGC(totalCountGC);
     }
 
@@ -99,12 +109,12 @@ public class SearchResult implements Parcelable {
     }
 
     public SearchResult(final Parcel in) {
-        final ArrayList<String> list = new ArrayList<String>();
+        final ArrayList<String> list = new ArrayList<>();
         in.readStringList(list);
-        geocodes = new HashSet<String>(list);
-        final ArrayList<String> filteredList = new ArrayList<String>();
+        geocodes = new HashSet<>(list);
+        final ArrayList<String> filteredList = new ArrayList<>();
         in.readStringList(filteredList);
-        filteredGeocodes = new HashSet<String>(filteredList);
+        filteredGeocodes = new HashSet<>(filteredList);
         error = (StatusCode) in.readSerializable();
         url = in.readString();
         final int length = in.readInt();
@@ -155,6 +165,7 @@ public class SearchResult implements Parcelable {
         return 0;
     }
 
+    @NonNull
     public Set<String> getGeocodes() {
         return Collections.unmodifiableSet(geocodes);
     }
@@ -213,12 +224,12 @@ public class SearchResult implements Parcelable {
 
         SearchResult result = new SearchResult(this);
         result.geocodes.clear();
-        final ArrayList<Geocache> includedCaches = new ArrayList<Geocache>();
+        final ArrayList<Geocache> includedCaches = new ArrayList<>();
         final Set<Geocache> caches = DataStore.loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
         int excluded = 0;
         for (Geocache cache : caches) {
             // Is there any reason to exclude the cache from the list?
-            final boolean excludeCache = (excludeDisabled && cache.isDisabled()) ||
+            final boolean excludeCache = (excludeDisabled && (cache.isDisabled() || cache.isArchived())) ||
                     (excludeMine && (cache.isOwner() || cache.isFound())) ||
                     (!cacheType.contains(cache));
             if (excludeCache) {
@@ -261,7 +272,7 @@ public class SearchResult implements Parcelable {
         for (Geocache geocache : caches) {
             addGeocode(geocache.getGeocode());
         }
-        DataStore.saveCaches(caches, EnumSet.of(SaveFlag.SAVE_CACHE));
+        DataStore.saveCaches(caches, EnumSet.of(SaveFlag.CACHE));
     }
 
     public boolean isEmpty() {
@@ -313,13 +324,13 @@ public class SearchResult implements Parcelable {
                     }
                 });
             }
-        }, Schedulers.io()).reduce(new SearchResult(), new Func2<SearchResult, SearchResult, SearchResult>() {
+        }, RxUtils.networkScheduler).reduce(new SearchResult(), new Func2<SearchResult, SearchResult, SearchResult>() {
             @Override
             public SearchResult call(final SearchResult searchResult, final SearchResult searchResult2) {
                 searchResult.addSearchResult(searchResult2);
                 return searchResult;
             }
-        }).toBlockingObservable().first();
+        }).toBlocking().first();
     }
 
 }

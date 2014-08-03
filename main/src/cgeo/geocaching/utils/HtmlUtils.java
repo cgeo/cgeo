@@ -34,7 +34,7 @@ public final class HtmlUtils {
         if (html instanceof Spanned) {
             Spanned text = (Spanned) html;
             Object[] styles = text.getSpans(0, text.length(), Object.class);
-            ArrayList<Pair<Integer, Integer>> removals = new ArrayList<Pair<Integer, Integer>>();
+            ArrayList<Pair<Integer, Integer>> removals = new ArrayList<>();
             for (Object style : styles) {
                 if (style instanceof ImageSpan) {
                     int start = text.getSpanStart(style);

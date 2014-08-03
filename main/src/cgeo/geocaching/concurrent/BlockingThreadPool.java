@@ -27,7 +27,7 @@ public class BlockingThreadPool {
      */
     public BlockingThreadPool(int poolSize, int priority) {
         ThreadFactory threadFactory = new PriorityThreadFactory(priority);
-        this.queue = new ArrayBlockingQueue<Runnable>(poolSize, true);
+        this.queue = new ArrayBlockingQueue<>(poolSize, true);
         this.executor = new ThreadPoolExecutor(0, poolSize, 5, TimeUnit.SECONDS, this.queue);
         this.executor.setThreadFactory(threadFactory);
     }

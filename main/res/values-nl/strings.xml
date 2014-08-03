@@ -9,7 +9,6 @@
   <string name="about">Over c:geo</string>
   <string name="latitude">Breedtegraad</string>
   <string name="longitude">Lengtegraad</string>
-  <string name="action_bar_share_title">Deel link naar cache</string>
   <string name="settings_titlebar">c:geo Instellingen</string>
   <string name="all_types">Alle cache types</string>
   <string name="traditional">Traditionele cache</string>
@@ -18,6 +17,7 @@
   <string name="letterbox">Letterbox hybrid</string>
   <string name="event">Event cache</string>
   <string name="mega">Mega-event cache</string>
+  <string name="giga">Giga-Event Cache</string>
   <string name="earth">Earthcache</string>
   <string name="cito">Cache in trash out event</string>
   <string name="webcam">Webcam cache</string>
@@ -29,13 +29,13 @@
   <string name="gps">Gps adventures exhibit</string>
   <string name="block">Groundspeak Block Party</string>
   <string name="unknown">Onbekend type</string>
-  <string name="cache_size_micro">micro</string>
-  <string name="cache_size_small">small</string>
-  <string name="cache_size_regular">regular</string>
-  <string name="cache_size_large">large</string>
-  <string name="cache_size_other">other</string>
+  <string name="cache_size_micro">Micro</string>
+  <string name="cache_size_small">Small</string>
+  <string name="cache_size_regular">Regular</string>
+  <string name="cache_size_large">Large</string>
+  <string name="cache_size_other">Other</string>
   <string name="cache_size_virtual">Virtual</string>
-  <string name="cache_size_notchosen">not chosen</string>
+  <string name="cache_size_notchosen">Niet gekozen</string>
   <string name="cache_size_unknown">Onbekend</string>
   <string name="cache_size_nano">Nano</string>
   <string name="cache_size_very_large">Erg Groot</string>
@@ -78,22 +78,9 @@
   <string name="log_saving">Log opslaan…</string>
   <string name="log_saving_and_uploading">Verzenden van log en uploaden foto…</string>
   <string name="log_clear">Wissen</string>
-  <string name="log_post">Verzend log</string>
-  <string name="log_post_rate">Verzend log &amp; beoordeel</string>
-  <string name="log_post_no_rate">Verzend log zonder beoordeling</string>
   <string name="log_post_not_possible">Laden Log Pagina…</string>
   <string name="log_add">Toevoegen</string>
-  <string name="log_rating">Beoordeling</string>
   <string name="log_no_rating">Geen beoordeling</string>
-  <string name="log_stars_1">1 ster</string>
-  <string name="log_stars_15">1.5 ster</string>
-  <string name="log_stars_2">2 sterren</string>
-  <string name="log_stars_25">2.5 sterren</string>
-  <string name="log_stars_3">3 sterren</string>
-  <string name="log_stars_35">3.5 sterren</string>
-  <string name="log_stars_4">4 sterren</string>
-  <string name="log_stars_45">4.5 sterren</string>
-  <string name="log_stars_5">5 sterren</string>
   <string name="log_stars_1_description">Slecht</string>
   <string name="log_stars_15_description">Redelijk slecht</string>
   <string name="log_stars_2_description">Beneden gemiddeld</string>
@@ -112,7 +99,6 @@
   <string name="log_smilies">Smilies</string>
   <string name="log_image">Foto</string>
   <string name="log_image_attach">Foto koppelen</string>
-  <string name="log_image_edit">Foto bewerken</string>
   <string name="log_image_stored">Bestaande</string>
   <string name="log_image_camera">Nieuw</string>
   <string name="log_image_caption">Bijschrift</string>
@@ -121,6 +107,13 @@
   <string name="log_password_title">Log wachtwoord:</string>
   <string name="log_hint_log_password">Voer Login Wachtwoord</string>
   <string name="log_oc_team_comment">OC Team commentaar</string>
+  <string-array name="log_image_scales">
+    <item>Niet schalen</item>
+    <item>512 px</item>
+    <item>640 px</item>
+    <item>800 px</item>
+    <item>1024 px</item>
+  </string-array>
   <string name="translate_to_sys_lang">Vertaal naar %s</string>
   <string name="translate_to_english">Vertaal naar engels</string>
   <string name="translate_length_warning">Vertaling kan mislukken bij grote stukken tekst.</string>
@@ -213,6 +206,7 @@
   <string name="info_select_logimage_cancelled">Foto selectie of opname is geannuleerd.</string>
   <string name="info_stored_image">Nieuwe foto opgeslagen in:</string>
   <string name="info_storing_static_maps">Proberen statische kaarten op te slaan</string>
+  <string name="info_cache_saved">De cache is lokaal opgeslagen</string>
   <string name="loc_last">Laatst bekende</string>
   <string name="loc_net">Netwerk</string>
   <string name="loc_gps">GPS</string>
@@ -220,6 +214,7 @@
   <string name="loc_trying">Proberen te lokaliseren</string>
   <string name="loc_no_addr">Adres onbekend</string>
   <string name="loc_gps_disabled">GPS uitgeschakeld</string>
+  <string name="menu_centerposition">Centreer op mijn positie</string>
   <string name="menu_about">Over c:geo</string>
   <string name="menu_helpers">Hulpprogramma\'s</string>
   <string name="menu_settings">Instellingen</string>
@@ -241,12 +236,15 @@
   <string name="caches_more_caches_currently">op dit moment</string>
   <string name="caches_downloading">Caches aan het downloaden…\nGeschatte tijd: </string>
   <string name="caches_eta_ltm">Minder dan een minuut</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="one">%d minuut</item>
+    <item quantity="other">%d minuten</item>
+  </plurals>
   <string name="caches_store_offline">Opslaan voor Offline gebruik</string>
   <string name="caches_store_selected">Geselecteerden opslaan</string>
   <string name="caches_history">Geschiedenis</string>
   <string name="caches_on_map">Toon op kaart</string>
   <string name="caches_sort">Sorteren</string>
-  <string name="caches_sort_title">Sorteer op</string>
   <string name="caches_sort_distance">Afstand</string>
   <string name="caches_sort_difficulty">Moeilijkheid</string>
   <string name="caches_sort_terrain">Terrein</string>
@@ -268,13 +266,11 @@
   <string name="caches_select_invert">Selectie omkeren</string>
   <string name="caches_nearby">Nabij</string>
   <string name="caches_manage">Beheer</string>
-  <string name="caches_drop_selected">Drop geselecteerde</string>
-  <string name="caches_drop_selected_ask">Wil je de geselecteerde caches verwijderen van het apparaat?</string>
-  <string name="caches_drop_all">Alles verwijderen</string>
-  <string name="caches_drop_all_ask">Wil je alle caches van het apparaat verwijderen?</string>
-  <string name="caches_drop_stored">Verwijder opgeslagen</string>
-  <string name="caches_drop_progress">Caches worden verwijderd</string>
-  <string name="caches_drop_all_and_list">Alle verwijderen en lijst verwijderen</string>
+  <string name="caches_remove_all">Verwijder alles</string>
+  <string name="caches_remove_all_confirm">Wil je alle %s caches uit de huidige lijst verwijderen?</string>
+  <string name="caches_remove_selected">Selectie verwijderen</string>
+  <string name="caches_remove_selected_confirm">Wil je de geselecteerde %s caches verwijderen van uw apparaat?</string>
+  <string name="caches_remove_progress">Caches worden verwijderd</string>
   <string name="caches_delete_events">Verwijder afgelopen evenementen</string>
   <string name="caches_refresh_selected">Ververs geselecteerden</string>
   <string name="caches_refresh_all">Ververs alle</string>
@@ -301,11 +297,10 @@
   <string name="caches_removing_from_history">Verwijderen uit geschiedenis…</string>
   <string name="caches_clear_offlinelogs">Verwijderen offline logs</string>
   <string name="caches_clear_offlinelogs_progress">Offline logs worden verwijderd</string>
-  <string name="list_menu">Lijst</string>
   <string name="list_menu_create">Maak nieuwe lijst</string>
   <string name="list_menu_drop">Verwijder huidige lijst</string>
-  <string name="list_menu_change">Pas lijst aan</string>
   <string name="list_menu_rename">Hernoem huidige lijst</string>
+  <string name="list_menu_import">Importeer</string>
   <string name="list_title">Selecteer een lijst</string>
   <string name="list_inbox">Opgeslagen</string>
   <string name="list_all_lists">Alle caches</string>
@@ -373,6 +368,9 @@
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Activeren</string>
   <string name="init_oc_ro_description">c:geo Autoriseren met opencaching.ro naar caches te zoeken en je gevonden caches te benaderen/filteren.</string>
+  <string name="init_oc_uk">Opencaching.org.uk</string>
+  <string name="settings_activate_oc_uk">Activeren</string>
+  <string name="init_oc_uk_description">c:geo authoriseren met opencaching.org.uk om naar caches te zoeken en het filteren van gevonden caches.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activeren</string>
@@ -402,8 +400,8 @@
   <string name="init_signature_template_log">Log tekst</string>
   <string name="init_ratingwanted">GCvote.com waardering</string>
   <string name="init_summary_ratingwanted">Laad cachewaardering van GCvote.com</string>
-  <string name="init_friendlogswanted">Lange omschrijving</string>
-  <string name="init_summary_friendlogswanted">Laad extra logbook pagina voor logs van vrienden</string>
+  <string name="init_friends_and_own_logs_wanted">Toon eigen/van vrienden</string>
+  <string name="init_summary_friends_and_own_logs_wanted">Toon additionele logboek pagina voor eigen en vrienden logs</string>
   <string name="init_openlastdetailspage">Laad details met laatst gebruikte pagina</string>
   <string name="init_summary_openlastdetailspage">Laad details met laatst gebruikte pagina</string>
   <string name="init_autoload">Lange omschrijving</string>
@@ -492,6 +490,9 @@
   <string name="init_maintenance">Onderhoud</string>
   <string name="init_maintenance_directories_note">c:geo slaat diverse bestanden die bij een cache horen op in een afzonderlijke map. In sommige gevallen (zoals bij importeren/exporteren van de database) kan deze map verouderde bestanden bevatten. Deze kunnen hier verwijderd worden.</string>
   <string name="init_maintenance_directories">Verweesde bestanden verwijderen</string>
+  <string name="init_create_memory_dump">Geheugendump maken</string>
+  <string name="init_memory_dump">Geheugendump</string>
+  <string name="init_memory_dumped">Geheugen gedumpt naar %s</string>
   <string name="settings_open_website">Open website</string>
   <string name="settings_settings">Instellingen</string>
   <string name="settings_information">Informatie</string>
@@ -541,7 +542,12 @@
   <string name="auth_ocnl">opencaching.nl</string>
   <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
+  <string name="auth_ocuk">opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:geo is nu gekoppeld met %s.</string>
+  <plurals name="cache_counts">
+    <item quantity="one">Een cache</item>
+    <item quantity="other">%1$d Caches</item>
+  </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Verversen</string>
   <string name="cache_offline_drop">Laten vervallen</string>
@@ -557,7 +563,6 @@
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Attributen</string>
   <string name="cache_inventory">Inventaris</string>
-  <string name="cache_log_offline">Offline log</string>
   <string name="cache_log_images_title">Logafbeelding</string>
   <string name="cache_log_image_default_title">Foto</string>
   <string name="cache_personal_note">Persoonlijke notitie</string>
@@ -568,8 +573,6 @@
   <string name="cache_personal_note_uploading">Uploading persoonlijke notitie</string>
   <string name="cache_personal_note_upload_done">Persoonlijke notitie geupload</string>
   <string name="cache_personal_note_upload_cancelled">Persoonlijk notitie uploaden geannulleerd</string>
-  <string name="cache_personal_note_unstored">Cache niet opgeslagen</string>
-  <string name="cache_personal_note_store">De cache zal eerst opgeslagen worden om persoonlijke notities toe te kunnen voegen.</string>
   <string name="cache_description">Omschrijving</string>
   <string name="cache_description_long">Lange omschrijving</string>
   <string name="cache_description_table_note">Omschrijving bevat een tabel-layout welke misschien op %s bekeken moet worden.</string>
@@ -586,10 +589,14 @@
   <string name="cache_list_unknown">Niet in een lijst</string>
   <string name="cache_images">Afbeeldingen</string>
   <string name="cache_waypoints">Waypoints</string>
+  <plurals name="waypoints">
+    <item quantity="one">1 Waypoint</item>
+    <item quantity="other">%d Waypoints</item>
+  </plurals>
   <string name="cache_waypoints_add">Waypoint toevoegen</string>
   <string name="cache_hint">Hint</string>
   <string name="cache_logs">Logboek</string>
-  <string name="cache_logsfriends">Logboek (vrienden)</string>
+  <string name="cache_logs_friends_and_own">Vrienden/Eigen Logs</string>
   <string name="cache_dialog_loading_details">Cache details laden…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Pagina laden</string>
   <string name="cache_dialog_loading_details_status_details">Verwerken details</string>
@@ -635,15 +642,14 @@
   <string name="cache_menu_refresh">Verversen</string>
   <string name="cache_menu_share">Deel cache</string>
   <string name="cache_menu_move_list">Verplaats naar andere lijst</string>
-  <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
-  <string name="cache_menu_cachebeacon">Cache baken</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Log opgeslagen</string>
   <string name="cache_status_found">Gevonden</string>
+  <string name="cache_not_status_found">Niet gevonden</string>
   <string name="cache_status_archived">Gearchiveerd</string>
   <string name="cache_status_disabled">Uitgeschakeld</string>
   <string name="cache_status_premium">Alleen voor premium leden</string>
@@ -755,10 +761,7 @@
   <string name="map_view_map">Kaart weergave</string>
   <string name="map_modes">Kaartinstellingen</string>
   <string name="map_trail_show">Toon spoor</string>
-  <string name="map_trail_hide">Verberg spoor</string>
   <string name="map_circles_show">Laat cirkels zien</string>
-  <string name="map_circles_hide">Verberg cirkels</string>
-  <string name="map_mycaches_show">Tonen eigen/gevonden caches</string>
   <string name="map_mycaches_hide">Verbergen eigen/gevonden caches</string>
   <string name="map_theme_builtin">Standaard</string>
   <string name="map_theme_select">Selecteer mapthema</string>
@@ -838,10 +841,10 @@
   <string name="user_menu_open_contact">Open contactkaart</string>
   <string name="navigation">Navigatie</string>
   <string name="compass_title">Kompas</string>
+  <string name="compass_sensors">Actieve sensoren</string>
   <string name="use_gps">Gebruik alleen GPS</string>
   <string name="use_compass">Gebruik GPS en kompas</string>
   <string name="destination_select">Selecteer bestemming</string>
-  <string name="destination_set">Zet bestemming</string>
   <string name="navigation_direct_navigation">Directe navigatie</string>
   <string name="navigation_target">Doel</string>
   <string name="err_nav_no_coordinates">Kan navigatie niet starten zonder coördinaten</string>
@@ -1112,7 +1115,6 @@
   <string name="website">Website: <a href="">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="nutshellmanual">Handleiding: <a href="">c:geo in een notendop</a></string>
   <string name="market">Android: <a href="">c:geo op Google Play</a></string>
   <string name="about_twitter">Moet <b>c:geo</b> elke cache vondst publiceren naar Twitter?</string>
   <string name="faq">FAQ: <a href=""> faq.cgeo.org</a></string>
@@ -1128,50 +1130,28 @@
   <string name="tts_stop">Stop met praten</string>
   <string name="err_tts_lang_not_supported">De huidige taal wordt niet ondersteund door tekst naar spraak.</string>
   <string name="tts_one_kilometer">één kilometer</string>
-  <string name="tts_one_meter">één meter</string>
-  <string name="tts_one_mile">één mijl</string>
-  <string name="tts_one_foot">één voet</string>
-  <string name="tts_one_oclock">één uur</string>
-  <string name="tts_oclock">%s uur</string>
-  <string name="clipboard_copy_ok">Gekopieerd naar klembord</string>
-  <string name="percent_favorite_points">%\ favorieten</string>
-  <string name="cgeo_shortcut">c:geo snelkoppeling</string>
-  <string name="create_shortcut">Maak snelkoppeling</string>
-  <string-array name="log_image_scales">
-    <item>Niet schalen</item>
-    <item>512 px</item>
-    <item>640 px</item>
-    <item>800 px</item>
-    <item>1024 px</item>
-  </string-array>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">minuut</item>
-    <item quantity="other">minuten</item>
-  </plurals>
-  <plurals name="cache_counts">
-    <item quantity="one">Een cache</item>
-    <item quantity="other">%1$d Caches</item>
-  </plurals>
-  <plurals name="waypoints">
-    <item quantity="one">1 Waypoint</item>
-    <item quantity="other">%d Waypoints</item>
-  </plurals>
   <plurals name="tts_kilometers">
     <item quantity="one">%s kilometer</item>
     <item quantity="other">%s kilometer</item>
   </plurals>
+  <string name="tts_one_meter">één meter</string>
   <plurals name="tts_meters">
     <item quantity="one">%s meter</item>
     <item quantity="other">%s meter</item>
   </plurals>
+  <string name="tts_one_mile">één mijl</string>
   <plurals name="tts_miles">
     <item quantity="one">%s mijl</item>
     <item quantity="other">%s mijl</item>
   </plurals>
+  <string name="tts_one_foot">één voet</string>
   <plurals name="tts_feet">
     <item quantity="one">%s voet</item>
     <item quantity="other">%s voeten</item>
   </plurals>
+  <string name="tts_one_oclock">één uur</string>
+  <string name="tts_oclock">%s uur</string>
+  <string name="clipboard_copy_ok">Gekopieerd naar klembord</string>
   <plurals name="days_ago">
     <item quantity="one">Gisteren</item>
     <item quantity="other">%d dagen geleden</item>
@@ -1180,4 +1160,8 @@
     <item quantity="one">%s favoriet</item>
     <item quantity="other">%s favorieten</item>
   </plurals>
+  <string name="percent_favorite_points">%\ favorieten</string>
+  <string name="cgeo_shortcut">c:geo snelkoppeling</string>
+  <string name="create_shortcut">Maak snelkoppeling</string>
+  <string name="send">Verzenden</string>
 </resources>

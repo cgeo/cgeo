@@ -1,49 +1,59 @@
 package cgeo.geocaching.ui.dialog;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.R;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.DatePicker;
 
 import java.util.Calendar;
 
-public class DateDialog extends NoTitleDialog {
+public class DateDialog extends DialogFragment {
 
     public interface DateDialogParent {
         abstract public void setDate(final Calendar date);
     }
 
-    private final DateDialogParent parent;
-    private final Calendar date;
+    private Calendar date;
 
-    public DateDialog(Activity contextIn, DateDialogParent parentIn, Calendar dateIn) {
-        super(contextIn);
-
-        // init
-        this.date = dateIn;
-        this.parent = parentIn;
+    public static DateDialog getInstance(final Calendar date) {
+        final DateDialog dd = new DateDialog();
+        final Bundle args = new Bundle();
+        args.putSerializable("date", date);
+        dd.setArguments(args);
+        return dd;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+        final Bundle args = getArguments();
+        date = (Calendar) args.getSerializable("date");
+    }
 
-        setContentView(R.layout.date);
+    @Override
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+        final View v = inflater.inflate(R.layout.date, container, false);
 
-        final DatePicker picker = (DatePicker) findViewById(R.id.picker);
+        final DatePicker picker = ButterKnife.findById(v, R.id.picker);
         picker.init(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DATE), new DatePickerListener());
+        return v;
     }
 
     private class DatePickerListener implements DatePicker.OnDateChangedListener {
 
         @Override
-        public void onDateChanged(DatePicker picker, int year, int month, int day) {
-            if (parent != null) {
-                date.set(year, month, day);
+        public void onDateChanged(final DatePicker picker, final int year, final int month, final int day) {
+            date.set(year, month, day);
 
-                parent.setDate(date);
-            }
+            ((DateDialogParent) getActivity()).setDate(date);
+
         }
     }
 }

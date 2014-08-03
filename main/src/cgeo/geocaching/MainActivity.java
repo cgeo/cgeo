@@ -3,9 +3,11 @@ package cgeo.geocaching;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ILogin;
+import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -17,26 +19,30 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
-import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.DatabaseBackupUtils;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+
 import org.apache.commons.lang3.StringUtils;
+
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
 import rx.android.observables.AndroidObservable;
 import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 import rx.subscriptions.Subscriptions;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -45,6 +51,8 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -61,7 +69,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
-public class MainActivity extends AbstractActivity {
+public class MainActivity extends AbstractActionBarActivity {
     @InjectView(R.id.nav_satellites) protected TextView navSatellites;
     @InjectView(R.id.filter_button_title)protected TextView filterTitle;
     @InjectView(R.id.map) protected ImageView findOnMap;
@@ -86,24 +94,24 @@ public class MainActivity extends AbstractActivity {
 
     private final UpdateLocation locationUpdater = new UpdateLocation();
 
-    private Handler updateUserInfoHandler = new Handler() {
+    private final Handler updateUserInfoHandler = new Handler() {
 
         @Override
         public void handleMessage(final Message msg) {
 
             // Get active connectors with login status
-            ILogin[] loginConns = ConnectorFactory.getActiveLiveConnectors();
+            final ILogin[] loginConns = ConnectorFactory.getActiveLiveConnectors();
 
             // Update UI
             infoArea.removeAllViews();
-            LayoutInflater inflater = getLayoutInflater();
+            final LayoutInflater inflater = getLayoutInflater();
 
-            for (ILogin conn : loginConns) {
+            for (final ILogin conn : loginConns) {
 
-                TextView connectorInfo = (TextView) inflater.inflate(R.layout.main_activity_connectorstatus, null);
+                final TextView connectorInfo = (TextView) inflater.inflate(R.layout.main_activity_connectorstatus, null);
                 infoArea.addView(connectorInfo);
 
-                StringBuilder userInfo = new StringBuilder(conn.getName()).append(Formatter.SEPARATOR);
+                final StringBuilder userInfo = new StringBuilder(conn.getName()).append(Formatter.SEPARATOR);
                 if (conn.isLoggedIn()) {
                     userInfo.append(conn.getUserName());
                     if (conn.getCachesFound() >= 0) {
@@ -119,7 +127,7 @@ public class MainActivity extends AbstractActivity {
     };
 
     private static String formatAddress(final Address address) {
-        final ArrayList<String> addressParts = new ArrayList<String>();
+        final ArrayList<String> addressParts = new ArrayList<>();
 
         final String countryName = address.getCountryName();
         if (countryName != null) {
@@ -167,9 +175,9 @@ public class MainActivity extends AbstractActivity {
 
     }
 
-    private SatellitesHandler satellitesHandler = new SatellitesHandler();
+    private final SatellitesHandler satellitesHandler = new SatellitesHandler();
 
-    private Handler firstLoginHandler = new Handler() {
+    private final Handler firstLoginHandler = new Handler() {
 
         @Override
         public void handleMessage(final Message msg) {
@@ -179,7 +187,7 @@ public class MainActivity extends AbstractActivity {
                 if (reason != null && reason != StatusCode.NO_ERROR) { //LoginFailed
                     showToast(res.getString(reason == StatusCode.MAINTENANCE ? reason.getErrorString() : R.string.err_login_failed_toast));
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.w("MainActivity.firstLoginHander", e);
             }
         }
@@ -189,6 +197,10 @@ public class MainActivity extends AbstractActivity {
     public void onCreate(final Bundle savedInstanceState) {
         // don't call the super implementation with the layout argument, as that would set the wrong theme
         super.onCreate(savedInstanceState);
+
+        // Disable the up navigation for this activity
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
         setContentView(R.layout.main_activity);
         ButterKnife.inject(this);
 
@@ -204,6 +216,8 @@ public class MainActivity extends AbstractActivity {
         Log.i("Starting " + getPackageName() + ' ' + version + " a.k.a " + Version.getVersionName(this));
 
         init();
+
+        checkShowChangelog();
     }
 
     @Override
@@ -231,6 +245,10 @@ public class MainActivity extends AbstractActivity {
                 new Thread() {
                     @Override
                     public void run() {
+                        if (mustLogin && conn == GCConnector.getInstance()) {
+                            // Properly log out from geocaching.com
+                            GCLogin.getInstance().logout();
+                        }
                         conn.login(firstLoginHandler, MainActivity.this);
                         updateUserInfoHandler.sendEmptyMessage(-1);
                     }
@@ -262,6 +280,11 @@ public class MainActivity extends AbstractActivity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.main_activity_options, menu);
+        final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        final MenuItem searchItem = menu.findItem(R.id.menu_gosearch);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
         return true;
     }
 
@@ -276,6 +299,10 @@ public class MainActivity extends AbstractActivity {
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int id = item.getItemId();
         switch (id) {
+            case android.R.id.home:
+                // this activity must handle the home navigation different than all others
+                showAbout(null);
+                return true;
             case R.id.menu_about:
                 showAbout(null);
                 return true;
@@ -303,13 +330,12 @@ public class MainActivity extends AbstractActivity {
                     }
                 });
                 return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
+        return super.onOptionsItemSelected(item);
     }
 
     private void startScannerApplication() {
-        IntentIntegrator integrator = new IntentIntegrator(this);
+        final IntentIntegrator integrator = new IntentIntegrator(this);
         // integrator dialog is English only, therefore localize it
         integrator.setButtonYesByID(android.R.string.yes);
         integrator.setButtonNoByID(android.R.string.no);
@@ -320,9 +346,9 @@ public class MainActivity extends AbstractActivity {
 
     @Override
     public void onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
-        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+        final IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanResult != null) {
-            String scan = scanResult.getContents();
+            final String scan = scanResult.getContents();
             if (StringUtils.isBlank(scan)) {
                 return;
             }
@@ -425,7 +451,7 @@ public class MainActivity extends AbstractActivity {
     }
 
     protected void selectGlobalTypeFilter() {
-        final List<CacheType> cacheTypes = new ArrayList<CacheType>();
+        final List<CacheType> cacheTypes = new ArrayList<>();
 
         //first add the most used types
         cacheTypes.add(CacheType.ALL);
@@ -434,7 +460,7 @@ public class MainActivity extends AbstractActivity {
         cacheTypes.add(CacheType.MYSTERY);
 
         // then add all other cache types sorted alphabetically
-        List<CacheType> sorted = new ArrayList<CacheType>();
+        final List<CacheType> sorted = new ArrayList<>();
         sorted.addAll(Arrays.asList(CacheType.values()));
         sorted.removeAll(cacheTypes);
 
@@ -453,18 +479,18 @@ public class MainActivity extends AbstractActivity {
             checkedItem = 0;
         }
 
-        String[] items = new String[cacheTypes.size()];
+        final String[] items = new String[cacheTypes.size()];
         for (int i = 0; i < cacheTypes.size(); i++) {
             items[i] = cacheTypes.get(i).getL10n();
         }
 
-        Builder builder = new AlertDialog.Builder(this);
+        final Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.menu_filter);
         builder.setSingleChoiceItems(items, checkedItem, new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(final DialogInterface dialog, final int position) {
-                CacheType cacheType = cacheTypes.get(position);
+                final CacheType cacheType = cacheTypes.get(position);
                 Settings.setCacheType(cacheType);
                 setFilterTitle();
                 dialog.dismiss();
@@ -524,7 +550,7 @@ public class MainActivity extends AbstractActivity {
             navType.setText(res.getString(geo.getLocationProvider().resourceId));
 
             if (geo.getAccuracy() >= 0) {
-                int speed = Math.round(geo.getSpeed()) * 60 * 60 / 1000;
+                final int speed = Math.round(geo.getSpeed()) * 60 * 60 / 1000;
                 navAccuracy.setText("±" + Units.getDistanceFromMeters(geo.getAccuracy()) + Formatter.SEPARATOR + Units.getSpeed(speed));
             } else {
                 navAccuracy.setText(null);
@@ -553,12 +579,13 @@ public class MainActivity extends AbstractActivity {
                         }
                     });
                     AndroidObservable.bindActivity(MainActivity.this, address.onErrorResumeNext(Observable.from(geo.getCoords().toString())))
+                            .subscribeOn(RxUtils.networkScheduler)
                             .subscribe(new Action1<String>() {
                                 @Override
                                 public void call(final String address) {
                                     navLocation.setText(address);
                                 }
-                            }, Schedulers.io());
+                            });
                 }
             } else {
                 navLocation.setText(geo.getCoords().toString());
@@ -633,7 +660,7 @@ public class MainActivity extends AbstractActivity {
     }
 
     private class CountBubbleUpdateThread extends Thread {
-        private Handler countBubbleHandler = new Handler() {
+        private final Handler countBubbleHandler = new Handler() {
 
             @Override
             public void handleMessage(final Message msg) {
@@ -645,7 +672,7 @@ public class MainActivity extends AbstractActivity {
                         countBubble.bringToFront();
                         countBubble.setVisibility(View.VISIBLE);
                     }
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     Log.w("MainActivity.countBubbleHander", e);
                 }
             }
@@ -662,7 +689,7 @@ public class MainActivity extends AbstractActivity {
                 try {
                     sleep(500);
                     checks++;
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     Log.e("MainActivity.CountBubbleUpdateThread.run", e);
                 }
 
@@ -705,6 +732,16 @@ public class MainActivity extends AbstractActivity {
         }
     }
 
+    private void checkShowChangelog() {
+        final long lastChecksum = Settings.getLastChangelogChecksum();
+        final long checksum = TextUtils.checksum(getString(R.string.changelog_master) + getString(R.string.changelog_release));
+        Settings.setLastChangelogChecksum(checksum);
+        // don't show change log after new install...
+        if (lastChecksum > 0 && lastChecksum != checksum) {
+            AboutActivity.showChangeLog(this);
+        }
+    }
+
     /**
      * @param view
      *            unused here but needed since this method is referenced from XML layout
@@ -712,13 +749,4 @@ public class MainActivity extends AbstractActivity {
     public void showAbout(final View view) {
         startActivity(new Intent(this, AboutActivity.class));
     }
-
-    /**
-     * @param view
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void goSearch(final View view) {
-        onSearchRequested();
-    }
-
 }

@@ -106,7 +106,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.authorization_activity, true);
+        super.onCreate(savedInstanceState, R.layout.authorization_activity);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {

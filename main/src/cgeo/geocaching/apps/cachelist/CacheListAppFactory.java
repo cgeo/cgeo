@@ -51,7 +51,7 @@ public final class CacheListAppFactory extends AbstractAppFactory {
     }
 
     private static List<CacheListApp> getActiveApps() {
-        final List<CacheListApp> activeApps = new ArrayList<CacheListApp>(LazyHolder.apps.length);
+        final List<CacheListApp> activeApps = new ArrayList<>(LazyHolder.apps.length);
         for (final CacheListApp app : LazyHolder.apps) {
             if (app.isInstalled()) {
                 activeApps.add(app);

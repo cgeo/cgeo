@@ -32,6 +32,19 @@ abstract class StateFilter extends AbstractFilter {
 
     }
 
+    static class StateNotFoundFilter extends StateFilter {
+
+        public StateNotFoundFilter() {
+            super(res.getString(R.string.cache_not_status_found));
+        }
+
+        @Override
+        public boolean accepts(final Geocache cache) {
+            return !cache.isFound();
+        }
+
+    }
+
     static class StateArchivedFilter extends StateFilter {
         public StateArchivedFilter() {
             super(res.getString(R.string.cache_status_archived));
@@ -113,8 +126,9 @@ abstract class StateFilter extends AbstractFilter {
 
         @Override
         public List<StateFilter> getFilters() {
-            final List<StateFilter> filters = new ArrayList<StateFilter>(6);
+            final List<StateFilter> filters = new ArrayList<>(6);
             filters.add(new StateFoundFilter());
+            filters.add(new StateNotFoundFilter());
             filters.add(new StateArchivedFilter());
             filters.add(new StateDisabledFilter());
             filters.add(new StatePremiumFilter());

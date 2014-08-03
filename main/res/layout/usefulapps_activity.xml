@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="?background_color"
     android:orientation="vertical" >
-
-    <include layout="@layout/actionbar" />
 
     <ListView
         android:id="@+id/apps_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:cacheColorHint="?background_color"
+        android:clipToPadding="false"
         android:divider="?background_color"
         android:fastScrollEnabled="true"
         android:footerDividersEnabled="false"
         android:headerDividersEnabled="false"
         android:listSelector="?background_color"
-        android:padding="4dip" >
+        android:padding="4dip"
+        android:scrollbarStyle="outsideOverlay"
+        tools:listitem="@layout/usefulapps_item" >
     </ListView>
 
 </LinearLayout>

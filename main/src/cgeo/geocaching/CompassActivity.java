@@ -3,7 +3,7 @@ package cgeo.geocaching;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
@@ -14,8 +14,8 @@ import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.ui.CompassView;
-import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.LoggingUI;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CompassActivity extends AbstractActivity {
+public class CompassActivity extends AbstractActionBarActivity {
 
     private static final int COORDINATES_OFFSET = 10;
 
@@ -56,7 +56,7 @@ public class CompassActivity extends AbstractActivity {
     private static final String EXTRAS_NAME = "name";
     private static final String EXTRAS_GEOCODE = "geocode";
     private static final String EXTRAS_CACHE_INFO = "cacheinfo";
-    private static final List<IWaypoint> coordinates = new ArrayList<IWaypoint>();
+    private static final List<IWaypoint> coordinates = new ArrayList<>();
 
     /**
      * Destination of the compass, or null (if the compass is used for a waypoint only).
@@ -69,7 +69,7 @@ public class CompassActivity extends AbstractActivity {
     private boolean hasMagneticFieldSensor;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.compass_activity);
 
         final SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -79,7 +79,7 @@ public class CompassActivity extends AbstractActivity {
         }
 
         // get parameters
-        Bundle extras = getIntent().getExtras();
+        final Bundle extras = getIntent().getExtras();
         if (extras != null) {
             final String geocode = extras.getString(EXTRAS_GEOCODE);
             if (StringUtils.isNotEmpty(geocode)) {
@@ -98,7 +98,7 @@ public class CompassActivity extends AbstractActivity {
                 }
             }
         } else {
-            Intent pointIntent = new Intent(this, NavigateAnyPointActivity.class);
+            final Intent pointIntent = new Intent(this, NavigateAnyPointActivity.class);
             startActivity(pointIntent);
 
             finish();
@@ -129,7 +129,7 @@ public class CompassActivity extends AbstractActivity {
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
         setContentView(R.layout.compass_activity);
@@ -150,7 +150,7 @@ public class CompassActivity extends AbstractActivity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.compass_activity_options, menu);
-        menu.findItem(R.id.menu_switch_compass_gps).setVisible(hasMagneticFieldSensor);
+        menu.findItem(R.id.menu_compass_sensor).setVisible(hasMagneticFieldSensor);
         final SubMenu subMenu = menu.findItem(R.id.menu_select_destination).getSubMenu();
         if (coordinates.size() > 1) {
             for (int i = 0; i < coordinates.size(); i++) {
@@ -167,43 +167,47 @@ public class CompassActivity extends AbstractActivity {
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
+    public boolean onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_switch_compass_gps).setTitle(res.getString(Settings.isUseCompass() ? R.string.use_gps : R.string.use_compass));
+        if (Settings.isUseCompass()) {
+            menu.findItem(R.id.menu_compass_sensor_magnetic).setChecked(true);
+        }
+        else {
+            menu.findItem(R.id.menu_compass_sensor_gps).setChecked(true);
+        }
         menu.findItem(R.id.menu_tts_start).setVisible(!SpeechService.isRunning());
         menu.findItem(R.id.menu_tts_stop).setVisible(SpeechService.isRunning());
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        final int id = item.getItemId();
         switch (id) {
             case R.id.menu_map:
                 CGeoMap.startActivityCoords(this, dstCoords, null, null);
                 return true;
-            case R.id.menu_switch_compass_gps:
-                boolean oldSetting = Settings.isUseCompass();
-                Settings.setUseCompass(!oldSetting);
+            case R.id.menu_compass_sensor_gps:
+                Settings.setUseCompass(false);
                 invalidateOptionsMenuCompatible();
                 return true;
-            case R.id.menu_edit_destination:
-                Intent pointIntent = new Intent(this, NavigateAnyPointActivity.class);
-                startActivity(pointIntent);
-
-                finish();
+            case R.id.menu_compass_sensor_magnetic:
+                Settings.setUseCompass(true);
+                invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_tts_start:
                 SpeechService.startService(this, dstCoords);
+                invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_tts_stop:
                 SpeechService.stopService(this);
+                invalidateOptionsMenuCompatible();
                 return true;
             default:
                 if (LoggingUI.onMenuItemSelected(item, this, cache)) {
                     return true;
                 }
-                int coordinatesIndex = id - COORDINATES_OFFSET;
+                final int coordinatesIndex = id - COORDINATES_OFFSET;
                 if (coordinatesIndex >= 0 && coordinatesIndex < coordinates.size()) {
                     final IWaypoint coordinate = coordinates.get(coordinatesIndex);
                     title = coordinate.getName();
@@ -217,7 +221,7 @@ public class CompassActivity extends AbstractActivity {
                     return true;
                 }
         }
-        return false;
+        return super.onOptionsItemSelected(item);
     }
 
     private void setTitle() {
@@ -255,7 +259,7 @@ public class CompassActivity extends AbstractActivity {
         headingView.setText(Math.round(cacheHeading) + "°");
     }
 
-    private GeoDirHandler geoDirHandler = new GeoDirHandler() {
+    private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
         @Override
         public void updateGeoDir(final IGeoData geo, final float dir) {
             try {
@@ -283,7 +287,7 @@ public class CompassActivity extends AbstractActivity {
                 }
 
                 updateNorthHeading(DirectionProvider.getDirectionNow(dir));
-            } catch (RuntimeException e) {
+            } catch (final RuntimeException e) {
                 Log.w("Failed to LocationUpdater location.");
             }
         }
@@ -299,7 +303,7 @@ public class CompassActivity extends AbstractActivity {
             final String info) {
         coordinates.clear();
         if (coordinatesWithType != null) {
-            for (IWaypoint coordinate : coordinatesWithType) {
+            for (final IWaypoint coordinate : coordinatesWithType) {
                 if (coordinate != null) {
                     coordinates.add(coordinate);
                 }

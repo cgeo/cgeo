@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
@@ -10,11 +12,11 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.twitter.Twitter;
-import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.dialog.DateDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.DateUtils;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
@@ -25,7 +27,6 @@ import org.apache.commons.lang3.StringUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -35,12 +36,13 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
+import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -52,7 +54,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     static final String EXTRAS_GEOCODE = "geocode";
     static final String EXTRAS_ID = "id";
 
-    private static final int SUBMENU_VOTE = 3;
     private static final String SAVED_STATE_RATING = "cgeo.geocaching.saved_state_rating";
     private static final String SAVED_STATE_TYPE = "cgeo.geocaching.saved_state_type";
     private static final String SAVED_STATE_DATE = "cgeo.geocaching.saved_state_date";
@@ -66,13 +67,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private Geocache cache = null;
     private String geocode = null;
     private String text = null;
-    private List<LogType> possibleLogTypes = new ArrayList<LogType>();
+    private List<LogType> possibleLogTypes = new ArrayList<>();
     private List<TrackableLog> trackables = null;
-    private Button postButton = null;
     private CheckBox tweetCheck = null;
     private LinearLayout tweetBox = null;
     private LinearLayout logPasswordBox = null;
-    private boolean tbChanged = false;
     private SparseArray<TrackableLog> actionButtons;
 
     private ILoggingManager loggingManager;
@@ -84,6 +83,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private String imageCaption;
     private String imageDescription;
     private Uri imageUri;
+    private boolean sendButtonEnabled;
 
 
     public void onLoadFinished() {
@@ -123,9 +123,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private void initializeTrackablesAction() {
         if (Settings.isTrackableAutoVisit()) {
-            for (TrackableLog trackable : trackables) {
+            for (final TrackableLog trackable : trackables) {
                 trackable.action = LogTypeTrackable.VISITED;
-                tbChanged = true;
             }
         }
     }
@@ -137,24 +136,26 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         if (inflater == null) {
             inflater = getLayoutInflater();
         }
-        actionButtons = new SparseArray<TrackableLog>();
+        actionButtons = new SparseArray<>();
 
         final LinearLayout inventoryView = (LinearLayout) findViewById(R.id.inventory);
         inventoryView.removeAllViews();
 
-        for (TrackableLog tb : trackables) {
-            LinearLayout inventoryItem = (LinearLayout) inflater.inflate(R.layout.logcache_trackable_item, null);
+        for (final TrackableLog tb : trackables) {
+            final LinearLayout inventoryItem = (LinearLayout) inflater.inflate(R.layout.logcache_trackable_item, inventoryView, false);
 
-            ((TextView) inventoryItem.findViewById(R.id.trackcode)).setText(tb.trackCode);
-            ((TextView) inventoryItem.findViewById(R.id.name)).setText(tb.name);
-            final TextView actionButton = (TextView) inventoryItem.findViewById(R.id.action);
+            final TextView codeView = ButterKnife.findById(inventoryItem, R.id.trackcode);
+            codeView.setText(tb.trackCode);
+            final TextView nameView = ButterKnife.findById(inventoryItem, R.id.name);
+            nameView.setText(tb.name);
+            final TextView actionButton = ButterKnife.findById(inventoryItem, R.id.action);
             actionButton.setId(tb.id);
             actionButtons.put(actionButton.getId(), tb);
             actionButton.setText(tb.action.getLabel() + " ▼");
             actionButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
-                public void onClick(View view) {
+                public void onClick(final View view) {
                     selectTrackableAction(view);
                 }
             });
@@ -164,7 +165,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             inventoryItem.findViewById(R.id.info).setOnClickListener(new View.OnClickListener() {
 
                 @Override
-                public void onClick(View view) {
+                public void onClick(final View view) {
                     final Intent trackablesIntent = new Intent(LogCacheActivity.this, TrackableActivity.class);
                     trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, tbCode);
                     startActivity(trackablesIntent);
@@ -180,11 +181,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         if (inventoryView.getChildCount() > 1) {
             final LinearLayout inventoryChangeAllView = (LinearLayout) findViewById(R.id.inventory_changeall);
 
-            final Button changeButton = (Button) inventoryChangeAllView.findViewById(R.id.changebutton);
+            final Button changeButton = ButterKnife.findById(inventoryChangeAllView, R.id.changebutton);
             changeButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
-                public void onClick(View view) {
+                public void onClick(final View view) {
                     selectAllTrackablesAction();
                 }
             });
@@ -193,33 +194,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
     }
 
-    private void enablePostButton(boolean enabled) {
-        postButton.setEnabled(enabled);
-        if (enabled) {
-            postButton.setOnClickListener(new PostListener());
-        }
-        else {
-            postButton.setOnTouchListener(null);
-            postButton.setOnClickListener(null);
-        }
-        updatePostButtonText();
-    }
-
-    private void updatePostButtonText() {
-        postButton.setText(getPostButtonText());
-    }
-
-    private String getPostButtonText() {
-        if (!postButton.isEnabled()) {
-            return res.getString(R.string.log_post_not_possible);
-        }
-        if (!GCVote.isVotingPossible(cache)) {
-            return res.getString(R.string.log_post);
-        }
-        if (GCVote.isValidRating(rating)) {
-            return res.getString(R.string.log_post_rate) + " " + GCVote.getRatingText(rating) + "*";
-        }
-        return res.getString(R.string.log_post_no_rate);
+    private void enablePostButton(final boolean enabled) {
+        sendButtonEnabled = enabled;
+        invalidateOptionsMenuCompatible();
     }
 
     @Override
@@ -239,6 +216,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
 
         cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        invalidateOptionsMenuCompatible();
         possibleLogTypes = cache.getPossibleLogTypes();
 
         if (StringUtils.isNotBlank(cache.getName())) {
@@ -248,10 +226,12 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
 
         // Get ids for later use
-        postButton = (Button) findViewById(R.id.post);
         tweetBox = (LinearLayout) findViewById(R.id.tweet_box);
         tweetCheck = (CheckBox) findViewById(R.id.tweet);
         logPasswordBox = (LinearLayout) findViewById(R.id.log_password_box);
+
+        final RatingBar ratingBar = (RatingBar) findViewById(R.id.gcvoteRating);
+        initializeRatingBar(ratingBar);
 
         // initialize with default values
         setDefaultValues();
@@ -277,8 +257,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(cache, null)), false);
             }
         }
-        updatePostButtonText();
-        updateImageButton();
         enablePostButton(false);
 
         final Button typeButton = (Button) findViewById(R.id.type);
@@ -286,7 +264,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         typeButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 selectLogType();
             }
         });
@@ -305,36 +283,30 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         updateTweetBox(typeSelected);
         updateLogPasswordBox(typeSelected);
 
-        final Button imageButton = (Button) findViewById(R.id.image_btn);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                selectImage();
-            }
-        });
-
-        final Button saveButton = (Button) findViewById(R.id.save);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                saveLog(true);
-            }
-        });
-
-        final Button clearButton = (Button) findViewById(R.id.clear);
-        clearButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                clearLog();
-            }
-        });
-
         loggingManager = cache.getLoggingManager(this);
 
         loggingManager.init();
+    }
+
+    private void initializeRatingBar(final RatingBar ratingBar) {
+        final TextView label = (TextView) findViewById(R.id.gcvoteLabel);
+        if (GCVote.isVotingPossible(cache)) {
+            ratingBar.setVisibility(View.VISIBLE);
+            label.setVisibility(View.VISIBLE);
+        }
+        ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+
+            @Override
+            public void onRatingChanged(final RatingBar ratingBar, final float stars, final boolean fromUser) {
+                // 0.5 is not a valid rating, therefore we must limit
+                rating = GCVote.isValidRating(stars) ? stars : 0;
+                if (rating < stars) {
+                    ratingBar.setRating(rating);
+                }
+                label.setText(GCVote.getDescription(rating));
+            }
+        });
+        ratingBar.setRating(cache.getMyVote());
     }
 
     private void setDefaultValues() {
@@ -364,8 +336,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         final EditText logPasswordView = (EditText) findViewById(R.id.log_password);
         logPasswordView.setText(StringUtils.EMPTY);
 
-        updateImageButton();
-
         showToast(res.getString(R.string.info_log_cleared));
     }
 
@@ -382,53 +352,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
-        super.onCreateOptionsMenu(menu);
-
-        final SubMenu menuStars = menu.addSubMenu(0, SUBMENU_VOTE, 0, res.getString(R.string.log_rating)).setIcon(R.drawable.ic_menu_sort_by_size);
-        menuStars.add(0, 10, 0, res.getString(R.string.log_no_rating));
-        menuStars.add(0, 19, 0, res.getString(R.string.log_stars_5) + " (" + res.getString(R.string.log_stars_5_description) + ")");
-        menuStars.add(0, 18, 0, res.getString(R.string.log_stars_45) + " (" + res.getString(R.string.log_stars_45_description) + ")");
-        menuStars.add(0, 17, 0, res.getString(R.string.log_stars_4) + " (" + res.getString(R.string.log_stars_4_description) + ")");
-        menuStars.add(0, 16, 0, res.getString(R.string.log_stars_35) + " (" + res.getString(R.string.log_stars_35_description) + ")");
-        menuStars.add(0, 15, 0, res.getString(R.string.log_stars_3) + " (" + res.getString(R.string.log_stars_3_description) + ")");
-        menuStars.add(0, 14, 0, res.getString(R.string.log_stars_25) + " (" + res.getString(R.string.log_stars_25_description) + ")");
-        menuStars.add(0, 13, 0, res.getString(R.string.log_stars_2) + " (" + res.getString(R.string.log_stars_2_description) + ")");
-        menuStars.add(0, 12, 0, res.getString(R.string.log_stars_15) + " (" + res.getString(R.string.log_stars_15_description) + ")");
-        menuStars.add(0, 11, 0, res.getString(R.string.log_stars_1) + " (" + res.getString(R.string.log_stars_1_description) + ")");
-
-        return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-
-        menu.findItem(SUBMENU_VOTE).setVisible(GCVote.isVotingPossible(cache));
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (super.onOptionsItemSelected(item)) {
-            return true;
-        }
-
-        final int id = item.getItemId();
-        if (id >= 10 && id <= 19) {
-            rating = (id - 9) / 2.0f;
-            if (!GCVote.isValidRating(rating)) {
-                rating = GCVote.NO_RATING;
-            }
-            updatePostButtonText();
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
     protected void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putDouble(SAVED_STATE_RATING, rating);
@@ -440,32 +363,24 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     @Override
-    public void setDate(Calendar dateIn) {
+    public void setDate(final Calendar dateIn) {
         date = dateIn;
 
         final Button dateButton = (Button) findViewById(R.id.date);
         dateButton.setText(Formatter.formatShortDateVerbally(date.getTime().getTime()));
     }
 
-    public void setType(LogType type) {
+    public void setType(final LogType type) {
         final Button typeButton = (Button) findViewById(R.id.type);
 
         typeSelected = type;
         typeButton.setText(typeSelected.getL10n());
 
-        if (LogType.FOUND_IT == type && !tbChanged) {
-            // TODO: change action
-        } else if (LogType.FOUND_IT != type && !tbChanged) {
-            // TODO: change action
-        }
-
         updateTweetBox(type);
         updateLogPasswordBox(type);
-
-        updatePostButtonText();
     }
 
-    private void updateTweetBox(LogType type) {
+    private void updateTweetBox(final LogType type) {
         if (type == LogType.FOUND_IT && Settings.isUseTwitter() && Settings.isTwitterLoginValid()) {
             tweetBox.setVisibility(View.VISIBLE);
         } else {
@@ -473,7 +388,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
     }
 
-    private void updateLogPasswordBox(LogType type) {
+    private void updateLogPasswordBox(final LogType type) {
         if (type == LogType.FOUND_IT && cache.isLogPasswordRequired()) {
             logPasswordBox.setVisibility(View.VISIBLE);
         } else {
@@ -484,20 +399,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private class DateListener implements View.OnClickListener {
 
         @Override
-        public void onClick(View arg0) {
-            final Dialog dateDialog = new DateDialog(LogCacheActivity.this, LogCacheActivity.this, date);
+        public void onClick(final View arg0) {
+            final DateDialog dateDialog = DateDialog.getInstance(date);
             dateDialog.setCancelable(true);
-            dateDialog.show();
-        }
-    }
-
-    private class PostListener implements View.OnClickListener {
-        @Override
-        public void onClick(View arg0) {
-            final String message = res.getString(StringUtils.isBlank(imageUri.getPath()) ?
-                    R.string.log_saving :
-                    R.string.log_saving_and_uploading);
-            new Poster(LogCacheActivity.this, message).execute(currentLogText(), currentLogPassword());
+            dateDialog.show(getSupportFragmentManager(), "date_dialog");
         }
     }
 
@@ -516,15 +421,16 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
                 if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
                     // update geocache in DB
-                    if (typeSelected == LogType.FOUND_IT || typeSelected == LogType.ATTENDED) {
+                    if (typeSelected == LogType.FOUND_IT || typeSelected == LogType.ATTENDED || typeSelected == LogType.WEBCAM_PHOTO_TAKEN) {
                         cache.setFound(true);
                         cache.setVisitedDate(new Date().getTime());
                     }
                     DataStore.saveChangedCache(cache);
 
                     // update logs in DB
-                    ArrayList<LogEntry> newLogs = new ArrayList<LogEntry>(cache.getLogs());
+                    final ArrayList<LogEntry> newLogs = new ArrayList<>(cache.getLogs());
                     final LogEntry logNow = new LogEntry(date.getTimeInMillis(), typeSelected, log);
+                    logNow.friend = true;
                     newLogs.add(0, logNow);
                     DataStore.saveLogsWithoutTransaction(cache.getGeocode(), newLogs);
 
@@ -541,7 +447,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     }
 
                     if (StringUtils.isNotBlank(imageUri.getPath())) {
-                        ImageResult imageResult = loggingManager.postLogImage(logResult.getLogId(), imageCaption, imageDescription, imageUri);
+                        final ImageResult imageResult = loggingManager.postLogImage(logResult.getLogId(), imageCaption, imageDescription, imageUri);
                         final String uploadedImageUrl = imageResult.getImageUri();
                         if (StringUtils.isNotEmpty(uploadedImageUrl)) {
                             logNow.addLogImage(new Image(uploadedImageUrl, imageCaption, imageDescription));
@@ -552,7 +458,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 }
 
                 return logResult.getPostLogResult();
-            } catch (RuntimeException e) {
+            } catch (final RuntimeException e) {
                 Log.e("VisitCacheActivity.Poster.doInBackgroundInternal", e);
             }
 
@@ -601,18 +507,17 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     private void selectAllTrackablesAction() {
-        Builder alert = new AlertDialog.Builder(this);
+        final Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(res.getString(R.string.log_tb_changeall));
-        String[] tbLogTypes = getTBLogTypes();
+        final String[] tbLogTypes = getTBLogTypes();
         alert.setItems(tbLogTypes, new OnClickListener() {
 
             @Override
-            public void onClick(DialogInterface dialog, int position) {
+            public void onClick(final DialogInterface dialog, final int position) {
                 final LogTypeTrackable logType = LogTypeTrackable.values()[position];
-                for (TrackableLog tb : trackables) {
+                for (final TrackableLog tb : trackables) {
                     tb.action = logType;
                 }
-                tbChanged = true;
                 updateTrackablesList();
                 dialog.dismiss();
             }
@@ -622,7 +527,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private static String[] getTBLogTypes() {
         final LogTypeTrackable[] logTypeValues = LogTypeTrackable.values();
-        String[] logTypes = new String[logTypeValues.length];
+        final String[] logTypes = new String[logTypeValues.length];
         for (int i = 0; i < logTypes.length; i++) {
             logTypes[i] = logTypeValues[i].getLabel();
         }
@@ -631,17 +536,17 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private void selectLogType() {
         // use a local copy of the possible types, as that one might be modified in the background by the loader
-        final ArrayList<LogType> possible = new ArrayList<LogType>(possibleLogTypes);
+        final ArrayList<LogType> possible = new ArrayList<>(possibleLogTypes);
 
-        Builder alert = new AlertDialog.Builder(this);
-        String[] choices = new String[possible.size()];
+        final Builder alert = new AlertDialog.Builder(this);
+        final String[] choices = new String[possible.size()];
         for (int i = 0; i < choices.length; i++) {
             choices[i] = possible.get(i).getL10n();
         }
         alert.setSingleChoiceItems(choices, possible.indexOf(typeSelected), new OnClickListener() {
 
             @Override
-            public void onClick(DialogInterface dialog, int position) {
+            public void onClick(final DialogInterface dialog, final int position) {
                 setType(possible.get(position));
                 dialog.dismiss();
             }
@@ -649,18 +554,17 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         alert.create().show();
     }
 
-    private void selectTrackableAction(View view) {
+    private void selectTrackableAction(final View view) {
         final int realViewId = view.getId();
-        Builder alert = new AlertDialog.Builder(this);
+        final Builder alert = new AlertDialog.Builder(this);
         final TrackableLog trackableLog = actionButtons.get(realViewId);
         alert.setTitle(trackableLog.name);
-        String[] tbLogTypes = getTBLogTypes();
+        final String[] tbLogTypes = getTBLogTypes();
         alert.setItems(tbLogTypes, new OnClickListener() {
 
             @Override
-            public void onClick(DialogInterface dialog, int position) {
+            public void onClick(final DialogInterface dialog, final int position) {
                 final LogTypeTrackable logType = LogTypeTrackable.values()[position];
-                tbChanged = true;
                 trackableLog.action = logType;
                 Log.i("Trackable " + trackableLog.trackCode + " (" + trackableLog.name + ") has new action: #" + logType);
                 updateTrackablesList();
@@ -671,7 +575,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     private void selectImage() {
-        Intent selectImageIntent = new Intent(this, ImageSelectActivity.class);
+        final Intent selectImageIntent = new Intent(this, ImageSelectActivity.class);
         selectImageIntent.putExtra(ImageSelectActivity.EXTRAS_CAPTION, imageCaption);
         selectImageIntent.putExtra(ImageSelectActivity.EXTRAS_DESCRIPTION, imageDescription);
         selectImageIntent.putExtra(ImageSelectActivity.EXTRAS_URI_AS_STRING, imageUri.toString());
@@ -680,7 +584,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         if (requestCode == SELECT_IMAGE) {
             if (resultCode == RESULT_OK) {
                 imageCaption = data.getStringExtra(ImageSelectActivity.EXTRAS_CAPTION);
@@ -690,19 +594,51 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 // Image capture failed, advise user
                 showToast(getResources().getString(R.string.err_select_logimage_failed));
             }
-            updateImageButton();
-
         }
     }
 
-    private void updateImageButton() {
-        final Button imageButton = (Button) findViewById(R.id.image_btn);
-        if (cache.supportsLogImages()) {
-            imageButton.setVisibility(View.VISIBLE);
-            imageButton.setText(StringUtils.isNotBlank(imageUri.getPath()) ?
-                res.getString(R.string.log_image_edit) : res.getString(R.string.log_image_attach));
-        } else {
-            imageButton.setVisibility(View.GONE);
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_send:
+                sendLog();
+                return true;
+            case R.id.menu_image:
+                selectImage();
+                return true;
+            case R.id.save:
+                saveLog(true);
+                finish();
+                return true;
+            case R.id.clear:
+                clearLog();
+                return true;
+            default:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void sendLog() {
+        if (!sendButtonEnabled) {
+            Dialogs.message(this, R.string.log_post_not_possible);
+        }
+        else {
+            final String message = res.getString(StringUtils.isBlank(imageUri.getPath()) ?
+                    R.string.log_saving :
+                    R.string.log_saving_and_uploading);
+            new Poster(this, message).execute(currentLogText(), currentLogPassword());
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        menu.findItem(R.id.menu_image).setVisible(cache.supportsLogImages());
+        menu.findItem(R.id.save).setVisible(true);
+        menu.findItem(R.id.clear).setVisible(true);
+        return true;
+    }
+
 }

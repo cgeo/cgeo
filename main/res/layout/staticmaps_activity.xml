@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:padding="4dip" >
 
-    <include layout="@layout/actionbar" />
-
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/maps_list"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:padding="4dip" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+    </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/maps_list"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-        </LinearLayout>
-    </ScrollView>
-
-</LinearLayout>
+</ScrollView>

@@ -4,15 +4,6 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <LinearLayout style="@style/action_bar" >
-
-        <include layout="@layout/actionbar_title" />
-
-        <include layout="@layout/actionbar_progress" />
-
-        <include layout="@layout/actionbar_button_map" />
-    </LinearLayout>
-
     <include layout="@layout/filter_bar" />
 
     <RelativeLayout
@@ -37,9 +28,11 @@
         android:layout_margin="0dip"
         android:background="?background_color"
         android:cacheColorHint="?background_color"
+        android:clipToPadding="false"
         android:dividerHeight="1dip"
+        android:fastScrollEnabled="true"
         android:padding="0dip"
-        android:visibility="gone"
-        android:fastScrollEnabled="true" />
+        android:scrollbarStyle="outsideOverlay"
+        android:visibility="gone" />
 
 </LinearLayout>

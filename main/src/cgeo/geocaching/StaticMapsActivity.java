@@ -1,8 +1,9 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
@@ -11,7 +12,6 @@ import org.androidannotations.annotations.OptionsMenu;
 import org.apache.commons.collections4.CollectionUtils;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,7 +25,7 @@ import java.util.List;
 
 @EActivity
 @OptionsMenu(R.menu.static_maps_activity_options)
-public class StaticMapsActivity extends AbstractActivity {
+public class StaticMapsActivity extends AbstractActionBarActivity {
 
     private static final String EXTRAS_WAYPOINT = "waypoint";
     private static final String EXTRAS_DOWNLOAD = "download";
@@ -35,7 +35,7 @@ public class StaticMapsActivity extends AbstractActivity {
     @Extra(EXTRAS_WAYPOINT) Integer waypointId = null;
     @Extra(EXTRAS_GEOCODE) String geocode = null;
 
-    private final List<Bitmap> maps = new ArrayList<Bitmap>();
+    private final List<Bitmap> maps = new ArrayList<>();
     private LayoutInflater inflater = null;
     private ProgressDialog waitDialog = null;
     private LinearLayout smapsView = null;
@@ -62,7 +62,7 @@ public class StaticMapsActivity extends AbstractActivity {
                 } else {
                     showStaticMaps();
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.e("StaticMapsActivity.loadMapsHandler", e);
             }
         }
@@ -83,7 +83,7 @@ public class StaticMapsActivity extends AbstractActivity {
 
         for (final Bitmap image : maps) {
             if (image != null) {
-                final ImageView map = (ImageView) inflater.inflate(R.layout.staticmaps_activity_item, null);
+                final ImageView map = (ImageView) inflater.inflate(R.layout.staticmaps_activity_item, smapsView, false);
                 map.setImageBitmap(image);
                 smapsView.addView(map);
             }
@@ -127,7 +127,7 @@ public class StaticMapsActivity extends AbstractActivity {
                                     maps.add(image);
                                 }
                             }
-                        } catch (Exception e) {
+                        } catch (final Exception e) {
                             Log.e("StaticMapsActivity.LoadMapsThread.run", e);
                         }
                     }
@@ -137,7 +137,7 @@ public class StaticMapsActivity extends AbstractActivity {
                 }
 
                 loadMapsHandler.sendMessage(Message.obtain());
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.e("StaticMapsActivity.LoadMapsThread.run", e);
             }
         }
@@ -153,7 +153,7 @@ public class StaticMapsActivity extends AbstractActivity {
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         if (waypointId == null) {
             showToast(res.getString(R.string.info_storing_static_maps));
-            StaticMapsProvider.storeCacheStaticMap(cache, true);
+            RxUtils.waitForCompletion(StaticMapsProvider.storeCacheStaticMap(cache));
             return cache.hasStaticMap();
         }
         final Waypoint waypoint = cache.getWaypointById(waypointId);
@@ -161,18 +161,10 @@ public class StaticMapsActivity extends AbstractActivity {
             showToast(res.getString(R.string.info_storing_static_maps));
             // refresh always removes old waypoint files
             StaticMapsProvider.removeWpStaticMaps(waypoint, geocode);
-            StaticMapsProvider.storeWaypointStaticMap(cache, waypoint, true);
+            RxUtils.waitForCompletion(StaticMapsProvider.storeWaypointStaticMap(cache, waypoint));
             return StaticMapsProvider.hasStaticMapForWaypoint(geocode, waypoint);
         }
         showToast(res.getString(R.string.err_detail_not_load_map_static));
         return false;
-    }
-
-    public static void startActivity(final Context activity, final String geocode, final boolean download, final Waypoint waypoint) {
-        StaticMapsActivity_.IntentBuilder_ builder = StaticMapsActivity_.intent(activity).geocode(geocode).download(download);
-        if (waypoint != null) {
-            builder.waypointId(waypoint.getId());
-        }
-        builder.start();
     }
 }

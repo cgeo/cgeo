@@ -198,7 +198,7 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public List<LogType> getPossibleLogTypes(Geocache geocache) {
-        final List<LogType> logTypes = new ArrayList<LogType>();
+        final List<LogType> logTypes = new ArrayList<>();
         if (geocache.isEventCache()) {
             logTypes.add(LogType.WILL_ATTEND);
             logTypes.add(LogType.ATTENDED);

@@ -9,7 +9,6 @@
   <string name="about">Quant al c:geo</string>
   <string name="latitude">Latitud</string>
   <string name="longitude">Longitud</string>
-  <string name="action_bar_share_title">Comparteix l\'enllaç al catxé</string>
   <string name="settings_titlebar">Opcions del c:geo</string>
   <string name="all_types">Tots </string>
   <string name="traditional">Tradicional</string>
@@ -79,22 +78,9 @@
   <string name="log_saving">S\'està enviant el registre…</string>
   <string name="log_saving_and_uploading">S\'està enviant el registre i pujant la imatge…</string>
   <string name="log_clear">Esborra</string>
-  <string name="log_post">Envia el registre</string>
-  <string name="log_post_rate">Envia el registre i la valoració</string>
-  <string name="log_post_no_rate">Envia el registre sense valoració</string>
   <string name="log_post_not_possible">S\'està carregant la pàgina del registre…</string>
   <string name="log_add">Afegeix</string>
-  <string name="log_rating">Puntuació</string>
   <string name="log_no_rating">Sense puntuació</string>
-  <string name="log_stars_1">1 estrella</string>
-  <string name="log_stars_15">1,5 estrelles</string>
-  <string name="log_stars_2">2 estrelles</string>
-  <string name="log_stars_25">2,5 estrelles</string>
-  <string name="log_stars_3">3 estrelles</string>
-  <string name="log_stars_35">3,5 estrelles</string>
-  <string name="log_stars_4">4 estrelles</string>
-  <string name="log_stars_45">4,5 estrelles</string>
-  <string name="log_stars_5">5 estrelles</string>
   <string name="log_stars_1_description">Pobre</string>
   <string name="log_stars_15_description">Bastant pobre</string>
   <string name="log_stars_2_description">Per sota de la mitjana</string>
@@ -113,7 +99,6 @@
   <string name="log_smilies">Emoticones</string>
   <string name="log_image">Imatge</string>
   <string name="log_image_attach">Adjunta una imatge</string>
-  <string name="log_image_edit">Edita la imatge</string>
   <string name="log_image_stored">Existent</string>
   <string name="log_image_camera">Nou</string>
   <string name="log_image_caption">Títol</string>
@@ -122,6 +107,13 @@
   <string name="log_password_title">Contrasenya d\'accés:</string>
   <string name="log_hint_log_password">Introduïu la contrasenya d\'accés</string>
   <string name="log_oc_team_comment">Comentari de l\'equip OC</string>
+  <string-array name="log_image_scales">
+    <item>Sense escala</item>
+    <item>512 px</item>
+    <item>640 px</item>
+    <item>800 px</item>
+    <item>1024 px</item>
+  </string-array>
   <string name="translate_to_sys_lang">Tradueix a %s</string>
   <string name="translate_to_english">Tradueix a l\'anglès</string>
   <string name="translate_length_warning">La traducció pot fallar amb una gran quantitat de text.</string>
@@ -214,6 +206,7 @@
   <string name="info_select_logimage_cancelled">La selecció d\'imatge o captura s\'ha cancel·lat.</string>
   <string name="info_stored_image">La nova imatge s\'ha desat a:</string>
   <string name="info_storing_static_maps">S\'està intentant desar els mapes estàtics</string>
+  <string name="info_cache_saved">El catxé ha estat desat localment</string>
   <string name="loc_last">Última coneguda</string>
   <string name="loc_net">Xarxa</string>
   <string name="loc_gps">GPS</string>
@@ -221,6 +214,7 @@
   <string name="loc_trying">Intentant ubicar</string>
   <string name="loc_no_addr">L\'adreça és desconeguda</string>
   <string name="loc_gps_disabled">El GPS està desactivat</string>
+  <string name="menu_centerposition">Centra a la meva posició</string>
   <string name="menu_about">Quant al c:geo</string>
   <string name="menu_helpers">Programes d\'utilitat</string>
   <string name="menu_settings">Configuració</string>
@@ -242,12 +236,15 @@
   <string name="caches_more_caches_currently">actualment</string>
   <string name="caches_downloading">S\'estan descarregant els catxés…\nETA:  </string>
   <string name="caches_eta_ltm">Menys d\'un minut</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="one">%d minut</item>
+    <item quantity="other">%d minuts</item>
+  </plurals>
   <string name="caches_store_offline">Desa per usar fora de línia</string>
   <string name="caches_store_selected">Desa els seleccionats</string>
   <string name="caches_history">Historial</string>
   <string name="caches_on_map">Mostra al mapa</string>
   <string name="caches_sort">Ordena</string>
-  <string name="caches_sort_title">Ordena per</string>
   <string name="caches_sort_distance">Distància</string>
   <string name="caches_sort_difficulty">Dificultat</string>
   <string name="caches_sort_terrain">Terreny</string>
@@ -269,13 +266,11 @@
   <string name="caches_select_invert">Inverteix la selecció</string>
   <string name="caches_nearby">Propers</string>
   <string name="caches_manage">Administra</string>
-  <string name="caches_drop_selected">Elimina els seleccionats</string>
-  <string name="caches_drop_selected_ask">Voleu suprimir els catxés seleccionats del dispositiu?</string>
-  <string name="caches_drop_all">Esborra\'ls tots</string>
-  <string name="caches_drop_all_ask">Voleu suprimir tots els catxés de la llista actual?</string>
-  <string name="caches_drop_stored">Esborra els desats</string>
-  <string name="caches_drop_progress">S\'estan eliminant els catxés</string>
-  <string name="caches_drop_all_and_list">Esborra\'ls tots i suprimeix la llista</string>
+  <string name="caches_remove_all">Suprimeix-los tots</string>
+  <string name="caches_remove_all_confirm">Voleu suprimir tots els %s catxés de la llista actual?</string>
+  <string name="caches_remove_selected">Suprimeix els seleccionats</string>
+  <string name="caches_remove_selected_confirm">Voleu suprimir del dispositiu els %s catxés seleccionats?</string>
+  <string name="caches_remove_progress">S\'estan eliminant els catxés</string>
   <string name="caches_delete_events">Elimina trobades passades</string>
   <string name="caches_refresh_selected">Actualitza els seleccionats</string>
   <string name="caches_refresh_all">Actualitza-ho tot</string>
@@ -302,11 +297,10 @@
   <string name="caches_removing_from_history">S\'està eliminant de l\'historial…</string>
   <string name="caches_clear_offlinelogs">Neteja els registres fora de línea</string>
   <string name="caches_clear_offlinelogs_progress">S\'estan netejant els registres fora línia</string>
-  <string name="list_menu">Llista</string>
   <string name="list_menu_create">Crea una llista nova</string>
   <string name="list_menu_drop">Elimina la llista actual</string>
-  <string name="list_menu_change">Canvia de llista</string>
   <string name="list_menu_rename">Reanomena la llista actual</string>
+  <string name="list_menu_import">Importa</string>
   <string name="list_title">Trieu una llista</string>
   <string name="list_inbox">Desats</string>
   <string name="list_all_lists">Tots els catxés</string>
@@ -374,6 +368,8 @@
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Activa</string>
   <string name="init_oc_ro_description">Autoritza al c:geo a opencaching.ro per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
+  <string name="settings_activate_oc_uk">Activa</string>
+  <string name="init_oc_uk_description">Autoritza al c:geo a opencaching.org.uk per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activa</string>
@@ -403,8 +399,8 @@
   <string name="init_signature_template_log">Text del registre</string>
   <string name="init_ratingwanted">Valoració del GCvote</string>
   <string name="init_summary_ratingwanted">Descarrega la valoració des de GCvote.com</string>
-  <string name="init_friendlogswanted">Mostra els registres d\'amics</string>
-  <string name="init_summary_friendlogswanted">Mostra els registres dels amics a una altra pàgina</string>
+  <string name="init_friends_and_own_logs_wanted">Mostra els dels amics i els propis</string>
+  <string name="init_summary_friends_and_own_logs_wanted">Visualitza una pàgina addicional del llibre de registre pels registres dels amics i els propis</string>
   <string name="init_openlastdetailspage">Obre l\'última pàgina de detalls</string>
   <string name="init_summary_openlastdetailspage">Obre els detalls amb l\'última pàgina utilitzada</string>
   <string name="init_autoload">Descripció llarga</string>
@@ -493,6 +489,9 @@
   <string name="init_maintenance">Manteniment</string>
   <string name="init_maintenance_directories_note">El c:geo desa les imatges, el imatges dels registres i altres fitxers relacionats amb un catxé a un directori separat. En alguns casos (com important/exportant la base de dades) aquest directori pot contenir fitxers antiquats, que es poden suprimir aquí.</string>
   <string name="init_maintenance_directories">Suprimeix els arxius orfes</string>
+  <string name="init_create_memory_dump">Crea un buidat de memòria</string>
+  <string name="init_memory_dump">Buidat de memòria</string>
+  <string name="init_memory_dumped">S\'ha creat el buidat de memòria al %s</string>
   <string name="settings_open_website">Obre el lloc web</string>
   <string name="settings_settings">Configuració</string>
   <string name="settings_information">Informació</string>
@@ -543,6 +542,10 @@
   <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_dialog_completed_oc">El c:geo ara està autoritzat a interactuar amb %s.</string>
+  <plurals name="cache_counts">
+    <item quantity="one">Un catxé</item>
+    <item quantity="other">%1$d catxés</item>
+  </plurals>
   <string name="cache_offline">Fora de línia</string>
   <string name="cache_offline_refresh">Actualitza</string>
   <string name="cache_offline_drop">Esborra</string>
@@ -558,7 +561,6 @@
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Atributs</string>
   <string name="cache_inventory">Inventari</string>
-  <string name="cache_log_offline">Registre fora línia</string>
   <string name="cache_log_images_title">Imatges del registre</string>
   <string name="cache_log_image_default_title">Foto</string>
   <string name="cache_personal_note">Nota personal</string>
@@ -569,8 +571,6 @@
   <string name="cache_personal_note_uploading">S\'està pujant la nota personal</string>
   <string name="cache_personal_note_upload_done">S\'ha pujat la nota personal</string>
   <string name="cache_personal_note_upload_cancelled">S\'ha cancel·lat la pujada de la nota personal</string>
-  <string name="cache_personal_note_unstored">El catxé no s\'ha desat</string>
-  <string name="cache_personal_note_store">El catxé es desa en primer lloc per permetre una nota personal.</string>
   <string name="cache_description">Descripció</string>
   <string name="cache_description_long">Descripció llarga</string>
   <string name="cache_description_table_note">La descripció conté un format que pot necessitar visualitzar-se a %s per a veure\'s correctament.</string>
@@ -587,10 +587,14 @@
   <string name="cache_list_unknown">No està a cap llista</string>
   <string name="cache_images">Imatges</string>
   <string name="cache_waypoints">Fites</string>
+  <plurals name="waypoints">
+    <item quantity="one">1 fita</item>
+    <item quantity="other">%d fites</item>
+  </plurals>
   <string name="cache_waypoints_add">Afegeix una fita</string>
   <string name="cache_hint">Pista</string>
   <string name="cache_logs">Llibre de registre</string>
-  <string name="cache_logsfriends">Llibre de registre (Amics)</string>
+  <string name="cache_logs_friends_and_own">Registres dels amics o propis</string>
   <string name="cache_dialog_loading_details">S\'està carregant els detalls del catxé…</string>
   <string name="cache_dialog_loading_details_status_loadpage">S\'està carregant la pàgina</string>
   <string name="cache_dialog_loading_details_status_details">S\'està processant els detalls</string>
@@ -636,15 +640,14 @@
   <string name="cache_menu_refresh">Actualitza</string>
   <string name="cache_menu_share">Comparteix el catxé</string>
   <string name="cache_menu_move_list">Mou a una llista diferent</string>
-  <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
-  <string name="cache_menu_cachebeacon">Catxé de balisa</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_status">Estat</string>
   <string name="cache_status_offline_log">Registre desat</string>
   <string name="cache_status_found">Trobat</string>
+  <string name="cache_not_status_found">No s\'ha trobat</string>
   <string name="cache_status_archived">Arxivat</string>
   <string name="cache_status_disabled">Desactivat</string>
   <string name="cache_status_premium">Només per membres Premium</string>
@@ -756,10 +759,7 @@
   <string name="map_view_map">Tria el mapa</string>
   <string name="map_modes">Configuració del mapa</string>
   <string name="map_trail_show">Mostra la ruta</string>
-  <string name="map_trail_hide">Amaga la ruta</string>
   <string name="map_circles_show">Mostra els cercles</string>
-  <string name="map_circles_hide">Amaga els cercles</string>
-  <string name="map_mycaches_show">Mostra els catxés propis/trobats</string>
   <string name="map_mycaches_hide">Amaga els catxés propis/trobats</string>
   <string name="map_theme_builtin">Per defecte</string>
   <string name="map_theme_select">Trieu els detalls del mapa</string>
@@ -839,10 +839,10 @@
   <string name="user_menu_open_contact">Obre targeta del contacte</string>
   <string name="navigation">Navegació</string>
   <string name="compass_title">Brúixola</string>
+  <string name="compass_sensors">Sensors actius</string>
   <string name="use_gps">Usa només el GPS</string>
   <string name="use_compass">Usa el GPS i la brúixola</string>
   <string name="destination_select">Tria destinació</string>
-  <string name="destination_set">Fixa destinació</string>
   <string name="navigation_direct_navigation">Navegació directa</string>
   <string name="navigation_target">Objectiu</string>
   <string name="err_nav_no_coordinates">No es pot iniciar la navegació sense les coordenades</string>
@@ -1113,7 +1113,6 @@
   <string name="website">Lloc web: <a href=""> cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="">Pàgina del c:geo</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="nutshellmanual">Manual: <a href="">c:geo in a Nutshell</a></string>
   <string name="market">Android: <a href="">El c:geo a Google Play</a></string>
   <string name="about_twitter">Voleu que <b>el c:geo</b>  publiqui un nou estatus al Twitter cada vegada que registreu un catxé?</string>
   <string name="faq">PMF: <a href=""> faq.cgeo.org</a></string>
@@ -1129,50 +1128,28 @@
   <string name="tts_stop">Deixa de parlar</string>
   <string name="err_tts_lang_not_supported">La llengua actual no és compatible amb la síntesi de veu.</string>
   <string name="tts_one_kilometer">un quilòmetre</string>
-  <string name="tts_one_meter">un metre</string>
-  <string name="tts_one_mile">una milla</string>
-  <string name="tts_one_foot">un peu</string>
-  <string name="tts_one_oclock">la una en punt</string>
-  <string name="tts_oclock">%s en punt</string>
-  <string name="clipboard_copy_ok">S\'ha copiat al portapapers</string>
-  <string name="percent_favorite_points">% \ preferits</string>
-  <string name="cgeo_shortcut">Drecera del c:geo</string>
-  <string name="create_shortcut">Crea una drecera</string>
-  <string-array name="log_image_scales">
-    <item>Sense escala</item>
-    <item>512 px</item>
-    <item>640 px</item>
-    <item>800 px</item>
-    <item>1024 px</item>
-  </string-array>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">minut</item>
-    <item quantity="other">minuts</item>
-  </plurals>
-  <plurals name="cache_counts">
-    <item quantity="one">Un catxé</item>
-    <item quantity="other">%1$d catxés</item>
-  </plurals>
-  <plurals name="waypoints">
-    <item quantity="one">1 fita</item>
-    <item quantity="other">%d fites</item>
-  </plurals>
   <plurals name="tts_kilometers">
     <item quantity="one">%s quilòmetre</item>
     <item quantity="other">%s quilòmetres</item>
   </plurals>
+  <string name="tts_one_meter">un metre</string>
   <plurals name="tts_meters">
     <item quantity="one">%s metre</item>
     <item quantity="other">%s metres</item>
   </plurals>
+  <string name="tts_one_mile">una milla</string>
   <plurals name="tts_miles">
     <item quantity="one">%s milla</item>
     <item quantity="other">%s milles</item>
   </plurals>
+  <string name="tts_one_foot">un peu</string>
   <plurals name="tts_feet">
     <item quantity="one">%s peu</item>
     <item quantity="other">%s peus</item>
   </plurals>
+  <string name="tts_one_oclock">la una en punt</string>
+  <string name="tts_oclock">%s en punt</string>
+  <string name="clipboard_copy_ok">S\'ha copiat al portapapers</string>
   <plurals name="days_ago">
     <item quantity="one">ahir</item>
     <item quantity="other">fa %d dies</item>
@@ -1181,4 +1158,8 @@
     <item quantity="one">%s preferit</item>
     <item quantity="other">%s preferits</item>
   </plurals>
+  <string name="percent_favorite_points">% \ preferits</string>
+  <string name="cgeo_shortcut">Drecera del c:geo</string>
+  <string name="create_shortcut">Crea una drecera</string>
+  <string name="send">Envia</string>
 </resources>

@@ -25,6 +25,8 @@ import cgeo.geocaching.utils.SynchronizedDateFormat;
 
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -103,12 +105,12 @@ public abstract class GPXParser extends FileParser {
     private String parentCacheCode = null;
     private boolean wptVisited = false;
     private boolean wptUserDefined = false;
-    private List<LogEntry> logs = new ArrayList<LogEntry>();
+    private List<LogEntry> logs = new ArrayList<>();
 
     /**
      * Parser result. Maps geocode to cache.
      */
-    private final Set<String> result = new HashSet<String>(100);
+    private final Set<String> result = new HashSet<>(100);
     private ProgressInputStream progressStream;
     /**
      * URL contained in the header of the GPX file. Used to guess where the file is coming from.
@@ -270,7 +272,7 @@ public abstract class GPXParser extends FileParser {
     }
 
     @Override
-    public Collection<Geocache> parse(final InputStream stream, final CancellableHandler progressHandler) throws IOException, ParserException {
+    public Collection<Geocache> parse(@NonNull final InputStream stream, @Nullable final CancellableHandler progressHandler) throws IOException, ParserException {
         resetCache();
         final RootElement root = new RootElement(namespace, "gpx");
         final Element waypoint = root.getChild(namespace, "wpt");
@@ -338,11 +340,11 @@ public abstract class GPXParser extends FileParser {
 
                     // finally store the cache in the database
                     result.add(geocode);
-                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
                     DataStore.saveLogsWithoutTransaction(cache.getGeocode(), logs);
 
                     // avoid the cachecache using lots of memory for caches which the user did not actually look at
-                    DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+                    DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.CACHE));
                     showProgressMessage(progressHandler, progressStream.getProgress());
                 } else if (StringUtils.isNotBlank(cache.getName())
                         && StringUtils.containsIgnoreCase(type, "waypoint")) {
@@ -379,14 +381,14 @@ public abstract class GPXParser extends FileParser {
                         waypoint.setCoords(cache.getCoords());
                         waypoint.setNote(cache.getDescription());
                         waypoint.setVisited(wptVisited);
-                        final ArrayList<Waypoint> mergedWayPoints = new ArrayList<Waypoint>();
+                        final ArrayList<Waypoint> mergedWayPoints = new ArrayList<>();
                         mergedWayPoints.addAll(cacheForWaypoint.getWaypoints());
 
-                        final ArrayList<Waypoint> newPoints = new ArrayList<Waypoint>();
+                        final ArrayList<Waypoint> newPoints = new ArrayList<>();
                         newPoints.add(waypoint);
                         Waypoint.mergeWayPoints(newPoints, mergedWayPoints, true);
                         cacheForWaypoint.setWaypoints(newPoints, false);
-                        DataStore.saveCache(cacheForWaypoint, EnumSet.of(SaveFlag.SAVE_DB));
+                        DataStore.saveCache(cacheForWaypoint, EnumSet.of(SaveFlag.DB));
                         showProgressMessage(progressHandler, progressStream.getProgress());
                     }
                 }
@@ -814,7 +816,7 @@ public abstract class GPXParser extends FileParser {
             progressStream = new ProgressInputStream(stream);
             BufferedReader reader = new BufferedReader(new InputStreamReader(progressStream, CharEncoding.UTF_8));
             Xml.parse(new InvalidXMLCharacterFilterReader(reader), root.getContentHandler());
-            return DataStore.loadCaches(result, EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
+            return DataStore.loadCaches(result, EnumSet.of(LoadFlag.DB_MINIMAL));
         } catch (final SAXException e) {
             throw new ParserException("Cannot parse .gpx file as GPX " + version + ": could not parse XML", e);
         }
@@ -999,7 +1001,7 @@ public abstract class GPXParser extends FileParser {
         parentCacheCode = null;
         wptVisited = false;
         wptUserDefined = false;
-        logs = new ArrayList<LogEntry>();
+        logs = new ArrayList<>();
 
         cache = new Geocache(this);
 

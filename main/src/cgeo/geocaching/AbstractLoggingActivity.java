@@ -1,32 +1,34 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCSmiliesProvider;
 import cgeo.geocaching.connector.gc.GCSmiliesProvider.Smiley;
 import cgeo.geocaching.connector.trackable.TravelBugConnector;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
-
-import org.apache.commons.lang3.StringUtils;
 
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.widget.EditText;
 
-public abstract class AbstractLoggingActivity extends AbstractActivity {
+public abstract class AbstractLoggingActivity extends AbstractActionBarActivity {
+
+    /**
+     * sub classes can disable the send button
+     */
+    private boolean enableSend = true;
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.abstract_logging_activity, menu);
 
         final SubMenu menuLog = menu.findItem(R.id.menu_templates).getSubMenu();
-        for (final LogTemplate template : LogTemplateProvider.getTemplates()) {
+        for (final LogTemplate template : LogTemplateProvider.getTemplatesWithSignature()) {
             menuLog.add(0, template.getItemId(), 0, template.getResourceId());
         }
 
@@ -39,10 +41,7 @@ public abstract class AbstractLoggingActivity extends AbstractActivity {
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        final boolean signatureAvailable = StringUtils.isNotBlank(Settings.getSignature());
-        menu.findItem(R.id.menu_signature).setVisible(signatureAvailable);
-
+    public boolean onPrepareOptionsMenu(final Menu menu) {
         boolean smileyVisible = false;
         final Geocache cache = getLogContext().getCache();
         if (cache != null && ConnectorFactory.getConnector(cache).equals(GCConnector.getInstance())) {
@@ -54,18 +53,14 @@ public abstract class AbstractLoggingActivity extends AbstractActivity {
         }
 
         menu.findItem(R.id.menu_smilies).setVisible(smileyVisible);
+        menu.findItem(R.id.menu_send).setVisible(enableSend);
 
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         final int id = item.getItemId();
-
-        if (id == R.id.menu_signature) {
-            insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), getLogContext()), true);
-            return true;
-        }
 
         final LogTemplate template = LogTemplateProvider.getTemplate(id);
         if (template != null) {
@@ -79,13 +74,18 @@ public abstract class AbstractLoggingActivity extends AbstractActivity {
             return true;
         }
 
-        return false;
+        return super.onOptionsItemSelected(item);
     }
 
     protected abstract LogContext getLogContext();
 
-    protected void insertIntoLog(String newText, final boolean moveCursor) {
+    protected final void insertIntoLog(final String newText, final boolean moveCursor) {
         final EditText log = (EditText) findViewById(R.id.log);
         ActivityMixin.insertAtPosition(log, newText, moveCursor);
+    }
+
+    protected final void setLoggingEnabled(final boolean enabled) {
+        enableSend = enabled;
+        invalidateOptionsMenuCompatible();
     }
 }

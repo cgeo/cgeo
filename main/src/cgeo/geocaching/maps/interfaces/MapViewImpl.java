@@ -6,7 +6,6 @@ import cgeo.geocaching.maps.PositionAndScaleOverlay;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
@@ -47,7 +46,7 @@ public interface MapViewImpl {
 
     CachesOverlay createAddMapOverlay(Context context, Drawable drawable);
 
-    PositionAndScaleOverlay createAddPositionAndScaleOverlay(Activity activity);
+    PositionAndScaleOverlay createAddPositionAndScaleOverlay();
 
     void setMapSource();
 

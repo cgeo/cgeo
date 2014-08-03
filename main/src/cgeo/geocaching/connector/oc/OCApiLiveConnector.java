@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.oc;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.ICache;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ILoggingManager;
@@ -34,7 +35,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     private final int tokenSecretPrefKeyId;
     private UserInfo userInfo = new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.NOT_RETRIEVED);
 
-    public OCApiLiveConnector(String name, String host, String prefix, String licenseString, int cKResId, int cSResId, int isActivePrefKeyId, int tokenPublicPrefKeyId, int tokenSecretPrefKeyId, ApiSupport apiSupport) {
+    public OCApiLiveConnector(final String name, final String host, final String prefix, final String licenseString, final int cKResId, final int cSResId, final int isActivePrefKeyId, final int tokenPublicPrefKeyId, final int tokenSecretPrefKeyId, final ApiSupport apiSupport) {
         super(name, host, prefix, CryptUtils.rot13(CgeoApplication.getInstance().getResources().getString(cKResId)), licenseString, apiSupport);
 
         cS = CryptUtils.rot13(CgeoApplication.getInstance().getResources().getString(cSResId));
@@ -49,22 +50,22 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public SearchResult searchByViewport(@NonNull Viewport viewport, MapTokens tokens) {
+    public SearchResult searchByViewport(@NonNull final Viewport viewport, final MapTokens tokens) {
         return new SearchResult(OkapiClient.getCachesBBox(viewport, this));
     }
 
     @Override
-    public SearchResult searchByCenter(@NonNull Geopoint center, final @NonNull RecaptchaReceiver recaptchaReceiver) {
+    public SearchResult searchByCenter(@NonNull final Geopoint center, final @NonNull RecaptchaReceiver recaptchaReceiver) {
         return new SearchResult(OkapiClient.getCachesAround(center, this));
     }
 
     @Override
-    public SearchResult searchByOwner(@NonNull String username, final @NonNull RecaptchaReceiver recaptchaReceiver) {
+    public SearchResult searchByOwner(@NonNull final String username, final @NonNull RecaptchaReceiver recaptchaReceiver) {
         return new SearchResult(OkapiClient.getCachesByOwner(username, this));
     }
 
     @Override
-    public SearchResult searchByFinder(@NonNull String username, final @NonNull RecaptchaReceiver recaptchaReceiver) {
+    public SearchResult searchByFinder(@NonNull final String username, final @NonNull RecaptchaReceiver recaptchaReceiver) {
         return new SearchResult(OkapiClient.getCachesByFinder(username, this));
     }
 
@@ -94,11 +95,11 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
 
     @Override
     public boolean supportsWatchList() {
-        return true;
+        return ApiSupport.current == getApiSupport();
     }
 
     @Override
-    public boolean addToWatchlist(Geocache cache) {
+    public boolean addToWatchlist(final Geocache cache) {
         final boolean added = OkapiClient.setWatchState(cache, true, this);
 
         if (added) {
@@ -109,7 +110,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public boolean removeFromWatchlist(Geocache cache) {
+    public boolean removeFromWatchlist(final Geocache cache) {
         final boolean removed = OkapiClient.setWatchState(cache, false, this);
 
         if (removed) {
@@ -130,7 +131,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public boolean canLog(Geocache cache) {
+    public boolean canLog(final Geocache cache) {
         return true;
     }
 
@@ -139,13 +140,18 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public boolean login(Handler handler, Context fromActivity) {
+    public boolean login(final Handler handler, final Context fromActivity) {
         if (supportsPersonalization()) {
             userInfo = OkapiClient.getUserInfo(this);
         } else {
             userInfo = new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.NOT_SUPPORTED);
         }
         return userInfo.getStatus() == UserInfoStatus.SUCCESSFUL;
+    }
+
+    @Override
+    public boolean isOwner(final ICache cache) {
+        return StringUtils.isNotEmpty(getUserName()) && StringUtils.equals(cache.getOwnerDisplayName(), getUserName());
     }
 
     @Override
@@ -175,7 +181,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public boolean isSearchForMyCaches(String username) {
+    public boolean isSearchForMyCaches(final String username) {
         return StringUtils.equalsIgnoreCase(username, getUserName());
     }
 

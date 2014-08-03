@@ -9,7 +9,6 @@
   <string name="about">A c:geo-ról</string>
   <string name="latitude">Szélesség</string>
   <string name="longitude">Hosszúság</string>
-  <string name="action_bar_share_title">A láda linkjének megosztása</string>
   <string name="settings_titlebar">c:geo Beállítások</string>
   <string name="all_types">Minden láda típus</string>
   <string name="traditional">Hagyományos láda</string>
@@ -68,22 +67,9 @@
   <string name="log_save">Mentés</string>
   <string name="log_saving">Log mentése…</string>
   <string name="log_clear">Törlés</string>
-  <string name="log_post">Log beküldése</string>
-  <string name="log_post_rate">Log beküldése &amp; értékelés</string>
-  <string name="log_post_no_rate">Log beküldése &amp; nincs értékelés</string>
   <string name="log_post_not_possible">Log oldal betöltése…</string>
   <string name="log_add">Hozzáadás</string>
-  <string name="log_rating">Értékelés</string>
   <string name="log_no_rating">Nincs értékelés</string>
-  <string name="log_stars_1">1 csillag</string>
-  <string name="log_stars_15">1.5 csillag</string>
-  <string name="log_stars_2">2 csillag</string>
-  <string name="log_stars_25">2.5 csillag</string>
-  <string name="log_stars_3">3 csillag</string>
-  <string name="log_stars_35">3.5 csillag</string>
-  <string name="log_stars_4">4 csillag</string>
-  <string name="log_stars_45">4.5 csillag</string>
-  <string name="log_stars_5">5 csillag</string>
   <string name="log_stars_1_description">nagyon rossz</string>
   <string name="log_stars_15_description">elég rossz</string>
   <string name="log_stars_2_description">átlagon aluli</string>
@@ -212,7 +198,6 @@
   <string name="caches_history">Előzmények</string>
   <string name="caches_on_map">Mutasd meg térképen</string>
   <string name="caches_sort">Rendezés</string>
-  <string name="caches_sort_title">Rendezés eszerint</string>
   <string name="caches_sort_distance">távolság</string>
   <string name="caches_sort_difficulty">nehézség</string>
   <string name="caches_sort_terrain">terep</string>
@@ -233,13 +218,6 @@
   <string name="caches_select_invert">Kijelölés invertálása</string>
   <string name="caches_nearby">Közeli</string>
   <string name="caches_manage">Kezelés</string>
-  <string name="caches_drop_selected">Kiválasztott törlése</string>
-  <string name="caches_drop_selected_ask">El szeretnéd távolítani a kiválasztott ládákat az eszközről?</string>
-  <string name="caches_drop_all">Az összes törlése</string>
-  <string name="caches_drop_all_ask">Szeretnél eltávolítani minden ládát a jelenlegi listáról?</string>
-  <string name="caches_drop_stored">Tároltak elvetése</string>
-  <string name="caches_drop_progress">Ládák eltávolítása</string>
-  <string name="caches_drop_all_and_list">Az összes térlése és a lista eltávolítása.</string>
   <string name="caches_refresh_selected">Kijelöltek frissítése</string>
   <string name="caches_refresh_all">Mind frissítése</string>
   <string name="caches_move_selected">Kijelöltek mozgatása</string>
@@ -258,10 +236,8 @@
   <string name="caches_filter_clear">szűrők törlése</string>
   <string name="caches_filter_modified">Módosított koordinátákkal</string>
   <string name="caches_removing_from_history">Eltávolítás a Előzményekből…</string>
-  <string name="list_menu">Lista</string>
   <string name="list_menu_create">Új lista létrehozása</string>
   <string name="list_menu_drop">Jelenlegi lista elvetése</string>
-  <string name="list_menu_change">Lista megváltoztatása</string>
   <string name="list_menu_rename">Az aktuális lista átnevezése</string>
   <string name="list_title">Válassz listát</string>
   <string name="list_inbox">Mentett</string>
@@ -302,8 +278,6 @@
   <string name="init_signature_template_owner">Tulajdonos</string>
   <string name="init_ratingwanted">Értékelés betöltése a GCvote.com-ról</string>
   <string name="init_summary_ratingwanted">Értékelés betöltése a GCvote.com-ról</string>
-  <string name="init_friendlogswanted">További logbook oldal betöltése a barátok logjainak.</string>
-  <string name="init_summary_friendlogswanted">További logbook oldal betöltése a barátok logjainak.</string>
   <string name="init_openlastdetailspage">Az utoljára használt oldal részleteinek betöltése</string>
   <string name="init_summary_openlastdetailspage">Az utoljára használt oldal részleteinek betöltése</string>
   <string name="init_autoload">Hosszú leírás automatikus betöltése</string>
@@ -410,7 +384,6 @@
   <string name="cache_premium">Prémium</string>
   <string name="cache_attributes">Tulajdonságok</string>
   <string name="cache_inventory">Tárgyak</string>
-  <string name="cache_log_offline">Offline bejegyzés</string>
   <string name="cache_log_images_title">Bejegyzés kép</string>
   <string name="cache_log_image_default_title">Fotó</string>
   <string name="cache_personal_note">Személyes megjegyzés</string>
@@ -431,7 +404,6 @@
   <string name="cache_waypoints_add">Útpont hozzáadása</string>
   <string name="cache_hint">Segítség</string>
   <string name="cache_logs">Láda napló</string>
-  <string name="cache_logsfriends">Logbook (Barátok)</string>
   <string name="cache_dialog_loading_details">Láda adatainak betöltése…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Oldal betöltése</string>
   <string name="cache_dialog_loading_details_status_details">Részletek feldolgozása</string>
@@ -469,10 +441,8 @@
   <string name="cache_menu_refresh">Frissítés</string>
   <string name="cache_menu_share">Láda megosztása</string>
   <string name="cache_menu_move_list">Mozgatás másik listára</string>
-  <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
-  <string name="cache_menu_cachebeacon">Geoláda jelzőbója</string>
   <string name="cache_status">Állapot</string>
   <string name="cache_status_offline_log">Mentett bejegyzés</string>
   <string name="cache_status_found">Megtalált</string>
@@ -566,9 +536,7 @@
   <string name="map_view_map">Térkép nézet</string>
   <string name="map_modes">Térkép módok</string>
   <string name="map_trail_show">Ösvény mutatása</string>
-  <string name="map_trail_hide">Ösvény elrejtése</string>
   <string name="map_circles_show">Körök mutatása</string>
-  <string name="map_circles_hide">Körök elrejtése</string>
   <string name="map_theme_builtin">Alapértelmezett</string>
   <string name="map_theme_select">Válassz térképtémát</string>
   <string name="map_live_enable">Élő mód engedélyezése</string>
@@ -637,7 +605,6 @@
   <string name="use_gps">GPS használata</string>
   <string name="use_compass">Iránytű használata</string>
   <string name="destination_select">Cél kiválasztása</string>
-  <string name="destination_set">Cél beállítása</string>
   <string name="navigation_direct_navigation">Közvetlen navigáció</string>
   <string name="navigation_target">Célpont</string>
   <string name="license">Licensz</string>
@@ -807,7 +774,6 @@
   <string name="website">Weboldal: <a href="">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="nutshellmanual">Kézikönyv: <a href="">A c:geo dióhéjban</a></string>
   <string name="about_twitter">Akarod, hogy <b>c:geo</b> új bejegyzést írjon Twitterre mindig mikor egy ládát megtalálsz?</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Új kiadás található.\nKattints a telepítéshez.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Új napi verzió található.\nKattints a telepítéshez.</string>

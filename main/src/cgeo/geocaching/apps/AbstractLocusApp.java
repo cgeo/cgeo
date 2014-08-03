@@ -77,7 +77,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
         if (pd.getPoints().size() <= 1000) {
             DisplayData.sendData(activity, pd, export);
         } else {
-            final ArrayList<PointsData> data = new ArrayList<PointsData>();
+            final ArrayList<PointsData> data = new ArrayList<>();
             data.add(pd);
             DisplayData.sendDataCursor(activity, data,
                     "content://" + LocusDataStorageProvider.class.getCanonicalName().toLowerCase(Locale.US),
@@ -140,7 +140,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
         pg.found = cache.isFound();
 
         if (withWaypoints && cache.hasWaypoints()) {
-            pg.waypoints = new ArrayList<PointGeocachingDataWaypoint>();
+            pg.waypoints = new ArrayList<>();
             for (Waypoint waypoint : cache.getWaypoints()) {
                 if (waypoint == null || waypoint.getCoords() == null) {
                     continue;

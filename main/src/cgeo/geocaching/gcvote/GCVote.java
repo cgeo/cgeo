@@ -1,6 +1,8 @@
 package cgeo.geocaching.gcvote;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.R;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
@@ -33,7 +35,7 @@ public final class GCVote {
     private static final Pattern PATTERN_VOTE_ELEMENT = Pattern.compile("<vote ([^>]+)>", Pattern.CASE_INSENSITIVE);
 
     private static final int MAX_CACHED_RATINGS = 1000;
-    private static final LeastRecentlyUsedMap<String, GCVoteRating> RATINGS_CACHE = new LeastRecentlyUsedMap.LruCache<String, GCVoteRating>(MAX_CACHED_RATINGS);
+    private static final LeastRecentlyUsedMap<String, GCVoteRating> RATINGS_CACHE = new LeastRecentlyUsedMap.LruCache<>(MAX_CACHED_RATINGS);
     private static final float MIN_RATING = 1;
     private static final float MAX_RATING = 5;
 
@@ -74,7 +76,7 @@ public final class GCVote {
             return null;
         }
 
-        final Map<String, GCVoteRating> ratings = new HashMap<String, GCVoteRating>();
+        final Map<String, GCVoteRating> ratings = new HashMap<>();
 
         try {
             final Parameters params = new Parameters();
@@ -253,13 +255,13 @@ public final class GCVote {
 
     /**
      * Get geocodes of all the caches, which can be used with GCVote. Non-GC caches will be filtered out.
-     * 
+     *
      * @param caches
      * @return
      */
     private static @NonNull
     ArrayList<String> getVotableGeocodes(final @NonNull Collection<Geocache> caches) {
-        final ArrayList<String> geocodes = new ArrayList<String>(caches.size());
+        final ArrayList<String> geocodes = new ArrayList<>(caches.size());
         for (final Geocache cache : caches) {
             String geocode = cache.getGeocode();
             if (StringUtils.isNotBlank(geocode) && cache.supportsGCVote()) {
@@ -279,6 +281,35 @@ public final class GCVote {
 
     public static boolean isVotingPossible(final Geocache cache) {
         return Settings.isGCvoteLogin() && StringUtils.isNotBlank(cache.getGuid()) && cache.supportsGCVote();
+    }
+
+    public static String getDescription(final float rating) {
+        switch (Math.round(rating * 2f)) {
+            case 2:
+                return getString(R.string.log_stars_1_description);
+            case 3:
+                return getString(R.string.log_stars_15_description);
+            case 4:
+                return getString(R.string.log_stars_2_description);
+            case 5:
+                return getString(R.string.log_stars_25_description);
+            case 6:
+                return getString(R.string.log_stars_3_description);
+            case 7:
+                return getString(R.string.log_stars_35_description);
+            case 8:
+                return getString(R.string.log_stars_4_description);
+            case 9:
+                return getString(R.string.log_stars_45_description);
+            case 10:
+                return getString(R.string.log_stars_5_description);
+            default:
+                return getString(R.string.log_no_rating);
+        }
+    }
+
+    private static String getString(int resId) {
+        return CgeoApplication.getInstance().getString(resId);
     }
 
 }

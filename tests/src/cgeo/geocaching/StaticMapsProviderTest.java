@@ -7,12 +7,13 @@ import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
+import cgeo.geocaching.utils.RxUtils;
+
+import junit.framework.TestCase;
 
 import android.test.suitebuilder.annotation.Suppress;
 
 import java.io.File;
-
-import junit.framework.TestCase;
 
 @Suppress
 public class StaticMapsProviderTest extends TestCase {
@@ -52,7 +53,7 @@ public class StaticMapsProviderTest extends TestCase {
             assertThat(StaticMapsProvider.hasStaticMapForWaypoint(geocode, trailhead)).isFalse();
 
             // download
-            StaticMapsProvider.downloadMaps(cache);
+            RxUtils.waitForCompletion(StaticMapsProvider.downloadMaps(cache));
 
             try {
                 Thread.sleep(10000);

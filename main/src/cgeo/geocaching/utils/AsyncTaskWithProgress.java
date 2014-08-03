@@ -13,7 +13,7 @@ import android.os.AsyncTask;
  * If no style is given, the progress dialog uses "determinate" style with known maximum. The progress maximum is
  * automatically derived from the number of {@code Params} given to the task in {@link #execute(Object...)}.
  * </p>
- * 
+ *
  * @param <Params>
  * @param <Result>
  */
@@ -53,7 +53,7 @@ public abstract class AsyncTaskWithProgress<Params, Result> extends AsyncTask<Pa
      * @param progressTitle
      * @param progressMessage
      */
-    public AsyncTaskWithProgress(final Activity activity, final String progressTitle, final String progressMessage, boolean indeterminate) {
+    public AsyncTaskWithProgress(final Activity activity, final String progressTitle, final String progressMessage, final boolean indeterminate) {
         this.activity = activity;
         this.progressTitle = progressTitle;
         this.progressMessage = progressMessage;
@@ -66,7 +66,7 @@ public abstract class AsyncTaskWithProgress<Params, Result> extends AsyncTask<Pa
      * @param activity
      * @param progressTitle
      */
-    public AsyncTaskWithProgress(final Activity activity, final String progressTitle, boolean indeterminate) {
+    public AsyncTaskWithProgress(final Activity activity, final String progressTitle, final boolean indeterminate) {
         this(activity, progressTitle, null, indeterminate);
     }
 
@@ -91,7 +91,7 @@ public abstract class AsyncTaskWithProgress<Params, Result> extends AsyncTask<Pa
     }
 
     @Override
-    protected final void onPostExecute(Result result) {
+    protected final void onPostExecute(final Result result) {
         onPostExecuteInternal(result);
         if (null != activity) {
             progress.dismiss();
@@ -103,12 +103,12 @@ public abstract class AsyncTaskWithProgress<Params, Result> extends AsyncTask<Pa
      *
      * @param result
      */
-    protected void onPostExecuteInternal(Result result) {
+    protected void onPostExecuteInternal(final Result result) {
         // empty by default
     }
 
     @Override
-    protected final void onProgressUpdate(Integer... status) {
+    protected final void onProgressUpdate(final Integer... status) {
         final int progressValue = status[0];
         if (null != activity && progressValue >= 0) {
             progress.setProgress(progressValue);
@@ -119,7 +119,7 @@ public abstract class AsyncTaskWithProgress<Params, Result> extends AsyncTask<Pa
     /**
      * This method should by overridden by sub classes instead of {@link #onProgressUpdate(Integer...)}.
      */
-    protected void onProgressUpdateInternal(@SuppressWarnings("unused") int progress) {
+    protected void onProgressUpdateInternal(@SuppressWarnings("unused") final int progress) {
         // empty by default
     }
 
@@ -127,8 +127,9 @@ public abstract class AsyncTaskWithProgress<Params, Result> extends AsyncTask<Pa
         progress.setMessage(message);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    protected final Result doInBackground(Params... params) {
+    protected final Result doInBackground(final Params... params) {
         if (params != null) {
             progress.setMaxProgressAndReset(params.length);
         }

@@ -6,14 +6,16 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
 import org.apache.commons.lang3.StringUtils;
+
 import rx.Observable;
 import rx.android.observables.AndroidObservable;
 import rx.functions.Action1;
 import rx.functions.Func0;
-import rx.schedulers.Schedulers;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -75,7 +77,7 @@ public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
 
                         return Observable.empty();
                     }
-                }).firstOrDefault(0)).subscribe(new Action1<Integer>() {
+                }).firstOrDefault(0)).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<Integer>() {
                     @Override
                     public void call(final Integer pin) {
                         progressDialog.dismiss();
@@ -87,7 +89,7 @@ public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
                             Dialogs.message(activity, R.string.init_sendToCgeo, R.string.init_sendToCgeo_register_fail);
                         }
                     }
-                }, Schedulers.io());
+                });
 
                 return true;
             }

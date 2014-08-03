@@ -45,7 +45,7 @@ abstract class AbstractUserClickListener implements View.OnClickListener {
         final AbstractActivity activity = (AbstractActivity) view.getContext();
         final Resources res = activity.getResources();
 
-        ArrayList<String> labels = new ArrayList<String>(userActions.size());
+        ArrayList<String> labels = new ArrayList<>(userActions.size());
         for (UserAction action : userActions) {
             labels.add(res.getString(action.displayResourceId));
         }

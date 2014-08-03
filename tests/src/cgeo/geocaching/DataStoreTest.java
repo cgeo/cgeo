@@ -121,7 +121,7 @@ public class DataStoreTest extends CGeoTestCase {
         cache.setInventory(inventory);
 
         try {
-            DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
             final Geocache loadedCache = DataStore.loadCache(GEOCODE_CACHE, LoadFlags.LOAD_ALL_DB_ONLY);
             assertThat(loadedCache).overridingErrorMessage("Cache was not saved.").isNotNull();
             assertThat(loadedCache.getInventory()).hasSize(1);
@@ -147,7 +147,7 @@ public class DataStoreTest extends CGeoTestCase {
             final Geocache oldCache = DataStore.loadCache(upperCase, LoadFlags.LOAD_ALL_DB_ONLY);
             assertThat(oldCache).as("Old cache").isNull();
 
-            DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
             final Geocache cacheWithOriginalCode = DataStore.loadCache(upperCase, LoadFlags.LOAD_ALL_DB_ONLY);
             assertThat(cacheWithOriginalCode).overridingErrorMessage("Cache was not saved correctly!").isNotNull();
 
@@ -210,11 +210,11 @@ public class DataStoreTest extends CGeoTestCase {
         inTileHighZoom.setCoords(new Geopoint("N49 44.001 E8 37.001"), Tile.ZOOMLEVEL_MIN_PERSONALIZED + 1);
 
         // put in cache
-        DataStore.saveCache(main, EnumSet.of(SaveFlag.SAVE_CACHE));
-        DataStore.saveCache(inTileLowZoom, EnumSet.of(SaveFlag.SAVE_CACHE));
-        DataStore.saveCache(inTileHighZoom, EnumSet.of(SaveFlag.SAVE_CACHE));
-        DataStore.saveCache(outTile, EnumSet.of(SaveFlag.SAVE_CACHE));
-        DataStore.saveCache(otherConnector, EnumSet.of(SaveFlag.SAVE_CACHE));
+        DataStore.saveCache(main, EnumSet.of(SaveFlag.CACHE));
+        DataStore.saveCache(inTileLowZoom, EnumSet.of(SaveFlag.CACHE));
+        DataStore.saveCache(inTileHighZoom, EnumSet.of(SaveFlag.CACHE));
+        DataStore.saveCache(outTile, EnumSet.of(SaveFlag.CACHE));
+        DataStore.saveCache(otherConnector, EnumSet.of(SaveFlag.CACHE));
 
         final SearchResult search = new SearchResult(main);
 

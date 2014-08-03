@@ -5,6 +5,7 @@ import cgeo.geocaching.utils.Log;
 
 import com.viewpagerindicator.TitlePageIndicator;
 import com.viewpagerindicator.TitleProvider;
+
 import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -30,24 +31,24 @@ import java.util.Map;
  *            Enum listing all available pages of this activity. The pages available at a certain point of time are
  *            defined by overriding {@link #getOrderedPages()}.
  */
-public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends AbstractActivity {
+public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends AbstractActionBarActivity {
 
     /**
      * A {@link List} of all available pages.
      *
      * TODO Move to adapter
      */
-    private final List<Page> pageOrder = new ArrayList<Page>();
+    private final List<Page> pageOrder = new ArrayList<>();
 
     /**
      * Instances of all {@link PageViewCreator}.
      */
-    private final Map<Page, PageViewCreator> viewCreators = new HashMap<Page, PageViewCreator>();
+    private final Map<Page, PageViewCreator> viewCreators = new HashMap<>();
 
     /**
      * Store the states of the page views to be able to persist them when destroyed and reinstantiated again
      */
-    private final Map<Page, Bundle> viewStates = new HashMap<Page, Bundle>();
+    private final Map<Page, Bundle> viewStates = new HashMap<>();
     /**
      * The {@link ViewPager} for this activity.
      */
@@ -69,14 +70,14 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
          *
          * @return
          */
-        public View getDispatchedView();
+        public View getDispatchedView(final ViewGroup parentView);
 
         /**
          * Returns a (maybe cached) view.
          *
          * @return
          */
-        public View getView();
+        public View getView(final ViewGroup parentView);
 
         /**
          * Handles changed data-sets.
@@ -109,16 +110,17 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
     private class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 
         @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
+        public void destroyItem(final ViewGroup container, final int position, final Object object) {
             if (position >= pageOrder.size()) {
                 return;
             }
             final Page page = pageOrder.get(position);
 
             // Store the state of the view if the page supports it
-            PageViewCreator creator = viewCreators.get(page);
+            final PageViewCreator creator = viewCreators.get(page);
             if (creator != null) {
                 @Nullable
+                final
                 Bundle state = creator.getViewState();
                 if (state != null) {
                     viewStates.put(page, state);
@@ -129,7 +131,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
         }
 
         @Override
-        public void finishUpdate(ViewGroup container) {
+        public void finishUpdate(final ViewGroup container) {
         }
 
         @Override
@@ -138,7 +140,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
         }
 
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
+        public Object instantiateItem(final ViewGroup container, final int position) {
 
             final Page page = pageOrder.get(position);
 
@@ -156,29 +158,29 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
                 if (null != creator) {
                     // Result from getView() is maybe cached, but it should be valid because the
                     // creator should be informed about data-changes with notifyDataSetChanged()
-                    view = creator.getView();
+                    view = creator.getView(container);
 
                     // Restore the state of the view if the page supports it
-                    Bundle state = viewStates.get(page);
+                    final Bundle state = viewStates.get(page);
                     if (state != null) {
                         creator.setViewState(state);
                     }
 
                     container.addView(view, 0);
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.e("ViewPagerAdapter.instantiateItem ", e);
             }
             return view;
         }
 
         @Override
-        public boolean isViewFromObject(View view, Object object) {
+        public boolean isViewFromObject(final View view, final Object object) {
             return view == object;
         }
 
         @Override
-        public void restoreState(Parcelable arg0, ClassLoader arg1) {
+        public void restoreState(final Parcelable arg0, final ClassLoader arg1) {
         }
 
         @Override
@@ -187,18 +189,18 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
         }
 
         @Override
-        public void startUpdate(ViewGroup arg0) {
+        public void startUpdate(final ViewGroup arg0) {
         }
 
         @Override
-        public int getItemPosition(Object object) {
+        public int getItemPosition(final Object object) {
             // We are doing the caching. So pretend that the view is gone.
             // The ViewPager will get it back in instantiateItem()
             return POSITION_NONE;
         }
 
         @Override
-        public String getTitle(int position) {
+        public String getTitle(final int position) {
             final Page page = pageOrder.get(position);
             if (null == page) {
                 return "";
@@ -216,7 +218,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
      * @param pageSelectedListener
      *            page selection listener or <code>null</code>
      */
-    protected final void createViewPager(int startPageIndex, final OnPageSelectedListener pageSelectedListener) {
+    protected final void createViewPager(final int startPageIndex, final OnPageSelectedListener pageSelectedListener) {
         // initialize ViewPager
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPagerAdapter = new ViewPagerAdapter();
@@ -227,16 +229,16 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
         if (pageSelectedListener != null) {
             titleIndicator.setOnPageChangeListener(new OnPageChangeListener() {
                 @Override
-                public void onPageSelected(int position) {
+                public void onPageSelected(final int position) {
                     pageSelectedListener.onPageSelected(position);
                 }
 
                 @Override
-                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                public void onPageScrolled(final int position, final float positionOffset, final int positionOffsetPixels) {
                 }
 
                 @Override
-                public void onPageScrollStateChanged(int state) {
+                public void onPageScrollStateChanged(final int state) {
                 }
             });
         }
@@ -267,11 +269,11 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
     protected final void reinitializeViewPager() {
 
         // notify all creators that the data has changed
-        for (PageViewCreator creator : viewCreators.values()) {
+        for (final PageViewCreator creator : viewCreators.values()) {
             creator.notifyDataSetChanged();
         }
         // reset the stored view states of all pages
-        for (Bundle state : viewStates.values()) {
+        for (final Bundle state : viewStates.values()) {
             state.clear();
         }
 
@@ -301,19 +303,19 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
      */
     protected abstract Pair<List<? extends Page>, Integer> getOrderedPages();
 
-    public final Page getPage(int position) {
+    public final Page getPage(final int position) {
         return pageOrder.get(position);
     }
 
-    protected final int getPageIndex(Page page) {
+    protected final int getPageIndex(final Page page) {
         return pageOrder.indexOf(page);
     }
 
-    protected final PageViewCreator getViewCreator(Page page) {
+    protected final PageViewCreator getViewCreator(final Page page) {
         return viewCreators.get(page);
     }
 
-    protected final boolean isCurrentPage(Page page) {
+    protected final boolean isCurrentPage(final Page page) {
         return getCurrentItem() == getPageIndex(page);
     }
 

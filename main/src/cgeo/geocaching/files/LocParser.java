@@ -12,6 +12,8 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,7 +55,7 @@ public final class LocParser extends FileParser {
         final Map<String, Geocache> cidCoords = parseCoordinates(fileContent);
 
         // save found cache coordinates
-        final HashSet<String> contained = new HashSet<String>();
+        final HashSet<String> contained = new HashSet<>();
         for (String geocode : searchResult.getGeocodes()) {
             if (cidCoords.containsKey(geocode)) {
                 contained.add(geocode);
@@ -80,7 +82,7 @@ public final class LocParser extends FileParser {
     }
 
     static Map<String, Geocache> parseCoordinates(final String fileContent) {
-        final Map<String, Geocache> coords = new HashMap<String, Geocache>();
+        final Map<String, Geocache> coords = new HashMap<>();
         if (StringUtils.isBlank(fileContent)) {
             return coords;
         }
@@ -116,11 +118,11 @@ public final class LocParser extends FileParser {
     }
 
     @Override
-    public Collection<Geocache> parse(InputStream stream, CancellableHandler progressHandler) throws IOException, ParserException {
-        // TODO: progress reporting happens during reading stream only, not during parsing
-        String streamContent = readStream(stream, progressHandler).toString();
+    public Collection<Geocache> parse(@NonNull final InputStream stream, @Nullable final CancellableHandler progressHandler) throws IOException, ParserException {
+        final String streamContent = readStream(stream, null).toString();
+        final int maxSize = streamContent.length();
         final Map<String, Geocache> coords = parseCoordinates(streamContent);
-        final List<Geocache> caches = new ArrayList<Geocache>();
+        final List<Geocache> caches = new ArrayList<>();
         for (Entry<String, Geocache> entry : coords.entrySet()) {
             Geocache coord = entry.getValue();
             if (StringUtils.isBlank(coord.getGeocode()) || StringUtils.isBlank(coord.getName())) {
@@ -136,6 +138,9 @@ public final class LocParser extends FileParser {
             cache.setListId(listId);
             cache.setDetailed(true);
             cache.store(null);
+            if (progressHandler != null) {
+                progressHandler.sendMessage(progressHandler.obtainMessage(0, maxSize * caches.size() / coords.size(), 0));
+            }
         }
         Log.i("Caches found in .loc file: " + caches.size());
         return caches;

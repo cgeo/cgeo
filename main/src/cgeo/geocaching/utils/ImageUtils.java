@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 import cgeo.geocaching.compatibility.Compatibility;
 
 import org.apache.commons.io.IOUtils;
@@ -8,17 +9,25 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Base64;
 import android.util.Base64InputStream;
+import android.widget.TextView;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
@@ -286,6 +295,50 @@ public final class ImageUtils {
             IOUtils.copy(in, out);
         } finally {
             IOUtils.closeQuietly(in);
+        }
+    }
+
+    public static BitmapDrawable getTransparent1x1Drawable(final Resources res) {
+        return new BitmapDrawable(res, BitmapFactory.decodeResource(res, R.drawable.image_no_placement));
+    }
+
+    /**
+     * Container which can hold a drawable (initially an empty one) and get a newer version when it
+     * becomes available. It also invalidates the view the container belongs to, so that it is
+     * redrawn properly.
+     */
+    @SuppressWarnings("deprecation")
+    public final static class ContainerDrawable extends BitmapDrawable implements Action1<Drawable> {
+        private Drawable drawable;
+        final private TextView view;
+
+        public ContainerDrawable(@NonNull final TextView view) {
+            this.view = view;
+            drawable = null;
+            setBounds(0, 0, 0, 0);
+        }
+
+        public ContainerDrawable(@NonNull final TextView view, final Observable<? extends Drawable> drawableObservable) {
+            this(view);
+            updateFrom(drawableObservable);
+        }
+
+        @Override
+        public void draw(final Canvas canvas) {
+            if (drawable != null) {
+                drawable.draw(canvas);
+            }
+        }
+
+        @Override
+        public void call(final Drawable newDrawable) {
+            setBounds(0, 0, newDrawable.getIntrinsicWidth(), newDrawable.getIntrinsicHeight());
+            drawable = newDrawable;
+            view.setText(view.getText());
+        }
+
+        public void updateFrom(final Observable<? extends Drawable> drawableObservable) {
+            drawableObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(this);
         }
     }
 }

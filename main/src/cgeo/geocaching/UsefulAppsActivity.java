@@ -3,7 +3,7 @@ package cgeo.geocaching;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.ui.AbstractViewHolder;
 
 import android.app.Activity;
@@ -18,7 +18,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class UsefulAppsActivity extends AbstractActivity {
+public class UsefulAppsActivity extends AbstractActionBarActivity {
 
     @InjectView(R.id.apps_list) protected ListView list;
 
@@ -27,7 +27,7 @@ public class UsefulAppsActivity extends AbstractActivity {
         @InjectView(R.id.image) protected ImageView image;
         @InjectView(R.id.description) protected TextView description;
 
-        public ViewHolder(View rowView) {
+        public ViewHolder(final View rowView) {
             super(rowView);
         }
     }
@@ -45,7 +45,7 @@ public class UsefulAppsActivity extends AbstractActivity {
             this.packageName = packageName;
         }
 
-        private void installFromMarket(Activity activity) {
+        private void installFromMarket(final Activity activity) {
             try {
                 // allow also opening pure http URLs in addition to market packages
                 final String url = (packageName.startsWith("http:")) ? packageName : "market://details?id=" + packageName;
@@ -53,7 +53,7 @@ public class UsefulAppsActivity extends AbstractActivity {
                 marketIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
                 activity.startActivity(marketIntent);
 
-            } catch (RuntimeException e) {
+            } catch (final RuntimeException e) {
                 // market not available in standard emulator
             }
         }
@@ -72,17 +72,17 @@ public class UsefulAppsActivity extends AbstractActivity {
     };
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.usefulapps_activity);
 
         ButterKnife.inject(this);
 
         list.setAdapter(new ArrayAdapter<HelperApp>(this, R.layout.usefulapps_item, HELPER_APPS) {
             @Override
-            public View getView(int position, View convertView, android.view.ViewGroup parent) {
+            public View getView(final int position, final View convertView, final android.view.ViewGroup parent) {
                 View rowView = convertView;
                 if (null == rowView) {
-                    rowView = getLayoutInflater().inflate(R.layout.usefulapps_item, null);
+                    rowView = getLayoutInflater().inflate(R.layout.usefulapps_item, parent, false);
                 }
                 ViewHolder holder = (ViewHolder) rowView.getTag();
                 if (null == holder) {
@@ -94,7 +94,7 @@ public class UsefulAppsActivity extends AbstractActivity {
                 return rowView;
             }
 
-            private void fillViewHolder(ViewHolder holder, HelperApp app) {
+            private void fillViewHolder(final ViewHolder holder, final HelperApp app) {
                 holder.title.setText(res.getString(app.titleId));
                 holder.image.setImageDrawable(res.getDrawable(app.iconId));
                 holder.description.setText(Html.fromHtml(res.getString(app.descriptionId)));
@@ -104,8 +104,8 @@ public class UsefulAppsActivity extends AbstractActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                HelperApp helperApp = HELPER_APPS[position];
+            public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
+                final HelperApp helperApp = HELPER_APPS[position];
                 helperApp.installFromMarket(UsefulAppsActivity.this);
             }
         });

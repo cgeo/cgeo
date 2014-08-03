@@ -8,7 +8,7 @@ public abstract class AbstractList {
 
     public final int id;
     public final String title;
-    private static SparseArray<AbstractList> LISTS = new SparseArray<AbstractList>();
+    private static SparseArray<AbstractList> LISTS = new SparseArray<>();
 
     public AbstractList(final int id, final String title) {
         this.id = id;
@@ -19,6 +19,10 @@ public abstract class AbstractList {
     public abstract String getTitleAndCount();
 
     public abstract boolean isConcrete();
+
+    public abstract String getTitle();
+
+    public abstract int getNumberOfCaches();
 
     @Nullable
     public static AbstractList getListById(int listId) {

@@ -4,7 +4,7 @@ import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ILogable;
 import cgeo.geocaching.R;
-import cgeo.geocaching.StaticMapsActivity;
+import cgeo.geocaching.StaticMapsActivity_;
 import cgeo.geocaching.StaticMapsProvider;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -49,7 +49,11 @@ abstract class AbstractStaticMapsApp extends AbstractApp implements CacheNavigat
         }
         final String geocode = StringUtils.upperCase(logable.getGeocode());
 
-        StaticMapsActivity.startActivity(activity, geocode, download, waypoint);
+        StaticMapsActivity_.IntentBuilder_ builder = StaticMapsActivity_.intent(activity).geocode(geocode).download(download);
+        if (waypoint != null) {
+            builder.waypointId(waypoint.getId());
+        }
+        builder.start();
         return true;
     }
 }

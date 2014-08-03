@@ -9,7 +9,6 @@
   <string name="about">Sobre c:geo</string>
   <string name="latitude">Latitud</string>
   <string name="longitude">Longitud</string>
-  <string name="action_bar_share_title">Compartir enlace a escondite</string>
   <string name="settings_titlebar">c:geo Ajustes</string>
   <string name="all_types">Todos los escondites</string>
   <string name="traditional">Tradicionales</string>
@@ -77,22 +76,9 @@
   <string name="log_saving">Enviando registo…</string>
   <string name="log_saving_and_uploading">Enviando registro y subiendo imagen…</string>
   <string name="log_clear">Limpiar</string>
-  <string name="log_post">Enviar registro</string>
-  <string name="log_post_rate">Enviar registro y puntuación</string>
-  <string name="log_post_no_rate">Enviar registro sin puntuar</string>
   <string name="log_post_not_possible">Cargando página de registro…</string>
   <string name="log_add">Añadir</string>
-  <string name="log_rating">Puntuación</string>
   <string name="log_no_rating">Sin puntuación</string>
-  <string name="log_stars_1">1 estrella</string>
-  <string name="log_stars_15">1,5 estrellas</string>
-  <string name="log_stars_2">2 estrellas</string>
-  <string name="log_stars_25">2,5 estrellas</string>
-  <string name="log_stars_3">3 estrellas</string>
-  <string name="log_stars_35">3,5 estrellas</string>
-  <string name="log_stars_4">4 estrellas</string>
-  <string name="log_stars_45">4,5 estrellas</string>
-  <string name="log_stars_5">5 estrellas</string>
   <string name="log_stars_1_description">malísimo</string>
   <string name="log_stars_15_description">muy malo</string>
   <string name="log_stars_2_description">malo</string>
@@ -111,7 +97,6 @@
   <string name="log_smilies">Emoticonos</string>
   <string name="log_image">Imagen</string>
   <string name="log_image_attach">Adjuntar imagen</string>
-  <string name="log_image_edit">Editar imagen</string>
   <string name="log_image_stored">Galería</string>
   <string name="log_image_camera">Tomar foto</string>
   <string name="log_image_caption">Título</string>
@@ -120,6 +105,13 @@
   <string name="log_password_title">Contraseña:</string>
   <string name="log_hint_log_password">Introduzca su contraseña</string>
   <string name="log_oc_team_comment">Comentario equipo OC</string>
+  <string-array name="log_image_scales">
+    <item>Sin redimensionar</item>
+    <item>512 px</item>
+    <item>640 px</item>
+    <item>800 px</item>
+    <item>1024 px</item>
+  </string-array>
   <string name="translate_to_sys_lang">Traducir al %s</string>
   <string name="translate_to_english">Traducir al inglés</string>
   <string name="translate_length_warning">La traducción podría fallar con un texto muy largo.</string>
@@ -240,12 +232,15 @@
   <string name="caches_more_caches_currently">actualmente</string>
   <string name="caches_downloading">Descargando escondites…\nFaltan: </string>
   <string name="caches_eta_ltm">Menos de un minuto</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="one">%d minuto</item>
+    <item quantity="other">%d minutos</item>
+  </plurals>
   <string name="caches_store_offline">Usar sin conexión luego</string>
   <string name="caches_store_selected">Almacenamiento seleccionado</string>
   <string name="caches_history">Historial</string>
   <string name="caches_on_map">Ver en mapa</string>
   <string name="caches_sort">Ordenar</string>
-  <string name="caches_sort_title">Ordenar por</string>
   <string name="caches_sort_distance">distancia</string>
   <string name="caches_sort_difficulty">dificultad</string>
   <string name="caches_sort_terrain">terreno</string>
@@ -267,13 +262,6 @@
   <string name="caches_select_invert">Invertir selección</string>
   <string name="caches_nearby">Cercanos</string>
   <string name="caches_manage">Gestionar</string>
-  <string name="caches_drop_selected">Descartar los seleccionados</string>
-  <string name="caches_drop_selected_ask">¿Quieres borrar los escondites seleccionados del dispositivo?</string>
-  <string name="caches_drop_all">Descartar todos</string>
-  <string name="caches_drop_all_ask">¿Quieres borrar todos los escondites guardados en el dispositivo?</string>
-  <string name="caches_drop_stored">Descartar guardados</string>
-  <string name="caches_drop_progress">Borrando escondites</string>
-  <string name="caches_drop_all_and_list">Descartar todos y borrar lista</string>
   <string name="caches_delete_events">Borrar eventos pasados</string>
   <string name="caches_refresh_selected">Actualizar seleccionados</string>
   <string name="caches_refresh_all">Actualizar todos</string>
@@ -300,10 +288,8 @@
   <string name="caches_removing_from_history">Borrando del historial…</string>
   <string name="caches_clear_offlinelogs">Borrar registros sin conexión</string>
   <string name="caches_clear_offlinelogs_progress">Borrando registros sin conexión</string>
-  <string name="list_menu">Lista</string>
   <string name="list_menu_create">Crear nueva lista</string>
   <string name="list_menu_drop">Borrar lista actual</string>
-  <string name="list_menu_change">Cambiar lista</string>
   <string name="list_menu_rename">Renombrar la lista actual</string>
   <string name="list_title">Escoger lista</string>
   <string name="list_inbox">Guardadas</string>
@@ -351,11 +337,13 @@
   <string name="settings_activate_ox">Activar</string>
   <string name="settings_gc_legal_note">Usando el servicio de geocaching.com, usted acepta los términos de uso de Groundspeak.</string>
   <string name="settings_info_facebook_login_title">Facebook Login</string>
+  <string name="settings_info_facebook_login">No puedes iniciar sesión en geocaching.com desde c:geo con tu cuenta de Facebook. Pero esto se puede solucionar con un simple truco…</string>
   <string name="settings_authorize">Autorizar c:geo</string>
   <string name="settings_reauthorize">Autorizar c:geo otra vez</string>
   <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Activar</string>
   <string name="settings_activate_oc_pl">Activar</string>
+  <string name="settings_activate_oc_ro">Activar</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activar</string>
@@ -370,6 +358,7 @@
   <string name="init_login_popup_not_authorized">No autorizado</string>
   <string name="init_login_popup_invalid_timestamp">Hora local inválida, ajuste la hora de nuevo</string>
   <string name="init_login_popup_invalid_token">Autorización inválida, volver a autorizar</string>
+  <string name="settings_service_active">Activo</string>
   <string name="init_signature">Firma</string>
   <string name="init_signature_template_button">Insertar plantilla</string>
   <string name="init_signature_template_date">Fecha</string>
@@ -380,8 +369,8 @@
   <string name="init_signature_template_owner">Propietario</string>
   <string name="init_signature_template_name">Nombre</string>
   <string name="init_signature_template_url">URL</string>
+  <string name="init_signature_template_log">Texto de registro</string>
   <string name="init_ratingwanted">Clasificación de GCvote</string>
-  <string name="init_friendlogswanted">Mostrar registros de amigos</string>
   <string name="init_openlastdetailspage">Detalles de la última página</string>
   <string name="init_autoload">Autocargar descripción larga</string>
   <string name="init_summary_autoload">Autocargar descripción larga</string>
@@ -463,6 +452,10 @@
   <string name="auth_again">Volver a iniciar</string>
   <string name="auth_dialog_waiting">Esperando a %s…</string>
   <string name="auth_ocde">Opencaching.de</string>
+  <plurals name="cache_counts">
+    <item quantity="one">Un escondite</item>
+    <item quantity="other">%1$d Escondites</item>
+  </plurals>
   <string name="cache_offline">Desconectado</string>
   <string name="cache_offline_refresh">Actualizar</string>
   <string name="cache_offline_drop">Tirar</string>
@@ -478,7 +471,6 @@
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Atributos</string>
   <string name="cache_inventory">Inventario</string>
-  <string name="cache_log_offline">Registro desconectado</string>
   <string name="cache_log_images_title">Imagen de registro</string>
   <string name="cache_log_image_default_title">Foto</string>
   <string name="cache_personal_note">Nota personal</string>
@@ -521,7 +513,6 @@
   <string name="cache_menu_refresh">Actualizar</string>
   <string name="cache_menu_share">Compartir escondite</string>
   <string name="cache_menu_move_list">Mover a otra lista</string>
-  <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_status">Estado</string>
@@ -595,9 +586,7 @@
   <string name="map_view_map">Ver mapa</string>
   <string name="map_modes">Configuración del mapa</string>
   <string name="map_trail_show">Mostrar rastro</string>
-  <string name="map_trail_hide">Ocultar rastro</string>
   <string name="map_circles_show">Mostrar círculos</string>
-  <string name="map_circles_hide">Ocultar círculos</string>
   <string name="map_theme_builtin">Por defecto</string>
   <string name="map_live_enable">Activar en vivo</string>
   <string name="map_live_disable">Desactivar en vivo</string>
@@ -668,7 +657,6 @@
   <string name="use_gps">Solo usar GPS</string>
   <string name="use_compass">Usar GPS y brújula</string>
   <string name="destination_select">Seleccionar destino</string>
-  <string name="destination_set">Elegir destino</string>
   <string name="navigation_target">Objetivo</string>
   <string name="license">Licencia</string>
   <string name="license_show">Mostrar licencia</string>
@@ -837,7 +825,6 @@
   <string name="website">Web: <a href="">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="nutshellmanual">Manual: <a href="">c:geo en breve</a></string>
   <string name="about_twitter">¿Debe <b>c:geo</b> publicar el nuevo estado en Twitter cuando registras un escondite?</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Nueva versión disponible. \nClick para instalar.</string>
   <string name="tts_start">Empezar a hablar</string>
@@ -849,19 +836,4 @@
   <string name="tts_oclock">%s en punto</string>
   <string name="clipboard_copy_ok">Copiado al portapapeles</string>
   <string name="percent_favorite_points">% \ favoritos</string>
-  <string-array name="log_image_scales">
-    <item>Sin redimensionar</item>
-    <item>512 px</item>
-    <item>640 px</item>
-    <item>800 px</item>
-    <item>1024 px</item>
-  </string-array>
-  <plurals name="caches_eta_mins">
-    <item quantity="one">minuto</item>
-    <item quantity="other">minutos</item>
-  </plurals>
-  <plurals name="cache_counts">
-    <item quantity="one">Un escondite</item>
-    <item quantity="other">%1$d Escondites</item>
-  </plurals>
 </resources>

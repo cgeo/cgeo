@@ -23,7 +23,7 @@ public class CacheCache {
     final private LeastRecentlyUsedMap<String, Geocache> cachesCache;
 
     public CacheCache() {
-        cachesCache = new LeastRecentlyUsedMap.LruCache<String, Geocache>(MAX_CACHED_CACHES);
+        cachesCache = new LeastRecentlyUsedMap.LruCache<>(MAX_CACHED_CACHES);
         cachesCache.setRemoveHandler(new CacheRemoveHandler());
     }
 
@@ -79,7 +79,7 @@ public class CacheCache {
     }
 
     public synchronized Set<String> getInViewport(final Viewport viewport, final CacheType cacheType) {
-        final Set<String> geocodes = new HashSet<String>();
+        final Set<String> geocodes = new HashSet<>();
         for (final Geocache cache : cachesCache.values()) {
             if (cache.getCoords() == null) {
                 // FIXME: this kludge must be removed, it is only present to help us debug the cases where

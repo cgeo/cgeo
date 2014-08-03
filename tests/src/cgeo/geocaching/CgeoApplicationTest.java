@@ -79,8 +79,8 @@ public class CgeoApplicationTest extends CGeoTestCase {
         assertThat(tb.getIconUrl()).isEqualTo("http://www.geocaching.com/images/wpttypes/21.gif");
         assertThat(tb.getName()).isEqualTo("blafoo's Children Music CD");
         assertThat(tb.getType()).isEqualTo("Travel Bug Dog Tag");
-        assertEquals(new GregorianCalendar(2009, 8 - 1, 24).getTime(), tb.getReleased());
-        assertEquals("Niedersachsen, Germany", tb.getOrigin());
+        assertThat(tb.getReleased()).isEqualTo(new GregorianCalendar(2009, 8 - 1, 24).getTime());
+        assertThat(tb.getOrigin()).isEqualTo("Niedersachsen, Germany");
         assertThat(tb.getOwner()).isEqualTo("blafoo");
         assertThat(tb.getOwnerGuid()).isEqualTo("0564a940-8311-40ee-8e76-7e91b2cf6284");
         assertThat(tb.getGoal()).isEqualTo("Kinder erfreuen.<br /><br />Make children happy.");
@@ -158,6 +158,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     public static void testSearchByGeocodeNotLoggedIn() {
         withMockedLoginDo(new Runnable() {
 
+            @Override
             public void run() {
                 // non premium cache
                 MockedCache cache = new GC2CJPF();
@@ -193,6 +194,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     public static void testSearchErrorOccured() {
         withMockedLoginDo(new Runnable() {
 
+            @Override
             public void run() {
                 // non premium cache
                 final MockedCache cache = new GC1ZXX2();
@@ -342,6 +344,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     public static void testSearchByViewportNotLoggedIn() {
         withMockedLoginDo(new Runnable() {
 
+            @Override
             public void run() {
                 final Strategy strategy = Settings.getLiveMapStrategy();
                 final Strategy testStrategy = Strategy.FAST; // FASTEST, FAST or DETAILED for tests
@@ -415,7 +418,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
      */
     public static void testSearchByGeocodeSpecialties() {
         final Geocache GCV2R9 = CgeoApplicationTest.testSearchByGeocode("GCV2R9");
-        assertEquals("California, United States", GCV2R9.getLocation());
+        assertThat(GCV2R9.getLocation()).isEqualTo("California, United States");
 
         final Geocache GC1ZXEZ = CgeoApplicationTest.testSearchByGeocode("GC1ZXEZ");
         assertThat(GC1ZXEZ.getOwnerUserId()).isEqualTo("Ms.Marple/Mr.Stringer");

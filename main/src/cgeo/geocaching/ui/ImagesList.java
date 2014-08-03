@@ -1,5 +1,7 @@
 package cgeo.geocaching.ui;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.Image;
 import cgeo.geocaching.R;
 import cgeo.geocaching.files.LocalStorage;
@@ -9,6 +11,7 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+
 import rx.Subscription;
 import rx.android.observables.AndroidObservable;
 import rx.functions.Action0;
@@ -65,11 +68,11 @@ public class ImagesList {
     private LayoutInflater inflater = null;
     private final Activity activity;
     // We could use a Set here, but we will insert no duplicates, so there is no need to check for uniqueness.
-    private final Collection<Bitmap> bitmaps = new LinkedList<Bitmap>();
+    private final Collection<Bitmap> bitmaps = new LinkedList<>();
     /**
      * map image view id to image
      */
-    private final SparseArray<Image> images = new SparseArray<Image>();
+    private final SparseArray<Image> images = new SparseArray<>();
     private final String geocode;
     private LinearLayout imagesView;
 
@@ -97,26 +100,27 @@ public class ImagesList {
             }
         }));
 
-        imagesView = (LinearLayout) parentView.findViewById(R.id.spoiler_list);
+        imagesView = ButterKnife.findById(parentView, R.id.spoiler_list);
 
         final HtmlImage imgGetter = new HtmlImage(geocode, true, offline ? StoredList.STANDARD_LIST_ID : StoredList.TEMPORARY_LIST_ID, false);
 
         for (final Image img : images) {
-            final LinearLayout rowView = (LinearLayout) inflater.inflate(R.layout.cache_image_item, null);
+            final LinearLayout rowView = (LinearLayout) inflater.inflate(R.layout.cache_image_item, imagesView, false);
             assert(rowView != null);
 
             if (StringUtils.isNotBlank(img.getTitle())) {
-                ((TextView) rowView.findViewById(R.id.title)).setText(Html.fromHtml(img.getTitle()));
+                final TextView titleView = ButterKnife.findById(rowView, R.id.title);
+                titleView.setText(Html.fromHtml(img.getTitle()));
                 rowView.findViewById(R.id.titleLayout).setVisibility(View.VISIBLE);
             }
 
             if (StringUtils.isNotBlank(img.getDescription())) {
-                final TextView descView = (TextView) rowView.findViewById(R.id.description);
+                final TextView descView = ButterKnife.findById(rowView, R.id.description);
                 descView.setText(Html.fromHtml(img.getDescription()), TextView.BufferType.SPANNABLE);
                 descView.setVisibility(View.VISIBLE);
             }
 
-            final ImageView imageView = (ImageView) inflater.inflate(R.layout.image_item, null);
+            final ImageView imageView = (ImageView) inflater.inflate(R.layout.image_item, rowView, false);
             assert(imageView != null);
             subscriptions.add(AndroidObservable.bindActivity(activity, imgGetter.fetchDrawable(img.getUrl())).subscribe(new Action1<BitmapDrawable>() {
                 @Override
@@ -141,7 +145,7 @@ public class ImagesList {
             imageView.setClickable(true);
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View arg0) {
+                public void onClick(final View arg0) {
                     viewImageInStandardApp(img, image);
                 }
             });
@@ -169,7 +173,7 @@ public class ImagesList {
         imagesView.removeAllViews();
     }
 
-    public void onCreateContextMenu(ContextMenu menu, View v) {
+    public void onCreateContextMenu(final ContextMenu menu, final View v) {
         assert v instanceof ImageView;
         activity.getMenuInflater().inflate(R.menu.images_list_context, menu);
         final Resources res = activity.getResources();
@@ -179,7 +183,7 @@ public class ImagesList {
         currentImage = images.get(view.getId());
     }
 
-    public boolean onContextItemSelected(MenuItem item) {
+    public boolean onContextItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.image_open_file:
                 viewImageInStandardApp(currentImage, currentDrawable);
@@ -221,7 +225,7 @@ public class ImagesList {
                 intent.setDataAndType(Uri.fromFile(saveToTemporaryJPGFile(image)), "image/jpeg");
             }
             activity.startActivity(intent);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Log.e("ImagesList.viewImageInStandardApp", e);
         }
     }

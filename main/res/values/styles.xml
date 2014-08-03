@@ -54,23 +54,13 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="action_bar_icon_cgeo">
-        <item name="android:layout_width">@dimen/actionbar_height</item>
-        <item name="android:layout_height">@dimen/actionbar_height</item>
-        <item name="android:padding">4dip</item>
-        <item name="android:scaleType">center</item>
-        <item name="android:focusable">true</item>
-        <item name="android:src">@drawable/actionbar_cgeo</item>
-        <item name="android:background">@drawable/actionbar_button</item>
-    </style>
-
     <style name="action_bar_action">
         <item name="android:layout_width">@dimen/actionbar_height</item>
         <item name="android:layout_height">@dimen/actionbar_height</item>
         <item name="android:padding">2dip</item>
         <item name="android:scaleType">center</item>
         <item name="android:focusable">true</item>
-        <item name="android:src">@drawable/actionbar_home</item>
+        <item name="android:src">@drawable/actionbar_cgeo</item>
         <item name="android:background">@drawable/actionbar_button</item>
     </style>
 
@@ -140,7 +130,7 @@
         <item name="android:layout_marginRight">10dip</item>
         <item name="android:layout_marginBottom">5dip</item>
         <item name="android:textColor">@color/text_dark</item>
-        <item name="android:textColorHint">@color/text_hint_dark</item>
+        <item name="android:textColorHint">?text_color_hint</item>
         <item name="android:background">@drawable/input_bcg_dark</item>
     </style>
 
@@ -310,7 +300,7 @@
 
     <!-- author of a log item -->
     <style name="logitem_author">
-        <item name="android:id">@+id/author</item>
+        <item name="android:id">@id/author</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentLeft">true</item>

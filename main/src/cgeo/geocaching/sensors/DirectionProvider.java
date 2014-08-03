@@ -21,9 +21,13 @@ import android.view.WindowManager;
 
 public class DirectionProvider {
 
-    private static final BehaviorSubject<Float> subject = BehaviorSubject.create(0.0f);
+    private static final BehaviorSubject<Float> SUBJECT = BehaviorSubject.create(0.0f);
 
-    private static final WindowManager windowManager = (WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
+    private static final WindowManager WINDOW_MANAGER = (WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
+
+    private DirectionProvider() {
+        // utility class
+    }
 
     static class Listener implements SensorEventListener, StartableHandlerThread.Callback {
 
@@ -33,22 +37,17 @@ public class DirectionProvider {
 
         @Override
         public void onSensorChanged(final SensorEvent event) {
-            subject.onNext(event.values[0]);
+            SUBJECT.onNext(event.values[0]);
         }
 
         @Override
         public void onAccuracyChanged(final Sensor sensor, final int accuracy) {
-                /*
-                * There is a bug in Android, which apparently causes this method to be called every
-                * time the sensor _value_ changed, even if the _accuracy_ did not change. So logging
-                * this event leads to the log being flooded with multiple entries _per second_,
-                * which I experienced when running cgeo in a building (with GPS and network being
-                * unreliable).
-                *
-                * See for example https://code.google.com/p/android/issues/detail?id=14792
-                */
-
-            //Log.i(Settings.tag, "Compass' accuracy is low (" + accuracy + ")");
+            /*
+             * There is a bug in Android, which apparently causes this method to be called every
+             * time the sensor _value_ changed, even if the _accuracy_ did not change. Do not have any code in here.
+             *
+             * See for example https://code.google.com/p/android/issues/detail?id=14792
+             */
         }
 
         @Override
@@ -83,7 +82,7 @@ public class DirectionProvider {
         private boolean hasSensorChecked = false;
 
         public boolean hasSensor(Context context) {
-            if (hasSensorChecked == false) {
+            if (!hasSensorChecked) {
                 hasSensor = getOrientationSensor(context) != null;
                 hasSensorChecked = true;
             }
@@ -99,18 +98,19 @@ public class DirectionProvider {
 
     }
 
-    private static final StartableHandlerThread handlerThread =
+    private static final StartableHandlerThread HANDLER_THREAD =
             new StartableHandlerThread("DirectionProvider thread", Process.THREAD_PRIORITY_BACKGROUND, new Listener());
 
     static {
-      handlerThread.start();
+        HANDLER_THREAD.start();
     }
-    static public Observable<Float> create(final Context context) {
+
+    public static Observable<Float> create(final Context context) {
         return Observable.create(new OnSubscribe<Float>() {
             @Override
             public void call(final Subscriber<? super Float> subscriber) {
-                handlerThread.start(subscriber, context);
-                subject.subscribe(subscriber);
+                HANDLER_THREAD.start(subscriber, context);
+                SUBJECT.subscribe(subscriber);
             }
         });
     }
@@ -131,7 +131,7 @@ public class DirectionProvider {
     }
 
     private static int getRotationOffset() {
-        switch (windowManager.getDefaultDisplay().getRotation()) {
+        switch (WINDOW_MANAGER.getDefaultDisplay().getRotation()) {
             case Surface.ROTATION_90:
                 return 90;
             case Surface.ROTATION_180:

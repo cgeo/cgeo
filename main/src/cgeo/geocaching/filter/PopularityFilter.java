@@ -28,7 +28,7 @@ class PopularityFilter extends AbstractFilter {
 
         @Override
         public List<IFilter> getFilters() {
-            final List<IFilter> filters = new ArrayList<IFilter>(FAVORITES.length);
+            final List<IFilter> filters = new ArrayList<>(FAVORITES.length);
             for (int i = 0; i < FAVORITES.length; i++) {
                 final int minRange = FAVORITES[i];
                 final int maxRange = Integer.MAX_VALUE;

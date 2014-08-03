@@ -1,6 +1,8 @@
 package cgeo.geocaching.utils;
 
+import rx.Observable;
 import rx.Scheduler;
+import rx.observables.BlockingObservable;
 import rx.schedulers.Schedulers;
 
 import java.util.concurrent.LinkedBlockingQueue;
@@ -12,7 +14,15 @@ public class RxUtils {
     // Utility class, not to be instanciated
     private RxUtils() {}
 
-    final static private int cores = Runtime.getRuntime().availableProcessors();
-    public final static Scheduler computationScheduler = Schedulers.executor(new ThreadPoolExecutor(1, cores, 5, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>()));
+    public final static Scheduler computationScheduler = Schedulers.computation();
 
+    public static final Scheduler networkScheduler = Schedulers.from(new ThreadPoolExecutor(10, 10, 5, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>()));
+
+    public static <T> void waitForCompletion(final BlockingObservable<T> observable) {
+        observable.lastOrDefault(null);
+    }
+
+    public static void waitForCompletion(final Observable<?>... observables) {
+        waitForCompletion(Observable.merge(observables).toBlocking());
+    }
 }

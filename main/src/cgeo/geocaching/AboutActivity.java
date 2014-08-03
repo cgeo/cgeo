@@ -14,10 +14,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -28,14 +30,16 @@ import java.util.Scanner;
 
 public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page> {
 
+    private static final String EXTRA_ABOUT_STARTPAGE = "cgeo.geocaching.extra.about.startpage";
+
     class LicenseViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
         @InjectView(R.id.license) protected TextView licenseLink;
         @InjectView(R.id.license_text) protected TextView licenseText;
 
         @Override
-        public ScrollView getDispatchedView() {
-            final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_license_page, null);
+        public ScrollView getDispatchedView(final ViewGroup parentView) {
+            final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_license_page, parentView, false);
             ButterKnife.inject(this, view);
             setClickListener(licenseLink, "http://www.apache.org/licenses/LICENSE-2.0.html");
             licenseText.setText(getRawResourceString(R.raw.license));
@@ -48,8 +52,8 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @InjectView(R.id.contributors) protected TextView contributors;
 
         @Override
-        public ScrollView getDispatchedView() {
-            final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_contributors_page, null);
+        public ScrollView getDispatchedView(final ViewGroup parentView) {
+            final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_contributors_page, parentView, false);
             ButterKnife.inject(this, view);
             contributors.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             return view;
@@ -63,8 +67,8 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @InjectView(R.id.changelog_release) protected TextView changeLogRelease;
 
         @Override
-        public ScrollView getDispatchedView() {
-            final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_changes_page, null);
+        public ScrollView getDispatchedView(final ViewGroup parentView) {
+            final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_changes_page, parentView, false);
             ButterKnife.inject(this, view);
             changeLogRelease.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             final String changeLogMasterString = getString(R.string.changelog_master);
@@ -84,19 +88,17 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @InjectView(R.id.website) protected TextView website;
         @InjectView(R.id.facebook) protected TextView facebook;
         @InjectView(R.id.twitter) protected TextView twitter;
-        @InjectView(R.id.nutshellmanual) protected TextView nutshellmanual;
         @InjectView(R.id.market) protected TextView market;
         @InjectView(R.id.faq) protected TextView faq;
 
         @Override
-        public ScrollView getDispatchedView() {
-            final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_help_page, null);
+        public ScrollView getDispatchedView(final ViewGroup parentView) {
+            final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_help_page, parentView, false);
             ButterKnife.inject(this, view);
             setClickListener(support, "mailto:support@cgeo.org?subject=" + Uri.encode("cgeo " + Version.getVersionName(AboutActivity.this)));
             setClickListener(website, "http://www.cgeo.org/");
             setClickListener(facebook, "http://www.facebook.com/pages/cgeo/297269860090");
             setClickListener(twitter, "http://twitter.com/android_gc");
-            setClickListener(nutshellmanual, "http://manual.cgeo.org/");
             setClickListener(faq, "http://faq.cgeo.org/");
             market.setOnClickListener(new View.OnClickListener() {
 
@@ -116,8 +118,8 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         @InjectView(R.id.donate) protected TextView donateButton;
 
         @Override
-        public ScrollView getDispatchedView() {
-            final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_version_page, null);
+        public ScrollView getDispatchedView(final ViewGroup parentView) {
+            final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_version_page, parentView, false);
             ButterKnife.inject(this, view);
             version.setText(Version.getVersionName(AboutActivity.this));
             setClickListener(donateButton, "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AQBS7UP76CXW2");
@@ -142,7 +144,13 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.viewpager_activity);
-        createViewPager(0, null);
+
+        int startPage = Page.VERSION.ordinal();
+        final Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            startPage = extras.getInt(EXTRA_ABOUT_STARTPAGE, startPage);
+        }
+        createViewPager(startPage, null);
         reinitializeViewPager();
     }
 
@@ -208,6 +216,12 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             }
         }
         return result;
+    }
+
+    public static void showChangeLog(final Context fromActivity) {
+        final Intent intent = new Intent(fromActivity, AboutActivity.class);
+        intent.putExtra(EXTRA_ABOUT_STARTPAGE, Page.CHANGELOG.ordinal());
+        fromActivity.startActivity(intent);
     }
 
 }

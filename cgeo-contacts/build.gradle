@@ -1,0 +1,31 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.1.0"
+
+
+
+    defaultConfig {
+        minSdkVersion 9
+        targetSdkVersion 19
+        versionName "1.1"
+        versionCode 2
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+    }
+}
+
+dependencies {
+    compile 'org.apache.commons:commons-lang3:3.3.2'
+    compile files('../main/compile-libs/org.eclipse.jdt.annotation_1.1.0.v20130513-1648.jar')
+    // The depency to the ICalnder interface from the main project is missing
+    // compile(:main) is not right
+}

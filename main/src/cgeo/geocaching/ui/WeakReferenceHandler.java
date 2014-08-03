@@ -18,7 +18,7 @@ public abstract class WeakReferenceHandler<ActivityType extends Activity> extend
     private final WeakReference<ActivityType> activityRef;
 
     protected WeakReferenceHandler(final ActivityType activity) {
-        this.activityRef = new WeakReference<ActivityType>(activity);
+        this.activityRef = new WeakReference<>(activity);
     }
 
     protected ActivityType getActivity() {

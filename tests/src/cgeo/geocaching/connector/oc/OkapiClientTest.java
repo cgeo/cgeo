@@ -6,6 +6,7 @@ import cgeo.CGeoTestCase;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.enumerations.LogType;
 
 public class OkapiClientTest extends CGeoTestCase {
 
@@ -22,6 +23,8 @@ public class OkapiClientTest extends CGeoTestCase {
         assertThat(cache.getGeocode()).isEqualTo(geoCode);
         assertThat(cache.getName()).isEqualTo("Oshkosh Municipal Tank");
         assertThat(cache.isDetailed()).isTrue();
+        assertThat(cache.getOwnerDisplayName()).isNotEmpty();
+        assertThat(cache.getOwnerUserId()).isEqualTo(cache.getOwnerDisplayName());
     }
 
     public static void testOCSearchMustWorkWithoutOAuthAccessTokens() {
@@ -42,8 +45,17 @@ public class OkapiClientTest extends CGeoTestCase {
         assertThat(cache.getWaypoints()).hasSize(3);
 
         // load again
-        cache.refreshSynchronous(cache.getListId(), null);
+        cache.refreshSynchronous(null);
         assertThat(cache.getWaypoints()).hasSize(3);
+    }
+
+    public static void testOCWillAttendLogs() {
+        final String geoCode = "OC6465";
+
+        removeCacheCompletely(geoCode);
+        Geocache cache = OkapiClient.getCache(geoCode);
+        assertThat(cache).as("Cache from OKAPI").isNotNull();
+        assertThat(cache.getLogCounts().get(LogType.WILL_ATTEND)).isGreaterThan(0);
     }
 
 }

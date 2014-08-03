@@ -3,7 +3,7 @@ package cgeo.geocaching;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
@@ -37,7 +37,7 @@ import android.widget.Button;
 
 import java.util.Locale;
 
-public class SearchActivity extends AbstractActivity {
+public class SearchActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
 
     @InjectView(R.id.buttonLatitude) protected Button buttonLatitude;
     @InjectView(R.id.buttonLongitude) protected Button buttonLongitude;
@@ -174,8 +174,20 @@ public class SearchActivity extends AbstractActivity {
     }
 
     private void init() {
-        buttonLatitude.setOnClickListener(new FindByCoordsAction());
-        buttonLongitude.setOnClickListener(new FindByCoordsAction());
+        buttonLatitude.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                updateCoordinates();
+            }
+        });
+        buttonLongitude.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                updateCoordinates();
+            }
+        });
 
         buttonSearchCoords.setOnClickListener(new View.OnClickListener() {
 
@@ -277,21 +289,16 @@ public class SearchActivity extends AbstractActivity {
         }
     }
 
-    private class FindByCoordsAction implements OnClickListener {
+    private void updateCoordinates() {
+        final CoordinatesInputDialog coordsDialog = CoordinatesInputDialog.getInstance(null, null, app.currentGeo());
+        coordsDialog.setCancelable(true);
+        coordsDialog.show(getSupportFragmentManager(), "wpedit_dialog");
+    }
 
-        @Override
-        public void onClick(final View arg0) {
-            final CoordinatesInputDialog coordsDialog = new CoordinatesInputDialog(SearchActivity.this, null, null, app.currentGeo());
-            coordsDialog.setCancelable(true);
-            coordsDialog.setOnCoordinateUpdate(new CoordinatesInputDialog.CoordinateUpdate() {
-                @Override
-                public void update(final Geopoint gp) {
-                    buttonLatitude.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
-                    buttonLongitude.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
-                }
-            });
-            coordsDialog.show();
-        }
+    @Override
+    public void updateCoordinates(final Geopoint gp) {
+        buttonLatitude.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
+        buttonLongitude.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
     }
 
     private void findByCoordsFn() {

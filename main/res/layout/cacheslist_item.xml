@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:cc="http://schemas.android.com/apk/res/cgeo.geocaching"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/one_cache"
     android:layout_width="fill_parent"
@@ -111,7 +111,7 @@
             android:minHeight="28px"
             android:minWidth="28px"
             android:visibility="gone"
-            cc:skin="?compass"
+            app:skin="?compass"
             tools:ignore="PxUsage" />
 
         <ImageView

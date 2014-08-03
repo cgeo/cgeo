@@ -16,8 +16,6 @@ import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
@@ -52,9 +50,9 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(cache.getSize()).isEqualTo(CacheSize.MICRO);
         assertThat(cache.getDifficulty()).isEqualTo(1.0f);
         assertThat(cache.getTerrain()).isEqualTo(5.0f);
-        assertEquals("Baden-Württemberg, Germany", cache.getLocation());
-        assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel.\nA old dream of my childhood, a treasure on a lonely island.", cache.getShortDescription());
-        assertEquals(new Geopoint(48.859683, 9.1874), cache.getCoords());
+        assertThat(cache.getLocation()).isEqualTo("Baden-Württemberg, Germany");
+        assertThat(cache.getShortDescription()).isEqualTo("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel.\nA old dream of my childhood, a treasure on a lonely island.");
+        assertThat(cache.getCoords()).isEqualTo(new Geopoint(48.859683, 9.1874));
         return cache;
     }
 
@@ -77,9 +75,9 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(cache.getSize()).isEqualTo(CacheSize.SMALL);
         assertThat(cache.getDifficulty()).isEqualTo(1.0f);
         assertThat(cache.getTerrain()).isEqualTo(4.0f);
-        assertEquals("Baden-Württemberg, Germany", cache.getLocation());
-        assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel. A old dream of my childhood, a treasure on a lonely is", cache.getShortDescription());
-        assertEquals(new Geopoint(48.85968, 9.18740), cache.getCoords());
+        assertThat(cache.getLocation()).isEqualTo("Baden-Württemberg, Germany");
+        assertThat(cache.getShortDescription()).isEqualTo("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel. A old dream of my childhood, a treasure on a lonely is");
+        assertThat(cache.getCoords()).isEqualTo(new Geopoint(48.85968, 9.18740));
         assertThat(cache.isReliableLatLon()).isTrue();
     }
 
@@ -176,7 +174,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(log.author).isEqualTo("Geoteufel");
         assertThat(log.date).isEqualTo(parseTime("2011-09-11T07:00:00Z"));
         assertThat(log.found).isEqualTo(-1);
-        assertEquals("Sehr schöne Runde und wir haben wieder etwas Neues über Hockenheim gelernt. Super Tarnung.\nTFTC, Geoteufel", log.log);
+        assertThat(log.log).isEqualTo("Sehr schöne Runde und wir haben wieder etwas Neues über Hockenheim gelernt. Super Tarnung.\nTFTC, Geoteufel");
         assertThat(log.isOwn()).isFalse();
         assertThat(log.getDisplayText()).isEqualTo(log.log);
         assertThat(log.daysSinceLog() > 700).isTrue();
@@ -211,7 +209,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(wp.getPrefix()).isEqualTo("S1");
         assertThat(wp.getLookup()).isEqualTo("---");
         assertThat(wp.getName()).isEqualTo("Station 1");
-        assertEquals("Ein zweiter Wegpunkt, der nicht wirklich existiert sondern nur zum Testen gedacht ist.", wp.getNote());
+        assertThat(wp.getNote()).isEqualTo("Ein zweiter Wegpunkt, der nicht wirklich existiert sondern nur zum Testen gedacht ist.");
         assertThat(wp.getWaypointType()).isEqualTo(WaypointType.STAGE);
         assertEquals(49.317500, wp.getCoords().getLatitude(), 0.000001);
         assertEquals(8.545100, wp.getCoords().getLongitude(), 0.000001);
@@ -287,7 +285,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(caches).hasSize(1);
         DataStore.removeAllFromCache();
         // load only the minimum cache, it has several members missing
-        final Geocache minimalCache = DataStore.loadCache(geocode, EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
+        final Geocache minimalCache = DataStore.loadCache(geocode, EnumSet.of(LoadFlag.DB_MINIMAL));
 
         // now check that we load lazy members on demand
         assertThat(minimalCache.getAttributes()).isNotEmpty();
@@ -320,7 +318,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(waymark).isNotNull();
         assertThat(waymark.getGeocode()).isEqualTo("WM7BM7");
         assertThat(waymark.getName()).isEqualTo("Roman water pipe Kornwestheim");
-        assertThat(StringUtils.isNotBlank(waymark.getUrl())).isTrue(); // connector must be able to create it
+        assertThat(waymark.getUrl()).isNotEmpty(); // connector must be able to create it
         assertThat(waymark.getType()).isEqualTo(CacheType.UNKNOWN);
         assertThat(waymark.getSize()).isEqualTo(CacheSize.UNKNOWN);
     }
@@ -347,7 +345,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(cache.getDifficulty()).isEqualTo(1.5f);
         assertThat(cache.getTerrain()).isEqualTo(1.0f);
         assertThat(cache.getDescription().startsWith("Dieses sind die Reste einer in Kornwestheim gefundenen")).isTrue();
-        assertEquals(new Geopoint(48.8642167, 9.1836), cache.getCoords());
+        assertThat(cache.getCoords()).isEqualTo(new Geopoint(48.8642167, 9.1836));
         assertThat(cache.isReliableLatLon()).isTrue();
         assertThat(cache.getHint()).isEqualTo("Wasserleitung");
     }

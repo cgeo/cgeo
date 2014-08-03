@@ -16,6 +16,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 
+import java.lang.ref.WeakReference;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -58,12 +59,12 @@ public final class StoredList extends AbstractList {
     }
 
     public static class UserInterface {
-        private final Activity activity;
+        private final WeakReference<Activity> activityRef;
         private final CgeoApplication app;
         private final Resources res;
 
-        public UserInterface(final Activity activity) {
-            this.activity = activity;
+        public UserInterface(final @NonNull Activity activity) {
+            this.activityRef = new WeakReference<>(activity);
             app = CgeoApplication.getInstance();
             res = app.getResources();
         }
@@ -77,7 +78,36 @@ public final class StoredList extends AbstractList {
         }
 
         public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId, final String newListName) {
-            final List<AbstractList> lists = new ArrayList<AbstractList>();
+            final List<AbstractList> lists = getMenuLists(onlyConcreteLists, exceptListId);
+
+            final List<CharSequence> listsTitle = new ArrayList<>();
+            for (AbstractList list : lists) {
+                listsTitle.add(list.getTitleAndCount());
+            }
+
+            final CharSequence[] items = new CharSequence[listsTitle.size()];
+
+            final Activity activity = activityRef.get();
+            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            builder.setTitle(res.getString(titleId));
+            builder.setItems(listsTitle.toArray(items), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int itemId) {
+                    final AbstractList list = lists.get(itemId);
+                    if (list == PseudoList.NEW_LIST) {
+                        // create new list on the fly
+                        promptForListCreation(runAfterwards, newListName);
+                    }
+                    else {
+                        runAfterwards.call(lists.get(itemId).id);
+                    }
+                }
+            });
+            builder.create().show();
+        }
+
+        public static List<AbstractList> getMenuLists(boolean onlyConcreteLists, int exceptListId) {
+            final List<AbstractList> lists = new ArrayList<>();
             lists.addAll(getSortedLists());
 
             if (exceptListId > StoredList.TEMPORARY_LIST_ID) {
@@ -95,31 +125,10 @@ public final class StoredList extends AbstractList {
                     lists.add(PseudoList.HISTORY_LIST);
                 }
             }
-            lists.add(PseudoList.NEW_LIST);
-
-            final List<CharSequence> listsTitle = new ArrayList<CharSequence>();
-            for (AbstractList list : lists) {
-                listsTitle.add(list.getTitleAndCount());
+            if (exceptListId != PseudoList.NEW_LIST.id) {
+                lists.add(PseudoList.NEW_LIST);
             }
-
-            final CharSequence[] items = new CharSequence[listsTitle.size()];
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-            builder.setTitle(res.getString(titleId));
-            builder.setItems(listsTitle.toArray(items), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int itemId) {
-                    final AbstractList list = lists.get(itemId);
-                    if (list == PseudoList.NEW_LIST) {
-                        // create new list on the fly
-                        promptForListCreation(runAfterwards, newListName);
-                    }
-                    else {
-                        runAfterwards.call(lists.get(itemId).id);
-                    }
-                }
-            });
-            builder.create().show();
+            return lists;
         }
 
         @NonNull
@@ -151,6 +160,10 @@ public final class StoredList extends AbstractList {
                 @SuppressWarnings("unused")
                 @Override
                 public void call(final String listName) {
+                    final Activity activity = activityRef.get();
+                    if (activity == null) {
+                        return;
+                    }
                     final int newId = DataStore.createList(listName);
                     new StoredList(newId, listName, 0);
 
@@ -165,6 +178,10 @@ public final class StoredList extends AbstractList {
         }
 
         private void handleListNameInput(final String defaultValue, int dialogTitle, int buttonTitle, final Action1<String> runnable) {
+            final Activity activity = activityRef.get();
+            if (activity == null) {
+                return;
+            }
             Dialogs.input(activity, dialogTitle, defaultValue, buttonTitle, new Action1<String>() {
 
                 @Override
@@ -193,12 +210,16 @@ public final class StoredList extends AbstractList {
     }
 
     /**
-     * Get the list title. This method is not public by intention to make clients use the {@link UserInterface} class.
-     *
-     * @return
+     * Get the list title.
      */
-    protected String getTitle() {
+    @Override
+    public String getTitle() {
         return title;
+    }
+
+    @Override
+    public int getNumberOfCaches() {
+        return count;
     }
 
     /**
