@@ -26,7 +26,8 @@ public class PopularityRatioComparator extends AbstractCacheComparator {
 
         if ((ratio2 - ratio1) > 0.0f) {
             return 1;
-        } else if ((ratio2 - ratio1) < 0.0f) {
+        }
+        if ((ratio2 - ratio1) < 0.0f) {
             return -1;
         }
 

@@ -139,10 +139,11 @@ public class GPXImporter {
 			final String mimeType) {
         if (GPX_MIME_TYPES.contains(mimeType)) {
 			return FileType.GPX;
-        } else if (ZIP_MIME_TYPES.contains(mimeType)) {
+        }
+        if (ZIP_MIME_TYPES.contains(mimeType)) {
 			return FileType.ZIP;
 		}
-		return FileType.UNKNOWN;
+        return FileType.UNKNOWN;
 	}
 
 	private ImportThread getImporterFromFileType(Uri uri,
