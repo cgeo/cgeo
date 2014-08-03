@@ -89,7 +89,7 @@ public final class Viewport {
         int total = 0;
         for (ICoordinates point: points) {
             if (point != null && contains(point)) {
-                total = total + 1;
+                total += 1;
             }
         }
         return total;
