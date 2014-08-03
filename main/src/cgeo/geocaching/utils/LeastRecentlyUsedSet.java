@@ -20,12 +20,9 @@ import java.util.List;
  * access has to be guarded externally or the synchronized getAsList method can be used
  * to get a clone for iteration.
  */
-public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
-        implements Cloneable, java.io.Serializable {
+public class LeastRecentlyUsedSet<E> extends AbstractSet<E> {
 
-    private static final long serialVersionUID = -1942301031191419547L;
-
-    private transient LeastRecentlyUsedMap<E, Object> map;
+    private final LeastRecentlyUsedMap<E, Object> map;
     private static final Object PRESENT = new Object();
 
     public LeastRecentlyUsedSet(int maxEntries, int initialCapacity, float loadFactor) {
@@ -132,84 +129,12 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E>
     }
 
     /**
-     * (synchronized) Clone of the set
-     * Copy of the HashSet code if clone()
-     *
-     * @see HashSet
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public Object clone() throws CloneNotSupportedException {
-        try {
-            synchronized (this) {
-                final LeastRecentlyUsedSet<E> newSet = (LeastRecentlyUsedSet<E>) super.clone();
-                newSet.map = (LeastRecentlyUsedMap<E, Object>) map.clone();
-                return newSet;
-            }
-        } catch (CloneNotSupportedException e) {
-            throw new InternalError();
-        }
-    }
-
-    /**
      * Creates a clone as a list in a synchronized fashion.
      *
      * @return List based clone of the set
      */
     public synchronized List<E> getAsList() {
         return new ArrayList<>(this);
-    }
-
-    /**
-     * Serialization version of HashSet with the additional parameters for the custom Map
-     *
-     * @see HashSet
-     */
-    private void writeObject(java.io.ObjectOutputStream s)
-            throws java.io.IOException {
-        // Write out any hidden serialization magic
-        s.defaultWriteObject();
-
-        // Write out HashMap capacity and load factor
-        s.writeInt(map.initialCapacity);
-        s.writeFloat(map.loadFactor);
-        s.writeInt(map.getMaxEntries());
-
-        // Write out size
-        s.writeInt(map.size());
-
-        // Write out all elements in the proper order.
-        for (final E e : map.keySet()) {
-            s.writeObject(e);
-        }
-    }
-
-    /**
-     * Serialization version of HashSet with the additional parameters for the custom Map
-     *
-     * @see HashSet
-     */
-    @SuppressWarnings("unchecked")
-    private void readObject(java.io.ObjectInputStream s)
-            throws java.io.IOException, ClassNotFoundException {
-        // Read in any hidden serialization magic
-        s.defaultReadObject();
-
-        // Read in HashMap capacity and load factor and create backing HashMap
-        final int capacity = s.readInt();
-        final float loadFactor = s.readFloat();
-        final int maxEntries = s.readInt();
-
-        map = new LeastRecentlyUsedMap.LruCache<>(maxEntries, capacity, loadFactor);
-
-        // Read in size
-        final int size = s.readInt();
-
-        // Read in all elements in the proper order.
-        for (int i = 0; i < size; i++) {
-            E e = (E) s.readObject();
-            map.put(e, PRESENT);
-        }
     }
 
 }
