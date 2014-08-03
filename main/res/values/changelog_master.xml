@@ -3,34 +3,6 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
-    · New: Actionbar menus (<b>long press action buttons for a description</b>)\n
-    · New: Show also own logs on friends log page\n
-    · New: Navigate - WhereYouGo will invoke automatic cartridge download in WhereYouGo\n
-    · New: Filter for caches which are not found\n
-    · New: Show "Import from web" also if not yet registered\n
-    · New: Popup list of changes on first start after upgrade\n
-    · New: Android Beam (NFC Sharing)\n
-    · New: Debugging option to save memory dumps on user demand\n
-    · New: Load Greokrety inventory for OC caches\n
-    · New: Autosave caches if user modifies waypoints\n
-    · New: Show recently viewed caches when clicking search icon on main screen\n
-    · New: Add support for opencaching.org.uk\n
-    · New: Improved sorting of waypoints depending on waypoint category\n
-    · New: Have a link to \"related webpage\" in cache details\n
-    · Fix: Hiding own caches on opencaching\n
-    · Fix: Webcam caches not marked as found after posting log\n
-    · Fix: Archived caches now also hidden if hiding disabled caches is active\n
-    · Fix: Filter invalid characters in GPX files\n
-    · Fix: All caches shown as owned if no username stored\n
-    · Fix: GPX import from mail failing on some devices\n
-    · Fix: Updating cache history should not ask for list to save caches\n
-    · Fix: Speed now always shown in km or miles per hour\n
-    · Fix: USER template now shows the correct username for the site where the cache is hosted\n
-    · Fix: Keep filter active if user switches the list\n
-    · Fix: Cache names with special chars not shown\n
-    · Fix: Improve static maps resolution and scaling depending on the screen resolution\n
-    · Fix: Will attend logs not counted in log summary of OC caches\n
-    · Fix: Improved loading of listing images\n
     \n
     \n
   </string>
