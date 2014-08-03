@@ -26,7 +26,7 @@ public class ECLogin extends AbstractLogin {
     }
 
     private static class SingletonHolder {
-        private static ECLogin INSTANCE = new ECLogin();
+        private final static ECLogin INSTANCE = new ECLogin();
     }
 
     public static ECLogin getInstance() {

@@ -33,7 +33,7 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
 
     private String mapFile;
 
-    private static int REQUEST_DIRECTORY = 1;
+    private final static int REQUEST_DIRECTORY = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -263,7 +263,7 @@ public class SimpleDirChooser extends AbstractListActivity {
         private boolean checked = false;
         private boolean writeable = false;
 
-        private static Comparator<Option> NAME_COMPARATOR = new Comparator<SimpleDirChooser.Option>() {
+        private final static Comparator<Option> NAME_COMPARATOR = new Comparator<SimpleDirChooser.Option>() {
 
             @Override
             public int compare(final Option lhs, final Option rhs) {

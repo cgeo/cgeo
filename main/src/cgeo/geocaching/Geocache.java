@@ -165,7 +165,7 @@ public class Geocache implements ICache, IWaypoint {
 
     // Images whose URL contains one of those patterns will not be available on the Images tab
     // for opening into an external application.
-    private final String[] NO_EXTERNAL = new String[]{"geocheck.org"};
+    private final static String[] NO_EXTERNAL = new String[]{"geocheck.org"};
 
     /**
      * Create a new cache. To be used everywhere except for the GPX parser

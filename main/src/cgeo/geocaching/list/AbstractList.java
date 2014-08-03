@@ -8,7 +8,7 @@ public abstract class AbstractList {
 
     public final int id;
     public final String title;
-    private static SparseArray<AbstractList> LISTS = new SparseArray<>();
+    private final static SparseArray<AbstractList> LISTS = new SparseArray<>();
 
     public AbstractList(final int id, final String title) {
         this.id = id;
