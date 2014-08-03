@@ -982,18 +982,28 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void showFooterLoadingCaches() {
+        // no footer for offline lists
+        if (listFooter == null) {
+            return;
+        }
         listFooterText.setText(res.getString(R.string.caches_more_caches_loading));
         listFooter.setClickable(false);
         listFooter.setOnClickListener(null);
     }
 
     private void showFooterMoreCaches() {
+        // no footer in offline lists
+        if (listFooter == null) {
+            return;
+        }
+
         boolean enableMore = type != CacheListType.OFFLINE && cacheList.size() < MAX_LIST_ITEMS;
         if (enableMore && search != null) {
             final int count = search.getTotalCountGC();
             enableMore = count > 0 && cacheList.size() < count;
         }
 
+        listFooter.setClickable(enableMore);
         if (enableMore) {
             listFooterText.setText(res.getString(R.string.caches_more_caches) + " (" + res.getString(R.string.caches_more_caches_currently) + ": " + cacheList.size() + ")");
             listFooter.setOnClickListener(new MoreCachesListener());
@@ -1001,10 +1011,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             listFooterText.setText(res.getString(CollectionUtils.isEmpty(cacheList) ? R.string.caches_no_cache : R.string.caches_more_caches_no));
             listFooter.setOnClickListener(null);
         } else {
-            // hide footer completely after online-list was loaded
-            listFooter.setVisibility(View.GONE);
+            // hiding footer for offline list is not possible, it must be removed instead
+            // http://stackoverflow.com/questions/7576099/hiding-footer-in-listview
+            getListView().removeFooterView(listFooter);
         }
-        listFooter.setClickable(enableMore);
     }
 
     private void importGpx() {
