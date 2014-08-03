@@ -11,8 +11,6 @@ import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.observables.ConnectableObservable;
 import rx.subjects.BehaviorSubject;
-import rx.subscriptions.CompositeSubscription;
-import rx.subscriptions.Subscriptions;
 
 import android.content.Context;
 import android.location.Location;
@@ -73,45 +71,32 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
 
     final ConnectableObservable<IGeoData> worker = new ConnectableObservable<IGeoData>(this) {
         private final AtomicInteger count = new AtomicInteger(0);
-
-        final private Listener networkListener = new Listener(LocationManager.NETWORK_PROVIDER, netLocation);
-        final private Listener gpsListener = new Listener(LocationManager.GPS_PROVIDER, gpsLocation);
+        private final Listener networkListener = new Listener(LocationManager.NETWORK_PROVIDER, netLocation);
+        private final Listener gpsListener = new Listener(LocationManager.GPS_PROVIDER, gpsLocation);
 
         @Override
         public void connect(Action1<? super Subscription> connection) {
-            final CompositeSubscription subscription = new CompositeSubscription();
-            RxUtils.looperCallbacksWorker.schedule(new Action0() {
-                @Override
-                public void call() {
-                    if (count.getAndIncrement() == 0) {
-                        Log.d("GeoDataProvider: starting the GPS and network listeners");
-                        for (final Listener listener : new Listener[]{networkListener, gpsListener}) {
-                            try {
-                                geoManager.requestLocationUpdates(listener.locationProvider, 0, 0, listener);
-                            } catch (final Exception e) {
-                                Log.w("There is no location provider " + listener.locationProvider);
-                            }
-                        }
-                    }
-
-                    subscription.add(Subscriptions.create(new Action0() {
+            connection.call(RxUtils.looperCallbacksSchedule(count,
+                    new Action0() {
                         @Override
                         public void call() {
-                            RxUtils.looperCallbacksWorker.schedule(new Action0() {
-                                @Override
-                                public void call() {
-                                    if (count.decrementAndGet() == 0) {
-                                        Log.d("GeoDataProvider: stopping the GPS and network listeners");
-                                        geoManager.removeUpdates(networkListener);
-                                        geoManager.removeUpdates(gpsListener);
-                                    }
+                            Log.d("GeoDataProvider: starting the GPS and network listeners");
+                            for (final Listener listener : new Listener[]{networkListener, gpsListener}) {
+                                try {
+                                    geoManager.requestLocationUpdates(listener.locationProvider, 0, 0, listener);
+                                } catch (final Exception e) {
+                                    Log.w("There is no location provider " + listener.locationProvider);
                                 }
-                            }, 2500, TimeUnit.MILLISECONDS);
+                            }
                         }
-                    }));
-                }
-            });
-            connection.call(subscription);
+                    }, new Action0() {
+                        @Override
+                        public void call() {
+                            Log.d("GeoDataProvider: stopping the GPS and network listeners");
+                            geoManager.removeUpdates(networkListener);
+                            geoManager.removeUpdates(gpsListener);
+                        }
+                    }, 2500, TimeUnit.MILLISECONDS));
         }
     };
 

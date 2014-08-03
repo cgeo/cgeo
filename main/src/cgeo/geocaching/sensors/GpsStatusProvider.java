@@ -12,8 +12,6 @@ import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.observables.ConnectableObservable;
 import rx.subjects.BehaviorSubject;
-import rx.subscriptions.CompositeSubscription;
-import rx.subscriptions.Subscriptions;
 
 import android.content.Context;
 import android.location.GpsSatellite;
@@ -66,37 +64,25 @@ public class GpsStatusProvider implements OnSubscribe<Status> {
 
     final ConnectableObservable<Status> worker = new ConnectableObservable<Status>(this) {
         private final AtomicInteger count = new AtomicInteger(0);
-
-        final private GpsStatus.Listener gpsStatusListener = new GpsStatusListener();
+        private final GpsStatus.Listener gpsStatusListener = new GpsStatusListener();
 
         @Override
         public void connect(Action1<? super Subscription> connection) {
-            final CompositeSubscription subscription = new CompositeSubscription();
-            RxUtils.looperCallbacksWorker.schedule(new Action0() {
-                @Override
-                public void call() {
-                    if (count.getAndIncrement() == 0) {
-                        Log.d("GpsStatusProvider: starting the GPS status listener");
-                        geoManager.addGpsStatusListener(gpsStatusListener);
-                    }
-
-                    subscription.add(Subscriptions.create(new Action0() {
+            connection.call(RxUtils.looperCallbacksSchedule(count,
+                    new Action0() {
                         @Override
                         public void call() {
-                            RxUtils.looperCallbacksWorker.schedule(new Action0() {
-                                @Override
-                                public void call() {
-                                    if (count.decrementAndGet() == 0) {
-                                        Log.d("GpsStatusProvider: stopping the GPS status listener");
-                                        geoManager.removeGpsStatusListener(gpsStatusListener);
-                                    }
-                                }
-                            });
+                            Log.d("GpsStatusProvider: starting the GPS status listener");
+                            geoManager.addGpsStatusListener(gpsStatusListener);
+                        }
+                    },
+                    new Action0() {
+                        @Override
+                        public void call() {
+                            Log.d("GpsStatusProvider: stopping the GPS status listener");
+                            geoManager.removeGpsStatusListener(gpsStatusListener);
                         }
                     }));
-                }
-            });
-            connection.call(subscription);
         }
     };
 
