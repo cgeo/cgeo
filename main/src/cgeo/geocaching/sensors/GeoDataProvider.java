@@ -3,8 +3,6 @@ package cgeo.geocaching.sensors;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.StartableHandlerThread;
 
-import org.apache.commons.lang3.StringUtils;
-
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
@@ -29,7 +27,6 @@ import java.util.concurrent.TimeUnit;
 
 public class GeoDataProvider implements OnSubscribe<IGeoData> {
 
-    private static final String LAST_LOCATION_PSEUDO_PROVIDER = "last";
     private final LocationManager geoManager;
     private final LocationData gpsLocation = new LocationData();
     private final LocationData netLocation = new LocationData();
@@ -140,7 +137,7 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
     };
 
     private IGeoData findInitialLocation() {
-        final Location initialLocation = new Location(LAST_LOCATION_PSEUDO_PROVIDER);
+        final Location initialLocation = new Location("initial");
         try {
             // Try to find a sensible initial location from the last locations known to Android.
             final Location lastGpsLocation = geoManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -167,7 +164,7 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
         }
         // Start with an historical GeoData just in case someone queries it before we get
         // a chance to get any information.
-        return new GeoData(initialLocation, false, 0, 0, true);
+        return new GeoData(initialLocation, false, 0, 0);
     }
 
     private static void copyCoords(final Location target, final Location source) {
@@ -275,8 +272,7 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
 
         // We do not necessarily get signalled when satellites go to 0/0.
         final int visible = gpsLocation.isRecent() ? satellitesVisible : 0;
-        final boolean pseudoLocation = StringUtils.equals(locationData.location.getProvider(), LAST_LOCATION_PSEUDO_PROVIDER);
-        final IGeoData current = new GeoData(locationData.location, gpsEnabled, visible, satellitesFixed, pseudoLocation);
+        final IGeoData current = new GeoData(locationData.location, gpsEnabled, visible, satellitesFixed);
         subject.onNext(current);
     }
 

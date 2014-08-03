@@ -891,7 +891,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     // Set center of map to my location if appropriate.
     private void myLocationInMiddle(final IGeoData geo) {
-        if (followMyLocation && !geo.isPseudoLocation()) {
+        if (followMyLocation) {
             centerMap(geo.getCoords());
         }
     }
@@ -908,7 +908,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         private static final float MIN_LOCATION_DELTA = 0.01f;
 
         Location currentLocation = new Location("");
-        boolean locationValid = false;
         float currentHeading;
 
         private long timeLastPositionOverlayCalculation = 0;
@@ -923,15 +922,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         @Override
         public void updateGeoDir(final IGeoData geo, final float dir) {
-            if (geo.isPseudoLocation()) {
-                locationValid = false;
-            } else {
-                locationValid = true;
-
-                currentLocation = geo.getLocation();
-                currentHeading = DirectionProvider.getDirectionNow(dir);
-                repaintPositionOverlay();
-            }
+            currentLocation = geo.getLocation();
+            currentHeading = DirectionProvider.getDirectionNow(dir);
+            repaintPositionOverlay();
         }
 
         /**
@@ -975,10 +968,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
 
         boolean needsRepaintForDistance() {
-            if (!locationValid) {
-                return false;
-            }
-
             final CGeoMap map = mapRef.get();
             if (map == null) {
                 return false;

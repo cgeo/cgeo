@@ -10,8 +10,6 @@ public interface IGeoData {
     public Location getLocation();
     public LocationProviderType getLocationProvider();
 
-    public boolean isPseudoLocation();
-
     public Geopoint getCoords();
     public float getBearing();
     public float getSpeed();

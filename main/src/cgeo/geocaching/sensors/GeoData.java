@@ -10,14 +10,12 @@ class GeoData extends Location implements IGeoData {
     private final boolean gpsEnabled;
     private final int satellitesVisible;
     private final int satellitesFixed;
-    private final boolean pseudoLocation;
 
-    GeoData(final Location location, final boolean gpsEnabled, final int satellitesVisible, final int satellitesFixed, final boolean pseudoLocation) {
+    GeoData(final Location location, final boolean gpsEnabled, final int satellitesVisible, final int satellitesFixed) {
         super(location);
         this.gpsEnabled = gpsEnabled;
         this.satellitesVisible = satellitesVisible;
         this.satellitesFixed = satellitesFixed;
-        this.pseudoLocation = pseudoLocation;
     }
 
     @Override
@@ -58,10 +56,5 @@ class GeoData extends Location implements IGeoData {
     @Override
     public int getSatellitesFixed() {
         return satellitesFixed;
-    }
-
-    @Override
-    public boolean isPseudoLocation() {
-        return pseudoLocation;
     }
 }
