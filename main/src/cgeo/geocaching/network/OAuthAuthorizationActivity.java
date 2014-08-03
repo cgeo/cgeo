@@ -193,9 +193,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
                         final String encodedParams = EntityUtils.toString(new UrlEncodedFormEntity(paramsBrowser));
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getUrlPrefix() + host + pathAuthorize + "?" + encodedParams)));
                         status = STATUS_SUCCESS;
-                    } catch (final ParseException e) {
-                        Log.e("OAuthAuthorizationActivity.requestToken", e);
-                    } catch (final IOException e) {
+                    } catch (ParseException | IOException e) {
                         Log.e("OAuthAuthorizationActivity.requestToken", e);
                     }
                 }
