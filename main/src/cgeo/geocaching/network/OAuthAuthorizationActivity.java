@@ -40,6 +40,8 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     private static final int STATUS_ERROR = 0;
     private static final int STATUS_SUCCESS = 1;
     private static final int STATUS_ERROR_EXT_MSG = 2;
+    private static final Pattern PARAMS_PATTERN_1 = Pattern.compile("oauth_token=([\\w_.-]+)");
+    private static final Pattern PARAMS_PATTERN_2 = Pattern.compile("oauth_token_secret=([\\w_.-]+)");
 
     @NonNull private String host = StringUtils.EMPTY;
     @NonNull private String pathRequest = StringUtils.EMPTY;
@@ -51,8 +53,6 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     @NonNull private String callback = StringUtils.EMPTY;
     private String OAtoken = null;
     private String OAtokenSecret = null;
-    private final Pattern paramsPattern1 = Pattern.compile("oauth_token=([\\w_.-]+)");
-    private final Pattern paramsPattern2 = Pattern.compile("oauth_token_secret=([\\w_.-]+)");
     @InjectView(R.id.start) protected Button startButton;
     @InjectView(R.id.auth_1) protected TextView auth_1;
     @InjectView(R.id.auth_2) protected TextView auth_2;
@@ -176,11 +176,11 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
             int status = STATUS_ERROR;
             if (StringUtils.isNotBlank(line)) {
                 assert line != null;
-                final MatcherWrapper paramsMatcher1 = new MatcherWrapper(paramsPattern1, line);
+                final MatcherWrapper paramsMatcher1 = new MatcherWrapper(PARAMS_PATTERN_1, line);
                 if (paramsMatcher1.find()) {
                     OAtoken = paramsMatcher1.group(1);
                 }
-                final MatcherWrapper paramsMatcher2 = new MatcherWrapper(paramsPattern2, line);
+                final MatcherWrapper paramsMatcher2 = new MatcherWrapper(PARAMS_PATTERN_2, line);
                 if (paramsMatcher2.find()) {
                     OAtokenSecret = paramsMatcher2.group(1);
                 }
@@ -225,11 +225,11 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
             OAtoken = "";
             OAtokenSecret = "";
 
-            final MatcherWrapper paramsMatcher1 = new MatcherWrapper(paramsPattern1, line);
+            final MatcherWrapper paramsMatcher1 = new MatcherWrapper(PARAMS_PATTERN_1, line);
             if (paramsMatcher1.find()) {
                 OAtoken = paramsMatcher1.group(1);
             }
-            final MatcherWrapper paramsMatcher2 = new MatcherWrapper(paramsPattern2, line);
+            final MatcherWrapper paramsMatcher2 = new MatcherWrapper(PARAMS_PATTERN_2, line);
             if (paramsMatcher2.find() && paramsMatcher2.groupCount() > 0) {
                 OAtokenSecret = paramsMatcher2.group(1);
             }
