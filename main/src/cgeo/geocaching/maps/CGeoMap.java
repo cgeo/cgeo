@@ -373,21 +373,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     }
 
     protected void countVisibleCaches() {
-        final List<Geocache> protectedCaches = caches.getAsList();
-
-        int count = 0;
-        if (!protectedCaches.isEmpty()) {
-            final Viewport viewport = mapView.getViewport();
-
-            for (final Geocache cache : protectedCaches) {
-                if (cache != null && cache.getCoords() != null) {
-                    if (viewport.contains(cache)) {
-                        count++;
-                    }
-                }
-            }
-        }
-        cachesCnt = count;
+        cachesCnt = mapView.getViewport().count(caches.getAsList());
     }
 
     @Override

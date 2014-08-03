@@ -79,6 +79,22 @@ public final class Viewport {
                 && coords.getLatitudeE6() <= topRight.getLatitudeE6();
     }
 
+    /**
+     * Count the number of points present in the viewport.
+     *
+     * @param points a collection of (possibly null) points
+     * @return the number of non-null points in the viewport
+     */
+    public int count(final @NonNull Collection<? extends ICoordinates> points) {
+        int total = 0;
+        for (ICoordinates point: points) {
+            if (point != null && contains(point)) {
+                total = total + 1;
+            }
+        }
+        return total;
+    }
+
     @Override
     public String toString() {
         return "(" + bottomLeft.toString() + "," + topRight.toString() + ")";
