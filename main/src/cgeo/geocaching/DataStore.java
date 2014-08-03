@@ -58,6 +58,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -1949,7 +1950,7 @@ public class DataStore {
 
         init();
 
-        final Map<LogType, Integer> logCounts = new HashMap<>();
+        final Map<LogType, Integer> logCounts = new EnumMap<>(LogType.class);
 
         final Cursor cursor = database.query(
                 dbTableLogCount,

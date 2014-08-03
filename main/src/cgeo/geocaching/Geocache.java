@@ -69,8 +69,8 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.EnumMap;
 import java.util.EnumSet;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -149,7 +149,7 @@ public class Geocache implements ICache, IWaypoint {
     private List<Image> spoilers = null;
 
     private List<Trackable> inventory = null;
-    private Map<LogType, Integer> logCounts = new HashMap<>();
+    private Map<LogType, Integer> logCounts = new EnumMap<>(LogType.class);
     private boolean userModifiedCoords = false;
     // temporary values
     private boolean statusChecked = false;
