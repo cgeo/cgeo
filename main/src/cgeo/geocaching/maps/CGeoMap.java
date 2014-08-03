@@ -204,7 +204,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private static BlockingQueue<Runnable> downloadQueue = new ArrayBlockingQueue<>(1);
     private static ThreadPoolExecutor downloadExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, downloadQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
     private static BlockingQueue<Runnable> loadQueue = new ArrayBlockingQueue<>(1);
-
     private static ThreadPoolExecutor loadExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, loadQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
     // handlers
     /** Updates the titles */
@@ -1218,9 +1217,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             //render
             displayExecutor.execute(new DisplayRunnable(this));
 
-        } catch (final ThreadDeath e) {
-            Log.d("DownloadThread stopped");
-            displayHandler.sendEmptyMessage(UPDATE_TITLE);
         } finally {
             showProgressHandler.sendEmptyMessage(HIDE_PROGRESS); // hide progress
         }
@@ -1279,9 +1275,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 displayHandler.sendEmptyMessage(INVALIDATE_MAP);
             }
 
-            displayHandler.sendEmptyMessage(UPDATE_TITLE);
-        } catch (final ThreadDeath e) {
-            Log.d("DisplayThread stopped");
             displayHandler.sendEmptyMessage(UPDATE_TITLE);
         } finally {
             showProgressHandler.sendEmptyMessage(HIDE_PROGRESS);
