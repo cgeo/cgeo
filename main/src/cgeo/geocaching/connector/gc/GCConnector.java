@@ -342,6 +342,11 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    public void logout() {
+        GCLogin.getInstance().logout();
+    }
+
+    @Override
     public String getUserName() {
         return GCLogin.getInstance().getActualUserName();
     }

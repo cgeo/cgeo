@@ -295,4 +295,6 @@ public abstract class AbstractConnector implements IConnector {
         return actions;
     }
 
+    public void logout() {
+    }
 }
