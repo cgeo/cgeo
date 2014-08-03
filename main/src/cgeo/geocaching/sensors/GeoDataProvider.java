@@ -1,14 +1,11 @@
 package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.RxUtils.ConnectableLooperCallbacks;
 
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
-import rx.Subscription;
-import rx.functions.Action0;
-import rx.functions.Action1;
 import rx.observables.ConnectableObservable;
 import rx.subjects.BehaviorSubject;
 
@@ -19,7 +16,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class GeoDataProvider implements OnSubscribe<IGeoData> {
 
@@ -69,34 +65,27 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
         subject.subscribe(subscriber);
     }
 
-    final ConnectableObservable<IGeoData> worker = new ConnectableObservable<IGeoData>(this) {
-        private final AtomicInteger count = new AtomicInteger(0);
+    final ConnectableObservable<IGeoData> worker = new ConnectableLooperCallbacks<IGeoData>(this, 2500, TimeUnit.MILLISECONDS) {
         private final Listener networkListener = new Listener(LocationManager.NETWORK_PROVIDER, netLocation);
         private final Listener gpsListener = new Listener(LocationManager.GPS_PROVIDER, gpsLocation);
 
         @Override
-        public void connect(Action1<? super Subscription> connection) {
-            connection.call(RxUtils.looperCallbacksSchedule(count,
-                    new Action0() {
-                        @Override
-                        public void call() {
-                            Log.d("GeoDataProvider: starting the GPS and network listeners");
-                            for (final Listener listener : new Listener[]{networkListener, gpsListener}) {
-                                try {
-                                    geoManager.requestLocationUpdates(listener.locationProvider, 0, 0, listener);
-                                } catch (final Exception e) {
-                                    Log.w("There is no location provider " + listener.locationProvider);
-                                }
-                            }
-                        }
-                    }, new Action0() {
-                        @Override
-                        public void call() {
-                            Log.d("GeoDataProvider: stopping the GPS and network listeners");
-                            geoManager.removeUpdates(networkListener);
-                            geoManager.removeUpdates(gpsListener);
-                        }
-                    }, 2500, TimeUnit.MILLISECONDS));
+        protected void onStart() {
+            Log.d("GeoDataProvider: starting the GPS and network listeners");
+            for (final Listener listener : new Listener[]{networkListener, gpsListener}) {
+                try {
+                    geoManager.requestLocationUpdates(listener.locationProvider, 0, 0, listener);
+                } catch (final Exception e) {
+                    Log.w("There is no location provider " + listener.locationProvider);
+                }
+            }
+        }
+
+        @Override
+        protected void onStop() {
+            Log.d("GeoDataProvider: stopping the GPS and network listeners");
+            geoManager.removeUpdates(networkListener);
+            geoManager.removeUpdates(gpsListener);
         }
     };
 
