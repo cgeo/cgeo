@@ -1014,7 +1014,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             displayPoint(coordsIntent);
             loadTimer = Subscriptions.empty();
         } else {
-            loadTimer = startLoadTimer();
+            loadTimer = Schedulers.newThread().createWorker().schedulePeriodically(new LoadTimerAction(this), 0, 250, TimeUnit.MILLISECONDS);
         }
         return loadTimer;
     }
@@ -1068,13 +1068,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 Log.w("CGeoMap.startLoadtimer.start", e);
             }
         }
-    }
-
-    /**
-     * loading timer Triggers every 250ms and checks for viewport change and starts a {@link LoadRunnable}.
-     */
-    private Subscription startLoadTimer() {
-        return Schedulers.newThread().createWorker().schedulePeriodically(new LoadTimerAction(this), 0, 250, TimeUnit.MILLISECONDS);
     }
 
     /**
