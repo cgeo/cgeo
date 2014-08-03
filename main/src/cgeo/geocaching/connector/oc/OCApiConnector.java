@@ -31,7 +31,7 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
     private final ApiSupport apiSupport;
     private final String licenseString;
 
-    public OCApiConnector(String name, String host, String prefix, String cK, String licenseString, ApiSupport apiSupport) {
+    public OCApiConnector(final String name, final String host, final String prefix, final String cK, final String licenseString, final ApiSupport apiSupport) {
         super(name, host, prefix);
         this.cK = cK;
         this.apiSupport = apiSupport;
@@ -39,7 +39,12 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
     }
 
     public void addAuthentication(final Parameters params) {
-        params.put(CryptUtils.rot13("pbafhzre_xrl"), CryptUtils.rot13(cK));
+        final String rotCK = CryptUtils.rot13(cK);
+        // check that developers are not using the Ant defined properties without any values
+        if (StringUtils.startsWith(rotCK, "${")) {
+            throw new IllegalStateException("invalid OKAPI OAuth token " + rotCK);
+        }
+        params.put(CryptUtils.rot13("pbafhzre_xrl"), rotCK);
     }
 
     @Override
@@ -93,13 +98,13 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
 
     /**
      * Checks if a search based on a user name targets the current user
-     * 
+     *
      * @param username
      *            Name of the user the query is searching after
      * @return True - search target and current is same, False - current user not known or not the same as username
      */
     @SuppressWarnings("static-method")
-    public boolean isSearchForMyCaches(String username) {
+    public boolean isSearchForMyCaches(final String username) {
         return false;
     }
 }
