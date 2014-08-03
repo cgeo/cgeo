@@ -254,12 +254,10 @@ public class FragmentListActivity extends FragmentActivity {
     /**
      * Provide the cursor for the list view.
      */
-    public void setListAdapter(final ListAdapter adapter) {
-        synchronized (this) {
-            ensureList();
-            mAdapter = adapter;
-            mList.setAdapter(adapter);
-        }
+    public synchronized void setListAdapter(final ListAdapter adapter) {
+        ensureList();
+        mAdapter = adapter;
+        mList.setAdapter(adapter);
     }
 
     /**
