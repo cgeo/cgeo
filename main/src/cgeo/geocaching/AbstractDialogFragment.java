@@ -42,7 +42,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public abstract class AbstractDialogFragment extends DialogFragment implements CacheMenuHandler.ActivityInterface, PopupMenu.OnMenuItemClickListener, MenuItem.OnMenuItemClickListener {
-    protected CgeoApplication app = null;
     protected Resources res = null;
     protected String geocode;
     protected CacheDetailsCreator details;
@@ -61,7 +60,6 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         res = getResources();
-        app = (CgeoApplication) getActivity().getApplication();
         setHasOptionsMenu(true);
     }
 
