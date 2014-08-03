@@ -136,9 +136,7 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
                 final CacheComparator comparator = cacheComparator.newInstance();
                 onClickListener.call(comparator);
             }
-        } catch (final InstantiationException e) {
-            Log.e("selectComparator", e);
-        } catch (final IllegalAccessException e) {
+        } catch (final InstantiationException | IllegalAccessException e) {
             Log.e("selectComparator", e);
         }
     }

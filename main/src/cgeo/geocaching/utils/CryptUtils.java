@@ -88,9 +88,7 @@ public final class CryptUtils {
             final MessageDigest digest = MessageDigest.getInstance("MD5");
             digest.update(text.getBytes(CharEncoding.UTF_8), 0, text.length());
             return new BigInteger(1, digest.digest()).toString(16);
-        } catch (NoSuchAlgorithmException e) {
-            Log.e("CryptUtils.md5", e);
-        } catch (UnsupportedEncodingException e) {
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             Log.e("CryptUtils.md5", e);
         }
 
@@ -105,9 +103,7 @@ public final class CryptUtils {
             final Mac mac = Mac.getInstance("HmacSHA1");
             mac.init(secretKeySpec);
             macBytes = mac.doFinal(text.getBytes(CharEncoding.UTF_8));
-        } catch (GeneralSecurityException e) {
-            Log.e("CryptUtils.hashHmac", e);
-        } catch (UnsupportedEncodingException e) {
+        } catch (GeneralSecurityException | UnsupportedEncodingException e) {
             Log.e("CryptUtils.hashHmac", e);
         }
 

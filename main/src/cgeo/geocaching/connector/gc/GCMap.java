@@ -102,11 +102,7 @@ public class GCMap {
                 caches.add(cache);
             }
             result.addAndPutInCache(caches);
-        } catch (JSONException e) {
-            result.setError(StatusCode.UNKNOWN_ERROR);
-        } catch (ParseException e) {
-            result.setError(StatusCode.UNKNOWN_ERROR);
-        } catch (NumberFormatException e) {
+        } catch (JSONException | ParseException | NumberFormatException e) {
             result.setError(StatusCode.UNKNOWN_ERROR);
         }
         return result;
@@ -220,9 +216,7 @@ public class GCMap {
             searchResult.addAndPutInCache(caches);
             Log.d("Retrieved " + searchResult.getCount() + " caches for tile " + tile.toString());
 
-        } catch (RuntimeException e) {
-            Log.e("GCMap.parseMapJSON", e);
-        } catch (JSONException e) {
+        } catch (RuntimeException | JSONException e) {
             Log.e("GCMap.parseMapJSON", e);
         }
 

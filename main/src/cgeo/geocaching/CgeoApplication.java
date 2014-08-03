@@ -62,12 +62,7 @@ public class CgeoApplication extends Application {
             final Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
             menuKeyField.setAccessible(true);
             menuKeyField.setBoolean(config, false);
-        } catch (final IllegalArgumentException e) {
-            // ignore
-        } catch (final NoSuchFieldException e) {
-            // ignore
-        } catch (final IllegalAccessException e) {
-            // ignore
+        } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException ignore) {
         }
         // ensure initialization of lists
         DataStore.getLists();

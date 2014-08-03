@@ -10,7 +10,6 @@ import android.content.ContentResolver;
 import android.net.Uri;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -37,8 +36,6 @@ public class FileTypeDetector {
             reader = new BufferedReader(new InputStreamReader(is));
 			type = detectHeader(reader);
             reader.close();
-        } catch (FileNotFoundException e) {
-			Log.e("FileTypeDetector", e);
         } catch (IOException e) {
 			Log.e("FileTypeDetector", e);
         } finally {
