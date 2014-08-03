@@ -105,9 +105,9 @@ public abstract class AbstractConnector implements IConnector {
         return null;
     }
 
-    protected static boolean isNumericId(final String string) {
+    protected static boolean isNumericId(final String str) {
         try {
-            return Integer.parseInt(string) > 0;
+            return Integer.parseInt(str) > 0;
         } catch (NumberFormatException e) {
         }
         return false;

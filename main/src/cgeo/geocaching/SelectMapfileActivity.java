@@ -98,8 +98,8 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
     }
 
     @Override
-    public void setCurrentFile(String newFile) {
-        mapFile = newFile;
+    public void setCurrentFile(String name) {
+        mapFile = name;
     }
 
     @Override

@@ -22,11 +22,11 @@ public class DateDialog extends DialogFragment {
     private Calendar date;
 
     public static DateDialog getInstance(final Calendar date) {
-        final DateDialog dd = new DateDialog();
+        final DateDialog dateDialog = new DateDialog();
         final Bundle args = new Bundle();
         args.putSerializable("date", date);
-        dd.setArguments(args);
-        return dd;
+        dateDialog.setArguments(args);
+        return dateDialog;
     }
 
     @Override

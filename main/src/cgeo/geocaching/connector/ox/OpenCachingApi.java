@@ -39,9 +39,9 @@ public class OpenCachingApi {
         return null;
     }
 
-    private static HttpResponse getRequest(String string, Parameters parameters) {
+    private static HttpResponse getRequest(final String uri, final Parameters parameters) {
         parameters.add("Authorization", DEV_KEY);
-        return Network.getRequest(string, parameters);
+        return Network.getRequest(uri, parameters);
     }
 
     private static Collection<Geocache> importCachesFromResponse(final HttpResponse response, final boolean isDetailed) {
