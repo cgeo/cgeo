@@ -3,7 +3,11 @@
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
     <b>Next feature release:</b>\n
-    · New: Actionbar menus (<b>long press action buttons for a description</b>)\n
+    
+    <h2>IMPORTANT CHANGE:</h2>
+    · New: Actionbar menus (<b>Long press action buttons for a description</b>)\n
+    <b><a href="http://faq.cgeo.org/#10_83">  Please do read our FAQ to learn more about the new menu!</a></b>
+    
     · New: Show also own logs on friends log page\n
     · New: Navigate - WhereYouGo will invoke automatic cartridge download in WhereYouGo\n
     · New: Filter for caches which are not found\n
@@ -32,45 +36,7 @@
     · Fix: Will attend logs not counted in log summary of OC caches\n
     · Fix: Improved loading of listing images\n
     \n
-    \n
-    <b>2014.07.27:</b>\n
-    · Fix: Slow login on gc.com\n
-    · Fix: Usernames with &lt; or &gt; have not been able to login\n
-    · Fix: Support mails sent from cgeo will contain version info in subject\n
-    \n
-    <b>2014.07.18:</b>\n
-    · Fix: Allegedly only \"unpublished\" caches for some users on some mobile networks\n
-    \n
-    <b>2014.07.12:</b>\n
-    · Fix: Caches not stored if \"Ask for list\" is disabled\n
-    · Fix: Use \"Unknown\" instead of \"Mystery\" in GPX export to ensure backward compatibility\n
-    · Fix: Avatar not shown in login confirmation screen\n
-    · Fix: Loading more than 40 caches in search results\n
-    \n
-    <b>2014.06.11:</b>\n
-    · Fix: Adapting to changes on gc.com\n
-    · Fix: New gc.com GPX waypoint types recognized\n
-    · Fix: Do not crop static maps to prevent the copyright notice being cut off\n
-    \n
-    <b>2014.05.14:</b>\n
-    · Fix: Adapting to changes on gc.com\n
-    \n
-    <b>2014.04.30:</b>\n
-    · New: Support new cache type: Giga Event\n
-    · New: Integrate with MapsWithMe\n
-    · New: Import external spoiler images from a Garmin-style file structure\n
-    · New: Support more details in GPX export\n
-    · Fix: A number of crash scenarios/instabilities due to memory issues\n
-    · Fix: Problems when calling some external navigation apps\n
-    · Fix: Crash when starting with a readonly cache directory\n
-    · New: Have <b>attended</b> as default log type on day of event\n
-    \n
-    \n
-    <a href="https://github.com/cgeo/cgeo/issues?milestone=30&amp;state=closed">Detailed list of all changes</a>\n
-    \n
-    <b>Old releases</b>\n
-    · Please refer to the release notes on the <a href="http://www.cgeo.org">c:geo-website</a>.\n
-    \n
+    <a href="https://github.com/cgeo/cgeo/issues?q=milestone%3A%22Next+feature+release%22+is%3Aclosed">Detailed list of all changes</a>\n
     \n
     <b>Known Limitations/Bugs:</b>\n
     · Live map:\n
