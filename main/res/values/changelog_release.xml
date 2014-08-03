@@ -4,7 +4,7 @@
   <string name="changelog_release" translatable="false">\n
     <b>Next feature release:</b>\n
     
-    <b>IMPORTANT CHANGE:</b>
+    <h2>IMPORTANT CHANGE:</h2>
     · New: Actionbar menus (<b>Long press action buttons for a description</b>)\n
     <b><a href="http://faq.cgeo.org/#10_83">  Please do read our FAQ to learn more about the new menu!</a></b>
     
