@@ -51,8 +51,8 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     @NonNull private String callback = StringUtils.EMPTY;
     private String OAtoken = null;
     private String OAtokenSecret = null;
-    private final Pattern paramsPattern1 = Pattern.compile("oauth_token=([a-zA-Z0-9\\-\\_.]+)");
-    private final Pattern paramsPattern2 = Pattern.compile("oauth_token_secret=([a-zA-Z0-9\\-\\_.]+)");
+    private final Pattern paramsPattern1 = Pattern.compile("oauth_token=([\\w_.-]+)");
+    private final Pattern paramsPattern2 = Pattern.compile("oauth_token_secret=([\\w_.-]+)");
     @InjectView(R.id.start) protected Button startButton;
     @InjectView(R.id.auth_1) protected TextView auth_1;
     @InjectView(R.id.auth_2) protected TextView auth_2;
