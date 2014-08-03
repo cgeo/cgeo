@@ -27,6 +27,7 @@ import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.OAuth;
+import cgeo.geocaching.network.OAuthTokens;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
@@ -35,7 +36,6 @@ import cgeo.geocaching.utils.SynchronizedDateFormat;
 import ch.boye.httpclientandroidlib.HttpResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.json.JSONArray;
@@ -734,19 +734,22 @@ final class OkapiClient {
     @NonNull
     private static JSONResult request(final OCApiConnector connector, final OkapiService service, final Parameters params) {
         if (connector == null) {
-            return new JSONResult(null);
+            return new JSONResult("unknown OKAPI connector");
         }
 
         final String host = connector.getHost();
         if (StringUtils.isBlank(host)) {
-            return new JSONResult(null);
+            return new JSONResult("unknown OKAPI connector host");
         }
 
         params.add("langpref", getPreferredLanguage());
 
         if (connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
-            final ImmutablePair<String, String> tokens = Settings.getTokenPair(connector.getTokenPublicPrefKeyId(), connector.getTokenSecretPrefKeyId());
-            OAuth.signOAuth(host, service.methodName, "GET", false, params, tokens.left, tokens.right, connector.getCK(), connector.getCS());
+            final OAuthTokens tokens = new OAuthTokens(connector);
+            if (!tokens.isValid()) {
+                return new JSONResult("invalid oauth tokens");
+            }
+            OAuth.signOAuth(host, service.methodName, "GET", false, params, tokens, connector.getCK(), connector.getCS());
         } else {
             connector.addAuthentication(params);
         }
@@ -901,6 +904,18 @@ final class OkapiClient {
             }
             this.data = data;
             this.isSuccess = isSuccess && data != null;
+        }
+
+        public JSONResult(final @NonNull String errorMessage) {
+            isSuccess = false;
+            data = new JSONObject();
+            final JSONObject error = new JSONObject();
+            try {
+                error.put("developer_message", errorMessage);
+                data.put("error", error);
+            } catch (final JSONException e) {
+                Log.e("error creating JSON result error message", e);
+            }
         }
     }
 }
