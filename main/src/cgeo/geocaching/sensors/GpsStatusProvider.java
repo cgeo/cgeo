@@ -1,7 +1,6 @@
 package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.sensors.GpsStatusProvider.Status;
-import cgeo.geocaching.utils.StartableHandlerThread;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxUtils;
 
@@ -9,7 +8,6 @@ import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.observables.ConnectableObservable;
@@ -40,11 +38,6 @@ public class GpsStatusProvider implements OnSubscribe<Status> {
 
     private final LocationManager geoManager;
     private final BehaviorSubject<Status> subject;
-    private static final StartableHandlerThread handlerThread =
-            new StartableHandlerThread("GpsStatusProvider thread", android.os.Process.THREAD_PRIORITY_BACKGROUND);
-    static {
-        handlerThread.start();
-    }
 
     private Status latest = new Status(false, 0, 0);
 
@@ -79,7 +72,7 @@ public class GpsStatusProvider implements OnSubscribe<Status> {
         @Override
         public void connect(Action1<? super Subscription> connection) {
             final CompositeSubscription subscription = new CompositeSubscription();
-            AndroidSchedulers.handlerThread(handlerThread.getHandler()).createWorker().schedule(new Action0() {
+            RxUtils.looperCallbacksWorker.schedule(new Action0() {
                 @Override
                 public void call() {
                     if (count.getAndIncrement() == 0) {
@@ -90,7 +83,7 @@ public class GpsStatusProvider implements OnSubscribe<Status> {
                     subscription.add(Subscriptions.create(new Action0() {
                         @Override
                         public void call() {
-                            AndroidSchedulers.handlerThread(handlerThread.getHandler()).createWorker().schedule(new Action0() {
+                            RxUtils.looperCallbacksWorker.schedule(new Action0() {
                                 @Override
                                 public void call() {
                                     if (count.decrementAndGet() == 0) {

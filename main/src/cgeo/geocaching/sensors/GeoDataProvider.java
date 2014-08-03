@@ -1,13 +1,12 @@
 package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.StartableHandlerThread;
+import cgeo.geocaching.utils.RxUtils;
 
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.observables.ConnectableObservable;
@@ -30,11 +29,6 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
     private final LocationData gpsLocation = new LocationData();
     private final LocationData netLocation = new LocationData();
     private final BehaviorSubject<IGeoData> subject;
-    private static final StartableHandlerThread handlerThread =
-            new StartableHandlerThread("GeoDataProvider thread", android.os.Process.THREAD_PRIORITY_BACKGROUND);
-    static {
-        handlerThread.start();
-    }
 
     private static class LocationData {
         public Location location;
@@ -86,7 +80,7 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
         @Override
         public void connect(Action1<? super Subscription> connection) {
             final CompositeSubscription subscription = new CompositeSubscription();
-            AndroidSchedulers.handlerThread(handlerThread.getHandler()).createWorker().schedule(new Action0() {
+            RxUtils.looperCallbacksWorker.schedule(new Action0() {
                 @Override
                 public void call() {
                     if (count.getAndIncrement() == 0) {
@@ -103,7 +97,7 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
                     subscription.add(Subscriptions.create(new Action0() {
                         @Override
                         public void call() {
-                            AndroidSchedulers.handlerThread(handlerThread.getHandler()).createWorker().schedule(new Action0() {
+                            RxUtils.looperCallbacksWorker.schedule(new Action0() {
                                 @Override
                                 public void call() {
                                     if (count.decrementAndGet() == 0) {
