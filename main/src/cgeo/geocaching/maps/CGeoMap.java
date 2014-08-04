@@ -491,7 +491,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
         prepareFilterBar();
 
-        if (!app.isLiveMapHintShownInThisSession() && !Settings.getHideLiveMapHint() && Settings.getLiveMapHintShowCount() <= 3) {
+        if (!app.isLiveMapHintShownInThisSession() && Settings.getLiveMapHintShowCount() <= 3) {
             LiveMapInfoDialogBuilder.create(activity).show();
         }
     }

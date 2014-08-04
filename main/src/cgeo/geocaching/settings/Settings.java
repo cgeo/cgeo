@@ -154,7 +154,6 @@ public class Settings {
             e.putInt(getKey(R.string.pref_defaultNavigationTool2), old.getInt(getKey(R.string.pref_defaultNavigationTool2), NavigationAppsEnum.INTERNAL_MAP.id));
             e.putInt(getKey(R.string.pref_livemapstrategy), old.getInt(getKey(R.string.pref_livemapstrategy), Strategy.AUTO.id));
             e.putBoolean(getKey(R.string.pref_debug), old.getBoolean(getKey(R.string.pref_debug), false));
-            e.putBoolean(getKey(R.string.pref_hidelivemaphint), old.getInt(getKey(R.string.pref_hidelivemaphint), 0) != 0);
             e.putInt(getKey(R.string.pref_livemaphintshowcount), old.getInt(getKey(R.string.pref_livemaphintshowcount), 0));
 
             e.putInt(getKey(R.string.pref_settingsversion), 1); // mark migrated
@@ -833,14 +832,6 @@ public class Settings {
 
     public static boolean isDebug() {
         return Log.isDebug();
-    }
-
-    public static boolean getHideLiveMapHint() {
-        return getBoolean(R.string.pref_hidelivemaphint, false);
-    }
-
-    public static void setHideLiveHint(final boolean hide) {
-        putBoolean(R.string.pref_hidelivemaphint, hide);
     }
 
     public static int getLiveMapHintShowCount() {
