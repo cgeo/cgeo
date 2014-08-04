@@ -177,6 +177,9 @@ public class GCLogin extends AbstractLogin {
         return StatusCode.NO_ERROR;
     }
 
+    private static String removeDotAndComma(final String str) {
+        return StringUtils.replaceChars(str, ".,", null);
+    }
 
     /**
      * Check if the user has been logged in when he retrieved the data.
@@ -203,7 +206,7 @@ public class GCLogin extends AbstractLogin {
             setActualUserName(TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???"));
             int cachesCount = 0;
             try {
-                cachesCount = Integer.parseInt(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll("[,.]", ""));
+                cachesCount = Integer.parseInt(removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0")));
             } catch (final NumberFormatException e) {
                 Log.e("getLoginStatus: bad cache count", e);
             }
@@ -268,7 +271,7 @@ public class GCLogin extends AbstractLogin {
                 Settings.setGCMemberStatus(GCConstants.MEMBER_STATUS_PM);
             }
 
-            setActualCachesFound(Integer.parseInt(TextUtils.getMatch(profile, GCConstants.PATTERN_CACHES_FOUND, true, "-1").replaceAll("[,.]", "")));
+            setActualCachesFound(Integer.parseInt(removeDotAndComma(TextUtils.getMatch(profile, GCConstants.PATTERN_CACHES_FOUND, true, "-1"))));
 
             final String avatarURL = TextUtils.getMatch(profile, GCConstants.PATTERN_AVATAR_IMAGE_PROFILE_PAGE, false, null);
             if (null != avatarURL) {
