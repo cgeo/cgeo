@@ -2,11 +2,11 @@ package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.utils.Log;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Handles the JSON error response from OKAPI
@@ -26,7 +26,7 @@ public class OkapiError {
     @NonNull private final OkapiErrors state;
     @NonNull private final String message;
 
-    public OkapiError(@Nullable JSONObject data) {
+    public OkapiError(@Nullable ObjectNode data) {
 
         // A null-response is by definition an error (some exception occurred somewhere in the flow)
         if (data == null) {
@@ -39,10 +39,10 @@ public class OkapiError {
             String localmessage = null;
             OkapiErrors localstate = OkapiErrors.UNSPECIFIED;
             try {
-                JSONObject error = data.getJSONObject("error");
+                final ObjectNode error = (ObjectNode) data.get("error");
                 // Check reason_stack element to look for the specific oauth problems we want to report back
                 if (error.has("reason_stack")) {
-                    String reason = error.getString("reason_stack");
+                    final String reason = error.get("reason_stack").asText();
                     if (StringUtils.contains(reason, "invalid_oauth_request")) {
                         if (StringUtils.contains(reason, "invalid_timestamp")) {
                             localstate = OkapiErrors.INVALID_TIMESTAMP;
@@ -53,10 +53,10 @@ public class OkapiError {
                 }
                 // Check if we can extract a message as well
                 if (error.has("developer_message")) {
-                    localmessage = error.getString("developer_message");
+                    localmessage = error.get("developer_message").asText();
                     assert localmessage != null; // by virtue of defaultString
                 }
-            } catch (JSONException ex) {
+            } catch (ClassCastException | NullPointerException ex) {
                 Log.d("OkapiError: Failed to parse JSON", ex);
                 localstate = OkapiErrors.UNSPECIFIED;
             }

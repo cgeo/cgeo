@@ -30,20 +30,24 @@ import cgeo.geocaching.network.OAuth;
 import cgeo.geocaching.network.OAuthTokens;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.net.Uri;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -211,10 +215,15 @@ final class OkapiClient {
         }
 
         addFilterParams(valueMap, connector, my);
-        params.add("search_params", new JSONObject(valueMap).toString());
+        try {
+            params.add("search_params", JsonUtils.writer.writeValueAsString(params));
+        } catch (final JsonProcessingException e) {
+            Log.e("requestCaches", e);
+            return Collections.emptyList();
+        }
         addRetrieveParams(params, connector);
 
-        final JSONObject data = request(connector, OkapiService.SERVICE_SEARCH_AND_RETRIEVE, params).data;
+        final ObjectNode data = request(connector, OkapiService.SERVICE_SEARCH_AND_RETRIEVE, params).data;
 
         if (data == null) {
             return Collections.emptyList();
@@ -247,7 +256,7 @@ final class OkapiClient {
         final Parameters params = new Parameters("cache_code", cache.getGeocode());
         params.add("watched", watched ? "true" : "false");
 
-        final JSONObject data = request(connector, OkapiService.SERVICE_MARK_CACHE, params).data;
+        final ObjectNode data = request(connector, OkapiService.SERVICE_MARK_CACHE, params).data;
 
         if (data == null) {
             return false;
@@ -271,68 +280,62 @@ final class OkapiClient {
             params.add("password", logPassword);
         }
 
-        final JSONObject data = request(connector, OkapiService.SERVICE_SUBMIT_LOG, params).data;
+        final ObjectNode data = request(connector, OkapiService.SERVICE_SUBMIT_LOG, params).data;
 
         if (data == null) {
             return new LogResult(StatusCode.LOG_POST_ERROR, "");
         }
 
         try {
-            if (data.getBoolean("success")) {
-                return new LogResult(StatusCode.NO_ERROR, data.getString("log_uuid"));
+            if (data.get("success").asBoolean()) {
+                return new LogResult(StatusCode.NO_ERROR, data.get("log_uuid").asText());
             }
 
             return new LogResult(StatusCode.LOG_POST_ERROR, "");
-        } catch (final JSONException e) {
+        } catch (final NullPointerException e) {
             Log.e("OkapiClient.postLog", e);
         }
         return new LogResult(StatusCode.LOG_POST_ERROR, "");
     }
 
-    private static List<Geocache> parseCaches(final JSONObject response) {
+    private static List<Geocache> parseCaches(final ObjectNode response) {
         try {
             // Check for empty result
-            final String result = response.getString("results");
+            final String result = response.get("results").asText();
             if (StringUtils.isBlank(result) || StringUtils.equals(result, "[]")) {
                 return Collections.emptyList();
             }
 
             // Get and iterate result list
-            final JSONObject cachesResponse = response.getJSONObject("results");
+            final ObjectNode cachesResponse = (ObjectNode) response.get("results");
             if (cachesResponse != null) {
-                final List<Geocache> caches = new ArrayList<>(cachesResponse.length());
-                final Iterator<?> keys = cachesResponse.keys();
-                while (keys.hasNext()) {
-                    final Object next = keys.next();
-                    if (next instanceof String) {
-                        final String key = (String) next;
-                        final Geocache cache = parseSmallCache(cachesResponse.getJSONObject(key));
-                        caches.add(cache);
-                    }
+                final List<Geocache> caches = new ArrayList<>(cachesResponse.size());
+                final Iterator<JsonNode> it = cachesResponse.elements();
+                while (it.hasNext()) {
+                    caches.add(parseSmallCache((ObjectNode) it.next()));
                 }
                 return caches;
             }
-        } catch (final JSONException e) {
+        } catch (ClassCastException | NullPointerException e) {
             Log.e("OkapiClient.parseCachesResult", e);
         }
         return Collections.emptyList();
     }
 
-    private static Geocache parseSmallCache(final JSONObject response) {
+    private static Geocache parseSmallCache(final ObjectNode response) {
         final Geocache cache = new Geocache();
         cache.setReliableLatLon(true);
         try {
-
             parseCoreCache(response, cache);
-
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
-        } catch (final JSONException e) {
+        } catch (final NullPointerException e) {
+            // FIXME: here we may return a partially filled cache
             Log.e("OkapiClient.parseSmallCache", e);
         }
         return cache;
     }
 
-    private static Geocache parseCache(final JSONObject response) {
+    private static Geocache parseCache(final ObjectNode response) {
         final Geocache cache = new Geocache();
         cache.setReliableLatLon(true);
         try {
@@ -340,28 +343,27 @@ final class OkapiClient {
             parseCoreCache(response, cache);
 
             // not used: url
-            final JSONObject ownerObject = response.getJSONObject(CACHE_OWNER);
-            final String owner = parseUser(ownerObject);
+            final String owner = parseUser(response.get(CACHE_OWNER));
             cache.setOwnerDisplayName(owner);
             // OpenCaching has no distinction between user id and user display name. Set the ID anyway to simplify c:geo workflows.
             cache.setOwnerUserId(owner);
 
-            cache.getLogCounts().put(LogType.FOUND_IT, response.getInt(CACHE_FOUNDS));
-            cache.getLogCounts().put(LogType.DIDNT_FIND_IT, response.getInt(CACHE_NOTFOUNDS));
+            cache.getLogCounts().put(LogType.FOUND_IT, response.get(CACHE_FOUNDS).asInt());
+            cache.getLogCounts().put(LogType.DIDNT_FIND_IT, response.get(CACHE_NOTFOUNDS).asInt());
             // only current Api
-            cache.getLogCounts().put(LogType.WILL_ATTEND, response.optInt(CACHE_WILLATTENDS));
+            cache.getLogCounts().put(LogType.WILL_ATTEND, response.path(CACHE_WILLATTENDS).asInt());
 
-            if (!response.isNull(CACHE_RATING)) {
-                cache.setRating((float) response.getDouble(CACHE_RATING));
+            if (response.has(CACHE_RATING)) {
+                cache.setRating((float) response.get(CACHE_RATING).asDouble());
             }
-            cache.setVotes(response.getInt(CACHE_VOTES));
+            cache.setVotes(response.get(CACHE_VOTES).asInt());
 
-            cache.setFavoritePoints(response.getInt(CACHE_RECOMMENDATIONS));
+            cache.setFavoritePoints(response.get(CACHE_RECOMMENDATIONS).asInt());
             // not used: req_password
             // Prepend gc-link to description if available
             final StringBuilder description = new StringBuilder(500);
-            if (!response.isNull("gc_code")) {
-                final String gccode = response.getString("gc_code");
+            if (response.has("gc_code")) {
+                final String gccode = response.get("gc_code").asText();
                 description.append(CgeoApplication.getInstance().getResources()
                         .getString(R.string.cache_listed_on, GCConnector.getInstance().getName()))
                         .append(": <a href=\"http://coord.info/")
@@ -370,71 +372,70 @@ final class OkapiClient {
                         .append(gccode)
                         .append("</a><br /><br />");
             }
-            description.append(response.getString(CACHE_DESCRIPTION));
+            description.append(response.get(CACHE_DESCRIPTION).asText());
             cache.setDescription(description.toString());
 
             // currently the hint is delivered as HTML (contrary to OKAPI documentation), so we can store it directly
-            cache.setHint(response.getString(CACHE_HINT));
+            cache.setHint(response.get(CACHE_HINT).asText());
             // not used: hints
 
-            final JSONArray images = response.getJSONArray(CACHE_IMAGES);
+            final ArrayNode images = (ArrayNode) response.get(CACHE_IMAGES);
             if (images != null) {
-                for (int i = 0; i < images.length(); i++) {
-                    final JSONObject imageResponse = images.getJSONObject(i);
-                    final String title = imageResponse.getString(CACHE_IMAGE_CAPTION);
-                    final String url = absoluteUrl(imageResponse.getString(CACHE_IMAGE_URL), cache.getGeocode());
+                for (final JsonNode imageResponse: images) {
+                    final String title = imageResponse.get(CACHE_IMAGE_CAPTION).asText();
+                    final String url = absoluteUrl(imageResponse.get(CACHE_IMAGE_URL).asText(), cache.getGeocode());
                     // all images are added as spoiler images, although OKAPI has spoiler and non spoiler images
                     cache.addSpoiler(new Image(url, title));
                 }
             }
 
-            cache.setAttributes(parseAttributes(response.getJSONArray(CACHE_ATTRNAMES), response.optJSONArray(CACHE_ATTR_ACODES)));
+            cache.setAttributes(parseAttributes((ArrayNode) response.path(CACHE_ATTRNAMES), (ArrayNode) response.get(CACHE_ATTR_ACODES)));
             //TODO: Store license per cache
             //cache.setLicense(response.getString("attribution_note"));
-            cache.setWaypoints(parseWaypoints(response.getJSONArray(CACHE_WPTS)), false);
+            cache.setWaypoints(parseWaypoints((ArrayNode) response.path(CACHE_WPTS)), false);
 
-            cache.setInventory(parseTrackables(response.getJSONArray(CACHE_TRACKABLES)));
+            cache.setInventory(parseTrackables((ArrayNode) response.path(CACHE_TRACKABLES)));
 
-            if (!response.isNull(CACHE_IS_WATCHED)) {
-                cache.setOnWatchlist(response.getBoolean(CACHE_IS_WATCHED));
+            if (response.has(CACHE_IS_WATCHED)) {
+                cache.setOnWatchlist(response.get(CACHE_IS_WATCHED).asBoolean());
             }
-            if (!response.isNull(CACHE_MY_NOTES)) {
-                cache.setPersonalNote(response.getString(CACHE_MY_NOTES));
+            if (response.has(CACHE_MY_NOTES)) {
+                cache.setPersonalNote(response.get(CACHE_MY_NOTES).asText());
                 cache.parseWaypointsFromNote();
             }
-            cache.setLogPasswordRequired(response.getBoolean(CACHE_REQ_PASSWORD));
+            cache.setLogPasswordRequired(response.get(CACHE_REQ_PASSWORD).asBoolean());
 
             cache.setDetailedUpdatedNow();
             // save full detailed caches
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-            DataStore.saveLogsWithoutTransaction(cache.getGeocode(), parseLogs(response.getJSONArray(CACHE_LATEST_LOGS)));
-        } catch (final JSONException e) {
+            DataStore.saveLogsWithoutTransaction(cache.getGeocode(), parseLogs((ArrayNode) response.path(CACHE_LATEST_LOGS)));
+        } catch (ClassCastException | NullPointerException e) {
             Log.e("OkapiClient.parseCache", e);
         }
         return cache;
     }
 
-    private static void parseCoreCache(final JSONObject response, final Geocache cache) throws JSONException {
-        cache.setGeocode(response.getString(CACHE_CODE));
-        cache.setName(response.getString(CACHE_NAME));
+    private static void parseCoreCache(final ObjectNode response, final Geocache cache) {
+        cache.setGeocode(response.get(CACHE_CODE).asText());
+        cache.setName(response.get(CACHE_NAME).asText());
         // not used: names
-        setLocation(cache, response.getString(CACHE_LOCATION));
-        cache.setType(getCacheType(response.getString(CACHE_TYPE)));
+        setLocation(cache, response.get(CACHE_LOCATION).asText());
+        cache.setType(getCacheType(response.get(CACHE_TYPE).asText()));
 
-        final String status = response.getString(CACHE_STATUS);
+        final String status = response.get(CACHE_STATUS).asText();
         cache.setDisabled(status.equalsIgnoreCase(CACHE_STATUS_DISABLED));
         cache.setArchived(status.equalsIgnoreCase(CACHE_STATUS_ARCHIVED));
 
         cache.setSize(getCacheSize(response));
-        cache.setDifficulty((float) response.getDouble(CACHE_DIFFICULTY));
-        cache.setTerrain((float) response.getDouble(CACHE_TERRAIN));
+        cache.setDifficulty((float) response.get(CACHE_DIFFICULTY).asDouble());
+        cache.setTerrain((float) response.get(CACHE_TERRAIN).asDouble());
 
-        cache.setInventoryItems(response.getInt(CACHE_TRACKABLES_COUNT));
+        cache.setInventoryItems(response.get(CACHE_TRACKABLES_COUNT).asInt());
 
-        if (!response.isNull(CACHE_IS_FOUND)) {
-            cache.setFound(response.getBoolean(CACHE_IS_FOUND));
+        if (response.has(CACHE_IS_FOUND)) {
+            cache.setFound(response.get(CACHE_IS_FOUND).asBoolean());
         }
-        cache.setHidden(parseDate(response.getString(CACHE_HIDDEN)));
+        cache.setHidden(parseDate(response.get(CACHE_HIDDEN).asText()));
     }
 
     private static String absoluteUrl(final String url, final String geocode) {
@@ -450,41 +451,39 @@ final class OkapiClient {
         return url;
     }
 
-    private static String parseUser(final JSONObject user) throws JSONException {
-        return user.getString(USER_USERNAME);
+    private static String parseUser(final JsonNode user) {
+        return user.get(USER_USERNAME).asText();
     }
 
-    private static List<LogEntry> parseLogs(final JSONArray logsJSON) {
+    private static List<LogEntry> parseLogs(final ArrayNode logsJSON) {
         List<LogEntry> result = null;
-        for (int i = 0; i < logsJSON.length(); i++) {
+        for (final JsonNode logResponse: logsJSON) {
             try {
-                final JSONObject logResponse = logsJSON.getJSONObject(i);
                 final LogEntry log = new LogEntry(
-                        parseUser(logResponse.getJSONObject(LOG_USER)),
-                        parseDate(logResponse.getString(LOG_DATE)).getTime(),
-                        parseLogType(logResponse.getString(LOG_TYPE)),
-                        logResponse.getString(LOG_COMMENT).trim());
+                        parseUser(logResponse.get(LOG_USER)),
+                        parseDate(logResponse.get(LOG_DATE).asText()).getTime(),
+                        parseLogType(logResponse.get(LOG_TYPE).asText()),
+                        logResponse.get(LOG_COMMENT).asText().trim());
                 if (result == null) {
                     result = new ArrayList<>();
                 }
                 result.add(log);
-            } catch (final JSONException e) {
+            } catch (final NullPointerException e) {
                 Log.e("OkapiClient.parseLogs", e);
             }
         }
         return result;
     }
 
-    private static List<Waypoint> parseWaypoints(final JSONArray wptsJson) {
+    private static List<Waypoint> parseWaypoints(final ArrayNode wptsJson) {
         List<Waypoint> result = null;
-        for (int i = 0; i < wptsJson.length(); i++) {
+        for (final JsonNode wptResponse: wptsJson) {
             try {
-                final JSONObject wptResponse = wptsJson.getJSONObject(i);
-                final Waypoint wpt = new Waypoint(wptResponse.getString(WPT_NAME),
-                        parseWptType(wptResponse.getString(WPT_TYPE)),
+                final Waypoint wpt = new Waypoint(wptResponse.get(WPT_NAME).asText(),
+                        parseWptType(wptResponse.get(WPT_TYPE).asText()),
                         false);
-                wpt.setNote(wptResponse.getString(WPT_DESCRIPTION));
-                final Geopoint pt = parseCoords(wptResponse.getString(WPT_LOCATION));
+                wpt.setNote(wptResponse.get(WPT_DESCRIPTION).asText());
+                final Geopoint pt = parseCoords(wptResponse.get(WPT_LOCATION).asText());
                 if (pt != null) {
                     wpt.setCoords(pt);
                 }
@@ -493,26 +492,25 @@ final class OkapiClient {
                 }
                 wpt.setPrefix(wpt.getName());
                 result.add(wpt);
-            } catch (final JSONException e) {
+            } catch (final NullPointerException e) {
                 Log.e("OkapiClient.parseWaypoints", e);
             }
         }
         return result;
     }
 
-    private static List<Trackable> parseTrackables(final JSONArray trackablesJson) {
-        if (trackablesJson.length() == 0) {
+    private static List<Trackable> parseTrackables(final ArrayNode trackablesJson) {
+        if (trackablesJson.size() == 0) {
             return Collections.emptyList();
         }
         final List<Trackable> result = new ArrayList<>();
-        for (int i = 0; i < trackablesJson.length(); i++) {
+        for (final JsonNode trackableResponse: trackablesJson) {
             try {
-                final JSONObject trackableResponse = trackablesJson.getJSONObject(i);
                 final Trackable trk = new Trackable();
-                trk.setGeocode(trackableResponse.getString(TRK_GEOCODE));
-                trk.setName(trackableResponse.getString(TRK_NAME));
+                trk.setGeocode(trackableResponse.get(TRK_GEOCODE).asText());
+                trk.setName(trackableResponse.get(TRK_NAME).asText());
                 result.add(trk);
-            } catch (final JSONException e) {
+            } catch (final NullPointerException e) {
                 Log.e("OkapiClient.parseWaypoints", e);
                 // Don't overwrite internal state with possibly partial result
                 return null;
@@ -600,14 +598,14 @@ final class OkapiClient {
         return null;
     }
 
-    private static List<String> parseAttributes(final JSONArray nameList, final JSONArray acodeList) {
+    private static List<String> parseAttributes(final ArrayNode nameList, final ArrayNode acodeList) {
 
         final List<String> result = new ArrayList<>();
 
-        for (int i = 0; i < nameList.length(); i++) {
+        for (int i = 0; i < nameList.size(); i++) {
             try {
-                final String name = nameList.getString(i);
-                final int acode = acodeList != null ? Integer.parseInt(acodeList.getString(i).substring(1)) : CacheAttribute.NO_ID;
+                final String name = nameList.get(i).asText();
+                final int acode = acodeList != null ? Integer.parseInt(acodeList.get(i).asText().substring(1)) : CacheAttribute.NO_ID;
                 final CacheAttribute attr = CacheAttribute.getByOcACode(acode);
 
                 if (attr != null) {
@@ -615,7 +613,7 @@ final class OkapiClient {
                 } else {
                     result.add(name);
                 }
-            } catch (final JSONException e) {
+            } catch (final NullPointerException e) {
                 Log.e("OkapiClient.parseAttributes", e);
             }
         }
@@ -629,27 +627,27 @@ final class OkapiClient {
         cache.setCoords(new Geopoint(latitude, longitude));
     }
 
-    private static CacheSize getCacheSize(final JSONObject response) {
-        if (response.isNull(CACHE_SIZE2)) {
+    private static CacheSize getCacheSize(final ObjectNode response) {
+        if (!response.has(CACHE_SIZE2)) {
             return getCacheSizeDeprecated(response);
         }
         try {
-            final String size = response.getString(CACHE_SIZE2);
+            final String size = response.get(CACHE_SIZE2).asText();
             return CacheSize.getById(size);
-        } catch (final JSONException e) {
+        } catch (final NullPointerException e) {
             Log.e("OkapiClient.getCacheSize", e);
             return getCacheSizeDeprecated(response);
         }
     }
 
-    private static CacheSize getCacheSizeDeprecated(final JSONObject response) {
-        if (response.isNull(CACHE_SIZE_DEPRECATED)) {
+    private static CacheSize getCacheSizeDeprecated(final ObjectNode response) {
+        if (!response.has(CACHE_SIZE_DEPRECATED)) {
             return CacheSize.NOT_CHOSEN;
         }
         double size = 0;
         try {
-            size = response.getDouble(CACHE_SIZE_DEPRECATED);
-        } catch (final JSONException e) {
+            size = response.get(CACHE_SIZE_DEPRECATED).asDouble();
+        } catch (final NullPointerException e) {
             Log.e("OkapiClient.getCacheSize", e);
         }
         switch ((int) Math.round(size)) {
@@ -818,16 +816,7 @@ final class OkapiClient {
             return null;
         }
 
-        final JSONObject data = result.data;
-        if (!data.isNull(USER_UUID)) {
-            try {
-                return data.getString(USER_UUID);
-            } catch (final JSONException e) {
-                Log.e("OkapiClient.getUserUUID - uuid", e);
-            }
-        }
-
-        return null;
+        return result.data.path(USER_UUID).asText(null);
     }
 
     public static UserInfo getUserInfo(final OCApiLiveConnector connector) {
@@ -841,31 +830,11 @@ final class OkapiClient {
             return new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.getFromOkapiError(error.getResult()));
         }
 
-        final JSONObject data = result.data;
-
-        String name = StringUtils.EMPTY;
-        boolean successUserName = false;
-
-        if (!data.isNull(USER_USERNAME)) {
-            try {
-                name = data.getString(USER_USERNAME);
-                successUserName = true;
-            } catch (final JSONException e) {
-                Log.e("OkapiClient.getUserInfo - name", e);
-            }
-        }
-
-        int finds = 0;
-        boolean successFinds = false;
-
-        if (!data.isNull(USER_CACHES_FOUND)) {
-            try {
-                finds = data.getInt(USER_CACHES_FOUND);
-                successFinds = true;
-            } catch (final JSONException e) {
-                Log.e("OkapiClient.getUserInfo - finds", e);
-            }
-        }
+        final ObjectNode data = result.data;
+        final boolean successUserName = data.has(USER_USERNAME);
+        final String name = data.path(USER_USERNAME).asText();
+        final boolean successFinds = data.has(USER_CACHES_FOUND);
+        final int finds = data.path(USER_CACHES_FOUND).asInt();
 
         return new UserInfo(name, finds, successUserName && successFinds ? UserInfoStatus.SUCCESSFUL : UserInfoStatus.FAILED);
     }
@@ -882,7 +851,7 @@ final class OkapiClient {
         if (!result.isSuccess) {
             return new OkapiError(result.data);
         }
-        return new OkapiError(new JSONObject());
+        return new OkapiError(new ObjectNode(JsonUtils.factory));
     }
 
     /**
@@ -892,33 +861,26 @@ final class OkapiClient {
     private static class JSONResult {
 
         public final boolean isSuccess;
-        public final JSONObject data;
+        public final ObjectNode data;
 
         public JSONResult(final @Nullable HttpResponse response) {
-            final boolean isSuccess = Network.isSuccess(response);
+            final boolean isRequestSuccessful = Network.isSuccess(response);
             final String responseData = Network.getResponseDataAlways(response);
-            JSONObject data = null;
+            ObjectNode tempData = null;
             if (responseData != null) {
                 try {
-                    data = new JSONObject(responseData);
-                } catch (final JSONException e) {
+                    tempData = (ObjectNode) JsonUtils.reader.readTree(responseData);
+                } catch (IOException | ClassCastException e) {
                     Log.w("JSONResult", e);
                 }
             }
-            this.data = data;
-            this.isSuccess = isSuccess && data != null;
+            data = tempData;
+            isSuccess = isRequestSuccessful && tempData != null;
         }
 
         public JSONResult(final @NonNull String errorMessage) {
             isSuccess = false;
-            data = new JSONObject();
-            final JSONObject error = new JSONObject();
-            try {
-                error.put("developer_message", errorMessage);
-                data.put("error", error);
-            } catch (final JSONException e) {
-                Log.e("error creating JSON result error message", e);
-            }
+            data = new ObjectNode(JsonUtils.factory).putObject("error").put("developer_message", errorMessage);
         }
     }
 }
