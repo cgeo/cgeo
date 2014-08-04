@@ -130,7 +130,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private int detailTotal = 0;
     private int detailProgress = 0;
     private long detailProgressTime = 0L;
-    private int listId = StoredList.TEMPORARY_LIST_ID; // Only meaningful for the OFFLINE type
+    private int listId = StoredList.TEMPORARY_LIST.id; // Only meaningful for the OFFLINE type
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
 
         @Override
@@ -1080,11 +1080,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                             }
                             refreshStoredInternal(caches);
                         }
-                    }, true, StoredList.TEMPORARY_LIST_ID, newListName);
+                    }, true, StoredList.TEMPORARY_LIST.id, newListName);
         } else {
             if (type != CacheListType.OFFLINE) {
                 for (final Geocache geocache : caches) {
-                    if (geocache.getListId() == StoredList.TEMPORARY_LIST_ID) {
+                    if (geocache.getListId() == StoredList.TEMPORARY_LIST.id) {
                         geocache.setListId(StoredList.STANDARD_LIST_ID);
                     }
                 }
@@ -1592,7 +1592,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 }
                 if (listId == PseudoList.ALL_LIST.id) {
                     title = res.getString(R.string.list_all_lists);
-                } else if (listId <= StoredList.TEMPORARY_LIST_ID) {
+                } else if (listId <= StoredList.TEMPORARY_LIST.id) {
                     listId = StoredList.STANDARD_LIST_ID;
                     title = res.getString(R.string.stored_caches_button);
                 } else {

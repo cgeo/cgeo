@@ -886,9 +886,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         public void call(final Integer selectedListId) {
                             storeCache(selectedListId, new StoreCacheHandler(CacheDetailActivity.this, progress));
                         }
-                    }, true, StoredList.TEMPORARY_LIST_ID);
+                    }, true, StoredList.TEMPORARY_LIST.id);
         } else {
-            storeCache(StoredList.TEMPORARY_LIST_ID, new StoreCacheHandler(this, progress));
+            storeCache(StoredList.TEMPORARY_LIST.id, new StoreCacheHandler(this, progress));
         }
     }
 

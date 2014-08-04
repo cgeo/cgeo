@@ -165,7 +165,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
                 deleteCacheFromDBAndLogout(cache.getGeocode());
 
-                SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST_ID, true, null);
+                SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST.id, true, null);
                 assertThat(search).isNotNull();
                 assertThat(search.getGeocodes()).hasSize(1);
                 assertThat(search.getGeocodes().contains(cache.getGeocode())).isTrue();
@@ -180,7 +180,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
                 deleteCacheFromDBAndLogout(cache.getGeocode());
 
-                search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST_ID, true, null);
+                search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST.id, true, null);
                 assertThat(search).isNotNull();
                 assertThat(search.getGeocodes()).isEmpty();
             }
@@ -201,7 +201,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
                 deleteCacheFromDBAndLogout(cache.getGeocode());
 
-                final SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST_ID, true, null);
+                final SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST.id, true, null);
                 assertThat(search).isNotNull();
                 assertThat(search.getGeocodes()).isEmpty();
             }

@@ -102,7 +102,7 @@ public class ImagesList {
 
         imagesView = ButterKnife.findById(parentView, R.id.spoiler_list);
 
-        final HtmlImage imgGetter = new HtmlImage(geocode, true, offline ? StoredList.STANDARD_LIST_ID : StoredList.TEMPORARY_LIST_ID, false);
+        final HtmlImage imgGetter = new HtmlImage(geocode, true, offline ? StoredList.STANDARD_LIST_ID : StoredList.TEMPORARY_LIST.id, false);
 
         for (final Image img : images) {
             final LinearLayout rowView = (LinearLayout) inflater.inflate(R.layout.cache_image_item, imagesView, false);

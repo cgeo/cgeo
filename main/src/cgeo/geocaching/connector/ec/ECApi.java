@@ -161,7 +161,7 @@ public class ECApi {
         }
 
         try {
-            return new GPX10Parser(StoredList.TEMPORARY_LIST_ID).parse(response.getEntity().getContent(), null);
+            return new GPX10Parser(StoredList.TEMPORARY_LIST.id).parse(response.getEntity().getContent(), null);
         } catch (Exception e) {
             Log.e("Error importing gpx from extremcaching.com", e);
             return Collections.emptyList();

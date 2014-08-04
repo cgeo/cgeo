@@ -38,7 +38,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
         private String searchInfo;
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(final Message msg) {
             if (msg.obj != null && waitDialog != null) {
                 if (searchInfo == null) {
                     searchInfo = res.getString(R.string.file_searching_in) + " ";
@@ -52,7 +52,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
 
         private String getDefaultFolders() {
             final ArrayList<String> names = new ArrayList<>();
-            for (File dir : getExistingBaseFolders()) {
+            for (final File dir : getExistingBaseFolders()) {
                 names.add(dir.getPath());
             }
             return StringUtils.join(names, '\n');
@@ -62,7 +62,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
     final private Handler loadFilesHandler = new Handler() {
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(final Message msg) {
             if (waitDialog != null) {
                 waitDialog.dismiss();
             }
@@ -76,17 +76,17 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
     };
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setTheme();
         setContentView(R.layout.gpx);
 
-        Bundle extras = getIntent().getExtras();
+        final Bundle extras = getIntent().getExtras();
         if (extras != null) {
             listId = extras.getInt(Intents.EXTRA_LIST_ID);
         }
-        if (listId <= StoredList.TEMPORARY_LIST_ID) {
+        if (listId <= StoredList.TEMPORARY_LIST.id) {
             listId = StoredList.STANDARD_LIST_ID;
         }
 
@@ -100,7 +100,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
                 true,
                 new DialogInterface.OnCancelListener() {
                     @Override
-                    public void onCancel(DialogInterface arg0) {
+                    public void onCancel(final DialogInterface arg0) {
                         if (searchingThread != null && searchingThread.isAlive()) {
                             searchingThread.notifyEnd();
                         }
@@ -171,7 +171,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
                 } else {
                     Log.w("No external media mounted.");
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.e("AbstractFileListActivity.loadFiles.run", e);
             }
 
@@ -181,7 +181,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
             Collections.sort(files, new Comparator<File>() {
 
                 @Override
-                public int compare(File lhs, File rhs) {
+                public int compare(final File lhs, final File rhs) {
                     return lhs.getName().compareToIgnoreCase(rhs.getName());
                 }
             });
@@ -189,7 +189,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
             loadFilesHandler.sendMessage(Message.obtain(loadFilesHandler));
         }
 
-        private void listDirs(List<File> list, List<File> directories, FileListSelector selector, Handler feedbackHandler) {
+        private void listDirs(final List<File> list, final List<File> directories, final FileListSelector selector, final Handler feedbackHandler) {
             for (final File dir : directories) {
                 FileUtils.listDir(list, dir, selector, feedbackHandler);
             }
@@ -204,7 +204,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
      * @return <code>true</code> if the filename belongs to the list
      */
     protected boolean filenameBelongsToList(final String filename) {
-        for (String ext : extensions) {
+        for (final String ext : extensions) {
             if (StringUtils.endsWithIgnoreCase(filename, ext)) {
                 return true;
             }
@@ -213,7 +213,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
     }
 
     protected List<File> getExistingBaseFolders() {
-        ArrayList<File> result = new ArrayList<>();
+        final ArrayList<File> result = new ArrayList<>();
         for (final File dir : getBaseFolders()) {
             if (dir.exists() && dir.isDirectory()) {
                 result.add(dir);
@@ -245,7 +245,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
         boolean shouldEnd = false;
 
         @Override
-        public boolean isSelected(File file) {
+        public boolean isSelected(final File file) {
             return filenameBelongsToList(file.getName());
         }
 
@@ -254,7 +254,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
             return shouldEnd;
         }
 
-        public synchronized void setShouldEnd(boolean shouldEnd) {
+        public synchronized void setShouldEnd(final boolean shouldEnd) {
             this.shouldEnd = shouldEnd;
         }
     }

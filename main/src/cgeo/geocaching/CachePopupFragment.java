@@ -135,9 +135,9 @@ public class CachePopupFragment extends AbstractDialogFragment {
                             public void call(final Integer selectedListId) {
                                 storeCache(selectedListId);
                             }
-                        }, true, StoredList.TEMPORARY_LIST_ID);
+                        }, true, StoredList.TEMPORARY_LIST.id);
             } else {
-                storeCache(StoredList.TEMPORARY_LIST_ID);
+                storeCache(StoredList.TEMPORARY_LIST.id);
             }
         }
 

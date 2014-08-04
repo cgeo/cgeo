@@ -693,7 +693,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                                     public void call(final Integer selectedListId) {
                                         storeCaches(geocodes, selectedListId);
                                     }
-                                }, true, StoredList.TEMPORARY_LIST_ID);
+                                }, true, StoredList.TEMPORARY_LIST.id);
                     } else {
                         storeCaches(geocodes, StoredList.STANDARD_LIST_ID);
                     }

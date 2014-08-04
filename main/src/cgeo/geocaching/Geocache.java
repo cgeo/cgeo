@@ -88,7 +88,7 @@ public class Geocache implements ICache, IWaypoint {
     private long updated = 0;
     private long detailedUpdate = 0;
     private long visitedDate = 0;
-    private int listId = StoredList.TEMPORARY_LIST_ID;
+    private int listId = StoredList.TEMPORARY_LIST.id;
     private boolean detailed = false;
     private String geocode = "";
     private String cacheId = "";
@@ -251,7 +251,7 @@ public class Geocache implements ICache, IWaypoint {
         if (visitedDate == 0) {
             visitedDate = other.visitedDate;
         }
-        if (listId == StoredList.TEMPORARY_LIST_ID) {
+        if (listId == StoredList.TEMPORARY_LIST.id) {
             listId = other.listId;
         }
         if (StringUtils.isBlank(geocode)) {
@@ -1432,7 +1432,7 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public void store(final CancellableHandler handler) {
-        store(StoredList.TEMPORARY_LIST_ID, handler);
+        store(StoredList.TEMPORARY_LIST.id, handler);
     }
 
     public void store(final int listId, final CancellableHandler handler) {
@@ -1627,7 +1627,7 @@ public class Geocache implements ICache, IWaypoint {
             return null;
         }
 
-        if (!forceReload && listId == StoredList.TEMPORARY_LIST_ID && (DataStore.isOffline(geocode, guid) || DataStore.isThere(geocode, guid, true, true))) {
+        if (!forceReload && listId == StoredList.TEMPORARY_LIST.id && (DataStore.isOffline(geocode, guid) || DataStore.isThere(geocode, guid, true, true))) {
             final SearchResult search = new SearchResult();
             final String realGeocode = StringUtils.isNotBlank(geocode) ? geocode : DataStore.getGeocodeForGuid(guid);
             search.addGeocode(realGeocode);

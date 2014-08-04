@@ -1010,7 +1010,7 @@ public class DataStore {
             }
             synchronized (listId) {
                 listId.bindString(1, value);
-                return listId.simpleQueryForLong() != StoredList.TEMPORARY_LIST_ID;
+                return listId.simpleQueryForLong() != StoredList.TEMPORARY_LIST.id;
             }
         } catch (final SQLiteDoneException e) {
             // Do nothing, it only means we have no information on the cache
@@ -2998,7 +2998,7 @@ public class DataStore {
     }
 
     public static void markDropped(final List<Geocache> caches) {
-        moveToList(caches, StoredList.TEMPORARY_LIST_ID);
+        moveToList(caches, StoredList.TEMPORARY_LIST.id);
     }
 
     public static Viewport getBounds(final String geocode) {

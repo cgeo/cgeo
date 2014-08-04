@@ -24,7 +24,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public final class StoredList extends AbstractList {
-    public static final int TEMPORARY_LIST_ID = 0;
+    private static final int TEMPORARY_LIST_ID = 0;
     public static final StoredList TEMPORARY_LIST = new StoredList(TEMPORARY_LIST_ID, "<temporary>", 0); // Never displayed
     public static final int STANDARD_LIST_ID = 1;
     private final int count; // this value is only valid as long as the list is not changed by other database operations
@@ -106,7 +106,7 @@ public final class StoredList extends AbstractList {
             final List<AbstractList> lists = new ArrayList<>();
             lists.addAll(getSortedLists());
 
-            if (exceptListId > StoredList.TEMPORARY_LIST_ID) {
+            if (exceptListId > StoredList.TEMPORARY_LIST.id) {
                 final StoredList exceptList = DataStore.getList(exceptListId);
                 if (exceptList != null) {
                     lists.remove(exceptList);
@@ -222,7 +222,7 @@ public final class StoredList extends AbstractList {
      * Return the given list, if it is a concrete list. Return the default list otherwise.
      */
     public static int getConcreteList(final int listId) {
-        if (listId == PseudoList.ALL_LIST.id || listId == TEMPORARY_LIST_ID || listId == PseudoList.HISTORY_LIST.id) {
+        if (listId == PseudoList.ALL_LIST.id || listId == TEMPORARY_LIST.id || listId == PseudoList.HISTORY_LIST.id) {
             return STANDARD_LIST_ID;
         }
         return listId;
