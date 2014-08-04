@@ -266,9 +266,9 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
             notifyAll();
         }
 
-        public synchronized void waitForCompletion(final long milliseconds, final int maxMessages) {
+        public synchronized void waitForCompletion(final long milliseconds) {
             try {
-                while (System.currentTimeMillis() - lastMessage <= milliseconds && messages.size() <= maxMessages) {
+                while (System.currentTimeMillis() - lastMessage <= milliseconds && !hasTerminatingMessage()) {
                     wait(milliseconds);
                 }
             } catch (InterruptedException e) {
@@ -276,9 +276,14 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
             }
         }
 
+        private boolean hasTerminatingMessage() {
+            Message recentMessage = messages.get(messages.size() - 1);
+            return recentMessage.what == GPXImporter.IMPORT_STEP_CANCELED || recentMessage.what == GPXImporter.IMPORT_STEP_FINISHED || recentMessage.what == GPXImporter.IMPORT_STEP_FINISHED_WITH_ERROR;
+        }
+
         public void waitForCompletion() {
-            // Use reasonable defaults
-            waitForCompletion(1000, 10);
+            // wait a maximum of 10 seconds
+            waitForCompletion(10000);
         }
     }
 
