@@ -1,6 +1,5 @@
 package cgeo.geocaching.utils;
 
-
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
@@ -23,28 +22,29 @@ public final class CryptUtils {
         // utility class
     }
 
-    private static char[] base64map1 = new char[64];
-    private static byte[] base64map2 = new byte[128];
+    private static final byte[] EMPTY = {};
+    private static char[] BASE64MAP1 = new char[64];
+    private static byte[] BASE64MAP2 = new byte[128];
 
     static {
         int i = 0;
         for (char c = 'A'; c <= 'Z'; c++) {
-            base64map1[i++] = c;
+            BASE64MAP1[i++] = c;
         }
         for (char c = 'a'; c <= 'z'; c++) {
-            base64map1[i++] = c;
+            BASE64MAP1[i++] = c;
         }
         for (char c = '0'; c <= '9'; c++) {
-            base64map1[i++] = c;
+            BASE64MAP1[i++] = c;
         }
-        base64map1[i++] = '+';
-        base64map1[i++] = '/';
+        BASE64MAP1[i++] = '+';
+        BASE64MAP1[i++] = '/';
 
-        for (i = 0; i < base64map2.length; i++) {
-            base64map2[i] = -1;
+        for (i = 0; i < BASE64MAP2.length; i++) {
+            BASE64MAP2[i] = -1;
         }
         for (i = 0; i < 64; i++) {
-            base64map2[base64map1[i]] = (byte) i;
+            BASE64MAP2[BASE64MAP1[i]] = (byte) i;
         }
     }
 
@@ -96,18 +96,16 @@ public final class CryptUtils {
     }
 
     public static byte[] hashHmac(String text, String salt) {
-        byte[] macBytes = {};
 
         try {
             final SecretKeySpec secretKeySpec = new SecretKeySpec(salt.getBytes(CharEncoding.UTF_8), "HmacSHA1");
             final Mac mac = Mac.getInstance("HmacSHA1");
             mac.init(secretKeySpec);
-            macBytes = mac.doFinal(text.getBytes(CharEncoding.UTF_8));
+            return mac.doFinal(text.getBytes(CharEncoding.UTF_8));
         } catch (GeneralSecurityException | UnsupportedEncodingException e) {
             Log.e("CryptUtils.hashHmac", e);
+            return EMPTY;
         }
-
-        return macBytes;
     }
 
     public static CharSequence rot13(final Spannable span) {
@@ -141,11 +139,11 @@ public final class CryptUtils {
             int o1 = ((i0 & 3) << 4) | (i1 >>> 4);
             int o2 = ((i1 & 0xf) << 2) | (i2 >>> 6);
             int o3 = i2 & 0x3F;
-            out[op++] = base64map1[o0];
-            out[op++] = base64map1[o1];
-            out[op] = op < oDataLen ? base64map1[o2] : '=';
+            out[op++] = BASE64MAP1[o0];
+            out[op++] = BASE64MAP1[o1];
+            out[op] = op < oDataLen ? BASE64MAP1[o2] : '=';
             op++;
-            out[op] = op < oDataLen ? base64map1[o3] : '=';
+            out[op] = op < oDataLen ? BASE64MAP1[o3] : '=';
             op++;
         }
 
