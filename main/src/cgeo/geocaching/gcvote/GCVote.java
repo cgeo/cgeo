@@ -20,7 +20,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -273,10 +272,6 @@ public final class GCVote {
 
     public static boolean isValidRating(final float rating) {
         return rating >= MIN_RATING && rating <= MAX_RATING;
-    }
-
-    public static String getRatingText(final float rating) {
-        return String.format(Locale.getDefault(), "%.1f", rating);
     }
 
     public static boolean isVotingPossible(final Geocache cache) {

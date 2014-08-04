@@ -17,8 +17,6 @@ import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
-import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -210,12 +208,6 @@ public class CachePopupFragment extends AbstractDialogFragment {
         }
         NavigationAppFactory.startDefaultNavigationApplication(2, getActivity(), cache);
         getActivity().finish();
-    }
-
-    public static void startActivity(final Context context, final String geocode) {
-        final Intent popupIntent = new Intent(context, CachePopup.class);
-        popupIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
-        context.startActivity(popupIntent);
     }
 
     @Override

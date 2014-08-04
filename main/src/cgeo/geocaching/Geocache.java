@@ -12,11 +12,9 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.connector.gc.UncertainProperty;
-import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
@@ -1691,22 +1689,6 @@ public class Geocache implements ICache, IWaypoint {
             }
         }
         return null;
-    }
-
-    /**
-     * check whether the cache has a given attribute
-     *
-     * @param attribute
-     * @param yes
-     *            true if we are looking for the attribute_yes version, false for the attribute_no version
-     * @return
-     */
-    public boolean hasAttribute(final CacheAttribute attribute, final boolean yes) {
-        Geocache fullCache = DataStore.loadCache(getGeocode(), EnumSet.of(LoadFlag.ATTRIBUTES));
-        if (fullCache == null) {
-            fullCache = this;
-        }
-        return fullCache.getAttributes().contains(attribute.getAttributeName(yes));
     }
 
     public boolean hasStaticMap() {
