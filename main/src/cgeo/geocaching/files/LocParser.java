@@ -88,7 +88,7 @@ public final class LocParser extends FileParser {
         }
         // >> premium only
 
-        final String[] points = fileContent.split("<waypoint>");
+        final String[] points = StringUtils.splitByWholeSeparator(fileContent, "<waypoint>");
 
         // parse coordinates
         for (String pointString : points) {

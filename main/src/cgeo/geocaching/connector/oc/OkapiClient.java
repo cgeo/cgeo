@@ -56,6 +56,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.regex.Pattern;
 
 final class OkapiClient {
 
@@ -130,6 +131,8 @@ final class OkapiClient {
     private static final String METHOD_SEARCH_BBOX = "services/caches/search/bbox";
     private static final String METHOD_SEARCH_NEAREST = "services/caches/search/nearest";
     private static final String METHOD_RETRIEVE_CACHES = "services/caches/geocaches";
+
+    private static final Pattern PATTERN_TIMEZONE = Pattern.compile("([+-][01][0-9]):([03])0");
 
     public static Geocache getCache(final String geoCode) {
         final Parameters params = new Parameters("cache_code", geoCode);
@@ -578,7 +581,7 @@ final class OkapiClient {
     }
 
     private static Date parseDate(final String date) {
-        final String strippedDate = date.replaceAll("\\+0([0-9]){1}\\:00", "+0$100");
+        final String strippedDate = PATTERN_TIMEZONE.matcher(date).replaceAll("$1$20");
         try {
             return ISO8601DATEFORMAT.parse(strippedDate);
         } catch (final ParseException e) {

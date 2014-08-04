@@ -26,6 +26,7 @@ import ch.boye.httpclientandroidlib.params.CoreConnectionPNames;
 import ch.boye.httpclientandroidlib.params.CoreProtocolPNames;
 import ch.boye.httpclientandroidlib.params.HttpParams;
 import ch.boye.httpclientandroidlib.util.EntityUtils;
+
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
@@ -43,6 +44,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.regex.Pattern;
 
 public abstract class Network {
 
@@ -51,7 +53,7 @@ public abstract class Network {
     /** Native user agent, taken from a Android 2.2 Nexus **/
     private final static String NATIVE_USER_AGENT = "Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
 
-    private static final String PATTERN_PASSWORD = "(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+";
+    private static final Pattern PATTERN_PASSWORD = Pattern.compile("(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+");
 
     private final static HttpParams clientParams = new BasicHttpParams();
 
@@ -63,7 +65,7 @@ public abstract class Network {
     }
 
     private static String hidePassword(final String message) {
-        return message.replaceAll(PATTERN_PASSWORD, "password=***");
+        return PATTERN_PASSWORD.matcher(message).replaceAll("password=***");
     }
 
     private static HttpClient getHttpClient() {

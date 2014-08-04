@@ -454,7 +454,7 @@ public abstract class GPXParser extends FileParser {
 
             @Override
             public void end(String body) {
-                final String[] content = body.split("\\|");
+                final String[] content = StringUtils.split(body, '|');
                 if (content.length > 0) {
                     type = content[0].toLowerCase(Locale.US).trim();
                 }

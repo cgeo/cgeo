@@ -125,7 +125,7 @@ public abstract class GCParser {
 
         page = page.substring(startPos + 1, endPos - startPos + 1); // cut between <table> and </table>
 
-        final String[] rows = page.split("<tr class=");
+        final String[] rows = StringUtils.splitByWholeSeparator(page, "<tr class=");
         final int rows_count = rows.length;
 
         int excludedCaches = 0;
@@ -709,10 +709,10 @@ public abstract class GCParser {
                     wpList = wpList.substring(wpBegin + 7, wpEnd);
                 }
 
-                final String[] wpItems = wpList.split("<tr");
+                final String[] wpItems = StringUtils.splitByWholeSeparator(wpList, "<tr");
 
                 for (int j = 1; j < wpItems.length; j++) {
-                    String[] wp = wpItems[j].split("<td");
+                    String[] wp = StringUtils.splitByWholeSeparator(wpItems[j], "<td");
 
                     // waypoint name
                     // res is null during the unit tests
@@ -738,7 +738,7 @@ public abstract class GCParser {
 
                     j++;
                     if (wpItems.length > j) {
-                        wp = wpItems[j].split("<td");
+                        wp = StringUtils.splitByWholeSeparator(wpItems[j], "<td");
                     }
 
                     // waypoint note
