@@ -2983,10 +2983,6 @@ public class DataStore {
             return getStatement("listFromGeocode", "SELECT reason FROM " + dbTableCaches + " WHERE guid = ?");
         }
 
-        private static SQLiteStatement getCacheIdOfGeocode() {
-            return getStatement("cacheIdFromGeocode", "SELECT cacheid FROM " + dbTableCaches + " WHERE geocode = ?");
-        }
-
         private static SQLiteStatement getGeocodeOfGuid() {
             return getStatement("geocodeFromGuid", "SELECT geocode FROM " + dbTableCaches + " WHERE guid = ?");
         }
