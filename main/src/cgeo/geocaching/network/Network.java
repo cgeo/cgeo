@@ -2,6 +2,7 @@ package cgeo.geocaching.network;
 
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
@@ -27,11 +28,11 @@ import ch.boye.httpclientandroidlib.params.CoreProtocolPNames;
 import ch.boye.httpclientandroidlib.params.HttpParams;
 import ch.boye.httpclientandroidlib.util.EntityUtils;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -109,7 +110,7 @@ public abstract class Network {
      * @return the HTTP response, or null in case of an encoding error params
      */
     @Nullable
-    public static HttpResponse postJsonRequest(final String uri, final JSONObject json) {
+    public static HttpResponse postJsonRequest(final String uri, final ObjectNode json) {
         HttpPost request = new HttpPost(uri);
         request.addHeader("Content-Type", "application/json; charset=utf-8");
         if (json != null) {
@@ -346,14 +347,14 @@ public abstract class Network {
      * @return a JSON object if the request was successful and the body could be decoded, <code>null</code> otherwise
      */
     @Nullable
-    public static JSONObject requestJSON(final String uri, @Nullable final Parameters params) {
+    public static ObjectNode requestJSON(final String uri, @Nullable final Parameters params) {
         final HttpResponse response = request("GET", uri, params, new Parameters("Accept", "application/json, text/javascript, */*; q=0.01"), null);
         final String responseData = getResponseData(response, false);
         if (responseData != null) {
             try {
-                return new JSONObject(responseData);
-            } catch (final JSONException e) {
-                Log.w("Network.requestJSON", e);
+                return (ObjectNode) JsonUtils.reader.readTree(responseData);
+            } catch (final IOException e) {
+                Log.w("requestJSON", e);
             }
         }
 
