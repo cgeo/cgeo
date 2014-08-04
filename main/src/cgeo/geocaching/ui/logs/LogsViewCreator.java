@@ -4,8 +4,7 @@ import cgeo.geocaching.ImagesActivity;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.list.StoredList;
-import cgeo.geocaching.network.HtmlImage;
+import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.ui.AbstractCachingListViewPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.DecryptTextClickListener;
@@ -85,7 +84,7 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
         if (TextUtils.containsHtml(logText)) {
             logText = log.getDisplayText();
             final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
-            holder.text.setText(Html.fromHtml(logText, new HtmlImage(getGeocode(), false, StoredList.STANDARD_LIST_ID, false, holder.text),
+            holder.text.setText(Html.fromHtml(logText, new SmileyImage(getGeocode(), holder.text),
                     unknownTagsHandler), TextView.BufferType.SPANNABLE);
         } else {
             holder.text.setText(logText, TextView.BufferType.SPANNABLE);

@@ -89,7 +89,7 @@ public class HtmlImage implements Html.ImageGetter {
     final private int maxWidth;
     final private int maxHeight;
     final private Resources resources;
-    final private TextView view;
+    protected final TextView view;
 
     // Background loading
     final private PublishSubject<Observable<String>> loading = PublishSubject.create();
@@ -208,12 +208,7 @@ public class HtmlImage implements Html.ImageGetter {
 
             private Pair<BitmapDrawable, Boolean> loadFromDisk() {
                 final Pair<Bitmap, Boolean> loadResult = loadImageFromStorage(url, pseudoGeocode, shared);
-                final Bitmap bitmap = loadResult.getLeft();
-                return new ImmutablePair<>(bitmap != null ?
-                        ImageUtils.scaleBitmapToFitDisplay(bitmap) :
-                        null,
-                        loadResult.getRight()
-                );
+                return scaleImage(loadResult);
             }
 
             private void downloadAndSave(final Subscriber<? super BitmapDrawable> subscriber) {
@@ -252,6 +247,14 @@ public class HtmlImage implements Html.ImageGetter {
                 }
             }
         });
+    }
+
+    protected Pair<BitmapDrawable, Boolean> scaleImage(final Pair<Bitmap, Boolean> loadResult) {
+        final Bitmap bitmap = loadResult.getLeft();
+        return new ImmutablePair<>(bitmap != null ?
+                ImageUtils.scaleBitmapToFitDisplay(bitmap) :
+                null,
+                loadResult.getRight());
     }
 
     public Observable<String> waitForEndObservable(@Nullable final CancellableHandler handler) {
