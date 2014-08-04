@@ -332,9 +332,6 @@
       <option name="m_minLength" value="2" />
       <option name="m_maxLength" value="30" />
     </inspection_tool>
-    <inspection_tool class="ParametersPerMethod" enabled="true" level="WARNING" enabled_by_default="true">
-      <option name="m_limit" value="5" />
-    </inspection_tool>
     <inspection_tool class="PointlessArithmeticExpression" enabled="false" level="WARNING" enabled_by_default="false">
       <option name="m_ignoreExpressionsContainingConstants" value="false" />
     </inspection_tool>
