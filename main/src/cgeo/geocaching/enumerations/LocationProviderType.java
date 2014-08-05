@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 public enum LocationProviderType {
     GPS(R.string.loc_gps),
     NETWORK(R.string.loc_net),
+    FUSED(R.string.loc_fused),
     LAST(R.string.loc_last);
 
     public final int resourceId;

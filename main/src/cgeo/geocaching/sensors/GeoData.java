@@ -6,9 +6,9 @@ import cgeo.geocaching.geopoint.Geopoint;
 import android.location.Location;
 import android.location.LocationManager;
 
-class GeoData extends Location implements IGeoData {
+public class GeoData extends Location implements IGeoData {
 
-    GeoData(final Location location) {
+    public GeoData(final Location location) {
         super(location);
     }
 
@@ -23,6 +23,9 @@ class GeoData extends Location implements IGeoData {
         }
         if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
             return LocationProviderType.NETWORK;
+        }
+        if (provider.equals("fused")) {
+            return LocationProviderType.FUSED;
         }
         return LocationProviderType.LAST;
     }
