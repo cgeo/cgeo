@@ -7,14 +7,18 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
+import com.fasterxml.jackson.databind.JsonNode;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.Nullable;
-import org.json.JSONException;
-import org.json.JSONObject;
+
+import java.io.IOException;
 
 public class ECLogin extends AbstractLogin {
 
@@ -93,18 +97,18 @@ public class ECLogin extends AbstractLogin {
         setActualStatus(app.getString(R.string.init_login_popup_ok));
 
         try {
-            final JSONObject json = new JSONObject(data);
+            final JsonNode json = JsonUtils.reader.readTree(data);
 
-            final String sid = json.getString("sid");
+            final String sid = json.get("sid").asText();
             if (!StringUtils.isBlank(sid)) {
                 sessionId = sid;
                 setActualLoginStatus(true);
-                setActualUserName(json.getString("username"));
-                setActualCachesFound(json.getInt("found"));
+                setActualUserName(json.get("username").asText());
+                setActualCachesFound(json.get("found").asInt());
                 return true;
             }
             resetLoginStatus();
-        } catch (final JSONException e) {
+        } catch (IOException | NullPointerException e) {
             Log.e("ECLogin.getLoginStatus", e);
         }
 

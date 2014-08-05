@@ -2,6 +2,9 @@
 #
 
 RXJAVA=0.19.6
+JACKSONCORE=2.4.1.1
+JACKSONDATABIND=2.4.1.3
+JACKSONANNOTATIONS=2.4.1
 
 cd $(git rev-parse --show-toplevel)/main/libs
 
@@ -31,3 +34,10 @@ updatelib com/netflix/rxjava rxjava-core $RXJAVA
 updatelib com/netflix/rxjava rxjava-android $RXJAVA
 updatelib com/netflix/rxjava rxjava-async-util $RXJAVA
 fixgradle RXVersion $RXJAVA
+
+updatelib com/fasterxml/jackson/core jackson-core $JACKSONCORE
+fixgradle JacksonCoreVersion $JACKSONCORE
+updatelib com/fasterxml/jackson/core jackson-databind $JACKSONDATABIND
+fixgradle JacksonDatabindVersion $JACKSONDATABIND
+updatelib com/fasterxml/jackson/core jackson-annotations $JACKSONANNOTATIONS
+fixgradle JacksonAnnotationsVersion $JACKSONANNOTATIONS

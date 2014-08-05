@@ -21,6 +21,9 @@
 # rxjava internal references sun.misc.Unsafe
 -dontwarn sun.misc.Unsafe
 
+# jackson internal references
+-dontwarn org.w3c.dom.bootstrap.DOMImplementationRegistry
+
 #-dontnote org.apache.commons.logging.**
 
 -keep public class cgeo.geocaching.*

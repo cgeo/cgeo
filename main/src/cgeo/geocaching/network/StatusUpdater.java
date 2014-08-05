@@ -4,8 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.utils.RxUtils;
 import cgeo.geocaching.utils.Version;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import rx.functions.Action0;
 import rx.subjects.BehaviorSubject;
@@ -31,11 +30,11 @@ public class StatusUpdater {
             this.url = url;
         }
 
-        Status(final JSONObject response) {
-            message = get(response, "message");
-            messageId = get(response, "message_id");
-            icon = get(response, "icon");
-            url = get(response, "url");
+        Status(final ObjectNode response) {
+            message = response.path("message").asText(null);
+            messageId = response.path("message_id").asText(null);
+            icon = response.path("icon").asText(null);
+            url = response.path("url").asText(null);
         }
 
         final static public Status closeoutStatus =
@@ -55,7 +54,7 @@ public class StatusUpdater {
         RxUtils.networkScheduler.createWorker().schedulePeriodically(new Action0() {
             @Override
             public void call() {
-                final JSONObject response =
+                final ObjectNode response =
                         Network.requestJSON("http://status.cgeo.org/api/status.json",
                                 new Parameters("version_code", String.valueOf(Version.getVersionCode(CgeoApplication.getInstance())),
                                         "version_name", Version.getVersionName(CgeoApplication.getInstance()),
@@ -65,14 +64,6 @@ public class StatusUpdater {
                 }
             }
         }, 0, 1800, TimeUnit.SECONDS);
-    }
-
-    private static String get(final JSONObject json, final String key) {
-        try {
-            return json.getString(key);
-        } catch (final JSONException e) {
-            return null;
-        }
     }
 
 }
