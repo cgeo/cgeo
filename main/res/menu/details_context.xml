@@ -4,9 +4,15 @@
 
     <item
         android:id="@+id/menu_copy"
-        android:icon="@drawable/ic_menu_copy"
+        android:icon="@drawable/ic_menu_copy_holo_dark"
         android:title="@android:string/copy"
         app:showAsAction="always|withText">
+    </item>
+    <item
+        android:id="@+id/menu_cache_share_field"
+        android:title="@string/cache_share_field"
+        android:icon="@drawable/ic_menu_share"
+        app:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_translate_to_sys_lang"
@@ -16,11 +22,6 @@
     <item
         android:id="@+id/menu_translate_to_english"
         android:title="@string/translate_to_english"
-        app:showAsAction="ifRoom">
-    </item>
-    <item
-        android:id="@+id/menu_cache_share_field"
-        android:title="@string/cache_share_field"
         app:showAsAction="ifRoom">
     </item>
     <item
