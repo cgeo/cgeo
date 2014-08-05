@@ -938,16 +938,16 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 try {
                     final CGeoMap map = mapRef.get();
                     if (map != null) {
-                        final boolean needsRepaintForDistance = needsRepaintForDistance();
+                        final boolean needsRepaintForDistanceOrAccuracy = needsRepaintForDistanceOrAccuracy();
                         final boolean needsRepaintForHeading = needsRepaintForHeading();
 
-                        if (needsRepaintForDistance) {
+                        if (needsRepaintForDistanceOrAccuracy) {
                             if (map.followMyLocation) {
                                 map.centerMap(new Geopoint(currentLocation));
                             }
                         }
 
-                        if (needsRepaintForDistance || needsRepaintForHeading) {
+                        if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
                             map.overlayPositionAndScale.setCoordinates(currentLocation);
                             map.overlayPositionAndScale.setHeading(currentHeading);
                             map.mapView.repaintRequired(map.overlayPositionAndScale);
@@ -967,7 +967,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             return Math.abs(AngleUtils.difference(currentHeading, map.overlayPositionAndScale.getHeading())) > MIN_HEADING_DELTA;
         }
 
-        boolean needsRepaintForDistance() {
+        boolean needsRepaintForDistanceOrAccuracy() {
             final CGeoMap map = mapRef.get();
             if (map == null) {
                 return false;
@@ -976,6 +976,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
             float dist = Float.MAX_VALUE;
             if (lastLocation != null) {
+                if (lastLocation.getAccuracy() != currentLocation.getAccuracy()) {
+                    return true;
+                }
                 dist = currentLocation.distanceTo(lastLocation);
             }
 
