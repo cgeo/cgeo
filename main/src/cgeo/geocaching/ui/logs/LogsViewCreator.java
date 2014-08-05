@@ -3,7 +3,7 @@ package cgeo.geocaching.ui.logs;
 import cgeo.geocaching.ImagesActivity;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.ui.AbstractCachingListViewPageViewCreator;
@@ -28,9 +28,9 @@ import java.util.List;
 
 public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCreator {
 
-    protected final AbstractActivity activity;
+    protected final AbstractActionBarActivity activity;
 
-    public LogsViewCreator(final AbstractActivity activity) {
+    public LogsViewCreator(final AbstractActionBarActivity activity) {
         this.activity = activity;
     }
 
@@ -60,6 +60,8 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
 
                 final LogEntry log = getItem(position);
                 fillViewHolder(convertView, holder, log);
+                final View logView = rowView.findViewById(R.id.log);
+                activity.addContextMenu(logView);
                 return rowView;
             }
         });

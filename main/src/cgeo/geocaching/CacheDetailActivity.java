@@ -1857,6 +1857,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         context.startActivity(cachesIntent);
     }
 
+    @Override
     public void addContextMenu(final View view) {
         view.setOnLongClickListener(new OnLongClickListener() {
 
@@ -1932,7 +1933,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         return onClipboardItemSelected(actionMode, menuItem, clickedItemText);
                     }
                 });
-                return false;
+                return true;
             }
         });
     }
