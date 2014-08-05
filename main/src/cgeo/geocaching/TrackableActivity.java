@@ -527,6 +527,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     }
 
+    @Override
     public void addContextMenu(final View view) {
         view.setOnLongClickListener(new OnLongClickListener() {
 
