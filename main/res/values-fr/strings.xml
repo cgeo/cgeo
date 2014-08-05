@@ -850,7 +850,7 @@
   <string name="helper_calendar_missing">Module supplémentaire c:geo agenda non installé</string>
   <string name="helper_calendar_description">Permet d\'exporter les événements liés aux caches dans le calendrier Android.</string>
   <string name="helper_sendtocgeo_title">Envoyer vers c:geo</string>
-  <string name="helper_contacts_title">c:geo - additif contacts</string>
+  <string name="helper_contacts_title">c:geo - Module complémentaire contacts</string>
   <string name="helper_contacts_description">Permet d\'ouvrir une fiche de contact (depuis le carnet d\'adresses) directement depuis une entrée de journal, de manière à pouvoir plus facilement appeler des amis à l\'aide.</string>
   <string name="helper_sendtocgeo_description">Envoyer à c:geo (<i>Send to c:geo</i>) est une extension pour le navigateur <strong>de votre ordinateur</strong>. Lorsque vous naviguez sur geocaching.com, vous pouvez envoyer des caches vers votre smartphone avec un clic.</string>
   <string name="helper_locus_title">Locus</string>
