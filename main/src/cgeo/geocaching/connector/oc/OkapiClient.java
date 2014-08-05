@@ -362,7 +362,7 @@ final class OkapiClient {
             // not used: req_password
             // Prepend gc-link to description if available
             final StringBuilder description = new StringBuilder(500);
-            if (response.has("gc_code")) {
+            if (response.hasNonNull("gc_code")) {
                 final String gccode = response.get("gc_code").asText();
                 description.append(CgeoApplication.getInstance().getResources()
                         .getString(R.string.cache_listed_on, GCConnector.getInstance().getName()))
@@ -399,7 +399,7 @@ final class OkapiClient {
             if (response.has(CACHE_IS_WATCHED)) {
                 cache.setOnWatchlist(response.get(CACHE_IS_WATCHED).asBoolean());
             }
-            if (response.has(CACHE_MY_NOTES)) {
+            if (response.hasNonNull(CACHE_MY_NOTES)) {
                 cache.setPersonalNote(response.get(CACHE_MY_NOTES).asText());
                 cache.parseWaypointsFromNote();
             }
