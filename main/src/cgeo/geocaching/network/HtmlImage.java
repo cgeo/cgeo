@@ -249,6 +249,7 @@ public class HtmlImage implements Html.ImageGetter {
         });
     }
 
+    @SuppressWarnings("static-method")
     protected Pair<BitmapDrawable, Boolean> scaleImage(final Pair<Bitmap, Boolean> loadResult) {
         final Bitmap bitmap = loadResult.getLeft();
         return new ImmutablePair<>(bitmap != null ?
