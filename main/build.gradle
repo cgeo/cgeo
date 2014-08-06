@@ -154,7 +154,7 @@ dependencies {
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
 
     compile 'com.android.support:appcompat-v7:19.1.0'
-    compile 'com.google.android.gms:play-services:5.0.77'
+    compile 'com.google.android.gms:play-services:5.0.89'
 
     compile 'com.jakewharton:butterknife:5.1.1'
     compile 'org.apache.commons:commons-collections4:4.0'
