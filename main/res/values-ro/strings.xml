@@ -206,6 +206,7 @@
   <string name="info_select_logimage_cancelled">Selecţia sau captura de imagine a fost anulată.</string>
   <string name="info_stored_image">Imaginea a fost salvată aici:</string>
   <string name="info_storing_static_maps">Încerc să salvez hărţi</string>
+  <string name="info_cache_saved">Geocutia a fost salvată local</string>
   <string name="loc_last">Ultima poziţie cunoscută</string>
   <string name="loc_net">Reţea</string>
   <string name="loc_gps">GPS</string>
@@ -235,6 +236,11 @@
   <string name="caches_more_caches_currently">până acum</string>
   <string name="caches_downloading">Descărcare cutii…\nMai durează: </string>
   <string name="caches_eta_ltm">Mai puţin de un minut</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="one">%d minut</item>
+    <item quantity="few">%d minute</item>
+    <item quantity="other">%d minute</item>
+  </plurals>
   <string name="caches_store_offline">Salvează local</string>
   <string name="caches_store_selected">Salvează cutiile selectate</string>
   <string name="caches_history">Istoric</string>
@@ -261,6 +267,11 @@
   <string name="caches_select_invert">Inversează selecţia</string>
   <string name="caches_nearby">În apropiere</string>
   <string name="caches_manage">Gestionează</string>
+  <string name="caches_remove_all">Șterge toate</string>
+  <string name="caches_remove_all_confirm">Vrei să ştergi toate cele %s cutii din lista curenă?</string>
+  <string name="caches_remove_selected">Şterge geocutiile selectate</string>
+  <string name="caches_remove_selected_confirm">Vrei să ştergi cele %s cutii selectate din dispozitiv?</string>
+  <string name="caches_remove_progress">Ştergere geocutii</string>
   <string name="caches_delete_events">Şterge evenimentele trecute</string>
   <string name="caches_refresh_selected">Reîncarcă cutiile selectate</string>
   <string name="caches_refresh_all">Reîncarcă toate cutiile</string>
@@ -290,6 +301,7 @@
   <string name="list_menu_create">Crează listă nouă</string>
   <string name="list_menu_drop">Şterge lista curentă</string>
   <string name="list_menu_rename">Redenumeşte lista curentă</string>
+  <string name="list_menu_import">Import</string>
   <string name="list_title">Alege o listă</string>
   <string name="list_inbox">Salvate</string>
   <string name="list_all_lists">Toate cutiile</string>
@@ -357,6 +369,8 @@
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Activează</string>
   <string name="init_oc_ro_description">Autorizează c:geo cu opencaching.ro pentru a putea căuta geocutii şi a putea accesa/filtra pe cele găsite de tine.</string>
+  <string name="settings_activate_oc_uk">Activează</string>
+  <string name="init_oc_uk_description">Autorizează c:geo cu opencaching.org.uk pentru a putea căuta geocutii şi a putea accesa/filtra pe cele găsite de tine.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activează</string>
@@ -817,6 +831,7 @@
   <string name="user_menu_open_contact">Deschide pagina contactului</string>
   <string name="navigation">Navigare</string>
   <string name="compass_title">Busolă</string>
+  <string name="compass_sensors">Senzori activi</string>
   <string name="use_gps">Foloseşte doar GPS-ul</string>
   <string name="use_compass">Foloseşte GPS-ul şi busola</string>
   <string name="destination_select">Alege destinaţia</string>
