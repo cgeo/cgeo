@@ -216,7 +216,7 @@ final class OkapiClient {
 
         addFilterParams(valueMap, connector, my);
         try {
-            params.add("search_params", JsonUtils.writer.writeValueAsString(params));
+            params.add("search_params", JsonUtils.writer.writeValueAsString(valueMap));
         } catch (final JsonProcessingException e) {
             Log.e("requestCaches", e);
             return Collections.emptyList();
