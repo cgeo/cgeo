@@ -713,12 +713,18 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     private void checkShowChangelog() {
-        final long lastChecksum = Settings.getLastChangelogChecksum();
-        final long checksum = TextUtils.checksum(getString(R.string.changelog_master) + getString(R.string.changelog_release));
-        Settings.setLastChangelogChecksum(checksum);
-        // don't show change log after new install...
-        if (lastChecksum > 0 && lastChecksum != checksum) {
-            AboutActivity.showChangeLog(this);
+        // temporary workaround for #4143
+        //TODO: understand and avoid if possible
+        try {
+            final long lastChecksum = Settings.getLastChangelogChecksum();
+            final long checksum = TextUtils.checksum(getString(R.string.changelog_master) + getString(R.string.changelog_release));
+            Settings.setLastChangelogChecksum(checksum);
+            // don't show change log after new install...
+            if (lastChecksum > 0 && lastChecksum != checksum) {
+                AboutActivity.showChangeLog(this);
+            }
+        } catch (final Exception ex) {
+            Log.e("Error checking/showing changelog!", ex);
         }
     }
 
