@@ -67,3 +67,8 @@
 
 # keep Emma code coverage during debug builds
 -keep class com.vladium.** { *; }
+
+# keep some test only utils classes
+-keep class org.apache.commons.lang3.StringUtils { *; }
+-keep class org.apache.commons.io.IOUtils { *; }
+-keep class org.apache.commons.io.FileUtils { *; }
