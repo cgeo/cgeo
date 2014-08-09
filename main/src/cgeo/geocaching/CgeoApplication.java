@@ -1,6 +1,5 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.playservices.LocationProvider;
 import cgeo.geocaching.sensors.DirectionProvider;
 import cgeo.geocaching.sensors.GeoDataProvider;
 import cgeo.geocaching.sensors.GpsStatusProvider;
@@ -86,8 +85,7 @@ public class CgeoApplication extends Application {
 
     public synchronized Observable<IGeoData> geoDataObservable() {
         if (geoDataObservable == null) {
-            final Observable<IGeoData> rawObservable = isGooglePlayServicesAvailable() ? LocationProvider.create(this) : GeoDataProvider.create(this);
-            final ConnectableObservable<IGeoData> onDemand = rawObservable.replay(1);
+            final ConnectableObservable<IGeoData> onDemand = GeoDataProvider.create(this).replay(1);
             onDemand.subscribe(new Action1<IGeoData>() {
                                   @Override
                                   public void call(final IGeoData geoData) {
