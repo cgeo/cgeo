@@ -65,8 +65,9 @@
 # the sort action provider is only referenced from XML
 -keep public class cgeo.geocaching.sorting.SortActionProvider { *; }
 
-# keep Emma code coverage during debug builds
+# keep Emma code coverage during debug builds, and ignore related warnings
 -keep class com.vladium.** { *; }
+-dontwarn com.vladium.**
 
 # keep some test only utils classes
 -keep class org.apache.commons.lang3.StringUtils { *; }
