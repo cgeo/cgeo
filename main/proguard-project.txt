@@ -26,7 +26,7 @@
 
 #-dontnote org.apache.commons.logging.**
 
--keep public class cgeo.geocaching.*
+-keep class cgeo.geocaching.** { *; }
 -keep class android.support.v4.os.** { *; }
 
 -keep class ch.boye.httpclientandroidlib.conn.scheme.Scheme { *; }
