@@ -12,9 +12,6 @@ private.properties
 /crowdin/credentials
 /main/res/values/mapsapikey.xml
 
-# eclipse plugin settings which cannot be shared
-org.moreunit.prefs
-
 /main/project/localization/*.missing
 /main/project/attributes/drawable-mdpi/
 /main/project/attributes/iconlist1res.html
