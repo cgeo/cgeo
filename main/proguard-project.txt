@@ -61,3 +61,6 @@
 
 # the sort action provider is only referenced from XML
 -keep public class cgeo.geocaching.sorting.SortActionProvider { *; }
+
+# the navigation action provider is only referenced from XML
+-keep public class cgeo.geocaching.ui.NavigationActionProvider { *; }

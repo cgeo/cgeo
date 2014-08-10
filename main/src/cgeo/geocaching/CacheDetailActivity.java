@@ -6,6 +6,7 @@ import butterknife.InjectView;
 import cgeo.calendar.CalendarAddon;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
+import cgeo.geocaching.activity.INavigationSource;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cachelist.MapsWithMeCacheListApp;
@@ -35,6 +36,7 @@ import cgeo.geocaching.ui.EditNoteDialog.EditNoteDialogListener;
 import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.IndexOutOfBoundsAvoidingTextView;
 import cgeo.geocaching.ui.LoggingUI;
+import cgeo.geocaching.ui.NavigationActionProvider;
 import cgeo.geocaching.ui.OwnerActionsClickListener;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -83,6 +85,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.view.ActionMode;
 import android.text.Editable;
 import android.text.Html;
@@ -126,7 +129,7 @@ import java.util.regex.Pattern;
  *
  * e.g. details, description, logs, waypoints, inventory...
  */
-public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailActivity.Page> implements CacheMenuHandler.ActivityInterface {
+public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailActivity.Page> implements CacheMenuHandler.ActivityInterface, INavigationSource {
 
     private static final int MESSAGE_FAILED = -1;
     private static final int MESSAGE_SUCCEEDED = 1;
@@ -427,6 +430,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         CacheMenuHandler.addMenuItems(this, menu, cache);
+        final MenuItem menuItem = menu.findItem(R.id.menu_default_navigation);
+        final NavigationActionProvider navAction = (NavigationActionProvider) MenuItemCompat.getActionProvider(menuItem);
+        if (navAction != null) {
+            navAction.setNavigationSource(this);
+        }
         return true;
     }
 
@@ -610,10 +618,19 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     /**
-     * Tries to navigate to the {@link Geocache} of this activity.
+     * Tries to navigate to the {@link Geocache} of this activity using the default navigation tool.
      */
-    private void startDefaultNavigation() {
+    @Override
+    public void startDefaultNavigation() {
         NavigationAppFactory.startDefaultNavigationApplication(1, this, cache);
+    }
+
+    /**
+     * Tries to navigate to the {@link Geocache} of this activity using the second default navigation tool.
+     */
+    @Override
+    public void startDefaultNavigation2() {
+        NavigationAppFactory.startDefaultNavigationApplication(2, this, cache);
     }
 
     /**
