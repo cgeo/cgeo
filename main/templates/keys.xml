@@ -23,7 +23,7 @@
     <string name="oc_ro_okapi_consumer_key" translatable="false">@ocro.okapi.consumer.key@</string>
     <string name="oc_ro_okapi_consumer_secret" translatable="false">@ocro.okapi.consumer.secret@</string>
 
-    <!-- Opencaching.og.uk -->
+    <!-- Opencaching.org.uk -->
     <string name="oc_uk_okapi_consumer_key" translatable="false">@ocuk.okapi.consumer.key@</string>
     <string name="oc_uk_okapi_consumer_secret" translatable="false">@ocuk.okapi.consumer.secret@</string>
 </resources>
