@@ -61,7 +61,7 @@ public final class ImageUtils {
      * @return BitmapDrawable The scaled image
      */
     public static BitmapDrawable scaleBitmapToFitDisplay(@NonNull final Bitmap image) {
-        Point displaySize = Compatibility.getDisplaySize();
+        final Point displaySize = Compatibility.getDisplaySize();
         final int maxWidth = displaySize.x - 25;
         final int maxHeight = displaySize.y - 25;
         return scaleBitmapTo(image, maxWidth, maxHeight);
@@ -76,7 +76,7 @@ public final class ImageUtils {
      */
     @Nullable
     public static Bitmap readAndScaleImageToFitDisplay(@NonNull final String filename) {
-        Point displaySize = Compatibility.getDisplaySize();
+        final Point displaySize = Compatibility.getDisplaySize();
         // Restrict image size to 800 x 800 to prevent OOM on tablets
         final int maxWidth = Math.min(displaySize.x - 25, MAX_DISPLAY_IMAGE_XY);
         final int maxHeight = Math.min(displaySize.y - 25, MAX_DISPLAY_IMAGE_XY);
@@ -128,12 +128,12 @@ public final class ImageUtils {
      */
     public static void storeBitmap(final Bitmap bitmap, final Bitmap.CompressFormat format, final int quality, final String pathOfOutputImage) {
         try {
-            FileOutputStream out = new FileOutputStream(pathOfOutputImage);
-            BufferedOutputStream bos = new BufferedOutputStream(out);
+            final FileOutputStream out = new FileOutputStream(pathOfOutputImage);
+            final BufferedOutputStream bos = new BufferedOutputStream(out);
             bitmap.compress(format, quality, bos);
             bos.flush();
             bos.close();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             Log.e("ImageHelper.storeBitmap", e);
         }
     }
@@ -152,7 +152,7 @@ public final class ImageUtils {
         if (maxXY <= 0) {
             return filePath;
         }
-        Bitmap image = readDownsampledImage(filePath, maxXY, maxXY);
+        final Bitmap image = readDownsampledImage(filePath, maxXY, maxXY);
         if (image == null) {
             return null;
         }
@@ -184,7 +184,7 @@ public final class ImageUtils {
         try {
             final ExifInterface exif = new ExifInterface(filePath);
             orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             Log.e("ImageUtils.readDownsampledImage", e);
         }
         final BitmapFactory.Options sizeOnlyOptions = new BitmapFactory.Options();
@@ -233,7 +233,7 @@ public final class ImageUtils {
         }
 
         // Create a media file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
+        final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
         return new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
     }
 
@@ -254,7 +254,7 @@ public final class ImageUtils {
      * @return <tt>true</tt> if the URL contains at least one of the patterns, <tt>false</tt> otherwise
      */
     public static boolean containsPattern(final String url, final String[] patterns) {
-        for (String entry : patterns) {
+        for (final String entry : patterns) {
             if (StringUtils.containsIgnoreCase(url, entry)) {
                 return true;
             }
@@ -282,7 +282,7 @@ public final class ImageUtils {
 
     /**
      * Decode a base64-encoded string and save the result into a stream.
-     * 
+     *
      * @param inString
      *            the encoded string
      * @param out
@@ -307,11 +307,11 @@ public final class ImageUtils {
      * becomes available. It also invalidates the view the container belongs to, so that it is
      * redrawn properly.
      */
-    @SuppressWarnings("deprecation")
     public final static class ContainerDrawable extends BitmapDrawable implements Action1<Drawable> {
         private Drawable drawable;
         final private TextView view;
 
+        @SuppressWarnings("deprecation")
         public ContainerDrawable(@NonNull final TextView view) {
             this.view = view;
             drawable = null;
