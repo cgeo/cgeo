@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_marginBottom="10dip"
     android:descendantFocusability="blocksDescendants"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    tools:context=".UsefulAppsActivity" >
 
     <RelativeLayout style="@style/separator_horizontal_layout" >
 

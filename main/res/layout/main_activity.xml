@@ -4,7 +4,8 @@
     android:id="@+id/mainscreen"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layout_gravity="center" >
+    android:layout_gravity="center"
+    tools:context=".MainActivity" >
 
     <fragment
         android:id="@+id/status"

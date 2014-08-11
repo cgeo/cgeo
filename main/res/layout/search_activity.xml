@@ -5,7 +5,8 @@
     android:layout_height="fill_parent"
     android:background="?background_color"
     android:orientation="vertical"
-    android:padding="4dip" >
+    android:padding="4dip"
+    tools:context=".SearchActivity" >
 
     <LinearLayout
         android:layout_width="fill_parent"

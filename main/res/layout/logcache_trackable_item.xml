@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="5dip"
     android:orientation="horizontal"
     android:paddingBottom="10dip"
     android:paddingLeft="10dip"
-    android:paddingRight="10dip" >
+    android:paddingRight="10dip"
+    tools:context=".LogCacheActivity" >
 
     <LinearLayout
         android:id="@+id/info"

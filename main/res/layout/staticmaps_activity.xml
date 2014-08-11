@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:padding="4dip" >
+    android:padding="4dip"
+    tools:context=".StaticMapsActivity" >
 
     <LinearLayout
         android:id="@+id/maps_list"
