@@ -879,7 +879,8 @@ final class OkapiClient {
 
         public JSONResult(final @NonNull String errorMessage) {
             isSuccess = false;
-            data = new ObjectNode(JsonUtils.factory).putObject("error").put("developer_message", errorMessage);
+            data = new ObjectNode(JsonUtils.factory);
+            data.putObject("error").put("developer_message", errorMessage);
         }
     }
 }
