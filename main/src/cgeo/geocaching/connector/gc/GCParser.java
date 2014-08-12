@@ -1972,7 +1972,7 @@ public abstract class GCParser {
         }
 
         final ObjectNode jo = new ObjectNode(JsonUtils.factory);
-        jo.putObject("dto").put("et", cache.getPersonalNote()).put("ut", userToken);
+        jo.putObject("dto").put("et", StringUtils.defaultString(cache.getPersonalNote())).put("ut", userToken);
 
         final String uriSuffix = "SetUserCacheNote";
 
