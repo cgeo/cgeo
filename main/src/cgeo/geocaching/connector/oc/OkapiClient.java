@@ -301,20 +301,17 @@ final class OkapiClient {
     private static List<Geocache> parseCaches(final ObjectNode response) {
         try {
             // Check for empty result
-            if (response.get("results").isNull() || !response.get("results").isContainerNode()) {
+            final JsonNode results = response.path("results");
+            if (!results.isObject()) {
                 return Collections.emptyList();
             }
 
             // Get and iterate result list
-            final ObjectNode cachesResponse = (ObjectNode) response.get("results");
-            if (cachesResponse != null) {
-                final List<Geocache> caches = new ArrayList<>(cachesResponse.size());
-                final Iterator<JsonNode> it = cachesResponse.elements();
-                while (it.hasNext()) {
-                    caches.add(parseSmallCache((ObjectNode) it.next()));
-                }
-                return caches;
+            final List<Geocache> caches = new ArrayList<>(results.size());
+            for (final JsonNode cache: results) {
+                caches.add(parseSmallCache((ObjectNode) cache));
             }
+            return caches;
         } catch (ClassCastException | NullPointerException e) {
             Log.e("OkapiClient.parseCachesResult", e);
         }
