@@ -125,6 +125,13 @@ public class CgeoApplication extends Application {
         return currentGeo != null ? currentGeo : geoDataObservable().toBlocking().first();
     }
 
+    public Float distanceNonBlocking(final ICoordinates target) {
+        if (currentGeo == null || target.getCoords() == null) {
+            return null;
+        }
+        return currentGeo.getCoords().distanceTo(target);
+    }
+
     public float currentDirection() {
         return currentDirection;
     }
