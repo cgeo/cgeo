@@ -52,6 +52,7 @@ import java.util.Date;
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -452,7 +453,7 @@ final class OkapiClient {
     }
 
     private static List<LogEntry> parseLogs(final JSONArray logsJSON) {
-        List<LogEntry> result = null;
+        final List<LogEntry> result = new LinkedList<>();
         for (int i = 0; i < logsJSON.length(); i++) {
             try {
                 final JSONObject logResponse = logsJSON.getJSONObject(i);
@@ -461,9 +462,6 @@ final class OkapiClient {
                         parseDate(logResponse.getString(LOG_DATE)).getTime(),
                         parseLogType(logResponse.getString(LOG_TYPE)),
                         logResponse.getString(LOG_COMMENT).trim());
-                if (result == null) {
-                    result = new ArrayList<>();
-                }
                 result.add(log);
             } catch (final JSONException e) {
                 Log.e("OkapiClient.parseLogs", e);
