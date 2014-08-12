@@ -7,7 +7,6 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.utils.Formatter;
 
@@ -152,13 +151,7 @@ public final class CacheDetailsCreator {
     }
 
     public void addDistance(final Geocache cache, final TextView cacheDistanceView) {
-        Float distance = null;
-        if (cache.getCoords() != null) {
-            final Geopoint currentCoords = CgeoApplication.getInstance().currentGeo().getCoords();
-            if (currentCoords != null) {
-                distance = currentCoords.distanceTo(cache);
-            }
-        }
+        Float distance = CgeoApplication.getInstance().distanceNonBlocking(cache);
         if (distance == null) {
             if (cache.getDistance() != null) {
                 distance = cache.getDistance();
@@ -177,13 +170,7 @@ public final class CacheDetailsCreator {
     }
 
     public void addDistance(final Waypoint wpt, final TextView waypointDistanceView) {
-        Float distance = null;
-        if (wpt.getCoords() != null) {
-            final Geopoint currentCoords = CgeoApplication.getInstance().currentGeo().getCoords();
-            if (currentCoords != null) {
-                distance = currentCoords.distanceTo(wpt);
-            }
-        }
+        Float distance = CgeoApplication.getInstance().distanceNonBlocking(wpt);
         String text = "--";
         if (distance != null) {
             text = Units.getDistanceFromKilometers(distance);
