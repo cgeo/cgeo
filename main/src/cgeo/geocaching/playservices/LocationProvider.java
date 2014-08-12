@@ -74,9 +74,7 @@ public class LocationProvider implements OnSubscribe<IGeoData>, ConnectionCallba
     public void onConnected(final Bundle bundle) {
         if (firstLocation) {
             final Location initialLocation = locationClient.getLastLocation();
-            if (initialLocation != null) {
-                subject.onNext(new GeoData(initialLocation));
-            }
+            subject.onNext(initialLocation != null ? new GeoData(initialLocation) : GeoData.dummyLocation());
             firstLocation = false;
         }
         locationClient.requestLocationUpdates(LOCATION_REQUEST, this);

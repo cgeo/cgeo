@@ -90,7 +90,7 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
     };
 
     private IGeoData findInitialLocation() {
-        final Location initialLocation = new Location("initial");
+        final Location initialLocation = new Location(GeoData.INITIAL_PROVIDER);
         try {
             // Try to find a sensible initial location from the last locations known to Android.
             final Location lastGpsLocation = geoManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -109,6 +109,7 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
                 copyCoords(initialLocation, lastNetworkLocation);
             } else {
                 Log.i("GeoDataProvider: no last known location available");
+                return GeoData.dummyLocation();
             }
         } catch (final Exception e) {
             // This error is non-fatal as its only consequence is that we will start with a dummy location
