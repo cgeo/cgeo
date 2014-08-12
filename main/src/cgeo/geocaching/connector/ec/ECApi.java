@@ -21,17 +21,16 @@ import cgeo.geocaching.utils.SynchronizedDateFormat;
 import ch.boye.httpclientandroidlib.HttpResponse;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -173,12 +172,11 @@ public class ECApi {
     private static List<Geocache> importCachesFromJSON(final HttpResponse response) {
         if (response != null) {
             try {
-                final String data = Network.getResponseDataAlways(response);
-                if (StringUtils.isBlank(data) || StringUtils.equals(data, "[]")) {
+                final JsonNode json = JsonUtils.reader.readTree(Network.getResponseDataAlways(response));
+                if (!json.isArray()) {
                     return Collections.emptyList();
                 }
-                final ArrayNode json = (ArrayNode) JsonUtils.reader.readTree(data);
-                final List<Geocache> caches = new LinkedList<>();
+                final List<Geocache> caches = new ArrayList<>(json.size());
                 for (final JsonNode node: json) {
                     final Geocache cache = parseCache(node);
                     if (cache != null) {
