@@ -936,8 +936,8 @@
     <string name="license_dismiss">Dismiss</string>
 
     <!-- helpers -->
-    <string name="helper_calendar_title">c:geo calendar add-on</string>
-    <string name="helper_calendar_missing">c:geo calendar add-on not installed.</string>
+    <string name="helper_calendar_title">c:geo calendar plugin</string>
+    <string name="helper_calendar_missing">c:geo calendar plugin not installed.</string>
     <string name="helper_calendar_description">Enables you to export event caches to the calendar on your device.</string>
     <string name="helper_sendtocgeo_title">Send to c:geo</string>
     <string name="helper_contacts_title">c:geo contacts add-on</string>
@@ -957,7 +957,7 @@
     <string name="helper_google_translate_description">If you download translation packages in the Google Translate app, then you can easily translate cache descriptions in c:geo by a long tap on the cache description text (without an Internet connection).</string>
     
     <!-- add-ons -->
-    <string name="addon_missing_title">Missing Add-On</string>
+    <string name="addon_missing_title">Missing plugin</string>
     <string name="addon_download_prompt">Get it now from Google Play.</string>
 
     <!-- export -->
