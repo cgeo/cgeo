@@ -85,7 +85,7 @@ android {
             //zipAlign = true
             debuggable true
             runProguard true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', '../tests/proguard.cfg'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
             versionNameSuffix " Debug " + versionProps['betaNumber']
         }
         release {
