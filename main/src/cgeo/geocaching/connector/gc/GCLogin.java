@@ -22,8 +22,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Observable;
-import rx.functions.Func0;
-import rx.util.async.Async;
 
 import android.graphics.drawable.Drawable;
 
@@ -271,14 +269,9 @@ public class GCLogin extends AbstractLogin {
             setActualCachesFound(Integer.parseInt(TextUtils.getMatch(profile, GCConstants.PATTERN_CACHES_FOUND, true, "-1").replaceAll("[,.]", "")));
 
             final String avatarURL = TextUtils.getMatch(profile, GCConstants.PATTERN_AVATAR_IMAGE_PROFILE_PAGE, false, null);
-            if (null != avatarURL) {
-                return Async.start(new Func0<Drawable>() {
-                    @Override
-                    public Drawable call() {
-                        final HtmlImage imgGetter = new HtmlImage("", false, 0, false);
-                        return imgGetter.getDrawable(avatarURL.replace("avatar", "user/large"));
-                    }
-                });
+            if (avatarURL != null) {
+                final HtmlImage imgGetter = new HtmlImage("", false, 0, false);
+                return imgGetter.fetchDrawable(avatarURL.replace("avatar", "user/large")).cast(Drawable.class);
             }
             // No match? There may be no avatar set by user.
             Log.d("No avatar set for user");
