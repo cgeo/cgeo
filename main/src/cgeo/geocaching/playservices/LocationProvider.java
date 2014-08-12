@@ -30,7 +30,7 @@ public class LocationProvider implements OnSubscribe<IGeoData>, ConnectionCallba
     private final LocationClient locationClient;
     private static final LocationRequest LOCATION_REQUEST =
             LocationRequest.create().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY).setInterval(2000).setInterval(1000);
-    private static boolean firstLocation = true;
+    private boolean firstLocation = true;
 
     /**
      * Build a new geo data provider object.
