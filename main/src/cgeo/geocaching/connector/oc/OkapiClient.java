@@ -301,8 +301,7 @@ final class OkapiClient {
     private static List<Geocache> parseCaches(final ObjectNode response) {
         try {
             // Check for empty result
-            final String result = response.get("results").asText();
-            if (StringUtils.isBlank(result) || StringUtils.equals(result, "[]")) {
+            if (response.get("results").isNull() || !response.get("results").isContainerNode()) {
                 return Collections.emptyList();
             }
 
