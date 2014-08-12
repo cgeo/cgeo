@@ -56,7 +56,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
             final List<Entry<LogType, Integer>> sortedLogCounts = new ArrayList<>(logCounts.size());
             for (final Entry<LogType, Integer> entry : logCounts.entrySet()) {
                 // it may happen that the label is unknown -> then avoid any output for this type
-                if (entry.getKey() != LogType.PUBLISH_LISTING && entry.getKey().getL10n() != null) {
+                if (entry.getKey() != LogType.PUBLISH_LISTING && entry.getKey().getL10n() != null && entry.getValue() != 0) {
                     sortedLogCounts.add(entry);
                 }
             }
