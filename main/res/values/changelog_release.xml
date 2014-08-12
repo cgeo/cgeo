@@ -35,6 +35,7 @@
     · Fix: Improve static maps resolution and scaling depending on the screen resolution\n
     · Fix: Will attend logs not counted in log summary of OC caches\n
     · Fix: Improved loading of listing images\n
+    · Fix: Empty personal note not uploaded to gc.com\n
     \n
     <a href="https://github.com/cgeo/cgeo/issues?q=milestone%3A%22Next+feature+release%22+is%3Aclosed">Detailed list of all changes</a>\n
     \n
