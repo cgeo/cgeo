@@ -1986,7 +1986,7 @@ public abstract class GCParser {
         try {
             final JSONObject jo = new JSONObject()
                     .put("dto", (new JSONObject()
-                            .put("et", cache.getPersonalNote())
+                            .put("et", StringUtils.defaultString(cache.getPersonalNote()))
                             .put("ut", userToken)));
 
             final String uriSuffix = "SetUserCacheNote";
