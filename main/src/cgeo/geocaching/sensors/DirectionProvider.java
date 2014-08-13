@@ -2,117 +2,62 @@ package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.utils.AngleUtils;
-import cgeo.geocaching.utils.StartableHandlerThread;
+import cgeo.geocaching.utils.RxUtils.LooperCallbacks;
 
 import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.subjects.BehaviorSubject;
 
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Handler;
-import android.os.Process;
 import android.view.Surface;
 import android.view.WindowManager;
 
-public class DirectionProvider {
-
-    private static final BehaviorSubject<Float> SUBJECT = BehaviorSubject.create(0.0f);
+public class DirectionProvider extends LooperCallbacks<Float> implements SensorEventListener {
 
     private static final WindowManager WINDOW_MANAGER = (WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
 
-    private DirectionProvider() {
-        // utility class
+    private final SensorManager sensorManager;
+    private final Sensor orientationSensor;
+
+    @SuppressWarnings("deprecation")
+    protected DirectionProvider(final Context context) {
+        sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        orientationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
     }
 
-    static class Listener implements SensorEventListener, StartableHandlerThread.Callback {
-
-        private int count = 0;
-
-        private SensorManager sensorManager;
-
-        @Override
-        public void onSensorChanged(final SensorEvent event) {
-            SUBJECT.onNext(event.values[0]);
-        }
-
-        @Override
-        public void onAccuracyChanged(final Sensor sensor, final int accuracy) {
-            /*
-             * There is a bug in Android, which apparently causes this method to be called every
-             * time the sensor _value_ changed, even if the _accuracy_ did not change. Do not have any code in here.
-             *
-             * See for example https://code.google.com/p/android/issues/detail?id=14792
-             */
-        }
-
-        @Override
-        public void start(final Context context, final Handler handler) {
-            if (!hasSensor(context)) {
-                return;
-            }
-            if (++count == 1) {
-                Sensor orientationSensor = getOrientationSensor(context);
-                sensorManager.registerListener(this, orientationSensor, SensorManager.SENSOR_DELAY_NORMAL, handler);
-            }
-        }
-
-        @Override
-        public void stop() {
-            if (!hasSensor) {
-                return;
-            }
-            if (--count == 0) {
-                sensorManager.unregisterListener(this);
-            }
-        }
-
-        /**
-         * Assume that there is an orientation sensor, unless we have really checked that
-         */
-        private boolean hasSensor = true;
-
-        /**
-         * Flag for one time check if there is a sensor.
-         */
-        private boolean hasSensorChecked = false;
-
-        public boolean hasSensor(Context context) {
-            if (!hasSensorChecked) {
-                hasSensor = getOrientationSensor(context) != null;
-                hasSensorChecked = true;
-            }
-            return hasSensor;
-        }
-
-        // This will be removed when using a new location service. Until then, it is okay to be used.
-        @SuppressWarnings("deprecation")
-        private Sensor getOrientationSensor(final Context context) {
-            sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-            return sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
-        }
-
+    @Override
+    public void onSensorChanged(final SensorEvent event) {
+            subscriber.onNext(event.values[0]);
     }
 
-    private static final StartableHandlerThread HANDLER_THREAD =
-            new StartableHandlerThread("DirectionProvider thread", Process.THREAD_PRIORITY_BACKGROUND, new Listener());
+    @Override
+    public void onAccuracyChanged(final Sensor sensor, final int accuracy) {
+        /*
+         * There is a bug in Android, which apparently causes this method to be called every
+         * time the sensor _value_ changed, even if the _accuracy_ did not change. Do not have any code in here.
+         *
+         * See for example https://code.google.com/p/android/issues/detail?id=14792
+         */
+    }
 
-    static {
-        HANDLER_THREAD.start();
+    @Override
+    public void onStart() {
+        if (orientationSensor != null) {
+            sensorManager.registerListener(this, orientationSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        if (orientationSensor != null) {
+            sensorManager.unregisterListener(this);
+        }
     }
 
     public static Observable<Float> create(final Context context) {
-        return Observable.create(new OnSubscribe<Float>() {
-            @Override
-            public void call(final Subscriber<? super Float> subscriber) {
-                HANDLER_THREAD.start(subscriber, context);
-                SUBJECT.subscribe(subscriber);
-            }
-        });
+        return Observable.create(new DirectionProvider(context));
     }
 
     /**

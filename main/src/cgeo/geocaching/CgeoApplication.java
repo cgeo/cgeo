@@ -87,36 +87,31 @@ public class CgeoApplication extends Application {
     public synchronized Observable<IGeoData> geoDataObservable() {
         if (geoDataObservable == null) {
             final Observable<IGeoData> rawObservable = isGooglePlayServicesAvailable() ? LocationProvider.create(this) : GeoDataProvider.create(this);
-            final ConnectableObservable<IGeoData> onDemand = rawObservable.replay(1);
-            onDemand.subscribe(new Action1<IGeoData>() {
-                                  @Override
-                                  public void call(final IGeoData geoData) {
-                                      currentGeo = geoData;
-                                  }
-                              });
-            geoDataObservable = onDemand.refCount();
+            geoDataObservable = rawObservable.replay(1).refCount().doOnNext(new Action1<IGeoData>() {
+                @Override
+                public void call(final IGeoData geoData) {
+                    currentGeo = geoData;
+                }
+            });
         }
         return geoDataObservable;
     }
 
     public synchronized Observable<Float> directionObservable() {
         if (directionObservable == null) {
-            final ConnectableObservable<Float> onDemand = DirectionProvider.create(this).replay(1);
-            onDemand.subscribe(new Action1<Float>() {
-                                  @Override
-                                  public void call(final Float direction) {
-                                      currentDirection = direction;
-                                  }
-                              });
-            directionObservable = onDemand.refCount();
+            directionObservable = DirectionProvider.create(this).replay(1).refCount().doOnNext(new Action1<Float>() {
+                @Override
+                public void call(final Float direction) {
+                    currentDirection = direction;
+                }
+            });
         }
         return directionObservable;
     }
 
     public synchronized Observable<Status> gpsStatusObservable() {
         if (gpsStatusObservable == null) {
-            final ConnectableObservable<Status> onDemand = GpsStatusProvider.create(this).replay(1);
-            gpsStatusObservable = onDemand.refCount();
+            gpsStatusObservable = GpsStatusProvider.create(this).share();
         }
         return gpsStatusObservable;
     }

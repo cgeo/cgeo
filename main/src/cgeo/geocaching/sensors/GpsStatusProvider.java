@@ -2,20 +2,16 @@ package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.sensors.GpsStatusProvider.Status;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils.ConnectableLooperCallbacks;
+import cgeo.geocaching.utils.RxUtils.LooperCallbacks;
 
 import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.observables.ConnectableObservable;
-import rx.subjects.BehaviorSubject;
 
 import android.content.Context;
 import android.location.GpsSatellite;
 import android.location.GpsStatus;
 import android.location.LocationManager;
 
-public class GpsStatusProvider implements OnSubscribe<Status> {
+public class GpsStatusProvider extends LooperCallbacks<Status> {
 
     public static class Status {
         final public boolean gpsEnabled;
@@ -30,8 +26,7 @@ public class GpsStatusProvider implements OnSubscribe<Status> {
     }
 
     private final LocationManager geoManager;
-    private final BehaviorSubject<Status> subject;
-
+    private final GpsStatus.Listener gpsStatusListener = new GpsStatusListener();
     private Status latest = new Status(false, 0, 0);
 
     /**
@@ -44,34 +39,23 @@ public class GpsStatusProvider implements OnSubscribe<Status> {
      */
     protected GpsStatusProvider(final Context context) {
         geoManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        subject = BehaviorSubject.create(latest);
     }
 
     public static Observable<Status> create(final Context context) {
-        final GpsStatusProvider provider = new GpsStatusProvider(context);
-        return provider.worker.refCount();
+        return Observable.create(new GpsStatusProvider(context));
     }
 
     @Override
-    public void call(final Subscriber<? super Status> subscriber) {
-        subject.subscribe(subscriber);
+    protected void onStart() {
+        Log.d("GpsStatusProvider: starting the GPS status listener");
+        geoManager.addGpsStatusListener(gpsStatusListener);
     }
 
-    final ConnectableObservable<Status> worker = new ConnectableLooperCallbacks<Status>(this) {
-        private final GpsStatus.Listener gpsStatusListener = new GpsStatusListener();
-
-        @Override
-        protected void onStart() {
-            Log.d("GpsStatusProvider: starting the GPS status listener");
-            geoManager.addGpsStatusListener(gpsStatusListener);
-        }
-
-        @Override
-        protected void onStop() {
-            Log.d("GpsStatusProvider: stopping the GPS status listener");
-            geoManager.removeGpsStatusListener(gpsStatusListener);
-        }
-    };
+    @Override
+    protected void onStop() {
+        Log.d("GpsStatusProvider: stopping the GPS status listener");
+        geoManager.removeGpsStatusListener(gpsStatusListener);
+    }
 
     private final class GpsStatusListener implements GpsStatus.Listener {
 
@@ -105,7 +89,7 @@ public class GpsStatusProvider implements OnSubscribe<Status> {
                     throw new IllegalStateException();
             }
 
-            subject.onNext(latest);
+            subscriber.onNext(latest);
         }
     }
 

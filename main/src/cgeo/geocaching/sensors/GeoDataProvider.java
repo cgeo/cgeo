@@ -1,13 +1,9 @@
 package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.RxUtils.ConnectableLooperCallbacks;
+import cgeo.geocaching.utils.RxUtils.LooperCallbacks;
 
 import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.observables.ConnectableObservable;
-import rx.subjects.BehaviorSubject;
 
 import android.content.Context;
 import android.location.Location;
@@ -17,12 +13,13 @@ import android.os.Bundle;
 
 import java.util.concurrent.TimeUnit;
 
-public class GeoDataProvider implements OnSubscribe<IGeoData> {
+public class GeoDataProvider extends LooperCallbacks<IGeoData> {
 
     private final LocationManager geoManager;
     private final LocationData gpsLocation = new LocationData();
     private final LocationData netLocation = new LocationData();
-    private final BehaviorSubject<IGeoData> subject;
+    private final Listener networkListener = new Listener(LocationManager.NETWORK_PROVIDER, netLocation);
+    private final Listener gpsListener = new Listener(LocationManager.GPS_PROVIDER, gpsLocation);
 
     private static class LocationData {
         public Location location;
@@ -51,43 +48,33 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
      * @param context the context used to retrieve the system services
      */
     protected GeoDataProvider(final Context context) {
+        super(2500, TimeUnit.MILLISECONDS);
         geoManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        subject = BehaviorSubject.create(findInitialLocation());
     }
 
     public static Observable<IGeoData> create(final Context context) {
-        final GeoDataProvider provider = new GeoDataProvider(context);
-        return provider.worker.refCount();
+        return Observable.create(new GeoDataProvider(context));
     }
 
     @Override
-    public void call(final Subscriber<? super IGeoData> subscriber) {
-        subject.subscribe(subscriber);
-    }
-
-    final ConnectableObservable<IGeoData> worker = new ConnectableLooperCallbacks<IGeoData>(this, 2500, TimeUnit.MILLISECONDS) {
-        private final Listener networkListener = new Listener(LocationManager.NETWORK_PROVIDER, netLocation);
-        private final Listener gpsListener = new Listener(LocationManager.GPS_PROVIDER, gpsLocation);
-
-        @Override
-        protected void onStart() {
-            Log.d("GeoDataProvider: starting the GPS and network listeners");
-            for (final Listener listener : new Listener[]{networkListener, gpsListener}) {
-                try {
-                    geoManager.requestLocationUpdates(listener.locationProvider, 0, 0, listener);
-                } catch (final Exception e) {
-                    Log.w("There is no location provider " + listener.locationProvider);
-                }
+    public void onStart() {
+        subscriber.onNext(findInitialLocation());
+        Log.d("GeoDataProvider: starting the GPS and network listeners");
+        for (final Listener listener : new Listener[]{networkListener, gpsListener}) {
+            try {
+                geoManager.requestLocationUpdates(listener.locationProvider, 0, 0, listener);
+            } catch (final Exception e) {
+                Log.w("There is no location provider " + listener.locationProvider, e);
             }
         }
+    }
 
-        @Override
-        protected void onStop() {
-            Log.d("GeoDataProvider: stopping the GPS and network listeners");
-            geoManager.removeUpdates(networkListener);
-            geoManager.removeUpdates(gpsListener);
-        }
-    };
+    @Override
+    protected void onStop() {
+        Log.d("GeoDataProvider: stopping the GPS and network listeners");
+        geoManager.removeUpdates(networkListener);
+        geoManager.removeUpdates(gpsListener);
+    }
 
     private IGeoData findInitialLocation() {
         final Location initialLocation = new Location(GeoData.INITIAL_PROVIDER);
@@ -178,7 +165,7 @@ public class GeoDataProvider implements OnSubscribe<IGeoData> {
 
         // We do not necessarily get signalled when satellites go to 0/0.
         final IGeoData current = new GeoData(locationData.location);
-        subject.onNext(current);
+        subscriber.onNext(current);
     }
 
 }
