@@ -286,6 +286,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         loggingManager = cache.getLoggingManager(this);
 
         loggingManager.init();
+        requestKeyboardForLogging();
     }
 
     private void initializeRatingBar(final RatingBar ratingBar) {

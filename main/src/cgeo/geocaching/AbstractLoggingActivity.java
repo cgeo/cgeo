@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCSmiliesProvider;
@@ -88,4 +89,9 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
         enableSend = enabled;
         invalidateOptionsMenuCompatible();
     }
+
+    protected void requestKeyboardForLogging() {
+        new Keyboard(this).show(findViewById(R.id.log));
+    }
+
 }

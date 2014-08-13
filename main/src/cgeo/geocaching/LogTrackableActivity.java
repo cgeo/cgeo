@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.enumerations.LogType;
@@ -144,6 +145,17 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         }
 
         init();
+        requestKeyboardForLogging();
+    }
+
+    @Override
+    protected void requestKeyboardForLogging() {
+        if (StringUtils.isBlank(trackingEditText.getText())) {
+            new Keyboard(this).show(trackingEditText);
+        }
+        else {
+            super.requestKeyboardForLogging();
+        }
     }
 
     @Override
