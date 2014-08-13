@@ -940,7 +940,7 @@
     <string name="helper_calendar_missing">c:geo calendar plugin not installed.</string>
     <string name="helper_calendar_description">Enables you to export event caches to the calendar on your device.</string>
     <string name="helper_sendtocgeo_title">Send to c:geo</string>
-    <string name="helper_contacts_title">c:geo contacts add-on</string>
+    <string name="helper_contacts_title">c:geo contacts plugin</string>
     <string name="helper_contacts_description">Enables you to open a contact card (of your address book) directly from a log entry, so you can more easily ask friends for help.</string>
     <string name="helper_sendtocgeo_description">Send to c:geo is a browser extension <strong>for your PC</strong>. When browsing geocaching.com, you can send caches to your smartphone with the click of a button directly inside the browser.</string>
     <string name="helper_locus_title">Locus</string>
