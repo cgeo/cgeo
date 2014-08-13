@@ -1226,6 +1226,8 @@
     <string name="tts_service">Talking compass</string>
     <string name="tts_start">Start talking</string>
     <string name="tts_stop">Stop talking</string>
+    <string name="tts_started">Started speech</string>
+    <string name="tts_stopped">Stopped speech</string>
     <string name="err_tts_lang_not_supported">The current language is not supported by text-to-speech.</string>
     <string name="tts_one_kilometer">one kilometer</string>
     <plurals name="tts_kilometers">

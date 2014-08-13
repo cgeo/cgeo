@@ -9,7 +9,9 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
+
 import rx.Subscription;
+import rx.subscriptions.Subscriptions;
 
 import android.app.Activity;
 import android.app.Service;
@@ -18,7 +20,6 @@ import android.os.IBinder;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.Engine;
 import android.speech.tts.TextToSpeech.OnInitListener;
-import rx.subscriptions.Subscriptions;
 
 import java.util.Locale;
 
@@ -80,7 +81,7 @@ public class SpeechService extends Service implements OnInitListener {
     private Subscription initSubscription = Subscriptions.empty();
 
     @Override
-    public IBinder onBind(Intent intent) {
+    public IBinder onBind(final Intent intent) {
         return null;
     }
 
@@ -118,7 +119,7 @@ public class SpeechService extends Service implements OnInitListener {
     }
 
     @Override
-    public void onInit(int status) {
+    public void onInit(final int status) {
         // The text to speech system takes some time to initialize.
         if (status != TextToSpeech.SUCCESS) {
             Log.e("Text to speech cannot be initialized.");
@@ -130,7 +131,7 @@ public class SpeechService extends Service implements OnInitListener {
             locale = Locale.ENGLISH;
         }
 
-        int switchLocale = tts.setLanguage(locale);
+        final int switchLocale = tts.setLanguage(locale);
 
         if (switchLocale == TextToSpeech.LANG_MISSING_DATA) {
             startingActivity.startActivity(new Intent(Engine.ACTION_INSTALL_TTS_DATA));
@@ -145,10 +146,11 @@ public class SpeechService extends Service implements OnInitListener {
         initialized = true;
 
         initSubscription = geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR);
+        ActivityMixin.showShortToast(startingActivity, startingActivity.getResources().getString(R.string.tts_started));
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    public int onStartCommand(final Intent intent, final int flags, final int startId) {
         if (intent != null) {
             target = intent.getParcelableExtra(EXTRA_TARGET_COORDS);
         }
@@ -162,10 +164,10 @@ public class SpeechService extends Service implements OnInitListener {
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 
-    public static void startService(final Activity activity, Geopoint dstCoords) {
+    public static void startService(final Activity activity, final Geopoint dstCoords) {
         isRunning = true;
         startingActivity = activity;
-        Intent talkingService = new Intent(activity, SpeechService.class);
+        final Intent talkingService = new Intent(activity, SpeechService.class);
         talkingService.putExtra(EXTRA_TARGET_COORDS, dstCoords);
         activity.startService(talkingService);
     }
@@ -173,6 +175,7 @@ public class SpeechService extends Service implements OnInitListener {
     public static void stopService(final Activity activity) {
         isRunning = false;
         activity.stopService(new Intent(activity, SpeechService.class));
+        ActivityMixin.showShortToast(activity, activity.getResources().getString(R.string.tts_stopped));
     }
 
     public static boolean isRunning() {
