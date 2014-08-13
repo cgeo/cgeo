@@ -17,7 +17,20 @@
         android:descendantFocusability="blocksDescendants"
         android:orientation="horizontal" >
 
+
+
+        <ImageView
+            android:id="@+id/wpDefaultNavigation"
+            style="@style/action_bar_action"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right"
+            android:clickable="true"
+            android:focusable="false"
+            android:longClickable="true"
+            android:src="?actionbar_compass" />
+
         <LinearLayout
+            android:layout_toLeftOf="@id/wpDefaultNavigation"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -30,7 +43,8 @@
                 android:layout_height="wrap_content"
                 android:focusable="false"
                 android:textColor="?text_color"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:text="Description of the Cache with a lot of small words so the an incorrect"/>
 
             <TextView
                 android:id="@+id/info"
@@ -45,18 +59,10 @@
                 android:singleLine="true"
                 android:textColor="?text_color_headline"
                 android:textSize="14sp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:visiblity="visible"
+                tools:text="Info"/>
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/wpDefaultNavigation"
-            style="@style/action_bar_action"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="right"
-            android:clickable="true"
-            android:focusable="false"
-            android:longClickable="true"
-            android:src="?actionbar_compass" />
     </RelativeLayout>
 
     <TextView
@@ -72,7 +78,9 @@
         android:singleLine="true"
         android:textColor="?text_color_headline"
         android:textSize="14sp"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:visiblity="visible"
+        tools:text="1.2.3.4.5N 6.7.8.9.10S"/>
 
     <TextView
         android:id="@+id/note"
@@ -82,7 +90,9 @@
         android:focusable="false"
         android:textColor="?text_color"
         android:textSize="14sp"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:visiblity="visible"
+        tools:text="Note"/>
 
     <View
         style="@style/separator_horizontal"
