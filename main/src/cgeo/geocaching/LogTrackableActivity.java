@@ -310,6 +310,9 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
                     tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
                 Twitter.postTweetTrackable(geocode, new LogEntry(0, typeSelected, log));
             }
+            if (status == StatusCode.NO_ERROR) {
+                addLocalTrackableLog(log);
+            }
 
             return status;
         } catch (final Exception e) {
@@ -317,6 +320,20 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         }
 
         return StatusCode.LOG_POST_ERROR;
+    }
+
+    /**
+     * Adds the new log to the list of log entries for this trackable to be able to show it in the trackable activity.
+     *
+     *
+     * @param logText
+     */
+    private void addLocalTrackableLog(final String logText) {
+        final LogEntry logEntry = new LogEntry(Calendar.getInstance().getTimeInMillis(), typeSelected, logText);
+        final ArrayList<LogEntry> modifiedLogs = new ArrayList<>(trackable.getLogs());
+        modifiedLogs.add(0, logEntry);
+        trackable.setLogs(modifiedLogs);
+        DataStore.saveTrackable(trackable);
     }
 
     public static void startActivity(final Context context, final Trackable trackable) {

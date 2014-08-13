@@ -342,7 +342,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             case DETAILS:
                 return new DetailsViewCreator();
             case LOGS:
-                return new TrackableLogsViewCreator(this, trackable);
+                return new TrackableLogsViewCreator(this);
         }
         throw new IllegalStateException(); // cannot happen as long as switch case is enum complete
     }
@@ -594,4 +594,18 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         return false;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // refresh the logs view after coming back from logging a trackable
+        if (trackable != null) {
+            final Trackable updatedTrackable = DataStore.loadTrackable(trackable.getGeocode());
+            trackable.setLogs(updatedTrackable.getLogs());
+            reinitializeViewPager();
+        }
+    }
+
+    public Trackable getTrackable() {
+        return trackable;
+    }
 }
