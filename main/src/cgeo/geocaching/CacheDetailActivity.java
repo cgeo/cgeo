@@ -64,10 +64,12 @@ import org.eclipse.jdt.annotation.Nullable;
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.observables.AndroidObservable;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.subscriptions.CompositeSubscription;
+import rx.subscriptions.Subscriptions;
 
 import android.R.color;
 import android.app.AlertDialog;
@@ -167,6 +169,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
      * waypoint selected in context menu. This variable will be gone when the waypoint context menu is a fragment.
      */
     private Waypoint selectedWaypoint;
+
+    private boolean requireGeodata;
+    private Subscription geoDataSubscription = Subscriptions.empty();
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -291,8 +296,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 if (getPage(position) == Page.IMAGES) {
                     loadCacheImages();
                 }
+                requireGeodata = getPage(position) == Page.DETAILS;
+                startOrStopGeoDataListener();
             }
         });
+        requireGeodata = pageToOpen == 1;
 
         final String realGeocode = geocode;
         final String realGuid = guid;
@@ -313,14 +321,28 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         outState.putInt(STATE_PAGE_INDEX, getCurrentItem());
     }
 
+    private void startOrStopGeoDataListener() {
+        geoDataSubscription.unsubscribe();
+        if (requireGeodata) {
+            geoDataSubscription = locationUpdater.start(GeoDirHandler.UPDATE_GEODATA);
+        }
+    }
+
     @Override
     public void onResume() {
-        super.onResume(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA));
+        super.onResume();
+        startOrStopGeoDataListener();
 
         if (refreshOnResume) {
             notifyDataSetChanged();
             refreshOnResume = false;
         }
+    }
+
+    @Override
+    public void onPause() {
+        geoDataSubscription.unsubscribe();
+        super.onPause();
     }
 
     @Override
