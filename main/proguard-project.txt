@@ -73,3 +73,6 @@
 -keep class org.apache.commons.lang3.StringUtils { *; }
 -keep class org.apache.commons.io.IOUtils { *; }
 -keep class org.apache.commons.io.FileUtils { *; }
+
+# the navigation action provider is only referenced from XML
+-keep public class cgeo.geocaching.ui.NavigationActionProvider { *; }
