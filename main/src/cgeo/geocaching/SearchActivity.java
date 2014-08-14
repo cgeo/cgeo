@@ -177,14 +177,14 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         buttonLatitude.setOnClickListener(new OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 updateCoordinates();
             }
         });
         buttonLongitude.setOnClickListener(new OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 updateCoordinates();
             }
         });
@@ -398,6 +398,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     @Override
     public final boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.search_activity_options, menu);
+        presentShowcase();
         return true;
     }
 
@@ -417,4 +418,15 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
                 putExtra(Intents.EXTRA_KEYWORD_SEARCH, false);
         fromActivity.startActivityForResult(searchIntent, MainActivity.SEARCH_REQUEST_CODE);
     }
+
+    //    The showcase doesn't work well with the search activity, because on searching a geocode (or 
+    //    selecting a cache from the search field) we immediately close the activity. That in turn confuses the delayed
+    //    creation of the showcase bitmap.
+    //    
+    //    @Override
+    //    protected ShowcaseViewBuilder getShowcase() {
+    //        return new ShowcaseViewBuilder(this)
+    //                .setTarget(new ActionItemTarget(this, R.id.menu_search_own_caches))
+    //                .setContent(R.string.showcase_search_title, R.string.showcase_search_text);
+    //    }
 }

@@ -1269,5 +1269,12 @@
     <string name="cgeo_shortcut">c:geo shortcut</string>
     <string name="create_shortcut">Create shortcut</string>
     <string name="send">Send</string>
-
+    
+    <string name="showcase_logcache_title">Sending the log</string>
+    <string name="showcase_logcache_text">Remember, many commands are now in the action bar. There you find the button for sending the finished log.</string>
+    <string name="showcase_main_title">Action bar</string>
+    <string name="showcase_main_text">c:geo now uses the Android action bar at the top for menu items. More menu items are hidden behind the dotted symbol. Long press an action bar item to see its name.</string>
+    <string name="showcase_search_title"></string>
+    <string name="showcase_search_text"></string>
+    
 </resources>

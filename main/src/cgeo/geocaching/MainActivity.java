@@ -4,6 +4,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -27,6 +28,7 @@ import cgeo.geocaching.utils.RxUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
 
+import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -284,7 +286,7 @@ public class MainActivity extends AbstractActionBarActivity {
         final MenuItem searchItem = menu.findItem(R.id.menu_gosearch);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-
+        presentShowcase();
         return true;
     }
 
@@ -748,5 +750,12 @@ public class MainActivity extends AbstractActionBarActivity {
      */
     public void showAbout(final View view) {
         startActivity(new Intent(this, AboutActivity.class));
+    }
+
+    @Override
+    protected ShowcaseViewBuilder getShowcase() {
+        return new ShowcaseViewBuilder(this)
+                .setTarget(new ActionViewTarget(this, ActionViewTarget.Type.OVERFLOW))
+                .setContent(R.string.showcase_main_title, R.string.showcase_main_text);
     }
 }
