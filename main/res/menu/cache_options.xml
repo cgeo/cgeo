@@ -6,7 +6,8 @@
         android:id="@+id/menu_default_navigation"
         android:icon="@drawable/ic_menu_compass"
         android:title="@string/cache_menu_navigate"
-        app:showAsAction="ifRoom"> <!-- will be replaced -->
+        app:actionProviderClass="cgeo.geocaching.ui.NavigationActionProvider"
+        app:showAsAction="always"> <!-- will be replaced -->
     </item>
     <item
         android:id="@+id/menu_navigate"
