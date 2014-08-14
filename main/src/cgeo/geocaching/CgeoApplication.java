@@ -14,7 +14,6 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import rx.Observable;
 import rx.functions.Action1;
-import rx.observables.ConnectableObservable;
 
 import android.app.Application;
 import android.view.ViewConfiguration;
@@ -76,6 +75,21 @@ public class CgeoApplication extends Application {
             isGooglePlayServicesAvailable = true;
         }
         Log.i("Google Play services are " + (isGooglePlayServicesAvailable ? "" : "not ") + "available");
+        geoDataObservable = (isGooglePlayServicesAvailable() ? LocationProvider.create(this) : GeoDataProvider.create(this))
+                .replay(1).refCount().doOnNext(new Action1<IGeoData>() {
+                    @Override
+                    public void call(final IGeoData geoData) {
+                        currentGeo = geoData;
+                    }
+                });
+
+        directionObservable = DirectionProvider.create(this).replay(1).refCount().doOnNext(new Action1<Float>() {
+            @Override
+            public void call(final Float direction) {
+                currentDirection = direction;
+            }
+        });
+        gpsStatusObservable = GpsStatusProvider.create(this).share();
     }
 
     @Override
@@ -84,32 +98,15 @@ public class CgeoApplication extends Application {
         DataStore.removeAllFromCache();
     }
 
-    public synchronized Observable<IGeoData> geoDataObservable() {
-        if (geoDataObservable == null) {
-            final Observable<IGeoData> rawObservable = isGooglePlayServicesAvailable() ? LocationProvider.create(this) : GeoDataProvider.create(this);
-            geoDataObservable = rawObservable.replay(1).refCount().doOnNext(new Action1<IGeoData>() {
-                @Override
-                public void call(final IGeoData geoData) {
-                    currentGeo = geoData;
-                }
-            });
-        }
+    public Observable<IGeoData> geoDataObservable() {
         return geoDataObservable;
     }
 
-    public synchronized Observable<Float> directionObservable() {
-        if (directionObservable == null) {
-            directionObservable = DirectionProvider.create(this).replay(1).refCount().doOnNext(new Action1<Float>() {
-                @Override
-                public void call(final Float direction) {
-                    currentDirection = direction;
-                }
-            });
-        }
+    public Observable<Float> directionObservable() {
         return directionObservable;
     }
 
-    public synchronized Observable<Status> gpsStatusObservable() {
+    public Observable<Status> gpsStatusObservable() {
         if (gpsStatusObservable == null) {
             gpsStatusObservable = GpsStatusProvider.create(this).share();
         }
