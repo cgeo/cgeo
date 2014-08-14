@@ -208,7 +208,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
     @Override
     public void onResume() {
-        super.onResume(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA),
+        super.onResume(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.LOW_POWER),
                 app.gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(satellitesHandler));
         updateUserInfoHandler.sendEmptyMessage(-1);
         startBackgroundLogin();

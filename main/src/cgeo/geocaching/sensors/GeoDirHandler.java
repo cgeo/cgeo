@@ -29,6 +29,7 @@ public abstract class GeoDirHandler {
     public static final int UPDATE_GEODATA = 1 << 1;
     public static final int UPDATE_DIRECTION = 1 << 2;
     public static final int UPDATE_GEODIR = 1 << 3;
+    public static final int LOW_POWER = 1 << 4;
 
     private static final CgeoApplication app = CgeoApplication.getInstance();
 
@@ -85,8 +86,9 @@ public abstract class GeoDirHandler {
      */
     public Subscription start(final int flags) {
         final CompositeSubscription subscriptions = new CompositeSubscription();
+        final boolean lowPower = (flags & LOW_POWER) != 0;
         if ((flags & UPDATE_GEODATA) != 0) {
-            subscriptions.add(app.geoDataObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<IGeoData>() {
+            subscriptions.add(app.geoDataObservable(lowPower).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<IGeoData>() {
                 @Override
                 public void call(final IGeoData geoData) {
                     updateGeoData(geoData);
@@ -102,7 +104,7 @@ public abstract class GeoDirHandler {
             }));
         }
         if ((flags & UPDATE_GEODIR) != 0) {
-            subscriptions.add(Observable.combineLatest(app.geoDataObservable(), app.directionObservable(), new Func2<IGeoData, Float, ImmutablePair<IGeoData, Float>>() {
+            subscriptions.add(Observable.combineLatest(app.geoDataObservable(lowPower), app.directionObservable(), new Func2<IGeoData, Float, ImmutablePair<IGeoData, Float>>() {
                 @Override
                 public ImmutablePair<IGeoData, Float> call(final IGeoData geoData, final Float direction) {
                     return ImmutablePair.of(geoData, fixDirection(geoData, direction));

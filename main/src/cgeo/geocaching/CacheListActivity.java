@@ -509,7 +509,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public void onResume() {
         super.onResume();
 
-        resumeSubscription = geoDirHandler.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.UPDATE_DIRECTION);
+        resumeSubscription = geoDirHandler.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.UPDATE_DIRECTION | GeoDirHandler.LOW_POWER);
 
         adapter.setSelectMode(false);
         setAdapterCurrentCoordinates(true);

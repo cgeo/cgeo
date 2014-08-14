@@ -30,6 +30,7 @@ public class CgeoApplication extends Application {
     private boolean liveMapHintShownInThisSession = false; // livemap hint has been shown
     private static CgeoApplication instance;
     private Observable<IGeoData> geoDataObservable;
+    private Observable<IGeoData> geoDataObservableLowPower;
     private Observable<Float> directionObservable;
     private Observable<Status> gpsStatusObservable;
     private volatile IGeoData currentGeo = GeoData.dummyLocation();
@@ -85,7 +86,7 @@ public class CgeoApplication extends Application {
         }
         Log.i("Google Play services are " + (isGooglePlayServicesAvailable ? "" : "not ") + "available");
         setupGeoDataObservables(Settings.useGooglePlayServices());
-        geoDataObservable.subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe(REMEMBER_GEODATA);
+        geoDataObservableLowPower.subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe(REMEMBER_GEODATA);
         directionObservable = DirectionProvider.create(this).replay(1).refCount().doOnNext(new Action1<Float>() {
             @Override
             public void call(final Float direction) {
@@ -96,8 +97,21 @@ public class CgeoApplication extends Application {
     }
 
     public void setupGeoDataObservables(final boolean useGooglePlayServices) {
-        geoDataObservable = (isGooglePlayServicesAvailable() && useGooglePlayServices ? LocationProvider.create(this) : GeoDataProvider.create(this))
-                .replay(1).refCount().doOnNext(REMEMBER_GEODATA);
+        final Action1<IGeoData> rememberGeoData = new Action1<IGeoData>() {
+            @Override
+            public void call(final IGeoData geoData) {
+                currentGeo = geoData;
+            }
+        };
+        if (isGooglePlayServicesAvailable) {
+            geoDataObservable = LocationProvider.getMostPrecise(this, true).replay(1).refCount().doOnNext(rememberGeoData);
+            geoDataObservableLowPower = LocationProvider.getLowPower(this, true).replay(1).refCount().doOnNext(rememberGeoData);
+            LocationProvider.getInitialLocation(this, false).subscribeOn(RxUtils.looperCallbacksScheduler).subscribe(rememberGeoData);
+        } else {
+            geoDataObservable = GeoDataProvider.create(this).replay(1).refCount().doOnNext(rememberGeoData);
+            geoDataObservableLowPower = geoDataObservable;
+            geoDataObservable.first().subscribeOn(RxUtils.looperCallbacksScheduler).subscribe(rememberGeoData);
+        }
     }
 
     @Override
@@ -106,8 +120,8 @@ public class CgeoApplication extends Application {
         DataStore.removeAllFromCache();
     }
 
-    public Observable<IGeoData> geoDataObservable() {
-        return geoDataObservable;
+    public Observable<IGeoData> geoDataObservable(final boolean lowPower) {
+        return lowPower ? geoDataObservableLowPower : geoDataObservable;
     }
 
     public Observable<Float> directionObservable() {
