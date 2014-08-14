@@ -5,6 +5,7 @@ import butterknife.ButterKnife;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.sensors.IGeoData;
@@ -91,6 +92,12 @@ public class CoordinatesInputDialog extends DialogFragment {
         if (VERSION.SDK_INT < VERSION_CODES.HONEYCOMB && Settings.isLightSkin()) {
             setStyle(STYLE_NORMAL, R.style.DialogFixGingerbread);
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        new Keyboard(getActivity()).hide();
     }
 
     @Override
