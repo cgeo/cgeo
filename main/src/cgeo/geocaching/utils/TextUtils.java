@@ -46,26 +46,27 @@ public final class TextUtils {
     @SuppressFBWarnings("DM_STRING_CTOR")
     public static String getMatch(@Nullable final String data, final Pattern p, final boolean trim, final int group, final String defaultValue, final boolean last) {
         if (data != null) {
-
-            String result = null;
             final Matcher matcher = p.matcher(data);
-
             if (matcher.find()) {
-                result = matcher.group(group);
-            }
-            if (null != result) {
-                final Matcher remover = PATTERN_REMOVE_NONPRINTABLE.matcher(result);
-                result = remover.replaceAll(" ");
+                String result = matcher.group(group);
+                while (last && matcher.find()) {
+                    result = matcher.group(group);
+                }
 
-                return trim ? new String(result).trim() : new String(result);
-                // Java copies the whole page String, when matching with regular expressions
-                // later this would block the garbage collector, as we only need tiny parts of the page
-                // see http://developer.android.com/reference/java/lang/String.html#backing_array
-                // Thus the creating of a new String via String constructor is necessary here!!
+                if (result != null) {
+                    final Matcher remover = PATTERN_REMOVE_NONPRINTABLE.matcher(result);
+                    result = remover.replaceAll(" ");
 
-                // And BTW: You cannot even see that effect in the debugger, but must use a separate memory profiler!
+                    // Some versions of Java copy the whole page String, when matching with regular expressions
+                    // later this would block the garbage collector, as we only need tiny parts of the page
+                    // see http://developer.android.com/reference/java/lang/String.html#backing_array
+                    // Thus the creating of a new String via String constructor is voluntary here!!
+                    // And BTW: You cannot even see that effect in the debugger, but must use a separate memory profiler!
+                    return trim ? new String(result).trim() : new String(result);
+                }
             }
         }
+
         return defaultValue;
     }
 
