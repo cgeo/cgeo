@@ -180,7 +180,7 @@ public abstract class GCParser {
 
             // cache direction - image
             if (Settings.getLoadDirImg()) {
-                final String direction = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE, false, 1, null, false);
+                final String direction = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE, false, null);
                 if (direction != null) {
                     cache.setDirectionImg(direction);
                 }
@@ -207,11 +207,11 @@ public abstract class GCParser {
             }
 
             // size
-            final String container = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_CONTAINER, false, 1, null, false);
+            final String container = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_CONTAINER, false, null);
             cache.setSize(CacheSize.getById(container));
 
             // date hidden, makes sorting event caches easier
-            final String dateHidden = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_HIDDEN_DATE, false, 1, null, false);
+            final String dateHidden = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_HIDDEN_DATE, false, null);
             if (StringUtils.isNotBlank(dateHidden)) {
                 try {
                     final Date date = GCLogin.parseGcCustomDate(dateHidden);
