@@ -10,7 +10,7 @@
         app:showAsAction="always"/>
     <item
         android:id="@+id/menu_select_mapview"
-        android:icon="@drawable/ic_menu_mapmode"
+        android:icon="@drawable/ic_action_layers"
         android:showAsAction="ifRoom|withText"
         android:title="@string/map_view_map"
         app:showAsAction="ifRoom|withText">
