@@ -183,7 +183,7 @@ public final class TextUtils {
      */
     public static long checksum(final String input) {
         final CRC32 checksum = new CRC32();
-        checksum.update(input.getBytes());
+        checksum.update(input.getBytes(CHARSET_UTF8));
         return checksum.getValue();
     }
 }
