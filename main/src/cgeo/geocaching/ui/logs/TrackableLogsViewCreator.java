@@ -1,6 +1,7 @@
 package cgeo.geocaching.ui.logs;
 
 import cgeo.geocaching.CacheDetailActivity;
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.TrackableActivity;
@@ -49,14 +50,16 @@ public class TrackableLogsViewCreator extends LogsViewCreator {
             holder.countOrLocation.setVisibility(View.GONE);
         } else {
             holder.countOrLocation.setText(Html.fromHtml(log.cacheName));
-            final String cacheGuid = log.cacheGuid;
-            final String cacheName = log.cacheName;
-            holder.countOrLocation.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View arg0) {
-                    CacheDetailActivity.startActivityGuid(activity, cacheGuid, Html.fromHtml(cacheName).toString());
-                }
-            });
+            final String cacheCode = DataStore.getGeocodeForGuid(log.cacheGuid);
+            if (cacheCode != null) {
+                final String cacheName = log.cacheName;
+                holder.countOrLocation.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(final View arg0) {
+                        CacheDetailActivity.startActivity(activity, cacheCode, Html.fromHtml(cacheName).toString());
+                    }
+                });
+            }
         }
     }
 
