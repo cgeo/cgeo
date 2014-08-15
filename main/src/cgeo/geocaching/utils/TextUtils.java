@@ -27,11 +27,11 @@ public final class TextUtils {
     }
 
     /**
-     * Searches for the pattern p in the data. If the pattern is not found defaultValue is returned
+     * Searches for the pattern pattern in the data. If the pattern is not found defaultValue is returned
      *
      * @param data
      *            Data to search in
-     * @param p
+     * @param pattern
      *            Pattern to search for
      * @param trim
      *            Set to true if the group found should be trim'ed
@@ -44,9 +44,9 @@ public final class TextUtils {
      * @return defaultValue or the n-th group if the pattern matches (trimmed if wanted)
      */
     @SuppressFBWarnings("DM_STRING_CTOR")
-    public static String getMatch(@Nullable final String data, final Pattern p, final boolean trim, final int group, final String defaultValue, final boolean last) {
+    public static String getMatch(@Nullable final String data, final Pattern pattern, final boolean trim, final int group, final String defaultValue, final boolean last) {
         if (data != null) {
-            final Matcher matcher = p.matcher(data);
+            final Matcher matcher = pattern.matcher(data);
             if (matcher.find()) {
                 String result = matcher.group(group);
                 while (last && matcher.find()) {
@@ -71,11 +71,11 @@ public final class TextUtils {
     }
 
     /**
-     * Searches for the pattern p in the data. If the pattern is not found defaultValue is returned
+     * Searches for the pattern pattern in the data. If the pattern is not found defaultValue is returned
      *
      * @param data
      *            Data to search in
-     * @param p
+     * @param pattern
      *            Pattern to search for
      * @param trim
      *            Set to true if the group found should be trim'ed
@@ -83,38 +83,35 @@ public final class TextUtils {
      *            Value to return if the pattern is not found
      * @return defaultValue or the first group if the pattern matches (trimmed if wanted)
      */
-    public static String getMatch(final String data, final Pattern p, final boolean trim, final String defaultValue) {
-        return TextUtils.getMatch(data, p, trim, 1, defaultValue, false);
+    public static String getMatch(final String data, final Pattern pattern, final boolean trim, final String defaultValue) {
+        return TextUtils.getMatch(data, pattern, trim, 1, defaultValue, false);
     }
 
     /**
-     * Searches for the pattern p in the data. If the pattern is not found defaultValue is returned
+     * Searches for the pattern pattern in the data. If the pattern is not found defaultValue is returned
      *
      * @param data
      *            Data to search in
-     * @param p
+     * @param pattern
      *            Pattern to search for
      * @param defaultValue
      *            Value to return if the pattern is not found
      * @return defaultValue or the first group if the pattern matches (trimmed)
      */
-    public static String getMatch(@Nullable final String data, final Pattern p, final String defaultValue) {
-        return TextUtils.getMatch(data, p, true, 1, defaultValue, false);
+    public static String getMatch(@Nullable final String data, final Pattern pattern, final String defaultValue) {
+        return TextUtils.getMatch(data, pattern, true, 1, defaultValue, false);
     }
 
     /**
-     * Searches for the pattern p in the data.
+     * Searches for the pattern pattern in the data.
      *
      * @param data
-     * @param p
-     * @return true if data contains the pattern p
+     * @param pattern
+     * @return true if data contains the pattern pattern
      */
-    public static boolean matches(final String data, final Pattern p) {
-        if (data == null) {
-            return false;
-        }
+    public static boolean matches(final String data, final Pattern pattern) {
         // matcher is faster than String.contains() and more flexible - it takes patterns instead of fixed texts
-        return p.matcher(data).find();
+        return data != null && pattern.matcher(data).find();
 
     }
 
