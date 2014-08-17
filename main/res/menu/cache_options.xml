@@ -7,12 +7,13 @@
         android:icon="@drawable/ic_menu_compass"
         android:title="@string/cache_menu_navigate"
         app:actionProviderClass="cgeo.geocaching.ui.NavigationActionProvider"
-        app:showAsAction="always"> <!-- will be replaced -->
+        app:showAsAction="always">
     </item>
     <item
         android:id="@+id/menu_navigate"
         android:icon="@drawable/ic_menu_mapmode"
         android:title="@string/cache_menu_navigate"
+        app:actionProviderClass="cgeo.geocaching.apps.cache.navi.NavigationSelectionActionProvider"
         app:showAsAction="ifRoom">
     </item>
     <item

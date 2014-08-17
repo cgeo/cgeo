@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.calendar.CalendarAddon;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.apps.cache.navi.NavigationSelectionActionProvider;
 import cgeo.geocaching.ui.AbstractUIFactory;
 
 import android.app.Activity;
@@ -46,8 +47,12 @@ public class CacheMenuHandler extends AbstractUIFactory {
                 activityInterface.navigateTo();
                 return true;
             case R.id.menu_navigate:
-                activityInterface.showNavigationMenu();
-                return true;
+                final NavigationSelectionActionProvider navigationProvider = (NavigationSelectionActionProvider) MenuItemCompat.getActionProvider(item);
+                if (navigationProvider == null) {
+                    activityInterface.showNavigationMenu();
+                    return true;
+                }
+                return false;
             case R.id.menu_caches_around:
                 activityInterface.cachesAround();
                 return true;

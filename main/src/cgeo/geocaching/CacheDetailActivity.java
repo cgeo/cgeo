@@ -9,6 +9,7 @@ import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.activity.INavigationSource;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.apps.cache.navi.NavigationSelectionActionProvider;
 import cgeo.geocaching.apps.cachelist.MapsWithMeCacheListApp;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -430,11 +431,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         CacheMenuHandler.addMenuItems(this, menu, cache);
-        final MenuItem menuItem = menu.findItem(R.id.menu_default_navigation);
+        MenuItem menuItem = menu.findItem(R.id.menu_default_navigation);
         final NavigationActionProvider navAction = (NavigationActionProvider) MenuItemCompat.getActionProvider(menuItem);
         if (navAction != null) {
             navAction.setNavigationSource(this);
         }
+        menuItem = menu.findItem(R.id.menu_navigate);
+        NavigationSelectionActionProvider.initialize(menuItem, cache);
         return true;
     }
 
