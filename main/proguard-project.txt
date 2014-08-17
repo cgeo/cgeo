@@ -59,8 +59,7 @@
 # Null analysis annotations of Eclipse JDT are just used by the Eclipse compiler, so ignore them here
 -dontwarn org.eclipse.jdt.annotation.**
 
-# the sort action provider is only referenced from XML
+# action providers are only referenced from XML
 -keep public class cgeo.geocaching.sorting.SortActionProvider { *; }
-
-# the navigation action provider is only referenced from XML
 -keep public class cgeo.geocaching.ui.NavigationActionProvider { *; }
+-keep public class cgeo.geocaching.apps.cache.navi.NavigationSelectionActionProvider  { *; }
