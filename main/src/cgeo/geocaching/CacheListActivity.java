@@ -595,8 +595,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             menu.findItem(R.id.menu_invert_selection).setVisible(adapter.isSelectMode());
 
             setVisible(menu, R.id.menu_switch_select_mode, !isEmpty);
-            setVisible(menu, R.id.submenu_manage, (isHistory && !isEmpty) || isOffline);
-
             setVisible(menu, R.id.menu_create_list, isOffline);
 
             setVisible(menu, R.id.menu_sort, !isEmpty && !isHistory);
@@ -605,15 +603,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setVisible(menu, R.id.menu_delete_events, isConcrete && !isEmpty && containsPastEvents());
             setVisible(menu, R.id.menu_move_to_list, isOffline && !isEmpty);
             setVisible(menu, R.id.menu_remove_from_history, !isEmpty && isHistory);
-            setVisible(menu, R.id.menu_clear_offline_logs, !isEmpty && containsOfflineLogs() && (isHistory || isOffline));
+            setVisible(menu, R.id.menu_clear_offline_logs, !isEmpty && (isHistory || isOffline) && containsOfflineLogs());
             setVisible(menu, R.id.menu_import, isOffline);
             setVisible(menu, R.id.menu_import_web, isOffline);
             setVisible(menu, R.id.menu_import_gpx, isOffline);
             setVisible(menu, R.id.menu_export, !isEmpty);
-            setVisible(menu, R.id.menu_refresh_stored_top, !isOffline && !isEmpty);
 
             if (!isOffline && !isHistory) {
-                menu.findItem(R.id.menu_refresh_stored_top).setTitle(R.string.caches_store_offline);
+                menu.findItem(R.id.menu_refresh_stored).setTitle(R.string.caches_store_offline);
             }
 
             final boolean isNonDefaultList = isConcrete && listId != StoredList.STANDARD_LIST_ID;
@@ -628,8 +625,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             menu.findItem(R.id.menu_drop_list).setVisible(isNonDefaultList);
             menu.findItem(R.id.menu_rename_list).setVisible(isNonDefaultList);
-
-            menu.findItem(R.id.menu_move_to_list).setVisible(!isEmpty);
 
             setMenuItemLabel(menu, R.id.menu_remove_from_history, R.string.cache_remove_from_history, R.string.cache_clear_history);
             menu.findItem(R.id.menu_import_android).setVisible(Compatibility.isStorageAccessFrameworkAvailable() && isOffline);
@@ -684,7 +679,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 adapter.switchSelectMode();
                 invalidateOptionsMenuCompatible();
                 return true;
-            case R.id.menu_refresh_stored_top:
             case R.id.menu_refresh_stored:
                 refreshStored(adapter.getCheckedOrAllCaches());
                 invalidateOptionsMenuCompatible();
