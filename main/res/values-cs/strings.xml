@@ -1123,6 +1123,8 @@
   <string name="tts_service">Mluvící kompas</string>
   <string name="tts_start">Začít mluvit</string>
   <string name="tts_stop">Přestat mluvit</string>
+  <string name="tts_started">Řeč zahájena</string>
+  <string name="tts_stopped">Řeč ukončena</string>
   <string name="err_tts_lang_not_supported">Převod textu na řeč není pro tento jazyk k dispozici.</string>
   <string name="tts_one_kilometer">jeden kilometr</string>
   <string name="tts_one_meter">jeden metr</string>
