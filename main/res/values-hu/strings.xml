@@ -1128,6 +1128,8 @@
   <string name="tts_service">Beszélő iránytű</string>
   <string name="tts_start">Beszéd indítása</string>
   <string name="tts_stop">Beszéd leállítása</string>
+  <string name="tts_started">Beszéd elindítva</string>
+  <string name="tts_stopped">Beszéd leállítva</string>
   <string name="err_tts_lang_not_supported">A jelenlegi nyelv nem támogatott a hangos felolvasáshoz.</string>
   <string name="tts_one_kilometer">1 kilométer</string>
   <plurals name="tts_kilometers">

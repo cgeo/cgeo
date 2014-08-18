@@ -1118,6 +1118,8 @@
   <string name="tts_service">Kalbantis kompasas</string>
   <string name="tts_start">Kalbėti</string>
   <string name="tts_stop">Nekalbėti</string>
+  <string name="tts_started">Pradėtas kalbėjimas</string>
+  <string name="tts_stopped">Sustabdytas kalbėjimas</string>
   <string name="err_tts_lang_not_supported">Dabartinė kalba nepalaikoma teksto-į-kalbą.</string>
   <string name="tts_one_kilometer">vienas kilometras</string>
   <plurals name="tts_kilometers">
