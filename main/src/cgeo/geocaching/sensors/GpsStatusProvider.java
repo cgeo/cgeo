@@ -13,6 +13,8 @@ import android.location.LocationManager;
 
 public class GpsStatusProvider extends LooperCallbacks<Status> {
 
+    public static final Status NO_GPS = new Status(false, 0, 0);
+
     public static class Status {
         final public boolean gpsEnabled;
         final public int satellitesVisible;
