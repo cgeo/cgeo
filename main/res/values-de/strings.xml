@@ -209,6 +209,7 @@
   <string name="info_cache_saved">Der Cache wurde gespeichert</string>
   <string name="loc_last">Letzte Position</string>
   <string name="loc_net">Netzwerk</string>
+  <string name="loc_fused">Kombiniert</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">SAT</string>
   <string name="loc_trying">Lokalisierung</string>
@@ -489,6 +490,10 @@
   <string name="init_maintenance">Wartung</string>
   <string name="init_maintenance_directories_note">c:geo speichert Bilder, Log-Bilder und weitere Dateien zu einem Cache in einem separaten Verzeichnis. In manchen Fällen (z.B. bei Sichern und Wiederherstellen der Datenbank) kann dieses Verzeichnis unnötige Daten enthalten, die gelöscht werden können.</string>
   <string name="init_maintenance_directories">Verwaiste Daten löschen</string>
+  <string name="init_location">Positionierung</string>
+  <string name="init_location_note">Auf Geräten mit GooglePlay-Diensten kann c:geo automatisch eine bessere Positions-Bestimmung nutzen. Allerdings kann dann kein externer Bluetooth GPS-Empfänger verwendet werden. Weiterhin kann damit ein LowPower-Modus ohne GPS genutzt werden, wenn hohe Genauigkeit nicht unbedingt erforderlich ist.</string>
+  <string name="init_location_googleplayservices">GooglePlay-Dienst nutzen</string>
+  <string name="init_location_lowpower">LowPower-Modus</string>
   <string name="init_create_memory_dump">Erzeuge ein Speicherabbild</string>
   <string name="init_memory_dump">Speicherabbild</string>
   <string name="init_memory_dumped">Speicherabbild in %s gespeichert</string>
@@ -846,8 +851,11 @@
   <string name="license">Lizenz</string>
   <string name="license_show">Zeige Lizenz</string>
   <string name="license_dismiss">Ablehnen</string>
+  <string name="helper_calendar_title">c:geo Kalender-Plugin</string>
+  <string name="helper_calendar_missing">c:geo Kalendar-Plugin nicht installiert.</string>
   <string name="helper_calendar_description">Ermöglicht die Übernahme von Event-Caches in den Kalender.</string>
   <string name="helper_sendtocgeo_title">Send to c:geo</string>
+  <string name="helper_contacts_title"> c:geo Kontakte-Plugin</string>
   <string name="helper_contacts_description">Ermöglicht das direkte Öffnen von Kontakten (aus dem eigenen Adressbuch) von Logeinträgen aus, so dass man Freunde einfacher um Hilfe fragen kann.</string>
   <string name="helper_sendtocgeo_description">Send to c:geo ist eine Browsererweiterung <strong>für Ihren PC</strong>. Beim Durchsuchen von geocaching.com können Sie Caches mit einem Klick im Browser direkt an Ihr Smartphone übermitteln.</string>
   <string name="helper_locus_title">Locus</string>
@@ -862,6 +870,7 @@
   <string name="helper_pocketquery_description">Ermöglicht das einfache Erzeugen und Herunterladen von Pocket Queries basierend auf der aktuellen Position oder einem auf der Karte gewählten Punkt. Setzt eine Premium-Mitgliedschaft bei geocaching.com voraus.</string>
   <string name="helper_google_translate_title">Google Übersetzer</string>
   <string name="helper_google_translate_description">Wenn Sie Übersetzungspakete mit der Google Übersetzer-App herunterladen, können Sie Cache-Beschreibungen in c:geo durch langes Drücken auf den Cache-Beschreibungstext übersetzen (ohne Internetverbindung) .</string>
+  <string name="addon_missing_title">Fehlendes Plugin</string>
   <string name="addon_download_prompt">Jetzt im Google Play Store herunterladen</string>
   <string name="export">Exportieren</string>
   <string name="export_exportedto">exportiert nach</string>

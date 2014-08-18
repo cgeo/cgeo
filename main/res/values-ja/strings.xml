@@ -770,8 +770,11 @@
   <string name="license">ライセンス</string>
   <string name="license_show">ライセンスを表示</string>
   <string name="license_dismiss">閉じる</string>
+  <string name="helper_calendar_title">c:geo - カレンダーアドオン</string>
+  <string name="helper_calendar_missing">c:geo - カレンダーアドオンはインストールされていません。</string>
   <string name="helper_calendar_description">イベントキャッシュをカレンダーアプリに登録することができます。</string>
   <string name="helper_sendtocgeo_title">Send to c:geo</string>
+  <string name="helper_contacts_title">c:geo - 連絡先アドオン</string>
   <string name="helper_sendtocgeo_description">Send to c:geoは<strong>PC用</strong>ブラウザの拡張機能です。PCのブラウザで表示してるキャッシュ情報をアンドロイド端末に直接送ることができます。</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">シンプルで役に立つ地図アプリ。オフライン用に地図を直接ダウンロード(画像データのみ)することができます。軌跡(GPSログ)を記録したり、POIを扱ったり、その他もたくさん便利な機能があります。</string>
@@ -786,6 +789,7 @@
   <string name="helper_google_translate_title">Google 翻訳</string>
   <string name="helper_google_translate_description">キャッシュの詳細でロングタップすればGoogle翻訳アプリで簡単に翻訳できます。
 Google翻訳アプリで各言語の辞書をダウンロードしておけばオフラインでも使用できます。</string>
+  <string name="addon_missing_title">アドオンが見つかりません</string>
   <string name="addon_download_prompt">Google Playからインストールしますか?</string>
   <string name="export">エクスポート</string>
   <string name="export_exportedto">にエクスポートしました</string>

@@ -851,8 +851,11 @@
   <string name="license">Licensz</string>
   <string name="license_show">Licensz mutatása</string>
   <string name="license_dismiss">Elutasítás</string>
+  <string name="helper_calendar_title">c:geo naptár add-on</string>
+  <string name="helper_calendar_missing">c:geo naptár add-on nincs telepítve.</string>
   <string name="helper_calendar_description">Lehetővé teszi a geoládák exportálását az eszközöd naptárába.</string>
   <string name="helper_sendtocgeo_title">Küldés a c:geo-ra</string>
+  <string name="helper_contacts_title">c:geo kapcsolatok add-on</string>
   <string name="helper_contacts_description">Lehetővé teszi egy névjegy közvetlen megnyitását a log bejegyzésekből, így könnyebben segítséget tudsz kérni.</string>
   <string name="helper_sendtocgeo_description">A \'Küldés a c:geo-ra\' egy böngésző bővítmény <strong>PC-re</strong>. A geocaching.com böngészése közben, egy kattintással tudsz geoládákat küldeni az okostelefonodra.</string>
   <string name="helper_locus_title">Locus</string>
@@ -867,6 +870,7 @@
   <string name="helper_pocketquery_description">A jelenlegi pozíciód vagy egy kijelölt pont körüli pocket lekérdezések egyszerű létrehozása és letöltése. Csak prémium geocaching.com-os tagsággal használható.</string>
   <string name="helper_google_translate_title">Google Fordító</string>
   <string name="helper_google_translate_description">A Google Fordító app-hoz letöltött fordító csomagokkal könnyedén lefordíthatod a c:geo ládaleírásait, ha hosszan tartva megnyomod a ládaleírás szövegét. (Internet kapcsolat nélkül is működik.)</string>
+  <string name="addon_missing_title">Hiányzó add-on</string>
   <string name="addon_download_prompt">Töltsd le most a Google Play-ről.</string>
   <string name="export">Exportálás</string>
   <string name="export_exportedto">exportálva ide</string>

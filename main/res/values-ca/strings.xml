@@ -849,8 +849,11 @@
   <string name="license">Llicència</string>
   <string name="license_show">Mostra la llicència</string>
   <string name="license_dismiss">Omet</string>
+  <string name="helper_calendar_title">Complement del calendari del c:geo</string>
+  <string name="helper_calendar_missing">No s\'ha instal·lat el complement del calendari del c:geo.</string>
   <string name="helper_calendar_description">Permet exportar trobades al calendari del vostre dispositiu.</string>
   <string name="helper_sendtocgeo_title">Send to c:geo</string>
+  <string name="helper_contacts_title">Complement de contactes del c:geo</string>
   <string name="helper_contacts_description">Us permet obrir un contacte (de la llibreta de contactes) directament des d\'una entrada del registre, així podeu demanar ajuda als amics més fàcilment.</string>
   <string name="helper_sendtocgeo_description">Send to c:geo és una extensió del navegador <strong>per al vostre ordinador</strong>. Quan navegueu per geocaching.com podreu enviar catxés des del navegador directament al vostre telèfon amb un clic de botó.</string>
   <string name="helper_locus_title">Locus</string>
@@ -865,6 +868,7 @@
   <string name="helper_pocketquery_description">Permet la fàcil creació i descàrrega de pocket queries centrats en la posició actual o en un punt seleccionat al mapa. Requereix un compte Premium de Geocaching.com.</string>
   <string name="helper_google_translate_title">Google Translate</string>
   <string name="helper_google_translate_description">Si descarregueu paquets de traducció a l\'app Google Translate, llavors podeu traduir fàcilment les descripcions dels catxés al c:geo tocant uns segons sobre el text de la descripció del catxé (sense connexió a Internet).</string>
+  <string name="addon_missing_title">No es troba el complement</string>
   <string name="addon_download_prompt">Baixa-te\'l de Google Play.</string>
   <string name="export">Exporta</string>
   <string name="export_exportedto">exportat a</string>

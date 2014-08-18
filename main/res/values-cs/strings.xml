@@ -846,8 +846,11 @@
   <string name="license">Licence</string>
   <string name="license_show">Zobrazit licenci</string>
   <string name="license_dismiss">Zamítnout</string>
+  <string name="helper_calendar_title">c:geo - Kalendář (doplněk)</string>
+  <string name="helper_calendar_missing">Doplněk pro c:geo - Kalendář není nainstalován.</string>
   <string name="helper_calendar_description">Umožňuje exportovat události keší do tvého kalendáře.</string>
   <string name="helper_sendtocgeo_title">Poslat do c:geo</string>
+  <string name="helper_contacts_title">c:geo - kontakty (doplněk)</string>
   <string name="helper_contacts_description">Umožňuje otevřít vizitku (z tvého seznamu kontaktů) přímo z logu keše, můžeš tak snadněji kontaktovat kamarády o pomoc.</string>
   <string name="helper_sendtocgeo_description">Poslat do c:geo (Send2c:geo) je rozšíření prohlížeče <strong>pro tvůj počítač</strong>. Umožňuje zaslání keše do tvého mobilního zařízení jediným klepnutím, přímo z prohlížeče, při procházení webu Geocaching.com.</string>
   <string name="helper_locus_title">Locus</string>
@@ -862,6 +865,7 @@
   <string name="helper_pocketquery_description">Umožňuje snadné vytváření a stažení PQ podle současné pozice nebo bodu na mapě. Vyžaduje Premium účet na Geocaching.com.</string>
   <string name="helper_google_translate_title">Překladač Google</string>
   <string name="helper_google_translate_description">Pokud si v aplikaci Překladač Google stáhneš překladový balíček, můžeš jednoduše překládat popisy keší v c:geu dlouhým podržením textu (a to bez připojení k Internetu).</string>
+  <string name="addon_missing_title">Chybějící modul</string>
   <string name="addon_download_prompt">Získat nyní z Google Play.</string>
   <string name="export">Export</string>
   <string name="export_exportedto">Exportováno do</string>

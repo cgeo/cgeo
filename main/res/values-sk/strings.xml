@@ -839,8 +839,11 @@
   <string name="license">Licencia</string>
   <string name="license_show">Zobraziť licenciu</string>
   <string name="license_dismiss">Zamietnutie</string>
+  <string name="helper_calendar_title">Doplnok c:geo calendar</string>
+  <string name="helper_calendar_missing">Doplnok c:geo calendar nie je nainštalovaný</string>
   <string name="helper_calendar_description">Umožní vám exportovať Event cache do kalendára na vašom zariadení.</string>
   <string name="helper_sendtocgeo_title">Poslať do c:geo</string>
+  <string name="helper_contacts_title">Doplnok c:geo kontakty</string>
   <string name="helper_contacts_description">Umožňuje otvorenie karty kontaktu (z adresára) priamo z logbooku, takže môžete ľahko požiadať priateľov o pomoc.</string>
   <string name="helper_sendtocgeo_description">Poslať do c:geo je rozšírenie prehliadača <strong>pre vaše PC</strong>. Pri browsovaní geocaching.com, môžete poslať cache do vášho smartphone kliknutím na tlačidlo priamo v prehliadači.</string>
   <string name="helper_locus_title">Locus</string>
@@ -855,6 +858,7 @@
   <string name="helper_pocketquery_description">Umožňuje ľahké vytváranie a sťahovanie Pocket Query zamerané na vašu aktuálnu polohu alebo bod vybraný na mape. Vyžaduje Premium účet na Geocaching.com.</string>
   <string name="helper_google_translate_title">Google Translate</string>
   <string name="helper_google_translate_description">Ak prevezmete balíky prekladov v aplikácii Google Translate, môžete ľahko preložiť popisy skrýš v c:geo dlhým kliknutím na text s popisom skrýše (aj bez pripojenia k internetu).</string>
+  <string name="addon_missing_title">Chýbajúci doplnok</string>
   <string name="addon_download_prompt">Získať doplnok teraz z Google Play.</string>
   <string name="export">Exportovať</string>
   <string name="export_exportedto">exportované do</string>
