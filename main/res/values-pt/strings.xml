@@ -846,11 +846,8 @@
   <string name="license">Licença</string>
   <string name="license_show">Mostrar licença</string>
   <string name="license_dismiss">Dispensar</string>
-  <string name="helper_calendar_title">Add on calendário para c:geo </string>
-  <string name="helper_calendar_missing">Add on calendário para o c:geo não está instalado.</string>
   <string name="helper_calendar_description">Permite exportar caches evento para o calendário do seu dispositivo.</string>
   <string name="helper_sendtocgeo_title">Enviar para o c:geo</string>
-  <string name="helper_contacts_title">c:geo - plugin contactos</string>
   <string name="helper_contacts_description">Permite abrir um contacto (da sua agenda telefónica) directamente a partir de um log. Assim será mais fácil de pedir ajuda aos seus amigos.</string>
   <string name="helper_sendtocgeo_description">Send to c:geo é uma extensão do navegador <strong>para o seu PC</strong>. Ao navegar geocaching.com, você pode enviar as caches directamente para seu smartphone com o clique de um botão no navegador.</string>
   <string name="helper_locus_title">Locus</string>
@@ -865,7 +862,6 @@
   <string name="helper_pocketquery_description">Permite a fácil criação de consultas e download de Pocket Query centrado na sua posição actual ou um ponto selecionado a partir de um mapa. Requer uma conta premium em Geocaching.com.</string>
   <string name="helper_google_translate_title">Tradutor Google</string>
   <string name="helper_google_translate_description">Se fizer o download dos pacotes de tradução na app Google Translate, pode facilmente traduzir as descrições da cache no c:geo com um toque longo sobre o texto da descrição da cache (mesmo sem ligação à Internet).</string>
-  <string name="addon_missing_title">Add-On em falta</string>
   <string name="addon_download_prompt">Obter agora a partir de Google Play.</string>
   <string name="export">Exportar</string>
   <string name="export_exportedto">exportado para</string>

@@ -851,11 +851,8 @@
   <string name="license">Licens</string>
   <string name="license_show">Visa licens</string>
   <string name="license_dismiss">Avbryt</string>
-  <string name="helper_calendar_title">c:geo kalendertillägg</string>
-  <string name="helper_calendar_missing">c:geo kalendertillägg är inte installerat</string>
   <string name="helper_calendar_description">Gör det möjligt att exportera event till din kalender.</string>
   <string name="helper_sendtocgeo_title">Skicka till c:geo (Send2cgeo)</string>
-  <string name="helper_contacts_title">c:geo - Kontakttillägg</string>
   <string name="helper_contacts_description">Gör det möjligt att öppna en kontakt (i telefonens adressbok) direkt från en logg, så att du enkelt kan kontakta vänner för att få hjälp.</string>
   <string name="helper_sendtocgeo_description">Skicka till c:geo är ett tillägg till webbläsaren <strong>för din PC</strong>. När du bläddrar geocaching.com, kan du skicka cacher till din telefon med en knapptryckning i webbläsaren.</string>
   <string name="helper_locus_title">Locus</string>
@@ -870,7 +867,6 @@
   <string name="helper_pocketquery_description">Gör det enkelt att skapa och ladda ner Pocket Queries baserade på din position eller plats som väljs på kartan. Kräver Premium konto hos Geocaching.com.</string>
   <string name="helper_google_translate_title">Google Översätt</string>
   <string name="helper_google_translate_description">Om du hämtar översättningspaket i Google Translate appen, kan du enkelt översätta cachebeskrivningar i c:geo med en lång tryckning på cache-beskrivningstexten (även utan Internet-anslutning).</string>
-  <string name="addon_missing_title">Tillägg saknas</string>
   <string name="addon_download_prompt">Hämta det nu från Google Play.</string>
   <string name="export">Exportera</string>
   <string name="export_exportedto">exporterat till</string>

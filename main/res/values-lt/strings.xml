@@ -843,11 +843,8 @@
   <string name="license">Licencija</string>
   <string name="license_show">Rodyti licenciją</string>
   <string name="license_dismiss">Atmesti</string>
-  <string name="helper_calendar_title">c:geo kalendorius (įskiepis)</string>
-  <string name="helper_calendar_missing">c:geo kalendoriaus įskiepis neįdiegtas.</string>
   <string name="helper_calendar_description">Leidžia eksportuoti renginius į prietaiso kalendorių.</string>
   <string name="helper_sendtocgeo_title">Siųsti į c:geo</string>
-  <string name="helper_contacts_title">c:geo kontaktai (įskiepis)</string>
   <string name="helper_contacts_description">Leidžia tiesiai iš įrašo atidaryti kontakto kortelę (iš jūsų adresų knygos), kad galėtumėte susisiekti su draugais paprašyti pagalbos.</string>
   <string name="helper_sendtocgeo_description">Send to c:geo yra <strong>jūsų kompiuterio</strong> naršyklės priedas . Kai naršote geocaching.com, jūs galite siųsti slėptuves į savo išmanųjį telefoną tiesiog naršyklės viduje paspausdami mygtuką.</string>
   <string name="helper_locus_title">Locus</string>
@@ -862,7 +859,6 @@
   <string name="helper_pocketquery_description">Leidžia lengvai sukurti ir atsisiųsti Kišeninius sąrašus pagal jūsų buvimo vietą arba pasirinktą tašką žemėlapyje. Būtina Premium narystė Geocaching.com.</string>
   <string name="helper_google_translate_title">\"Google\" vertėjas</string>
   <string name="helper_google_translate_description">Atsisiuntę vertimo paketą Google Translate programai galėsite lengvai išversti slėptuvės aprašymus ilgai paspaudę ant slėptuvės aprašymo teksto (tam nereikės interneto ryšio).</string>
-  <string name="addon_missing_title">Trūksta įskiepio</string>
   <string name="addon_download_prompt">Parsisiųsti iš Google Play dabar.</string>
   <string name="export">Eksportuoti</string>
   <string name="export_exportedto">eksportuota į</string>

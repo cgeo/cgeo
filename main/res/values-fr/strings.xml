@@ -209,6 +209,7 @@
   <string name="info_cache_saved">La cache a été stockée en local</string>
   <string name="loc_last">Aucun</string>
   <string name="loc_net">Réseau</string>
+  <string name="loc_fused">Fusionné</string>
   <string name="loc_gps">Gps</string>
   <string name="loc_sat">Satellites</string>
   <string name="loc_trying">Localisation en cours…</string>
@@ -489,6 +490,10 @@
   <string name="init_maintenance">Maintenance</string>
   <string name="init_maintenance_directories_note">c:geo stocke les images et les autres fichiers associés à une géocache dans un dossier dédié. Dans certains cas (comme l\'importation/exportation de la base de données), ce dossier peut contenir des fichiers obsolètes, qui peuvent être supprimés ici.</string>
   <string name="init_maintenance_directories">Supprimer les fichiers orphelins</string>
+  <string name="init_location">Géolocalisation</string>
+  <string name="init_location_note">Sur les appareils équipés des services Google Play, c:geo peut automatiquement utiliser un meilleur fournisseur de données de géolocalisation. Cependant, cela empêche l\'utilisation d\'un appareil GPS externe BlueTooth. Un mode basse consommation est également disponible au prix d\'une localisation moins précise lorsque ce n\'est pas strictement nécessaire.</string>
+  <string name="init_location_googleplayservices">Utiliser les services Google Play</string>
+  <string name="init_location_lowpower">Mode basse consommation</string>
   <string name="init_create_memory_dump">Créer une image mémoire</string>
   <string name="init_memory_dump">Image mémoire</string>
   <string name="init_memory_dumped">Mémoire copiée dans %s</string>
@@ -846,11 +851,11 @@
   <string name="license">Licence</string>
   <string name="license_show">Afficher la licence</string>
   <string name="license_dismiss">Rejeter</string>
-  <string name="helper_calendar_title">Module supplémentaire c:geo agenda</string>
-  <string name="helper_calendar_missing">Module supplémentaire c:geo agenda non installé</string>
+  <string name="helper_calendar_title">Module complémentaire c:geo agenda</string>
+  <string name="helper_calendar_missing">Module complémentaire c:geo agenda non installé.</string>
   <string name="helper_calendar_description">Permet d\'exporter les événements liés aux caches dans le calendrier Android.</string>
   <string name="helper_sendtocgeo_title">Envoyer vers c:geo</string>
-  <string name="helper_contacts_title">c:geo - Module complémentaire contacts</string>
+  <string name="helper_contacts_title">Module complémentaire c:geo contacts</string>
   <string name="helper_contacts_description">Permet d\'ouvrir une fiche de contact (depuis le carnet d\'adresses) directement depuis une entrée de journal, de manière à pouvoir plus facilement appeler des amis à l\'aide.</string>
   <string name="helper_sendtocgeo_description">Envoyer à c:geo (<i>Send to c:geo</i>) est une extension pour le navigateur <strong>de votre ordinateur</strong>. Lorsque vous naviguez sur geocaching.com, vous pouvez envoyer des caches vers votre smartphone avec un clic.</string>
   <string name="helper_locus_title">Locus</string>
@@ -1123,6 +1128,8 @@
   <string name="tts_service">Boussole parlante</string>
   <string name="tts_start">Commencer à parler</string>
   <string name="tts_stop">Arrêter de parler</string>
+  <string name="tts_started">Boussole parlante démarrée</string>
+  <string name="tts_stopped">Boussole parlante stoppée</string>
   <string name="err_tts_lang_not_supported">La langue courante n\'est pas prise en charge par la synthèse vocale.</string>
   <string name="tts_one_kilometer">un kilomètre</string>
   <plurals name="tts_kilometers">

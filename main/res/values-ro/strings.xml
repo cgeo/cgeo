@@ -841,11 +841,8 @@
   <string name="license">Licenţă</string>
   <string name="license_show">Afişează licenţa</string>
   <string name="license_dismiss">Renunță</string>
-  <string name="helper_calendar_title">Extensia c:geo calendar</string>
-  <string name="helper_calendar_missing">Extensia \"c:geo - calendar\" nu este instalată.</string>
   <string name="helper_calendar_description">Permite exportul evenimentelor către aplicaţia calendar a dispozitivului.</string>
   <string name="helper_sendtocgeo_title">Trimite la c:geo</string>
-  <string name="helper_contacts_title">c:geo - contacte (extensie)</string>
   <string name="helper_contacts_description">Permite să afişezi contacte (din agenda de contacte) direct din formularul pentru însemnări, astfel încţt să ăti poţi întreba mai uşor prietenii.</string>
   <string name="helper_sendtocgeo_description">Send to c:geo este o extensie pentru browser-ul <strong>de pe PC</strong>. Când vizitezi geocaching.com, poţi trimite geocutii direct către dispozitivul tău apăsând un simplu buton.</string>
   <string name="helper_locus_title">Locus</string>
@@ -860,7 +857,6 @@
   <string name="helper_pocketquery_description">Permite crearea de Pocket Queries centrate pe poziţia ta actuală sau a unui punct de pe hartă. Necesită cont premium pe Geocaching.com.</string>
   <string name="helper_google_translate_title">Google Translate</string>
   <string name="helper_google_translate_description">Dacă ai descărcat pachete cu traduceri în aplicaţia Google Translate atunci poţi traduce descrierile geocutiilor în c:geo apăsând prelungit pe textul descrierii (chiar şi fără conexiune internet).</string>
-  <string name="addon_missing_title">Extensie lipsă</string>
   <string name="addon_download_prompt">Ia acum de pe Google Play.</string>
   <string name="export">Exportă</string>
   <string name="export_exportedto">exportat către</string>

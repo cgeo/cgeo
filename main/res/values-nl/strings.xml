@@ -851,11 +851,8 @@
   <string name="license">Licentie</string>
   <string name="license_show">Toon licentie</string>
   <string name="license_dismiss">Afwijzen</string>
-  <string name="helper_calendar_title">c:geo kalender add-on</string>
-  <string name="helper_calendar_missing">c:geo kalender add-on niet geïnstalleerd.</string>
   <string name="helper_calendar_description">Maakt het mogelijk om Geocaching events in je kalender op te slaan.</string>
   <string name="helper_sendtocgeo_title">Verzend naar c:geo</string>
-  <string name="helper_contacts_title">c:geo contacten-plug-in</string>
   <string name="helper_contacts_description">Maakt het mogelijk een contactpersoon (uit je adresboek) te openen rechtstreeks vanuit een log, zodat je vrienden makkelijker om hulp kunt vragen.</string>
   <string name="helper_sendtocgeo_description">Verzenden naar c:geo is een browserextensie <strong>voor uw PC</strong>. Tijdens het browsen op geocaching.com, kunt u caches verzenden naar uw smartphone met een klik direct in de browser.</string>
   <string name="helper_locus_title">Locus</string>
@@ -870,7 +867,6 @@
   <string name="helper_pocketquery_description">Makkelijk Pocket Query\'s maken en downloaden gericht op uw huidige positie of een punt geselecteerd van een kaart. Vereist een Premium account van Geocaching.com.</string>
   <string name="helper_google_translate_title">Google Translate</string>
   <string name="helper_google_translate_description">Als je vertaal pakketten in de Google Translate app download, kan je eenvoudig een cache omschrijving vertalen in c:geo door een lange tik op deze omschrijvingstekst (zonder een internet verbinding).</string>
-  <string name="addon_missing_title">Add-On ontbreekt</string>
   <string name="addon_download_prompt">Haal de add-on nu op van Google Play.</string>
   <string name="export">Export</string>
   <string name="export_exportedto">Geexporteerd naar</string>

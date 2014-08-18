@@ -846,11 +846,8 @@
   <string name="license">Licencja</string>
   <string name="license_show">Pokaż licencję</string>
   <string name="license_dismiss">Odmów</string>
-  <string name="helper_calendar_title">Dodatek Kalendarz c:geo</string>
-  <string name="helper_calendar_missing">Dodatek Kalendarz c:geo nie jest zainstalowany.</string>
   <string name="helper_calendar_description">Umożliwia Tobie eksport skrzynek Wydarzenie do kalendarza w Twoim urządzeniu.</string>
   <string name="helper_sendtocgeo_title">Wyślij do c:geo</string>
-  <string name="helper_contacts_title">c:geo - dodatek Kontakty</string>
   <string name="helper_contacts_description">Umożliwia Tobie otwarcie kontaktu (z Twojej książki adresowej) bezpośrednio z wpisu do dziennika, więc możesz łatwiej poprosić przyjaciół o pomoc.</string>
   <string name="helper_sendtocgeo_description">Wyślij do c:geo jest rozszerzeniem do przeglądarki <strong>na komputer</strong>. Podczas przeglądania Geocaching.com pozwala na wysłanie skrzynek bezpośrednio do telefonu, za pomocą jednego przycisku w przeglądarce.</string>
   <string name="helper_locus_title">Locus</string>
@@ -865,7 +862,6 @@
   <string name="helper_pocketquery_description">Pozwala na łatwe tworzenie i pobieranie Pocket Queries wyśrodkowanych w Twoim aktualnym położeniu lub wybranym punkcie mapy. Wymaga konta Premium w Geocaching.com.</string>
   <string name="helper_google_translate_title">Tłumacz Google</string>
   <string name="helper_google_translate_description">Jeśli pobierzesz paczki tłumaczeń w aplikacji Google Tłumacz, będziesz mógł łatwo tłumaczyć opisy skrzynek przytrzymując na nich palcem chwilę dłużej (bez połączenia z internetem).</string>
-  <string name="addon_missing_title">Brakujący dodatek</string>
   <string name="addon_download_prompt">Pobierz teraz z Google Play.</string>
   <string name="export">Eksport</string>
   <string name="export_exportedto">wyeksportowano do</string>
