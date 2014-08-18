@@ -745,6 +745,15 @@
                 android:key="@string/pref_fakekey_preference_maintenance_directories"
                 android:title="@string/init_maintenance_directories" />
         </PreferenceCategory>
+        <PreferenceCategory android:title="@string/init_location">
+            <cgeo.geocaching.settings.TextPreference
+                android:layout="@layout/text_preference"
+                android:text="@string/init_location_note" />
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="@string/pref_googleplayservices"
+                android:title="@string/init_location_googleplayservices" />
+        </PreferenceCategory>
         <PreferenceCategory android:title="@string/init_debug_title" >
             <cgeo.geocaching.settings.TextPreference
                 android:layout="@layout/text_preference"

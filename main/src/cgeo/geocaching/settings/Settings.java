@@ -393,6 +393,14 @@ public class Settings {
         return getString(R.string.pref_cookiestore, null);
     }
 
+    public static boolean useGooglePlayServices() {
+        return getBoolean(R.string.pref_googleplayservices, true);
+    }
+
+    public static boolean setUseGooglePlayServices(final boolean useGooglePlayServices) {
+        return putBoolean(R.string.pref_googleplayservices, useGooglePlayServices);
+    }
+
     /**
      * @param cacheType
      *            The cache type used for future filtering

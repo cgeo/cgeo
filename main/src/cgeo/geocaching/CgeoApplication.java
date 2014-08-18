@@ -7,6 +7,7 @@ import cgeo.geocaching.sensors.GeoDataProvider;
 import cgeo.geocaching.sensors.GpsStatusProvider;
 import cgeo.geocaching.sensors.GpsStatusProvider.Status;
 import cgeo.geocaching.sensors.IGeoData;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
 import cgeo.geocaching.utils.RxUtils;
@@ -34,6 +35,12 @@ public class CgeoApplication extends Application {
     private volatile IGeoData currentGeo = GeoData.dummyLocation();
     private volatile float currentDirection = 0.0f;
     private boolean isGooglePlayServicesAvailable = false;
+    private final Action1<IGeoData> REMEMBER_GEODATA = new Action1<IGeoData>() {
+        @Override
+        public void call(final IGeoData geoData) {
+            currentGeo = geoData;
+        }
+    };
 
     public static void dumpOnOutOfMemory(final boolean enable) {
 
@@ -77,15 +84,8 @@ public class CgeoApplication extends Application {
             isGooglePlayServicesAvailable = true;
         }
         Log.i("Google Play services are " + (isGooglePlayServicesAvailable ? "" : "not ") + "available");
-        final Action1<IGeoData> rememberGeoData = new Action1<IGeoData>() {
-            @Override
-            public void call(final IGeoData geoData) {
-                currentGeo = geoData;
-            }
-        };
-        geoDataObservable = (isGooglePlayServicesAvailable() ? LocationProvider.create(this) : GeoDataProvider.create(this))
-                .replay(1).refCount().doOnNext(rememberGeoData);
-        geoDataObservable.subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe(rememberGeoData);
+        setupGeoDataObservables(Settings.useGooglePlayServices());
+        geoDataObservable.subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe(REMEMBER_GEODATA);
         directionObservable = DirectionProvider.create(this).replay(1).refCount().doOnNext(new Action1<Float>() {
             @Override
             public void call(final Float direction) {
@@ -93,6 +93,11 @@ public class CgeoApplication extends Application {
             }
         });
         gpsStatusObservable = GpsStatusProvider.create(this).share();
+    }
+
+    public void setupGeoDataObservables(final boolean useGooglePlayServices) {
+        geoDataObservable = (isGooglePlayServicesAvailable() && useGooglePlayServices ? LocationProvider.create(this) : GeoDataProvider.create(this))
+                .replay(1).refCount().doOnNext(REMEMBER_GEODATA);
     }
 
     @Override

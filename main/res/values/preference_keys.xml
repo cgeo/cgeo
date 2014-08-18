@@ -106,6 +106,7 @@
     <string name="pref_coordinputformat">coordinputformat</string>
     <string name="pref_gccustomdate">gccustomdate</string>
     <string name="pref_cookiestore">cookiestore</string>
+    <string name="pref_googleplayservices">googleplayservices</string>
     <string name="pref_lastdetailspage">lastdetailspage</string>
     <string name="pref_livemapstrategy">livemapstrategy</string>
     <string name="pref_livemaphintshowcount">livemaphintshowcount</string>

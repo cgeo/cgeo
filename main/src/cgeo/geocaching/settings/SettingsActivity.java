@@ -122,6 +122,7 @@ public class SettingsActivity extends PreferenceActivity {
         initDefaultNavigationPreferences();
         initBackupButtons();
         initDbLocationPreference();
+        initGeolocationPreference();
         initDebugPreference();
         initBasicMemberPreferences();
         initSend2CgeoPreferences();
@@ -396,6 +397,19 @@ public class SettingsActivity extends PreferenceActivity {
                 return true;
             }
         });
+    }
+
+    private void initGeolocationPreference() {
+        final Preference p = getPreference(R.string.pref_googleplayservices);
+        p.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+                final boolean useGooglePlayServices = (Boolean) newValue;
+                CgeoApplication.getInstance().setupGeoDataObservables(useGooglePlayServices);
+                return true;
+            }
+        });
+        p.setEnabled(CgeoApplication.getInstance().isGooglePlayServicesAvailable());
     }
 
     void initBasicMemberPreferences() {
