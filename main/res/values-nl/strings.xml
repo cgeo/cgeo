@@ -1128,6 +1128,8 @@
   <string name="tts_service">Pratend kompas</string>
   <string name="tts_start">Begin met praten</string>
   <string name="tts_stop">Stop met praten</string>
+  <string name="tts_started">Gestart toespraak</string>
+  <string name="tts_stopped">Gestopt toespraak</string>
   <string name="err_tts_lang_not_supported">De huidige taal wordt niet ondersteund door tekst naar spraak.</string>
   <string name="tts_one_kilometer">één kilometer</string>
   <plurals name="tts_kilometers">
