@@ -3,16 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menu_default_navigation"
+        android:icon="@drawable/ic_menu_compass"
+        android:title="@string/cache_menu_navigate"
+        app:actionProviderClass="cgeo.geocaching.ui.NavigationActionProvider"
+        app:showAsAction="always">
+    </item>
+    <item
         android:id="@+id/menu_navigate"
         android:icon="@drawable/ic_menu_mapmode"
         android:title="@string/cache_menu_navigate"
         app:showAsAction="ifRoom">
-    </item>
-    <item
-        android:id="@+id/menu_default_navigation"
-        android:icon="@drawable/ic_menu_compass"
-        android:title="@string/cache_menu_navigate"
-        app:showAsAction="ifRoom"> <!-- will be replaced in code -->
     </item>
     <item
         android:id="@+id/menu_caches_around"
