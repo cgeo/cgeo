@@ -162,17 +162,17 @@ public class HtmlImage implements Html.ImageGetter {
     public Observable<BitmapDrawable> fetchDrawable(final String url) {
 
         if (StringUtils.isBlank(url) || ImageUtils.containsPattern(url, BLOCKED)) {
-            return Observable.from(ImageUtils.getTransparent1x1Drawable(resources));
+            return Observable.just(ImageUtils.getTransparent1x1Drawable(resources));
         }
 
         // Explicit local file URLs are loaded from the filesystem regardless of their age. The IO part is short
         // enough to make the whole operation on the computation scheduler.
         if (FileUtils.isFileUrl(url)) {
-            return Observable.defer(new Func0<Observable<? extends BitmapDrawable>>() {
+            return Observable.defer(new Func0<Observable<BitmapDrawable>>() {
                 @Override
-                public Observable<? extends BitmapDrawable> call() {
+                public Observable<BitmapDrawable> call() {
                     final Bitmap bitmap = loadCachedImage(FileUtils.urlToFile(url), true).getLeft();
-                    return bitmap != null ? Observable.from(ImageUtils.scaleBitmapToFitDisplay(bitmap)) : Observable.<BitmapDrawable>empty();
+                    return bitmap != null ? Observable.just(ImageUtils.scaleBitmapToFitDisplay(bitmap)) : Observable.<BitmapDrawable>empty();
                 }
             }).subscribeOn(RxUtils.computationScheduler);
         }

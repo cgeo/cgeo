@@ -69,7 +69,7 @@ public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
                             final String[] strings = StringUtils.split(Network.getResponseData(response), ',');
                             Settings.setWebNameCode(nam, strings[0]);
                             try {
-                                return Observable.from(Integer.parseInt(strings[1].trim()));
+                                return Observable.just(Integer.parseInt(strings[1].trim()));
                             } catch (final Exception e) {
                                 Log.e("RegisterSend2CgeoPreference", e);
                             }

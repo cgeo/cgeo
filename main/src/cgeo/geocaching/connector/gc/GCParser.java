@@ -1677,9 +1677,9 @@ public abstract class GCParser {
      * @return Observable<LogEntry> The logs
      */
     private static Observable<LogEntry> getSpecialLogs(final String page, final SpecialLogs logType) {
-        return Observable.defer(new Func0<Observable<? extends LogEntry>>() {
+        return Observable.defer(new Func0<Observable<LogEntry>>() {
             @Override
-            public Observable<? extends LogEntry> call() {
+            public Observable<LogEntry> call() {
                 final MatcherWrapper userTokenMatcher = new MatcherWrapper(GCConstants.PATTERN_USERTOKEN, page);
                 if (!userTokenMatcher.find()) {
                     Log.e("GCParser.loadLogsFromDetails: unable to extract userToken");

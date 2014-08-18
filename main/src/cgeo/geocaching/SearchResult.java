@@ -320,7 +320,7 @@ public class SearchResult implements Parcelable {
                 return cObservable.flatMap(new Func1<C, Observable<? extends SearchResult>>() {
                     @Override
                     public Observable<? extends SearchResult> call(final C c) {
-                        return c.isActive() ? Observable.from(func.call(c)) : Observable.<SearchResult>empty();
+                        return c.isActive() ? Observable.just(func.call(c)) : Observable.<SearchResult>empty();
                     }
                 });
             }

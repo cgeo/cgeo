@@ -42,15 +42,15 @@ public class RecaptchaHandler extends Handler {
     }
 
     private void loadChallenge(final ImageView imageView, final View reloadButton) {
-        final Observable<Bitmap> captcha = Observable.defer(new Func0<Observable<? extends Bitmap>>() {
+        final Observable<Bitmap> captcha = Observable.defer(new Func0<Observable<Bitmap>>() {
             @Override
-            public Observable<? extends Bitmap> call() {
+            public Observable<Bitmap> call() {
                 final String url = "http://www.google.com/recaptcha/api/image?c=" + recaptchaReceiver.getChallenge();
                 final InputStream is = Network.getResponseStream(Network.getRequest(url));
                 if (is != null) {
                     try {
                         final Bitmap img = BitmapFactory.decodeStream(is);
-                        return Observable.from(img);
+                        return Observable.just(img);
                     } catch (final Exception e) {
                         Log.e("RecaptchaHandler.getCaptcha", e);
                         return Observable.error(e);

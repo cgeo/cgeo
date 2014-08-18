@@ -558,7 +558,7 @@ public class MainActivity extends AbstractActionBarActivity {
                             }
                         }
                     });
-                    AndroidObservable.bindActivity(MainActivity.this, address.onErrorResumeNext(Observable.from(geo.getCoords().toString())))
+                    AndroidObservable.bindActivity(MainActivity.this, address.onErrorResumeNext(Observable.just(geo.getCoords().toString())))
                             .subscribeOn(RxUtils.networkScheduler)
                             .subscribe(new Action1<String>() {
                                 @Override
