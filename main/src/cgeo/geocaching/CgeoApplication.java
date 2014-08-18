@@ -2,12 +2,14 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.playservices.LocationProvider;
 import cgeo.geocaching.sensors.DirectionProvider;
+import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDataProvider;
 import cgeo.geocaching.sensors.GpsStatusProvider;
 import cgeo.geocaching.sensors.GpsStatusProvider.Status;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
+import cgeo.geocaching.utils.RxUtils;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -29,7 +31,7 @@ public class CgeoApplication extends Application {
     private Observable<IGeoData> geoDataObservable;
     private Observable<Float> directionObservable;
     private Observable<Status> gpsStatusObservable;
-    private volatile IGeoData currentGeo = null;
+    private volatile IGeoData currentGeo = GeoData.dummyLocation();
     private volatile float currentDirection = 0.0f;
     private boolean isGooglePlayServicesAvailable = false;
 
@@ -75,14 +77,15 @@ public class CgeoApplication extends Application {
             isGooglePlayServicesAvailable = true;
         }
         Log.i("Google Play services are " + (isGooglePlayServicesAvailable ? "" : "not ") + "available");
+        final Action1<IGeoData> rememberGeoData = new Action1<IGeoData>() {
+            @Override
+            public void call(final IGeoData geoData) {
+                currentGeo = geoData;
+            }
+        };
         geoDataObservable = (isGooglePlayServicesAvailable() ? LocationProvider.create(this) : GeoDataProvider.create(this))
-                .replay(1).refCount().doOnNext(new Action1<IGeoData>() {
-                    @Override
-                    public void call(final IGeoData geoData) {
-                        currentGeo = geoData;
-                    }
-                });
-
+                .replay(1).refCount().doOnNext(rememberGeoData);
+        geoDataObservable.subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe(rememberGeoData);
         directionObservable = DirectionProvider.create(this).replay(1).refCount().doOnNext(new Action1<Float>() {
             @Override
             public void call(final Float direction) {
@@ -114,11 +117,11 @@ public class CgeoApplication extends Application {
     }
 
     public IGeoData currentGeo() {
-        return currentGeo != null ? currentGeo : geoDataObservable().toBlocking().first();
+        return currentGeo;
     }
 
     public Float distanceNonBlocking(final ICoordinates target) {
-        if (currentGeo == null || target.getCoords() == null) {
+        if (target.getCoords() == null) {
             return null;
         }
         return currentGeo.getCoords().distanceTo(target);
