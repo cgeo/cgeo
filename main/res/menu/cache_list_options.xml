@@ -34,40 +34,17 @@
         android:title="@string/caches_select_invert">
     </item>
     <item
-        android:id="@+id/submenu_manage"
-        android:icon="@drawable/ic_menu_save"
-        android:title="@string/caches_manage">
-        <menu>
-            <item
-                android:id="@+id/menu_refresh_stored"
-                android:title="@string/cache_offline_refresh">
-            </item>
-            <item
-                android:id="@+id/menu_move_to_list"
-                android:title="@string/cache_menu_move_list">
-            </item>
-            <item
-                android:id="@+id/menu_drop_caches"
-                android:title="@string/caches_remove_all">
-            </item>
-            <item
-                android:id="@+id/menu_delete_events"
-                android:title="@string/caches_delete_events">
-            </item>
-            <item
-                android:id="@+id/menu_clear_offline_logs"
-                android:title="@string/caches_clear_offlinelogs">
-            </item>
-            <item
-                android:id="@+id/menu_remove_from_history"
-                android:title="@string/cache_clear_history">
-            </item>
-        </menu>
-    </item>
-    <item
-        android:id="@+id/menu_refresh_stored_top"
+        android:id="@+id/menu_refresh_stored"
         android:icon="@drawable/ic_menu_set_as"
         android:title="@string/cache_offline_refresh">
+    </item>
+    <item
+        android:id="@+id/menu_move_to_list"
+        android:title="@string/cache_menu_move_list">
+    </item>
+    <item
+        android:id="@+id/menu_drop_caches"
+        android:title="@string/caches_remove_all">
     </item>
     <item
         android:id="@+id/menu_cache_list_app"
@@ -128,6 +105,18 @@
                 android:title="@string/export_fieldnotes">
             </item>
         </menu>
+    </item>
+    <item
+        android:id="@+id/menu_delete_events"
+        android:title="@string/caches_delete_events">
+    </item>
+    <item
+        android:id="@+id/menu_clear_offline_logs"
+        android:title="@string/caches_clear_offlinelogs">
+    </item>
+    <item
+        android:id="@+id/menu_remove_from_history"
+        android:title="@string/cache_clear_history">
     </item>
 
 </menu>

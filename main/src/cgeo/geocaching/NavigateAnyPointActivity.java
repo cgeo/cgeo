@@ -5,6 +5,7 @@ import butterknife.InjectView;
 import butterknife.Optional;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.activity.INavigationSource;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -13,6 +14,7 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AbstractViewHolder;
+import cgeo.geocaching.ui.NavigationActionProvider;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Formatter;
@@ -24,6 +26,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -44,7 +47,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class NavigateAnyPointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
+public class NavigateAnyPointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate, INavigationSource {
 
     @InjectView(R.id.historyList) protected ListView historyListView;
 
@@ -313,7 +316,12 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.navigate_any_point_activity_options, menu);
-        menu.findItem(R.id.menu_default_navigation).setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
+        final MenuItem menuItem = menu.findItem(R.id.menu_default_navigation);
+        menuItem.setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
+        final NavigationActionProvider navAction = (NavigationActionProvider) MenuItemCompat.getActionProvider(menuItem);
+        if (navAction != null) {
+            navAction.setNavigationSource(this);
+        }
         return true;
     }
 
@@ -539,5 +547,15 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
             return;
         }
         Settings.setAnyCoordinates(coords);
+    }
+
+    @Override
+    public void startDefaultNavigation() {
+        navigateTo();
+    }
+
+    @Override
+    public void startDefaultNavigation2() {
+        NavigationAppFactory.startDefaultNavigationApplication(2, this, getDestination());
     }
 }
