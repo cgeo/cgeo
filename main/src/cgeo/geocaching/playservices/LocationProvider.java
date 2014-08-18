@@ -117,6 +117,7 @@ public class LocationProvider extends LooperCallbacks<IGeoData> implements Conne
 
     @Override
     public void onLocationChanged(final Location location) {
+        location.setProvider(lowPower ? GeoData.LOW_POWER_PROVIDER : GeoData.FUSED_PROVIDER);
         subscriber.onNext(new GeoData(location));
     }
 }

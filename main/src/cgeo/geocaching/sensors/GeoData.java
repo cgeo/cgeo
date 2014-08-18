@@ -9,6 +9,8 @@ import android.location.LocationManager;
 public class GeoData extends Location implements IGeoData {
 
     public static final String INITIAL_PROVIDER = "initial";
+    public static final String FUSED_PROVIDER = "fused";
+    public static final String LOW_POWER_PROVIDER = "low-power";
 
     public GeoData(final Location location) {
         super(location);
@@ -27,8 +29,11 @@ public class GeoData extends Location implements IGeoData {
             return LocationProviderType.NETWORK;
         }
         // LocationManager.FUSED_PROVIDER constant is not available at API level 9
-        if (provider.equals("fused")) {
+        if (provider.equals(FUSED_PROVIDER)) {
             return LocationProviderType.FUSED;
+        }
+        if (provider.equals(LOW_POWER_PROVIDER)) {
+            return LocationProviderType.LOW_POWER;
         }
         return LocationProviderType.LAST;
     }
