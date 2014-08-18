@@ -85,7 +85,7 @@ public class CgeoApplication extends Application {
             isGooglePlayServicesAvailable = true;
         }
         Log.i("Google Play services are " + (isGooglePlayServicesAvailable ? "" : "not ") + "available");
-        setupGeoDataObservables(Settings.useGooglePlayServices());
+        setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
         geoDataObservableLowPower.subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe(REMEMBER_GEODATA);
         directionObservable = DirectionProvider.create(this).replay(1).refCount().doOnNext(new Action1<Float>() {
             @Override
@@ -96,21 +96,17 @@ public class CgeoApplication extends Application {
         gpsStatusObservable = GpsStatusProvider.create(this).share();
     }
 
-    public void setupGeoDataObservables(final boolean useGooglePlayServices) {
-        final Action1<IGeoData> rememberGeoData = new Action1<IGeoData>() {
-            @Override
-            public void call(final IGeoData geoData) {
-                currentGeo = geoData;
+    public void setupGeoDataObservables(final boolean useGooglePlayServices, final boolean useLowPowerLocation) {
+        if (useGooglePlayServices) {
+            geoDataObservable = LocationProvider.getMostPrecise(this, true).replay(1).refCount().doOnNext(REMEMBER_GEODATA);
+            if (useLowPowerLocation) {
+                geoDataObservableLowPower = LocationProvider.getLowPower(this, true).replay(1).refCount().doOnNext(REMEMBER_GEODATA);
+            } else {
+                geoDataObservableLowPower = geoDataObservable;
             }
-        };
-        if (isGooglePlayServicesAvailable) {
-            geoDataObservable = LocationProvider.getMostPrecise(this, true).replay(1).refCount().doOnNext(rememberGeoData);
-            geoDataObservableLowPower = LocationProvider.getLowPower(this, true).replay(1).refCount().doOnNext(rememberGeoData);
-            LocationProvider.getInitialLocation(this, false).subscribeOn(RxUtils.looperCallbacksScheduler).subscribe(rememberGeoData);
         } else {
-            geoDataObservable = GeoDataProvider.create(this).replay(1).refCount().doOnNext(rememberGeoData);
+            geoDataObservable = GeoDataProvider.create(this).replay(1).refCount().doOnNext(REMEMBER_GEODATA);
             geoDataObservableLowPower = geoDataObservable;
-            geoDataObservable.first().subscribeOn(RxUtils.looperCallbacksScheduler).subscribe(rememberGeoData);
         }
     }
 

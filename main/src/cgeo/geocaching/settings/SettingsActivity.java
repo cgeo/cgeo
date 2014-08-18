@@ -365,12 +365,13 @@ public class SettingsActivity extends PreferenceActivity {
 		final Preference memoryDumpPref = getPreference(R.string.pref_memory_dump);
 		memoryDumpPref
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-					@Override public boolean onPreferenceClick(
-							final Preference preference) {
-						DebugUtils.createMemoryDump(SettingsActivity.this);
-						return true;
-					}
-				});
+                    @Override
+                    public boolean onPreferenceClick(
+                            final Preference preference) {
+                        DebugUtils.createMemoryDump(SettingsActivity.this);
+                        return true;
+                    }
+                });
     }
 
     private void initDbLocationPreference() {
@@ -401,15 +402,25 @@ public class SettingsActivity extends PreferenceActivity {
 
     private void initGeolocationPreference() {
         final Preference p = getPreference(R.string.pref_googleplayservices);
+        final Preference p2 = getPreference(R.string.pref_lowpowermode);
         p.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(final Preference preference, final Object newValue) {
                 final boolean useGooglePlayServices = (Boolean) newValue;
-                CgeoApplication.getInstance().setupGeoDataObservables(useGooglePlayServices);
+                p2.setEnabled(useGooglePlayServices);
+                CgeoApplication.getInstance().setupGeoDataObservables(useGooglePlayServices, Settings.useLowPowerMode());
+                return true;
+            }
+        });
+        p2.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+                CgeoApplication.getInstance().setupGeoDataObservables(Settings.useGooglePlayServices(), (Boolean) newValue);
                 return true;
             }
         });
         p.setEnabled(CgeoApplication.getInstance().isGooglePlayServicesAvailable());
+        p2.setEnabled(Settings.useGooglePlayServices());
     }
 
     void initBasicMemberPreferences() {

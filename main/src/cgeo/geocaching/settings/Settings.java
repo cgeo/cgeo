@@ -394,11 +394,11 @@ public class Settings {
     }
 
     public static boolean useGooglePlayServices() {
-        return getBoolean(R.string.pref_googleplayservices, true);
+        return CgeoApplication.getInstance().isGooglePlayServicesAvailable() && getBoolean(R.string.pref_googleplayservices, true);
     }
 
-    public static boolean setUseGooglePlayServices(final boolean useGooglePlayServices) {
-        return putBoolean(R.string.pref_googleplayservices, useGooglePlayServices);
+    public static boolean useLowPowerMode() {
+        return useGooglePlayServices() && getBoolean(R.string.pref_lowpowermode, false);
     }
 
     /**

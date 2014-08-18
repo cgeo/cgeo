@@ -529,8 +529,9 @@
     <string name="init_maintenance_directories_note">c:geo stores images, log images and other files related to a cache in a separate directory. In some cases (like importing/exporting the database) this directory may contain outdated files, which can be deleted here.</string>
     <string name="init_maintenance_directories">Delete orphaned files</string>
     <string name="init_location">Geolocation</string>
-    <string name="init_location_note">On devices equipped with Google Play Services, c:geo can automatically use a better geolocation provider. However, this prevents the use of an external BlueTooth GPS receiver.</string>
+    <string name="init_location_note">On devices equipped with Google Play Services, c:geo can automatically use a better geolocation provider. However, this prevents the use of an external BlueTooth GPS receiver. Also, a low-power mode can prevent the use of the GPS when a highly accurate location is not strictly necessary.</string>
     <string name="init_location_googleplayservices">Use Google Play Services</string>
+    <string name="init_location_lowpower">Low-power mode</string>
     <string name="init_create_memory_dump">Create memory dump</string>
     <string name="init_memory_dump">Memory dump</string>
     <string name="init_memory_dumped">Memory dumped to %s</string>
