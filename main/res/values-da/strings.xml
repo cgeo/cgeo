@@ -78,12 +78,34 @@
   <string name="log_stars_35_description">God</string>
   <string name="log_stars_4_description">Bedre end gennemsnittet</string>
   <string name="log_stars_45_description">Meget god</string>
+  <string name="log_stars_5_description">Fantastisk</string>
   <string name="log_webcam">Webcamfoto taget</string>
   <string name="log_new_log">Log</string>
+  <string name="log_new_log_text">Logbesked</string>
+  <string name="log_announcement">Meddelelse</string>
+  <string name="log_today">I dag</string>
+  <string name="log_yesterday">I går</string>
+  <string name="log_smilies">Smileyer</string>
+  <string name="log_image">Billede</string>
+  <string name="log_image_attach">Vedhæft billede</string>
+  <string name="log_image_stored">Eksisterende</string>
+  <string name="log_image_camera">Nyt</string>
+  <string name="log_image_caption">Billedtekst</string>
+  <string name="log_image_description">Beskrivelse</string>
+  <string name="log_image_scale">Skalering</string>
+  <string-array name="log_image_scales">
+    <item>Ingen skalering</item>
+    <item>512 px</item>
+    <item>640 px</item>
+    <item>800 px</item>
+    <item>1024 px</item>
+  </string-array>
+  <string name="translate_to_sys_lang">Oversæt til %s</string>
+  <string name="translate_to_english">Oversæt til engelsk</string>
   <string name="err_none">Ok</string>
   <string name="err_parse">Login-side kan ikke indlæses</string>
   <string name="err_server">Kan ikke forbinde til Geocaching.com (server eller forbindelsesfejl?)</string>
-  <string name="err_login">Ingen login gemt</string>
+  <string name="err_login">Loginoplysninger mangler</string>
   <string name="err_unknown">Ukendt fejl</string>
   <string name="err_comm">Ukendt forbindelsesfejl</string>
   <string name="err_wrong">Fejl i login</string>
@@ -99,6 +121,8 @@
   <string name="err_auth_process">Godkendelse fejlede.</string>
   <string name="err_cannot_log_visit">c:geo har ikke nok informationer til at logge besøg. Log fra \"Alle detaljer\".</string>
   <string name="err_download_fail">Beklager, c:geo kan ikke hente cachen pga. </string>
+  <string name="err_point_no_position_given_title">Oplysninger mangler</string>
+  <string name="err_point_bear_and_dist_title">Har du brug for hjælp?</string>
   <string name="warn_save_nothing">Der er ikke noget at gemme.</string>
   <string name="warn_no_cache_coord">Der er ingen cache med disse koordinater.</string>
   <string name="loc_last">Sidst kendte</string>
@@ -107,8 +131,12 @@
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Lokaliserer</string>
   <string name="loc_no_addr">Ukendt adresse</string>
+  <string name="loc_gps_disabled">GPS deaktiveret</string>
+  <string name="menu_centerposition">Centrer på min position</string>
   <string name="menu_about">Om c:geo</string>
+  <string name="menu_helpers">Hjælpeprogrammer</string>
   <string name="menu_settings">Indstillinger</string>
+  <string name="menu_history">Historik</string>
   <string name="menu_filter">Filter</string>
   <string name="live_map_button">Live-kort</string>
   <string name="caches_nearby_button">I nærheden</string>
@@ -122,9 +150,35 @@
   <string name="caches_eta_ltm">Under et minut</string>
   <string name="caches_store_offline">Gem Offline</string>
   <string name="caches_on_map">Vis på kort</string>
+  <string name="caches_sort">Sorter</string>
+  <string name="caches_sort_distance">Afstand</string>
+  <string name="caches_sort_terrain">Terræn</string>
+  <string name="caches_sort_size">Størrelse</string>
+  <string name="caches_sort_favorites">Favoritter</string>
+  <string name="caches_sort_favorites_ratio">Favoritter [%]</string>
+  <string name="caches_sort_name">Navn</string>
+  <string name="list_dialog_create">Opret</string>
+  <string name="list_dialog_remove_title">Fjern liste</string>
+  <string name="list_dialog_remove">Fjern</string>
+  <string name="list_dialog_rename_title">Omdøb liste</string>
+  <string name="list_dialog_rename">Omdøb</string>
+  <string name="about_version">Version</string>
   <string name="about_changelog">Ændringslog</string>
   <string name="about_donate">Donér</string>
   <string name="about_donation_more">Donér\nudvikling</string>
+  <string name="about_contributors">Bidragsydere</string>
+  <string name="about_license">Licens</string>
+  <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
+  <string name="about_help">Hjælp</string>
+  <string name="settings_title_services">Tjenester</string>
+  <string name="settings_title_appearance">Udseende</string>
+  <string name="settings_title_cachedetails">Cachedetaljer</string>
+  <string name="settings_title_navigation">Navigation</string>
+  <string name="settings_title_system">System</string>
+  <string name="settings_title_navigation_menu">Navigationsmenu</string>
+  <string name="settings_category_browser">Browser</string>
+  <string name="settings_category_social">Sociale medier</string>
+  <string name="settings_goto_url_button">mere…</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="init_username">Brugernavn</string>
