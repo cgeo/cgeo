@@ -1258,14 +1258,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                     }
                     itemsToDisplay.add(getCacheItem(cache));
                 }
-
-                overlayCaches.updateItems(itemsToDisplay);
-                displayHandler.sendEmptyMessage(INVALIDATE_MAP);
-
-            } else {
-                overlayCaches.updateItems(itemsToDisplay);
-                displayHandler.sendEmptyMessage(INVALIDATE_MAP);
             }
+
+            overlayCaches.updateItems(itemsToDisplay);
+            displayHandler.sendEmptyMessage(INVALIDATE_MAP);
 
             displayHandler.sendEmptyMessage(UPDATE_TITLE);
         } finally {
