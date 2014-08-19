@@ -53,6 +53,9 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     private String guid = null;
     private String geocode = null;
     private String[] viewstates = null;
+    /**
+     * As long as we still fetch the current state of the trackable from the Internet, the user cannot yet send a log.
+     */
     private boolean gettingViewstate = true;
     private Calendar date = Calendar.getInstance();
     private LogType typeSelected = LogType.getById(Settings.getTrackableAction());
@@ -88,7 +91,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
             }
 
             gettingViewstate = false; // we're done, user can post log
-            setLoggingEnabled(true);
 
             showProgress(false);
         }
@@ -211,10 +213,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         }
 
         if (GCLogin.isEmpty(viewstates)) {
-            setLoggingEnabled(false);
             new LoadDataThread().start();
-        } else {
-            setLoggingEnabled(true);
         }
         disableSuggestions(trackingEditText);
     }

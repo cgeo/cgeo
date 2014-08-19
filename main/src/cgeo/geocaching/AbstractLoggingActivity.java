@@ -19,11 +19,6 @@ import android.widget.EditText;
 
 public abstract class AbstractLoggingActivity extends AbstractActionBarActivity {
 
-    /**
-     * sub classes can disable the send button
-     */
-    private boolean enableSend = true;
-
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.abstract_logging_activity, menu);
@@ -54,7 +49,6 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
         }
 
         menu.findItem(R.id.menu_smilies).setVisible(smileyVisible);
-        menu.findItem(R.id.menu_send).setVisible(enableSend);
 
         return true;
     }
@@ -83,11 +77,6 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
     protected final void insertIntoLog(final String newText, final boolean moveCursor) {
         final EditText log = (EditText) findViewById(R.id.log);
         ActivityMixin.insertAtPosition(log, newText, moveCursor);
-    }
-
-    protected final void setLoggingEnabled(final boolean enabled) {
-        enableSend = enabled;
-        invalidateOptionsMenuCompatible();
     }
 
     protected void requestKeyboardForLogging() {

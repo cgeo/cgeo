@@ -196,7 +196,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private void enablePostButton(final boolean enabled) {
         sendButtonEnabled = enabled;
-        invalidateOptionsMenuCompatible();
     }
 
     @Override
