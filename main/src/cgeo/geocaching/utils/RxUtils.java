@@ -13,6 +13,7 @@ import rx.subscriptions.Subscriptions;
 
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.Looper;
 
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -33,7 +34,9 @@ public class RxUtils {
     static {
         looperCallbacksThread.start();
     }
-    public static final Scheduler looperCallbacksScheduler = AndroidSchedulers.handlerThread(new Handler(looperCallbacksThread.getLooper()));
+
+    public static final Looper looperCallbacksLooper = looperCallbacksThread.getLooper();
+    public static final Scheduler looperCallbacksScheduler = AndroidSchedulers.handlerThread(new Handler(looperCallbacksLooper));
     public static final Worker looperCallbacksWorker = looperCallbacksScheduler.createWorker();
 
     public static <T> void waitForCompletion(final BlockingObservable<T> observable) {
