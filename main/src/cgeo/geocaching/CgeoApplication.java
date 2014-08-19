@@ -93,7 +93,7 @@ public class CgeoApplication extends Application {
                 currentDirection = direction;
             }
         });
-        gpsStatusObservable = GpsStatusProvider.create(this).startWith(GpsStatusProvider.NO_GPS).share();
+        gpsStatusObservable = GpsStatusProvider.create(this).replay(1).refCount();
     }
 
     public void setupGeoDataObservables(final boolean useGooglePlayServices, final boolean useLowPowerLocation) {

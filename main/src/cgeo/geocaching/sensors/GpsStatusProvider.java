@@ -13,8 +13,6 @@ import android.location.LocationManager;
 
 public class GpsStatusProvider extends LooperCallbacks<Status> {
 
-    public static final Status NO_GPS = new Status(false, 0, 0);
-
     public static class Status {
         final public boolean gpsEnabled;
         final public int satellitesVisible;
@@ -30,6 +28,8 @@ public class GpsStatusProvider extends LooperCallbacks<Status> {
     private final LocationManager geoManager;
     private final GpsStatus.Listener gpsStatusListener = new GpsStatusListener();
     private Status latest = new Status(false, 0, 0);
+
+    private static final Status NO_GPS = new Status(false, 0, 0);
 
     /**
      * Build a new gps status provider object.
@@ -50,6 +50,7 @@ public class GpsStatusProvider extends LooperCallbacks<Status> {
     @Override
     protected void onStart() {
         Log.d("GpsStatusProvider: starting the GPS status listener");
+        subscriber.onNext(NO_GPS);
         geoManager.addGpsStatusListener(gpsStatusListener);
     }
 
