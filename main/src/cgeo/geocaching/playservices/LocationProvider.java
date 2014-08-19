@@ -2,6 +2,7 @@ package cgeo.geocaching.playservices;
 
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.IGeoData;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxUtils;
 
@@ -145,6 +146,9 @@ public class LocationProvider implements ConnectionCallbacks, OnConnectionFailed
 
     @Override
     public void onLocationChanged(final Location location) {
+        if (Settings.useLowPowerMode()) {
+            location.setProvider(GeoData.LOW_POWER_PROVIDER);
+        }
         subject.onNext(new GeoData(location));
     }
 }
