@@ -34,10 +34,9 @@ import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
+import com.github.amlcurran.showcaseview.AnimationFactory.AnimationEndListener;
+import com.github.amlcurran.showcaseview.AnimationFactory.AnimationStartListener;
 import com.github.amlcurran.showcaseview.targets.Target;
-
-import static com.github.amlcurran.showcaseview.AnimationFactory.AnimationEndListener;
-import static com.github.amlcurran.showcaseview.AnimationFactory.AnimationStartListener;
 
 /**
  * A view which allows you to showcase areas of your app with an explanation.
@@ -121,7 +120,7 @@ public class ShowcaseView extends RelativeLayout
             RelativeLayout.LayoutParams lps = (LayoutParams) generateDefaultLayoutParams();
             lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
             lps.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            lps.setMargins(margin, margin, margin, margin);
+            lps.setMargins(margin, margin, margin, margin * 4);
             mEndButton.setLayoutParams(lps);
             mEndButton.setText(android.R.string.ok);
             if (!hasCustomClickListener) {
