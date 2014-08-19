@@ -1151,6 +1151,10 @@
     <item quantity="one">ontem</item>
     <item quantity="other">%d dias atrás</item>
   </plurals>
+  <plurals name="favorite_points">
+    <item quantity="one">%s favorito</item>
+    <item quantity="other">%s favoritos</item>
+  </plurals>
   <string name="percent_favorite_points">%\  favoritos</string>
   <string name="cgeo_shortcut">Atalho c:geo</string>
   <string name="create_shortcut">Criar atalho</string>
