@@ -371,7 +371,7 @@ public abstract class GCParser {
         final SearchResult result = new SearchResult(parsed.left);
         if (parsed.left == StatusCode.NO_ERROR) {
             result.addAndPutInCache(Collections.singletonList(parsed.right));
-            DataStore.saveLogsWithoutTransaction(parsed.right.getGeocode(), getLogsFromDetails(page).toBlocking().toIterable());
+            DataStore.saveLogsWithoutTransaction(parsed.right.getGeocode(), getLogs(page, Logs.ALL).toBlocking().toIterable());
         }
         return result;
     }
@@ -1370,7 +1370,7 @@ public abstract class GCParser {
     }
 
     @Nullable
-    static String requestHtmlPage(@Nullable final String geocode, @Nullable final String guid, final String log, final String numlogs) {
+    static String requestHtmlPage(@Nullable final String geocode, @Nullable final String guid, final String log) {
         final Parameters params = new Parameters("decrypt", "y");
         if (StringUtils.isNotBlank(geocode)) {
             params.put("wp", geocode);
@@ -1378,7 +1378,7 @@ public abstract class GCParser {
             params.put("guid", guid);
         }
         params.put("log", log);
-        params.put("numlogs", numlogs);
+        params.put("numlogs", "0");
 
         return GCLogin.getInstance().getRequestLogged("http://www.geocaching.com/seek/cache_details.aspx", params);
     }
@@ -1417,7 +1417,7 @@ public abstract class GCParser {
     }
 
     private static String getUserToken(final Geocache cache) {
-        final String page = requestHtmlPage(cache.getGeocode(), null, "n", "0");
+        final String page = requestHtmlPage(cache.getGeocode(), null, "n");
         return TextUtils.getMatch(page, GCConstants.PATTERN_USERTOKEN, "");
     }
 
@@ -1637,27 +1637,14 @@ public abstract class GCParser {
         return StringUtils.replace(input, "../", GCConstants.GC_URL);
     }
 
-    /**
-     * Extract logs from a cache details page.
-     *
-     * @param page
-     *            the text of the details page
-     * @return a list of log entries which will be empty if the logs could not be retrieved
-     *
-     */
-    @NonNull
-    private static Observable<LogEntry> getLogsFromDetails(final String page) {
-        // extract embedded JSON data from page
-        return parseLogs(false, TextUtils.getMatch(page, GCConstants.PATTERN_LOGBOOK, ""));
-    }
-
-    private enum SpecialLogs {
+    private enum Logs {
+        ALL(null),
         FRIENDS("sf"),
         OWN("sp");
 
         final String paramName;
 
-        SpecialLogs(String paramName) {
+        Logs(final String paramName) {
             this.paramName = paramName;
         }
 
@@ -1675,10 +1662,10 @@ public abstract class GCParser {
      *            The logType to request
      * @return Observable<LogEntry> The logs
      */
-    private static Observable<LogEntry> getSpecialLogs(final String page, final SpecialLogs logType) {
-        return Observable.defer(new Func0<Observable<? extends LogEntry>>() {
+    private static Observable<LogEntry> getLogs(final String page, final Logs logType) {
+        return Observable.defer(new Func0<Observable<LogEntry>>() {
             @Override
-            public Observable<? extends LogEntry> call() {
+            public Observable<LogEntry> call() {
                 final MatcherWrapper userTokenMatcher = new MatcherWrapper(GCConstants.PATTERN_USERTOKEN, page);
                 if (!userTokenMatcher.find()) {
                     Log.e("GCParser.loadLogsFromDetails: unable to extract userToken");
@@ -1690,8 +1677,10 @@ public abstract class GCParser {
                         "tkn", userToken,
                         "idx", "1",
                         "num", String.valueOf(GCConstants.NUMBER_OF_LOGS),
-                        logType.getParamName(), Boolean.toString(Boolean.TRUE),
                         "decrypt", "true");
+                if (logType != Logs.ALL) {
+                    params.add(logType.getParamName(), Boolean.toString(Boolean.TRUE));
+                }
                 final HttpResponse response = Network.getRequest("http://www.geocaching.com/seek/geocache.logbook", params);
                 if (response == null) {
                     Log.e("GCParser.loadLogsFromDetails: cannot log logs, response is null");
@@ -1707,7 +1696,7 @@ public abstract class GCParser {
                     Log.e("GCParser.loadLogsFromDetails: unable to read whole response");
                     return Observable.empty();
                 }
-                return parseLogs(true, rawResponse);
+                return parseLogs(logType != Logs.ALL, rawResponse);
             }
         }).subscribeOn(RxUtils.networkScheduler);
     }
@@ -1876,12 +1865,12 @@ public abstract class GCParser {
             return;
         }
 
-        final Observable<LogEntry> logs = getLogsFromDetails(page).subscribeOn(RxUtils.computationScheduler);
+        final Observable<LogEntry> logs = getLogs(page, Logs.ALL);
         Observable<LogEntry> specialLogs;
         if (Settings.isFriendLogsWanted()) {
             CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
-            specialLogs = Observable.merge(getSpecialLogs(page, SpecialLogs.FRIENDS),
-                    getSpecialLogs(page, SpecialLogs.OWN));
+            specialLogs = Observable.merge(getLogs(page, Logs.FRIENDS),
+                    getLogs(page, Logs.OWN));
         } else {
             CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
             specialLogs = Observable.empty();
