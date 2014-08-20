@@ -40,10 +40,8 @@
     <a href="https://github.com/cgeo/cgeo/issues?q=milestone%3A%22Next+feature+release%22+is%3Aclosed">Detailed list of all changes</a>\n
     \n
     <b>Known Limitations/Bugs:</b>\n
-    · Enable live mode not working on a map invoked for a waypoint\n
     · Device menu button not working on map popup\n
       Please use the three dot button instead\n
-    · Own log entries and entries of your friends might be shown doubled in the logbook\n
     · Live map:\n
       Approximated coords due to limitations on the GC-website\n
       Be aware: If navigation is started directly from live map it may also use the approximated coords!\n
