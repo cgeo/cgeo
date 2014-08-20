@@ -134,13 +134,11 @@ public class GCLogin extends AbstractLogin {
         assert loginData != null;  // Caught above
 
         if (getLoginStatus(loginData)) {
-            Log.i("Successfully logged in Geocaching.com as " + username + " (" + Settings.getGCMemberStatus() + ')');
-
             if (switchToEnglish(loginData) && retry) {
                 return login(false);
             }
+            Log.i("Successfully logged in Geocaching.com as " + username + " (" + Settings.getGCMemberStatus() + ')');
             Settings.setCookieStore(Cookies.dumpCookieStore());
-
             return StatusCode.NO_ERROR; // logged in
         }
 
