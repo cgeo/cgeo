@@ -606,6 +606,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             } else {
                 item.setTitle(res.getString(R.string.map_live_enable));
             }
+            item.setVisible(coordsIntent == null);
 
             item = menu.findItem(R.id.menu_mycaches_mode); // own & found caches
             item.setChecked(Settings.isExcludeMyCaches());
