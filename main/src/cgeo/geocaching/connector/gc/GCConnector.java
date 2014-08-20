@@ -143,7 +143,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
         CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
 
-        final String page = GCParser.requestHtmlPage(geocode, guid, "y", String.valueOf(GCConstants.NUMBER_OF_LOGS));
+        final String page = GCParser.requestHtmlPage(geocode, guid, "y");
 
         if (StringUtils.isEmpty(page)) {
             final SearchResult search = new SearchResult();
