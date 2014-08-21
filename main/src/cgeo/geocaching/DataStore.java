@@ -112,35 +112,32 @@ public class DataStore {
                     "cg_caches.direction,"          +    // 16
                     "cg_caches.distance,"           +    // 17
                     "cg_caches.terrain,"            +    // 18
-                    "cg_caches.latlon,"             +    // 19
-                    "cg_caches.location,"           +    // 20
-                    "cg_caches.personal_note,"      +    // 21
-                    "cg_caches.shortdesc,"          +    // 22
-                    "cg_caches.favourite_cnt,"      +    // 23
-                    "cg_caches.rating,"             +    // 24
-                    "cg_caches.votes,"              +    // 25
-                    "cg_caches.myvote,"             +    // 26
-                    "cg_caches.disabled,"           +    // 27
-                    "cg_caches.archived,"           +    // 28
-                    "cg_caches.members,"            +    // 29
-                    "cg_caches.found,"              +    // 30
-                    "cg_caches.favourite,"          +    // 31
-                    "cg_caches.inventoryunknown,"   +    // 32
-                    "cg_caches.onWatchlist,"        +    // 33
-                    "cg_caches.reliable_latlon,"    +    // 34
-                    "cg_caches.coordsChanged,"      +    // 35
-                    "cg_caches.latitude,"           +    // 36
-                    "cg_caches.longitude,"          +    // 37
-                    "cg_caches.finalDefined,"       +    // 38
-                    "cg_caches._id,"                +    // 39
-                    "cg_caches.inventorycoins,"     +    // 40
-                    "cg_caches.inventorytags,"      +    // 41
-                    "cg_caches.logPasswordRequired";     // 42
-
-    //TODO: remove "latlon" field from cache and waypoint tables
+                    "cg_caches.location,"           +    // 19
+                    "cg_caches.personal_note,"      +    // 20
+                    "cg_caches.shortdesc,"          +    // 21
+                    "cg_caches.favourite_cnt,"      +    // 22
+                    "cg_caches.rating,"             +    // 23
+                    "cg_caches.votes,"              +    // 24
+                    "cg_caches.myvote,"             +    // 25
+                    "cg_caches.disabled,"           +    // 26
+                    "cg_caches.archived,"           +    // 27
+                    "cg_caches.members,"            +    // 28
+                    "cg_caches.found,"              +    // 29
+                    "cg_caches.favourite,"          +    // 30
+                    "cg_caches.inventoryunknown,"   +    // 31
+                    "cg_caches.onWatchlist,"        +    // 32
+                    "cg_caches.reliable_latlon,"    +    // 33
+                    "cg_caches.coordsChanged,"      +    // 34
+                    "cg_caches.latitude,"           +    // 35
+                    "cg_caches.longitude,"          +    // 36
+                    "cg_caches.finalDefined,"       +    // 37
+                    "cg_caches._id,"                +    // 38
+                    "cg_caches.inventorycoins,"     +    // 39
+                    "cg_caches.inventorytags,"      +    // 40
+                    "cg_caches.logPasswordRequired";     // 41
 
     /** The list of fields needed for mapping. */
-    private static final String[] WAYPOINT_COLUMNS = new String[] { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latlon", "latitude", "longitude", "note", "own", "visited" };
+    private static final String[] WAYPOINT_COLUMNS = new String[] { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latitude", "longitude", "note", "own", "visited" };
 
     /** Number of days (as ms) after temporarily saved caches are deleted */
     private final static long DAYS_AFTER_CACHE_IS_DELETED = 3 * 24 * 60 * 60 * 1000;
@@ -184,7 +181,6 @@ public class DataStore {
             + "size text, "
             + "difficulty float, "
             + "terrain float, "
-            + "latlon text, "
             + "location text, "
             + "direction double, "
             + "distance double, "
@@ -236,7 +232,6 @@ public class DataStore {
             + "prefix text, "
             + "lookup text, "
             + "name text, "
-            + "latlon text, "
             + "latitude double, "
             + "longitude double, "
             + "note text, "
@@ -639,7 +634,6 @@ public class DataStore {
                                     + "size text, "
                                     + "difficulty float, "
                                     + "terrain float, "
-                                    + "latlon text, "
                                     + "location text, "
                                     + "direction double, "
                                     + "distance double, "
@@ -666,7 +660,7 @@ public class DataStore {
 
                             db.execSQL(dbCreateCachesTemp);
                             db.execSQL("insert into " + dbTableCachesTemp + " select _id,updated,detailed,detailedupdate,visiteddate,geocode,reason,cacheid,guid,type,name,own,owner,owner_real," +
-                                    "hidden,hint,size,difficulty,terrain,latlon,location,direction,distance,latitude,longitude, 0," +
+                                    "hidden,hint,size,difficulty,terrain,location,direction,distance,latitude,longitude, 0," +
                                     "personal_note,shortdesc,description,favourite_cnt,rating,votes,myvote,disabled,archived,members,found,favourite,inventorycoins," +
                                     "inventorytags,inventoryunknown,onWatchlist from " + dbTableCaches);
                             db.execSQL("drop table " + dbTableCaches);
@@ -682,13 +676,12 @@ public class DataStore {
                                     + "prefix text, "
                                     + "lookup text, "
                                     + "name text, "
-                                    + "latlon text, "
                                     + "latitude double, "
                                     + "longitude double, "
                                     + "note text "
                                     + "); ";
                             db.execSQL(dbCreateWaypointsTemp);
-                            db.execSQL("insert into " + dbTableWaypointsTemp + " select _id, geocode, updated, type, prefix, lookup, name, latlon, latitude, longitude, note from " + dbTableWaypoints);
+                            db.execSQL("insert into " + dbTableWaypointsTemp + " select _id, geocode, updated, type, prefix, lookup, name, latitude, longitude, note from " + dbTableWaypoints);
                             db.execSQL("drop table " + dbTableWaypoints);
                             db.execSQL("alter table " + dbTableWaypointsTemp + " rename to " + dbTableWaypoints);
 
@@ -1618,7 +1611,7 @@ public class DataStore {
             int logIndex = -1;
 
             while (cursor.moveToNext()) {
-                final Geocache cache = DataStore.createCacheFromDatabaseContent(cursor);
+                final Geocache cache = createCacheFromDatabaseContent(cursor);
 
                 if (loadFlags.contains(LoadFlag.ATTRIBUTES)) {
                     cache.setAttributes(loadAttributes(cache.getGeocode()));
@@ -1728,25 +1721,25 @@ public class DataStore {
         }
         cache.setTerrain(cursor.getFloat(18));
         // do not set cache.location
-        cache.setCoords(getCoords(cursor, 36, 37));
-        cache.setPersonalNote(cursor.getString(21));
+        cache.setPersonalNote(cursor.getString(20));
         // do not set cache.shortdesc
         // do not set cache.description
-        cache.setFavoritePoints(cursor.getInt(23));
-        cache.setRating(cursor.getFloat(24));
-        cache.setVotes(cursor.getInt(25));
-        cache.setMyVote(cursor.getFloat(26));
-        cache.setDisabled(cursor.getInt(27) == 1);
-        cache.setArchived(cursor.getInt(28) == 1);
-        cache.setPremiumMembersOnly(cursor.getInt(29) == 1);
-        cache.setFound(cursor.getInt(30) == 1);
-        cache.setFavorite(cursor.getInt(31) == 1);
-        cache.setInventoryItems(cursor.getInt(32));
-        cache.setOnWatchlist(cursor.getInt(33) == 1);
-        cache.setReliableLatLon(cursor.getInt(34) > 0);
-        cache.setUserModifiedCoords(cursor.getInt(35) > 0);
-        cache.setFinalDefined(cursor.getInt(38) > 0);
-        cache.setLogPasswordRequired(cursor.getInt(42) > 0);
+        cache.setFavoritePoints(cursor.getInt(22));
+        cache.setRating(cursor.getFloat(23));
+        cache.setVotes(cursor.getInt(24));
+        cache.setMyVote(cursor.getFloat(25));
+        cache.setDisabled(cursor.getInt(26) == 1);
+        cache.setArchived(cursor.getInt(27) == 1);
+        cache.setPremiumMembersOnly(cursor.getInt(28) == 1);
+        cache.setFound(cursor.getInt(29) == 1);
+        cache.setFavorite(cursor.getInt(30) == 1);
+        cache.setInventoryItems(cursor.getInt(31));
+        cache.setOnWatchlist(cursor.getInt(32) == 1);
+        cache.setReliableLatLon(cursor.getInt(33) > 0);
+        cache.setUserModifiedCoords(cursor.getInt(34) > 0);
+        cache.setCoords(getCoords(cursor, 35, 36));
+        cache.setFinalDefined(cursor.getInt(37) > 0);
+        cache.setLogPasswordRequired(cursor.getInt(41) > 0);
 
         Log.d("Loading " + cache.toString() + " (" + cache.getListId() + ") from DB");
 
