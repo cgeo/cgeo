@@ -137,7 +137,7 @@ public class DataStore {
                     "cg_caches.inventorytags,"      +    // 41
                     "cg_caches.logPasswordRequired";     // 42
 
-    //TODO: remove "latlon" field from cache table
+    //TODO: remove "latlon" field from cache and waypoint tables
 
     /** The list of fields needed for mapping. */
     private static final String[] WAYPOINT_COLUMNS = new String[] { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latlon", "latitude", "longitude", "note", "own", "visited" };
@@ -1274,7 +1274,6 @@ public class DataStore {
                 values.put("prefix", oneWaypoint.getPrefix());
                 values.put("lookup", oneWaypoint.getLookup());
                 values.put("name", oneWaypoint.getName());
-                values.put("latlon", oneWaypoint.getLatlon());
                 putCoords(values, oneWaypoint.getCoords());
                 values.put("note", oneWaypoint.getNote());
                 values.put("own", oneWaypoint.isUserDefined() ? 1 : 0);
@@ -1353,7 +1352,6 @@ public class DataStore {
             values.put("prefix", waypoint.getPrefix());
             values.put("lookup", waypoint.getLookup());
             values.put("name", waypoint.getName());
-            values.put("latlon", waypoint.getLatlon());
             putCoords(values, waypoint.getCoords());
             values.put("note", waypoint.getNote());
             values.put("own", waypoint.isUserDefined() ? 1 : 0);
@@ -1830,7 +1828,6 @@ public class DataStore {
         waypoint.setGeocode(cursor.getString(cursor.getColumnIndex("geocode")));
         waypoint.setPrefix(cursor.getString(cursor.getColumnIndex("prefix")));
         waypoint.setLookup(cursor.getString(cursor.getColumnIndex("lookup")));
-        waypoint.setLatlon(cursor.getString(cursor.getColumnIndex("latlon")));
         waypoint.setCoords(getCoords(cursor, cursor.getColumnIndex("latitude"), cursor.getColumnIndex("longitude")));
         waypoint.setNote(cursor.getString(cursor.getColumnIndex("note")));
 

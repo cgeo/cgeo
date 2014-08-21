@@ -735,7 +735,6 @@ public abstract class GCParser {
                     // waypoint latitude and longitude
                     latlon = Html.fromHtml(TextUtils.getMatch(wp[7], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, false, 2, "", false)).toString().trim();
                     if (!StringUtils.startsWith(latlon, "???")) {
-                        waypoint.setLatlon(latlon);
                         waypoint.setCoords(new Geopoint(latlon));
                     }
 
