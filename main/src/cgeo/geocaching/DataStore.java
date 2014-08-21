@@ -212,8 +212,6 @@ public class DataStore {
             + "_id integer primary key autoincrement, "
             + "title text not null, "
             + "updated long not null, "
-            + "latitude double, "
-            + "longitude double "
             + "); ";
     private static final String dbCreateAttributes = ""
             + "create table " + dbTableAttributes + " ("
