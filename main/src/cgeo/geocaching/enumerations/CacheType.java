@@ -4,6 +4,8 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.R;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
@@ -14,7 +16,7 @@ import java.util.Map;
  */
 public enum CacheType {
 
-    TRADITIONAL("traditional", "Traditional Cache", "32bc9333-5e52-4957-b0f6-5a2c8fc7b257", R.string.traditional, R.drawable.type_traditional),
+    TRADITIONAL("traditional", "Traditional Geocache", "32bc9333-5e52-4957-b0f6-5a2c8fc7b257", R.string.traditional, R.drawable.type_traditional),
     MULTI("multi", "Multi-cache", "a5f6d0ad-d2f2-4011-8c14-940a9ebf3c74", R.string.multi, R.drawable.type_multi),
     MYSTERY("mystery", "Unknown Cache", "40861821-1835-4e11-b666-8d41064d03fe", R.string.mystery, R.drawable.type_mystery),
     LETTERBOX("letterbox", "Letterbox hybrid", "4bdd8fb2-d7bc-453f-a9c5-968563b15d24", R.string.letterbox, R.drawable.type_letterbox),
@@ -85,6 +87,10 @@ public enum CacheType {
     }
 
     public static CacheType getByPattern(final String pattern) {
+        // FIXME: hardcode the previous version in case there is a roll-back. To be removed when stabilized. 2014-08-21
+        if (StringUtils.equals(pattern, "Traditional Cache")) {
+            return TRADITIONAL;
+        }
         final CacheType result = (pattern != null) ? CacheType.FIND_BY_PATTERN.get(pattern.toLowerCase(Locale.US).trim()) : null;
         if (result == null) {
             return UNKNOWN;
