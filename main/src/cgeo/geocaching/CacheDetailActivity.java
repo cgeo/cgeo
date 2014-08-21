@@ -237,7 +237,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     finish();
                     return;
                 }
-            } else if (uriHost.contains("opencaching.de")) {
+            } else if (uriHost.contains("opencaching.de") || uriHost.contains("opencaching.fr")) {
                 if (StringUtils.startsWith(uriPath, "/oc")) {
                     geocode = uriPath.substring(1).toUpperCase(Locale.US);
                 } else {

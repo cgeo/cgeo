@@ -324,6 +324,39 @@
                     android:pathPrefix="/viewcache.php"
                     android:scheme="http" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="opencaching.fr"
+                    android:pathPrefix="/OC"
+                    android:scheme="http" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.opencaching.fr"
+                    android:pathPrefix="/OC"
+                    android:scheme="http" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.opencaching.fr"
+                    android:pathPrefix="/viewcache.php"
+                    android:scheme="http" />
+            </intent-filter>
         </activity>
         <activity
             android:name="cgeo.geocaching.TrackableActivity"
