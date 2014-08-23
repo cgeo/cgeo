@@ -17,16 +17,13 @@
         <!-- system elements -->
         <item name="android:windowContentOverlay">@null</item>
         <item name="actionBarStyle">@style/cgeo_main.ActionBarStyle</item>
+        <item name="android:actionBarStyle" tools:ignore="NewApi">@style/cgeo_main.ActionBarStyle</item>
 
-        <!-- KitKat's transperent navigation -->
-        <item name="android:fitsSystemWindows">true</item>
-        <item name="android:windowTranslucentNavigation" tools:ignore="NewApi">true</item>
-    </style>
+    </style>    
 
 
     <style name="cgeo_main" parent="cgeo_main.base">
-        <item name="actionBarStyle">@style/cgeo_main.ActionBarStyle</item>
-        <item name="android:actionBarStyle" tools:ignore="NewApi">@style/cgeo_main.ActionBarStyle</item>
+        <!-- gets modified in v19 to add translucent window decoration -->
     </style>
 
     <style name="cgeo.Widget.AppCompat.Base.ProgressBar.Medium" parent="android:Widget.ProgressBar">
