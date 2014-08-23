@@ -143,7 +143,6 @@
     <issue id="StringFormatInvalid" severity="ignore" />
     <issue id="StringFormatMatches" severity="ignore" />
     <issue id="StringShouldBeInt" severity="ignore" />
-    <issue id="StyleCycle" severity="ignore" />
     <issue id="Suspicious0dp" severity="ignore" />
     <issue id="SuspiciousImport" severity="ignore" />
     <issue id="TextFields" severity="ignore" />
