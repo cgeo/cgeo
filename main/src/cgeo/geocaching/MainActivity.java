@@ -293,7 +293,7 @@ public class MainActivity extends AbstractActionBarActivity {
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;
             case R.id.menu_history:
-                CacheListActivity.startActivityHistory(this);
+                startActivity(CacheListActivity.getHistoryIntent(this));
                 return true;
             case R.id.menu_scan:
                 startScannerApplication();
@@ -579,7 +579,7 @@ public class MainActivity extends AbstractActionBarActivity {
      */
     public void cgeoFindOnMap(final View v) {
         findOnMap.setPressed(true);
-        CGeoMap.startActivityLiveMap(this);
+        startActivity(CGeoMap.getLiveMapIntent(this));
     }
 
     /**
@@ -592,7 +592,7 @@ public class MainActivity extends AbstractActionBarActivity {
         }
 
         nearestView.setPressed(true);
-        CacheListActivity.startActivityNearest(this, app.currentGeo().getCoords());
+        startActivity(CacheListActivity.getNearestIntent(this));
     }
 
     /**

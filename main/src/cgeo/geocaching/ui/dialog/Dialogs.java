@@ -25,8 +25,15 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.ContextThemeWrapper;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.TextView;
+
+import java.util.List;
 
 /**
  * Wrapper for {@link AlertDialog}. If you want to show a simple text, use one of the
@@ -409,5 +416,45 @@ public final class Dialogs {
 
     private static void enableDialogButtonIfNotEmpty(final AlertDialog dialog, final String input) {
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(StringUtils.isNotBlank(input));
+    }
+
+    public static interface ItemWithIcon {
+        /**
+         * @return the drawable
+         */
+        int getIcon();
+    }
+
+    public static <T extends ItemWithIcon> void select(final Activity activity, final String title, final List<T> items, final Action1<T> listener) {
+        final ListAdapter adapter = new ArrayAdapter<T>(
+                activity,
+                android.R.layout.select_dialog_item,
+                android.R.id.text1,
+                items) {
+            @Override
+            public View getView(final int position, final View convertView, final ViewGroup parent) {
+                // standard list entry
+                final View v = super.getView(position, convertView, parent);
+
+                // add image
+                final TextView tv = (TextView) v.findViewById(android.R.id.text1);
+                tv.setCompoundDrawablesWithIntrinsicBounds(items.get(position).getIcon(), 0, 0, 0);
+
+                // Add margin between image and text
+                final int dp5 = (int) (5 * activity.getResources().getDisplayMetrics().density + 0.5f);
+                tv.setCompoundDrawablePadding(dp5);
+
+                return v;
+            }
+        };
+
+        new AlertDialog.Builder(activity)
+                .setTitle(title)
+                .setAdapter(adapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(final DialogInterface dialog, final int item) {
+                        listener.call(items.get(item));
+                    }
+                }).show();
     }
 }

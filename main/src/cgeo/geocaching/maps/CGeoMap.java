@@ -1570,11 +1570,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         fromActivity.startActivity(mapIntent);
     }
 
-    public static void startActivityLiveMap(final Activity fromActivity) {
-        final Intent mapIntent = newIntent(fromActivity);
-        mapIntent.putExtra(EXTRAS_MAP_MODE, MapMode.LIVE);
-        mapIntent.putExtra(EXTRAS_LIVE_ENABLED, Settings.isLiveMap());
-        fromActivity.startActivity(mapIntent);
+    public static Intent getLiveMapIntent(final Activity fromActivity) {
+        return newIntent(fromActivity)
+                .putExtra(EXTRAS_MAP_MODE, MapMode.LIVE)
+                .putExtra(EXTRAS_LIVE_ENABLED, true);
     }
 
     public static void startActivityCoords(final Activity fromActivity, final Geopoint coords, final WaypointType type, final String title) {

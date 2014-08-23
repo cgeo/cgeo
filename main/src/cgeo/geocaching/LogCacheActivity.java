@@ -641,4 +641,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         return true;
     }
 
+    public static Intent getLogCacheIntent(final Activity context, final String cacheId, final String geocode) {
+        final Intent logVisitIntent = new Intent(context, LogCacheActivity.class);
+        logVisitIntent.putExtra(LogCacheActivity.EXTRAS_ID, cacheId);
+        logVisitIntent.putExtra(LogCacheActivity.EXTRAS_GEOCODE, geocode);
+        return logVisitIntent;
+    }
+
 }

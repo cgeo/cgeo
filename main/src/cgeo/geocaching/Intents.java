@@ -1,5 +1,13 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.enumerations.CacheListType;
+
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+
+import android.content.Intent;
+import android.os.Bundle;
+
 public class Intents {
 
     private Intents() {
@@ -18,7 +26,11 @@ public class Intents {
     public static final String EXTRA_KEYWORD = PREFIX + "keyword";
     public static final String EXTRA_KEYWORD_SEARCH = PREFIX + "keyword_search";
     public static final String EXTRA_LIST_ID = PREFIX + "list_id";
-    public static final String EXTRA_LIST_TYPE = PREFIX + "list_type";
+    /**
+     * list type to be used with the cache list activity. Be aware to use the String representation of the corresponding
+     * enum.
+     */
+    private static final String EXTRA_LIST_TYPE = PREFIX + "list_type";
     public static final String EXTRA_MAP_FILE = PREFIX + "map_file";
     public static final String EXTRA_NAME = PREFIX + "name";
     public static final String EXTRA_SEARCH = PREFIX + "search";
@@ -49,4 +61,27 @@ public class Intents {
     public static final String EXTRA_OAUTH_TEMP_TOKEN_SECRET_PREF = PREFIX_OAUTH + "tempSecretPref";
     public static final String EXTRA_OAUTH_TOKEN_PUBLIC_KEY = PREFIX_OAUTH + "publicTokenPref";
     public static final String EXTRA_OAUTH_TOKEN_SECRET_KEY = PREFIX_OAUTH + "secretTokenPref";
+
+    public static Intent putListType(final Intent intent, final @NonNull CacheListType listType) {
+        intent.putExtra(Intents.EXTRA_LIST_TYPE, listType.name());
+        return intent;
+    }
+
+    public static @NonNull CacheListType getListType(final Intent intent) {
+        final Bundle extras = intent.getExtras();
+        if (extras == null) {
+            return CacheListType.OFFLINE;
+        }
+        final String typeName = extras.getString(Intents.EXTRA_LIST_TYPE);
+        if (StringUtils.isBlank(typeName)) {
+            return CacheListType.OFFLINE;
+        }
+        CacheListType listType;
+        try {
+            listType = CacheListType.valueOf(typeName);
+        } catch (final IllegalArgumentException e) {
+            return CacheListType.OFFLINE;
+        }
+        return (listType != null) ? listType : CacheListType.OFFLINE;
+    }
 }

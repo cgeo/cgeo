@@ -453,11 +453,7 @@ public class Geocache implements ICache, IWaypoint {
             ActivityMixin.showToast(fromActivity, fromActivity.getResources().getString(R.string.err_cannot_log_visit));
             return;
         }
-        final Intent logVisitIntent = new Intent(fromActivity, LogCacheActivity.class);
-        logVisitIntent.putExtra(LogCacheActivity.EXTRAS_ID, cacheId);
-        logVisitIntent.putExtra(LogCacheActivity.EXTRAS_GEOCODE, geocode);
-
-        fromActivity.startActivity(logVisitIntent);
+        fromActivity.startActivity(LogCacheActivity.getLogCacheIntent(fromActivity, cacheId, geocode));
     }
 
     public void logOffline(final Activity fromActivity, final LogType logType) {

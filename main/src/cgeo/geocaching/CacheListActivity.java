@@ -388,8 +388,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         // get parameters
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            final Object typeObject = extras.get(Intents.EXTRA_LIST_TYPE);
-            type = (typeObject instanceof CacheListType) ? (CacheListType) typeObject : CacheListType.OFFLINE;
+            type = Intents.getListType(getIntent());
             coords = extras.getParcelable(Intents.EXTRA_COORDS);
         }
         else {
@@ -400,6 +399,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             if (coords == null) {
                 coords = Geopoint.ZERO;
             }
+        }
+        if (type == CacheListType.NEAREST) {
+            coords = CgeoApplication.getInstance().currentGeo().getCoords();
         }
 
         setTitle(title);
@@ -1356,7 +1358,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         if (id == PseudoList.HISTORY_LIST.id) {
-            CacheListActivity.startActivityHistory(this);
+            startActivity(CacheListActivity.getHistoryIntent(this));
             finish();
             return;
         }
@@ -1446,7 +1448,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     public static void startActivityOffline(final Context context) {
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
-        cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.OFFLINE);
+        Intents.putListType(cachesIntent, CacheListType.OFFLINE);
         context.startActivity(cachesIntent);
     }
 
@@ -1455,7 +1457,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return;
         }
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
-        cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.OWNER);
+        Intents.putListType(cachesIntent, CacheListType.OWNER);
         cachesIntent.putExtra(Intents.EXTRA_USERNAME, userName);
         context.startActivity(cachesIntent);
     }
@@ -1473,7 +1475,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return;
         }
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
-        cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.FINDER);
+        Intents.putListType(cachesIntent, CacheListType.FINDER);
         cachesIntent.putExtra(Intents.EXTRA_USERNAME, userName);
         context.startActivity(cachesIntent);
     }
@@ -1494,25 +1496,17 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
-    public static void startActivityNearest(final AbstractActivity context, final Geopoint coordsNow) {
-        if (!isValidCoords(context, coordsNow)) {
-            return;
-        }
-        final Intent cachesIntent = new Intent(context, CacheListActivity.class);
-        cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.NEAREST);
-        cachesIntent.putExtra(Intents.EXTRA_COORDS, coordsNow);
-        context.startActivity(cachesIntent);
+    public static Intent getNearestIntent(final Activity context) {
+        return Intents.putListType(new Intent(context, CacheListActivity.class), CacheListType.NEAREST);
     }
 
-    public static void startActivityHistory(final Context context) {
-        final Intent cachesIntent = new Intent(context, CacheListActivity.class);
-        cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.HISTORY);
-        context.startActivity(cachesIntent);
+    public static Intent getHistoryIntent(final Context context) {
+        return Intents.putListType(new Intent(context, CacheListActivity.class), CacheListType.HISTORY);
     }
 
     public static void startActivityAddress(final Context context, final Geopoint coords, final String address) {
         final Intent addressIntent = new Intent(context, CacheListActivity.class);
-        addressIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.ADDRESS);
+        Intents.putListType(addressIntent, CacheListType.ADDRESS);
         addressIntent.putExtra(Intents.EXTRA_COORDS, coords);
         addressIntent.putExtra(Intents.EXTRA_ADDRESS, address);
         context.startActivity(addressIntent);
@@ -1523,7 +1517,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return;
         }
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
-        cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.COORDINATE);
+        Intents.putListType(cachesIntent, CacheListType.COORDINATE);
         cachesIntent.putExtra(Intents.EXTRA_COORDS, coords);
         context.startActivity(cachesIntent);
     }
@@ -1542,15 +1536,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return;
         }
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
-        cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.KEYWORD);
+        Intents.putListType(cachesIntent, CacheListType.KEYWORD);
         cachesIntent.putExtra(Intents.EXTRA_KEYWORD, keyword);
         context.startActivity(cachesIntent);
     }
 
     public static void startActivityMap(final Context context, final SearchResult search) {
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
-        cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.MAP);
         cachesIntent.putExtra(Intents.EXTRA_SEARCH, search);
+        Intents.putListType(cachesIntent, CacheListType.MAP);
         context.startActivity(cachesIntent);
     }
 
@@ -1561,7 +1555,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return;
         }
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
-        cachesIntent.putExtra(Intents.EXTRA_LIST_TYPE, CacheListType.POCKET);
+        Intents.putListType(cachesIntent, CacheListType.POCKET);
         cachesIntent.putExtra(Intents.EXTRA_NAME, pq.getName());
         cachesIntent.putExtra(Intents.EXTRA_POCKET_GUID, guid);
         context.startActivity(cachesIntent);
