@@ -49,6 +49,10 @@ public final class ImageUtils {
     private static final int[] ROTATION = new int[] { 90, 180, 270 };
     private static final int MAX_DISPLAY_IMAGE_XY = 800;
 
+    // Images whose URL contains one of those patterns will not be available on the Images tab
+    // for opening into an external application.
+    private final static String[] NO_EXTERNAL = new String[] { "geocheck.org" };
+
     private ImageUtils() {
         // Do not let this class be instantiated, this is a utility class.
     }
@@ -340,5 +344,9 @@ public final class ImageUtils {
         public void updateFrom(final Observable<? extends Drawable> drawableObservable) {
             drawableObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(this);
         }
+    }
+
+    public static boolean canBeOpenedExternally(final String source) {
+        return !containsPattern(source, NO_EXTERNAL);
     }
 }

@@ -161,10 +161,6 @@ public class Geocache implements ICache, IWaypoint {
 
     private Handler changeNotificationHandler = null;
 
-    // Images whose URL contains one of those patterns will not be available on the Images tab
-    // for opening into an external application.
-    private final static String[] NO_EXTERNAL = new String[]{"geocheck.org"};
-
     /**
      * Create a new cache. To be used everywhere except for the GPX parser
      */
@@ -1706,7 +1702,7 @@ public class Geocache implements ICache, IWaypoint {
         Html.fromHtml(getDescription(), new ImageGetter() {
             @Override
             public Drawable getDrawable(final String source) {
-                if (!urls.contains(source) && !ImageUtils.containsPattern(source, NO_EXTERNAL)) {
+                if (!urls.contains(source) && ImageUtils.canBeOpenedExternally(source)) {
                     images.add(new Image(source, geocode));
                     urls.add(source);
                 }
