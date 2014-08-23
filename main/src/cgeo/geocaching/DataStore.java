@@ -1531,7 +1531,7 @@ public class DataStore {
             return new HashSet<>();
         }
 
-        final Set<Geocache> result = new HashSet<>();
+        final Set<Geocache> result = new HashSet<>(geocodes.size());
         final Set<String> remaining = new HashSet<>(geocodes);
 
         if (loadFlags.contains(LoadFlag.CACHE_BEFORE)) {
@@ -2834,7 +2834,7 @@ public class DataStore {
         final StringBuilder whereExpr = new StringBuilder("geocode in (");
         final Iterator<String> iterator = geocodes.iterator();
         while (true) {
-            whereExpr.append(DatabaseUtils.sqlEscapeString(StringUtils.upperCase(iterator.next())));
+            DatabaseUtils.appendEscapedSQLString(whereExpr, StringUtils.upperCase(iterator.next()));
             if (!iterator.hasNext()) {
                 break;
             }
