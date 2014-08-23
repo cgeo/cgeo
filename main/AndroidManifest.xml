@@ -214,16 +214,18 @@
         </activity>
         <activity
             android:exported="true"
+            android:name=".maps.MapActivity"
+            android:label="@string/map_map" >
+        </activity>
+        <activity
             android:name=".maps.google.v1.GoogleMapActivity"
             android:label="@string/map_map" >
         </activity>
         <activity
-            android:exported="true"
             android:name=".maps.mapsforge.MapsforgeMapActivity"
             android:label="@string/map_map" >
         </activity>
         <activity
-            android:exported="true"
             android:name=".maps.mapsforge.v024.MapsforgeMapActivity024"
             android:label="@string/map_map" >
         </activity>

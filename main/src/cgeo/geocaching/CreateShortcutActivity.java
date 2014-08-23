@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.maps.MapActivity;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.Dialogs.ItemWithIcon;
 
@@ -62,9 +63,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
     private void promptForShortcut() {
         final List<Shortcut> shortcuts = new ArrayList<>();
 
-        // TODO: The shortcut invokes the Google/Mapsforge selection which was active at time of shortcut creation.
-        // We need a real LiveMap activity to be able to dynamically select the used renderer
-        // shortcuts.add(new Shortcut(R.string.live_map_button, R.drawable.main_live, CGeoMap.getLiveMapIntent(this)));
+        shortcuts.add(new Shortcut(R.string.live_map_button, R.drawable.main_live, new Intent(this, MapActivity.class)));
         shortcuts.add(new Shortcut(R.string.caches_nearby_button, R.drawable.main_nearby, CacheListActivity.getNearestIntent(this)));
 
         // TODO: make logging activities ask for cache/trackable when being invoked externally
