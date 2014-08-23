@@ -47,38 +47,7 @@ public final class CalendarActivity extends Activity {
      * @param entry
      */
     private void selectCalendarForAdding(final CalendarEntry entry) {
-        final String[] projection = new String[] { "_id", "displayName" };
-        final Uri calendarProvider = Compatibility.getCalendarProviderURI();
-
-        final Cursor cursor = managedQuery(calendarProvider, projection, "selected=1", null, null);
-
-        if (cursor == null || cursor.getCount() <= 0) {
-            showToast(R.string.event_fail);
-            finish();
-            return;
-        }
-
-        final SparseArray<String> calendars = new SparseArray<>();
-        cursor.moveToFirst();
-
-        final int indexId = cursor.getColumnIndex("_id");
-        final int indexName = cursor.getColumnIndex("displayName");
-
-        do {
-            final String idString = cursor.getString(indexId);
-            if (idString != null) {
-                try {
-                    int id = Integer.parseInt(idString);
-                    final String calName = cursor.getString(indexName);
-
-                    if (id > 0 && calName != null) {
-                        calendars.put(id, calName);
-                    }
-                } catch (NumberFormatException e) {
-                    Log.e(LOG_TAG, "CalendarActivity.selectCalendarForAdding", e);
-                }
-            }
-        } while (cursor.moveToNext());
+        final SparseArray<String> calendars = queryCalendars();
 
         if (calendars.size() == 0) {
             showToast(R.string.event_fail);
@@ -108,6 +77,48 @@ public final class CalendarActivity extends Activity {
             }
         });
         builder.create().show();
+    }
+
+    private SparseArray<String> queryCalendars() {
+        final SparseArray<String> calendars = new SparseArray<>();
+
+        final String[] projection = new String[] { "_id", "displayName" };
+        final Uri calendarProvider = Compatibility.getCalendarProviderURI();
+
+        Cursor cursor = null;
+        try {
+            cursor = getContentResolver().query(calendarProvider, projection, "selected=1", null, null);
+
+            if (cursor == null) {
+                return calendars;
+            }
+
+            cursor.moveToFirst();
+
+            final int indexId = cursor.getColumnIndex("_id");
+            final int indexName = cursor.getColumnIndex("displayName");
+
+            do {
+                final String idString = cursor.getString(indexId);
+                if (idString != null) {
+                    try {
+                        int id = Integer.parseInt(idString);
+                        final String calName = cursor.getString(indexName);
+
+                        if (id > 0 && calName != null) {
+                            calendars.put(id, calName);
+                        }
+                    } catch (NumberFormatException e) {
+                        Log.e(LOG_TAG, "CalendarActivity.selectCalendarForAdding", e);
+                    }
+                }
+            } while (cursor.moveToNext());
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return calendars;
     }
 
     public final void showToast(final int res) {
