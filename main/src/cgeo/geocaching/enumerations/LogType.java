@@ -117,4 +117,8 @@ public enum LogType {
     public final boolean isFoundLog() {
         return this == LogType.FOUND_IT || this == LogType.ATTENDED || this == LogType.WEBCAM_PHOTO_TAKEN;
     }
+
+    public boolean mustConfirmLog() {
+        return this == ARCHIVE || this == NEEDS_ARCHIVE;
+    }
 }

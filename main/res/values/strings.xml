@@ -1275,5 +1275,7 @@
     <string name="cgeo_shortcut">c:geo shortcut</string>
     <string name="create_shortcut">Create shortcut</string>
     <string name="send">Send</string>
-
+    <string name="confirm_log_title">Unusual log type</string>
+    <string name="confirm_log_message">You want to log \'%s\'. Are you sure?</string>
+    
 </resources>

@@ -599,7 +599,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_send:
-                sendLog();
+                sendLogAndConfirm();
                 return true;
             case R.id.menu_image:
                 selectImage();
@@ -618,16 +618,30 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         return super.onOptionsItemSelected(item);
     }
 
-    private void sendLog() {
+    private void sendLogAndConfirm() {
         if (!sendButtonEnabled) {
             Dialogs.message(this, R.string.log_post_not_possible);
+            return;
+        }
+        if (typeSelected.mustConfirmLog()) {
+            Dialogs.confirm(this, R.string.confirm_log_title, res.getString(R.string.confirm_log_message, typeSelected.getL10n()), new OnClickListener() {
+
+                @Override
+                public void onClick(final DialogInterface dialog, final int which) {
+                    sendLogInternal();
+                }
+            });
         }
         else {
-            final String message = res.getString(StringUtils.isBlank(imageUri.getPath()) ?
-                    R.string.log_saving :
-                    R.string.log_saving_and_uploading);
-            new Poster(this, message).execute(currentLogText(), currentLogPassword());
+            sendLogInternal();
         }
+    }
+
+    private void sendLogInternal() {
+        final String message = res.getString(StringUtils.isBlank(imageUri.getPath()) ?
+                R.string.log_saving :
+                R.string.log_saving_and_uploading);
+        new Poster(this, message).execute(currentLogText(), currentLogPassword());
     }
 
     @Override
