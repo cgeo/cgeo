@@ -18,6 +18,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import rx.Observable;
 import rx.functions.Action1;
+import rx.functions.Func1;
 
 import android.app.Application;
 import android.view.ViewConfiguration;
@@ -88,7 +89,12 @@ public class CgeoApplication extends Application {
         Log.i("Google Play services are " + (isGooglePlayServicesAvailable ? "" : "not ") + "available");
         setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
         geoDataObservableLowPower.subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe(rememberGeodataAction);
-        directionObservable = RotationProvider.create(this).onErrorResumeNext(OrientationProvider.create(this)).replay(1).refCount().doOnNext(new Action1<Float>() {
+        directionObservable = RotationProvider.create(this).onErrorResumeNext(new Func1<Throwable, Observable<? extends Float>>() {
+            @Override
+            public Observable<? extends Float> call(final Throwable throwable) {
+                return OrientationProvider.create(CgeoApplication.this);
+            }
+        }).replay(1).refCount().doOnNext(new Action1<Float>() {
             @Override
             public void call(final Float direction) {
                 currentDirection = direction;
