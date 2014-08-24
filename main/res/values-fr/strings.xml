@@ -210,6 +210,7 @@
   <string name="loc_last">Aucun</string>
   <string name="loc_net">Réseau</string>
   <string name="loc_fused">Fusionné</string>
+  <string name="loc_low_power">Éco</string>
   <string name="loc_gps">Gps</string>
   <string name="loc_sat">Satellites</string>
   <string name="loc_trying">Localisation en cours…</string>
@@ -369,6 +370,7 @@
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Activer</string>
   <string name="init_oc_ro_description">Autoriser c:geo à utiliser opencaching.ro pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
+  <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Activer</string>
   <string name="init_oc_uk_description">Autoriser c:geo à utiliser opencaching.org.uk pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
   <string name="init_gcvote">GCvote.com</string>
@@ -543,6 +545,10 @@
   <string name="auth_dialog_completed_twitter">c:geo est maintenant autorisé à poster sur Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
+  <string name="auth_ocnl">opencaching.nl</string>
+  <string name="auth_ocus">opencaching.us</string>
+  <string name="auth_ocro">opencaching.ro</string>
+  <string name="auth_ocuk">opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:geo est désormais autorisé à interagir avec %s.</string>
   <plurals name="cache_counts">
     <item quantity="one">%1$d cache</item>
@@ -1166,4 +1172,10 @@
   <string name="cgeo_shortcut">c:geo raccourci</string>
   <string name="create_shortcut">Créer un raccourci</string>
   <string name="send">Envoyer</string>
+  <string name="showcase_logcache_title">Envoi du journal</string>
+  <string name="showcase_logcache_text">N\'oubliez pas, beaucoup de commandes sont maintenant dans la barre de titre. Ici, l\'envoi du journal.</string>
+  <string name="showcase_main_title">Nouveaux menus</string>
+  <string name="showcase_main_text">c:geo place maintenant les entrées de menu dans la barre de titre. Certaines sont cachées derrière les trois points. Un appui long donne la description d\'un bouton.</string>
+  <string name="confirm_log_title">Type inhabituel d\'entrée de journal</string>
+  <string name="confirm_log_message">Vous allez envoyer \'%s\'. Êtes-vous sûr(e) ?</string>
 </resources>
