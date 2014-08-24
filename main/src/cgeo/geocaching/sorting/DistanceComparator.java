@@ -3,6 +3,7 @@ package cgeo.geocaching.sorting;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.geopoint.Geopoint;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,9 +16,10 @@ public class DistanceComparator extends AbstractCacheComparator {
     final private List<Geocache> list;
     private boolean cachedDistances;
 
-    public DistanceComparator(final Geopoint coords, List<Geocache> list) {
+    public DistanceComparator(final Geopoint coords, final List<Geocache> list) {
         this.coords = coords;
-        this.list = list;
+        // create new list so we can iterate over the list in parallel with the cache list adapter
+        this.list = new ArrayList<>(list);
     }
 
     /**
