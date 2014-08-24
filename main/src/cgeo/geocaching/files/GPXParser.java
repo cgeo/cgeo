@@ -8,6 +8,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -120,12 +122,12 @@ public abstract class GPXParser extends FileParser {
     private final class UserDataListener implements EndTextElementListener {
         private final int index;
 
-        public UserDataListener(int index) {
+        public UserDataListener(final int index) {
             this.index = index;
         }
 
         @Override
-        public void end(String user) {
+        public void end(final String user) {
             userData[index] = validate(user);
         }
     }
@@ -250,13 +252,13 @@ public abstract class GPXParser extends FileParser {
         }
     }
 
-    protected GPXParser(int listIdIn, String namespaceIn, String versionIn) {
+    protected GPXParser(final int listIdIn, final String namespaceIn, final String versionIn) {
         listId = listIdIn;
         namespace = namespaceIn;
         version = versionIn;
     }
 
-    static Date parseDate(String inputUntrimmed) throws ParseException {
+    static Date parseDate(final String inputUntrimmed) throws ParseException {
         String input = inputUntrimmed.trim();
         // remove milliseconds to reduce number of needed patterns
         final MatcherWrapper matcher = new MatcherWrapper(PATTERN_MILLISECONDS, input);
@@ -280,7 +282,7 @@ public abstract class GPXParser extends FileParser {
         root.getChild(namespace, "url").setEndTextElementListener(new EndTextElementListener() {
 
             @Override
-            public void end(String body) {
+            public void end(final String body) {
                 scriptUrl = body;
             }
         });
@@ -289,7 +291,7 @@ public abstract class GPXParser extends FileParser {
         waypoint.setStartElementListener(new StartElementListener() {
 
             @Override
-            public void start(Attributes attrs) {
+            public void start(final Attributes attrs) {
                 try {
                     if (attrs.getIndex("lat") > -1 && attrs.getIndex("lon") > -1) {
                         final String latitude = attrs.getValue("lat");
@@ -399,7 +401,7 @@ public abstract class GPXParser extends FileParser {
         waypoint.getChild(namespace, "time").setEndTextElementListener(new EndTextElementListener() {
 
             @Override
-            public void end(String body) {
+            public void end(final String body) {
                 try {
                     cache.setHidden(parseDate(body));
                 } catch (final Exception e) {
@@ -412,7 +414,7 @@ public abstract class GPXParser extends FileParser {
         waypoint.getChild(namespace, "name").setEndTextElementListener(new EndTextElementListener() {
 
             @Override
-            public void end(String body) {
+            public void end(final String body) {
                 name = body;
 
                 String content = body.trim();
@@ -431,7 +433,7 @@ public abstract class GPXParser extends FileParser {
         waypoint.getChild(namespace, "desc").setEndTextElementListener(new EndTextElementListener() {
 
             @Override
-            public void end(String body) {
+            public void end(final String body) {
                 desc = body;
 
                 cache.setShortDescription(validate(body));
@@ -442,7 +444,7 @@ public abstract class GPXParser extends FileParser {
         waypoint.getChild(namespace, "cmt").setEndTextElementListener(new EndTextElementListener() {
 
             @Override
-            public void end(String body) {
+            public void end(final String body) {
                 cmt = body;
 
                 cache.setDescription(validate(body));
@@ -453,7 +455,7 @@ public abstract class GPXParser extends FileParser {
         waypoint.getChild(namespace, "type").setEndTextElementListener(new EndTextElementListener() {
 
             @Override
-            public void end(String body) {
+            public void end(final String body) {
                 final String[] content = StringUtils.split(body, '|');
                 if (content.length > 0) {
                     type = content[0].toLowerCase(Locale.US).trim();
@@ -477,7 +479,7 @@ public abstract class GPXParser extends FileParser {
         waypoint.getChild(namespace, "url").setEndTextElementListener(new EndTextElementListener() {
 
             @Override
-            public void end(String url) {
+            public void end(final String url) {
                 final MatcherWrapper matcher = new MatcherWrapper(PATTERN_GUID, url);
                 if (matcher.matches()) {
                     final String guid = matcher.group(1);
@@ -497,7 +499,7 @@ public abstract class GPXParser extends FileParser {
         waypoint.getChild(namespace, "urlname").setEndTextElementListener(new EndTextElementListener() {
 
             @Override
-            public void end(String urlName) {
+            public void end(final String urlName) {
                 if (cache.getName().equals(cache.getGeocode()) && StringUtils.startsWith(cache.getGeocode(), "WM")) {
                     cache.setName(StringUtils.trim(urlName));
                 }
@@ -520,7 +522,7 @@ public abstract class GPXParser extends FileParser {
             gcCache.setStartElementListener(new StartElementListener() {
 
                 @Override
-                public void start(Attributes attrs) {
+                public void start(final Attributes attrs) {
                     try {
                         if (attrs.getIndex("id") > -1) {
                             cache.setCacheId(attrs.getValue("id"));
@@ -541,7 +543,7 @@ public abstract class GPXParser extends FileParser {
             gcCache.getChild(nsGC, "name").setEndTextElementListener(new EndTextElementListener() {
 
                 @Override
-                public void end(String cacheName) {
+                public void end(final String cacheName) {
                     cache.setName(validate(cacheName));
                 }
             });
@@ -550,7 +552,7 @@ public abstract class GPXParser extends FileParser {
             gcCache.getChild(nsGC, "owner").setEndTextElementListener(new EndTextElementListener() {
 
                 @Override
-                public void end(String ownerUserId) {
+                public void end(final String ownerUserId) {
                     cache.setOwnerUserId(validate(ownerUserId));
                 }
             });
@@ -559,7 +561,7 @@ public abstract class GPXParser extends FileParser {
             gcCache.getChild(nsGC, "placed_by").setEndTextElementListener(new EndTextElementListener() {
 
                 @Override
-                public void end(String ownerDisplayName) {
+                public void end(final String ownerDisplayName) {
                     cache.setOwnerDisplayName(validate(ownerDisplayName));
                 }
             });
@@ -568,7 +570,7 @@ public abstract class GPXParser extends FileParser {
             gcCache.getChild(nsGC, "type").setEndTextElementListener(new EndTextElementListener() {
 
                 @Override
-                public void end(String body) {
+                public void end(final String body) {
                     cache.setType(CacheType.getByPattern(validate(body)));
                 }
             });
@@ -577,7 +579,7 @@ public abstract class GPXParser extends FileParser {
             gcCache.getChild(nsGC, "container").setEndTextElementListener(new EndTextElementListener() {
 
                 @Override
-                public void end(String body) {
+                public void end(final String body) {
                     cache.setSize(CacheSize.getById(validate(body)));
                 }
             });
@@ -597,7 +599,7 @@ public abstract class GPXParser extends FileParser {
 
             gcAttribute.setStartElementListener(new StartElementListener() {
                 @Override
-                public void start(Attributes attrs) {
+                public void start(final Attributes attrs) {
                     try {
                         if (attrs.getIndex("id") > -1 && attrs.getIndex("inc") > -1) {
                             final int attributeId = Integer.parseInt(attrs.getValue("id"));
@@ -617,7 +619,7 @@ public abstract class GPXParser extends FileParser {
             gcCache.getChild(nsGC, "difficulty").setEndTextElementListener(new EndTextElementListener() {
 
                 @Override
-                public void end(String body) {
+                public void end(final String body) {
                     try {
                         cache.setDifficulty(Float.parseFloat(body));
                     } catch (final NumberFormatException e) {
@@ -630,7 +632,7 @@ public abstract class GPXParser extends FileParser {
             gcCache.getChild(nsGC, "terrain").setEndTextElementListener(new EndTextElementListener() {
 
                 @Override
-                public void end(String body) {
+                public void end(final String body) {
                     try {
                         cache.setTerrain(Float.parseFloat(body));
                     } catch (final NumberFormatException e) {
@@ -643,7 +645,7 @@ public abstract class GPXParser extends FileParser {
             gcCache.getChild(nsGC, "country").setEndTextElementListener(new EndTextElementListener() {
 
                 @Override
-                public void end(String country) {
+                public void end(final String country) {
                     if (StringUtils.isBlank(cache.getLocation())) {
                         cache.setLocation(validate(country));
                     } else {
@@ -656,7 +658,7 @@ public abstract class GPXParser extends FileParser {
             gcCache.getChild(nsGC, "state").setEndTextElementListener(new EndTextElementListener() {
 
                 @Override
-                public void end(String state) {
+                public void end(final String state) {
                     final String trimmedState = state.trim();
                     if (StringUtils.isNotEmpty(trimmedState)) { // state can be completely empty
                         if (StringUtils.isBlank(cache.getLocation())) {
@@ -672,7 +674,7 @@ public abstract class GPXParser extends FileParser {
             gcCache.getChild(nsGC, "encoded_hints").setEndTextElementListener(new EndTextElementListener() {
 
                 @Override
-                public void end(String encoded) {
+                public void end(final String encoded) {
                     cache.setHint(validate(encoded));
                 }
             });
@@ -680,7 +682,7 @@ public abstract class GPXParser extends FileParser {
             gcCache.getChild(nsGC, "short_description").setEndTextElementListener(new EndTextElementListener() {
 
                 @Override
-                public void end(String shortDesc) {
+                public void end(final String shortDesc) {
                     cache.setShortDescription(validate(shortDesc));
                 }
             });
@@ -688,7 +690,7 @@ public abstract class GPXParser extends FileParser {
             gcCache.getChild(nsGC, "long_description").setEndTextElementListener(new EndTextElementListener() {
 
                 @Override
-                public void end(String desc) {
+                public void end(final String desc) {
                     cache.setDescription(validate(desc));
                 }
             });
@@ -703,7 +705,7 @@ public abstract class GPXParser extends FileParser {
             gcTB.setStartElementListener(new StartElementListener() {
 
                 @Override
-                public void start(Attributes attrs) {
+                public void start(final Attributes attrs) {
                     trackable = new Trackable();
 
                     try {
@@ -733,7 +735,7 @@ public abstract class GPXParser extends FileParser {
             gcTB.getChild(nsGC, "name").setEndTextElementListener(new EndTextElementListener() {
 
                 @Override
-                public void end(String tbName) {
+                public void end(final String tbName) {
                     trackable.setName(validate(tbName));
                 }
             });
@@ -747,7 +749,7 @@ public abstract class GPXParser extends FileParser {
             gcLog.setStartElementListener(new StartElementListener() {
 
                 @Override
-                public void start(Attributes attrs) {
+                public void start(final Attributes attrs) {
                     log = new LogEntry("", 0, LogType.UNKNOWN, "");
 
                     try {
@@ -765,6 +767,13 @@ public abstract class GPXParser extends FileParser {
                 @Override
                 public void end() {
                     if (log.type != LogType.UNKNOWN) {
+                        if (log.type.isFoundLog() && StringUtils.isNotBlank(log.author)) {
+                            final IConnector connector = ConnectorFactory.getConnector(cache);
+                            if (connector instanceof ILogin && StringUtils.equals(log.author, ((ILogin) connector).getUserName())) {
+                                cache.setFound(true);
+                                cache.setVisitedDate(log.date);
+                            }
+                        }
                         logs.add(log);
                     }
                 }
@@ -774,7 +783,7 @@ public abstract class GPXParser extends FileParser {
             gcLog.getChild(nsGC, "date").setEndTextElementListener(new EndTextElementListener() {
 
                 @Override
-                public void end(String body) {
+                public void end(final String body) {
                     try {
                         log.date = parseDate(body).getTime();
                     } catch (final Exception e) {
@@ -787,7 +796,7 @@ public abstract class GPXParser extends FileParser {
             gcLog.getChild(nsGC, "type").setEndTextElementListener(new EndTextElementListener() {
 
                 @Override
-                public void end(String body) {
+                public void end(final String body) {
                     final String logType = validate(body);
                     log.type = LogType.getByType(logType);
                 }
@@ -797,7 +806,7 @@ public abstract class GPXParser extends FileParser {
             gcLog.getChild(nsGC, "finder").setEndTextElementListener(new EndTextElementListener() {
 
                 @Override
-                public void end(String finderName) {
+                public void end(final String finderName) {
                     log.author = validate(finderName);
                 }
             });
@@ -806,7 +815,7 @@ public abstract class GPXParser extends FileParser {
             gcLog.getChild(nsGC, "text").setEndTextElementListener(new EndTextElementListener() {
 
                 @Override
-                public void end(String logText) {
+                public void end(final String logText) {
                     log.log = validate(logText);
                 }
             });
@@ -814,7 +823,7 @@ public abstract class GPXParser extends FileParser {
 
         try {
             progressStream = new ProgressInputStream(stream);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(progressStream, CharEncoding.UTF_8));
+            final BufferedReader reader = new BufferedReader(new InputStreamReader(progressStream, CharEncoding.UTF_8));
             Xml.parse(new InvalidXMLCharacterFilterReader(reader), root.getContentHandler());
             return DataStore.loadCaches(result, EnumSet.of(LoadFlag.DB_MINIMAL));
         } catch (final SAXException e) {
@@ -833,7 +842,7 @@ public abstract class GPXParser extends FileParser {
             gsak.getChild(gsakNamespace, "Watch").setEndTextElementListener(new EndTextElementListener() {
 
                 @Override
-                public void end(String watchList) {
+                public void end(final String watchList) {
                     cache.setOnWatchlist(Boolean.valueOf(watchList.trim()));
                 }
             });
@@ -847,7 +856,7 @@ public abstract class GPXParser extends FileParser {
             gsak.getChild(gsakNamespace, "Parent").setEndTextElementListener(new EndTextElementListener() {
 
                 @Override
-                public void end(String body) {
+                public void end(final String body) {
                     parentCacheCode = body;
                 }
             });
@@ -855,7 +864,7 @@ public abstract class GPXParser extends FileParser {
             gsak.getChild(gsakNamespace, "FavPoints").setEndTextElementListener(new EndTextElementListener() {
 
                 @Override
-                public void end(String favoritePoints) {
+                public void end(final String favoritePoints) {
                     try {
                         cache.setFavoritePoints(Integer.parseInt(favoritePoints));
                     }
@@ -894,7 +903,7 @@ public abstract class GPXParser extends FileParser {
         cgeoVisited.setEndTextElementListener(new EndTextElementListener() {
 
             @Override
-            public void end(String visited) {
+            public void end(final String visited) {
                 wptVisited = Boolean.valueOf(visited.trim());
             }
         });
@@ -904,7 +913,7 @@ public abstract class GPXParser extends FileParser {
         cgeoUserDefined.setEndTextElementListener(new EndTextElementListener() {
 
             @Override
-            public void end(String userDefined) {
+            public void end(final String userDefined) {
                 wptUserDefined = Boolean.valueOf(userDefined.trim());
             }
         });
@@ -917,7 +926,7 @@ public abstract class GPXParser extends FileParser {
      * @param cache
      *            currently imported cache
      */
-    protected void afterParsing(Geocache cache) {
+    protected void afterParsing(final Geocache cache) {
         // can be overridden by sub classes
     }
 
@@ -930,7 +939,7 @@ public abstract class GPXParser extends FileParser {
      */
     protected abstract Element getCacheParent(Element waypoint);
 
-    protected static String validate(String input) {
+    protected static String validate(final String input) {
         if ("nil".equalsIgnoreCase(input)) {
             return "";
         }

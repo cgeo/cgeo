@@ -419,7 +419,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
                 if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
                     // update geocache in DB
-                    if (typeSelected == LogType.FOUND_IT || typeSelected == LogType.ATTENDED || typeSelected == LogType.WEBCAM_PHOTO_TAKEN) {
+                    if (typeSelected.isFoundLog()) {
                         cache.setFound(true);
                         cache.setVisitedDate(new Date().getTime());
                     }
