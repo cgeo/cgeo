@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.playservices.LocationProvider;
-import cgeo.geocaching.sensors.DirectionProvider;
+import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDataProvider;
 import cgeo.geocaching.sensors.GpsStatusProvider;
@@ -87,7 +87,7 @@ public class CgeoApplication extends Application {
         Log.i("Google Play services are " + (isGooglePlayServicesAvailable ? "" : "not ") + "available");
         setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
         geoDataObservableLowPower.subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe(rememberGeodataAction);
-        directionObservable = DirectionProvider.create(this).replay(1).refCount().doOnNext(new Action1<Float>() {
+        directionObservable = OrientationProvider.create(this).replay(1).refCount().doOnNext(new Action1<Float>() {
             @Override
             public void call(final Float direction) {
                 currentDirection = direction;

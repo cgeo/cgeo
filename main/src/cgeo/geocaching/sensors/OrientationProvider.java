@@ -1,5 +1,6 @@
 package cgeo.geocaching.sensors;
 
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxUtils.LooperCallbacks;
 
 import rx.Observable;
@@ -10,15 +11,20 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-public class DirectionProvider extends LooperCallbacks<Float> implements SensorEventListener {
+public class OrientationProvider extends LooperCallbacks<Float> implements SensorEventListener {
 
     private final SensorManager sensorManager;
     private final Sensor orientationSensor;
 
     @SuppressWarnings("deprecation")
-    protected DirectionProvider(final Context context) {
+    protected OrientationProvider(final Context context) {
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         orientationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+        if (orientationSensor != null) {
+            Log.d("OrientationProvider: sensor found");
+        } else {
+            Log.w("OrientationProvider: no orientation sensor on this device");
+        }
     }
 
     @Override
@@ -39,19 +45,23 @@ public class DirectionProvider extends LooperCallbacks<Float> implements SensorE
     @Override
     public void onStart() {
         if (orientationSensor != null) {
+            Log.d("OrientationProvider: starting the orientation provider");
             sensorManager.registerListener(this, orientationSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        } else {
+            subscriber.onError(new RuntimeException("orientation sensor is absent on this device"));
         }
     }
 
     @Override
     public void onStop() {
         if (orientationSensor != null) {
+            Log.d("OrientationProvider: stopping the orientation provider");
             sensorManager.unregisterListener(this);
         }
     }
 
     public static Observable<Float> create(final Context context) {
-        return Observable.create(new DirectionProvider(context));
+        return Observable.create(new OrientationProvider(context));
     }
 
 }
