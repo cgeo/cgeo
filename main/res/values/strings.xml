@@ -1271,7 +1271,7 @@
     <string name="send">Send</string>
     
     <string name="showcase_logcache_title">Sending the log</string>
-    <string name="showcase_logcache_text">Remember, many commands are now in the action bar. There you find the button for sending the finished log.</string>
+    <string name="showcase_logcache_text">Remember, many commands are now in the title bar. There you find the button for sending the finished log.</string>
     <string name="showcase_main_title">New menus</string>
     <string name="showcase_main_text">c:geo now places menu items in the title bar like other modern apps. Some items are hidden behind the dotted symbol. Long press a button to see its description.</string>
     
