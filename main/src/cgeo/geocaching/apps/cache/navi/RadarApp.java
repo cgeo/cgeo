@@ -16,8 +16,8 @@ class RadarApp extends AbstractRadarApp {
 
     @Override
     protected void addCoordinates(final Intent intent, final Geopoint coords) {
-        intent.putExtra("latitude", (float) coords.getLatitude());
-        intent.putExtra("longitude", (float) coords.getLongitude());
+        intent.putExtra(RADAR_EXTRA_LATITUDE, (float) coords.getLatitude());
+        intent.putExtra(RADAR_EXTRA_LONGITUDE, (float) coords.getLongitude());
     }
 
 }

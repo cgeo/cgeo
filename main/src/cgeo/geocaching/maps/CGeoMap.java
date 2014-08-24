@@ -6,6 +6,7 @@ import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Waypoint;
@@ -124,16 +125,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private static final int INVALIDATE_MAP = 1;
     private static final int UPDATE_PROGRESS = 0;
     private static final int FINISHED_LOADING_DETAILS = 1;
-
-    //Menu
-    private static final String EXTRAS_GEOCODE = "geocode";
-    private static final String EXTRAS_COORDS = "coords";
-    private static final String EXTRAS_WPTTYPE = "wpttype";
-    private static final String EXTRAS_MAPSTATE = "mapstate";
-    private static final String EXTRAS_SEARCH = "search";
-    private static final String EXTRAS_MAP_TITLE = "mapTitle";
-    private static final String EXTRAS_MAP_MODE = "mapMode";
-    private static final String EXTRAS_LIVE_ENABLED = "liveEnabled";
 
     private static final String BUNDLE_MAP_SOURCE = "mapSource";
     private static final String BUNDLE_MAP_STATE = "mapState";
@@ -402,14 +393,14 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         // Get parameters from the intent
         final Bundle extras = activity.getIntent().getExtras();
         if (extras != null) {
-            mapMode = (MapMode) extras.get(EXTRAS_MAP_MODE);
-            isLiveEnabled = extras.getBoolean(EXTRAS_LIVE_ENABLED, false);
-            searchIntent = extras.getParcelable(EXTRAS_SEARCH);
-            geocodeIntent = extras.getString(EXTRAS_GEOCODE);
-            coordsIntent = extras.getParcelable(EXTRAS_COORDS);
-            waypointTypeIntent = WaypointType.findById(extras.getString(EXTRAS_WPTTYPE));
-            mapStateIntent = extras.getIntArray(EXTRAS_MAPSTATE);
-            mapTitle = extras.getString(EXTRAS_MAP_TITLE);
+            mapMode = (MapMode) extras.get(Intents.EXTRA_MAP_MODE);
+            isLiveEnabled = extras.getBoolean(Intents.EXTRA_LIVE_ENABLED, false);
+            searchIntent = extras.getParcelable(Intents.EXTRA_SEARCH);
+            geocodeIntent = extras.getString(Intents.EXTRA_GEOCODE);
+            coordsIntent = extras.getParcelable(Intents.EXTRA_COORDS);
+            waypointTypeIntent = WaypointType.findById(extras.getString(Intents.EXTRA_WPTTYPE));
+            mapStateIntent = extras.getIntArray(Intents.EXTRA_MAPSTATE);
+            mapTitle = extras.getString(Intents.EXTRA_MAP_TITLE);
         }
         else {
             mapMode = MapMode.LIVE;
@@ -850,19 +841,19 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         // prepare information to restart a similar view
         final Intent mapIntent = new Intent(activity, Settings.getMapProvider().getMapClass());
 
-        mapIntent.putExtra(EXTRAS_SEARCH, searchIntent);
-        mapIntent.putExtra(EXTRAS_GEOCODE, geocodeIntent);
+        mapIntent.putExtra(Intents.EXTRA_SEARCH, searchIntent);
+        mapIntent.putExtra(Intents.EXTRA_GEOCODE, geocodeIntent);
         if (coordsIntent != null) {
-            mapIntent.putExtra(EXTRAS_COORDS, coordsIntent);
+            mapIntent.putExtra(Intents.EXTRA_COORDS, coordsIntent);
         }
-        mapIntent.putExtra(EXTRAS_WPTTYPE, waypointTypeIntent != null ? waypointTypeIntent.id : null);
-        mapIntent.putExtra(EXTRAS_MAP_TITLE, mapTitle);
-        mapIntent.putExtra(EXTRAS_MAP_MODE, mapMode);
-        mapIntent.putExtra(EXTRAS_LIVE_ENABLED, isLiveEnabled);
+        mapIntent.putExtra(Intents.EXTRA_WPTTYPE, waypointTypeIntent != null ? waypointTypeIntent.id : null);
+        mapIntent.putExtra(Intents.EXTRA_MAP_TITLE, mapTitle);
+        mapIntent.putExtra(Intents.EXTRA_MAP_MODE, mapMode);
+        mapIntent.putExtra(Intents.EXTRA_LIVE_ENABLED, isLiveEnabled);
 
         final int[] mapState = currentMapState();
         if (mapState != null) {
-            mapIntent.putExtra(EXTRAS_MAPSTATE, mapState);
+            mapIntent.putExtra(Intents.EXTRA_MAPSTATE, mapState);
         }
 
         // start the new map
@@ -1561,41 +1552,41 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     public static void startActivitySearch(final Activity fromActivity, final SearchResult search, final String title) {
         final Intent mapIntent = newIntent(fromActivity);
-        mapIntent.putExtra(EXTRAS_SEARCH, search);
-        mapIntent.putExtra(EXTRAS_MAP_MODE, MapMode.LIST);
-        mapIntent.putExtra(EXTRAS_LIVE_ENABLED, false);
+        mapIntent.putExtra(Intents.EXTRA_SEARCH, search);
+        mapIntent.putExtra(Intents.EXTRA_MAP_MODE, MapMode.LIST);
+        mapIntent.putExtra(Intents.EXTRA_LIVE_ENABLED, false);
         if (StringUtils.isNotBlank(title)) {
-            mapIntent.putExtra(CGeoMap.EXTRAS_MAP_TITLE, title);
+            mapIntent.putExtra(Intents.EXTRA_MAP_TITLE, title);
         }
         fromActivity.startActivity(mapIntent);
     }
 
     public static Intent getLiveMapIntent(final Activity fromActivity) {
         return newIntent(fromActivity)
-                .putExtra(EXTRAS_MAP_MODE, MapMode.LIVE)
-                .putExtra(EXTRAS_LIVE_ENABLED, true);
+                .putExtra(Intents.EXTRA_MAP_MODE, MapMode.LIVE)
+                .putExtra(Intents.EXTRA_LIVE_ENABLED, true);
     }
 
     public static void startActivityCoords(final Activity fromActivity, final Geopoint coords, final WaypointType type, final String title) {
         final Intent mapIntent = newIntent(fromActivity);
-        mapIntent.putExtra(EXTRAS_MAP_MODE, MapMode.COORDS);
-        mapIntent.putExtra(EXTRAS_LIVE_ENABLED, false);
-        mapIntent.putExtra(EXTRAS_COORDS, coords);
+        mapIntent.putExtra(Intents.EXTRA_MAP_MODE, MapMode.COORDS);
+        mapIntent.putExtra(Intents.EXTRA_LIVE_ENABLED, false);
+        mapIntent.putExtra(Intents.EXTRA_COORDS, coords);
         if (type != null) {
-            mapIntent.putExtra(EXTRAS_WPTTYPE, type.id);
+            mapIntent.putExtra(Intents.EXTRA_WPTTYPE, type.id);
         }
         if (StringUtils.isNotBlank(title)) {
-            mapIntent.putExtra(EXTRAS_MAP_TITLE, title);
+            mapIntent.putExtra(Intents.EXTRA_MAP_TITLE, title);
         }
         fromActivity.startActivity(mapIntent);
     }
 
     public static void startActivityGeoCode(final Activity fromActivity, final String geocode) {
         final Intent mapIntent = newIntent(fromActivity);
-        mapIntent.putExtra(EXTRAS_MAP_MODE, MapMode.SINGLE);
-        mapIntent.putExtra(EXTRAS_LIVE_ENABLED, false);
-        mapIntent.putExtra(EXTRAS_GEOCODE, geocode);
-        mapIntent.putExtra(EXTRAS_MAP_TITLE, geocode);
+        mapIntent.putExtra(Intents.EXTRA_MAP_MODE, MapMode.SINGLE);
+        mapIntent.putExtra(Intents.EXTRA_LIVE_ENABLED, false);
+        mapIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
+        mapIntent.putExtra(Intents.EXTRA_MAP_TITLE, geocode);
         fromActivity.startActivity(mapIntent);
     }
 

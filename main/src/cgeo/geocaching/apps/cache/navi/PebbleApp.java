@@ -20,7 +20,7 @@ class PebbleApp extends AbstractRadarApp {
 
     @Override
     protected void addCoordinates(final Intent intent, final Geopoint coords) {
-        intent.putExtra("latitude", coords.getLatitude());
-        intent.putExtra("longitude", coords.getLongitude());
+        intent.putExtra(RADAR_EXTRA_LATITUDE, coords.getLatitude());
+        intent.putExtra(RADAR_EXTRA_LONGITUDE, coords.getLongitude());
     }
 }

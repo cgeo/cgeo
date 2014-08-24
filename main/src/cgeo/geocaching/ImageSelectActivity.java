@@ -48,11 +48,6 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     @InjectView(R.id.cancel) protected Button clearButton;
     @InjectView(R.id.image_preview) protected ImageView imagePreview;
 
-    static final String EXTRAS_CAPTION = "caption";
-    static final String EXTRAS_DESCRIPTION = "description";
-    static final String EXTRAS_URI_AS_STRING = "uri";
-    static final String EXTRAS_SCALE = "scale";
-
     private static final String SAVED_STATE_IMAGE_CAPTION = "cgeo.geocaching.saved_state_image_caption";
     private static final String SAVED_STATE_IMAGE_DESCRIPTION = "cgeo.geocaching.saved_state_image_description";
     private static final String SAVED_STATE_IMAGE_URI = "cgeo.geocaching.saved_state_image_uri";
@@ -80,10 +75,10 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         // Get parameters from intent and basic cache information from database
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            imageCaption = extras.getString(EXTRAS_CAPTION);
-            imageDescription = extras.getString(EXTRAS_DESCRIPTION);
-            imageUri = Uri.parse(extras.getString(EXTRAS_URI_AS_STRING));
-            scaleChoiceIndex = extras.getInt(EXTRAS_SCALE, scaleChoiceIndex);
+            imageCaption = extras.getString(Intents.EXTRA_CAPTION);
+            imageDescription = extras.getString(Intents.EXTRA_DESCRIPTION);
+            imageUri = Uri.parse(extras.getString(Intents.EXTRA_URI_AS_STRING));
+            scaleChoiceIndex = extras.getInt(Intents.EXTRA_SCALE, scaleChoiceIndex);
         }
 
         // Restore previous state
@@ -97,7 +92,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         cameraButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 selectImageFromCamera();
             }
         });
@@ -105,7 +100,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         storedButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 selectImageFromStorage();
             }
         });
@@ -123,20 +118,20 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         scaleView.setSelection(scaleChoiceIndex);
         scaleView.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+            public void onItemSelected(final AdapterView<?> arg0, final View arg1, final int arg2, final long arg3) {
                 scaleChoiceIndex = scaleView.getSelectedItemPosition();
                 Settings.setLogImageScale(scaleChoiceIndex);
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
+            public void onNothingSelected(final AdapterView<?> arg0) {
             }
         });
 
         saveButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 saveImageInfo(true);
             }
         });
@@ -144,7 +139,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         clearButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 saveImageInfo(false);
             }
         });
@@ -162,17 +157,17 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         outState.putInt(SAVED_STATE_IMAGE_SCALE, scaleChoiceIndex);
     }
 
-    public void saveImageInfo(boolean saveInfo) {
+    public void saveImageInfo(final boolean saveInfo) {
         if (saveInfo) {
             final String filename = writeScaledImage(imageUri.getPath());
             if (filename != null) {
                 imageUri = Uri.parse(filename);
                 final Intent intent = new Intent();
                 syncEditTexts();
-                intent.putExtra(EXTRAS_CAPTION, imageCaption);
-                intent.putExtra(EXTRAS_DESCRIPTION, imageDescription);
-                intent.putExtra(EXTRAS_URI_AS_STRING, imageUri.toString());
-                intent.putExtra(EXTRAS_SCALE, scaleChoiceIndex);
+                intent.putExtra(Intents.EXTRA_CAPTION, imageCaption);
+                intent.putExtra(Intents.EXTRA_DESCRIPTION, imageDescription);
+                intent.putExtra(Intents.EXTRA_URI_AS_STRING, imageUri.toString());
+                intent.putExtra(Intents.EXTRA_SCALE, scaleChoiceIndex);
                 setResult(RESULT_OK, intent);
             } else {
                 showToast(res.getString(R.string.err_select_logimage_failed));
@@ -193,7 +188,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
 
     private void selectImageFromCamera() {
         // create Intent to take a picture and return control to the calling application
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         imageUri = ImageUtils.getOutputImageFileUri(); // create a file to save the image
         if (imageUri == null) {
@@ -207,14 +202,14 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     }
 
     private void selectImageFromStorage() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/jpeg");
 
         startActivityForResult(Intent.createChooser(intent, "Select Image"), SELECT_STORED_IMAGE);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         if (resultCode == RESULT_CANCELED) {
             // User cancelled the image capture
             showToast(getResources().getString(R.string.info_select_logimage_cancelled));
@@ -232,7 +227,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         if (data != null) {
             final Uri selectedImage = data.getData();
             if (Build.VERSION.SDK_INT < VERSION_CODES.KITKAT) {
-                String[] filePathColumn = { MediaColumns.DATA };
+                final String[] filePathColumn = { MediaColumns.DATA };
 
                 Cursor cursor = null;
                 try {
@@ -243,14 +238,14 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
                     }
                     cursor.moveToFirst();
 
-                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    String filePath = cursor.getString(columnIndex);
+                    final int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    final String filePath = cursor.getString(columnIndex);
                     if (StringUtils.isBlank(filePath)) {
                         showFailure();
                         return;
                     }
                     imageUri = Uri.parse(filePath);
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     Log.e("ImageSelectActivity.onActivityResult", e);
                     showFailure();
                 } finally {
@@ -269,7 +264,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
                     output = new FileOutputStream(outputFile);
                     LocalStorage.copy(input, output);
                     imageUri = Uri.fromFile(outputFile);
-                } catch (FileNotFoundException e) {
+                } catch (final FileNotFoundException e) {
                     Log.e("ImageSelectActivity.onStartResult", e);
                 } finally {
                     IOUtils.closeQuietly(input);

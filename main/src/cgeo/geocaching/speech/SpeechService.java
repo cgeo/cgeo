@@ -1,5 +1,6 @@
 package cgeo.geocaching.speech;
 
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -31,7 +32,6 @@ public class SpeechService extends Service implements OnInitListener {
 
     private static final int SPEECH_MINPAUSE_SECONDS = 5;
     private static final int SPEECH_MAXPAUSE_SECONDS = 30;
-    private static final String EXTRA_TARGET_COORDS = "target";
     private static Activity startingActivity;
     private static boolean isRunning = false;
     /**
@@ -152,7 +152,7 @@ public class SpeechService extends Service implements OnInitListener {
     @Override
     public int onStartCommand(final Intent intent, final int flags, final int startId) {
         if (intent != null) {
-            target = intent.getParcelableExtra(EXTRA_TARGET_COORDS);
+            target = intent.getParcelableExtra(Intents.EXTRA_COORDS);
         }
         return START_NOT_STICKY; // service can be stopped by system, if under memory pressure
     }
@@ -168,7 +168,7 @@ public class SpeechService extends Service implements OnInitListener {
         isRunning = true;
         startingActivity = activity;
         final Intent talkingService = new Intent(activity, SpeechService.class);
-        talkingService.putExtra(EXTRA_TARGET_COORDS, dstCoords);
+        talkingService.putExtra(Intents.EXTRA_COORDS, dstCoords);
         activity.startService(talkingService);
     }
 

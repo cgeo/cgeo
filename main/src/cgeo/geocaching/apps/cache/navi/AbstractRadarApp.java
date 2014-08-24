@@ -9,6 +9,9 @@ import android.content.Intent;
 
 public abstract class AbstractRadarApp extends AbstractPointNavigationApp {
 
+    protected static final String RADAR_EXTRA_LONGITUDE = "longitude";
+    protected static final String RADAR_EXTRA_LATITUDE = "latitude";
+
     private final String intentAction;
 
     protected AbstractRadarApp(final String name, final int id, final String intent, final String packageName) {

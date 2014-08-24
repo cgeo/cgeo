@@ -51,8 +51,6 @@ import java.util.Date;
 import java.util.List;
 
 public class LogCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent {
-    static final String EXTRAS_GEOCODE = "geocode";
-    static final String EXTRAS_ID = "id";
 
     private static final String SAVED_STATE_RATING = "cgeo.geocaching.saved_state_rating";
     private static final String SAVED_STATE_TYPE = "cgeo.geocaching.saved_state_type";
@@ -205,9 +203,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         // Get parameters from intent and basic cache information from database
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            geocode = extras.getString(EXTRAS_GEOCODE);
+            geocode = extras.getString(Intents.EXTRA_GEOCODE);
             if (StringUtils.isBlank(geocode)) {
-                final String cacheid = extras.getString(EXTRAS_ID);
+                final String cacheid = extras.getString(Intents.EXTRA_ID);
                 if (StringUtils.isNotBlank(cacheid)) {
                     geocode = DataStore.getGeocodeForGuid(cacheid);
                 }
@@ -576,9 +574,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private void selectImage() {
         final Intent selectImageIntent = new Intent(this, ImageSelectActivity.class);
-        selectImageIntent.putExtra(ImageSelectActivity.EXTRAS_CAPTION, imageCaption);
-        selectImageIntent.putExtra(ImageSelectActivity.EXTRAS_DESCRIPTION, imageDescription);
-        selectImageIntent.putExtra(ImageSelectActivity.EXTRAS_URI_AS_STRING, imageUri.toString());
+        selectImageIntent.putExtra(Intents.EXTRA_CAPTION, imageCaption);
+        selectImageIntent.putExtra(Intents.EXTRA_DESCRIPTION, imageDescription);
+        selectImageIntent.putExtra(Intents.EXTRA_URI_AS_STRING, imageUri.toString());
 
         startActivityForResult(selectImageIntent, SELECT_IMAGE);
     }
@@ -587,9 +585,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         if (requestCode == SELECT_IMAGE) {
             if (resultCode == RESULT_OK) {
-                imageCaption = data.getStringExtra(ImageSelectActivity.EXTRAS_CAPTION);
-                imageDescription = data.getStringExtra(ImageSelectActivity.EXTRAS_DESCRIPTION);
-                imageUri = Uri.parse(data.getStringExtra(ImageSelectActivity.EXTRAS_URI_AS_STRING));
+                imageCaption = data.getStringExtra(Intents.EXTRA_CAPTION);
+                imageDescription = data.getStringExtra(Intents.EXTRA_DESCRIPTION);
+                imageUri = Uri.parse(data.getStringExtra(Intents.EXTRA_URI_AS_STRING));
             } else if (resultCode != RESULT_CANCELED) {
                 // Image capture failed, advise user
                 showToast(getResources().getString(R.string.err_select_logimage_failed));
@@ -643,8 +641,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     public static Intent getLogCacheIntent(final Activity context, final String cacheId, final String geocode) {
         final Intent logVisitIntent = new Intent(context, LogCacheActivity.class);
-        logVisitIntent.putExtra(LogCacheActivity.EXTRAS_ID, cacheId);
-        logVisitIntent.putExtra(LogCacheActivity.EXTRAS_GEOCODE, geocode);
+        logVisitIntent.putExtra(Intents.EXTRA_ID, cacheId);
+        logVisitIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
         return logVisitIntent;
     }
 
