@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import butterknife.ButterKnife;
 
+import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
@@ -20,6 +21,8 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
+
+import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -637,7 +640,14 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         menu.findItem(R.id.menu_image).setVisible(cache.supportsLogImages());
         menu.findItem(R.id.save).setVisible(true);
         menu.findItem(R.id.clear).setVisible(true);
+        presentShowcase();
         return true;
     }
 
+    @Override
+    protected ShowcaseViewBuilder getShowcase() {
+        return new ShowcaseViewBuilder(this)
+                .setTarget(new ActionItemTarget(this, R.id.menu_send))
+                .setContent(R.string.showcase_logcache_title, R.string.showcase_logcache_text);
+    }
 }
