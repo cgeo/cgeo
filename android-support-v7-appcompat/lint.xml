@@ -43,6 +43,7 @@
     <issue id="GradleCompatible" severity="ignore" />
     <issue id="GradleDependency" severity="ignore" />
     <issue id="GradleDeprecated" severity="ignore" />
+    <issue id="GradleDynamicVersion" severity="ignore" />
     <issue id="GradleGetter" severity="ignore" />
     <issue id="GradleIdeError" severity="ignore" />
     <issue id="GradleOverrides" severity="ignore" />
@@ -127,6 +128,10 @@
     <issue id="ResourceAsColor" severity="ignore" />
     <issue id="ResourceCycle" severity="ignore" />
     <issue id="ResourceName" severity="ignore" />
+    <issue id="RtlCompat" severity="ignore" />
+    <issue id="RtlEnabled" severity="ignore" />
+    <issue id="RtlHardcoded" severity="ignore" />
+    <issue id="RtlSymmetry" severity="ignore" />
     <issue id="ScrollViewCount" severity="ignore" />
     <issue id="ScrollViewSize" severity="ignore" />
     <issue id="SdCardPath" severity="ignore" />
