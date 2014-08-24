@@ -76,7 +76,7 @@
   <string name="log_tb_changeall">Az összes megváltoztatása</string>
   <string name="log_save">Mentés</string>
   <string name="log_saving">Log mentése…</string>
-  <string name="log_saving_and_uploading">Log beküldése és kép feltöltése...</string>
+  <string name="log_saving_and_uploading">Log beküldése és kép feltöltése…</string>
   <string name="log_clear">Törlés</string>
   <string name="log_post_not_possible">Log oldal betöltése…</string>
   <string name="log_add">Hozzáadás</string>
@@ -341,7 +341,7 @@
   <string name="settings_category_geocaching">Geocaching</string>
   <string name="settings_category_social">Közösségi média</string>
   <string name="settings_category_logging_other">Egyéb logolási beállítások</string>
-  <string name="settings_goto_url_button">Tovább...</string>
+  <string name="settings_goto_url_button">Tovább…</string>
   <string name="settings_title_gc">Geocaching.com</string>
   <string name="settings_title_ec">Extremcaching.com</string>
   <string name="settings_title_ox">Opencaching.com (Garmin)</string>
@@ -533,7 +533,7 @@
   <string name="auth_authorize">Hozzáférés engedélyezése a c:geo-nak</string>
   <string name="auth_start">Engedélyezés indítása</string>
   <string name="auth_again">Engedélyezés indítása újra</string>
-  <string name="auth_dialog_waiting">Várakozás %s-re...</string>
+  <string name="auth_dialog_waiting">Várakozás %s-re…</string>
   <string name="auth_explain_short">A következő folyamat lehetővé teszi a <b>c:geo</b>-nak a hozzáférést %s-hez.</string>
   <string name="auth_explain_long">A \"c:geo engedélyezése\" gomb megnyomása után a böngészőben megnyílik a(z) %s oldal. Jelentkezz be ezen az oldalon, és engedélyezd a <b>c:geo</b> hozzáférését a fiókodhoz.</string>
   <string name="auth_dialog_completed_twitter">A c:geo engedélyt kapott, hogy bejegyzéseket küldjön a Twitter-re.</string>
@@ -617,9 +617,9 @@
   <string name="cache_dialog_watchlist_remove_title">Figyelőlista</string>
   <string name="cache_dialog_watchlist_remove_message">Láda eltávolítása a figyelőlistádról…</string>
   <string name="cache_dialog_favorite_add_title">Kedvenc</string>
-  <string name="cache_dialog_favorite_add_message">Geoláda hozzáadás a kedvencekhez...</string>
+  <string name="cache_dialog_favorite_add_message">Geoláda hozzáadás a kedvencekhez…</string>
   <string name="cache_dialog_favorite_remove_title">Kedvenc</string>
-  <string name="cache_dialog_favorite_remove_message">Geoláda eltávolítása a kedvencek közül...</string>
+  <string name="cache_dialog_favorite_remove_message">Geoláda eltávolítása a kedvencek közül…</string>
   <string name="cache_menu_navigate">Navigáció</string>
   <string name="cache_menu_navigation_drive">Autós navigáció</string>
   <string name="cache_menu_navigation_walk">Gyalogos navigáció</string>
@@ -737,11 +737,11 @@
   <string name="waypoint_save_and_modify_on_website">A geoláda koordinátáiként megadni a c:geo-ban és a weboldalon</string>
   <string name="waypoint_reset_cache_coords">Geoláda koordinátáinak visszaállítása</string>
   <string name="waypoint_coordinates_has_been_reset_on_website">Geoláda koordinátáinak visszaállítása megtörtént a weboldalon.</string>
-  <string name="waypoint_coordinates_being_reset_on_website">Geoláda koordinátáinak visszaállítása a weboldalon...</string>
+  <string name="waypoint_coordinates_being_reset_on_website">Geoláda koordinátáinak visszaállítása a weboldalon…</string>
   <string name="waypoint_reset">Visszaállítás</string>
   <string name="waypoint_localy_reset_cache_coords">Visszaállítás a c:geo-ban</string>
   <string name="waypoint_reset_local_and_remote_cache_coords">Visszaállítás a c:geo-ban és a weboldalon</string>
-  <string name="waypoint_being_saved">Útpont mentése...</string>
+  <string name="waypoint_being_saved">Útpont mentése…</string>
   <string name="waypoint_coordinates_couldnt_be_modified_on_website">A weboldal nem támogatja a geoláda koordinátáinak módosítását.</string>
   <string name="waypoint_coordinates_upload_error">Hiba történt a koordináták honlapon történő módosítása közben.</string>
   <string name="waypoint_coordinates_uploading_to_website">Koordináták feltöltése %s weboldalra.</string>
