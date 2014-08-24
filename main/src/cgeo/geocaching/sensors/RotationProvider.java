@@ -1,10 +1,12 @@
 package cgeo.geocaching.sensors;
 
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxUtils.LooperCallbacks;
 
 import rx.Observable;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -18,13 +20,22 @@ public class RotationProvider extends LooperCallbacks<Float> implements SensorEv
     private final float[] rotationMatrix = new float[16];
     private final float[] orientation = new float[4];
 
+    @TargetApi(19)
     protected RotationProvider(final Context context) {
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-        rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
-        if (rotationSensor != null) {
-            Log.d("RotationProvider: sensor found");
+        // The geomagnetic rotation vector introduced in Android 4.4 (API 19) requires less power. Favour it
+        // even if it is more sensible to noise in low-power settings.
+        final Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR);
+        if (sensor != null && Settings.useLowPowerMode()) {
+            rotationSensor = sensor;
+            Log.d("RotationProvider: geomagnetic (low-power) sensor found");
         } else {
-            Log.w("RotationProvider: no rotation sensor on this device");
+            rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+            if (rotationSensor != null) {
+                Log.d("RotationProvider: sensor found");
+            } else {
+                Log.w("RotationProvider: no rotation sensor on this device");
+            }
         }
     }
 
