@@ -311,7 +311,7 @@ public final class ImageUtils {
      * becomes available. It also invalidates the view the container belongs to, so that it is
      * redrawn properly.
      */
-    public final static class ContainerDrawable extends BitmapDrawable implements Action1<Drawable> {
+    public static class ContainerDrawable extends BitmapDrawable implements Action1<Drawable> {
         private Drawable drawable;
         final private TextView view;
 
@@ -328,7 +328,7 @@ public final class ImageUtils {
         }
 
         @Override
-        public void draw(final Canvas canvas) {
+        public final void draw(final Canvas canvas) {
             if (drawable != null) {
                 drawable.draw(canvas);
             }
@@ -341,13 +341,37 @@ public final class ImageUtils {
             view.setText(view.getText());
         }
 
-        public void updateFrom(final Observable<? extends Drawable> drawableObservable) {
+        public final void updateFrom(final Observable<? extends Drawable> drawableObservable) {
             drawableObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(this);
+        }
+    }
+
+    /**
+     * Image that automatically scales to fit a line of text in the containing {@link TextView}.
+     */
+    public final static class LineHeightContainerDrawable extends ContainerDrawable {
+        private final TextView view;
+
+        public LineHeightContainerDrawable(@NonNull final TextView view, final Observable<? extends Drawable> drawableObservable) {
+            super(view, drawableObservable);
+            this.view = view;
+        }
+
+        @Override
+        public void call(final Drawable newDrawable) {
+            super.call(newDrawable);
+            setBounds(ImageUtils.scaleImageToLineHeight(newDrawable, view));
         }
     }
 
     public static boolean canBeOpenedExternally(final String source) {
         return !containsPattern(source, NO_EXTERNAL);
+    }
+
+    public static Rect scaleImageToLineHeight(final Drawable drawable, final TextView view) {
+        final int lineHeight = (int) (view.getLineHeight() * 0.8);
+        final int width = drawable.getIntrinsicWidth() * lineHeight / drawable.getIntrinsicHeight();
+        return new Rect(0, 0, width, lineHeight);
     }
 
     public static Bitmap convertToBitmap(final Drawable drawable) {

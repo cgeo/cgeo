@@ -154,6 +154,10 @@ public class HtmlImage implements Html.ImageGetter {
         if (view == null) {
             return drawable.toBlocking().lastOrDefault(null);
         }
+        return getContainerDrawable(drawable);
+    }
+
+    protected BitmapDrawable getContainerDrawable(final Observable<BitmapDrawable> drawable) {
         return new ContainerDrawable(view, drawable);
     }
 
