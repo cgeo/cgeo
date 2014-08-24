@@ -124,6 +124,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     public void onResume() {
         super.onResume(geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR),
                 app.gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(gpsStatusHandler));
+        forceRefresh();
     }
 
     @Override
@@ -143,13 +144,14 @@ public class CompassActivity extends AbstractActionBarActivity {
         setTitle();
         setDestCoords();
         setCacheInfo();
+        forceRefresh();
+    }
 
+    private void forceRefresh() {
         // Force a refresh of location and direction when data is available.
         final CgeoApplication app = CgeoApplication.getInstance();
         final IGeoData geo = app.currentGeo();
-        if (geo != null) {
-            geoDirHandler.updateGeoDir(geo, app.currentDirection());
-        }
+        geoDirHandler.updateGeoDir(geo, app.currentDirection());
     }
 
     @Override
