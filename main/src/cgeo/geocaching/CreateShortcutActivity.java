@@ -36,13 +36,6 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
             this.intent = intent;
         }
 
-        /**
-         * shortcut with generic c:geo icon
-         */
-        public Shortcut(final int titleResourceId, final Intent intent) {
-            this(titleResourceId, R.drawable.cgeo, intent);
-        }
-
         @Override
         public int getIcon() {
             return drawableResourceId;
