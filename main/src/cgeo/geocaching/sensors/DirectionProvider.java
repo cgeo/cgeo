@@ -1,7 +1,5 @@
 package cgeo.geocaching.sensors;
 
-import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.RxUtils.LooperCallbacks;
 
 import rx.Observable;
@@ -11,12 +9,8 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.view.Surface;
-import android.view.WindowManager;
 
 public class DirectionProvider extends LooperCallbacks<Float> implements SensorEventListener {
-
-    private static final WindowManager WINDOW_MANAGER = (WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
 
     private final SensorManager sensorManager;
     private final Sensor orientationSensor;
@@ -58,34 +52,6 @@ public class DirectionProvider extends LooperCallbacks<Float> implements SensorE
 
     public static Observable<Float> create(final Context context) {
         return Observable.create(new DirectionProvider(context));
-    }
-
-    /**
-     * Take the phone rotation (through a given activity) in account and adjust the direction.
-     *
-     * @param direction the unadjusted direction in degrees, in the [0, 360[ range
-     * @return the adjusted direction in degrees, in the [0, 360[ range
-     */
-
-    public static float getDirectionNow(final float direction) {
-        return AngleUtils.normalize(direction + getRotationOffset());
-    }
-
-    static float reverseDirectionNow(final float direction) {
-        return AngleUtils.normalize(direction - getRotationOffset());
-    }
-
-    private static int getRotationOffset() {
-        switch (WINDOW_MANAGER.getDefaultDisplay().getRotation()) {
-            case Surface.ROTATION_90:
-                return 90;
-            case Surface.ROTATION_180:
-                return 180;
-            case Surface.ROTATION_270:
-                return 270;
-            default:
-                return 0;
-        }
     }
 
 }

@@ -8,7 +8,6 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.maps.CGeoMap;
-import cgeo.geocaching.sensors.DirectionProvider;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.GpsStatusProvider.Status;
 import cgeo.geocaching.sensors.IGeoData;
@@ -16,6 +15,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.ui.CompassView;
 import cgeo.geocaching.ui.LoggingUI;
+import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
@@ -299,7 +299,7 @@ public class CompassActivity extends AbstractActionBarActivity {
                     navLocation.setText(res.getString(R.string.loc_trying));
                 }
 
-                updateNorthHeading(DirectionProvider.getDirectionNow(dir));
+                updateNorthHeading(AngleUtils.getDirectionNow(dir));
             } catch (final RuntimeException e) {
                 Log.w("Failed to LocationUpdater location.");
             }

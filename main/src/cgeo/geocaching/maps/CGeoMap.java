@@ -32,7 +32,6 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
-import cgeo.geocaching.sensors.DirectionProvider;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
@@ -915,7 +914,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         @Override
         public void updateGeoDir(final IGeoData geo, final float dir) {
             currentLocation = geo.getLocation();
-            currentHeading = DirectionProvider.getDirectionNow(dir);
+            currentHeading = AngleUtils.getDirectionNow(dir);
             repaintPositionOverlay();
         }
 

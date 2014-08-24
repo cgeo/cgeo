@@ -2,6 +2,7 @@ package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.AngleUtils;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -21,7 +22,7 @@ import rx.subscriptions.CompositeSubscription;
  * accordingly in {@code onPause}.
  *
  * The direction is always relative to the top of the device (natural direction), and that it must
- * be fixed using {@link DirectionProvider#getDirectionNow(float)}. When the direction is derived from the GPS,
+ * be fixed using {@link cgeo.geocaching.utils.AngleUtils#getDirectionNow(float)}. When the direction is derived from the GPS,
  * it is altered so that the fix can still be applied as if the information came from the compass.
  */
 public abstract class GeoDirHandler {
@@ -77,7 +78,7 @@ public abstract class GeoDirHandler {
 
     private static float fixDirection(final IGeoData geoData, final float direction) {
         final boolean useGPSBearing = !Settings.isUseCompass() || geoData.getSpeed() > 5;
-        return useGPSBearing ? DirectionProvider.reverseDirectionNow(geoData.getBearing()) : direction;
+        return useGPSBearing ? AngleUtils.reverseDirectionNow(geoData.getBearing()) : direction;
     }
 
     /**

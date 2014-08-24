@@ -40,7 +40,6 @@ import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.sensors.DirectionProvider;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
@@ -51,6 +50,7 @@ import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.DateUtils;
@@ -136,7 +136,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         @Override
         public void updateDirection(final float direction) {
             if (Settings.isLiveList()) {
-                adapter.setActualHeading(DirectionProvider.getDirectionNow(direction));
+                adapter.setActualHeading(AngleUtils.getDirectionNow(direction));
             }
         }
 
