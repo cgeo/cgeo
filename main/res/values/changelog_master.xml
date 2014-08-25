@@ -3,7 +3,12 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
-    \n
+    · New: Use GooglePlayService as additional location provider if available\n
+    · New: Optionally use a low power GPS mode for parts of the app which don\'t require high precision\n
+    · New: Confirmation dialog for dangerous log types\n
+    · New: Store found date of found caches when importing via GPX\n
+    · Fix: Improved compass rotation algorithm\n
+    · Fix: Better scaling of smilies in logbook\n
     \n
   </string>
 </resources>
