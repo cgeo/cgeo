@@ -209,6 +209,8 @@
   <string name="info_cache_saved">La cache a été stockée en local</string>
   <string name="loc_last">Aucun</string>
   <string name="loc_net">Réseau</string>
+  <string name="loc_fused">Fusionné</string>
+  <string name="loc_low_power">Éco</string>
   <string name="loc_gps">Gps</string>
   <string name="loc_sat">Satellites</string>
   <string name="loc_trying">Localisation en cours…</string>
@@ -489,6 +491,10 @@
   <string name="init_maintenance">Maintenance</string>
   <string name="init_maintenance_directories_note">c:geo stocke les images et les autres fichiers associés à une géocache dans un dossier dédié. Dans certains cas (comme l\'importation/exportation de la base de données), ce dossier peut contenir des fichiers obsolètes, qui peuvent être supprimés ici.</string>
   <string name="init_maintenance_directories">Supprimer les fichiers orphelins</string>
+  <string name="init_location">Géolocalisation</string>
+  <string name="init_location_note">Sur les appareils équipés des services Google Play, c:geo peut automatiquement utiliser un meilleur fournisseur de données de géolocalisation. Cependant, cela empêche l\'utilisation d\'un appareil GPS externe BlueTooth. Un mode basse consommation est également disponible au prix d\'une localisation moins précise lorsque ce n\'est pas strictement nécessaire.</string>
+  <string name="init_location_googleplayservices">Utiliser les services Google Play</string>
+  <string name="init_location_lowpower">Mode basse consommation</string>
   <string name="init_create_memory_dump">Créer une image mémoire</string>
   <string name="init_memory_dump">Image mémoire</string>
   <string name="init_memory_dumped">Mémoire copiée dans %s</string>
@@ -1161,4 +1167,10 @@
   <string name="cgeo_shortcut">c:geo raccourci</string>
   <string name="create_shortcut">Créer un raccourci</string>
   <string name="send">Envoyer</string>
+  <string name="showcase_logcache_title">Envoi du journal</string>
+  <string name="showcase_logcache_text">N\'oubliez pas, beaucoup de commandes sont maintenant dans la barre de titre. Ici, l\'envoi du journal.</string>
+  <string name="showcase_main_title">Nouveaux menus</string>
+  <string name="showcase_main_text">c:geo place maintenant les entrées de menu dans la barre de titre. Certaines sont cachées derrière les trois points. Un appui long donne la description d\'un bouton.</string>
+  <string name="confirm_log_title">Type inhabituel d\'entrée de journal</string>
+  <string name="confirm_log_message">Vous allez envoyer \'%s\'. Êtes-vous sûr(e) ?</string>
 </resources>

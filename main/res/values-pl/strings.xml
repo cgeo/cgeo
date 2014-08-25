@@ -209,6 +209,8 @@
   <string name="info_cache_saved">Skrzynka jest przechowywana lokalnie</string>
   <string name="loc_last">Ostatnia pozycja</string>
   <string name="loc_net">Sieć</string>
+  <string name="loc_fused">Połączona</string>
+  <string name="loc_low_power">Niski pobór energii</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Próba lokalizacji</string>
@@ -487,6 +489,10 @@
   <string name="init_maintenance">Konserwacja</string>
   <string name="init_maintenance_directories_note">c:geo przechowuje zdjęcia, zdjęcia do logów i inne pliki związane ze skrzynką w oddzielnym katalogu. W niektórych przypadkach (np. import/eksport bazy danych) ten katalog może zawierać nieaktualne pliki, które mogą być usunięte tutaj.</string>
   <string name="init_maintenance_directories">Usuń nieaktualne pliki</string>
+  <string name="init_location">Geolokalizacja</string>
+  <string name="init_location_note">Na urządzeniach wyposażonych w usługi Google Play, c:geo może automatycznie użyć lepszego źródła geolokalizacji. Jednakże to zapobiega używanianiu zewnętrzego odbiornika BlueTooth GPS. Również tryb niskiego poboru energii może nie dopuszczać do używania GPS kiedy bardzo dokładna lokalizacja nie jest konieczna.</string>
+  <string name="init_location_googleplayservices">Użyj usług Google Play</string>
+  <string name="init_location_lowpower">Tryb niskiego poboru energii</string>
   <string name="init_create_memory_dump">Wykonaj zrzut pamięci</string>
   <string name="init_memory_dump">Zrzut pamięci</string>
   <string name="init_memory_dumped">Pamięć zrzucona do %s</string>
@@ -1167,4 +1173,10 @@
   <string name="cgeo_shortcut">skrót do c:geo</string>
   <string name="create_shortcut">Utwórz skrót</string>
   <string name="send">Wyślij</string>
+  <string name="showcase_logcache_title">Wysyłanie wpisu</string>
+  <string name="showcase_logcache_text">Pamiętaj, wiele poleceń jest teraz dostępnych w pasku tytułowym. Tam znajdziesz przycisk wysyłający gotowy wpis.</string>
+  <string name="showcase_main_title">Nowe menu</string>
+  <string name="showcase_main_text">c:geo umieszcza teraz opcje menu w pasku tytułowym jak inne współczesne programy. Niektóre opcje są schowane za kropkowanym symbolem. Naciśnij dłużej przycisk by zobaczyć opis.</string>
+  <string name="confirm_log_title">Niezwykły typ wpisu</string>
+  <string name="confirm_log_message">Chcesz wpisać \'%s\'. Czy jesteś pewien?</string>
 </resources>
