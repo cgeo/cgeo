@@ -489,6 +489,7 @@
   <string name="init_maintenance">Manteniment</string>
   <string name="init_maintenance_directories_note">El c:geo desa les imatges, el imatges dels registres i altres fitxers relacionats amb un catxé a un directori separat. En alguns casos (com important/exportant la base de dades) aquest directori pot contenir fitxers antiquats, que es poden suprimir aquí.</string>
   <string name="init_maintenance_directories">Suprimeix els arxius orfes</string>
+  <string name="init_location">Geolocalització</string>
   <string name="init_create_memory_dump">Crea un buidat de memòria</string>
   <string name="init_memory_dump">Buidat de memòria</string>
   <string name="init_memory_dumped">S\'ha creat el buidat de memòria al %s</string>
@@ -1162,4 +1163,8 @@
   <string name="cgeo_shortcut">Drecera del c:geo</string>
   <string name="create_shortcut">Crea una drecera</string>
   <string name="send">Envia</string>
+  <string name="showcase_logcache_title">Enviant el registre</string>
+  <string name="showcase_logcache_text">Recordeu, ara moltes comandes es troben a la barra de títol. Allà trobareu el botó per enviar el registre acabat.</string>
+  <string name="showcase_main_title">Nous menús</string>
+  <string name="showcase_main_text">Ara el c:geo posa elements del menú a la barra de títol al igual que altres aplicacions modernes. Alguns elements s\'amaguen darrere el símbol de punts. Premeu el botó de forma llarga per veure la seva descripció.</string>
 </resources>

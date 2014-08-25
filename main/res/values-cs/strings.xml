@@ -368,6 +368,7 @@
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Aktivovat</string>
   <string name="init_oc_ro_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.ro.</string>
+  <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Aktivovat</string>
   <string name="init_oc_uk_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.org.uk.</string>
   <string name="init_gcvote">GCvote.com</string>
@@ -489,6 +490,7 @@
   <string name="init_maintenance">Údržba</string>
   <string name="init_maintenance_directories_note">c:geo ukládá obrázky, obrázky z logů a další soubory vázané ke keši v samostatném adresáři. V některých případech (jako import/export databáze) může tento adresář obsahovat staré soubory, které se zde dají smazat.</string>
   <string name="init_maintenance_directories">Odstranit osamocené soubory</string>
+  <string name="init_location">Geolokace</string>
   <string name="init_create_memory_dump">Vytvořit výpis paměti</string>
   <string name="init_memory_dump">Výpis stavu paměti</string>
   <string name="init_memory_dumped">Paměť vypsána do %s</string>
@@ -541,6 +543,7 @@
   <string name="auth_ocnl">opencaching.nl</string>
   <string name="auth_ocus">opencaching.us</string>
   <string name="auth_ocro">opencaching.ro</string>
+  <string name="auth_ocuk">opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:geo je nyní autorizováno pro interakce s %s.</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Obnovit</string>
@@ -1137,4 +1140,8 @@
   <string name="cgeo_shortcut">c:geo zástupce</string>
   <string name="create_shortcut">Vytvořit zástupce</string>
   <string name="send">Odeslat</string>
+  <string name="showcase_logcache_title">Zasílám log</string>
+  <string name="showcase_logcache_text">Pamatujte si, že mnoho příkazů je nyní v záhlaví. Zde najdete tlačítko pro odeslání hotových logů.</string>
+  <string name="showcase_main_title">Nové menu</string>
+  <string name="showcase_main_text">c:geo nyní umísťuje položky menu v záhlaví jako ostatní moderní aplikace. Některé položky jsou skryty za tečkovaným symbolem. Dlouze stiskněte tlačítko pro zobrazení popisu.</string>
 </resources>

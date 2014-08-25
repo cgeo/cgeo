@@ -209,6 +209,7 @@
   <string name="info_cache_saved">Láda adati letöltve</string>
   <string name="loc_last">Utolsó ismert</string>
   <string name="loc_net">Hálózat</string>
+  <string name="loc_fused">Kombinált</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Műhold</string>
   <string name="loc_trying">Keresés folyamatban</string>
@@ -490,6 +491,10 @@
   <string name="init_maintenance">Karbantartás</string>
   <string name="init_maintenance_directories_note">A c:geo az egyes geoládákhoz képeket, logokat és egyéb fájlokat tárol egy külön mappában. Bizonyos esetekben (pl. adatbázis importja vagy exportja) ez a mappa már fölösleges adatokat tartalmazhat, amelyek ezzel a funkcióval törölhetők.</string>
   <string name="init_maintenance_directories">Szükségtelen fájlok törlése</string>
+  <string name="init_location">Helymeghatározás</string>
+  <string name="init_location_note">Google Play Szolgáltatásokat használó eszközökön, a c:geo automatikusan jobb helymeghatározó eljárást vehet igénybe. Ez azonban akadályozza külső, BlueTooth-os GPS-vevők alkalmazását. A kis energiaigényű üzemmód is gátolhatja a GPS használatát, amikor nincs szükség precíz helymeghatározásra.</string>
+  <string name="init_location_googleplayservices">Google Play Szolgáltatások használata</string>
+  <string name="init_location_lowpower">Kis energiaigényű üzemmód</string>
   <string name="init_create_memory_dump">Memóriatartalom mentése</string>
   <string name="init_memory_dump">Memóriatartalom</string>
   <string name="init_memory_dumped">Memóriatartalom mentve a %s-n</string>

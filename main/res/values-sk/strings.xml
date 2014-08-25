@@ -209,6 +209,8 @@
   <string name="info_cache_saved">Skrýša bola uložená v zariadení</string>
   <string name="loc_last">posledná známa</string>
   <string name="loc_net">sieť</string>
+  <string name="loc_fused">Zlúčené</string>
+  <string name="loc_low_power">Nízka spotreba</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">sat</string>
   <string name="loc_trying">zisťovanie polohy</string>
@@ -364,6 +366,7 @@
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Aktivovať</string>
   <string name="init_oc_ro_description">Autorizovať c:geo pre opencaching.ro na vyhľadávanie, zobrazenie a filtrovanie nájdených skrýš.</string>
+  <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Aktivovať</string>
   <string name="init_oc_uk_description">Autorizovať c:geo pre opencaching.org.uk na vyhľadávanie, zobrazenie a filtrovanie nájdených skrýš.</string>
   <string name="init_gcvote">GCvote.com</string>
@@ -485,6 +488,10 @@
   <string name="init_maintenance">Údržba</string>
   <string name="init_maintenance_directories_note">c:Geo ukladá obrázky, log obrázky a ďalšie súbory súvisiace so skrýšou v samostatnom priečinku. V niektorých prípadoch (ako import/export databázy) tento priečinok môže obsahovať neaktuálne súbory, ktoré môžete zmazať tu.</string>
   <string name="init_maintenance_directories">Odstrániť osirelé súbory</string>
+  <string name="init_location">Geolokácia</string>
+  <string name="init_location_note">Na zariadeniach vybavených službami Google Play môže c:geo automaticky používať lepšiu možnosť geolokácie. Táto možnosť ale zabraňuje používaniu externého bluetooth GPS prijímača. Zároveň, v móde s nízkou spotrebou môže byť zabránené použitiu GPS keď nie je nutná vysoká presnosť zamerania.</string>
+  <string name="init_location_googleplayservices">Používanie služieb Google Play</string>
+  <string name="init_location_lowpower">Režim nízkej spotreby</string>
   <string name="init_create_memory_dump">Vytvorenie výpisu pamäte</string>
   <string name="init_memory_dump">Výpis pamäte</string>
   <string name="init_memory_dumped">Výpis pamäte uložený do %s</string>
@@ -534,6 +541,10 @@
   <string name="auth_dialog_completed_twitter">c:geo teraz môže posielať správy na váš Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
+  <string name="auth_ocnl">opencaching.nl</string>
+  <string name="auth_ocus">opencaching.us</string>
+  <string name="auth_ocro">opencaching.ro</string>
+  <string name="auth_ocuk">opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:Geo je teraz autorizované komunikovať s %s.</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Obnoviť</string>
@@ -1116,6 +1127,8 @@
   <string name="tts_service">Hovoriaci kompas</string>
   <string name="tts_start">Začať hovoriť</string>
   <string name="tts_stop">Prestať hovoriť</string>
+  <string name="tts_started">Rozprávanie zapnuté</string>
+  <string name="tts_stopped">Rozprávanie vypnuté</string>
   <string name="err_tts_lang_not_supported">Aktuálny jazyk nepodporuje prevod textu na reč.</string>
   <string name="tts_one_kilometer">jeden kilometer</string>
   <plurals name="tts_kilometers">
@@ -1158,4 +1171,10 @@
   <string name="cgeo_shortcut">c:Geo odkaz</string>
   <string name="create_shortcut">Vytvoriť odkaz</string>
   <string name="send">Odoslať</string>
+  <string name="showcase_logcache_title">Odosielam log</string>
+  <string name="showcase_logcache_text">Pamätaj, že mnohé príkazy sú teraz v záhlaví. Tam nájdeš tlačidlo pre odoslanie hotového logu.</string>
+  <string name="showcase_main_title">Nové ponuky</string>
+  <string name="showcase_main_text">c:geo teraz umiestňuje položky menu v záhlaví, ako iné moderné aplikácie. Niektoré položky sú skryté za symbolom bodiek. Dlhým podržaním tlačidla sa zobrazí jeho popis.</string>
+  <string name="confirm_log_title">Nezvyčajný typ logu</string>
+  <string name="confirm_log_message">Chceš zalogovať \'%s\'. Určite?</string>
 </resources>
