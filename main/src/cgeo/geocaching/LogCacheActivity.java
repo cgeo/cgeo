@@ -658,7 +658,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     @Override
-    protected ShowcaseViewBuilder getShowcase() {
+    public ShowcaseViewBuilder getShowcase() {
         return new ShowcaseViewBuilder(this)
                 .setTarget(new ActionItemTarget(this, R.id.menu_send))
                 .setContent(R.string.showcase_logcache_title, R.string.showcase_logcache_text);

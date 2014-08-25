@@ -77,26 +77,13 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         initializeCommonFields();
     }
 
-    /**
-     * Call this method to actually present a showcase. The right time to invoke this method depends on the showcase
-     * target. I.e. if the showcase target is an action bar item, this method can only be invoked after that item has
-     * been created in onCreateOptionsMenu.
-     */
-    protected final void presentShowcase() {
-        final ShowcaseViewBuilder builder = getShowcase();
-        if (builder != null) {
-            builder.setStyle(R.style.ShowcaseView);
-            builder.build();
-        }
+    @Override
+    public final void presentShowcase() {
+        ActivityMixin.presentShowcase(this);
     }
 
-    /**
-     * Override this method to create a showcase view highlighting the most important UI element.
-     *
-     * @return
-     */
-    @SuppressWarnings("static-method")
-    protected ShowcaseViewBuilder getShowcase() {
+    @Override
+    public ShowcaseViewBuilder getShowcase() {
         // do nothing by default
         return null;
     }

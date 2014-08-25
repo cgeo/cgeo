@@ -421,7 +421,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     }
 
     @Override
-    protected ShowcaseViewBuilder getShowcase() {
+    public ShowcaseViewBuilder getShowcase() {
         // The showcase doesn't work well with the search activity, because on searching a geocode (or
         // selecting a cache from the search field) we immediately close the activity. That in turn confuses the delayed
         // creation of the showcase bitmap. To avoid someone running into this issue again, this method explicitly overrides

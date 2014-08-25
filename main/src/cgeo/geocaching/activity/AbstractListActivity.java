@@ -32,17 +32,17 @@ public abstract class AbstractListActivity extends ActionBarListActivity impleme
     }
 
     @Override
-    public final void showToast(String text) {
+    public final void showToast(final String text) {
         ActivityMixin.showToast(this, text);
     }
 
     @Override
-    public final void showShortToast(String text) {
+    public final void showShortToast(final String text) {
         ActivityMixin.showShortToast(this, text);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
@@ -55,7 +55,7 @@ public abstract class AbstractListActivity extends ActionBarListActivity impleme
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         if (item.getItemId()== android.R.id.home) {
             return ActivityMixin.navigateUp(this);
         }
@@ -79,7 +79,7 @@ public abstract class AbstractListActivity extends ActionBarListActivity impleme
         ActivityMixin.invalidateOptionsMenu(this);
     }
 
-    public void onCreate(Bundle savedInstanceState, int resourceLayoutID) {
+    public void onCreate(final Bundle savedInstanceState, final int resourceLayoutID) {
         super.onCreate(savedInstanceState);
         initializeCommonFields();
 
@@ -88,10 +88,22 @@ public abstract class AbstractListActivity extends ActionBarListActivity impleme
     }
 
     @Override
-    public void setContentView(int layoutResID) {
+    public void setContentView(final int layoutResID) {
         super.setContentView(layoutResID);
 
         // initialize action bar title with activity title
         ActivityMixin.setTitle(this, getTitle());
     }
+
+    @Override
+    public final void presentShowcase() {
+        ActivityMixin.presentShowcase(this);
+    }
+
+    @Override
+    public ShowcaseViewBuilder getShowcase() {
+        // do nothing by default
+        return null;
+    }
+
 }

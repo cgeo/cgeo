@@ -739,7 +739,7 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     @Override
-    protected ShowcaseViewBuilder getShowcase() {
+    public ShowcaseViewBuilder getShowcase() {
         return new ShowcaseViewBuilder(this)
                 .setTarget(new ActionViewTarget(this, ActionViewTarget.Type.OVERFLOW))
                 .setContent(R.string.showcase_main_title, R.string.showcase_main_text);
