@@ -102,11 +102,14 @@ public final class CacheDetailsCreator {
     public void addCacheState(final Geocache cache) {
         if (cache.isLogOffline() || cache.isArchived() || cache.isDisabled() || cache.isPremiumMembersOnly() || cache.isFound()) {
             final List<String> states = new ArrayList<>(5);
+            String date = getVisitedDate(cache);
             if (cache.isLogOffline()) {
-                states.add(res.getString(R.string.cache_status_offline_log));
+                states.add(res.getString(R.string.cache_status_offline_log) + date);
+                // reset the found date, to avoid showing it twice
+                date = "";
             }
             if (cache.isFound()) {
-                states.add(res.getString(R.string.cache_status_found));
+                states.add(res.getString(R.string.cache_status_found) + date);
             }
             if (cache.isArchived()) {
                 states.add(res.getString(R.string.cache_status_archived));
@@ -121,12 +124,20 @@ public final class CacheDetailsCreator {
         }
     }
 
+    private static String getVisitedDate(final Geocache cache) {
+        final long visited = cache.getVisitedDate();
+        if (visited != 0) {
+            return "(" + Formatter.formatShortDate(visited) + ")";
+        }
+        return "";
+    }
+
     public void addRating(final Geocache cache) {
         if (cache.getRating() > 0) {
             final RelativeLayout itemLayout = addStars(R.string.cache_rating, cache.getRating());
             if (cache.getVotes() > 0) {
                 final TextView itemAddition = ButterKnife.findById(itemLayout, R.id.addition);
-                itemAddition.setText("(" + cache.getVotes() + ")");
+                itemAddition.setText(" (" + cache.getVotes() + ')');
                 itemAddition.setVisibility(View.VISIBLE);
             }
         }
@@ -170,7 +181,7 @@ public final class CacheDetailsCreator {
     }
 
     public void addDistance(final Waypoint wpt, final TextView waypointDistanceView) {
-        Float distance = CgeoApplication.getInstance().distanceNonBlocking(wpt);
+        final Float distance = CgeoApplication.getInstance().distanceNonBlocking(wpt);
         String text = "--";
         if (distance != null) {
             text = Units.getDistanceFromKilometers(distance);

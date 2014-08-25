@@ -48,7 +48,7 @@ public class OrientationProvider extends LooperCallbacks<Float> implements Senso
             Log.d("OrientationProvider: starting the orientation provider");
             sensorManager.registerListener(this, orientationSensor, SensorManager.SENSOR_DELAY_NORMAL);
         } else {
-            subscriber.onError(new RuntimeException("orientation sensor is absent on this device"));
+            //            subscriber.onError(new RuntimeException("orientation sensor is absent on this device"));
         }
     }
 
