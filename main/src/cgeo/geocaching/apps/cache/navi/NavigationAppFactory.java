@@ -142,23 +142,21 @@ public final class NavigationAppFactory extends AbstractAppFactory {
             final boolean showInternalMap, final boolean showDefaultNavigation) {
         final List<NavigationAppsEnum> items = new ArrayList<>();
         final int defaultNavigationTool = Settings.getDefaultNavigationTool();
-        for (final NavigationAppsEnum navApp : getInstalledNavigationApps()) {
+        for (final NavigationAppsEnum navApp : getActiveNavigationApps()) {
             if ((showInternalMap || !(navApp.app instanceof InternalMap)) &&
                     (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
-                if (Settings.isUseNavigationApp(navApp)) {
-                    boolean add = false;
-                    if (cache != null && navApp.app instanceof CacheNavigationApp && navApp.app.isEnabled(cache)) {
-                        add = true;
-                    }
-                    if (waypoint != null && navApp.app instanceof WaypointNavigationApp && ((WaypointNavigationApp) navApp.app).isEnabled(waypoint)) {
-                        add = true;
-                    }
-                    if (destination != null && navApp.app instanceof GeopointNavigationApp) {
-                        add = true;
-                    }
-                    if (add) {
-                        items.add(navApp);
-                    }
+                boolean add = false;
+                if (cache != null && navApp.app instanceof CacheNavigationApp && navApp.app.isEnabled(cache)) {
+                    add = true;
+                }
+                if (waypoint != null && navApp.app instanceof WaypointNavigationApp && ((WaypointNavigationApp) navApp.app).isEnabled(waypoint)) {
+                    add = true;
+                }
+                if (destination != null && navApp.app instanceof GeopointNavigationApp) {
+                    add = true;
+                }
+                if (add) {
+                    items.add(navApp);
                 }
             }
         }
@@ -200,6 +198,19 @@ public final class NavigationAppFactory extends AbstractAppFactory {
             }
         }
         return installedNavigationApps;
+    }
+
+    /**
+     * @return all navigation apps, which are installed and activated in the settings
+     */
+    public static List<NavigationAppsEnum> getActiveNavigationApps() {
+        final List<NavigationAppsEnum> activeApps = new ArrayList<>();
+        for (final NavigationAppsEnum appEnum : getInstalledNavigationApps()) {
+            if (Settings.isUseNavigationApp(appEnum)) {
+                activeApps.add(appEnum);
+            }
+        }
+        return activeApps;
     }
 
     /**

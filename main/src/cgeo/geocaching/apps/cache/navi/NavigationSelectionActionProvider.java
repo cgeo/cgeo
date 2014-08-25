@@ -47,7 +47,7 @@ public class NavigationSelectionActionProvider extends ActionProvider {
         if (geocache == null) {
             return;
         }
-        for (final NavigationAppsEnum app : NavigationAppFactory.getInstalledNavigationApps()) {
+        for (final NavigationAppsEnum app : NavigationAppFactory.getActiveNavigationApps()) {
             if (app.app.isEnabled(geocache)) {
                 subMenu.add(Menu.NONE, app.id, Menu.NONE, app.app.getName()).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 
