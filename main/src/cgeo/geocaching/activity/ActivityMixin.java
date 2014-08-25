@@ -103,13 +103,13 @@ public final class ActivityMixin {
         postShowToast(activity, text, Toast.LENGTH_SHORT);
     }
 
-    public static void keepScreenOn(final Activity abstractActivity, boolean keepScreenOn) {
+    public static void keepScreenOn(final Activity abstractActivity, final boolean keepScreenOn) {
         if (keepScreenOn) {
             abstractActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
     }
 
-    public static void invalidateOptionsMenu(Activity activity) {
+    public static void invalidateOptionsMenu(final Activity activity) {
         if (activity instanceof ActionBarActivity) {
             ((ActionBarActivity) activity).supportInvalidateOptionsMenu();
         }
@@ -127,10 +127,10 @@ public final class ActivityMixin {
      *            place the cursor after the inserted text
      */
     public static void insertAtPosition(final EditText editText, final String insertText, final boolean moveCursor) {
-        int selectionStart = editText.getSelectionStart();
-        int selectionEnd = editText.getSelectionEnd();
-        int start = Math.min(selectionStart, selectionEnd);
-        int end = Math.max(selectionStart, selectionEnd);
+        final int selectionStart = editText.getSelectionStart();
+        final int selectionEnd = editText.getSelectionEnd();
+        final int start = Math.min(selectionStart, selectionEnd);
+        final int end = Math.max(selectionStart, selectionEnd);
 
         final String content = editText.getText().toString();
         String completeText;
@@ -141,13 +141,13 @@ public final class ActivityMixin {
         }
 
         editText.getText().replace(start, end, completeText);
-        int newCursor = moveCursor ? start + completeText.length() : start;
+        final int newCursor = moveCursor ? start + completeText.length() : start;
         editText.setSelection(newCursor);
     }
 
     public static boolean navigateUp(@NonNull final Activity activity) {
         // see http://developer.android.com/training/implementing-navigation/ancestral.html
-        Intent upIntent = NavUtils.getParentActivityIntent(activity);
+        final Intent upIntent = NavUtils.getParentActivityIntent(activity);
         if (upIntent == null) {
             activity.finish();
             return true;
@@ -166,5 +166,13 @@ public final class ActivityMixin {
             NavUtils.navigateUpTo(activity, upIntent);
         }
         return true;
+    }
+
+    public static void presentShowcase(final IAbstractActivity activity) {
+        final ShowcaseViewBuilder builder = activity.getShowcase();
+        if (builder != null) {
+            builder.setStyle(R.style.ShowcaseView);
+            builder.build();
+        }
     }
 }

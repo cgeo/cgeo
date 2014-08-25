@@ -5,6 +5,9 @@ import com.github.amlcurran.showcaseview.targets.Target;
 
 import android.app.Activity;
 
+/**
+ * TODO: replace by simple utility class embedding a builder instead of inheriting from it
+ */
 public class ShowcaseViewBuilder extends Builder {
 
     private final Activity activity;

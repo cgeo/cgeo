@@ -7,6 +7,7 @@ import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.activity.Progress;
+import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cachelist.CacheListAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
@@ -57,6 +58,9 @@ import cgeo.geocaching.utils.DateUtils;
 import cgeo.geocaching.utils.Log;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
+
+import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
+import com.github.amlcurran.showcaseview.targets.ActionViewTarget.Type;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
@@ -427,9 +431,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (isInvokedFromAttachment()) {
             importGpxAttachement();
         }
-
-
-
+        else {
+            presentShowcase();
+        }
     }
 
     /**
@@ -1740,5 +1744,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             numbers.add(getCacheNumberString(getResources(), search.getCount()));
         }
         return numbers.isEmpty() ? null : StringUtils.join(numbers, '/');
+    }
+
+    @Override
+    public ShowcaseViewBuilder getShowcase() {
+        return new ShowcaseViewBuilder(this)
+                .setTarget(new ActionViewTarget(this, Type.SPINNER))
+                .setContent(R.string.showcase_cachelist_title, R.string.showcase_cachelist_text);
     }
 }
