@@ -209,6 +209,8 @@
   <string name="info_cache_saved">Geocutia a fost salvată local</string>
   <string name="loc_last">Ultima poziţie cunoscută</string>
   <string name="loc_net">Reţea</string>
+  <string name="loc_fused">Combinat</string>
+  <string name="loc_low_power">Mod economic</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Încerc să determin poziţia</string>
@@ -490,6 +492,10 @@
   <string name="init_maintenance">Întreţinere</string>
   <string name="init_maintenance_directories_note">c:geo salvează imagini, imagini din însemnări şi alte fişiere legate de o geocutie într-un dosar separat. Este posibil ca în unele cazuri (precum import/export al bazei de date) acest dosar să conţină fişiere vechi ce pot fi şterse aici.</string>
   <string name="init_maintenance_directories">Şterge fişierele devenite inutile</string>
+  <string name="init_location">Geolocație</string>
+  <string name="init_location_note">Pe dispozitivele echipate cu \"Serviciile Google Play\", c:geo poate folosi un furnizor de geolocaţie mai bun. Acest lucru împiedică totuşi folosirea unui receptor GPS Bluetooth extern. Totodata, modul economic poate împiedica folosirea GPS-ului atunci când nu este necesară localizarea cu acurateţe foarte bună.</string>
+  <string name="init_location_googleplayservices">Foloseşte serviciile Google Play</string>
+  <string name="init_location_lowpower">Modul economic cu consum redus de energie</string>
   <string name="init_create_memory_dump">Creează un extras de memorie copie după memoria folosită de aplicaţie</string>
   <string name="init_memory_dump">Extras de memorie</string>
   <string name="init_memory_dumped">Extras de memorie salvat în %s</string>
@@ -1118,6 +1124,8 @@
   <string name="tts_service">Busolă vorbitoare</string>
   <string name="tts_start">Vorbeşte</string>
   <string name="tts_stop">Nu mai vorbi</string>
+  <string name="tts_started">Începe ghidarea vocală</string>
+  <string name="tts_stopped">Terminat ghidarea vocală</string>
   <string name="err_tts_lang_not_supported">Limba actuală nu este suportată de funcţia text-către-vorbire.</string>
   <string name="tts_one_kilometer">un kilometru</string>
   <string name="tts_one_meter">un metru</string>
@@ -1130,4 +1138,10 @@
   <string name="cgeo_shortcut">legătură la c:geo</string>
   <string name="create_shortcut">Crează scurtătură</string>
   <string name="send">Trimite</string>
+  <string name="showcase_logcache_title">Trimiterea însemnării</string>
+  <string name="showcase_logcache_text">Reţine, multe comenzi sunt acum în bara de titlu. Acolo vei găsi butonul pentru a trimite o însemnare finalizată.</string>
+  <string name="showcase_main_title">Noile meniuri</string>
+  <string name="showcase_main_text">c:geo foloseşte meniu în bara de titlu precum alte aplicaţii moderne. Unele elemente sunt ascunse în spatele simbolului punctat. O apăsare prelungită pe un buton afişează descrierea acestuia.</string>
+  <string name="confirm_log_title">Tip neobişnuit de însemnare</string>
+  <string name="confirm_log_message">Vrei să scrii o însemnare pentru \'%s\'. Eşti sigur?</string>
 </resources>

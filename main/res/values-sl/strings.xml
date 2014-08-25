@@ -17,6 +17,7 @@
   <string name="letterbox">Letterbox Hybrid</string>
   <string name="event">Srečanja</string>
   <string name="mega">Mega-srečanja</string>
+  <string name="giga">Giga-srečanja</string>
   <string name="earth">Zemeljski zakladi</string>
   <string name="cito">CITO dogodki</string>
   <string name="webcam">Spletna kamera</string>
@@ -205,13 +206,17 @@
   <string name="info_select_logimage_cancelled">Izbira slike je bila preklicana.</string>
   <string name="info_stored_image">Slika je bila shranjena v:</string>
   <string name="info_storing_static_maps">Poskus shranjevanja statičnih zemljevidov</string>
+  <string name="info_cache_saved">Zaklad je bil shranjen lokalno</string>
   <string name="loc_last">Zadnja znana lokacija</string>
   <string name="loc_net">Omrežje</string>
+  <string name="loc_fused">Združen</string>
+  <string name="loc_low_power">Nizka poraba</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Satelit</string>
   <string name="loc_trying">Iščem lokacijo</string>
   <string name="loc_no_addr">Neznan naslov</string>
   <string name="loc_gps_disabled">GPS onemogočen</string>
+  <string name="menu_centerposition">Moja lokacija na sredino</string>
   <string name="menu_about">O c:geo</string>
   <string name="menu_helpers">Dodatni programi</string>
   <string name="menu_settings">Nastavitve</string>
@@ -233,6 +238,12 @@
   <string name="caches_more_caches_currently">trenutno</string>
   <string name="caches_downloading">Nalagam zaklade…\nČas do konca: </string>
   <string name="caches_eta_ltm">manj kot minuta</string>
+  <plurals name="caches_eta_mins">
+    <item quantity="one">%d minuta</item>
+    <item quantity="two">%d minuti</item>
+    <item quantity="few">%d minute</item>
+    <item quantity="other">%d minut</item>
+  </plurals>
   <string name="caches_store_offline">Shrani</string>
   <string name="caches_store_selected">Shrani izbrane</string>
   <string name="caches_history">Zgodovina</string>
@@ -259,6 +270,9 @@
   <string name="caches_select_invert">Obrni izbor</string>
   <string name="caches_nearby">V bližini</string>
   <string name="caches_manage">Upravljaj</string>
+  <string name="caches_remove_all">Odstrani vse</string>
+  <string name="caches_remove_selected">Odstrani izbrane</string>
+  <string name="caches_remove_progress">Odstranjujem zaklade</string>
   <string name="caches_delete_events">Izbriši pretekla srečanja</string>
   <string name="caches_refresh_selected">Osveži izbrane</string>
   <string name="caches_refresh_all">Osveži vse</string>
@@ -288,6 +302,7 @@
   <string name="list_menu_create">Ustvari nov seznam</string>
   <string name="list_menu_drop">Izbriši trenutni seznam</string>
   <string name="list_menu_rename">Preimenuj trenutni seznam</string>
+  <string name="list_menu_import">Uvozi</string>
   <string name="list_title">Izberi seznam</string>
   <string name="list_inbox">Shranjeni</string>
   <string name="list_all_lists">Vsi zakladi</string>
@@ -352,6 +367,8 @@
   <string name="init_oc_us_description">Poveži c:geo z opencaching.us za iskanje zakladov in dostop in filter najdenih zakladov.</string>
   <string name="settings_activate_oc_ro">Aktiviraj</string>
   <string name="init_oc_ro_description">Poveži c:geo z opencaching.ro za iskanje zakladov in dostop in filter najdenih zakladov.</string>
+  <string name="settings_activate_oc_uk">Aktiviraj</string>
+  <string name="init_oc_uk_description">Poveži c:geo z opencaching.org.uk za iskanje zakladov in dostop in filter najdenih zakladov.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktiviraj</string>
@@ -381,6 +398,8 @@
   <string name="init_signature_template_log">Vsebina zapisa</string>
   <string name="init_ratingwanted">GCvote ocene</string>
   <string name="init_summary_ratingwanted">Naloži ocene iz GCvote.com</string>
+  <string name="init_friends_and_own_logs_wanted">Prikaže svoje/prijateljeve</string>
+  <string name="init_summary_friends_and_own_logs_wanted">Prikaži dodaten zavihek s svojimi/prijateljevimi zapisi</string>
   <string name="init_openlastdetailspage">Odpri nazadnje odprto stran</string>
   <string name="init_summary_openlastdetailspage">Pri podrobnostih zaklada vedno odpri zadnjo uporabljeno stran</string>
   <string name="init_autoload">Prikaži celoten opis</string>
@@ -469,6 +488,13 @@
   <string name="init_maintenance">Vzdrževanje</string>
   <string name="init_maintenance_directories_note">c:geo shranjuje slike in ostale datoteke povezane z zakladom v drugem direktoriju. V nekaterih primerih (kot na primer uvažanje/izvažanje baze) lahko direktorij vsebuje zastarele datoteke, ki jih lahko izbrišete tukaj.</string>
   <string name="init_maintenance_directories">Izbriši osirotišene datoteke</string>
+  <string name="init_location">Geolokacija</string>
+  <string name="init_location_note">Na napravah, ki so opremljena s storitvijo Google Play lahko c:geo samodejno uporabi najboljšega ponudnika geolokacije. Vendar to preprečuje uporabo zunanjega BlueTooth GPS sprejemnika. Režim nizke porabe lahko tudi prepreči uporabo GPS sprejemnika, kadar zelo natančna lokacija ni nujno potrebna.</string>
+  <string name="init_location_googleplayservices">Uporabljaj storitve Google Play</string>
+  <string name="init_location_lowpower">Način nizke porabe</string>
+  <string name="init_create_memory_dump">Ustvari Memmory dump</string>
+  <string name="init_memory_dump">Memory dump</string>
+  <string name="init_memory_dumped">Memory dump zapisan v %s</string>
   <string name="settings_open_website">Odpri spletno stran</string>
   <string name="settings_settings">Nastavitve</string>
   <string name="settings_information">Informacije</string>
@@ -572,6 +598,7 @@
   <string name="cache_waypoints_add">Dodaj točko</string>
   <string name="cache_hint">Namig</string>
   <string name="cache_logs">Dnevnik zapisov</string>
+  <string name="cache_logs_friends_and_own">Lastni/prijateljevi zapisi</string>
   <string name="cache_dialog_loading_details">Nalaganje podatkov zaklada…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Nalaganje strani</string>
   <string name="cache_dialog_loading_details_status_details">Obdelujem podatke</string>
@@ -624,6 +651,7 @@
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Shranjen zapis</string>
   <string name="cache_status_found">Najden</string>
+  <string name="cache_not_status_found">Ni najden</string>
   <string name="cache_status_archived">Arhiviran</string>
   <string name="cache_status_disabled">Onemogočen</string>
   <string name="cache_status_premium">Samo za Premium člane</string>
@@ -815,6 +843,7 @@
   <string name="user_menu_open_contact">Odpri vizitko kontakta</string>
   <string name="navigation">Navigacija</string>
   <string name="compass_title">Kompas</string>
+  <string name="compass_sensors">Aktivni senzorji</string>
   <string name="use_gps">Uporabi samo GPS</string>
   <string name="use_compass">Uporabi GPS in kompas</string>
   <string name="destination_select">Izbira destinacije</string>
@@ -1101,6 +1130,8 @@
   <string name="tts_service">Glasovni kompas</string>
   <string name="tts_start">Začni glasovno navigacijo</string>
   <string name="tts_stop">Ustavi glasovno navigacijo</string>
+  <string name="tts_started">Začel govor</string>
+  <string name="tts_stopped">Ustavil govor</string>
   <string name="err_tts_lang_not_supported">Trenutno izbrani jezik ni podprt s storitvijo pretvorbe besedila v govor.</string>
   <string name="tts_one_kilometer">en kilometer</string>
   <plurals name="tts_kilometers">
@@ -1148,4 +1179,11 @@
   <string name="percent_favorite_points">%\ favoritov</string>
   <string name="cgeo_shortcut">Bližnjica c:geo</string>
   <string name="create_shortcut">Ustvari bližnjico</string>
+  <string name="send">Pošlji</string>
+  <string name="showcase_logcache_title">Pošiljanje zapisa</string>
+  <string name="showcase_logcache_text">Ne pozabite! Veliko ukazov je sedaj v naslovni vrstici. Tam boste našli tudi gumb za pošiljanje zapisa.</string>
+  <string name="showcase_main_title">Novi meniji</string>
+  <string name="showcase_main_text">c:geo ima sedaj svoj meni v naslovni vrstici, tako kot ostale moderne aplikacije. Nekateri elementi menija so skriti pod simbolom treh pikic. Dolg pritisk na posamezen gumb vam prikaže njegov opis.</string>
+  <string name="confirm_log_title">Nenavaden zapis</string>
+  <string name="confirm_log_message">Poslali boste zapis \'%s\'. Ali ste prepričani?</string>
 </resources>

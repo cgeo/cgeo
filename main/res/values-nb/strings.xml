@@ -209,6 +209,8 @@
   <string name="info_cache_saved">Cachen er nå lagret lokalt</string>
   <string name="loc_last">Sist sett</string>
   <string name="loc_net">Nettverk</string>
+  <string name="loc_fused">Kombinert</string>
+  <string name="loc_low_power">Lavt strømforbruk</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Satellitter</string>
   <string name="loc_trying">Prøver å lokalisere</string>
@@ -217,7 +219,7 @@
   <string name="menu_centerposition">Midtstill kartet på min posisjon</string>
   <string name="menu_about">Om c:geo</string>
   <string name="menu_helpers">Verktøyprogrammer</string>
-  <string name="menu_settings">Instillinger</string>
+  <string name="menu_settings">Innstillinger</string>
   <string name="menu_history">Historikk</string>
   <string name="menu_filter">Filter</string>
   <string name="menu_scan_geo">Skann GC-kode</string>
@@ -379,8 +381,8 @@
   <string name="init_login_popup_invalid_token">Godkjenning ugyldig, prøv å godkjenn på nytt</string>
   <string name="settings_service_active">Aktiv</string>
   <string name="init_signature">Signatur</string>
-  <string name="init_template_help">Plassholdere, slik som [NAME], vil bli erstattet senere når denne malen blir brukt.</string>
-  <string name="init_signature_template_button">Sett inn mal</string>
+  <string name="init_template_help">Autotekst, slik som [NAME], vil bli erstattet med navnet på cachen når denne malen blir brukt i en logg.</string>
+  <string name="init_signature_template_button">Sett inn autotekst</string>
   <string name="init_signature_template_date">Dato</string>
   <string name="init_signature_template_time">Tid</string>
   <string name="init_signature_template_datetime">Dato og klokkeslett</string>
@@ -482,6 +484,10 @@
   <string name="init_maintenance">Vedlikehold</string>
   <string name="init_maintenance_directories_note">c:geo lagrer bilder, loggbilder og andre filer knyttet til en cache i en egen mappe. I noen situasjoner (som importering/eksportering av databasen) vil denne mappen inneholde utdaterte filer som kan slettes her.</string>
   <string name="init_maintenance_directories">Slett utdaterte filer</string>
+  <string name="init_location">Geolokasjon</string>
+  <string name="init_location_note">På enheter utstyrt med Google Play Services kan c:geo automatisk bruke en bedre posisjonstjeneste. Men dette forhindrer bruk av en ekstern BlueTooth GPS-mottaker. Strømsparingsmodus kan også forhindre bruk av GPS når svært nøyaktig posisjon ikke er strengt nødvendig.</string>
+  <string name="init_location_googleplayservices">Bruk Google Play Services</string>
+  <string name="init_location_lowpower">Strømsparingsmodus</string>
   <string name="init_create_memory_dump">Opprett minnedump</string>
   <string name="init_memory_dump">Minnedump</string>
   <string name="init_memory_dumped">Minne dumpet til %s</string>
@@ -757,7 +763,7 @@
   <string name="map_static_loading">Laster statiske kart…</string>
   <string name="map_token_err">Siden c:geo bare kan laste ned datasettene delvis, kan enkelte koordinater være unøyaktige.</string>
   <string name="map_as_list">Vis som liste</string>
-  <string name="map_strategy">Strategi</string>
+  <string name="map_strategy">Strategi for live-kart</string>
   <string name="map_strategy_title">Strategi for Live-kart</string>
   <string name="map_strategy_fastest">Raskest</string>
   <string name="map_strategy_fast">Rask</string>
@@ -1113,6 +1119,8 @@
   <string name="tts_service">Talende kompass</string>
   <string name="tts_start">Start tale</string>
   <string name="tts_stop">Stopp tale</string>
+  <string name="tts_started">Startet tale</string>
+  <string name="tts_stopped">Stoppet tale</string>
   <string name="err_tts_lang_not_supported">Dette språket er ikke støttet av text-to-speech.</string>
   <string name="tts_one_kilometer">en kilometer</string>
   <string name="tts_one_meter">en meter</string>
@@ -1141,4 +1149,10 @@
   <string name="cgeo_shortcut">c:geo-snartvei</string>
   <string name="create_shortcut">Opprett snarvei</string>
   <string name="send">Send</string>
+  <string name="showcase_logcache_title">Sender loggen</string>
+  <string name="showcase_logcache_text">Husk, mange kommandoer er nå i tittellinjen. Der finner du knappen for å sende den ferdige loggen.</string>
+  <string name="showcase_main_title">Nye menyer</string>
+  <string name="showcase_main_text">c:geo har nå plassert menyelementer i tittellinjen, slik som andre moderne app-er. Noen elementer er skjult bak symbolet med prikker. Langt trykk på en knapp viser en beskrivelse av funksjonen.</string>
+  <string name="confirm_log_title">Uvanlig loggtype</string>
+  <string name="confirm_log_message">Du vil logge \'%s\'. Er du sikker?</string>
 </resources>

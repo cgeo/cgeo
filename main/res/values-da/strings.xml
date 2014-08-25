@@ -387,7 +387,32 @@
   <string name="search_tb_button">Søg trackable</string>
   <string name="search_destination">Destination</string>
   <string name="search_direction_rel">Fra denne position</string>
+  <string name="trackable_browser_open">Åbn i browser</string>
+  <string name="trackable_goal">Mål</string>
+  <string name="trackable_details">Detaljer</string>
+  <string name="trackable_image">Billede</string>
+  <string name="trackable_name">Navn</string>
+  <string name="trackable_type">Type</string>
+  <string name="trackable_owner">Ejer</string>
+  <string name="trackable_spotted">Set</string>
+  <string name="trackable_spotted_in_cache">I</string>
+  <string name="trackable_unknown">Ukendt</string>
+  <string name="trackable_distance">Rejst</string>
+  <string name="user_menu_title">Om</string>
+  <string name="user_menu_view_hidden">Skjulte cacher</string>
+  <string name="user_menu_view_found">Fundne cacher</string>
+  <string name="user_menu_open_browser">Åbn profil i browser</string>
+  <string name="user_menu_send_message">Send besked</string>
   <string name="navigation">Navigation</string>
+  <string name="compass_title">Kompas</string>
+  <string name="compass_sensors">Aktive sensorer</string>
+  <string name="use_gps">Brug kun GPS</string>
+  <string name="use_compass">Brug GPS og kompas</string>
+  <string name="destination_select">Vælg destination</string>
+  <string name="navigation_direct_navigation">Direkte navigation</string>
+  <string name="navigation_target">Mål</string>
+  <string name="license">Licens</string>
+  <string name="license_show">Vis licens</string>
   <string name="support">Support: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
   <string name="website">Hjemmeside: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>

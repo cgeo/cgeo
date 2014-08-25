@@ -38,7 +38,7 @@
   <string name="cache_size_notchosen">Nicht gewählt</string>
   <string name="cache_size_unknown">Unbekannt</string>
   <string name="cache_size_nano">Nano</string>
-  <string name="cache_size_very_large">Sehr groß</string>
+  <string name="cache_size_very_large">Extrem groß</string>
   <string name="wp_final">Final</string>
   <string name="wp_stage">Station eines Multi-Cache</string>
   <string name="wp_puzzle">Station mit Frage</string>
@@ -209,6 +209,8 @@
   <string name="info_cache_saved">Der Cache wurde gespeichert</string>
   <string name="loc_last">Letzte Position</string>
   <string name="loc_net">Netzwerk</string>
+  <string name="loc_fused">Kombiniert</string>
+  <string name="loc_low_power">Energiesparmodus</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">SAT</string>
   <string name="loc_trying">Lokalisierung</string>
@@ -489,6 +491,10 @@
   <string name="init_maintenance">Wartung</string>
   <string name="init_maintenance_directories_note">c:geo speichert Bilder, Log-Bilder und weitere Dateien zu einem Cache in einem separaten Verzeichnis. In manchen Fällen (z.B. bei Sichern und Wiederherstellen der Datenbank) kann dieses Verzeichnis unnötige Daten enthalten, die gelöscht werden können.</string>
   <string name="init_maintenance_directories">Verwaiste Daten löschen</string>
+  <string name="init_location">Positionierung</string>
+  <string name="init_location_note">Auf Geräten mit GooglePlay-Diensten kann c:geo automatisch eine bessere Positions-Bestimmung nutzen. Allerdings kann dann kein externer Bluetooth GPS-Empfänger verwendet werden. Weiterhin kann damit ein LowPower-Modus ohne GPS genutzt werden, wenn hohe Genauigkeit nicht unbedingt erforderlich ist.</string>
+  <string name="init_location_googleplayservices">GooglePlay-Dienst nutzen</string>
+  <string name="init_location_lowpower">LowPower-Modus</string>
   <string name="init_create_memory_dump">Erzeuge ein Speicherabbild</string>
   <string name="init_memory_dump">Speicherabbild</string>
   <string name="init_memory_dumped">Speicherabbild in %s gespeichert</string>
@@ -1161,4 +1167,10 @@
   <string name="cgeo_shortcut">c:geo Shortcut</string>
   <string name="create_shortcut">Shortcut erstellen</string>
   <string name="send">Senden</string>
+  <string name="showcase_logcache_title">Log senden</string>
+  <string name="showcase_logcache_text">Denk daran, viele Optionen findest du jetzt in der Titelzeile. Dort findest du auch die Schaltfläche zum Senden des Logs.</string>
+  <string name="showcase_main_title">Neue Menüstruktur</string>
+  <string name="showcase_main_text">c:geo nutzt nun die Titelzeile für Menü-Optionen wie in anderen modernen Apps. Einige Menüpunkte sind dabei hinter der Drei-Punkt Schaltfläche versteckt. Ein langer Druck auf eine Schaltfläche zeigt die Bedeutung.</string>
+  <string name="confirm_log_title">Ungewöhnlicher Log-Typ</string>
+  <string name="confirm_log_message">Du möchtest \'%s\' loggen. Bist du dir sicher?</string>
 </resources>
