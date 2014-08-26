@@ -55,6 +55,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module" module-name="mapswithme-api" exported="" />
+    <orderEntry type="module" module-name="showcaseview" exported="" />
     <orderEntry type="module" module-name="android-support-v7-appcompat" exported="" />
   </component>
 </module>
