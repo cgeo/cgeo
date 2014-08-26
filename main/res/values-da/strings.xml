@@ -184,6 +184,7 @@
   <string name="caches_sort_name">Navn</string>
   <string name="caches_sort_geocode">Geokode</string>
   <string name="caches_sort_rating">Vurdering</string>
+  <string name="caches_filter_origin">Kilde</string>
   <string name="list_dialog_create">Opret</string>
   <string name="list_dialog_create_ok">Ny liste blev oprettet</string>
   <string name="list_dialog_create_err">c:geo kunne ikke oprette ny liste</string>
