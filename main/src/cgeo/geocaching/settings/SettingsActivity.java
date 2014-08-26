@@ -122,7 +122,7 @@ public class SettingsActivity extends PreferenceActivity {
         initDefaultNavigationPreferences();
         initBackupButtons();
         initDbLocationPreference();
-        initGeolocationPreference();
+        initGeoDirPreferences();
         initDebugPreference();
         initBasicMemberPreferences();
         initSend2CgeoPreferences();
@@ -400,27 +400,26 @@ public class SettingsActivity extends PreferenceActivity {
         });
     }
 
-    private void initGeolocationPreference() {
-        final Preference p = getPreference(R.string.pref_googleplayservices);
-        final Preference p2 = getPreference(R.string.pref_lowpowermode);
-        p.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+    private void initGeoDirPreferences() {
+        final Preference playServices = getPreference(R.string.pref_googleplayservices);
+        playServices.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-                final boolean useGooglePlayServices = (Boolean) newValue;
-                p2.setEnabled(useGooglePlayServices);
-                CgeoApplication.getInstance().setupGeoDataObservables(useGooglePlayServices, Settings.useLowPowerMode());
+                CgeoApplication.getInstance().setupGeoDataObservables((Boolean) newValue, Settings.useLowPowerMode());
                 return true;
             }
         });
-        p2.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+        playServices.setEnabled(CgeoApplication.getInstance().isGooglePlayServicesAvailable());
+        getPreference(R.string.pref_lowpowermode).setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-                CgeoApplication.getInstance().setupGeoDataObservables(Settings.useGooglePlayServices(), (Boolean) newValue);
+                final CgeoApplication app = CgeoApplication.getInstance();
+                final Boolean useLowPower = (Boolean) newValue;
+                app.setupGeoDataObservables(Settings.useGooglePlayServices(), useLowPower);
+                app.setupDirectionObservable(useLowPower);
                 return true;
             }
         });
-        p.setEnabled(CgeoApplication.getInstance().isGooglePlayServicesAvailable());
-        p2.setEnabled(Settings.useGooglePlayServices());
     }
 
     void initBasicMemberPreferences() {

@@ -398,7 +398,7 @@ public class Settings {
     }
 
     public static boolean useLowPowerMode() {
-        return useGooglePlayServices() && getBoolean(R.string.pref_lowpowermode, false);
+        return getBoolean(R.string.pref_lowpowermode, false);
     }
 
     /**

@@ -88,7 +88,7 @@ public class CgeoApplication extends Application {
         }
         Log.i("Google Play services are " + (isGooglePlayServicesAvailable ? "" : "not ") + "available");
         setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
-        setupDirectionObservable();
+        setupDirectionObservable(Settings.useLowPowerMode());
         gpsStatusObservable = GpsStatusProvider.create(this).replay(1).refCount();
 
         // Attempt to acquire an initial location before any real activity happens.
@@ -109,8 +109,8 @@ public class CgeoApplication extends Application {
         }
     }
 
-    private void setupDirectionObservable() {
-        directionObservable = RotationProvider.create(this).onErrorResumeNext(new Func1<Throwable, Observable<? extends Float>>() {
+    public void setupDirectionObservable(final boolean useLowPower) {
+        directionObservable = RotationProvider.create(this, useLowPower).onErrorResumeNext(new Func1<Throwable, Observable<? extends Float>>() {
             @Override
             public Observable<? extends Float> call(final Throwable throwable) {
                 return OrientationProvider.create(CgeoApplication.this);

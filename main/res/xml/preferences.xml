@@ -754,10 +754,15 @@
                 android:defaultValue="true"
                 android:key="@string/pref_googleplayservices"
                 android:title="@string/init_location_googleplayservices" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/init_low_power">
+            <cgeo.geocaching.settings.TextPreference
+                android:layout="@layout/text_preference"
+                android:text="@string/init_low_power_note" />
             <CheckBoxPreference
                 android:defaultValue="false"
                 android:key="@string/pref_lowpowermode"
-                android:title="@string/init_location_lowpower" />
+                android:title="@string/init_low_power_mode" />
         </PreferenceCategory>
         <PreferenceCategory android:title="@string/init_debug_title" >
             <cgeo.geocaching.settings.TextPreference

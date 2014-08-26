@@ -1,6 +1,5 @@
 package cgeo.geocaching.sensors;
 
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxUtils.LooperCallbacks;
 
@@ -21,12 +20,12 @@ public class RotationProvider extends LooperCallbacks<Float> implements SensorEv
     private final float[] orientation = new float[4];
 
     @TargetApi(19)
-    protected RotationProvider(final Context context) {
+    protected RotationProvider(final Context context, final boolean lowPower) {
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         // The geomagnetic rotation vector introduced in Android 4.4 (API 19) requires less power. Favour it
         // even if it is more sensible to noise in low-power settings.
-        final Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR);
-        if (sensor != null && Settings.useLowPowerMode()) {
+        final Sensor sensor = lowPower ? sensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR) : null;
+        if (sensor != null) {
             rotationSensor = sensor;
             Log.d("RotationProvider: geomagnetic (low-power) sensor found");
         } else {
@@ -68,8 +67,8 @@ public class RotationProvider extends LooperCallbacks<Float> implements SensorEv
         }
     }
 
-    public static Observable<Float> create(final Context context) {
-        return Observable.create(new RotationProvider(context));
+    public static Observable<Float> create(final Context context, final boolean lowPower) {
+        return Observable.create(new RotationProvider(context, lowPower));
     }
 
 }
