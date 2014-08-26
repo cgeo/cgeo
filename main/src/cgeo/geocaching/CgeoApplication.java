@@ -88,7 +88,28 @@ public class CgeoApplication extends Application {
         }
         Log.i("Google Play services are " + (isGooglePlayServicesAvailable ? "" : "not ") + "available");
         setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
+        setupDirectionObservable();
+        gpsStatusObservable = GpsStatusProvider.create(this).replay(1).refCount();
+
+        // Attempt to acquire an initial location before any real activity happens.
         geoDataObservableLowPower.subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe(rememberGeodataAction);
+    }
+
+    public void setupGeoDataObservables(final boolean useGooglePlayServices, final boolean useLowPowerLocation) {
+        if (useGooglePlayServices) {
+            geoDataObservable = LocationProvider.getMostPrecise(this).doOnNext(rememberGeodataAction);
+            if (useLowPowerLocation) {
+                geoDataObservableLowPower = LocationProvider.getLowPower(this, true).doOnNext(rememberGeodataAction);
+            } else {
+                geoDataObservableLowPower = geoDataObservable;
+            }
+        } else {
+            geoDataObservable = GeoDataProvider.create(this).replay(1).refCount().doOnNext(rememberGeodataAction);
+            geoDataObservableLowPower = geoDataObservable;
+        }
+    }
+
+    private void setupDirectionObservable() {
         directionObservable = RotationProvider.create(this).onErrorResumeNext(new Func1<Throwable, Observable<? extends Float>>() {
             @Override
             public Observable<? extends Float> call(final Throwable throwable) {
@@ -106,21 +127,6 @@ public class CgeoApplication extends Application {
                 currentDirection = direction;
             }
         });
-        gpsStatusObservable = GpsStatusProvider.create(this).replay(1).refCount();
-    }
-
-    public void setupGeoDataObservables(final boolean useGooglePlayServices, final boolean useLowPowerLocation) {
-        if (useGooglePlayServices) {
-            geoDataObservable = LocationProvider.getMostPrecise(this).doOnNext(rememberGeodataAction);
-            if (useLowPowerLocation) {
-                geoDataObservableLowPower = LocationProvider.getLowPower(this, true).doOnNext(rememberGeodataAction);
-            } else {
-                geoDataObservableLowPower = geoDataObservable;
-            }
-        } else {
-            geoDataObservable = GeoDataProvider.create(this).replay(1).refCount().doOnNext(rememberGeodataAction);
-            geoDataObservableLowPower = geoDataObservable;
-        }
     }
 
     @Override
