@@ -417,5 +417,6 @@
   <string name="website">Hjemmeside: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
-  <string name="about_twitter">Skal <b>c:geo</b> sende status til Twitter hvergang du logger en cache?</string>
+  <string name="market">Android: <a href="">c:geo på Google Play</a></string>
+  <string name="about_twitter">Skal <b>c:geo</b> sende status til Twitter hver gang du logger en cache?</string>
 </resources>

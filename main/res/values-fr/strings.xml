@@ -370,7 +370,6 @@
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Activer</string>
   <string name="init_oc_ro_description">Autoriser c:geo à utiliser opencaching.ro pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
-  <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Activer</string>
   <string name="init_oc_uk_description">Autoriser c:geo à utiliser opencaching.org.uk pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
   <string name="init_gcvote">GCvote.com</string>
@@ -493,9 +492,11 @@
   <string name="init_maintenance_directories_note">c:geo stocke les images et les autres fichiers associés à une géocache dans un dossier dédié. Dans certains cas (comme l\'importation/exportation de la base de données), ce dossier peut contenir des fichiers obsolètes, qui peuvent être supprimés ici.</string>
   <string name="init_maintenance_directories">Supprimer les fichiers orphelins</string>
   <string name="init_location">Géolocalisation</string>
-  <string name="init_location_note">Sur les appareils équipés des services Google Play, c:geo peut automatiquement utiliser un meilleur fournisseur de données de géolocalisation. Cependant, cela empêche l\'utilisation d\'un appareil GPS externe BlueTooth. Un mode basse consommation est également disponible au prix d\'une localisation moins précise lorsque ce n\'est pas strictement nécessaire.</string>
+  <string name="init_location_note">Sur les appareils équipés des services Google Play, c:geo peut automatiquement utiliser un meilleur fournisseur de données de géolocalisation. Cependant, cela empêche l\'utilisation d\'un appareil GPS externe BlueTooth.</string>
   <string name="init_location_googleplayservices">Utiliser les services Google Play</string>
-  <string name="init_location_lowpower">Mode basse consommation</string>
+  <string name="init_low_power">Mode économie d\'énergie</string>
+  <string name="init_low_power_note">Le mode économie d\'énergie permet d\'éviter l\'utilisation du GPS et du gyroscope lorsqu\'une localisation précise n\'est pas indispensable, au prix d\'une localisation précise plus lente lorsqu\'elle est nécessaire.</string>
+  <string name="init_low_power_mode">Activer le mode économie d\'énergie</string>
   <string name="init_create_memory_dump">Créer une image mémoire</string>
   <string name="init_memory_dump">Image mémoire</string>
   <string name="init_memory_dumped">Mémoire copiée dans %s</string>
@@ -545,10 +546,6 @@
   <string name="auth_dialog_completed_twitter">c:geo est maintenant autorisé à poster sur Twitter.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
-  <string name="auth_ocnl">opencaching.nl</string>
-  <string name="auth_ocus">opencaching.us</string>
-  <string name="auth_ocro">opencaching.ro</string>
-  <string name="auth_ocuk">opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:geo est désormais autorisé à interagir avec %s.</string>
   <plurals name="cache_counts">
     <item quantity="one">%1$d cache</item>
@@ -1176,6 +1173,8 @@
   <string name="showcase_logcache_text">N\'oubliez pas, beaucoup de commandes sont maintenant dans la barre de titre. Ici, l\'envoi du journal.</string>
   <string name="showcase_main_title">Nouveaux menus</string>
   <string name="showcase_main_text">c:geo place maintenant les entrées de menu dans la barre de titre. Certaines sont cachées derrière les trois points. Un appui long donne la description d\'un bouton.</string>
+  <string name="showcase_cachelist_title">Changer de liste</string>
+  <string name="showcase_cachelist_text">Vous pouvez basculer entre vos différentes listes en cliquant sur le nom de la liste courante.</string>
   <string name="confirm_log_title">Type inhabituel d\'entrée de journal</string>
   <string name="confirm_log_message">Vous allez envoyer \'%s\'. Êtes-vous sûr(e) ?</string>
 </resources>

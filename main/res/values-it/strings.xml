@@ -209,6 +209,8 @@
   <string name="info_cache_saved">Il cache è stato salvato localmente</string>
   <string name="loc_last">Ultima nota</string>
   <string name="loc_net">Network</string>
+  <string name="loc_fused">Combinato</string>
+  <string name="loc_low_power">Risparmio energetico</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Localizzazione in corso</string>
@@ -486,6 +488,8 @@
   <string name="init_maintenance">Manutenzione</string>
   <string name="init_maintenance_directories_note">c:geo memorizza immagini, immagini log e altri file (correlati a un cache) in una cartella separata. In alcuni casi (es.: dopo import/esport del database) questa cartella potrebbe contenere file obsoleti, che possono essere cancellati da qui.</string>
   <string name="init_maintenance_directories">Elimina file orfani</string>
+  <string name="init_location">Geolocalizzazione</string>
+  <string name="init_location_googleplayservices">Usa i servizi Google Play</string>
   <string name="init_create_memory_dump">Salva la memoria del programma</string>
   <string name="init_memory_dump">Salvataggio memoria</string>
   <string name="init_memory_dumped">Memoria salvata in %s</string>
@@ -1120,6 +1124,8 @@
   <string name="tts_service">Bussola parlante</string>
   <string name="tts_start">Start voce</string>
   <string name="tts_stop">Stop voce</string>
+  <string name="tts_started">Sintesi vocale on</string>
+  <string name="tts_stopped">Sintesi vocale off</string>
   <string name="err_tts_lang_not_supported">Il linguaggio attivo non è supportato dal modulo di sintesi vocale.</string>
   <string name="tts_one_kilometer">un chilometro</string>
   <plurals name="tts_kilometers">
@@ -1156,4 +1162,10 @@
   <string name="cgeo_shortcut">collegamento a c:geo</string>
   <string name="create_shortcut">Crea collegamento</string>
   <string name="send">Invia</string>
+  <string name="showcase_logcache_title">Invio del Log</string>
+  <string name="showcase_logcache_text">Ricorda, molti comandi sono ora nella barra del titolo. Qui trovate il pulsante per l\'invio del log.</string>
+  <string name="showcase_main_title">Nuovi menu</string>
+  <string name="showcase_main_text">c:geo ora ha le voci di menu nella barra del titolo come altre moderne applicazioni. Alcuni elementi potrebbero essere nascosti dietro il simbolo dei puntini. Tenere premuto un bottone per vederne la descrizione.</string>
+  <string name="confirm_log_title">Tipo di Log non usuale</string>
+  <string name="confirm_log_message">Si desidera registrare \'%s\'. Sei sicuro?</string>
 </resources>

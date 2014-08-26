@@ -484,9 +484,7 @@
   <string name="init_maintenance_directories_note">c:geo saugo nuotraukas, įrašų nuotraukas ir kitus failus, susijusius su slėptuve, atskirame kataloge. Kai kuriais atvejais (pvz., importuojant/eksportuojant duomenų bazę) šiame kataloge gali likti pasenusių failų, kuriuos galima panaikinti čia.</string>
   <string name="init_maintenance_directories">Ištrinti nebereikalingus failus</string>
   <string name="init_location">Vietos nustatymo paslauga</string>
-  <string name="init_location_note">Įrenginiuose su Google Play paslauga, c:geo gali automatiškai naudoti geriausia vietos nustatymo paslaugų teikėją . Tačiau tai neleidžia naudoti išorinį BlueTooth GPS imtuvą. Be to, energijos taupymo režimas gali uždrausti naudoti GPS kai labai tiksli vieta nėra būtina.</string>
   <string name="init_location_googleplayservices">Naudoti Google Play paslaugas</string>
-  <string name="init_location_lowpower">Energijos taupymas</string>
   <string name="init_create_memory_dump">Sukurti atminties turinio failą</string>
   <string name="init_memory_dump">Atminties turinio failas</string>
   <string name="init_memory_dumped">Atminties turinio failas išsaugotas %s</string>
@@ -553,7 +551,7 @@
   <string name="cache_offline_time_hours">valandas atgal</string>
   <string name="cache_offline_time_days">dienų atgal</string>
   <string name="cache_premium">Premium</string>
-  <string name="cache_attributes">Atributus</string>
+  <string name="cache_attributes">Atributai</string>
   <string name="cache_inventory">Inventorius</string>
   <string name="cache_log_images_title">Nuotraukos iš įrašo</string>
   <string name="cache_log_image_default_title">Nuotrauka</string>
@@ -1165,7 +1163,7 @@
   <string name="showcase_logcache_title">Siųsti įrašą</string>
   <string name="showcase_logcache_text">Atminkite, kad dauguma komandų dabar pavadinimo juostoje. Ten rasite užbagto įrašo siuntimo mygtuką.</string>
   <string name="showcase_main_title">Naujas meniu</string>
-  <string name="showcase_main_text">c:geo dabar patalpino meniu komandas pavadinimo juostoje kaip ir kituose šiuolaikinėse programose. Kai kurie elementai yra paslėpti už triejų taškų simbolio. Norėdami peržiūrėti jų aprašymus, ilgai spauskie mygtuką.</string>
+  <string name="showcase_main_text">c:geo dabar meniu komandas patalpino pavadinimo juostoje kaip ir kituose šiuolaikinėse programose. Kai kurie elementai yra paslėpti už triejų taškų simbolio. Norėdami peržiūrėti jų aprašymus, ilgai spauskie mygtuką.</string>
   <string name="confirm_log_title">Neįprastas įrašo tipas</string>
   <string name="confirm_log_message">Norite registruoti \'%s\'. Ar tikrai?</string>
 </resources>

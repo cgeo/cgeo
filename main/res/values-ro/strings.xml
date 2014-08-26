@@ -493,9 +493,7 @@
   <string name="init_maintenance_directories_note">c:geo salvează imagini, imagini din însemnări şi alte fişiere legate de o geocutie într-un dosar separat. Este posibil ca în unele cazuri (precum import/export al bazei de date) acest dosar să conţină fişiere vechi ce pot fi şterse aici.</string>
   <string name="init_maintenance_directories">Şterge fişierele devenite inutile</string>
   <string name="init_location">Geolocație</string>
-  <string name="init_location_note">Pe dispozitivele echipate cu \"Serviciile Google Play\", c:geo poate folosi un furnizor de geolocaţie mai bun. Acest lucru împiedică totuşi folosirea unui receptor GPS Bluetooth extern. Totodata, modul economic poate împiedica folosirea GPS-ului atunci când nu este necesară localizarea cu acurateţe foarte bună.</string>
   <string name="init_location_googleplayservices">Foloseşte serviciile Google Play</string>
-  <string name="init_location_lowpower">Modul economic cu consum redus de energie</string>
   <string name="init_create_memory_dump">Creează un extras de memorie copie după memoria folosită de aplicaţie</string>
   <string name="init_memory_dump">Extras de memorie</string>
   <string name="init_memory_dumped">Extras de memorie salvat în %s</string>

@@ -490,9 +490,7 @@
   <string name="init_maintenance_directories_note">c:geo przechowuje zdjęcia, zdjęcia do logów i inne pliki związane ze skrzynką w oddzielnym katalogu. W niektórych przypadkach (np. import/eksport bazy danych) ten katalog może zawierać nieaktualne pliki, które mogą być usunięte tutaj.</string>
   <string name="init_maintenance_directories">Usuń nieaktualne pliki</string>
   <string name="init_location">Geolokalizacja</string>
-  <string name="init_location_note">Na urządzeniach wyposażonych w usługi Google Play, c:geo może automatycznie użyć lepszego źródła geolokalizacji. Jednakże to zapobiega używanianiu zewnętrzego odbiornika BlueTooth GPS. Również tryb niskiego poboru energii może nie dopuszczać do używania GPS kiedy bardzo dokładna lokalizacja nie jest konieczna.</string>
   <string name="init_location_googleplayservices">Użyj usług Google Play</string>
-  <string name="init_location_lowpower">Tryb niskiego poboru energii</string>
   <string name="init_create_memory_dump">Wykonaj zrzut pamięci</string>
   <string name="init_memory_dump">Zrzut pamięci</string>
   <string name="init_memory_dumped">Pamięć zrzucona do %s</string>

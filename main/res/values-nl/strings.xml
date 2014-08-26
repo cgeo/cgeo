@@ -493,9 +493,7 @@
   <string name="init_maintenance_directories_note">c:geo slaat diverse bestanden die bij een cache horen op in een afzonderlijke map. In sommige gevallen (zoals bij importeren/exporteren van de database) kan deze map verouderde bestanden bevatten. Deze kunnen hier verwijderd worden.</string>
   <string name="init_maintenance_directories">Verweesde bestanden verwijderen</string>
   <string name="init_location">Geolocatie</string>
-  <string name="init_location_note">Op apparaten uitgerust met de Google Play Services kan c:geo automatisch een betere manier van geolocatie selecteren. Dit zorgt er echter voor dat externe Bluetooth GPS ontvangers niet gebruikt kunnen worden. Ook kan de spaarstand van de batterij het gebruik van een hoge nauwkeurigheid van de GPS verhinderen, als de hoge nauwkeurigheid niet nodig is.</string>
   <string name="init_location_googleplayservices">Gebruik Google Play Services</string>
-  <string name="init_location_lowpower">Batterijbesparingsmodus</string>
   <string name="init_create_memory_dump">Geheugendump maken</string>
   <string name="init_memory_dump">Geheugendump</string>
   <string name="init_memory_dumped">Geheugen gedumpt naar %s</string>
@@ -1115,7 +1113,7 @@
   <string name="attribute_survey_marker_no">Niet nabij een Survey Marker</string>
   <string name="attribute_offset_cache_yes">Offset cache</string>
   <string name="attribute_offset_cache_no">Geen offset cache</string>
-  <string name="quote">Om geocahing makkelijker te maken en gebruikers luier te maken.</string>
+  <string name="quote">Om geocaching makkelijker en gebruikers luier te maken.</string>
   <string name="powered_by">carnero</string>
   <string name="support">Support: <a href="">support@cgeo.org</a></string>
   <string name="website">Website: <a href="">cgeo.org</a></string>
