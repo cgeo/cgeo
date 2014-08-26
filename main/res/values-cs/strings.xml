@@ -491,6 +491,10 @@
   <string name="init_maintenance_directories_note">c:geo ukládá obrázky, obrázky z logů a další soubory vázané ke keši v samostatném adresáři. V některých případech (jako import/export databáze) může tento adresář obsahovat staré soubory, které se zde dají smazat.</string>
   <string name="init_maintenance_directories">Odstranit osamocené soubory</string>
   <string name="init_location">Geolokace</string>
+  <string name="init_location_note">Na zařízeních s nainstalovanými Službami Google Play může c:geo automaticky vybírat nejvhodnější metodu pro určování polohy. Nebude však možné používat externí Bluetooth GPS přijímač.</string>
+  <string name="init_low_power">Režim nízké spotřeby</string>
+  <string name="init_low_power_note">Režim nízké spotřeby zamezí používání GPS a gyroskopu, pokud není nezbytně vyžadována přesná detekce polohy. Zaměření však bude trvat o trochu déle.</string>
+  <string name="init_low_power_mode">Aktivovat režim nízké spotřeby</string>
   <string name="init_create_memory_dump">Vytvořit výpis paměti</string>
   <string name="init_memory_dump">Výpis stavu paměti</string>
   <string name="init_memory_dumped">Paměť vypsána do %s</string>
@@ -825,7 +829,7 @@
   <string name="trackable_released">Vypuštění</string>
   <string name="trackable_distance">Nacestoval</string>
   <string name="trackable_touch">Dotyk</string>
-  <string name="trackable_not_activated">Trackable není aktivován</string>
+  <string name="trackable_not_activated">Sledovatelný předmět není aktivován</string>
   <string name="geokret_type_traditional">Tradiční</string>
   <string name="geokret_type_book_or_media">Kniha nebo elektronická média</string>
   <string name="geokret_type_human">Člověk</string>
@@ -853,7 +857,7 @@
   <string name="helper_calendar_missing">Doplněk pro c:geo - Kalendář není nainstalován.</string>
   <string name="helper_calendar_description">Umožňuje exportovat události keší do tvého kalendáře.</string>
   <string name="helper_sendtocgeo_title">Poslat do c:geo</string>
-  <string name="helper_contacts_title">c:geo - kontakty (doplněk)</string>
+  <string name="helper_contacts_title">c:geo - Kontakty (doplněk)</string>
   <string name="helper_contacts_description">Umožňuje otevřít vizitku (z tvého seznamu kontaktů) přímo z logu keše, můžeš tak snadněji kontaktovat kamarády o pomoc.</string>
   <string name="helper_sendtocgeo_description">Poslat do c:geo (Send2c:geo) je rozšíření prohlížeče <strong>pro tvůj počítač</strong>. Umožňuje zaslání keše do tvého mobilního zařízení jediným klepnutím, přímo z prohlížeče, při procházení webu Geocaching.com.</string>
   <string name="helper_locus_title">Locus</string>
@@ -1140,8 +1144,12 @@
   <string name="cgeo_shortcut">c:geo zástupce</string>
   <string name="create_shortcut">Vytvořit zástupce</string>
   <string name="send">Odeslat</string>
-  <string name="showcase_logcache_title">Zasílám log</string>
-  <string name="showcase_logcache_text">Pamatujte si, že mnoho příkazů je nyní v záhlaví. Zde najdete tlačítko pro odeslání hotových logů.</string>
-  <string name="showcase_main_title">Nové menu</string>
-  <string name="showcase_main_text">c:geo nyní umísťuje položky menu v záhlaví jako ostatní moderní aplikace. Některé položky jsou skryty za tečkovaným symbolem. Dlouze stiskněte tlačítko pro zobrazení popisu.</string>
+  <string name="showcase_logcache_title">Odesílání logu</string>
+  <string name="showcase_logcache_text">Pamatuj, mnoho příkazů je teď umístěno v záhlaví. Zde také najdeš tlačítko pro odeslání hotových logů.</string>
+  <string name="showcase_main_title">Nová menu</string>
+  <string name="showcase_main_text">c:geo nyní umísťuje položky menu v záhlaví jako ostatní moderní aplikace. Některé položky jsou skryty za symbolem tří teček. Dlouhým stiskem tlačítka zobrazíš jeho popis.</string>
+  <string name="showcase_cachelist_title">Přepínání seznamů</string>
+  <string name="showcase_cachelist_text">Mezi seznamy s keškami můžeš přepínat klepnutím na název seznamu.</string>
+  <string name="confirm_log_title">Neobvyklý typ logu</string>
+  <string name="confirm_log_message">Opravdu chceš zalogovat „%s“?</string>
 </resources>

@@ -493,7 +493,11 @@
   <string name="init_maintenance_directories_note">c:geo slaat diverse bestanden die bij een cache horen op in een afzonderlijke map. In sommige gevallen (zoals bij importeren/exporteren van de database) kan deze map verouderde bestanden bevatten. Deze kunnen hier verwijderd worden.</string>
   <string name="init_maintenance_directories">Verweesde bestanden verwijderen</string>
   <string name="init_location">Geolocatie</string>
+  <string name="init_location_note">Op apparaten uitgerust met Google Play-Services, kan c:geo automatisch een betere geolocation provider gebruiken. Dit voorkomt echter het gebruik van een externe BlueTooth GPS-ontvanger.</string>
   <string name="init_location_googleplayservices">Gebruik Google Play Services</string>
+  <string name="init_low_power">Energiebesparende modus</string>
+  <string name="init_low_power_note">De spaarstand vermijdt het gebruik van de GPS en de gyroscoop wanneer een zeer nauwkeurige locatie niet strikt noodzakelijk is, dit gaat ten koste van een snelle gps-fix.</string>
+  <string name="init_low_power_mode">Energiebesparende modus activeren</string>
   <string name="init_create_memory_dump">Geheugendump maken</string>
   <string name="init_memory_dump">Geheugendump</string>
   <string name="init_memory_dumped">Geheugen gedumpt naar %s</string>
@@ -1174,6 +1178,8 @@
   <string name="showcase_logcache_text">Onthoud, veel commando\'s zijn nu te vinden in de titelbalk. Daar is de knop te vinden voor het verzenden van de log.</string>
   <string name="showcase_main_title">Nieuwe menu\'s</string>
   <string name="showcase_main_text">c:geo plaatst nu menu-items in de titelbalk, zoals veel andere moderne apps. Sommige items zijn verborgen achter het symbool met de drie puntjes. Druk lang op een knop om de beschrijving te zien.</string>
+  <string name="showcase_cachelist_title">Wisselen van lijst</string>
+  <string name="showcase_cachelist_text">Je kan wisselen tussen geocache lijsten door te klikken op de titel van de lijst.</string>
   <string name="confirm_log_title">Ongebruikelijk logtype</string>
   <string name="confirm_log_message">Je wilt \'%s\' loggen. Weet je het zeker?</string>
 </resources>

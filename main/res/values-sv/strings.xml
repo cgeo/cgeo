@@ -1128,6 +1128,8 @@
   <string name="tts_service">Talande kompass</string>
   <string name="tts_start">Starta tal</string>
   <string name="tts_stop">Stoppa tal</string>
+  <string name="tts_started">Påbörjade tal</string>
+  <string name="tts_stopped">Avslutade tal</string>
   <string name="err_tts_lang_not_supported">Detta språk hanteras inte av text-to-speech.</string>
   <string name="tts_one_kilometer">en kilometer</string>
   <plurals name="tts_kilometers">
@@ -1160,4 +1162,10 @@
   <string name="cgeo_shortcut">c:geo genväg</string>
   <string name="create_shortcut">Skapa genväg</string>
   <string name="send">Skicka</string>
+  <string name="showcase_logcache_title">Skickar loggen</string>
+  <string name="showcase_logcache_text">Kom ihåg, många kommandon hittar du nu i titelraden. Där hittar du knappen för att skicka den avslutade loggen.</string>
+  <string name="showcase_main_title">Nya menyer</string>
+  <string name="showcase_main_text">c:geo placerar un menyalternativ i titelraden likt andra moderna appar. Några alternativ döljs bakom symbolen med prickar. Tryck länge på en knapp för att se dess beskrivning.</string>
+  <string name="confirm_log_title">Ovanlig loggtyp</string>
+  <string name="confirm_log_message">Du vill logga \'%s\'. Är du säker?</string>
 </resources>
