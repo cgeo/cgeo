@@ -57,6 +57,12 @@
 		</exec>
 	</target>
 
+	<target name="run_release" description="Run signed release application" depends="install_release">
+		<exec executable="${sdk.dir}/platform-tools/adb">
+			<arg line="-d shell am start -n cgeo.geocaching/.MainActivity" />
+		</exec>
+	</target>
+
 	<target name="debugAPI" depends="-pre-build"
         description="Changes API key to debug">
 	</target>
