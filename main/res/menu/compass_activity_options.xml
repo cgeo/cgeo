@@ -43,23 +43,5 @@
             </item>
         </menu>
     </item>
-    <item
-        android:id="@+id/menu_compass_sensor"
-        android:icon="@drawable/ic_menu_compass"
-        android:title="@string/compass_sensors"
-        app:showAsAction="never|withText"> <!-- will be replaced in code -->
-        <menu>
-            <group android:checkableBehavior="single" >
-                <item
-                    android:id="@+id/menu_compass_sensor_gps"
-                    android:title="@string/use_gps">
-                </item>
-                <item
-                    android:id="@+id/menu_compass_sensor_magnetic"
-                    android:title="@string/use_compass">
-                </item>
-            </group>
-        </menu>
-    </item>
 
 </menu>

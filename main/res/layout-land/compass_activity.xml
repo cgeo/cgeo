@@ -36,6 +36,19 @@
             android:textColor="?text_color"
             android:textSize="14sp" />
 
+        <ToggleButton
+            android:id="@+id/use_compass"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="false"
+            android:layout_below="@+id/cacheinfo"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:textOn="@string/attribute_compass_yes"
+            android:textOff="@string/attribute_compass_no" />
+
         <TextView
             android:id="@+id/heading"
             android:layout_width="wrap_content"

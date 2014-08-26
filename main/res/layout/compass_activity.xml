@@ -33,6 +33,14 @@
             android:textSize="14sp"
             tools:text="Cache information (D/T/S)" />
 
+        <ToggleButton
+            android:id="@+id/use_compass"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textOn="@string/attribute_compass_yes"
+            android:textOff="@string/attribute_compass_no" />
+
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" >

@@ -39,7 +39,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import java.util.List;
 
@@ -54,6 +56,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     @InjectView(R.id.rose) protected CompassView compassView;
     @InjectView(R.id.destination) protected TextView destinationTextView;
     @InjectView(R.id.cacheinfo) protected TextView cacheInfoView;
+    @InjectView(R.id.use_compass) protected ToggleButton useCompassSwitch;
 
     /**
      * Destination of the compass, or null (if the compass is used for a waypoint only).
@@ -65,7 +68,7 @@ public class CompassActivity extends AbstractActionBarActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState, R.layout.compass_activity);
+        onCreate(savedInstanceState, R.layout.compass_activity);
         ButterKnife.inject(this);
 
         // get parameters
@@ -104,6 +107,18 @@ public class CompassActivity extends AbstractActionBarActivity {
             setTitle(StringUtils.defaultIfBlank(extras.getString(Intents.EXTRA_NAME), res.getString(R.string.navigation)));
         }
 
+        if (Sensors.getInstance().hasCompassCapabilities()) {
+            useCompassSwitch.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(final View view) {
+                    Settings.setUseCompass(((ToggleButton) view).isChecked());
+                }
+            });
+            useCompassSwitch.setVisibility(View.VISIBLE);
+        } else {
+            useCompassSwitch.setVisibility(View.INVISIBLE);
+        }
+
         // make sure we can control the TTS volume
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
@@ -112,7 +127,7 @@ public class CompassActivity extends AbstractActionBarActivity {
 
     @Override
     public void onResume() {
-        super.onResume(geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR),
+        onResume(geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR),
                 Sensors.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(gpsStatusHandler));
         forceRefresh();
     }
@@ -136,6 +151,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     }
 
     private void forceRefresh() {
+        useCompassSwitch.setChecked(Settings.isUseCompass());
         // Force a refresh of location and direction when data is available.
         final Sensors sensors = Sensors.getInstance();
         geoDirHandler.updateGeoDir(sensors.currentGeo(), sensors.currentDirection());
@@ -144,7 +160,6 @@ public class CompassActivity extends AbstractActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.compass_activity_options, menu);
-        menu.findItem(R.id.menu_compass_sensor).setVisible(Sensors.getInstance().hasCompassCapabilities());
         if (cache != null) {
             LoggingUI.addMenuItems(this, menu, cache);
         }
@@ -170,12 +185,6 @@ public class CompassActivity extends AbstractActionBarActivity {
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        if (Settings.isUseCompass()) {
-            menu.findItem(R.id.menu_compass_sensor_magnetic).setChecked(true);
-        }
-        else {
-            menu.findItem(R.id.menu_compass_sensor_gps).setChecked(true);
-        }
         menu.findItem(R.id.menu_tts_start).setVisible(!SpeechService.isRunning());
         menu.findItem(R.id.menu_tts_stop).setVisible(SpeechService.isRunning());
         menu.findItem(R.id.menu_compass_cache).setVisible(cache != null);
@@ -194,14 +203,6 @@ public class CompassActivity extends AbstractActionBarActivity {
                 else {
                     CGeoMap.startActivityCoords(this, dstCoords, null, null);
                 }
-                return true;
-            case R.id.menu_compass_sensor_gps:
-                Settings.setUseCompass(false);
-                invalidateOptionsMenuCompatible();
-                return true;
-            case R.id.menu_compass_sensor_magnetic:
-                Settings.setUseCompass(true);
-                invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_tts_start:
                 SpeechService.startService(this, dstCoords);
@@ -266,12 +267,12 @@ public class CompassActivity extends AbstractActionBarActivity {
 
     private void setTargetDescription(final @Nullable String newDescription) {
         description = newDescription;
-        if (this.description == null) {
+        if (description == null) {
             cacheInfoView.setVisibility(View.GONE);
             return;
         }
         cacheInfoView.setVisibility(View.VISIBLE);
-        cacheInfoView.setText(this.description);
+        cacheInfoView.setText(description);
     }
 
     private void updateDistanceInfo(final GeoData geo) {
