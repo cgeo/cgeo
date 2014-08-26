@@ -143,6 +143,7 @@ dependencies {
     compile "org.androidannotations:androidannotations-api:$AAVersion"
 
     compile project(":mapswithme-api")
+    compile project(":showcaseview")
 
     compile files('libs/httpclientandroidlib-1.1.2.jar')
     compile files('libs/locus-api-4.0.jar')
