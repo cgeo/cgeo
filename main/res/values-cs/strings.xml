@@ -208,6 +208,8 @@
   <string name="info_cache_saved">Keš uložena pro lokální použití</string>
   <string name="loc_last">Poslední známá</string>
   <string name="loc_net">Síť</string>
+  <string name="loc_fused">Kombinovaný</string>
+  <string name="loc_low_power">Nízká spotřeba</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Zjišťování pozice</string>
@@ -492,6 +494,7 @@
   <string name="init_maintenance_directories">Odstranit osamocené soubory</string>
   <string name="init_location">Geolokace</string>
   <string name="init_location_note">Na zařízeních s nainstalovanými Službami Google Play může c:geo automaticky vybírat nejvhodnější metodu pro určování polohy. Nebude však možné používat externí Bluetooth GPS přijímač.</string>
+  <string name="init_location_googleplayservices">Používaní služeb Google Play</string>
   <string name="init_low_power">Režim nízké spotřeby</string>
   <string name="init_low_power_note">Režim nízké spotřeby zamezí používání GPS a gyroskopu, pokud není nezbytně vyžadována přesná detekce polohy. Zaměření však bude trvat o trochu déle.</string>
   <string name="init_low_power_mode">Aktivovat režim nízké spotřeby</string>
