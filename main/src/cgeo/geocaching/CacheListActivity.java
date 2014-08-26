@@ -1742,8 +1742,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     @Override
     public ShowcaseViewBuilder getShowcase() {
-        return new ShowcaseViewBuilder(this)
-                .setTarget(new ActionViewTarget(this, Type.SPINNER))
-                .setContent(R.string.showcase_cachelist_title, R.string.showcase_cachelist_text);
+        if (mCacheListSpinnerAdapter != null) {
+            return new ShowcaseViewBuilder(this)
+                    .setTarget(new ActionViewTarget(this, Type.SPINNER))
+                    .setContent(R.string.showcase_cachelist_title, R.string.showcase_cachelist_text);
+        }
+        return null;
     }
 }

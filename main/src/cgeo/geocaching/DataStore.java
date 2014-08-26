@@ -3107,11 +3107,16 @@ public class DataStore {
     }
 
     public static String[] getSuggestions(final String table, final String column, final String input) {
-        final Cursor cursor = database.rawQuery("SELECT DISTINCT " + column
-                + " FROM " + table
-                + " WHERE " + column + " LIKE ?"
-                + " ORDER BY " + column + " COLLATE NOCASE ASC;", new String[] { getSuggestionArgument(input) });
-        return cursorToColl(cursor, new LinkedList<String>(), GET_STRING_0).toArray(new String[cursor.getCount()]);
+        try {
+            final Cursor cursor = database.rawQuery("SELECT DISTINCT " + column
+                    + " FROM " + table
+                    + " WHERE " + column + " LIKE ?"
+                    + " ORDER BY " + column + " COLLATE NOCASE ASC;", new String[] { getSuggestionArgument(input) });
+            return cursorToColl(cursor, new LinkedList<String>(), GET_STRING_0).toArray(new String[cursor.getCount()]);
+        } catch (final RuntimeException e) {
+            Log.e("cannot get suggestions from " + table + "->" + column + " for input '" + input + "'", e);
+            return new String[0];
+        }
     }
 
     public static String[] getSuggestionsOwnerName(final String input) {
