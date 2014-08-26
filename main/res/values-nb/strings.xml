@@ -485,9 +485,7 @@
   <string name="init_maintenance_directories_note">c:geo lagrer bilder, loggbilder og andre filer knyttet til en cache i en egen mappe. I noen situasjoner (som importering/eksportering av databasen) vil denne mappen inneholde utdaterte filer som kan slettes her.</string>
   <string name="init_maintenance_directories">Slett utdaterte filer</string>
   <string name="init_location">Geolokasjon</string>
-  <string name="init_location_note">På enheter utstyrt med Google Play Services kan c:geo automatisk bruke en bedre posisjonstjeneste. Men dette forhindrer bruk av en ekstern BlueTooth GPS-mottaker. Strømsparingsmodus kan også forhindre bruk av GPS når svært nøyaktig posisjon ikke er strengt nødvendig.</string>
   <string name="init_location_googleplayservices">Bruk Google Play Services</string>
-  <string name="init_location_lowpower">Strømsparingsmodus</string>
   <string name="init_create_memory_dump">Opprett minnedump</string>
   <string name="init_memory_dump">Minnedump</string>
   <string name="init_memory_dumped">Minne dumpet til %s</string>
