@@ -16,6 +16,8 @@ import cgeo.geocaching.utils.RxUtils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import rx.Observable;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -35,13 +37,15 @@ public class CgeoApplication extends Application {
     private Observable<IGeoData> geoDataObservableLowPower;
     private Observable<Float> directionObservable;
     private Observable<Status> gpsStatusObservable;
-    private volatile IGeoData currentGeo = GeoData.dummyLocation();
+    @NonNull private volatile IGeoData currentGeo = GeoData.DUMMY_LOCATION;
+    private volatile boolean hasValidLocation = false;
     private volatile float currentDirection = 0.0f;
     private boolean isGooglePlayServicesAvailable = false;
     private final Action1<IGeoData> rememberGeodataAction = new Action1<IGeoData>() {
         @Override
         public void call(final IGeoData geoData) {
             currentGeo = geoData;
+            hasValidLocation = true;
         }
     };
 
@@ -82,6 +86,7 @@ public class CgeoApplication extends Application {
         }
         // ensure initialization of lists
         DataStore.getLists();
+
         // Check if Google Play services is available
         if (GooglePlayServicesUtil.isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS) {
             isGooglePlayServicesAvailable = true;
@@ -150,8 +155,13 @@ public class CgeoApplication extends Application {
         return gpsStatusObservable;
     }
 
+    @NonNull
     public IGeoData currentGeo() {
         return currentGeo;
+    }
+
+    public boolean hasValidLocation() {
+        return hasValidLocation;
     }
 
     public Float distanceNonBlocking(final ICoordinates target) {

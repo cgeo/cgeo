@@ -124,7 +124,10 @@ public class LocationProvider implements ConnectionCallbacks, OnConnectionFailed
      * @param context the context used to retrieve the system services
      */
     private LocationProvider(final Context context) {
-        subject.onNext(GeoData.dummyLocation());
+        final IGeoData initialLocation = GeoData.getInitialLocation(context);
+        if (initialLocation != null) {
+            subject.onNext(initialLocation);
+        }
         locationClient = new LocationClient(context, this, this);
         locationClient.connect();
     }

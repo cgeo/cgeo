@@ -898,7 +898,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         // minimum change of location in fraction of map width/height (whatever is smaller) for position overlay update
         private static final float MIN_LOCATION_DELTA = 0.01f;
 
-        Location currentLocation = new Location("");
+        Location currentLocation = CgeoApplication.getInstance().currentGeo().getLocation();
         float currentHeading;
 
         private long timeLastPositionOverlayCalculation = 0;
