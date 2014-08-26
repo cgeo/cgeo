@@ -94,6 +94,12 @@ public class CgeoApplication extends Application {
             public Observable<? extends Float> call(final Throwable throwable) {
                 return OrientationProvider.create(CgeoApplication.this);
             }
+        }).onErrorResumeNext(new Func1<Throwable, Observable<? extends Float>>() {
+            @Override
+            public Observable<? extends Float> call(final Throwable throwable) {
+                Log.e("Device orientation will not be available as no suitable sensors were found");
+                return Observable.never();
+            }
         }).replay(1).refCount().doOnNext(new Action1<Float>() {
             @Override
             public void call(final Float direction) {
