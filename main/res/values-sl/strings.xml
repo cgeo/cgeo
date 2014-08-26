@@ -271,7 +271,9 @@
   <string name="caches_nearby">V bližini</string>
   <string name="caches_manage">Upravljaj</string>
   <string name="caches_remove_all">Odstrani vse</string>
+  <string name="caches_remove_all_confirm">Ali želite odstraniti vseh %s zakladov iz trenutnega seznama?</string>
   <string name="caches_remove_selected">Odstrani izbrane</string>
+  <string name="caches_remove_selected_confirm">Ali želite odstraniti %s označenih zakladov iz vaše naprave?</string>
   <string name="caches_remove_progress">Odstranjujem zaklade</string>
   <string name="caches_delete_events">Izbriši pretekla srečanja</string>
   <string name="caches_refresh_selected">Osveži izbrane</string>
@@ -489,7 +491,11 @@
   <string name="init_maintenance_directories_note">c:geo shranjuje slike in ostale datoteke povezane z zakladom v drugem direktoriju. V nekaterih primerih (kot na primer uvažanje/izvažanje baze) lahko direktorij vsebuje zastarele datoteke, ki jih lahko izbrišete tukaj.</string>
   <string name="init_maintenance_directories">Izbriši osirotišene datoteke</string>
   <string name="init_location">Geolokacija</string>
+  <string name="init_location_note">Na napravah, ki so opremljena s storitvijo Google Play lahko c:geo samodejno uporabi najboljšega ponudnika geolokacije. Vendar to preprečuje uporabo zunanjega BlueTooth GPS sprejemnika.</string>
   <string name="init_location_googleplayservices">Uporabljaj storitve Google Play</string>
+  <string name="init_low_power">Način nizke porabe</string>
+  <string name="init_low_power_note">Način nizke porabe izključi sprejemnik GPS in žiroskop v napravi, kadar natančna lokacija ni nujno potrebna, na račun daljšega čakanja na GPS lokacijo.</string>
+  <string name="init_low_power_mode">Aktiviraj režim nizke porabe</string>
   <string name="init_create_memory_dump">Ustvari Memmory dump</string>
   <string name="init_memory_dump">Memory dump</string>
   <string name="init_memory_dumped">Memory dump zapisan v %s</string>
@@ -1182,6 +1188,8 @@
   <string name="showcase_logcache_text">Ne pozabite! Veliko ukazov je sedaj v naslovni vrstici. Tam boste našli tudi gumb za pošiljanje zapisa.</string>
   <string name="showcase_main_title">Novi meniji</string>
   <string name="showcase_main_text">c:geo ima sedaj svoj meni v naslovni vrstici, tako kot ostale moderne aplikacije. Nekateri elementi menija so skriti pod simbolom treh pikic. Dolg pritisk na posamezen gumb vam prikaže njegov opis.</string>
+  <string name="showcase_cachelist_title">Premikanje med seznami</string>
+  <string name="showcase_cachelist_text">S klikom na ime seznama lahko preklapljate med različnimi seznami zakladov.</string>
   <string name="confirm_log_title">Nenavaden zapis</string>
   <string name="confirm_log_message">Poslali boste zapis \'%s\'. Ali ste prepričani?</string>
 </resources>

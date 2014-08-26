@@ -492,7 +492,11 @@
   <string name="init_maintenance_directories_note">c:geo speichert Bilder, Log-Bilder und weitere Dateien zu einem Cache in einem separaten Verzeichnis. In manchen Fällen (z.B. bei Sichern und Wiederherstellen der Datenbank) kann dieses Verzeichnis unnötige Daten enthalten, die gelöscht werden können.</string>
   <string name="init_maintenance_directories">Verwaiste Daten löschen</string>
   <string name="init_location">Positionierung</string>
+  <string name="init_location_note">Auf Geräten mit GooglePlay-Diensten kann c:geo automatisch eine bessere Positions-Bestimmung nutzen. Allerdings kann dann kein externer Bluetooth GPS-Empfänger verwendet werden. Weiterhin kann damit ein Energiesparmodus ohne GPS genutzt werden, wenn hohe Genauigkeit nicht unbedingt erforderlich ist.</string>
   <string name="init_location_googleplayservices">GooglePlay-Dienst nutzen</string>
+  <string name="init_low_power">Energiesparmodus</string>
+  <string name="init_low_power_note">Der Energiesparmodus vermeidet die Verwendung von GPS und Gyroskop, wenn eine hochgenaue Position nicht unbedingt notwendig ist. Nachteil ist eine längere Zeit bis zum GPS-Fix.</string>
+  <string name="init_low_power_mode">Energiesparmodus aktivieren</string>
   <string name="init_create_memory_dump">Erzeuge ein Speicherabbild</string>
   <string name="init_memory_dump">Speicherabbild</string>
   <string name="init_memory_dumped">Speicherabbild in %s gespeichert</string>
@@ -1169,6 +1173,8 @@
   <string name="showcase_logcache_text">Denk daran, viele Optionen findest du jetzt in der Titelzeile. Dort findest du auch die Schaltfläche zum Senden des Logs.</string>
   <string name="showcase_main_title">Neue Menüstruktur</string>
   <string name="showcase_main_text">c:geo nutzt nun die Titelzeile für Menü-Optionen wie in anderen modernen Apps. Einige Menüpunkte sind dabei hinter der Drei-Punkt Schaltfläche versteckt. Ein langer Druck auf eine Schaltfläche zeigt die Bedeutung.</string>
+  <string name="showcase_cachelist_title">Liste wechseln</string>
+  <string name="showcase_cachelist_text">Du kannst zwischen deinen Listen wechseln, indem du auf den Titel der Liste klickst.</string>
   <string name="confirm_log_title">Ungewöhnlicher Log-Typ</string>
   <string name="confirm_log_message">Du möchtest \'%s\' loggen. Bist du dir sicher?</string>
 </resources>

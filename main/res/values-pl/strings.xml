@@ -490,7 +490,11 @@
   <string name="init_maintenance_directories_note">c:geo przechowuje zdjęcia, zdjęcia do logów i inne pliki związane ze skrzynką w oddzielnym katalogu. W niektórych przypadkach (np. import/eksport bazy danych) ten katalog może zawierać nieaktualne pliki, które mogą być usunięte tutaj.</string>
   <string name="init_maintenance_directories">Usuń nieaktualne pliki</string>
   <string name="init_location">Geolokalizacja</string>
+  <string name="init_location_note">Na urządzeniach wyposażonych w Usługi Google Play, c:geo może automatycznie używać dokładniejszego źródła geolokalizacji. Jednakże to przeszkadza w użyciu zewnętrznego odbiornika GPS BlueTooth.</string>
   <string name="init_location_googleplayservices">Użyj usług Google Play</string>
+  <string name="init_low_power">Tryb niskiego zużycia energii</string>
+  <string name="init_low_power_note">Tryb niskiego zużycia energii pozwala na uniknięcie używania GPS i żyroskopu kiedy bardzo dokładna pozycja nie jest ściśle potrzebna, kosztem dłuższego ustalania pozycji.</string>
+  <string name="init_low_power_mode">Aktywuj tryb niskiego zużycia energii</string>
   <string name="init_create_memory_dump">Wykonaj zrzut pamięci</string>
   <string name="init_memory_dump">Zrzut pamięci</string>
   <string name="init_memory_dumped">Pamięć zrzucona do %s</string>
@@ -1175,6 +1179,8 @@
   <string name="showcase_logcache_text">Pamiętaj, wiele poleceń jest teraz dostępnych w pasku tytułowym. Tam znajdziesz przycisk wysyłający gotowy wpis.</string>
   <string name="showcase_main_title">Nowe menu</string>
   <string name="showcase_main_text">c:geo umieszcza teraz opcje menu w pasku tytułowym jak inne współczesne programy. Niektóre opcje są schowane za kropkowanym symbolem. Naciśnij dłużej przycisk by zobaczyć opis.</string>
+  <string name="showcase_cachelist_title">Przełączanie list</string>
+  <string name="showcase_cachelist_text">Możesz przełączać między listami skrzynek klikając tytuł listy.</string>
   <string name="confirm_log_title">Niezwykły typ wpisu</string>
   <string name="confirm_log_message">Chcesz wpisać \'%s\'. Czy jesteś pewien?</string>
 </resources>
