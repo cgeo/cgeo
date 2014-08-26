@@ -1563,7 +1563,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     public static Intent getLiveMapIntent(final Activity fromActivity) {
         return newIntent(fromActivity)
                 .putExtra(Intents.EXTRA_MAP_MODE, MapMode.LIVE)
-                .putExtra(Intents.EXTRA_LIVE_ENABLED, true);
+                .putExtra(Intents.EXTRA_LIVE_ENABLED, Settings.isLiveMap());
     }
 
     public static void startActivityCoords(final Activity fromActivity, final Geopoint coords, final WaypointType type, final String title) {
