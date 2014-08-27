@@ -311,6 +311,7 @@
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Vis på kort</string>
   <string name="cache_menu_map_static">Statiske kort</string>
+  <string name="cache_menu_rmaps">Rmaps</string>
   <string name="cache_menu_map_ext">Vis på ext. kort</string>
   <string name="cache_menu_browser">Åbn i browser</string>
   <string name="cache_menu_visit">Log besøg</string>
@@ -319,6 +320,8 @@
   <string name="cache_menu_event">Tilføj til kalender</string>
   <string name="cache_menu_details">Detaljer</string>
   <string name="cache_menu_refresh">Genindlæs</string>
+  <string name="cache_menu_oruxmaps">OruxMaps</string>
+  <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Log gemt</string>
   <string name="cache_status_found">Fundet</string>

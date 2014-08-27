@@ -484,7 +484,11 @@
   <string name="init_maintenance_directories_note">c:geo saugo nuotraukas, įrašų nuotraukas ir kitus failus, susijusius su slėptuve, atskirame kataloge. Kai kuriais atvejais (pvz., importuojant/eksportuojant duomenų bazę) šiame kataloge gali likti pasenusių failų, kuriuos galima panaikinti čia.</string>
   <string name="init_maintenance_directories">Ištrinti nebereikalingus failus</string>
   <string name="init_location">Vietos nustatymo paslauga</string>
+  <string name="init_location_note">Įrenginiuose su Google Play paslauga, c:geo gali automatiškai naudoti geresnį vietos nustatymo paslaugų teiką. Tačiau tai neleidžia naudoti išorinį BlueTooth GPS imtuvą.</string>
   <string name="init_location_googleplayservices">Naudoti Google Play paslaugas</string>
+  <string name="init_low_power">Energijos taupymo režimas</string>
+  <string name="init_low_power_note">Energijos taupymo režimas išvengia GPS ir giroskopo naudojimo kai labai tiksli vieta nėra būtina, bet truputėli pailgina vietos nustatymo laiką.</string>
+  <string name="init_low_power_mode">Aktyvinti energijos taupymo režimą</string>
   <string name="init_create_memory_dump">Sukurti atminties turinio failą</string>
   <string name="init_memory_dump">Atminties turinio failas</string>
   <string name="init_memory_dumped">Atminties turinio failas išsaugotas %s</string>
@@ -1164,6 +1168,8 @@
   <string name="showcase_logcache_text">Atminkite, kad dauguma komandų dabar pavadinimo juostoje. Ten rasite užbagto įrašo siuntimo mygtuką.</string>
   <string name="showcase_main_title">Naujas meniu</string>
   <string name="showcase_main_text">c:geo dabar meniu komandas patalpino pavadinimo juostoje kaip ir kituose šiuolaikinėse programose. Kai kurie elementai yra paslėpti už triejų taškų simbolio. Norėdami peržiūrėti jų aprašymus, ilgai spauskie mygtuką.</string>
+  <string name="showcase_cachelist_title">Sąrašų perjungimas</string>
+  <string name="showcase_cachelist_text">Galite perjungti slėptuvių sąrašus spustelėdami sąrašo pavadinimą.</string>
   <string name="confirm_log_title">Neįprastas įrašo tipas</string>
   <string name="confirm_log_message">Norite registruoti \'%s\'. Ar tikrai?</string>
 </resources>
