@@ -1,10 +1,13 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.content.Context;
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Parcel;
@@ -73,12 +76,17 @@ public class Image implements Parcelable {
         return description;
     }
 
-    public void openInBrowser(final Context fromActivity) {
+    public void openInBrowser(final Activity fromActivity) {
         if (StringUtils.isBlank(url)) {
             return;
         }
         final Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        fromActivity.startActivity(browserIntent);
+        try {
+            fromActivity.startActivity(browserIntent);
+        } catch (final ActivityNotFoundException e) {
+            Log.e("Cannot find suitable activity", e);
+            ActivityMixin.showToast(fromActivity, R.string.err_application_no);
+        }
     }
 
     @Override

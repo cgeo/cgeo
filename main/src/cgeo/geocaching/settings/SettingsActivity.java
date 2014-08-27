@@ -188,9 +188,8 @@ public class SettingsActivity extends PreferenceActivity {
                 try {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://" + host)));
                 } catch (final ActivityNotFoundException e) {
-                    // Those cases are rare enough (no web browser installed) and the use case so untypical
-                    // that we do not need to report anything to the user.
-                    Log.e("Cannot browse host " + host, e);
+                    Log.e("Cannot find suitable activity", e);
+                    ActivityMixin.showToast(SettingsActivity.this, R.string.err_application_no);
                 }
                 return true;
             }
