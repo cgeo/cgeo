@@ -21,6 +21,7 @@ import org.openintents.intents.FileManagerIntents;
 
 import android.app.ProgressDialog;
 import android.app.backup.BackupManager;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -185,7 +186,13 @@ public class SettingsActivity extends PreferenceActivity {
         preference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(final Preference preference) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://" + host)));
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://" + host)));
+                } catch (final ActivityNotFoundException e) {
+                    // Those cases are rare enough (no web browser installed) and the use case so untypical
+                    // that we do not need to report anything to the user.
+                    Log.e("Cannot browse host " + host, e);
+                }
                 return true;
             }
         });
