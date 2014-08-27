@@ -5,6 +5,7 @@ import butterknife.InjectView;
 
 import cgeo.calendar.CalendarAddon;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.AbstractActivity.ActivitySharingInterface;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.activity.INavigationSource;
 import cgeo.geocaching.activity.Progress;
@@ -133,7 +134,7 @@ import java.util.regex.Pattern;
  *
  * e.g. details, description, logs, waypoints, inventory...
  */
-public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailActivity.Page> implements CacheMenuHandler.ActivityInterface, INavigationSource {
+public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailActivity.Page> implements CacheMenuHandler.ActivityInterface, INavigationSource, ActivitySharingInterface {
 
     private static final int MESSAGE_FAILED = -1;
     private static final int MESSAGE_SUCCEEDED = 1;
@@ -315,12 +316,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         locationUpdater = new CacheDetailsGeoDirHandler(this);
 
         // If we have a newer Android device setup Android Beam for easy cache sharing
-        initializeAndroidBeam(new ActivitySharingInterface() {
-            @Override
-            public String getUri() {
-                return cache != null ? cache.getCgeoUrl() : null;
-            }
-        });
+        initializeAndroidBeam(this);
+    }
+
+    @Override
+    public String getAndroidBeamUri() {
+        return cache != null ? cache.getCgeoUrl() : null;
     }
 
     @Override
