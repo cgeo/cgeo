@@ -51,12 +51,12 @@ public class GeoDataProvider extends LooperCallbacks<IGeoData> {
         try {
             geoManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, gpsListener);
         } catch (final Exception e) {
-            Log.w("No GPS provider available", e);
+            Log.w("Unable to create GPS location provider: " + e.getMessage());
         }
         try {
             geoManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, networkListener);
         } catch (final Exception e) {
-            Log.w("No network provider available", e);
+            Log.w("Unable to create network location provider: " + e.getMessage());
         }
     }
 
