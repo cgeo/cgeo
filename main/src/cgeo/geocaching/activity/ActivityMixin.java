@@ -169,6 +169,9 @@ public final class ActivityMixin {
     }
 
     public static void presentShowcase(final IAbstractActivity activity) {
+        if (VERSION.SDK_INT < 11) {
+            return;
+        }
         final ShowcaseViewBuilder builder = activity.getShowcase();
         if (builder != null) {
             builder.setStyle(R.style.ShowcaseView);
