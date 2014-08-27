@@ -442,21 +442,21 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 final TextView spotted = details.add(R.string.trackable_spotted, text.toString());
                 spotted.setClickable(true);
                 if (Trackable.SPOTTED_CACHE == trackable.getSpottedType()) {
-                        spotted.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(final View arg0) {
-                                final String cacheGeocode = DataStore.getGeocodeForGuid(trackable.getSpottedGuid());
-                                if (StringUtils.isNotBlank(cacheGeocode)) {
-                                    CacheDetailActivity.startActivity(TrackableActivity.this, cacheGeocode, trackable.getSpottedName());
-                                } else {
-                                    // for geokrety we only know the cache geocode
-                                    final String cacheCode = trackable.getSpottedName();
-                                    if (ConnectorFactory.canHandle(cacheCode)) {
-                                        CacheDetailActivity.startActivity(TrackableActivity.this, cacheCode);
-                                    }
+                    spotted.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(final View arg0) {
+                            if (StringUtils.isNotBlank(trackable.getSpottedGuid())) {
+                                CacheDetailActivity.startActivityGuid(TrackableActivity.this, trackable.getSpottedGuid(), trackable.getSpottedName());
+                            }
+                            else {
+                                // for geokrety we only know the cache geocode
+                                final String cacheCode = trackable.getSpottedName();
+                                if (ConnectorFactory.canHandle(cacheCode)) {
+                                    CacheDetailActivity.startActivity(TrackableActivity.this, cacheCode);
                                 }
                             }
-                        });
+                        }
+                    });
                 } else if (Trackable.SPOTTED_USER == trackable.getSpottedType()) {
                     spotted.setOnClickListener(new UserNameClickListener(trackable, Html.fromHtml(trackable.getSpottedName()).toString()));
                 } else if (Trackable.SPOTTED_OWNER == trackable.getSpottedType()) {
