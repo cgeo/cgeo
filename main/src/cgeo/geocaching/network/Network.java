@@ -235,7 +235,7 @@ public abstract class Network {
                 Log.w(status + " [" + response.getStatusLine().getReasonPhrase() + "]" + formatTimeSpan(before) + reqLogStr);
             }
             return response;
-        } catch (final IOException e) {
+        } catch (final Exception e) {
             final String timeSpan = formatTimeSpan(before);
             Log.w("Failure" + timeSpan + reqLogStr + " (" + e.toString() + ")");
         }
