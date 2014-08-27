@@ -78,6 +78,7 @@ import java.util.regex.Pattern;
 public abstract class GCParser {
     private final static SynchronizedDateFormat dateTbIn1 = new SynchronizedDateFormat("EEEEE, dd MMMMM yyyy", Locale.ENGLISH); // Saturday, 28 March 2009
     private final static SynchronizedDateFormat dateTbIn2 = new SynchronizedDateFormat("EEEEE, MMMMM dd, yyyy", Locale.ENGLISH); // Saturday, March 28, 2009
+    private final static ImmutablePair<StatusCode, Geocache> UNKNOWN_PARSE_ERROR = ImmutablePair.of(StatusCode.UNKNOWN_ERROR, null);
 
     private static SearchResult parseSearch(final String url, final String pageContent, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
         if (StringUtils.isBlank(pageContent)) {
@@ -390,12 +391,13 @@ public abstract class GCParser {
      * @return a pair, with a {@link StatusCode} on the left, and a non-null cache object on the right
      *         iff the status code is {@link StatusCode.NO_ERROR}.
      */
+    @NonNull
     static private ImmutablePair<StatusCode, Geocache> parseCacheFromText(final String pageIn, @Nullable final CancellableHandler handler) {
         CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_details);
 
         if (StringUtils.isBlank(pageIn)) {
             Log.e("GCParser.parseCache: No page given");
-            return null;
+            return UNKNOWN_PARSE_ERROR;
         }
 
         if (pageIn.contains(GCConstants.STRING_UNPUBLISHED_OTHER) || pageIn.contains(GCConstants.STRING_UNPUBLISHED_FROM_SEARCH)) {
@@ -408,7 +410,7 @@ public abstract class GCParser {
 
         final String cacheName = Html.fromHtml(TextUtils.getMatch(pageIn, GCConstants.PATTERN_NAME, true, "")).toString();
         if (GCConstants.STRING_UNKNOWN_ERROR.equalsIgnoreCase(cacheName)) {
-            return ImmutablePair.of(StatusCode.UNKNOWN_ERROR, null);
+            return UNKNOWN_PARSE_ERROR;
         }
 
         // first handle the content with line breaks, then trim everything for easier matching and reduced memory consumption in parsed fields
@@ -451,7 +453,7 @@ public abstract class GCParser {
         final int pos = tableInside.indexOf(GCConstants.STRING_CACHEDETAILS);
         if (pos == -1) {
             Log.e("GCParser.parseCache: ID \"cacheDetails\" not found on page");
-            return null;
+            return UNKNOWN_PARSE_ERROR;
         }
 
         tableInside = tableInside.substring(pos);
@@ -590,7 +592,7 @@ public abstract class GCParser {
         // cache spoilers
         try {
             if (CancellableHandler.isCancelled(handler)) {
-                return null;
+                return UNKNOWN_PARSE_ERROR;
             }
             CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_spoilers);
 
@@ -691,7 +693,7 @@ public abstract class GCParser {
         int wpBegin = page.indexOf("<table class=\"Table\" id=\"ctl00_ContentBody_Waypoints\">");
         if (wpBegin != -1) { // parse waypoints
             if (CancellableHandler.isCancelled(handler)) {
-                return null;
+                return UNKNOWN_PARSE_ERROR;
             }
             CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_waypoints);
 
@@ -755,7 +757,7 @@ public abstract class GCParser {
 
         // last check for necessary cache conditions
         if (StringUtils.isBlank(cache.getGeocode())) {
-            return ImmutablePair.of(StatusCode.UNKNOWN_ERROR, null);
+            return UNKNOWN_PARSE_ERROR;
         }
 
         cache.setDetailedUpdatedNow();
