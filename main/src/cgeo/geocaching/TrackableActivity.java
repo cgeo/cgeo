@@ -120,7 +120,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             initializeAndroidBeam(
                     new ActivitySharingInterface() {
                         @Override
-                        public String getUri() {
+                        public String getAndroidBeamUri() {
                             return trackable.getUrl();
                         }
                     }

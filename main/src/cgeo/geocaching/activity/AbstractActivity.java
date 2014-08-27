@@ -211,8 +211,8 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
     // these are so few that we don't want to deal with the older (non Android Beam) API
 
     public interface ActivitySharingInterface {
-        /** Return an URL that represent the current activity for sharing */
-        public String getUri();
+        /** Return an URL that represent the current activity for sharing or null for no sharing. */
+        public String getAndroidBeamUri();
     }
 
     protected void initializeAndroidBeam(final ActivitySharingInterface sharingInterface) {
@@ -230,8 +230,8 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         nfcAdapter.setNdefPushMessageCallback(new NfcAdapter.CreateNdefMessageCallback() {
             @Override
             public NdefMessage createNdefMessage(final NfcEvent event) {
-                final NdefRecord record = NdefRecord.createUri(sharingInterface.getUri());
-                return new NdefMessage(new NdefRecord[]{record});
+                final String uri = sharingInterface.getAndroidBeamUri();
+                return uri != null ? new NdefMessage(new NdefRecord[]{NdefRecord.createUri(uri)}) : null;
             }
         }, this);
 
