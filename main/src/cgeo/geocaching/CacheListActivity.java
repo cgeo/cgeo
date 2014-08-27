@@ -1387,6 +1387,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         showProgress(true);
         showFooterLoadingCaches();
         DataStore.moveToList(adapter.getCheckedCaches(), listId);
+        adapter.setSelectMode(false);
 
         currentLoader = (OfflineGeocacheListLoader) getSupportLoaderManager().restartLoader(CacheListType.OFFLINE.getLoaderId(), OfflineGeocacheListLoader.getBundleForList(listId), this);
 
