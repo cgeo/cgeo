@@ -313,6 +313,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         });
 
         locationUpdater = new CacheDetailsGeoDirHandler(this);
+
+        // If we have a newer Android device setup Android Beam for easy cache sharing
+        initializeAndroidBeam(new ActivitySharingInterface() {
+            @Override
+            public String getUri() {
+                return cache != null ? cache.getCgeoUrl() : null;
+            }
+        });
     }
 
     @Override
@@ -604,16 +612,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         cache.setChangeNotificationHandler(new ChangeNotificationHandler(this, progress));
 
         updateTitleBar(cache.getGeocode(), cache.getName(), cache.getType());
-
-        // if we have a newer Android device setup Android Beam for easy cache sharing
-        initializeAndroidBeam(
-                new ActivitySharingInterface() {
-                    @Override
-                    public String getUri() {
-                        return cache.getCgeoUrl();
-                    }
-                }
-        );
 
         // reset imagesList so Images view page will be redrawn
         imagesList = null;

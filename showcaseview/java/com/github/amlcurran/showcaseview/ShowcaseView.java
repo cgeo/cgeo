@@ -26,6 +26,7 @@ import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -157,24 +158,28 @@ public class ShowcaseView extends RelativeLayout
         postDelayed(new Runnable() {
             @Override
             public void run() {
+            	
+                try {
+					if (!shotStateStore.hasShot()) {
 
-                if (!shotStateStore.hasShot()) {
+					    updateBitmap();
+					    Point targetPoint = target.getPoint();
+					    if (targetPoint != null) {
+					        hasNoTarget = false;
+					        if (animate) {
+					            animationFactory.animateTargetToPoint(ShowcaseView.this, targetPoint);
+					        } else {
+					            setShowcasePosition(targetPoint);
+					        }
+					    } else {
+					        hasNoTarget = true;
+					        invalidate();
+					    }
 
-                    updateBitmap();
-                    Point targetPoint = target.getPoint();
-                    if (targetPoint != null) {
-                        hasNoTarget = false;
-                        if (animate) {
-                            animationFactory.animateTargetToPoint(ShowcaseView.this, targetPoint);
-                        } else {
-                            setShowcasePosition(targetPoint);
-                        }
-                    } else {
-                        hasNoTarget = true;
-                        invalidate();
-                    }
-
-                }
+					}
+				} catch (RuntimeException e) {
+					Log.e("cgeo", "Couldn't create showcase view", e);
+				}
             }
         }, 100);
     }
