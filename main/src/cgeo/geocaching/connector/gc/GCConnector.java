@@ -7,6 +7,7 @@ import cgeo.geocaching.ICache;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.UserAction;
@@ -37,6 +38,7 @@ import org.eclipse.jdt.annotation.Nullable;
 
 import rx.functions.Action1;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -414,7 +416,12 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
             @Override
             public void call(cgeo.geocaching.connector.UserAction.Context context) {
-                context.activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/email/?u=" + Network.encode(context.userName))));
+                try {
+                    context.activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/email/?u=" + Network.encode(context.userName))));
+                } catch (final ActivityNotFoundException e) {
+                    Log.e("Cannot find suitable activity", e);
+                    ActivityMixin.showToast(context.activity, R.string.err_application_no);
+                }
             }
         }));
         return actions;
