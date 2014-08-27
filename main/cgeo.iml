@@ -23,9 +23,11 @@
           <root url="file://$MODULE_DIR$/libs" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/libs/src" />
+        </SOURCES>
         <jarDirectory url="file://$MODULE_DIR$/libs" recursive="false" />
-        <jarDirectory url="file://$MODULE_DIR$/libs" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/libs/src" recursive="false" type="SOURCES" />
         <jarDirectory url="file://$MODULE_DIR$/libs/src" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
