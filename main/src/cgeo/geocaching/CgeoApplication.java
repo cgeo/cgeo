@@ -124,7 +124,7 @@ public class CgeoApplication extends Application {
             @Override
             public Observable<? extends Float> call(final Throwable throwable) {
                 Log.e("Device orientation will not be available as no suitable sensors were found");
-                return Observable.never();
+                return Observable.<Float>never().startWith(0.0f);
             }
         }).replay(1).refCount().doOnNext(new Action1<Float>() {
             @Override
