@@ -17,6 +17,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.enumerations.CacheAttribute;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -259,9 +260,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return;
         }
 
-        // if we open this cache from a search, let's properly initialize the title bar, even if we don't have cache details
-        cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_ONLY);
-        updateTitleBar(geocode);
+        // If we open this cache from a search, let's properly initialize the title bar, even if we don't have cache details
+        updateTitleBar(geocode, name, null);
 
         final LoadCacheHandler loadCacheHandler = new LoadCacheHandler(this, progress);
 
@@ -581,7 +581,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         // allow cache to notify CacheDetailActivity when it changes so it can be reloaded
         cache.setChangeNotificationHandler(new ChangeNotificationHandler(this, progress));
 
-        updateTitleBar(null);
+        updateTitleBar(cache.getGeocode(), cache.getName(), cache.getType());
 
         // if we have a newer Android device setup Android Beam for easy cache sharing
         initializeAndroidBeam(
@@ -604,19 +604,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         Settings.addCacheToHistory(cache.getGeocode());
     }
 
-    private void updateTitleBar(@Nullable final String geocode) {
-        if (cache == null) {
-            setTitle(StringUtils.isBlank(geocode) ? res.getString(R.string.cache) : geocode);
-            // avoid showing the traditional cache icon from the standard action bar (it may later change to the actual type icon)
-            getSupportActionBar().setIcon(android.R.color.transparent);
+    private void updateTitleBar(@Nullable final String geocode, @Nullable final String name, @Nullable final CacheType type) {
+        if (StringUtils.isNotBlank(name)) {
+            setTitle(StringUtils.isNotBlank(geocode) ? name + " (" + geocode + ")" : name);
+        } else {
+            setTitle(StringUtils.isNotBlank(geocode) ? geocode : res.getString(R.string.cache));
         }
-        else {
-            if (StringUtils.isNotBlank(cache.getName())) {
-                setTitle(cache.getName() + " (" + cache.getGeocode() + ')');
-            } else {
-                setTitle(cache.getGeocode());
-            }
-            getSupportActionBar().setIcon(getResources().getDrawable(cache.getType().markerId));
+        if (type != null) {
+            getSupportActionBar().setIcon(getResources().getDrawable(type.markerId));
+        } else {
+            getSupportActionBar().setIcon(android.R.color.transparent);
         }
     }
 
