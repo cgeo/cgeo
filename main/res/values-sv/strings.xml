@@ -209,6 +209,8 @@
   <string name="info_cache_saved">Cachen har lagrats lokalt</string>
   <string name="loc_last">Senast kända</string>
   <string name="loc_net">Nätverk</string>
+  <string name="loc_fused">Kombinerad</string>
+  <string name="loc_low_power">Strömspar</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Försöker hitta plats</string>
@@ -490,6 +492,12 @@
   <string name="init_maintenance">Underhåll</string>
   <string name="init_maintenance_directories_note">c:geo lagrar bilder, loggbilder och andra filer relaterade till en cache i en separat katalog. I vissa fall (som vid importering/exportering av databasen) kan denna katalog innehålla inaktuella filer, som kan tas bort här.</string>
   <string name="init_maintenance_directories">Ta bort överblivna filer</string>
+  <string name="init_location">Geolocation</string>
+  <string name="init_location_note">På enheter utrustade med Google Play-tjänster kan c:geo automatiskt använda en bättre tjänst för positionering. Detta hindrar emellertid användningen av en extern Bluetooth GPS-mottagare.</string>
+  <string name="init_location_googleplayservices">Använd Google Play-tjänster</string>
+  <string name="init_low_power">Strömsparläge</string>
+  <string name="init_low_power_note">Strömsparläget undviker att använda GPS och gyroskop när exakt position inte är absolut nödvändigt. Detta sker på bekostnad av längre tid för positionering.</string>
+  <string name="init_low_power_mode">Aktivera strömsparläge</string>
   <string name="init_create_memory_dump">Skapa minnesdump</string>
   <string name="init_memory_dump">Minnesdump</string>
   <string name="init_memory_dumped">Minnet sparat till %s</string>
@@ -1165,7 +1173,9 @@
   <string name="showcase_logcache_title">Skickar loggen</string>
   <string name="showcase_logcache_text">Kom ihåg, många kommandon hittar du nu i titelraden. Där hittar du knappen för att skicka den avslutade loggen.</string>
   <string name="showcase_main_title">Nya menyer</string>
-  <string name="showcase_main_text">c:geo placerar un menyalternativ i titelraden likt andra moderna appar. Några alternativ döljs bakom symbolen med prickar. Tryck länge på en knapp för att se dess beskrivning.</string>
+  <string name="showcase_main_text">c:geo placerar nu menyalternativ i titelraden likt andra moderna appar. Några alternativ döljs bakom symbolen med prickar. Tryck länge på en knapp för att se dess beskrivning.</string>
+  <string name="showcase_cachelist_title">Byt listor</string>
+  <string name="showcase_cachelist_text">Du kan växla mellan dina geocachelistor genom att klicka på rubriken för listan.</string>
   <string name="confirm_log_title">Ovanlig loggtyp</string>
   <string name="confirm_log_message">Du vill logga \'%s\'. Är du säker?</string>
 </resources>
