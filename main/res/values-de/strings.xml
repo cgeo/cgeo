@@ -500,6 +500,9 @@
   <string name="init_create_memory_dump">Erzeuge ein Speicherabbild</string>
   <string name="init_memory_dump">Speicherabbild</string>
   <string name="init_memory_dumped">Speicherabbild in %s gespeichert</string>
+  <string name="init_hardware_acceleration_title">Hardwarebeschleunigte Darstellung</string>
+  <string name="init_hardware_acceleration_note">Mittels Hardwarebeschleunigung werden grafische Elemente schneller auf den Bildschirm dargestellt. Jedoch enthält das Android auf manchen Geräten Fehler, die zu verschwommenem Text (meistens bei fettgedruckten Zeichen) führen können. in diesen Fällen sollte die Hardwarebeschleunigung deaktiviert werden.</string>
+  <string name="init_hardware_acceleration">Hardwarebeschleunigung aktivieren</string>
   <string name="settings_open_website">Webseite öffnen</string>
   <string name="settings_settings">Einstellungen</string>
   <string name="settings_information">Information</string>
