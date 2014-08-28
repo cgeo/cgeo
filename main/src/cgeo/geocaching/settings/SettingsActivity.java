@@ -90,6 +90,7 @@ public class SettingsActivity extends PreferenceActivity {
         setTheme(Settings.isLightSkin() && Build.VERSION.SDK_INT > 10 ? R.style.settings_light : R.style.settings);
         super.onCreate(savedInstanceState);
 
+        initHardwareAccelerationPreferences();
         SettingsActivity.addPreferencesFromResource(this, R.xml.preferences);
         initPreferences();
 
@@ -131,7 +132,6 @@ public class SettingsActivity extends PreferenceActivity {
         initServicePreferences();
         initNavigationMenuPreferences();
         initMaintenanceButtons();
-        initHardwareAccelerationPreferences();
 
         for (final int k : new int[] { R.string.pref_username, R.string.pref_password,
                 R.string.pref_pass_vote, R.string.pref_signature,
@@ -381,10 +381,10 @@ public class SettingsActivity extends PreferenceActivity {
 				});
     }
 
-    public void initHardwareAccelerationPreferences() {
+    public static void initHardwareAccelerationPreferences() {
         // We have to ensure that the preference is initialized so that devices with hardware acceleration disabled
         // get the appropriate value.
-        getPreference(R.string.pref_hardware_acceleration).setDefaultValue(!Settings.HW_ACCEL_DISABLED_BY_DEFAULT);
+        Settings.setUseHardwareAcceleration(Settings.useHardwareAcceleration());
     }
 
     private void initDbLocationPreference() {
