@@ -64,7 +64,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.location.Location;
 import android.os.Build;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -260,12 +259,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             titleview.setText(title);
 
         }
-        if ((Build.VERSION.SDK_INT >= VERSION_CODES.ICE_CREAM_SANDWICH)) {
+        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)) {
             setTitleIceCreamSandwich(title);
         }
     }
 
-    @TargetApi(VERSION_CODES.ICE_CREAM_SANDWICH)
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     private void setTitleIceCreamSandwich(final String title) {
         activity.getActionBar().setTitle(title);
     }
@@ -374,7 +373,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         outState.putParcelableArrayList(BUNDLE_TRAIL_HISTORY, overlayPositionAndScale.getHistory());
     }
 
-    @TargetApi(VERSION_CODES.ICE_CREAM_SANDWICH)
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -435,7 +434,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         // set layout
         ActivityMixin.setTheme(activity);
-        if (Build.VERSION.SDK_INT >= VERSION_CODES.ICE_CREAM_SANDWICH) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             activity.getActionBar().setDisplayHomeAsUpEnabled(true);
         }
         activity.setContentView(mapProvider.getMapLayoutId());
@@ -551,7 +550,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         super.onPause();
     }
 
-    @TargetApi(VERSION_CODES.ICE_CREAM_SANDWICH)
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         // menu inflation happens in Google/Mapsforge specific classes
@@ -563,7 +562,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         subMenuStrategy.setHeaderTitle(res.getString(R.string.map_strategy_title));
 
 
-        if (Build.VERSION.SDK_INT >= VERSION_CODES.ICE_CREAM_SANDWICH) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             /* if we have an Actionbar find the my position toggle */
             final MenuItem item = menu.findItem(R.id.menu_toggle_mypos);
             myLocSwitch = new CheckBox(activity);
