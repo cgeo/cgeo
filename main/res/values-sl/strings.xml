@@ -499,6 +499,9 @@
   <string name="init_create_memory_dump">Ustvari Memmory dump</string>
   <string name="init_memory_dump">Memory dump</string>
   <string name="init_memory_dumped">Memory dump zapisan v %s</string>
+  <string name="init_hardware_acceleration_title">Strojno pospešeno prikazovanje</string>
+  <string name="init_hardware_acceleration_note">Strojno pospeševanje omogoča hitrejše prikazovanje grafičnih elementov na zaslonu. Vendar imajo nekatere Android naprave s strojno pospešenim prikazovanjem težave, predvsem s prikazovanjem odebeljenega teksta. V primeru težav izključite strojno pospešeno prikazovanje grafičnih elementov.</string>
+  <string name="init_hardware_acceleration">Omogoči strojno pospeševanje</string>
   <string name="settings_open_website">Odpri spletno stran</string>
   <string name="settings_settings">Nastavitve</string>
   <string name="settings_information">Informacije</string>

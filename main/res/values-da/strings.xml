@@ -143,7 +143,7 @@
   <string name="err_auth_initialize">Beklager, c:geo kan ikke gennemføre godkendelsen.</string>
   <string name="err_auth_process">Godkendelse fejlede.</string>
   <string name="err_cannot_log_visit">c:geo har ikke nok informationer til at logge besøg. Log fra \"Alle detaljer\".</string>
-  <string name="err_download_fail">Beklager, c:geo kan ikke hente cachen pga. </string>
+  <string name="err_download_fail">c:geo kan ikke indlæse cacher.</string>
   <string name="err_dwld_details_failed">c:geo kunne ikke hente cache-detaljer.</string>
   <string name="err_load_descr_failed">c:geo kan ikke indlæse beskrivelse.</string>
   <string name="err_location_unknown">c:geo kender ikke ​​cachens position.</string>
@@ -228,7 +228,7 @@
   <string name="caches_more_caches_no">Ikke flere cacher</string>
   <string name="caches_more_caches_loading">Indlæser cacher…</string>
   <string name="caches_more_caches_currently">indlæst</string>
-  <string name="caches_downloading">Henter cacher…\nETA: </string>
+  <string name="caches_downloading">Indlæser cacher…\nETA: </string>
   <string name="caches_eta_ltm">Under et minut</string>
   <plurals name="caches_eta_mins">
     <item quantity="one">%d minut</item>
@@ -547,6 +547,7 @@
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Vis på kort</string>
   <string name="cache_menu_map_static">Statiske kort</string>
+  <string name="cache_menu_download_map_static">Indlæs statiske kort</string>
   <string name="cache_menu_rmaps">Rmaps</string>
   <string name="cache_menu_map_ext">Vis på ext. kort</string>
   <string name="cache_menu_browser">Åbn i browser</string>
