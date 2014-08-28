@@ -370,6 +370,7 @@
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Activer</string>
   <string name="init_oc_ro_description">Autoriser c:geo à utiliser opencaching.ro pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
+  <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Activer</string>
   <string name="init_oc_uk_description">Autoriser c:geo à utiliser opencaching.org.uk pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
   <string name="init_gcvote">GCvote.com</string>
@@ -500,6 +501,9 @@
   <string name="init_create_memory_dump">Créer une image mémoire</string>
   <string name="init_memory_dump">Image mémoire</string>
   <string name="init_memory_dumped">Mémoire copiée dans %s</string>
+  <string name="init_hardware_acceleration_title">Accélération graphique</string>
+  <string name="init_hardware_acceleration_note">L\'accélération matérielle permet de dessiner les éléments graphiques plus rapidement à l\'écran. Toutefois, sur certains appareils, le système Android contient des erreurs et certains textes peuvent apparaitre flous, notamment les caractères gras. Dans ce cas, il suffit de désactiver l\'accélération graphique.</string>
+  <string name="init_hardware_acceleration">Activer l\'accélération graphique</string>
   <string name="settings_open_website">Ouvrir le site dans un navigateur</string>
   <string name="settings_settings">Paramètres</string>
   <string name="settings_information">Information</string>
