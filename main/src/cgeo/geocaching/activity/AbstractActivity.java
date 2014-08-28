@@ -216,7 +216,7 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
     }
 
     protected void initializeAndroidBeam(final ActivitySharingInterface sharingInterface) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             initializeICSAndroidBeam(sharingInterface);
         }
     }
