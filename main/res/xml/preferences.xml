@@ -745,6 +745,16 @@
                 android:key="@string/pref_fakekey_preference_maintenance_directories"
                 android:title="@string/init_maintenance_directories" />
         </PreferenceCategory>
+        <PreferenceCategory android:title="@string/init_hardware_acceleration_title">
+            <cgeo.geocaching.settings.TextPreference
+                android:layout="@layout/text_preference"
+                android:text="@string/init_hardware_acceleration_note" />
+
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="@string/pref_hardware_acceleration"
+                android:title="@string/init_hardware_acceleration" />
+        </PreferenceCategory>
         <PreferenceCategory android:title="@string/init_debug_title" >
             <cgeo.geocaching.settings.TextPreference
                 android:layout="@layout/text_preference"

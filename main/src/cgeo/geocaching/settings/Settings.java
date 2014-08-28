@@ -1036,6 +1036,10 @@ public class Settings {
     }
 
     public static boolean useHardwareAcceleration() {
-        return true;
+        return getBoolean(R.string.pref_hardware_acceleration, true);
+    }
+
+    public static boolean setUseHardwareAcceleration(final boolean useHardwareAcceleration) {
+        return putBoolean(R.string.pref_hardware_acceleration, useHardwareAcceleration);
     }
 }

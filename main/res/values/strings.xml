@@ -530,6 +530,9 @@
     <string name="init_create_memory_dump">Create memory dump</string>
     <string name="init_memory_dump">Memory dump</string>
     <string name="init_memory_dumped">Memory dumped to %s</string>
+    <string name="init_hardware_acceleration_title">Hardware accelerated rendering</string>
+    <string name="init_hardware_acceleration_note">Hardware acceleration renders graphical elements faster on the screen. However on some devices the Android operating system contains bugs and some text may appear blurred (notably bold characters). Disable hardware acceleration if this happens to you.</string>
+    <string name="init_hardware_acceleration">Enable hardware acceleration</string>
     <string name="settings_open_website">Open website</string>
     <string name="settings_settings">Settings</string>
     <string name="settings_information">Information</string>
