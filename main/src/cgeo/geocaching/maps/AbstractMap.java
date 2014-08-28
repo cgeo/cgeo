@@ -6,7 +6,6 @@ import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Build;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,7 +34,7 @@ public abstract class AbstractMap {
     public void onCreate(Bundle savedInstanceState) {
 
         mapActivity.superOnCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= VERSION_CODES.ICE_CREAM_SANDWICH) {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
             mapActivity.getActivity().requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         }
     }
