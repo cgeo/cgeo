@@ -1034,4 +1034,8 @@ public class Settings {
         history.add(0, geocode);
         putString(R.string.pref_caches_history, StringUtils.join(history, HISTORY_SEPARATOR));
     }
+
+    public static boolean useHardwareAcceleration() {
+        return true;
+    }
 }

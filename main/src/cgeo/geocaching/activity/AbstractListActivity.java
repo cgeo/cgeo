@@ -67,7 +67,7 @@ public abstract class AbstractListActivity extends ActionBarListActivity impleme
         res = this.getResources();
         app = (CgeoApplication) this.getApplication();
 
-        ActivityMixin.keepScreenOn(this, keepScreenOn);
+        ActivityMixin.onCreate(this, keepScreenOn);
     }
 
     final protected void setTitle(final String title) {

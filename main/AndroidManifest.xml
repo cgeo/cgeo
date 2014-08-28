@@ -39,7 +39,8 @@
         android:backupAgent="cgeo.geocaching.backup.CentralBackupAgent"
         android:icon="@drawable/cgeo"
         android:label="@string/app_name"
-        android:theme="@style/cgeo" >
+        android:theme="@style/cgeo"
+        android:hardwareAccelerated="false">
         <uses-library
             android:name="com.google.android.maps"
             android:required="false" />

@@ -16,7 +16,9 @@ import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
+import android.view.Window;
 import android.view.WindowManager;
+import android.view.WindowManager.LayoutParams;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -103,9 +105,13 @@ public final class ActivityMixin {
         postShowToast(activity, text, Toast.LENGTH_SHORT);
     }
 
-    public static void keepScreenOn(final Activity abstractActivity, final boolean keepScreenOn) {
+    public static void onCreate(final Activity abstractActivity, final boolean keepScreenOn) {
+        final Window window = abstractActivity.getWindow();
         if (keepScreenOn) {
-            abstractActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
+        if (Settings.useHardwareAcceleration()) {
+            window.setFlags(LayoutParams.FLAG_HARDWARE_ACCELERATED, LayoutParams.FLAG_HARDWARE_ACCELERATED);
         }
     }
 
