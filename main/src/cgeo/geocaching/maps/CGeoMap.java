@@ -1151,7 +1151,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             final boolean excludeMine = Settings.isExcludeMyCaches();
             final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
             if (mapMode == MapMode.LIVE) {
-                CGeoMap.filter(caches);
+                synchronized(caches) {
+                    CGeoMap.filter(caches);
+                }
             }
             countVisibleCaches();
             if (cachesCnt < Settings.getWayPointsThreshold() || geocodeIntent != null) {
