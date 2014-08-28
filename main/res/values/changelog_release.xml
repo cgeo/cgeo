@@ -2,7 +2,11 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next feature release:</b>\n
+    <b>2014.08.28:</b>\n
+    · New: Option to disable hardware acceleration on problematic devices\n
+    · Various bugfixes\n
+    \n
+    <b>2014.08.27a:</b>\n
     \n
     <font size="16"><b>IMPORTANT CHANGE</b></font>\n
     · New: Actionbar menus (Long press action buttons for a description)\n
