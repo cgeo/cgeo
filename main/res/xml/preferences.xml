@@ -764,6 +764,15 @@
                 android:key="@string/pref_lowpowermode"
                 android:title="@string/init_low_power_mode" />
         </PreferenceCategory>
+        <PreferenceCategory android:title="@string/init_hardware_acceleration_title">
+            <cgeo.geocaching.settings.TextPreference
+                android:layout="@layout/text_preference"
+                android:text="@string/init_hardware_acceleration_note" />
+
+            <CheckBoxPreference
+                android:key="@string/pref_hardware_acceleration"
+                android:title="@string/init_hardware_acceleration" />
+        </PreferenceCategory>
         <PreferenceCategory android:title="@string/init_debug_title" >
             <cgeo.geocaching.settings.TextPreference
                 android:layout="@layout/text_preference"

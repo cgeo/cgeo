@@ -146,7 +146,7 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
 
         // only needed in some activities, but implemented in super class nonetheless
         Cookies.restoreCookieStore(Settings.getCookieStore());
-        ActivityMixin.keepScreenOn(this, keepScreenOn);
+        ActivityMixin.onCreate(this, keepScreenOn);
     }
 
     @Override

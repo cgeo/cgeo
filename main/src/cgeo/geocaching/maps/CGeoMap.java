@@ -429,7 +429,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         // reset status
         noMapTokenShowed = false;
 
-        ActivityMixin.keepScreenOn(activity, true);
+        ActivityMixin.onCreate(activity, true);
 
 
         // set layout
