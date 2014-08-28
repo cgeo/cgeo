@@ -751,7 +751,6 @@
                 android:text="@string/init_hardware_acceleration_note" />
 
             <CheckBoxPreference
-                android:defaultValue="true"
                 android:key="@string/pref_hardware_acceleration"
                 android:title="@string/init_hardware_acceleration" />
         </PreferenceCategory>

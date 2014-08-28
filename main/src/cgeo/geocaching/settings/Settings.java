@@ -34,6 +34,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 
@@ -52,6 +53,10 @@ public class Settings {
     public static final int SHOW_WP_THRESHOLD_DEFAULT = 10;
     public static final int SHOW_WP_THRESHOLD_MAX = 50;
     private static final int MAP_SOURCE_DEFAULT = GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
+
+    public static final boolean HW_ACCEL_DISABLED_BY_DEFAULT =
+            StringUtils.equals(Build.MODEL, "HTC One X") ||    // HTC One X
+            StringUtils.equals(Build.MODEL, "GT-I8190");       // Samsung S3 mini
 
     private final static int unitsMetric = 1;
 
@@ -1036,7 +1041,7 @@ public class Settings {
     }
 
     public static boolean useHardwareAcceleration() {
-        return getBoolean(R.string.pref_hardware_acceleration, true);
+        return getBoolean(R.string.pref_hardware_acceleration, !HW_ACCEL_DISABLED_BY_DEFAULT);
     }
 
     public static boolean setUseHardwareAcceleration(final boolean useHardwareAcceleration) {

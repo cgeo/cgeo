@@ -1,5 +1,7 @@
 package cgeo.geocaching.settings;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Intents;
@@ -129,6 +131,7 @@ public class SettingsActivity extends PreferenceActivity {
         initServicePreferences();
         initNavigationMenuPreferences();
         initMaintenanceButtons();
+        initHardwareAccelerationPreferences();
 
         for (final int k : new int[] { R.string.pref_username, R.string.pref_password,
                 R.string.pref_pass_vote, R.string.pref_signature,
@@ -376,6 +379,12 @@ public class SettingsActivity extends PreferenceActivity {
 						return true;
 					}
 				});
+    }
+
+    public void initHardwareAccelerationPreferences() {
+        // We have to ensure that the preference is initialized so that devices with hardware acceleration disabled
+        // get the appropriate value.
+        getPreference(R.string.pref_hardware_acceleration).setDefaultValue(!Settings.HW_ACCEL_DISABLED_BY_DEFAULT);
     }
 
     private void initDbLocationPreference() {
