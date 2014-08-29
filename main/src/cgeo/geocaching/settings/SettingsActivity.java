@@ -1,7 +1,5 @@
 package cgeo.geocaching.settings;
 
-import butterknife.ButterKnife;
-
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Intents;

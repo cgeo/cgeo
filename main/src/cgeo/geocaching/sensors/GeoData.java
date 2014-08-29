@@ -86,10 +86,9 @@ public class GeoData extends Location implements IGeoData {
             if (bestLocation != null) {
                 bestLocation.setProvider(INITIAL_PROVIDER);
                 return new GeoData(bestLocation);
-            } else {
-                Log.i("No last known location available");
-                return null;
             }
+            Log.i("No last known location available");
+            return null;
         } catch (final Exception e) {
             // This error is non-fatal as its only consequence is that we will start with a dummy location
             // instead of a previously known one.

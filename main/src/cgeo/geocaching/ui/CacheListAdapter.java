@@ -120,9 +120,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     public CacheListAdapter(final Activity activity, final List<Geocache> list, final CacheListType cacheListType) {
         super(activity, 0, list);
         final IGeoData currentGeo = CgeoApplication.getInstance().currentGeo();
-        if (currentGeo != null) {
-            coords = currentGeo.getCoords();
-        }
+        coords = currentGeo.getCoords();
         this.res = activity.getResources();
         this.list = list;
         this.cacheListType = cacheListType;
