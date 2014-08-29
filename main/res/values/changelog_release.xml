@@ -2,6 +2,9 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>2014.08.29:</b>\n
+    · Fix: Stored found or owned caches shown on map although set to hidden\n
+    \n
     <b>2014.08.28:</b>\n
     · New: Option to disable hardware acceleration on problematic devices\n
     · Various bugfixes\n
