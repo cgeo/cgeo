@@ -18,6 +18,7 @@ public class RotationProvider extends LooperCallbacks<Float> implements SensorEv
     private final Sensor rotationSensor;
     private final float[] rotationMatrix = new float[16];
     private final float[] orientation = new float[4];
+    private final float[] values = new float[4];
 
     @TargetApi(19)
     protected RotationProvider(final Context context, final boolean lowPower) {
@@ -40,7 +41,15 @@ public class RotationProvider extends LooperCallbacks<Float> implements SensorEv
 
     @Override
     public void onSensorChanged(final SensorEvent event) {
-        SensorManager.getRotationMatrixFromVector(rotationMatrix, event.values);
+        // On some Samsung devices, SensorManager#getRotationMatrixFromVector throws an exception if the rotation
+        // vector has more than 4 elements. Since only the four first elements are used, we can truncate the vector
+        // without losing precision.
+        if (event.values.length > 4) {
+            System.arraycopy(event.values, 0, values, 0, 4);
+            SensorManager.getRotationMatrixFromVector(rotationMatrix, values);
+        } else {
+            SensorManager.getRotationMatrixFromVector(rotationMatrix, event.values);
+        }
         SensorManager.getOrientation(rotationMatrix, orientation);
         subscriber.onNext((float) (orientation[0] * 180 / Math.PI));
     }
