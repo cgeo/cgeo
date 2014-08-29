@@ -492,6 +492,8 @@
   <string name="init_create_memory_dump">Sukurti atminties turinio failą</string>
   <string name="init_memory_dump">Atminties turinio failas</string>
   <string name="init_memory_dumped">Atminties turinio failas išsaugotas %s</string>
+  <string name="init_hardware_acceleration_title">Aparatinis grafikos spartinimas</string>
+  <string name="init_hardware_acceleration">Įjungti aparatinį spartinimą</string>
   <string name="settings_open_website">Atidaryti interneto svetainę</string>
   <string name="settings_settings">Nustatymai</string>
   <string name="settings_information">Informacija</string>

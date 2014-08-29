@@ -209,6 +209,8 @@
   <string name="info_cache_saved">El catxé ha estat desat localment</string>
   <string name="loc_last">Última coneguda</string>
   <string name="loc_net">Xarxa</string>
+  <string name="loc_fused">Combinat</string>
+  <string name="loc_low_power">Bateria baixa</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Intentant ubicar</string>
@@ -490,9 +492,17 @@
   <string name="init_maintenance_directories_note">El c:geo desa les imatges, el imatges dels registres i altres fitxers relacionats amb un catxé a un directori separat. En alguns casos (com important/exportant la base de dades) aquest directori pot contenir fitxers antiquats, que es poden suprimir aquí.</string>
   <string name="init_maintenance_directories">Suprimeix els arxius orfes</string>
   <string name="init_location">Geolocalització</string>
+  <string name="init_location_note">En dispositius equipats amb Google Play el c:geo pot utilitzar automàticament un proveïdor de geolocalització millor. Tanmateix, això evita l\'ús d\'un receptor GPS BlueTooth extern.</string>
+  <string name="init_location_googleplayservices">Utilitza els serveis de Google Play</string>
+  <string name="init_low_power">Mode de bateria baixa</string>
+  <string name="init_low_power_note">El mode de bateria baixa evita utilitzar el GPS i el giroscopi quan no és estrictament necessària una ubicació precisa, a costa d\'augmentar el temps per fixar els satèl·lits.</string>
+  <string name="init_low_power_mode">Activa el mode de bateria baixa</string>
   <string name="init_create_memory_dump">Crea un buidat de memòria</string>
   <string name="init_memory_dump">Buidat de memòria</string>
   <string name="init_memory_dumped">S\'ha creat el buidat de memòria al %s</string>
+  <string name="init_hardware_acceleration_title">Renderització amb acceleració per maquinari</string>
+  <string name="init_hardware_acceleration_note">L\'acceleració per maquinari renderitza més ràpidament els elements gràfics a la pantalla. Tanmateix, en alguns dispositius Android, el sistema operatiu conté errors i algun text pot aparèixer borrós (caràcters en negreta molt notables). Inhabiliteu l\'acceleració per maquinari si teniu aquest problema.</string>
+  <string name="init_hardware_acceleration">Activa l\'acceleració per maquinari</string>
   <string name="settings_open_website">Obre el lloc web</string>
   <string name="settings_settings">Configuració</string>
   <string name="settings_information">Informació</string>
@@ -1127,6 +1137,8 @@
   <string name="tts_service">Brúixola parlant</string>
   <string name="tts_start">Comença a parlar</string>
   <string name="tts_stop">Deixa de parlar</string>
+  <string name="tts_started">S\'ha iniciat el mode parlat</string>
+  <string name="tts_stopped">S\'ha aturat el mode parlat</string>
   <string name="err_tts_lang_not_supported">La llengua actual no és compatible amb la síntesi de veu.</string>
   <string name="tts_one_kilometer">un quilòmetre</string>
   <plurals name="tts_kilometers">
@@ -1167,4 +1179,7 @@
   <string name="showcase_logcache_text">Recordeu, ara moltes comandes es troben a la barra de títol. Allà trobareu el botó per enviar el registre acabat.</string>
   <string name="showcase_main_title">Nous menús</string>
   <string name="showcase_main_text">Ara el c:geo posa elements del menú a la barra de títol al igual que altres aplicacions modernes. Alguns elements s\'amaguen darrere el símbol de punts. Premeu el botó de forma llarga per veure la seva descripció.</string>
+  <string name="showcase_cachelist_text">Es pot canviar entre les diferents llistes fent un clic al nom de la llista actual.</string>
+  <string name="confirm_log_title">Tipus de registre poc habitual</string>
+  <string name="confirm_log_message">Voleu registrar \'%s\'. N\'esteu segurs?</string>
 </resources>
