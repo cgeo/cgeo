@@ -57,7 +57,9 @@ public class Settings {
     public static final boolean HW_ACCEL_DISABLED_BY_DEFAULT =
             StringUtils.equals(Build.MODEL, "HTC One X") ||    // HTC One X
             StringUtils.equals(Build.MODEL, "GT-I8190")  ||    // Samsung S3 mini
-            StringUtils.equals(Build.MODEL, "GT-S6310L");      // Samsung Galaxy Young
+            StringUtils.equals(Build.MODEL, "GT-S6310L") ||    // Samsung Galaxy Young
+            StringUtils.equals(Build.MODEL, "GT-P5210")  ||    // Samsung Galaxy Tab 3
+            StringUtils.equals(Build.MODEL, "ST25i");         // Sony Xperia U
 
     private final static int unitsMetric = 1;
 
