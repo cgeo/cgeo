@@ -1510,7 +1510,6 @@ public class Geocache implements ICache, IWaypoint {
             @Override
             public void call() {
                 refreshSynchronous(handler);
-                handler.sendEmptyMessage(CancellableHandler.DONE);
             }
         });
     }
@@ -1601,7 +1600,7 @@ public class Geocache implements ICache, IWaypoint {
             RxUtils.waitForCompletion(StaticMapsProvider.downloadMaps(cache), imgGetter.waitForEndObservable(handler));
 
             if (handler != null) {
-                handler.sendMessage(Message.obtain());
+                handler.sendEmptyMessage(CancellableHandler.DONE);
             }
         } catch (final Exception e) {
             Log.e("Geocache.storeCache", e);
