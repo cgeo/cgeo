@@ -550,6 +550,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         super.onPause();
     }
 
+    @Override
+    public void onStop() {
+        // Ensure that handlers will not try to update the dialog once the view is detached.
+        waitDialog = null;
+        super.onStop();
+    }
+
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {

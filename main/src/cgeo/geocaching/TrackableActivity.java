@@ -4,6 +4,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.AbstractActivity.ActivitySharingInterface;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
@@ -56,7 +57,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivity.Page> {
+public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivity.Page> implements ActivitySharingInterface {
 
     public enum Page {
         DETAILS(R.string.detail),
@@ -116,15 +117,6 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 waitDialog.dismiss();
             }
 
-            // if we have a newer Android device setup Android Beam for easy cache sharing
-            initializeAndroidBeam(
-                    new ActivitySharingInterface() {
-                        @Override
-                        public String getAndroidBeamUri() {
-                            return trackable.getUrl();
-                        }
-                    }
-            );
         }
     };
 
@@ -211,9 +203,18 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         }
         waitDialog = ProgressDialog.show(this, message, res.getString(R.string.trackable_details_loading), true, true);
 
+
+        // If we have a newer Android device setup Android Beam for easy cache sharing
+        initializeAndroidBeam(this);
+
         createViewPager(0, null);
         final LoadTrackableThread thread = new LoadTrackableThread(loadTrackableHandler, geocode, guid, id);
         thread.start();
+    }
+
+    @Override
+    public String getAndroidBeamUri() {
+        return trackable != null ? trackable.getUrl() : null;
     }
 
     @Override
