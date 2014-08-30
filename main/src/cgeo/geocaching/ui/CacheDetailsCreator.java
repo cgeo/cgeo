@@ -126,10 +126,7 @@ public final class CacheDetailsCreator {
 
     private static String getVisitedDate(final Geocache cache) {
         final long visited = cache.getVisitedDate();
-        if (visited != 0) {
-            return "(" + Formatter.formatShortDate(visited) + ")";
-        }
-        return "";
+        return visited != 0 ? " (" + Formatter.formatShortDate(visited) + ")" : "";
     }
 
     public void addRating(final Geocache cache) {
