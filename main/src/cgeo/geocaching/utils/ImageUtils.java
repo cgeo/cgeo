@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.Image;
 import cgeo.geocaching.R;
 import cgeo.geocaching.compatibility.Compatibility;
 
@@ -25,6 +26,8 @@ import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
+import android.text.Html;
+import android.text.Html.ImageGetter;
 import android.util.Base64;
 import android.util.Base64InputStream;
 import android.widget.TextView;
@@ -36,8 +39,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.Locale;
+import java.util.Set;
 
 public final class ImageUtils {
     private static final int[] ORIENTATIONS = new int[] {
@@ -304,6 +310,30 @@ public final class ImageUtils {
 
     public static BitmapDrawable getTransparent1x1Drawable(final Resources res) {
         return new BitmapDrawable(res, BitmapFactory.decodeResource(res, R.drawable.image_no_placement));
+    }
+
+    /**
+     * Add images present in the HTML description to the existing collection.
+     *
+     * @param images a collection of images
+     * @param htmlText the HTML description to be parsed
+     * @param geocode the common title for images in the description
+     */
+    public static void addImagesFromHtml(final Collection<Image> images, final String htmlText, final String geocode) {
+        final Set<String> urls = new LinkedHashSet<>();
+        for (final Image image : images) {
+            urls.add(image.getUrl());
+        }
+        Html.fromHtml(StringUtils.defaultString(htmlText), new ImageGetter() {
+            @Override
+            public Drawable getDrawable(final String source) {
+                if (!urls.contains(source) && canBeOpenedExternally(source)) {
+                    images.add(new Image(source, StringUtils.defaultString(geocode)));
+                    urls.add(source);
+                }
+                return null;
+            }
+        }, null);
     }
 
     /**

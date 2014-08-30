@@ -52,14 +52,12 @@ import rx.functions.Action0;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
 import android.text.Html;
-import android.text.Html.ImageGetter;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -70,7 +68,6 @@ import java.util.Date;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -1694,23 +1691,6 @@ public class Geocache implements ICache, IWaypoint {
         }
     };
 
-    private void addDescriptionImagesUrls(final Collection<Image> images) {
-        final Set<String> urls = new LinkedHashSet<>();
-        for (final Image image : images) {
-            urls.add(image.getUrl());
-        }
-        Html.fromHtml(getDescription(), new ImageGetter() {
-            @Override
-            public Drawable getDrawable(final String source) {
-                if (!urls.contains(source) && ImageUtils.canBeOpenedExternally(source)) {
-                    images.add(new Image(source, geocode));
-                    urls.add(source);
-                }
-                return null;
-            }
-        }, null);
-    }
-
     public Collection<Image> getImages() {
         final LinkedList<Image> result = new LinkedList<>();
         result.addAll(getSpoilers());
@@ -1718,11 +1698,7 @@ public class Geocache implements ICache, IWaypoint {
         for (final LogEntry log : getLogs()) {
             result.addAll(log.getLogImages());
         }
-        final Set<String> urls = new HashSet<>(result.size());
-        for (final Image image : result) {
-            urls.add(image.getUrl());
-        }
-        addDescriptionImagesUrls(result);
+        ImageUtils.addImagesFromHtml(result, getDescription(), geocode);
         return result;
     }
 

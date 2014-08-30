@@ -15,6 +15,7 @@ import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.UserActionsClickListener;
 import cgeo.geocaching.ui.UserNameClickListener;
 import cgeo.geocaching.ui.logs.TrackableLogsViewCreator;
@@ -23,6 +24,7 @@ import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -33,6 +35,7 @@ import rx.android.observables.ViewObservable;
 import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -60,9 +63,12 @@ import java.util.Locale;
 
 public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivity.Page> implements ActivitySharingInterface {
 
+    private CompositeSubscription createSubscriptions;
+
     public enum Page {
         DETAILS(R.string.detail),
-        LOGS(R.string.cache_logs);
+        LOGS(R.string.cache_logs),
+        IMAGES(R.string.cache_images);
 
         private final int resId;
 
@@ -79,6 +85,8 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     private LayoutInflater inflater = null;
     private ProgressDialog waitDialog = null;
     private CharSequence clickedItemText = null;
+    private ImagesList imagesList = null;
+
     /**
      * Action mode of the current contextual action bar (e.g. for copy and share actions).
      */
@@ -163,15 +171,24 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         // If we have a newer Android device setup Android Beam for easy cache sharing
         initializeAndroidBeam(this);
 
-        createViewPager(0, null);
+        createViewPager(0, new OnPageSelectedListener() {
+            @Override
+            public void onPageSelected(final int position) {
+                // Lazy loading of trackable images
+                if (getPage(position) == Page.IMAGES) {
+                    loadTrackableImages();
+                }
+            }
+        });
         waitDialog = ProgressDialog.show(this, message, res.getString(R.string.trackable_details_loading), true, true);
-        AndroidObservable.bindActivity(this, loadTrackable(geocode, guid, id)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
+        createSubscriptions = new CompositeSubscription();
+        createSubscriptions.add(AndroidObservable.bindActivity(this, loadTrackable(geocode, guid, id)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
             @Override
             public void call(final Trackable trackable) {
                 TrackableActivity.this.trackable = trackable;
                 displayTrackable();
             }
-        });
+        }));
     }
 
     @Override
@@ -304,8 +321,35 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 return new DetailsViewCreator();
             case LOGS:
                 return new TrackableLogsViewCreator(this);
+            case IMAGES:
+                return new ImagesViewCreator();
         }
         throw new IllegalStateException(); // cannot happen as long as switch case is enum complete
+    }
+
+    private class ImagesViewCreator extends AbstractCachingPageViewCreator<View> {
+
+        @Override
+        public View getDispatchedView(final ViewGroup parentView) {
+            view = getLayoutInflater().inflate(R.layout.cachedetail_images_page, parentView, false);
+            return view;
+        }
+    }
+
+    private void loadTrackableImages() {
+        if (imagesList != null) {
+            return;
+        }
+        final PageViewCreator creator = getViewCreator(Page.IMAGES);
+        if (creator == null) {
+            return;
+        }
+        final View imageView = creator.getView(null);
+        if (imageView == null) {
+            return;
+        }
+        imagesList = new ImagesList(this, trackable.getGeocode());
+        createSubscriptions.add(imagesList.loadImages(imageView, trackable.getImages(), false));
     }
 
     @Override
@@ -317,8 +361,11 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     protected Pair<List<? extends Page>, Integer> getOrderedPages() {
         final List<Page> pages = new ArrayList<>();
         pages.add(Page.DETAILS);
-        if (!trackable.getLogs().isEmpty()) {
+        if (CollectionUtils.isNotEmpty(trackable.getLogs())) {
             pages.add(Page.LOGS);
+        }
+        if (CollectionUtils.isNotEmpty(trackable.getImages())) {
+            pages.add(Page.IMAGES);
         }
         return new ImmutablePair<List<? extends Page>, Integer>(pages, 0);
     }
@@ -562,6 +609,12 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             trackable.setLogs(updatedTrackable.getLogs());
             reinitializeViewPager();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        createSubscriptions.unsubscribe();
+        super.onDestroy();
     }
 
     public Trackable getTrackable() {
