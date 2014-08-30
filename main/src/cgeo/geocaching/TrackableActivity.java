@@ -27,17 +27,18 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
+import rx.Observable;
 import rx.android.observables.AndroidObservable;
 import rx.android.observables.ViewObservable;
 import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.schedulers.Schedulers;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.view.ActionMode;
 import android.text.Html;
@@ -77,49 +78,6 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     private String id = null;
     private LayoutInflater inflater = null;
     private ProgressDialog waitDialog = null;
-    private final Handler loadTrackableHandler = new Handler() {
-
-        @Override
-        public void handleMessage(final Message msg) {
-            if (trackable == null) {
-                if (waitDialog != null) {
-                    waitDialog.dismiss();
-                }
-
-                if (StringUtils.isNotBlank(geocode)) {
-                    showToast(res.getString(R.string.err_tb_find) + " " + geocode + ".");
-                } else {
-                    showToast(res.getString(R.string.err_tb_find_that));
-                }
-
-                finish();
-                return;
-            }
-
-            try {
-                inflater = getLayoutInflater();
-                geocode = trackable.getGeocode();
-
-                if (StringUtils.isNotBlank(trackable.getName())) {
-                    setTitle(Html.fromHtml(trackable.getName()).toString());
-                } else {
-                    setTitle(trackable.getName());
-                }
-
-                invalidateOptionsMenuCompatible();
-                reinitializeViewPager();
-
-            } catch (final Exception e) {
-                Log.e("TrackableActivity.loadTrackableHandler: ", e);
-            }
-
-            if (waitDialog != null) {
-                waitDialog.dismiss();
-            }
-
-        }
-    };
-
     private CharSequence clickedItemText = null;
     /**
      * Action mode of the current contextual action bar (e.g. for copy and share actions).
@@ -201,15 +159,19 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         } else {
             message = res.getString(R.string.trackable);
         }
-        waitDialog = ProgressDialog.show(this, message, res.getString(R.string.trackable_details_loading), true, true);
-
 
         // If we have a newer Android device setup Android Beam for easy cache sharing
         initializeAndroidBeam(this);
 
         createViewPager(0, null);
-        final LoadTrackableThread thread = new LoadTrackableThread(loadTrackableHandler, geocode, guid, id);
-        thread.start();
+        waitDialog = ProgressDialog.show(this, message, res.getString(R.string.trackable_details_loading), true, true);
+        AndroidObservable.bindActivity(this, loadTrackable(geocode, guid, id)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
+            @Override
+            public void call(final Trackable trackable) {
+                TrackableActivity.this.trackable = trackable;
+                displayTrackable();
+            }
+        });
     }
 
     @Override
@@ -245,87 +207,85 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         return super.onPrepareOptionsMenu(menu);
     }
 
-    private class LoadTrackableThread extends Thread {
-        final private Handler handler;
-        final private String geocode;
-        final private String guid;
-        final private String id;
-
-        public LoadTrackableThread(final Handler handlerIn, final String geocodeIn, final String guidIn, final String idIn) {
-            handler = handlerIn;
-            geocode = geocodeIn;
-            guid = guidIn;
-            id = idIn;
-        }
-
-        @Override
-        public void run() {
-            if (StringUtils.isNotEmpty(geocode)) {
-
-                // iterate over the connectors as some codes may be handled by multiple connectors
-                for (final TrackableConnector trackableConnector : ConnectorFactory.getTrackableConnectors()) {
-                    if (trackableConnector.canHandleTrackable(geocode)) {
-                        trackable = trackableConnector.searchTrackable(geocode, guid, id);
-                        if (trackable != null) {
-                            break;
+    private static Observable<Trackable> loadTrackable(final String geocode, final String guid, final String id) {
+        return Observable.defer(new Func0<Observable<Trackable>>() {
+            @Override
+            public Observable<Trackable> call() {
+                if (StringUtils.isNotEmpty(geocode)) {
+                    // iterate over the connectors as some codes may be handled by multiple connectors
+                    for (final TrackableConnector trackableConnector : ConnectorFactory.getTrackableConnectors()) {
+                        if (trackableConnector.canHandleTrackable(geocode)) {
+                            final Trackable trackable = trackableConnector.searchTrackable(geocode, guid, id);
+                            if (trackable != null) {
+                                return Observable.just(trackable);
+                            }
                         }
                     }
+                    // Check local storage (offline case)
+                    final Trackable trackable = DataStore.loadTrackable(geocode);
+                    if (trackable != null) {
+                        return Observable.just(trackable);
+                    }
                 }
-                // Check local storage (offline case)
-                if (trackable == null) {
-                    trackable = DataStore.loadTrackable(geocode);
-                }
+
+                // Fall back to GC search by GUID
+                final Trackable trackable = TravelBugConnector.getInstance().searchTrackable(geocode, guid, id);
+                return trackable != null ? Observable.just(trackable) : Observable.<Trackable>empty();
             }
-            // fall back to GC search by GUID
-            if (trackable == null) {
-                trackable = TravelBugConnector.getInstance().searchTrackable(geocode, guid, id);
-            }
-            handler.sendMessage(Message.obtain());
-        }
+        }).subscribeOn(Schedulers.io());
     }
 
-    private class TrackableIconThread extends Thread {
-        final private String url;
-        final private Handler handler;
-
-        public TrackableIconThread(final String urlIn, final Handler handlerIn) {
-            url = urlIn;
-            handler = handlerIn;
-        }
-
-        @Override
-        public void run() {
-            if (url == null || handler == null) {
-                return;
+    public void displayTrackable() {
+        if (trackable == null) {
+            if (waitDialog != null) {
+                waitDialog.dismiss();
             }
 
-            try {
-                final HtmlImage imgGetter = new HtmlImage(trackable.getGeocode(), false, 0, false);
-
-                final BitmapDrawable image = imgGetter.getDrawable(url);
-                final Message message = handler.obtainMessage(0, image);
-                handler.sendMessage(message);
-            } catch (final Exception e) {
-                Log.e("TrackableActivity.TrackableIconThread.run: ", e);
+            if (StringUtils.isNotBlank(geocode)) {
+                showToast(res.getString(R.string.err_tb_find) + " " + geocode + ".");
+            } else {
+                showToast(res.getString(R.string.err_tb_find_that));
             }
+
+            finish();
+            return;
         }
+
+        try {
+            inflater = getLayoutInflater();
+            geocode = trackable.getGeocode();
+
+            if (StringUtils.isNotBlank(trackable.getName())) {
+                setTitle(Html.fromHtml(trackable.getName()).toString());
+            } else {
+                setTitle(trackable.getName());
+            }
+
+            invalidateOptionsMenuCompatible();
+            reinitializeViewPager();
+
+        } catch (final Exception e) {
+            Log.e("TrackableActivity.loadTrackableHandler: ", e);
+        }
+
+        if (waitDialog != null) {
+            waitDialog.dismiss();
+        }
+
     }
 
-    private static class TrackableIconHandler extends Handler {
-        final private ActionBar view;
-
-        public TrackableIconHandler(final ActionBar viewIn) {
-            view = viewIn;
-        }
-
-        @Override
-        public void handleMessage(final Message message) {
-            final BitmapDrawable image = (BitmapDrawable) message.obj;
-            if (image != null && view != null) {
-                image.setBounds(0, 0, view.getHeight(), view.getHeight());
-                view.setIcon(image);
+    private void setupIcon(final ActionBar actionBar, final String url) {
+        final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, 0, false);
+        AndroidObservable.bindActivity(this, imgGetter.fetchDrawable(url)).subscribe(new Action1<BitmapDrawable>() {
+            @Override
+            public void call(final BitmapDrawable image) {
+                if (actionBar != null) {
+                    final int height = actionBar.getHeight();
+                    image.setBounds(0, 0, height, height);
+                    actionBar.setIcon(image);
+                }
             }
-        }
+        });
     }
 
     public static void startActivity(final AbstractActivity fromContext,
@@ -382,9 +342,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
             // action bar icon
             if (StringUtils.isNotBlank(trackable.getIconUrl())) {
-                final TrackableIconHandler iconHandler = new TrackableIconHandler(getSupportActionBar());
-                final TrackableIconThread iconThread = new TrackableIconThread(trackable.getIconUrl(), iconHandler);
-                iconThread.start();
+                setupIcon(getSupportActionBar(), trackable.getIconUrl());
             }
 
             // trackable name
