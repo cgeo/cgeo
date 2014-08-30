@@ -2244,7 +2244,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
                 updateStatusMsg(R.string.cache_dialog_offline_save_message, (String) msg.obj);
             } else {
-                notifyDatasetChanged(activityRef);
+                notifyDataSetChanged(activityRef);
             }
         }
     }
@@ -2260,7 +2260,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
                 updateStatusMsg(R.string.cache_dialog_refresh_message, (String) msg.obj);
             } else {
-                notifyDatasetChanged(activityRef);
+                notifyDataSetChanged(activityRef);
             }
         }
     }
@@ -2273,7 +2273,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         @Override
         public void handleMessage(final Message msg) {
-            notifyDatasetChanged(activityRef);
+            notifyDataSetChanged(activityRef);
         }
     }
 
@@ -2288,12 +2288,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (msg.what == MESSAGE_FAILED) {
                 super.handleMessage(msg);
             } else {
-                notifyDatasetChanged(activityRef);
+                notifyDataSetChanged(activityRef);
             }
         }
     }
 
-    private static void notifyDatasetChanged(final WeakReference<AbstractActivity> activityRef) {
+    private static void notifyDataSetChanged(final WeakReference<AbstractActivity> activityRef) {
         final CacheDetailActivity activity = ((CacheDetailActivity) activityRef.get());
         if (activity != null) {
             activity.notifyDataSetChanged();
