@@ -84,6 +84,10 @@ public class CgeoApplication extends Application {
             menuKeyField.setBoolean(config, false);
         } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException ignore) {
         }
+
+        // Set language to English if the user decided so.
+        Settings.setLanguage(Settings.isUseEnglish());
+
         // ensure initialization of lists
         DataStore.getLists();
 

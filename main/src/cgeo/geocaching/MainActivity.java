@@ -361,8 +361,6 @@ public class MainActivity extends AbstractActionBarActivity {
 
         initialized = true;
 
-        Settings.setLanguage(Settings.isUseEnglish());
-
         findOnMap.setClickable(true);
         findOnMap.setOnClickListener(new OnClickListener() {
             @Override
