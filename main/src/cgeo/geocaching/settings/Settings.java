@@ -55,6 +55,7 @@ public class Settings {
     private static final int MAP_SOURCE_DEFAULT = GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
 
     public static final boolean HW_ACCEL_DISABLED_BY_DEFAULT =
+            Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1 ||
             StringUtils.equals(Build.MODEL, "HTC One X") ||    // HTC One X
             StringUtils.equals(Build.MODEL, "HTC One S") ||
             StringUtils.equals(Build.MODEL, "GT-I8190")  ||    // Samsung S3 mini
