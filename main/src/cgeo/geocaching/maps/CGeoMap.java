@@ -890,6 +890,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
      * @return the current map state as an array of int, or null if no map state is available
      */
     private int[] currentMapState() {
+        if (mapView == null) {
+            return null;
+        }
         final GeoPointImpl mapCenter = mapView.getMapViewCenter();
         return new int[] {
                 mapCenter.getLatitudeE6(),
