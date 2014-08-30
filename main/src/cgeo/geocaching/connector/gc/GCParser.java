@@ -1862,16 +1862,11 @@ public abstract class GCParser {
             return;
         }
 
+        CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
         final Observable<LogEntry> logs = getLogs(page, Logs.ALL);
-        Observable<LogEntry> specialLogs;
-        if (Settings.isFriendLogsWanted()) {
-            CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
-            specialLogs = Observable.merge(getLogs(page, Logs.FRIENDS),
-                    getLogs(page, Logs.OWN));
-        } else {
-            CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
-            specialLogs = Observable.empty();
-        }
+        final Observable<LogEntry> ownLogs = getLogs(page, Logs.OWN).cache();
+        final Observable<LogEntry> specialLogs = Settings.isFriendLogsWanted() ?
+                Observable.merge(getLogs(page, Logs.FRIENDS), ownLogs) : Observable.<LogEntry>empty();
         final Observable<List<LogEntry>> mergedLogs = Observable.zip(logs.toList(), specialLogs.toList(),
                 new Func2<List<LogEntry>, List<LogEntry>, List<LogEntry>>() {
                     @Override
@@ -1886,6 +1881,16 @@ public abstract class GCParser {
                                      DataStore.saveLogsWithoutTransaction(cache.getGeocode(), logEntries);
                                  }
                              });
+        if (cache.isFound() && cache.getVisitedDate() == 0) {
+            ownLogs.subscribe(new Action1<LogEntry>() {
+                @Override
+                public void call(final LogEntry logEntry) {
+                    if (logEntry.type == LogType.FOUND_IT) {
+                        cache.setVisitedDate(logEntry.date);
+                    }
+                }
+            });
+        }
 
         if (Settings.isRatingWanted() && !CancellableHandler.isCancelled(handler)) {
             CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_gcvote);
