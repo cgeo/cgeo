@@ -560,7 +560,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 clickedItemText = ((TextView) view).getText();
                 switch (viewId) {
                     case R.id.value: // name, TB-code, origin, released, distance
-                        final String itemTitle = (String) ((TextView) ((View) view.getParent()).findViewById(R.id.name)).getText();
+                        final CharSequence itemTitle = ((TextView) ((View) view.getParent()).findViewById(R.id.name)).getText();
                         buildDetailsContextMenu(actionMode, menu, clickedItemText, itemTitle, true);
                         return true;
                     case R.id.goal:
