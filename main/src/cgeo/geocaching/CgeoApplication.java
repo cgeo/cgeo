@@ -66,6 +66,10 @@ public class CgeoApplication extends Application {
         } catch (final IllegalAccessException e) {
             // ignore
         }
+
+        // Set language to English if the user decided so.
+        Settings.setLanguage(Settings.isUseEnglish());
+
         // ensure initialization of lists
         DataStore.getLists();
     }
