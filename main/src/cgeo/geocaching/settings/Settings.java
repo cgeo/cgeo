@@ -59,7 +59,8 @@ public class Settings {
             StringUtils.equals(Build.MODEL, "GT-I8190")  ||    // Samsung S3 mini
             StringUtils.equals(Build.MODEL, "GT-S6310L") ||    // Samsung Galaxy Young
             StringUtils.equals(Build.MODEL, "GT-P5210")  ||    // Samsung Galaxy Tab 3
-            StringUtils.equals(Build.MODEL, "ST25i");         // Sony Xperia U
+            StringUtils.equals(Build.MODEL, "ST25i")     ||    // Sony Xperia U
+            StringUtils.equals(Build.MODEL, "bq Aquaris 5");   // bq Aquaris 5
 
     private final static int unitsMetric = 1;
 
