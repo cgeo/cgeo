@@ -68,7 +68,7 @@ public final class GCVote {
     @NonNull
     private static Map<String, GCVoteRating> getRating(final List<String> guids, final List<String> geocodes) {
         if (guids == null && geocodes == null) {
-            return MapUtils.EMPTY_SORTED_MAP;
+            return Collections.emptyMap();
         }
 
         final Parameters params = new Parameters("version", "cgeo");
@@ -86,7 +86,7 @@ public final class GCVote {
         }
         final String page = Network.getResponseData(Network.getRequest("http://gcvote.com/getVotes.php", params));
         if (page == null) {
-            return MapUtils.EMPTY_SORTED_MAP;
+            return Collections.emptyMap();
         }
         return getRatingsFromXMLResponse(page, requestByGuids);
     }
@@ -120,7 +120,7 @@ public final class GCVote {
             return ratings;
         } catch (final Exception e) {
             Log.e("Cannot parse GC vote result", e);
-            return MapUtils.EMPTY_SORTED_MAP;
+            return Collections.emptyMap();
 
         }
     }
