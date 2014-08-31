@@ -1555,7 +1555,7 @@ public abstract class GCParser {
                 final String details = StringUtils.trim(matcherDetailsImage.group(4));
 
                 if (StringUtils.isNotEmpty(image)) {
-                    trackable.setImage(image);
+                    trackable.setImage(StringUtils.replace(image, "/display/", "/large/"));
                 }
                 if (StringUtils.isNotEmpty(details) && !StringUtils.equals(details, "No additional details available.")) {
                     trackable.setDetails(convertLinks(details));
