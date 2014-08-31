@@ -132,7 +132,8 @@ import java.util.regex.Pattern;
  *
  * e.g. details, description, logs, waypoints, inventory...
  */
-public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailActivity.Page> implements CacheMenuHandler.ActivityInterface, INavigationSource, ActivitySharingInterface {
+public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailActivity.Page>
+        implements CacheMenuHandler.ActivityInterface, INavigationSource, ActivitySharingInterface, EditNoteDialogListener {
 
     private static final int MESSAGE_FAILED = -1;
     private static final int MESSAGE_SUCCEEDED = 1;
@@ -2290,21 +2291,20 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     public static void editPersonalNote(final Geocache cache, final CacheDetailActivity activity) {
         if (cache.isOffline()) {
-            final EditNoteDialogListener editNoteDialogListener = new EditNoteDialogListener() {
-                @Override
-                public void onFinishEditNoteDialog(final String note) {
-                    cache.setPersonalNote(note);
-                    cache.parseWaypointsFromNote();
-                    final TextView personalNoteView = ButterKnife.findById(activity, R.id.personalnote);
-                    setPersonalNote(personalNoteView, note);
-                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                    activity.notifyDataSetChanged();
-                }
-            };
             final FragmentManager fm = activity.getSupportFragmentManager();
-            final EditNoteDialog dialog = EditNoteDialog.newInstance(cache.getPersonalNote(), editNoteDialogListener);
+            final EditNoteDialog dialog = EditNoteDialog.newInstance(cache.getPersonalNote());
             dialog.show(fm, "fragment_edit_note");
         }
+    }
+
+    @Override
+    public void onFinishEditNoteDialog(final String note) {
+        cache.setPersonalNote(note);
+        cache.parseWaypointsFromNote();
+        final TextView personalNoteView = ButterKnife.findById(this, R.id.personalnote);
+        setPersonalNote(personalNoteView, note);
+        DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+        notifyDataSetChanged();
     }
 
     private static void setPersonalNote(final TextView personalNoteView, final String personalNote) {

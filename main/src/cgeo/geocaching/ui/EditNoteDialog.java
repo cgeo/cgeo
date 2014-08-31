@@ -31,15 +31,19 @@ public class EditNoteDialog extends DialogFragment {
     public static final String ARGUMENT_INITIAL_NOTE = "initialNote";
 
     private EditText mEditText;
-    private EditNoteDialogListener listener;
 
-    public static EditNoteDialog newInstance(final String initialNote, final EditNoteDialogListener listener) {
+    /**
+     * Create a new dialog to edit a note.
+     * <em>This fragment must be inserted into an activity implementing the EditNoteDialogListener interface.</em>
+     *
+     * @param initialNote the initial note to insert in the edit dialog
+     */
+    public static EditNoteDialog newInstance(final String initialNote) {
         final EditNoteDialog dialog = new EditNoteDialog();
 
         final Bundle arguments = new Bundle();
         arguments.putString(EditNoteDialog.ARGUMENT_INITIAL_NOTE, initialNote);
         dialog.setArguments(arguments);
-        dialog.listener = listener;
 
         return dialog;
     }
@@ -70,7 +74,7 @@ public class EditNoteDialog extends DialogFragment {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(final DialogInterface dialog, final int whichButton) {
-                        listener.onFinishEditNoteDialog(mEditText.getText().toString());
+                        ((EditNoteDialogListener) getActivity()).onFinishEditNoteDialog(mEditText.getText().toString());
                         dialog.dismiss();
                     }
                 });
