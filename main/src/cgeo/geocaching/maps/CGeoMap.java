@@ -1490,9 +1490,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     // switch My Location button image
     private void switchMyLocationButton() {
-        myLocSwitch.setChecked(followMyLocation);
-        if (followMyLocation) {
-            myLocationInMiddle(app.currentGeo());
+        // FIXME: temporary workaround for the absence of "follow my location" on Android 3.x (see issue #4289).
+        if (myLocSwitch != null) {
+            myLocSwitch.setChecked(followMyLocation);
+            if (followMyLocation) {
+                myLocationInMiddle(app.currentGeo());
+            }
         }
     }
 
