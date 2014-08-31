@@ -76,7 +76,7 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
-    public boolean supportsFavoritePoints() {
+    public boolean supportsFavoritePoints(final Geocache cache) {
         return false;
     }
 

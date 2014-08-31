@@ -523,7 +523,7 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public boolean supportsFavoritePoints() {
-        return getConnector().supportsFavoritePoints();
+        return getConnector().supportsFavoritePoints(this);
     }
 
     public boolean supportsLogging() {
