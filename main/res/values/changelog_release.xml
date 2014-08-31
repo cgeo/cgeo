@@ -4,6 +4,7 @@
   <string name="changelog_release" translatable="false">\n
     <b>Next bugfix release:</b>\n
     · Fix: Hardware acceleration is unreliable on Android &lt; 4.2 and on some devices\n
+    · Fix: Favorite points should not be given to event caches\n
     · Fix: Force English does not work on main screen\n
     · Fix: Trackables are not included in search on main screen\n
     · Fix: Several non-frequent causes of crashes\n
