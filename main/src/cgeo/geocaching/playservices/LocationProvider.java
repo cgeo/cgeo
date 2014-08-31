@@ -105,12 +105,12 @@ public class LocationProvider implements ConnectionCallbacks, OnConnectionFailed
     public static Observable<IGeoData> getLowPower(Context context, boolean withInitialLocation) {
         final Observable<IGeoData> initialLocationObservable = withInitialLocation ? getInitialLocation(context, true) : Observable.<IGeoData>empty();
         final Observable<IGeoData> lowPowerObservable = get(context, lowPowerCount).skip(1);
-        final Observable<IGeoData> gpsFixObservable = get(context, mostPreciseCount).skip(1).takeFirst(new Func1<IGeoData, Boolean>() {
+        final Observable<IGeoData> gpsFixObservable = get(context, mostPreciseCount).skip(1).lift(RxUtils.operatorTakeUntil(new Func1<IGeoData, Boolean>() {
             @Override
             public Boolean call(final IGeoData geoData) {
                 return geoData.getAccuracy() < 20;
             }
-        });
+        }));
         return initialLocationObservable.concatWith(lowPowerObservable.mergeWith(gpsFixObservable.delaySubscription(6, TimeUnit.SECONDS)).first()
                 .concatWith(lowPowerObservable).timeout(60, TimeUnit.SECONDS).retry());
     }

@@ -2,11 +2,14 @@ package cgeo.geocaching.utils;
 
 import rx.Observable;
 import rx.Observable.OnSubscribe;
+import rx.Observable.Operator;
 import rx.Scheduler;
 import rx.Scheduler.Worker;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
+import rx.functions.Func1;
+import rx.internal.operators.OperatorTakeWhile;
 import rx.observables.BlockingObservable;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.Subscriptions;
@@ -23,7 +26,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class RxUtils {
 
     // Utility class, not to be instanciated
-    private RxUtils() {}
+    private RxUtils() {
+    }
 
     public final static Scheduler computationScheduler = Schedulers.computation();
 
@@ -31,6 +35,7 @@ public class RxUtils {
 
     private static final HandlerThread looperCallbacksThread =
             new HandlerThread("Looper callbacks thread", android.os.Process.THREAD_PRIORITY_BACKGROUND);
+
     static {
         looperCallbacksThread.start();
     }
@@ -50,7 +55,8 @@ public class RxUtils {
     /**
      * Subscribe function whose subscription and unsubscription take place on a looper thread.
      *
-     * @param <T> the type of the observable
+     * @param <T>
+     *         the type of the observable
      */
     public static abstract class LooperCallbacks<T> implements OnSubscribe<T> {
 
@@ -95,6 +101,23 @@ public class RxUtils {
         }
 
         abstract protected void onStart();
+
         abstract protected void onStop();
     }
+
+    public static <T> Operator<T, T> operatorTakeUntil(final Func1<? super T, Boolean> predicate) {
+        return new OperatorTakeWhile<T>(new Func1<T, Boolean>() {
+            private boolean quitting = false;
+
+            @Override
+            public Boolean call(final T item) {
+                if (quitting) {
+                    return false;
+                }
+                quitting |= predicate.call(item);
+                return true;
+            }
+        });
+    }
+
 }
