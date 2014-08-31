@@ -489,10 +489,17 @@
   <string name="init_maintenance_directories_note">c:Geo ukladá obrázky, log obrázky a ďalšie súbory súvisiace so skrýšou v samostatnom priečinku. V niektorých prípadoch (ako import/export databázy) tento priečinok môže obsahovať neaktuálne súbory, ktoré môžete zmazať tu.</string>
   <string name="init_maintenance_directories">Odstrániť osirelé súbory</string>
   <string name="init_location">Geolokácia</string>
+  <string name="init_location_note">Na zariadeniach vybavených službami Google Play môže c:geo automaticky používať lepšiu možnosť geolokácie. Táto možnosť ale zabraňuje používaniu externého bluetooth GPS prijímača. Zároveň, v móde s nízkou spotrebou môže byť zabránené použitiu GPS keď nie je nutná vysoká presnosť zamerania.</string>
   <string name="init_location_googleplayservices">Používanie služieb Google Play</string>
+  <string name="init_low_power">Režim nízkej spotreby</string>
+  <string name="init_low_power_note">Režim nízkeho výkonu sa vyhýba používaniu GPS a gyroskopu, keď nie je nutná vysoká presnosť geolokácie, za cenu dlhšieho času pre učenie polohy.</string>
+  <string name="init_low_power_mode">Aktivácia režimu nízkej spotreby</string>
   <string name="init_create_memory_dump">Vytvorenie výpisu pamäte</string>
   <string name="init_memory_dump">Výpis pamäte</string>
   <string name="init_memory_dumped">Výpis pamäte uložený do %s</string>
+  <string name="init_hardware_acceleration_title">Hardvérovo zrýchlené vykresľovanie</string>
+  <string name="init_hardware_acceleration_note">Hardvérové zrýchlenie rýchlejšie vykresľuje grafické prvky na obrazovke. Napriek tomu, na niektorých zariadeniach, operačný systém Android obsahuje chybu, ktorá spôsobuje neostré vykresľovanie textu (viditeľne hrubšie znaky). Ak sa toto stane, je vhodné zakázať hardvérové zrýchlenie.</string>
+  <string name="init_hardware_acceleration">Povoliť hardvérové zrýchlenie</string>
   <string name="settings_open_website">Otvoriť webovú stránku</string>
   <string name="settings_settings">Nastavenia</string>
   <string name="settings_information">Informácia</string>
@@ -1173,6 +1180,8 @@
   <string name="showcase_logcache_text">Pamätaj, že mnohé príkazy sú teraz v záhlaví. Tam nájdeš tlačidlo pre odoslanie hotového logu.</string>
   <string name="showcase_main_title">Nové ponuky</string>
   <string name="showcase_main_text">c:geo teraz umiestňuje položky menu v záhlaví, ako iné moderné aplikácie. Niektoré položky sú skryté za symbolom bodiek. Dlhým podržaním tlačidla sa zobrazí jeho popis.</string>
+  <string name="showcase_cachelist_title">Prepínanie zoznamov</string>
+  <string name="showcase_cachelist_text">Môžete prepínať medzi svojimi zoznamami kešiek kliknutím na názov zoznamu.</string>
   <string name="confirm_log_title">Nezvyčajný typ logu</string>
   <string name="confirm_log_message">Chceš zalogovať \'%s\'. Určite?</string>
 </resources>

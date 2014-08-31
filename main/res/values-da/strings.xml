@@ -101,6 +101,8 @@
   <string name="log_image_caption">Billedtekst</string>
   <string name="log_image_description">Beskrivelse</string>
   <string name="log_image_scale">Skalering</string>
+  <string name="log_password_title">Adgangskode til log:</string>
+  <string name="log_hint_log_password">Skriv adgangskode til log</string>
   <string name="log_oc_team_comment">OC Hold-meddelelse</string>
   <string-array name="log_image_scales">
     <item>Ingen skalering</item>
@@ -188,6 +190,7 @@
   <string name="warn_log_text_fill">Indtast tekst til din logbesked.</string>
   <string name="warn_load_images">c:geo kunne ikke indlæse billeder.</string>
   <string name="warn_invalid_mapfile">Den valgte kortfil er ikke en gyldig mapsforge version 0.3.0 kortfil.\nOffline kort vil ikke være tilgængelige.</string>
+  <string name="warn_deprecated_mapfile">Du bruger en kortfil med et forældet format (version 0.2.4).\nOvervej at skifte til kort med version 0.3.0.\nNæste udgave af c:geo vil ikke understøtte version 0.2.4.</string>
   <string name="warn_nonexistant_mapfile">Den valgte kortfil eksisterer ikke.\nOffline kort vil ikke være tilgængelige.</string>
   <string name="warn_rendertheme_missing">Korttema ikke fundet.</string>
   <string name="warn_pocket_query_select">Ingen Pocket Query valgt.</string>
@@ -249,6 +252,7 @@
   <string name="caches_sort_geocode">Geokode</string>
   <string name="caches_sort_rating">Vurdering</string>
   <string name="caches_sort_vote">Afstemning (egen vurdering)</string>
+  <string name="caches_sort_inventory">Antal Trackables</string>
   <string name="caches_sort_date_hidden">Dato for placering</string>
   <string name="caches_sort_date_logged">Dato for logbesked</string>
   <string name="caches_sort_finds">Fund</string>
@@ -401,8 +405,15 @@
   <string name="init_summary_save_log_img">Gem billeder fra logbeskeder</string>
   <string name="init_units">Benyt britiske afstandsmål</string>
   <string name="init_summary_units">Benyt britiske afstandsmål</string>
+  <string name="init_log_offline">Offline logning</string>
+  <string name="init_summary_log_offline">Aktivér offline logning (online logbeskeder vises ikke og logbeskeder uploades ikke)</string>
   <string name="init_livelist">Vis retning til cacher i lister</string>
   <string name="init_summary_livelist">Vis retning til cacher i lister</string>
+  <string name="init_backup">Backup</string>
+  <string name="init_backup_backup">Backup</string>
+  <string name="init_backup_running">Opretter backup af cache-database…</string>
+  <string name="init_backup_note">Denne funktion opretter en backup af dine cacher og waypoints, men ikke dine indstillinger.\nDine login-oplysninger kan ikke eksporteres fra denne app.</string>
+  <string name="init_backup_restore">Gendan fra backup</string>
   <string name="settings_info_offline_maps_title">Oplysninger om offline kort</string>
   <string name="settings_info_offline_maps">c:geo understøtter kort til offline brug. Du kan downloade kort fra Mapsforge eller lave dine egne kort ved hjælp af OSM data. Du skal vælge en mappe, som indeholder offline kort, før du kan bruge offline kort.</string>
   <string name="settings_info_themes_title">Oplysninger om korttemaer</string>
