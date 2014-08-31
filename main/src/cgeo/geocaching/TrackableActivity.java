@@ -22,6 +22,7 @@ import cgeo.geocaching.ui.logs.TrackableLogsViewCreator;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -34,7 +35,6 @@ import rx.android.observables.AndroidObservable;
 import rx.android.observables.ViewObservable;
 import rx.functions.Action1;
 import rx.functions.Func0;
-import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
 import android.app.ProgressDialog;
@@ -249,7 +249,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 final Trackable trackable = TravelBugConnector.getInstance().searchTrackable(geocode, guid, id);
                 return trackable != null ? Observable.just(trackable) : Observable.<Trackable>empty();
             }
-        }).subscribeOn(Schedulers.io());
+        }).subscribeOn(RxUtils.networkScheduler);
     }
 
     public void displayTrackable() {
