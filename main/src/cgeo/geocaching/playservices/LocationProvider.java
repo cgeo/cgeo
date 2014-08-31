@@ -111,8 +111,8 @@ public class LocationProvider implements ConnectionCallbacks, OnConnectionFailed
                 return geoData.getAccuracy() < 20;
             }
         }));
-        return initialLocationObservable.concatWith(lowPowerObservable.mergeWith(gpsFixObservable.delaySubscription(6, TimeUnit.SECONDS)).first()
-                .concatWith(lowPowerObservable).timeout(60, TimeUnit.SECONDS).retry());
+        return initialLocationObservable.concatWith(lowPowerObservable.ambWith(gpsFixObservable.delaySubscription(6, TimeUnit.SECONDS)).first()
+                .concatWith(lowPowerObservable).timeout(25, TimeUnit.SECONDS).retry());
     }
 
     /**
