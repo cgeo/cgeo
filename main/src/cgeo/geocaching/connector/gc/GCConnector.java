@@ -285,8 +285,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public boolean supportsFavoritePoints() {
-        return true;
+    public boolean supportsFavoritePoints(final Geocache cache) {
+        return !cache.getType().isEvent();
     }
 
     @Override
