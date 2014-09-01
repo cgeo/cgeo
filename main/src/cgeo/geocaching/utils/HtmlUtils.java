@@ -24,7 +24,7 @@ public final class HtmlUtils {
      * @param html
      * @return
      */
-    public static String extractText(CharSequence html) {
+    public static String extractText(final CharSequence html) {
         if (StringUtils.isBlank(html)) {
             return StringUtils.EMPTY;
         }
@@ -32,13 +32,13 @@ public final class HtmlUtils {
 
         // recognize images in textview HTML contents
         if (html instanceof Spanned) {
-            Spanned text = (Spanned) html;
-            Object[] styles = text.getSpans(0, text.length(), Object.class);
-            ArrayList<Pair<Integer, Integer>> removals = new ArrayList<>();
-            for (Object style : styles) {
+            final Spanned text = (Spanned) html;
+            final Object[] styles = text.getSpans(0, text.length(), Object.class);
+            final ArrayList<Pair<Integer, Integer>> removals = new ArrayList<>();
+            for (final Object style : styles) {
                 if (style instanceof ImageSpan) {
-                    int start = text.getSpanStart(style);
-                    int end = text.getSpanEnd(style);
+                    final int start = text.getSpanStart(style);
+                    final int end = text.getSpanEnd(style);
                     removals.add(Pair.of(start, end));
                 }
             }
@@ -47,17 +47,27 @@ public final class HtmlUtils {
             Collections.sort(removals, new Comparator<Pair<Integer, Integer>>() {
 
                 @Override
-                public int compare(Pair<Integer, Integer> lhs, Pair<Integer, Integer> rhs) {
+                public int compare(final Pair<Integer, Integer> lhs, final Pair<Integer, Integer> rhs) {
                     return rhs.getRight().compareTo(lhs.getRight());
                 }
             });
             result = text.toString();
-            for (Pair<Integer, Integer> removal : removals) {
+            for (final Pair<Integer, Integer> removal : removals) {
                 result = result.substring(0, removal.getLeft()) + result.substring(removal.getRight());
             }
         }
 
         // now that images are gone, do a normal html to text conversion
         return Html.fromHtml(result).toString().trim();
+    }
+
+    public static String removeExtraParagraph(final String html) {
+        if (StringUtils.startsWith(html, "<p>") && StringUtils.endsWith(html, "</p>")) {
+            final String paragraph = StringUtils.substring(html, "<p>".length(), html.length() - "</p>".length()).trim();
+            if (extractText(paragraph).equals(paragraph)) {
+                return paragraph;
+            }
+        }
+        return html;
     }
 }

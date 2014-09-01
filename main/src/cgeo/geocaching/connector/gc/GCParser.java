@@ -30,6 +30,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.DirectionImage;
 import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -1547,7 +1548,7 @@ public abstract class GCParser {
         }
 
         // trackable goal
-        trackable.setGoal(convertLinks(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GOAL, true, trackable.getGoal())));
+        trackable.setGoal(HtmlUtils.removeExtraParagraph(convertLinks(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GOAL, true, trackable.getGoal()))));
 
         // trackable details & image
         try {
@@ -1560,7 +1561,7 @@ public abstract class GCParser {
                     trackable.setImage(StringUtils.replace(image, "/display/", "/large/"));
                 }
                 if (StringUtils.isNotEmpty(details) && !StringUtils.equals(details, "No additional details available.")) {
-                    trackable.setDetails(convertLinks(details));
+                    trackable.setDetails(HtmlUtils.removeExtraParagraph(convertLinks(details)));
                 }
             }
         } catch (final RuntimeException e) {
