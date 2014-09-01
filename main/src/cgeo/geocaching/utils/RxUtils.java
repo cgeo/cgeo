@@ -25,8 +25,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class RxUtils {
 
-    // Utility class, not to be instanciated
     private RxUtils() {
+        // Utility class, not to be instantiated
     }
 
     public final static Scheduler computationScheduler = Schedulers.computation();
@@ -106,7 +106,7 @@ public class RxUtils {
     }
 
     public static <T> Operator<T, T> operatorTakeUntil(final Func1<? super T, Boolean> predicate) {
-        return new OperatorTakeWhile<T>(new Func1<T, Boolean>() {
+        return new OperatorTakeWhile<>(new Func1<T, Boolean>() {
             private boolean quitting = false;
 
             @Override
