@@ -45,7 +45,9 @@ public class GCLogin extends AbstractLogin {
                 DEFAULT_CUSTOM_DATE_FORMAT,
                 "yyyy-MM-dd",
                 "yyyy/MM/dd",
+                "dd.MM.yyyy",
                 "dd/MMM/yyyy",
+                "dd.MMM.yyyy",
                 "MMM/dd/yyyy",
                 "dd MMM yy",
                 "dd/MM/yyyy"
