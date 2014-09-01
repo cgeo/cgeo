@@ -113,6 +113,12 @@ public class Settings {
         if (oldVersion < 1) {
             final String oldPreferencesName = "cgeo.pref";
             final SharedPreferences old = CgeoApplication.getInstance().getSharedPreferences(oldPreferencesName, Context.MODE_PRIVATE);
+
+            // No need to migrate if the shared preferences did not previously exist, the defaults will be fine.
+            if (old.getAll().isEmpty()) {
+                return;
+            }
+
             final Editor e = sharedPrefs.edit();
 
             e.putString(getKey(R.string.pref_temp_twitter_token_secret), old.getString(getKey(R.string.pref_temp_twitter_token_secret), null));
