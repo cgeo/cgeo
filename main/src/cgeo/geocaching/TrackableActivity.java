@@ -438,8 +438,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 if (showTimeSpan && trackable.getLogs() != null) {
                     for (final LogEntry log : trackable.getLogs()) {
                         if (log.type == LogType.RETRIEVED_IT || log.type == LogType.GRABBED_IT || log.type == LogType.DISCOVERED_IT || log.type == LogType.PLACED_IT) {
-                            final int days = log.daysSinceLog();
-                            text.append(" (").append(res.getQuantityString(R.plurals.days_ago, days, days)).append(')');
+                            text.append(" (").append(Formatter.formatDaysAgo(log.date)).append(')');
                             break;
                         }
                     }

@@ -33,7 +33,7 @@ public abstract class Formatter {
      *            milliseconds since the epoch
      * @return the formatted string
      */
-    public static String formatTime(long date) {
+    public static String formatTime(final long date) {
         return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_TIME);
     }
 
@@ -45,7 +45,7 @@ public abstract class Formatter {
      *            milliseconds since the epoch
      * @return the formatted string
      */
-    public static String formatDate(long date) {
+    public static String formatDate(final long date) {
         return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE);
     }
 
@@ -58,7 +58,7 @@ public abstract class Formatter {
      *            milliseconds since the epoch
      * @return the formatted string
      */
-    public static String formatFullDate(long date) {
+    public static String formatFullDate(final long date) {
         return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE
                 | DateUtils.FORMAT_SHOW_YEAR);
     }
@@ -71,8 +71,8 @@ public abstract class Formatter {
      *            milliseconds since the epoch
      * @return the formatted string
      */
-    public static String formatShortDate(long date) {
-        DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
+    public static String formatShortDate(final long date) {
+        final DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
         return dateFormat.format(date);
     }
 
@@ -84,8 +84,8 @@ public abstract class Formatter {
      *            milliseconds since the epoch
      * @return the formatted string
      */
-    public static String formatShortDateVerbally(long date) {
-        int diff = cgeo.geocaching.utils.DateUtils.daysSince(date);
+    public static String formatShortDateVerbally(final long date) {
+        final int diff = cgeo.geocaching.utils.DateUtils.daysSince(date);
         switch (diff) {
             case 0:
                 return CgeoApplication.getInstance().getString(R.string.log_today);
@@ -104,7 +104,7 @@ public abstract class Formatter {
      *            milliseconds since the epoch
      * @return the formatted string
      */
-    public static String formatShortDateTime(long date) {
+    public static String formatShortDateTime(final long date) {
         return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_ABBREV_ALL);
     }
 
@@ -116,11 +116,11 @@ public abstract class Formatter {
      *            milliseconds since the epoch
      * @return the formatted string
      */
-    public static String formatDateTime(long date) {
+    public static String formatDateTime(final long date) {
         return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME);
     }
 
-    public static String formatCacheInfoLong(Geocache cache, CacheListType cacheListType) {
+    public static String formatCacheInfoLong(final Geocache cache, final CacheListType cacheListType) {
         final ArrayList<String> infos = new ArrayList<>();
         if (StringUtils.isNotBlank(cache.getGeocode())) {
             infos.add(cache.getGeocode());
@@ -137,13 +137,13 @@ public abstract class Formatter {
         return StringUtils.join(infos, Formatter.SEPARATOR);
     }
 
-    public static String formatCacheInfoShort(Geocache cache) {
+    public static String formatCacheInfoShort(final Geocache cache) {
         final ArrayList<String> infos = new ArrayList<>();
         addShortInfos(cache, infos);
         return StringUtils.join(infos, Formatter.SEPARATOR);
     }
 
-    private static void addShortInfos(Geocache cache, final ArrayList<String> infos) {
+    private static void addShortInfos(final Geocache cache, final ArrayList<String> infos) {
         if (cache.hasDifficulty()) {
             infos.add("D " + String.format("%.1f", cache.getDifficulty()));
         }
@@ -162,7 +162,7 @@ public abstract class Formatter {
         }
     }
 
-    public static String formatCacheInfoHistory(Geocache cache) {
+    public static String formatCacheInfoHistory(final Geocache cache) {
         final ArrayList<String> infos = new ArrayList<>(3);
         infos.add(StringUtils.upperCase(cache.getGeocode()));
         infos.add(Formatter.formatDate(cache.getVisitedDate()));
@@ -170,9 +170,9 @@ public abstract class Formatter {
         return StringUtils.join(infos, Formatter.SEPARATOR);
     }
 
-    public static String formatWaypointInfo(Waypoint waypoint) {
+    public static String formatWaypointInfo(final Waypoint waypoint) {
         final List<String> infos = new ArrayList<>(3);
-        WaypointType waypointType = waypoint.getWaypointType();
+        final WaypointType waypointType = waypoint.getWaypointType();
         if (waypointType != WaypointType.OWN && waypointType != null) {
             infos.add(waypointType.getL10n());
         }
@@ -187,5 +187,17 @@ public abstract class Formatter {
             }
         }
         return StringUtils.join(infos, Formatter.SEPARATOR);
+    }
+
+    public static String formatDaysAgo(final long date) {
+        final int days = cgeo.geocaching.utils.DateUtils.daysSince(date);
+        switch (days) {
+            case 0:
+                return CgeoApplication.getInstance().getString(R.string.log_today);
+            case 1:
+                return CgeoApplication.getInstance().getString(R.string.log_yesterday);
+            default:
+                return CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.days_ago, days, days);
+        }
     }
 }
