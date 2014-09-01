@@ -77,6 +77,8 @@ public class Settings {
         Min,
         Sec;
 
+        static int DEFAULT_INT_VALUE = Min.ordinal();
+
         public static CoordInputFormatEnum fromInt(final int id) {
             final CoordInputFormatEnum[] values = CoordInputFormatEnum.values();
             if (id < 0 || id >= values.length) {
@@ -153,7 +155,7 @@ public class Settings {
             e.putString(getKey(R.string.pref_password), old.getString(getKey(R.string.pref_password), null));
             e.putString(getKey(R.string.pref_username), old.getString(getKey(R.string.pref_username), null));
             e.putString(getKey(R.string.pref_memberstatus), old.getString(getKey(R.string.pref_memberstatus), ""));
-            e.putInt(getKey(R.string.pref_coordinputformat), old.getInt(getKey(R.string.pref_coordinputformat), 0));
+            e.putInt(getKey(R.string.pref_coordinputformat), old.getInt(getKey(R.string.pref_coordinputformat), CoordInputFormatEnum.DEFAULT_INT_VALUE));
             e.putBoolean(getKey(R.string.pref_log_offline), old.getBoolean(getKey(R.string.pref_log_offline), false));
             e.putBoolean(getKey(R.string.pref_choose_list), old.getBoolean(getKey(R.string.pref_choose_list), true));
             e.putBoolean(getKey(R.string.pref_loaddirectionimg), old.getBoolean(getKey(R.string.pref_loaddirectionimg), true));
@@ -478,7 +480,7 @@ public class Settings {
     }
 
     public static CoordInputFormatEnum getCoordInputFormat() {
-        return CoordInputFormatEnum.fromInt(getInt(R.string.pref_coordinputformat, CoordInputFormatEnum.Min.ordinal()));
+        return CoordInputFormatEnum.fromInt(getInt(R.string.pref_coordinputformat, CoordInputFormatEnum.DEFAULT_INT_VALUE));
     }
 
     public static void setCoordInputFormat(final CoordInputFormatEnum format) {
