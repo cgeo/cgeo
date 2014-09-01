@@ -9,6 +9,7 @@
     · Fix: Force English does not work on main screen\n
     · Fix: Trackables are not included in search on main screen\n
     · Fix: Trackables images are too small\n
+    · Fix: Default coordinates format for new installations should be degrees and decimal minutes\n
     · Fix: Several non-frequent causes of crashes\n
     \n
     <b>2014.08.29:</b>\n
