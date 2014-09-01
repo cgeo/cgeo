@@ -4,6 +4,7 @@
   <string name="changelog_release" translatable="false">\n
     <b>Next bugfix release:</b>\n
     · Fix: Hardware acceleration is unreliable on Android &lt; 4.2 and on some devices\n
+    · Fix: Recognize new date formats on geocaching.com\n
     · Fix: Date for event caches are not available in search results\n
     · Fix: Favorite points should not be given to event caches\n
     · Fix: Force English does not work on main screen\n
