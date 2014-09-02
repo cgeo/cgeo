@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<gkxml version="1.0" date="2013-06-16 08:22:08">
-<geokrety><geokret id="141" dist="2235" owner_id="122" state="1" type="0" image="1197483279joayp.jpg"><![CDATA[WeltenbummlerKret]]></geokret>
+<gkxml version="1.0" date="2014-09-03 21:49:59">
+<geokrety><geokret id="46464" dist="0" owner_id="26422" type="0" image="14097735378mgfc.png"><![CDATA[c:geo One]]></geokret>
+<geokret id="46465" dist="0" owner_id="26422" type="4" image="14097736673tzjb.png"><![CDATA[c:geo Two]]></geokret>
 </geokrety>
 </gkxml>

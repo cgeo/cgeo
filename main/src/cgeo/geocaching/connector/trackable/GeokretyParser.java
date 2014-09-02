@@ -7,34 +7,36 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.DefaultHandler;
 
-import android.sax.Element;
-import android.sax.EndTextElementListener;
-import android.sax.RootElement;
-import android.sax.StartElementListener;
-import android.util.Xml;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 public class GeokretyParser {
 
-    public static Trackable parse(final String page) {
-        final Trackable trackable = new Trackable();
+    static class GeokretyHandler extends DefaultHandler {
+        private final List<Trackable> trackables = new ArrayList<Trackable>();
+        Trackable trackable;
+        private String content;
 
-        final RootElement root = new RootElement("gkxml");
-        final Element geokret = root.getChild("geokrety").getChild("geokret");
+        public final List<Trackable> getTrackables() { return trackables; }
 
-        geokret.setEndTextElementListener(new EndTextElementListener() {
+        public GeokretyHandler() {}
 
-            @Override
-            public void end(String name) {
-                trackable.setName(name);
-            }
-        });
+        @Override
+        public final void startElement(String uri, String localName, String qName,
+                                 Attributes attributes) throws SAXException {
+            if (localName.equalsIgnoreCase("geokret")) {
 
-        geokret.setStartElementListener(new StartElementListener() {
+                trackable = new Trackable();
+                trackables.add(trackable);
 
-            @Override
-            public void start(Attributes attributes) {
                 try {
                     final String kretyId = attributes.getValue("id");
                     if (StringUtils.isNumeric(kretyId)) {
@@ -61,19 +63,44 @@ public class GeokretyParser {
                     Log.e("Parsing geokret", e);
                 }
             }
-        });
-
-        try {
-            Xml.parse(page, root.getContentHandler());
-            return trackable;
-        } catch (final SAXException e) {
-            Log.w("Cannot parse geokrety", e);
         }
 
+        @Override
+        public final void endElement(String uri, String localName, String qName)
+                throws SAXException {
+            if (localName.equalsIgnoreCase("geokret")) {
+                trackable.setName(content);
+            }
+        };
+
+        @Override
+        public final void characters(char[] ch, int start, int length)
+                throws SAXException {
+            content = new String(ch, start, length);
+        }
+    }
+
+    public static List<Trackable> parse(final InputSource page) {
+
+        try {
+            // Create a new instance of the SAX parser
+            final SAXParserFactory saxPF = SAXParserFactory.newInstance();
+            final SAXParser saxP = saxPF.newSAXParser();
+            final XMLReader xmlR = saxP.getXMLReader();
+
+            // Create the Handler to handle each of the XML tags.
+            final GeokretyHandler gkXMLHandler = new GeokretyHandler();
+            xmlR.setContentHandler(gkXMLHandler);
+            xmlR.parse(page);
+
+            return gkXMLHandler.getTrackables();
+        } catch (final Exception e) {
+            Log.w("Cannot parse geokrety", e);
+        }
         return null;
     }
 
-    protected static String getType(int type) {
+    protected static String getType(final int type) {
         switch (type) {
             case 0:
                 return CgeoApplication.getInstance().getString(R.string.geokret_type_traditional);

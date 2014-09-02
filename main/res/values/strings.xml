@@ -668,6 +668,7 @@
     <string name="cache_dialog_loading_details_status_gcvote">Loading GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Caching Data</string>
     <string name="cache_dialog_loading_details_status_render">Render view</string>
+    <string name="cache_dialog_loading_details_status_inventory">Load Inventory</string>
     <string name="cache_dialog_offline_save_title">Offline</string>
     <string name="cache_dialog_offline_save_message">Saving cache for offline use…</string>
     <string name="cache_dialog_offline_drop_title">Offline</string>
