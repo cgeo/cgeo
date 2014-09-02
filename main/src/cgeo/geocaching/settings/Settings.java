@@ -108,80 +108,89 @@ public class Settings {
     }
 
     private static void migrateSettings() {
-        // migrate from non standard file location and integer based boolean types
-        final int oldVersion = getInt(R.string.pref_settingsversion, 0);
-        if (oldVersion < 1) {
-            final String oldPreferencesName = "cgeo.pref";
-            final SharedPreferences old = CgeoApplication.getInstance().getSharedPreferences(oldPreferencesName, Context.MODE_PRIVATE);
+        final int LATEST_PREFERENCES_VERSION = 2;
+        final int currentVersion = getInt(R.string.pref_settingsversion, 0);
 
-            // No need to migrate if the shared preferences did not previously exist, the defaults will be fine.
-            if (old.getAll().isEmpty()) {
-                return;
-            }
+        // No need to migrate if we are up to date.
+        if (currentVersion == LATEST_PREFERENCES_VERSION) {
+            return;
+        }
 
+        // No need to migrate if we don't have older settings, defaults will be used instead.
+        final String preferencesNameV0 = "cgeo.pref";
+        final SharedPreferences prefsV0 = CgeoApplication.getInstance().getSharedPreferences(preferencesNameV0, Context.MODE_PRIVATE);
+        if (currentVersion == 0 && prefsV0.getAll().isEmpty()) {
+            final Editor e = sharedPrefs.edit();
+            e.putInt(getKey(R.string.pref_settingsversion), LATEST_PREFERENCES_VERSION);
+            e.commit();
+            return;
+        }
+
+        if (currentVersion < 1) {
+            // migrate from non standard file location and integer based boolean types
             final Editor e = sharedPrefs.edit();
 
-            e.putString(getKey(R.string.pref_temp_twitter_token_secret), old.getString(getKey(R.string.pref_temp_twitter_token_secret), null));
-            e.putString(getKey(R.string.pref_temp_twitter_token_public), old.getString(getKey(R.string.pref_temp_twitter_token_public), null));
-            e.putBoolean(getKey(R.string.pref_help_shown), old.getInt(getKey(R.string.pref_help_shown), 0) != 0);
-            e.putFloat(getKey(R.string.pref_anylongitude), old.getFloat(getKey(R.string.pref_anylongitude), 0));
-            e.putFloat(getKey(R.string.pref_anylatitude), old.getFloat(getKey(R.string.pref_anylatitude), 0));
-            e.putBoolean(getKey(R.string.pref_offlinemaps), 0 != old.getInt(getKey(R.string.pref_offlinemaps), 1));
-            e.putBoolean(getKey(R.string.pref_offlinewpmaps), 0 != old.getInt(getKey(R.string.pref_offlinewpmaps), 0));
-            e.putString(getKey(R.string.pref_webDeviceCode), old.getString(getKey(R.string.pref_webDeviceCode), null));
-            e.putString(getKey(R.string.pref_webDeviceName), old.getString(getKey(R.string.pref_webDeviceName), null));
-            e.putBoolean(getKey(R.string.pref_maplive), old.getInt(getKey(R.string.pref_maplive), 1) != 0);
-            e.putInt(getKey(R.string.pref_mapsource), old.getInt(getKey(R.string.pref_mapsource), MAP_SOURCE_DEFAULT));
-            e.putBoolean(getKey(R.string.pref_twitter), 0 != old.getInt(getKey(R.string.pref_twitter), 0));
-            e.putBoolean(getKey(R.string.pref_showaddress), 0 != old.getInt(getKey(R.string.pref_showaddress), 1));
-            e.putBoolean(getKey(R.string.pref_showcaptcha), old.getBoolean(getKey(R.string.pref_showcaptcha), false));
-            e.putBoolean(getKey(R.string.pref_maptrail), old.getInt(getKey(R.string.pref_maptrail), 1) != 0);
-            e.putInt(getKey(R.string.pref_lastmapzoom), old.getInt(getKey(R.string.pref_lastmapzoom), 14));
-            e.putBoolean(getKey(R.string.pref_livelist), 0 != old.getInt(getKey(R.string.pref_livelist), 1));
-            e.putBoolean(getKey(R.string.pref_units), old.getInt(getKey(R.string.pref_units), unitsMetric) == unitsMetric);
-            e.putBoolean(getKey(R.string.pref_skin), old.getInt(getKey(R.string.pref_skin), 0) != 0);
-            e.putInt(getKey(R.string.pref_lastusedlist), old.getInt(getKey(R.string.pref_lastusedlist), StoredList.STANDARD_LIST_ID));
-            e.putString(getKey(R.string.pref_cachetype), old.getString(getKey(R.string.pref_cachetype), CacheType.ALL.id));
-            e.putString(getKey(R.string.pref_twitter_token_secret), old.getString(getKey(R.string.pref_twitter_token_secret), null));
-            e.putString(getKey(R.string.pref_twitter_token_public), old.getString(getKey(R.string.pref_twitter_token_public), null));
-            e.putInt(getKey(R.string.pref_version), old.getInt(getKey(R.string.pref_version), 0));
-            e.putBoolean(getKey(R.string.pref_autoloaddesc), 0 != old.getInt(getKey(R.string.pref_autoloaddesc), 1));
-            e.putBoolean(getKey(R.string.pref_ratingwanted), old.getBoolean(getKey(R.string.pref_ratingwanted), true));
-            e.putBoolean(getKey(R.string.pref_friendlogswanted), old.getBoolean(getKey(R.string.pref_friendlogswanted), true));
-            e.putBoolean(getKey(R.string.pref_useenglish), old.getBoolean(getKey(R.string.pref_useenglish), false));
-            e.putBoolean(getKey(R.string.pref_usecompass), 0 != old.getInt(getKey(R.string.pref_usecompass), 1));
-            e.putBoolean(getKey(R.string.pref_trackautovisit), old.getBoolean(getKey(R.string.pref_trackautovisit), false));
-            e.putBoolean(getKey(R.string.pref_sigautoinsert), old.getBoolean(getKey(R.string.pref_sigautoinsert), false));
-            e.putBoolean(getKey(R.string.pref_logimages), old.getBoolean(getKey(R.string.pref_logimages), false));
-            e.putBoolean(getKey(R.string.pref_excludedisabled), 0 != old.getInt(getKey(R.string.pref_excludedisabled), 0));
-            e.putBoolean(getKey(R.string.pref_excludemine), 0 != old.getInt(getKey(R.string.pref_excludemine), 0));
-            e.putString(getKey(R.string.pref_mapfile), old.getString(getKey(R.string.pref_mapfile), null));
-            e.putString(getKey(R.string.pref_signature), old.getString(getKey(R.string.pref_signature), null));
-            e.putString(getKey(R.string.pref_pass_vote), old.getString(getKey(R.string.pref_pass_vote), null));
-            e.putString(getKey(R.string.pref_password), old.getString(getKey(R.string.pref_password), null));
-            e.putString(getKey(R.string.pref_username), old.getString(getKey(R.string.pref_username), null));
-            e.putString(getKey(R.string.pref_memberstatus), old.getString(getKey(R.string.pref_memberstatus), ""));
-            e.putInt(getKey(R.string.pref_coordinputformat), old.getInt(getKey(R.string.pref_coordinputformat), CoordInputFormatEnum.DEFAULT_INT_VALUE));
-            e.putBoolean(getKey(R.string.pref_log_offline), old.getBoolean(getKey(R.string.pref_log_offline), false));
-            e.putBoolean(getKey(R.string.pref_choose_list), old.getBoolean(getKey(R.string.pref_choose_list), true));
-            e.putBoolean(getKey(R.string.pref_loaddirectionimg), old.getBoolean(getKey(R.string.pref_loaddirectionimg), true));
-            e.putString(getKey(R.string.pref_gccustomdate), old.getString(getKey(R.string.pref_gccustomdate), null));
-            e.putInt(getKey(R.string.pref_showwaypointsthreshold), old.getInt(getKey(R.string.pref_showwaypointsthreshold), SHOW_WP_THRESHOLD_DEFAULT));
-            e.putString(getKey(R.string.pref_cookiestore), old.getString(getKey(R.string.pref_cookiestore), null));
-            e.putBoolean(getKey(R.string.pref_opendetailslastpage), old.getBoolean(getKey(R.string.pref_opendetailslastpage), false));
-            e.putInt(getKey(R.string.pref_lastdetailspage), old.getInt(getKey(R.string.pref_lastdetailspage), 1));
-            e.putInt(getKey(R.string.pref_defaultNavigationTool), old.getInt(getKey(R.string.pref_defaultNavigationTool), NavigationAppsEnum.COMPASS.id));
-            e.putInt(getKey(R.string.pref_defaultNavigationTool2), old.getInt(getKey(R.string.pref_defaultNavigationTool2), NavigationAppsEnum.INTERNAL_MAP.id));
-            e.putInt(getKey(R.string.pref_livemapstrategy), old.getInt(getKey(R.string.pref_livemapstrategy), Strategy.AUTO.id));
-            e.putBoolean(getKey(R.string.pref_debug), old.getBoolean(getKey(R.string.pref_debug), false));
-            e.putInt(getKey(R.string.pref_livemaphintshowcount), old.getInt(getKey(R.string.pref_livemaphintshowcount), 0));
+            e.putString(getKey(R.string.pref_temp_twitter_token_secret), prefsV0.getString(getKey(R.string.pref_temp_twitter_token_secret), null));
+            e.putString(getKey(R.string.pref_temp_twitter_token_public), prefsV0.getString(getKey(R.string.pref_temp_twitter_token_public), null));
+            e.putBoolean(getKey(R.string.pref_help_shown), prefsV0.getInt(getKey(R.string.pref_help_shown), 0) != 0);
+            e.putFloat(getKey(R.string.pref_anylongitude), prefsV0.getFloat(getKey(R.string.pref_anylongitude), 0));
+            e.putFloat(getKey(R.string.pref_anylatitude), prefsV0.getFloat(getKey(R.string.pref_anylatitude), 0));
+            e.putBoolean(getKey(R.string.pref_offlinemaps), 0 != prefsV0.getInt(getKey(R.string.pref_offlinemaps), 1));
+            e.putBoolean(getKey(R.string.pref_offlinewpmaps), 0 != prefsV0.getInt(getKey(R.string.pref_offlinewpmaps), 0));
+            e.putString(getKey(R.string.pref_webDeviceCode), prefsV0.getString(getKey(R.string.pref_webDeviceCode), null));
+            e.putString(getKey(R.string.pref_webDeviceName), prefsV0.getString(getKey(R.string.pref_webDeviceName), null));
+            e.putBoolean(getKey(R.string.pref_maplive), prefsV0.getInt(getKey(R.string.pref_maplive), 1) != 0);
+            e.putInt(getKey(R.string.pref_mapsource), prefsV0.getInt(getKey(R.string.pref_mapsource), MAP_SOURCE_DEFAULT));
+            e.putBoolean(getKey(R.string.pref_twitter), 0 != prefsV0.getInt(getKey(R.string.pref_twitter), 0));
+            e.putBoolean(getKey(R.string.pref_showaddress), 0 != prefsV0.getInt(getKey(R.string.pref_showaddress), 1));
+            e.putBoolean(getKey(R.string.pref_showcaptcha), prefsV0.getBoolean(getKey(R.string.pref_showcaptcha), false));
+            e.putBoolean(getKey(R.string.pref_maptrail), prefsV0.getInt(getKey(R.string.pref_maptrail), 1) != 0);
+            e.putInt(getKey(R.string.pref_lastmapzoom), prefsV0.getInt(getKey(R.string.pref_lastmapzoom), 14));
+            e.putBoolean(getKey(R.string.pref_livelist), 0 != prefsV0.getInt(getKey(R.string.pref_livelist), 1));
+            e.putBoolean(getKey(R.string.pref_units), prefsV0.getInt(getKey(R.string.pref_units), unitsMetric) == unitsMetric);
+            e.putBoolean(getKey(R.string.pref_skin), prefsV0.getInt(getKey(R.string.pref_skin), 0) != 0);
+            e.putInt(getKey(R.string.pref_lastusedlist), prefsV0.getInt(getKey(R.string.pref_lastusedlist), StoredList.STANDARD_LIST_ID));
+            e.putString(getKey(R.string.pref_cachetype), prefsV0.getString(getKey(R.string.pref_cachetype), CacheType.ALL.id));
+            e.putString(getKey(R.string.pref_twitter_token_secret), prefsV0.getString(getKey(R.string.pref_twitter_token_secret), null));
+            e.putString(getKey(R.string.pref_twitter_token_public), prefsV0.getString(getKey(R.string.pref_twitter_token_public), null));
+            e.putInt(getKey(R.string.pref_version), prefsV0.getInt(getKey(R.string.pref_version), 0));
+            e.putBoolean(getKey(R.string.pref_autoloaddesc), 0 != prefsV0.getInt(getKey(R.string.pref_autoloaddesc), 1));
+            e.putBoolean(getKey(R.string.pref_ratingwanted), prefsV0.getBoolean(getKey(R.string.pref_ratingwanted), true));
+            e.putBoolean(getKey(R.string.pref_friendlogswanted), prefsV0.getBoolean(getKey(R.string.pref_friendlogswanted), true));
+            e.putBoolean(getKey(R.string.pref_useenglish), prefsV0.getBoolean(getKey(R.string.pref_useenglish), false));
+            e.putBoolean(getKey(R.string.pref_usecompass), 0 != prefsV0.getInt(getKey(R.string.pref_usecompass), 1));
+            e.putBoolean(getKey(R.string.pref_trackautovisit), prefsV0.getBoolean(getKey(R.string.pref_trackautovisit), false));
+            e.putBoolean(getKey(R.string.pref_sigautoinsert), prefsV0.getBoolean(getKey(R.string.pref_sigautoinsert), false));
+            e.putBoolean(getKey(R.string.pref_logimages), prefsV0.getBoolean(getKey(R.string.pref_logimages), false));
+            e.putBoolean(getKey(R.string.pref_excludedisabled), 0 != prefsV0.getInt(getKey(R.string.pref_excludedisabled), 0));
+            e.putBoolean(getKey(R.string.pref_excludemine), 0 != prefsV0.getInt(getKey(R.string.pref_excludemine), 0));
+            e.putString(getKey(R.string.pref_mapfile), prefsV0.getString(getKey(R.string.pref_mapfile), null));
+            e.putString(getKey(R.string.pref_signature), prefsV0.getString(getKey(R.string.pref_signature), null));
+            e.putString(getKey(R.string.pref_pass_vote), prefsV0.getString(getKey(R.string.pref_pass_vote), null));
+            e.putString(getKey(R.string.pref_password), prefsV0.getString(getKey(R.string.pref_password), null));
+            e.putString(getKey(R.string.pref_username), prefsV0.getString(getKey(R.string.pref_username), null));
+            e.putString(getKey(R.string.pref_memberstatus), prefsV0.getString(getKey(R.string.pref_memberstatus), ""));
+            e.putInt(getKey(R.string.pref_coordinputformat), prefsV0.getInt(getKey(R.string.pref_coordinputformat), CoordInputFormatEnum.DEFAULT_INT_VALUE));
+            e.putBoolean(getKey(R.string.pref_log_offline), prefsV0.getBoolean(getKey(R.string.pref_log_offline), false));
+            e.putBoolean(getKey(R.string.pref_choose_list), prefsV0.getBoolean(getKey(R.string.pref_choose_list), true));
+            e.putBoolean(getKey(R.string.pref_loaddirectionimg), prefsV0.getBoolean(getKey(R.string.pref_loaddirectionimg), true));
+            e.putString(getKey(R.string.pref_gccustomdate), prefsV0.getString(getKey(R.string.pref_gccustomdate), null));
+            e.putInt(getKey(R.string.pref_showwaypointsthreshold), prefsV0.getInt(getKey(R.string.pref_showwaypointsthreshold), SHOW_WP_THRESHOLD_DEFAULT));
+            e.putString(getKey(R.string.pref_cookiestore), prefsV0.getString(getKey(R.string.pref_cookiestore), null));
+            e.putBoolean(getKey(R.string.pref_opendetailslastpage), prefsV0.getBoolean(getKey(R.string.pref_opendetailslastpage), false));
+            e.putInt(getKey(R.string.pref_lastdetailspage), prefsV0.getInt(getKey(R.string.pref_lastdetailspage), 1));
+            e.putInt(getKey(R.string.pref_defaultNavigationTool), prefsV0.getInt(getKey(R.string.pref_defaultNavigationTool), NavigationAppsEnum.COMPASS.id));
+            e.putInt(getKey(R.string.pref_defaultNavigationTool2), prefsV0.getInt(getKey(R.string.pref_defaultNavigationTool2), NavigationAppsEnum.INTERNAL_MAP.id));
+            e.putInt(getKey(R.string.pref_livemapstrategy), prefsV0.getInt(getKey(R.string.pref_livemapstrategy), Strategy.AUTO.id));
+            e.putBoolean(getKey(R.string.pref_debug), prefsV0.getBoolean(getKey(R.string.pref_debug), false));
+            e.putInt(getKey(R.string.pref_livemaphintshowcount), prefsV0.getInt(getKey(R.string.pref_livemaphintshowcount), 0));
 
             e.putInt(getKey(R.string.pref_settingsversion), 1); // mark migrated
             e.commit();
         }
 
         // changes for new settings dialog
-        if (oldVersion < 2) {
+        if (currentVersion < 2) {
             final Editor e = sharedPrefs.edit();
 
             e.putBoolean(getKey(R.string.pref_units), !isUseImperialUnits());
