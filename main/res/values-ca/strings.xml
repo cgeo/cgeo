@@ -1179,6 +1179,7 @@
   <string name="showcase_logcache_text">Recordeu, ara moltes comandes es troben a la barra de títol. Allà trobareu el botó per enviar el registre acabat.</string>
   <string name="showcase_main_title">Nous menús</string>
   <string name="showcase_main_text">Ara el c:geo posa elements del menú a la barra de títol al igual que altres aplicacions modernes. Alguns elements s\'amaguen darrere el símbol de punts. Premeu el botó de forma llarga per veure la seva descripció.</string>
+  <string name="showcase_cachelist_title">Llista de canvis</string>
   <string name="showcase_cachelist_text">Es pot canviar entre les diferents llistes fent un clic al nom de la llista actual.</string>
   <string name="confirm_log_title">Tipus de registre poc habitual</string>
   <string name="confirm_log_message">Voleu registrar \'%s\'. N\'esteu segurs?</string>
