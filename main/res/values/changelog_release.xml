@@ -2,6 +2,10 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>2014.09.02-legacy:</b>\n
+    · Fix: Recognize new date formats on geocaching.com\n
+    · Fix: Date for event caches are not available in search results\n
+    \n
     <b>2014.07.27-legacy:</b>\n
     · Fix: Slow login on gc.com\n
     · Fix: Usernames with &lt; or &gt; have not been able to login\n
