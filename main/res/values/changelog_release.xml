@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release:</b>\n
+    <b>2014.09.02:</b>\n
     · Fix: Hardware acceleration is unreliable on Android &lt; 4.2 and on some devices\n
     · Fix: Recognize new date formats on geocaching.com\n
     · Fix: Date for event caches are not available in search results\n
