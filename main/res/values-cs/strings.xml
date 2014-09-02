@@ -502,6 +502,7 @@
   <string name="init_memory_dump">Výpis stavu paměti</string>
   <string name="init_memory_dumped">Paměť vypsána do %s</string>
   <string name="init_hardware_acceleration_title">Hardwarově akcelerované vykreslování</string>
+  <string name="init_hardware_acceleration_note">S hardwarovou akcelerací se uživatelské rozhraní vykreslí rychleji. Operační systém Android však na některých zařízeních obsahuje chyby a některé části textu mohou být rozmazané (zejména tučné znaky). Pokud zaznamenáváš potíže, vypni hardwarovou akceleraci.</string>
   <string name="init_hardware_acceleration">Povolit hardwarovou akceleraci</string>
   <string name="settings_open_website">Otevřít webovou stránku</string>
   <string name="settings_settings">Nastavení</string>
