@@ -771,7 +771,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return new SearchResult(geocodes);
     }
 
-    public void deletePastEvents() {
+    private void deletePastEvents() {
         final List<Geocache> deletion = new ArrayList<>();
         for (final Geocache cache : adapter.getCheckedOrAllCaches()) {
             if (DateUtils.isPastEvent(cache)) {
@@ -781,9 +781,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         new DropDetailsTask().execute(deletion.toArray(new Geocache[deletion.size()]));
     }
 
-    public void clearOfflineLogs() {
-        progress.show(this, null, res.getString(R.string.caches_clear_offlinelogs_progress), true, clearOfflineLogsHandler.cancelMessage());
-        new ClearOfflineLogsThread(clearOfflineLogsHandler).start();
+    private void clearOfflineLogs() {
+        Dialogs.confirmYesNo(this, R.string.caches_clear_offlinelogs, R.string.caches_clear_offlinelogs_message, new OnClickListener() {
+
+            @Override
+            public void onClick(final DialogInterface dialog, final int which) {
+                progress.show(CacheListActivity.this, null, res.getString(R.string.caches_clear_offlinelogs_progress), true, clearOfflineLogsHandler.cancelMessage());
+                new ClearOfflineLogsThread(clearOfflineLogsHandler).start();
+            }
+        });
     }
 
     /**
@@ -1127,7 +1133,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         });
     }
 
-    public void removeFromHistory() {
+    private void removeFromHistory() {
         final List<Geocache> caches = adapter.getCheckedOrAllCaches();
         final String[] geocodes = new String[caches.size()];
         for (int i = 0; i < geocodes.length; i++) {
@@ -1138,7 +1144,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         getSupportLoaderManager().initLoader(CacheListLoaderType.REMOVE_FROM_HISTORY.getLoaderId(), b, this);
     }
 
-    public void importWeb() {
+    private void importWeb() {
         // menu is also shown with no device connected
         if (!Settings.isRegisteredForSend2cgeo()) {
             Dialogs.confirm(this, R.string.web_import_title, R.string.init_sendToCgeo_description, new OnClickListener() {
@@ -1160,7 +1166,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         threadWeb.start();
     }
 
-    public void dropStored() {
+    private void dropStored() {
         final int titleId = (adapter.getCheckedCount() > 0) ? R.string.caches_remove_selected : R.string.caches_remove_all;
         final int messageId = (adapter.getCheckedCount() > 0) ? R.string.caches_remove_selected_confirm : R.string.caches_remove_all_confirm;
         final String message = getString(messageId, adapter.getCheckedOrAllCount());
@@ -1356,7 +1362,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         };
     }
 
-    public void switchListById(final int id) {
+    private void switchListById(final int id) {
         if (id < 0) {
             return;
         }
