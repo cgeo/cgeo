@@ -1172,7 +1172,6 @@
     <item quantity="few">%s obľúbené</item>
     <item quantity="other">%s obľúbených</item>
   </plurals>
-  <string name="percent_favorite_points">% \ obľúbených</string>
   <string name="cgeo_shortcut">c:Geo odkaz</string>
   <string name="create_shortcut">Vytvoriť odkaz</string>
   <string name="send">Odoslať</string>

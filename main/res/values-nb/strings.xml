@@ -1143,7 +1143,6 @@
     <item quantity="one">%s favoritt</item>
     <item quantity="other">%s favoritt</item>
   </plurals>
-  <string name="percent_favorite_points">%\  favoritter</string>
   <string name="cgeo_shortcut">c:geo-snartvei</string>
   <string name="create_shortcut">Opprett snarvei</string>
   <string name="send">Send</string>

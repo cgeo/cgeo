@@ -1163,7 +1163,6 @@
     <item quantity="few">%s mėgiamos</item>
     <item quantity="other">%s mėgiamų</item>
   </plurals>
-  <string name="percent_favorite_points">%\  mėgiamos</string>
   <string name="cgeo_shortcut">c:geo nuoroda</string>
   <string name="create_shortcut">Sukurti nuorodą</string>
   <string name="send">Siųsti</string>

@@ -1171,7 +1171,6 @@
     <item quantity="one">%s preferit</item>
     <item quantity="other">%s preferits</item>
   </plurals>
-  <string name="percent_favorite_points">% \ preferits</string>
   <string name="cgeo_shortcut">Drecera del c:geo</string>
   <string name="create_shortcut">Crea una drecera</string>
   <string name="send">Envia</string>

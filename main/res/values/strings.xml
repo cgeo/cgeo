@@ -1275,7 +1275,7 @@
         <item quantity="other">%s favorites</item>
     </plurals>
     
-    <string name="percent_favorite_points">%\  favorites</string>
+    <string name="more_than_percent_favorite_points">> %d%% favorites</string>
     
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo shortcut</string>

@@ -1183,7 +1183,6 @@
     <item quantity="few">%s favoritov</item>
     <item quantity="other">%s favoritov</item>
   </plurals>
-  <string name="percent_favorite_points">%\ favoritov</string>
   <string name="cgeo_shortcut">Bližnjica c:geo</string>
   <string name="create_shortcut">Ustvari bližnjico</string>
   <string name="send">Pošlji</string>

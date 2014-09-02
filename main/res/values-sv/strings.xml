@@ -1166,7 +1166,6 @@
     <item quantity="one">igår</item>
     <item quantity="other">%d dagar sedan</item>
   </plurals>
-  <string name="percent_favorite_points">%\  favoriter</string>
   <string name="cgeo_shortcut">c:geo genväg</string>
   <string name="create_shortcut">Skapa genväg</string>
   <string name="send">Skicka</string>

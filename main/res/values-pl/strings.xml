@@ -1171,7 +1171,6 @@
     <item quantity="few">%s ulubione</item>
     <item quantity="other">%s ulubionych</item>
   </plurals>
-  <string name="percent_favorite_points">%\ ulubionych</string>
   <string name="cgeo_shortcut">skrót do c:geo</string>
   <string name="create_shortcut">Utwórz skrót</string>
   <string name="send">Wyślij</string>

@@ -1146,7 +1146,6 @@
   <string name="tts_one_oclock">jedna hodina</string>
   <string name="tts_oclock">%s hodin</string>
   <string name="clipboard_copy_ok">Zkopírováno do schránky</string>
-  <string name="percent_favorite_points">%\ oblíbené</string>
   <string name="cgeo_shortcut">c:geo zástupce</string>
   <string name="create_shortcut">Vytvořit zástupce</string>
   <string name="send">Odeslat</string>

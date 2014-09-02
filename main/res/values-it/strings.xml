@@ -1165,7 +1165,6 @@
     <item quantity="one">%s preferito</item>
     <item quantity="other">%s preferiti</item>
   </plurals>
-  <string name="percent_favorite_points">%\  preferiti</string>
   <string name="cgeo_shortcut">collegamento a c:geo</string>
   <string name="create_shortcut">Crea collegamento</string>
   <string name="send">Invia</string>

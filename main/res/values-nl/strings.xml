@@ -1170,7 +1170,6 @@
     <item quantity="one">%s favoriet</item>
     <item quantity="other">%s favorieten</item>
   </plurals>
-  <string name="percent_favorite_points">%\ favorieten</string>
   <string name="cgeo_shortcut">c:geo snelkoppeling</string>
   <string name="create_shortcut">Maak snelkoppeling</string>
   <string name="send">Verzenden</string>

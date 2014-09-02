@@ -1169,7 +1169,6 @@
     <item quantity="one">%s favori</item>
     <item quantity="other">%s favoris</item>
   </plurals>
-  <string name="percent_favorite_points">%\ favoris</string>
   <string name="cgeo_shortcut">c:geo raccourci</string>
   <string name="create_shortcut">Créer un raccourci</string>
   <string name="send">Envoyer</string>

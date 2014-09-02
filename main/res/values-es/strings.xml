@@ -835,5 +835,4 @@
   <string name="tts_one_oclock">La una en punto</string>
   <string name="tts_oclock">%s en punto</string>
   <string name="clipboard_copy_ok">Copiado al portapapeles</string>
-  <string name="percent_favorite_points">% \ favoritos</string>
-</resources>
+  </resources>

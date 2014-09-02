@@ -1165,7 +1165,6 @@
     <item quantity="one">%s kedvenc pont</item>
     <item quantity="other">%s kedvenc pont</item>
   </plurals>
-  <string name="percent_favorite_points">%\  kedvenc pont</string>
   <string name="cgeo_shortcut">c:geo parancsikon</string>
   <string name="create_shortcut">Parancsikon létrehozása</string>
   <string name="send">Küldés</string>
