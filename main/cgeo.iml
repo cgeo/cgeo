@@ -6,6 +6,7 @@
         <proGuardCfgFiles>
           <file>file://$MODULE_DIR$/proguard-project.txt</file>
         </proGuardCfgFiles>
+        <option name="UPDATE_PROPERTY_FILES" value="false" />
         <includeAssetsFromLibraries>true</includeAssetsFromLibraries>
       </configuration>
     </facet>
