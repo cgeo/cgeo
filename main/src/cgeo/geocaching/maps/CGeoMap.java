@@ -1261,14 +1261,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                     }
                     itemsToDisplay.add(getCacheItem(cache));
                 }
-
-                overlayCaches.updateItems(itemsToDisplay);
-                displayHandler.sendEmptyMessage(INVALIDATE_MAP);
-
-            } else {
-                overlayCaches.updateItems(itemsToDisplay);
-                displayHandler.sendEmptyMessage(INVALIDATE_MAP);
             }
+            // don't add other waypoints to overlayCaches if just one point should be displayed
+            if (coordsIntent == null) {
+                overlayCaches.updateItems(itemsToDisplay);
+            }
+            displayHandler.sendEmptyMessage(INVALIDATE_MAP);
 
             displayHandler.sendEmptyMessage(UPDATE_TITLE);
         } finally {
