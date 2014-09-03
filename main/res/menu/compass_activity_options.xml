@@ -25,6 +25,7 @@
         android:id="@+id/menu_select_destination"
         android:icon="@drawable/ic_menu_myplaces"
         android:title="@string/destination_select"
+        android:visible="false"
         app:showAsAction="ifRoom|withText">
         <menu /> <!-- filled dynamically -->
     </item>
@@ -43,7 +44,7 @@
                     android:id="@+id/menu_compass_sensor_magnetic"
                     android:title="@string/use_compass">
                 </item>
-                </group>
+            </group>
         </menu>
     </item>
 

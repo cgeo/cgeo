@@ -38,13 +38,9 @@ import android.view.SubMenu;
 import android.view.View;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class CompassActivity extends AbstractActionBarActivity {
-
-    private static final int COORDINATES_OFFSET = 10;
 
     @InjectView(R.id.nav_type) protected TextView navType;
     @InjectView(R.id.nav_accuracy) protected TextView navAccuracy;
@@ -60,7 +56,6 @@ public class CompassActivity extends AbstractActionBarActivity {
     private static final String EXTRAS_NAME = "name";
     private static final String EXTRAS_GEOCODE = "geocode";
     private static final String EXTRAS_CACHE_INFO = "cacheinfo";
-    private static final List<IWaypoint> coordinates = new ArrayList<>();
 
     /**
      * Destination of the compass, or null (if the compass is used for a waypoint only).
@@ -158,19 +153,26 @@ public class CompassActivity extends AbstractActionBarActivity {
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.compass_activity_options, menu);
         menu.findItem(R.id.menu_compass_sensor).setVisible(hasMagneticFieldSensor);
-        final SubMenu subMenu = menu.findItem(R.id.menu_select_destination).getSubMenu();
-        if (coordinates.size() > 1) {
-            for (int i = 0; i < coordinates.size(); i++) {
-                final IWaypoint coordinate = coordinates.get(i);
-                subMenu.add(0, COORDINATES_OFFSET + i, 0, coordinate.getName() + " (" + coordinate.getCoordType() + ")");
-            }
-        } else {
-            menu.findItem(R.id.menu_select_destination).setVisible(false);
-        }
         if (cache != null) {
             LoggingUI.addMenuItems(this, menu, cache);
         }
+        addWaypointItems(menu);
         return true;
+    }
+
+    private void addWaypointItems(final Menu menu) {
+        if (cache != null) {
+            final List<Waypoint> waypoints = cache.getWaypoints();
+            boolean visible = false;
+            final SubMenu subMenu = menu.findItem(R.id.menu_select_destination).getSubMenu();
+            for (final Waypoint waypoint : waypoints) {
+                if (waypoint.getCoords() != null) {
+                    subMenu.add(0, waypoint.getId(), 0, waypoint.getName());
+                    visible = true;
+                }
+            }
+            menu.findItem(R.id.menu_select_destination).setVisible(visible);
+        }
     }
 
     @Override
@@ -214,18 +216,19 @@ public class CompassActivity extends AbstractActionBarActivity {
                 if (LoggingUI.onMenuItemSelected(item, this, cache)) {
                     return true;
                 }
-                final int coordinatesIndex = id - COORDINATES_OFFSET;
-                if (coordinatesIndex >= 0 && coordinatesIndex < coordinates.size()) {
-                    final IWaypoint coordinate = coordinates.get(coordinatesIndex);
-                    title = coordinate.getName();
-                    dstCoords = coordinate.getCoords();
-                    setTitle();
-                    setDestCoords();
-                    setCacheInfo();
-                    updateDistanceInfo(app.currentGeo());
+                if (cache != null) {
+                    final Waypoint waypoint = cache.getWaypointById(id);
+                    if (waypoint != null) {
+                        title = waypoint.getName();
+                        dstCoords = waypoint.getCoords();
+                        setTitle();
+                        setDestCoords();
+                        setCacheInfo();
+                        updateDistanceInfo(app.currentGeo());
 
-                    Log.d("destination set: " + title + " (" + dstCoords + ")");
-                    return true;
+                        Log.d("destination set: " + title + " (" + dstCoords + ")");
+                        return true;
+                    }
                 }
         }
         return super.onOptionsItemSelected(item);
@@ -312,17 +315,8 @@ public class CompassActivity extends AbstractActionBarActivity {
         }
     }
 
-    public static void startActivity(final Context context, final String geocode, final String displayedName, final Geopoint coords, final Collection<IWaypoint> coordinatesWithType,
+    public static void startActivity(final Context context, final String geocode, final String displayedName, final Geopoint coords,
             final String info) {
-        coordinates.clear();
-        if (coordinatesWithType != null) {
-            for (final IWaypoint coordinate : coordinatesWithType) {
-                if (coordinate != null) {
-                    coordinates.add(coordinate);
-                }
-            }
-        }
-
         final Intent navigateIntent = new Intent(context, CompassActivity.class);
         navigateIntent.putExtra(EXTRAS_COORDS, coords);
         navigateIntent.putExtra(EXTRAS_GEOCODE, geocode);
@@ -333,12 +327,12 @@ public class CompassActivity extends AbstractActionBarActivity {
         context.startActivity(navigateIntent);
     }
 
-    public static void startActivity(final Context context, final String geocode, final String displayedName, final Geopoint coords, final Collection<IWaypoint> coordinatesWithType) {
-        CompassActivity.startActivity(context, geocode, displayedName, coords, coordinatesWithType, null);
+    public static void startActivity(final Context context, final String geocode, final String displayedName, final Geopoint coords) {
+        startActivity(context, geocode, displayedName, coords, null);
     }
 
-    public static void startActivity(final Context context, final Geocache cache) {
-        startActivity(context, cache.getGeocode(), cache.getName(), cache.getCoords(), null,
+    public static void startActivityCache(final Context context, final Geocache cache) {
+        startActivity(context, cache.getGeocode(), cache.getName(), cache.getCoords(),
                 Formatter.formatCacheInfoShort(cache));
     }
 
