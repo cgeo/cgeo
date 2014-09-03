@@ -12,6 +12,8 @@
     </issue>
     <issue id="MissingTranslation" severity="ignore" />
     <issue id="Registered" severity="ignore" />
+    <issue id="RtlHardcoded" severity="ignore" />
+    <issue id="RtlSymmetry" severity="ignore" />
     <issue id="UnusedAttribute" severity="ignore" />
     <issue id="UnusedResources">
         <ignore path="res/drawable-mdpi/attribute_maintenance.png" />
