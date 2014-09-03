@@ -10,6 +10,9 @@ import cgeo.geocaching.utils.MatcherWrapper;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -18,22 +21,34 @@ import java.util.regex.Pattern;
 public class GCVoteTest extends AbstractResourceInstrumentationTestCase {
 
     private String response;
+    private InputStream responseStream;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
         response = getFileContent(R.raw.gcvote);
+        responseStream = new ByteArrayInputStream(response.getBytes());
+        responseStream.mark(response.getBytes().length + 1);
+    }
+
+    private InputStream responseStream() {
+        try {
+            responseStream.reset();
+        } catch (final IOException ignored) {
+            // Cannot happen
+        }
+        return responseStream;
     }
 
     public void testGetRatingsByGeocode() {
-        final Map<String, GCVoteRating> ratings = GCVote.getRatingsFromXMLResponse(response, false);
+        final Map<String, GCVoteRating> ratings = GCVote.getRatingsFromXMLResponse(responseStream(), false);
         assertThat(ratings).hasSize(10);
         assertThat(ratings).containsKey("GCKF13");
         assertThat(ratings.get("GC1WEVZ")).isEqualToComparingFieldByField(new GCVoteRating(3.75f, 2, 0));
     }
 
     public void testGetRatingsByGuid() {
-        final Map<String, GCVoteRating> ratings = GCVote.getRatingsFromXMLResponse(response, true);
+        final Map<String, GCVoteRating> ratings = GCVote.getRatingsFromXMLResponse(responseStream(), true);
         assertThat(ratings).hasSize(10);
         assertThat(ratings).containsKey("a02894bb-4a08-4c09-a73c-25939894ba15");
         assertThat(ratings.get("5520c33b-3941-45ca-9056-ea655dbaadf7")).isEqualToComparingFieldByField(new GCVoteRating(3.75f, 2, 0));
@@ -47,7 +62,7 @@ public class GCVoteTest extends AbstractResourceInstrumentationTestCase {
     public void testCompareResults() {
         for (int i = 0; i < 2; i++) {
             final boolean requestByGuids = i == 0;
-            final Map<String, GCVoteRating> xmlRatings = GCVote.getRatingsFromXMLResponse(response, requestByGuids);
+            final Map<String, GCVoteRating> xmlRatings = GCVote.getRatingsFromXMLResponse(responseStream(), requestByGuids);
             final Map<String, GCVoteRating> regexRatings = getRatingsRegex(response, requestByGuids);
             assertThat(xmlRatings.keySet()).containsExactlyElementsOf(regexRatings.keySet());
             for (final Entry<String, GCVoteRating> entry: xmlRatings.entrySet()) {
@@ -59,7 +74,7 @@ public class GCVoteTest extends AbstractResourceInstrumentationTestCase {
     private void benchmarkXML(final int occurrences) {
         final long start = System.currentTimeMillis();
         for (int i = 0; i < occurrences; i++) {
-            GCVote.getRatingsFromXMLResponse(response, false);
+            GCVote.getRatingsFromXMLResponse(responseStream(), false);
         }
         Log.d("XML GCVote parsing (current) in ms (" + occurrences + " times): " + (System.currentTimeMillis() - start));
     }

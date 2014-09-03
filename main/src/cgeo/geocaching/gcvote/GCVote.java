@@ -11,13 +11,14 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.io.Charsets;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import java.io.StringReader;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -84,18 +85,18 @@ public final class GCVote {
         } else {
             params.put("waypoints", StringUtils.join(geocodes, ','));
         }
-        final String page = Network.getResponseData(Network.getRequest("http://gcvote.com/getVotes.php", params));
-        if (page == null) {
+        final InputStream response = Network.getResponseStream(Network.getRequest("http://gcvote.com/getVotes.php", params));
+        if (response == null) {
             return Collections.emptyMap();
         }
-        return getRatingsFromXMLResponse(page, requestByGuids);
+        return getRatingsFromXMLResponse(response, requestByGuids);
     }
 
-    static Map<String, GCVoteRating> getRatingsFromXMLResponse(@NonNull final String page, final boolean requestByGuids) {
+    static Map<String, GCVoteRating> getRatingsFromXMLResponse(@NonNull final InputStream response, final boolean requestByGuids) {
         try {
             final XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             final XmlPullParser xpp = factory.newPullParser();
-            xpp.setInput(new StringReader(page));
+            xpp.setInput(response, Charsets.UTF_8.name());
             boolean loggedIn = false;
             final Map<String, GCVoteRating> ratings = new HashMap<>();
             int eventType = xpp.getEventType();
