@@ -802,6 +802,7 @@
     <string name="waypoint_visited">Visited</string>
     <string name="waypoint_save">Save</string>
     <string name="waypoint_loading">Loading waypoint…</string>
+    <string name="waypoint_uploading">Uploading waypoint…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">No change to cache coordinates</string>
     <string name="waypoint_set_as_cache_coords">Set as cache coordinates in c:geo</string>
     <string name="waypoint_save_and_modify_on_website">Set as cache coordinates in c:geo and on website</string>
