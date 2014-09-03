@@ -946,7 +946,7 @@
     <string name="helper_contacts_description">Enables you to open a contact card (of your address book) directly from a log entry, so you can more easily ask friends for help.</string>
     <string name="helper_sendtocgeo_description">Send to c:geo is a browser extension <strong>for your PC</strong>. When browsing geocaching.com, you can send caches to your smartphone with the click of a button directly inside the browser.</string>
     <string name="helper_locus_title">Locus</string>
-    <string name="helper_locus_description">Simple, usable application which shows online maps and allows you to download them directly into Offline mode (raster maps only). Also supports track recording, POI handling and many other useful functions.</string>
+    <string name="helper_locus_description">Outdoor navigation app for your phone or tablet. View topo maps offline, track your route, hunt geocaches, use a voice guide and do even more.</string>
     <string name="helper_gpsstatus_title">GPS Status</string>
     <string name="helper_gpsstatus_description">You can use the radar in this application in conjunction with c:geo. It also offers a lot of other GPS-related information.</string>
     <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
