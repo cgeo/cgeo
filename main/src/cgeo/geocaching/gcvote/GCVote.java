@@ -12,6 +12,7 @@ import cgeo.geocaching.utils.Log;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.io.Charsets;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
@@ -89,7 +90,11 @@ public final class GCVote {
         if (response == null) {
             return Collections.emptyMap();
         }
-        return getRatingsFromXMLResponse(response, requestByGuids);
+        try {
+            return getRatingsFromXMLResponse(response, requestByGuids);
+        } finally {
+            IOUtils.closeQuietly(response);
+        }
     }
 
     static Map<String, GCVoteRating> getRatingsFromXMLResponse(@NonNull final InputStream response, final boolean requestByGuids) {
