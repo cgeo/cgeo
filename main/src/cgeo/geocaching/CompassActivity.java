@@ -20,6 +20,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import rx.android.schedulers.AndroidSchedulers;
@@ -52,24 +53,19 @@ public class CompassActivity extends AbstractActionBarActivity {
     @InjectView(R.id.destination) protected TextView destinationTextView;
     @InjectView(R.id.cacheinfo) protected TextView cacheInfoView;
 
-    private static final String EXTRAS_COORDS = "coords";
-    private static final String EXTRAS_NAME = "name";
-    private static final String EXTRAS_GEOCODE = "geocode";
-    private static final String EXTRAS_CACHE_INFO = "cacheinfo";
-
     /**
      * Destination of the compass, or null (if the compass is used for a waypoint only).
      */
-    private @Nullable Geocache cache = null;
+    private Geocache cache = null;
     private Geopoint dstCoords = null;
     private float cacheHeading = 0;
-    private String title = null;
-    private String info = null;
     private boolean hasMagneticFieldSensor;
+    private String description;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.compass_activity);
+        ButterKnife.inject(this);
 
         final SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         hasMagneticFieldSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null;
@@ -79,37 +75,37 @@ public class CompassActivity extends AbstractActionBarActivity {
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            final String geocode = extras.getString(EXTRAS_GEOCODE);
-            if (StringUtils.isNotEmpty(geocode)) {
-                cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-            }
-            title = geocode;
-            final String name = extras.getString(EXTRAS_NAME);
-            dstCoords = extras.getParcelable(EXTRAS_COORDS);
-            info = extras.getString(EXTRAS_CACHE_INFO);
-
-            if (StringUtils.isNotBlank(name)) {
-                if (StringUtils.isNotBlank(title)) {
-                    title += ": " + name;
-                } else {
-                    title = name;
-                }
-            }
-        } else {
-            final Intent pointIntent = new Intent(this, NavigateAnyPointActivity.class);
-            startActivity(pointIntent);
-
+        if (extras == null) {
             finish();
             return;
         }
 
-        // set header
-        setTitle();
-        setDestCoords();
-        setCacheInfo();
+        // cache must exist, except for "any point navigation"
+        final String geocode = extras.getString(Intents.EXTRA_GEOCODE);
+        if (geocode != null) {
+            cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        }
 
-        ButterKnife.inject(this);
+        // find the wanted navigation target
+        if (extras.containsKey(Intents.EXTRA_WAYPOINT_ID)) {
+            final int waypointId = extras.getInt(Intents.EXTRA_WAYPOINT_ID);
+            setTarget(DataStore.loadWaypoint(waypointId));
+        }
+        else if (extras.containsKey(Intents.EXTRA_COORDS)) {
+            final Geopoint coords = extras.getParcelable(Intents.EXTRA_COORDS);
+            final String description = extras.getString(Intents.EXTRA_DESCRIPTION);
+            setTarget(coords, description);
+        }
+        else {
+            setTarget(cache);
+        }
+
+        // set activity title just once, independent of what target is switched to
+        String title = extras.getString(Intents.EXTRA_NAME);
+        if (cache != null) {
+            title = cache.getGeocode() + ": " + cache.getName();
+        }
+        setTitle(StringUtils.defaultIfBlank(title, res.getString(R.string.navigation)));
 
         // make sure we can control the TTS volume
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
@@ -135,10 +131,8 @@ public class CompassActivity extends AbstractActionBarActivity {
 
         setContentView(R.layout.compass_activity);
         ButterKnife.inject(this);
+        setTarget(dstCoords, description);
 
-        setTitle();
-        setDestCoords();
-        setCacheInfo();
         forceRefresh();
     }
 
@@ -186,6 +180,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         }
         menu.findItem(R.id.menu_tts_start).setVisible(!SpeechService.isRunning());
         menu.findItem(R.id.menu_tts_stop).setVisible(SpeechService.isRunning());
+        menu.findItem(R.id.menu_compass_cache).setVisible(cache != null);
         return true;
     }
 
@@ -212,6 +207,9 @@ public class CompassActivity extends AbstractActionBarActivity {
                 SpeechService.stopService(this);
                 invalidateOptionsMenuCompatible();
                 return true;
+            case R.id.menu_compass_cache:
+                setTarget(cache);
+                return true;
             default:
                 if (LoggingUI.onMenuItemSelected(item, this, cache)) {
                     return true;
@@ -219,14 +217,7 @@ public class CompassActivity extends AbstractActionBarActivity {
                 if (cache != null) {
                     final Waypoint waypoint = cache.getWaypointById(id);
                     if (waypoint != null) {
-                        title = waypoint.getName();
-                        dstCoords = waypoint.getCoords();
-                        setTitle();
-                        setDestCoords();
-                        setCacheInfo();
-                        updateDistanceInfo(app.currentGeo());
-
-                        Log.d("destination set: " + title + " (" + dstCoords + ")");
+                        setTarget(waypoint);
                         return true;
                     }
                 }
@@ -234,15 +225,24 @@ public class CompassActivity extends AbstractActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setTitle() {
-        if (StringUtils.isNotBlank(title)) {
-            setTitle(title);
-        } else {
-            setTitle(res.getString(R.string.navigation));
-        }
+    private void setTarget(final Geopoint coords, final String description) {
+        setDestCoords(coords);
+        setTargetDescription(description);
+        updateDistanceInfo(app.currentGeo());
+
+        Log.d("destination set: " + description + " (" + dstCoords + ")");
     }
 
-    private void setDestCoords() {
+    private void setTarget(final @NonNull Waypoint waypoint) {
+        setTarget(waypoint.getCoords(), waypoint.getName());
+    }
+
+    private void setTarget(final Geocache cache) {
+        setTarget(cache.getCoords(), Formatter.formatCacheInfoShort(cache));
+    }
+
+    private void setDestCoords(final Geopoint coords) {
+        dstCoords = coords;
         if (dstCoords == null) {
             return;
         }
@@ -250,13 +250,14 @@ public class CompassActivity extends AbstractActionBarActivity {
         destinationTextView.setText(dstCoords.toString());
     }
 
-    private void setCacheInfo() {
-        if (info == null) {
+    private void setTargetDescription(final @Nullable String newDescription) {
+        description = newDescription;
+        if (description == null) {
             cacheInfoView.setVisibility(View.GONE);
             return;
         }
         cacheInfoView.setVisibility(View.VISIBLE);
-        cacheInfoView.setText(info);
+        cacheInfoView.setText(description);
     }
 
     private void updateDistanceInfo(final IGeoData geo) {
@@ -315,25 +316,24 @@ public class CompassActivity extends AbstractActionBarActivity {
         }
     }
 
-    public static void startActivity(final Context context, final String geocode, final String displayedName, final Geopoint coords,
-            final String info) {
+    public static void startActivityWaypoint(final Context context, final Waypoint waypoint) {
         final Intent navigateIntent = new Intent(context, CompassActivity.class);
-        navigateIntent.putExtra(EXTRAS_COORDS, coords);
-        navigateIntent.putExtra(EXTRAS_GEOCODE, geocode);
-        if (null != displayedName) {
-            navigateIntent.putExtra(EXTRAS_NAME, displayedName);
-        }
-        navigateIntent.putExtra(EXTRAS_CACHE_INFO, info);
+        navigateIntent.putExtra(Intents.EXTRA_GEOCODE, waypoint.getGeocode());
+        navigateIntent.putExtra(Intents.EXTRA_WAYPOINT_ID, waypoint.getId());
         context.startActivity(navigateIntent);
     }
 
-    public static void startActivity(final Context context, final String geocode, final String displayedName, final Geopoint coords) {
-        startActivity(context, geocode, displayedName, coords, null);
+    public static void startActivityPoint(final Context context, final Geopoint coords, final String displayedName) {
+        final Intent navigateIntent = new Intent(context, CompassActivity.class);
+        navigateIntent.putExtra(Intents.EXTRA_COORDS, coords);
+        navigateIntent.putExtra(Intents.EXTRA_NAME, displayedName);
+        context.startActivity(navigateIntent);
     }
 
     public static void startActivityCache(final Context context, final Geocache cache) {
-        startActivity(context, cache.getGeocode(), cache.getName(), cache.getCoords(),
-                Formatter.formatCacheInfoShort(cache));
+        final Intent navigateIntent = new Intent(context, CompassActivity.class);
+        navigateIntent.putExtra(Intents.EXTRA_GEOCODE, cache.getGeocode());
+        context.startActivity(navigateIntent);
     }
 
 }

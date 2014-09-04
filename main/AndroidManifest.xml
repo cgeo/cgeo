@@ -473,7 +473,7 @@
         </activity>
         <activity
             android:name=".CompassActivity"
-            android:configChanges="orientation"
+            android:configChanges="orientation|screenSize"
             android:label="@string/compass_title" >
         </activity>
         <activity

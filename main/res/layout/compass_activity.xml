@@ -20,7 +20,8 @@
             android:layout_gravity="center"
             android:text="@null"
             android:textColor="?text_color"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:text="Destination coordinates" />
 
         <TextView
             android:id="@+id/cacheinfo"
@@ -29,7 +30,8 @@
             android:layout_gravity="center"
             android:text="@null"
             android:textColor="?text_color"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:text="Cache information (D/T/S)" />
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -44,7 +46,8 @@
                 android:layout_marginLeft="3dip"
                 android:text="@null"
                 android:textColor="?text_color"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                tools:text="123°" />
 
             <TextView
                 android:id="@+id/distance"
@@ -55,7 +58,8 @@
                 android:layout_marginRight="3dip"
                 android:text="@null"
                 android:textColor="?text_color"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                tools:text="123 km" />
         </RelativeLayout>
     </LinearLayout>
 

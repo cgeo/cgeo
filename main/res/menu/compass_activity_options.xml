@@ -24,10 +24,18 @@
     <item
         android:id="@+id/menu_select_destination"
         android:icon="@drawable/ic_menu_myplaces"
+        android:orderInCategory="999"
         android:title="@string/destination_select"
         android:visible="false"
         app:showAsAction="ifRoom|withText">
-        <menu /> <!-- filled dynamically -->
+        <menu>
+            <item
+                android:id="@+id/menu_compass_cache"
+                android:orderInCategory="999"
+                android:title="@string/cache"
+                android:visible="false">
+            </item>
+        </menu>
     </item>
     <item
         android:id="@+id/menu_compass_sensor"
