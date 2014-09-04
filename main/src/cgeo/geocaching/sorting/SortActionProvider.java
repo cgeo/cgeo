@@ -78,6 +78,7 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
         register(R.string.caches_sort_terrain, TerrainComparator.class);
         register(R.string.caches_sort_date_logged, VisitComparator.class);
         register(R.string.caches_sort_vote, VoteComparator.class);
+        register(R.string.caches_sort_eventdate, EventDateComparator.class);
 
         // sort the menu labels alphabetically for easier reading
         Collections.sort(registry, new Comparator<ComparatorEntry>() {
