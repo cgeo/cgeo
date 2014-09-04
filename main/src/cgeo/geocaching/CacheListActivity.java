@@ -977,8 +977,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void updateAdapter() {
         adapter.notifyDataSetChanged();
-        adapter.forceSort();
         adapter.reFilter();
+        adapter.checkEvents();
+        adapter.forceSort();
     }
 
     private void showFooterLoadingCaches() {
