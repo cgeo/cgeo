@@ -179,6 +179,9 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         if (cacheComparator == null && eventsOnly) {
             return EventDateComparator.singleton;
         }
+        if (cacheComparator == null) {
+            return DistanceComparator.singleton;
+        }
         return cacheComparator;
     }
 
