@@ -27,13 +27,9 @@ import java.util.List;
 @OptionsMenu(R.menu.static_maps_activity_options)
 public class StaticMapsActivity extends AbstractActionBarActivity {
 
-    private static final String EXTRAS_WAYPOINT = "waypoint";
-    private static final String EXTRAS_DOWNLOAD = "download";
-    private static final String EXTRAS_GEOCODE = "geocode";
-
-    @Extra(EXTRAS_DOWNLOAD) boolean download = false;
-    @Extra(EXTRAS_WAYPOINT) Integer waypointId = null;
-    @Extra(EXTRAS_GEOCODE) String geocode = null;
+    @Extra(Intents.EXTRA_DOWNLOAD) boolean download = false;
+    @Extra(Intents.EXTRA_WAYPOINT_ID) Integer waypointId = null;
+    @Extra(Intents.EXTRA_GEOCODE) String geocode = null;
 
     private final List<Bitmap> maps = new ArrayList<>();
     private LayoutInflater inflater = null;

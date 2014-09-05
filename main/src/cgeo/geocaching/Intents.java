@@ -37,6 +37,8 @@ public class Intents {
     public static final String EXTRA_MAP_MODE = PREFIX + "mapMode";
     public static final String EXTRA_LIVE_ENABLED = PREFIX + "liveEnabled";
 
+    public static final String EXTRA_DOWNLOAD = PREFIX + "download";
+
     /**
      * list type to be used with the cache list activity. Be aware to use the String representation of the corresponding
      * enum.
