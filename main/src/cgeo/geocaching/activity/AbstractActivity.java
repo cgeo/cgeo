@@ -3,7 +3,9 @@ package cgeo.geocaching.activity;
 import butterknife.ButterKnife;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -13,6 +15,7 @@ import cgeo.geocaching.utils.TranslationUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
@@ -236,4 +239,22 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         }, this);
 
     }
+
+    protected void setCacheTitleBar(@Nullable final String geocode, @Nullable final String name, @Nullable final CacheType type) {
+        if (StringUtils.isNotBlank(name)) {
+            setTitle(StringUtils.isNotBlank(geocode) ? name + " (" + geocode + ")" : name);
+        } else {
+            setTitle(StringUtils.isNotBlank(geocode) ? geocode : res.getString(R.string.cache));
+        }
+        if (type != null) {
+            getSupportActionBar().setIcon(getResources().getDrawable(type.markerId));
+        } else {
+            getSupportActionBar().setIcon(android.R.color.transparent);
+        }
+    }
+
+    protected void setCacheTitleBar(final @NonNull Geocache cache) {
+        setCacheTitleBar(cache.getGeocode(), cache.getName(), cache.getType());
+    }
+
 }

@@ -97,6 +97,7 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
             return;
         }
         cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        setCacheTitleBar(cache);
 
         waitDialog = ProgressDialog.show(this, null, res.getString(R.string.map_static_loading), true);
         waitDialog.setCancelable(true);

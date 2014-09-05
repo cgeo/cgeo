@@ -18,7 +18,6 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.enumerations.CacheAttribute;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -61,7 +60,6 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Observable;
 import rx.Observable.OnSubscribe;
@@ -268,7 +266,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         // If we open this cache from a search, let's properly initialize the title bar, even if we don't have cache details
-        updateTitleBar(geocode, name, null);
+        setCacheTitleBar(geocode, name, null);
 
         final LoadCacheHandler loadCacheHandler = new LoadCacheHandler(this, progress);
 
@@ -613,7 +611,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         // allow cache to notify CacheDetailActivity when it changes so it can be reloaded
         cache.setChangeNotificationHandler(new ChangeNotificationHandler(this, progress));
 
-        updateTitleBar(cache.getGeocode(), cache.getName(), cache.getType());
+        setCacheTitleBar(cache);
 
         // reset imagesList so Images view page will be redrawn
         imagesList = null;
@@ -624,19 +622,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         progress.dismiss();
 
         Settings.addCacheToHistory(cache.getGeocode());
-    }
-
-    private void updateTitleBar(@Nullable final String geocode, @Nullable final String name, @Nullable final CacheType type) {
-        if (StringUtils.isNotBlank(name)) {
-            setTitle(StringUtils.isNotBlank(geocode) ? name + " (" + geocode + ")" : name);
-        } else {
-            setTitle(StringUtils.isNotBlank(geocode) ? geocode : res.getString(R.string.cache));
-        }
-        if (type != null) {
-            getSupportActionBar().setIcon(getResources().getDrawable(type.markerId));
-        } else {
-            getSupportActionBar().setIcon(android.R.color.transparent);
-        }
     }
 
     /**

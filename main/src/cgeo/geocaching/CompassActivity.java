@@ -101,11 +101,12 @@ public class CompassActivity extends AbstractActionBarActivity {
         }
 
         // set activity title just once, independent of what target is switched to
-        String title = extras.getString(Intents.EXTRA_NAME);
         if (cache != null) {
-            title = cache.getGeocode() + ": " + cache.getName();
+            setCacheTitleBar(cache);
         }
-        setTitle(StringUtils.defaultIfBlank(title, res.getString(R.string.navigation)));
+        else {
+            setTitle(StringUtils.defaultIfBlank(extras.getString(Intents.EXTRA_NAME), res.getString(R.string.navigation)));
+        }
 
         // make sure we can control the TTS volume
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
