@@ -31,6 +31,7 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
     @Extra(Intents.EXTRA_WAYPOINT_ID) Integer waypointId = null;
     @Extra(Intents.EXTRA_GEOCODE) String geocode = null;
 
+    private Geocache cache;
     private final List<Bitmap> maps = new ArrayList<>();
     private LayoutInflater inflater = null;
     private ProgressDialog waitDialog = null;
@@ -95,6 +96,7 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
             finish();
             return;
         }
+        cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
 
         waitDialog = ProgressDialog.show(this, null, res.getString(R.string.map_static_loading), true);
         waitDialog.setCancelable(true);
@@ -112,7 +114,6 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
                     for (int level = 1; level <= StaticMapsProvider.MAPS_LEVEL_MAX; level++) {
                         try {
                             if (waypointId != null) {
-                                final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
                                 final Bitmap image = StaticMapsProvider.getWaypointMap(geocode, cache.getWaypointById(waypointId), level);
                                 if (image != null) {
                                     maps.add(image);
@@ -146,7 +147,6 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
     }
 
     private boolean downloadStaticMaps() {
-        final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         if (waypointId == null) {
             showToast(res.getString(R.string.info_storing_static_maps));
             RxUtils.waitForCompletion(StaticMapsProvider.storeCacheStaticMap(cache));
