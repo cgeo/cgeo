@@ -570,8 +570,13 @@ public abstract class GPXParser extends FileParser {
             gcCache.getChild(nsGC, "type").setEndTextElementListener(new EndTextElementListener() {
 
                 @Override
-                public void end(final String body) {
-                    cache.setType(CacheType.getByPattern(validate(body)));
+                public void end(final String bodyIn) {
+                    String body = validate(bodyIn);
+                    // lab caches wrongly contain a prefix in the type
+                    if (body.startsWith("Geocache|")) {
+                        body = StringUtils.substringAfter(body, "Geocache|").trim();
+                    }
+                    cache.setType(CacheType.getByPattern(body));
                 }
             });
 

@@ -48,7 +48,7 @@ public enum CacheType {
     private final int stringId;
     public final int markerId;
 
-    CacheType(String id, String pattern, String guid, int stringId, int markerId) {
+    CacheType(final String id, final String pattern, final String guid, final int stringId, final int markerId) {
         this.id = id;
         this.pattern = pattern;
         this.guid = guid;
@@ -63,7 +63,7 @@ public enum CacheType {
         final HashMap<String, CacheType> mappingId = new HashMap<>();
         final HashMap<String, CacheType> mappingPattern = new HashMap<>();
         final HashMap<String, CacheType> mappingGuid = new HashMap<>();
-        for (CacheType ct : values()) {
+        for (final CacheType ct : values()) {
             mappingId.put(ct.id, ct);
             mappingPattern.put(ct.pattern.toLowerCase(Locale.US), ct);
             mappingGuid.put(ct.guid, ct);
@@ -72,6 +72,8 @@ public enum CacheType {
         mappingPattern.put("Mystery Cache".toLowerCase(Locale.US), MYSTERY);
         // This pattern briefly appeared on gc.com in 2014-08.
         mappingPattern.put("Traditional Geocache".toLowerCase(Locale.US), TRADITIONAL);
+        // map lab caches to the virtual type for the time being
+        mappingPattern.put("Lab Cache".toLowerCase(Locale.US), VIRTUAL);
 
         FIND_BY_ID = Collections.unmodifiableMap(mappingId);
         FIND_BY_PATTERN = Collections.unmodifiableMap(mappingPattern);
@@ -121,7 +123,7 @@ public enum CacheType {
      * @param cache
      * @return true if this is the ALL type or if this type equals the type of the cache.
      */
-    public boolean contains(ICache cache) {
+    public boolean contains(final ICache cache) {
         if (cache == null) {
             return false;
         }
