@@ -1291,4 +1291,15 @@
     <string name="showcase_cachelist_text">You can switch between your geocache lists by clicking the title of the list.</string>
     <string name="confirm_log_title">Unusual log type</string>
     <string name="confirm_log_message">You want to log \'%s\'. Are you sure?</string>
+
+    <!-- Geokrety -->
+    <string name="init_geokrety">Geokrety.org</string>
+    <string name="init_geokrety_login">Login on Geokrety.org</string>
+    <string name="init_connectorGeokretyActive">Geokrety Trackables</string>
+    <string name="init_summary_geokrety">Enable trackables from Geokrety.org</string>
+    <string name="init_geokrety_secretkey">Secret key</string>
+    <string name="init_geokrety_register_ok">Login successfull</string>
+    <string name="init_geokrety_register_fail">Login failed</string>
+    <string name="init_geokrety_get_secid">Get Secret key</string>
+
 </resources>
