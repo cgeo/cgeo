@@ -92,6 +92,7 @@
     <string name="pref_webDeviceCode">webDeviceCode</string>
     <string name="pref_maplive">maplive</string>
     <string name="pref_lastmapzoom">mapzoom</string>
+    <string name="pref_cache_zoom">cachezoom</string>
     <string name="pref_lastmaplat">maplat</string>
     <string name="pref_lastmaplon">maplon</string>
     <string name="pref_livelist">livelist</string>

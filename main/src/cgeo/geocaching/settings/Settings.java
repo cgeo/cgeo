@@ -12,6 +12,7 @@ import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.maps.CGeoMap.MapMode;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.google.v1.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -620,12 +621,49 @@ public class Settings {
         putBoolean(R.string.pref_maptrail, showTrail);
     }
 
-    public static int getMapZoom() {
+    /**
+     * Get last used zoom of the internal map. Differentiate between two use cases for a map of multiple caches (e.g.
+     * live map) and the map of a single cache (which is often zoomed in more deep).
+     *
+     * @param mapMode
+     * @return
+     */
+    public static int getMapZoom(final MapMode mapMode) {
+        if (mapMode == MapMode.SINGLE || mapMode == MapMode.COORDS) {
+            return getCacheZoom();
+        }
+        return getMapZoom();
+    }
+
+    public static void setMapZoom(final MapMode mapMode, final int zoomLevel) {
+        if (mapMode == MapMode.SINGLE || mapMode == MapMode.COORDS) {
+            setCacheZoom(zoomLevel);
+        }
+        else {
+            setMapZoom(zoomLevel);
+        }
+    }
+
+    /**
+     * @return zoom used for the (live) map
+     */
+    private static int getMapZoom() {
         return getInt(R.string.pref_lastmapzoom, 14);
     }
 
-    public static void setMapZoom(final int mapZoomLevel) {
+    private static void setMapZoom(final int mapZoomLevel) {
         putInt(R.string.pref_lastmapzoom, mapZoomLevel);
+    }
+
+    /**
+     * @return zoom used for the map of a single cache
+     */
+    private static int getCacheZoom() {
+        return getInt(R.string.pref_cache_zoom, 14);
+    }
+
+    private static void setCacheZoom(final int zoomLevel) {
+        putInt(R.string.pref_cache_zoom, zoomLevel);
     }
 
     public static GeoPointImpl getMapCenter() {

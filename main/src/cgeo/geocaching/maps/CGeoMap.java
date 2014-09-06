@@ -459,7 +459,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         mapView.repaintRequired(null);
 
-        setZoom(Settings.getMapZoom());
+        setZoom(Settings.getMapZoom(mapMode));
         mapView.getMapController().setCenter(Settings.getMapCenter());
 
         if (null == mapStateIntent) {
@@ -886,7 +886,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     }
 
     private void savePrefs() {
-        Settings.setMapZoom(mapView.getMapZoomLevel());
+        Settings.setMapZoom(mapMode, mapView.getMapZoomLevel());
         Settings.setMapCenter(mapView.getMapViewCenter());
     }
 
