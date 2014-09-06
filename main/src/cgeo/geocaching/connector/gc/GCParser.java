@@ -651,9 +651,11 @@ public abstract class GCParser {
                 }
             }
             // Load Geokrety
-            final List<Trackable> trackables = GeokretyConnector.searchTrackables(cache.getGeocode());
-            cache.getInventory().addAll(trackables);
-            cache.setInventoryItems(cache.getInventoryItems() + trackables.size());
+            if (Settings.isGeokretyConnectorActive()) {
+                final List<Trackable> trackables = GeokretyConnector.searchTrackables(cache.getGeocode());
+                cache.getInventory().addAll(trackables);
+                cache.setInventoryItems(cache.getInventoryItems() + trackables.size());
+            }
         } catch (final RuntimeException e) {
             // failed to parse cache inventory
             Log.w("GCParser.parseCache: Failed to parse cache inventory (2)", e);
