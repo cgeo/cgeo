@@ -57,7 +57,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:configChanges="keyboardHidden|orientation"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/cgeo_main"
@@ -71,7 +71,7 @@
         </activity>
         <activity
             android:name=".SearchActivity"
-            android:configChanges="keyboardHidden|orientation"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:label="@string/app_name"
             android:launchMode="singleTop"
@@ -90,14 +90,14 @@
         </activity>
         <activity
             android:name=".CachePopup"
-            android:configChanges="keyboardHidden|orientation"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:theme="@style/popup_dark"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name=".AboutActivity"
-            android:configChanges="keyboardHidden|orientation"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/about"
             android:parentActivityName="cgeo.geocaching.MainActivity"
             android:windowSoftInputMode="stateHidden" >
@@ -107,7 +107,7 @@
         </activity>
         <activity
             android:name=".UsefulAppsActivity"
-            android:configChanges="keyboardHidden|orientation"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/helpers"
             android:parentActivityName="cgeo.geocaching.MainActivity"
             android:windowSoftInputMode="stateHidden" >
@@ -117,7 +117,7 @@
         </activity>
         <activity
             android:name=".twitter.TwitterAuthorizationActivity"
-            android:configChanges="keyboardHidden|orientation"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/auth_twitter"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden" >
@@ -140,7 +140,7 @@
         </activity>
         <activity
             android:name=".NavigateAnyPointActivity"
-            android:configChanges="keyboardHidden|orientation"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:label="@string/search_destination"
             android:parentActivityName="cgeo.geocaching.MainActivity"
@@ -151,7 +151,7 @@
         </activity>
         <activity
             android:name=".AddressListActivity"
-            android:configChanges="keyboardHidden|orientation"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/search_address_result"
             android:parentActivityName="cgeo.geocaching.SearchActivity"
             android:windowSoftInputMode="stateHidden" >
@@ -161,7 +161,7 @@
         </activity>
         <activity
             android:name=".settings.SettingsActivity"
-            android:configChanges="keyboardHidden|orientation"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/settings_titlebar"
             android:parentActivityName="cgeo.geocaching.MainActivity"
             android:theme="@style/settings" >
@@ -240,17 +240,17 @@
         </activity>
         <activity
             android:name=".LogTrackableActivity"
-            android:configChanges="keyboardHidden|orientation"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/trackable_touch" >
         </activity>
         <activity
             android:name=".ImagesActivity"
-            android:configChanges="keyboardHidden|orientation"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name" >
         </activity>
         <activity
             android:name=".CacheDetailActivity"
-            android:configChanges="keyboardHidden|orientation"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="wikitudeapi.arcallback" />
@@ -370,7 +370,7 @@
         </activity>
         <activity
             android:name="cgeo.geocaching.TrackableActivity"
-            android:configChanges="keyboardHidden|orientation"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name" >
 
             <!-- TravelBug URL via coord.info redirection -->
@@ -478,12 +478,12 @@
         </activity>
         <activity
             android:name=".GpxFileListActivity"
-            android:configChanges="keyboardHidden|orientation"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/gpx_import_title" >
         </activity>
         <activity
             android:name=".SelectMapfileActivity"
-            android:configChanges="keyboardHidden|orientation"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/map_file_select_title"
             android:parentActivityName="cgeo.geocaching.settings.SettingsActivity" >
             <meta-data
@@ -492,7 +492,7 @@
         </activity>
         <activity
             android:name="WaypointPopup"
-            android:configChanges="keyboardHidden|orientation"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/waypoint"
             android:theme="@style/popup_dark"
             android:windowSoftInputMode="stateHidden" >
@@ -513,7 +513,7 @@
 
         <activity
             android:name=".connector.oc.OCAuthorizationActivity"
-            android:configChanges="keyboardHidden|orientation"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden" >
