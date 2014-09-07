@@ -17,7 +17,12 @@ import android.widget.ArrayAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoggingUI extends AbstractUIFactory {
+public final class LoggingUI extends AbstractUIFactory {
+
+    private LoggingUI() {
+        // utility class
+    }
+
     public static class LogTypeEntry {
         private final LogType logType;
         private final SpecialLogType specialLogType;
@@ -79,7 +84,7 @@ public class LoggingUI extends AbstractUIFactory {
 
         final List<LogType> logTypes = cache.getPossibleLogTypes();
         final ArrayList<LogTypeEntry> list = new ArrayList<>();
-        for (LogType logType : logTypes) {
+        for (final LogType logType : logTypes) {
             list.add(new LogTypeEntry(logType, null, logType == currentLogType));
         }
         if (cache.isLogOffline()) {
@@ -94,7 +99,7 @@ public class LoggingUI extends AbstractUIFactory {
 
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int item) {
+            public void onClick(final DialogInterface dialog, final int item) {
                 final LogTypeEntry logTypeEntry = adapter.getItem(item);
                 if (logTypeEntry.logType == null) {
                     switch (logTypeEntry.specialLogType) {
@@ -116,7 +121,7 @@ public class LoggingUI extends AbstractUIFactory {
 
     }
 
-    public static void onPrepareOptionsMenu(Menu menu, Geocache cache) {
+    public static void onPrepareOptionsMenu(final Menu menu, final Geocache cache) {
         if (cache == null) {
             return;
         }
@@ -127,7 +132,7 @@ public class LoggingUI extends AbstractUIFactory {
         itemOffline.setVisible(cache.supportsLogging() && Settings.getLogOffline());
     }
 
-    public static void addMenuItems(Activity activity, Menu menu, Geocache cache) {
+    public static void addMenuItems(final Activity activity, final Menu menu, final Geocache cache) {
         activity.getMenuInflater().inflate(R.menu.logging_ui, menu);
         onPrepareOptionsMenu(menu, cache);
     }

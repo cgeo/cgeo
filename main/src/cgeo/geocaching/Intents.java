@@ -89,12 +89,10 @@ public class Intents {
         if (StringUtils.isBlank(typeName)) {
             return CacheListType.OFFLINE;
         }
-        CacheListType listType;
         try {
-            listType = CacheListType.valueOf(typeName);
+            return CacheListType.valueOf(typeName);
         } catch (final IllegalArgumentException e) {
             return CacheListType.OFFLINE;
         }
-        return (listType != null) ? listType : CacheListType.OFFLINE;
     }
 }

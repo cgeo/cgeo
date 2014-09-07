@@ -787,7 +787,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
                 progress.show(CacheListActivity.this, null, res.getString(R.string.caches_clear_offlinelogs_progress), true, clearOfflineLogsHandler.cancelMessage());
-                new ClearOfflineLogsThread(clearOfflineLogsHandler).start();
+                new ClearOfflineLogsThread(clearOfflineLogsHandler, adapter.getCheckedOrAllCaches()).start();
             }
         });
     }
@@ -1315,14 +1315,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     }
 
-    private class ClearOfflineLogsThread extends Thread {
+    private static class ClearOfflineLogsThread extends Thread {
 
         final private Handler handler;
         final private List<Geocache> selected;
 
-        public ClearOfflineLogsThread(final Handler handlerIn) {
+        public ClearOfflineLogsThread(final Handler handlerIn, final List<Geocache> selectedCaches) {
             handler = handlerIn;
-            selected = adapter.getCheckedOrAllCaches();
+            selected = selectedCaches;
         }
 
         @Override

@@ -26,10 +26,10 @@ public class MapsWithMeCacheListApp extends AbstractApp implements CacheListApp 
     }
 
     @Override
-    public boolean invoke(List<Geocache> caches, Activity activity, SearchResult search) {
+    public boolean invoke(final List<Geocache> caches, final Activity activity, final SearchResult search) {
         final MWMPoint[] points = new MWMPoint[caches.size()];
         for (int i = 0; i < points.length; i++) {
-            Geocache geocache = caches.get(i);
+            final Geocache geocache = caches.get(i);
             points[i] = new MWMPoint(geocache.getCoords().getLatitude(), geocache.getCoords().getLongitude(), geocache.getName(), geocache.getGeocode());
         }
         MapsWithMeApi.showPointsOnMap(activity, null, getPendingIntent(activity), points);
@@ -44,22 +44,20 @@ public class MapsWithMeCacheListApp extends AbstractApp implements CacheListApp 
 
     /**
      * get cache code from a PendingIntent after an invocation of MapsWithMe
-     * 
+     *
      * @return
      */
     @Nullable
     public static String getCacheFromMapsWithMe(final Context context, final Intent intent) {
         final MWMResponse mwmResponse = MWMResponse.extractFromIntent(context, intent);
-        if (mwmResponse != null) {
-            final MWMPoint point = mwmResponse.getPoint();
-            if (point != null) {
-                return point.getId();
-            }
+        final MWMPoint point = mwmResponse.getPoint();
+        if (point != null) {
+            return point.getId();
         }
         return null;
     }
 
-    private static PendingIntent getPendingIntent(Context context) {
+    private static PendingIntent getPendingIntent(final Context context) {
         final Intent intent = new Intent(context, CacheDetailActivity.class);
         return PendingIntent.getActivity(context, 0, intent, 0);
     }

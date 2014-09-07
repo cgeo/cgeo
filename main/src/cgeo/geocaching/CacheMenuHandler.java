@@ -18,7 +18,11 @@ import android.view.MenuItem;
  * TODO: replace by a fragment
  *
  */
-public class CacheMenuHandler extends AbstractUIFactory {
+public final class CacheMenuHandler extends AbstractUIFactory {
+
+    private CacheMenuHandler() {
+        // utility class
+    }
 
     /**
      * Methods to be implemented by the activity to react to the cache menu selections.

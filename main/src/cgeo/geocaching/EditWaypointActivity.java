@@ -67,10 +67,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     @Extra(Intents.EXTRA_GEOCODE) protected String geocode = null;
     @Extra(Intents.EXTRA_WAYPOINT_ID) protected int waypointId = -1;
-    /**
-     * number of waypoints that the corresponding cache has until now
-     */
-    @Extra(Intents.EXTRA_COUNT) protected int wpCount = 0;
 
     @InstanceState protected int waypointTypeSelectorPosition = -1;
 
@@ -524,6 +520,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     }
 
     public static void startActivityAddWaypoint(final Context context, final Geocache cache) {
-        EditWaypointActivity_.intent(context).geocode(cache.getGeocode()).wpCount(cache.getWaypoints().size()).start();
+        EditWaypointActivity_.intent(context).geocode(cache.getGeocode()).start();
     }
 }

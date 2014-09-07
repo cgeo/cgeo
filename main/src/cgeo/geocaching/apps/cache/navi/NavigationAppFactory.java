@@ -27,6 +27,10 @@ import java.util.List;
 
 public final class NavigationAppFactory extends AbstractAppFactory {
 
+    private NavigationAppFactory() {
+        // utility class
+    }
+
     public enum NavigationAppsEnum {
         /** The internal compass activity */
         COMPASS(new CompassApp(), 0, R.string.pref_navigation_menu_compass),

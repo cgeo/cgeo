@@ -6,7 +6,7 @@ public abstract class AbstractAddWaypointActivityTest extends AbstractWaypointAc
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        setActivityIntent(new EditWaypointActivity_.IntentBuilder_(getInstrumentation().getContext()).geocode(getCache().getGeocode()).wpCount(1).get());
+        setActivityIntent(new EditWaypointActivity_.IntentBuilder_(getInstrumentation().getContext()).geocode(getCache().getGeocode()).get());
         getActivity();
     }
 }
