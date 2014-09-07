@@ -63,6 +63,7 @@ public class Settings {
             StringUtils.equals(Build.MODEL, "GT-S6310L") ||    // Samsung Galaxy Young
             StringUtils.equals(Build.MODEL, "GT-P5210")  ||    // Samsung Galaxy Tab 3
             StringUtils.equals(Build.MODEL, "GT-S7580")  ||    // Samsung Galaxy Trend Plus
+            StringUtils.equals(Build.MODEL, "GT-I9105P") ||    // Samsung Galaxy SII Plus
             StringUtils.equals(Build.MODEL, "ST25i")     ||    // Sony Xperia U
             StringUtils.equals(Build.MODEL, "bq Aquaris 5");   // bq Aquaris 5
 
