@@ -48,13 +48,13 @@
     </item>
     <item
         android:id="@+id/menu_cache_list_app"
-        android:icon="@drawable/ic_menu_mapmode"
+        android:icon="@drawable/ic_menu_goto"
         android:title="@null"
         android:visible="false">
     </item>
     <item
         android:id="@+id/submenu_cache_list_app"
-        android:icon="@drawable/ic_menu_mapmode"
+        android:icon="@drawable/ic_menu_goto"
         android:title="@string/caches_on_map"
         android:visible="false">
         <menu>
