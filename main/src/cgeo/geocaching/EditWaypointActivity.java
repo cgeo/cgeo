@@ -66,7 +66,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     @ViewById(R.id.modify_cache_coordinates_local) protected RadioButton modifyLocal;
 
     @Extra(Intents.EXTRA_GEOCODE) protected String geocode = null;
-    @Extra(Intents.EXTRA_WAYPOINT_ID) protected int id = -1;
+    @Extra(Intents.EXTRA_WAYPOINT_ID) protected int waypointId = -1;
     /**
      * number of waypoints that the corresponding cache has until now
      */
@@ -95,8 +95,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         public void handleMessage(final Message msg) {
             try {
                 if (waypoint == null) {
-                    Log.d("No waypoint loaded to edit. id= " + id);
-                    id = -1;
+                    Log.d("No waypoint loaded to edit. id= " + waypointId);
+                    waypointId = -1;
                 } else {
                     geocode = waypoint.getGeocode();
                     prefix = waypoint.getPrefix();
@@ -141,14 +141,14 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.editwaypoint_activity);
 
-        if (StringUtils.isBlank(geocode) && id <= 0) {
+        if (StringUtils.isBlank(geocode) && waypointId <= 0) {
             showToast(res.getString(R.string.err_waypoint_cache_unknown));
 
             finish();
             return;
         }
 
-        if (id <= 0) {
+        if (waypointId <= 0) {
             setTitle(res.getString(R.string.waypoint_add_title));
         } else {
             setTitle(res.getString(R.string.waypoint_edit_title));
@@ -174,7 +174,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
             setCoordsModificationVisibility(ConnectorFactory.getConnector(geocode), cache);
         }
-        if (id > 0) { // existing waypoint
+        if (waypointId > 0) { // existing waypoint
             waitDialog = ProgressDialog.show(this, null, res.getString(R.string.waypoint_loading), true);
             waitDialog.setCancelable(true);
 
@@ -279,7 +279,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         @Override
         public void run() {
             try {
-                waypoint = DataStore.loadWaypoint(id);
+                waypoint = DataStore.loadWaypoint(waypointId);
 
                 loadWaypointHandler.sendMessage(Message.obtain());
             } catch (final Exception e) {
@@ -465,14 +465,14 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     waypoint.setCoords(coordsToSave);
                     waypoint.setNote(noteText);
                     waypoint.setVisited(visited);
-                    waypoint.setId(id);
+                    waypoint.setId(waypointId);
 
                     final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
                     if (cache == null) {
                         finishHandler.sendEmptyMessage(SAVE_ERROR);
                         return null;
                     }
-                    final Waypoint oldWaypoint = cache.getWaypointById(id);
+                    final Waypoint oldWaypoint = cache.getWaypointById(waypointId);
                     if (cache.addOrChangeWaypoint(waypoint, true)) {
                         DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
                         if (!StaticMapsProvider.hasAllStaticMapsForWaypoint(geocode, waypoint)) {
@@ -520,7 +520,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     }
 
     public static void startActivityEditWaypoint(final Context context, final Geocache cache, final int waypointId) {
-        EditWaypointActivity_.intent(context).geocode(cache.getGeocode()).id(waypointId).start();
+        EditWaypointActivity_.intent(context).geocode(cache.getGeocode()).waypointId(waypointId).start();
     }
 
     public static void startActivityAddWaypoint(final Context context, final Geocache cache) {
