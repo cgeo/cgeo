@@ -11,7 +11,7 @@
     </item>
     <item
         android:id="@+id/menu_navigate"
-        android:icon="@drawable/ic_menu_mapmode"
+        android:icon="@drawable/ic_menu_goto"
         android:title="@string/cache_menu_navigate"
         app:showAsAction="ifRoom">
     </item>
