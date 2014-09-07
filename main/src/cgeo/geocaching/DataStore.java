@@ -1041,7 +1041,7 @@ public class DataStore {
      * @param saveFlags
      *
      */
-    public static void saveCache(final Geocache cache, final EnumSet<LoadFlags.SaveFlag> saveFlags) {
+    public static void saveCache(final Geocache cache, final Set<LoadFlags.SaveFlag> saveFlags) {
         saveCaches(Collections.singletonList(cache), saveFlags);
     }
 
@@ -1053,7 +1053,7 @@ public class DataStore {
      * @param saveFlags
      *
      */
-    public static void saveCaches(final Collection<Geocache> caches, final EnumSet<LoadFlags.SaveFlag> saveFlags) {
+    public static void saveCaches(final Collection<Geocache> caches, final Set<LoadFlags.SaveFlag> saveFlags) {
         if (CollectionUtils.isEmpty(caches)) {
             return;
         }
