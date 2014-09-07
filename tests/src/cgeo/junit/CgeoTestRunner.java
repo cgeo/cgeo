@@ -92,7 +92,7 @@ public class CgeoTestRunner extends GoogleInstrumentationTestRunner {
             Field bridgeTestRunner = c.getSuperclass().getDeclaredField("bridgeTestRunner");
             bridgeTestRunner.setAccessible(true);
             Object obj = bridgeTestRunner.get(this);
-            Method m = obj.getClass().getDeclaredMethod("getAndroidTestRunner", null);
+            Method m = obj.getClass().getDeclaredMethod("getAndroidTestRunner", (Class[]) null);
             AndroidTestRunner androidTestRunner = (AndroidTestRunner) m.invoke(obj);
             androidTestRunner.addTestListener(mListener);
         } catch (NoSuchFieldException x) {
