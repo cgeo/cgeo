@@ -64,9 +64,7 @@ android {
         // NOTE: must match the package in the test directory and must be different from the app package
         testApplicationId "cgeo.geocaching.test"
 
-        // standard android test runner
-        //testInstrumentationRunner "android.test.InstrumentationTestRunner"
-        testInstrumentationRunner "com.zutubi.android.junitreport.JUnitReportTestRunner"
+        testInstrumentationRunner "cgeo.junit.CgeoTestRunner"
 
         //testHandlingProfiling true
         testFunctionalTest true
