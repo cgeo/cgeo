@@ -7,6 +7,11 @@
     · New: Optional low power GPS mode for parts of the app which don\'t require high precision\n
     · New: Confirmation dialog for dangerous log types\n
     · New: Store found date of found caches when importing via GPX\n
+    · New: Select a waypoint of a cache as target direclty from compass\n
+    · New: Suggestion for waypoint name depending on its type\n
+    · New: Import lab caches as virtual caches\n
+    · New: Remember zoom level of live map and cache map separatel\n
+    · New: Confirmation for deleting all offline logs\n
     · Fix: Improved compass rotation algorithm\n
     · Fix: Smilies fit line height in logbook\n
     \n
