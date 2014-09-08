@@ -178,6 +178,10 @@ public class SettingsActivity extends PreferenceActivity {
         setWebsite(R.string.pref_fakekey_gcvote_website, "gcvote.com");
         getPreference(R.string.preference_screen_gcvote).setSummary(getServiceSummary(Settings.isRatingWanted()));
 
+        getPreference(R.string.pref_connectorGeokretyActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
+        setWebsite(R.string.pref_fakekey_geokrety_website, "geokrety.org");
+        getPreference(R.string.preference_screen_geokrety).setSummary(getServiceSummary(Settings.isGeokretyConnectorActive()));
+
         setWebsite(R.string.pref_fakekey_sendtocgeo_website, "send2.cgeo.org");
         getPreference(R.string.preference_screen_sendtocgeo).setSummary(getServiceSummary(Settings.isRegisteredForSend2cgeo()));
     }
@@ -655,6 +659,9 @@ public class SettingsActivity extends PreferenceActivity {
                 preference.setSummary(text);
             } else if (isPreference(preference, R.string.pref_ratingwanted)) {
                 findPreference(R.string.preference_screen_gcvote).setSummary(getServiceSummary((Boolean) value));
+                redrawScreen(findPreference(R.string.preference_screen_services));
+            } else if (isPreference(preference, R.string.pref_connectorGeokretyActive)) {
+                findPreference(R.string.preference_screen_geokrety).setSummary(getServiceSummary((Boolean) value));
                 redrawScreen(findPreference(R.string.preference_screen_services));
             } else {
                 // For all other preferences, set the summary to the value's

@@ -22,6 +22,7 @@
     <string name="preference_screen_navigation_menu">fakekey_navigation_menu_screen</string>
     <string name="preference_screen_sendtocgeo">preference_screen_sendtocgeo</string>
     <string name="preference_screen_gcvote">preference_screen_gcvote</string>
+    <string name="preference_screen_geokrety">preference_screen_geokrety</string>
     <string name="pref_fakekey_ocde_authorization">fakekey_ocde_authorization</string>
     <string name="pref_fakekey_ocpl_authorization">fakekey_ocpl_authorization</string>
     <string name="pref_fakekey_ocnl_authorization">fakekey_ocnl_authorization</string>
@@ -42,6 +43,10 @@
     <string name="pref_ecpassword">ecpassword</string>
     <string name="pref_connectorECActive">connectorECActive</string>
     <string name="pref_connectorOXActive">connectorOXActive</string>
+    <string name="pref_connectorGeokretyActive">connectorGeokretyActive</string>
+    <string name="pref_geokrety_username">geokretyusername</string>
+    <string name="pref_geokrety_password">geokretypassword</string>
+    <string name="pref_geokrety_secid">geokretysecid</string>
     <string name="pref_pass_vote">pass-vote</string>
     <string name="pref_twitter">twitter</string>
     <string name="pref_webDeviceName">webDeviceName</string>
@@ -173,6 +178,7 @@
     <string name="pref_fakekey_ec_website">fakekey_ec_website</string>
     <string name="pref_fakekey_ox_website">fakekey_ox_website</string>
     <string name="pref_fakekey_gcvote_website">fakekey_gcvote_website</string>
+    <string name="pref_fakekey_geokrety_website">fakekey_geokrety_website</string>
     <string name="pref_fakekey_sendtocgeo_website">fakekey_sendtocgeo_website</string>
     <string name="pref_twitter_cache_message">twitter_cache_message</string>
     <string name="pref_twitter_trackable_message">twitter_trackable_message</string>

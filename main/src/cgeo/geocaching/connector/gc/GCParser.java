@@ -11,6 +11,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.Waypoint;
+import cgeo.geocaching.connector.trackable.GeokretyConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -620,6 +621,7 @@ public abstract class GCParser {
         }
 
         // cache inventory
+        CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_inventory);
         try {
             cache.setInventoryItems(0);
 
@@ -647,6 +649,12 @@ public abstract class GCParser {
                         }
                     }
                 }
+            }
+            // Load Geokrety
+            if (Settings.isGeokretyConnectorActive()) {
+                final List<Trackable> trackables = GeokretyConnector.searchTrackables(cache.getGeocode());
+                cache.getInventory().addAll(trackables);
+                cache.setInventoryItems(cache.getInventoryItems() + trackables.size());
             }
         } catch (final RuntimeException e) {
             // failed to parse cache inventory

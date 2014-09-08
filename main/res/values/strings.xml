@@ -668,6 +668,7 @@
     <string name="cache_dialog_loading_details_status_gcvote">Loading GCVote</string>
     <string name="cache_dialog_loading_details_status_cache">Caching Data</string>
     <string name="cache_dialog_loading_details_status_render">Render view</string>
+    <string name="cache_dialog_loading_details_status_inventory">Load Inventory</string>
     <string name="cache_dialog_offline_save_title">Offline</string>
     <string name="cache_dialog_offline_save_message">Saving cache for offline use…</string>
     <string name="cache_dialog_offline_drop_title">Offline</string>
@@ -1291,4 +1292,15 @@
     <string name="showcase_cachelist_text">You can switch between your geocache lists by clicking the title of the list.</string>
     <string name="confirm_log_title">Unusual log type</string>
     <string name="confirm_log_message">You want to log \'%s\'. Are you sure?</string>
+
+    <!-- Geokrety -->
+    <string name="init_geokrety">Geokrety.org</string>
+    <string name="init_geokrety_login">Login on Geokrety.org</string>
+    <string name="init_connectorGeokretyActive">Geokrety Trackables</string>
+    <string name="init_summary_geokrety">Enable trackables from Geokrety.org</string>
+    <string name="init_geokrety_secretkey">Secret key</string>
+    <string name="init_geokrety_register_ok">Login successfull</string>
+    <string name="init_geokrety_register_fail">Login failed</string>
+    <string name="init_geokrety_get_secid">Get Secret key</string>
+
 </resources>
