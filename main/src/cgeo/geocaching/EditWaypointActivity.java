@@ -328,12 +328,14 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 return type.getL10n();
             }
         }
-        // for other types add an index by default
-        int index = 1;
-        while (wpNames.contains(type.getL10n() + " " + index)) {
-            index++;
+        // for other types add an index by default, which is highest found index + 1
+        int max = 0;
+        for (int i = 0; i < 30; i++) {
+            if (wpNames.contains(type.getL10n() + " " + i)) {
+                max = i;
+            }
         }
-        return type.getL10n() + " " + index;
+        return type.getL10n() + " " + (max + 1);
     }
 
     private WaypointType getSelectedWaypointType() {
