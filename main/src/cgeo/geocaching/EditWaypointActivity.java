@@ -291,7 +291,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             Geopoint gp = null;
             try {
                 gp = new Geopoint(buttonLat.getText().toString(), buttonLon.getText().toString());
-            } catch (final Geopoint.ParseException e) {
+            } catch (final Geopoint.ParseException ignored) {
                 // button text is blank when creating new waypoint
             }
             final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
@@ -387,7 +387,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 double bearing;
                 try {
                     bearing = Double.parseDouble(bearingText);
-                } catch (final NumberFormatException e) {
+                } catch (final NumberFormatException ignored) {
                     Dialogs.message(EditWaypointActivity.this, R.string.err_point_bear_and_dist_title, R.string.err_point_bear_and_dist);
                     return;
                 }
@@ -396,7 +396,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 try {
                     distance = DistanceParser.parseDistance(distanceText,
                             !Settings.isUseImperialUnits());
-                } catch (final NumberFormatException e) {
+                } catch (final NumberFormatException ignored) {
                     showToast(res.getString(R.string.err_parse_dist));
                     return;
                 }

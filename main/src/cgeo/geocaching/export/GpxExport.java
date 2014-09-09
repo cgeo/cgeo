@@ -156,7 +156,7 @@ public class GpxExport extends AbstractExport {
                 if (writer != null) {
                     try {
                         writer.close();
-                    } catch (final IOException e1) {
+                    } catch (final IOException ignored) {
                         // Ignore double error
                     }
                 }

@@ -323,7 +323,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         try {
             CacheMenuHandler.onPrepareOptionsMenu(menu, cache);
             LoggingUI.onPrepareOptionsMenu(menu, cache);
-        } catch (final RuntimeException e) {
+        } catch (final RuntimeException ignored) {
             // nothing
         }
     }

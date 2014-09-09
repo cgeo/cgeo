@@ -42,7 +42,7 @@ public class MapProviderFactory {
         // Check if API is available
         try {
             Class.forName("com.google.android.maps.MapActivity");
-        } catch (final ClassNotFoundException e) {
+        } catch (final ClassNotFoundException ignored) {
             return false;
         }
 

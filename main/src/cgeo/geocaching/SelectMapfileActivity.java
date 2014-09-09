@@ -53,7 +53,7 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
                     dirChooser.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT,
                             getString(android.R.string.ok));
                     startActivityForResult(dirChooser, REQUEST_DIRECTORY);
-                } catch (android.content.ActivityNotFoundException ex) {
+                } catch (android.content.ActivityNotFoundException ignored) {
                     // OI file manager not available
                     final Intent dirChooser = new Intent(SelectMapfileActivity.this, SimpleDirChooser.class);
                     dirChooser.putExtra(Intents.EXTRA_START_DIR, LocalStorage.getStorage().getAbsolutePath());

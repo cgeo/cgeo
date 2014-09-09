@@ -211,7 +211,7 @@ public class GPXImporter {
             } catch (final ParserException e) {
                 Log.i("Importing caches failed - data format error", e);
                 importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED_WITH_ERROR, R.string.gpx_import_error_parser, 0, e.getLocalizedMessage()));
-            } catch (final CancellationException e) {
+            } catch (final CancellationException ignored) {
                 Log.i("Importing caches canceled");
                 importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_CANCELED));
             } catch (final Exception e) {
@@ -294,7 +294,7 @@ public class GPXImporter {
             try {
                 // try to parse cache file as GPX 10
                 return doImport(new GPX10Parser(listId));
-            } catch (final ParserException pe) {
+            } catch (final ParserException ignored) {
                 // didn't work -> lets try GPX11
                 return doImport(new GPX11Parser(listId));
             }

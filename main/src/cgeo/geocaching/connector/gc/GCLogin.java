@@ -312,14 +312,14 @@ public class GCLogin extends AbstractLogin {
         if (GC_CUSTOM_DATE_FORMATS.containsKey(format)) {
             try {
                 return GC_CUSTOM_DATE_FORMATS.get(format).parse(trimmed);
-            } catch (final ParseException e) {
+            } catch (final ParseException ignored) {
             }
         }
 
         for (final SimpleDateFormat sdf : GC_CUSTOM_DATE_FORMATS.values()) {
             try {
                 return sdf.parse(trimmed);
-            } catch (final ParseException e) {
+            } catch (final ParseException ignored) {
             }
         }
 

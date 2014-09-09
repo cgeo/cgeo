@@ -65,7 +65,7 @@ public final class ProcessUtils {
             // This can throw an exception where the exception type is only defined on API Level > 3
             // therefore surround with try-catch
             return packageManager.getLaunchIntentForPackage(packageName);
-        } catch (final Exception e) {
+        } catch (final Exception ignored) {
             return null;
         }
     }

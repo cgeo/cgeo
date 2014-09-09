@@ -82,7 +82,7 @@ public class CgeoApplication extends Application {
             final Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
             menuKeyField.setAccessible(true);
             menuKeyField.setBoolean(config, false);
-        } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException ignore) {
+        } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException ignored) {
         }
 
         // Set language to English if the user decided so.

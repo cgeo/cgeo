@@ -1003,7 +1003,7 @@ public class DataStore {
                 listId.bindString(1, value);
                 return listId.simpleQueryForLong() != StoredList.TEMPORARY_LIST.id;
             }
-        } catch (final SQLiteDoneException e) {
+        } catch (final SQLiteDoneException ignored) {
             // Do nothing, it only means we have no information on the cache
         } catch (final Exception e) {
             Log.e("DataStore.isOffline", e);
@@ -1024,7 +1024,7 @@ public class DataStore {
                 description.bindString(1, guid);
                 return description.simpleQueryForString();
             }
-        } catch (final SQLiteDoneException e) {
+        } catch (final SQLiteDoneException ignored) {
             // Do nothing, it only means we have no information on the cache
         } catch (final Exception e) {
             Log.e("DataStore.getGeocodeForGuid", e);
@@ -2803,7 +2803,7 @@ public class DataStore {
             }
 
             cursor.close();
-        } catch (final SQLiteDoneException e) {
+        } catch (final SQLiteDoneException ignored) {
             // Do nothing, it only means we have no information on the cache
         } catch (final Exception e) {
             Log.e("DataStore.getCacheDescription", e);

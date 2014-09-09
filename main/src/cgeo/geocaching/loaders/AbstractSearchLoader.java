@@ -95,7 +95,7 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
     public void waitForUser() {
         try {
             latch.await();
-        } catch (InterruptedException e) {
+        } catch (InterruptedException ignored) {
             Log.w("searchThread is not waiting for user…");
         }
     }

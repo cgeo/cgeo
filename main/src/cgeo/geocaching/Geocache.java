@@ -1671,7 +1671,7 @@ public class Geocache implements ICache, IWaypoint {
                     if (hours >= 0 && hours < 24 && minutes >= 0 && minutes < 60) {
                         return String.valueOf(hours * 60 + minutes);
                     }
-                } catch (final NumberFormatException e) {
+                } catch (final NumberFormatException ignored) {
                     // cannot happen, but static code analysis doesn't know
                 }
             }

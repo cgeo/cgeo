@@ -30,7 +30,7 @@ class StreetviewApp extends AbstractPointNavigationApp {
         try {
             activity.startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse("google.streetview:cbll=" + point.getLatitude() + "," + point.getLongitude())));
-        } catch (final ActivityNotFoundException e) {
+        } catch (final ActivityNotFoundException ignored) {
             ActivityMixin.showToast(activity, CgeoApplication.getInstance().getString(R.string.err_application_no));
         }
     }

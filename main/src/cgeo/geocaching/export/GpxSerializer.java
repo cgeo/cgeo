@@ -195,7 +195,7 @@ public final class GpxSerializer {
                 try {
                     final int numericPrefix = Integer.parseInt(prefix);
                     maxPrefix = Math.max(numericPrefix, maxPrefix);
-                } catch (final NumberFormatException ex) {
+                } catch (final NumberFormatException ignored) {
                     // ignore non numeric prefix, as it should be unique in the list of non-own waypoints already
                 }
             }

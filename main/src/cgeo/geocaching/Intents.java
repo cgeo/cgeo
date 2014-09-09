@@ -91,7 +91,7 @@ public class Intents {
         }
         try {
             return CacheListType.valueOf(typeName);
-        } catch (final IllegalArgumentException e) {
+        } catch (final IllegalArgumentException ignored) {
             return CacheListType.OFFLINE;
         }
     }

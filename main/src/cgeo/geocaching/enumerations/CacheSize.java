@@ -83,7 +83,7 @@ public enum CacheSize {
                     }
                 }
             }
-        } catch (final NumberFormatException e) {
+        } catch (final NumberFormatException ignored) {
             // ignore, as this might be a number or not
         }
         return UNKNOWN;

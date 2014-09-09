@@ -253,7 +253,7 @@ public final class LocalStorage {
             } finally {
                 f.close();
             }
-        } catch (final FileNotFoundException e) {
+        } catch (final FileNotFoundException ignored) {
             // Do nothing, the file does not exist
         } catch (final Exception e) {
             Log.w("could not read saved header " + name + " for " + baseFile, e);

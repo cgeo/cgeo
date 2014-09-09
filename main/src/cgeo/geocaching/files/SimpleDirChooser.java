@@ -142,7 +142,7 @@ public class SimpleDirChooser extends AbstractListActivity {
             for (final File currentDir : dirs) {
                 listDirs.add(new Option(currentDir.getName(), currentDir.getAbsolutePath(), currentDir.canWrite()));
             }
-        } catch (final RuntimeException e) {
+        } catch (final RuntimeException ignored) {
         }
         Collections.sort(listDirs, Option.NAME_COMPARATOR);
         if (dir.getParent() != null) {

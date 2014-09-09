@@ -228,7 +228,7 @@ public abstract class GPXParser extends FileParser {
             String stringName;
             try {
                 stringName = CgeoApplication.getInstance().getResources().getResourceName(stringId);
-            } catch (final NullPointerException e) {
+            } catch (final NullPointerException ignored) {
                 return null;
             }
             if (stringName == null) {
@@ -614,7 +614,7 @@ public abstract class GPXParser extends FileParser {
                                 cache.getAttributes().add(internalId);
                             }
                         }
-                    } catch (final NumberFormatException e) {
+                    } catch (final NumberFormatException ignored) {
                         // nothing
                     }
                 }
@@ -717,7 +717,7 @@ public abstract class GPXParser extends FileParser {
                         if (attrs.getIndex("ref") > -1) {
                             trackable.setGeocode(attrs.getValue("ref"));
                         }
-                    } catch (final RuntimeException e) {
+                    } catch (final RuntimeException ignored) {
                         // nothing
                     }
                 }
@@ -761,7 +761,7 @@ public abstract class GPXParser extends FileParser {
                         if (attrs.getIndex("id") > -1) {
                             log.id = Integer.parseInt(attrs.getValue("id"));
                         }
-                    } catch (final NumberFormatException e) {
+                    } catch (final NumberFormatException ignored) {
                         // nothing
                     }
                 }

@@ -336,7 +336,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
             menu.findItem(R.id.menu_caches_around).setVisible(visible);
 
             menu.findItem(R.id.menu_clear_history).setVisible(!getHistoryOfSearchedLocations().isEmpty());
-        } catch (final RuntimeException e) {
+        } catch (final RuntimeException ignored) {
             // nothing
         }
 
@@ -518,7 +518,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
             double bearing;
             try {
                 bearing = Double.parseDouble(bearingText);
-            } catch (final NumberFormatException e) {
+            } catch (final NumberFormatException ignored) {
                 Dialogs.message(this, R.string.err_point_bear_and_dist_title, R.string.err_point_bear_and_dist);
                 return null;
             }
@@ -527,7 +527,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
             try {
                 distance = DistanceParser.parseDistance(distanceText,
                         !Settings.isUseImperialUnits());
-            } catch (final NumberFormatException e) {
+            } catch (final NumberFormatException ignored) {
                 showToast(res.getString(R.string.err_parse_dist));
                 return null;
             }

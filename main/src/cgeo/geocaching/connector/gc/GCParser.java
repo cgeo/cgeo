@@ -1528,7 +1528,7 @@ public abstract class GCParser {
         if (releaseString != null) {
             try {
                 trackable.setReleased(dateTbIn1.parse(releaseString));
-            } catch (final ParseException ignore) {
+            } catch (final ParseException ignored) {
                 if (trackable.getReleased() == null) {
                     try {
                         trackable.setReleased(dateTbIn2.parse(releaseString));
@@ -1591,7 +1591,7 @@ public abstract class GCParser {
                 long date = 0;
                 try {
                     date = GCLogin.parseGcCustomDate(matcherLogs.group(2)).getTime();
-                } catch (final ParseException ignore) {
+                } catch (final ParseException ignored) {
                 }
 
                 final LogEntry logDone = new LogEntry(

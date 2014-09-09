@@ -92,7 +92,7 @@ class GeopointParser {
 
         try {
             return new ResultWrapper(Double.valueOf(replaceSpaceAfterComma), 0, text.length());
-        } catch (NumberFormatException e1) {
+        } catch (NumberFormatException ignored) {
             // fall through to advanced parsing
         }
 
@@ -126,7 +126,7 @@ class GeopointParser {
                 final int pos = (latlon == LatLon.LON ? text.lastIndexOf(textPart) : text.indexOf(textPart));
                 return new ResultWrapper(Double.parseDouble(textPart), pos, textPart.length());
             }
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException ignored) {
             // The right exception will be raised below.
         }
 

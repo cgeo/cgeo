@@ -30,7 +30,7 @@ public class DecryptTextClickListener implements View.OnClickListener {
             } else {
                 targetView.setText(CryptUtils.rot13((String) text));
             }
-        } catch (final RuntimeException ignore) {
+        } catch (final RuntimeException ignored) {
             // nothing
         }
     }

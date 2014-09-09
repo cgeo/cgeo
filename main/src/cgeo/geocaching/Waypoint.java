@@ -309,7 +309,7 @@ public class Waypoint implements IWaypoint {
                     waypoints.add(waypoint);
                     count++;
                 }
-            } catch (final Geopoint.ParseException ignore) {
+            } catch (final Geopoint.ParseException ignored) {
             }
 
             note = note.substring(matcher.start() + 1);

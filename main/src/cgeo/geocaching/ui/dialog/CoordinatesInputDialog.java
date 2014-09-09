@@ -421,7 +421,7 @@ public class CoordinatesInputDialog extends DialogFragment {
                 gp = current;
                 return true;
             }
-        } catch (final Geopoint.ParseException e) {
+        } catch (final Geopoint.ParseException ignored) {
             // Signaled and returned below
         }
         if (signalError) {

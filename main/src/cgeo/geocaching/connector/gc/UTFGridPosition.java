@@ -46,7 +46,7 @@ public final class UTFGridPosition {
                 final int y = Integer.parseInt(matcher.group(2));
                 return new UTFGridPosition(x, y);
             }
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException ignored) {
         }
         return new UTFGridPosition(0, 0);
     }

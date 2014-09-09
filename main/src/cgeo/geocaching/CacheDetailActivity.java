@@ -278,7 +278,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 title = geocode;
             }
             progress.show(this, title, res.getString(R.string.cache_dialog_loading_details), true, loadCacheHandler.cancelMessage());
-        } catch (final RuntimeException e) {
+        } catch (final RuntimeException ignored) {
             // nothing, we lost the window
         }
 
@@ -1604,7 +1604,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             if (null != loadingIndicatorView) {
                 loadingIndicatorView.setVisibility(View.GONE);
             }
-        } catch (final Exception e) {
+        } catch (final Exception ignored) {
             showToast(res.getString(R.string.err_load_descr_failed));
         }
     }

@@ -1279,7 +1279,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     } else {
                         try {
                             sleep(5000); // Wait for 5s if no cache found
-                        } catch (final InterruptedException e) {
+                        } catch (final InterruptedException ignored) {
                         }
                         handler.sendEmptyMessage(MSG_WAITING);
                     }

@@ -98,7 +98,7 @@ public class GCMap {
                 caches.add(cache);
             }
             result.addAndPutInCache(caches);
-        } catch (ParserException | ParseException | IOException | NumberFormatException ignore) {
+        } catch (ParserException | ParseException | IOException | NumberFormatException ignored) {
             result.setError(StatusCode.UNKNOWN_ERROR);
         }
         return result;
