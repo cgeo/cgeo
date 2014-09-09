@@ -79,7 +79,7 @@ public class Settings {
         Min,
         Sec;
 
-        static int DEFAULT_INT_VALUE = Min.ordinal();
+        static final int DEFAULT_INT_VALUE = Min.ordinal();
 
         public static CoordInputFormatEnum fromInt(final int id) {
             final CoordInputFormatEnum[] values = CoordInputFormatEnum.values();
