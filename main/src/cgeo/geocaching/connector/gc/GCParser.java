@@ -376,7 +376,7 @@ public abstract class GCParser {
         final SearchResult result = new SearchResult(parsed.left);
         if (parsed.left == StatusCode.NO_ERROR) {
             result.addAndPutInCache(Collections.singletonList(parsed.right));
-            DataStore.saveLogsWithoutTransaction(parsed.right.getGeocode(), getLogs(page, Logs.ALL).toBlocking().toIterable());
+            DataStore.saveLogsWithoutTransaction(parsed.right.getGeocode(), getLogs(parseUserToken(page), Logs.ALL).toBlocking().toIterable());
         }
         return result;
     }
@@ -1420,7 +1420,10 @@ public abstract class GCParser {
     }
 
     private static String getUserToken(final Geocache cache) {
-        final String page = requestHtmlPage(cache.getGeocode(), null, "n");
+        return parseUserToken(requestHtmlPage(cache.getGeocode(), null, "n"));
+    }
+
+    private static String parseUserToken(final String page) {
         return TextUtils.getMatch(page, GCConstants.PATTERN_USERTOKEN, "");
     }
 
@@ -1665,17 +1668,15 @@ public abstract class GCParser {
      *            The logType to request
      * @return Observable<LogEntry> The logs
      */
-    private static Observable<LogEntry> getLogs(final String page, final Logs logType) {
+    private static Observable<LogEntry> getLogs(final String userToken, final Logs logType) {
+        if (userToken.isEmpty()) {
+            Log.e("GCParser.loadLogsFromDetails: unable to extract userToken");
+            return Observable.empty();
+        }
+
         return Observable.defer(new Func0<Observable<LogEntry>>() {
             @Override
             public Observable<LogEntry> call() {
-                final MatcherWrapper userTokenMatcher = new MatcherWrapper(GCConstants.PATTERN_USERTOKEN, page);
-                if (!userTokenMatcher.find()) {
-                    Log.e("GCParser.loadLogsFromDetails: unable to extract userToken");
-                    return Observable.empty();
-                }
-
-                final String userToken = userTokenMatcher.group(1);
                 final Parameters params = new Parameters(
                         "tkn", userToken,
                         "idx", "1",
@@ -1864,10 +1865,11 @@ public abstract class GCParser {
         }
 
         CancellableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
-        final Observable<LogEntry> logs = getLogs(page, Logs.ALL);
-        final Observable<LogEntry> ownLogs = getLogs(page, Logs.OWN).cache();
+        final String userToken = parseUserToken(page);
+        final Observable<LogEntry> logs = getLogs(userToken, Logs.ALL);
+        final Observable<LogEntry> ownLogs = getLogs(userToken, Logs.OWN).cache();
         final Observable<LogEntry> specialLogs = Settings.isFriendLogsWanted() ?
-                Observable.merge(getLogs(page, Logs.FRIENDS), ownLogs) : Observable.<LogEntry>empty();
+                Observable.merge(getLogs(userToken, Logs.FRIENDS), ownLogs) : Observable.<LogEntry>empty();
         final Observable<List<LogEntry>> mergedLogs = Observable.zip(logs.toList(), specialLogs.toList(),
                 new Func2<List<LogEntry>, List<LogEntry>, List<LogEntry>>() {
                     @Override
