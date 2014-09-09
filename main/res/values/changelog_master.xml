@@ -7,7 +7,7 @@
     · New: Optional low power GPS mode for parts of the app which don\'t require high precision\n
     · New: Confirmation dialog for dangerous log types\n
     · New: Store found date of found caches when importing via GPX\n
-    · New: Select a waypoint of a cache as target direclty from compass\n
+    · New: Select a waypoint of a cache as target directly from compass\n
     · New: Suggestion for waypoint name depending on its type\n
     · New: Import lab caches as virtual caches\n
     · New: Remember zoom level of live map and cache map separately\n
