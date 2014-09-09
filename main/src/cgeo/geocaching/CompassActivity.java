@@ -306,7 +306,7 @@ public class CompassActivity extends AbstractActionBarActivity {
 
                 updateNorthHeading(AngleUtils.getDirectionNow(dir));
             } catch (final RuntimeException e) {
-                Log.w("Failed to LocationUpdater location.");
+                Log.w("Failed to update location", e);
             }
         }
     };

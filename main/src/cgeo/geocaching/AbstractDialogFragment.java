@@ -263,7 +263,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
                 }
                 onUpdateGeoData(geo);
             } catch (final RuntimeException e) {
-                Log.w("Failed to UpdateLocation location.");
+                Log.w("Failed to update location", e);
             }
         }
     };

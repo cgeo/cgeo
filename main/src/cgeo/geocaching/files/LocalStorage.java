@@ -460,7 +460,7 @@ public final class LocalStorage {
                 }
             } catch (final IOException e) {
                 Log.e("Could not get additional mount points for user content. " +
-                        "Proceeding with external storage only (" + extStorage + ")");
+                        "Proceeding with external storage only (" + extStorage + ")", e);
             } finally {
                 IOUtils.closeQuietly(fr);
                 IOUtils.closeQuietly(br);

@@ -592,7 +592,7 @@ public class SettingsActivity extends PreferenceActivity {
                     final int mapSourceId = Integer.parseInt(stringValue);
                     mapSource = MapProviderFactory.getMapSource(mapSourceId);
                 } catch (final NumberFormatException e) {
-                    Log.e("SettingsActivity.onPreferenceChange: bad source id '" + stringValue + "'");
+                    Log.e("SettingsActivity.onPreferenceChange: bad source id '" + stringValue + "'", e);
                     mapSource = null;
                 }
                 // If there is no corresponding map source (because some map sources were

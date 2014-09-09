@@ -303,7 +303,7 @@ public abstract class GPXParser extends FileParser {
                         }
                     }
                 } catch (final NumberFormatException e) {
-                    Log.w("Failed to parse waypoint's latitude and/or longitude.");
+                    Log.w("Failed to parse waypoint's latitude and/or longitude", e);
                 }
             }
         });
@@ -534,7 +534,7 @@ public abstract class GPXParser extends FileParser {
                             cache.setDisabled(!attrs.getValue("available").equalsIgnoreCase("true"));
                         }
                     } catch (final RuntimeException e) {
-                        Log.w("Failed to parse cache attributes.");
+                        Log.w("Failed to parse cache attributes", e);
                     }
                 }
             });

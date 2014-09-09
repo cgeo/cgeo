@@ -955,7 +955,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                         }
                     }
                 } catch (final RuntimeException e) {
-                    Log.w("Failed to update location.");
+                    Log.w("Failed to update location", e);
                 }
             }
         }

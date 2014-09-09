@@ -459,7 +459,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
                 latButton.setHint(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
                 lonButton.setHint(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
             } catch (final RuntimeException e) {
-                Log.w("Failed to update location.");
+                Log.w("Failed to update location", e);
             }
         }
     };
