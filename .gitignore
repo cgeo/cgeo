@@ -2,9 +2,13 @@
 bin/
 gen/
 annotation_gen/
+generated/
 
 # vm crash logs
 hs_err_pid*.log
+
+# annotation processor log files
+androidannotations.log
 
 # developer specific settings and credentials
 local.properties
