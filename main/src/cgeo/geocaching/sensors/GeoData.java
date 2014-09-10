@@ -31,10 +31,10 @@ public class GeoData extends Location implements IGeoData {
 
     @Nullable
     static Location best(@Nullable final Location gpsLocation, @Nullable final Location netLocation) {
-        if (isRecent(gpsLocation) || !(netLocation != null)) {
+        if (isRecent(gpsLocation) || netLocation == null) {
             return gpsLocation;
         }
-        if (!(gpsLocation != null)) {
+        if (gpsLocation == null) {
             return netLocation;
         }
         return gpsLocation.getTime() >= netLocation.getTime() ? gpsLocation : netLocation;
