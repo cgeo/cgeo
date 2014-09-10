@@ -206,7 +206,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_log_touch:
-                LogTrackableActivity.startActivity(this, trackable);
+                startActivity(LogTrackableActivity.getIntent(this, trackable));
                 return true;
             case R.id.menu_browser_trackable:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getUrl())));

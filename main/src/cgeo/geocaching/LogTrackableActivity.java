@@ -16,7 +16,9 @@ import cgeo.geocaching.ui.dialog.DateDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
+import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -29,6 +31,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -347,12 +350,12 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         DataStore.saveTrackable(trackable);
     }
 
-    public static void startActivity(final Context context, final Trackable trackable) {
+    public static Intent getIntent(final Context context, final Trackable trackable) {
         final Intent logTouchIntent = new Intent(context, LogTrackableActivity.class);
         logTouchIntent.putExtra(Intents.EXTRA_GEOCODE, trackable.getGeocode());
         logTouchIntent.putExtra(Intents.EXTRA_GUID, trackable.getGuid());
         logTouchIntent.putExtra(Intents.EXTRA_TRACKING_CODE, trackable.getTrackingcode());
-        context.startActivity(logTouchIntent);
+        return logTouchIntent;
     }
 
     @Override
@@ -387,6 +390,17 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         } else {
             showToast(res.getString(R.string.err_log_load_data_still));
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        final boolean result = super.onCreateOptionsMenu(menu);
+        for (final LogTemplate template : LogTemplateProvider.getTemplatesWithoutSignature()) {
+            if (template.getTemplateString().equals("NUMBER")) {
+                menu.findItem(R.id.menu_templates).getSubMenu().removeItem(template.getItemId());
+            }
+        }
+        return result;
     }
 
 }
