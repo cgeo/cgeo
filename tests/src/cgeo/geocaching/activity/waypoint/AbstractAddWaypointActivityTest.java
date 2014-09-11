@@ -1,4 +1,4 @@
-package cgeo.geocaching.waypointactivity;
+package cgeo.geocaching.activity.waypoint;
 
 import cgeo.geocaching.EditWaypointActivity_;
 

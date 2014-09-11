@@ -3,10 +3,9 @@ package cgeo.geocaching.activity.logtrackable;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.LogTrackableActivity;
 import cgeo.geocaching.Trackable;
+import cgeo.geocaching.activity.AbstractEspressoTest;
 
-import android.test.ActivityInstrumentationTestCase2;
-
-public abstract class AbstractLogTrackableActivityTest extends ActivityInstrumentationTestCase2<LogTrackableActivity> {
+public abstract class AbstractLogTrackableActivityTest extends AbstractEspressoTest<LogTrackableActivity> {
 
     private static Trackable trackable;
 

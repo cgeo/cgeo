@@ -1,19 +1,18 @@
-package cgeo.geocaching.waypointactivity;
+package cgeo.geocaching.activity.waypoint;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.EditWaypointActivity_;
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.activity.AbstractEspressoTest;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 
-import android.test.ActivityInstrumentationTestCase2;
-
 import java.util.Collections;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-public abstract class AbstractWaypointActivityTest extends ActivityInstrumentationTestCase2<EditWaypointActivity_> {
+public abstract class AbstractWaypointActivityTest extends AbstractEspressoTest<EditWaypointActivity_> {
 
     private Geocache cache;
 

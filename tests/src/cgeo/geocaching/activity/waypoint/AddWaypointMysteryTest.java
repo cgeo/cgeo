@@ -1,4 +1,4 @@
-package cgeo.geocaching.waypointactivity;
+package cgeo.geocaching.activity.waypoint;
 
 import static com.google.android.apps.common.testing.ui.espresso.Espresso.onView;
 import static com.google.android.apps.common.testing.ui.espresso.assertion.ViewAssertions.matches;
