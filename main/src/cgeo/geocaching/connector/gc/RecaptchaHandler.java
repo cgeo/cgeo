@@ -41,10 +41,13 @@ public class RecaptchaHandler extends Handler {
         this.recaptchaReceiver = recaptchaReceiver;
     }
 
-    private void loadChallenge(final ImageView imageView, final View reloadButton) {
+    private void loadChallenge(final ImageView imageView, final View reloadButton, final boolean needsFetch) {
         final Observable<Bitmap> captcha = Observable.defer(new Func0<Observable<? extends Bitmap>>() {
             @Override
             public Observable<? extends Bitmap> call() {
+                if (needsFetch) {
+                    recaptchaReceiver.fetchChallenge();
+                }
                 final String url = "http://www.google.com/recaptcha/api/image?c=" + recaptchaReceiver.getChallenge();
                 final InputStream is = Network.getResponseStream(Network.getRequest(url));
                 if (is != null) {
@@ -89,12 +92,11 @@ public class RecaptchaHandler extends Handler {
             reloadButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
-                    recaptchaReceiver.fetchChallenge();
-                    loadChallenge(imageView, reloadButton);
+                    loadChallenge(imageView, reloadButton, true);
                 }
             });
 
-            loadChallenge(imageView, reloadButton);
+            loadChallenge(imageView, reloadButton, false);
 
             dlg.setTitle(activity.getString(R.string.caches_recaptcha_title));
             dlg.setView(view);
