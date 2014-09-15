@@ -35,7 +35,7 @@ public class TextFactoryTest extends AndroidTestCase {
         final Configuration config = resources.getConfiguration();
         defaultLocale1 = config.locale;
         defaultLocale2 = Locale.getDefault();
-        defaultMetric = !Settings.isUseImperialUnits();
+        defaultMetric = !Settings.useImperialUnits();
     }
 
     @Override

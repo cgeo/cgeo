@@ -149,7 +149,7 @@ public class Settings {
             e.putBoolean(getKey(R.string.pref_maptrail), prefsV0.getInt(getKey(R.string.pref_maptrail), 1) != 0);
             e.putInt(getKey(R.string.pref_lastmapzoom), prefsV0.getInt(getKey(R.string.pref_lastmapzoom), 14));
             e.putBoolean(getKey(R.string.pref_livelist), 0 != prefsV0.getInt(getKey(R.string.pref_livelist), 1));
-            e.putBoolean(getKey(R.string.pref_units), prefsV0.getInt(getKey(R.string.pref_units), unitsMetric) == unitsMetric);
+            e.putBoolean(getKey(R.string.pref_units_imperial), prefsV0.getInt(getKey(R.string.pref_units_imperial), unitsMetric) != unitsMetric);
             e.putBoolean(getKey(R.string.pref_skin), prefsV0.getInt(getKey(R.string.pref_skin), 0) != 0);
             e.putInt(getKey(R.string.pref_lastusedlist), prefsV0.getInt(getKey(R.string.pref_lastusedlist), StoredList.STANDARD_LIST_ID));
             e.putString(getKey(R.string.pref_cachetype), prefsV0.getString(getKey(R.string.pref_cachetype), CacheType.ALL.id));
@@ -195,7 +195,7 @@ public class Settings {
         if (currentVersion < 2) {
             final Editor e = sharedPrefs.edit();
 
-            e.putBoolean(getKey(R.string.pref_units), !isUseImperialUnits());
+            e.putBoolean(getKey(R.string.pref_units_imperial), useImperialUnits());
 
             // show waypoints threshold now as a slider
             int wpThreshold = getWayPointsThreshold();
@@ -595,11 +595,15 @@ public class Settings {
         return getBoolean(R.string.pref_sigautoinsert, false);
     }
 
-    public static boolean isUseImperialUnits() {
-        return getBoolean(R.string.pref_units, getImperialUnitsDefault());
+    public static void setUseImperialUnits(final boolean useImperialUnits) {
+        putBoolean(R.string.pref_units_imperial, useImperialUnits);
     }
 
-    static boolean getImperialUnitsDefault() {
+    public static boolean useImperialUnits() {
+        return getBoolean(R.string.pref_units_imperial, useImperialUnitsByDefault());
+    }
+
+    static boolean useImperialUnitsByDefault() {
         final String countryCode = Locale.getDefault().getCountry();
         return "US".equals(countryCode)  // USA
             || "LR".equals(countryCode)  // Liberia

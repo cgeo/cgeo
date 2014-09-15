@@ -250,7 +250,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     private void initializeDistanceUnitSelector() {
         distanceUnits = new ArrayList<>(Arrays.asList(res.getStringArray(R.array.distance_units)));
         if (initViews) {
-            distanceUnitSelector.setSelection(Settings.isUseImperialUnits() ? 2 : 0); //0:m, 2:ft
+            distanceUnitSelector.setSelection(Settings.useImperialUnits() ? 2 : 0); //0:m, 2:ft
         }
     }
 
@@ -397,7 +397,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 double distance;
                 try {
                     distance = DistanceParser.parseDistance(distanceText,
-                            !Settings.isUseImperialUnits());
+                            !Settings.useImperialUnits());
                 } catch (final NumberFormatException ignored) {
                     showToast(res.getString(R.string.err_parse_dist));
                     return;

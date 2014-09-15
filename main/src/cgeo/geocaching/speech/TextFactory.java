@@ -31,7 +31,7 @@ public class TextFactory {
     private static String getDistance(Geopoint position, Geopoint target) {
         final float kilometers = position.distanceTo(target);
 
-        if (Settings.isUseImperialUnits()) {
+        if (Settings.useImperialUnits()) {
             return getDistance(kilometers / IConversion.MILES_TO_KILOMETER,
                     (int) (kilometers * 1000.0 * IConversion.METERS_TO_FEET),
                     3.0f, 0.2f, 300,

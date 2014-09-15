@@ -430,7 +430,7 @@
             android:title="@string/init_useenglish" />
         <CheckBoxPreference
             android:defaultValue="false"
-            android:key="@string/pref_units"
+            android:key="@string/pref_units_imperial"
             android:summary="@string/init_summary_units"
             android:title="@string/init_units" />
     </PreferenceScreen>

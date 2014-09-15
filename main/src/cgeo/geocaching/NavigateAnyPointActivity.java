@@ -261,7 +261,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
 
     private void initializeDistanceUnitSelector() {
         if (StringUtils.isBlank(distanceUnit)) {
-            if (Settings.isUseImperialUnits()) {
+            if (Settings.useImperialUnits()) {
                 distanceUnitSelector.setSelection(2); // ft
                 distanceUnit = res.getStringArray(R.array.distance_units)[2];
             } else {
@@ -526,7 +526,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
             double distance;
             try {
                 distance = DistanceParser.parseDistance(distanceText,
-                        !Settings.isUseImperialUnits());
+                        !Settings.useImperialUnits());
             } catch (final NumberFormatException ignored) {
                 showToast(res.getString(R.string.err_parse_dist));
                 return null;

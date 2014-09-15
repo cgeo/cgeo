@@ -49,7 +49,7 @@
     <string name="pref_skin">skin</string>
     <string name="pref_showaddress">showaddress</string>
     <string name="pref_useenglish">useenglish</string>
-    <string name="pref_units">units</string>
+    <string name="pref_units_imperial">units</string>
     <string name="pref_autoloaddesc">autoloaddesc</string>
     <string name="pref_ratingwanted">ratingwanted</string>
     <string name="pref_friendlogswanted">friendlogswanted</string>

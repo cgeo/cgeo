@@ -11,7 +11,7 @@ public class Units {
     public static ImmutablePair<Double, String> scaleDistance(final double distanceKilometers) {
         double distance;
         String units;
-        if (Settings.isUseImperialUnits()) {
+        if (Settings.useImperialUnits()) {
             distance = distanceKilometers / IConversion.MILES_TO_KILOMETER;
             if (distance >= 0.1) {
                 units = "mi";
@@ -54,7 +54,7 @@ public class Units {
     }
 
     public static String getSpeed(final float kilometersPerHour) {
-        if (Settings.isUseImperialUnits()) {
+        if (Settings.useImperialUnits()) {
             return String.format(Locale.US, "%.0f mph", kilometersPerHour / IConversion.MILES_TO_KILOMETER);
         }
         return String.format(Locale.US, "%.0f km/h", kilometersPerHour);

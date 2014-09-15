@@ -89,6 +89,7 @@ public class SettingsActivity extends PreferenceActivity {
         super.onCreate(savedInstanceState);
 
         initHardwareAccelerationPreferences();
+        initUnitPreferences();
         SettingsActivity.addPreferencesFromResource(this, R.xml.preferences);
         initPreferences();
 
@@ -142,7 +143,6 @@ public class SettingsActivity extends PreferenceActivity {
                 R.string.pref_ecusername, R.string.pref_ecpassword, R.string.pref_ec_icons }) {
             bindSummaryToStringValue(k);
         }
-        getPreference(R.string.pref_units).setDefaultValue(Settings.getImperialUnitsDefault());
     }
 
     private void initNavigationMenuPreferences() {
@@ -385,6 +385,10 @@ public class SettingsActivity extends PreferenceActivity {
         // We have to ensure that the preference is initialized so that devices with hardware acceleration disabled
         // get the appropriate value.
         Settings.setUseHardwareAcceleration(Settings.useHardwareAcceleration());
+    }
+
+    private static void initUnitPreferences() {
+        Settings.setUseImperialUnits(Settings.useImperialUnits());
     }
 
     private void initDbLocationPreference() {

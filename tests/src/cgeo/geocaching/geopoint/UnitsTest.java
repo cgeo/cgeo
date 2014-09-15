@@ -14,7 +14,7 @@ public class UnitsTest extends CGeoTestCase {
         final String actual = Units.getDistanceFromKilometers(distance);
         if (!StringUtils.equals(expected, actual.replace(',', '.'))) { // make 1.2 the same as 1,2
             fail("getHumanDistance(" + distance +
-                    ") [metric: " + (!Settings.isUseImperialUnits() ? "yes" : "no") +
+                    ") [metric: " + (!Settings.useImperialUnits() ? "yes" : "no") +
                     "] fails to match " + expected + ": " + actual);
         }
     }
@@ -23,7 +23,7 @@ public class UnitsTest extends CGeoTestCase {
     @SuppressWarnings("static-method")
     public void testDistance() {
         assertThat(Units.getDistanceFromKilometers(null)).isEqualTo("?");
-        final boolean savedImperial = Settings.isUseImperialUnits();
+        final boolean savedImperial = Settings.useImperialUnits();
         try {
             TestSettings.setUseImperialUnits(false);
             assertDistance("123 km", 122.782f);
@@ -46,7 +46,7 @@ public class UnitsTest extends CGeoTestCase {
     @SuppressWarnings("static-method")
     public void testSpeed() {
         assertThat(Units.getDistanceFromKilometers(null)).isEqualTo("?");
-        final boolean savedImperial = Settings.isUseImperialUnits();
+        final boolean savedImperial = Settings.useImperialUnits();
         try {
             TestSettings.setUseImperialUnits(false);
             assertSpeed("123 km/h", 122.782f);

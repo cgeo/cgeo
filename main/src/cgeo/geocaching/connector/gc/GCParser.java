@@ -192,7 +192,7 @@ public abstract class GCParser {
             final String distance = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE, false, 2, null, false);
             if (distance != null) {
                 cache.setDistance(DistanceParser.parseDistance(distance,
-                        !Settings.isUseImperialUnits()));
+                        !Settings.useImperialUnits()));
             }
 
             // difficulty/terrain
@@ -1544,7 +1544,7 @@ public abstract class GCParser {
         if (null != distance) {
             try {
                 trackable.setDistance(DistanceParser.parseDistance(distance,
-                        !Settings.isUseImperialUnits()));
+                        !Settings.useImperialUnits()));
             } catch (final NumberFormatException e) {
                 Log.e("GCParser.parseTrackable: Failed to parse distance", e);
             }
