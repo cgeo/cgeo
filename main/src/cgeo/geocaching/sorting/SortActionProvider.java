@@ -62,7 +62,7 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
     }
 
     private void registerComparators() {
-        register(R.string.caches_sort_distance, null);
+        register(R.string.caches_sort_distance, DistanceComparator.class);
         register(R.string.caches_sort_date_hidden, DateComparator.class);
         register(R.string.caches_sort_difficulty, DifficultyComparator.class);
         register(R.string.caches_sort_finds, FindsComparator.class);
