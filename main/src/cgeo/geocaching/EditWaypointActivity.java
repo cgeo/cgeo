@@ -379,7 +379,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             final int selectedTypeIndex = waypointTypeSelector.getSelectedItemPosition();
             final WaypointType type = selectedTypeIndex >= 0 ? POSSIBLE_WAYPOINT_TYPES.get(selectedTypeIndex) : waypoint.getWaypointType();
             final boolean visited = visitedCheckBox.isChecked();
-            final ProgressDialog progress = ProgressDialog.show(EditWaypointActivity.this, getString(R.string.waypoint_uploading), getString(R.string.waypoint_being_saved), true);
+            final ProgressDialog progress = ProgressDialog.show(EditWaypointActivity.this, getString(R.string.waypoint), getString(R.string.waypoint_being_saved), true);
             final Handler finishHandler = new Handler() {
 
                 @Override
