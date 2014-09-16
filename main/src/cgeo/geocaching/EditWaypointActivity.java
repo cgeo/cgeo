@@ -417,12 +417,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
                 @Override
                 public void handleMessage(final Message msg) {
-                    // TODO: The order of showToast, progress.dismiss and finish is different in these cases. Why?
                     switch (msg.what) {
                         case UPLOAD_SUCCESS:
-                            showToast(getString(R.string.waypoint_coordinates_has_been_modified_on_website, coordsToSave));
                             progress.dismiss();
                             finish();
+                            showToast(getString(R.string.waypoint_coordinates_has_been_modified_on_website, coordsToSave));
                             break;
                         case SUCCESS:
                             progress.dismiss();
