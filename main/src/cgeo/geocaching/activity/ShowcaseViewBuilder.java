@@ -1,9 +1,12 @@
 package cgeo.geocaching.activity;
 
+import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.ShowcaseView.Builder;
 import com.github.amlcurran.showcaseview.targets.Target;
 
 import android.app.Activity;
+import android.view.View;
+import android.view.WindowManager.LayoutParams;
 
 /**
  * TODO: replace by simple utility class embedding a builder instead of inheriting from it
@@ -56,6 +59,15 @@ public class ShowcaseViewBuilder extends Builder {
     public ShowcaseViewBuilder setContent(final int titleId, final int textId) {
         setContentTitle(titleId);
         return setContentText(textId);
+    }
+
+    @Override
+    public ShowcaseView build() {
+        final ShowcaseView showcaseView = super.build();
+        if (showcaseView.getVisibility() == View.VISIBLE) {
+            activity.getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        }
+        return showcaseView;
     }
 
 }
