@@ -1701,14 +1701,19 @@ public class Geocache implements ICache, IWaypoint {
         return result;
     }
 
-    // Add spoilers stored locally in /sdcard/GeocachePhotos
+    /**
+     * Add spoilers stored locally in <tt>/sdcard/GeocachePhotos</tt>. If a cache is named GC123ABC, the
+     * directory will be <tt>/sdcard/GeocachePhotos/C/B/GC123ABC/</tt>.
+     *
+     * @param spoilers the list to add to
+     */
     private void addLocalSpoilersTo(final List<Image> spoilers) {
         if (StringUtils.length(geocode) >= 2) {
             final String suffix = StringUtils.right(geocode, 2);
-            final File baseDir = new File(Environment.getExternalStorageDirectory().toString(), "GeocachePhotos");
+            final File baseDir = new File(Environment.getExternalStorageDirectory(), "GeocachePhotos");
             final File lastCharDir = new File(baseDir, suffix.substring(1));
             final File secondToLastCharDir = new File(lastCharDir, suffix.substring(0, 1));
-            final File finalDir = new File(secondToLastCharDir, getGeocode());
+            final File finalDir = new File(secondToLastCharDir, geocode);
             final File[] files = finalDir.listFiles();
             if (files != null) {
                 for (final File image : files) {
