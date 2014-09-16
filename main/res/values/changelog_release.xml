@@ -6,6 +6,8 @@
     · Fix: Hardware acceleration is unreliable on some devices\n
     · Fix: Return correct error message if a cache is unpublished\n
     · Fix: Better icon for navigation menu in cache details\n
+    · Fix: Reloading captcha was not working\n
+    · Fix: Minor layout corrections\n
     \n
     <b>2014.09.02:</b>\n
     · Fix: Hardware acceleration is unreliable on Android &lt; 4.2 and on some devices\n
