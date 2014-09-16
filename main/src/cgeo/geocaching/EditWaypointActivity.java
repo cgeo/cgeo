@@ -412,7 +412,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             final Geopoint coordsToSave = coords;
             final WaypointType type = getSelectedWaypointType();
             final boolean visited = visitedCheckBox.isChecked();
-            final ProgressDialog progress = ProgressDialog.show(EditWaypointActivity.this, getString(R.string.waypoint_uploading), getString(R.string.waypoint_being_saved), true);
+            final ProgressDialog progress = ProgressDialog.show(EditWaypointActivity.this, getString(R.string.waypoint), getString(R.string.waypoint_being_saved), true);
             final Handler finishHandler = new Handler() {
 
                 @Override
