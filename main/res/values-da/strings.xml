@@ -229,7 +229,7 @@
   <string name="caches_nearby_button">I nærheden</string>
   <string name="advanced_search_button">Søg</string>
   <string name="stored_caches_button">Gemte</string>
-  <string name="any_button">Alle destinationer</string>
+  <string name="any_button">Navigation</string>
   <string name="unknown_scan">Der blev ikke fundet nogen geokoder i skanningen.</string>
   <string name="caches_no_cache">Ingen cache</string>
   <string name="caches_more_caches">Flere cacher</string>
@@ -246,7 +246,7 @@
   <string name="caches_store_selected">Gem valgte</string>
   <string name="caches_history">Historik</string>
   <string name="caches_on_map">Vis på kort</string>
-  <string name="caches_sort">Sorter</string>
+  <string name="caches_sort">Sortér</string>
   <string name="caches_sort_distance">Afstand</string>
   <string name="caches_sort_difficulty">Sværhed</string>
   <string name="caches_sort_terrain">Terræn</string>
@@ -398,14 +398,14 @@
   <string name="init_summary_openlastdetailspage">Åbn detaljesiden med de sidst indlæste oplysninger</string>
   <string name="init_autoload">Auto-indlæs lang cachebeskrivelse</string>
   <string name="init_summary_autoload">Auto-indlæs lang cachebeskrivelse</string>
-  <string name="init_skin">Light skin (genstart af c:geo nødvendig)</string>
-  <string name="init_summary_skin">Light skin (genstart af c:geo nødvendig)</string>
+  <string name="init_skin">Light skin</string>
+  <string name="init_summary_skin">Light skin (kræver genstart af c:geo)</string>
   <string name="init_address">Vis adresse på hovedskærm</string>
   <string name="init_summary_address">Vis adresse på hovedskærm</string>
   <string name="init_captcha">Vis CAPTHCA</string>
   <string name="init_summary_captcha">Vis CAPTHCA, hvis nødvendigt (kun Basismedlemmer)</string>
   <string name="init_useenglish">Brug engelsk</string>
-  <string name="init_summary_useenglish">Brug engelsk i c:geo (genstart nødvendig)</string>
+  <string name="init_summary_useenglish">Brug engelsk i c:geo (kræver genstart af c:geo)</string>
   <string name="init_exclude">Udelad egne og fundne cacher</string>
   <string name="init_summary_exclude">Udelad egne og fundne cacher</string>
   <string name="init_showwaypoints">Vis waypoints</string>
@@ -576,7 +576,7 @@
   <string name="cache_watchlist_add">Tilføj til overvågningsliste</string>
   <string name="cache_watchlist_remove">Fjern fra overvågningsliste</string>
   <string name="cache_favpoint_on">Dette er en favoritcache.</string>
-  <string name="cache_favpoint_not_on">Dette er ikke en favoritcache.</string>
+  <string name="cache_favpoint_not_on">Denne cache er ikke blandt dine favoritter.</string>
   <string name="cache_favpoint_add">Tilføj</string>
   <string name="cache_favpoint_remove">Fjern</string>
   <string name="cache_list_text">Liste:</string>
@@ -1150,7 +1150,7 @@
     <item quantity="one">%s favorit</item>
     <item quantity="other">%s favoritter</item>
   </plurals>
-  <string name="percent_favorite_points">% favoritter</string>
+  <string name="percent_favorite_points">%% favoritter</string>
   <string name="cgeo_shortcut">c:geo genvej</string>
   <string name="create_shortcut">Opret genvej</string>
   <string name="send">Send</string>
@@ -1159,7 +1159,7 @@
   <string name="showcase_main_title">Nye menuer</string>
   <string name="showcase_main_text">Som i andre moderne apps er menupunkter i c:geo nu placeret i titellinien. Nogle menupunkter er skjult og bliver først vist når du trykker på knappen med tre prikker. Et langt tryk på et menupunkt åbner en beskrivelse af menupunktet.</string>
   <string name="showcase_cachelist_title">Skift af liste</string>
-  <string name="showcase_cachelist_text">Du kan skifte mellem dine lister med cacher ved at trykke på listens titellinie.</string>
+  <string name="showcase_cachelist_text">Du kan skifte mellem dine lister ved at trykke på listens titel.</string>
   <string name="confirm_log_title">Usædvanlig logtype</string>
   <string name="confirm_log_message">Du er ved at logge \"%s\". Er du sikker?</string>
 </resources>

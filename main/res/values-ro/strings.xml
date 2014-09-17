@@ -493,10 +493,17 @@
   <string name="init_maintenance_directories_note">c:geo salvează imagini, imagini din însemnări şi alte fişiere legate de o geocutie într-un dosar separat. Este posibil ca în unele cazuri (precum import/export al bazei de date) acest dosar să conţină fişiere vechi ce pot fi şterse aici.</string>
   <string name="init_maintenance_directories">Şterge fişierele devenite inutile</string>
   <string name="init_location">Geolocație</string>
+  <string name="init_location_note">Pe dispozitivele echipate cu serviciile Google Play, c:geo poate utiliza automat un furnizor de geolocalizare mai bun. Aceasta însă împiedică folosirea unui receptor GPS extern conectat prin Bluetooth.</string>
   <string name="init_location_googleplayservices">Foloseşte serviciile Google Play</string>
+  <string name="init_low_power">Mod economic</string>
+  <string name="init_low_power_note">Modul economic reduce consumul evitând utilizarea GPS-ului şi a senzorului giroscopic atunci când nu este necesară cunoaşterea cu mare precizie a poziţiei, dar acest lucru poate mări timpul de aşteptare până la obţinerea unei poziţii precise.</string>
+  <string name="init_low_power_mode">Activează modul economic</string>
   <string name="init_create_memory_dump">Creează un extras de memorie copie după memoria folosită de aplicaţie</string>
   <string name="init_memory_dump">Extras de memorie</string>
   <string name="init_memory_dumped">Extras de memorie salvat în %s</string>
+  <string name="init_hardware_acceleration_title">Afişare accelerată hardware</string>
+  <string name="init_hardware_acceleration_note">Accelerarea hardware generează şi afişează mai rapid pe ecran elemente grafice. Pe unele dispozitive însă sistemul de operare Android conţine erori şi unele texte pot apărea neclar. (în special literele îngroşate). Dezactivează accelerarea hardware dacă ai această problemă.</string>
+  <string name="init_hardware_acceleration">Activează accelerarea hardware</string>
   <string name="settings_open_website">Intră pe site</string>
   <string name="settings_settings">Opţiuni</string>
   <string name="settings_information">Informaţii</string>
@@ -1140,6 +1147,8 @@
   <string name="showcase_logcache_text">Reţine, multe comenzi sunt acum în bara de titlu. Acolo vei găsi butonul pentru a trimite o însemnare finalizată.</string>
   <string name="showcase_main_title">Noile meniuri</string>
   <string name="showcase_main_text">c:geo foloseşte meniu în bara de titlu precum alte aplicaţii moderne. Unele elemente sunt ascunse în spatele simbolului punctat. O apăsare prelungită pe un buton afişează descrierea acestuia.</string>
+  <string name="showcase_cachelist_title">Comutare între liste</string>
+  <string name="showcase_cachelist_text">Poţi să schimbi lista afişată apăsând pe titlul listei.</string>
   <string name="confirm_log_title">Tip neobişnuit de însemnare</string>
   <string name="confirm_log_message">Vrei să scrii o însemnare pentru \'%s\'. Eşti sigur?</string>
 </resources>

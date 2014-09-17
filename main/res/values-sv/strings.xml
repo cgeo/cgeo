@@ -501,6 +501,9 @@
   <string name="init_create_memory_dump">Skapa minnesdump</string>
   <string name="init_memory_dump">Minnesdump</string>
   <string name="init_memory_dumped">Minnet sparat till %s</string>
+  <string name="init_hardware_acceleration_title">Hårdvaruaccelererad grafik</string>
+  <string name="init_hardware_acceleration_note">Hårdvaruacceleration visar grafik snabbare på skärmen. På vissa enheter har Android buggar som gör att viss text blir suddig (eller som feta bokstäver). Inaktivera hårdvaruacceleration om du upplever detta.</string>
+  <string name="init_hardware_acceleration">Aktivera hårdvaruacceleration</string>
   <string name="settings_open_website">Öppna hemsida</string>
   <string name="settings_settings">Inställningar</string>
   <string name="settings_information">Information</string>
