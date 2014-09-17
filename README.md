@@ -33,7 +33,7 @@ Build
 
 ### Prerequisites ###
 
-- [Android SDK](http://developer.android.com/sdk) (latest version) including Google APIs V19 (although we target API 7)
+- [Android SDK](http://developer.android.com/sdk) (latest version) including Google APIs V19
 - [Ant](http://ant.apache.org) 1.6.0+ for building c:geo on the command line (not necessary when using only Eclipse)
 - If you use Microsoft Windows, [Google USB Driver](http://developer.android.com/sdk/win-usb.html) to install the application on the smartphone
 
@@ -52,11 +52,18 @@ If the workspace directory name contains a space and leads to errors in the -dex
 3. copy `./main/templates/local.properties` to `./main/`
 4. copy `./main/templates/local.properties` to `./tests/`
 5. edit `local.properties` (see comments in the file)
+6. copy `local.properties` to all other projects (currently android-support-v7-appcompat, google-play-services_lib, mapswithme-api, showcaseview)
+7. copy `local.properties` to cgeo-calender and cgeo-contatcs if you plan to hack on the plugins
 6. copy `./main/templates/keys.xml` to `./main/res/values/`
 7. edit `./main/res/values/keys.xml` and insert several keys (see comments in the file)
   * Google Maps API key (you can leave it empty, but then Google Maps don't work)
-  * request your personal consumer key and secret at [opencaching.de OKAPI signup](http://www.opencaching.de/okapi/signup.html)
-  * request your personal consumer key and secret at [opencaching.pl OKAPI signup](http://www.opencaching.pl/okapi/signup.html)
+  * request your personal consumer key and secret for the various opencaching nodes we support:
+    * [opencaching.de OKAPI signup](http://www.opencaching.de/okapi/signup.html)
+    * [opencaching.pl OKAPI signup](http://www.opencaching.pl/okapi/signup.html)
+    * [opencaching.ro OKAPI signup](http://www.opencaching.ro/okapi/signup.html)
+    * [opencaching.nl OKAPI signup](http://www.opencaching.nl/okapi/signup.html)
+    * [opencaching.us OKAPI signup](http://www.opencaching.us/okapi/signup.html)
+    * [opencaching.org.uk OKAPI signup](http://www.opencaching.org.uk/okapi/signup.html)
 
 ### Building with Ant ###
 
