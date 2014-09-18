@@ -1,5 +1,7 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.network.Network;
 
 import org.apache.commons.lang3.StringUtils;
@@ -46,12 +48,17 @@ public final class TranslationUtils {
     /**
      * Send Intent for Google Translate. Can be caught by Google Translate App or browser.
      *
+     * @param activity
+     *            The activity starting the process
      * @param toLang
      *            The two-letter lowercase ISO language codes as defined by ISO 639-1
      * @param text
      *            The text to be translated
      */
-    public static void startActivityTranslate(final Activity context, final String toLang, final String text) {
-        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(buildTranslationURI(toLang, text))));
+    public static void startActivityTranslate(final Activity activity, final String toLang, final String text) {
+        if (text.length() > TranslationUtils.TRANSLATION_TEXT_LENGTH_WARN) {
+            ActivityMixin.showToast(activity, R.string.translate_length_warning);
+        }
+        activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(buildTranslationURI(toLang, text))));
     }
 }

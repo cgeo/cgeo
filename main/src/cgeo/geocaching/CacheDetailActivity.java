@@ -1889,12 +1889,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                                 assert view instanceof TextView;
                                 clickedItemText = ((TextView) view).getText();
                                 final CharSequence itemTitle = ((TextView) ((View) view.getParent()).findViewById(R.id.name)).getText();
-                                buildDetailsContextMenu(actionMode, menu, clickedItemText, itemTitle, true);
+                                buildDetailsContextMenu(actionMode, menu, itemTitle, true);
                                 return true;
                             case R.id.shortdesc:
                                 assert view instanceof TextView;
                                 clickedItemText = ((TextView) view).getText();
-                                buildDetailsContextMenu(actionMode, menu, clickedItemText, res.getString(R.string.cache_description), false);
+                                buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_description), false);
                                 return true;
                             case R.id.longdesc:
                                 assert view instanceof TextView;
@@ -1905,27 +1905,27 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                                 } else {
                                     clickedItemText = shortDesc + "\n\n" + ((TextView) view).getText();
                                 }
-                                buildDetailsContextMenu(actionMode, menu, clickedItemText, res.getString(R.string.cache_description), false);
+                                buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_description), false);
                                 return true;
                             case R.id.personalnote:
                                 assert view instanceof TextView;
                                 clickedItemText = ((TextView) view).getText();
-                                buildDetailsContextMenu(actionMode, menu, clickedItemText, res.getString(R.string.cache_personal_note), true);
+                                buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_personal_note), true);
                                 return true;
                             case R.id.hint:
                                 assert view instanceof TextView;
                                 clickedItemText = ((TextView) view).getText();
-                                buildDetailsContextMenu(actionMode, menu, clickedItemText, res.getString(R.string.cache_hint), false);
+                                buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_hint), false);
                                 return true;
                             case R.id.log:
                                 assert view instanceof TextView;
                                 clickedItemText = ((TextView) view).getText();
-                                buildDetailsContextMenu(actionMode, menu, clickedItemText, res.getString(R.string.cache_logs), false);
+                                buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_logs), false);
                                 return true;
                             case R.id.date: // event date
                                 assert view instanceof TextView;
                                 clickedItemText = ((TextView) view).getText();
-                                buildDetailsContextMenu(actionMode, menu, clickedItemText, res.getString(R.string.cache_event), true);
+                                buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_event), true);
                                 menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
                                 return true;
                         }
