@@ -168,13 +168,10 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         new Keyboard(this).show(view);
     }
 
-    protected void buildDetailsContextMenu(final ActionMode actionMode, final Menu menu, final CharSequence clickedItemText, final CharSequence fieldTitle, final boolean copyOnly) {
+    protected void buildDetailsContextMenu(final ActionMode actionMode, final Menu menu, final CharSequence fieldTitle, final boolean copyOnly) {
         actionMode.setTitle(fieldTitle);
         menu.findItem(R.id.menu_translate_to_sys_lang).setVisible(!copyOnly);
         if (!copyOnly) {
-            if (clickedItemText.length() > TranslationUtils.TRANSLATION_TEXT_LENGTH_WARN) {
-                showToast(res.getString(R.string.translate_length_warning));
-            }
             menu.findItem(R.id.menu_translate_to_sys_lang).setTitle(res.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()));
         }
         final boolean localeIsEnglish = StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage());
