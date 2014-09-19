@@ -9,6 +9,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.AbstractLoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
+import cgeo.geocaching.enumerations.Loaders;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.loaders.UrlLoader;
@@ -89,7 +90,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
 
     @Override
     public void init() {
-        activity.getSupportLoaderManager().initLoader(0, null, this);
+        activity.getSupportLoaderManager().initLoader(Loaders.LOGGING_GEOCHACHING.getLoaderId(), null, this);
     }
 
     @Override
