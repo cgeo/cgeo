@@ -30,3 +30,6 @@
     public <init>(android.content.Context, android.util.AttributeSet, int);
     public void set*(...);
 }
+
+# Null analysis annotations of Eclipse JDT are just used by the Eclipse compiler, so ignore them here
+-dontwarn org.eclipse.jdt.annotation.**

@@ -1154,7 +1154,7 @@
   <string name="cgeo_shortcut">c:geo genvej</string>
   <string name="create_shortcut">Opret genvej</string>
   <string name="send">Send</string>
-  <string name="showcase_logcache_title">Sender logbesked</string>
+  <string name="showcase_logcache_title">Afsendelse af logbesked</string>
   <string name="showcase_logcache_text">Husk, at mange funktioner nu er i titellinien, hvor du også kan finde knappen til at sende den færdige logbesked.</string>
   <string name="showcase_main_title">Nye menuer</string>
   <string name="showcase_main_text">Som i andre moderne apps er menupunkter i c:geo nu placeret i titellinien. Nogle menupunkter er skjult og bliver først vist når du trykker på knappen med tre prikker. Et langt tryk på et menupunkt åbner en beskrivelse af menupunktet.</string>
