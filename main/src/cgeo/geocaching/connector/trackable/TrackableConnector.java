@@ -3,9 +3,12 @@ package cgeo.geocaching.connector.trackable;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.enumerations.TrackableBrand;
+import cgeo.geocaching.loaders.AbstractCacheInventoryLoader;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
+import android.content.Context;
 
 import java.util.List;
 
@@ -38,7 +41,9 @@ public interface TrackableConnector {
     public boolean isLoggable();
 
     @Nullable
-    public Trackable searchTrackable(String geocode, String guid, String id);
+    public Trackable searchTrackable(final String geocode, final String guid, final String id);
+
+    public List<Trackable> searchTrackables(final String geocode);
 
     @Nullable
     public String getTrackableCodeFromUrl(final @NonNull String url);
@@ -47,4 +52,12 @@ public interface TrackableConnector {
     public List<UserAction> getUserActions();
 
     public TrackableBrand getBrand();
+
+    boolean isGenericLoggable();
+
+    boolean isActive();
+
+    public int getCacheInventoryLoaderId();
+
+    public AbstractCacheInventoryLoader getCacheInventoryLoader(final Context context, final String geocode);
 }

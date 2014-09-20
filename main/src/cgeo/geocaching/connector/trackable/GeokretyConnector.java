@@ -1,19 +1,30 @@
 package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.Trackable;
+import cgeo.geocaching.enumerations.Loaders;
 import cgeo.geocaching.enumerations.TrackableBrand;
+import cgeo.geocaching.loaders.AbstractCacheInventoryLoader;
+import cgeo.geocaching.loaders.GeokretyCacheInventoryLoader;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.xml.sax.InputSource;
 
+import android.content.Context;
+
+import java.io.InputStream;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class GeokretyConnector extends AbstractTrackableConnector {
 
     private static final Pattern PATTERN_GK_CODE = Pattern.compile("GK[0-9A-F]{4,}");
+    private static final String URL = "http://geokrety.org";
+    private static final String URLPROXY = "http://geokretymap.org";
 
     @Override
     public boolean canHandleTrackable(final String geocode) {
@@ -29,11 +40,50 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     @Override
     @Nullable
     public Trackable searchTrackable(final String geocode, final String guid, final String id) {
-        final String page = Network.getResponseData(Network.getRequest("http://geokrety.org/export2.php?gkid=" + getId(geocode)));
-        if (page == null) {
+        return searchTrackable(geocode);
+    }
+
+    private static String getUrlCache() {
+        return (Settings.isGeokretyCacheActive() ? URLPROXY : URL);
+    }
+
+    public static Trackable searchTrackable(final String geocode) {
+        Log.d("GeokretyConnector.searchTrackable: gkid=" + getId(geocode));
+        try {
+            final String urlDetails = (Settings.isGeokretyCacheActive() ? URLPROXY + "/export-details.php" : URL + "/export2.php");
+
+            final InputStream response = Network.getResponseStream(Network.getRequest(urlDetails + "?gkid=" + getId(geocode)));
+            if (response == null) {
+                Log.e("GeokretyConnector.searchTrackable: No data from server");
+                return null;
+            }
+            final InputSource is = new InputSource(response);
+            final List<Trackable> trackables = GeokretyParser.parse(is);
+            if (!trackables.isEmpty()) {
+                return trackables.get(0);
+            }
+        } catch (final Exception e) {
+            Log.w("GeokretyConnector.searchTrackable", e);
+        }
+        // TODO maybe a fallback to no proxy would be cool?
+        return null;
+    }
+
+    @Override
+    public List<Trackable> searchTrackables(final String geocode) {
+        Log.d("GeokretyConnector.searchTrackables: wpt=" + geocode);
+        try {
+            final InputStream response = Network.getResponseStream(Network.getRequest(getUrlCache() + "/export2.php?wpt=" + geocode));
+            if (response == null) {
+                Log.e("GeokretyConnector.searchTrackable: No data from server");
+                return null;
+            }
+            final InputSource is = new InputSource(response);
+            return GeokretyParser.parse(is);
+        } catch (final Exception e) {
+            Log.w("GeokretyConnector.searchTrackables", e);
             return null;
         }
-        return GeokretyParser.parse(page);
     }
 
     protected static int getId(final String geocode) {
@@ -65,6 +115,26 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     @Override
     public TrackableBrand getBrand() {
         return TrackableBrand.GEOKRETY;
+    }
+
+    @Override
+    public boolean isGenericLoggable() {
+        return true;
+    }
+
+    @Override
+    public boolean isActive() {
+        return Settings.isGeokretyConnectorActive();
+    }
+
+    @Override
+    public int getCacheInventoryLoaderId() {
+        return Loaders.CACHE_INVENTORY_GEOKRETY.getLoaderId();
+    }
+
+    @Override
+    public AbstractCacheInventoryLoader getCacheInventoryLoader(final Context context, final String geocode) {
+        return new GeokretyCacheInventoryLoader(context, this, geocode);
     }
 
     /**

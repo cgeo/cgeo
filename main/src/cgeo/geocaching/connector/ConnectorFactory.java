@@ -180,6 +180,16 @@ public final class ConnectorFactory {
         return UNKNOWN_TRACKABLE_CONNECTOR; // avoid null checks by returning a non implementing connector
     }
 
+    public static ArrayList<TrackableConnector> getGenericTrackablesConnectors() {
+        final ArrayList<TrackableConnector> trackableConnectors = new ArrayList<>();
+        for (final TrackableConnector connector : TRACKABLE_CONNECTORS) {
+            if (connector.isGenericLoggable() && connector.isActive()) {
+                trackableConnectors.add(connector);
+            }
+        }
+        return trackableConnectors;
+    }
+
     @NonNull
     public static IConnector getConnector(final String geocodeInput) {
         // this may come from user input

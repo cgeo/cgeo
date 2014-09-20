@@ -16,6 +16,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.IgnoreCapability;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
+import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
@@ -96,6 +97,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.view.ActionMode;
@@ -142,7 +145,7 @@ import java.util.regex.Pattern;
  * e.g. details, description, logs, waypoints, inventory...
  */
 public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailActivity.Page>
-        implements CacheMenuHandler.ActivityInterface, INavigationSource, AndroidBeam.ActivitySharingInterface, EditNoteDialogListener {
+        implements CacheMenuHandler.ActivityInterface, INavigationSource, AndroidBeam.ActivitySharingInterface, EditNoteDialogListener, LoaderCallbacks<List<Trackable>> {
 
     private static final int MESSAGE_FAILED = -1;
     private static final int MESSAGE_SUCCEEDED = 1;
@@ -156,7 +159,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             Pattern.compile("((?<!bg)color)=\"" + "white" + "\"", Pattern.CASE_INSENSITIVE) };
     public static final String STATE_PAGE_INDEX = "cgeo.geocaching.pageIndex";
 
+    // Store Geocode here, as 'cache' is loaded Async.
+    private String geocode;
     private Geocache cache;
+    private final List<Trackable> genericTrackables = new ArrayList<>();
     private final Progress progress = new Progress();
 
     private SearchResult search;
@@ -183,6 +189,29 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private boolean requireGeodata;
     private Subscription geoDataSubscription = Subscriptions.empty();
 
+    private ArrayList<TrackableConnector> trackablesConnectors;
+
+    @Override
+    public Loader<List<Trackable>> onCreateLoader(final int id, final Bundle bundle) {
+        for (final TrackableConnector connector: trackablesConnectors) {
+            if (id == connector.getCacheInventoryLoaderId()) {
+                return connector.getCacheInventoryLoader(app, geocode);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(final Loader<List<Trackable>> listLoader, final List<Trackable> trackables) {
+        genericTrackables.addAll(trackables);
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void onLoaderReset(final Loader<List<Trackable>> listLoader) {
+        // nothing
+    }
+
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.cachedetail_activity);
@@ -195,7 +224,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         // try to get data from extras
         String name = null;
-        String geocode = null;
         String guid = null;
 
         if (extras != null) {
@@ -305,6 +333,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 loadCacheHandler.sendMessage(Message.obtain());
             }
         });
+
+        // Load Generic trackables connectors Async
+        trackablesConnectors = ConnectorFactory.getGenericTrackablesConnectors();
+        for (final TrackableConnector connector: trackablesConnectors) {
+            getSupportLoaderManager().initLoader(connector.getCacheInventoryLoaderId(), null, this).forceLoad();
+        }
 
         locationUpdater = new CacheDetailsGeoDirHandler(this);
 
@@ -1776,7 +1810,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             // TODO: fix layout, then switch back to Android-resource and delete copied one
             // this copy is modified to respect the text color
             final TrackableListAdapter adapterTrackables = new TrackableListAdapter(CacheDetailActivity.this);
-            for (final Trackable trackable: cache.getInventory()) {
+            final ArrayList<Trackable> trackables = new ArrayList<>();
+            if (cache.getInventory() != null) {
+                trackables.addAll(cache.getInventory());
+            }
+            if (genericTrackables != null) {
+                trackables.addAll(genericTrackables);
+            }
+            for (final Trackable trackable: trackables) {
                 adapterTrackables.add(trackable);
             }
             view.setAdapter(adapterTrackables);
@@ -2038,7 +2079,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (CollectionUtils.isNotEmpty(cache.getFriendsLogs())) {
             pages.add(Page.LOGSFRIENDS);
         }
-        if (CollectionUtils.isNotEmpty(cache.getInventory())) {
+        if (CollectionUtils.isNotEmpty(cache.getInventory()) || CollectionUtils.isNotEmpty(genericTrackables)) {
             pages.add(Page.INVENTORY);
         }
         if (CollectionUtils.isNotEmpty(cache.getImages())) {

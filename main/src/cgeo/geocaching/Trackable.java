@@ -86,6 +86,30 @@ public class Trackable implements ILogable {
         return iconUrl;
     }
 
+
+    public int getIconBrand() {
+        return getBrand().getIconResource();
+    }
+
+    public void forceSetBrand(final TrackableBrand trackableBrand) {
+        this.brand = trackableBrand;
+    }
+
+    public TrackableBrand getBrand() {
+        if (brand == null) {
+            if (StringUtils.isNotEmpty(geocode)) {
+                final TrackableConnector connector = ConnectorFactory.getTrackableConnector(geocode);
+                    if (connector != ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR) {
+                    brand = connector.getBrand();
+                    return brand;
+                }
+            }
+            // Fallback to Unkwown
+            brand = TrackableBrand.UNKNOWN;
+        }
+        return brand;
+    }
+
     public void setIconUrl(final String iconUrl) {
         this.iconUrl = iconUrl;
     }
@@ -256,28 +280,5 @@ public class Trackable implements ILogable {
         logTypes.add(LogTypeTrackable.DISCOVERED_IT);
 
         return logTypes;
-    }
-
-    public int getIconBrand() {
-        return getBrand().getIconResource();
-    }
-
-    public void forceSetBrand(final TrackableBrand trackableBrand) {
-        this.brand = trackableBrand;
-    }
-
-    public TrackableBrand getBrand() {
-        if (brand == null) {
-            if (StringUtils.isNotEmpty(geocode)) {
-                final TrackableConnector connector = ConnectorFactory.getTrackableConnector(geocode);
-                if (connector != ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR) {
-                    brand = connector.getBrand();
-                    return brand;
-                }
-            }
-            // Fallback to Unkwown
-            brand = TrackableBrand.UNKNOWN;
-        }
-        return brand;
     }
 }
