@@ -43,6 +43,7 @@ import cgeo.geocaching.ui.IndexOutOfBoundsAvoidingTextView;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.ui.NavigationActionProvider;
 import cgeo.geocaching.ui.OwnerActionsClickListener;
+import cgeo.geocaching.ui.TrackableListAdapter;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.logs.CacheLogsViewCreator;
@@ -1774,7 +1775,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // TODO: fix layout, then switch back to Android-resource and delete copied one
             // this copy is modified to respect the text color
-            view.setAdapter(new ArrayAdapter<>(CacheDetailActivity.this, R.layout.simple_list_item_1, cache.getInventory()));
+            final TrackableListAdapter adapterTrackables = new TrackableListAdapter(CacheDetailActivity.this);
+            for (final Trackable trackable: cache.getInventory()) {
+                adapterTrackables.add(trackable);
+            }
+            view.setAdapter(adapterTrackables);
             view.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(final AdapterView<?> arg0, final View arg1, final int arg2, final long arg3) {
