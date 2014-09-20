@@ -583,6 +583,34 @@ public class Settings {
         return getBoolean(R.string.pref_ratingwanted, true);
     }
 
+    public static boolean isGeokretyConnectorActive() {
+        return getBoolean(R.string.pref_connectorGeokretyActive, true);
+    }
+
+    public static boolean isGeokretyCacheActive() {
+        return getBoolean(R.string.pref_geokrety_cache, true);
+    }
+
+    public static String getGeokretyUsername() {
+        return getString(R.string.pref_geokrety_username, null);
+    }
+
+    public static String getGeokretyPassword() {
+        return getString(R.string.pref_geokrety_password, null);
+    }
+
+    public static String getGeokretySecId() {
+        return getString(R.string.pref_geokrety_secid, null);
+    }
+
+    public static void setGeokretySecId(final String secid) {
+        putString(R.string.pref_geokrety_secid, secid);
+    }
+
+    public static boolean isRegisteredForGeokrety() {
+        return getGeokretySecId() != null;
+    }
+
     public static boolean isFriendLogsWanted() {
         if (!isLogin()) {
             // don't show a friends log if the user is anonymous

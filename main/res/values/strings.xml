@@ -569,6 +569,8 @@
     <string name="init_hardware_acceleration_note">Hardware acceleration renders graphical elements faster on the screen. However on some devices the Android operating system contains bugs and some text may appear blurred (notably bold characters). Disable hardware acceleration if this happens to you.</string>
     <string name="init_hardware_acceleration">Enable hardware acceleration</string>
     <string name="settings_open_website">Open website</string>
+    <string name="settings_open_geokrety_register">Open Geokrety.org registration page</string>
+    <string name="settings_open_geokretymap_website">Open GeokretyMap.org website</string>
     <string name="settings_settings">Settings</string>
     <string name="settings_information">Information</string>
     <string name="settings_twitter_cache_message">Message for found cache</string>
@@ -1327,4 +1329,18 @@
     <string name="showcase_cachelist_text">You can switch between your geocache lists by clicking the title of the list.</string>
     <string name="confirm_log_title">Unusual log type</string>
     <string name="confirm_log_message">You want to log \'%s\'. Are you sure?</string>
+
+    <!-- Geokrety -->
+    <string name="init_geokrety">Geokrety.org</string>
+    <string name="init_geokrety_login">Login on Geokrety.org</string>
+    <string name="init_connectorGeokretyActive">Geokrety Trackables</string>
+    <string name="init_summary_geokrety">Enable trackables from Geokrety.org</string>
+    <string name="init_summary_geokrety_cache">Improve loading speed.</string>
+    <string name="init_geokrety_register_ok">Login successfull</string>
+    <string name="init_geokrety_register_fail">Login failed</string>
+    <string name="init_geokrety_get_secid">Retrieve API key</string>
+    <string name="init_geokrety_description">Store your API key in c:geo to ease logging GeoKrety</string>
+    <string name="init_geokrety_cache_description">GeokretyMap.org provides cached datas for Geokrety trackables. Datas may not be up to date!\nPositions: ~30min.\nDescriptions: ~24h.</string>
+    <string name="init_geokrety_cache">Use cached datas</string>
+
 </resources>

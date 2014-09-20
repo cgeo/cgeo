@@ -146,6 +146,7 @@ public class SettingsActivity extends PreferenceActivity {
                 R.string.pref_gpxExportDir, R.string.pref_gpxImportDir,
                 R.string.pref_mapDirectory, R.string.pref_defaultNavigationTool,
                 R.string.pref_defaultNavigationTool2, R.string.pref_webDeviceName,
+                R.string.pref_geokrety_username, R.string.pref_geokrety_password,
                 R.string.pref_fakekey_preference_backup_info, R.string.pref_twitter_cache_message, R.string.pref_twitter_trackable_message,
                 R.string.pref_ecusername, R.string.pref_ecpassword, R.string.pref_ec_icons }) {
             bindSummaryToStringValue(k);
@@ -184,6 +185,11 @@ public class SettingsActivity extends PreferenceActivity {
         getPreference(R.string.pref_ratingwanted).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         setWebsite(R.string.pref_fakekey_gcvote_website, "gcvote.com");
         getPreference(R.string.preference_screen_gcvote).setSummary(getServiceSummary(Settings.isRatingWanted()));
+
+        getPreference(R.string.pref_connectorGeokretyActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
+        setWebsite(R.string.pref_fakekey_geokrety_website, "geokrety.org");
+        setWebsite(R.string.pref_fakekey_geokretymap_website, "geokretymap.org");
+        getPreference(R.string.preference_screen_geokrety).setSummary(getServiceSummary(Settings.isGeokretyConnectorActive()));
 
         setWebsite(R.string.pref_fakekey_sendtocgeo_website, "send2.cgeo.org");
         getPreference(R.string.preference_screen_sendtocgeo).setSummary(getServiceSummary(Settings.isRegisteredForSend2cgeo()));
@@ -666,6 +672,9 @@ public class SettingsActivity extends PreferenceActivity {
                 preference.setSummary(text);
             } else if (isPreference(preference, R.string.pref_ratingwanted)) {
                 findPreference(R.string.preference_screen_gcvote).setSummary(getServiceSummary((Boolean) value));
+                redrawScreen(findPreference(R.string.preference_screen_services));
+            } else if (isPreference(preference, R.string.pref_connectorGeokretyActive)) {
+                findPreference(R.string.preference_screen_geokrety).setSummary(getServiceSummary((Boolean) value));
                 redrawScreen(findPreference(R.string.preference_screen_services));
             } else {
                 // For all other preferences, set the summary to the value's
