@@ -32,8 +32,6 @@ public class GeokretyInventoryLoader extends AbstractInventoryLoader {
                             trackable.getBrand()
                     ));
                 }
-
-            // Return request status
             return trackables;
         } catch (final RuntimeException e) {
             Log.e("GeokretyInventoryLoader.loadInBackground", e);

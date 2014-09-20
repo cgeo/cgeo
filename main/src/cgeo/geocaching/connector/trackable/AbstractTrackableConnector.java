@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.trackable;
 
+import cgeo.geocaching.AbstractLoggingActivity;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.UserAction;
@@ -76,6 +77,11 @@ public abstract class AbstractTrackableConnector implements TrackableConnector {
     }
 
     @Override
+    public int getTrackableLoggingManagerLoaderId() {
+        return 0;
+    }
+
+    @Override
     public AbstractInventoryLoader getInventoryLoader(final Context context) {
         return null;
     }
@@ -86,7 +92,7 @@ public abstract class AbstractTrackableConnector implements TrackableConnector {
     }
 
     @Override
-    public TrackableLoggingManager getTrackableLoggingManager() {
+    public AbstractTrackableLoggingManager getTrackableLoggingManager(final AbstractLoggingActivity activity) {
         return null;
     }
 }

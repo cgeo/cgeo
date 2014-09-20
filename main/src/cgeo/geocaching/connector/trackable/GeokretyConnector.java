@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.trackable;
 
+import cgeo.geocaching.AbstractLoggingActivity;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.TrackableLog;
@@ -192,8 +193,8 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     }
 
     @Override
-    public TrackableLoggingManager getTrackableLoggingManager() {
-        return new GeokretyLoggingManager();
+    public AbstractTrackableLoggingManager getTrackableLoggingManager(final AbstractLoggingActivity activity) {
+        return new GeokretyLoggingManager(activity);
     }
 
     /**
@@ -208,11 +209,11 @@ public class GeokretyConnector extends AbstractTrackableConnector {
         // See doc: http://geokrety.org/api.php
         Log.d("GeokretyConnector.postLogTrackable: nr=" + trackableLog.trackCode);
         if (trackableLog.brand != TrackableBrand.GEOKRETY) {
-            Log.e("GeokretyConnector.postLogTrackable: receive invalid brand trackable");
+            Log.d("GeokretyConnector.postLogTrackable: receive invalid brand");
             return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, new ArrayList<String>());
         }
         if (trackableLog.action == LogTypeTrackable.DO_NOTHING) {
-            Log.e("GeokretyConnector.postLogTrackable: receive invalid logtype trackable");
+            Log.d("GeokretyConnector.postLogTrackable: received invalid logtype");
             return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, new ArrayList<String>());
         }
         try {
@@ -233,9 +234,9 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                     "godzina",String.format("%tH", date), // HH
                     "minuta", String.format("%tM", date), // MM
                     "comment", log,
-                    "app", "c:geo", // getString(R.string.app_name),
-                    "app_ver", "dev", // getString(R.string.about_version)
-                    "mobile_lang", "en_EN.UTF-8" // How to get current locale ?
+                    "app", "c:geo", // getString(R.string.app_name), -- NEED HELP HERE
+                    "app_ver", "dev", // getString(R.string.about_version) -- NEED HELP HERE
+                    "mobile_lang", "en_EN.UTF-8" // How to get current locale ? -- NEED HELP HERE
             );
             // See doc: http://geokrety.org/help.php#acceptableformats
             if (null != cache && null != cache.getCoords() && null != cache.getGeocode()) {

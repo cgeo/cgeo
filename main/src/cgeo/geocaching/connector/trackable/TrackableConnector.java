@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.trackable;
 
+import cgeo.geocaching.AbstractLoggingActivity;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.enumerations.TrackableBrand;
@@ -56,7 +57,7 @@ public interface TrackableConnector {
 
     public List<Trackable> loadInventory();
 
-    public TrackableLoggingManager getTrackableLoggingManager();
+    public AbstractTrackableLoggingManager getTrackableLoggingManager(final AbstractLoggingActivity activity);
 
     boolean isGenericLoggable();
 
@@ -67,6 +68,8 @@ public interface TrackableConnector {
     public int getInventoryLoaderId();
 
     public int getCacheInventoryLoaderId();
+
+    public int getTrackableLoggingManagerLoaderId();
 
     public AbstractInventoryLoader getInventoryLoader(final Context context);
 

@@ -184,6 +184,7 @@
     <string name="err_acquire_image_failed">Acquiring an image failed.</string>
     <string name="err_tb_display">c:geo can\'t display the trackable you want. Is it really a trackable?</string>
     <string name="err_tb_details_open">c:geo can\'t open trackable details.</string>
+    <string name="err_tb_not_loggable">This trackable isn\'t loggable.</string>
     <string name="err_tb_find">c:geo can\'t find trackable</string>
     <string name="err_tb_find_that">c:geo can\'t find that trackable.</string>
     <string name="err_waypoint_cache_unknown">c:geo doesn\'t know to which cache you want to add a waypoint for.</string>

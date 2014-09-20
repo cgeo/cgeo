@@ -4,12 +4,13 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import cgeo.geocaching.activity.Keyboard;
-import cgeo.geocaching.connector.gc.GCLogin;
-import cgeo.geocaching.connector.gc.GCParser;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.LogResult;
+import cgeo.geocaching.connector.trackable.AbstractTrackableLoggingManager;
+import cgeo.geocaching.connector.trackable.TrackableConnector;
+import cgeo.geocaching.enumerations.Loaders;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.network.Network;
-import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.dialog.DateDialog;
@@ -30,6 +31,8 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,7 +46,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class LogTrackableActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent {
+public class LogTrackableActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent, LoaderManager.LoaderCallbacks<List<LogTypeTrackable>> {
 
     @InjectView(R.id.type) protected Button typeButton;
     @InjectView(R.id.date) protected Button dateButton;
@@ -53,53 +56,19 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
     private List<LogTypeTrackable> possibleLogTypesTrackable = new ArrayList<>();
     private ProgressDialog waitDialog = null;
-    private String guid = null;
     private String geocode = null;
-    private String[] viewstates = null;
     /**
      * As long as we still fetch the current state of the trackable from the Internet, the user cannot yet send a log.
      */
-    private boolean gettingViewstate = true;
+    private boolean postReady = true;
     private Calendar date = Calendar.getInstance();
     private LogTypeTrackable typeSelected = LogTypeTrackable.getById(Settings.getTrackableAction());
-    private int attempts = 0;
     private Trackable trackable;
 
+    TrackableConnector connector;
+    private AbstractTrackableLoggingManager loggingManager;
+
     final public static int LOG_TRACKABLE = 1;
-
-    private final Handler showProgressHandler = new Handler() {
-        @Override
-        public void handleMessage(final Message msg) {
-            showProgress(true);
-        }
-    };
-
-    private final Handler loadDataHandler = new Handler() {
-
-        @Override
-        public void handleMessage(final Message msg) {
-            if (!possibleLogTypesTrackable.contains(typeSelected)) {
-                setType(possibleLogTypesTrackable.get(0));
-
-                showToast(res.getString(R.string.info_log_type_changed));
-            }
-
-            if (GCLogin.isEmpty(viewstates)) {
-                if (attempts < 2) {
-                    showToast(res.getString(R.string.err_log_load_data_again));
-                    new LoadDataThread().start();
-                } else {
-                    showToast(res.getString(R.string.err_log_load_data));
-                    showProgress(false);
-                }
-                return;
-            }
-
-            gettingViewstate = false; // we're done, user can post log
-
-            showProgress(false);
-        }
-    };
 
     private final Handler postLogHandler = new Handler() {
 
@@ -121,6 +90,47 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     };
 
     @Override
+    public Loader<List<LogTypeTrackable>> onCreateLoader(final int id, final Bundle bundle) {
+        showProgress(true);
+        loggingManager = connector.getTrackableLoggingManager(this);
+
+        if (loggingManager == null) {
+            showToast(res.getString(R.string.err_tb_not_loggable));
+            finish();
+            return null;
+        }
+
+        if (id == Loaders.LOGGING_TRAVELBUG.getLoaderId()) {
+            loggingManager.setGuid(trackable.getGuid());
+        }
+
+        return loggingManager;
+    }
+
+    @Override
+    public void onLoadFinished(final Loader<List<LogTypeTrackable>> listLoader, final List<LogTypeTrackable> logTypesTrackable) {
+
+        if (CollectionUtils.isNotEmpty(logTypesTrackable)) {
+            possibleLogTypesTrackable.clear();
+            possibleLogTypesTrackable.addAll(logTypesTrackable);
+        }
+
+        if (logTypesTrackable != null && !logTypesTrackable.contains(typeSelected) && !logTypesTrackable.isEmpty()) {
+            setType(logTypesTrackable.get(0));
+            showToast(res.getString(R.string.info_log_type_changed));
+        }
+
+        postReady = loggingManager.postReady(); // we're done, user can post log
+
+        showProgress(false);
+    }
+
+    @Override
+    public void onLoaderReset(final Loader<List<LogTypeTrackable>> listLoader) {
+        // nothing
+    }
+
+    @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.logtrackable_activity);
         ButterKnife.inject(this);
@@ -129,7 +139,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
-            guid = extras.getString(Intents.EXTRA_GUID);
 
             if (StringUtils.isNotBlank(extras.getString(Intents.EXTRA_TRACKING_CODE))) {
                 trackingEditText.setText(extras.getString(Intents.EXTRA_TRACKING_CODE));
@@ -137,6 +146,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
             }
         }
 
+        // Load Trackable from internal
         trackable = DataStore.loadTrackable(geocode);
 
         if (trackable == null) {
@@ -152,8 +162,32 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
             setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getGeocode());
         }
 
+        // We're in LogTrackableActivity, so trackable must be loggable ;)
+        if (!trackable.isLoggable()) {
+            showToast(res.getString(R.string.err_tb_not_loggable));
+            finish();
+            return;
+        }
+
+        // create trackable connector
+        connector = ConnectorFactory.getTrackableConnector(geocode);
+
+        // Start loading in background
+        getSupportLoaderManager().initLoader(connector.getTrackableLoggingManagerLoaderId(), null, this).forceLoad();
+
+        // Show retrieved infos
+        displayTrackable();
         init();
         requestKeyboardForLogging();
+    }
+
+    private void displayTrackable() {
+
+        if (StringUtils.isNotBlank(trackable.getName())) {
+            setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getName());
+        } else {
+            setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getGeocode());
+        }
     }
 
     @Override
@@ -218,9 +252,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
             possibleLogTypesTrackable = Trackable.getPossibleLogTypes();
         }
 
-        if (GCLogin.isEmpty(viewstates)) {
-            new LoadDataThread().start();
-        }
         disableSuggestions(trackingEditText);
     }
 
@@ -255,45 +286,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         }
     }
 
-    private class LoadDataThread extends Thread {
-
-        public LoadDataThread() {
-            super("Load data for logging trackable");
-        }
-
-        @Override
-        public void run() {
-            final Parameters params = new Parameters();
-
-            showProgressHandler.sendEmptyMessage(0);
-            gettingViewstate = true;
-            attempts++;
-
-            try {
-                if (StringUtils.isNotBlank(guid)) {
-                    params.put("wid", guid);
-                } else {
-                    loadDataHandler.sendEmptyMessage(0);
-                    return;
-                }
-
-                final String page = Network.getResponseData(Network.getRequest("http://www.geocaching.com/track/log.aspx", params));
-
-                viewstates = GCLogin.getViewstates(page);
-
-                final List<LogTypeTrackable> typesPre = GCParser.parseLogTypesTrackables(page);
-                if (CollectionUtils.isNotEmpty(typesPre)) {
-                    possibleLogTypesTrackable.clear();
-                    possibleLogTypesTrackable.addAll(typesPre);
-                }
-            } catch (final Exception e) {
-                Log.e("LogTrackableActivity.LoadDataThread.run", e);
-            }
-
-            loadDataHandler.sendEmptyMessage(0);
-        }
-    }
-
     private class PostLogThread extends Thread {
         final private Handler handler;
         final private String tracking;
@@ -315,19 +307,21 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
     public StatusCode postLogFn(final String tracking, final String log) {
         try {
-            final StatusCode status = GCParser.postLogTrackable(guid, tracking, viewstates, typeSelected, date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE), log);
+            final TrackableLog trackableLog = new TrackableLog(tracking, trackable.getName(), 0, 0, trackable.getBrand());
+            trackableLog.setAction(typeSelected);
+            final LogResult logResult = loggingManager.postLog(null, trackableLog, date, log);
 
-            if (status == StatusCode.NO_ERROR && Settings.isUseTwitter() &&
+            if (logResult.getPostLogResult() == StatusCode.NO_ERROR && Settings.isUseTwitter() &&
                     Settings.isTwitterLoginValid() &&
                     tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
                 // TODO create a LogTrackableEntry. For now use "oldLogtype" as a temporary migration path
                 Twitter.postTweetTrackable(geocode, new LogEntry(0, typeSelected.oldLogtype, log));
             }
-            if (status == StatusCode.NO_ERROR) {
+            if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
                 addLocalTrackableLog(log);
             }
 
-            return status;
+            return logResult.getPostLogResult();
         } catch (final Exception e) {
             Log.e("LogTrackableActivity.postLogFn", e);
         }
@@ -352,7 +346,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     public static Intent getIntent(final Context context, final Trackable trackable) {
         final Intent logTouchIntent = new Intent(context, LogTrackableActivity.class);
         logTouchIntent.putExtra(Intents.EXTRA_GEOCODE, trackable.getGeocode());
-        logTouchIntent.putExtra(Intents.EXTRA_GUID, trackable.getGuid());
         logTouchIntent.putExtra(Intents.EXTRA_TRACKING_CODE, trackable.getTrackingcode());
         return logTouchIntent;
     }
@@ -376,7 +369,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     }
 
     private void sendLog() {
-        if (!gettingViewstate) {
+        if (postReady) {
             waitDialog = ProgressDialog.show(this, null, res.getString(R.string.log_saving), true);
             waitDialog.setCancelable(true);
 

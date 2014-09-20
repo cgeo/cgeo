@@ -1,6 +1,17 @@
 package cgeo.geocaching.connector.trackable;
 
-public abstract class AbstractTrackableLoggingManager implements TrackableLoggingManager {
+import cgeo.geocaching.enumerations.LogTypeTrackable;
+
+import android.content.Context;
+import android.support.v4.content.AsyncTaskLoader;
+
+import java.util.List;
+
+public abstract class AbstractTrackableLoggingManager extends AsyncTaskLoader<List<LogTypeTrackable>> implements TrackableLoggingManager {
+
+    public AbstractTrackableLoggingManager(final Context context) {
+        super(context);
+    }
 
     @Override
     public boolean hasLoaderError() {
@@ -23,6 +34,11 @@ public abstract class AbstractTrackableLoggingManager implements TrackableLoggin
 
     @Override
     public boolean isRegistered() {
+        return false;
+    }
+
+    @Override
+    public boolean postReady() {
         return false;
     }
 }

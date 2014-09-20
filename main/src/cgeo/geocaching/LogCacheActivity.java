@@ -434,8 +434,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private class Poster extends AsyncTaskWithProgress<String, StatusCode> {
 
+        final Activity activity;
+
         public Poster(final Activity activity, final String progressMessage) {
             super(activity, null, progressMessage, true);
+            this.activity = activity;
         }
 
         @Override
@@ -478,7 +481,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     }
 
                     for (final TrackableConnector connector: trackablesConnectors) {
-                        final TrackableLoggingManager manager = connector.getTrackableLoggingManager();
+                        final TrackableLoggingManager manager = connector.getTrackableLoggingManager((AbstractLoggingActivity) activity);
                         for (final TrackableLog trackableLog: trackables) {
                             manager.postLog(cache, trackableLog, date, log);
 

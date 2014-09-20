@@ -40,7 +40,9 @@ public interface TrackableLoggingManager {
 
     public boolean canLogCoordinates();
 
-    public void setGuid(String guid);
+    public void setGuid(final String guid);
 
     public boolean isRegistered();
+
+    public boolean postReady();
 }

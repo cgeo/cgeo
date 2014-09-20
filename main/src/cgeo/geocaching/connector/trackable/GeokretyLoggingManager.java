@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.trackable;
 
+import cgeo.geocaching.AbstractLoggingActivity;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.connector.ImageResult;
@@ -15,10 +16,17 @@ import android.net.Uri;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class GeokretyLoggingManager extends AbstractTrackableLoggingManager {
 
-    public GeokretyLoggingManager() {
+    public GeokretyLoggingManager(final AbstractLoggingActivity activity) {
+        super(activity);
+    }
+
+    @Override
+    public List<LogTypeTrackable> loadInBackground() {
+        return getPossibleLogTypesTrackable();
     }
 
     @Override

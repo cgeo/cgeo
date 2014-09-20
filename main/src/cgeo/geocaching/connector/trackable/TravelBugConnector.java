@@ -1,10 +1,14 @@
 package cgeo.geocaching.connector.trackable;
 
+import cgeo.geocaching.AbstractLoggingActivity;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCParser;
+import cgeo.geocaching.enumerations.Loaders;
 import cgeo.geocaching.enumerations.TrackableBrand;
+import cgeo.geocaching.network.Network;
+import cgeo.geocaching.network.Parameters;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
@@ -29,6 +33,10 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     @NonNull
     public String getUrl(@NonNull final Trackable trackable) {
         return "http://www.geocaching.com//track/details.aspx?tracker=" + trackable.getGeocode();
+    }
+
+    public static String getTravelbugViewstates(final String guid) {
+        return Network.getResponseData(Network.getRequest("http://www.geocaching.com/track/log.aspx", new Parameters("wid", guid)));
     }
 
     @Override
@@ -82,5 +90,15 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     @Override
     public TrackableBrand getBrand() {
         return TrackableBrand.TRAVELBUG;
+    }
+
+    @Override
+    public int getTrackableLoggingManagerLoaderId() {
+        return Loaders.LOGGING_TRAVELBUG.getLoaderId();
+    }
+
+    @Override
+    public AbstractTrackableLoggingManager getTrackableLoggingManager(final AbstractLoggingActivity activity) {
+        return new TravelBugLoggingManager(activity);
     }
 }
