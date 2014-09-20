@@ -2,7 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
-import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.utils.ImageUtils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -242,12 +242,12 @@ public class Trackable implements ILogable {
     }
 
     @NonNull
-    static List<LogType> getPossibleLogTypes() {
-        final List<LogType> logTypes = new ArrayList<>();
-        logTypes.add(LogType.RETRIEVED_IT);
-        logTypes.add(LogType.GRABBED_IT);
-        logTypes.add(LogType.NOTE);
-        logTypes.add(LogType.DISCOVERED_IT);
+    static public List<LogTypeTrackable> getPossibleLogTypes() {
+        final List<LogTypeTrackable> logTypes = new ArrayList<>();
+        logTypes.add(LogTypeTrackable.RETRIEVED_IT);
+        logTypes.add(LogTypeTrackable.GRABBED_IT);
+        logTypes.add(LogTypeTrackable.NOTE);
+        logTypes.add(LogTypeTrackable.DISCOVERED_IT);
 
         return logTypes;
     }

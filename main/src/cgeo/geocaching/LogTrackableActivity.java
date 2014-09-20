@@ -6,7 +6,7 @@ import butterknife.InjectView;
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.connector.gc.GCParser;
-import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -51,7 +51,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     @InjectView(R.id.tweet) protected CheckBox tweetCheck;
     @InjectView(R.id.tweet_box) protected LinearLayout tweetBox;
 
-    private List<LogType> possibleLogTypes = new ArrayList<>();
+    private List<LogTypeTrackable> possibleLogTypesTrackable = new ArrayList<>();
     private ProgressDialog waitDialog = null;
     private String guid = null;
     private String geocode = null;
@@ -61,7 +61,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
      */
     private boolean gettingViewstate = true;
     private Calendar date = Calendar.getInstance();
-    private LogType typeSelected = LogType.getById(Settings.getTrackableAction());
+    private LogTypeTrackable typeSelected = LogTypeTrackable.getById(Settings.getTrackableAction());
     private int attempts = 0;
     private Trackable trackable;
 
@@ -78,8 +78,8 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
         @Override
         public void handleMessage(final Message msg) {
-            if (!possibleLogTypes.contains(typeSelected)) {
-                setType(possibleLogTypes.get(0));
+            if (!possibleLogTypesTrackable.contains(typeSelected)) {
+                setType(possibleLogTypesTrackable.get(0));
 
                 showToast(res.getString(R.string.info_log_type_changed));
             }
@@ -179,8 +179,8 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         final int viewId = view.getId();
 
         if (viewId == R.id.type) {
-            for (final LogType typeOne : possibleLogTypes) {
-                menu.add(viewId, typeOne.id, 0, typeOne.getL10n());
+            for (final LogTypeTrackable typeOne : possibleLogTypesTrackable) {
+                menu.add(viewId, typeOne.id, 0, typeOne.getLabel());
             }
         }
     }
@@ -191,7 +191,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         final int id = item.getItemId();
 
         if (group == R.id.type) {
-            setType(LogType.getById(id));
+            setType(LogTypeTrackable.getById(id));
 
             return true;
         }
@@ -214,8 +214,8 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
         initTwitter();
 
-        if (CollectionUtils.isEmpty(possibleLogTypes)) {
-            possibleLogTypes = Trackable.getPossibleLogTypes();
+        if (CollectionUtils.isEmpty(possibleLogTypesTrackable)) {
+            possibleLogTypesTrackable = Trackable.getPossibleLogTypes();
         }
 
         if (GCLogin.isEmpty(viewstates)) {
@@ -231,9 +231,9 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         dateButton.setText(Formatter.formatShortDateVerbally(date.getTime().getTime()));
     }
 
-    public void setType(final LogType type) {
+    public void setType(final LogTypeTrackable type) {
         typeSelected = type;
-        typeButton.setText(typeSelected.getL10n());
+        typeButton.setText(typeSelected.getLabel());
     }
 
     private void initTwitter() {
@@ -281,10 +281,10 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
                 viewstates = GCLogin.getViewstates(page);
 
-                final List<LogType> typesPre = GCParser.parseTypes(page);
+                final List<LogTypeTrackable> typesPre = GCParser.parseLogTypesTrackables(page);
                 if (CollectionUtils.isNotEmpty(typesPre)) {
-                    possibleLogTypes.clear();
-                    possibleLogTypes.addAll(typesPre);
+                    possibleLogTypesTrackable.clear();
+                    possibleLogTypesTrackable.addAll(typesPre);
                 }
             } catch (final Exception e) {
                 Log.e("LogTrackableActivity.LoadDataThread.run", e);
@@ -320,7 +320,8 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
             if (status == StatusCode.NO_ERROR && Settings.isUseTwitter() &&
                     Settings.isTwitterLoginValid() &&
                     tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
-                Twitter.postTweetTrackable(geocode, new LogEntry(0, typeSelected, log));
+                // TODO create a LogTrackableEntry. For now use "oldLogtype" as a temporary migration path
+                Twitter.postTweetTrackable(geocode, new LogEntry(0, typeSelected.oldLogtype, log));
             }
             if (status == StatusCode.NO_ERROR) {
                 addLocalTrackableLog(log);
@@ -340,7 +341,8 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
      *
      */
     private void addLocalTrackableLog(final String logText) {
-        final LogEntry logEntry = new LogEntry(date.getTimeInMillis(), typeSelected, logText);
+        // TODO create a LogTrackableEntry. For now use "oldLogtype" as a temporary migration path
+        final LogEntry logEntry = new LogEntry(date.getTimeInMillis(), typeSelected.oldLogtype, logText);
         final ArrayList<LogEntry> modifiedLogs = new ArrayList<>(trackable.getLogs());
         modifiedLogs.add(0, logEntry);
         trackable.setLogs(modifiedLogs);

@@ -502,14 +502,17 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private void selectAllTrackablesAction() {
         final Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(res.getString(R.string.log_tb_changeall));
-        final String[] tbLogTypes = getTBLogTypes();
+
+        final ArrayList<LogTypeTrackable> tbLogTypeValues = LogTypeTrackable.getLogTypeTrackableForLogCache();
+        final String[] tbLogTypes = getTBLogTypes(tbLogTypeValues);
         alert.setItems(tbLogTypes, new OnClickListener() {
 
             @Override
             public void onClick(final DialogInterface dialog, final int position) {
-                final LogTypeTrackable logType = LogTypeTrackable.values()[position];
+                final LogTypeTrackable logType = tbLogTypeValues.get(position);
                 for (final TrackableLog tb : trackables) {
                     tb.action = logType;
+                    Log.i("Trackable " + tb.trackCode + " (" + tb.name + ") has new action: #" + logType);
                 }
                 updateTrackablesList();
                 dialog.dismiss();
@@ -518,14 +521,14 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         alert.create().show();
     }
 
-    private static String[] getTBLogTypes() {
-        final LogTypeTrackable[] logTypeValues = LogTypeTrackable.values();
-        final String[] logTypes = new String[logTypeValues.length];
-        for (int i = 0; i < logTypes.length; i++) {
-            logTypes[i] = logTypeValues[i].getLabel();
+    private static String[] getTBLogTypes(final ArrayList<LogTypeTrackable> tbLogTypeValues) {
+        final String[] tbLogTypes = new String[tbLogTypeValues.size()];
+        for (int i = 0; i < tbLogTypes.length; i++) {
+            tbLogTypes[i] = tbLogTypeValues.get(i).getLabel();
         }
-        return logTypes;
+        return tbLogTypes;
     }
+
 
     private void selectLogType() {
         // use a local copy of the possible types, as that one might be modified in the background by the loader
@@ -552,12 +555,13 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         final Builder alert = new AlertDialog.Builder(this);
         final TrackableLog trackableLog = actionButtons.get(realViewId);
         alert.setTitle(trackableLog.name);
-        final String[] tbLogTypes = getTBLogTypes();
+        final ArrayList<LogTypeTrackable> tbLogTypeValues = LogTypeTrackable.getLogTypeTrackableForLogCache();
+        final String[] tbLogTypes = getTBLogTypes(tbLogTypeValues);
         alert.setItems(tbLogTypes, new OnClickListener() {
 
             @Override
             public void onClick(final DialogInterface dialog, final int position) {
-                final LogTypeTrackable logType = LogTypeTrackable.values()[position];
+                final LogTypeTrackable logType = tbLogTypeValues.get(position);
                 trackableLog.action = logType;
                 Log.i("Trackable " + trackableLog.trackCode + " (" + trackableLog.name + ") has new action: #" + logType);
                 updateTrackablesList();

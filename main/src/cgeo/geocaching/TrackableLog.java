@@ -3,7 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 
 public final class TrackableLog {
-    public TrackableLog(String trackCode, String name, int id, int ctl) {
+    public TrackableLog(final String trackCode, final String name, final int id, final int ctl) {
         this.trackCode = trackCode;
         this.name = name;
         this.id = id;
@@ -15,4 +15,8 @@ public final class TrackableLog {
     public final String trackCode;
     public final String name;
     public LogTypeTrackable action = LogTypeTrackable.DO_NOTHING; // base.logTrackablesAction - no action
+
+    public void setAction(final LogTypeTrackable logTypeTrackable) {
+        action = logTypeTrackable;
+    }
 }
