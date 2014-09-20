@@ -25,6 +25,7 @@ public class GeokretyInventoryLoader extends AbstractInventoryLoader {
         try {
                 for (final Trackable trackable: connector.loadInventory()) {
                     trackables.add(new TrackableLog(
+                            trackable.getGeocode(),
                             trackable.getTrackingcode(),
                             trackable.getName(),
                             GeokretyConnector.getId(trackable.getGeocode()),

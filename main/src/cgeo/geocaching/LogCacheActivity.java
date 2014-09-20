@@ -194,7 +194,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 }
             });
 
-            final String tbCode = tb.trackCode;
+            final String tbCode = (StringUtils.isNotEmpty(tb.geocode) ? tb.geocode : tb.trackCode);
             inventoryItem.setClickable(true);
             ButterKnife.findById(inventoryItem, R.id.info).setOnClickListener(new View.OnClickListener() {
 

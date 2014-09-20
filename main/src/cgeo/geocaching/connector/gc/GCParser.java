@@ -1862,7 +1862,7 @@ public abstract class GCParser {
                     final Integer ctl = Integer.valueOf(trackableMatcher.group(3));
                     final Integer id = Integer.valueOf(trackableMatcher.group(5));
                     if (trackCode != null && ctl != null && id != null) {
-                        final TrackableLog entry = new TrackableLog(trackCode, name, id, ctl, TrackableBrand.TRAVELBUG);
+                        final TrackableLog entry = new TrackableLog("", trackCode, name, id, ctl, TrackableBrand.TRAVELBUG);
 
                         Log.i("Trackable in inventory (#" + entry.ctl + "/" + entry.id + "): " + entry.trackCode + " - " + entry.name);
                         trackableLogs.add(entry);
