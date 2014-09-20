@@ -4,7 +4,6 @@ import butterknife.ButterKnife;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteRating;
@@ -211,7 +210,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         assert cache != null;
         // cache type
         final String cacheType = cache.getType().getL10n();
-        final String cacheSize = cache.getSize() != CacheSize.UNKNOWN ? " (" + cache.getSize().getL10n() + ")" : "";
+        final String cacheSize = cache.showSize() ? " (" + cache.getSize().getL10n() + ")" : "";
         details.add(R.string.cache_type, cacheType + cacheSize);
 
         details.add(R.string.cache_geocode, cache.getGeocode());
