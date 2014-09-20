@@ -46,6 +46,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -146,6 +147,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         for (final TrackableLog tb : trackables) {
             final LinearLayout inventoryItem = (LinearLayout) inflater.inflate(R.layout.logcache_trackable_item, inventoryView, false);
 
+            final ImageView brandView = ButterKnife.findById(inventoryItem, R.id.trackable_image_brand);
+            brandView.setImageResource(tb.brand.getIconResource());
             final TextView codeView = ButterKnife.findById(inventoryItem, R.id.trackcode);
             codeView.setText(tb.trackCode);
             final TextView nameView = ButterKnife.findById(inventoryItem, R.id.name);

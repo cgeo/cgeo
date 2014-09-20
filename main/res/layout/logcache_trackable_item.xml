@@ -10,6 +10,13 @@
     android:paddingRight="10dip"
     tools:context=".LogCacheActivity" >
 
+    <ImageView
+        android:id="@+id/trackable_image_brand"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginRight="4dip"
+        android:scaleType="fitCenter" />
+
     <LinearLayout
         android:id="@+id/info"
         android:layout_width="0dip"
