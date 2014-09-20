@@ -7,12 +7,18 @@ import cgeo.geocaching.enumerations.TrackableBrand;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -167,6 +173,67 @@ public class GeokretyParser {
         return null;
     }
 
+    public static class GeokretyRuchyXmlParser {
+        private int gkid;
+        private final ArrayList<String> errors;
+        private String text;
+
+        public GeokretyRuchyXmlParser() {
+            errors = new ArrayList<String>();
+            gkid = 0;
+        }
+
+        public List<String> getErrors() {
+            return errors;
+        }
+
+        public int getGkid() {
+            return gkid;
+        }
+
+        public List<String> parse(final String page) {
+            try {
+                final XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+                factory.setNamespaceAware(true);
+                final XmlPullParser parser = factory.newPullParser();
+                parser.setInput(new StringReader(page));
+
+                int eventType = parser.getEventType();
+                while (eventType != XmlPullParser.END_DOCUMENT) {
+                    final String tagname = parser.getName();
+                    switch (eventType) {
+                        case XmlPullParser.START_TAG:
+                            if (tagname.equalsIgnoreCase("geokret")) {
+                                gkid = Integer.parseInt(parser.getAttributeValue(null, "id"));
+                            }
+                            break;
+
+                        case XmlPullParser.TEXT:
+                            text = parser.getText();
+                            break;
+
+                        case XmlPullParser.END_TAG:
+                            if (tagname.equalsIgnoreCase("error")) {
+                                if (null != text && !text.trim().isEmpty()) {
+                                    errors.add(text);
+                                }
+                            }
+                            break;
+
+                        default:
+                            break;
+                    }
+                    eventType = parser.next();
+                }
+
+            } catch (XmlPullParserException | IOException e) {
+                Log.e("GeokretyRuchyXmlParser: Error Parsing geokret", e);
+            }
+
+            return errors;
+        }
+    }
+
     protected static String getType(final int type) {
         switch (type) {
             case 0:
@@ -179,6 +246,19 @@ public class GeokretyParser {
                 return CgeoApplication.getInstance().getString(R.string.geokret_type_coin);
             case 4:
                 return CgeoApplication.getInstance().getString(R.string.geokret_type_post);
+        }
+        return null;
+    }
+
+    public static ImmutablePair<Integer, ArrayList<String>> parseResponse(final String page) {
+        if (null != page) {
+            try {
+                final GeokretyRuchyXmlParser parser = new GeokretyRuchyXmlParser();
+                parser.parse(page);
+                return new ImmutablePair(parser.getGkid(), parser.getErrors());
+            } catch (final Exception e) {
+                Log.w("Cannot parseResponse geokrety", e);
+            }
         }
         return null;
     }

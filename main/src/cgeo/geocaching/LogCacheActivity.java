@@ -9,6 +9,7 @@ import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
+import cgeo.geocaching.connector.trackable.TrackableLoggingManager;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
@@ -473,6 +474,14 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                             DataStore.saveChangedCache(cache);
                         } else {
                             showToast(res.getString(R.string.err_gcvote_send_rating));
+                        }
+                    }
+
+                    for (final TrackableConnector connector: trackablesConnectors) {
+                        final TrackableLoggingManager manager = connector.getTrackableLoggingManager();
+                        for (final TrackableLog trackableLog: trackables) {
+                            manager.postLog(cache, trackableLog, date, log);
+
                         }
                     }
 

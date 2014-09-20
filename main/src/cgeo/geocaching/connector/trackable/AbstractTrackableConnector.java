@@ -84,4 +84,9 @@ public abstract class AbstractTrackableConnector implements TrackableConnector {
     public AbstractCacheInventoryLoader getCacheInventoryLoader(final Context context, final String geocode) {
         return null;
     }
+
+    @Override
+    public TrackableLoggingManager getTrackableLoggingManager() {
+        return null;
+    }
 }

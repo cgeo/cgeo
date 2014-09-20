@@ -56,6 +56,8 @@ public interface TrackableConnector {
 
     public List<Trackable> loadInventory();
 
+    public TrackableLoggingManager getTrackableLoggingManager();
+
     boolean isGenericLoggable();
 
     boolean isActive();
