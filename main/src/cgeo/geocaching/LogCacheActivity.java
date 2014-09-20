@@ -4,9 +4,11 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import cgeo.geocaching.activity.ShowcaseViewBuilder;
+import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
+import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
@@ -38,6 +40,8 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -53,9 +57,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class LogCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent {
+public class LogCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent, LoaderCallbacks<List<TrackableLog>> {
 
     private static final String SAVED_STATE_RATING = "cgeo.geocaching.saved_state_rating";
     private static final String SAVED_STATE_TYPE = "cgeo.geocaching.saved_state_type";
@@ -71,13 +77,14 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private String geocode = null;
     private String text = null;
     private List<LogType> possibleLogTypes = new ArrayList<>();
-    private List<TrackableLog> trackables = null;
+    private final Set<TrackableLog> trackables = new HashSet<>();
     protected @InjectView(R.id.tweet) CheckBox tweetCheck;
     protected @InjectView(R.id.tweet_box) LinearLayout tweetBox;
     protected @InjectView(R.id.log_password_box) LinearLayout logPasswordBox;
     private SparseArray<TrackableLog> actionButtons;
 
     private ILoggingManager loggingManager;
+    private List<TrackableConnector> trackablesConnectors;
 
     // Data to be saved while reconfiguring
     private float rating;
@@ -88,13 +95,34 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private Uri imageUri;
     private boolean sendButtonEnabled;
 
+    @Override
+    public Loader<List<TrackableLog>> onCreateLoader(final int id, final Bundle bundle) {
+        for (final TrackableConnector connector: trackablesConnectors) {
+            if (id == connector.getInventoryLoaderId()) {
+                return connector.getInventoryLoader(app);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(final Loader<List<TrackableLog>> listLoader, final List<TrackableLog> trackableList) {
+        trackables.addAll(trackableList);
+        updateTrackablesList();
+    }
+
+    @Override
+    public void onLoaderReset(final Loader<List<TrackableLog>> listLoader) {
+        // nothing
+    }
+
     public void onLoadFinished() {
         if (loggingManager.hasLoaderError()) {
             showErrorLoadingData();
             return;
         }
 
-        trackables = loggingManager.getTrackables();
+        trackables.addAll(loggingManager.getTrackables());
         possibleLogTypes = loggingManager.getPossibleLogTypes();
 
         if (possibleLogTypes.isEmpty()) {
@@ -282,8 +310,15 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         updateLogPasswordBox(typeSelected);
 
         loggingManager = cache.getLoggingManager(this);
-
         loggingManager.init();
+
+        trackablesConnectors = ConnectorFactory.getGenericTrackablesConnectors();
+        for (final TrackableConnector connector: trackablesConnectors) {
+            if (connector.isRegistered()) {
+                getSupportLoaderManager().initLoader(connector.getInventoryLoaderId(), null, this).forceLoad();
+            }
+        }
+
         requestKeyboardForLogging();
     }
 
@@ -407,7 +442,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             final String log = logTexts[0];
             final String logPwd = logTexts.length > 1 ? logTexts[1] : null;
             try {
-                final LogResult logResult = loggingManager.postLog(typeSelected, date, log, logPwd, trackables);
+                final LogResult logResult = loggingManager.postLog(typeSelected, date, log, logPwd, new ArrayList<>(trackables));
 
                 if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
                     // update geocache in DB

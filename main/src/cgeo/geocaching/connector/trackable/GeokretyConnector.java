@@ -4,8 +4,11 @@ import cgeo.geocaching.Trackable;
 import cgeo.geocaching.enumerations.Loaders;
 import cgeo.geocaching.enumerations.TrackableBrand;
 import cgeo.geocaching.loaders.AbstractCacheInventoryLoader;
+import cgeo.geocaching.loaders.AbstractInventoryLoader;
 import cgeo.geocaching.loaders.GeokretyCacheInventoryLoader;
+import cgeo.geocaching.loaders.GeokretyInventoryLoader;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
@@ -17,6 +20,7 @@ import org.xml.sax.InputSource;
 import android.content.Context;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -86,7 +90,36 @@ public class GeokretyConnector extends AbstractTrackableConnector {
         }
     }
 
-    protected static int getId(final String geocode) {
+    @Override
+    public List<Trackable> loadInventory() {
+        return loadInventory(0);
+    }
+
+    public static List<Trackable> loadInventory(final int userid) {
+        Log.d("GeokretyConnector.loadInventory: userid=" + userid);
+        try {
+            final Parameters params = new Parameters("inventory", "1");
+            if (userid > 0) {
+                // retrieve someone inventory
+                params.put("userid", String.valueOf(userid));
+            } else {
+                // Retrieve intentory, with tracking codes
+                params.put("secid", Settings.getGeokretySecId());
+            }
+            final InputStream response = Network.getResponseStream(Network.getRequest(URL + "/export2.php", params));
+            if (response == null) {
+                Log.e("GeokretyConnector.loadInventory: No data from server");
+                return new ArrayList<>();
+            }
+            final InputSource is = new InputSource(response);
+            return GeokretyParser.parse(is);
+        } catch (final Exception e) {
+            Log.w("GeokretyConnector.loadInventory", e);
+            return new ArrayList<>();
+        }
+    }
+
+    public static int getId(final String geocode) {
         try {
             final String hex = geocode.substring(2);
             return Integer.parseInt(hex, 16);
@@ -128,8 +161,23 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     }
 
     @Override
+    public boolean isRegistered() {
+        return Settings.isRegisteredForGeokrety();
+    }
+
+    @Override
+    public int getInventoryLoaderId() {
+        return Loaders.INVENTORY_GEOKRETY.getLoaderId();
+    }
+
+    @Override
     public int getCacheInventoryLoaderId() {
         return Loaders.CACHE_INVENTORY_GEOKRETY.getLoaderId();
+    }
+
+    @Override
+    public AbstractInventoryLoader getInventoryLoader(final Context context) {
+        return new GeokretyInventoryLoader(context, this);
     }
 
     @Override

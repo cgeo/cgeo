@@ -4,6 +4,7 @@ import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.loaders.AbstractCacheInventoryLoader;
+import cgeo.geocaching.loaders.AbstractInventoryLoader;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -47,6 +48,9 @@ public abstract class AbstractTrackableConnector implements TrackableConnector {
     public List<Trackable> searchTrackables(final String geocode) { return new ArrayList<>(); }
 
     @Override
+    public List<Trackable> loadInventory() { return new ArrayList<>(); }
+
+    @Override
     public boolean isGenericLoggable() {
         return false;
     }
@@ -57,8 +61,23 @@ public abstract class AbstractTrackableConnector implements TrackableConnector {
     }
 
     @Override
+    public boolean isRegistered() {
+        return false;
+    }
+
+    @Override
+    public int getInventoryLoaderId() {
+        return 0;
+    }
+
+    @Override
     public int getCacheInventoryLoaderId() {
         return 0;
+    }
+
+    @Override
+    public AbstractInventoryLoader getInventoryLoader(final Context context) {
+        return null;
     }
 
     @Override

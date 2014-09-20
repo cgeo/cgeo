@@ -3,6 +3,8 @@ package cgeo.geocaching;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.TrackableBrand;
 
+import org.apache.commons.lang3.StringUtils;
+
 public final class TrackableLog {
     public TrackableLog(final String trackCode, final String name, final int id, final int ctl, final TrackableBrand brand) {
         this.trackCode = trackCode;
@@ -22,4 +24,16 @@ public final class TrackableLog {
     public void setAction(final LogTypeTrackable logTypeTrackable) {
         action = logTypeTrackable;
     }
+
+    @Override
+    public int hashCode() {
+        return StringUtils.defaultString(trackCode).hashCode();
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        final TrackableLog tb = (TrackableLog) obj;
+        return StringUtils.defaultString(tb.trackCode).equals(trackCode);
+    }
+
 }

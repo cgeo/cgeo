@@ -4,6 +4,7 @@ import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.enumerations.TrackableBrand;
 import cgeo.geocaching.loaders.AbstractCacheInventoryLoader;
+import cgeo.geocaching.loaders.AbstractInventoryLoader;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -53,11 +54,19 @@ public interface TrackableConnector {
 
     public TrackableBrand getBrand();
 
+    public List<Trackable> loadInventory();
+
     boolean isGenericLoggable();
 
     boolean isActive();
 
+    public boolean isRegistered();
+
+    public int getInventoryLoaderId();
+
     public int getCacheInventoryLoaderId();
+
+    public AbstractInventoryLoader getInventoryLoader(final Context context);
 
     public AbstractCacheInventoryLoader getCacheInventoryLoader(final Context context, final String geocode);
 }
