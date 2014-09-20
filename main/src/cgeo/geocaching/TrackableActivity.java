@@ -301,6 +301,12 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         });
     }
 
+    private static void setupIcon(final ActionBar actionBar, final int resId) {
+        if (actionBar != null) {
+            actionBar.setIcon(resId);
+        }
+    }
+
     public static void startActivity(final AbstractActivity fromContext,
             final String guid, final String geocode, final String name) {
         final Intent trackableIntent = new Intent(fromContext, TrackableActivity.class);
@@ -386,6 +392,8 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             // action bar icon
             if (StringUtils.isNotBlank(trackable.getIconUrl())) {
                 setupIcon(getSupportActionBar(), trackable.getIconUrl());
+            } else {
+                setupIcon(getSupportActionBar(), trackable.getIconBrand());
             }
 
             // trackable name
