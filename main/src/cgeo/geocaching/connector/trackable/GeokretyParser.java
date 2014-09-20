@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.trackable;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Trackable;
+import cgeo.geocaching.enumerations.TrackableBrand;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -19,6 +20,7 @@ public class GeokretyParser {
 
     public static Trackable parse(final String page) {
         final Trackable trackable = new Trackable();
+        trackable.forceSetBrand(TrackableBrand.GEOKRETY);
 
         final RootElement root = new RootElement("gkxml");
         final Element geokret = root.getChild("geokrety").getChild("geokret");

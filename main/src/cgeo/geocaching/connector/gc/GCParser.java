@@ -18,6 +18,7 @@ import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.enumerations.TrackableBrand;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocParser;
 import cgeo.geocaching.gcvote.GCVote;
@@ -654,6 +655,7 @@ public abstract class GCParser {
                         while (matcherInventoryInside.find()) {
                             if (matcherInventoryInside.groupCount() > 0) {
                                 final Trackable inventoryItem = new Trackable();
+                                inventoryItem.forceSetBrand(TrackableBrand.TRAVELBUG);
                                 inventoryItem.setGuid(matcherInventoryInside.group(1));
                                 inventoryItem.setName(matcherInventoryInside.group(2));
 
@@ -1466,6 +1468,7 @@ public abstract class GCParser {
         }
 
         final Trackable trackable = new Trackable();
+        trackable.forceSetBrand(TrackableBrand.TRAVELBUG);
 
         // trackable geocode
         trackable.setGeocode(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GEOCODE, true, StringUtils.upperCase(possibleTrackingcode)));

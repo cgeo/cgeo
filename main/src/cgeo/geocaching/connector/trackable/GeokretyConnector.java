@@ -1,6 +1,7 @@
 package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.Trackable;
+import cgeo.geocaching.enumerations.TrackableBrand;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.utils.Log;
 
@@ -59,6 +60,11 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             return geocode(Integer.parseInt(id));
         }
         return null;
+    }
+
+    @Override
+    public TrackableBrand getBrand() {
+        return TrackableBrand.GEOKRETY;
     }
 
     /**

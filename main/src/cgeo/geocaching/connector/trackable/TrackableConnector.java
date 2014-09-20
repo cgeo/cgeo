@@ -2,6 +2,7 @@ package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.UserAction;
+import cgeo.geocaching.enumerations.TrackableBrand;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -45,4 +46,5 @@ public interface TrackableConnector {
     @NonNull
     public List<UserAction> getUserActions();
 
+    public TrackableBrand getBrand();
 }

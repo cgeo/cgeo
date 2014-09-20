@@ -4,6 +4,7 @@ import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCParser;
+import cgeo.geocaching.enumerations.TrackableBrand;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
@@ -76,5 +77,10 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     List<UserAction> getUserActions() {
         // travel bugs should have the same actions as GC caches
         return GCConnector.getInstance().getUserActions();
+    }
+
+    @Override
+    public TrackableBrand getBrand() {
+        return TrackableBrand.TRAVELBUG;
     }
 }
