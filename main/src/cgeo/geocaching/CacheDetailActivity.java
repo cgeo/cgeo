@@ -1947,7 +1947,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
                     @Override
                     public boolean onActionItemClicked(final ActionMode actionMode, final MenuItem menuItem) {
-                        return onClipboardItemSelected(actionMode, menuItem, clickedItemText);
+                        switch (menuItem.getItemId()) {
+                        // detail fields
+                            case R.id.menu_calendar:
+                                CalendarAddon.addToCalendarWithIntent(CacheDetailActivity.this, cache);
+                                actionMode.finish();
+                                return true;
+                                // handle clipboard actions in base
+                            default:
+                                return onClipboardItemSelected(actionMode, menuItem, clickedItemText);
+                        }
                     }
                 });
                 return true;
