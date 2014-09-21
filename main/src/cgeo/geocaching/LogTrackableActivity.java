@@ -22,6 +22,7 @@ import cgeo.geocaching.ui.dialog.DateDialog.DateDialogParent;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.TimeDialog;
 import cgeo.geocaching.ui.dialog.TimeDialog.TimeDialogParent;
+import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
@@ -31,13 +32,12 @@ import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import android.app.ProgressDialog;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.view.ContextMenu;
@@ -67,7 +67,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     @InjectView(R.id.tweet_box) protected LinearLayout tweetBox;
 
     private List<LogTypeTrackable> possibleLogTypesTrackable = new ArrayList<>();
-    private ProgressDialog waitDialog = null;
     private String geocode = null;
     private Geopoint geopoint;
     private Geocache geocache = new Geocache();
@@ -83,25 +82,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     private AbstractTrackableLoggingManager loggingManager;
 
     final public static int LOG_TRACKABLE = 1;
-
-    private final Handler postLogHandler = new Handler() {
-
-        @Override
-        public void handleMessage(final Message msg) {
-            if (waitDialog != null) {
-                waitDialog.dismiss();
-            }
-
-            final StatusCode error = (StatusCode) msg.obj;
-            if (error == StatusCode.NO_ERROR) {
-                showToast(res.getString(R.string.info_log_posted));
-                setResult(RESULT_OK);
-                finish();
-            } else {
-                showToast(error.getErrorString(res));
-            }
-        }
-    };
 
     @Override
     public Loader<List<LogTypeTrackable>> onCreateLoader(final int id, final Bundle bundle) {
@@ -373,47 +353,57 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         }
     }
 
-    private class PostLogThread extends Thread {
-        final private Handler handler;
-        final private String tracking;
-        final private String log;
+    private class Poster extends AsyncTaskWithProgress<String, StatusCode> {
 
-        public PostLogThread(final Handler handlerIn, final String trackingIn, final String logIn) {
-            super("Post trackable log");
-            handler = handlerIn;
-            tracking = trackingIn;
-            log = logIn;
+        public Poster(final Activity activity, final String progressMessage) {
+            super(activity, null, progressMessage, true);
         }
 
         @Override
-        public void run() {
-            final StatusCode status = postLogFn(tracking, log);
-            handler.sendMessage(handler.obtainMessage(0, status));
-        }
-    }
+        protected StatusCode doInBackgroundInternal(final String[] params) {
+            final String logMsg = params[0];
+            try {
+                // Set selected action
+                final TrackableLog trackableLog = new TrackableLog(trackable.getGeocode(), trackable.getTrackingcode(), trackable.getName(), 0, 0, trackable.getBrand());
+                trackableLog.setAction(typeSelected);
+                // Real call to post log
+                final LogResult logResult = loggingManager.postLog(geocache, trackableLog, date, logMsg);
 
-    public StatusCode postLogFn(final String tracking, final String log) {
-        try {
-            final TrackableLog trackableLog = new TrackableLog(trackable.getGeocode(), trackable.getTrackingcode(), trackable.getName(), 0, 0, trackable.getBrand());
-            trackableLog.setAction(typeSelected);
-            final LogResult logResult = loggingManager.postLog(null, trackableLog, date, log);
+                // Now posting tweet if log is OK
+                if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
+                    addLocalTrackableLog(logMsg);
+                    if (tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
+                        // TODO oldLogType as a temp workaround...
+                        final LogEntry logNow = new LogEntry(date.getTimeInMillis(), typeSelected.oldLogtype, logMsg);
+                        Twitter.postTweetTrackable(trackable.getGeocode(), logNow);
+                    }
+                }
+                // Display errors to the user
+                if (StringUtils.isNoneEmpty(logResult.getLogId())) {
+                    showToast(logResult.getLogId());
+                }
 
-            if (logResult.getPostLogResult() == StatusCode.NO_ERROR && Settings.isUseTwitter() &&
-                    Settings.isTwitterLoginValid() &&
-                    tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
-                // TODO create a LogTrackableEntry. For now use "oldLogtype" as a temporary migration path
-                Twitter.postTweetTrackable(geocode, new LogEntry(0, typeSelected.oldLogtype, log));
+                // Return request status
+                return logResult.getPostLogResult();
+            } catch (final RuntimeException e) {
+                Log.e("LogTrackableActivity.Poster.doInBackgroundInternal", e);
             }
-            if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
-                addLocalTrackableLog(log);
-            }
-
-            return logResult.getPostLogResult();
-        } catch (final Exception e) {
-            Log.e("LogTrackableActivity.postLogFn", e);
+            return StatusCode.LOG_POST_ERROR;
         }
 
-        return StatusCode.LOG_POST_ERROR;
+        @Override
+        protected void onPostExecuteInternal(final StatusCode status) {
+            if (status == StatusCode.NO_ERROR) {
+                showToast(res.getString(R.string.info_log_posted));
+                finish();
+            } else if (status == StatusCode.LOG_SAVED) {
+                // is this part of code really reachable ? Dind't see StatusCode.LOG_SAVED in postLog()
+                showToast(res.getString(R.string.info_log_saved));
+                finish();
+            } else {
+                showToast(status.getErrorString(res));
+            }
+        }
     }
 
     /**
@@ -456,19 +446,48 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     }
 
     private void sendLog() {
-        if (postReady) {
-            waitDialog = ProgressDialog.show(this, null, res.getString(R.string.log_saving), true);
-            waitDialog.setCancelable(true);
-
-            Settings.setTrackableAction(typeSelected.id);
-
-            final String tracking = trackingEditText.getText().toString();
-            final String log = logEditText.getText().toString();
-            new PostLogThread(postLogHandler, tracking, log).start();
-            Settings.setLastTrackableLog(log);
-        } else {
-            showToast(res.getString(R.string.err_log_load_data_still));
+        // Can logging?
+        if (!postReady) {
+            showToast(res.getString(R.string.log_post_not_possible));
+            return;
         }
+
+        if (!loggingManager.isRegistered()) {
+            final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            alertDialog.setTitle(R.string.init_summary_geokrety_account);
+            alertDialog.setMessage(R.string.init_summary_geokrety_not_anonymous);
+            alertDialog.setPositiveButton(R.string.ok, null);
+            alertDialog.show();
+            // TODO redirect user to geokrety settings page
+            // this throw "android.util.AndroidRuntimeException: Calling startActivity() from outside of an Activity  context requires the FLAG_ACTIVITY_NEW_TASK flag. Is this really what you want?"
+            //SettingsActivity.openForScreen(R.string.preference_screen_geokrety, getApplicationContext());
+            return;
+        }
+
+        // Check Tracking Code existance
+        if (trackingEditText.getText().toString().isEmpty()) {
+            showToast(res.getString(R.string.err_log_post_missing_tracking_code));
+            return;
+        }
+        trackable.setTrackingcode(trackingEditText.getText().toString());
+
+        // Check params for trackables needing coordinates
+        if (loggingManager.canLogCoordinates() && LogTypeTrackable.isCoordinatesNeeded(typeSelected)) {
+            // Check geocode
+            if (geocacheEditText.getText().toString().isEmpty()) {
+                showToast(res.getString(R.string.log_post_geocode_missing));
+                return;
+            }
+            // Check Coordinates
+            if (null == geopoint) {
+                showToast(res.getString(R.string.err_log_post_missing_coordinates));
+                return;
+            }
+        }
+
+        // Post Log in Background
+        new Poster(this, res.getString(R.string.log_saving)).execute(logEditText.getText().toString());
+        Settings.setLastTrackableLog(logEditText.getText().toString());
     }
 
     @Override

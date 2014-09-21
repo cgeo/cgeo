@@ -1,6 +1,7 @@
 package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.AbstractLoggingActivity;
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.TrackableLog;
@@ -70,7 +71,9 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             }
             final InputSource is = new InputSource(response);
             final List<Trackable> trackables = GeokretyParser.parse(is);
+
             if (!trackables.isEmpty()) {
+                DataStore.saveTrackable(trackables.get(0));
                 return trackables.get(0);
             }
         } catch (final Exception e) {

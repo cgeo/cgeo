@@ -95,6 +95,7 @@
     <string name="log_saving_and_uploading">Sending log and uploading image…</string>
     <string name="log_clear">Clear</string>
     <string name="log_post_not_possible">Loading Log Page…</string>
+    <string name="log_post_geocode_missing">Geocode missing…</string>
     <string name="log_date_future_not_allowed">Future log dates are not allowed.</string>
     <string name="log_add">Add</string>
     <string name="log_repeat">Repeat last log</string>
@@ -197,6 +198,8 @@
     <string name="err_log_load_data">c:geo can\'t load data required to log visit.</string>
     <string name="err_log_load_data_again">c:geo can\'t load data required to log visit. Trying again.</string>
     <string name="err_log_load_data_still">c:geo is still loading data required to post log. Please wait a little while longer.</string>
+    <string name="err_log_post_missing_tracking_code">Tracking code is missing.</string>
+    <string name="err_log_post_missing_coordinates">Coordinates are missing.</string>
     <string name="err_log_post_failed">It seems that your log was not posted. Please check it on the cache originating website.</string>
     <string name="err_log_post_failed_ec">It seems that your log was not posted. Please check it on Extremcaching.com.</string>
     <string name="err_log_post_failed_gk">It seems that your log was not posted. Please check it on geokrety.org.</string>
@@ -1343,6 +1346,8 @@
     <string name="init_connectorGeokretyActive">Geokrety Trackables</string>
     <string name="init_summary_geokrety">Enable trackables from Geokrety.org</string>
     <string name="init_summary_geokrety_cache">Improve loading speed.</string>
+    <string name="init_summary_geokrety_account">No account configured.</string>
+    <string name="init_summary_geokrety_not_anonymous">Logging from c:geo cannot be anonymous. Please register.</string>
     <string name="init_geokrety_register_ok">Login successfull</string>
     <string name="init_geokrety_register_fail">Login failed</string>
     <string name="init_geokrety_get_secid">Retrieve API key</string>

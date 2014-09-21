@@ -78,4 +78,9 @@ public class GeokretyLoggingManager extends AbstractTrackableLoggingManager {
     public boolean isRegistered() {
         return Settings.isRegisteredForGeokrety();
     }
+
+    @Override
+    public boolean postReady() {
+        return true;
+    }
 }
