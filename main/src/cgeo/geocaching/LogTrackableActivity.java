@@ -8,13 +8,20 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.trackable.AbstractTrackableLoggingManager;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.Loaders;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.twitter.Twitter;
+import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
+import cgeo.geocaching.ui.dialog.CoordinatesInputDialog.CoordinateUpdate;
 import cgeo.geocaching.ui.dialog.DateDialog;
+import cgeo.geocaching.ui.dialog.DateDialog.DateDialogParent;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.TimeDialog;
+import cgeo.geocaching.ui.dialog.TimeDialog.TimeDialogParent;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
@@ -37,6 +44,7 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -46,17 +54,23 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class LogTrackableActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent, LoaderManager.LoaderCallbacks<List<LogTypeTrackable>> {
+public class LogTrackableActivity extends AbstractLoggingActivity implements DateDialogParent, TimeDialogParent, CoordinateUpdate, LoaderManager.LoaderCallbacks<List<LogTypeTrackable>> {
 
     @InjectView(R.id.type) protected Button typeButton;
     @InjectView(R.id.date) protected Button dateButton;
+    @InjectView(R.id.time) protected Button timeButton;
+    @InjectView(R.id.geocode) protected EditText geocacheEditText;
+    @InjectView(R.id.coordinates) protected Button coordinatesButton;
     @InjectView(R.id.tracking) protected EditText trackingEditText;
+    @InjectView(R.id.log) protected EditText logEditText;
     @InjectView(R.id.tweet) protected CheckBox tweetCheck;
     @InjectView(R.id.tweet_box) protected LinearLayout tweetBox;
 
     private List<LogTypeTrackable> possibleLogTypesTrackable = new ArrayList<>();
     private ProgressDialog waitDialog = null;
     private String geocode = null;
+    private Geopoint geopoint;
+    private Geocache geocache = new Geocache();
     /**
      * As long as we still fetch the current state of the trackable from the Internet, the user cannot yet send a log.
      */
@@ -246,6 +260,22 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         dateButton.setOnClickListener(new DateListener());
         setDate(date);
 
+        if (loggingManager.canLogTime()) {
+            timeButton.setOnClickListener(new TimeListener());
+            setTime(date);
+            timeButton.setVisibility(View.VISIBLE);
+        } else {
+            timeButton.setVisibility(View.GONE);
+        }
+
+        // Register Coordinates Listener
+        if (loggingManager.canLogCoordinates()) {
+            geocacheEditText.setOnFocusChangeListener(new LoadGeocacheListener());
+            geocacheEditText.setText(geocache.getGeocode());
+            updateCoordinates(geocache.getCoords());
+            coordinatesButton.setOnClickListener(new CoordinatesListener());
+        }
+
         initTwitter();
 
         if (CollectionUtils.isEmpty(possibleLogTypesTrackable)) {
@@ -262,9 +292,22 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         dateButton.setText(Formatter.formatShortDateVerbally(date.getTime().getTime()));
     }
 
+    @Override
+    public void setTime(final Calendar dateIn) {
+        date = dateIn;
+        timeButton.setText(Formatter.formatTime(date.getTime().getTime()));
+    }
+
     public void setType(final LogTypeTrackable type) {
         typeSelected = type;
         typeButton.setText(typeSelected.getLabel());
+        if (LogTypeTrackable.isCoordinatesNeeded(typeSelected) && loggingManager.canLogCoordinates()) {
+            geocacheEditText.setVisibility(View.VISIBLE);
+            coordinatesButton.setVisibility(View.VISIBLE);
+        } else {
+            geocacheEditText.setVisibility(View.GONE);
+            coordinatesButton.setVisibility(View.GONE);
+        }
     }
 
     private void initTwitter() {
@@ -276,13 +319,57 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         }
     }
 
+    @Override
+    public void updateCoordinates(final Geopoint geopointIn) {
+        if (geopointIn == null) {
+            return;
+        }
+        geopoint = geopointIn;
+        coordinatesButton.setText(geopoint.toString());
+        geocache.setCoords(geopoint);
+    }
+
     private class DateListener implements View.OnClickListener {
 
         @Override
         public void onClick(final View arg0) {
             final DateDialog dateDialog = DateDialog.getInstance(date);
             dateDialog.setCancelable(true);
-            dateDialog.show(getSupportFragmentManager(),"date_dialog");
+            dateDialog.show(getSupportFragmentManager(), "date_dialog");
+        }
+    }
+
+    private class TimeListener implements View.OnClickListener {
+        @Override
+        public void onClick(final View arg0) {
+            final TimeDialog timeDialog = TimeDialog.getInstance(date);
+            timeDialog.setCancelable(true);
+            timeDialog.show(getSupportFragmentManager(),"time_dialog");
+        }
+    }
+
+    private class CoordinatesListener implements View.OnClickListener {
+        @Override
+        public void onClick(final View arg0) {
+            final CoordinatesInputDialog coordinatesDialog = CoordinatesInputDialog.getInstance(null, geopoint, null);
+            coordinatesDialog.setCancelable(true);
+            coordinatesDialog.show(getSupportFragmentManager(),"coordinates_dialog");
+        }
+    }
+
+    // React when changing geocode
+    private class LoadGeocacheListener implements OnFocusChangeListener {
+        @Override
+        public void onFocusChange(final View view, final boolean hasFocus) {
+            if (!hasFocus && !geocacheEditText.getText().toString().isEmpty()) {
+                final Geocache tmpGeocache = DataStore.loadCache(geocacheEditText.getText().toString(), LoadFlags.LOAD_CACHE_OR_DB);
+                if (tmpGeocache == null) {
+                    geocache.setGeocode(geocacheEditText.getText().toString());
+                } else {
+                    geocache = tmpGeocache;
+                    updateCoordinates(geocache.getCoords());
+                }
+            }
         }
     }
 
@@ -307,7 +394,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
     public StatusCode postLogFn(final String tracking, final String log) {
         try {
-            final TrackableLog trackableLog = new TrackableLog(tracking, trackable.getName(), 0, 0, trackable.getBrand());
+            final TrackableLog trackableLog = new TrackableLog(trackable.getGeocode(), trackable.getTrackingcode(), trackable.getName(), 0, 0, trackable.getBrand());
             trackableLog.setAction(typeSelected);
             final LogResult logResult = loggingManager.postLog(null, trackableLog, date, log);
 
@@ -375,7 +462,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
             Settings.setTrackableAction(typeSelected.id);
 
-            final EditText logEditText = (EditText) findViewById(R.id.log);
             final String tracking = trackingEditText.getText().toString();
             final String log = logEditText.getText().toString();
             new PostLogThread(postLogHandler, tracking, log).start();

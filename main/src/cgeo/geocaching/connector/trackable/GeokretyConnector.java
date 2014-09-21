@@ -205,6 +205,11 @@ public class GeokretyConnector extends AbstractTrackableConnector {
         return String.format("GK%04X", id);
     }
 
+    @Override
+    public boolean isLoggable() {
+        return true;
+    }
+
     public static ImmutablePair<StatusCode, ArrayList<String>> postLogTrackable(final Geocache cache, final TrackableLog trackableLog, final Calendar date, final String log) {
         // See doc: http://geokrety.org/api.php
         Log.d("GeokretyConnector.postLogTrackable: nr=" + trackableLog.trackCode);
