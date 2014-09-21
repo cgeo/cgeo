@@ -134,6 +134,14 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         if (extras != null) {
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
 
+            // Load geocache if we can
+            if (StringUtils.isNotBlank(extras.getString(Intents.EXTRA_GEOCACHE))) {
+                final Geocache tmpGeocache = DataStore.loadCache(extras.getString(Intents.EXTRA_GEOCACHE), LoadFlags.LOAD_CACHE_OR_DB);
+                if (tmpGeocache != null) {
+                    geocache = tmpGeocache;
+                }
+            }
+            // Display tracking code if we have, and move cursor next
             if (StringUtils.isNotBlank(extras.getString(Intents.EXTRA_TRACKING_CODE))) {
                 trackingEditText.setText(extras.getString(Intents.EXTRA_TRACKING_CODE));
                 Dialogs.moveCursorToEnd(trackingEditText);
@@ -424,6 +432,12 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         final Intent logTouchIntent = new Intent(context, LogTrackableActivity.class);
         logTouchIntent.putExtra(Intents.EXTRA_GEOCODE, trackable.getGeocode());
         logTouchIntent.putExtra(Intents.EXTRA_TRACKING_CODE, trackable.getTrackingcode());
+        return logTouchIntent;
+    }
+
+    public static Intent getIntent(final Context context, final Trackable trackable, final String geocache) {
+        final Intent logTouchIntent =  getIntent(context, trackable);
+        logTouchIntent.putExtra(Intents.EXTRA_GEOCACHE, geocache);
         return logTouchIntent;
     }
 

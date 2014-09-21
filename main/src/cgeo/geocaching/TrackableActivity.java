@@ -84,6 +84,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     private String name = null;
     private String guid = null;
     private String id = null;
+    private String geocache = null;
     private LayoutInflater inflater = null;
     private ProgressDialog waitDialog = null;
     private CharSequence clickedItemText = null;
@@ -112,6 +113,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             name = extras.getString(Intents.EXTRA_NAME);
             guid = extras.getString(Intents.EXTRA_GUID);
             id = extras.getString(Intents.EXTRA_ID);
+            geocache = extras.getString(Intents.EXTRA_GEOCACHE);
         }
 
         // try to get data from URI
@@ -202,7 +204,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_log_touch:
-                startActivityForResult(LogTrackableActivity.getIntent(this, trackable), LogTrackableActivity.LOG_TRACKABLE);
+                startActivityForResult(LogTrackableActivity.getIntent(this, trackable, geocache), LogTrackableActivity.LOG_TRACKABLE);
                 return true;
             case R.id.menu_browser_trackable:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getUrl())));
@@ -308,11 +310,12 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     }
 
     public static void startActivity(final AbstractActivity fromContext,
-            final String guid, final String geocode, final String name) {
+            final String guid, final String geocode, final String name, final String geocache) {
         final Intent trackableIntent = new Intent(fromContext, TrackableActivity.class);
         trackableIntent.putExtra(Intents.EXTRA_GUID, guid);
         trackableIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
         trackableIntent.putExtra(Intents.EXTRA_NAME, name);
+        trackableIntent.putExtra(Intents.EXTRA_GEOCACHE, geocache);
         fromContext.startActivity(trackableIntent);
     }
 
