@@ -941,7 +941,7 @@
     <string name="trackable_goal">Goal</string>
     <string name="trackable_details">Details</string>
     <string name="trackable_image">Image</string>
-    <string name="trackable_code">TB-Code</string>
+    <string name="trackable_code">Tracking Code</string>
     <string name="trackable_name">Name</string>
     <string name="trackable_type">Type</string>
     <string name="trackable_owner">Owner</string>
