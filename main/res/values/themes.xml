@@ -46,6 +46,11 @@
     </style>
 
    <style name="cgeo.base" parent="@style/Theme.AppCompat">
+
+       <!-- For some reason we get a different text-size here (bug in abc?), explicitly set text styles -->
+       <item name="titleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionMode.Title</item>
+       <item name="subtitleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle</item>
+
        <item name="android:buttonStyle">@style/button</item>
        <item name="android:editTextStyle">@style/edittext</item>
        <item name="android:windowContentOverlay">@null</item>
