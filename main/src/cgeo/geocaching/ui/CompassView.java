@@ -81,8 +81,9 @@ public class CompassView extends View {
     }
 
     public void updateGraphics() {
-        final float newAzimuthShown = smoothUpdate(northMeasured, azimuthShown);
-        final float newCacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
+        final float newAzimuthShown = initialDisplay ? northMeasured : smoothUpdate(northMeasured, azimuthShown);
+        final float newCacheHeadingShown = initialDisplay ? cacheHeadingMeasured : smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
+        initialDisplay = false;
         if (Math.abs(AngleUtils.difference(azimuthShown, newAzimuthShown)) >= 2 ||
                 Math.abs(AngleUtils.difference(cacheHeadingShown, newCacheHeadingShown)) >= 2) {
             azimuthShown = newAzimuthShown;
@@ -151,17 +152,6 @@ public class CompassView extends View {
      * @param cacheHeading the cache direction (extra rotation of the needle)
      */
     public void updateNorth(final float northHeading, final float cacheHeading) {
-        if (initialDisplay) {
-            // We will force the compass to move brutally if this is the first
-            // update since it is visible.
-            azimuthShown = northHeading;
-            cacheHeadingShown = cacheHeading;
-
-            // it may take some time to get an initial direction measurement for the device
-            if (northHeading != 0.0) {
-                initialDisplay = false;
-            }
-        }
         northMeasured = northHeading;
         cacheHeadingMeasured = cacheHeading;
     }
