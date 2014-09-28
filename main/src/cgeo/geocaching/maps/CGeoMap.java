@@ -60,8 +60,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -1608,24 +1606,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     private CachesOverlayItemImpl getCacheItem(final Geocache cache) {
         final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(cache, cache.applyDistanceRule());
-        item.setMarker(MapUtils.getCacheItem(getResources(), cache));
+        item.setMarker(MapUtils.getCacheMarker(getResources(), cache));
         return item;
     }
 
     private CachesOverlayItemImpl getWaypointItem(final Waypoint waypoint) {
         final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(waypoint, waypoint.getWaypointType().applyDistanceRule());
-        final Drawable marker = getResources().getDrawable(!waypoint.isVisited() ? R.drawable.marker : R.drawable.marker_transparent);
-        final Drawable[] layers = new Drawable[] {
-                marker,
-                getResources().getDrawable(waypoint.getWaypointType().markerId)
-        };
-        final LayerDrawable ld = new LayerDrawable(layers);
-        if (layers[0].getIntrinsicWidth() > 40) {
-            ld.setLayerInset(1, 9, 12, 10, 13);
-        } else {
-            ld.setLayerInset(1, 9, 12, 8, 12);
-        }
-        item.setMarker(ld);
+        item.setMarker(MapUtils.getWaypointMarker(getResources(), waypoint));
         return item;
     }
 
