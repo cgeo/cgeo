@@ -555,9 +555,9 @@ public abstract class GCParser {
         final String longDescription = TextUtils.getMatch(page, GCConstants.PATTERN_DESC, true, "");
         String relatedWebPage = TextUtils.getMatch(page, GCConstants.PATTERN_RELATED_WEB_PAGE, true, "");
         if (StringUtils.isNotEmpty(relatedWebPage)) {
-            relatedWebPage = String.format("<a href=\"%s\"><b>%s</b></a><br/><br/>", relatedWebPage, relatedWebPage);
+            relatedWebPage = String.format("<br/><br/><a href=\"%s\"><b>%s</b></a>", relatedWebPage, relatedWebPage);
         }
-        cache.setDescription(relatedWebPage + longDescription);
+        cache.setDescription(longDescription + relatedWebPage);
 
         // cache attributes
         try {
