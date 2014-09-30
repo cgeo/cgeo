@@ -5,7 +5,11 @@ You want to contribute?
 -----------------------
 Perfect! Please **tell us in the [issue tracker](https://github.com/cgeo/cgeo/issues) before hacking** on your great new feature. It would be bad if you have implemented something great, but we can't include it because it doesn't fit the remaining architecture and code. You might also want to chat with the developers on channel #cgeo on the freenode IRC network.
 
-[![Build Status](http://ci.cgeo.org/job/c-geo/badge/icon)](http://ci.cgeo.org/job/c-geo/)
+Project status
+--------------
+[![Build Status](http://ci.cgeo.org/job/c-geo/badge/icon)](http://ci.cgeo.org/job/c-geo/)<br>
+[![Issue Stats](http://issuestats.com/github/cgeo/cgeo/badge/pr)](http://issuestats.com/github/cgeo/cgeo)<br>
+[![Issue Stats](http://issuestats.com/github/cgeo/cgeo/badge/issue)](http://issuestats.com/github/cgeo/cgeo)
 
 Get the source
 --------------
