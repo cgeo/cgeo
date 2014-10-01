@@ -138,6 +138,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private MapViewImpl mapView;
     private CachesOverlay overlayCaches;
     private PositionAndScaleOverlay overlayPositionAndScale;
+    private DistanceOverlay overlayDistance;
 
     final private GeoDirHandler geoDirUpdate;
     private SearchResult searchIntent = null;
@@ -453,6 +454,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay();
         if (trailHistory != null) {
             overlayPositionAndScale.setHistory(trailHistory);
+        }
+
+        if (coordsIntent != null || geocodeIntent != null) {
+            overlayDistance = mapView.createAddDistanceOverlay(coordsIntent, geocodeIntent);
         }
 
         mapView.repaintRequired(null);
@@ -950,6 +955,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                             map.overlayPositionAndScale.setCoordinates(currentLocation);
                             map.overlayPositionAndScale.setHeading(currentHeading);
                             map.mapView.repaintRequired(map.overlayPositionAndScale);
+
+                            if (map.overlayDistance != null) {
+                                map.overlayDistance.setCoordinates(currentLocation);
+                                map.overlayDistance.setHeading(currentHeading);
+                                map.mapView.repaintRequired(map.overlayDistance);
+                            }
                         }
                     }
                 } catch (final RuntimeException e) {
