@@ -112,7 +112,7 @@ public class MapsforgeMapView024 extends MapView implements MapViewImpl {
 
     @Override
     public DistanceOverlay createAddDistanceOverlay(Geopoint coords, String geocode) {
-        MapsforgeDistanceOverlay ovl = new MapsforgeDistanceOverlay(coords, geocode);
+        MapsforgeDistanceOverlay ovl = new MapsforgeDistanceOverlay(this, coords, geocode);
         getOverlays().add(ovl);
         return (DistanceOverlay) ovl.getBase();
     }

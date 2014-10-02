@@ -137,7 +137,7 @@ public class GoogleMapView extends MapView implements MapViewImpl {
 
     @Override
     public DistanceOverlay createAddDistanceOverlay(final Geopoint coords, final String geocode) {
-        final GoogleDistanceOverlay ovl = new GoogleDistanceOverlay(coords, geocode);
+        final GoogleDistanceOverlay ovl = new GoogleDistanceOverlay(this, coords, geocode);
         getOverlays().add(ovl);
         return (DistanceOverlay) ovl.getBase();
     }

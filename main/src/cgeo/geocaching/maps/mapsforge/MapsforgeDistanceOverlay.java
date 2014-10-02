@@ -20,8 +20,8 @@ public class MapsforgeDistanceOverlay extends Overlay implements OverlayImpl {
     private DistanceOverlay overlayBase = null;
     private final Lock lock = new ReentrantLock();
 
-    public MapsforgeDistanceOverlay(final Geopoint coords, final String geocode) {
-        overlayBase = new DistanceOverlay(this, coords, geocode);
+    public MapsforgeDistanceOverlay(final MapViewImpl mapView, final Geopoint coords, final String geocode) {
+        overlayBase = new DistanceOverlay(this, mapView, coords, geocode);
     }
 
     @Override
@@ -40,7 +40,6 @@ public class MapsforgeDistanceOverlay extends Overlay implements OverlayImpl {
     @Override
     public void lock() {
         lock.lock();
-
     }
 
     @Override

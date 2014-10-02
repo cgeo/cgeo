@@ -27,14 +27,13 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 public class DistanceOverlay implements GeneralOverlay {
-    private Location currentLoc = null;
     private Geopoint currentCoords;
     private final Geopoint destinationCoords;
     private float currentHeading;
 
-    private static Bitmap compassArrow;
-    private static int compassArrowWidth = 0;
-    private static int compassArrowHeight = 0;
+    private final Bitmap compassArrow;
+    private final int compassArrowWidth;
+    private final int compassArrowHeight;
 
     private Paint paintBox = null;
     private Paint paintBoxShadow = null;
@@ -42,13 +41,19 @@ public class DistanceOverlay implements GeneralOverlay {
     private Paint paintCompass = null;
     private BlurMaskFilter blurBoxShadow = null;
 
+    private final boolean needsInvertedColors;
     private float pixelDensity = 0;
     private final float boxWidth, boxHeight, boxCornerRadius, boxShadowSize, boxPadding;
-    private final float textHeight;
+    private final float textHeight, maxTextWidth;
+    private final float boxX, boxY;
+    private final float compassArrowX, compassArrowY, compassArrowCenterX, compassArrowCenterY;
+
+    private String distanceText = null;
+    private float compassRotation;
 
     private OverlayImpl ovlImpl = null;
 
-    public DistanceOverlay(final OverlayImpl ovlImpl, final Geopoint coords, final String geocode) {
+    public DistanceOverlay(final OverlayImpl ovlImpl, final MapViewImpl mapView, final Geopoint coords, final String geocode) {
         this.ovlImpl = ovlImpl;
 
         if (coords == null) {
@@ -62,14 +67,12 @@ public class DistanceOverlay implements GeneralOverlay {
         final WindowManager windowManager = (WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
         windowManager.getDefaultDisplay().getMetrics(metrics);
 
-        if (compassArrow == null) {
-            compassArrow = BitmapFactory.decodeResource(
-                    CgeoApplication.getInstance().getResources(),
-                    Settings.isLightSkin() ? R.drawable.compass_arrow_mini_black : R.drawable.compass_arrow_mini_white
-                    );
-            compassArrowWidth = compassArrow.getWidth();
-            compassArrowHeight = compassArrow.getWidth();
-        }
+        compassArrow = BitmapFactory.decodeResource(
+                CgeoApplication.getInstance().getResources(),
+                Settings.isLightSkin() ? R.drawable.compass_arrow_mini_black : R.drawable.compass_arrow_mini_white
+                );
+        compassArrowWidth = compassArrow.getWidth();
+        compassArrowHeight = compassArrow.getWidth();
 
         pixelDensity = metrics.density;
 
@@ -79,30 +82,48 @@ public class DistanceOverlay implements GeneralOverlay {
         boxCornerRadius = 5 * pixelDensity;
         boxShadowSize = 1 * pixelDensity;
         textHeight = 20 * pixelDensity;
+
+        needsInvertedColors = mapView.needsInvertedColors();
+        boxX = metrics.widthPixels - boxWidth;
+        boxY = 0;
+
+        compassArrowX = boxX + boxPadding + (compassArrowWidth / 2);
+        compassArrowY = boxY + (boxHeight - compassArrowHeight) / 2;
+        compassArrowCenterX = compassArrowX + (compassArrowHeight / 2);
+        compassArrowCenterY = compassArrowY + (compassArrowWidth / 2);
+
+        maxTextWidth = boxWidth - 3 * boxPadding - compassArrowWidth;
     }
 
     public void setCoordinates(final Location coordinatesIn) {
-        currentLoc = coordinatesIn;
-        currentCoords = new Geopoint(currentLoc);
+        currentCoords = new Geopoint(coordinatesIn);
+        updateCompassRotation();
+
+        final float distance = currentCoords.distanceTo(destinationCoords);
+        distanceText = Units.getDistanceFromKilometers(distance);
     }
 
     public void setHeading(final float bearingNow) {
         currentHeading = bearingNow;
+        updateCompassRotation();
     }
 
     @Override
     public void draw(final Canvas canvas, final MapViewImpl mapView, final boolean shadow) {
-        drawInternal(canvas, mapView.getMapProjection(), mapView);
-
+        drawInternal(canvas);
     }
 
     @Override
     public void drawOverlayBitmap(final Canvas canvas, final Point drawPosition, final MapProjectionImpl projection, final byte drawZoomLevel) {
-        drawInternal(canvas, projection, getOverlayImpl().getMapViewImpl());
+        drawInternal(canvas);
     }
 
-    private void drawInternal(final Canvas canvas, @SuppressWarnings("unused") final MapProjectionImpl projection, final MapViewImpl mapView) {
-        if (currentLoc == null) {
+    private void updateCompassRotation() {
+        compassRotation = currentCoords.bearingTo(destinationCoords) - currentHeading;
+    }
+
+    private void drawInternal(final Canvas canvas) {
+        if (currentCoords == null) {
             return;
         }
 
@@ -134,7 +155,7 @@ public class DistanceOverlay implements GeneralOverlay {
             paintCompass.setFilterBitmap(true);
         }
 
-        if (mapView.needsInvertedColors()) {
+        if (needsInvertedColors) {
             paintBoxShadow.setColor(0xFF000000);
             paintBox.setColor(0xFFFFFFFF);
             paintText.setColor(0xFF000000);
@@ -145,26 +166,13 @@ public class DistanceOverlay implements GeneralOverlay {
         }
 
 
-        /* Calculate positions */
-        final float boxX = mapView.getWidth() - boxWidth;
-        final float boxY = 0;
-
-        final float distance = currentCoords.distanceTo(destinationCoords);
-        final String text = Units.getDistanceFromKilometers(distance);
-
-        final float compassArrowX = boxX + boxPadding + (compassArrowWidth / 2);
-        final float compassArrowY = boxY + (boxHeight - compassArrowHeight) / 2;
-        final float compassArrowCenterX = compassArrowX + (compassArrowHeight / 2);
-        final float compassArrowCenterY = compassArrowY + (compassArrowWidth / 2);
-        final float compassRotation = currentCoords.bearingTo(destinationCoords) - currentHeading;
-
-        final float maxTextWidth = boxWidth - 3 * boxPadding - compassArrowWidth;
+        /* Calculate text size */
         final Rect textBounds = new Rect();
         paintText.setTextSize(textHeight);
-        paintText.getTextBounds(text, 0, text.length(), textBounds);
+        paintText.getTextBounds(distanceText, 0, distanceText.length(), textBounds);
         while (textBounds.height() > maxTextWidth) {
             paintText.setTextSize(paintText.getTextSize() - 1);
-            paintText.getTextBounds(text, 0, text.length(), textBounds);
+            paintText.getTextBounds(distanceText, 0, distanceText.length(), textBounds);
         }
 
         final float textX = (boxWidth - 3 * boxPadding - compassArrowWidth - textBounds.width()) / 2 + boxX + 2 * boxPadding + compassArrowWidth;
@@ -195,7 +203,7 @@ public class DistanceOverlay implements GeneralOverlay {
         canvas.restore();
 
         /* Paint distance */
-        canvas.drawText(text, textX, textY, paintText);
+        canvas.drawText(distanceText, textX, textY, paintText);
     }
 
     @Override
