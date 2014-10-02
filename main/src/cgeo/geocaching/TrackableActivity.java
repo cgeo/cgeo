@@ -561,16 +561,16 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 switch (viewId) {
                     case R.id.value: // name, TB-code, origin, released, distance
                         final CharSequence itemTitle = ((TextView) ((View) view.getParent()).findViewById(R.id.name)).getText();
-                        buildDetailsContextMenu(actionMode, menu, clickedItemText, itemTitle, true);
+                        buildDetailsContextMenu(actionMode, menu, itemTitle, true);
                         return true;
                     case R.id.goal:
-                        buildDetailsContextMenu(actionMode, menu, clickedItemText, res.getString(R.string.trackable_goal), false);
+                        buildDetailsContextMenu(actionMode, menu, res.getString(R.string.trackable_goal), false);
                         return true;
                     case R.id.details:
-                        buildDetailsContextMenu(actionMode, menu, clickedItemText, res.getString(R.string.trackable_details), false);
+                        buildDetailsContextMenu(actionMode, menu, res.getString(R.string.trackable_details), false);
                         return true;
                     case R.id.log:
-                        buildDetailsContextMenu(actionMode, menu, clickedItemText, res.getString(R.string.cache_logs), false);
+                        buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_logs), false);
                         return true;
                 }
                 return false;
