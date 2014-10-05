@@ -36,7 +36,6 @@ import cgeo.geocaching.loaders.NextPageGeocacheListLoader;
 import cgeo.geocaching.loaders.OfflineGeocacheListLoader;
 import cgeo.geocaching.loaders.OwnerGeocacheListLoader;
 import cgeo.geocaching.loaders.PocketGeocacheListLoader;
-import cgeo.geocaching.loaders.RemoveFromHistoryLoader;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.Network;
@@ -1140,9 +1139,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         for (int i = 0; i < geocodes.length; i++) {
             geocodes[i] = caches.get(i).getGeocode();
         }
-        final Bundle b = new Bundle();
-        b.putStringArray(Intents.EXTRA_CACHELIST, geocodes);
-        getSupportLoaderManager().initLoader(CacheListLoaderType.REMOVE_FROM_HISTORY.getLoaderId(), b, this);
+        DataStore.clearVisitDate(geocodes);
+        refreshCurrentList();
     }
 
     private void importWeb() {
@@ -1656,10 +1654,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 search = (SearchResult) extras.get(Intents.EXTRA_SEARCH);
                 replaceCacheListFromSearch();
                 loadCachesHandler.sendMessage(Message.obtain());
-                break;
-            case REMOVE_FROM_HISTORY:
-                title = res.getString(R.string.caches_history);
-                loader = new RemoveFromHistoryLoader(app, extras.getStringArray(Intents.EXTRA_CACHELIST), coords);
                 break;
             case NEXT_PAGE:
                 loader = new NextPageGeocacheListLoader(app, search);
