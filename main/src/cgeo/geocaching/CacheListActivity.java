@@ -23,6 +23,7 @@ import cgeo.geocaching.filter.FilterUserInterface;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.list.AbstractList;
+import cgeo.geocaching.list.ListNameMemento;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.loaders.AbstractSearchLoader;
@@ -155,6 +156,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private ContextMenuInfo lastMenuInfo;
     private String contextMenuGeocode = "";
     private Subscription resumeSubscription;
+    private final ListNameMemento listNameMemento = new ListNameMemento();
 
     // FIXME: This method has mostly been replaced by the loaders. But it still contains a license agreement check.
     public void handleCachesLoaded() {
@@ -373,7 +375,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     };
     private AbstractSearchLoader currentLoader;
-    private String newListName = StringUtils.EMPTY;
 
     public CacheListActivity() {
         super(true);
@@ -701,7 +702,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 invalidateOptionsMenuCompatible();
                 return false;
             case R.id.menu_create_list:
-                new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(), newListName);
+                new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(), listNameMemento.getTerm());
                 refreshSpinnerAdapter();
                 invalidateOptionsMenuCompatible();
                 return false;
@@ -910,7 +911,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         adapter.setSelectMode(false);
                         refreshCurrentList();
                     }
-                }, true, listId, newListName);
+                }, true, listId, listNameMemento);
                 break;
             case R.id.menu_store_cache:
             case R.id.menu_refresh:
@@ -1086,7 +1087,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                             }
                             refreshStoredInternal(caches);
                         }
-                    }, true, StoredList.TEMPORARY_LIST.id, newListName);
+                    }, true, StoredList.TEMPORARY_LIST.id, listNameMemento);
         } else {
             if (type != CacheListType.OFFLINE) {
                 for (final Geocache geocache : caches) {
@@ -1621,13 +1622,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 break;
             case KEYWORD:
                 final String keyword = extras.getString(Intents.EXTRA_KEYWORD);
-                rememberTerm(keyword);
+                title = listNameMemento.rememberTerm(keyword);
                 loader = new KeywordGeocacheListLoader(app, keyword);
                 break;
             case ADDRESS:
                 final String address = extras.getString(Intents.EXTRA_ADDRESS);
                 if (StringUtils.isNotBlank(address)) {
-                    rememberTerm(address);
+                    title = listNameMemento.rememberTerm(address);
                 } else {
                     title = coords.toString();
                 }
@@ -1640,12 +1641,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 break;
             case FINDER:
                 final String username = extras.getString(Intents.EXTRA_USERNAME);
-                rememberTerm(username);
+                title = listNameMemento.rememberTerm(username);
                 loader = new FinderGeocacheListLoader(app, username);
                 break;
             case OWNER:
                 final String ownerName = extras.getString(Intents.EXTRA_USERNAME);
-                rememberTerm(ownerName);
+                title = listNameMemento.rememberTerm(ownerName);
                 loader = new OwnerGeocacheListLoader(app, ownerName);
                 break;
             case MAP:
@@ -1672,13 +1673,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             loader.setRecaptchaHandler(new RecaptchaHandler(this, loader));
         }
         return loader;
-    }
-
-    private void rememberTerm(final String term) {
-        // set the title of the activity
-        title = term;
-        // and remember this term for potential use in list creation
-        newListName = term;
     }
 
     @Override

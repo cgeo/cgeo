@@ -70,10 +70,10 @@ public final class StoredList extends AbstractList {
         }
 
         public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId) {
-            promptForListSelection(titleId, runAfterwards, onlyConcreteLists, exceptListId, StringUtils.EMPTY);
+            promptForListSelection(titleId, runAfterwards, onlyConcreteLists, exceptListId, ListNameMemento.EMPTY);
         }
 
-        public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId, final String newListName) {
+        public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final int exceptListId, final @NonNull ListNameMemento listNameMemento) {
             final List<AbstractList> lists = getMenuLists(onlyConcreteLists, exceptListId);
 
             final List<CharSequence> listsTitle = new ArrayList<>();
@@ -92,7 +92,7 @@ public final class StoredList extends AbstractList {
                     final AbstractList list = lists.get(itemId);
                     if (list == PseudoList.NEW_LIST) {
                         // create new list on the fly
-                        promptForListCreation(runAfterwards, newListName);
+                        promptForListCreation(runAfterwards, listNameMemento.getTerm());
                     }
                     else {
                         runAfterwards.call(lists.get(itemId).id);
