@@ -387,6 +387,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
             final String tracking = trackingEditText.getText().toString();
             final String log = logEditText.getText().toString();
             new PostLogThread(postLogHandler, tracking, log).start();
+            Settings.setLastTrackableLog(log);
         } else {
             showToast(res.getString(R.string.err_log_load_data_still));
         }
@@ -401,6 +402,11 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
             }
         }
         return result;
+    }
+
+    @Override
+    protected String getLastLog() {
+        return Settings.getLastTrackableLog();
     }
 
 }

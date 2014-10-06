@@ -92,6 +92,7 @@
     <string name="log_clear">Clear</string>
     <string name="log_post_not_possible">Loading Log Page…</string>
     <string name="log_add">Add</string>
+    <string name="log_repeat">Repeat last log</string>
     <string name="log_no_rating">No rating</string>
     <string name="log_stars_1_description">Poor</string>
     <string name="log_stars_15_description">Fairly poor</string>

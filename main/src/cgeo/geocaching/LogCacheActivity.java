@@ -490,6 +490,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         // again will be easy using "Clear" while retyping the text may not be.
         if (force || (StringUtils.isNotEmpty(log) && !StringUtils.equals(log, text))) {
             cache.logOffline(this, log, date, typeSelected);
+            Settings.setLastCacheLog(log);
         }
         text = log;
     }
@@ -645,6 +646,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 R.string.log_saving :
                 R.string.log_saving_and_uploading);
         new Poster(this, message).execute(currentLogText(), currentLogPassword());
+        Settings.setLastCacheLog(currentLogText());
     }
 
     @Override
@@ -669,5 +671,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         logVisitIntent.putExtra(Intents.EXTRA_ID, cacheId);
         logVisitIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
         return logVisitIntent;
+    }
+
+    @Override
+    protected String getLastLog() {
+        return Settings.getLastCacheLog();
     }
 }

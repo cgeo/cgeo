@@ -12,6 +12,8 @@ import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -56,6 +58,10 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int id = item.getItemId();
+        if (id == R.id.menu_repeat_last) {
+            replaceLog(getLastLog());
+            return true;
+        }
 
         final LogTemplate template = LogTemplateProvider.getTemplate(id);
         if (template != null) {
@@ -72,11 +78,22 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * @return the last log text used with this logging activity
+     */
+    protected abstract String getLastLog();
+
     protected abstract LogContext getLogContext();
 
     protected final void insertIntoLog(final String newText, final boolean moveCursor) {
         final EditText log = (EditText) findViewById(R.id.log);
         ActivityMixin.insertAtPosition(log, newText, moveCursor);
+    }
+
+    private final void replaceLog(final String newText) {
+        final EditText log = (EditText) findViewById(R.id.log);
+        log.setText(StringUtils.EMPTY);
+        insertIntoLog(newText, true);
     }
 
     protected void requestKeyboardForLogging() {

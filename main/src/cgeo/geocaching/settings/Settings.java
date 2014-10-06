@@ -1113,4 +1113,20 @@ public class Settings {
     public static boolean setUseHardwareAcceleration(final boolean useHardwareAcceleration) {
         return putBoolean(R.string.pref_hardware_acceleration, useHardwareAcceleration);
     }
+
+    public static String getLastCacheLog() {
+        return getString(R.string.pref_last_cache_log, StringUtils.EMPTY);
+    }
+
+    public static void setLastCacheLog(final String log) {
+        putString(R.string.pref_last_cache_log, log);
+    }
+
+    public static String getLastTrackableLog() {
+        return getString(R.string.pref_last_trackable_log, StringUtils.EMPTY);
+    }
+
+    public static void setLastTrackableLog(final String log) {
+        putString(R.string.pref_last_trackable_log, log);
+    }
 }

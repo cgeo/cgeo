@@ -32,6 +32,11 @@
         <menu /> <!-- filled dynamically -->
     </item>
     <item
+        android:id="@+id/menu_repeat_last"
+        android:title="@string/log_repeat"
+        app:showAsAction="ifRoom|withText">
+    </item>
+    <item
         android:id="@+id/save"
         android:icon="@drawable/ic_menu_save"
         android:title="@string/log_save"
