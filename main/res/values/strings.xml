@@ -835,7 +835,8 @@
     <string name="search_clear_history">Clear History</string>
     <string name="search_history_cleared">History cleared</string>
     <string name="waypoint_coordinate_formats_plain">Plain</string>
-
+    <string name="from_clipboard">From clipboard</string>
+    
     <!-- visit -->
     <string name="visit_tweet">Post this find to Twitter</string>
 

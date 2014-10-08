@@ -28,4 +28,15 @@ public final class ClipboardUtils {
         clipboard.setText(text);
     }
 
+    /**
+     * get clipboard content
+     *
+     */
+    @SuppressWarnings("deprecation")
+    public static String getText() {
+        // fully qualified name used here to avoid buggy deprecation warning (of javac) on the import statement
+        final android.text.ClipboardManager clipboard = (android.text.ClipboardManager) CgeoApplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
+        return clipboard.getText().toString();
+    }
+
 }
