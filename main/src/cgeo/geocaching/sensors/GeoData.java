@@ -4,11 +4,11 @@ import cgeo.geocaching.enumerations.LocationProviderType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.Log;
 
+import org.eclipse.jdt.annotation.Nullable;
+
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
-
-import javax.annotation.Nullable;
 
 public class GeoData extends Location implements IGeoData {
 
