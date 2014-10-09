@@ -2,6 +2,8 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
 
+import org.eclipse.jdt.annotation.Nullable;
+
 import android.content.Context;
 
 /**
@@ -33,10 +35,12 @@ public final class ClipboardUtils {
      *
      */
     @SuppressWarnings("deprecation")
+    @Nullable
     public static String getText() {
         // fully qualified name used here to avoid buggy deprecation warning (of javac) on the import statement
         final android.text.ClipboardManager clipboard = (android.text.ClipboardManager) CgeoApplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
-        return clipboard.getText().toString();
+        final CharSequence text = clipboard.getText();
+        return text != null ? text.toString() : null;
     }
 
 }
