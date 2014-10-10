@@ -9,7 +9,6 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.functions.Func1;
-import rx.internal.operators.OperatorTakeWhile;
 import rx.observables.BlockingObservable;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.Subscriptions;
@@ -106,18 +105,46 @@ public class RxUtils {
     }
 
     public static <T> Operator<T, T> operatorTakeUntil(final Func1<? super T, Boolean> predicate) {
-        return new OperatorTakeWhile<>(new Func1<T, Boolean>() {
-            private boolean quitting = false;
-
+        return new Operator<T, T>() {
             @Override
-            public Boolean call(final T item) {
-                if (quitting) {
-                    return false;
-                }
-                quitting |= predicate.call(item);
-                return true;
+            public Subscriber<? super T> call(final Subscriber<? super T> subscriber) {
+                return new Subscriber<T>(subscriber) {
+                    private boolean done = false;
+
+                    @Override
+                    public void onCompleted() {
+                        if (!done) {
+                            subscriber.onCompleted();
+                        }
+                    }
+
+                    @Override
+                    public void onError(final Throwable e) {
+                        if (!done) {
+                            subscriber.onError(e);
+                        }
+                    }
+
+                    @Override
+                    public void onNext(final T t) {
+                        subscriber.onNext(t);
+                        boolean shouldEnd = false;
+                        try {
+                            shouldEnd = predicate.call(t);
+                        } catch (final Throwable e) {
+                            done = true;
+                            subscriber.onError(e);
+                            unsubscribe();
+                        }
+                        if (shouldEnd) {
+                            done = true;
+                            subscriber.onCompleted();
+                            unsubscribe();
+                        }
+                    }
+                };
             }
-        });
+        };
     }
 
 }
