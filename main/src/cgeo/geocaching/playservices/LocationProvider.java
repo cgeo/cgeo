@@ -94,25 +94,32 @@ public class LocationProvider implements ConnectionCallbacks, OnConnectionFailed
         });
     }
 
-    private static Observable<IGeoData> getInitialLocation(final Context context, final boolean lowPower) {
-        return get(context, lowPower ? lowPowerCount : mostPreciseCount).first();
-    }
-
     public static Observable<IGeoData> getMostPrecise(final Context context) {
         return get(context, mostPreciseCount);
     }
 
-    public static Observable<IGeoData> getLowPower(Context context, boolean withInitialLocation) {
-        final Observable<IGeoData> initialLocationObservable = withInitialLocation ? getInitialLocation(context, true) : Observable.<IGeoData>empty();
+    public static Observable<IGeoData> getLowPower(final Context context) {
+        // Low-power location without the last stored location
         final Observable<IGeoData> lowPowerObservable = get(context, lowPowerCount).skip(1);
-        final Observable<IGeoData> gpsFixObservable = get(context, mostPreciseCount).skip(1).lift(RxUtils.operatorTakeUntil(new Func1<IGeoData, Boolean>() {
-            @Override
-            public Boolean call(final IGeoData geoData) {
-                return geoData.getAccuracy() < 20;
-            }
-        }));
-        return initialLocationObservable.mergeWith(lowPowerObservable.ambWith(gpsFixObservable.delaySubscription(6, TimeUnit.SECONDS)).first()
-                .concatWith(lowPowerObservable).timeout(25, TimeUnit.SECONDS).retry());
+
+        // High-power location without the last stored location
+        final Observable<IGeoData> highPowerObservable = get(context, mostPreciseCount).skip(1);
+
+        // Use either low-power (with a 6 seconds head start) or high-power observables to obtain a location
+        // no less precise than 20 meters.
+        final Observable<IGeoData> untilPreciseEnoughObservable =
+                lowPowerObservable.mergeWith(highPowerObservable.delaySubscription(6, TimeUnit.SECONDS))
+                        .lift(RxUtils.operatorTakeUntil(new Func1<IGeoData, Boolean>() {
+                            @Override
+                            public Boolean call(final IGeoData geoData) {
+                                return geoData.getAccuracy() <= 20;
+                            }
+                        }));
+
+        // After sending the last known location, try to get a precise location then use the low-power mode. If no
+        // location information is given for 25 seconds (if the network location is turned off for example), get
+        // back to the precise location and try again.
+        return subject.first().concatWith(untilPreciseEnoughObservable.concatWith(lowPowerObservable).timeout(25, TimeUnit.SECONDS).retry());
     }
 
     /**
@@ -125,9 +132,7 @@ public class LocationProvider implements ConnectionCallbacks, OnConnectionFailed
      */
     private LocationProvider(final Context context) {
         final IGeoData initialLocation = GeoData.getInitialLocation(context);
-        if (initialLocation != null) {
-            subject.onNext(initialLocation);
-        }
+        subject.onNext(initialLocation != null ? initialLocation : GeoData.DUMMY_LOCATION);
         locationClient = new LocationClient(context, this, this);
         locationClient.connect();
     }

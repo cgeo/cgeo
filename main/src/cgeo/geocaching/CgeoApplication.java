@@ -108,7 +108,7 @@ public class CgeoApplication extends Application {
         if (useGooglePlayServices) {
             geoDataObservable = LocationProvider.getMostPrecise(this).doOnNext(rememberGeodataAction);
             if (useLowPowerLocation) {
-                geoDataObservableLowPower = LocationProvider.getLowPower(this, true).doOnNext(rememberGeodataAction);
+                geoDataObservableLowPower = LocationProvider.getLowPower(this).doOnNext(rememberGeodataAction);
             } else {
                 geoDataObservableLowPower = geoDataObservable;
             }
