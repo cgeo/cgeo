@@ -16,8 +16,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Observable;
+import rx.functions.Func0;
 import rx.functions.Func1;
 import rx.functions.Func2;
+import rx.util.async.Async;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -314,17 +316,17 @@ public class SearchResult implements Parcelable {
 
     public static <C extends IConnector> SearchResult parallelCombineActive(final Collection<C> connectors,
                                                                             final Func1<C, SearchResult> func) {
-        return Observable.from(connectors).parallel(new Func1<Observable<C>, Observable<SearchResult>>() {
+        return Observable.from(connectors).flatMap(new Func1<C, Observable<SearchResult>>() {
             @Override
-            public Observable<SearchResult> call(final Observable<C> cObservable) {
-                return cObservable.flatMap(new Func1<C, Observable<? extends SearchResult>>() {
+            public Observable<SearchResult> call(final C connector) {
+                return connector.isActive() ? Async.start(new Func0<SearchResult>() {
                     @Override
-                    public Observable<? extends SearchResult> call(final C c) {
-                        return c.isActive() ? Observable.just(func.call(c)) : Observable.<SearchResult>empty();
+                    public SearchResult call() {
+                        return func.call(connector);
                     }
-                });
+                }, RxUtils.networkScheduler) : Observable.<SearchResult>empty();
             }
-        }, RxUtils.networkScheduler).reduce(new SearchResult(), new Func2<SearchResult, SearchResult, SearchResult>() {
+        }).reduce(new SearchResult(), new Func2<SearchResult, SearchResult, SearchResult>() {
             @Override
             public SearchResult call(final SearchResult searchResult, final SearchResult searchResult2) {
                 searchResult.addSearchResult(searchResult2);
