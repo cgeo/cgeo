@@ -28,9 +28,9 @@ gradle connectedCheck
 
 def AAVersion = '3.1'
 def RXVersion = '0.20.5'
-def JacksonCoreVersion = '2.4.1.1'
-def JacksonDatabindVersion = '2.4.1.3'
-def JacksonAnnotationsVersion = '2.4.1'
+def JacksonCoreVersion = '2.4.3'
+def JacksonDatabindVersion = '2.4.3'
+def JacksonAnnotationsVersion = '2.4.3'
 group = 'cgeo.geocaching'
 version = '0.0.1'
 
