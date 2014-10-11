@@ -50,6 +50,10 @@ import java.util.Locale;
  */
 public class Settings {
 
+    /**
+     * On opening a map, we limit the _initial_ zoom. The user can still zoom out afterwards.
+     */
+    private static final int INITIAL_MAP_ZOOM_LIMIT = 16;
     private static final char HISTORY_SEPARATOR = ',';
     public static final int SHOW_WP_THRESHOLD_DEFAULT = 10;
     public static final int SHOW_WP_THRESHOLD_MAX = 50;
@@ -653,7 +657,7 @@ public class Settings {
      * @return zoom used for the (live) map
      */
     private static int getMapZoom() {
-        return getInt(R.string.pref_lastmapzoom, 14);
+        return Math.min(getInt(R.string.pref_lastmapzoom, 14), INITIAL_MAP_ZOOM_LIMIT);
     }
 
     private static void setMapZoom(final int mapZoomLevel) {
@@ -664,7 +668,7 @@ public class Settings {
      * @return zoom used for the map of a single cache
      */
     private static int getCacheZoom() {
-        return getInt(R.string.pref_cache_zoom, 14);
+        return Math.min(getInt(R.string.pref_cache_zoom, 14), INITIAL_MAP_ZOOM_LIMIT);
     }
 
     private static void setCacheZoom(final int zoomLevel) {
