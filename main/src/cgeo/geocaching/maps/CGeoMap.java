@@ -225,7 +225,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                     map.countVisibleCaches();
                     if (!map.caches.isEmpty() && !map.mapTitle.contains("[")) {
                         title.append(" [").append(map.cachesCnt);
-                        if (map.cachesCnt != map.caches.size()) {
+                        if (map.cachesCnt != map.caches.size() && Settings.isDebug()) {
                             title.append('/').append(map.caches.size());
                         }
                         title.append(']');
