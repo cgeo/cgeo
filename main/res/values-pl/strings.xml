@@ -498,6 +498,9 @@
   <string name="init_create_memory_dump">Wykonaj zrzut pamięci</string>
   <string name="init_memory_dump">Zrzut pamięci</string>
   <string name="init_memory_dumped">Pamięć zrzucona do %s</string>
+  <string name="init_hardware_acceleration_title">Sprzętowa akceleracja renderowania</string>
+  <string name="init_hardware_acceleration_note">Akceleracja sprzętowa renderuje elementy graficzne szybciej na ekranie. Jednakże na niektórych urządzeniach z systemem Android może powodować błędy i część tekstu może być niewyraźna (zwłaszcza pogrubione znaki). Jeśli tak się stanie, należy wyłączyć akcelerację sprzętową.</string>
+  <string name="init_hardware_acceleration">Włącz akcelerację sprzętową</string>
   <string name="settings_open_website">Otwórz stronę</string>
   <string name="settings_settings">Ustawienia</string>
   <string name="settings_information">Informacje</string>
