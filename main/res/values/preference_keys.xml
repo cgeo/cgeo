@@ -142,6 +142,7 @@
     <string name="pref_navigation_menu_google_maps_directions">navigationMapsDirections</string>
     <string name="pref_navigation_menu_where_you_go">navigationWhereYouGo</string>
     <string name="pref_navigation_menu_pebble">navigationPebble</string>
+    <string name="pref_navigation_menu_android_wear">navigationAndroidWear</string>
     <string name="pref_navigation_menu_mapswithme">navigationMapsWithMe</string>
     <string name="pref_ocpl_tokensecret">ocpl_tokensecret</string>
     <string name="pref_ocpl_tokenpublic">ocpl_tokenpublic</string>
