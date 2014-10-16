@@ -98,7 +98,9 @@ public final class ProcessUtils {
         }
         final List<ResolveInfo> list = packageManager.queryIntentActivities(intent,
                 PackageManager.MATCH_DEFAULT_ONLY);
-        return CollectionUtils.isNotEmpty(list);
+        final List<ResolveInfo> servicesList = packageManager.queryIntentServices(intent,
+                PackageManager.MATCH_DEFAULT_ONLY);
+        return CollectionUtils.isNotEmpty(list) || CollectionUtils.isNotEmpty(servicesList);
     }
 
 }

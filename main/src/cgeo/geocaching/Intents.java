@@ -18,6 +18,8 @@ public class Intents {
 
     public static final String EXTRA_ADDRESS = PREFIX + "address";
     public static final String EXTRA_COORDS = PREFIX + "coords";
+    public static final String EXTRA_LATITUDE = PREFIX + "latitude";
+    public static final String EXTRA_LONGITUDE = PREFIX + "longitude";
     public static final String EXTRA_COUNT = PREFIX + "count";
     public static final String EXTRA_GEOCODE = PREFIX + "geocode";
     public static final String EXTRA_GUID = PREFIX + "guid";
