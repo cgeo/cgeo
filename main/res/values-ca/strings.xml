@@ -868,7 +868,6 @@
   <string name="helper_contacts_description">Us permet obrir un contacte (de la llibreta de contactes) directament des d\'una entrada del registre, així podeu demanar ajuda als amics més fàcilment.</string>
   <string name="helper_sendtocgeo_description">Send to c:geo és una extensió del navegador <strong>per al vostre ordinador</strong>. Quan navegueu per geocaching.com podreu enviar catxés des del navegador directament al vostre telèfon amb un clic de botó.</string>
   <string name="helper_locus_title">Locus</string>
-  <string name="helper_locus_description">Aplicació simple que mostra mapes en línia i us permet descarregar-los directament pel mode fora de línia (només mapes raster). També suporta la  gravació de rutes, manipulació de punts d\'interès i moltes altres funcions útils.</string>
   <string name="helper_gpsstatus_title">Estat del GPS</string>
   <string name="helper_gpsstatus_description">Podeu utilitzar el radar en aquesta aplicació conjuntament amb el c:geo. També ofereix moltes altres informacions relacionades amb el GPS.</string>
   <string name="helper_bluetoothgps_title">GPS Bluetooth</string>

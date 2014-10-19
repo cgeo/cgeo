@@ -870,7 +870,6 @@
   <string name="helper_contacts_description">Gör det möjligt att öppna en kontakt (i telefonens adressbok) direkt från en logg, så att du enkelt kan kontakta vänner för att få hjälp.</string>
   <string name="helper_sendtocgeo_description">Skicka till c:geo är ett tillägg till webbläsaren <strong>för din PC</strong>. När du bläddrar geocaching.com, kan du skicka cacher till din telefon med en knapptryckning i webbläsaren.</string>
   <string name="helper_locus_title">Locus</string>
-  <string name="helper_locus_description">Ett enkelt program för att visa Online kartor men som också medger nedladdning av raster kartor för användning i Offline läge. Stödjer även inspelning av väg (track recording), POI hantering och många andra användbara funktioner.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">Erbjuder många GPS-relaterade funktioner. Radar-funktionen i detta program kan användas i c:geo.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>

@@ -853,7 +853,6 @@
   <string name="helper_contacts_description">Giver dig mulighed for at åbne kontaktside (fra dine kontakter) direkte fra en logbesked, så du let kan kontakte dine venner.</string>
   <string name="helper_sendtocgeo_description">Send2c:geo (send til c:geo) er en browserudvidelse <strong>til din PC</strong>. Med send2c:geo kan du sende cacher direkte fra din browser til c:geo på din Android-enhed ved blot at klikke på en knap i din browser.</string>
   <string name="helper_locus_title">Locus</string>
-  <string name="helper_locus_description">Simpel og brugervenlig app, som viser online kort og giver dig mulighed for at downloade dem direkte til offline tilstand (gælder kun raster-kort). Understøtter også optagelse af GPS-spor, administration af interessepunkter og mange andre anvendelige funktioner.</string>
   <string name="helper_gpsstatus_title">GPS-status</string>
   <string name="helper_gpsstatus_description">Du kan bruger radaren i denne app sammen med c:geo. Appen giver desuden en mængde GPS-relateret information.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
@@ -933,7 +932,7 @@
   <string name="attribute_abandonedbuilding_no">Ikke forladt bygning</string>
   <string name="attribute_hike_short_yes">Kort gåtur (under 1 km)</string>
   <string name="attribute_hike_short_no">Ikke kort gåtur</string>
-  <string name="attribute_hike_med_yes">Mellemlang gåtur (1-10 km)</string>
+  <string name="attribute_hike_med_yes">Mellemlang gåtur (1–10 km)</string>
   <string name="attribute_hike_med_no">Ikke mellemlang gåtur</string>
   <string name="attribute_hike_long_yes">Lang gåtur (over 10 km)</string>
   <string name="attribute_hike_long_no">Ikke lang gåtur</string>
@@ -1150,7 +1149,6 @@
     <item quantity="one">%s favorit</item>
     <item quantity="other">%s favoritter</item>
   </plurals>
-  <string name="percent_favorite_points">%% favoritter</string>
   <string name="cgeo_shortcut">c:geo genvej</string>
   <string name="create_shortcut">Opret genvej</string>
   <string name="send">Send</string>

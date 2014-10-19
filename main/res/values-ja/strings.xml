@@ -777,7 +777,6 @@
   <string name="helper_contacts_title">c:geo - 連絡先アドオン</string>
   <string name="helper_sendtocgeo_description">Send to c:geoは<strong>PC用</strong>ブラウザの拡張機能です。PCのブラウザで表示してるキャッシュ情報をアンドロイド端末に直接送ることができます。</string>
   <string name="helper_locus_title">Locus</string>
-  <string name="helper_locus_description">シンプルで役に立つ地図アプリ。オフライン用に地図を直接ダウンロード(画像データのみ)することができます。軌跡(GPSログ)を記録したり、POIを扱ったり、その他もたくさん便利な機能があります。</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">c:geoでこのアプリのレーダーを利用することができます。その他、GPSに関するたくさんの情報が得られます。</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>

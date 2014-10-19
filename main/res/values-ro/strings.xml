@@ -860,7 +860,6 @@
   <string name="helper_contacts_description">Permite să afişezi contacte (din agenda de contacte) direct din formularul pentru însemnări, astfel încţt să ăti poţi întreba mai uşor prietenii.</string>
   <string name="helper_sendtocgeo_description">Send to c:geo este o extensie pentru browser-ul <strong>de pe PC</strong>. Când vizitezi geocaching.com, poţi trimite geocutii direct către dispozitivul tău apăsând un simplu buton.</string>
   <string name="helper_locus_title">Locus</string>
-  <string name="helper_locus_description">Aplicaţie simplă care afişează hărţi de pe internet şi îţi permite să le salvezi local (doar caimagini cu hărţi). Mai ştie să înregistreze trasee, gestiune de puncte de interes şi alte funcţii utile.</string>
   <string name="helper_gpsstatus_title">Stare GPS</string>
   <string name="helper_gpsstatus_description">Poţi folosi ecranul Radar din această aplicaţie împreună cu c:geo. Oferă şi multe alte informaţii legate de GPS.</string>
   <string name="helper_bluetoothgps_title">GPS prin Bluetooth</string>
