@@ -856,7 +856,6 @@
   <string name="helper_contacts_description">Leidžia tiesiai iš įrašo atidaryti kontakto kortelę (iš jūsų adresų knygos), kad galėtumėte susisiekti su draugais paprašyti pagalbos.</string>
   <string name="helper_sendtocgeo_description">Send to c:geo yra <strong>jūsų kompiuterio</strong> naršyklės priedas . Kai naršote geocaching.com, jūs galite siųsti slėptuves į savo išmanųjį telefoną tiesiog naršyklės viduje paspausdami mygtuką.</string>
   <string name="helper_locus_title">Locus</string>
-  <string name="helper_locus_description">Patogi programa, kuri rodo žemėlapius tiesiai iš interneto ir suteikia galimybę atsisiųsti juos į prietaisą (tik rastrinius žemėlapius). Ji taip pat palaiko nukeliauto kelio įrašymą, lankytinų vietų valdymą ir turi daug kitų naudingų funkcijų.</string>
   <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">Kartu su c:geo galite naudoti šioje programoje esantį radarą. Ji taip pat siūlo daug kitos su GPS susijusios informacijos.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>

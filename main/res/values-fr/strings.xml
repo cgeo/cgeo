@@ -866,7 +866,6 @@
   <string name="helper_contacts_description">Permet d\'ouvrir une fiche de contact (depuis le carnet d\'adresses) directement depuis une entrée de journal, de manière à pouvoir plus facilement appeler des amis à l\'aide.</string>
   <string name="helper_sendtocgeo_description">Envoyer à c:geo (<i>Send to c:geo</i>) est une extension pour le navigateur <strong>de votre ordinateur</strong>. Lorsque vous naviguez sur geocaching.com, vous pouvez envoyer des caches vers votre smartphone avec un clic.</string>
   <string name="helper_locus_title">Locus</string>
-  <string name="helper_locus_description">Application simple affichant des cartes en ligne et hors ligne. Permet d\'enregistrer son parcours, de gérer des POI et de nombreuses autres fonctions utiles.</string>
   <string name="helper_gpsstatus_title">Etat GPS</string>
   <string name="helper_gpsstatus_description">Vous pouvez utiliser le radar de cette application dans c:geo. Il gère des informations supplémentaires relatives au GPS.</string>
   <string name="helper_bluetoothgps_title">GPS Bluetooth</string>

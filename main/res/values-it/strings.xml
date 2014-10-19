@@ -862,7 +862,6 @@
   <string name="helper_contacts_description">Consente di aprire una scheda contatto (della tua rubrica) direttamente da un log, per permetterti di chiedere aiuto agli amici più facilmente.</string>
   <string name="helper_sendtocgeo_description">Send to c:geo è un\'estensione del browser <strong>per il tuo PC</strong>. Durante la navigazione su geocaching.com, è possibile inviare i cache al vostro smartphone con il clic di un pulsante direttamente all\'interno del browser.</string>
   <string name="helper_locus_title">Locus</string>
-  <string name="helper_locus_description">Applicazione semplice da usare che mostra mappe online permettendo di scaricarle direttamente per l\'uso offline (solo mappe raster). Supporta inoltra la registrazione di traccia, gestione dei waypoints e altre utili funzioni.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">Puoi usare il radar di questa applicazione con c:geo. Offre inoltre molte informazioni addizionali legate al GPS.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>

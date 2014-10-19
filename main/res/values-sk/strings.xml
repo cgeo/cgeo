@@ -863,7 +863,6 @@
   <string name="helper_contacts_description">Umožňuje otvorenie karty kontaktu (z adresára) priamo z logbooku, takže môžete ľahko požiadať priateľov o pomoc.</string>
   <string name="helper_sendtocgeo_description">Poslať do c:geo je rozšírenie prehliadača <strong>pre vaše PC</strong>. Pri browsovaní geocaching.com, môžete poslať cache do vášho smartphone kliknutím na tlačidlo priamo v prehliadači.</string>
   <string name="helper_locus_title">Locus</string>
-  <string name="helper_locus_description">Užitočná aplikácia zobrazujúca Online i Offline mapy a umožňujúca ich stiahnutie priamo do Offline režimu (iba rastrové online mapy). Tiež podporuje nahrávanie trasy, správu bodov záujmu (POI) a mnoho iných užitočných funkcií.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">Radar z tejto aplikácie môžete použiť v c:geo. Poskytuje tiež mnoho iných informácií súvisiacich s GPS.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>

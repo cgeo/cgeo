@@ -867,7 +867,6 @@
   <string name="helper_contacts_description">Umožňuje otevřít vizitku (z tvého seznamu kontaktů) přímo z logu keše, můžeš tak snadněji kontaktovat kamarády o pomoc.</string>
   <string name="helper_sendtocgeo_description">Poslat do c:geo (Send2c:geo) je rozšíření prohlížeče <strong>pro tvůj počítač</strong>. Umožňuje zaslání keše do tvého mobilního zařízení jediným klepnutím, přímo z prohlížeče, při procházení webu Geocaching.com.</string>
   <string name="helper_locus_title">Locus</string>
-  <string name="helper_locus_description">Jednoduše použitelná aplikace zobrazující Online mapy a dovolující je přímo stahovat pro Offline použití (pouze rastrové mapy). Také podporuje záznam trasy, zpracování bodů zájmu a další užitečné funkce.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">Můžeš použít radar z této aplikace pro c:geo. Také podporuje další funkce spojené s používáním GPS.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>

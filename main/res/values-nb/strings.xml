@@ -849,7 +849,6 @@
   <string name="helper_contacts_description">Gjør det mulig å åpne en kontakt (i telefonens adressebok) direkte fra en logg så du enklere kan be om hjelp fra dine venner.</string>
   <string name="helper_sendtocgeo_description">Send til c:geo (send2c:geo) er en nettleserutvidelse <strong>for din pc</strong>. På geocaching.com kan du sende cacher til din smarttelefon ved hjelp av en egen knapp i nettleseren.</string>
   <string name="helper_locus_title">Locus</string>
-  <string name="helper_locus_description">Enkel, brukervennlig app for å vise online kart, men som også kan laste ned kart til offline bruk. Støtter også spor, POI-håndtering (points of interest) og mange andre nyttige funksjoner.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">Du kan bruke radaren i denne appen sammen med c:geo. Den gir mye GPS-relatert informasjon.</string>
   <string name="helper_bluetoothgps_title">Blåtann-GPS</string>

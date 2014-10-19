@@ -868,7 +868,6 @@
   <string name="helper_contacts_description">Omogoča vam odpiranje vizitke kontakta (v vašem adresarju) direktno iz zapisa, tako da lahko lažje vprašate prijatelje za pomoč.</string>
   <string name="helper_sendtocgeo_description">Send to c:geo je razširitev za vaš brskalnik <strong>na vašem računalniku</strong>. Ko brskate na geocaching.com, lahko iz spletne strani pošljete zaklad direktno na vašo napravo s klikom na gumb znotraj brskalnika.</string>
   <string name="helper_locus_title">Locus</string>
-  <string name="helper_locus_description">Aplikacija Locus vam omogoča prikaz zemljevidov brez povezave in prenos zemljevidov direktno na napravo (samo rasterski zemljevidi). Omogoča tudi beleženje lokacije, uporavljanje s točkami zanimivosti in drugimi uporabnimi funkcionalnostmi.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">Aplikacija GPS Status vam omogoča prikaz radarja in uporabljate jo lahko z aplikacijo c:geo. Omogoča tudi prikaz veliko drugih informacij povezanih z GPS in njihovimi orodji.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>

@@ -865,7 +865,6 @@
   <string name="helper_contacts_description">Umożliwia Tobie otwarcie kontaktu (z Twojej książki adresowej) bezpośrednio z wpisu do dziennika, więc możesz łatwiej poprosić przyjaciół o pomoc.</string>
   <string name="helper_sendtocgeo_description">Wyślij do c:geo jest rozszerzeniem do przeglądarki <strong>na komputer</strong>. Podczas przeglądania Geocaching.com pozwala na wysłanie skrzynek bezpośrednio do telefonu, za pomocą jednego przycisku w przeglądarce.</string>
   <string name="helper_locus_title">Locus</string>
-  <string name="helper_locus_description">Bardzo dobra aplikacja do oglądania map online, która pozwala na pobieranie ich bezpośrednio do trybu offline (tylko mapy rastrowe). Pozwala także na zapisywanie ścieżek, obsługę POI oraz ma wiele innych przydatnych funkcji.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">Można wywołać radar bezpośrednio z aplikacji c:geo. Oferuje on również wiele informacji związanych z GPS.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>

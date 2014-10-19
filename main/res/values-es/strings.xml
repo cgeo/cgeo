@@ -729,12 +729,11 @@
   <string name="waypoint_visited">Visitado</string>
   <string name="waypoint_save">Guardar</string>
   <string name="waypoint_loading">Cargando punto de referencia…</string>
-  <string name="waypoint_do_not_touch_cache_coordinates">No cambiar las coordenadas del cache</string>
   <string name="waypoint_set_as_cache_coords">Establecer como coordenadas del cache solo en c:geo</string>
   <string name="waypoint_save_and_modify_on_website">Establecer como coordenadas del cache en c:geo y en la web</string>
   <string name="waypoint_reset_cache_coords">Restablecer las coordenadas del cache</string>
   <string name="waypoint_coordinates_has_been_reset_on_website">Las coordenadas del cache han sido reseteadas en la web.</string>
-  <string name="waypoint_coordinates_being_reset_on_website">Reseteando las coordenadas del cache en la web...</string>
+  <string name="waypoint_coordinates_being_reset_on_website">Reseteando las coordenadas del cache en la web…</string>
   <string name="waypoint_reset">Restablecer</string>
   <string name="waypoint_localy_reset_cache_coords">Restablecer en c:geo</string>
   <string name="waypoint_reset_local_and_remote_cache_coords">Restablecer en c:geo y en la web</string>
@@ -853,10 +852,9 @@
   <string name="helper_calendar_description">Permite exportar caches evento al calendario de tu dispositivo.</string>
   <string name="helper_sendtocgeo_title">Send to c:geo</string>
   <string name="helper_contacts_title">Complemento de contactos de c:geo</string>
-  <string name="helper_contacts_description">Permite abrir un contacto (de tu libreta de contactos) directamente desde un registro, para que puedas pedir ayuda a tus amigos más facilmente.</string>
+  <string name="helper_contacts_description">Permite abrir un contacto (de tu libreta de contactos) directamente desde un registro, para que puedas pedir ayuda a tus amigos más fácilmente.</string>
   <string name="helper_sendtocgeo_description">\'Enviar a c:geo\' es una extensión <strong>para tu PC</strong>. Cuando navegues por geocaching.com, puedes enviar cachés a tu smartphone haciendo clic directamente desde tu navegador.</string>
   <string name="helper_locus_title">Locus</string>
-  <string name="helper_locus_description">Sencilla aplicación que muestra mapas en línea y permite descargarlos para ser usados sin conexión (sólo mapas no vectoriales). También permite registrar el recorrido, gestionar puntos de interés y más funciones interesantes.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">Puedes usar el radar de esta aplicación con c:geo. Además ofrece un montón de información relacionada con el GPS.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
@@ -1052,8 +1050,6 @@
   <string name="attribute_all_seasons_no">No todas las estaciones</string>
   <string name="attribute_breeding_yes">Época de cría / Naturaleza protegida</string>
   <string name="attribute_breeding_no">No es época de cría / naturaleza protegida</string>
-  <string name="attribute_snow_proof_yes">Escondite a prueba de nieve</string>
-  <string name="attribute_snow_proof_no">Escondite NO a prueba de nieve</string>
   <string name="attribute_compass_yes">Brújula</string>
   <string name="attribute_compass_no">Sin brújula</string>
   <string name="attribute_cave_yes">Equipo para cuevas</string>
@@ -1168,4 +1164,4 @@
   <string name="showcase_cachelist_text">Puedes cambiar entre tus listas de cachés haciendo clic sobre el nombre de la lista.</string>
   <string name="confirm_log_title">Tipo de registro inusual</string>
   <string name="confirm_log_message">Quieres registrar \'%s\'. ¿Estás seguro?</string>
-  </resources>
+</resources>

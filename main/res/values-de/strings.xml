@@ -80,6 +80,7 @@
   <string name="log_clear">Leeren</string>
   <string name="log_post_not_possible">Lade Log-Seite…</string>
   <string name="log_add">Hinzufügen</string>
+  <string name="log_repeat">Verwende das letzte Log erneut</string>
   <string name="log_no_rating">Keine Bewertung</string>
   <string name="log_stars_1_description">Schlecht</string>
   <string name="log_stars_15_description">Lohnt sich nicht</string>
@@ -298,6 +299,7 @@
   <string name="caches_filter_popularity_ratio">Favoriten [%]</string>
   <string name="caches_removing_from_history">Lösche aus Verlauf…</string>
   <string name="caches_clear_offlinelogs">Offline-Logs löschen</string>
+  <string name="caches_clear_offlinelogs_message">Möchtest du die offline Logs löschen?</string>
   <string name="caches_clear_offlinelogs_progress">Lösche Offline-Logs</string>
   <string name="list_menu_create">Neue Liste</string>
   <string name="list_menu_drop">Aktuelle Liste löschen</string>
@@ -761,6 +763,7 @@
   <string name="search_clear_history">Verlauf löschen</string>
   <string name="search_history_cleared">Verlauf gelöscht</string>
   <string name="waypoint_coordinate_formats_plain">Schlicht</string>
+  <string name="from_clipboard">Aus der Zwischenablage</string>
   <string name="visit_tweet">Diesen Eintrag auf Twitter veröffentlichen</string>
   <string name="map_map">Karte</string>
   <string name="map_live">Live-Karte</string>
@@ -865,7 +868,7 @@
   <string name="helper_contacts_description">Ermöglicht das direkte Öffnen von Kontakten (aus dem eigenen Adressbuch) von Logeinträgen aus, so dass man Freunde einfacher um Hilfe fragen kann.</string>
   <string name="helper_sendtocgeo_description">Send to c:geo ist eine Browsererweiterung <strong>für Ihren PC</strong>. Beim Durchsuchen von geocaching.com können Sie Caches mit einem Klick im Browser direkt an Ihr Smartphone übermitteln.</string>
   <string name="helper_locus_title">Locus</string>
-  <string name="helper_locus_description">Sehr gute App für Online- und Offline-Karten (nur Rasterkarten) mit vielen weiteren Funktionen wie z. B. Trackaufzeichnung, POIs und vieles mehr.</string>
+  <string name="helper_locus_description">Outdoor Navigations-App für dein Handy oder Tablet. Verwende topografische Karten offline, zeichne Tracks von deinen Touren auf, suche Geocaches, benutze Sprachführung und vieles mehr.</string>
   <string name="helper_gpsstatus_title">GPS-Status</string>
   <string name="helper_gpsstatus_description">Das Radar dieser App kann in c:geo verwendet und zusätzlich viele GPS-bezogene Informationen abgerufen werden.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
@@ -1168,6 +1171,7 @@
     <item quantity="one">%s Favorit</item>
     <item quantity="other">%s Favoriten</item>
   </plurals>
+  <string name="more_than_percent_favorite_points">&gt; %d%% Favoriten</string>
   <string name="cgeo_shortcut">c:geo Shortcut</string>
   <string name="create_shortcut">Shortcut erstellen</string>
   <string name="send">Senden</string>

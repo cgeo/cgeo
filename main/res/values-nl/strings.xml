@@ -870,7 +870,6 @@
   <string name="helper_contacts_description">Maakt het mogelijk een contactpersoon (uit je adresboek) te openen rechtstreeks vanuit een log, zodat je vrienden makkelijker om hulp kunt vragen.</string>
   <string name="helper_sendtocgeo_description">Verzenden naar c:geo is een browserextensie <strong>voor uw PC</strong>. Tijdens het browsen op geocaching.com, kunt u caches verzenden naar uw smartphone met een klik direct in de browser.</string>
   <string name="helper_locus_title">Locus</string>
-  <string name="helper_locus_description">Simpele bruikbare applicatie om online kaarten weer te geven en deze voor offline gebruik te downloaden (alleen rasterkarten). Ook ondersteuning voor track recording, poi afhandeling en vele andere handige functies.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">De radar van deze applicatie kan gebruikt worden samen met c:geo. Het bied ook vele andere GPS gerelateerde informatie.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>

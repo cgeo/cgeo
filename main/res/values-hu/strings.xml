@@ -862,7 +862,6 @@
   <string name="helper_contacts_description">Lehetővé teszi egy névjegy közvetlen megnyitását a log bejegyzésekből, így könnyebben segítséget tudsz kérni.</string>
   <string name="helper_sendtocgeo_description">A \'Küldés a c:geo-ra\' egy böngésző bővítmény <strong>PC-re</strong>. A geocaching.com böngészése közben, egy kattintással tudsz geoládákat küldeni az okostelefonodra.</string>
   <string name="helper_locus_title">Locus</string>
-  <string name="helper_locus_description">Egyszerűen kezelhető alkalmazás online térképek megjelenítésére, amelyeket le is tud tölteni offline használatra (csak raszteres térképekkel működik). Támogatja a nyomvonalrögzítést, érdekes pontok kezelést és sok egyéb hasznos funkciót.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">A programban található radart a c:geo-hoz is használhatod. Sok egyéb GPS-el kapcsolatos információt is megmutat.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
