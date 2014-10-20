@@ -18,6 +18,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -308,9 +309,17 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
             Log.i("Image does not exist");
             return;
         }
+        new AsyncTask<Void, Void, Bitmap>() {
+            @Override
+            protected Bitmap doInBackground(final Void... params) {
+                return ImageUtils.readAndScaleImageToFitDisplay(imageUri.getPath());
+            }
 
-        final Bitmap bitmap = ImageUtils.readAndScaleImageToFitDisplay(imageUri.getPath());
-        imagePreview.setImageBitmap(bitmap);
-        imagePreview.setVisibility(View.VISIBLE);
+            @Override
+            protected void onPostExecute(final Bitmap bitmap) {
+                imagePreview.setImageBitmap(bitmap);
+                imagePreview.setVisibility(View.VISIBLE);
+            }
+        }.execute();
     }
 }
