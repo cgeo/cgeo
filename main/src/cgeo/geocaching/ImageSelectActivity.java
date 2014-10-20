@@ -160,20 +160,29 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
 
     public void saveImageInfo(final boolean saveInfo) {
         if (saveInfo) {
-            final String filename = writeScaledImage(imageUri.getPath());
-            if (filename != null) {
-                imageUri = Uri.parse(filename);
-                final Intent intent = new Intent();
-                syncEditTexts();
-                intent.putExtra(Intents.EXTRA_CAPTION, imageCaption);
-                intent.putExtra(Intents.EXTRA_DESCRIPTION, imageDescription);
-                intent.putExtra(Intents.EXTRA_URI_AS_STRING, imageUri.toString());
-                intent.putExtra(Intents.EXTRA_SCALE, scaleChoiceIndex);
-                setResult(RESULT_OK, intent);
-            } else {
-                showToast(res.getString(R.string.err_select_logimage_failed));
-                setResult(RESULT_CANCELED);
-            }
+            new AsyncTask<Void, Void, String>() {
+                @Override
+                protected String doInBackground(final Void... params) {
+                    return writeScaledImage(imageUri.getPath());
+                }
+
+                @Override
+                protected void onPostExecute(final String filename) {
+                    if (filename != null) {
+                        imageUri = Uri.parse(filename);
+                        final Intent intent = new Intent();
+                        syncEditTexts();
+                        intent.putExtra(Intents.EXTRA_CAPTION, imageCaption);
+                        intent.putExtra(Intents.EXTRA_DESCRIPTION, imageDescription);
+                        intent.putExtra(Intents.EXTRA_URI_AS_STRING, imageUri.toString());
+                        intent.putExtra(Intents.EXTRA_SCALE, scaleChoiceIndex);
+                        setResult(RESULT_OK, intent);
+                    } else {
+                        showToast(res.getString(R.string.err_select_logimage_failed));
+                        setResult(RESULT_CANCELED);
+                    }
+                }
+            }.execute();
         } else {
             setResult(RESULT_CANCELED);
         }
