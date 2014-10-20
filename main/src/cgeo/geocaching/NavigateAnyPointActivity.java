@@ -393,13 +393,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
                 protected void onPostExecute(final Void v) {
                     // Ensure to remove the footer
                     historyListView.removeFooterView(getEmptyHistoryFooter());
-
-                    NavigateAnyPointActivity.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            destinationHistoryAdapter.notifyDataSetChanged();
-                        }
-                    });
+                    destinationHistoryAdapter.notifyDataSetChanged();
                 }
             }.execute();
         }
