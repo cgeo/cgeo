@@ -299,27 +299,27 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     progress.setMessage(res.getString(R.string.caches_downloading) + " " + res.getQuantityString(R.plurals.caches_eta_mins, minutesRemaining, minutesRemaining));
                 }
             } else {
-                if (search != null) {
-                    new AsyncTask<Void, Void, Set<Geocache>>() {
-                        @Override
-                        protected Set<Geocache> doInBackground(final Void... params) {
-                            return search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-                        }
-
-                        @Override
-                        protected void onPostExecute(final Set<Geocache> cacheListTmp) {
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(final Void... params) {
+                        if (search != null) {
+                            final Set<Geocache> cacheListTmp = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
                             if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                                 cacheList.clear();
                                 cacheList.addAll(cacheListTmp);
                             }
                         }
-                    }.execute();
-                }
+                        return null;
+                    }
 
-                setAdapterCurrentCoordinates(false);
+                    @Override
+                    protected void onPostExecute(final Void result) {
+                        setAdapterCurrentCoordinates(false);
 
-                showProgress(false);
-                progress.dismiss();
+                        showProgress(false);
+                        progress.dismiss();
+                    }
+                }.execute();
             }
         }
     };
