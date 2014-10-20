@@ -181,13 +181,13 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
                         showToast(res.getString(R.string.err_select_logimage_failed));
                         setResult(RESULT_CANCELED);
                     }
+                    finish();
                 }
             }.execute();
         } else {
             setResult(RESULT_CANCELED);
+            finish();
         }
-
-        finish();
     }
 
     private void syncEditTexts() {
