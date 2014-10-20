@@ -410,37 +410,43 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return true;
             case R.id.menu_waypoint_duplicate:
                 ensureSaved();
-                if (cache.duplicateWaypoint(selectedWaypoint)) {
-                    new AsyncTask<Void, Void, Void>() {
-                        @Override
-                        protected Void doInBackground(final Void... params) {
+                new AsyncTask<Void, Void, Boolean>() {
+                    @Override
+                    protected Boolean doInBackground(final Void... params) {
+                        if (cache.duplicateWaypoint(selectedWaypoint)) {
                             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                            return null;
+                            return true;
                         }
+                        return false;
+                    }
 
-                        @Override
-                        protected void onPostExecute(final Void v) {
+                    @Override
+                    protected void onPostExecute(final Boolean result) {
+                        if (result) {
                             notifyDataSetChanged();
                         }
-                    }.execute();
-                }
+                    }
+                }.execute();
                 return true;
             case R.id.menu_waypoint_delete:
                 ensureSaved();
-                if (cache.deleteWaypoint(selectedWaypoint)) {
-                    new AsyncTask<Void, Void, Void>() {
-                        @Override
-                        protected Void doInBackground(final Void... params) {
+                new AsyncTask<Void, Void, Boolean>() {
+                    @Override
+                    protected Boolean doInBackground(final Void... params) {
+                        if (cache.deleteWaypoint(selectedWaypoint)) {
                             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                            return null;
+                            return true;
                         }
+                        return false;
+                    }
 
-                        @Override
-                        protected void onPostExecute(final Void v) {
+                    @Override
+                    protected void onPostExecute(final Boolean result) {
+                        if (result) {
                             notifyDataSetChanged();
                         }
-                    }.execute();
-                }
+                    }
+                }.execute();
                 return true;
             case R.id.menu_waypoint_navigate_default:
                 if (selectedWaypoint != null) {
