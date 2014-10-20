@@ -83,6 +83,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -299,11 +300,20 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 }
             } else {
                 if (search != null) {
-                    final Set<Geocache> cacheListTmp = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-                    if (CollectionUtils.isNotEmpty(cacheListTmp)) {
-                        cacheList.clear();
-                        cacheList.addAll(cacheListTmp);
-                    }
+                    new AsyncTask<Void, Void, Set<Geocache>>() {
+                        @Override
+                        protected Set<Geocache> doInBackground(final Void... params) {
+                            return search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+                        }
+
+                        @Override
+                        protected void onPostExecute(final Set<Geocache> cacheListTmp) {
+                            if (CollectionUtils.isNotEmpty(cacheListTmp)) {
+                                cacheList.clear();
+                                cacheList.addAll(cacheListTmp);
+                            }
+                        }
+                    }.execute();
                 }
 
                 setAdapterCurrentCoordinates(false);
