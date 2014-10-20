@@ -61,6 +61,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -521,9 +522,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         resumeSubscription = Subscriptions.from(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR), startTimer());
 
         if (!CollectionUtils.isEmpty(dirtyCaches)) {
-            new Thread() {
+            new AsyncTask<Void, Void, Void>() {
                 @Override
-                public void run() {
+                public Void doInBackground(final Void... params) {
                     for (final String geocode : dirtyCaches) {
                         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
                         if (cache != null) {
@@ -533,11 +534,16 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                             caches.add(cache);
                         }
                     }
+                    return null;
                 }
-            }.start();
-            dirtyCaches.clear();
-            // Update display
-            displayExecutor.execute(new DisplayRunnable(this));
+
+                @Override
+                public void onPostExecute(final Void result) {
+                    dirtyCaches.clear();
+                    // Update display
+                    displayExecutor.execute(new DisplayRunnable(CGeoMap.this));
+                }
+            }.execute();
         }
     }
 
