@@ -2337,13 +2337,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public void onFinishEditNoteDialog(final String note) {
-        cache.setPersonalNote(note);
-        cache.parseWaypointsFromNote();
         final TextView personalNoteView = ButterKnife.findById(this, R.id.personalnote);
         setPersonalNote(personalNoteView, note);
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(final Void... params) {
+                cache.setPersonalNote(note);
+                cache.parseWaypointsFromNote();
                 DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
                 return null;
             }
