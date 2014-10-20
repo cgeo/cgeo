@@ -25,6 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.view.ContextMenu;
@@ -380,18 +381,21 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
         if (!getHistoryOfSearchedLocations().contains(loc)) {
             getHistoryOfSearchedLocations().add(0, loc);
 
-            // Save location
-            DataStore.saveSearchedDestination(loc);
-
-            // Ensure to remove the footer
-            historyListView.removeFooterView(getEmptyHistoryFooter());
-
-            runOnUiThread(new Runnable() {
+            new AsyncTask<Void, Void, Void>() {
                 @Override
-                public void run() {
+                protected Void doInBackground(final Void... params) {
+                    // Save location
+                    DataStore.saveSearchedDestination(loc);
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(final Void v) {
+                    // Ensure to remove the footer
+                    historyListView.removeFooterView(getEmptyHistoryFooter());
                     destinationHistoryAdapter.notifyDataSetChanged();
                 }
-            });
+            }.execute();
         }
     }
 

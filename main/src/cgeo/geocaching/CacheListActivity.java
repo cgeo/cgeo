@@ -83,6 +83,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -298,18 +299,27 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     progress.setMessage(res.getString(R.string.caches_downloading) + " " + res.getQuantityString(R.plurals.caches_eta_mins, minutesRemaining, minutesRemaining));
                 }
             } else {
-                if (search != null) {
-                    final Set<Geocache> cacheListTmp = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-                    if (CollectionUtils.isNotEmpty(cacheListTmp)) {
-                        cacheList.clear();
-                        cacheList.addAll(cacheListTmp);
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(final Void... params) {
+                        if (search != null) {
+                            final Set<Geocache> cacheListTmp = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+                            if (CollectionUtils.isNotEmpty(cacheListTmp)) {
+                                cacheList.clear();
+                                cacheList.addAll(cacheListTmp);
+                            }
+                        }
+                        return null;
                     }
-                }
 
-                setAdapterCurrentCoordinates(false);
+                    @Override
+                    protected void onPostExecute(final Void result) {
+                        setAdapterCurrentCoordinates(false);
 
-                showProgress(false);
-                progress.dismiss();
+                        showProgress(false);
+                        progress.dismiss();
+                    }
+                }.execute();
             }
         }
     };
