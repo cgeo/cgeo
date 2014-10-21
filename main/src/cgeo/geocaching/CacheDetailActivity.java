@@ -84,6 +84,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -409,17 +410,43 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return true;
             case R.id.menu_waypoint_duplicate:
                 ensureSaved();
-                if (cache.duplicateWaypoint(selectedWaypoint)) {
-                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                    notifyDataSetChanged();
-                }
+                new AsyncTask<Void, Void, Boolean>() {
+                    @Override
+                    protected Boolean doInBackground(final Void... params) {
+                        if (cache.duplicateWaypoint(selectedWaypoint)) {
+                            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                            return true;
+                        }
+                        return false;
+                    }
+
+                    @Override
+                    protected void onPostExecute(final Boolean result) {
+                        if (result) {
+                            notifyDataSetChanged();
+                        }
+                    }
+                }.execute();
                 return true;
             case R.id.menu_waypoint_delete:
                 ensureSaved();
-                if (cache.deleteWaypoint(selectedWaypoint)) {
-                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                    notifyDataSetChanged();
-                }
+                new AsyncTask<Void, Void, Boolean>() {
+                    @Override
+                    protected Boolean doInBackground(final Void... params) {
+                        if (cache.deleteWaypoint(selectedWaypoint)) {
+                            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                            return true;
+                        }
+                        return false;
+                    }
+
+                    @Override
+                    protected void onPostExecute(final Boolean result) {
+                        if (result) {
+                            notifyDataSetChanged();
+                        }
+                    }
+                }.execute();
                 return true;
             case R.id.menu_waypoint_navigate_default:
                 if (selectedWaypoint != null) {
@@ -1660,7 +1687,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (!cache.isOffline()) {
             showToast(getString(R.string.info_cache_saved));
             cache.setListId(StoredList.STANDARD_LIST_ID);
-            DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+            new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected Void doInBackground(final Void... params) {
+                    DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+                    return null;
+                }
+            }.execute();
         }
     }
 
@@ -2310,12 +2343,22 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public void onFinishEditNoteDialog(final String note) {
-        cache.setPersonalNote(note);
-        cache.parseWaypointsFromNote();
         final TextView personalNoteView = ButterKnife.findById(this, R.id.personalnote);
         setPersonalNote(personalNoteView, note);
-        DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-        notifyDataSetChanged();
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(final Void... params) {
+                cache.setPersonalNote(note);
+                cache.parseWaypointsFromNote();
+                DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(final Void v) {
+                notifyDataSetChanged();
+            }
+        }.execute();
     }
 
     private static void setPersonalNote(final TextView personalNoteView, final String personalNote) {
