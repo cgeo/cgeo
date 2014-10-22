@@ -80,6 +80,7 @@
   <string name="log_clear">Išvalyti</string>
   <string name="log_post_not_possible">Įkeliamas įrašo puslapis…</string>
   <string name="log_add">Pridėti</string>
+  <string name="log_repeat">Pakartoti paskutinį įrašą</string>
   <string name="log_no_rating">Nėra reitingo</string>
   <string name="log_stars_1_description">Prasta</string>
   <string name="log_stars_15_description">Pakankamai prasta</string>
@@ -299,6 +300,7 @@
   <string name="caches_filter_popularity_ratio">Kaip mėgiamos [%]</string>
   <string name="caches_removing_from_history">Pašalinama iš Istorijos…</string>
   <string name="caches_clear_offlinelogs">Išvalyti išsaugotus įrašus</string>
+  <string name="caches_clear_offlinelogs_message">Ar norite išvalyti išsaugotus įrašus?</string>
   <string name="caches_clear_offlinelogs_progress">Išvalomi išsaugoti įrašai</string>
   <string name="list_menu_create">Sukurti naują sąrašą</string>
   <string name="list_menu_drop">Išmesti dabartinį sąrašą</string>
@@ -752,6 +754,7 @@
   <string name="search_clear_history">Išvalyti istoriją</string>
   <string name="search_history_cleared">Istorija išvalyta</string>
   <string name="waypoint_coordinate_formats_plain">Paprastas</string>
+  <string name="from_clipboard">Iš mainų srities</string>
   <string name="visit_tweet">Skelbti radybas Twitter paskytoje</string>
   <string name="map_map">Išsaugotos slėptuvės</string>
   <string name="map_live">Slėptuvės iš interneto</string>
@@ -856,6 +859,7 @@
   <string name="helper_contacts_description">Leidžia tiesiai iš įrašo atidaryti kontakto kortelę (iš jūsų adresų knygos), kad galėtumėte susisiekti su draugais paprašyti pagalbos.</string>
   <string name="helper_sendtocgeo_description">Send to c:geo yra <strong>jūsų kompiuterio</strong> naršyklės priedas . Kai naršote geocaching.com, jūs galite siųsti slėptuves į savo išmanųjį telefoną tiesiog naršyklės viduje paspausdami mygtuką.</string>
   <string name="helper_locus_title">Locus</string>
+  <string name="helper_locus_description">Navigacijos programa Jūsų telefonui. Žiūrėkite išsaugotus topo žemėlapius, įrašykite savo maršrutą, ieškokite slėptuves, naudokite balso komandas ir dar daugiau.</string>
   <string name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
   <string name="helper_gpsstatus_description">Kartu su c:geo galite naudoti šioje programoje esantį radarą. Ji taip pat siūlo daug kitos su GPS susijusios informacijos.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
@@ -1162,6 +1166,7 @@
     <item quantity="few">%s mėgiamos</item>
     <item quantity="other">%s mėgiamų</item>
   </plurals>
+  <string name="more_than_percent_favorite_points">&gt; %d%% megstami</string>
   <string name="cgeo_shortcut">c:geo nuoroda</string>
   <string name="create_shortcut">Sukurti nuorodą</string>
   <string name="send">Siųsti</string>
