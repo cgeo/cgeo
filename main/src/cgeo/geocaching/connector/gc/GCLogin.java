@@ -76,6 +76,11 @@ public class GCLogin extends AbstractLogin {
         private static final GCLogin INSTANCE = new GCLogin();
     }
 
+    private static StatusCode resetGcCustomDate(final StatusCode statusCode) {
+        Settings.setGcCustomDate("MM/dd/yyyy");
+        return statusCode;
+    }
+
     @Override
     protected StatusCode login(boolean retry) {
         final ImmutablePair<String, String> credentials = Settings.getGcCredentials();
@@ -85,7 +90,7 @@ public class GCLogin extends AbstractLogin {
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
             clearLoginInfo();
             Log.e("Login.login: No login information stored");
-            return StatusCode.NO_LOGIN_INFO_STORED;
+            return resetGcCustomDate(StatusCode.NO_LOGIN_INFO_STORED);
         }
 
         setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
@@ -146,12 +151,12 @@ public class GCLogin extends AbstractLogin {
 
         if (loginData.contains("Your username/password combination does not match.")) {
             Log.i("Failed to log in Geocaching.com as " + username + " because of wrong username/password");
-            return StatusCode.WRONG_LOGIN_DATA; // wrong login
+            return resetGcCustomDate(StatusCode.WRONG_LOGIN_DATA); // wrong login
         }
 
         if (loginData.contains("You must validate your account before you can log in.")) {
             Log.i("Failed to log in Geocaching.com as " + username + " because account needs to be validated first");
-            return StatusCode.UNVALIDATED_ACCOUNT;
+            return resetGcCustomDate(StatusCode.UNVALIDATED_ACCOUNT);
         }
 
         Log.i("Failed to log in Geocaching.com as " + username + " for some unknown reason");
@@ -160,7 +165,7 @@ public class GCLogin extends AbstractLogin {
             return login(false);
         }
 
-        return StatusCode.UNKNOWN_ERROR; // can't login
+        return resetGcCustomDate(StatusCode.UNKNOWN_ERROR); // can't login
     }
 
     public StatusCode logout() {
