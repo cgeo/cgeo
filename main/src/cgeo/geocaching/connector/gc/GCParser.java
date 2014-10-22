@@ -1734,6 +1734,7 @@ public abstract class GCParser {
                             date = GCLogin.parseGcCustomDate(entry.get("Visited").asText()).getTime();
                         } catch (ParseException | NullPointerException e) {
                             Log.e("GCParser.loadLogsFromDetails: failed to parse log date", e);
+                            continue;
                         }
 
                         // TODO: we should update our log data structure to be able to record
