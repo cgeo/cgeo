@@ -778,7 +778,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 deletion.add(cache);
             }
         }
-        new DropDetailsTask().execute(deletion.toArray(new Geocache[deletion.size()]));
+        new DropDetailsTask(0).execute(deletion.toArray(new Geocache[deletion.size()]));
     }
 
     private void clearOfflineLogs() {
@@ -1175,7 +1175,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             @Override
             public void onClick(final DialogInterface dialog, final int id) {
                 final List<Geocache> selected = adapter.getCheckedOrAllCaches();
-                new DropDetailsTask().execute(selected.toArray(new Geocache[selected.size()]));
+                final int lastListPosition = CacheListActivity.this.getListView().getFirstVisiblePosition();
+                new DropDetailsTask(lastListPosition).execute(selected.toArray(new Geocache[selected.size()]));
                 dialog.cancel();
             }
         });
@@ -1294,9 +1295,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private class DropDetailsTask extends AsyncTaskWithProgress<Geocache, Void> {
+        private final int lastListPosition;
 
-        public DropDetailsTask() {
+        public DropDetailsTask(final int lastListPosition) {
             super(CacheListActivity.this, null, res.getString(R.string.caches_remove_progress), true);
+            this.lastListPosition = lastListPosition;
         }
 
         @Override
@@ -1310,6 +1313,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             adapter.setSelectMode(false);
             refreshCurrentList();
             replaceCacheListFromSearch();
+            CacheListActivity.this.getListView().setSelection(lastListPosition);
         }
 
     }
