@@ -18,6 +18,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -159,25 +160,34 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
 
     public void saveImageInfo(final boolean saveInfo) {
         if (saveInfo) {
-            final String filename = writeScaledImage(imageUri.getPath());
-            if (filename != null) {
-                imageUri = Uri.parse(filename);
-                final Intent intent = new Intent();
-                syncEditTexts();
-                intent.putExtra(Intents.EXTRA_CAPTION, imageCaption);
-                intent.putExtra(Intents.EXTRA_DESCRIPTION, imageDescription);
-                intent.putExtra(Intents.EXTRA_URI_AS_STRING, imageUri.toString());
-                intent.putExtra(Intents.EXTRA_SCALE, scaleChoiceIndex);
-                setResult(RESULT_OK, intent);
-            } else {
-                showToast(res.getString(R.string.err_select_logimage_failed));
-                setResult(RESULT_CANCELED);
-            }
+            new AsyncTask<Void, Void, String>() {
+                @Override
+                protected String doInBackground(final Void... params) {
+                    return writeScaledImage(imageUri.getPath());
+                }
+
+                @Override
+                protected void onPostExecute(final String filename) {
+                    if (filename != null) {
+                        imageUri = Uri.parse(filename);
+                        final Intent intent = new Intent();
+                        syncEditTexts();
+                        intent.putExtra(Intents.EXTRA_CAPTION, imageCaption);
+                        intent.putExtra(Intents.EXTRA_DESCRIPTION, imageDescription);
+                        intent.putExtra(Intents.EXTRA_URI_AS_STRING, imageUri.toString());
+                        intent.putExtra(Intents.EXTRA_SCALE, scaleChoiceIndex);
+                        setResult(RESULT_OK, intent);
+                    } else {
+                        showToast(res.getString(R.string.err_select_logimage_failed));
+                        setResult(RESULT_CANCELED);
+                    }
+                    finish();
+                }
+            }.execute();
         } else {
             setResult(RESULT_CANCELED);
+            finish();
         }
-
-        finish();
     }
 
     private void syncEditTexts() {
@@ -309,8 +319,17 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
             return;
         }
 
-        final Bitmap bitmap = ImageUtils.readAndScaleImageToFitDisplay(imageUri.getPath());
-        imagePreview.setImageBitmap(bitmap);
-        imagePreview.setVisibility(View.VISIBLE);
+        new AsyncTask<Void, Void, Bitmap>() {
+            @Override
+            protected Bitmap doInBackground(final Void... params) {
+                return ImageUtils.readAndScaleImageToFitDisplay(imageUri.getPath());
+            }
+
+            @Override
+            protected void onPostExecute(final Bitmap bitmap) {
+                imagePreview.setImageBitmap(bitmap);
+                imagePreview.setVisibility(View.VISIBLE);
+            }
+        }.execute();
     }
 }
