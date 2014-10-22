@@ -327,10 +327,6 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         // login
         final StatusCode status = GCLogin.getInstance().login();
 
-        if (status == StatusCode.NO_ERROR) {
-            GCLogin.detectGcCustomDate();
-        }
-
         if (CgeoApplication.getInstance().showLoginToast && handler != null) {
             handler.sendMessage(handler.obtainMessage(0, status));
             CgeoApplication.getInstance().showLoginToast = false;

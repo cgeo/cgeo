@@ -110,6 +110,7 @@ public class GCLogin extends AbstractLogin {
             if (switchToEnglish(loginData) && retry) {
                 return login(false);
             }
+            detectGcCustomDate();
             return StatusCode.NO_ERROR; // logged in
         }
 
@@ -146,6 +147,7 @@ public class GCLogin extends AbstractLogin {
             }
             Log.i("Successfully logged in Geocaching.com as " + username + " (" + Settings.getGCMemberStatus() + ')');
             Settings.setCookieStore(Cookies.dumpCookieStore());
+            detectGcCustomDate();
             return StatusCode.NO_ERROR; // logged in
         }
 
@@ -289,7 +291,7 @@ public class GCLogin extends AbstractLogin {
     /**
      * Detect user date settings on geocaching.com
      */
-    public static void detectGcCustomDate() {
+    private static void detectGcCustomDate() {
 
         final String result = Network.getResponseData(Network.getRequest("http://www.geocaching.com/account/ManagePreferences.aspx"));
 
