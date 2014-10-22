@@ -1952,7 +1952,6 @@ public abstract class GCParser {
 
         final String uriPrefix = "http://www.geocaching.com/seek/cache_details.aspx/";
         final HttpResponse response = Network.postJsonRequest(uriPrefix + uriSuffix, jo);
-        Log.i("Sending to " + uriPrefix + uriSuffix + " :" + jo.toString());
 
         if (response != null && response.getStatusLine().getStatusCode() == 200) {
             Log.i("GCParser.editModifiedCoordinates - edited on GC.com");
@@ -1976,7 +1975,6 @@ public abstract class GCParser {
 
         final String uriPrefix = "http://www.geocaching.com/seek/cache_details.aspx/";
         final HttpResponse response = Network.postJsonRequest(uriPrefix + uriSuffix, jo);
-        Log.i("Sending to " + uriPrefix + uriSuffix + " :" + jo.toString());
 
         if (response != null && response.getStatusLine().getStatusCode() == 200) {
             Log.i("GCParser.uploadPersonalNote - uploaded to GC.com");
