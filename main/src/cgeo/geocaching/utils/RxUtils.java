@@ -8,9 +8,11 @@ import rx.Scheduler.Worker;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
+import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.observables.BlockingObservable;
 import rx.schedulers.Schedulers;
+import rx.subjects.PublishSubject;
 import rx.subscriptions.Subscriptions;
 
 import android.os.Handler;
@@ -62,7 +64,7 @@ public class RxUtils {
         final AtomicInteger counter = new AtomicInteger(0);
         final long stopDelay;
         final TimeUnit stopDelayUnit;
-        protected Subscriber<? super T> subscriber;
+        final protected PublishSubject<T> subject = PublishSubject.create();
 
         public LooperCallbacks(final long stopDelay, final TimeUnit stopDelayUnit) {
             this.stopDelay = stopDelay;
@@ -75,7 +77,22 @@ public class RxUtils {
 
         @Override
         final public void call(final Subscriber<? super T> subscriber) {
-            this.subscriber = subscriber;
+            subscriber.add(subject.subscribe(new Action1<T>() {
+                @Override
+                public void call(final T data) {
+                    subscriber.onNext(data);
+                }
+            }, new Action1<Throwable>() {
+                @Override
+                public void call(final Throwable throwable) {
+                    subscriber.onError(throwable);
+                }
+            }, new Action0() {
+                @Override
+                public void call() {
+                    subscriber.onCompleted();
+                }
+            }));
             looperCallbacksWorker.schedule(new Action0() {
                 @Override
                 public void call() {
