@@ -20,6 +20,7 @@
         android:id="@+id/menu_pocket_queries"
         android:icon="@drawable/ic_menu_account_list"
         android:title="@string/menu_pocket_queries"
+        android:visible="false"
         app:showAsAction="ifRoom">
     </item>
     <item
@@ -38,6 +39,7 @@
         android:id="@+id/menu_scan"
         android:icon="@drawable/ic_menu_barcode"
         android:title="@string/menu_scan_geo"
+        android:visible="false"
         app:showAsAction="ifRoom">
     </item>
     <item

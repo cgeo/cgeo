@@ -73,6 +73,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 
         WHERE_YOU_GO(new WhereYouGoApp(), 16, R.string.pref_navigation_menu_where_you_go),
         PEBBLE(new PebbleApp(), 17, R.string.pref_navigation_menu_pebble),
+        ANDROID_WEAR(new AndroidWearApp(), 18, R.string.pref_navigation_menu_android_wear),
         MAPSWITHME(new MapsWithMeApp(), 22, R.string.pref_navigation_menu_mapswithme);
 
         NavigationAppsEnum(final App app, final int id, final int preferenceKey) {

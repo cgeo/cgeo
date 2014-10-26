@@ -29,7 +29,6 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
         FINDER,
         OWNER,
         MAP,
-        REMOVE_FROM_HISTORY,
         NEXT_PAGE;
 
         public int getLoaderId() {
@@ -43,9 +42,9 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
     private String recaptchaText = null;
     private SearchResult search;
     private boolean loading;
-    private CountDownLatch latch = new CountDownLatch(1);
+    private final CountDownLatch latch = new CountDownLatch(1);
 
-    public AbstractSearchLoader(Context context) {
+    public AbstractSearchLoader(final Context context) {
         super(context);
     }
 
@@ -65,7 +64,7 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
                 // Unless we make a new Search the Loader framework won't deliver results. It does't do equals only identity
                 search = new SearchResult(search);
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Log.e("Error in Loader ", e);
         }
         loading = false;
@@ -95,13 +94,13 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
     public void waitForUser() {
         try {
             latch.await();
-        } catch (InterruptedException ignored) {
+        } catch (final InterruptedException ignored) {
             Log.w("searchThread is not waiting for user…");
         }
     }
 
     @Override
-    public void setKey(String key) {
+    public void setKey(final String key) {
         recaptchaKey = key;
     }
 
@@ -125,7 +124,7 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
     }
 
     @Override
-    public void setText(String text) {
+    public void setText(final String text) {
         recaptchaText = text;
         latch.countDown();
     }

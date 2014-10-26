@@ -50,7 +50,7 @@ public class GpsStatusProvider extends LooperCallbacks<Status> {
     @Override
     protected void onStart() {
         Log.d("GpsStatusProvider: starting the GPS status listener");
-        subscriber.onNext(NO_GPS);
+        subject.onNext(NO_GPS);
         geoManager.addGpsStatusListener(gpsStatusListener);
     }
 
@@ -92,7 +92,7 @@ public class GpsStatusProvider extends LooperCallbacks<Status> {
                     throw new IllegalStateException();
             }
 
-            subscriber.onNext(latest);
+            subject.onNext(latest);
         }
     }
 

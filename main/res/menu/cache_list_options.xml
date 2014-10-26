@@ -108,15 +108,18 @@
     </item>
     <item
         android:id="@+id/menu_delete_events"
-        android:title="@string/caches_delete_events">
+        android:title="@string/caches_delete_events"
+        android:visible="false">
     </item>
     <item
         android:id="@+id/menu_clear_offline_logs"
-        android:title="@string/caches_clear_offlinelogs">
+        android:title="@string/caches_clear_offlinelogs"
+        android:visible="false">
     </item>
     <item
         android:id="@+id/menu_remove_from_history"
-        android:title="@string/cache_clear_history">
+        android:title="@string/cache_clear_history"
+        android:visible="false">
     </item>
 
 </menu>

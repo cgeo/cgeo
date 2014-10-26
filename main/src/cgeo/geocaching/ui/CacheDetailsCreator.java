@@ -16,7 +16,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.Resources;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 // TODO The suppression of this lint finding is bad. But to fix it, someone needs to rework the layout of the cache
@@ -199,20 +197,12 @@ public final class CacheDetailsCreator {
     }
 
     public TextView addHiddenDate(final @NonNull Geocache cache) {
-        final Date hiddenDate = cache.getHiddenDate();
-        if (hiddenDate == null) {
+        final String dateString = Formatter.formatHiddenDate(cache);
+        if (StringUtils.isEmpty(dateString)) {
             return null;
         }
-        final long time = hiddenDate.getTime();
-        if (time > 0) {
-            String dateString = Formatter.formatFullDate(time);
-            if (cache.isEventCache()) {
-                dateString = DateUtils.formatDateTime(CgeoApplication.getInstance().getBaseContext(), time, DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + dateString;
-            }
-            final TextView view = add(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden, dateString);
-            view.setId(R.id.date);
-            return view;
-        }
-        return null;
+        final TextView view = add(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden, dateString);
+        view.setId(R.id.date);
+        return view;
     }
 }

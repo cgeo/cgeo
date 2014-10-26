@@ -12,13 +12,13 @@ import cgeo.geocaching.utils.TextUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.core.IOUtils;
 
+import junit.framework.Assert;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
-
-import junit.framework.Assert;
 
 public abstract class MockedCache implements ICache {
 
@@ -44,7 +44,7 @@ public abstract class MockedCache implements ICache {
     }
 
     public static String getDateFormat() {
-        return "dd/MM/yyyy";
+        return "yyyy-MM-dd";
     }
 
     /*

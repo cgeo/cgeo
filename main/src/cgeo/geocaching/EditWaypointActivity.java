@@ -115,8 +115,17 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                         }
                         Dialogs.moveCursorToEnd(note);
                     }
-                    final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_ONLY);
-                    setCoordsModificationVisibility(ConnectorFactory.getConnector(geocode), cache);
+                    new AsyncTask<Void, Void, Geocache>() {
+                        @Override
+                        protected Geocache doInBackground(final Void... params) {
+                            return DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_ONLY);
+                        }
+
+                        @Override
+                        protected void onPostExecute(final Geocache cache) {
+                            setCoordsModificationVisibility(ConnectorFactory.getConnector(geocode), cache);
+                        }
+                    }.execute();
                 }
 
                 if (own) {
@@ -294,10 +303,20 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             } catch (final Geopoint.ParseException ignored) {
                 // button text is blank when creating new waypoint
             }
-            final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
-            final CoordinatesInputDialog coordsDialog = CoordinatesInputDialog.getInstance(cache, gp, app.currentGeo());
-            coordsDialog.setCancelable(true);
-            coordsDialog.show(getSupportFragmentManager(),"wpeditdialog");
+            final Geopoint geopoint = gp;
+            new AsyncTask<Void, Void, Geocache>() {
+                @Override
+                protected Geocache doInBackground(final Void... params) {
+                    return DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
+                }
+
+                @Override
+                protected void onPostExecute(final Geocache cache) {
+                    final CoordinatesInputDialog coordsDialog = CoordinatesInputDialog.getInstance(cache, geopoint, app.currentGeo());
+                    coordsDialog.setCancelable(true);
+                    coordsDialog.show(getSupportFragmentManager(), "wpeditdialog");
+                }
+            }.execute();
         }
 
 

@@ -80,6 +80,7 @@
   <string name="log_clear">Wissen</string>
   <string name="log_post_not_possible">Laden Log Pagina…</string>
   <string name="log_add">Toevoegen</string>
+  <string name="log_repeat">Herhaal laatste log</string>
   <string name="log_no_rating">Geen beoordeling</string>
   <string name="log_stars_1_description">Slecht</string>
   <string name="log_stars_15_description">Redelijk slecht</string>
@@ -298,6 +299,7 @@
   <string name="caches_filter_popularity_ratio">Favorieten [%]</string>
   <string name="caches_removing_from_history">Verwijderen uit geschiedenis…</string>
   <string name="caches_clear_offlinelogs">Verwijderen offline logs</string>
+  <string name="caches_clear_offlinelogs_message">Wil je de offline logs wissen?</string>
   <string name="caches_clear_offlinelogs_progress">Offline logs worden verwijderd</string>
   <string name="list_menu_create">Maak nieuwe lijst</string>
   <string name="list_menu_drop">Verwijder huidige lijst</string>
@@ -657,6 +659,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
+  <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Log opgeslagen</string>
   <string name="cache_status_found">Gevonden</string>
@@ -766,6 +769,7 @@
   <string name="search_clear_history">Maak geschiedenis leeg</string>
   <string name="search_history_cleared">Geschiedenis leeggemaakt</string>
   <string name="waypoint_coordinate_formats_plain">Plat</string>
+  <string name="from_clipboard">Van klembord</string>
   <string name="visit_tweet">Post deze vondst op Twitter</string>
   <string name="map_map">Kaart</string>
   <string name="map_live">Live kaart</string>
@@ -870,7 +874,7 @@
   <string name="helper_contacts_description">Maakt het mogelijk een contactpersoon (uit je adresboek) te openen rechtstreeks vanuit een log, zodat je vrienden makkelijker om hulp kunt vragen.</string>
   <string name="helper_sendtocgeo_description">Verzenden naar c:geo is een browserextensie <strong>voor uw PC</strong>. Tijdens het browsen op geocaching.com, kunt u caches verzenden naar uw smartphone met een klik direct in de browser.</string>
   <string name="helper_locus_title">Locus</string>
-  <string name="helper_locus_description">Simpele bruikbare applicatie om online kaarten weer te geven en deze voor offline gebruik te downloaden (alleen rasterkarten). Ook ondersteuning voor track recording, poi afhandeling en vele andere handige functies.</string>
+  <string name="helper_locus_description">Outdoor navigatie app voor uw telefoon of Tablet. Topo kaarten offline bekijken, uw route vastleggen, geocaches zoeken, gebruik een stem gids en meer.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">De radar van deze applicatie kan gebruikt worden samen met c:geo. Het bied ook vele andere GPS gerelateerde informatie.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
@@ -1173,6 +1177,7 @@
     <item quantity="one">%s favoriet</item>
     <item quantity="other">%s favorieten</item>
   </plurals>
+  <string name="more_than_percent_favorite_points">&gt; %d %% favorieten</string>
   <string name="cgeo_shortcut">c:geo snelkoppeling</string>
   <string name="create_shortcut">Maak snelkoppeling</string>
   <string name="send">Verzenden</string>

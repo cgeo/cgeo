@@ -3,4 +3,5 @@
 <resources>
   <string name="app_name">c:geo - contactos (complemento)</string>
   <string name="contact_not_found">El contacto con alias %s no se ha encontrado. Primero añádelo a tu aplicación de contactos.</string>
+  <string name="multiple_matches">Múltiples coincidencias</string>
 </resources>

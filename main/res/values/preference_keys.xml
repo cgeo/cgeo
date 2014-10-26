@@ -142,6 +142,7 @@
     <string name="pref_navigation_menu_google_maps_directions">navigationMapsDirections</string>
     <string name="pref_navigation_menu_where_you_go">navigationWhereYouGo</string>
     <string name="pref_navigation_menu_pebble">navigationPebble</string>
+    <string name="pref_navigation_menu_android_wear">navigationAndroidWear</string>
     <string name="pref_navigation_menu_mapswithme">navigationMapsWithMe</string>
     <string name="pref_ocpl_tokensecret">ocpl_tokensecret</string>
     <string name="pref_ocpl_tokenpublic">ocpl_tokenpublic</string>
@@ -182,4 +183,6 @@
     <string name="pref_changelog_last_checksum">changelog_last_checksum</string>
     <string name="pref_caches_history">caches_history</string>
     <string name="pref_hardware_acceleration">hardware_acceleration2</string>
+    <string name="pref_last_cache_log">last_cache_log</string>
+    <string name="pref_last_trackable_log">last_trackable_log</string>
 </resources>

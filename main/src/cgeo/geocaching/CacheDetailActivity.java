@@ -84,6 +84,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -409,17 +410,43 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return true;
             case R.id.menu_waypoint_duplicate:
                 ensureSaved();
-                if (cache.duplicateWaypoint(selectedWaypoint)) {
-                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                    notifyDataSetChanged();
-                }
+                new AsyncTask<Void, Void, Boolean>() {
+                    @Override
+                    protected Boolean doInBackground(final Void... params) {
+                        if (cache.duplicateWaypoint(selectedWaypoint)) {
+                            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                            return true;
+                        }
+                        return false;
+                    }
+
+                    @Override
+                    protected void onPostExecute(final Boolean result) {
+                        if (result) {
+                            notifyDataSetChanged();
+                        }
+                    }
+                }.execute();
                 return true;
             case R.id.menu_waypoint_delete:
                 ensureSaved();
-                if (cache.deleteWaypoint(selectedWaypoint)) {
-                    DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                    notifyDataSetChanged();
-                }
+                new AsyncTask<Void, Void, Boolean>() {
+                    @Override
+                    protected Boolean doInBackground(final Void... params) {
+                        if (cache.deleteWaypoint(selectedWaypoint)) {
+                            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                            return true;
+                        }
+                        return false;
+                    }
+
+                    @Override
+                    protected void onPostExecute(final Boolean result) {
+                        if (result) {
+                            notifyDataSetChanged();
+                        }
+                    }
+                }.execute();
                 return true;
             case R.id.menu_waypoint_navigate_default:
                 if (selectedWaypoint != null) {
@@ -1660,7 +1687,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (!cache.isOffline()) {
             showToast(getString(R.string.info_cache_saved));
             cache.setListId(StoredList.STANDARD_LIST_ID);
-            DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+            new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected Void doInBackground(final Void... params) {
+                    DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+                    return null;
+                }
+            }.execute();
         }
     }
 
@@ -1899,29 +1932,25 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                                 buildDetailsContextMenu(actionMode, menu, itemTitle, true);
                                 return true;
                             case R.id.shortdesc:
-                                assert view instanceof TextView;
-                                clickedItemText = ((TextView) view).getText();
+                                clickedItemText = cache.getShortDescription();
                                 buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_description), false);
                                 return true;
                             case R.id.longdesc:
-                                assert view instanceof TextView;
                                 // combine short and long description
                                 final String shortDesc = cache.getShortDescription();
                                 if (StringUtils.isBlank(shortDesc)) {
-                                    clickedItemText = ((TextView) view).getText();
+                                    clickedItemText = cache.getDescription();
                                 } else {
-                                    clickedItemText = shortDesc + "\n\n" + ((TextView) view).getText();
+                                    clickedItemText = shortDesc + "\n\n" + cache.getDescription();
                                 }
                                 buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_description), false);
                                 return true;
                             case R.id.personalnote:
-                                assert view instanceof TextView;
-                                clickedItemText = ((TextView) view).getText();
+                                clickedItemText = cache.getPersonalNote();
                                 buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_personal_note), true);
                                 return true;
                             case R.id.hint:
-                                assert view instanceof TextView;
-                                clickedItemText = ((TextView) view).getText();
+                                clickedItemText = cache.getHint();
                                 buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_hint), false);
                                 return true;
                             case R.id.log:
@@ -1930,8 +1959,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                                 buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_logs), false);
                                 return true;
                             case R.id.date: // event date
-                                assert view instanceof TextView;
-                                clickedItemText = ((TextView) view).getText();
+                                clickedItemText = Formatter.formatHiddenDate(cache);
                                 buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_event), true);
                                 menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
                                 return true;
@@ -2315,12 +2343,22 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public void onFinishEditNoteDialog(final String note) {
-        cache.setPersonalNote(note);
-        cache.parseWaypointsFromNote();
         final TextView personalNoteView = ButterKnife.findById(this, R.id.personalnote);
         setPersonalNote(personalNoteView, note);
-        DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-        notifyDataSetChanged();
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(final Void... params) {
+                cache.setPersonalNote(note);
+                cache.parseWaypointsFromNote();
+                DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(final Void v) {
+                notifyDataSetChanged();
+            }
+        }.execute();
     }
 
     private static void setPersonalNote(final TextView personalNoteView, final String personalNote) {

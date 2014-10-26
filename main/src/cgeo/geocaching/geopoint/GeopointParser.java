@@ -1,9 +1,9 @@
 package cgeo.geocaching.geopoint;
 
-
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import java.util.regex.Pattern;
 
@@ -55,7 +55,7 @@ class GeopointParser {
      * @throws Geopoint.ParseException
      *             if lat or lon could not be parsed
      */
-    public static Geopoint parse(final String text) {
+    public static Geopoint parse(@NonNull final String text) {
         final ResultWrapper latitudeWrapper = parseHelper(text, LatLon.LAT);
         // cut away the latitude part when parsing the longitude
         final ResultWrapper longitudeWrapper = parseHelper(text.substring(latitudeWrapper.matcherPos + latitudeWrapper.matcherLength), LatLon.LON);

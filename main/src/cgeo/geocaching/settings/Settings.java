@@ -6,7 +6,6 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
-import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LogType;
@@ -50,6 +49,10 @@ import java.util.Locale;
  */
 public class Settings {
 
+    /**
+     * On opening a map, we limit the _initial_ zoom. The user can still zoom out afterwards.
+     */
+    private static final int INITIAL_MAP_ZOOM_LIMIT = 16;
     private static final char HISTORY_SEPARATOR = ',';
     public static final int SHOW_WP_THRESHOLD_DEFAULT = 10;
     public static final int SHOW_WP_THRESHOLD_MAX = 50;
@@ -529,7 +532,6 @@ public class Settings {
 
     /**
      * @return User selected date format on GC.com
-     * @see GCLogin#GC_CUSTOM_DATE_FORMATS
      */
     public static String getGcCustomDate() {
         return getString(R.string.pref_gccustomdate, null);
@@ -653,7 +655,7 @@ public class Settings {
      * @return zoom used for the (live) map
      */
     private static int getMapZoom() {
-        return getInt(R.string.pref_lastmapzoom, 14);
+        return Math.max(getInt(R.string.pref_lastmapzoom, 14), INITIAL_MAP_ZOOM_LIMIT);
     }
 
     private static void setMapZoom(final int mapZoomLevel) {
@@ -664,7 +666,7 @@ public class Settings {
      * @return zoom used for the map of a single cache
      */
     private static int getCacheZoom() {
-        return getInt(R.string.pref_cache_zoom, 14);
+        return Math.max(getInt(R.string.pref_cache_zoom, 14), INITIAL_MAP_ZOOM_LIMIT);
     }
 
     private static void setCacheZoom(final int zoomLevel) {
@@ -1112,5 +1114,21 @@ public class Settings {
 
     public static boolean setUseHardwareAcceleration(final boolean useHardwareAcceleration) {
         return putBoolean(R.string.pref_hardware_acceleration, useHardwareAcceleration);
+    }
+
+    public static String getLastCacheLog() {
+        return getString(R.string.pref_last_cache_log, StringUtils.EMPTY);
+    }
+
+    public static void setLastCacheLog(final String log) {
+        putString(R.string.pref_last_cache_log, log);
+    }
+
+    public static String getLastTrackableLog() {
+        return getString(R.string.pref_last_trackable_log, StringUtils.EMPTY);
+    }
+
+    public static void setLastTrackableLog(final String log) {
+        putString(R.string.pref_last_trackable_log, log);
     }
 }

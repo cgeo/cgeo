@@ -70,7 +70,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.EnumSet;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -1064,7 +1063,7 @@ public abstract class GCParser {
                 "__EVENTARGUMENT", "",
                 "__LASTFOCUS", "",
                 "ctl00$ContentBody$LogBookPanel1$ddLogType", Integer.toString(logType.id),
-                "ctl00$ContentBody$LogBookPanel1$uxDateVisited", GCLogin.getCustomGcDateFormat().format(new GregorianCalendar(year, month - 1, day).getTime()),
+                "ctl00$ContentBody$LogBookPanel1$uxDateVisited", GCLogin.formatGcCustomDate(year, month, day),
                 "ctl00$ContentBody$LogBookPanel1$uxDateVisited$Month", Integer.toString(month),
                 "ctl00$ContentBody$LogBookPanel1$uxDateVisited$Day", Integer.toString(day),
                 "ctl00$ContentBody$LogBookPanel1$uxDateVisited$Year", Integer.toString(year),
@@ -1260,7 +1259,7 @@ public abstract class GCParser {
             params.put("ctl00$ContentBody$LogBookPanel1$uxDateVisited", "");
         } else {
             params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged", Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year));
-            params.put("ctl00$ContentBody$LogBookPanel1$uxDateVisited", GCLogin.getCustomGcDateFormat().format(new GregorianCalendar(year, month - 1, day).getTime()));
+            params.put("ctl00$ContentBody$LogBookPanel1$uxDateVisited", GCLogin.formatGcCustomDate(year, month, day));
         }
         params.put(
                 "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day", Integer.toString(day),
@@ -1734,6 +1733,7 @@ public abstract class GCParser {
                             date = GCLogin.parseGcCustomDate(entry.get("Visited").asText()).getTime();
                         } catch (ParseException | NullPointerException e) {
                             Log.e("GCParser.loadLogsFromDetails: failed to parse log date", e);
+                            continue;
                         }
 
                         // TODO: we should update our log data structure to be able to record
@@ -1952,7 +1952,6 @@ public abstract class GCParser {
 
         final String uriPrefix = "http://www.geocaching.com/seek/cache_details.aspx/";
         final HttpResponse response = Network.postJsonRequest(uriPrefix + uriSuffix, jo);
-        Log.i("Sending to " + uriPrefix + uriSuffix + " :" + jo.toString());
 
         if (response != null && response.getStatusLine().getStatusCode() == 200) {
             Log.i("GCParser.editModifiedCoordinates - edited on GC.com");
@@ -1976,7 +1975,6 @@ public abstract class GCParser {
 
         final String uriPrefix = "http://www.geocaching.com/seek/cache_details.aspx/";
         final HttpResponse response = Network.postJsonRequest(uriPrefix + uriSuffix, jo);
-        Log.i("Sending to " + uriPrefix + uriSuffix + " :" + jo.toString());
 
         if (response != null && response.getStatusLine().getStatusCode() == 200) {
             Log.i("GCParser.uploadPersonalNote - uploaded to GC.com");

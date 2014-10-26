@@ -7,10 +7,12 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.Geopoint.ParseException;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.Settings.CoordInputFormatEnum;
+import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -171,6 +173,15 @@ public class CoordinatesInputDialog extends DialogFragment {
             buttonCache.setOnClickListener(new CacheListener());
         } else {
             buttonCache.setVisibility(View.GONE);
+        }
+
+        final Button buttonClipboard = ButterKnife.findById(v, R.id.clipboard);
+        try {
+            @SuppressWarnings("unused")
+            final Geopoint geopoint = new Geopoint(StringUtils.defaultString(ClipboardUtils.getText()));
+            buttonClipboard.setOnClickListener(new ClipboardListener());
+            buttonClipboard.setVisibility(View.VISIBLE);
+        } catch (final ParseException e) {
         }
 
         final Button buttonDone = ButterKnife.findById(v, R.id.done);
@@ -503,6 +514,17 @@ public class CoordinatesInputDialog extends DialogFragment {
         }
     }
 
+    private class ClipboardListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(final View v) {
+            try {
+                gp = new Geopoint(StringUtils.defaultString(ClipboardUtils.getText()));
+                updateGUI();
+            } catch (final ParseException e) {
+            }
+        }
+    }
 
     private class InputDoneListener implements View.OnClickListener {
 

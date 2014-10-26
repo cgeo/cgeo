@@ -23,6 +23,7 @@ import cgeo.geocaching.filter.FilterUserInterface;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.list.AbstractList;
+import cgeo.geocaching.list.ListNameMemento;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.loaders.AbstractSearchLoader;
@@ -36,7 +37,6 @@ import cgeo.geocaching.loaders.NextPageGeocacheListLoader;
 import cgeo.geocaching.loaders.OfflineGeocacheListLoader;
 import cgeo.geocaching.loaders.OwnerGeocacheListLoader;
 import cgeo.geocaching.loaders.PocketGeocacheListLoader;
-import cgeo.geocaching.loaders.RemoveFromHistoryLoader;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.Network;
@@ -83,6 +83,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -156,6 +157,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private ContextMenuInfo lastMenuInfo;
     private String contextMenuGeocode = "";
     private Subscription resumeSubscription;
+    private final ListNameMemento listNameMemento = new ListNameMemento();
 
     // FIXME: This method has mostly been replaced by the loaders. But it still contains a license agreement check.
     public void handleCachesLoaded() {
@@ -297,18 +299,27 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     progress.setMessage(res.getString(R.string.caches_downloading) + " " + res.getQuantityString(R.plurals.caches_eta_mins, minutesRemaining, minutesRemaining));
                 }
             } else {
-                if (search != null) {
-                    final Set<Geocache> cacheListTmp = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-                    if (CollectionUtils.isNotEmpty(cacheListTmp)) {
-                        cacheList.clear();
-                        cacheList.addAll(cacheListTmp);
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(final Void... params) {
+                        if (search != null) {
+                            final Set<Geocache> cacheListTmp = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+                            if (CollectionUtils.isNotEmpty(cacheListTmp)) {
+                                cacheList.clear();
+                                cacheList.addAll(cacheListTmp);
+                            }
+                        }
+                        return null;
                     }
-                }
 
-                setAdapterCurrentCoordinates(false);
+                    @Override
+                    protected void onPostExecute(final Void result) {
+                        setAdapterCurrentCoordinates(false);
 
-                showProgress(false);
-                progress.dismiss();
+                        showProgress(false);
+                        progress.dismiss();
+                    }
+                }.execute();
             }
         }
     };
@@ -374,7 +385,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     };
     private AbstractSearchLoader currentLoader;
-    private String newListName = StringUtils.EMPTY;
 
     public CacheListActivity() {
         super(true);
@@ -702,7 +712,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 invalidateOptionsMenuCompatible();
                 return false;
             case R.id.menu_create_list:
-                new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(), newListName);
+                new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(), listNameMemento.getTerm());
                 refreshSpinnerAdapter();
                 invalidateOptionsMenuCompatible();
                 return false;
@@ -778,7 +788,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 deletion.add(cache);
             }
         }
-        new DropDetailsTask().execute(deletion.toArray(new Geocache[deletion.size()]));
+        new DropDetailsTask(0).execute(deletion.toArray(new Geocache[deletion.size()]));
     }
 
     private void clearOfflineLogs() {
@@ -911,7 +921,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         adapter.setSelectMode(false);
                         refreshCurrentList();
                     }
-                }, true, listId, newListName);
+                }, true, listId, listNameMemento);
                 break;
             case R.id.menu_store_cache:
             case R.id.menu_refresh:
@@ -1087,7 +1097,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                             }
                             refreshStoredInternal(caches);
                         }
-                    }, true, StoredList.TEMPORARY_LIST.id, newListName);
+                    }, true, StoredList.TEMPORARY_LIST.id, listNameMemento);
         } else {
             if (type != CacheListType.OFFLINE) {
                 for (final Geocache geocache : caches) {
@@ -1140,9 +1150,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         for (int i = 0; i < geocodes.length; i++) {
             geocodes[i] = caches.get(i).getGeocode();
         }
-        final Bundle b = new Bundle();
-        b.putStringArray(Intents.EXTRA_CACHELIST, geocodes);
-        getSupportLoaderManager().initLoader(CacheListLoaderType.REMOVE_FROM_HISTORY.getLoaderId(), b, this);
+        DataStore.clearVisitDate(geocodes);
+        refreshCurrentList();
     }
 
     private void importWeb() {
@@ -1176,7 +1185,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             @Override
             public void onClick(final DialogInterface dialog, final int id) {
                 final List<Geocache> selected = adapter.getCheckedOrAllCaches();
-                new DropDetailsTask().execute(selected.toArray(new Geocache[selected.size()]));
+                final int lastListPosition = CacheListActivity.this.getListView().getFirstVisiblePosition();
+                new DropDetailsTask(lastListPosition).execute(selected.toArray(new Geocache[selected.size()]));
                 dialog.cancel();
             }
         });
@@ -1295,9 +1305,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private class DropDetailsTask extends AsyncTaskWithProgress<Geocache, Void> {
+        private final int lastListPosition;
 
-        public DropDetailsTask() {
+        public DropDetailsTask(final int lastListPosition) {
             super(CacheListActivity.this, null, res.getString(R.string.caches_remove_progress), true);
+            this.lastListPosition = lastListPosition;
         }
 
         @Override
@@ -1311,6 +1323,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             adapter.setSelectMode(false);
             refreshCurrentList();
             replaceCacheListFromSearch();
+            CacheListActivity.this.getListView().setSelection(lastListPosition);
         }
 
     }
@@ -1623,13 +1636,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 break;
             case KEYWORD:
                 final String keyword = extras.getString(Intents.EXTRA_KEYWORD);
-                rememberTerm(keyword);
+                title = listNameMemento.rememberTerm(keyword);
                 loader = new KeywordGeocacheListLoader(app, keyword);
                 break;
             case ADDRESS:
                 final String address = extras.getString(Intents.EXTRA_ADDRESS);
                 if (StringUtils.isNotBlank(address)) {
-                    rememberTerm(address);
+                    title = listNameMemento.rememberTerm(address);
                 } else {
                     title = coords.toString();
                 }
@@ -1642,12 +1655,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 break;
             case FINDER:
                 final String username = extras.getString(Intents.EXTRA_USERNAME);
-                rememberTerm(username);
+                title = listNameMemento.rememberTerm(username);
                 loader = new FinderGeocacheListLoader(app, username);
                 break;
             case OWNER:
                 final String ownerName = extras.getString(Intents.EXTRA_USERNAME);
-                rememberTerm(ownerName);
+                title = listNameMemento.rememberTerm(ownerName);
                 loader = new OwnerGeocacheListLoader(app, ownerName);
                 break;
             case MAP:
@@ -1656,10 +1669,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 search = (SearchResult) extras.get(Intents.EXTRA_SEARCH);
                 replaceCacheListFromSearch();
                 loadCachesHandler.sendMessage(Message.obtain());
-                break;
-            case REMOVE_FROM_HISTORY:
-                title = res.getString(R.string.caches_history);
-                loader = new RemoveFromHistoryLoader(app, extras.getStringArray(Intents.EXTRA_CACHELIST), coords);
                 break;
             case NEXT_PAGE:
                 loader = new NextPageGeocacheListLoader(app, search);
@@ -1678,13 +1687,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             loader.setRecaptchaHandler(new RecaptchaHandler(this, loader));
         }
         return loader;
-    }
-
-    private void rememberTerm(final String term) {
-        // set the title of the activity
-        title = term;
-        // and remember this term for potential use in list creation
-        newListName = term;
     }
 
     @Override

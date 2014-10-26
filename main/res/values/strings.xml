@@ -92,6 +92,7 @@
     <string name="log_clear">Clear</string>
     <string name="log_post_not_possible">Loading Log Page…</string>
     <string name="log_add">Add</string>
+    <string name="log_repeat">Repeat last log</string>
     <string name="log_no_rating">No rating</string>
     <string name="log_stars_1_description">Poor</string>
     <string name="log_stars_15_description">Fairly poor</string>
@@ -708,6 +709,7 @@
     <string name="cache_menu_oruxmaps">OruxMaps</string>
     <string name="cache_menu_navigon">Navigon</string>
     <string name="cache_menu_pebble">Pebble</string>
+    <string name="cache_menu_android_wear">Android Wear</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Saved Log</string>
     <string name="cache_status_found">Found</string>
@@ -834,7 +836,8 @@
     <string name="search_clear_history">Clear History</string>
     <string name="search_history_cleared">History cleared</string>
     <string name="waypoint_coordinate_formats_plain">Plain</string>
-
+    <string name="from_clipboard">From clipboard</string>
+    
     <!-- visit -->
     <string name="visit_tweet">Post this find to Twitter</string>
 

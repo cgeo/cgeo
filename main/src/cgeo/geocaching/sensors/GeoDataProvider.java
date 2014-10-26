@@ -45,7 +45,7 @@ public class GeoDataProvider extends LooperCallbacks<IGeoData> {
     public void onStart() {
         final IGeoData initialLocation = GeoData.getInitialLocation(context);
         if (initialLocation != null) {
-            subscriber.onNext(initialLocation);
+            subject.onNext(initialLocation);
         }
         Log.d("GeoDataProvider: starting the GPS and network listeners");
         try {
@@ -98,7 +98,7 @@ public class GeoDataProvider extends LooperCallbacks<IGeoData> {
     private void assign(final Location location) {
         // We do not necessarily get signalled when satellites go to 0/0.
         final IGeoData current = new GeoData(location);
-        subscriber.onNext(current);
+        subject.onNext(current);
     }
 
 }
