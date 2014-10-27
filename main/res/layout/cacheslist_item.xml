@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:cgeo="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/one_cache"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="?background_color" >
+    android:background="?background_color"
+    tools:context=".ui.CacheListAdapter" >
 
     <!-- selection mode checkbox -->
 
@@ -111,7 +112,7 @@
             android:minHeight="28px"
             android:minWidth="28px"
             android:visibility="gone"
-            cgeo:skin="?compass"
+            app:skin="?compass"
             tools:ignore="PxUsage" />
 
         <ImageView

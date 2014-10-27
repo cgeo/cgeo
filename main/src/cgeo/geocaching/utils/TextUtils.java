@@ -27,11 +27,11 @@ public final class TextUtils {
     }
 
     /**
-     * Searches for the pattern p in the data. If the pattern is not found defaultValue is returned
+     * Searches for the pattern pattern in the data. If the pattern is not found defaultValue is returned
      *
      * @param data
      *            Data to search in
-     * @param p
+     * @param pattern
      *            Pattern to search for
      * @param trim
      *            Set to true if the group found should be trim'ed
@@ -44,37 +44,38 @@ public final class TextUtils {
      * @return defaultValue or the n-th group if the pattern matches (trimmed if wanted)
      */
     @SuppressFBWarnings("DM_STRING_CTOR")
-    public static String getMatch(@Nullable final String data, final Pattern p, final boolean trim, final int group, final String defaultValue, final boolean last) {
+    public static String getMatch(@Nullable final String data, final Pattern pattern, final boolean trim, final int group, final String defaultValue, final boolean last) {
         if (data != null) {
-
-            String result = null;
-            final Matcher matcher = p.matcher(data);
-
+            final Matcher matcher = pattern.matcher(data);
             if (matcher.find()) {
-                result = matcher.group(group);
-            }
-            if (null != result) {
-                final Matcher remover = PATTERN_REMOVE_NONPRINTABLE.matcher(result);
-                result = remover.replaceAll(" ");
+                String result = matcher.group(group);
+                while (last && matcher.find()) {
+                    result = matcher.group(group);
+                }
 
-                return trim ? new String(result).trim() : new String(result);
-                // Java copies the whole page String, when matching with regular expressions
-                // later this would block the garbage collector, as we only need tiny parts of the page
-                // see http://developer.android.com/reference/java/lang/String.html#backing_array
-                // Thus the creating of a new String via String constructor is necessary here!!
+                if (result != null) {
+                    final Matcher remover = PATTERN_REMOVE_NONPRINTABLE.matcher(result);
+                    result = remover.replaceAll(" ");
 
-                // And BTW: You cannot even see that effect in the debugger, but must use a separate memory profiler!
+                    // Some versions of Java copy the whole page String, when matching with regular expressions
+                    // later this would block the garbage collector, as we only need tiny parts of the page
+                    // see http://developer.android.com/reference/java/lang/String.html#backing_array
+                    // Thus the creating of a new String via String constructor is voluntary here!!
+                    // And BTW: You cannot even see that effect in the debugger, but must use a separate memory profiler!
+                    return trim ? new String(result).trim() : new String(result);
+                }
             }
         }
+
         return defaultValue;
     }
 
     /**
-     * Searches for the pattern p in the data. If the pattern is not found defaultValue is returned
+     * Searches for the pattern pattern in the data. If the pattern is not found defaultValue is returned
      *
      * @param data
      *            Data to search in
-     * @param p
+     * @param pattern
      *            Pattern to search for
      * @param trim
      *            Set to true if the group found should be trim'ed
@@ -82,38 +83,35 @@ public final class TextUtils {
      *            Value to return if the pattern is not found
      * @return defaultValue or the first group if the pattern matches (trimmed if wanted)
      */
-    public static String getMatch(final String data, final Pattern p, final boolean trim, final String defaultValue) {
-        return TextUtils.getMatch(data, p, trim, 1, defaultValue, false);
+    public static String getMatch(final String data, final Pattern pattern, final boolean trim, final String defaultValue) {
+        return TextUtils.getMatch(data, pattern, trim, 1, defaultValue, false);
     }
 
     /**
-     * Searches for the pattern p in the data. If the pattern is not found defaultValue is returned
+     * Searches for the pattern pattern in the data. If the pattern is not found defaultValue is returned
      *
      * @param data
      *            Data to search in
-     * @param p
+     * @param pattern
      *            Pattern to search for
      * @param defaultValue
      *            Value to return if the pattern is not found
      * @return defaultValue or the first group if the pattern matches (trimmed)
      */
-    public static String getMatch(@Nullable final String data, final Pattern p, final String defaultValue) {
-        return TextUtils.getMatch(data, p, true, 1, defaultValue, false);
+    public static String getMatch(@Nullable final String data, final Pattern pattern, final String defaultValue) {
+        return TextUtils.getMatch(data, pattern, true, 1, defaultValue, false);
     }
 
     /**
-     * Searches for the pattern p in the data.
+     * Searches for the pattern pattern in the data.
      *
      * @param data
-     * @param p
-     * @return true if data contains the pattern p
+     * @param pattern
+     * @return true if data contains the pattern pattern
      */
-    public static boolean matches(final String data, final Pattern p) {
-        if (data == null) {
-            return false;
-        }
+    public static boolean matches(final String data, final Pattern pattern) {
         // matcher is faster than String.contains() and more flexible - it takes patterns instead of fixed texts
-        return p.matcher(data).find();
+        return data != null && pattern.matcher(data).find();
 
     }
 
@@ -182,7 +180,7 @@ public final class TextUtils {
      */
     public static long checksum(final String input) {
         final CRC32 checksum = new CRC32();
-        checksum.update(input.getBytes());
+        checksum.update(input.getBytes(CHARSET_UTF8));
         return checksum.getValue();
     }
 }

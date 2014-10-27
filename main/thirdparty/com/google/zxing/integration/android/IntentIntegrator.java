@@ -311,7 +311,7 @@ public class IntentIntegrator {
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         try {
           activity.startActivity(intent);
-        } catch (ActivityNotFoundException anfe) {
+        } catch (ActivityNotFoundException ignored) {
           // Hmm, market is not installed
           Log.w(TAG, "Google Play is not installed; cannot install " + packageName);
         }

@@ -1,6 +1,8 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.Image;
+import cgeo.geocaching.R;
 import cgeo.geocaching.compatibility.Compatibility;
 
 import org.apache.commons.io.IOUtils;
@@ -8,17 +10,27 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
+import android.text.Html;
+import android.text.Html.ImageGetter;
 import android.util.Base64;
 import android.util.Base64InputStream;
+import android.widget.TextView;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
@@ -27,8 +39,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.Locale;
+import java.util.Set;
 
 public final class ImageUtils {
     private static final int[] ORIENTATIONS = new int[] {
@@ -39,6 +54,10 @@ public final class ImageUtils {
 
     private static final int[] ROTATION = new int[] { 90, 180, 270 };
     private static final int MAX_DISPLAY_IMAGE_XY = 800;
+
+    // Images whose URL contains one of those patterns will not be available on the Images tab
+    // for opening into an external application.
+    private final static String[] NO_EXTERNAL = new String[] { "geocheck.org" };
 
     private ImageUtils() {
         // Do not let this class be instantiated, this is a utility class.
@@ -52,7 +71,7 @@ public final class ImageUtils {
      * @return BitmapDrawable The scaled image
      */
     public static BitmapDrawable scaleBitmapToFitDisplay(@NonNull final Bitmap image) {
-        Point displaySize = Compatibility.getDisplaySize();
+        final Point displaySize = Compatibility.getDisplaySize();
         final int maxWidth = displaySize.x - 25;
         final int maxHeight = displaySize.y - 25;
         return scaleBitmapTo(image, maxWidth, maxHeight);
@@ -67,7 +86,7 @@ public final class ImageUtils {
      */
     @Nullable
     public static Bitmap readAndScaleImageToFitDisplay(@NonNull final String filename) {
-        Point displaySize = Compatibility.getDisplaySize();
+        final Point displaySize = Compatibility.getDisplaySize();
         // Restrict image size to 800 x 800 to prevent OOM on tablets
         final int maxWidth = Math.min(displaySize.x - 25, MAX_DISPLAY_IMAGE_XY);
         final int maxHeight = Math.min(displaySize.y - 25, MAX_DISPLAY_IMAGE_XY);
@@ -119,12 +138,12 @@ public final class ImageUtils {
      */
     public static void storeBitmap(final Bitmap bitmap, final Bitmap.CompressFormat format, final int quality, final String pathOfOutputImage) {
         try {
-            FileOutputStream out = new FileOutputStream(pathOfOutputImage);
-            BufferedOutputStream bos = new BufferedOutputStream(out);
+            final FileOutputStream out = new FileOutputStream(pathOfOutputImage);
+            final BufferedOutputStream bos = new BufferedOutputStream(out);
             bitmap.compress(format, quality, bos);
             bos.flush();
             bos.close();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             Log.e("ImageHelper.storeBitmap", e);
         }
     }
@@ -143,7 +162,7 @@ public final class ImageUtils {
         if (maxXY <= 0) {
             return filePath;
         }
-        Bitmap image = readDownsampledImage(filePath, maxXY, maxXY);
+        final Bitmap image = readDownsampledImage(filePath, maxXY, maxXY);
         if (image == null) {
             return null;
         }
@@ -175,7 +194,7 @@ public final class ImageUtils {
         try {
             final ExifInterface exif = new ExifInterface(filePath);
             orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             Log.e("ImageUtils.readDownsampledImage", e);
         }
         final BitmapFactory.Options sizeOnlyOptions = new BitmapFactory.Options();
@@ -224,7 +243,7 @@ public final class ImageUtils {
         }
 
         // Create a media file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
+        final String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
         return new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
     }
 
@@ -245,7 +264,7 @@ public final class ImageUtils {
      * @return <tt>true</tt> if the URL contains at least one of the patterns, <tt>false</tt> otherwise
      */
     public static boolean containsPattern(final String url, final String[] patterns) {
-        for (String entry : patterns) {
+        for (final String entry : patterns) {
             if (StringUtils.containsIgnoreCase(url, entry)) {
                 return true;
             }
@@ -273,7 +292,7 @@ public final class ImageUtils {
 
     /**
      * Decode a base64-encoded string and save the result into a stream.
-     * 
+     *
      * @param inString
      *            the encoded string
      * @param out
@@ -287,5 +306,120 @@ public final class ImageUtils {
         } finally {
             IOUtils.closeQuietly(in);
         }
+    }
+
+    public static BitmapDrawable getTransparent1x1Drawable(final Resources res) {
+        return new BitmapDrawable(res, BitmapFactory.decodeResource(res, R.drawable.image_no_placement));
+    }
+
+    /**
+     * Add images present in the HTML description to the existing collection.
+     *
+     * @param images a collection of images
+     * @param htmlText the HTML description to be parsed
+     * @param geocode the common title for images in the description
+     */
+    public static void addImagesFromHtml(final Collection<Image> images, final String htmlText, final String geocode) {
+        final Set<String> urls = new LinkedHashSet<>();
+        for (final Image image : images) {
+            urls.add(image.getUrl());
+        }
+        Html.fromHtml(StringUtils.defaultString(htmlText), new ImageGetter() {
+            @Override
+            public Drawable getDrawable(final String source) {
+                if (!urls.contains(source) && canBeOpenedExternally(source)) {
+                    images.add(new Image(source, StringUtils.defaultString(geocode)));
+                    urls.add(source);
+                }
+                return null;
+            }
+        }, null);
+    }
+
+    /**
+     * Container which can hold a drawable (initially an empty one) and get a newer version when it
+     * becomes available. It also invalidates the view the container belongs to, so that it is
+     * redrawn properly.
+     */
+    public static class ContainerDrawable extends BitmapDrawable implements Action1<Drawable> {
+        private Drawable drawable;
+        final private TextView view;
+
+        @SuppressWarnings("deprecation")
+        public ContainerDrawable(@NonNull final TextView view) {
+            this.view = view;
+            drawable = null;
+            setBounds(0, 0, 0, 0);
+        }
+
+        public ContainerDrawable(@NonNull final TextView view, final Observable<? extends Drawable> drawableObservable) {
+            this(view);
+            updateFrom(drawableObservable);
+        }
+
+        @Override
+        public final void draw(final Canvas canvas) {
+            if (drawable != null) {
+                drawable.draw(canvas);
+            }
+        }
+
+        @Override
+        public void call(final Drawable newDrawable) {
+            setBounds(0, 0, newDrawable.getIntrinsicWidth(), newDrawable.getIntrinsicHeight());
+            drawable = newDrawable;
+            view.setText(view.getText());
+        }
+
+        public final void updateFrom(final Observable<? extends Drawable> drawableObservable) {
+            drawableObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(this);
+        }
+    }
+
+    /**
+     * Image that automatically scales to fit a line of text in the containing {@link TextView}.
+     */
+    public final static class LineHeightContainerDrawable extends ContainerDrawable {
+        private final TextView view;
+
+        public LineHeightContainerDrawable(@NonNull final TextView view, final Observable<? extends Drawable> drawableObservable) {
+            super(view, drawableObservable);
+            this.view = view;
+        }
+
+        @Override
+        public void call(final Drawable newDrawable) {
+            super.call(newDrawable);
+            setBounds(ImageUtils.scaleImageToLineHeight(newDrawable, view));
+        }
+    }
+
+    public static boolean canBeOpenedExternally(final String source) {
+        return !containsPattern(source, NO_EXTERNAL);
+    }
+
+    public static Rect scaleImageToLineHeight(final Drawable drawable, final TextView view) {
+        final int lineHeight = (int) (view.getLineHeight() * 0.8);
+        final int width = drawable.getIntrinsicWidth() * lineHeight / drawable.getIntrinsicHeight();
+        return new Rect(0, 0, width, lineHeight);
+    }
+
+    public static Bitmap convertToBitmap(final Drawable drawable) {
+        if (drawable instanceof BitmapDrawable) {
+            return ((BitmapDrawable) drawable).getBitmap();
+        }
+
+        // handle solid colors, which have no width
+        int width = drawable.getIntrinsicWidth();
+        width = width > 0 ? width : 1;
+        int height = drawable.getIntrinsicHeight();
+        height = height > 0 ? height : 1;
+
+        final Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        final Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+
+        return bitmap;
     }
 }

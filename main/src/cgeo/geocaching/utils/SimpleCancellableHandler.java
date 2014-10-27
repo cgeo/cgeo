@@ -15,8 +15,8 @@ public class SimpleCancellableHandler extends CancellableHandler {
     protected final WeakReference<Progress> progressDialogRef;
 
     public SimpleCancellableHandler(final AbstractActivity activity, final Progress progress) {
-        this.activityRef = new WeakReference<AbstractActivity>(activity);
-        this.progressDialogRef = new WeakReference<Progress>(progress);
+        this.activityRef = new WeakReference<>(activity);
+        this.progressDialogRef = new WeakReference<>(progress);
     }
 
     @Override

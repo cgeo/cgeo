@@ -3,13 +3,16 @@ package cgeo.geocaching;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.utils.ImageUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
 import android.text.Html;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Trackable implements ILogable {
@@ -35,7 +38,7 @@ public class Trackable implements ILogable {
     private String goal = null;
     private String details = null;
     private String image = null;
-    private List<LogEntry> logs = new ArrayList<LogEntry>();
+    private List<LogEntry> logs = new ArrayList<>();
     private String trackingcode = null;
 
     public String getUrl() {
@@ -214,8 +217,20 @@ public class Trackable implements ILogable {
         this.trackingcode = trackingcode;
     }
 
+    public Collection<Image> getImages() {
+        final List<Image> images = new LinkedList<>();
+        if (StringUtils.isNotBlank(image)) {
+            images.add(new Image(image, StringUtils.defaultIfBlank(name, geocode)));
+        }
+        ImageUtils.addImagesFromHtml(images, getDetails(), geocode);
+        for (final LogEntry log : getLogs()) {
+            images.addAll(log.getLogImages());
+        }
+        return images;
+    }
+
     static public List<LogType> getPossibleLogTypes() {
-        final List<LogType> logTypes = new ArrayList<LogType>();
+        final List<LogType> logTypes = new ArrayList<>();
         logTypes.add(LogType.RETRIEVED_IT);
         logTypes.add(LogType.GRABBED_IT);
         logTypes.add(LogType.NOTE);

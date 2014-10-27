@@ -31,14 +31,18 @@ public class OCAuthParams extends OAuthParameters {
             R.string.oc_ro_okapi_consumer_key, R.string.oc_ro_okapi_consumer_secret, "callback://www.cgeo.org/opencaching.ro/",
             R.string.auth_ocro, R.string.pref_ocro_tokenpublic, R.string.pref_ocro_tokensecret, R.string.pref_temp_ocro_token_public, R.string.pref_temp_ocro_token_secret);
 
+    public static final OCAuthParams OC_UK_AUTH_PARAMS = new OCAuthParams("www.opencaching.org.uk", false,
+            R.string.oc_uk_okapi_consumer_key, R.string.oc_uk_okapi_consumer_secret, "callback://www.cgeo.org/opencaching.org.uk/",
+            R.string.auth_ocuk, R.string.pref_ocuk_tokenpublic, R.string.pref_ocuk_tokensecret, R.string.pref_temp_ocuk_token_public, R.string.pref_temp_ocuk_token_secret);
+
     public final int authTitleResId;
     public final int tokenPublicPrefKey;
     public final int tokenSecretPrefKey;
     public final int tempTokenPublicPrefKey;
     public final int tempTokenSecretPrefKey;
 
-    public OCAuthParams(@NonNull String host, boolean https, int consumerKeyResId, int consumerSecretResId, @NonNull String callback,
-            int authTitleResId, int tokenPublicPrefKey, int tokenSecretPrefKey, int tempTokePublicPrefKey, int tempTokenSecretPrefKey) {
+    public OCAuthParams(@NonNull final String host, final boolean https, final int consumerKeyResId, final int consumerSecretResId, @NonNull final String callback,
+            final int authTitleResId, final int tokenPublicPrefKey, final int tokenSecretPrefKey, final int tempTokePublicPrefKey, final int tempTokenSecretPrefKey) {
         super(host, "/okapi/services/oauth/request_token",
                 "/okapi/services/oauth/authorize",
                 "/okapi/services/oauth/access_token",
@@ -54,7 +58,7 @@ public class OCAuthParams extends OAuthParameters {
     }
 
     @Override
-    public void setOAuthExtras(Intent intent) {
+    public void setOAuthExtras(final Intent intent) {
         super.setOAuthExtras(intent);
 
         if (intent != null) {

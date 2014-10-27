@@ -2,7 +2,7 @@ package cgeo.geocaching.geopoint;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.ui.Formatter;
+import cgeo.geocaching.utils.Formatter;
 
 import android.test.AndroidTestCase;
 

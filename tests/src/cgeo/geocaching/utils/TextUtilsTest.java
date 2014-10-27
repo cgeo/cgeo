@@ -26,4 +26,11 @@ public class TextUtilsTest extends AndroidTestCase {
         assertThat(TextUtils.getMatch("some" + "\u001C" + "control" + (char) 0x1D + "characters removed", patternAll, "")).isEqualTo("some control characters removed");
         assertThat(TextUtils.getMatch("newline\nalso\nremoved", patternAll, "")).isEqualTo("newline also removed");
     }
+
+    public static void testGetMatch() {
+        final Pattern patternAll = Pattern.compile("foo(...)");
+        final String text = "abc-foobar-def-fooxyz-ghi-foobaz-jkl";
+        assertThat(TextUtils.getMatch(text, patternAll, false, 1, null, false)).isEqualTo("bar");
+        assertThat(TextUtils.getMatch(text, patternAll, false, 1, null, true)).isEqualTo("baz");
+    }
 }

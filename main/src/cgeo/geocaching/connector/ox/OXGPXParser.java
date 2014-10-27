@@ -10,13 +10,13 @@ public class OXGPXParser extends GPX10Parser {
 
     private final boolean isDetailed;
 
-    public OXGPXParser(int listIdIn, boolean isDetailed) {
+    public OXGPXParser(final int listIdIn, final boolean isDetailed) {
         super(listIdIn);
         this.isDetailed = isDetailed;
     }
 
     @Override
-    protected void afterParsing(Geocache cache) {
+    protected void afterParsing(final Geocache cache) {
         cache.setUpdated(System.currentTimeMillis());
         if (isDetailed) {
             cache.setDetailedUpdate(cache.getUpdated());
@@ -27,11 +27,11 @@ public class OXGPXParser extends GPX10Parser {
 
     /**
      * The short description of OX caches contains "title by owner, type(T/D/Awesomeness)". That is a lot of
-     * duplication.
+     * duplication. Additionally a space between type and (T/D/Awesomeness) is introduced.
      *
      * @param cache
      */
     private static void removeTitleFromShortDescription(final @NonNull Geocache cache) {
-        cache.setShortDescription(StringUtils.trim(StringUtils.substringAfterLast(cache.getShortDescription(), ",")));
+        cache.setShortDescription(StringUtils.replace(StringUtils.trim(StringUtils.substringAfterLast(cache.getShortDescription(), ",")), "(", " ("));
     }
 }

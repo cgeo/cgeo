@@ -40,7 +40,7 @@ class DistanceFilter extends AbstractFilter {
 
         @Override
         public List<IFilter> getFilters() {
-            final List<IFilter> filters = new ArrayList<IFilter>(KILOMETERS.length);
+            final List<IFilter> filters = new ArrayList<>(KILOMETERS.length);
             for (int i = 0; i < KILOMETERS.length; i++) {
                 final int minRange = KILOMETERS[i];
                 final int maxRange;

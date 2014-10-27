@@ -72,7 +72,7 @@ public interface IConnector {
      *
      * @return
      */
-    public boolean supportsFavoritePoints();
+    public boolean supportsFavoritePoints(final Geocache cache);
 
     /**
      * enable/disable logging controls in cache details

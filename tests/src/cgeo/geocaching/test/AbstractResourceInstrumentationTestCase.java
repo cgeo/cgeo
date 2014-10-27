@@ -30,7 +30,7 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
 
     protected static void removeCacheCompletely(final String geocode) {
         final EnumSet<RemoveFlag> flags = EnumSet.copyOf(LoadFlags.REMOVE_ALL);
-        flags.add(RemoveFlag.REMOVE_OWN_WAYPOINTS_ONLY_FOR_TESTING);
+        flags.add(RemoveFlag.OWN_WAYPOINTS_ONLY_FOR_TESTING);
         DataStore.removeCache(geocode, flags);
     }
 
@@ -75,7 +75,7 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
     protected void setUp() throws Exception {
         super.setUp();
         temporaryListId = DataStore.createList("Temporary unit testing");
-        assertThat(temporaryListId != StoredList.TEMPORARY_LIST_ID).isTrue();
+        assertThat(temporaryListId != StoredList.TEMPORARY_LIST.id).isTrue();
         assertThat(temporaryListId != StoredList.STANDARD_LIST_ID).isTrue();
     }
 
@@ -95,7 +95,7 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
     final protected Geocache loadCacheFromResource(int resourceId) throws IOException, ParserException {
         final InputStream instream = getResourceStream(resourceId);
         try {
-            GPX10Parser parser = new GPX10Parser(StoredList.TEMPORARY_LIST_ID);
+            GPX10Parser parser = new GPX10Parser(StoredList.TEMPORARY_LIST.id);
             Collection<Geocache> caches = parser.parse(instream, null);
             assertThat(caches).isNotNull();
             assertThat(caches.isEmpty()).isFalse();

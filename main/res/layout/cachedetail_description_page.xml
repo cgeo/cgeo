@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    tools:context=".CacheDetailActivity$DescriptionViewCreator" >
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -134,6 +136,7 @@
                 android:id="@+id/edit_personalnote"
                 style="@style/button_small"
                 android:text="@string/cache_personal_note_edit" />
+
             <Button
                 android:id="@+id/upload_personalnote"
                 style="@style/button_small"

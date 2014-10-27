@@ -14,17 +14,18 @@ import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -161,7 +162,7 @@ public class ECApi {
         }
 
         try {
-            return new GPX10Parser(StoredList.TEMPORARY_LIST_ID).parse(response.getEntity().getContent(), null);
+            return new GPX10Parser(StoredList.TEMPORARY_LIST.id).parse(response.getEntity().getContent(), null);
         } catch (Exception e) {
             Log.e("Error importing gpx from extremcaching.com", e);
             return Collections.emptyList();
@@ -171,46 +172,44 @@ public class ECApi {
     private static List<Geocache> importCachesFromJSON(final HttpResponse response) {
         if (response != null) {
             try {
-                final String data = Network.getResponseDataAlways(response);
-                if (StringUtils.isBlank(data) || StringUtils.equals(data, "[]")) {
+                final JsonNode json = JsonUtils.reader.readTree(Network.getResponseDataAlways(response));
+                if (!json.isArray()) {
                     return Collections.emptyList();
                 }
-                final JSONArray json = new JSONArray(data);
-                final int len = json.length();
-                final List<Geocache> caches = new ArrayList<Geocache>(len);
-                for (int i = 0; i < len; i++) {
-                    final Geocache cache = parseCache(json.getJSONObject(i));
+                final List<Geocache> caches = new ArrayList<>(json.size());
+                for (final JsonNode node: json) {
+                    final Geocache cache = parseCache(node);
                     if (cache != null) {
                         caches.add(cache);
                     }
                 }
                 return caches;
-            } catch (final JSONException e) {
-                Log.w("JSONResult", e);
+            } catch (IOException | ClassCastException e) {
+                Log.w("importCachesFromJSON", e);
             }
         }
 
         return Collections.emptyList();
     }
 
-    private static Geocache parseCache(final JSONObject response) {
-        final Geocache cache = new Geocache();
-        cache.setReliableLatLon(true);
+    private static Geocache parseCache(final JsonNode response) {
         try {
-            cache.setGeocode("EC" + response.getString("cache_id"));
-            cache.setName(response.getString("title"));
-            cache.setCoords(new Geopoint(response.getString("lat"), response.getString("lon")));
-            cache.setType(getCacheType(response.getString("type")));
-            cache.setDifficulty((float) response.getDouble("difficulty"));
-            cache.setTerrain((float) response.getDouble("terrain"));
-            cache.setSize(CacheSize.getById(response.getString("size")));
-            cache.setFound(response.getInt("found") == 1);
-            DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_CACHE));
-        } catch (final JSONException e) {
+            final Geocache cache = new Geocache();
+            cache.setReliableLatLon(true);
+            cache.setGeocode("EC" + response.get("cache_id").asText());
+            cache.setName(response.get("title").asText());
+            cache.setCoords(new Geopoint(response.get("lat").asText(), response.get("lon").asText()));
+            cache.setType(getCacheType(response.get("type").asText()));
+            cache.setDifficulty((float) response.get("difficulty").asDouble());
+            cache.setTerrain((float) response.get("terrain").asDouble());
+            cache.setSize(CacheSize.getById(response.get("size").asText()));
+            cache.setFound(response.get("found").asInt() == 1);
+            DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
+            return cache;
+        } catch (final NullPointerException e) {
             Log.e("ECApi.parseCache", e);
             return null;
         }
-        return cache;
     }
 
     private static CacheType getCacheType(final String cacheType) {

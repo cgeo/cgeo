@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.calendar.CalendarAddon;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.apps.cache.navi.NavigationSelectionActionProvider;
 import cgeo.geocaching.ui.AbstractUIFactory;
 
 import android.app.Activity;
@@ -15,9 +16,13 @@ import android.view.MenuItem;
 /**
  * Shared menu handling for all activities having menu items related to a cache. <br>
  * TODO: replace by a fragment
- * 
+ *
  */
-public class CacheMenuHandler extends AbstractUIFactory {
+public final class CacheMenuHandler extends AbstractUIFactory {
+
+    private CacheMenuHandler() {
+        // utility class
+    }
 
     /**
      * Methods to be implemented by the activity to react to the cache menu selections.
@@ -46,8 +51,12 @@ public class CacheMenuHandler extends AbstractUIFactory {
                 activityInterface.navigateTo();
                 return true;
             case R.id.menu_navigate:
-                activityInterface.showNavigationMenu();
-                return true;
+                final NavigationSelectionActionProvider navigationProvider = (NavigationSelectionActionProvider) MenuItemCompat.getActionProvider(item);
+                if (navigationProvider == null) {
+                    activityInterface.showNavigationMenu();
+                    return true;
+                }
+                return false;
             case R.id.menu_caches_around:
                 activityInterface.cachesAround();
                 return true;
@@ -61,9 +70,8 @@ public class CacheMenuHandler extends AbstractUIFactory {
                 if (shareActionProvider == null) {
                     cache.shareCache(activity, res);
                     return true;
-                } else {
-                    return false;
                 }
+                return false;
             case R.id.menu_calendar:
                 CalendarAddon.addToCalendarWithIntent(activity, cache);
                 return true;

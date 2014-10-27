@@ -85,7 +85,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
         assertThat(tb.getOwnerGuid()).isEqualTo("0564a940-8311-40ee-8e76-7e91b2cf6284");
         assertThat(tb.getGoal()).isEqualTo("Kinder erfreuen.<br /><br />Make children happy.");
         assertThat(tb.getDetails()).startsWith("Auf der CD sind");
-        assertThat(tb.getImage()).isEqualTo("http://imgcdn.geocaching.com/track/display/38382780-87a7-4393-8393-78841678ee8c.jpg");
+        assertThat(tb.getImage()).isEqualTo("http://imgcdn.geocaching.com/track/large/38382780-87a7-4393-8393-78841678ee8c.jpg");
         // Following data can change over time
         assertThat(tb.getDistance()).isGreaterThanOrEqualTo(10617.8f);
         assertThat(tb.getLogs().size()).isGreaterThanOrEqualTo(10);
@@ -165,7 +165,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
                 deleteCacheFromDBAndLogout(cache.getGeocode());
 
-                SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST_ID, true, null);
+                SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST.id, true, null);
                 assertThat(search).isNotNull();
                 assertThat(search.getGeocodes()).hasSize(1);
                 assertThat(search.getGeocodes().contains(cache.getGeocode())).isTrue();
@@ -180,7 +180,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
                 deleteCacheFromDBAndLogout(cache.getGeocode());
 
-                search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST_ID, true, null);
+                search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST.id, true, null);
                 assertThat(search).isNotNull();
                 assertThat(search.getGeocodes()).isEmpty();
             }
@@ -201,7 +201,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
                 deleteCacheFromDBAndLogout(cache.getGeocode());
 
-                final SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST_ID, true, null);
+                final SearchResult search = Geocache.searchByGeocode(cache.getGeocode(), null, StoredList.TEMPORARY_LIST.id, true, null);
                 assertThat(search).isNotNull();
                 assertThat(search.getGeocodes()).isEmpty();
             }

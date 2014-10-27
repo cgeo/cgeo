@@ -9,24 +9,31 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LiveMapStrategy.Strategy;
 import cgeo.geocaching.enumerations.LiveMapStrategy.StrategyFlag;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.files.ParserException;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.ui.Formatter;
+import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.Log;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+
+import rx.Observable;
+import rx.functions.Func2;
 
 import android.graphics.Bitmap;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,7 +56,7 @@ public class GCMap {
             final Parameters params = new Parameters("i", geocodeList, "_", String.valueOf(System.currentTimeMillis()));
             params.add("app", "cgeo");
             final String referer = GCConstants.URL_LIVE_MAP_DETAILS;
-            final String data = StringUtils.defaultString(Tile.requestMapInfo(referer, params, referer));
+            final String data = StringUtils.defaultString(Tile.requestMapInfo(referer, params, referer).toBlocking().first());
 
             // Example JSON information
             // {"status":"success",
@@ -57,53 +64,41 @@ public class GCMap {
             //            {"name":"HP: Hannover - Sahlkamp","gc":"GC2Q97X","g":"a09149ca-00e0-4aa2-b332-db2b4dfb18d2","available":true,"archived":false,"subrOnly":false,"li":false,"fp":"0","difficulty":{"text":1.0,"value":"1"},"terrain":{"text":1.5,"value":"1_5"},"hidden":"5/29/2011","container":{"text":"Small","value":"small.gif"},"type":{"text":"Traditional Cache","value":2},"owner":{"text":"GeoM@n","value":"1deaa69e-6bcc-421d-95a1-7d32b468cb82"}}]
             // }
 
-            final JSONObject json = new JSONObject(data);
-            final String status = json.getString("status");
+            final ObjectNode json = (ObjectNode) JsonUtils.reader.readTree(data);
+            final String status = json.path("status").asText();
             if (StringUtils.isBlank(status)) {
-
-                throw new JSONException("No status inside JSON");
+                throw new ParserException("No status inside JSON");
             }
             if ("success".compareTo(status) != 0) {
-                throw new JSONException("Wrong status inside JSON");
+                throw new ParserException("Wrong status inside JSON");
             }
-            final JSONArray dataArray = json.getJSONArray("data");
+            final ArrayNode dataArray = (ArrayNode) json.get("data");
             if (dataArray == null) {
-                throw new JSONException("No data inside JSON");
+                throw new ParserException("No data inside JSON");
             }
 
-            final ArrayList<Geocache> caches = new ArrayList<Geocache>();
-            for (int j = 0; j < dataArray.length(); j++) {
+            final ArrayList<Geocache> caches = new ArrayList<>();
+            for (final JsonNode dataObject: dataArray) {
                 final Geocache cache = new Geocache();
-
-                JSONObject dataObject = dataArray.getJSONObject(j);
-                cache.setName(dataObject.getString("name"));
-                cache.setGeocode(dataObject.getString("gc"));
-                cache.setGuid(dataObject.getString("g")); // 34c2e609-5246-4f91-9029-d6c02b0f2a82"
-                cache.setDisabled(!dataObject.getBoolean("available"));
-                cache.setArchived(dataObject.getBoolean("archived"));
-                cache.setPremiumMembersOnly(dataObject.getBoolean("subrOnly"));
+                cache.setName(dataObject.path("name").asText());
+                cache.setGeocode(dataObject.path("gc").asText());
+                cache.setGuid(dataObject.path("g").asText()); // 34c2e609-5246-4f91-9029-d6c02b0f2a82"
+                cache.setDisabled(!dataObject.path("available").asBoolean());
+                cache.setArchived(dataObject.path("archived").asBoolean());
+                cache.setPremiumMembersOnly(dataObject.path("subrOnly").asBoolean());
                 // "li" seems to be "false" always
-                cache.setFavoritePoints(Integer.parseInt(dataObject.getString("fp")));
-                JSONObject difficultyObj = dataObject.getJSONObject("difficulty");
-                cache.setDifficulty(Float.parseFloat(difficultyObj.getString("text"))); // 3.5
-                JSONObject terrainObj = dataObject.getJSONObject("terrain");
-                cache.setTerrain(Float.parseFloat(terrainObj.getString("text"))); // 1.5
-                cache.setHidden(GCLogin.parseGcCustomDate(dataObject.getString("hidden"), "MM/dd/yyyy")); // 7/23/2001
-                JSONObject containerObj = dataObject.getJSONObject("container");
-                cache.setSize(CacheSize.getById(containerObj.getString("text"))); // Regular
-                JSONObject typeObj = dataObject.getJSONObject("type");
-                cache.setType(CacheType.getByPattern(typeObj.getString("text"))); // Traditional Cache
-                JSONObject ownerObj = dataObject.getJSONObject("owner");
-                cache.setOwnerDisplayName(ownerObj.getString("text"));
+                cache.setFavoritePoints(Integer.parseInt(dataObject.path("fp").asText()));
+                cache.setDifficulty(Float.parseFloat(dataObject.path("difficulty").path("text").asText())); // 3.5
+                cache.setTerrain(Float.parseFloat(dataObject.path("terrain").path("text").asText())); // 1.5
+                cache.setHidden(GCLogin.parseGcCustomDate(dataObject.path("hidden").asText(), "MM/dd/yyyy")); // 7/23/2001
+                cache.setSize(CacheSize.getById(dataObject.path("container").path("text").asText())); // Regular
+                cache.setType(CacheType.getByPattern(dataObject.path("type").path("text").asText())); // Traditional Cache
+                cache.setOwnerDisplayName(dataObject.path("owner").path("text").asText());
 
                 caches.add(cache);
             }
             result.addAndPutInCache(caches);
-        } catch (JSONException e) {
-            result.setError(StatusCode.UNKNOWN_ERROR);
-        } catch (ParseException e) {
-            result.setError(StatusCode.UNKNOWN_ERROR);
-        } catch (NumberFormatException e) {
+        } catch (ParserException | ParseException | IOException | NumberFormatException ignored) {
             result.setError(StatusCode.UNKNOWN_ERROR);
         }
         return result;
@@ -119,10 +114,10 @@ public class GCMap {
 
         try {
 
-            final LeastRecentlyUsedMap<String, String> nameCache = new LeastRecentlyUsedMap.LruCache<String, String>(2000); // JSON id, cache name
+            final LeastRecentlyUsedMap<String, String> nameCache = new LeastRecentlyUsedMap.LruCache<>(2000); // JSON id, cache name
 
             if (StringUtils.isEmpty(data)) {
-                throw new JSONException("No page given");
+                throw new ParserException("No page given");
             }
 
             // Example JSON information
@@ -131,47 +126,46 @@ public class GCMap {
             //  "data":{"55_55":[{"i":"gEaR","n":"Spiel & Sport"}],"55_54":[{"i":"gEaR","n":"Spiel & Sport"}],"17_25":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"55_53":[{"i":"gEaR","n":"Spiel & Sport"}],"17_27":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"17_26":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"57_53":[{"i":"gEaR","n":"Spiel & Sport"}],"57_55":[{"i":"gEaR","n":"Spiel & Sport"}],"3_62":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"3_61":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"57_54":[{"i":"gEaR","n":"Spiel & Sport"}],"3_60":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"15_27":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"15_26":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"15_25":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"4_60":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"4_61":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"4_62":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"16_25":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"16_26":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"16_27":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"2_62":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"2_60":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"2_61":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"56_53":[{"i":"gEaR","n":"Spiel & Sport"}],"56_54":[{"i":"gEaR","n":"Spiel & Sport"}],"56_55":[{"i":"gEaR","n":"Spiel & Sport"}]}
             //  }
 
-            final JSONObject json = new JSONObject(data);
+            final ObjectNode json = (ObjectNode) JsonUtils.reader.readTree(data);
 
-            final JSONArray grid = json.getJSONArray("grid");
-            if (grid == null || grid.length() != (UTFGrid.GRID_MAXY + 1)) {
-                throw new JSONException("No grid inside JSON");
+            final ArrayNode grid = (ArrayNode) json.get("grid");
+            if (grid == null || grid.size() != (UTFGrid.GRID_MAXY + 1)) {
+                throw new ParserException("No grid inside JSON");
             }
-            final JSONArray keys = json.getJSONArray("keys");
+            final ArrayNode keys = (ArrayNode) json.get("keys");
             if (keys == null) {
-                throw new JSONException("No keys inside JSON");
+                throw new ParserException("No keys inside JSON");
             }
-            final JSONObject dataObject = json.getJSONObject("data");
+            final ObjectNode dataObject = (ObjectNode) json.get("data");
             if (dataObject == null) {
-                throw new JSONException("No data inside JSON");
+                throw new ParserException("No data inside JSON");
             }
 
             // iterate over the data and construct all caches in this tile
-            Map<String, List<UTFGridPosition>> positions = new HashMap<String, List<UTFGridPosition>>(); // JSON id as key
-            Map<String, List<UTFGridPosition>> singlePositions = new HashMap<String, List<UTFGridPosition>>(); // JSON id as key
+            Map<String, List<UTFGridPosition>> positions = new HashMap<>(); // JSON id as key
+            Map<String, List<UTFGridPosition>> singlePositions = new HashMap<>(); // JSON id as key
 
-            for (int i = 1; i < keys.length(); i++) { // index 0 is empty
-                String key = keys.getString(i);
-                if (StringUtils.isNotBlank(key)) {
+            for (final JsonNode rawKey: keys) {
+                final String key = rawKey.asText();
+                if (StringUtils.isNotBlank(key)) { // index 0 is empty
                     UTFGridPosition pos = UTFGridPosition.fromString(key);
-                    JSONArray dataForKey = dataObject.getJSONArray(key);
-                    for (int j = 0; j < dataForKey.length(); j++) {
-                        JSONObject cacheInfo = dataForKey.getJSONObject(j);
-                        String id = cacheInfo.getString("i");
-                        nameCache.put(id, cacheInfo.getString("n"));
+                    final ArrayNode dataForKey = (ArrayNode) dataObject.get(key);
+                    for (final JsonNode cacheInfo: dataForKey) {
+                        final String id = cacheInfo.get("i").asText();
+                        nameCache.put(id, cacheInfo.get("n").asText());
 
                         List<UTFGridPosition> listOfPositions = positions.get(id);
                         List<UTFGridPosition> singleListOfPositions = singlePositions.get(id);
 
                         if (listOfPositions == null) {
-                            listOfPositions = new ArrayList<UTFGridPosition>();
+                            listOfPositions = new ArrayList<>();
                             positions.put(id, listOfPositions);
-                            singleListOfPositions = new ArrayList<UTFGridPosition>();
+                            singleListOfPositions = new ArrayList<>();
                             singlePositions.put(id, singleListOfPositions);
                         }
 
                         listOfPositions.add(pos);
-                        if (dataForKey.length() == 1) {
+                        if (dataForKey.size() == 1) {
                             singleListOfPositions.add(pos);
                         }
 
@@ -179,7 +173,7 @@ public class GCMap {
                 }
             }
 
-            final ArrayList<Geocache> caches = new ArrayList<Geocache>();
+            final ArrayList<Geocache> caches = new ArrayList<>();
             for (Entry<String, List<UTFGridPosition>> entry : positions.entrySet()) {
                 String id = entry.getKey();
                 List<UTFGridPosition> pos = entry.getValue();
@@ -217,9 +211,7 @@ public class GCMap {
             searchResult.addAndPutInCache(caches);
             Log.d("Retrieved " + searchResult.getCount() + " caches for tile " + tile.toString());
 
-        } catch (RuntimeException e) {
-            Log.e("GCMap.parseMapJSON", e);
-        } catch (JSONException e) {
+        } catch (RuntimeException | ParserException | IOException e) {
             Log.e("GCMap.parseMapJSON", e);
         }
 
@@ -265,7 +257,7 @@ public class GCMap {
      *            Strategy for data retrieval and parsing, @see Strategy
      * @return
      */
-    private static SearchResult searchByViewport(final Viewport viewport, final MapTokens tokens, Strategy strategy) {
+    private static SearchResult searchByViewport(final Viewport viewport, final MapTokens tokens, final Strategy strategy) {
         Log.d("GCMap.searchByViewport" + viewport.toString());
 
         final SearchResult searchResult = new SearchResult();
@@ -281,8 +273,7 @@ public class GCMap {
                 searchResult.setUrl(new StringBuilder().append(tiles.iterator().next().getZoomLevel()).append(Formatter.SEPARATOR).append(searchResult.getUrl()).toString());
             }
 
-            for (Tile tile : tiles) {
-
+            for (final Tile tile : tiles) {
                 if (!Tile.cache.contains(tile)) {
                     final Parameters params = new Parameters(
                             "x", String.valueOf(tile.getX()),
@@ -305,34 +296,37 @@ public class GCMap {
                     }
 
                     // The PNG must be requested first, otherwise the following request would always return with 204 - No Content
-                    Bitmap bitmap = Tile.requestMapTile(params);
+                    final Observable<Bitmap> bitmapObs = Tile.requestMapTile(params);
+                    final Observable<String> dataObs = Tile.requestMapInfo(GCConstants.URL_MAP_INFO, params, GCConstants.URL_LIVE_MAP);
+                    Observable.zip(bitmapObs, dataObs, new Func2<Bitmap, String, Void>() {
+                        @Override
+                        public Void call(final Bitmap bitmap, final String data) {
+                            final boolean validBitmap = bitmap != null && bitmap.getWidth() == Tile.TILE_SIZE && bitmap.getHeight() == Tile.TILE_SIZE;
 
-                    // Check bitmap size
-                    if (bitmap != null && (bitmap.getWidth() != Tile.TILE_SIZE ||
-                            bitmap.getHeight() != Tile.TILE_SIZE)) {
-                        bitmap.recycle();
-                        bitmap = null;
-                    }
+                            if (StringUtils.isEmpty(data)) {
+                                Log.w("GCMap.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
+                            } else {
+                                final SearchResult search = GCMap.parseMapJSON(data, tile, validBitmap ? bitmap : null, strategy);
+                                if (CollectionUtils.isEmpty(search.getGeocodes())) {
+                                    Log.e("GCMap.searchByViewport: No cache parsed for viewport " + viewport);
+                                } else {
+                                    synchronized (searchResult) {
+                                        searchResult.addSearchResult(search);
+                                    }
+                                }
+                                synchronized (Tile.cache) {
+                                    Tile.cache.add(tile);
+                                }
+                            }
 
-                    String data = Tile.requestMapInfo(GCConstants.URL_MAP_INFO, params, GCConstants.URL_LIVE_MAP);
-                    if (StringUtils.isEmpty(data)) {
-                        Log.w("GCMap.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
-                    } else {
-                        final SearchResult search = GCMap.parseMapJSON(data, tile, bitmap, strategy);
-                        if (CollectionUtils.isEmpty(search.getGeocodes())) {
-                            Log.e("GCMap.searchByViewport: No cache parsed for viewport " + viewport);
+                            // release native bitmap memory
+                            if (bitmap != null) {
+                                bitmap.recycle();
+                            }
+
+                            return null;
                         }
-                        else {
-                            searchResult.addSearchResult(search);
-                        }
-                        Tile.cache.add(tile);
-                    }
-
-                    // release native bitmap memory
-                    if (bitmap != null) {
-                        bitmap.recycle();
-                    }
-
+                    }).toBlocking().single();
                 }
             }
 
@@ -373,7 +367,7 @@ public class GCMap {
      *         8 = mystery, 1858 = whereigo
      */
     private static String getCacheTypeFilter(CacheType typeToDisplay) {
-        Set<String> filterTypes = new HashSet<String>();
+        Set<String> filterTypes = new HashSet<>();
         // Put all types in set, remove what should be visible in a second step
         filterTypes.addAll(Arrays.asList("2", "9", "5", "3", "6", "453", "13", "1304", "4", "11", "137", "8", "1858"));
         switch (typeToDisplay) {

@@ -18,9 +18,15 @@
 -dontwarn org.junit.**
 -dontwarn org.robolectric.**
 
+# rxjava internal references sun.misc.Unsafe
+-dontwarn sun.misc.Unsafe
+
+# jackson internal references
+-dontwarn org.w3c.dom.bootstrap.DOMImplementationRegistry
+
 #-dontnote org.apache.commons.logging.**
 
--keep public class cgeo.geocaching.*
+-keep class cgeo.geocaching.** { *; }
 -keep class android.support.v4.os.** { *; }
 
 -keep class ch.boye.httpclientandroidlib.conn.scheme.Scheme { *; }
@@ -56,5 +62,16 @@
 # Null analysis annotations of Eclipse JDT are just used by the Eclipse compiler, so ignore them here
 -dontwarn org.eclipse.jdt.annotation.**
 
-# the sort action provider is only referenced from XML
+# keep Emma code coverage during debug builds, and ignore related warnings
+-keep class com.vladium.** { *; }
+-dontwarn com.vladium.**
+
+# keep some test only utils classes
+-keep class org.apache.commons.lang3.StringUtils { *; }
+-keep class org.apache.commons.io.IOUtils { *; }
+-keep class org.apache.commons.io.FileUtils { *; }
+
+# action providers are only referenced from XML
 -keep public class cgeo.geocaching.sorting.SortActionProvider { *; }
+-keep public class cgeo.geocaching.ui.NavigationActionProvider { *; }
+-keep public class cgeo.geocaching.apps.cache.navi.NavigationSelectionActionProvider  { *; }

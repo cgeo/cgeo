@@ -16,7 +16,7 @@ class PopularityRatioFilter extends AbstractFilter {
     private final int minRatio;
     private final int maxRatio;
 
-    public PopularityRatioFilter(String name, final int minRatio, final int maxRatio) {
+    public PopularityRatioFilter(final String name, final int minRatio, final int maxRatio) {
         super(name);
         this.minRatio = minRatio;
         this.maxRatio = maxRatio;
@@ -35,11 +35,11 @@ class PopularityRatioFilter extends AbstractFilter {
         return ratio > minRatio && ratio <= maxRatio;
     }
 
-    private static int getFindsCount(Geocache cache) {
+    private static int getFindsCount(final Geocache cache) {
         if (cache.getLogCounts().isEmpty()) {
             cache.setLogCounts(DataStore.loadLogCounts(cache.getGeocode()));
         }
-        Integer logged = cache.getLogCounts().get(LogType.FOUND_IT);
+        final Integer logged = cache.getLogCounts().get(LogType.FOUND_IT);
         if (logged != null) {
             return logged;
         }
@@ -52,11 +52,10 @@ class PopularityRatioFilter extends AbstractFilter {
 
         @Override
         public List<IFilter> getFilters() {
-            final List<IFilter> filters = new ArrayList<IFilter>(RATIOS.length);
-            for (int i = 0; i < RATIOS.length; i++) {
-                final int minRange = RATIOS[i];
+            final List<IFilter> filters = new ArrayList<>(RATIOS.length);
+            for (final int minRange : RATIOS) {
                 final int maxRange = Integer.MAX_VALUE;
-                final String name = "> " + minRange + " " + CgeoApplication.getInstance().getResources().getString(R.string.percent_favorite_points);
+                final String name = CgeoApplication.getInstance().getResources().getString(R.string.more_than_percent_favorite_points, minRange);
                 filters.add(new PopularityRatioFilter(name, minRange, maxRange));
             }
             return filters;

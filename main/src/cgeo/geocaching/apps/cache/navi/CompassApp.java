@@ -20,19 +20,18 @@ class CompassApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(Activity activity, Geopoint coords) {
-        CompassActivity.startActivity(activity, getString(R.string.navigation_direct_navigation), getString(R.string.navigation_target), coords, null);
+    public void navigate(final Activity activity, final Geopoint coords) {
+        CompassActivity.startActivityPoint(activity, coords, getString(R.string.navigation_direct_navigation));
     }
 
     @Override
-    public void navigate(Activity activity, Waypoint waypoint) {
-        CompassActivity.startActivity(activity, waypoint.getPrefix() + "/" + waypoint.getLookup(), waypoint.getName(), waypoint.getCoords(), null,
-                waypoint.getWaypointType().getL10n());
+    public void navigate(final Activity activity, final Waypoint waypoint) {
+        CompassActivity.startActivityWaypoint(activity, waypoint);
     }
 
     @Override
-    public void navigate(Activity activity, Geocache cache) {
-        CompassActivity.startActivity(activity, cache);
+    public void navigate(final Activity activity, final Geocache cache) {
+        CompassActivity.startActivityCache(activity, cache);
     }
 
 }

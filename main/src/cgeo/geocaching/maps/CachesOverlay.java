@@ -40,7 +40,7 @@ import java.util.List;
 
 public class CachesOverlay extends AbstractItemizedOverlay {
 
-    private List<CachesOverlayItemImpl> items = new ArrayList<CachesOverlayItemImpl>();
+    private List<CachesOverlayItemImpl> items = new ArrayList<>();
     private Context context = null;
     private boolean displayCircles = false;
     private Progress progress = new Progress();
@@ -61,7 +61,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
     }
 
     void updateItems(CachesOverlayItemImpl item) {
-        List<CachesOverlayItemImpl> itemsPre = new ArrayList<CachesOverlayItemImpl>();
+        List<CachesOverlayItemImpl> itemsPre = new ArrayList<>();
         itemsPre.add(item);
 
         updateItems(itemsPre);
@@ -79,7 +79,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
         // ensure no interference between the draw and content changing routines
         getOverlayImpl().lock();
         try {
-            items = new ArrayList<CachesOverlayItemImpl>(itemsPre);
+            items = new ArrayList<>(itemsPre);
 
             setLastFocusedItemIndex(-1); // to reset tap during data change
             populate();

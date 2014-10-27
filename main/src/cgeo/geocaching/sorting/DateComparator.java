@@ -19,7 +19,7 @@ public class DateComparator extends AbstractCacheComparator {
             final int dateDifference = date1.compareTo(date2);
             // for equal dates, sort by distance
             if (dateDifference == 0) {
-                final ArrayList<Geocache> list = new ArrayList<Geocache>();
+                final ArrayList<Geocache> list = new ArrayList<>();
                 list.add(cache1);
                 list.add(cache2);
                 final DistanceComparator distanceComparator = new DistanceComparator(CgeoApplication.getInstance().currentGeo().getCoords(), list);

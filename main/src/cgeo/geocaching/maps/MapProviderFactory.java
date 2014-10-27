@@ -2,7 +2,7 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.maps.google.GoogleMapProvider;
+import cgeo.geocaching.maps.google.v1.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
@@ -21,7 +21,7 @@ import java.util.List;
 
 public class MapProviderFactory {
 
-    private final static ArrayList<MapSource> mapSources = new ArrayList<MapSource>();
+    private final static ArrayList<MapSource> mapSources = new ArrayList<>();
 
     static {
         // add GoogleMapProvider only if google api is available in order to support x86 android emulator
@@ -33,7 +33,8 @@ public class MapProviderFactory {
 
     public static boolean isGoogleMapsInstalled() {
         // Check if API key is available
-        if (StringUtils.isBlank(CgeoApplication.getInstance().getString(R.string.maps_api_key))) {
+        final String mapsKey = CgeoApplication.getInstance().getString(R.string.maps_api_key);
+        if (StringUtils.length(mapsKey) < 30 || StringUtils.contains(mapsKey, "key")) {
             Log.w("No Google API key available.");
             return false;
         }
@@ -41,7 +42,7 @@ public class MapProviderFactory {
         // Check if API is available
         try {
             Class.forName("com.google.android.maps.MapActivity");
-        } catch (ClassNotFoundException e) {
+        } catch (final ClassNotFoundException ignored) {
             return false;
         }
 
@@ -59,7 +60,7 @@ public class MapProviderFactory {
         return provider1 == provider2 && provider1.isSameActivity(source1, source2);
     }
 
-    public static void addMapviewMenuItems(Menu menu) {
+    public static void addMapviewMenuItems(final Menu menu) {
         final SubMenu parentMenu = menu.findItem(R.id.menu_select_mapview).getSubMenu();
 
         final int currentSource = Settings.getMapSource().getNumericalId();
@@ -78,8 +79,8 @@ public class MapProviderFactory {
      * @return the map source, or <tt>null</tt> if <tt>id</tt> does not correspond to a registered map source
      */
     @Nullable
-    public static MapSource getMapSource(int id) {
-        for (MapSource mapSource : mapSources) {
+    public static MapSource getMapSource(final int id) {
+        for (final MapSource mapSource : mapSources) {
             if (mapSource.getNumericalId() == id) {
                 return mapSource;
             }
@@ -108,8 +109,8 @@ public class MapProviderFactory {
      * remove offline map sources after changes of the settings
      */
     public static void deleteOfflineMapSources() {
-        final ArrayList<MapSource> deletion = new ArrayList<MapSource>();
-        for (MapSource mapSource : mapSources) {
+        final ArrayList<MapSource> deletion = new ArrayList<>();
+        for (final MapSource mapSource : mapSources) {
             if (mapSource instanceof MapsforgeMapProvider.OfflineMapSource) {
                 deletion.add(mapSource);
             }

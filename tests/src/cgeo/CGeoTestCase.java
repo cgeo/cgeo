@@ -39,7 +39,7 @@ public abstract class CGeoTestCase extends ApplicationTestCase<CgeoApplication> 
      */
     protected static void removeCacheCompletely(final String geocode) {
         final EnumSet<RemoveFlag> flags = EnumSet.copyOf(LoadFlags.REMOVE_ALL);
-        flags.add(RemoveFlag.REMOVE_OWN_WAYPOINTS_ONLY_FOR_TESTING);
+        flags.add(RemoveFlag.OWN_WAYPOINTS_ONLY_FOR_TESTING);
         DataStore.removeCache(geocode, flags);
     }
 

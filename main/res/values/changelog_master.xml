@@ -3,28 +3,19 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
-    · New: Implemented actionbar menus\n
-    · New: Show also own logs on friend log page\n
-    · New: Navigate - WhereYouGo will invoke automatic cartridge download in WhereYouGo\n
-    · New: Filter for caches which are not found\n
-    · New: Show "Import from web" also if not yet registered\n
-    · New: Popup list of changes on first start after upgrade\n
-    · New: Android Beam (NFC Sharing)\n
-    · New: Debugging option to save memory dumps on user demand\n
-    · New: Load Greokrety inventory for OC caches\n
-    · New: Autosave caches if user modifies waypoints\n
-    · New: Show recently viewed caches when clicking search icon on main screen\n
-    · Fix: Hiding own caches on opencaching\n
-    · Fix: Webcam caches not marked as found after posting log\n
-    · Fix: Archived caches now also hidden if hiding disabled caches is active\n
-    · Fix: Filter invalid characters in GPX files\n
-    · Fix: All caches shown as owned if no username stored\n
-    · Fix: GPX import from mail failing on some devices\n
-    · Fix: Updating cache history should not ask for list to save caches\n
-    · Fix: Speed now always shown in km or miles per hour\n
-    · Fix: USER template now shows the correct username for the site where the cache is hosted\n
-    · Fix: Keep filter active if user switches the list\n
-    \n
+    · New: Google Play Services used for location (less battery usage)\n
+    · New: Optional low power GPS mode for parts of the app which don\'t require high precision\n
+    · New: Confirmation dialog for dangerous log types\n
+    · New: Store found date of found caches when importing via GPX\n
+    · New: Select a waypoint of a cache as target directly from compass\n
+    · New: Suggestion for waypoint name depending on its type\n
+    · New: Import lab caches as virtual caches\n
+    · New: Remember zoom level of live map and cache map separately\n
+    · New: Confirmation for deleting all offline logs\n
+    · New: Menu item for repeating last log text\n
+    · New: Set waypoint coordinates from clipboard content\n
+    · Fix: Improved compass rotation algorithm\n
+    · Fix: Smilies fit line height in logbook\n
     \n
   </string>
 </resources>

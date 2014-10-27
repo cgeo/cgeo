@@ -17,6 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class CacheListAppFactory extends AbstractAppFactory {
+
+    private CacheListAppFactory() {
+        // utility class
+    }
+
     private static class LazyHolder {
         public static final CacheListApp[] apps = {
                 new InternalCacheListMap(),
@@ -51,7 +56,7 @@ public final class CacheListAppFactory extends AbstractAppFactory {
     }
 
     private static List<CacheListApp> getActiveApps() {
-        final List<CacheListApp> activeApps = new ArrayList<CacheListApp>(LazyHolder.apps.length);
+        final List<CacheListApp> activeApps = new ArrayList<>(LazyHolder.apps.length);
         for (final CacheListApp app : LazyHolder.apps) {
             if (app.isInstalled()) {
                 activeApps.add(app);
@@ -71,10 +76,10 @@ public final class CacheListAppFactory extends AbstractAppFactory {
         }
         if (app != null) {
             try {
-                boolean result = app.invoke(caches, activity, search);
+                final boolean result = app.invoke(caches, activity, search);
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return result;
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.e("CacheListAppFactory.onMenuItemSelected", e);
             }
         }

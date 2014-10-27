@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/status"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/helper_bcg"
-    android:visibility="invisible" >
+    android:visibility="invisible"
+    tools:context=".StatusFragment" >
 
     <ImageView
         android:id="@+id/status_icon"

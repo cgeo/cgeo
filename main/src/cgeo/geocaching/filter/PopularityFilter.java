@@ -28,9 +28,8 @@ class PopularityFilter extends AbstractFilter {
 
         @Override
         public List<IFilter> getFilters() {
-            final List<IFilter> filters = new ArrayList<IFilter>(FAVORITES.length);
-            for (int i = 0; i < FAVORITES.length; i++) {
-                final int minRange = FAVORITES[i];
+            final List<IFilter> filters = new ArrayList<>(FAVORITES.length);
+            for (final int minRange : FAVORITES) {
                 final int maxRange = Integer.MAX_VALUE;
                 final String range = "> " + minRange;
                 final String name = CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.favorite_points, minRange, range);

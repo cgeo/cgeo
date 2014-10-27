@@ -37,9 +37,9 @@ public enum WaypointType {
      * non public so that <code>null</code> handling can be handled centrally in the enum type itself
      */
     private static final Map<String, WaypointType> FIND_BY_ID;
-    public static final Set<WaypointType> ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL = new HashSet<WaypointType>();
+    public static final Set<WaypointType> ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL = new HashSet<>();
     static {
-        final HashMap<String, WaypointType> mapping = new HashMap<String, WaypointType>();
+        final HashMap<String, WaypointType> mapping = new HashMap<>();
         for (WaypointType wt : values()) {
             mapping.put(wt.id, wt);
             if (wt != WaypointType.OWN && wt != WaypointType.ORIGINAL) {

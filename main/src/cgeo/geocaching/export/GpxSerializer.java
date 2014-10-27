@@ -57,7 +57,7 @@ public final class GpxSerializer {
 
     public void writeGPX(List<String> allGeocodesIn, Writer writer, final ProgressListener progressListener) throws IOException {
         // create a copy of the geocode list, as we need to modify it, but it might be immutable
-        final ArrayList<String> allGeocodes = new ArrayList<String>(allGeocodesIn);
+        final ArrayList<String> allGeocodes = new ArrayList<>(allGeocodesIn);
 
         this.progressListener = progressListener;
         gpx.setOutput(writer);
@@ -184,8 +184,8 @@ public final class GpxSerializer {
 
     private void writeWaypoints(final Geocache cache) throws IOException {
         final List<Waypoint> waypoints = cache.getWaypoints();
-        final List<Waypoint> ownWaypoints = new ArrayList<Waypoint>(waypoints.size());
-        final List<Waypoint> originWaypoints = new ArrayList<Waypoint>(waypoints.size());
+        final List<Waypoint> ownWaypoints = new ArrayList<>(waypoints.size());
+        final List<Waypoint> originWaypoints = new ArrayList<>(waypoints.size());
         int maxPrefix = 0;
         for (final Waypoint wp : cache.getWaypoints()) {
 
@@ -195,7 +195,7 @@ public final class GpxSerializer {
                 try {
                     final int numericPrefix = Integer.parseInt(prefix);
                     maxPrefix = Math.max(numericPrefix, maxPrefix);
-                } catch (final NumberFormatException ex) {
+                } catch (final NumberFormatException ignored) {
                     // ignore non numeric prefix, as it should be unique in the list of non-own waypoints already
                 }
             }

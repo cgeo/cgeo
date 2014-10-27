@@ -27,7 +27,7 @@ public class OriginFilter extends AbstractFilter {
 
         @Override
         public List<OriginFilter> getFilters() {
-            final ArrayList<OriginFilter> filters = new ArrayList<OriginFilter>();
+            final ArrayList<OriginFilter> filters = new ArrayList<>();
             for (IConnector connector : ConnectorFactory.getConnectors()) {
                 filters.add(new OriginFilter(connector));
             }

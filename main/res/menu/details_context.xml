@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:cgeo="http://schemas.android.com/apk/res-auto" >
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <item
         android:id="@+id/menu_copy"
-        android:icon="@drawable/ic_menu_copy"
+        android:icon="@drawable/ic_menu_copy_holo_dark"
         android:title="@android:string/copy"
-        cgeo:showAsAction="always|withText">
-    </item>
-    <item
-        android:id="@+id/menu_translate_to_sys_lang"
-        android:title="@string/translate_to_sys_lang"
-        cgeo:showAsAction="ifRoom">
-    </item>
-    <item
-        android:id="@+id/menu_translate_to_english"
-        android:title="@string/translate_to_english"
-        cgeo:showAsAction="ifRoom">
+        app:showAsAction="always|withText">
     </item>
     <item
         android:id="@+id/menu_cache_share_field"
         android:title="@string/cache_share_field"
-        cgeo:showAsAction="ifRoom">
+        android:icon="@drawable/ic_menu_share"
+        app:showAsAction="ifRoom">
+    </item>
+    <item
+        android:id="@+id/menu_translate_to_sys_lang"
+        android:title="@string/translate_to_sys_lang"
+        app:showAsAction="ifRoom">
+    </item>
+    <item
+        android:id="@+id/menu_translate_to_english"
+        android:title="@string/translate_to_english"
+        app:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_calendar"
         android:icon="@drawable/ic_menu_my_calendar"
         android:title="@string/cache_menu_event"
         android:visible="false"
-        cgeo:showAsAction="ifRoom">
+        app:showAsAction="ifRoom">
     </item>
 
 </menu>

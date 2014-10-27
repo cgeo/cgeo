@@ -1,5 +1,7 @@
 package cgeo.geocaching.settings;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.R;
 
 import android.content.Context;
@@ -29,15 +31,15 @@ public class TextPreference extends AbstractAttributeBasedPrefence {
     private TextView summaryView;
     private CharSequence summaryText;
 
-    public TextPreference(Context context) {
+    public TextPreference(final Context context) {
         super(context);
     }
 
-    public TextPreference(Context context, AttributeSet attrs) {
+    public TextPreference(final Context context, final AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public TextPreference(Context context, AttributeSet attrs, int defStyle) {
+    public TextPreference(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
     }
 
@@ -47,27 +49,27 @@ public class TextPreference extends AbstractAttributeBasedPrefence {
     }
 
     @Override
-    protected void processAttributeValues(TypedArray values) {
+    protected void processAttributeValues(final TypedArray values) {
         this.text = values.getString(0);
     }
 
     @Override
-    protected View onCreateView(ViewGroup parent) {
+    protected View onCreateView(final ViewGroup parent) {
         this.setSelectable(false);
 
-        View v = super.onCreateView(parent);
+        final View v = super.onCreateView(parent);
 
-        TextView text = (TextView) v.findViewById(R.id.textPreferenceText);
+        final TextView text = ButterKnife.findById(v, R.id.textPreferenceText);
         text.setText(this.text);
 
-        summaryView = (TextView) v.findViewById(R.id.textPreferenceSummary);
+        summaryView = ButterKnife.findById(v, R.id.textPreferenceSummary);
         setSummary(null); // show saved summary text
 
         return v;
     }
 
     @Override
-    public void setSummary(CharSequence summaryText) {
+    public void setSummary(final CharSequence summaryText) {
         // the layout hasn't been inflated yet, save the summaryText for later use
         if (summaryView == null) {
             this.summaryText = summaryText;

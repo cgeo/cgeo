@@ -2,18 +2,19 @@
 bin/
 gen/
 annotation_gen/
+generated/
 
 # vm crash logs
 hs_err_pid*.log
+
+# annotation processor log files
+androidannotations.log
 
 # developer specific settings and credentials
 local.properties
 private.properties
 /crowdin/credentials
 /main/res/values/mapsapikey.xml
-
-# eclipse plugin settings which cannot be shared
-org.moreunit.prefs
 
 /main/project/localization/*.missing
 /main/project/attributes/drawable-mdpi/

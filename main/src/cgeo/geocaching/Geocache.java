@@ -11,11 +11,10 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.Tile;
-import cgeo.geocaching.enumerations.CacheAttribute;
+import cgeo.geocaching.connector.gc.UncertainProperty;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
@@ -34,7 +33,6 @@ import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.RxUtils;
-import cgeo.geocaching.utils.UncertainProperty;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
@@ -54,14 +52,12 @@ import rx.functions.Action0;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
 import android.text.Html;
-import android.text.Html.ImageGetter;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -69,10 +65,9 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.EnumMap;
 import java.util.EnumSet;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -88,12 +83,12 @@ public class Geocache implements ICache, IWaypoint {
     private long updated = 0;
     private long detailedUpdate = 0;
     private long visitedDate = 0;
-    private int listId = StoredList.TEMPORARY_LIST_ID;
+    private int listId = StoredList.TEMPORARY_LIST.id;
     private boolean detailed = false;
     private String geocode = "";
     private String cacheId = "";
     private String guid = "";
-    private UncertainProperty<CacheType> cacheType = new UncertainProperty<CacheType>(CacheType.UNKNOWN, Tile.ZOOMLEVEL_MIN - 1);
+    private UncertainProperty<CacheType> cacheType = new UncertainProperty<>(CacheType.UNKNOWN, Tile.ZOOMLEVEL_MIN - 1);
     private String name = "";
     private String ownerDisplayName = "";
     private String ownerUserId = "";
@@ -111,7 +106,7 @@ public class Geocache implements ICache, IWaypoint {
      * lazy initialized
      */
     private String location = null;
-    private UncertainProperty<Geopoint> coords = new UncertainProperty<Geopoint>(null);
+    private UncertainProperty<Geopoint> coords = new UncertainProperty<>(null);
     private boolean reliableLatLon = false;
     private String personalNote = null;
     /**
@@ -149,7 +144,7 @@ public class Geocache implements ICache, IWaypoint {
     private List<Image> spoilers = null;
 
     private List<Trackable> inventory = null;
-    private Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
+    private Map<LogType, Integer> logCounts = new EnumMap<>(LogType.class);
     private boolean userModifiedCoords = false;
     // temporary values
     private boolean statusChecked = false;
@@ -162,10 +157,6 @@ public class Geocache implements ICache, IWaypoint {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
     private Handler changeNotificationHandler = null;
-
-    // Images whose URL contains one of those patterns will not be available on the Images tab
-    // for opening into an external application.
-    private final String[] NO_EXTERNAL = new String[]{"geocheck.org"};
 
     /**
      * Create a new cache. To be used everywhere except for the GPX parser
@@ -251,7 +242,7 @@ public class Geocache implements ICache, IWaypoint {
         if (visitedDate == 0) {
             visitedDate = other.visitedDate;
         }
-        if (listId == StoredList.TEMPORARY_LIST_ID) {
+        if (listId == StoredList.TEMPORARY_LIST.id) {
             listId = other.listId;
         }
         if (StringUtils.isBlank(geocode)) {
@@ -336,7 +327,7 @@ public class Geocache implements ICache, IWaypoint {
             this.setWaypoints(other.waypoints, false);
         }
         else {
-            final ArrayList<Waypoint> newPoints = new ArrayList<Waypoint>(waypoints);
+            final ArrayList<Waypoint> newPoints = new ArrayList<>(waypoints);
             Waypoint.mergeWayPoints(newPoints, other.waypoints, false);
             this.setWaypoints(newPoints, false);
         }
@@ -455,11 +446,7 @@ public class Geocache implements ICache, IWaypoint {
             ActivityMixin.showToast(fromActivity, fromActivity.getResources().getString(R.string.err_cannot_log_visit));
             return;
         }
-        final Intent logVisitIntent = new Intent(fromActivity, LogCacheActivity.class);
-        logVisitIntent.putExtra(LogCacheActivity.EXTRAS_ID, cacheId);
-        logVisitIntent.putExtra(LogCacheActivity.EXTRAS_GEOCODE, geocode);
-
-        fromActivity.startActivity(logVisitIntent);
+        fromActivity.startActivity(LogCacheActivity.getLogCacheIntent(fromActivity, cacheId, geocode));
     }
 
     public void logOffline(final Activity fromActivity, final LogType logType) {
@@ -496,7 +483,7 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public void openInBrowser(final Activity fromActivity) {
-        final Intent viewIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getUrl()));
+        final Intent viewIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getLongUrl()));
 
         // Check if cgeo is the default, show the chooser to let the user choose a browser
         if (viewIntent.resolveActivity(fromActivity.getPackageManager()).getPackageName().equals(fromActivity.getPackageName())) {
@@ -536,7 +523,7 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public boolean supportsFavoritePoints() {
-        return getConnector().supportsFavoritePoints();
+        return getConnector().supportsFavoritePoints(this);
     }
 
     public boolean supportsLogging() {
@@ -741,6 +728,10 @@ public class Geocache implements ICache, IWaypoint {
         return getConnector().getCacheUrl(this);
     }
 
+    public String getLongUrl() {
+        return getConnector().getLongCacheUrl(this);
+    }
+
     public String getCgeoUrl() { return getConnector().getCacheUrl(this); }
 
     public boolean supportsGCVote() {
@@ -783,7 +774,7 @@ public class Geocache implements ICache, IWaypoint {
 
     public void addSpoiler(final Image spoiler) {
         if (spoilers == null) {
-            spoilers = new ArrayList<Image>();
+            spoilers = new ArrayList<>();
         }
         spoilers.add(spoiler);
     }
@@ -908,7 +899,7 @@ public class Geocache implements ICache, IWaypoint {
      * @param coords
      */
     public void setCoords(final Geopoint coords) {
-        this.coords = new UncertainProperty<Geopoint>(coords);
+        this.coords = new UncertainProperty<>(coords);
     }
 
     /**
@@ -918,7 +909,7 @@ public class Geocache implements ICache, IWaypoint {
      * @param zoomlevel
      */
     public void setCoords(final Geopoint coords, final int zoomlevel) {
-        this.coords = new UncertainProperty<Geopoint>(coords, zoomlevel);
+        this.coords = new UncertainProperty<>(coords, zoomlevel);
     }
 
     /**
@@ -1032,7 +1023,7 @@ public class Geocache implements ICache, IWaypoint {
      */
     @NonNull
     public List<LogEntry> getFriendsLogs() {
-        final ArrayList<LogEntry> friendLogs = new ArrayList<LogEntry>();
+        final ArrayList<LogEntry> friendLogs = new ArrayList<>();
         for (final LogEntry log : getLogs()) {
             if (log.friend) {
                 friendLogs.add(log);
@@ -1165,14 +1156,14 @@ public class Geocache implements ICache, IWaypoint {
         if (cacheType == null || CacheType.ALL == cacheType) {
             throw new IllegalArgumentException("Illegal cache type");
         }
-        this.cacheType = new UncertainProperty<CacheType>(cacheType);
+        this.cacheType = new UncertainProperty<>(cacheType);
     }
 
     public void setType(final CacheType cacheType, final int zoomlevel) {
         if (cacheType == null || CacheType.ALL == cacheType) {
             throw new IllegalArgumentException("Illegal cache type");
         }
-        this.cacheType = new UncertainProperty<CacheType>(cacheType, zoomlevel);
+        this.cacheType = new UncertainProperty<>(cacheType, zoomlevel);
     }
 
     public boolean hasDifficulty() {
@@ -1239,7 +1230,7 @@ public class Geocache implements ICache, IWaypoint {
      */
     private void assignUniquePrefix(final Waypoint waypoint) {
         // gather existing prefixes
-        final Set<String> assignedPrefixes = new HashSet<String>();
+        final Set<String> assignedPrefixes = new HashSet<>();
         for (final Waypoint wp : waypoints) {
             assignedPrefixes.add(wp.getPrefix());
         }
@@ -1325,7 +1316,7 @@ public class Geocache implements ICache, IWaypoint {
             final int index = getWaypointIndex(waypoint);
             waypoints.remove(index);
             DataStore.deleteWaypoint(waypoint.getId());
-            DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+            DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.CACHE));
             // Check status if Final is defined
             if (waypoint.isFinalWithCoords()) {
                 resetFinalDefined();
@@ -1345,7 +1336,7 @@ public class Geocache implements ICache, IWaypoint {
         final int index = getWaypointIndex(waypoint);
         waypoints.remove(index);
         DataStore.deleteWaypoint(waypoint.getId());
-        DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+        DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.CACHE));
         resetFinalDefined();
     }
 
@@ -1428,7 +1419,7 @@ public class Geocache implements ICache, IWaypoint {
     }
 
     public void store(final CancellableHandler handler) {
-        store(StoredList.TEMPORARY_LIST_ID, handler);
+        store(StoredList.TEMPORARY_LIST.id, handler);
     }
 
     public void store(final int listId, final CancellableHandler handler) {
@@ -1469,7 +1460,7 @@ public class Geocache implements ICache, IWaypoint {
 
     public void dropSynchronous() {
         DataStore.markDropped(Collections.singletonList(this));
-        DataStore.removeCache(getGeocode(), EnumSet.of(RemoveFlag.REMOVE_CACHE));
+        DataStore.removeCache(getGeocode(), EnumSet.of(RemoveFlag.CACHE));
     }
 
     public void checkFields() {
@@ -1519,13 +1510,12 @@ public class Geocache implements ICache, IWaypoint {
             @Override
             public void call() {
                 refreshSynchronous(handler);
-                handler.sendEmptyMessage(CancellableHandler.DONE);
             }
         });
     }
 
     public void refreshSynchronous(final CancellableHandler handler) {
-        DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+        DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.CACHE));
         storeCache(null, geocode, listId, true, handler);
     }
 
@@ -1601,7 +1591,7 @@ public class Geocache implements ICache, IWaypoint {
             }
 
             cache.setListId(listId);
-            DataStore.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
+            DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
 
             if (CancellableHandler.isCancelled(handler)) {
                 return;
@@ -1610,7 +1600,7 @@ public class Geocache implements ICache, IWaypoint {
             RxUtils.waitForCompletion(StaticMapsProvider.downloadMaps(cache), imgGetter.waitForEndObservable(handler));
 
             if (handler != null) {
-                handler.sendMessage(Message.obtain());
+                handler.sendEmptyMessage(CancellableHandler.DONE);
             }
         } catch (final Exception e) {
             Log.e("Geocache.storeCache", e);
@@ -1623,7 +1613,7 @@ public class Geocache implements ICache, IWaypoint {
             return null;
         }
 
-        if (!forceReload && listId == StoredList.TEMPORARY_LIST_ID && (DataStore.isOffline(geocode, guid) || DataStore.isThere(geocode, guid, true, true))) {
+        if (!forceReload && listId == StoredList.TEMPORARY_LIST.id && (DataStore.isOffline(geocode, guid) || DataStore.isThere(geocode, guid, true, true))) {
             final SearchResult search = new SearchResult();
             final String realGeocode = StringUtils.isNotBlank(geocode) ? geocode : DataStore.getGeocodeForGuid(guid);
             search.addGeocode(realGeocode);
@@ -1657,7 +1647,7 @@ public class Geocache implements ICache, IWaypoint {
         }
 
         final String hourLocalized = CgeoApplication.getInstance().getString(R.string.cache_time_full_hours);
-        final ArrayList<Pattern> patterns = new ArrayList<Pattern>();
+        final ArrayList<Pattern> patterns = new ArrayList<>();
 
         // 12:34
         patterns.add(Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)\\b"));
@@ -1681,28 +1671,12 @@ public class Geocache implements ICache, IWaypoint {
                     if (hours >= 0 && hours < 24 && minutes >= 0 && minutes < 60) {
                         return String.valueOf(hours * 60 + minutes);
                     }
-                } catch (final NumberFormatException e) {
+                } catch (final NumberFormatException ignored) {
                     // cannot happen, but static code analysis doesn't know
                 }
             }
         }
         return null;
-    }
-
-    /**
-     * check whether the cache has a given attribute
-     *
-     * @param attribute
-     * @param yes
-     *            true if we are looking for the attribute_yes version, false for the attribute_no version
-     * @return
-     */
-    public boolean hasAttribute(final CacheAttribute attribute, final boolean yes) {
-        Geocache fullCache = DataStore.loadCache(getGeocode(), EnumSet.of(LoadFlag.LOAD_ATTRIBUTES));
-        if (fullCache == null) {
-            fullCache = this;
-        }
-        return fullCache.getAttributes().contains(attribute.getAttributeName(yes));
     }
 
     public boolean hasStaticMap() {
@@ -1716,46 +1690,30 @@ public class Geocache implements ICache, IWaypoint {
         }
     };
 
-    private void addDescriptionImagesUrls(final Collection<Image> images) {
-        final Set<String> urls = new LinkedHashSet<String>();
-        for (final Image image : images) {
-            urls.add(image.getUrl());
-        }
-        Html.fromHtml(getDescription(), new ImageGetter() {
-            @Override
-            public Drawable getDrawable(final String source) {
-                if (!urls.contains(source) && !ImageUtils.containsPattern(source, NO_EXTERNAL)) {
-                    images.add(new Image(source, geocode));
-                    urls.add(source);
-                }
-                return null;
-            }
-        }, null);
-    }
-
     public Collection<Image> getImages() {
-        final LinkedList<Image> result = new LinkedList<Image>();
+        final LinkedList<Image> result = new LinkedList<>();
         result.addAll(getSpoilers());
         addLocalSpoilersTo(result);
         for (final LogEntry log : getLogs()) {
             result.addAll(log.getLogImages());
         }
-        final Set<String> urls = new HashSet<String>(result.size());
-        for (final Image image : result) {
-            urls.add(image.getUrl());
-        }
-        addDescriptionImagesUrls(result);
+        ImageUtils.addImagesFromHtml(result, getDescription(), geocode);
         return result;
     }
 
-    // Add spoilers stored locally in /sdcard/GeocachePhotos
+    /**
+     * Add spoilers stored locally in <tt>/sdcard/GeocachePhotos</tt>. If a cache is named GC123ABC, the
+     * directory will be <tt>/sdcard/GeocachePhotos/C/B/GC123ABC/</tt>.
+     *
+     * @param spoilers the list to add to
+     */
     private void addLocalSpoilersTo(final List<Image> spoilers) {
         if (StringUtils.length(geocode) >= 2) {
             final String suffix = StringUtils.right(geocode, 2);
-            final File baseDir = new File(Environment.getExternalStorageDirectory().toString(), "GeocachePhotos");
+            final File baseDir = new File(Environment.getExternalStorageDirectory(), "GeocachePhotos");
             final File lastCharDir = new File(baseDir, suffix.substring(1));
             final File secondToLastCharDir = new File(lastCharDir, suffix.substring(0, 1));
-            final File finalDir = new File(secondToLastCharDir, getGeocode());
+            final File finalDir = new File(secondToLastCharDir, geocode);
             final File[] files = finalDir.listFiles();
             if (files != null) {
                 for (final File image : files) {

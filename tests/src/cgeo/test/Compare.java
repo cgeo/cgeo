@@ -14,38 +14,39 @@ import java.util.Date;
 public abstract class Compare {
 
     public static void assertCompareCaches(ICache expected, Geocache actual, boolean all) {
-        String geocode = expected.getGeocode();
+        final String geocode = expected.getGeocode();
+        final String cacheStr = "Cache " + geocode + ": ";
         assertThat(actual).isNotNull();
-        assertThat(expected.getGeocode()).as("Cache " + geocode + ": geocode").isEqualTo(actual.getGeocode());
-        assertThat(expected.getType()).as("Cache " + geocode + ": type").isEqualTo(actual.getType());
-        assertThat(expected.getOwnerDisplayName()).as("Cache " + geocode + ": OwnerDisplayName").isEqualTo(actual.getOwnerDisplayName());
-        assertThat(expected.getDifficulty()).as("Cache " + geocode + ": difficulty").isEqualTo(actual.getDifficulty());
-        assertThat(expected.getTerrain()).as("Cache " + geocode + ": terrain").isEqualTo(actual.getTerrain());
-        assertThat(expected.isDisabled()).as("Cache " + geocode + ": disabled").isEqualTo(actual.isDisabled());
-        assertThat(expected.isArchived()).as("Cache " + geocode + ": archived").isEqualTo(actual.isArchived());
-        assertThat(actual.getSize()).overridingErrorMessage("Cache " + geocode + ": expected size", expected.getSize()).isEqualTo(expected.getSize());
-        assertThat(expected.getName()).as("Cache " + geocode + ": name").isEqualTo(actual.getName());
-        assertThat(expected.getGuid()).as("Cache " + geocode + ": guid").isEqualTo(actual.getGuid());
-        assertThat(expected.getFavoritePoints()).as("Cache " + geocode + ": fav points").isLessThanOrEqualTo(actual.getFavoritePoints());
+        assertThat(actual.getGeocode()).as(cacheStr + "geocode").isEqualTo(expected.getGeocode());
+        assertThat(actual.getType()).as(cacheStr + "type").isEqualTo(expected.getType());
+        assertThat(actual.getOwnerDisplayName()).as(cacheStr + "OwnerDisplayName").isEqualTo(expected.getOwnerDisplayName());
+        assertThat(actual.getDifficulty()).as(cacheStr + "difficulty").isEqualTo(expected.getDifficulty());
+        assertThat(actual.getTerrain()).as(cacheStr + "terrain").isEqualTo(expected.getTerrain());
+        assertThat(actual.isDisabled()).as(cacheStr + "disabled").isEqualTo(expected.isDisabled());
+        assertThat(actual.isArchived()).as(cacheStr + "archived").isEqualTo(expected.isArchived());
+        assertThat(actual.getSize()).overridingErrorMessage(cacheStr + "expected size", expected.getSize()).isEqualTo(expected.getSize());
+        assertThat(actual.getName()).as(cacheStr + "name").isEqualTo(expected.getName());
+        assertThat(actual.getGuid()).as(cacheStr + "guid").isEqualTo(expected.getGuid());
+        assertThat(actual.getFavoritePoints()).as(cacheStr + "fav points").isGreaterThanOrEqualTo(expected.getFavoritePoints());
         final Date hiddenDate = actual.getHiddenDate();
         assertThat(hiddenDate).isNotNull();
         assert hiddenDate != null; // silence the eclipse compiler in the next line
-        assertThat(expected.getHiddenDate().toString()).as("Cache " + geocode + ": hidden date").isEqualTo(hiddenDate.toString());
-        assertThat(expected.isPremiumMembersOnly()).as("Cache " + geocode + ": premium only").isEqualTo(actual.isPremiumMembersOnly());
+        assertThat(hiddenDate.toString()).as(cacheStr + "hidden date").isEqualTo(expected.getHiddenDate().toString());
+        assertThat(actual.isPremiumMembersOnly()).as(cacheStr + "premium only").isEqualTo(expected.isPremiumMembersOnly());
 
         if (all) {
-            assertThat(expected.getCoords()).as("Cache " + geocode + ": coords").isEqualTo(actual.getCoords());
-            assertThat(actual.isReliableLatLon()).as("Cache " + geocode + ": reliable latlon").isTrue();
-            assertThat(expected.isOwner()).as("Cache " + geocode + ": owning status").isEqualTo(actual.isOwner());
-            assertThat(expected.getOwnerUserId()).as("Cache " + geocode + ": owner user id").isEqualTo(actual.getOwnerUserId());
+            assertThat(actual.getCoords()).as(cacheStr + "coords").isEqualTo(expected.getCoords());
+            assertThat(actual.isReliableLatLon()).as(cacheStr + "reliable latlon").isTrue();
+            assertThat(actual.isOwner()).as(cacheStr + "owning status").isEqualTo(expected.isOwner());
+            assertThat(actual.getOwnerUserId()).as(cacheStr + "owner user id").isEqualTo(expected.getOwnerUserId());
             assertThat(StringUtils.equals(expected.getHint(), actual.getHint()) || StringUtils.equals(expected.getHint(), CryptUtils.rot13(actual.getHint()))).isTrue();
             assertThat(actual.getDescription()).as("description").startsWith(expected.getDescription());
-            assertThat(expected.getShortDescription()).as("Cache " + geocode + ": short description").isEqualTo(actual.getShortDescription());
-            assertThat(expected.getCacheId()).as("Cache " + geocode + ": cache id").isEqualTo(actual.getCacheId());
-            assertThat(expected.getLocation()).as("Cache " + geocode + ": location").isEqualTo(actual.getLocation());
-            assertThat(expected.isFound()).as("Cache " + geocode + ": found status").isEqualTo(actual.isFound());
-            assertThat(expected.isFavorite()).as("Cache " + geocode + ": favorite status").isEqualTo(actual.isFavorite());
-            assertThat(expected.isOnWatchlist()).as("Cache " + geocode + ": watchlist status").isEqualTo(actual.isOnWatchlist());
+            assertThat(actual.getShortDescription()).as(cacheStr + "short description").isEqualTo(expected.getShortDescription());
+            assertThat(actual.getCacheId()).as(cacheStr + "cache id").isEqualTo(expected.getCacheId());
+            assertThat(actual.getLocation()).as(cacheStr + "location").isEqualTo(expected.getLocation());
+            assertThat(actual.isFound()).as(cacheStr + "found status").isEqualTo(expected.isFound());
+            assertThat(actual.isFavorite()).as(cacheStr + "favorite status").isEqualTo(expected.isFavorite());
+            assertThat(actual.isOnWatchlist()).as(cacheStr + "watchlist status").isEqualTo(expected.isOnWatchlist());
 
             for (String attribute : expected.getAttributes()) {
                 assertThat(actual.getAttributes()).as("attributes of " + actual.getGeocode()).contains(attribute);
@@ -59,7 +60,7 @@ public abstract class Compare {
 
             final int actualSpoilersSize = null != actual.getSpoilers() ? actual.getSpoilers().size() : 0;
             final int expectedSpoilersSize = null != expected.getSpoilers() ? expected.getSpoilers().size() : 0;
-            assertThat(expectedSpoilersSize).as("Cache " + geocode + ": spoiler count").isEqualTo(actualSpoilersSize);
+            assertThat(actualSpoilersSize).as(cacheStr + "spoiler count").isEqualTo(expectedSpoilersSize);
         }
     }
 

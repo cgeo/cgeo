@@ -29,7 +29,7 @@ public class AnchorAwareLinkMovementMethod extends LinkMovementMethod {
     public boolean onTouchEvent(TextView widget, Spannable buffer, MotionEvent event) {
         try {
             return super.onTouchEvent(widget, buffer, event);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
             // local links to anchors don't work
         }
         return false;

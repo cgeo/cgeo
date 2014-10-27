@@ -13,7 +13,7 @@
         android:required="false" />
 
     <instrumentation
-        android:name="com.zutubi.android.junitreport.JUnitReportTestRunner"
+        android:name="cgeo.junit.CgeoTestRunner"
         android:targetPackage="cgeo.geocaching" />
 
     <application

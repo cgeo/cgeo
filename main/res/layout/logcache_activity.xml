@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="?background_color"
     android:orientation="vertical"
-    android:padding="4dip" >
+    android:padding="4dip"
+    tools:context=".LogCacheActivity" >
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -67,7 +69,9 @@
                     style="@style/edittext_full"
                     android:hint="@string/log_hint_log_password"
                     android:inputType="text"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    tools:ignore="TextFields" />
+
             </LinearLayout>
 
             <RatingBar

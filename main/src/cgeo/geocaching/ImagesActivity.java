@@ -90,7 +90,7 @@ public class ImagesActivity extends AbstractActionBarActivity {
                 .putExtra(Intents.EXTRA_TYPE, imageType);
 
         // avoid forcing the array list as parameter type
-        final ArrayList<Image> arrayList = new ArrayList<Image>(logImages);
+        final ArrayList<Image> arrayList = new ArrayList<>(logImages);
         logImgIntent.putParcelableArrayListExtra(Intents.EXTRA_IMAGES, arrayList);
         fromActivity.startActivity(logImgIntent);
     }

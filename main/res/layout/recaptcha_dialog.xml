@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    tools:context=".connector.gc.RecaptchaHandler" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +29,6 @@
             android:layout_gravity="center_vertical"
             android:scaleType="centerInside"
             android:src="@drawable/ic_menu_refresh" />
-
     </LinearLayout>
 
     <EditText
@@ -43,7 +44,7 @@
         android:layout_margin="7dip"
         android:paddingLeft="3dip"
         android:text="@string/caches_recaptcha_explanation"
-        android:textColor="@color/text_grey_dark"
+        android:textColor="?text_color_hint"
         android:textSize="12sp" />
 
 </LinearLayout>

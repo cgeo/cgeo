@@ -126,7 +126,7 @@ abstract class StateFilter extends AbstractFilter {
 
         @Override
         public List<StateFilter> getFilters() {
-            final List<StateFilter> filters = new ArrayList<StateFilter>(6);
+            final List<StateFilter> filters = new ArrayList<>(6);
             filters.add(new StateFoundFilter());
             filters.add(new StateNotFoundFilter());
             filters.add(new StateArchivedFilter());

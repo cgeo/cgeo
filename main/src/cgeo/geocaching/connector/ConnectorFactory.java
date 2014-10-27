@@ -13,7 +13,6 @@ import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.MapTokens;
-import cgeo.geocaching.connector.oc.OCApiConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector.ApiSupport;
 import cgeo.geocaching.connector.oc.OCApiLiveConnector;
 import cgeo.geocaching.connector.oc.OCConnector;
@@ -45,7 +44,9 @@ public final class ConnectorFactory {
                     R.string.oc_de_okapi_consumer_key, R.string.oc_de_okapi_consumer_secret,
                     R.string.pref_connectorOCActive, R.string.pref_ocde_tokenpublic, R.string.pref_ocde_tokensecret, ApiSupport.current),
             new OCConnector("OpenCaching.CZ", "www.opencaching.cz", "OZ"),
-            new OCApiConnector("OpenCaching.CO.UK", "www.opencaching.org.uk", "OK", "arU4okouc4GEjMniE2fq", "CC BY-NC-SA 2.5", ApiSupport.oldapi),
+            new OCApiLiveConnector("opencaching.org.uk", "www.opencaching.org.uk", "OK", "CC BY-NC-SA 2.5",
+                    R.string.oc_uk_okapi_consumer_key, R.string.oc_uk_okapi_consumer_secret,
+                    R.string.pref_connectorOCUKActive, R.string.pref_ocuk_tokenpublic, R.string.pref_ocuk_tokensecret, ApiSupport.oldapi),
             new OCConnector("OpenCaching.ES", "www.opencachingspain.es", "OC"),
             new OCConnector("OpenCaching.IT", "www.opencaching.it", "OC"),
             new OCConnector("OpenCaching.JP", "www.opencaching.jp", "OJ"),
@@ -88,7 +89,7 @@ public final class ConnectorFactory {
 
     @SuppressWarnings("unchecked")
     private static <T extends IConnector> Collection<T> getMatchingConnectors(final Class<T> clazz) {
-        final List<T> matching = new ArrayList<T>();
+        final List<T> matching = new ArrayList<>();
         for (final IConnector connector : CONNECTORS) {
             if (clazz.isInstance(connector)) {
                 matching.add((T) connector);
@@ -118,7 +119,7 @@ public final class ConnectorFactory {
     }
 
     public static ILogin[] getActiveLiveConnectors() {
-        final List<ILogin> liveConns = new ArrayList<ILogin>();
+        final List<ILogin> liveConns = new ArrayList<>();
         for (final IConnector conn : CONNECTORS) {
             if (conn instanceof ILogin && conn.isActive()) {
                 liveConns.add((ILogin) conn);
@@ -143,16 +144,16 @@ public final class ConnectorFactory {
     }
 
     public static @NonNull
-    IConnector getConnector(ICache cache) {
+    IConnector getConnector(final ICache cache) {
         return getConnector(cache.getGeocode());
     }
 
-    public static TrackableConnector getConnector(Trackable trackable) {
+    public static TrackableConnector getConnector(final Trackable trackable) {
         return getTrackableConnector(trackable.getGeocode());
     }
 
     @NonNull
-    public static TrackableConnector getTrackableConnector(String geocode) {
+    public static TrackableConnector getTrackableConnector(final String geocode) {
         for (final TrackableConnector connector : TRACKABLE_CONNECTORS) {
             if (connector.canHandleTrackable(geocode)) {
                 return connector;
@@ -188,7 +189,7 @@ public final class ConnectorFactory {
     public static SearchResult searchByViewport(final @NonNull Viewport viewport, final MapTokens tokens) {
         return SearchResult.parallelCombineActive(searchByViewPortConns, new Func1<ISearchByViewPort, SearchResult>() {
             @Override
-            public SearchResult call(ISearchByViewPort connector) {
+            public SearchResult call(final ISearchByViewPort connector) {
                 return connector.searchByViewport(viewport, tokens);
             }
         });

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:cgeo="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/image_open_file"
-        cgeo:showAsAction="ifRoom|withText"
+        app:showAsAction="ifRoom|withText"
         android:title="@string/cache_image_open_file">
     </item>
     <item
         android:id="@+id/image_open_browser"
-        cgeo:showAsAction="ifRoom|withText"
+        app:showAsAction="ifRoom|withText"
         android:title="@string/cache_image_open_browser">
     </item>
 

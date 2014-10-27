@@ -15,4 +15,9 @@ public class HtmlUtilsTest extends TestCase {
         assertThat(HtmlUtils.extractText("<b>bold</b>")).isEqualTo("bold");
     }
 
+    public static void testRemoveExtraParagraph() {
+        assertThat(HtmlUtils.removeExtraParagraph("<p></p>")).isEqualTo("");
+        assertThat(HtmlUtils.removeExtraParagraph("<p>Test</p>")).isEqualTo("Test");
+        assertThat(HtmlUtils.removeExtraParagraph("<p>1</p><p>2</p>")).isEqualTo("<p>1</p><p>2</p>");
+    }
 }

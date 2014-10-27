@@ -3,7 +3,9 @@ package cgeo.geocaching.activity;
 import butterknife.ButterKnife;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -13,6 +15,7 @@ import cgeo.geocaching.utils.TranslationUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
@@ -60,35 +63,45 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
     }
 
     @Override
-    public final void showToast(String text) {
+    public final void showToast(final String text) {
         ActivityMixin.showToast(this, text);
     }
 
     @Override
-    public final void showShortToast(String text) {
+    public final void showShortToast(final String text) {
         ActivityMixin.showShortToast(this, text);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
         initializeCommonFields();
-
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public final void presentShowcase() {
+        ActivityMixin.presentShowcase(this);
+    }
+
+    @Override
+    public ShowcaseViewBuilder getShowcase() {
+        // do nothing by default
+        return null;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             return ActivityMixin.navigateUp(this);
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void onResume(final Subscription resumeSubscription) {
+    public void onResume(final Subscription... resumeSubscriptions) {
         super.onResume();
-        this.resumeSubscription = resumeSubscription;
+        this.resumeSubscription = Subscriptions.from(resumeSubscriptions);
     }
 
     @Override
@@ -116,7 +129,6 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
     }
 
     protected void onCreate(final Bundle savedInstanceState, final int resourceLayoutID) {
-
         super.onCreate(savedInstanceState);
 
         initializeCommonFields();
@@ -137,11 +149,11 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
 
         // only needed in some activities, but implemented in super class nonetheless
         Cookies.restoreCookieStore(Settings.getCookieStore());
-        ActivityMixin.keepScreenOn(this, keepScreenOn);
+        ActivityMixin.onCreate(this, keepScreenOn);
     }
 
     @Override
-    public void setContentView(int layoutResID) {
+    public void setContentView(final int layoutResID) {
         super.setContentView(layoutResID);
 
         // initialize the action bar title with the activity title for single source
@@ -156,13 +168,10 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         new Keyboard(this).show(view);
     }
 
-    protected void buildDetailsContextMenu(final ActionMode actionMode, final Menu menu, final CharSequence clickedItemText, final CharSequence fieldTitle, final boolean copyOnly) {
+    protected void buildDetailsContextMenu(final ActionMode actionMode, final Menu menu, final CharSequence fieldTitle, final boolean copyOnly) {
         actionMode.setTitle(fieldTitle);
         menu.findItem(R.id.menu_translate_to_sys_lang).setVisible(!copyOnly);
         if (!copyOnly) {
-            if (clickedItemText.length() > TranslationUtils.TRANSLATION_TEXT_LENGTH_WARN) {
-                showToast(res.getString(R.string.translate_length_warning));
-            }
             menu.findItem(R.id.menu_translate_to_sys_lang).setTitle(res.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()));
         }
         final boolean localeIsEnglish = StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage());
@@ -202,29 +211,47 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
     // these are so few that we don't want to deal with the older (non Android Beam) API
 
     public interface ActivitySharingInterface {
-        /** Return an URL that represent the current activity for sharing */
-        public String getUri();
+        /** Return an URL that represent the current activity for sharing or null for no sharing. */
+        public String getAndroidBeamUri();
     }
 
-    protected void initializeAndroidBeam(ActivitySharingInterface sharingInterface) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+    protected void initializeAndroidBeam(final ActivitySharingInterface sharingInterface) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             initializeICSAndroidBeam(sharingInterface);
         }
     }
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     protected void initializeICSAndroidBeam(final ActivitySharingInterface sharingInterface) {
-        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        final NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {
             return;
         }
         nfcAdapter.setNdefPushMessageCallback(new NfcAdapter.CreateNdefMessageCallback() {
             @Override
-            public NdefMessage createNdefMessage(NfcEvent event) {
-                NdefRecord record = NdefRecord.createUri(sharingInterface.getUri());
-                return new NdefMessage(new NdefRecord[]{record});
+            public NdefMessage createNdefMessage(final NfcEvent event) {
+                final String uri = sharingInterface.getAndroidBeamUri();
+                return uri != null ? new NdefMessage(new NdefRecord[]{NdefRecord.createUri(uri)}) : null;
             }
         }, this);
 
     }
+
+    protected void setCacheTitleBar(@Nullable final String geocode, @Nullable final String name, @Nullable final CacheType type) {
+        if (StringUtils.isNotBlank(name)) {
+            setTitle(StringUtils.isNotBlank(geocode) ? name + " (" + geocode + ")" : name);
+        } else {
+            setTitle(StringUtils.isNotBlank(geocode) ? geocode : res.getString(R.string.cache));
+        }
+        if (type != null) {
+            getSupportActionBar().setIcon(getResources().getDrawable(type.markerId));
+        } else {
+            getSupportActionBar().setIcon(android.R.color.transparent);
+        }
+    }
+
+    protected void setCacheTitleBar(final @NonNull Geocache cache) {
+        setCacheTitleBar(cache.getGeocode(), cache.getName(), cache.getType());
+    }
+
 }

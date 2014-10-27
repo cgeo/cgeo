@@ -157,7 +157,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         // upload coordinates
         GCParser.editModifiedCoordinates(cache, new Geopoint("N51 21.544", "E07 02.566"));
         cache.dropSynchronous();
-        final String page = GCParser.requestHtmlPage(cache.getGeocode(), null, "n", "0");
+        final String page = GCParser.requestHtmlPage(cache.getGeocode(), null, "n");
         final Geocache cache2 = GCParser.parseAndSaveCacheFromText(page, null).getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
         assertThat(cache2).isNotNull();
         assert (cache2 != null); // eclipse bug
@@ -166,7 +166,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         // delete coordinates
         GCParser.deleteModifiedCoordinates(cache2);
         cache2.dropSynchronous();
-        final String page2 = GCParser.requestHtmlPage(cache.getGeocode(), null, "n", "0");
+        final String page2 = GCParser.requestHtmlPage(cache.getGeocode(), null, "n");
         final Geocache cache3 = GCParser.parseAndSaveCacheFromText(page2, null).getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
         assertThat(cache3).isNotNull();
         assert (cache3 != null); // eclipse bug

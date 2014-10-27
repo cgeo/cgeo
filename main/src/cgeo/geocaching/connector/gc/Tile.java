@@ -7,10 +7,15 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 
 import org.eclipse.jdt.annotation.NonNull;
+
+import rx.Observable;
+import rx.functions.Func0;
+import rx.util.async.Async;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -51,11 +56,11 @@ public class Tile {
     private final int zoomLevel;
     private final Viewport viewPort;
 
-    public Tile(Geopoint origin, int zoomlevel) {
+    public Tile(final Geopoint origin, final int zoomlevel) {
         this(calcX(origin, clippedZoomlevel(zoomlevel)), calcY(origin, clippedZoomlevel(zoomlevel)), clippedZoomlevel(zoomlevel));
     }
 
-    private Tile(int tileX, int tileY, int zoomlevel) {
+    private Tile(final int tileX, final int tileY, final int zoomlevel) {
 
         this.zoomLevel = clippedZoomlevel(zoomlevel);
 
@@ -69,7 +74,7 @@ public class Tile {
         return zoomLevel;
     }
 
-    private static int clippedZoomlevel(int zoomlevel) {
+    private static int clippedZoomlevel(final int zoomlevel) {
         return Math.max(Math.min(zoomlevel, ZOOMLEVEL_MAX), ZOOMLEVEL_MIN);
     }
 
@@ -90,7 +95,7 @@ public class Tile {
      */
     private static int calcY(final Geopoint origin, final int zoomlevel) {
         // Optimization from Bing
-        double sinLatRad = Math.sin(Math.toRadians(origin.getLatitude()));
+        final double sinLatRad = Math.sin(Math.toRadians(origin.getLatitude()));
         // The cut of the fractional part instead of rounding to the nearest integer is intentional and part of the algorithm
         return (int) ((0.5 - Math.log((1 + sinLatRad) / (1 - sinLatRad)) / (4 * Math.PI)) * NUMBER_OF_TILES[zoomlevel]);
     }
@@ -110,13 +115,13 @@ public class Tile {
      *      href="http://developers.cloudmade.com/projects/tiles/examples/convert-coordinates-to-tile-numbers">Cloudmade</a>
      */
     @NonNull
-    public Geopoint getCoord(UTFGridPosition pos) {
+    public Geopoint getCoord(final UTFGridPosition pos) {
 
-        double pixX = tileX * TILE_SIZE + pos.x * 4;
-        double pixY = tileY * TILE_SIZE + pos.y * 4;
+        final double pixX = tileX * TILE_SIZE + pos.x * 4;
+        final double pixY = tileY * TILE_SIZE + pos.y * 4;
 
-        double lonDeg = ((360.0 * pixX) / NUMBER_OF_PIXELS[this.zoomLevel]) - 180.0;
-        double latRad = Math.atan(Math.sinh(Math.PI * (1 - 2 * pixY / NUMBER_OF_PIXELS[this.zoomLevel])));
+        final double lonDeg = ((360.0 * pixX) / NUMBER_OF_PIXELS[this.zoomLevel]) - 180.0;
+        final double latRad = Math.atan(Math.sinh(Math.PI * (1 - 2 * pixY / NUMBER_OF_PIXELS[this.zoomLevel])));
         return new Geopoint(Math.toDegrees(latRad), lonDeg);
     }
 
@@ -148,8 +153,8 @@ public class Tile {
                         / Math.log(2)
         );
 
-        Tile tileLeft = new Tile(left, zoom);
-        Tile tileRight = new Tile(right, zoom);
+        final Tile tileLeft = new Tile(left, zoom);
+        final Tile tileRight = new Tile(right, zoom);
 
         if (Math.abs(tileLeft.tileX - tileRight.tileX) < (numberOfTiles - 1)) {
             zoom += 1;
@@ -185,8 +190,8 @@ public class Tile {
                         ) / Math.log(2)
                 );
 
-        Tile tileBottom = new Tile(bottom, zoom);
-        Tile tileTop = new Tile(top, zoom);
+        final Tile tileBottom = new Tile(bottom, zoom);
+        final Tile tileTop = new Tile(top, zoom);
 
         if (Math.abs(tileBottom.tileY - tileTop.tileY) > (numberOfTiles - 1)) {
             zoom -= 1;
@@ -195,7 +200,7 @@ public class Tile {
         return Math.min(zoom, ZOOMLEVEL_MAX);
     }
 
-    private static double tanGrad(double angleGrad) {
+    private static double tanGrad(final double angleGrad) {
         return Math.tan(angleGrad / 180.0 * Math.PI);
     }
 
@@ -206,12 +211,12 @@ public class Tile {
      * @param x
      * @return
      */
-    private static double asinh(double x) {
+    private static double asinh(final double x) {
         return Math.log(x + Math.sqrt(x * x + 1.0));
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
@@ -228,20 +233,39 @@ public class Tile {
         return toString().hashCode();
     }
 
-    /** Request JSON informations for a tile */
-    public static String requestMapInfo(final String url, final Parameters params, final String referer) {
-        return Network.getResponseData(Network.getRequest(url, params, new Parameters("Referer", referer)));
+    /** Request JSON informations for a tile. Return as soon as the request has been made, before the answer has been
+     * read.
+     *
+     * @return An observable with one element, which may be <tt>null</tt>.
+     */
+    public static Observable<String> requestMapInfo(final String url, final Parameters params, final String referer) {
+        final HttpResponse response = Network.getRequest(url, params, new Parameters("Referer", referer));
+        return Async.start(new Func0<String>() {
+            @Override
+            public String call() {
+                return Network.getResponseData(response);
+            }
+        }, RxUtils.networkScheduler);
     }
 
-    /** Request .png image for a tile. */
-    public static Bitmap requestMapTile(final Parameters params) {
+    /** Request .png image for a tile. Return as soon as the request has been made, before the answer has been
+     * read and processed.
+     *
+     * @return An observable with one element, which may be <tt>null</tt>.
+     */
+    public static Observable<Bitmap> requestMapTile(final Parameters params) {
         final HttpResponse response = Network.getRequest(GCConstants.URL_MAP_TILE, params, new Parameters("Referer", GCConstants.URL_LIVE_MAP));
-        try {
-            return response != null ? BitmapFactory.decodeStream(response.getEntity().getContent()) : null;
-        } catch (IOException e) {
-            Log.e("Tile.requestMapTile() ", e);
-        }
-        return null;
+        return Async.start(new Func0<Bitmap>() {
+            @Override
+            public Bitmap call() {
+                try {
+                    return response != null ? BitmapFactory.decodeStream(response.getEntity().getContent()) : null;
+                } catch (final IOException e) {
+                    Log.e("Tile.requestMapTile() ", e);
+                    return null;
+                }
+            }
+        }, RxUtils.computationScheduler);
     }
 
     public boolean containsPoint(final @NonNull ICoordinates point) {
@@ -274,20 +298,20 @@ public class Tile {
      * @return
      */
     protected static Set<Tile> getTilesForViewport(final Viewport viewport, final int tilesOnAxis, final int minZoom) {
-        Set<Tile> tiles = new HashSet<Tile>();
-        int zoom = Math.max(
+        final Set<Tile> tiles = new HashSet<>();
+        final int zoom = Math.max(
                 Math.min(Tile.calcZoomLon(viewport.bottomLeft, viewport.topRight, tilesOnAxis),
                         Tile.calcZoomLat(viewport.bottomLeft, viewport.topRight, tilesOnAxis)),
                 minZoom);
 
-        Tile tileBottomLeft = new Tile(viewport.bottomLeft, zoom);
-        Tile tileTopRight = new Tile(viewport.topRight, zoom);
+        final Tile tileBottomLeft = new Tile(viewport.bottomLeft, zoom);
+        final Tile tileTopRight = new Tile(viewport.topRight, zoom);
 
-        int xLow = Math.min(tileBottomLeft.getX(), tileTopRight.getX());
-        int xHigh = Math.max(tileBottomLeft.getX(), tileTopRight.getX());
+        final int xLow = Math.min(tileBottomLeft.getX(), tileTopRight.getX());
+        final int xHigh = Math.max(tileBottomLeft.getX(), tileTopRight.getX());
 
-        int yLow = Math.min(tileBottomLeft.getY(), tileTopRight.getY());
-        int yHigh = Math.max(tileBottomLeft.getY(), tileTopRight.getY());
+        final int yLow = Math.min(tileBottomLeft.getY(), tileTopRight.getY());
+        final int yHigh = Math.max(tileBottomLeft.getY(), tileTopRight.getY());
 
         for (int xNum = xLow; xNum <= xHigh; xNum++) {
             for (int yNum = yLow; yNum <= yHigh; yNum++) {
@@ -300,14 +324,12 @@ public class Tile {
 
     public static class TileCache extends LeastRecentlyUsedSet<Tile> {
 
-        private static final long serialVersionUID = -1942301031192719547L;
-
         public TileCache() {
             super(64);
         }
 
         public void removeFromTileCache(@NonNull final ICoordinates point) {
-            for (final Tile tile : new ArrayList<Tile>(this)) {
+            for (final Tile tile : new ArrayList<>(this)) {
                 if (tile.containsPoint(point)) {
                     remove(tile);
                 }

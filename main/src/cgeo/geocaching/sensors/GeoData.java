@@ -2,22 +2,42 @@ package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.enumerations.LocationProviderType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.utils.Log;
 
+import org.eclipse.jdt.annotation.Nullable;
+
+import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
 
-class GeoData extends Location implements IGeoData {
-    private final boolean gpsEnabled;
-    private final int satellitesVisible;
-    private final int satellitesFixed;
-    private final boolean pseudoLocation;
+public class GeoData extends Location implements IGeoData {
 
-    GeoData(final Location location, final boolean gpsEnabled, final int satellitesVisible, final int satellitesFixed, final boolean pseudoLocation) {
+    public static final String INITIAL_PROVIDER = "initial";
+    public static final String FUSED_PROVIDER = "fused";
+    public static final String LOW_POWER_PROVIDER = "low-power";
+
+    // Some devices will not have the last position available (for example the emulator). In this case,
+    // rather than waiting forever for a position update which might never come, we emulate it by placing
+    // the user arbitrarly at Paris Notre-Dame, one of the most visited free tourist attractions in the world.
+    final public static GeoData DUMMY_LOCATION = new GeoData(new Location(INITIAL_PROVIDER));
+    static {
+        DUMMY_LOCATION.setLatitude(48.85308);
+        DUMMY_LOCATION.setLongitude(2.34962);
+    }
+
+    public GeoData(final Location location) {
         super(location);
-        this.gpsEnabled = gpsEnabled;
-        this.satellitesVisible = satellitesVisible;
-        this.satellitesFixed = satellitesFixed;
-        this.pseudoLocation = pseudoLocation;
+    }
+
+    @Nullable
+    static Location best(@Nullable final Location gpsLocation, @Nullable final Location netLocation) {
+        if (isRecent(gpsLocation) || netLocation == null) {
+            return gpsLocation;
+        }
+        if (gpsLocation == null) {
+            return netLocation;
+        }
+        return gpsLocation.getTime() >= netLocation.getTime() ? gpsLocation : netLocation;
     }
 
     @Override
@@ -32,6 +52,13 @@ class GeoData extends Location implements IGeoData {
         if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
             return LocationProviderType.NETWORK;
         }
+        // LocationManager.FUSED_PROVIDER constant is not available at API level 9
+        if (provider.equals(FUSED_PROVIDER)) {
+            return LocationProviderType.FUSED;
+        }
+        if (provider.equals(LOW_POWER_PROVIDER)) {
+            return LocationProviderType.LOW_POWER;
+        }
         return LocationProviderType.LAST;
     }
 
@@ -45,23 +72,35 @@ class GeoData extends Location implements IGeoData {
         return new Geopoint(this);
     }
 
-    @Override
-    public boolean getGpsEnabled() {
-        return gpsEnabled;
+    @Nullable public static GeoData getInitialLocation(final Context context) {
+        final LocationManager geoManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        if (geoManager == null) {
+            Log.w("No LocationManager available");
+            return null;
+        }
+        try {
+            // Try to find a sensible initial location from the last locations known to Android.
+            final Location lastGpsLocation = geoManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            final Location lastNetworkLocation = geoManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            final Location bestLocation = best(lastGpsLocation, lastNetworkLocation);
+            if (bestLocation != null) {
+                bestLocation.setProvider(INITIAL_PROVIDER);
+                return new GeoData(bestLocation);
+            }
+            Log.i("No last known location available");
+            return null;
+        } catch (final Exception e) {
+            // This error is non-fatal as its only consequence is that we will start with a dummy location
+            // instead of a previously known one.
+            Log.e("Error when retrieving last known location", e);
+            return null;
+        }
     }
 
-    @Override
-    public int getSatellitesVisible() {
-        return satellitesVisible;
+
+
+    public static boolean isRecent(@Nullable final Location location) {
+        return location != null && System.currentTimeMillis() <= location.getTime() + 30000;
     }
 
-    @Override
-    public int getSatellitesFixed() {
-        return satellitesFixed;
-    }
-
-    @Override
-    public boolean isPseudoLocation() {
-        return pseudoLocation;
-    }
 }

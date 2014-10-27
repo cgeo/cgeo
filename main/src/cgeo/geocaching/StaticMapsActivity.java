@@ -27,15 +27,12 @@ import java.util.List;
 @OptionsMenu(R.menu.static_maps_activity_options)
 public class StaticMapsActivity extends AbstractActionBarActivity {
 
-    private static final String EXTRAS_WAYPOINT = "waypoint";
-    private static final String EXTRAS_DOWNLOAD = "download";
-    private static final String EXTRAS_GEOCODE = "geocode";
+    @Extra(Intents.EXTRA_DOWNLOAD) boolean download = false;
+    @Extra(Intents.EXTRA_WAYPOINT_ID) Integer waypointId = null;
+    @Extra(Intents.EXTRA_GEOCODE) String geocode = null;
 
-    @Extra(EXTRAS_DOWNLOAD) boolean download = false;
-    @Extra(EXTRAS_WAYPOINT) Integer waypointId = null;
-    @Extra(EXTRAS_GEOCODE) String geocode = null;
-
-    private final List<Bitmap> maps = new ArrayList<Bitmap>();
+    private Geocache cache;
+    private final List<Bitmap> maps = new ArrayList<>();
     private LayoutInflater inflater = null;
     private ProgressDialog waitDialog = null;
     private LinearLayout smapsView = null;
@@ -62,7 +59,7 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
                 } else {
                     showStaticMaps();
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.e("StaticMapsActivity.loadMapsHandler", e);
             }
         }
@@ -83,7 +80,7 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
 
         for (final Bitmap image : maps) {
             if (image != null) {
-                final ImageView map = (ImageView) inflater.inflate(R.layout.staticmaps_activity_item, null);
+                final ImageView map = (ImageView) inflater.inflate(R.layout.staticmaps_activity_item, smapsView, false);
                 map.setImageBitmap(image);
                 smapsView.addView(map);
             }
@@ -99,6 +96,8 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
             finish();
             return;
         }
+        cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        setCacheTitleBar(cache);
 
         waitDialog = ProgressDialog.show(this, null, res.getString(R.string.map_static_loading), true);
         waitDialog.setCancelable(true);
@@ -116,7 +115,6 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
                     for (int level = 1; level <= StaticMapsProvider.MAPS_LEVEL_MAX; level++) {
                         try {
                             if (waypointId != null) {
-                                final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
                                 final Bitmap image = StaticMapsProvider.getWaypointMap(geocode, cache.getWaypointById(waypointId), level);
                                 if (image != null) {
                                     maps.add(image);
@@ -127,7 +125,7 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
                                     maps.add(image);
                                 }
                             }
-                        } catch (Exception e) {
+                        } catch (final Exception e) {
                             Log.e("StaticMapsActivity.LoadMapsThread.run", e);
                         }
                     }
@@ -137,7 +135,7 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
                 }
 
                 loadMapsHandler.sendMessage(Message.obtain());
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.e("StaticMapsActivity.LoadMapsThread.run", e);
             }
         }
@@ -150,7 +148,6 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
     }
 
     private boolean downloadStaticMaps() {
-        final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         if (waypointId == null) {
             showToast(res.getString(R.string.info_storing_static_maps));
             RxUtils.waitForCompletion(StaticMapsProvider.storeCacheStaticMap(cache));

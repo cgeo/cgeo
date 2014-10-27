@@ -37,7 +37,7 @@ public final class TestSettings extends Settings {
     }
 
     public static void setUseImperialUnits(final boolean imperial) {
-        putBoolean(R.string.pref_units, imperial);
+        putBoolean(R.string.pref_units_imperial, imperial);
     }
 
     public static void setCacheTwitterMessage(final String template) {

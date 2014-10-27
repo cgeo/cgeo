@@ -6,7 +6,10 @@ import cgeo.geocaching.settings.Settings;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 
@@ -15,8 +18,12 @@ public class LiveMapInfoDialogBuilder {
     public static AlertDialog create(Activity activity) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
-        // AlertDialog has always dark style, so we have to apply it as well always
-        final View layout = View.inflate(new ContextThemeWrapper(activity, R.style.dark), R.layout.livemapinfo, null);
+        final Context themedContext;
+        if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB)
+            themedContext = new ContextThemeWrapper(activity, R.style.dark);
+        else
+            themedContext = activity;
+        final View layout = View.inflate(themedContext, R.layout.livemapinfo, null);
         builder.setView(layout);
 
         final int showCount = Settings.getLiveMapHintShowCount();

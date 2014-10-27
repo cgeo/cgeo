@@ -1,10 +1,10 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.MapProviderFactory;
+import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -23,15 +23,13 @@ public class GoogleMapsDirectionApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(Activity activity, Geopoint coords) {
+    public void navigate(final Activity activity, final Geopoint coords) {
         try {
-            IGeoData geo = CgeoApplication.getInstance().currentGeo();
-            final Geopoint coordsNow = geo == null ? null : geo.getCoords();
-
-            if (coordsNow != null) {
+            final IGeoData geo = CgeoApplication.getInstance().currentGeo();
+            if (geo.getCoords() != null) {
                 activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri
                         .parse("http://maps.google.com/maps?f=d&saddr="
-                                + coordsNow.getLatitude() + "," + coordsNow.getLongitude() + "&daddr="
+                                + geo.getCoords().getLatitude() + "," + geo.getCoords().getLongitude() + "&daddr="
                                 + coords.getLatitude() + "," + coords.getLongitude())));
             } else {
                 activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri
@@ -39,7 +37,7 @@ public class GoogleMapsDirectionApp extends AbstractPointNavigationApp {
                                 + coords.getLatitude() + "," + coords.getLongitude())));
             }
 
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Log.i("GoogleMapsDirectionApp: application not available.", e);
         }
 

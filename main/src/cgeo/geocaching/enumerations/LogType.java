@@ -52,7 +52,7 @@ public enum LogType {
     private final int stringId;
     public final int markerId;
 
-    LogType(int id, String iconName, String type, String oc_type, int stringId, int markerId) {
+    LogType(final int id, final String iconName, final String type, final String oc_type, final int stringId, final int markerId) {
         this.id = id;
         this.iconName = iconName;
         this.type = type;
@@ -61,16 +61,16 @@ public enum LogType {
         this.markerId = markerId;
     }
 
-    LogType(int id, String iconName, String type, String oc_type, int stringId) {
+    LogType(final int id, final String iconName, final String type, final String oc_type, final int stringId) {
         this(id, iconName, type, oc_type, stringId, R.drawable.mark_gray);
     }
 
     private final static Map<String, LogType> FIND_BY_ICONNAME;
     private final static Map<String, LogType> FIND_BY_TYPE;
     static {
-        final HashMap<String, LogType> mappingPattern = new HashMap<String, LogType>();
-        final HashMap<String, LogType> mappingType = new HashMap<String, LogType>();
-        for (LogType lt : values()) {
+        final HashMap<String, LogType> mappingPattern = new HashMap<>();
+        final HashMap<String, LogType> mappingType = new HashMap<>();
+        for (final LogType lt : values()) {
             if (lt.iconName != null) {
                 mappingPattern.put(lt.iconName, lt);
             }
@@ -81,7 +81,7 @@ public enum LogType {
     }
 
     public static LogType getById(final int id) {
-        for (LogType logType : values()) {
+        for (final LogType logType : values()) {
             if (logType.id == id) {
                 return logType;
             }
@@ -112,5 +112,13 @@ public enum LogType {
 
     public final String getL10n() {
         return CgeoApplication.getInstance().getBaseContext().getResources().getString(stringId);
+    }
+
+    public final boolean isFoundLog() {
+        return this == LogType.FOUND_IT || this == LogType.ATTENDED || this == LogType.WEBCAM_PHOTO_TAKEN;
+    }
+
+    public boolean mustConfirmLog() {
+        return this == ARCHIVE || this == NEEDS_ARCHIVE;
     }
 }

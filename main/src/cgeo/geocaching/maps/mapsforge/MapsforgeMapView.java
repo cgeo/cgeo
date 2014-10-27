@@ -234,7 +234,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
         if (StringUtils.isNotEmpty(customRenderTheme)) {
             try {
                 setRenderTheme(new File(customRenderTheme));
-            } catch (FileNotFoundException e) {
+            } catch (FileNotFoundException ignored) {
                 Toast.makeText(
                         getContext(),
                         getContext().getResources().getString(R.string.warn_rendertheme_missing),

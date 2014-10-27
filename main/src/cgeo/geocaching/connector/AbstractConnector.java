@@ -76,7 +76,7 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
-    public boolean supportsFavoritePoints() {
+    public boolean supportsFavoritePoints(final Geocache cache) {
         return false;
     }
 
@@ -105,10 +105,10 @@ public abstract class AbstractConnector implements IConnector {
         return null;
     }
 
-    protected static boolean isNumericId(final String string) {
+    protected static boolean isNumericId(final String str) {
         try {
-            return Integer.parseInt(string) > 0;
-        } catch (NumberFormatException e) {
+            return Integer.parseInt(str) > 0;
+        } catch (NumberFormatException ignored) {
         }
         return false;
     }
@@ -160,7 +160,7 @@ public abstract class AbstractConnector implements IConnector {
 
     @Override
     public List<LogType> getPossibleLogTypes(Geocache geocache) {
-        final List<LogType> logTypes = new ArrayList<LogType>();
+        final List<LogType> logTypes = new ArrayList<>();
         if (geocache.isEventCache()) {
             logTypes.add(LogType.WILL_ATTEND);
             logTypes.add(LogType.ATTENDED);
@@ -214,7 +214,7 @@ public abstract class AbstractConnector implements IConnector {
 
     @Override
     public final Collection<String> getCapabilities() {
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
         addCapability(list, ISearchByViewPort.class, R.string.feature_search_live_map);
         addCapability(list, ISearchByKeyword.class, R.string.feature_search_keyword);
         addCapability(list, ISearchByCenter.class, R.string.feature_search_center);
@@ -281,7 +281,7 @@ public abstract class AbstractConnector implements IConnector {
      */
     static @NonNull
     public List<UserAction> getDefaultUserActions() {
-        final ArrayList<UserAction> actions = new ArrayList<UserAction>();
+        final ArrayList<UserAction> actions = new ArrayList<>();
         if (ContactsAddon.isAvailable()) {
             actions.add(new UserAction(R.string.user_menu_open_contact, new Action1<UserAction.Context>() {
 
@@ -295,4 +295,6 @@ public abstract class AbstractConnector implements IConnector {
         return actions;
     }
 
+    public void logout() {
+    }
 }

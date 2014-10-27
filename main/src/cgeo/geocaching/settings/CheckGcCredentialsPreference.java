@@ -5,6 +5,8 @@ import cgeo.geocaching.enumerations.StatusCode;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import rx.Observable;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -25,11 +27,10 @@ public class CheckGcCredentialsPreference extends AbstractCheckCredentialsPrefer
     }
 
     @Override
-    protected ImmutablePair<StatusCode, ? extends Drawable> login() {
+    protected ImmutablePair<StatusCode, Observable<Drawable>> login() {
         final StatusCode loginResult = GCLogin.getInstance().login();
         switch (loginResult) {
             case NO_ERROR:
-                GCLogin.detectGcCustomDate();
                 return ImmutablePair.of(StatusCode.NO_ERROR, GCLogin.getInstance().downloadAvatarAndGetMemberStatus());
             default:
                 return ImmutablePair.of(loginResult, null);

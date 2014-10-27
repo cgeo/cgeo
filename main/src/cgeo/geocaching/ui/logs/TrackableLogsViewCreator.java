@@ -15,14 +15,16 @@ import java.util.List;
 
 public class TrackableLogsViewCreator extends LogsViewCreator {
 
-    private final Trackable trackable;
+    private Trackable trackable;
+    private final TrackableActivity trackableActivity;
 
     /**
      * @param trackableActivity
      */
-    public TrackableLogsViewCreator(TrackableActivity trackableActivity, final Trackable trackable) {
+    public TrackableLogsViewCreator(final TrackableActivity trackableActivity) {
         super(trackableActivity);
-        this.trackable = trackable;
+        this.trackableActivity = trackableActivity;
+        trackable = trackableActivity.getTrackable();
     }
 
     @Override
@@ -32,6 +34,7 @@ public class TrackableLogsViewCreator extends LogsViewCreator {
 
     @Override
     protected List<LogEntry> getLogs() {
+        trackable = trackableActivity.getTrackable();
         return trackable.getLogs();
     }
 
@@ -41,7 +44,7 @@ public class TrackableLogsViewCreator extends LogsViewCreator {
     }
 
     @Override
-    protected void fillCountOrLocation(LogViewHolder holder, final LogEntry log) {
+    protected void fillCountOrLocation(final LogViewHolder holder, final LogEntry log) {
         if (StringUtils.isBlank(log.cacheName)) {
             holder.countOrLocation.setVisibility(View.GONE);
         } else {
@@ -50,7 +53,7 @@ public class TrackableLogsViewCreator extends LogsViewCreator {
             final String cacheName = log.cacheName;
             holder.countOrLocation.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View arg0) {
+                public void onClick(final View arg0) {
                     CacheDetailActivity.startActivityGuid(activity, cacheGuid, Html.fromHtml(cacheName).toString());
                 }
             });

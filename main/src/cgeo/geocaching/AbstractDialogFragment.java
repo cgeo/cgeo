@@ -1,8 +1,9 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteRating;
@@ -14,13 +15,13 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 
 import rx.Observable;
 import rx.Subscription;
 import rx.android.observables.AndroidObservable;
 import rx.functions.Action1;
 import rx.functions.Func0;
-import rx.schedulers.Schedulers;
 import rx.subscriptions.Subscriptions;
 
 import android.annotation.TargetApi;
@@ -40,7 +41,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public abstract class AbstractDialogFragment extends DialogFragment implements CacheMenuHandler.ActivityInterface, PopupMenu.OnMenuItemClickListener, MenuItem.OnMenuItemClickListener {
-    protected CgeoApplication app = null;
     protected Resources res = null;
     protected String geocode;
     protected CacheDetailsCreator details;
@@ -56,26 +56,25 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         res = getResources();
-        app = (CgeoApplication) getActivity().getApplication();
         setHasOptionsMenu(true);
     }
 
-    protected void initCustomActionBar(View v)
+    protected void initCustomActionBar(final View v)
     {
-        final ImageView defaultNavigationImageView = (ImageView) v.findViewById(R.id.defaultNavigation);
+        final ImageView defaultNavigationImageView = ButterKnife.findById(v, R.id.defaultNavigation);
         defaultNavigationImageView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public boolean onLongClick(View v) {
+            public boolean onLongClick(final View v) {
                 startDefaultNavigation2();
                 return true;
             }
         });
         defaultNavigationImageView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 navigateTo();
             }
         });
@@ -83,7 +82,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         final View overflowActionBar = v.findViewById(R.id.overflowActionBar);
         overflowActionBar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 showPopup(v);
             }
         });
@@ -109,7 +108,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     }
 
 
-    protected void showPopup(View view)
+    protected void showPopup(final View view)
     {
         // For reason I totally not understand the PopupMenu from Appcompat is broken beyond
         // repair. Chicken out here and show the old menu on Gingerbread.
@@ -124,13 +123,13 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private void showPopupHoneycomb(View view) {
-        android.widget.PopupMenu popupMenu = new android.widget.PopupMenu(getActivity(), view);
+    private void showPopupHoneycomb(final View view) {
+        final android.widget.PopupMenu popupMenu = new android.widget.PopupMenu(getActivity(), view);
         CacheMenuHandler.addMenuItems(new MenuInflater(getActivity()), popupMenu.getMenu(), cache);
         popupMenu.setOnMenuItemClickListener(
                 new android.widget.PopupMenu.OnMenuItemClickListener() {
                     @Override
-                    public boolean onMenuItemClick(MenuItem item) {
+                    public boolean onMenuItemClick(final MenuItem item) {
                        return AbstractDialogFragment.this.onMenuItemClick(item);
                     }
                 }
@@ -138,9 +137,9 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         popupMenu.show();
     }
 
-    protected void showPopupCompat(View view)
+    protected void showPopupCompat(final View view)
     {
-        PopupMenu popupMenu = new PopupMenu(getActivity(), view);
+        final PopupMenu popupMenu = new PopupMenu(getActivity(), view);
 
         // Directly instantiate SupportMenuInflater instead of getActivity().getMenuinflator
         // getMenuinflator will throw a NPE since it tries to get the not displayed ActionBar
@@ -194,7 +193,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
                 final GCVoteRating rating = GCVote.getRating(cache.getGuid(), geocode);
                 return rating != null ? Observable.just(rating) : Observable.<GCVoteRating>empty();
             }
-        })).subscribeOn(Schedulers.io()).subscribe(new Action1<GCVoteRating>() {
+        })).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<GCVoteRating>() {
             @Override
             public void call(final GCVoteRating rating) {
                 cache.setRating(rating.getRating());
@@ -209,7 +208,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         assert cache != null;
         // cache type
         final String cacheType = cache.getType().getL10n();
-        final String cacheSize = cache.getSize() != CacheSize.UNKNOWN ? " (" + cache.getSize().getL10n() + ")" : "";
+        final String cacheSize = cache.showSize() ? " (" + cache.getSize().getL10n() + ")" : "";
         details.add(R.string.cache_type, cacheType + cacheSize);
 
         details.add(R.string.cache_geocode, cache.getGeocode());
@@ -238,7 +237,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         buttonMore.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View arg0) {
+            public void onClick(final View arg0) {
                 CacheDetailActivity.startActivity(getActivity(), geocode);
                 getActivity().finish();
             }
@@ -248,7 +247,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         registerForContextMenu(buttonMore);
     }
 
-    public final void showToast(String text) {
+    public final void showToast(final String text) {
         ActivityMixin.showToast(getActivity(), text);
     }
 
@@ -263,7 +262,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
                 }
                 onUpdateGeoData(geo);
             } catch (final RuntimeException e) {
-                Log.w("Failed to UpdateLocation location.");
+                Log.w("Failed to update location", e);
             }
         }
     };
@@ -277,35 +276,35 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         CacheMenuHandler.addMenuItems(inflater, menu, cache);
 
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+    public void onCreateContextMenu(final ContextMenu menu, final View v, final ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         CacheMenuHandler.addMenuItems(new MenuInflater(getActivity()), menu, cache);
         for (int i=0;i<menu.size();i++) {
-            MenuItem m = menu.getItem(i);
+            final MenuItem m = menu.getItem(i);
             m.setOnMenuItemClickListener(this);
         }
     }
 
     @Override
-    public boolean onContextItemSelected(MenuItem item) {
+    public boolean onContextItemSelected(final MenuItem item) {
         return onOptionsItemSelected(item);
     }
 
 
     @Override
-    public boolean onMenuItemClick(MenuItem menuItem) {
+    public boolean onMenuItemClick(final MenuItem menuItem) {
         return onOptionsItemSelected(menuItem);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         if (CacheMenuHandler.onMenuItemSelected(item, this, cache)) {
             return true;
         }
@@ -317,13 +316,13 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     }
 
     @Override
-    public void onPrepareOptionsMenu(Menu menu) {
+    public void onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
         try {
             CacheMenuHandler.onPrepareOptionsMenu(menu, cache);
             LoggingUI.onPrepareOptionsMenu(menu, cache);
-        } catch (final RuntimeException e) {
+        } catch (final RuntimeException ignored) {
             // nothing
         }
     }
@@ -346,13 +345,9 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     }
 
     @Override
-    public void onCancel(DialogInterface dialog) {
+    public void onCancel(final DialogInterface dialog) {
         super.onCancel(dialog);
         getActivity().finish();
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
 }

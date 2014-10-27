@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Holo Style is only available for ICS+ -->
+
+    <style name="cgeo.Widget.AppCompat.Base.ProgressBar.Medium" parent="android:Widget.Holo.ProgressBar">
+        <item name="android:minWidth">32dip</item>
+        <item name="android:maxWidth">32dip</item>
+        <item name="android:minHeight">32dip</item>
+        <item name="android:maxHeight">32dip</item>
+    </style>
+
+    <style name="cgeo_light" parent="cgeo.base.light">
+        <item name="actionBarStyle">@style/cgeo.ActionBarStyle.Light.Inverse</item>
+        <item name="android:actionBarStyle" >@style/cgeo.ActionBarStyle.Light.Inverse</item>
+    </style>
+
+    <style name="cgeo" parent="cgeo.base">
+        <item name="android:actionBarStyle">@style/cgeo.ActionBarStyle</item>
+    </style>
+
+
+</resources>

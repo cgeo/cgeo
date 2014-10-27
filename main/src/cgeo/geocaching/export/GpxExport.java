@@ -1,5 +1,7 @@
 package cgeo.geocaching.export;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
@@ -15,7 +17,10 @@ import org.apache.commons.lang3.CharEncoding;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Environment;
 import android.view.ContextThemeWrapper;
 import android.view.View;
@@ -57,14 +62,19 @@ public class GpxExport extends AbstractExport {
     private Dialog getExportDialog(final String[] geocodes, final Activity activity) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
-        // AlertDialog has always dark style, so we have to apply it as well always
-        final View layout = View.inflate(new ContextThemeWrapper(activity, R.style.dark), R.layout.gpx_export_dialog, null);
+        final Context themedContext;
+        if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB)
+            themedContext = new ContextThemeWrapper(activity, R.style.dark);
+        else
+            themedContext = activity;
+
+        final View layout = View.inflate(themedContext, R.layout.gpx_export_dialog, null);
         builder.setView(layout);
 
-        final TextView text = (TextView) layout.findViewById(R.id.info);
+        final TextView text = ButterKnife.findById(layout, R.id.info);
         text.setText(getString(R.string.export_gpx_info, Settings.getGpxExportDir()));
 
-        final CheckBox shareOption = (CheckBox) layout.findViewById(R.id.share);
+        final CheckBox shareOption = ButterKnife.findById(layout, R.id.share);
 
         shareOption.setChecked(Settings.getShareAfterExport());
 
@@ -88,7 +98,7 @@ public class GpxExport extends AbstractExport {
     }
 
     private static String[] getGeocodes(final List<Geocache> caches) {
-        final ArrayList<String> allGeocodes = new ArrayList<String>(caches.size());
+        final ArrayList<String> allGeocodes = new ArrayList<>(caches.size());
         for (final Geocache geocache : caches) {
             allGeocodes.add(geocache.getGeocode());
         }
@@ -122,7 +132,7 @@ public class GpxExport extends AbstractExport {
                 return null;
             }
 
-            final List<String> allGeocodes = new ArrayList<String>(Arrays.asList(geocodes));
+            final List<String> allGeocodes = new ArrayList<>(Arrays.asList(geocodes));
 
             setMessage(CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.cache_counts, allGeocodes.size(), allGeocodes.size()));
 
@@ -146,7 +156,7 @@ public class GpxExport extends AbstractExport {
                 if (writer != null) {
                     try {
                         writer.close();
-                    } catch (final IOException e1) {
+                    } catch (final IOException ignored) {
                         // Ignore double error
                     }
                 }

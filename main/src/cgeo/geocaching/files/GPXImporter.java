@@ -113,7 +113,7 @@ public class GPXImporter {
 			fileType = getFileTypeFromMimeType(mimeType);
 		}
 
-		ImportThread importer = getImporterFromFileType(uri, contentResolver,
+		final ImportThread importer = getImporterFromFileType(uri, contentResolver,
 				fileType);
 
 		if (importer != null) {
@@ -139,14 +139,15 @@ public class GPXImporter {
 			final String mimeType) {
         if (GPX_MIME_TYPES.contains(mimeType)) {
 			return FileType.GPX;
-        } else if (ZIP_MIME_TYPES.contains(mimeType)) {
+        }
+        if (ZIP_MIME_TYPES.contains(mimeType)) {
 			return FileType.ZIP;
 		}
-		return FileType.UNKNOWN;
+        return FileType.UNKNOWN;
 	}
 
-	private ImportThread getImporterFromFileType(Uri uri,
-			ContentResolver contentResolver, FileType fileType) {
+	private ImportThread getImporterFromFileType(final Uri uri,
+			final ContentResolver contentResolver, final FileType fileType) {
 		switch (fileType) {
 		case ZIP:
 			return new ImportGpxZipAttachmentThread(uri, contentResolver,
@@ -178,7 +179,7 @@ public class GPXImporter {
         final Handler importStepHandler;
         final CancellableHandler progressHandler;
 
-        protected ImportThread(int listId, Handler importStepHandler, CancellableHandler progressHandler) {
+        protected ImportThread(final int listId, final Handler importStepHandler, final CancellableHandler progressHandler) {
             this.listId = listId;
             this.importStepHandler = importStepHandler;
             this.progressHandler = progressHandler;
@@ -210,7 +211,7 @@ public class GPXImporter {
             } catch (final ParserException e) {
                 Log.i("Importing caches failed - data format error", e);
                 importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED_WITH_ERROR, R.string.gpx_import_error_parser, 0, e.getLocalizedMessage()));
-            } catch (final CancellationException e) {
+            } catch (final CancellationException ignored) {
                 Log.i("Importing caches canceled");
                 importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_CANCELED));
             } catch (final Exception e) {
@@ -244,7 +245,7 @@ public class GPXImporter {
     static class ImportLocFileThread extends ImportThread {
         private final File file;
 
-        public ImportLocFileThread(final File file, int listId, Handler importStepHandler, CancellableHandler progressHandler) {
+        public ImportLocFileThread(final File file, final int listId, final Handler importStepHandler, final CancellableHandler progressHandler) {
             super(listId, importStepHandler, progressHandler);
             this.file = file;
         }
@@ -262,7 +263,7 @@ public class GPXImporter {
         private final Uri uri;
         private final ContentResolver contentResolver;
 
-        public ImportLocAttachmentThread(Uri uri, ContentResolver contentResolver, int listId, Handler importStepHandler, CancellableHandler progressHandler) {
+        public ImportLocAttachmentThread(final Uri uri, final ContentResolver contentResolver, final int listId, final Handler importStepHandler, final CancellableHandler progressHandler) {
             super(listId, importStepHandler, progressHandler);
             this.uri = uri;
             this.contentResolver = contentResolver;
@@ -284,7 +285,7 @@ public class GPXImporter {
 
     static abstract class ImportGpxThread extends ImportThread {
 
-        protected ImportGpxThread(int listId, Handler importStepHandler, CancellableHandler progressHandler) {
+        protected ImportGpxThread(final int listId, final Handler importStepHandler, final CancellableHandler progressHandler) {
             super(listId, importStepHandler, progressHandler);
         }
 
@@ -293,7 +294,7 @@ public class GPXImporter {
             try {
                 // try to parse cache file as GPX 10
                 return doImport(new GPX10Parser(listId));
-            } catch (final ParserException pe) {
+            } catch (final ParserException ignored) {
                 // didn't work -> lets try GPX11
                 return doImport(new GPX11Parser(listId));
             }
@@ -305,13 +306,13 @@ public class GPXImporter {
     static class ImportGpxFileThread extends ImportGpxThread {
         private final File cacheFile;
 
-        public ImportGpxFileThread(final File file, int listId, Handler importStepHandler, CancellableHandler progressHandler) {
+        public ImportGpxFileThread(final File file, final int listId, final Handler importStepHandler, final CancellableHandler progressHandler) {
             super(listId, importStepHandler, progressHandler);
             this.cacheFile = file;
         }
 
         @Override
-        protected Collection<Geocache> doImport(GPXParser parser) throws IOException, ParserException {
+        protected Collection<Geocache> doImport(final GPXParser parser) throws IOException, ParserException {
             Log.i("Import GPX file: " + cacheFile.getAbsolutePath());
             importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches, (int) cacheFile.length()));
             Collection<Geocache> caches = parser.parse(cacheFile, progressHandler);
@@ -333,17 +334,21 @@ public class GPXImporter {
         private final Uri uri;
         private final ContentResolver contentResolver;
 
-        public ImportGpxAttachmentThread(Uri uri, ContentResolver contentResolver, int listId, Handler importStepHandler, CancellableHandler progressHandler) {
+        public ImportGpxAttachmentThread(final Uri uri, final ContentResolver contentResolver, final int listId, final Handler importStepHandler, final CancellableHandler progressHandler) {
             super(listId, importStepHandler, progressHandler);
             this.uri = uri;
             this.contentResolver = contentResolver;
         }
 
         @Override
-        protected Collection<Geocache> doImport(GPXParser parser) throws IOException, ParserException {
+        protected Collection<Geocache> doImport(final GPXParser parser) throws IOException, ParserException {
             Log.i("Import GPX from uri: " + uri);
-            importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches, -1));
             final InputStream is = contentResolver.openInputStream(uri);
+            int streamSize = is.available();
+            if (streamSize == 0) {
+                streamSize = -1;
+            }
+            importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches, streamSize));
             try {
                 return parser.parse(is, progressHandler);
             } finally {
@@ -354,12 +359,12 @@ public class GPXImporter {
 
     static abstract class ImportGpxZipThread extends ImportGpxThread {
 
-        protected ImportGpxZipThread(int listId, Handler importStepHandler, CancellableHandler progressHandler) {
+        protected ImportGpxZipThread(final int listId, final Handler importStepHandler, final CancellableHandler progressHandler) {
             super(listId, importStepHandler, progressHandler);
         }
 
         @Override
-        protected Collection<Geocache> doImport(GPXParser parser) throws IOException, ParserException {
+        protected Collection<Geocache> doImport(final GPXParser parser) throws IOException, ParserException {
             Collection<Geocache> caches = Collections.emptySet();
             // can't assume that GPX file comes before waypoint file in zip -> so we need two passes
             // 1. parse GPX files
@@ -403,7 +408,7 @@ public class GPXImporter {
     static class ImportGpxZipFileThread extends ImportGpxZipThread {
         private final File cacheFile;
 
-        public ImportGpxZipFileThread(final File file, int listId, Handler importStepHandler, CancellableHandler progressHandler) {
+        public ImportGpxZipFileThread(final File file, final int listId, final Handler importStepHandler, final CancellableHandler progressHandler) {
             super(listId, importStepHandler, progressHandler);
             this.cacheFile = file;
             Log.i("Import zipped GPX: " + file);
@@ -419,7 +424,7 @@ public class GPXImporter {
         private final Uri uri;
         private final ContentResolver contentResolver;
 
-        public ImportGpxZipAttachmentThread(Uri uri, ContentResolver contentResolver, int listId, Handler importStepHandler, CancellableHandler progressHandler) {
+        public ImportGpxZipAttachmentThread(final Uri uri, final ContentResolver contentResolver, final int listId, final Handler importStepHandler, final CancellableHandler progressHandler) {
             super(listId, importStepHandler, progressHandler);
             this.uri = uri;
             this.contentResolver = contentResolver;
@@ -434,14 +439,14 @@ public class GPXImporter {
 
     final private CancellableHandler progressHandler = new CancellableHandler() {
         @Override
-        public void handleRegularMessage(Message msg) {
+        public void handleRegularMessage(final Message msg) {
             progress.setProgress(msg.arg1);
         }
     };
 
     final private Handler importStepHandler = new Handler() {
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(final Message msg) {
             switch (msg.what) {
                 case IMPORT_STEP_START:
                     final Message cancelMessage = importStepHandler.obtainMessage(IMPORT_STEP_CANCEL);

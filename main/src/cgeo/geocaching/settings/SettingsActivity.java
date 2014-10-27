@@ -21,6 +21,7 @@ import org.openintents.intents.FileManagerIntents;
 
 import android.app.ProgressDialog;
 import android.app.backup.BackupManager;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -62,7 +63,7 @@ public class SettingsActivity extends PreferenceActivity {
      * directory and preference key in onActivityResult() easily just by knowing
      * the result code.
      */
-    private static enum DirChooserType {
+    private enum DirChooserType {
         GPX_IMPORT_DIR(1, R.string.pref_gpxImportDir,
                 Environment.getExternalStorageDirectory().getPath() + "/gpx", false),
         GPX_EXPORT_DIR(2, R.string.pref_gpxExportDir,
@@ -87,6 +88,8 @@ public class SettingsActivity extends PreferenceActivity {
         setTheme(Settings.isLightSkin() && Build.VERSION.SDK_INT > 10 ? R.style.settings_light : R.style.settings);
         super.onCreate(savedInstanceState);
 
+        initHardwareAccelerationPreferences();
+        initUnitPreferences();
         SettingsActivity.addPreferencesFromResource(this, R.xml.preferences);
         initPreferences();
 
@@ -122,6 +125,7 @@ public class SettingsActivity extends PreferenceActivity {
         initDefaultNavigationPreferences();
         initBackupButtons();
         initDbLocationPreference();
+        initGeoDirPreferences();
         initDebugPreference();
         initBasicMemberPreferences();
         initSend2CgeoPreferences();
@@ -139,7 +143,6 @@ public class SettingsActivity extends PreferenceActivity {
                 R.string.pref_ecusername, R.string.pref_ecpassword, R.string.pref_ec_icons }) {
             bindSummaryToStringValue(k);
         }
-        getPreference(R.string.pref_units).setDefaultValue(Settings.getImperialUnitsDefault());
     }
 
     private void initNavigationMenuPreferences() {
@@ -157,19 +160,26 @@ public class SettingsActivity extends PreferenceActivity {
         for (final OCPreferenceKeys key : OCPreferenceKeys.values()) {
             getPreference(key.isActivePrefId).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
             setWebsite(key.websitePrefId, key.authParams.host);
-            setServiceScreenSummary(getPreferenceManager(), key.isActivePrefId);
+            getPreference(key.prefScreenId).setSummary(getServiceSummary(Settings.isOCConnectorActive(key.isActivePrefId)));
         }
         getPreference(R.string.pref_connectorGCActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
-        getPreference(R.string.pref_connectorOXActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
-        getPreference(R.string.pref_connectorECActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         setWebsite(R.string.pref_fakekey_gc_website, GCConnector.getInstance().getHost());
+        getPreference(R.string.preference_screen_gc).setSummary(getServiceSummary(Settings.isGCConnectorActive()));
+
+        getPreference(R.string.pref_connectorOXActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         setWebsite(R.string.pref_fakekey_ox_website, "opencaching.com");
+        getPreference(R.string.preference_screen_ox).setSummary(getServiceSummary(Settings.isOXConnectorActive()));
+
+        getPreference(R.string.pref_connectorECActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         setWebsite(R.string.pref_fakekey_ec_website, "extremcaching.com");
+        getPreference(R.string.preference_screen_ec).setSummary(getServiceSummary(Settings.isECConnectorActive()));
+
+        getPreference(R.string.pref_ratingwanted).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         setWebsite(R.string.pref_fakekey_gcvote_website, "gcvote.com");
+        getPreference(R.string.preference_screen_gcvote).setSummary(getServiceSummary(Settings.isRatingWanted()));
+
         setWebsite(R.string.pref_fakekey_sendtocgeo_website, "send2.cgeo.org");
-        setServiceScreenSummary(getPreferenceManager(), R.string.pref_connectorGCActive);
-        setServiceScreenSummary(getPreferenceManager(), R.string.pref_connectorOXActive);
-        setServiceScreenSummary(getPreferenceManager(), R.string.pref_connectorECActive);
+        getPreference(R.string.preference_screen_sendtocgeo).setSummary(getServiceSummary(Settings.isRegisteredForSend2cgeo()));
     }
 
     private void setWebsite(final int preferenceKey, final String host) {
@@ -177,7 +187,12 @@ public class SettingsActivity extends PreferenceActivity {
         preference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(final Preference preference) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://" + host)));
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://" + host)));
+                } catch (final ActivityNotFoundException e) {
+                    Log.e("Cannot find suitable activity", e);
+                    ActivityMixin.showToast(SettingsActivity.this, R.string.err_application_no);
+                }
                 return true;
             }
         });
@@ -185,32 +200,6 @@ public class SettingsActivity extends PreferenceActivity {
 
     private static String getServiceSummary(final boolean status) {
         return status ? CgeoApplication.getInstance().getString(R.string.settings_service_active) : StringUtils.EMPTY;
-    }
-
-    private static void setServiceScreenSummary(final PreferenceManager preferenceManager, final int preferenceKey) {
-
-        String summary;
-
-        switch (preferenceKey) {
-            case R.string.pref_connectorGCActive:
-                summary = getServiceSummary(Settings.isGCConnectorActive());
-                preferenceManager.findPreference(getKey(R.string.preference_screen_gc)).setSummary(summary);
-                break;
-            case R.string.pref_connectorOXActive:
-                summary = getServiceSummary(Settings.isOXConnectorActive());
-                preferenceManager.findPreference(getKey(R.string.preference_screen_ox)).setSummary(summary);
-                break;
-            case R.string.pref_connectorECActive:
-                summary = getServiceSummary(Settings.isECConnectorActive());
-                preferenceManager.findPreference(getKey(R.string.preference_screen_ec)).setSummary(summary);
-                break;
-            default:
-                if (OCPreferenceKeys.isOCPreference(preferenceKey)) {
-                    final OCPreferenceKeys prefKey = OCPreferenceKeys.getById(preferenceKey);
-                    summary = getServiceSummary(Settings.isOCConnectorActive(prefKey.isActivePrefId));
-                    preferenceManager.findPreference(getKey(prefKey.prefScreenId)).setSummary(summary);
-                }
-        }
     }
 
     private static String getKey(final int prefKeyId) {
@@ -307,7 +296,7 @@ public class SettingsActivity extends PreferenceActivity {
             dirChooser.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT,
                     getString(android.R.string.ok));
             startActivityForResult(dirChooser, dct.requestCode);
-        } catch (final android.content.ActivityNotFoundException ex) {
+        } catch (final android.content.ActivityNotFoundException ignored) {
             // OI file manager not available
             final Intent dirChooser = new Intent(this, SimpleDirChooser.class);
             dirChooser.putExtra(Intents.EXTRA_START_DIR, startDirectory);
@@ -383,12 +372,23 @@ public class SettingsActivity extends PreferenceActivity {
 		final Preference memoryDumpPref = getPreference(R.string.pref_memory_dump);
 		memoryDumpPref
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-					@Override public boolean onPreferenceClick(
-							final Preference preference) {
-						DebugUtils.createMemoryDump(SettingsActivity.this);
-						return true;
-					}
-				});
+                    @Override
+                    public boolean onPreferenceClick(
+                            final Preference preference) {
+                        DebugUtils.createMemoryDump(SettingsActivity.this);
+                        return true;
+                    }
+                });
+    }
+
+    public static void initHardwareAccelerationPreferences() {
+        // We have to ensure that the preference is initialized so that devices with hardware acceleration disabled
+        // get the appropriate value.
+        Settings.setUseHardwareAcceleration(Settings.useHardwareAcceleration());
+    }
+
+    private static void initUnitPreferences() {
+        Settings.setUseImperialUnits(Settings.useImperialUnits());
     }
 
     private void initDbLocationPreference() {
@@ -409,7 +409,31 @@ public class SettingsActivity extends PreferenceActivity {
         p.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-                Log.setDebug((Boolean) newValue);
+                final boolean isDebug = (Boolean) newValue;
+                Log.setDebug(isDebug);
+                CgeoApplication.dumpOnOutOfMemory(isDebug);
+                return true;
+            }
+        });
+    }
+
+    private void initGeoDirPreferences() {
+        final Preference playServices = getPreference(R.string.pref_googleplayservices);
+        playServices.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+                CgeoApplication.getInstance().setupGeoDataObservables((Boolean) newValue, Settings.useLowPowerMode());
+                return true;
+            }
+        });
+        playServices.setEnabled(CgeoApplication.getInstance().isGooglePlayServicesAvailable());
+        getPreference(R.string.pref_lowpowermode).setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+                final CgeoApplication app = CgeoApplication.getInstance();
+                final Boolean useLowPower = (Boolean) newValue;
+                app.setupGeoDataObservables(Settings.useGooglePlayServices(), useLowPower);
+                app.setupDirectionObservable(useLowPower);
                 return true;
             }
         });
@@ -460,6 +484,7 @@ public class SettingsActivity extends PreferenceActivity {
             case R.string.pref_fakekey_ocnl_authorization:
             case R.string.pref_fakekey_ocus_authorization:
             case R.string.pref_fakekey_ocro_authorization:
+            case R.string.pref_fakekey_ocuk_authorization:
                 setOCAuthTitle(OCPreferenceKeys.getByAuthId(prefKeyId));
                 break;
             case R.string.pref_fakekey_twitter_authorization:
@@ -535,6 +560,7 @@ public class SettingsActivity extends PreferenceActivity {
             case R.string.pref_fakekey_ocnl_authorization:
             case R.string.pref_fakekey_ocus_authorization:
             case R.string.pref_fakekey_ocro_authorization:
+            case R.string.pref_fakekey_ocuk_authorization:
                 final OCPreferenceKeys key = OCPreferenceKeys.getByAuthId(requestCode);
                 if (key != null) {
                     setOCAuthTitle(key);
@@ -555,8 +581,12 @@ public class SettingsActivity extends PreferenceActivity {
      * to reflect its new value.
      */
     private static final Preference.OnPreferenceChangeListener VALUE_CHANGE_LISTENER = new Preference.OnPreferenceChangeListener() {
+
+        private PreferenceManager preferenceManager;
+
         @Override
         public boolean onPreferenceChange(final Preference preference, final Object value) {
+            preferenceManager = preference.getPreferenceManager();
             final String stringValue = value.toString();
 
             if (isPreference(preference, R.string.pref_mapsource)) {
@@ -566,7 +596,7 @@ public class SettingsActivity extends PreferenceActivity {
                     final int mapSourceId = Integer.parseInt(stringValue);
                     mapSource = MapProviderFactory.getMapSource(mapSourceId);
                 } catch (final NumberFormatException e) {
-                    Log.e("SettingsActivity.onPreferenceChange: bad source id '" + stringValue + "'");
+                    Log.e("SettingsActivity.onPreferenceChange: bad source id '" + stringValue + "'", e);
                     mapSource = null;
                 }
                 // If there is no corresponding map source (because some map sources were
@@ -587,6 +617,7 @@ public class SettingsActivity extends PreferenceActivity {
                     || isPreference(preference, R.string.pref_connectorOCNLActive)
                     || isPreference(preference, R.string.pref_connectorOCUSActive)
                     || isPreference(preference, R.string.pref_connectorOCROActive)
+                    || isPreference(preference, R.string.pref_connectorOCUKActive)
                     || isPreference(preference, R.string.pref_connectorGCActive)
                     || isPreference(preference, R.string.pref_connectorOXActive)
                     || isPreference(preference, R.string.pref_connectorECActive)) {
@@ -626,6 +657,9 @@ public class SettingsActivity extends PreferenceActivity {
                     text = preference.getContext().getString(R.string.init_backup_last_no);
                 }
                 preference.setSummary(text);
+            } else if (isPreference(preference, R.string.pref_ratingwanted)) {
+                findPreference(R.string.preference_screen_gcvote).setSummary(getServiceSummary((Boolean) value));
+                redrawScreen(findPreference(R.string.preference_screen_services));
             } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
@@ -638,6 +672,11 @@ public class SettingsActivity extends PreferenceActivity {
             }
             return true;
         }
+
+        private Preference findPreference(final int preferenceKeyResourceId) {
+            return preferenceManager.findPreference(getKey(preferenceKeyResourceId));
+        }
+
     };
 
     /**

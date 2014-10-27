@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:cgeo="http://schemas.android.com/apk/res-auto" >
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <item
         android:id="@+id/menu_toggle_mypos"
         android:icon="@drawable/ic_menu_myposition"
         android:showAsAction="always"
         android:title="@string/menu_centerposition"
-        cgeo:showAsAction="always"/>
+        app:showAsAction="always"/>
     <item
         android:id="@+id/menu_select_mapview"
-        android:icon="@drawable/ic_menu_mapmode"
+        android:icon="@drawable/ic_action_layers"
+        android:showAsAction="ifRoom|withText"
         android:title="@string/map_view_map"
-        cgeo:showAsAction="ifRoom|withText">
+        app:showAsAction="ifRoom|withText">
         <menu>
             <group
                 android:id="@+id/menu_group_map_sources"
@@ -23,54 +24,61 @@
     <item
         android:id="@+id/menu_map_live"
         android:icon="@drawable/ic_menu_refresh"
+        android:showAsAction="ifRoom|withText"
         android:title="@string/map_live_disable"
-        cgeo:showAsAction="ifRoom|withText">
+        android:visible="false"
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_store_caches"
         android:icon="@drawable/ic_menu_set_as"
+        android:showAsAction="ifRoom|withText"
         android:title="@string/caches_store_offline"
-        cgeo:showAsAction="ifRoom|withText">
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/submenu_modes"
         android:icon="@drawable/ic_menu_mark"
+        android:showAsAction="ifRoom|withText"
         android:title="@string/map_modes"
-        cgeo:showAsAction="ifRoom|withText">
+        app:showAsAction="ifRoom|withText">
         <menu>
             <item
                 android:id="@+id/menu_trail_mode"
                 android:checkable="true"
                 android:icon="@drawable/ic_menu_trail"
                 android:title="@string/map_trail_show"
-                cgeo:showAsAction="ifRoom|withText">
+                app:showAsAction="ifRoom|withText">
             </item>
             <item
                 android:id="@+id/menu_circle_mode"
                 android:checkable="true"
                 android:icon="@drawable/ic_menu_circle"
                 android:title="@string/map_circles_show"
-                cgeo:showAsAction="ifRoom|withText">
+                app:showAsAction="ifRoom|withText">
             </item>
             <item
                 android:id="@+id/menu_mycaches_mode"
                 android:checkable="true"
                 android:icon="@android:drawable/ic_menu_myplaces"
                 android:title="@string/map_mycaches_hide"
-                cgeo:showAsAction="ifRoom|withText">
+                app:showAsAction="ifRoom|withText">
             </item>
         </menu>
     </item>
     <item
         android:id="@+id/menu_theme_mode"
         android:icon="@drawable/ic_menu_preferences"
+        android:showAsAction="ifRoom|withText"
         android:title="@string/map_theme_select"
-        cgeo:showAsAction="ifRoom|withText">
+        android:visible="false"
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/submenu_strategy"
         android:icon="@drawable/ic_menu_preferences"
-        android:title="@string/map_strategy">
+        android:title="@string/map_strategy"
+        android:visible="false">
         <menu>
             <group
                 android:id="@+id/menu_group_strategy"

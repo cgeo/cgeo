@@ -21,13 +21,13 @@ public class Waypoint implements IWaypoint {
 
     public static final String PREFIX_OWN = "OWN";
     private static final int ORDER_UNDEFINED = -2;
+    private static final Pattern PATTERN_COORDS = Pattern.compile("\\b[nNsS]\\s*\\d");
     private int id = -1;
     private String geocode = "geocode";
     private WaypointType waypointType = WaypointType.WAYPOINT;
     private String prefix = "";
     private String lookup = "";
     private String name = "";
-    private String latlon = "";
     private Geopoint coords = null;
     private String note = "";
     private int cachedOrder = ORDER_UNDEFINED;
@@ -67,9 +67,6 @@ public class Waypoint implements IWaypoint {
         if (StringUtils.isBlank(name)) {
             setName(old.name);
         }
-        if (StringUtils.isBlank(latlon) || latlon.startsWith("?")) { // there are waypoints containing "???"
-            latlon = old.latlon;
-        }
         if (coords == null) {
             coords = old.coords;
         }
@@ -89,7 +86,7 @@ public class Waypoint implements IWaypoint {
 
     public static void mergeWayPoints(final List<Waypoint> newPoints, final List<Waypoint> oldPoints, final boolean forceMerge) {
         // Build a map of new waypoints for faster subsequent lookups
-        final Map<String, Waypoint> newPrefixes = new HashMap<String, Waypoint>(newPoints.size());
+        final Map<String, Waypoint> newPrefixes = new HashMap<>(newPoints.size());
         for (final Waypoint waypoint : newPoints) {
             newPrefixes.put(waypoint.getPrefix(), waypoint);
         }
@@ -204,14 +201,6 @@ public class Waypoint implements IWaypoint {
         this.name = name;
     }
 
-    public String getLatlon() {
-        return latlon;
-    }
-
-    public void setLatlon(final String latlon) {
-        this.latlon = latlon;
-    }
-
     @Override
     public Geopoint getCoords() {
         return coords;
@@ -302,11 +291,10 @@ public class Waypoint implements IWaypoint {
      * @return a collection of found waypoints
      */
     public static Collection<Waypoint> parseWaypointsFromNote(@NonNull final String initialNote) {
-        final List<Waypoint> waypoints = new LinkedList<Waypoint>();
-        final Pattern COORDPATTERN = Pattern.compile("\\b[nNsS]{1}\\s*\\d"); // begin of coordinates
+        final List<Waypoint> waypoints = new LinkedList<>();
 
         String note = initialNote;
-        MatcherWrapper matcher = new MatcherWrapper(COORDPATTERN, note);
+        MatcherWrapper matcher = new MatcherWrapper(PATTERN_COORDS, note);
         int count = 1;
         while (matcher.find()) {
             try {
@@ -321,12 +309,11 @@ public class Waypoint implements IWaypoint {
                     waypoints.add(waypoint);
                     count++;
                 }
-            } catch (final Geopoint.ParseException e) {
-                // ignore
+            } catch (final Geopoint.ParseException ignored) {
             }
 
             note = note.substring(matcher.start() + 1);
-            matcher = new MatcherWrapper(COORDPATTERN, note);
+            matcher = new MatcherWrapper(PATTERN_COORDS, note);
         }
         return waypoints;
     }

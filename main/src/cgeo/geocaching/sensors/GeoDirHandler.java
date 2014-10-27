@@ -2,6 +2,7 @@ package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.AngleUtils;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -21,7 +22,7 @@ import rx.subscriptions.CompositeSubscription;
  * accordingly in {@code onPause}.
  *
  * The direction is always relative to the top of the device (natural direction), and that it must
- * be fixed using {@link DirectionProvider#getDirectionNow(float)}. When the direction is derived from the GPS,
+ * be fixed using {@link cgeo.geocaching.utils.AngleUtils#getDirectionNow(float)}. When the direction is derived from the GPS,
  * it is altered so that the fix can still be applied as if the information came from the compass.
  */
 public abstract class GeoDirHandler {
@@ -29,6 +30,7 @@ public abstract class GeoDirHandler {
     public static final int UPDATE_GEODATA = 1 << 1;
     public static final int UPDATE_DIRECTION = 1 << 2;
     public static final int UPDATE_GEODIR = 1 << 3;
+    public static final int LOW_POWER = 1 << 4;
 
     private static final CgeoApplication app = CgeoApplication.getInstance();
 
@@ -76,7 +78,7 @@ public abstract class GeoDirHandler {
 
     private static float fixDirection(final IGeoData geoData, final float direction) {
         final boolean useGPSBearing = !Settings.isUseCompass() || geoData.getSpeed() > 5;
-        return useGPSBearing ? DirectionProvider.reverseDirectionNow(geoData.getBearing()) : direction;
+        return useGPSBearing ? AngleUtils.reverseDirectionNow(geoData.getBearing()) : direction;
     }
 
     /**
@@ -85,8 +87,9 @@ public abstract class GeoDirHandler {
      */
     public Subscription start(final int flags) {
         final CompositeSubscription subscriptions = new CompositeSubscription();
+        final boolean lowPower = (flags & LOW_POWER) != 0;
         if ((flags & UPDATE_GEODATA) != 0) {
-            subscriptions.add(app.geoDataObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<IGeoData>() {
+            subscriptions.add(app.geoDataObservable(lowPower).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<IGeoData>() {
                 @Override
                 public void call(final IGeoData geoData) {
                     updateGeoData(geoData);
@@ -102,7 +105,7 @@ public abstract class GeoDirHandler {
             }));
         }
         if ((flags & UPDATE_GEODIR) != 0) {
-            subscriptions.add(Observable.combineLatest(app.geoDataObservable(), app.directionObservable(), new Func2<IGeoData, Float, ImmutablePair<IGeoData, Float>>() {
+            subscriptions.add(Observable.combineLatest(app.geoDataObservable(lowPower), app.directionObservable(), new Func2<IGeoData, Float, ImmutablePair<IGeoData, Float>>() {
                 @Override
                 public ImmutablePair<IGeoData, Float> call(final IGeoData geoData, final Float direction) {
                     return ImmutablePair.of(geoData, fixDirection(geoData, direction));

@@ -59,7 +59,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         File directory = new File(directoryPath);
         if (directory.isDirectory()) {
             try {
-                ArrayList<String> mapFileList = new ArrayList<String>();
+                ArrayList<String> mapFileList = new ArrayList<>();
                 final File[] files = directory.listFiles();
                 if (ArrayUtils.isNotEmpty(files)) {
                     for (File file : files) {

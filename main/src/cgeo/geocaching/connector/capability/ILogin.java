@@ -23,6 +23,11 @@ public interface ILogin extends IConnector {
     boolean login(Handler handler, Context fromActivity);
 
     /**
+     * Log out of the connector if possible.
+     */
+    void logout();
+
+    /**
      * Returns the status of the last {@link}login() request
      *
      * @return

@@ -26,7 +26,7 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
 
     private static final int MENU_GROUP = 1;
     private final Context mContext;
-    private final ArrayList<ComparatorEntry> registry = new ArrayList<ComparatorEntry>(20);
+    private final ArrayList<ComparatorEntry> registry = new ArrayList<>(20);
     /**
      * Callback triggered on selecting a new sort order.
      */
@@ -62,7 +62,7 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
     }
 
     private void registerComparators() {
-        register(R.string.caches_sort_distance, null);
+        register(R.string.caches_sort_distance, DistanceComparator.class);
         register(R.string.caches_sort_date_hidden, DateComparator.class);
         register(R.string.caches_sort_difficulty, DifficultyComparator.class);
         register(R.string.caches_sort_finds, FindsComparator.class);
@@ -136,9 +136,7 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
                 final CacheComparator comparator = cacheComparator.newInstance();
                 onClickListener.call(comparator);
             }
-        } catch (final InstantiationException e) {
-            Log.e("selectComparator", e);
-        } catch (final IllegalAccessException e) {
+        } catch (final InstantiationException | IllegalAccessException e) {
             Log.e("selectComparator", e);
         }
     }

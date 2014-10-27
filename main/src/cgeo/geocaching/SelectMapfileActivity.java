@@ -33,7 +33,7 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
 
     private String mapFile;
 
-    private static int REQUEST_DIRECTORY = 1;
+    private final static int REQUEST_DIRECTORY = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
                     dirChooser.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT,
                             getString(android.R.string.ok));
                     startActivityForResult(dirChooser, REQUEST_DIRECTORY);
-                } catch (android.content.ActivityNotFoundException ex) {
+                } catch (android.content.ActivityNotFoundException ignored) {
                     // OI file manager not available
                     final Intent dirChooser = new Intent(SelectMapfileActivity.this, SimpleDirChooser.class);
                     dirChooser.putExtra(Intents.EXTRA_START_DIR, LocalStorage.getStorage().getAbsolutePath());
@@ -83,7 +83,7 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
 
     @Override
     protected List<File> getBaseFolders() {
-        List<File> folders = new ArrayList<File>();
+        List<File> folders = new ArrayList<>();
         for (File dir : LocalStorage.getStorages()) {
             folders.add(new File(dir, "mfmaps"));
             folders.add(new File(new File(dir, "Locus"), "mapsVector"));
@@ -98,8 +98,8 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
     }
 
     @Override
-    public void setCurrentFile(String newFile) {
-        mapFile = newFile;
+    public void setCurrentFile(String name) {
+        mapFile = name;
     }
 
     @Override

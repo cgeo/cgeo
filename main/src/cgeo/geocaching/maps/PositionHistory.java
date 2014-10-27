@@ -19,7 +19,7 @@ public class PositionHistory {
      */
     private static final int MAX_POSITIONS = 700;
 
-    private ArrayList<Location> history = new ArrayList<Location>();
+    private ArrayList<Location> history = new ArrayList<>();
 
     /**
      * Adds the current position to the trail history to be able to show the trail on the map.

@@ -1,5 +1,8 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
+
+import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
@@ -10,14 +13,16 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.twitter.Twitter;
-import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.dialog.DateDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.DateUtils;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
 import cgeo.geocaching.utils.LogTemplateProvider.LogContext;
+
+import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -49,8 +54,6 @@ import java.util.Date;
 import java.util.List;
 
 public class LogCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent {
-    static final String EXTRAS_GEOCODE = "geocode";
-    static final String EXTRAS_ID = "id";
 
     private static final String SAVED_STATE_RATING = "cgeo.geocaching.saved_state_rating";
     private static final String SAVED_STATE_TYPE = "cgeo.geocaching.saved_state_type";
@@ -65,12 +68,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private Geocache cache = null;
     private String geocode = null;
     private String text = null;
-    private List<LogType> possibleLogTypes = new ArrayList<LogType>();
+    private List<LogType> possibleLogTypes = new ArrayList<>();
     private List<TrackableLog> trackables = null;
     private CheckBox tweetCheck = null;
     private LinearLayout tweetBox = null;
     private LinearLayout logPasswordBox = null;
-    private boolean tbChanged = false;
     private SparseArray<TrackableLog> actionButtons;
 
     private ILoggingManager loggingManager;
@@ -124,7 +126,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         if (Settings.isTrackableAutoVisit()) {
             for (final TrackableLog trackable : trackables) {
                 trackable.action = LogTypeTrackable.VISITED;
-                tbChanged = true;
             }
         }
     }
@@ -136,17 +137,19 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         if (inflater == null) {
             inflater = getLayoutInflater();
         }
-        actionButtons = new SparseArray<TrackableLog>();
+        actionButtons = new SparseArray<>();
 
         final LinearLayout inventoryView = (LinearLayout) findViewById(R.id.inventory);
         inventoryView.removeAllViews();
 
         for (final TrackableLog tb : trackables) {
-            final LinearLayout inventoryItem = (LinearLayout) inflater.inflate(R.layout.logcache_trackable_item, null);
+            final LinearLayout inventoryItem = (LinearLayout) inflater.inflate(R.layout.logcache_trackable_item, inventoryView, false);
 
-            ((TextView) inventoryItem.findViewById(R.id.trackcode)).setText(tb.trackCode);
-            ((TextView) inventoryItem.findViewById(R.id.name)).setText(tb.name);
-            final TextView actionButton = (TextView) inventoryItem.findViewById(R.id.action);
+            final TextView codeView = ButterKnife.findById(inventoryItem, R.id.trackcode);
+            codeView.setText(tb.trackCode);
+            final TextView nameView = ButterKnife.findById(inventoryItem, R.id.name);
+            nameView.setText(tb.name);
+            final TextView actionButton = ButterKnife.findById(inventoryItem, R.id.action);
             actionButton.setId(tb.id);
             actionButtons.put(actionButton.getId(), tb);
             actionButton.setText(tb.action.getLabel() + " ▼");
@@ -179,7 +182,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         if (inventoryView.getChildCount() > 1) {
             final LinearLayout inventoryChangeAllView = (LinearLayout) findViewById(R.id.inventory_changeall);
 
-            final Button changeButton = (Button) inventoryChangeAllView.findViewById(R.id.changebutton);
+            final Button changeButton = ButterKnife.findById(inventoryChangeAllView, R.id.changebutton);
             changeButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -194,7 +197,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private void enablePostButton(final boolean enabled) {
         sendButtonEnabled = enabled;
-        invalidateOptionsMenuCompatible();
     }
 
     @Override
@@ -204,9 +206,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         // Get parameters from intent and basic cache information from database
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            geocode = extras.getString(EXTRAS_GEOCODE);
+            geocode = extras.getString(Intents.EXTRA_GEOCODE);
             if (StringUtils.isBlank(geocode)) {
-                final String cacheid = extras.getString(EXTRAS_ID);
+                final String cacheid = extras.getString(Intents.EXTRA_ID);
                 if (StringUtils.isNotBlank(cacheid)) {
                     geocode = DataStore.getGeocodeForGuid(cacheid);
                 }
@@ -284,6 +286,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         loggingManager = cache.getLoggingManager(this);
 
         loggingManager.init();
+        requestKeyboardForLogging();
     }
 
     private void initializeRatingBar(final RatingBar ratingBar) {
@@ -374,12 +377,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         typeSelected = type;
         typeButton.setText(typeSelected.getL10n());
 
-        if (LogType.FOUND_IT == type && !tbChanged) {
-            // TODO: change action
-        } else if (LogType.FOUND_IT != type && !tbChanged) {
-            // TODO: change action
-        }
-
         updateTweetBox(type);
         updateLogPasswordBox(type);
     }
@@ -425,14 +422,14 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
                 if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
                     // update geocache in DB
-                    if (typeSelected == LogType.FOUND_IT || typeSelected == LogType.ATTENDED || typeSelected == LogType.WEBCAM_PHOTO_TAKEN) {
+                    if (typeSelected.isFoundLog()) {
                         cache.setFound(true);
                         cache.setVisitedDate(new Date().getTime());
                     }
                     DataStore.saveChangedCache(cache);
 
                     // update logs in DB
-                    final ArrayList<LogEntry> newLogs = new ArrayList<LogEntry>(cache.getLogs());
+                    final ArrayList<LogEntry> newLogs = new ArrayList<>(cache.getLogs());
                     final LogEntry logNow = new LogEntry(date.getTimeInMillis(), typeSelected, log);
                     logNow.friend = true;
                     newLogs.add(0, logNow);
@@ -493,6 +490,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         // again will be easy using "Clear" while retyping the text may not be.
         if (force || (StringUtils.isNotEmpty(log) && !StringUtils.equals(log, text))) {
             cache.logOffline(this, log, date, typeSelected);
+            Settings.setLastCacheLog(log);
         }
         text = log;
     }
@@ -522,7 +520,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 for (final TrackableLog tb : trackables) {
                     tb.action = logType;
                 }
-                tbChanged = true;
                 updateTrackablesList();
                 dialog.dismiss();
             }
@@ -541,7 +538,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private void selectLogType() {
         // use a local copy of the possible types, as that one might be modified in the background by the loader
-        final ArrayList<LogType> possible = new ArrayList<LogType>(possibleLogTypes);
+        final ArrayList<LogType> possible = new ArrayList<>(possibleLogTypes);
 
         final Builder alert = new AlertDialog.Builder(this);
         final String[] choices = new String[possible.size()];
@@ -570,7 +567,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             @Override
             public void onClick(final DialogInterface dialog, final int position) {
                 final LogTypeTrackable logType = LogTypeTrackable.values()[position];
-                tbChanged = true;
                 trackableLog.action = logType;
                 Log.i("Trackable " + trackableLog.trackCode + " (" + trackableLog.name + ") has new action: #" + logType);
                 updateTrackablesList();
@@ -582,9 +578,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private void selectImage() {
         final Intent selectImageIntent = new Intent(this, ImageSelectActivity.class);
-        selectImageIntent.putExtra(ImageSelectActivity.EXTRAS_CAPTION, imageCaption);
-        selectImageIntent.putExtra(ImageSelectActivity.EXTRAS_DESCRIPTION, imageDescription);
-        selectImageIntent.putExtra(ImageSelectActivity.EXTRAS_URI_AS_STRING, imageUri.toString());
+        selectImageIntent.putExtra(Intents.EXTRA_CAPTION, imageCaption);
+        selectImageIntent.putExtra(Intents.EXTRA_DESCRIPTION, imageDescription);
+        selectImageIntent.putExtra(Intents.EXTRA_URI_AS_STRING, imageUri.toString());
 
         startActivityForResult(selectImageIntent, SELECT_IMAGE);
     }
@@ -593,9 +589,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         if (requestCode == SELECT_IMAGE) {
             if (resultCode == RESULT_OK) {
-                imageCaption = data.getStringExtra(ImageSelectActivity.EXTRAS_CAPTION);
-                imageDescription = data.getStringExtra(ImageSelectActivity.EXTRAS_DESCRIPTION);
-                imageUri = Uri.parse(data.getStringExtra(ImageSelectActivity.EXTRAS_URI_AS_STRING));
+                imageCaption = data.getStringExtra(Intents.EXTRA_CAPTION);
+                imageDescription = data.getStringExtra(Intents.EXTRA_DESCRIPTION);
+                imageUri = Uri.parse(data.getStringExtra(Intents.EXTRA_URI_AS_STRING));
             } else if (resultCode != RESULT_CANCELED) {
                 // Image capture failed, advise user
                 showToast(getResources().getString(R.string.err_select_logimage_failed));
@@ -607,7 +603,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_send:
-                sendLog();
+                sendLogAndConfirm();
                 return true;
             case R.id.menu_image:
                 selectImage();
@@ -626,16 +622,31 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         return super.onOptionsItemSelected(item);
     }
 
-    private void sendLog() {
+    private void sendLogAndConfirm() {
         if (!sendButtonEnabled) {
             Dialogs.message(this, R.string.log_post_not_possible);
+            return;
+        }
+        if (typeSelected.mustConfirmLog()) {
+            Dialogs.confirm(this, R.string.confirm_log_title, res.getString(R.string.confirm_log_message, typeSelected.getL10n()), new OnClickListener() {
+
+                @Override
+                public void onClick(final DialogInterface dialog, final int which) {
+                    sendLogInternal();
+                }
+            });
         }
         else {
-            final String message = res.getString(StringUtils.isBlank(imageUri.getPath()) ?
-                    R.string.log_saving :
-                    R.string.log_saving_and_uploading);
-            new Poster(LogCacheActivity.this, message).execute(currentLogText(), currentLogPassword());
+            sendLogInternal();
         }
+    }
+
+    private void sendLogInternal() {
+        final String message = res.getString(StringUtils.isBlank(imageUri.getPath()) ?
+                R.string.log_saving :
+                R.string.log_saving_and_uploading);
+        new Poster(this, message).execute(currentLogText(), currentLogPassword());
+        Settings.setLastCacheLog(currentLogText());
     }
 
     @Override
@@ -644,7 +655,26 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         menu.findItem(R.id.menu_image).setVisible(cache.supportsLogImages());
         menu.findItem(R.id.save).setVisible(true);
         menu.findItem(R.id.clear).setVisible(true);
+        presentShowcase();
         return true;
     }
 
+    @Override
+    public ShowcaseViewBuilder getShowcase() {
+        return new ShowcaseViewBuilder(this)
+                .setTarget(new ActionItemTarget(this, R.id.menu_send))
+                .setContent(R.string.showcase_logcache_title, R.string.showcase_logcache_text);
+    }
+
+    public static Intent getLogCacheIntent(final Activity context, final String cacheId, final String geocode) {
+        final Intent logVisitIntent = new Intent(context, LogCacheActivity.class);
+        logVisitIntent.putExtra(Intents.EXTRA_ID, cacheId);
+        logVisitIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
+        return logVisitIntent;
+    }
+
+    @Override
+    protected String getLastLog() {
+        return Settings.getLastCacheLog();
+    }
 }

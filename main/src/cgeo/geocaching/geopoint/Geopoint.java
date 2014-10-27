@@ -53,7 +53,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      *             if the string cannot be parsed
      * @see GeopointParser#parse(String)
      */
-    public Geopoint(final String text) {
+    public Geopoint(@NonNull final String text) {
         final Geopoint parsed = GeopointParser.parse(text);
         latitude = parsed.latitude;
         longitude = parsed.longitude;

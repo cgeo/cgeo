@@ -3,6 +3,7 @@ package cgeo.geocaching.files;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -10,7 +11,6 @@ import android.content.ContentResolver;
 import android.net.Uri;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,7 +20,7 @@ public class FileTypeDetector {
     private final ContentResolver contentResolver;
     private final Uri uri;
 
-    public FileTypeDetector(Uri uri, ContentResolver contentResolver) {
+    public FileTypeDetector(final Uri uri, final ContentResolver contentResolver) {
         this.uri = uri;
         this.contentResolver = contentResolver;
     }
@@ -34,12 +34,10 @@ public class FileTypeDetector {
             if (is == null) {
                 return FileType.UNKNOWN;
             }
-            reader = new BufferedReader(new InputStreamReader(is));
+            reader = new BufferedReader(new InputStreamReader(is, CharEncoding.UTF_8));
 			type = detectHeader(reader);
             reader.close();
-        } catch (FileNotFoundException e) {
-			Log.e("FileTypeDetector", e);
-        } catch (IOException e) {
+        } catch (final IOException e) {
 			Log.e("FileTypeDetector", e);
         } finally {
             IOUtils.closeQuietly(reader);
@@ -48,7 +46,7 @@ public class FileTypeDetector {
 		return type;
     }
 
-	private static FileType detectHeader(BufferedReader reader)
+	private static FileType detectHeader(final BufferedReader reader)
 			throws IOException {
 		String line = reader.readLine();
 		if (isZip(line)) {
@@ -68,7 +66,7 @@ public class FileTypeDetector {
 		return FileType.UNKNOWN;
 	}
 
-	private static boolean isZip(String line) {
+	private static boolean isZip(final String line) {
 		return StringUtils.length(line) >= 4
 				&& StringUtils.startsWith(line, "PK") && line.charAt(2) == 3
 				&& line.charAt(3) == 4;

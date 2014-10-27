@@ -68,7 +68,7 @@ public final class LogEntry {
 
     public void addLogImage(final Image image) {
         if (logImages == null) {
-            logImages = new ArrayList<Image>();
+            logImages = new ArrayList<>();
         }
         logImages.add(image);
     }
@@ -88,7 +88,7 @@ public final class LogEntry {
     }
 
     public CharSequence getImageTitles() {
-        final List<String> titles = new ArrayList<String>(5);
+        final List<String> titles = new ArrayList<>(5);
         for (Image image : getLogImages()) {
             if (StringUtils.isNotBlank(image.getTitle())) {
                 titles.add(HtmlUtils.extractText(image.getTitle()));

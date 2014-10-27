@@ -17,51 +17,54 @@
         <!-- system elements -->
         <item name="android:windowContentOverlay">@null</item>
         <item name="actionBarStyle">@style/cgeo_main.ActionBarStyle</item>
+        <item name="android:actionBarStyle" tools:ignore="NewApi">@style/cgeo_main.ActionBarStyle</item>
 
-   </style>
+    </style>    
 
 
     <style name="cgeo_main" parent="cgeo_main.base">
-        <item name="actionBarStyle">@style/cgeo_main.ActionBarStyle</item>
-        <item name="android:actionBarStyle" tools:ignore="NewApi">@style/cgeo_main.ActionBarStyle</item>
+        <!-- gets modified in v19 to add translucent window decoration -->
     </style>
 
-    <style name="cgeo.Widget.AppCompat.Base.ProgressBar.Small" parent="android:Widget.ProgressBar.Small">
-        <item name="background">@color/just_white</item>
+    <style name="cgeo.Widget.AppCompat.Base.ProgressBar.Medium" parent="android:Widget.ProgressBar">
+        <item name="android:minWidth">32dip</item>
+        <item name="android:maxWidth">32dip</item>
+        <item name="android:minHeight">32dip</item>
+        <item name="android:maxHeight">32dip</item>
     </style>
 
 
     <style name="cgeo.ActionBarStyle" parent="Widget.AppCompat.Base.ActionBar">
-        <item name="indeterminateProgressStyle">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Small</item>
-        <item name="android:indeterminateProgressStyle" tools:ignore="NewApi">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Small</item>
+        <item name="indeterminateProgressStyle">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Medium</item>
+        <item name="android:indeterminateProgressStyle" tools:ignore="NewApi">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Medium</item>
+    </style>
 
+
+    <style name="cgeo.ActionBarStyle.Light.Inverse" parent="Widget.AppCompat.Light.Base.ActionBar.Solid.Inverse">
+        <item name="indeterminateProgressStyle">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Medium</item>
+        <item name="android:indeterminateProgressStyle" tools:ignore="NewApi">@style/cgeo.Widget.AppCompat.Base.ProgressBar.Medium</item>
     </style>
 
    <style name="cgeo.base" parent="@style/Theme.AppCompat">
 
+       <!-- For some reason we get a different text-size here (bug in abc?), explicitly set text styles -->
+       <item name="titleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionMode.Title</item>
+       <item name="subtitleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle</item>
 
        <item name="android:buttonStyle">@style/button</item>
        <item name="android:editTextStyle">@style/edittext</item>
        <item name="android:windowContentOverlay">@null</item>
+       <item name="actionBarStyle">@style/cgeo.ActionBarStyle</item>
 
         <!-- own values: colors -->
         <item name="just_color">@color/just_black</item>
         <item name="text_color_link">@color/link</item>
         <item name="button_color_enabled">@color/button_enabled</item>
         <item name="button_color_disabled">@color/button_disabled</item>
-
    </style>
 
-    <style name="cgeo" parent="cgeo.base">
-        <item name="actionBarStyle">@style/cgeo.ActionBarStyle</item>
-        <item name="android:actionBarStyle"  tools:ignore="NewApi">@style/cgeo.ActionBarStyle</item>
-    </style>
-
-
-
-
-    <!-- Identical to cgeo aside from different parent style -->
-    <style name="cgeo_light" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <!-- Identical to cgeo.base aside from different parent style and bug fixes-->
+    <style name="cgeo.base.light" parent="@style/Theme.AppCompat.Light.DarkActionBar">
 
         <!-- For some reason we get the non inversed texts here (bug in abc?), explicitly set text styles -->
         <item name="titleTextStyle">@style/TextAppearance.AppCompat.Widget.ActionMode.Title.Inverse</item>
@@ -71,18 +74,46 @@
         <item name="android:buttonStyle">@style/button</item>
         <item name="android:editTextStyle">@style/edittext</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="actionBarStyle">@style/cgeo.ActionBarStyle.Light.Inverse</item>
 
         <!-- own values: colors -->
         <item name="just_color">@color/just_black</item>
         <item name="text_color_link">@color/link</item>
         <item name="button_color_enabled">@color/button_enabled</item>
         <item name="button_color_disabled">@color/button_disabled</item>
+
+    </style>
+
+    <style name="cgeo" parent="cgeo.base">
+    </style>
+
+    <style name="cgeo_light" parent="cgeo.base.light">
+
+    </style>
+
+    <!-- Gingerbreads' Dialog style without the colors but with white backgound -->
+    <style name="DialogWindowTitle">
+        <item name="android:maxLines">1</item>
+        <item name="android:scrollHorizontally">true</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.DialogWindowTitle</item>
+    </style>
+
+    <style name="DialogFixGingerbread">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowTitleStyle">@style/DialogWindowTitle</item>
+        <item name="android:windowIsFloating">true</item>
+
+        <item name="android:windowBackground">@color/just_white</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
     </style>
 
 
 
-    <style name="dark" parent="cgeo">
 
+    <style name="dark" parent="cgeo">
         <!-- own values: colors -->
         <item name="text_color">@color/text_dark</item>
         <item name="text_color_headline">@color/text_headline_dark</item>
@@ -98,9 +129,6 @@
         <item name="input">@drawable/input_bcg_dark</item>
         <item name="inventory">@drawable/inventory_background_dark</item>
         <item name="favorite">@drawable/favorite_background_dark</item>
-        <item name="favorite_r">@drawable/favorite_background_red_dark</item>
-        <item name="favorite_o">@drawable/favorite_background_orange_dark</item>
-        <item name="favorite_g">@drawable/favorite_background_green_dark</item>
         <item name="close">@drawable/map_close_dark</item>
         <item name="log_img_icon">@drawable/log_img_dark</item>
         <item name="actionbar_compass">@drawable/actionbar_compass_dark</item>
@@ -113,7 +141,6 @@
     <style name="light" parent="cgeo_light">
 
         <!-- own values: colors -->
-        <item name="android:windowBackground">@color/just_white</item> 
         <item name="text_color">@color/text_light</item>
         <item name="text_color_headline">@color/text_headline_light</item>
         <item name="text_color_grey">@color/text_grey_light</item>
@@ -128,9 +155,6 @@
         <item name="input">@drawable/input_bcg_light</item>
         <item name="inventory">@drawable/inventory_background_light</item>
         <item name="favorite">@drawable/favorite_background_light</item>
-        <item name="favorite_r">@drawable/favorite_background_red_light</item>
-        <item name="favorite_o">@drawable/favorite_background_orange_light</item>
-        <item name="favorite_g">@drawable/favorite_background_green_light</item>
         <item name="close">@drawable/map_close_light</item>
         <item name="log_img_icon">@drawable/log_img_light</item>
         <item name="actionbar_compass">@drawable/actionbar_compass_light</item>
@@ -154,6 +178,7 @@
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@android:style/Animation</item>
+
     </style>
 
     <style name="cgeo_popup" parent="cgeo.Translucent.Light">
@@ -189,5 +214,5 @@
         <item name="settings_sdcard">@drawable/settings_sdcard_black</item>
         <item name="settings_info_icon">@drawable/settings_info_icon_black</item>
     </style>
-    
+
 </resources>

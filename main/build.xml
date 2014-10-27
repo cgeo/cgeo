@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="cgeo">
 
-    <!-- The local.properties file is created and updated by the 'android' tool.
+	<!-- The local.properties file is created and updated by the 'android' tool.
          It contains the path to the SDK. It should *NOT* be checked into
          Version Control Systems. -->
-    <loadproperties srcFile="local.properties" />
+	<loadproperties srcFile="local.properties" />
 
-    <!-- The ant.properties file can be created by you. It is only edited by the
+	<!-- The ant.properties file can be created by you. It is only edited by the
          'android' tool to add properties to it.
          This is the place to change some Ant specific build properties.
          Here are some properties you may want to change/update:
@@ -26,9 +26,9 @@
          application and should be checked into Version Control Systems.
 
          -->
-    <property file="ant.properties" />
+	<property file="ant.properties" />
 
-    <!-- The project.properties file is created and updated by the 'android'
+	<!-- The project.properties file is created and updated by the 'android'
          tool, as well as ADT.
 
          This contains project specific properties such as project target, and library
@@ -37,36 +37,48 @@
 
          This file is an integral part of the build system for your
          application and should be checked into Version Control Systems. -->
-    <loadproperties srcFile="project.properties" />
-    
-    <!-- The private.properties file sets api-keys as well as keystore,
+	<loadproperties srcFile="project.properties" />
+
+	<!-- The private.properties file sets api-keys as well as keystore,
          certificate and passwords (if you want).
          See /templates/private.properties for more information. -->
-    <property file="private.properties" />
+	<property file="private.properties" />
 
-    <!-- quick check on sdk.dir -->
-    <fail
+	<!-- quick check on sdk.dir -->
+	<fail
             message="sdk.dir is missing. Make sure to generate local.properties using 'android update project'"
             unless="sdk.dir"
     />
-    
-    <!-- Custom targets -->
-    <target name="install_release" description="Install signed release application" depends="release">
-        <exec executable="${sdk.dir}/platform-tools/adb">
-            <arg line="-d install -r ./bin/${ant.project.name}-release.apk" />
-        </exec>
-    </target>
-    
-    <target name="debugAPI" depends="-pre-build"
+
+	<!-- Custom targets -->
+	<target name="install_release" description="Install signed release application" depends="release">
+		<exec executable="${sdk.dir}/platform-tools/adb">
+			<arg line="-d install -r ./bin/${ant.project.name}-release.apk" />
+		</exec>
+	</target>
+
+	<target name="run_release" description="Run signed release application" depends="install_release">
+		<exec executable="${sdk.dir}/platform-tools/adb">
+			<arg line="-d shell am start -n cgeo.geocaching/.MainActivity" />
+		</exec>
+	</target>
+
+	<target name="debugAPI" depends="-pre-build"
         description="Changes API key to debug">
-    </target>
-    
+	</target>
+
 	<taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask">
 		<classpath>
-		    <pathelement location="./compile-libs/findbugs-ant.jar"/>
+			<pathelement location="./compile-libs/findbugs-ant.jar"/>
 		</classpath>
 	</taskdef>
 
+    <!-- We need to enable ProGuard in debug mode as we otherwise run into the 64 K methods dex limit.
+    As long as we don't obfuscate, we can even use the same ProGuard config in both builds. -->
+	<target name="-debug-obfuscation-check">
+	    <property name="proguard.enabled" value="true"/>
+	</target>
+	
 	<target name="findbugs">
 		<mkdir dir="reports" />
 		<gettarget
@@ -81,65 +93,83 @@
 			outputFile="reports/findbugs.xml" 
 			excludefilter="project/findbugs/exclusions.xml"
 			effort="max"
-			reportLevel="low">
+			reportLevel="low"
+			jvmargs="-Xmx1024m">
 			<auxClasspath path="${project.target.android.jar}" />
 			<class location="${out.dir}" />
 		</findbugs>
 	</target>
-	
+
 	<!-- extension targets. Uncomment the ones where you want to do custom work
          in between standard targets -->
-    <target name="-pre-build">
-        <condition property="build.mode.release" else="false">
-            <equals arg1="${build.target}" arg2="release" />
-        </condition>
+	<target name="-pre-build">
+		<!-- Enable ProGuard in debug builds -->
+		<condition property="proguard.enabled" value="true" else="false">
+			<isset property="proguard.config" />
+		</condition>
+		<if condition="${proguard.enabled}">
+			<then>
+				<echo level="info">Proguard.config is enabled</echo>
+				<!-- Secondary dx input (jar files) is empty since all the jar files will be in the obfuscated jar -->
+				<path id="out.dex.jar.input.ref" />
+			</then>
+			<else>
+				<echo level="info">Proguard.config is disabled</echo>
+			</else>
+		</if>
+		
+		<!-- Add all the keys for Google Maps, Twitter and OKAPI in the build -->
+		<condition property="build.mode.release" else="false">
+			<equals arg1="${build.target}" arg2="release" />
+		</condition>
+		<if condition="${build.mode.release}">
+			<then>
+				<filterset id="maps-key">
+					<filter token="maps.api.key" value="${maps.api.key.market}" />
+				</filterset>
+			</then>
+			<else>
+				<filterset id="maps-key">
+					<filter token="maps.api.key" value="${maps.api.key}"/>
+				</filterset>
+			</else>
+		</if>
+		<copy file="./templates/keys.xml" todir="./res/values/" overwrite="true">
+			<filterset refid="maps-key" />
+			<filterset>
+				<filter token="ocde.okapi.consumer.key" value="${ocde.okapi.consumer.key}"/>
+				<filter token="ocde.okapi.consumer.secret" value="${ocde.okapi.consumer.secret}"/>
+				<filter token="ocpl.okapi.consumer.key" value="${ocpl.okapi.consumer.key}"/>
+				<filter token="ocpl.okapi.consumer.secret" value="${ocpl.okapi.consumer.secret}"/>
+				<filter token="ocus.okapi.consumer.key" value="${ocus.okapi.consumer.key}"/>
+				<filter token="ocus.okapi.consumer.secret" value="${ocus.okapi.consumer.secret}"/>
+				<filter token="ocnl.okapi.consumer.key" value="${ocnl.okapi.consumer.key}"/>
+				<filter token="ocnl.okapi.consumer.secret" value="${ocnl.okapi.consumer.secret}"/>
+				<filter token="ocro.okapi.consumer.key" value="${ocro.okapi.consumer.key}"/>
+				<filter token="ocro.okapi.consumer.secret" value="${ocro.okapi.consumer.secret}"/>
+				<filter token="ocuk.okapi.consumer.key" value="${ocuk.okapi.consumer.key}"/>
+				<filter token="ocuk.okapi.consumer.secret" value="${ocuk.okapi.consumer.secret}"/>
+			</filterset>
+		</copy>
+	</target>
 
-        <if condition="${build.mode.release}">
-            <then>
-                <filterset id="maps-key">
-                    <filter token="maps.api.key" value="${maps.api.key.market}"/>
-                </filterset>
-            </then>
-            <else>
-                <filterset id="maps-key">
-                    <filter token="maps.api.key" value="${maps.api.key}"/>
-                </filterset>
-            </else>
-        </if>
-        <copy file="./templates/keys.xml" todir="./res/values/" overwrite="true">
-            <filterset refid="maps-key" />
-            <filterset>
-                <filter token="ocde.okapi.consumer.key" value="${ocde.okapi.consumer.key}"/>
-                <filter token="ocde.okapi.consumer.secret" value="${ocde.okapi.consumer.secret}"/>
-                <filter token="ocpl.okapi.consumer.key" value="${ocpl.okapi.consumer.key}"/>
-                <filter token="ocpl.okapi.consumer.secret" value="${ocpl.okapi.consumer.secret}"/>
-                <filter token="ocus.okapi.consumer.key" value="${ocus.okapi.consumer.key}"/>
-                <filter token="ocus.okapi.consumer.secret" value="${ocus.okapi.consumer.secret}"/>
-                <filter token="ocnl.okapi.consumer.key" value="${ocnl.okapi.consumer.key}"/>
-                <filter token="ocnl.okapi.consumer.secret" value="${ocnl.okapi.consumer.secret}"/>
-                <filter token="ocro.okapi.consumer.key" value="${ocro.okapi.consumer.key}"/>
-                <filter token="ocro.okapi.consumer.secret" value="${ocro.okapi.consumer.secret}"/>
-            </filterset>
-        </copy>
-    </target>
-
-<!-- start of modifications for android annotations, see https://github.com/excilys/androidannotations/wiki/Building-Project-Ant -->
+	<!-- start of modifications for android annotations, see https://github.com/excilys/androidannotations/wiki/Building-Project-Ant -->
 	<property name="generated.dir" value="annotation_gen" />
 	<property name="generated.absolute.dir" location="${generated.dir}" />
-	<property name="java.compilerargs" value="-s &apos;${generated.absolute.dir}&apos;" />    
+	<property name="java.compilerargs" value="-s &apos;${generated.absolute.dir}&apos;" />
 	<target name="-pre-compile">
 		<mkdir dir="${generated.absolute.dir}" />
 	</target>
-    <target name="-compile" depends="-pre-build, -build-setup, -code-gen, -pre-compile">
-        <do-only-if-manifest-hasCode elseText="hasCode = false. Skipping...">
-            <!-- merge the project's own classpath and the tested project's classpath -->
-            <path id="project.javac.classpath">
-                <path refid="project.all.jars.path" />
-                <path refid="tested.project.classpath" />
-                <path path="${java.compiler.classpath}" />
-                <fileset dir="compile-libs" includes="*.jar"/>
-            </path>
-            <javac encoding="${java.encoding}"
+	<target name="-compile" depends="-pre-build, -build-setup, -code-gen, -pre-compile">
+		<do-only-if-manifest-hasCode elseText="hasCode = false. Skipping...">
+			<!-- merge the project's own classpath and the tested project's classpath -->
+			<path id="project.javac.classpath">
+				<path refid="project.all.jars.path" />
+				<path refid="tested.project.classpath" />
+				<path path="${java.compiler.classpath}" />
+				<fileset dir="compile-libs" includes="*.jar"/>
+			</path>
+			<javac encoding="${java.encoding}"
                     source="${java.source}" target="${java.target}"
                     debug="true" extdirs="" includeantruntime="false"
                     destdir="${out.classes.absolute.dir}"
@@ -147,77 +177,77 @@
                     verbose="${verbose}"
                     classpathref="project.javac.classpath"
                     fork="${need.javac.fork}">
-                <src path="${source.absolute.dir}" />
-                <src path="${gen.absolute.dir}" />
-                <compilerarg line="${java.compilerargs}" />
-            </javac>
+				<src path="${source.absolute.dir}" />
+				<src path="${gen.absolute.dir}" />
+				<compilerarg line="${java.compilerargs}" />
+			</javac>
 
-            <!-- if the project is instrumented, intrument the classes -->
-            <if condition="${build.is.instrumented}">
-                <then>
-                    <echo level="info">Instrumenting classes from ${out.absolute.dir}/classes...</echo>
+			<!-- if the project is instrumented, intrument the classes -->
+			<if condition="${build.is.instrumented}">
+				<then>
+					<echo level="info">Instrumenting classes from ${out.absolute.dir}/classes...</echo>
 
-                    <!-- build the filter to remove R, Manifest, BuildConfig -->
-                    <getemmafilter
+					<!-- build the filter to remove R, Manifest, BuildConfig -->
+					<getemmafilter
                             appPackage="${project.app.package}"
                             libraryPackagesRefId="project.library.packages"
                             filterOut="emma.default.filter"/>
 
-                    <!-- define where the .em file is going. This may have been
+					<!-- define where the .em file is going. This may have been
                          setup already if this is a library -->
-                    <property name="emma.coverage.absolute.file" location="${out.absolute.dir}/coverage.em" />
+					<property name="emma.coverage.absolute.file" location="${out.absolute.dir}/coverage.em" />
 
-                    <!-- It only instruments class files, not any external libs -->
-                    <emma enabled="true">
-                        <instr verbosity="${verbosity}"
+					<!-- It only instruments class files, not any external libs -->
+					<emma enabled="true">
+						<instr verbosity="${verbosity}"
                                mode="overwrite"
                                instrpath="${out.absolute.dir}/classes"
                                outdir="${out.absolute.dir}/classes"
                                metadatafile="${emma.coverage.absolute.file}">
-                            <filter excludes="${emma.default.filter}" />
-                            <filter excludes="android.*, com.*, org.*" />
-                            <filter value="${emma.filter}" />
-                        </instr>
-                    </emma>
-                </then>
-            </if>
+							<filter excludes="${emma.default.filter}" />
+							<filter excludes="android.*, com.*, org.*" />
+							<filter value="${emma.filter}" />
+						</instr>
+					</emma>
+				</then>
+			</if>
 
-            <!-- if the project is a library then we generate a jar file -->
-            <if condition="${project.is.library}">
-                <then>
-                    <echo level="info">Creating library output jar file...</echo>
-                    <property name="out.library.jar.file" location="${out.absolute.dir}/classes.jar" />
-                    <if>
-                        <condition>
-                            <length string="${android.package.excludes}" trim="true" when="greater" length="0" />
-                        </condition>
-                        <then>
-                            <echo level="info">Custom jar packaging exclusion: ${android.package.excludes}</echo>
-                        </then>
-                    </if>
+			<!-- if the project is a library then we generate a jar file -->
+			<if condition="${project.is.library}">
+				<then>
+					<echo level="info">Creating library output jar file...</echo>
+					<property name="out.library.jar.file" location="${out.absolute.dir}/classes.jar" />
+					<if>
+						<condition>
+							<length string="${android.package.excludes}" trim="true" when="greater" length="0" />
+						</condition>
+						<then>
+							<echo level="info">Custom jar packaging exclusion: ${android.package.excludes}</echo>
+						</then>
+					</if>
 
-                    <propertybyreplace name="project.app.package.path" input="${project.app.package}" replace="." with="/" />
+					<propertybyreplace name="project.app.package.path" input="${project.app.package}" replace="." with="/" />
 
-                    <jar destfile="${out.library.jar.file}">
-                        <fileset dir="${out.classes.absolute.dir}"
+					<jar destfile="${out.library.jar.file}">
+						<fileset dir="${out.classes.absolute.dir}"
                                 includes="**/*.class"
                                 excludes="${project.app.package.path}/R.class ${project.app.package.path}/R$*.class ${project.app.package.path}/BuildConfig.class"/>
-                        <fileset dir="${source.absolute.dir}" excludes="**/*.java ${android.package.excludes}" />
-                    </jar>
-                </then>
-            </if>
+						<fileset dir="${source.absolute.dir}" excludes="**/*.java ${android.package.excludes}" />
+					</jar>
+				</then>
+			</if>
 
-        </do-only-if-manifest-hasCode>
-    </target>
-<!-- end of modifications for android-annotations -->    
-    
-	
-<!--
+		</do-only-if-manifest-hasCode>
+	</target>
+	<!-- end of modifications for android-annotations -->
+
+
+	<!--
     <target name="-post-compile">
     </target>
 -->
 
-    <!-- Import the actual build file.
+	<!-- Import the actual build file.
 
          To customize existing targets, there are two options:
          - Customize only one target:
@@ -235,7 +265,7 @@
          In all cases you must update the value of version-tag below to read 'custom' instead of an integer,
          in order to avoid having your file be overridden by tools such as "android update project"
     -->
-    <!-- version-tag: custom -->
-    <import file="${sdk.dir}/tools/ant/build.xml" />
+	<!-- version-tag: custom -->
+	<import file="${sdk.dir}/tools/ant/build.xml" />
 
 </project>

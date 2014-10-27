@@ -4,7 +4,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="?background_color"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    tools:context=".files.SimpleDirChooser" >
 
     <LinearLayout
         android:id="@+id/headerLayout"

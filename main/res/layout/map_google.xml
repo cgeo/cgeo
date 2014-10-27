@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
-
-
+    android:orientation="vertical"
+    tools:context=".maps.google.v1.GoogleMapProvider" >
 
     <include layout="@layout/actionbar_maps" />
 
@@ -35,7 +35,7 @@
             android:id="@+id/map"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            class="cgeo.geocaching.maps.google.GoogleMapView"
+            class="cgeo.geocaching.maps.google.v1.GoogleMapView"
             android:apiKey="@string/maps_api_key"
             android:clickable="true"
             android:enabled="true"

@@ -1,4 +1,4 @@
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 apply plugin: 'findbugs'
 
@@ -26,15 +26,23 @@ gradle connectedCheck
 //Testing guide : http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Testing
 //https://github.com/stephanenicolas/Quality-Tools-for-Android
 
-def AAVersion = '3.0.1'
-def RXVersion = '0.19.0'
+def AAVersion = '3.1'
+def RXVersion = '0.20.6'
+def JacksonCoreVersion = '2.4.3'
+def JacksonDatabindVersion = '2.4.3'
+def JacksonAnnotationsVersion = '2.4.3'
 group = 'cgeo.geocaching'
 version = '0.0.1'
 
 android {
     compileSdkVersion "Google Inc.:Google APIs:19"
     //compileSdkVersion 19
-    buildToolsVersion "19.1.0"
+    buildToolsVersion "20"
+
+     compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 
     def Properties versionProps = new Properties()
     versionProps.load(new FileInputStream(file('version.properties')))
@@ -56,9 +64,7 @@ android {
         // NOTE: must match the package in the test directory and must be different from the app package
         testApplicationId "cgeo.geocaching.test"
 
-        // standard android test runner
-        //testInstrumentationRunner "android.test.InstrumentationTestRunner"
-        testInstrumentationRunner "com.zutubi.android.junitreport.JUnitReportTestRunner"
+        testInstrumentationRunner "cgeo.junit.CgeoTestRunner"
 
         //testHandlingProfiling true
         testFunctionalTest true
@@ -76,8 +82,8 @@ android {
             //packageNameSuffix ".debug"
             //zipAlign = true
             debuggable true
-            runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), '../tests/proguard.cfg'
+            runProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
             versionNameSuffix " Debug " + versionProps['betaNumber']
         }
         release {
@@ -138,6 +144,7 @@ dependencies {
     compile "org.androidannotations:androidannotations-api:$AAVersion"
 
     compile project(":mapswithme-api")
+    compile project(":showcaseview")
 
     compile files('libs/httpclientandroidlib-1.1.2.jar')
     compile files('libs/locus-api-4.0.jar')
@@ -146,16 +153,21 @@ dependencies {
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
 
     compile 'com.android.support:appcompat-v7:19.1.0'
+    compile 'com.google.android.gms:play-services:5.0.89'
 
-    compile 'com.jakewharton:butterknife:5.0.0'
+    compile 'com.jakewharton:butterknife:5.1.2'
     compile 'org.apache.commons:commons-collections4:4.0'
-    compile 'org.apache.commons:commons-lang3:3.2.1'
+    compile 'org.apache.commons:commons-lang3:3.3.2'
     compile 'commons-io:commons-io:2.4'
-    compile 'com.google.code.findbugs:annotations:2.0.3'
+    compile 'com.google.code.findbugs:annotations:3.0.0'
 
     compile "com.netflix.rxjava:rxjava-core:$RXVersion"
     compile "com.netflix.rxjava:rxjava-android:$RXVersion"
     compile "com.netflix.rxjava:rxjava-async-util:$RXVersion"
+
+    compile "com.fasterxml.jackson.core:jackson-core:$JacksonCoreVersion"
+    compile "com.fasterxml.jackson.core:jackson-databind:$JacksonDatabindVersion"
+    compile "com.fasterxml.jackson.core:jackson-annotations:$JacksonAnnotationsVersion"
 
     //TEST
     //compile files('compile-libs/androidannotations-3.0.1.jar')
@@ -196,7 +208,7 @@ apt {
 
 //http://www.gradle.org/docs/current/dsl/org.gradle.api.plugins.quality.FindBugsExtension.html
 findbugs {
-    toolVersion = "2.0.1"
+    toolVersion = "3.0.0"
     //sourceSets = [sourceSets.main]
     ignoreFailures = true
     reportsDir = file("$project.buildDir/reports")
@@ -242,14 +254,14 @@ dependencies {
     unitTestCompile 'junit:junit:4.8.2'
     unitTestCompile 'com.google.android:android-test:4.1.1.4'
 
-    unitTestCompile 'com.googlecode.androidannotations:androidannotations-api:2.7.1'
-    unitTestCompile 'com.jakewharton:butterknife:4.0.1'
+    unitTestCompile 'com.googlecode.androidannotations:androidannotations-api:$AAVersion'
+    unitTestCompile 'com.jakewharton:butterknife:5.1.2'
     unitTestCompile 'org.apache.commons:commons-collections4:4.0'
     unitTestCompile 'commons-io:commons-io:2.4'
-    unitTestCompile 'org.apache.commons:commons-lang3:3.2.1'
-    unitTestCompile 'com.google.code.findbugs:annotations:2.0.3'
-    unitTestCompile 'com.netflix.rxjava:rxjava-core:0.17.0-RC6'
-    unitTestCompile 'com.netflix.rxjava:rxjava-android:0.17.0-RC6'
+    unitTestCompile 'org.apache.commons:commons-lang3:3.3.2'
+    unitTestCompile 'com.google.code.findbugs:annotations:3.0.0'
+    unitTestCompile 'com.netflix.rxjava:rxjava-core:$RXVersion'
+    unitTestCompile 'com.netflix.rxjava:rxjava-android:$RXVersion'
 }
 
 // extend the runtime

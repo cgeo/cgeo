@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
+    <issue id="AppCompatResource" severity="ignore" />
+    <issue id="Assert" severity="ignore" />
     <issue id="ContentDescription" severity="ignore" />
     <issue id="DuplicateIds" severity="error" />
     <issue id="DuplicateIncludedIds" severity="error" />
     <issue id="ExportedContentProvider" severity="ignore" />
     <issue id="InvalidPackage" severity="ignore" />
-    <issue id="MissingTranslation" severity="ignore" />
     <issue id="MissingQuantity">
         <ignore path="res/values-pl/strings.xml" />
     </issue>
+    <issue id="MissingTranslation" severity="ignore" />
     <issue id="Registered" severity="ignore" />
+    <issue id="RtlHardcoded" severity="ignore" />
+    <issue id="RtlSymmetry" severity="ignore" />
+    <issue id="UnusedAttribute" severity="ignore" />
     <issue id="UnusedResources">
         <ignore path="res/drawable-mdpi/attribute_maintenance.png" />
         <ignore path="res/values/vpi__colors.xml" />

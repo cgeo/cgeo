@@ -6,6 +6,7 @@
         <proGuardCfgFiles>
           <file>file://$MODULE_DIR$/proguard-project.txt</file>
         </proGuardCfgFiles>
+        <option name="UPDATE_PROPERTY_FILES" value="false" />
         <includeAssetsFromLibraries>true</includeAssetsFromLibraries>
       </configuration>
     </facet>
@@ -23,9 +24,11 @@
           <root url="file://$MODULE_DIR$/libs" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/libs/src" />
+        </SOURCES>
         <jarDirectory url="file://$MODULE_DIR$/libs" recursive="false" />
-        <jarDirectory url="file://$MODULE_DIR$/libs" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/libs/src" recursive="false" type="SOURCES" />
         <jarDirectory url="file://$MODULE_DIR$/libs/src" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
@@ -44,7 +47,7 @@
         <jarDirectory url="file://$MODULE_DIR$/compile-libs" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="" scope="PROVIDED">
+    <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
           <root url="file://$MODULE_DIR$/libs" />
@@ -55,7 +58,9 @@
       </library>
     </orderEntry>
     <orderEntry type="module" module-name="mapswithme-api" exported="" />
+    <orderEntry type="module" module-name="showcaseview" exported="" />
     <orderEntry type="module" module-name="android-support-v7-appcompat" exported="" />
+    <orderEntry type="module" module-name="google-play-services_lib" exported="" />
   </component>
 </module>
 

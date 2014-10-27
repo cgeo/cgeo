@@ -27,6 +27,10 @@ import java.util.List;
 
 public final class NavigationAppFactory extends AbstractAppFactory {
 
+    private NavigationAppFactory() {
+        // utility class
+    }
+
     public enum NavigationAppsEnum {
         /** The internal compass activity */
         COMPASS(new CompassApp(), 0, R.string.pref_navigation_menu_compass),
@@ -69,6 +73,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 
         WHERE_YOU_GO(new WhereYouGoApp(), 16, R.string.pref_navigation_menu_where_you_go),
         PEBBLE(new PebbleApp(), 17, R.string.pref_navigation_menu_pebble),
+        ANDROID_WEAR(new AndroidWearApp(), 18, R.string.pref_navigation_menu_android_wear),
         MAPSWITHME(new MapsWithMeApp(), 22, R.string.pref_navigation_menu_mapswithme);
 
         NavigationAppsEnum(final App app, final int id, final int preferenceKey) {
@@ -140,25 +145,23 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     public static void showNavigationMenu(final Activity activity,
             final Geocache cache, final Waypoint waypoint, final Geopoint destination,
             final boolean showInternalMap, final boolean showDefaultNavigation) {
-        final List<NavigationAppsEnum> items = new ArrayList<NavigationAppFactory.NavigationAppsEnum>();
+        final List<NavigationAppsEnum> items = new ArrayList<>();
         final int defaultNavigationTool = Settings.getDefaultNavigationTool();
-        for (final NavigationAppsEnum navApp : getInstalledNavigationApps()) {
+        for (final NavigationAppsEnum navApp : getActiveNavigationApps()) {
             if ((showInternalMap || !(navApp.app instanceof InternalMap)) &&
                     (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
-                if (Settings.isUseNavigationApp(navApp)) {
-                    boolean add = false;
-                    if (cache != null && navApp.app instanceof CacheNavigationApp && navApp.app.isEnabled(cache)) {
-                        add = true;
-                    }
-                    if (waypoint != null && navApp.app instanceof WaypointNavigationApp && ((WaypointNavigationApp) navApp.app).isEnabled(waypoint)) {
-                        add = true;
-                    }
-                    if (destination != null && navApp.app instanceof GeopointNavigationApp) {
-                        add = true;
-                    }
-                    if (add) {
-                        items.add(navApp);
-                    }
+                boolean add = false;
+                if (cache != null && navApp.app instanceof CacheNavigationApp && navApp.app.isEnabled(cache)) {
+                    add = true;
+                }
+                if (waypoint != null && navApp.app instanceof WaypointNavigationApp && ((WaypointNavigationApp) navApp.app).isEnabled(waypoint)) {
+                    add = true;
+                }
+                if (destination != null && navApp.app instanceof GeopointNavigationApp) {
+                    add = true;
+                }
+                if (add) {
+                    items.add(navApp);
                 }
             }
         }
@@ -172,7 +175,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
          * Using an ArrayAdapter with list of NavigationAppsEnum items avoids
          * handling between mapping list positions allows us to do dynamic filtering of the list based on use case.
          */
-        final ArrayAdapter<NavigationAppsEnum> adapter = new ArrayAdapter<NavigationAppsEnum>(activity, android.R.layout.select_dialog_item, items);
+        final ArrayAdapter<NavigationAppsEnum> adapter = new ArrayAdapter<>(activity, android.R.layout.select_dialog_item, items);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.cache_menu_navigate);
@@ -193,7 +196,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @return
      */
     public static List<NavigationAppsEnum> getInstalledNavigationApps() {
-        final List<NavigationAppsEnum> installedNavigationApps = new ArrayList<NavigationAppsEnum>();
+        final List<NavigationAppsEnum> installedNavigationApps = new ArrayList<>();
         for (final NavigationAppsEnum appEnum : NavigationAppsEnum.values()) {
             if (appEnum.app.isInstalled()) {
                 installedNavigationApps.add(appEnum);
@@ -203,12 +206,25 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     }
 
     /**
+     * @return all navigation apps, which are installed and activated in the settings
+     */
+    public static List<NavigationAppsEnum> getActiveNavigationApps() {
+        final List<NavigationAppsEnum> activeApps = new ArrayList<>();
+        for (final NavigationAppsEnum appEnum : getInstalledNavigationApps()) {
+            if (Settings.isUseNavigationApp(appEnum)) {
+                activeApps.add(appEnum);
+            }
+        }
+        return activeApps;
+    }
+
+    /**
      * Returns all installed navigation apps for default navigation.
      *
      * @return
      */
     public static List<NavigationAppsEnum> getInstalledDefaultNavigationApps() {
-        final List<NavigationAppsEnum> installedNavigationApps = new ArrayList<NavigationAppsEnum>();
+        final List<NavigationAppsEnum> installedNavigationApps = new ArrayList<>();
         for (final NavigationAppsEnum appEnum : NavigationAppsEnum.values()) {
             if (appEnum.app.isInstalled() && appEnum.app.isUsableAsDefaultNavigationApp()) {
                 installedNavigationApps.add(appEnum);

@@ -67,7 +67,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
 
         assertThat(gpxFirst.length() > 0).isTrue();
 
-        final GPX10Parser parser = new GPX10Parser(StoredList.TEMPORARY_LIST_ID);
+        final GPX10Parser parser = new GPX10Parser(StoredList.TEMPORARY_LIST.id);
 
         final InputStream stream = new ByteArrayInputStream(gpxFirst.getBytes(CharEncoding.UTF_8));
         Collection<Geocache> caches = parser.parse(stream, null);

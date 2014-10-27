@@ -44,7 +44,7 @@ public final class FilterUserInterface {
         this.activity = activity;
         this.res = CgeoApplication.getInstance().getResources();
 
-        registry = new ArrayList<FactoryEntry>();
+        registry = new ArrayList<>();
         if (Settings.getCacheType() == CacheType.ALL) {
             register(R.string.caches_filter_type, TypeFilter.Factory.class);
         }
@@ -82,7 +82,7 @@ public final class FilterUserInterface {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.caches_filter_title);
 
-        final ArrayAdapter<FactoryEntry> adapter = new ArrayAdapter<FactoryEntry>(activity, android.R.layout.select_dialog_item, registry);
+        final ArrayAdapter<FactoryEntry> adapter = new ArrayAdapter<>(activity, android.R.layout.select_dialog_item, registry);
 
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             @Override
@@ -116,7 +116,7 @@ public final class FilterUserInterface {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(menuTitle);
 
-        final ArrayAdapter<IFilter> adapter = new ArrayAdapter<IFilter>(activity, android.R.layout.select_dialog_item, filters);
+        final ArrayAdapter<IFilter> adapter = new ArrayAdapter<>(activity, android.R.layout.select_dialog_item, filters);
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, final int item) {

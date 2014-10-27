@@ -9,6 +9,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -16,8 +17,6 @@ import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
-import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -134,9 +133,9 @@ public class CachePopupFragment extends AbstractDialogFragment {
                             public void call(final Integer selectedListId) {
                                 storeCache(selectedListId);
                             }
-                        }, true, StoredList.TEMPORARY_LIST_ID);
+                        }, true, StoredList.TEMPORARY_LIST.id);
             } else {
-                storeCache(StoredList.TEMPORARY_LIST_ID);
+                storeCache(StoredList.TEMPORARY_LIST.id);
             }
         }
 
@@ -168,7 +167,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
 
             final StoreCacheHandler refreshCacheHandler = new StoreCacheHandler(R.string.cache_dialog_offline_save_message);
             progress.show(getActivity(), res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
-            cache.refresh(refreshCacheHandler, Schedulers.io());
+            cache.refresh(refreshCacheHandler, RxUtils.networkScheduler);
         }
     }
 
@@ -194,7 +193,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
 
     @Override
     public void showNavigationMenu() {
-        // TODO
+        NavigationAppFactory.showNavigationMenu(getActivity(), cache, null, null, true, true);
     }
 
 
@@ -209,12 +208,6 @@ public class CachePopupFragment extends AbstractDialogFragment {
         }
         NavigationAppFactory.startDefaultNavigationApplication(2, getActivity(), cache);
         getActivity().finish();
-    }
-
-    public static void startActivity(final Context context, final String geocode) {
-        final Intent popupIntent = new Intent(context, CachePopup.class);
-        popupIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
-        context.startActivity(popupIntent);
     }
 
     @Override

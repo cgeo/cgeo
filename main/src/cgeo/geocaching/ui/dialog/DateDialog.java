@@ -1,5 +1,7 @@
 package cgeo.geocaching.ui.dialog;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.R;
 
 import android.os.Bundle;
@@ -19,27 +21,27 @@ public class DateDialog extends DialogFragment {
 
     private Calendar date;
 
-    public static DateDialog getInstance(Calendar date) {
-        DateDialog dd = new DateDialog();
-        Bundle args = new Bundle();
+    public static DateDialog getInstance(final Calendar date) {
+        final DateDialog dateDialog = new DateDialog();
+        final Bundle args = new Bundle();
         args.putSerializable("date", date);
-        dd.setArguments(args);
-        return dd;
+        dateDialog.setArguments(args);
+        return dateDialog;
     }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NO_TITLE, 0);
-        Bundle args = getArguments();
+        final Bundle args = getArguments();
         date = (Calendar) args.getSerializable("date");
     }
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.date, container, false);
+        final View v = inflater.inflate(R.layout.date, container, false);
 
-        final DatePicker picker = (DatePicker) v.findViewById(R.id.picker);
+        final DatePicker picker = ButterKnife.findById(v, R.id.picker);
         picker.init(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DATE), new DatePickerListener());
         return v;
     }
@@ -47,7 +49,7 @@ public class DateDialog extends DialogFragment {
     private class DatePickerListener implements DatePicker.OnDateChangedListener {
 
         @Override
-        public void onDateChanged(DatePicker picker, int year, int month, int day) {
+        public void onDateChanged(final DatePicker picker, final int year, final int month, final int day) {
             date.set(year, month, day);
 
             ((DateDialogParent) getActivity()).setDate(date);

@@ -90,9 +90,9 @@
     <string name="log_saving">Sending log…</string>
     <string name="log_saving_and_uploading">Sending log and uploading image…</string>
     <string name="log_clear">Clear</string>
-    <string name="log_post">Submit Log</string>
     <string name="log_post_not_possible">Loading Log Page…</string>
     <string name="log_add">Add</string>
+    <string name="log_repeat">Repeat last log</string>
     <string name="log_no_rating">No rating</string>
     <string name="log_stars_1_description">Poor</string>
     <string name="log_stars_15_description">Fairly poor</string>
@@ -229,6 +229,8 @@
     <!-- location service -->
     <string name="loc_last">Last known</string>
     <string name="loc_net">Network</string>
+    <string name="loc_fused">Fused</string>
+    <string name="loc_low_power">Low-power</string>
     <string name="loc_gps">GPS</string>
     <string name="loc_sat">Sat</string>
     <string name="loc_trying">Trying to Locate</string>
@@ -265,8 +267,8 @@
     <string name="caches_eta_ltm">Less than a minute</string>
 
     <plurals name="caches_eta_mins">
-        <item quantity="one">minute</item>
-        <item quantity="other">minutes</item>
+        <item quantity="one">%d minute</item>
+        <item quantity="other">%d minutes</item>
     </plurals>
 
     <string name="caches_store_offline">Store Offline</string>
@@ -274,7 +276,6 @@
     <string name="caches_history">History</string>
     <string name="caches_on_map">Show on map</string>
     <string name="caches_sort">Sort</string>
-    <string name="caches_sort_title">Sort by</string>
     <string name="caches_sort_distance">Distance</string>
     <string name="caches_sort_difficulty">Difficulty</string>
     <string name="caches_sort_terrain">Terrain</string>
@@ -308,7 +309,6 @@
     <string name="caches_move_all">Move all</string>
     <string name="caches_map_locus">Locus</string>
     <string name="caches_map_locus_export">Export to Locus</string>
-    <string name="caches_map_mapswithme">MapsWithMe</string>
     <string name="caches_recaptcha_title">reCAPTCHA</string>
     <string name="caches_recaptcha_explanation">Please enter the text you see in the image. This enables downloading of cache coordinates, which can be disabled in Settings.</string>
     <string name="caches_recaptcha_hint">Text from image</string>
@@ -327,6 +327,7 @@
     <string name="caches_filter_popularity_ratio">Favorites [%]</string>
     <string name="caches_removing_from_history">Removing from History…</string>
     <string name="caches_clear_offlinelogs">Clear offline logs</string>
+    <string name="caches_clear_offlinelogs_message">Do you want to clear the offline logs?</string>
     <string name="caches_clear_offlinelogs_progress">Clearing offline logs</string>
 
     <!-- caches lists -->
@@ -408,6 +409,9 @@
     <string name="init_oc_ro">Opencaching.ro</string>
     <string name="settings_activate_oc_ro">Activate</string>
     <string name="init_oc_ro_description">Authorize c:geo with opencaching.ro to search for caches and access/filter your found caches.</string>
+    <string name="init_oc_uk">Opencaching.org.uk</string>
+    <string name="settings_activate_oc_uk">Activate</string>
+    <string name="init_oc_uk_description">Authorize c:geo with opencaching.org.uk to search for caches and access/filter your found caches.</string>
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_twitter">Twitter</string>
     <string name="settings_activate_twitter">Activate</string>
@@ -466,7 +470,7 @@
     <string name="init_units">Use Imperial Units</string>
     <string name="init_summary_units">Use Imperial Units instead of Metric Units</string>
     <string name="init_log_offline">Offline Logging</string>
-    <string name="init_summary_log_offline">Enable Offline Logging (Wont\'t show online log screen when logging, won\'t upload logs)</string>
+    <string name="init_summary_log_offline">Enable Offline Logging (Won\'t show online log screen when logging, won\'t upload logs)</string>
     <string name="init_choose_list">Ask for List</string>
     <string name="init_summary_choose_list">Ask which list to store caches in</string>
     <string name="init_livelist">Show Direction</string>
@@ -527,9 +531,18 @@
     <string name="init_maintenance">Maintenance</string>
     <string name="init_maintenance_directories_note">c:geo stores images, log images and other files related to a cache in a separate directory. In some cases (like importing/exporting the database) this directory may contain outdated files, which can be deleted here.</string>
     <string name="init_maintenance_directories">Delete orphaned files</string>
+    <string name="init_location">Geolocation</string>
+    <string name="init_location_note">On devices equipped with Google Play Services, c:geo can automatically use a better geolocation provider. However, this prevents the use of an external BlueTooth GPS receiver.</string>
+    <string name="init_location_googleplayservices">Use Google Play Services</string>
+    <string name="init_low_power">Low-power mode</string>
+    <string name="init_low_power_note">The low-power mode avoids using the GPS and the gyroscope when a highly accurate location is not strictly necessary, at the cost of longer fixing times.</string>
+    <string name="init_low_power_mode">Activate low-power mode</string>
     <string name="init_create_memory_dump">Create memory dump</string>
     <string name="init_memory_dump">Memory dump</string>
     <string name="init_memory_dumped">Memory dumped to %s</string>
+    <string name="init_hardware_acceleration_title">Hardware accelerated rendering</string>
+    <string name="init_hardware_acceleration_note">Hardware acceleration renders graphical elements faster on the screen. However on some devices the Android operating system contains bugs and some text may appear blurred (notably bold characters). Disable hardware acceleration if this happens to you.</string>
+    <string name="init_hardware_acceleration">Enable hardware acceleration</string>
     <string name="settings_open_website">Open website</string>
     <string name="settings_settings">Settings</string>
     <string name="settings_information">Information</string>
@@ -587,6 +600,7 @@
     <string name="auth_ocnl">opencaching.nl</string>
     <string name="auth_ocus">opencaching.us</string>
     <string name="auth_ocro">opencaching.ro</string>
+    <string name="auth_ocuk">opencaching.org.uk</string>
     <string name="auth_dialog_completed_oc">c:geo is now authorized to interact with %s.</string>
 
     <!-- cache -->
@@ -695,7 +709,7 @@
     <string name="cache_menu_oruxmaps">OruxMaps</string>
     <string name="cache_menu_navigon">Navigon</string>
     <string name="cache_menu_pebble">Pebble</string>
-    <string name="cache_menu_mapswithme">MapsWithMe</string>
+    <string name="cache_menu_android_wear">Android Wear</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Saved Log</string>
     <string name="cache_status_found">Found</string>
@@ -822,7 +836,8 @@
     <string name="search_clear_history">Clear History</string>
     <string name="search_history_cleared">History cleared</string>
     <string name="waypoint_coordinate_formats_plain">Plain</string>
-
+    <string name="from_clipboard">From clipboard</string>
+    
     <!-- visit -->
     <string name="visit_tweet">Post this find to Twitter</string>
 
@@ -935,15 +950,15 @@
     <string name="license_dismiss">Dismiss</string>
 
     <!-- helpers -->
-    <string name="helper_calendar_title">c:geo calendar add-on</string>
-    <string name="helper_calendar_missing">c:geo calendar add-on not installed.</string>
+    <string name="helper_calendar_title">c:geo calendar plugin</string>
+    <string name="helper_calendar_missing">c:geo calendar plugin not installed.</string>
     <string name="helper_calendar_description">Enables you to export event caches to the calendar on your device.</string>
     <string name="helper_sendtocgeo_title">Send to c:geo</string>
-    <string name="helper_contacts_title">c:geo contacts add-on</string>
+    <string name="helper_contacts_title">c:geo contacts plugin</string>
     <string name="helper_contacts_description">Enables you to open a contact card (of your address book) directly from a log entry, so you can more easily ask friends for help.</string>
     <string name="helper_sendtocgeo_description">Send to c:geo is a browser extension <strong>for your PC</strong>. When browsing geocaching.com, you can send caches to your smartphone with the click of a button directly inside the browser.</string>
     <string name="helper_locus_title">Locus</string>
-    <string name="helper_locus_description">Simple, usable application which shows online maps and allows you to download them directly into Offline mode (raster maps only). Also supports track recording, POI handling and many other useful functions.</string>
+    <string name="helper_locus_description">Outdoor navigation app for your phone or tablet. View topo maps offline, track your route, hunt geocaches, use a voice guide and do even more.</string>
     <string name="helper_gpsstatus_title">GPS Status</string>
     <string name="helper_gpsstatus_description">You can use the radar in this application in conjunction with c:geo. It also offers a lot of other GPS-related information.</string>
     <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
@@ -956,7 +971,7 @@
     <string name="helper_google_translate_description">If you download translation packages in the Google Translate app, then you can easily translate cache descriptions in c:geo by a long tap on the cache description text (without an Internet connection).</string>
     
     <!-- add-ons -->
-    <string name="addon_missing_title">Missing Add-On</string>
+    <string name="addon_missing_title">Missing plugin</string>
     <string name="addon_download_prompt">Get it now from Google Play.</string>
 
     <!-- export -->
@@ -1225,6 +1240,8 @@
     <string name="tts_service">Talking compass</string>
     <string name="tts_start">Start talking</string>
     <string name="tts_stop">Stop talking</string>
+    <string name="tts_started">Started speech</string>
+    <string name="tts_stopped">Stopped speech</string>
     <string name="err_tts_lang_not_supported">The current language is not supported by text-to-speech.</string>
     <string name="tts_one_kilometer">one kilometer</string>
     <plurals name="tts_kilometers">
@@ -1261,11 +1278,19 @@
         <item quantity="other">%s favorites</item>
     </plurals>
     
-    <string name="percent_favorite_points">%\  favorites</string>
+    <string name="more_than_percent_favorite_points">> %d%% favorites</string>
     
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo shortcut</string>
     <string name="create_shortcut">Create shortcut</string>
     <string name="send">Send</string>
-
+    
+    <string name="showcase_logcache_title">Sending the log</string>
+    <string name="showcase_logcache_text">Remember, many commands are now in the title bar. There you find the button for sending the finished log.</string>
+    <string name="showcase_main_title">New menus</string>
+    <string name="showcase_main_text">c:geo now places menu items in the title bar like other modern apps. Some items are hidden behind the dotted symbol. Long press a button to see its description.</string>
+    <string name="showcase_cachelist_title">Switching lists</string>
+    <string name="showcase_cachelist_text">You can switch between your geocache lists by clicking the title of the list.</string>
+    <string name="confirm_log_title">Unusual log type</string>
+    <string name="confirm_log_message">You want to log \'%s\'. Are you sure?</string>
 </resources>

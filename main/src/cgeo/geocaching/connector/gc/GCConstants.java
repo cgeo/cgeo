@@ -45,7 +45,6 @@ public final class GCConstants {
     public final static Pattern PATTERN_OWNER_USERID = Pattern.compile("other caches <a href=\"/seek/nearest\\.aspx\\?u=(.*?)\">hidden</a> or");
     public final static Pattern PATTERN_FOUND = Pattern.compile("ctl00_ContentBody_GeoNav_logText\">(Found It|Attended)");
     public final static Pattern PATTERN_FOUND_ALTERNATIVE = Pattern.compile("<div class=\"StatusInformationWidget FavoriteWidget\"");
-    public final static Pattern PATTERN_FOUND_DATE = Pattern.compile(">Logged on: ([^<]+?)<");
     public final static Pattern PATTERN_OWNER_DISPLAYNAME = Pattern.compile("<div id=\"ctl00_ContentBody_mcd1\">[^<]+<a href=\"[^\"]+\">([^<]+)</a>");
     public final static Pattern PATTERN_TYPE = Pattern.compile("<a href=\"/seek/nearest.aspx\\?tx=([0-9a-f-]+)");
     public final static Pattern PATTERN_HIDDEN = Pattern.compile("<div id=\"ctl00_ContentBody_mcd2\">\\W*Hidden[\\s:]*([^<]+?)</div>");
@@ -64,17 +63,18 @@ public final class GCConstants {
     public final static Pattern PATTERN_INVENTORY = Pattern.compile("<span id=\"ctl00_ContentBody_uxTravelBugList_uxInventoryLabel\">\\W*Inventory[^<]*</span>[^<]*</h3>[^<]*<div class=\"WidgetBody\">([^<]*<ul>(([^<]*<li>[^<]*<a href=\"[^\"]+\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>[^<]+<\\/span>[^<]*<\\/a>[^<]*<\\/li>)+)[^<]*<\\/ul>)?");
     public final static Pattern PATTERN_INVENTORYINSIDE = Pattern.compile("[^<]*<li>[^<]*<a href=\"[a-z0-9\\-\\_\\.\\?\\/\\:\\@]*\\/track\\/details\\.aspx\\?guid=([0-9a-z\\-]+)[^\"]*\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>([^<]+)<\\/span>[^<]*<\\/a>[^<]*<\\/li>");
     public final static Pattern PATTERN_WATCHLIST = Pattern.compile(Pattern.quote("watchlist.aspx") + ".{1,50}" + Pattern.quote("action=rem"));
+    public final static Pattern PATTERN_RELATED_WEB_PAGE = Pattern.compile("id=\"ctl00_ContentBody_uxCacheUrl\" title=\"Related Web Page\" href=\"(.*?)\">");
 
     // Info box top-right
-    public static final Pattern PATTERN_LOGIN_NAME = Pattern.compile("\"SignedInProfileLink\">([^<]+)</a>");
+    public static final Pattern PATTERN_LOGIN_NAME = Pattern.compile("\"SignedInProfileLink\">(.*?)</a>");
     public static final Pattern PATTERN_MEMBER_STATUS = Pattern.compile("<span id=\"ctl00_litPMLevel\">([^<]+)</span>");
     public static final String MEMBER_STATUS_RENEW = "<a id=\"ctl00_hlRenew";
     public static final String MEMBER_STATUS_PM = "Premium Member";
     /** Use replaceAll("[,.]","") on the resulting string before converting to an int */
     public static final Pattern PATTERN_CACHES_FOUND = Pattern.compile("<strong[^>]*>.*?([\\d,.]+) Caches? Found", Pattern.DOTALL);
-    public static final Pattern PATTERN_AVATAR_IMAGE_PROFILE_PAGE = Pattern.compile("src=\"(https?://imgcdn.geocaching.com/avatar/[0-9a-f-]+\\.jpg)\"[^>]*alt=\"Avatar\"");
+    public static final Pattern PATTERN_AVATAR_IMAGE_PROFILE_PAGE = Pattern.compile("src=\"(https?://(imgcdn\\.geocaching\\.com|[^>\"]+\\.cloudfront\\.net)/avatar/[0-9a-f-]+\\.jpg)\"[^>]*alt=\"");
     public static final Pattern PATTERN_LOGIN_NAME_LOGIN_PAGE = Pattern.compile("ctl00_ContentBody_lbUsername\">.*<strong>(.*)</strong>");
-    public static final Pattern PATTERN_CUSTOMDATE = Pattern.compile("<option selected=\"selected\" value=\"([ /Mdy-]+)\">");
+    public static final Pattern PATTERN_CUSTOMDATE = Pattern.compile("<option selected=\"selected\" value=\"([ /.Mdy-]+)\">");
     public static final Pattern PATTERN_MAP_LOGGED_IN = Pattern.compile("<a href=\"https?://www.geocaching.com/my/\" class=\"CommonUsername\"");
 
     /**
@@ -130,7 +130,7 @@ public final class GCConstants {
     public final static Pattern PATTERN_SEARCH_TOTALCOUNT = Pattern.compile("<span>Total Records\\D*(\\d+)<");
     public final static Pattern PATTERN_SEARCH_RECAPTCHA = Pattern.compile("<script[^>]*src=\"[^\"]*/recaptcha/api/challenge\\?k=([^\"]+)\"[^>]*>");
     public final static Pattern PATTERN_SEARCH_RECAPTCHACHALLENGE = Pattern.compile("challenge : '([^']+)'");
-    public final static Pattern PATTERN_SEARCH_HIDDEN_DATE = Pattern.compile("<td valign=\"top\"[^<]+<span class=\"small\">([^<]+)</span>");
+    public final static Pattern PATTERN_SEARCH_HIDDEN_DATE = Pattern.compile("<td style=\"width:70px\">[^<]+<span class=\"small\">([^<]+)</span>");
 
     /**
      * Patterns for waypoints
@@ -172,7 +172,7 @@ public final class GCConstants {
     public final static String STRING_PREMIUMONLY_2 = "Sorry, the owner of this listing has made it viewable to Premium Members only.";
     public final static String STRING_PREMIUMONLY_1 = "has chosen to make this cache listing visible to Premium Members only.";
     public final static String STRING_UNPUBLISHED_OTHER = "you cannot view this cache listing until it has been published";
-    public final static String STRING_UNPUBLISHED_FROM_SEARCH = "UnpublishedCacheSearchWidget";
+    public final static String STRING_UNPUBLISHED_FROM_SEARCH = "class=\"UnpublishedCacheSearchWidget"; // do not include closing brace as the CSS can contain additional styles
     public final static String STRING_UNKNOWN_ERROR = "An Error Has Occurred";
     public final static String STRING_DISABLED = "<li>This cache is temporarily unavailable.";
     public final static String STRING_ARCHIVED = "<li>This cache has been archived,";

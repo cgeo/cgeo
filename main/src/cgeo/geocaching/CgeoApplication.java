@@ -1,20 +1,30 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.sensors.DirectionProvider;
+import cgeo.geocaching.playservices.LocationProvider;
+import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDataProvider;
+import cgeo.geocaching.sensors.GpsStatusProvider;
+import cgeo.geocaching.sensors.GpsStatusProvider.Status;
 import cgeo.geocaching.sensors.IGeoData;
+import cgeo.geocaching.sensors.OrientationProvider;
+import cgeo.geocaching.sensors.RotationProvider;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
+import cgeo.geocaching.utils.RxUtils;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
+import org.eclipse.jdt.annotation.NonNull;
 
 import rx.Observable;
 import rx.functions.Action1;
-import rx.observables.ConnectableObservable;
+import rx.functions.Func1;
 
 import android.app.Application;
-import android.os.Environment;
 import android.view.ViewConfiguration;
 
-import java.io.IOException;
-import java.lang.Thread.UncaughtExceptionHandler;
 import java.lang.reflect.Field;
 
 public class CgeoApplication extends Application {
@@ -24,33 +34,33 @@ public class CgeoApplication extends Application {
     private boolean liveMapHintShownInThisSession = false; // livemap hint has been shown
     private static CgeoApplication instance;
     private Observable<IGeoData> geoDataObservable;
+    private Observable<IGeoData> geoDataObservableLowPower;
     private Observable<Float> directionObservable;
-    private volatile IGeoData currentGeo = null;
+    private Observable<Status> gpsStatusObservable;
+    @NonNull private volatile IGeoData currentGeo = GeoData.DUMMY_LOCATION;
+    private volatile boolean hasValidLocation = false;
     private volatile float currentDirection = 0.0f;
+    private boolean isGooglePlayServicesAvailable = false;
+    private final Action1<IGeoData> rememberGeodataAction = new Action1<IGeoData>() {
+        @Override
+        public void call(final IGeoData geoData) {
+            currentGeo = geoData;
+            hasValidLocation = true;
+        }
+    };
 
-    static {
-        final UncaughtExceptionHandler defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
+    public static void dumpOnOutOfMemory(final boolean enable) {
 
-        Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler() {
+        if (enable) {
 
-            @Override
-            public void uncaughtException(final Thread thread, final Throwable ex) {
-                Log.e("UncaughtException", ex);
-                Throwable exx = ex;
-                while (exx.getCause() != null) {
-                    exx = exx.getCause();
-                }
-                if (exx.getClass().equals(OutOfMemoryError.class)) {
-                    try {
-                        Log.e("OutOfMemory");
-                        android.os.Debug.dumpHprofData(Environment.getExternalStorageDirectory().getPath() + "/dump.hprof");
-                    } catch (final IOException e) {
-                        Log.e("Error writing dump", e);
-                    }
-                }
-                defaultHandler.uncaughtException(thread, ex);
+            if (!OOMDumpingUncaughtExceptionHandler.activateHandler()) {
+                Log.e("OOM dumping handler not activated (either a problem occured or it was already active)");
             }
-        });
+        } else {
+            if (!OOMDumpingUncaughtExceptionHandler.resetToDefault()) {
+                Log.e("OOM dumping handler not resetted (either a problem occured or it was not active)");
+            }
+        }
     }
 
     public CgeoApplication() {
@@ -70,14 +80,62 @@ public class CgeoApplication extends Application {
         try {
             final ViewConfiguration config = ViewConfiguration.get(this);
             final Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
-
-            if (menuKeyField != null) {
-                menuKeyField.setAccessible(true);
-                menuKeyField.setBoolean(config, false);
-            }
-        } catch (final Exception ex) {
-            // Ignore
+            menuKeyField.setAccessible(true);
+            menuKeyField.setBoolean(config, false);
+        } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException ignored) {
         }
+
+        // Set language to English if the user decided so.
+        Settings.setLanguage(Settings.isUseEnglish());
+
+        // ensure initialization of lists
+        DataStore.getLists();
+
+        // Check if Google Play services is available
+        if (GooglePlayServicesUtil.isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS) {
+            isGooglePlayServicesAvailable = true;
+        }
+        Log.i("Google Play services are " + (isGooglePlayServicesAvailable ? "" : "not ") + "available");
+        setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
+        setupDirectionObservable(Settings.useLowPowerMode());
+        gpsStatusObservable = GpsStatusProvider.create(this).replay(1).refCount();
+
+        // Attempt to acquire an initial location before any real activity happens.
+        geoDataObservableLowPower.subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe(rememberGeodataAction);
+    }
+
+    public void setupGeoDataObservables(final boolean useGooglePlayServices, final boolean useLowPowerLocation) {
+        if (useGooglePlayServices) {
+            geoDataObservable = LocationProvider.getMostPrecise(this).doOnNext(rememberGeodataAction);
+            if (useLowPowerLocation) {
+                geoDataObservableLowPower = LocationProvider.getLowPower(this).doOnNext(rememberGeodataAction);
+            } else {
+                geoDataObservableLowPower = geoDataObservable;
+            }
+        } else {
+            geoDataObservable = GeoDataProvider.create(this).replay(1).refCount().doOnNext(rememberGeodataAction);
+            geoDataObservableLowPower = geoDataObservable;
+        }
+    }
+
+    public void setupDirectionObservable(final boolean useLowPower) {
+        directionObservable = RotationProvider.create(this, useLowPower).onErrorResumeNext(new Func1<Throwable, Observable<? extends Float>>() {
+            @Override
+            public Observable<? extends Float> call(final Throwable throwable) {
+                return OrientationProvider.create(CgeoApplication.this);
+            }
+        }).onErrorResumeNext(new Func1<Throwable, Observable<? extends Float>>() {
+            @Override
+            public Observable<? extends Float> call(final Throwable throwable) {
+                Log.e("Device orientation will not be available as no suitable sensors were found");
+                return Observable.<Float>never().startWith(0.0f);
+            }
+        }).replay(1).refCount().doOnNext(new Action1<Float>() {
+            @Override
+            public void call(final Float direction) {
+                currentDirection = direction;
+            }
+        });
     }
 
     @Override
@@ -86,36 +144,35 @@ public class CgeoApplication extends Application {
         DataStore.removeAllFromCache();
     }
 
-    public synchronized Observable<IGeoData> geoDataObservable() {
-        if (geoDataObservable == null) {
-            final ConnectableObservable<IGeoData> onDemand = GeoDataProvider.create(this).replay(1);
-            onDemand.subscribe(new Action1<IGeoData>() {
-                                  @Override
-                                  public void call(final IGeoData geoData) {
-                                      currentGeo = geoData;
-                                  }
-                              });
-            geoDataObservable = onDemand.refCount();
-        }
-        return geoDataObservable;
+    public Observable<IGeoData> geoDataObservable(final boolean lowPower) {
+        return lowPower ? geoDataObservableLowPower : geoDataObservable;
     }
 
-    public synchronized Observable<Float> directionObservable() {
-        if (directionObservable == null) {
-            final ConnectableObservable<Float> onDemand = DirectionProvider.create(this).replay(1);
-            onDemand.subscribe(new Action1<Float>() {
-                                  @Override
-                                  public void call(final Float direction) {
-                                      currentDirection = direction;
-                                  }
-                              });
-            directionObservable = onDemand.refCount();
-        }
+    public Observable<Float> directionObservable() {
         return directionObservable;
     }
 
+    public Observable<Status> gpsStatusObservable() {
+        if (gpsStatusObservable == null) {
+            gpsStatusObservable = GpsStatusProvider.create(this).share();
+        }
+        return gpsStatusObservable;
+    }
+
+    @NonNull
     public IGeoData currentGeo() {
-        return currentGeo != null ? currentGeo : geoDataObservable().toBlocking().first();
+        return currentGeo;
+    }
+
+    public boolean hasValidLocation() {
+        return hasValidLocation;
+    }
+
+    public Float distanceNonBlocking(final ICoordinates target) {
+        if (target.getCoords() == null) {
+            return null;
+        }
+        return currentGeo.getCoords().distanceTo(target);
     }
 
     public float currentDirection() {
@@ -146,6 +203,10 @@ public class CgeoApplication extends Application {
      */
     public void forceRelog() {
         forceRelog = true;
+    }
+
+    public boolean isGooglePlayServicesAvailable() {
+        return isGooglePlayServicesAvailable;
     }
 
 }

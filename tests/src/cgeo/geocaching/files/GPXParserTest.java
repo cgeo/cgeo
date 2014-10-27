@@ -285,7 +285,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(caches).hasSize(1);
         DataStore.removeAllFromCache();
         // load only the minimum cache, it has several members missing
-        final Geocache minimalCache = DataStore.loadCache(geocode, EnumSet.of(LoadFlag.LOAD_DB_MINIMAL));
+        final Geocache minimalCache = DataStore.loadCache(geocode, EnumSet.of(LoadFlag.DB_MINIMAL));
 
         // now check that we load lazy members on demand
         assertThat(minimalCache.getAttributes()).isNotEmpty();
@@ -375,14 +375,41 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
 
     public void testGPXMysteryType() throws IOException, ParserException {
         final List<Geocache> caches = readGPX10(R.raw.tc2012);
-        Geocache mystery = null;
-        for (Geocache geocache : caches) {
-            if (geocache.getName().equals("U017")) {
-                mystery = geocache;
-            }
-        }
+        Geocache mystery = getCache(caches, "U017");
         assertThat(mystery).isNotNull();
         assert (mystery != null);
         assertThat(mystery.getType()).isEqualTo(CacheType.MYSTERY);
     }
+
+    private static Geocache getCache(final List<Geocache> caches, String geocode) {
+        for (Geocache geocache : caches) {
+            if (geocache.getName().equals(geocode)) {
+                return geocache;
+            }
+        }
+        return null;
+    }
+
+    public void testLabCaches() throws IOException, ParserException {
+        final List<Geocache> caches = readGPX10(R.raw.giga_lab_caches);
+        assertThat(caches).hasSize(10);
+        Geocache lab = getCache(caches, "01_Munich Olympic Walk Of Stars_Updated-Project MUNICH2014 - Mia san Giga! Olympiapark");
+        assertThat(lab).isNotNull();
+
+        // parse labs as virtual for the time being
+        assertThat(lab.getType()).isEqualTo(CacheType.VIRTUAL);
+
+        // no difficulty and terrain rating
+        assertThat(lab.getTerrain()).isEqualTo(0);
+        assertThat(lab.getDifficulty()).isEqualTo(0);
+
+        // geocodes are just big hashes
+        assertThat(lab.getGeocode()).isEqualTo("01_Munich Olympic Walk Of Stars_Updated-Project MUNICH2014 - Mia san Giga! Olympiapark".toUpperCase(Locale.US));
+
+        // other normal cache properties
+        assertThat(lab.getName()).isEqualTo("01_Munich Olympic Walk Of Stars_Updated-Project MUNICH2014 - Mia san Giga! Olympiapark");
+        assertThat(lab.getShortDescription()).isEqualTo("01_Munich Olympic Walk Of Stars_Updated (Giga! Olympia Park)-Project MUNICH2014 - Mia san Giga! Olympiapark");
+        assertThat(lab.getDescription()).startsWith("DEU:");
+    }
+
 }

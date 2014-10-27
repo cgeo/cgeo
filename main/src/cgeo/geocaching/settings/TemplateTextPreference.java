@@ -1,5 +1,7 @@
 package cgeo.geocaching.settings;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -30,12 +32,12 @@ public class TemplateTextPreference extends DialogPreference {
     private EditText editText;
     private String initialValue;
 
-    public TemplateTextPreference(Context context, AttributeSet attrs) {
+    public TemplateTextPreference(final Context context, final AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public TemplateTextPreference(Context context, AttributeSet attrs, int defStyle) {
+    public TemplateTextPreference(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
         init();
     }
@@ -45,28 +47,28 @@ public class TemplateTextPreference extends DialogPreference {
     }
 
     @Override
-    protected void onBindDialogView(View view) {
+    protected void onBindDialogView(final View view) {
         settingsActivity = (SettingsActivity) this.getContext();
 
-        editText = (EditText) view.findViewById(R.id.signature_dialog_text);
+        editText = ButterKnife.findById(view, R.id.signature_dialog_text);
         editText.setText(getPersistedString(initialValue != null ? initialValue : StringUtils.EMPTY));
         Dialogs.moveCursorToEnd(editText);
 
-        Button button = (Button) view.findViewById(R.id.signature_templates);
+        final Button button = ButterKnife.findById(view, R.id.signature_templates);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View button) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(TemplateTextPreference.this.getContext());
+            public void onClick(final View button) {
+                final AlertDialog.Builder alert = new AlertDialog.Builder(TemplateTextPreference.this.getContext());
                 alert.setTitle(R.string.init_signature_template_button);
                 final ArrayList<LogTemplate> templates = LogTemplateProvider.getTemplatesWithoutSignature();
-                String[] items = new String[templates.size()];
+                final String[] items = new String[templates.size()];
                 for (int i = 0; i < templates.size(); i++) {
                     items[i] = settingsActivity.getResources().getString(templates.get(i).getResourceId());
                 }
                 alert.setItems(items, new DialogInterface.OnClickListener() {
 
                     @Override
-                    public void onClick(DialogInterface dialog, int position) {
+                    public void onClick(final DialogInterface dialog, final int position) {
                         dialog.dismiss();
                         final LogTemplate template = templates.get(position);
                         insertSignatureTemplate(template);
@@ -80,14 +82,14 @@ public class TemplateTextPreference extends DialogPreference {
     }
 
     private void insertSignatureTemplate(final LogTemplate template) {
-        String insertText = "[" + template.getTemplateString() + "]";
+        final String insertText = "[" + template.getTemplateString() + "]";
         ActivityMixin.insertAtPosition(editText, insertText, true);
     }
 
     @Override
-    protected void onDialogClosed(boolean positiveResult) {
+    protected void onDialogClosed(final boolean positiveResult) {
         if (positiveResult) {
-            String text = editText.getText().toString();
+            final String text = editText.getText().toString();
             persistString(text);
             callChangeListener(text);
         }
@@ -95,7 +97,7 @@ public class TemplateTextPreference extends DialogPreference {
     }
 
     @Override
-    protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue) {
+    protected void onSetInitialValue(final boolean restorePersistedValue, final Object defaultValue) {
         if (restorePersistedValue) {
             // Restore existing state
             initialValue = this.getPersistedString(DEFAULT_VALUE);
@@ -107,7 +109,7 @@ public class TemplateTextPreference extends DialogPreference {
     }
 
     @Override
-    protected Object onGetDefaultValue(TypedArray array, int index) {
+    protected Object onGetDefaultValue(final TypedArray array, final int index) {
         return array.getString(index);
     }
 }

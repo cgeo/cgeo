@@ -25,7 +25,7 @@ class DifficultyFilter extends AbstractRangeFilter {
 
         @Override
         public List<IFilter> getFilters() {
-            final ArrayList<IFilter> filters = new ArrayList<IFilter>(DIFFICULTY_MAX);
+            final ArrayList<IFilter> filters = new ArrayList<>(DIFFICULTY_MAX);
             for (int difficulty = DIFFICULTY_MIN; difficulty <= DIFFICULTY_MAX; difficulty++) {
                 filters.add(new DifficultyFilter(difficulty));
             }

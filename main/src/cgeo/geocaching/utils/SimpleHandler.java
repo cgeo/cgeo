@@ -14,8 +14,8 @@ public abstract class SimpleHandler extends Handler {
     protected final WeakReference<Progress> progressDialogRef;
 
     public SimpleHandler(final AbstractActivity activity, final Progress progress) {
-        activityRef = new WeakReference<AbstractActivity>(activity);
-        progressDialogRef = new WeakReference<Progress>(progress);
+        activityRef = new WeakReference<>(activity);
+        progressDialogRef = new WeakReference<>(progress);
     }
 
     @Override

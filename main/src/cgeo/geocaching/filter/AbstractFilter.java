@@ -14,7 +14,7 @@ abstract class AbstractFilter implements IFilter {
 
     @Override
     public void filter(final List<Geocache> list) {
-        final List<Geocache> itemsToRemove = new ArrayList<Geocache>();
+        final List<Geocache> itemsToRemove = new ArrayList<>();
         for (Geocache item : list) {
             if (!accepts(item)) {
                 itemsToRemove.add(item);

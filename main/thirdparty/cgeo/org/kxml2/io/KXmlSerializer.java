@@ -32,6 +32,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Locale;
 
+@SuppressWarnings("ALL")
 public class KXmlSerializer implements XmlSerializer {
 
     //    static final String UNDEFINED = ":";

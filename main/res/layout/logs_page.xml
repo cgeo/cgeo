@@ -12,6 +12,7 @@
     android:headerDividersEnabled="false"
     android:listSelector="?background_color"
     android:scrollbarStyle="outsideOverlay"
+    tools:context=".ui.logs.LogsViewCreator"
     tools:listitem="@layout/logs_item" >
 
 </ListView>

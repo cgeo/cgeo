@@ -2,6 +2,7 @@ package cgeo.geocaching.network;
 
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
@@ -26,11 +27,12 @@ import ch.boye.httpclientandroidlib.params.CoreConnectionPNames;
 import ch.boye.httpclientandroidlib.params.CoreProtocolPNames;
 import ch.boye.httpclientandroidlib.params.HttpParams;
 import ch.boye.httpclientandroidlib.util.EntityUtils;
+
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -43,6 +45,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.regex.Pattern;
 
 public abstract class Network {
 
@@ -51,7 +54,7 @@ public abstract class Network {
     /** Native user agent, taken from a Android 2.2 Nexus **/
     private final static String NATIVE_USER_AGENT = "Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
 
-    private static final String PATTERN_PASSWORD = "(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+";
+    private static final Pattern PATTERN_PASSWORD = Pattern.compile("(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+");
 
     private final static HttpParams clientParams = new BasicHttpParams();
 
@@ -63,7 +66,7 @@ public abstract class Network {
     }
 
     private static String hidePassword(final String message) {
-        return message.replaceAll(PATTERN_PASSWORD, "password=***");
+        return PATTERN_PASSWORD.matcher(message).replaceAll("password=***");
     }
 
     private static HttpClient getHttpClient() {
@@ -107,14 +110,14 @@ public abstract class Network {
      * @return the HTTP response, or null in case of an encoding error params
      */
     @Nullable
-    public static HttpResponse postJsonRequest(final String uri, final JSONObject json) {
+    public static HttpResponse postJsonRequest(final String uri, final ObjectNode json) {
         HttpPost request = new HttpPost(uri);
         request.addHeader("Content-Type", "application/json; charset=utf-8");
         if (json != null) {
             try {
                 request.setEntity(new StringEntity(json.toString(), CharEncoding.UTF_8));
             } catch (UnsupportedEncodingException e) {
-                Log.e("postJsonRequest:JSON Entity: UnsupportedEncodingException");
+                Log.e("postJsonRequest:JSON Entity: UnsupportedEncodingException", e);
                 return null;
             }
         }
@@ -235,7 +238,7 @@ public abstract class Network {
                 Log.w(status + " [" + response.getStatusLine().getReasonPhrase() + "]" + formatTimeSpan(before) + reqLogStr);
             }
             return response;
-        } catch (final IOException e) {
+        } catch (final Exception e) {
             final String timeSpan = formatTimeSpan(before);
             Log.w("Failure" + timeSpan + reqLogStr + " (" + e.toString() + ")");
         }
@@ -344,14 +347,14 @@ public abstract class Network {
      * @return a JSON object if the request was successful and the body could be decoded, <code>null</code> otherwise
      */
     @Nullable
-    public static JSONObject requestJSON(final String uri, @Nullable final Parameters params) {
+    public static ObjectNode requestJSON(final String uri, @Nullable final Parameters params) {
         final HttpResponse response = request("GET", uri, params, new Parameters("Accept", "application/json, text/javascript, */*; q=0.01"), null);
         final String responseData = getResponseData(response, false);
         if (responseData != null) {
             try {
-                return new JSONObject(responseData);
-            } catch (final JSONException e) {
-                Log.w("Network.requestJSON", e);
+                return (ObjectNode) JsonUtils.reader.readTree(responseData);
+            } catch (final IOException e) {
+                Log.w("requestJSON", e);
             }
         }
 

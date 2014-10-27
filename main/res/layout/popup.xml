@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:background="?background_color_transparent"
     android:orientation="vertical"
-    tools:context=".CachePopup">
+    tools:context=".CachePopupFragment" >
 
     <include layout="@layout/actionbar_popup" />
     <ScrollView

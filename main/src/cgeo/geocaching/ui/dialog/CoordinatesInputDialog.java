@@ -1,17 +1,24 @@
 package cgeo.geocaching.ui.dialog;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.Geopoint.ParseException;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.Settings.CoordInputFormatEnum;
+import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.Editable;
@@ -50,7 +57,7 @@ public class CoordinatesInputDialog extends DialogFragment {
 
     public static CoordinatesInputDialog getInstance(final Geocache cache, final Geopoint gp, final IGeoData geo) {
 
-        Bundle args = new Bundle();
+        final Bundle args = new Bundle();
 
         if (gp != null) {
             args.putParcelable(GEOPOINT_ARG, gp);
@@ -60,31 +67,43 @@ public class CoordinatesInputDialog extends DialogFragment {
             args.putParcelable(GEOPOINT_ARG, Geopoint.ZERO);
         }
 
-        if (geo !=null)
+        if (geo !=null) {
             args.putParcelable(GEOPOINT_INTIAL_ARG, geo.getCoords());
+        }
 
-        if (cache != null)
+        if (cache != null) {
             args.putParcelable(CACHECOORDS_ARG, cache.getCoords());
+        }
 
-        CoordinatesInputDialog cid = new CoordinatesInputDialog();
+        final CoordinatesInputDialog cid = new CoordinatesInputDialog();
         cid.setArguments(args);
         return cid;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         gp = getArguments().getParcelable(GEOPOINT_ARG);
         gpinitial = getArguments().getParcelable(GEOPOINT_INTIAL_ARG);
         cacheCoords = getArguments().getParcelable(CACHECOORDS_ARG);
 
-        if (savedInstanceState != null && savedInstanceState.getParcelable(GEOPOINT_ARG)!=null)
+        if (savedInstanceState != null && savedInstanceState.getParcelable(GEOPOINT_ARG)!=null) {
             gp = savedInstanceState.getParcelable(GEOPOINT_ARG);
+        }
 
+        if (VERSION.SDK_INT < VERSION_CODES.HONEYCOMB && Settings.isLightSkin()) {
+            setStyle(STYLE_NORMAL, R.style.DialogFixGingerbread);
+        }
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onPause() {
+        super.onPause();
+        new Keyboard(getActivity()).hide();
+    }
+
+    @Override
+    public void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
         // TODO: if current input is not commited in gp, read the current input into gp
         outState.putParcelable(GEOPOINT_ARG, gp);
@@ -94,8 +113,8 @@ public class CoordinatesInputDialog extends DialogFragment {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         getDialog().setTitle(R.string.cache_coordinates);
 
-        View v = inflater.inflate(R.layout.coordinatesinput_dialog, container, false);
-        final Spinner spinner = (Spinner) v.findViewById(R.id.spinnerCoordinateFormats);
+        final View v = inflater.inflate(R.layout.coordinatesinput_dialog, container, false);
+        final Spinner spinner = ButterKnife.findById(v, R.id.spinnerCoordinateFormats);
         final ArrayAdapter<CharSequence> adapter =
                 ArrayAdapter.createFromResource(getActivity(),
                         R.array.waypoint_coordinate_formats,
@@ -105,25 +124,25 @@ public class CoordinatesInputDialog extends DialogFragment {
         spinner.setSelection(Settings.getCoordInputFormat().ordinal());
         spinner.setOnItemSelectedListener(new CoordinateFormatListener());
 
-        bLat = (Button) v.findViewById(R.id.ButtonLat);
-        eLat = (EditText) v.findViewById(R.id.latitude);
-        eLatDeg = (EditText) v.findViewById(R.id.EditTextLatDeg);
-        eLatMin = (EditText) v.findViewById(R.id.EditTextLatMin);
-        eLatSec = (EditText) v.findViewById(R.id.EditTextLatSec);
-        eLatSub = (EditText) v.findViewById(R.id.EditTextLatSecFrac);
-        tLatSep1 = (TextView) v.findViewById(R.id.LatSeparator1);
-        tLatSep2 = (TextView) v.findViewById(R.id.LatSeparator2);
-        tLatSep3 = (TextView) v.findViewById(R.id.LatSeparator3);
+        bLat = ButterKnife.findById(v, R.id.ButtonLat);
+        eLat = ButterKnife.findById(v, R.id.latitude);
+        eLatDeg = ButterKnife.findById(v, R.id.EditTextLatDeg);
+        eLatMin = ButterKnife.findById(v, R.id.EditTextLatMin);
+        eLatSec = ButterKnife.findById(v, R.id.EditTextLatSec);
+        eLatSub = ButterKnife.findById(v, R.id.EditTextLatSecFrac);
+        tLatSep1 = ButterKnife.findById(v, R.id.LatSeparator1);
+        tLatSep2 = ButterKnife.findById(v, R.id.LatSeparator2);
+        tLatSep3 = ButterKnife.findById(v, R.id.LatSeparator3);
 
-        bLon = (Button) v.findViewById(R.id.ButtonLon);
-        eLon = (EditText) v.findViewById(R.id.longitude);
-        eLonDeg = (EditText) v.findViewById(R.id.EditTextLonDeg);
-        eLonMin = (EditText) v.findViewById(R.id.EditTextLonMin);
-        eLonSec = (EditText) v.findViewById(R.id.EditTextLonSec);
-        eLonSub = (EditText) v.findViewById(R.id.EditTextLonSecFrac);
-        tLonSep1 = (TextView) v.findViewById(R.id.LonSeparator1);
-        tLonSep2 = (TextView) v.findViewById(R.id.LonSeparator2);
-        tLonSep3 = (TextView) v.findViewById(R.id.LonSeparator3);
+        bLon = ButterKnife.findById(v, R.id.ButtonLon);
+        eLon = ButterKnife.findById(v, R.id.longitude);
+        eLonDeg = ButterKnife.findById(v, R.id.EditTextLonDeg);
+        eLonMin = ButterKnife.findById(v, R.id.EditTextLonMin);
+        eLonSec = ButterKnife.findById(v, R.id.EditTextLonSec);
+        eLonSub = ButterKnife.findById(v, R.id.EditTextLonSecFrac);
+        tLonSep1 = ButterKnife.findById(v, R.id.LonSeparator1);
+        tLonSep2 = ButterKnife.findById(v, R.id.LonSeparator2);
+        tLonSep3 = ButterKnife.findById(v, R.id.LonSeparator3);
 
         eLatDeg.addTextChangedListener(new TextChanged(eLatDeg));
         eLatMin.addTextChangedListener(new TextChanged(eLatMin));
@@ -146,9 +165,9 @@ public class CoordinatesInputDialog extends DialogFragment {
         bLat.setOnClickListener(new ButtonClickListener());
         bLon.setOnClickListener(new ButtonClickListener());
 
-        final Button buttonCurrent = (Button) v.findViewById(R.id.current);
+        final Button buttonCurrent = ButterKnife.findById(v, R.id.current);
         buttonCurrent.setOnClickListener(new CurrentListener());
-        final Button buttonCache = (Button) v.findViewById(R.id.cache);
+        final Button buttonCache = ButterKnife.findById(v, R.id.cache);
 
         if (cacheCoords != null) {
             buttonCache.setOnClickListener(new CacheListener());
@@ -156,7 +175,16 @@ public class CoordinatesInputDialog extends DialogFragment {
             buttonCache.setVisibility(View.GONE);
         }
 
-        final Button buttonDone = (Button) v.findViewById(R.id.done);
+        final Button buttonClipboard = ButterKnife.findById(v, R.id.clipboard);
+        try {
+            @SuppressWarnings("unused")
+            final Geopoint geopoint = new Geopoint(StringUtils.defaultString(ClipboardUtils.getText()));
+            buttonClipboard.setOnClickListener(new ClipboardListener());
+            buttonClipboard.setVisibility(View.VISIBLE);
+        } catch (final ParseException e) {
+        }
+
+        final Button buttonDone = ButterKnife.findById(v, R.id.done);
         buttonDone.setOnClickListener(new InputDoneListener());
 
         return v;
@@ -263,7 +291,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     private class ButtonClickListener implements View.OnClickListener {
 
         @Override
-        public void onClick(View view) {
+        public void onClick(final View view) {
             assert view instanceof Button;
             final Button button = (Button) view;
             final CharSequence text = button.getText();
@@ -296,12 +324,12 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         private final EditText editText;
 
-        public TextChanged(EditText editText) {
+        public TextChanged(final EditText editText) {
             this.editText = editText;
         }
 
         @Override
-        public void afterTextChanged(Editable s) {
+        public void afterTextChanged(final Editable s) {
             /*
              * Max lengths, depending on currentFormat
              *
@@ -355,11 +383,11 @@ public class CoordinatesInputDialog extends DialogFragment {
         }
 
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
         }
 
         @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
         }
 
     }
@@ -404,7 +432,7 @@ public class CoordinatesInputDialog extends DialogFragment {
                 gp = current;
                 return true;
             }
-        } catch (final Geopoint.ParseException e) {
+        } catch (final Geopoint.ParseException ignored) {
             // Signaled and returned below
         }
         if (signalError) {
@@ -430,7 +458,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     private class CoordinateFormatListener implements OnItemSelectedListener {
 
         @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        public void onItemSelected(final AdapterView<?> parent, final View view, final int pos, final long id) {
             // Ignore first call, which comes from onCreate()
             if (currentFormat != null) {
 
@@ -451,7 +479,7 @@ public class CoordinatesInputDialog extends DialogFragment {
         }
 
         @Override
-        public void onNothingSelected(AdapterView<?> arg0) {
+        public void onNothingSelected(final AdapterView<?> arg0) {
         }
 
     }
@@ -459,7 +487,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     private class CurrentListener implements View.OnClickListener {
 
         @Override
-        public void onClick(View v) {
+        public void onClick(final View v) {
             if (gpinitial == null) {
                 final AbstractActivity activity = (AbstractActivity) getActivity();
                 activity.showToast(activity.getResources().getString(R.string.err_point_unknown_position));
@@ -474,7 +502,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     private class CacheListener implements View.OnClickListener {
 
         @Override
-        public void onClick(View v) {
+        public void onClick(final View v) {
             if (cacheCoords == null) {
                 final AbstractActivity activity = (AbstractActivity) getActivity();
                 activity.showToast(activity.getResources().getString(R.string.err_location_unknown));
@@ -486,11 +514,22 @@ public class CoordinatesInputDialog extends DialogFragment {
         }
     }
 
+    private class ClipboardListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(final View v) {
+            try {
+                gp = new Geopoint(StringUtils.defaultString(ClipboardUtils.getText()));
+                updateGUI();
+            } catch (final ParseException e) {
+            }
+        }
+    }
 
     private class InputDoneListener implements View.OnClickListener {
 
         @Override
-        public void onClick(View v) {
+        public void onClick(final View v) {
             if (!areCurrentCoordinatesValid(true)) {
                 return;
             }

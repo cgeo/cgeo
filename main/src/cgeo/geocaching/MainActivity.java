@@ -4,10 +4,9 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ILogin;
-import cgeo.geocaching.connector.gc.GCConnector;
-import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -16,16 +15,20 @@ import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.sensors.GpsStatusProvider;
+import cgeo.geocaching.sensors.GpsStatusProvider.Status;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
-import cgeo.geocaching.ui.Formatter;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.DatabaseBackupUtils;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
 
+import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -35,9 +38,8 @@ import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
 import rx.android.observables.AndroidObservable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.Subscriptions;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -127,7 +129,7 @@ public class MainActivity extends AbstractActionBarActivity {
     };
 
     private static String formatAddress(final Address address) {
-        final ArrayList<String> addressParts = new ArrayList<String>();
+        final ArrayList<String> addressParts = new ArrayList<>();
 
         final String countryName = address.getCountryName();
         if (countryName != null) {
@@ -145,37 +147,16 @@ public class MainActivity extends AbstractActionBarActivity {
         return StringUtils.join(addressParts, ", ");
     }
 
-    private class SatellitesHandler extends GeoDirHandler {
-
-        private boolean gpsEnabled = false;
-        private int satellitesFixed = 0;
-        private int satellitesVisible = 0;
-
+    private final Action1<GpsStatusProvider.Status> satellitesHandler = new Action1<Status>() {
         @Override
-        public void updateGeoData(final IGeoData data) {
-            if (data.getGpsEnabled() == gpsEnabled &&
-                    data.getSatellitesFixed() == satellitesFixed &&
-                    data.getSatellitesVisible() == satellitesVisible) {
-                return;
-            }
-            gpsEnabled = data.getGpsEnabled();
-            satellitesFixed = data.getSatellitesFixed();
-            satellitesVisible = data.getSatellitesVisible();
-
-            if (gpsEnabled) {
-                if (satellitesFixed > 0) {
-                    navSatellites.setText(res.getString(R.string.loc_sat) + ": " + satellitesFixed + '/' + satellitesVisible);
-                } else if (satellitesVisible >= 0) {
-                    navSatellites.setText(res.getString(R.string.loc_sat) + ": 0/" + satellitesVisible);
-                }
+        public void call(final Status gpsStatus) {
+            if (gpsStatus.gpsEnabled) {
+                navSatellites.setText(res.getString(R.string.loc_sat) + ": " + gpsStatus.satellitesFixed + '/' + gpsStatus.satellitesVisible);
             } else {
                 navSatellites.setText(res.getString(R.string.loc_gps_disabled));
             }
         }
-
-    }
-
-    private final SatellitesHandler satellitesHandler = new SatellitesHandler();
+    };
 
     private final Handler firstLoginHandler = new Handler() {
 
@@ -229,8 +210,12 @@ public class MainActivity extends AbstractActionBarActivity {
 
     @Override
     public void onResume() {
-        super.onResume(Subscriptions.from(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA), satellitesHandler.start(GeoDirHandler.UPDATE_GEODATA)));
+        super.onResume(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.LOW_POWER),
+                app.gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(satellitesHandler));
         updateUserInfoHandler.sendEmptyMessage(-1);
+        if (app.hasValidLocation()) {
+            locationUpdater.updateGeoData(app.currentGeo());
+        }
         startBackgroundLogin();
         init();
     }
@@ -245,9 +230,9 @@ public class MainActivity extends AbstractActionBarActivity {
                 new Thread() {
                     @Override
                     public void run() {
-                        if (mustLogin && conn == GCConnector.getInstance()) {
+                        if (mustLogin) {
                             // Properly log out from geocaching.com
-                            GCLogin.getInstance().logout();
+                            conn.logout();
                         }
                         conn.login(firstLoginHandler, MainActivity.this);
                         updateUserInfoHandler.sendEmptyMessage(-1);
@@ -284,7 +269,7 @@ public class MainActivity extends AbstractActionBarActivity {
         final MenuItem searchItem = menu.findItem(R.id.menu_gosearch);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-
+        presentShowcase();
         return true;
     }
 
@@ -313,7 +298,7 @@ public class MainActivity extends AbstractActionBarActivity {
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;
             case R.id.menu_history:
-                CacheListActivity.startActivityHistory(this);
+                startActivity(CacheListActivity.getHistoryIntent(this));
                 return true;
             case R.id.menu_scan:
                 startScannerApplication();
@@ -375,8 +360,6 @@ public class MainActivity extends AbstractActionBarActivity {
         }
 
         initialized = true;
-
-        Settings.setLanguage(Settings.isUseEnglish());
 
         findOnMap.setClickable(true);
         findOnMap.setOnClickListener(new OnClickListener() {
@@ -451,7 +434,7 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     protected void selectGlobalTypeFilter() {
-        final List<CacheType> cacheTypes = new ArrayList<CacheType>();
+        final List<CacheType> cacheTypes = new ArrayList<>();
 
         //first add the most used types
         cacheTypes.add(CacheType.ALL);
@@ -460,7 +443,7 @@ public class MainActivity extends AbstractActionBarActivity {
         cacheTypes.add(CacheType.MYSTERY);
 
         // then add all other cache types sorted alphabetically
-        final List<CacheType> sorted = new ArrayList<CacheType>();
+        final List<CacheType> sorted = new ArrayList<>();
         sorted.addAll(Arrays.asList(CacheType.values()));
         sorted.removeAll(cacheTypes);
 
@@ -578,8 +561,8 @@ public class MainActivity extends AbstractActionBarActivity {
                             }
                         }
                     });
-                    AndroidObservable.bindActivity(MainActivity.this, address.onErrorResumeNext(Observable.from(geo.getCoords().toString())))
-                            .subscribeOn(Schedulers.io())
+                    AndroidObservable.bindActivity(MainActivity.this, address.onErrorResumeNext(Observable.just(geo.getCoords().toString())))
+                            .subscribeOn(RxUtils.networkScheduler)
                             .subscribe(new Action1<String>() {
                                 @Override
                                 public void call(final String address) {
@@ -599,7 +582,7 @@ public class MainActivity extends AbstractActionBarActivity {
      */
     public void cgeoFindOnMap(final View v) {
         findOnMap.setPressed(true);
-        CGeoMap.startActivityLiveMap(this);
+        startActivity(CGeoMap.getLiveMapIntent(this));
     }
 
     /**
@@ -612,7 +595,7 @@ public class MainActivity extends AbstractActionBarActivity {
         }
 
         nearestView.setPressed(true);
-        CacheListActivity.startActivityNearest(this, app.currentGeo().getCoords());
+        startActivity(CacheListActivity.getNearestIntent(this));
     }
 
     /**
@@ -733,12 +716,18 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     private void checkShowChangelog() {
-        final long lastChecksum = Settings.getLastChangelogChecksum();
-        final long checksum = TextUtils.checksum(getString(R.string.changelog_master) + getString(R.string.changelog_release));
-        Settings.setLastChangelogChecksum(checksum);
-        // don't show change log after new install...
-        if (lastChecksum > 0 && lastChecksum != checksum) {
-            AboutActivity.showChangeLog(this);
+        // temporary workaround for #4143
+        //TODO: understand and avoid if possible
+        try {
+            final long lastChecksum = Settings.getLastChangelogChecksum();
+            final long checksum = TextUtils.checksum(getString(R.string.changelog_master) + getString(R.string.changelog_release));
+            Settings.setLastChangelogChecksum(checksum);
+            // don't show change log after new install...
+            if (lastChecksum > 0 && lastChecksum != checksum) {
+                AboutActivity.showChangeLog(this);
+            }
+        } catch (final Exception ex) {
+            Log.e("Error checking/showing changelog!", ex);
         }
     }
 
@@ -748,5 +737,12 @@ public class MainActivity extends AbstractActionBarActivity {
      */
     public void showAbout(final View view) {
         startActivity(new Intent(this, AboutActivity.class));
+    }
+
+    @Override
+    public ShowcaseViewBuilder getShowcase() {
+        return new ShowcaseViewBuilder(this)
+                .setTarget(new ActionViewTarget(this, ActionViewTarget.Type.OVERFLOW))
+                .setContent(R.string.showcase_main_title, R.string.showcase_main_text);
     }
 }

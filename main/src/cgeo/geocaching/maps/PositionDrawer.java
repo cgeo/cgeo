@@ -103,7 +103,7 @@ public class PositionDrawer {
 
         if (Settings.isMapTrail()) {
             // always add current position to drawn history to have a closed connection
-            final ArrayList<Location> paintHistory = new ArrayList<Location>(positionHistory.getHistory());
+            final ArrayList<Location> paintHistory = new ArrayList<>(positionHistory.getHistory());
             paintHistory.add(coordinates);
 
             int size = paintHistory.size();

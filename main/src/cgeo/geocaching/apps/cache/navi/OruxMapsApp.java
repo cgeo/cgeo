@@ -8,6 +8,8 @@ import android.content.Intent;
 
 class OruxMapsApp extends AbstractPointNavigationApp {
 
+    private static final String ORUXMAPS_EXTRA_LONGITUDE = "longitude";
+    private static final String ORUXMAPS_EXTRA_LATITUDE = "latitude";
     private static final String INTENT = "com.oruxmaps.VIEW_MAP_ONLINE";
 
     OruxMapsApp() {
@@ -17,8 +19,8 @@ class OruxMapsApp extends AbstractPointNavigationApp {
     @Override
     public void navigate(Activity activity, Geopoint point) {
         final Intent intent = new Intent(INTENT);
-        intent.putExtra("latitude", point.getLatitude());//latitude, wgs84 datum
-        intent.putExtra("longitude", point.getLongitude());//longitude, wgs84 datum
+        intent.putExtra(ORUXMAPS_EXTRA_LATITUDE, point.getLatitude());//latitude, wgs84 datum
+        intent.putExtra(ORUXMAPS_EXTRA_LONGITUDE, point.getLongitude());//longitude, wgs84 datum
 
         activity.startActivity(intent);
     }
