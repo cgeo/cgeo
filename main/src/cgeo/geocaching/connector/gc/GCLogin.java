@@ -29,6 +29,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 public class GCLogin extends AbstractLogin {
 
@@ -282,7 +283,7 @@ public class GCLogin extends AbstractLogin {
     }
 
     public static Date parseGcCustomDate(final String input, final String format) throws ParseException {
-        return new SimpleDateFormat(format).parse(input.trim());
+        return new SimpleDateFormat(format, Locale.ENGLISH).parse(input.trim());
     }
 
     public static Date parseGcCustomDate(final String input) throws ParseException {
