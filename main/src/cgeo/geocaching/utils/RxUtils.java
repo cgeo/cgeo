@@ -8,9 +8,9 @@ import rx.Scheduler.Worker;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
-import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.observables.BlockingObservable;
+import rx.observers.Subscribers;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 import rx.subscriptions.Subscriptions;
@@ -77,22 +77,7 @@ public class RxUtils {
 
         @Override
         final public void call(final Subscriber<? super T> subscriber) {
-            subscriber.add(subject.subscribe(new Action1<T>() {
-                @Override
-                public void call(final T data) {
-                    subscriber.onNext(data);
-                }
-            }, new Action1<Throwable>() {
-                @Override
-                public void call(final Throwable throwable) {
-                    subscriber.onError(throwable);
-                }
-            }, new Action0() {
-                @Override
-                public void call() {
-                    subscriber.onCompleted();
-                }
-            }));
+            subscriber.add(subject.subscribe(Subscribers.from(subscriber)));
             looperCallbacksWorker.schedule(new Action0() {
                 @Override
                 public void call() {
