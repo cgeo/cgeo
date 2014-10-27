@@ -282,8 +282,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         public void handleRegularMessage(final Message msg) {
             updateAdapter();
 
-            if (msg.what > -1) {
-                cacheList.get(msg.what).setStatusChecked(false);
+            if (msg.what == MSG_LOADED) {
+                ((Geocache) msg.obj).setStatusChecked(false);
 
                 adapter.notifyDataSetChanged();
 
@@ -1221,7 +1221,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 }
                 detailProgress++;
                 cache.refreshSynchronous(null);
-                handler.sendEmptyMessage(cacheList.indexOf(cache));
+                handler.obtainMessage(MSG_LOADED, cache).sendToTarget();
             } catch (final InterruptedException e) {
                 Log.i(e.getMessage());
                 return false;
