@@ -433,6 +433,11 @@
             android:key="@string/pref_units_imperial"
             android:summary="@string/init_summary_units"
             android:title="@string/init_units" />
+        <ListPreference
+            android:defaultValue="0"
+            android:dialogTitle="@string/init_markersize_select"
+            android:key="@string/pref_markersize"
+            android:title="@string/init_markersize_select" />
     </PreferenceScreen>
     <PreferenceScreen
         android:icon="?attr/settings_details"

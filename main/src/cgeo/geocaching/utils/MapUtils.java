@@ -3,6 +3,7 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
+import cgeo.geocaching.settings.Settings;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -154,7 +155,13 @@ public final class MapUtils {
     }
 
     private static int calculateResolution(final Drawable marker) {
-        final int resolution = marker.getIntrinsicWidth() > 40 ? (marker.getIntrinsicWidth() > 50 ? (marker.getIntrinsicWidth() > 70 ? (marker.getIntrinsicWidth() > 100 ? 4 : 3) : 2) : 1) : 0;
+        int resolution = 0;
+        if (Settings.getMarkerSize() > 0) {
+            resolution = Settings.getMarkerSize() - 1;
+        }
+        else {
+            resolution = marker.getIntrinsicWidth() > 40 ? (marker.getIntrinsicWidth() > 50 ? (marker.getIntrinsicWidth() > 70 ? (marker.getIntrinsicWidth() > 100 ? 4 : 3) : 2) : 1) : 0;
+        }
         return resolution;
     }
 }

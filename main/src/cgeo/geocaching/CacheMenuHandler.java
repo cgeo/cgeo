@@ -57,6 +57,9 @@ public final class CacheMenuHandler extends AbstractUIFactory {
                     return true;
                 }
                 return false;
+            case R.id.menu_log_visit:
+                cache.logVisit(activity);
+                return true;
             case R.id.menu_caches_around:
                 activityInterface.cachesAround();
                 return true;
@@ -87,6 +90,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
         final boolean hasCoords = cache.getCoords() != null;
         menu.findItem(R.id.menu_default_navigation).setVisible(hasCoords);
         menu.findItem(R.id.menu_navigate).setVisible(hasCoords);
+        menu.findItem(R.id.menu_log_visit).setVisible(hasCoords);
         menu.findItem(R.id.menu_caches_around).setVisible(hasCoords && cache.supportsCachesAround());
         menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
         menu.findItem(R.id.menu_show_in_browser).setVisible(cache.canOpenInBrowser());

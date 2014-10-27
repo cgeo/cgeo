@@ -57,6 +57,7 @@ public class Settings {
     public static final int SHOW_WP_THRESHOLD_DEFAULT = 10;
     public static final int SHOW_WP_THRESHOLD_MAX = 50;
     private static final int MAP_SOURCE_DEFAULT = GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
+    private static final int MARKER_SIZE_DEFAULT = 0;
 
     public static final boolean HW_ACCEL_DISABLED_BY_DEFAULT =
             Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1 ||
@@ -153,6 +154,7 @@ public class Settings {
             e.putInt(getKey(R.string.pref_lastmapzoom), prefsV0.getInt(getKey(R.string.pref_lastmapzoom), 14));
             e.putBoolean(getKey(R.string.pref_livelist), 0 != prefsV0.getInt(getKey(R.string.pref_livelist), 1));
             e.putBoolean(getKey(R.string.pref_units_imperial), prefsV0.getInt(getKey(R.string.pref_units_imperial), unitsMetric) != unitsMetric);
+            e.putInt(getKey(R.string.pref_markersize), prefsV0.getInt(getKey(R.string.pref_markersize), MARKER_SIZE_DEFAULT));
             e.putBoolean(getKey(R.string.pref_skin), prefsV0.getInt(getKey(R.string.pref_skin), 0) != 0);
             e.putInt(getKey(R.string.pref_lastusedlist), prefsV0.getInt(getKey(R.string.pref_lastusedlist), StoredList.STANDARD_LIST_ID));
             e.putString(getKey(R.string.pref_cachetype), prefsV0.getString(getKey(R.string.pref_cachetype), CacheType.ALL.id));
@@ -199,6 +201,10 @@ public class Settings {
             final Editor e = sharedPrefs.edit();
 
             e.putBoolean(getKey(R.string.pref_units_imperial), useImperialUnits());
+
+            final int msz = sharedPrefs.getInt(getKey(R.string.pref_markersize), MARKER_SIZE_DEFAULT);
+            e.remove(getKey(R.string.pref_markersize));
+            e.putString(getKey(R.string.pref_markersize), String.valueOf(msz));
 
             // show waypoints threshold now as a slider
             int wpThreshold = getWayPointsThreshold();
@@ -610,6 +616,44 @@ public class Settings {
         return "US".equals(countryCode)  // USA
             || "LR".equals(countryCode)  // Liberia
             || "MM".equals(countryCode); // Burma
+    }
+
+    public static int getMarkerSize() {
+        return Integer.parseInt(getString(
+                R.string.pref_markersize,
+                String.valueOf(MARKER_SIZE_DEFAULT)));
+    }
+
+    public static String getMarkerSizeName(final int markerSize) {
+        String markerSizeName = "auto";
+
+        switch(markerSize)
+        {
+            case 0:
+                markerSizeName = "auto";
+            break;
+            case 1:
+                markerSizeName = "small";
+            break;
+            case 2:
+                markerSizeName = "medium";
+            break;
+            case 3:
+                markerSizeName = "large";
+            break;
+            case 4:
+                markerSizeName = "x-large";
+            break;
+            case 5:markerSizeName = "xx-large";
+                markerSizeName = "xx-large";
+            break;
+        }
+
+        return markerSizeName;
+    }
+
+    public static void setMarkerSize(final int markerSize) {
+        putInt(R.string.pref_markersize, markerSize);
     }
 
     public static boolean isLiveMap() {

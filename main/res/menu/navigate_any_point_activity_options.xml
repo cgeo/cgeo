@@ -16,6 +16,12 @@
         app:showAsAction="ifRoom">
     </item>
     <item
+        android:id="@+id/menu_log_visit"
+        android:icon="@drawable/ic_menu_edit"
+        android:title="@string/cache_menu_visit"
+        app:showAsAction="ifRoom">
+    </item>
+    <item
         android:id="@+id/menu_caches_around"
         android:icon="@drawable/ic_menu_rotate"
         android:title="@string/cache_menu_around"
