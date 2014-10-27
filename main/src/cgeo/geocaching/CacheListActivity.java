@@ -285,7 +285,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             updateAdapter();
 
             if (msg.what > -1) {
-                cacheList.get(msg.what).setStatusChecked(false);
+                //Quickfix for #4434 the updateAdapter above clears the list when using StateNotStoredFilter.
+                if (msg.what < cacheList.size()) {
+                    cacheList.get(msg.what).setStatusChecked(false);
+                }
 
                 adapter.notifyDataSetChanged();
 
