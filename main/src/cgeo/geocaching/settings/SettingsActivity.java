@@ -132,6 +132,7 @@ public class SettingsActivity extends PreferenceActivity {
         initServicePreferences();
         initNavigationMenuPreferences();
         initMaintenanceButtons();
+        initMarkerSizePreferences();
 
         for (final int k : new int[] { R.string.pref_username, R.string.pref_password,
                 R.string.pref_pass_vote, R.string.pref_signature,
@@ -139,7 +140,8 @@ public class SettingsActivity extends PreferenceActivity {
                 R.string.pref_gpxExportDir, R.string.pref_gpxImportDir,
                 R.string.pref_mapDirectory, R.string.pref_defaultNavigationTool,
                 R.string.pref_defaultNavigationTool2, R.string.pref_webDeviceName,
-                R.string.pref_fakekey_preference_backup_info, R.string.pref_twitter_cache_message, R.string.pref_twitter_trackable_message,
+                R.string.pref_fakekey_preference_backup_info, R.string.pref_twitter_cache_message,
+                R.string.pref_twitter_trackable_message, R.string.pref_markersize,
                 R.string.pref_ecusername, R.string.pref_ecpassword, R.string.pref_ec_icons }) {
             bindSummaryToStringValue(k);
         }
@@ -369,9 +371,9 @@ public class SettingsActivity extends PreferenceActivity {
                 return true;
             }
         });
-		final Preference memoryDumpPref = getPreference(R.string.pref_memory_dump);
-		memoryDumpPref
-				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+        final Preference memoryDumpPref = getPreference(R.string.pref_memory_dump);
+        memoryDumpPref
+                .setOnPreferenceClickListener(new OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(
                             final Preference preference) {
@@ -389,6 +391,27 @@ public class SettingsActivity extends PreferenceActivity {
 
     private static void initUnitPreferences() {
         Settings.setUseImperialUnits(Settings.useImperialUnits());
+    }
+
+    private void initMarkerSizePreferences() {
+        final ListPreference pref = (ListPreference) getPreference(R.string.pref_markersize);
+
+        final CharSequence[] entries = new CharSequence[6];
+        final CharSequence[] values = new CharSequence[6];
+        entries[0] = "auto";
+        values[0] = "0";
+        entries[1] = "small";
+        values[1] = "1";
+        entries[2] = "medium";
+        values[2] = "2";
+        entries[3] = "large";
+        values[3] = "3";
+        entries[4] = "x-large";
+        values[4] = "4";
+        entries[5] = "xx-large";
+        values[5] = "5";
+        pref.setEntries(entries);
+        pref.setEntryValues(values);
     }
 
     private void initDbLocationPreference() {
@@ -612,6 +635,10 @@ public class SettingsActivity extends PreferenceActivity {
                 }
                 Settings.setMapSource(mapSource);
                 preference.setSummary(mapSource.getName());
+            /*} else if (isPreference(preference, R.string.pref_markersize)) {
+                final int intVal = (int) value;
+                Settings.setMarkerSize(intVal);
+                preference.setSummary(Settings.getMarkerSizeName(intVal));*/
             } else if (isPreference(preference, R.string.pref_connectorOCActive)
                     || isPreference(preference, R.string.pref_connectorOCPLActive)
                     || isPreference(preference, R.string.pref_connectorOCNLActive)

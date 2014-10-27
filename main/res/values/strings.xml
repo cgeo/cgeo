@@ -1293,4 +1293,5 @@
     <string name="showcase_cachelist_text">You can switch between your geocache lists by clicking the title of the list.</string>
     <string name="confirm_log_title">Unusual log type</string>
     <string name="confirm_log_message">You want to log \'%s\'. Are you sure?</string>
+    <string name="init_markersize_select">Select Marker Size</string>
 </resources>
