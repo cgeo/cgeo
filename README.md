@@ -60,7 +60,7 @@ If the workspace directory name contains a space and leads to errors in the -dex
 7. copy `local.properties` to cgeo-calender and cgeo-contatcs if you plan to hack on the plugins
 6. copy `./main/templates/keys.xml` to `./main/res/values/`
 7. edit `./main/res/values/keys.xml` and insert several keys (see comments in the file)
-  * Google Maps API key (you can leave it empty, but then Google Maps don't work)
+  * Google Maps API v1 key (you can leave it empty, but then Google Maps don't work - Google doesn't hand out new keys for Google Maps v1, you have to use an existing one)
   * request your personal consumer key and secret for the various opencaching nodes we support:
     * [opencaching.de OKAPI signup](http://www.opencaching.de/okapi/signup.html)
     * [opencaching.pl OKAPI signup](http://www.opencaching.pl/okapi/signup.html)
