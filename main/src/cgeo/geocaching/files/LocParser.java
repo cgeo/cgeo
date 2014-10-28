@@ -63,8 +63,10 @@ public final class LocParser extends FileParser {
         }
         final Set<Geocache> caches = DataStore.loadCaches(contained, LoadFlags.LOAD_CACHE_OR_DB);
         for (final Geocache cache : caches) {
-            final Geocache coord = cidCoords.get(cache.getGeocode());
-            copyCoordToCache(coord, cache);
+            if (!cache.isReliableLatLon()) {
+                final Geocache coord = cidCoords.get(cache.getGeocode());
+                copyCoordToCache(coord, cache);
+            }
         }
     }
 
