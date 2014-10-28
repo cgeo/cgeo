@@ -15,6 +15,7 @@ public class GeoData extends Location implements IGeoData {
     public static final String INITIAL_PROVIDER = "initial";
     public static final String FUSED_PROVIDER = "fused";
     public static final String LOW_POWER_PROVIDER = "low-power";
+    private static final int TWO_MINUTES = 1000 * 60 * 2;
 
     // Some devices will not have the last position available (for example the emulator). In this case,
     // rather than waiting forever for a position update which might never come, we emulate it by placing
@@ -97,10 +98,48 @@ public class GeoData extends Location implements IGeoData {
         }
     }
 
-
-
     public static boolean isRecent(@Nullable final Location location) {
         return location != null && System.currentTimeMillis() <= location.getTime() + 30000;
+    }
+
+    public static boolean isBetterLocation(Location location, Location currentBestLocation) {
+        if (currentBestLocation == null) {
+            return true;
+        }
+
+        long timeDelta = location.getTime() - currentBestLocation.getTime();
+        boolean isSignificantlyNewer = timeDelta > TWO_MINUTES;
+        boolean isSignificantlyOlder = timeDelta < -TWO_MINUTES;
+        boolean isNewer = timeDelta > 0;
+
+        if (isSignificantlyNewer) {
+            return true;
+        } else if (isSignificantlyOlder) {
+            return false;
+        }
+
+        int accuracyDelta = (int) (location.getAccuracy() - currentBestLocation.getAccuracy());
+        boolean isLessAccurate = accuracyDelta > 0;
+        boolean isMoreAccurate = accuracyDelta < 0;
+        boolean isSignificantlyLessAccurate = accuracyDelta > 200;
+
+        boolean isFromSameProvider = isSameProvider(location.getProvider(),
+                currentBestLocation.getProvider());
+
+        if (isMoreAccurate) {
+            return true;
+        } else if (isNewer && !isLessAccurate) {
+            return true;
+        } else if (isNewer && !isSignificantlyLessAccurate && isFromSameProvider) {
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isSameProvider(String provider1, String provider2) {
+        if (provider1 == null)
+            return provider2 == null;
+        return provider1.equals(provider2);
     }
 
 }
