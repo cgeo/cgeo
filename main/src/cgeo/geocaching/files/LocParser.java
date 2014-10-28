@@ -9,34 +9,31 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MatcherWrapper;
 
+import org.apache.commons.io.Charsets;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 public final class LocParser extends FileParser {
 
     private static final String NAME_OWNER_SEPARATOR = " by ";
-    private static final Pattern patternGeocode = Pattern
-            .compile("name id=\"([^\"]+)\"");
-    private static final Pattern patternLat = Pattern
-            .compile("lat=\"([^\"]+)\"");
-    private static final Pattern patternLon = Pattern
-            .compile("lon=\"([^\"]+)\"");
-    private static final Pattern patternName = Pattern.compile("CDATA\\[([^\\]]+)\\]");
 
     private static final CacheSize[] SIZES = {
             CacheSize.NOT_CHOSEN, // 1
@@ -49,10 +46,13 @@ public final class LocParser extends FileParser {
             CacheSize.SMALL, // 8
     };
 
+    // Used so that the initial value of the geocache is not null. Never filled.
+    private static final Geocache DUMMY_GEOCACHE = new Geocache();
+
     private int listId;
 
     public static void parseLoc(final SearchResult searchResult, final String fileContent) {
-        final Map<String, Geocache> cidCoords = parseCoordinates(fileContent);
+        final Map<String, Geocache> cidCoords = parseLoc(fileContent);
 
         // save found cache coordinates
         final HashSet<String> contained = new HashSet<>();
@@ -61,10 +61,73 @@ public final class LocParser extends FileParser {
                 contained.add(geocode);
             }
         }
-        Set<Geocache> caches = DataStore.loadCaches(contained, LoadFlags.LOAD_CACHE_OR_DB);
-        for (Geocache cache : caches) {
-            Geocache coord = cidCoords.get(cache.getGeocode());
+        final Set<Geocache> caches = DataStore.loadCaches(contained, LoadFlags.LOAD_CACHE_OR_DB);
+        for (final Geocache cache : caches) {
+            final Geocache coord = cidCoords.get(cache.getGeocode());
             copyCoordToCache(coord, cache);
+        }
+    }
+
+    private static Map<String, Geocache> parseLoc(final String content) {
+        return parseLoc(new ByteArrayInputStream(content.getBytes(Charsets.UTF_8)));
+    }
+
+    private static Map<String, Geocache> parseLoc(final InputStream content) {
+        try {
+            final XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            final XmlPullParser xpp = factory.newPullParser();
+            xpp.setInput(content, Charsets.UTF_8.name());
+            final Map<String, Geocache> caches = new HashMap<>();
+            int eventType = xpp.getEventType();
+            Geocache currentCache = DUMMY_GEOCACHE;
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                if (eventType == XmlPullParser.START_TAG) {
+                    switch (xpp.getName()) {
+                        case "waypoint":
+                            currentCache = new Geocache();
+                            currentCache.setType(CacheType.UNKNOWN);  // Type not present in .loc file
+                            break;
+                        case "name":
+                            currentCache.setGeocode(xpp.getAttributeValue(null, "id"));
+                            if (xpp.next() == XmlPullParser.TEXT) {
+                                final String nameOwner = xpp.getText();
+                                currentCache.setName(StringUtils.trim(StringUtils.substringBeforeLast(nameOwner, NAME_OWNER_SEPARATOR)));
+                                currentCache.setOwnerUserId(StringUtils.trim(StringUtils.substringAfterLast(nameOwner, NAME_OWNER_SEPARATOR)));
+                            }
+                            break;
+                        case "coord":
+                            currentCache.setCoords(new Geopoint(Double.valueOf(xpp.getAttributeValue(null, "lat")),
+                                    Double.valueOf(xpp.getAttributeValue(null, "lon"))));
+                            currentCache.setReliableLatLon(true);
+                            break;
+                        case "container":
+                            if (xpp.next() == XmlPullParser.TEXT) {
+                                currentCache.setSize(SIZES[Integer.valueOf(xpp.getText()) - 1]);
+                            }
+                            break;
+                        case "difficulty":
+                            if (xpp.next() == XmlPullParser.TEXT) {
+                                currentCache.setDifficulty(Float.valueOf(xpp.getText()));
+                            }
+                            break;
+                        case "terrain":
+                            if (xpp.next() == XmlPullParser.TEXT) {
+                                currentCache.setTerrain(Float.valueOf(xpp.getText()));
+                            }
+                            break;
+                        default:
+                            // Ignore
+                    }
+                } else if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("waypoint") && StringUtils.isNotBlank(currentCache.getGeocode())) {
+                    caches.put(currentCache.getGeocode(), currentCache);
+                }
+                eventType = xpp.next();
+            }
+            Log.d("Coordinates found in .loc content: " + caches.size());
+            return caches;
+        } catch (XmlPullParserException | IOException e) {
+            Log.e("unable to parse .loc content", e);
+            return Collections.emptyMap();
         }
     }
 
@@ -79,27 +142,6 @@ public final class LocParser extends FileParser {
             cache.setName(coord.getName());
         }
         cache.setOwnerUserId(coord.getOwnerUserId());
-    }
-
-    static Map<String, Geocache> parseCoordinates(final String fileContent) {
-        final Map<String, Geocache> coords = new HashMap<>();
-        if (StringUtils.isBlank(fileContent)) {
-            return coords;
-        }
-        // >> premium only
-
-        final String[] points = StringUtils.splitByWholeSeparator(fileContent, "<waypoint>");
-
-        // parse coordinates
-        for (String pointString : points) {
-            final Geocache pointCoord = parseCache(pointString);
-            if (StringUtils.isNotBlank(pointCoord.getGeocode())) {
-                coords.put(pointCoord.getGeocode(), pointCoord);
-            }
-        }
-
-        Log.i("Coordinates found in .loc file: " + coords.size());
-        return coords;
     }
 
     public static Geopoint parsePoint(final String latitude, final String longitude) {
@@ -119,18 +161,14 @@ public final class LocParser extends FileParser {
 
     @Override
     public Collection<Geocache> parse(@NonNull final InputStream stream, @Nullable final CancellableHandler progressHandler) throws IOException, ParserException {
-        final String streamContent = readStream(stream, null).toString();
-        final int maxSize = streamContent.length();
-        final Map<String, Geocache> coords = parseCoordinates(streamContent);
+        final int maxSize = stream.available();
+        final Map<String, Geocache> coords = parseLoc(stream);
         final List<Geocache> caches = new ArrayList<>();
-        for (Entry<String, Geocache> entry : coords.entrySet()) {
-            Geocache coord = entry.getValue();
-            if (StringUtils.isBlank(coord.getGeocode()) || StringUtils.isBlank(coord.getName())) {
+        for (final Entry<String, Geocache> entry : coords.entrySet()) {
+            final Geocache cache = entry.getValue();
+            if (StringUtils.isBlank(cache.getGeocode()) || StringUtils.isBlank(cache.getName())) {
                 continue;
             }
-            Geocache cache = new Geocache();
-            cache.setReliableLatLon(true);
-            copyCoordToCache(coord, cache);
             caches.add(cache);
 
             fixCache(cache);
@@ -146,53 +184,4 @@ public final class LocParser extends FileParser {
         return caches;
     }
 
-    public static Geocache parseCache(final String pointString) {
-        final Geocache cache = new Geocache();
-        final MatcherWrapper matcherGeocode = new MatcherWrapper(patternGeocode, pointString);
-        if (matcherGeocode.find()) {
-            cache.setGeocode(matcherGeocode.group(1).trim());
-        }
-
-        final MatcherWrapper matcherName = new MatcherWrapper(patternName, pointString);
-        if (matcherName.find()) {
-            final String name = matcherName.group(1).trim();
-            String ownerName = StringUtils.trim(StringUtils.substringAfterLast(name, NAME_OWNER_SEPARATOR));
-            if (StringUtils.isEmpty(cache.getOwnerUserId()) && StringUtils.isNotEmpty(ownerName)) {
-                cache.setOwnerUserId(ownerName);
-            }
-            cache.setName(StringUtils.substringBeforeLast(name, NAME_OWNER_SEPARATOR).trim());
-        } else {
-            cache.setName(cache.getGeocode());
-        }
-
-        final MatcherWrapper matcherLat = new MatcherWrapper(patternLat, pointString);
-        final MatcherWrapper matcherLon = new MatcherWrapper(patternLon, pointString);
-        if (matcherLat.find() && matcherLon.find()) {
-            cache.setCoords(parsePoint(matcherLat.group(1).trim(), matcherLon.group(1).trim()));
-        }
-
-        final String difficulty = StringUtils.substringBetween(pointString, "<difficulty>", "</difficulty>");
-        final String terrain = StringUtils.substringBetween(pointString, "<terrain>", "</terrain>");
-        final String container = StringUtils.substringBetween(pointString, "<container>", "</container");
-        try {
-            if (StringUtils.isNotBlank(difficulty)) {
-                cache.setDifficulty(Float.parseFloat(difficulty.trim()));
-            }
-
-            if (StringUtils.isNotBlank(terrain)) {
-                cache.setTerrain(Float.parseFloat(terrain.trim()));
-            }
-
-            if (StringUtils.isNotBlank(container)) {
-                final int size = Integer.parseInt(container.trim());
-                if (size >= 1 && size <= 8) {
-                    cache.setSize(SIZES[size - 1]);
-                }
-            }
-        } catch (NumberFormatException e) {
-            Log.e("LocParser.parseCache", e);
-        }
-
-        return cache;
-    }
 }
