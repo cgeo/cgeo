@@ -266,7 +266,7 @@ public class GCLogin extends AbstractLogin {
      */
     private static void detectGcCustomDate() {
 
-        final String result = Network.getResponseData(Network.getRequest("https://www.geocaching.com/myaccount/settings/preferences"));
+        final String result = Network.getResponseData(Network.getRequest("https://www.geocaching.com/account/settings/preferences"));
 
         if (null == result) {
             Log.w("Login.detectGcCustomDate: result is null");
