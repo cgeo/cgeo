@@ -1,18 +1,17 @@
 [c:geo](http://www.cgeo.org) is an open source, full-featured, always ready-to-go client for geocaching.com (unofficial) and offers basic support for other geocaching platforms.
 It does not require a web browser or exports - just download and start right away.
 
-You want to contribute?
------------------------
+## You want to contribute?
+
 Perfect! Please **tell us in the [issue tracker](https://github.com/cgeo/cgeo/issues) before hacking** on your great new feature. It would be bad if you have implemented something great, but we can't include it because it doesn't fit the remaining architecture and code. You might also want to chat with the developers on channel #cgeo on the freenode IRC network.
 
-Project status
---------------
+## Project status
+
 [![Build Status](http://ci.cgeo.org/job/c-geo/badge/icon)](http://ci.cgeo.org/job/c-geo/)<br>
 [![Issue Stats](http://issuestats.com/github/cgeo/cgeo/badge/pr)](http://issuestats.com/github/cgeo/cgeo)<br>
 [![Issue Stats](http://issuestats.com/github/cgeo/cgeo/badge/issue)](http://issuestats.com/github/cgeo/cgeo)
 
-Get the source
---------------
+## Get the source
 
 Fork the [project source code](https://github.com/cgeo/cgeo), make changes to your clone and [create a pull request](https://help.github.com/articles/using-pull-requests) afterwards.
 
@@ -24,16 +23,14 @@ Fork the [project source code](https://github.com/cgeo/cgeo), make changes to yo
 A more complex bugfix can be first tested against the `master` branch and integrated in the nightly builds, while kept compatible with the `release` branch for a later integration.
 Such a procedure is [described in the wiki](https://github.com/cgeo/cgeo/wiki/How-to-get-a-bug-fix-into-the-release).
 
-Set up Eclipse
---------------
+## Set up Eclipse
 
 - Install an Eclipse distribution for your OS from http://eclipse.org/downloads/ (you may choose the Java developers distribution).
 - Start Eclipse, choose any directory as workspace. Close the welcome screen, if it appears.
 - After the workbench has started, select File | Import | Install | Install Software Items From File and select a locally downloaded copy of https://github.com/cgeo/cgeo/tree/master/main/project/eclipse%20installation/cgeo%20eclipse%20components.p2f. This way you can easily install all necessary plugins.
 - After forking the project you should import the Eclipse projects in your workspace with File | Import | Projects from Git.
 
-Build
------
+## Build
 
 ### Prerequisites ###
 
@@ -93,13 +90,11 @@ To run all tests use the same "Run As" menu item from the context menu of the te
 
 For tests to run successfully you need to configure c:geo on the emulator that runs the test with a valid geocaching.com account. In order for all tests to be successfull the account needs to be premium.
 
-License
--------
+## License
 
 c:geo is distributed under [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
-Contact
--------
+## Contact
 
 - Website: http://www.cgeo.org/
 - Support: support@cgeo.org
