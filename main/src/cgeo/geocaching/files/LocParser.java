@@ -1,11 +1,9 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
@@ -51,7 +49,7 @@ public final class LocParser extends FileParser {
 
     private int listId;
 
-    public static void parseLoc(final SearchResult searchResult, final String fileContent) {
+    public static void parseLoc(final SearchResult searchResult, final String fileContent, final Set<Geocache> caches) {
         final Map<String, Geocache> cidCoords = parseLoc(fileContent);
 
         // save found cache coordinates
@@ -61,7 +59,6 @@ public final class LocParser extends FileParser {
                 contained.add(geocode);
             }
         }
-        final Set<Geocache> caches = DataStore.loadCaches(contained, LoadFlags.LOAD_CACHE_OR_DB);
         for (final Geocache cache : caches) {
             if (!cache.isReliableLatLon()) {
                 final Geocache coord = cidCoords.get(cache.getGeocode());
