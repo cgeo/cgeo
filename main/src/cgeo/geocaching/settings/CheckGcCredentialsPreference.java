@@ -31,7 +31,6 @@ public class CheckGcCredentialsPreference extends AbstractCheckCredentialsPrefer
         final StatusCode loginResult = GCLogin.getInstance().login();
         switch (loginResult) {
             case NO_ERROR:
-                GCLogin.detectGcCustomDate();
                 return ImmutablePair.of(StatusCode.NO_ERROR, GCLogin.getInstance().downloadAvatarAndGetMemberStatus());
             default:
                 return ImmutablePair.of(loginResult, null);

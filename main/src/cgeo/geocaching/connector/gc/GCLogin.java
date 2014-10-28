@@ -27,42 +27,15 @@ import android.graphics.drawable.Drawable;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.GregorianCalendar;
 import java.util.Locale;
-import java.util.Map;
 
 public class GCLogin extends AbstractLogin {
 
-    private static final String DEFAULT_CUSTOM_DATE_FORMAT = "MM/dd/yyyy";
-
     private final static String ENGLISH = "<a href=\"#\">English &#9660;</a>";
 
-    private final static Map<String, SimpleDateFormat> GC_CUSTOM_DATE_FORMATS;
     public static final String LANGUAGE_CHANGE_URI = "http://www.geocaching.com/my/souvenirs.aspx";
-
-    static {
-        final String[] formats = new String[] {
-                DEFAULT_CUSTOM_DATE_FORMAT,
-                "yyyy-MM-dd",
-                "yyyy/MM/dd",
-                "dd.MM.yyyy",
-                "dd/MMM/yyyy",
-                "dd.MMM.yyyy",
-                "MMM/dd/yyyy",
-                "dd MMM yy",
-                "dd/MM/yyyy"
-        };
-
-        final Map<String, SimpleDateFormat> map = new HashMap<>();
-
-        for (final String format : formats) {
-            map.put(format, new SimpleDateFormat(format, Locale.ENGLISH));
-        }
-
-        GC_CUSTOM_DATE_FORMATS = Collections.unmodifiableMap(map);
-    }
 
     private GCLogin() {
         // singleton
@@ -76,6 +49,11 @@ public class GCLogin extends AbstractLogin {
         private static final GCLogin INSTANCE = new GCLogin();
     }
 
+    private static StatusCode resetGcCustomDate(final StatusCode statusCode) {
+        Settings.setGcCustomDate("MM/dd/yyyy");
+        return statusCode;
+    }
+
     @Override
     protected StatusCode login(boolean retry) {
         final ImmutablePair<String, String> credentials = Settings.getGcCredentials();
@@ -85,7 +63,7 @@ public class GCLogin extends AbstractLogin {
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
             clearLoginInfo();
             Log.e("Login.login: No login information stored");
-            return StatusCode.NO_LOGIN_INFO_STORED;
+            return resetGcCustomDate(StatusCode.NO_LOGIN_INFO_STORED);
         }
 
         setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
@@ -105,6 +83,7 @@ public class GCLogin extends AbstractLogin {
             if (switchToEnglish(loginData) && retry) {
                 return login(false);
             }
+            detectGcCustomDate();
             return StatusCode.NO_ERROR; // logged in
         }
 
@@ -141,17 +120,18 @@ public class GCLogin extends AbstractLogin {
             }
             Log.i("Successfully logged in Geocaching.com as " + username + " (" + Settings.getGCMemberStatus() + ')');
             Settings.setCookieStore(Cookies.dumpCookieStore());
+            detectGcCustomDate();
             return StatusCode.NO_ERROR; // logged in
         }
 
         if (loginData.contains("Your username/password combination does not match.")) {
             Log.i("Failed to log in Geocaching.com as " + username + " because of wrong username/password");
-            return StatusCode.WRONG_LOGIN_DATA; // wrong login
+            return resetGcCustomDate(StatusCode.WRONG_LOGIN_DATA); // wrong login
         }
 
         if (loginData.contains("You must validate your account before you can log in.")) {
             Log.i("Failed to log in Geocaching.com as " + username + " because account needs to be validated first");
-            return StatusCode.UNVALIDATED_ACCOUNT;
+            return resetGcCustomDate(StatusCode.UNVALIDATED_ACCOUNT);
         }
 
         Log.i("Failed to log in Geocaching.com as " + username + " for some unknown reason");
@@ -160,7 +140,7 @@ public class GCLogin extends AbstractLogin {
             return login(false);
         }
 
-        return StatusCode.UNKNOWN_ERROR; // can't login
+        return resetGcCustomDate(StatusCode.UNKNOWN_ERROR); // can't login
     }
 
     public StatusCode logout() {
@@ -284,9 +264,9 @@ public class GCLogin extends AbstractLogin {
     /**
      * Detect user date settings on geocaching.com
      */
-    public static void detectGcCustomDate() {
+    private static void detectGcCustomDate() {
 
-        final String result = Network.getResponseData(Network.getRequest("http://www.geocaching.com/account/ManagePreferences.aspx"));
+        final String result = Network.getResponseData(Network.getRequest("https://www.geocaching.com/myaccount/settings/preferences"));
 
         if (null == result) {
             Log.w("Login.detectGcCustomDate: result is null");
@@ -300,40 +280,15 @@ public class GCLogin extends AbstractLogin {
     }
 
     public static Date parseGcCustomDate(final String input, final String format) throws ParseException {
-        if (StringUtils.isBlank(input)) {
-            throw new ParseException("Input is null", 0);
-        }
-
-        final String trimmed = input.trim();
-
-        if (GC_CUSTOM_DATE_FORMATS.containsKey(format)) {
-            try {
-                return GC_CUSTOM_DATE_FORMATS.get(format).parse(trimmed);
-            } catch (final ParseException e) {
-            }
-        }
-
-        for (final SimpleDateFormat sdf : GC_CUSTOM_DATE_FORMATS.values()) {
-            try {
-                return sdf.parse(trimmed);
-            } catch (final ParseException e) {
-            }
-        }
-
-        throw new ParseException("No matching pattern", 0);
+        return new SimpleDateFormat(format, Locale.ENGLISH).parse(input.trim());
     }
 
     public static Date parseGcCustomDate(final String input) throws ParseException {
         return parseGcCustomDate(input, Settings.getGcCustomDate());
     }
 
-    public static SimpleDateFormat getCustomGcDateFormat() {
-        final String format = Settings.getGcCustomDate();
-        if (GC_CUSTOM_DATE_FORMATS.containsKey(format)) {
-            return GC_CUSTOM_DATE_FORMATS.get(format);
-        }
-
-        return GC_CUSTOM_DATE_FORMATS.get(DEFAULT_CUSTOM_DATE_FORMAT);
+    public static String formatGcCustomDate(int year, int month, int day) {
+        return new SimpleDateFormat(Settings.getGcCustomDate()).format(new GregorianCalendar(year, month - 1, day).getTime());
     }
 
     /**
