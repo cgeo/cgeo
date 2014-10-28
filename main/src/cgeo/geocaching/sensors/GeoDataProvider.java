@@ -71,6 +71,9 @@ public class GeoDataProvider extends LooperCallbacks<IGeoData> {
 
         @Override
         public void onLocationChanged(final Location location) {
+            if (!GeoData.isBetterLocation(location, latestGPSLocation))
+                return;
+
             if (StringUtils.equals(location.getProvider(), LocationManager.GPS_PROVIDER)) {
                 latestGPSLocation = location;
                 assign(latestGPSLocation);

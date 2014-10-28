@@ -14,6 +14,7 @@ import cgeo.geocaching.geopoint.Units;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.GpsStatusProvider;
 import cgeo.geocaching.sensors.GpsStatusProvider.Status;
@@ -50,6 +51,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -93,6 +95,7 @@ public class MainActivity extends AbstractActionBarActivity {
     private int countBubbleCnt = 0;
     private Geopoint addCoords = null;
     private boolean initialized = false;
+    private Location lastBestLocation = null;
 
     private final UpdateLocation locationUpdater = new UpdateLocation();
 
@@ -518,6 +521,9 @@ public class MainActivity extends AbstractActionBarActivity {
 
         @Override
         public void updateGeoData(final IGeoData geo) {
+            if (!GeoData.isBetterLocation(geo.getLocation(), lastBestLocation))
+                return;
+            lastBestLocation = geo.getLocation();
             if (!nearestView.isClickable()) {
                 nearestView.setFocusable(true);
                 nearestView.setClickable(true);
