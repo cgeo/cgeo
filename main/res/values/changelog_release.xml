@@ -2,6 +2,11 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release:</b>\n
+    · Fix: Map icons looked blurred on some devices\n
+    · Fix: Some menus had a wrong font size\n
+    · Fix: Adding an event to calendar was not always working\n
+    · Fix: Do not show cache size info for earth caches as it has none\n
     <b>2014.09.18:</b>\n
     · Fix: Hardware acceleration is unreliable on some devices\n
     · Fix: Return correct error message if a cache is unpublished\n
