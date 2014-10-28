@@ -98,11 +98,7 @@ public class GpxExport extends AbstractExport {
     }
 
     private static String[] getGeocodes(final List<Geocache> caches) {
-        final ArrayList<String> allGeocodes = new ArrayList<>(caches.size());
-        for (final Geocache geocache : caches) {
-            allGeocodes.add(geocache.getGeocode());
-        }
-        return allGeocodes.toArray(new String[allGeocodes.size()]);
+        return Geocache.getGeocodes(caches).toArray(new String[caches.size()]);
     }
 
     protected class ExportTask extends AsyncTaskWithProgress<String, File> {

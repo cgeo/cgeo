@@ -105,7 +105,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -774,11 +773,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private SearchResult getFilteredSearch() {
-        final Set<String> geocodes = new HashSet<>();
-        for (final Geocache cache : adapter.getFilteredList()) {
-            geocodes.add(cache.getGeocode());
-        }
-        return new SearchResult(geocodes);
+        return new SearchResult(Geocache.getGeocodes(adapter.getFilteredList()));
     }
 
     private void deletePastEvents() {

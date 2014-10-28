@@ -1802,4 +1802,21 @@ public class Geocache implements ICache, IWaypoint {
         return LogType.FOUND_IT;
     }
 
+    /**
+     * Get the geocodes of a collection of caches.
+     *
+     * @param caches a collection of caches
+     * @return the non-blank geocodes of the caches
+     */
+    public static Set<String> getGeocodes(final Collection<Geocache> caches) {
+        final Set<String> geocodes = new HashSet<>(caches.size());
+        for (final Geocache cache : caches) {
+            final String geocode = cache.getGeocode();
+            if (StringUtils.isNotBlank(geocode)) {
+                geocodes.add(geocode);
+            }
+        }
+        return geocodes;
+    }
+
 }

@@ -2492,13 +2492,11 @@ public class DataStore {
 
         init();
 
-        final Set<String> geocodes = new HashSet<>(caches.size());
         for (final Geocache cache : caches) {
-            geocodes.add(cache.getGeocode());
             cache.setLogOffline(false);
         }
 
-        database.execSQL(String.format("DELETE FROM %s where %s", dbTableLogsOffline, whereGeocodeIn(geocodes)));
+        database.execSQL(String.format("DELETE FROM %s where %s", dbTableLogsOffline, whereGeocodeIn(Geocache.getGeocodes(caches))));
     }
 
     public static boolean hasLogOffline(final String geocode) {
