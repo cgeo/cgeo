@@ -1728,7 +1728,7 @@ public abstract class GCParser {
                         final String logIconNameExt = entry.path("LogTypeImage").asText(".gif");
                         final String logIconName = logIconNameExt.substring(0, logIconNameExt.length() - 4);
 
-                        long date = 0;
+                        long date;
                         try {
                             date = GCLogin.parseGcCustomDate(entry.get("Visited").asText()).getTime();
                         } catch (ParseException | NullPointerException e) {
