@@ -899,11 +899,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 CacheDetailActivity.startActivity(this, cache.getGeocode(), cache.getName());
                 break;
             case R.id.menu_drop_cache:
+                final int lastListPosition = CacheListActivity.this.getListView().getFirstVisiblePosition();
                 cache.drop(new Handler() {
                     @Override
                     public void handleMessage(final Message msg) {
                         adapter.notifyDataSetChanged();
                         refreshCurrentList();
+                        CacheListActivity.this.getListView().setSelection(lastListPosition);
                     }
                 }, Schedulers.io());
                 break;
