@@ -291,7 +291,7 @@ public class GCLogin extends AbstractLogin {
     }
 
     public static String formatGcCustomDate(int year, int month, int day) {
-        return new SimpleDateFormat(Settings.getGcCustomDate()).format(new GregorianCalendar(year, month - 1, day).getTime());
+        return new SimpleDateFormat(Settings.getGcCustomDate(), Locale.ENGLISH).format(new GregorianCalendar(year, month - 1, day).getTime());
     }
 
     /**
