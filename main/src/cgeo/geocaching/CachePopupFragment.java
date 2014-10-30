@@ -181,7 +181,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
 
             final DropCacheHandler dropCacheHandler = new DropCacheHandler();
             progress.show(getActivity(), res.getString(R.string.cache_dialog_offline_drop_title), res.getString(R.string.cache_dialog_offline_drop_message), true, null);
-            cache.drop(dropCacheHandler, Schedulers.io());
+            cache.drop(dropCacheHandler);
         }
     }
 

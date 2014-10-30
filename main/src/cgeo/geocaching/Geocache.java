@@ -48,6 +48,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import rx.Scheduler;
 import rx.Subscription;
 import rx.functions.Action0;
+import rx.schedulers.Schedulers;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -1444,8 +1445,8 @@ public class Geocache implements ICache, IWaypoint {
         return "cache";
     }
 
-    public Subscription drop(final Handler handler, final Scheduler scheduler) {
-        return scheduler.createWorker().schedule(new Action0() {
+    public Subscription drop(final Handler handler) {
+        return Schedulers.io().createWorker().schedule(new Action0() {
             @Override
             public void call() {
                 try {

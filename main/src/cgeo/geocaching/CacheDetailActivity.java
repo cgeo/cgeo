@@ -927,7 +927,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         progress.show(this, res.getString(R.string.cache_dialog_offline_drop_title), res.getString(R.string.cache_dialog_offline_drop_message), true, null);
-        cache.drop(new ChangeNotificationHandler(this, progress), RxUtils.networkScheduler);
+        cache.drop(new ChangeNotificationHandler(this, progress));
     }
 
     private void storeCache() {

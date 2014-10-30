@@ -70,7 +70,6 @@ import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Subscription;
 import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -907,7 +906,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         refreshCurrentList();
                         CacheListActivity.this.getListView().setSelection(lastListPosition);
                     }
-                }, Schedulers.io());
+                });
                 break;
             case R.id.menu_move_to_list:
                 new StoredList.UserInterface(this).promptForListSelection(R.string.cache_menu_move_list, new Action1<Integer>() {
