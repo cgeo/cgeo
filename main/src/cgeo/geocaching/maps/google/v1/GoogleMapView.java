@@ -2,8 +2,10 @@ package cgeo.geocaching.maps.google.v1;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
+import cgeo.geocaching.maps.DistanceOverlay;
 import cgeo.geocaching.maps.PositionAndScaleOverlay;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -131,6 +133,13 @@ public class GoogleMapView extends MapView implements MapViewImpl {
         GoogleOverlay ovl = new GoogleOverlay();
         getOverlays().add(ovl);
         return (PositionAndScaleOverlay) ovl.getBase();
+    }
+
+    @Override
+    public DistanceOverlay createAddDistanceOverlay(final Geopoint coords, final String geocode) {
+        final GoogleDistanceOverlay ovl = new GoogleDistanceOverlay(this, coords, geocode);
+        getOverlays().add(ovl);
+        return (DistanceOverlay) ovl.getBase();
     }
 
     @Override

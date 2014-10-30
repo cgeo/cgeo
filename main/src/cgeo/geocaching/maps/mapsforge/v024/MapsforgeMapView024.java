@@ -1,8 +1,10 @@
 package cgeo.geocaching.maps.mapsforge.v024;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
+import cgeo.geocaching.maps.DistanceOverlay;
 import cgeo.geocaching.maps.PositionAndScaleOverlay;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -106,6 +108,13 @@ public class MapsforgeMapView024 extends MapView implements MapViewImpl {
         MapsforgeOverlay ovl = new MapsforgeOverlay();
         getOverlays().add(ovl);
         return (PositionAndScaleOverlay) ovl.getBase();
+    }
+
+    @Override
+    public DistanceOverlay createAddDistanceOverlay(Geopoint coords, String geocode) {
+        MapsforgeDistanceOverlay ovl = new MapsforgeDistanceOverlay(this, coords, geocode);
+        getOverlays().add(ovl);
+        return (DistanceOverlay) ovl.getBase();
     }
 
     @Override
