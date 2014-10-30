@@ -91,10 +91,19 @@
             android:launchMode="singleTop"
             android:parentActivityName="cgeo.geocaching.MainActivity"
             android:windowSoftInputMode="stateHidden" >
+            
+            <!-- keyword based search from search widget -->
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-
+            
+            <!-- This can trigger our app from Google Now by something like "Search for keyword on c:geo".
+            See http://developer.android.com/guide/components/intents-common.html#Search -->
+			<intent-filter>
+		        <action android:name="com.google.android.gms.actions.SEARCH_ACTION"/>
+		        <category android:name="android.intent.category.DEFAULT"/>
+		    </intent-filter>
+    
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cgeo.geocaching.MainActivity" />
