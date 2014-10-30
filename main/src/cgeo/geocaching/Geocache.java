@@ -1464,46 +1464,30 @@ public class Geocache implements ICache, IWaypoint {
         DataStore.removeCache(getGeocode(), EnumSet.of(RemoveFlag.CACHE));
     }
 
+    private void warnIncorrectParsingIf(final boolean incorrect, final String field) {
+        if (incorrect) {
+            Log.w(field + " not parsed correctly for " + geocode);
+        }
+    }
+
+    private void warnIncorrectParsingIfBlank(final String str, final String field) {
+        warnIncorrectParsingIf(StringUtils.isBlank(str), field);
+    }
+
     public void checkFields() {
-        if (StringUtils.isBlank(getGeocode())) {
-            Log.w("geo code not parsed correctly for " + geocode);
-        }
-        if (StringUtils.isBlank(getName())) {
-            Log.w("name not parsed correctly for " + geocode);
-        }
-        if (StringUtils.isBlank(getGuid())) {
-            Log.w("guid not parsed correctly for " + geocode);
-        }
-        if (getTerrain() == 0.0) {
-            Log.w("terrain not parsed correctly for " + geocode);
-        }
-        if (getDifficulty() == 0.0) {
-            Log.w("difficulty not parsed correctly for " + geocode);
-        }
-        if (StringUtils.isBlank(getOwnerDisplayName())) {
-            Log.w("owner display name not parsed correctly for " + geocode);
-        }
-        if (StringUtils.isBlank(getOwnerUserId())) {
-            Log.w("owner user id real not parsed correctly for " + geocode);
-        }
-        if (getHiddenDate() == null) {
-            Log.w("hidden not parsed correctly for " + geocode);
-        }
-        if (getFavoritePoints() < 0) {
-            Log.w("favoriteCount not parsed correctly for " + geocode);
-        }
-        if (getSize() == null) {
-            Log.w("size not parsed correctly for " + geocode);
-        }
-        if (getType() == null || getType() == CacheType.UNKNOWN) {
-            Log.w("type not parsed correctly for " + geocode);
-        }
-        if (getCoords() == null) {
-            Log.w("coordinates not parsed correctly for " + geocode);
-        }
-        if (StringUtils.isBlank(getLocation())) {
-            Log.w("location not parsed correctly for " + geocode);
-        }
+        warnIncorrectParsingIfBlank(getGeocode(), "geo");
+        warnIncorrectParsingIfBlank(getName(), "name");
+        warnIncorrectParsingIfBlank(getGuid(), "guid");
+        warnIncorrectParsingIf(getTerrain() == 0.0, "terrain");
+        warnIncorrectParsingIf(getDifficulty() == 0.0, "difficulty");
+        warnIncorrectParsingIfBlank(getOwnerDisplayName(), "owner");
+        warnIncorrectParsingIfBlank(getOwnerUserId(), "owner");
+        warnIncorrectParsingIf(getHiddenDate() == null, "hidden");
+        warnIncorrectParsingIf(getFavoritePoints() < 0, "favoriteCount");
+        warnIncorrectParsingIf(getSize() == null, "size");
+        warnIncorrectParsingIf(getType() == null || getType() == CacheType.UNKNOWN, "type");
+        warnIncorrectParsingIf(getCoords() == null, "coordinates");
+        warnIncorrectParsingIfBlank(getLocation(), "location");
     }
 
     public Subscription refresh(final CancellableHandler handler, final Scheduler scheduler) {
