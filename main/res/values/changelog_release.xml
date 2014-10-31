@@ -9,6 +9,8 @@
     · Fix: Do not show cache size info for earth caches as it has none\n
     · Fix: Support all possible date formats of geocaching.com\n
     · Fix: Avoid crash when saving a filtered list of caches\n
+    · Fix: Picture title in TB logs not shown\n
+    \n
     <b>2014.09.18:</b>\n
     · Fix: Hardware acceleration is unreliable on some devices\n
     · Fix: Return correct error message if a cache is unpublished\n
