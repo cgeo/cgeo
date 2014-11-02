@@ -5,8 +5,8 @@ import butterknife.InjectView;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.Units;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.GpsStatusProvider.Status;

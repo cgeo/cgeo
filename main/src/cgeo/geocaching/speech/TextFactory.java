@@ -2,8 +2,8 @@ package cgeo.geocaching.speech;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.IConversion;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.IConversion;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
 

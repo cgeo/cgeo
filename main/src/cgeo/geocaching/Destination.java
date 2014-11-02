@@ -1,6 +1,6 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.location.Geopoint;
 
 public final class Destination implements ICoordinates {
 

@@ -3,7 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.DataStore.StorageLocation;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap.RemoveHandler;
 import cgeo.geocaching.utils.Log;

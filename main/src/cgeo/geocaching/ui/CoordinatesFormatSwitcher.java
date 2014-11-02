@@ -1,7 +1,7 @@
 package cgeo.geocaching.ui;
 
-import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointFormatter;
 
 import android.view.View;
 import android.view.View.OnClickListener;

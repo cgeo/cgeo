@@ -2,7 +2,7 @@ package cgeo.calendar;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
-import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.ProcessUtils;

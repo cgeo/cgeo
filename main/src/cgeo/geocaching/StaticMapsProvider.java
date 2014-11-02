@@ -2,7 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.files.LocalStorage;
-import cgeo.geocaching.geopoint.GeopointFormatter.Format;
+import cgeo.geocaching.location.GeopointFormatter.Format;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;

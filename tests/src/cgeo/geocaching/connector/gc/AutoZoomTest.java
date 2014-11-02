@@ -2,8 +2,8 @@ package cgeo.geocaching.connector.gc;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Viewport;
 
 import java.util.Set;
 

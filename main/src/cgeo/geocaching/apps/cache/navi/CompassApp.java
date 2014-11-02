@@ -4,7 +4,7 @@ import cgeo.geocaching.CompassActivity;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.location.Geopoint;
 
 import android.app.Activity;
 

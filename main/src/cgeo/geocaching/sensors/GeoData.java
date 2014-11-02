@@ -1,7 +1,7 @@
 package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.enumerations.LocationProviderType;
-import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.Log;
 
 import org.eclipse.jdt.annotation.Nullable;

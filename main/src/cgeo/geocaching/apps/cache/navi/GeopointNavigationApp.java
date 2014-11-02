@@ -1,6 +1,6 @@
 package cgeo.geocaching.apps.cache.navi;
 
-import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.location.Geopoint;
 
 import android.app.Activity;
 

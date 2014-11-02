@@ -1,6 +1,6 @@
 package cgeo.geocaching.maps.interfaces;
 
-import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
 import cgeo.geocaching.maps.PositionAndScaleOverlay;
 

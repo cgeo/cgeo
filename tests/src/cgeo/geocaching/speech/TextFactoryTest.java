@@ -3,7 +3,7 @@ package cgeo.geocaching.speech;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
 

@@ -1,4 +1,6 @@
-package cgeo.geocaching.geopoint;
+package cgeo.geocaching.location;
+
+import cgeo.geocaching.location.DistanceParser;
 
 import android.test.AndroidTestCase;
 

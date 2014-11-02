@@ -6,7 +6,7 @@ import cgeo.geocaching.ICache;
 import cgeo.geocaching.Image;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.gc.GCConstants;
-import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.TextUtils;
 
 import org.apache.commons.lang3.StringUtils;

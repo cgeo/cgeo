@@ -1,7 +1,7 @@
 package cgeo.geocaching.ui;
 
-import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.Units;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Units;
 
 import org.eclipse.jdt.annotation.NonNull;
 

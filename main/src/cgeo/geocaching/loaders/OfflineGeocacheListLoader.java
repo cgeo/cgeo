@@ -3,7 +3,7 @@ package cgeo.geocaching.loaders;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 
 import android.content.Context;

@@ -4,9 +4,9 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.GeopointFormatter;
-import cgeo.geocaching.geopoint.GeopointFormatter.Format;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointFormatter;
+import cgeo.geocaching.location.GeopointFormatter.Format;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;

@@ -1,8 +1,10 @@
-package cgeo.geocaching.geopoint;
+package cgeo.geocaching.location;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.ICoordinates;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Viewport;
 
 import org.eclipse.jdt.annotation.NonNull;
 

@@ -21,7 +21,7 @@ import cgeo.geocaching.connector.trackable.GeokretyConnector;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.connector.trackable.UnknownTrackableConnector;
-import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.location.Viewport;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;

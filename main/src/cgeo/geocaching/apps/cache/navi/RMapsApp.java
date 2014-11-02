@@ -3,8 +3,8 @@ package cgeo.geocaching.apps.cache.navi;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
-import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.GeopointFormatter.Format;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointFormatter.Format;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -2,10 +2,10 @@ package cgeo.geocaching.connector.ox;
 
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.GeopointFormatter;
-import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointFormatter;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;

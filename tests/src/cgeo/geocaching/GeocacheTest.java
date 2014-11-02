@@ -5,8 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
-import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.location.Geopoint;
 
 import org.apache.commons.lang3.StringUtils;
 

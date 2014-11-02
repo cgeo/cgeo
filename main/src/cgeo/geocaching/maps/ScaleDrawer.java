@@ -1,8 +1,8 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.Units;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 

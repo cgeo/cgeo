@@ -1,7 +1,7 @@
 package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.location.Geopoint;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package cgeo.geocaching.geopoint;
+package cgeo.geocaching.location;
 
 import cgeo.geocaching.settings.Settings;
 

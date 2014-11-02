@@ -3,7 +3,7 @@ package cgeo.geocaching;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.location.Geopoint;
 
 import android.test.AndroidTestCase;
 

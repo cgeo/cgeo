@@ -1,6 +1,6 @@
 package cgeo.geocaching.maps.google.v1;
 
-import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 
 import com.google.android.maps.GeoPoint;

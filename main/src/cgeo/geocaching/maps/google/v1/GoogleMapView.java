@@ -2,7 +2,7 @@ package cgeo.geocaching.maps.google.v1;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
-import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
 import cgeo.geocaching.maps.PositionAndScaleOverlay;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;

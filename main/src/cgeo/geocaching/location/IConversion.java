@@ -1,4 +1,4 @@
-package cgeo.geocaching.geopoint;
+package cgeo.geocaching.location;
 
 public interface IConversion {
     public static final float MILES_TO_KILOMETER = 1.609344f;

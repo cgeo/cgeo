@@ -3,7 +3,7 @@ package cgeo.geocaching.apps.cache.navi;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.ProcessUtils;
 
 import android.app.Activity;

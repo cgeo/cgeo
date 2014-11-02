@@ -3,9 +3,10 @@ package cgeo.geocaching.loaders;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
-import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.location.Geopoint;
 
 import org.eclipse.jdt.annotation.NonNull;
+
 import rx.functions.Func1;
 
 import android.content.Context;

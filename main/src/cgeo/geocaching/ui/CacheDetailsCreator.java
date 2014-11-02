@@ -7,7 +7,7 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.geopoint.Units;
+import cgeo.geocaching.location.Units;
 import cgeo.geocaching.utils.Formatter;
 
 import org.apache.commons.lang3.StringUtils;

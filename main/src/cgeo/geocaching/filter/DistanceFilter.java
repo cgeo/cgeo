@@ -4,7 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.R;
-import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.location.Geopoint;
 
 import java.util.ArrayList;
 import java.util.List;

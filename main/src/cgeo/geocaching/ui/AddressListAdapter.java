@@ -5,8 +5,8 @@ import butterknife.InjectView;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.Units;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Units;
 
 import org.apache.commons.lang3.StringUtils;
 

@@ -2,8 +2,8 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
-import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.CacheDetailsCreator;

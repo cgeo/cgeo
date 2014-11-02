@@ -1,6 +1,6 @@
 package cgeo.geocaching.maps.mapsforge.v024;
 
-import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 
 import org.mapsforge.android.mapsold.GeoPoint;
