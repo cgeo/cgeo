@@ -15,7 +15,8 @@
         <Spinner
             android:id="@+id/spinnerCoordinateFormats"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:listitem="@android:layout/simple_spinner_item" />
 
         <TableLayout
             android:id="@+id/coordTable"

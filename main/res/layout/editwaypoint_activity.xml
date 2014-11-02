@@ -57,7 +57,8 @@
             android:id="@+id/type"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:listitem="@android:layout/simple_spinner_item" />
 
         <AutoCompleteTextView
             android:id="@+id/name"
