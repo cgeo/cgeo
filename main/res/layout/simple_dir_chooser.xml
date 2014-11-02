@@ -40,6 +40,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:baselineAligned="false"
         android:orientation="horizontal"
         android:paddingTop="10dip" >
 

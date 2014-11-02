@@ -25,6 +25,7 @@
         android:layout_marginBottom="5dip"
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
+        android:baselineAligned="false"
         android:orientation="horizontal" >
 
         <ImageView

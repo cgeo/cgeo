@@ -63,7 +63,9 @@
             android:id="@+id/distanceUnit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:entries="@array/distance_units" />
+            android:entries="@array/distance_units"
+            tools:listitem="@android:layout/simple_spinner_item" />
+
     </LinearLayout>
 
     <RelativeLayout style="@style/separator_horizontal_layout" >
