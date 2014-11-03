@@ -79,6 +79,7 @@
   <string name="log_clear">Vyčistit</string>
   <string name="log_post_not_possible">Načítání stránky s Logovacím formulářem…</string>
   <string name="log_add">Přidat</string>
+  <string name="log_repeat">Opakovat poslední log</string>
   <string name="log_no_rating">Bez hodnocení</string>
   <string name="log_stars_1_description">Slabá</string>
   <string name="log_stars_15_description">Docela slabá</string>
@@ -298,6 +299,7 @@
   <string name="caches_filter_popularity_ratio">Oblíbené [%]</string>
   <string name="caches_removing_from_history">Čištění Historie…</string>
   <string name="caches_clear_offlinelogs">Smazat offline Logy</string>
+  <string name="caches_clear_offlinelogs_message">Opravdu chceš vymazat offline logy?</string>
   <string name="caches_clear_offlinelogs_progress">Mazání offline logů</string>
   <string name="list_menu_create">Vytvořit nový seznam</string>
   <string name="list_menu_drop">Smazat aktuální seznam</string>
@@ -763,6 +765,7 @@
   <string name="search_clear_history">Vymazat historii</string>
   <string name="search_history_cleared">Historie vymazána</string>
   <string name="waypoint_coordinate_formats_plain">Prostý</string>
+  <string name="from_clipboard">Ze schránky</string>
   <string name="visit_tweet">Oznámit nález na Twitteru</string>
   <string name="map_map">Mapa</string>
   <string name="map_live">Aktivní mapa</string>
@@ -867,6 +870,7 @@
   <string name="helper_contacts_description">Umožňuje otevřít vizitku (z tvého seznamu kontaktů) přímo z logu keše, můžeš tak snadněji kontaktovat kamarády o pomoc.</string>
   <string name="helper_sendtocgeo_description">Poslat do c:geo (Send2c:geo) je rozšíření prohlížeče <strong>pro tvůj počítač</strong>. Umožňuje zaslání keše do tvého mobilního zařízení jediným klepnutím, přímo z prohlížeče, při procházení webu Geocaching.com.</string>
   <string name="helper_locus_title">Locus</string>
+  <string name="helper_locus_description">Outdoorová navigace pro telefon či tablet. Prohlížení offline topo map, záznam trasy, lov geokeší, hlasová navigace a mnohem více.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">Můžeš použít radar z této aplikace pro c:geo. Také podporuje další funkce spojené s používáním GPS.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
@@ -1145,6 +1149,7 @@
   <string name="tts_one_oclock">jedna hodina</string>
   <string name="tts_oclock">%s hodin</string>
   <string name="clipboard_copy_ok">Zkopírováno do schránky</string>
+  <string name="more_than_percent_favorite_points">&gt; %d%% oblíbených položek</string>
   <string name="cgeo_shortcut">c:geo zástupce</string>
   <string name="create_shortcut">Vytvořit zástupce</string>
   <string name="send">Odeslat</string>
