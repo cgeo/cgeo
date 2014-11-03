@@ -36,7 +36,7 @@ public class Geocoder {
             return geocoder.getFromLocationName(keyword, 20);
         } catch (final Exception e) {
             handleException(e);
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
         }
     }
 
@@ -45,7 +45,7 @@ public class Geocoder {
             return geocoder.getFromLocation(coords.getLatitude(), coords.getLongitude(), 20);
         } catch (final IOException e) {
             handleException(e);
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
         }
     }
 
