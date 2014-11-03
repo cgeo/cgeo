@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release:</b>\n
+    <b>2014.11.03:</b>\n
     · Fix: Map icons looked blurred on some devices\n
     · Fix: Some menus had a wrong font size\n
     · Fix: Adding an event to calendar was not always working\n
