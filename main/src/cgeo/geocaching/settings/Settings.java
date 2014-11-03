@@ -159,7 +159,7 @@ public class Settings {
             e.putBoolean(getKey(R.string.pref_log_offline), old.getBoolean(getKey(R.string.pref_log_offline), false));
             e.putBoolean(getKey(R.string.pref_choose_list), old.getBoolean(getKey(R.string.pref_choose_list), true));
             e.putBoolean(getKey(R.string.pref_loaddirectionimg), old.getBoolean(getKey(R.string.pref_loaddirectionimg), true));
-            e.putString(getKey(R.string.pref_gccustomdate), old.getString(getKey(R.string.pref_gccustomdate), null));
+            e.putString(getKey(R.string.pref_gccustomdate), old.getString(getKey(R.string.pref_gccustomdate), GCConstants.DEFAULT_GC_DATE));
             e.putInt(getKey(R.string.pref_showwaypointsthreshold), old.getInt(getKey(R.string.pref_showwaypointsthreshold), SHOW_WP_THRESHOLD_DEFAULT));
             e.putString(getKey(R.string.pref_cookiestore), old.getString(getKey(R.string.pref_cookiestore), null));
             e.putBoolean(getKey(R.string.pref_opendetailslastpage), old.getBoolean(getKey(R.string.pref_opendetailslastpage), false));
@@ -507,7 +507,9 @@ public class Settings {
      * @return User selected date format on GC.com
      */
     public static String getGcCustomDate() {
-        return getString(R.string.pref_gccustomdate, null);
+        // We might have some users whose stored value is null, which is invalid. In this case, we use the default.
+        return StringUtils.defaultString(getString(R.string.pref_gccustomdate, GCConstants.DEFAULT_GC_DATE),
+                GCConstants.DEFAULT_GC_DATE);
     }
 
     public static boolean isExcludeMyCaches() {

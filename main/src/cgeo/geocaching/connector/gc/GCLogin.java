@@ -50,7 +50,7 @@ public class GCLogin extends AbstractLogin {
     }
 
     private static StatusCode resetGcCustomDate(final StatusCode statusCode) {
-        Settings.setGcCustomDate("MM/dd/yyyy");
+        Settings.setGcCustomDate(GCConstants.DEFAULT_GC_DATE);
         return statusCode;
     }
 
