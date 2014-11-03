@@ -24,6 +24,8 @@ public final class GCConstants {
     public final static @NonNull String URL_MAP_INFO = GC_TILE_URL + "map.info";
     /** Tile itself */
     public final static @NonNull String URL_MAP_TILE = GC_TILE_URL + "map.png";
+    /** Format used by geocaching.com when user is not logged in. */
+    public static final String DEFAULT_GC_DATE = "MM/dd/yyyy";
 
     /**
      * Patterns for parsing the result of a (detailed) search
