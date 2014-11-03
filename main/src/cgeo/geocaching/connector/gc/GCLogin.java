@@ -124,7 +124,7 @@ public class GCLogin extends AbstractLogin {
             return StatusCode.NO_ERROR; // logged in
         }
 
-        if (loginData.contains("Your username/password combination does not match.")) {
+        if (loginData.contains("your username or password is incorrect")) {
             Log.i("Failed to log in Geocaching.com as " + username + " because of wrong username/password");
             return resetGcCustomDate(StatusCode.WRONG_LOGIN_DATA); // wrong login
         }
