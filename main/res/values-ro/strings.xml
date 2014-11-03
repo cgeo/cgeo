@@ -80,6 +80,7 @@
   <string name="log_clear">Şterge</string>
   <string name="log_post_not_possible">Încărcare pagină însemnări…</string>
   <string name="log_add">Adaugă</string>
+  <string name="log_repeat">Repetă ultima însemnare</string>
   <string name="log_no_rating">Fără voturi</string>
   <string name="log_stars_1_description">Foarte slabă</string>
   <string name="log_stars_15_description">Slabă</string>
@@ -299,6 +300,7 @@
   <string name="caches_filter_popularity_ratio">Favorite [%]</string>
   <string name="caches_removing_from_history">Şterge din istoric…</string>
   <string name="caches_clear_offlinelogs">Şterge însemnări stocate local</string>
+  <string name="caches_clear_offlinelogs_message">Vrei să ştergi însemnările stocate local?</string>
   <string name="caches_clear_offlinelogs_progress">Ştergere însemnări stocate local</string>
   <string name="list_menu_create">Crează listă nouă</string>
   <string name="list_menu_drop">Şterge lista curentă</string>
@@ -756,6 +758,7 @@
   <string name="search_clear_history">Şterge istoric</string>
   <string name="search_history_cleared">Istoric şters</string>
   <string name="waypoint_coordinate_formats_plain">Simplu</string>
+  <string name="from_clipboard">Din memoria temporară</string>
   <string name="visit_tweet">Publică pe Twitter</string>
   <string name="map_map">Hartă</string>
   <string name="map_live">Hartă</string>
@@ -860,6 +863,7 @@
   <string name="helper_contacts_description">Permite să afişezi contacte (din agenda de contacte) direct din formularul pentru însemnări, astfel încţt să ăti poţi întreba mai uşor prietenii.</string>
   <string name="helper_sendtocgeo_description">Send to c:geo este o extensie pentru browser-ul <strong>de pe PC</strong>. Când vizitezi geocaching.com, poţi trimite geocutii direct către dispozitivul tău apăsând un simplu buton.</string>
   <string name="helper_locus_title">Locus</string>
+  <string name="helper_locus_description">Aplicaţie de navigare pentru telefon sau tabletă. Vezi hărţi salvate, urmăreşte-ţi traseul, caută geocutii, foloseşte ghidare vocală şi multe altele.</string>
   <string name="helper_gpsstatus_title">Stare GPS</string>
   <string name="helper_gpsstatus_description">Poţi folosi ecranul Radar din această aplicaţie împreună cu c:geo. Oferă şi multe alte informaţii legate de GPS.</string>
   <string name="helper_bluetoothgps_title">GPS prin Bluetooth</string>
@@ -1137,7 +1141,8 @@
   <string name="tts_one_foot">un picior</string>
   <string name="tts_one_oclock">ora unu</string>
   <string name="tts_oclock">ora %s</string>
-  <string name="clipboard_copy_ok">Copiat</string>
+  <string name="clipboard_copy_ok">Copiat în memoria temporară</string>
+  <string name="more_than_percent_favorite_points">&gt; %d%% favorite</string>
   <string name="cgeo_shortcut">legătură la c:geo</string>
   <string name="create_shortcut">Crează scurtătură</string>
   <string name="send">Trimite</string>

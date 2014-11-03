@@ -80,6 +80,7 @@
   <string name="log_clear">Limpiar</string>
   <string name="log_post_not_possible">Cargando página de registro…</string>
   <string name="log_add">Añadir</string>
+  <string name="log_repeat">Repetir el último registro</string>
   <string name="log_no_rating">Sin puntuación</string>
   <string name="log_stars_1_description">malísimo</string>
   <string name="log_stars_15_description">muy malo</string>
@@ -298,6 +299,7 @@
   <string name="caches_filter_popularity_ratio">Favoritos [%]</string>
   <string name="caches_removing_from_history">Borrando del historial…</string>
   <string name="caches_clear_offlinelogs">Borrar registros sin conexión</string>
+  <string name="caches_clear_offlinelogs_message">¿Quieres borrar los registros sin conexión?</string>
   <string name="caches_clear_offlinelogs_progress">Borrando registros sin conexión</string>
   <string name="list_menu_create">Crear nueva lista</string>
   <string name="list_menu_drop">Borrar lista actual</string>
@@ -729,6 +731,7 @@
   <string name="waypoint_visited">Visitado</string>
   <string name="waypoint_save">Guardar</string>
   <string name="waypoint_loading">Cargando punto de referencia…</string>
+  <string name="waypoint_do_not_touch_cache_coordinates">No cambiar las coordenadas del caché</string>
   <string name="waypoint_set_as_cache_coords">Establecer como coordenadas del cache solo en c:geo</string>
   <string name="waypoint_save_and_modify_on_website">Establecer como coordenadas del cache en c:geo y en la web</string>
   <string name="waypoint_reset_cache_coords">Restablecer las coordenadas del cache</string>
@@ -751,6 +754,7 @@
   <string name="search_clear_history">Borrar historial</string>
   <string name="search_history_cleared">Historial borrado</string>
   <string name="waypoint_coordinate_formats_plain">Sencillo</string>
+  <string name="from_clipboard">Desde portapapeles</string>
   <string name="visit_tweet">Publicar en Twitter</string>
   <string name="map_map">Mapa</string>
   <string name="map_live">Mapa activo</string>
@@ -855,6 +859,7 @@
   <string name="helper_contacts_description">Permite abrir un contacto (de tu libreta de contactos) directamente desde un registro, para que puedas pedir ayuda a tus amigos más fácilmente.</string>
   <string name="helper_sendtocgeo_description">\'Enviar a c:geo\' es una extensión <strong>para tu PC</strong>. Cuando navegues por geocaching.com, puedes enviar cachés a tu smartphone haciendo clic directamente desde tu navegador.</string>
   <string name="helper_locus_title">Locus</string>
+  <string name="helper_locus_description">App de navegación exterior para tu móvil o tableta. Puede visualizar mapas Topo sin conexión, marcar tu ruta, buscar geocachés, usar una guía de voz y mucho más.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">Puedes usar el radar de esta aplicación con c:geo. Además ofrece un montón de información relacionada con el GPS.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
@@ -1050,6 +1055,8 @@
   <string name="attribute_all_seasons_no">No todas las estaciones</string>
   <string name="attribute_breeding_yes">Época de cría / Naturaleza protegida</string>
   <string name="attribute_breeding_no">No es época de cría / naturaleza protegida</string>
+  <string name="attribute_snow_proof_yes">Caché a prueba de nieve</string>
+  <string name="attribute_snow_proof_no">No es caché a prueba de nieve</string>
   <string name="attribute_compass_yes">Brújula</string>
   <string name="attribute_compass_no">Sin brújula</string>
   <string name="attribute_cave_yes">Equipo para cuevas</string>
@@ -1153,6 +1160,7 @@
     <item quantity="one">%s favorito</item>
     <item quantity="other">%s favoritos</item>
   </plurals>
+  <string name="more_than_percent_favorite_points">&gt; %d%% favoritos</string>
   <string name="cgeo_shortcut">Atajo de c:geo</string>
   <string name="create_shortcut">Crear atajo</string>
   <string name="send">Enviar</string>
