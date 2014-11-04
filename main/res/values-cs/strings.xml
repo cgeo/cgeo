@@ -535,7 +535,7 @@
   <string name="init_sendToCgeo">Poslat do c:geo</string>
   <string name="settings_info_send2cgeo_title">Info o funkci send2c:geo</string>
   <string name="init_sendToCgeo_name">Název tvého zařízení</string>
-  <string name="init_sendToCgeo_description">Funkce <b>Send2c:geo</b> umožňuje stahovat keše přímo ze stránky Geocaching.com pomocí speciálního doplňku pro webové prholížeče. Před registrací zkoukni <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Pokud chceš používat funkci send2c:geo, musíš se zaregistrovat. c:geo může samozřejmě pracovat normálně i bez registrace této funkce.</string>
+  <string name="init_sendToCgeo_description">Funkce <b>Send2c:geo</b> umožňuje stahovat keše přímo ze stránky Geocaching.com pomocí speciálního doplňku pro webové prohlížeče. Před registrací zkoukni <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Pokud chceš používat funkci send2c:geo, musíš se zaregistrovat. Aplikace c:geo může samozřejmě pracovat normálně i bez registrace této funkce.</string>
   <string name="init_sendToCgeo_register">Požádat o registraci</string>
   <string name="init_sendToCgeo_registering">Registrace tvého zařízení pro funkci Poslat do c:geo…</string>
   <string name="init_sendToCgeo_register_ok">Registrace úspěšně dokončena. PIN kód je ####. Použij ho na stránce c:geo pro přidání zařízení do tvého prohlížeče.</string>
