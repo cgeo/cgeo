@@ -18,6 +18,7 @@ import rx.subscriptions.Subscriptions;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
+import android.os.Process;
 
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -35,7 +36,7 @@ public class RxUtils {
     public static final Scheduler networkScheduler = Schedulers.from(new ThreadPoolExecutor(10, 10, 5, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>()));
 
     private static final HandlerThread looperCallbacksThread =
-            new HandlerThread("Looper callbacks thread", android.os.Process.THREAD_PRIORITY_BACKGROUND);
+            new HandlerThread("Looper callbacks thread", Process.THREAD_PRIORITY_DEFAULT);
 
     static {
         looperCallbacksThread.start();
