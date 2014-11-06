@@ -135,12 +135,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private CgeoApplication app;
     private MapItemFactory mapItemFactory;
     private String mapTitle;
-    private LeastRecentlyUsedSet<Geocache> caches;
+    final private LeastRecentlyUsedSet<Geocache> caches = new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount());
     private MapViewImpl mapView;
     private CachesOverlay overlayCaches;
     private PositionAndScaleOverlay overlayPositionAndScale;
 
-    final private GeoDirHandler geoDirUpdate;
+    final private GeoDirHandler geoDirUpdate = new UpdateLoc(this);
     private SearchResult searchIntent = null;
     private String geocodeIntent = null;
     private Geopoint coordsIntent = null;
@@ -357,7 +357,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     public CGeoMap(final MapActivityImpl activity) {
         super(activity);
-        geoDirUpdate = new UpdateLoc(this);
     }
 
     protected void countVisibleCaches() {
@@ -381,9 +380,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         res = this.getResources();
         activity = this.getActivity();
         app = (CgeoApplication) activity.getApplication();
-
-        final int countBubbleCnt = DataStore.getAllCachesCount();
-        caches = new LeastRecentlyUsedSet<>(MAX_CACHES + countBubbleCnt);
 
         final MapProvider mapProvider = Settings.getMapProvider();
         mapItemFactory = mapProvider.getMapItemFactory();
