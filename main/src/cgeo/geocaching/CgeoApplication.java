@@ -113,7 +113,7 @@ public class CgeoApplication extends Application {
                 geoDataObservableLowPower = geoDataObservable;
             }
         } else {
-            geoDataObservable = GeoDataProvider.create(this).replay(1).refCount().doOnNext(rememberGeodataAction);
+            geoDataObservable = GeoDataProvider.create(this).doOnNext(rememberGeodataAction).replay(1).refCount();
             geoDataObservableLowPower = geoDataObservable;
         }
     }
@@ -130,12 +130,12 @@ public class CgeoApplication extends Application {
                 Log.e("Device orientation will not be available as no suitable sensors were found");
                 return Observable.<Float>never().startWith(0.0f);
             }
-        }).replay(1).refCount().doOnNext(new Action1<Float>() {
+        }).doOnNext(new Action1<Float>() {
             @Override
             public void call(final Float direction) {
                 currentDirection = direction;
             }
-        });
+        }).replay(1).refCount();
     }
 
     @Override
