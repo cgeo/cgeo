@@ -7,8 +7,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Geopoint.ParseException;
+import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.Settings.CoordInputFormatEnum;
@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -226,8 +227,10 @@ public class CoordinatesInputDialog extends DialogFragment {
 
                 eLatDeg.setText(addZeros(gp.getLatDeg(), 2));
                 eLatMin.setText(addZeros(gp.getLatDegFrac(), 5));
+                eLatMin.setGravity(Gravity.NO_GRAVITY);
                 eLonDeg.setText(addZeros(gp.getLonDeg(), 3));
                 eLonMin.setText(addZeros(gp.getLonDegFrac(), 5));
+                eLonMin.setGravity(Gravity.NO_GRAVITY);
                 break;
             case Min: // DDD° MM.MMM
                 getView().findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
@@ -249,9 +252,11 @@ public class CoordinatesInputDialog extends DialogFragment {
 
                 eLatDeg.setText(addZeros(gp.getLatDeg(), 2));
                 eLatMin.setText(addZeros(gp.getLatMin(), 2));
+                eLatMin.setGravity(Gravity.RIGHT);
                 eLatSec.setText(addZeros(gp.getLatMinFrac(), 3));
                 eLonDeg.setText(addZeros(gp.getLonDeg(), 3));
                 eLonMin.setText(addZeros(gp.getLonMin(), 2));
+                eLonMin.setGravity(Gravity.RIGHT);
                 eLonSec.setText(addZeros(gp.getLonMinFrac(), 3));
                 break;
             case Sec: // DDD° MM SS.SSS
@@ -274,10 +279,12 @@ public class CoordinatesInputDialog extends DialogFragment {
 
                 eLatDeg.setText(addZeros(gp.getLatDeg(), 2));
                 eLatMin.setText(addZeros(gp.getLatMin(), 2));
+                eLatMin.setGravity(Gravity.RIGHT);
                 eLatSec.setText(addZeros(gp.getLatSec(), 2));
                 eLatSub.setText(addZeros(gp.getLatSecFrac(), 3));
                 eLonDeg.setText(addZeros(gp.getLonDeg(), 3));
                 eLonMin.setText(addZeros(gp.getLonMin(), 2));
+                eLonMin.setGravity(Gravity.RIGHT);
                 eLonSec.setText(addZeros(gp.getLonSec(), 2));
                 eLonSub.setText(addZeros(gp.getLonSecFrac(), 3));
                 break;
@@ -402,16 +409,18 @@ public class CoordinatesInputDialog extends DialogFragment {
                 final String lonDir = bLon.getText().toString();
                 final String latDeg = eLatDeg.getText().toString();
                 final String lonDeg = eLonDeg.getText().toString();
-                final String latDegFrac = eLatMin.getText().toString();
-                final String lonDegFrac = eLonMin.getText().toString();
+                // right-pad decimal fraction
+                final String latDegFrac = padZerosRight(eLatMin.getText().toString(), 5);
+                final String lonDegFrac = padZerosRight(eLonMin.getText().toString(), 5);
                 final String latMin = eLatMin.getText().toString();
                 final String lonMin = eLonMin.getText().toString();
                 final String latMinFrac = eLatSec.getText().toString();
                 final String lonMinFrac = eLonSec.getText().toString();
                 final String latSec = eLatSec.getText().toString();
                 final String lonSec = eLonSec.getText().toString();
-                final String latSecFrac = eLatSub.getText().toString();
-                final String lonSecFrac = eLonSub.getText().toString();
+                // right-pad seconds fraction
+                final String latSecFrac = padZerosRight(eLatSub.getText().toString(), 3);
+                final String lonSecFrac = padZerosRight(eLonSub.getText().toString(), 3);
 
                 switch (currentFormat) {
                     case Deg:
@@ -440,6 +449,10 @@ public class CoordinatesInputDialog extends DialogFragment {
             activity.showToast(activity.getResources().getString(R.string.err_parse_lat_lon));
         }
         return false;
+    }
+
+    private static String padZerosRight(final String value, final int len) {
+        return StringUtils.rightPad(value, len, '0');
     }
 
     public int getMaxLengthFromCurrentField(final EditText editText) {
