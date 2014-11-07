@@ -225,6 +225,10 @@ public abstract class Network {
      */
     @Nullable
     private static HttpResponse doLogRequest(final HttpRequestBase request) {
+        if (!isNetworkConnected()) {
+            return null;
+        }
+
         final String reqLogStr = request.getMethod() + " " + hidePassword(request.getURI().toString());
         Log.d(reqLogStr);
 
