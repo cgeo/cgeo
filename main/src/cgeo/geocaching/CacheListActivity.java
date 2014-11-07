@@ -1076,7 +1076,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return;
         }
 
-        if (!Network.isNetworkConnected(getApplicationContext())) {
+        if (!Network.isNetworkConnected()) {
             showToast(getString(R.string.err_server));
             return;
         }

@@ -1,5 +1,6 @@
 package cgeo.geocaching.network;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.JsonUtils;
@@ -460,16 +461,16 @@ public abstract class Network {
     /**
      * Checks if the device has network connection.
      *
-     * @param context
-     *            context of the application, cannot be null
-     *
      * @return <code>true</code> if the device is connected to the network.
      */
-    public static boolean isNetworkConnected(Context context) {
-        ConnectivityManager conMan = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = conMan.getActiveNetworkInfo();
-
-        return activeNetwork != null && activeNetwork.isConnected();
+    private static ConnectivityManager connectivityManager = null;
+    public static boolean isNetworkConnected() {
+        if (connectivityManager == null) {
+            // Concurrent assignment would not hurt
+            connectivityManager = (ConnectivityManager) CgeoApplication.getInstance().getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        }
+        final NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 }

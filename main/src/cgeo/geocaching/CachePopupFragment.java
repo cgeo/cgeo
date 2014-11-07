@@ -160,7 +160,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
                 return;
             }
 
-            if (!Network.isNetworkConnected(getActivity())) {
+            if (!Network.isNetworkConnected()) {
                 showToast(getString(R.string.err_server));
                 return;
             }

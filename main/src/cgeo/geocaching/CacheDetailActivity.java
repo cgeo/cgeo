@@ -908,7 +908,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return;
         }
 
-        if (!Network.isNetworkConnected(getApplicationContext())) {
+        if (!Network.isNetworkConnected()) {
             showToast(getString(R.string.err_server));
             return;
         }
