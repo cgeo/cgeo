@@ -39,6 +39,7 @@ import rx.Observable.OnSubscribe;
 import rx.Subscriber;
 import rx.android.observables.AndroidObservable;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
 import rx.functions.Action1;
 
 import android.app.AlertDialog;
@@ -227,9 +228,9 @@ public class MainActivity extends AbstractActionBarActivity {
 
         for (final ILogin conn : ConnectorFactory.getActiveLiveConnectors()) {
             if (mustLogin || !conn.isLoggedIn()) {
-                new Thread() {
+                RxUtils.networkScheduler.createWorker().schedule(new Action0() {
                     @Override
-                    public void run() {
+                    public void call() {
                         if (mustLogin) {
                             // Properly log out from geocaching.com
                             conn.logout();
@@ -237,7 +238,7 @@ public class MainActivity extends AbstractActionBarActivity {
                         conn.login(firstLoginHandler, MainActivity.this);
                         updateUserInfoHandler.sendEmptyMessage(-1);
                     }
-                }.start();
+                });
             }
         }
     }
