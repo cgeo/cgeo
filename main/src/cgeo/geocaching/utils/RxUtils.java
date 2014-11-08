@@ -8,6 +8,8 @@ import rx.Scheduler.Worker;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func0;
 import rx.functions.Func1;
 import rx.observables.BlockingObservable;
 import rx.observers.Subscribers;
@@ -24,6 +26,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class RxUtils {
 
@@ -148,6 +151,22 @@ public class RxUtils {
                 };
             }
         };
+    }
+
+    public static<T> Observable<T> rememberLast(final Observable<T> observable) {
+        final AtomicReference<T> lastValue = new AtomicReference<>(null);
+        return observable.doOnNext(new Action1<T>() {
+            @Override
+            public void call(final T value) {
+                lastValue.set(value);
+            }
+        }).startWith(Observable.defer(new Func0<Observable<T>>() {
+            @Override
+            public Observable<T> call() {
+                final T last = lastValue.get();
+                return last != null ? Observable.just(last) : Observable.<T>empty();
+            }
+        })).replay(1).refCount();
     }
 
 }

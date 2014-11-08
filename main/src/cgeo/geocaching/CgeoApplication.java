@@ -101,7 +101,7 @@ public class CgeoApplication extends Application {
         gpsStatusObservable = GpsStatusProvider.create(this).replay(1).refCount();
 
         // Attempt to acquire an initial location before any real activity happens.
-        geoDataObservableLowPower.subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe(rememberGeodataAction);
+        geoDataObservableLowPower.subscribeOn(RxUtils.looperCallbacksScheduler).first().subscribe();
     }
 
     public void setupGeoDataObservables(final boolean useGooglePlayServices, final boolean useLowPowerLocation) {
@@ -113,7 +113,7 @@ public class CgeoApplication extends Application {
                 geoDataObservableLowPower = geoDataObservable;
             }
         } else {
-            geoDataObservable = GeoDataProvider.create(this).doOnNext(rememberGeodataAction).replay(1).refCount();
+            geoDataObservable = RxUtils.rememberLast(GeoDataProvider.create(this).doOnNext(rememberGeodataAction));
             geoDataObservableLowPower = geoDataObservable;
         }
     }
