@@ -122,18 +122,18 @@ public class RxUtils {
                     }
 
                     @Override
-                    public void onError(final Throwable e) {
+                    public void onError(final Throwable throwable) {
                         if (!done) {
-                            subscriber.onError(e);
+                            subscriber.onError(throwable);
                         }
                     }
 
                     @Override
-                    public void onNext(final T t) {
-                        subscriber.onNext(t);
+                    public void onNext(final T value) {
+                        subscriber.onNext(value);
                         boolean shouldEnd = false;
                         try {
-                            shouldEnd = predicate.call(t);
+                            shouldEnd = predicate.call(value);
                         } catch (final Throwable e) {
                             done = true;
                             subscriber.onError(e);
