@@ -191,7 +191,7 @@ public class GCLogin extends AbstractLogin {
             setActualCachesFound(cachesCount);
             Settings.setGCMemberStatus(TextUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, null));
             if (page.contains(GCConstants.MEMBER_STATUS_RENEW)) {
-                Settings.setGCMemberStatus(GCConstants.MEMBER_STATUS_PM);
+                Settings.setGCMemberStatus(GCConstants.MEMBER_STATUS_PREMIUM);
             }
             return true;
         }
@@ -246,7 +246,7 @@ public class GCLogin extends AbstractLogin {
 
             Settings.setGCMemberStatus(TextUtils.getMatch(profile, GCConstants.PATTERN_MEMBER_STATUS, true, null));
             if (profile.contains(GCConstants.MEMBER_STATUS_RENEW)) {
-                Settings.setGCMemberStatus(GCConstants.MEMBER_STATUS_PM);
+                Settings.setGCMemberStatus(GCConstants.MEMBER_STATUS_PREMIUM);
             }
 
             setActualCachesFound(Integer.parseInt(removeDotAndComma(TextUtils.getMatch(profile, GCConstants.PATTERN_CACHES_FOUND, true, "-1"))));

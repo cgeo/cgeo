@@ -71,7 +71,8 @@ public final class GCConstants {
     public static final Pattern PATTERN_LOGIN_NAME = Pattern.compile("\"SignedInProfileLink\">(.*?)</a>");
     public static final Pattern PATTERN_MEMBER_STATUS = Pattern.compile("<span id=\"ctl00_litPMLevel\">([^<]+)</span>");
     public static final String MEMBER_STATUS_RENEW = "<a id=\"ctl00_hlRenew";
-    public static final String MEMBER_STATUS_PM = "Premium Member";
+    public static final String MEMBER_STATUS_PREMIUM = "Premium Member";
+    public static final String MEMBER_STATUS_CHARTER = "Charter Member";
     /** Use replaceAll("[,.]","") on the resulting string before converting to an int */
     public static final Pattern PATTERN_CACHES_FOUND = Pattern.compile("<strong[^>]*>.*?([\\d,.]+) Caches? Found", Pattern.DOTALL);
     public static final Pattern PATTERN_AVATAR_IMAGE_PROFILE_PAGE = Pattern.compile("src=\"(https?://(imgcdn\\.geocaching\\.com|[^>\"]+\\.cloudfront\\.net)/avatar/[0-9a-f-]+\\.jpg)\"[^>]*alt=\"");
