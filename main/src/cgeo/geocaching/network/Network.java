@@ -112,12 +112,12 @@ public abstract class Network {
      */
     @Nullable
     public static HttpResponse postJsonRequest(final String uri, final ObjectNode json) {
-        HttpPost request = new HttpPost(uri);
+        final HttpPost request = new HttpPost(uri);
         request.addHeader("Content-Type", "application/json; charset=utf-8");
         if (json != null) {
             try {
                 request.setEntity(new StringEntity(json.toString(), CharEncoding.UTF_8));
-            } catch (UnsupportedEncodingException e) {
+            } catch (final UnsupportedEncodingException e) {
                 Log.e("postJsonRequest:JSON Entity: UnsupportedEncodingException", e);
                 return null;
             }
@@ -232,7 +232,7 @@ public abstract class Network {
         final long before = System.currentTimeMillis();
         try {
             final HttpResponse response = client.execute(request);
-            int status = response.getStatusLine().getStatusCode();
+            final int status = response.getStatusLine().getStatusCode();
             if (status == 200) {
                 Log.d(status + formatTimeSpan(before) + reqLogStr);
             } else {
@@ -387,11 +387,11 @@ public abstract class Network {
     }
 
     @Nullable
-    private static String getResponseDataNoError(final HttpResponse response, boolean replaceWhitespace) {
+    private static String getResponseDataNoError(final HttpResponse response, final boolean replaceWhitespace) {
         try {
-            String data = EntityUtils.toString(response.getEntity(), CharEncoding.UTF_8);
+            final String data = EntityUtils.toString(response.getEntity(), CharEncoding.UTF_8);
             return replaceWhitespace ? TextUtils.replaceWhitespace(data) : data;
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Log.e("getResponseData", e);
             return null;
         }
@@ -424,7 +424,7 @@ public abstract class Network {
      * @return the body if the response comes from a successful HTTP request, <code>null</code> otherwise
      */
     @Nullable
-    public static String getResponseData(@Nullable final HttpResponse response, boolean replaceWhitespace) {
+    public static String getResponseData(@Nullable final HttpResponse response, final boolean replaceWhitespace) {
         if (!isSuccess(response)) {
             return null;
         }
@@ -433,7 +433,7 @@ public abstract class Network {
     }
 
     @Nullable
-    public static String rfc3986URLEncode(String text) {
+    public static String rfc3986URLEncode(final String text) {
         final String encoded = encode(text);
         return encoded != null ? StringUtils.replace(encoded.replace("+", "%20"), "%7E", "~") : null;
     }
@@ -442,7 +442,7 @@ public abstract class Network {
     public static String decode(final String text) {
         try {
             return URLDecoder.decode(text, CharEncoding.UTF_8);
-        } catch (UnsupportedEncodingException e) {
+        } catch (final UnsupportedEncodingException e) {
             Log.e("Network.decode", e);
         }
         return null;
@@ -452,18 +452,19 @@ public abstract class Network {
     public static String encode(final String text) {
         try {
             return URLEncoder.encode(text, CharEncoding.UTF_8);
-        } catch (UnsupportedEncodingException e) {
+        } catch (final UnsupportedEncodingException e) {
             Log.e("Network.encode", e);
         }
         return null;
     }
+
+    private static ConnectivityManager connectivityManager = null;
 
     /**
      * Checks if the device has network connection.
      *
      * @return <code>true</code> if the device is connected to the network.
      */
-    private static ConnectivityManager connectivityManager = null;
     public static boolean isNetworkConnected() {
         if (connectivityManager == null) {
             // Concurrent assignment would not hurt
