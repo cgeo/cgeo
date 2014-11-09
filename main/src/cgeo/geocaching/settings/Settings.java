@@ -332,8 +332,9 @@ public class Settings {
     }
 
     public static boolean isGCPremiumMember() {
-        // Basic Member, Premium Member, ???
-        return GCConstants.MEMBER_STATUS_PM.equalsIgnoreCase(Settings.getGCMemberStatus());
+        final String memberStatus = Settings.getGCMemberStatus();
+        return StringUtils.equalsIgnoreCase(memberStatus, GCConstants.MEMBER_STATUS_PREMIUM) ||
+                StringUtils.equalsIgnoreCase(memberStatus, GCConstants.MEMBER_STATUS_CHARTER);
     }
 
     public static String getGCMemberStatus() {

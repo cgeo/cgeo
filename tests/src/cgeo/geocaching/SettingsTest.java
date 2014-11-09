@@ -2,7 +2,6 @@ package cgeo.geocaching;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.settings.Settings;
 
@@ -29,7 +28,7 @@ public class SettingsTest extends ActivityInstrumentationTestCase2<MainActivity>
 
     public static void testSettings() {
         // unfortunately, several other tests depend on being a premium member and will fail if run by a basic member
-        assertThat(Settings.getGCMemberStatus()).isEqualTo(GCConstants.MEMBER_STATUS_PM);
+        assertThat(Settings.isGCPremiumMember()).isTrue();
     }
 
     public static void testDeviceHasNormalLogin() {

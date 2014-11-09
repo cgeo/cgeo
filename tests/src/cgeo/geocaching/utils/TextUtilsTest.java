@@ -14,7 +14,7 @@ public class TextUtilsTest extends AndroidTestCase {
     public static void testRegEx() {
         final String page = MockedCache.readCachePage("GC2CJPF");
         assertThat(TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???")).isEqualTo(GCConstantsTest.MOCK_LOGIN_NAME);
-        assertThat(page.contains("id=\"ctl00_hlRenew\"") || GCConstants.MEMBER_STATUS_PM.equals(TextUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, "???"))).isTrue();
+        assertThat(page.contains("id=\"ctl00_hlRenew\"") || GCConstants.MEMBER_STATUS_PREMIUM.equals(TextUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, "???"))).isTrue();
     }
 
     public static void testReplaceWhitespaces() {
