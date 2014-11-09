@@ -21,10 +21,8 @@ public class SettingsTest extends ActivityInstrumentationTestCase2<MainActivity>
      * this should work fine without an exception (once there was an exception because of the empty map file string)
      */
     public static void testSettingsException() {
-        final String mapFile = Settings.getMapFile();
         // We just want to ensure that it does not throw any exception but we do not know anything about the result
-        MapsforgeMapProvider.isValidMapFile(mapFile);
-        assertThat(true).isTrue();
+        MapsforgeMapProvider.isValidMapFile(Settings.getMapFile());
     }
 
     public static void testSettings() {
