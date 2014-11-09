@@ -14,6 +14,7 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.GpsStatusProvider;
 import cgeo.geocaching.sensors.GpsStatusProvider.Status;
@@ -45,12 +46,15 @@ import rx.functions.Action1;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.SearchManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -94,6 +98,7 @@ public class MainActivity extends AbstractActionBarActivity {
     private int countBubbleCnt = 0;
     private Geopoint addCoords = null;
     private boolean initialized = false;
+    private ConnectivityChangeReceiver connectivityChangeReceiver;
 
     private final UpdateLocation locationUpdater = new UpdateLocation();
 
@@ -125,6 +130,19 @@ public class MainActivity extends AbstractActionBarActivity {
                 userInfo.append(conn.getLoginStatusString());
 
                 connectorInfo.setText(userInfo);
+            }
+        }
+    };
+
+    private final class ConnectivityChangeReceiver extends BroadcastReceiver {
+        private boolean isConnected = Network.isNetworkConnected();
+
+        @Override
+        public void onReceive(final Context context, final Intent intent) {
+            final boolean wasConnected = isConnected;
+            isConnected = Network.isNetworkConnected();
+            if (isConnected && !wasConnected) {
+                startBackgroundLogin();
             }
         }
     };
@@ -219,6 +237,9 @@ public class MainActivity extends AbstractActionBarActivity {
         }
         startBackgroundLogin();
         init();
+
+        connectivityChangeReceiver = new ConnectivityChangeReceiver();
+        registerReceiver(connectivityChangeReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
 
     private void startBackgroundLogin() {
@@ -260,6 +281,7 @@ public class MainActivity extends AbstractActionBarActivity {
     @Override
     public void onPause() {
         initialized = false;
+        unregisterReceiver(connectivityChangeReceiver);
         super.onPause();
     }
 
