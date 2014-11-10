@@ -1,4 +1,4 @@
-package cgeo.geocaching.enumerations;
+package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.R;
 

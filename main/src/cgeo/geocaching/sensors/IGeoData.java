@@ -1,6 +1,5 @@
 package cgeo.geocaching.sensors;
 
-import cgeo.geocaching.enumerations.LocationProviderType;
 import cgeo.geocaching.location.Geopoint;
 
 import android.location.Location;
