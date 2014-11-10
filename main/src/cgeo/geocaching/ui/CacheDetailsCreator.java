@@ -4,6 +4,7 @@ import butterknife.ButterKnife;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
+import cgeo.geocaching.ICoordinates;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -127,6 +128,13 @@ public final class CacheDetailsCreator {
         return visited != 0 ? " (" + Formatter.formatShortDate(visited) + ")" : "";
     }
 
+    private static Float distanceNonBlocking(final ICoordinates target) {
+        if (target.getCoords() == null) {
+            return null;
+        }
+        return CgeoApplication.getInstance().currentGeo().getCoords().distanceTo(target);
+    }
+
     public void addRating(final Geocache cache) {
         if (cache.getRating() > 0) {
             final RelativeLayout itemLayout = addStars(R.string.cache_rating, cache.getRating());
@@ -157,7 +165,7 @@ public final class CacheDetailsCreator {
     }
 
     public void addDistance(final Geocache cache, final TextView cacheDistanceView) {
-        Float distance = CgeoApplication.getInstance().distanceNonBlocking(cache);
+        Float distance = distanceNonBlocking(cache);
         if (distance == null) {
             if (cache.getDistance() != null) {
                 distance = cache.getDistance();
@@ -176,7 +184,7 @@ public final class CacheDetailsCreator {
     }
 
     public void addDistance(final Waypoint wpt, final TextView waypointDistanceView) {
-        final Float distance = CgeoApplication.getInstance().distanceNonBlocking(wpt);
+        final Float distance = distanceNonBlocking(wpt);
         String text = "--";
         if (distance != null) {
             text = Units.getDistanceFromKilometers(distance);

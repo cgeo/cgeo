@@ -168,13 +168,6 @@ public class CgeoApplication extends Application {
         return hasValidLocation;
     }
 
-    public Float distanceNonBlocking(final ICoordinates target) {
-        if (target.getCoords() == null) {
-            return null;
-        }
-        return currentGeo.getCoords().distanceTo(target);
-    }
-
     public float currentDirection() {
         return currentDirection;
     }
