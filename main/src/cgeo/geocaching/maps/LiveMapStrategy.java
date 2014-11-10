@@ -1,4 +1,4 @@
-package cgeo.geocaching.enumerations;
+package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
