@@ -2,6 +2,9 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release:</b>\n
+    · Fix: Charter Members not recognized as Premium Members\n
+    · Fix: \n
     <b>2014.11.04:</b>\n
     · Fix: App crashing while logging in to gc.com in rare cases\n
     · Fix: Improved error message on login error on gc.com\n
