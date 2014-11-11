@@ -697,7 +697,7 @@
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Open in browser</string>
     <string name="cache_menu_visit">Log Visit</string>
-    <string name="cache_menu_visit_offline">Log Visit offline</string>
+    <string name="cache_menu_visit_offline">One click offline log</string>
     <string name="cache_menu_spoilers">Spoiler images</string>
     <string name="cache_menu_around">Caches around</string>
     <string name="cache_menu_event">Add to calendar</string>
