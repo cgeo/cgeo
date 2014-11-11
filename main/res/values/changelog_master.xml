@@ -5,6 +5,8 @@
     <b>Next feature release:</b>\n
     · New: Google Play Services used for location (less battery usage)\n
     · New: Optional low power GPS mode for parts of the app which don\'t require high precision\n
+    · New: Detect offline state and delay login until network is available\n
+    · New: In app search via Google Now (not available for all languages)\n
     · New: Confirmation dialog for dangerous log types\n
     · New: Store found date of found caches when importing via GPX\n
     · New: Select a waypoint of a cache as target directly from compass\n
