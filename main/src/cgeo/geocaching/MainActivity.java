@@ -145,7 +145,7 @@ public class MainActivity extends AbstractActionBarActivity {
                 startBackgroundLogin();
             }
         }
-    };
+    }
 
     private static String formatAddress(final Address address) {
         final ArrayList<String> addressParts = new ArrayList<>();
