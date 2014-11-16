@@ -62,6 +62,8 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     @InjectView(R.id.trackable) protected AutoCompleteTextView trackableEditText;
     @InjectView(R.id.display_trackable) protected Button buttonSearchTrackable;
 
+    private static final String GOOGLE_NOW_SEARCH_ACTION = "com.google.android.gms.actions.SEARCH_ACTION";
+
     @Override
     public final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,8 +83,8 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
             return;
         }
 
-        // search query
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+        // search query, from search toolbar or from google now
+        if (Intent.ACTION_SEARCH.equals(intent.getAction()) || GOOGLE_NOW_SEARCH_ACTION.equals(intent.getAction())) {
             hideKeyboard();
             final String query = intent.getStringExtra(SearchManager.QUERY);
             final boolean keywordSearch = intent.getBooleanExtra(Intents.EXTRA_KEYWORD_SEARCH, true);
