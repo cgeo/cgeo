@@ -18,6 +18,7 @@
     <issue id="CommitPrefEdits" severity="ignore" />
     <issue id="CommitTransaction" severity="ignore" />
     <issue id="ContentDescription" severity="ignore" />
+    <issue id="CustomViewStyleable" severity="ignore" />
     <issue id="CutPasteId" severity="ignore" />
     <issue id="DalvikOverride" severity="ignore" />
     <issue id="DefaultLocale" severity="ignore" />
