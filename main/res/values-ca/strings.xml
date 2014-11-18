@@ -80,6 +80,7 @@
   <string name="log_clear">Esborra</string>
   <string name="log_post_not_possible">S\'està carregant la pàgina del registre…</string>
   <string name="log_add">Afegeix</string>
+  <string name="log_repeat">Repeteix l\'últim registre</string>
   <string name="log_no_rating">Sense puntuació</string>
   <string name="log_stars_1_description">Pobre</string>
   <string name="log_stars_15_description">Bastant pobre</string>
@@ -298,6 +299,7 @@
   <string name="caches_filter_popularity_ratio">Preferits [%]</string>
   <string name="caches_removing_from_history">S\'està eliminant de l\'historial…</string>
   <string name="caches_clear_offlinelogs">Neteja els registres fora de línea</string>
+  <string name="caches_clear_offlinelogs_message">Voleu esborrar els registres fora de línia?</string>
   <string name="caches_clear_offlinelogs_progress">S\'estan netejant els registres fora línia</string>
   <string name="list_menu_create">Crea una llista nova</string>
   <string name="list_menu_drop">Elimina la llista actual</string>
@@ -764,6 +766,7 @@
   <string name="search_clear_history">Esborra l\'historial</string>
   <string name="search_history_cleared">S\'ha esborrat l\'historial</string>
   <string name="waypoint_coordinate_formats_plain">Senzill</string>
+  <string name="from_clipboard">Des del porta-retalls</string>
   <string name="visit_tweet">Envia aquest \"trobat\" al Twitter</string>
   <string name="map_map">Mapa</string>
   <string name="map_live">Mapa en viu</string>
@@ -868,6 +871,7 @@
   <string name="helper_contacts_description">Us permet obrir un contacte (de la llibreta de contactes) directament des d\'una entrada del registre, així podeu demanar ajuda als amics més fàcilment.</string>
   <string name="helper_sendtocgeo_description">Send to c:geo és una extensió del navegador <strong>per al vostre ordinador</strong>. Quan navegueu per geocaching.com podreu enviar catxés des del navegador directament al vostre telèfon amb un clic de botó.</string>
   <string name="helper_locus_title">Locus</string>
+  <string name="helper_locus_description">Aplicació de navegació a l\'aire lliure per al vostre telèfon o tauleta. Podeu veure mapes topogràfics fora de línia, seguir una ruta, trobar geocatxés, utilitzar una guia de veu i molt més.</string>
   <string name="helper_gpsstatus_title">Estat del GPS</string>
   <string name="helper_gpsstatus_description">Podeu utilitzar el radar en aquesta aplicació conjuntament amb el c:geo. També ofereix moltes altres informacions relacionades amb el GPS.</string>
   <string name="helper_bluetoothgps_title">GPS Bluetooth</string>
@@ -1170,6 +1174,7 @@
     <item quantity="one">%s preferit</item>
     <item quantity="other">%s preferits</item>
   </plurals>
+  <string name="more_than_percent_favorite_points">&gt; %d%% preferits</string>
   <string name="cgeo_shortcut">Drecera del c:geo</string>
   <string name="create_shortcut">Crea una drecera</string>
   <string name="send">Envia</string>
