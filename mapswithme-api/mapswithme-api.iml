@@ -13,6 +13,7 @@
     <facet type="android" name="Android">
       <configuration>
         <option name="LIBRARY_PROJECT" value="true" />
+        <option name="UPDATE_PROPERTY_FILES" value="false" />
       </configuration>
     </facet>
   </component>
@@ -26,4 +27,3 @@
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
-
