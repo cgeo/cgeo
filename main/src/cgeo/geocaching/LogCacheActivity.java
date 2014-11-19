@@ -424,7 +424,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     // update geocache in DB
                     if (typeSelected.isFoundLog()) {
                         cache.setFound(true);
-                        cache.setVisitedDate(new Date().getTime());
+                        cache.setVisitedDate(date.getTimeInMillis());
                     }
                     DataStore.saveChangedCache(cache);
 
