@@ -29,6 +29,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
 import rx.android.observables.AndroidObservable;
+import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.functions.Func1;
@@ -879,15 +880,15 @@ public class DataStore {
 
             // Use a background thread for the real removal to avoid keeping the database locked
             // if we are called from within a transaction.
-            new Thread(new Runnable() {
+            Schedulers.io().createWorker().schedule(new Action0() {
                 @Override
-                public void run() {
+                public void call() {
                     for (final File dir : toRemove) {
                         Log.i("Removing obsolete cache directory for " + dir.getName());
                         LocalStorage.deleteDirectory(dir);
                     }
                 }
-            }).start();
+            });
         }
     }
 
