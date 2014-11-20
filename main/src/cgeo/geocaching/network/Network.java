@@ -174,7 +174,7 @@ public abstract class Network {
     @Nullable
     private static HttpResponse request(final String method, final String uri,
                                         @Nullable final Parameters params, @Nullable final Parameters headers, @Nullable final File cacheFile) {
-        HttpRequestBase request;
+        final HttpRequestBase request;
         if (method.equals("GET")) {
             final String fullUri = params == null ? uri : Uri.parse(uri).buildUpon().encodedQuery(params.toString()).build().toString();
             request = new HttpGet(fullUri);
@@ -377,7 +377,6 @@ public abstract class Network {
         if (!isSuccess(response)) {
             return null;
         }
-        assert(response != null);
         final HttpEntity entity = response.getEntity();
         if (entity == null) {
             return null;
