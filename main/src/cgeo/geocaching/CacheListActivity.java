@@ -898,13 +898,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 CacheDetailActivity.startActivity(this, cache.getGeocode(), cache.getName());
                 break;
             case R.id.menu_drop_cache:
-                final int lastListPosition = CacheListActivity.this.getListView().getFirstVisiblePosition();
+                final int lastListPosition = getListView().getFirstVisiblePosition();
                 cache.drop(new Handler() {
                     @Override
                     public void handleMessage(final Message msg) {
                         adapter.notifyDataSetChanged();
                         refreshCurrentList();
-                        CacheListActivity.this.getListView().setSelection(lastListPosition);
+                        getListView().setSelection(lastListPosition);
                     }
                 });
                 break;
@@ -1112,7 +1112,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         showProgress(false);
 
         final int etaTime = ((detailTotal * 25) / 60);
-        String message;
+        final String message;
         if (etaTime < 1) {
             message = res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm);
         } else {
@@ -1181,7 +1181,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             @Override
             public void onClick(final DialogInterface dialog, final int id) {
                 final List<Geocache> selected = adapter.getCheckedOrAllCaches();
-                final int lastListPosition = CacheListActivity.this.getListView().getFirstVisiblePosition();
+                final int lastListPosition = getListView().getFirstVisiblePosition();
                 new DropDetailsTask(lastListPosition).execute(selected.toArray(new Geocache[selected.size()]));
                 dialog.cancel();
             }
@@ -1319,7 +1319,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             adapter.setSelectMode(false);
             refreshCurrentList();
             replaceCacheListFromSearch();
-            CacheListActivity.this.getListView().setSelection(lastListPosition);
+            getListView().setSelection(lastListPosition);
         }
 
     }
@@ -1614,7 +1614,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     title = list.title;
                 }
 
-                loader = new OfflineGeocacheListLoader(this.getBaseContext(), coords, listId);
+                loader = new OfflineGeocacheListLoader(getBaseContext(), coords, listId);
 
                 break;
             case HISTORY:
