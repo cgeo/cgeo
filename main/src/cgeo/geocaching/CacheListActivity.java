@@ -40,8 +40,8 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.DownloadProgress;
-import cgeo.geocaching.network.Send2CgeoDownloader;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.network.Send2CgeoDownloader;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
@@ -68,9 +68,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
 import rx.Subscription;
 import rx.functions.Action0;
 import rx.functions.Action1;
+import rx.functions.Func1;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -107,6 +111,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CacheListActivity extends AbstractListActivity implements FilteredActivity, LoaderManager.LoaderCallbacks<SearchResult> {
 
@@ -125,7 +130,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private final Progress progress = new Progress();
     private String title = "";
     private int detailTotal = 0;
-    private int detailProgress = 0;
+    private AtomicInteger detailProgress = new AtomicInteger(0);
     private long detailProgressTime = 0L;
     private int listId = StoredList.TEMPORARY_LIST.id; // Only meaningful for the OFFLINE type
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
@@ -281,10 +286,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
                 adapter.notifyDataSetChanged();
 
+                final int dp = detailProgress.get();
                 final int secondsElapsed = (int) ((System.currentTimeMillis() - detailProgressTime) / 1000);
-                final int minutesRemaining = ((detailTotal - detailProgress) * secondsElapsed / ((detailProgress > 0) ? detailProgress : 1) / 60);
+                final int minutesRemaining = ((detailTotal - dp) * secondsElapsed / ((dp > 0) ? dp : 1) / 60);
 
-                progress.setProgress(detailProgress);
+                progress.setProgress(dp);
                 if (minutesRemaining < 1) {
                     progress.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
                 } else {
@@ -1101,7 +1107,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void refreshStoredInternal(final List<Geocache> caches) {
-        detailProgress = 0;
+        detailProgress.set(0);
 
         showProgress(false);
 
@@ -1157,7 +1163,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return;
         }
 
-        detailProgress = 0;
+        detailProgress.set(0);
         showProgress(false);
         final DownloadFromWebHandler downloadFromWebHandler = new DownloadFromWebHandler();
         progress.show(this, null, res.getString(R.string.web_import_waiting), true, downloadFromWebHandler.cancelMessage());
@@ -1185,27 +1191,30 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      */
 
     private void loadDetails(final CancellableHandler handler, final List<Geocache> caches) {
-        RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+        final List<Geocache> allCaches = Settings.isStoreOfflineMaps() ?
+                ListUtils.union(ListUtils.selectRejected(caches, Geocache.hasStaticMap),
+                        ListUtils.select(caches, Geocache.hasStaticMap)) :
+                caches;
+        final Observable<Geocache> loaded = Observable.from(allCaches).flatMap(new Func1<Geocache, Observable<Geocache>>() {
+            @Override
+            public Observable<Geocache> call(final Geocache cache) {
+                return Observable.create(new OnSubscribe<Geocache>() {
+                    @Override
+                    public void call(final Subscriber<? super Geocache> subscriber) {
+                        cache.refreshSynchronous(null);
+                        detailProgress.incrementAndGet();
+                        handler.obtainMessage(DownloadProgress.MSG_LOADED, cache).sendToTarget();
+                        subscriber.onCompleted();
+                    }
+                }).subscribeOn(RxUtils.networkScheduler);
+            }
+        }).doOnCompleted(new Action0() {
             @Override
             public void call() {
-                final List<Geocache> allCaches = Settings.isStoreOfflineMaps() ?
-                        ListUtils.union(ListUtils.selectRejected(caches, Geocache.hasStaticMap),
-                                ListUtils.select(caches, Geocache.hasStaticMap)) :
-                        caches;
-
-                for (final Geocache cache : allCaches) {
-                    if (handler.isCancelled()) {
-                        break;
-                    }
-                    detailProgress++;
-                    cache.refreshSynchronous(null);
-                    handler.obtainMessage(DownloadProgress.MSG_LOADED, cache).sendToTarget();
-                }
-
                 handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
             }
-
         });
+        handler.unsubscribeIfCancelled(loaded.subscribe());
     }
 
     private class DropDetailsTask extends AsyncTaskWithProgress<Geocache, Void> {
