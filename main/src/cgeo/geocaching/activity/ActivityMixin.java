@@ -111,7 +111,7 @@ public final class ActivityMixin {
             window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
         if (Settings.useHardwareAcceleration()) {
-            window.setFlags(LayoutParams.FLAG_HARDWARE_ACCELERATED, LayoutParams.FLAG_HARDWARE_ACCELERATED);
+            window.addFlags(LayoutParams.FLAG_HARDWARE_ACCELERATED);
         }
     }
 
