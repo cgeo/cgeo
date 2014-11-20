@@ -17,7 +17,7 @@ public abstract class CancellableHandler extends Handler {
     public static final int DONE = -1000;
     protected static final int UPDATE_LOAD_PROGRESS_DETAIL = 42186;
     private volatile boolean cancelled = false;
-    private static CompositeSubscription subscriptions = new CompositeSubscription();
+    private final CompositeSubscription subscriptions = new CompositeSubscription();
 
     private static class CancelHolder {
         final Object payload;
