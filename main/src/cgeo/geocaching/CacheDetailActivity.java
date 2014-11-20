@@ -470,7 +470,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 } else {
                     final ProgressDialog progressDialog = ProgressDialog.show(this, getString(R.string.cache), getString(R.string.waypoint_reset), true);
                     final HandlerResetCoordinates handler = new HandlerResetCoordinates(this, progressDialog, false);
-                    new ResetCoordsThread(cache, handler, selectedWaypoint, true, false, progressDialog).start();
+                    resetCoords(cache, handler, selectedWaypoint, true, false, progressDialog);
                 }
                 return true;
             case R.id.menu_calendar:
@@ -2021,13 +2021,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 dialog.dismiss();
                 final ProgressDialog progressDialog = ProgressDialog.show(CacheDetailActivity.this, getString(R.string.cache), getString(R.string.waypoint_reset), true);
                 final HandlerResetCoordinates handler = new HandlerResetCoordinates(CacheDetailActivity.this, progressDialog, which == 1);
-                new ResetCoordsThread(cache, handler, wpt, which == 0 || which == 1, which == 1, progressDialog).start();
+                resetCoords(cache, handler, wpt, which == 0 || which == 1, which == 1, progressDialog);
             }
         });
         return builder.create();
     }
 
     private static class HandlerResetCoordinates extends WeakReferenceHandler<CacheDetailActivity> {
+        public static final int LOCAL = 0;
+        public static final int ON_WEBSITE = 1;
+
         private boolean remoteFinished = false;
         private boolean localFinished = false;
         private final ProgressDialog progressDialog;
@@ -2041,7 +2044,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         @Override
         public void handleMessage(final Message msg) {
-            if (msg.what == ResetCoordsThread.LOCAL) {
+            if (msg.what == LOCAL) {
                 localFinished = true;
             } else {
                 remoteFinished = true;
@@ -2058,71 +2061,53 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     }
 
-    private class ResetCoordsThread extends Thread {
-
-        private final Geocache cache;
-        private final Handler handler;
-        private final boolean local;
-        private final boolean remote;
-        private final Waypoint wpt;
-        private final ProgressDialog progress;
-        public static final int LOCAL = 0;
-        public static final int ON_WEBSITE = 1;
-
-        public ResetCoordsThread(final Geocache cache, final Handler handler, final Waypoint wpt, final boolean local, final boolean remote, final ProgressDialog progress) {
-            this.cache = cache;
-            this.handler = handler;
-            this.local = local;
-            this.remote = remote;
-            this.wpt = wpt;
-            this.progress = progress;
-        }
-
-        @Override
-        public void run() {
-
-            if (local) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        progress.setMessage(res.getString(R.string.waypoint_reset_cache_coords));
-                    }
-                });
-                cache.setCoords(wpt.getCoords());
-                cache.setUserModifiedCoords(false);
-                cache.deleteWaypointForce(wpt);
-                DataStore.saveChangedCache(cache);
-                handler.sendEmptyMessage(LOCAL);
-            }
-
-            final IConnector con = ConnectorFactory.getConnector(cache);
-            if (remote && con.supportsOwnCoordinates()) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        progress.setMessage(res.getString(R.string.waypoint_coordinates_being_reset_on_website));
-                    }
-                });
-
-                final boolean result = con.deleteModifiedCoordinates(cache);
-
-                runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        if (result) {
-                            showToast(getString(R.string.waypoint_coordinates_has_been_reset_on_website));
-                        } else {
-                            showToast(getString(R.string.waypoint_coordinates_upload_error));
+    private void resetCoords(final Geocache cache, final Handler handler, final Waypoint wpt, final boolean local, final boolean remote, final ProgressDialog progress) {
+        RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+            @Override
+            public void call() {
+                if (local) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            progress.setMessage(res.getString(R.string.waypoint_reset_cache_coords));
                         }
-                        handler.sendEmptyMessage(ON_WEBSITE);
-                        notifyDataSetChanged();
-                    }
+                    });
+                    cache.setCoords(wpt.getCoords());
+                    cache.setUserModifiedCoords(false);
+                    cache.deleteWaypointForce(wpt);
+                    DataStore.saveChangedCache(cache);
+                    handler.sendEmptyMessage(HandlerResetCoordinates.LOCAL);
+                }
 
-                });
+                final IConnector con = ConnectorFactory.getConnector(cache);
+                if (remote && con.supportsOwnCoordinates()) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            progress.setMessage(res.getString(R.string.waypoint_coordinates_being_reset_on_website));
+                        }
+                    });
 
+                    final boolean result = con.deleteModifiedCoordinates(cache);
+
+                    runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            if (result) {
+                                showToast(getString(R.string.waypoint_coordinates_has_been_reset_on_website));
+                            } else {
+                                showToast(getString(R.string.waypoint_coordinates_upload_error));
+                            }
+                            handler.sendEmptyMessage(HandlerResetCoordinates.ON_WEBSITE);
+                            notifyDataSetChanged();
+                        }
+
+                    });
+
+                }
             }
-        }
+        });
     }
 
     private static class UploadPersonalNoteThread extends Thread {
