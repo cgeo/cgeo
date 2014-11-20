@@ -43,7 +43,6 @@ import cgeo.geocaching.ui.OwnerActionsClickListener;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.logs.CacheLogsViewCreator;
-import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
@@ -958,8 +957,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          */
         private LinearLayout detailsList;
 
-        private Thread watchlistThread;
-
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
             if (cache == null) {
@@ -1116,164 +1113,133 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         /**
          * Abstract Listener for add / remove buttons for watchlist
          */
-        private abstract class AbstractWatchlistClickListener implements View.OnClickListener {
-            public void doExecute(final int titleId, final int messageId, final Thread thread) {
+        private abstract class AbstractPropertyListener implements View.OnClickListener {
+
+            private final SimpleCancellableHandler handler = new SimpleCancellableHandler(CacheDetailActivity.this, progress) {
+                @Override
+                public void handleRegularMessage(final Message message) {
+                    super.handleRegularMessage(message);
+                    updateWatchlistBox();
+                    updateFavPointBox();
+                }
+            };
+
+            public void doExecute(final int titleId, final int messageId, final Action1<SimpleCancellableHandler> action) {
                 if (progress.isShowing()) {
                     showToast(res.getString(R.string.err_watchlist_still_managing));
                     return;
                 }
                 progress.show(CacheDetailActivity.this, res.getString(titleId), res.getString(messageId), true, null);
-
-                if (watchlistThread != null) {
-                    watchlistThread.interrupt();
-                }
-
-                watchlistThread = thread;
-                watchlistThread.start();
+                RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+                    @Override
+                    public void call() {
+                        action.call(handler);
+                    }
+                });
             }
         }
 
         /**
          * Listener for "add to watchlist" button
          */
-        private class AddToWatchlistClickListener extends AbstractWatchlistClickListener {
+        private class AddToWatchlistClickListener extends AbstractPropertyListener {
             @Override
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_watchlist_add_title,
                         R.string.cache_dialog_watchlist_add_message,
-                        new WatchlistAddThread(new SimpleUpdateHandler(CacheDetailActivity.this, progress)));
+                        new Action1<SimpleCancellableHandler>() {
+                            @Override
+                            public void call(final SimpleCancellableHandler simpleCancellableHandler) {
+                                watchListAdd(simpleCancellableHandler);
+                            }
+                        });
             }
         }
 
         /**
          * Listener for "remove from watchlist" button
          */
-        private class RemoveFromWatchlistClickListener extends AbstractWatchlistClickListener {
+        private class RemoveFromWatchlistClickListener extends AbstractPropertyListener {
             @Override
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_watchlist_remove_title,
                         R.string.cache_dialog_watchlist_remove_message,
-                        new WatchlistRemoveThread(new SimpleUpdateHandler(CacheDetailActivity.this, progress)));
+                        new Action1<SimpleCancellableHandler>() {
+                            @Override
+                            public void call(final SimpleCancellableHandler simpleCancellableHandler) {
+                                watchListRemove(simpleCancellableHandler);
+                            }
+                        });
             }
         }
 
-        /** Thread to add this cache to the watchlist of the user */
-        private class WatchlistAddThread extends Thread {
-            private final Handler handler;
-
-            public WatchlistAddThread(final Handler handler) {
-                this.handler = handler;
-            }
-
-            @Override
-            public void run() {
-                watchlistThread = null;
-                final Message msg;
-                if (ConnectorFactory.getConnector(cache).addToWatchlist(cache)) {
-                    msg = Message.obtain(handler, MESSAGE_SUCCEEDED);
-                } else {
-                    msg = Message.obtain(handler, MESSAGE_FAILED);
-                    final Bundle bundle = new Bundle();
-                    bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, res.getString(R.string.err_watchlist_failed));
-                    msg.setData(bundle);
-                }
-                handler.sendMessage(msg);
+        /** Add this cache to the watchlist of the user */
+        private void watchListAdd(final SimpleCancellableHandler handler) {
+            if (ConnectorFactory.getConnector(cache).addToWatchlist(cache)) {
+                handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
+            } else {
+                handler.sendTextMessage(MESSAGE_FAILED, R.string.err_watchlist_failed);
             }
         }
 
-        /** Thread to remove this cache from the watchlist of the user */
-        private class WatchlistRemoveThread extends Thread {
-            private final Handler handler;
-
-            public WatchlistRemoveThread(final Handler handler) {
-                this.handler = handler;
-            }
-
-            @Override
-            public void run() {
-                watchlistThread = null;
-                final Message msg;
-                if (ConnectorFactory.getConnector(cache).removeFromWatchlist(cache)) {
-                    msg = Message.obtain(handler, MESSAGE_SUCCEEDED);
-                } else {
-                    msg = Message.obtain(handler, MESSAGE_FAILED);
-                    final Bundle bundle = new Bundle();
-                    bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, res.getString(R.string.err_watchlist_failed));
-                    msg.setData(bundle);
-                }
-                handler.sendMessage(msg);
+        /** Remove this cache from the watchlist of the user */
+        private void watchListRemove(final SimpleCancellableHandler handler) {
+            if (ConnectorFactory.getConnector(cache).removeFromWatchlist(cache)) {
+                handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
+            } else {
+                handler.sendTextMessage(MESSAGE_FAILED, R.string.err_watchlist_failed);
             }
         }
 
-        /** Thread to add this cache to the favorite list of the user */
-        private class FavoriteAddThread extends Thread {
-            private final Handler handler;
-
-            public FavoriteAddThread(final Handler handler) {
-                this.handler = handler;
-            }
-
-            @Override
-            public void run() {
-                watchlistThread = null;
-                final Message msg;
-                if (GCConnector.addToFavorites(cache)) {
-                    msg = Message.obtain(handler, MESSAGE_SUCCEEDED);
-                } else {
-                    msg = Message.obtain(handler, MESSAGE_FAILED);
-                    final Bundle bundle = new Bundle();
-                    bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, res.getString(R.string.err_favorite_failed));
-                    msg.setData(bundle);
-                }
-                handler.sendMessage(msg);
+        /** Add this cache to the favorite list of the user */
+        private void favoriteAdd(final SimpleCancellableHandler handler) {
+            if (GCConnector.addToFavorites(cache)) {
+                handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
+            } else {
+                handler.sendTextMessage(MESSAGE_FAILED, R.string.err_favorite_failed);
             }
         }
 
-        /** Thread to remove this cache to the favorite list of the user */
-        private class FavoriteRemoveThread extends Thread {
-            private final Handler handler;
-
-            public FavoriteRemoveThread(final Handler handler) {
-                this.handler = handler;
-            }
-
-            @Override
-            public void run() {
-                watchlistThread = null;
-                final Message msg;
-                if (GCConnector.removeFromFavorites(cache)) {
-                    msg = Message.obtain(handler, MESSAGE_SUCCEEDED);
-                } else {
-                    msg = Message.obtain(handler, MESSAGE_FAILED);
-                    final Bundle bundle = new Bundle();
-                    bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, res.getString(R.string.err_favorite_failed));
-                    msg.setData(bundle);
-                }
-                handler.sendMessage(msg);
+        /** Remove this cache to the favorite list of the user */
+        private void favoriteRemove(final SimpleCancellableHandler handler) {
+            if (GCConnector.removeFromFavorites(cache)) {
+                handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
+            } else {
+                handler.sendTextMessage(MESSAGE_FAILED, R.string.err_favorite_failed);
             }
         }
 
         /**
          * Listener for "add to favorites" button
          */
-        private class FavoriteAddClickListener extends AbstractWatchlistClickListener {
+        private class FavoriteAddClickListener extends AbstractPropertyListener {
             @Override
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_favorite_add_title,
                         R.string.cache_dialog_favorite_add_message,
-                        new FavoriteAddThread(new SimpleUpdateHandler(CacheDetailActivity.this, progress)));
+                        new Action1<SimpleCancellableHandler>() {
+                            @Override
+                            public void call(final SimpleCancellableHandler simpleCancellableHandler) {
+                                favoriteAdd(simpleCancellableHandler);
+                            }
+                        });
             }
         }
 
         /**
          * Listener for "remove from favorites" button
          */
-        private class FavoriteRemoveClickListener extends AbstractWatchlistClickListener {
+        private class FavoriteRemoveClickListener extends AbstractPropertyListener {
             @Override
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_favorite_remove_title,
                         R.string.cache_dialog_favorite_remove_message,
-                        new FavoriteRemoveThread(new SimpleUpdateHandler(CacheDetailActivity.this, progress)));
+                        new Action1<SimpleCancellableHandler>() {
+                            @Override
+                            public void call(final SimpleCancellableHandler simpleCancellableHandler) {
+                                favoriteRemove(simpleCancellableHandler);
+                            }
+                        });
             }
         }
 
@@ -1550,19 +1516,26 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return view;
         }
 
-        Thread currentThread;
-
         private void uploadPersonalNote() {
             final SimpleCancellableHandler myHandler = new SimpleCancellableHandler(CacheDetailActivity.this, progress);
 
             final Message cancelMessage = myHandler.cancelMessage(res.getString(R.string.cache_personal_note_upload_cancelled));
             progress.show(CacheDetailActivity.this, res.getString(R.string.cache_personal_note_uploading), res.getString(R.string.cache_personal_note_uploading), true, cancelMessage);
 
-            if (currentThread != null) {
-                currentThread.interrupt();
-            }
-            currentThread = new UploadPersonalNoteThread(cache, myHandler);
-            currentThread.start();
+            myHandler.unsubscribeIfCancelled(RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+                @Override
+                public void call() {
+                    final IConnector con = ConnectorFactory.getConnector(cache);
+                    if (con.supportsPersonalNote()) {
+                        con.uploadPersonalNote(cache);
+                    }
+                    final Message msg = Message.obtain();
+                    final Bundle bundle = new Bundle();
+                    bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, CgeoApplication.getInstance().getString(R.string.cache_personal_note_upload_done));
+                    msg.setData(bundle);
+                    myHandler.sendMessage(msg);
+                }
+            }));
         }
 
         private void loadLongDescription() {
@@ -2110,29 +2083,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         });
     }
 
-    private static class UploadPersonalNoteThread extends Thread {
-        private Geocache cache = null;
-        private CancellableHandler handler = null;
-
-        public UploadPersonalNoteThread(final Geocache cache, final CancellableHandler handler) {
-            this.cache = cache;
-            this.handler = handler;
-        }
-
-        @Override
-        public void run() {
-            final IConnector con = ConnectorFactory.getConnector(cache);
-            if (con.supportsPersonalNote()) {
-                con.uploadPersonalNote(cache);
-            }
-            final Message msg = Message.obtain();
-            final Bundle bundle = new Bundle();
-            bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, CgeoApplication.getInstance().getString(R.string.cache_personal_note_upload_done));
-            msg.setData(bundle);
-            handler.sendMessage(msg);
-        }
-    }
-
     @Override
     protected String getTitle(final Page page) {
         // show number of waypoints directly in waypoint title
@@ -2284,14 +2234,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
-    private static final class SimpleUpdateHandler extends SimpleHandler {
+    private static final class SimpleUpdateHandler extends SimpleCancellableHandler {
 
         public SimpleUpdateHandler(final CacheDetailActivity activity, final Progress progress) {
             super(activity, progress);
         }
 
         @Override
-        public void handleMessage(final Message msg) {
+        public void handleRegularMessage(final Message msg) {
             if (msg.what == MESSAGE_FAILED) {
                 super.handleMessage(msg);
             } else {
