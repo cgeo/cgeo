@@ -75,6 +75,7 @@ import rx.Subscription;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -791,7 +792,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
                 progress.show(CacheListActivity.this, null, res.getString(R.string.caches_clear_offlinelogs_progress), true, clearOfflineLogsHandler.cancelMessage());
-                new ClearOfflineLogsThread(clearOfflineLogsHandler, adapter.getCheckedOrAllCaches()).start();
+                clearOfflineLogs(clearOfflineLogsHandler, adapter.getCheckedOrAllCaches());
             }
         });
     }
@@ -1241,21 +1242,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     }
 
-    private static class ClearOfflineLogsThread extends Thread {
-
-        final private Handler handler;
-        final private List<Geocache> selected;
-
-        public ClearOfflineLogsThread(final Handler handlerIn, final List<Geocache> selectedCaches) {
-            handler = handlerIn;
-            selected = selectedCaches;
-        }
-
-        @Override
-        public void run() {
-            DataStore.clearLogsOffline(selected);
-            handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
-        }
+    private static void clearOfflineLogs(final Handler handler, final List<Geocache> selectedCaches) {
+        Schedulers.io().createWorker().schedule(new Action0() {
+            @Override
+            public void call() {
+                DataStore.clearLogsOffline(selectedCaches);
+                handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
+            }
+        });
     }
 
     private class MoreCachesListener implements View.OnClickListener {
