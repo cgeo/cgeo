@@ -377,6 +377,7 @@ public abstract class Network {
         if (!isSuccess(response)) {
             return null;
         }
+        assert(response != null);
         final HttpEntity entity = response.getEntity();
         if (entity == null) {
             return null;
