@@ -2934,7 +2934,7 @@ public class DataStore {
         private final static PreparedStatement COUNT_TYPE_LIST = new PreparedStatement("select count(_id) from " + dbTableCaches + " where detailed = 1 and type = ? and reason = ?");
         private final static PreparedStatement COUNT_ALL_TYPES_LIST = new PreparedStatement("select count(_id) from " + dbTableCaches + " where detailed = 1 and reason = ?");
 
-        private static final List<SQLiteStatement> statements = new ArrayList<>();
+        private static final List<PreparedStatement> statements = new ArrayList<>();
 
         private SQLiteStatement statement = null; // initialized lazily
         final String query;
@@ -2951,14 +2951,15 @@ public class DataStore {
             if (statement == null) {
                 init();
                 statement = database.compileStatement(query);
-                statements.add(statement);
+                statements.add(this);
             }
             return statement;
         }
 
         private static void clearPreparedStatements() {
-            for (final SQLiteStatement statement : statements) {
-                statement.close();
+            for (final PreparedStatement preparedStatement : statements) {
+                preparedStatement.statement.close();
+                preparedStatement.statement = null;
             }
             statements.clear();
         }
