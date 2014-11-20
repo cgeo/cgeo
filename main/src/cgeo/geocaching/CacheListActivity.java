@@ -56,6 +56,7 @@ import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.DateUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget.Type;
@@ -67,6 +68,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Subscription;
+import rx.functions.Action0;
 import rx.functions.Action1;
 
 import android.app.Activity;
@@ -267,7 +269,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         refreshSpinnerAdapter();
     }
 
-    private final CancellableHandler loadDetailsHandler = new CancellableHandler() {
+    private class LoadDetailsHandler extends CancellableHandler {
 
         @Override
         public void handleRegularMessage(final Message msg) {
@@ -1110,13 +1112,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             message = res.getString(R.string.caches_downloading) + " " + res.getQuantityString(R.plurals.caches_eta_mins, etaTime, etaTime);
         }
 
+        final LoadDetailsHandler loadDetailsHandler = new LoadDetailsHandler();
         progress.show(this, null, message, ProgressDialog.STYLE_HORIZONTAL, loadDetailsHandler.cancelMessage());
         progress.setMaxProgressAndReset(detailTotal);
 
         detailProgressTime = System.currentTimeMillis();
 
-        final LoadDetailsThread threadDetails = new LoadDetailsThread(loadDetailsHandler, caches);
-        threadDetails.start();
+        loadDetails(loadDetailsHandler, caches);
     }
 
     public void removeFromHistoryCheck() {
@@ -1178,62 +1180,31 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     /**
-     * Thread to refresh the cache details.
+     * Method to asynchronously refresh the cache details.
      */
 
-    private class LoadDetailsThread extends Thread {
+    private void loadDetails(final CancellableHandler handler, final List<Geocache> caches) {
+        RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+            @Override
+            public void call() {
+                final List<Geocache> allCaches = Settings.isStoreOfflineMaps() ?
+                        ListUtils.union(ListUtils.selectRejected(caches, Geocache.hasStaticMap),
+                                ListUtils.select(caches, Geocache.hasStaticMap)) :
+                        caches;
 
-        final private CancellableHandler handler;
-        final private List<Geocache> caches;
-
-        public LoadDetailsThread(final CancellableHandler handler, final List<Geocache> caches) {
-            this.handler = handler;
-            this.caches = caches;
-        }
-
-        @Override
-        public void run() {
-            // First refresh caches that do not yet have static maps to get them a chance to get a copy
-            // before the limit expires, unless we do not want to store offline maps.
-            final List<Geocache> allCaches = Settings.isStoreOfflineMaps() ?
-                    ListUtils.union(ListUtils.selectRejected(caches, Geocache.hasStaticMap),
-                            ListUtils.select(caches, Geocache.hasStaticMap)) :
-                    caches;
-
-            for (final Geocache cache : allCaches) {
-                if (!refreshCache(cache)) {
-                    break;
+                for (final Geocache cache : allCaches) {
+                    if (handler.isCancelled()) {
+                        break;
+                    }
+                    detailProgress++;
+                    cache.refreshSynchronous(null);
+                    handler.obtainMessage(Send2CgeoDownloader.MSG_LOADED, cache).sendToTarget();
                 }
+
+                handler.sendEmptyMessage(Send2CgeoDownloader.MSG_DONE);
             }
 
-            handler.sendEmptyMessage(Send2CgeoDownloader.MSG_DONE);
-        }
-
-        /**
-         * Refreshes the cache information.
-         *
-         * @param cache
-         *            The cache to refresh
-         * @return
-         *         <code>false</code> if the storing was interrupted, <code>true</code> otherwise
-         */
-        private boolean refreshCache(final Geocache cache) {
-            try {
-                if (handler.isCancelled()) {
-                    throw new InterruptedException("Stopped storing process.");
-                }
-                detailProgress++;
-                cache.refreshSynchronous(null);
-                handler.obtainMessage(Send2CgeoDownloader.MSG_LOADED, cache).sendToTarget();
-            } catch (final InterruptedException e) {
-                Log.i(e.getMessage());
-                return false;
-            } catch (final Exception e) {
-                Log.e("CacheListActivity.LoadDetailsThread", e);
-            }
-
-            return true;
-        }
+        });
     }
 
     private class DropDetailsTask extends AsyncTaskWithProgress<Geocache, Void> {
