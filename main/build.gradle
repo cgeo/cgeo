@@ -39,7 +39,7 @@ version = '0.0.1'
 android {
     compileSdkVersion "Google Inc.:Google APIs:19"
     //compileSdkVersion 19
-    buildToolsVersion "20"
+    buildToolsVersion "21.1"
 
      compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
@@ -163,9 +163,9 @@ dependencies {
     compile 'commons-io:commons-io:2.4'
     compile 'com.google.code.findbugs:annotations:3.0.0'
 
-    compile "io.reactivex.rxjava:rxjava:$RXJavaVersion"
-    compile "io.reactivex.rxandroid:rxandroid:$RXAndroidVersion"
-    compile "io.reactivex.rxjava-async-util:rxjava-async-util:$RXJavaAsyncUtilVersion"
+    compile "io.reactivex:rxjava:$RXJavaVersion"
+    compile "io.reactivex:rxandroid:$RXAndroidVersion"
+    compile "io.reactivex:rxjava-async-util:$RXJavaAsyncUtilVersion"
 
     compile "com.fasterxml.jackson.core:jackson-core:$JacksonCoreVersion"
     compile "com.fasterxml.jackson.core:jackson-databind:$JacksonDatabindVersion"
