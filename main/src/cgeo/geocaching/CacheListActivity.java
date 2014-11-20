@@ -130,7 +130,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private final Progress progress = new Progress();
     private String title = "";
     private int detailTotal = 0;
-    private AtomicInteger detailProgress = new AtomicInteger(0);
+    private final AtomicInteger detailProgress = new AtomicInteger(0);
     private long detailProgressTime = 0L;
     private int listId = StoredList.TEMPORARY_LIST.id; // Only meaningful for the OFFLINE type
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
