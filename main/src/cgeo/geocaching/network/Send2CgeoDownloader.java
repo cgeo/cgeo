@@ -16,13 +16,6 @@ import java.util.concurrent.TimeUnit;
 
 public class Send2CgeoDownloader {
 
-    public static final int MSG_DONE = -1;
-    public static final int MSG_SERVER_FAIL = -2;
-    public static final int MSG_NO_REGISTRATION = -3;
-    public static final int MSG_WAITING = 0;
-    public static final int MSG_LOADING = 1;
-    public static final int MSG_LOADED = 2;
-
     private Send2CgeoDownloader() {
         // Do not instantiate
     }
@@ -43,7 +36,7 @@ public class Send2CgeoDownloader {
             @Override
             public void call() {
                 if (System.currentTimeMillis() - baseTime >= 3 * 60000) { // maximum: 3 minutes
-                    handler.sendEmptyMessage(MSG_DONE);
+                    handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
                     return;
                 }
 
@@ -53,22 +46,22 @@ public class Send2CgeoDownloader {
                 if (responseFromWeb != null && responseFromWeb.getStatusLine().getStatusCode() == 200) {
                     final String response = Network.getResponseData(responseFromWeb);
                     if (response != null && response.length() > 2) {
-                        handler.sendMessage(handler.obtainMessage(MSG_LOADING, response));
+                        handler.sendMessage(handler.obtainMessage(DownloadProgress.MSG_LOADING, response));
                         Geocache.storeCache(null, response, listId, false, null);
-                        handler.sendMessage(handler.obtainMessage(MSG_LOADED, response));
+                        handler.sendMessage(handler.obtainMessage(DownloadProgress.MSG_LOADED, response));
                         baseTime = System.currentTimeMillis();
                         worker.schedule(this);
                     } else if ("RG".equals(response)) {
                         //Server returned RG (registration) and this device no longer registered.
                         Settings.setWebNameCode(null, null);
-                        handler.sendEmptyMessage(MSG_NO_REGISTRATION);
+                        handler.sendEmptyMessage(DownloadProgress.MSG_NO_REGISTRATION);
                         handler.cancel();
                     } else {
                         worker.schedule(this, 5, TimeUnit.SECONDS);
-                        handler.sendEmptyMessage(MSG_WAITING);
+                        handler.sendEmptyMessage(DownloadProgress.MSG_WAITING);
                     }
                 } else {
-                    handler.sendEmptyMessage(MSG_SERVER_FAIL);
+                    handler.sendEmptyMessage(DownloadProgress.MSG_SERVER_FAIL);
                     handler.cancel();
                 }
             }

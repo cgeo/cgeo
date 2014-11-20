@@ -39,6 +39,7 @@ import cgeo.geocaching.loaders.PocketGeocacheListLoader;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.network.Cookies;
+import cgeo.geocaching.network.DownloadProgress;
 import cgeo.geocaching.network.Send2CgeoDownloader;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.sensors.GeoDirHandler;
@@ -275,7 +276,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         public void handleRegularMessage(final Message msg) {
             updateAdapter();
 
-            if (msg.what == Send2CgeoDownloader.MSG_LOADED) {
+            if (msg.what == DownloadProgress.MSG_LOADED) {
                 ((Geocache) msg.obj).setStatusChecked(false);
 
                 adapter.notifyDataSetChanged();
@@ -326,22 +327,22 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             adapter.notifyDataSetChanged();
 
             switch (msg.what) {
-                case Send2CgeoDownloader.MSG_WAITING:  //no caches
+                case DownloadProgress.MSG_WAITING:  //no caches
                     progress.setMessage(res.getString(R.string.web_import_waiting));
                     break;
-                case Send2CgeoDownloader.MSG_LOADING:  //cache downloading
+                case DownloadProgress.MSG_LOADING:  //cache downloading
                     progress.setMessage(res.getString(R.string.web_downloading) + " " + msg.obj + '…');
                     break;
-                case Send2CgeoDownloader.MSG_LOADED:  //Cache downloaded
+                case DownloadProgress.MSG_LOADED:  //Cache downloaded
                     progress.setMessage(res.getString(R.string.web_downloaded) + " " + msg.obj + '…');
                     refreshCurrentList();
                     break;
-                case Send2CgeoDownloader.MSG_SERVER_FAIL:
+                case DownloadProgress.MSG_SERVER_FAIL:
                     progress.dismiss();
                     showToast(res.getString(R.string.sendToCgeo_download_fail));
                     finish();
                     break;
-                case Send2CgeoDownloader.MSG_NO_REGISTRATION:
+                case DownloadProgress.MSG_NO_REGISTRATION:
                     progress.dismiss();
                     showToast(res.getString(R.string.sendToCgeo_no_registration));
                     finish();
@@ -1180,7 +1181,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     /**
-     * Method to asynchronously refresh the cache details.
+     * Method to asynchronously refresh the caches details.
      */
 
     private void loadDetails(final CancellableHandler handler, final List<Geocache> caches) {
@@ -1198,10 +1199,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     }
                     detailProgress++;
                     cache.refreshSynchronous(null);
-                    handler.obtainMessage(Send2CgeoDownloader.MSG_LOADED, cache).sendToTarget();
+                    handler.obtainMessage(DownloadProgress.MSG_LOADED, cache).sendToTarget();
                 }
 
-                handler.sendEmptyMessage(Send2CgeoDownloader.MSG_DONE);
+                handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
             }
 
         });
@@ -1244,7 +1245,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         @Override
         public void run() {
             DataStore.clearLogsOffline(selected);
-            handler.sendEmptyMessage(Send2CgeoDownloader.MSG_DONE);
+            handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
         }
     }
 
