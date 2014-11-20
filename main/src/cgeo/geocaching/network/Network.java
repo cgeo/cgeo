@@ -57,13 +57,13 @@ public abstract class Network {
 
     private static final Pattern PATTERN_PASSWORD = Pattern.compile("(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+");
 
-    private final static HttpParams clientParams = new BasicHttpParams();
+    private final static HttpParams CLIENT_PARAMS = new BasicHttpParams();
 
     static {
-        clientParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, CharEncoding.UTF_8);
-        clientParams.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
-        clientParams.setParameter(CoreConnectionPNames.SO_TIMEOUT, 90000);
-        clientParams.setParameter(ClientPNames.HANDLE_REDIRECTS,  true);
+        CLIENT_PARAMS.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, CharEncoding.UTF_8);
+        CLIENT_PARAMS.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
+        CLIENT_PARAMS.setParameter(CoreConnectionPNames.SO_TIMEOUT, 90000);
+        CLIENT_PARAMS.setParameter(ClientPNames.HANDLE_REDIRECTS, true);
     }
 
     private static String hidePassword(final String message) {
@@ -73,7 +73,7 @@ public abstract class Network {
     private static HttpClient getHttpClient() {
         final DefaultHttpClient client = new DefaultHttpClient();
         client.setCookieStore(Cookies.cookieStore);
-        client.setParams(clientParams);
+        client.setParams(CLIENT_PARAMS);
         client.setRedirectStrategy(new LaxRedirectStrategy());
         return new DecompressingHttpClient(client);
     }
