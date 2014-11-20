@@ -39,8 +39,8 @@ import cgeo.geocaching.loaders.PocketGeocacheListLoader;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.network.Cookies;
+import cgeo.geocaching.network.Send2CgeoDownloader;
 import cgeo.geocaching.network.Network;
-import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
@@ -56,8 +56,6 @@ import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.DateUtils;
 import cgeo.geocaching.utils.Log;
-
-import ch.boye.httpclientandroidlib.HttpResponse;
 
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget.Type;
@@ -110,13 +108,6 @@ import java.util.Set;
 public class CacheListActivity extends AbstractListActivity implements FilteredActivity, LoaderManager.LoaderCallbacks<SearchResult> {
 
     private static final int MAX_LIST_ITEMS = 1000;
-
-    private static final int MSG_DONE = -1;
-    private static final int MSG_SERVER_FAIL = -2;
-    private static final int MSG_NO_REGISTRATION = -3;
-    private static final int MSG_WAITING = 0;
-    private static final int MSG_LOADING = 1;
-    private static final int MSG_LOADED = 2;
 
     private static final int REQUEST_CODE_IMPORT_GPX = 1;
 
@@ -282,7 +273,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         public void handleRegularMessage(final Message msg) {
             updateAdapter();
 
-            if (msg.what == MSG_LOADED) {
+            if (msg.what == Send2CgeoDownloader.MSG_LOADED) {
                 ((Geocache) msg.obj).setStatusChecked(false);
 
                 adapter.notifyDataSetChanged();
@@ -333,22 +324,22 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             adapter.notifyDataSetChanged();
 
             switch (msg.what) {
-                case MSG_WAITING:  //no caches
+                case Send2CgeoDownloader.MSG_WAITING:  //no caches
                     progress.setMessage(res.getString(R.string.web_import_waiting));
                     break;
-                case MSG_LOADING:  //cache downloading
+                case Send2CgeoDownloader.MSG_LOADING:  //cache downloading
                     progress.setMessage(res.getString(R.string.web_downloading) + " " + msg.obj + '…');
                     break;
-                case MSG_LOADED:  //Cache downloaded
+                case Send2CgeoDownloader.MSG_LOADED:  //Cache downloaded
                     progress.setMessage(res.getString(R.string.web_downloaded) + " " + msg.obj + '…');
                     refreshCurrentList();
                     break;
-                case MSG_SERVER_FAIL:
+                case Send2CgeoDownloader.MSG_SERVER_FAIL:
                     progress.dismiss();
                     showToast(res.getString(R.string.sendToCgeo_download_fail));
                     finish();
                     break;
-                case MSG_NO_REGISTRATION:
+                case Send2CgeoDownloader.MSG_NO_REGISTRATION:
                     progress.dismiss();
                     showToast(res.getString(R.string.sendToCgeo_no_registration));
                     finish();
@@ -1167,9 +1158,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         showProgress(false);
         final DownloadFromWebHandler downloadFromWebHandler = new DownloadFromWebHandler();
         progress.show(this, null, res.getString(R.string.web_import_waiting), true, downloadFromWebHandler.cancelMessage());
-
-        final LoadFromWebThread threadWeb = new LoadFromWebThread(downloadFromWebHandler, listId);
-        threadWeb.start();
+        Send2CgeoDownloader.loadFromWeb(downloadFromWebHandler, listId);
     }
 
     private void dropStored() {
@@ -1217,7 +1206,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 }
             }
 
-            handler.sendEmptyMessage(MSG_DONE);
+            handler.sendEmptyMessage(Send2CgeoDownloader.MSG_DONE);
         }
 
         /**
@@ -1235,7 +1224,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 }
                 detailProgress++;
                 cache.refreshSynchronous(null);
-                handler.obtainMessage(MSG_LOADED, cache).sendToTarget();
+                handler.obtainMessage(Send2CgeoDownloader.MSG_LOADED, cache).sendToTarget();
             } catch (final InterruptedException e) {
                 Log.i(e.getMessage());
                 return false;
@@ -1244,59 +1233,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
 
             return true;
-        }
-    }
-
-    private static class LoadFromWebThread extends Thread {
-
-        final private CancellableHandler handler;
-        final private int listIdLFW;
-
-        public LoadFromWebThread(final CancellableHandler handler, final int listId) {
-            this.handler = handler;
-            listIdLFW = StoredList.getConcreteList(listId);
-        }
-
-        @Override
-        public void run() {
-            long baseTime = System.currentTimeMillis();
-
-            final String deviceCode = StringUtils.defaultString(Settings.getWebDeviceCode());
-            final Parameters params = new Parameters("code", deviceCode);
-            while (!handler.isCancelled() && System.currentTimeMillis() - baseTime < 3 * 60000) { // maximum: 3 minutes
-                // Download new code
-                final HttpResponse responseFromWeb = Network.getRequest("http://send2.cgeo.org/read.html", params);
-
-                if (responseFromWeb != null && responseFromWeb.getStatusLine().getStatusCode() == 200) {
-                    final String response = Network.getResponseData(responseFromWeb);
-                    if (response != null && response.length() > 2) {
-                        handler.sendMessage(handler.obtainMessage(MSG_LOADING, response));
-
-                        Geocache.storeCache(null, response, listIdLFW, false, null);
-
-                        handler.sendMessage(handler.obtainMessage(MSG_LOADED, response));
-                        baseTime = System.currentTimeMillis();
-                    } else if ("RG".equals(response)) {
-                        //Server returned RG (registration) and this device no longer registered.
-                        Settings.setWebNameCode(null, null);
-                        handler.sendEmptyMessage(MSG_NO_REGISTRATION);
-                        handler.cancel();
-                        break;
-                    } else {
-                        try {
-                            sleep(5000); // Wait for 5s if no cache found
-                        } catch (final InterruptedException ignored) {
-                        }
-                        handler.sendEmptyMessage(MSG_WAITING);
-                    }
-                } else {
-                    handler.sendEmptyMessage(MSG_SERVER_FAIL);
-                    handler.cancel();
-                    break;
-                }
-            }
-
-            handler.sendEmptyMessage(MSG_DONE);
         }
     }
 
@@ -1337,7 +1273,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         @Override
         public void run() {
             DataStore.clearLogsOffline(selected);
-            handler.sendEmptyMessage(MSG_DONE);
+            handler.sendEmptyMessage(Send2CgeoDownloader.MSG_DONE);
         }
     }
 
