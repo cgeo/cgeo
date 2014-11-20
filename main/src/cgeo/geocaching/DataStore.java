@@ -21,6 +21,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.Version;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
@@ -2285,63 +2286,70 @@ public class DataStore {
     }
 
     /**
-     * Remove caches with listId = 0
+     * Remove caches with listId = 0 in the background. Once it has been executed once it will not do anything.
+     * This must be called from the UI thread to ensure synchronization of an internal variable.
      *
      * @param more
      *            true = all caches false = caches stored 3 days or more before
      */
-    public static void clean(final boolean more) {
+    public static void cleanIfNeeded(final Context context) {
         if (databaseCleaned) {
             return;
         }
-
-        Log.d("Database clean: started");
-
-        try {
-            Set<String> geocodes = new HashSet<>();
-            if (more) {
-                queryToColl(dbTableCaches,
-                        new String[]{"geocode"},
-                        "reason = 0",
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        geocodes,
-                        GET_STRING_0);
-            } else {
-                final long timestamp = System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED;
-                final String timestampString = Long.toString(timestamp);
-                queryToColl(dbTableCaches,
-                        new String[]{"geocode"},
-                        "reason = 0 and detailed < ? and detailedupdate < ? and visiteddate < ?",
-                        new String[]{timestampString, timestampString, timestampString},
-                        null,
-                        null,
-                        null,
-                        null,
-                        geocodes,
-                        GET_STRING_0);
-            }
-
-            geocodes = exceptCachesWithOfflineLog(geocodes);
-
-            if (!geocodes.isEmpty()) {
-                Log.d("Database clean: removing " + geocodes.size() + " geocaches from listId=0");
-                removeCaches(geocodes, LoadFlags.REMOVE_ALL);
-            }
-
-            // This cleanup needs to be kept in place for about one year so that older log images records are
-            // cleaned. TO BE REMOVED AFTER 2015-03-24.
-            Log.d("Database clean: removing obsolete log images records");
-            database.delete(dbTableLogImages, "log_id NOT IN (SELECT _id FROM " + dbTableLogs + ")", null);
-        } catch (final Exception e) {
-            Log.w("DataStore.clean", e);
-        }
-
-        Log.d("Database clean: finished");
         databaseCleaned = true;
+
+        Schedulers.io().createWorker().schedule(new Action0() {
+            @Override
+            public void call() {
+                Log.d("Database clean: started");
+                try {
+                    final int version = Version.getVersionCode(context);
+                    final Set<String> geocodes = new HashSet<>();
+                    if (version != Settings.getVersion()) {
+                        queryToColl(dbTableCaches,
+                                new String[]{"geocode"},
+                                "reason = 0",
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                geocodes,
+                                GET_STRING_0);
+                    } else {
+                        final long timestamp = System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED;
+                        final String timestampString = Long.toString(timestamp);
+                        queryToColl(dbTableCaches,
+                                new String[]{"geocode"},
+                                "reason = 0 and detailed < ? and detailedupdate < ? and visiteddate < ?",
+                                new String[]{timestampString, timestampString, timestampString},
+                                null,
+                                null,
+                                null,
+                                null,
+                                geocodes,
+                                GET_STRING_0);
+                    }
+
+                    final Set<String> withoutOfflineLogs = exceptCachesWithOfflineLog(geocodes);
+                    Log.d("Database clean: removing " + withoutOfflineLogs.size() + " geocaches from listId=0");
+                    removeCaches(withoutOfflineLogs, LoadFlags.REMOVE_ALL);
+
+                    // This cleanup needs to be kept in place for about one year so that older log images records are
+                    // cleaned. TO BE REMOVED AFTER 2015-03-24.
+                    Log.d("Database clean: removing obsolete log images records");
+                    database.delete(dbTableLogImages, "log_id NOT IN (SELECT _id FROM " + dbTableLogs + ")", null);
+
+                    if (version > -1) {
+                        Settings.setVersion(version);
+                    }
+                } catch (final Exception e) {
+                    Log.w("DataStore.clean", e);
+                }
+
+                Log.d("Database clean: finished");
+            }
+        });
     }
 
     /**

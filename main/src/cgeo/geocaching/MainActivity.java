@@ -93,8 +93,6 @@ public class MainActivity extends AbstractActionBarActivity {
 
     public static final int SEARCH_REQUEST_CODE = 2;
 
-    private int version = 0;
-    private boolean cleanupRunning = false;
     private Geopoint addCoords = null;
     private boolean initialized = false;
     private ConnectivityChangeReceiver connectivityChangeReceiver;
@@ -211,8 +209,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
         setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); // type to search
 
-        version = Version.getVersionCode(this);
-        Log.i("Starting " + getPackageName() + ' ' + version + " a.k.a " + Version.getVersionName(this));
+        Log.i("Starting " + getPackageName() + ' ' + Version.getVersionCode(this) + " a.k.a " + Version.getVersionName(this));
 
         init();
 
@@ -452,7 +449,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
         setFilterTitle();
         checkRestore();
-        (new CleanDatabaseThread()).start();
+        DataStore.cleanIfNeeded(this);
     }
 
     protected void selectGlobalTypeFilter() {
@@ -678,34 +675,6 @@ public class MainActivity extends AbstractActionBarActivity {
      */
     public void cgeoNavSettings(final View v) {
         startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-    }
-
-    private class CleanDatabaseThread extends Thread {
-
-        @Override
-        public void run() {
-            if (app == null) {
-                return;
-            }
-            if (cleanupRunning) {
-                return;
-            }
-
-            boolean more = false;
-            if (version != Settings.getVersion()) {
-                Log.i("Initializing hard cleanup - version changed from " + Settings.getVersion() + " to " + version + ".");
-
-                more = true;
-            }
-
-            cleanupRunning = true;
-            DataStore.clean(more);
-            cleanupRunning = false;
-
-            if (version > 0) {
-                Settings.setVersion(version);
-            }
-        }
     }
 
     private void checkShowChangelog() {
