@@ -466,7 +466,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             case R.id.menu_waypoint_reset_cache_coords:
                 ensureSaved();
                 if (ConnectorFactory.getConnector(cache).supportsOwnCoordinates()) {
-                    createResetCacheCoordinatesDialog(cache, selectedWaypoint).show();
+                    createResetCacheCoordinatesDialog(selectedWaypoint).show();
                 } else {
                     final ProgressDialog progressDialog = ProgressDialog.show(this, getString(R.string.cache), getString(R.string.waypoint_reset), true);
                     final HandlerResetCoordinates handler = new HandlerResetCoordinates(this, progressDialog, false);
@@ -847,20 +847,19 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 final CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
                 if (attrib != null) {
                     noAttributeIconsFound = false;
-                    Drawable d = res.getDrawable(attrib.drawableId);
-                    iv.setImageDrawable(d);
+                    Drawable drawable = res.getDrawable(attrib.drawableId);
+                    iv.setImageDrawable(drawable);
                     // strike through?
                     if (strikeThrough) {
                         // generate strike through image with same properties as attribute image
                         final ImageView strikeThroughImage = new ImageView(CacheDetailActivity.this);
                         strikeThroughImage.setLayoutParams(iv.getLayoutParams());
-                        d = res.getDrawable(R.drawable.attribute__strikethru);
-                        strikeThroughImage.setImageDrawable(d);
+                        drawable = res.getDrawable(R.drawable.attribute__strikethru);
+                        strikeThroughImage.setImageDrawable(drawable);
                         fl.addView(strikeThroughImage);
                     }
                 } else {
-                    final Drawable d = res.getDrawable(R.drawable.attribute_unknown);
-                    iv.setImageDrawable(d);
+                    iv.setImageDrawable(res.getDrawable(R.drawable.attribute_unknown));
                 }
 
                 attributeRow.addView(fl);
@@ -1169,7 +1168,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             @Override
             public void run() {
                 watchlistThread = null;
-                Message msg;
+                final Message msg;
                 if (ConnectorFactory.getConnector(cache).addToWatchlist(cache)) {
                     msg = Message.obtain(handler, MESSAGE_SUCCEEDED);
                 } else {
@@ -1193,7 +1192,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             @Override
             public void run() {
                 watchlistThread = null;
-                Message msg;
+                final Message msg;
                 if (ConnectorFactory.getConnector(cache).removeFromWatchlist(cache)) {
                     msg = Message.obtain(handler, MESSAGE_SUCCEEDED);
                 } else {
@@ -1217,7 +1216,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             @Override
             public void run() {
                 watchlistThread = null;
-                Message msg;
+                final Message msg;
                 if (GCConnector.addToFavorites(cache)) {
                     msg = Message.obtain(handler, MESSAGE_SUCCEEDED);
                 } else {
@@ -1241,7 +1240,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             @Override
             public void run() {
                 watchlistThread = null;
-                Message msg;
+                final Message msg;
                 if (GCConnector.removeFromFavorites(cache)) {
                     msg = Message.obtain(handler, MESSAGE_SUCCEEDED);
                 } else {
@@ -1283,7 +1282,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          */
         private class ChangeListClickListener implements View.OnClickListener {
             @Override
-            public void onClick(final View view) {
+            public void onClick(final View v) {
                 new StoredList.UserInterface(CacheDetailActivity.this).promptForListSelection(R.string.list_title,
                         new Action1<Integer>() {
                             @Override
@@ -1637,7 +1636,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     private static void fixTextColor(final String descriptionString, final IndexOutOfBoundsAvoidingTextView descriptionView) {
-        int backcolor;
+        final int backcolor;
         if (Settings.isLightSkin()) {
             backcolor = color.white;
 
@@ -1698,7 +1697,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     private class WaypointsViewCreator extends AbstractCachingPageViewCreator<ListView> {
-        private final int VISITED_INSET = (int) (6.6f * CgeoApplication.getInstance().getResources().getDisplayMetrics().density + 0.5f);
+        private final int visitedInset = (int) (6.6f * CgeoApplication.getInstance().getResources().getDisplayMetrics().density + 0.5f);
 
         @Override
         public ListView getDispatchedView(final ViewGroup parentView) {
@@ -1781,15 +1780,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             } else {
                 nameView.setText(res.getString(R.string.waypoint));
             }
-            setWaypointIcon(res, nameView, wpt);
+            setWaypointIcon(nameView, wpt);
 
             // visited
             if (wpt.isVisited()) {
-                final TypedValue a = new TypedValue();
-                getTheme().resolveAttribute(R.attr.text_color_grey, a, true);
-                if (a.type >= TypedValue.TYPE_FIRST_COLOR_INT && a.type <= TypedValue.TYPE_LAST_COLOR_INT) {
+                final TypedValue typedValue = new TypedValue();
+                getTheme().resolveAttribute(R.attr.text_color_grey, typedValue, true);
+                if (typedValue.type >= TypedValue.TYPE_FIRST_COLOR_INT && typedValue.type <= TypedValue.TYPE_LAST_COLOR_INT) {
                     // really should be just a color!
-                    nameView.setTextColor(a.data);
+                    nameView.setTextColor(typedValue.data);
                 }
             }
 
@@ -1845,15 +1844,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             });
         }
 
-        private void setWaypointIcon(final Resources res, final TextView nameView, final Waypoint wpt) {
+        private void setWaypointIcon(final TextView nameView, final Waypoint wpt) {
             final WaypointType waypointType = wpt.getWaypointType();
             final Drawable icon;
             if (wpt.isVisited()) {
                 final LayerDrawable ld = new LayerDrawable(new Drawable[] {
                         res.getDrawable(waypointType.markerId),
                         res.getDrawable(R.drawable.tick) });
-                ld.setLayerInset(0, 0, 0, VISITED_INSET, VISITED_INSET);
-                ld.setLayerInset(1, VISITED_INSET, VISITED_INSET, 0, 0);
+                ld.setLayerInset(0, 0, 0, visitedInset, visitedInset);
+                ld.setLayerInset(1, visitedInset, visitedInset, 0, 0);
                 icon = ld;
             } else {
                 icon = res.getDrawable(waypointType.markerId);
@@ -2009,7 +2008,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     /**
      * A dialog to allow the user to select reseting coordinates local/remote/both.
      */
-    private AlertDialog createResetCacheCoordinatesDialog(final Geocache cache, final Waypoint wpt) {
+    private AlertDialog createResetCacheCoordinatesDialog(final Waypoint wpt) {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.waypoint_reset_cache_coords);
@@ -2221,7 +2220,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (cache.isOffline()) {
             final long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
 
-            String ago;
+            final String ago;
             if (diff < 15) {
                 ago = res.getString(R.string.cache_offline_time_mins_few);
             } else if (diff < 50) {
