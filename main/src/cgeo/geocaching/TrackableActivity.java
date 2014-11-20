@@ -31,6 +31,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import rx.Observable;
+import rx.android.events.OnClickEvent;
 import rx.android.observables.AndroidObservable;
 import rx.android.observables.ViewObservable;
 import rx.functions.Action1;
@@ -511,9 +512,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
                 trackableImage.setImageResource(R.drawable.image_not_loaded);
                 trackableImage.setClickable(true);
-                ViewObservable.clicks(trackableImage, false).subscribe(new Action1<View>() {
+                ViewObservable.clicks(trackableImage, false).subscribe(new Action1<OnClickEvent>() {
                     @Override
-                    public void call(final View view) {
+                    public void call(final OnClickEvent onClickEvent) {
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getImage())));
                     }
                 });

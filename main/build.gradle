@@ -27,7 +27,9 @@ gradle connectedCheck
 //https://github.com/stephanenicolas/Quality-Tools-for-Android
 
 def AAVersion = '3.2'
-def RXVersion = '0.20.7'
+def RXJavaVersion = '1.0.0'
+def RXAndroidVersion = '0.23.0'
+def RXJavaAsyncUtilVersion = '0.21.0'
 def JacksonCoreVersion = '2.4.3'
 def JacksonDatabindVersion = '2.4.3'
 def JacksonAnnotationsVersion = '2.4.3'
@@ -161,9 +163,9 @@ dependencies {
     compile 'commons-io:commons-io:2.4'
     compile 'com.google.code.findbugs:annotations:3.0.0'
 
-    compile "com.netflix.rxjava:rxjava-core:$RXVersion"
-    compile "com.netflix.rxjava:rxjava-android:$RXVersion"
-    compile "com.netflix.rxjava:rxjava-async-util:$RXVersion"
+    compile "io.reactivex.rxjava:rxjava:$RXJavaVersion"
+    compile "io.reactivex.rxandroid:rxandroid:$RXAndroidVersion"
+    compile "io.reactivex.rxjava-async-util:rxjava-async-util:$RXJavaAsyncUtilVersion"
 
     compile "com.fasterxml.jackson.core:jackson-core:$JacksonCoreVersion"
     compile "com.fasterxml.jackson.core:jackson-databind:$JacksonDatabindVersion"

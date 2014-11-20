@@ -1,7 +1,9 @@
 #! /bin/sh
 #
 
-RXJAVA=0.20.7
+RXJAVA=1.0.0
+RXANDROID=0.23.0
+RXJAVAASYNCUTIL=0.21.0
 JACKSONCORE=2.4.3
 JACKSONDATABIND=2.4.3
 JACKSONANNOTATIONS=2.4.3
@@ -30,10 +32,12 @@ fixgradle() {
   sed -i "/def $var =/s/.*/def $var = '$version'/" ../build.gradle
 }
 
-updatelib com/netflix/rxjava rxjava-core $RXJAVA
-updatelib com/netflix/rxjava rxjava-android $RXJAVA
-updatelib com/netflix/rxjava rxjava-async-util $RXJAVA
-fixgradle RXVersion $RXJAVA
+updatelib io/reactivex rxjava $RXJAVA
+fixgradle RXJavaVersion $RXJAVA
+updatelib io/reactivex rxandroid $RXANDROID
+fixgradle RXAndroidVersion $RXANDROID
+updatelib io/reactivex rxjava-async-util $RXJAVAASYNCUTIL
+fixgradle RXJavaAsyncUtilVersion $RXJAVAASYNCUTIL
 
 updatelib com/fasterxml/jackson/core jackson-core $JACKSONCORE
 fixgradle JacksonCoreVersion $JACKSONCORE
