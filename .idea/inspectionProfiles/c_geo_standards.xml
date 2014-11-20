@@ -67,7 +67,7 @@
       <option name="SUGGEST_NULLABLE_ANNOTATIONS" value="false" />
       <option name="DONT_REPORT_TRUE_ASSERT_STATEMENTS" value="true" />
     </inspection_tool>
-    <inspection_tool class="ConstantNamingConvention" enabled="false" level="WEAK WARNING" enabled_by_default="false">
+    <inspection_tool class="ConstantNamingConvention" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="onlyCheckImmutables" value="false" />
       <option name="m_regex" value="[A-Z][A-Z_\d]*" />
       <option name="m_minLength" value="3" />
@@ -111,6 +111,7 @@
     <inspection_tool class="FieldHidesSuperclassField" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="m_ignoreInvisibleFields" value="true" />
     </inspection_tool>
+    <inspection_tool class="FieldMayBeFinal" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="FieldMayBeStatic" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="FinalStaticMethod" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ForLoopReplaceableByWhile" enabled="true" level="WARNING" enabled_by_default="true">
@@ -153,12 +154,12 @@
     </inspection_tool>
     <inspection_tool class="InfiniteLoopStatement" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="InnerClassMayBeStatic" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="InstanceMethodNamingConvention" enabled="true" level="WARNING" enabled_by_default="true">
+    <inspection_tool class="InstanceMethodNamingConvention" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="m_regex" value="[a-z][A-Za-z\d]*" />
       <option name="m_minLength" value="3" />
-      <option name="m_maxLength" value="32" />
+      <option name="m_maxLength" value="64" />
     </inspection_tool>
-    <inspection_tool class="InstanceVariableNamingConvention" enabled="true" level="WARNING" enabled_by_default="true">
+    <inspection_tool class="InstanceVariableNamingConvention" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="m_regex" value="[a-z][A-Za-z\d]*" />
       <option name="m_minLength" value="2" />
       <option name="m_maxLength" value="30" />
@@ -168,7 +169,7 @@
     <inspection_tool class="InstanceofThis" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="InstantiationOfUtilityClass" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="IntLiteralMayBeLongLiteral" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="InterfaceNamingConvention" enabled="true" level="WARNING" enabled_by_default="true">
+    <inspection_tool class="InterfaceNamingConvention" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="m_regex" value="[A-Z][A-Za-z\d]*" />
       <option name="m_minLength" value="3" />
       <option name="m_maxLength" value="64" />
@@ -213,11 +214,15 @@
     <inspection_tool class="ListenerMayUseAdapter" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="checkForEmptyMethods" value="true" />
     </inspection_tool>
+    <inspection_tool class="LocalCanBeFinal" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="REPORT_VARIABLES" value="true" />
+      <option name="REPORT_PARAMETERS" value="true" />
+    </inspection_tool>
     <inspection_tool class="LocalVariableHidingMemberVariable" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="m_ignoreInvisibleFields" value="true" />
       <option name="m_ignoreStaticMethods" value="true" />
     </inspection_tool>
-    <inspection_tool class="LocalVariableNamingConvention" enabled="true" level="WARNING" enabled_by_default="true">
+    <inspection_tool class="LocalVariableNamingConvention" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="m_ignoreForLoopParameters" value="true" />
       <option name="m_ignoreCatchParameters" value="true" />
       <option name="m_regex" value="[a-z][A-Za-z\d]*" />
@@ -327,9 +332,9 @@
       <option name="m_ignoreSingleCharacterNames" value="false" />
       <option name="m_ignoreOverridesOfLibraryMethods" value="false" />
     </inspection_tool>
-    <inspection_tool class="ParameterNamingConvention" enabled="true" level="WARNING" enabled_by_default="true">
+    <inspection_tool class="ParameterNamingConvention" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="m_regex" value="[a-z][A-Za-z\d]*" />
-      <option name="m_minLength" value="2" />
+      <option name="m_minLength" value="1" />
       <option name="m_maxLength" value="30" />
     </inspection_tool>
     <inspection_tool class="PointlessArithmeticExpression" enabled="false" level="WARNING" enabled_by_default="false">
