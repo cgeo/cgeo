@@ -95,7 +95,6 @@ public class MainActivity extends AbstractActionBarActivity {
 
     private int version = 0;
     private boolean cleanupRunning = false;
-    private int countBubbleCnt = 0;
     private Geopoint addCoords = null;
     private boolean initialized = false;
     private ConnectivityChangeReceiver connectivityChangeReceiver;
@@ -507,7 +506,23 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     public void updateCacheCounter() {
-        (new CountBubbleUpdateThread()).start();
+        AndroidObservable.bindActivity(this, DataStore.getAllCachesCountObservable()).subscribe(new Action1<Integer>() {
+            @Override
+            public void call(final Integer countBubbleCnt1) {
+                if (countBubbleCnt1 == 0) {
+                    countBubble.setVisibility(View.GONE);
+                } else {
+                    countBubble.setText(Integer.toString(countBubbleCnt1));
+                    countBubble.bringToFront();
+                    countBubble.setVisibility(View.VISIBLE);
+                }
+            }
+        }, new Action1<Throwable>() {
+            @Override
+            public void call(final Throwable throwable) {
+                Log.e("Unable to add bubble count", throwable);
+            }
+        });
     }
 
     private void checkRestore() {
@@ -663,51 +678,6 @@ public class MainActivity extends AbstractActionBarActivity {
      */
     public void cgeoNavSettings(final View v) {
         startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-    }
-
-    private class CountBubbleUpdateThread extends Thread {
-        private final Handler countBubbleHandler = new Handler() {
-
-            @Override
-            public void handleMessage(final Message msg) {
-                try {
-                    if (countBubbleCnt == 0) {
-                        countBubble.setVisibility(View.GONE);
-                    } else {
-                        countBubble.setText(Integer.toString(countBubbleCnt));
-                        countBubble.bringToFront();
-                        countBubble.setVisibility(View.VISIBLE);
-                    }
-                } catch (final Exception e) {
-                    Log.w("MainActivity.countBubbleHander", e);
-                }
-            }
-        };
-
-        @Override
-        public void run() {
-            if (app == null) {
-                return;
-            }
-
-            int checks = 0;
-            while (!DataStore.isInitialized()) {
-                try {
-                    sleep(500);
-                    checks++;
-                } catch (final Exception e) {
-                    Log.e("MainActivity.CountBubbleUpdateThread.run", e);
-                }
-
-                if (checks > 10) {
-                    return;
-                }
-            }
-
-            countBubbleCnt = DataStore.getAllCachesCount();
-
-            countBubbleHandler.sendEmptyMessage(0);
-        }
     }
 
     private class CleanDatabaseThread extends Thread {

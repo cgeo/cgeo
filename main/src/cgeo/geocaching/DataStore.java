@@ -28,6 +28,9 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
 import rx.android.observables.AndroidObservable;
 import rx.functions.Action0;
 import rx.functions.Action1;
@@ -70,6 +73,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 public class DataStore {
@@ -304,6 +308,16 @@ public class DataStore {
             + "latitude double, "
             + "longitude double "
             + "); ";
+
+    private static final Observable<Integer> allCachesCountObservable = Observable.create(new OnSubscribe<Integer>() {
+        @Override
+        public void call(final Subscriber<? super Integer> subscriber) {
+            if (isInitialized()) {
+                subscriber.onNext(getAllCachesCount());
+                subscriber.onCompleted();
+            }
+        }
+    }).timeout(500, TimeUnit.MILLISECONDS).retry(10).subscribeOn(Schedulers.io());
 
     private static boolean newlyCreatedDatabase = false;
     private static boolean databaseCleaned = false;
@@ -2608,6 +2622,15 @@ public class DataStore {
 
     public static int getAllCachesCount() {
         return (int) PreparedStatement.COUNT_ALL_CACHES.simpleQueryForLong();
+    }
+
+    /**
+     * Count all caches in the background.
+     *
+     * @return an observable containing a unique element if the caches could be counted, or an error otherwise
+     */
+    public static Observable<Integer> getAllCachesCountObservable() {
+        return allCachesCountObservable;
     }
 
     /**
