@@ -321,7 +321,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 }.execute();
             }
         }
-    };
+    }
 
     /**
      * TODO Possibly parts should be a Thread not a Handler

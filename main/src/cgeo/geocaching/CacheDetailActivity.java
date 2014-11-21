@@ -2234,22 +2234,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
-    private static final class SimpleUpdateHandler extends SimpleCancellableHandler {
-
-        public SimpleUpdateHandler(final CacheDetailActivity activity, final Progress progress) {
-            super(activity, progress);
-        }
-
-        @Override
-        public void handleRegularMessage(final Message msg) {
-            if (msg.what == MESSAGE_FAILED) {
-                super.handleMessage(msg);
-            } else {
-                notifyDataSetChanged(activityRef);
-            }
-        }
-    }
-
     private static void notifyDataSetChanged(final WeakReference<AbstractActivity> activityRef) {
         final CacheDetailActivity activity = ((CacheDetailActivity) activityRef.get());
         if (activity != null) {

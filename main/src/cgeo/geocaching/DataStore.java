@@ -2288,9 +2288,6 @@ public class DataStore {
     /**
      * Remove caches with listId = 0 in the background. Once it has been executed once it will not do anything.
      * This must be called from the UI thread to ensure synchronization of an internal variable.
-     *
-     * @param more
-     *            true = all caches false = caches stored 3 days or more before
      */
     public static void cleanIfNeeded(final Context context) {
         if (databaseCleaned) {
