@@ -38,6 +38,8 @@ public class RxUtils {
 
     public static final Scheduler networkScheduler = Schedulers.from(new ThreadPoolExecutor(10, 10, 5, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>()));
 
+    public static final Scheduler refreshScheduler = Schedulers.from(new ThreadPoolExecutor(3, 3, 5, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>()));
+
     private static final HandlerThread looperCallbacksThread =
             new HandlerThread("Looper callbacks thread", Process.THREAD_PRIORITY_DEFAULT);
 

@@ -1207,7 +1207,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         handler.obtainMessage(DownloadProgress.MSG_LOADED, cache).sendToTarget();
                         subscriber.onCompleted();
                     }
-                }).subscribeOn(RxUtils.networkScheduler);
+                }).subscribeOn(RxUtils.refreshScheduler);
             }
         }).doOnCompleted(new Action0() {
             @Override
