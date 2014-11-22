@@ -18,7 +18,6 @@ import ch.boye.httpclientandroidlib.HttpResponse;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -175,7 +174,7 @@ public class HtmlImage implements Html.ImageGetter {
             return Observable.defer(new Func0<Observable<BitmapDrawable>>() {
                 @Override
                 public Observable<BitmapDrawable> call() {
-                    final Bitmap bitmap = loadCachedImage(FileUtils.urlToFile(url), true).getLeft();
+                    final Bitmap bitmap = loadCachedImage(FileUtils.urlToFile(url), true).left;
                     return bitmap != null ? Observable.just(ImageUtils.scaleBitmapToFitDisplay(bitmap)) : Observable.<BitmapDrawable>empty();
                 }
             }).subscribeOn(RxUtils.computationScheduler);
@@ -191,9 +190,9 @@ public class HtmlImage implements Html.ImageGetter {
                 subscriber.add(RxUtils.computationScheduler.createWorker().schedule(new Action0() {
                     @Override
                     public void call() {
-                        final Pair<BitmapDrawable, Boolean> loaded = loadFromDisk();
-                        final BitmapDrawable bitmap = loaded.getLeft();
-                        if (loaded.getRight()) {
+                        final ImmutablePair<BitmapDrawable, Boolean> loaded = loadFromDisk();
+                        final BitmapDrawable bitmap = loaded.left;
+                        if (loaded.right) {
                             subscriber.onNext(bitmap);
                             subscriber.onCompleted();
                             return;
@@ -210,8 +209,8 @@ public class HtmlImage implements Html.ImageGetter {
                 }));
             }
 
-            private Pair<BitmapDrawable, Boolean> loadFromDisk() {
-                final Pair<Bitmap, Boolean> loadResult = loadImageFromStorage(url, pseudoGeocode, shared);
+            private ImmutablePair<BitmapDrawable, Boolean> loadFromDisk() {
+                final ImmutablePair<Bitmap, Boolean> loadResult = loadImageFromStorage(url, pseudoGeocode, shared);
                 return scaleImage(loadResult);
             }
 
@@ -236,8 +235,8 @@ public class HtmlImage implements Html.ImageGetter {
                     RxUtils.computationScheduler.createWorker().schedule(new Action0() {
                         @Override
                         public void call() {
-                            final Pair<BitmapDrawable, Boolean> loaded = loadFromDisk();
-                            final BitmapDrawable image = loaded.getLeft();
+                            final ImmutablePair<BitmapDrawable, Boolean> loaded = loadFromDisk();
+                            final BitmapDrawable image = loaded.left;
                             if (image != null) {
                                 subscriber.onNext(image);
                             } else {
@@ -254,12 +253,9 @@ public class HtmlImage implements Html.ImageGetter {
     }
 
     @SuppressWarnings("static-method")
-    protected Pair<BitmapDrawable, Boolean> scaleImage(final Pair<Bitmap, Boolean> loadResult) {
-        final Bitmap bitmap = loadResult.getLeft();
-        return new ImmutablePair<>(bitmap != null ?
-                ImageUtils.scaleBitmapToFitDisplay(bitmap) :
-                null,
-                loadResult.getRight());
+    protected ImmutablePair<BitmapDrawable, Boolean> scaleImage(final ImmutablePair<Bitmap, Boolean> loadResult) {
+        final Bitmap bitmap = loadResult.left;
+        return ImmutablePair.of(bitmap != null ? ImageUtils.scaleBitmapToFitDisplay(bitmap) : null, loadResult.right);
     }
 
     public Observable<String> waitForEndObservable(@Nullable final CancellableHandler handler) {
@@ -330,11 +326,11 @@ public class HtmlImage implements Html.ImageGetter {
      * @return A pair whose first element is the bitmap if available, and the second one is <code>true</code> if the image is present and fresh enough.
      */
     @NonNull
-    private Pair<Bitmap, Boolean> loadImageFromStorage(final String url, final String pseudoGeocode, final boolean forceKeep) {
+    private ImmutablePair<Bitmap, Boolean> loadImageFromStorage(final String url, final String pseudoGeocode, final boolean forceKeep) {
         try {
             final File file = LocalStorage.getStorageFile(pseudoGeocode, url, true, false);
-            final Pair<Bitmap, Boolean> image = loadCachedImage(file, forceKeep);
-            if (image.getRight() || image.getLeft() != null) {
+            final ImmutablePair<Bitmap, Boolean> image = loadCachedImage(file, forceKeep);
+            if (image.right || image.left != null) {
                 return image;
             }
             final File fileSec = LocalStorage.getStorageSecFile(pseudoGeocode, url, true);
@@ -342,7 +338,7 @@ public class HtmlImage implements Html.ImageGetter {
         } catch (final Exception e) {
             Log.w("HtmlImage.loadImageFromStorage", e);
         }
-        return new ImmutablePair<>(null, false);
+        return ImmutablePair.of((Bitmap) null, false);
     }
 
     @Nullable
@@ -380,11 +376,11 @@ public class HtmlImage implements Html.ImageGetter {
      *         <code>true</code>)
      */
     @NonNull
-    private Pair<Bitmap, Boolean> loadCachedImage(final File file, final boolean forceKeep) {
+    private ImmutablePair<Bitmap, Boolean> loadCachedImage(final File file, final boolean forceKeep) {
         if (file.exists()) {
             final boolean freshEnough = listId >= StoredList.STANDARD_LIST_ID || file.lastModified() > (new Date().getTime() - (24 * 60 * 60 * 1000)) || forceKeep;
             if (freshEnough && onlySave) {
-                return new ImmutablePair<>(null, true);
+                return ImmutablePair.of((Bitmap) null, true);
             }
             final BitmapFactory.Options bfOptions = new BitmapFactory.Options();
             bfOptions.inTempStorage = new byte[16 * 1024];
@@ -393,12 +389,11 @@ public class HtmlImage implements Html.ImageGetter {
             final Bitmap image = BitmapFactory.decodeFile(file.getPath(), bfOptions);
             if (image == null) {
                 Log.e("Cannot decode bitmap from " + file.getPath());
-                return new ImmutablePair<>(null, false);
+                return ImmutablePair.of((Bitmap) null, false);
             }
-            return new ImmutablePair<>(image,
-                    freshEnough);
+            return ImmutablePair.of(image, freshEnough);
         }
-        return new ImmutablePair<>(null, false);
+        return ImmutablePair.of((Bitmap) null, false);
     }
 
     private void setSampleSize(final File file, final BitmapFactory.Options bfOptions) {
