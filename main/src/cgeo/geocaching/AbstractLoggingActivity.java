@@ -90,7 +90,7 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
         ActivityMixin.insertAtPosition(log, newText, moveCursor);
     }
 
-    private final void replaceLog(final String newText) {
+    private void replaceLog(final String newText) {
         final EditText log = (EditText) findViewById(R.id.log);
         log.setText(StringUtils.EMPTY);
         insertIntoLog(newText, true);
