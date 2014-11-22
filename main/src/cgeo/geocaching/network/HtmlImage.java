@@ -45,20 +45,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Date;
 
-public class HtmlImage implements Html.ImageGetter {
+/**
+ * All-purpose image getter that can also be used as a ImageGetter interface when displaying caches.
+ */
 
-    // This class implements an all-purpose image getter that can also be used as a ImageGetter interface
-    // when displaying caches. An instance mainly has three possible use cases:
-    //  - If onlySave is true, getDrawable() will return null immediately and will queue the image retrieval
-    //    and saving in the loading subject. Downloads will start in parallel when the blocking
-    //    waitForBackgroundLoading() method is called, and they can be cancelled through the given handler.
-    //  - If onlySave is false and the instance is called through fetchDrawable(), then an observable for the
-    //    given URL will be returned. This observable will emit the local copy of the image if it is present,
-    //    regardless of its freshness, then if needed an updated fresher copy after retrieving it from the network.
-    //  - If onlySave is false and the instance is used as an ImageGetter, only the final version of the
-    //    image will be returned, unless a view has been provided. If it has, then a dummy drawable is returned
-    //    and is updated when the image is available, possibly several times if we had a stale copy of the image
-    //    and then got a new one from the network.
+public class HtmlImage implements Html.ImageGetter {
 
     private static final String[] BLOCKED = new String[] {
             "gccounter.de",
@@ -80,7 +71,7 @@ public class HtmlImage implements Html.ImageGetter {
 
     final private String geocode;
     /**
-     * on error: return large error image, if <code>true</code>, otherwise empty 1x1 image
+     * on error: return large error image, if {@code true}, otherwise empty 1x1 image
      */
     final private boolean returnErrorImage;
     final private int listId;
@@ -93,10 +84,23 @@ public class HtmlImage implements Html.ImageGetter {
     // Background loading
     final private PublishSubject<Observable<String>> loading = PublishSubject.create();
     final private Observable<String> waitForEnd = Observable.merge(loading).publish().refCount();
-    final CompositeSubscription subscription = new CompositeSubscription(waitForEnd.subscribe());
+    final private CompositeSubscription subscription = new CompositeSubscription(waitForEnd.subscribe());
 
     /**
      * Create a new HtmlImage object with different behaviours depending on <tt>onlySave</tt> and <tt>view</tt> values.
+     * There are the three possible use cases:
+     * <ul>
+     *  <li>If onlySave is true, getDrawable() will return null immediately and will queue the image retrieval
+     *      and saving in the loading subject. Downloads will start in parallel when the blocking
+     *      waitForBackgroundLoading() method is called, and they can be cancelled through the given handler.</li>
+     *  <li>If onlySave is false and the instance is called through fetchDrawable(), then an observable for the
+     *      given URL will be returned. This observable will emit the local copy of the image if it is present</li>
+     *      regardless of its freshness, then if needed an updated fresher copy after retrieving it from the network.
+     *  <li>If onlySave is false and the instance is used as an ImageGetter, only the final version of the
+     *      image will be returned, unless a view has been provided. If it has, then a dummy drawable is returned
+     *      and is updated when the image is available, possibly several times if we had a stale copy of the image
+     *      and then got a new one from the network.</li>
+     * </ul>
      *
      * @param geocode the geocode of the item for which we are requesting the image
      * @param returnErrorImage set to <tt>true</tt> if an error image should be returned in case of a problem,
