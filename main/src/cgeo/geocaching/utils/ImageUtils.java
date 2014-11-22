@@ -346,14 +346,10 @@ public final class ImageUtils {
         final private TextView view;
 
         @SuppressWarnings("deprecation")
-        public ContainerDrawable(@NonNull final TextView view) {
+        public ContainerDrawable(@NonNull final TextView view, final Observable<? extends Drawable> drawableObservable) {
             this.view = view;
             drawable = null;
             setBounds(0, 0, 0, 0);
-        }
-
-        public ContainerDrawable(@NonNull final TextView view, final Observable<? extends Drawable> drawableObservable) {
-            this(view);
             updateFrom(drawableObservable);
         }
 
