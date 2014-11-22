@@ -95,7 +95,7 @@ public abstract class Network {
      *
      * @param uri the URI to request
      * @param params the parameters to add to the POST request
-     * @params headers the headers to add to the request
+     * @param headers the headers to add to the request
      * @return the HTTP response, or null in case of an encoding error params
      */
     @Nullable
@@ -377,7 +377,7 @@ public abstract class Network {
         if (!isSuccess(response)) {
             return null;
         }
-        assert(response != null);
+        assert response != null;
         final HttpEntity entity = response.getEntity();
         if (entity == null) {
             return null;
