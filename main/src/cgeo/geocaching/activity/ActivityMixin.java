@@ -6,6 +6,7 @@ import cgeo.geocaching.settings.Settings;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build.VERSION;
@@ -111,8 +112,13 @@ public final class ActivityMixin {
             window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
         if (Settings.useHardwareAcceleration()) {
-            window.addFlags(LayoutParams.FLAG_HARDWARE_ACCELERATED);
+            enableHardwareAcceleration(window);
         }
+    }
+
+    @TargetApi(VERSION_CODES.HONEYCOMB)
+    private static void enableHardwareAcceleration(final Window window) {
+        window.addFlags(LayoutParams.FLAG_HARDWARE_ACCELERATED);
     }
 
     public static void invalidateOptionsMenu(final Activity activity) {
