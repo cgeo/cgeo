@@ -383,7 +383,7 @@ public class HtmlImage implements Html.ImageGetter {
     private Pair<Bitmap, Boolean> loadCachedImage(final File file, final boolean forceKeep) {
         if (file.exists()) {
             final boolean freshEnough = listId >= StoredList.STANDARD_LIST_ID || file.lastModified() > (new Date().getTime() - (24 * 60 * 60 * 1000)) || forceKeep;
-            if (onlySave) {
+            if (freshEnough && onlySave) {
                 return new ImmutablePair<>(null, true);
             }
             final BitmapFactory.Options bfOptions = new BitmapFactory.Options();
