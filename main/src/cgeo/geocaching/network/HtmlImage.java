@@ -327,7 +327,7 @@ public class HtmlImage implements Html.ImageGetter {
      * @param url the image URL
      * @param pseudoGeocode the geocode or the shared name
      * @param forceKeep keep the image if it is there, without checking its freshness
-     * @return <code>true</code> if the image was there and is fresh enough, <code>false</code> otherwise
+     * @return A pair whose first element is the bitmap if available, and the second one is <code>true</code> if the image is present and fresh enough.
      */
     @NonNull
     private Pair<Bitmap, Boolean> loadImageFromStorage(final String url, final String pseudoGeocode, final boolean forceKeep) {
@@ -374,9 +374,9 @@ public class HtmlImage implements Html.ImageGetter {
      *
      * @param file the file on disk
      * @param forceKeep keep the image if it is there, without checking its freshness
-     * @return a pair with <code>true</code> if the image was there and is fresh enough or <code>false</code> otherwise,
-     *         and the image (possibly <code>null</code> if the first component is <code>false</code> and the image
-     *         could not be loaded, or if the first component is <code>true</code> and <code>onlySave</code> is also
+     * @return a pair with <code>true</code> in the second component if the image was there and is fresh enough or <code>false</code> otherwise,
+     *         and the image (possibly <code>null</code> if the second component is <code>false</code> and the image
+     *         could not be loaded, or if the second component is <code>true</code> and <code>onlySave</code> is also
      *         <code>true</code>)
      */
     @NonNull
