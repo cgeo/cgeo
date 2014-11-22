@@ -1,10 +1,13 @@
-package cgeo.geocaching.network;
+package cgeo.geocaching.activity;
 
 import butterknife.InjectView;
 
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.network.Network;
+import cgeo.geocaching.network.OAuth;
+import cgeo.geocaching.network.OAuthTokens;
+import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.BundleUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;

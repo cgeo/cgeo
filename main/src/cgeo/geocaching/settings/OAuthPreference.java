@@ -2,9 +2,9 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.OAuthAuthorizationActivity.OAuthParameters;
 import cgeo.geocaching.connector.oc.OCAuthParams;
 import cgeo.geocaching.connector.oc.OCAuthorizationActivity;
-import cgeo.geocaching.network.OAuthAuthorizationActivity.OAuthParameters;
 import cgeo.geocaching.twitter.TwitterAuthorizationActivity;
 
 import android.content.Context;

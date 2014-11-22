@@ -2,8 +2,8 @@ package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.OAuthAuthorizationActivity;
 import cgeo.geocaching.connector.oc.OkapiError.OkapiErrors;
-import cgeo.geocaching.network.OAuthAuthorizationActivity;
 import cgeo.geocaching.settings.Settings;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
