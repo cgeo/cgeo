@@ -157,6 +157,7 @@ public class SpeechService extends Service implements OnInitListener {
         return START_NOT_STICKY; // service can be stopped by system, if under memory pressure
     }
 
+    @SuppressWarnings("deprecation")
     private void speak(final String text) {
         if (!initialized) {
             return;
