@@ -127,7 +127,7 @@ public class Settings {
         if (currentVersion == 0 && prefsV0.getAll().isEmpty()) {
             final Editor e = sharedPrefs.edit();
             e.putInt(getKey(R.string.pref_settingsversion), LATEST_PREFERENCES_VERSION);
-            e.commit();
+            e.apply();
             return;
         }
 
@@ -191,7 +191,7 @@ public class Settings {
             e.putInt(getKey(R.string.pref_livemaphintshowcount), prefsV0.getInt(getKey(R.string.pref_livemaphintshowcount), 0));
 
             e.putInt(getKey(R.string.pref_settingsversion), 1); // mark migrated
-            e.commit();
+            e.apply();
         }
 
         // changes for new settings dialog
@@ -227,7 +227,7 @@ public class Settings {
             e.putString(getKey(R.string.pref_gpxExportDir), getGpxExportDir());
 
             e.putInt(getKey(R.string.pref_settingsversion), 2); // mark migrated
-            e.commit();
+            e.apply();
         }
     }
 
