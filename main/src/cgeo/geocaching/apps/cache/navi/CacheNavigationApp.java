@@ -11,7 +11,4 @@ import android.app.Activity;
  */
 public interface CacheNavigationApp extends App {
     void navigate(final Activity activity, final Geocache cache);
-
-    @Override
-    boolean isEnabled(final Geocache cache);
 }
