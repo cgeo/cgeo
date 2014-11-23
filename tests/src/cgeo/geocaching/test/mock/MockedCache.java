@@ -2,7 +2,7 @@ package cgeo.geocaching.test.mock;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.ICache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Image;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.gc.GCConstants;
@@ -20,10 +20,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
-public abstract class MockedCache implements ICache {
+public abstract class MockedCache extends Geocache {
 
     final protected Geopoint coords;
-    private String data;
+    private final String data;
     private String mockedDataUser;
 
     protected MockedCache(final Geopoint coords) {
@@ -38,7 +38,7 @@ public abstract class MockedCache implements ICache {
         return mockedDataUser;
     }
 
-    public void setMockedDataUser(String mockedDataUser) {
+    public void setMockedDataUser(final String mockedDataUser) {
         this.mockedDataUser = mockedDataUser;
         assertThat(StringUtils.isNotBlank(this.mockedDataUser)).isTrue();
     }
@@ -71,7 +71,7 @@ public abstract class MockedCache implements ICache {
             }
 
             return TextUtils.replaceWhitespace(buffer.toString());
-        } catch (IOException e) {
+        } catch (final IOException e) {
             Assert.fail(e.getMessage());
         } finally {
             IOUtils.closeQuietly(is);

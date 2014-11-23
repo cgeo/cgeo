@@ -1,7 +1,6 @@
 package cgeo.geocaching.connector;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.ICache;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
@@ -24,7 +23,7 @@ public class GeocachingAustraliaConnector extends AbstractConnector {
     }
 
     @Override
-    public boolean isOwner(final ICache cache) {
+    public boolean isOwner(final Geocache cache) {
         return false;
     }
 

@@ -1,7 +1,6 @@
 package cgeo.geocaching.connector.ox;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.ICache;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
@@ -56,7 +55,7 @@ public class OXConnector extends AbstractConnector implements ISearchByCenter, I
     }
 
     @Override
-    public boolean isOwner(final ICache cache) {
+    public boolean isOwner(final Geocache cache) {
         return false;
     }
 

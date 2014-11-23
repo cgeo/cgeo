@@ -1,7 +1,6 @@
 package cgeo.geocaching.connector.oc;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.ICache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.enumerations.LogType;
@@ -54,7 +53,7 @@ public class OCConnector extends AbstractConnector {
     }
 
     @Override
-    public boolean isOwner(final ICache cache) {
+    public boolean isOwner(final Geocache cache) {
         return false;
     }
 

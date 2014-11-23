@@ -1,7 +1,6 @@
 package cgeo.geocaching.connector;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.ICache;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.location.Geopoint;
@@ -189,7 +188,7 @@ public interface IConnector {
      * @param cache a cache that this connector must be able to handle
      * @return <code>true</code> if the current user is the cache owner, <code>false</code> otherwise
      */
-    public boolean isOwner(final ICache cache);
+    public boolean isOwner(final Geocache cache);
 
     /**
      * Check if the cache information is complete enough to be

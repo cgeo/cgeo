@@ -1,7 +1,7 @@
 package cgeo.geocaching.enumerations;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.ICache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 
 import java.util.Collections;
@@ -123,7 +123,7 @@ public enum CacheType {
      * @param cache
      * @return true if this is the ALL type or if this type equals the type of the cache.
      */
-    public boolean contains(final ICache cache) {
+    public boolean contains(final Geocache cache) {
         if (cache == null) {
             return false;
         }

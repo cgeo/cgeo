@@ -76,9 +76,9 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
- * Internal c:geo representation of a "cache"
+ * Internal representation of a "cache"
  */
-public class Geocache implements ICache, IWaypoint {
+public class Geocache implements IWaypoint, ILogable, ICoordinates {
 
     private static final int OWN_WP_PREFIX_OFFSET = 17;
     private long updated = 0;
@@ -170,7 +170,7 @@ public class Geocache implements ICache, IWaypoint {
      * Cache constructor to be used by the GPX parser only. This constructor explicitly sets several members to empty
      * lists.
      *
-     * @param gpxParser
+     * @param gpxParser ignored parameter allowing to select this constructor
      */
     public Geocache(final GPXParser gpxParser) {
         setReliableLatLon(true);
@@ -543,7 +543,6 @@ public class Geocache implements ICache, IWaypoint {
         return getConnector().getLoggingManager(activity, this);
     }
 
-    @Override
     public float getDifficulty() {
         return difficulty;
     }
@@ -553,12 +552,13 @@ public class Geocache implements ICache, IWaypoint {
         return geocode;
     }
 
-    @Override
+    /**
+     * @return displayed owner, might differ from the real owner
+     */
     public String getOwnerDisplayName() {
         return ownerDisplayName;
     }
 
-    @Override
     public CacheSize getSize() {
         if (size == null) {
             return CacheSize.UNKNOWN;
@@ -566,22 +566,18 @@ public class Geocache implements ICache, IWaypoint {
         return size;
     }
 
-    @Override
     public float getTerrain() {
         return terrain;
     }
 
-    @Override
     public boolean isArchived() {
         return BooleanUtils.isTrue(archived);
     }
 
-    @Override
     public boolean isDisabled() {
         return BooleanUtils.isTrue(disabled);
     }
 
-    @Override
     public boolean isPremiumMembersOnly() {
         return BooleanUtils.isTrue(premiumMembersOnly);
     }
@@ -590,20 +586,26 @@ public class Geocache implements ICache, IWaypoint {
         this.premiumMembersOnly = members;
     }
 
-    @Override
+    /**
+     *
+     * @return {@code true} if the user is the owner of the cache, {@code false} otherwise
+     */
     public boolean isOwner() {
         return getConnector().isOwner(this);
     }
 
-    @Override
-    public String getOwnerUserId() {
+    /**
+     * @return GC username of the (actual) owner, might differ from the owner. Never empty.
+     */
+    @NonNull public String getOwnerUserId() {
         return ownerUserId;
     }
 
     /**
      * Attention, calling this method may trigger a database access for the cache!
+     *
+     * @return the decrypted hint
      */
-    @Override
     public String getHint() {
         initializeCacheTexts();
         assertTextNotNull(hint, "Hint");
@@ -623,7 +625,6 @@ public class Geocache implements ICache, IWaypoint {
     /**
      * Attention, calling this method may trigger a database access for the cache!
      */
-    @Override
     public String getDescription() {
         initializeCacheTexts();
         assertTextNotNull(description, "Description");
@@ -654,7 +655,6 @@ public class Geocache implements ICache, IWaypoint {
     /**
      * Attention, calling this method may trigger a database access for the cache!
      */
-    @Override
     public String getShortDescription() {
         initializeCacheTexts();
         assertTextNotNull(shortdesc, "Short description");
@@ -666,7 +666,6 @@ public class Geocache implements ICache, IWaypoint {
         return name;
     }
 
-    @Override
     public String getCacheId() {
         if (StringUtils.isBlank(cacheId) && getConnector().equals(GCConnector.getInstance())) {
             return String.valueOf(GCConstants.gccodeToGCId(geocode));
@@ -675,7 +674,6 @@ public class Geocache implements ICache, IWaypoint {
         return cacheId;
     }
 
-    @Override
     public String getGuid() {
         return guid;
     }
@@ -683,14 +681,12 @@ public class Geocache implements ICache, IWaypoint {
     /**
      * Attention, calling this method may trigger a database access for the cache!
      */
-    @Override
     public String getLocation() {
         initializeCacheTexts();
         assertTextNotNull(location, "Location");
         return location;
     }
 
-    @Override
     public String getPersonalNote() {
         // non premium members have no personal notes, premium members have an empty string by default.
         // map both to null, so other code doesn't need to differentiate
@@ -743,12 +739,14 @@ public class Geocache implements ICache, IWaypoint {
         this.description = description;
     }
 
-    @Override
     public boolean isFound() {
         return BooleanUtils.isTrue(found);
     }
 
-    @Override
+    /**
+     *
+     * @return {@code true} if the user has put a favorite point onto this cache
+     */
     public boolean isFavorite() {
         return BooleanUtils.isTrue(favorite);
     }
@@ -757,18 +755,15 @@ public class Geocache implements ICache, IWaypoint {
         this.favorite = favorite;
     }
 
-    @Override
     @Nullable
     public Date getHiddenDate() {
         return hidden;
     }
 
-    @Override
     public List<String> getAttributes() {
         return attributes.getUnderlyingList();
     }
 
-    @Override
     public List<Trackable> getInventory() {
         return inventory;
     }
@@ -780,22 +775,24 @@ public class Geocache implements ICache, IWaypoint {
         spoilers.add(spoiler);
     }
 
-    @Override
     public List<Image> getSpoilers() {
         return ListUtils.unmodifiableList(ListUtils.emptyIfNull(spoilers));
     }
 
-    @Override
+    /**
+     * @return a statistic how often the caches has been found, disabled, archived etc.
+     */
     public Map<LogType, Integer> getLogCounts() {
         return logCounts;
     }
 
-    @Override
     public int getFavoritePoints() {
         return favoritePoints;
     }
 
-    @Override
+    /**
+     * @return the normalized cached name to be used for sorting, taking into account the numerical parts in the name
+     */
     public String getNameForSorting() {
         if (null == nameForSorting) {
             nameForSorting = name;
@@ -896,8 +893,6 @@ public class Geocache implements ICache, IWaypoint {
 
     /**
      * Set reliable coordinates
-     *
-     * @param coords
      */
     public void setCoords(final Geopoint coords) {
         this.coords = new UncertainProperty<>(coords);
@@ -905,9 +900,6 @@ public class Geocache implements ICache, IWaypoint {
 
     /**
      * Set unreliable coordinates from a certain map zoom level
-     *
-     * @param coords
-     * @param zoomlevel
      */
     public void setCoords(final Geopoint coords, final int zoomlevel) {
         this.coords = new UncertainProperty<>(coords, zoomlevel);
@@ -964,7 +956,9 @@ public class Geocache implements ICache, IWaypoint {
         this.inventoryItems = inventoryItems;
     }
 
-    @Override
+    /**
+     * @return {@code true} if the cache is on the user's watchlist, {@code false} otherwise
+     */
     public boolean isOnWatchlist() {
         return BooleanUtils.isTrue(onWatchlist);
     }
@@ -1148,7 +1142,6 @@ public class Geocache implements ICache, IWaypoint {
      *
      * @returns Never null
      */
-    @Override
     public CacheType getType() {
         return cacheType.getValue();
     }
@@ -1329,8 +1322,6 @@ public class Geocache implements ICache, IWaypoint {
 
     /**
      * deletes any waypoint
-     *
-     * @param waypoint
      */
 
     public void deleteWaypointForce(final Waypoint waypoint) {
@@ -1750,8 +1741,6 @@ public class Geocache implements ICache, IWaypoint {
 
     /**
      * Get number of overall finds for a cache, or 0 if the number of finds is not known.
-     *
-     * @return
      */
     public int getFindsCount() {
         if (getLogCounts().isEmpty()) {

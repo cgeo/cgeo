@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.ICache;
+import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Trackable;
@@ -144,7 +144,7 @@ public final class ConnectorFactory {
     }
 
     public static @NonNull
-    IConnector getConnector(final ICache cache) {
+    IConnector getConnector(final Geocache cache) {
         return getConnector(cache.getGeocode());
     }
 

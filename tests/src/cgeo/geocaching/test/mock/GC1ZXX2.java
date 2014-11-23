@@ -6,6 +6,8 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.location.Geopoint;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
@@ -58,6 +60,7 @@ public class GC1ZXX2 extends MockedCache {
         return true;
     }
 
+    @NonNull
     @Override
     public String getOwnerUserId() {
         return "daniel354";
