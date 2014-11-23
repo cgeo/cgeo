@@ -11,4 +11,9 @@
         <val val="&quot;null,_,_-&gt;null;_,null,_-&gt;null;_,_,null-&gt;null&quot;" />
       </annotation>
     </item>
+    <item name='org.apache.commons.lang3.StringUtils java.lang.String[] split(java.lang.String)'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val val="&quot;null-&gt;null;!null-&gt;!null&quot;" />
+        </annotation>
+    </item>
 </root>
