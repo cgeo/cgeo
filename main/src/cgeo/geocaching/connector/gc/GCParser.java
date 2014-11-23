@@ -832,14 +832,12 @@ public abstract class GCParser {
     /**
      * Possibly hide caches found or hidden by user. This mutates its params argument when possible.
      *
-     * @param params
-     *            the parameters to mutate, or null to create a new Parameters if needed
-     * @param my
-     * @param addF
+     * @param params the parameters to mutate, or null to create a new Parameters if needed
+     * @param my {@code true} if the user's caches must be forcibly included regardless of their settings
      * @return the original params if not null, maybe augmented with f=1, or a new Parameters with f=1 or null otherwise
      */
-    private static Parameters addFToParams(final Parameters params, final boolean my, final boolean addF) {
-        if (!my && Settings.isExcludeMyCaches() && addF) {
+    private static Parameters addFToParams(final Parameters params, final boolean my) {
+        if (!my && Settings.isExcludeMyCaches()) {
             if (params == null) {
                 return new Parameters("f", "1");
             }
@@ -855,8 +853,9 @@ public abstract class GCParser {
         insertCacheType(params, cacheType);
 
         final String uri = "http://www.geocaching.com/seek/nearest.aspx";
-        final String fullUri = uri + "?" + addFToParams(params, my, true);
-        final String page = GCLogin.getInstance().getRequestLogged(uri, addFToParams(params, my, true));
+        final Parameters paramsWithF = addFToParams(params, my);
+        final String fullUri = uri + "?" + paramsWithF;
+        final String page = GCLogin.getInstance().getRequestLogged(uri, paramsWithF);
 
         if (StringUtils.isBlank(page)) {
             Log.e("GCParser.searchByAny: No data from server");
