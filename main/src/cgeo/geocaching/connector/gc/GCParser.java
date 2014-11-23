@@ -240,7 +240,8 @@ public abstract class GCParser {
                 }
             }
 
-            if (inventoryPre != null && StringUtils.isNotBlank(inventoryPre)) {
+            if (StringUtils.isNotBlank(inventoryPre)) {
+                assert inventoryPre != null;
                 final MatcherWrapper matcherTbsInside = new MatcherWrapper(GCConstants.PATTERN_SEARCH_TRACKABLESINSIDE, inventoryPre);
                 while (matcherTbsInside.find()) {
                     if (matcherTbsInside.groupCount() == 2 &&
