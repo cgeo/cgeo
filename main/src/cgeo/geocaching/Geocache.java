@@ -212,7 +212,7 @@ public class Geocache implements ICache, IWaypoint {
         // if parsed cache is not yet detailed and stored is, the information of
         // the parsed cache will be overwritten
         if (!detailed && other.detailed) {
-            detailed = other.detailed;
+            detailed = true;
             detailedUpdate = other.detailedUpdate;
             // boolean values must be enumerated here. Other types are assigned outside this if-statement
             reliableLatLon = other.reliableLatLon;
