@@ -32,7 +32,7 @@ public class GeoData extends Location {
 
     @Nullable
     static Location best(@Nullable final Location gpsLocation, @Nullable final Location netLocation) {
-        if (isRecent(gpsLocation) || netLocation == null) {
+        if (netLocation == null || (gpsLocation != null && System.currentTimeMillis() <= gpsLocation.getTime() + 30000)) {
             return gpsLocation;
         }
         if (gpsLocation == null) {
@@ -91,10 +91,6 @@ public class GeoData extends Location {
             Log.e("Error when retrieving last known location", e);
             return null;
         }
-    }
-
-    public static boolean isRecent(@Nullable final Location location) {
-        return location != null && System.currentTimeMillis() <= location.getTime() + 30000;
     }
 
 }
