@@ -240,7 +240,7 @@ public abstract class GCParser {
                 }
             }
 
-            if (StringUtils.isNotBlank(inventoryPre)) {
+            if (inventoryPre != null && StringUtils.isNotBlank(inventoryPre)) {
                 final MatcherWrapper matcherTbsInside = new MatcherWrapper(GCConstants.PATTERN_SEARCH_TRACKABLESINSIDE, inventoryPre);
                 while (matcherTbsInside.find()) {
                     if (matcherTbsInside.groupCount() == 2 &&
@@ -1157,6 +1157,11 @@ public abstract class GCParser {
             Log.e("GCParser.postLog.confim", e);
         }
 
+        if (page == null) {
+            Log.e("GCParser.postLog: didn't get response");
+            return new ImmutablePair<>(StatusCode.LOG_POST_ERROR, "");
+        }
+
         try {
 
             final MatcherWrapper matcherOk = new MatcherWrapper(GCConstants.PATTERN_OK1, page);
@@ -1220,6 +1225,11 @@ public abstract class GCParser {
 
         final File image = new File(imageUri.getPath());
         final String response = Network.getResponseData(Network.postRequest(uri, uploadParams, "ctl00$ContentBody$ImageUploadControl1$uxFileUpload", "image/jpeg", image));
+
+        if (response == null) {
+            Log.e("GCParser.uploadLogIMage: didn't get response for image upload");
+            return ImmutablePair.of(StatusCode.LOGIMAGE_POST_ERROR, null);
+        }
 
         final MatcherWrapper matcherUrl = new MatcherWrapper(GCConstants.PATTERN_IMAGE_UPLOAD_URL, response);
 
