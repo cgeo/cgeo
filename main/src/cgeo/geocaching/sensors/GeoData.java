@@ -41,25 +41,20 @@ public class GeoData extends Location {
         return gpsLocation.getTime() >= netLocation.getTime() ? gpsLocation : netLocation;
     }
 
-    private static LocationProviderType getLocationProviderType(final String provider) {
-        if (provider.equals(LocationManager.GPS_PROVIDER)) {
-            return LocationProviderType.GPS;
-        }
-        if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
-            return LocationProviderType.NETWORK;
-        }
-        // LocationManager.FUSED_PROVIDER constant is not available at API level 9
-        if (provider.equals(FUSED_PROVIDER)) {
-            return LocationProviderType.FUSED;
-        }
-        if (provider.equals(LOW_POWER_PROVIDER)) {
-            return LocationProviderType.LOW_POWER;
-        }
-        return LocationProviderType.LAST;
-    }
-
     public LocationProviderType getLocationProvider() {
-        return getLocationProviderType(getProvider());
+        switch (getProvider()) {
+            case LocationManager.GPS_PROVIDER:
+                return LocationProviderType.GPS;
+            case LocationManager.NETWORK_PROVIDER:
+                return LocationProviderType.NETWORK;
+            case FUSED_PROVIDER:
+                // LocationManager.FUSED_PROVIDER constant is not available at API level 9
+                return LocationProviderType.FUSED;
+            case LOW_POWER_PROVIDER:
+                return LocationProviderType.LOW_POWER;
+            default:
+                return LocationProviderType.LAST;
+        }
     }
 
     @NonNull
