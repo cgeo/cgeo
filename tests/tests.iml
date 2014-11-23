@@ -16,7 +16,7 @@
       <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" generated="true" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="cgeo" exported="" scope="TEST" />
+    <orderEntry type="module" module-name="cgeo" scope="TEST" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -31,17 +31,5 @@
       </library>
     </orderEntry>
     <orderEntry type="inheritedJdk" />
-    <orderEntry type="module-library" scope="PROVIDED">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../main/compile-libs/org.eclipse.jdt.annotation_1.1.0.v20130513-1648.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$MODULE_DIR$/../main/compile-libs/org.eclipse.jdt.annotation_1.1.0.v20130513-1648.jar!/src" />
-        </SOURCES>
-      </library>
-    </orderEntry>
   </component>
 </module>
-

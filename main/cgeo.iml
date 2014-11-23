@@ -46,11 +46,8 @@
           <root url="file://$MODULE_DIR$/compile-libs" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES>
-          <root url="file://$MODULE_DIR$/compile-libs" />
-        </SOURCES>
+        <SOURCES />
         <jarDirectory url="file://$MODULE_DIR$/compile-libs" recursive="false" />
-        <jarDirectory url="file://$MODULE_DIR$/compile-libs" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
     <orderEntry type="module-library" exported="">
