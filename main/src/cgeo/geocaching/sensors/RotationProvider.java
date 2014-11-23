@@ -77,7 +77,7 @@ public class RotationProvider extends LooperCallbacks<Float> implements SensorEv
     }
 
     public static Observable<Float> create(final Context context, final boolean lowPower) {
-        return Observable.create(new RotationProvider(context, lowPower));
+        return Observable.create(new RotationProvider(context, lowPower)).onBackpressureDrop();
     }
 
 }

@@ -61,7 +61,7 @@ public class OrientationProvider extends LooperCallbacks<Float> implements Senso
     }
 
     public static Observable<Float> create(final Context context) {
-        return Observable.create(new OrientationProvider(context));
+        return Observable.create(new OrientationProvider(context)).onBackpressureDrop();
     }
 
 }
