@@ -310,10 +310,8 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
 
         if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) {
             final IGeoData geo = app.currentGeo();
-            if (geo.getCoords() != null) {
-                buttonLatitude.setText(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE));
-                buttonLongitude.setText(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE));
-            }
+            buttonLatitude.setText(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE));
+            buttonLongitude.setText(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE));
         } else {
             try {
                 CacheListActivity.startActivityCoordinates(this, new Geopoint(latText, lonText));

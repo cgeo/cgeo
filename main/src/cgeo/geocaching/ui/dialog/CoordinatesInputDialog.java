@@ -62,10 +62,8 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         if (gp != null) {
             args.putParcelable(GEOPOINT_ARG, gp);
-        } else if (geo != null && geo.getCoords() != null) {
-            args.putParcelable(GEOPOINT_ARG, geo.getCoords());
         } else {
-            args.putParcelable(GEOPOINT_ARG, Geopoint.ZERO);
+            args.putParcelable(GEOPOINT_ARG, geo != null ? geo.getCoords() : Geopoint.ZERO);
         }
 
         if (geo !=null) {

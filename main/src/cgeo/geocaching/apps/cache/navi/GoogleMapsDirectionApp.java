@@ -26,16 +26,10 @@ public class GoogleMapsDirectionApp extends AbstractPointNavigationApp {
     public void navigate(final Activity activity, final Geopoint coords) {
         try {
             final IGeoData geo = CgeoApplication.getInstance().currentGeo();
-            if (geo.getCoords() != null) {
-                activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri
-                        .parse("http://maps.google.com/maps?f=d&saddr="
-                                + geo.getCoords().getLatitude() + "," + geo.getCoords().getLongitude() + "&daddr="
-                                + coords.getLatitude() + "," + coords.getLongitude())));
-            } else {
-                activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri
-                        .parse("http://maps.google.com/maps?f=d&daddr="
-                                + coords.getLatitude() + "," + coords.getLongitude())));
-            }
+            activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri
+                    .parse("http://maps.google.com/maps?f=d&saddr="
+                            + geo.getCoords().getLatitude() + "," + geo.getCoords().getLongitude() + "&daddr="
+                            + coords.getLatitude() + "," + coords.getLongitude())));
 
         } catch (final Exception e) {
             Log.i("GoogleMapsDirectionApp: application not available.", e);

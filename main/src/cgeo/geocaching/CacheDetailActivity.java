@@ -555,7 +555,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return;
             }
 
-            if (geo.getCoords() != null && activity.cache != null && activity.cache.getCoords() != null) {
+            if (activity.cache != null && activity.cache.getCoords() != null) {
                 activity.cacheDistanceView.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(activity.cache.getCoords())));
                 activity.cacheDistanceView.bringToFront();
             }

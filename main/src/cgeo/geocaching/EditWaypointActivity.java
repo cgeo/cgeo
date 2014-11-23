@@ -266,10 +266,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     final private GeoDirHandler geoDirHandler = new GeoDirHandler() {
         @Override
         public void updateGeoData(final IGeoData geo) {
-            if (geo.getCoords() == null) {
-                return;
-            }
-
             try {
                 buttonLat.setHint(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
                 buttonLon.setHint(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
@@ -395,12 +391,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     return;
                 }
             } else {
-                final IGeoData geo = app.currentGeo();
-                if (geo.getCoords() == null) {
-                    showToast(res.getString(R.string.err_point_curr_position_unavailable));
-                    return;
-                }
-                coords = geo.getCoords();
+                coords = app.currentGeo().getCoords();
             }
 
             if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {

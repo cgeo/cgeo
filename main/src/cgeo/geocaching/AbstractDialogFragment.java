@@ -256,7 +256,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         @Override
         public void updateGeoData(final IGeoData geo) {
             try {
-                if (geo.getCoords() != null && cache != null && cache.getCoords() != null) {
+                if (cache != null && cache.getCoords() != null) {
                     cacheDistance.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(cache.getCoords())));
                     cacheDistance.bringToFront();
                 }

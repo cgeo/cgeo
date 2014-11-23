@@ -625,10 +625,6 @@ public class MainActivity extends AbstractActionBarActivity {
      *            unused here but needed since this method is referenced from XML layout
      */
     public void cgeoFindNearest(final View v) {
-        if (app.currentGeo().getCoords() == null) {
-            return;
-        }
-
         nearestView.setPressed(true);
         startActivity(CacheListActivity.getNearestIntent(this));
     }

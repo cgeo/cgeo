@@ -262,7 +262,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     }
 
     private void updateDistanceInfo(final IGeoData geo) {
-        if (geo.getCoords() == null || dstCoords == null) {
+        if (dstCoords == null) {
             return;
         }
 
@@ -286,23 +286,17 @@ public class CompassActivity extends AbstractActionBarActivity {
         @Override
         public void updateGeoDir(final IGeoData geo, final float dir) {
             try {
-                if (geo.getCoords() != null) {
-                    navType.setText(res.getString(geo.getLocationProvider().resourceId));
+                navType.setText(res.getString(geo.getLocationProvider().resourceId));
 
-                    if (geo.getAccuracy() >= 0) {
-                        navAccuracy.setText("±" + Units.getDistanceFromMeters(geo.getAccuracy()));
-                    } else {
-                        navAccuracy.setText(null);
-                    }
-
-                    navLocation.setText(geo.getCoords().toString());
-
-                    updateDistanceInfo(geo);
+                if (geo.getAccuracy() >= 0) {
+                    navAccuracy.setText("±" + Units.getDistanceFromMeters(geo.getAccuracy()));
                 } else {
-                    navType.setText(null);
                     navAccuracy.setText(null);
-                    navLocation.setText(res.getString(R.string.loc_trying));
                 }
+
+                navLocation.setText(geo.getCoords().toString());
+
+                updateDistanceInfo(geo);
 
                 updateNorthHeading(AngleUtils.getDirectionNow(dir));
             } catch (final RuntimeException e) {

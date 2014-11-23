@@ -473,14 +473,8 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
         @Override
         public void onClick(final View arg0) {
             final Geopoint coords = app.currentGeo().getCoords();
-            if (coords == null) {
-                showToast(res.getString(R.string.err_point_unknown_position));
-                return;
-            }
-
             latButton.setText(coords.format(GeopointFormatter.Format.LAT_DECMINUTE));
             lonButton.setText(coords.format(GeopointFormatter.Format.LON_DECMINUTE));
-
             changed = false;
         }
     }
@@ -508,16 +502,11 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
                 return null;
             }
         } else {
-            if (app.currentGeo().getCoords() == null) {
-                showToast(res.getString(R.string.err_point_curr_position_unavailable));
-                return null;
-            }
-
             coords = app.currentGeo().getCoords();
         }
 
         // apply projection
-        if (coords != null && StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
+        if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
             // bearing & distance
             double bearing;
             try {
@@ -539,9 +528,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
             coords = coords.project(bearing, distance);
         }
 
-        if (coords != null) {
-            saveCoords(coords);
-        }
+        saveCoords(coords);
 
         return coords;
     }

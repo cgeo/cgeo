@@ -145,10 +145,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         @Override
         public void updateGeoData(final IGeoData geoData) {
-            final Geopoint coords = geoData.getCoords();
-            if (coords != null) {
-                adapter.setActualCoordinates(coords);
-            }
+            adapter.setActualCoordinates(geoData.getCoords());
         }
 
     };
@@ -544,12 +541,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void setAdapterCurrentCoordinates(final boolean forceSort) {
-        final Geopoint coordsNow = app.currentGeo().getCoords();
-        if (coordsNow != null) {
-            adapter.setActualCoordinates(coordsNow);
-            if (forceSort) {
-                adapter.forceSort();
-            }
+        adapter.setActualCoordinates(app.currentGeo().getCoords());
+        if (forceSort) {
+            adapter.forceSort();
         }
     }
 
