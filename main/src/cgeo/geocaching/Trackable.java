@@ -6,6 +6,7 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.utils.ImageUtils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.text.Html;
 
@@ -184,6 +185,7 @@ public class Trackable implements ILogable {
         this.image = image;
     }
 
+    @NonNull
     public List<LogEntry> getLogs() {
         return logs;
     }
