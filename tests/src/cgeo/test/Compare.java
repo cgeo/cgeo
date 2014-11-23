@@ -30,7 +30,7 @@ public abstract class Compare {
         final Date hiddenDate = actual.getHiddenDate();
         assertThat(hiddenDate).isNotNull();
         assert hiddenDate != null; // silence the eclipse compiler in the next line
-        assertThat(hiddenDate.toString()).as(cacheStr + "hidden date").isEqualTo(expected.getHiddenDate().toString());
+        assertThat(hiddenDate).as(cacheStr + " hidden date").isEqualTo(expected.getHiddenDate());
         assertThat(actual.isPremiumMembersOnly()).as(cacheStr + "premium only").isEqualTo(expected.isPremiumMembersOnly());
 
         if (all) {
