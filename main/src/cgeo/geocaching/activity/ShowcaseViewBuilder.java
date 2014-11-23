@@ -29,7 +29,7 @@ public class ShowcaseViewBuilder extends Builder {
     /**
      * Use the hash of the title for the single shot remembering
      *
-     * @param resId
+     * @param title
      */
     private void setSingleshot(final CharSequence title) {
         super.singleShot(title.hashCode());

@@ -1320,7 +1320,7 @@ public class DataStore {
      *
      * @param values
      *            a ContentValues to save coordinates in
-     * @param oneWaypoint
+     * @param coords
      *            coordinates to save, or null to save empty coordinates
      */
     private static void putCoords(final ContentValues values, final Geopoint coords) {
@@ -2235,14 +2235,10 @@ public class DataStore {
     /**
      * Loads the geocodes of caches in a viewport from CacheCache and/or Database
      *
-     * @param stored
-     *            True - query only stored caches, False - query cached ones as well
-     * @param centerLat
-     * @param centerLon
-     * @param spanLat
-     * @param spanLon
-     * @param cacheType
-     * @return Set with geocodes
+     * @param stored {@code true} to query caches stored in the database, {@code false} to also use the CacheCache
+     * @param viewport the viewport defining the area to scan
+     * @param cacheType the cache type
+     * @return the matching caches
      */
     private static SearchResult loadInViewport(final boolean stored, final Viewport viewport, final CacheType cacheType) {
         final Set<String> geocodes = new HashSet<>();

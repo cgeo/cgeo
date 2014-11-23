@@ -277,7 +277,7 @@ public class SettingsActivity extends PreferenceActivity {
     /**
      * Fire up a directory chooser on click on the preference.
      *
-     * @see #onActivityResult() for processing of the selected directory
+     * The result can be processed using {@link android.app.Activity#onActivityResult}.
      *
      * @param dct
      *            type of directory to be selected

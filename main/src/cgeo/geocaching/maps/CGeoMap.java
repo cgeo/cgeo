@@ -1002,7 +1002,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     }
 
     /**
-     * Starts the {@link LoadTimer}.
+     * Starts the load timer.
      */
 
     private Subscription startTimer() {
@@ -1081,7 +1081,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     /**
      * Worker thread that loads caches and waypoints from the database and then spawns the {@link DownloadRunnable}.
-     * started by {@link LoadTimer}
+     * started by the load timer.
      */
 
     private static class LoadRunnable extends DoRunnable {

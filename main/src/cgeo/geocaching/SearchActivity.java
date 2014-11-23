@@ -126,7 +126,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     /**
      * Performs a search for query either as geocode, trackable code or keyword
      *
-     * @param query
+     * @param nonTrimmedQuery
      *            String to search for
      * @param keywordSearch
      *            Set to true if keyword search should be performed if query isn't GC or TB
