@@ -15,7 +15,7 @@ import android.os.Bundle;
 
 import java.util.concurrent.TimeUnit;
 
-public class GeoDataProvider extends LooperCallbacks<IGeoData> {
+public class GeoDataProvider extends LooperCallbacks<GeoData> {
 
     private final Context context;
     private final LocationManager geoManager;
@@ -37,13 +37,13 @@ public class GeoDataProvider extends LooperCallbacks<IGeoData> {
         geoManager = (LocationManager) this.context.getSystemService(Context.LOCATION_SERVICE);
     }
 
-    public static Observable<IGeoData> create(final Context context) {
+    public static Observable<GeoData> create(final Context context) {
         return Observable.create(new GeoDataProvider(context));
     }
 
     @Override
     public void onStart() {
-        final IGeoData initialLocation = GeoData.getInitialLocation(context);
+        final GeoData initialLocation = GeoData.getInitialLocation(context);
         if (initialLocation != null) {
             subject.onNext(initialLocation);
         }
@@ -97,7 +97,7 @@ public class GeoDataProvider extends LooperCallbacks<IGeoData> {
 
     private void assign(final Location location) {
         // We do not necessarily get signalled when satellites go to 0/0.
-        final IGeoData current = new GeoData(location);
+        final GeoData current = new GeoData(location);
         subject.onNext(current);
     }
 

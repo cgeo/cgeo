@@ -17,7 +17,7 @@ import rx.subscriptions.CompositeSubscription;
 /**
  * GeoData and Direction handler.
  * <p>
- * To use this class, override {@link #updateGeoDir(IGeoData, float)}. You need to start the handler using
+ * To use this class, override {@link #updateGeoDir(cgeo.geocaching.sensors.GeoData, float)}. You need to start the handler using
  * {@link #start(int)}. A good place to do so might be the {@code onResume} method of the Activity. Stop the Handler
  * accordingly in {@code onPause}.
  *
@@ -40,7 +40,7 @@ public abstract class GeoDirHandler {
      *
      * @param geoData the new geographical data
      */
-    public void updateGeoData(final IGeoData geoData) {
+    public void updateGeoData(final GeoData geoData) {
     }
 
     /**
@@ -62,21 +62,21 @@ public abstract class GeoDirHandler {
      * If the device goes fast enough, or if the compass use is not enabled in the settings,
      * the GPS direction information will be used instead of the compass one.
      */
-    public void updateGeoDir(final IGeoData geoData, final float direction) {
+    public void updateGeoDir(final GeoData geoData, final float direction) {
     }
 
     private static Observable<Float> fixedDirection() {
         return app.directionObservable().map(new Func1<Float, Float>() {
             @Override
             public Float call(final Float direction) {
-                final IGeoData geoData = app.currentGeo();
+                final GeoData geoData = app.currentGeo();
                 return fixDirection(geoData, direction);
             }
         });
 
     }
 
-    private static float fixDirection(final IGeoData geoData, final float direction) {
+    private static float fixDirection(final GeoData geoData, final float direction) {
         final boolean useGPSBearing = !Settings.isUseCompass() || geoData.getSpeed() > 5;
         return useGPSBearing ? AngleUtils.reverseDirectionNow(geoData.getBearing()) : direction;
     }
@@ -89,9 +89,9 @@ public abstract class GeoDirHandler {
         final CompositeSubscription subscriptions = new CompositeSubscription();
         final boolean lowPower = (flags & LOW_POWER) != 0;
         if ((flags & UPDATE_GEODATA) != 0) {
-            subscriptions.add(app.geoDataObservable(lowPower).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<IGeoData>() {
+            subscriptions.add(app.geoDataObservable(lowPower).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<GeoData>() {
                 @Override
-                public void call(final IGeoData geoData) {
+                public void call(final GeoData geoData) {
                     updateGeoData(geoData);
                 }
             }));
@@ -105,14 +105,14 @@ public abstract class GeoDirHandler {
             }));
         }
         if ((flags & UPDATE_GEODIR) != 0) {
-            subscriptions.add(Observable.combineLatest(app.geoDataObservable(lowPower), app.directionObservable(), new Func2<IGeoData, Float, ImmutablePair<IGeoData, Float>>() {
+            subscriptions.add(Observable.combineLatest(app.geoDataObservable(lowPower), app.directionObservable(), new Func2<GeoData, Float, ImmutablePair<GeoData, Float>>() {
                 @Override
-                public ImmutablePair<IGeoData, Float> call(final IGeoData geoData, final Float direction) {
+                public ImmutablePair<GeoData, Float> call(final GeoData geoData, final Float direction) {
                     return ImmutablePair.of(geoData, fixDirection(geoData, direction));
                 }
-            }).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<ImmutablePair<IGeoData, Float>>() {
+            }).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<ImmutablePair<GeoData, Float>>() {
                 @Override
-                public void call(final ImmutablePair<IGeoData, Float> geoDir) {
+                public void call(final ImmutablePair<GeoData, Float> geoDir) {
                     updateGeoDir(geoDir.left, geoDir.right);
                 }
             }));

@@ -1,7 +1,6 @@
 package cgeo.geocaching.playservices;
 
 import cgeo.geocaching.sensors.GeoData;
-import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxUtils;
@@ -38,7 +37,7 @@ public class LocationProvider implements ConnectionCallbacks, OnConnectionFailed
     private static final AtomicInteger mostPreciseCount = new AtomicInteger(0);
     private static final AtomicInteger lowPowerCount = new AtomicInteger(0);
     private static LocationProvider instance = null;
-    private static ReplaySubject<IGeoData> subject = ReplaySubject.createWithSize(1);
+    private static ReplaySubject<GeoData> subject = ReplaySubject.createWithSize(1);
     private final LocationClient locationClient;
 
     private static synchronized LocationProvider getInstance(final Context context) {
@@ -63,11 +62,11 @@ public class LocationProvider implements ConnectionCallbacks, OnConnectionFailed
         }
     }
 
-    private static Observable<IGeoData> get(final Context context, final AtomicInteger reference) {
+    private static Observable<GeoData> get(final Context context, final AtomicInteger reference) {
         final LocationProvider instance = getInstance(context);
-        return Observable.create(new OnSubscribe<IGeoData>() {
+        return Observable.create(new OnSubscribe<GeoData>() {
             @Override
-            public void call(final Subscriber<? super IGeoData> subscriber) {
+            public void call(final Subscriber<? super GeoData> subscriber) {
                 if (reference.incrementAndGet() == 1) {
                     instance.updateRequest();
                 }
@@ -84,9 +83,9 @@ public class LocationProvider implements ConnectionCallbacks, OnConnectionFailed
                         }, 2500, TimeUnit.MILLISECONDS);
                     }
                 }));
-                subscriber.add(subject.subscribe(new Action1<IGeoData>() {
+                subscriber.add(subject.subscribe(new Action1<GeoData>() {
                     @Override
-                    public void call(final IGeoData geoData) {
+                    public void call(final GeoData geoData) {
                         subscriber.onNext(geoData);
                     }
                 }));
@@ -94,24 +93,24 @@ public class LocationProvider implements ConnectionCallbacks, OnConnectionFailed
         });
     }
 
-    public static Observable<IGeoData> getMostPrecise(final Context context) {
+    public static Observable<GeoData> getMostPrecise(final Context context) {
         return get(context, mostPreciseCount);
     }
 
-    public static Observable<IGeoData> getLowPower(final Context context) {
+    public static Observable<GeoData> getLowPower(final Context context) {
         // Low-power location without the last stored location
-        final Observable<IGeoData> lowPowerObservable = get(context, lowPowerCount).skip(1);
+        final Observable<GeoData> lowPowerObservable = get(context, lowPowerCount).skip(1);
 
         // High-power location without the last stored location
-        final Observable<IGeoData> highPowerObservable = get(context, mostPreciseCount).skip(1);
+        final Observable<GeoData> highPowerObservable = get(context, mostPreciseCount).skip(1);
 
         // Use either low-power (with a 6 seconds head start) or high-power observables to obtain a location
         // no less precise than 20 meters.
-        final Observable<IGeoData> untilPreciseEnoughObservable =
+        final Observable<GeoData> untilPreciseEnoughObservable =
                 lowPowerObservable.mergeWith(highPowerObservable.delaySubscription(6, TimeUnit.SECONDS))
-                        .lift(RxUtils.operatorTakeUntil(new Func1<IGeoData, Boolean>() {
+                        .lift(RxUtils.operatorTakeUntil(new Func1<GeoData, Boolean>() {
                             @Override
-                            public Boolean call(final IGeoData geoData) {
+                            public Boolean call(final GeoData geoData) {
                                 return geoData.getAccuracy() <= 20;
                             }
                         }));
@@ -131,7 +130,7 @@ public class LocationProvider implements ConnectionCallbacks, OnConnectionFailed
      * @param context the context used to retrieve the system services
      */
     private LocationProvider(final Context context) {
-        final IGeoData initialLocation = GeoData.getInitialLocation(context);
+        final GeoData initialLocation = GeoData.getInitialLocation(context);
         subject.onNext(initialLocation != null ? initialLocation : GeoData.DUMMY_LOCATION);
         locationClient = new LocationClient(context, this, this);
         locationClient.connect();

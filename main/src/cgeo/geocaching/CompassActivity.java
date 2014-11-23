@@ -8,9 +8,9 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.GpsStatusProvider.Status;
-import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.ui.CompassView;
@@ -140,7 +140,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     private void forceRefresh() {
         // Force a refresh of location and direction when data is available.
         final CgeoApplication app = CgeoApplication.getInstance();
-        final IGeoData geo = app.currentGeo();
+        final GeoData geo = app.currentGeo();
         geoDirHandler.updateGeoDir(geo, app.currentDirection());
     }
 
@@ -261,7 +261,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         cacheInfoView.setText(description);
     }
 
-    private void updateDistanceInfo(final IGeoData geo) {
+    private void updateDistanceInfo(final GeoData geo) {
         if (dstCoords == null) {
             return;
         }
@@ -284,7 +284,7 @@ public class CompassActivity extends AbstractActionBarActivity {
 
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
         @Override
-        public void updateGeoDir(final IGeoData geo, final float dir) {
+        public void updateGeoDir(final GeoData geo, final float dir) {
             try {
                 navType.setText(res.getString(geo.getLocationProvider().resourceId));
 

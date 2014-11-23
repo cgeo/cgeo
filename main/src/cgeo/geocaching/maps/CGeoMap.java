@@ -32,8 +32,8 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
+import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
-import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.LiveMapInfoDialogBuilder;
 import cgeo.geocaching.utils.AngleUtils;
@@ -896,7 +896,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     }
 
     // Set center of map to my location if appropriate.
-    private void myLocationInMiddle(final IGeoData geo) {
+    private void myLocationInMiddle(final GeoData geo) {
         if (followMyLocation) {
             centerMap(geo.getCoords());
         }
@@ -927,7 +927,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
 
         @Override
-        public void updateGeoDir(final IGeoData geo, final float dir) {
+        public void updateGeoDir(final GeoData geo, final float dir) {
             currentLocation = geo.getLocation();
             currentHeading = AngleUtils.getDirectionNow(dir);
             repaintPositionOverlay();

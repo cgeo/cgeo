@@ -2,7 +2,7 @@ package cgeo.geocaching.filter;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.sensors.IGeoData;
+import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class DistanceFilter extends AbstractFilter {
-    private final IGeoData geo;
+    private final GeoData geo;
     private final int minDistance;
     private final int maxDistance;
 

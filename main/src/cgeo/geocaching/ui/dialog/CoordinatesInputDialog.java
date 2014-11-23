@@ -9,7 +9,7 @@ import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Geopoint.ParseException;
 import cgeo.geocaching.location.GeopointFormatter;
-import cgeo.geocaching.sensors.IGeoData;
+import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.Settings.CoordInputFormatEnum;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -56,7 +56,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     private static final String CACHECOORDS_ARG = "CACHECOORDS";
 
 
-    public static CoordinatesInputDialog getInstance(final Geocache cache, final Geopoint gp, final IGeoData geo) {
+    public static CoordinatesInputDialog getInstance(final Geocache cache, final Geopoint gp, final GeoData geo) {
 
         final Bundle args = new Bundle();
 

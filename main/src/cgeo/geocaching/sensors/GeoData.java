@@ -3,13 +3,14 @@ package cgeo.geocaching.sensors;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.Log;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
 
-public class GeoData extends Location implements IGeoData {
+public class GeoData extends Location {
 
     public static final String INITIAL_PROVIDER = "initial";
     public static final String FUSED_PROVIDER = "fused";
@@ -19,6 +20,7 @@ public class GeoData extends Location implements IGeoData {
     // rather than waiting forever for a position update which might never come, we emulate it by placing
     // the user arbitrarly at Paris Notre-Dame, one of the most visited free tourist attractions in the world.
     final public static GeoData DUMMY_LOCATION = new GeoData(new Location(INITIAL_PROVIDER));
+
     static {
         DUMMY_LOCATION.setLatitude(48.85308);
         DUMMY_LOCATION.setLongitude(2.34962);
@@ -39,7 +41,6 @@ public class GeoData extends Location implements IGeoData {
         return gpsLocation.getTime() >= netLocation.getTime() ? gpsLocation : netLocation;
     }
 
-    @Override
     public Location getLocation() {
         return this;
     }
@@ -61,17 +62,17 @@ public class GeoData extends Location implements IGeoData {
         return LocationProviderType.LAST;
     }
 
-    @Override
     public LocationProviderType getLocationProvider() {
         return getLocationProviderType(getProvider());
     }
 
-    @Override
+    @NonNull
     public Geopoint getCoords() {
         return new Geopoint(this);
     }
 
-    @Nullable public static GeoData getInitialLocation(final Context context) {
+    @Nullable
+    public static GeoData getInitialLocation(final Context context) {
         final LocationManager geoManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         if (geoManager == null) {
             Log.w("No LocationManager available");
@@ -95,8 +96,6 @@ public class GeoData extends Location implements IGeoData {
             return null;
         }
     }
-
-
 
     public static boolean isRecent(@Nullable final Location location) {
         return location != null && System.currentTimeMillis() <= location.getTime() + 30000;
