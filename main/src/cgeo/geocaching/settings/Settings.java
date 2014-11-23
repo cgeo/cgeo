@@ -255,40 +255,40 @@ public class Settings {
         return sharedPrefs.getFloat(getKey(prefKeyId), defaultValue);
     }
 
-    protected static boolean putString(final int prefKeyId, final String value) {
+    protected static void putString(final int prefKeyId, final String value) {
         final SharedPreferences.Editor edit = sharedPrefs.edit();
         edit.putString(getKey(prefKeyId), value);
-        return edit.commit();
+        edit.apply();
     }
 
-    protected static boolean putBoolean(final int prefKeyId, final boolean value) {
+    protected static void putBoolean(final int prefKeyId, final boolean value) {
         final SharedPreferences.Editor edit = sharedPrefs.edit();
         edit.putBoolean(getKey(prefKeyId), value);
-        return edit.commit();
+        edit.apply();
     }
 
-    private static boolean putInt(final int prefKeyId, final int value) {
+    private static void putInt(final int prefKeyId, final int value) {
         final SharedPreferences.Editor edit = sharedPrefs.edit();
         edit.putInt(getKey(prefKeyId), value);
-        return edit.commit();
+        edit.apply();
     }
 
-    private static boolean putLong(final int prefKeyId, final long value) {
+    private static void putLong(final int prefKeyId, final long value) {
         final SharedPreferences.Editor edit = sharedPrefs.edit();
         edit.putLong(getKey(prefKeyId), value);
-        return edit.commit();
+        edit.apply();
     }
 
-    private static boolean putFloat(final int prefKeyId, final float value) {
+    private static void putFloat(final int prefKeyId, final float value) {
         final SharedPreferences.Editor edit = sharedPrefs.edit();
         edit.putFloat(getKey(prefKeyId), value);
-        return edit.commit();
+        edit.apply();
     }
 
-    private static boolean remove(final int prefKeyId) {
+    private static void remove(final int prefKeyId) {
         final SharedPreferences.Editor edit = sharedPrefs.edit();
         edit.remove(getKey(prefKeyId));
-        return edit.commit();
+        edit.apply();
     }
 
     private static boolean contains(final int prefKeyId) {
@@ -360,11 +360,11 @@ public class Settings {
         return getString(R.string.pref_memberstatus, "");
     }
 
-    public static boolean setGCMemberStatus(final String memberStatus) {
+    public static void setGCMemberStatus(final String memberStatus) {
         if (StringUtils.isBlank(memberStatus)) {
-            return remove(R.string.pref_memberstatus);
+            remove(R.string.pref_memberstatus);
         }
-        return putString(R.string.pref_memberstatus, memberStatus);
+        putString(R.string.pref_memberstatus, memberStatus);
     }
 
     public static ImmutablePair<String, String> getTokenPair(final int tokenPublicPrefKey, final int tokenSecretPrefKey) {
@@ -415,13 +415,13 @@ public class Settings {
         return getString(R.string.pref_signature, StringUtils.EMPTY);
     }
 
-    public static boolean setCookieStore(final String cookies) {
+    public static void setCookieStore(final String cookies) {
         if (StringUtils.isBlank(cookies)) {
             // erase cookies
-            return remove(R.string.pref_cookiestore);
+            remove(R.string.pref_cookiestore);
         }
         // save cookies
-        return putString(R.string.pref_cookiestore, cookies);
+        putString(R.string.pref_cookiestore, cookies);
     }
 
     public static String getCookieStore() {
@@ -469,12 +469,11 @@ public class Settings {
         return getString(R.string.pref_mapfile, null);
     }
 
-    public static boolean setMapFile(final String mapFile) {
-        final boolean result = putString(R.string.pref_mapfile, mapFile);
+    public static void setMapFile(final String mapFile) {
+        putString(R.string.pref_mapfile, mapFile);
         if (mapFile != null) {
             setMapFileDirectory(new File(mapFile).getParent());
         }
-        return result;
     }
 
     public static String getMapFileDirectory() {
@@ -489,10 +488,9 @@ public class Settings {
         return null;
     }
 
-    public static boolean setMapFileDirectory(final String mapFileDirectory) {
-        final boolean result = putString(R.string.pref_mapDirectory, mapFileDirectory);
+    public static void setMapFileDirectory(final String mapFileDirectory) {
+        putString(R.string.pref_mapDirectory, mapFileDirectory);
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
-        return result;
     }
 
     public static boolean isValidMapFile() {
@@ -634,9 +632,6 @@ public class Settings {
     /**
      * Get last used zoom of the internal map. Differentiate between two use cases for a map of multiple caches (e.g.
      * live map) and the map of a single cache (which is often zoomed in more deep).
-     *
-     * @param mapMode
-     * @return
      */
     public static int getMapZoom(final MapMode mapMode) {
         if (mapMode == MapMode.SINGLE || mapMode == MapMode.COORDS) {
@@ -715,9 +710,7 @@ public class Settings {
     private static final int HISTORY_SIZE = 10;
 
     /**
-     * convert old preference ids for maps (based on constant values) into new hash based ids
-     *
-     * @return
+     * Convert old preference ids for maps (based on constant values) into new hash based ids.
      */
     private static int getConvertedMapId() {
         final int id = Integer.parseInt(getString(R.string.pref_mapsource,
@@ -803,7 +796,7 @@ public class Settings {
     }
 
     public static String getWebDeviceName() {
-        return getString(R.string.pref_webDeviceName, android.os.Build.MODEL);
+        return getString(R.string.pref_webDeviceName, Build.MODEL);
     }
 
     /**
@@ -1047,9 +1040,7 @@ public class Settings {
     }
 
     /**
-     * remember date of last field note export
-     *
-     * @param date
+     * Remember date of last field note export.
      */
     public static void setFieldnoteExportDate(final long date) {
         putLong(R.string.pref_fieldNoteExportDate, date);
@@ -1060,9 +1051,7 @@ public class Settings {
     }
 
     /**
-     * remember the state of the "Upload" checkbox in the field notes export dialog
-     *
-     * @param upload
+     * Remember the state of the "Upload" checkbox in the field notes export dialog.
      */
     public static void setFieldNoteExportUpload(final boolean upload) {
         putBoolean(R.string.pref_fieldNoteExportUpload, upload);
@@ -1073,9 +1062,7 @@ public class Settings {
     }
 
     /**
-     * remember the state of the "Only new" checkbox in the field notes export dialog
-     *
-     * @param onlyNew
+     * Remember the state of the "Only new" checkbox in the field notes export dialog.
      */
     public static void setFieldNoteExportOnlyNew(final boolean onlyNew) {
         putBoolean(R.string.pref_fieldNoteExportOnlyNew, onlyNew);
@@ -1115,8 +1102,8 @@ public class Settings {
         return getBoolean(R.string.pref_hardware_acceleration, !HW_ACCEL_DISABLED_BY_DEFAULT);
     }
 
-    public static boolean setUseHardwareAcceleration(final boolean useHardwareAcceleration) {
-        return putBoolean(R.string.pref_hardware_acceleration, useHardwareAcceleration);
+    public static void setUseHardwareAcceleration(final boolean useHardwareAcceleration) {
+        putBoolean(R.string.pref_hardware_acceleration, useHardwareAcceleration);
     }
 
     public static String getLastCacheLog() {

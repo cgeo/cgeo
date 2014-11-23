@@ -3,6 +3,7 @@ package cgeo.geocaching.network;
 import ch.boye.httpclientandroidlib.NameValuePair;
 import ch.boye.httpclientandroidlib.client.utils.URLEncodedUtils;
 import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
+
 import org.apache.commons.lang3.CharEncoding;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
