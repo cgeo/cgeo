@@ -10,7 +10,7 @@ public class Units {
 
     public static ImmutablePair<Double, String> scaleDistance(final double distanceKilometers) {
         double distance;
-        String units;
+        final String units;
         if (Settings.useImperialUnits()) {
             distance = distanceKilometers / IConversion.MILES_TO_KILOMETER;
             if (distance >= 0.1) {
@@ -37,19 +37,19 @@ public class Units {
         }
 
         final ImmutablePair<Double, String> scaled = scaleDistance(distanceKilometers);
-        String formatString;
+        final String formatString;
         if (scaled.left >= 100) {
-            formatString = "%.0f";
+            formatString = "%.0f %s";
         } else if (scaled.left >= 10) {
-            formatString = "%.1f";
+            formatString = "%.1f %s";
         } else {
-            formatString = "%.2f";
+            formatString = "%.2f %s";
         }
 
-        return String.format(formatString + " %s", scaled.left, scaled.right);
+        return String.format(formatString, scaled.left, scaled.right);
     }
 
-    public static String getDistanceFromMeters(float meters) {
+    public static String getDistanceFromMeters(final float meters) {
         return getDistanceFromKilometers(meters / 1000f);
     }
 
