@@ -1606,7 +1606,7 @@ public class Geocache implements ICache, IWaypoint {
         }
 
         // if we have no geocode, we can't dynamically select the handler, but must explicitly use GC
-        if (geocode == null && guid != null) {
+        if (geocode == null) {
             return GCConnector.getInstance().searchByGeocode(null, guid, handler);
         }
 
