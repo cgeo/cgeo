@@ -23,7 +23,7 @@ class DistanceFilter extends AbstractFilter {
 
     @Override
     public boolean accepts(final Geocache cache) {
-        final Geopoint currentPos = new Geopoint(geo.getLocation());
+        final Geopoint currentPos = new Geopoint(geo);
         final Geopoint coords = cache.getCoords();
         if (coords == null) {
             // If a cache has no coordinates, consider it to be out of range. It will

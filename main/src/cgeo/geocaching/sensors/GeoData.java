@@ -41,10 +41,6 @@ public class GeoData extends Location {
         return gpsLocation.getTime() >= netLocation.getTime() ? gpsLocation : netLocation;
     }
 
-    public Location getLocation() {
-        return this;
-    }
-
     private static LocationProviderType getLocationProviderType(final String provider) {
         if (provider.equals(LocationManager.GPS_PROVIDER)) {
             return LocationProviderType.GPS;
