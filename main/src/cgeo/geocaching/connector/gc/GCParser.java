@@ -398,7 +398,7 @@ public abstract class GCParser {
      * @param handler
      *            the handler to send the progress notifications to
      * @return a pair, with a {@link StatusCode} on the left, and a non-null cache object on the right
-     *         iff the status code is {@link StatusCode.NO_ERROR}.
+     *         iff the status code is {@link cgeo.geocaching.enumerations.StatusCode#NO_ERROR}.
      */
     @NonNull
     static private ImmutablePair<StatusCode, Geocache> parseCacheFromText(final String pageIn, @Nullable final CancellableHandler handler) {
@@ -850,15 +850,6 @@ public abstract class GCParser {
         return params;
     }
 
-    /**
-     * @param cacheType
-     * @param listId
-     * @param showCaptcha
-     * @param params
-     *            the parameters to add to the request URI
-     * @param recaptchaReceiver
-     * @return
-     */
     @Nullable
     private static SearchResult searchByAny(final CacheType cacheType, final boolean my, final boolean showCaptcha, final Parameters params, final RecaptchaReceiver recaptchaReceiver) {
         insertCacheType(params, cacheType);
@@ -1680,10 +1671,8 @@ public abstract class GCParser {
     /**
      * Extract special logs (friends, own) through seperate request.
      *
-     * @param page
-     *            The page to extrat userToken from
-     * @param logType
-     *            The logType to request
+     * @param userToken the user token extracted from the web page
+     * @param logType the logType to request
      * @return Observable<LogEntry> The logs
      */
     private static Observable<LogEntry> getLogs(final String userToken, final Logs logType) {
@@ -1747,7 +1736,7 @@ public abstract class GCParser {
                         final String logIconNameExt = entry.path("LogTypeImage").asText(".gif");
                         final String logIconName = logIconNameExt.substring(0, logIconNameExt.length() - 4);
 
-                        long date;
+                        final long date;
                         try {
                             date = GCLogin.parseGcCustomDate(entry.get("Visited").asText()).getTime();
                         } catch (ParseException | NullPointerException e) {
