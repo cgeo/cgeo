@@ -737,7 +737,7 @@ public class Settings {
         return id;
     }
 
-    public static void setMapSource(final MapSource newMapSource) {
+    public static synchronized void setMapSource(final MapSource newMapSource) {
         putString(R.string.pref_mapsource, String.valueOf(newMapSource.getNumericalId()));
         if (newMapSource instanceof OfflineMapSource) {
             setMapFile(((OfflineMapSource) newMapSource).getFileName());
