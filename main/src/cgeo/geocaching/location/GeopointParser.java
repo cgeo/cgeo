@@ -17,7 +17,7 @@ class GeopointParser {
         final int matcherPos;
         final int matcherLength;
 
-        public ResultWrapper(final double result, int matcherPos, int stringLength) {
+        public ResultWrapper(final double result, final int matcherPos, final int stringLength) {
             this.result = result;
             this.matcherPos = matcherPos;
             this.matcherLength = stringLength;
@@ -78,21 +78,21 @@ class GeopointParser {
     /**
      * Helper for coordinates-parsing
      * 
-     * @param text
-     * @param latlon
-     * @return
+     * @param text the text to parse
+     * @param latlon the kind of coordinate to parse
+     * @return a wrapper with the result and the corresponding matching part
+     * @throws Geopoint.ParseException if the text cannot be parsed
      */
-    private static ResultWrapper parseHelper(final String text, final LatLon latlon) {
-
+    private static ResultWrapper parseHelper(@NonNull final String text, final LatLon latlon) {
         MatcherWrapper matcher = new MatcherWrapper(PATTERN_BAD_BLANK, text);
-        String replaceSpaceAfterComma = matcher.replaceAll("$1.$2");
+        final String replaceSpaceAfterComma = matcher.replaceAll("$1.$2");
 
         final Pattern pattern = LatLon.LAT == latlon ? PATTERN_LAT : PATTERN_LON;
         matcher = new MatcherWrapper(pattern, replaceSpaceAfterComma);
 
         try {
             return new ResultWrapper(Double.valueOf(replaceSpaceAfterComma), 0, text.length());
-        } catch (NumberFormatException ignored) {
+        } catch (final NumberFormatException ignored) {
             // fall through to advanced parsing
         }
 
@@ -126,7 +126,7 @@ class GeopointParser {
                 final int pos = (latlon == LatLon.LON ? text.lastIndexOf(textPart) : text.indexOf(textPart));
                 return new ResultWrapper(Double.parseDouble(textPart), pos, textPart.length());
             }
-        } catch (NumberFormatException ignored) {
+        } catch (final NumberFormatException ignored) {
             // The right exception will be raised below.
         }
 
