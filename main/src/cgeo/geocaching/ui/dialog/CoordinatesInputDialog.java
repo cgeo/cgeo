@@ -174,12 +174,10 @@ public class CoordinatesInputDialog extends DialogFragment {
             buttonCache.setVisibility(View.GONE);
         }
 
-        final Button buttonClipboard = ButterKnife.findById(v, R.id.clipboard);
-        try {
-            new Geopoint(StringUtils.defaultString(ClipboardUtils.getText())); // Check if it raises an exception
+        if (hasClipboardCoordinates()) {
+            final Button buttonClipboard = ButterKnife.findById(v, R.id.clipboard);
             buttonClipboard.setOnClickListener(new ClipboardListener());
             buttonClipboard.setVisibility(View.VISIBLE);
-        } catch (final ParseException ignored) {
         }
 
         final Button buttonDone = ButterKnife.findById(v, R.id.done);
@@ -188,6 +186,15 @@ public class CoordinatesInputDialog extends DialogFragment {
         return v;
     }
 
+    @SuppressWarnings("unused")
+    private static boolean hasClipboardCoordinates() {
+        try {
+            new Geopoint(StringUtils.defaultString(ClipboardUtils.getText()));
+        } catch (final ParseException ignored) {
+            return false;
+        }
+        return true;
+    }
 
 
     private void updateGUI() {
