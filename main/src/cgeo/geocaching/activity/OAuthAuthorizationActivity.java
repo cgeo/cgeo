@@ -11,6 +11,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.BundleUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.RxUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 import ch.boye.httpclientandroidlib.ParseException;
@@ -21,6 +22,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
+import rx.functions.Action0;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -271,13 +274,12 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
             startButton.setOnClickListener(null);
 
             setTempTokens(null, null);
-            (new Thread() {
-
+            RxUtils.networkScheduler.createWorker().schedule(new Action0() {
                 @Override
-                public void run() {
+                public void call() {
                     requestToken();
                 }
-            }).start();
+            });
         }
     }
 
@@ -289,13 +291,12 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         }
         changeTokensDialog.show();
 
-        (new Thread() {
-
+        RxUtils.networkScheduler.createWorker().schedule(new Action0() {
             @Override
-            public void run() {
+            public void call() {
                 changeToken(verifier);
             }
-        }).start();
+        });
     }
 
     protected abstract ImmutablePair<String, String> getTempTokens();
