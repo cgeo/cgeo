@@ -67,7 +67,7 @@
       <option name="reportWhenNoStatementFollow" value="false" />
     </inspection_tool>
     <inspection_tool class="ConstantAssertCondition" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="ConstantConditions" enabled="true" level="WARNING" enabled_by_default="true">
+    <inspection_tool class="ConstantConditions" enabled="true" level="ERROR" enabled_by_default="true">
       <option name="SUGGEST_NULLABLE_ANNOTATIONS" value="false" />
       <option name="DONT_REPORT_TRUE_ASSERT_STATEMENTS" value="true" />
     </inspection_tool>
@@ -180,37 +180,6 @@
     </inspection_tool>
     <inspection_tool class="IteratorHasNextCallsIteratorNext" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="IteratorNextDoesNotThrowNoSuchElementException" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="JavaDoc" enabled="true" level="ERROR" enabled_by_default="true">
-      <option name="TOP_LEVEL_CLASS_OPTIONS">
-        <value>
-          <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
-          <option name="REQUIRED_TAGS" value="" />
-        </value>
-      </option>
-      <option name="INNER_CLASS_OPTIONS">
-        <value>
-          <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
-          <option name="REQUIRED_TAGS" value="" />
-        </value>
-      </option>
-      <option name="METHOD_OPTIONS">
-        <value>
-          <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
-          <option name="REQUIRED_TAGS" value="@return@param@throws or @exception" />
-        </value>
-      </option>
-      <option name="FIELD_OPTIONS">
-        <value>
-          <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
-          <option name="REQUIRED_TAGS" value="" />
-        </value>
-      </option>
-      <option name="IGNORE_DEPRECATED" value="false" />
-      <option name="IGNORE_JAVADOC_PERIOD" value="true" />
-      <option name="IGNORE_DUPLICATED_THROWS" value="false" />
-      <option name="IGNORE_POINT_TO_ITSELF" value="false" />
-      <option name="myAdditionalJavadocTags" value="" />
-    </inspection_tool>
     <inspection_tool class="KeySetIterationMayUseEntrySet" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="LengthOneStringInIndexOf" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ListIndexOfReplaceableByContains" enabled="true" level="WARNING" enabled_by_default="true" />
@@ -363,6 +332,7 @@
     <inspection_tool class="RequiredAttributes" enabled="false" level="WARNING" enabled_by_default="false">
       <option name="myAdditionalRequiredHtmlAttributes" value="" />
     </inspection_tool>
+    <inspection_tool class="ResourceType" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ReturnFromFinallyBlock" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ReturnNull" enabled="false" level="WEAK WARNING" enabled_by_default="false">
       <option name="m_reportObjectMethods" value="true" />
