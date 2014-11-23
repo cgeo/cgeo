@@ -6,7 +6,7 @@ import cgeo.geocaching.Geocache;
  * sort caches by state (normal, disabled, archived)
  *
  */
-public class StateComparator extends AbstractCacheComparator {
+class StateComparator extends AbstractCacheComparator {
 
     @Override
     protected int compareCaches(final Geocache cache1, final Geocache cache2) {

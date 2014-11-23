@@ -13,13 +13,13 @@ import android.net.Uri;
 import java.util.Calendar;
 import java.util.List;
 
-public class ECLoggingManager extends AbstractLoggingManager {
+class ECLoggingManager extends AbstractLoggingManager {
 
     private final ECConnector connector;
     private final Geocache cache;
-    private LogCacheActivity activity;
+    private final LogCacheActivity activity;
 
-    public ECLoggingManager(final LogCacheActivity activity, final ECConnector connector, final Geocache cache) {
+    ECLoggingManager(final LogCacheActivity activity, final ECConnector connector, final Geocache cache) {
         this.connector = connector;
         this.cache = cache;
         this.activity = activity;

@@ -23,7 +23,7 @@ import java.io.IOException;
 public class ECLogin extends AbstractLogin {
 
     private final CgeoApplication app = CgeoApplication.getInstance();
-    protected String sessionId = null;
+    private String sessionId = null;
 
     private ECLogin() {
         // singleton
@@ -38,7 +38,7 @@ public class ECLogin extends AbstractLogin {
     }
 
     @Override
-    protected StatusCode login(boolean retry) {
+    protected StatusCode login(final boolean retry) {
         final ImmutablePair<String, String> login = Settings.getCredentials(ECConnector.getInstance());
 
         if (StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
@@ -50,9 +50,9 @@ public class ECLogin extends AbstractLogin {
         setActualStatus(app.getString(R.string.init_login_popup_working));
 
         final Parameters params = new Parameters("user", login.left, "pass", login.right);
-        HttpResponse loginResponse = Network.postRequest("https://extremcaching.com/exports/apilogin.php", params);
+        final HttpResponse loginResponse = Network.postRequest("https://extremcaching.com/exports/apilogin.php", params);
 
-        String loginData = Network.getResponseData(loginResponse);
+        final String loginData = Network.getResponseData(loginResponse);
 
         if (StringUtils.isBlank(loginData)) {
             Log.e("ECLogin.login: Failed to retrieve login data");
@@ -87,7 +87,7 @@ public class ECLogin extends AbstractLogin {
      * @param data
      * @return <code>true</code> if user is logged in, <code>false</code> otherwise
      */
-    public boolean getLoginStatus(@Nullable final String data) {
+    private boolean getLoginStatus(@Nullable final String data) {
         if (StringUtils.isBlank(data) || StringUtils.equals(data, "[]")) {
             Log.e("ECLogin.getLoginStatus: No or empty data given");
             return false;

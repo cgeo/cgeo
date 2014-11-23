@@ -6,7 +6,7 @@ import cgeo.geocaching.Geocache;
  * sorts caches by popularity (favorite count)
  *
  */
-public class PopularityComparator extends AbstractCacheComparator {
+class PopularityComparator extends AbstractCacheComparator {
 
     @Override
     protected int compareCaches(final Geocache cache1, final Geocache cache2) {

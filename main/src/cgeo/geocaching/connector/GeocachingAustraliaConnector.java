@@ -5,7 +5,7 @@ import cgeo.geocaching.Geocache;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
-public class GeocachingAustraliaConnector extends AbstractConnector {
+class GeocachingAustraliaConnector extends AbstractConnector {
 
     @Override
     public String getName() {

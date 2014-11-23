@@ -6,7 +6,7 @@ import cgeo.geocaching.Geocache;
  * sorts caches by terrain rating
  *
  */
-public class TerrainComparator extends AbstractCacheComparator {
+class TerrainComparator extends AbstractCacheComparator {
 
     @Override
     protected boolean canCompare(final Geocache cache) {

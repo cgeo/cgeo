@@ -5,7 +5,7 @@ import cgeo.geocaching.Geocache;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
-public class WaymarkingConnector extends AbstractConnector {
+class WaymarkingConnector extends AbstractConnector {
 
     @Override
     public String getName() {
@@ -13,7 +13,7 @@ public class WaymarkingConnector extends AbstractConnector {
     }
 
     @Override
-    public String getCacheUrl(@NonNull Geocache cache) {
+    public String getCacheUrl(@NonNull final Geocache cache) {
         return getCacheUrlPrefix() + cache.getGeocode();
     }
 
@@ -23,7 +23,7 @@ public class WaymarkingConnector extends AbstractConnector {
     }
 
     @Override
-    public boolean isOwner(Geocache cache) {
+    public boolean isOwner(final Geocache cache) {
         // this connector has no user management
         return false;
     }
@@ -34,7 +34,7 @@ public class WaymarkingConnector extends AbstractConnector {
     }
 
     @Override
-    public boolean canHandle(@NonNull String geocode) {
+    public boolean canHandle(@NonNull final String geocode) {
         return StringUtils.startsWith(geocode, "WM");
     }
 }

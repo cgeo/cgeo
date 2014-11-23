@@ -11,7 +11,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 
-public class GoogleMapsDirectionApp extends AbstractPointNavigationApp {
+class GoogleMapsDirectionApp extends AbstractPointNavigationApp {
 
     protected GoogleMapsDirectionApp() {
         super(getString(R.string.cache_menu_maps_directions), R.id.cache_app_google_maps_direction, null);

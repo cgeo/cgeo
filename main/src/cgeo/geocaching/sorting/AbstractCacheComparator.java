@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
  * abstract super implementation for all cache comparators
  *
  */
-public abstract class AbstractCacheComparator implements CacheComparator {
+abstract class AbstractCacheComparator implements CacheComparator {
 
     @Override
     public final int compare(final Geocache cache1, final Geocache cache2) {

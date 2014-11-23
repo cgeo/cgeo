@@ -8,7 +8,7 @@ import android.view.Display;
 import android.view.WindowManager;
 
 @SuppressWarnings("deprecation")
-public class AndroidLevel13Emulation implements AndroidLevel13Interface {
+class AndroidLevel13Emulation implements AndroidLevel13Interface {
 
     @Override
     public int getDisplayWidth() {

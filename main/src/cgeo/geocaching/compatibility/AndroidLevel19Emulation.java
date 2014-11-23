@@ -2,10 +2,10 @@ package cgeo.geocaching.compatibility;
 
 import android.app.Activity;
 
-public class AndroidLevel19Emulation implements AndroidLevel19Interface {
+class AndroidLevel19Emulation implements AndroidLevel19Interface {
 
     @Override
-    public void importGpxFromStorageAccessFramework(Activity activity, int requestCode) {
+    public void importGpxFromStorageAccessFramework(final Activity activity, final int requestCode) {
         // do nothing
     }
 

@@ -5,7 +5,7 @@ import cgeo.geocaching.Geocache;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
-public class GeopeitusConnector extends AbstractConnector {
+class GeopeitusConnector extends AbstractConnector {
 
     @Override
     public String getName() {
@@ -28,7 +28,7 @@ public class GeopeitusConnector extends AbstractConnector {
     }
 
     @Override
-    public boolean canHandle(@NonNull String geocode) {
+    public boolean canHandle(@NonNull final String geocode) {
         return StringUtils.startsWith(geocode, "GE") && isNumericId(geocode.substring(2));
     }
 

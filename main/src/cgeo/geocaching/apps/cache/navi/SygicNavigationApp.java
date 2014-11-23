@@ -12,7 +12,7 @@ import android.net.Uri;
  * handler
  *
  */
-public class SygicNavigationApp extends AbstractPointNavigationApp {
+class SygicNavigationApp extends AbstractPointNavigationApp {
 
     private static final String PACKAGE = "com.sygic.aura";
 
@@ -21,8 +21,8 @@ public class SygicNavigationApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(Activity activity, Geopoint coords) {
-        String str = "http://com.sygic.aura/coordinate|" + coords.getLongitude() + "|" + coords.getLatitude() + "|show";
+    public void navigate(final Activity activity, final Geopoint coords) {
+        final String str = "http://com.sygic.aura/coordinate|" + coords.getLongitude() + "|" + coords.getLatitude() + "|show";
         activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(str)));
     }
 

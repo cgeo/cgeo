@@ -8,13 +8,13 @@ import java.util.regex.Pattern;
 /**
  * Representation of a position inside an UTFGrid
  */
-public final class UTFGridPosition {
+final class UTFGridPosition {
 
-    public final int x;
-    public final int y;
+    final int x;
+    final int y;
     private final static Pattern PATTERN_JSON_KEY = Pattern.compile("[^\\d]*" + "(\\d+),\\s*(\\d+)" + "[^\\d]*"); // (12, 34)
 
-    public UTFGridPosition(final int x, final int y) {
+    UTFGridPosition(final int x, final int y) {
         if (x < 0 || x > UTFGrid.GRID_MAXX) {
             throw new IllegalArgumentException("x outside bounds");
         }
@@ -38,7 +38,7 @@ public final class UTFGridPosition {
      *            Key in the format (xx, xx)
      * @return
      */
-    static UTFGridPosition fromString(String key) {
+    static UTFGridPosition fromString(final String key) {
         final MatcherWrapper matcher = new MatcherWrapper(UTFGridPosition.PATTERN_JSON_KEY, key);
         try {
             if (matcher.matches()) {
@@ -46,7 +46,7 @@ public final class UTFGridPosition {
                 final int y = Integer.parseInt(matcher.group(2));
                 return new UTFGridPosition(x, y);
             }
-        } catch (NumberFormatException ignored) {
+        } catch (final NumberFormatException ignored) {
         }
         return new UTFGridPosition(0, 0);
     }
