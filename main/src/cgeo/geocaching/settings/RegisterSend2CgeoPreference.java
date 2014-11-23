@@ -67,11 +67,13 @@ public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
                         if (response != null && response.getStatusLine().getStatusCode() == 200) {
                             //response was OK
                             final String[] strings = StringUtils.split(Network.getResponseData(response), ',');
-                            Settings.setWebNameCode(nam, strings[0]);
-                            try {
-                                return Observable.just(Integer.parseInt(strings[1].trim()));
-                            } catch (final Exception e) {
-                                Log.e("RegisterSend2CgeoPreference", e);
+                            if (strings != null) {
+                                Settings.setWebNameCode(nam, strings[0]);
+                                try {
+                                    return Observable.just(Integer.parseInt(strings[1].trim()));
+                                } catch (final Exception e) {
+                                    Log.e("RegisterSend2CgeoPreference", e);
+                                }
                             }
                         }
 
