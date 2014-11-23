@@ -255,9 +255,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
             progress.dismiss();
         } catch (NotFoundException e) {
             Log.e("CachesOverlay.onTap", e);
-            if (progress != null) {
-                progress.dismiss();
-            }
+            progress.dismiss();
         }
 
         return true;
