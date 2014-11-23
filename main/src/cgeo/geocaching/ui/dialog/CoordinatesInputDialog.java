@@ -176,8 +176,7 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         final Button buttonClipboard = ButterKnife.findById(v, R.id.clipboard);
         try {
-            @SuppressWarnings("unused")
-            final Geopoint geopoint = new Geopoint(StringUtils.defaultString(ClipboardUtils.getText()));
+            new Geopoint(StringUtils.defaultString(ClipboardUtils.getText())); // Check if it raises an exception
             buttonClipboard.setOnClickListener(new ClipboardListener());
             buttonClipboard.setVisibility(View.VISIBLE);
         } catch (final ParseException ignored) {
