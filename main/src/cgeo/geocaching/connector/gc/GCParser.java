@@ -78,8 +78,8 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 public abstract class GCParser {
-    private final static SynchronizedDateFormat dateTbIn1 = new SynchronizedDateFormat("EEEEE, dd MMMMM yyyy", Locale.ENGLISH); // Saturday, 28 March 2009
-    private final static SynchronizedDateFormat dateTbIn2 = new SynchronizedDateFormat("EEEEE, MMMMM dd, yyyy", Locale.ENGLISH); // Saturday, March 28, 2009
+    private final static SynchronizedDateFormat DATE_TB_IN_1 = new SynchronizedDateFormat("EEEEE, dd MMMMM yyyy", Locale.ENGLISH); // Saturday, 28 March 2009
+    private final static SynchronizedDateFormat DATE_TB_IN_2 = new SynchronizedDateFormat("EEEEE, MMMMM dd, yyyy", Locale.ENGLISH); // Saturday, March 28, 2009
     private final static ImmutablePair<StatusCode, Geocache> UNKNOWN_PARSE_ERROR = ImmutablePair.of(StatusCode.UNKNOWN_ERROR, null);
 
     private static SearchResult parseSearch(final String url, final String pageContent, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
@@ -725,8 +725,13 @@ public abstract class GCParser {
 
                 final String[] wpItems = StringUtils.splitByWholeSeparator(wpList, "<tr");
 
-                for (int j = 1; j < wpItems.length; j++) {
-                    String[] wp = StringUtils.splitByWholeSeparator(wpItems[j], "<td");
+                for (int j = 1; j < wpItems.length; j += 2) {
+                    final String[] wp = StringUtils.splitByWholeSeparator(wpItems[j], "<td");
+                    assert wp != null;
+                    if (wp.length < 8) {
+                        Log.e("GCParser.cacheParseFromText: not enough waypoint columns in table");
+                        continue;
+                    }
 
                     // waypoint name
                     // res is null during the unit tests
@@ -749,13 +754,17 @@ public abstract class GCParser {
                         waypoint.setCoords(new Geopoint(latlon));
                     }
 
-                    j++;
-                    if (wpItems.length > j) {
-                        wp = StringUtils.splitByWholeSeparator(wpItems[j], "<td");
-                    }
+                    if (wpItems.length >= j) {
+                        final String[] wpNote = StringUtils.splitByWholeSeparator(wpItems[j + 1], "<td");
+                        assert wpNote != null;
+                        if (wpNote.length < 4) {
+                            Log.d("GCParser.cacheParseFromText: not enough waypoint columns in table to extract note");
+                            continue;
+                        }
 
-                    // waypoint note
-                    waypoint.setNote(TextUtils.getMatch(wp[3], GCConstants.PATTERN_WPNOTE, waypoint.getNote()));
+                        // waypoint note
+                        waypoint.setNote(TextUtils.getMatch(wpNote[3], GCConstants.PATTERN_WPNOTE, waypoint.getNote()));
+                    }
 
                     cache.addOrChangeWaypoint(waypoint, false);
                 }
@@ -1535,11 +1544,11 @@ public abstract class GCParser {
         final String releaseString = TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_RELEASES, false, null);
         if (releaseString != null) {
             try {
-                trackable.setReleased(dateTbIn1.parse(releaseString));
+                trackable.setReleased(DATE_TB_IN_1.parse(releaseString));
             } catch (final ParseException ignored) {
                 if (trackable.getReleased() == null) {
                     try {
-                        trackable.setReleased(dateTbIn2.parse(releaseString));
+                        trackable.setReleased(DATE_TB_IN_2.parse(releaseString));
                     } catch (final ParseException e) {
                         Log.e("Could not parse trackable release " + releaseString, e);
                     }
