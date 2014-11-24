@@ -43,10 +43,6 @@ public final class GCVote {
     /**
      * Get user rating for a given guid or geocode. For a guid first the ratings cache is checked
      * before a request to gcvote.com is made.
-     *
-     * @param guid
-     * @param geocode
-     * @return
      */
     public static GCVoteRating getRating(final String guid, final String geocode) {
         if (StringUtils.isNotBlank(guid) && RATINGS_CACHE.containsKey(guid)) {
@@ -63,10 +59,6 @@ public final class GCVote {
 
     /**
      * Get user ratings from gcvote.com
-     *
-     * @param guids
-     * @param geocodes
-     * @return
      */
     @NonNull
     private static Map<String, GCVoteRating> getRating(final List<String> guids, final List<String> geocodes) {
@@ -148,6 +140,7 @@ public final class GCVote {
                 "userName", login.left,
                 "password", login.right,
                 "cacheId", cache.getGuid(),
+                "waypoint", cache.getGeocode(),
                 "voteUser", String.format(Locale.US, "%.1f", rating),
                 "version", "cgeo");
 
@@ -173,31 +166,28 @@ public final class GCVote {
             final Map<String, GCVoteRating> ratings = GCVote.getRating(null, geocodes);
 
             // save found cache coordinates
-            for (Geocache cache : caches) {
+            for (final Geocache cache : caches) {
                 if (ratings.containsKey(cache.getGeocode())) {
-                    GCVoteRating rating = ratings.get(cache.getGeocode());
+                    final GCVoteRating rating = ratings.get(cache.getGeocode());
 
                     cache.setRating(rating.getRating());
                     cache.setVotes(rating.getVotes());
                     cache.setMyVote(rating.getMyVote());
                 }
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Log.e("GCvote.loadRatings", e);
         }
     }
 
     /**
      * Get geocodes of all the caches, which can be used with GCVote. Non-GC caches will be filtered out.
-     *
-     * @param caches
-     * @return
      */
     private static @NonNull
     ArrayList<String> getVotableGeocodes(final @NonNull Collection<Geocache> caches) {
         final ArrayList<String> geocodes = new ArrayList<>(caches.size());
         for (final Geocache cache : caches) {
-            String geocode = cache.getGeocode();
+            final String geocode = cache.getGeocode();
             if (StringUtils.isNotBlank(geocode) && cache.supportsGCVote()) {
                 geocodes.add(geocode);
             }
@@ -238,7 +228,7 @@ public final class GCVote {
         }
     }
 
-    private static String getString(int resId) {
+    private static String getString(final int resId) {
         return CgeoApplication.getInstance().getString(resId);
     }
 
