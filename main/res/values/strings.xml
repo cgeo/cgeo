@@ -413,6 +413,7 @@
     <string name="settings_activate_oc_uk">Activate</string>
     <string name="init_oc_uk_description">Authorize c:geo with opencaching.org.uk to search for caches and access/filter your found caches.</string>
     <string name="init_gcvote">GCvote.com</string>
+    <string name="init_gcvote_password_description">To be able to rate a cache, you need to follow the instructions at GCVote.com and enter your GCVote password here.</string>
     <string name="init_twitter">Twitter</string>
     <string name="settings_activate_twitter">Activate</string>
     <string name="init_username">Username</string>
