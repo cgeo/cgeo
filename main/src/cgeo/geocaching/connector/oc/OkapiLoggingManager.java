@@ -37,7 +37,7 @@ public class OkapiLoggingManager extends AbstractLoggingManager {
     }
 
     @Override
-    public final LogResult postLog(final Geocache cache, final LogType logType, final Calendar date, final String log, final String logPassword, final List<TrackableLog> trackableLogs) {
+    public final LogResult postLog(final LogType logType, final Calendar date, final String log, final String logPassword, final List<TrackableLog> trackableLogs) {
         final LogResult result = OkapiClient.postLog(cache, logType, date, log, logPassword, connector);
         connector.login(null, null);
         return result;

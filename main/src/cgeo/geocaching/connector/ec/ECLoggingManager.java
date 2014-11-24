@@ -31,7 +31,7 @@ class ECLoggingManager extends AbstractLoggingManager {
     }
 
     @Override
-    public final LogResult postLog(final Geocache cache, final LogType logType, final Calendar date, final String log, final String logPassword, final List<TrackableLog> trackableLogs) {
+    public final LogResult postLog(final LogType logType, final Calendar date, final String log, final String logPassword, final List<TrackableLog> trackableLogs) {
         return ECApi.postLog(cache, logType, date, log);
     }
 

@@ -19,7 +19,7 @@ class NoLoggingManager extends AbstractLoggingManager {
     }
 
     @Override
-    public LogResult postLog(final Geocache cache, final LogType logType, final Calendar date, final String log, final String logPassword, final List<TrackableLog> trackableLogs) {
+    public LogResult postLog(final LogType logType, final Calendar date, final String log, final String logPassword, final List<TrackableLog> trackableLogs) {
         return new LogResult(StatusCode.LOG_POST_ERROR, "");
     }
 

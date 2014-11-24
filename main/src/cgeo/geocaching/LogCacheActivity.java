@@ -420,7 +420,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             final String log = logTexts[0];
             final String logPwd = logTexts.length > 1 ? logTexts[1] : null;
             try {
-                final LogResult logResult = loggingManager.postLog(cache, typeSelected, date, log, logPwd, trackables);
+                final LogResult logResult = loggingManager.postLog(typeSelected, date, log, logPwd, trackables);
 
                 if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
                     // update geocache in DB
