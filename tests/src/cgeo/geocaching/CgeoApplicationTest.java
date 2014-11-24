@@ -107,7 +107,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link GCParser#searchByGeocode(String, String, int, boolean, CancellableHandler)}
+     * Test {@link Geocache#searchByGeocode(String, String, int, boolean, CancellableHandler)}
      */
     @MediumTest
     public static Geocache testSearchByGeocode(final String geocode) {
@@ -283,7 +283,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link ConnectorFactory#searchByViewport(Viewport, String)}
+     * Test {@link ConnectorFactory#searchByViewport(Viewport, MapTokens)}
      */
     @MediumTest
     public static void testSearchByViewport() {
@@ -338,7 +338,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link ConnectorFactory#searchByViewport(Viewport, String)}
+     * Test {@link ConnectorFactory#searchByViewport(Viewport, MapTokens)}
      */
     @MediumTest
     public static void testSearchByViewportNotLoggedIn() {

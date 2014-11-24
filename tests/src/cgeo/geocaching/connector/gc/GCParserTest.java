@@ -93,7 +93,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     /**
-     * Test {@link GCParser#parseCacheFromText(String, int, CancellableHandler)} with "mocked" data
+     * Test {@link GCParser#parseCacheFromText(String, CancellableHandler)} with "mocked" data
      *
      */
     @MediumTest
