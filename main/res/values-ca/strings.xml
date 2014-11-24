@@ -644,7 +644,6 @@
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Obre al navegador</string>
   <string name="cache_menu_visit">Registra visita</string>
-  <string name="cache_menu_visit_offline">Registra visita fora de línia</string>
   <string name="cache_menu_spoilers">Imatges d\'ajuda</string>
   <string name="cache_menu_around">Catxés propers</string>
   <string name="cache_menu_event">Afegeix al calendari</string>

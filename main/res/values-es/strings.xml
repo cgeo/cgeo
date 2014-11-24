@@ -633,7 +633,6 @@
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Navegador</string>
   <string name="cache_menu_visit">Encontrado</string>
-  <string name="cache_menu_visit_offline">Registar vista sin conexión</string>
   <string name="cache_menu_spoilers">Revelaciones</string>
   <string name="cache_menu_around">Alrededores</string>
   <string name="cache_menu_event">Añadir a calendario</string>

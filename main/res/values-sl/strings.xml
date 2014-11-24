@@ -642,7 +642,6 @@
   <string name="cache_menu_streetview">Pogled ulic</string>
   <string name="cache_menu_browser">Odpri v brskalniku</string>
   <string name="cache_menu_visit">Objavi zapis</string>
-  <string name="cache_menu_visit_offline">Shrani zapis</string>
   <string name="cache_menu_spoilers">Spoiler slike</string>
   <string name="cache_menu_around">Zakladi v bližini</string>
   <string name="cache_menu_event">Dodaj na koledar</string>

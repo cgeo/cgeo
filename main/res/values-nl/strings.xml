@@ -646,7 +646,6 @@
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Open in browser</string>
   <string name="cache_menu_visit">Log bezoek</string>
-  <string name="cache_menu_visit_offline">Log bezoek offline</string>
   <string name="cache_menu_spoilers">Spoiler afbeeldingen</string>
   <string name="cache_menu_around">Caches rondom</string>
   <string name="cache_menu_event">Toevoegen aan kalender</string>

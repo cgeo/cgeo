@@ -633,7 +633,6 @@
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Atidaryti naršyklėje</string>
   <string name="cache_menu_visit">Registruoti</string>
-  <string name="cache_menu_visit_offline">Registruoti neprisijungus</string>
   <string name="cache_menu_spoilers">Užuominų nuotraukos</string>
   <string name="cache_menu_around">Slėptuvės aplink</string>
   <string name="cache_menu_event">Įtraukti į kalendorių</string>

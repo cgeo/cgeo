@@ -628,7 +628,6 @@
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Åbn i browser</string>
   <string name="cache_menu_visit">Log besøg</string>
-  <string name="cache_menu_visit_offline">Log besøg offline</string>
   <string name="cache_menu_spoilers">Spoilerbilleder</string>
   <string name="cache_menu_around">Cacher i nærheden</string>
   <string name="cache_menu_event">Tilføj til kalender</string>

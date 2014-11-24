@@ -643,7 +643,6 @@
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Otevřít v prohlížečí</string>
   <string name="cache_menu_visit">Zalogovat návštěvu</string>
-  <string name="cache_menu_visit_offline">Zapsat návštěvu (offline)</string>
   <string name="cache_menu_spoilers">Obrázky</string>
   <string name="cache_menu_around">Keš v okolí</string>
   <string name="cache_menu_event">Přidat do kalendáře</string>

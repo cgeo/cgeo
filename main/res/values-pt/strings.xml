@@ -628,7 +628,6 @@
   <string name="cache_menu_streetview">Vista de rua</string>
   <string name="cache_menu_browser">Abrir no browser</string>
   <string name="cache_menu_visit">Registar visita</string>
-  <string name="cache_menu_visit_offline">Registar visita offline</string>
   <string name="cache_menu_spoilers">Imagens spoiler</string>
   <string name="cache_menu_around">Caches próximas</string>
   <string name="cache_menu_event">Adicionar ao calendário</string>

@@ -624,7 +624,6 @@
   <string name="cache_menu_streetview">Gatevisning</string>
   <string name="cache_menu_browser">Åpne i nettleseren</string>
   <string name="cache_menu_visit">Logg funn</string>
-  <string name="cache_menu_visit_offline">Logg besøket offline</string>
   <string name="cache_menu_spoilers">Bilder</string>
   <string name="cache_menu_around">Cacher i nærheten</string>
   <string name="cache_menu_event">Eksporter til kalender</string>

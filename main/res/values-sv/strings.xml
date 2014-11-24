@@ -646,7 +646,6 @@
   <string name="cache_menu_streetview">Gatuvy</string>
   <string name="cache_menu_browser">Öppna i webbläsare</string>
   <string name="cache_menu_visit">Logga besök</string>
-  <string name="cache_menu_visit_offline">Logga besök offline</string>
   <string name="cache_menu_spoilers">Spoiler bilder</string>
   <string name="cache_menu_around">Cacher i närheten</string>
   <string name="cache_menu_event">Lägg till i kalender</string>
