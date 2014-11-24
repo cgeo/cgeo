@@ -167,7 +167,6 @@
   <string name="err_point_unknown_position">Lo siento, c:geo n puedo identificar donde estás.</string>
   <string name="err_point_no_position_given_title">Información obligatoria</string>
   <string name="err_point_no_position_given">Rellena como mínimo latitud y longitud o distancia y orientación. También puedes rellenar los cuatro campos.</string>
-  <string name="err_point_curr_position_unavailable">c:geo sigue sin obtener las coordenadas actuales. Espera un poco mas…</string>
   <string name="err_point_bear_and_dist_title">¿Necesitas ayuda?</string>
   <string name="err_point_bear_and_dist">Rellena ambos, orientación y distancia. La orientación es un ángulo de 0 a 360 grados relativo al norte. Distancia con o sin unidades.</string>
   <string name="err_log_load_data">Lo siento, c:geo no puede cargar los datos necesarios para registrar la visita.</string>

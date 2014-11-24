@@ -166,7 +166,6 @@
   <string name="err_point_unknown_position">O c:geo não conseguiu reconhecer a sua localização.</string>
   <string name="err_point_no_position_given_title">Informação requerida</string>
   <string name="err_point_no_position_given">Preencha pelo menos a latitude, a longitude, a distância ou a direcção. Também pode preencher os quatro campos.</string>
-  <string name="err_point_curr_position_unavailable">O c:geo ainda não possui as coordenadas actuais. Por favor, aguarde um instante…</string>
   <string name="err_point_bear_and_dist_title">Precisa de ajuda?</string>
   <string name="err_point_bear_and_dist">Preencha a direcção e a distância. A direcção é o ângulo de 0 a 360 graus relativo ao norte. A distância pode ser introduzida com ou sem unidades.</string>
   <string name="err_log_load_data">O c:geo não consegue carregar os dados necessários para registar a sua visita.</string>

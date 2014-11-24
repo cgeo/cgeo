@@ -167,7 +167,6 @@
   <string name="err_point_unknown_position">c:geo konnte den aktuellen Standort nicht bestimmen.</string>
   <string name="err_point_no_position_given_title">Info benötigt</string>
   <string name="err_point_no_position_given">Mindestens Längen- und Breitengrad oder Entfernung und Richtung angeben. Auch alle Angaben sind möglich.</string>
-  <string name="err_point_curr_position_unavailable">c:geo hat noch keine aktuelle Koordinaten. Bitte einen Moment warten…</string>
   <string name="err_point_bear_and_dist_title">Hilfe benötigt?</string>
   <string name="err_point_bear_and_dist">Angaben zu Richtung und Entfernung sind notwendig. Richtung: 0 bis 360 Grad relativ zum Norden. Die Entfernung benötigt keine Bezeichnung der Einheiten. </string>
   <string name="err_log_load_data">c:geo konnte die benötigten Daten nicht laden, um den Besuch zu loggen.</string>

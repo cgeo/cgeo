@@ -166,7 +166,6 @@
   <string name="err_point_unknown_position">c:geo nevie, kde ste.</string>
   <string name="err_point_no_position_given_title">Popis je požadovaný</string>
   <string name="err_point_no_position_given">Vyplňte aspoň zemepisnú šírku a dĺžku alebo vzdialenosť a azimut. Môžete tiež vyplniť všetky štyri polia.</string>
-  <string name="err_point_curr_position_unavailable">c:geo stále nepozná aktuálnu polohu. Prosím, čakajte…</string>
   <string name="err_point_bear_and_dist_title">Potrebujete poradiť?</string>
   <string name="err_point_bear_and_dist">Vyplňte azimut aj vzdialenosť. Azimut je uhol 0 až 360 stupňov vzhľadom k severu. Vzdialenosť môžete zadať bez jednotiek.</string>
   <string name="err_log_load_data">c:geo nemôže načítať dáta potrebné pre zalogovanie návštevy.</string>

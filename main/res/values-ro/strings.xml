@@ -167,7 +167,6 @@
   <string name="err_point_unknown_position">c:geo nu poate determina unde te afli.</string>
   <string name="err_point_no_position_given_title">Informaţii necesare</string>
   <string name="err_point_no_position_given">Introdu cel puţin latitudine şi longitudine sau distanţă şi azimut. Se pot completa şi toate cele patru câmpuri.</string>
-  <string name="err_point_curr_position_unavailable">c:geo incă tot nu a obţinut coordonatele poziţiei curente. Te rog, mai aşteaptă puţin…</string>
   <string name="err_point_bear_and_dist_title">Ai nevoie de ajutor?</string>
   <string name="err_point_bear_and_dist">Completează şi azimutul şi distanţa. Azimutul este unghiul de la 0 la 360 faţă de nord. Distanţa nu necesită unităţi.</string>
   <string name="err_log_load_data">c:geo nu poate încărca informaţiile necesare pentru a posta o însemnare.</string>

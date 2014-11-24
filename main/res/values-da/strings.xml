@@ -166,7 +166,6 @@
   <string name="err_point_unknown_position">c: geo kan ikke bestemme din placering.</string>
   <string name="err_point_no_position_given_title">Oplysninger mangler</string>
   <string name="err_point_no_position_given">Udfyld mindst breddegrad og længdegrad eller afstand og pejling. Du kan også udfylde alle fire felter.</string>
-  <string name="err_point_curr_position_unavailable">c: geo har endnu ikke bestemt din position. Vent venligst…</string>
   <string name="err_point_bear_and_dist_title">Har du brug for hjælp?</string>
   <string name="err_point_bear_and_dist">Udfyld både pejling og afstand. Pejlingen er en kompasvinkel mellem 0 og 360 grader i forhold til nord. Afstanden kræver ikke enheder.</string>
   <string name="err_log_load_data">c: geo kan ikke indlæse de data, der kræves for at logge besøget.</string>

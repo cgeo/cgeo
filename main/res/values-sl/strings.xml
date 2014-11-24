@@ -166,7 +166,6 @@
   <string name="err_point_unknown_position">c:geo ne ve kje ste.</string>
   <string name="err_point_no_position_given_title">Potrebne informacije</string>
   <string name="err_point_no_position_given">Vnesite vsaj koordinate ali pa razdaljo in smer. Izpolnete lahko tudi vsa polja.</string>
-  <string name="err_point_curr_position_unavailable">c:geo še vedno nima trenutnih koordinat. Prosimo počakajte…</string>
   <string name="err_point_bear_and_dist_title">Potrebujete pomoč?</string>
   <string name="err_point_bear_and_dist">Vnesite smer in razdaljo. Smer je kot med 0 in 360 stopinjami od severa. Razdalja je lahko z ali brez enot.</string>
   <string name="err_log_load_data">c:geo ni mogel naložiti podatkov za zapis obiska.</string>

@@ -166,7 +166,6 @@
   <string name="err_point_unknown_position">Sajnáljuk, a c:geo nem tudja felismerni hol vagy.</string>
   <string name="err_point_no_position_given_title">Információ szükséges</string>
   <string name="err_point_no_position_given">Írd be legalább a szélességi és hosszúsági vagy a távolsági és irány értéket. Megadhatod mind a négyet is.</string>
-  <string name="err_point_curr_position_unavailable">A c:geo továbbra sem ismeri a jelenlegi koordinátákat. Kérlek várj egy ideig.</string>
   <string name="err_point_bear_and_dist_title">Segítségre van szükséged?</string>
   <string name="err_point_bear_and_dist">Tölsd ki az irányt és a távolságot is. Az irány az északkal bezárt szög 0 és 360 fok között. A távolság mértékegységgel és mértékegység nélkül is állhat.</string>
   <string name="err_log_load_data">Sajnáljuk, a c:geo nem tudja betölteni a megtalálás bejelentéséhez szükségesek adatokat.</string>

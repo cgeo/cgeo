@@ -167,7 +167,6 @@
   <string name="err_point_unknown_position">Tyvärr kan c:geo inte bestämma din position.</string>
   <string name="err_point_no_position_given_title">Mer info krävs</string>
   <string name="err_point_no_position_given">Ange minst latitud och longitud eller avstånd och riktning. Du kan också ange alla fyra.</string>
-  <string name="err_point_curr_position_unavailable">c:geo har ännu inte nuvarande koordinater. Vänta en stund…</string>
   <string name="err_point_bear_and_dist_title">Tips!</string>
   <string name="err_point_bear_and_dist">Ange både riktning och avstånd. Rikting är en vinkel mellan 0 och 360 grader relativt norr. Avstånd anges med eller utan enhet.</string>
   <string name="err_log_load_data">Tyvärr kan c:geo inte ladda information som krävs för att logga ditt besök.</string>

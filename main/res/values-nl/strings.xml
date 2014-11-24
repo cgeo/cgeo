@@ -167,7 +167,6 @@
   <string name="err_point_unknown_position">Sorry, c:geo kan niet bepalen waar je bent.</string>
   <string name="err_point_no_position_given_title">Info benodigd</string>
   <string name="err_point_no_position_given">Geef op zijn minst lengte- en breedtegraad of afstand en richting. Of vul alle 4 de velden.</string>
-  <string name="err_point_curr_position_unavailable">c:geo heeft de huidige coördinaten nog niet. Even geduld a.u.b….</string>
   <string name="err_point_bear_and_dist_title">Hulp nodig?</string>
   <string name="err_point_bear_and_dist">Vul zowel richting als afstand. Richting is hoek van 0 to 360 graden t.o.v. het noorden. Afstand mag met of zonder eenheid.</string>
   <string name="err_log_load_data">Sorry, c:geo kan data om bezoek te loggen niet laden.</string>

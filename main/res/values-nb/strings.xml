@@ -166,7 +166,6 @@
   <string name="err_point_unknown_position">c:geo finner ikke din posisjon.</string>
   <string name="err_point_no_position_given_title">info kreves</string>
   <string name="err_point_no_position_given">Skriv inn minst breddegrad og lengdegrad eller avstand og peiling. Du kan også skrive inn i alle fire felt.</string>
-  <string name="err_point_curr_position_unavailable">c:geo har fortsatt ikke riktige koordinater. Vennligst vent…</string>
   <string name="err_point_bear_and_dist_title">Trenger du hjelp?</string>
   <string name="err_point_bear_and_dist">Skriv inn både retning og avstand. Retning er 0 til 360 grader i forhold til nord. Avstand angis med eller uten enheter.</string>
   <string name="err_log_load_data">Beklager, c:geo klarte ikke å laste den nødvendige informasjonen for å logge funnet.</string>

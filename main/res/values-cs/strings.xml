@@ -166,7 +166,6 @@
   <string name="err_point_unknown_position">c:geo nedokáže zjistit tvou polohu.</string>
   <string name="err_point_no_position_given_title">Popis je vyžadován</string>
   <string name="err_point_no_position_given">Vyplň alespoň zeměpisnou šířku a délku nebo vzdálenost a směr. Můžeš také vyplnit všechna čtyři pole.</string>
-  <string name="err_point_curr_position_unavailable">c:geo stále nemá aktuální souřadnice. Prosím, chvilku počkej…</string>
   <string name="err_point_bear_and_dist_title">Potřebuješ poradit?</string>
   <string name="err_point_bear_and_dist">Vyplň směr i vzdálenost. Směr je úhel 0 až 360 stupňů vzhledem k severu. Vzdálenost s nebo bez jednotek.</string>
   <string name="err_log_load_data">c:geo nemůže načíst data požadovaná k zalogování návštěvy.</string>

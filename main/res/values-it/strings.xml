@@ -166,7 +166,6 @@
   <string name="err_point_unknown_position">c:geo non capisce dove ti trovi.</string>
   <string name="err_point_no_position_given_title">Info richieste</string>
   <string name="err_point_no_position_given">Inserisci almeno latitudine e longitudine, o distanza e angolo. Puoi anche inserire tutti e quattro i valori.</string>
-  <string name="err_point_curr_position_unavailable">c:geo non ha le coordinate attuali. Attendere, prego…</string>
   <string name="err_point_bear_and_dist_title">Necessiti di aiuto?</string>
   <string name="err_point_bear_and_dist">Inserisci angolo e distanza. Angolo specifica un valore in gradi tra 0 e 360 relativo al nord. La distanza non richiede unità di misura.</string>
   <string name="err_log_load_data">c:geo non riesce a caricare i dati necessari per salvare il log della tua visita.</string>

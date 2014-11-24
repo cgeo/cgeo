@@ -184,7 +184,6 @@
     <string name="err_point_unknown_position">c:geo can\'t recognize where you are.</string>
     <string name="err_point_no_position_given_title">Info required</string>
     <string name="err_point_no_position_given">Fill at least latitude and longitude or distance and bearing. You can also fill all four fields.</string>
-    <string name="err_point_curr_position_unavailable">c:geo still doesn\'t have current coordinates. Please, wait a while…</string>
     <string name="err_point_bear_and_dist_title">Need some help?</string>
     <string name="err_point_bear_and_dist">Fill both bearing and distance. Bearing is angle 0 to 360 degrees relative to north. Distance doesn\'t require units.</string>
     <string name="err_log_load_data">c:geo can\'t load data required to log visit.</string>

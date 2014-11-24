@@ -167,7 +167,6 @@
   <string name="err_point_unknown_position">El c:geo no pot reconèixer on ets.</string>
   <string name="err_point_no_position_given_title">Cal informació</string>
   <string name="err_point_no_position_given">Ompliu la latitud i la longitud o la distància i la direcció. També podeu omplir els quatre camps.</string>
-  <string name="err_point_curr_position_unavailable">El c:geo encara no té les coordenades actuals. Espereu una estona…</string>
   <string name="err_point_bear_and_dist_title">Necessiteu ajuda?</string>
   <string name="err_point_bear_and_dist">Ompliu el rumb i la distància. El rumb son angles del 0º al 360º respecte al Nord. La distància no necessita unitats.</string>
   <string name="err_log_load_data">El c:geo no pot carregar les dades necessàries per registrar la visita.</string>

@@ -162,7 +162,6 @@
   <string name="err_point_unknown_position">現在地を認識できません。</string>
   <string name="err_point_no_position_given_title">必要な情報</string>
   <string name="err_point_no_position_given">少なくとも経度、緯度、または距離と方位を入力してください。全てを入力することもできます。</string>
-  <string name="err_point_curr_position_unavailable">現在地の座標が分かりません。もう少しお待ちください…</string>
   <string name="err_point_bear_and_dist_title">ヘルプが必要?</string>
   <string name="err_point_bear_and_dist">方位と距離を入力してください。方位は北を基準として時計回りに0～360度で表し単位は付けないでください。</string>
   <string name="err_log_load_data">ログを書くのに必要なデータをロードすることができません。</string>

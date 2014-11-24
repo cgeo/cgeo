@@ -167,7 +167,6 @@
   <string name="err_point_unknown_position">c:geo neranda Jūsų buvimo vietos.</string>
   <string name="err_point_no_position_given_title">Reikalinga informacija</string>
   <string name="err_point_no_position_given">Užpildykite bent platumą ir ilgumą arba atstumą ir azimutą. Taip pat galite užpildyt ir visus keturis laukelius.</string>
-  <string name="err_point_curr_position_unavailable">c:geo dar negavo vietos koordinačių. Prašome palaukti…</string>
   <string name="err_point_bear_and_dist_title">Reikalinga pagalba?</string>
   <string name="err_point_bear_and_dist">Užpildykite azimutą ir atstumą. Azimutas tai nuo 0 iki 360 laipsnių kampas nuo šiaurės. Atstumas nereikalauja matavimo vienetų.</string>
   <string name="err_log_load_data">c:geo negali įkelti duomenų reikalingų apsilankymui įrašyti.</string>

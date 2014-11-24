@@ -167,7 +167,6 @@
   <string name="err_point_unknown_position">c:geo nie może określić Twojej lokalizacji.</string>
   <string name="err_point_no_position_given_title">Informacje wymagane</string>
   <string name="err_point_no_position_given">Wypełnij co najmniej szerokość i długość geograficzną lub odległość i namiar. Możesz również wypełnić wszystkie cztery pola.</string>
-  <string name="err_point_curr_position_unavailable">c:geo nadal nie zna aktualnych współrzędnych. Proszę chwilę poczekać…</string>
   <string name="err_point_bear_and_dist_title">Potrzebujesz pomocy?</string>
   <string name="err_point_bear_and_dist">Wypełnij zarówno namiar i odległość. Biorąc kąt od 0 do 360 stopni w stosunku do północy. Odległość z lub bez jednostki.</string>
   <string name="err_log_load_data">c:geo nie może załadować danych wymaganych do wpisania wizyty.</string>
