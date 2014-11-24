@@ -18,6 +18,7 @@
     <inspection_tool class="AndroidLintTooManyViews" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="AndroidLintUnusedResources" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="AndroidLintUsesMinSdkAttributes" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="AndroidLintWrongViewCast" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="Annotator" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="AntMissingPropertiesFileInspection" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="AntResolveInspection" enabled="false" level="ERROR" enabled_by_default="false" />
@@ -37,7 +38,12 @@
     </inspection_tool>
     <inspection_tool class="BusyWait" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="CStyleArrayDeclaration" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="CanBeFinal" enabled="false" level="WARNING" enabled_by_default="false">
+    <inspection_tool class="CanBeFinal" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Changed Files" level="ERROR" enabled="true">
+        <option name="REPORT_CLASSES" value="false" />
+        <option name="REPORT_METHODS" value="false" />
+        <option name="REPORT_FIELDS" value="true" />
+      </scope>
       <option name="REPORT_CLASSES" value="false" />
       <option name="REPORT_METHODS" value="false" />
       <option name="REPORT_FIELDS" value="true" />
@@ -115,8 +121,13 @@
     <inspection_tool class="FieldHidesSuperclassField" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="m_ignoreInvisibleFields" value="true" />
     </inspection_tool>
-    <inspection_tool class="FieldMayBeFinal" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="FieldMayBeStatic" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="FieldMayBeFinal" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Changed Files" level="ERROR" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="FieldMayBeStatic" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="FinalPrivateMethod" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Changed Files" level="ERROR" enabled="true" />
+    </inspection_tool>
     <inspection_tool class="FinalStaticMethod" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ForLoopReplaceableByWhile" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="m_ignoreLoopsWithoutConditions" value="false" />
@@ -124,6 +135,9 @@
     <inspection_tool class="ForLoopThatDoesntUseLoopVariable" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ForLoopWithMissingComponent" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoreCollectionLoops" value="false" />
+    </inspection_tool>
+    <inspection_tool class="GrMethodMayBeStatic" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Changed Files" level="ERROR" enabled="true" />
     </inspection_tool>
     <inspection_tool class="GroovyDoubleCheckedLocking" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoreOnVolatileVariables" value="true" />
@@ -187,6 +201,10 @@
       <option name="checkForEmptyMethods" value="true" />
     </inspection_tool>
     <inspection_tool class="LocalCanBeFinal" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Changed Files" level="ERROR" enabled="true">
+        <option name="REPORT_VARIABLES" value="true" />
+        <option name="REPORT_PARAMETERS" value="true" />
+      </scope>
       <option name="REPORT_VARIABLES" value="true" />
       <option name="REPORT_PARAMETERS" value="true" />
     </inspection_tool>
@@ -265,7 +283,9 @@
       <option name="m_limit" value="30" />
     </inspection_tool>
     <inspection_tool class="NonExceptionNameEndsWithException" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="NonFinalFieldInEnum" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="NonFinalFieldInEnum" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Changed Files" level="ERROR" enabled="true" />
+    </inspection_tool>
     <inspection_tool class="NonShortCircuitBoolean" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="NonSynchronizedMethodOverridesSynchronizedMethod" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="NotifyCalledOnCondition" enabled="true" level="WARNING" enabled_by_default="true" />
@@ -294,6 +314,9 @@
       <option name="m_minLength" value="2" />
       <option name="m_maxLength" value="16" />
     </inspection_tool>
+    <inspection_tool class="ParameterCanBeLocal" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Changed Files" level="ERROR" enabled="true" />
+    </inspection_tool>
     <inspection_tool class="ParameterHidingMemberVariable" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="m_ignoreInvisibleFields" value="true" />
       <option name="m_ignoreStaticMethodParametersHidingInstanceFields" value="true" />
@@ -315,7 +338,9 @@
     </inspection_tool>
     <inspection_tool class="PointlessIndexOfComparison" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="PointlessNullCheck" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="ProtectedMemberInFinalClass" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ProtectedMemberInFinalClass" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Changed Files" level="ERROR" enabled="true" />
+    </inspection_tool>
     <inspection_tool class="PublicFieldAccessedInSynchronizedContext" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="QuestionableName" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="nameString" value="aa,abc,bad,bar,bar2,baz,baz1,baz2,baz3,bb,blah,bogus,bool,cc,dd,defau1t,dummy,dummy2,ee,fa1se,ff,foo,foo1,foo2,foo3,foobar,four,fred,fred1,fred2,gg,hh,hello,hello1,hello2,hello3,ii,nu11,one,silly,silly2,string,two,that,then,three,whi1e,var" />
