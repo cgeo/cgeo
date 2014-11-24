@@ -85,10 +85,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private String imageDescription;
     private Uri imageUri;
     private boolean sendButtonEnabled;
-
+    private boolean isRatingBarShown = false;
 
     public void onLoadFinished() {
-
         if (loggingManager.hasLoaderError()) {
             showErrorLoadingData();
             return;
@@ -108,6 +107,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
             showToast(res.getString(R.string.info_log_type_changed));
         }
+
+        initializeRatingBar();
 
         enablePostButton(true);
 
@@ -230,8 +231,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         tweetCheck = (CheckBox) findViewById(R.id.tweet);
         logPasswordBox = (LinearLayout) findViewById(R.id.log_password_box);
 
-        final RatingBar ratingBar = (RatingBar) findViewById(R.id.gcvoteRating);
-        initializeRatingBar(ratingBar);
+        initializeRatingBar();
 
         // initialize with default values
         setDefaultValues();
@@ -289,25 +289,27 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         requestKeyboardForLogging();
     }
 
-    private void initializeRatingBar(final RatingBar ratingBar) {
-        final TextView label = (TextView) findViewById(R.id.gcvoteLabel);
-        if (GCVote.isVotingPossible(cache)) {
+    private void initializeRatingBar() {
+        if (GCVote.isVotingPossible(cache) && !isRatingBarShown) {
+            final RatingBar ratingBar = (RatingBar) findViewById(R.id.gcvoteRating);
+            final TextView label = (TextView) findViewById(R.id.gcvoteLabel);
+            isRatingBarShown = true;
             ratingBar.setVisibility(View.VISIBLE);
             label.setVisibility(View.VISIBLE);
-        }
-        ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+            ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 
-            @Override
-            public void onRatingChanged(final RatingBar ratingBar, final float stars, final boolean fromUser) {
-                // 0.5 is not a valid rating, therefore we must limit
-                rating = GCVote.isValidRating(stars) ? stars : 0;
-                if (rating < stars) {
-                    ratingBar.setRating(rating);
+                @Override
+                public void onRatingChanged(final RatingBar ratingBar, final float stars, final boolean fromUser) {
+                    // 0.5 is not a valid rating, therefore we must limit
+                    rating = GCVote.isValidRating(stars) ? stars : 0;
+                    if (rating < stars) {
+                        ratingBar.setRating(rating);
+                    }
+                    label.setText(GCVote.getDescription(rating));
                 }
-                label.setText(GCVote.getDescription(rating));
-            }
-        });
-        ratingBar.setRating(cache.getMyVote());
+            });
+            ratingBar.setRating(cache.getMyVote());
+        }
     }
 
     private void setDefaultValues() {

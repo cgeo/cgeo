@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
@@ -14,6 +15,7 @@ import cgeo.geocaching.loaders.UrlLoader;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -55,14 +57,23 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
 
     @Override
     public void onLoadFinished(final Loader<String> arg0, final String page) {
-
         if (page == null) {
             hasLoaderError = true;
         } else {
-
             viewstates = GCLogin.getViewstates(page);
             trackables = GCParser.parseTrackableLog(page);
             possibleLogTypes = GCParser.parseTypes(page);
+            if (StringUtils.isBlank(cache.getGuid())) {
+                // Acquire the cache GUID from the log page. This will not only complete the information in the database,
+                // but also allow the user to post a rating using GCVote since it requires the GUID to do so.
+                final String guid = TextUtils.getMatch(page, GCConstants.PATTERN_LOG_GUID, null);
+                if (StringUtils.isNotBlank(guid)) {
+                    cache.setGuid(guid);
+                    DataStore.saveChangedCache(cache);
+                } else {
+                    Log.w("Could not acquire GUID from log page for " + cache.getGeocode());
+                }
+            }
 
             hasLoaderError = possibleLogTypes.isEmpty();
         }

@@ -169,6 +169,7 @@ public final class GCConstants {
     final static Pattern PATTERN_USERSESSION = Pattern.compile("UserSession\\('([^']+)'");
     final static Pattern PATTERN_SESSIONTOKEN = Pattern.compile("sessionToken:'([^']+)'");
 
+    static final Pattern PATTERN_LOG_GUID = Pattern.compile("<a id=\"ctl00_ContentBody_LogBookPanel1_WaypointLink\"[^>]* href=\"https?://www\\.geocaching\\.com/seek/cache_details\\.aspx\\?guid=([0-9a-f-]+)\"");
     final static Pattern PATTERN_LOG_IMAGE_UPLOAD = Pattern.compile("/seek/upload\\.aspx\\?LID=(\\d+)", Pattern.CASE_INSENSITIVE);
 
     final static String STRING_PREMIUMONLY_2 = "Sorry, the owner of this listing has made it viewable to Premium Members only.";
