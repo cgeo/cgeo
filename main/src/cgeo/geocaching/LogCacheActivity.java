@@ -443,8 +443,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                             Twitter.postTweetCache(geocode, logNow);
                         }
                     }
-                    if (GCVote.isValidRating(rating)) {
-                        GCVote.setRating(cache, rating);
+                    if (GCVote.isValidRating(rating) && GCVote.isVotingPossible(cache)) {
+                        if (!GCVote.setRating(cache, rating)) {
+                            showToast(res.getString(R.string.err_gcvote_send_rating));
+                        }
                     }
 
                     if (StringUtils.isNotBlank(imageUri.getPath())) {

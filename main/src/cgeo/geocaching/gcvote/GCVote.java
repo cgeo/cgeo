@@ -25,6 +25,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public final class GCVote {
@@ -109,8 +110,7 @@ public final class GCVote {
                 if (eventType == XmlPullParser.START_TAG) {
                     final String tagName = xpp.getName();
                     if (StringUtils.equals(tagName, "vote")) {
-                        final String guid = xpp.getAttributeValue(null, "cacheId");
-                        final String id = requestByGuids ? guid : xpp.getAttributeValue(null, "waypoint");
+                        final String id = xpp.getAttributeValue(null, requestByGuids ? "cacheId" : "waypoint");
                         final float myVote = loggedIn ? Float.parseFloat(xpp.getAttributeValue(null, "voteUser")) : 0;
                         final GCVoteRating voteRating = new GCVoteRating(Float.parseFloat(xpp.getAttributeValue(null, "voteAvg")),
                                 Integer.parseInt(xpp.getAttributeValue(null, "voteCnt")),
@@ -134,33 +134,29 @@ public final class GCVote {
     /**
      * Transmit user vote to gcvote.com
      *
-     * @param cache
-     * @param vote
+     * @param cache the geocache (supported by GCVote)
+     * @param rating the rating
      * @return {@code true} if the rating was submitted successfully
      */
-    public static boolean setRating(final Geocache cache, final float vote) {
-        if (!isVotingPossible(cache)) {
-            return false;
-        }
-        if (!isValidRating(vote)) {
-            return false;
+    public static boolean setRating(final Geocache cache, final float rating) {
+        if (!isVotingPossible(cache) || !isValidRating(rating)) {
+            throw new IllegalArgumentException(!isVotingPossible(cache) ? "voting is not possible for " + cache : "invalid rating " + rating);
         }
 
         final ImmutablePair<String, String> login = Settings.getGCvoteLogin();
-        if (login == null) {
-            return false;
-        }
-
         final Parameters params = new Parameters(
                 "userName", login.left,
                 "password", login.right,
                 "cacheId", cache.getGuid(),
-                "voteUser", String.format("%.1f", vote).replace(',', '.'),
+                "voteUser", String.format(Locale.US, "%.1f", rating),
                 "version", "cgeo");
 
-        final String result = Network.getResponseData(Network.getRequest("http://gcvote.com/setVote.php", params));
-
-        return result != null && result.trim().equalsIgnoreCase("ok");
+        final String result = StringUtils.trim(Network.getResponseData(Network.getRequest("http://gcvote.com/setVote.php", params)));
+        if (!StringUtils.equalsIgnoreCase(result, "ok")) {
+            Log.e("GCVote.setRating: could not post rating, answer was " + result);
+            return false;
+        }
+        return true;
     }
 
     public static void loadRatings(final @NonNull ArrayList<Geocache> caches) {

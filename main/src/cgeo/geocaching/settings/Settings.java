@@ -394,10 +394,7 @@ public class Settings {
     }
 
     public static boolean isGCvoteLogin() {
-        final String preUsername = getString(R.string.pref_username, null);
-        final String prePassword = getString(R.string.pref_pass_vote, null);
-
-        return !StringUtils.isBlank(preUsername) && !StringUtils.isBlank(prePassword);
+        return getGCvoteLogin() != null;
     }
 
     public static ImmutablePair<String, String> getGCvoteLogin() {
