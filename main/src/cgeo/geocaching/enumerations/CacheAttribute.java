@@ -167,7 +167,7 @@ public enum CacheAttribute {
     private final static SparseArray<CacheAttribute> FIND_BY_OCACODE = new SparseArray<>();
     static {
         final HashMap<String, CacheAttribute> mapGcRawNames = new HashMap<>();
-        for (CacheAttribute attr : values()) {
+        for (final CacheAttribute attr : values()) {
             mapGcRawNames.put(attr.rawName, attr);
             if (attr.ocacode != NO_ID) {
                 FIND_BY_OCACODE.put(attr.ocacode, attr);
@@ -184,7 +184,7 @@ public enum CacheAttribute {
         return FIND_BY_OCACODE.get(ocAcode);
     }
 
-    public static String trimAttributeName(String attributeName) {
+    public static String trimAttributeName(final String attributeName) {
         if (null == attributeName) {
             return "";
         }
@@ -195,7 +195,4 @@ public enum CacheAttribute {
         return !StringUtils.endsWithIgnoreCase(attributeName, INTERNAL_NO);
     }
 
-    public String getAttributeName(final boolean yes) {
-        return rawName + (yes ? INTERNAL_YES : INTERNAL_NO);
-    }
 }

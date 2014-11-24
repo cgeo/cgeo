@@ -1,6 +1,5 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.Geocache;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;

@@ -44,9 +44,8 @@ public class CacheAttributeTest extends AndroidTestCase {
     }
 
     public static void testIsEnabled() {
-        final CacheAttribute attribute = CacheAttribute.HIKING;
-        final String hiking_yes = attribute.getAttributeName(true);
-        final String hiking_no = attribute.getAttributeName(false);
+        final String hiking_yes = "hiking_yes";
+        final String hiking_no = "hiking_no";
         assertThat(CacheAttribute.isEnabled(hiking_yes)).isTrue();
         assertThat(CacheAttribute.isEnabled(hiking_no)).isFalse();
     }

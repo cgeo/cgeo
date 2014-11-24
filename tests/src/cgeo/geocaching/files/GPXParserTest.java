@@ -14,6 +14,7 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
+import cgeo.geocaching.utils.DateUtils;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 
 import java.io.IOException;
@@ -177,7 +178,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(log.log).isEqualTo("Sehr schöne Runde und wir haben wieder etwas Neues über Hockenheim gelernt. Super Tarnung.\nTFTC, Geoteufel");
         assertThat(log.isOwn()).isFalse();
         assertThat(log.getDisplayText()).isEqualTo(log.log);
-        assertThat(log.daysSinceLog() > 700).isTrue();
+        assertThat(DateUtils.daysSince(log.date) > 700).isTrue();
 
         // following info is not contained in pocket query gpx file
         assertThat(cache.getAttributes()).isEmpty();
