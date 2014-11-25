@@ -1,4 +1,9 @@
 <root>
+    <item name='org.apache.commons.lang3.StringUtils boolean isNotBlank(java.lang.CharSequence)'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val val="&quot;null-&gt;false&quot;" />
+        </annotation>
+    </item>
     <item
         name='org.apache.commons.lang3.StringUtils boolean startsWith(java.lang.CharSequence, java.lang.CharSequence)'>
         <annotation name='org.jetbrains.annotations.Contract'>
