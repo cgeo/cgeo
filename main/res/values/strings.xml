@@ -86,7 +86,7 @@
     <string name="log_tb_visit">Visited</string>
     <string name="log_tb_drop">Dropped Off</string>
     <string name="log_tb_changeall">Change All</string>
-    <string name="log_save">Save</string>
+    <string name="log_save">Save offline</string>
     <string name="log_saving">Sending log…</string>
     <string name="log_saving_and_uploading">Sending log and uploading image…</string>
     <string name="log_clear">Clear</string>
