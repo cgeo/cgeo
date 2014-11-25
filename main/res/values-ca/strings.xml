@@ -74,7 +74,6 @@
   <string name="log_tb_visit">Visitat</string>
   <string name="log_tb_drop">Deixat</string>
   <string name="log_tb_changeall">Canvia-ho tot</string>
-  <string name="log_save">Desa</string>
   <string name="log_saving">S\'està enviant el registre…</string>
   <string name="log_saving_and_uploading">S\'està enviant el registre i pujant la imatge…</string>
   <string name="log_clear">Esborra</string>

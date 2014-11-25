@@ -74,7 +74,6 @@
   <string name="log_tb_visit">Besøkte</string>
   <string name="log_tb_drop">Legg igjen</string>
   <string name="log_tb_changeall">Endre alle</string>
-  <string name="log_save">Lagre</string>
   <string name="log_saving">Lagrer logg…</string>
   <string name="log_saving_and_uploading">Sender logg og laster opp bilde…</string>
   <string name="log_clear">Tøm</string>

@@ -74,7 +74,6 @@
   <string name="log_tb_visit">Vizitat</string>
   <string name="log_tb_drop">Lăsat</string>
   <string name="log_tb_changeall">Schimbă toate</string>
-  <string name="log_save">Salvează</string>
   <string name="log_saving">Trimitere jurnal…</string>
   <string name="log_saving_and_uploading">Trimitre jurnal şi încarcare poze…</string>
   <string name="log_clear">Şterge</string>

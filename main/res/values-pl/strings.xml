@@ -74,7 +74,6 @@
   <string name="log_tb_visit">Odwiedzony</string>
   <string name="log_tb_drop">Odłożony</string>
   <string name="log_tb_changeall">Zmień wszystko</string>
-  <string name="log_save">Zapisz</string>
   <string name="log_saving">Zapisuję w dzienniku…</string>
   <string name="log_saving_and_uploading">Zapisuję w dzienniku i wysyłam zdjęcie…</string>
   <string name="log_clear">Wyczyść</string>

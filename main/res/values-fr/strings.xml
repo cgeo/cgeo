@@ -74,7 +74,7 @@
   <string name="log_tb_visit">Visité</string>
   <string name="log_tb_drop">Déposé ici</string>
   <string name="log_tb_changeall">Tout modifié</string>
-  <string name="log_save">Enregistrer</string>
+  <string name="log_save">Sauvegarder hors-ligne</string>
   <string name="log_saving">Enregistrement en cours…</string>
   <string name="log_saving_and_uploading">Envoi de la note et de l\'image…</string>
   <string name="log_clear">Effacer</string>
@@ -211,6 +211,7 @@
   <string name="loc_net">Réseau</string>
   <string name="loc_fused">Fusionné</string>
   <string name="loc_low_power">Éco</string>
+  <string name="loc_home">Domicile</string>
   <string name="loc_gps">Gps</string>
   <string name="loc_sat">Satellites</string>
   <string name="loc_trying">Localisation en cours…</string>
@@ -376,6 +377,7 @@
   <string name="init_oc_uk_description">Autoriser c:geo à utiliser opencaching.org.uk pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Pour pouvoir attribuer une note à une géocache, vous devez suivre les instructions de GCVote.com et entrer ici votre mot de passe GCVote.</string>
+  <string name="err_gcvote_send_rating">Erreur lors de l\'envoi de la note, vérifiez le mot de passe GCVote dans les paramètres ou effacez le.</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activer</string>
   <string name="init_username">Identifiant</string>

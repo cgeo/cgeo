@@ -74,7 +74,6 @@
   <string name="log_tb_visit">Besøg</string>
   <string name="log_tb_drop">Læg her</string>
   <string name="log_tb_changeall">Ændr alle</string>
-  <string name="log_save">Gem</string>
   <string name="log_saving">Sender logbesked…</string>
   <string name="log_saving_and_uploading">Sender logbesked og billede…</string>
   <string name="log_clear">Fjern</string>

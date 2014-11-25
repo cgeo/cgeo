@@ -74,7 +74,6 @@
   <string name="log_tb_visit">Visitado</string>
   <string name="log_tb_drop">Dejar aquí</string>
   <string name="log_tb_changeall">Cambiar todo</string>
-  <string name="log_save">Guardar</string>
   <string name="log_saving">Enviando registo…</string>
   <string name="log_saving_and_uploading">Enviando registro y subiendo imagen…</string>
   <string name="log_clear">Limpiar</string>

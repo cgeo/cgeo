@@ -74,7 +74,6 @@
   <string name="log_tb_visit">Obisk</string>
   <string name="log_tb_drop">Pusti v zakladu</string>
   <string name="log_tb_changeall">Spremeni vse</string>
-  <string name="log_save">Shrani</string>
   <string name="log_saving">Pošiljam…</string>
   <string name="log_saving_and_uploading">Pošiljam zapis in nalagam sliko…</string>
   <string name="log_clear">Počisti</string>

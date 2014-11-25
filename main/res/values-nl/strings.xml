@@ -74,7 +74,6 @@
   <string name="log_tb_visit">Bezoek</string>
   <string name="log_tb_drop">Hier droppen</string>
   <string name="log_tb_changeall">Wijzig alles</string>
-  <string name="log_save">Opslaan</string>
   <string name="log_saving">Log opslaan…</string>
   <string name="log_saving_and_uploading">Verzenden van log en uploaden foto…</string>
   <string name="log_clear">Wissen</string>

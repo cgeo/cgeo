@@ -74,7 +74,6 @@
   <string name="log_tb_visit">Besök</string>
   <string name="log_tb_drop">Lämna här</string>
   <string name="log_tb_changeall">Ändra alla</string>
-  <string name="log_save">Spara</string>
   <string name="log_saving">Sparar logg…</string>
   <string name="log_saving_and_uploading">Sparar logg och laddar upp bild…</string>
   <string name="log_clear">Rensa</string>

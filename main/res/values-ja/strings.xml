@@ -71,7 +71,6 @@
   <string name="log_tb_visit">訪れた</string>
   <string name="log_tb_drop">ここに置く</string>
   <string name="log_tb_changeall">Change All</string>
-  <string name="log_save">保存</string>
   <string name="log_saving">ログを送信中…</string>
   <string name="log_saving_and_uploading">ログと画像を送信中…</string>
   <string name="log_clear">消去</string>

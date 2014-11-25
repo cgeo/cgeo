@@ -73,7 +73,6 @@
   <string name="log_tb_visit">Navštíveno</string>
   <string name="log_tb_drop">Nechat zde</string>
   <string name="log_tb_changeall">Změnit vše</string>
-  <string name="log_save">Uložit</string>
   <string name="log_saving">Odesílání Logu…</string>
   <string name="log_saving_and_uploading">Odesílání Logu a nahrávání obrázku…</string>
   <string name="log_clear">Vyčistit</string>
