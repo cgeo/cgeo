@@ -11,6 +11,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.RxUtils;
 import cgeo.geocaching.utils.TextUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
@@ -22,6 +23,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Observable;
+import rx.functions.Action0;
 
 import android.graphics.drawable.Drawable;
 
@@ -83,6 +85,7 @@ public class GCLogin extends AbstractLogin {
             if (switchToEnglish(loginData) && retry) {
                 return login(false);
             }
+            setHomeLocation();
             detectGcCustomDate();
             return StatusCode.NO_ERROR; // logged in
         }
@@ -264,11 +267,24 @@ public class GCLogin extends AbstractLogin {
         return null;
     }
 
+    private static void setHomeLocation() {
+        RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+            @Override
+            public void call() {
+                final String result = Network.getResponseData(Network.getRequest("https://www.geocaching.com/account/settings/homelocation"));
+                final String homeLocationStr = TextUtils.getMatch(result, GCConstants.PATTERN_HOME_LOCATION, null);
+                if (StringUtils.isNotBlank(homeLocationStr) && !StringUtils.equals(homeLocationStr, Settings.getHomeLocation())) {
+                    Log.i("Setting home location to " + homeLocationStr);
+                    Settings.setHomeLocation(homeLocationStr);
+                }
+            }
+        });
+    }
+
     /**
      * Detect user date settings on geocaching.com
      */
     private static void detectGcCustomDate() {
-
         final String result = Network.getResponseData(Network.getRequest("https://www.geocaching.com/account/settings/preferences"));
 
         if (null == result) {

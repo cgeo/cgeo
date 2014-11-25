@@ -77,6 +77,7 @@ public final class GCConstants {
     static final Pattern PATTERN_AVATAR_IMAGE_PROFILE_PAGE = Pattern.compile("src=\"(https?://(imgcdn\\.geocaching\\.com|[^>\"]+\\.cloudfront\\.net)/avatar/[0-9a-f-]+\\.jpg)\"[^>]*alt=\"");
     static final Pattern PATTERN_LOGIN_NAME_LOGIN_PAGE = Pattern.compile("ctl00_ContentBody_lbUsername\">.*<strong>(.*)</strong>");
     static final Pattern PATTERN_CUSTOMDATE = Pattern.compile("<option selected=\"selected\" value=\"([ /.Mdy-]+)\">");
+    static final Pattern PATTERN_HOME_LOCATION = Pattern.compile("<input class=\"search-coordinates\"[^>]* value=\"(.*?)\"");
     static final Pattern PATTERN_MAP_LOGGED_IN = Pattern.compile("<a href=\"https?://www.geocaching.com/my/\" class=\"CommonUsername\"");
 
     /**

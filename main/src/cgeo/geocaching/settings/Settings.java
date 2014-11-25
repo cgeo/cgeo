@@ -1118,4 +1118,13 @@ public class Settings {
     public static void setLastTrackableLog(final String log) {
         putString(R.string.pref_last_trackable_log, log);
     }
+
+    @Nullable
+    public static String getHomeLocation() {
+        return getString(R.string.pref_home_location, null);
+    }
+
+    public static void setHomeLocation(@NonNull final String homeLocation) {
+        putString(R.string.pref_home_location, homeLocation);
+    }
 }
