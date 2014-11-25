@@ -71,9 +71,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private String text = null;
     private List<LogType> possibleLogTypes = new ArrayList<>();
     private List<TrackableLog> trackables = null;
-    private @InjectView(R.id.tweet) CheckBox tweetCheck;
-    private @InjectView(R.id.tweet_box) LinearLayout tweetBox;
-    private @InjectView(R.id.log_password_box) LinearLayout logPasswordBox;
+    protected @InjectView(R.id.tweet) CheckBox tweetCheck;
+    protected @InjectView(R.id.tweet_box) LinearLayout tweetBox;
+    protected @InjectView(R.id.log_password_box) LinearLayout logPasswordBox;
     private SparseArray<TrackableLog> actionButtons;
 
     private ILoggingManager loggingManager;
