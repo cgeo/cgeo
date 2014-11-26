@@ -7,6 +7,11 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 
 import org.apache.commons.lang3.StringUtils;
 
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.schedulers.Schedulers;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.res.Resources;
@@ -30,24 +35,23 @@ public class DatabaseBackupUtils {
         final Resources res = activity.getResources();
         final ProgressDialog dialog = ProgressDialog.show(activity, res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_running), true, false);
         final AtomicBoolean restoreSuccessful = new AtomicBoolean(false);
-        new Thread() {
+        RxUtils.andThenOnUi(Schedulers.io(), new Action0() {
             @Override
-            public void run() {
+            public void call() {
                 restoreSuccessful.set(DataStore.restoreDatabaseInternal());
-                activity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        dialog.dismiss();
-                        boolean restored = restoreSuccessful.get();
-                        String message = restored ? res.getString(R.string.init_restore_success) : res.getString(R.string.init_restore_failed);
-                        Dialogs.message(activity, R.string.init_backup_restore, message);
-                        if (activity instanceof MainActivity) {
-                            ((MainActivity) activity).updateCacheCounter();
-                        }
-                    }
-                });
             }
-        }.start();
+        }, new Action0() {
+            @Override
+            public void call() {
+                dialog.dismiss();
+                boolean restored = restoreSuccessful.get();
+                String message = restored ? res.getString(R.string.init_restore_success) : res.getString(R.string.init_restore_failed);
+                Dialogs.message(activity, R.string.init_backup_restore, message);
+                if (activity instanceof MainActivity) {
+                    ((MainActivity) activity).updateCacheCounter();
+                }
+            }
+        });
     }
 
     public static boolean createBackup(final Activity activity, final Runnable runAfterwards) {
@@ -61,27 +65,26 @@ public class DatabaseBackupUtils {
         final ProgressDialog dialog = ProgressDialog.show(activity,
                 activity.getString(R.string.init_backup),
                 activity.getString(R.string.init_backup_running), true, false);
-        new Thread() {
+        RxUtils.andThenOnUi(Schedulers.io(), new Func0<String>() {
             @Override
-            public void run() {
-                final String backupFileName = DataStore.backupDatabaseInternal();
-                activity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        dialog.dismiss();
-                        Dialogs.message(activity,
-                                R.string.init_backup_backup,
-                                backupFileName != null
-                                        ? activity.getString(R.string.init_backup_success)
-                                                + "\n" + backupFileName
-                                        : activity.getString(R.string.init_backup_failed));
-                        if (runAfterwards != null) {
-                            runAfterwards.run();
-                        }
-                    }
-                });
+            public String call() {
+                return DataStore.backupDatabaseInternal();
             }
-        }.start();
+        }, new Action1<String>() {
+            @Override
+            public void call(final String backupFileName) {
+                dialog.dismiss();
+                Dialogs.message(activity,
+                        R.string.init_backup_backup,
+                        backupFileName != null
+                                ? activity.getString(R.string.init_backup_success)
+                                + "\n" + backupFileName
+                                : activity.getString(R.string.init_backup_failed));
+                if (runAfterwards != null) {
+                    runAfterwards.run();
+                }
+            }
+        });
         return true;
     }
 

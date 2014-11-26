@@ -19,14 +19,17 @@ import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
 
+import rx.functions.Action0;
+import rx.schedulers.Schedulers;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.view.ContextMenu;
@@ -385,22 +388,20 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
 
         if (!getHistoryOfSearchedLocations().contains(loc)) {
             getHistoryOfSearchedLocations().add(0, loc);
-
-            new AsyncTask<Void, Void, Void>() {
+            RxUtils.andThenOnUi(Schedulers.io(), new Action0() {
                 @Override
-                protected Void doInBackground(final Void... params) {
+                public void call() {
                     // Save location
                     DataStore.saveSearchedDestination(loc);
-                    return null;
                 }
-
+            }, new Action0() {
                 @Override
-                protected void onPostExecute(final Void v) {
+                public void call() {
                     // Ensure to remove the footer
                     historyListView.removeFooterView(getEmptyHistoryFooter());
                     destinationHistoryAdapter.notifyDataSetChanged();
                 }
-            }.execute();
+            });
         }
     }
 
