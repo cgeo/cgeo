@@ -73,6 +73,7 @@
   <string name="log_tb_visit">Navštíveno</string>
   <string name="log_tb_drop">Nechat zde</string>
   <string name="log_tb_changeall">Změnit vše</string>
+  <string name="log_save">Uložit offline</string>
   <string name="log_saving">Odesílání Logu…</string>
   <string name="log_saving_and_uploading">Odesílání Logu a nahrávání obrázku…</string>
   <string name="log_clear">Vyčistit</string>
@@ -374,6 +375,8 @@
   <string name="settings_activate_oc_uk">Aktivovat</string>
   <string name="init_oc_uk_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.org.uk.</string>
   <string name="init_gcvote">GCvote.com</string>
+  <string name="init_gcvote_password_description">Pokud chceš hodnotit keše, je třeba postupovat dle pokynů na GCVote.com a zadat sem své heslo.</string>
+  <string name="err_gcvote_send_rating">Během odesílání hodnocení došlo k chybě. Překontroluj či vymaž své GCVote heslo v nastavení.</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Povolit</string>
   <string name="init_username">Uživatelské jméno</string>
