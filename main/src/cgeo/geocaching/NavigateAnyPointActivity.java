@@ -21,6 +21,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.app.Activity;
 import android.content.Context;
@@ -95,7 +96,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
         public View getView(final int position, final View convertView, final ViewGroup parent) {
             View rowView = convertView;
 
-            ViewHolder viewHolder;
+            final ViewHolder viewHolder;
             if (rowView == null) {
                 rowView = getInflater().inflate(R.layout.simple_way_point, parent, false);
                 viewHolder = new ViewHolder(rowView);
@@ -347,20 +348,14 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int menuItem = item.getItemId();
-
-        final Geopoint coords = getDestination();
-
-        if (coords != null) {
-            addToHistory(coords);
-        }
-
+        final Geopoint coords = getDestinationAndAddToHistory();
         switch (menuItem) {
             case R.id.menu_default_navigation:
-                navigateTo();
+                navigateTo(coords);
                 return true;
 
             case R.id.menu_caches_around:
-                cachesAround();
+                cachesAround(coords);
                 return true;
 
             case R.id.menu_clear_history:
@@ -374,7 +369,17 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
         return super.onOptionsItemSelected(item);
     }
 
-    private void addToHistory(final Geopoint coords) {
+    private Geopoint getDestinationAndAddToHistory() {
+        final Geopoint coords = getDestination();
+        addToHistory(coords);
+        return coords;
+    }
+
+    private void addToHistory(@Nullable final Geopoint coords) {
+        if (coords == null) {
+            return;
+        }
+
         // Add locations to history
         final Destination loc = new Destination(coords);
 
@@ -435,17 +440,16 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
         }
     }
 
-    private void navigateTo() {
-        navigateTo(getDestination());
+    private void navigateTo(final Geopoint coords) {
+        if (coords == null) {
+            showToast(res.getString(R.string.err_location_unknown));
+            return;
+        }
+
+        NavigationAppFactory.startDefaultNavigationApplication(1, this, coords);
     }
 
-    private void navigateTo(final Geopoint geopoint) {
-        NavigationAppFactory.startDefaultNavigationApplication(1, this, geopoint);
-    }
-
-    private void cachesAround() {
-        final Geopoint coords = getDestination();
-
+    private void cachesAround(final Geopoint coords) {
         if (coords == null) {
             showToast(res.getString(R.string.err_location_unknown));
             return;
@@ -508,7 +512,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
         // apply projection
         if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
             // bearing & distance
-            double bearing;
+            final double bearing;
             try {
                 bearing = Double.parseDouble(bearingText);
             } catch (final NumberFormatException ignored) {
@@ -516,7 +520,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
                 return null;
             }
 
-            double distance;
+            final double distance;
             try {
                 distance = DistanceParser.parseDistance(distanceText,
                         !Settings.useImperialUnits());
@@ -542,11 +546,11 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
 
     @Override
     public void startDefaultNavigation() {
-        navigateTo();
+        navigateTo(getDestinationAndAddToHistory());
     }
 
     @Override
     public void startDefaultNavigation2() {
-        NavigationAppFactory.startDefaultNavigationApplication(2, this, getDestination());
+        NavigationAppFactory.startDefaultNavigationApplication(2, this, getDestinationAndAddToHistory());
     }
 }
