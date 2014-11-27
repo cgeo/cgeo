@@ -230,7 +230,7 @@
     <string name="loc_net">Network</string>
     <string name="loc_fused">Fused</string>
     <string name="loc_low_power">Low-power</string>
-    <string name="loc_home">Home</string>
+    <string name="loc_home">Home coordinates</string>
     <string name="loc_gps">GPS</string>
     <string name="loc_sat">Sat</string>
     <string name="loc_trying">Trying to Locate</string>
