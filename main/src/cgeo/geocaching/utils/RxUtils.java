@@ -23,6 +23,8 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Process;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -189,6 +191,44 @@ public class RxUtils {
                 foreground.call();
             }
         });
+    }
+
+    /**
+     * Cache observables so that every key is associated to only one of them.
+     *
+     * @param <K> the type of the key
+     * @param <V> the type of the value
+     */
+    public static class ObservableCache<K, V> {
+
+        final private Func1<K, Observable<V>> func;
+        final private Map<K, Observable<V>> cached = new HashMap<>();
+
+        /**
+         * Create a new observables cache.
+         *
+         * @param func the function transforming a key into an observable
+         */
+        public ObservableCache(final Func1<K, Observable<V>> func) {
+            this.func = func;
+        }
+
+        /**
+         * Get the observable corresponding to a key. If the key has not already been
+         * seen, the function passed to the constructor will be called to build the observable.
+         *
+         * @param key the key
+         * @return the observable corresponding to the key
+         */
+        public synchronized Observable<V> get(final K key) {
+            if (cached.containsKey(key)) {
+                return cached.get(key);
+            }
+            final Observable<V> value = func.call(key).replay().refCount();
+            cached.put(key, value);
+            return value;
+        }
+
     }
 
 }

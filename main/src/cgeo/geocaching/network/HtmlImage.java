@@ -12,6 +12,7 @@ import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.ImageUtils.ContainerDrawable;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxUtils;
+import cgeo.geocaching.utils.RxUtils.ObservableCache;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
 
@@ -80,6 +81,13 @@ public class HtmlImage implements Html.ImageGetter {
     final private int maxHeight;
     final private Resources resources;
     protected final TextView view;
+
+    final private ObservableCache<String, BitmapDrawable> observableCache = new ObservableCache<>(new Func1<String, Observable<BitmapDrawable>>() {
+        @Override
+        public Observable<BitmapDrawable> call(final String url) {
+            return fetchDrawableUncached(url);
+        }
+    });
 
     // Background loading
     final private PublishSubject<Observable<String>> loading = PublishSubject.create();
@@ -154,20 +162,20 @@ public class HtmlImage implements Html.ImageGetter {
             }));
             return null;
         }
-        if (view == null) {
-            return drawable.toBlocking().lastOrDefault(null);
-        }
-        return getContainerDrawable(drawable);
+        return view == null ? drawable.toBlocking().lastOrDefault(null) : getContainerDrawable(drawable);
     }
 
     protected BitmapDrawable getContainerDrawable(final Observable<BitmapDrawable> drawable) {
         return new ContainerDrawable(view, drawable);
     }
 
+    public Observable<BitmapDrawable> fetchDrawable(final String url) {
+        return observableCache.get(url);
+    }
+
     // Caches are loaded from disk on a computation scheduler to avoid using more threads than cores while decoding
     // the image. Downloads happen on downloadScheduler, in parallel with image decoding.
-    public Observable<BitmapDrawable> fetchDrawable(final String url) {
-
+    private Observable<BitmapDrawable> fetchDrawableUncached(final String url) {
         if (StringUtils.isBlank(url) || ImageUtils.containsPattern(url, BLOCKED)) {
             return Observable.just(ImageUtils.getTransparent1x1Drawable(resources));
         }
