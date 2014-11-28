@@ -348,7 +348,6 @@ public final class ImageUtils {
         @SuppressWarnings("deprecation")
         public ContainerDrawable(@NonNull final TextView view, final Observable<? extends Drawable> drawableObservable) {
             this.view = view;
-            drawable = null;
             setBounds(0, 0, 0, 0);
             updateFrom(drawableObservable);
         }
@@ -364,7 +363,13 @@ public final class ImageUtils {
         public void call(final Drawable newDrawable) {
             setBounds(0, 0, newDrawable.getIntrinsicWidth(), newDrawable.getIntrinsicHeight());
             drawable = newDrawable;
-            view.setText(view.getText());
+            view.invalidateDrawable(this);
+            // This is necessary to force a layout recomputation. Appending text takes much less time
+            // than setting the whole text. However, if many images are drawn one after the other without
+            // line breaks or text between them, the rendering might be incorrect as is the case in
+            // for http://coord.info/GC49CQC.
+            // TODO: find a better way to make the view get redrawn, or use a different kind of view
+            view.append("");
         }
 
         public final void updateFrom(final Observable<? extends Drawable> drawableObservable) {
