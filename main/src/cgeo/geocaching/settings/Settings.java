@@ -74,6 +74,8 @@ public class Settings {
     private final static @NonNull String keyConsumerPublic = CryptUtils.rot13("ESnsCvAv3kEupF1GCR3jGj");
     private final static @NonNull String keyConsumerSecret = CryptUtils.rot13("7vQWceACV9umEjJucmlpFe9FCMZSeqIqfkQ2BnhV9x");
 
+    private static boolean useCompass = true;
+
     public enum CoordInputFormatEnum {
         Plain,
         Deg,
@@ -761,11 +763,11 @@ public class Settings {
     }
 
     public static boolean isUseCompass() {
-        return getBoolean(R.string.pref_usecompass, true);
+        return useCompass;
     }
 
-    public static void setUseCompass(final boolean useCompass) {
-        putBoolean(R.string.pref_usecompass, useCompass);
+    public static void setUseCompass(final boolean value) {
+        useCompass = value;
     }
 
     public static boolean isLightSkin() {
