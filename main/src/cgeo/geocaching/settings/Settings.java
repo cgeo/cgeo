@@ -71,8 +71,8 @@ public class Settings {
             StringUtils.equals(Build.MODEL, "bq Aquaris 5");   // bq Aquaris 5
 
     // twitter api keys
-    private final static @NonNull String keyConsumerPublic = CryptUtils.rot13("ESnsCvAv3kEupF1GCR3jGj");
-    private final static @NonNull String keyConsumerSecret = CryptUtils.rot13("7vQWceACV9umEjJucmlpFe9FCMZSeqIqfkQ2BnhV9x");
+    private final static @NonNull String TWITTER_KEY_CONSUMER_PUBLIC = CryptUtils.rot13("ESnsCvAv3kEupF1GCR3jGj");
+    private final static @NonNull String TWITTER_KEY_CONSUMER_SECRET = CryptUtils.rot13("7vQWceACV9umEjJucmlpFe9FCMZSeqIqfkQ2BnhV9x");
 
     private static boolean useCompass = true;
 
@@ -775,13 +775,13 @@ public class Settings {
     }
 
     @NonNull
-    public static String getKeyConsumerPublic() {
-        return keyConsumerPublic;
+    public static String getTwitterKeyConsumerPublic() {
+        return TWITTER_KEY_CONSUMER_PUBLIC;
     }
 
     @NonNull
-    public static String getKeyConsumerSecret() {
-        return keyConsumerSecret;
+    public static String getTwitterKeyConsumerSecret() {
+        return TWITTER_KEY_CONSUMER_SECRET;
     }
 
     public static String getWebDeviceCode() {
