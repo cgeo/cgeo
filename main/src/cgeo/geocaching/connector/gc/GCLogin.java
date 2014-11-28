@@ -267,12 +267,17 @@ public class GCLogin extends AbstractLogin {
         return null;
     }
 
+    @Nullable
+    static String retrieveHomeLocation() {
+        final String result = Network.getResponseData(Network.getRequest("https://www.geocaching.com/account/settings/homelocation"));
+        return TextUtils.getMatch(result, GCConstants.PATTERN_HOME_LOCATION, null);
+    }
+
     private static void setHomeLocation() {
         RxUtils.networkScheduler.createWorker().schedule(new Action0() {
             @Override
             public void call() {
-                final String result = Network.getResponseData(Network.getRequest("https://www.geocaching.com/account/settings/homelocation"));
-                final String homeLocationStr = TextUtils.getMatch(result, GCConstants.PATTERN_HOME_LOCATION, null);
+                final String homeLocationStr = retrieveHomeLocation();
                 if (StringUtils.isNotBlank(homeLocationStr) && !StringUtils.equals(homeLocationStr, Settings.getHomeLocation())) {
                     Log.i("Setting home location to " + homeLocationStr);
                     Settings.setHomeLocation(homeLocationStr);
