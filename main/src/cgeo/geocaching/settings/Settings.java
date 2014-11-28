@@ -70,8 +70,6 @@ public class Settings {
             StringUtils.equals(Build.MODEL, "ST25i")     ||    // Sony Xperia U
             StringUtils.equals(Build.MODEL, "bq Aquaris 5");   // bq Aquaris 5
 
-    private final static int unitsMetric = 1;
-
     // twitter api keys
     private final static @NonNull String keyConsumerPublic = CryptUtils.rot13("ESnsCvAv3kEupF1GCR3jGj");
     private final static @NonNull String keyConsumerSecret = CryptUtils.rot13("7vQWceACV9umEjJucmlpFe9FCMZSeqIqfkQ2BnhV9x");
@@ -152,7 +150,7 @@ public class Settings {
             e.putBoolean(getKey(R.string.pref_maptrail), prefsV0.getInt(getKey(R.string.pref_maptrail), 1) != 0);
             e.putInt(getKey(R.string.pref_lastmapzoom), prefsV0.getInt(getKey(R.string.pref_lastmapzoom), 14));
             e.putBoolean(getKey(R.string.pref_livelist), 0 != prefsV0.getInt(getKey(R.string.pref_livelist), 1));
-            e.putBoolean(getKey(R.string.pref_units_imperial), prefsV0.getInt(getKey(R.string.pref_units_imperial), unitsMetric) != unitsMetric);
+            e.putBoolean(getKey(R.string.pref_units_imperial), prefsV0.getInt(getKey(R.string.pref_units_imperial), 1) != 1);
             e.putBoolean(getKey(R.string.pref_skin), prefsV0.getInt(getKey(R.string.pref_skin), 0) != 0);
             e.putInt(getKey(R.string.pref_lastusedlist), prefsV0.getInt(getKey(R.string.pref_lastusedlist), StoredList.STANDARD_LIST_ID));
             e.putString(getKey(R.string.pref_cachetype), prefsV0.getString(getKey(R.string.pref_cachetype), CacheType.ALL.id));
