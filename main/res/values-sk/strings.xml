@@ -74,11 +74,13 @@
   <string name="log_tb_visit">Navštívené</string>
   <string name="log_tb_drop">Nechať tu</string>
   <string name="log_tb_changeall">Zmeniť všetko</string>
+  <string name="log_save">Uložiť offline</string>
   <string name="log_saving">Ukladanie logu…</string>
   <string name="log_saving_and_uploading">Odosielanie logu a nahrávanie obrázku…</string>
   <string name="log_clear">Vyčistiť</string>
   <string name="log_post_not_possible">Načítanie stránky s logmi…</string>
   <string name="log_add">Pridať</string>
+  <string name="log_repeat">Zopakovať posledný log</string>
   <string name="log_no_rating">Nehlasovať</string>
   <string name="log_stars_1_description">slabé</string>
   <string name="log_stars_15_description">dosť slabé</string>
@@ -292,6 +294,7 @@
   <string name="caches_filter_popularity_ratio">Obľúbené [%]</string>
   <string name="caches_removing_from_history">Odstraňovanie z histórie…</string>
   <string name="caches_clear_offlinelogs">Vymazať offline záznamy</string>
+  <string name="caches_clear_offlinelogs_message">Prajete si vymazať offline logy?</string>
   <string name="caches_clear_offlinelogs_progress">Vymazanie logov v režime offline</string>
   <string name="list_menu_create">Vytvoriť nový zoznam</string>
   <string name="list_menu_drop">Odstrániť tento zoznam</string>
@@ -635,7 +638,7 @@
   <string name="cache_menu_map_ext">Zobraziť na externej mape</string>
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Otvoriť v prehliadači</string>
-  <string name="cache_menu_visit">Zapísať návštevu</string>
+  <string name="cache_menu_visit">Zalogovať návštevu</string>
   <string name="cache_menu_spoilers">Obrázky s nápovedou</string>
   <string name="cache_menu_around">Skrýše v okolí</string>
   <string name="cache_menu_event">Pridať do kalendára</string>

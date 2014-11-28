@@ -74,11 +74,13 @@
   <string name="log_tb_visit">Besøg</string>
   <string name="log_tb_drop">Læg her</string>
   <string name="log_tb_changeall">Ændr alle</string>
+  <string name="log_save">Gem offline</string>
   <string name="log_saving">Sender logbesked…</string>
   <string name="log_saving_and_uploading">Sender logbesked og billede…</string>
   <string name="log_clear">Fjern</string>
   <string name="log_post_not_possible">Indlæser logside…</string>
   <string name="log_add">Tilføj</string>
+  <string name="log_repeat">Gentag sidste logbesked</string>
   <string name="log_no_rating">Ingen vurdering</string>
   <string name="log_stars_1_description">Dårlig</string>
   <string name="log_stars_15_description">Temmelig dårlig</string>
@@ -209,6 +211,7 @@
   <string name="loc_net">Netværk</string>
   <string name="loc_fused">Kombineret</string>
   <string name="loc_low_power">Lavt strømforbrug</string>
+  <string name="loc_home">Hjemmeposition</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Bestemmer position</string>
@@ -296,6 +299,7 @@
   <string name="caches_filter_popularity_ratio">Favoritter [%]</string>
   <string name="caches_removing_from_history">Fjerner fra historik…</string>
   <string name="caches_clear_offlinelogs">Fjern offline logbeskeder</string>
+  <string name="caches_clear_offlinelogs_message">Vil du fjerne offline logbeskeder?</string>
   <string name="caches_clear_offlinelogs_progress">Fjerner offline logbeskeder</string>
   <string name="list_menu_create">Opret ny liste</string>
   <string name="list_menu_drop">Fjern aktuelle liste</string>
@@ -362,6 +366,7 @@
   <string name="settings_activate_oc_uk">Aktivér</string>
   <string name="init_oc_uk_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på opencaching.org.uk.</string>
   <string name="init_gcvote">GCvote.com</string>
+  <string name="init_gcvote_password_description">For at kunne bedømme en cache skal du følge instruktionerne på GCVote.com og angive dit password til GCVote her.</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivér</string>
   <string name="init_username">Brugernavn</string>
@@ -627,6 +632,7 @@
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Åbn i browser</string>
   <string name="cache_menu_visit">Log besøg</string>
+  <string name="cache_menu_visit_offline">Hurtig offline logbesked</string>
   <string name="cache_menu_spoilers">Spoilerbilleder</string>
   <string name="cache_menu_around">Cacher i nærheden</string>
   <string name="cache_menu_event">Tilføj til kalender</string>
@@ -746,6 +752,7 @@
   <string name="search_clear_history">Slet historik</string>
   <string name="search_history_cleared">Historik slettet</string>
   <string name="waypoint_coordinate_formats_plain">Simpel</string>
+  <string name="from_clipboard">Fra udklipsholder</string>
   <string name="visit_tweet">Post fund på Twitter</string>
   <string name="map_map">Kort</string>
   <string name="map_live">Live-kort</string>
@@ -850,6 +857,7 @@
   <string name="helper_contacts_description">Giver dig mulighed for at åbne kontaktside (fra dine kontakter) direkte fra en logbesked, så du let kan kontakte dine venner.</string>
   <string name="helper_sendtocgeo_description">Send2c:geo (send til c:geo) er en browserudvidelse <strong>til din PC</strong>. Med send2c:geo kan du sende cacher direkte fra din browser til c:geo på din Android-enhed ved blot at klikke på en knap i din browser.</string>
   <string name="helper_locus_title">Locus</string>
+  <string name="helper_locus_description">Udendørs navigationsapp til din telefon eller tablet. Vis topografiske kort offline, track din rute, find geocacher, brug stemmeguide og meget mere.</string>
   <string name="helper_gpsstatus_title">GPS-status</string>
   <string name="helper_gpsstatus_description">Du kan bruger radaren i denne app sammen med c:geo. Appen giver desuden en mængde GPS-relateret information.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
@@ -1146,6 +1154,7 @@
     <item quantity="one">%s favorit</item>
     <item quantity="other">%s favoritter</item>
   </plurals>
+  <string name="more_than_percent_favorite_points">&gt; %d%% favoritter</string>
   <string name="cgeo_shortcut">c:geo genvej</string>
   <string name="create_shortcut">Opret genvej</string>
   <string name="send">Send</string>

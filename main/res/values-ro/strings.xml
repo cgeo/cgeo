@@ -74,6 +74,7 @@
   <string name="log_tb_visit">Vizitat</string>
   <string name="log_tb_drop">Lăsat</string>
   <string name="log_tb_changeall">Schimbă toate</string>
+  <string name="log_save">Salvează local</string>
   <string name="log_saving">Trimitere jurnal…</string>
   <string name="log_saving_and_uploading">Trimitre jurnal şi încarcare poze…</string>
   <string name="log_clear">Şterge</string>
@@ -210,6 +211,7 @@
   <string name="loc_net">Reţea</string>
   <string name="loc_fused">Combinat</string>
   <string name="loc_low_power">Mod economic</string>
+  <string name="loc_home">Coordonatele de acasă</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Încerc să determin poziţia</string>
@@ -374,6 +376,8 @@
   <string name="settings_activate_oc_uk">Activează</string>
   <string name="init_oc_uk_description">Autorizează c:geo cu opencaching.org.uk pentru a putea căuta geocutii şi a putea accesa/filtra pe cele găsite de tine.</string>
   <string name="init_gcvote">GCvote.com</string>
+  <string name="init_gcvote_password_description">Pentru a putea evalua o geocutie, trebuie să urmezi instrucţiunile de la GCVote.com şi să introduci aici parola GCVote.</string>
+  <string name="err_gcvote_send_rating">Eroare la trimiterea evaluării, verifică-ţi parola GCVote din configuraţie sau şterge această parolă.</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activează</string>
   <string name="init_username">Utilizator</string>
@@ -635,6 +639,7 @@
   <string name="cache_menu_streetview">Vedere stradală</string>
   <string name="cache_menu_browser">Afişează în browser</string>
   <string name="cache_menu_visit">Jurnal</string>
+  <string name="cache_menu_visit_offline">Însemnare locală cu un singur clic</string>
   <string name="cache_menu_spoilers">Imagini (indicii?)</string>
   <string name="cache_menu_around">Cutii din împrejurimi</string>
   <string name="cache_menu_event">Adaugă la calendar</string>
