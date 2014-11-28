@@ -1,7 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/action_bar" >
 
- <!-- Empty layout, on 11+ we have a real action bar -->
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    <!-- Add the up chevron to the icon -->
 
-</merge>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:src="@drawable/abc_ic_ab_back_holo_dark" />
+
+    <ImageView
+        style="@style/action_bar_action"
+        android:layout_marginLeft="-13dp"
+        android:onClick="navigateUp" />
+
+    <View style="@style/action_bar_separator" />
+
+    <TextView
+        android:id="@+id/actionbar_title"
+        style="@style/action_bar_title"
+        tools:ignore="InconsistentLayout" />
+
+    <ProgressBar
+        android:id="@+id/actionbar_progress"
+        style="@style/action_bar_progress"
+        android:visibility="gone"
+        tools:ignore="InconsistentLayout" />
+
+    <View style="@style/action_bar_separator" />
+
+    <FrameLayout style="@style/action_bar_action" >
+
+        <CheckBox
+            android:id="@+id/my_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:button="@drawable/ic_menu_myposition"
+            android:checked="false"
+            tools:ignore="InconsistentLayout" />
+    </FrameLayout>
+
+    <View style="@style/action_bar_separator" />
+
+    <ImageView
+        android:id="@+id/overflowActionBar"
+        style="@style/action_bar_action"
+        android:longClickable="true"
+        android:src="@drawable/abc_ic_menu_moreoverflow_normal_holo_dark" />
+
+</LinearLayout>

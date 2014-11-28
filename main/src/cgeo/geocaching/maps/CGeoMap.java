@@ -67,6 +67,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
@@ -182,6 +183,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private boolean centered = false; // if map is already centered
     private boolean alreadyCentered = false; // -""- for setting my location
     private static final Set<String> dirtyCaches = new HashSet<>();
+    // flag for honeycomb special popup menu handling
+    private boolean honeycombMenu = false;
 
     /**
      * if live map is enabled, this is the minimum zoom level, independent of the stored setting
@@ -476,6 +479,18 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
         prepareFilterBar();
 
+        // Check for Honeycomb fake overflow button and attach popup
+        final View overflowActionBar = ButterKnife.findById(activity, R.id.overflowActionBar);
+        if (overflowActionBar != null) {
+            honeycombMenu = true;
+            overflowActionBar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View v) {
+                    showPopupHoneycomb(v);
+                }
+            });
+        }
+
         if (!app.isLiveMapHintShownInThisSession() && Settings.getLiveMapHintShowCount() <= 3) {
             LiveMapInfoDialogBuilder.create(activity).show();
         }
@@ -563,10 +578,37 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    private void showPopupHoneycomb(final View view) {
+        // Inflate the core menu ourselves
+        final android.widget.PopupMenu popupMenu = new android.widget.PopupMenu(getActivity(), view);
+        final MenuInflater inflater = new MenuInflater(getActivity());
+        inflater.inflate(R.menu.map_activity, popupMenu.getMenu());
+
+        // continue processing menu items as usual
+        onCreateOptionsMenu(popupMenu.getMenu());
+
+        onPrepareOptionsMenu(popupMenu.getMenu());
+
+        popupMenu.setOnMenuItemClickListener(
+                new android.widget.PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(final MenuItem item) {
+                        return onOptionsItemSelected(item);
+                    }
+                }
+                );
+        // display menu
+        popupMenu.show();
+    }
+
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         // menu inflation happens in Google/Mapsforge specific classes
-        super.onCreateOptionsMenu(menu);
+        // skip it for honeycomb - handled specially in @see showPopupHoneycomb
+        if (!honeycombMenu) {
+            super.onCreateOptionsMenu(menu);
+        }
 
         MapProviderFactory.addMapviewMenuItems(menu);
 
@@ -574,7 +616,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         subMenuStrategy.setHeaderTitle(res.getString(R.string.map_strategy_title));
 
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             /* if we have an Actionbar find the my position toggle */
             final MenuItem item = menu.findItem(R.id.menu_toggle_mypos);
             myLocSwitch = new CheckBox(activity);
