@@ -74,6 +74,7 @@
   <string name="log_tb_visit">Besucht</string>
   <string name="log_tb_drop">Abgelegt</string>
   <string name="log_tb_changeall">Alle ändern</string>
+  <string name="log_save">Offline speichern</string>
   <string name="log_saving">Log wird gesendet…</string>
   <string name="log_saving_and_uploading">Log und Bild werden gesendet…</string>
   <string name="log_clear">Leeren</string>
@@ -210,6 +211,7 @@
   <string name="loc_net">Netzwerk</string>
   <string name="loc_fused">Kombiniert</string>
   <string name="loc_low_power">Energiesparmodus</string>
+  <string name="loc_home">Heimkoordinaten</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">SAT</string>
   <string name="loc_trying">Lokalisierung</string>
@@ -373,6 +375,8 @@
   <string name="settings_activate_oc_uk">Aktivieren</string>
   <string name="init_oc_uk_description">Autorisiere c:geo auf opencaching.org.uk zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
   <string name="init_gcvote">GCvote.com</string>
+  <string name="init_gcvote_password_description">Um einen Cache bewerten zu können, folge der Anleitung auf gcvote.com  und gib das GCVote-Passwort anschließend hier ein.</string>
+  <string name="err_gcvote_send_rating">Fehler beim Senden der Bewertung. Prüfe das GCVote-Passwort in den Einstellungen oder lösche es.</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivieren</string>
   <string name="init_username">Benutzername</string>
@@ -640,6 +644,7 @@
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Im Browser öffnen</string>
   <string name="cache_menu_visit">Besuch loggen</string>
+  <string name="cache_menu_visit_offline">Offline loggen</string>
   <string name="cache_menu_spoilers">Hinweisbild</string>
   <string name="cache_menu_around">Caches im Umkreis</string>
   <string name="cache_menu_event">Zum Kalender hinzufügen</string>

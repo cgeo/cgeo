@@ -74,11 +74,13 @@
   <string name="log_tb_visit">Visitato</string>
   <string name="log_tb_drop">Lasciato</string>
   <string name="log_tb_changeall">Cambia tutto</string>
+  <string name="log_save">Salva offline</string>
   <string name="log_saving">Invio log…</string>
   <string name="log_saving_and_uploading">Invio log e immagine…</string>
   <string name="log_clear">Azzera</string>
   <string name="log_post_not_possible">Connessione…</string>
   <string name="log_add">Aggiungi</string>
+  <string name="log_repeat">Ripeti l\'ultimo log</string>
   <string name="log_no_rating">Nessun voto</string>
   <string name="log_stars_1_description">proprio brutto</string>
   <string name="log_stars_15_description">abbastanza brutto</string>
@@ -209,6 +211,7 @@
   <string name="loc_net">Network</string>
   <string name="loc_fused">Combinato</string>
   <string name="loc_low_power">Risparmio energetico</string>
+  <string name="loc_home">Coordinate di casa</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Localizzazione in corso</string>
@@ -296,6 +299,7 @@
   <string name="caches_filter_popularity_ratio">Preferiti [%]</string>
   <string name="caches_removing_from_history">Rimozione dalla cronologia…</string>
   <string name="caches_clear_offlinelogs">Cancella i log offline</string>
+  <string name="caches_clear_offlinelogs_message">Vuoi cancellare tutti i log offline?</string>
   <string name="caches_clear_offlinelogs_progress">Cancellazione logs offline</string>
   <string name="list_menu_create">Crea nuova lista</string>
   <string name="list_menu_drop">Elimina la lista corrente</string>
@@ -368,6 +372,8 @@
   <string name="settings_activate_oc_uk">Attiva</string>
   <string name="init_oc_uk_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.org.uk.</string>
   <string name="init_gcvote">GCvote.com</string>
+  <string name="init_gcvote_password_description">Per poter votare un cache, è necessario seguire le istruzioni di GCVote.com e inserire la password di GCVote qui.</string>
+  <string name="err_gcvote_send_rating">Errore durante l\'invio del voto, verifica la password di GCVote nelle impostazioni oppure cancellala.</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Attiva</string>
   <string name="init_username">Utente</string>
@@ -635,6 +641,7 @@
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Apri nel browser</string>
   <string name="cache_menu_visit">Scrivi Log</string>
+  <string name="cache_menu_visit_offline">Log offline con un solo click</string>
   <string name="cache_menu_spoilers">Immagini spoiler</string>
   <string name="cache_menu_around">Cache qui intorno</string>
   <string name="cache_menu_event">Aggiungi al calendario</string>
@@ -755,6 +762,7 @@
   <string name="search_clear_history">Cancella cronologia</string>
   <string name="search_history_cleared">Cronologia azzerata</string>
   <string name="waypoint_coordinate_formats_plain">Plain</string>
+  <string name="from_clipboard">Dagli appunti</string>
   <string name="visit_tweet">Segnala questo ritrovamento su Twitter</string>
   <string name="map_map">Mappa</string>
   <string name="map_live">Mappa Live</string>
@@ -859,6 +867,7 @@
   <string name="helper_contacts_description">Consente di aprire una scheda contatto (della tua rubrica) direttamente da un log, per permetterti di chiedere aiuto agli amici più facilmente.</string>
   <string name="helper_sendtocgeo_description">Send to c:geo è un\'estensione del browser <strong>per il tuo PC</strong>. Durante la navigazione su geocaching.com, è possibile inviare i cache al vostro smartphone con il clic di un pulsante direttamente all\'interno del browser.</string>
   <string name="helper_locus_title">Locus</string>
+  <string name="helper_locus_description">App per la navigazione in esterni per cellulare o tablet. Mostra mappe offline, traccia il tuo percorso, cerca geocache, usa una voce guida e molto altro.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">Puoi usare il radar di questa applicazione con c:geo. Offre inoltre molte informazioni addizionali legate al GPS.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
@@ -1161,6 +1170,7 @@
     <item quantity="one">%s preferito</item>
     <item quantity="other">%s preferiti</item>
   </plurals>
+  <string name="more_than_percent_favorite_points">&gt; preferiti %d%%</string>
   <string name="cgeo_shortcut">collegamento a c:geo</string>
   <string name="create_shortcut">Crea collegamento</string>
   <string name="send">Invia</string>
