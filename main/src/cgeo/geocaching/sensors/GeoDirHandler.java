@@ -125,12 +125,13 @@ public abstract class GeoDirHandler {
             }));
         }
         if ((flags & UPDATE_GEODIR) != 0) {
+            // combineOnLatest() does not implement backpressure handling, so we need to explicitely use a backpressure operator there.
             subscriptions.add(throttleIfNeeded(Observable.combineLatest(app.geoDataObservable(lowPower), app.directionObservable(), new Func2<GeoData, Float, ImmutablePair<GeoData, Float>>() {
                 @Override
                 public ImmutablePair<GeoData, Float> call(final GeoData geoData, final Float direction) {
                     return ImmutablePair.of(geoData, fixDirection(geoData, direction));
                 }
-            }), windowDuration, unit).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<ImmutablePair<GeoData, Float>>() {
+            }), windowDuration, unit).onBackpressureDrop().observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<ImmutablePair<GeoData, Float>>() {
                 @Override
                 public void call(final ImmutablePair<GeoData, Float> geoDir) {
                     updateGeoDir(geoDir.left, geoDir.right);
