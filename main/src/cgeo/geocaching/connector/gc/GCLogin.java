@@ -279,6 +279,7 @@ public class GCLogin extends AbstractLogin {
             public void call() {
                 final String homeLocationStr = retrieveHomeLocation();
                 if (StringUtils.isNotBlank(homeLocationStr) && !StringUtils.equals(homeLocationStr, Settings.getHomeLocation())) {
+                    assert homeLocationStr != null;
                     Log.i("Setting home location to " + homeLocationStr);
                     Settings.setHomeLocation(homeLocationStr);
                 }
