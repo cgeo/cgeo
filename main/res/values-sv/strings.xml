@@ -74,6 +74,7 @@
   <string name="log_tb_visit">Besök</string>
   <string name="log_tb_drop">Lämna här</string>
   <string name="log_tb_changeall">Ändra alla</string>
+  <string name="log_save">Spara offline</string>
   <string name="log_saving">Sparar logg…</string>
   <string name="log_saving_and_uploading">Sparar logg och laddar upp bild…</string>
   <string name="log_clear">Rensa</string>
@@ -210,6 +211,7 @@
   <string name="loc_net">Nätverk</string>
   <string name="loc_fused">Kombinerad</string>
   <string name="loc_low_power">Strömspar</string>
+  <string name="loc_home">Hemkoordinater</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Försöker hitta plats</string>
@@ -374,6 +376,8 @@
   <string name="settings_activate_oc_uk">Aktivera</string>
   <string name="init_oc_uk_description">Använd c:geo med opencaching.org.uk för att söka efter cacher samt för att filtrera dina funna cacher.</string>
   <string name="init_gcvote">GCvote.com</string>
+  <string name="init_gcvote_password_description">För att kunna betygsätta en cache måste du följa instruktionerna på GCVote.com och ange ditt lösenord till GCVote här.</string>
+  <string name="err_gcvote_send_rating">Fel uppstod när betyg skulle sparas, kontrollera eller ta bort lösenordet för GCVote i inställningarna.</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivera</string>
   <string name="init_username">Användare</string>
@@ -645,6 +649,7 @@
   <string name="cache_menu_streetview">Gatuvy</string>
   <string name="cache_menu_browser">Öppna i webbläsare</string>
   <string name="cache_menu_visit">Logga besök</string>
+  <string name="cache_menu_visit_offline">Snabblogga offline</string>
   <string name="cache_menu_spoilers">Spoiler bilder</string>
   <string name="cache_menu_around">Cacher i närheten</string>
   <string name="cache_menu_event">Lägg till i kalender</string>

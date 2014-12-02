@@ -373,7 +373,7 @@
   <string name="init_oc_uk_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.org.uk.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Per poter votare un cache, è necessario seguire le istruzioni di GCVote.com e inserire la password di GCVote qui.</string>
-  <string name="err_gcvote_send_rating">Errore durante l\'invio del voto, verifica la password di GCVote nelle impostazioni oppure cancellala.</string>
+  <string name="err_gcvote_send_rating">Errore durante l\'invio del voto, verifica la password di GCVote nelle impostazioni oppure cancellala per disattivare GCVote.</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Attiva</string>
   <string name="init_username">Utente</string>
