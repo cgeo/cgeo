@@ -210,6 +210,7 @@
   <string name="loc_net">Síť</string>
   <string name="loc_fused">Kombinovaný</string>
   <string name="loc_low_power">Nízká spotřeba</string>
+  <string name="loc_home">Souřadnice domova</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Zjišťování pozice</string>
@@ -376,7 +377,7 @@
   <string name="init_oc_uk_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.org.uk.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Pokud chceš hodnotit keše, je třeba postupovat dle pokynů na GCVote.com a zadat sem své heslo.</string>
-  <string name="err_gcvote_send_rating">Během odesílání hodnocení došlo k chybě. Překontroluj či vymaž své GCVote heslo v nastavení.</string>
+  <string name="err_gcvote_send_rating">Chyba při odesílání hodnocení, zkontroluj GCVote heslo v nastavení nebo ho nech prázdné.</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Povolit</string>
   <string name="init_username">Uživatelské jméno</string>
@@ -645,6 +646,7 @@
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Otevřít v prohlížečí</string>
   <string name="cache_menu_visit">Zalogovat návštěvu</string>
+  <string name="cache_menu_visit_offline">Offline log jedním klepnutím</string>
   <string name="cache_menu_spoilers">Obrázky</string>
   <string name="cache_menu_around">Keš v okolí</string>
   <string name="cache_menu_event">Přidat do kalendáře</string>

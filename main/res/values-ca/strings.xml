@@ -211,7 +211,6 @@
   <string name="loc_net">Xarxa</string>
   <string name="loc_fused">Combinat</string>
   <string name="loc_low_power">Bateria baixa</string>
-  <string name="loc_home">Inici</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Intentant ubicar</string>
@@ -376,7 +375,6 @@
   <string name="init_oc_uk_description">Autoritza al c:geo a opencaching.org.uk per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Per poder puntuar un catxé, cal seguir les instruccions a GCVote.com i introduir aquí la contrasenya del GCVote.</string>
-  <string name="err_gcvote_send_rating">S\'ha produït un error al enviar la puntuació, comprova la contrasenya de GCVote  a la configuració o deixa-la en blanc.</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activa</string>
   <string name="init_username">Nom d\'usuari</string>
