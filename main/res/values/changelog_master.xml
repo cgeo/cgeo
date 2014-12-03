@@ -2,26 +2,5 @@
 <resources>
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
-    <b>Next feature release:</b>\n
-    · New: Google Play Services used for location (less battery usage)\n
-    · New: Optional low power GPS mode for parts of the app which don\'t require high precision\n
-    · New: Detect offline state and delay login until network is available\n
-    · New: Voice search via Google Now (not available for all languages), say \'Search for topic in c:geo\' \n
-    · New: Confirmation dialog for dangerous log types\n
-    · New: Store found date of found caches when importing via GPX\n
-    · New: Select a waypoint of a cache as target directly from compass\n
-    · New: Suggestion for waypoint name depending on its type\n
-    · New: Import lab caches as virtual caches\n
-    · New: Remember zoom level of live map and cache map separately\n
-    · New: Confirmation for deleting all offline logs\n
-    · New: Menu item for repeating last log text\n
-    · New: Set waypoint coordinates from clipboard content\n
-    · Fix: Titlebar missing on map with Android 3.x\n
-    · Fix: Improved compass rotation algorithm\n
-    · Fix: Smilies fit line height in logbook\n
-    · Fix: GcVote rating sometimes not shown when logging a cache\n
-    · Fix: Caches with corrected coords sometimes shown on their listing coords on the map\n
-    · Fix: Improved rendering of cache listings with many embedded image\ns
-    \n
   </string>
 </resources>
