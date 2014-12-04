@@ -367,6 +367,7 @@
   <string name="init_oc_uk_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på opencaching.org.uk.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">For at kunne bedømme en cache skal du følge instruktionerne på GCVote.com og angive dit password til GCVote her.</string>
+  <string name="err_gcvote_send_rating">Fejl under afsendelse af bedømmelse. Kontrollér eller fjern GCVote password under Indstillinger.</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivér</string>
   <string name="init_username">Brugernavn</string>
