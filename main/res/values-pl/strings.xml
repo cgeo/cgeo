@@ -74,6 +74,7 @@
   <string name="log_tb_visit">Odwiedzony</string>
   <string name="log_tb_drop">Odłożony</string>
   <string name="log_tb_changeall">Zmień wszystko</string>
+  <string name="log_save">Zapisz offline</string>
   <string name="log_saving">Zapisuję w dzienniku…</string>
   <string name="log_saving_and_uploading">Zapisuję w dzienniku i wysyłam zdjęcie…</string>
   <string name="log_clear">Wyczyść</string>
@@ -210,6 +211,7 @@
   <string name="loc_net">Sieć</string>
   <string name="loc_fused">Połączona</string>
   <string name="loc_low_power">Niski pobór energii</string>
+  <string name="loc_home">Koordynaty domowe</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Próba lokalizacji</string>
@@ -371,6 +373,8 @@
   <string name="settings_activate_oc_uk">Aktywuj</string>
   <string name="init_oc_uk_description">Autoryzuj c:geo z opencaching.org.uk aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
   <string name="init_gcvote">GCvote.com</string>
+  <string name="init_gcvote_password_description">Aby móc oceniać skrzynki, należy postępować zgodnie z instrukcjami zawartymi na  GCVote.com i podać swoje hasło do serwisu tutaj.</string>
+  <string name="err_gcvote_send_rating">Błąd podczas wysyłania oceny, sprawdź swoje hasło do GCVote w ustawieniach albo wyczyść je.</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktywuj</string>
   <string name="init_username">Nazwa użytkownika</string>
@@ -640,6 +644,7 @@
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Otwórz w przeglądarce</string>
   <string name="cache_menu_visit">Wpisz wizytę</string>
+  <string name="cache_menu_visit_offline">Wpisz wizytę offline</string>
   <string name="cache_menu_spoilers">Zdjęcia spoiler</string>
   <string name="cache_menu_around">Skrzynki w pobliżu</string>
   <string name="cache_menu_event">Dodaj do kalendarza</string>
