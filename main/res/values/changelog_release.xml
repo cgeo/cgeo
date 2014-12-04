@@ -21,7 +21,7 @@
     · Fix: Smilies fit line height in logbook\n
     · Fix: GcVote rating sometimes not shown when logging a cache\n
     · Fix: Caches with corrected coords sometimes shown on their listing coords on the map\n
-    · Fix: Improved rendering of cache listings with many embedded image\ns
+    · Fix: Improved rendering of cache listings with many embedded image\n
     · Fix: Charter Members not recognized as Premium Members\n
     \n
     <b>Known Limitations/Bugs:</b>\n
