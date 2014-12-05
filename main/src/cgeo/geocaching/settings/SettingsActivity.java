@@ -152,7 +152,10 @@ public class SettingsActivity extends PreferenceActivity {
     private void initNavigationMenuPreferences() {
         for (final NavigationAppsEnum appEnum : NavigationAppsEnum.values()) {
             if (appEnum.app.isInstalled()) {
-                getPreference(appEnum.preferenceKey).setEnabled(true);
+                final Preference preference = getPreference(appEnum.preferenceKey);
+                if (preference != null) {
+                    preference.setEnabled(true);
+                }
             }
         }
         getPreference(R.string.preference_screen_basicmembers)
