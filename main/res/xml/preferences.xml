@@ -703,6 +703,11 @@
                 <CheckBoxPreference
                     android:defaultValue="true"
                     android:enabled="false"
+                    android:key="@string/pref_navigation_menu_android_wear"
+                    android:title="@string/cache_menu_android_wear" />
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:enabled="false"
                     android:key="@string/pref_navigation_menu_mapswithme"
                     android:title="@string/cache_menu_mapswithme" />
             </PreferenceScreen>
