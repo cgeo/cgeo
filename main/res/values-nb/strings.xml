@@ -376,6 +376,8 @@
   <string name="settings_activate_oc_uk">Aktiver</string>
   <string name="init_oc_uk_description">Gi c:geo tilgang til å bruke opencaching.org.uk for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
   <string name="init_gcvote">GCVote.com</string>
+  <string name="init_gcvote_password_description">For å kunne vurdere en cache, må du følge instruksjonene på GCVote.com og angi ditt GCVote passord her.</string>
+  <string name="err_gcvote_send_rating">Feil ved sending av rating, sjekk GCVote passord i innstillinger eller tøm den.</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktiver</string>
   <string name="init_username">Brukernavn</string>
@@ -495,11 +497,17 @@
   <string name="init_maintenance_directories_note">c:geo lagrer bilder, loggbilder og andre filer knyttet til en cache i en egen mappe. I noen situasjoner (som importering/eksportering av databasen) vil denne mappen inneholde utdaterte filer som kan slettes her.</string>
   <string name="init_maintenance_directories">Slett utdaterte filer</string>
   <string name="init_location">Geolokasjon</string>
+  <string name="init_location_note">På enheter utstyrt med Google spill tjenester, kan c:geo automatisk bruke en bedre geolocation-leverandør. Men dette forhindrer bruk av en ekstern BlueTooth GPS-mottaker.</string>
   <string name="init_location_googleplayservices">Bruk Google Play Services</string>
   <string name="init_low_power">Strømsparingsmodus</string>
+  <string name="init_low_power_note">Strømsparingsmodus unngår GPS og gyroskop når en svært nøyaktig plassering ikke er strengt nødvendig, men det gir lengere behandlingstid.</string>
+  <string name="init_low_power_mode">Aktivere strømsparingsmodus</string>
   <string name="init_create_memory_dump">Opprett minnedump</string>
   <string name="init_memory_dump">Minnedump</string>
   <string name="init_memory_dumped">Minne dumpet til %s</string>
+  <string name="init_hardware_acceleration_title">Maskinvareakselerert rendering</string>
+  <string name="init_hardware_acceleration_note">Maskinvare-akselerasjon gjengir grafikkelementer raskere på skjermen. Men på noen Android telefoners operativsystem er det noen feil, og noe av teksten kan komme fram som uklare  Deaktiver maskinvare-akselerasjonen hvis dette skjer med deg.</string>
+  <string name="init_hardware_acceleration">Aktivere maskinvareakselerasjonen</string>
   <string name="settings_open_website">Åpne nettside</string>
   <string name="settings_settings">Innstillinger</string>
   <string name="settings_information">Informasjon</string>
@@ -636,6 +644,7 @@
   <string name="cache_menu_streetview">Gatevisning</string>
   <string name="cache_menu_browser">Åpne i nettleseren</string>
   <string name="cache_menu_visit">Logg funn</string>
+  <string name="cache_menu_visit_offline">Ett klikk frakoblet Logg</string>
   <string name="cache_menu_spoilers">Bilder</string>
   <string name="cache_menu_around">Cacher i nærheten</string>
   <string name="cache_menu_event">Eksporter til kalender</string>
@@ -755,6 +764,7 @@
   <string name="search_clear_history">Slett historikk</string>
   <string name="search_history_cleared">Historikken er slettet</string>
   <string name="waypoint_coordinate_formats_plain">Ren tekst</string>
+  <string name="from_clipboard">Fra utklippstavlen.</string>
   <string name="visit_tweet">Del dette funnet på Twitter</string>
   <string name="map_map">Kart</string>
   <string name="map_live">Live-kart</string>
@@ -859,6 +869,7 @@
   <string name="helper_contacts_description">Gjør det mulig å åpne en kontakt (i telefonens adressebok) direkte fra en logg så du enklere kan be om hjelp fra dine venner.</string>
   <string name="helper_sendtocgeo_description">Send til c:geo (send2c:geo) er en nettleserutvidelse <strong>for din pc</strong>. På geocaching.com kan du sende cacher til din smarttelefon ved hjelp av en egen knapp i nettleseren.</string>
   <string name="helper_locus_title">Locus</string>
+  <string name="helper_locus_description">utendørs-navigasjon app for din telefon eller tablet. Se topo kart frakoblet, spore ruten din, let etter turbokser eller bruk en stemme guide og gjør enda mer.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">Du kan bruke radaren i denne appen sammen med c:geo. Den gir mye GPS-relatert informasjon.</string>
   <string name="helper_bluetoothgps_title">Blåtann-GPS</string>
@@ -1152,6 +1163,7 @@
     <item quantity="one">%s favoritt</item>
     <item quantity="other">%s favoritt</item>
   </plurals>
+  <string name="more_than_percent_favorite_points">&gt; %d%% favoritter.</string>
   <string name="cgeo_shortcut">c:geo-snartvei</string>
   <string name="create_shortcut">Opprett snarvei</string>
   <string name="send">Send</string>
@@ -1159,6 +1171,8 @@
   <string name="showcase_logcache_text">Husk, mange kommandoer er nå i tittellinjen. Der finner du knappen for å sende den ferdige loggen.</string>
   <string name="showcase_main_title">Nye menyer</string>
   <string name="showcase_main_text">c:geo har nå plassert menyelementer i tittellinjen, slik som andre moderne app-er. Noen elementer er skjult bak symbolet med prikker. Langt trykk på en knapp viser en beskrivelse av funksjonen.</string>
+  <string name="showcase_cachelist_title">Bytter lister.</string>
+  <string name="showcase_cachelist_text">Du kan bytte mellom geocache lister ved å klikke på tittelen på listen.</string>
   <string name="confirm_log_title">Uvanlig loggtype</string>
   <string name="confirm_log_message">Du vil logge \'%s\'. Er du sikker?</string>
 </resources>
