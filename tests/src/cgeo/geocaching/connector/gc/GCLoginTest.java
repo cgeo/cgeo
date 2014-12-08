@@ -6,9 +6,9 @@ import cgeo.geocaching.enumerations.StatusCode;
 
 import org.apache.commons.lang3.StringUtils;
 
-import junit.framework.TestCase;
-
 import android.test.suitebuilder.annotation.Suppress;
+
+import junit.framework.TestCase;
 
 public class GCLoginTest extends TestCase {
 
@@ -20,7 +20,7 @@ public class GCLoginTest extends TestCase {
         assertThat(instance.login()).isEqualTo(StatusCode.NO_ERROR);
     }
 
-    public void testHomeLocation() {
+    public static void testHomeLocation() {
         assertThat(StringUtils.isNotBlank(GCLogin.retrieveHomeLocation())).isTrue();
     }
 
