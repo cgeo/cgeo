@@ -27,12 +27,15 @@ gradle connectedCheck
 //https://github.com/stephanenicolas/Quality-Tools-for-Android
 
 def AAVersion = '3.2'
-def RXJavaVersion = '1.0.1'
+def RXJavaVersion = '1.0.2'
 def RXAndroidVersion = '0.23.0'
 def RXJavaAsyncUtilVersion = '0.21.0'
-def JacksonCoreVersion = '2.4.3'
-def JacksonDatabindVersion = '2.4.3'
-def JacksonAnnotationsVersion = '2.4.3'
+def JacksonCoreVersion = '2.4.4'
+def JacksonDatabindVersion = '2.4.4'
+def JacksonAnnotationsVersion = '2.4.4'
+def CommonsCollections4Version = '4.0'
+def CommonsLang3Version = '3.3.2'
+def CommonsIoVersion = '2.4'
 group = 'cgeo.geocaching'
 version = '0.0.1'
 
@@ -158,9 +161,9 @@ dependencies {
     compile 'com.google.android.gms:play-services:5.0.89'
 
     compile 'com.jakewharton:butterknife:6.0.0'
-    compile 'org.apache.commons:commons-collections4:4.0'
-    compile 'org.apache.commons:commons-lang3:3.3.2'
-    compile 'commons-io:commons-io:2.4'
+    compile "org.apache.commons:commons-collections4:$CommonsCollections4Version"
+    compile "org.apache.commons:commons-lang3:3.3.2:$CommonsLang3Version"
+    compile "commons-io:commons-io:$CommonsIoVersion"
     compile 'com.google.code.findbugs:annotations:3.0.0'
 
     compile "io.reactivex:rxjava:$RXJavaVersion"

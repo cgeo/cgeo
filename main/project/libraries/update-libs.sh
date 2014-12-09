@@ -1,12 +1,15 @@
 #! /bin/sh
 #
 
-RXJAVA=1.0.1
+RXJAVA=1.0.2
 RXANDROID=0.23.0
 RXJAVAASYNCUTIL=0.21.0
-JACKSONCORE=2.4.3
-JACKSONDATABIND=2.4.3
-JACKSONANNOTATIONS=2.4.3
+JACKSONCORE=2.4.4
+JACKSONDATABIND=2.4.4
+JACKSONANNOTATIONS=2.4.4
+COMMONSCOLLECTIONS4=4.0
+COMMONSLANG3=3.3.2
+COMMONSIO=2.4
 
 cd $(git rev-parse --show-toplevel)/main/libs
 
@@ -45,3 +48,10 @@ updatelib com/fasterxml/jackson/core jackson-databind $JACKSONDATABIND
 fixgradle JacksonDatabindVersion $JACKSONDATABIND
 updatelib com/fasterxml/jackson/core jackson-annotations $JACKSONANNOTATIONS
 fixgradle JacksonAnnotationsVersion $JACKSONANNOTATIONS
+
+updatelib org/apache/commons commons-collections4 $COMMONSCOLLECTIONS4
+fixgradle CommonsCollections4Version $COMMONSCOLLECTIONS4
+updatelib org/apache/commons commons-lang3 $COMMONSLANG3
+fixgradle CommonsLang3Version $COMMONSLANG3
+updatelib commons-io commons-io $COMMONSIO
+fixgradle CommonsIoVersion $COMMONSIO
