@@ -104,7 +104,7 @@ final class ECApi {
         final HttpResponse response = Network.postRequest(uri, params);
 
         if (response == null) {
-            return new LogResult(StatusCode.LOG_POST_ERROR_EC, "");
+            return new LogResult(StatusCode.LOG_POST_ERROR, "");
         }
         if (!isRetry && response.getStatusLine().getStatusCode() == 403) {
             if (ecLogin.login() == StatusCode.NO_ERROR) {
@@ -112,7 +112,7 @@ final class ECApi {
             }
         }
         if (response.getStatusLine().getStatusCode() != 200) {
-            return new LogResult(StatusCode.LOG_POST_ERROR_EC, "");
+            return new LogResult(StatusCode.LOG_POST_ERROR, "");
         }
 
         final String data = Network.getResponseDataAlways(response);
@@ -124,7 +124,7 @@ final class ECApi {
             return new LogResult(StatusCode.NO_ERROR, uid);
         }
 
-        return new LogResult(StatusCode.LOG_POST_ERROR_EC, "");
+        return new LogResult(StatusCode.LOG_POST_ERROR, "");
     }
 
 

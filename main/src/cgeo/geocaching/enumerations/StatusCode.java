@@ -21,14 +21,13 @@ public enum StatusCode {
     PREMIUM_ONLY(R.string.err_premium_only),
     MAINTENANCE(R.string.err_maintenance),
     LOG_POST_ERROR(R.string.err_log_post_failed),
-    LOG_POST_ERROR_EC(R.string.err_log_post_failed_ec),
     NO_LOG_TEXT(R.string.warn_log_text_fill),
     NOT_LOGGED_IN(R.string.init_login_popup_failed),
     LOGIMAGE_POST_ERROR(R.string.err_logimage_post_failed);
 
     final private int error_string;
 
-    StatusCode(int error_string) {
+    StatusCode(final int error_string) {
         this.error_string = error_string;
     }
 
