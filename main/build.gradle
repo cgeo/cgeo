@@ -162,7 +162,7 @@ dependencies {
 
     compile 'com.jakewharton:butterknife:6.0.0'
     compile "org.apache.commons:commons-collections4:$CommonsCollections4Version"
-    compile "org.apache.commons:commons-lang3:3.3.2:$CommonsLang3Version"
+    compile "org.apache.commons:commons-lang3:$CommonsLang3Version"
     compile "commons-io:commons-io:$CommonsIoVersion"
     compile 'com.google.code.findbugs:annotations:3.0.0'
 
