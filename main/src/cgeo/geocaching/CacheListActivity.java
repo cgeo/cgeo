@@ -27,7 +27,6 @@ import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.loaders.AbstractSearchLoader;
 import cgeo.geocaching.loaders.AbstractSearchLoader.CacheListLoaderType;
-import cgeo.geocaching.loaders.AddressGeocacheListLoader;
 import cgeo.geocaching.loaders.CoordsGeocacheListLoader;
 import cgeo.geocaching.loaders.FinderGeocacheListLoader;
 import cgeo.geocaching.loaders.HistoryGeocacheListLoader;
@@ -1549,12 +1548,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 } else {
                     title = coords.toString();
                 }
-                if (coords != null) {
-                    loader = new CoordsGeocacheListLoader(app, coords);
-                }
-                else {
-                    loader = new AddressGeocacheListLoader(app, address);
-                }
+                loader = new CoordsGeocacheListLoader(app, coords);
                 break;
             case FINDER:
                 final String username = extras.getString(Intents.EXTRA_USERNAME);

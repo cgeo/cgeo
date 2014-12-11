@@ -2,8 +2,10 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.location.AndroidGeocoder;
+import cgeo.geocaching.location.GCGeocoder;
 import cgeo.geocaching.ui.AddressListAdapter;
 
+import rx.Observable;
 import rx.android.observables.AndroidObservable;
 import rx.functions.Action1;
 
@@ -19,28 +21,20 @@ public class AddressListActivity extends AbstractListActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.addresslist_activity);
 
-        // get parameters
-        final String keyword = getIntent().getStringExtra(Intents.EXTRA_KEYWORD);
-
-        if (keyword == null) {
-            showToast(res.getString(R.string.err_search_address_forgot));
-            finish();
-            return;
-        }
 
         final AddressListAdapter adapter = new AddressListAdapter(this);
         setListAdapter(adapter);
 
+        final String keyword = getIntent().getStringExtra(Intents.EXTRA_KEYWORD);
         final ProgressDialog waitDialog =
                 ProgressDialog.show(this, res.getString(R.string.search_address_started), keyword, true);
         waitDialog.setCancelable(true);
-
         lookupAddressInBackground(keyword, adapter, waitDialog);
     }
 
     private void lookupAddressInBackground(final String keyword, final AddressListAdapter adapter, final ProgressDialog waitDialog) {
-        final AndroidGeocoder geocoder = new AndroidGeocoder(this);
-        AndroidObservable.bindActivity(this, geocoder.getFromLocationName(keyword).toList()).subscribe(new Action1<List<Address>>() {
+        final Observable<Address> geocoderObservable = new AndroidGeocoder(this).getFromLocationName(keyword).onErrorResumeNext(GCGeocoder.getFromLocationName(keyword));
+        AndroidObservable.bindActivity(this, geocoderObservable.toList()).subscribe(new Action1<List<Address>>() {
             @Override
             public void call(final List<Address> addresses) {
                 waitDialog.dismiss();
@@ -52,7 +46,7 @@ public class AddressListActivity extends AbstractListActivity {
             @Override
             public void call(final Throwable throwable) {
                 finish();
-                CacheListActivity.startActivityAddress(AddressListActivity.this, null, keyword);
+                showToast(res.getString(R.string.err_unknown_address));
             }
         });
     }

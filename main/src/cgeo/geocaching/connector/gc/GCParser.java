@@ -940,30 +940,6 @@ public abstract class GCParser {
         return searchByAny(cacheType, isSearchForMyCaches(userName), showCaptcha, params, recaptchaReceiver);
     }
 
-    public static SearchResult searchByAddress(final String address, final CacheType cacheType, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
-        if (StringUtils.isBlank(address)) {
-            Log.e("GCParser.searchByAddress: No address given");
-            return null;
-        }
-
-        final ObjectNode response = Network.requestJSON("http://www.geocaching.com/api/geocode", new Parameters("q", address));
-        if (response == null) {
-            return null;
-        }
-
-        if (!StringUtils.equalsIgnoreCase(response.path("status").asText(), "success")) {
-            return null;
-        }
-
-        final JsonNode data = response.path("data");
-        final JsonNode latNode = data.get("lat");
-        final JsonNode lngNode = data.get("lng");
-        if (latNode == null || lngNode == null) {
-            return null;
-        }
-        return searchByCoords(new Geopoint(latNode.asDouble(), lngNode.asDouble()), cacheType, showCaptcha, recaptchaReceiver);
-    }
-
     @Nullable
     public static Trackable searchTrackable(final String geocode, final String guid, final String id) {
         if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid) && StringUtils.isBlank(id)) {
