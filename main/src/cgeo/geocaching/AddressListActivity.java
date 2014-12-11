@@ -1,14 +1,14 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractListActivity;
-import cgeo.geocaching.location.Geocoder;
+import cgeo.geocaching.location.AndroidGeocoder;
 import cgeo.geocaching.ui.AddressListAdapter;
 
-import org.apache.commons.collections4.CollectionUtils;
+import rx.android.observables.AndroidObservable;
+import rx.functions.Action1;
 
 import android.app.ProgressDialog;
 import android.location.Address;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import java.util.List;
@@ -39,27 +39,21 @@ public class AddressListActivity extends AbstractListActivity {
     }
 
     private void lookupAddressInBackground(final String keyword, final AddressListAdapter adapter, final ProgressDialog waitDialog) {
-        new AsyncTask<Void, Void, List<Address>>() {
-
+        final AndroidGeocoder geocoder = new AndroidGeocoder(this);
+        AndroidObservable.bindActivity(this, geocoder.getFromLocationName(keyword).toList()).subscribe(new Action1<List<Address>>() {
             @Override
-            protected List<Address> doInBackground(final Void... params) {
-                final Geocoder geocoder = new Geocoder(AddressListActivity.this);
-                return geocoder.getFromLocationName(keyword);
-            }
-
-            @Override
-            protected void onPostExecute(final List<Address> addresses) {
+            public void call(final List<Address> addresses) {
                 waitDialog.dismiss();
-                if (CollectionUtils.isNotEmpty(addresses)) {
-                    for (final Address address : addresses) {
-                        adapter.add(address); // don't use addAll, it's only available with API >= 11
-                    }
-                } else {
-                    finish();
-                    CacheListActivity.startActivityAddress(AddressListActivity.this, null, keyword);
+                for (final Address address : addresses) {
+                    adapter.add(address); // don't use addAll, it's only available with API >= 11
                 }
             }
-
-        }.execute();
+        }, new Action1<Throwable>() {
+            @Override
+            public void call(final Throwable throwable) {
+                finish();
+                CacheListActivity.startActivityAddress(AddressListActivity.this, null, keyword);
+            }
+        });
     }
 }
