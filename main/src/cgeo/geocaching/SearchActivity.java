@@ -373,7 +373,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     }
 
     private void findByGeocodeFn() {
-        final String geocodeText = StringUtils.trim(geocodeEditText.getText().toString());
+        final String geocodeText = StringUtils.trimToEmpty(geocodeEditText.getText().toString());
 
         if (StringUtils.isBlank(geocodeText) || geocodeText.equalsIgnoreCase("GC")) {
             Dialogs.message(this, R.string.warn_search_help_title, R.string.warn_search_help_gccode);
@@ -384,7 +384,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     }
 
     private void findTrackableFn() {
-        final String trackableText = StringUtils.trim(trackableEditText.getText().toString());
+        final String trackableText = StringUtils.trimToEmpty(trackableEditText.getText().toString());
 
         if (StringUtils.isBlank(trackableText) || trackableText.equalsIgnoreCase("TB")) {
             Dialogs.message(this, R.string.warn_search_help_title, R.string.warn_search_help_tb);

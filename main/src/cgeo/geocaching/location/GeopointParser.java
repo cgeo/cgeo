@@ -119,7 +119,7 @@ class GeopointParser {
 
         // Nothing found with "N 52...", try to match string as decimal degree parts (i.e. multiple doubles)
         try {
-            final String[] items = StringUtils.split(text.trim());
+            final String[] items = StringUtils.split(StringUtils.trimToEmpty(text));
             if (items.length > 0 && items.length <= 2) {
                 final int index = (latlon == LatLon.LON ? items.length - 1 : 0);
                 final String textPart = items[index];
