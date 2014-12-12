@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -141,12 +142,17 @@ public class CachePopupFragment extends AbstractDialogFragment {
 
         protected void storeCache(final int listId) {
             final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(R.string.cache_dialog_offline_save_message);
-            progress.show(getActivity(), res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
-            Schedulers.io().createWorker().schedule(new Action0() {
+            final FragmentActivity activity = getActivity();
+            progress.show(activity, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
+            RxUtils.andThenOnUi(Schedulers.io(), new Action0() {
                 @Override
                 public void call() {
                     cache.store(listId, storeCacheHandler);
-                    getActivity().supportInvalidateOptionsMenu();
+                }
+            }, new Action0() {
+                @Override
+                public void call() {
+                    activity.supportInvalidateOptionsMenu();
                 }
             });
         }
