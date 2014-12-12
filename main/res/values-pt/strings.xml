@@ -172,9 +172,6 @@
   <string name="err_log_load_data">O c:geo não consegue carregar os dados necessários para registar a sua visita.</string>
   <string name="err_log_load_data_again">O c:geo não consegue carregar os dados necessários para registar a sua visita. A tentar de novo.</string>
   <string name="err_log_load_data_still">O c:geo ainda está a carregar dados necessários para publicar o registo. Por favor espere mais um pouco.</string>
-  <string name="err_log_post_failed">O c:geo falhou a publicação do registo.</string>
-  <string name="err_log_post_failed_ec">Parece que o seu  log não foi publicado. Por favor verifique-o em Extremcaching.com.</string>
-  <string name="err_logimage_post_failed">Parece que a sua imagem de registo não foi enviada. Por favor verifique em Geocaching.com.</string>
   <string name="err_search_address_forgot">O c:geo esqueceu o endereço que procura.</string>
   <string name="err_parse_lat">O c:geo não consegue analisar a latitue.</string>
   <string name="err_parse_lon">O c:geo não consegue analisar a logitude.</string>

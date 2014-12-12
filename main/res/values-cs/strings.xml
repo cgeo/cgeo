@@ -171,9 +171,6 @@
   <string name="err_log_load_data">c:geo nemůže načíst data požadovaná k zalogování návštěvy.</string>
   <string name="err_log_load_data_again">c:geo nemůže načíst data požadovaná k zalogování návštěvy. Zkouší to znovu.</string>
   <string name="err_log_load_data_still">c:geo stále načítá data požadovaná k odeslání Logu. Prosím, počkej ještě chvíli.</string>
-  <string name="err_log_post_failed">Zdá se, že tvůj Log nebyl odeslán. Prosím, zkontroluj to na Geocaching.com.</string>
-  <string name="err_log_post_failed_ec">Zdá se, že tvůj Log nebyl odeslán. Prosím, zkontroluj to na Extremcaching.com.</string>
-  <string name="err_logimage_post_failed">Zdá se, že tvůj obrázek nebyl nahrán. Zkontroluj to, prosím, na Geocaching.com.</string>
   <string name="err_search_address_forgot">c:geo zapomnělo hledanou adresu.</string>
   <string name="err_parse_lat">c:geo nemůže dopočítat zeměpisnou šířku.</string>
   <string name="err_parse_lon">c:geo nemůže dopočítat zeměpisnou délku.</string>

@@ -172,9 +172,6 @@
   <string name="err_log_load_data">Beklager, c:geo klarte ikke å laste den nødvendige informasjonen for å logge funnet.</string>
   <string name="err_log_load_data_again">Beklager, c:geo klarte ikke å laste den nødvendige informasjonen for å logge funnet. c:geo prøver på nytt.</string>
   <string name="err_log_load_data_still">c:geo laster fortsatt informasjonen som er nødvendig for å logge funnet. Vennligst vent.</string>
-  <string name="err_log_post_failed">Beklager, c:geo klarte ikke å logge funnet.</string>
-  <string name="err_log_post_failed_ec">Din logg ble trolig ikke lastet opp. Du bør sjekke det på Extremcaching.com.</string>
-  <string name="err_logimage_post_failed">Bildet til loggen ble trolig ikke lastet opp. Du bør sjekke det på Geocaching.com.</string>
   <string name="err_search_address_forgot">Beklager, c:geo glemte adressen du prøvde å finne.</string>
   <string name="err_parse_lat">Beklager, c:geo klarte ikke å lese breddegraden.</string>
   <string name="err_parse_lon">Beklager, c:geo klarte ikke å lese lengdegraden.</string>
