@@ -2,6 +2,9 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+     <b>2014.12.12:</b>\n
+    · Fix: Crashes on map popup interaction\n
+     \n
     <b>2014.12.09:</b>\n
     · New: Google Play Services used for location (less battery usage)\n
     · New: Optional low power GPS mode for parts of the app which don\'t require high precision\n
