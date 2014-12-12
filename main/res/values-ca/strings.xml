@@ -172,9 +172,6 @@
   <string name="err_log_load_data">El c:geo no pot carregar les dades necessàries per registrar la visita.</string>
   <string name="err_log_load_data_again">El c:geo no pot carregar les dades necessàries per registrar la visita. Torneu a intentar-ho.</string>
   <string name="err_log_load_data_still">El c:geo encara està carregant les dades necessàries per enviar el registre. Si us plau, espereu una estona més.</string>
-  <string name="err_log_post_failed">Sembla que el vostre registre no s\'ha publicat. Comproveu-ho a geocaching.com.</string>
-  <string name="err_log_post_failed_ec">Sembla que el registre no s\'ha publicat. Comproveu-ho a Extremcaching.com.</string>
-  <string name="err_logimage_post_failed">Sembla que la  imatge de registre no ha estat guardada. Comproveu-ho a Geocaching.com.</string>
   <string name="err_search_address_forgot">El c:geo ha oblidat l\'adreça que intentaves trobar.</string>
   <string name="err_parse_lat">El c:geo no pot calcular la latitud.</string>
   <string name="err_parse_lon">El c:geo no pot calcular la longitud.</string>

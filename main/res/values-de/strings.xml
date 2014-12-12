@@ -172,9 +172,8 @@
   <string name="err_log_load_data">c:geo konnte die benötigten Daten nicht laden, um den Besuch zu loggen.</string>
   <string name="err_log_load_data_again">c:geo konnte die benötigten Daten nicht laden, um den Besuch zu loggen. Bitte erneut versuchen.</string>
   <string name="err_log_load_data_still">c:geo lädt gerade die benötigten Daten. Bitte kurz warten.</string>
-  <string name="err_log_post_failed">c:geo konnte den Log nicht absenden. Bitte auf geocaching.com überprüfen.</string>
-  <string name="err_log_post_failed_ec">c:geo konnte den Log nicht absenden. Bitte auf Extremcaching.com überprüfen.</string>
-  <string name="err_logimage_post_failed">Es scheint dass Ihr Logfoto nicht hochgeladen werden konnte. Bitte prüfen Sie es auf Geocaching.com nach.</string>
+  <string name="err_log_post_failed">Der Log-Eintrag wurde scheinbar nicht gesendet. Bitte auf der betreffenden Geocaching-Webseite prüfen.</string>
+  <string name="err_logimage_post_failed">Das Log-Bild wurde scheinbar nicht hochgeladen. Bitte auf der betreffenden Geocaching-Webseite prüfen.</string>
   <string name="err_search_address_forgot">c:geo hat die Adresse vergessen, die gesucht wurde.</string>
   <string name="err_parse_lat">c:geo konnte den Breitengrad nicht verarbeiten.</string>
   <string name="err_parse_lon">c:geo konnte den Längengrad nicht verarbeiten.</string>

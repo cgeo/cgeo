@@ -172,9 +172,6 @@
   <string name="err_log_load_data">c:geo nu poate încărca informaţiile necesare pentru a posta o însemnare.</string>
   <string name="err_log_load_data_again">c:geo nu poate încărca informaţiile necesare pentru a posta o însemnare. Te rog încearcă din nou.</string>
   <string name="err_log_load_data_still">c:geo încă încarcă informaţiale necesare pentru a posta o însemnare. Te rog mai aşteaptă.</string>
-  <string name="err_log_post_failed">Se pare că însemnarea nu a fost postată. Verifică pe Geocaching.com.</string>
-  <string name="err_log_post_failed_ec">Se pare că însemnarea nu a fost postată. Verifică pe Extremcaching.com.</string>
-  <string name="err_logimage_post_failed">Se pare că imaginea ataşată însemnării nu a fost postată. Verifică pe Geocaching.com.</string>
   <string name="err_search_address_forgot">c:geo a uitat adresa pe care o căutai.</string>
   <string name="err_parse_lat">c:geo nu înţelege latitudinea.</string>
   <string name="err_parse_lon">c:geo nu înţelege longitudinea.</string>

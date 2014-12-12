@@ -172,9 +172,8 @@
   <string name="err_log_load_data">c:geo negali įkelti duomenų reikalingų apsilankymui įrašyti.</string>
   <string name="err_log_load_data_again">c:geo negali įkelti duomenų reikalingų apsilankymui įrašyti. Bando dar kartą.</string>
   <string name="err_log_load_data_still">c:geo dar įkelia duomenis reikalingus apsilankymui įrašyti. Prašome palaukti šiek tiek ilgiau.</string>
-  <string name="err_log_post_failed">Atrodo, kad jūsų įrašas nebuvo paskelbtas. Prašome tai patikrinti Geocaching.com.</string>
-  <string name="err_log_post_failed_ec">Atrodo, kad jūsų įrašas nebuvo paskelbtas. Prašome tai patikrinti Extremcaching.com.</string>
-  <string name="err_logimage_post_failed">Atrodo, kad jūsų įrašo nuotrauka nebuvo įkelta. Prašome tai patikrinti Geocaching.com.</string>
+  <string name="err_log_post_failed">Atrodo, kad jūsų įrašas nebuvo paskelbtas. Prašome patikrinti jį slėptuvės svetainėje.</string>
+  <string name="err_logimage_post_failed">Atrodo, kad jūsų įrašo nuotrauka nebuvo paskelbta. Prašome patikrinti ją slėptuvės svetainėje.</string>
   <string name="err_search_address_forgot">c:geo pamiršo adresą kurio bandėte ieškoti.</string>
   <string name="err_parse_lat">c:geo nesupranta įvestos platumos.</string>
   <string name="err_parse_lon">c:geo nesupranta įvestos ilgumos.</string>
