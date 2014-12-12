@@ -96,25 +96,28 @@ class GeopointParser {
             // fall through to advanced parsing
         }
 
-        if (matcher.find()) {
-            final double sign = matcher.group(1).equalsIgnoreCase("S") || matcher.group(1).equalsIgnoreCase("W") ? -1.0 : 1.0;
-            final double degree = Integer.valueOf(matcher.group(2)).doubleValue();
+        try {
+            if (matcher.find()) {
+                final double sign = matcher.group(1).equalsIgnoreCase("S") || matcher.group(1).equalsIgnoreCase("W") ? -1.0 : 1.0;
+                final double degree = Integer.valueOf(matcher.group(2)).doubleValue();
 
-            double minutes = 0.0;
-            double seconds = 0.0;
+                double minutes = 0.0;
+                double seconds = 0.0;
 
-            if (null != matcher.group(3)) {
-                minutes = Integer.valueOf(matcher.group(3)).doubleValue();
+                if (null != matcher.group(3)) {
+                    minutes = Integer.valueOf(matcher.group(3)).doubleValue();
 
-                if (null != matcher.group(4)) {
-                    seconds = Double.parseDouble("0." + matcher.group(4)) * 60.0;
-                } else if (null != matcher.group(5)) {
-                    seconds = Double.parseDouble(matcher.group(5).replace(",", "."));
+                    if (null != matcher.group(4)) {
+                        seconds = Double.parseDouble("0." + matcher.group(4)) * 60.0;
+                    } else if (null != matcher.group(5)) {
+                        seconds = Double.parseDouble(matcher.group(5).replace(",", "."));
+                    }
                 }
+
+                return new ResultWrapper(sign * (degree + minutes / 60.0 + seconds / 3600.0), matcher.start(), matcher.group().length());
             }
-
-            return new ResultWrapper(sign * (degree + minutes / 60.0 + seconds / 3600.0), matcher.start(), matcher.group().length());
-
+        } catch (final NumberFormatException ignored) {
+            // We might have encountered too large a number. This was not the right way to do it, try another.
         }
 
         // Nothing found with "N 52...", try to match string as decimal degree parts (i.e. multiple doubles)
