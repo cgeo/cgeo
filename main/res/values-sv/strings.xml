@@ -172,9 +172,8 @@
   <string name="err_log_load_data">Tyvärr kan c:geo inte ladda information som krävs för att logga ditt besök.</string>
   <string name="err_log_load_data_again">Tyvärr kan c:geo inte ladda information som krävs för att logga ditt besök. Försöker igen.</string>
   <string name="err_log_load_data_still">c:geo laddar fortfarande data för att kunna posta loggen. Vänligen vänta en stund till.</string>
-  <string name="err_log_post_failed">Tyvärr misslyckades c:geo att posta loggen.</string>
-  <string name="err_log_post_failed_ec">Det verkar som att din logg inte kunde laddas upp. Kontrollera loggen på Extremcaching.com.</string>
-  <string name="err_logimage_post_failed">Det verkar som om din bild till loggen inte kunde laddas upp. Vänligen kontrollera den på Geocaching.com.</string>
+  <string name="err_log_post_failed">Det verkar som att din logg inte kunde postas. Kontrollera loggen på cachens ursprungliga hemsida.</string>
+  <string name="err_logimage_post_failed">Det verkar som att din logg bild inte kunde laddas upp. Kontrollera bilden på cachens hemsida.</string>
   <string name="err_search_address_forgot">Tyvärr glömde c:geo adressen du sökte efter.</string>
   <string name="err_parse_lat">Tyvärr kan c:geo inte tolka latitud.</string>
   <string name="err_parse_lon">Tyvärr kan c:geo inte tolka longitud.</string>

@@ -172,9 +172,6 @@
   <string name="err_log_load_data">Sorry, c:geo kan data om bezoek te loggen niet laden.</string>
   <string name="err_log_load_data_again">Sorry, c:geo kan data om bezoek te loggen niet laden. Bezig nogmaals te proberen.</string>
   <string name="err_log_load_data_still">c:geo is nog steeds bezig om data te laden om bezoek te loggen. Graag nog even geduld.</string>
-  <string name="err_log_post_failed">Sorry, het is c:geo niet gelukt het log te posten.</string>
-  <string name="err_log_post_failed_ec">Het lijkt erop dat uw log niet werd gepost. Controleer het op Extremcaching.com.</string>
-  <string name="err_logimage_post_failed">Het lijkt erop dat uw log-foto niet geüpload is. Controleer het op Geocaching.com.</string>
   <string name="err_search_address_forgot">Sorry, c:geo is het adres dat je zoekt vergeten.</string>
   <string name="err_parse_lat">Sorry, c:geo kan breedtegraad niet verwerken.</string>
   <string name="err_parse_lon">Sorry, c:geo kan lengtegraad niet verwerken.</string>

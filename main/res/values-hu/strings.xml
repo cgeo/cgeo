@@ -172,9 +172,6 @@
   <string name="err_log_load_data">Sajnáljuk, a c:geo nem tudja betölteni a megtalálás bejelentéséhez szükségesek adatokat.</string>
   <string name="err_log_load_data_again">Sajnáljuk, a c:geo nem tudja betölteni a megtalálás bejelentéséhez szükségesek adatokat. Újrapróbálkozás.</string>
   <string name="err_log_load_data_still">A c:geo még tölti a megtalálás bejelentéséhez szükségesek adatokat. Kérlek, várj egy kicsit tovább.</string>
-  <string name="err_log_post_failed">Úgy tűnik, a logod nem került hozzáadásra. Kérlek, ellenőrizd a geocaching.com-on.</string>
-  <string name="err_log_post_failed_ec">Úgy tűnik, hogy a logod nem került hozzáadásra. Kérlek, ellenőrizd a geocaching.com-on!</string>
-  <string name="err_logimage_post_failed">Úgy tűnik, hogy a log képed feltöltése nem sikerült. Kérjük, ellenőrizd a geocaching.com-on!</string>
   <string name="err_search_address_forgot">Sajnáljuk, a c:geo elfelejtette a keresett címet.</string>
   <string name="err_parse_lat">Sajnáljuk, a c:geo nem tudja értelmezni a szélességet.</string>
   <string name="err_parse_lon">Sajnáljuk, a c:geo nem tudja értelmezni a hosszúságot.</string>
