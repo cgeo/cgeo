@@ -172,9 +172,6 @@
   <string name="err_log_load_data">c:geo nie może załadować danych wymaganych do wpisania wizyty.</string>
   <string name="err_log_load_data_again">c:geo nie może załadować danych wymaganych do wpisania wizyty. Próbuję ponownie.</string>
   <string name="err_log_load_data_still">Nadal trwa ładowanie danych wymaganych do wpisu w dzienniku. Proszę czekać…</string>
-  <string name="err_log_post_failed">Wygląda na to, że Twój wpis nie został wysłany. Proszę sprawdź na Geocaching.com.</string>
-  <string name="err_log_post_failed_ec">Wygląda na to, że Twój wpis nie został wysłany. Proszę sprawdź na Extremcaching.com.</string>
-  <string name="err_logimage_post_failed">Wygląda na to, że Twój obraz nie został dodany. Proszę sprawdź na Geocaching.com.</string>
   <string name="err_search_address_forgot">c:geo zapomniał adresu, którego szukałeś.</string>
   <string name="err_parse_lat">c:geo nie może obliczyć szerokości geograficznej.</string>
   <string name="err_parse_lon">c:geo nie może obliczyć długości geograficznej.</string>

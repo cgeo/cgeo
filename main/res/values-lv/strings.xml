@@ -143,7 +143,7 @@
   <string name="err_detail_not_load_map_static">c:geo neizdevās ielādēt statiskās kartes.</string>
   <string name="err_detail_still_working">Joprojām strādā pie citas darbības.</string>
   <string name="err_watchlist_still_managing">Joprojām kārto tavu novērojamo slēpņu sarakstu.</string>
-  <string name="err_watchlist_failed">Neizdevās mainīt tavu novērošanas slēpņu sarakstu.</string>
+  <string name="err_watchlist_failed">Neizdevās mainīt tavu novērojamo slēpņu sarakstu.</string>
   <string name="err_application_no">c:geo nevar atrast nevienu piemērotu aplikāciju.</string>
   <string name="err_auth_initialize">c:geo neizdevās izpildīt pierakstīšanās procesu.</string>
   <string name="err_auth_process">Pierakstīšanās process neizdevās.</string>
@@ -172,9 +172,6 @@
   <string name="err_log_load_data_again">c:geo nevar ielādēt datus, kas nepieciešami lai pierakstītu apmeklējumu. Mēģiniet vēlreiz.
 </string>
   <string name="err_log_load_data_still">c:geo joprojām ielādē datus, kas vajadzīgi, lai pierakstītos. Lūdzu, uzgaidiet nedaudz ilgāk.</string>
-  <string name="err_log_post_failed">Šķiet, ka jūsu pieraksts netika iegrāmatots. Lūdzu pārbaudiet to Geocaching.com.</string>
-  <string name="err_log_post_failed_ec">Šķiet, ka jūsu pieraksts netika iegrāmatots. Lūdzu pārbaudiet to Extremcaching.com.</string>
-  <string name="err_logimage_post_failed">Izskatās, ka pierakstīšanās attēls netika augšupielādēts. Lūdzu pārbaudiet to Geocaching.com.</string>
   <string name="err_search_address_forgot">c:geo aizmirsa adresi, kuru mēģinājāt atrast.</string>
   <string name="warn_save_nothing">Šeit nekā nav ko saglabāt.</string>
   <string name="warn_no_cache_coord">Te nav slēpņu ar koordinātām.</string>
@@ -459,6 +456,7 @@
   <string name="feature_personal_notes">Personiska piezīme</string>
   <string name="feature_online_logging">Tiešsaistes pierakstīšanās</string>
   <string name="feature_log_images">Pievienot attēlus ierakstam</string>
+  <string name="feature_watch_list">Skatīties sarakstu</string>
   <string name="feature_search_keyword">Meklēt pēc atslēgvārda</string>
   <string name="feature_search_geocode">Meklēt pēc Geo code</string>
   <string name="feature_search_owner">Meklēt pēc īpašnieka</string>
@@ -468,8 +466,9 @@
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="cache_offline">Bezsaistes režīmā</string>
   <string name="cache_offline_refresh">Atjaunot</string>
+  <string name="cache_offline_drop">Izmest</string>
   <string name="cache_offline_store">Saglabāt</string>
-  <string name="cache_offline_stored">Saglabātie ierīcē</string>
+  <string name="cache_offline_stored">Saglabāts ierīcē</string>
   <string name="cache_offline_not_ready">Nav pieejams bezsaistē</string>
   <string name="cache_offline_time_about">pirms</string>
   <string name="cache_offline_time_mins">minūtes (-ēm)</string>
@@ -479,7 +478,10 @@
   <string name="cache_log_image_default_title">Attēls</string>
   <string name="cache_personal_note_edit">Rediģēt</string>
   <string name="cache_description_long">Garš apraksts</string>
-  <string name="cache_watchlist_on">Jūs vērojat šo slēpni</string>
+  <string name="cache_watchlist_on">Jūs novērojat šo slēpni</string>
+  <string name="cache_watchlist_not_on">Šis slēpnis nav jūsu sarakstā ar novērojamajiem.</string>
+  <string name="cache_watchlist_add">Pievienot sarakstam ar novērojamajiem</string>
+  <string name="cache_watchlist_remove">Noņemt no saraksta ar novērojamajiem</string>
   <string name="cache_favpoint_on">Šis slēpnis ir viens no jūsu favorītiem.</string>
   <string name="cache_favpoint_not_on">Šis slēpnis nav neviens no jūsu favorītiem.</string>
   <string name="cache_favpoint_add">Pievienot</string>
@@ -497,19 +499,25 @@
   <string name="cache_dialog_loading_details_status_waypoints">Apstrādā Starpposmus</string>
   <string name="cache_dialog_offline_save_title">Bezsaistes režīmā</string>
   <string name="cache_dialog_offline_drop_title">Bezsaistes režīmā</string>
+  <string name="cache_dialog_offline_drop_message">Notiek slēpņa izdzēšana no ierīces atmiņas...</string>
   <string name="cache_dialog_refresh_title">Atjaunot</string>
+  <string name="cache_dialog_watchlist_add_title">Saraksts ar novērojamajiem</string>
+  <string name="cache_dialog_watchlist_add_message">Notiek slēpņa pievienošana novērojamo slēpņu sarakstam...</string>
+  <string name="cache_dialog_watchlist_remove_title">Saraksts ar novērojamajiem</string>
+  <string name="cache_dialog_watchlist_remove_message">Notiek slēpņa dzēšana no novērojamo slēpņu saraksta...</string>
   <string name="cache_dialog_favorite_add_title">Favorīts</string>
   <string name="cache_dialog_favorite_add_message">Pievienot slēpni favorītiem...</string>
   <string name="cache_dialog_favorite_remove_title">Favorīts</string>
   <string name="cache_dialog_favorite_remove_message">Noņemt slēpni no saviem favorītiem...</string>
   <string name="cache_menu_map">Karte</string>
+  <string name="cache_menu_visit">Reģistrēt atradumu</string>
   <string name="cache_menu_move_list">Pārvietot uz citu sarakstu</string>
   <string name="cache_status">Statuss</string>
   <string name="cache_status_found">Atrasts</string>
   <string name="cache_not_status_found">Nav atrasts</string>
   <string name="cache_status_archived">Arhivēts</string>
   <string name="cache_status_disabled">Atspējots</string>
-  <string name="cache_status_stored">Saglabātie</string>
+  <string name="cache_status_stored">Saglabāts</string>
   <string name="cache_status_not_stored">Nav saglabāti</string>
   <string name="cache_geocode">Geo code</string>
   <string name="cache_name">Nosaukums</string>
@@ -526,6 +534,7 @@
   <string name="cache_coordinates">Koordinātas</string>
   <string name="cache_coordinates_original">Sākotnējās koordinātas</string>
   <string name="cache_spoiler_images_title">\"Spoiler\" bilde (-es)</string>
+  <string name="cache_log_types">Reģistrēto ierakstu tipi</string>
   <string name="cache_remove_from_history">Noņemt no vēstures</string>
   <string name="cache_image_open_file">Atvērt kā failu</string>
   <string name="cache_image_open_browser">Atvērt pārlūkprogrammā</string>

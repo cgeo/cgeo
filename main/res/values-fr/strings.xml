@@ -172,9 +172,8 @@
   <string name="err_log_load_data">c:geo ne peut pas charger les données pour enregistrer votre visite.</string>
   <string name="err_log_load_data_again">c:geo ne peut pas charger les données pour enregistrer votre visite. Essayer plus tard.</string>
   <string name="err_log_load_data_still">c:geo est en train de charger les données pour enregistrer votre visite. Veuillez patienter encore un peu.</string>
-  <string name="err_log_post_failed">Il semble que votre visite n\'a pas été enregistrée. Veuillez vérifier sur le site Geocaching.com.</string>
-  <string name="err_log_post_failed_ec">Il semble que votre visite n\'a pas été enregistrée. Veuillez vérifier sur le site Extremcaching.com.</string>
-  <string name="err_logimage_post_failed">Il semble que l\'envoi de l\'image ait échoué. Veuillez vérifier sur le site Geocaching.com.</string>
+  <string name="err_log_post_failed">Il semble que votre visite n\'a pas été enregistrée. Veuillez vérifier sur le site web d\'origine de la géocache.</string>
+  <string name="err_logimage_post_failed">Il semble que l\'envoi de l\'image a échoué. Veuillez vérifier sur le site web d\'origine de la géocache.</string>
   <string name="err_search_address_forgot">c:geo a oublié l\'adresse recherchée.</string>
   <string name="err_parse_lat">c:geo n\'arrive pas à lire la latitude.</string>
   <string name="err_parse_lon">c:geo n\'arrive pas à lire la longitude.</string>

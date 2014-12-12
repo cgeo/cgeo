@@ -172,9 +172,6 @@
   <string name="err_log_load_data">c:geo nemôže načítať dáta potrebné pre zalogovanie návštevy.</string>
   <string name="err_log_load_data_again">c:geo nemôže načítať dáta potrebné pre zalogovanie návštevy. Skúša to znovu.</string>
   <string name="err_log_load_data_still">c:geo stále načítava dáta potrebné pre zalogovanie návštevy. Prosím, počkajte chvíľu.</string>
-  <string name="err_log_post_failed">c:geo pravdepodobne nemohlo odoslať log. Skontrolujte to, prosím, na Geocaching.com.</string>
-  <string name="err_log_post_failed_ec">c:geo pravdepodobne nemohlo odoslať log. Skontrolujte to, prosím, na Extremcaching.com.</string>
-  <string name="err_logimage_post_failed">Obrázok k logu sa pravdepodobne nepodarilo nahrať. Skontrolujte to, prosím, na Geocaching.com.</string>
   <string name="err_search_address_forgot">c:geo zabudlo adresu, ktorú sa pokúšate nájsť.</string>
   <string name="err_parse_lat">c:geo nemôže zistiť zemepisnú šírku.</string>
   <string name="err_parse_lon">c:geo nemôže dopočítať zemepisnú dĺžku.</string>

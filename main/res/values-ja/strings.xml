@@ -166,9 +166,6 @@
   <string name="err_log_load_data">ログを書くのに必要なデータをロードすることができません。</string>
   <string name="err_log_load_data_again">ログを書くのに必要なデータをロードすることができません。もう一度やってみてください。</string>
   <string name="err_log_load_data_still">ログを投稿するのに必要なデータをまだロード中です。もう少しお待ちください。</string>
-  <string name="err_log_post_failed">ログを投稿することができなかったようです。Geocaching.comで確認してください。</string>
-  <string name="err_log_post_failed_ec">ログを投稿することができなかったようです。Extremcaching.comで確認してください。</string>
-  <string name="err_logimage_post_failed">ログの添付画像がアップロードされなかったようです。Geocaching.comで確認してください。</string>
   <string name="err_search_address_forgot">c:geo forgot the address you tried to find.</string>
   <string name="err_parse_lat">緯度の解析ができません。</string>
   <string name="err_parse_lon">経度の解析ができません。</string>

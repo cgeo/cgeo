@@ -172,9 +172,6 @@
   <string name="err_log_load_data">c: geo kan ikke indlæse de data, der kræves for at logge besøget.</string>
   <string name="err_log_load_data_again">c: geo kan ikke indlæse de data, der kræves for at logge besøget. Forsøger igen.</string>
   <string name="err_log_load_data_still">c:geo forsøger stadig at indlæse de data, som kræves for at sende logbeskeden. Vent venligst.</string>
-  <string name="err_log_post_failed">Din logbesked blev muligvis ikke blev gemt korrekt. Kontrollér venligst på geocaching.com.</string>
-  <string name="err_log_post_failed_ec">Din logbesked blev muligvis ikke blev gemt korrekt. Kontrollér venligst på extremecaching.com.</string>
-  <string name="err_logimage_post_failed">Dit logbeskedbillede blev muligvis ikke gemt korrekt. Kontrollér venligst på geocaching.com.</string>
   <string name="err_search_address_forgot">c: geo glemte den adresse, du forsøgte at finde.</string>
   <string name="err_parse_lat">c:geo kan ikke forstå den indtastede breddegrad.</string>
   <string name="err_parse_lon">c:geo kan ikke forstå den indtastede længdegrad.</string>

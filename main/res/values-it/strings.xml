@@ -172,9 +172,6 @@
   <string name="err_log_load_data">c:geo non riesce a caricare i dati necessari per salvare il log della tua visita.</string>
   <string name="err_log_load_data_again">c:geo non riesce a caricare i dati necessari per salvare il log della tua visita. Nuovo tentativo in corso.</string>
   <string name="err_log_load_data_still">c:geo sta ancora caricando i dati necessari per salvare il log. Per cortesia attendere ancora un pochino.</string>
-  <string name="err_log_post_failed">Sembra che il log non sia stato inviato. Prego verificare su Geocaching.com.</string>
-  <string name="err_log_post_failed_ec">Sembra che il tuo log non sia stato pubblicato. Controlla su Extremcaching.com.</string>
-  <string name="err_logimage_post_failed">Sembra che l\'immagine del tuo log non sia stata caricata. Si prega di controllare su Geocaching.com.</string>
   <string name="err_search_address_forgot">c:geo ha dimenticato l\'indirizzo che vuoi trovare.</string>
   <string name="err_parse_lat">c:geo non riesce ad interpretare la latitudine.</string>
   <string name="err_parse_lon">c:geo non riesce ad interpretare la longitudine.</string>
