@@ -1368,12 +1368,15 @@ public class Geocache implements IWaypoint {
     /**
      * Detect coordinates in the personal note and convert them to user defined waypoints. Works by rule of thumb.
      */
-    public void parseWaypointsFromNote() {
+    public boolean parseWaypointsFromNote() {
+        boolean changed = false;
         for (final Waypoint waypoint : Waypoint.parseWaypointsFromNote(StringUtils.defaultString(getPersonalNote()))) {
             if (!hasIdenticalWaypoint(waypoint.getCoords())) {
                 addOrChangeWaypoint(waypoint, false);
+                changed = true;
             }
         }
+        return changed;
     }
 
     private boolean hasIdenticalWaypoint(final Geopoint point) {

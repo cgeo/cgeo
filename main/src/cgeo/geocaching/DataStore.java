@@ -1103,7 +1103,9 @@ public class DataStore {
         for (final Geocache cache : caches) {
             final String geocode = cache.getGeocode();
             final Geocache existingCache = existingCaches.get(geocode);
-            final boolean dbUpdateRequired = !cache.gatherMissingFrom(existingCache) || cacheCache.getCacheFromCache(geocode) != null;
+            boolean dbUpdateRequired = !cache.gatherMissingFrom(existingCache) || cacheCache.getCacheFromCache(geocode) != null;
+            // parse the note AFTER merging the local information in
+            dbUpdateRequired |= cache.parseWaypointsFromNote();
             cache.addStorageLocation(StorageLocation.CACHE);
             cacheCache.putCacheInCache(cache);
 
