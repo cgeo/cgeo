@@ -38,7 +38,7 @@ public class GeoDataProvider extends LooperCallbacks<GeoData> {
     }
 
     public static Observable<GeoData> create(final Context context) {
-        return Observable.create(new GeoDataProvider(context));
+        return Observable.create(new GeoDataProvider(context)).onBackpressureDrop();
     }
 
     @Override
