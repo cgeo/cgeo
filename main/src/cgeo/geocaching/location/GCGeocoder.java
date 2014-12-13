@@ -26,9 +26,11 @@ public class GCGeocoder {
     }
 
     /**
-     * Retrieve addresses from a textual location using geocaching.com geocoding API. The works happens on the network scheduler.
+     * Retrieve addresses from a textual location using geocaching.com geocoding API. The work happens on the network
+     * scheduler.
      *
-     * @param address the location
+     * @param address
+     *            the location
      * @return an observable containing zero or more locations
      *
      * @see android.location.Geocoder#getFromLocationName(String, int)

@@ -29,9 +29,11 @@ public class MapQuestGeocoder {
     }
 
     /**
-     * Retrieve addresses from a textual location using MapQuest geocoding API. The works happens on the network scheduler.
+     * Retrieve addresses from a textual location using MapQuest geocoding API. The work happens on the network
+     * scheduler.
      *
-     * @param address the location
+     * @param address
+     *            the location
      * @return an observable containing zero or more locations
      *
      * @see android.location.Geocoder#getFromLocationName(String, int)
@@ -42,7 +44,11 @@ public class MapQuestGeocoder {
             public Observable<Address> call() {
                 final ObjectNode response = Network.requestJSON("https://www.mapquestapi.com/geocoding/v1/address",
                         new Parameters("key", MAPQUEST_KEY, "location", address, "maxResults", "20", "thumbMaps", "false"));
-                final int statusCode = response != null ? response.path("info").path("statuscode").asInt(-1) : -1;
+                if (response == null) {
+                    Log.w("MapQuest decoder error: no response");
+                    return Observable.error(new RuntimeException("no answer from MapQuest geocoder"));
+                }
+                final int statusCode = response.path("info").path("statuscode").asInt(-1);
                 if (statusCode != 0) {
                     Log.w("MapQuest decoder error: statuscode is not 0");
                     return Observable.error(new RuntimeException("no correct answer from MapQuest geocoder"));
