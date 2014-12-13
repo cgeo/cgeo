@@ -771,8 +771,6 @@ public abstract class GCParser {
             }
         }
 
-        cache.parseWaypointsFromNote();
-
         // last check for necessary cache conditions
         if (StringUtils.isBlank(cache.getGeocode())) {
             return UNKNOWN_PARSE_ERROR;
