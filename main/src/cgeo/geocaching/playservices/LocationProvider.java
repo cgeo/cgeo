@@ -94,7 +94,7 @@ public class LocationProvider implements ConnectionCallbacks, OnConnectionFailed
     }
 
     public static Observable<GeoData> getMostPrecise(final Context context) {
-        return get(context, mostPreciseCount);
+        return get(context, mostPreciseCount).onBackpressureDrop();
     }
 
     public static Observable<GeoData> getLowPower(final Context context) {
@@ -118,7 +118,7 @@ public class LocationProvider implements ConnectionCallbacks, OnConnectionFailed
         // After sending the last known location, try to get a precise location then use the low-power mode. If no
         // location information is given for 25 seconds (if the network location is turned off for example), get
         // back to the precise location and try again.
-        return subject.first().concatWith(untilPreciseEnoughObservable.concatWith(lowPowerObservable).timeout(25, TimeUnit.SECONDS).retry());
+        return subject.first().concatWith(untilPreciseEnoughObservable.concatWith(lowPowerObservable).timeout(25, TimeUnit.SECONDS).retry()).onBackpressureDrop();
     }
 
     /**
