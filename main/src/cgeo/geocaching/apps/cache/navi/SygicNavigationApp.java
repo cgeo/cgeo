@@ -2,6 +2,7 @@ package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.utils.ProcessUtils;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,10 +15,19 @@ import android.net.Uri;
  */
 class SygicNavigationApp extends AbstractPointNavigationApp {
 
-    private static final String PACKAGE = "com.sygic.aura";
+    private static final String PACKAGE_NORMAL = "com.sygic.aura";
+    /**
+     * there is a secondary edition of this app
+     */
+    private static final String PACKAGE_VOUCHER = "com.sygic.aura_voucher";
 
     SygicNavigationApp() {
-        super(getString(R.string.cache_menu_sygic), R.id.cache_app_sygic, null, PACKAGE);
+        super(getString(R.string.cache_menu_sygic), R.id.cache_app_sygic, null, PACKAGE_NORMAL);
+    }
+
+    @Override
+    public boolean isInstalled() {
+        return ProcessUtils.isLaunchable(PACKAGE_NORMAL) || ProcessUtils.isLaunchable(PACKAGE_VOUCHER);
     }
 
     @Override
