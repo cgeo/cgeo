@@ -10,26 +10,31 @@ import org.assertj.core.data.Offset;
 
 import rx.Observable;
 
+import android.annotation.TargetApi;
 import android.location.Address;
-import android.test.suitebuilder.annotation.Suppress;
+import android.location.Geocoder;
+import android.os.Build;
 
 public class GeocoderTest extends CGeoTestCase {
 
     private static final String TEST_ADDRESS = "46 rue Barrault, Paris, France";
     private static final double TEST_LATITUDE = 48.82677;
     private static final double TEST_LONGITUDE = 2.34644;
-    private static final Offset<Double> TEST_OFFSET = Offset.offset(0.00010);
+    private static final Offset<Double> TEST_OFFSET = Offset.offset(0.00050);
 
-    @Suppress // Some emulators don't have access to Google Android geocoder
-    public void testAndroidGeocoder() {
-        testGeocoder(new AndroidGeocoder(CgeoApplication.getInstance()).getFromLocationName(TEST_ADDRESS), "Android");
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+    public static void testAndroidGeocoder() {
+        // Some emulators don't have access to Google Android geocoder
+        if (Geocoder.isPresent()) {
+            testGeocoder(new AndroidGeocoder(CgeoApplication.getInstance()).getFromLocationName(TEST_ADDRESS), "Android");
+        }
     }
 
-    public void testGCGeocoder() {
+    public static void testGCGeocoder() {
         testGeocoder(GCGeocoder.getFromLocationName(TEST_ADDRESS), "GC");
     }
 
-    public void testMapQuestGeocoder() {
+    public static void testMapQuestGeocoder() {
         testGeocoder(MapQuestGeocoder.getFromLocationName(TEST_ADDRESS), "MapQuest");
     }
 
