@@ -34,17 +34,17 @@
         android:textIsSelectable="false"
         android:textSize="14sp" />
 
-    <LinearLayout
+    <RatingBar
         android:id="@+id/stars"
+        style="@style/cacheRatingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:layout_gravity="center_horizontal"
         android:layout_toRightOf="@+id/value"
         android:baselineAligned="false"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:visibility="gone" >
-    </LinearLayout>
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/addition"
