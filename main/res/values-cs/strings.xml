@@ -171,6 +171,8 @@
   <string name="err_log_load_data">c:geo nemůže načíst data požadovaná k zalogování návštěvy.</string>
   <string name="err_log_load_data_again">c:geo nemůže načíst data požadovaná k zalogování návštěvy. Zkouší to znovu.</string>
   <string name="err_log_load_data_still">c:geo stále načítá data požadovaná k odeslání Logu. Prosím, počkej ještě chvíli.</string>
+  <string name="err_log_post_failed">Zdá se, že tvůj log nebyl správně zveřejněn. Prosím, zkontroluj ho přímo na webové stránce keše.</string>
+  <string name="err_logimage_post_failed">Zdá se, že obrázek u logu nebyl správně odeslán. Prosím, zkontroluj to přímo na webové stránce keše.</string>
   <string name="err_search_address_forgot">c:geo zapomnělo hledanou adresu.</string>
   <string name="err_parse_lat">c:geo nemůže dopočítat zeměpisnou šířku.</string>
   <string name="err_parse_lon">c:geo nemůže dopočítat zeměpisnou délku.</string>
@@ -1119,7 +1121,7 @@
   <string name="attribute_survey_marker_no">Není v blízkosti měřičské značky</string>
   <string name="attribute_offset_cache_yes">Offset keš</string>
   <string name="attribute_offset_cache_no">Není to Offset keš</string>
-  <string name="quote">Učinit Geocaching lehčí a uživatelé línější.</string>
+  <string name="quote">Učinit Geocaching lehčí a uživatele línější.</string>
   <string name="powered_by">carnero</string>
   <string name="support">Podpora: <a href="">support@cgeo.org</a></string>
   <string name="website">Stránka: <a href="">cgeo.org</a></string>

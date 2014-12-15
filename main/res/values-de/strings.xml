@@ -495,8 +495,8 @@
   <string name="init_maintenance_directories_note">c:geo speichert Bilder, Log-Bilder und weitere Dateien zu einem Cache in einem separaten Verzeichnis. In manchen Fällen (z.B. bei Sichern und Wiederherstellen der Datenbank) kann dieses Verzeichnis unnötige Daten enthalten, die gelöscht werden können.</string>
   <string name="init_maintenance_directories">Verwaiste Daten löschen</string>
   <string name="init_location">Positionierung</string>
-  <string name="init_location_note">Auf Geräten mit GooglePlay-Diensten kann c:geo automatisch eine bessere Positions-Bestimmung nutzen. Allerdings kann dann kein externer Bluetooth GPS-Empfänger verwendet werden. Weiterhin kann damit ein Energiesparmodus ohne GPS genutzt werden, wenn hohe Genauigkeit nicht unbedingt erforderlich ist.</string>
-  <string name="init_location_googleplayservices">GooglePlay-Dienst nutzen</string>
+  <string name="init_location_note">Auf Geräten mit Google Play-Diensten kann c:geo automatisch eine bessere Positions-Bestimmung nutzen. Allerdings kann dann kein externer Bluetooth GPS-Empfänger verwendet werden. Weiterhin kann damit ein Energiesparmodus ohne GPS genutzt werden, wenn hohe Genauigkeit nicht unbedingt erforderlich ist.</string>
+  <string name="init_location_googleplayservices">Google Play-Dienst nutzen</string>
   <string name="init_low_power">Energiesparmodus</string>
   <string name="init_low_power_note">Der Energiesparmodus vermeidet die Verwendung von GPS und Gyroskop, wenn eine hochgenaue Position nicht unbedingt notwendig ist. Nachteil ist eine längere Zeit bis zum GPS-Fix.</string>
   <string name="init_low_power_mode">Energiesparmodus aktivieren</string>
