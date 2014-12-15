@@ -298,7 +298,10 @@
     <string name="caches_nearby">Nearby</string>
     <string name="caches_manage">Manage</string>
     <string name="caches_remove_all">Remove all</string>
-    <string name="caches_remove_all_confirm">Do you want to remove all %s caches from current list?</string>
+    <plurals name="caches_remove_all_confirm">
+        <item quantity="one">Do you want to remove all %s cache from current list?</item>
+        <item quantity="other">Do you want to remove all %s caches from current list?</item>
+    </plurals>
     <string name="caches_remove_selected">Remove selected</string>
     <string name="caches_remove_selected_confirm">Do you want to remove the selected %s caches from your device?</string>
     <string name="caches_remove_progress">Removing caches</string>
