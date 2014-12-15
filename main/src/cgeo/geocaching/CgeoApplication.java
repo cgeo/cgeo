@@ -118,7 +118,7 @@ public class CgeoApplication extends Application {
     }
 
     public void setupDirectionObservable(final boolean useLowPower) {
-        directionObservable = RotationProvider.create(this, useLowPower).onErrorResumeNext(new Func1<Throwable, Observable<? extends Float>>() {
+        directionObservable = RxUtils.rememberLast(RotationProvider.create(this, useLowPower).onErrorResumeNext(new Func1<Throwable, Observable<? extends Float>>() {
             @Override
             public Observable<? extends Float> call(final Throwable throwable) {
                 return OrientationProvider.create(CgeoApplication.this);
@@ -134,7 +134,7 @@ public class CgeoApplication extends Application {
             public void call(final Float direction) {
                 currentDirection = direction;
             }
-        }).replay(1).refCount();
+        }));
     }
 
     @Override
