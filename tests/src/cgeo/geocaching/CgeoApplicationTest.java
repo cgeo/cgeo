@@ -396,17 +396,11 @@ public class CgeoApplicationTest extends CGeoTestCase {
      */
     public static void testSearchByGeocodeBasis() {
         for (MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
-            String oldUser = mockedCache.getMockedDataUser();
+            final String oldUser = mockedCache.getMockedDataUser();
             try {
                 mockedCache.setMockedDataUser(Settings.getUsername());
-                Geocache parsedCache = CgeoApplicationTest.testSearchByGeocode(mockedCache.getGeocode());
-                if (null != parsedCache) {
-                    // fake found flag for one cache until it will be updated
-                    if (parsedCache.getGeocode().equals("GC3XX5J") && Settings.getUsername().equals("mucek4")) {
-                        parsedCache.setFound(false);
-                    }
-                    Compare.assertCompareCaches(mockedCache, parsedCache, true);
-                }
+                final Geocache parsedCache = CgeoApplicationTest.testSearchByGeocode(mockedCache.getGeocode());
+                Compare.assertCompareCaches(mockedCache, parsedCache, true);
             } finally {
                 mockedCache.setMockedDataUser(oldUser);
             }
