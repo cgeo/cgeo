@@ -2,6 +2,9 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+     <b>Next bugfix release:</b>\n
+    · Fix: Crash due to an overload of sensor data\n
+     \n
      <b>2014.12.12:</b>\n
     · Fix: Crashes on map popup interaction\n
      \n
