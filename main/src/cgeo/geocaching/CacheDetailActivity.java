@@ -115,6 +115,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
@@ -952,10 +953,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
      * Creator for details-view.
      */
     private class DetailsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
-        /**
-         * Reference to the details list, so that the helper-method can access it without an additional argument
-         */
+        // Reference to the details list and favorite line, so that the helper-method can access them without an additional argument
         private LinearLayout detailsList;
+        private ImmutablePair<RelativeLayout, TextView> favoriteLine;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
@@ -1006,9 +1006,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             details.addRating(cache);
 
             // favorite count
-            if (cache.getFavoritePoints() > 0) {
-                details.add(R.string.cache_favorite, cache.getFavoritePoints() + "×");
-            }
+            favoriteLine = details.add(R.string.cache_favorite, "");
 
             // own rating
             if (cache.getMyVote() > 0) {
@@ -1339,6 +1337,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 buttonAdd.setVisibility(View.GONE);
                 buttonRemove.setEnabled(false);
                 buttonRemove.setVisibility(View.GONE);
+            }
+
+            // Favorite counts
+            if (cache.getFavoritePoints() > 0) {
+                favoriteLine.left.setVisibility(View.VISIBLE);
+                favoriteLine.right.setText(cache.getFavoritePoints() + "×");
+            } else {
+                favoriteLine.left.setVisibility(View.GONE);
             }
         }
 
