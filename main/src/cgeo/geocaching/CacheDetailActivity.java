@@ -115,6 +115,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
@@ -952,10 +953,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
      * Creator for details-view.
      */
     private class DetailsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
-        /**
-         * Reference to the details list, so that the helper-method can access it without an additional argument
-         */
+        // Reference to the details list and favorite line, so that the helper-method can access them without an additional argument
         private LinearLayout detailsList;
+        private ImmutablePair<RelativeLayout, TextView> favoriteLine;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
@@ -992,10 +992,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 span.setSpan(new ForegroundColorSpan(res.getColor(R.color.archived_cache_color)), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
-            addContextMenu(details.add(R.string.cache_name, span));
+            addContextMenu(details.add(R.string.cache_name, span).right);
             details.add(R.string.cache_type, cache.getType().getL10n());
             details.addSize(cache);
-            addContextMenu(details.add(R.string.cache_geocode, cache.getGeocode()));
+            addContextMenu(details.add(R.string.cache_geocode, cache.getGeocode()).right);
             details.addCacheState(cache);
 
             details.addDistance(cache, cacheDistanceView);
@@ -1006,9 +1006,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             details.addRating(cache);
 
             // favorite count
-            if (cache.getFavoritePoints() > 0) {
-                details.add(R.string.cache_favorite, cache.getFavoritePoints() + "×");
-            }
+            favoriteLine = details.add(R.string.cache_favorite, "");
 
             // own rating
             if (cache.getMyVote() > 0) {
@@ -1017,7 +1015,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // cache author
             if (StringUtils.isNotBlank(cache.getOwnerDisplayName()) || StringUtils.isNotBlank(cache.getOwnerUserId())) {
-                final TextView ownerView = details.add(R.string.cache_owner, "");
+                final TextView ownerView = details.add(R.string.cache_owner, "").right;
                 if (StringUtils.isNotBlank(cache.getOwnerDisplayName())) {
                     ownerView.setText(cache.getOwnerDisplayName(), TextView.BufferType.SPANNABLE);
                 } else { // OwnerReal guaranteed to be not blank based on above
@@ -1039,7 +1037,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // cache coordinates
             if (cache.getCoords() != null) {
-                final TextView valueView = details.add(R.string.cache_coordinates, cache.getCoords().toString());
+                final TextView valueView = details.add(R.string.cache_coordinates, cache.getCoords().toString()).right;
                 valueView.setOnClickListener(new CoordinatesFormatSwitcher(cache.getCoords()));
                 addContextMenu(valueView);
             }
@@ -1339,6 +1337,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 buttonAdd.setVisibility(View.GONE);
                 buttonRemove.setEnabled(false);
                 buttonRemove.setVisibility(View.GONE);
+            }
+
+            // Favorite counts
+            if (cache.getFavoritePoints() > 0) {
+                favoriteLine.left.setVisibility(View.VISIBLE);
+                favoriteLine.right.setText(cache.getFavoritePoints() + "×");
+            } else {
+                favoriteLine.left.setVisibility(View.GONE);
             }
         }
 
