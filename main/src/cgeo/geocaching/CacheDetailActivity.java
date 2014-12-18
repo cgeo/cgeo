@@ -1274,7 +1274,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         /**
-         * shows/hides buttons, sets text in watchlist box
+         * Show/hide buttons, set text in watchlist box
          */
         private void updateWatchlistBox() {
             final LinearLayout layout = ButterKnife.findById(view, R.id.watchlist_box);
@@ -1308,9 +1308,17 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         /**
-         * shows/hides buttons, sets text in watchlist box
+         * Show/hide buttons, set text in favourite line and box
          */
         private void updateFavPointBox() {
+            // Favorite counts
+            if (cache.getFavoritePoints() > 0) {
+                favoriteLine.left.setVisibility(View.VISIBLE);
+                favoriteLine.right.setText(cache.getFavoritePoints() + "×");
+            } else {
+                favoriteLine.left.setVisibility(View.GONE);
+            }
+
             final LinearLayout layout = ButterKnife.findById(view, R.id.favpoint_box);
             final boolean supportsFavoritePoints = cache.supportsFavoritePoints();
             layout.setVisibility(supportsFavoritePoints ? View.VISIBLE : View.GONE);
@@ -1337,14 +1345,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 buttonAdd.setVisibility(View.GONE);
                 buttonRemove.setEnabled(false);
                 buttonRemove.setVisibility(View.GONE);
-            }
-
-            // Favorite counts
-            if (cache.getFavoritePoints() > 0) {
-                favoriteLine.left.setVisibility(View.VISIBLE);
-                favoriteLine.right.setText(cache.getFavoritePoints() + "×");
-            } else {
-                favoriteLine.left.setVisibility(View.GONE);
             }
         }
 
