@@ -16,8 +16,8 @@ import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
 import rx.functions.Action0;
-import rx.functions.Action1;
 import rx.functions.Func1;
+import rx.observers.Subscribers;
 import rx.subjects.ReplaySubject;
 import rx.subscriptions.Subscriptions;
 
@@ -37,7 +37,7 @@ public class LocationProvider implements ConnectionCallbacks, OnConnectionFailed
     private static final AtomicInteger mostPreciseCount = new AtomicInteger(0);
     private static final AtomicInteger lowPowerCount = new AtomicInteger(0);
     private static LocationProvider instance = null;
-    private static ReplaySubject<GeoData> subject = ReplaySubject.createWithSize(1);
+    private static final ReplaySubject<GeoData> subject = ReplaySubject.createWithSize(1);
     private final LocationClient locationClient;
 
     private static synchronized LocationProvider getInstance(final Context context) {
@@ -83,12 +83,7 @@ public class LocationProvider implements ConnectionCallbacks, OnConnectionFailed
                         }, 2500, TimeUnit.MILLISECONDS);
                     }
                 }));
-                subscriber.add(subject.subscribe(new Action1<GeoData>() {
-                    @Override
-                    public void call(final GeoData geoData) {
-                        subscriber.onNext(geoData);
-                    }
-                }));
+                subscriber.add(subject.subscribe(Subscribers.from(subscriber)));
             }
         });
     }
