@@ -62,7 +62,10 @@ public final class LocParser extends FileParser {
         for (final Geocache cache : caches) {
             if (!cache.isReliableLatLon()) {
                 final Geocache coord = cidCoords.get(cache.getGeocode());
-                copyCoordToCache(coord, cache);
+                // Archived caches will not have any coordinates
+                if (coord != null) {
+                    copyCoordToCache(coord, cache);
+                }
             }
         }
     }
