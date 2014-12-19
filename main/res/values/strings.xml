@@ -363,6 +363,7 @@
     
     <!-- settings -->
     <string name="settings_title_services">Services</string>
+    <string name="settings_summary_services">Configure user account information and access to optional services.</string>
     <string name="settings_title_appearance">Appearance</string>
     <string name="settings_title_cachedetails">Cache Details</string>
     <string name="settings_title_offlinedata">Offline Data</string>
