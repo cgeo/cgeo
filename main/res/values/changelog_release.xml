@@ -4,6 +4,7 @@
   <string name="changelog_release" translatable="false">\n
      <b>Next bugfix release:</b>\n
     · New: Updated translations\n
+    · New: Google Play services are disabled by default on Android before 4.0\n
     · Fix: Favorite points display not updated after change\n
     · Fix: Search by owner results may lack some caches coordinates\n
     · Fix: Crash due to an overload of sensor data\n
