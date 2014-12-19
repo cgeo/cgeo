@@ -6,7 +6,8 @@
     <PreferenceScreen
         android:icon="?attr/settings_cloud"
         android:key="@string/preference_screen_services"
-        android:title="@string/settings_title_services" >
+        android:title="@string/settings_title_services"
+        android:summary="@string/settings_summary_services">
         <PreferenceCategory android:title="@string/settings_category_geocaching" >
             <PreferenceScreen
                 android:key="@string/preference_screen_gc"
