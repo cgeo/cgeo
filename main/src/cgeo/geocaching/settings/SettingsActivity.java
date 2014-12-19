@@ -92,7 +92,7 @@ public class SettingsActivity extends PreferenceActivity {
         setTheme(Settings.isLightSkin() && Build.VERSION.SDK_INT > 10 ? R.style.settings_light : R.style.settings);
         super.onCreate(savedInstanceState);
 
-        initHardwareAccelerationPreferences();
+        initDeviceSpecificPreferences();
         initUnitPreferences();
         SettingsActivity.addPreferencesFromResource(this, R.xml.preferences);
         initPreferences();
@@ -383,10 +383,11 @@ public class SettingsActivity extends PreferenceActivity {
                 });
     }
 
-    public static void initHardwareAccelerationPreferences() {
-        // We have to ensure that the preference is initialized so that devices with hardware acceleration disabled
-        // get the appropriate value.
+    public static void initDeviceSpecificPreferences() {
+        // We have to ensure that those preferences are initialized so that devices with specific default values
+        // will get the appropriate ones.
         Settings.setUseHardwareAcceleration(Settings.useHardwareAcceleration());
+        Settings.setUseGooglePlayServices(Settings.useGooglePlayServices());
     }
 
     private static void initUnitPreferences() {
