@@ -627,7 +627,7 @@ public class Settings {
     }
 
     public static boolean isMapTrail() {
-        return getBoolean(R.string.pref_maptrail, true);
+        return getBoolean(R.string.pref_maptrail, false);
     }
 
     public static void setMapTrail(final boolean showTrail) {
