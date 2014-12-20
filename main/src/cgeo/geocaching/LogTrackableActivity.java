@@ -343,7 +343,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
      * @param logText
      */
     private void addLocalTrackableLog(final String logText) {
-        final LogEntry logEntry = new LogEntry(Calendar.getInstance().getTimeInMillis(), typeSelected, logText);
+        final LogEntry logEntry = new LogEntry(date.getTimeInMillis(), typeSelected, logText);
         final ArrayList<LogEntry> modifiedLogs = new ArrayList<>(trackable.getLogs());
         modifiedLogs.add(0, logEntry);
         trackable.setLogs(modifiedLogs);
