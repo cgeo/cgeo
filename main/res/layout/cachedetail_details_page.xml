@@ -27,23 +27,38 @@
             android:id="@+id/attributes_box"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone" >
+            android:orientation="vertical" >
 
             <View
                 style="@style/separator_horizontal"
                 android:layout_marginBottom="9dp"
                 android:layout_marginTop="9dp" />
 
-            <!-- innerbox is only needed to define the paddings easily -->
-
-            <LinearLayout
-                android:id="@+id/attributes_innerbox"
+            <cgeo.geocaching.ui.WrappingGridView
+                android:id="@+id/attributes_grid"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:columnWidth="32dip"
+                android:horizontalSpacing="2dip"
+                android:numColumns="auto_fit"
                 android:paddingLeft="6dp"
-                android:paddingRight="6dp" />
+                android:paddingRight="6dp"
+                android:scrollbars="none"
+                android:stretchMode="none"
+                android:verticalSpacing="2dip" />
+
+            <TextView
+                android:id="@+id/attributes_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:linksClickable="true"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:textColor="?text_color"
+                android:textColorLink="?text_color_link"
+                android:textIsSelectable="false"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <!-- Offline box -->

@@ -12,7 +12,6 @@ import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationSelectionActionProvider;
 import cgeo.geocaching.apps.cachelist.MapsWithMeCacheListApp;
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -105,13 +104,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.view.ViewParent;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -722,185 +719,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
-    private class AttributeViewBuilder {
-        private ViewGroup attributeIconsLayout; // layout for attribute icons
-        private ViewGroup attributeDescriptionsLayout; // layout for attribute descriptions
-        private boolean attributesShowAsIcons = true; // default: show icons
-        /**
-         * If the cache is from a non GC source, it might be without icons. Disable switching in those cases.
-         */
-        private boolean noAttributeIconsFound = false;
-        private int attributeBoxMaxWidth;
-
-        public void fillView(final LinearLayout attributeBox) {
-            // first ensure that the view is empty
-            attributeBox.removeAllViews();
-
-            // maximum width for attribute icons is screen width - paddings of parents
-            attributeBoxMaxWidth = Compatibility.getDisplayWidth();
-            ViewParent child = attributeBox;
-            do {
-                if (child instanceof View) {
-                    attributeBoxMaxWidth -= ((View) child).getPaddingLeft() + ((View) child).getPaddingRight();
-                }
-                child = child.getParent();
-            } while (child != null);
-
-            // delete views holding description / icons
-            attributeDescriptionsLayout = null;
-            attributeIconsLayout = null;
-
-            attributeBox.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View v) {
-                    // toggle between attribute icons and descriptions
-                    toggleAttributeDisplay(attributeBox, attributeBoxMaxWidth);
-                }
-            });
-
-            // icons or text?
-            //
-            // also show icons when noAttributeImagesFound == true. Explanation:
-            //  1. no icons could be found in the first invocation of this method
-            //  2. user refreshes cache from web
-            //  3. now this method is called again
-            //  4. attributeShowAsIcons is false but noAttributeImagesFound is true
-            //     => try to show them now
-            if (attributesShowAsIcons || noAttributeIconsFound) {
-                showAttributeIcons(attributeBox, attributeBoxMaxWidth);
-            } else {
-                showAttributeDescriptions(attributeBox);
-            }
-        }
-
-        /**
-         * lazy-creates the layout holding the icons of the caches attributes
-         * and makes it visible
-         */
-        private void showAttributeIcons(final LinearLayout attribBox, final int parentWidth) {
-            if (attributeIconsLayout == null) {
-                attributeIconsLayout = createAttributeIconsLayout(parentWidth);
-                // no matching icons found? show text
-                if (noAttributeIconsFound) {
-                    showAttributeDescriptions(attribBox);
-                    return;
-                }
-            }
-            attribBox.removeAllViews();
-            attribBox.addView(attributeIconsLayout);
-            attributesShowAsIcons = true;
-        }
-
-        /**
-         * lazy-creates the layout holding the descriptions of the caches attributes
-         * and makes it visible
-         */
-        private void showAttributeDescriptions(final LinearLayout attribBox) {
-            if (attributeDescriptionsLayout == null) {
-                attributeDescriptionsLayout = createAttributeDescriptionsLayout(attribBox);
-            }
-            attribBox.removeAllViews();
-            attribBox.addView(attributeDescriptionsLayout);
-            attributesShowAsIcons = false;
-        }
-
-        /**
-         * toggle attribute descriptions and icons
-         */
-        private void toggleAttributeDisplay(final LinearLayout attribBox, final int parentWidth) {
-            // Don't toggle when there are no icons to show.
-            if (noAttributeIconsFound) {
-                return;
-            }
-
-            // toggle
-            if (attributesShowAsIcons) {
-                showAttributeDescriptions(attribBox);
-            } else {
-                showAttributeIcons(attribBox, parentWidth);
-            }
-        }
-
-        private ViewGroup createAttributeIconsLayout(final int parentWidth) {
-            final LinearLayout rows = new LinearLayout(CacheDetailActivity.this);
-            rows.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-            rows.setOrientation(LinearLayout.VERTICAL);
-
-            LinearLayout attributeRow = newAttributeIconsRow();
-            rows.addView(attributeRow);
-
-            noAttributeIconsFound = true;
-
-            for (final String attributeName : cache.getAttributes()) {
-                // check if another attribute icon fits in this row
-                attributeRow.measure(0, 0);
-                final int rowWidth = attributeRow.getMeasuredWidth();
-                final FrameLayout fl = (FrameLayout) getLayoutInflater().inflate(R.layout.attribute_image, attributeRow, false);
-                final ImageView iv = (ImageView) fl.getChildAt(0);
-                if ((parentWidth - rowWidth) < iv.getLayoutParams().width) {
-                    // make a new row
-                    attributeRow = newAttributeIconsRow();
-                    rows.addView(attributeRow);
-                }
-
-                final boolean strikeThrough = !CacheAttribute.isEnabled(attributeName);
-                final CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
-                if (attrib != null) {
-                    noAttributeIconsFound = false;
-                    Drawable drawable = res.getDrawable(attrib.drawableId);
-                    iv.setImageDrawable(drawable);
-                    // strike through?
-                    if (strikeThrough) {
-                        // generate strike through image with same properties as attribute image
-                        final ImageView strikeThroughImage = new ImageView(CacheDetailActivity.this);
-                        strikeThroughImage.setLayoutParams(iv.getLayoutParams());
-                        drawable = res.getDrawable(R.drawable.attribute__strikethru);
-                        strikeThroughImage.setImageDrawable(drawable);
-                        fl.addView(strikeThroughImage);
-                    }
-                } else {
-                    iv.setImageDrawable(res.getDrawable(R.drawable.attribute_unknown));
-                }
-
-                attributeRow.addView(fl);
-            }
-
-            return rows;
-        }
-
-        private LinearLayout newAttributeIconsRow() {
-            final LinearLayout rowLayout = new LinearLayout(CacheDetailActivity.this);
-            rowLayout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
-                    LayoutParams.WRAP_CONTENT));
-            rowLayout.setOrientation(LinearLayout.HORIZONTAL);
-            return rowLayout;
-        }
-
-        private ViewGroup createAttributeDescriptionsLayout(final LinearLayout parentView) {
-            final LinearLayout descriptions = (LinearLayout) getLayoutInflater().inflate(
-                    R.layout.attribute_descriptions, parentView, false);
-            final TextView attribView = (TextView) descriptions.getChildAt(0);
-
-            final StringBuilder buffer = new StringBuilder();
-            for (String attributeName : cache.getAttributes()) {
-                final boolean enabled = CacheAttribute.isEnabled(attributeName);
-                // search for a translation of the attribute
-                final CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
-                if (attrib != null) {
-                    attributeName = attrib.getL10n(enabled);
-                }
-                if (buffer.length() > 0) {
-                    buffer.append('\n');
-                }
-                buffer.append(attributeName);
-            }
-
-            attribView.setText(buffer);
-
-            return descriptions;
-        }
-    }
-
     private void refreshCache() {
         if (progress.isShowing()) {
             showToast(res.getString(R.string.err_detail_still_working));
@@ -1043,11 +861,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             // cache attributes
-            if (!cache.getAttributes().isEmpty()) {
-                final LinearLayout innerLayout = ButterKnife.findById(view, R.id.attributes_innerbox);
-                new AttributeViewBuilder().fillView(innerLayout);
-                view.findViewById(R.id.attributes_box).setVisibility(View.VISIBLE);
-            }
+            updateAttributesText();
+            updateAttributesIcons();
 
             updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener());
 
@@ -1084,6 +899,61 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             return view;
+        }
+
+        private void updateAttributesIcons() {
+            final GridView gridView = ButterKnife.findById(view, R.id.attributes_grid);
+            final List<String> attributes = cache.getAttributes();
+            if (attributes.isEmpty()) {
+                gridView.setVisibility(View.GONE);
+                return;
+            }
+            gridView.setAdapter(new AttributesGridAdapter(CacheDetailActivity.this, cache));
+            gridView.setVisibility(View.VISIBLE);
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(final android.widget.AdapterView<?> parent, final View view, final int position, final long id) {
+                    toggleAttributesView();
+                }
+            });
+        }
+
+        protected void toggleAttributesView() {
+            final View textView = ButterKnife.findById(view, R.id.attributes_text);
+            textView.setVisibility(textView.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+            final View gridView = ButterKnife.findById(view, R.id.attributes_grid);
+            gridView.setVisibility(gridView.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+        }
+
+        private void updateAttributesText() {
+            final TextView attribView = ButterKnife.findById(view, R.id.attributes_text);
+            final List<String> attributes = cache.getAttributes();
+            if (attributes.isEmpty()) {
+                attribView.setVisibility(View.GONE);
+                return;
+            }
+            final StringBuilder text = new StringBuilder();
+            for (String attributeName : attributes) {
+                final boolean enabled = CacheAttribute.isEnabled(attributeName);
+                // search for a translation of the attribute
+                final CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
+                if (attrib != null) {
+                    attributeName = attrib.getL10n(enabled);
+                }
+                if (text.length() > 0) {
+                    text.append('\n');
+                }
+                text.append(attributeName);
+            }
+            attribView.setText(text);
+            attribView.setVisibility(View.GONE);
+            attribView.setOnClickListener(new OnClickListener() {
+
+                @Override
+                public void onClick(final View v) {
+                    toggleAttributesView();
+                }
+            });
         }
 
         private class StoreCacheClickListener implements View.OnClickListener {
@@ -1304,11 +1174,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 buttonRemove.setEnabled(false);
                 buttonRemove.setVisibility(View.GONE);
             }
-
         }
 
         /**
-         * Show/hide buttons, set text in favourite line and box
+         * Show/hide buttons, set text in favorite line and box
          */
         private void updateFavPointBox() {
             // Favorite counts
