@@ -91,7 +91,7 @@ public class GeoData extends Location {
         final String homeLocationStr = Settings.getHomeLocation();
         if (StringUtils.isNotBlank(homeLocationStr)) {
             try {
-                assert (homeLocationStr != null);
+                assert homeLocationStr != null;
                 final Geopoint homeLocation = new Geopoint(homeLocationStr);
                 Log.i("No last known location available, using home location");
                 final Location initialLocation = new Location(HOME_PROVIDER);

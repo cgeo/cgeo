@@ -19,6 +19,7 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.GpsStatusProvider;
 import cgeo.geocaching.sensors.GpsStatusProvider.Status;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -226,11 +227,8 @@ public class MainActivity extends AbstractActionBarActivity {
     @Override
     public void onResume() {
         super.onResume(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.LOW_POWER),
-                app.gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(satellitesHandler));
+                Sensors.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(satellitesHandler));
         updateUserInfoHandler.sendEmptyMessage(-1);
-        if (app.hasValidLocation()) {
-            locationUpdater.updateGeoData(app.currentGeo());
-        }
         startBackgroundLogin();
         init();
 
@@ -585,8 +583,7 @@ public class MainActivity extends AbstractActionBarActivity {
                             try {
                                 addCoords = geo.getCoords();
                                 final Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
-                                final Geopoint coords = app.currentGeo().getCoords();
-                                final List<Address> addresses = geocoder.getFromLocation(coords.getLatitude(), coords.getLongitude(), 1);
+                                final List<Address> addresses = geocoder.getFromLocation(addCoords.getLatitude(), addCoords.getLongitude(), 1);
                                 if (!addresses.isEmpty()) {
                                     subscriber.onNext(formatAddress(addresses.get(0)));
                                 }

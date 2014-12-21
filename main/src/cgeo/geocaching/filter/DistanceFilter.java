@@ -2,9 +2,10 @@ package cgeo.geocaching.filter;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.sensors.GeoData;
+import cgeo.geocaching.sensors.Sensors;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +15,11 @@ class DistanceFilter extends AbstractFilter {
     private final int minDistance;
     private final int maxDistance;
 
-    public DistanceFilter(String name, final int minDistance, final int maxDistance) {
+    public DistanceFilter(final String name, final int minDistance, final int maxDistance) {
         super(name);
         this.minDistance = minDistance;
         this.maxDistance = maxDistance;
-        geo = CgeoApplication.getInstance().currentGeo();
+        geo = Sensors.getInstance().currentGeo();
     }
 
     @Override

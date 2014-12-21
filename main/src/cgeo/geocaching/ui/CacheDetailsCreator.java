@@ -2,13 +2,13 @@ package cgeo.geocaching.ui;
 
 import butterknife.ButterKnife;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICoordinates;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.location.Units;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.utils.Formatter;
 
 import org.apache.commons.lang3.StringUtils;
@@ -118,7 +118,7 @@ public final class CacheDetailsCreator {
         if (target.getCoords() == null) {
             return null;
         }
-        return CgeoApplication.getInstance().currentGeo().getCoords().distanceTo(target);
+        return Sensors.getInstance().currentGeo().getCoords().distanceTo(target);
     }
 
     public void addRating(final Geocache cache) {

@@ -11,6 +11,7 @@ import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.GpsStatusProvider.Status;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.ui.CompassView;
@@ -29,8 +30,6 @@ import rx.functions.Action1;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.Menu;
@@ -59,19 +58,12 @@ public class CompassActivity extends AbstractActionBarActivity {
     private Geocache cache = null;
     private Geopoint dstCoords = null;
     private float cacheHeading = 0;
-    private boolean hasMagneticFieldSensor;
     private String description;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.compass_activity);
         ButterKnife.inject(this);
-
-        final SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        hasMagneticFieldSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null;
-        if (!hasMagneticFieldSensor) {
-            Settings.setUseCompass(false);
-        }
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
@@ -92,9 +84,7 @@ public class CompassActivity extends AbstractActionBarActivity {
             setTarget(DataStore.loadWaypoint(waypointId));
         }
         else if (extras.containsKey(Intents.EXTRA_COORDS)) {
-            final Geopoint coords = extras.getParcelable(Intents.EXTRA_COORDS);
-            final String description = extras.getString(Intents.EXTRA_DESCRIPTION);
-            setTarget(coords, description);
+            setTarget(extras.<Geopoint>getParcelable(Intents.EXTRA_COORDS), extras.getString(Intents.EXTRA_DESCRIPTION));
         }
         else {
             setTarget(cache);
@@ -115,7 +105,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     @Override
     public void onResume() {
         super.onResume(geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR),
-                app.gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(gpsStatusHandler));
+                Sensors.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(gpsStatusHandler));
         forceRefresh();
     }
 
@@ -139,15 +129,14 @@ public class CompassActivity extends AbstractActionBarActivity {
 
     private void forceRefresh() {
         // Force a refresh of location and direction when data is available.
-        final CgeoApplication app = CgeoApplication.getInstance();
-        final GeoData geo = app.currentGeo();
-        geoDirHandler.updateGeoDir(geo, app.currentDirection());
+        final Sensors sensors = Sensors.getInstance();
+        geoDirHandler.updateGeoDir(sensors.currentGeo(), sensors.currentDirection());
     }
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.compass_activity_options, menu);
-        menu.findItem(R.id.menu_compass_sensor).setVisible(hasMagneticFieldSensor);
+        menu.findItem(R.id.menu_compass_sensor).setVisible(Sensors.getInstance().hasMagneticFieldSensor());
         if (cache != null) {
             LoggingUI.addMenuItems(this, menu, cache);
         }
@@ -226,12 +215,12 @@ public class CompassActivity extends AbstractActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setTarget(final Geopoint coords, final String description) {
+    private void setTarget(final Geopoint coords, final String newDescription) {
         setDestCoords(coords);
-        setTargetDescription(description);
-        updateDistanceInfo(app.currentGeo());
+        setTargetDescription(newDescription);
+        updateDistanceInfo(Sensors.getInstance().currentGeo());
 
-        Log.d("destination set: " + description + " (" + dstCoords + ")");
+        Log.d("destination set: " + newDescription + " (" + dstCoords + ")");
     }
 
     private void setTarget(final @NonNull Waypoint waypoint) {
@@ -253,12 +242,12 @@ public class CompassActivity extends AbstractActionBarActivity {
 
     private void setTargetDescription(final @Nullable String newDescription) {
         description = newDescription;
-        if (description == null) {
+        if (this.description == null) {
             cacheInfoView.setVisibility(View.GONE);
             return;
         }
         cacheInfoView.setVisibility(View.VISIBLE);
-        cacheInfoView.setText(description);
+        cacheInfoView.setText(this.description);
     }
 
     private void updateDistanceInfo(final GeoData geo) {

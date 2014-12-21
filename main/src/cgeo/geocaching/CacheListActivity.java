@@ -43,6 +43,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Send2CgeoDownloader;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.sorting.CacheComparator;
@@ -411,7 +412,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
         }
         if (type == CacheListType.NEAREST) {
-            coords = CgeoApplication.getInstance().currentGeo().getCoords();
+            coords = Sensors.getInstance().currentGeo().getCoords();
         }
 
         setTitle(title);
@@ -541,7 +542,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void setAdapterCurrentCoordinates(final boolean forceSort) {
-        adapter.setActualCoordinates(app.currentGeo().getCoords());
+        adapter.setActualCoordinates(Sensors.getInstance().currentGeo().getCoords());
         if (forceSort) {
             adapter.forceSort();
         }

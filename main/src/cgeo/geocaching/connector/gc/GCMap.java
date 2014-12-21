@@ -1,6 +1,5 @@
 package cgeo.geocaching.connector.gc;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.SearchResult;
@@ -9,12 +8,13 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.files.ParserException;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointFormatter.Format;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.location.GeopointFormatter.Format;
 import cgeo.geocaching.maps.LiveMapStrategy.Strategy;
 import cgeo.geocaching.maps.LiveMapStrategy.StrategyFlag;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.JsonUtils;
@@ -47,7 +47,7 @@ import java.util.Set;
 public class GCMap {
     private static Viewport lastSearchViewport = null;
 
-    public static SearchResult searchByGeocodes(Set<String> geocodes) {
+    public static SearchResult searchByGeocodes(final Set<String> geocodes) {
         final SearchResult result = new SearchResult();
 
         final String geocodeList = StringUtils.join(geocodes.toArray(), "|");
@@ -109,7 +109,7 @@ public class GCMap {
      *            Retrieved data.
      * @return SearchResult. Never null.
      */
-    public static SearchResult parseMapJSON(final String data, Tile tile, Bitmap bitmap, final Strategy strategy) {
+    public static SearchResult parseMapJSON(final String data, final Tile tile, final Bitmap bitmap, final Strategy strategy) {
         final SearchResult searchResult = new SearchResult();
 
         try {
@@ -142,13 +142,13 @@ public class GCMap {
             }
 
             // iterate over the data and construct all caches in this tile
-            Map<String, List<UTFGridPosition>> positions = new HashMap<>(); // JSON id as key
-            Map<String, List<UTFGridPosition>> singlePositions = new HashMap<>(); // JSON id as key
+            final Map<String, List<UTFGridPosition>> positions = new HashMap<>(); // JSON id as key
+            final Map<String, List<UTFGridPosition>> singlePositions = new HashMap<>(); // JSON id as key
 
             for (final JsonNode rawKey: keys) {
                 final String key = rawKey.asText();
                 if (StringUtils.isNotBlank(key)) { // index 0 is empty
-                    UTFGridPosition pos = UTFGridPosition.fromString(key);
+                    final UTFGridPosition pos = UTFGridPosition.fromString(key);
                     final ArrayNode dataForKey = (ArrayNode) dataObject.get(key);
                     for (final JsonNode cacheInfo: dataForKey) {
                         final String id = cacheInfo.get("i").asText();
@@ -174,18 +174,18 @@ public class GCMap {
             }
 
             final ArrayList<Geocache> caches = new ArrayList<>();
-            for (Entry<String, List<UTFGridPosition>> entry : positions.entrySet()) {
-                String id = entry.getKey();
-                List<UTFGridPosition> pos = entry.getValue();
-                UTFGridPosition xy = UTFGrid.getPositionInGrid(pos);
-                Geocache cache = new Geocache();
+            for (final Entry<String, List<UTFGridPosition>> entry : positions.entrySet()) {
+                final String id = entry.getKey();
+                final List<UTFGridPosition> pos = entry.getValue();
+                final UTFGridPosition xy = UTFGrid.getPositionInGrid(pos);
+                final Geocache cache = new Geocache();
                 cache.setDetailed(false);
                 cache.setReliableLatLon(false);
                 cache.setGeocode(id);
                 cache.setName(nameCache.get(id));
                 cache.setCoords(tile.getCoord(xy), tile.getZoomLevel());
                 if (strategy.flags.contains(StrategyFlag.PARSE_TILES) && bitmap != null) {
-                    for (UTFGridPosition singlePos : singlePositions.get(id)) {
+                    for (final UTFGridPosition singlePos : singlePositions.get(id)) {
                         if (IconDecoder.parseMapPNG(cache, bitmap, singlePos, tile.getZoomLevel())) {
                             break; // cache parsed
                         }
@@ -228,16 +228,16 @@ public class GCMap {
      * @return
      */
     public static SearchResult searchByViewport(final Viewport viewport, final MapTokens tokens) {
-        int speed = (int) CgeoApplication.getInstance().currentGeo().getSpeed() * 60 * 60 / 1000; // in km/h
+        final int speed = (int) Sensors.getInstance().currentGeo().getSpeed() * 60 * 60 / 1000; // in km/h
         Strategy strategy = Settings.getLiveMapStrategy();
         if (strategy == Strategy.AUTO) {
             strategy = speed >= 30 ? Strategy.FAST : Strategy.DETAILED;
         }
 
-        SearchResult result = searchByViewport(viewport, tokens, strategy);
+        final SearchResult result = searchByViewport(viewport, tokens, strategy);
 
         if (Settings.isDebug()) {
-            StringBuilder text = new StringBuilder(Formatter.SEPARATOR).append(strategy.getL10n()).append(Formatter.SEPARATOR).append(Units.getSpeed(speed));
+            final StringBuilder text = new StringBuilder(Formatter.SEPARATOR).append(strategy.getL10n()).append(Formatter.SEPARATOR).append(Units.getSpeed(speed));
             result.setUrl(result.getUrl() + text);
         }
 
@@ -340,7 +340,7 @@ public class GCMap {
             final Geopoint center = viewport.getCenter();
             if ((lastSearchViewport == null) || !lastSearchViewport.contains(center)) {
                 //FIXME We don't have a RecaptchaReceiver!?
-                SearchResult search = GCParser.searchByCoords(center, Settings.getCacheType(), false, null);
+                final SearchResult search = GCParser.searchByCoords(center, Settings.getCacheType(), false, null);
                 if (search != null && !search.isEmpty()) {
                     final Set<String> geocodes = search.getGeocodes();
                     lastSearchViewport = DataStore.getBounds(geocodes);
@@ -366,8 +366,8 @@ public class GCMap {
      *         4 = virtual, 11 = webcam, 137 = earth
      *         8 = mystery, 1858 = whereigo
      */
-    private static String getCacheTypeFilter(CacheType typeToDisplay) {
-        Set<String> filterTypes = new HashSet<>();
+    private static String getCacheTypeFilter(final CacheType typeToDisplay) {
+        final Set<String> filterTypes = new HashSet<>();
         // Put all types in set, remove what should be visible in a second step
         filterTypes.addAll(Arrays.asList("2", "9", "5", "3", "6", "453", "13", "1304", "4", "11", "137", "8", "1858"));
         switch (typeToDisplay) {

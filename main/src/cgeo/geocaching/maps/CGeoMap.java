@@ -34,6 +34,7 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.LiveMapInfoDialogBuilder;
 import cgeo.geocaching.utils.AngleUtils;
@@ -133,7 +134,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     // Those are initialized in onCreate() and will never be null afterwards
     private Resources res;
     private Activity activity;
-    private CgeoApplication app;
     private MapItemFactory mapItemFactory;
     private String mapTitle;
     final private LeastRecentlyUsedSet<Geocache> caches = new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount());
@@ -382,7 +382,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         // class init
         res = this.getResources();
         activity = this.getActivity();
-        app = (CgeoApplication) activity.getApplication();
 
         final MapProvider mapProvider = Settings.getMapProvider();
         mapItemFactory = mapProvider.getMapItemFactory();
@@ -491,7 +490,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             });
         }
 
-        if (!app.isLiveMapHintShownInThisSession() && Settings.getLiveMapHintShowCount() <= 3) {
+        if (!CgeoApplication.getInstance().isLiveMapHintShownInThisSession() && Settings.getLiveMapHintShowCount() <= 3) {
             LiveMapInfoDialogBuilder.create(activity).show();
         }
     }
@@ -955,7 +954,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         // minimum change of location in fraction of map width/height (whatever is smaller) for position overlay update
         private static final float MIN_LOCATION_DELTA = 0.01f;
 
-        Location currentLocation = CgeoApplication.getInstance().currentGeo();
+        Location currentLocation = Sensors.getInstance().currentGeo();
         float currentHeading;
 
         private long timeLastPositionOverlayCalculation = 0;
@@ -1539,7 +1538,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         if (myLocSwitch != null) {
             myLocSwitch.setChecked(followMyLocation);
             if (followMyLocation) {
-                myLocationInMiddle(app.currentGeo());
+                myLocationInMiddle(Sensors.getInstance().currentGeo());
             }
         }
     }

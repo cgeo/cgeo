@@ -3,7 +3,6 @@ package cgeo.geocaching.ui;
 import butterknife.InjectView;
 
 import cgeo.geocaching.CacheDetailActivity;
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheListType;
@@ -11,6 +10,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.sensors.GeoData;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.DistanceComparator;
@@ -119,7 +119,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
 
     public CacheListAdapter(final Activity activity, final List<Geocache> list, final CacheListType cacheListType) {
         super(activity, 0, list);
-        final GeoData currentGeo = CgeoApplication.getInstance().currentGeo();
+        final GeoData currentGeo = Sensors.getInstance().currentGeo();
         coords = currentGeo.getCoords();
         this.res = activity.getResources();
         this.list = list;

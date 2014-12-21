@@ -1,10 +1,10 @@
 package cgeo.geocaching.apps.cache.navi;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.sensors.GeoData;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -25,7 +25,7 @@ class GoogleMapsDirectionApp extends AbstractPointNavigationApp {
     @Override
     public void navigate(final Activity activity, final Geopoint coords) {
         try {
-            final GeoData geo = CgeoApplication.getInstance().currentGeo();
+            final GeoData geo = Sensors.getInstance().currentGeo();
             activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri
                     .parse("http://maps.google.com/maps?f=d&saddr="
                             + geo.getCoords().getLatitude() + "," + geo.getCoords().getLongitude() + "&daddr="
