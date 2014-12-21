@@ -80,6 +80,9 @@ public final class NavigationAppFactory extends AbstractAppFactory {
             this.app = app;
             this.id = id;
             this.preferenceKey = preferenceKey;
+            if (preferenceKey == 0 || preferenceKey == -1) {
+                throw new IllegalStateException("Every navigation app must have a boolean preference in the settings to be enabled/disabled.");
+            }
         }
 
         /**
