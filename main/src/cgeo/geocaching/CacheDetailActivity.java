@@ -863,6 +863,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             // cache attributes
             updateAttributesText();
             updateAttributesIcons();
+            ButterKnife.findById(view, R.id.attributes_box).setVisibility(cache.getAttributes().isEmpty() ? View.GONE : View.VISIBLE);
 
             updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener());
 
