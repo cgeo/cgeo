@@ -3,6 +3,9 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
+    · New: Waypoints created from personal notes can now be deleted\n
+    · Fix: Up navigation did not work when c:geo was invoked from another app\n
+    · Fix: Recognize Sygic voucher edition\n
     \n
   </string>
 </resources>
