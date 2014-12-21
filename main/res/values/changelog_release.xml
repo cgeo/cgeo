@@ -38,6 +38,8 @@
     · Fix: Charter Members not recognized as Premium Members\n
     \n
     <b>Known Limitations/Bugs:</b>\n
+    · On devices without magnetic compass the position arrow on the map might not be shown.\n
+      We are working on this problem.\n
     · Device menu button not working on map popup\n
       Please use the three dot button instead\n
     · Live map:\n
