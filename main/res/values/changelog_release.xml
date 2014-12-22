@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-     <b>Next bugfix release:</b>\n
+     <b>2014.12.22:</b>\n
     · New: Updated translations\n
     · New: Google Play services are disabled by default on Android before 4.0\n
     · Fix: Favorite points display not updated after change\n
@@ -38,6 +38,8 @@
     · Fix: Charter Members not recognized as Premium Members\n
     \n
     <b>Known Limitations/Bugs:</b>\n
+    · On devices without magnetic compass the position arrow on the map might not be shown.\n
+      We are working on this problem.\n
     · Device menu button not working on map popup\n
       Please use the three dot button instead\n
     · Live map:\n
