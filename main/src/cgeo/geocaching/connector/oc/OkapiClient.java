@@ -738,7 +738,7 @@ final class OkapiClient {
     }
 
     private static String getPreferredLanguage() {
-        final String code = Locale.getDefault().getCountry();
+        final String code = Locale.getDefault().getLanguage();
         if (StringUtils.isNotBlank(code)) {
             return StringUtils.lowerCase(code) + "|en";
         }
