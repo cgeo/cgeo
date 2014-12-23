@@ -5,7 +5,6 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDataProvider;
 import cgeo.geocaching.sensors.GpsStatusProvider;
 import cgeo.geocaching.sensors.GpsStatusProvider.Status;
-import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.settings.Settings;
@@ -33,17 +32,17 @@ public class CgeoApplication extends Application {
     public boolean showLoginToast = true; //login toast shown just once.
     private boolean liveMapHintShownInThisSession = false; // livemap hint has been shown
     private static CgeoApplication instance;
-    private Observable<IGeoData> geoDataObservable;
-    private Observable<IGeoData> geoDataObservableLowPower;
+    private Observable<GeoData> geoDataObservable;
+    private Observable<GeoData> geoDataObservableLowPower;
     private Observable<Float> directionObservable;
     private Observable<Status> gpsStatusObservable;
-    @NonNull private volatile IGeoData currentGeo = GeoData.DUMMY_LOCATION;
+    @NonNull private volatile GeoData currentGeo = GeoData.DUMMY_LOCATION;
     private volatile boolean hasValidLocation = false;
     private volatile float currentDirection = 0.0f;
     private boolean isGooglePlayServicesAvailable = false;
-    private final Action1<IGeoData> rememberGeodataAction = new Action1<IGeoData>() {
+    private final Action1<GeoData> rememberGeodataAction = new Action1<GeoData>() {
         @Override
-        public void call(final IGeoData geoData) {
+        public void call(final GeoData geoData) {
             currentGeo = geoData;
             hasValidLocation = true;
         }
@@ -144,7 +143,7 @@ public class CgeoApplication extends Application {
         DataStore.removeAllFromCache();
     }
 
-    public Observable<IGeoData> geoDataObservable(final boolean lowPower) {
+    public Observable<GeoData> geoDataObservable(final boolean lowPower) {
         return lowPower ? geoDataObservableLowPower : geoDataObservable;
     }
 
@@ -160,7 +159,7 @@ public class CgeoApplication extends Application {
     }
 
     @NonNull
-    public IGeoData currentGeo() {
+    public GeoData currentGeo() {
         return currentGeo;
     }
 

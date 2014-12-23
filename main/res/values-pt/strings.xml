@@ -74,12 +74,13 @@
   <string name="log_tb_visit">Visitei</string>
   <string name="log_tb_drop">Deixei aqui</string>
   <string name="log_tb_changeall">Alterar todos</string>
-  <string name="log_save">Gravar</string>
+  <string name="log_save">Guardar offline</string>
   <string name="log_saving">A gravar o registo…</string>
   <string name="log_saving_and_uploading">A enviar o registo e a imagem…</string>
   <string name="log_clear">Limpar</string>
   <string name="log_post_not_possible">A carregar página de registo…</string>
   <string name="log_add">Adicionar</string>
+  <string name="log_repeat">Repetir último registo</string>
   <string name="log_no_rating">Não votar</string>
   <string name="log_stars_1_description">Terrível</string>
   <string name="log_stars_15_description">Muito má</string>
@@ -166,15 +167,11 @@
   <string name="err_point_unknown_position">O c:geo não conseguiu reconhecer a sua localização.</string>
   <string name="err_point_no_position_given_title">Informação requerida</string>
   <string name="err_point_no_position_given">Preencha pelo menos a latitude, a longitude, a distância ou a direcção. Também pode preencher os quatro campos.</string>
-  <string name="err_point_curr_position_unavailable">O c:geo ainda não possui as coordenadas actuais. Por favor, aguarde um instante…</string>
   <string name="err_point_bear_and_dist_title">Precisa de ajuda?</string>
   <string name="err_point_bear_and_dist">Preencha a direcção e a distância. A direcção é o ângulo de 0 a 360 graus relativo ao norte. A distância pode ser introduzida com ou sem unidades.</string>
   <string name="err_log_load_data">O c:geo não consegue carregar os dados necessários para registar a sua visita.</string>
   <string name="err_log_load_data_again">O c:geo não consegue carregar os dados necessários para registar a sua visita. A tentar de novo.</string>
   <string name="err_log_load_data_still">O c:geo ainda está a carregar dados necessários para publicar o registo. Por favor espere mais um pouco.</string>
-  <string name="err_log_post_failed">O c:geo falhou a publicação do registo.</string>
-  <string name="err_log_post_failed_ec">Parece que o seu  log não foi publicado. Por favor verifique-o em Extremcaching.com.</string>
-  <string name="err_logimage_post_failed">Parece que a sua imagem de registo não foi enviada. Por favor verifique em Geocaching.com.</string>
   <string name="err_search_address_forgot">O c:geo esqueceu o endereço que procura.</string>
   <string name="err_parse_lat">O c:geo não consegue analisar a latitue.</string>
   <string name="err_parse_lon">O c:geo não consegue analisar a logitude.</string>
@@ -209,6 +206,9 @@
   <string name="info_cache_saved">A cache foi armazenada localmente</string>
   <string name="loc_last">Último conhecido</string>
   <string name="loc_net">Rede</string>
+  <string name="loc_fused">Combinados</string>
+  <string name="loc_low_power">Bateria fraca</string>
+  <string name="loc_home">Coordenadas de casa</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">A tentar localizar</string>
@@ -296,6 +296,7 @@
   <string name="caches_filter_popularity_ratio">Favoritos [%]</string>
   <string name="caches_removing_from_history">A remover do histórico…</string>
   <string name="caches_clear_offlinelogs">Limpar registos offline</string>
+  <string name="caches_clear_offlinelogs_message">Quer apagar os registos offline?</string>
   <string name="caches_clear_offlinelogs_progress">A limpar registos offline</string>
   <string name="list_menu_create">Criar nova lista</string>
   <string name="list_menu_drop">Apagar lista actual</string>
@@ -371,6 +372,8 @@
   <string name="settings_activate_oc_uk">Ativar</string>
   <string name="init_oc_uk_description">Autorizar o c:geo em opencaching.org.uk para que pesquise por caches e aceder/filtrar as suas caches encontradas.</string>
   <string name="init_gcvote">GCvote.com</string>
+  <string name="init_gcvote_password_description">Para poder classificar uma cache, tem que seguir as instruções em GCVote.com e digitar a sua senha GCVote aqui.</string>
+  <string name="err_gcvote_send_rating">Erro ao enviar a classificação, verifique a senha do GCVote nas configurações ou limpe a mesma.</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activar</string>
   <string name="init_username">Nome de utilizador</string>
@@ -489,9 +492,18 @@
   <string name="init_maintenance">Manutenção</string>
   <string name="init_maintenance_directories_note">c:geo armazena imagens, registo de imagens e outros ficheiros relacionados com uma cache numa pasta separada. Nalguns casos (como ao importar/exportar a base de dados) esta pasta pode conter ficheiros desatualizados, que podem ser apagados aqui.</string>
   <string name="init_maintenance_directories">Apagar ficheiros orfãos</string>
+  <string name="init_location">Geolocalização</string>
+  <string name="init_location_note">Em dispositivos equipados com serviços Google Play, o c:geo pode automaticamente usar um melhor fornecedor de geolocalização. No entanto, isso impede o uso de um receptor GPS BlueTooth externo.</string>
+  <string name="init_location_googleplayservices">Utilizar serviços Google Play</string>
+  <string name="init_low_power">Modo de baixo consumo de energia</string>
+  <string name="init_low_power_note">O modo de baixo consumo de energia evita usar o GPS e o giroscópio quando não é necessária uma localização muito precisa, à custa de tempos de fixação mais longos.</string>
+  <string name="init_low_power_mode">Ativar modo de baixo consumo de energia</string>
   <string name="init_create_memory_dump">criar dump de memória</string>
   <string name="init_memory_dump">dump de memória</string>
   <string name="init_memory_dumped">dump de memória em %s</string>
+  <string name="init_hardware_acceleration_title">Renderização acelerada por hardware</string>
+  <string name="init_hardware_acceleration_note">Aceleração por hardware processa elementos gráficos mais rapidamente no ecrã. No entanto, em alguns dispositivos o sistema operativo Android contém erros e algum texto pode aparecer desfocado (nomeadamente caracteres em negrito). Desactive a aceleração por hardware se isso lhe acontecer.</string>
+  <string name="init_hardware_acceleration">Activar renderização acelerada por hardware</string>
   <string name="settings_open_website">Abrir o website</string>
   <string name="settings_settings">Definições</string>
   <string name="settings_information">Informações</string>
@@ -629,7 +641,7 @@
   <string name="cache_menu_streetview">Vista de rua</string>
   <string name="cache_menu_browser">Abrir no browser</string>
   <string name="cache_menu_visit">Registar visita</string>
-  <string name="cache_menu_visit_offline">Registar visita offline</string>
+  <string name="cache_menu_visit_offline">Registo offline rápido</string>
   <string name="cache_menu_spoilers">Imagens spoiler</string>
   <string name="cache_menu_around">Caches próximas</string>
   <string name="cache_menu_event">Adicionar ao calendário</string>
@@ -750,6 +762,7 @@
   <string name="search_clear_history">Limpar histórico</string>
   <string name="search_history_cleared">Histórico limpo</string>
   <string name="waypoint_coordinate_formats_plain">Plano</string>
+  <string name="from_clipboard">Da área de transferência</string>
   <string name="visit_tweet">Publicar esta descoberta no Twitter</string>
   <string name="map_map">Mapa</string>
   <string name="map_live">Mapa ao vivo</string>
@@ -854,6 +867,7 @@
   <string name="helper_contacts_description">Permite abrir um contacto (da sua agenda telefónica) directamente a partir de um log. Assim será mais fácil de pedir ajuda aos seus amigos.</string>
   <string name="helper_sendtocgeo_description">Send to c:geo é uma extensão do navegador <strong>para o seu PC</strong>. Ao navegar geocaching.com, você pode enviar as caches directamente para seu smartphone com o clique de um botão no navegador.</string>
   <string name="helper_locus_title">Locus</string>
+  <string name="helper_locus_description">Aplicação de navegação ao ar livre para o seu telefone ou tablet. Veja mapas topográficos offline, registe a sua rota, procure geocaches, use um guia de voz e muito mais.</string>
   <string name="helper_gpsstatus_title">Estado do GPS</string>
   <string name="helper_gpsstatus_description">Pode usar o radar a partir desta aplicação. Também fornece muitas outras informações relacionadas com o GPS.</string>
   <string name="helper_bluetoothgps_title">GPS por bluetooth</string>
@@ -1122,6 +1136,8 @@
   <string name="tts_service">Bússola que fala</string>
   <string name="tts_start">Comece a falar</string>
   <string name="tts_stop">Páre de falar</string>
+  <string name="tts_started">Iniciou fala</string>
+  <string name="tts_stopped">Parou fala</string>
   <string name="err_tts_lang_not_supported">A linguagem corrente não é suportada pelo texto em fala.</string>
   <string name="tts_one_kilometer">um quilômetro</string>
   <plurals name="tts_kilometers">
@@ -1154,7 +1170,16 @@
     <item quantity="one">%s favorito</item>
     <item quantity="other">%s favoritos</item>
   </plurals>
+  <string name="more_than_percent_favorite_points">&gt; %d%% favoritos</string>
   <string name="cgeo_shortcut">Atalho c:geo</string>
   <string name="create_shortcut">Criar atalho</string>
   <string name="send">Enviar</string>
+  <string name="showcase_logcache_title">Enviando o registo</string>
+  <string name="showcase_logcache_text">Lembre-se, muitos comandos estão agora na barra de título. Lá encontra o botão para enviar o registo terminado.</string>
+  <string name="showcase_main_title">Novos menus</string>
+  <string name="showcase_main_text">c:Geo coloca agora itens de menu na barra de título como outras aplicações modernas. Alguns itens estão escondidos atrás do símbolo dos pontos. Prima longamente um botão para ver sua descrição.</string>
+  <string name="showcase_cachelist_title">A trocar de listas</string>
+  <string name="showcase_cachelist_text">Pode alternar entre listas de caches clicando no título da lista.</string>
+  <string name="confirm_log_title">Tipo de registo invulgar</string>
+  <string name="confirm_log_message">Quer fazer o registo \'%s\'. Tem a certeza?</string>
 </resources>

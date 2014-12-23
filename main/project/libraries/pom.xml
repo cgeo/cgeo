@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.cgeo</groupId>
+	<artifactId>library.check</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>c:geo dependency update check</name>
+
+	<description>This project checks or updates c:geo dependencies.
+	Run 'mvn validate' to see available dependency updates.
+	Run 'mvn install' to actually update to the latest releases. You may need to refresh your IDE afterwards.
+	</description>
+
+	<properties>
+		<AndroidAnnotationsVersion>3.2</AndroidAnnotationsVersion>
+
+		<ButterKnifeVersion>6.0.0</ButterKnifeVersion>
+
+		<CommonsCollections4Version>4.0</CommonsCollections4Version>
+		<CommonsIoVersion>2.4</CommonsIoVersion>
+		<CommonsLang3Version>3.3.2</CommonsLang3Version>
+
+		<FindbugsAnnotationsVersion>3.0.0</FindbugsAnnotationsVersion>
+
+		<JacksonAnnotationsVersion>2.4.4</JacksonAnnotationsVersion>
+		<JacksonCoreVersion>2.4.4</JacksonCoreVersion>
+		<JacksonDatabindVersion>2.4.4</JacksonDatabindVersion>
+
+		<RXAndroidVersion>0.23.0</RXAndroidVersion>
+		<RXJavaVersion>1.0.2</RXJavaVersion>
+		<RXJavaAsyncUtilVersion>0.21.0</RXJavaAsyncUtilVersion>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.androidannotations</groupId>
+			<artifactId>androidannotations</artifactId>
+			<version>${AndroidAnnotationsVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.androidannotations</groupId>
+			<artifactId>androidannotations-api</artifactId>
+			<version>${AndroidAnnotationsVersion}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jakewharton</groupId>
+			<artifactId>butterknife</artifactId>
+			<version>${ButterKnifeVersion}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>${CommonsCollections4Version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${CommonsLang3Version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${CommonsIoVersion}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>annotations</artifactId>
+			<version>${FindbugsAnnotationsVersion}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${JacksonAnnotationsVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${JacksonCoreVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${JacksonDatabindVersion}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.reactivex</groupId>
+			<artifactId>rxjava</artifactId>
+			<version>${RXJavaVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.reactivex</groupId>
+			<artifactId>rxjava-async-util</artifactId>
+			<version>${RXJavaAsyncUtilVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.reactivex</groupId>
+			<artifactId>rxandroid</artifactId>
+			<version>${RXAndroidVersion}</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>2.1</version>
+				<executions>
+					<execution>
+						<id>display-property-updates</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>display-property-updates</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>update-properties</id>
+						<phase>install</phase>
+						<goals>
+							<goal>update-properties</goal>
+						</goals>
+						<configuration>
+							<allowSnapshots>false</allowSnapshots>
+							<allowMajorUpdates>true</allowMajorUpdates>
+							<allowMinorUpdates>true</allowMinorUpdates>
+							<generateBackupPoms>true</generateBackupPoms>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.9</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/../../libs</outputDirectory>
+							<overWriteReleases>true</overWriteReleases>
+							<excludeTransitive>true</excludeTransitive>
+						</configuration>
+					</execution>
+					<execution>
+						<id>src-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<classifier>sources</classifier>
+							<outputDirectory>${basedir}/../../libs/src</outputDirectory>
+							<failOnMissingClassifierArtifact>false</failOnMissingClassifierArtifact>
+							<overWriteReleases>true</overWriteReleases>
+							<excludeTransitive>true</excludeTransitive>
+						</configuration>
+					</execution>
+					<execution>
+						<id>javadoc-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<classifier>javadoc</classifier>
+							<outputDirectory>${basedir}/../../libs/src</outputDirectory>
+							<failOnMissingClassifierArtifact>false</failOnMissingClassifierArtifact>
+							<overWriteReleases>true</overWriteReleases>
+							<excludeTransitive>true</excludeTransitive>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- unfinished: update properties files of source and javadoc
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<id>write-properties-files</id>
+						<phase>package</phase>
+						<configuration>
+							<tasks>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			 -->
+		</plugins>
+	</build>
+</project>

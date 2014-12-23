@@ -71,7 +71,6 @@
   <string name="log_tb_visit">訪れた</string>
   <string name="log_tb_drop">ここに置く</string>
   <string name="log_tb_changeall">Change All</string>
-  <string name="log_save">保存</string>
   <string name="log_saving">ログを送信中…</string>
   <string name="log_saving_and_uploading">ログと画像を送信中…</string>
   <string name="log_clear">消去</string>
@@ -162,15 +161,11 @@
   <string name="err_point_unknown_position">現在地を認識できません。</string>
   <string name="err_point_no_position_given_title">必要な情報</string>
   <string name="err_point_no_position_given">少なくとも経度、緯度、または距離と方位を入力してください。全てを入力することもできます。</string>
-  <string name="err_point_curr_position_unavailable">現在地の座標が分かりません。もう少しお待ちください…</string>
   <string name="err_point_bear_and_dist_title">ヘルプが必要?</string>
   <string name="err_point_bear_and_dist">方位と距離を入力してください。方位は北を基準として時計回りに0～360度で表し単位は付けないでください。</string>
   <string name="err_log_load_data">ログを書くのに必要なデータをロードすることができません。</string>
   <string name="err_log_load_data_again">ログを書くのに必要なデータをロードすることができません。もう一度やってみてください。</string>
   <string name="err_log_load_data_still">ログを投稿するのに必要なデータをまだロード中です。もう少しお待ちください。</string>
-  <string name="err_log_post_failed">ログを投稿することができなかったようです。Geocaching.comで確認してください。</string>
-  <string name="err_log_post_failed_ec">ログを投稿することができなかったようです。Extremcaching.comで確認してください。</string>
-  <string name="err_logimage_post_failed">ログの添付画像がアップロードされなかったようです。Geocaching.comで確認してください。</string>
   <string name="err_search_address_forgot">c:geo forgot the address you tried to find.</string>
   <string name="err_parse_lat">緯度の解析ができません。</string>
   <string name="err_parse_lon">経度の解析ができません。</string>
@@ -561,7 +556,6 @@
   <string name="cache_menu_streetview">Googleストリートビュー</string>
   <string name="cache_menu_browser">ブラウザで開く</string>
   <string name="cache_menu_visit">ログを書く</string>
-  <string name="cache_menu_visit_offline">ログを書く(オフライン)</string>
   <string name="cache_menu_spoilers">スポイラー画像</string>
   <string name="cache_menu_around">近くのキャッシュ</string>
   <string name="cache_menu_event">カレンダーに登録</string>

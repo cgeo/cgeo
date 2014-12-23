@@ -27,17 +27,22 @@ gradle connectedCheck
 //https://github.com/stephanenicolas/Quality-Tools-for-Android
 
 def AAVersion = '3.2'
-def RXVersion = '0.20.7'
-def JacksonCoreVersion = '2.4.3'
-def JacksonDatabindVersion = '2.4.3'
-def JacksonAnnotationsVersion = '2.4.3'
+def RXJavaVersion = '1.0.2'
+def RXAndroidVersion = '0.23.0'
+def RXJavaAsyncUtilVersion = '0.21.0'
+def JacksonCoreVersion = '2.4.4'
+def JacksonDatabindVersion = '2.4.4'
+def JacksonAnnotationsVersion = '2.4.4'
+def CommonsCollections4Version = '4.0'
+def CommonsLang3Version = '3.3.2'
+def CommonsIoVersion = '2.4'
 group = 'cgeo.geocaching'
 version = '0.0.1'
 
 android {
     compileSdkVersion "Google Inc.:Google APIs:19"
     //compileSdkVersion 19
-    buildToolsVersion "20"
+    buildToolsVersion "21.1"
 
      compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
@@ -156,14 +161,14 @@ dependencies {
     compile 'com.google.android.gms:play-services:5.0.89'
 
     compile 'com.jakewharton:butterknife:6.0.0'
-    compile 'org.apache.commons:commons-collections4:4.0'
-    compile 'org.apache.commons:commons-lang3:3.3.2'
-    compile 'commons-io:commons-io:2.4'
+    compile "org.apache.commons:commons-collections4:$CommonsCollections4Version"
+    compile "org.apache.commons:commons-lang3:$CommonsLang3Version"
+    compile "commons-io:commons-io:$CommonsIoVersion"
     compile 'com.google.code.findbugs:annotations:3.0.0'
 
-    compile "com.netflix.rxjava:rxjava-core:$RXVersion"
-    compile "com.netflix.rxjava:rxjava-android:$RXVersion"
-    compile "com.netflix.rxjava:rxjava-async-util:$RXVersion"
+    compile "io.reactivex:rxjava:$RXJavaVersion"
+    compile "io.reactivex:rxandroid:$RXAndroidVersion"
+    compile "io.reactivex:rxjava-async-util:$RXJavaAsyncUtilVersion"
 
     compile "com.fasterxml.jackson.core:jackson-core:$JacksonCoreVersion"
     compile "com.fasterxml.jackson.core:jackson-databind:$JacksonDatabindVersion"
@@ -258,7 +263,7 @@ dependencies {
     unitTestCompile 'com.jakewharton:butterknife:6.0.0'
     unitTestCompile 'org.apache.commons:commons-collections4:4.0'
     unitTestCompile 'commons-io:commons-io:2.4'
-    unitTestCompile 'org.apache.commons:commons-lang3:3.3.2'
+    unitTestCompile 'org.apache.commons:commons-lang3:$CommonsLang3Version'
     unitTestCompile 'com.google.code.findbugs:annotations:3.0.0'
     unitTestCompile 'com.netflix.rxjava:rxjava-core:$RXVersion'
     unitTestCompile 'com.netflix.rxjava:rxjava-android:$RXVersion'

@@ -17,7 +17,7 @@ class GeopointParser {
         final int matcherPos;
         final int matcherLength;
 
-        public ResultWrapper(final double result, int matcherPos, int stringLength) {
+        public ResultWrapper(final double result, final int matcherPos, final int stringLength) {
             this.result = result;
             this.matcherPos = matcherPos;
             this.matcherLength = stringLength;
@@ -78,55 +78,58 @@ class GeopointParser {
     /**
      * Helper for coordinates-parsing
      * 
-     * @param text
-     * @param latlon
-     * @return
+     * @param text the text to parse
+     * @param latlon the kind of coordinate to parse
+     * @return a wrapper with the result and the corresponding matching part
+     * @throws Geopoint.ParseException if the text cannot be parsed
      */
-    private static ResultWrapper parseHelper(final String text, final LatLon latlon) {
-
+    private static ResultWrapper parseHelper(@NonNull final String text, final LatLon latlon) {
         MatcherWrapper matcher = new MatcherWrapper(PATTERN_BAD_BLANK, text);
-        String replaceSpaceAfterComma = matcher.replaceAll("$1.$2");
+        final String replaceSpaceAfterComma = matcher.replaceAll("$1.$2");
 
         final Pattern pattern = LatLon.LAT == latlon ? PATTERN_LAT : PATTERN_LON;
         matcher = new MatcherWrapper(pattern, replaceSpaceAfterComma);
 
         try {
             return new ResultWrapper(Double.valueOf(replaceSpaceAfterComma), 0, text.length());
-        } catch (NumberFormatException ignored) {
+        } catch (final NumberFormatException ignored) {
             // fall through to advanced parsing
         }
 
-        if (matcher.find()) {
-            final double sign = matcher.group(1).equalsIgnoreCase("S") || matcher.group(1).equalsIgnoreCase("W") ? -1.0 : 1.0;
-            final double degree = Integer.valueOf(matcher.group(2)).doubleValue();
+        try {
+            if (matcher.find()) {
+                final double sign = matcher.group(1).equalsIgnoreCase("S") || matcher.group(1).equalsIgnoreCase("W") ? -1.0 : 1.0;
+                final double degree = Integer.valueOf(matcher.group(2)).doubleValue();
 
-            double minutes = 0.0;
-            double seconds = 0.0;
+                double minutes = 0.0;
+                double seconds = 0.0;
 
-            if (null != matcher.group(3)) {
-                minutes = Integer.valueOf(matcher.group(3)).doubleValue();
+                if (null != matcher.group(3)) {
+                    minutes = Integer.valueOf(matcher.group(3)).doubleValue();
 
-                if (null != matcher.group(4)) {
-                    seconds = Double.parseDouble("0." + matcher.group(4)) * 60.0;
-                } else if (null != matcher.group(5)) {
-                    seconds = Double.parseDouble(matcher.group(5).replace(",", "."));
+                    if (null != matcher.group(4)) {
+                        seconds = Double.parseDouble("0." + matcher.group(4)) * 60.0;
+                    } else if (null != matcher.group(5)) {
+                        seconds = Double.parseDouble(matcher.group(5).replace(",", "."));
+                    }
                 }
+
+                return new ResultWrapper(sign * (degree + minutes / 60.0 + seconds / 3600.0), matcher.start(), matcher.group().length());
             }
-
-            return new ResultWrapper(sign * (degree + minutes / 60.0 + seconds / 3600.0), matcher.start(), matcher.group().length());
-
+        } catch (final NumberFormatException ignored) {
+            // We might have encountered too large a number. This was not the right way to do it, try another.
         }
 
         // Nothing found with "N 52...", try to match string as decimal degree parts (i.e. multiple doubles)
         try {
-            final String[] items = StringUtils.split(text.trim());
+            final String[] items = StringUtils.split(StringUtils.trimToEmpty(text));
             if (items.length > 0 && items.length <= 2) {
                 final int index = (latlon == LatLon.LON ? items.length - 1 : 0);
                 final String textPart = items[index];
                 final int pos = (latlon == LatLon.LON ? text.lastIndexOf(textPart) : text.indexOf(textPart));
                 return new ResultWrapper(Double.parseDouble(textPart), pos, textPart.length());
             }
-        } catch (NumberFormatException ignored) {
+        } catch (final NumberFormatException ignored) {
             // The right exception will be raised below.
         }
 

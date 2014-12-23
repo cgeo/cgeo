@@ -92,7 +92,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
 
             @Override
             public void call(final Integer listId) {
-                createOfflineListShortcut(listId.intValue());
+                createOfflineListShortcut(listId);
             }
         }, true, -1);
     }

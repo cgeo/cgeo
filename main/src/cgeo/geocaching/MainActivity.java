@@ -15,10 +15,10 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.GpsStatusProvider;
 import cgeo.geocaching.sensors.GpsStatusProvider.Status;
-import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -93,9 +93,6 @@ public class MainActivity extends AbstractActionBarActivity {
 
     public static final int SEARCH_REQUEST_CODE = 2;
 
-    private int version = 0;
-    private boolean cleanupRunning = false;
-    private int countBubbleCnt = 0;
     private Geopoint addCoords = null;
     private boolean initialized = false;
     private ConnectivityChangeReceiver connectivityChangeReceiver;
@@ -212,8 +209,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
         setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); // type to search
 
-        version = Version.getVersionCode(this);
-        Log.i("Starting " + getPackageName() + ' ' + version + " a.k.a " + Version.getVersionName(this));
+        Log.i("Starting " + getPackageName() + ' ' + Version.getVersionCode(this) + " a.k.a " + Version.getVersionName(this));
 
         init();
 
@@ -453,7 +449,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
         setFilterTitle();
         checkRestore();
-        (new CleanDatabaseThread()).start();
+        DataStore.cleanIfNeeded(this);
     }
 
     protected void selectGlobalTypeFilter() {
@@ -507,7 +503,23 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     public void updateCacheCounter() {
-        (new CountBubbleUpdateThread()).start();
+        AndroidObservable.bindActivity(this, DataStore.getAllCachesCountObservable()).subscribe(new Action1<Integer>() {
+            @Override
+            public void call(final Integer countBubbleCnt1) {
+                if (countBubbleCnt1 == 0) {
+                    countBubble.setVisibility(View.GONE);
+                } else {
+                    countBubble.setText(Integer.toString(countBubbleCnt1));
+                    countBubble.bringToFront();
+                    countBubble.setVisibility(View.VISIBLE);
+                }
+            }
+        }, new Action1<Throwable>() {
+            @Override
+            public void call(final Throwable throwable) {
+                Log.e("Unable to add bubble count", throwable);
+            }
+        });
     }
 
     private void checkRestore() {
@@ -540,7 +552,7 @@ public class MainActivity extends AbstractActionBarActivity {
     private class UpdateLocation extends GeoDirHandler {
 
         @Override
-        public void updateGeoData(final IGeoData geo) {
+        public void updateGeoData(final GeoData geo) {
             if (!nearestView.isClickable()) {
                 nearestView.setFocusable(true);
                 nearestView.setClickable(true);
@@ -613,10 +625,6 @@ public class MainActivity extends AbstractActionBarActivity {
      *            unused here but needed since this method is referenced from XML layout
      */
     public void cgeoFindNearest(final View v) {
-        if (app.currentGeo().getCoords() == null) {
-            return;
-        }
-
         nearestView.setPressed(true);
         startActivity(CacheListActivity.getNearestIntent(this));
     }
@@ -663,79 +671,6 @@ public class MainActivity extends AbstractActionBarActivity {
      */
     public void cgeoNavSettings(final View v) {
         startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-    }
-
-    private class CountBubbleUpdateThread extends Thread {
-        private final Handler countBubbleHandler = new Handler() {
-
-            @Override
-            public void handleMessage(final Message msg) {
-                try {
-                    if (countBubbleCnt == 0) {
-                        countBubble.setVisibility(View.GONE);
-                    } else {
-                        countBubble.setText(Integer.toString(countBubbleCnt));
-                        countBubble.bringToFront();
-                        countBubble.setVisibility(View.VISIBLE);
-                    }
-                } catch (final Exception e) {
-                    Log.w("MainActivity.countBubbleHander", e);
-                }
-            }
-        };
-
-        @Override
-        public void run() {
-            if (app == null) {
-                return;
-            }
-
-            int checks = 0;
-            while (!DataStore.isInitialized()) {
-                try {
-                    sleep(500);
-                    checks++;
-                } catch (final Exception e) {
-                    Log.e("MainActivity.CountBubbleUpdateThread.run", e);
-                }
-
-                if (checks > 10) {
-                    return;
-                }
-            }
-
-            countBubbleCnt = DataStore.getAllCachesCount();
-
-            countBubbleHandler.sendEmptyMessage(0);
-        }
-    }
-
-    private class CleanDatabaseThread extends Thread {
-
-        @Override
-        public void run() {
-            if (app == null) {
-                return;
-            }
-            if (cleanupRunning) {
-                return;
-            }
-
-            boolean more = false;
-            if (version != Settings.getVersion()) {
-                Log.i("Initializing hard cleanup - version changed from " + Settings.getVersion() + " to " + version + ".");
-
-                more = true;
-            }
-
-            cleanupRunning = true;
-            DataStore.clean(more);
-            cleanupRunning = false;
-
-            if (version > 0) {
-                Settings.setVersion(version);
-            }
-        }
     }
 
     private void checkShowChangelog() {

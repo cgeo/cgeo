@@ -6,7 +6,7 @@ import cgeo.geocaching.Geocache;
  * sorts caches by geo code, therefore effectively sorting by cache age
  *
  */
-public class GeocodeComparator extends AbstractCacheComparator {
+class GeocodeComparator extends AbstractCacheComparator {
 
     @Override
     protected boolean canCompare(final Geocache cache) {

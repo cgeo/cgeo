@@ -9,28 +9,28 @@ import com.mapswithme.maps.api.MapsWithMeApi;
 
 import android.app.Activity;
 
-public class MapsWithMeApp extends AbstractPointNavigationApp {
+class MapsWithMeApp extends AbstractPointNavigationApp {
 
     protected MapsWithMeApp() {
         super(getString(R.string.cache_menu_mapswithme), R.id.cache_app_mapswithme, null);
     }
 
     @Override
-    public void navigate(Activity activity, Geopoint coords) {
+    public void navigate(final Activity activity, final Geopoint coords) {
         navigate(activity, coords, getString(R.string.unknown));
     }
 
     @Override
-    public void navigate(Activity activity, Geocache cache) {
+    public void navigate(final Activity activity, final Geocache cache) {
         navigate(activity, cache.getCoords(), cache.getName());
     }
 
-    private static void navigate(Activity activity, Geopoint coords, String label) {
+    private static void navigate(final Activity activity, final Geopoint coords, final String label) {
         MapsWithMeApi.showPointOnMap(activity, coords.getLatitude(), coords.getLongitude(), label);
     }
 
     @Override
-    public void navigate(Activity activity, Waypoint waypoint) {
+    public void navigate(final Activity activity, final Waypoint waypoint) {
         navigate(activity, waypoint.getCoords(), waypoint.getName());
     }
 

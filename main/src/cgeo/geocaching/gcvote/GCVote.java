@@ -25,6 +25,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public final class GCVote {
@@ -42,10 +43,6 @@ public final class GCVote {
     /**
      * Get user rating for a given guid or geocode. For a guid first the ratings cache is checked
      * before a request to gcvote.com is made.
-     *
-     * @param guid
-     * @param geocode
-     * @return
      */
     public static GCVoteRating getRating(final String guid, final String geocode) {
         if (StringUtils.isNotBlank(guid) && RATINGS_CACHE.containsKey(guid)) {
@@ -62,10 +59,6 @@ public final class GCVote {
 
     /**
      * Get user ratings from gcvote.com
-     *
-     * @param guids
-     * @param geocodes
-     * @return
      */
     @NonNull
     private static Map<String, GCVoteRating> getRating(final List<String> guids, final List<String> geocodes) {
@@ -109,8 +102,7 @@ public final class GCVote {
                 if (eventType == XmlPullParser.START_TAG) {
                     final String tagName = xpp.getName();
                     if (StringUtils.equals(tagName, "vote")) {
-                        final String guid = xpp.getAttributeValue(null, "cacheId");
-                        final String id = requestByGuids ? guid : xpp.getAttributeValue(null, "waypoint");
+                        final String id = xpp.getAttributeValue(null, requestByGuids ? "cacheId" : "waypoint");
                         final float myVote = loggedIn ? Float.parseFloat(xpp.getAttributeValue(null, "voteUser")) : 0;
                         final GCVoteRating voteRating = new GCVoteRating(Float.parseFloat(xpp.getAttributeValue(null, "voteAvg")),
                                 Integer.parseInt(xpp.getAttributeValue(null, "voteCnt")),
@@ -134,33 +126,30 @@ public final class GCVote {
     /**
      * Transmit user vote to gcvote.com
      *
-     * @param cache
-     * @param vote
+     * @param cache the geocache (supported by GCVote)
+     * @param rating the rating
      * @return {@code true} if the rating was submitted successfully
      */
-    public static boolean setRating(final Geocache cache, final float vote) {
-        if (!isVotingPossible(cache)) {
-            return false;
-        }
-        if (!isValidRating(vote)) {
-            return false;
+    public static boolean setRating(final Geocache cache, final float rating) {
+        if (!isVotingPossible(cache) || !isValidRating(rating)) {
+            throw new IllegalArgumentException(!isVotingPossible(cache) ? "voting is not possible for " + cache : "invalid rating " + rating);
         }
 
         final ImmutablePair<String, String> login = Settings.getGCvoteLogin();
-        if (login == null) {
-            return false;
-        }
-
         final Parameters params = new Parameters(
                 "userName", login.left,
                 "password", login.right,
                 "cacheId", cache.getGuid(),
-                "voteUser", String.format("%.1f", vote).replace(',', '.'),
+                "waypoint", cache.getGeocode(),
+                "voteUser", String.format(Locale.US, "%.1f", rating),
                 "version", "cgeo");
 
-        final String result = Network.getResponseData(Network.getRequest("http://gcvote.com/setVote.php", params));
-
-        return result != null && result.trim().equalsIgnoreCase("ok");
+        final String result = StringUtils.trim(Network.getResponseData(Network.getRequest("http://gcvote.com/setVote.php", params)));
+        if (!StringUtils.equalsIgnoreCase(result, "ok")) {
+            Log.e("GCVote.setRating: could not post rating, answer was " + result);
+            return false;
+        }
+        return true;
     }
 
     public static void loadRatings(final @NonNull ArrayList<Geocache> caches) {
@@ -177,31 +166,28 @@ public final class GCVote {
             final Map<String, GCVoteRating> ratings = GCVote.getRating(null, geocodes);
 
             // save found cache coordinates
-            for (Geocache cache : caches) {
+            for (final Geocache cache : caches) {
                 if (ratings.containsKey(cache.getGeocode())) {
-                    GCVoteRating rating = ratings.get(cache.getGeocode());
+                    final GCVoteRating rating = ratings.get(cache.getGeocode());
 
                     cache.setRating(rating.getRating());
                     cache.setVotes(rating.getVotes());
                     cache.setMyVote(rating.getMyVote());
                 }
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Log.e("GCvote.loadRatings", e);
         }
     }
 
     /**
      * Get geocodes of all the caches, which can be used with GCVote. Non-GC caches will be filtered out.
-     *
-     * @param caches
-     * @return
      */
     private static @NonNull
     ArrayList<String> getVotableGeocodes(final @NonNull Collection<Geocache> caches) {
         final ArrayList<String> geocodes = new ArrayList<>(caches.size());
         for (final Geocache cache : caches) {
-            String geocode = cache.getGeocode();
+            final String geocode = cache.getGeocode();
             if (StringUtils.isNotBlank(geocode) && cache.supportsGCVote()) {
                 geocodes.add(geocode);
             }
@@ -242,7 +228,7 @@ public final class GCVote {
         }
     }
 
-    private static String getString(int resId) {
+    private static String getString(final int resId) {
         return CgeoApplication.getInstance().getString(resId);
     }
 

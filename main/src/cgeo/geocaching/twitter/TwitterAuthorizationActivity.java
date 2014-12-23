@@ -1,7 +1,7 @@
 package cgeo.geocaching.twitter;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.network.OAuthAuthorizationActivity;
+import cgeo.geocaching.activity.OAuthAuthorizationActivity;
 import cgeo.geocaching.settings.Settings;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -15,8 +15,8 @@ public class TwitterAuthorizationActivity extends OAuthAuthorizationActivity {
             "/oauth/authorize",
             "/oauth/access_token",
             true,
-            Settings.getKeyConsumerPublic(),
-            Settings.getKeyConsumerSecret(),
+            Settings.getTwitterKeyConsumerPublic(),
+            Settings.getTwitterKeyConsumerSecret(),
             "callback://www.cgeo.org/twitter/");
 
     @Override

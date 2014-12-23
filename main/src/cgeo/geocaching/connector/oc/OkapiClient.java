@@ -397,7 +397,6 @@ final class OkapiClient {
             }
             if (response.hasNonNull(CACHE_MY_NOTES)) {
                 cache.setPersonalNote(response.get(CACHE_MY_NOTES).asText());
-                cache.parseWaypointsFromNote();
             }
             cache.setLogPasswordRequired(response.get(CACHE_REQ_PASSWORD).asBoolean());
 

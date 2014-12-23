@@ -17,11 +17,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.Resources;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -71,31 +69,16 @@ public final class CacheDetailsCreator {
         final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_information_item, null, false);
         final TextView nameView = ButterKnife.findById(layout, R.id.name);
         lastValueView = ButterKnife.findById(layout, R.id.value);
-        final LinearLayout layoutStars = ButterKnife.findById(layout, R.id.stars);
 
         nameView.setText(activity.getResources().getString(nameId));
         lastValueView.setText(String.format("%.1f", value) + ' ' + activity.getResources().getString(R.string.cache_rating_of) + " " + String.format("%d", max));
-        createStarImages(layoutStars, value, max);
+
+        final RatingBar layoutStars = ButterKnife.findById(layout, R.id.stars);
+        layoutStars.setRating(value);
         layoutStars.setVisibility(View.VISIBLE);
 
         parentView.addView(layout);
         return layout;
-    }
-
-    private void createStarImages(final ViewGroup starsContainer, final float value, final int max) {
-        final LayoutInflater inflater = LayoutInflater.from(activity);
-
-        for (int i = 0; i < max; i++) {
-            final ImageView star = (ImageView) inflater.inflate(R.layout.star_image, starsContainer, false);
-            if (value - i >= 0.75) {
-                star.setImageResource(R.drawable.star_on);
-            } else if (value - i >= 0.25) {
-                star.setImageResource(R.drawable.star_half);
-            } else {
-                star.setImageResource(R.drawable.star_off);
-            }
-            starsContainer.addView(star);
-        }
     }
 
     public void addCacheState(final Geocache cache) {

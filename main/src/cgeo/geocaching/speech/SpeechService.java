@@ -4,8 +4,8 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
-import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
@@ -47,7 +47,7 @@ public class SpeechService extends Service implements OnInitListener {
 
     final GeoDirHandler geoDirHandler = new GeoDirHandler() {
         @Override
-        public void updateGeoDir(final IGeoData newGeo, final float newDirection) {
+        public void updateGeoDir(final GeoData newGeo, final float newDirection) {
             position = newGeo.getCoords();
             direction = newDirection;
             // avoid any calculation, if the delay since the last output is not long enough
@@ -157,6 +157,7 @@ public class SpeechService extends Service implements OnInitListener {
         return START_NOT_STICKY; // service can be stopped by system, if under memory pressure
     }
 
+    @SuppressWarnings("deprecation")
     private void speak(final String text) {
         if (!initialized) {
             return;

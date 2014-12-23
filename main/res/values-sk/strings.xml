@@ -74,12 +74,13 @@
   <string name="log_tb_visit">Navštívené</string>
   <string name="log_tb_drop">Nechať tu</string>
   <string name="log_tb_changeall">Zmeniť všetko</string>
-  <string name="log_save">Uložiť</string>
+  <string name="log_save">Uložiť offline</string>
   <string name="log_saving">Ukladanie logu…</string>
   <string name="log_saving_and_uploading">Odosielanie logu a nahrávanie obrázku…</string>
   <string name="log_clear">Vyčistiť</string>
   <string name="log_post_not_possible">Načítanie stránky s logmi…</string>
   <string name="log_add">Pridať</string>
+  <string name="log_repeat">Zopakovať posledný log</string>
   <string name="log_no_rating">Nehlasovať</string>
   <string name="log_stars_1_description">slabé</string>
   <string name="log_stars_15_description">dosť slabé</string>
@@ -166,15 +167,11 @@
   <string name="err_point_unknown_position">c:geo nevie, kde ste.</string>
   <string name="err_point_no_position_given_title">Popis je požadovaný</string>
   <string name="err_point_no_position_given">Vyplňte aspoň zemepisnú šírku a dĺžku alebo vzdialenosť a azimut. Môžete tiež vyplniť všetky štyri polia.</string>
-  <string name="err_point_curr_position_unavailable">c:geo stále nepozná aktuálnu polohu. Prosím, čakajte…</string>
   <string name="err_point_bear_and_dist_title">Potrebujete poradiť?</string>
   <string name="err_point_bear_and_dist">Vyplňte azimut aj vzdialenosť. Azimut je uhol 0 až 360 stupňov vzhľadom k severu. Vzdialenosť môžete zadať bez jednotiek.</string>
   <string name="err_log_load_data">c:geo nemôže načítať dáta potrebné pre zalogovanie návštevy.</string>
   <string name="err_log_load_data_again">c:geo nemôže načítať dáta potrebné pre zalogovanie návštevy. Skúša to znovu.</string>
   <string name="err_log_load_data_still">c:geo stále načítava dáta potrebné pre zalogovanie návštevy. Prosím, počkajte chvíľu.</string>
-  <string name="err_log_post_failed">c:geo pravdepodobne nemohlo odoslať log. Skontrolujte to, prosím, na Geocaching.com.</string>
-  <string name="err_log_post_failed_ec">c:geo pravdepodobne nemohlo odoslať log. Skontrolujte to, prosím, na Extremcaching.com.</string>
-  <string name="err_logimage_post_failed">Obrázok k logu sa pravdepodobne nepodarilo nahrať. Skontrolujte to, prosím, na Geocaching.com.</string>
   <string name="err_search_address_forgot">c:geo zabudlo adresu, ktorú sa pokúšate nájsť.</string>
   <string name="err_parse_lat">c:geo nemôže zistiť zemepisnú šírku.</string>
   <string name="err_parse_lon">c:geo nemôže dopočítať zemepisnú dĺžku.</string>
@@ -211,6 +208,7 @@
   <string name="loc_net">sieť</string>
   <string name="loc_fused">Zlúčené</string>
   <string name="loc_low_power">Nízka spotreba</string>
+  <string name="loc_home">Súradnice domova</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">sat</string>
   <string name="loc_trying">zisťovanie polohy</string>
@@ -294,6 +292,7 @@
   <string name="caches_filter_popularity_ratio">Obľúbené [%]</string>
   <string name="caches_removing_from_history">Odstraňovanie z histórie…</string>
   <string name="caches_clear_offlinelogs">Vymazať offline záznamy</string>
+  <string name="caches_clear_offlinelogs_message">Prajete si vymazať offline logy?</string>
   <string name="caches_clear_offlinelogs_progress">Vymazanie logov v režime offline</string>
   <string name="list_menu_create">Vytvoriť nový zoznam</string>
   <string name="list_menu_drop">Odstrániť tento zoznam</string>
@@ -370,6 +369,8 @@
   <string name="settings_activate_oc_uk">Aktivovať</string>
   <string name="init_oc_uk_description">Autorizovať c:geo pre opencaching.org.uk na vyhľadávanie, zobrazenie a filtrovanie nájdených skrýš.</string>
   <string name="init_gcvote">GCvote.com</string>
+  <string name="init_gcvote_password_description">Ak chcete hodnotiť keše, postupujte podľa pokynov na GCVote.com a potom sem zadajte svoje GCVote heslo.</string>
+  <string name="err_gcvote_send_rating">Chyba pri odosielaní hodnotenia, skontrolujte GCVote heslo v nastaveniach alebo ho ponechajte prázdne.</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivovať</string>
   <string name="init_username">používateľské meno</string>
@@ -637,8 +638,8 @@
   <string name="cache_menu_map_ext">Zobraziť na externej mape</string>
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Otvoriť v prehliadači</string>
-  <string name="cache_menu_visit">Zapísať návštevu</string>
-  <string name="cache_menu_visit_offline">Zapísať návševu offline</string>
+  <string name="cache_menu_visit">Zalogovať návštevu</string>
+  <string name="cache_menu_visit_offline">Zalogovať offline</string>
   <string name="cache_menu_spoilers">Obrázky s nápovedou</string>
   <string name="cache_menu_around">Skrýše v okolí</string>
   <string name="cache_menu_event">Pridať do kalendára</string>
@@ -759,6 +760,7 @@
   <string name="search_clear_history">Zmazať históriu</string>
   <string name="search_history_cleared">História zmazaná</string>
   <string name="waypoint_coordinate_formats_plain">Iba text</string>
+  <string name="from_clipboard">Zo schránky</string>
   <string name="visit_tweet">Informovať o nájdení na Twitteri</string>
   <string name="map_map">Mapa</string>
   <string name="map_live">Aktívna mapa</string>
@@ -863,6 +865,7 @@
   <string name="helper_contacts_description">Umožňuje otvorenie karty kontaktu (z adresára) priamo z logbooku, takže môžete ľahko požiadať priateľov o pomoc.</string>
   <string name="helper_sendtocgeo_description">Poslať do c:geo je rozšírenie prehliadača <strong>pre vaše PC</strong>. Pri browsovaní geocaching.com, môžete poslať cache do vášho smartphone kliknutím na tlačidlo priamo v prehliadači.</string>
   <string name="helper_locus_title">Locus</string>
+  <string name="helper_locus_description">Navigačná aplikácia pre tvoj mobil alebo tablet. Zmapuj okolie cez offline topografické mapy, zaznamenávaj svoju cestu, hľadaj geocache, používaj hlasovú navigáciu a rob ešte oveľa viac.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">Radar z tejto aplikácie môžete použiť v c:geo. Poskytuje tiež mnoho iných informácií súvisiacich s GPS.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
@@ -1171,6 +1174,7 @@
     <item quantity="few">%s obľúbené</item>
     <item quantity="other">%s obľúbených</item>
   </plurals>
+  <string name="more_than_percent_favorite_points">&gt; %d %% obľúbených</string>
   <string name="cgeo_shortcut">c:Geo odkaz</string>
   <string name="create_shortcut">Vytvoriť odkaz</string>
   <string name="send">Odoslať</string>

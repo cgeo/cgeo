@@ -79,9 +79,7 @@ public class CgeoTestsActivity extends Activity {
                     Thread.sleep(50);
                     publishProgress(mReader.readLine());
                 } while (System.currentTimeMillis() < timeout);
-            } catch (InterruptedException e) {
-                publishProgress("ERROR: " + e);
-            } catch (IOException e) {
+            } catch (InterruptedException | IOException e) {
                 publishProgress("ERROR: " + e);
             } finally {
                 publishProgress("END");

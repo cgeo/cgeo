@@ -74,7 +74,7 @@
   <string name="log_tb_visit">Apsilankė</string>
   <string name="log_tb_drop">Paliktas</string>
   <string name="log_tb_changeall">Keisti visus</string>
-  <string name="log_save">Išsaugoti</string>
+  <string name="log_save">Išsaugoti neprisijungus</string>
   <string name="log_saving">Siunčiamas įrašas…</string>
   <string name="log_saving_and_uploading">Siunčiamas įrašas ir įkeliama nuotrauka…</string>
   <string name="log_clear">Išvalyti</string>
@@ -167,15 +167,13 @@
   <string name="err_point_unknown_position">c:geo neranda Jūsų buvimo vietos.</string>
   <string name="err_point_no_position_given_title">Reikalinga informacija</string>
   <string name="err_point_no_position_given">Užpildykite bent platumą ir ilgumą arba atstumą ir azimutą. Taip pat galite užpildyt ir visus keturis laukelius.</string>
-  <string name="err_point_curr_position_unavailable">c:geo dar negavo vietos koordinačių. Prašome palaukti…</string>
   <string name="err_point_bear_and_dist_title">Reikalinga pagalba?</string>
   <string name="err_point_bear_and_dist">Užpildykite azimutą ir atstumą. Azimutas tai nuo 0 iki 360 laipsnių kampas nuo šiaurės. Atstumas nereikalauja matavimo vienetų.</string>
   <string name="err_log_load_data">c:geo negali įkelti duomenų reikalingų apsilankymui įrašyti.</string>
   <string name="err_log_load_data_again">c:geo negali įkelti duomenų reikalingų apsilankymui įrašyti. Bando dar kartą.</string>
   <string name="err_log_load_data_still">c:geo dar įkelia duomenis reikalingus apsilankymui įrašyti. Prašome palaukti šiek tiek ilgiau.</string>
-  <string name="err_log_post_failed">Atrodo, kad jūsų įrašas nebuvo paskelbtas. Prašome tai patikrinti Geocaching.com.</string>
-  <string name="err_log_post_failed_ec">Atrodo, kad jūsų įrašas nebuvo paskelbtas. Prašome tai patikrinti Extremcaching.com.</string>
-  <string name="err_logimage_post_failed">Atrodo, kad jūsų įrašo nuotrauka nebuvo įkelta. Prašome tai patikrinti Geocaching.com.</string>
+  <string name="err_log_post_failed">Atrodo, kad jūsų įrašas nebuvo paskelbtas. Prašome patikrinti jį slėptuvės svetainėje.</string>
+  <string name="err_logimage_post_failed">Atrodo, kad jūsų įrašo nuotrauka nebuvo paskelbta. Prašome patikrinti ją slėptuvės svetainėje.</string>
   <string name="err_search_address_forgot">c:geo pamiršo adresą kurio bandėte ieškoti.</string>
   <string name="err_parse_lat">c:geo nesupranta įvestos platumos.</string>
   <string name="err_parse_lon">c:geo nesupranta įvestos ilgumos.</string>
@@ -212,6 +210,7 @@
   <string name="loc_net">Tinklas</string>
   <string name="loc_fused">Sujungta</string>
   <string name="loc_low_power">Energijos taupymas</string>
+  <string name="loc_home">Namų koordinatės</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Pal.</string>
   <string name="loc_trying">Bandoma nustatyti</string>
@@ -367,6 +366,8 @@
   <string name="settings_activate_oc_uk">Aktyvuoti</string>
   <string name="init_oc_uk_description">Leiskite c:geo prisijungti prie opencaching.org.uk tam, kad galėtumėt ieškoti slėptuvių ir pasiekti/filtruoti rastas slėptuves.</string>
   <string name="init_gcvote">GCvote.com</string>
+  <string name="init_gcvote_password_description">Kad būtų galima reitinguoti slėptuvę, sekite instrukciją GCVote.com svetainėje ir čia  įveskite GCVote slaptažodį.</string>
+  <string name="err_gcvote_send_rating">Klaida siunčiant reitingą, patikrinkite GCVote slaptažodį parametruose arba jį ištrinkite.</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktyvuoti</string>
   <string name="init_username">Vartotojo vardas</string>
@@ -634,7 +635,7 @@
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Atidaryti naršyklėje</string>
   <string name="cache_menu_visit">Registruoti</string>
-  <string name="cache_menu_visit_offline">Registruoti neprisijungus</string>
+  <string name="cache_menu_visit_offline">Vienu paspaudimu žurnalo įrašo išsaugojimas</string>
   <string name="cache_menu_spoilers">Užuominų nuotraukos</string>
   <string name="cache_menu_around">Slėptuvės aplink</string>
   <string name="cache_menu_event">Įtraukti į kalendorių</string>

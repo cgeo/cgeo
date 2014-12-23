@@ -8,12 +8,12 @@ import cgeo.geocaching.Geocache;
 /**
  * sorts caches by popularity ratio (favorites per find in %).
  */
-public class PopularityRatioComparator extends AbstractCacheComparator {
+class PopularityRatioComparator extends AbstractCacheComparator {
 
     @Override
     protected int compareCaches(final Geocache cache1, final Geocache cache2) {
-        int finds1 = cache1.getFindsCount();
-        int finds2 = cache2.getFindsCount();
+        final int finds1 = cache1.getFindsCount();
+        final int finds2 = cache2.getFindsCount();
 
         float ratio1 = 0.0f;
         if (finds1 != 0) {

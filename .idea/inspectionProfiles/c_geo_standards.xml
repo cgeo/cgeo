@@ -2,6 +2,10 @@
   <profile version="1.0" is_locked="false">
     <option name="myName" value="c:geo standards" />
     <option name="myLocal" value="false" />
+    <inspection_tool class="AbstractMethodOverridesAbstractMethod" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoreJavaDoc" value="true" />
+      <option name="ignoreAnnotations" value="true" />
+    </inspection_tool>
     <inspection_tool class="AccessStaticViaInstance" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="AndroidLintBackButton" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="AndroidLintContentDescription" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -14,6 +18,7 @@
     <inspection_tool class="AndroidLintTooManyViews" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="AndroidLintUnusedResources" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="AndroidLintUsesMinSdkAttributes" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="AndroidLintWrongViewCast" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="Annotator" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="AntMissingPropertiesFileInspection" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="AntResolveInspection" enabled="false" level="ERROR" enabled_by_default="false" />
@@ -33,7 +38,12 @@
     </inspection_tool>
     <inspection_tool class="BusyWait" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="CStyleArrayDeclaration" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="CanBeFinal" enabled="false" level="WARNING" enabled_by_default="false">
+    <inspection_tool class="CanBeFinal" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Changed Files" level="ERROR" enabled="true">
+        <option name="REPORT_CLASSES" value="false" />
+        <option name="REPORT_METHODS" value="false" />
+        <option name="REPORT_FIELDS" value="true" />
+      </scope>
       <option name="REPORT_CLASSES" value="false" />
       <option name="REPORT_METHODS" value="false" />
       <option name="REPORT_FIELDS" value="true" />
@@ -63,11 +73,11 @@
       <option name="reportWhenNoStatementFollow" value="false" />
     </inspection_tool>
     <inspection_tool class="ConstantAssertCondition" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="ConstantConditions" enabled="true" level="WARNING" enabled_by_default="true">
+    <inspection_tool class="ConstantConditions" enabled="true" level="ERROR" enabled_by_default="true">
       <option name="SUGGEST_NULLABLE_ANNOTATIONS" value="false" />
       <option name="DONT_REPORT_TRUE_ASSERT_STATEMENTS" value="true" />
     </inspection_tool>
-    <inspection_tool class="ConstantNamingConvention" enabled="false" level="WEAK WARNING" enabled_by_default="false">
+    <inspection_tool class="ConstantNamingConvention" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="onlyCheckImmutables" value="false" />
       <option name="m_regex" value="[A-Z][A-Z_\d]*" />
       <option name="m_minLength" value="3" />
@@ -111,7 +121,13 @@
     <inspection_tool class="FieldHidesSuperclassField" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="m_ignoreInvisibleFields" value="true" />
     </inspection_tool>
-    <inspection_tool class="FieldMayBeStatic" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="FieldMayBeFinal" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Changed Files" level="ERROR" enabled="true" />
+    </inspection_tool>
+    <inspection_tool class="FieldMayBeStatic" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="FinalPrivateMethod" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Changed Files" level="ERROR" enabled="true" />
+    </inspection_tool>
     <inspection_tool class="FinalStaticMethod" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ForLoopReplaceableByWhile" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="m_ignoreLoopsWithoutConditions" value="false" />
@@ -119,6 +135,9 @@
     <inspection_tool class="ForLoopThatDoesntUseLoopVariable" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ForLoopWithMissingComponent" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoreCollectionLoops" value="false" />
+    </inspection_tool>
+    <inspection_tool class="GrMethodMayBeStatic" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Changed Files" level="ERROR" enabled="true" />
     </inspection_tool>
     <inspection_tool class="GroovyDoubleCheckedLocking" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoreOnVolatileVariables" value="true" />
@@ -153,12 +172,12 @@
     </inspection_tool>
     <inspection_tool class="InfiniteLoopStatement" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="InnerClassMayBeStatic" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="InstanceMethodNamingConvention" enabled="true" level="WARNING" enabled_by_default="true">
+    <inspection_tool class="InstanceMethodNamingConvention" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="m_regex" value="[a-z][A-Za-z\d]*" />
       <option name="m_minLength" value="3" />
-      <option name="m_maxLength" value="32" />
+      <option name="m_maxLength" value="64" />
     </inspection_tool>
-    <inspection_tool class="InstanceVariableNamingConvention" enabled="true" level="WARNING" enabled_by_default="true">
+    <inspection_tool class="InstanceVariableNamingConvention" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="m_regex" value="[a-z][A-Za-z\d]*" />
       <option name="m_minLength" value="2" />
       <option name="m_maxLength" value="30" />
@@ -168,56 +187,32 @@
     <inspection_tool class="InstanceofThis" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="InstantiationOfUtilityClass" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="IntLiteralMayBeLongLiteral" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="InterfaceNamingConvention" enabled="true" level="WARNING" enabled_by_default="true">
+    <inspection_tool class="InterfaceNamingConvention" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="m_regex" value="[A-Z][A-Za-z\d]*" />
       <option name="m_minLength" value="3" />
       <option name="m_maxLength" value="64" />
     </inspection_tool>
     <inspection_tool class="IteratorHasNextCallsIteratorNext" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="IteratorNextDoesNotThrowNoSuchElementException" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="JavaDoc" enabled="false" level="WARNING" enabled_by_default="false">
-      <option name="TOP_LEVEL_CLASS_OPTIONS">
-        <value>
-          <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
-          <option name="REQUIRED_TAGS" value="" />
-        </value>
-      </option>
-      <option name="INNER_CLASS_OPTIONS">
-        <value>
-          <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
-          <option name="REQUIRED_TAGS" value="" />
-        </value>
-      </option>
-      <option name="METHOD_OPTIONS">
-        <value>
-          <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
-          <option name="REQUIRED_TAGS" value="@return@param@throws or @exception" />
-        </value>
-      </option>
-      <option name="FIELD_OPTIONS">
-        <value>
-          <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
-          <option name="REQUIRED_TAGS" value="" />
-        </value>
-      </option>
-      <option name="IGNORE_DEPRECATED" value="false" />
-      <option name="IGNORE_JAVADOC_PERIOD" value="true" />
-      <option name="IGNORE_DUPLICATED_THROWS" value="false" />
-      <option name="IGNORE_POINT_TO_ITSELF" value="false" />
-      <option name="myAdditionalJavadocTags" value="" />
-    </inspection_tool>
-    <inspection_tool class="JavadocReference" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="KeySetIterationMayUseEntrySet" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="LengthOneStringInIndexOf" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ListIndexOfReplaceableByContains" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ListenerMayUseAdapter" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="checkForEmptyMethods" value="true" />
     </inspection_tool>
+    <inspection_tool class="LocalCanBeFinal" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Changed Files" level="ERROR" enabled="true">
+        <option name="REPORT_VARIABLES" value="true" />
+        <option name="REPORT_PARAMETERS" value="true" />
+      </scope>
+      <option name="REPORT_VARIABLES" value="true" />
+      <option name="REPORT_PARAMETERS" value="true" />
+    </inspection_tool>
     <inspection_tool class="LocalVariableHidingMemberVariable" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="m_ignoreInvisibleFields" value="true" />
       <option name="m_ignoreStaticMethods" value="true" />
     </inspection_tool>
-    <inspection_tool class="LocalVariableNamingConvention" enabled="true" level="WARNING" enabled_by_default="true">
+    <inspection_tool class="LocalVariableNamingConvention" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="m_ignoreForLoopParameters" value="true" />
       <option name="m_ignoreCatchParameters" value="true" />
       <option name="m_regex" value="[a-z][A-Za-z\d]*" />
@@ -260,6 +255,7 @@
         <value />
       </option>
     </inspection_tool>
+    <inspection_tool class="MissingDeprecatedAnnotation" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="MissingOverrideAnnotation" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoreObjectMethods" value="true" />
       <option name="ignoreAnonymousClassMethods" value="false" />
@@ -287,7 +283,9 @@
       <option name="m_limit" value="30" />
     </inspection_tool>
     <inspection_tool class="NonExceptionNameEndsWithException" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="NonFinalFieldInEnum" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="NonFinalFieldInEnum" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Changed Files" level="ERROR" enabled="true" />
+    </inspection_tool>
     <inspection_tool class="NonShortCircuitBoolean" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="NonSynchronizedMethodOverridesSynchronizedMethod" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="NotifyCalledOnCondition" enabled="true" level="WARNING" enabled_by_default="true" />
@@ -316,6 +314,9 @@
       <option name="m_minLength" value="2" />
       <option name="m_maxLength" value="16" />
     </inspection_tool>
+    <inspection_tool class="ParameterCanBeLocal" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Changed Files" level="ERROR" enabled="true" />
+    </inspection_tool>
     <inspection_tool class="ParameterHidingMemberVariable" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="m_ignoreInvisibleFields" value="true" />
       <option name="m_ignoreStaticMethodParametersHidingInstanceFields" value="true" />
@@ -327,9 +328,9 @@
       <option name="m_ignoreSingleCharacterNames" value="false" />
       <option name="m_ignoreOverridesOfLibraryMethods" value="false" />
     </inspection_tool>
-    <inspection_tool class="ParameterNamingConvention" enabled="true" level="WARNING" enabled_by_default="true">
+    <inspection_tool class="ParameterNamingConvention" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="m_regex" value="[a-z][A-Za-z\d]*" />
-      <option name="m_minLength" value="2" />
+      <option name="m_minLength" value="1" />
       <option name="m_maxLength" value="30" />
     </inspection_tool>
     <inspection_tool class="PointlessArithmeticExpression" enabled="false" level="WARNING" enabled_by_default="false">
@@ -337,7 +338,9 @@
     </inspection_tool>
     <inspection_tool class="PointlessIndexOfComparison" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="PointlessNullCheck" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="ProtectedMemberInFinalClass" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="ProtectedMemberInFinalClass" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="Changed Files" level="ERROR" enabled="true" />
+    </inspection_tool>
     <inspection_tool class="PublicFieldAccessedInSynchronizedContext" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="QuestionableName" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="nameString" value="aa,abc,bad,bar,bar2,baz,baz1,baz2,baz3,bb,blah,bogus,bool,cc,dd,defau1t,dummy,dummy2,ee,fa1se,ff,foo,foo1,foo2,foo3,foobar,four,fred,fred1,fred2,gg,hh,hello,hello1,hello2,hello3,ii,nu11,one,silly,silly2,string,two,that,then,three,whi1e,var" />
@@ -345,6 +348,7 @@
     <inspection_tool class="RandomDoubleForRandomInteger" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="RedundantArrayCreation" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="RedundantStringFormatCall" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="RedundantSuppression" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="ReplaceAllDot" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ReplaceAssignmentWithOperatorAssignment" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoreLazyOperators" value="true" />
@@ -353,6 +357,7 @@
     <inspection_tool class="RequiredAttributes" enabled="false" level="WARNING" enabled_by_default="false">
       <option name="myAdditionalRequiredHtmlAttributes" value="" />
     </inspection_tool>
+    <inspection_tool class="ResourceType" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ReturnFromFinallyBlock" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="ReturnNull" enabled="false" level="WEAK WARNING" enabled_by_default="false">
       <option name="m_reportObjectMethods" value="true" />
@@ -449,6 +454,13 @@
     <inspection_tool class="UnnecessaryCallToStringValueOf" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="UnnecessaryConstructor" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="UnnecessaryEnumModifier" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="UnnecessaryFullyQualifiedName" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="m_ignoreJavadoc" value="false" />
+    </inspection_tool>
+    <inspection_tool class="UnnecessaryInheritDoc" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="UnnecessaryJavaDocLink" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoreInlineLinkToSuper" value="false" />
+    </inspection_tool>
     <inspection_tool class="UnnecessaryModuleDependencyInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="UnnecessaryQualifierForThis" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="UnnecessarySemicolon" enabled="false" level="WARNING" enabled_by_default="false" />

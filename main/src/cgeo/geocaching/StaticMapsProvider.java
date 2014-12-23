@@ -137,11 +137,6 @@ public final class StaticMapsProvider {
 
     /**
      * Deletes and download all Waypoints static maps.
-     *
-     * @param cache
-     *            The cache instance
-     * @param edge
-     *            The boundings
      */
     private static Observable<String> refreshAllWpStaticMaps(final Geocache cache, final int width, final int height) {
         LocalStorage.deleteFilesWithPrefix(cache.getGeocode(), MAP_FILENAME_PREFIX + WAYPOINT_PREFIX);

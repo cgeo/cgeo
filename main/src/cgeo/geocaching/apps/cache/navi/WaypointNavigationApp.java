@@ -8,7 +8,7 @@ import android.app.Activity;
  * interface for navigation to a waypoint
  *
  */
-public interface WaypointNavigationApp {
+interface WaypointNavigationApp {
     void navigate(final Activity activity, final Waypoint waypoint);
 
     boolean isEnabled(final Waypoint waypoint);

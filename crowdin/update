@@ -18,7 +18,7 @@ update_file() {
         "http://api.crowdin.net/api/project/cgeo/update-file?key=${CROWDIN_APIKEY}"
 }
 
-. "`dirname $0`/globals"
+. "$(dirname $0)/globals"
 
 echo You must be on an up-to-date master branch to execute this script.
 echo You have 5 seconds to abort with ctrl-c if this is not the case.

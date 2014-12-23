@@ -86,7 +86,7 @@
     <string name="log_tb_visit">Visited</string>
     <string name="log_tb_drop">Dropped Off</string>
     <string name="log_tb_changeall">Change All</string>
-    <string name="log_save">Save</string>
+    <string name="log_save">Save offline</string>
     <string name="log_saving">Sending log…</string>
     <string name="log_saving_and_uploading">Sending log and uploading image…</string>
     <string name="log_clear">Clear</string>
@@ -142,6 +142,7 @@
     <string name="err_login">No Login information stored</string>
     <string name="err_login_failed_toast">c:geo can\'t log in. c:geo works offline with Stored caches. Check Login settings or enable your internet connection.</string>
     <string name="err_unknown">Unknown error</string>
+    <string name="err_unknown_address">c:geo was unable to map this address to an existing location</string>
     <string name="err_comm">Unknown communication error</string>
     <string name="err_missing_auth">No username and/or password set.</string>
     <string name="err_wrong">Login information incorrect</string>
@@ -184,15 +185,13 @@
     <string name="err_point_unknown_position">c:geo can\'t recognize where you are.</string>
     <string name="err_point_no_position_given_title">Info required</string>
     <string name="err_point_no_position_given">Fill at least latitude and longitude or distance and bearing. You can also fill all four fields.</string>
-    <string name="err_point_curr_position_unavailable">c:geo still doesn\'t have current coordinates. Please, wait a while…</string>
     <string name="err_point_bear_and_dist_title">Need some help?</string>
     <string name="err_point_bear_and_dist">Fill both bearing and distance. Bearing is angle 0 to 360 degrees relative to north. Distance doesn\'t require units.</string>
     <string name="err_log_load_data">c:geo can\'t load data required to log visit.</string>
     <string name="err_log_load_data_again">c:geo can\'t load data required to log visit. Trying again.</string>
     <string name="err_log_load_data_still">c:geo is still loading data required to post log. Please wait a little while longer.</string>
-    <string name="err_log_post_failed">It seems that your log was not posted. Please check it on Geocaching.com.</string>
-    <string name="err_log_post_failed_ec">It seems that your log was not posted. Please check it on Extremcaching.com.</string>
-    <string name="err_logimage_post_failed">It seems that your log image was not uploaded. Please check it on Geocaching.com.</string>
+    <string name="err_log_post_failed">It seems that your log was not posted. Please check it on the cache originating website.</string>
+    <string name="err_logimage_post_failed">It seems that your log image was not uploaded. Please check it on the cache originating website.</string>
     <string name="err_search_address_forgot">c:geo forgot the address you tried to find.</string>
     <string name="err_parse_lat">c:geo can\'t parse latitude.</string>
     <string name="err_parse_lon">c:geo can\'t parse longitude.</string>
@@ -231,6 +230,7 @@
     <string name="loc_net">Network</string>
     <string name="loc_fused">Fused</string>
     <string name="loc_low_power">Low-power</string>
+    <string name="loc_home">Home coordinates</string>
     <string name="loc_gps">GPS</string>
     <string name="loc_sat">Sat</string>
     <string name="loc_trying">Trying to Locate</string>
@@ -416,6 +416,8 @@
     <string name="settings_activate_oc_uk">Activate</string>
     <string name="init_oc_uk_description">Authorize c:geo with opencaching.org.uk to search for caches and access/filter your found caches.</string>
     <string name="init_gcvote">GCvote.com</string>
+    <string name="init_gcvote_password_description">To be able to rate a cache, you need to follow the instructions at GCVote.com and enter your GCVote password here.</string>
+    <string name="err_gcvote_send_rating">Error while sending rating, check GCVote password in settings or empty it.</string>
     <string name="init_twitter">Twitter</string>
     <string name="settings_activate_twitter">Activate</string>
     <string name="init_username">Username</string>

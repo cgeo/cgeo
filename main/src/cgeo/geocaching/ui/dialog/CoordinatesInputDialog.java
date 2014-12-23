@@ -9,7 +9,7 @@ import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Geopoint.ParseException;
 import cgeo.geocaching.location.GeopointFormatter;
-import cgeo.geocaching.sensors.IGeoData;
+import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.Settings.CoordInputFormatEnum;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -56,16 +56,14 @@ public class CoordinatesInputDialog extends DialogFragment {
     private static final String CACHECOORDS_ARG = "CACHECOORDS";
 
 
-    public static CoordinatesInputDialog getInstance(final Geocache cache, final Geopoint gp, final IGeoData geo) {
+    public static CoordinatesInputDialog getInstance(final Geocache cache, final Geopoint gp, final GeoData geo) {
 
         final Bundle args = new Bundle();
 
         if (gp != null) {
             args.putParcelable(GEOPOINT_ARG, gp);
-        } else if (geo != null && geo.getCoords() != null) {
-            args.putParcelable(GEOPOINT_ARG, geo.getCoords());
         } else {
-            args.putParcelable(GEOPOINT_ARG, Geopoint.ZERO);
+            args.putParcelable(GEOPOINT_ARG, geo != null ? geo.getCoords() : Geopoint.ZERO);
         }
 
         if (geo !=null) {
@@ -176,13 +174,10 @@ public class CoordinatesInputDialog extends DialogFragment {
             buttonCache.setVisibility(View.GONE);
         }
 
-        final Button buttonClipboard = ButterKnife.findById(v, R.id.clipboard);
-        try {
-            @SuppressWarnings("unused")
-            final Geopoint geopoint = new Geopoint(StringUtils.defaultString(ClipboardUtils.getText()));
+        if (hasClipboardCoordinates()) {
+            final Button buttonClipboard = ButterKnife.findById(v, R.id.clipboard);
             buttonClipboard.setOnClickListener(new ClipboardListener());
             buttonClipboard.setVisibility(View.VISIBLE);
-        } catch (final ParseException e) {
         }
 
         final Button buttonDone = ButterKnife.findById(v, R.id.done);
@@ -191,6 +186,15 @@ public class CoordinatesInputDialog extends DialogFragment {
         return v;
     }
 
+    @SuppressWarnings("unused")
+    private static boolean hasClipboardCoordinates() {
+        try {
+            new Geopoint(StringUtils.defaultString(ClipboardUtils.getText()));
+        } catch (final ParseException ignored) {
+            return false;
+        }
+        return true;
+    }
 
 
     private void updateGUI() {
@@ -534,7 +538,7 @@ public class CoordinatesInputDialog extends DialogFragment {
             try {
                 gp = new Geopoint(StringUtils.defaultString(ClipboardUtils.getText()));
                 updateGUI();
-            } catch (final ParseException e) {
+            } catch (final ParseException ignored) {
             }
         }
     }

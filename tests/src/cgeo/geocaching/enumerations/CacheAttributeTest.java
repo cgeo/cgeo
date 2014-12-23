@@ -2,6 +2,8 @@ package cgeo.geocaching.enumerations;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.test.AndroidTestCase;
 
 public class CacheAttributeTest extends AndroidTestCase {
@@ -16,8 +18,7 @@ public class CacheAttributeTest extends AndroidTestCase {
     public static void testIds() {
         for (CacheAttribute attribute : CacheAttribute.values()) {
             if (attribute != CacheAttribute.UNKNOWN) {
-                assertThat(attribute.rawName != null).isTrue();
-                assertThat(attribute.rawName.length() > 0).isTrue();
+                assertThat(StringUtils.isNotEmpty(attribute.rawName)).isTrue();
                 assertThat(attribute.drawableId != 0).isTrue();
                 assertThat(attribute.stringIdYes != 0).isTrue();
                 assertThat(attribute.stringIdNo != 0).isTrue();
@@ -43,9 +44,8 @@ public class CacheAttributeTest extends AndroidTestCase {
     }
 
     public static void testIsEnabled() {
-        final CacheAttribute attribute = CacheAttribute.HIKING;
-        final String hiking_yes = attribute.getAttributeName(true);
-        final String hiking_no = attribute.getAttributeName(false);
+        final String hiking_yes = "hiking_yes";
+        final String hiking_no = "hiking_no";
         assertThat(CacheAttribute.isEnabled(hiking_yes)).isTrue();
         assertThat(CacheAttribute.isEnabled(hiking_no)).isFalse();
     }

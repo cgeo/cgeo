@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- system definitions -->
 
@@ -338,4 +338,13 @@
         <item name="android:src">@drawable/mark_green</item>
     </style>
 
+    <style name="cacheRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/star_rating</item>
+        <item name="android:minHeight">12dip</item>
+        <item name="android:maxHeight">22dip</item>
+        <item name="android:max">5</item>
+        <item name="android:stepSize">0.5</item>
+        <item name="android:isIndicator">true</item>
+    </style>
+    
 </resources>

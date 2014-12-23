@@ -17,7 +17,7 @@
   <string name="letterbox">Letterbox hybrid</string>
   <string name="event">Event cache</string>
   <string name="mega">Mega-event cache</string>
-  <string name="giga">Giga-Event Cache</string>
+  <string name="giga">Giga-Event cache</string>
   <string name="earth">Earthcache</string>
   <string name="cito">Cache in trash out event</string>
   <string name="webcam">Webcam cache</string>
@@ -74,7 +74,7 @@
   <string name="log_tb_visit">Besök</string>
   <string name="log_tb_drop">Lämna här</string>
   <string name="log_tb_changeall">Ändra alla</string>
-  <string name="log_save">Spara</string>
+  <string name="log_save">Spara offline</string>
   <string name="log_saving">Sparar logg…</string>
   <string name="log_saving_and_uploading">Sparar logg och laddar upp bild…</string>
   <string name="log_clear">Rensa</string>
@@ -167,15 +167,13 @@
   <string name="err_point_unknown_position">Tyvärr kan c:geo inte bestämma din position.</string>
   <string name="err_point_no_position_given_title">Mer info krävs</string>
   <string name="err_point_no_position_given">Ange minst latitud och longitud eller avstånd och riktning. Du kan också ange alla fyra.</string>
-  <string name="err_point_curr_position_unavailable">c:geo har ännu inte nuvarande koordinater. Vänta en stund…</string>
   <string name="err_point_bear_and_dist_title">Tips!</string>
   <string name="err_point_bear_and_dist">Ange både riktning och avstånd. Rikting är en vinkel mellan 0 och 360 grader relativt norr. Avstånd anges med eller utan enhet.</string>
   <string name="err_log_load_data">Tyvärr kan c:geo inte ladda information som krävs för att logga ditt besök.</string>
   <string name="err_log_load_data_again">Tyvärr kan c:geo inte ladda information som krävs för att logga ditt besök. Försöker igen.</string>
   <string name="err_log_load_data_still">c:geo laddar fortfarande data för att kunna posta loggen. Vänligen vänta en stund till.</string>
-  <string name="err_log_post_failed">Tyvärr misslyckades c:geo att posta loggen.</string>
-  <string name="err_log_post_failed_ec">Det verkar som att din logg inte kunde laddas upp. Kontrollera loggen på Extremcaching.com.</string>
-  <string name="err_logimage_post_failed">Det verkar som om din bild till loggen inte kunde laddas upp. Vänligen kontrollera den på Geocaching.com.</string>
+  <string name="err_log_post_failed">Det verkar som att din logg inte kunde postas. Kontrollera loggen på cachens ursprungliga hemsida.</string>
+  <string name="err_logimage_post_failed">Det verkar som att din logg bild inte kunde laddas upp. Kontrollera bilden på cachens hemsida.</string>
   <string name="err_search_address_forgot">Tyvärr glömde c:geo adressen du sökte efter.</string>
   <string name="err_parse_lat">Tyvärr kan c:geo inte tolka latitud.</string>
   <string name="err_parse_lon">Tyvärr kan c:geo inte tolka longitud.</string>
@@ -212,6 +210,7 @@
   <string name="loc_net">Nätverk</string>
   <string name="loc_fused">Kombinerad</string>
   <string name="loc_low_power">Strömspar</string>
+  <string name="loc_home">Hemkoordinater</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Försöker hitta plats</string>
@@ -376,6 +375,8 @@
   <string name="settings_activate_oc_uk">Aktivera</string>
   <string name="init_oc_uk_description">Använd c:geo med opencaching.org.uk för att söka efter cacher samt för att filtrera dina funna cacher.</string>
   <string name="init_gcvote">GCvote.com</string>
+  <string name="init_gcvote_password_description">För att kunna betygsätta en cache måste du följa instruktionerna på GCVote.com och ange ditt lösenord till GCVote här.</string>
+  <string name="err_gcvote_send_rating">Fel uppstod när betyg skulle sparas, kontrollera eller ta bort lösenordet för GCVote i inställningarna.</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivera</string>
   <string name="init_username">Användare</string>
@@ -647,7 +648,7 @@
   <string name="cache_menu_streetview">Gatuvy</string>
   <string name="cache_menu_browser">Öppna i webbläsare</string>
   <string name="cache_menu_visit">Logga besök</string>
-  <string name="cache_menu_visit_offline">Logga besök offline</string>
+  <string name="cache_menu_visit_offline">Snabblogga offline</string>
   <string name="cache_menu_spoilers">Spoiler bilder</string>
   <string name="cache_menu_around">Cacher i närheten</string>
   <string name="cache_menu_event">Lägg till i kalender</string>

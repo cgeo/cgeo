@@ -8,6 +8,6 @@ import android.app.Activity;
  * interface for navigation to a coordinate. This one cannot be enabled/disabled.
  *
  */
-public interface GeopointNavigationApp {
+interface GeopointNavigationApp {
     void navigate(final Activity activity, final Geopoint coords);
 }

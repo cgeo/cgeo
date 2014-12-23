@@ -9,10 +9,10 @@ import java.util.Date;
 /**
  * compares caches by date
  */
-public class DateComparator extends AbstractCacheComparator {
+class DateComparator extends AbstractCacheComparator {
 
     @Override
-    protected int compareCaches(Geocache cache1, Geocache cache2) {
+    protected int compareCaches(final Geocache cache1, final Geocache cache2) {
         final Date date1 = cache1.getHiddenDate();
         final Date date2 = cache2.getHiddenDate();
         if (date1 != null && date2 != null) {

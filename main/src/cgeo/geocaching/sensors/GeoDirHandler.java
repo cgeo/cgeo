@@ -14,10 +14,12 @@ import rx.functions.Func1;
 import rx.functions.Func2;
 import rx.subscriptions.CompositeSubscription;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * GeoData and Direction handler.
  * <p>
- * To use this class, override {@link #updateGeoDir(IGeoData, float)}. You need to start the handler using
+ * To use this class, override {@link #updateGeoDir(cgeo.geocaching.sensors.GeoData, float)}. You need to start the handler using
  * {@link #start(int)}. A good place to do so might be the {@code onResume} method of the Activity. Stop the Handler
  * accordingly in {@code onPause}.
  *
@@ -40,7 +42,7 @@ public abstract class GeoDirHandler {
      *
      * @param geoData the new geographical data
      */
-    public void updateGeoData(final IGeoData geoData) {
+    public void updateGeoData(final GeoData geoData) {
     }
 
     /**
@@ -62,42 +64,60 @@ public abstract class GeoDirHandler {
      * If the device goes fast enough, or if the compass use is not enabled in the settings,
      * the GPS direction information will be used instead of the compass one.
      */
-    public void updateGeoDir(final IGeoData geoData, final float direction) {
+    public void updateGeoDir(final GeoData geoData, final float direction) {
     }
 
     private static Observable<Float> fixedDirection() {
         return app.directionObservable().map(new Func1<Float, Float>() {
             @Override
             public Float call(final Float direction) {
-                final IGeoData geoData = app.currentGeo();
+                final GeoData geoData = app.currentGeo();
                 return fixDirection(geoData, direction);
             }
         });
 
     }
 
-    private static float fixDirection(final IGeoData geoData, final float direction) {
+    private static float fixDirection(final GeoData geoData, final float direction) {
         final boolean useGPSBearing = !Settings.isUseCompass() || geoData.getSpeed() > 5;
         return useGPSBearing ? AngleUtils.reverseDirectionNow(geoData.getBearing()) : direction;
     }
 
+    private static <T> Observable<T> throttleIfNeeded(final Observable<T> observable, final long windowDuration, final TimeUnit unit) {
+        return windowDuration > 0 ? observable.throttleFirst(windowDuration, unit) : observable;
+    }
+
     /**
-     * Register the current GeoDirHandler for GeoData and direction information (if the
-     * preferences allow it).
+     * Register the current GeoDirHandler for GeoData and direction information (if the preferences allow it).
+     *
+     * @param flags a combination of UPDATE_GEODATA, UPDATE_DIRECTION, UPDATE_GEODIR, and LOW_POWER
+     * @return a subscription which can be used to stop the handler
      */
     public Subscription start(final int flags) {
+        return start(flags, 0, TimeUnit.SECONDS);
+    }
+
+    /**
+     * Register the current GeoDirHandler for GeoData and direction information (if the preferences allow it).
+     *
+     * @param flags a combination of UPDATE_GEODATA, UPDATE_DIRECTION, UPDATE_GEODIR, and LOW_POWER
+     * @param windowDuration if greater than 0, the size of the window duration during which no new value will be presented
+     * @param unit the unit for the windowDuration
+     * @return a subscription which can be used to stop the handler
+     */
+    public Subscription start(final int flags, final long windowDuration, final TimeUnit unit) {
         final CompositeSubscription subscriptions = new CompositeSubscription();
         final boolean lowPower = (flags & LOW_POWER) != 0;
         if ((flags & UPDATE_GEODATA) != 0) {
-            subscriptions.add(app.geoDataObservable(lowPower).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<IGeoData>() {
+            subscriptions.add(throttleIfNeeded(app.geoDataObservable(lowPower), windowDuration, unit).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<GeoData>() {
                 @Override
-                public void call(final IGeoData geoData) {
+                public void call(final GeoData geoData) {
                     updateGeoData(geoData);
                 }
             }));
         }
         if ((flags & UPDATE_DIRECTION) != 0) {
-            subscriptions.add(fixedDirection().observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Float>() {
+            subscriptions.add(throttleIfNeeded(fixedDirection(), windowDuration, unit).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Float>() {
                 @Override
                 public void call(final Float direction) {
                     updateDirection(direction);
@@ -105,14 +125,15 @@ public abstract class GeoDirHandler {
             }));
         }
         if ((flags & UPDATE_GEODIR) != 0) {
-            subscriptions.add(Observable.combineLatest(app.geoDataObservable(lowPower), app.directionObservable(), new Func2<IGeoData, Float, ImmutablePair<IGeoData, Float>>() {
+            // combineOnLatest() does not implement backpressure handling, so we need to explicitely use a backpressure operator there.
+            subscriptions.add(throttleIfNeeded(Observable.combineLatest(app.geoDataObservable(lowPower), app.directionObservable(), new Func2<GeoData, Float, ImmutablePair<GeoData, Float>>() {
                 @Override
-                public ImmutablePair<IGeoData, Float> call(final IGeoData geoData, final Float direction) {
+                public ImmutablePair<GeoData, Float> call(final GeoData geoData, final Float direction) {
                     return ImmutablePair.of(geoData, fixDirection(geoData, direction));
                 }
-            }).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<ImmutablePair<IGeoData, Float>>() {
+            }), windowDuration, unit).onBackpressureDrop().observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<ImmutablePair<GeoData, Float>>() {
                 @Override
-                public void call(final ImmutablePair<IGeoData, Float> geoDir) {
+                public void call(final ImmutablePair<GeoData, Float> geoDir) {
                     updateGeoDir(geoDir.left, geoDir.right);
                 }
             }));

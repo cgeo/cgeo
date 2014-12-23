@@ -14,8 +14,8 @@
   <string name="multi">Multi keš</string>
   <string name="mystery">Mystery keš</string>
   <string name="letterbox">Dopisní schránka</string>
-  <string name="event">Keš události</string>
-  <string name="mega">Keš Mega-události</string>
+  <string name="event">Událost</string>
+  <string name="mega">Mega-událost</string>
   <string name="giga">Giga event</string>
   <string name="earth">Earthcache</string>
   <string name="cito">Událost Cache In Trash Out</string>
@@ -73,7 +73,7 @@
   <string name="log_tb_visit">Navštíveno</string>
   <string name="log_tb_drop">Nechat zde</string>
   <string name="log_tb_changeall">Změnit vše</string>
-  <string name="log_save">Uložit</string>
+  <string name="log_save">Uložit offline</string>
   <string name="log_saving">Odesílání Logu…</string>
   <string name="log_saving_and_uploading">Odesílání Logu a nahrávání obrázku…</string>
   <string name="log_clear">Vyčistit</string>
@@ -166,15 +166,11 @@
   <string name="err_point_unknown_position">c:geo nedokáže zjistit tvou polohu.</string>
   <string name="err_point_no_position_given_title">Popis je vyžadován</string>
   <string name="err_point_no_position_given">Vyplň alespoň zeměpisnou šířku a délku nebo vzdálenost a směr. Můžeš také vyplnit všechna čtyři pole.</string>
-  <string name="err_point_curr_position_unavailable">c:geo stále nemá aktuální souřadnice. Prosím, chvilku počkej…</string>
   <string name="err_point_bear_and_dist_title">Potřebuješ poradit?</string>
   <string name="err_point_bear_and_dist">Vyplň směr i vzdálenost. Směr je úhel 0 až 360 stupňů vzhledem k severu. Vzdálenost s nebo bez jednotek.</string>
   <string name="err_log_load_data">c:geo nemůže načíst data požadovaná k zalogování návštěvy.</string>
   <string name="err_log_load_data_again">c:geo nemůže načíst data požadovaná k zalogování návštěvy. Zkouší to znovu.</string>
   <string name="err_log_load_data_still">c:geo stále načítá data požadovaná k odeslání Logu. Prosím, počkej ještě chvíli.</string>
-  <string name="err_log_post_failed">Zdá se, že tvůj Log nebyl odeslán. Prosím, zkontroluj to na Geocaching.com.</string>
-  <string name="err_log_post_failed_ec">Zdá se, že tvůj Log nebyl odeslán. Prosím, zkontroluj to na Extremcaching.com.</string>
-  <string name="err_logimage_post_failed">Zdá se, že tvůj obrázek nebyl nahrán. Zkontroluj to, prosím, na Geocaching.com.</string>
   <string name="err_search_address_forgot">c:geo zapomnělo hledanou adresu.</string>
   <string name="err_parse_lat">c:geo nemůže dopočítat zeměpisnou šířku.</string>
   <string name="err_parse_lon">c:geo nemůže dopočítat zeměpisnou délku.</string>
@@ -211,6 +207,7 @@
   <string name="loc_net">Síť</string>
   <string name="loc_fused">Kombinovaný</string>
   <string name="loc_low_power">Nízká spotřeba</string>
+  <string name="loc_home">Souřadnice domova</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Zjišťování pozice</string>
@@ -376,6 +373,8 @@
   <string name="settings_activate_oc_uk">Aktivovat</string>
   <string name="init_oc_uk_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.org.uk.</string>
   <string name="init_gcvote">GCvote.com</string>
+  <string name="init_gcvote_password_description">Pokud chceš hodnotit keše, je třeba postupovat dle pokynů na GCVote.com a zadat sem své heslo.</string>
+  <string name="err_gcvote_send_rating">Chyba při odesílání hodnocení, zkontroluj GCVote heslo v nastavení nebo ho nech prázdné.</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Povolit</string>
   <string name="init_username">Uživatelské jméno</string>
@@ -644,7 +643,7 @@
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Otevřít v prohlížečí</string>
   <string name="cache_menu_visit">Zalogovat návštěvu</string>
-  <string name="cache_menu_visit_offline">Zapsat návštěvu (offline)</string>
+  <string name="cache_menu_visit_offline">Offline log jedním klepnutím</string>
   <string name="cache_menu_spoilers">Obrázky</string>
   <string name="cache_menu_around">Keš v okolí</string>
   <string name="cache_menu_event">Přidat do kalendáře</string>

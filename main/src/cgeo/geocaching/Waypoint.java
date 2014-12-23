@@ -97,16 +97,9 @@ public class Waypoint implements IWaypoint {
             if (newPrefixes.containsKey(prefix)) {
                 newPrefixes.get(prefix).merge(oldWaypoint);
             } else if (oldWaypoint.isUserDefined() || forceMerge) {
-                // personal note waypoints should always be taken from the new list only
-                if (!isPersonalNoteWaypoint(oldWaypoint)) {
-                    newPoints.add(oldWaypoint);
-                }
+                newPoints.add(oldWaypoint);
             }
         }
-    }
-
-    private static boolean isPersonalNoteWaypoint(final @NonNull Waypoint waypoint) {
-        return StringUtils.startsWith(waypoint.getName(), CgeoApplication.getInstance().getString(R.string.cache_personal_note) + " ");
     }
 
     public boolean isUserDefined() {
@@ -304,7 +297,7 @@ public class Waypoint implements IWaypoint {
                         ((point.getLatitudeE6() % 1000) != 0 || (point.getLongitudeE6() % 1000) != 0)) {
                     final String name = CgeoApplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
                     final String potentialWaypointType = note.substring(Math.max(0, matcher.start() - 15));
-                    final Waypoint waypoint = new Waypoint(name, parseWaypointType(potentialWaypointType), false);
+                    final Waypoint waypoint = new Waypoint(name, parseWaypointType(potentialWaypointType), true);
                     waypoint.setCoords(point);
                     waypoints.add(waypoint);
                     count++;

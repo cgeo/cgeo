@@ -3,7 +3,7 @@ package cgeo.geocaching.connector.oc;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
-import cgeo.geocaching.network.OAuthAuthorizationActivity.OAuthParameters;
+import cgeo.geocaching.activity.OAuthAuthorizationActivity.OAuthParameters;
 
 import org.eclipse.jdt.annotation.NonNull;
 

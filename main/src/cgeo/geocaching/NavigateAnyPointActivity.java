@@ -10,8 +10,8 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.location.DistanceParser;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
+import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
-import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.NavigationActionProvider;
@@ -19,13 +19,17 @@ import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.Nullable;
+
+import rx.functions.Action0;
+import rx.schedulers.Schedulers;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.view.ContextMenu;
@@ -95,7 +99,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
         public View getView(final int position, final View convertView, final ViewGroup parent) {
             View rowView = convertView;
 
-            ViewHolder viewHolder;
+            final ViewHolder viewHolder;
             if (rowView == null) {
                 rowView = getInflater().inflate(R.layout.simple_way_point, parent, false);
                 viewHolder = new ViewHolder(rowView);
@@ -347,20 +351,14 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int menuItem = item.getItemId();
-
-        final Geopoint coords = getDestination();
-
-        if (coords != null) {
-            addToHistory(coords);
-        }
-
+        final Geopoint coords = getDestinationAndAddToHistory();
         switch (menuItem) {
             case R.id.menu_default_navigation:
-                navigateTo();
+                navigateTo(coords);
                 return true;
 
             case R.id.menu_caches_around:
-                cachesAround();
+                cachesAround(coords);
                 return true;
 
             case R.id.menu_clear_history:
@@ -374,28 +372,36 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
         return super.onOptionsItemSelected(item);
     }
 
-    private void addToHistory(final Geopoint coords) {
+    private Geopoint getDestinationAndAddToHistory() {
+        final Geopoint coords = getDestination();
+        addToHistory(coords);
+        return coords;
+    }
+
+    private void addToHistory(@Nullable final Geopoint coords) {
+        if (coords == null) {
+            return;
+        }
+
         // Add locations to history
         final Destination loc = new Destination(coords);
 
         if (!getHistoryOfSearchedLocations().contains(loc)) {
             getHistoryOfSearchedLocations().add(0, loc);
-
-            new AsyncTask<Void, Void, Void>() {
+            RxUtils.andThenOnUi(Schedulers.io(), new Action0() {
                 @Override
-                protected Void doInBackground(final Void... params) {
+                public void call() {
                     // Save location
                     DataStore.saveSearchedDestination(loc);
-                    return null;
                 }
-
+            }, new Action0() {
                 @Override
-                protected void onPostExecute(final Void v) {
+                public void call() {
                     // Ensure to remove the footer
                     historyListView.removeFooterView(getEmptyHistoryFooter());
                     destinationHistoryAdapter.notifyDataSetChanged();
                 }
-            }.execute();
+            });
         }
     }
 
@@ -435,17 +441,16 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
         }
     }
 
-    private void navigateTo() {
-        navigateTo(getDestination());
+    private void navigateTo(final Geopoint coords) {
+        if (coords == null) {
+            showToast(res.getString(R.string.err_location_unknown));
+            return;
+        }
+
+        NavigationAppFactory.startDefaultNavigationApplication(1, this, coords);
     }
 
-    private void navigateTo(final Geopoint geopoint) {
-        NavigationAppFactory.startDefaultNavigationApplication(1, this, geopoint);
-    }
-
-    private void cachesAround() {
-        final Geopoint coords = getDestination();
-
+    private void cachesAround(final Geopoint coords) {
         if (coords == null) {
             showToast(res.getString(R.string.err_location_unknown));
             return;
@@ -458,7 +463,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
 
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
         @Override
-        public void updateGeoData(final IGeoData geo) {
+        public void updateGeoData(final GeoData geo) {
             try {
                 latButton.setHint(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
                 lonButton.setHint(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
@@ -473,14 +478,8 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
         @Override
         public void onClick(final View arg0) {
             final Geopoint coords = app.currentGeo().getCoords();
-            if (coords == null) {
-                showToast(res.getString(R.string.err_point_unknown_position));
-                return;
-            }
-
             latButton.setText(coords.format(GeopointFormatter.Format.LAT_DECMINUTE));
             lonButton.setText(coords.format(GeopointFormatter.Format.LON_DECMINUTE));
-
             changed = false;
         }
     }
@@ -508,18 +507,13 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
                 return null;
             }
         } else {
-            if (app.currentGeo().getCoords() == null) {
-                showToast(res.getString(R.string.err_point_curr_position_unavailable));
-                return null;
-            }
-
             coords = app.currentGeo().getCoords();
         }
 
         // apply projection
-        if (coords != null && StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
+        if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
             // bearing & distance
-            double bearing;
+            final double bearing;
             try {
                 bearing = Double.parseDouble(bearingText);
             } catch (final NumberFormatException ignored) {
@@ -527,7 +521,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
                 return null;
             }
 
-            double distance;
+            final double distance;
             try {
                 distance = DistanceParser.parseDistance(distanceText,
                         !Settings.useImperialUnits());
@@ -539,9 +533,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
             coords = coords.project(bearing, distance);
         }
 
-        if (coords != null) {
-            saveCoords(coords);
-        }
+        saveCoords(coords);
 
         return coords;
     }
@@ -555,11 +547,11 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
 
     @Override
     public void startDefaultNavigation() {
-        navigateTo();
+        navigateTo(getDestinationAndAddToHistory());
     }
 
     @Override
     public void startDefaultNavigation2() {
-        NavigationAppFactory.startDefaultNavigationApplication(2, this, getDestination());
+        NavigationAppFactory.startDefaultNavigationApplication(2, this, getDestinationAndAddToHistory());
     }
 }

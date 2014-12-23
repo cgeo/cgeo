@@ -12,7 +12,7 @@ import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.search.AutoCompleteAdapter;
-import cgeo.geocaching.sensors.IGeoData;
+import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -126,7 +126,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     /**
      * Performs a search for query either as geocode, trackable code or keyword
      *
-     * @param query
+     * @param nonTrimmedQuery
      *            String to search for
      * @param keywordSearch
      *            Set to true if keyword search should be performed if query isn't GC or TB
@@ -309,11 +309,9 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         final String lonText = StringUtils.trim(buttonLongitude.getText().toString());
 
         if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) {
-            final IGeoData geo = app.currentGeo();
-            if (geo.getCoords() != null) {
-                buttonLatitude.setText(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE));
-                buttonLongitude.setText(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE));
-            }
+            final GeoData geo = app.currentGeo();
+            buttonLatitude.setText(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE));
+            buttonLongitude.setText(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE));
         } else {
             try {
                 CacheListActivity.startActivityCoordinates(this, new Geopoint(latText, lonText));
@@ -375,7 +373,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     }
 
     private void findByGeocodeFn() {
-        final String geocodeText = StringUtils.trim(geocodeEditText.getText().toString());
+        final String geocodeText = StringUtils.trimToEmpty(geocodeEditText.getText().toString());
 
         if (StringUtils.isBlank(geocodeText) || geocodeText.equalsIgnoreCase("GC")) {
             Dialogs.message(this, R.string.warn_search_help_title, R.string.warn_search_help_gccode);
@@ -386,7 +384,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     }
 
     private void findTrackableFn() {
-        final String trackableText = StringUtils.trim(trackableEditText.getText().toString());
+        final String trackableText = StringUtils.trimToEmpty(trackableEditText.getText().toString());
 
         if (StringUtils.isBlank(trackableText) || trackableText.equalsIgnoreCase("TB")) {
             Dialogs.message(this, R.string.warn_search_help_title, R.string.warn_search_help_tb);

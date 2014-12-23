@@ -70,11 +70,11 @@ public class Settings {
             StringUtils.equals(Build.MODEL, "ST25i")     ||    // Sony Xperia U
             StringUtils.equals(Build.MODEL, "bq Aquaris 5");   // bq Aquaris 5
 
-    private final static int unitsMetric = 1;
-
     // twitter api keys
-    private final static @NonNull String keyConsumerPublic = CryptUtils.rot13("ESnsCvAv3kEupF1GCR3jGj");
-    private final static @NonNull String keyConsumerSecret = CryptUtils.rot13("7vQWceACV9umEjJucmlpFe9FCMZSeqIqfkQ2BnhV9x");
+    private final static @NonNull String TWITTER_KEY_CONSUMER_PUBLIC = CryptUtils.rot13("ESnsCvAv3kEupF1GCR3jGj");
+    private final static @NonNull String TWITTER_KEY_CONSUMER_SECRET = CryptUtils.rot13("7vQWceACV9umEjJucmlpFe9FCMZSeqIqfkQ2BnhV9x");
+
+    private static boolean useCompass = true;
 
     public enum CoordInputFormatEnum {
         Plain,
@@ -127,7 +127,7 @@ public class Settings {
         if (currentVersion == 0 && prefsV0.getAll().isEmpty()) {
             final Editor e = sharedPrefs.edit();
             e.putInt(getKey(R.string.pref_settingsversion), LATEST_PREFERENCES_VERSION);
-            e.commit();
+            e.apply();
             return;
         }
 
@@ -152,7 +152,7 @@ public class Settings {
             e.putBoolean(getKey(R.string.pref_maptrail), prefsV0.getInt(getKey(R.string.pref_maptrail), 1) != 0);
             e.putInt(getKey(R.string.pref_lastmapzoom), prefsV0.getInt(getKey(R.string.pref_lastmapzoom), 14));
             e.putBoolean(getKey(R.string.pref_livelist), 0 != prefsV0.getInt(getKey(R.string.pref_livelist), 1));
-            e.putBoolean(getKey(R.string.pref_units_imperial), prefsV0.getInt(getKey(R.string.pref_units_imperial), unitsMetric) != unitsMetric);
+            e.putBoolean(getKey(R.string.pref_units_imperial), prefsV0.getInt(getKey(R.string.pref_units_imperial), 1) != 1);
             e.putBoolean(getKey(R.string.pref_skin), prefsV0.getInt(getKey(R.string.pref_skin), 0) != 0);
             e.putInt(getKey(R.string.pref_lastusedlist), prefsV0.getInt(getKey(R.string.pref_lastusedlist), StoredList.STANDARD_LIST_ID));
             e.putString(getKey(R.string.pref_cachetype), prefsV0.getString(getKey(R.string.pref_cachetype), CacheType.ALL.id));
@@ -191,7 +191,7 @@ public class Settings {
             e.putInt(getKey(R.string.pref_livemaphintshowcount), prefsV0.getInt(getKey(R.string.pref_livemaphintshowcount), 0));
 
             e.putInt(getKey(R.string.pref_settingsversion), 1); // mark migrated
-            e.commit();
+            e.apply();
         }
 
         // changes for new settings dialog
@@ -227,7 +227,7 @@ public class Settings {
             e.putString(getKey(R.string.pref_gpxExportDir), getGpxExportDir());
 
             e.putInt(getKey(R.string.pref_settingsversion), 2); // mark migrated
-            e.commit();
+            e.apply();
         }
     }
 
@@ -255,40 +255,40 @@ public class Settings {
         return sharedPrefs.getFloat(getKey(prefKeyId), defaultValue);
     }
 
-    protected static boolean putString(final int prefKeyId, final String value) {
+    protected static void putString(final int prefKeyId, final String value) {
         final SharedPreferences.Editor edit = sharedPrefs.edit();
         edit.putString(getKey(prefKeyId), value);
-        return edit.commit();
+        edit.apply();
     }
 
-    protected static boolean putBoolean(final int prefKeyId, final boolean value) {
+    protected static void putBoolean(final int prefKeyId, final boolean value) {
         final SharedPreferences.Editor edit = sharedPrefs.edit();
         edit.putBoolean(getKey(prefKeyId), value);
-        return edit.commit();
+        edit.apply();
     }
 
-    private static boolean putInt(final int prefKeyId, final int value) {
+    private static void putInt(final int prefKeyId, final int value) {
         final SharedPreferences.Editor edit = sharedPrefs.edit();
         edit.putInt(getKey(prefKeyId), value);
-        return edit.commit();
+        edit.apply();
     }
 
-    private static boolean putLong(final int prefKeyId, final long value) {
+    private static void putLong(final int prefKeyId, final long value) {
         final SharedPreferences.Editor edit = sharedPrefs.edit();
         edit.putLong(getKey(prefKeyId), value);
-        return edit.commit();
+        edit.apply();
     }
 
-    private static boolean putFloat(final int prefKeyId, final float value) {
+    private static void putFloat(final int prefKeyId, final float value) {
         final SharedPreferences.Editor edit = sharedPrefs.edit();
         edit.putFloat(getKey(prefKeyId), value);
-        return edit.commit();
+        edit.apply();
     }
 
-    private static boolean remove(final int prefKeyId) {
+    private static void remove(final int prefKeyId) {
         final SharedPreferences.Editor edit = sharedPrefs.edit();
         edit.remove(getKey(prefKeyId));
-        return edit.commit();
+        edit.apply();
     }
 
     private static boolean contains(final int prefKeyId) {
@@ -360,11 +360,11 @@ public class Settings {
         return getString(R.string.pref_memberstatus, "");
     }
 
-    public static boolean setGCMemberStatus(final String memberStatus) {
+    public static void setGCMemberStatus(final String memberStatus) {
         if (StringUtils.isBlank(memberStatus)) {
-            return remove(R.string.pref_memberstatus);
+            remove(R.string.pref_memberstatus);
         }
-        return putString(R.string.pref_memberstatus, memberStatus);
+        putString(R.string.pref_memberstatus, memberStatus);
     }
 
     public static ImmutablePair<String, String> getTokenPair(final int tokenPublicPrefKey, final int tokenSecretPrefKey) {
@@ -394,10 +394,7 @@ public class Settings {
     }
 
     public static boolean isGCvoteLogin() {
-        final String preUsername = getString(R.string.pref_username, null);
-        final String prePassword = getString(R.string.pref_pass_vote, null);
-
-        return !StringUtils.isBlank(preUsername) && !StringUtils.isBlank(prePassword);
+        return getGCvoteLogin() != null;
     }
 
     public static ImmutablePair<String, String> getGCvoteLogin() {
@@ -415,13 +412,13 @@ public class Settings {
         return getString(R.string.pref_signature, StringUtils.EMPTY);
     }
 
-    public static boolean setCookieStore(final String cookies) {
+    public static void setCookieStore(final String cookies) {
         if (StringUtils.isBlank(cookies)) {
             // erase cookies
-            return remove(R.string.pref_cookiestore);
+            remove(R.string.pref_cookiestore);
         }
         // save cookies
-        return putString(R.string.pref_cookiestore, cookies);
+        putString(R.string.pref_cookiestore, cookies);
     }
 
     public static String getCookieStore() {
@@ -469,12 +466,11 @@ public class Settings {
         return getString(R.string.pref_mapfile, null);
     }
 
-    public static boolean setMapFile(final String mapFile) {
-        final boolean result = putString(R.string.pref_mapfile, mapFile);
+    public static void setMapFile(final String mapFile) {
+        putString(R.string.pref_mapfile, mapFile);
         if (mapFile != null) {
             setMapFileDirectory(new File(mapFile).getParent());
         }
-        return result;
     }
 
     public static String getMapFileDirectory() {
@@ -489,10 +485,9 @@ public class Settings {
         return null;
     }
 
-    public static boolean setMapFileDirectory(final String mapFileDirectory) {
-        final boolean result = putString(R.string.pref_mapDirectory, mapFileDirectory);
+    public static void setMapFileDirectory(final String mapFileDirectory) {
+        putString(R.string.pref_mapDirectory, mapFileDirectory);
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
-        return result;
     }
 
     public static boolean isValidMapFile() {
@@ -634,9 +629,6 @@ public class Settings {
     /**
      * Get last used zoom of the internal map. Differentiate between two use cases for a map of multiple caches (e.g.
      * live map) and the map of a single cache (which is often zoomed in more deep).
-     *
-     * @param mapMode
-     * @return
      */
     public static int getMapZoom(final MapMode mapMode) {
         if (mapMode == MapMode.SINGLE || mapMode == MapMode.COORDS) {
@@ -715,9 +707,7 @@ public class Settings {
     private static final int HISTORY_SIZE = 10;
 
     /**
-     * convert old preference ids for maps (based on constant values) into new hash based ids
-     *
-     * @return
+     * Convert old preference ids for maps (based on constant values) into new hash based ids.
      */
     private static int getConvertedMapId() {
         final int id = Integer.parseInt(getString(R.string.pref_mapsource,
@@ -744,7 +734,7 @@ public class Settings {
         return id;
     }
 
-    public static void setMapSource(final MapSource newMapSource) {
+    public static synchronized void setMapSource(final MapSource newMapSource) {
         putString(R.string.pref_mapsource, String.valueOf(newMapSource.getNumericalId()));
         if (newMapSource instanceof OfflineMapSource) {
             setMapFile(((OfflineMapSource) newMapSource).getFileName());
@@ -773,11 +763,11 @@ public class Settings {
     }
 
     public static boolean isUseCompass() {
-        return getBoolean(R.string.pref_usecompass, true);
+        return useCompass;
     }
 
-    public static void setUseCompass(final boolean useCompass) {
-        putBoolean(R.string.pref_usecompass, useCompass);
+    public static void setUseCompass(final boolean value) {
+        useCompass = value;
     }
 
     public static boolean isLightSkin() {
@@ -785,13 +775,13 @@ public class Settings {
     }
 
     @NonNull
-    public static String getKeyConsumerPublic() {
-        return keyConsumerPublic;
+    public static String getTwitterKeyConsumerPublic() {
+        return TWITTER_KEY_CONSUMER_PUBLIC;
     }
 
     @NonNull
-    public static String getKeyConsumerSecret() {
-        return keyConsumerSecret;
+    public static String getTwitterKeyConsumerSecret() {
+        return TWITTER_KEY_CONSUMER_SECRET;
     }
 
     public static String getWebDeviceCode() {
@@ -803,7 +793,7 @@ public class Settings {
     }
 
     public static String getWebDeviceName() {
-        return getString(R.string.pref_webDeviceName, android.os.Build.MODEL);
+        return getString(R.string.pref_webDeviceName, Build.MODEL);
     }
 
     /**
@@ -1047,9 +1037,7 @@ public class Settings {
     }
 
     /**
-     * remember date of last field note export
-     *
-     * @param date
+     * Remember date of last field note export.
      */
     public static void setFieldnoteExportDate(final long date) {
         putLong(R.string.pref_fieldNoteExportDate, date);
@@ -1060,9 +1048,7 @@ public class Settings {
     }
 
     /**
-     * remember the state of the "Upload" checkbox in the field notes export dialog
-     *
-     * @param upload
+     * Remember the state of the "Upload" checkbox in the field notes export dialog.
      */
     public static void setFieldNoteExportUpload(final boolean upload) {
         putBoolean(R.string.pref_fieldNoteExportUpload, upload);
@@ -1073,9 +1059,7 @@ public class Settings {
     }
 
     /**
-     * remember the state of the "Only new" checkbox in the field notes export dialog
-     *
-     * @param onlyNew
+     * Remember the state of the "Only new" checkbox in the field notes export dialog.
      */
     public static void setFieldNoteExportOnlyNew(final boolean onlyNew) {
         putBoolean(R.string.pref_fieldNoteExportOnlyNew, onlyNew);
@@ -1115,8 +1099,8 @@ public class Settings {
         return getBoolean(R.string.pref_hardware_acceleration, !HW_ACCEL_DISABLED_BY_DEFAULT);
     }
 
-    public static boolean setUseHardwareAcceleration(final boolean useHardwareAcceleration) {
-        return putBoolean(R.string.pref_hardware_acceleration, useHardwareAcceleration);
+    public static void setUseHardwareAcceleration(final boolean useHardwareAcceleration) {
+        putBoolean(R.string.pref_hardware_acceleration, useHardwareAcceleration);
     }
 
     public static String getLastCacheLog() {
@@ -1133,5 +1117,14 @@ public class Settings {
 
     public static void setLastTrackableLog(final String log) {
         putString(R.string.pref_last_trackable_log, log);
+    }
+
+    @Nullable
+    public static String getHomeLocation() {
+        return getString(R.string.pref_home_location, null);
+    }
+
+    public static void setHomeLocation(@NonNull final String homeLocation) {
+        putString(R.string.pref_home_location, homeLocation);
     }
 }

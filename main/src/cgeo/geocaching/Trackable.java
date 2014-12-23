@@ -6,6 +6,7 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.utils.ImageUtils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.text.Html;
 
@@ -16,7 +17,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Trackable implements ILogable {
-    static final public int SPOTTED_UNSET = 0;
+    static final private int SPOTTED_UNSET = 0;
     static final public int SPOTTED_CACHE = 1;
     static final public int SPOTTED_USER = 2;
     static final public int SPOTTED_UNKNOWN = 3;
@@ -53,7 +54,7 @@ public class Trackable implements ILogable {
         return guid;
     }
 
-    public void setGuid(String guid) {
+    public void setGuid(final String guid) {
         this.guid = guid;
     }
 
@@ -62,7 +63,7 @@ public class Trackable implements ILogable {
         return geocode;
     }
 
-    public void setGeocode(String geocode) {
+    public void setGeocode(final String geocode) {
         this.geocode = StringUtils.upperCase(geocode);
     }
 
@@ -70,7 +71,7 @@ public class Trackable implements ILogable {
         return iconUrl;
     }
 
-    public void setIconUrl(String iconUrl) {
+    public void setIconUrl(final String iconUrl) {
         this.iconUrl = iconUrl;
     }
 
@@ -79,7 +80,7 @@ public class Trackable implements ILogable {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -87,7 +88,7 @@ public class Trackable implements ILogable {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(final String type) {
         this.type = type;
     }
 
@@ -95,7 +96,7 @@ public class Trackable implements ILogable {
         return released;
     }
 
-    public void setReleased(Date released) {
+    public void setReleased(final Date released) {
         if (released == null) {
             this.released = null;
         }
@@ -108,7 +109,7 @@ public class Trackable implements ILogable {
         return distance;
     }
 
-    public void setDistance(float distance) {
+    public void setDistance(final float distance) {
         this.distance = distance;
     }
 
@@ -116,7 +117,7 @@ public class Trackable implements ILogable {
         return origin;
     }
 
-    public void setOrigin(String origin) {
+    public void setOrigin(final String origin) {
         this.origin = origin;
     }
 
@@ -124,7 +125,7 @@ public class Trackable implements ILogable {
         return owner;
     }
 
-    public void setOwner(String owner) {
+    public void setOwner(final String owner) {
         this.owner = owner;
     }
 
@@ -132,7 +133,7 @@ public class Trackable implements ILogable {
         return ownerGuid;
     }
 
-    public void setOwnerGuid(String ownerGuid) {
+    public void setOwnerGuid(final String ownerGuid) {
         this.ownerGuid = ownerGuid;
     }
 
@@ -140,7 +141,7 @@ public class Trackable implements ILogable {
         return spottedName;
     }
 
-    public void setSpottedName(String spottedName) {
+    public void setSpottedName(final String spottedName) {
         this.spottedName = spottedName;
     }
 
@@ -148,7 +149,7 @@ public class Trackable implements ILogable {
         return spottedType;
     }
 
-    public void setSpottedType(int spottedType) {
+    public void setSpottedType(final int spottedType) {
         this.spottedType = spottedType;
     }
 
@@ -156,7 +157,7 @@ public class Trackable implements ILogable {
         return spottedGuid;
     }
 
-    public void setSpottedGuid(String spottedGuid) {
+    public void setSpottedGuid(final String spottedGuid) {
         this.spottedGuid = spottedGuid;
     }
 
@@ -164,7 +165,7 @@ public class Trackable implements ILogable {
         return goal;
     }
 
-    public void setGoal(String goal) {
+    public void setGoal(final String goal) {
         this.goal = goal;
     }
 
@@ -172,7 +173,7 @@ public class Trackable implements ILogable {
         return details;
     }
 
-    public void setDetails(String details) {
+    public void setDetails(final String details) {
         this.details = details;
     }
 
@@ -180,15 +181,16 @@ public class Trackable implements ILogable {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(final String image) {
         this.image = image;
     }
 
+    @NonNull
     public List<LogEntry> getLogs() {
         return logs;
     }
 
-    public void setLogs(List<LogEntry> logs) {
+    public void setLogs(final List<LogEntry> logs) {
         this.logs = logs != null ? logs : new ArrayList<LogEntry>();
     }
 
@@ -213,7 +215,7 @@ public class Trackable implements ILogable {
         return trackingcode;
     }
 
-    public void setTrackingcode(String trackingcode) {
+    public void setTrackingcode(final String trackingcode) {
         this.trackingcode = trackingcode;
     }
 
@@ -229,7 +231,7 @@ public class Trackable implements ILogable {
         return images;
     }
 
-    static public List<LogType> getPossibleLogTypes() {
+    static List<LogType> getPossibleLogTypes() {
         final List<LogType> logTypes = new ArrayList<>();
         logTypes.add(LogType.RETRIEVED_IT);
         logTypes.add(LogType.GRABBED_IT);

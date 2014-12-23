@@ -2,7 +2,6 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.DateUtils;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
 
@@ -89,7 +88,7 @@ public final class LogEntry {
 
     public CharSequence getImageTitles() {
         final List<String> titles = new ArrayList<>(5);
-        for (Image image : getLogImages()) {
+        for (final Image image : getLogImages()) {
             if (StringUtils.isNotBlank(image.getTitle())) {
                 titles.add(HtmlUtils.extractText(image.getTitle()));
             }
@@ -100,16 +99,12 @@ public final class LogEntry {
         return StringUtils.join(titles, ", ");
     }
 
-    public int daysSinceLog() {
-        return DateUtils.daysSince(date);
-    }
-
     /**
      * Get the log text to be displayed. Depending on the settings, color tags might be removed.
      */
     public String getDisplayText() {
         if (Settings.getPlainLogs()) {
-            MatcherWrapper matcher = new MatcherWrapper(PATTERN_REMOVE_COLORS, log);
+            final MatcherWrapper matcher = new MatcherWrapper(PATTERN_REMOVE_COLORS, log);
             return matcher.replaceAll(StringUtils.EMPTY);
         }
         return log;

@@ -8,9 +8,9 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.GpsStatusProvider.Status;
-import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.ui.CompassView;
@@ -140,7 +140,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     private void forceRefresh() {
         // Force a refresh of location and direction when data is available.
         final CgeoApplication app = CgeoApplication.getInstance();
-        final IGeoData geo = app.currentGeo();
+        final GeoData geo = app.currentGeo();
         geoDirHandler.updateGeoDir(geo, app.currentDirection());
     }
 
@@ -261,8 +261,8 @@ public class CompassActivity extends AbstractActionBarActivity {
         cacheInfoView.setText(description);
     }
 
-    private void updateDistanceInfo(final IGeoData geo) {
-        if (geo.getCoords() == null || dstCoords == null) {
+    private void updateDistanceInfo(final GeoData geo) {
+        if (dstCoords == null) {
             return;
         }
 
@@ -284,25 +284,19 @@ public class CompassActivity extends AbstractActionBarActivity {
 
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
         @Override
-        public void updateGeoDir(final IGeoData geo, final float dir) {
+        public void updateGeoDir(final GeoData geo, final float dir) {
             try {
-                if (geo.getCoords() != null) {
-                    navType.setText(res.getString(geo.getLocationProvider().resourceId));
+                navType.setText(res.getString(geo.getLocationProvider().resourceId));
 
-                    if (geo.getAccuracy() >= 0) {
-                        navAccuracy.setText("±" + Units.getDistanceFromMeters(geo.getAccuracy()));
-                    } else {
-                        navAccuracy.setText(null);
-                    }
-
-                    navLocation.setText(geo.getCoords().toString());
-
-                    updateDistanceInfo(geo);
+                if (geo.getAccuracy() >= 0) {
+                    navAccuracy.setText("±" + Units.getDistanceFromMeters(geo.getAccuracy()));
                 } else {
-                    navType.setText(null);
                     navAccuracy.setText(null);
-                    navLocation.setText(res.getString(R.string.loc_trying));
                 }
+
+                navLocation.setText(geo.getCoords().toString());
+
+                updateDistanceInfo(geo);
 
                 updateNorthHeading(AngleUtils.getDirectionNow(dir));
             } catch (final RuntimeException e) {

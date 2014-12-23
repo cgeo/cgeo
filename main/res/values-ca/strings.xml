@@ -74,12 +74,13 @@
   <string name="log_tb_visit">Visitat</string>
   <string name="log_tb_drop">Deixat</string>
   <string name="log_tb_changeall">Canvia-ho tot</string>
-  <string name="log_save">Desa</string>
+  <string name="log_save">Guarda-ho  fora de línia</string>
   <string name="log_saving">S\'està enviant el registre…</string>
   <string name="log_saving_and_uploading">S\'està enviant el registre i pujant la imatge…</string>
   <string name="log_clear">Esborra</string>
   <string name="log_post_not_possible">S\'està carregant la pàgina del registre…</string>
   <string name="log_add">Afegeix</string>
+  <string name="log_repeat">Repeteix l\'últim registre</string>
   <string name="log_no_rating">Sense puntuació</string>
   <string name="log_stars_1_description">Pobre</string>
   <string name="log_stars_15_description">Bastant pobre</string>
@@ -166,15 +167,11 @@
   <string name="err_point_unknown_position">El c:geo no pot reconèixer on ets.</string>
   <string name="err_point_no_position_given_title">Cal informació</string>
   <string name="err_point_no_position_given">Ompliu la latitud i la longitud o la distància i la direcció. També podeu omplir els quatre camps.</string>
-  <string name="err_point_curr_position_unavailable">El c:geo encara no té les coordenades actuals. Espereu una estona…</string>
   <string name="err_point_bear_and_dist_title">Necessiteu ajuda?</string>
   <string name="err_point_bear_and_dist">Ompliu el rumb i la distància. El rumb son angles del 0º al 360º respecte al Nord. La distància no necessita unitats.</string>
   <string name="err_log_load_data">El c:geo no pot carregar les dades necessàries per registrar la visita.</string>
   <string name="err_log_load_data_again">El c:geo no pot carregar les dades necessàries per registrar la visita. Torneu a intentar-ho.</string>
   <string name="err_log_load_data_still">El c:geo encara està carregant les dades necessàries per enviar el registre. Si us plau, espereu una estona més.</string>
-  <string name="err_log_post_failed">Sembla que el vostre registre no s\'ha publicat. Comproveu-ho a geocaching.com.</string>
-  <string name="err_log_post_failed_ec">Sembla que el registre no s\'ha publicat. Comproveu-ho a Extremcaching.com.</string>
-  <string name="err_logimage_post_failed">Sembla que la  imatge de registre no ha estat guardada. Comproveu-ho a Geocaching.com.</string>
   <string name="err_search_address_forgot">El c:geo ha oblidat l\'adreça que intentaves trobar.</string>
   <string name="err_parse_lat">El c:geo no pot calcular la latitud.</string>
   <string name="err_parse_lon">El c:geo no pot calcular la longitud.</string>
@@ -298,6 +295,7 @@
   <string name="caches_filter_popularity_ratio">Preferits [%]</string>
   <string name="caches_removing_from_history">S\'està eliminant de l\'historial…</string>
   <string name="caches_clear_offlinelogs">Neteja els registres fora de línea</string>
+  <string name="caches_clear_offlinelogs_message">Voleu esborrar els registres fora de línia?</string>
   <string name="caches_clear_offlinelogs_progress">S\'estan netejant els registres fora línia</string>
   <string name="list_menu_create">Crea una llista nova</string>
   <string name="list_menu_drop">Elimina la llista actual</string>
@@ -373,6 +371,7 @@
   <string name="settings_activate_oc_uk">Activa</string>
   <string name="init_oc_uk_description">Autoritza al c:geo a opencaching.org.uk per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
   <string name="init_gcvote">GCvote.com</string>
+  <string name="init_gcvote_password_description">Per poder puntuar un catxé, cal seguir les instruccions a GCVote.com i introduir aquí la contrasenya del GCVote.</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activa</string>
   <string name="init_username">Nom d\'usuari</string>
@@ -643,7 +642,7 @@
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Obre al navegador</string>
   <string name="cache_menu_visit">Registra visita</string>
-  <string name="cache_menu_visit_offline">Registra visita fora de línia</string>
+  <string name="cache_menu_visit_offline">Registra fora de línia amb un sol clic</string>
   <string name="cache_menu_spoilers">Imatges d\'ajuda</string>
   <string name="cache_menu_around">Catxés propers</string>
   <string name="cache_menu_event">Afegeix al calendari</string>
@@ -764,6 +763,7 @@
   <string name="search_clear_history">Esborra l\'historial</string>
   <string name="search_history_cleared">S\'ha esborrat l\'historial</string>
   <string name="waypoint_coordinate_formats_plain">Senzill</string>
+  <string name="from_clipboard">Des del porta-retalls</string>
   <string name="visit_tweet">Envia aquest \"trobat\" al Twitter</string>
   <string name="map_map">Mapa</string>
   <string name="map_live">Mapa en viu</string>
@@ -868,6 +868,7 @@
   <string name="helper_contacts_description">Us permet obrir un contacte (de la llibreta de contactes) directament des d\'una entrada del registre, així podeu demanar ajuda als amics més fàcilment.</string>
   <string name="helper_sendtocgeo_description">Send to c:geo és una extensió del navegador <strong>per al vostre ordinador</strong>. Quan navegueu per geocaching.com podreu enviar catxés des del navegador directament al vostre telèfon amb un clic de botó.</string>
   <string name="helper_locus_title">Locus</string>
+  <string name="helper_locus_description">Aplicació de navegació a l\'aire lliure per al vostre telèfon o tauleta. Podeu veure mapes topogràfics fora de línia, seguir una ruta, trobar geocatxés, utilitzar una guia de veu i molt més.</string>
   <string name="helper_gpsstatus_title">Estat del GPS</string>
   <string name="helper_gpsstatus_description">Podeu utilitzar el radar en aquesta aplicació conjuntament amb el c:geo. També ofereix moltes altres informacions relacionades amb el GPS.</string>
   <string name="helper_bluetoothgps_title">GPS Bluetooth</string>
@@ -1170,6 +1171,7 @@
     <item quantity="one">%s preferit</item>
     <item quantity="other">%s preferits</item>
   </plurals>
+  <string name="more_than_percent_favorite_points">&gt; %d%% preferits</string>
   <string name="cgeo_shortcut">Drecera del c:geo</string>
   <string name="create_shortcut">Crea una drecera</string>
   <string name="send">Envia</string>

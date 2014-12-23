@@ -1,0 +1,34 @@
+<root>
+    <item name='org.apache.commons.lang3.StringUtils boolean isNotBlank(java.lang.CharSequence)'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val val="&quot;null-&gt;false&quot;" />
+        </annotation>
+    </item>
+    <item
+        name='org.apache.commons.lang3.StringUtils boolean startsWith(java.lang.CharSequence, java.lang.CharSequence)'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val val="&quot;null,null-&gt;true;null,!null-&gt;false;!null,null-&gt;false&quot;" />
+        </annotation>
+    </item>
+    <item
+        name='org.apache.commons.lang3.StringUtils java.lang.String substringBetween(java.lang.String, java.lang.String, java.lang.String)'>
+      <annotation name='org.jetbrains.annotations.Contract'>
+        <val val="&quot;null,_,_-&gt;null;_,null,_-&gt;null;_,_,null-&gt;null&quot;" />
+      </annotation>
+    </item>
+    <item name='org.apache.commons.lang3.StringUtils java.lang.String trim(java.lang.String)'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val val="&quot;null-&gt;null;!null-&gt;!null&quot;" />
+        </annotation>
+    </item>
+    <item name='org.apache.commons.lang3.StringUtils java.lang.String upperCase(java.lang.String)'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val val="&quot;null-&gt;null;!null-&gt;!null&quot;" />
+        </annotation>
+    </item>
+    <item name='org.apache.commons.lang3.StringUtils java.lang.String[] split(java.lang.String)'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val val="&quot;null-&gt;null;!null-&gt;!null&quot;" />
+        </annotation>
+    </item>
+</root>

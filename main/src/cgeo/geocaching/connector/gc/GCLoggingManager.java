@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
@@ -14,6 +15,7 @@ import cgeo.geocaching.loaders.UrlLoader;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -28,7 +30,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-public class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.LoaderCallbacks<String> {
+class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.LoaderCallbacks<String> {
 
     private final LogCacheActivity activity;
     private final Geocache cache;
@@ -38,14 +40,14 @@ public class GCLoggingManager extends AbstractLoggingManager implements LoaderMa
     private List<LogType> possibleLogTypes;
     private boolean hasLoaderError = true;
 
-    public GCLoggingManager(final LogCacheActivity activity, final Geocache cache) {
+    GCLoggingManager(final LogCacheActivity activity, final Geocache cache) {
         this.activity = activity;
         this.cache = cache;
     }
 
     @Nullable
     @Override
-    public Loader<String> onCreateLoader(int arg0, Bundle arg1) {
+    public Loader<String> onCreateLoader(final int arg0, final Bundle arg1) {
         if (!Settings.isLogin()) { // allow offline logging
             ActivityMixin.showToast(activity, activity.getResources().getString(R.string.err_login));
             return null;
@@ -54,15 +56,24 @@ public class GCLoggingManager extends AbstractLoggingManager implements LoaderMa
     }
 
     @Override
-    public void onLoadFinished(Loader<String> arg0, String page) {
-
+    public void onLoadFinished(final Loader<String> arg0, final String page) {
         if (page == null) {
             hasLoaderError = true;
         } else {
-
             viewstates = GCLogin.getViewstates(page);
             trackables = GCParser.parseTrackableLog(page);
             possibleLogTypes = GCParser.parseTypes(page);
+            if (StringUtils.isBlank(cache.getGuid())) {
+                // Acquire the cache GUID from the log page. This will not only complete the information in the database,
+                // but also allow the user to post a rating using GCVote since it requires the GUID to do so.
+                final String guid = TextUtils.getMatch(page, GCConstants.PATTERN_LOG_GUID, null);
+                if (StringUtils.isNotBlank(guid)) {
+                    cache.setGuid(guid);
+                    DataStore.saveChangedCache(cache);
+                } else {
+                    Log.w("Could not acquire GUID from log page for " + cache.getGeocode());
+                }
+            }
 
             hasLoaderError = possibleLogTypes.isEmpty();
         }
@@ -71,7 +82,7 @@ public class GCLoggingManager extends AbstractLoggingManager implements LoaderMa
     }
 
     @Override
-    public void onLoaderReset(Loader<String> arg0) {
+    public void onLoaderReset(final Loader<String> arg0) {
         // nothing to do
     }
 
@@ -81,7 +92,7 @@ public class GCLoggingManager extends AbstractLoggingManager implements LoaderMa
     }
 
     @Override
-    public LogResult postLog(Geocache cache, LogType logType, Calendar date, String log, String logPassword, List<TrackableLog> trackableLogs) {
+    public LogResult postLog(final LogType logType, final Calendar date, final String log, final String logPassword, final List<TrackableLog> trackableLogs) {
 
         try {
             final ImmutablePair<StatusCode, String> postResult = GCParser.postLog(cache.getGeocode(), cache.getCacheId(), viewstates, logType,
@@ -96,7 +107,7 @@ public class GCLoggingManager extends AbstractLoggingManager implements LoaderMa
                 }
             }
             return new LogResult(postResult.left, postResult.right);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Log.e("GCLoggingManager.postLog", e);
         }
 
@@ -104,11 +115,11 @@ public class GCLoggingManager extends AbstractLoggingManager implements LoaderMa
     }
 
     @Override
-    public ImageResult postLogImage(String logId, String imageCaption, String imageDescription, Uri imageUri) {
+    public ImageResult postLogImage(final String logId, final String imageCaption, final String imageDescription, final Uri imageUri) {
 
         if (StringUtils.isNotBlank(imageUri.getPath())) {
 
-            ImmutablePair<StatusCode, String> imageResult = GCParser.uploadLogImage(logId, imageCaption, imageDescription, imageUri);
+            final ImmutablePair<StatusCode, String> imageResult = GCParser.uploadLogImage(logId, imageCaption, imageDescription, imageUri);
 
             return new ImageResult(imageResult.left, imageResult.right);
         }

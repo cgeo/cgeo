@@ -74,7 +74,7 @@
   <string name="log_tb_visit">Besucht</string>
   <string name="log_tb_drop">Abgelegt</string>
   <string name="log_tb_changeall">Alle ändern</string>
-  <string name="log_save">Speichern</string>
+  <string name="log_save">Offline speichern</string>
   <string name="log_saving">Log wird gesendet…</string>
   <string name="log_saving_and_uploading">Log und Bild werden gesendet…</string>
   <string name="log_clear">Leeren</string>
@@ -167,15 +167,13 @@
   <string name="err_point_unknown_position">c:geo konnte den aktuellen Standort nicht bestimmen.</string>
   <string name="err_point_no_position_given_title">Info benötigt</string>
   <string name="err_point_no_position_given">Mindestens Längen- und Breitengrad oder Entfernung und Richtung angeben. Auch alle Angaben sind möglich.</string>
-  <string name="err_point_curr_position_unavailable">c:geo hat noch keine aktuelle Koordinaten. Bitte einen Moment warten…</string>
   <string name="err_point_bear_and_dist_title">Hilfe benötigt?</string>
   <string name="err_point_bear_and_dist">Angaben zu Richtung und Entfernung sind notwendig. Richtung: 0 bis 360 Grad relativ zum Norden. Die Entfernung benötigt keine Bezeichnung der Einheiten. </string>
   <string name="err_log_load_data">c:geo konnte die benötigten Daten nicht laden, um den Besuch zu loggen.</string>
   <string name="err_log_load_data_again">c:geo konnte die benötigten Daten nicht laden, um den Besuch zu loggen. Bitte erneut versuchen.</string>
   <string name="err_log_load_data_still">c:geo lädt gerade die benötigten Daten. Bitte kurz warten.</string>
-  <string name="err_log_post_failed">c:geo konnte den Log nicht absenden. Bitte auf geocaching.com überprüfen.</string>
-  <string name="err_log_post_failed_ec">c:geo konnte den Log nicht absenden. Bitte auf Extremcaching.com überprüfen.</string>
-  <string name="err_logimage_post_failed">Es scheint dass Ihr Logfoto nicht hochgeladen werden konnte. Bitte prüfen Sie es auf Geocaching.com nach.</string>
+  <string name="err_log_post_failed">Der Log-Eintrag wurde scheinbar nicht gesendet. Bitte auf der betreffenden Geocaching-Webseite prüfen.</string>
+  <string name="err_logimage_post_failed">Das Log-Bild wurde scheinbar nicht hochgeladen. Bitte auf der betreffenden Geocaching-Webseite prüfen.</string>
   <string name="err_search_address_forgot">c:geo hat die Adresse vergessen, die gesucht wurde.</string>
   <string name="err_parse_lat">c:geo konnte den Breitengrad nicht verarbeiten.</string>
   <string name="err_parse_lon">c:geo konnte den Längengrad nicht verarbeiten.</string>
@@ -212,6 +210,7 @@
   <string name="loc_net">Netzwerk</string>
   <string name="loc_fused">Kombiniert</string>
   <string name="loc_low_power">Energiesparmodus</string>
+  <string name="loc_home">Heimkoordinaten</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">SAT</string>
   <string name="loc_trying">Lokalisierung</string>
@@ -375,6 +374,8 @@
   <string name="settings_activate_oc_uk">Aktivieren</string>
   <string name="init_oc_uk_description">Autorisiere c:geo auf opencaching.org.uk zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
   <string name="init_gcvote">GCvote.com</string>
+  <string name="init_gcvote_password_description">Um einen Cache bewerten zu können, folge der Anleitung auf gcvote.com  und gib das GCVote-Passwort anschließend hier ein.</string>
+  <string name="err_gcvote_send_rating">Fehler beim Senden der Bewertung. Prüfe das GCVote-Passwort in den Einstellungen oder lösche es.</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivieren</string>
   <string name="init_username">Benutzername</string>
@@ -642,7 +643,7 @@
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Im Browser öffnen</string>
   <string name="cache_menu_visit">Besuch loggen</string>
-  <string name="cache_menu_visit_offline">Besuch offline loggen</string>
+  <string name="cache_menu_visit_offline">Offline loggen</string>
   <string name="cache_menu_spoilers">Hinweisbild</string>
   <string name="cache_menu_around">Caches im Umkreis</string>
   <string name="cache_menu_event">Zum Kalender hinzufügen</string>

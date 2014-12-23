@@ -15,7 +15,7 @@
 # upload_file uploads the file in parameter 1 to the crowdin file name in parameter 2 
 upload_file() {
     if [ -f "$2" ]; then
-        CROWDIN_LANG=`map_to_crowdin_code "$1"`
+        CROWDIN_LANG=$(map_to_crowdin_code "$1")
         crowdin_surf \
             -F \"files[$3]=@$2\" \
             -F \"language=$CROWDIN_LANG\" \
@@ -26,7 +26,7 @@ upload_file() {
     fi
 }
 
-. "`dirname $0`/globals"
+. "$(dirname $0)/globals"
 
 if [ $# -eq 0 ]; then
     debug "no languages passed - aborting."

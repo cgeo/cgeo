@@ -27,7 +27,6 @@ import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.loaders.AbstractSearchLoader;
 import cgeo.geocaching.loaders.AbstractSearchLoader.CacheListLoaderType;
-import cgeo.geocaching.loaders.AddressGeocacheListLoader;
 import cgeo.geocaching.loaders.CoordsGeocacheListLoader;
 import cgeo.geocaching.loaders.FinderGeocacheListLoader;
 import cgeo.geocaching.loaders.HistoryGeocacheListLoader;
@@ -39,10 +38,11 @@ import cgeo.geocaching.loaders.PocketGeocacheListLoader;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.network.Cookies;
+import cgeo.geocaching.network.DownloadProgress;
 import cgeo.geocaching.network.Network;
-import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.network.Send2CgeoDownloader;
+import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
-import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.sorting.CacheComparator;
@@ -56,8 +56,7 @@ import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.DateUtils;
 import cgeo.geocaching.utils.Log;
-
-import ch.boye.httpclientandroidlib.HttpResponse;
+import cgeo.geocaching.utils.RxUtils;
 
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget.Type;
@@ -68,8 +67,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
 import rx.Subscription;
+import rx.functions.Action0;
 import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -106,17 +111,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CacheListActivity extends AbstractListActivity implements FilteredActivity, LoaderManager.LoaderCallbacks<SearchResult> {
 
     private static final int MAX_LIST_ITEMS = 1000;
-
-    private static final int MSG_DONE = -1;
-    private static final int MSG_SERVER_FAIL = -2;
-    private static final int MSG_NO_REGISTRATION = -3;
-    private static final int MSG_WAITING = 0;
-    private static final int MSG_LOADING = 1;
-    private static final int MSG_LOADED = 2;
 
     private static final int REQUEST_CODE_IMPORT_GPX = 1;
 
@@ -131,7 +131,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private final Progress progress = new Progress();
     private String title = "";
     private int detailTotal = 0;
-    private int detailProgress = 0;
+    private final AtomicInteger detailProgress = new AtomicInteger(0);
     private long detailProgressTime = 0L;
     private int listId = StoredList.TEMPORARY_LIST.id; // Only meaningful for the OFFLINE type
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
@@ -144,11 +144,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         @Override
-        public void updateGeoData(final IGeoData geoData) {
-            final Geopoint coords = geoData.getCoords();
-            if (coords != null) {
-                adapter.setActualCoordinates(coords);
-            }
+        public void updateGeoData(final GeoData geoData) {
+            adapter.setActualCoordinates(geoData.getCoords());
         }
 
     };
@@ -276,21 +273,22 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         refreshSpinnerAdapter();
     }
 
-    private final CancellableHandler loadDetailsHandler = new CancellableHandler() {
+    private class LoadDetailsHandler extends CancellableHandler {
 
         @Override
         public void handleRegularMessage(final Message msg) {
             updateAdapter();
 
-            if (msg.what == MSG_LOADED) {
+            if (msg.what == DownloadProgress.MSG_LOADED) {
                 ((Geocache) msg.obj).setStatusChecked(false);
 
                 adapter.notifyDataSetChanged();
 
+                final int dp = detailProgress.get();
                 final int secondsElapsed = (int) ((System.currentTimeMillis() - detailProgressTime) / 1000);
-                final int minutesRemaining = ((detailTotal - detailProgress) * secondsElapsed / ((detailProgress > 0) ? detailProgress : 1) / 60);
+                final int minutesRemaining = ((detailTotal - dp) * secondsElapsed / ((dp > 0) ? dp : 1) / 60);
 
-                progress.setProgress(detailProgress);
+                progress.setProgress(dp);
                 if (minutesRemaining < 1) {
                     progress.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
                 } else {
@@ -320,7 +318,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 }.execute();
             }
         }
-    };
+    }
 
     /**
      * TODO Possibly parts should be a Thread not a Handler
@@ -333,22 +331,22 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             adapter.notifyDataSetChanged();
 
             switch (msg.what) {
-                case MSG_WAITING:  //no caches
+                case DownloadProgress.MSG_WAITING:  //no caches
                     progress.setMessage(res.getString(R.string.web_import_waiting));
                     break;
-                case MSG_LOADING:  //cache downloading
+                case DownloadProgress.MSG_LOADING:  //cache downloading
                     progress.setMessage(res.getString(R.string.web_downloading) + " " + msg.obj + '…');
                     break;
-                case MSG_LOADED:  //Cache downloaded
+                case DownloadProgress.MSG_LOADED:  //Cache downloaded
                     progress.setMessage(res.getString(R.string.web_downloaded) + " " + msg.obj + '…');
                     refreshCurrentList();
                     break;
-                case MSG_SERVER_FAIL:
+                case DownloadProgress.MSG_SERVER_FAIL:
                     progress.dismiss();
                     showToast(res.getString(R.string.sendToCgeo_download_fail));
                     finish();
                     break;
-                case MSG_NO_REGISTRATION:
+                case DownloadProgress.MSG_NO_REGISTRATION:
                     progress.dismiss();
                     showToast(res.getString(R.string.sendToCgeo_no_registration));
                     finish();
@@ -523,7 +521,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public void onResume() {
         super.onResume();
 
-        resumeSubscription = geoDirHandler.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.UPDATE_DIRECTION | GeoDirHandler.LOW_POWER);
+        resumeSubscription = geoDirHandler.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.UPDATE_DIRECTION | GeoDirHandler.LOW_POWER, 250, TimeUnit.MILLISECONDS);
 
         adapter.setSelectMode(false);
         setAdapterCurrentCoordinates(true);
@@ -543,12 +541,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void setAdapterCurrentCoordinates(final boolean forceSort) {
-        final Geopoint coordsNow = app.currentGeo().getCoords();
-        if (coordsNow != null) {
-            adapter.setActualCoordinates(coordsNow);
-            if (forceSort) {
-                adapter.forceSort();
-            }
+        adapter.setActualCoordinates(app.currentGeo().getCoords());
+        if (forceSort) {
+            adapter.forceSort();
         }
     }
 
@@ -564,6 +559,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         CacheListAppFactory.addMenuItems(menu, this, res);
         sortProvider = (SortActionProvider) MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_sort));
+        assert sortProvider != null;  // We set it in the XML file
         sortProvider.setSelection(adapter.getCacheComparator());
         sortProvider.setClickListener(new Action1<CacheComparator>() {
 
@@ -791,7 +787,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
                 progress.show(CacheListActivity.this, null, res.getString(R.string.caches_clear_offlinelogs_progress), true, clearOfflineLogsHandler.cancelMessage());
-                new ClearOfflineLogsThread(clearOfflineLogsHandler, adapter.getCheckedOrAllCaches()).start();
+                clearOfflineLogs(clearOfflineLogsHandler, adapter.getCheckedOrAllCaches());
             }
         });
     }
@@ -898,13 +894,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 CacheDetailActivity.startActivity(this, cache.getGeocode(), cache.getName());
                 break;
             case R.id.menu_drop_cache:
-                final int lastListPosition = CacheListActivity.this.getListView().getFirstVisiblePosition();
+                final int lastListPosition = getListView().getFirstVisiblePosition();
                 cache.drop(new Handler() {
                     @Override
                     public void handleMessage(final Message msg) {
                         adapter.notifyDataSetChanged();
                         refreshCurrentList();
-                        CacheListActivity.this.getListView().setSelection(lastListPosition);
+                        getListView().setSelection(lastListPosition);
                     }
                 });
                 break;
@@ -1107,25 +1103,25 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void refreshStoredInternal(final List<Geocache> caches) {
-        detailProgress = 0;
+        detailProgress.set(0);
 
         showProgress(false);
 
         final int etaTime = ((detailTotal * 25) / 60);
-        String message;
+        final String message;
         if (etaTime < 1) {
             message = res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm);
         } else {
             message = res.getString(R.string.caches_downloading) + " " + res.getQuantityString(R.plurals.caches_eta_mins, etaTime, etaTime);
         }
 
+        final LoadDetailsHandler loadDetailsHandler = new LoadDetailsHandler();
         progress.show(this, null, message, ProgressDialog.STYLE_HORIZONTAL, loadDetailsHandler.cancelMessage());
         progress.setMaxProgressAndReset(detailTotal);
 
         detailProgressTime = System.currentTimeMillis();
 
-        final LoadDetailsThread threadDetails = new LoadDetailsThread(loadDetailsHandler, caches);
-        threadDetails.start();
+        loadDetails(loadDetailsHandler, caches);
     }
 
     public void removeFromHistoryCheck() {
@@ -1163,13 +1159,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return;
         }
 
-        detailProgress = 0;
+        detailProgress.set(0);
         showProgress(false);
         final DownloadFromWebHandler downloadFromWebHandler = new DownloadFromWebHandler();
         progress.show(this, null, res.getString(R.string.web_import_waiting), true, downloadFromWebHandler.cancelMessage());
-
-        final LoadFromWebThread threadWeb = new LoadFromWebThread(downloadFromWebHandler, listId);
-        threadWeb.start();
+        Send2CgeoDownloader.loadFromWeb(downloadFromWebHandler, listId);
     }
 
     private void dropStored() {
@@ -1181,7 +1175,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             @Override
             public void onClick(final DialogInterface dialog, final int id) {
                 final List<Geocache> selected = adapter.getCheckedOrAllCaches();
-                final int lastListPosition = CacheListActivity.this.getListView().getFirstVisiblePosition();
+                final int lastListPosition = getListView().getFirstVisiblePosition();
                 new DropDetailsTask(lastListPosition).execute(selected.toArray(new Geocache[selected.size()]));
                 dialog.cancel();
             }
@@ -1189,115 +1183,34 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     /**
-     * Thread to refresh the cache details.
+     * Method to asynchronously refresh the caches details.
      */
 
-    private class LoadDetailsThread extends Thread {
-
-        final private CancellableHandler handler;
-        final private List<Geocache> caches;
-
-        public LoadDetailsThread(final CancellableHandler handler, final List<Geocache> caches) {
-            this.handler = handler;
-            this.caches = caches;
-        }
-
-        @Override
-        public void run() {
-            // First refresh caches that do not yet have static maps to get them a chance to get a copy
-            // before the limit expires, unless we do not want to store offline maps.
-            final List<Geocache> allCaches = Settings.isStoreOfflineMaps() ?
-                    ListUtils.union(ListUtils.selectRejected(caches, Geocache.hasStaticMap),
-                            ListUtils.select(caches, Geocache.hasStaticMap)) :
-                    caches;
-
-            for (final Geocache cache : allCaches) {
-                if (!refreshCache(cache)) {
-                    break;
-                }
-            }
-
-            handler.sendEmptyMessage(MSG_DONE);
-        }
-
-        /**
-         * Refreshes the cache information.
-         *
-         * @param cache
-         *            The cache to refresh
-         * @return
-         *         <code>false</code> if the storing was interrupted, <code>true</code> otherwise
-         */
-        private boolean refreshCache(final Geocache cache) {
-            try {
-                if (handler.isCancelled()) {
-                    throw new InterruptedException("Stopped storing process.");
-                }
-                detailProgress++;
-                cache.refreshSynchronous(null);
-                handler.obtainMessage(MSG_LOADED, cache).sendToTarget();
-            } catch (final InterruptedException e) {
-                Log.i(e.getMessage());
-                return false;
-            } catch (final Exception e) {
-                Log.e("CacheListActivity.LoadDetailsThread", e);
-            }
-
-            return true;
-        }
-    }
-
-    private static class LoadFromWebThread extends Thread {
-
-        final private CancellableHandler handler;
-        final private int listIdLFW;
-
-        public LoadFromWebThread(final CancellableHandler handler, final int listId) {
-            this.handler = handler;
-            listIdLFW = StoredList.getConcreteList(listId);
-        }
-
-        @Override
-        public void run() {
-            long baseTime = System.currentTimeMillis();
-
-            final String deviceCode = StringUtils.defaultString(Settings.getWebDeviceCode());
-            final Parameters params = new Parameters("code", deviceCode);
-            while (!handler.isCancelled() && System.currentTimeMillis() - baseTime < 3 * 60000) { // maximum: 3 minutes
-                // Download new code
-                final HttpResponse responseFromWeb = Network.getRequest("http://send2.cgeo.org/read.html", params);
-
-                if (responseFromWeb != null && responseFromWeb.getStatusLine().getStatusCode() == 200) {
-                    final String response = Network.getResponseData(responseFromWeb);
-                    if (response != null && response.length() > 2) {
-                        handler.sendMessage(handler.obtainMessage(MSG_LOADING, response));
-
-                        Geocache.storeCache(null, response, listIdLFW, false, null);
-
-                        handler.sendMessage(handler.obtainMessage(MSG_LOADED, response));
-                        baseTime = System.currentTimeMillis();
-                    } else if ("RG".equals(response)) {
-                        //Server returned RG (registration) and this device no longer registered.
-                        Settings.setWebNameCode(null, null);
-                        handler.sendEmptyMessage(MSG_NO_REGISTRATION);
-                        handler.cancel();
-                        break;
-                    } else {
-                        try {
-                            sleep(5000); // Wait for 5s if no cache found
-                        } catch (final InterruptedException ignored) {
-                        }
-                        handler.sendEmptyMessage(MSG_WAITING);
+    private void loadDetails(final CancellableHandler handler, final List<Geocache> caches) {
+        final List<Geocache> allCaches = Settings.isStoreOfflineMaps() ?
+                ListUtils.union(ListUtils.selectRejected(caches, Geocache.hasStaticMap),
+                        ListUtils.select(caches, Geocache.hasStaticMap)) :
+                caches;
+        final Observable<Geocache> loaded = Observable.from(allCaches).flatMap(new Func1<Geocache, Observable<Geocache>>() {
+            @Override
+            public Observable<Geocache> call(final Geocache cache) {
+                return Observable.create(new OnSubscribe<Geocache>() {
+                    @Override
+                    public void call(final Subscriber<? super Geocache> subscriber) {
+                        cache.refreshSynchronous(null);
+                        detailProgress.incrementAndGet();
+                        handler.obtainMessage(DownloadProgress.MSG_LOADED, cache).sendToTarget();
+                        subscriber.onCompleted();
                     }
-                } else {
-                    handler.sendEmptyMessage(MSG_SERVER_FAIL);
-                    handler.cancel();
-                    break;
-                }
+                }).subscribeOn(RxUtils.refreshScheduler);
             }
-
-            handler.sendEmptyMessage(MSG_DONE);
-        }
+        }).doOnCompleted(new Action0() {
+            @Override
+            public void call() {
+                handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
+            }
+        });
+        handler.unsubscribeIfCancelled(loaded.subscribe());
     }
 
     private class DropDetailsTask extends AsyncTaskWithProgress<Geocache, Void> {
@@ -1319,26 +1232,19 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             adapter.setSelectMode(false);
             refreshCurrentList();
             replaceCacheListFromSearch();
-            CacheListActivity.this.getListView().setSelection(lastListPosition);
+            getListView().setSelection(lastListPosition);
         }
 
     }
 
-    private static class ClearOfflineLogsThread extends Thread {
-
-        final private Handler handler;
-        final private List<Geocache> selected;
-
-        public ClearOfflineLogsThread(final Handler handlerIn, final List<Geocache> selectedCaches) {
-            handler = handlerIn;
-            selected = selectedCaches;
-        }
-
-        @Override
-        public void run() {
-            DataStore.clearLogsOffline(selected);
-            handler.sendEmptyMessage(MSG_DONE);
-        }
+    private static void clearOfflineLogs(final Handler handler, final List<Geocache> selectedCaches) {
+        Schedulers.io().createWorker().schedule(new Action0() {
+            @Override
+            public void call() {
+                DataStore.clearLogsOffline(selectedCaches);
+                handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
+            }
+        });
     }
 
     private class MoreCachesListener implements View.OnClickListener {
@@ -1614,7 +1520,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     title = list.title;
                 }
 
-                loader = new OfflineGeocacheListLoader(this.getBaseContext(), coords, listId);
+                loader = new OfflineGeocacheListLoader(getBaseContext(), coords, listId);
 
                 break;
             case HISTORY:
@@ -1642,12 +1548,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 } else {
                     title = coords.toString();
                 }
-                if (coords != null) {
-                    loader = new CoordsGeocacheListLoader(app, coords);
-                }
-                else {
-                    loader = new AddressGeocacheListLoader(app, address);
-                }
+                loader = new CoordsGeocacheListLoader(app, coords);
                 break;
             case FINDER:
                 final String username = extras.getString(Intents.EXTRA_USERNAME);

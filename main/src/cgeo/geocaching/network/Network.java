@@ -57,13 +57,13 @@ public abstract class Network {
 
     private static final Pattern PATTERN_PASSWORD = Pattern.compile("(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+");
 
-    private final static HttpParams clientParams = new BasicHttpParams();
+    private final static HttpParams CLIENT_PARAMS = new BasicHttpParams();
 
     static {
-        clientParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, CharEncoding.UTF_8);
-        clientParams.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
-        clientParams.setParameter(CoreConnectionPNames.SO_TIMEOUT, 90000);
-        clientParams.setParameter(ClientPNames.HANDLE_REDIRECTS,  true);
+        CLIENT_PARAMS.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, CharEncoding.UTF_8);
+        CLIENT_PARAMS.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
+        CLIENT_PARAMS.setParameter(CoreConnectionPNames.SO_TIMEOUT, 90000);
+        CLIENT_PARAMS.setParameter(ClientPNames.HANDLE_REDIRECTS, true);
     }
 
     private static String hidePassword(final String message) {
@@ -73,7 +73,7 @@ public abstract class Network {
     private static HttpClient getHttpClient() {
         final DefaultHttpClient client = new DefaultHttpClient();
         client.setCookieStore(Cookies.cookieStore);
-        client.setParams(clientParams);
+        client.setParams(CLIENT_PARAMS);
         client.setRedirectStrategy(new LaxRedirectStrategy());
         return new DecompressingHttpClient(client);
     }
@@ -95,7 +95,7 @@ public abstract class Network {
      *
      * @param uri the URI to request
      * @param params the parameters to add to the POST request
-     * @params headers the headers to add to the request
+     * @param headers the headers to add to the request
      * @return the HTTP response, or null in case of an encoding error params
      */
     @Nullable
@@ -174,7 +174,7 @@ public abstract class Network {
     @Nullable
     private static HttpResponse request(final String method, final String uri,
                                         @Nullable final Parameters params, @Nullable final Parameters headers, @Nullable final File cacheFile) {
-        HttpRequestBase request;
+        final HttpRequestBase request;
         if (method.equals("GET")) {
             final String fullUri = params == null ? uri : Uri.parse(uri).buildUpon().encodedQuery(params.toString()).build().toString();
             request = new HttpGet(fullUri);
@@ -377,7 +377,7 @@ public abstract class Network {
         if (!isSuccess(response)) {
             return null;
         }
-        assert(response != null);
+        assert response != null;
         final HttpEntity entity = response.getEntity();
         if (entity == null) {
             return null;

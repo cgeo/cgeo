@@ -35,18 +35,22 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class ECApi {
+final class ECApi {
 
     private static final String API_HOST = "https://extremcaching.com/exports/";
 
     private static final ECLogin ecLogin = ECLogin.getInstance();
     private static final SynchronizedDateFormat LOG_DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ", TimeZone.getTimeZone("UTC"), Locale.US);
 
-    public static String getIdFromGeocode(final String geocode) {
+    private ECApi() {
+        // utility class with static methods
+    }
+
+    static String getIdFromGeocode(final String geocode) {
         return StringUtils.removeStartIgnoreCase(geocode, "EC");
     }
 
-    public static Geocache searchByGeoCode(final String geocode) {
+    static Geocache searchByGeoCode(final String geocode) {
         final Parameters params = new Parameters("id", getIdFromGeocode(geocode));
         final HttpResponse response = apiRequest("gpx.php", params);
 
@@ -57,7 +61,7 @@ public class ECApi {
         return null;
     }
 
-    public static Collection<Geocache> searchByBBox(final Viewport viewport) {
+    static Collection<Geocache> searchByBBox(final Viewport viewport) {
 
         if (viewport.getLatitudeSpan() == 0 || viewport.getLongitudeSpan() == 0) {
             return Collections.emptyList();
@@ -74,7 +78,7 @@ public class ECApi {
     }
 
 
-    public static Collection<Geocache> searchByCenter(final Geopoint center) {
+    static Collection<Geocache> searchByCenter(final Geopoint center) {
 
         final Parameters params = new Parameters("fnc", "center");
         params.add("distance", "20");
@@ -85,11 +89,11 @@ public class ECApi {
         return importCachesFromJSON(response);
     }
 
-    public static LogResult postLog(final Geocache cache, final LogType logType, final Calendar date, final String log) {
+    static LogResult postLog(final Geocache cache, final LogType logType, final Calendar date, final String log) {
         return postLog(cache, logType, date, log, false);
     }
 
-    public static LogResult postLog(final Geocache cache, final LogType logType, final Calendar date, final String log, boolean isRetry) {
+    private static LogResult postLog(final Geocache cache, final LogType logType, final Calendar date, final String log, final boolean isRetry) {
         final Parameters params = new Parameters("cache_id", cache.getGeocode());
         params.add("type", logType.type);
         params.add("log", log);
@@ -100,7 +104,7 @@ public class ECApi {
         final HttpResponse response = Network.postRequest(uri, params);
 
         if (response == null) {
-            return new LogResult(StatusCode.LOG_POST_ERROR_EC, "");
+            return new LogResult(StatusCode.LOG_POST_ERROR, "");
         }
         if (!isRetry && response.getStatusLine().getStatusCode() == 403) {
             if (ecLogin.login() == StatusCode.NO_ERROR) {
@@ -108,7 +112,7 @@ public class ECApi {
             }
         }
         if (response.getStatusLine().getStatusCode() != 200) {
-            return new LogResult(StatusCode.LOG_POST_ERROR_EC, "");
+            return new LogResult(StatusCode.LOG_POST_ERROR, "");
         }
 
         final String data = Network.getResponseDataAlways(response);
@@ -120,7 +124,7 @@ public class ECApi {
             return new LogResult(StatusCode.NO_ERROR, uid);
         }
 
-        return new LogResult(StatusCode.LOG_POST_ERROR_EC, "");
+        return new LogResult(StatusCode.LOG_POST_ERROR, "");
     }
 
 
@@ -163,7 +167,7 @@ public class ECApi {
 
         try {
             return new GPX10Parser(StoredList.TEMPORARY_LIST.id).parse(response.getEntity().getContent(), null);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Log.e("Error importing gpx from extremcaching.com", e);
             return Collections.emptyList();
         }

@@ -11,6 +11,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.RxUtils;
 import cgeo.geocaching.utils.TextUtils;
 
 import ch.boye.httpclientandroidlib.HttpResponse;
@@ -22,6 +23,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Observable;
+import rx.functions.Action0;
 
 import android.graphics.drawable.Drawable;
 
@@ -35,7 +37,7 @@ public class GCLogin extends AbstractLogin {
 
     private final static String ENGLISH = "<a href=\"#\">English &#9660;</a>";
 
-    public static final String LANGUAGE_CHANGE_URI = "http://www.geocaching.com/my/souvenirs.aspx";
+    private static final String LANGUAGE_CHANGE_URI = "http://www.geocaching.com/my/souvenirs.aspx";
 
     private GCLogin() {
         // singleton
@@ -55,7 +57,7 @@ public class GCLogin extends AbstractLogin {
     }
 
     @Override
-    protected StatusCode login(boolean retry) {
+    protected StatusCode login(final boolean retry) {
         final ImmutablePair<String, String> credentials = Settings.getGcCredentials();
         final String username = credentials.left;
         final String password = credentials.right;
@@ -83,6 +85,7 @@ public class GCLogin extends AbstractLogin {
             if (switchToEnglish(loginData) && retry) {
                 return login(false);
             }
+            setHomeLocation();
             detectGcCustomDate();
             return StatusCode.NO_ERROR; // logged in
         }
@@ -165,7 +168,7 @@ public class GCLogin extends AbstractLogin {
      * @param page
      * @return <code>true</code> if user is logged in, <code>false</code> otherwise
      */
-    public boolean getLoginStatus(@Nullable final String page) {
+    boolean getLoginStatus(@Nullable final String page) {
         if (StringUtils.isBlank(page)) {
             Log.e("Login.checkLogin: No page given");
             return false;
@@ -214,7 +217,7 @@ public class GCLogin extends AbstractLogin {
      * @param previousPage the content of the last loaded page
      * @return <code>true</code> if a switch was necessary and succesfully performed (non-English -> English)
      */
-    private boolean switchToEnglish(String previousPage) {
+    private boolean switchToEnglish(final String previousPage) {
         if (previousPage != null && previousPage.contains(ENGLISH)) {
             Log.i("Geocaching.com language already set to English");
             // get find count
@@ -264,11 +267,30 @@ public class GCLogin extends AbstractLogin {
         return null;
     }
 
+    @Nullable
+    static String retrieveHomeLocation() {
+        final String result = Network.getResponseData(Network.getRequest("https://www.geocaching.com/account/settings/homelocation"));
+        return TextUtils.getMatch(result, GCConstants.PATTERN_HOME_LOCATION, null);
+    }
+
+    private static void setHomeLocation() {
+        RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+            @Override
+            public void call() {
+                final String homeLocationStr = retrieveHomeLocation();
+                if (StringUtils.isNotBlank(homeLocationStr) && !StringUtils.equals(homeLocationStr, Settings.getHomeLocation())) {
+                    assert homeLocationStr != null;
+                    Log.i("Setting home location to " + homeLocationStr);
+                    Settings.setHomeLocation(homeLocationStr);
+                }
+            }
+        });
+    }
+
     /**
      * Detect user date settings on geocaching.com
      */
     private static void detectGcCustomDate() {
-
         final String result = Network.getResponseData(Network.getRequest("https://www.geocaching.com/account/settings/preferences"));
 
         if (null == result) {
@@ -286,11 +308,11 @@ public class GCLogin extends AbstractLogin {
         return new SimpleDateFormat(format, Locale.ENGLISH).parse(input.trim());
     }
 
-    public static Date parseGcCustomDate(final String input) throws ParseException {
+    static Date parseGcCustomDate(final String input) throws ParseException {
         return parseGcCustomDate(input, Settings.getGcCustomDate());
     }
 
-    public static String formatGcCustomDate(int year, int month, int day) {
+    static String formatGcCustomDate(final int year, final int month, final int day) {
         return new SimpleDateFormat(Settings.getGcCustomDate(), Locale.ENGLISH).format(new GregorianCalendar(year, month - 1, day).getTime());
     }
 
@@ -299,7 +321,7 @@ public class GCLogin extends AbstractLogin {
      * - Array is null
      * - or all elements are null or empty strings
      */
-    public static boolean isEmpty(String[] a) {
+    public static boolean isEmpty(final String[] a) {
         if (a == null) {
             return true;
         }
@@ -317,7 +339,7 @@ public class GCLogin extends AbstractLogin {
      *
      * @return String[] with all view states
      */
-    public static String[] getViewstates(String page) {
+    public static String[] getViewstates(final String page) {
         // Get the number of viewstates.
         // If there is only one viewstate, __VIEWSTATEFIELDCOUNT is not present
 
@@ -365,7 +387,7 @@ public class GCLogin extends AbstractLogin {
     /**
      * put viewstates into request parameters
      */
-    public static void putViewstates(final Parameters params, final String[] viewstates) {
+    static void putViewstates(final Parameters params, final String[] viewstates) {
         if (ArrayUtils.isEmpty(viewstates)) {
             return;
         }
@@ -382,7 +404,7 @@ public class GCLogin extends AbstractLogin {
      * transfers the viewstates variables from a page (response) to parameters
      * (next request)
      */
-    public static void transferViewstates(final String page, final Parameters params) {
+    static void transferViewstates(final String page, final Parameters params) {
         putViewstates(params, getViewstates(page));
     }
 
@@ -392,7 +414,7 @@ public class GCLogin extends AbstractLogin {
      * @param uri
      * @return
      */
-    public String postRequestLogged(final String uri, final Parameters params) {
+    String postRequestLogged(final String uri, final Parameters params) {
         final String data = Network.getResponseData(Network.postRequest(uri, params));
 
         if (getLoginStatus(data)) {
@@ -415,7 +437,7 @@ public class GCLogin extends AbstractLogin {
      * @return
      */
     @Nullable
-    public String getRequestLogged(@NonNull final String uri, @Nullable final Parameters params) {
+    String getRequestLogged(@NonNull final String uri, @Nullable final Parameters params) {
         final HttpResponse response = Network.getRequest(uri, params);
         final String data = Network.getResponseData(response, canRemoveWhitespace(uri));
 

@@ -10,12 +10,12 @@
 # see: http://crowdin.net/page/api/export
 # see: http://crowdin.net/page/api/download
 
-. "`dirname $0`/globals"
+. "$(dirname $0)/globals"
 
 BRANCH=crowdin_translations
 GITHUB_PR_TITLE="crowdin: New translations"
 PR_EXISTS=0
-DDATE=`date +"%Y-%m-%d %H:%M:%S"`
+DDATE=$(date +"%Y-%m-%d %H:%M:%S")
 ZIPFILE=all.zip
 # default base branch
 BASE_BRANCH=master
@@ -76,10 +76,10 @@ for f in */*/*values-*/strings.xml; do
 done
 
 # apply local patches to particular strings
-. "`dirname $0`/local-patches"
+. "$progdir/local-patches"
 
 # check for changes
-if [ -z "`git diff`" ]; then
+if [ -z "$(git diff)" ]; then
     debug "no changes, finishing."
     finish
     exit
@@ -87,7 +87,7 @@ fi
 
 # upload changes to github
 AMEND=""
-[[ ! -z "`git log ${BASE_BRANCH}..${BRANCH}`" ]] && AMEND="--amend"
+[[ ! -z "$(git log ${BASE_BRANCH}..${BRANCH})" ]] && AMEND="--amend"
 _do git commit -a "${AMEND}" -m \"${GITHUB_PR_TITLE}\" || die "commit failed."
 _do git push -f origin "${BRANCH}" || die "git push failed."
 

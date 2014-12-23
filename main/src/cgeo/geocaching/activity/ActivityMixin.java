@@ -6,6 +6,7 @@ import cgeo.geocaching.settings.Settings;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build.VERSION;
@@ -111,8 +112,13 @@ public final class ActivityMixin {
             window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
         if (Settings.useHardwareAcceleration()) {
-            window.setFlags(LayoutParams.FLAG_HARDWARE_ACCELERATED, LayoutParams.FLAG_HARDWARE_ACCELERATED);
+            enableHardwareAcceleration(window);
         }
+    }
+
+    @TargetApi(VERSION_CODES.HONEYCOMB)
+    private static void enableHardwareAcceleration(final Window window) {
+        window.addFlags(LayoutParams.FLAG_HARDWARE_ACCELERATED);
     }
 
     public static void invalidateOptionsMenu(final Activity activity) {
@@ -151,6 +157,15 @@ public final class ActivityMixin {
         editText.setSelection(newCursor);
     }
 
+    /**
+     * This is the exact code from Google to implement Up navigation, with one exception: activity.isTaskRoot() was
+     * added as {@link NavUtils#shouldUpRecreateTask(Activity, Intent)} seems not to handle the case, that this activity
+     * was created from an intent by another app, and our own app is not yet running. The bug seems to be fixed in
+     * Android 4.4.something, however.
+     *
+     * @param activity
+     * @return
+     */
     public static boolean navigateUp(@NonNull final Activity activity) {
         // see http://developer.android.com/training/implementing-navigation/ancestral.html
         final Intent upIntent = NavUtils.getParentActivityIntent(activity);
@@ -158,7 +173,7 @@ public final class ActivityMixin {
             activity.finish();
             return true;
         }
-        if (NavUtils.shouldUpRecreateTask(activity, upIntent)) {
+        if (NavUtils.shouldUpRecreateTask(activity, upIntent) || activity.isTaskRoot()) {
             // This activity is NOT part of this app's task, so create a new task
             // when navigating up, with a synthesized back stack.
             TaskStackBuilder.create(activity)

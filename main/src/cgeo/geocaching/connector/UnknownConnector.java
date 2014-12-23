@@ -1,12 +1,11 @@
 package cgeo.geocaching.connector;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.ICache;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
-public class UnknownConnector extends AbstractConnector {
+class UnknownConnector extends AbstractConnector {
 
     @Override
     public String getName() {
@@ -14,7 +13,7 @@ public class UnknownConnector extends AbstractConnector {
     }
 
     @Override
-    public String getCacheUrl(@NonNull Geocache cache) {
+    public String getCacheUrl(@NonNull final Geocache cache) {
         return null; // we have no url for these caches
     }
 
@@ -24,7 +23,7 @@ public class UnknownConnector extends AbstractConnector {
     }
 
     @Override
-    public boolean isOwner(final ICache cache) {
+    public boolean isOwner(final Geocache cache) {
         return false;
     }
 

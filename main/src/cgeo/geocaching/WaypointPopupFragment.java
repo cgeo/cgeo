@@ -6,7 +6,7 @@ import butterknife.InjectView;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
-import cgeo.geocaching.sensors.IGeoData;
+import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.utils.Log;
 
@@ -48,8 +48,8 @@ public class WaypointPopupFragment extends AbstractDialogFragment {
     }
 
     @Override
-    protected void onUpdateGeoData(IGeoData geo) {
-        if (geo.getCoords() != null && waypoint != null && waypoint.getCoords() != null) {
+    protected void onUpdateGeoData(GeoData geo) {
+        if (waypoint != null && waypoint.getCoords() != null) {
             waypointDistance.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(waypoint.getCoords())));
             waypointDistance.bringToFront();
         }

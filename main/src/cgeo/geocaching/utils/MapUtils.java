@@ -154,7 +154,6 @@ public final class MapUtils {
     }
 
     private static int calculateResolution(final Drawable marker) {
-        final int resolution = marker.getIntrinsicWidth() > 40 ? (marker.getIntrinsicWidth() > 50 ? (marker.getIntrinsicWidth() > 70 ? (marker.getIntrinsicWidth() > 100 ? 4 : 3) : 2) : 1) : 0;
-        return resolution;
+        return marker.getIntrinsicWidth() > 40 ? (marker.getIntrinsicWidth() > 50 ? (marker.getIntrinsicWidth() > 70 ? (marker.getIntrinsicWidth() > 100 ? 4 : 3) : 2) : 1) : 0;
     }
 }

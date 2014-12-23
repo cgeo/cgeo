@@ -2,7 +2,6 @@ package cgeo.geocaching.connector.ec;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.ICache;
 import cgeo.geocaching.LogCacheActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
@@ -115,7 +114,7 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public boolean isOwner(final ICache cache) {
+    public boolean isOwner(final Geocache cache) {
         return false;
     }
 

@@ -1,10 +1,15 @@
 #! /bin/sh
 #
 
-RXJAVA=0.20.7
-JACKSONCORE=2.4.3
-JACKSONDATABIND=2.4.3
-JACKSONANNOTATIONS=2.4.3
+RXJAVA=1.0.2
+RXANDROID=0.23.0
+RXJAVAASYNCUTIL=0.21.0
+JACKSONCORE=2.4.4
+JACKSONDATABIND=2.4.4
+JACKSONANNOTATIONS=2.4.4
+COMMONSCOLLECTIONS4=4.0
+COMMONSLANG3=3.3.2
+COMMONSIO=2.4
 
 cd $(git rev-parse --show-toplevel)/main/libs
 
@@ -30,10 +35,12 @@ fixgradle() {
   sed -i "/def $var =/s/.*/def $var = '$version'/" ../build.gradle
 }
 
-updatelib com/netflix/rxjava rxjava-core $RXJAVA
-updatelib com/netflix/rxjava rxjava-android $RXJAVA
-updatelib com/netflix/rxjava rxjava-async-util $RXJAVA
-fixgradle RXVersion $RXJAVA
+updatelib io/reactivex rxjava $RXJAVA
+fixgradle RXJavaVersion $RXJAVA
+updatelib io/reactivex rxandroid $RXANDROID
+fixgradle RXAndroidVersion $RXANDROID
+updatelib io/reactivex rxjava-async-util $RXJAVAASYNCUTIL
+fixgradle RXJavaAsyncUtilVersion $RXJAVAASYNCUTIL
 
 updatelib com/fasterxml/jackson/core jackson-core $JACKSONCORE
 fixgradle JacksonCoreVersion $JACKSONCORE
@@ -41,3 +48,10 @@ updatelib com/fasterxml/jackson/core jackson-databind $JACKSONDATABIND
 fixgradle JacksonDatabindVersion $JACKSONDATABIND
 updatelib com/fasterxml/jackson/core jackson-annotations $JACKSONANNOTATIONS
 fixgradle JacksonAnnotationsVersion $JACKSONANNOTATIONS
+
+updatelib org/apache/commons commons-collections4 $COMMONSCOLLECTIONS4
+fixgradle CommonsCollections4Version $COMMONSCOLLECTIONS4
+updatelib org/apache/commons commons-lang3 $COMMONSLANG3
+fixgradle CommonsLang3Version $COMMONSLANG3
+updatelib commons-io commons-io $COMMONSIO
+fixgradle CommonsIoVersion $COMMONSIO

@@ -13,13 +13,13 @@ import android.net.Uri;
 import java.util.Calendar;
 import java.util.List;
 
-public class ECLoggingManager extends AbstractLoggingManager {
+class ECLoggingManager extends AbstractLoggingManager {
 
     private final ECConnector connector;
     private final Geocache cache;
-    private LogCacheActivity activity;
+    private final LogCacheActivity activity;
 
-    public ECLoggingManager(final LogCacheActivity activity, final ECConnector connector, final Geocache cache) {
+    ECLoggingManager(final LogCacheActivity activity, final ECConnector connector, final Geocache cache) {
         this.connector = connector;
         this.cache = cache;
         this.activity = activity;
@@ -31,7 +31,7 @@ public class ECLoggingManager extends AbstractLoggingManager {
     }
 
     @Override
-    public final LogResult postLog(final Geocache cache, final LogType logType, final Calendar date, final String log, final String logPassword, final List<TrackableLog> trackableLogs) {
+    public final LogResult postLog(final LogType logType, final Calendar date, final String log, final String logPassword, final List<TrackableLog> trackableLogs) {
         return ECApi.postLog(cache, logType, date, log);
     }
 

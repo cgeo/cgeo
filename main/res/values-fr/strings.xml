@@ -74,12 +74,13 @@
   <string name="log_tb_visit">Visité</string>
   <string name="log_tb_drop">Déposé ici</string>
   <string name="log_tb_changeall">Tout modifié</string>
-  <string name="log_save">Enregistrer</string>
+  <string name="log_save">Sauvegarder hors-ligne</string>
   <string name="log_saving">Enregistrement en cours…</string>
   <string name="log_saving_and_uploading">Envoi de la note et de l\'image…</string>
   <string name="log_clear">Effacer</string>
   <string name="log_post_not_possible">Chargement de la page…</string>
   <string name="log_add">Ajouter</string>
+  <string name="log_repeat">Recopier la dernière entrée</string>
   <string name="log_no_rating">Pas de note</string>
   <string name="log_stars_1_description">faible</string>
   <string name="log_stars_15_description">plutôt faible</string>
@@ -166,15 +167,13 @@
   <string name="err_point_unknown_position">c:geo ne peut pas savoir où vous êtes.</string>
   <string name="err_point_no_position_given_title">Information obligatoire</string>
   <string name="err_point_no_position_given">Remplissez au moins la latitude ou la longitude ou la distance et le relèvement. Vous pouvez aussi remplir tous les champs.</string>
-  <string name="err_point_curr_position_unavailable">c:geo ne connaît pas encore votre position. Veuillez patienter…</string>
   <string name="err_point_bear_and_dist_title">Besoin d\'aide?</string>
   <string name="err_point_bear_and_dist">Remplissez le relèvement et la distance. Le relèvement est l\'angle de 0 à 360 degrés par rapport au Nord. La distance est avec ou sans les unités.</string>
   <string name="err_log_load_data">c:geo ne peut pas charger les données pour enregistrer votre visite.</string>
   <string name="err_log_load_data_again">c:geo ne peut pas charger les données pour enregistrer votre visite. Essayer plus tard.</string>
   <string name="err_log_load_data_still">c:geo est en train de charger les données pour enregistrer votre visite. Veuillez patienter encore un peu.</string>
-  <string name="err_log_post_failed">Il semble que votre visite n\'a pas été enregistrée. Veuillez vérifier sur le site Geocaching.com.</string>
-  <string name="err_log_post_failed_ec">Il semble que votre visite n\'a pas été enregistrée. Veuillez vérifier sur le site Extremcaching.com.</string>
-  <string name="err_logimage_post_failed">Il semble que l\'envoi de l\'image ait échoué. Veuillez vérifier sur le site Geocaching.com.</string>
+  <string name="err_log_post_failed">Il semble que votre visite n\'a pas été enregistrée. Veuillez vérifier sur le site web d\'origine de la géocache.</string>
+  <string name="err_logimage_post_failed">Il semble que l\'envoi de l\'image a échoué. Veuillez vérifier sur le site web d\'origine de la géocache.</string>
   <string name="err_search_address_forgot">c:geo a oublié l\'adresse recherchée.</string>
   <string name="err_parse_lat">c:geo n\'arrive pas à lire la latitude.</string>
   <string name="err_parse_lon">c:geo n\'arrive pas à lire la longitude.</string>
@@ -211,6 +210,7 @@
   <string name="loc_net">Réseau</string>
   <string name="loc_fused">Fusionné</string>
   <string name="loc_low_power">Éco</string>
+  <string name="loc_home">Domicile</string>
   <string name="loc_gps">Gps</string>
   <string name="loc_sat">Satellites</string>
   <string name="loc_trying">Localisation en cours…</string>
@@ -298,6 +298,7 @@
   <string name="caches_filter_popularity_ratio">Favoris [%]</string>
   <string name="caches_removing_from_history">Effacer de l\'historique…</string>
   <string name="caches_clear_offlinelogs">Effacer les entrées de carnet hors-ligne</string>
+  <string name="caches_clear_offlinelogs_message">Effacer tous les journaux hors ligne ?</string>
   <string name="caches_clear_offlinelogs_progress">Effacement des entrées de carnet hors-ligne</string>
   <string name="list_menu_create">Nouvelle liste</string>
   <string name="list_menu_drop">Effacer la liste courante</string>
@@ -374,6 +375,8 @@
   <string name="settings_activate_oc_uk">Activer</string>
   <string name="init_oc_uk_description">Autoriser c:geo à utiliser opencaching.org.uk pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
   <string name="init_gcvote">GCvote.com</string>
+  <string name="init_gcvote_password_description">Pour pouvoir attribuer une note à une géocache, vous devez suivre les instructions de GCVote.com et entrer ici votre mot de passe GCVote.</string>
+  <string name="err_gcvote_send_rating">Erreur lors de l\'envoi de la note, vérifiez le mot de passe GCVote dans les paramètres ou effacez le.</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activer</string>
   <string name="init_username">Identifiant</string>
@@ -641,7 +644,7 @@
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Navigateur</string>
   <string name="cache_menu_visit">Carnet</string>
-  <string name="cache_menu_visit_offline">Enregistrer la visite hors-ligne</string>
+  <string name="cache_menu_visit_offline">Journal hors connexion en un clic</string>
   <string name="cache_menu_spoilers">Images indices</string>
   <string name="cache_menu_around">Alentours</string>
   <string name="cache_menu_event">Ajouter à l\'agenda</string>
@@ -762,6 +765,7 @@
   <string name="search_clear_history">Effacer l\'historique</string>
   <string name="search_history_cleared">Historique effacé</string>
   <string name="waypoint_coordinate_formats_plain">Texte</string>
+  <string name="from_clipboard">Depuis le presse-papiers</string>
   <string name="visit_tweet">Publier votre découverte sur Twitter</string>
   <string name="map_map">Carte</string>
   <string name="map_live">Carte active</string>
@@ -866,6 +870,7 @@
   <string name="helper_contacts_description">Permet d\'ouvrir une fiche de contact (depuis le carnet d\'adresses) directement depuis une entrée de journal, de manière à pouvoir plus facilement appeler des amis à l\'aide.</string>
   <string name="helper_sendtocgeo_description">Envoyer à c:geo (<i>Send to c:geo</i>) est une extension pour le navigateur <strong>de votre ordinateur</strong>. Lorsque vous naviguez sur geocaching.com, vous pouvez envoyer des caches vers votre smartphone avec un clic.</string>
   <string name="helper_locus_title">Locus</string>
+  <string name="helper_locus_description">Application pour la navigation en plein air pour téléphone ou tablette. Visualisez les cartes hors-lignes, enregistrez le chemin parcouru, cherchez les géocaches, utilisez le guidage vocal et plus.</string>
   <string name="helper_gpsstatus_title">Etat GPS</string>
   <string name="helper_gpsstatus_description">Vous pouvez utiliser le radar de cette application dans c:geo. Il gère des informations supplémentaires relatives au GPS.</string>
   <string name="helper_bluetoothgps_title">GPS Bluetooth</string>
@@ -1168,6 +1173,7 @@
     <item quantity="one">%s favori</item>
     <item quantity="other">%s favoris</item>
   </plurals>
+  <string name="more_than_percent_favorite_points">&gt; %d%% favoris</string>
   <string name="cgeo_shortcut">c:geo raccourci</string>
   <string name="create_shortcut">Créer un raccourci</string>
   <string name="send">Envoyer</string>

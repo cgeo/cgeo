@@ -74,7 +74,7 @@
   <string name="log_tb_visit">Vizitat</string>
   <string name="log_tb_drop">Lăsat</string>
   <string name="log_tb_changeall">Schimbă toate</string>
-  <string name="log_save">Salvează</string>
+  <string name="log_save">Salvează local</string>
   <string name="log_saving">Trimitere jurnal…</string>
   <string name="log_saving_and_uploading">Trimitre jurnal şi încarcare poze…</string>
   <string name="log_clear">Şterge</string>
@@ -167,15 +167,11 @@
   <string name="err_point_unknown_position">c:geo nu poate determina unde te afli.</string>
   <string name="err_point_no_position_given_title">Informaţii necesare</string>
   <string name="err_point_no_position_given">Introdu cel puţin latitudine şi longitudine sau distanţă şi azimut. Se pot completa şi toate cele patru câmpuri.</string>
-  <string name="err_point_curr_position_unavailable">c:geo incă tot nu a obţinut coordonatele poziţiei curente. Te rog, mai aşteaptă puţin…</string>
   <string name="err_point_bear_and_dist_title">Ai nevoie de ajutor?</string>
   <string name="err_point_bear_and_dist">Completează şi azimutul şi distanţa. Azimutul este unghiul de la 0 la 360 faţă de nord. Distanţa nu necesită unităţi.</string>
   <string name="err_log_load_data">c:geo nu poate încărca informaţiile necesare pentru a posta o însemnare.</string>
   <string name="err_log_load_data_again">c:geo nu poate încărca informaţiile necesare pentru a posta o însemnare. Te rog încearcă din nou.</string>
   <string name="err_log_load_data_still">c:geo încă încarcă informaţiale necesare pentru a posta o însemnare. Te rog mai aşteaptă.</string>
-  <string name="err_log_post_failed">Se pare că însemnarea nu a fost postată. Verifică pe Geocaching.com.</string>
-  <string name="err_log_post_failed_ec">Se pare că însemnarea nu a fost postată. Verifică pe Extremcaching.com.</string>
-  <string name="err_logimage_post_failed">Se pare că imaginea ataşată însemnării nu a fost postată. Verifică pe Geocaching.com.</string>
   <string name="err_search_address_forgot">c:geo a uitat adresa pe care o căutai.</string>
   <string name="err_parse_lat">c:geo nu înţelege latitudinea.</string>
   <string name="err_parse_lon">c:geo nu înţelege longitudinea.</string>
@@ -212,6 +208,7 @@
   <string name="loc_net">Reţea</string>
   <string name="loc_fused">Combinat</string>
   <string name="loc_low_power">Mod economic</string>
+  <string name="loc_home">Coordonatele de acasă</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Încerc să determin poziţia</string>
@@ -376,6 +373,8 @@
   <string name="settings_activate_oc_uk">Activează</string>
   <string name="init_oc_uk_description">Autorizează c:geo cu opencaching.org.uk pentru a putea căuta geocutii şi a putea accesa/filtra pe cele găsite de tine.</string>
   <string name="init_gcvote">GCvote.com</string>
+  <string name="init_gcvote_password_description">Pentru a putea evalua o geocutie, trebuie să urmezi instrucţiunile de la GCVote.com şi să introduci aici parola GCVote.</string>
+  <string name="err_gcvote_send_rating">Eroare la trimiterea evaluării, verifică-ţi parola GCVote din configuraţie sau şterge această parolă.</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activează</string>
   <string name="init_username">Utilizator</string>
@@ -637,7 +636,7 @@
   <string name="cache_menu_streetview">Vedere stradală</string>
   <string name="cache_menu_browser">Afişează în browser</string>
   <string name="cache_menu_visit">Jurnal</string>
-  <string name="cache_menu_visit_offline">Jurnal salvat</string>
+  <string name="cache_menu_visit_offline">Însemnare locală cu un singur clic</string>
   <string name="cache_menu_spoilers">Imagini (indicii?)</string>
   <string name="cache_menu_around">Cutii din împrejurimi</string>
   <string name="cache_menu_event">Adaugă la calendar</string>

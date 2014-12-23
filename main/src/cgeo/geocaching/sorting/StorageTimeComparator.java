@@ -2,10 +2,10 @@ package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.Geocache;
 
-public class StorageTimeComparator extends AbstractCacheComparator {
+class StorageTimeComparator extends AbstractCacheComparator {
 
     @Override
-    protected int compareCaches(Geocache cache1, Geocache cache2) {
+    protected int compareCaches(final Geocache cache1, final Geocache cache2) {
         if (cache1.getUpdated() < cache2.getUpdated()) {
             return -1;
         }

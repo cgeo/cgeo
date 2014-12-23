@@ -8,15 +8,15 @@ import org.apache.commons.lang3.StringUtils;
  * sorts caches by name
  *
  */
-public class NameComparator extends AbstractCacheComparator {
+class NameComparator extends AbstractCacheComparator {
 
     @Override
-    protected boolean canCompare(Geocache cache) {
+    protected boolean canCompare(final Geocache cache) {
         return StringUtils.isNotBlank(cache.getName());
     }
 
     @Override
-    protected int compareCaches(Geocache cache1, Geocache cache2) {
+    protected int compareCaches(final Geocache cache1, final Geocache cache2) {
         return cache1.getNameForSorting().compareToIgnoreCase(cache2.getNameForSorting());
     }
 }

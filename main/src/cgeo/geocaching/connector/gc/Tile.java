@@ -35,13 +35,13 @@ import java.util.Set;
  */
 public class Tile {
 
-    public static final int TILE_SIZE = 256;
-    public static final int ZOOMLEVEL_MAX = 18;
+    static final int TILE_SIZE = 256;
+    static final int ZOOMLEVEL_MAX = 18;
     public static final int ZOOMLEVEL_MIN = 0;
     public static final int ZOOMLEVEL_MIN_PERSONALIZED = 12;
 
-    static final int[] NUMBER_OF_TILES = new int[ZOOMLEVEL_MAX - ZOOMLEVEL_MIN + 1];
-    static final int[] NUMBER_OF_PIXELS = new int[ZOOMLEVEL_MAX - ZOOMLEVEL_MIN + 1];
+    private static final int[] NUMBER_OF_TILES = new int[ZOOMLEVEL_MAX - ZOOMLEVEL_MIN + 1];
+    private static final int[] NUMBER_OF_PIXELS = new int[ZOOMLEVEL_MAX - ZOOMLEVEL_MIN + 1];
     static {
         for (int z = ZOOMLEVEL_MIN; z <= ZOOMLEVEL_MAX; z++) {
             NUMBER_OF_TILES[z] = 1 << z;
@@ -115,7 +115,7 @@ public class Tile {
      *      href="http://developers.cloudmade.com/projects/tiles/examples/convert-coordinates-to-tile-numbers">Cloudmade</a>
      */
     @NonNull
-    public Geopoint getCoord(final UTFGridPosition pos) {
+    Geopoint getCoord(final UTFGridPosition pos) {
 
         final double pixX = tileX * TILE_SIZE + pos.x * 4;
         final double pixY = tileY * TILE_SIZE + pos.y * 4;
@@ -146,7 +146,7 @@ public class Tile {
      *            Second point
      * @return
      */
-    public static int calcZoomLon(final Geopoint left, final Geopoint right, final int numberOfTiles) {
+    static int calcZoomLon(final Geopoint left, final Geopoint right, final int numberOfTiles) {
 
         int zoom = (int) Math.floor(
                 Math.log(360.0 * numberOfTiles / (2.0 * Math.abs(left.getLongitude() - right.getLongitude())))
@@ -179,7 +179,7 @@ public class Tile {
      *            Second point
      * @return
      */
-    public static int calcZoomLat(final Geopoint bottom, final Geopoint top, final int numberOfTiles) {
+    static int calcZoomLat(final Geopoint bottom, final Geopoint top, final int numberOfTiles) {
 
         int zoom = (int) Math.ceil(
                 Math.log(2.0 * Math.PI * numberOfTiles / (
@@ -238,7 +238,8 @@ public class Tile {
      *
      * @return An observable with one element, which may be <tt>null</tt>.
      */
-    public static Observable<String> requestMapInfo(final String url, final Parameters params, final String referer) {
+
+    static Observable<String> requestMapInfo(final String url, final Parameters params, final String referer) {
         final HttpResponse response = Network.getRequest(url, params, new Parameters("Referer", referer));
         return Async.start(new Func0<String>() {
             @Override
@@ -253,7 +254,7 @@ public class Tile {
      *
      * @return An observable with one element, which may be <tt>null</tt>.
      */
-    public static Observable<Bitmap> requestMapTile(final Parameters params) {
+    static Observable<Bitmap> requestMapTile(final Parameters params) {
         final HttpResponse response = Network.getRequest(GCConstants.URL_MAP_TILE, params, new Parameters("Referer", GCConstants.URL_LIVE_MAP));
         return Async.start(new Func0<Bitmap>() {
             @Override

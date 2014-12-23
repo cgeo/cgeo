@@ -2,6 +2,8 @@ package cgeo.geocaching.utils;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,7 +15,7 @@ import java.util.regex.Pattern;
 public class MatcherWrapper {
     private final Matcher matcher;
 
-    public MatcherWrapper(Pattern pattern, String input) {
+    public MatcherWrapper(@NonNull final Pattern pattern, @NonNull final String input) {
         this.matcher = pattern.matcher(input);
     }
 
@@ -24,14 +26,14 @@ public class MatcherWrapper {
         return matcher.find();
     }
 
-    public boolean find(int start) {
+    public boolean find(final int start) {
         return matcher.find(start);
     }
 
     /**
      * see {@link Matcher#group(int)}
      */
-    public String group(int index) {
+    public String group(final int index) {
         return newString(matcher.group(index));
     }
 
@@ -47,7 +49,7 @@ public class MatcherWrapper {
      * @return
      */
     @SuppressFBWarnings("DM_STRING_CTOR")
-    private static String newString(String input) {
+    private static String newString(final String input) {
         if (input == null) {
             return null;
         }
@@ -78,7 +80,7 @@ public class MatcherWrapper {
     /**
      * see {@link Matcher#replaceAll(String)}
      */
-    public String replaceAll(String replacement) {
+    public String replaceAll(final String replacement) {
         return newString(matcher.replaceAll(replacement));
     }
 
@@ -92,7 +94,7 @@ public class MatcherWrapper {
     /**
      * see {@link Matcher#replaceFirst(String)}
      */
-    public String replaceFirst(String replacement) {
+    public String replaceFirst(final String replacement) {
         return newString(matcher.replaceFirst(replacement));
     }
 }

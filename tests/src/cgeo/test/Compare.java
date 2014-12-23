@@ -3,7 +3,6 @@ package cgeo.test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.ICache;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.utils.CryptUtils;
 
@@ -13,7 +12,7 @@ import java.util.Date;
 
 public abstract class Compare {
 
-    public static void assertCompareCaches(ICache expected, Geocache actual, boolean all) {
+    public static void assertCompareCaches(Geocache expected, Geocache actual, boolean all) {
         final String geocode = expected.getGeocode();
         final String cacheStr = "Cache " + geocode + ": ";
         assertThat(actual).isNotNull();
@@ -31,7 +30,7 @@ public abstract class Compare {
         final Date hiddenDate = actual.getHiddenDate();
         assertThat(hiddenDate).isNotNull();
         assert hiddenDate != null; // silence the eclipse compiler in the next line
-        assertThat(hiddenDate.toString()).as(cacheStr + "hidden date").isEqualTo(expected.getHiddenDate().toString());
+        assertThat(hiddenDate).as(cacheStr + " hidden date").isEqualTo(expected.getHiddenDate());
         assertThat(actual.isPremiumMembersOnly()).as(cacheStr + "premium only").isEqualTo(expected.isPremiumMembersOnly());
 
         if (all) {

@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.connector.ILoggingManager;
@@ -70,9 +71,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private String text = null;
     private List<LogType> possibleLogTypes = new ArrayList<>();
     private List<TrackableLog> trackables = null;
-    private CheckBox tweetCheck = null;
-    private LinearLayout tweetBox = null;
-    private LinearLayout logPasswordBox = null;
+    protected @InjectView(R.id.tweet) CheckBox tweetCheck;
+    protected @InjectView(R.id.tweet_box) LinearLayout tweetBox;
+    protected @InjectView(R.id.log_password_box) LinearLayout logPasswordBox;
     private SparseArray<TrackableLog> actionButtons;
 
     private ILoggingManager loggingManager;
@@ -85,10 +86,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private String imageDescription;
     private Uri imageUri;
     private boolean sendButtonEnabled;
-
+    private boolean isRatingBarShown = false;
 
     public void onLoadFinished() {
-
         if (loggingManager.hasLoaderError()) {
             showErrorLoadingData();
             return;
@@ -108,6 +108,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
             showToast(res.getString(R.string.info_log_type_changed));
         }
+
+        initializeRatingBar();
 
         enablePostButton(true);
 
@@ -139,7 +141,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
         actionButtons = new SparseArray<>();
 
-        final LinearLayout inventoryView = (LinearLayout) findViewById(R.id.inventory);
+        final LinearLayout inventoryView = ButterKnife.findById(this, R.id.inventory);
         inventoryView.removeAllViews();
 
         for (final TrackableLog tb : trackables) {
@@ -163,7 +165,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
             final String tbCode = tb.trackCode;
             inventoryItem.setClickable(true);
-            inventoryItem.findViewById(R.id.info).setOnClickListener(new View.OnClickListener() {
+            ButterKnife.findById(inventoryItem, R.id.info).setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(final View view) {
@@ -177,10 +179,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
 
         if (inventoryView.getChildCount() > 0) {
-            findViewById(R.id.inventory_box).setVisibility(View.VISIBLE);
+            ButterKnife.findById(this, R.id.inventory_box).setVisibility(View.VISIBLE);
         }
         if (inventoryView.getChildCount() > 1) {
-            final LinearLayout inventoryChangeAllView = (LinearLayout) findViewById(R.id.inventory_changeall);
+            final LinearLayout inventoryChangeAllView = ButterKnife.findById(this, R.id.inventory_changeall);
 
             final Button changeButton = ButterKnife.findById(inventoryChangeAllView, R.id.changebutton);
             changeButton.setOnClickListener(new View.OnClickListener() {
@@ -225,13 +227,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             setTitle(res.getString(R.string.log_new_log) + ": " + cache.getGeocode());
         }
 
-        // Get ids for later use
-        tweetBox = (LinearLayout) findViewById(R.id.tweet_box);
-        tweetCheck = (CheckBox) findViewById(R.id.tweet);
-        logPasswordBox = (LinearLayout) findViewById(R.id.log_password_box);
-
-        final RatingBar ratingBar = (RatingBar) findViewById(R.id.gcvoteRating);
-        initializeRatingBar(ratingBar);
+        initializeRatingBar();
 
         // initialize with default values
         setDefaultValues();
@@ -259,7 +255,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         }
         enablePostButton(false);
 
-        final Button typeButton = (Button) findViewById(R.id.type);
+        final Button typeButton = ButterKnife.findById(this, R.id.type);
         typeButton.setText(typeSelected.getL10n());
         typeButton.setOnClickListener(new View.OnClickListener() {
 
@@ -269,11 +265,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             }
         });
 
-        final Button dateButton = (Button) findViewById(R.id.date);
+        final Button dateButton = ButterKnife.findById(this, R.id.date);
         setDate(date);
         dateButton.setOnClickListener(new DateListener());
 
-        final EditText logView = (EditText) findViewById(R.id.log);
+        final EditText logView = ButterKnife.findById(this, R.id.log);
         if (StringUtils.isBlank(currentLogText()) && StringUtils.isNotBlank(text)) {
             logView.setText(text);
             Dialogs.moveCursorToEnd(logView);
@@ -289,25 +285,27 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         requestKeyboardForLogging();
     }
 
-    private void initializeRatingBar(final RatingBar ratingBar) {
-        final TextView label = (TextView) findViewById(R.id.gcvoteLabel);
-        if (GCVote.isVotingPossible(cache)) {
+    private void initializeRatingBar() {
+        if (GCVote.isVotingPossible(cache) && !isRatingBarShown) {
+            final RatingBar ratingBar = ButterKnife.findById(this, R.id.gcvoteRating);
+            final TextView label = ButterKnife.findById(this, R.id.gcvoteLabel);
+            isRatingBarShown = true;
             ratingBar.setVisibility(View.VISIBLE);
             label.setVisibility(View.VISIBLE);
-        }
-        ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+            ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 
-            @Override
-            public void onRatingChanged(final RatingBar ratingBar, final float stars, final boolean fromUser) {
-                // 0.5 is not a valid rating, therefore we must limit
-                rating = GCVote.isValidRating(stars) ? stars : 0;
-                if (rating < stars) {
-                    ratingBar.setRating(rating);
+                @Override
+                public void onRatingChanged(final RatingBar ratingBar, final float stars, final boolean fromUser) {
+                    // 0.5 is not a valid rating, therefore we must limit
+                    rating = GCVote.isValidRating(stars) ? stars : 0;
+                    if (rating < stars) {
+                        ratingBar.setRating(rating);
+                    }
+                    label.setText(GCVote.getDescription(rating));
                 }
-                label.setText(GCVote.getDescription(rating));
-            }
-        });
-        ratingBar.setRating(cache.getMyVote());
+            });
+            ratingBar.setRating(cache.getMyVote());
+        }
     }
 
     private void setDefaultValues() {
@@ -332,9 +330,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         setType(typeSelected);
         setDate(date);
 
-        final EditText logView = (EditText) findViewById(R.id.log);
+        final EditText logView = ButterKnife.findById(this, R.id.log);
         logView.setText(StringUtils.EMPTY);
-        final EditText logPasswordView = (EditText) findViewById(R.id.log_password);
+        final EditText logPasswordView = ButterKnife.findById(this, R.id.log_password);
         logPasswordView.setText(StringUtils.EMPTY);
 
         showToast(res.getString(R.string.info_log_cleared));
@@ -367,12 +365,12 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     public void setDate(final Calendar dateIn) {
         date = dateIn;
 
-        final Button dateButton = (Button) findViewById(R.id.date);
+        final Button dateButton = ButterKnife.findById(this, R.id.date);
         dateButton.setText(Formatter.formatShortDateVerbally(date.getTime().getTime()));
     }
 
     public void setType(final LogType type) {
-        final Button typeButton = (Button) findViewById(R.id.type);
+        final Button typeButton = ButterKnife.findById(this, R.id.type);
 
         typeSelected = type;
         typeButton.setText(typeSelected.getL10n());
@@ -418,13 +416,13 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             final String log = logTexts[0];
             final String logPwd = logTexts.length > 1 ? logTexts[1] : null;
             try {
-                final LogResult logResult = loggingManager.postLog(cache, typeSelected, date, log, logPwd, trackables);
+                final LogResult logResult = loggingManager.postLog(typeSelected, date, log, logPwd, trackables);
 
                 if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
                     // update geocache in DB
                     if (typeSelected.isFoundLog()) {
                         cache.setFound(true);
-                        cache.setVisitedDate(new Date().getTime());
+                        cache.setVisitedDate(date.getTimeInMillis());
                     }
                     DataStore.saveChangedCache(cache);
 
@@ -443,8 +441,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                             Twitter.postTweetCache(geocode, logNow);
                         }
                     }
-                    if (GCVote.isValidRating(rating)) {
-                        GCVote.setRating(cache, rating);
+                    if (GCVote.isValidRating(rating) && GCVote.isVotingPossible(cache)) {
+                        if (!GCVote.setRating(cache, rating)) {
+                            showToast(res.getString(R.string.err_gcvote_send_rating));
+                        }
                     }
 
                     if (StringUtils.isNotBlank(imageUri.getPath())) {
@@ -496,11 +496,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     private String currentLogText() {
-        return ((EditText) findViewById(R.id.log)).getText().toString();
+        return ButterKnife.<EditText>findById(this, R.id.log).getText().toString();
     }
 
     private String currentLogPassword() {
-        return ((EditText) findViewById(R.id.log_password)).getText().toString();
+        return ButterKnife.<EditText>findById(this, R.id.log_password).getText().toString();
     }
 
     @Override

@@ -16,12 +16,15 @@ import rx.observers.Subscribers;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 import rx.subscriptions.Subscriptions;
+import rx.util.async.Async;
 
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Process;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -37,6 +40,8 @@ public class RxUtils {
     public final static Scheduler computationScheduler = Schedulers.computation();
 
     public static final Scheduler networkScheduler = Schedulers.from(new ThreadPoolExecutor(10, 10, 5, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>()));
+
+    public static final Scheduler refreshScheduler = Schedulers.from(new ThreadPoolExecutor(3, 3, 5, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>()));
 
     private static final HandlerThread looperCallbacksThread =
             new HandlerThread("Looper callbacks thread", Process.THREAD_PRIORITY_DEFAULT);
@@ -167,6 +172,63 @@ public class RxUtils {
                 return last != null ? Observable.just(last) : Observable.<T>empty();
             }
         })).replay(1).refCount();
+    }
+
+    public static <T> void andThenOnUi(final Scheduler scheduler, final Func0<T> background, final Action1<T> foreground) {
+        Async.fromCallable(background, scheduler).observeOn(AndroidSchedulers.mainThread()).subscribe(foreground);
+    }
+
+    public static void andThenOnUi(final Scheduler scheduler, final Action0 background, final Action0 foreground) {
+        andThenOnUi(scheduler, new Func0<Void>() {
+            @Override
+            public Void call() {
+                background.call();
+                return null;
+            }
+        }, new Action1<Void>() {
+            @Override
+            public void call(final Void ignored) {
+                foreground.call();
+            }
+        });
+    }
+
+    /**
+     * Cache observables so that every key is associated to only one of them.
+     *
+     * @param <K> the type of the key
+     * @param <V> the type of the value
+     */
+    public static class ObservableCache<K, V> {
+
+        final private Func1<K, Observable<V>> func;
+        final private Map<K, Observable<V>> cached = new HashMap<>();
+
+        /**
+         * Create a new observables cache.
+         *
+         * @param func the function transforming a key into an observable
+         */
+        public ObservableCache(final Func1<K, Observable<V>> func) {
+            this.func = func;
+        }
+
+        /**
+         * Get the observable corresponding to a key. If the key has not already been
+         * seen, the function passed to the constructor will be called to build the observable.
+         *
+         * @param key the key
+         * @return the observable corresponding to the key
+         */
+        public synchronized Observable<V> get(final K key) {
+            if (cached.containsKey(key)) {
+                return cached.get(key);
+            }
+            final Observable<V> value = func.call(key).replay().refCount();
+            cached.put(key, value);
+            return value;
+        }
+
     }
 
 }

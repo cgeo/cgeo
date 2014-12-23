@@ -25,8 +25,8 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
-import cgeo.geocaching.sensors.IGeoData;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
@@ -43,7 +43,6 @@ import cgeo.geocaching.ui.OwnerActionsClickListener;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.logs.CacheLogsViewCreator;
-import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
@@ -466,11 +465,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             case R.id.menu_waypoint_reset_cache_coords:
                 ensureSaved();
                 if (ConnectorFactory.getConnector(cache).supportsOwnCoordinates()) {
-                    createResetCacheCoordinatesDialog(cache, selectedWaypoint).show();
+                    createResetCacheCoordinatesDialog(selectedWaypoint).show();
                 } else {
                     final ProgressDialog progressDialog = ProgressDialog.show(this, getString(R.string.cache), getString(R.string.waypoint_reset), true);
                     final HandlerResetCoordinates handler = new HandlerResetCoordinates(this, progressDialog, false);
-                    new ResetCoordsThread(cache, handler, selectedWaypoint, true, false, progressDialog).start();
+                    resetCoords(cache, handler, selectedWaypoint, true, false, progressDialog);
                 }
                 return true;
             case R.id.menu_calendar:
@@ -547,7 +546,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         @Override
-        public void updateGeoData(final IGeoData geo) {
+        public void updateGeoData(final GeoData geo) {
             final CacheDetailActivity activity = activityRef.get();
             if (activity == null) {
                 return;
@@ -556,7 +555,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return;
             }
 
-            if (geo.getCoords() != null && activity.cache != null && activity.cache.getCoords() != null) {
+            if (activity.cache != null && activity.cache.getCoords() != null) {
                 activity.cacheDistanceView.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(activity.cache.getCoords())));
                 activity.cacheDistanceView.bringToFront();
             }
@@ -847,20 +846,19 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 final CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
                 if (attrib != null) {
                     noAttributeIconsFound = false;
-                    Drawable d = res.getDrawable(attrib.drawableId);
-                    iv.setImageDrawable(d);
+                    Drawable drawable = res.getDrawable(attrib.drawableId);
+                    iv.setImageDrawable(drawable);
                     // strike through?
                     if (strikeThrough) {
                         // generate strike through image with same properties as attribute image
                         final ImageView strikeThroughImage = new ImageView(CacheDetailActivity.this);
                         strikeThroughImage.setLayoutParams(iv.getLayoutParams());
-                        d = res.getDrawable(R.drawable.attribute__strikethru);
-                        strikeThroughImage.setImageDrawable(d);
+                        drawable = res.getDrawable(R.drawable.attribute__strikethru);
+                        strikeThroughImage.setImageDrawable(drawable);
                         fl.addView(strikeThroughImage);
                     }
                 } else {
-                    final Drawable d = res.getDrawable(R.drawable.attribute_unknown);
-                    iv.setImageDrawable(d);
+                    iv.setImageDrawable(res.getDrawable(R.drawable.attribute_unknown));
                 }
 
                 attributeRow.addView(fl);
@@ -958,8 +956,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          * Reference to the details list, so that the helper-method can access it without an additional argument
          */
         private LinearLayout detailsList;
-
-        private Thread watchlistThread;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
@@ -1117,164 +1113,133 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         /**
          * Abstract Listener for add / remove buttons for watchlist
          */
-        private abstract class AbstractWatchlistClickListener implements View.OnClickListener {
-            public void doExecute(final int titleId, final int messageId, final Thread thread) {
+        private abstract class AbstractPropertyListener implements View.OnClickListener {
+
+            private final SimpleCancellableHandler handler = new SimpleCancellableHandler(CacheDetailActivity.this, progress) {
+                @Override
+                public void handleRegularMessage(final Message message) {
+                    super.handleRegularMessage(message);
+                    updateWatchlistBox();
+                    updateFavPointBox();
+                }
+            };
+
+            public void doExecute(final int titleId, final int messageId, final Action1<SimpleCancellableHandler> action) {
                 if (progress.isShowing()) {
                     showToast(res.getString(R.string.err_watchlist_still_managing));
                     return;
                 }
                 progress.show(CacheDetailActivity.this, res.getString(titleId), res.getString(messageId), true, null);
-
-                if (watchlistThread != null) {
-                    watchlistThread.interrupt();
-                }
-
-                watchlistThread = thread;
-                watchlistThread.start();
+                RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+                    @Override
+                    public void call() {
+                        action.call(handler);
+                    }
+                });
             }
         }
 
         /**
          * Listener for "add to watchlist" button
          */
-        private class AddToWatchlistClickListener extends AbstractWatchlistClickListener {
+        private class AddToWatchlistClickListener extends AbstractPropertyListener {
             @Override
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_watchlist_add_title,
                         R.string.cache_dialog_watchlist_add_message,
-                        new WatchlistAddThread(new SimpleUpdateHandler(CacheDetailActivity.this, progress)));
+                        new Action1<SimpleCancellableHandler>() {
+                            @Override
+                            public void call(final SimpleCancellableHandler simpleCancellableHandler) {
+                                watchListAdd(simpleCancellableHandler);
+                            }
+                        });
             }
         }
 
         /**
          * Listener for "remove from watchlist" button
          */
-        private class RemoveFromWatchlistClickListener extends AbstractWatchlistClickListener {
+        private class RemoveFromWatchlistClickListener extends AbstractPropertyListener {
             @Override
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_watchlist_remove_title,
                         R.string.cache_dialog_watchlist_remove_message,
-                        new WatchlistRemoveThread(new SimpleUpdateHandler(CacheDetailActivity.this, progress)));
+                        new Action1<SimpleCancellableHandler>() {
+                            @Override
+                            public void call(final SimpleCancellableHandler simpleCancellableHandler) {
+                                watchListRemove(simpleCancellableHandler);
+                            }
+                        });
             }
         }
 
-        /** Thread to add this cache to the watchlist of the user */
-        private class WatchlistAddThread extends Thread {
-            private final Handler handler;
-
-            public WatchlistAddThread(final Handler handler) {
-                this.handler = handler;
-            }
-
-            @Override
-            public void run() {
-                watchlistThread = null;
-                Message msg;
-                if (ConnectorFactory.getConnector(cache).addToWatchlist(cache)) {
-                    msg = Message.obtain(handler, MESSAGE_SUCCEEDED);
-                } else {
-                    msg = Message.obtain(handler, MESSAGE_FAILED);
-                    final Bundle bundle = new Bundle();
-                    bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, res.getString(R.string.err_watchlist_failed));
-                    msg.setData(bundle);
-                }
-                handler.sendMessage(msg);
+        /** Add this cache to the watchlist of the user */
+        private void watchListAdd(final SimpleCancellableHandler handler) {
+            if (ConnectorFactory.getConnector(cache).addToWatchlist(cache)) {
+                handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
+            } else {
+                handler.sendTextMessage(MESSAGE_FAILED, R.string.err_watchlist_failed);
             }
         }
 
-        /** Thread to remove this cache from the watchlist of the user */
-        private class WatchlistRemoveThread extends Thread {
-            private final Handler handler;
-
-            public WatchlistRemoveThread(final Handler handler) {
-                this.handler = handler;
-            }
-
-            @Override
-            public void run() {
-                watchlistThread = null;
-                Message msg;
-                if (ConnectorFactory.getConnector(cache).removeFromWatchlist(cache)) {
-                    msg = Message.obtain(handler, MESSAGE_SUCCEEDED);
-                } else {
-                    msg = Message.obtain(handler, MESSAGE_FAILED);
-                    final Bundle bundle = new Bundle();
-                    bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, res.getString(R.string.err_watchlist_failed));
-                    msg.setData(bundle);
-                }
-                handler.sendMessage(msg);
+        /** Remove this cache from the watchlist of the user */
+        private void watchListRemove(final SimpleCancellableHandler handler) {
+            if (ConnectorFactory.getConnector(cache).removeFromWatchlist(cache)) {
+                handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
+            } else {
+                handler.sendTextMessage(MESSAGE_FAILED, R.string.err_watchlist_failed);
             }
         }
 
-        /** Thread to add this cache to the favorite list of the user */
-        private class FavoriteAddThread extends Thread {
-            private final Handler handler;
-
-            public FavoriteAddThread(final Handler handler) {
-                this.handler = handler;
-            }
-
-            @Override
-            public void run() {
-                watchlistThread = null;
-                Message msg;
-                if (GCConnector.addToFavorites(cache)) {
-                    msg = Message.obtain(handler, MESSAGE_SUCCEEDED);
-                } else {
-                    msg = Message.obtain(handler, MESSAGE_FAILED);
-                    final Bundle bundle = new Bundle();
-                    bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, res.getString(R.string.err_favorite_failed));
-                    msg.setData(bundle);
-                }
-                handler.sendMessage(msg);
+        /** Add this cache to the favorite list of the user */
+        private void favoriteAdd(final SimpleCancellableHandler handler) {
+            if (GCConnector.addToFavorites(cache)) {
+                handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
+            } else {
+                handler.sendTextMessage(MESSAGE_FAILED, R.string.err_favorite_failed);
             }
         }
 
-        /** Thread to remove this cache to the favorite list of the user */
-        private class FavoriteRemoveThread extends Thread {
-            private final Handler handler;
-
-            public FavoriteRemoveThread(final Handler handler) {
-                this.handler = handler;
-            }
-
-            @Override
-            public void run() {
-                watchlistThread = null;
-                Message msg;
-                if (GCConnector.removeFromFavorites(cache)) {
-                    msg = Message.obtain(handler, MESSAGE_SUCCEEDED);
-                } else {
-                    msg = Message.obtain(handler, MESSAGE_FAILED);
-                    final Bundle bundle = new Bundle();
-                    bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, res.getString(R.string.err_favorite_failed));
-                    msg.setData(bundle);
-                }
-                handler.sendMessage(msg);
+        /** Remove this cache to the favorite list of the user */
+        private void favoriteRemove(final SimpleCancellableHandler handler) {
+            if (GCConnector.removeFromFavorites(cache)) {
+                handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
+            } else {
+                handler.sendTextMessage(MESSAGE_FAILED, R.string.err_favorite_failed);
             }
         }
 
         /**
          * Listener for "add to favorites" button
          */
-        private class FavoriteAddClickListener extends AbstractWatchlistClickListener {
+        private class FavoriteAddClickListener extends AbstractPropertyListener {
             @Override
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_favorite_add_title,
                         R.string.cache_dialog_favorite_add_message,
-                        new FavoriteAddThread(new SimpleUpdateHandler(CacheDetailActivity.this, progress)));
+                        new Action1<SimpleCancellableHandler>() {
+                            @Override
+                            public void call(final SimpleCancellableHandler simpleCancellableHandler) {
+                                favoriteAdd(simpleCancellableHandler);
+                            }
+                        });
             }
         }
 
         /**
          * Listener for "remove from favorites" button
          */
-        private class FavoriteRemoveClickListener extends AbstractWatchlistClickListener {
+        private class FavoriteRemoveClickListener extends AbstractPropertyListener {
             @Override
             public void onClick(final View arg0) {
                 doExecute(R.string.cache_dialog_favorite_remove_title,
                         R.string.cache_dialog_favorite_remove_message,
-                        new FavoriteRemoveThread(new SimpleUpdateHandler(CacheDetailActivity.this, progress)));
+                        new Action1<SimpleCancellableHandler>() {
+                            @Override
+                            public void call(final SimpleCancellableHandler simpleCancellableHandler) {
+                                favoriteRemove(simpleCancellableHandler);
+                            }
+                        });
             }
         }
 
@@ -1283,7 +1248,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
          */
         private class ChangeListClickListener implements View.OnClickListener {
             @Override
-            public void onClick(final View view) {
+            public void onClick(final View v) {
                 new StoredList.UserInterface(CacheDetailActivity.this).promptForListSelection(R.string.list_title,
                         new Action1<Integer>() {
                             @Override
@@ -1551,19 +1516,26 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             return view;
         }
 
-        Thread currentThread;
-
         private void uploadPersonalNote() {
             final SimpleCancellableHandler myHandler = new SimpleCancellableHandler(CacheDetailActivity.this, progress);
 
             final Message cancelMessage = myHandler.cancelMessage(res.getString(R.string.cache_personal_note_upload_cancelled));
             progress.show(CacheDetailActivity.this, res.getString(R.string.cache_personal_note_uploading), res.getString(R.string.cache_personal_note_uploading), true, cancelMessage);
 
-            if (currentThread != null) {
-                currentThread.interrupt();
-            }
-            currentThread = new UploadPersonalNoteThread(cache, myHandler);
-            currentThread.start();
+            myHandler.unsubscribeIfCancelled(RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+                @Override
+                public void call() {
+                    final IConnector con = ConnectorFactory.getConnector(cache);
+                    if (con.supportsPersonalNote()) {
+                        con.uploadPersonalNote(cache);
+                    }
+                    final Message msg = Message.obtain();
+                    final Bundle bundle = new Bundle();
+                    bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, CgeoApplication.getInstance().getString(R.string.cache_personal_note_upload_done));
+                    msg.setData(bundle);
+                    myHandler.sendMessage(msg);
+                }
+            }));
         }
 
         private void loadLongDescription() {
@@ -1637,7 +1609,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     private static void fixTextColor(final String descriptionString, final IndexOutOfBoundsAvoidingTextView descriptionView) {
-        int backcolor;
+        final int backcolor;
         if (Settings.isLightSkin()) {
             backcolor = color.white;
 
@@ -1698,7 +1670,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     private class WaypointsViewCreator extends AbstractCachingPageViewCreator<ListView> {
-        private final int VISITED_INSET = (int) (6.6f * CgeoApplication.getInstance().getResources().getDisplayMetrics().density + 0.5f);
+        private final int visitedInset = (int) (6.6f * CgeoApplication.getInstance().getResources().getDisplayMetrics().density + 0.5f);
 
         @Override
         public ListView getDispatchedView(final ViewGroup parentView) {
@@ -1781,15 +1753,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             } else {
                 nameView.setText(res.getString(R.string.waypoint));
             }
-            setWaypointIcon(res, nameView, wpt);
+            setWaypointIcon(nameView, wpt);
 
             // visited
             if (wpt.isVisited()) {
-                final TypedValue a = new TypedValue();
-                getTheme().resolveAttribute(R.attr.text_color_grey, a, true);
-                if (a.type >= TypedValue.TYPE_FIRST_COLOR_INT && a.type <= TypedValue.TYPE_LAST_COLOR_INT) {
+                final TypedValue typedValue = new TypedValue();
+                getTheme().resolveAttribute(R.attr.text_color_grey, typedValue, true);
+                if (typedValue.type >= TypedValue.TYPE_FIRST_COLOR_INT && typedValue.type <= TypedValue.TYPE_LAST_COLOR_INT) {
                     // really should be just a color!
-                    nameView.setTextColor(a.data);
+                    nameView.setTextColor(typedValue.data);
                 }
             }
 
@@ -1845,15 +1817,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             });
         }
 
-        private void setWaypointIcon(final Resources res, final TextView nameView, final Waypoint wpt) {
+        private void setWaypointIcon(final TextView nameView, final Waypoint wpt) {
             final WaypointType waypointType = wpt.getWaypointType();
             final Drawable icon;
             if (wpt.isVisited()) {
                 final LayerDrawable ld = new LayerDrawable(new Drawable[] {
                         res.getDrawable(waypointType.markerId),
                         res.getDrawable(R.drawable.tick) });
-                ld.setLayerInset(0, 0, 0, VISITED_INSET, VISITED_INSET);
-                ld.setLayerInset(1, VISITED_INSET, VISITED_INSET, 0, 0);
+                ld.setLayerInset(0, 0, 0, visitedInset, visitedInset);
+                ld.setLayerInset(1, visitedInset, visitedInset, 0, 0);
                 icon = ld;
             } else {
                 icon = res.getDrawable(waypointType.markerId);
@@ -2009,7 +1981,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     /**
      * A dialog to allow the user to select reseting coordinates local/remote/both.
      */
-    private AlertDialog createResetCacheCoordinatesDialog(final Geocache cache, final Waypoint wpt) {
+    private AlertDialog createResetCacheCoordinatesDialog(final Waypoint wpt) {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.waypoint_reset_cache_coords);
@@ -2022,13 +1994,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 dialog.dismiss();
                 final ProgressDialog progressDialog = ProgressDialog.show(CacheDetailActivity.this, getString(R.string.cache), getString(R.string.waypoint_reset), true);
                 final HandlerResetCoordinates handler = new HandlerResetCoordinates(CacheDetailActivity.this, progressDialog, which == 1);
-                new ResetCoordsThread(cache, handler, wpt, which == 0 || which == 1, which == 1, progressDialog).start();
+                resetCoords(cache, handler, wpt, which == 0 || which == 1, which == 1, progressDialog);
             }
         });
         return builder.create();
     }
 
     private static class HandlerResetCoordinates extends WeakReferenceHandler<CacheDetailActivity> {
+        public static final int LOCAL = 0;
+        public static final int ON_WEBSITE = 1;
+
         private boolean remoteFinished = false;
         private boolean localFinished = false;
         private final ProgressDialog progressDialog;
@@ -2042,7 +2017,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         @Override
         public void handleMessage(final Message msg) {
-            if (msg.what == ResetCoordsThread.LOCAL) {
+            if (msg.what == LOCAL) {
                 localFinished = true;
             } else {
                 remoteFinished = true;
@@ -2059,94 +2034,53 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     }
 
-    private class ResetCoordsThread extends Thread {
-
-        private final Geocache cache;
-        private final Handler handler;
-        private final boolean local;
-        private final boolean remote;
-        private final Waypoint wpt;
-        private final ProgressDialog progress;
-        public static final int LOCAL = 0;
-        public static final int ON_WEBSITE = 1;
-
-        public ResetCoordsThread(final Geocache cache, final Handler handler, final Waypoint wpt, final boolean local, final boolean remote, final ProgressDialog progress) {
-            this.cache = cache;
-            this.handler = handler;
-            this.local = local;
-            this.remote = remote;
-            this.wpt = wpt;
-            this.progress = progress;
-        }
-
-        @Override
-        public void run() {
-
-            if (local) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        progress.setMessage(res.getString(R.string.waypoint_reset_cache_coords));
-                    }
-                });
-                cache.setCoords(wpt.getCoords());
-                cache.setUserModifiedCoords(false);
-                cache.deleteWaypointForce(wpt);
-                DataStore.saveChangedCache(cache);
-                handler.sendEmptyMessage(LOCAL);
-            }
-
-            final IConnector con = ConnectorFactory.getConnector(cache);
-            if (remote && con.supportsOwnCoordinates()) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        progress.setMessage(res.getString(R.string.waypoint_coordinates_being_reset_on_website));
-                    }
-                });
-
-                final boolean result = con.deleteModifiedCoordinates(cache);
-
-                runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        if (result) {
-                            showToast(getString(R.string.waypoint_coordinates_has_been_reset_on_website));
-                        } else {
-                            showToast(getString(R.string.waypoint_coordinates_upload_error));
+    private void resetCoords(final Geocache cache, final Handler handler, final Waypoint wpt, final boolean local, final boolean remote, final ProgressDialog progress) {
+        RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+            @Override
+            public void call() {
+                if (local) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            progress.setMessage(res.getString(R.string.waypoint_reset_cache_coords));
                         }
-                        handler.sendEmptyMessage(ON_WEBSITE);
-                        notifyDataSetChanged();
-                    }
+                    });
+                    cache.setCoords(wpt.getCoords());
+                    cache.setUserModifiedCoords(false);
+                    cache.deleteWaypointForce(wpt);
+                    DataStore.saveChangedCache(cache);
+                    handler.sendEmptyMessage(HandlerResetCoordinates.LOCAL);
+                }
 
-                });
+                final IConnector con = ConnectorFactory.getConnector(cache);
+                if (remote && con.supportsOwnCoordinates()) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            progress.setMessage(res.getString(R.string.waypoint_coordinates_being_reset_on_website));
+                        }
+                    });
 
+                    final boolean result = con.deleteModifiedCoordinates(cache);
+
+                    runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            if (result) {
+                                showToast(getString(R.string.waypoint_coordinates_has_been_reset_on_website));
+                            } else {
+                                showToast(getString(R.string.waypoint_coordinates_upload_error));
+                            }
+                            handler.sendEmptyMessage(HandlerResetCoordinates.ON_WEBSITE);
+                            notifyDataSetChanged();
+                        }
+
+                    });
+
+                }
             }
-        }
-    }
-
-    private static class UploadPersonalNoteThread extends Thread {
-        private Geocache cache = null;
-        private CancellableHandler handler = null;
-
-        public UploadPersonalNoteThread(final Geocache cache, final CancellableHandler handler) {
-            this.cache = cache;
-            this.handler = handler;
-        }
-
-        @Override
-        public void run() {
-            final IConnector con = ConnectorFactory.getConnector(cache);
-            if (con.supportsPersonalNote()) {
-                con.uploadPersonalNote(cache);
-            }
-            final Message msg = Message.obtain();
-            final Bundle bundle = new Bundle();
-            bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, CgeoApplication.getInstance().getString(R.string.cache_personal_note_upload_done));
-            msg.setData(bundle);
-            handler.sendMessage(msg);
-        }
+        });
     }
 
     @Override
@@ -2221,7 +2155,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (cache.isOffline()) {
             final long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
 
-            String ago;
+            final String ago;
             if (diff < 15) {
                 ago = res.getString(R.string.cache_offline_time_mins_few);
             } else if (diff < 50) {
@@ -2297,22 +2231,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         @Override
         public void handleMessage(final Message msg) {
             notifyDataSetChanged(activityRef);
-        }
-    }
-
-    private static final class SimpleUpdateHandler extends SimpleHandler {
-
-        public SimpleUpdateHandler(final CacheDetailActivity activity, final Progress progress) {
-            super(activity, progress);
-        }
-
-        @Override
-        public void handleMessage(final Message msg) {
-            if (msg.what == MESSAGE_FAILED) {
-                super.handleMessage(msg);
-            } else {
-                notifyDataSetChanged(activityRef);
-            }
         }
     }
 

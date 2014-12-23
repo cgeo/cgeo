@@ -95,16 +95,8 @@ public class CgeoTestRunner extends GoogleInstrumentationTestRunner {
             Method m = obj.getClass().getDeclaredMethod("getAndroidTestRunner", (Class[]) null);
             AndroidTestRunner androidTestRunner = (AndroidTestRunner) m.invoke(obj);
             androidTestRunner.addTestListener(mListener);
-        } catch (NoSuchFieldException x) {
+        } catch (NoSuchFieldException | InvocationTargetException | IllegalAccessException | NoSuchMethodException | SecurityException x) {
             Log.e(LOG_TAG, x.toString());
-        } catch (SecurityException e) {
-            Log.e(LOG_TAG, e.toString());
-        } catch (NoSuchMethodException e) {
-            Log.e(LOG_TAG, e.toString());
-        } catch (IllegalAccessException x) {
-            Log.e(LOG_TAG, x.toString());
-        } catch (InvocationTargetException e) {
-            Log.e(LOG_TAG, e.toString());
         }
         super.start();
     }

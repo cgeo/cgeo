@@ -1,7 +1,5 @@
 package cgeo.geocaching.location;
 
-import cgeo.geocaching.location.DistanceParser;
-
 import android.test.AndroidTestCase;
 
 public class DistanceParserTest extends AndroidTestCase {
@@ -25,7 +23,7 @@ public class DistanceParserTest extends AndroidTestCase {
         assertEquals(1.2, DistanceParser.parseDistance("1,2km", true), MM);
     }
 
-    public static void testCase() {
+    public static void testFeet() {
         assertEquals(0.36576, DistanceParser.parseDistance("1200 FT", true), MM);
     }
 

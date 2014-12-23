@@ -9,6 +9,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.Activity;
 import android.location.Address;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 public class AddressListAdapter extends ArrayAdapter<Address> {
 
     final private LayoutInflater inflater;
-    final private Geopoint location;
+    @NonNull final private Geopoint location;
 
     protected static final class ViewHolder extends AbstractViewHolder {
         @InjectView(R.id.label) protected TextView label;
@@ -72,7 +73,7 @@ public class AddressListAdapter extends ArrayAdapter<Address> {
     }
 
     private CharSequence getDistanceText(final Address address) {
-        if (location != null && address.hasLatitude() && address.hasLongitude()) {
+        if (address.hasLatitude() && address.hasLongitude()) {
             return Units.getDistanceFromKilometers(location.distanceTo(new Geopoint(address.getLatitude(), address.getLongitude())));
         }
 

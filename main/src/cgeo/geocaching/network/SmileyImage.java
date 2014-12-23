@@ -5,7 +5,6 @@ import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.ImageUtils.LineHeightContainerDrawable;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
 
 import rx.Observable;
 
@@ -23,17 +22,14 @@ public class SmileyImage extends HtmlImage {
     }
 
     @Override
-    protected Pair<BitmapDrawable, Boolean> scaleImage(final Pair<Bitmap, Boolean> loadResult) {
-        final Bitmap bitmap = loadResult.getLeft();
-        BitmapDrawable drawable;
-        if (bitmap != null) {
-            drawable = new BitmapDrawable(view.getResources(), bitmap);
-            drawable.setBounds(ImageUtils.scaleImageToLineHeight(drawable, view));
+    protected ImmutablePair<BitmapDrawable, Boolean> scaleImage(final ImmutablePair<Bitmap, Boolean> loadResult) {
+        final Bitmap bitmap = loadResult.left;
+        if (bitmap == null) {
+            return ImmutablePair.of((BitmapDrawable) null, loadResult.right);
         }
-        else {
-            drawable = null;
-        }
-        return new ImmutablePair<>(drawable, loadResult.getRight());
+        final BitmapDrawable drawable = new BitmapDrawable(view.getResources(), bitmap);
+        drawable.setBounds(ImageUtils.scaleImageToLineHeight(drawable, view));
+        return ImmutablePair.of(drawable, loadResult.right);
     }
 
     @Override

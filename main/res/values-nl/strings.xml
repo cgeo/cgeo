@@ -74,7 +74,7 @@
   <string name="log_tb_visit">Bezoek</string>
   <string name="log_tb_drop">Hier droppen</string>
   <string name="log_tb_changeall">Wijzig alles</string>
-  <string name="log_save">Opslaan</string>
+  <string name="log_save">Off line opslaan</string>
   <string name="log_saving">Log opslaan…</string>
   <string name="log_saving_and_uploading">Verzenden van log en uploaden foto…</string>
   <string name="log_clear">Wissen</string>
@@ -167,15 +167,11 @@
   <string name="err_point_unknown_position">Sorry, c:geo kan niet bepalen waar je bent.</string>
   <string name="err_point_no_position_given_title">Info benodigd</string>
   <string name="err_point_no_position_given">Geef op zijn minst lengte- en breedtegraad of afstand en richting. Of vul alle 4 de velden.</string>
-  <string name="err_point_curr_position_unavailable">c:geo heeft de huidige coördinaten nog niet. Even geduld a.u.b….</string>
   <string name="err_point_bear_and_dist_title">Hulp nodig?</string>
   <string name="err_point_bear_and_dist">Vul zowel richting als afstand. Richting is hoek van 0 to 360 graden t.o.v. het noorden. Afstand mag met of zonder eenheid.</string>
   <string name="err_log_load_data">Sorry, c:geo kan data om bezoek te loggen niet laden.</string>
   <string name="err_log_load_data_again">Sorry, c:geo kan data om bezoek te loggen niet laden. Bezig nogmaals te proberen.</string>
   <string name="err_log_load_data_still">c:geo is nog steeds bezig om data te laden om bezoek te loggen. Graag nog even geduld.</string>
-  <string name="err_log_post_failed">Sorry, het is c:geo niet gelukt het log te posten.</string>
-  <string name="err_log_post_failed_ec">Het lijkt erop dat uw log niet werd gepost. Controleer het op Extremcaching.com.</string>
-  <string name="err_logimage_post_failed">Het lijkt erop dat uw log-foto niet geüpload is. Controleer het op Geocaching.com.</string>
   <string name="err_search_address_forgot">Sorry, c:geo is het adres dat je zoekt vergeten.</string>
   <string name="err_parse_lat">Sorry, c:geo kan breedtegraad niet verwerken.</string>
   <string name="err_parse_lon">Sorry, c:geo kan lengtegraad niet verwerken.</string>
@@ -212,6 +208,7 @@
   <string name="loc_net">Netwerk</string>
   <string name="loc_fused">Gecombineerd</string>
   <string name="loc_low_power">Batterij bijna leeg</string>
+  <string name="loc_home">Thuis coördinaten</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Proberen te lokaliseren</string>
@@ -376,6 +373,8 @@
   <string name="settings_activate_oc_uk">Activeren</string>
   <string name="init_oc_uk_description">c:geo authoriseren met opencaching.org.uk om naar caches te zoeken en het filteren van gevonden caches.</string>
   <string name="init_gcvote">GCvote.com</string>
+  <string name="init_gcvote_password_description">Om een cache te kunnen beoordelen, volg de instructies op GCVote.com en geef hier uw GCVote wachtwoord op.</string>
+  <string name="err_gcvote_send_rating">Fout bij het verzenden van beoordeling, controleer het GCVote wachtwoord in instellingen of maak deze leeg.</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activeren</string>
   <string name="init_username">Gebruikersnaam</string>
@@ -647,7 +646,7 @@
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Open in browser</string>
   <string name="cache_menu_visit">Log bezoek</string>
-  <string name="cache_menu_visit_offline">Log bezoek offline</string>
+  <string name="cache_menu_visit_offline">Enkele klik offline log</string>
   <string name="cache_menu_spoilers">Spoiler afbeeldingen</string>
   <string name="cache_menu_around">Caches rondom</string>
   <string name="cache_menu_event">Toevoegen aan kalender</string>

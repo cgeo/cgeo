@@ -220,12 +220,6 @@ public final class GpxSerializer {
 
     /**
      * Writes one waypoint entry for cache waypoint.
-     *
-     * @param cache
-     *            The
-     * @param wp
-     * @param prefix
-     * @throws IOException
      */
     private void writeCacheWaypoint(final Waypoint wp) throws IOException {
         final Geopoint coords = wp.getCoords();

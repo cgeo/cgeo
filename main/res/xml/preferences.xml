@@ -325,7 +325,13 @@
                         android:summary="@string/init_summary_ratingwanted"
                         android:title="@string/init_ratingwanted" />
 
+                    <cgeo.geocaching.settings.TextPreference
+                        android:dependency="@string/pref_ratingwanted"
+                        android:layout="@layout/text_preference"
+                        android:text="@string/init_gcvote_password_description" />
+
                     <cgeo.geocaching.settings.EditPasswordPreference
+                        android:dependency="@string/pref_ratingwanted"
                         android:dialogTitle="@string/init_password"
                         android:hint="@string/init_password"
                         android:imeOptions="actionDone"
@@ -694,6 +700,11 @@
                     android:enabled="false"
                     android:key="@string/pref_navigation_menu_pebble"
                     android:title="@string/cache_menu_pebble" />
+                <CheckBoxPreference
+                    android:defaultValue="true"
+                    android:enabled="false"
+                    android:key="@string/pref_navigation_menu_android_wear"
+                    android:title="@string/cache_menu_android_wear" />
                 <CheckBoxPreference
                     android:defaultValue="true"
                     android:enabled="false"
