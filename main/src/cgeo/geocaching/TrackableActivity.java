@@ -612,8 +612,11 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         // refresh the logs view after coming back from logging a trackable
         if (trackable != null) {
             final Trackable updatedTrackable = DataStore.loadTrackable(trackable.getGeocode());
-            trackable.setLogs(updatedTrackable.getLogs());
-            reinitializeViewPager();
+            // if this activity is resumed after a long time, the trackable might be gone due to regular cleanup
+            if (updatedTrackable != null) {
+                trackable.setLogs(updatedTrackable.getLogs());
+                reinitializeViewPager();
+            }
         }
     }
 
