@@ -39,7 +39,6 @@
         android:id="@+id/menu_scan"
         android:icon="@drawable/ic_menu_barcode"
         android:title="@string/menu_scan_geo"
-        android:visible="false"
         app:showAsAction="ifRoom">
     </item>
     <item
