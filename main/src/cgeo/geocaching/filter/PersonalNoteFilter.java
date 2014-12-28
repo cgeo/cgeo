@@ -9,6 +9,9 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Filter that accepts {@link Geocache}s with a non empty personal note stored locally.
+ */
 public class PersonalNoteFilter extends AbstractFilter implements IFilterFactory {
 
     protected PersonalNoteFilter() {
@@ -16,7 +19,7 @@ public class PersonalNoteFilter extends AbstractFilter implements IFilterFactory
     }
 
     @Override
-    public boolean accepts(Geocache cache) {
+    public boolean accepts(final Geocache cache) {
         return StringUtils.isNotBlank(cache.getPersonalNote());
     }
 
