@@ -1168,8 +1168,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void dropStored() {
         final int titleId = (adapter.getCheckedCount() > 0) ? R.string.caches_remove_selected : R.string.caches_remove_all;
-        final int messageId = (adapter.getCheckedCount() > 0) ? R.string.caches_remove_selected_confirm : R.string.caches_remove_all_confirm;
-        final String message = getString(messageId, adapter.getCheckedOrAllCount());
+        //final int messageId = (adapter.getCheckedCount() > 0) ? R.string.caches_remove_selected_confirm : R.string.caches_remove_all_confirm;
+        //final String message = getString(messageId, adapter.getCheckedOrAllCount());
+        final int count= adapter.getCheckedOrAllCount();
+        final String message = (adapter.getCheckedCount() > 0) ?
+                getString(R.string.caches_remove_selected_confirm, count) : res.getQuantityString(R.plurals.caches_remove_all_confirm,count,count);
         Dialogs.confirmYesNo(this, titleId, message, new DialogInterface.OnClickListener() {
 
             @Override
