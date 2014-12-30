@@ -20,6 +20,8 @@ import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.gcvote.GCVote;
+import cgeo.geocaching.gcvote.GCVoteDialog;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.network.HtmlImage;
@@ -502,6 +504,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         menu.findItem(R.id.menu_store).setVisible(cache != null && !cache.isOffline());
         menu.findItem(R.id.menu_delete).setVisible(cache != null && cache.isOffline());
         menu.findItem(R.id.menu_refresh).setVisible(cache != null && cache.isOffline());
+        menu.findItem(R.id.menu_gcvote).setVisible(cache != null && GCVote.isVotingPossible(cache));
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -523,6 +526,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             case R.id.menu_refresh:
                 refreshCache();
                 return true;
+            case R.id.menu_gcvote:
+                showVoteDialog();
+                return true;
             default:
                 if (NavigationAppFactory.onMenuItemSelected(item, this, cache)) {
                     return true;
@@ -534,6 +540,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showVoteDialog() {
+        GCVoteDialog.show(this, cache, new Runnable() {
+            @Override
+            public void run() {
+                notifyDataSetChanged();
+            }
+        });
     }
 
     private static final class CacheDetailsGeoDirHandler extends GeoDirHandler {
@@ -614,7 +629,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     private void notifyDataSetChanged() {
-        // This might get called asynchronically when the activity is shut down
+        // This might get called asynchronous when the activity is shut down
         if (isFinishing()) {
             return;
         }

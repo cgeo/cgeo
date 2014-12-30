@@ -131,8 +131,11 @@ public final class GCVote {
      * @return {@code true} if the rating was submitted successfully
      */
     public static boolean setRating(final Geocache cache, final float rating) {
-        if (!isVotingPossible(cache) || !isValidRating(rating)) {
-            throw new IllegalArgumentException(!isVotingPossible(cache) ? "voting is not possible for " + cache : "invalid rating " + rating);
+        if (!isVotingPossible(cache)) {
+            throw new IllegalArgumentException("voting is not possible for " + cache);
+        }
+        if (!isValidRating(rating)) {
+            throw new IllegalArgumentException("invalid rating " + rating);
         }
 
         final ImmutablePair<String, String> login = Settings.getGCvoteLogin();
@@ -199,7 +202,7 @@ public final class GCVote {
         return rating >= MIN_RATING && rating <= MAX_RATING;
     }
 
-    public static boolean isVotingPossible(final Geocache cache) {
+    public static boolean isVotingPossible(@NonNull final Geocache cache) {
         return Settings.isGCvoteLogin() && StringUtils.isNotBlank(cache.getGuid()) && cache.supportsGCVote();
     }
 

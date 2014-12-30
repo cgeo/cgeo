@@ -419,6 +419,7 @@
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_gcvote_password_description">To be able to rate a cache, you need to follow the instructions at GCVote.com and enter your GCVote password here.</string>
     <string name="err_gcvote_send_rating">Error while sending rating, check GCVote password in settings or empty it.</string>
+    <string name="gcvote_sent">Voting successfully sent</string>
     <string name="init_twitter">Twitter</string>
     <string name="settings_activate_twitter">Activate</string>
     <string name="init_username">Username</string>
@@ -716,6 +717,7 @@
     <string name="cache_menu_navigon">Navigon</string>
     <string name="cache_menu_pebble">Pebble</string>
     <string name="cache_menu_android_wear">Android Wear</string>
+    <string name="cache_menu_vote">Vote</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Saved Log</string>
     <string name="cache_status_found">Found</string>

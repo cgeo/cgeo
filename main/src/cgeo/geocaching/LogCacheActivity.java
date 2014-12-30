@@ -12,6 +12,8 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
+import cgeo.geocaching.gcvote.GCVoteRatingBarUtil;
+import cgeo.geocaching.gcvote.GCVoteRatingBarUtil.OnRatingChangeListener;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.dialog.DateDialog;
@@ -45,8 +47,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RatingBar;
-import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -86,7 +86,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private String imageDescription;
     private Uri imageUri;
     private boolean sendButtonEnabled;
-    private boolean isRatingBarShown = false;
+    private final boolean isRatingBarShown = false;
 
     public void onLoadFinished() {
         if (loggingManager.hasLoaderError()) {
@@ -287,24 +287,13 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private void initializeRatingBar() {
         if (GCVote.isVotingPossible(cache) && !isRatingBarShown) {
-            final RatingBar ratingBar = ButterKnife.findById(this, R.id.gcvoteRating);
-            final TextView label = ButterKnife.findById(this, R.id.gcvoteLabel);
-            isRatingBarShown = true;
-            ratingBar.setVisibility(View.VISIBLE);
-            label.setVisibility(View.VISIBLE);
-            ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+            GCVoteRatingBarUtil.initializeRatingBar(cache, getWindow().getDecorView().getRootView(), new OnRatingChangeListener() {
 
                 @Override
-                public void onRatingChanged(final RatingBar ratingBar, final float stars, final boolean fromUser) {
-                    // 0.5 is not a valid rating, therefore we must limit
-                    rating = GCVote.isValidRating(stars) ? stars : 0;
-                    if (rating < stars) {
-                        ratingBar.setRating(rating);
-                    }
-                    label.setText(GCVote.getDescription(rating));
+                public void onRatingChanged(final float stars) {
+                    rating = stars;
                 }
             });
-            ratingBar.setRating(cache.getMyVote());
         }
     }
 

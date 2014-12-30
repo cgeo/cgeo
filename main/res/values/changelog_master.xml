@@ -4,6 +4,7 @@
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
     · New: Waypoints created from personal notes can now be deleted\n
+    · New: More easy to use vote dialog in cache details\n
     · Fix: Up navigation did not work when c:geo was invoked from another app\n
     \n
   </string>
