@@ -431,7 +431,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                         }
                     }
                     if (GCVote.isValidRating(rating) && GCVote.isVotingPossible(cache)) {
-                        if (!GCVote.setRating(cache, rating)) {
+                        if (GCVote.setRating(cache, rating)) {
+                            cache.setMyVote(rating);
+                            DataStore.saveChangedCache(cache);
+                        } else {
                             showToast(res.getString(R.string.err_gcvote_send_rating));
                         }
                     }

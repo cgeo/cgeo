@@ -28,6 +28,7 @@ import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Observable;
 import rx.Observable.OnSubscribe;
@@ -2010,6 +2011,7 @@ public class DataStore {
         return trackables;
     }
 
+    @Nullable
     public static Trackable loadTrackable(final String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return null;
