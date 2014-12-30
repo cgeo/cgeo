@@ -6,6 +6,8 @@
     · Fix: Use phone language instead of country when requesting opencaching data\n
     · Fix: Menu for scanning trackable and geocache codes wrongly hidden\n
     · Fix: Recognize Sygic voucher edition\n
+    · Fix: Update locally stored GCVote when sending over network\n
+     \n
      <b>2014.12.22:</b>\n
     · New: Updated translations\n
     · New: Google Play services are disabled by default on Android before 4.0\n
