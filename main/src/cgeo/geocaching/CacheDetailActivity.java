@@ -749,7 +749,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         progress.show(this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
 
-        cache.refresh(refreshCacheHandler, RxUtils.networkScheduler);
+        cache.refresh(refreshCacheHandler, RxUtils.refreshScheduler);
     }
 
     private void dropCache() {
