@@ -158,8 +158,8 @@ public class RxUtils {
         };
     }
 
-    public static<T> Observable<T> rememberLast(final Observable<T> observable) {
-        final AtomicReference<T> lastValue = new AtomicReference<>(null);
+    public static<T> Observable<T> rememberLast(final Observable<T> observable, final T initialValue) {
+        final AtomicReference<T> lastValue = new AtomicReference<>(initialValue);
         return observable.doOnNext(new Action1<T>() {
             @Override
             public void call(final T value) {

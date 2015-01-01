@@ -70,7 +70,7 @@ public class Sensors {
                 geoDataObservableLowPower = geoDataObservable;
             }
         } else {
-            geoDataObservable = RxUtils.rememberLast(GeoDataProvider.create(app).doOnNext(rememberGeodataAction));
+            geoDataObservable = RxUtils.rememberLast(GeoDataProvider.create(app).doOnNext(rememberGeodataAction), null);
             geoDataObservableLowPower = geoDataObservable;
         }
     }
@@ -86,7 +86,7 @@ public class Sensors {
         // If we have no magnetic sensor, there is no point in trying to setup any, we will always get the direction from the GPS.
         if (!hasMagneticFieldSensor) {
             Log.i("No magnetic field sensor, using only the GPS for the orientation");
-            directionObservable = RxUtils.rememberLast(geoDataObservableLowPower.map(GPS_TO_DIRECTION).doOnNext(onNextrememberDirectionAction));
+            directionObservable = RxUtils.rememberLast(geoDataObservableLowPower.map(GPS_TO_DIRECTION).doOnNext(onNextrememberDirectionAction), 0f);
             return;
         }
 
@@ -130,7 +130,7 @@ public class Sensors {
             }
         }).map(GPS_TO_DIRECTION);
 
-        directionObservable = Observable.merge(magneticDirectionObservable, directionFromGpsObservable);
+        directionObservable = RxUtils.rememberLast(Observable.merge(magneticDirectionObservable, directionFromGpsObservable).doOnNext(onNextrememberDirectionAction), 0f);
     }
 
     public Observable<GeoData> geoDataObservable(final boolean lowPower) {
