@@ -109,11 +109,7 @@ public class Sensors {
         }).filter(new Func1<Float, Boolean>() {
             @Override
             public Boolean call(final Float aFloat) {
-                final boolean compassWillBeUsed = Settings.isUseCompass() && !useDirectionFromGps.get();
-                if (compassWillBeUsed) {
-                    Log.d("Using direction from compass: " + aFloat);
-                }
-                return compassWillBeUsed;
+                return Settings.isUseCompass() && !useDirectionFromGps.get();
             }
         });
 
@@ -122,11 +118,7 @@ public class Sensors {
             public Boolean call(final GeoData geoData) {
                 final boolean useGps = geoData.getSpeed() > 5.0f;
                 useDirectionFromGps.set(useGps);
-                final boolean gpsWillBeUsed = useGps || !Settings.isUseCompass();
-                if (gpsWillBeUsed) {
-                    Log.d("Using direction from GPS");
-                }
-                return gpsWillBeUsed;
+                return useGps || !Settings.isUseCompass();
             }
         }).map(GPS_TO_DIRECTION);
 
