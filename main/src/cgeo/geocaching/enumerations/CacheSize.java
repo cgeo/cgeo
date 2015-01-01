@@ -3,6 +3,8 @@ package cgeo.geocaching.enumerations;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
@@ -50,6 +52,7 @@ public enum CacheSize {
         FIND_BY_ID = Collections.unmodifiableMap(mapping);
     }
 
+    @NonNull
     public static CacheSize getById(final String id) {
         if (id == null) {
             return UNKNOWN;

@@ -98,7 +98,7 @@ public class Geocache implements IWaypoint {
      * lazy initialized
      */
     private String hint = null;
-    private CacheSize size = CacheSize.UNKNOWN;
+    @NonNull private CacheSize size = CacheSize.UNKNOWN;
     private float difficulty = 0;
     private float terrain = 0;
     private Float direction = null;
@@ -271,7 +271,7 @@ public class Geocache implements IWaypoint {
         if (!detailed && StringUtils.isBlank(getHint())) {
             hint = other.getHint();
         }
-        if (size == null || CacheSize.UNKNOWN == size) {
+        if (size == CacheSize.UNKNOWN) {
             size = other.size;
         }
         if (difficulty == 0) {
@@ -559,10 +559,8 @@ public class Geocache implements IWaypoint {
         return ownerDisplayName;
     }
 
+    @NonNull
     public CacheSize getSize() {
-        if (size == null) {
-            return CacheSize.UNKNOWN;
-        }
         return size;
     }
 
@@ -1079,13 +1077,8 @@ public class Geocache implements IWaypoint {
         this.hint = hint;
     }
 
-    public void setSize(final CacheSize size) {
-        if (size == null) {
-            this.size = CacheSize.UNKNOWN;
-        }
-        else {
-            this.size = size;
-        }
+    public void setSize(@NonNull final CacheSize size) {
+        this.size = size;
     }
 
     public void setDifficulty(final float difficulty) {
@@ -1478,7 +1471,7 @@ public class Geocache implements IWaypoint {
         warnIncorrectParsingIfBlank(getOwnerUserId(), "owner");
         warnIncorrectParsingIf(getHiddenDate() == null, "hidden");
         warnIncorrectParsingIf(getFavoritePoints() < 0, "favoriteCount");
-        warnIncorrectParsingIf(getSize() == null, "size");
+        warnIncorrectParsingIf(getSize() == CacheSize.UNKNOWN, "size");
         warnIncorrectParsingIf(getType() == null || getType() == CacheType.UNKNOWN, "type");
         warnIncorrectParsingIf(getCoords() == null, "coordinates");
         warnIncorrectParsingIfBlank(getLocation(), "location");

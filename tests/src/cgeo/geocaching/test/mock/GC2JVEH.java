@@ -64,6 +64,7 @@ public class GC2JVEH extends MockedCache {
         return "indianerjones";
     }
 
+    @NonNull
     @Override
     public CacheSize getSize() {
         return CacheSize.SMALL;

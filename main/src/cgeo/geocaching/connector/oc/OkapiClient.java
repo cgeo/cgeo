@@ -619,6 +619,7 @@ final class OkapiClient {
         cache.setCoords(new Geopoint(latitude, longitude));
     }
 
+    @NonNull
     private static CacheSize getCacheSize(final ObjectNode response) {
         if (!response.has(CACHE_SIZE2)) {
             return getCacheSizeDeprecated(response);
@@ -632,6 +633,7 @@ final class OkapiClient {
         }
     }
 
+    @NonNull
     private static CacheSize getCacheSizeDeprecated(final ObjectNode response) {
         if (!response.has(CACHE_SIZE_DEPRECATED)) {
             return CacheSize.NOT_CHOSEN;

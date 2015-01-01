@@ -41,6 +41,7 @@ public class GC3XX5J extends MockedCache {
         return "David & Ajda";
     }
 
+    @NonNull
     @Override
     public CacheSize getSize() {
         return CacheSize.SMALL;
