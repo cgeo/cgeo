@@ -242,7 +242,6 @@ public class HtmlImage implements Html.ImageGetter {
                         return;
                 }
                 if (onlySave) {
-                    Log.d("onlySave, returning");
                     subscriber.onCompleted();
                     return;
                 }
