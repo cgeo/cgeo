@@ -91,7 +91,7 @@ public class HtmlImage implements Html.ImageGetter {
 
     // Background loading
     final private PublishSubject<Observable<String>> loading = PublishSubject.create();
-    final private Observable<String> waitForEnd = Observable.merge(loading).publish().refCount();
+    final private Observable<String> waitForEnd = Observable.merge(loading).cache();
     final private CompositeSubscription subscription = new CompositeSubscription(waitForEnd.subscribe());
 
     /**
