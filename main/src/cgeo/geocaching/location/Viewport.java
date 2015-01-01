@@ -87,7 +87,7 @@ public final class Viewport {
      */
     public int count(final @NonNull Collection<? extends ICoordinates> points) {
         int total = 0;
-        for (ICoordinates point: points) {
+        for (final ICoordinates point: points) {
             if (point != null && contains(point)) {
                 total += 1;
             }
@@ -102,7 +102,7 @@ public final class Viewport {
 
     /**
      * Check whether another viewport is fully included into the current one.
-     * 
+     *
      * @param vp
      *            the other viewport
      * @return true if the viewport is fully included into this one, false otherwise
@@ -118,6 +118,7 @@ public final class Viewport {
      *            the database table to use as prefix, or null if no prefix is required
      * @return the string without the "where" keyword
      */
+    @NonNull
     public StringBuilder sqlWhere(@Nullable final String dbTable) {
         final String prefix = dbTable == null ? "" : (dbTable + ".");
         return new StringBuilder(prefix).append("latitude >= ").append(getLatitudeMin()).append(" and ")

@@ -312,6 +312,8 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     assertThat(search).isNotNull();
                     assertThat(search.getGeocodes().contains(mockedCache.getGeocode())).isTrue();
                     Geocache parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+                    assert (parsedCache != null);
+                    assertThat(parsedCache).isNotNull();
 
                     assertThat(mockedCache.getCoords().equals(parsedCache.getCoords())).isEqualTo(Settings.isGCPremiumMember());
                     assertThat(parsedCache.isReliableLatLon()).isEqualTo(Settings.isGCPremiumMember());
@@ -324,6 +326,8 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     assertThat(search).isNotNull();
                     assertThat(search.getGeocodes().contains(mockedCache.getGeocode())).isTrue();
                     parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+                    assert (parsedCache != null);
+                    assertThat(parsedCache).isNotNull();
 
                     assertThat(mockedCache.getCoords().equals(parsedCache.getCoords())).isEqualTo(Settings.isGCPremiumMember());
                     assertThat(parsedCache.isReliableLatLon()).isEqualTo(Settings.isGCPremiumMember());
@@ -366,6 +370,8 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     assertThat(search.getGeocodes().contains(cache.getGeocode())).isTrue();
                     // coords differ
                     final Geocache cacheFromViewport = DataStore.loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+                    assert (cacheFromViewport != null);
+                    assertThat(cacheFromViewport).isNotNull();
                     Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
                     Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cacheFromViewport.getCoords());
                     assertThat(cache.getCoords().distanceTo(cacheFromViewport.getCoords()) <= 1e-3).isFalse();

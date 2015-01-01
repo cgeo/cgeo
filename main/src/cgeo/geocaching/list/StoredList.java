@@ -108,9 +108,7 @@ public final class StoredList extends AbstractList {
 
             if (exceptListId > StoredList.TEMPORARY_LIST.id) {
                 final StoredList exceptList = DataStore.getList(exceptListId);
-                if (exceptList != null) {
-                    lists.remove(exceptList);
-                }
+                lists.remove(exceptList);
             }
 
             if (!onlyConcreteLists) {

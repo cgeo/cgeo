@@ -19,6 +19,7 @@ public class OkapiClientTest extends CGeoTestCase {
         assertThat(cache.isDetailed()).isTrue();
         // cache should be stored to DB (to listID 0) when loaded above
         cache = DataStore.loadCache(geoCode, LoadFlags.LOAD_ALL_DB_ONLY);
+        assert (cache != null);
         assertThat(cache).isNotNull();
         assertThat(cache.getGeocode()).isEqualTo(geoCode);
         assertThat(cache.getName()).isEqualTo("Oshkosh Municipal Tank");
@@ -41,6 +42,7 @@ public class OkapiClientTest extends CGeoTestCase {
         assertThat(cache).as("Cache from OKAPI").isNotNull();
         // cache should be stored to DB (to listID 0) when loaded above
         cache = DataStore.loadCache(geoCode, LoadFlags.LOAD_ALL_DB_ONLY);
+        assert (cache != null);
         assertThat(cache).isNotNull();
         assertThat(cache.getWaypoints()).hasSize(3);
 

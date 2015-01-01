@@ -81,7 +81,10 @@ public class CompassActivity extends AbstractActionBarActivity {
         // find the wanted navigation target
         if (extras.containsKey(Intents.EXTRA_WAYPOINT_ID)) {
             final int waypointId = extras.getInt(Intents.EXTRA_WAYPOINT_ID);
-            setTarget(DataStore.loadWaypoint(waypointId));
+            final Waypoint waypoint = DataStore.loadWaypoint(waypointId);
+            if (waypoint != null) {
+                setTarget(waypoint);
+            }
         }
         else if (extras.containsKey(Intents.EXTRA_COORDS)) {
             setTarget(extras.<Geopoint>getParcelable(Intents.EXTRA_COORDS), extras.getString(Intents.EXTRA_DESCRIPTION));
@@ -215,7 +218,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setTarget(final Geopoint coords, final String newDescription) {
+    private void setTarget(@NonNull final Geopoint coords, final String newDescription) {
         setDestCoords(coords);
         setTargetDescription(newDescription);
         updateDistanceInfo(Sensors.getInstance().currentGeo());

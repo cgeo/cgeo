@@ -1246,12 +1246,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 // update text
                 final TextView text = ButterKnife.findById(view, R.id.list_text);
                 final StoredList list = DataStore.getList(cache.getListId());
-                if (list != null) {
-                    text.setText(res.getString(R.string.cache_list_text) + " " + list.title);
-                } else {
-                    // this should not happen
-                    text.setText(R.string.cache_list_unknown);
-                }
+                text.setText(res.getString(R.string.cache_list_text) + " " + list.title);
             } else {
                 // hide box
                 box.setVisibility(View.GONE);

@@ -1295,9 +1295,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             title = res.getString(R.string.list_all_lists);
         } else {
             final StoredList list = DataStore.getList(id);
-            if (list == null) {
-                return;
-            }
             listId = list.id;
             title = list.title;
         }
