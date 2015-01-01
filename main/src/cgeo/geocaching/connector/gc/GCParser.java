@@ -1896,7 +1896,7 @@ public abstract class GCParser {
         }
 
         // Wait for completion of logs parsing, retrieving and merging
-        mergedLogs.toBlocking().last();
+        RxUtils.waitForCompletion(mergedLogs);
     }
 
     /**
