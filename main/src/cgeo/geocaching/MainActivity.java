@@ -237,7 +237,7 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     private void startBackgroundLogin() {
-        assert(app != null);
+        assert app != null;
 
         final boolean mustLogin = app.mustRelog();
 

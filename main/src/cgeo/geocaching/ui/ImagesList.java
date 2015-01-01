@@ -106,7 +106,7 @@ public class ImagesList {
 
         for (final Image img : images) {
             final LinearLayout rowView = (LinearLayout) inflater.inflate(R.layout.cache_image_item, imagesView, false);
-            assert(rowView != null);
+            assert rowView != null;
 
             if (StringUtils.isNotBlank(img.getTitle())) {
                 final TextView titleView = ButterKnife.findById(rowView, R.id.title);
@@ -121,7 +121,7 @@ public class ImagesList {
             }
 
             final ImageView imageView = (ImageView) inflater.inflate(R.layout.image_item, rowView, false);
-            assert(imageView != null);
+            assert imageView != null;
             subscriptions.add(AndroidObservable.bindActivity(activity, imgGetter.fetchDrawable(img.getUrl())).subscribe(new Action1<BitmapDrawable>() {
                 @Override
                 public void call(final BitmapDrawable image) {
