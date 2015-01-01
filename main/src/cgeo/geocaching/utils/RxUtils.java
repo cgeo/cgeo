@@ -224,7 +224,7 @@ public class RxUtils {
             if (cached.containsKey(key)) {
                 return cached.get(key);
             }
-            final Observable<V> value = func.call(key).replay().refCount();
+            final Observable<V> value = func.call(key).share();
             cached.put(key, value);
             return value;
         }

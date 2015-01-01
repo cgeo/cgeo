@@ -98,13 +98,13 @@ public class HtmlImage implements Html.ImageGetter {
      * Create a new HtmlImage object with different behaviours depending on <tt>onlySave</tt> and <tt>view</tt> values.
      * There are the three possible use cases:
      * <ul>
-     *  <li>If onlySave is true, getDrawable() will return null immediately and will queue the image retrieval
+     *  <li>If onlySave is true, {@link #getDrawable(String)} will return <tt>null</tt> immediately and will queue the image retrieval
      *      and saving in the loading subject. Downloads will start in parallel when the blocking
-     *      waitForBackgroundLoading() method is called, and they can be cancelled through the given handler.</li>
-     *  <li>If onlySave is false and the instance is called through fetchDrawable(), then an observable for the
-     *      given URL will be returned. This observable will emit the local copy of the image if it is present</li>
-     *      regardless of its freshness, then if needed an updated fresher copy after retrieving it from the network.
-     *  <li>If onlySave is false and the instance is used as an ImageGetter, only the final version of the
+     *      {@link #waitForEndObservable(cgeo.geocaching.utils.CancellableHandler)} method is called, and they can be cancelled through the given handler.</li>
+     *  <li>If <tt>onlySave</tt> is <tt>false</tt> and the instance is called through {@link #fetchDrawable(String)}, then an observable for the
+     *      given URL will be returned. This observable will emit the local copy of the image if it is present
+     *      regardless of its freshness, then if needed an updated fresher copy after retrieving it from the network.</li>
+     *  <li>If <tt>onlySave</tt> is <tt>false</tt> and the instance is used as an {@link Html.ImageGetter}, only the final version of the
      *      image will be returned, unless a view has been provided. If it has, then a dummy drawable is returned
      *      and is updated when the image is available, possibly several times if we had a stale copy of the image
      *      and then got a new one from the network.</li>
@@ -242,24 +242,25 @@ public class HtmlImage implements Html.ImageGetter {
                         return;
                 }
                 if (onlySave) {
+                    Log.d("onlySave, returning");
                     subscriber.onCompleted();
-                } else {
-                    RxUtils.computationScheduler.createWorker().schedule(new Action0() {
-                        @Override
-                        public void call() {
-                            final ImmutablePair<BitmapDrawable, Boolean> loaded = loadFromDisk();
-                            final BitmapDrawable image = loaded.left;
-                            if (image != null) {
-                                subscriber.onNext(image);
-                            } else {
-                                subscriber.onNext(returnErrorImage ?
-                                        new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded)) :
-                                        ImageUtils.getTransparent1x1Drawable(resources));
-                            }
-                            subscriber.onCompleted();
-                        }
-                    });
+                    return;
                 }
+                RxUtils.computationScheduler.createWorker().schedule(new Action0() {
+                    @Override
+                    public void call() {
+                        final ImmutablePair<BitmapDrawable, Boolean> loaded = loadFromDisk();
+                        final BitmapDrawable image = loaded.left;
+                        if (image != null) {
+                            subscriber.onNext(image);
+                        } else {
+                            subscriber.onNext(returnErrorImage ?
+                                    new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded)) :
+                                    ImageUtils.getTransparent1x1Drawable(resources));
+                        }
+                        subscriber.onCompleted();
+                    }
+                });
             }
         });
     }
