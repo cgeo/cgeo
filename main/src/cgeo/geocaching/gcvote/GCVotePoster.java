@@ -44,7 +44,7 @@ class GCVotePoster extends AsyncTask<Void, Void, Boolean> {
     @Override
     protected void onPostExecute(final Boolean status) {
         final CgeoApplication context = CgeoApplication.getInstance();
-        final String text = context.getString(status.booleanValue() ? R.string.gcvote_sent : R.string.err_gcvote_send_rating);
+        final String text = context.getString(status ? R.string.gcvote_sent : R.string.err_gcvote_send_rating);
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
         if (afterVoteSent != null) {
             afterVoteSent.run();
