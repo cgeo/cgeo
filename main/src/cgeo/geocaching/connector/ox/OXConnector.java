@@ -34,6 +34,7 @@ public class OXConnector extends AbstractConnector implements ISearchByCenter, I
     }
 
     @Override
+    @NonNull
     public String getCacheUrl(@NonNull Geocache cache) {
         return getCacheUrlPrefix() + cache.getGeocode();
     }

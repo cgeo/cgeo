@@ -723,6 +723,7 @@ public class Geocache implements IWaypoint {
         return getConnector().getCacheUrl(this);
     }
 
+    @NonNull
     public String getLongUrl() {
         return getConnector().getLongCacheUrl(this);
     }

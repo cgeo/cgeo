@@ -67,6 +67,7 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    @NonNull
     public String getCacheUrl(@NonNull Geocache cache) {
         return CACHE_URL + cache.getGeocode().replace("EC", "");
     }

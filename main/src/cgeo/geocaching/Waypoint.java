@@ -150,6 +150,7 @@ public class Waypoint implements IWaypoint {
         cachedOrder = ORDER_UNDEFINED;
     }
 
+    @NonNull
     public String getUrl() {
         return "http://www.geocaching.com/seek/cache_details.aspx?wp=" + geocode;
     }

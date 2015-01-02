@@ -38,6 +38,7 @@ public class OCConnector extends AbstractConnector {
     }
 
     @Override
+    @NonNull
     public String getCacheUrl(@NonNull Geocache cache) {
         return getCacheUrlPrefix() + cache.getGeocode();
     }

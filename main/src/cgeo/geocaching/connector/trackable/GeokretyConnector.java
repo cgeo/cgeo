@@ -20,6 +20,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     }
 
     @Override
+    @NonNull
     public String getUrl(Trackable trackable) {
         return "http://geokrety.org/konkret.php?id=" + getId(trackable.getGeocode());
     }

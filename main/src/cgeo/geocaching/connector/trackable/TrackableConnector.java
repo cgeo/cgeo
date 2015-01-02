@@ -16,6 +16,7 @@ public interface TrackableConnector {
 
     public boolean canHandleTrackable(final String geocode);
 
+    @NonNull
     public String getUrl(final Trackable trackable);
 
     public boolean isLoggable();

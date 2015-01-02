@@ -85,11 +85,13 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    @NonNull
     public String getLongCacheUrl(@NonNull Geocache cache) {
         return CACHE_URL_LONG + cache.getGeocode();
     }
 
     @Override
+    @NonNull
     public String getCacheUrl(@NonNull Geocache cache) {
         return CACHE_URL_SHORT + cache.getGeocode();
     }

@@ -33,6 +33,7 @@ public interface IConnector {
      * @param cache
      * @return
      */
+    @NonNull
     public String getCacheUrl(final @NonNull Geocache cache);
 
     /**
@@ -41,6 +42,7 @@ public interface IConnector {
      * @param cache
      * @return
      */
+    @NonNull
     public String getLongCacheUrl(final @NonNull Geocache cache);
 
     /**
