@@ -14,7 +14,7 @@ public class UnknownTrackableConnector extends AbstractTrackableConnector {
     @Override
     @NonNull
     public String getUrl(Trackable trackable) {
-        throw new IllegalAccessError("getUrl cannot be called on unknown trackables");
+        throw new IllegalStateException("getUrl cannot be called on unknown trackables");
     }
 
     @Override

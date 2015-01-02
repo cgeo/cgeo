@@ -15,7 +15,7 @@ class UnknownConnector extends AbstractConnector {
     @Override
     @NonNull
     public String getCacheUrl(@NonNull final Geocache cache) {
-        throw new IllegalAccessError("getCacheUrl cannot be called on unknown caches");
+        throw new IllegalStateException("getCacheUrl cannot be called on unknown caches");
     }
 
     @Override
