@@ -136,17 +136,17 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
         trackable = DataStore.loadTrackable(geocode);
 
-        if (StringUtils.isNotBlank(trackable.getName())) {
-            setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getName());
-        } else {
-            setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getGeocode());
-        }
-
-        if (guid == null) {
+        if (trackable == null) {
             showToast(res.getString(R.string.err_tb_forgot_saw));
 
             finish();
             return;
+        }
+
+        if (StringUtils.isNotBlank(trackable.getName())) {
+            setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getName());
+        } else {
+            setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getGeocode());
         }
 
         init();
