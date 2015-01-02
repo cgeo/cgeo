@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Collection;
-import java.util.Date;
 import java.util.concurrent.CancellationException;
 
 public abstract class FileParser {
@@ -24,24 +23,19 @@ public abstract class FileParser {
      * Parses caches from input stream.
      *
      * @param stream
+     *         the input stream
      * @param progressHandler
-     *            for reporting parsing progress (in bytes read from input stream)
+     *         for reporting parsing progress (in bytes read from input stream)
      * @return collection of caches
      * @throws IOException
-     *             if the input stream can't be read
+     *         if the input stream can't be read
      * @throws ParserException
-     *             if the input stream contains data not matching the file format of the parser
+     *         if the input stream contains data not matching the file format of the parser
      */
     public abstract Collection<Geocache> parse(@NonNull final InputStream stream, @Nullable final CancellableHandler progressHandler) throws IOException, ParserException;
 
     /**
      * Convenience method for parsing a file.
-     *
-     * @param file
-     * @param progressHandler
-     * @return
-     * @throws IOException
-     * @throws ParserException
      */
     public Collection<Geocache> parse(final File file, final CancellableHandler progressHandler) throws IOException, ParserException {
         final BufferedInputStream stream = new BufferedInputStream(new FileInputStream(file));
@@ -84,7 +78,7 @@ public abstract class FileParser {
         } else {
             cache.setInventoryItems(0);
         }
-        final long time = new Date().getTime();
+        final long time = System.currentTimeMillis();
         cache.setUpdated(time);
         cache.setDetailedUpdate(time);
     }

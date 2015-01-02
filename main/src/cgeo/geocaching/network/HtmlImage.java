@@ -44,7 +44,6 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.Date;
 
 /**
  * All-purpose image getter that can also be used as a ImageGetter interface when displaying caches.
@@ -400,7 +399,7 @@ public class HtmlImage implements Html.ImageGetter {
     @NonNull
     private ImmutablePair<Bitmap, Boolean> loadCachedImage(final File file, final boolean forceKeep) {
         if (file.exists()) {
-            final boolean freshEnough = listId >= StoredList.STANDARD_LIST_ID || file.lastModified() > (new Date().getTime() - (24 * 60 * 60 * 1000)) || forceKeep;
+            final boolean freshEnough = listId >= StoredList.STANDARD_LIST_ID || file.lastModified() > (System.currentTimeMillis() - (24 * 60 * 60 * 1000)) || forceKeep;
             if (freshEnough && onlySave) {
                 return ImmutablePair.of((Bitmap) null, true);
             }
