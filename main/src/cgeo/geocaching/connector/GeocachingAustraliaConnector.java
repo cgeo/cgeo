@@ -8,6 +8,7 @@ import org.eclipse.jdt.annotation.NonNull;
 class GeocachingAustraliaConnector extends AbstractConnector {
 
     @Override
+    @NonNull
     public String getName() {
         return "Geocaching Australia";
     }
@@ -19,12 +20,13 @@ class GeocachingAustraliaConnector extends AbstractConnector {
     }
 
     @Override
+    @NonNull
     public String getHost() {
         return "geocaching.com.au";
     }
 
     @Override
-    public boolean isOwner(final Geocache cache) {
+    public boolean isOwner(@NonNull final Geocache cache) {
         return false;
     }
 
@@ -34,6 +36,7 @@ class GeocachingAustraliaConnector extends AbstractConnector {
     }
 
     @Override
+    @NonNull
     protected String getCacheUrlPrefix() {
         return "http://" + getHost() + "/cache/";
     }

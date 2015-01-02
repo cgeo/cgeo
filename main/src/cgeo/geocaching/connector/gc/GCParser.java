@@ -78,10 +78,16 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 public abstract class GCParser {
+    @NonNull
     private final static SynchronizedDateFormat DATE_TB_IN_1 = new SynchronizedDateFormat("EEEEE, dd MMMMM yyyy", Locale.ENGLISH); // Saturday, 28 March 2009
+
+    @NonNull
     private final static SynchronizedDateFormat DATE_TB_IN_2 = new SynchronizedDateFormat("EEEEE, MMMMM dd, yyyy", Locale.ENGLISH); // Saturday, March 28, 2009
+
+    @NonNull
     private final static ImmutablePair<StatusCode, Geocache> UNKNOWN_PARSE_ERROR = ImmutablePair.of(StatusCode.UNKNOWN_ERROR, null);
 
+    @Nullable
     private static SearchResult parseSearch(final String url, final String pageContent, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
         if (StringUtils.isBlank(pageContent)) {
             Log.e("GCParser.parseSearch: No page given");
@@ -349,11 +355,13 @@ public abstract class GCParser {
         return searchResult;
     }
 
+    @Nullable
     private static Float parseStars(final String value) {
         final float floatValue = Float.parseFloat(StringUtils.replaceChars(value, ',', '.'));
         return floatValue >= 0.5 && floatValue <= 5.0 ? floatValue : null;
     }
 
+    @Nullable
     static SearchResult parseCache(final String page, final CancellableHandler handler) {
         final ImmutablePair<StatusCode, Geocache> parsed = parseCacheFromText(page, handler);
         // attention: parseCacheFromText already stores implicitly through searchResult.addCache
@@ -379,6 +387,7 @@ public abstract class GCParser {
         return new SearchResult(cache);
     }
 
+    @NonNull
     static SearchResult parseAndSaveCacheFromText(final String page, @Nullable final CancellableHandler handler) {
         final ImmutablePair<StatusCode, Geocache> parsed = parseCacheFromText(page, handler);
         final SearchResult result = new SearchResult(parsed.left);
@@ -780,10 +789,12 @@ public abstract class GCParser {
         return ImmutablePair.of(StatusCode.NO_ERROR, cache);
     }
 
+    @Nullable
     private static String getNumberString(final String numberWithPunctuation) {
         return StringUtils.replaceChars(numberWithPunctuation, ".,", "");
     }
 
+    @Nullable
     public static SearchResult searchByNextPage(final SearchResult search, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
         if (search == null) {
             return null;
@@ -856,7 +867,7 @@ public abstract class GCParser {
     }
 
     @Nullable
-    private static SearchResult searchByAny(final CacheType cacheType, final boolean my, final boolean showCaptcha, final Parameters params, final RecaptchaReceiver recaptchaReceiver) {
+    private static SearchResult searchByAny(@NonNull final CacheType cacheType, final boolean my, final boolean showCaptcha, final Parameters params, final RecaptchaReceiver recaptchaReceiver) {
         insertCacheType(params, cacheType);
 
         final String uri = "http://www.geocaching.com/seek/nearest.aspx";
@@ -883,12 +894,12 @@ public abstract class GCParser {
         return search;
     }
 
-    public static SearchResult searchByCoords(final @NonNull Geopoint coords, final CacheType cacheType, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
+    public static SearchResult searchByCoords(final @NonNull Geopoint coords, @NonNull final CacheType cacheType, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
         final Parameters params = new Parameters("lat", Double.toString(coords.getLatitude()), "lng", Double.toString(coords.getLongitude()));
         return searchByAny(cacheType, false, showCaptcha, params, recaptchaReceiver);
     }
 
-    public static SearchResult searchByKeyword(final @NonNull String keyword, final CacheType cacheType, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
+    public static SearchResult searchByKeyword(final @NonNull String keyword, @NonNull final CacheType cacheType, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
         if (StringUtils.isBlank(keyword)) {
             Log.e("GCParser.searchByKeyword: No keyword given");
             return null;
@@ -906,7 +917,7 @@ public abstract class GCParser {
         return false;
     }
 
-    public static SearchResult searchByUsername(final String userName, final CacheType cacheType, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
+    public static SearchResult searchByUsername(final String userName, @NonNull final CacheType cacheType, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
         if (StringUtils.isBlank(userName)) {
             Log.e("GCParser.searchByUsername: No user name given");
             return null;
@@ -917,7 +928,7 @@ public abstract class GCParser {
         return searchByAny(cacheType, isSearchForMyCaches(userName), showCaptcha, params, recaptchaReceiver);
     }
 
-    public static SearchResult searchByPocketQuery(final String pocketGuid, final CacheType cacheType, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
+    public static SearchResult searchByPocketQuery(final String pocketGuid, @NonNull final CacheType cacheType, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
         if (StringUtils.isBlank(pocketGuid)) {
             Log.e("GCParser.searchByPocket: No guid name given");
             return null;
@@ -928,7 +939,7 @@ public abstract class GCParser {
         return searchByAny(cacheType, false, showCaptcha, params, recaptchaReceiver);
     }
 
-    public static SearchResult searchByOwner(final String userName, final CacheType cacheType, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
+    public static SearchResult searchByOwner(final String userName, @NonNull final CacheType cacheType, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
         if (StringUtils.isBlank(userName)) {
             Log.e("GCParser.searchByOwner: No user name given");
             return null;
@@ -1790,9 +1801,10 @@ public abstract class GCParser {
         return types;
     }
 
+    @NonNull
     public static List<TrackableLog> parseTrackableLog(final String page) {
         if (StringUtils.isEmpty(page)) {
-            return null;
+            return Collections.emptyList();
         }
 
         String table = StringUtils.substringBetween(page, "<table id=\"tblTravelBugs\"", "</table>");
@@ -1805,7 +1817,7 @@ public abstract class GCParser {
         table = StringUtils.substringBetween(table, "<tbody>", "</tbody>");
         if (StringUtils.isBlank(table)) {
             Log.e("GCParser.parseTrackableLog: tbody not found on page");
-            return null;
+            return Collections.emptyList();
         }
 
         final List<TrackableLog> trackableLogs = new ArrayList<>();

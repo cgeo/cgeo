@@ -145,7 +145,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         }
 
         final IConnector connector = ConnectorFactory.getConnector(geocode);
-        if (connector instanceof ISearchByGeocode) {
+        if (connector instanceof ISearchByGeocode && geocode != null) {
             CacheDetailActivity.startActivity(this, geocode.toUpperCase(Locale.US));
             return true;
         }
@@ -162,7 +162,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
             }
         }
 
-        if (trackableConnector != ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR) {
+        if (trackableConnector != ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR && geocode != null) {
             final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
             trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, geocode.toUpperCase(Locale.US));
             startActivity(trackablesIntent);

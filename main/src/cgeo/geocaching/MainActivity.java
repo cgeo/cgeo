@@ -114,7 +114,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
             for (final ILogin conn : loginConns) {
 
-                final TextView connectorInfo = (TextView) inflater.inflate(R.layout.main_activity_connectorstatus, null);
+                final TextView connectorInfo = (TextView) inflater.inflate(R.layout.main_activity_connectorstatus, infoArea, false);
                 infoArea.addView(connectorInfo);
 
                 final StringBuilder userInfo = new StringBuilder(conn.getName()).append(Formatter.SEPARATOR);

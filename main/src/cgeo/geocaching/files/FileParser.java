@@ -32,11 +32,13 @@ public abstract class FileParser {
      * @throws ParserException
      *         if the input stream contains data not matching the file format of the parser
      */
+    @NonNull
     public abstract Collection<Geocache> parse(@NonNull final InputStream stream, @Nullable final CancellableHandler progressHandler) throws IOException, ParserException;
 
     /**
      * Convenience method for parsing a file.
      */
+    @NonNull
     public Collection<Geocache> parse(final File file, final CancellableHandler progressHandler) throws IOException, ParserException {
         final BufferedInputStream stream = new BufferedInputStream(new FileInputStream(file));
         try {
@@ -46,6 +48,7 @@ public abstract class FileParser {
         }
     }
 
+    @NonNull
     protected static StringBuilder readStream(@NonNull final InputStream is, @Nullable final CancellableHandler progressHandler) throws IOException {
         final StringBuilder buffer = new StringBuilder();
         final ProgressInputStream progressInputStream = new ProgressInputStream(is);

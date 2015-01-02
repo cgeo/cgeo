@@ -8,6 +8,7 @@ import org.eclipse.jdt.annotation.NonNull;
 class UnknownConnector extends AbstractConnector {
 
     @Override
+    @NonNull
     public String getName() {
         return "Unknown caches";
     }
@@ -19,12 +20,13 @@ class UnknownConnector extends AbstractConnector {
     }
 
     @Override
+    @NonNull
     public String getHost() {
-        return null; // we have no host for these caches
+        return StringUtils.EMPTY; // we have no host for these caches
     }
 
     @Override
-    public boolean isOwner(final Geocache cache) {
+    public boolean isOwner(@NonNull final Geocache cache) {
         return false;
     }
 
@@ -34,8 +36,9 @@ class UnknownConnector extends AbstractConnector {
     }
 
     @Override
+    @NonNull
     protected String getCacheUrlPrefix() {
-        return null;
+        return StringUtils.EMPTY;
     }
 
 }

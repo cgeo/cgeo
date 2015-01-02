@@ -9,6 +9,8 @@ import cgeo.geocaching.utils.RxUtils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.app.Application;
 import android.view.ViewConfiguration;
 
@@ -40,7 +42,7 @@ public class CgeoApplication extends Application {
         setInstance(this);
     }
 
-    private static void setInstance(final CgeoApplication application) {
+    private static void setInstance(@NonNull final CgeoApplication application) {
         instance = application;
     }
 

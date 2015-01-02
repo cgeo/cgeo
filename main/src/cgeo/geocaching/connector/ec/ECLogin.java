@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import java.io.IOException;
@@ -30,14 +31,17 @@ public class ECLogin extends AbstractLogin {
     }
 
     private static class SingletonHolder {
+        @NonNull
         private final static ECLogin INSTANCE = new ECLogin();
     }
 
+    @NonNull
     public static ECLogin getInstance() {
         return SingletonHolder.INSTANCE;
     }
 
     @Override
+    @NonNull
     protected StatusCode login(final boolean retry) {
         final ImmutablePair<String, String> login = Settings.getCredentials(ECConnector.getInstance());
 

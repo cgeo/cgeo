@@ -19,6 +19,7 @@ import cgeo.geocaching.utils.TextUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import android.net.Uri;
@@ -36,7 +37,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     private final Geocache cache;
 
     private String[] viewstates;
-    private List<TrackableLog> trackables;
+    @NonNull private List<TrackableLog> trackables = Collections.emptyList();
     private List<LogType> possibleLogTypes;
     private boolean hasLoaderError = true;
 
@@ -92,7 +93,8 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     }
 
     @Override
-    public LogResult postLog(final LogType logType, final Calendar date, final String log, final String logPassword, final List<TrackableLog> trackableLogs) {
+    @NonNull
+    public LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs) {
 
         try {
             final ImmutablePair<StatusCode, String> postResult = GCParser.postLog(cache.getGeocode(), cache.getCacheId(), viewstates, logType,
@@ -115,6 +117,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     }
 
     @Override
+    @NonNull
     public ImageResult postLogImage(final String logId, final String imageCaption, final String imageDescription, final Uri imageUri) {
 
         if (StringUtils.isNotBlank(imageUri.getPath())) {
@@ -133,6 +136,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     }
 
     @Override
+    @NonNull
     public List<TrackableLog> getTrackables() {
         if (hasLoaderError) {
             return Collections.emptyList();
@@ -141,6 +145,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     }
 
     @Override
+    @NonNull
     public List<LogType> getPossibleLogTypes() {
         if (hasLoaderError) {
             return Collections.emptyList();

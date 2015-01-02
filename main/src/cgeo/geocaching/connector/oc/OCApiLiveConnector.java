@@ -50,7 +50,8 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public SearchResult searchByViewport(@NonNull final Viewport viewport, final MapTokens tokens) {
+    @NonNull
+    public SearchResult searchByViewport(@NonNull final Viewport viewport, @NonNull final MapTokens tokens) {
         return new SearchResult(OkapiClient.getCachesBBox(viewport, this));
     }
 
@@ -99,7 +100,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public boolean addToWatchlist(final Geocache cache) {
+    public boolean addToWatchlist(@NonNull final Geocache cache) {
         final boolean added = OkapiClient.setWatchState(cache, true, this);
 
         if (added) {
@@ -110,7 +111,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public boolean removeFromWatchlist(final Geocache cache) {
+    public boolean removeFromWatchlist(@NonNull final Geocache cache) {
         final boolean removed = OkapiClient.setWatchState(cache, false, this);
 
         if (removed) {
@@ -126,12 +127,13 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public ILoggingManager getLoggingManager(final LogCacheActivity activity, final Geocache cache) {
+    @NonNull
+    public ILoggingManager getLoggingManager(@NonNull final LogCacheActivity activity, @NonNull final Geocache cache) {
         return new OkapiLoggingManager(activity, this, cache);
     }
 
     @Override
-    public boolean canLog(final Geocache cache) {
+    public boolean canLog(@NonNull final Geocache cache) {
         return true;
     }
 
@@ -150,7 +152,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     }
 
     @Override
-    public boolean isOwner(final Geocache cache) {
+    public boolean isOwner(@NonNull final Geocache cache) {
         return StringUtils.isNotEmpty(getUserName()) && StringUtils.equals(cache.getOwnerDisplayName(), getUserName());
     }
 

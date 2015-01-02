@@ -48,6 +48,7 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode {
     }
 
     @Override
+    @NonNull
     public String getLicenseText(final @NonNull Geocache cache) {
         // NOT TO BE TRANSLATED
         return "© " + cache.getOwnerDisplayName() + ", <a href=\"" + getCacheUrl(cache) + "\">" + getName() + "</a>, " + licenseString;

@@ -36,13 +36,18 @@ import java.util.regex.Pattern;
 
 public class ECConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ILogin, ICredentials {
 
+    @NonNull
     private static final String CACHE_URL = "http://extremcaching.com/index.php/output-2/";
 
     /**
      * Pattern for EC codes
      */
+    @NonNull
     private final static Pattern PATTERN_EC_CODE = Pattern.compile("EC[0-9]+", Pattern.CASE_INSENSITIVE);
+
     private final CgeoApplication app = CgeoApplication.getInstance();
+
+    @NonNull
     private final ECLogin ecLogin = ECLogin.getInstance();
 
     private ECConnector() {
@@ -56,28 +61,30 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
         private static final @NonNull ECConnector INSTANCE = new ECConnector();
     }
 
-    public static @NonNull
-    ECConnector getInstance() {
+    @NonNull
+    public static ECConnector getInstance() {
         return Holder.INSTANCE;
     }
 
     @Override
-    public boolean canHandle(@NonNull String geocode) {
+    public boolean canHandle(@NonNull final String geocode) {
         return ECConnector.PATTERN_EC_CODE.matcher(geocode).matches();
     }
 
     @Override
     @NonNull
-    public String getCacheUrl(@NonNull Geocache cache) {
+    public String getCacheUrl(@NonNull final Geocache cache) {
         return CACHE_URL + cache.getGeocode().replace("EC", "");
     }
 
     @Override
+    @NonNull
     public String getName() {
         return "extremcaching.com";
     }
 
     @Override
+    @NonNull
     public String getHost() {
         return "extremcaching.com";
     }
@@ -95,31 +102,28 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public SearchResult searchByViewport(@NonNull Viewport viewport, final MapTokens tokens) {
+    @NonNull
+    public SearchResult searchByViewport(@NonNull final Viewport viewport, @NonNull final MapTokens tokens) {
         final Collection<Geocache> caches = ECApi.searchByBBox(viewport);
-        if (caches == null) {
-            return null;
-        }
         final SearchResult searchResult = new SearchResult(caches);
         return searchResult.filterSearchResults(false, false, Settings.getCacheType());
     }
 
     @Override
-    public SearchResult searchByCenter(@NonNull Geopoint center, final @NonNull RecaptchaReceiver recaptchaReceiver) {
+    @NonNull
+    public SearchResult searchByCenter(@NonNull final Geopoint center, final @NonNull RecaptchaReceiver recaptchaReceiver) {
         final Collection<Geocache> caches = ECApi.searchByCenter(center);
-        if (caches == null) {
-            return null;
-        }
         final SearchResult searchResult = new SearchResult(caches);
         return searchResult.filterSearchResults(false, false, Settings.getCacheType());
     }
 
     @Override
-    public boolean isOwner(final Geocache cache) {
+    public boolean isOwner(@NonNull final Geocache cache) {
         return false;
     }
 
     @Override
+    @NonNull
     protected String getCacheUrlPrefix() {
         return CACHE_URL;
     }
@@ -130,7 +134,7 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public boolean login(Handler handler, Context fromActivity) {
+    public boolean login(final Handler handler, final Context fromActivity) {
         // login
         final StatusCode status = ecLogin.login();
 
@@ -167,7 +171,7 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public int getCacheMapMarkerId(boolean disabled) {
+    public int getCacheMapMarkerId(final boolean disabled) {
         final String icons = Settings.getECIconSet();
         if (StringUtils.equals(icons, "1")) {
             return disabled ? R.drawable.marker_disabled_other : R.drawable.marker_other;
@@ -176,6 +180,7 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    @NonNull
     public String getLicenseText(final @NonNull Geocache cache) {
         // NOT TO BE TRANSLATED
         return "© " + cache.getOwnerDisplayName() + ", <a href=\"" + getCacheUrl(cache) + "\">" + getName() + "</a>, CC BY-NC-ND 3.0, alle Logeinträge © jeweiliger Autor";
@@ -187,17 +192,19 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public boolean canLog(Geocache cache) {
+    public boolean canLog(@NonNull final Geocache cache) {
         return true;
     }
 
     @Override
-    public ILoggingManager getLoggingManager(final LogCacheActivity activity, final Geocache cache) {
+    @NonNull
+    public ILoggingManager getLoggingManager(@NonNull final LogCacheActivity activity, @NonNull final Geocache cache) {
         return new ECLoggingManager(activity, this, cache);
     }
 
     @Override
-    public List<LogType> getPossibleLogTypes(Geocache geocache) {
+    @NonNull
+    public List<LogType> getPossibleLogTypes(@NonNull final Geocache geocache) {
         final List<LogType> logTypes = new ArrayList<>();
         if (geocache.isEventCache()) {
             logTypes.add(LogType.WILL_ATTEND);

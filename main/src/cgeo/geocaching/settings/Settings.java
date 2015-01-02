@@ -808,6 +808,7 @@ public class Settings {
      * @return The cache type used for filtering or ALL if no filter is active.
      *         Returns never null
      */
+    @NonNull
     public static CacheType getCacheType() {
         return CacheType.getById(getString(R.string.pref_cachetype, CacheType.ALL.id));
     }

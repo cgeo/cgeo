@@ -8,6 +8,7 @@ import org.eclipse.jdt.annotation.NonNull;
 class GeopeitusConnector extends AbstractConnector {
 
     @Override
+    @NonNull
     public String getName() {
         return "geopeitus.ee";
     }
@@ -19,12 +20,13 @@ class GeopeitusConnector extends AbstractConnector {
     }
 
     @Override
+    @NonNull
     public String getHost() {
         return "www.geopeitus.ee";
     }
 
     @Override
-    public boolean isOwner(final Geocache cache) {
+    public boolean isOwner(@NonNull final Geocache cache) {
         return false;
     }
 
@@ -34,6 +36,7 @@ class GeopeitusConnector extends AbstractConnector {
     }
 
     @Override
+    @NonNull
     protected String getCacheUrlPrefix() {
         return "http://" + getHost() + "/aare/";
     }

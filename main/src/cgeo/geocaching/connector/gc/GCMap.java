@@ -27,6 +27,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import rx.Observable;
 import rx.functions.Func2;
@@ -227,6 +228,7 @@ public class GCMap {
      *            Live map tokens
      * @return
      */
+    @NonNull
     public static SearchResult searchByViewport(final Viewport viewport, final MapTokens tokens) {
         final int speed = (int) Sensors.getInstance().currentGeo().getSpeed() * 60 * 60 / 1000; // in km/h
         Strategy strategy = Settings.getLiveMapStrategy();
@@ -257,6 +259,7 @@ public class GCMap {
      *            Strategy for data retrieval and parsing, @see Strategy
      * @return
      */
+    @NonNull
     private static SearchResult searchByViewport(final Viewport viewport, final MapTokens tokens, final Strategy strategy) {
         Log.d("GCMap.searchByViewport" + viewport.toString());
 
@@ -354,11 +357,11 @@ public class GCMap {
 
     /**
      * Creates a list of caches types to filter on the live map (exclusion string)
-     * 
+     *
      * @param typeToDisplay
      *            - cache type to omit from exclusion list so it gets displayed
      * @return
-     * 
+     *
      *         cache types for live map filter:
      *         2 = traditional, 9 = ape, 5 = letterbox
      *         3 = multi

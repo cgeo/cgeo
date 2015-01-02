@@ -49,18 +49,22 @@ import java.util.regex.Pattern;
 
 public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ISearchByKeyword, ILogin, ICredentials, ISearchByOwner, ISearchByFinder, FieldNotesCapability {
 
+    @NonNull
     private static final String CACHE_URL_SHORT = "http://coord.info/";
     // Double slash is used to force open in browser
+    @NonNull
     private static final String CACHE_URL_LONG = "http://www.geocaching.com/seek/cache_details.aspx?wp=";
     /**
      * Pocket queries downloaded from the website use a numeric prefix. The pocket query creator Android app adds a
      * verbatim "pocketquery" prefix.
      */
+    @NonNull
     private static final Pattern GPX_ZIP_FILE_PATTERN = Pattern.compile("((\\d{7,})|(pocketquery))" + "(_.+)?" + "\\.zip", Pattern.CASE_INSENSITIVE);
 
     /**
      * Pattern for GC codes
      */
+    @NonNull
     private final static Pattern PATTERN_GC_CODE = Pattern.compile("GC[0-9A-Z]+", Pattern.CASE_INSENSITIVE);
 
     private GCConnector() {
@@ -74,25 +78,25 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         private static final @NonNull GCConnector INSTANCE = new GCConnector();
     }
 
-    public static @NonNull
-    GCConnector getInstance() {
+    @NonNull
+    public static GCConnector getInstance() {
         return Holder.INSTANCE;
     }
 
     @Override
-    public boolean canHandle(@NonNull String geocode) {
+    public boolean canHandle(@NonNull final String geocode) {
         return GCConnector.PATTERN_GC_CODE.matcher(geocode).matches();
     }
 
     @Override
     @NonNull
-    public String getLongCacheUrl(@NonNull Geocache cache) {
+    public String getLongCacheUrl(@NonNull final Geocache cache) {
         return CACHE_URL_LONG + cache.getGeocode();
     }
 
     @Override
     @NonNull
-    public String getCacheUrl(@NonNull Geocache cache) {
+    public String getCacheUrl(@NonNull final Geocache cache) {
         return CACHE_URL_SHORT + cache.getGeocode();
     }
 
@@ -122,21 +126,24 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public ILoggingManager getLoggingManager(final LogCacheActivity activity, final Geocache cache) {
+    @NonNull
+    public ILoggingManager getLoggingManager(@NonNull final LogCacheActivity activity, @NonNull final Geocache cache) {
         return new GCLoggingManager(activity, cache);
     }
 
     @Override
-    public boolean canLog(Geocache cache) {
+    public boolean canLog(@NonNull final Geocache cache) {
         return StringUtils.isNotBlank(cache.getCacheId());
     }
 
     @Override
+    @NonNull
     public String getName() {
         return "geocaching.com";
     }
 
     @Override
+    @NonNull
     public String getHost() {
         return "www.geocaching.com";
     }
@@ -179,28 +186,29 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public SearchResult searchByViewport(@NonNull Viewport viewport, final MapTokens tokens) {
+    @NonNull
+    public SearchResult searchByViewport(@NonNull final Viewport viewport, @NonNull final MapTokens tokens) {
         return GCMap.searchByViewport(viewport, tokens);
     }
 
     @Override
-    public boolean isZippedGPXFile(final String fileName) {
+    public boolean isZippedGPXFile(@NonNull final String fileName) {
         return GPX_ZIP_FILE_PATTERN.matcher(fileName).matches();
     }
 
     @Override
-    public boolean isReliableLatLon(boolean cacheHasReliableLatLon) {
+    public boolean isReliableLatLon(final boolean cacheHasReliableLatLon) {
         return cacheHasReliableLatLon;
     }
 
     @Override
-    public boolean isOwner(final Geocache cache) {
+    public boolean isOwner(@NonNull final Geocache cache) {
         final String user = Settings.getUsername();
         return StringUtils.isNotEmpty(user) && StringUtils.equalsIgnoreCase(cache.getOwnerUserId(), user);
     }
 
     @Override
-    public boolean addToWatchlist(Geocache cache) {
+    public boolean addToWatchlist(@NonNull final Geocache cache) {
         final boolean added = GCParser.addToWatchlist(cache);
         if (added) {
             DataStore.saveChangedCache(cache);
@@ -209,7 +217,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public boolean removeFromWatchlist(Geocache cache) {
+    public boolean removeFromWatchlist(@NonNull final Geocache cache) {
         final boolean removed = GCParser.removeFromWatchlist(cache);
         if (removed) {
             DataStore.saveChangedCache(cache);
@@ -227,7 +235,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
      * @return <code>true</code> if the cache was successfully added, <code>false</code> otherwise
      */
 
-    public static boolean addToFavorites(Geocache cache) {
+    public static boolean addToFavorites(final Geocache cache) {
         final boolean added = GCParser.addToFavorites(cache);
         if (added) {
             DataStore.saveChangedCache(cache);
@@ -245,7 +253,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
      * @return <code>true</code> if the cache was successfully added, <code>false</code> otherwise
      */
 
-    public static boolean removeFromFavorites(Geocache cache) {
+    public static boolean removeFromFavorites(final Geocache cache) {
         final boolean removed = GCParser.removeFromFavorites(cache);
         if (removed) {
             DataStore.saveChangedCache(cache);
@@ -254,7 +262,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public boolean uploadModifiedCoordinates(Geocache cache, Geopoint wpt) {
+    public boolean uploadModifiedCoordinates(@NonNull final Geocache cache, @NonNull final Geopoint wpt) {
         final boolean uploaded = GCParser.uploadModifiedCoordinates(cache, wpt);
         if (uploaded) {
             DataStore.saveChangedCache(cache);
@@ -263,7 +271,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public boolean deleteModifiedCoordinates(Geocache cache) {
+    public boolean deleteModifiedCoordinates(@NonNull final Geocache cache) {
         final boolean deleted = GCParser.deleteModifiedCoordinates(cache);
         if (deleted) {
             DataStore.saveChangedCache(cache);
@@ -272,7 +280,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public boolean uploadPersonalNote(Geocache cache) {
+    public boolean uploadPersonalNote(@NonNull final Geocache cache) {
         final boolean uploaded = GCParser.uploadPersonalNote(cache);
         if (uploaded) {
             DataStore.saveChangedCache(cache);
@@ -281,22 +289,23 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public SearchResult searchByCenter(@NonNull Geopoint center, final @NonNull RecaptchaReceiver recaptchaReceiver) {
+    public SearchResult searchByCenter(@NonNull final Geopoint center, final @NonNull RecaptchaReceiver recaptchaReceiver) {
         return GCParser.searchByCoords(center, Settings.getCacheType(), Settings.isShowCaptcha(), recaptchaReceiver);
     }
 
     @Override
-    public boolean supportsFavoritePoints(final Geocache cache) {
+    public boolean supportsFavoritePoints(@NonNull final Geocache cache) {
         return !cache.getType().isEvent();
     }
 
     @Override
+    @NonNull
     protected String getCacheUrlPrefix() {
-        return null; // UNUSED
+        return StringUtils.EMPTY; // UNUSED
     }
 
     @Override
-    public String getGeocodeFromUrl(String url) {
+    public String getGeocodeFromUrl(final String url) {
         // coord.info URLs
         String code = StringUtils.substringAfterLast(url, "coord.info/");
         if (code != null && canHandle(code)) {
@@ -316,7 +325,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public int getCacheMapMarkerId(boolean disabled) {
+    public int getCacheMapMarkerId(final boolean disabled) {
         if (disabled) {
             return R.drawable.marker_disabled;
         }
@@ -324,7 +333,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public boolean login(Handler handler, Context fromActivity) {
+    public boolean login(final Handler handler, final Context fromActivity) {
         // login
         final StatusCode status = GCLogin.getInstance().login();
 
@@ -366,7 +375,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public String getWaypointGpxId(String prefix, String geocode) {
+    public String getWaypointGpxId(final String prefix, final String geocode) {
         String gpxId = prefix;
         if (StringUtils.isNotBlank(geocode) && geocode.length() > 2) {
             gpxId += geocode.substring(2);
@@ -375,7 +384,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public String getWaypointPrefix(String name) {
+    @NonNull
+    public String getWaypointPrefix(final String name) {
         String prefix = name;
         if (StringUtils.isNotBlank(prefix) && prefix.length() >= 2) {
             prefix = name.substring(0, 2);
@@ -384,7 +394,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public SearchResult searchByKeyword(@NonNull String keyword, final @NonNull RecaptchaReceiver recaptchaReceiver) {
+    public SearchResult searchByKeyword(@NonNull final String keyword, final @NonNull RecaptchaReceiver recaptchaReceiver) {
         return GCParser.searchByKeyword(keyword, Settings.getCacheType(), Settings.isShowCaptcha(), recaptchaReceiver);
     }
 
@@ -401,18 +411,18 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public @NonNull
     List<UserAction> getUserActions() {
-        List<UserAction> actions = super.getUserActions();
+        final List<UserAction> actions = super.getUserActions();
         actions.add(new UserAction(R.string.user_menu_open_browser, new Action1<UserAction.Context>() {
 
             @Override
-            public void call(cgeo.geocaching.connector.UserAction.Context context) {
+            public void call(final cgeo.geocaching.connector.UserAction.Context context) {
                 context.activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + Network.encode(context.userName))));
             }
         }));
         actions.add(new UserAction(R.string.user_menu_send_message, new Action1<UserAction.Context>() {
 
             @Override
-            public void call(cgeo.geocaching.connector.UserAction.Context context) {
+            public void call(final cgeo.geocaching.connector.UserAction.Context context) {
                 try {
                     context.activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/email/?u=" + Network.encode(context.userName))));
                 } catch (final ActivityNotFoundException e) {
@@ -435,7 +445,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public boolean uploadFieldNotes(final File exportFile) {
+    public boolean uploadFieldNotes(@NonNull final File exportFile) {
         if (!GCLogin.getInstance().isActualLoginStatus()) {
             // no need to upload (possibly large file) if we're not logged in
             final StatusCode loginState = GCLogin.getInstance().login();

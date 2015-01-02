@@ -28,43 +28,46 @@ public class OCConnector extends AbstractConnector {
     }
 
     @Override
-    public boolean canHandle(@NonNull String geocode) {
+    public boolean canHandle(@NonNull final String geocode) {
         return codePattern.matcher(geocode).matches();
     }
 
     @Override
+    @NonNull
     public String getName() {
         return name;
     }
 
     @Override
     @NonNull
-    public String getCacheUrl(@NonNull Geocache cache) {
+    public String getCacheUrl(@NonNull final Geocache cache) {
         return getCacheUrlPrefix() + cache.getGeocode();
     }
 
     @Override
+    @NonNull
     public String getHost() {
         return host;
     }
 
     @Override
-    public boolean isZippedGPXFile(String fileName) {
+    public boolean isZippedGPXFile(@NonNull final String fileName) {
         return GPX_ZIP_FILE_PATTERN.matcher(fileName).matches();
     }
 
     @Override
-    public boolean isOwner(final Geocache cache) {
+    public boolean isOwner(@NonNull final Geocache cache) {
         return false;
     }
 
     @Override
+    @NonNull
     protected String getCacheUrlPrefix() {
         return "http://" + host + "/viewcache.php?wp=";
     }
 
     @Override
-    public int getCacheMapMarkerId(boolean disabled) {
+    public int getCacheMapMarkerId(final boolean disabled) {
         if (disabled) {
             return R.drawable.marker_disabled_oc;
         }
@@ -72,7 +75,8 @@ public class OCConnector extends AbstractConnector {
     }
 
     @Override
-    public final List<LogType> getPossibleLogTypes(Geocache cache) {
+    @NonNull
+    public final List<LogType> getPossibleLogTypes(@NonNull final Geocache cache) {
         if (cache.isEventCache()) {
             return EVENT_LOG_TYPES;
         }

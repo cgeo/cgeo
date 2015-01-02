@@ -36,8 +36,8 @@ import java.util.Collections;
 import java.util.List;
 
 public final class ConnectorFactory {
-    private static final @NonNull UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
-    private static final Collection<IConnector> CONNECTORS = Collections.unmodifiableCollection(Arrays.asList(new IConnector[] {
+    @NonNull private static final UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
+    @NonNull private static final Collection<IConnector> CONNECTORS = Collections.unmodifiableCollection(Arrays.asList(new IConnector[] {
             GCConnector.getInstance(),
             ECConnector.getInstance(),
             new OCApiLiveConnector("opencaching.de", "www.opencaching.de", "OC", "CC BY-NC-ND, alle Logeinträge © jeweiliger Autor",
@@ -71,22 +71,30 @@ public final class ConnectorFactory {
     }));
 
     @NonNull public static final UnknownTrackableConnector UNKNOWN_TRACKABLE_CONNECTOR = new UnknownTrackableConnector();
+
+    @NonNull
     private static final Collection<TrackableConnector> TRACKABLE_CONNECTORS = Collections.unmodifiableCollection(Arrays.asList(new TrackableConnector[] {
             new GeokretyConnector(), // GK must be first, as it overlaps with the secret codes of travel bugs
             TravelBugConnector.getInstance(),
             UNKNOWN_TRACKABLE_CONNECTOR // must be last
     }));
 
+    @NonNull
     private static final Collection<ISearchByViewPort> searchByViewPortConns = getMatchingConnectors(ISearchByViewPort.class);
 
+    @NonNull
     private static final Collection<ISearchByCenter> searchByCenterConns = getMatchingConnectors(ISearchByCenter.class);
 
+    @NonNull
     private static final Collection<ISearchByKeyword> searchByKeywordConns = getMatchingConnectors(ISearchByKeyword.class);
 
+    @NonNull
     private static final Collection<ISearchByOwner> SEARCH_BY_OWNER_CONNECTORS = getMatchingConnectors(ISearchByOwner.class);
 
+    @NonNull
     private static final Collection<ISearchByFinder> SEARCH_BY_FINDER_CONNECTORS = getMatchingConnectors(ISearchByFinder.class);
 
+    @NonNull
     @SuppressWarnings("unchecked")
     private static <T extends IConnector> Collection<T> getMatchingConnectors(final Class<T> clazz) {
         final List<T> matching = new ArrayList<>();
@@ -98,26 +106,32 @@ public final class ConnectorFactory {
         return Collections.unmodifiableCollection(matching);
     }
 
+    @NonNull
     public static Collection<IConnector> getConnectors() {
         return CONNECTORS;
     }
 
+    @NonNull
     public static Collection<ISearchByCenter> getSearchByCenterConnectors() {
         return searchByCenterConns;
     }
 
+    @NonNull
     public static Collection<ISearchByKeyword> getSearchByKeywordConnectors() {
         return searchByKeywordConns;
     }
 
+    @NonNull
     public static Collection<ISearchByOwner> getSearchByOwnerConnectors() {
         return SEARCH_BY_OWNER_CONNECTORS;
     }
 
+    @NonNull
     public static Collection<ISearchByFinder> getSearchByFinderConnectors() {
         return SEARCH_BY_FINDER_CONNECTORS;
     }
 
+    @NonNull
     public static ILogin[] getActiveLiveConnectors() {
         final List<ILogin> liveConns = new ArrayList<>();
         for (final IConnector conn : CONNECTORS) {
@@ -143,11 +157,12 @@ public final class ConnectorFactory {
         return false;
     }
 
-    public static @NonNull
-    IConnector getConnector(final Geocache cache) {
+    @NonNull
+    public static IConnector getConnector(final Geocache cache) {
         return getConnector(cache.getGeocode());
     }
 
+    @NonNull
     public static TrackableConnector getConnector(final Trackable trackable) {
         return getTrackableConnector(trackable.getGeocode());
     }
@@ -162,8 +177,8 @@ public final class ConnectorFactory {
         return UNKNOWN_TRACKABLE_CONNECTOR; // avoid null checks by returning a non implementing connector
     }
 
-    public static @NonNull
-    IConnector getConnector(final String geocodeInput) {
+    @NonNull
+    public static IConnector getConnector(final String geocodeInput) {
         // this may come from user input
         final String geocode = StringUtils.trim(geocodeInput);
         if (geocode == null) {
@@ -186,7 +201,8 @@ public final class ConnectorFactory {
     }
 
     /** @see ISearchByViewPort#searchByViewport */
-    public static SearchResult searchByViewport(final @NonNull Viewport viewport, final MapTokens tokens) {
+    @NonNull
+    public static SearchResult searchByViewport(final @NonNull Viewport viewport, @NonNull final MapTokens tokens) {
         return SearchResult.parallelCombineActive(searchByViewPortConns, new Func1<ISearchByViewPort, SearchResult>() {
             @Override
             public SearchResult call(final ISearchByViewPort connector) {
@@ -195,6 +211,7 @@ public final class ConnectorFactory {
         });
     }
 
+    @Nullable
     public static String getGeocodeFromURL(final String url) {
         for (final IConnector connector : CONNECTORS) {
             final String geocode = connector.getGeocodeFromUrl(url);
@@ -205,6 +222,7 @@ public final class ConnectorFactory {
         return null;
     }
 
+    @NonNull
     public static Collection<TrackableConnector> getTrackableConnectors() {
         return TRACKABLE_CONNECTORS;
     }
@@ -215,6 +233,7 @@ public final class ConnectorFactory {
      * @param url
      * @return {@code null} if the URL cannot be decoded
      */
+    @Nullable
     public static String getTrackableFromURL(final String url) {
         if (url == null) {
             return null;

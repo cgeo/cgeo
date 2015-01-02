@@ -274,6 +274,7 @@ public abstract class GPXParser extends FileParser {
     }
 
     @Override
+    @NonNull
     public Collection<Geocache> parse(@NonNull final InputStream stream, @Nullable final CancellableHandler progressHandler) throws IOException, ParserException {
         resetCache();
         final RootElement root = new RootElement(namespace, "gpx");

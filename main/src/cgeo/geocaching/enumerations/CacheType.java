@@ -4,6 +4,8 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
@@ -56,9 +58,15 @@ public enum CacheType {
         this.markerId = markerId;
     }
 
+    @NonNull
     private final static Map<String, CacheType> FIND_BY_ID;
+
+    @NonNull
     private final static Map<String, CacheType> FIND_BY_PATTERN;
+
+    @NonNull
     private final static Map<String, CacheType> FIND_BY_GUID;
+
     static {
         final HashMap<String, CacheType> mappingId = new HashMap<>();
         final HashMap<String, CacheType> mappingPattern = new HashMap<>();
@@ -80,6 +88,7 @@ public enum CacheType {
         FIND_BY_GUID = Collections.unmodifiableMap(mappingGuid);
     }
 
+    @NonNull
     public static CacheType getById(final String id) {
         final CacheType result = (id != null) ? CacheType.FIND_BY_ID.get(id.toLowerCase(Locale.US).trim()) : null;
         if (result == null) {
@@ -88,6 +97,7 @@ public enum CacheType {
         return result;
     }
 
+    @NonNull
     public static CacheType getByPattern(final String pattern) {
         final CacheType result = (pattern != null) ? CacheType.FIND_BY_PATTERN.get(pattern.toLowerCase(Locale.US).trim()) : null;
         if (result == null) {
@@ -96,6 +106,7 @@ public enum CacheType {
         return result;
     }
 
+    @NonNull
     public static CacheType getByGuid(final String id) {
         final CacheType result = (id != null) ? CacheType.FIND_BY_GUID.get(id) : null;
         if (result == null) {

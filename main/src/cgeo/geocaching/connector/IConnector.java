@@ -16,6 +16,7 @@ public interface IConnector {
      *
      * @return
      */
+    @NonNull
     public String getName();
 
     /**
@@ -58,7 +59,7 @@ public interface IConnector {
      * @param cache
      * @return True - success/False - failure
      */
-    public boolean addToWatchlist(Geocache cache);
+    public boolean addToWatchlist(@NonNull Geocache cache);
 
     /**
      * Remove the cache from the watchlist
@@ -66,14 +67,14 @@ public interface IConnector {
      * @param cache
      * @return True - success/False - failure
      */
-    public boolean removeFromWatchlist(Geocache cache);
+    public boolean removeFromWatchlist(@NonNull Geocache cache);
 
     /**
      * enable/disable favorite points controls in cache details
      *
      * @return
      */
-    public boolean supportsFavoritePoints(final Geocache cache);
+    public boolean supportsFavoritePoints(@NonNull final Geocache cache);
 
     /**
      * enable/disable logging controls in cache details
@@ -94,13 +95,15 @@ public interface IConnector {
      *
      * @return
      */
-    public ILoggingManager getLoggingManager(final LogCacheActivity activity, final Geocache cache);
+    @NonNull
+    public ILoggingManager getLoggingManager(@NonNull final LogCacheActivity activity, @NonNull final Geocache cache);
 
     /**
      * Get host name of the connector server for dynamic loading of data.
      *
      * @return
      */
+    @NonNull
     public String getHost();
 
     /**
@@ -109,6 +112,7 @@ public interface IConnector {
      * @param cache
      * @return
      */
+    @NonNull
     public String getLicenseText(final @NonNull Geocache cache);
 
     /**
@@ -117,7 +121,7 @@ public interface IConnector {
      * @param fileName
      * @return
      */
-    public boolean isZippedGPXFile(final String fileName);
+    public boolean isZippedGPXFile(@NonNull final String fileName);
 
     /**
      * return true if coordinates of a cache are reliable. only implemented by GC connector
@@ -149,7 +153,7 @@ public interface IConnector {
      * @param cache
      * @return success
      */
-    public boolean uploadPersonalNote(Geocache cache);
+    public boolean uploadPersonalNote(@NonNull Geocache cache);
 
     /**
      * enable/disable uploading modified coordinates to website
@@ -164,7 +168,7 @@ public interface IConnector {
      * @param cache
      * @return success
      */
-    public boolean deleteModifiedCoordinates(Geocache cache);
+    public boolean deleteModifiedCoordinates(@NonNull Geocache cache);
 
     /**
      * Uploading modified coordinates to website
@@ -173,7 +177,7 @@ public interface IConnector {
      * @param wpt
      * @return success
      */
-    public boolean uploadModifiedCoordinates(Geocache cache, Geopoint wpt);
+    public boolean uploadModifiedCoordinates(@NonNull Geocache cache, @NonNull Geopoint wpt);
 
     /**
      * Return {@code true} if this connector is active for online interaction (download details, do searches, ...). If
@@ -190,7 +194,7 @@ public interface IConnector {
      * @param cache a cache that this connector must be able to handle
      * @return <code>true</code> if the current user is the cache owner, <code>false</code> otherwise
      */
-    public boolean isOwner(final Geocache cache);
+    public boolean isOwner(@NonNull final Geocache cache);
 
     /**
      * Check if the cache information is complete enough to be
@@ -199,7 +203,7 @@ public interface IConnector {
      * @param geocache
      * @return
      */
-    public boolean canLog(Geocache geocache);
+    public boolean canLog(@NonNull Geocache geocache);
 
     /**
      * Return the marker id of the caches for this connector. This creates the different backgrounds for cache markers
@@ -217,7 +221,8 @@ public interface IConnector {
      * @param geocache
      * @return
      */
-    public List<LogType> getPossibleLogTypes(Geocache geocache);
+    @NonNull
+    public List<LogType> getPossibleLogTypes(@NonNull Geocache geocache);
 
     /**
      * Get the GPX id for a waypoint when exporting. For some connectors there is an inherent name logic,
@@ -234,6 +239,7 @@ public interface IConnector {
      * @param name
      * @return
      */
+    @NonNull
     public String getWaypointPrefix(String name);
 
     /**
@@ -248,8 +254,9 @@ public interface IConnector {
      *
      * @return
      */
+    @NonNull
     public Collection<String> getCapabilities();
 
-    public @NonNull
-    List<UserAction> getUserActions();
+    @NonNull
+    public List<UserAction> getUserActions();
 }

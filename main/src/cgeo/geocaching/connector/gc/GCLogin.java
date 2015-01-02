@@ -57,6 +57,7 @@ public class GCLogin extends AbstractLogin {
     }
 
     @Override
+    @NonNull
     protected StatusCode login(final boolean retry) {
         final ImmutablePair<String, String> credentials = Settings.getGcCredentials();
         final String username = credentials.left;
@@ -470,8 +471,8 @@ public class GCLogin extends AbstractLogin {
      *
      * @return first is user session, second is session token
      */
-    public @NonNull
-    MapTokens getMapTokens() {
+    @NonNull
+    public MapTokens getMapTokens() {
         final String data = getRequestLogged(GCConstants.URL_LIVE_MAP, null);
         final String userSession = TextUtils.getMatch(data, GCConstants.PATTERN_USERSESSION, "");
         final String sessionToken = TextUtils.getMatch(data, GCConstants.PATTERN_SESSIONTOKEN, "");
