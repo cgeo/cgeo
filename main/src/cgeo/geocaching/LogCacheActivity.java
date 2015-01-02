@@ -86,7 +86,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private String imageDescription;
     private Uri imageUri;
     private boolean sendButtonEnabled;
-    private final boolean isRatingBarShown = false;
 
     public void onLoadFinished() {
         if (loggingManager.hasLoaderError()) {
@@ -286,7 +285,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     }
 
     private void initializeRatingBar() {
-        if (GCVote.isVotingPossible(cache) && !isRatingBarShown) {
+        if (GCVote.isVotingPossible(cache)) {
             GCVoteRatingBarUtil.initializeRatingBar(cache, getWindow().getDecorView().getRootView(), new OnRatingChangeListener() {
 
                 @Override
