@@ -137,8 +137,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         trackable = DataStore.loadTrackable(geocode);
 
         if (trackable == null) {
-            showToast(res.getString(R.string.err_tb_forgot_saw));
-
+            Log.e("LogTrackableActivity.onCreate: cannot load trackable " + geocode);
             finish();
             return;
         }
@@ -256,11 +255,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
         public LoadDataThread() {
             super("Load data for logging trackable");
-            if (guid == null) {
-                showToast(res.getString(R.string.err_tb_forgot_saw));
-
-                finish();
-            }
         }
 
         @Override

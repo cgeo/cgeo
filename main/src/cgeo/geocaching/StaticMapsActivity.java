@@ -94,7 +94,7 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
         cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
 
         if (cache == null) {
-            showToast("Sorry, c:geo forgot for what cache you want to load static maps.");
+            Log.e("StaticMapsActivity.onCreate: cannot find the cache " + geocode);
             finish();
             return;
         }

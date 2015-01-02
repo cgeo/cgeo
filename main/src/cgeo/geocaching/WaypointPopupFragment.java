@@ -64,6 +64,7 @@ public class WaypointPopupFragment extends AbstractDialogFragment {
         if (waypoint == null) {
             Log.e("WaypointPopupFragment.init: unable to get waypoint " + waypointId);
             getActivity().finish();
+            return;
         }
 
         try {
