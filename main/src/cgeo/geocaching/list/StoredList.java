@@ -107,8 +107,7 @@ public final class StoredList extends AbstractList {
             lists.addAll(getSortedLists());
 
             if (exceptListId == StoredList.STANDARD_LIST_ID || exceptListId >= DataStore.customListIdOffset) {
-                final StoredList exceptList = DataStore.getList(exceptListId);
-                lists.remove(exceptList);
+                lists.remove(DataStore.getList(exceptListId));
             }
 
             if (!onlyConcreteLists) {
