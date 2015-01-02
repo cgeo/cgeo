@@ -1157,7 +1157,7 @@ public class DataStore {
             values.put("hidden", hiddenDate.getTime());
         }
         values.put("hint", cache.getHint());
-        values.put("size", cache.getSize() == null ? "" : cache.getSize().id);
+        values.put("size", cache.getSize().id);
         values.put("difficulty", cache.getDifficulty());
         values.put("terrain", cache.getTerrain());
         values.put("location", cache.getLocation());

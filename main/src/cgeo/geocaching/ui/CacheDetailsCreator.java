@@ -133,7 +133,7 @@ public final class CacheDetailsCreator {
     }
 
     public void addSize(final Geocache cache) {
-        if (null != cache.getSize() && cache.showSize()) {
+        if (cache.showSize()) {
             add(R.string.cache_size, cache.getSize().getL10n());
         }
     }
