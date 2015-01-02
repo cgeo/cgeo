@@ -40,6 +40,7 @@ public enum CacheSize {
         this.ocSize2 = ocSize2;
     }
 
+    @NonNull
     final private static Map<String, CacheSize> FIND_BY_ID;
     static {
         final HashMap<String, CacheSize> mapping = new HashMap<>();
@@ -76,6 +77,7 @@ public enum CacheSize {
      * @param id
      * @return
      */
+    @NonNull
     private static CacheSize getByNumber(final String id) {
         try {
             final int numerical = Integer.parseInt(id);

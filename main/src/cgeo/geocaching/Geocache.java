@@ -479,6 +479,7 @@ public class Geocache implements IWaypoint {
         notifyChange();
     }
 
+    @NonNull
     public List<LogType> getPossibleLogTypes() {
         return getConnector().getPossibleLogTypes(this);
     }
@@ -502,11 +503,7 @@ public class Geocache implements IWaypoint {
         }
     }
 
-
-    private String getCacheUrl() {
-        return getConnector().getCacheUrl(this);
-    }
-
+    @NonNull
     private IConnector getConnector() {
         return ConnectorFactory.getConnector(this);
     }
@@ -535,6 +532,7 @@ public class Geocache implements IWaypoint {
         return getConnector().supportsOwnCoordinates();
     }
 
+    @NonNull
     public ILoggingManager getLoggingManager(final LogCacheActivity activity) {
         return getConnector().getLoggingManager(activity, this);
     }
@@ -591,7 +589,8 @@ public class Geocache implements IWaypoint {
     /**
      * @return GC username of the (actual) owner, might differ from the owner. Never empty.
      */
-    @NonNull public String getOwnerUserId() {
+    @NonNull
+    public String getOwnerUserId() {
         return ownerUserId;
     }
 
@@ -700,6 +699,8 @@ public class Geocache implements IWaypoint {
 
         fromActivity.startActivity(Intent.createChooser(intent, res.getText(R.string.cache_menu_share)));
     }
+
+    @NonNull
     public Intent getShareIntent() {
         final StringBuilder subject = new StringBuilder("Geocache ");
         subject.append(geocode);
@@ -715,6 +716,7 @@ public class Geocache implements IWaypoint {
         return intent;
     }
 
+    @NonNull
     public String getUrl() {
         return getConnector().getCacheUrl(this);
     }
@@ -724,7 +726,10 @@ public class Geocache implements IWaypoint {
         return getConnector().getLongCacheUrl(this);
     }
 
-    public String getCgeoUrl() { return getConnector().getCacheUrl(this); }
+    @NonNull
+    public String getCgeoUrl() {
+        return getConnector().getCacheUrl(this);
+    }
 
     public boolean supportsGCVote() {
         return StringUtils.startsWithIgnoreCase(geocode, "GC");
@@ -755,6 +760,7 @@ public class Geocache implements IWaypoint {
         return hidden;
     }
 
+    @NonNull
     public List<String> getAttributes() {
         return attributes.getUnderlyingList();
     }
@@ -770,6 +776,7 @@ public class Geocache implements IWaypoint {
         spoilers.add(spoiler);
     }
 
+    @NonNull
     public List<Image> getSpoilers() {
         return ListUtils.unmodifiableList(ListUtils.emptyIfNull(spoilers));
     }
@@ -967,6 +974,7 @@ public class Geocache implements IWaypoint {
      *
      * @return always non <code>null</code>
      */
+    @NonNull
     public List<Waypoint> getWaypoints() {
         return waypoints.getUnderlyingList();
     }
@@ -1610,6 +1618,7 @@ public class Geocache implements IWaypoint {
      *
      * @return start time in minutes after midnight
      */
+    @Nullable
     public String guessEventTimeMinutes() {
         if (!isEventCache()) {
             return null;
@@ -1659,6 +1668,7 @@ public class Geocache implements IWaypoint {
         }
     };
 
+    @NonNull
     public Collection<Image> getImages() {
         final LinkedList<Image> result = new LinkedList<>();
         result.addAll(getSpoilers());
@@ -1728,6 +1738,7 @@ public class Geocache implements IWaypoint {
         return getConnector().getWaypointGpxId(prefix, geocode);
     }
 
+    @NonNull
     public String getWaypointPrefix(final String name) {
         return getConnector().getWaypointPrefix(name);
     }
@@ -1750,6 +1761,7 @@ public class Geocache implements IWaypoint {
         return (getType().applyDistanceRule() || hasUserModifiedCoords()) && getConnector() == GCConnector.getInstance();
     }
 
+    @NonNull
     public LogType getDefaultLogType() {
         if (isEventCache()) {
             final Date eventDate = getHiddenDate();
@@ -1775,7 +1787,8 @@ public class Geocache implements IWaypoint {
      * @param caches a collection of caches
      * @return the non-blank geocodes of the caches
      */
-    public static Set<String> getGeocodes(final Collection<Geocache> caches) {
+    @NonNull
+    public static Set<String> getGeocodes(@NonNull final Collection<Geocache> caches) {
         final Set<String> geocodes = new HashSet<>(caches.size());
         for (final Geocache cache : caches) {
             final String geocode = cache.getGeocode();

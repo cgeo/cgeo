@@ -16,14 +16,14 @@ public abstract class AbstractTrackableConnector implements TrackableConnector {
     }
 
     @Override
-    public @Nullable
-    String getTrackableCodeFromUrl(@NonNull String url) {
+    @Nullable
+    public String getTrackableCodeFromUrl(@NonNull final String url) {
         return null;
     }
 
     @Override
-    public @NonNull
-    List<UserAction> getUserActions() {
+    @NonNull
+    public List<UserAction> getUserActions() {
         return AbstractConnector.getDefaultUserActions();
     }
 }

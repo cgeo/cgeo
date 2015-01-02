@@ -2,6 +2,8 @@ package cgeo.geocaching.filter;
 
 import cgeo.geocaching.Geocache;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +15,9 @@ abstract class AbstractFilter implements IFilter {
     }
 
     @Override
-    public void filter(final List<Geocache> list) {
+    public void filter(@NonNull final List<Geocache> list) {
         final List<Geocache> itemsToRemove = new ArrayList<>();
-        for (Geocache item : list) {
+        for (final Geocache item : list) {
             if (!accepts(item)) {
                 itemsToRemove.add(item);
             }

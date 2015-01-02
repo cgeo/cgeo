@@ -5,6 +5,7 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,11 +20,12 @@ public class PersonalNoteFilter extends AbstractFilter implements IFilterFactory
     }
 
     @Override
-    public boolean accepts(final Geocache cache) {
+    public boolean accepts(@NonNull final Geocache cache) {
         return StringUtils.isNotBlank(cache.getPersonalNote());
     }
 
     @Override
+    @NonNull
     public List<PersonalNoteFilter> getFilters() {
         return Collections.singletonList(this);
     }

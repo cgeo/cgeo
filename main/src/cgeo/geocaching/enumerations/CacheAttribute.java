@@ -4,6 +4,8 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.util.SparseArray;
 
@@ -163,7 +165,10 @@ public enum CacheAttribute {
                 enabled ? stringIdYes : stringIdNo);
     }
 
+    @NonNull
     private final static Map<String, CacheAttribute> FIND_BY_GCRAWNAME;
+
+    @NonNull
     private final static SparseArray<CacheAttribute> FIND_BY_OCACODE = new SparseArray<>();
     static {
         final HashMap<String, CacheAttribute> mapGcRawNames = new HashMap<>();
@@ -176,14 +181,17 @@ public enum CacheAttribute {
         FIND_BY_GCRAWNAME = Collections.unmodifiableMap(mapGcRawNames);
     }
 
+    @Nullable
     public static CacheAttribute getByRawName(final String rawName) {
         return rawName != null ? FIND_BY_GCRAWNAME.get(rawName) : null;
     }
 
+    @Nullable
     public static CacheAttribute getByOcACode(final int ocAcode) {
         return FIND_BY_OCACODE.get(ocAcode);
     }
 
+    @NonNull
     public static String trimAttributeName(final String attributeName) {
         if (null == attributeName) {
             return "";

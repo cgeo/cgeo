@@ -5,6 +5,8 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.gcvote.GCVote;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -20,11 +22,12 @@ public class RatingFilter extends AbstractFilter implements IFilterFactory {
     }
 
     @Override
-    public boolean accepts(final Geocache cache) {
+    public boolean accepts(@NonNull final Geocache cache) {
         return cache.getRating() > 0;
     }
 
     @Override
+    @NonNull
     public List<RatingFilter> getFilters() {
         return Collections.singletonList(this);
     }

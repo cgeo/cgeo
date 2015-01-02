@@ -47,6 +47,7 @@ public class Trackable implements ILogable {
         return getConnector().getUrl(this);
     }
 
+    @NonNull
     private TrackableConnector getConnector() {
         return ConnectorFactory.getConnector(this);
     }
@@ -220,6 +221,7 @@ public class Trackable implements ILogable {
         this.trackingcode = trackingcode;
     }
 
+    @NonNull
     public Collection<Image> getImages() {
         final List<Image> images = new LinkedList<>();
         if (StringUtils.isNotBlank(image)) {
@@ -232,6 +234,7 @@ public class Trackable implements ILogable {
         return images;
     }
 
+    @NonNull
     static List<LogType> getPossibleLogTypes() {
         final List<LogType> logTypes = new ArrayList<>();
         logTypes.add(LogType.RETRIEVED_IT);

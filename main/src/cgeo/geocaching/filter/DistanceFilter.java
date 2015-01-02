@@ -7,6 +7,8 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.Sensors;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,7 @@ class DistanceFilter extends AbstractFilter {
     }
 
     @Override
-    public boolean accepts(final Geocache cache) {
+    public boolean accepts(@NonNull final Geocache cache) {
         final Geopoint currentPos = new Geopoint(geo);
         final Geopoint coords = cache.getCoords();
         if (coords == null) {
@@ -40,6 +42,7 @@ class DistanceFilter extends AbstractFilter {
         private static final int[] KILOMETERS = { 0, 2, 5, 10, 20, 50 };
 
         @Override
+        @NonNull
         public List<IFilter> getFilters() {
             final List<IFilter> filters = new ArrayList<>(KILOMETERS.length);
             for (int i = 0; i < KILOMETERS.length; i++) {

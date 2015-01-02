@@ -4,6 +4,8 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -19,16 +21,17 @@ public class OriginFilter extends AbstractFilter {
     }
 
     @Override
-    public final boolean accepts(final Geocache cache) {
+    public final boolean accepts(@NonNull final Geocache cache) {
         return ConnectorFactory.getConnector(cache) == connector;
     }
 
     public static final class Factory implements IFilterFactory {
 
         @Override
+        @NonNull
         public List<OriginFilter> getFilters() {
             final ArrayList<OriginFilter> filters = new ArrayList<>();
-            for (IConnector connector : ConnectorFactory.getConnectors()) {
+            for (final IConnector connector : ConnectorFactory.getConnectors()) {
                 filters.add(new OriginFilter(connector));
             }
 

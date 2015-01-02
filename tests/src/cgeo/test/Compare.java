@@ -57,8 +57,8 @@ public abstract class Compare {
             // The inventories can differ too often, therefore we don't compare them. Also, the personal note
             // cannot be expected to match with different tester accounts.
 
-            final int actualSpoilersSize = null != actual.getSpoilers() ? actual.getSpoilers().size() : 0;
-            final int expectedSpoilersSize = null != expected.getSpoilers() ? expected.getSpoilers().size() : 0;
+            final int actualSpoilersSize = actual.getSpoilers().size();
+            final int expectedSpoilersSize = expected.getSpoilers().size();
             assertThat(actualSpoilersSize).as(cacheStr + "spoiler count").isEqualTo(expectedSpoilersSize);
         }
     }

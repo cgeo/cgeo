@@ -6,6 +6,8 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.LogType;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,7 @@ class PopularityRatioFilter extends AbstractFilter {
     }
 
     @Override
-    public boolean accepts(final Geocache cache) {
+    public boolean accepts(@NonNull final Geocache cache) {
         final int finds = getFindsCount(cache);
 
         if (finds == 0) {   // Prevent division by zero
@@ -51,6 +53,7 @@ class PopularityRatioFilter extends AbstractFilter {
         private static final int[] RATIOS = { 10, 20, 30, 40, 50, 75 };
 
         @Override
+        @NonNull
         public List<IFilter> getFilters() {
             final List<IFilter> filters = new ArrayList<>(RATIOS.length);
             for (final int minRange : RATIOS) {
