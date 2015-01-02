@@ -511,10 +511,6 @@ public class Geocache implements IWaypoint {
         return ConnectorFactory.getConnector(this);
     }
 
-    public boolean canOpenInBrowser() {
-        return getCacheUrl() != null;
-    }
-
     public boolean supportsRefresh() {
         return getConnector() instanceof ISearchByGeocode;
     }
