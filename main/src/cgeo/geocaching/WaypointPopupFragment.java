@@ -60,6 +60,12 @@ public class WaypointPopupFragment extends AbstractDialogFragment {
         super.init();
 
         waypoint = DataStore.loadWaypoint(waypointId);
+
+        if (waypoint == null) {
+            Log.e("WaypointPopupFragment.init: unable to get waypoint " + waypointId);
+            getActivity().finish();
+        }
+
         try {
             if (StringUtils.isNotBlank(waypoint.getName())) {
                 setTitle(waypoint.getName());
