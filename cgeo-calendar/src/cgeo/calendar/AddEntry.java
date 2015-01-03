@@ -8,14 +8,15 @@ import java.util.Date;
 
 class AddEntry extends AbstractAddEntry {
 
-    private int calendarId;
+    private final int calendarId;
 
     /**
      * @param entry
+     *         new entry to be stored
      * @param calendarId
-     *            The selected calendar
+     *         The selected calendar
      */
-    public AddEntry(CalendarEntry entry, CalendarActivity activity, int calendarId) {
+    public AddEntry(final CalendarEntry entry, final CalendarActivity activity, final int calendarId) {
         super(entry, activity);
         this.calendarId = calendarId;
     }

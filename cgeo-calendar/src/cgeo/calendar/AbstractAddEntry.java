@@ -4,10 +4,10 @@ import android.util.Log;
 
 abstract class AbstractAddEntry {
 
-    protected CalendarEntry entry;
-    protected CalendarActivity activity;
+    protected final CalendarEntry entry;
+    protected final CalendarActivity activity;
 
-    public AbstractAddEntry(final CalendarEntry entry, CalendarActivity activity) {
+    public AbstractAddEntry(final CalendarEntry entry, final CalendarActivity activity) {
         this.entry = entry;
         this.activity = activity;
     }
@@ -16,7 +16,7 @@ abstract class AbstractAddEntry {
         try {
             addEntryToCalendarInternal();
             activity.showToast(R.string.event_success);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             activity.showToast(R.string.event_fail);
 
             Log.e(CalendarActivity.LOG_TAG, "addToCalendar", e);

@@ -16,14 +16,14 @@ import java.util.Date;
 
 class CalendarEntry {
 
-    private String shortDesc;
-    private String hiddenDate;
-    private String url;
-    private String personalNote;
-    private String name;
-    private String coords;
+    private final String shortDesc;
+    private final String hiddenDate;
+    private final String url;
+    private final String personalNote;
+    private final String name;
+    private final String coords;
     private int startTimeMinutes = -1;
-    private Uri uri;
+    private final Uri uri;
 
     public CalendarEntry(final Uri uri) {
         this.uri = uri;
@@ -37,7 +37,7 @@ class CalendarEntry {
         if (startTime.length() > 0) {
             try {
                 this.startTimeMinutes = Integer.parseInt(startTime);
-            } catch (NumberFormatException e) {
+            } catch (final NumberFormatException e) {
                 Log.e("CalendarEntry creation", e);
             }
         }
@@ -50,7 +50,7 @@ class CalendarEntry {
                 return "";
             }
             return URLDecoder.decode(param, CharEncoding.UTF_8).trim();
-        } catch (UnsupportedEncodingException e) {
+        } catch (final UnsupportedEncodingException e) {
             Log.e("CalendarEntry.getParameter", e);
         }
         return "";
@@ -81,14 +81,14 @@ class CalendarEntry {
      */
     protected Date parseDate() {
         try {
-            Calendar cal = Calendar.getInstance();
+            final Calendar cal = Calendar.getInstance();
             cal.setTimeInMillis(Long.parseLong(getHiddenDate()));
             cal.set(Calendar.HOUR_OF_DAY, 0);
             cal.set(Calendar.MINUTE, 0);
             cal.set(Calendar.SECOND, 0);
 
             return cal.getTime();
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
             // cannot happen normally, but static code analysis does not know
         }
         return null;

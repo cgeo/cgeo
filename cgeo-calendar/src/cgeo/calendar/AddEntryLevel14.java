@@ -12,7 +12,7 @@ import java.util.Date;
  */
 class AddEntryLevel14 extends AbstractAddEntry {
 
-    public AddEntryLevel14(CalendarEntry entry, CalendarActivity activity) {
+    public AddEntryLevel14(final CalendarEntry entry, final CalendarActivity activity) {
         super(entry, activity);
     }
 
