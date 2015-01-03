@@ -159,7 +159,6 @@
   <string name="err_acquire_image_failed">Nie można pobrać obrazu.</string>
   <string name="err_tb_display">c:geo nie może pokazać przedmiotów podróżnych. Czy to naprawdę jest przedmiot podróżny?</string>
   <string name="err_tb_details_open">c:geo nie może otworzyć szczegółów przedmiotu podróżnego.</string>
-  <string name="err_tb_forgot_saw">c:geo zapomiał, który przedmiot podróżny widziałeś.</string>
   <string name="err_tb_find">c:geo nie może znaleźć przedmiotu podróżnego.</string>
   <string name="err_tb_find_that">c:geo nie może znaleźć tego przedmiotu podróżnego.</string>
   <string name="err_waypoint_cache_unknown">c:geo nie wie, do której skrzynki chcesz dodać punkt nawigacji.</string>

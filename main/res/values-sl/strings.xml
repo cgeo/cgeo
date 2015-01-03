@@ -157,7 +157,6 @@
   <string name="err_acquire_image_failed">Pridobivanje slike ni uspelo.</string>
   <string name="err_tb_display">c:geo ne more prikazati željenega sledljivčka. Ali je res sledljivček?</string>
   <string name="err_tb_details_open">c:geo ne more pokazati podatke sledljivčka.</string>
-  <string name="err_tb_forgot_saw">c:geo je pozabil kateri sledljivček hočete.</string>
   <string name="err_tb_find">c:geo ni našel sledljivčka.</string>
   <string name="err_tb_find_that">c:geo ni našel tega sledljivčka.</string>
   <string name="err_waypoint_cache_unknown">c:geo ne ve h kateremu zakladu želite dodati točko.</string>

@@ -159,7 +159,6 @@
   <string name="err_acquire_image_failed">Aquisição de uma imagem falhou.</string>
   <string name="err_tb_display">O c:geo não consegue mostrar o trackable pretendido. É mesmo um trackable?</string>
   <string name="err_tb_details_open">O c:geo não consegue abrir os detalhes do trackable.</string>
-  <string name="err_tb_forgot_saw">O c:geo esqueceu o trackable que viu.</string>
   <string name="err_tb_find">O c:geo não encontra o trackable</string>
   <string name="err_tb_find_that">O c:geo não encontra esse trackable.</string>
   <string name="err_waypoint_cache_unknown">O c:geo não sabe a que cache quer adicionar o ponto de referência.</string>

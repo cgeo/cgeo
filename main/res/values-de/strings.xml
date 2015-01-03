@@ -125,6 +125,7 @@
   <string name="err_login">Keine Anmeldedaten gespeichert.</string>
   <string name="err_login_failed_toast">c:geo konnte sich nicht einloggen und arbeitet im Offline-Modus. Bitte die Login-Daten in den Einstellungen überprüfen oder eine Internetverbindung herstellen.</string>
   <string name="err_unknown">Unbekannter Fehler</string>
+  <string name="err_unknown_address">c:geo konnte keine Koordinaten für diese Adresse ermitteln</string>
   <string name="err_comm">Unbekannter Kommunikationsfehler</string>
   <string name="err_missing_auth">Benutzername oder Passwort nicht gesetzt.</string>
   <string name="err_wrong">Benutzername und/oder Passwort falsch</string>
@@ -159,7 +160,6 @@
   <string name="err_acquire_image_failed">Erstellen eines Fotos ist fehlgeschlagen.</string>
   <string name="err_tb_display">c:geo kann den gewünschten Trackable nicht anzeigen. Ist es wirklich einer?</string>
   <string name="err_tb_details_open">c:geo konnte die Details des Trackables nicht öffnen.</string>
-  <string name="err_tb_forgot_saw">c:geo hat vergessen, welcher Trackable gesehen wurde.</string>
   <string name="err_tb_find">c:geo findet den Trackable nicht</string>
   <string name="err_tb_find_that">c:geo konnte diesen Trackable nicht finden.</string>
   <string name="err_waypoint_cache_unknown">c:geo weiß nicht, zu welchem Cache der Wegpunkt hinzugefügt werden soll.</string>
@@ -296,6 +296,9 @@
   <string name="caches_filter_personal_note">Mit persönlicher Notiz</string>
   <string name="caches_filter_popularity">Favoriten</string>
   <string name="caches_filter_popularity_ratio">Favoriten [%]</string>
+  <string name="caches_filter_personal_data">Mit eigenen Informationen</string>
+  <string name="caches_filter_rating">Mit Bewertung</string>
+  <string name="caches_filter_own_rating">Mit eigener Bewertung</string>
   <string name="caches_removing_from_history">Lösche aus Verlauf…</string>
   <string name="caches_clear_offlinelogs">Offline-Logs löschen</string>
   <string name="caches_clear_offlinelogs_message">Möchtest du die Offline-Logs löschen?</string>
@@ -328,6 +331,7 @@
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Hilfe</string>
   <string name="settings_title_services">Dienste</string>
+  <string name="settings_summary_services">Konfiguriere Zugangsdaten und den Zugriff auf optionale Dienste.</string>
   <string name="settings_title_appearance">Erscheinungsbild</string>
   <string name="settings_title_cachedetails">Cache-Details</string>
   <string name="settings_title_offlinedata">Offline-Daten</string>
@@ -376,6 +380,7 @@
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Um einen Cache bewerten zu können, folge der Anleitung auf gcvote.com  und gib das GCVote-Passwort anschließend hier ein.</string>
   <string name="err_gcvote_send_rating">Fehler beim Senden der Bewertung. Prüfe das GCVote-Passwort in den Einstellungen oder lösche es.</string>
+  <string name="gcvote_sent">Bewertung erfolgreich gesendet</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivieren</string>
   <string name="init_username">Benutzername</string>
@@ -655,6 +660,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble Smartwatch</string>
+  <string name="cache_menu_vote">Bewerten</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Gespeicherter Log</string>
   <string name="cache_status_found">Gefunden</string>

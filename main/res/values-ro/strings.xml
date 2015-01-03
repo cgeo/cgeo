@@ -159,7 +159,6 @@
   <string name="err_acquire_image_failed">Imaginea nu a putut fi obţinută.</string>
   <string name="err_tb_display">c:geo nu poate afişa obiectul călător solicitat. Chiar este un obiect călător?</string>
   <string name="err_tb_details_open">c:geo nu poate accesa detaliile obiectului călător.</string>
-  <string name="err_tb_forgot_saw">c:geo a uitat obiectul călător pe care l-ai văzut.</string>
   <string name="err_tb_find">c:geo nu poate găsi obiectul călător</string>
   <string name="err_tb_find_that">c:geo nu poate găsi acest obiect călător.</string>
   <string name="err_waypoint_cache_unknown">c:geo nu ştie pentru ce cutie vrei sa adaugi un punct.</string>

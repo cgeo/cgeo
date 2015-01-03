@@ -159,7 +159,6 @@
   <string name="err_acquire_image_failed">Hämtning av bilden misslyckades.</string>
   <string name="err_tb_display">Tyvärr kan c:geo inte visa den trackable du önskar. Är den verkligen trackable?</string>
   <string name="err_tb_details_open">Tyvärr kan c:geo inte öppna detaljer för trackable.</string>
-  <string name="err_tb_forgot_saw">Tyvärr glömde c:geo vilken trackable du såg.</string>
   <string name="err_tb_find">Tyvärr kunde c:geo inte hitta trackable</string>
   <string name="err_tb_find_that">Tyvärr kan c:geo inte hitta önskad trackable.</string>
   <string name="err_waypoint_cache_unknown">Tyvärr vet inte c:geo till vilken cache du vill lägga till en punkt.</string>
