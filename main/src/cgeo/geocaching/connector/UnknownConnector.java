@@ -38,7 +38,12 @@ class UnknownConnector extends AbstractConnector {
     @Override
     @NonNull
     protected String getCacheUrlPrefix() {
-        return StringUtils.EMPTY;
+        throw new IllegalStateException("getCacheUrl cannot be called on unknown caches");
+    }
+
+    @Override
+    public String getGeocodeFromUrl(final String url) {
+        return null;
     }
 
 }
