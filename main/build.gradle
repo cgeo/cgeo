@@ -42,7 +42,7 @@ version = '0.0.1'
 android {
     compileSdkVersion "Google Inc.:Google APIs:19"
     //compileSdkVersion 19
-    buildToolsVersion "21.1"
+    buildToolsVersion "21.1.2"
 
      compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
