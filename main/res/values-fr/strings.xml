@@ -125,6 +125,7 @@
   <string name="err_login">Pas d\'utilisateur ou de mot de passe enregistré</string>
   <string name="err_login_failed_toast">c:geo est en mode hors-ligne et ne peut pas se connecter. Vérifiez votre connexion Internet.</string>
   <string name="err_unknown">Erreur inconnue</string>
+  <string name="err_unknown_address">c:geo n\'a pas réussi à trouver de coordonnées géographiques pour cette adresse</string>
   <string name="err_comm">Erreur inconnue de communication</string>
   <string name="err_missing_auth">Nom d\'utilisateur ou mot de passe manquant.</string>
   <string name="err_wrong">Nom d\'utilisateur inconnu ou mauvais mot de passe</string>
@@ -159,7 +160,6 @@
   <string name="err_acquire_image_failed">L\'acquisition d\'une nouvelle image pour la note a échoué.</string>
   <string name="err_tb_display">\"c:geo ne peut pas afficher l\'objet voyageur demandé. Est-ce vraiment un objet voyageur?</string>
   <string name="err_tb_details_open">c:geo ne peut pas ouvrir le détail de l\'objet voyageur.</string>
-  <string name="err_tb_forgot_saw">c:geo a oublié quel objet voyageur vous avez vu.</string>
   <string name="err_tb_find">c:geo ne peut pas trouver d\'objet voyageur.</string>
   <string name="err_tb_find_that">c:geo ne peut pas trouver cet objet voyageur.</string>
   <string name="err_waypoint_cache_unknown">c:geo ne sait pas à quel cache vous voulez ajouter une étape.</string>
@@ -296,6 +296,9 @@
   <string name="caches_filter_personal_note">Avec une note personnelle</string>
   <string name="caches_filter_popularity">Favoris</string>
   <string name="caches_filter_popularity_ratio">Favoris [%]</string>
+  <string name="caches_filter_personal_data">Avec des données personnelles</string>
+  <string name="caches_filter_rating">Ayant reçu une note</string>
+  <string name="caches_filter_own_rating">Ayant reçu une note de votre part</string>
   <string name="caches_removing_from_history">Effacer de l\'historique…</string>
   <string name="caches_clear_offlinelogs">Effacer les entrées de carnet hors-ligne</string>
   <string name="caches_clear_offlinelogs_message">Effacer tous les journaux hors ligne ?</string>
@@ -328,6 +331,7 @@
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Aide</string>
   <string name="settings_title_services">Services</string>
+  <string name="settings_summary_services">Configuration des données de connexion et des services optionnels.</string>
   <string name="settings_title_appearance">Apparence</string>
   <string name="settings_title_cachedetails">Détails de la cache</string>
   <string name="settings_title_offlinedata">Données hors-ligne</string>
@@ -377,6 +381,7 @@
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Pour pouvoir attribuer une note à une géocache, vous devez suivre les instructions de GCVote.com et entrer ici votre mot de passe GCVote.</string>
   <string name="err_gcvote_send_rating">Erreur lors de l\'envoi de la note, vérifiez le mot de passe GCVote dans les paramètres ou effacez le.</string>
+  <string name="gcvote_sent">Note envoyée</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activer</string>
   <string name="init_username">Identifiant</string>
@@ -656,6 +661,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
+  <string name="cache_menu_vote">Noter</string>
   <string name="cache_status">Statut</string>
   <string name="cache_status_offline_log">Visite sauvée hors-ligne</string>
   <string name="cache_status_found">Trouvée</string>

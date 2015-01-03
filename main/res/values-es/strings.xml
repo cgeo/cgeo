@@ -159,7 +159,6 @@
   <string name="err_acquire_image_failed">No se pudo obtener una imagen.</string>
   <string name="err_tb_display">\"Lo siento, c:geo no puede mostrar el rastreable que buscas. ¿Es realmente rastreable?</string>
   <string name="err_tb_details_open">Lo siento, c:geo no puede abrir los detalles del rastreable.</string>
-  <string name="err_tb_forgot_saw">Lo siento, c:geo ha olvidado qué rastreable has visto.</string>
   <string name="err_tb_find">Lo siento, c:geo no encuentra el rasteable</string>
   <string name="err_tb_find_that">Lo siento, c:geo no encuentra ese rastreable.</string>
   <string name="err_waypoint_cache_unknown">Lo siento, c:geo no sabe a qué escondite quieres añadir un punto de referencia.</string>
@@ -603,7 +602,6 @@
   <string name="cache_dialog_loading_details_status_logs">Cargando registros</string>
   <string name="cache_dialog_loading_details_status_waypoints">Procesando Waypoints</string>
   <string name="cache_dialog_loading_details_status_gcvote">Cargando GCVote</string>
-  <string name="cache_dialog_loading_details_status_cache">Salvando datos</string>
   <string name="cache_dialog_loading_details_status_render">Procesando la representación</string>
   <string name="cache_dialog_offline_save_title">Desconectado</string>
   <string name="cache_dialog_offline_save_message">Guardando escondite para usar desconectado…</string>

@@ -159,7 +159,6 @@
   <string name="err_acquire_image_failed">Získavanie obrázku zlyhalo.</string>
   <string name="err_tb_display">Prepáčte, c:geo nemôže zobraziť trasovateľný predmet. Je to naozaj trasovateľný predmet?</string>
   <string name="err_tb_details_open">Prepáčte, c:geo nemôže otvoriť podrobnosti k trasovateľnému predmetu.</string>
-  <string name="err_tb_forgot_saw">c:geo zabudlo, ktorý trasovateľný predmet ste videli.</string>
   <string name="err_tb_find">c:geo nemôže nájsť trasovateľný predmet.</string>
   <string name="err_tb_find_that">c:geo nemôže nájsť tento trasovateľný predmet.</string>
   <string name="err_waypoint_cache_unknown">c:geo nevie, ku ktorej skrýši chcete pridať bod trasy.</string>

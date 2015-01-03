@@ -159,7 +159,6 @@
   <string name="err_acquire_image_failed">Henting av bilde mislyktes.</string>
   <string name="err_tb_display">\"Beklager, c:geo klarte ikke å finne den sporbare du etterspurte. Er det virkelig en sporbar (trackable)?</string>
   <string name="err_tb_details_open">Beklager, c:geo klarte ikke å åpne detaljerene til den sporbare.</string>
-  <string name="err_tb_forgot_saw">Beklager, c:geo glemte hvilken sporbare du oppdaget.</string>
   <string name="err_tb_find">Beklager, c:geo klarte ikke å finne noen sporbare</string>
   <string name="err_tb_find_that">Beklager, c:geo finner ikke den sporbare.</string>
   <string name="err_waypoint_cache_unknown">c:geo vet ikke hvilken cache du vil legge til et veipunkt for.</string>

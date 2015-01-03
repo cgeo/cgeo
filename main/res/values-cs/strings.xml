@@ -158,7 +158,6 @@
   <string name="err_acquire_image_failed">Získání obrázku selhalo.</string>
   <string name="err_tb_display">c:geo nemůže zobrazit sledovatelný předmět. Je to opravdu sledovatelný předmět?</string>
   <string name="err_tb_details_open">c:geo nemůže otevřít podrobnosti ke sledovatelnému předmětu.</string>
-  <string name="err_tb_forgot_saw">c:geo zapomělo, který sledovatelný předmět jsi prohlížel/a.</string>
   <string name="err_tb_find">c:geo nemůže najít sledovatelný předmět.</string>
   <string name="err_tb_find_that">c:geo nemůže najít tento sledovatelný předmět.</string>
   <string name="err_waypoint_cache_unknown">c:geo neví k jaké keši chceš přidat bod trasy.</string>

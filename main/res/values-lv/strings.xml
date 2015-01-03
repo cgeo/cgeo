@@ -159,7 +159,6 @@
   <string name="err_acquire_image_failed">Attēla iegūšana neizdevās.</string>
   <string name="err_tb_display">c:geo nevar parādīt ceļotājums, kurus izvēlējāties. Vai tie patiešām ir ceļotāji?</string>
   <string name="err_tb_details_open">c:geo nevar atvērt ceļotāja datus.</string>
-  <string name="err_tb_forgot_saw">c:geo aizmirsāt, kuru ceļotāju jūs redzējāt.</string>
   <string name="err_tb_find">c:geo nevar atrast ceļotāju</string>
   <string name="err_tb_find_that">c:feo nevar atrast šo ceļotāju.</string>
   <string name="err_waypoint_cache_unknown">c:geo, nezina, kuram slēpnim Jūs vēlaties pievienot Starpposma punktu.</string>

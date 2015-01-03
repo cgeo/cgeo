@@ -159,7 +159,6 @@
   <string name="err_acquire_image_failed">Nepavyko pasiekti nuotraukos.</string>
   <string name="err_tb_display">c:geo negali parodyti norimo keliauninko. Ar tai tikrai keliauninkas?</string>
   <string name="err_tb_details_open">c:geo negali atidaryti keliauninko informacijos.</string>
-  <string name="err_tb_forgot_saw">c:geo pamiršo kokį keliauninką žiūrėjote.</string>
   <string name="err_tb_find">c:geo neranda keliauninko</string>
   <string name="err_tb_find_that">c:geo neranda šito keliauninko.</string>
   <string name="err_waypoint_cache_unknown">c:geo nežino, kokiai slėptuvei norite pridėti papildomą tašką.</string>

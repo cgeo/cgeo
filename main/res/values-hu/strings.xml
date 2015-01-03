@@ -125,6 +125,7 @@
   <string name="err_login">Nincs mentett belépési adat</string>
   <string name="err_login_failed_toast">Sajnos a c:geo nem tud belépni. A c:geo hálózat nélküli módban fut. Ellenőrizd a belépési adataid a beállításoknál vagy engedélyezd az internet kapcsolatot.</string>
   <string name="err_unknown">Ismeretlen hiba</string>
+  <string name="err_unknown_address">A c:geo nem tudta leképezni ezt a címet egy létező helyszínre</string>
   <string name="err_comm">Ismeretlen kommunikációs hiba</string>
   <string name="err_missing_auth">Nincs megadva belépési név és/vagy jelszó.</string>
   <string name="err_wrong">Rossz belépési adatok</string>
@@ -159,7 +160,6 @@
   <string name="err_acquire_image_failed">A kép készítése nem sikerült.</string>
   <string name="err_tb_display">Sajnáljuk, a c:geo nem tudja megjeleníteni a követhető tárgyat. Biztos, hogy ez egy követhető tárgy?</string>
   <string name="err_tb_details_open">Sajnáljuk, a c:geo nem tudja megnyitni a követhető tárgy leírását.</string>
-  <string name="err_tb_forgot_saw">Sajnáljuk, a c:geo elfelejtette, melyik követhető tárgyat láttad.</string>
   <string name="err_tb_find">Sajnáljuk, a c:geo nem találja a követhető tárgyat.</string>
   <string name="err_tb_find_that">Sajnáljuk, a c:geo nem találja azt a követhető tárgyat.</string>
   <string name="err_waypoint_cache_unknown">Sajnáljuk, a c:geo nem tudja melyik ládához szeretnéd hozzáadni az útpontot.</string>
@@ -172,6 +172,8 @@
   <string name="err_log_load_data">Sajnáljuk, a c:geo nem tudja betölteni a megtalálás bejelentéséhez szükségesek adatokat.</string>
   <string name="err_log_load_data_again">Sajnáljuk, a c:geo nem tudja betölteni a megtalálás bejelentéséhez szükségesek adatokat. Újrapróbálkozás.</string>
   <string name="err_log_load_data_still">A c:geo még tölti a megtalálás bejelentéséhez szükségesek adatokat. Kérlek, várj egy kicsit tovább.</string>
+  <string name="err_log_post_failed">Úgy tűnik, hogy a logod nem ment át. Kérlek, ellenőrizd a láda eredeti oldalát.</string>
+  <string name="err_logimage_post_failed">Úgy tűnik, hogy a logfotóid nem mentek át. Kérlek, ellenőrizd a láda eredeti oldalát.</string>
   <string name="err_search_address_forgot">Sajnáljuk, a c:geo elfelejtette a keresett címet.</string>
   <string name="err_parse_lat">Sajnáljuk, a c:geo nem tudja értelmezni a szélességet.</string>
   <string name="err_parse_lon">Sajnáljuk, a c:geo nem tudja értelmezni a hosszúságot.</string>
@@ -253,8 +255,8 @@
   <string name="caches_sort_favorites_ratio">kedvencek [%]</string>
   <string name="caches_sort_name">név</string>
   <string name="caches_sort_geocode">GC-kód</string>
-  <string name="caches_sort_rating">osztályzat</string>
-  <string name="caches_sort_vote">szavazat (saját osztályzat)</string>
+  <string name="caches_sort_rating">értékelés</string>
+  <string name="caches_sort_vote">szavazat (saját értékelés)</string>
   <string name="caches_sort_inventory">tárgyak száma</string>
   <string name="caches_sort_date_hidden">rejtés dátuma</string>
   <string name="caches_sort_date_logged">log dátuma</string>
@@ -284,16 +286,19 @@
   <string name="caches_recaptcha_continue">Folytatás</string>
   <string name="caches_filter">Szűrő</string>
   <string name="caches_filter_title">Szűrés eszerint</string>
-  <string name="caches_filter_size">méret</string>
-  <string name="caches_filter_type">típus</string>
-  <string name="caches_filter_track">követhető tárgyak</string>
-  <string name="caches_filter_clear">szűrők törlése</string>
-  <string name="caches_filter_modified">Módosított koordinátákkal</string>
+  <string name="caches_filter_size">Méret</string>
+  <string name="caches_filter_type">Típus</string>
+  <string name="caches_filter_track">Követhető tárgyak</string>
+  <string name="caches_filter_clear">Szűrők törlése</string>
+  <string name="caches_filter_modified">Módosított koordináták</string>
   <string name="caches_filter_origin">Származás</string>
   <string name="caches_filter_distance">Távolság</string>
-  <string name="caches_filter_personal_note">Személyes megjegyzéssel ellátottak</string>
+  <string name="caches_filter_personal_note">Személyes megjegyzés</string>
   <string name="caches_filter_popularity">Kedvencek</string>
   <string name="caches_filter_popularity_ratio">Kedvencek [%]</string>
+  <string name="caches_filter_personal_data">Személyes adatok</string>
+  <string name="caches_filter_rating">Értékelés</string>
+  <string name="caches_filter_own_rating">Saját értékelés</string>
   <string name="caches_removing_from_history">Eltávolítás a Előzményekből…</string>
   <string name="caches_clear_offlinelogs">Offline logok törlése</string>
   <string name="caches_clear_offlinelogs_message">Szeretnéd törölni az offline logokat?</string>
@@ -326,6 +331,7 @@
   <string name="about_apache_license"><a href=""> Apache License, 2.0 verzió</a></string>
   <string name="about_help">Segítség</string>
   <string name="settings_title_services">Szolgáltatók</string>
+  <string name="settings_summary_services">A felhasználói fiók adatainak és a választható szolgáltatásokhoz való hozzáférés beállítása.</string>
   <string name="settings_title_appearance">Megjelenítés</string>
   <string name="settings_title_cachedetails">Geoláda részletek</string>
   <string name="settings_title_offlinedata">Offline adatok</string>
@@ -375,6 +381,7 @@
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Ládák értékeléséhez kövesd az utasításokat a GCVote.com-on és add meg itt a GCVote jelszavad.</string>
   <string name="err_gcvote_send_rating">Sikertelen az értélkelés elküldése, ellenőrizd a GCVote jelszavad a beállításoknál. Próbálkozz a törlésével.</string>
+  <string name="gcvote_sent">Az értékelés sikeresen elment</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktiválás</string>
   <string name="init_username">Felhasználónév</string>
@@ -534,13 +541,13 @@
   <string name="init_sendToCgeo">Küldés c:geo-nak</string>
   <string name="settings_info_send2cgeo_title">Információk a \'Küldés c:geo-nak\'-ról</string>
   <string name="init_sendToCgeo_name">Az eszközöd neve</string>
-  <string name="init_sendToCgeo_description">A <b>\'Küldés c:geo-nak\'</b> segítségével közvetlenül a geocaching weboldalról tölthetsz le ládákat egy Firefox vagy Chrome modul segítségével. Regisztráció előtt olvasd el a leírást <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Csak akkor kell regisztrálnod, ha a \'Küldés c:geo-nak\' modult használni akarod. A c:geo a regisztráció nélkül is működik.</string>
+  <string name="init_sendToCgeo_description">A <b>send2c:geo</b> segítségével közvetlenül a geocaching weboldalról tölthetsz le ládákat egy Firefox vagy Chrome modul segítségével. Regisztráció előtt olvasd el a leírást <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Csak akkor kell regisztrálnod, ha a send2c:geo modult használni akarod. A c:geo a regisztráció nélkül is működik.</string>
   <string name="init_sendToCgeo_register">Regisztráció kérése</string>
-  <string name="init_sendToCgeo_registering">Az eszközöd regisztrációja a \'Küldés c:geo-nak\' modulhoz…</string>
+  <string name="init_sendToCgeo_registering">Az eszközöd regisztrációja a send2c:geo modulhoz…</string>
   <string name="init_sendToCgeo_register_ok">A regisztráció sikeres. A PIN kód ####. Használd ezt a kódot a c:geo weboldalán, hogy hozzáadd ezt az eszközt a böngészőhöz.</string>
   <string name="init_sendToCgeo_register_fail">Regisztráció sikertelen.</string>
-  <string name="sendToCgeo_download_fail">A c:geo nem tudta letölteni a ládákat. Nincs internetkapcsolat vagy a \'Küldés c:geo-nak\' leállt.</string>
-  <string name="sendToCgeo_no_registration">A c:geo nem tudta letölteni a ládákat. A \'Küldés c:geo-nak\' regisztrációd lejárt. Kérlek regisztrálj a beállításoknál.</string>
+  <string name="sendToCgeo_download_fail">A c:geo nem tudta letölteni a ládákat. Nincs internetkapcsolat vagy a send2c:geo leállt.</string>
+  <string name="sendToCgeo_no_registration">A c:geo nem tudta letölteni a ládákat. A send2c:geo regisztrációd lejárt. Kérlek, regisztrálj a beállításoknál.</string>
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Hozzáférés engedélyezése a c:geo-nak</string>
   <string name="auth_start">Engedélyezés indítása</string>
@@ -575,7 +582,7 @@
   <string name="cache_premium">Prémium</string>
   <string name="cache_attributes">Tulajdonságok</string>
   <string name="cache_inventory">Tárgyak</string>
-  <string name="cache_log_images_title">Bejegyzés kép</string>
+  <string name="cache_log_images_title">Logfotók</string>
   <string name="cache_log_image_default_title">Fotó</string>
   <string name="cache_personal_note">Személyes megjegyzés</string>
   <string name="cache_personal_note_edit">Szerkesztés</string>
@@ -659,6 +666,7 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble (okosóra)</string>
   <string name="cache_menu_android_wear">Android Wear</string>
+  <string name="cache_menu_vote">Értékelés</string>
   <string name="cache_status">Állapot</string>
   <string name="cache_status_offline_log">Mentett bejegyzés</string>
   <string name="cache_status_found">Megtalált</string>
@@ -676,7 +684,7 @@
   <string name="cache_distance">Távolság</string>
   <string name="cache_difficulty">Nehézség</string>
   <string name="cache_terrain">Terep</string>
-  <string name="cache_rating">Osztályzat</string>
+  <string name="cache_rating">Értékelés</string>
   <string name="cache_own_rating">Saját értékelés</string>
   <string name="cache_rating_of">/</string>
   <string name="cache_favorite">Kedvenc</string>
@@ -873,7 +881,7 @@
   <string name="helper_contacts_description">Lehetővé teszi egy névjegy közvetlen megnyitását a log bejegyzésekből, így könnyebben segítséget tudsz kérni.</string>
   <string name="helper_sendtocgeo_description">A \'Küldés a c:geo-ra\' egy böngésző bővítmény <strong>PC-re</strong>. A geocaching.com böngészése közben, egy kattintással tudsz geoládákat küldeni az okostelefonodra.</string>
   <string name="helper_locus_title">Locus</string>
-  <string name="helper_locus_description">Telefonodon, tableteden használható szabadtéri navigációs progi. Offline térképek használata, útvonal követése, ládavadászat, hangos útikalauz, stb ...</string>
+  <string name="helper_locus_description">Telefonodon, tableteden használható szabadtéri navigációs progi. Offline térképek használata, útvonal követése, ládavadászat, hangos útikalauz, stb.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">A programban található radart a c:geo-hoz is használhatod. Sok egyéb GPS-el kapcsolatos információt is megmutat.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>

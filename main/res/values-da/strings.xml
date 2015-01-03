@@ -159,7 +159,6 @@
   <string name="err_acquire_image_failed">Optagelse af et billede mislykkedes.</string>
   <string name="err_tb_display">c:geo kan ikke vise den forespurgte Trackable. Er det virkelig en Trackable?</string>
   <string name="err_tb_details_open">c:geo kan ikke åbne Trackable-detaljer.</string>
-  <string name="err_tb_forgot_saw">c:geo glemte hvilken Trackable du så.</string>
   <string name="err_tb_find">c:geo kan ikke finde den forespurgte Trackable</string>
   <string name="err_tb_find_that">c:geo kan ikke finde den forespurgte Trackable.</string>
   <string name="err_waypoint_cache_unknown">c: geo ved ikke hvilken cache, du ønsker at tilføje et waypoint til.</string>

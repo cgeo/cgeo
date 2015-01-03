@@ -153,7 +153,6 @@
   <string name="err_acquire_image_failed">画像ファイルの取得に失敗しました。</string>
   <string name="err_tb_display">トラッカブルを表示することができません。本当にトラッカブルですか?</string>
   <string name="err_tb_details_open">トラッカブルの詳細を開くことができません。</string>
-  <string name="err_tb_forgot_saw">c:geo forgot which trackable you saw.</string>
   <string name="err_tb_find">トラッカブルが見つかりません。</string>
   <string name="err_tb_find_that">トラッカブルが見つかりません。</string>
   <string name="err_waypoint_cache_unknown">c:geo doesn\'t know to which cache you want to add waypoint.</string>

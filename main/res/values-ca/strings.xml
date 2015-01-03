@@ -159,7 +159,6 @@
   <string name="err_acquire_image_failed">S\'ha produït un error a l\'adquirir una imatge.</string>
   <string name="err_tb_display">El c:geo no pot mostrar el traçable que volíeu. És realment un traçable?</string>
   <string name="err_tb_details_open">El c:geo no pot obrir els detalls del traçable.</string>
-  <string name="err_tb_forgot_saw">El c:geo no recorda quin traçable heu vist.</string>
   <string name="err_tb_find">El c:geo no pot trobar el traçable</string>
   <string name="err_tb_find_that">El c:geo no pot trobar aquest traçable.</string>
   <string name="err_waypoint_cache_unknown">El c:geo no sap a quin catxé voleu afegir la fita.</string>
