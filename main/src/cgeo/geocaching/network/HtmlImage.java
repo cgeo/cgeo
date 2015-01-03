@@ -69,7 +69,7 @@ public class HtmlImage implements Html.ImageGetter {
     };
     public static final String SHARED = "shared";
 
-    final private String geocode;
+    @NonNull final private String geocode;
     /**
      * on error: return large error image, if {@code true}, otherwise empty 1x1 image
      */
@@ -112,7 +112,8 @@ public class HtmlImage implements Html.ImageGetter {
      * </ul>
      *
      * @param geocode
-     *            the geocode of the item for which we are requesting the image
+     *            the geocode of the item for which we are requesting the image, or {@link #SHARED} to use the shared
+     *            cache directory
      * @param returnErrorImage
      *            set to <tt>true</tt> if an error image should be returned in case of a problem, <tt>false</tt> to get
      *            a transparent 1x1 image instead
@@ -127,7 +128,7 @@ public class HtmlImage implements Html.ImageGetter {
      *            redrawn when
      *            the image is ready through an invalidation of the given view
      */
-    public HtmlImage(final String geocode, final boolean returnErrorImage, final int listId, final boolean onlySave, final TextView view) {
+    public HtmlImage(@NonNull final String geocode, final boolean returnErrorImage, final int listId, final boolean onlySave, final TextView view) {
         this.geocode = geocode;
         this.returnErrorImage = returnErrorImage;
         this.listId = listId;
@@ -146,7 +147,7 @@ public class HtmlImage implements Html.ImageGetter {
      *
      * For documentation, see {@link #HtmlImage(String, boolean, int, boolean, TextView)}.
      */
-    public HtmlImage(final String geocode, final boolean returnErrorImage, final int listId, final boolean onlySave) {
+    public HtmlImage(@NonNull final String geocode, final boolean returnErrorImage, final int listId, final boolean onlySave) {
         this(geocode, returnErrorImage, listId, onlySave, null);
     }
 
@@ -347,7 +348,7 @@ public class HtmlImage implements Html.ImageGetter {
      * @return A pair whose first element is the bitmap if available, and the second one is <code>true</code> if the image is present and fresh enough.
      */
     @NonNull
-    private ImmutablePair<Bitmap, Boolean> loadImageFromStorage(final String url, final String pseudoGeocode, final boolean forceKeep) {
+    private ImmutablePair<Bitmap, Boolean> loadImageFromStorage(final String url, @NonNull final String pseudoGeocode, final boolean forceKeep) {
         try {
             final File file = LocalStorage.getStorageFile(pseudoGeocode, url, true, false);
             final ImmutablePair<Bitmap, Boolean> image = loadCachedImage(file, forceKeep);

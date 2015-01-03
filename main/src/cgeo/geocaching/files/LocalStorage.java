@@ -45,7 +45,7 @@ public final class LocalStorage {
     public static final String HEADER_ETAG = "etag";
 
     /** Name of the local private directory used to hold cached information */
-    public final static String cache = ".cgeo";
+    public final static String CACHE_DIRNAME = ".cgeo";
 
     private static File internalStorageBase;
 
@@ -74,7 +74,7 @@ public final class LocalStorage {
     private static File getStorageSpecific(final boolean secondary) {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) ^ secondary ?
                 getExternalStorageBase() :
-                new File(getInternalStorageBase(), LocalStorage.cache);
+                new File(getInternalStorageBase(), LocalStorage.CACHE_DIRNAME);
     }
 
     public static File getExternalDbDirectory() {
@@ -86,7 +86,7 @@ public final class LocalStorage {
     }
 
     private static File getExternalStorageBase() {
-        return new File(Environment.getExternalStorageDirectory(), LocalStorage.cache);
+        return new File(Environment.getExternalStorageDirectory(), LocalStorage.CACHE_DIRNAME);
     }
 
     private static File getInternalStorageBase() {
@@ -105,7 +105,7 @@ public final class LocalStorage {
      * @return the file extension, including the leading dot, or the empty string if none could be determined
      */
     static String getExtension(final String url) {
-        String urlExt;
+        final String urlExt;
         if (url.startsWith("data:")) {
             // "data:image/png;base64,i53…" -> ".png"
             urlExt = StringUtils.substringAfter(StringUtils.substringBefore(url, ";"), "/");
@@ -124,7 +124,7 @@ public final class LocalStorage {
      *            the geocode
      * @return the cache directory
      */
-    public static File getStorageDir(@Nullable final String geocode) {
+    public static File getStorageDir(@NonNull final String geocode) {
         return storageDir(getStorage(), geocode);
     }
 
@@ -136,12 +136,12 @@ public final class LocalStorage {
      *            the geocode
      * @return the cache directory
      */
-    private static File getStorageSecDir(@Nullable final String geocode) {
+    private static File getStorageSecDir(@NonNull final String geocode) {
         return storageDir(getStorageSec(), geocode);
     }
 
-    private static File storageDir(final File base, @Nullable final String geocode) {
-        return new File(base, StringUtils.defaultIfEmpty(geocode, "_others"));
+    private static File storageDir(final File base, @NonNull final String geocode) {
+        return new File(base, geocode);
     }
 
     /**
@@ -157,7 +157,7 @@ public final class LocalStorage {
      *            true if an url was given, false if a file name was given
      * @return the file
      */
-    public static File getStorageFile(@Nullable final String geocode, final String fileNameOrUrl, final boolean isUrl, final boolean createDirs) {
+    public static File getStorageFile(@NonNull final String geocode, final String fileNameOrUrl, final boolean isUrl, final boolean createDirs) {
         return buildFile(getStorageDir(geocode), fileNameOrUrl, isUrl, createDirs);
     }
 
@@ -244,14 +244,14 @@ public final class LocalStorage {
     public static String getSavedHeader(final File baseFile, final String name) {
         try {
             final File file = filenameForHeader(baseFile, name);
-            final Reader f = new InputStreamReader(new FileInputStream(file), CharEncoding.UTF_8);
+            final Reader reader = new InputStreamReader(new FileInputStream(file), CharEncoding.UTF_8);
             try {
                 // No header will be more than 256 bytes
                 final char[] value = new char[256];
-                final int count = f.read(value);
+                final int count = reader.read(value);
                 return new String(value, 0, count);
             } finally {
-                f.close();
+                reader.close();
             }
         } catch (final FileNotFoundException ignored) {
             // Do nothing, the file does not exist
@@ -442,10 +442,10 @@ public final class LocalStorage {
             try {
                 fr = new InputStreamReader(new FileInputStream(file), CharEncoding.UTF_8);
                 br = new BufferedReader(fr);
-                String s = br.readLine();
-                while (s != null) {
-                    if (s.startsWith("dev_mount")) {
-                        final String[] tokens = StringUtils.split(s);
+                String str = br.readLine();
+                while (str != null) {
+                    if (str.startsWith("dev_mount")) {
+                        final String[] tokens = StringUtils.split(str);
                         if (tokens.length >= 3) {
                             final String path = tokens[2]; // mountpoint
                             if (!extStorage.equals(path)) {
@@ -456,7 +456,7 @@ public final class LocalStorage {
                             }
                         }
                     }
-                    s = br.readLine();
+                    str = br.readLine();
                 }
             } catch (final IOException e) {
                 Log.e("Could not get additional mount points for user content. " +

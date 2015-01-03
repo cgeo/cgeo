@@ -257,7 +257,7 @@ public class GCLogin extends AbstractLogin {
 
             final String avatarURL = TextUtils.getMatch(profile, GCConstants.PATTERN_AVATAR_IMAGE_PROFILE_PAGE, false, null);
             if (avatarURL != null) {
-                final HtmlImage imgGetter = new HtmlImage("", false, 0, false);
+                final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, 0, false);
                 return imgGetter.fetchDrawable(avatarURL.replace("avatar", "user/large")).cast(Drawable.class);
             }
             // No match? There may be no avatar set by user.
