@@ -109,7 +109,7 @@ public final class LocParser extends FileParser {
                             break;
                         case "container":
                             if (xpp.next() == XmlPullParser.TEXT) {
-                                currentCache.setSize(SIZES[Integer.valueOf(xpp.getText()) - 1]);
+                                currentCache.setSize(SIZES[Integer.parseInt(xpp.getText()) - 1]);
                             }
                             break;
                         case "difficulty":
