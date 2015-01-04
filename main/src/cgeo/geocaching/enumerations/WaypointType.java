@@ -39,7 +39,7 @@ public enum WaypointType {
      * inverse lookup of waypoint IDs<br/>
      * non public so that <code>null</code> handling can be handled centrally in the enum type itself
      */
-    private static final Map<String, WaypointType> FIND_BY_ID = new HashMap();
+    private static final Map<String, WaypointType> FIND_BY_ID = new HashMap<>();
     private static final Set<WaypointType> ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL_TMP = new HashSet<>();
     static {
         for (final WaypointType wt : values()) {
