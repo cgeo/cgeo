@@ -18,3 +18,7 @@
 -keepnames class * implements android.os.Parcelable {
     public static final ** CREATOR;
 }
+
+# classes introduced in higher API levels than we use as target
+-dontwarn com.google.android.gms.common.SupportErrorDialogFragment
+-dontwarn com.google.android.gms.common.api.**
