@@ -203,7 +203,7 @@ public class ImagesList {
     }
 
     private static File saveToTemporaryJPGFile(final BitmapDrawable image) throws FileNotFoundException {
-        final File file = LocalStorage.getStorageFile(null, "temp.jpg", false, true);
+        final File file = LocalStorage.getStorageFile(HtmlImage.SHARED, "temp.jpg", false, true);
         BufferedOutputStream stream = null;
         try {
             stream = new BufferedOutputStream(new FileOutputStream(file));
