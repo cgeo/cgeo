@@ -63,6 +63,8 @@
     <orderEntry type="module" module-name="mapswithme-api" exported="" />
     <orderEntry type="module" module-name="showcaseview" exported="" />
     <orderEntry type="module" module-name="android-support-v7-appcompat" exported="" />
-    <orderEntry type="module" module-name="google-play-services_lib" exported="" />
+    <orderEntry type="module" module-name="play-services-base" exported="" />
+    <orderEntry type="module" module-name="play-services-location" exported="" />
   </component>
 </module>
+

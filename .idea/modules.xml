@@ -8,6 +8,8 @@
       <module fileurl="file://$PROJECT_DIR$/cgeo-contacts/cgeo-contacts.iml" filepath="$PROJECT_DIR$/cgeo-contacts/cgeo-contacts.iml" />
       <module fileurl="file://$PROJECT_DIR$/google-play-services_lib/google-play-services_lib.iml" filepath="$PROJECT_DIR$/google-play-services_lib/google-play-services_lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/mapswithme-api/mapswithme-api.iml" filepath="$PROJECT_DIR$/mapswithme-api/mapswithme-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/play-services-base/play-services-base.iml" filepath="$PROJECT_DIR$/play-services-base/play-services-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/play-services-location/play-services-location.iml" filepath="$PROJECT_DIR$/play-services-location/play-services-location.iml" />
       <module fileurl="file://$PROJECT_DIR$/showcaseview/showcaseview.iml" filepath="$PROJECT_DIR$/showcaseview/showcaseview.iml" />
       <module fileurl="file://$PROJECT_DIR$/tests/tests.iml" filepath="$PROJECT_DIR$/tests/tests.iml" />
     </modules>
