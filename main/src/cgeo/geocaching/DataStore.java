@@ -2941,35 +2941,36 @@ public class DataStore {
         DataStore.saveCache(cache, cache.getStorageLocation().contains(StorageLocation.DATABASE) ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.CACHE));
     }
 
-    private static class PreparedStatement {
+    private static enum PreparedStatement {
 
-        private final static PreparedStatement HISTORY_COUNT = new PreparedStatement("select count(_id) from " + dbTableCaches + " where visiteddate > 0");
-        private final static PreparedStatement MOVE_TO_STANDARD_LIST = new PreparedStatement("UPDATE " + dbTableCaches + " SET reason = " + StoredList.STANDARD_LIST_ID + " WHERE reason = ?");
-        private final static PreparedStatement MOVE_TO_LIST = new PreparedStatement("UPDATE " + dbTableCaches + " SET reason = ? WHERE geocode = ?");
-        private final static PreparedStatement UPDATE_VISIT_DATE = new PreparedStatement("UPDATE " + dbTableCaches + " SET visiteddate = ? WHERE geocode = ?");
-        private final static PreparedStatement INSERT_LOG_IMAGE = new PreparedStatement("INSERT INTO " + dbTableLogImages + " (log_id, title, url) VALUES (?, ?, ?)");
-        private final static PreparedStatement INSERT_LOG_COUNTS = new PreparedStatement("INSERT INTO " + dbTableLogCount + " (geocode, updated, type, count) VALUES (?, ?, ?, ?)");
-        private final static PreparedStatement INSERT_SPOILER = new PreparedStatement("INSERT INTO " + dbTableSpoilers + " (geocode, updated, url, title, description) VALUES (?, ?, ?, ?, ?)");
-        private final static PreparedStatement LOG_COUNT_OF_GEOCODE = new PreparedStatement("SELECT count(_id) FROM " + DataStore.dbTableLogsOffline + " WHERE geocode = ?");
-        private final static PreparedStatement COUNT_CACHES_ON_STANDARD_LIST = new PreparedStatement("SELECT count(_id) FROM " + dbTableCaches + " WHERE reason = " + StoredList.STANDARD_LIST_ID);
-        private final static PreparedStatement COUNT_ALL_CACHES = new PreparedStatement("SELECT count(_id) FROM " + dbTableCaches + " WHERE reason >= " + StoredList.STANDARD_LIST_ID);
-        private final static PreparedStatement INSERT_LOG = new PreparedStatement("INSERT INTO " + dbTableLogs + " (geocode, updated, type, author, log, date, found, friend) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        private final static PreparedStatement INSERT_ATTRIBUTE = new PreparedStatement("INSERT INTO " + dbTableAttributes + " (geocode, updated, attribute) VALUES (?, ?, ?)");
-        private final static PreparedStatement LIST_ID_OF_GEOCODE = new PreparedStatement("SELECT reason FROM " + dbTableCaches + " WHERE geocode = ?");
-        private final static PreparedStatement LIST_ID_OF_GUID = new PreparedStatement("SELECT reason FROM " + dbTableCaches + " WHERE guid = ?");
-        private final static PreparedStatement GEOCODE_OF_GUID = new PreparedStatement("SELECT geocode FROM " + dbTableCaches + " WHERE guid = ?");
-        private final static PreparedStatement INSERT_SEARCH_DESTINATION = new PreparedStatement("INSERT INTO " + dbTableSearchDestinationHistory + " (date, latitude, longitude) VALUES (?, ?, ?)");
-        private final static PreparedStatement COUNT_TYPE_ALL_LIST = new PreparedStatement("select count(_id) from " + dbTableCaches + " where detailed = 1 and type = ? and reason > 0");
-        private final static PreparedStatement COUNT_ALL_TYPES_ALL_LIST = new PreparedStatement("select count(_id) from " + dbTableCaches + " where detailed = 1 and reason > 0");
-        private final static PreparedStatement COUNT_TYPE_LIST = new PreparedStatement("select count(_id) from " + dbTableCaches + " where detailed = 1 and type = ? and reason = ?");
-        private final static PreparedStatement COUNT_ALL_TYPES_LIST = new PreparedStatement("select count(_id) from " + dbTableCaches + " where detailed = 1 and reason = ?");
+        HISTORY_COUNT("select count(_id) from " + dbTableCaches + " where visiteddate > 0"),
+        MOVE_TO_STANDARD_LIST("UPDATE " + dbTableCaches + " SET reason = " + StoredList.STANDARD_LIST_ID + " WHERE reason = ?"),
+        MOVE_TO_LIST("UPDATE " + dbTableCaches + " SET reason = ? WHERE geocode = ?"),
+        UPDATE_VISIT_DATE("UPDATE " + dbTableCaches + " SET visiteddate = ? WHERE geocode = ?"),
+        INSERT_LOG_IMAGE("INSERT INTO " + dbTableLogImages + " (log_id, title, url) VALUES (?, ?, ?)"),
+        INSERT_LOG_COUNTS("INSERT INTO " + dbTableLogCount + " (geocode, updated, type, count) VALUES (?, ?, ?, ?)"),
+        INSERT_SPOILER("INSERT INTO " + dbTableSpoilers + " (geocode, updated, url, title, description) VALUES (?, ?, ?, ?, ?)"),
+        LOG_COUNT_OF_GEOCODE("SELECT count(_id) FROM " + DataStore.dbTableLogsOffline + " WHERE geocode = ?"),
+        COUNT_CACHES_ON_STANDARD_LIST("SELECT count(_id) FROM " + dbTableCaches + " WHERE reason = " + StoredList.STANDARD_LIST_ID),
+        COUNT_ALL_CACHES("SELECT count(_id) FROM " + dbTableCaches + " WHERE reason >= " + StoredList.STANDARD_LIST_ID),
+        INSERT_LOG("INSERT INTO " + dbTableLogs + " (geocode, updated, type, author, log, date, found, friend) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"),
+        INSERT_ATTRIBUTE("INSERT INTO " + dbTableAttributes + " (geocode, updated, attribute) VALUES (?, ?, ?)"),
+        LIST_ID_OF_GEOCODE("SELECT reason FROM " + dbTableCaches + " WHERE geocode = ?"),
+        LIST_ID_OF_GUID("SELECT reason FROM " + dbTableCaches + " WHERE guid = ?"),
+        GEOCODE_OF_GUID("SELECT geocode FROM " + dbTableCaches + " WHERE guid = ?"),
+        INSERT_SEARCH_DESTINATION("INSERT INTO " + dbTableSearchDestinationHistory + " (date, latitude, longitude) VALUES (?, ?, ?)"),
+        COUNT_TYPE_ALL_LIST("select count(_id) from " + dbTableCaches + " where detailed = 1 and type = ? and reason > 0"),
+        COUNT_ALL_TYPES_ALL_LIST("select count(_id) from " + dbTableCaches + " where detailed = 1 and reason > 0"),
+        COUNT_TYPE_LIST("select count(_id) from " + dbTableCaches + " where detailed = 1 and type = ? and reason = ?"),
+        COUNT_ALL_TYPES_LIST("select count(_id) from " + dbTableCaches + " where detailed = 1 and reason = ?");
 
         private static final List<PreparedStatement> statements = new ArrayList<>();
 
-        private SQLiteStatement statement = null; // initialized lazily
+        @Nullable
+        private volatile SQLiteStatement statement = null; // initialized lazily
         final String query;
 
-        public PreparedStatement(final String query) {
+        PreparedStatement(final String query) {
             this.query = query;
         }
 
@@ -2978,19 +2979,24 @@ public class DataStore {
         }
 
         private SQLiteStatement getStatement() {
-            synchronized (statements) {
-                if (statement == null) {
-                    init();
-                    statement = database.compileStatement(query);
-                    statements.add(this);
+            if (statement == null) {
+                synchronized (statements) {
+                    if (statement == null) {
+                        init();
+                        statement = database.compileStatement(query);
+                        statements.add(this);
+                    }
                 }
-                return statement;
             }
+            return statement;
         }
 
         private static void clearPreparedStatements() {
             for (final PreparedStatement preparedStatement : statements) {
-                preparedStatement.statement.close();
+                if (preparedStatement.statement != null) {
+                    preparedStatement.statement.close();
+                    preparedStatement.statement = null;
+                }
             }
             statements.clear();
         }
