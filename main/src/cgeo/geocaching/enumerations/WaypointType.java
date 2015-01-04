@@ -39,21 +39,17 @@ public enum WaypointType {
      * inverse lookup of waypoint IDs<br/>
      * non public so that <code>null</code> handling can be handled centrally in the enum type itself
      */
-    @NonNull
-    private static final Map<String, WaypointType> FIND_BY_ID;
-
-    @NonNull
-    public static final Set<WaypointType> ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL = new HashSet<>();
+    private static final Map<String, WaypointType> FIND_BY_ID = new HashMap();
+    private static final Set<WaypointType> ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL_TMP = new HashSet<>();
     static {
-        final HashMap<String, WaypointType> mapping = new HashMap<>();
         for (final WaypointType wt : values()) {
-            mapping.put(wt.id, wt);
+            FIND_BY_ID.put(wt.id, wt);
             if (wt != WaypointType.OWN && wt != WaypointType.ORIGINAL) {
-                ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL.add(wt);
+                ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL_TMP.add(wt);
             }
         }
-        FIND_BY_ID = Collections.unmodifiableMap(mapping);
     }
+    public static final Set<WaypointType> ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL = Collections.unmodifiableSet(ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL_TMP);
 
     /**
      * inverse lookup of waypoint IDs<br/>

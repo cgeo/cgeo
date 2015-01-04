@@ -5,7 +5,6 @@ import cgeo.geocaching.R;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -40,17 +39,14 @@ public enum CacheSize {
         this.ocSize2 = ocSize2;
     }
 
-    @NonNull
-    final private static Map<String, CacheSize> FIND_BY_ID;
+    final private static Map<String, CacheSize> FIND_BY_ID = new HashMap<>();
     static {
-        final HashMap<String, CacheSize> mapping = new HashMap<>();
         for (final CacheSize cs : values()) {
-            mapping.put(cs.id.toLowerCase(Locale.US), cs);
-            mapping.put(cs.ocSize2.toLowerCase(Locale.US), cs);
+            FIND_BY_ID.put(cs.id.toLowerCase(Locale.US), cs);
+            FIND_BY_ID.put(cs.ocSize2.toLowerCase(Locale.US), cs);
         }
         // add medium as additional string for Regular
-        mapping.put("medium", CacheSize.REGULAR);
-        FIND_BY_ID = Collections.unmodifiableMap(mapping);
+        FIND_BY_ID.put("medium", CacheSize.REGULAR);
     }
 
     @NonNull
@@ -73,9 +69,6 @@ public enum CacheSize {
 
     /**
      * Bad GPX files can contain the container size encoded as number.
-     *
-     * @param id
-     * @return
      */
     @NonNull
     private static CacheSize getByNumber(final String id) {

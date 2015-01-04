@@ -6,7 +6,6 @@ import cgeo.geocaching.R;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -58,34 +57,22 @@ public enum CacheType {
         this.markerId = markerId;
     }
 
-    @NonNull
-    private final static Map<String, CacheType> FIND_BY_ID;
-
-    @NonNull
-    private final static Map<String, CacheType> FIND_BY_PATTERN;
-
-    @NonNull
-    private final static Map<String, CacheType> FIND_BY_GUID;
+    private final static Map<String, CacheType> FIND_BY_ID = new HashMap<>();
+    private final static Map<String, CacheType> FIND_BY_PATTERN = new HashMap<>();
+    private final static Map<String, CacheType> FIND_BY_GUID = new HashMap<>();
 
     static {
-        final HashMap<String, CacheType> mappingId = new HashMap<>();
-        final HashMap<String, CacheType> mappingPattern = new HashMap<>();
-        final HashMap<String, CacheType> mappingGuid = new HashMap<>();
         for (final CacheType ct : values()) {
-            mappingId.put(ct.id, ct);
-            mappingPattern.put(ct.pattern.toLowerCase(Locale.US), ct);
-            mappingGuid.put(ct.guid, ct);
+            FIND_BY_ID.put(ct.id, ct);
+            FIND_BY_PATTERN.put(ct.pattern.toLowerCase(Locale.US), ct);
+            FIND_BY_GUID.put(ct.guid, ct);
         }
         // Add old mystery type for GPX file compatibility.
-        mappingPattern.put("Mystery Cache".toLowerCase(Locale.US), MYSTERY);
+        FIND_BY_PATTERN.put("Mystery Cache".toLowerCase(Locale.US), MYSTERY);
         // This pattern briefly appeared on gc.com in 2014-08.
-        mappingPattern.put("Traditional Geocache".toLowerCase(Locale.US), TRADITIONAL);
+        FIND_BY_PATTERN.put("Traditional Geocache".toLowerCase(Locale.US), TRADITIONAL);
         // map lab caches to the virtual type for the time being
-        mappingPattern.put("Lab Cache".toLowerCase(Locale.US), VIRTUAL);
-
-        FIND_BY_ID = Collections.unmodifiableMap(mappingId);
-        FIND_BY_PATTERN = Collections.unmodifiableMap(mappingPattern);
-        FIND_BY_GUID = Collections.unmodifiableMap(mappingGuid);
+        FIND_BY_PATTERN.put("Lab Cache".toLowerCase(Locale.US), VIRTUAL);
     }
 
     @NonNull

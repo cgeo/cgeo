@@ -5,7 +5,6 @@ import cgeo.geocaching.R;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -67,22 +66,15 @@ public enum LogType {
         this(id, iconName, type, oc_type, stringId, R.drawable.mark_gray);
     }
 
-    @NonNull
-    private final static Map<String, LogType> FIND_BY_ICONNAME;
-
-    @NonNull
-    private final static Map<String, LogType> FIND_BY_TYPE;
+    private final static Map<String, LogType> FIND_BY_ICONNAME = new HashMap<>();
+    private final static Map<String, LogType> FIND_BY_TYPE = new HashMap<>();
     static {
-        final HashMap<String, LogType> mappingPattern = new HashMap<>();
-        final HashMap<String, LogType> mappingType = new HashMap<>();
         for (final LogType lt : values()) {
             if (lt.iconName != null) {
-                mappingPattern.put(lt.iconName, lt);
+                FIND_BY_ICONNAME.put(lt.iconName, lt);
             }
-            mappingType.put(lt.type, lt);
+            FIND_BY_TYPE.put(lt.type, lt);
         }
-        FIND_BY_ICONNAME = Collections.unmodifiableMap(mappingPattern);
-        FIND_BY_TYPE = Collections.unmodifiableMap(mappingType);
     }
 
     @NonNull

@@ -9,7 +9,6 @@ import org.eclipse.jdt.annotation.Nullable;
 
 import android.util.SparseArray;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -165,20 +164,15 @@ public enum CacheAttribute {
                 enabled ? stringIdYes : stringIdNo);
     }
 
-    @NonNull
-    private final static Map<String, CacheAttribute> FIND_BY_GCRAWNAME;
-
-    @NonNull
+    private final static Map<String, CacheAttribute> FIND_BY_GCRAWNAME = new HashMap<>();
     private final static SparseArray<CacheAttribute> FIND_BY_OCACODE = new SparseArray<>();
     static {
-        final HashMap<String, CacheAttribute> mapGcRawNames = new HashMap<>();
         for (final CacheAttribute attr : values()) {
-            mapGcRawNames.put(attr.rawName, attr);
+            FIND_BY_GCRAWNAME.put(attr.rawName, attr);
             if (attr.ocacode != NO_ID) {
                 FIND_BY_OCACODE.put(attr.ocacode, attr);
             }
         }
-        FIND_BY_GCRAWNAME = Collections.unmodifiableMap(mapGcRawNames);
     }
 
     @Nullable
