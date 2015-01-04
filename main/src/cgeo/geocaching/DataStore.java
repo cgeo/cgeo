@@ -1945,7 +1945,7 @@ public class DataStore {
         init();
 
         final Cursor cursor = database.rawQuery(
-                /*                           0       1      2      3    4      5      6                                                7       8      9     10 */
+                //                           0       1      2      3    4      5      6                                                7       8      9     10
                 "SELECT cg_logs._id as cg_logs_id, type, author, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url"
                         + " FROM " + dbTableLogs + " LEFT OUTER JOIN " + dbTableLogImages
                         + " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date desc, cg_logs._id asc", new String[]{geocode});
@@ -2978,18 +2978,19 @@ public class DataStore {
         }
 
         private SQLiteStatement getStatement() {
-            if (statement == null) {
-                init();
-                statement = database.compileStatement(query);
-                statements.add(this);
+            synchronized (statements) {
+                if (statement == null) {
+                    init();
+                    statement = database.compileStatement(query);
+                    statements.add(this);
+                }
+                return statement;
             }
-            return statement;
         }
 
         private static void clearPreparedStatements() {
             for (final PreparedStatement preparedStatement : statements) {
                 preparedStatement.statement.close();
-                preparedStatement.statement = null;
             }
             statements.clear();
         }
