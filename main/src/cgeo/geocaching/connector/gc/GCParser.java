@@ -65,6 +65,7 @@ import android.text.Html;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -1695,28 +1696,22 @@ public abstract class GCParser {
                     Log.e("GCParser.loadLogsFromDetails: error " + statusCode + " when requesting log information");
                     return Observable.empty();
                 }
-                final String rawResponse = Network.getResponseData(response);
-                if (rawResponse == null) {
+                final InputStream responseStream = Network.getResponseStream(response);
+                if (responseStream == null) {
                     Log.e("GCParser.loadLogsFromDetails: unable to read whole response");
                     return Observable.empty();
                 }
-                return parseLogs(logType != Logs.ALL, rawResponse);
+                return parseLogs(logType != Logs.ALL, responseStream);
             }
         }).subscribeOn(RxUtils.networkScheduler);
     }
 
-    private static Observable<LogEntry> parseLogs(final boolean markAsFriendsLog, final String rawResponse) {
+    private static Observable<LogEntry> parseLogs(final boolean markAsFriendsLog, final InputStream responseStream) {
         return Observable.create(new OnSubscribe<LogEntry>() {
             @Override
             public void call(final Subscriber<? super LogEntry> subscriber) {
-                // for non logged in users the log book is not shown
-                if (StringUtils.isBlank(rawResponse)) {
-                    subscriber.onCompleted();
-                    return;
-                }
-
                 try {
-                    final ObjectNode resp = (ObjectNode) JsonUtils.reader.readTree(rawResponse);
+                    final ObjectNode resp = (ObjectNode) JsonUtils.reader.readTree(responseStream);
                     if (!resp.path("status").asText().equals("success")) {
                         Log.e("GCParser.loadLogsFromDetails: status is " + resp.path("status").asText("[absent]"));
                         subscriber.onCompleted();
