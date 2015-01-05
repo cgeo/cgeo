@@ -2,7 +2,11 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-     <b>Next bugfix release:</b>\n
+    <b>Next release:</b>\n
+    · New: Waypoints created from personal notes can now be deleted\n
+    · New: More easy to use vote dialog in cache details\n
+    · Fix: Up navigation did not work when c:geo was invoked from another app\n
+    · Fix: Rare crash when performing a backup of the cache database\n
     · Fix: Use phone language instead of country when requesting opencaching data\n
     · Fix: Menu for scanning trackable and geocache codes wrongly hidden\n
     · Fix: Recognize Sygic voucher edition\n
