@@ -344,7 +344,7 @@ public abstract class GPXParser extends FileParser {
                     // finally store the cache in the database
                     result.add(geocode);
                     DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-                    DataStore.saveLogsWithoutTransaction(cache.getGeocode(), logs);
+                    DataStore.saveLogs(cache.getGeocode(), logs);
 
                     // avoid the cachecache using lots of memory for caches which the user did not actually look at
                     DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.CACHE));
