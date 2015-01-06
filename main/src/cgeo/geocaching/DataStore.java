@@ -3001,8 +3001,9 @@ public class DataStore {
 
         private static void clearPreparedStatements() {
             for (final PreparedStatement preparedStatement : statements) {
-                if (preparedStatement.statement != null) {
-                    preparedStatement.statement.close();
+                final SQLiteStatement statement = preparedStatement.statement;
+                if (statement != null) {
+                    statement.close();
                     preparedStatement.statement = null;
                 }
             }
