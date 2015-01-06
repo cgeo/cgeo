@@ -890,9 +890,11 @@ public class DataStore {
                 if (file.isDirectory()) {
                     final String geocode = file.getName();
                     if (oldFilePattern.matcher(geocode).find()) {
-                        select.bindString(1, geocode);
-                        if (select.simpleQueryForLong() == 0) {
-                            toRemove.add(file);
+                        synchronized (select) {
+                            select.bindString(1, geocode);
+                            if (select.simpleQueryForLong() == 0) {
+                                toRemove.add(file);
+                            }
                         }
                     }
                 }
@@ -1224,13 +1226,15 @@ public class DataStore {
             return;
         }
         final SQLiteStatement statement = PreparedStatement.INSERT_ATTRIBUTE.getStatement();
-        final long timestamp = System.currentTimeMillis();
-        for (final String attribute : attributes) {
-            statement.bindString(1, geocode);
-            statement.bindLong(2, timestamp);
-            statement.bindString(3, attribute);
+        synchronized (statement) {
+            final long timestamp = System.currentTimeMillis();
+            for (final String attribute : attributes) {
+                statement.bindString(1, geocode);
+                statement.bindLong(2, timestamp);
+                statement.bindString(3, attribute);
 
-            statement.executeInsert();
+                statement.executeInsert();
+            }
         }
     }
 
@@ -1247,12 +1251,14 @@ public class DataStore {
 
         try {
             final SQLiteStatement insertDestination = PreparedStatement.INSERT_SEARCH_DESTINATION.getStatement();
-            insertDestination.bindLong(1, destination.getDate());
-            final Geopoint coords = destination.getCoords();
-            insertDestination.bindDouble(2, coords.getLatitude());
-            insertDestination.bindDouble(3, coords.getLongitude());
+            synchronized (insertDestination) {
+                insertDestination.bindLong(1, destination.getDate());
+                final Geopoint coords = destination.getCoords();
+                insertDestination.bindDouble(2, coords.getLatitude());
+                insertDestination.bindDouble(3, coords.getLongitude());
 
-            insertDestination.executeInsert();
+                insertDestination.executeInsert();
+            }
             database.setTransactionSuccessful();
         } catch (final Exception e) {
             Log.e("Updating searchedDestinations db failed", e);
@@ -1410,20 +1416,21 @@ public class DataStore {
         final List<Image> spoilers = cache.getSpoilers();
         if (CollectionUtils.isNotEmpty(spoilers)) {
             final SQLiteStatement insertSpoiler = PreparedStatement.INSERT_SPOILER.getStatement();
-            final long timestamp = System.currentTimeMillis();
-            for (final Image spoiler : spoilers) {
-                insertSpoiler.bindString(1, geocode);
-                insertSpoiler.bindLong(2, timestamp);
-                insertSpoiler.bindString(3, spoiler.getUrl());
-                insertSpoiler.bindString(4, spoiler.getTitle());
-                final String description = spoiler.getDescription();
-                if (description != null) {
-                    insertSpoiler.bindString(5, description);
+            synchronized (insertSpoiler) {
+                final long timestamp = System.currentTimeMillis();
+                for (final Image spoiler : spoilers) {
+                    insertSpoiler.bindString(1, geocode);
+                    insertSpoiler.bindLong(2, timestamp);
+                    insertSpoiler.bindString(3, spoiler.getUrl());
+                    insertSpoiler.bindString(4, spoiler.getTitle());
+                    final String description = spoiler.getDescription();
+                    if (description != null) {
+                        insertSpoiler.bindString(5, description);
+                    } else {
+                        insertSpoiler.bindNull(5);
+                    }
+                    insertSpoiler.executeInsert();
                 }
-                else {
-                    insertSpoiler.bindNull(5);
-                }
-                insertSpoiler.executeInsert();
             }
         }
     }
@@ -1433,24 +1440,27 @@ public class DataStore {
         database.delete(dbTableLogs, "geocode = ?", new String[]{geocode});
 
         final SQLiteStatement insertLog = PreparedStatement.INSERT_LOG.getStatement();
-        final long timestamp = System.currentTimeMillis();
-        for (final LogEntry log : logs) {
-            insertLog.bindString(1, geocode);
-            insertLog.bindLong(2, timestamp);
-            insertLog.bindLong(3, log.type.id);
-            insertLog.bindString(4, log.author);
-            insertLog.bindString(5, log.log);
-            insertLog.bindLong(6, log.date);
-            insertLog.bindLong(7, log.found);
-            insertLog.bindLong(8, log.friend ? 1 : 0);
-            final long logId = insertLog.executeInsert();
-            if (log.hasLogImages()) {
-                final SQLiteStatement insertImage = PreparedStatement.INSERT_LOG_IMAGE.getStatement();
-                for (final Image img : log.getLogImages()) {
-                    insertImage.bindLong(1, logId);
-                    insertImage.bindString(2, img.getTitle());
-                    insertImage.bindString(3, img.getUrl());
-                    insertImage.executeInsert();
+        synchronized (insertLog) {
+            final long timestamp = System.currentTimeMillis();
+            for (final LogEntry log : logs) {
+                insertLog.bindString(1, geocode);
+                insertLog.bindLong(2, timestamp);
+                insertLog.bindLong(3, log.type.id);
+                insertLog.bindString(4, log.author);
+                insertLog.bindString(5, log.log);
+                insertLog.bindLong(6, log.date);
+                insertLog.bindLong(7, log.found);
+                insertLog.bindLong(8, log.friend ? 1 : 0);
+                final long logId = insertLog.executeInsert();
+                if (log.hasLogImages()) {
+                    // INSERT_LOG_IMAGE is used only here and is already protected by the synchronization on INSERT_LOG
+                    final SQLiteStatement insertImage = PreparedStatement.INSERT_LOG_IMAGE.getStatement();
+                    for (final Image img : log.getLogImages()) {
+                        insertImage.bindLong(1, logId);
+                        insertImage.bindString(2, img.getTitle());
+                        insertImage.bindString(3, img.getUrl());
+                        insertImage.executeInsert();
+                    }
                 }
             }
         }
@@ -1464,14 +1474,16 @@ public class DataStore {
         if (MapUtils.isNotEmpty(logCounts)) {
             final Set<Entry<LogType, Integer>> logCountsItems = logCounts.entrySet();
             final SQLiteStatement insertLogCounts = PreparedStatement.INSERT_LOG_COUNTS.getStatement();
-            final long timestamp = System.currentTimeMillis();
-            for (final Entry<LogType, Integer> pair : logCountsItems) {
-                insertLogCounts.bindString(1, geocode);
-                insertLogCounts.bindLong(2, timestamp);
-                insertLogCounts.bindLong(3, pair.getKey().id);
-                insertLogCounts.bindLong(4, pair.getValue());
+            synchronized (insertLogCounts) {
+                final long timestamp = System.currentTimeMillis();
+                for (final Entry<LogType, Integer> pair : logCountsItems) {
+                    insertLogCounts.bindString(1, geocode);
+                    insertLogCounts.bindLong(2, timestamp);
+                    insertLogCounts.bindLong(3, pair.getKey().id);
+                    insertLogCounts.bindLong(4, pair.getValue());
 
-                insertLogCounts.executeInsert();
+                    insertLogCounts.executeInsert();
+                }
             }
         }
     }
@@ -2096,27 +2108,28 @@ public class DataStore {
 
         try {
             final SQLiteStatement compiledStmnt;
-            if (list == PseudoList.ALL_LIST.id) {
-                if (cacheType == CacheType.ALL) {
-                    compiledStmnt = PreparedStatement.COUNT_ALL_TYPES_ALL_LIST.getStatement();
+            synchronized (PreparedStatement.COUNT_TYPE_LIST) {
+                // All the statements here are used only once and are protected through the current synchronized block
+                if (list == PseudoList.ALL_LIST.id) {
+                    if (cacheType == CacheType.ALL) {
+                        compiledStmnt = PreparedStatement.COUNT_ALL_TYPES_ALL_LIST.getStatement();
+                    } else {
+                        compiledStmnt = PreparedStatement.COUNT_TYPE_ALL_LIST.getStatement();
+                        compiledStmnt.bindString(1, cacheType.id);
+                    }
+                } else {
+                    if (cacheType == CacheType.ALL) {
+                        compiledStmnt = PreparedStatement.COUNT_ALL_TYPES_LIST.getStatement();
+                        compiledStmnt.bindLong(1, list);
+                    } else {
+                        compiledStmnt = PreparedStatement.COUNT_TYPE_LIST.getStatement();
+                        compiledStmnt.bindString(1, cacheType.id);
+                        compiledStmnt.bindLong(1, list);
+                    }
                 }
-                else {
-                    compiledStmnt = PreparedStatement.COUNT_TYPE_ALL_LIST.getStatement();
-                    compiledStmnt.bindString(1, cacheType.id);
-                }
-            } else {
-                if (cacheType == CacheType.ALL) {
-                    compiledStmnt = PreparedStatement.COUNT_ALL_TYPES_LIST.getStatement();
-                    compiledStmnt.bindLong(1, list);
-                }
-                else {
-                    compiledStmnt = PreparedStatement.COUNT_TYPE_LIST.getStatement();
-                    compiledStmnt.bindString(1, cacheType.id);
-                    compiledStmnt.bindLong(1, list);
-                }
-            }
 
-            return (int) compiledStmnt.simpleQueryForLong();
+                return (int) compiledStmnt.simpleQueryForLong();
+            }
         } catch (final Exception e) {
             Log.e("DataStore.loadAllStoredCachesCount", e);
         }
@@ -2581,10 +2594,12 @@ public class DataStore {
         try {
             final SQLiteStatement setVisit = PreparedStatement.UPDATE_VISIT_DATE.getStatement();
 
-            for (final String geocode : geocodes) {
-                setVisit.bindLong(1, visitedDate);
-                setVisit.bindString(2, geocode);
-                setVisit.execute();
+            synchronized (setVisit) {
+                for (final String geocode : geocodes) {
+                    setVisit.bindLong(1, visitedDate);
+                    setVisit.bindString(2, geocode);
+                    setVisit.execute();
+                }
             }
             database.setTransactionSuccessful();
         } finally {
@@ -2749,8 +2764,10 @@ public class DataStore {
             if (cnt > 0) {
                 // move caches from deleted list to standard list
                 final SQLiteStatement moveToStandard = PreparedStatement.MOVE_TO_STANDARD_LIST.getStatement();
-                moveToStandard.bindLong(1, listId);
-                moveToStandard.execute();
+                synchronized (moveToStandard) {
+                    moveToStandard.bindLong(1, listId);
+                    moveToStandard.execute();
+                }
 
                 status = true;
             }
@@ -2783,16 +2800,18 @@ public class DataStore {
         final SQLiteStatement move = PreparedStatement.MOVE_TO_LIST.getStatement();
 
         database.beginTransaction();
-        try {
-            for (final Geocache cache : caches) {
-                move.bindLong(1, listId);
-                move.bindString(2, cache.getGeocode());
-                move.execute();
-                cache.setListId(listId);
+        synchronized (move) {
+            try {
+                for (final Geocache cache : caches) {
+                    move.bindLong(1, listId);
+                    move.bindString(2, cache.getGeocode());
+                    move.execute();
+                    cache.setListId(listId);
+                }
+                database.setTransactionSuccessful();
+            } finally {
+                database.endTransaction();
             }
-            database.setTransactionSuccessful();
-        } finally {
-            database.endTransaction();
         }
     }
 
@@ -2947,7 +2966,7 @@ public class DataStore {
         MOVE_TO_STANDARD_LIST("UPDATE " + dbTableCaches + " SET reason = " + StoredList.STANDARD_LIST_ID + " WHERE reason = ?"),
         MOVE_TO_LIST("UPDATE " + dbTableCaches + " SET reason = ? WHERE geocode = ?"),
         UPDATE_VISIT_DATE("UPDATE " + dbTableCaches + " SET visiteddate = ? WHERE geocode = ?"),
-        INSERT_LOG_IMAGE("INSERT INTO " + dbTableLogImages + " (log_id, title, url) VALUES (?, ?, ?)"),
+        INSERT_LOG_IMAGE("INSERT INTO " + dbTableLogImages + " (log_id, title, url) VALUES (?, ?, ?)"), // See use of INSERT_LOG for synchronization
         INSERT_LOG_COUNTS("INSERT INTO " + dbTableLogCount + " (geocode, updated, type, count) VALUES (?, ?, ?, ?)"),
         INSERT_SPOILER("INSERT INTO " + dbTableSpoilers + " (geocode, updated, url, title, description) VALUES (?, ?, ?, ?, ?)"),
         LOG_COUNT_OF_GEOCODE("SELECT count(_id) FROM " + DataStore.dbTableLogsOffline + " WHERE geocode = ?"),
@@ -2959,10 +2978,10 @@ public class DataStore {
         LIST_ID_OF_GUID("SELECT reason FROM " + dbTableCaches + " WHERE guid = ?"),
         GEOCODE_OF_GUID("SELECT geocode FROM " + dbTableCaches + " WHERE guid = ?"),
         INSERT_SEARCH_DESTINATION("INSERT INTO " + dbTableSearchDestinationHistory + " (date, latitude, longitude) VALUES (?, ?, ?)"),
-        COUNT_TYPE_ALL_LIST("select count(_id) from " + dbTableCaches + " where detailed = 1 and type = ? and reason > 0"),
-        COUNT_ALL_TYPES_ALL_LIST("select count(_id) from " + dbTableCaches + " where detailed = 1 and reason > 0"),
+        COUNT_TYPE_ALL_LIST("select count(_id) from " + dbTableCaches + " where detailed = 1 and type = ? and reason > 0"), // See use of COUNT_TYPE_LIST for synchronization
+        COUNT_ALL_TYPES_ALL_LIST("select count(_id) from " + dbTableCaches + " where detailed = 1 and reason > 0"), // See use of COUNT_TYPE_LIST for synchronization
         COUNT_TYPE_LIST("select count(_id) from " + dbTableCaches + " where detailed = 1 and type = ? and reason = ?"),
-        COUNT_ALL_TYPES_LIST("select count(_id) from " + dbTableCaches + " where detailed = 1 and reason = ?");
+        COUNT_ALL_TYPES_LIST("select count(_id) from " + dbTableCaches + " where detailed = 1 and reason = ?"); // See use of COUNT_TYPE_LIST for synchronization
 
         private static final List<PreparedStatement> statements = new ArrayList<>();
 
