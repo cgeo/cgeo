@@ -70,9 +70,6 @@
 -keep class org.apache.commons.lang3.StringUtils { *; }
 -keep class org.apache.commons.io.IOUtils { *; }
 -keep class org.apache.commons.io.FileUtils { *; }
--keepclassmembers class rx.Observable {
-    public static Observable<Integer> range(int, int);
-}
 
 # action providers are only referenced from XML
 -keep public class cgeo.geocaching.sorting.SortActionProvider { *; }
