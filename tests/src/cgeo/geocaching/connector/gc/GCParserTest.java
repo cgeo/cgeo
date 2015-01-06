@@ -106,10 +106,10 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
                 final SearchResult searchResult = GCParser.parseAndSaveCacheFromText(mockedCache.getData(), null);
                 final Geocache parsedCache = searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
                 assertThat(parsedCache).isNotNull();
+                assert parsedCache != null;  // To keep editors happy
                 assertThat(StringUtils.isNotBlank(mockedCache.getMockedDataUser())).isTrue();
                 // Workaround for issue #3777
-                if (Settings.getUsername().equals("mucek4")) {
-                    assert parsedCache != null;  // To keep editors happy
+                if (mockedCache.getGeocode().equals("GC3XX5J") && Settings.getUsername().equals("mucek4")) {
                     parsedCache.setFound(true);
                 }
                 Compare.assertCompareCaches(mockedCache, parsedCache, true);
