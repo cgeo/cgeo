@@ -4,7 +4,8 @@
   <string name="changelog_release" translatable="false">\n
     <b>Next release:</b>\n
     · New: Waypoints created from personal notes can now be deleted\n
-    · New: More easy to use vote dialog in cache details\n
+    · New: More easy to use GCVote dialog in cache details\n
+    · Fix: Arrow on map not shown on some devices\n
     · Fix: Up navigation did not work when c:geo was invoked from another app\n
     · Fix: Rare crash when performing a backup of the cache database\n
     · Fix: Use phone language instead of country when requesting opencaching data\n
@@ -12,44 +13,8 @@
     · Fix: Recognize Sygic voucher edition\n
     · Fix: Update locally stored GCVote when sending over network\n
      \n
-     <b>2014.12.22:</b>\n
-    · New: Updated translations\n
-    · New: Google Play services are disabled by default on Android before 4.0\n
-    · Fix: Favorite points display not updated after change\n
-    · Fix: Search by owner results may lack some caches coordinates\n
-    · Fix: Crash due to an overload of sensor data\n
-    · Fix: Crash due to some phones incorrect implementation of rotation sensor\n
-    · Fix: Rare crash when inputting a really huge value in coordinates box\n
-     \n
-     <b>2014.12.12:</b>\n
-    · Fix: Crashes on map popup interaction\n
-     \n
-    <b>2014.12.09:</b>\n
-    · New: Google Play Services used for location (less battery usage)\n
-    · New: Optional low power GPS mode for parts of the app which don\'t require high precision\n
-    · New: Detect offline state and delay login until network is available\n
-    · New: Voice search via Google Now (not available for all languages), say \'Search for topic in c:geo\' \n
-    · New: Confirmation dialog for dangerous log types\n
-    · New: Store found date of found caches when importing via GPX\n
-    · New: Select a waypoint of a cache as target directly from compass\n
-    · New: Suggestion for waypoint name depending on its type\n
-    · New: Import lab caches as virtual caches\n
-    · New: Remember zoom level of live map and cache map separately\n
-    · New: Confirmation for deleting all offline logs\n
-    · New: Menu item for repeating last log text\n
-    · New: Set waypoint coordinates from clipboard content\n
-    · New: Added Latvian translation (help us improving it on crowdin.net)\n
-    · Fix: Titlebar missing on map with Android 3.x\n
-    · Fix: Improved compass rotation algorithm\n
-    · Fix: Smilies fit line height in logbook\n
-    · Fix: GcVote rating sometimes not shown when logging a cache\n
-    · Fix: Caches with corrected coords sometimes shown on their listing coords on the map\n
-    · Fix: Improved rendering of cache listings with many embedded image\n
-    · Fix: Charter Members not recognized as Premium Members\n
-    \n
+     \n    
     <b>Known Limitations/Bugs:</b>\n
-    · On devices without magnetic compass the position arrow on the map might not be shown.\n
-      We are working on this problem.\n
     · Device menu button not working on map popup\n
       Please use the three dot button instead\n
     · Live map:\n
