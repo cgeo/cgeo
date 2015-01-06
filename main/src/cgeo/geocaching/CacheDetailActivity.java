@@ -56,6 +56,7 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.io.Charsets;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -84,6 +85,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
+import android.nfc.NdefMessage;
+import android.nfc.NfcAdapter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -182,13 +185,17 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
-        final Uri uri = getIntent().getData();
+        Uri uri = getIntent().getData();
 
         // try to get data from extras
         String name = null;
         String geocode = null;
         String guid = null;
-        if (extras != null) {
+
+        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
+            final NdefMessage msg = (NdefMessage) extras.getParcelableArray(NfcAdapter.EXTRA_NDEF_MESSAGES)[0];
+            uri = Uri.parse("http://" + new String(msg.getRecords()[0].getPayload(), Charsets.UTF_8));
+        } else if (extras != null) {
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
             name = extras.getString(Intents.EXTRA_NAME);
             guid = extras.getString(Intents.EXTRA_GUID);
