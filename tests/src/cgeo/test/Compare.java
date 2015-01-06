@@ -12,7 +12,7 @@ import java.util.Date;
 
 public abstract class Compare {
 
-    public static void assertCompareCaches(Geocache expected, Geocache actual, boolean all) {
+    public static void assertCompareCaches(final Geocache expected, final Geocache actual, final boolean all) {
         final String geocode = expected.getGeocode();
         final String cacheStr = "Cache " + geocode + ": ";
         assertThat(actual).isNotNull();
@@ -47,10 +47,10 @@ public abstract class Compare {
             assertThat(actual.isFavorite()).as(cacheStr + "favorite status").isEqualTo(expected.isFavorite());
             assertThat(actual.isOnWatchlist()).as(cacheStr + "watchlist status").isEqualTo(expected.isOnWatchlist());
 
-            for (String attribute : expected.getAttributes()) {
+            for (final String attribute : expected.getAttributes()) {
                 assertThat(actual.getAttributes()).as("attributes of " + actual.getGeocode()).contains(attribute);
             }
-            for (LogType logType : expected.getLogCounts().keySet()) {
+            for (final LogType logType : expected.getLogCounts().keySet()) {
                 assertThat(actual.getLogCounts().get(logType)).as("logcount of " + geocode + " for type " + logType.toString()).isGreaterThanOrEqualTo(expected.getLogCounts().get(logType));
             }
 

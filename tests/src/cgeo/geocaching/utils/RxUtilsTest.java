@@ -6,13 +6,23 @@ import rx.Observable;
 import rx.Subscription;
 import rx.functions.Func1;
 import rx.subjects.PublishSubject;
+import rx.subjects.ReplaySubject;
 
 import android.test.AndroidTestCase;
 
 public class RxUtilsTest extends AndroidTestCase {
 
+    // Observable.range(int, int) is not kept in the application by proguard. Use an explicit range here.
+    private static final ReplaySubject<Integer> range = ReplaySubject.createWithSize(10);
+    static {
+        for (int i = 1; i <= 10; i++) {
+            range.onNext(i);
+        }
+        range.onCompleted();
+    }
+
     public static void testTakeUntil() {
-        final Observable<Integer> observable = Observable.range(1, 10).lift(RxUtils.operatorTakeUntil(new Func1<Integer, Boolean>() {
+        final Observable<Integer> observable = range.lift(RxUtils.operatorTakeUntil(new Func1<Integer, Boolean>() {
             @Override
             public Boolean call(final Integer value) {
                 return value > 6;
