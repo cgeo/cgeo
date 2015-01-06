@@ -231,7 +231,14 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
             @Override
             public NdefMessage createNdefMessage(final NfcEvent event) {
                 final String uri = sharingInterface.getAndroidBeamUri();
-                return uri != null ? new NdefMessage(new NdefRecord[]{NdefRecord.createUri(uri)}) : null;
+                if (uri == null) {
+                    return null;
+                }
+                final NdefRecord[] records = {
+                        NdefRecord.createUri(uri),
+                        NdefRecord.createApplicationRecord(CgeoApplication.getInstance().getPackageName())
+                };
+                return new NdefMessage(records);
             }
         }, this);
 
