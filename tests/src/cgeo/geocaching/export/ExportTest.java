@@ -34,7 +34,7 @@ public class ExportTest extends CGeoTestCase {
         cache.setCoords(new Geopoint("N 49 44.000 E 8 37.000"));
         final LogEntry log = new LogEntry(1353244820000L, LogType.FOUND_IT, "Smile: \ud83d\ude0a");
         DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
-        DataStore.saveLogsWithoutTransaction(cache.getGeocode(), Collections.singletonList(log));
+        DataStore.saveLogs(cache.getGeocode(), Collections.singletonList(log));
         ArrayList<Geocache> exportList = new ArrayList<Geocache>();
         exportList.add(cache);
         GpxExportTester gpxExport = new GpxExportTester();

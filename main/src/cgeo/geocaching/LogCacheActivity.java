@@ -419,7 +419,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     final LogEntry logNow = new LogEntry(date.getTimeInMillis(), typeSelected, log);
                     logNow.friend = true;
                     newLogs.add(0, logNow);
-                    DataStore.saveLogsWithoutTransaction(cache.getGeocode(), newLogs);
+                    DataStore.saveLogs(cache.getGeocode(), newLogs);
 
                     // update offline log in DB
                     cache.clearOfflineLog();
@@ -443,7 +443,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                         final String uploadedImageUrl = imageResult.getImageUri();
                         if (StringUtils.isNotEmpty(uploadedImageUrl)) {
                             logNow.addLogImage(new Image(uploadedImageUrl, imageCaption, imageDescription));
-                            DataStore.saveLogsWithoutTransaction(cache.getGeocode(), newLogs);
+                            DataStore.saveLogs(cache.getGeocode(), newLogs);
                         }
                         return imageResult.getPostResult();
                     }

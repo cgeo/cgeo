@@ -393,7 +393,7 @@ public abstract class GCParser {
         final SearchResult result = new SearchResult(parsed.left);
         if (parsed.left == StatusCode.NO_ERROR) {
             result.addAndPutInCache(Collections.singletonList(parsed.right));
-            DataStore.saveLogsWithoutTransaction(parsed.right.getGeocode(), getLogs(parseUserToken(page), Logs.ALL).toBlocking().toIterable());
+            DataStore.saveLogs(parsed.right.getGeocode(), getLogs(parseUserToken(page), Logs.ALL).toBlocking().toIterable());
         }
         return result;
     }
@@ -1883,7 +1883,7 @@ public abstract class GCParser {
         mergedLogs.subscribe(new Action1<List<LogEntry>>() {
                                  @Override
                                  public void call(final List<LogEntry> logEntries) {
-                                     DataStore.saveLogsWithoutTransaction(cache.getGeocode(), logEntries);
+                                     DataStore.saveLogs(cache.getGeocode(), logEntries);
                                  }
                              });
         if (cache.isFound() && cache.getVisitedDate() == 0) {
