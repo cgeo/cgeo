@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -93,19 +94,18 @@ public class GeocacheTest extends CGeoTestCase {
         }
     }
 
-    public static void testMergeDownloadedStored() {
-        final Geocache stored = new Geocache();
-        stored.setGeocode("GC12345");
-        stored.setDetailed(true);
-        stored.setDisabled(true);
-        stored.setType(CacheType.TRADITIONAL);
-        stored.setCoords(new Geopoint(40.0, 8.0));
-        stored.setDescription("Test1");
-        final ArrayList<String> attributes = new ArrayList<String>(1);
-        attributes.add("TestAttribute");
-        stored.setAttributes(attributes);
-        stored.setShortDescription("Short");
-        stored.setHint("Hint");
+    public static void testMergeDownloaded() {
+        final Geocache previous = new Geocache();
+        previous.setGeocode("GC12345");
+        previous.setDetailed(true);
+        previous.setDisabled(true);
+        previous.setType(CacheType.TRADITIONAL);
+        previous.setCoords(new Geopoint(40.0, 8.0));
+        previous.setDescription("Test1");
+        previous.setAttributes(Collections.singletonList("TestAttribute"));
+        previous.setShortDescription("Short");
+        previous.setHint("Hint");
+        removeCacheCompletely(previous.getGeocode());
 
         final Geocache download = new Geocache();
         download.setGeocode("GC12345");
@@ -114,6 +114,40 @@ public class GeocacheTest extends CGeoTestCase {
         download.setType(CacheType.MULTI);
         download.setCoords(new Geopoint(41.0, 9.0));
         download.setDescription("Test2");
+
+        download.gatherMissingFrom(previous);
+
+        assertThat(download.isDetailed()).as("merged detailed").isTrue();
+        assertThat(download.isDisabled()).as("merged disabled").isFalse();
+        assertThat(download.getType()).as("merged download").isEqualTo(CacheType.MULTI);
+        assertThat(download.getCoords()).as("merged coordinates").isEqualTo(new Geopoint(41.0, 9.0));
+        assertThat(download.getDescription()).as("merged description").isEqualTo("Test2");
+        assertThat(download.getShortDescription()).as("merged short description").isEmpty();
+        assertThat(download.getAttributes()).as("merged attributes").isEmpty();
+        assertThat(download.getHint()).as("merged hint").isEmpty();
+    }
+
+    public static void testMergeDownloadedStored() {
+        final Geocache stored = new Geocache();
+        stored.setGeocode("GC12345");
+        stored.setDetailed(true);
+        stored.setDisabled(true);
+        stored.setType(CacheType.TRADITIONAL);
+        stored.setCoords(new Geopoint(40.0, 8.0));
+        stored.setDescription("Test1");
+        stored.setAttributes(Collections.singletonList("TestAttribute"));
+        stored.setShortDescription("Short");
+        stored.setHint("Hint");
+        saveFreshCacheToDB(stored);
+
+        final Geocache download = new Geocache();
+        download.setGeocode("GC12345");
+        download.setDetailed(true);
+        download.setDisabled(false);
+        download.setType(CacheType.MULTI);
+        download.setCoords(new Geopoint(41.0, 9.0));
+        download.setDescription("Test2");
+        download.setAttributes(Collections.<String>emptyList());
 
         download.gatherMissingFrom(stored);
 
@@ -127,6 +161,29 @@ public class GeocacheTest extends CGeoTestCase {
         assertThat(download.getHint()).as("merged hint").isEmpty();
     }
 
+    public static void testMergeLivemap() {
+        final Geocache previous = new Geocache();
+        previous.setGeocode("GC12345");
+        previous.setDetailed(true);
+        previous.setDisabled(true);
+        previous.setType(CacheType.TRADITIONAL);
+        previous.setCoords(new Geopoint(40.0, 8.0));
+        removeCacheCompletely(previous.getGeocode());
+
+        final Geocache livemap = new Geocache();
+        livemap.setGeocode("GC12345");
+        livemap.setType(CacheType.MULTI, 12);
+        livemap.setCoords(new Geopoint(41.0, 9.0), 12);
+
+        livemap.gatherMissingFrom(previous);
+
+        assertThat(livemap.isDetailed()).as("merged detailed").isTrue();
+        assertThat(livemap.isDisabled()).as("merged disabled").isTrue();
+        assertThat(livemap.getType()).as("merged type").isEqualTo(CacheType.TRADITIONAL);
+        assertThat(livemap.getCoords()).as("merged coordinates").isEqualToComparingFieldByField(new Geopoint(40.0, 8.0));
+        assertThat(livemap.getCoordZoomLevel()).as("merged zoomlevel").isEqualTo(previous.getCoordZoomLevel());
+    }
+
     public static void testMergeLivemapStored() {
         final Geocache stored = new Geocache();
         stored.setGeocode("GC12345");
@@ -134,6 +191,7 @@ public class GeocacheTest extends CGeoTestCase {
         stored.setDisabled(true);
         stored.setType(CacheType.TRADITIONAL);
         stored.setCoords(new Geopoint(40.0, 8.0));
+        saveFreshCacheToDB(stored);
 
         final Geocache livemap = new Geocache();
         livemap.setGeocode("GC12345");

@@ -2946,7 +2946,7 @@ public class DataStore {
     }
 
     public static void saveChangedCache(final Geocache cache) {
-        DataStore.saveCache(cache, cache.getStorageLocation().contains(StorageLocation.DATABASE) ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.CACHE));
+        DataStore.saveCache(cache, cache.inDatabase() ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.CACHE));
     }
 
     private static enum PreparedStatement {

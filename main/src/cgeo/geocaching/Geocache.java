@@ -133,13 +133,13 @@ public class Geocache implements IWaypoint {
     private final LazyInitializedList<String> attributes = new LazyInitializedList<String>() {
         @Override
         public List<String> call() {
-            return DataStore.loadAttributes(geocode);
+            return inDatabase() ? DataStore.loadAttributes(geocode) : new LinkedList<String>();
         }
     };
     private final LazyInitializedList<Waypoint> waypoints = new LazyInitializedList<Waypoint>() {
         @Override
         public List<Waypoint> call() {
-            return DataStore.loadWaypoints(geocode);
+            return inDatabase() ? DataStore.loadWaypoints(geocode) : new LinkedList<Waypoint>();
         }
     };
     private List<Image> spoilers = null;
@@ -629,18 +629,25 @@ public class Geocache implements IWaypoint {
      */
     private void initializeCacheTexts() {
         if (description == null || shortdesc == null || hint == null || location == null) {
-            final Geocache partial = DataStore.loadCacheTexts(this.getGeocode());
-            if (description == null) {
-                setDescription(partial.getDescription());
-            }
-            if (shortdesc == null) {
-                setShortDescription(partial.getShortDescription());
-            }
-            if (hint == null) {
-                setHint(partial.getHint());
-            }
-            if (location == null) {
-                setLocation(partial.getLocation());
+            if (inDatabase()) {
+                final Geocache partial = DataStore.loadCacheTexts(this.getGeocode());
+                if (description == null) {
+                    setDescription(partial.getDescription());
+                }
+                if (shortdesc == null) {
+                    setShortDescription(partial.getShortDescription());
+                }
+                if (hint == null) {
+                    setHint(partial.getHint());
+                }
+                if (location == null) {
+                    setLocation(partial.getLocation());
+                }
+            } else {
+                description = StringUtils.defaultString(description);
+                shortdesc = StringUtils.defaultString(shortdesc);
+                hint = StringUtils.defaultString(hint);
+                location = StringUtils.defaultString(location);
             }
         }
     }
@@ -1013,7 +1020,7 @@ public class Geocache implements IWaypoint {
      */
     @NonNull
     public List<LogEntry> getLogs() {
-        return DataStore.loadLogs(geocode);
+        return inDatabase() ? DataStore.loadLogs(geocode) : Collections.<LogEntry>emptyList();
     }
 
     /**
@@ -1179,6 +1186,13 @@ public class Geocache implements IWaypoint {
      */
     public void addStorageLocation(final StorageLocation storageLocation) {
         this.storageLocation.add(storageLocation);
+    }
+
+    /**
+     * Check if this cache instance comes from or has been stored into the database.
+     */
+    public boolean inDatabase() {
+        return storageLocation.contains(StorageLocation.DATABASE);
     }
 
     /**
@@ -1748,7 +1762,7 @@ public class Geocache implements IWaypoint {
      */
     public int getFindsCount() {
         if (getLogCounts().isEmpty()) {
-            setLogCounts(DataStore.loadLogCounts(getGeocode()));
+            setLogCounts(inDatabase() ? DataStore.loadLogCounts(getGeocode()) : Collections.<LogType, Integer>emptyMap());
         }
         final Integer logged = getLogCounts().get(LogType.FOUND_IT);
         if (logged != null) {
