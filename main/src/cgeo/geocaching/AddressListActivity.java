@@ -22,7 +22,6 @@ public class AddressListActivity extends AbstractListActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.addresslist_activity);
 
-
         final AddressListAdapter adapter = new AddressListAdapter(this);
         setListAdapter(adapter);
 
