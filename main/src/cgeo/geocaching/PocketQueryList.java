@@ -2,13 +2,9 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.gc.GCParser;
-import cgeo.geocaching.utils.RxUtils;
 
 import org.apache.commons.collections4.CollectionUtils;
 
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
 import rx.android.app.AppObservable;
 import rx.functions.Action1;
 
@@ -47,13 +43,7 @@ public final class PocketQueryList {
     public static void promptForListSelection(final Activity activity, final Action1<PocketQueryList> runAfterwards) {
         final Dialog waitDialog = ProgressDialog.show(activity, activity.getString(R.string.search_pocket_title), activity.getString(R.string.search_pocket_loading), true, true);
 
-        AppObservable.bindActivity(activity, Observable.create(new OnSubscribe<List<PocketQueryList>>() {
-            @Override
-            public void call(final Subscriber<? super List<PocketQueryList>> subscriber) {
-                subscriber.onNext(GCParser.searchPocketQueryList());
-                subscriber.onCompleted();
-            }
-        })).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<List<PocketQueryList>>() {
+        AppObservable.bindActivity(activity, GCParser.searchPocketQueryListObservable).subscribe(new Action1<List<PocketQueryList>>() {
             @Override
             public void call(final List<PocketQueryList> pocketQueryLists) {
                 waitDialog.dismiss();
@@ -61,6 +51,7 @@ public final class PocketQueryList {
             }
         });
     }
+
     private static void selectFromPocketQueries(final Activity activity, final List<PocketQueryList> pocketQueryList, final Action1<PocketQueryList> runAfterwards) {
         if (CollectionUtils.isEmpty(pocketQueryList)) {
             ActivityMixin.showToast(activity, activity.getString(R.string.warn_no_pocket_query_found));

@@ -986,52 +986,58 @@ public abstract class GCParser {
         return trackable;
     }
 
-    public static List<PocketQueryList> searchPocketQueryList() {
+    /**
+     * Observable that fetches a list of pocket queries. Returns a single element (which may be an empty list).
+     * Executes on the network scheduler.
+     */
+    public static final Observable<List<PocketQueryList>> searchPocketQueryListObservable = Async.fromCallable(new Func0<List<PocketQueryList>>() {
+        @Override
+        public List<PocketQueryList> call() {
+            final Parameters params = new Parameters();
 
-        final Parameters params = new Parameters();
+            final String page = GCLogin.getInstance().getRequestLogged("http://www.geocaching.com/pocket/default.aspx", params);
 
-        final String page = GCLogin.getInstance().getRequestLogged("http://www.geocaching.com/pocket/default.aspx", params);
-
-        if (StringUtils.isBlank(page)) {
-            Log.e("GCParser.searchPocketQueryList: No data from server");
-            return null;
-        }
-
-        final String subPage = StringUtils.substringAfter(page, "class=\"PocketQueryListTable");
-        if (StringUtils.isEmpty(subPage)) {
-            Log.e("GCParser.searchPocketQueryList: class \"PocketQueryListTable\" not found on page");
-            return Collections.emptyList();
-        }
-
-        final List<PocketQueryList> list = new ArrayList<>();
-
-        final MatcherWrapper matcherPocket = new MatcherWrapper(GCConstants.PATTERN_LIST_PQ, subPage);
-
-        while (matcherPocket.find()) {
-            int maxCaches;
-            try {
-                maxCaches = Integer.parseInt(matcherPocket.group(1));
-            } catch (final NumberFormatException e) {
-                maxCaches = 0;
-                Log.e("GCParser.searchPocketQueryList: Unable to parse max caches", e);
+            if (StringUtils.isBlank(page)) {
+                Log.e("GCParser.searchPocketQueryList: No data from server");
+                return Collections.emptyList();
             }
-            final String guid = Html.fromHtml(matcherPocket.group(2)).toString();
-            final String name = Html.fromHtml(matcherPocket.group(3)).toString();
-            final PocketQueryList pqList = new PocketQueryList(guid, name, maxCaches);
-            list.add(pqList);
-        }
 
-        // just in case, lets sort the resulting list
-        Collections.sort(list, new Comparator<PocketQueryList>() {
-
-            @Override
-            public int compare(final PocketQueryList left, final PocketQueryList right) {
-                return String.CASE_INSENSITIVE_ORDER.compare(left.getName(), right.getName());
+            final String subPage = StringUtils.substringAfter(page, "class=\"PocketQueryListTable");
+            if (StringUtils.isEmpty(subPage)) {
+                Log.e("GCParser.searchPocketQueryList: class \"PocketQueryListTable\" not found on page");
+                return Collections.emptyList();
             }
-        });
 
-        return list;
-    }
+            final List<PocketQueryList> list = new ArrayList<>();
+
+            final MatcherWrapper matcherPocket = new MatcherWrapper(GCConstants.PATTERN_LIST_PQ, subPage);
+
+            while (matcherPocket.find()) {
+                int maxCaches;
+                try {
+                    maxCaches = Integer.parseInt(matcherPocket.group(1));
+                } catch (final NumberFormatException e) {
+                    maxCaches = 0;
+                    Log.e("GCParser.searchPocketQueryList: Unable to parse max caches", e);
+                }
+                final String guid = Html.fromHtml(matcherPocket.group(2)).toString();
+                final String name = Html.fromHtml(matcherPocket.group(3)).toString();
+                final PocketQueryList pqList = new PocketQueryList(guid, name, maxCaches);
+                list.add(pqList);
+            }
+
+            // just in case, lets sort the resulting list
+            Collections.sort(list, new Comparator<PocketQueryList>() {
+
+                @Override
+                public int compare(final PocketQueryList left, final PocketQueryList right) {
+                    return String.CASE_INSENSITIVE_ORDER.compare(left.getName(), right.getName());
+                }
+            });
+
+            return list;
+        }
+    }, RxUtils.networkScheduler);
 
     public static ImmutablePair<StatusCode, String> postLog(final String geocode, final String cacheid, final String[] viewstates,
             final LogType logType, final int year, final int month, final int day,
