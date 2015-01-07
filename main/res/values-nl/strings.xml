@@ -125,6 +125,7 @@
   <string name="err_login">Geen login informatie opgeslagen</string>
   <string name="err_login_failed_toast">Sorry, c:geo kan niet inloggen. c:geo werkt in offline modus. Controleer je gebruikersnaam en wachtwoord en/of zet de internetverbinding aan.</string>
   <string name="err_unknown">Onbekende fout</string>
+  <string name="err_unknown_address">c:geo was niet in staat dit adres te herkennen als bestaande locatie</string>
   <string name="err_comm">Onbekende communicatiefout</string>
   <string name="err_missing_auth">Geen gebruikersnaam en/of wachtwoord ingesteld.</string>
   <string name="err_wrong">Foutieve login informatie</string>
@@ -171,6 +172,8 @@
   <string name="err_log_load_data">Sorry, c:geo kan data om bezoek te loggen niet laden.</string>
   <string name="err_log_load_data_again">Sorry, c:geo kan data om bezoek te loggen niet laden. Bezig nogmaals te proberen.</string>
   <string name="err_log_load_data_still">c:geo is nog steeds bezig om data te laden om bezoek te loggen. Graag nog even geduld.</string>
+  <string name="err_log_post_failed">Het lijkt erop dat je log niet werd gepost. Controleer het op de cache webpagina.</string>
+  <string name="err_logimage_post_failed">Het lijkt erop dat uw log-afbeelding niet is geüpload. Controleer het op de cache webpagina.</string>
   <string name="err_search_address_forgot">Sorry, c:geo is het adres dat je zoekt vergeten.</string>
   <string name="err_parse_lat">Sorry, c:geo kan breedtegraad niet verwerken.</string>
   <string name="err_parse_lon">Sorry, c:geo kan lengtegraad niet verwerken.</string>
@@ -206,7 +209,7 @@
   <string name="loc_last">Laatst bekende</string>
   <string name="loc_net">Netwerk</string>
   <string name="loc_fused">Gecombineerd</string>
-  <string name="loc_low_power">Batterij bijna leeg</string>
+  <string name="loc_low_power">Spaarstand</string>
   <string name="loc_home">Thuis coördinaten</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
@@ -293,6 +296,9 @@
   <string name="caches_filter_personal_note">Met privé cachenotitie</string>
   <string name="caches_filter_popularity">Favorieten</string>
   <string name="caches_filter_popularity_ratio">Favorieten [%]</string>
+  <string name="caches_filter_personal_data">Met persoonlijke gegevens</string>
+  <string name="caches_filter_rating">Met rating</string>
+  <string name="caches_filter_own_rating">Met eigen rating</string>
   <string name="caches_removing_from_history">Verwijderen uit geschiedenis…</string>
   <string name="caches_clear_offlinelogs">Verwijderen offline logs</string>
   <string name="caches_clear_offlinelogs_message">Wil je de offline logs wissen?</string>
@@ -325,6 +331,7 @@
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Help</string>
   <string name="settings_title_services">Diensten</string>
+  <string name="settings_summary_services">Gebruikersaccount informatie en toegang tot optionele services configureren.</string>
   <string name="settings_title_appearance">Uiterlijk</string>
   <string name="settings_title_cachedetails">Cache Details</string>
   <string name="settings_title_offlinedata">Offline gegevens</string>
@@ -374,6 +381,7 @@
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Om een cache te kunnen beoordelen, volg de instructies op GCVote.com en geef hier uw GCVote wachtwoord op.</string>
   <string name="err_gcvote_send_rating">Fout bij het verzenden van beoordeling, controleer het GCVote wachtwoord in instellingen of maak deze leeg.</string>
+  <string name="gcvote_sent">Stem succesvol verzonden</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activeren</string>
   <string name="init_username">Gebruikersnaam</string>
@@ -583,7 +591,7 @@
   <string name="cache_personal_note_upload">Uploaden</string>
   <string name="cache_personal_note_uploading">Uploading persoonlijke notitie</string>
   <string name="cache_personal_note_upload_done">Persoonlijke notitie geupload</string>
-  <string name="cache_personal_note_upload_cancelled">Persoonlijk notitie uploaden geannulleerd</string>
+  <string name="cache_personal_note_upload_cancelled">Persoonlijke notitie uploaden geannuleerd</string>
   <string name="cache_description">Omschrijving</string>
   <string name="cache_description_long">Lange omschrijving</string>
   <string name="cache_description_table_note">Omschrijving bevat een tabel-layout welke misschien op %s bekeken moet worden.</string>
@@ -658,6 +666,7 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_android_wear">Android Wear</string>
+  <string name="cache_menu_vote">Stem</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Log opgeslagen</string>
   <string name="cache_status_found">Gevonden</string>

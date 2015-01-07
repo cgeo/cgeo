@@ -9,8 +9,8 @@
   <string name="about">Om c:geo</string>
   <string name="latitude">Breddegrad</string>
   <string name="longitude">Længdegrad</string>
-  <string name="settings_titlebar">c:geo Indstillinger</string>
-  <string name="all_types">Alle Cache typer</string>
+  <string name="settings_titlebar">c:geo indstillinger</string>
+  <string name="all_types">Alle cachetyper</string>
   <string name="traditional">Traditionel cache</string>
   <string name="multi">Multi-cache</string>
   <string name="mystery">Ukendt cache</string>
@@ -125,6 +125,7 @@
   <string name="err_login">Loginoplysninger mangler</string>
   <string name="err_login_failed_toast">c:geo kan ikke logge ind. c:geo fungerer offline med gemte cacher. Kontrollér login-indstillingerne eller aktivér din Internetforbindelse.</string>
   <string name="err_unknown">Ukendt fejl</string>
+  <string name="err_unknown_address">c:geo kunne ikke tilknytte denne adresse til en eksisterende placering</string>
   <string name="err_comm">Ukendt forbindelsesfejl</string>
   <string name="err_missing_auth">Intet brugernavn og/eller password konfigureret.</string>
   <string name="err_wrong">Fejl i login</string>
@@ -171,6 +172,8 @@
   <string name="err_log_load_data">c: geo kan ikke indlæse de data, der kræves for at logge besøget.</string>
   <string name="err_log_load_data_again">c: geo kan ikke indlæse de data, der kræves for at logge besøget. Forsøger igen.</string>
   <string name="err_log_load_data_still">c:geo forsøger stadig at indlæse de data, som kræves for at sende logbeskeden. Vent venligst.</string>
+  <string name="err_log_post_failed">Din logbesked blev muligvis ikke uploadet. Kontrollér logbeskeden på geocachens hjemmeside.</string>
+  <string name="err_logimage_post_failed">Dit logbillede blev muligvis ikke uploadet korrekt. Kontrollér billedet på geocachens hjemmeside.</string>
   <string name="err_search_address_forgot">c: geo glemte den adresse, du forsøgte at finde.</string>
   <string name="err_parse_lat">c:geo kan ikke forstå den indtastede breddegrad.</string>
   <string name="err_parse_lon">c:geo kan ikke forstå den indtastede længdegrad.</string>
@@ -293,6 +296,9 @@
   <string name="caches_filter_personal_note">Med personlig note</string>
   <string name="caches_filter_popularity">Favoritter</string>
   <string name="caches_filter_popularity_ratio">Favoritter [%]</string>
+  <string name="caches_filter_personal_data">Med personlige data</string>
+  <string name="caches_filter_rating">Med vurdering</string>
+  <string name="caches_filter_own_rating">Med egen vurdering</string>
   <string name="caches_removing_from_history">Fjerner fra historik…</string>
   <string name="caches_clear_offlinelogs">Fjern offline logbeskeder</string>
   <string name="caches_clear_offlinelogs_message">Vil du fjerne offline logbeskeder?</string>
@@ -325,6 +331,7 @@
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Hjælp</string>
   <string name="settings_title_services">Tjenester</string>
+  <string name="settings_summary_services">Konfigurér oplysninger om brugerkonto og adgang til valgfrie tjenester.</string>
   <string name="settings_title_appearance">Udseende</string>
   <string name="settings_title_cachedetails">Cachedetaljer</string>
   <string name="settings_title_offlinedata">Offline data</string>
@@ -364,6 +371,7 @@
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">For at kunne bedømme en cache skal du følge instruktionerne på GCVote.com og angive dit password til GCVote her.</string>
   <string name="err_gcvote_send_rating">Fejl under afsendelse af bedømmelse. Kontrollér eller fjern GCVote password under Indstillinger.</string>
+  <string name="gcvote_sent">Stemme blev afsendt</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivér</string>
   <string name="init_username">Brugernavn</string>
