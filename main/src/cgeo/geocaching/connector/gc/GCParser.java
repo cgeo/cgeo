@@ -579,11 +579,11 @@ public abstract class GCParser {
 
         // cache attributes
         try {
+            final ArrayList<String> attributes = new ArrayList<>();
             final String attributesPre = TextUtils.getMatch(page, GCConstants.PATTERN_ATTRIBUTES, true, null);
-            if (null != attributesPre) {
+            if (attributesPre != null) {
                 final MatcherWrapper matcherAttributesInside = new MatcherWrapper(GCConstants.PATTERN_ATTRIBUTESINSIDE, attributesPre);
 
-                final ArrayList<String> attributes = new ArrayList<>();
                 while (matcherAttributesInside.find()) {
                     if (matcherAttributesInside.groupCount() > 1 && !matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
                         // by default, use the tooltip of the attribute
@@ -601,8 +601,8 @@ public abstract class GCParser {
                         attributes.add(attribute);
                     }
                 }
-                cache.setAttributes(attributes);
             }
+            cache.setAttributes(attributes);
         } catch (final RuntimeException e) {
             // failed to parse cache attributes
             Log.w("GCParser.parseCache: Failed to parse cache attributes", e);
