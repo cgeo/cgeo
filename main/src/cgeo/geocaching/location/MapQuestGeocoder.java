@@ -39,11 +39,25 @@ public class MapQuestGeocoder {
      * @see android.location.Geocoder#getFromLocationName(String, int)
      */
     public static Observable<Address> getFromLocationName(@NonNull final String address) {
+        return get("address", new Parameters("location", address, "maxResults", "20", "thumbMaps", "false"));
+    }
+
+    /**
+     * Retrieve the physical address for coordinates. The work happens on the network scheduler.
+     *
+     * @param coords the coordinates
+     * @return an observable containing one location or an error
+     */
+    public static Observable<Address> getFromLocation(@NonNull final Geopoint coords) {
+        return get("reverse", new Parameters("location", String.format(Locale.US, "%f,%f", coords.getLatitude(), coords.getLongitude()))).first();
+    }
+
+    private static Observable<Address> get(@NonNull final String method, @NonNull final Parameters parameters) {
         return Observable.defer(new Func0<Observable<Address>>() {
             @Override
             public Observable<Address> call() {
-                final ObjectNode response = Network.requestJSON("https://www.mapquestapi.com/geocoding/v1/address",
-                        new Parameters("key", MAPQUEST_KEY, "location", address, "maxResults", "20", "thumbMaps", "false"));
+                final ObjectNode response = Network.requestJSON("https://www.mapquestapi.com/geocoding/v1/" + method,
+                        parameters.put("key", MAPQUEST_KEY));
                 if (response == null) {
                     Log.w("MapQuest decoder error: no response");
                     return Observable.error(new RuntimeException("no answer from MapQuest geocoder"));
@@ -110,6 +124,10 @@ public class MapQuestGeocoder {
                 break;
             case "Country":
                 address.setCountryCode(content);
+                address.setCountryName(new Locale("", content).getDisplayCountry());
+                break;
+            // Make checkers happy
+            default:
                 break;
         }
     }

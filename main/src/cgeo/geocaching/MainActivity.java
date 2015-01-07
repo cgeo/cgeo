@@ -11,7 +11,9 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.location.AndroidGeocoder;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.MapQuestGeocoder;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.network.Network;
@@ -37,12 +39,11 @@ import com.google.zxing.integration.android.IntentResult;
 import org.apache.commons.lang3.StringUtils;
 
 import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.android.view.ViewObservable;
 import rx.functions.Action0;
 import rx.functions.Action1;
+import rx.functions.Func1;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -54,7 +55,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.location.Address;
-import android.location.Geocoder;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -75,7 +75,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 
 public class MainActivity extends AbstractActionBarActivity {
     @InjectView(R.id.nav_satellites) protected TextView navSatellites;
@@ -572,30 +571,21 @@ public class MainActivity extends AbstractActionBarActivity {
                 navAccuracy.setText(null);
             }
 
+            final Geopoint currentCoords = geo.getCoords();
             if (Settings.isShowAddress()) {
                 if (addCoords == null) {
                     navLocation.setText(R.string.loc_no_addr);
                 }
-                if (addCoords == null || (geo.getCoords().distanceTo(addCoords) > 0.5)) {
-                    final Observable<String> address = Observable.create(new OnSubscribe<String>() {
+                if (addCoords == null || (currentCoords.distanceTo(addCoords) > 0.5)) {
+                    addCoords = currentCoords;
+                    final Observable<String> address = (new AndroidGeocoder(MainActivity.this).getFromLocation(currentCoords)
+                            .onErrorResumeNext(MapQuestGeocoder.getFromLocation(currentCoords))).map(new Func1<Address, String>() {
                         @Override
-                        public void call(final Subscriber<? super String> subscriber) {
-                            try {
-                                addCoords = geo.getCoords();
-                                final Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
-                                final List<Address> addresses = geocoder.getFromLocation(addCoords.getLatitude(), addCoords.getLongitude(), 1);
-                                if (!addresses.isEmpty()) {
-                                    subscriber.onNext(formatAddress(addresses.get(0)));
-                                }
-                                subscriber.onCompleted();
-                            } catch (final Exception e) {
-                                subscriber.onError(e);
-                            }
+                        public String call(final Address address) {
+                            return formatAddress(address);
                         }
-                    });
-                    ViewObservable.bindView(navLocation, address.onErrorResumeNext(Observable.just(geo.getCoords().toString())))
-                            .subscribeOn(RxUtils.networkScheduler)
-                            .subscribe(new Action1<String>() {
+                    }).onErrorResumeNext(Observable.just(currentCoords.toString()));
+                    ViewObservable.bindView(navLocation, address).subscribe(new Action1<String>() {
                                 @Override
                                 public void call(final String address) {
                                     navLocation.setText(address);
@@ -603,7 +593,7 @@ public class MainActivity extends AbstractActionBarActivity {
                             });
                 }
             } else {
-                navLocation.setText(geo.getCoords().toString());
+                navLocation.setText(currentCoords.toString());
             }
         }
     }
