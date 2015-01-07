@@ -9,7 +9,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
-import rx.android.observables.AndroidObservable;
+import rx.android.app.AppObservable;
 import rx.functions.Action1;
 
 import android.app.Activity;
@@ -47,7 +47,7 @@ public final class PocketQueryList {
     public static void promptForListSelection(final Activity activity, final Action1<PocketQueryList> runAfterwards) {
         final Dialog waitDialog = ProgressDialog.show(activity, activity.getString(R.string.search_pocket_title), activity.getString(R.string.search_pocket_loading), true, true);
 
-        AndroidObservable.bindActivity(activity, Observable.create(new OnSubscribe<List<PocketQueryList>>() {
+        AppObservable.bindActivity(activity, Observable.create(new OnSubscribe<List<PocketQueryList>>() {
             @Override
             public void call(final Subscriber<? super List<PocketQueryList>> subscriber) {
                 subscriber.onNext(GCParser.searchPocketQueryList());

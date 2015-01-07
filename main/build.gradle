@@ -28,7 +28,7 @@ gradle connectedCheck
 
 def AAVersion = '3.2'
 def RXJavaVersion = '1.0.4'
-def RXAndroidVersion = '0.23.0'
+def RXAndroidVersion = '0.24.0'
 def RXJavaAsyncUtilVersion = '0.21.0'
 def JacksonCoreVersion = '2.4.4'
 def JacksonDatabindVersion = '2.4.4'

@@ -19,7 +19,7 @@ import cgeo.geocaching.utils.RxUtils;
 
 import rx.Observable;
 import rx.Subscription;
-import rx.android.observables.AndroidObservable;
+import rx.android.app.AppObservable;
 import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.subscriptions.Subscriptions;
@@ -187,7 +187,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         if (!cache.supportsGCVote()) {
             return;
         }
-        AndroidObservable.bindActivity(getActivity(), Observable.defer(new Func0<Observable<GCVoteRating>>() {
+        AppObservable.bindActivity(getActivity(), Observable.defer(new Func0<Observable<GCVoteRating>>() {
             @Override
             public Observable<GCVoteRating> call() {
                 final GCVoteRating rating = GCVote.getRating(cache.getGuid(), geocode);

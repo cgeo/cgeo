@@ -8,7 +8,7 @@ import cgeo.geocaching.network.StatusUpdater.Status;
 import cgeo.geocaching.utils.Log;
 
 import rx.Subscription;
-import rx.android.observables.AndroidObservable;
+import rx.android.app.AppObservable;
 import rx.functions.Action1;
 import rx.subscriptions.Subscriptions;
 
@@ -36,7 +36,7 @@ public class StatusFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         final ViewGroup statusGroup = (ViewGroup) inflater.inflate(R.layout.status, container, false);
         ButterKnife.inject(this, statusGroup);
-        statusSubscription = AndroidObservable.bindFragment(this, StatusUpdater.latestStatus)
+        statusSubscription = AppObservable.bindFragment(this, StatusUpdater.latestStatus)
                 .subscribe(new Action1<Status>() {
                     @Override
                     public void call(final Status status) {

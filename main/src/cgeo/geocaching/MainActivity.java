@@ -39,7 +39,7 @@ import org.apache.commons.lang3.StringUtils;
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
-import rx.android.observables.AndroidObservable;
+import rx.android.app.AppObservable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.functions.Action1;
@@ -501,7 +501,7 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     public void updateCacheCounter() {
-        AndroidObservable.bindActivity(this, DataStore.getAllCachesCountObservable()).subscribe(new Action1<Integer>() {
+        AppObservable.bindActivity(this, DataStore.getAllCachesCountObservable()).subscribe(new Action1<Integer>() {
             @Override
             public void call(final Integer countBubbleCnt1) {
                 if (countBubbleCnt1 == 0) {
@@ -593,7 +593,7 @@ public class MainActivity extends AbstractActionBarActivity {
                             }
                         }
                     });
-                    AndroidObservable.bindActivity(MainActivity.this, address.onErrorResumeNext(Observable.just(geo.getCoords().toString())))
+                    AppObservable.bindActivity(MainActivity.this, address.onErrorResumeNext(Observable.just(geo.getCoords().toString())))
                             .subscribeOn(RxUtils.networkScheduler)
                             .subscribe(new Action1<String>() {
                                 @Override

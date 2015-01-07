@@ -31,9 +31,9 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import rx.Observable;
-import rx.android.events.OnClickEvent;
-import rx.android.observables.AndroidObservable;
-import rx.android.observables.ViewObservable;
+import rx.android.app.AppObservable;
+import rx.android.view.OnClickEvent;
+import rx.android.view.ViewObservable;
 import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.subscriptions.CompositeSubscription;
@@ -183,7 +183,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         });
         waitDialog = ProgressDialog.show(this, message, res.getString(R.string.trackable_details_loading), true, true);
         createSubscriptions = new CompositeSubscription();
-        createSubscriptions.add(AndroidObservable.bindActivity(this, loadTrackable(geocode, guid, id)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
+        createSubscriptions.add(AppObservable.bindActivity(this, loadTrackable(geocode, guid, id)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
             @Override
             public void call(final Trackable trackable) {
                 TrackableActivity.this.trackable = trackable;
@@ -294,7 +294,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     private void setupIcon(final ActionBar actionBar, final String url) {
         final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, 0, false);
-        AndroidObservable.bindActivity(this, imgGetter.fetchDrawable(url)).subscribe(new Action1<BitmapDrawable>() {
+        AppObservable.bindActivity(this, imgGetter.fetchDrawable(url)).subscribe(new Action1<BitmapDrawable>() {
             @Override
             public void call(final BitmapDrawable image) {
                 if (actionBar != null) {
@@ -525,7 +525,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                     }
                 });
 
-                AndroidObservable.bindActivity(TrackableActivity.this, new HtmlImage(geocode, true, 0, false).fetchDrawable(trackable.getImage())).subscribe(new Action1<BitmapDrawable>() {
+                AppObservable.bindActivity(TrackableActivity.this, new HtmlImage(geocode, true, 0, false).fetchDrawable(trackable.getImage())).subscribe(new Action1<BitmapDrawable>() {
                     @Override
                     public void call(final BitmapDrawable bitmapDrawable) {
                         trackableImage.setImageDrawable(bitmapDrawable);

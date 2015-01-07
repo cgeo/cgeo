@@ -33,7 +33,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
-import rx.android.observables.AndroidObservable;
+import rx.android.app.AppObservable;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func0;
@@ -407,7 +407,7 @@ public class DataStore {
      */
     public static void moveDatabase(final Activity fromActivity) {
         final ProgressDialog dialog = ProgressDialog.show(fromActivity, fromActivity.getString(R.string.init_dbmove_dbmove), fromActivity.getString(R.string.init_dbmove_running), true, false);
-        AndroidObservable.bindActivity(fromActivity, Async.fromCallable(new Func0<Boolean>() {
+        AppObservable.bindActivity(fromActivity, Async.fromCallable(new Func0<Boolean>() {
             @Override
             public Boolean call() {
                 if (!LocalStorage.isExternalStorageAvailable()) {

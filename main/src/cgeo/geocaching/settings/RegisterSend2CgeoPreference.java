@@ -13,7 +13,7 @@ import ch.boye.httpclientandroidlib.HttpResponse;
 import org.apache.commons.lang3.StringUtils;
 
 import rx.Observable;
-import rx.android.observables.AndroidObservable;
+import rx.android.app.AppObservable;
 import rx.functions.Action1;
 import rx.functions.Func0;
 
@@ -55,7 +55,7 @@ public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
                         activity.getString(R.string.init_sendToCgeo_registering), true);
                 progressDialog.setCancelable(false);
 
-                AndroidObservable.bindActivity(activity, Observable.defer(new Func0<Observable<Integer>>() {
+                AppObservable.bindActivity(activity, Observable.defer(new Func0<Observable<Integer>>() {
                     @Override
                     public Observable<Integer> call() {
                         final String nam = StringUtils.defaultString(deviceName);
