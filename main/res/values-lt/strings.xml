@@ -125,6 +125,7 @@
   <string name="err_login">Nėra išsaugotos prisijungimo informacijos</string>
   <string name="err_login_failed_toast">c:geo negali prisijungti. c:geo veikia neprisijungusi su išsaugotomis slėptuvėmis. Patikrinkite prisijungimo nustatymus arba įjunkite prietaiso interneto ryšį.</string>
   <string name="err_unknown">Nežinoma klaida</string>
+  <string name="err_unknown_address">C:geo nepavyko susieti šio adreso su egzistuojančia vietove</string>
   <string name="err_comm">Nežinoma ryšio klaida</string>
   <string name="err_missing_auth">Neįvestas vartotojo vardas ir/ar slaptažodis.</string>
   <string name="err_wrong">Neteisinga prisijungimo informacija</string>
@@ -296,6 +297,9 @@
   <string name="caches_filter_personal_note">Su asmenine pastaba</string>
   <string name="caches_filter_popularity">Kaip mėgiamos</string>
   <string name="caches_filter_popularity_ratio">Kaip mėgiamos [%]</string>
+  <string name="caches_filter_personal_data">Su asmeniniais duomenimis</string>
+  <string name="caches_filter_rating">Su reitingu</string>
+  <string name="caches_filter_own_rating">Su savo reitingu</string>
   <string name="caches_removing_from_history">Pašalinama iš Istorijos…</string>
   <string name="caches_clear_offlinelogs">Išvalyti išsaugotus įrašus</string>
   <string name="caches_clear_offlinelogs_message">Ar norite išvalyti išsaugotus įrašus?</string>
@@ -328,6 +332,7 @@
   <string name="about_apache_license"><a href=""> Apache licencija, versija 2.0</a></string>
   <string name="about_help">Pagalba</string>
   <string name="settings_title_services">Paslaugos</string>
+  <string name="settings_summary_services">Nustatyk naudotojo paskyros informaciją ir prieiga prie pasirinktinų paslaugų.</string>
   <string name="settings_title_appearance">Išvaizda</string>
   <string name="settings_title_cachedetails">Slėptuvės informacija</string>
   <string name="settings_title_offlinedata">Duomenys darbui neprisijungus</string>
@@ -367,6 +372,7 @@
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Kad būtų galima reitinguoti slėptuvę, sekite instrukciją GCVote.com svetainėje ir čia  įveskite GCVote slaptažodį.</string>
   <string name="err_gcvote_send_rating">Klaida siunčiant reitingą, patikrinkite GCVote slaptažodį parametruose arba jį ištrinkite.</string>
+  <string name="gcvote_sent">Balsas sėkmingai išsiųstas</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktyvuoti</string>
   <string name="init_username">Vartotojo vardas</string>
@@ -645,6 +651,7 @@
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_pebble">Pebble</string>
+  <string name="cache_menu_vote">Balsuoti</string>
   <string name="cache_status">Būsena</string>
   <string name="cache_status_offline_log">Išsaugotas įrašas</string>
   <string name="cache_status_found">Rasta</string>

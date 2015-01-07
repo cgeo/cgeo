@@ -125,6 +125,7 @@
   <string name="err_login">Informação de login não gravada</string>
   <string name="err_login_failed_toast">O c:geo não consegue fazer login. O c:geo funciona offline com as caches Arquivadas. Verifique as definições de login ou habilite a ligação de dados.</string>
   <string name="err_unknown">Erro desconhecido</string>
+  <string name="err_unknown_address">c:geo não conseguiu mapear a morada para uma localização existente</string>
   <string name="err_comm">Erro de comunicação desconhecido</string>
   <string name="err_missing_auth">Sem nome de utilizador/password definidos.</string>
   <string name="err_wrong">Dados de login inválidos</string>
@@ -171,6 +172,8 @@
   <string name="err_log_load_data">O c:geo não consegue carregar os dados necessários para registar a sua visita.</string>
   <string name="err_log_load_data_again">O c:geo não consegue carregar os dados necessários para registar a sua visita. A tentar de novo.</string>
   <string name="err_log_load_data_still">O c:geo ainda está a carregar dados necessários para publicar o registo. Por favor espere mais um pouco.</string>
+  <string name="err_log_post_failed">Parece que o seu registo não foi publicado. Por favor, verifique a página Web original da cache.</string>
+  <string name="err_logimage_post_failed">Parece que a imagem do seu registo não foi enviada. Por favor, verifique a página Web original da cache.</string>
   <string name="err_search_address_forgot">O c:geo esqueceu o endereço que procura.</string>
   <string name="err_parse_lat">O c:geo não consegue analisar a latitue.</string>
   <string name="err_parse_lon">O c:geo não consegue analisar a logitude.</string>
@@ -293,6 +296,9 @@
   <string name="caches_filter_personal_note">Com nota pessoal</string>
   <string name="caches_filter_popularity">Favoritos</string>
   <string name="caches_filter_popularity_ratio">Favoritos [%]</string>
+  <string name="caches_filter_personal_data">Com notas pessoais</string>
+  <string name="caches_filter_rating">Com classificação</string>
+  <string name="caches_filter_own_rating">Com própria classificação</string>
   <string name="caches_removing_from_history">A remover do histórico…</string>
   <string name="caches_clear_offlinelogs">Limpar registos offline</string>
   <string name="caches_clear_offlinelogs_message">Quer apagar os registos offline?</string>
@@ -373,6 +379,7 @@
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Para poder classificar uma cache, tem que seguir as instruções em GCVote.com e digitar a sua senha GCVote aqui.</string>
   <string name="err_gcvote_send_rating">Erro ao enviar a classificação, verifique a senha do GCVote nas configurações ou limpe a mesma.</string>
+  <string name="gcvote_sent">Votação enviada com sucesso</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activar</string>
   <string name="init_username">Nome de utilizador</string>
@@ -652,6 +659,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Seixo</string>
+  <string name="cache_menu_vote">Voto</string>
   <string name="cache_status">Estado</string>
   <string name="cache_status_offline_log">Registo gravado</string>
   <string name="cache_status_found">Encontrada</string>

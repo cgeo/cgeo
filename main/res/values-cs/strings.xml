@@ -124,6 +124,7 @@
   <string name="err_login">Nejsou uloženy žádné přihlašovací údaje</string>
   <string name="err_login_failed_toast">Nelze se přihlásit. c:geo bude pracovat Offline s uloženými informacemi. Zkontroluj nastavení přihlašování a připojení k Internetu.</string>
   <string name="err_unknown">Neznámá chyba</string>
+  <string name="err_unknown_address">c:geo nedokázal tuto adresu najít na mapě</string>
   <string name="err_comm">Neznámá komunikační chyba</string>
   <string name="err_missing_auth">Nenastaveno žádné přihlašovací jméno/heslo.</string>
   <string name="err_wrong">Chybné přihlašovací údaje</string>
@@ -295,6 +296,9 @@
   <string name="caches_filter_personal_note">S osobní poznámkou</string>
   <string name="caches_filter_popularity">Oblíbené</string>
   <string name="caches_filter_popularity_ratio">Oblíbené [%]</string>
+  <string name="caches_filter_personal_data">S osobními údaji</string>
+  <string name="caches_filter_rating">S hodnocením</string>
+  <string name="caches_filter_own_rating">S vlastním hodnocením</string>
   <string name="caches_removing_from_history">Čištění Historie…</string>
   <string name="caches_clear_offlinelogs">Smazat offline Logy</string>
   <string name="caches_clear_offlinelogs_message">Opravdu chceš vymazat offline logy?</string>
@@ -327,6 +331,7 @@
   <string name="about_apache_license"><a href=""> licence Apache, verze 2.0</a></string>
   <string name="about_help">Nápověda</string>
   <string name="settings_title_services">Služby</string>
+  <string name="settings_summary_services">Nastavení uživatelského účtu a přístupu k volitelným službám.</string>
   <string name="settings_title_appearance">Vzhled</string>
   <string name="settings_title_cachedetails">Detaily keše</string>
   <string name="settings_title_offlinedata">Offline zdroje</string>
@@ -376,6 +381,7 @@
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Pokud chceš hodnotit keše, je třeba postupovat dle pokynů na GCVote.com a zadat sem své heslo.</string>
   <string name="err_gcvote_send_rating">Chyba při odesílání hodnocení, zkontroluj GCVote heslo v nastavení nebo ho nech prázdné.</string>
+  <string name="gcvote_sent">Hlas úspěšně odeslán</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Povolit</string>
   <string name="init_username">Uživatelské jméno</string>
@@ -656,6 +662,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
+  <string name="cache_menu_vote">Hlasovat</string>
   <string name="cache_status">Stav</string>
   <string name="cache_status_offline_log">Připravený Log</string>
   <string name="cache_status_found">Nalezena</string>
