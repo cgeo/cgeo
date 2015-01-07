@@ -13,6 +13,7 @@
     · Fix: Menu for scanning trackable and geocache codes wrongly hidden\n
     · Fix: Recognize Sygic voucher edition\n
     · Fix: Update locally stored GCVote when sending over network\n
+    · Fix: Clearing of a cache only attribute is not recorded into the database\n
      \n
      \n    
     <b>Known Limitations/Bugs:</b>\n
