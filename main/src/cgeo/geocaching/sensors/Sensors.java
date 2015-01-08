@@ -15,8 +15,6 @@ import rx.functions.Action1;
 import rx.functions.Func1;
 
 import android.content.Context;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -29,7 +27,7 @@ public class Sensors {
     @NonNull private volatile GeoData currentGeo = GeoData.DUMMY_LOCATION;
     private volatile float currentDirection = 0.0f;
     private volatile boolean hasValidLocation = false;
-    private final boolean hasMagneticFieldSensor;
+    private final boolean hasCompassCapabilities;
     private final CgeoApplication app = CgeoApplication.getInstance();
 
     private static class InstanceHolder {
@@ -53,8 +51,8 @@ public class Sensors {
 
     private Sensors() {
         gpsStatusObservable = GpsStatusProvider.create(app).replay(1).refCount();
-        final SensorManager sensorManager = (SensorManager) app.getSystemService(Context.SENSOR_SERVICE);
-        hasMagneticFieldSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null;
+        final Context context = CgeoApplication.getInstance().getApplicationContext();
+        hasCompassCapabilities = RotationProvider.hasRotationSensor(context) || OrientationProvider.hasOrientationSensor(context);
     }
 
     public static final Sensors getInstance() {
@@ -84,8 +82,8 @@ public class Sensors {
 
     public void setupDirectionObservable(final boolean useLowPower) {
         // If we have no magnetic sensor, there is no point in trying to setup any, we will always get the direction from the GPS.
-        if (!hasMagneticFieldSensor) {
-            Log.i("No magnetic field sensor, using only the GPS for the orientation");
+        if (!hasCompassCapabilities) {
+            Log.i("No compass capabilities, using only the GPS for the orientation");
             directionObservable = RxUtils.rememberLast(geoDataObservableLowPower.map(GPS_TO_DIRECTION).doOnNext(onNextrememberDirectionAction), 0f);
             return;
         }
@@ -153,8 +151,8 @@ public class Sensors {
         return currentDirection;
     }
 
-    public boolean hasMagneticFieldSensor() {
-        return hasMagneticFieldSensor;
+    public boolean hasCompassCapabilities() {
+        return hasCompassCapabilities;
     }
 
 }

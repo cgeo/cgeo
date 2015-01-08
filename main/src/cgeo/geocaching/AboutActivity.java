@@ -266,7 +266,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         }
         body
                 .append("\nLow power mode: ").append(Settings.useLowPowerMode() ? "active" : "inactive")
-                .append("\nMagnetic field sensor: ").append(presence(Sensors.getInstance().hasMagneticFieldSensor()))
+                .append("\nCompass capabilities: ").append(Sensors.getInstance().hasCompassCapabilities() ? "yes" : "no")
                 .append("\nRotation sensor: ").append(presence(RotationProvider.hasRotationSensor(context)))
                 .append("\nGeomagnetic rotation sensor: ").append(presence(RotationProvider.hasGeomagneticRotationSensor(context)))
                 .append("\nOrientation sensor: ").append(presence(OrientationProvider.hasOrientationSensor(context)))

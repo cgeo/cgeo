@@ -139,7 +139,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.compass_activity_options, menu);
-        menu.findItem(R.id.menu_compass_sensor).setVisible(Sensors.getInstance().hasMagneticFieldSensor());
+        menu.findItem(R.id.menu_compass_sensor).setVisible(Sensors.getInstance().hasCompassCapabilities());
         if (cache != null) {
             LoggingUI.addMenuItems(this, menu, cache);
         }
