@@ -93,7 +93,7 @@ public class Sensors {
 
         // The rotation sensor seems to be bogus on some devices. We should start with the orientation one, except when we explicitely
         // want to use the low-power geomagnetic rotation sensor or when we do not have an orientation sensor.
-        final boolean useRotationSensor = (Settings.useLowPowerMode() && RotationProvider.hasGeomagneticRotationSensor(app)) || !OrientationProvider.hasOrientationSensor(app);
+        final boolean useRotationSensor = (useLowPower && RotationProvider.hasGeomagneticRotationSensor(app)) || !OrientationProvider.hasOrientationSensor(app);
         final Observable<Float> sensorDirectionObservable = useRotationSensor ? RotationProvider.create(app, useLowPower) : OrientationProvider.create(app);
         final Observable<Float> magneticDirectionObservable = sensorDirectionObservable.onErrorResumeNext(new Func1<Throwable, Observable<? extends Float>>() {
             @Override
