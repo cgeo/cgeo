@@ -13,7 +13,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import rx.Subscription;
-import rx.android.view.ViewObservable;
+import rx.android.app.AppObservable;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.subscriptions.CompositeSubscription;
@@ -122,7 +122,7 @@ public class ImagesList {
 
             final ImageView imageView = (ImageView) inflater.inflate(R.layout.image_item, rowView, false);
             assert imageView != null;
-            subscriptions.add(ViewObservable.bindView(imageView, imgGetter.fetchDrawable(img.getUrl())).subscribe(new Action1<BitmapDrawable>() {
+            subscriptions.add(AppObservable.bindActivity(activity, imgGetter.fetchDrawable(img.getUrl())).subscribe(new Action1<BitmapDrawable>() {
                 @Override
                 public void call(final BitmapDrawable image) {
                     display(imageView, image, img, rowView);

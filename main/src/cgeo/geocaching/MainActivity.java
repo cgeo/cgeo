@@ -39,8 +39,8 @@ import com.google.zxing.integration.android.IntentResult;
 import org.apache.commons.lang3.StringUtils;
 
 import rx.Observable;
+import rx.android.app.AppObservable;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.android.view.ViewObservable;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -500,7 +500,7 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     public void updateCacheCounter() {
-        ViewObservable.bindView(countBubble, DataStore.getAllCachesCountObservable()).subscribe(new Action1<Integer>() {
+        AppObservable.bindActivity(this, DataStore.getAllCachesCountObservable()).subscribe(new Action1<Integer>() {
             @Override
             public void call(final Integer countBubbleCnt1) {
                 if (countBubbleCnt1 == 0) {
@@ -585,7 +585,9 @@ public class MainActivity extends AbstractActionBarActivity {
                             return formatAddress(address);
                         }
                     }).onErrorResumeNext(Observable.just(currentCoords.toString()));
-                    ViewObservable.bindView(navLocation, address).subscribe(new Action1<String>() {
+                    AppObservable.bindActivity(MainActivity.this, address)
+                            .subscribeOn(RxUtils.networkScheduler)
+                            .subscribe(new Action1<String>() {
                                 @Override
                                 public void call(final String address) {
                                     navLocation.setText(address);
