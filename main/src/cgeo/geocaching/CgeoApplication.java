@@ -82,8 +82,15 @@ public class CgeoApplication extends Application {
 
     @Override
     public void onLowMemory() {
-        Log.i("Cleaning applications cache.");
-        DataStore.removeAllFromCache();
+        onTrimMemory(TRIM_MEMORY_COMPLETE);
+    }
+
+    @Override
+    public void onTrimMemory(final int level) {
+        if (level >= TRIM_MEMORY_MODERATE) {
+            Log.i("Cleaning applications cache to trim memory");
+            DataStore.removeAllFromCache();
+        }
     }
 
     public boolean isLiveMapHintShownInThisSession() {
