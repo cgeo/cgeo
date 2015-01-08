@@ -89,18 +89,16 @@ public class Sensors {
         }
 
         // Combine the magnetic direction observable with the GPS when compass is disabled or speed is high enough.
-
         final AtomicBoolean useDirectionFromGps = new AtomicBoolean(false);
 
-        final Observable<Float> magneticDirectionObservable = RotationProvider.create(app, useLowPower).onErrorResumeNext(new Func1<Throwable, Observable<? extends Float>>() {
+        // The rotation sensor seems to be bogus on some devices. We should start with the orientation one, except when we explicitely
+        // want to use the low-power geomagnetic rotation sensor or when we do not have an orientation sensor.
+        final boolean useRotationSensor = (Settings.useLowPowerMode() && RotationProvider.hasGeomagneticRotationSensor(app)) || !OrientationProvider.hasOrientationSensor(app);
+        final Observable<Float> sensorDirectionObservable = useRotationSensor ? RotationProvider.create(app, useLowPower) : OrientationProvider.create(app);
+        final Observable<Float> magneticDirectionObservable = sensorDirectionObservable.onErrorResumeNext(new Func1<Throwable, Observable<? extends Float>>() {
             @Override
             public Observable<? extends Float> call(final Throwable throwable) {
-                return OrientationProvider.create(app);
-            }
-        }).onErrorResumeNext(new Func1<Throwable, Observable<? extends Float>>() {
-            @Override
-            public Observable<? extends Float> call(final Throwable throwable) {
-                Log.e("Device orientation will not be available as no suitable sensors were found, disabling compass");
+                Log.e("Device orientation is not available due to sensors error, disabling compass", throwable);
                 Settings.setUseCompass(false);
                 return Observable.<Float>never().startWith(0.0f);
             }
@@ -111,7 +109,7 @@ public class Sensors {
             }
         });
 
-        final Observable<Float> directionFromGpsObservable = geoDataObservable(true).filter(new Func1<GeoData, Boolean>() {
+        final Observable<Float> directionFromGpsObservable = geoDataObservableLowPower.filter(new Func1<GeoData, Boolean>() {
             @Override
             public Boolean call(final GeoData geoData) {
                 final boolean useGps = geoData.getSpeed() > 5.0f;
