@@ -39,6 +39,14 @@ public class RotationProvider extends LooperCallbacks<Float> implements SensorEv
         }
     }
 
+    public static boolean hasRotationSensor(final Context context) {
+        return ((SensorManager) context.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) != null;
+    }
+
+    public static boolean hasGeomagneticRotationSensor(final Context context) {
+        return ((SensorManager) context.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR) != null;
+    }
+
     @Override
     public void onSensorChanged(final SensorEvent event) {
         // On some Samsung devices, SensorManager#getRotationMatrixFromVector throws an exception if the rotation
