@@ -356,12 +356,14 @@
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Changelog</string>
+    <string name="about_system">System</string>
     <string name="about_donate">Donate</string>
     <string name="about_donation_more">Donate\ndevelopment</string>
     <string name="about_contributors">Contributors</string>
     <string name="about_license">License</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Help</string>
+    <string name="about_system_include">Please include the following system information when sending a bug report or asking for more information about c:geo:</string>
     
     <!-- settings -->
     <string name="settings_title_services">Services</string>
