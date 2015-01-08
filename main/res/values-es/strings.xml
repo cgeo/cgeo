@@ -17,7 +17,7 @@
   <string name="letterbox">Buzón híbrido</string>
   <string name="event">Eventos</string>
   <string name="mega">Mega-Eventos</string>
-  <string name="giga">Caché Giga-Evento</string>
+  <string name="giga">Giga-Eventos</string>
   <string name="earth">Educativos (Earth)</string>
   <string name="cito">Eventos Limpieza(CITO)</string>
   <string name="webcam">Webcams</string>
@@ -937,7 +937,7 @@
   <string name="attribute_cow_yes">Hay que tener cuidado con el ganado</string>
   <string name="attribute_cow_no">No hay que tener cuidado con el ganado</string>
   <string name="attribute_field_puzzle_yes">Puzzle en el lugar</string>
-  <string name="attribute_field_puzzle_no">Terreno no enrevesado</string>
+  <string name="attribute_field_puzzle_no">No es puzzle en el lugar</string>
   <string name="attribute_nightcache_yes">Caché nocturno</string>
   <string name="attribute_nightcache_no">Caché no nocturno</string>
   <string name="attribute_parkngrab_yes">Se puede aparcar justo al lado</string>

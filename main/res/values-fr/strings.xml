@@ -324,12 +324,14 @@
   <string name="list_not_available">La liste n\'est plus disponible, basculement vers la liste standard</string>
   <string name="about_version">Version</string>
   <string name="about_changelog">Versions</string>
+  <string name="about_system">Système</string>
   <string name="about_donate">Dons</string>
   <string name="about_donation_more">Don\ndéveloppement</string>
   <string name="about_contributors">Contributeurs</string>
   <string name="about_license">Licence</string>
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Aide</string>
+  <string name="about_system_include">Merci d\'inclure systématiquement les informations suivantes lorsque vous signalez un problème ou demandez plus d\'information à propos de c:geo:</string>
   <string name="settings_title_services">Services</string>
   <string name="settings_summary_services">Configuration des données de connexion et des services optionnels.</string>
   <string name="settings_title_appearance">Apparence</string>
