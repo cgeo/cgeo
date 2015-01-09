@@ -269,9 +269,7 @@
   <string name="caches_nearby">Por perto</string>
   <string name="caches_manage">Gerir</string>
   <string name="caches_remove_all">Remover todas</string>
-  <string name="caches_remove_all_confirm">Quer remover todas as %s caches da lista atual?</string>
   <string name="caches_remove_selected">Remover selecionadas</string>
-  <string name="caches_remove_selected_confirm">Quer remover as %s caches selecionadas do seu dispositivo?</string>
   <string name="caches_remove_progress">A remover caches</string>
   <string name="caches_delete_events">Eliminar eventos passados</string>
   <string name="caches_refresh_selected">Actualizar seleccionada</string>

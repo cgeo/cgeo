@@ -269,9 +269,7 @@
   <string name="caches_nearby">Blízké</string>
   <string name="caches_manage">Správa</string>
   <string name="caches_remove_all">Odstranit vše</string>
-  <string name="caches_remove_all_confirm">Opravdu chceš smazat všechny keše (%s) z tohoto seznamu?</string>
   <string name="caches_remove_selected">Odstranit vybrané</string>
-  <string name="caches_remove_selected_confirm">Opravdu chceš smazat vybrané keše (%s) z přístroje?</string>
   <string name="caches_remove_progress">Odstraňování keší</string>
   <string name="caches_delete_events">Vymazat staré události</string>
   <string name="caches_refresh_selected">Aktualizovat vybrané</string>

@@ -269,9 +269,7 @@
   <string name="caches_nearby">Propers</string>
   <string name="caches_manage">Administra</string>
   <string name="caches_remove_all">Suprimeix-los tots</string>
-  <string name="caches_remove_all_confirm">Voleu suprimir tots els %s catxés de la llista actual?</string>
   <string name="caches_remove_selected">Suprimeix els seleccionats</string>
-  <string name="caches_remove_selected_confirm">Voleu suprimir del dispositiu els %s catxés seleccionats?</string>
   <string name="caches_remove_progress">S\'estan eliminant els catxés</string>
   <string name="caches_delete_events">Elimina trobades passades</string>
   <string name="caches_refresh_selected">Actualitza els seleccionats</string>
@@ -324,12 +322,14 @@
   <string name="list_not_available">La llista ja no està disponible, s\'està canviant a la llista estàndard</string>
   <string name="about_version">Versió</string>
   <string name="about_changelog">Historial de canvis</string>
+  <string name="about_system">Sistema</string>
   <string name="about_donate">Donatiu</string>
   <string name="about_donation_more">Donatiu\nal desenvolupament</string>
   <string name="about_contributors">Col·laboradors</string>
   <string name="about_license">Llicència</string>
   <string name="about_apache_license"><a href="">Llicència Apache, versió 2.0</a></string>
   <string name="about_help">Ajuda</string>
+  <string name="about_system_include">Si us plau incloure la següent informació de sistema quan envieu un informe d\'error o demanar més informació sobre c:geo:</string>
   <string name="settings_title_services">Serveis</string>
   <string name="settings_summary_services">Configureu la informació del compte d\'usuari i l\'accés a serveis opcionals.</string>
   <string name="settings_title_appearance">Aparença</string>

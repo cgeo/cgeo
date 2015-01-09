@@ -265,9 +265,7 @@
   <string name="caches_nearby">V bližini</string>
   <string name="caches_manage">Upravljaj</string>
   <string name="caches_remove_all">Odstrani vse</string>
-  <string name="caches_remove_all_confirm">Ali želite odstraniti vseh %s zakladov iz trenutnega seznama?</string>
   <string name="caches_remove_selected">Odstrani izbrane</string>
-  <string name="caches_remove_selected_confirm">Ali želite odstraniti %s označenih zakladov iz vaše naprave?</string>
   <string name="caches_remove_progress">Odstranjujem zaklade</string>
   <string name="caches_delete_events">Izbriši pretekla srečanja</string>
   <string name="caches_refresh_selected">Osveži izbrane</string>

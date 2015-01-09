@@ -270,9 +270,7 @@
   <string name="caches_nearby">Netoliese</string>
   <string name="caches_manage">Valdyti</string>
   <string name="caches_remove_all">Pašalinti visas</string>
-  <string name="caches_remove_all_confirm">Ar norite pašalinti visas %s slėptuves iš dabartinio sąrašo?</string>
   <string name="caches_remove_selected">Pašalinti pasirinktą</string>
-  <string name="caches_remove_selected_confirm">Ar norite pašalinti pasirinktas %s slėptuves iš prietaiso?</string>
   <string name="caches_remove_progress">Pašalinamos slėptuvės</string>
   <string name="caches_delete_events">Ištrinti praeities įvykius</string>
   <string name="caches_refresh_selected">Atnaujinti pasirinktas</string>

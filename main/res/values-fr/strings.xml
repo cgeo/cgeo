@@ -269,9 +269,15 @@
   <string name="caches_nearby">Proches</string>
   <string name="caches_manage">Gérer</string>
   <string name="caches_remove_all">Tout supprimer</string>
-  <string name="caches_remove_all_confirm">Voulez-vous supprimer les %s caches de votre liste actuelle ?</string>
+  <plurals name="caches_remove_all_confirm">
+    <item quantity="one">Voulez-vous supprimer cette cache de la liste actuelle ?</item>
+    <item quantity="other">Voulez vous supprimer ces %d caches de la liste actuelle ?</item>
+  </plurals>
   <string name="caches_remove_selected">Supprimer la sélection</string>
-  <string name="caches_remove_selected_confirm">Voulez-vous supprimer de votre appareil les %s caches sélectionnées ?</string>
+  <plurals name="caches_remove_selected_confirm">
+    <item quantity="one">Voulez-vous supprimer cette cache de votre appareil ?</item>
+    <item quantity="other">Voulez-vous supprimer les %d caches sélectionnées de votre appareil ?</item>
+  </plurals>
   <string name="caches_remove_progress">Suppression des caches en cours</string>
   <string name="caches_delete_events">Effacer les événements précédents</string>
   <string name="caches_refresh_selected">Rafraîchir les caches sélectionnées</string>

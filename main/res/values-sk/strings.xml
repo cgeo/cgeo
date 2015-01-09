@@ -265,9 +265,7 @@
   <string name="caches_nearby">V okolí</string>
   <string name="caches_manage">Spravovať</string>
   <string name="caches_remove_all">Odstrániť všetky</string>
-  <string name="caches_remove_all_confirm">Chcete odstrániť všetky %s skrýše z aktuálneho zoznamu?</string>
   <string name="caches_remove_selected">Odstrániť vybraté</string>
-  <string name="caches_remove_selected_confirm">Chcete odstrániť %s vybraté skrýše z vášho zariadenia?</string>
   <string name="caches_remove_progress">Odstraňovanie skrýše</string>
   <string name="caches_delete_events">Odstrániť minulé Eventy</string>
   <string name="caches_refresh_selected">Obnoviť vybraté</string>

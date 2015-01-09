@@ -269,9 +269,7 @@
   <string name="caches_nearby">In der Nähe</string>
   <string name="caches_manage">Verwalten</string>
   <string name="caches_remove_all">Alle löschen</string>
-  <string name="caches_remove_all_confirm">Sollen alle %s Caches gelöscht werden?</string>
   <string name="caches_remove_selected">Ausgewählte löschen</string>
-  <string name="caches_remove_selected_confirm">Sollen die %s Caches gelöscht werden?</string>
   <string name="caches_remove_progress">Entferne Caches…</string>
   <string name="caches_delete_events">Vergangene Events löschen</string>
   <string name="caches_refresh_selected">Ausgewählte aktualisieren</string>
@@ -324,12 +322,14 @@
   <string name="list_not_available">Liste nicht mehr vorhanden, wechsele zur Standardliste</string>
   <string name="about_version">Version</string>
   <string name="about_changelog">Änderungen</string>
+  <string name="about_system">System</string>
   <string name="about_donate">Spenden</string>
   <string name="about_donation_more">Spenden für\nEntwicklung</string>
   <string name="about_contributors">Mitwirkende</string>
   <string name="about_license">Lizenz</string>
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Hilfe</string>
+  <string name="about_system_include">Bitte die folgende Systeminformation bei jedem Fehlerbericht oder bei Informationsanfragen zu c:geo mitsenden:</string>
   <string name="settings_title_services">Dienste</string>
   <string name="settings_summary_services">Konfiguriere Zugangsdaten und den Zugriff auf optionale Dienste.</string>
   <string name="settings_title_appearance">Erscheinungsbild</string>

@@ -267,9 +267,7 @@
   <string name="caches_nearby">În apropiere</string>
   <string name="caches_manage">Gestionează</string>
   <string name="caches_remove_all">Șterge toate</string>
-  <string name="caches_remove_all_confirm">Vrei să ştergi toate cele %s cutii din lista curenă?</string>
   <string name="caches_remove_selected">Şterge geocutiile selectate</string>
-  <string name="caches_remove_selected_confirm">Vrei să ştergi cele %s cutii selectate din dispozitiv?</string>
   <string name="caches_remove_progress">Ştergere geocutii</string>
   <string name="caches_delete_events">Şterge evenimentele trecute</string>
   <string name="caches_refresh_selected">Reîncarcă cutiile selectate</string>
