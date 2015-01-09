@@ -8,6 +8,7 @@
     · New: Add system information in \"About\" page and support mails\n
     · New: Improved NFC handling and support retrieval of cache and trackable URLs via NFC\n
     · New: Use alternate source to display the location on homescreen if Google fails\n
+    · New: Improve refresh speed by skipping static map loading if download limit is reached\n
     · Fix: Arrow on map not shown on some devices\n
     · Fix: Compass working erratically on some devices\n
     · Fix: Batch refresh of caches without progress\n
