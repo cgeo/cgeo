@@ -299,12 +299,12 @@
     <string name="caches_remove_all">Remove all</string>
     <plurals name="caches_remove_all_confirm">
         <item quantity="one">Do you want to remove this cache from current list?</item>
-        <item quantity="other">Do you want to remove all %s caches from current list?</item>
+        <item quantity="other">Do you want to remove all %d caches from current list?</item>
     </plurals>
     <string name="caches_remove_selected">Remove selected</string>
     <plurals name="caches_remove_selected_confirm">
         <item quantity="one">Do you want to remove this cache from your device?</item>
-        <item quantity="other">Do you want to remove the selected %s caches from your device?</item>
+        <item quantity="other">Do you want to remove the selected %d caches from your device?</item>
     </plurals>
     <string name="caches_remove_progress">Removing caches</string>
     <string name="caches_delete_events">Delete past events</string>
