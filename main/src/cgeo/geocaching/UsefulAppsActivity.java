@@ -45,6 +45,7 @@ public class UsefulAppsActivity extends AbstractActionBarActivity {
             this.packageName = packageName;
         }
 
+        @SuppressWarnings("deprecation")
         private void installFromMarket(final Activity activity) {
             try {
                 // allow also opening pure http URLs in addition to market packages
