@@ -6,17 +6,22 @@
     · New: Waypoints created from personal notes can now be deleted\n
     · New: More easy to use GCVote dialog in cache details\n
     · New: Add system information in \"About\" page and support mails\n
-    · Fix: Spanish translation: Use \"caché\" instead of \"escondite\"\n
+    · New: Improved NFC handling and support retrieval of cache and trackable URLs via NFC\n
+    · New: Use alternate source to display the location on homescreen if Google fails\n
     · Fix: Arrow on map not shown on some devices\n
     · Fix: Compass working erratically on some devices\n
+    · Fix: Batch refresh of caches without progress\n
     · Fix: Cache logs and pictures could be mixed up after batch refresh\n
+    · Fix: Spanish translation: Use \"caché\" instead of \"escondite\"\n
+    · Fix: Menu for scanning trackable and geocache codes wrongly hidden\n
     · Fix: Up navigation did not work when c:geo was invoked from another app\n
     · Fix: Rare crash when performing a backup of the cache database\n
+    · Fix: Rare crash when refreshing cache lists\n
     · Fix: Use phone language instead of country when requesting opencaching data\n
-    · Fix: Menu for scanning trackable and geocache codes wrongly hidden\n
     · Fix: Recognize Sygic voucher edition\n
     · Fix: Update locally stored GCVote when sending over network\n
     · Fix: Clearing of a cache only attribute is not recorded into the database\n
+    · Fix: Improve usability by lowering timeout for network requests\n
      \n
      \n    
     <b>Known Limitations/Bugs:</b>\n
