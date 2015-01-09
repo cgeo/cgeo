@@ -267,9 +267,7 @@
   <string name="caches_nearby">Najbliższe</string>
   <string name="caches_manage">Zarządzaj</string>
   <string name="caches_remove_all">Usuń wszystkie</string>
-  <string name="caches_remove_all_confirm">Czy chcesz usunąć wszystkie %s skrzynek z aktualnej listy?</string>
   <string name="caches_remove_selected">Usuń wybrane</string>
-  <string name="caches_remove_selected_confirm">Czy chcesz usunąć wybrane %s skrzynek z urządzenia?</string>
   <string name="caches_remove_progress">Usuwanie skrzynek</string>
   <string name="caches_delete_events">Usuń minione wydarzenia</string>
   <string name="caches_refresh_selected">Odśwież wybrane</string>
@@ -294,6 +292,7 @@
   <string name="caches_filter_personal_note">Zawiera notatkę</string>
   <string name="caches_filter_popularity">Ulubione</string>
   <string name="caches_filter_popularity_ratio">Ulubione [%]</string>
+  <string name="caches_filter_rating">Z oceną</string>
   <string name="caches_removing_from_history">Usuwam z Historii…</string>
   <string name="caches_clear_offlinelogs">Usuń wpisy offline</string>
   <string name="caches_clear_offlinelogs_message">Czy chcesz wyczyścić wpisy offline?</string>
@@ -326,6 +325,7 @@
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Pomoc</string>
   <string name="settings_title_services">Usługi</string>
+  <string name="settings_summary_services">Konfigurowanie informacji o koncie użytkownika i dostęp do usług opcjonalnych.</string>
   <string name="settings_title_appearance">Wygląd</string>
   <string name="settings_title_cachedetails">Szczegóły skrzynki</string>
   <string name="settings_title_offlinedata">Dane offline</string>
@@ -652,6 +652,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Zegarek Pebble</string>
+  <string name="cache_menu_vote">Głosuj</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Zapamiętany wpis</string>
   <string name="cache_status_found">Znaleziona</string>

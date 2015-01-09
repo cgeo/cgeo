@@ -269,9 +269,7 @@
   <string name="caches_nearby">I nærheten</string>
   <string name="caches_manage">Administrer</string>
   <string name="caches_remove_all">Fjern alle</string>
-  <string name="caches_remove_all_confirm">Vil du fjerne alle %s cacher fra gjeldende liste?</string>
   <string name="caches_remove_selected">Fjern valgte</string>
-  <string name="caches_remove_selected_confirm">Vil du slette de %s merkede cachene fra enheten?</string>
   <string name="caches_remove_progress">Fjerner cacher</string>
   <string name="caches_delete_events">Slett gamle eventer</string>
   <string name="caches_refresh_selected">Oppdater valgte</string>

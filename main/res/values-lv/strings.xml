@@ -255,9 +255,7 @@
   <string name="caches_nearby">Tuvumā</string>
   <string name="caches_manage">Pārvaldīt</string>
   <string name="caches_remove_all">Izdzēst visus</string>
-  <string name="caches_remove_all_confirm">Vai vēlaties izdzēst visus %s slēpņus no pašreizējā saraksta?</string>
   <string name="caches_remove_selected">Izdzēst atlasīto</string>
-  <string name="caches_remove_selected_confirm">Vai vēlaties noņemt atlasītos %s slēpņus no ierīces?</string>
   <string name="caches_remove_progress">Slēpņu noņemšana</string>
   <string name="caches_delete_events">Pagājušo notikumu dzēšana</string>
   <string name="caches_refresh_selected">Atjaunot atlasīto</string>

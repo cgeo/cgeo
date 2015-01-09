@@ -269,9 +269,7 @@
   <string name="caches_nearby">Cercanos</string>
   <string name="caches_manage">Gestionar</string>
   <string name="caches_remove_all">Eliminar todos</string>
-  <string name="caches_remove_all_confirm">¿Desea eliminar todos los cachés (%s) de la lista actual?</string>
   <string name="caches_remove_selected">Eliminar los seleccionados</string>
-  <string name="caches_remove_selected_confirm">¿Desea eliminar los %s cachés seleccionados de su dispositivo?</string>
   <string name="caches_remove_progress">Eliminando los cachés</string>
   <string name="caches_delete_events">Borrar eventos pasados</string>
   <string name="caches_refresh_selected">Actualizar seleccionados</string>
@@ -324,12 +322,14 @@
   <string name="list_not_available">La lista ya no está disponible, cambiando a la lista estándar</string>
   <string name="about_version">Versión</string>
   <string name="about_changelog">Cambios</string>
+  <string name="about_system">Sistema</string>
   <string name="about_donate">Donar</string>
   <string name="about_donation_more">Donar\nmas</string>
   <string name="about_contributors">Colaboradores</string>
   <string name="about_license">Licencia</string>
   <string name="about_apache_license"><a href="">Licencia Apache, Versión 2.0</a></string>
   <string name="about_help">Ayuda</string>
+  <string name="about_system_include">Por favor, incluya la siguiente información del sistema cuando envíe un informe de error o pida más información sobre c:geo:</string>
   <string name="settings_title_services">Servicios</string>
   <string name="settings_summary_services">Configura la información de la cuenta de usuario y accede a servicios opcionales.</string>
   <string name="settings_title_appearance">Aspecto</string>
@@ -765,11 +765,11 @@
   <string name="visit_tweet">Publicar en Twitter</string>
   <string name="map_map">Mapa</string>
   <string name="map_live">Mapa activo</string>
-  <string name="map_view_map">Ver mapa</string>
+  <string name="map_view_map">Elegir mapa</string>
   <string name="map_modes">Configuración del mapa</string>
   <string name="map_trail_show">Mostrar rastro</string>
   <string name="map_circles_show">Mostrar círculos</string>
-  <string name="map_mycaches_hide">Esconder cachés propios/encontrados</string>
+  <string name="map_mycaches_hide">Ocultar propios/encontr.</string>
   <string name="map_theme_builtin">Por defecto</string>
   <string name="map_theme_select">Seleccionar tema del mapa</string>
   <string name="map_live_enable">Activar en vivo</string>

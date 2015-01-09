@@ -269,9 +269,7 @@
   <string name="caches_nearby">Közeli</string>
   <string name="caches_manage">Kezelés</string>
   <string name="caches_remove_all">Összes eltávolítása</string>
-  <string name="caches_remove_all_confirm">Szeretnéd eltávolítani az összes (%s) ládát a jelenlegi csoportból?</string>
   <string name="caches_remove_selected">Kijelölt ládák eltávolítása</string>
-  <string name="caches_remove_selected_confirm">Szeretnéd a kijelölt %s ládát törölni az eszközödről?</string>
   <string name="caches_remove_progress">Ládák törlése</string>
   <string name="caches_delete_events">Korábbi események törlése</string>
   <string name="caches_refresh_selected">Kijelöltek frissítése</string>
