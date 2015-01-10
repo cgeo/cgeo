@@ -1,11 +1,18 @@
 package cgeo.geocaching.gcvote;
 
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.gcvote.GCVoteRatingBarUtil.OnRatingChangeListener;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.RxUtils;
 
 import org.eclipse.jdt.annotation.Nullable;
+
+import rx.functions.Action1;
+import rx.functions.Func0;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,6 +24,7 @@ import android.os.Build.VERSION_CODES;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 /**
  * Small dialog showing only a rating bar to vote on GCVote.com. Confirming the dialog will send the vote over the
@@ -67,8 +75,39 @@ public class GCVoteDialog {
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(GCVote.isValidRating(cache.getMyVote()));
     }
 
-    protected static void vote(final Geocache cache, final float rating, final @Nullable Runnable afterVoteSent) {
-        new GCVotePoster(cache, rating, afterVoteSent).execute();
+    private static void vote(final Geocache cache, final float rating, final @Nullable Runnable afterVoteSent) {
+        RxUtils.andThenOnUi(RxUtils.networkScheduler, new Func0<Boolean>() {
+            @Override
+            public Boolean call() {
+                try {
+                    if (GCVote.isValidRating(rating) && GCVote.isVotingPossible(cache)) {
+                        // send over network
+                        if (GCVote.setRating(cache, rating)) {
+                            // store locally
+                            cache.setMyVote(rating);
+                            DataStore.saveChangedCache(cache);
+                            return true;
+                        } else {
+                            Log.w("GCVoteDialog.vote: could not send vote");
+                        }
+                    }
+                } catch (final RuntimeException e) {
+                    Log.e("GCVoteDialog.vote: could not send vote", e);
+                }
+
+                return false;
+            }
+        }, new Action1<Boolean>() {
+            @Override
+            public void call(final Boolean status) {
+                final CgeoApplication context = CgeoApplication.getInstance();
+                final String text = context.getString(status ? R.string.gcvote_sent : R.string.err_gcvote_send_rating);
+                Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+                if (afterVoteSent != null) {
+                    afterVoteSent.run();
+                }
+            }
+        });
     }
 
 }
