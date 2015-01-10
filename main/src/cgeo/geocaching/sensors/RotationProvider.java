@@ -43,6 +43,7 @@ public class RotationProvider extends LooperCallbacks<Float> implements SensorEv
         return ((SensorManager) context.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) != null;
     }
 
+    @TargetApi(19)
     public static boolean hasGeomagneticRotationSensor(final Context context) {
         return ((SensorManager) context.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR) != null;
     }
