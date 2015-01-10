@@ -54,16 +54,6 @@
             android:background="@drawable/btn_green_selector"
             android:text="@string/down_pro" />
 
-        <Button
-            android:id="@+id/btn_lite"
-            style="@style/promoButton"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/btn_gray_selector"
-            android:padding="6dp"
-            android:text="@string/down_lite" />
-
     </LinearLayout>
 
 </ScrollView>
