@@ -11,10 +11,12 @@ import android.util.Log;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
 
 /**
  * Test runner which derives from the newer Google instrumentation test runner used by the Espresso test framework. It
- * adds junit report functionality by cloning the behaviour of the {@link JUnitReportTestRunner}.
+ * adds junit report functionality by cloning the behavior of the {@link JUnitReportTestRunner}.
  *
  */
 public class CgeoTestRunner extends GoogleInstrumentationTestRunner {
@@ -86,19 +88,30 @@ public class CgeoTestRunner extends GoogleInstrumentationTestRunner {
 
     @Override
     public void start() {
-        mListener = new JUnitReportListener(getContext(), getTargetContext(), mReportFile, mReportDir, mFilterTraces, mMultiFile);
-        try {
-            Class<?> c = getClass();
-            Field bridgeTestRunner = c.getSuperclass().getDeclaredField("bridgeTestRunner");
-            bridgeTestRunner.setAccessible(true);
-            Object obj = bridgeTestRunner.get(this);
-            Method m = obj.getClass().getDeclaredMethod("getAndroidTestRunner", (Class[]) null);
-            AndroidTestRunner androidTestRunner = (AndroidTestRunner) m.invoke(obj);
-            androidTestRunner.addTestListener(mListener);
-        } catch (NoSuchFieldException | InvocationTargetException | IllegalAccessException | NoSuchMethodException | SecurityException x) {
-            Log.e(LOG_TAG, x.toString());
-        }
+        makeAndroidTestRunnerAccessible();
         super.start();
+    }
+
+    private void makeAndroidTestRunnerAccessible() {
+        AccessController.doPrivileged(new PrivilegedAction<Void>() {
+            @Override
+            public Void run() {
+                mListener = new JUnitReportListener(getContext(), getTargetContext(), mReportFile, mReportDir, mFilterTraces, mMultiFile);
+                try {
+                    Class<?> c = getClass();
+                    Field bridgeTestRunner = c.getSuperclass().getDeclaredField("bridgeTestRunner");
+                    bridgeTestRunner.setAccessible(true);
+                    Object obj = bridgeTestRunner.get(this);
+                    Method m = obj.getClass().getDeclaredMethod("getAndroidTestRunner", (Class[]) null);
+                    AndroidTestRunner androidTestRunner = (AndroidTestRunner) m.invoke(obj);
+                    androidTestRunner.addTestListener(mListener);
+                } catch (NoSuchFieldException | InvocationTargetException | IllegalAccessException
+                        | NoSuchMethodException | SecurityException x) {
+                    Log.e(LOG_TAG, x.toString());
+                }
+                return null;
+            }
+        });
     }
 
     @Override
