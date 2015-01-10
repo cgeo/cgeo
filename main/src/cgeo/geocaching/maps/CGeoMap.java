@@ -460,7 +460,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         mapView.getMapController().setCenter(Settings.getMapCenter());
 
         if (null == mapStateIntent) {
-            followMyLocation &= mapMode != MapMode.LIVE;
+            followMyLocation &= mapMode == MapMode.LIVE;
         } else {
             followMyLocation = 1 == mapStateIntent[3];
             if ((overlayCaches.getCircles() ? 1 : 0) != mapStateIntent[4]) {
