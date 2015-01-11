@@ -49,7 +49,8 @@ public class GeocoderTest extends CGeoTestCase {
         if (withAddress) {
             assertThat(StringUtils.lowerCase(address.getAddressLine(0))).as(describe("street address", geocoder)).startsWith("46 rue barrault");
             assertThat(address.getLocality()).as(describe("locality", geocoder)).isEqualTo("Paris");
-            assertThat(address.getCountryName()).as(describe("country name", geocoder)).isEqualTo("France");
+            assertThat(address.getCountryCode()).as(describe("country code", geocoder)).isEqualTo("FR");
+            // don't assert on country name, as this can be localized, e.g. with the mapquest geocoder
         }
     }
 
