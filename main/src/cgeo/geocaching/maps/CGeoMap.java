@@ -989,7 +989,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                         final boolean needsRepaintForHeading = needsRepaintForHeading();
 
                         if (needsRepaintForDistanceOrAccuracy) {
-                            if (map.followMyLocation) {
+                            if (CGeoMap.followMyLocation) {
                                 map.centerMap(new Geopoint(currentLocation));
                             }
                         }
