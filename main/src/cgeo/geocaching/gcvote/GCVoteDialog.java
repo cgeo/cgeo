@@ -87,9 +87,8 @@ public class GCVoteDialog {
                             cache.setMyVote(rating);
                             DataStore.saveChangedCache(cache);
                             return true;
-                        } else {
-                            Log.w("GCVoteDialog.vote: could not send vote");
                         }
+                        Log.w("GCVoteDialog.vote: could not send vote");
                     }
                 } catch (final RuntimeException e) {
                     Log.e("GCVoteDialog.vote: could not send vote", e);
