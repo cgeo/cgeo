@@ -63,19 +63,22 @@ import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget.Type;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Observable;
 import rx.Observable.OnSubscribe;
+import rx.Scheduler.Worker;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
+import rx.subjects.ReplaySubject;
+import rx.subscriptions.CompositeSubscription;
+import rx.subscriptions.Subscriptions;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -1185,11 +1188,37 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      */
 
     private void loadDetails(final CancellableHandler handler, final List<Geocache> caches) {
-        final List<Geocache> allCaches = Settings.isStoreOfflineMaps() ?
-                ListUtils.union(ListUtils.selectRejected(caches, Geocache.hasStaticMap),
-                        ListUtils.select(caches, Geocache.hasStaticMap)) :
-                caches;
-        final Observable<Geocache> loaded = Observable.from(allCaches).flatMap(new Func1<Geocache, Observable<Geocache>>() {
+        final Observable<Geocache> allCaches;
+        final Subscription generator;
+        if (Settings.isStoreOfflineMaps()) {
+            // The list of caches will be generated in the background, putting the caches without static maps first.
+            final ReplaySubject<Geocache> withStaticMaps = ReplaySubject.create(caches.size());
+            final ReplaySubject<Geocache> withoutStaticMaps = ReplaySubject.create(caches.size());
+            final Worker worker = Schedulers.io().createWorker();
+            generator = worker.schedule(new Action0() {
+                @Override
+                public void call() {
+                    for (final Geocache cache : caches) {
+                        if (worker.isUnsubscribed()) {
+                            // Do not continue to check for static maps if the user pressed cancel.
+                            return;
+                        }
+                        if (cache.hasStaticMap()) {
+                            withStaticMaps.onNext(cache);
+                        } else {
+                            withoutStaticMaps.onNext(cache);
+                        }
+                    }
+                    withStaticMaps.onCompleted();
+                    withoutStaticMaps.onCompleted();
+                }
+            });
+            allCaches = Observable.concat(withoutStaticMaps, withStaticMaps);
+        } else {
+            allCaches = Observable.from(caches);
+            generator = Subscriptions.empty();
+        }
+        final Observable<Geocache> loaded = allCaches.flatMap(new Func1<Geocache, Observable<Geocache>>() {
             @Override
             public Observable<Geocache> call(final Geocache cache) {
                 return Observable.create(new OnSubscribe<Geocache>() {
@@ -1208,7 +1237,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
             }
         });
-        handler.unsubscribeIfCancelled(loaded.subscribe());
+        handler.unsubscribeIfCancelled(new CompositeSubscription(generator, loaded.subscribe()));
     }
 
     private class DropDetailsTask extends AsyncTaskWithProgress<Geocache, Void> {
