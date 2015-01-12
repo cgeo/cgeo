@@ -134,7 +134,7 @@
   <string name="err_unvalidated_account">Du skal først validere din konto på geocaching.com.</string>
   <string name="err_unpublished">Den forespurgte cache er ikke frigivet.</string>
   <string name="err_premium_only">Denne cache er kun tilgængelig for Geocaching.com Premium-medlemmer.</string>
-  <string name="err_detail_open">Beklager, c:geo kan ikke indlæse cachedetaljer.</string>
+  <string name="err_detail_open">c:geo kan ikke indlæse cachedetaljer.</string>
   <string name="err_detail_cache">Beklager, c:geo kan ikke vise denne cache.</string>
   <string name="err_detail_cache_find">c:geo kan ikke finde geocachen</string>
   <string name="err_detail_cache_find_some">c:geo kan ikke finde denne denne geocache.</string>
