@@ -269,6 +269,10 @@
   <string name="caches_nearby">Por perto</string>
   <string name="caches_manage">Gerir</string>
   <string name="caches_remove_all">Remover todas</string>
+  <plurals name="caches_remove_all_confirm">
+    <item quantity="one">Quer remover esta cache da lista actual?</item>
+    <item quantity="other">Quer remover todas as %d caches da lista actual?</item>
+  </plurals>
   <string name="caches_remove_selected">Remover selecionadas</string>
   <string name="caches_remove_progress">A remover caches</string>
   <string name="caches_delete_events">Eliminar eventos passados</string>
@@ -322,13 +326,16 @@
   <string name="list_not_available">A lista já não se encontra disponível, alterando para lista padrão</string>
   <string name="about_version">Versão</string>
   <string name="about_changelog">Changelog</string>
+  <string name="about_system">Sistema</string>
   <string name="about_donate">Doar</string>
   <string name="about_donation_more">Doar\ndesenvolvimento</string>
   <string name="about_contributors">Contribuidores</string>
   <string name="about_license">Licença</string>
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Ajuda</string>
+  <string name="about_system_include">Por favor inclua as seguintes informações de sistema ao enviar um relatório de bug ou ao pedir mais informações sobre c:geo:</string>
   <string name="settings_title_services">Serviços</string>
+  <string name="settings_summary_services">Configure a informação da conta de utilizador e o acesso a serviços opcionais.</string>
   <string name="settings_title_appearance">Aparência</string>
   <string name="settings_title_cachedetails">Detalhos da Cache</string>
   <string name="settings_title_offlinedata">Dados Offline</string>

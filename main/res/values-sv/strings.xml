@@ -125,6 +125,7 @@
   <string name="err_login">Inloggningsinformationen ej sparad</string>
   <string name="err_login_failed_toast">Tyvärr kan c:geo inte logga in. c:geo kommer att köra i offline läge med sparade cacher. Kontrollera dina inloggningsuppgifter och aktivera din internetanslutning.</string>
   <string name="err_unknown">Okänt fel</string>
+  <string name="err_unknown_address">c:geo kunde inte associera adressen till en plats</string>
   <string name="err_comm">Okänt kommunikationsfel</string>
   <string name="err_missing_auth">Användarnamn och/eller lösenord saknas.</string>
   <string name="err_wrong">Felaktiga inloggningsuppgifter</string>
@@ -268,6 +269,10 @@
   <string name="caches_nearby">Nära</string>
   <string name="caches_manage">Hantera</string>
   <string name="caches_remove_all">Ta bort alla</string>
+  <plurals name="caches_remove_all_confirm">
+    <item quantity="one">Vill du radera denna cachen från den här listan?</item>
+    <item quantity="other">Vill du radera dessa %d cacher från den här listan?</item>
+  </plurals>
   <string name="caches_remove_selected">Ta bort valda</string>
   <string name="caches_remove_progress">Tar bort cacher</string>
   <string name="caches_delete_events">Ta bort gamla event</string>
@@ -293,6 +298,7 @@
   <string name="caches_filter_personal_note">Med personlig anteckning</string>
   <string name="caches_filter_popularity">Favoriter</string>
   <string name="caches_filter_popularity_ratio">Favoriter [%]</string>
+  <string name="caches_filter_personal_data">Med personlig info</string>
   <string name="caches_filter_rating">Med betyg</string>
   <string name="caches_filter_own_rating">Med eget betyg</string>
   <string name="caches_removing_from_history">Tar bort från historik…</string>
@@ -327,6 +333,7 @@
   <string name="about_license">Licens</string>
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Hjälp</string>
+  <string name="about_system_include">Vänligen inkludera följande systeminformation när du skickar en felrapport eller ber om mer information om c:geo:</string>
   <string name="settings_title_services">Tjänster</string>
   <string name="settings_summary_services">Ställ in kontoinformation och tillgång till valbara tjänster.</string>
   <string name="settings_title_appearance">Utseende</string>

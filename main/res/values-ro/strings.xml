@@ -270,6 +270,11 @@
   <string name="caches_nearby">În apropiere</string>
   <string name="caches_manage">Gestionează</string>
   <string name="caches_remove_all">Șterge toate</string>
+  <plurals name="caches_remove_all_confirm">
+    <item quantity="one">Vrei să ştergi această geocutie din lista curentă?</item>
+    <item quantity="few">Vrei să ştergi toate cele %d geocutii din lista curentă?</item>
+    <item quantity="other">Vrei să ştergi toate cele %d geocutii din lista curentă?</item>
+  </plurals>
   <string name="caches_remove_selected">Şterge geocutiile selectate</string>
   <string name="caches_remove_progress">Ştergere geocutii</string>
   <string name="caches_delete_events">Şterge evenimentele trecute</string>
