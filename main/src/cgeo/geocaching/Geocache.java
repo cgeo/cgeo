@@ -38,7 +38,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
-import org.apache.commons.collections4.Predicate;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -1674,13 +1673,6 @@ public class Geocache implements IWaypoint {
     public boolean hasStaticMap() {
         return StaticMapsProvider.hasStaticMap(this);
     }
-
-    public static final Predicate<Geocache> hasStaticMap = new Predicate<Geocache>() {
-        @Override
-        public boolean evaluate(final Geocache cache) {
-            return cache.hasStaticMap();
-        }
-    };
 
     @NonNull
     public Collection<Image> getImages() {
