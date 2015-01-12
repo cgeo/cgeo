@@ -71,7 +71,7 @@
   <string name="log_retractlisting">Retract Listing</string>
   <string name="log_marked_missing">Markeret som mangler</string>
   <string name="log_tb_nothing">Gør intet</string>
-  <string name="log_tb_visit">Besøg</string>
+  <string name="log_tb_visit">Besøgt</string>
   <string name="log_tb_drop">Læg her</string>
   <string name="log_tb_changeall">Ændr alle</string>
   <string name="log_save">Gem offline</string>
@@ -136,8 +136,8 @@
   <string name="err_premium_only">Denne cache er kun tilgængelig for Geocaching.com Premium-medlemmer.</string>
   <string name="err_detail_open">Beklager, c:geo kan ikke indlæse cachedetaljer.</string>
   <string name="err_detail_cache">Beklager, c:geo kan ikke vise denne cache.</string>
-  <string name="err_detail_cache_find">Beklager, c:geo kan ikke vise denne cache</string>
-  <string name="err_detail_cache_find_some">Beklager, c:geo kan ikke vise denne cache.</string>
+  <string name="err_detail_cache_find">c:geo kan ikke finde geocachen</string>
+  <string name="err_detail_cache_find_some">c:geo kan ikke finde denne denne geocache.</string>
   <string name="err_detail_cache_find_any">c:geo kan ikke finde nogen geocacher.</string>
   <string name="err_detail_google_maps_limit_reached">c: geo kunne ikke hente statisk kort. Måske er det tilladte maksimum for Google Maps API forespørgsler overskredet.</string>
   <string name="err_detail_no_spoiler">c:geo fandt ingen spoilerbilleder til denne cache.</string>
@@ -269,6 +269,10 @@
   <string name="caches_nearby">I nærheden</string>
   <string name="caches_manage">Administrér</string>
   <string name="caches_remove_all">Fjern alle</string>
+  <plurals name="caches_remove_all_confirm">
+    <item quantity="one">Vil du fjerne denne cache fra den aktuelle liste?</item>
+    <item quantity="other">Ønsker du at fjerne alle %d cacher fra den aktuelle liste?</item>
+  </plurals>
   <string name="caches_remove_selected">Fjern valgte</string>
   <string name="caches_remove_progress">Fjerner cacher</string>
   <string name="caches_delete_events">Slet tidligere begivenheder</string>
@@ -322,12 +326,14 @@
   <string name="list_not_available">Listen er ikke længere tilgængelig, skifter til standard liste</string>
   <string name="about_version">Version</string>
   <string name="about_changelog">Ændringslog</string>
+  <string name="about_system">System</string>
   <string name="about_donate">Donér</string>
   <string name="about_donation_more">Donér\nudvikling</string>
   <string name="about_contributors">Bidragsydere</string>
   <string name="about_license">Licens</string>
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Hjælp</string>
+  <string name="about_system_include">Vedhæft følgende systemoplysninger når du sender en fejlrapport eller beder om yderligere oplysninger om c:geo:</string>
   <string name="settings_title_services">Tjenester</string>
   <string name="settings_summary_services">Konfigurér oplysninger om brugerkonto og adgang til valgfrie tjenester.</string>
   <string name="settings_title_appearance">Udseende</string>

@@ -75,7 +75,7 @@
   <string name="log_tb_drop">Nometa</string>
   <string name="log_tb_changeall">Mainīt visus</string>
   <string name="log_save">Saglabāt bezsaistes režīmā</string>
-  <string name="log_saving">Apmeklējuma ieraksta nosūtīšana...</string>
+  <string name="log_saving">Apmeklējuma ieraksta nosūtīšana…</string>
   <string name="log_saving_and_uploading">Pieraksta nosūtīšana un bildes augšupielāde…</string>
   <string name="log_clear">Notīrīt</string>
   <string name="log_post_not_possible">Ielādē apmeklējuma ierasta lapu…</string>
@@ -125,6 +125,7 @@
   <string name="err_login">Nav saglabāta pieteikšanās informācija</string>
   <string name="err_login_failed_toast">c:geo nevar pierakstīties. c:geo darbojas bezsaistē ar bezsaistē saglabātajiem slēpņiem. Pārbaudiet ielogošanās iestatījumus vai iespējojiet interneta savienojumu.</string>
   <string name="err_unknown">Nezināma kļūda</string>
+  <string name="err_unknown_address">c:geo nevarēja atrast kartē šo adresi ar pašreizējo atrašanās vietu</string>
   <string name="err_comm">Nezināma sakaru kļūda</string>
   <string name="err_missing_auth">Nav uzstādīts lietotājvārds un/vai parole.</string>
   <string name="err_wrong">Pieteikšanās informācija ir nepareiza</string>
@@ -172,6 +173,8 @@
   <string name="err_log_load_data_again">c:geo nevar ielādēt datus, kas nepieciešami lai pierakstītu apmeklējumu. Mēģiniet vēlreiz.
 </string>
   <string name="err_log_load_data_still">c:geo joprojām ielādē datus, kas vajadzīgi, lai pierakstītos. Lūdzu, uzgaidiet nedaudz ilgāk.</string>
+  <string name="err_log_post_failed">Šķiet, ka jūsu apmeklējuma ieraksts nav pievienots. Lūdzu, pārbaudiet to slēpņa mājas lapā.</string>
+  <string name="err_logimage_post_failed">Šķiet, ka jūsu apmeklējuma ieraksta attēls nav augšupielādēts. Lūdzu, pārbaudiet to slēpņa mājas lapā.</string>
   <string name="err_search_address_forgot">c:geo aizmirsa adresi, kuru mēģinājāt atrast.</string>
   <string name="err_parse_dist">c:geo nevar parsēt attālumu.</string>
   <string name="warn_save_nothing">Šeit nekā nav ko saglabāt.</string>
@@ -189,6 +192,7 @@
   <string name="warn_load_images">c:geo neizdevās ielādēt attēlus.</string>
   <string name="warn_nonexistant_mapfile">Izvēlētais kartes fails nepastāv. \nBezsaistes kartes nav pieejamas.</string>
   <string name="warn_rendertheme_missing">Kartes tēma nav atrasta.</string>
+  <string name="warn_no_pocket_query_found">Tiešsaistē nav atrasts Pocket queries.</string>
   <string name="info_log_posted">c:geo veiksmīgi iesniedza pierakstu.</string>
   <string name="info_log_saved">c:geo veiksmīgi saglabāja pierakstu.</string>
   <string name="info_log_cleared">Ieraksts tika dzēsts.</string>
@@ -280,6 +284,9 @@
   <string name="caches_filter_personal_note">Ar personisku piezīmi</string>
   <string name="caches_filter_popularity">Pēc favorītu daudzuma</string>
   <string name="caches_filter_popularity_ratio">Pēc favorītu [%]</string>
+  <string name="caches_filter_personal_data">Ar personīgiem datiem</string>
+  <string name="caches_filter_rating">Ar reitingu</string>
+  <string name="caches_filter_own_rating">Ar paša vērtējumu</string>
   <string name="caches_removing_from_history">Dzēš no vēstures…</string>
   <string name="caches_clear_offlinelogs">Notīrīt bezsaistes ierakstus</string>
   <string name="caches_clear_offlinelogs_message">Vai izdzēst bezsaistes ierakstus?</string>
@@ -305,13 +312,16 @@
   <string name="list_not_available">Saraksts vairs nav pieejams, pārslēdzas uz standarta sarakstu</string>
   <string name="about_version">Versija</string>
   <string name="about_changelog">Izmaiņas</string>
+  <string name="about_system">Sistēma</string>
   <string name="about_donate">Ziedot</string>
   <string name="about_donation_more">Ziedot\nattīstītājiem</string>
   <string name="about_contributors">Atbalstītāji</string>
   <string name="about_license">Licences</string>
   <string name="about_apache_license"><a href=""> Apache License, Version 2.0</a></string>
   <string name="about_help">Palīdzība</string>
+  <string name="about_system_include">Lūdzu, iekļaujiet sekojošu informāciju par sistēmu, nosūtot kļūdas ziņojumu vai prasot vairāk informācijas par c:geo:</string>
   <string name="settings_title_services">Servisi</string>
+  <string name="settings_summary_services">Konfigurēt lietotāja konta informāciju un papildu pakalpojumu pieejamību.</string>
   <string name="settings_title_appearance">Izskats</string>
   <string name="settings_title_cachedetails">Slēpņu dati</string>
   <string name="settings_title_offlinedata">Bezsaistes dati</string>
@@ -349,6 +359,8 @@
   <string name="settings_activate_oc_uk">Aktivizēt</string>
   <string name="init_oc_uk_description">Atļaut c:geo un opencaching.org.uk meklēt slēpņus un piekļūt/filtrēt savus atrastos slēpņus.</string>
   <string name="init_gcvote">GCvote.com</string>
+  <string name="init_gcvote_password_description">Lai spētu novērtēt slēpni, jums jāseko instrukcijām GCVote.com mājas lapā un jāievada jūsu GCVote parole šeit.</string>
+  <string name="gcvote_sent">Balsojums veiksmīgi nosūtīts</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivizēt</string>
   <string name="init_username">Lietotājvārds</string>
@@ -393,7 +405,7 @@
   <string name="init_showwaypoint_description">Ja skaits ir mazāks nekā norādītais attēlojamo slēpņu skaits, tad papildus kartē tiek parādīti arī to Starpposmi.</string>
   <string name="init_summary_offline_wp">Saglabāt Starpposmu statiskās kartes lietošanai bezsaistē</string>
   <string name="init_save_log_img">Saglabāt attēlus</string>
-  <string name="init_log_offline">Bezsaistes pierakstīšanās</string>
+  <string name="init_log_offline">Bezsaistes apmeklējuma reģistrācija</string>
   <string name="init_summary_log_offline">Iespējot bezsaistes pierakstīšanos (nerādīs tiešsaistes pieteikšanās logu ekrānā, kad reģistrē atradumu, netiks augšupielādēti pieraksta teksti)</string>
   <string name="init_livelist">Rādīt virzienu</string>
   <string name="init_summary_livelist">Rādīt slēpņu virzienus sarakstā</string>
@@ -537,7 +549,7 @@
   <string name="cache_hint">Mājiens</string>
   <string name="cache_logs">Apmeklējumu žurnāls</string>
   <string name="cache_logs_friends_and_own">Draugu/paša ieraksti</string>
-  <string name="cache_dialog_loading_details">Ielādē slēpņa datus...</string>
+  <string name="cache_dialog_loading_details">Ielādē slēpņa datus…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Ielādē lapu</string>
   <string name="cache_dialog_loading_details_status_details">Apstrādā detaļas</string>
   <string name="cache_dialog_loading_details_status_spoilers">Ielādē \"spoiler\" attēlus</string>
@@ -547,6 +559,7 @@
   <string name="cache_dialog_loading_details_status_cache">Apkopo datus</string>
   <string name="cache_dialog_loading_details_status_render">Gatavo attēlošanai</string>
   <string name="cache_dialog_offline_save_title">Bezsaistes režīmā</string>
+  <string name="cache_dialog_offline_save_message">Saglabā slēpni bezsaistes lietošanai...</string>
   <string name="cache_dialog_offline_drop_title">Bezsaistes režīmā</string>
   <string name="cache_dialog_offline_drop_message">Notiek slēpņa izdzēšana no ierīces atmiņas…</string>
   <string name="cache_dialog_refresh_title">Atjaunot</string>
@@ -564,6 +577,7 @@
   <string name="cache_menu_streetview">Ielas skats (Street View)</string>
   <string name="cache_menu_browser">Atvērt pārlūkprogrammā</string>
   <string name="cache_menu_visit">Reģistrēt atradumu</string>
+  <string name="cache_menu_visit_offline">Viena klikšķa bezsaistes apmeklējuma reģistrācija</string>
   <string name="cache_menu_spoilers">\"Spoiler\" bilde (-es)</string>
   <string name="cache_menu_event">Pievienot kalendāram</string>
   <string name="cache_menu_details">Sīkāka informācija</string>
@@ -572,7 +586,9 @@
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_pebble">Pebble</string>
+  <string name="cache_menu_vote">Balsot</string>
   <string name="cache_status">Statuss</string>
+  <string name="cache_status_offline_log">Apmeklējums ieraksts saglabāts</string>
   <string name="cache_status_found">Atrasts</string>
   <string name="cache_not_status_found">Nav atrasts</string>
   <string name="cache_status_archived">Arhivēts</string>

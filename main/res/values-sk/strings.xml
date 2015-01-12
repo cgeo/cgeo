@@ -265,7 +265,17 @@
   <string name="caches_nearby">V okolí</string>
   <string name="caches_manage">Spravovať</string>
   <string name="caches_remove_all">Odstrániť všetky</string>
+  <plurals name="caches_remove_all_confirm">
+    <item quantity="one">Chcete odstrániť túto skrýšu z tohoto zoznamu?</item>
+    <item quantity="few">Chcete odstrániť tieto %d skrýše z tohoto zoznamu?</item>
+    <item quantity="other">Chcete odstrániť týchto %d skrýš z tohoto zoznamu?</item>
+  </plurals>
   <string name="caches_remove_selected">Odstrániť vybraté</string>
+  <plurals name="caches_remove_selected_confirm">
+    <item quantity="one">Chcete odstrániť túto skrýšu zo zariadenia?</item>
+    <item quantity="few">Chcete odstrániť tieto %d skrýše zo zariadenia?</item>
+    <item quantity="other">Chcete odstrániť týchto %d skrýš zo zariadenia?</item>
+  </plurals>
   <string name="caches_remove_progress">Odstraňovanie skrýše</string>
   <string name="caches_delete_events">Odstrániť minulé Eventy</string>
   <string name="caches_refresh_selected">Obnoviť vybraté</string>
@@ -318,12 +328,14 @@
   <string name="list_not_available">Zoznam nie je k dispozícii, prechod na štandardný zoznam</string>
   <string name="about_version">Verzia</string>
   <string name="about_changelog">Zmeny</string>
+  <string name="about_system">Systém</string>
   <string name="about_donate">Podpora vývoja</string>
   <string name="about_donation_more">Podporte\nvývoj</string>
   <string name="about_contributors">Prispievatelia</string>
   <string name="about_license">Licencia</string>
   <string name="about_apache_license"><a href=""> Apache License, verzia 2.0</a></string>
   <string name="about_help">Pomoc</string>
+  <string name="about_system_include">Keď budete posielať správu o chybe alebo budete chcieť vedieť viac o c:geo, uveďte, prosím, nasledujúce systémové informácie:</string>
   <string name="settings_title_services">Služby</string>
   <string name="settings_summary_services">Konfigurovať informácie o používateľskom konte a prístup k voliteľným službám.</string>
   <string name="settings_title_appearance">Vzhľad</string>
