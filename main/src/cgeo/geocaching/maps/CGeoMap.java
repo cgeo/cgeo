@@ -153,7 +153,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private MapTokens tokens = null;
     private boolean noMapTokenShowed = false;
     // map status data
-    private boolean followMyLocation = false;
+    private static boolean followMyLocation = true;
     // threads
     private Subscription loadTimer;
     private LoadDetails loadDetailsThread = null;
@@ -460,7 +460,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         mapView.getMapController().setCenter(Settings.getMapCenter());
 
         if (null == mapStateIntent) {
-            followMyLocation = mapMode == MapMode.LIVE;
+            followMyLocation &= mapMode == MapMode.LIVE;
         } else {
             followMyLocation = 1 == mapStateIntent[3];
             if ((overlayCaches.getCircles() ? 1 : 0) != mapStateIntent[4]) {
