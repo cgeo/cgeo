@@ -269,7 +269,15 @@
   <string name="caches_nearby">In der Nähe</string>
   <string name="caches_manage">Verwalten</string>
   <string name="caches_remove_all">Alle löschen</string>
+  <plurals name="caches_remove_all_confirm">
+    <item quantity="one">Soll der Cache von dieser Liste gelöscht werden?</item>
+    <item quantity="other">Sollen alle %d Caches von dieser Liste gelöscht werden?</item>
+  </plurals>
   <string name="caches_remove_selected">Ausgewählte löschen</string>
+  <plurals name="caches_remove_selected_confirm">
+    <item quantity="one">Soll dieser Cache gelöscht werden?</item>
+    <item quantity="other">Sollen die %d ausgewählten Caches gelöscht werden?</item>
+  </plurals>
   <string name="caches_remove_progress">Entferne Caches…</string>
   <string name="caches_delete_events">Vergangene Events löschen</string>
   <string name="caches_refresh_selected">Ausgewählte aktualisieren</string>

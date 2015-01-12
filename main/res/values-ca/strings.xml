@@ -269,7 +269,15 @@
   <string name="caches_nearby">Propers</string>
   <string name="caches_manage">Administra</string>
   <string name="caches_remove_all">Suprimeix-los tots</string>
+  <plurals name="caches_remove_all_confirm">
+    <item quantity="one">Voleu suprimir aquest catxé de la llista actual?</item>
+    <item quantity="other">Voleu suprimir tots els %d catxés de la llista actual?</item>
+  </plurals>
   <string name="caches_remove_selected">Suprimeix els seleccionats</string>
+  <plurals name="caches_remove_selected_confirm">
+    <item quantity="one">Voleu suprimir aquest catxé del dispositiu?</item>
+    <item quantity="other">Voleu suprimir els %d catxés seleccionats del dispositiu?</item>
+  </plurals>
   <string name="caches_remove_progress">S\'estan eliminant els catxés</string>
   <string name="caches_delete_events">Elimina trobades passades</string>
   <string name="caches_refresh_selected">Actualitza els seleccionats</string>

@@ -8,12 +8,12 @@
   <string name="about">O aplikaci</string>
   <string name="latitude">Zeměpisná šířka</string>
   <string name="longitude">Zeměpisná délka</string>
-  <string name="settings_titlebar">c:geo Nastavení</string>
+  <string name="settings_titlebar">Nastavení c:geo</string>
   <string name="all_types">Všechny typy keší</string>
   <string name="traditional">Tradiční keš</string>
   <string name="multi">Multi keš</string>
   <string name="mystery">Mystery keš</string>
-  <string name="letterbox">Dopisní schránka</string>
+  <string name="letterbox">Letterbox keš</string>
   <string name="event">Událost</string>
   <string name="mega">Mega-událost</string>
   <string name="giga">Giga event</string>
@@ -322,12 +322,14 @@
   <string name="list_not_available">Seznam již není dostupný, přepínání na výchozí seznam</string>
   <string name="about_version">Verze</string>
   <string name="about_changelog">Změny</string>
+  <string name="about_system">Systém</string>
   <string name="about_donate">Podpora vývoje</string>
   <string name="about_donation_more">Podpořit\nvývoj</string>
   <string name="about_contributors">Přispívající</string>
   <string name="about_license">Licence</string>
   <string name="about_apache_license"><a href=""> licence Apache, verze 2.0</a></string>
   <string name="about_help">Nápověda</string>
+  <string name="about_system_include">Při odesílání hlášení o chybě nebo žádosti o další informace uveďte prosím následující systémové informace:</string>
   <string name="settings_title_services">Služby</string>
   <string name="settings_summary_services">Nastavení uživatelského účtu a přístupu k volitelným službám.</string>
   <string name="settings_title_appearance">Vzhled</string>

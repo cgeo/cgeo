@@ -270,6 +270,10 @@
   <string name="caches_manage">Gestisci</string>
   <string name="caches_remove_all">Elimina tutti</string>
   <string name="caches_remove_selected">Elimina selezionati</string>
+  <plurals name="caches_remove_selected_confirm">
+    <item quantity="one">Si desidera rimuovere questo cache dal tuo dispositivo?</item>
+    <item quantity="other">Vuoi rimuovere i %d cache selezionati dal dispositivo?</item>
+  </plurals>
   <string name="caches_remove_progress">Eliminazione dei cache</string>
   <string name="caches_delete_events">Cancella eventi passati</string>
   <string name="caches_refresh_selected">Aggiorna i cache selezionati</string>
@@ -322,12 +326,14 @@
   <string name="list_not_available">Elenco non più disponibile, passo a elenco standard</string>
   <string name="about_version">Versione</string>
   <string name="about_changelog">Modifiche</string>
+  <string name="about_system">Sistema</string>
   <string name="about_donate">Donazioni</string>
   <string name="about_donation_more">Fai una\nDonazione</string>
   <string name="about_contributors">Contributori</string>
   <string name="about_license">Licenza</string>
   <string name="about_apache_license"><a href="">Licenza Apache, versione 2.0</a></string>
   <string name="about_help">Guida</string>
+  <string name="about_system_include">Si prega di includere le seguenti informazioni di sistema quando si invia una segnalazione di bug o per chiedere ulteriori informazioni su c:geo:</string>
   <string name="settings_title_services">Servizi</string>
   <string name="settings_summary_services">Configura le informazioni utente dell\'account ed accede a servizi opzionali.</string>
   <string name="settings_title_appearance">Aspetto</string>
