@@ -44,6 +44,8 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * All-purpose image getter that can also be used as a ImageGetter interface when displaying caches.
@@ -80,6 +82,7 @@ public class HtmlImage implements Html.ImageGetter {
     final private int maxHeight;
     final private Resources resources;
     protected final TextView view;
+    final private Map<String, BitmapDrawable> cache = new HashMap<>();
 
     final private ObservableCache<String, BitmapDrawable> observableCache = new ObservableCache<>(new Func1<String, Observable<BitmapDrawable>>() {
         @Override
@@ -162,6 +165,9 @@ public class HtmlImage implements Html.ImageGetter {
     @Nullable
     @Override
     public BitmapDrawable getDrawable(final String url) {
+        if (cache.containsKey(url)) {
+            return cache.get(url);
+        }
         final Observable<BitmapDrawable> drawable = fetchDrawable(url);
         if (onlySave) {
             loading.onNext(drawable.map(new Func1<BitmapDrawable, String>() {
@@ -170,9 +176,12 @@ public class HtmlImage implements Html.ImageGetter {
                     return url;
                 }
             }));
+            cache.put(url, null);
             return null;
         }
-        return view == null ? drawable.toBlocking().lastOrDefault(null) : getContainerDrawable(drawable);
+        final BitmapDrawable result = view == null ? drawable.toBlocking().lastOrDefault(null) : getContainerDrawable(drawable);
+        cache.put(url, result);
+        return result;
     }
 
     protected BitmapDrawable getContainerDrawable(final Observable<BitmapDrawable> drawable) {
