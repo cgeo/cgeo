@@ -2,7 +2,7 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next release:</b>\n
+    <b>2015.01.12:</b>\n
     · New: Waypoints created from personal notes can now be deleted\n
     · New: More easy to use GCVote dialog in cache details\n
     · New: Add system information in \"About\" page and support mails\n
@@ -14,7 +14,7 @@
     · Fix: Compass working erratically on some devices\n
     · Fix: Batch refresh of caches without progress\n
     · Fix: Cache logs and pictures could be mixed up after batch refresh\n
-    · Fix: Spanish translation: Use \"caché\" instead of \"escondite\"\n
+    · Fix: Major rework of spanish translation\n
     · Fix: Menu for scanning trackable and geocache codes wrongly hidden\n
     · Fix: Up navigation did not work when c:geo was invoked from another app\n
     · Fix: Rare crash when performing a backup of the cache database\n
