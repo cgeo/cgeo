@@ -194,7 +194,7 @@ public class RxUtils {
     }
 
     /**
-     * Cache observables so that every key is associated to only one of them.
+     * Cache the last value of observables so that every key is associated to only one of them.
      *
      * @param <K> the type of the key
      * @param <V> the type of the value
@@ -215,7 +215,9 @@ public class RxUtils {
 
         /**
          * Get the observable corresponding to a key. If the key has not already been
-         * seen, the function passed to the constructor will be called to build the observable.
+         * seen, the function passed to the constructor will be called to build the observable
+         * <p/>
+         * If the observable has already emitted values, only the last one will be remembered.
          *
          * @param key the key
          * @return the observable corresponding to the key
@@ -224,7 +226,7 @@ public class RxUtils {
             if (cached.containsKey(key)) {
                 return cached.get(key);
             }
-            final Observable<V> value = func.call(key).share();
+            final Observable<V> value = func.call(key).replay(1).refCount();
             cached.put(key, value);
             return value;
         }
