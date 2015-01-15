@@ -99,6 +99,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.viewpager_activity);
+        createSubscriptions = new CompositeSubscription();
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.trackable));
@@ -191,7 +192,6 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             }
         });
         waitDialog = ProgressDialog.show(this, message, res.getString(R.string.trackable_details_loading), true, true);
-        createSubscriptions = new CompositeSubscription();
         createSubscriptions.add(AppObservable.bindActivity(this, loadTrackable(geocode, guid, id)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
             @Override
             public void call(final Trackable trackable) {
