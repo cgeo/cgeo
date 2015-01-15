@@ -59,11 +59,20 @@ public class Sensors {
         return InstanceHolder.INSTANCE;
     }
 
+    private final Func1<Throwable, Observable<GeoData>> fallbackToGeodataProvider = new Func1<Throwable, Observable<GeoData>>() {
+        @Override
+        public Observable<GeoData> call(final Throwable throwable) {
+            Log.e("Cannot use Play Services location provider, falling back to GeoDataProvider", throwable);
+            Settings.setUseGooglePlayServices(false);
+            return GeoDataProvider.create(app);
+        }
+    };
+
     public void setupGeoDataObservables(final boolean useGooglePlayServices, final boolean useLowPowerLocation) {
         if (useGooglePlayServices) {
-            geoDataObservable = LocationProvider.getMostPrecise(app).doOnNext(rememberGeodataAction);
+            geoDataObservable = LocationProvider.getMostPrecise(app).onErrorResumeNext(fallbackToGeodataProvider).doOnNext(rememberGeodataAction);
             if (useLowPowerLocation) {
-                geoDataObservableLowPower = LocationProvider.getLowPower(app).doOnNext(rememberGeodataAction);
+                geoDataObservableLowPower = LocationProvider.getLowPower(app).doOnNext(rememberGeodataAction).onErrorResumeNext(geoDataObservable);
             } else {
                 geoDataObservableLowPower = geoDataObservable;
             }
