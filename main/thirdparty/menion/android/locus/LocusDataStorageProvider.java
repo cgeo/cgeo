@@ -1,4 +1,4 @@
-package cgeo.geocaching.apps;
+package menion.android.locus;
 
 import menion.android.locus.addon.publiclib.geoData.PointsData;
 import menion.android.locus.addon.publiclib.utils.DataCursor;
