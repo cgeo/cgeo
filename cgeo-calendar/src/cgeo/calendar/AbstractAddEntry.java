@@ -1,13 +1,17 @@
 package cgeo.calendar;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.util.Log;
 
 abstract class AbstractAddEntry {
 
+    @NonNull
     protected final CalendarEntry entry;
+    @NonNull
     protected final CalendarActivity activity;
 
-    public AbstractAddEntry(final CalendarEntry entry, final CalendarActivity activity) {
+    public AbstractAddEntry(@NonNull final CalendarEntry entry, @NonNull final CalendarActivity activity) {
         this.entry = entry;
         this.activity = activity;
     }

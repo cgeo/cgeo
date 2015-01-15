@@ -3,6 +3,7 @@ package cgeo.calendar;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.CharEncoding;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.net.Uri;
 import android.text.Html;
@@ -16,16 +17,23 @@ import java.util.Date;
 
 class CalendarEntry {
 
+    @NonNull
     private final String shortDesc;
+    @NonNull
     private final String hiddenDate;
+    @NonNull
     private final String url;
+    @NonNull
     private final String personalNote;
+    @NonNull
     private final String name;
+    @NonNull
     private final String coords;
     private int startTimeMinutes = -1;
+    @NonNull
     private final Uri uri;
 
-    public CalendarEntry(final Uri uri) {
+    public CalendarEntry(@NonNull final Uri uri) {
         this.uri = uri;
         this.shortDesc = getParameter(ICalendar.PARAM_SHORT_DESC);
         this.hiddenDate = getParameter(ICalendar.PARAM_HIDDEN_DATE);
@@ -43,7 +51,8 @@ class CalendarEntry {
         }
     }
 
-    private String getParameter(final String paramKey) {
+    @NonNull
+    private String getParameter(@NonNull final String paramKey) {
         try {
             final String param = uri.getQueryParameter(paramKey);
             if (param == null) {
@@ -60,18 +69,22 @@ class CalendarEntry {
         return getName().length() > 0 && getHiddenDate().length() > 0;
     }
 
+    @NonNull
     public String getHiddenDate() {
         return hiddenDate;
     }
 
+    @NonNull
     public String getUrl() {
         return url;
     }
 
+    @NonNull
     public String getPersonalNote() {
         return personalNote;
     }
 
+    @NonNull
     public String getShortDesc() {
         return shortDesc;
     }
@@ -79,6 +92,7 @@ class CalendarEntry {
     /**
      * @return <code>Date</code> based on hidden date. Time is set to 00:00:00.
      */
+    @NonNull
     protected Date parseDate() {
         try {
             final Calendar cal = Calendar.getInstance();
@@ -90,13 +104,14 @@ class CalendarEntry {
             return cal.getTime();
         } catch (final NumberFormatException e) {
             // cannot happen normally, but static code analysis does not know
+            throw new IllegalStateException("hidden date must be a valid date for cache calendar entries");
         }
-        return null;
     }
 
     /**
      * @return description string with images removed and personal note included
      */
+    @NonNull
     protected String parseDescription() {
         final StringBuilder description = new StringBuilder();
         description.append(getUrl());
@@ -121,6 +136,7 @@ class CalendarEntry {
         return description.toString();
     }
 
+    @NonNull
     public String getName() {
         return name;
     }
@@ -129,6 +145,7 @@ class CalendarEntry {
         return startTimeMinutes;
     }
 
+    @NonNull
     public String getCoords() {
         return coords;
     }

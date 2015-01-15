@@ -1,5 +1,7 @@
 package cgeo.calendar;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -47,7 +49,7 @@ public final class CalendarActivity extends Activity {
      * @param entry
      *         new entry to be stored
      */
-    private void selectCalendarForAdding(final CalendarEntry entry) {
+    private void selectCalendarForAdding(@NonNull final CalendarEntry entry) {
         final SparseArray<String> calendars = queryCalendars();
 
         if (calendars.size() == 0) {
@@ -80,6 +82,7 @@ public final class CalendarActivity extends Activity {
         builder.create().show();
     }
 
+    @NonNull
     private SparseArray<String> queryCalendars() {
         final SparseArray<String> calendars = new SparseArray<>();
 

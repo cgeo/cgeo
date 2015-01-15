@@ -72,7 +72,7 @@ public final class ContactsActivity extends Activity {
         }
     }
 
-    private void selectContact(final List<Pair<Integer, String>> contacts) {
+    private void selectContact(@NonNull final List<Pair<Integer, String>> contacts) {
         final List<String> list = new ArrayList<>();
         for (final Pair<Integer, String> p : contacts) {
             list.add(p.second);
@@ -100,6 +100,7 @@ public final class ContactsActivity extends Activity {
         finish();
     }
 
+    @NonNull
     private List<Pair<Integer, String>> getContacts(final @NonNull String searchName, final Uri uri, final @NonNull String idColumnName, final @NonNull String selectionColumnName, final boolean like) {
         final String[] projection = new String[] { idColumnName, selectionColumnName };
         final String selection = selectionColumnName + (like ? " LIKE" : " =") + " ? COLLATE NOCASE";
@@ -131,7 +132,8 @@ public final class ContactsActivity extends Activity {
         toast.show();
     }
 
-    private static String getParameter(final Uri uri, final String paramKey) {
+    @NonNull
+    private static String getParameter(@NonNull final Uri uri, @NonNull final String paramKey) {
         try {
             final String param = uri.getQueryParameter(paramKey);
             if (param == null) {

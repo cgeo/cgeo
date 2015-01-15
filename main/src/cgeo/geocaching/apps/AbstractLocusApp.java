@@ -15,6 +15,9 @@ import menion.android.locus.addon.publiclib.geoData.PointGeocachingData;
 import menion.android.locus.addon.publiclib.geoData.PointGeocachingDataWaypoint;
 import menion.android.locus.addon.publiclib.geoData.PointsData;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 import android.app.Activity;
 import android.location.Location;
 
@@ -31,7 +34,7 @@ import java.util.Locale;
 public abstract class AbstractLocusApp extends AbstractApp {
     private static final SynchronizedDateFormat ISO8601DATE = new SynchronizedDateFormat("yyyy-MM-dd'T'", Locale.US);
 
-    protected AbstractLocusApp(final String text, int id, final String intent) {
+    protected AbstractLocusApp(@NonNull final String text, final int id, @NonNull final String intent) {
         super(text, id, intent);
     }
 
@@ -57,7 +60,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
 
         final boolean withCacheDetails = objectsToShow.size() < 200;
         final PointsData pd = new PointsData("c:geo");
-        for (Object o : objectsToShow) {
+        for (final Object o : objectsToShow) {
             Point p = null;
             // get icon and Point
             if (o instanceof Geocache) {
@@ -98,7 +101,8 @@ public abstract class AbstractLocusApp extends AbstractApp {
      *            should be false for all if more then 200 Caches are transferred
      * @return null, when the <code>Point</code> could not be constructed
      */
-    private static Point getCachePoint(Geocache cache, boolean withWaypoints, boolean withCacheDetails) {
+    @Nullable
+    private static Point getCachePoint(final Geocache cache, final boolean withWaypoints, final boolean withCacheDetails) {
         if (cache == null || cache.getCoords() == null) {
             return null;
         }
@@ -141,14 +145,14 @@ public abstract class AbstractLocusApp extends AbstractApp {
 
         if (withWaypoints && cache.hasWaypoints()) {
             pg.waypoints = new ArrayList<>();
-            for (Waypoint waypoint : cache.getWaypoints()) {
+            for (final Waypoint waypoint : cache.getWaypoints()) {
                 if (waypoint == null || waypoint.getCoords() == null) {
                     continue;
                 }
-                PointGeocachingDataWaypoint wp = new PointGeocachingDataWaypoint();
+                final PointGeocachingDataWaypoint wp = new PointGeocachingDataWaypoint();
                 wp.code = waypoint.getGeocode();
                 wp.name = waypoint.getName();
-                String locusWpId = toLocusWaypoint(waypoint.getWaypointType());
+                final String locusWpId = toLocusWaypoint(waypoint.getWaypointType());
                 if (locusWpId != null) {
                     wp.type = locusWpId;
                 }
@@ -177,7 +181,8 @@ public abstract class AbstractLocusApp extends AbstractApp {
      * @param waypoint
      * @return null, when the <code>Point</code> could not be constructed
      */
-    private static Point getWaypointPoint(Waypoint waypoint) {
+    @Nullable
+    private static Point getWaypointPoint(final Waypoint waypoint) {
         if (waypoint == null || waypoint.getCoords() == null) {
             return null;
         }
@@ -248,6 +253,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
         }
     }
 
+    @Nullable
     private static String toLocusWaypoint(final WaypointType wt) {
         switch (wt) {
             case FINAL:

@@ -11,11 +11,12 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.AbstractApp;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.Activity;
 
 abstract class AbstractStaticMapsApp extends AbstractApp implements CacheNavigationApp, WaypointNavigationApp {
-    protected AbstractStaticMapsApp(final String name, final int id) {
+    protected AbstractStaticMapsApp(@NonNull final String name, final int id) {
         super(name, id, null);
     }
 
@@ -29,11 +30,11 @@ abstract class AbstractStaticMapsApp extends AbstractApp implements CacheNavigat
         return false;
     }
 
-    protected static boolean hasStaticMap(Waypoint waypoint) {
+    protected static boolean hasStaticMap(final Waypoint waypoint) {
         if (waypoint==null) {
             return false;
         }
-        String geocode = waypoint.getGeocode();
+        final String geocode = waypoint.getGeocode();
         if (StringUtils.isNotEmpty(geocode) && DataStore.isOffline(geocode, null)) {
             return StaticMapsProvider.hasStaticMapForWaypoint(geocode, waypoint);
         }
@@ -49,7 +50,7 @@ abstract class AbstractStaticMapsApp extends AbstractApp implements CacheNavigat
         }
         final String geocode = StringUtils.upperCase(logable.getGeocode());
 
-        StaticMapsActivity_.IntentBuilder_ builder = StaticMapsActivity_.intent(activity).geocode(geocode).download(download);
+        final StaticMapsActivity_.IntentBuilder_ builder = StaticMapsActivity_.intent(activity).geocode(geocode).download(download);
         if (waypoint != null) {
             builder.waypointId(waypoint.getId());
         }

@@ -1,5 +1,7 @@
 package cgeo.calendar;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.content.Intent;
 import android.text.Html;
 
@@ -12,7 +14,7 @@ import java.util.Date;
  */
 class AddEntryLevel14 extends AbstractAddEntry {
 
-    public AddEntryLevel14(final CalendarEntry entry, final CalendarActivity activity) {
+    public AddEntryLevel14(@NonNull final CalendarEntry entry, @NonNull final CalendarActivity activity) {
         super(entry, activity);
     }
 

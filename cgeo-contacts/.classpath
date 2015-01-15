@@ -10,6 +10,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/cgeo"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
-	<classpathentry kind="lib" path="org.eclipse.jdt.annotation_1.1.0.v20130513-1648.jar"/>
+	<classpathentry kind="lib" path="compile-libs/org.eclipse.jdt.annotation_1.1.0.v20130513-1648.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

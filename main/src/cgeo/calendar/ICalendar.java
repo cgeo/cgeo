@@ -1,19 +1,21 @@
 package cgeo.calendar;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 public interface ICalendar {
-    static final String CALENDAR_ADDON_URI = "market://details?id=cgeo.calendar";
+    @NonNull static final String CALENDAR_ADDON_URI = "market://details?id=cgeo.calendar";
 
-    static final String INTENT = "cgeo.calendar.RESERVE";
+    @NonNull static final String INTENT = "cgeo.calendar.RESERVE";
 
-    static final String URI_SCHEME = "add";
-    static final String URI_HOST = "cgeo.org";
+    @NonNull static final String URI_SCHEME = "add";
+    @NonNull static final String URI_HOST = "cgeo.org";
 
-    static final String PARAM_SHORT_DESC = "shortDesc"; // cache short description
-    static final String PARAM_HIDDEN_DATE = "hiddenDate"; // cache hidden date in milliseconds
-    static final String PARAM_URL = "url"; // cache URL
-    static final String PARAM_NOTE = "note"; // personal note
-    static final String PARAM_NAME = "name"; // cache name
-    static final String PARAM_LOCATION = "location"; // cache location, or empty string
-    static final String PARAM_COORDS = "coords"; // cache coordinates, or empty string
-    static final String PARAM_START_TIME_MINUTES = "time"; // time of start
+    @NonNull static final String PARAM_SHORT_DESC = "shortDesc"; // cache short description
+    @NonNull static final String PARAM_HIDDEN_DATE = "hiddenDate"; // cache hidden date in milliseconds
+    @NonNull static final String PARAM_URL = "url"; // cache URL
+    @NonNull static final String PARAM_NOTE = "note"; // personal note
+    @NonNull static final String PARAM_NAME = "name"; // cache name
+    @NonNull static final String PARAM_LOCATION = "location"; // cache location, or empty string
+    @NonNull static final String PARAM_COORDS = "coords"; // cache coordinates, or empty string
+    @NonNull static final String PARAM_START_TIME_MINUTES = "time"; // time of start
 }

@@ -1,5 +1,7 @@
 package cgeo.calendar;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.content.ContentValues;
 import android.net.Uri;
 import android.text.Html;
@@ -16,7 +18,7 @@ class AddEntry extends AbstractAddEntry {
      * @param calendarId
      *         The selected calendar
      */
-    public AddEntry(final CalendarEntry entry, final CalendarActivity activity, final int calendarId) {
+    public AddEntry(@NonNull final CalendarEntry entry, @NonNull final CalendarActivity activity, final int calendarId) {
         super(entry, activity);
         this.calendarId = calendarId;
     }

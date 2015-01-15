@@ -8,6 +8,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.ProcessUtils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -27,7 +28,7 @@ public class CalendarAddon {
         return ProcessUtils.isIntentAvailable(ICalendar.INTENT, Uri.parse(ICalendar.URI_SCHEME + "://" + ICalendar.URI_HOST));
     }
 
-    public static void addToCalendarWithIntent(final Activity activity, final Geocache cache) {
+    public static void addToCalendarWithIntent(@NonNull final Activity activity, @NonNull final Geocache cache) {
         final Resources res = activity.getResources();
         if (CalendarAddon.isAvailable()) {
             final Date hiddenDate = cache.getHiddenDate();
@@ -51,7 +52,7 @@ public class CalendarAddon {
                     .append(res.getString(R.string.addon_download_prompt))
                     .toString(), new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int id) {
+                public void onClick(final DialogInterface dialog, final int id) {
                     final Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse(ICalendar.CALENDAR_ADDON_URI));
                     activity.startActivity(intent);

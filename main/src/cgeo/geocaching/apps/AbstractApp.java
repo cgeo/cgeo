@@ -5,28 +5,31 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.utils.ProcessUtils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.content.Intent;
 
 public abstract class AbstractApp implements App {
 
-    private final String packageName;
-    private final String intent;
+    @Nullable private final String packageName;
+    @Nullable private final String intent;
+    @NonNull
     private final String name;
     /**
      * a unique id, defined in res/values/ids.xml
      */
     private final int id;
 
-    protected AbstractApp(final String name, final int id, final String intent,
-            final String packageName) {
+    protected AbstractApp(@NonNull final String name, final int id, @Nullable final String intent,
+            @Nullable final String packageName) {
         this.name = name;
         this.id = id;
         this.intent = intent;
         this.packageName = packageName;
     }
 
-    protected AbstractApp(final String name, final int id, final String intent) {
+    protected AbstractApp(@NonNull final String name, final int id, @Nullable final String intent) {
         this(name, id, intent, null);
     }
 
@@ -38,6 +41,7 @@ public abstract class AbstractApp implements App {
         return ProcessUtils.isIntentAvailable(intent);
     }
 
+    @Nullable
     protected Intent getLaunchIntent() {
         return ProcessUtils.getLaunchIntent(packageName);
     }
@@ -48,6 +52,7 @@ public abstract class AbstractApp implements App {
     }
 
     @Override
+    @NonNull
     public String getName() {
         return name;
     }
@@ -57,12 +62,12 @@ public abstract class AbstractApp implements App {
         return id;
     }
 
-    protected static String getString(int ressourceId) {
+    protected static String getString(final int ressourceId) {
         return CgeoApplication.getInstance().getString(ressourceId);
     }
 
     @Override
-    public boolean isEnabled(Geocache cache) {
+    public boolean isEnabled(final Geocache cache) {
         return cache != null;
     }
 }
