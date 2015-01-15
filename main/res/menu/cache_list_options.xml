@@ -53,12 +53,12 @@
         android:visible="false">
     </item>
     <item
-        android:id="@+id/submenu_cache_list_app"
+        android:id="@+id/menu_cache_list_app_provider"
+        android:actionProviderClass="cgeo.geocaching.apps.cachelist.ListNavigationSelectionActionProvider"
         android:icon="@drawable/ic_menu_goto"
         android:title="@string/caches_on_map"
+        app:actionProviderClass="cgeo.geocaching.apps.cachelist.ListNavigationSelectionActionProvider"
         android:visible="false">
-        <menu>
-        </menu>
     </item>
     <item
         android:id="@+id/menu_create_list"

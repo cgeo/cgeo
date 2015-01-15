@@ -494,13 +494,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         CacheMenuHandler.addMenuItems(this, menu, cache);
-        MenuItem menuItem = menu.findItem(R.id.menu_default_navigation);
+        final MenuItem menuItem = menu.findItem(R.id.menu_default_navigation);
         final NavigationActionProvider navAction = (NavigationActionProvider) MenuItemCompat.getActionProvider(menuItem);
         if (navAction != null) {
             navAction.setNavigationSource(this);
         }
-        menuItem = menu.findItem(R.id.menu_navigate);
-        NavigationSelectionActionProvider.initialize(menuItem, cache);
+        NavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_navigate), cache);
         return true;
     }
 

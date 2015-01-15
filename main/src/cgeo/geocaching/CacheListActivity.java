@@ -9,7 +9,9 @@ import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
-import cgeo.geocaching.apps.cachelist.CacheListAppFactory;
+import cgeo.geocaching.apps.cachelist.CacheListApp;
+import cgeo.geocaching.apps.cachelist.CacheListApps;
+import cgeo.geocaching.apps.cachelist.ListNavigationSelectionActionProvider;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.gc.RecaptchaHandler;
 import cgeo.geocaching.enumerations.CacheListType;
@@ -558,7 +560,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.cache_list_options, menu);
 
-        CacheListAppFactory.addMenuItems(menu, this, res);
         sortProvider = (SortActionProvider) MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_sort));
         assert sortProvider != null;  // We set it in the XML file
         sortProvider.setSelection(adapter.getCacheComparator());
@@ -579,6 +580,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 sortProvider.setSelection(selectedComparator);
             }
         });
+
+        ListNavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_cache_list_app_provider), new ListNavigationSelectionActionProvider.Callback() {
+
+            @Override
+            public void onListNavigationSelected(final CacheListApp app) {
+                app.invoke(cacheList, CacheListActivity.this, getFilteredSearch());
+            }
+        });
+
         return true;
     }
 
@@ -639,6 +649,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             setMenuItemLabel(menu, R.id.menu_remove_from_history, R.string.cache_remove_from_history, R.string.cache_clear_history);
             menu.findItem(R.id.menu_import_android).setVisible(Compatibility.isStorageAccessFrameworkAvailable() && isOffline);
+
+            final List<CacheListApp> listNavigationApps = CacheListApps.getActiveApps();
+            menu.findItem(R.id.menu_cache_list_app_provider).setVisible(listNavigationApps.size() > 1);
+            menu.findItem(R.id.menu_cache_list_app).setVisible(listNavigationApps.size() == 1);
+
         } catch (final RuntimeException e) {
             Log.e("CacheListActivity.onPrepareOptionsMenu", e);
         }
@@ -679,9 +694,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        if (super.onOptionsItemSelected(item)) {
-            return true;
-        }
         switch (item.getItemId()) {
             case R.id.menu_show_on_map:
                 goMap();
@@ -705,23 +717,23 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             case R.id.menu_import_android:
                 importGpxFromAndroid();
                 invalidateOptionsMenuCompatible();
-                return false;
+                return true;
             case R.id.menu_create_list:
                 new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(), listNameMemento.getTerm());
                 refreshSpinnerAdapter();
                 invalidateOptionsMenuCompatible();
-                return false;
+                return true;
             case R.id.menu_drop_list:
                 removeList(false);
                 invalidateOptionsMenuCompatible();
-                return false;
+                return true;
             case R.id.menu_rename_list:
                 renameList();
-                return false;
+                return true;
             case R.id.menu_invert_selection:
                 adapter.invertSelection();
                 invalidateOptionsMenuCompatible();
-                return false;
+                return true;
             case R.id.menu_filter:
                 showFilterMenu(null);
                 return true;
@@ -737,7 +749,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             case R.id.menu_remove_from_history:
                 removeFromHistoryCheck();
                 invalidateOptionsMenuCompatible();
-                return false;
+                return true;
             case R.id.menu_move_to_list:
                 moveCachesToOtherList();
                 invalidateOptionsMenuCompatible();
@@ -751,13 +763,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_cache_list_app:
-                if (!cacheToShow()) {
-                    return false;
+                if (cacheToShow()) {
+                    CacheListApps.getActiveApps().get(0).invoke(cacheList, this, getFilteredSearch());
                 }
-                return CacheListAppFactory.onMenuItemSelected(item, cacheList, this, getFilteredSearch());
-            default:
-                return CacheListAppFactory.onMenuItemSelected(item, cacheList, this, search);
+                return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     private boolean cacheToShow() {
