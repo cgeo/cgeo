@@ -2,6 +2,12 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release:</b>\n
+    · Fix: Better handling for caches with high amount of pictures\n
+    · Fix: Rare crash if TB can not be found\n
+    · Fix: Possible crash in case GooglePlay location services are not working as expected\n
+    \n
+    \n
     <b>2015.01.12:</b>\n
     · New: Waypoints created from personal notes can now be deleted\n
     · New: More easy to use GCVote dialog in cache details\n
