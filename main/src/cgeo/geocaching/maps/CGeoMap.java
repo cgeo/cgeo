@@ -876,7 +876,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         if (restartRequired) {
             mapRestart();
         } else if (mapView != null) {  // changeMapSource can be called by onCreate()
+            mapStateIntent = currentMapState();
             mapView.setMapSource();
+            // re-center the map
+            centered = false;
+            centerMap(geocodeIntent, searchIntent, coordsIntent, mapStateIntent);
+            // re-build menues
             ActivityMixin.invalidateOptionsMenu(activity);
         }
 
@@ -887,9 +892,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
      * Restart the current activity with the default map source.
      */
     private void mapRestart() {
-        // close old mapview
-        activity.finish();
-
         // prepare information to restart a similar view
         final Intent mapIntent = new Intent(activity, Settings.getMapProvider().getMapClass());
 
@@ -907,6 +909,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         if (mapState != null) {
             mapIntent.putExtra(Intents.EXTRA_MAPSTATE, mapState);
         }
+
+        // close old map
+        activity.finish();
 
         // start the new map
         activity.startActivity(mapIntent);
