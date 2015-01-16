@@ -27,9 +27,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.eclipse.jdt.annotation.NonNull;
 
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.text.Spannable;
@@ -111,6 +115,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         @InjectView(R.id.inventory) protected ImageView inventory;
         @InjectView(R.id.direction) protected CompassMiniView direction;
         @InjectView(R.id.dirimg) protected ImageView dirImg;
+        public Geocache cache = null;
 
         public ViewHolder(final View view) {
             super(view);
@@ -378,6 +383,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         } else {
             holder = (ViewHolder) v.getTag();
         }
+        holder.cache = cache;
 
         final boolean lightSkin = Settings.isLightSkin();
 
@@ -457,9 +463,17 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
                 holder.direction.updateAzimuth(azimuth);
                 holder.direction.updateHeading(cache.getDirection());
             } else if (StringUtils.isNotBlank(cache.getDirectionImg())) {
-                holder.dirImg.setImageDrawable(DirectionImage.getDrawable(cache.getDirectionImg()));
-                holder.dirImg.setVisibility(View.VISIBLE);
+                holder.dirImg.setVisibility(View.INVISIBLE);
                 holder.direction.setVisibility(View.GONE);
+                DirectionImage.fetchDrawable(cache.getDirectionImg()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<BitmapDrawable>() {
+                    @Override
+                    public void call(final BitmapDrawable bitmapDrawable) {
+                        if (cache == holder.cache) {
+                            holder.dirImg.setImageDrawable(bitmapDrawable);
+                            holder.dirImg.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
             } else {
                 holder.dirImg.setVisibility(View.GONE);
                 holder.direction.setVisibility(View.GONE);
