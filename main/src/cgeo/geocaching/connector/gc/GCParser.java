@@ -28,7 +28,6 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.ui.DirectionImage;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.JsonUtils;
@@ -340,16 +339,6 @@ public abstract class GCParser {
 
             } catch (final RuntimeException e) {
                 Log.e("GCParser.parseSearch.CIDs", e);
-            }
-        }
-
-        // get direction images
-        if (Settings.getLoadDirImg()) {
-            final Set<Geocache> cachesReloaded = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-            for (final Geocache cache : cachesReloaded) {
-                if (cache.getCoords() == null && StringUtils.isNotEmpty(cache.getDirectionImg())) {
-                    DirectionImage.getDrawable(cache.getDirectionImg());
-                }
             }
         }
 

@@ -3,22 +3,22 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.network.HtmlImage;
 
-import org.apache.commons.lang3.StringUtils;
+import rx.Observable;
 
 import android.graphics.drawable.BitmapDrawable;
 
 public class DirectionImage {
 
-    static private HtmlImage htmlImage = new HtmlImage(HtmlImage.SHARED, false, StoredList.STANDARD_LIST_ID, false);
+    static final private HtmlImage HTML_IMAGE = new HtmlImage(HtmlImage.SHARED, false, StoredList.STANDARD_LIST_ID, false);
 
     /**
      * Retrieve the direction image corresponding to the direction code.
      *
      * @param directionCode one of the eight cardinal points
-     * @return a drawable with the arrow pointing into the right direction
+     * @return an observable containing zero or more drawables (the last one being the freshest image)
      */
-    public static BitmapDrawable getDrawable(final String directionCode) {
-        return StringUtils.isNotBlank(directionCode) ? htmlImage.getDrawable("http://www.geocaching.com/images/icons/compass/" + directionCode + ".gif") : null;
+    public static Observable<BitmapDrawable> fetchDrawable(final String directionCode) {
+        return HTML_IMAGE.fetchDrawable("https://www.geocaching.com/images/icons/compass/" + directionCode + ".gif");
     }
 
 }
