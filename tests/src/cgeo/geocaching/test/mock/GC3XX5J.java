@@ -59,7 +59,8 @@ public class GC3XX5J extends MockedCache {
 
     @Override
     public boolean isArchived() {
-        return false;
+        // The cache has been archived since 2015-01-13.
+        return true;
     }
 
     @NonNull
@@ -145,9 +146,4 @@ public class GC3XX5J extends MockedCache {
         return Settings.getUsername().equals("mucek4");
     }
 
-    @Override
-    public boolean isDisabled() {
-        // The cache has been disabled since 2014-12-13.
-        return true;
-    }
 }
