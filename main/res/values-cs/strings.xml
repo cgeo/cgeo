@@ -8,12 +8,12 @@
   <string name="about">O aplikaci</string>
   <string name="latitude">Zeměpisná šířka</string>
   <string name="longitude">Zeměpisná délka</string>
-  <string name="settings_titlebar">c:geo Nastavení</string>
+  <string name="settings_titlebar">Nastavení c:geo</string>
   <string name="all_types">Všechny typy keší</string>
   <string name="traditional">Tradiční keš</string>
   <string name="multi">Multi keš</string>
   <string name="mystery">Mystery keš</string>
-  <string name="letterbox">Dopisní schránka</string>
+  <string name="letterbox">Letterbox keš</string>
   <string name="event">Událost</string>
   <string name="mega">Mega-událost</string>
   <string name="giga">Giga event</string>
@@ -124,6 +124,7 @@
   <string name="err_login">Nejsou uloženy žádné přihlašovací údaje</string>
   <string name="err_login_failed_toast">Nelze se přihlásit. c:geo bude pracovat Offline s uloženými informacemi. Zkontroluj nastavení přihlašování a připojení k Internetu.</string>
   <string name="err_unknown">Neznámá chyba</string>
+  <string name="err_unknown_address">c:geo nedokázal tuto adresu najít na mapě</string>
   <string name="err_comm">Neznámá komunikační chyba</string>
   <string name="err_missing_auth">Nenastaveno žádné přihlašovací jméno/heslo.</string>
   <string name="err_wrong">Chybné přihlašovací údaje</string>
@@ -158,7 +159,6 @@
   <string name="err_acquire_image_failed">Získání obrázku selhalo.</string>
   <string name="err_tb_display">c:geo nemůže zobrazit sledovatelný předmět. Je to opravdu sledovatelný předmět?</string>
   <string name="err_tb_details_open">c:geo nemůže otevřít podrobnosti ke sledovatelnému předmětu.</string>
-  <string name="err_tb_forgot_saw">c:geo zapomělo, který sledovatelný předmět jsi prohlížel/a.</string>
   <string name="err_tb_find">c:geo nemůže najít sledovatelný předmět.</string>
   <string name="err_tb_find_that">c:geo nemůže najít tento sledovatelný předmět.</string>
   <string name="err_waypoint_cache_unknown">c:geo neví k jaké keši chceš přidat bod trasy.</string>
@@ -171,6 +171,8 @@
   <string name="err_log_load_data">c:geo nemůže načíst data požadovaná k zalogování návštěvy.</string>
   <string name="err_log_load_data_again">c:geo nemůže načíst data požadovaná k zalogování návštěvy. Zkouší to znovu.</string>
   <string name="err_log_load_data_still">c:geo stále načítá data požadovaná k odeslání Logu. Prosím, počkej ještě chvíli.</string>
+  <string name="err_log_post_failed">Zdá se, že tvůj log nebyl správně zveřejněn. Prosím, zkontroluj ho přímo na webové stránce keše.</string>
+  <string name="err_logimage_post_failed">Zdá se, že obrázek u logu nebyl správně odeslán. Prosím, zkontroluj to přímo na webové stránce keše.</string>
   <string name="err_search_address_forgot">c:geo zapomnělo hledanou adresu.</string>
   <string name="err_parse_lat">c:geo nemůže dopočítat zeměpisnou šířku.</string>
   <string name="err_parse_lon">c:geo nemůže dopočítat zeměpisnou délku.</string>
@@ -267,9 +269,7 @@
   <string name="caches_nearby">Blízké</string>
   <string name="caches_manage">Správa</string>
   <string name="caches_remove_all">Odstranit vše</string>
-  <string name="caches_remove_all_confirm">Opravdu chceš smazat všechny keše (%s) z tohoto seznamu?</string>
   <string name="caches_remove_selected">Odstranit vybrané</string>
-  <string name="caches_remove_selected_confirm">Opravdu chceš smazat vybrané keše (%s) z přístroje?</string>
   <string name="caches_remove_progress">Odstraňování keší</string>
   <string name="caches_delete_events">Vymazat staré události</string>
   <string name="caches_refresh_selected">Aktualizovat vybrané</string>
@@ -294,6 +294,9 @@
   <string name="caches_filter_personal_note">S osobní poznámkou</string>
   <string name="caches_filter_popularity">Oblíbené</string>
   <string name="caches_filter_popularity_ratio">Oblíbené [%]</string>
+  <string name="caches_filter_personal_data">S osobními údaji</string>
+  <string name="caches_filter_rating">S hodnocením</string>
+  <string name="caches_filter_own_rating">S vlastním hodnocením</string>
   <string name="caches_removing_from_history">Čištění Historie…</string>
   <string name="caches_clear_offlinelogs">Smazat offline Logy</string>
   <string name="caches_clear_offlinelogs_message">Opravdu chceš vymazat offline logy?</string>
@@ -319,13 +322,16 @@
   <string name="list_not_available">Seznam již není dostupný, přepínání na výchozí seznam</string>
   <string name="about_version">Verze</string>
   <string name="about_changelog">Změny</string>
+  <string name="about_system">Systém</string>
   <string name="about_donate">Podpora vývoje</string>
   <string name="about_donation_more">Podpořit\nvývoj</string>
   <string name="about_contributors">Přispívající</string>
   <string name="about_license">Licence</string>
   <string name="about_apache_license"><a href=""> licence Apache, verze 2.0</a></string>
   <string name="about_help">Nápověda</string>
+  <string name="about_system_include">Při odesílání hlášení o chybě nebo žádosti o další informace uveďte prosím následující systémové informace:</string>
   <string name="settings_title_services">Služby</string>
+  <string name="settings_summary_services">Nastavení uživatelského účtu a přístupu k volitelným službám.</string>
   <string name="settings_title_appearance">Vzhled</string>
   <string name="settings_title_cachedetails">Detaily keše</string>
   <string name="settings_title_offlinedata">Offline zdroje</string>
@@ -375,6 +381,7 @@
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Pokud chceš hodnotit keše, je třeba postupovat dle pokynů na GCVote.com a zadat sem své heslo.</string>
   <string name="err_gcvote_send_rating">Chyba při odesílání hodnocení, zkontroluj GCVote heslo v nastavení nebo ho nech prázdné.</string>
+  <string name="gcvote_sent">Hlas úspěšně odeslán</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Povolit</string>
   <string name="init_username">Uživatelské jméno</string>
@@ -655,6 +662,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
+  <string name="cache_menu_vote">Hlasovat</string>
   <string name="cache_status">Stav</string>
   <string name="cache_status_offline_log">Připravený Log</string>
   <string name="cache_status_found">Nalezena</string>
@@ -1119,7 +1127,7 @@
   <string name="attribute_survey_marker_no">Není v blízkosti měřičské značky</string>
   <string name="attribute_offset_cache_yes">Offset keš</string>
   <string name="attribute_offset_cache_no">Není to Offset keš</string>
-  <string name="quote">Učinit Geocaching lehčí a uživatelé línější.</string>
+  <string name="quote">Učinit Geocaching lehčí a uživatele línější.</string>
   <string name="powered_by">carnero</string>
   <string name="support">Podpora: <a href="">support@cgeo.org</a></string>
   <string name="website">Stránka: <a href="">cgeo.org</a></string>

@@ -2,6 +2,8 @@ package cgeo.geocaching.connector.capability;
 
 import cgeo.geocaching.connector.IConnector;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.io.File;
 
 /**
@@ -9,5 +11,5 @@ import java.io.File;
  *
  */
 public interface FieldNotesCapability extends IConnector {
-    public boolean uploadFieldNotes(final File exportFile);
+    public boolean uploadFieldNotes(@NonNull final File exportFile);
 }

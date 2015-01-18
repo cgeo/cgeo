@@ -13,6 +13,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.search.AutoCompleteAdapter;
 import cgeo.geocaching.sensors.GeoData;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -144,7 +145,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         }
 
         final IConnector connector = ConnectorFactory.getConnector(geocode);
-        if (connector instanceof ISearchByGeocode) {
+        if (connector instanceof ISearchByGeocode && geocode != null) {
             CacheDetailActivity.startActivity(this, geocode.toUpperCase(Locale.US));
             return true;
         }
@@ -161,7 +162,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
             }
         }
 
-        if (trackableConnector != ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR) {
+        if (trackableConnector != ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR && geocode != null) {
             final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
             trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, geocode.toUpperCase(Locale.US));
             startActivity(trackablesIntent);
@@ -293,7 +294,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     }
 
     private void updateCoordinates() {
-        final CoordinatesInputDialog coordsDialog = CoordinatesInputDialog.getInstance(null, null, app.currentGeo());
+        final CoordinatesInputDialog coordsDialog = CoordinatesInputDialog.getInstance(null, null, Sensors.getInstance().currentGeo());
         coordsDialog.setCancelable(true);
         coordsDialog.show(getSupportFragmentManager(), "wpedit_dialog");
     }
@@ -309,7 +310,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         final String lonText = StringUtils.trim(buttonLongitude.getText().toString());
 
         if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) {
-            final GeoData geo = app.currentGeo();
+            final GeoData geo = Sensors.getInstance().currentGeo();
             buttonLatitude.setText(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE));
             buttonLongitude.setText(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE));
         } else {

@@ -8,7 +8,7 @@ import android.app.Activity;
 
 import java.util.List;
 
-interface CacheListApp extends App {
+public interface CacheListApp extends App {
 
     boolean invoke(final List<Geocache> caches,
             final Activity activity, final SearchResult search);

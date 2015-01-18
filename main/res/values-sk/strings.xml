@@ -125,6 +125,7 @@
   <string name="err_login">Nie sú uložené žiadne prihlasovacie údaje.</string>
   <string name="err_login_failed_toast">Prepáčte, c:geo sa nepodarilo prihlásiť. c:geo funguje v offline režime. Skontrolujte vaše prihlasovacie údaje v nastaveniach alebo povoľte pripojenie k Internetu.</string>
   <string name="err_unknown">Neznáma chyba</string>
+  <string name="err_unknown_address">c:geo nedokázal nájsť miesto k daným súradniciam</string>
   <string name="err_comm">Neznáma chyba pri komunikácii</string>
   <string name="err_missing_auth">Nevyplnené používateľské meno a/alebo heslo.</string>
   <string name="err_wrong">Prihlasovacie údaje sú nesprávne</string>
@@ -159,7 +160,6 @@
   <string name="err_acquire_image_failed">Získavanie obrázku zlyhalo.</string>
   <string name="err_tb_display">Prepáčte, c:geo nemôže zobraziť trasovateľný predmet. Je to naozaj trasovateľný predmet?</string>
   <string name="err_tb_details_open">Prepáčte, c:geo nemôže otvoriť podrobnosti k trasovateľnému predmetu.</string>
-  <string name="err_tb_forgot_saw">c:geo zabudlo, ktorý trasovateľný predmet ste videli.</string>
   <string name="err_tb_find">c:geo nemôže nájsť trasovateľný predmet.</string>
   <string name="err_tb_find_that">c:geo nemôže nájsť tento trasovateľný predmet.</string>
   <string name="err_waypoint_cache_unknown">c:geo nevie, ku ktorej skrýši chcete pridať bod trasy.</string>
@@ -172,6 +172,8 @@
   <string name="err_log_load_data">c:geo nemôže načítať dáta potrebné pre zalogovanie návštevy.</string>
   <string name="err_log_load_data_again">c:geo nemôže načítať dáta potrebné pre zalogovanie návštevy. Skúša to znovu.</string>
   <string name="err_log_load_data_still">c:geo stále načítava dáta potrebné pre zalogovanie návštevy. Prosím, počkajte chvíľu.</string>
+  <string name="err_log_post_failed">Zdá sa že tvoj log nebol uverejnený. Skontroluj to na stránke keše.</string>
+  <string name="err_logimage_post_failed">Zdá sa že obrázok logu nebol nahratý. Skontroluj to na stránke keše.</string>
   <string name="err_search_address_forgot">c:geo zabudlo adresu, ktorú sa pokúšate nájsť.</string>
   <string name="err_parse_lat">c:geo nemôže zistiť zemepisnú šírku.</string>
   <string name="err_parse_lon">c:geo nemôže dopočítať zemepisnú dĺžku.</string>
@@ -263,9 +265,17 @@
   <string name="caches_nearby">V okolí</string>
   <string name="caches_manage">Spravovať</string>
   <string name="caches_remove_all">Odstrániť všetky</string>
-  <string name="caches_remove_all_confirm">Chcete odstrániť všetky %s skrýše z aktuálneho zoznamu?</string>
+  <plurals name="caches_remove_all_confirm">
+    <item quantity="one">Chcete odstrániť túto skrýšu z tohoto zoznamu?</item>
+    <item quantity="few">Chcete odstrániť tieto %d skrýše z tohoto zoznamu?</item>
+    <item quantity="other">Chcete odstrániť týchto %d skrýš z tohoto zoznamu?</item>
+  </plurals>
   <string name="caches_remove_selected">Odstrániť vybraté</string>
-  <string name="caches_remove_selected_confirm">Chcete odstrániť %s vybraté skrýše z vášho zariadenia?</string>
+  <plurals name="caches_remove_selected_confirm">
+    <item quantity="one">Chcete odstrániť túto skrýšu zo zariadenia?</item>
+    <item quantity="few">Chcete odstrániť tieto %d skrýše zo zariadenia?</item>
+    <item quantity="other">Chcete odstrániť týchto %d skrýš zo zariadenia?</item>
+  </plurals>
   <string name="caches_remove_progress">Odstraňovanie skrýše</string>
   <string name="caches_delete_events">Odstrániť minulé Eventy</string>
   <string name="caches_refresh_selected">Obnoviť vybraté</string>
@@ -290,6 +300,9 @@
   <string name="caches_filter_personal_note">S osobnou poznámkou</string>
   <string name="caches_filter_popularity">Obľúbené</string>
   <string name="caches_filter_popularity_ratio">Obľúbené [%]</string>
+  <string name="caches_filter_personal_data">S osobnými údajmi</string>
+  <string name="caches_filter_rating">S hodnotením</string>
+  <string name="caches_filter_own_rating">S vlastným hodnotením</string>
   <string name="caches_removing_from_history">Odstraňovanie z histórie…</string>
   <string name="caches_clear_offlinelogs">Vymazať offline záznamy</string>
   <string name="caches_clear_offlinelogs_message">Prajete si vymazať offline logy?</string>
@@ -315,13 +328,16 @@
   <string name="list_not_available">Zoznam nie je k dispozícii, prechod na štandardný zoznam</string>
   <string name="about_version">Verzia</string>
   <string name="about_changelog">Zmeny</string>
+  <string name="about_system">Systém</string>
   <string name="about_donate">Podpora vývoja</string>
   <string name="about_donation_more">Podporte\nvývoj</string>
   <string name="about_contributors">Prispievatelia</string>
   <string name="about_license">Licencia</string>
   <string name="about_apache_license"><a href=""> Apache License, verzia 2.0</a></string>
   <string name="about_help">Pomoc</string>
+  <string name="about_system_include">Keď budete posielať správu o chybe alebo budete chcieť vedieť viac o c:geo, uveďte, prosím, nasledujúce systémové informácie:</string>
   <string name="settings_title_services">Služby</string>
+  <string name="settings_summary_services">Konfigurovať informácie o používateľskom konte a prístup k voliteľným službám.</string>
   <string name="settings_title_appearance">Vzhľad</string>
   <string name="settings_title_cachedetails">Detaily skrýše</string>
   <string name="settings_title_offlinedata">Údaje v režime offline</string>
@@ -371,6 +387,7 @@
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Ak chcete hodnotiť keše, postupujte podľa pokynov na GCVote.com a potom sem zadajte svoje GCVote heslo.</string>
   <string name="err_gcvote_send_rating">Chyba pri odosielaní hodnotenia, skontrolujte GCVote heslo v nastaveniach alebo ho ponechajte prázdne.</string>
+  <string name="gcvote_sent">Hlasovanie úspešne odoslané</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivovať</string>
   <string name="init_username">používateľské meno</string>
@@ -651,6 +668,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
+  <string name="cache_menu_vote">Hlasovať</string>
   <string name="cache_status">Stav</string>
   <string name="cache_status_offline_log">Uložený log</string>
   <string name="cache_status_found">Nájdená</string>

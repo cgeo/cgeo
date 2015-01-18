@@ -74,26 +74,7 @@
                     tools:ignore="TextFields" />
             </LinearLayout>
 
-            <RatingBar
-                android:id="@+id/gcvoteRating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:max="5"
-                android:numStars="5"
-                android:stepSize="0.5"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/gcvoteLabel"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:padding="10dip"
-                android:text="@string/log_no_rating"
-                android:textColor="?text_color"
-                android:textSize="12sp"
-                android:visibility="gone" />
+            <include layout="@layout/gcvote_rating_bar"  android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 
             <LinearLayout
                 android:id="@+id/tweet_box"

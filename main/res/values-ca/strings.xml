@@ -125,6 +125,7 @@
   <string name="err_login">No hi ha desada cap informació d\'accés</string>
   <string name="err_login_failed_toast">El c:geo no pot iniciar la sessió. El c:geo treballa fora línia amb els catxés desats. Comproveu la configuració de la connexió o activeu la connexió a Internet.</string>
   <string name="err_unknown">Error desconegut</string>
+  <string name="err_unknown_address">c:geo no ha pogut assignar aquesta adreça a una ubicació existent</string>
   <string name="err_comm">S\'ha produït un error de comunicació desconegut</string>
   <string name="err_missing_auth">No s\'ha definit nom d\'usuari i/o contrasenya.</string>
   <string name="err_wrong">La informació d\'accés és incorrecta</string>
@@ -159,7 +160,6 @@
   <string name="err_acquire_image_failed">S\'ha produït un error a l\'adquirir una imatge.</string>
   <string name="err_tb_display">El c:geo no pot mostrar el traçable que volíeu. És realment un traçable?</string>
   <string name="err_tb_details_open">El c:geo no pot obrir els detalls del traçable.</string>
-  <string name="err_tb_forgot_saw">El c:geo no recorda quin traçable heu vist.</string>
   <string name="err_tb_find">El c:geo no pot trobar el traçable</string>
   <string name="err_tb_find_that">El c:geo no pot trobar aquest traçable.</string>
   <string name="err_waypoint_cache_unknown">El c:geo no sap a quin catxé voleu afegir la fita.</string>
@@ -172,6 +172,8 @@
   <string name="err_log_load_data">El c:geo no pot carregar les dades necessàries per registrar la visita.</string>
   <string name="err_log_load_data_again">El c:geo no pot carregar les dades necessàries per registrar la visita. Torneu a intentar-ho.</string>
   <string name="err_log_load_data_still">El c:geo encara està carregant les dades necessàries per enviar el registre. Si us plau, espereu una estona més.</string>
+  <string name="err_log_post_failed">El registre no s\'ha publicat. Comproveu la memòria del lloc web d\'origen.</string>
+  <string name="err_logimage_post_failed">La imatge de registre no s\'ha pujat. Comproveu la memòria del lloc web d\'origen.</string>
   <string name="err_search_address_forgot">El c:geo ha oblidat l\'adreça que intentaves trobar.</string>
   <string name="err_parse_lat">El c:geo no pot calcular la latitud.</string>
   <string name="err_parse_lon">El c:geo no pot calcular la longitud.</string>
@@ -208,6 +210,7 @@
   <string name="loc_net">Xarxa</string>
   <string name="loc_fused">Combinat</string>
   <string name="loc_low_power">Bateria baixa</string>
+  <string name="loc_home">Coordenades de casa</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">Sat</string>
   <string name="loc_trying">Intentant ubicar</string>
@@ -266,9 +269,15 @@
   <string name="caches_nearby">Propers</string>
   <string name="caches_manage">Administra</string>
   <string name="caches_remove_all">Suprimeix-los tots</string>
-  <string name="caches_remove_all_confirm">Voleu suprimir tots els %s catxés de la llista actual?</string>
+  <plurals name="caches_remove_all_confirm">
+    <item quantity="one">Voleu suprimir aquest catxé de la llista actual?</item>
+    <item quantity="other">Voleu suprimir tots els %d catxés de la llista actual?</item>
+  </plurals>
   <string name="caches_remove_selected">Suprimeix els seleccionats</string>
-  <string name="caches_remove_selected_confirm">Voleu suprimir del dispositiu els %s catxés seleccionats?</string>
+  <plurals name="caches_remove_selected_confirm">
+    <item quantity="one">Voleu suprimir aquest catxé del dispositiu?</item>
+    <item quantity="other">Voleu suprimir els %d catxés seleccionats del dispositiu?</item>
+  </plurals>
   <string name="caches_remove_progress">S\'estan eliminant els catxés</string>
   <string name="caches_delete_events">Elimina trobades passades</string>
   <string name="caches_refresh_selected">Actualitza els seleccionats</string>
@@ -293,6 +302,9 @@
   <string name="caches_filter_personal_note">Amb una nota personal</string>
   <string name="caches_filter_popularity">Preferits</string>
   <string name="caches_filter_popularity_ratio">Preferits [%]</string>
+  <string name="caches_filter_personal_data">Amb dades personals</string>
+  <string name="caches_filter_rating">Amb puntuació</string>
+  <string name="caches_filter_own_rating">Amb puntuació pròpia</string>
   <string name="caches_removing_from_history">S\'està eliminant de l\'historial…</string>
   <string name="caches_clear_offlinelogs">Neteja els registres fora de línea</string>
   <string name="caches_clear_offlinelogs_message">Voleu esborrar els registres fora de línia?</string>
@@ -318,13 +330,16 @@
   <string name="list_not_available">La llista ja no està disponible, s\'està canviant a la llista estàndard</string>
   <string name="about_version">Versió</string>
   <string name="about_changelog">Historial de canvis</string>
+  <string name="about_system">Sistema</string>
   <string name="about_donate">Donatiu</string>
   <string name="about_donation_more">Donatiu\nal desenvolupament</string>
   <string name="about_contributors">Col·laboradors</string>
   <string name="about_license">Llicència</string>
   <string name="about_apache_license"><a href="">Llicència Apache, versió 2.0</a></string>
   <string name="about_help">Ajuda</string>
+  <string name="about_system_include">Si us plau incloure la següent informació de sistema quan envieu un informe d\'error o demanar més informació sobre c:geo:</string>
   <string name="settings_title_services">Serveis</string>
+  <string name="settings_summary_services">Configureu la informació del compte d\'usuari i l\'accés a serveis opcionals.</string>
   <string name="settings_title_appearance">Aparença</string>
   <string name="settings_title_cachedetails">Detalls del catxé</string>
   <string name="settings_title_offlinedata">Dades fora de línia</string>
@@ -372,6 +387,8 @@
   <string name="init_oc_uk_description">Autoritza al c:geo a opencaching.org.uk per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Per poder puntuar un catxé, cal seguir les instruccions a GCVote.com i introduir aquí la contrasenya del GCVote.</string>
+  <string name="err_gcvote_send_rating">Hi ha un error al enviar la puntuació, comproveu la contrasenya de GCVote a les opcions  o deixeu-ho buit.</string>
+  <string name="gcvote_sent">Votació enviada correctament</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activa</string>
   <string name="init_username">Nom d\'usuari</string>
@@ -654,6 +671,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
+  <string name="cache_menu_vote">Vota</string>
   <string name="cache_status">Estat</string>
   <string name="cache_status_offline_log">Registre desat</string>
   <string name="cache_status_found">Trobat</string>

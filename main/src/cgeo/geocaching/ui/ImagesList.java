@@ -13,7 +13,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import rx.Subscription;
-import rx.android.observables.AndroidObservable;
+import rx.android.app.AppObservable;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.subscriptions.CompositeSubscription;
@@ -106,7 +106,7 @@ public class ImagesList {
 
         for (final Image img : images) {
             final LinearLayout rowView = (LinearLayout) inflater.inflate(R.layout.cache_image_item, imagesView, false);
-            assert(rowView != null);
+            assert rowView != null;
 
             if (StringUtils.isNotBlank(img.getTitle())) {
                 final TextView titleView = ButterKnife.findById(rowView, R.id.title);
@@ -121,8 +121,8 @@ public class ImagesList {
             }
 
             final ImageView imageView = (ImageView) inflater.inflate(R.layout.image_item, rowView, false);
-            assert(imageView != null);
-            subscriptions.add(AndroidObservable.bindActivity(activity, imgGetter.fetchDrawable(img.getUrl())).subscribe(new Action1<BitmapDrawable>() {
+            assert imageView != null;
+            subscriptions.add(AppObservable.bindActivity(activity, imgGetter.fetchDrawable(img.getUrl())).subscribe(new Action1<BitmapDrawable>() {
                 @Override
                 public void call(final BitmapDrawable image) {
                     display(imageView, image, img, rowView);
@@ -203,7 +203,7 @@ public class ImagesList {
     }
 
     private static File saveToTemporaryJPGFile(final BitmapDrawable image) throws FileNotFoundException {
-        final File file = LocalStorage.getStorageFile(null, "temp.jpg", false, true);
+        final File file = LocalStorage.getStorageFile(HtmlImage.SHARED, "temp.jpg", false, true);
         BufferedOutputStream stream = null;
         try {
             stream = new BufferedOutputStream(new FileOutputStream(file));

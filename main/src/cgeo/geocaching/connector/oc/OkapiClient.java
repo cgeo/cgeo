@@ -403,7 +403,7 @@ final class OkapiClient {
             cache.setDetailedUpdatedNow();
             // save full detailed caches
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
-            DataStore.saveLogsWithoutTransaction(cache.getGeocode(), parseLogs((ArrayNode) response.path(CACHE_LATEST_LOGS)));
+            DataStore.saveLogs(cache.getGeocode(), parseLogs((ArrayNode) response.path(CACHE_LATEST_LOGS)));
         } catch (ClassCastException | NullPointerException e) {
             Log.e("OkapiClient.parseCache", e);
         }
@@ -619,6 +619,7 @@ final class OkapiClient {
         cache.setCoords(new Geopoint(latitude, longitude));
     }
 
+    @NonNull
     private static CacheSize getCacheSize(final ObjectNode response) {
         if (!response.has(CACHE_SIZE2)) {
             return getCacheSizeDeprecated(response);
@@ -632,6 +633,7 @@ final class OkapiClient {
         }
     }
 
+    @NonNull
     private static CacheSize getCacheSizeDeprecated(final ObjectNode response) {
         if (!response.has(CACHE_SIZE_DEPRECATED)) {
             return CacheSize.NOT_CHOSEN;
@@ -738,7 +740,7 @@ final class OkapiClient {
     }
 
     private static String getPreferredLanguage() {
-        final String code = Locale.getDefault().getCountry();
+        final String code = Locale.getDefault().getLanguage();
         if (StringUtils.isNotBlank(code)) {
             return StringUtils.lowerCase(code) + "|en";
         }

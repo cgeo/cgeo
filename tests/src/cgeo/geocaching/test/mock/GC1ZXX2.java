@@ -40,6 +40,7 @@ public class GC1ZXX2 extends MockedCache {
         return "Rich Uncle Pennybags";
     }
 
+    @NonNull
     @Override
     public CacheSize getSize() {
         return CacheSize.OTHER;
@@ -96,6 +97,7 @@ public class GC1ZXX2 extends MockedCache {
         return null;
     }
 
+    @NonNull
     @Override
     public List<String> getAttributes() {
         final String[] attributes = new String[] {

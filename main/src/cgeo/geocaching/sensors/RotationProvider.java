@@ -39,6 +39,15 @@ public class RotationProvider extends LooperCallbacks<Float> implements SensorEv
         }
     }
 
+    public static boolean hasRotationSensor(final Context context) {
+        return ((SensorManager) context.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) != null;
+    }
+
+    @TargetApi(19)
+    public static boolean hasGeomagneticRotationSensor(final Context context) {
+        return ((SensorManager) context.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR) != null;
+    }
+
     @Override
     public void onSensorChanged(final SensorEvent event) {
         // On some Samsung devices, SensorManager#getRotationMatrixFromVector throws an exception if the rotation
@@ -62,7 +71,12 @@ public class RotationProvider extends LooperCallbacks<Float> implements SensorEv
     public void onStart() {
         if (rotationSensor != null) {
             Log.d("RotationProvider: starting the rotation provider");
-            sensorManager.registerListener(this, rotationSensor, SensorManager.SENSOR_DELAY_NORMAL);
+            try {
+                sensorManager.registerListener(this, rotationSensor, SensorManager.SENSOR_DELAY_NORMAL);
+            } catch (final Exception e) {
+                Log.w("RotationProvider: unable to register listener", e);
+                subject.onError(e);
+            }
         } else {
             subject.onError(new RuntimeException("rotation sensor is absent on this device"));
         }

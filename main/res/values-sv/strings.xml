@@ -125,6 +125,7 @@
   <string name="err_login">Inloggningsinformationen ej sparad</string>
   <string name="err_login_failed_toast">Tyvärr kan c:geo inte logga in. c:geo kommer att köra i offline läge med sparade cacher. Kontrollera dina inloggningsuppgifter och aktivera din internetanslutning.</string>
   <string name="err_unknown">Okänt fel</string>
+  <string name="err_unknown_address">c:geo kunde inte associera adressen till en plats</string>
   <string name="err_comm">Okänt kommunikationsfel</string>
   <string name="err_missing_auth">Användarnamn och/eller lösenord saknas.</string>
   <string name="err_wrong">Felaktiga inloggningsuppgifter</string>
@@ -159,7 +160,6 @@
   <string name="err_acquire_image_failed">Hämtning av bilden misslyckades.</string>
   <string name="err_tb_display">Tyvärr kan c:geo inte visa den trackable du önskar. Är den verkligen trackable?</string>
   <string name="err_tb_details_open">Tyvärr kan c:geo inte öppna detaljer för trackable.</string>
-  <string name="err_tb_forgot_saw">Tyvärr glömde c:geo vilken trackable du såg.</string>
   <string name="err_tb_find">Tyvärr kunde c:geo inte hitta trackable</string>
   <string name="err_tb_find_that">Tyvärr kan c:geo inte hitta önskad trackable.</string>
   <string name="err_waypoint_cache_unknown">Tyvärr vet inte c:geo till vilken cache du vill lägga till en punkt.</string>
@@ -269,9 +269,11 @@
   <string name="caches_nearby">Nära</string>
   <string name="caches_manage">Hantera</string>
   <string name="caches_remove_all">Ta bort alla</string>
-  <string name="caches_remove_all_confirm">Vill du ta bort alla %s cacher från denna lista?</string>
+  <plurals name="caches_remove_all_confirm">
+    <item quantity="one">Vill du radera denna cachen från den här listan?</item>
+    <item quantity="other">Vill du radera dessa %d cacher från den här listan?</item>
+  </plurals>
   <string name="caches_remove_selected">Ta bort valda</string>
-  <string name="caches_remove_selected_confirm">Vill du ta bort de %s markerade cacherna från enheten?</string>
   <string name="caches_remove_progress">Tar bort cacher</string>
   <string name="caches_delete_events">Ta bort gamla event</string>
   <string name="caches_refresh_selected">Uppdatera valda</string>
@@ -296,6 +298,9 @@
   <string name="caches_filter_personal_note">Med personlig anteckning</string>
   <string name="caches_filter_popularity">Favoriter</string>
   <string name="caches_filter_popularity_ratio">Favoriter [%]</string>
+  <string name="caches_filter_personal_data">Med personlig info</string>
+  <string name="caches_filter_rating">Med betyg</string>
+  <string name="caches_filter_own_rating">Med eget betyg</string>
   <string name="caches_removing_from_history">Tar bort från historik…</string>
   <string name="caches_clear_offlinelogs">Rensa offline loggar</string>
   <string name="caches_clear_offlinelogs_message">Vill du rensa offline loggarna?</string>
@@ -321,13 +326,16 @@
   <string name="list_not_available">Listan är inte längre tillgänglig, byter till standardlistan</string>
   <string name="about_version">Version</string>
   <string name="about_changelog">Historik</string>
+  <string name="about_system">System</string>
   <string name="about_donate">Stöd c:geo</string>
   <string name="about_donation_more">Donera till\nutveckling</string>
   <string name="about_contributors">Medarbetare</string>
   <string name="about_license">Licens</string>
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Hjälp</string>
+  <string name="about_system_include">Vänligen inkludera följande systeminformation när du skickar en felrapport eller ber om mer information om c:geo:</string>
   <string name="settings_title_services">Tjänster</string>
+  <string name="settings_summary_services">Ställ in kontoinformation och tillgång till valbara tjänster.</string>
   <string name="settings_title_appearance">Utseende</string>
   <string name="settings_title_cachedetails">Cachedetaljer</string>
   <string name="settings_title_offlinedata">Offlinedata</string>
@@ -377,6 +385,7 @@
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">För att kunna betygsätta en cache måste du följa instruktionerna på GCVote.com och ange ditt lösenord till GCVote här.</string>
   <string name="err_gcvote_send_rating">Fel uppstod när betyg skulle sparas, kontrollera eller ta bort lösenordet för GCVote i inställningarna.</string>
+  <string name="gcvote_sent">Röst skickades</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivera</string>
   <string name="init_username">Användare</string>
@@ -661,6 +670,7 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_android_wear">Android Wear</string>
+  <string name="cache_menu_vote">Rösta</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Sparad logg</string>
   <string name="cache_status_found">Hittad</string>

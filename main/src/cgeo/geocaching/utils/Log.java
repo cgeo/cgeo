@@ -43,56 +43,60 @@ public final class Log {
         Log.isDebug = isDebug;
     }
 
+    private static String addThreadInfo(final String msg) {
+        return new StringBuilder("[").append(Thread.currentThread().getName()).append("] ").append(msg).toString();
+    }
+
     public static void v(final String msg) {
         if (isDebug) {
-            android.util.Log.v(TAG, msg);
+            android.util.Log.v(TAG, addThreadInfo(msg));
         }
     }
 
     public static void v(final String msg, final Throwable t) {
         if (isDebug) {
-            android.util.Log.v(TAG, msg, t);
+            android.util.Log.v(TAG, addThreadInfo(msg), t);
         }
     }
 
     public static void d(final String msg) {
         if (isDebug) {
-            android.util.Log.d(TAG, msg);
+            android.util.Log.d(TAG, addThreadInfo(msg));
         }
     }
 
     public static void d(final String msg, final Throwable t) {
         if (isDebug) {
-            android.util.Log.d(TAG, msg, t);
+            android.util.Log.d(TAG, addThreadInfo(msg), t);
         }
     }
 
     public static void i(final String msg) {
         if (isDebug) {
-            android.util.Log.i(TAG, msg);
+            android.util.Log.i(TAG, addThreadInfo(msg));
         }
     }
 
     public static void i(final String msg, final Throwable t) {
         if (isDebug) {
-            android.util.Log.i(TAG, msg, t);
+            android.util.Log.i(TAG, addThreadInfo(msg), t);
         }
     }
 
     public static void w(final String msg) {
-        android.util.Log.w(TAG, msg);
+        android.util.Log.w(TAG, addThreadInfo(msg));
     }
 
     public static void w(final String msg, final Throwable t) {
-        android.util.Log.w(TAG, msg, t);
+        android.util.Log.w(TAG, addThreadInfo(msg), t);
     }
 
     public static void e(final String msg) {
-        android.util.Log.e(TAG, msg);
+        android.util.Log.e(TAG, addThreadInfo(msg));
     }
 
     public static void e(final String msg, final Throwable t) {
-        android.util.Log.e(TAG, msg, t);
+        android.util.Log.e(TAG, addThreadInfo(msg), t);
     }
 
     /**
@@ -116,7 +120,7 @@ public final class Log {
         Writer writer = null;
         try {
             writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), CharEncoding.UTF_8));
-            writer.write(msg);
+            writer.write(addThreadInfo(msg));
         } catch (final IOException e) {
             Log.e("logToFile: cannot write to " + file, e);
         } finally {

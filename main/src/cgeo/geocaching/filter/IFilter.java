@@ -2,6 +2,8 @@ package cgeo.geocaching.filter;
 
 import cgeo.geocaching.Geocache;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.List;
 
 public interface IFilter {
@@ -12,7 +14,7 @@ public interface IFilter {
      * @param cache
      * @return true if the filter accepts the cache, false otherwise
      */
-    boolean accepts(final Geocache cache);
+    boolean accepts(@NonNull final Geocache cache);
 
-    void filter(final List<Geocache> list);
+    void filter(@NonNull final List<Geocache> list);
 }

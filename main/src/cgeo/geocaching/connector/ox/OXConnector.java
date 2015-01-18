@@ -29,33 +29,37 @@ public class OXConnector extends AbstractConnector implements ISearchByCenter, I
     private static final Pattern PATTERN_GEOCODE = Pattern.compile("OX[A-Z0-9]+", Pattern.CASE_INSENSITIVE);
 
     @Override
-    public boolean canHandle(@NonNull String geocode) {
+    public boolean canHandle(@NonNull final String geocode) {
         return PATTERN_GEOCODE.matcher(geocode).matches();
     }
 
     @Override
-    public String getCacheUrl(@NonNull Geocache cache) {
+    @NonNull
+    public String getCacheUrl(@NonNull final Geocache cache) {
         return getCacheUrlPrefix() + cache.getGeocode();
     }
 
     @Override
+    @NonNull
     public String getName() {
         return "OpenCaching.com";
     }
 
     @Override
+    @NonNull
     public String getHost() {
         return "www.opencaching.com";
     }
 
     @Override
-    public String getLicenseText(@NonNull Geocache cache) {
+    @NonNull
+    public String getLicenseText(@NonNull final Geocache cache) {
         // NOT TO BE TRANSLATED
         return "<a href=\"" + getCacheUrl(cache) + "\">" + getName() + "</a> data licensed under the Creative Commons CC-BY-SA 3.0 License";
     }
 
     @Override
-    public boolean isOwner(final Geocache cache) {
+    public boolean isOwner(@NonNull final Geocache cache) {
         return false;
     }
 
@@ -73,17 +77,19 @@ public class OXConnector extends AbstractConnector implements ISearchByCenter, I
     }
 
     @Override
-    public SearchResult searchByCenter(@NonNull Geopoint center, final @NonNull RecaptchaReceiver recaptchaReceiver) {
+    public SearchResult searchByCenter(@NonNull final Geopoint center, final @NonNull RecaptchaReceiver recaptchaReceiver) {
         return createSearchResult(OpenCachingApi.searchByCenter(center));
     }
 
     @Override
+    @NonNull
     protected String getCacheUrlPrefix() {
         return "http://www.opencaching.com/#!geocache/";
     }
 
     @Override
-    public SearchResult searchByViewport(@NonNull Viewport viewport, final MapTokens tokens) {
+    @NonNull
+    public SearchResult searchByViewport(@NonNull final Viewport viewport, @NonNull final MapTokens tokens) {
         return createSearchResult(OpenCachingApi.searchByBoundingBox(viewport));
     }
 
@@ -97,7 +103,7 @@ public class OXConnector extends AbstractConnector implements ISearchByCenter, I
         return createSearchResult(OpenCachingApi.searchByKeyword(name));
     }
 
-    private static SearchResult createSearchResult(Collection<Geocache> caches) {
+    private static SearchResult createSearchResult(final Collection<Geocache> caches) {
         if (caches == null) {
             return null;
         }

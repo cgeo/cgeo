@@ -75,3 +75,6 @@
 -keep public class cgeo.geocaching.sorting.SortActionProvider { *; }
 -keep public class cgeo.geocaching.ui.NavigationActionProvider { *; }
 -keep public class cgeo.geocaching.apps.cache.navi.NavigationSelectionActionProvider  { *; }
+
+# Play Service references to classes introduced in higher API levels
+-dontwarn com.google.android.gms.**

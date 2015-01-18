@@ -15,17 +15,18 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     private static final Pattern PATTERN_GK_CODE = Pattern.compile("GK[0-9A-F]{4,}");
 
     @Override
-    public boolean canHandleTrackable(String geocode) {
+    public boolean canHandleTrackable(final String geocode) {
         return geocode != null && PATTERN_GK_CODE.matcher(geocode).matches();
     }
 
     @Override
-    public String getUrl(Trackable trackable) {
+    @NonNull
+    public String getUrl(@NonNull final Trackable trackable) {
         return "http://geokrety.org/konkret.php?id=" + getId(trackable.getGeocode());
     }
 
     @Override
-    public Trackable searchTrackable(String geocode, String guid, String id) {
+    public Trackable searchTrackable(final String geocode, final String guid, final String id) {
         final String page = Network.getResponseData(Network.getRequest("http://geokrety.org/export2.php?gkid=" + getId(geocode)));
         if (page == null) {
             return null;
@@ -33,7 +34,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
         return GeokretyParser.parse(page);
     }
 
-    protected static int getId(String geocode) {
+    protected static int getId(final String geocode) {
         try {
             final String hex = geocode.substring(2);
             return Integer.parseInt(hex, 16);
@@ -45,9 +46,9 @@ public class GeokretyConnector extends AbstractTrackableConnector {
 
     @Override
     public @Nullable
-    String getTrackableCodeFromUrl(@NonNull String url) {
+    String getTrackableCodeFromUrl(@NonNull final String url) {
         // http://geokrety.org/konkret.php?id=38545
-        String id = StringUtils.substringAfterLast(url, "konkret.php?id=");
+        final String id = StringUtils.substringAfterLast(url, "konkret.php?id=");
         if (StringUtils.isNumeric(id)) {
             return geocode(Integer.parseInt(id));
         }

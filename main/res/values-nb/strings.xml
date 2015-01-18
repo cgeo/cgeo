@@ -125,6 +125,7 @@
   <string name="err_login">Ingen innloggingsopplysninger lagret</string>
   <string name="err_login_failed_toast">c:geo kan ikke logge inn. c:geo fungerer frakoblet med lagrede cacher. Sjekk innloggingsinnstillinger eller aktiver Internettforbindelsen.</string>
   <string name="err_unknown">Ukjent feil</string>
+  <string name="err_unknown_address">c:geo klarte ikke finne et sted ut fra denne adressen</string>
   <string name="err_comm">Ukjent tilkoblingsfeil</string>
   <string name="err_missing_auth">Brukernavn eller passord er ikke oppgitt.</string>
   <string name="err_wrong">Feilaktige innloggingsopplysninger</string>
@@ -159,7 +160,6 @@
   <string name="err_acquire_image_failed">Henting av bilde mislyktes.</string>
   <string name="err_tb_display">\"Beklager, c:geo klarte ikke å finne den sporbare du etterspurte. Er det virkelig en sporbar (trackable)?</string>
   <string name="err_tb_details_open">Beklager, c:geo klarte ikke å åpne detaljerene til den sporbare.</string>
-  <string name="err_tb_forgot_saw">Beklager, c:geo glemte hvilken sporbare du oppdaget.</string>
   <string name="err_tb_find">Beklager, c:geo klarte ikke å finne noen sporbare</string>
   <string name="err_tb_find_that">Beklager, c:geo finner ikke den sporbare.</string>
   <string name="err_waypoint_cache_unknown">c:geo vet ikke hvilken cache du vil legge til et veipunkt for.</string>
@@ -172,6 +172,8 @@
   <string name="err_log_load_data">Beklager, c:geo klarte ikke å laste den nødvendige informasjonen for å logge funnet.</string>
   <string name="err_log_load_data_again">Beklager, c:geo klarte ikke å laste den nødvendige informasjonen for å logge funnet. c:geo prøver på nytt.</string>
   <string name="err_log_load_data_still">c:geo laster fortsatt informasjonen som er nødvendig for å logge funnet. Vennligst vent.</string>
+  <string name="err_log_post_failed">Det ser ut som loggen din ikke ble registrert. Du bør sjekke dette på cachens nettside.</string>
+  <string name="err_logimage_post_failed">Det ser ut som loggbildet ditt ikke ble lastet opp. Du bør sjekke om dette er tilfelle på cachens nettside.</string>
   <string name="err_search_address_forgot">Beklager, c:geo glemte adressen du prøvde å finne.</string>
   <string name="err_parse_lat">Beklager, c:geo klarte ikke å lese breddegraden.</string>
   <string name="err_parse_lon">Beklager, c:geo klarte ikke å lese lengdegraden.</string>
@@ -267,9 +269,7 @@
   <string name="caches_nearby">I nærheten</string>
   <string name="caches_manage">Administrer</string>
   <string name="caches_remove_all">Fjern alle</string>
-  <string name="caches_remove_all_confirm">Vil du fjerne alle %s cacher fra gjeldende liste?</string>
   <string name="caches_remove_selected">Fjern valgte</string>
-  <string name="caches_remove_selected_confirm">Vil du slette de %s merkede cachene fra enheten?</string>
   <string name="caches_remove_progress">Fjerner cacher</string>
   <string name="caches_delete_events">Slett gamle eventer</string>
   <string name="caches_refresh_selected">Oppdater valgte</string>
@@ -294,6 +294,9 @@
   <string name="caches_filter_personal_note">Med personlig notat</string>
   <string name="caches_filter_popularity">Favoritter</string>
   <string name="caches_filter_popularity_ratio">Favoritter [%]</string>
+  <string name="caches_filter_personal_data">Med personlige data</string>
+  <string name="caches_filter_rating">Med vurdering</string>
+  <string name="caches_filter_own_rating">Med egen vurdering</string>
   <string name="caches_removing_from_history">Fjerner fra historikken…</string>
   <string name="caches_clear_offlinelogs">Fjern offline-logger</string>
   <string name="caches_clear_offlinelogs_message">Vil du fjerne offline-loggene?</string>
@@ -326,6 +329,7 @@
   <string name="about_apache_license"><a href="">Apache-lisens, versjon 2.0</a></string>
   <string name="about_help">Hjelp</string>
   <string name="settings_title_services">Tjenester</string>
+  <string name="settings_summary_services">Konfigurer kontoinformasjon og tilgang til tilleggstjenester.</string>
   <string name="settings_title_appearance">Utseende</string>
   <string name="settings_title_cachedetails">Cache-detaljer</string>
   <string name="settings_title_offlinedata">Offline-data</string>
@@ -375,6 +379,7 @@
   <string name="init_gcvote">GCVote.com</string>
   <string name="init_gcvote_password_description">For å kunne vurdere en cache, må du følge instruksjonene på GCVote.com og angi ditt GCVote passord her.</string>
   <string name="err_gcvote_send_rating">Feil ved sending av rating, sjekk GCVote passord i innstillinger eller tøm den.</string>
+  <string name="gcvote_sent">Stemmegivning sendt</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktiver</string>
   <string name="init_username">Brukernavn</string>
@@ -652,6 +657,7 @@
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_pebble">Pebble</string>
+  <string name="cache_menu_vote">Avgi stemme</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Logg lagret</string>
   <string name="cache_status_found">Funnet</string>

@@ -91,12 +91,14 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.staticmaps_activity);
 
-        if (geocode == null) {
-            showToast("Sorry, c:geo forgot for what cache you want to load static maps.");
+        cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+
+        if (cache == null) {
+            Log.e("StaticMapsActivity.onCreate: cannot find the cache " + geocode);
             finish();
             return;
         }
-        cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+
         setCacheTitleBar(cache);
 
         waitDialog = ProgressDialog.show(this, null, res.getString(R.string.map_static_loading), true);

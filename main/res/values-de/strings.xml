@@ -125,6 +125,7 @@
   <string name="err_login">Keine Anmeldedaten gespeichert.</string>
   <string name="err_login_failed_toast">c:geo konnte sich nicht einloggen und arbeitet im Offline-Modus. Bitte die Login-Daten in den Einstellungen überprüfen oder eine Internetverbindung herstellen.</string>
   <string name="err_unknown">Unbekannter Fehler</string>
+  <string name="err_unknown_address">c:geo konnte keine Koordinaten für diese Adresse ermitteln</string>
   <string name="err_comm">Unbekannter Kommunikationsfehler</string>
   <string name="err_missing_auth">Benutzername oder Passwort nicht gesetzt.</string>
   <string name="err_wrong">Benutzername und/oder Passwort falsch</string>
@@ -159,7 +160,6 @@
   <string name="err_acquire_image_failed">Erstellen eines Fotos ist fehlgeschlagen.</string>
   <string name="err_tb_display">c:geo kann den gewünschten Trackable nicht anzeigen. Ist es wirklich einer?</string>
   <string name="err_tb_details_open">c:geo konnte die Details des Trackables nicht öffnen.</string>
-  <string name="err_tb_forgot_saw">c:geo hat vergessen, welcher Trackable gesehen wurde.</string>
   <string name="err_tb_find">c:geo findet den Trackable nicht</string>
   <string name="err_tb_find_that">c:geo konnte diesen Trackable nicht finden.</string>
   <string name="err_waypoint_cache_unknown">c:geo weiß nicht, zu welchem Cache der Wegpunkt hinzugefügt werden soll.</string>
@@ -269,9 +269,15 @@
   <string name="caches_nearby">In der Nähe</string>
   <string name="caches_manage">Verwalten</string>
   <string name="caches_remove_all">Alle löschen</string>
-  <string name="caches_remove_all_confirm">Sollen alle %s Caches gelöscht werden?</string>
+  <plurals name="caches_remove_all_confirm">
+    <item quantity="one">Soll der Cache von dieser Liste gelöscht werden?</item>
+    <item quantity="other">Sollen alle %d Caches von dieser Liste gelöscht werden?</item>
+  </plurals>
   <string name="caches_remove_selected">Ausgewählte löschen</string>
-  <string name="caches_remove_selected_confirm">Sollen die %s Caches gelöscht werden?</string>
+  <plurals name="caches_remove_selected_confirm">
+    <item quantity="one">Soll dieser Cache gelöscht werden?</item>
+    <item quantity="other">Sollen die %d ausgewählten Caches gelöscht werden?</item>
+  </plurals>
   <string name="caches_remove_progress">Entferne Caches…</string>
   <string name="caches_delete_events">Vergangene Events löschen</string>
   <string name="caches_refresh_selected">Ausgewählte aktualisieren</string>
@@ -296,6 +302,9 @@
   <string name="caches_filter_personal_note">Mit persönlicher Notiz</string>
   <string name="caches_filter_popularity">Favoriten</string>
   <string name="caches_filter_popularity_ratio">Favoriten [%]</string>
+  <string name="caches_filter_personal_data">Mit eigenen Informationen</string>
+  <string name="caches_filter_rating">Mit Bewertung</string>
+  <string name="caches_filter_own_rating">Mit eigener Bewertung</string>
   <string name="caches_removing_from_history">Lösche aus Verlauf…</string>
   <string name="caches_clear_offlinelogs">Offline-Logs löschen</string>
   <string name="caches_clear_offlinelogs_message">Möchtest du die Offline-Logs löschen?</string>
@@ -321,13 +330,16 @@
   <string name="list_not_available">Liste nicht mehr vorhanden, wechsele zur Standardliste</string>
   <string name="about_version">Version</string>
   <string name="about_changelog">Änderungen</string>
+  <string name="about_system">System</string>
   <string name="about_donate">Spenden</string>
   <string name="about_donation_more">Spenden für\nEntwicklung</string>
   <string name="about_contributors">Mitwirkende</string>
   <string name="about_license">Lizenz</string>
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Hilfe</string>
+  <string name="about_system_include">Bitte die folgende Systeminformation bei jedem Fehlerbericht oder bei Informationsanfragen zu c:geo mitsenden:</string>
   <string name="settings_title_services">Dienste</string>
+  <string name="settings_summary_services">Konfiguriere Zugangsdaten und den Zugriff auf optionale Dienste.</string>
   <string name="settings_title_appearance">Erscheinungsbild</string>
   <string name="settings_title_cachedetails">Cache-Details</string>
   <string name="settings_title_offlinedata">Offline-Daten</string>
@@ -376,6 +388,7 @@
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Um einen Cache bewerten zu können, folge der Anleitung auf gcvote.com  und gib das GCVote-Passwort anschließend hier ein.</string>
   <string name="err_gcvote_send_rating">Fehler beim Senden der Bewertung. Prüfe das GCVote-Passwort in den Einstellungen oder lösche es.</string>
+  <string name="gcvote_sent">Bewertung erfolgreich gesendet</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktivieren</string>
   <string name="init_username">Benutzername</string>
@@ -495,8 +508,8 @@
   <string name="init_maintenance_directories_note">c:geo speichert Bilder, Log-Bilder und weitere Dateien zu einem Cache in einem separaten Verzeichnis. In manchen Fällen (z.B. bei Sichern und Wiederherstellen der Datenbank) kann dieses Verzeichnis unnötige Daten enthalten, die gelöscht werden können.</string>
   <string name="init_maintenance_directories">Verwaiste Daten löschen</string>
   <string name="init_location">Positionierung</string>
-  <string name="init_location_note">Auf Geräten mit GooglePlay-Diensten kann c:geo automatisch eine bessere Positions-Bestimmung nutzen. Allerdings kann dann kein externer Bluetooth GPS-Empfänger verwendet werden. Weiterhin kann damit ein Energiesparmodus ohne GPS genutzt werden, wenn hohe Genauigkeit nicht unbedingt erforderlich ist.</string>
-  <string name="init_location_googleplayservices">GooglePlay-Dienst nutzen</string>
+  <string name="init_location_note">Auf Geräten mit Google Play-Diensten kann c:geo automatisch eine bessere Positions-Bestimmung nutzen. Allerdings kann dann kein externer Bluetooth GPS-Empfänger verwendet werden. Weiterhin kann damit ein Energiesparmodus ohne GPS genutzt werden, wenn hohe Genauigkeit nicht unbedingt erforderlich ist.</string>
+  <string name="init_location_googleplayservices">Google Play-Dienst nutzen</string>
   <string name="init_low_power">Energiesparmodus</string>
   <string name="init_low_power_note">Der Energiesparmodus vermeidet die Verwendung von GPS und Gyroskop, wenn eine hochgenaue Position nicht unbedingt notwendig ist. Nachteil ist eine längere Zeit bis zum GPS-Fix.</string>
   <string name="init_low_power_mode">Energiesparmodus aktivieren</string>
@@ -655,6 +668,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble Smartwatch</string>
+  <string name="cache_menu_vote">Bewerten</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Gespeicherter Log</string>
   <string name="cache_status_found">Gefunden</string>

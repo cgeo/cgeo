@@ -7,13 +7,10 @@ import android.os.Handler;
 
 public interface ILogin extends IConnector {
 
-
     /**
-     * Contacts the server the connector belongs to
-     * and verifies/establishes authentication and
-     * retrieves information about the current user
-     * (Name, found caches) if applicable.
-     * 
+     * Contacts the server the connector belongs to and verifies/establishes authentication and retrieves information
+     * about the current user (Name, found caches) if applicable.
+     *
      * @param handler
      *            Handler to receive status feedback
      * @param fromActivity
@@ -28,7 +25,7 @@ public interface ILogin extends IConnector {
     void logout();
 
     /**
-     * Returns the status of the last {@link}login() request
+     * Returns the status of the last {@link #login(Handler, Context)} request.
      *
      * @return
      */
@@ -42,18 +39,17 @@ public interface ILogin extends IConnector {
     String getLoginStatusString();
 
     /**
-     * Name the user has in this connector or empty string if not applicable
-     * It might be necessary to execute login before this information is valid.
+     * Name the user has in this connector or empty string if not applicable.
+     * It might be necessary to execute {@link #login(Handler, Context)} before this information is valid.
      *
      * @return
      */
     String getUserName();
 
     /**
-     * Number of caches the user has found in this connector
-     * Normally retrieved/updated with (@see login).
-     * Might be out dated as changes on the connectors site
-     * are generally not notified.
+     * Number of caches the user has found in this connector.
+     * Normally retrieved/updated with {@link #login(Handler, Context)}.
+     * Might be stale as changes on the connectors site are generally not notified.
      *
      * @return
      */

@@ -8,7 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class OAuth {
@@ -24,7 +23,7 @@ public class OAuth {
                 "oauth_consumer_key", consumerKey,
                 "oauth_nonce", CryptUtils.md5(Long.toString(System.currentTimeMillis())),
                 "oauth_signature_method", "HMAC-SHA1",
-                "oauth_timestamp", Long.toString(new Date().getTime() / 1000),
+                "oauth_timestamp", Long.toString(System.currentTimeMillis() / 1000),
                 "oauth_token", StringUtils.defaultString(tokens.getTokenPublic()),
                 "oauth_version", "1.0");
         params.sort();
@@ -41,10 +40,7 @@ public class OAuth {
     }
 
     /**
-     * percent encode following http://tools.ietf.org/html/rfc5849#section-3.6
-     *
-     * @param url
-     * @return
+     * Percent encode following http://tools.ietf.org/html/rfc5849#section-3.6
      */
     static String percentEncode(@NonNull final String url) {
         return StringUtils.replace(Network.rfc3986URLEncode(url), "*", "%2A");

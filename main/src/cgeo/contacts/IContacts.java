@@ -1,10 +1,12 @@
 package cgeo.contacts;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 public interface IContacts {
-    static final String INTENT = "cgeo.contacts.FIND";
+    @NonNull static final String INTENT = "cgeo.contacts.FIND";
 
-    static final String URI_SCHEME = "find";
-    static final String URI_HOST = "cgeo.org";
+    @NonNull static final String URI_SCHEME = "find";
+    @NonNull static final String URI_HOST = "cgeo.org";
 
-    static final String PARAM_NAME = "name"; // user name
+    @NonNull static final String PARAM_NAME = "name"; // user name
 }

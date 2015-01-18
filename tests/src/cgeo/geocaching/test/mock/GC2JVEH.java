@@ -64,6 +64,7 @@ public class GC2JVEH extends MockedCache {
         return "indianerjones";
     }
 
+    @NonNull
     @Override
     public CacheSize getSize() {
         return CacheSize.SMALL;
@@ -99,6 +100,7 @@ public class GC2JVEH extends MockedCache {
         return null;
     }
 
+    @NonNull
     @Override
     public List<String> getAttributes() {
         final String[] attributes = new String[] {

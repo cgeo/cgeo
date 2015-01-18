@@ -1,5 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 public class GCSmiliesProvider {
     public enum Smiley {
@@ -24,9 +26,10 @@ public class GCSmiliesProvider {
         DISAPPROVE("V"),
         QUESTION("?");
 
+        @NonNull
         public final String text;
 
-        Smiley(final String text) {
+        Smiley(@NonNull final String text) {
             this.text = text;
         }
 
@@ -35,12 +38,14 @@ public class GCSmiliesProvider {
         }
     }
 
+    @NonNull
     public static Smiley[] getSmilies() {
         return Smiley.values();
     }
 
-    public static Smiley getSmiley(int itemId) {
-        for (Smiley smiley : getSmilies()) {
+    @Nullable
+    public static Smiley getSmiley(final int itemId) {
+        for (final Smiley smiley : getSmilies()) {
             if (smiley.getItemId() == itemId) {
                 return smiley;
             }

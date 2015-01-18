@@ -4,6 +4,10 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
+import cgeo.geocaching.sensors.OrientationProvider;
+import cgeo.geocaching.sensors.RotationProvider;
+import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.utils.Version;
@@ -17,6 +21,8 @@ import org.apache.commons.lang3.tuple.Pair;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,6 +88,20 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     }
 
+    class SystemViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
+
+        @InjectView(R.id.system) protected TextView system;
+
+        @Override
+        public ScrollView getDispatchedView(final ViewGroup parentView) {
+            final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_system_page, parentView, false);
+            ButterKnife.inject(this, view);
+            system.setText(systemInformation(AboutActivity.this));
+            system.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+            return view;
+        }
+    }
+
     class HelpViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
         @InjectView(R.id.support) protected TextView support;
@@ -95,7 +115,8 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         public ScrollView getDispatchedView(final ViewGroup parentView) {
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_help_page, parentView, false);
             ButterKnife.inject(this, view);
-            setClickListener(support, "mailto:support@cgeo.org?subject=" + Uri.encode("cgeo " + Version.getVersionName(AboutActivity.this)));
+            setClickListener(support, "mailto:support@cgeo.org?subject=" + Uri.encode("cgeo " + Version.getVersionName(AboutActivity.this)) +
+                    "&body=" + Uri.encode(systemInformation(AboutActivity.this)) + "\n");
             setClickListener(website, "http://www.cgeo.org/");
             setClickListener(facebook, "http://www.facebook.com/pages/cgeo/297269860090");
             setClickListener(twitter, "http://twitter.com/android_gc");
@@ -131,6 +152,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         VERSION(R.string.about_version),
         HELP(R.string.about_help),
         CHANGELOG(R.string.about_changelog),
+        SYSTEM(R.string.about_system),
         CONTRIBUTORS(R.string.about_contributors),
         LICENSE(R.string.about_license);
 
@@ -168,6 +190,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
     }
 
+    @SuppressWarnings("deprecation")
     final void market() {
         final Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getPackageName()));
         marketIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
@@ -183,6 +206,8 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 return new HelpViewCreator();
             case CHANGELOG:
                 return new ChangeLogViewCreator();
+            case SYSTEM:
+                return new SystemViewCreator();
             case CONTRIBUTORS:
                 return new ContributorsViewCreator();
             case LICENSE:
@@ -222,6 +247,32 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         final Intent intent = new Intent(fromActivity, AboutActivity.class);
         intent.putExtra(EXTRA_ABOUT_STARTPAGE, Page.CHANGELOG.ordinal());
         fromActivity.startActivity(intent);
+    }
+
+
+    private static String presence(final Boolean present) {
+        return present ? "present" : "absent";
+    }
+
+    private static String systemInformation(final Context context) {
+        final boolean googlePlayServicesAvailable = CgeoApplication.getInstance().isGooglePlayServicesAvailable();
+        final StringBuilder body = new StringBuilder("--- System information ---")
+                .append("\nDevice: ").append(Build.MODEL).append(" (").append(Build.PRODUCT).append(", ").append(Build.BRAND).append(")")
+                .append("\nAndroid version: ").append(VERSION.RELEASE)
+                .append("\nAndroid build: ").append(Build.DISPLAY)
+                .append("\nCgeo version: ").append(Version.getVersionName(context))
+                .append("\nPlay services: ").append(presence(googlePlayServicesAvailable));
+        if (googlePlayServicesAvailable) {
+            body.append("\nUse Play services: ").append(Settings.useGooglePlayServices() ? "yes" : "no");
+        }
+        body
+                .append("\nLow power mode: ").append(Settings.useLowPowerMode() ? "active" : "inactive")
+                .append("\nCompass capabilities: ").append(Sensors.getInstance().hasCompassCapabilities() ? "yes" : "no")
+                .append("\nRotation sensor: ").append(presence(RotationProvider.hasRotationSensor(context)))
+                .append("\nGeomagnetic rotation sensor: ").append(presence(RotationProvider.hasGeomagneticRotationSensor(context)))
+                .append("\nOrientation sensor: ").append(presence(OrientationProvider.hasOrientationSensor(context)))
+                .append("\n--- End of system information ---\n");
+        return body.toString();
     }
 
 }

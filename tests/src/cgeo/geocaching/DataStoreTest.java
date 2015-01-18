@@ -59,6 +59,7 @@ public class DataStoreTest extends CGeoTestCase {
 
             // get list
             final StoredList list1 = DataStore.getList(listId1);
+            assertThat(list1).isNotNull();
             assertThat(list1.title).isEqualTo("DataStore Test (renamed)");
 
             // move to list (cache1=listId2, cache2=listId2)
@@ -123,6 +124,8 @@ public class DataStoreTest extends CGeoTestCase {
         try {
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
             final Geocache loadedCache = DataStore.loadCache(GEOCODE_CACHE, LoadFlags.LOAD_ALL_DB_ONLY);
+            assert loadedCache != null;
+            assertThat(loadedCache).isNotNull();
             assertThat(loadedCache).overridingErrorMessage("Cache was not saved.").isNotNull();
             assertThat(loadedCache.getInventory()).hasSize(1);
         } finally {

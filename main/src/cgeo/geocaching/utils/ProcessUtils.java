@@ -3,6 +3,8 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.CgeoApplication;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -24,7 +26,7 @@ public final class ProcessUtils {
      * @param packageName
      * @return
      */
-    public static boolean isLaunchable(final String packageName) {
+    public static boolean isLaunchable(@Nullable final String packageName) {
         return getLaunchIntent(packageName) != null;
     }
 
@@ -36,14 +38,14 @@ public final class ProcessUtils {
      * @param packageName
      * @return
      */
-    public static boolean isInstalled(final String packageName) {
+    public static boolean isInstalled(@NonNull final String packageName) {
         return isLaunchable(packageName) || hasPackageInstalled(packageName);
     }
 
     /**
      * This will find installed applications even without launch intent (e.g. the streetview plugin).
      */
-    private static boolean hasPackageInstalled(final String packageName) {
+    private static boolean hasPackageInstalled(@NonNull final String packageName) {
         final List<PackageInfo> packs = CgeoApplication.getInstance().getPackageManager().getInstalledPackages(0);
         for (final PackageInfo packageInfo : packs) {
             if (packageName.equals(packageInfo.packageName)) {
@@ -56,7 +58,8 @@ public final class ProcessUtils {
     /**
      * This will find applications, which can be launched.
      */
-    public static Intent getLaunchIntent(final String packageName) {
+    @Nullable
+    public static Intent getLaunchIntent(@Nullable final String packageName) {
         if (packageName == null) {
             return null;
         }
@@ -79,16 +82,16 @@ public final class ProcessUtils {
      * method queries the package manager for installed packages that can
      * respond to an intent with the specified action. If no suitable package is
      * found, this method returns false.
-     * 
+     *
      * @param action
      *            The Intent action to check for availability.
      * @param uri
      *            The Intent URI to check for availability.
-     * 
+     *
      * @return True if an Intent with the specified action can be sent and
      *         responded to, false otherwise.
      */
-    public static boolean isIntentAvailable(final String action, final Uri uri) {
+    public static boolean isIntentAvailable(@NonNull final String action, @Nullable final Uri uri) {
         final PackageManager packageManager = CgeoApplication.getInstance().getPackageManager();
         final Intent intent;
         if (uri == null) {

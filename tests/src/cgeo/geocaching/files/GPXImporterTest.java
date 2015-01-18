@@ -78,6 +78,8 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         final SearchResult search = (SearchResult) importStepHandler.messages.get(3).obj;
         assertThat(new ArrayList<String>(search.getGeocodes())).isEqualTo(Collections.singletonList(geocode));
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        assert cache != null;
+        assertThat(cache).isNotNull();
         assertCacheProperties(cache);
 
         assertThat(cache.getWaypoints().isEmpty()).isTrue();
@@ -101,6 +103,8 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         final SearchResult search = (SearchResult) importStepHandler.messages.get(3).obj;
         assertThat(new ArrayList<String>(search.getGeocodes())).isEqualTo(Collections.singletonList(geocode));
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        assert cache != null;
+        assertThat(cache).isNotNull();
         assertCacheProperties(cache);
 
         assertThat(cache.getWaypoints()).as("Number of imported waypoints").hasSize(4);
@@ -128,6 +132,8 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         final SearchResult search = (SearchResult) importStepHandler.messages.get(4).obj;
         assertThat(new ArrayList<String>(search.getGeocodes())).isEqualTo(Collections.singletonList("GC31J2H"));
         final Geocache cache = DataStore.loadCache("GC31J2H", LoadFlags.LOAD_CACHE_OR_DB);
+        assert cache != null;
+        assertThat(cache).isNotNull();
         assertCacheProperties(cache);
         assertThat(cache.getWaypoints()).hasSize(2);
     }
@@ -141,6 +147,8 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
 
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_STORE_STATIC_MAPS, GPXImporter.IMPORT_STEP_FINISHED);
         final Geocache cache = DataStore.loadCache("AID1", LoadFlags.LOAD_CACHE_OR_DB);
+        assert cache != null;
+        assertThat(cache).isNotNull();
         assertCacheProperties(cache);
         assertThat(cache.getName()).isEqualTo("First Aid Station #1");
     }
@@ -205,6 +213,8 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         final SearchResult search = (SearchResult) importStepHandler.messages.get(3).obj;
         assertThat(new ArrayList<String>(search.getGeocodes())).isEqualTo(Collections.singletonList(geocode));
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        assert cache != null;
+        assertThat(cache).isNotNull();
         assertCacheProperties(cache);
 
         assertThat(cache.getWaypoints().isEmpty()).isTrue();
@@ -223,6 +233,8 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         final SearchResult search = (SearchResult) importStepHandler.messages.get(4).obj;
         assertThat(new ArrayList<String>(search.getGeocodes())).isEqualTo(Collections.singletonList(geocode));
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        assert cache != null;
+        assertThat(cache).isNotNull();
         assertCacheProperties(cache);
         assertThat(cache.getWaypoints()).hasSize(1); // this is the original pocket query result without test waypoint
     }
@@ -249,6 +261,8 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         final SearchResult search = (SearchResult) importStepHandler.messages.get(4).obj;
         assertThat(new ArrayList<String>(search.getGeocodes())).isEqualTo(Collections.singletonList(geocode));
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        assert cache != null;
+        assertThat(cache).isNotNull();
         assertCacheProperties(cache);
         assertThat(cache.getWaypoints()).hasSize(1); // this is the original pocket query result without test waypoint
     }

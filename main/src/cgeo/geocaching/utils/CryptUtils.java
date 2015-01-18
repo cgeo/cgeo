@@ -23,8 +23,8 @@ public final class CryptUtils {
     }
 
     private static final byte[] EMPTY = {};
-    private static char[] BASE64MAP1 = new char[64];
-    private static byte[] BASE64MAP2 = new byte[128];
+    private static final char[] BASE64MAP1 = new char[64];
+    private static final byte[] BASE64MAP2 = new byte[128];
 
     static {
         int i = 0;

@@ -16,16 +16,17 @@ public interface TrackableConnector {
 
     public boolean canHandleTrackable(final String geocode);
 
-    public String getUrl(final Trackable trackable);
+    @NonNull
+    public String getUrl(@NonNull final Trackable trackable);
 
     public boolean isLoggable();
 
     public Trackable searchTrackable(String geocode, String guid, String id);
 
-    public @Nullable
-    String getTrackableCodeFromUrl(final @NonNull String url);
+    @Nullable
+    public String getTrackableCodeFromUrl(final @NonNull String url);
 
-    public @NonNull
-    List<UserAction> getUserActions();
+    @NonNull
+    public List<UserAction> getUserActions();
 
 }

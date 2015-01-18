@@ -4,6 +4,8 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,14 +13,14 @@ class PopularityFilter extends AbstractFilter {
     private final int minFavorites;
     private final int maxFavorites;
 
-    public PopularityFilter(String name, final int minFavorites, final int maxFavorites) {
+    public PopularityFilter(final String name, final int minFavorites, final int maxFavorites) {
         super(name);
         this.minFavorites = minFavorites;
         this.maxFavorites = maxFavorites;
     }
 
     @Override
-    public boolean accepts(final Geocache cache) {
+    public boolean accepts(@NonNull final Geocache cache) {
         return (cache.getFavoritePoints() > minFavorites) && (cache.getFavoritePoints() <= maxFavorites);
     }
 
@@ -27,6 +29,7 @@ class PopularityFilter extends AbstractFilter {
         private static final int[] FAVORITES = { 10, 20, 50, 100, 200, 500 };
 
         @Override
+        @NonNull
         public List<IFilter> getFilters() {
             final List<IFilter> filters = new ArrayList<>(FAVORITES.length);
             for (final int minRange : FAVORITES) {

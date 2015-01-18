@@ -28,7 +28,7 @@ public final class ContactsActivity extends Activity {
     static final String LOG_TAG = "cgeo.contacts";
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         final Uri uri = getIntent().getData();
@@ -67,14 +67,14 @@ public final class ContactsActivity extends Activity {
             selectContact(contacts);
         }
         else {
-            int contactId = contacts.get(0).first;
+            final int contactId = contacts.get(0).first;
             openContactAndFinish(contactId);
         }
     }
 
-    private void selectContact(final List<Pair<Integer, String>> contacts) {
-        List<String> list = new ArrayList<>();
-        for (Pair<Integer, String> p : contacts) {
+    private void selectContact(@NonNull final List<Pair<Integer, String>> contacts) {
+        final List<String> list = new ArrayList<>();
+        for (final Pair<Integer, String> p : contacts) {
             list.add(p.second);
         }
         final CharSequence[] items = list.toArray(new CharSequence[list.size()]);
@@ -82,8 +82,9 @@ public final class ContactsActivity extends Activity {
                 .setTitle(R.string.multiple_matches)
                 .setItems(items, new OnClickListener() {
 
-                    public void onClick(DialogInterface dialog, int which) {
-                        int contactId = contacts.get(which).first;
+                    @Override
+                    public void onClick(final DialogInterface dialog, final int which) {
+                        final int contactId = contacts.get(which).first;
                         dialog.dismiss();
                         openContactAndFinish(contactId);
                     }
@@ -91,29 +92,30 @@ public final class ContactsActivity extends Activity {
                 .create().show();
     }
 
-    private void openContactAndFinish(int id) {
+    private void openContactAndFinish(final int id) {
         final Intent intent = new Intent(Intent.ACTION_VIEW);
-        Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_URI, String.valueOf(id));
+        final Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_URI, String.valueOf(id));
         intent.setData(uri);
         startActivity(intent);
         finish();
     }
 
-    private List<Pair<Integer, String>> getContacts(final @NonNull String searchName, Uri uri, final @NonNull String idColumnName, final @NonNull String selectionColumnName, boolean like) {
+    @NonNull
+    private List<Pair<Integer, String>> getContacts(final @NonNull String searchName, final Uri uri, final @NonNull String idColumnName, final @NonNull String selectionColumnName, final boolean like) {
         final String[] projection = new String[] { idColumnName, selectionColumnName };
         final String selection = selectionColumnName + (like ? " LIKE" : " =") + " ? COLLATE NOCASE";
         final String[] selectionArgs = new String[] { like ? "%" + searchName + "%" : searchName };
         Cursor cursor = null;
 
-        List<Pair<Integer, String>> result = new ArrayList<>();
+        final List<Pair<Integer, String>> result = new ArrayList<>();
         try {
             cursor = getContentResolver().query(uri, projection, selection, selectionArgs, null);
             while (cursor != null && cursor.moveToNext()) {
-                int foundId = cursor.getInt(0);
-                String foundName = cursor.getString(1);
+                final int foundId = cursor.getInt(0);
+                final String foundName = cursor.getString(1);
                 result.add(new Pair<>(foundId, foundName));
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Log.e(LOG_TAG, "ContactsActivity.getContactId", e);
         } finally {
             if (cursor != null) {
@@ -130,14 +132,15 @@ public final class ContactsActivity extends Activity {
         toast.show();
     }
 
-    private static String getParameter(final Uri uri, final String paramKey) {
+    @NonNull
+    private static String getParameter(@NonNull final Uri uri, @NonNull final String paramKey) {
         try {
             final String param = uri.getQueryParameter(paramKey);
             if (param == null) {
                 return StringUtils.EMPTY;
             }
             return URLDecoder.decode(param, CharEncoding.UTF_8).trim();
-        } catch (UnsupportedEncodingException e) {
+        } catch (final UnsupportedEncodingException e) {
             Log.e(LOG_TAG, "ContactsActivity.getParameter", e);
         }
         return StringUtils.EMPTY;

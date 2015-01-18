@@ -9,6 +9,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.GPXListAdapter;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -24,7 +25,7 @@ public class GpxFileListActivity extends AbstractFileListActivity<GPXListAdapter
     }
 
     @Override
-    protected GPXListAdapter getAdapter(List<File> files) {
+    protected GPXListAdapter getAdapter(final List<File> files) {
         return new GPXListAdapter(this, files);
     }
 
@@ -33,17 +34,17 @@ public class GpxFileListActivity extends AbstractFileListActivity<GPXListAdapter
         return Collections.singletonList(new File(Settings.getGpxImportDir()));
     }
 
-    public static void startSubActivity(Activity fromActivity, int listId) {
+    public static void startSubActivity(final Activity fromActivity, final int listId) {
         final Intent intent = new Intent(fromActivity, GpxFileListActivity.class);
         intent.putExtra(Intents.EXTRA_LIST_ID, StoredList.getConcreteList(listId));
         fromActivity.startActivityForResult(intent, 0);
     }
 
     @Override
-    protected boolean filenameBelongsToList(final String filename) {
+    protected boolean filenameBelongsToList(@NonNull final String filename) {
         if (super.filenameBelongsToList(filename)) {
             if (StringUtils.endsWithIgnoreCase(filename, GPXImporter.ZIP_FILE_EXTENSION)) {
-                for (IConnector connector : ConnectorFactory.getConnectors()) {
+                for (final IConnector connector : ConnectorFactory.getConnectors()) {
                     if (connector.isZippedGPXFile(filename)) {
                         return true;
                     }

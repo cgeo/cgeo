@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
@@ -27,6 +28,7 @@
         android:layout_height="fill_parent"
         android:layout_above="@+id/buttonRun"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/headline" >
 
         <TextView
@@ -43,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
         android:onClick="runTests"
         android:text="@string/run_tests" />
 

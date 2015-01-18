@@ -3,6 +3,8 @@ package cgeo.geocaching.enumerations;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -22,11 +24,12 @@ public enum WaypointType {
     WAYPOINT("waypoint", R.string.wp_waypoint, R.drawable.waypoint_waypoint),
     ORIGINAL("original", R.string.wp_original, R.drawable.waypoint_waypoint);
 
+    @NonNull
     public final String id;
     public final int stringId;
     public final int markerId;
 
-    WaypointType(String id, int stringId, int markerId) {
+    WaypointType(@NonNull final String id, final int stringId, final int markerId) {
         this.id = id;
         this.stringId = stringId;
         this.markerId = markerId;
@@ -36,28 +39,28 @@ public enum WaypointType {
      * inverse lookup of waypoint IDs<br/>
      * non public so that <code>null</code> handling can be handled centrally in the enum type itself
      */
-    private static final Map<String, WaypointType> FIND_BY_ID;
-    public static final Set<WaypointType> ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL = new HashSet<>();
+    private static final Map<String, WaypointType> FIND_BY_ID = new HashMap<>();
+    private static final Set<WaypointType> ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL_TMP = new HashSet<>();
     static {
-        final HashMap<String, WaypointType> mapping = new HashMap<>();
-        for (WaypointType wt : values()) {
-            mapping.put(wt.id, wt);
+        for (final WaypointType wt : values()) {
+            FIND_BY_ID.put(wt.id, wt);
             if (wt != WaypointType.OWN && wt != WaypointType.ORIGINAL) {
-                ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL.add(wt);
+                ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL_TMP.add(wt);
             }
         }
-        FIND_BY_ID = Collections.unmodifiableMap(mapping);
     }
+    public static final Set<WaypointType> ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL = Collections.unmodifiableSet(ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL_TMP);
 
     /**
      * inverse lookup of waypoint IDs<br/>
      * here the <code>null</code> handling shall be done
      */
+    @NonNull
     public static WaypointType findById(final String id) {
         if (null == id) {
             return WAYPOINT;
         }
-        WaypointType waypointType = FIND_BY_ID.get(id);
+        final WaypointType waypointType = FIND_BY_ID.get(id);
         if (null == waypointType) {
             return WAYPOINT;
         }

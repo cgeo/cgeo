@@ -4,6 +4,8 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.content.res.Resources;
 
 import java.util.LinkedList;
@@ -25,13 +27,14 @@ class AttributeFilter extends AbstractFilter {
     }
 
     @Override
-    public boolean accepts(final Geocache cache) {
+    public boolean accepts(@NonNull final Geocache cache) {
         return cache.getAttributes().contains(attribute);
     }
 
     public static class Factory implements IFilterFactory {
 
         @Override
+        @NonNull
         public List<IFilter> getFilters() {
             final String packageName = CgeoApplication.getInstance().getBaseContext().getPackageName();
             final Resources res = CgeoApplication.getInstance().getResources();

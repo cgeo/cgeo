@@ -125,6 +125,7 @@
   <string name="err_login">Nu există informaţii de autorizare</string>
   <string name="err_login_failed_toast">c:geo nu se poate conecta. c:geo va funcţiona deconectat cu cutiile salvate local. Verifică informaţiile de autentificare sau activează conexiunea la internet.</string>
   <string name="err_unknown">Eroare necunoscută</string>
+  <string name="err_unknown_address">c:geo nu a putut găsi coordonate pentru această adresă</string>
   <string name="err_comm">Eroare necunoscută de comunicaţie</string>
   <string name="err_missing_auth">Nu a fost dat numele de utilizator sau parola.</string>
   <string name="err_wrong">Informaţii de autentificare incorecte</string>
@@ -159,7 +160,6 @@
   <string name="err_acquire_image_failed">Imaginea nu a putut fi obţinută.</string>
   <string name="err_tb_display">c:geo nu poate afişa obiectul călător solicitat. Chiar este un obiect călător?</string>
   <string name="err_tb_details_open">c:geo nu poate accesa detaliile obiectului călător.</string>
-  <string name="err_tb_forgot_saw">c:geo a uitat obiectul călător pe care l-ai văzut.</string>
   <string name="err_tb_find">c:geo nu poate găsi obiectul călător</string>
   <string name="err_tb_find_that">c:geo nu poate găsi acest obiect călător.</string>
   <string name="err_waypoint_cache_unknown">c:geo nu ştie pentru ce cutie vrei sa adaugi un punct.</string>
@@ -172,6 +172,8 @@
   <string name="err_log_load_data">c:geo nu poate încărca informaţiile necesare pentru a posta o însemnare.</string>
   <string name="err_log_load_data_again">c:geo nu poate încărca informaţiile necesare pentru a posta o însemnare. Te rog încearcă din nou.</string>
   <string name="err_log_load_data_still">c:geo încă încarcă informaţiale necesare pentru a posta o însemnare. Te rog mai aşteaptă.</string>
+  <string name="err_log_post_failed">Se pare că însemnarea ta nu a fost postată. Te rog verifică pe site-ul pe care se află publicată această geocutie.</string>
+  <string name="err_logimage_post_failed">Se pare că imaginea pe care încercai să o trimiţi odată cu însemnarea nu a putut fi încărcată. Te rog verifică însemnarea în jurnalul geocutiei pe site-ul unde este publicată.</string>
   <string name="err_search_address_forgot">c:geo a uitat adresa pe care o căutai.</string>
   <string name="err_parse_lat">c:geo nu înţelege latitudinea.</string>
   <string name="err_parse_lon">c:geo nu înţelege longitudinea.</string>
@@ -254,7 +256,7 @@
   <string name="caches_sort_favorites_ratio">Favorite [%]</string>
   <string name="caches_sort_name">Nume</string>
   <string name="caches_sort_geocode">Geo Cod</string>
-  <string name="caches_sort_rating">Rating</string>
+  <string name="caches_sort_rating">Voturi</string>
   <string name="caches_sort_vote">Vot (propriul vot)</string>
   <string name="caches_sort_inventory">Total inventar</string>
   <string name="caches_sort_date_hidden">Data ascunderii</string>
@@ -268,9 +270,12 @@
   <string name="caches_nearby">În apropiere</string>
   <string name="caches_manage">Gestionează</string>
   <string name="caches_remove_all">Șterge toate</string>
-  <string name="caches_remove_all_confirm">Vrei să ştergi toate cele %s cutii din lista curenă?</string>
+  <plurals name="caches_remove_all_confirm">
+    <item quantity="one">Vrei să ştergi această geocutie din lista curentă?</item>
+    <item quantity="few">Vrei să ştergi toate cele %d geocutii din lista curentă?</item>
+    <item quantity="other">Vrei să ştergi toate cele %d geocutii din lista curentă?</item>
+  </plurals>
   <string name="caches_remove_selected">Şterge geocutiile selectate</string>
-  <string name="caches_remove_selected_confirm">Vrei să ştergi cele %s cutii selectate din dispozitiv?</string>
   <string name="caches_remove_progress">Ştergere geocutii</string>
   <string name="caches_delete_events">Şterge evenimentele trecute</string>
   <string name="caches_refresh_selected">Reîncarcă cutiile selectate</string>
@@ -295,6 +300,9 @@
   <string name="caches_filter_personal_note">Scrie notă personală</string>
   <string name="caches_filter_popularity">Favorite</string>
   <string name="caches_filter_popularity_ratio">Favorite [%]</string>
+  <string name="caches_filter_personal_data">Cu date personalizate</string>
+  <string name="caches_filter_rating">Cu voturi</string>
+  <string name="caches_filter_own_rating">Cu votul tău</string>
   <string name="caches_removing_from_history">Şterge din istoric…</string>
   <string name="caches_clear_offlinelogs">Şterge însemnări stocate local</string>
   <string name="caches_clear_offlinelogs_message">Vrei să ştergi însemnările stocate local?</string>
@@ -320,13 +328,16 @@
   <string name="list_not_available">Lista nu mai există, revenire la lista standard</string>
   <string name="about_version">Versiune</string>
   <string name="about_changelog">Istoric modificări</string>
+  <string name="about_system">Sistem</string>
   <string name="about_donate">Donează</string>
   <string name="about_donation_more">Donează pentru\ndezvoltare</string>
   <string name="about_contributors">Contribuitori</string>
   <string name="about_license">Licenţă</string>
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Ajutor</string>
+  <string name="about_system_include">Te rog include urmatoarele informaţii despre sistem atunci când trimiţi o sesizare sau întrebi despre c:geo:</string>
   <string name="settings_title_services">Servicii internet</string>
+  <string name="settings_summary_services">Configurează-ţi contul şi accesul la servicii opţionale.</string>
   <string name="settings_title_appearance">Aspect vizual</string>
   <string name="settings_title_cachedetails">Detalii cutie</string>
   <string name="settings_title_offlinedata">Informaţii păstrate locale</string>
@@ -375,6 +386,7 @@
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Pentru a putea evalua o geocutie, trebuie să urmezi instrucţiunile de la GCVote.com şi să introduci aici parola GCVote.</string>
   <string name="err_gcvote_send_rating">Eroare la trimiterea evaluării, verifică-ţi parola GCVote din configuraţie sau şterge această parolă.</string>
+  <string name="gcvote_sent">Votul a fost trimis</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Activează</string>
   <string name="init_username">Utilizator</string>
@@ -648,6 +660,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Ceas \"Pebble\"</string>
+  <string name="cache_menu_vote">Votează</string>
   <string name="cache_status">Stare</string>
   <string name="cache_status_offline_log">Jurnal salvat</string>
   <string name="cache_status_found">Găsit</string>

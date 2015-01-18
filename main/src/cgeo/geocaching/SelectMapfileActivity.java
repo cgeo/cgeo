@@ -87,7 +87,7 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
         for (File dir : LocalStorage.getStorages()) {
             folders.add(new File(dir, "mfmaps"));
             folders.add(new File(new File(dir, "Locus"), "mapsVector"));
-            folders.add(new File(dir, LocalStorage.cache));
+            folders.add(new File(dir, LocalStorage.CACHE_DIRNAME));
         }
         return folders;
     }

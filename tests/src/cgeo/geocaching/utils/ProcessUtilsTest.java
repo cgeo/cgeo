@@ -6,7 +6,7 @@ import junit.framework.TestCase;
 public class ProcessUtilsTest extends TestCase {
 
     public static void testIsInstalled() {
-        assertThat(ProcessUtils.isInstalled("com.android.launcher")).isTrue();
+        assertThat(ProcessUtils.isInstalled("com.android.settings")).isTrue();
     }
 
     public static void testIsInstalledNotLaunchable() {
@@ -16,7 +16,7 @@ public class ProcessUtilsTest extends TestCase {
     }
 
     public static void testIsLaunchable() {
-        assertThat(ProcessUtils.isInstalled("com.android.settings")).isTrue();
+        assertThat(ProcessUtils.isLaunchable("com.android.settings")).isTrue();
     }
 
 }

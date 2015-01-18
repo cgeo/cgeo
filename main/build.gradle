@@ -27,8 +27,8 @@ gradle connectedCheck
 //https://github.com/stephanenicolas/Quality-Tools-for-Android
 
 def AAVersion = '3.2'
-def RXJavaVersion = '1.0.2'
-def RXAndroidVersion = '0.23.0'
+def RXJavaVersion = '1.0.4'
+def RXAndroidVersion = '0.24.0'
 def RXJavaAsyncUtilVersion = '0.21.0'
 def JacksonCoreVersion = '2.4.4'
 def JacksonDatabindVersion = '2.4.4'
@@ -42,7 +42,7 @@ version = '0.0.1'
 android {
     compileSdkVersion "Google Inc.:Google APIs:19"
     //compileSdkVersion 19
-    buildToolsVersion "21.1"
+    buildToolsVersion "21.1.2"
 
      compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
@@ -158,7 +158,7 @@ dependencies {
     compile files('libs/mapsforge-map-0.3.0-jar-with-dependencies.jar')
 
     compile 'com.android.support:appcompat-v7:19.1.0'
-    compile 'com.google.android.gms:play-services:5.0.89'
+    compile 'com.google.android.gms:play-services:6.5.+'
 
     compile 'com.jakewharton:butterknife:6.0.0'
     compile "org.apache.commons:commons-collections4:$CommonsCollections4Version"

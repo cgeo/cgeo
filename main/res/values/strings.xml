@@ -177,7 +177,6 @@
     <string name="err_acquire_image_failed">Acquiring an image failed.</string>
     <string name="err_tb_display">c:geo can\'t display the trackable you want. Is it really a trackable?</string>
     <string name="err_tb_details_open">c:geo can\'t open trackable details.</string>
-    <string name="err_tb_forgot_saw">c:geo forgot which trackable you saw.</string>
     <string name="err_tb_find">c:geo can\'t find trackable</string>
     <string name="err_tb_find_that">c:geo can\'t find that trackable.</string>
     <string name="err_waypoint_cache_unknown">c:geo doesn\'t know to which cache you want to add a waypoint for.</string>
@@ -299,11 +298,19 @@
     <string name="caches_manage">Manage</string>
     <string name="caches_remove_all">Remove all</string>
     <plurals name="caches_remove_all_confirm">
+<<<<<<< HEAD
         <item quantity="one">Do you want to remove all %s cache from current list?</item>
         <item quantity="other">Do you want to remove all %s caches from current list?</item>
+=======
+        <item quantity="one">Do you want to remove this cache from current list?</item>
+        <item quantity="other">Do you want to remove all %d caches from current list?</item>
+>>>>>>> upstream/master
     </plurals>
     <string name="caches_remove_selected">Remove selected</string>
-    <string name="caches_remove_selected_confirm">Do you want to remove the selected %s caches from your device?</string>
+    <plurals name="caches_remove_selected_confirm">
+        <item quantity="one">Do you want to remove this cache from your device?</item>
+        <item quantity="other">Do you want to remove the selected %d caches from your device?</item>
+    </plurals>
     <string name="caches_remove_progress">Removing caches</string>
     <string name="caches_delete_events">Delete past events</string>
     <string name="caches_refresh_selected">Refresh selected</string>
@@ -328,6 +335,9 @@
     <string name="caches_filter_personal_note">With personal note</string>
     <string name="caches_filter_popularity">Favorites</string>
     <string name="caches_filter_popularity_ratio">Favorites [%]</string>
+    <string name="caches_filter_personal_data">With personal data</string>
+    <string name="caches_filter_rating">With rating</string>
+    <string name="caches_filter_own_rating">With own rating</string>
     <string name="caches_removing_from_history">Removing from History…</string>
     <string name="caches_clear_offlinelogs">Clear offline logs</string>
     <string name="caches_clear_offlinelogs_message">Do you want to clear the offline logs?</string>
@@ -357,15 +367,18 @@
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Changelog</string>
+    <string name="about_system">System</string>
     <string name="about_donate">Donate</string>
     <string name="about_donation_more">Donate\ndevelopment</string>
     <string name="about_contributors">Contributors</string>
     <string name="about_license">License</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Help</string>
+    <string name="about_system_include">Please include the following system information when sending a bug report or asking for more information about c:geo:</string>
     
     <!-- settings -->
     <string name="settings_title_services">Services</string>
+    <string name="settings_summary_services">Configure user account information and access to optional services.</string>
     <string name="settings_title_appearance">Appearance</string>
     <string name="settings_title_cachedetails">Cache Details</string>
     <string name="settings_title_offlinedata">Offline Data</string>
@@ -418,6 +431,7 @@
     <string name="init_gcvote">GCvote.com</string>
     <string name="init_gcvote_password_description">To be able to rate a cache, you need to follow the instructions at GCVote.com and enter your GCVote password here.</string>
     <string name="err_gcvote_send_rating">Error while sending rating, check GCVote password in settings or empty it.</string>
+    <string name="gcvote_sent">Voting successfully sent</string>
     <string name="init_twitter">Twitter</string>
     <string name="settings_activate_twitter">Activate</string>
     <string name="init_username">Username</string>
@@ -715,6 +729,7 @@
     <string name="cache_menu_navigon">Navigon</string>
     <string name="cache_menu_pebble">Pebble</string>
     <string name="cache_menu_android_wear">Android Wear</string>
+    <string name="cache_menu_vote">Vote</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Saved Log</string>
     <string name="cache_status_found">Found</string>

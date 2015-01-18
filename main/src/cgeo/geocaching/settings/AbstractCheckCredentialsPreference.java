@@ -11,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import rx.Observable;
-import rx.android.observables.AndroidObservable;
+import rx.android.app.AppObservable;
 import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.util.async.Async;
@@ -74,7 +74,7 @@ public abstract class AbstractCheckCredentialsPreference extends AbstractClickab
             loginDialog.setCancelable(false);
             Cookies.clearCookies();
 
-            AndroidObservable.bindActivity(settingsActivity, Async.start(new Func0<ImmutablePair<StatusCode, Observable<Drawable>>>() {
+            AppObservable.bindActivity(settingsActivity, Async.start(new Func0<ImmutablePair<StatusCode, Observable<Drawable>>>() {
                 @Override
                 public ImmutablePair<StatusCode, Observable<Drawable>> call() {
                     return login();

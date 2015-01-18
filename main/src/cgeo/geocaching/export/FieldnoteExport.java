@@ -59,10 +59,11 @@ public class FieldnoteExport extends AbstractExport {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
         final Context themedContext;
-        if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB)
+        if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB) {
             themedContext = new ContextThemeWrapper(activity, R.style.dark);
-        else
+        } else {
             themedContext = activity;
+        }
         final View layout = View.inflate(themedContext, R.layout.fieldnote_export_dialog, null);
 
         builder.setView(layout);
@@ -135,8 +136,10 @@ public class FieldnoteExport extends AbstractExport {
                 for (final Geocache cache : caches) {
                     if (ConnectorFactory.getConnector(cache).equals(connector) && cache.isLogOffline()) {
                         final LogEntry log = DataStore.loadLogOffline(cache.getGeocode());
-                        if (!onlyNew || log.date > Settings.getFieldnoteExportDate()) {
-                            fieldNotes.add(cache, log);
+                        if (log != null) {
+                            if (!onlyNew || log.date > Settings.getFieldnoteExportDate()) {
+                                fieldNotes.add(cache, log);
+                            }
                         }
                     }
                     publishProgress(++i);

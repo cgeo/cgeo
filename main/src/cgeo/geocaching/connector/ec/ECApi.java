@@ -24,6 +24,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,9 +39,13 @@ import java.util.TimeZone;
 
 final class ECApi {
 
+    @NonNull
     private static final String API_HOST = "https://extremcaching.com/exports/";
 
+    @NonNull
     private static final ECLogin ecLogin = ECLogin.getInstance();
+
+    @NonNull
     private static final SynchronizedDateFormat LOG_DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ", TimeZone.getTimeZone("UTC"), Locale.US);
 
     private ECApi() {
@@ -50,6 +56,7 @@ final class ECApi {
         return StringUtils.removeStartIgnoreCase(geocode, "EC");
     }
 
+    @Nullable
     static Geocache searchByGeoCode(final String geocode) {
         final Parameters params = new Parameters("id", getIdFromGeocode(geocode));
         final HttpResponse response = apiRequest("gpx.php", params);
@@ -61,6 +68,7 @@ final class ECApi {
         return null;
     }
 
+    @NonNull
     static Collection<Geocache> searchByBBox(final Viewport viewport) {
 
         if (viewport.getLatitudeSpan() == 0 || viewport.getLongitudeSpan() == 0) {
@@ -77,7 +85,7 @@ final class ECApi {
         return importCachesFromJSON(response);
     }
 
-
+    @NonNull
     static Collection<Geocache> searchByCenter(final Geopoint center) {
 
         final Parameters params = new Parameters("fnc", "center");
@@ -89,11 +97,13 @@ final class ECApi {
         return importCachesFromJSON(response);
     }
 
-    static LogResult postLog(final Geocache cache, final LogType logType, final Calendar date, final String log) {
+    @NonNull
+    static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log) {
         return postLog(cache, logType, date, log, false);
     }
 
-    private static LogResult postLog(final Geocache cache, final LogType logType, final Calendar date, final String log, final boolean isRetry) {
+    @NonNull
+    private static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, final boolean isRetry) {
         final Parameters params = new Parameters("cache_id", cache.getGeocode());
         params.add("type", logType.type);
         params.add("log", log);
@@ -127,15 +137,17 @@ final class ECApi {
         return new LogResult(StatusCode.LOG_POST_ERROR, "");
     }
 
-
+    @Nullable
     private static HttpResponse apiRequest(final Parameters params) {
         return apiRequest("api.php", params);
     }
 
+    @Nullable
     private static HttpResponse apiRequest(final String uri, final Parameters params) {
         return apiRequest(uri, params, false);
     }
 
+    @Nullable
     private static HttpResponse apiRequest(final String uri, final Parameters params, final boolean isRetry) {
         // add session and cgeo marker on every request
         if (!isRetry) {
@@ -160,6 +172,7 @@ final class ECApi {
         return response;
     }
 
+    @NonNull
     private static Collection<Geocache> importCachesFromGPXResponse(final HttpResponse response) {
         if (response == null) {
             return Collections.emptyList();
@@ -173,6 +186,7 @@ final class ECApi {
         }
     }
 
+    @NonNull
     private static List<Geocache> importCachesFromJSON(final HttpResponse response) {
         if (response != null) {
             try {
@@ -196,6 +210,7 @@ final class ECApi {
         return Collections.emptyList();
     }
 
+    @Nullable
     private static Geocache parseCache(final JsonNode response) {
         try {
             final Geocache cache = new Geocache();
@@ -216,6 +231,7 @@ final class ECApi {
         }
     }
 
+    @NonNull
     private static CacheType getCacheType(final String cacheType) {
         if (cacheType.equalsIgnoreCase("Tradi")) {
             return CacheType.TRADITIONAL;

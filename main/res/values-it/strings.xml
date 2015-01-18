@@ -125,6 +125,7 @@
   <string name="err_login">Informazioni di login non memorizzate</string>
   <string name="err_login_failed_toast">c:geo non può effettuare login. Attivata la modalità offline. Verificare le informazioni di login nelle impostazioni o abilitare una connessione internet.</string>
   <string name="err_unknown">Errore sconosciuto</string>
+  <string name="err_unknown_address">c:geo non è in grado di mappare questo indirizzo su una posizione gps esistente</string>
   <string name="err_comm">Errore sconosciuto di comunicazione</string>
   <string name="err_missing_auth">username e/o password non settati.</string>
   <string name="err_wrong">Informazioni di login errate</string>
@@ -159,7 +160,6 @@
   <string name="err_acquire_image_failed">Acquisizione immagine fallita.</string>
   <string name="err_tb_display">c:geo non riesce a visualizzare il trackable che vuoi. È veramente un trackable?</string>
   <string name="err_tb_details_open">c:geo non riesce ad aprire i dettagli del trackable.</string>
-  <string name="err_tb_forgot_saw">c:geo ha dimenticato quale trackable vedevi.</string>
   <string name="err_tb_find">c:geo non trova nessun trackable</string>
   <string name="err_tb_find_that">c:geo non trova quel trackable.</string>
   <string name="err_waypoint_cache_unknown">c:geo non conosce a quale cache vuoi aggiungere un waypoint.</string>
@@ -172,6 +172,8 @@
   <string name="err_log_load_data">c:geo non riesce a caricare i dati necessari per salvare il log della tua visita.</string>
   <string name="err_log_load_data_again">c:geo non riesce a caricare i dati necessari per salvare il log della tua visita. Nuovo tentativo in corso.</string>
   <string name="err_log_load_data_still">c:geo sta ancora caricando i dati necessari per salvare il log. Per cortesia attendere ancora un pochino.</string>
+  <string name="err_log_post_failed">Sembra che il log non sia stato pubblicato. Si prega di controllare sul sito Web del cache originario.</string>
+  <string name="err_logimage_post_failed">Sembra che l\'immagine del registro non sia stata caricata. Si prega di controllare sul sito Web del cache originario.</string>
   <string name="err_search_address_forgot">c:geo ha dimenticato l\'indirizzo che vuoi trovare.</string>
   <string name="err_parse_lat">c:geo non riesce ad interpretare la latitudine.</string>
   <string name="err_parse_lon">c:geo non riesce ad interpretare la longitudine.</string>
@@ -267,9 +269,11 @@
   <string name="caches_nearby">Qui vicino</string>
   <string name="caches_manage">Gestisci</string>
   <string name="caches_remove_all">Elimina tutti</string>
-  <string name="caches_remove_all_confirm">Vuoi rimuovere tutti i %s cache dalla lista corrente?</string>
   <string name="caches_remove_selected">Elimina selezionati</string>
-  <string name="caches_remove_selected_confirm">Vuoi rimuovere i %s cache selezionati dal dispositivo?</string>
+  <plurals name="caches_remove_selected_confirm">
+    <item quantity="one">Si desidera rimuovere questo cache dal tuo dispositivo?</item>
+    <item quantity="other">Vuoi rimuovere i %d cache selezionati dal dispositivo?</item>
+  </plurals>
   <string name="caches_remove_progress">Eliminazione dei cache</string>
   <string name="caches_delete_events">Cancella eventi passati</string>
   <string name="caches_refresh_selected">Aggiorna i cache selezionati</string>
@@ -294,6 +298,9 @@
   <string name="caches_filter_personal_note">Con una nota personale</string>
   <string name="caches_filter_popularity">Preferiti</string>
   <string name="caches_filter_popularity_ratio">Preferiti [%]</string>
+  <string name="caches_filter_personal_data">Con dati personali</string>
+  <string name="caches_filter_rating">Con valutazione (rating)</string>
+  <string name="caches_filter_own_rating">Con propria valutazione (rating)</string>
   <string name="caches_removing_from_history">Rimozione dalla cronologia…</string>
   <string name="caches_clear_offlinelogs">Cancella i log offline</string>
   <string name="caches_clear_offlinelogs_message">Vuoi cancellare tutti i log offline?</string>
@@ -319,13 +326,16 @@
   <string name="list_not_available">Elenco non più disponibile, passo a elenco standard</string>
   <string name="about_version">Versione</string>
   <string name="about_changelog">Modifiche</string>
+  <string name="about_system">Sistema</string>
   <string name="about_donate">Donazioni</string>
   <string name="about_donation_more">Fai una\nDonazione</string>
   <string name="about_contributors">Contributori</string>
   <string name="about_license">Licenza</string>
   <string name="about_apache_license"><a href="">Licenza Apache, versione 2.0</a></string>
   <string name="about_help">Guida</string>
+  <string name="about_system_include">Si prega di includere le seguenti informazioni di sistema quando si invia una segnalazione di bug o per chiedere ulteriori informazioni su c:geo:</string>
   <string name="settings_title_services">Servizi</string>
+  <string name="settings_summary_services">Configura le informazioni utente dell\'account ed accede a servizi opzionali.</string>
   <string name="settings_title_appearance">Aspetto</string>
   <string name="settings_title_cachedetails">Dettagli cache</string>
   <string name="settings_title_offlinedata">Dati offline</string>
@@ -371,6 +381,7 @@
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Per poter votare un cache, è necessario seguire le istruzioni di GCVote.com e inserire la password di GCVote qui.</string>
   <string name="err_gcvote_send_rating">Errore durante l\'invio del voto, verifica la password di GCVote nelle impostazioni oppure cancellala per disattivare GCVote.</string>
+  <string name="gcvote_sent">Voto inviato correttamente</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Attiva</string>
   <string name="init_username">Utente</string>
@@ -650,6 +661,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
+  <string name="cache_menu_vote">Vota</string>
   <string name="cache_status">Stato</string>
   <string name="cache_status_offline_log">Log salvato</string>
   <string name="cache_status_found">Trovato</string>

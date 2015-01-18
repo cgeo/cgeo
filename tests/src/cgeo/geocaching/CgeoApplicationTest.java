@@ -72,7 +72,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     public static void testSearchTrackable() {
         final Trackable tb = GCParser.searchTrackable("TB2J1VZ", null, null);
         assertThat(tb).isNotNull();
-        assert (tb != null); // eclipse bug
+        assert tb != null; // eclipse bug
         // fix data
         assertThat(tb.getGuid()).isEqualTo("aefffb86-099f-444f-b132-605436163aa8");
         assertThat(tb.getGeocode()).isEqualTo("TB2J1VZ");
@@ -172,7 +172,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                 final Geocache searchedCache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
                 // coords must be null if the user is not logged in
                 assertThat(searchedCache).isNotNull();
-                assert (searchedCache != null); // eclipse bug
+                assert searchedCache != null; // eclipse bug
                 assertThat(searchedCache.getCoords()).isNull();
 
                 // premium cache. Not visible to guests
@@ -312,6 +312,8 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     assertThat(search).isNotNull();
                     assertThat(search.getGeocodes().contains(mockedCache.getGeocode())).isTrue();
                     Geocache parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+                    assert parsedCache != null;
+                    assertThat(parsedCache).isNotNull();
 
                     assertThat(mockedCache.getCoords().equals(parsedCache.getCoords())).isEqualTo(Settings.isGCPremiumMember());
                     assertThat(parsedCache.isReliableLatLon()).isEqualTo(Settings.isGCPremiumMember());
@@ -324,6 +326,8 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     assertThat(search).isNotNull();
                     assertThat(search.getGeocodes().contains(mockedCache.getGeocode())).isTrue();
                     parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+                    assert parsedCache != null;
+                    assertThat(parsedCache).isNotNull();
 
                     assertThat(mockedCache.getCoords().equals(parsedCache.getCoords())).isEqualTo(Settings.isGCPremiumMember());
                     assertThat(parsedCache.isReliableLatLon()).isEqualTo(Settings.isGCPremiumMember());
@@ -366,6 +370,8 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     assertThat(search.getGeocodes().contains(cache.getGeocode())).isTrue();
                     // coords differ
                     final Geocache cacheFromViewport = DataStore.loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+                    assert cacheFromViewport != null;
+                    assertThat(cacheFromViewport).isNotNull();
                     Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
                     Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cacheFromViewport.getCoords());
                     assertThat(cache.getCoords().distanceTo(cacheFromViewport.getCoords()) <= 1e-3).isFalse();
@@ -396,17 +402,11 @@ public class CgeoApplicationTest extends CGeoTestCase {
      */
     public static void testSearchByGeocodeBasis() {
         for (MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
-            String oldUser = mockedCache.getMockedDataUser();
+            final String oldUser = mockedCache.getMockedDataUser();
             try {
                 mockedCache.setMockedDataUser(Settings.getUsername());
-                Geocache parsedCache = CgeoApplicationTest.testSearchByGeocode(mockedCache.getGeocode());
-                if (null != parsedCache) {
-                    // fake found flag for one cache until it will be updated
-                    if (parsedCache.getGeocode().equals("GC3XX5J") && Settings.getUsername().equals("mucek4")) {
-                        parsedCache.setFound(false);
-                    }
-                    Compare.assertCompareCaches(mockedCache, parsedCache, true);
-                }
+                final Geocache parsedCache = CgeoApplicationTest.testSearchByGeocode(mockedCache.getGeocode());
+                Compare.assertCompareCaches(mockedCache, parsedCache, true);
             } finally {
                 mockedCache.setMockedDataUser(oldUser);
             }

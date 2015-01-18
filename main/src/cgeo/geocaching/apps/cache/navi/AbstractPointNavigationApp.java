@@ -7,6 +7,8 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.AbstractApp;
 import cgeo.geocaching.location.Geopoint;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.app.Activity;
 import android.content.Intent;
 
@@ -15,20 +17,20 @@ import android.content.Intent;
  */
 abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNavigationApp, WaypointNavigationApp, GeopointNavigationApp {
 
-    protected AbstractPointNavigationApp(final String name, final int id, final String intent) {
+    protected AbstractPointNavigationApp(@NonNull final String name, final int id, final String intent) {
         super(name, id, intent);
     }
 
-    protected AbstractPointNavigationApp(final String name, final int id, final String intent, final String packageName) {
+    protected AbstractPointNavigationApp(@NonNull final String name, final int id, final String intent, final String packageName) {
         super(name, id, intent, packageName);
     }
 
     @Override
-    public void navigate(Activity activity, Geocache cache) {
+    public void navigate(final Activity activity, final Geocache cache) {
         navigateWithNullCheck(activity, cache.getCoords());
     }
 
-    private void navigateWithNullCheck(Activity activity, final Geopoint coords) {
+    private void navigateWithNullCheck(final Activity activity, final Geopoint coords) {
         if (coords != null) {
             navigate(activity, coords);
         } else {
@@ -37,17 +39,17 @@ abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNa
     }
 
     @Override
-    public void navigate(Activity activity, Waypoint waypoint) {
+    public void navigate(final Activity activity, final Waypoint waypoint) {
         navigateWithNullCheck(activity, waypoint.getCoords());
     }
 
     @Override
-    public boolean isEnabled(Geocache cache) {
+    public boolean isEnabled(final Geocache cache) {
         return cache.getCoords() != null;
     }
 
     @Override
-    public boolean isEnabled(Waypoint waypoint) {
+    public boolean isEnabled(final Waypoint waypoint) {
         return waypoint.getCoords() != null;
     }
 

@@ -5,6 +5,7 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.settings.Settings;
 
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -40,6 +41,7 @@ public class GC3XX5J extends MockedCache {
         return "David & Ajda";
     }
 
+    @NonNull
     @Override
     public CacheSize getSize() {
         return CacheSize.SMALL;
@@ -96,6 +98,7 @@ public class GC3XX5J extends MockedCache {
         return null;
     }
 
+    @NonNull
     @Override
     public List<String> getAttributes() {
         final String[] attributes = new String[] {
@@ -135,5 +138,16 @@ public class GC3XX5J extends MockedCache {
     @Override
     public String getShortDescription() {
         return "Kadar zbolimo nam pomaga...<br /> <br /> When we get sick, they are helpful...";
+    }
+
+    @Override
+    public boolean isFound() {
+        return Settings.getUsername().equals("mucek4");
+    }
+
+    @Override
+    public boolean isDisabled() {
+        // The cache has been disabled since 2014-12-13.
+        return true;
     }
 }

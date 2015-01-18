@@ -4,6 +4,8 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.content.res.Resources;
 
 import java.util.ArrayList;
@@ -26,7 +28,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(final Geocache cache) {
+        public boolean accepts(@NonNull final Geocache cache) {
             return cache.isFound();
         }
 
@@ -39,7 +41,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(final Geocache cache) {
+        public boolean accepts(@NonNull final Geocache cache) {
             return !cache.isFound();
         }
 
@@ -51,7 +53,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(final Geocache cache) {
+        public boolean accepts(@NonNull final Geocache cache) {
             return cache.isArchived();
         }
     }
@@ -62,7 +64,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(final Geocache cache) {
+        public boolean accepts(@NonNull final Geocache cache) {
             return cache.isDisabled();
         }
     }
@@ -73,7 +75,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(final Geocache cache) {
+        public boolean accepts(@NonNull final Geocache cache) {
             return cache.isPremiumMembersOnly();
         }
     }
@@ -84,7 +86,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(final Geocache cache) {
+        public boolean accepts(@NonNull final Geocache cache) {
             return !cache.isPremiumMembersOnly();
         }
     }
@@ -95,7 +97,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(final Geocache cache) {
+        public boolean accepts(@NonNull final Geocache cache) {
             return cache.isLogOffline();
         }
     }
@@ -106,7 +108,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(final Geocache cache) {
+        public boolean accepts(@NonNull final Geocache cache) {
             return cache.isOffline();
         }
     }
@@ -117,7 +119,7 @@ abstract class StateFilter extends AbstractFilter {
         }
 
         @Override
-        public boolean accepts(final Geocache cache) {
+        public boolean accepts(@NonNull final Geocache cache) {
             return !cache.isOffline();
         }
     }
@@ -125,6 +127,7 @@ abstract class StateFilter extends AbstractFilter {
     public static class Factory implements IFilterFactory {
 
         @Override
+        @NonNull
         public List<StateFilter> getFilters() {
             final List<StateFilter> filters = new ArrayList<>(6);
             filters.add(new StateFoundFilter());

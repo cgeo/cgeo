@@ -54,12 +54,12 @@ public final class FilterUserInterface {
         register(R.string.cache_attributes, AttributeFilter.Factory.class);
         register(R.string.cache_status, StateFilter.Factory.class);
         register(R.string.caches_filter_track, TrackablesFilter.class);
-        register(R.string.caches_filter_modified, ModifiedFilter.class);
         register(R.string.caches_filter_origin, OriginFilter.Factory.class);
         register(R.string.caches_filter_distance, DistanceFilter.Factory.class);
-        register(R.string.caches_filter_personal_note, PersonalNoteFilter.class);
         register(R.string.caches_filter_popularity, PopularityFilter.Factory.class);
         register(R.string.caches_filter_popularity_ratio, PopularityRatioFilter.Factory.class);
+        register(R.string.caches_filter_personal_data, PersonalDataFilterFactory.class);
+        register(R.string.caches_filter_rating, RatingFilter.class);
 
         // sort by localized names
         Collections.sort(registry, new Comparator<FactoryEntry>() {
@@ -87,16 +87,16 @@ public final class FilterUserInterface {
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, final int itemIndex) {
-                FactoryEntry entry = adapter.getItem(itemIndex);
+                final FactoryEntry entry = adapter.getItem(itemIndex);
                 // reset?
                 if (entry.filterFactory == null) {
                     runAfterwards.call(null);
                 }
                 else {
                     try {
-                        IFilterFactory factoryInstance = entry.filterFactory.newInstance();
+                        final IFilterFactory factoryInstance = entry.filterFactory.newInstance();
                         selectFromFactory(factoryInstance, entry.name, runAfterwards);
-                    } catch (Exception e) {
+                    } catch (final Exception e) {
                         Log.e("selectFilter", e);
                     }
                 }

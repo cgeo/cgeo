@@ -9,7 +9,9 @@ import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
-import cgeo.geocaching.apps.cachelist.CacheListAppFactory;
+import cgeo.geocaching.apps.cachelist.CacheListApp;
+import cgeo.geocaching.apps.cachelist.CacheListApps;
+import cgeo.geocaching.apps.cachelist.ListNavigationSelectionActionProvider;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.gc.RecaptchaHandler;
 import cgeo.geocaching.enumerations.CacheListType;
@@ -43,6 +45,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Send2CgeoDownloader;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.sorting.CacheComparator;
@@ -62,19 +65,22 @@ import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.github.amlcurran.showcaseview.targets.ActionViewTarget.Type;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Observable;
 import rx.Observable.OnSubscribe;
+import rx.Scheduler.Worker;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
+import rx.subjects.ReplaySubject;
+import rx.subscriptions.CompositeSubscription;
+import rx.subscriptions.Subscriptions;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -295,21 +301,18 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     progress.setMessage(res.getString(R.string.caches_downloading) + " " + res.getQuantityString(R.plurals.caches_eta_mins, minutesRemaining, minutesRemaining));
                 }
             } else {
-                new AsyncTask<Void, Void, Void>() {
+                new AsyncTask<Void, Void, Set<Geocache>>() {
                     @Override
-                    protected Void doInBackground(final Void... params) {
-                        if (search != null) {
-                            final Set<Geocache> cacheListTmp = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-                            if (CollectionUtils.isNotEmpty(cacheListTmp)) {
-                                cacheList.clear();
-                                cacheList.addAll(cacheListTmp);
-                            }
-                        }
-                        return null;
+                    protected Set<Geocache> doInBackground(final Void... params) {
+                        return search != null ? search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB) : null;
                     }
 
                     @Override
-                    protected void onPostExecute(final Void result) {
+                    protected void onPostExecute(final Set<Geocache> result) {
+                        if (CollectionUtils.isNotEmpty(result)) {
+                            cacheList.clear();
+                            cacheList.addAll(result);
+                        }
                         setAdapterCurrentCoordinates(false);
 
                         showProgress(false);
@@ -411,7 +414,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
         }
         if (type == CacheListType.NEAREST) {
-            coords = CgeoApplication.getInstance().currentGeo().getCoords();
+            coords = Sensors.getInstance().currentGeo().getCoords();
         }
 
         setTitle(title);
@@ -541,7 +544,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void setAdapterCurrentCoordinates(final boolean forceSort) {
-        adapter.setActualCoordinates(app.currentGeo().getCoords());
+        adapter.setActualCoordinates(Sensors.getInstance().currentGeo().getCoords());
         if (forceSort) {
             adapter.forceSort();
         }
@@ -557,7 +560,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.cache_list_options, menu);
 
-        CacheListAppFactory.addMenuItems(menu, this, res);
         sortProvider = (SortActionProvider) MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_sort));
         assert sortProvider != null;  // We set it in the XML file
         sortProvider.setSelection(adapter.getCacheComparator());
@@ -578,6 +580,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 sortProvider.setSelection(selectedComparator);
             }
         });
+
+        ListNavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_cache_list_app_provider), new ListNavigationSelectionActionProvider.Callback() {
+
+            @Override
+            public void onListNavigationSelected(final CacheListApp app) {
+                app.invoke(cacheList, CacheListActivity.this, getFilteredSearch());
+            }
+        });
+
         return true;
     }
 
@@ -638,6 +649,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             setMenuItemLabel(menu, R.id.menu_remove_from_history, R.string.cache_remove_from_history, R.string.cache_clear_history);
             menu.findItem(R.id.menu_import_android).setVisible(Compatibility.isStorageAccessFrameworkAvailable() && isOffline);
+
+            final List<CacheListApp> listNavigationApps = CacheListApps.getActiveApps();
+            menu.findItem(R.id.menu_cache_list_app_provider).setVisible(listNavigationApps.size() > 1);
+            menu.findItem(R.id.menu_cache_list_app).setVisible(listNavigationApps.size() == 1);
+
         } catch (final RuntimeException e) {
             Log.e("CacheListActivity.onPrepareOptionsMenu", e);
         }
@@ -678,9 +694,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        if (super.onOptionsItemSelected(item)) {
-            return true;
-        }
         switch (item.getItemId()) {
             case R.id.menu_show_on_map:
                 goMap();
@@ -704,23 +717,23 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             case R.id.menu_import_android:
                 importGpxFromAndroid();
                 invalidateOptionsMenuCompatible();
-                return false;
+                return true;
             case R.id.menu_create_list:
                 new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(), listNameMemento.getTerm());
                 refreshSpinnerAdapter();
                 invalidateOptionsMenuCompatible();
-                return false;
+                return true;
             case R.id.menu_drop_list:
                 removeList(false);
                 invalidateOptionsMenuCompatible();
-                return false;
+                return true;
             case R.id.menu_rename_list:
                 renameList();
-                return false;
+                return true;
             case R.id.menu_invert_selection:
                 adapter.invertSelection();
                 invalidateOptionsMenuCompatible();
-                return false;
+                return true;
             case R.id.menu_filter:
                 showFilterMenu(null);
                 return true;
@@ -736,7 +749,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             case R.id.menu_remove_from_history:
                 removeFromHistoryCheck();
                 invalidateOptionsMenuCompatible();
-                return false;
+                return true;
             case R.id.menu_move_to_list:
                 moveCachesToOtherList();
                 invalidateOptionsMenuCompatible();
@@ -750,13 +763,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 invalidateOptionsMenuCompatible();
                 return true;
             case R.id.menu_cache_list_app:
-                if (!cacheToShow()) {
-                    return false;
+                if (cacheToShow()) {
+                    CacheListApps.getActiveApps().get(0).invoke(cacheList, this, getFilteredSearch());
                 }
-                return CacheListAppFactory.onMenuItemSelected(item, cacheList, this, getFilteredSearch());
-            default:
-                return CacheListAppFactory.onMenuItemSelected(item, cacheList, this, search);
+                return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     private boolean cacheToShow() {
@@ -1168,9 +1180,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void dropStored() {
         final int titleId = (adapter.getCheckedCount() > 0) ? R.string.caches_remove_selected : R.string.caches_remove_all;
+<<<<<<< HEAD
         final int count= adapter.getCheckedOrAllCount();
         final String message = (adapter.getCheckedCount() > 0) ?
                 getString(R.string.caches_remove_selected_confirm, count) : res.getQuantityString(R.plurals.caches_remove_all_confirm,count,count);
+=======
+        final int count = adapter.getCheckedOrAllCount();
+        final String message = res.getQuantityString(adapter.getCheckedCount() > 0 ? R.plurals.caches_remove_selected_confirm : R.plurals.caches_remove_all_confirm, count, count);
+>>>>>>> upstream/master
         Dialogs.confirmYesNo(this, titleId, message, new DialogInterface.OnClickListener() {
 
             @Override
@@ -1188,11 +1205,37 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      */
 
     private void loadDetails(final CancellableHandler handler, final List<Geocache> caches) {
-        final List<Geocache> allCaches = Settings.isStoreOfflineMaps() ?
-                ListUtils.union(ListUtils.selectRejected(caches, Geocache.hasStaticMap),
-                        ListUtils.select(caches, Geocache.hasStaticMap)) :
-                caches;
-        final Observable<Geocache> loaded = Observable.from(allCaches).flatMap(new Func1<Geocache, Observable<Geocache>>() {
+        final Observable<Geocache> allCaches;
+        final Subscription generator;
+        if (Settings.isStoreOfflineMaps()) {
+            // The list of caches will be generated in the background, putting the caches without static maps first.
+            final ReplaySubject<Geocache> withStaticMaps = ReplaySubject.create(caches.size());
+            final ReplaySubject<Geocache> withoutStaticMaps = ReplaySubject.create(caches.size());
+            final Worker worker = Schedulers.io().createWorker();
+            generator = worker.schedule(new Action0() {
+                @Override
+                public void call() {
+                    for (final Geocache cache : caches) {
+                        if (worker.isUnsubscribed()) {
+                            // Do not continue to check for static maps if the user pressed cancel.
+                            return;
+                        }
+                        if (cache.hasStaticMap()) {
+                            withStaticMaps.onNext(cache);
+                        } else {
+                            withoutStaticMaps.onNext(cache);
+                        }
+                    }
+                    withStaticMaps.onCompleted();
+                    withoutStaticMaps.onCompleted();
+                }
+            });
+            allCaches = Observable.concat(withoutStaticMaps, withStaticMaps);
+        } else {
+            allCaches = Observable.from(caches);
+            generator = Subscriptions.empty();
+        }
+        final Observable<Geocache> loaded = allCaches.flatMap(new Func1<Geocache, Observable<Geocache>>() {
             @Override
             public Observable<Geocache> call(final Geocache cache) {
                 return Observable.create(new OnSubscribe<Geocache>() {
@@ -1211,7 +1254,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 handler.sendEmptyMessage(DownloadProgress.MSG_DONE);
             }
         });
-        handler.unsubscribeIfCancelled(loaded.subscribe());
+        handler.unsubscribeIfCancelled(new CompositeSubscription(generator, loaded.subscribe()));
     }
 
     private class DropDetailsTask extends AsyncTaskWithProgress<Geocache, Void> {
@@ -1295,9 +1338,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             title = res.getString(R.string.list_all_lists);
         } else {
             final StoredList list = DataStore.getList(id);
-            if (list == null) {
-                return;
-            }
             listId = list.id;
             title = list.title;
         }

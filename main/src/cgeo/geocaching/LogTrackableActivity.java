@@ -136,17 +136,16 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
         trackable = DataStore.loadTrackable(geocode);
 
+        if (trackable == null) {
+            Log.e("LogTrackableActivity.onCreate: cannot load trackable " + geocode);
+            finish();
+            return;
+        }
+
         if (StringUtils.isNotBlank(trackable.getName())) {
             setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getName());
         } else {
             setTitle(res.getString(R.string.trackable_touch) + ": " + trackable.getGeocode());
-        }
-
-        if (guid == null) {
-            showToast(res.getString(R.string.err_tb_forgot_saw));
-
-            finish();
-            return;
         }
 
         init();
@@ -256,11 +255,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
         public LoadDataThread() {
             super("Load data for logging trackable");
-            if (guid == null) {
-                showToast(res.getString(R.string.err_tb_forgot_saw));
-
-                finish();
-            }
         }
 
         @Override
@@ -343,7 +337,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
      * @param logText
      */
     private void addLocalTrackableLog(final String logText) {
-        final LogEntry logEntry = new LogEntry(Calendar.getInstance().getTimeInMillis(), typeSelected, logText);
+        final LogEntry logEntry = new LogEntry(date.getTimeInMillis(), typeSelected, logText);
         final ArrayList<LogEntry> modifiedLogs = new ArrayList<>(trackable.getLogs());
         modifiedLogs.add(0, logEntry);
         trackable.setLogs(modifiedLogs);

@@ -12,6 +12,7 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.files.SimpleDirChooser;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.utils.DatabaseBackupUtils;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.Log;
@@ -92,7 +93,7 @@ public class SettingsActivity extends PreferenceActivity {
         setTheme(Settings.isLightSkin() && Build.VERSION.SDK_INT > 10 ? R.style.settings_light : R.style.settings);
         super.onCreate(savedInstanceState);
 
-        initHardwareAccelerationPreferences();
+        initDeviceSpecificPreferences();
         initUnitPreferences();
         SettingsActivity.addPreferencesFromResource(this, R.xml.preferences);
         initPreferences();
@@ -383,10 +384,11 @@ public class SettingsActivity extends PreferenceActivity {
                 });
     }
 
-    public static void initHardwareAccelerationPreferences() {
-        // We have to ensure that the preference is initialized so that devices with hardware acceleration disabled
-        // get the appropriate value.
+    public static void initDeviceSpecificPreferences() {
+        // We have to ensure that those preferences are initialized so that devices with specific default values
+        // will get the appropriate ones.
         Settings.setUseHardwareAcceleration(Settings.useHardwareAcceleration());
+        Settings.setUseGooglePlayServices(Settings.useGooglePlayServices());
     }
 
     private static void initUnitPreferences() {
@@ -420,11 +422,12 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
     private void initGeoDirPreferences() {
+        final Sensors sensors = Sensors.getInstance();
         final Preference playServices = getPreference(R.string.pref_googleplayservices);
         playServices.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-                CgeoApplication.getInstance().setupGeoDataObservables((Boolean) newValue, Settings.useLowPowerMode());
+                sensors.setupGeoDataObservables((Boolean) newValue, Settings.useLowPowerMode());
                 return true;
             }
         });
@@ -432,10 +435,9 @@ public class SettingsActivity extends PreferenceActivity {
         getPreference(R.string.pref_lowpowermode).setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-                final CgeoApplication app = CgeoApplication.getInstance();
                 final Boolean useLowPower = (Boolean) newValue;
-                app.setupGeoDataObservables(Settings.useGooglePlayServices(), useLowPower);
-                app.setupDirectionObservable(useLowPower);
+                sensors.setupGeoDataObservables(Settings.useGooglePlayServices(), useLowPower);
+                sensors.setupDirectionObservable(useLowPower);
                 return true;
             }
         });

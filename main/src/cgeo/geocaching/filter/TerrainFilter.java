@@ -3,6 +3,8 @@ package cgeo.geocaching.filter;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,7 @@ class TerrainFilter extends AbstractRangeFilter {
     }
 
     @Override
-    public boolean accepts(final Geocache cache) {
+    public boolean accepts(@NonNull final Geocache cache) {
         final float terrain = cache.getTerrain();
         return rangeMin <= terrain && terrain < rangeMax;
     }
@@ -23,6 +25,7 @@ class TerrainFilter extends AbstractRangeFilter {
         private static final int TERRAIN_MAX = 7;
 
         @Override
+        @NonNull
         public List<IFilter> getFilters() {
             final ArrayList<IFilter> filters = new ArrayList<>(TERRAIN_MAX);
             for (int terrain = TERRAIN_MIN; terrain <= TERRAIN_MAX; terrain++) {

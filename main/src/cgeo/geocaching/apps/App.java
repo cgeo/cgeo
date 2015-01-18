@@ -2,6 +2,8 @@ package cgeo.geocaching.apps;
 
 import cgeo.geocaching.Geocache;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 public interface App {
     public boolean isInstalled();
 
@@ -10,6 +12,7 @@ public interface App {
      */
     public boolean isUsableAsDefaultNavigationApp();
 
+    @NonNull
     public String getName();
 
     /**

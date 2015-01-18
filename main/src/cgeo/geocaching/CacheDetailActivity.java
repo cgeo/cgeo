@@ -12,7 +12,6 @@ import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationSelectionActionProvider;
 import cgeo.geocaching.apps.cachelist.MapsWithMeCacheListApp;
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -21,6 +20,8 @@ import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.gcvote.GCVote;
+import cgeo.geocaching.gcvote.GCVoteDialog;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.network.HtmlImage;
@@ -55,6 +56,7 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.io.Charsets;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -64,7 +66,7 @@ import rx.Observable;
 import rx.Observable.OnSubscribe;
 import rx.Subscriber;
 import rx.Subscription;
-import rx.android.observables.AndroidObservable;
+import rx.android.app.AppObservable;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.subscriptions.CompositeSubscription;
@@ -83,6 +85,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
+import android.nfc.NdefMessage;
+import android.nfc.NfcAdapter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -105,16 +109,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.view.ViewParent;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
@@ -182,13 +185,17 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
-        final Uri uri = getIntent().getData();
+        Uri uri = getIntent().getData();
 
         // try to get data from extras
         String name = null;
         String geocode = null;
         String guid = null;
-        if (extras != null) {
+
+        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
+            final NdefMessage msg = (NdefMessage) extras.getParcelableArray(NfcAdapter.EXTRA_NDEF_MESSAGES)[0];
+            uri = Uri.parse("http://" + new String(msg.getRecords()[0].getPayload(), Charsets.UTF_8));
+        } else if (extras != null) {
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
             name = extras.getString(Intents.EXTRA_NAME);
             guid = extras.getString(Intents.EXTRA_GUID);
@@ -487,13 +494,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         CacheMenuHandler.addMenuItems(this, menu, cache);
-        MenuItem menuItem = menu.findItem(R.id.menu_default_navigation);
+        final MenuItem menuItem = menu.findItem(R.id.menu_default_navigation);
         final NavigationActionProvider navAction = (NavigationActionProvider) MenuItemCompat.getActionProvider(menuItem);
         if (navAction != null) {
             navAction.setNavigationSource(this);
         }
-        menuItem = menu.findItem(R.id.menu_navigate);
-        NavigationSelectionActionProvider.initialize(menuItem, cache);
+        NavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_navigate), cache);
         return true;
     }
 
@@ -504,6 +510,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         menu.findItem(R.id.menu_store).setVisible(cache != null && !cache.isOffline());
         menu.findItem(R.id.menu_delete).setVisible(cache != null && cache.isOffline());
         menu.findItem(R.id.menu_refresh).setVisible(cache != null && cache.isOffline());
+        menu.findItem(R.id.menu_gcvote).setVisible(cache != null && GCVote.isVotingPossible(cache));
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -525,6 +532,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             case R.id.menu_refresh:
                 refreshCache();
                 return true;
+            case R.id.menu_gcvote:
+                showVoteDialog();
+                return true;
             default:
                 if (NavigationAppFactory.onMenuItemSelected(item, this, cache)) {
                     return true;
@@ -536,6 +546,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showVoteDialog() {
+        GCVoteDialog.show(this, cache, new Runnable() {
+            @Override
+            public void run() {
+                notifyDataSetChanged();
+            }
+        });
     }
 
     private static final class CacheDetailsGeoDirHandler extends GeoDirHandler {
@@ -616,7 +635,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     private void notifyDataSetChanged() {
-        // This might get called asynchronically when the activity is shut down
+        // This might get called asynchronous when the activity is shut down
         if (isFinishing()) {
             return;
         }
@@ -721,185 +740,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
     }
 
-    private class AttributeViewBuilder {
-        private ViewGroup attributeIconsLayout; // layout for attribute icons
-        private ViewGroup attributeDescriptionsLayout; // layout for attribute descriptions
-        private boolean attributesShowAsIcons = true; // default: show icons
-        /**
-         * If the cache is from a non GC source, it might be without icons. Disable switching in those cases.
-         */
-        private boolean noAttributeIconsFound = false;
-        private int attributeBoxMaxWidth;
-
-        public void fillView(final LinearLayout attributeBox) {
-            // first ensure that the view is empty
-            attributeBox.removeAllViews();
-
-            // maximum width for attribute icons is screen width - paddings of parents
-            attributeBoxMaxWidth = Compatibility.getDisplayWidth();
-            ViewParent child = attributeBox;
-            do {
-                if (child instanceof View) {
-                    attributeBoxMaxWidth -= ((View) child).getPaddingLeft() + ((View) child).getPaddingRight();
-                }
-                child = child.getParent();
-            } while (child != null);
-
-            // delete views holding description / icons
-            attributeDescriptionsLayout = null;
-            attributeIconsLayout = null;
-
-            attributeBox.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View v) {
-                    // toggle between attribute icons and descriptions
-                    toggleAttributeDisplay(attributeBox, attributeBoxMaxWidth);
-                }
-            });
-
-            // icons or text?
-            //
-            // also show icons when noAttributeImagesFound == true. Explanation:
-            //  1. no icons could be found in the first invocation of this method
-            //  2. user refreshes cache from web
-            //  3. now this method is called again
-            //  4. attributeShowAsIcons is false but noAttributeImagesFound is true
-            //     => try to show them now
-            if (attributesShowAsIcons || noAttributeIconsFound) {
-                showAttributeIcons(attributeBox, attributeBoxMaxWidth);
-            } else {
-                showAttributeDescriptions(attributeBox);
-            }
-        }
-
-        /**
-         * lazy-creates the layout holding the icons of the caches attributes
-         * and makes it visible
-         */
-        private void showAttributeIcons(final LinearLayout attribBox, final int parentWidth) {
-            if (attributeIconsLayout == null) {
-                attributeIconsLayout = createAttributeIconsLayout(parentWidth);
-                // no matching icons found? show text
-                if (noAttributeIconsFound) {
-                    showAttributeDescriptions(attribBox);
-                    return;
-                }
-            }
-            attribBox.removeAllViews();
-            attribBox.addView(attributeIconsLayout);
-            attributesShowAsIcons = true;
-        }
-
-        /**
-         * lazy-creates the layout holding the descriptions of the caches attributes
-         * and makes it visible
-         */
-        private void showAttributeDescriptions(final LinearLayout attribBox) {
-            if (attributeDescriptionsLayout == null) {
-                attributeDescriptionsLayout = createAttributeDescriptionsLayout(attribBox);
-            }
-            attribBox.removeAllViews();
-            attribBox.addView(attributeDescriptionsLayout);
-            attributesShowAsIcons = false;
-        }
-
-        /**
-         * toggle attribute descriptions and icons
-         */
-        private void toggleAttributeDisplay(final LinearLayout attribBox, final int parentWidth) {
-            // Don't toggle when there are no icons to show.
-            if (noAttributeIconsFound) {
-                return;
-            }
-
-            // toggle
-            if (attributesShowAsIcons) {
-                showAttributeDescriptions(attribBox);
-            } else {
-                showAttributeIcons(attribBox, parentWidth);
-            }
-        }
-
-        private ViewGroup createAttributeIconsLayout(final int parentWidth) {
-            final LinearLayout rows = new LinearLayout(CacheDetailActivity.this);
-            rows.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-            rows.setOrientation(LinearLayout.VERTICAL);
-
-            LinearLayout attributeRow = newAttributeIconsRow();
-            rows.addView(attributeRow);
-
-            noAttributeIconsFound = true;
-
-            for (final String attributeName : cache.getAttributes()) {
-                // check if another attribute icon fits in this row
-                attributeRow.measure(0, 0);
-                final int rowWidth = attributeRow.getMeasuredWidth();
-                final FrameLayout fl = (FrameLayout) getLayoutInflater().inflate(R.layout.attribute_image, attributeRow, false);
-                final ImageView iv = (ImageView) fl.getChildAt(0);
-                if ((parentWidth - rowWidth) < iv.getLayoutParams().width) {
-                    // make a new row
-                    attributeRow = newAttributeIconsRow();
-                    rows.addView(attributeRow);
-                }
-
-                final boolean strikeThrough = !CacheAttribute.isEnabled(attributeName);
-                final CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
-                if (attrib != null) {
-                    noAttributeIconsFound = false;
-                    Drawable drawable = res.getDrawable(attrib.drawableId);
-                    iv.setImageDrawable(drawable);
-                    // strike through?
-                    if (strikeThrough) {
-                        // generate strike through image with same properties as attribute image
-                        final ImageView strikeThroughImage = new ImageView(CacheDetailActivity.this);
-                        strikeThroughImage.setLayoutParams(iv.getLayoutParams());
-                        drawable = res.getDrawable(R.drawable.attribute__strikethru);
-                        strikeThroughImage.setImageDrawable(drawable);
-                        fl.addView(strikeThroughImage);
-                    }
-                } else {
-                    iv.setImageDrawable(res.getDrawable(R.drawable.attribute_unknown));
-                }
-
-                attributeRow.addView(fl);
-            }
-
-            return rows;
-        }
-
-        private LinearLayout newAttributeIconsRow() {
-            final LinearLayout rowLayout = new LinearLayout(CacheDetailActivity.this);
-            rowLayout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
-                    LayoutParams.WRAP_CONTENT));
-            rowLayout.setOrientation(LinearLayout.HORIZONTAL);
-            return rowLayout;
-        }
-
-        private ViewGroup createAttributeDescriptionsLayout(final LinearLayout parentView) {
-            final LinearLayout descriptions = (LinearLayout) getLayoutInflater().inflate(
-                    R.layout.attribute_descriptions, parentView, false);
-            final TextView attribView = (TextView) descriptions.getChildAt(0);
-
-            final StringBuilder buffer = new StringBuilder();
-            for (String attributeName : cache.getAttributes()) {
-                final boolean enabled = CacheAttribute.isEnabled(attributeName);
-                // search for a translation of the attribute
-                final CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
-                if (attrib != null) {
-                    attributeName = attrib.getL10n(enabled);
-                }
-                if (buffer.length() > 0) {
-                    buffer.append('\n');
-                }
-                buffer.append(attributeName);
-            }
-
-            attribView.setText(buffer);
-
-            return descriptions;
-        }
-    }
-
     private void refreshCache() {
         if (progress.isShowing()) {
             showToast(res.getString(R.string.err_detail_still_working));
@@ -915,7 +755,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         progress.show(this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
 
-        cache.refresh(refreshCacheHandler, RxUtils.networkScheduler);
+        cache.refresh(refreshCacheHandler, RxUtils.refreshScheduler);
     }
 
     private void dropCache() {
@@ -952,10 +792,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
      * Creator for details-view.
      */
     private class DetailsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
-        /**
-         * Reference to the details list, so that the helper-method can access it without an additional argument
-         */
+        // Reference to the details list and favorite line, so that the helper-method can access them without an additional argument
         private LinearLayout detailsList;
+        private ImmutablePair<RelativeLayout, TextView> favoriteLine;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
@@ -967,7 +806,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             view = (ScrollView) getLayoutInflater().inflate(R.layout.cachedetail_details_page, parentView, false);
 
             // Start loading preview map
-            AndroidObservable.bindActivity(CacheDetailActivity.this, previewMap).subscribeOn(RxUtils.networkScheduler)
+            AppObservable.bindActivity(CacheDetailActivity.this, previewMap).subscribeOn(RxUtils.networkScheduler)
                     .subscribe(new Action1<BitmapDrawable>() {
                         @Override
                         public void call(final BitmapDrawable image) {
@@ -992,10 +831,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 span.setSpan(new ForegroundColorSpan(res.getColor(R.color.archived_cache_color)), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
 
-            addContextMenu(details.add(R.string.cache_name, span));
+            addContextMenu(details.add(R.string.cache_name, span).right);
             details.add(R.string.cache_type, cache.getType().getL10n());
             details.addSize(cache);
-            addContextMenu(details.add(R.string.cache_geocode, cache.getGeocode()));
+            addContextMenu(details.add(R.string.cache_geocode, cache.getGeocode()).right);
             details.addCacheState(cache);
 
             details.addDistance(cache, cacheDistanceView);
@@ -1006,9 +845,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             details.addRating(cache);
 
             // favorite count
-            if (cache.getFavoritePoints() > 0) {
-                details.add(R.string.cache_favorite, cache.getFavoritePoints() + "×");
-            }
+            favoriteLine = details.add(R.string.cache_favorite, "");
 
             // own rating
             if (cache.getMyVote() > 0) {
@@ -1017,7 +854,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // cache author
             if (StringUtils.isNotBlank(cache.getOwnerDisplayName()) || StringUtils.isNotBlank(cache.getOwnerUserId())) {
-                final TextView ownerView = details.add(R.string.cache_owner, "");
+                final TextView ownerView = details.add(R.string.cache_owner, "").right;
                 if (StringUtils.isNotBlank(cache.getOwnerDisplayName())) {
                     ownerView.setText(cache.getOwnerDisplayName(), TextView.BufferType.SPANNABLE);
                 } else { // OwnerReal guaranteed to be not blank based on above
@@ -1039,17 +876,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // cache coordinates
             if (cache.getCoords() != null) {
-                final TextView valueView = details.add(R.string.cache_coordinates, cache.getCoords().toString());
+                final TextView valueView = details.add(R.string.cache_coordinates, cache.getCoords().toString()).right;
                 valueView.setOnClickListener(new CoordinatesFormatSwitcher(cache.getCoords()));
                 addContextMenu(valueView);
             }
 
             // cache attributes
-            if (!cache.getAttributes().isEmpty()) {
-                final LinearLayout innerLayout = ButterKnife.findById(view, R.id.attributes_innerbox);
-                new AttributeViewBuilder().fillView(innerLayout);
-                view.findViewById(R.id.attributes_box).setVisibility(View.VISIBLE);
-            }
+            updateAttributesText();
+            updateAttributesIcons();
+            ButterKnife.findById(view, R.id.attributes_box).setVisibility(cache.getAttributes().isEmpty() ? View.GONE : View.VISIBLE);
 
             updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener());
 
@@ -1086,6 +921,61 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             }
 
             return view;
+        }
+
+        private void updateAttributesIcons() {
+            final GridView gridView = ButterKnife.findById(view, R.id.attributes_grid);
+            final List<String> attributes = cache.getAttributes();
+            if (attributes.isEmpty()) {
+                gridView.setVisibility(View.GONE);
+                return;
+            }
+            gridView.setAdapter(new AttributesGridAdapter(CacheDetailActivity.this, cache));
+            gridView.setVisibility(View.VISIBLE);
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(final android.widget.AdapterView<?> parent, final View view, final int position, final long id) {
+                    toggleAttributesView();
+                }
+            });
+        }
+
+        protected void toggleAttributesView() {
+            final View textView = ButterKnife.findById(view, R.id.attributes_text);
+            textView.setVisibility(textView.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+            final View gridView = ButterKnife.findById(view, R.id.attributes_grid);
+            gridView.setVisibility(gridView.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+        }
+
+        private void updateAttributesText() {
+            final TextView attribView = ButterKnife.findById(view, R.id.attributes_text);
+            final List<String> attributes = cache.getAttributes();
+            if (attributes.isEmpty()) {
+                attribView.setVisibility(View.GONE);
+                return;
+            }
+            final StringBuilder text = new StringBuilder();
+            for (String attributeName : attributes) {
+                final boolean enabled = CacheAttribute.isEnabled(attributeName);
+                // search for a translation of the attribute
+                final CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
+                if (attrib != null) {
+                    attributeName = attrib.getL10n(enabled);
+                }
+                if (text.length() > 0) {
+                    text.append('\n');
+                }
+                text.append(attributeName);
+            }
+            attribView.setText(text);
+            attribView.setVisibility(View.GONE);
+            attribView.setOnClickListener(new OnClickListener() {
+
+                @Override
+                public void onClick(final View v) {
+                    toggleAttributesView();
+                }
+            });
         }
 
         private class StoreCacheClickListener implements View.OnClickListener {
@@ -1276,7 +1166,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         /**
-         * shows/hides buttons, sets text in watchlist box
+         * Show/hide buttons, set text in watchlist box
          */
         private void updateWatchlistBox() {
             final LinearLayout layout = ButterKnife.findById(view, R.id.watchlist_box);
@@ -1306,13 +1196,20 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 buttonRemove.setEnabled(false);
                 buttonRemove.setVisibility(View.GONE);
             }
-
         }
 
         /**
-         * shows/hides buttons, sets text in watchlist box
+         * Show/hide buttons, set text in favorite line and box
          */
         private void updateFavPointBox() {
+            // Favorite counts
+            if (cache.getFavoritePoints() > 0) {
+                favoriteLine.left.setVisibility(View.VISIBLE);
+                favoriteLine.right.setText(cache.getFavoritePoints() + "×");
+            } else {
+                favoriteLine.left.setVisibility(View.GONE);
+            }
+
             final LinearLayout layout = ButterKnife.findById(view, R.id.favpoint_box);
             final boolean supportsFavoritePoints = cache.supportsFavoritePoints();
             layout.setVisibility(supportsFavoritePoints ? View.VISIBLE : View.GONE);
@@ -1355,12 +1252,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 // update text
                 final TextView text = ButterKnife.findById(view, R.id.list_text);
                 final StoredList list = DataStore.getList(cache.getListId());
-                if (list != null) {
-                    text.setText(res.getString(R.string.cache_list_text) + " " + list.title);
-                } else {
-                    // this should not happen
-                    text.setText(R.string.cache_list_unknown);
-                }
+                text.setText(res.getString(R.string.cache_list_text) + " " + list.title);
             } else {
                 // hide box
                 box.setVisibility(View.GONE);

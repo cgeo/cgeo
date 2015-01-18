@@ -38,7 +38,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
-import org.apache.commons.collections4.Predicate;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -98,7 +97,7 @@ public class Geocache implements IWaypoint {
      * lazy initialized
      */
     private String hint = null;
-    private CacheSize size = CacheSize.UNKNOWN;
+    @NonNull private CacheSize size = CacheSize.UNKNOWN;
     private float difficulty = 0;
     private float terrain = 0;
     private Float direction = null;
@@ -133,13 +132,13 @@ public class Geocache implements IWaypoint {
     private final LazyInitializedList<String> attributes = new LazyInitializedList<String>() {
         @Override
         public List<String> call() {
-            return DataStore.loadAttributes(geocode);
+            return inDatabase() ? DataStore.loadAttributes(geocode) : new LinkedList<String>();
         }
     };
     private final LazyInitializedList<Waypoint> waypoints = new LazyInitializedList<Waypoint>() {
         @Override
         public List<Waypoint> call() {
-            return DataStore.loadWaypoints(geocode);
+            return inDatabase() ? DataStore.loadWaypoints(geocode) : new LinkedList<Waypoint>();
         }
     };
     private List<Image> spoilers = null;
@@ -271,7 +270,7 @@ public class Geocache implements IWaypoint {
         if (!detailed && StringUtils.isBlank(getHint())) {
             hint = other.getHint();
         }
-        if (size == null || CacheSize.UNKNOWN == size) {
+        if (size == CacheSize.UNKNOWN) {
             size = other.size;
         }
         if (difficulty == 0) {
@@ -479,6 +478,7 @@ public class Geocache implements IWaypoint {
         notifyChange();
     }
 
+    @NonNull
     public List<LogType> getPossibleLogTypes() {
         return getConnector().getPossibleLogTypes(this);
     }
@@ -502,17 +502,9 @@ public class Geocache implements IWaypoint {
         }
     }
 
-
-    private String getCacheUrl() {
-        return getConnector().getCacheUrl(this);
-    }
-
+    @NonNull
     private IConnector getConnector() {
         return ConnectorFactory.getConnector(this);
-    }
-
-    public boolean canOpenInBrowser() {
-        return getCacheUrl() != null;
     }
 
     public boolean supportsRefresh() {
@@ -539,6 +531,7 @@ public class Geocache implements IWaypoint {
         return getConnector().supportsOwnCoordinates();
     }
 
+    @NonNull
     public ILoggingManager getLoggingManager(final LogCacheActivity activity) {
         return getConnector().getLoggingManager(activity, this);
     }
@@ -559,10 +552,8 @@ public class Geocache implements IWaypoint {
         return ownerDisplayName;
     }
 
+    @NonNull
     public CacheSize getSize() {
-        if (size == null) {
-            return CacheSize.UNKNOWN;
-        }
         return size;
     }
 
@@ -597,7 +588,8 @@ public class Geocache implements IWaypoint {
     /**
      * @return GC username of the (actual) owner, might differ from the owner. Never empty.
      */
-    @NonNull public String getOwnerUserId() {
+    @NonNull
+    public String getOwnerUserId() {
         return ownerUserId;
     }
 
@@ -636,18 +628,25 @@ public class Geocache implements IWaypoint {
      */
     private void initializeCacheTexts() {
         if (description == null || shortdesc == null || hint == null || location == null) {
-            final Geocache partial = DataStore.loadCacheTexts(this.getGeocode());
-            if (description == null) {
-                setDescription(partial.getDescription());
-            }
-            if (shortdesc == null) {
-                setShortDescription(partial.getShortDescription());
-            }
-            if (hint == null) {
-                setHint(partial.getHint());
-            }
-            if (location == null) {
-                setLocation(partial.getLocation());
+            if (inDatabase()) {
+                final Geocache partial = DataStore.loadCacheTexts(this.getGeocode());
+                if (description == null) {
+                    setDescription(partial.getDescription());
+                }
+                if (shortdesc == null) {
+                    setShortDescription(partial.getShortDescription());
+                }
+                if (hint == null) {
+                    setHint(partial.getHint());
+                }
+                if (location == null) {
+                    setLocation(partial.getLocation());
+                }
+            } else {
+                description = StringUtils.defaultString(description);
+                shortdesc = StringUtils.defaultString(shortdesc);
+                hint = StringUtils.defaultString(hint);
+                location = StringUtils.defaultString(location);
             }
         }
     }
@@ -706,6 +705,8 @@ public class Geocache implements IWaypoint {
 
         fromActivity.startActivity(Intent.createChooser(intent, res.getText(R.string.cache_menu_share)));
     }
+
+    @NonNull
     public Intent getShareIntent() {
         final StringBuilder subject = new StringBuilder("Geocache ");
         subject.append(geocode);
@@ -721,15 +722,20 @@ public class Geocache implements IWaypoint {
         return intent;
     }
 
+    @NonNull
     public String getUrl() {
         return getConnector().getCacheUrl(this);
     }
 
+    @NonNull
     public String getLongUrl() {
         return getConnector().getLongCacheUrl(this);
     }
 
-    public String getCgeoUrl() { return getConnector().getCacheUrl(this); }
+    @NonNull
+    public String getCgeoUrl() {
+        return getConnector().getCacheUrl(this);
+    }
 
     public boolean supportsGCVote() {
         return StringUtils.startsWithIgnoreCase(geocode, "GC");
@@ -760,6 +766,7 @@ public class Geocache implements IWaypoint {
         return hidden;
     }
 
+    @NonNull
     public List<String> getAttributes() {
         return attributes.getUnderlyingList();
     }
@@ -775,6 +782,7 @@ public class Geocache implements IWaypoint {
         spoilers.add(spoiler);
     }
 
+    @NonNull
     public List<Image> getSpoilers() {
         return ListUtils.unmodifiableList(ListUtils.emptyIfNull(spoilers));
     }
@@ -972,6 +980,7 @@ public class Geocache implements IWaypoint {
      *
      * @return always non <code>null</code>
      */
+    @NonNull
     public List<Waypoint> getWaypoints() {
         return waypoints.getUnderlyingList();
     }
@@ -1010,7 +1019,7 @@ public class Geocache implements IWaypoint {
      */
     @NonNull
     public List<LogEntry> getLogs() {
-        return DataStore.loadLogs(geocode);
+        return inDatabase() ? DataStore.loadLogs(geocode) : Collections.<LogEntry>emptyList();
     }
 
     /**
@@ -1079,13 +1088,8 @@ public class Geocache implements IWaypoint {
         this.hint = hint;
     }
 
-    public void setSize(final CacheSize size) {
-        if (size == null) {
-            this.size = CacheSize.UNKNOWN;
-        }
-        else {
-            this.size = size;
-        }
+    public void setSize(@NonNull final CacheSize size) {
+        this.size = size;
     }
 
     public void setDifficulty(final float difficulty) {
@@ -1181,6 +1185,13 @@ public class Geocache implements IWaypoint {
      */
     public void addStorageLocation(final StorageLocation storageLocation) {
         this.storageLocation.add(storageLocation);
+    }
+
+    /**
+     * Check if this cache instance comes from or has been stored into the database.
+     */
+    public boolean inDatabase() {
+        return storageLocation.contains(StorageLocation.DATABASE);
     }
 
     /**
@@ -1478,7 +1489,7 @@ public class Geocache implements IWaypoint {
         warnIncorrectParsingIfBlank(getOwnerUserId(), "owner");
         warnIncorrectParsingIf(getHiddenDate() == null, "hidden");
         warnIncorrectParsingIf(getFavoritePoints() < 0, "favoriteCount");
-        warnIncorrectParsingIf(getSize() == null, "size");
+        warnIncorrectParsingIf(getSize() == CacheSize.UNKNOWN, "size");
         warnIncorrectParsingIf(getType() == null || getType() == CacheType.UNKNOWN, "type");
         warnIncorrectParsingIf(getCoords() == null, "coordinates");
         warnIncorrectParsingIfBlank(getLocation(), "location");
@@ -1620,6 +1631,7 @@ public class Geocache implements IWaypoint {
      *
      * @return start time in minutes after midnight
      */
+    @Nullable
     public String guessEventTimeMinutes() {
         if (!isEventCache()) {
             return null;
@@ -1662,13 +1674,7 @@ public class Geocache implements IWaypoint {
         return StaticMapsProvider.hasStaticMap(this);
     }
 
-    public static final Predicate<Geocache> hasStaticMap = new Predicate<Geocache>() {
-        @Override
-        public boolean evaluate(final Geocache cache) {
-            return cache.hasStaticMap();
-        }
-    };
-
+    @NonNull
     public Collection<Image> getImages() {
         final LinkedList<Image> result = new LinkedList<>();
         result.addAll(getSpoilers());
@@ -1738,6 +1744,7 @@ public class Geocache implements IWaypoint {
         return getConnector().getWaypointGpxId(prefix, geocode);
     }
 
+    @NonNull
     public String getWaypointPrefix(final String name) {
         return getConnector().getWaypointPrefix(name);
     }
@@ -1747,7 +1754,7 @@ public class Geocache implements IWaypoint {
      */
     public int getFindsCount() {
         if (getLogCounts().isEmpty()) {
-            setLogCounts(DataStore.loadLogCounts(getGeocode()));
+            setLogCounts(inDatabase() ? DataStore.loadLogCounts(getGeocode()) : Collections.<LogType, Integer>emptyMap());
         }
         final Integer logged = getLogCounts().get(LogType.FOUND_IT);
         if (logged != null) {
@@ -1760,6 +1767,7 @@ public class Geocache implements IWaypoint {
         return (getType().applyDistanceRule() || hasUserModifiedCoords()) && getConnector() == GCConnector.getInstance();
     }
 
+    @NonNull
     public LogType getDefaultLogType() {
         if (isEventCache()) {
             final Date eventDate = getHiddenDate();
@@ -1785,7 +1793,8 @@ public class Geocache implements IWaypoint {
      * @param caches a collection of caches
      * @return the non-blank geocodes of the caches
      */
-    public static Set<String> getGeocodes(final Collection<Geocache> caches) {
+    @NonNull
+    public static Set<String> getGeocodes(@NonNull final Collection<Geocache> caches) {
         final Set<String> geocodes = new HashSet<>(caches.size());
         for (final Geocache cache : caches) {
             final String geocode = cache.getGeocode();

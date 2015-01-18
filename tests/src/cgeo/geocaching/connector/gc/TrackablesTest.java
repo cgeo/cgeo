@@ -18,6 +18,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
     public void testLogPageWithTrackables() {
         final List<TrackableLog> tbLogs = GCParser.parseTrackableLog(getFileContent(R.raw.log_with_2tb));
         assertThat(tbLogs).isNotNull();
+        assert tbLogs != null;
         assertThat(tbLogs).hasSize(2);
         final TrackableLog log = tbLogs.get(0);
         assertThat(log.name).isEqualTo("Steffen's Kaiserwagen");

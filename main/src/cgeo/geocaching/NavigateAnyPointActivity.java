@@ -12,6 +12,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.NavigationActionProvider;
@@ -286,7 +287,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
             if (latButton.getText().length() > 0 && lonButton.getText().length() > 0) {
                 gp = new Geopoint(latButton.getText().toString() + " " + lonButton.getText().toString());
             }
-            final CoordinatesInputDialog coordsDialog = CoordinatesInputDialog.getInstance(null, gp, app.currentGeo());
+            final CoordinatesInputDialog coordsDialog = CoordinatesInputDialog.getInstance(null, gp, Sensors.getInstance().currentGeo());
             coordsDialog.setCancelable(true);
             coordsDialog.show(getSupportFragmentManager(),"wpedit_dialog");
         }
@@ -477,7 +478,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
 
         @Override
         public void onClick(final View arg0) {
-            final Geopoint coords = app.currentGeo().getCoords();
+            final Geopoint coords = Sensors.getInstance().currentGeo().getCoords();
             latButton.setText(coords.format(GeopointFormatter.Format.LAT_DECMINUTE));
             lonButton.setText(coords.format(GeopointFormatter.Format.LON_DECMINUTE));
             changed = false;
@@ -507,7 +508,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
                 return null;
             }
         } else {
-            coords = app.currentGeo().getCoords();
+            coords = Sensors.getInstance().currentGeo().getCoords();
         }
 
         // apply projection

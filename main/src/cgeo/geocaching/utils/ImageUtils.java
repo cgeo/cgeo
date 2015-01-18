@@ -7,11 +7,14 @@ import cgeo.geocaching.compatibility.Compatibility;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Observable;
+import rx.Scheduler.Worker;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
 import rx.functions.Action1;
 
 import android.content.res.Resources;
@@ -39,11 +42,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Locale;
 import java.util.Set;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public final class ImageUtils {
     private static final int[] ORIENTATIONS = new int[] {
@@ -340,17 +346,33 @@ public final class ImageUtils {
      * Container which can hold a drawable (initially an empty one) and get a newer version when it
      * becomes available. It also invalidates the view the container belongs to, so that it is
      * redrawn properly.
+     * <p/>
+     * When a new version of the drawable is available, it is put into a queue and, if needed (no other elements
+     * waiting in the queue), a refresh is launched on the UI thread. This refresh will empty the queue (including
+     * elements arrived in the meantime) and ensures that the view is uploaded only once all the queued requests have
+     * been handled.
      */
     public static class ContainerDrawable extends BitmapDrawable implements Action1<Drawable> {
+        final private static Object lock = new Object(); // Used to lock the queue to determine if a refresh needs to be scheduled
+        final private static LinkedBlockingQueue<ImmutablePair<ContainerDrawable, Drawable>> REDRAW_QUEUE = new LinkedBlockingQueue<>();
+        final private static Set<TextView> VIEWS = new HashSet<>();  // Modified only on the UI thread
+        final private static Worker UI_WORKER = AndroidSchedulers.mainThread().createWorker();
+        final private static Action0 REDRAW_QUEUED_DRAWABLES = new Action0() {
+            @Override
+            public void call() {
+                redrawQueuedDrawables();
+            }
+        };
+
         private Drawable drawable;
-        final private TextView view;
+        final protected TextView view;
 
         @SuppressWarnings("deprecation")
         public ContainerDrawable(@NonNull final TextView view, final Observable<? extends Drawable> drawableObservable) {
             this.view = view;
             drawable = null;
             setBounds(0, 0, 0, 0);
-            updateFrom(drawableObservable);
+            drawableObservable.subscribe(this);
         }
 
         @Override
@@ -361,32 +383,64 @@ public final class ImageUtils {
         }
 
         @Override
-        public void call(final Drawable newDrawable) {
-            setBounds(0, 0, newDrawable.getIntrinsicWidth(), newDrawable.getIntrinsicHeight());
-            drawable = newDrawable;
-            view.setText(view.getText());
+        public final void call(final Drawable newDrawable) {
+            final boolean needsRedraw;
+            synchronized (lock) {
+                // Check for emptyness inside the call to match the behaviour in redrawQueuedDrawables().
+                needsRedraw = REDRAW_QUEUE.isEmpty();
+                REDRAW_QUEUE.add(ImmutablePair.of(this, newDrawable));
+            }
+            if (needsRedraw) {
+                UI_WORKER.schedule(REDRAW_QUEUED_DRAWABLES);
+            }
         }
 
-        public final void updateFrom(final Observable<? extends Drawable> drawableObservable) {
-            drawableObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(this);
+        /**
+         * Update the container with the new drawable. Called on the UI thread.
+         *
+         * @param newDrawable the new drawable
+         * @return the view to update
+         */
+        protected TextView updateDrawable(final Drawable newDrawable) {
+            setBounds(0, 0, newDrawable.getIntrinsicWidth(), newDrawable.getIntrinsicHeight());
+            drawable = newDrawable;
+            return view;
         }
+
+        private static void redrawQueuedDrawables() {
+            if (!REDRAW_QUEUE.isEmpty()) {
+                // Add a small margin so that drawables arriving between the beginning of the allocation and the draining
+                // of the queue might be absorbed without reallocation.
+                final ArrayList<ImmutablePair<ContainerDrawable, Drawable>> toRedraw = new ArrayList<>(REDRAW_QUEUE.size() + 16);
+                synchronized (lock) {
+                    // Empty the queue inside the lock to match the check done in call().
+                    REDRAW_QUEUE.drainTo(toRedraw);
+                }
+                for (final ImmutablePair<ContainerDrawable, Drawable> redrawable : toRedraw) {
+                    VIEWS.add(redrawable.left.updateDrawable(redrawable.right));
+                }
+                for (final TextView view : VIEWS) {
+                    view.setText(view.getText());
+                }
+                VIEWS.clear();
+            }
+        }
+
     }
 
     /**
      * Image that automatically scales to fit a line of text in the containing {@link TextView}.
      */
     public final static class LineHeightContainerDrawable extends ContainerDrawable {
-        private final TextView view;
-
         public LineHeightContainerDrawable(@NonNull final TextView view, final Observable<? extends Drawable> drawableObservable) {
             super(view, drawableObservable);
-            this.view = view;
         }
 
         @Override
-        public void call(final Drawable newDrawable) {
-            super.call(newDrawable);
+        protected TextView updateDrawable(final Drawable newDrawable) {
+            super.updateDrawable(newDrawable);
             setBounds(ImageUtils.scaleImageToLineHeight(newDrawable, view));
+            return view;
         }
     }
 

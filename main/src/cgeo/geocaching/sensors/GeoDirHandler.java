@@ -1,16 +1,11 @@
 package cgeo.geocaching.sensors;
 
-import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.AngleUtils;
-
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import rx.Observable;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.functions.Func1;
 import rx.functions.Func2;
 import rx.subscriptions.CompositeSubscription;
 
@@ -33,8 +28,6 @@ public abstract class GeoDirHandler {
     public static final int UPDATE_DIRECTION = 1 << 2;
     public static final int UPDATE_GEODIR = 1 << 3;
     public static final int LOW_POWER = 1 << 4;
-
-    private static final CgeoApplication app = CgeoApplication.getInstance();
 
     /**
      * Update method called when new geodata is available. This method is called on the UI thread.
@@ -67,22 +60,6 @@ public abstract class GeoDirHandler {
     public void updateGeoDir(final GeoData geoData, final float direction) {
     }
 
-    private static Observable<Float> fixedDirection() {
-        return app.directionObservable().map(new Func1<Float, Float>() {
-            @Override
-            public Float call(final Float direction) {
-                final GeoData geoData = app.currentGeo();
-                return fixDirection(geoData, direction);
-            }
-        });
-
-    }
-
-    private static float fixDirection(final GeoData geoData, final float direction) {
-        final boolean useGPSBearing = !Settings.isUseCompass() || geoData.getSpeed() > 5;
-        return useGPSBearing ? AngleUtils.reverseDirectionNow(geoData.getBearing()) : direction;
-    }
-
     private static <T> Observable<T> throttleIfNeeded(final Observable<T> observable, final long windowDuration, final TimeUnit unit) {
         return windowDuration > 0 ? observable.throttleFirst(windowDuration, unit) : observable;
     }
@@ -108,8 +85,10 @@ public abstract class GeoDirHandler {
     public Subscription start(final int flags, final long windowDuration, final TimeUnit unit) {
         final CompositeSubscription subscriptions = new CompositeSubscription();
         final boolean lowPower = (flags & LOW_POWER) != 0;
+        final Sensors sensors = Sensors.getInstance();
+
         if ((flags & UPDATE_GEODATA) != 0) {
-            subscriptions.add(throttleIfNeeded(app.geoDataObservable(lowPower), windowDuration, unit).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<GeoData>() {
+            subscriptions.add(throttleIfNeeded(sensors.geoDataObservable(lowPower), windowDuration, unit).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<GeoData>() {
                 @Override
                 public void call(final GeoData geoData) {
                     updateGeoData(geoData);
@@ -117,7 +96,7 @@ public abstract class GeoDirHandler {
             }));
         }
         if ((flags & UPDATE_DIRECTION) != 0) {
-            subscriptions.add(throttleIfNeeded(fixedDirection(), windowDuration, unit).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Float>() {
+            subscriptions.add(throttleIfNeeded(sensors.directionObservable(), windowDuration, unit).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Float>() {
                 @Override
                 public void call(final Float direction) {
                     updateDirection(direction);
@@ -126,10 +105,10 @@ public abstract class GeoDirHandler {
         }
         if ((flags & UPDATE_GEODIR) != 0) {
             // combineOnLatest() does not implement backpressure handling, so we need to explicitely use a backpressure operator there.
-            subscriptions.add(throttleIfNeeded(Observable.combineLatest(app.geoDataObservable(lowPower), app.directionObservable(), new Func2<GeoData, Float, ImmutablePair<GeoData, Float>>() {
+            subscriptions.add(throttleIfNeeded(Observable.combineLatest(sensors.geoDataObservable(lowPower), sensors.directionObservable(), new Func2<GeoData, Float, ImmutablePair<GeoData, Float>>() {
                 @Override
                 public ImmutablePair<GeoData, Float> call(final GeoData geoData, final Float direction) {
-                    return ImmutablePair.of(geoData, fixDirection(geoData, direction));
+                    return ImmutablePair.of(geoData, direction);
                 }
             }), windowDuration, unit).onBackpressureDrop().observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<ImmutablePair<GeoData, Float>>() {
                 @Override

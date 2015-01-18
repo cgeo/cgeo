@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" >
+
+    <RatingBar
+        android:id="@+id/gcvoteRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:max="5"
+        android:numStars="5"
+        android:stepSize="0.5"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/gcvoteLabel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="10dip"
+        android:text="@string/log_no_rating"
+        android:textColor="?text_color"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+</merge>

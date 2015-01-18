@@ -35,6 +35,8 @@ import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 
@@ -425,8 +427,14 @@ public class Settings {
         return getString(R.string.pref_cookiestore, null);
     }
 
+    public static void setUseGooglePlayServices(final boolean value) {
+        putBoolean(R.string.pref_googleplayservices, value);
+    }
+
     public static boolean useGooglePlayServices() {
-        return CgeoApplication.getInstance().isGooglePlayServicesAvailable() && getBoolean(R.string.pref_googleplayservices, true);
+        // By defaut, enable play services starting from ICS.
+        return CgeoApplication.getInstance().isGooglePlayServicesAvailable() &&
+                getBoolean(R.string.pref_googleplayservices, VERSION.SDK_INT >= VERSION_CODES.ICE_CREAM_SANDWICH);
     }
 
     public static boolean useLowPowerMode() {
@@ -619,7 +627,7 @@ public class Settings {
     }
 
     public static boolean isMapTrail() {
-        return getBoolean(R.string.pref_maptrail, true);
+        return getBoolean(R.string.pref_maptrail, false);
     }
 
     public static void setMapTrail(final boolean showTrail) {
@@ -800,6 +808,7 @@ public class Settings {
      * @return The cache type used for filtering or ALL if no filter is active.
      *         Returns never null
      */
+    @NonNull
     public static CacheType getCacheType() {
         return CacheType.getById(getString(R.string.pref_cachetype, CacheType.ALL.id));
     }

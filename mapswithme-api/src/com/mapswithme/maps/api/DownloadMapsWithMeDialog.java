@@ -41,7 +41,6 @@ public class DownloadMapsWithMeDialog extends Dialog implements android.view.Vie
     requestWindowFeature(Window.FEATURE_NO_TITLE);
     setContentView(R.layout.dlg_install_mwm);
 
-    findViewById(R.id.btn_lite).setOnClickListener(this);
     findViewById(R.id.btn_pro).setOnClickListener(this);
 
     setOwnerActivity(activity);
@@ -59,7 +58,7 @@ public class DownloadMapsWithMeDialog extends Dialog implements android.view.Vie
   @Override
   public void onClick(View v)
   {
-    String url = getContext().getString(v.getId() == R.id.btn_lite ? R.string.url_lite : R.string.url_pro);
+    String url = getContext().getString(R.string.url_pro);
     onDownloadButtonClicked(url);
   }
 }

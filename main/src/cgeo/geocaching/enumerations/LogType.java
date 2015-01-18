@@ -3,7 +3,8 @@ package cgeo.geocaching.enumerations;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
-import java.util.Collections;
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -65,21 +66,18 @@ public enum LogType {
         this(id, iconName, type, oc_type, stringId, R.drawable.mark_gray);
     }
 
-    private final static Map<String, LogType> FIND_BY_ICONNAME;
-    private final static Map<String, LogType> FIND_BY_TYPE;
+    private final static Map<String, LogType> FIND_BY_ICONNAME = new HashMap<>();
+    private final static Map<String, LogType> FIND_BY_TYPE = new HashMap<>();
     static {
-        final HashMap<String, LogType> mappingPattern = new HashMap<>();
-        final HashMap<String, LogType> mappingType = new HashMap<>();
         for (final LogType lt : values()) {
             if (lt.iconName != null) {
-                mappingPattern.put(lt.iconName, lt);
+                FIND_BY_ICONNAME.put(lt.iconName, lt);
             }
-            mappingType.put(lt.type, lt);
+            FIND_BY_TYPE.put(lt.type, lt);
         }
-        FIND_BY_ICONNAME = Collections.unmodifiableMap(mappingPattern);
-        FIND_BY_TYPE = Collections.unmodifiableMap(mappingType);
     }
 
+    @NonNull
     public static LogType getById(final int id) {
         for (final LogType logType : values()) {
             if (logType.id == id) {
@@ -89,6 +87,7 @@ public enum LogType {
         return UNKNOWN;
     }
 
+    @NonNull
     public static LogType getByIconName(final String imageType) {
         // Special case for post reviewer note, which appears sometimes as 18.png (in individual entries) or as 68.png
         // (in logs counts).
@@ -102,6 +101,7 @@ public enum LogType {
         return result;
     }
 
+    @NonNull
     public static LogType getByType(final String type) {
         final LogType result = type != null ? LogType.FIND_BY_TYPE.get(type.toLowerCase(Locale.US).trim()) : null;
         if (result == null) {

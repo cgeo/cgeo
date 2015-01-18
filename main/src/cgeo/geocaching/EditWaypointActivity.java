@@ -12,6 +12,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -308,7 +309,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
                 @Override
                 protected void onPostExecute(final Geocache cache) {
-                    final CoordinatesInputDialog coordsDialog = CoordinatesInputDialog.getInstance(cache, geopoint, app.currentGeo());
+                    final CoordinatesInputDialog coordsDialog = CoordinatesInputDialog.getInstance(cache, geopoint, Sensors.getInstance().currentGeo());
                     coordsDialog.setCancelable(true);
                     coordsDialog.show(getSupportFragmentManager(), "wpeditdialog");
                 }
@@ -391,7 +392,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     return;
                 }
             } else {
-                coords = app.currentGeo().getCoords();
+                coords = Sensors.getInstance().currentGeo().getCoords();
             }
 
             if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {

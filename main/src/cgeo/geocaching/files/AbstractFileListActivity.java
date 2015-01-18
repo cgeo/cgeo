@@ -9,6 +9,7 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -203,7 +204,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
      * @param filename
      * @return <code>true</code> if the filename belongs to the list
      */
-    protected boolean filenameBelongsToList(final String filename) {
+    protected boolean filenameBelongsToList(@NonNull final String filename) {
         for (final String ext : extensions) {
             if (StringUtils.endsWithIgnoreCase(filename, ext)) {
                 return true;

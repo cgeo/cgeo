@@ -2,16 +2,17 @@ package cgeo.geocaching.ui;
 
 import butterknife.ButterKnife;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.ICoordinates;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.location.Units;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.utils.Formatter;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 
 import android.annotation.SuppressLint;
@@ -43,18 +44,20 @@ public final class CacheDetailsCreator {
     }
 
     /**
-     * @param nameId
-     * @param value
-     * @return the view containing the displayed string (i.e. the right side one from the pair of "label": "value")
+     * Create a "name: value" line.
+     *
+     * @param nameId the resource of the name field
+     * @param value the initial value
+     * @return a pair made of the whole "name: value" line (to be able to hide it for example) and of the value (to update it)
      */
-    public TextView add(final int nameId, final CharSequence value) {
+    public ImmutablePair<RelativeLayout, TextView> add(final int nameId, final CharSequence value) {
         final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_information_item, null, false);
         final TextView nameView = ButterKnife.findById(layout, R.id.name);
         nameView.setText(res.getString(nameId));
         lastValueView = ButterKnife.findById(layout, R.id.value);
         lastValueView.setText(value);
         parentView.addView(layout);
-        return lastValueView;
+        return ImmutablePair.of(layout, lastValueView);
     }
 
     public TextView getValueView() {
@@ -115,7 +118,7 @@ public final class CacheDetailsCreator {
         if (target.getCoords() == null) {
             return null;
         }
-        return CgeoApplication.getInstance().currentGeo().getCoords().distanceTo(target);
+        return Sensors.getInstance().currentGeo().getCoords().distanceTo(target);
     }
 
     public void addRating(final Geocache cache) {
@@ -130,7 +133,7 @@ public final class CacheDetailsCreator {
     }
 
     public void addSize(final Geocache cache) {
-        if (null != cache.getSize() && cache.showSize()) {
+        if (cache.showSize()) {
             add(R.string.cache_size, cache.getSize().getL10n());
         }
     }
@@ -192,7 +195,7 @@ public final class CacheDetailsCreator {
         if (StringUtils.isEmpty(dateString)) {
             return null;
         }
-        final TextView view = add(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden, dateString);
+        final TextView view = add(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden, dateString).right;
         view.setId(R.id.date);
         return view;
     }

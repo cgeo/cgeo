@@ -26,14 +26,15 @@ import cgeo.geocaching.utils.RxUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.io.Charsets;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import rx.Observable;
-import rx.android.events.OnClickEvent;
-import rx.android.observables.AndroidObservable;
-import rx.android.observables.ViewObservable;
+import rx.android.app.AppObservable;
+import rx.android.view.OnClickEvent;
+import rx.android.view.ViewObservable;
 import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.subscriptions.CompositeSubscription;
@@ -42,6 +43,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.nfc.NdefMessage;
+import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.view.ActionMode;
@@ -96,20 +99,27 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.viewpager_activity);
+        createSubscriptions = new CompositeSubscription();
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.trackable));
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
-        final Uri uri = getIntent().getData();
 
-        // try to get data from extras
-        if (extras != null) {
+        final Uri uri;
+        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
+            final NdefMessage msg = (NdefMessage) extras.getParcelableArray(NfcAdapter.EXTRA_NDEF_MESSAGES)[0];
+            uri = Uri.parse("http://" + new String(msg.getRecords()[0].getPayload(), Charsets.UTF_8));
+        } else if (extras != null) {
+            // try to get data from extras
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
             name = extras.getString(Intents.EXTRA_NAME);
             guid = extras.getString(Intents.EXTRA_GUID);
             id = extras.getString(Intents.EXTRA_ID);
+            uri = getIntent().getData();
+        } else {
+            uri = null;
         }
 
         // try to get data from URI
@@ -160,7 +170,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             return;
         }
 
-        String message;
+        final String message;
         if (StringUtils.isNotBlank(name)) {
             message = Html.fromHtml(name).toString();
         } else if (StringUtils.isNotBlank(geocode)) {
@@ -182,8 +192,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             }
         });
         waitDialog = ProgressDialog.show(this, message, res.getString(R.string.trackable_details_loading), true, true);
-        createSubscriptions = new CompositeSubscription();
-        createSubscriptions.add(AndroidObservable.bindActivity(this, loadTrackable(geocode, guid, id)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
+        createSubscriptions.add(AppObservable.bindActivity(this, loadTrackable(geocode, guid, id)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
             @Override
             public void call(final Trackable trackable) {
                 TrackableActivity.this.trackable = trackable;
@@ -294,7 +303,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
     private void setupIcon(final ActionBar actionBar, final String url) {
         final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, 0, false);
-        AndroidObservable.bindActivity(this, imgGetter.fetchDrawable(url)).subscribe(new Action1<BitmapDrawable>() {
+        AppObservable.bindActivity(this, imgGetter.fetchDrawable(url)).subscribe(new Action1<BitmapDrawable>() {
             @Override
             public void call(final BitmapDrawable image) {
                 if (actionBar != null) {
@@ -394,10 +403,10 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             }
 
             // trackable name
-            addContextMenu(details.add(R.string.trackable_name, StringUtils.isNotBlank(trackable.getName()) ? Html.fromHtml(trackable.getName()).toString() : res.getString(R.string.trackable_unknown)));
+            addContextMenu(details.add(R.string.trackable_name, StringUtils.isNotBlank(trackable.getName()) ? Html.fromHtml(trackable.getName()).toString() : res.getString(R.string.trackable_unknown)).right);
 
             // trackable type
-            String tbType;
+            final String tbType;
             if (StringUtils.isNotBlank(trackable.getType())) {
                 tbType = Html.fromHtml(trackable.getType()).toString();
             } else {
@@ -406,10 +415,10 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             details.add(R.string.trackable_type, tbType);
 
             // trackable geocode
-            addContextMenu(details.add(R.string.trackable_code, trackable.getGeocode()));
+            addContextMenu(details.add(R.string.trackable_code, trackable.getGeocode()).right);
 
             // trackable owner
-            final TextView owner = details.add(R.string.trackable_owner, res.getString(R.string.trackable_unknown));
+            final TextView owner = details.add(R.string.trackable_owner, res.getString(R.string.trackable_unknown)).right;
             if (StringUtils.isNotBlank(trackable.getOwner())) {
                 owner.setText(Html.fromHtml(trackable.getOwner()), TextView.BufferType.SPANNABLE);
                 owner.setOnClickListener(new UserActionsClickListener(trackable));
@@ -419,20 +428,26 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             if (StringUtils.isNotBlank(trackable.getSpottedName()) ||
                     trackable.getSpottedType() == Trackable.SPOTTED_UNKNOWN ||
                     trackable.getSpottedType() == Trackable.SPOTTED_OWNER) {
-                boolean showTimeSpan = true;
-                StringBuilder text;
 
-                if (trackable.getSpottedType() == Trackable.SPOTTED_CACHE) {
-                    text = new StringBuilder(res.getString(R.string.trackable_spotted_in_cache) + ' ' + Html.fromHtml(trackable.getSpottedName()).toString());
-                } else if (trackable.getSpottedType() == Trackable.SPOTTED_USER) {
-                    text = new StringBuilder(res.getString(R.string.trackable_spotted_at_user) + ' ' + Html.fromHtml(trackable.getSpottedName()).toString());
-                } else if (trackable.getSpottedType() == Trackable.SPOTTED_UNKNOWN) {
-                    text = new StringBuilder(res.getString(R.string.trackable_spotted_unknown_location));
-                } else if (trackable.getSpottedType() == Trackable.SPOTTED_OWNER) {
-                    text = new StringBuilder(res.getString(R.string.trackable_spotted_owner));
-                } else {
-                    text = new StringBuilder("N/A");
-                    showTimeSpan = false;
+                final StringBuilder text;
+                boolean showTimeSpan = true;
+                switch (trackable.getSpottedType()) {
+                    case Trackable.SPOTTED_CACHE:
+                        text = new StringBuilder(res.getString(R.string.trackable_spotted_in_cache) + ' ' + Html.fromHtml(trackable.getSpottedName()).toString());
+                        break;
+                    case Trackable.SPOTTED_USER:
+                        text = new StringBuilder(res.getString(R.string.trackable_spotted_at_user) + ' ' + Html.fromHtml(trackable.getSpottedName()).toString());
+                        break;
+                    case Trackable.SPOTTED_UNKNOWN:
+                        text = new StringBuilder(res.getString(R.string.trackable_spotted_unknown_location));
+                        break;
+                    case Trackable.SPOTTED_OWNER:
+                        text = new StringBuilder(res.getString(R.string.trackable_spotted_owner));
+                        break;
+                    default:
+                        text = new StringBuilder("N/A");
+                        showTimeSpan = false;
+                        break;
                 }
 
                 // days since last spotting
@@ -445,7 +460,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                     }
                 }
 
-                final TextView spotted = details.add(R.string.trackable_spotted, text.toString());
+                final TextView spotted = details.add(R.string.trackable_spotted, text.toString()).right;
                 spotted.setClickable(true);
                 if (Trackable.SPOTTED_CACHE == trackable.getSpottedType()) {
                     spotted.setOnClickListener(new View.OnClickListener() {
@@ -472,19 +487,19 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
             // trackable origin
             if (StringUtils.isNotBlank(trackable.getOrigin())) {
-                final TextView origin = details.add(R.string.trackable_origin, "");
+                final TextView origin = details.add(R.string.trackable_origin, "").right;
                 origin.setText(Html.fromHtml(trackable.getOrigin()), TextView.BufferType.SPANNABLE);
                 addContextMenu(origin);
             }
 
             // trackable released
             if (trackable.getReleased() != null) {
-                addContextMenu(details.add(R.string.trackable_released, Formatter.formatDate(trackable.getReleased().getTime())));
+                addContextMenu(details.add(R.string.trackable_released, Formatter.formatDate(trackable.getReleased().getTime())).right);
             }
 
             // trackable distance
             if (trackable.getDistance() >= 0) {
-                addContextMenu(details.add(R.string.trackable_distance, Units.getDistanceFromKilometers(trackable.getDistance())));
+                addContextMenu(details.add(R.string.trackable_distance, Units.getDistanceFromKilometers(trackable.getDistance())).right);
             }
 
             // trackable goal
@@ -519,7 +534,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                     }
                 });
 
-                AndroidObservable.bindActivity(TrackableActivity.this, new HtmlImage(geocode, true, 0, false).fetchDrawable(trackable.getImage())).subscribe(new Action1<BitmapDrawable>() {
+                AppObservable.bindActivity(TrackableActivity.this, new HtmlImage(geocode, true, 0, false).fetchDrawable(trackable.getImage())).subscribe(new Action1<BitmapDrawable>() {
                     @Override
                     public void call(final BitmapDrawable bitmapDrawable) {
                         trackableImage.setImageDrawable(bitmapDrawable);
@@ -606,8 +621,11 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         // refresh the logs view after coming back from logging a trackable
         if (trackable != null) {
             final Trackable updatedTrackable = DataStore.loadTrackable(trackable.getGeocode());
-            trackable.setLogs(updatedTrackable.getLogs());
-            reinitializeViewPager();
+            // if this activity is resumed after a long time, the trackable might be gone due to regular cleanup
+            if (updatedTrackable != null) {
+                trackable.setLogs(updatedTrackable.getLogs());
+                reinitializeViewPager();
+            }
         }
     }
 

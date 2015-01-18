@@ -125,6 +125,7 @@
   <string name="err_login">Brak danych do logowania.</string>
   <string name="err_login_failed_toast">c:geo nie może zalogować się. c:geo pracuje offline z zapisanymi skrzynkami. Sprawdź ustawienia logowania i połączenie z internetem.</string>
   <string name="err_unknown">Nieznany błąd</string>
+  <string name="err_unknown_address">c:geo nie mógł dopasować adresu do istniejącej lokalizacji</string>
   <string name="err_comm">Nieznany błąd w komunikacji</string>
   <string name="err_missing_auth">Brak nazwy użytkownika i/lub hasła.</string>
   <string name="err_wrong">Niepoprawne dane użytkownika</string>
@@ -159,7 +160,6 @@
   <string name="err_acquire_image_failed">Nie można pobrać obrazu.</string>
   <string name="err_tb_display">c:geo nie może pokazać przedmiotów podróżnych. Czy to naprawdę jest przedmiot podróżny?</string>
   <string name="err_tb_details_open">c:geo nie może otworzyć szczegółów przedmiotu podróżnego.</string>
-  <string name="err_tb_forgot_saw">c:geo zapomiał, który przedmiot podróżny widziałeś.</string>
   <string name="err_tb_find">c:geo nie może znaleźć przedmiotu podróżnego.</string>
   <string name="err_tb_find_that">c:geo nie może znaleźć tego przedmiotu podróżnego.</string>
   <string name="err_waypoint_cache_unknown">c:geo nie wie, do której skrzynki chcesz dodać punkt nawigacji.</string>
@@ -172,6 +172,8 @@
   <string name="err_log_load_data">c:geo nie może załadować danych wymaganych do wpisania wizyty.</string>
   <string name="err_log_load_data_again">c:geo nie może załadować danych wymaganych do wpisania wizyty. Próbuję ponownie.</string>
   <string name="err_log_load_data_still">Nadal trwa ładowanie danych wymaganych do wpisu w dzienniku. Proszę czekać…</string>
+  <string name="err_log_post_failed">Wygląda na to, że wpis nie został dodany. Proszę sprawdzić to na stronie internetowej skrzynki.</string>
+  <string name="err_logimage_post_failed">Wygląda na to, że zdjęcie nie zostało przesłane. Proszę sprawdzić to na stronie internetowej skrzynki.</string>
   <string name="err_search_address_forgot">c:geo zapomniał adresu, którego szukałeś.</string>
   <string name="err_parse_lat">c:geo nie może obliczyć szerokości geograficznej.</string>
   <string name="err_parse_lon">c:geo nie może obliczyć długości geograficznej.</string>
@@ -268,9 +270,7 @@
   <string name="caches_nearby">Najbliższe</string>
   <string name="caches_manage">Zarządzaj</string>
   <string name="caches_remove_all">Usuń wszystkie</string>
-  <string name="caches_remove_all_confirm">Czy chcesz usunąć wszystkie %s skrzynek z aktualnej listy?</string>
   <string name="caches_remove_selected">Usuń wybrane</string>
-  <string name="caches_remove_selected_confirm">Czy chcesz usunąć wybrane %s skrzynek z urządzenia?</string>
   <string name="caches_remove_progress">Usuwanie skrzynek</string>
   <string name="caches_delete_events">Usuń minione wydarzenia</string>
   <string name="caches_refresh_selected">Odśwież wybrane</string>
@@ -295,6 +295,9 @@
   <string name="caches_filter_personal_note">Zawiera notatkę</string>
   <string name="caches_filter_popularity">Ulubione</string>
   <string name="caches_filter_popularity_ratio">Ulubione [%]</string>
+  <string name="caches_filter_personal_data">Z osobistymi informacjami</string>
+  <string name="caches_filter_rating">Z oceną</string>
+  <string name="caches_filter_own_rating">Z własną oceną</string>
   <string name="caches_removing_from_history">Usuwam z Historii…</string>
   <string name="caches_clear_offlinelogs">Usuń wpisy offline</string>
   <string name="caches_clear_offlinelogs_message">Czy chcesz wyczyścić wpisy offline?</string>
@@ -320,13 +323,16 @@
   <string name="list_not_available">Lista nie jest już dostępna, przechodzę do standardowej listy</string>
   <string name="about_version">Wersja</string>
   <string name="about_changelog">Zmiany</string>
+  <string name="about_system">System</string>
   <string name="about_donate">Podaruj</string>
   <string name="about_donation_more">Darowizna dla\nprogramisty</string>
   <string name="about_contributors">Współpracownicy</string>
   <string name="about_license">Licencja</string>
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Pomoc</string>
+  <string name="about_system_include">Proszę załączyć następujące informacje o systemie podczas przesyłania raportu błędu albo podczas prośby o więcej informacji odnośnie c:geo:</string>
   <string name="settings_title_services">Usługi</string>
+  <string name="settings_summary_services">Konfigurowanie informacji o koncie użytkownika i dostęp do usług opcjonalnych.</string>
   <string name="settings_title_appearance">Wygląd</string>
   <string name="settings_title_cachedetails">Szczegóły skrzynki</string>
   <string name="settings_title_offlinedata">Dane offline</string>
@@ -372,6 +378,7 @@
   <string name="init_gcvote">GCvote.com</string>
   <string name="init_gcvote_password_description">Aby móc oceniać skrzynki, należy postępować zgodnie z instrukcjami zawartymi na  GCVote.com i podać swoje hasło do serwisu tutaj.</string>
   <string name="err_gcvote_send_rating">Błąd podczas wysyłania oceny, sprawdź swoje hasło do GCVote w ustawieniach albo wyczyść je.</string>
+  <string name="gcvote_sent">Głos pomyślnie oddany</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktywuj</string>
   <string name="init_username">Nazwa użytkownika</string>
@@ -653,6 +660,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Zegarek Pebble</string>
+  <string name="cache_menu_vote">Głosuj</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Zapamiętany wpis</string>
   <string name="cache_status_found">Znaleziona</string>
