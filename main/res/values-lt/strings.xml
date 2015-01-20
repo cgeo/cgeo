@@ -270,7 +270,17 @@
   <string name="caches_nearby">Netoliese</string>
   <string name="caches_manage">Valdyti</string>
   <string name="caches_remove_all">Pašalinti visas</string>
+  <plurals name="caches_remove_all_confirm">
+    <item quantity="one">Ar norite pašalinti slėptuvę iš dabartinio sąrašo?</item>
+    <item quantity="few">Ar norite pašalinti visas %d slėptuves iš dabartinio sąrašo?</item>
+    <item quantity="other">Ar norite pašalinti visas %d slėptuvių iš dabartinio sąrašo?</item>
+  </plurals>
   <string name="caches_remove_selected">Pašalinti pasirinktą</string>
+  <plurals name="caches_remove_selected_confirm">
+    <item quantity="one">Ar norite pašalinti slėptuvę iš prietaiso?</item>
+    <item quantity="few">Ar norite pašalinti pasirinktas %d slėptuves iš prietaiso?</item>
+    <item quantity="other">Ar norite pašalinti pasirinktas %d slėptuvių iš prietaiso?</item>
+  </plurals>
   <string name="caches_remove_progress">Pašalinamos slėptuvės</string>
   <string name="caches_delete_events">Ištrinti praeities įvykius</string>
   <string name="caches_refresh_selected">Atnaujinti pasirinktas</string>
@@ -323,12 +333,14 @@
   <string name="list_not_available">Sąrašas nebeprieinamas, pereinama į standartinį sąrašą</string>
   <string name="about_version">Versija</string>
   <string name="about_changelog">Pakeitimų žurnalas</string>
+  <string name="about_system">Sistema</string>
   <string name="about_donate">Paaukoti</string>
   <string name="about_donation_more">Paaukoti\nkūrėjams</string>
   <string name="about_contributors">Bendraautoriai</string>
   <string name="about_license">Licencija</string>
   <string name="about_apache_license"><a href=""> Apache licencija, versija 2.0</a></string>
   <string name="about_help">Pagalba</string>
+  <string name="about_system_include">Pridėkite papildomą sisteminę informaciją, kai siunčiate klaidos pranešimą arba norite gauti daugiau informacijos apie c:geo:</string>
   <string name="settings_title_services">Paslaugos</string>
   <string name="settings_summary_services">Nustatyk naudotojo paskyros informaciją ir prieiga prie pasirinktinų paslaugų.</string>
   <string name="settings_title_appearance">Išvaizda</string>
