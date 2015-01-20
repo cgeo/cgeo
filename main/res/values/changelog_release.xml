@@ -2,9 +2,9 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release:</b>\n
-    · Fix: On change of OSM map it was not centered to the current location\n
+    <b>2015.01.20:</b>\n
     · Fix: Nearby search for basic members not working in some cases\n
+    · Fix: On change of OSM map it was not centered to the current location\n
     · Fix: Better handling for caches with high amount of pictures\n
     · Fix: Rare crash if TB can not be found\n
     · Fix: Possible crash in case GooglePlay location services are not working as expected\n
