@@ -54,7 +54,7 @@
   <string name="log_attend">参加する</string>
   <string name="log_attended">参加した</string>
   <string name="log_retrieved">回収した</string>
-  <string name="log_placed">Placed</string>
+  <string name="log_placed">配置した</string>
   <string name="log_grabbed">どこかで捕まえた</string>
   <string name="log_movecollection">コレクションに移動</string>
   <string name="log_moveinventory">目録に移動</string>
@@ -70,7 +70,7 @@
   <string name="log_tb_nothing">何もしない</string>
   <string name="log_tb_visit">訪れた</string>
   <string name="log_tb_drop">ここに置く</string>
-  <string name="log_tb_changeall">Change All</string>
+  <string name="log_tb_changeall">すべてを変更する</string>
   <string name="log_saving">ログを送信中…</string>
   <string name="log_saving_and_uploading">ログと画像を送信中…</string>
   <string name="log_clear">消去</string>
@@ -100,8 +100,8 @@
   <string name="log_image_caption">タイトル</string>
   <string name="log_image_description">説明</string>
   <string name="log_image_scale">拡大縮小</string>
-  <string name="log_password_title">Log Password:</string>
-  <string name="log_hint_log_password">Enter your log password</string>
+  <string name="log_password_title">ログのパスワード：</string>
+  <string name="log_hint_log_password">パスワードを入力してください</string>
   <string-array name="log_image_scales">
     <item>実サイズ</item>
     <item>512 px</item>
@@ -125,7 +125,7 @@
   <string name="err_maintenance">Geocaching.comはメンテナンス中で接続できません。 保存済みキャッシュのみでオフラインで動作します。</string>
   <string name="err_license">Geocaching.comのライセンス契約に同意しなかったのでキャッシュの座標を見ることはできません。</string>
   <string name="err_unvalidated_account">Geocaching.comでアカウントを有効化してください。</string>
-  <string name="err_unpublished">The requested cache is unpublished.</string>
+  <string name="err_unpublished">要求したキャッシュが公開されていません。</string>
   <string name="err_premium_only">このキャッシュはプレミアム会員のみ有効です。</string>
   <string name="err_detail_open">キャッシュの詳細を開くことができません。</string>
   <string name="err_detail_cache">キャッシュ情報を表示することができません。これは本当にジオキャッシュですか?</string>
@@ -137,7 +137,7 @@
   <string name="err_detail_no_map_static">このキャッシュのオフライン地図を見つけることができませんでした。</string>
   <string name="err_detail_not_load_map_static">オフライン地図のロードに失敗しました。</string>
   <string name="err_detail_still_working">他のタスクがまだ動作中です。</string>
-  <string name="err_watchlist_still_managing">Still managing your watchlist.</string>
+  <string name="err_watchlist_still_managing">まだウォッチリストを管理中です。</string>
   <string name="err_watchlist_failed">ウォッチリストの変更に失敗しました。</string>
   <string name="err_application_no">適切なアプリケーションが見つかりません。</string>
   <string name="err_auth_initialize">認証プロセスの初期化に失敗しました。</string>
@@ -158,14 +158,14 @@
   <string name="err_waypoint_cache_unknown">c:geo doesn\'t know to which cache you want to add waypoint.</string>
   <string name="err_waypoint_add_failed">ウェイポイントを追加することができませんでした。</string>
   <string name="err_point_unknown_position">現在地を認識できません。</string>
-  <string name="err_point_no_position_given_title">必要な情報</string>
+  <string name="err_point_no_position_given_title">情報が必要です</string>
   <string name="err_point_no_position_given">少なくとも経度、緯度、または距離と方位を入力してください。全てを入力することもできます。</string>
   <string name="err_point_bear_and_dist_title">ヘルプが必要?</string>
   <string name="err_point_bear_and_dist">方位と距離を入力してください。方位は北を基準として時計回りに0～360度で表し単位は付けないでください。</string>
   <string name="err_log_load_data">ログを書くのに必要なデータをロードすることができません。</string>
   <string name="err_log_load_data_again">ログを書くのに必要なデータをロードすることができません。もう一度やってみてください。</string>
   <string name="err_log_load_data_still">ログを投稿するのに必要なデータをまだロード中です。もう少しお待ちください。</string>
-  <string name="err_search_address_forgot">c:geo forgot the address you tried to find.</string>
+  <string name="err_search_address_forgot">c:geoはあなたの検索したアドレスを忘れてしまいました。</string>
   <string name="err_parse_lat">緯度の解析ができません。</string>
   <string name="err_parse_lon">経度の解析ができません。</string>
   <string name="err_parse_dist">距離の解析ができません。</string>
@@ -194,7 +194,7 @@
   <string name="info_select_logimage_cancelled">添付画像のファイル選択または撮影がキャンセルされました。</string>
   <string name="info_stored_image">新規画像ファイルの保存場所:</string>
   <string name="info_storing_static_maps">オフライン用に地図を保存中</string>
-  <string name="loc_last">Last known</string>
+  <string name="loc_last">判明した最後の位置</string>
   <string name="loc_net">ネットワーク</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">衛星</string>
@@ -207,6 +207,7 @@
   <string name="menu_history">履歴</string>
   <string name="menu_filter">フィルター</string>
   <string name="menu_scan_geo">QRコードスキャン</string>
+  <string name="menu_pocket_queries">ポケット・クエリ</string>
   <string name="menu_scan_description">QRコードにしたGCコードをスキャンできますが必要なアプリがインストールされていません。Google Playからインストールしますか?</string>
   <string name="live_map_button">地図</string>
   <string name="caches_nearby_button">近く</string>
@@ -233,12 +234,12 @@
   <string name="caches_sort_difficulty">難易度</string>
   <string name="caches_sort_terrain">地形</string>
   <string name="caches_sort_size">サイズ</string>
-  <string name="caches_sort_favorites">人気</string>
+  <string name="caches_sort_favorites">お気に入り</string>
   <string name="caches_sort_favorites_ratio">お気に入り [%]</string>
   <string name="caches_sort_name">名前</string>
   <string name="caches_sort_geocode">GCコード</string>
   <string name="caches_sort_rating">評価</string>
-  <string name="caches_sort_vote">Vote (Own Rating)</string>
+  <string name="caches_sort_vote">自己評価</string>
   <string name="caches_sort_inventory">目録の数</string>
   <string name="caches_sort_date_hidden">設置日</string>
   <string name="caches_sort_date_logged">ログが書かれた日</string>
@@ -250,6 +251,7 @@
   <string name="caches_select_invert">選択を反転</string>
   <string name="caches_nearby">現在地の近く</string>
   <string name="caches_manage">管理</string>
+  <string name="caches_remove_progress">キャッシュを削除中</string>
   <string name="caches_delete_events">過去のイベントを削除</string>
   <string name="caches_refresh_selected">選択したキャッシュを更新</string>
   <string name="caches_refresh_all">全てのキャッシュを更新</string>
@@ -268,7 +270,7 @@
   <string name="caches_filter_track">トラッカブルあり</string>
   <string name="caches_filter_clear">フィルターをクリア</string>
   <string name="caches_filter_modified">座標の更新あり</string>
-  <string name="caches_filter_origin">Origin</string>
+  <string name="caches_filter_origin">原点</string>
   <string name="caches_filter_distance">距離</string>
   <string name="caches_filter_personal_note">パーソナルノート付き</string>
   <string name="caches_filter_popularity">お気に入り</string>

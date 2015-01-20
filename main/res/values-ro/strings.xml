@@ -276,6 +276,11 @@
     <item quantity="other">Vrei să ştergi toate cele %d geocutii din lista curentă?</item>
   </plurals>
   <string name="caches_remove_selected">Şterge geocutiile selectate</string>
+  <plurals name="caches_remove_selected_confirm">
+    <item quantity="one">Vrei să ştergi această geocutie din dispozitivul tău?</item>
+    <item quantity="few">Vrei să ştergi cele %d geocutii selectate din dispozitivul tău?</item>
+    <item quantity="other">Vrei să ştergi cele %d geocutii selectate din dispozitivul tău?</item>
+  </plurals>
   <string name="caches_remove_progress">Ştergere geocutii</string>
   <string name="caches_delete_events">Şterge evenimentele trecute</string>
   <string name="caches_refresh_selected">Reîncarcă cutiile selectate</string>
