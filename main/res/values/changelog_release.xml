@@ -8,6 +8,7 @@
     · Fix: Better handling for caches with high amount of pictures\n
     · Fix: Rare crash if TB can not be found\n
     · Fix: Possible crash in case GooglePlay location services are not working as expected\n
+    · Fictitious: This app will auto-solve all Mysterys\n
     \n
     \n
     <b>2015.01.12:</b>\n
