@@ -3,7 +3,7 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
-    · Put features there\n
+    · New: confirmation on backup/restore\n
     \n
   </string>
 </resources>
