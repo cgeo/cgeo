@@ -216,9 +216,8 @@ public final class StaticMapsProvider {
     public static Observable<String> storeCachePreviewMap(final Geocache cache) {
         final String latlonMap = cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
         final Point displaySize = Compatibility.getDisplaySize();
-        final int minSize = Math.min(displaySize.x, displaySize.y);
         final String markerUrl = MARKERS_URL + "my_location_mdpi.png";
-        return downloadMap(cache.getGeocode(), 15, ROADMAP, markerUrl, PREFIX_PREVIEW, "shadow:false|", latlonMap, minSize, minSize, null);
+        return downloadMap(cache.getGeocode(), 15, ROADMAP, markerUrl, PREFIX_PREVIEW, "shadow:false|", latlonMap, displaySize.x, displaySize.y, null);
     }
 
     private static Observable<String> downloadMaps(final String geocode, final String markerUrl, final String prefix,
