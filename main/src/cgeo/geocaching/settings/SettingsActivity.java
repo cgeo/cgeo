@@ -327,13 +327,14 @@ public class SettingsActivity extends PreferenceActivity {
         backup.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(final Preference preference) {
-                return DatabaseBackupUtils.createBackup(SettingsActivity.this, new Runnable() {
+                DatabaseBackupUtils.createBackup(SettingsActivity.this, new Runnable() {
 
                     @Override
                     public void run() {
                         VALUE_CHANGE_LISTENER.onPreferenceChange(SettingsActivity.this.getPreference(R.string.pref_fakekey_preference_backup_info), "");
                     }
                 });
+                return true;
             }
         });
 

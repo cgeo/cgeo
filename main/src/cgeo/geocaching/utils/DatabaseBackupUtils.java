@@ -14,6 +14,8 @@ import rx.schedulers.Schedulers;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.res.Resources;
 
 import java.io.File;
@@ -26,12 +28,30 @@ public class DatabaseBackupUtils {
     }
 
     /**
-     * restore the database in a new thread, showing a progress window
+     * After confirming to overwrite the existing caches on the devices, restore the database in a new thread, showing a
+     * progress window
      *
      * @param activity
      *            calling activity
      */
     public static void restoreDatabase(final Activity activity) {
+        final int caches = DataStore.getAllCachesCount();
+        if (caches == 0) {
+            restoreDatabaseInternal(activity);
+        }
+        else {
+            Dialogs.confirm(activity, R.string.init_backup_restore, activity.getString(R.string.restore_confirm_overwrite, activity.getResources().getQuantityString(R.plurals.cache_counts, caches)), new OnClickListener() {
+
+                @Override
+                public void onClick(final DialogInterface dialog, final int which) {
+                    restoreDatabaseInternal(activity);
+                }
+            });
+
+        }
+    }
+
+    private static void restoreDatabaseInternal(final Activity activity) {
         final Resources res = activity.getResources();
         final ProgressDialog dialog = ProgressDialog.show(activity, res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_running), true, false);
         final AtomicBoolean restoreSuccessful = new AtomicBoolean(false);
@@ -44,8 +64,8 @@ public class DatabaseBackupUtils {
             @Override
             public void call() {
                 dialog.dismiss();
-                boolean restored = restoreSuccessful.get();
-                String message = restored ? res.getString(R.string.init_restore_success) : res.getString(R.string.init_restore_failed);
+                final boolean restored = restoreSuccessful.get();
+                final String message = restored ? res.getString(R.string.init_restore_success) : res.getString(R.string.init_restore_failed);
                 Dialogs.message(activity, R.string.init_backup_restore, message);
                 if (activity instanceof MainActivity) {
                     ((MainActivity) activity).updateCacheCounter();
@@ -54,14 +74,34 @@ public class DatabaseBackupUtils {
         });
     }
 
-    public static boolean createBackup(final Activity activity, final Runnable runAfterwards) {
+    /**
+     * Create a backup after confirming to overwrite the existing backup.
+     *
+     * @param activity
+     * @param runAfterwards
+     */
+    public static void createBackup(final Activity activity, final Runnable runAfterwards) {
         // avoid overwriting an existing backup with an empty database
         // (can happen directly after reinstalling the app)
         if (DataStore.getAllCachesCount() == 0) {
             Dialogs.message(activity, R.string.init_backup, R.string.init_backup_unnecessary);
-            return false;
+            return;
         }
+        if (hasBackup()) {
+            Dialogs.confirm(activity, R.string.init_backup, activity.getString(R.string.backup_confirm_overwrite, getBackupDateTime()), new OnClickListener() {
 
+                @Override
+                public void onClick(final DialogInterface dialog, final int which) {
+                    createBackupInternal(activity, runAfterwards);
+                }
+            });
+        }
+        else {
+            createBackupInternal(activity, runAfterwards);
+        }
+    }
+
+    private static void createBackupInternal(final Activity activity, final Runnable runAfterwards) {
         final ProgressDialog dialog = ProgressDialog.show(activity,
                 activity.getString(R.string.init_backup),
                 activity.getString(R.string.init_backup_running), true, false);
@@ -85,7 +125,6 @@ public class DatabaseBackupUtils {
                 }
             }
         });
-        return true;
     }
 
     public static File getRestoreFile() {

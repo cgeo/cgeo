@@ -497,6 +497,8 @@
     <string name="init_backup_success">c:geo\'s database was successfully copied to:</string>
     <string name="init_backup_failed">Backup of c:geo\'s database failed.</string>
     <string name="init_backup_unnecessary">Database is empty, no backup necessary.</string>
+    <string name="backup_confirm_overwrite">Do you want to overwrite the existing backup from %s?</string>
+    <string name="restore_confirm_overwrite">Do you want to overwrite %s on your device with the backup?</string>
     <string name="init_restore_success">Restoration completed.</string>
     <string name="init_restore_failed">Restoration failed.</string>
     <string name="init_restore_running">Restoring cache database…</string>
