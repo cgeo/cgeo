@@ -24,9 +24,9 @@ class GeopointParser {
         }
     }
 
-    //                                                            ( 1  )    ( 2  )         ( 3  )       ( 4  )       (        5        )
-    private static final Pattern PATTERN_LAT = Pattern.compile("\\b([NS]|)\\s*(\\d+)°?(?:\\s*(\\d+)(?:[.,](\\d+)|'?\\s*(\\d+(?:[.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
-    private static final Pattern PATTERN_LON = Pattern.compile("\\b([WE]|)\\s*(\\d+)°?(?:\\s*(\\d+)(?:[.,](\\d+)|'?\\s*(\\d+(?:[.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
+    //                                                            ( 1  )       ( 2  )         ( 3  )       ( 4  )       (        5        )
+    private static final Pattern PATTERN_LAT = Pattern.compile("\\b([NS]|)\\s*(\\d+°?|°)(?:\\s*(\\d+)(?:[.,](\\d+)|'?\\s*(\\d+(?:[.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
+    private static final Pattern PATTERN_LON = Pattern.compile("\\b([WE]|)\\s*(\\d+°?|°)(?:\\s*(\\d+)(?:[.,](\\d+)|'?\\s*(\\d+(?:[.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
 
     private static final Pattern PATTERN_BAD_BLANK = Pattern.compile("(\\d)[,.] (\\d{2,})");
 
@@ -99,7 +99,7 @@ class GeopointParser {
         try {
             if (matcher.find()) {
                 final double sign = matcher.group(1).equalsIgnoreCase("S") || matcher.group(1).equalsIgnoreCase("W") ? -1.0 : 1.0;
-                final double degree = Integer.valueOf(matcher.group(2)).doubleValue();
+                final double degree = Integer.valueOf(StringUtils.defaultIfEmpty(StringUtils.stripEnd(matcher.group(2), "°"), "0")).doubleValue();
 
                 double minutes = 0.0;
                 double seconds = 0.0;
