@@ -337,7 +337,7 @@ public class Settings {
     }
 
     public static String getUsername() {
-        return getString(R.string.pref_username, null);
+        return getString(R.string.pref_username, StringUtils.EMPTY);
     }
 
     public static boolean isGCConnectorActive() {
