@@ -2,8 +2,6 @@ package cgeo.geocaching.location;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.GeopointParser;
 import cgeo.geocaching.utils.Formatter;
 
 import android.test.AndroidTestCase;
@@ -41,6 +39,12 @@ public class GeoPointParserTest extends AndroidTestCase {
             // expected
         }
         assertThat(point).isNull();
+    }
+
+    public static void testCoordinateMissingDegree() {
+        // Some home coordinates on geocaching.com lack the degree part.
+        final Geopoint point = GeopointParser.parse("N 51° 23.123' W ° 17.123");
+        assertThat(point).isEqualTo(new Geopoint("N", "51", "23", "123", "W", "0", "17", "123"));
     }
 
     public static void testSouth() {
