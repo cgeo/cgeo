@@ -5,6 +5,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
+import cgeo.geocaching.maps.DirectionOverlay;
 import cgeo.geocaching.maps.DistanceOverlay;
 import cgeo.geocaching.maps.PositionAndScaleOverlay;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
@@ -133,6 +134,13 @@ public class GoogleMapView extends MapView implements MapViewImpl {
         final GoogleOverlay ovl = new GoogleOverlay();
         getOverlays().add(ovl);
         return (PositionAndScaleOverlay) ovl.getBase();
+    }
+
+    @Override
+    public DirectionOverlay createAddDirectionOverlay(final Geopoint coords, final String geocode) {
+        final GoogleDirectionOverlay ovl = new GoogleDirectionOverlay(this, coords, geocode);
+        getOverlays().add(ovl);
+        return (DirectionOverlay) ovl.getBase();
     }
 
     @Override
