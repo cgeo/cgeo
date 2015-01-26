@@ -2,8 +2,10 @@ package cgeo.geocaching.maps.google.v1;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
+import cgeo.geocaching.maps.DistanceOverlay;
 import cgeo.geocaching.maps.PositionAndScaleOverlay;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -36,22 +38,22 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     private OnMapDragListener onDragListener;
     private final GoogleMapController mapController = new GoogleMapController(getController());
 
-    public GoogleMapView(Context context, AttributeSet attrs) {
+    public GoogleMapView(final Context context, final AttributeSet attrs) {
         super(context, attrs);
         initialize(context);
     }
 
-    public GoogleMapView(Context context, AttributeSet attrs, int defStyle) {
+    public GoogleMapView(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
         initialize(context);
     }
 
-    public GoogleMapView(Context context, String apiKey) {
+    public GoogleMapView(final Context context, final String apiKey) {
         super(context, apiKey);
         initialize(context);
     }
 
-    private void initialize(Context context) {
+    private void initialize(final Context context) {
         if (isInEditMode()) {
             return;
         }
@@ -66,16 +68,16 @@ public class GoogleMapView extends MapView implements MapViewImpl {
             }
 
             super.draw(canvas);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Log.e("GoogleMapView.draw", e);
         }
     }
 
     @Override
-    public void displayZoomControls(boolean takeFocus) {
+    public void displayZoomControls(final boolean takeFocus) {
         try {
             // Push zoom controls to the right
-            FrameLayout.LayoutParams zoomParams = new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+            final FrameLayout.LayoutParams zoomParams = new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
             zoomParams.gravity = Gravity.RIGHT;
             // The call to retrieve the zoom buttons controller is undocumented and works so far on all devices
             // supported by Google Play, but fails at least on one Jolla.
@@ -83,9 +85,9 @@ public class GoogleMapView extends MapView implements MapViewImpl {
             controller.getZoomControls().setLayoutParams(zoomParams);
 
             super.displayZoomControls(takeFocus);
-        } catch (NoSuchMethodException ignored) {
+        } catch (final NoSuchMethodException ignored) {
             Log.w("GoogleMapView.displayZoomControls: unable to explicitly place the zoom buttons");
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Log.e("GoogleMapView.displayZoomControls", e);
         }
     }
@@ -98,7 +100,7 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     @Override
     @NonNull
     public GeoPointImpl getMapViewCenter() {
-        GeoPoint point = getMapCenter();
+        final GeoPoint point = getMapCenter();
         return new GoogleGeoPoint(point.getLatitudeE6(), point.getLongitudeE6());
     }
 
@@ -118,9 +120,9 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public CachesOverlay createAddMapOverlay(Context context, Drawable drawable) {
+    public CachesOverlay createAddMapOverlay(final Context context, final Drawable drawable) {
 
-        GoogleCacheOverlay ovl = new GoogleCacheOverlay(context, drawable);
+        final GoogleCacheOverlay ovl = new GoogleCacheOverlay(context, drawable);
         getOverlays().add(ovl);
         return ovl.getBase();
     }
@@ -128,9 +130,16 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     @Override
     public PositionAndScaleOverlay createAddPositionAndScaleOverlay() {
 
-        GoogleOverlay ovl = new GoogleOverlay();
+        final GoogleOverlay ovl = new GoogleOverlay();
         getOverlays().add(ovl);
         return (PositionAndScaleOverlay) ovl.getBase();
+    }
+
+    @Override
+    public DistanceOverlay createAddDistanceOverlay(final Geopoint coords, final String geocode) {
+        final GoogleDistanceOverlay ovl = new GoogleDistanceOverlay(this, coords, geocode);
+        getOverlays().add(ovl);
+        return (DistanceOverlay) ovl.getBase();
     }
 
     @Override
@@ -144,21 +153,21 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public void repaintRequired(GeneralOverlay overlay) {
+    public void repaintRequired(final GeneralOverlay overlay) {
         invalidate();
     }
 
     @Override
-    public void setOnDragListener(OnMapDragListener onDragListener) {
+    public void setOnDragListener(final OnMapDragListener onDragListener) {
         this.onDragListener = onDragListener;
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent ev) {
+    public boolean onTouchEvent(final MotionEvent ev) {
         try {
             gestureDetector.onTouchEvent(ev);
             return super.onTouchEvent(ev);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Log.e("GoogleMapView.onTouchEvent", e);
         }
         return false;
@@ -166,7 +175,7 @@ public class GoogleMapView extends MapView implements MapViewImpl {
 
     private class GestureListener extends SimpleOnGestureListener {
         @Override
-        public boolean onDoubleTap(MotionEvent e) {
+        public boolean onDoubleTap(final MotionEvent e) {
             getController().zoomInFixing((int) e.getX(), (int) e.getY());
             if (onDragListener != null) {
                 onDragListener.onDrag();
@@ -175,8 +184,8 @@ public class GoogleMapView extends MapView implements MapViewImpl {
         }
 
         @Override
-        public boolean onScroll(MotionEvent e1, MotionEvent e2,
-                float distanceX, float distanceY) {
+        public boolean onScroll(final MotionEvent e1, final MotionEvent e2,
+                final float distanceX, final float distanceY) {
             if (onDragListener != null) {
                 onDragListener.onDrag();
             }
