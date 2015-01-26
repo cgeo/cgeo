@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
+import cgeo.geocaching.maps.DirectionOverlay;
 import cgeo.geocaching.maps.DistanceOverlay;
 import cgeo.geocaching.maps.PositionAndScaleOverlay;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
@@ -117,6 +118,13 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
         final MapsforgeOverlay ovl = new MapsforgeOverlay();
         getOverlays().add(ovl);
         return (PositionAndScaleOverlay) ovl.getBase();
+    }
+
+    @Override
+    public DirectionOverlay createAddDirectionOverlay(final Geopoint coords, final String geocode) {
+        final MapsforgeDirectionOverlay ovl = new MapsforgeDirectionOverlay(this, coords, geocode);
+        getOverlays().add(ovl);
+        return (DirectionOverlay) ovl.getBase();
     }
 
     @Override

@@ -3,6 +3,7 @@ package cgeo.geocaching.maps.interfaces;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
+import cgeo.geocaching.maps.DirectionOverlay;
 import cgeo.geocaching.maps.DistanceOverlay;
 import cgeo.geocaching.maps.PositionAndScaleOverlay;
 
@@ -51,6 +52,8 @@ public interface MapViewImpl {
     PositionAndScaleOverlay createAddPositionAndScaleOverlay();
 
     DistanceOverlay createAddDistanceOverlay(Geopoint coords, String geocode);
+
+    DirectionOverlay createAddDirectionOverlay(Geopoint coords, String geocode);
 
     void setMapSource();
 

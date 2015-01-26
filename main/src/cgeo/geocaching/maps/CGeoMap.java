@@ -141,6 +141,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private CachesOverlay overlayCaches;
     private PositionAndScaleOverlay overlayPositionAndScale;
     private DistanceOverlay overlayDistance;
+    private DirectionOverlay overlayDirection;
 
     final private GeoDirHandler geoDirUpdate = new UpdateLoc(this);
     private SearchResult searchIntent = null;
@@ -450,6 +451,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         mapView.clearOverlays();
 
         overlayCaches = mapView.createAddMapOverlay(mapView.getContext(), getResources().getDrawable(R.drawable.marker));
+
+        if (coordsIntent != null || geocodeIntent != null) {
+            overlayDirection = mapView.createAddDirectionOverlay(coordsIntent, geocodeIntent);
+        }
+
         overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay();
         if (trailHistory != null) {
             overlayPositionAndScale.setHistory(trailHistory);
@@ -1005,6 +1011,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                         }
 
                         if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
+                            if (map.overlayDirection != null) {
+                                map.overlayDirection.setCoordinates(currentLocation);
+                                map.mapView.repaintRequired(map.overlayDirection);
+                            }
+
                             map.overlayPositionAndScale.setCoordinates(currentLocation);
                             map.overlayPositionAndScale.setHeading(currentHeading);
                             map.mapView.repaintRequired(map.overlayPositionAndScale);
