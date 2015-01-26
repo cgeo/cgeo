@@ -12,6 +12,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.FileUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -28,15 +29,22 @@ public class ExportTest extends CGeoTestCase {
         assertEquals("Non matching export " + fieldNotes.getContent(), "GCX1234,2012-11-18T13:20:20Z,Found it,\"Hidden in a tree\"\n", fieldNotes.getContent());
     }
 
-    public static void testGpxExportSmilies() throws InterruptedException, ExecutionException {
+    public static void testGpxExportSmilies() throws InterruptedException, ExecutionException, IOException {
         final Geocache cache = new Geocache();
         cache.setGeocode("GCX1234");
         cache.setCoords(new Geopoint("N 49 44.000 E 8 37.000"));
         final LogEntry log = new LogEntry(1353244820000L, LogType.FOUND_IT, "Smile: \ud83d\ude0a");
         DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
         DataStore.saveLogs(cache.getGeocode(), Collections.singletonList(log));
-        ArrayList<Geocache> exportList = new ArrayList<Geocache>();
-        exportList.add(cache);
+        assertCanExport(cache);
+    }
+
+    private static void assertCanExport(final Geocache cache) throws InterruptedException, ExecutionException, IOException {
+        // enforce storing in database, as GPX will not take information from cache
+        cache.setDetailed(true);
+        DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+
+        List<Geocache> exportList = Collections.singletonList(cache);
         GpxExportTester gpxExport = new GpxExportTester();
         File result = null;
         try {
@@ -46,6 +54,11 @@ public class ExportTest extends CGeoTestCase {
         }
 
         assertThat(result).isNotNull();
+
+        // make sure we actually exported waypoints
+        String gpx = org.apache.commons.io.FileUtils.readFileToString(result);
+        assertThat(gpx).contains("<wpt");
+        assertThat(gpx).contains(cache.getGeocode());
 
         FileUtils.deleteIgnoringFailure(result);
     }
