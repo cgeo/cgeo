@@ -6,6 +6,7 @@ import cgeo.CGeoTestCase;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
+import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.location.Geopoint;
@@ -36,6 +37,16 @@ public class ExportTest extends CGeoTestCase {
         final LogEntry log = new LogEntry(1353244820000L, LogType.FOUND_IT, "Smile: \ud83d\ude0a");
         DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
         DataStore.saveLogs(cache.getGeocode(), Collections.singletonList(log));
+        assertCanExport(cache);
+    }
+
+    public static void testGpxExportUnknownConnector() throws InterruptedException, ExecutionException, IOException {
+        final Geocache cache = new Geocache();
+        cache.setGeocode("ABC123");
+        cache.setCoords(new Geopoint("N 49 44.000 E 8 37.000"));
+        DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+
+        assertThat(ConnectorFactory.getConnector(cache).getName()).isEqualTo("Unknown caches");
         assertCanExport(cache);
     }
 
