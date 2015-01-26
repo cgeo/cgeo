@@ -6,6 +6,8 @@ import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.Waypoint;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -411,6 +413,9 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(lab.getName()).isEqualTo("01_Munich Olympic Walk Of Stars_Updated-Project MUNICH2014 - Mia san Giga! Olympiapark");
         assertThat(lab.getShortDescription()).isEqualTo("01_Munich Olympic Walk Of Stars_Updated (Giga! Olympia Park)-Project MUNICH2014 - Mia san Giga! Olympiapark");
         assertThat(lab.getDescription()).startsWith("DEU:");
+
+        final IConnector unknownConnector = ConnectorFactory.getConnector("ABC123");
+        assertThat(ConnectorFactory.getConnector(lab)).isSameAs(unknownConnector);
     }
 
 }
