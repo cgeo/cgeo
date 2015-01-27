@@ -302,7 +302,7 @@ public class GeocacheTest extends CGeoTestCase {
         cache.setType(CacheType.EVENT);
         cache.setDescription(StringUtils.EMPTY);
         cache.setShortDescription("text 14:20 text");
-        assertThat(cache.guessEventTimeMinutes()).isEqualTo(String.valueOf(14 * 60 + 20));
+        assertThat(cache.guessEventTimeMinutes()).isEqualTo(14 * 60 + 20);
     }
 
     private static void assertTime(final String description, final int hours, final int minutes) {
@@ -310,14 +310,14 @@ public class GeocacheTest extends CGeoTestCase {
         cache.setDescription(description);
         cache.setType(CacheType.EVENT);
         final int minutesAfterMidnight = hours * 60 + minutes;
-        assertThat(cache.guessEventTimeMinutes()).isEqualTo(String.valueOf(minutesAfterMidnight));
+        assertThat(cache.guessEventTimeMinutes()).isEqualTo(minutesAfterMidnight);
     }
 
     private static void assertNoTime(final String description) {
         final Geocache cache = new Geocache();
         cache.setDescription(description);
         cache.setType(CacheType.EVENT);
-        assertThat(cache.guessEventTimeMinutes()).isNull();
+        assertThat(cache.guessEventTimeMinutes()).isEqualTo(-1);
     }
 
     public static void testGetPossibleLogTypes() throws Exception {

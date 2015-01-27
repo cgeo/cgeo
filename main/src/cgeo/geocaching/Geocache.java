@@ -1631,10 +1631,9 @@ public class Geocache implements IWaypoint {
      *
      * @return start time in minutes after midnight
      */
-    @Nullable
-    public String guessEventTimeMinutes() {
+    public int guessEventTimeMinutes() {
         if (!isEventCache()) {
-            return null;
+            return -1;
         }
 
         final String hourLocalized = CgeoApplication.getInstance().getString(R.string.cache_time_full_hours);
@@ -1660,14 +1659,14 @@ public class Geocache implements IWaypoint {
                         minutes = Integer.parseInt(matcher.group(2));
                     }
                     if (hours >= 0 && hours < 24 && minutes >= 0 && minutes < 60) {
-                        return String.valueOf(hours * 60 + minutes);
+                        return hours * 60 + minutes;
                     }
                 } catch (final NumberFormatException ignored) {
                     // cannot happen, but static code analysis doesn't know
                 }
             }
         }
-        return null;
+        return -1;
     }
 
     public boolean hasStaticMap() {

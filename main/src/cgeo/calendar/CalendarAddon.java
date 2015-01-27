@@ -32,6 +32,7 @@ public class CalendarAddon {
         final Resources res = activity.getResources();
         if (CalendarAddon.isAvailable()) {
             final Date hiddenDate = cache.getHiddenDate();
+            final String startTime = cache.guessEventTimeMinutes() >= 0 ? String.valueOf(cache.guessEventTimeMinutes()) : StringUtils.EMPTY;
             final Parameters params = new Parameters(
                     ICalendar.PARAM_NAME, cache.getName(),
                     ICalendar.PARAM_NOTE, StringUtils.defaultString(cache.getPersonalNote()),
@@ -40,7 +41,7 @@ public class CalendarAddon {
                     ICalendar.PARAM_COORDS, cache.getCoords() == null ? "" : cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW),
                     ICalendar.PARAM_LOCATION, StringUtils.defaultString(cache.getLocation()),
                     ICalendar.PARAM_SHORT_DESC, StringUtils.defaultString(cache.getShortDescription()),
-                    ICalendar.PARAM_START_TIME_MINUTES, StringUtils.defaultString(cache.guessEventTimeMinutes())
+                    ICalendar.PARAM_START_TIME_MINUTES, startTime
                     );
 
             activity.startActivity(new Intent(ICalendar.INTENT,
