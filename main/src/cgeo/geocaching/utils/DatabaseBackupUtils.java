@@ -32,6 +32,9 @@ public class DatabaseBackupUtils {
      *            calling activity
      */
     public static void restoreDatabase(final Activity activity) {
+        if (!hasBackup()) {
+            return;
+        }
         final Resources res = activity.getResources();
         final ProgressDialog dialog = ProgressDialog.show(activity, res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_running), true, false);
         final AtomicBoolean restoreSuccessful = new AtomicBoolean(false);
@@ -44,8 +47,8 @@ public class DatabaseBackupUtils {
             @Override
             public void call() {
                 dialog.dismiss();
-                boolean restored = restoreSuccessful.get();
-                String message = restored ? res.getString(R.string.init_restore_success) : res.getString(R.string.init_restore_failed);
+                final boolean restored = restoreSuccessful.get();
+                final String message = restored ? res.getString(R.string.init_restore_success) : res.getString(R.string.init_restore_failed);
                 Dialogs.message(activity, R.string.init_backup_restore, message);
                 if (activity instanceof MainActivity) {
                     ((MainActivity) activity).updateCacheCounter();
