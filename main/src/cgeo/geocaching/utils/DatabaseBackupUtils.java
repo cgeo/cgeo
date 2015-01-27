@@ -6,6 +6,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import rx.functions.Action0;
 import rx.functions.Action1;
@@ -40,7 +42,7 @@ public class DatabaseBackupUtils {
             restoreDatabaseInternal(activity);
         }
         else {
-            Dialogs.confirm(activity, R.string.init_backup_restore, activity.getString(R.string.restore_confirm_overwrite, activity.getResources().getQuantityString(R.plurals.cache_counts, caches)), new OnClickListener() {
+            Dialogs.confirm(activity, R.string.init_backup_restore, activity.getString(R.string.restore_confirm_overwrite, activity.getResources().getQuantityString(R.plurals.cache_counts, caches, caches)), new OnClickListener() {
 
                 @Override
                 public void onClick(final DialogInterface dialog, final int which) {
@@ -127,6 +129,7 @@ public class DatabaseBackupUtils {
         });
     }
 
+    @Nullable
     public static File getRestoreFile() {
         final File fileSourceFile = DataStore.getBackupFileInternal();
         return fileSourceFile.exists() && fileSourceFile.length() > 0 ? fileSourceFile : null;
@@ -136,6 +139,7 @@ public class DatabaseBackupUtils {
         return getRestoreFile() != null;
     }
 
+    @NonNull
     public static String getBackupDateTime() {
         final File restoreFile = getRestoreFile();
         if (restoreFile == null) {
