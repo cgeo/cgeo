@@ -37,6 +37,9 @@ public class DatabaseBackupUtils {
      *            calling activity
      */
     public static void restoreDatabase(final Activity activity) {
+        if (!hasBackup()) {
+            return;
+        }
         final int caches = DataStore.getAllCachesCount();
         if (caches == 0) {
             restoreDatabaseInternal(activity);
