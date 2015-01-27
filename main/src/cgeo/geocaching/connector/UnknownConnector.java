@@ -4,6 +4,7 @@ import cgeo.geocaching.Geocache;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 class UnknownConnector extends AbstractConnector {
 
@@ -14,9 +15,9 @@ class UnknownConnector extends AbstractConnector {
     }
 
     @Override
-    @NonNull
+    @Nullable
     public String getCacheUrl(@NonNull final Geocache cache) {
-        return StringUtils.EMPTY;
+        return null;
     }
 
     @Override

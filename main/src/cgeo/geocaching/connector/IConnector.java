@@ -6,6 +6,7 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.location.Geopoint;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import java.util.Collection;
 import java.util.List;
@@ -34,7 +35,7 @@ public interface IConnector {
      * @param cache
      * @return
      */
-    @NonNull
+    @Nullable
     public String getCacheUrl(final @NonNull Geocache cache);
 
     /**
@@ -43,7 +44,7 @@ public interface IConnector {
      * @param cache
      * @return
      */
-    @NonNull
+    @Nullable
     public String getLongCacheUrl(final @NonNull Geocache cache);
 
     /**

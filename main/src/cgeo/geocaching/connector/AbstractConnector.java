@@ -19,6 +19,7 @@ import cgeo.geocaching.location.Geopoint;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import rx.functions.Action1;
 
@@ -144,7 +145,7 @@ public abstract class AbstractConnector implements IConnector {
     abstract protected String getCacheUrlPrefix();
 
     @Override
-    @NonNull
+    @Nullable
     public String getLongCacheUrl(final @NonNull Geocache cache) {
         return getCacheUrl(cache);
     }

@@ -61,6 +61,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Observable;
 import rx.Observable.OnSubscribe;
@@ -326,6 +327,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     @Override
+    @Nullable
     public String getAndroidBeamUri() {
         return cache != null ? cache.getCgeoUrl() : null;
     }
@@ -1461,9 +1463,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (unknownTagsHandler.isProblematicDetected()) {
             final int startPos = description.length();
             final IConnector connector = ConnectorFactory.getConnector(cache);
-            final Spanned tableNote = Html.fromHtml(res.getString(R.string.cache_description_table_note, "<a href=\"" + cache.getUrl() + "\">" + connector.getName() + "</a>"));
-            ((Editable) description).append("\n\n").append(tableNote);
-            ((Editable) description).setSpan(new StyleSpan(Typeface.ITALIC), startPos, description.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            if (StringUtils.isNotEmpty(cache.getUrl())) {
+                final Spanned tableNote = Html.fromHtml(res.getString(R.string.cache_description_table_note, "<a href=\"" + cache.getUrl() + "\">" + connector.getName() + "</a>"));
+                ((Editable) description).append("\n\n").append(tableNote);
+                ((Editable) description).setSpan(new StyleSpan(Typeface.ITALIC), startPos, description.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
         }
     }
     /**

@@ -212,6 +212,7 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
 
     public interface ActivitySharingInterface {
         /** Return an URL that represent the current activity for sharing or null for no sharing. */
+        @Nullable
         public String getAndroidBeamUri();
     }
 

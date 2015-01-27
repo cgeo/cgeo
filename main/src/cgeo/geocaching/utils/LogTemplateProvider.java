@@ -215,7 +215,7 @@ public final class LogTemplateProvider {
                 }
                 final Geocache cache = context.getCache();
                 if (cache != null) {
-                    return cache.getUrl();
+                    return StringUtils.defaultString(cache.getUrl());
                 }
                 return StringUtils.EMPTY;
             }

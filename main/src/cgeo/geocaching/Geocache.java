@@ -484,6 +484,9 @@ public class Geocache implements IWaypoint {
     }
 
     public void openInBrowser(final Activity fromActivity) {
+        if (getUrl() == null) {
+            return;
+        }
         final Intent viewIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getLongUrl()));
 
         // Check if cgeo is the default, show the chooser to let the user choose a browser
@@ -717,22 +720,22 @@ public class Geocache implements IWaypoint {
         final Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT, subject.toString());
-        intent.putExtra(Intent.EXTRA_TEXT, getUrl());
+        intent.putExtra(Intent.EXTRA_TEXT, StringUtils.defaultString(getUrl()));
 
         return intent;
     }
 
-    @NonNull
+    @Nullable
     public String getUrl() {
         return getConnector().getCacheUrl(this);
     }
 
-    @NonNull
+    @Nullable
     public String getLongUrl() {
         return getConnector().getLongCacheUrl(this);
     }
 
-    @NonNull
+    @Nullable
     public String getCgeoUrl() {
         return getConnector().getCacheUrl(this);
     }

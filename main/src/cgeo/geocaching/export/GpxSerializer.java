@@ -55,7 +55,7 @@ public final class GpxSerializer {
 
     }
 
-    public void writeGPX(List<String> allGeocodesIn, Writer writer, final ProgressListener progressListener) throws IOException {
+    public void writeGPX(final List<String> allGeocodesIn, final Writer writer, final ProgressListener progressListener) throws IOException {
         // create a copy of the geocode list, as we need to modify it, but it might be immutable
         final ArrayList<String> allGeocodes = new ArrayList<>(allGeocodesIn);
 
@@ -88,7 +88,7 @@ public final class GpxSerializer {
         gpx.endDocument();
     }
 
-    private void exportBatch(final XmlSerializer gpx, Collection<String> geocodesOfBatch) throws IOException {
+    private void exportBatch(final XmlSerializer gpx, final Collection<String> geocodesOfBatch) throws IOException {
         final Set<Geocache> caches = DataStore.loadCaches(geocodesOfBatch, LoadFlags.LOAD_ALL_DB_ONLY);
         for (final Geocache cache : caches) {
             if (cache == null) {
@@ -110,7 +110,11 @@ public final class GpxSerializer {
 
             XmlUtils.multipleTexts(gpx, PREFIX_GPX,
                     "name", cache.getGeocode(),
-                    "desc", cache.getName(),
+                    "desc", cache.getName());
+            if (StringUtils.isNotEmpty(cache.getUrl())) {
+                gpx.attribute(PREFIX_GPX, "url", cache.getUrl());
+            }
+            XmlUtils.multipleTexts(gpx, PREFIX_GPX,
                     "url", cache.getUrl(),
                     "urlname", cache.getName(),
                     "sym", cache.isFound() ? "Geocache Found" : "Geocache",
@@ -178,7 +182,7 @@ public final class GpxSerializer {
      * @return XML schema compliant boolean representation of the boolean flag. This must be either true, false, 0 or 1,
      *         but no other value (also not upper case True/False).
      */
-    private static String gpxBoolean(boolean boolFlag) {
+    private static String gpxBoolean(final boolean boolFlag) {
         return boolFlag ? "true" : "false";
     }
 
@@ -255,7 +259,7 @@ public final class GpxSerializer {
     }
 
     private void writeLogs(final Geocache cache) throws IOException {
-        List<LogEntry> logs = cache.getLogs();
+        final List<LogEntry> logs = cache.getLogs();
         if (logs.isEmpty()) {
             return;
         }
@@ -291,7 +295,7 @@ public final class GpxSerializer {
     }
 
     private void writeTravelBugs(final Geocache cache) throws IOException {
-        List<Trackable> inventory = cache.getInventory();
+        final List<Trackable> inventory = cache.getInventory();
         if (CollectionUtils.isEmpty(inventory)) {
             return;
         }
@@ -338,7 +342,7 @@ public final class GpxSerializer {
         return getLocationPart(cache, 0);
     }
 
-    private static String getLocationPart(final Geocache cache, int partIndex) {
+    private static String getLocationPart(final Geocache cache, final int partIndex) {
         final String location = cache.getLocation();
         if (StringUtils.contains(location, ", ")) {
             final String[] parts = StringUtils.split(location, ',');
@@ -350,7 +354,7 @@ public final class GpxSerializer {
     }
 
     public static String getCountry(final Geocache cache) {
-        String country = getLocationPart(cache, 1);
+        final String country = getLocationPart(cache, 1);
         if (StringUtils.isNotEmpty(country)) {
             return country;
         }
