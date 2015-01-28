@@ -34,8 +34,8 @@ public class DirectionDrawer {
         if (line == null) {
             line = new Paint();
             line.setAntiAlias(true);
-            line.setStrokeWidth(2f);
-            line.setColor(0xFFEB391E);
+            line.setStrokeWidth(4f);
+            line.setColor(0x80EB391E);
         }
 
         final Point pos = new Point();

@@ -70,34 +70,29 @@ public class DistanceDrawer {
 
         if (blurBoxShadow == null) {
             blurBoxShadow = new BlurMaskFilter(3, BlurMaskFilter.Blur.NORMAL);
-        }
 
-        if (paintBoxShadow == null) {
             paintBoxShadow = new Paint();
             paintBoxShadow.setAntiAlias(true);
             paintBoxShadow.setMaskFilter(blurBoxShadow);
-        }
 
-        if (paintBox == null) {
             paintBox = new Paint();
             paintBox.setAntiAlias(true);
-        }
 
-        if (paintText == null) {
             paintText = new Paint();
             paintText.setAntiAlias(true);
             paintText.setTextAlign(Paint.Align.LEFT);
             paintText.setTypeface(Typeface.DEFAULT_BOLD);
-        }
 
-        if (needsInvertedColors) {
-            paintBoxShadow.setColor(0xFF000000);
-            paintBox.setColor(0xFFFFFFFF);
-            paintText.setColor(0xFF000000);
-        } else {
-            paintBoxShadow.setColor(0xFFFFFFFF);
-            paintBox.setColor(0xFF000000);
-            paintText.setColor(0xFFFFFFFF);
+            final int TRANSPARENCY = 0x80000000;
+            if (needsInvertedColors) {
+                paintBoxShadow.setColor(0x000000 | TRANSPARENCY);
+                paintBox.setColor(0xFFFFFF | TRANSPARENCY);
+                paintText.setColor(0xFF000000);
+            } else {
+                paintBoxShadow.setColor(0xFFFFFF | TRANSPARENCY);
+                paintBox.setColor(0x000000 | TRANSPARENCY);
+                paintText.setColor(0xFFFFFFFF);
+            }
         }
 
         /* Calculate text size */
