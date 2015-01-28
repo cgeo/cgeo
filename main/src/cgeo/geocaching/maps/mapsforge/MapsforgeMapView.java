@@ -4,8 +4,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
-import cgeo.geocaching.maps.DirectionOverlay;
-import cgeo.geocaching.maps.DistanceOverlay;
 import cgeo.geocaching.maps.PositionAndScaleOverlay;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -114,24 +112,10 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public PositionAndScaleOverlay createAddPositionAndScaleOverlay() {
-        final MapsforgeOverlay ovl = new MapsforgeOverlay();
+    public PositionAndScaleOverlay createAddPositionAndScaleOverlay(final Geopoint coords, final String geocode) {
+        final MapsforgeOverlay ovl = new MapsforgeOverlay(this, coords, geocode);
         getOverlays().add(ovl);
         return (PositionAndScaleOverlay) ovl.getBase();
-    }
-
-    @Override
-    public DirectionOverlay createAddDirectionOverlay(final Geopoint coords, final String geocode) {
-        final MapsforgeDirectionOverlay ovl = new MapsforgeDirectionOverlay(this, coords, geocode);
-        getOverlays().add(ovl);
-        return (DirectionOverlay) ovl.getBase();
-    }
-
-    @Override
-    public DistanceOverlay createAddDistanceOverlay(final Geopoint coords, final String geocode) {
-        final MapsforgeDistanceOverlay ovl = new MapsforgeDistanceOverlay(this, coords, geocode);
-        getOverlays().add(ovl);
-        return (DistanceOverlay) ovl.getBase();
     }
 
     @Override

@@ -1,20 +1,14 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.DataStore;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
-import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.maps.interfaces.GeneralOverlay;
-import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
-import cgeo.geocaching.maps.interfaces.OverlayImpl;
 
 import android.content.Context;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
@@ -22,14 +16,13 @@ import android.location.Location;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
-public class DistanceOverlay implements GeneralOverlay {
+public class DistanceDrawer {
     private Geopoint currentCoords;
     private final Geopoint destinationCoords;
 
     private Paint paintBox = null;
     private Paint paintBoxShadow = null;
     private Paint paintText = null;
-    private Paint paintCompass = null;
     private BlurMaskFilter blurBoxShadow = null;
 
     private final boolean needsInvertedColors;
@@ -40,21 +33,8 @@ public class DistanceOverlay implements GeneralOverlay {
 
     private String distanceText = null;
 
-    private OverlayImpl ovlImpl = null;
-
-    public DistanceOverlay(final OverlayImpl ovlImpl, final MapViewImpl mapView, final Geopoint coords, final String geocode) {
-        this.ovlImpl = ovlImpl;
-
-        if (coords == null) {
-            final Viewport bounds = DataStore.getBounds(geocode);
-            if (bounds == null) {
-                this.destinationCoords = new Geopoint(0, 0);
-            } else {
-                this.destinationCoords = bounds.center;
-            }
-        } else {
-            this.destinationCoords = coords;
-        }
+    public DistanceDrawer(final MapViewImpl mapView, final Geopoint destinationCoords) {
+        this.destinationCoords = destinationCoords;
 
         final DisplayMetrics metrics = new DisplayMetrics();
         final WindowManager windowManager = (WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
@@ -83,17 +63,7 @@ public class DistanceOverlay implements GeneralOverlay {
         distanceText = Units.getDistanceFromKilometers(distance);
     }
 
-    @Override
-    public void draw(final Canvas canvas, final MapViewImpl mapView, final boolean shadow) {
-        drawInternal(canvas);
-    }
-
-    @Override
-    public void drawOverlayBitmap(final Canvas canvas, final Point drawPosition, final MapProjectionImpl projection, final byte drawZoomLevel) {
-        drawInternal(canvas);
-    }
-
-    private void drawInternal(final Canvas canvas) {
+    void drawDistance(final Canvas canvas) {
         if (currentCoords == null) {
             return;
         }
@@ -118,12 +88,6 @@ public class DistanceOverlay implements GeneralOverlay {
             paintText.setAntiAlias(true);
             paintText.setTextAlign(Paint.Align.LEFT);
             paintText.setTypeface(Typeface.DEFAULT_BOLD);
-        }
-
-        if (paintCompass == null) {
-            paintCompass = new Paint(Paint.ANTI_ALIAS_FLAG);
-            paintCompass.setDither(true);
-            paintCompass.setFilterBitmap(true);
         }
 
         if (needsInvertedColors) {
@@ -169,10 +133,4 @@ public class DistanceOverlay implements GeneralOverlay {
         /* Paint distance */
         canvas.drawText(distanceText, textX, textY, paintText);
     }
-
-    @Override
-    public OverlayImpl getOverlayImpl() {
-        return this.ovlImpl;
-    }
-
 }

@@ -3,8 +3,6 @@ package cgeo.geocaching.maps.interfaces;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
-import cgeo.geocaching.maps.DirectionOverlay;
-import cgeo.geocaching.maps.DistanceOverlay;
 import cgeo.geocaching.maps.PositionAndScaleOverlay;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -49,11 +47,7 @@ public interface MapViewImpl {
 
     CachesOverlay createAddMapOverlay(Context context, Drawable drawable);
 
-    PositionAndScaleOverlay createAddPositionAndScaleOverlay();
-
-    DistanceOverlay createAddDistanceOverlay(Geopoint coords, String geocode);
-
-    DirectionOverlay createAddDirectionOverlay(Geopoint coords, String geocode);
+    PositionAndScaleOverlay createAddPositionAndScaleOverlay(final Geopoint coords, final String geocode);
 
     void setMapSource();
 
