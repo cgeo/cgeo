@@ -22,20 +22,20 @@ public class PositionAndScaleOverlay implements GeneralOverlay {
     DirectionDrawer directionDrawer = null;
     DistanceDrawer distanceDrawer = null;
 
-    public PositionAndScaleOverlay(final OverlayImpl ovlImpl, final MapViewImpl mapView, Geopoint coords, final String geocode) {
+    public PositionAndScaleOverlay(final OverlayImpl ovlImpl, final MapViewImpl mapView, final Geopoint coords, final String geocode) {
         this.ovlImpl = ovlImpl;
         positionDrawer = new PositionDrawer();
         scaleDrawer = new ScaleDrawer();
 
-        if (coords == null && geocode != null) {
-            final Viewport bounds = DataStore.getBounds(geocode);
-            if (bounds != null) {
-                coords = bounds.center;
-            }
-        }
         if (coords != null) {
             directionDrawer = new DirectionDrawer(coords);
             distanceDrawer = new DistanceDrawer(mapView, coords);
+        } else if (geocode != null) {
+            final Viewport bounds = DataStore.getBounds(geocode);
+            if (bounds != null) {
+                directionDrawer = new DirectionDrawer(bounds.center);
+                distanceDrawer = new DistanceDrawer(mapView, bounds.center);
+            }
         }
     }
 
@@ -74,10 +74,14 @@ public class PositionAndScaleOverlay implements GeneralOverlay {
     }
 
     private void drawInternal(final Canvas canvas, final MapProjectionImpl projection, final MapViewImpl mapView) {
-        directionDrawer.drawDirection(canvas, projection);
+        if (directionDrawer != null) {
+            directionDrawer.drawDirection(canvas, projection);
+        }
         positionDrawer.drawPosition(canvas, projection);
         scaleDrawer.drawScale(canvas, mapView);
-        distanceDrawer.drawDistance(canvas);
+        if (distanceDrawer != null) {
+            distanceDrawer.drawDistance(canvas);
+        }
     }
 
     @Override
