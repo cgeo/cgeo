@@ -9,7 +9,7 @@
 
     <style name="cgeo_main.base" parent="@style/Theme.AppCompat">
 
-        <!-- copy the style elements of the Wallpaper theme since AppCombat has no Wallpaper theme -->
+        <!-- copy the style elements of the Wallpaper theme since AppCompat has no Wallpaper theme -->
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowShowWallpaper">true</item>
