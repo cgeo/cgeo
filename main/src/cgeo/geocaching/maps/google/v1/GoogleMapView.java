@@ -5,8 +5,6 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
-import cgeo.geocaching.maps.DirectionOverlay;
-import cgeo.geocaching.maps.DistanceOverlay;
 import cgeo.geocaching.maps.PositionAndScaleOverlay;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -129,25 +127,11 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public PositionAndScaleOverlay createAddPositionAndScaleOverlay() {
+    public PositionAndScaleOverlay createAddPositionAndScaleOverlay(final Geopoint coords, final String geocode) {
 
-        final GoogleOverlay ovl = new GoogleOverlay();
+        final GoogleOverlay ovl = new GoogleOverlay(this, coords, geocode);
         getOverlays().add(ovl);
         return (PositionAndScaleOverlay) ovl.getBase();
-    }
-
-    @Override
-    public DirectionOverlay createAddDirectionOverlay(final Geopoint coords, final String geocode) {
-        final GoogleDirectionOverlay ovl = new GoogleDirectionOverlay(this, coords, geocode);
-        getOverlays().add(ovl);
-        return (DirectionOverlay) ovl.getBase();
-    }
-
-    @Override
-    public DistanceOverlay createAddDistanceOverlay(final Geopoint coords, final String geocode) {
-        final GoogleDistanceOverlay ovl = new GoogleDistanceOverlay(this, coords, geocode);
-        getOverlays().add(ovl);
-        return (DistanceOverlay) ovl.getBase();
     }
 
     @Override

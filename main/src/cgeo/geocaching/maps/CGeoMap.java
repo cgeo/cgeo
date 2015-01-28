@@ -140,8 +140,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     private MapViewImpl mapView;
     private CachesOverlay overlayCaches;
     private PositionAndScaleOverlay overlayPositionAndScale;
-    private DistanceOverlay overlayDistance;
-    private DirectionOverlay overlayDirection;
 
     final private GeoDirHandler geoDirUpdate = new UpdateLoc(this);
     private SearchResult searchIntent = null;
@@ -452,18 +450,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
         overlayCaches = mapView.createAddMapOverlay(mapView.getContext(), getResources().getDrawable(R.drawable.marker));
 
-        if (coordsIntent != null || geocodeIntent != null) {
-            overlayDirection = mapView.createAddDirectionOverlay(coordsIntent, geocodeIntent);
-        }
 
-        overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay();
+        overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay(coordsIntent, geocodeIntent);
         if (trailHistory != null) {
             overlayPositionAndScale.setHistory(trailHistory);
         }
 
-        if (coordsIntent != null || geocodeIntent != null) {
-            overlayDistance = mapView.createAddDistanceOverlay(coordsIntent, geocodeIntent);
-        }
 
         mapView.repaintRequired(null);
 
@@ -1011,19 +1003,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                         }
 
                         if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
-                            if (map.overlayDirection != null) {
-                                map.overlayDirection.setCoordinates(currentLocation);
-                                map.mapView.repaintRequired(map.overlayDirection);
-                            }
 
                             map.overlayPositionAndScale.setCoordinates(currentLocation);
                             map.overlayPositionAndScale.setHeading(currentHeading);
                             map.mapView.repaintRequired(map.overlayPositionAndScale);
-
-                            if (map.overlayDistance != null) {
-                                map.overlayDistance.setCoordinates(currentLocation);
-                                map.mapView.repaintRequired(map.overlayDistance);
-                            }
                         }
                     }
                 } catch (final RuntimeException e) {

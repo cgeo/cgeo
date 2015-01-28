@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps.google.v1;
 
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.PositionAndScaleOverlay;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
@@ -16,14 +17,14 @@ import java.util.concurrent.locks.ReentrantLock;
 public class GoogleOverlay extends Overlay implements OverlayImpl {
 
     private PositionAndScaleOverlay overlayBase = null;
-    private Lock lock = new ReentrantLock();
+    private final Lock lock = new ReentrantLock();
 
-    public GoogleOverlay() {
-        overlayBase = new PositionAndScaleOverlay(this);
+    public GoogleOverlay(final MapViewImpl mapView, final Geopoint coords, final String geocode) {
+        overlayBase = new PositionAndScaleOverlay(this, mapView, coords, geocode);
     }
 
     @Override
-    public void draw(Canvas canvas, MapView mapView, boolean shadow) {
+    public void draw(final Canvas canvas, final MapView mapView, final boolean shadow) {
         super.draw(canvas, mapView, shadow);
 
         if (overlayBase != null) {
