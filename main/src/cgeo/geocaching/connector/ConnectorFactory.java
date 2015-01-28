@@ -18,6 +18,7 @@ import cgeo.geocaching.connector.oc.OCApiLiveConnector;
 import cgeo.geocaching.connector.oc.OCConnector;
 import cgeo.geocaching.connector.ox.OXConnector;
 import cgeo.geocaching.connector.trackable.GeokretyConnector;
+import cgeo.geocaching.connector.trackable.SwaggieConnector;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.connector.trackable.UnknownTrackableConnector;
@@ -74,8 +75,9 @@ public final class ConnectorFactory {
 
     @NonNull
     private static final Collection<TrackableConnector> TRACKABLE_CONNECTORS = Collections.unmodifiableCollection(Arrays.asList(new TrackableConnector[] {
-            new GeokretyConnector(), // GK must be first, as it overlaps with the secret codes of travel bugs
-            TravelBugConnector.getInstance(),
+            new GeokretyConnector(),
+            new SwaggieConnector(),
+            TravelBugConnector.getInstance(), // travel bugs last, as their secret codes overlap with other connectors
             UNKNOWN_TRACKABLE_CONNECTOR // must be last
     }));
 
