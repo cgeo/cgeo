@@ -85,6 +85,8 @@ public class Geocache implements IWaypoint {
     private long visitedDate = 0;
     private int listId = StoredList.TEMPORARY_LIST.id;
     private boolean detailed = false;
+
+    @NonNull
     private String geocode = "";
     private String cacheId = "";
     private String guid = "";
@@ -699,11 +701,7 @@ public class Geocache implements IWaypoint {
         return getConnector() instanceof ISearchByCenter;
     }
 
-    public void shareCache(final Activity fromActivity, final Resources res) {
-        if (geocode == null) {
-            return;
-        }
-
+    public void shareCache(@NonNull final Activity fromActivity, final Resources res) {
         final Intent intent = getShareIntent();
 
         fromActivity.startActivity(Intent.createChooser(intent, res.getText(R.string.cache_menu_share)));
@@ -1063,7 +1061,7 @@ public class Geocache implements IWaypoint {
         this.directionImg = directionImg;
     }
 
-    public void setGeocode(final String geocode) {
+    public void setGeocode(@NonNull final String geocode) {
         this.geocode = StringUtils.upperCase(geocode);
     }
 

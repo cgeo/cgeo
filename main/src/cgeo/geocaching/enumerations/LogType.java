@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -47,13 +48,16 @@ public enum LogType {
     UNKNOWN(0, "unknown", "", "", R.string.err_unknown, R.drawable.mark_red); // LogType not init. yet
 
     public final int id;
+    @Nullable
     public final String iconName;
+    @NonNull
     public final String type;
+    @NonNull
     public final String oc_type;
     private final int stringId;
     public final int markerId;
 
-    LogType(final int id, final String iconName, final String type, final String oc_type, final int stringId, final int markerId) {
+    LogType(final int id, @Nullable final String iconName, @NonNull final String type, @NonNull final String oc_type, final int stringId, final int markerId) {
         this.id = id;
         this.iconName = iconName;
         this.type = type;
@@ -110,6 +114,7 @@ public enum LogType {
         return result;
     }
 
+    @NonNull
     public final String getL10n() {
         return CgeoApplication.getInstance().getBaseContext().getResources().getString(stringId);
     }

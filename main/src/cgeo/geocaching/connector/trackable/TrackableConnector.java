@@ -21,6 +21,7 @@ public interface TrackableConnector {
 
     public boolean isLoggable();
 
+    @Nullable
     public Trackable searchTrackable(String geocode, String guid, String id);
 
     @Nullable

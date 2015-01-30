@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface IFilter {
 
+    @NonNull
     String getName();
 
     /**

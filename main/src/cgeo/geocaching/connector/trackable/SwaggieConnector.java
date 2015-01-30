@@ -25,6 +25,7 @@ public final class SwaggieConnector extends AbstractTrackableConnector {
     }
 
     @Override
+    @Nullable
     public Trackable searchTrackable(final String geocode, final String guid, final String id) {
         final String page = Network.getResponseData(Network.getRequest(getUrl(geocode)));
         if (page == null) {

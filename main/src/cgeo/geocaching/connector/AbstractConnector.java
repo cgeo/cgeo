@@ -130,7 +130,8 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
-    public String getGeocodeFromUrl(final String url) {
+    @Nullable
+    public String getGeocodeFromUrl(@NonNull final String url) {
         final String urlPrefix = getCacheUrlPrefix();
         if (StringUtils.isEmpty(urlPrefix) || StringUtils.startsWith(url, urlPrefix)) {
             @NonNull final String geocode = url.substring(urlPrefix.length());
@@ -202,7 +203,7 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
-    public String getWaypointGpxId(final String prefix, final String geocode) {
+    public String getWaypointGpxId(final String prefix, @NonNull final String geocode) {
         // Default: just return the prefix
         return prefix;
     }

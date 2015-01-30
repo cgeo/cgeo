@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -24,6 +25,7 @@ public enum CacheSize {
     OTHER("Other", 8, R.string.cache_size_other, "other"),
     UNKNOWN("Unknown", -1, R.string.cache_size_unknown, ""); // CacheSize not init. yet
 
+    @NonNull
     public final String id;
     public final int comparable;
     private final int stringId;
@@ -32,13 +34,14 @@ public enum CacheSize {
      */
     private final String ocSize2;
 
-    CacheSize(final String id, final int comparable, final int stringId, final String ocSize2) {
+    CacheSize(@NonNull final String id, final int comparable, final int stringId, final String ocSize2) {
         this.id = id;
         this.comparable = comparable;
         this.stringId = stringId;
         this.ocSize2 = ocSize2;
     }
 
+    @NonNull
     final private static Map<String, CacheSize> FIND_BY_ID = new HashMap<>();
     static {
         for (final CacheSize cs : values()) {
@@ -50,7 +53,7 @@ public enum CacheSize {
     }
 
     @NonNull
-    public static CacheSize getById(final String id) {
+    public static CacheSize getById(@Nullable final String id) {
         if (id == null) {
             return UNKNOWN;
         }
@@ -87,6 +90,7 @@ public enum CacheSize {
         return UNKNOWN;
     }
 
+    @NonNull
     public final String getL10n() {
         return CgeoApplication.getInstance().getBaseContext().getResources().getString(stringId);
     }

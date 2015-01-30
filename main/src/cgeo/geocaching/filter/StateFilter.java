@@ -17,7 +17,7 @@ abstract class StateFilter extends AbstractFilter {
 
     static final Resources res = CgeoApplication.getInstance().getResources();
 
-    protected StateFilter(final String name) {
+    protected StateFilter(@NonNull final String name) {
         super(name);
     }
 

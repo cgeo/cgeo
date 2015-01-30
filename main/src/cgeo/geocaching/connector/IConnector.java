@@ -139,7 +139,8 @@ public interface IConnector {
      * @param url
      * @return
      */
-    public String getGeocodeFromUrl(final String url);
+    @Nullable
+    public String getGeocodeFromUrl(@NonNull final String url);
 
     /**
      * enable/disable uploading personal note
@@ -232,7 +233,7 @@ public interface IConnector {
      * @param prefix
      * @return
      */
-    public String getWaypointGpxId(String prefix, String geocode);
+    public String getWaypointGpxId(String prefix, @NonNull String geocode);
 
     /**
      * Get the 'prefix' (key) for a waypoint from the 'name' in the GPX file

@@ -26,6 +26,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     }
 
     @Override
+    @Nullable
     public Trackable searchTrackable(final String geocode, final String guid, final String id) {
         final String page = Network.getResponseData(Network.getRequest("http://geokrety.org/export2.php?gkid=" + getId(geocode)));
         if (page == null) {

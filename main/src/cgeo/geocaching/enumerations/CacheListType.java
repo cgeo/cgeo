@@ -2,6 +2,8 @@ package cgeo.geocaching.enumerations;
 
 import cgeo.geocaching.loaders.AbstractSearchLoader.CacheListLoaderType;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 public enum CacheListType {
     OFFLINE(true, CacheListLoaderType.OFFLINE),
     POCKET(false, CacheListLoaderType.POCKET),
@@ -19,9 +21,9 @@ public enum CacheListType {
      */
     public final boolean canSwitch;
 
-    public final CacheListLoaderType loaderType;
+    @NonNull public final CacheListLoaderType loaderType;
 
-    CacheListType(final boolean canSwitch, final CacheListLoaderType loaderType) {
+    CacheListType(final boolean canSwitch, @NonNull final CacheListLoaderType loaderType) {
         this.canSwitch = canSwitch;
         this.loaderType = loaderType;
     }

@@ -36,6 +36,7 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     }
 
     @Override
+    @Nullable
     public Trackable searchTrackable(final String geocode, final String guid, final String id) {
         return GCParser.searchTrackable(geocode, guid, id);
     }

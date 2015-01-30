@@ -15,7 +15,7 @@ public class OriginFilter extends AbstractFilter {
 
     private final IConnector connector;
 
-    public OriginFilter(final IConnector connector) {
+    public OriginFilter(@NonNull final IConnector connector) {
         super(connector.getName());
         this.connector = connector;
     }

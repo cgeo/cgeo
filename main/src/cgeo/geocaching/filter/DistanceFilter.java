@@ -17,7 +17,7 @@ class DistanceFilter extends AbstractFilter {
     private final int minDistance;
     private final int maxDistance;
 
-    public DistanceFilter(final String name, final int minDistance, final int maxDistance) {
+    public DistanceFilter(@NonNull final String name, final int minDistance, final int maxDistance) {
         super(name);
         this.minDistance = minDistance;
         this.maxDistance = maxDistance;

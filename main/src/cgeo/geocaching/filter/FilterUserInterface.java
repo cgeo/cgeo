@@ -6,6 +6,9 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 import rx.functions.Action1;
 
 import android.app.Activity;
@@ -22,10 +25,10 @@ import java.util.List;
 public final class FilterUserInterface {
 
     private static class FactoryEntry {
-        private final String name;
-        private final Class<? extends IFilterFactory> filterFactory;
+        @NonNull private final String name;
+        @Nullable private final Class<? extends IFilterFactory> filterFactory;
 
-        public FactoryEntry(final String name, final Class<? extends IFilterFactory> filterFactory) {
+        public FactoryEntry(@NonNull final String name, @Nullable final Class<? extends IFilterFactory> filterFactory) {
             this.name = name;
             this.filterFactory = filterFactory;
         }
@@ -74,7 +77,7 @@ public final class FilterUserInterface {
         register(R.string.caches_filter_clear, null);
     }
 
-    private void register(final int resourceId, final Class<? extends IFilterFactory> factoryClass) {
+    private void register(final int resourceId, @Nullable final Class<? extends IFilterFactory> factoryClass) {
         registry.add(new FactoryEntry(res.getString(resourceId), factoryClass));
     }
 
@@ -89,12 +92,13 @@ public final class FilterUserInterface {
             public void onClick(final DialogInterface dialog, final int itemIndex) {
                 final FactoryEntry entry = adapter.getItem(itemIndex);
                 // reset?
-                if (entry.filterFactory == null) {
+                final Class<? extends IFilterFactory> filterFactory = entry.filterFactory;
+                if (filterFactory == null) {
                     runAfterwards.call(null);
                 }
                 else {
                     try {
-                        final IFilterFactory factoryInstance = entry.filterFactory.newInstance();
+                        final IFilterFactory factoryInstance = filterFactory.newInstance();
                         selectFromFactory(factoryInstance, entry.name, runAfterwards);
                     } catch (final Exception e) {
                         Log.e("selectFilter", e);
@@ -106,7 +110,7 @@ public final class FilterUserInterface {
         builder.create().show();
     }
 
-    private void selectFromFactory(final IFilterFactory factory, final String menuTitle, final Action1<IFilter> runAfterwards) {
+    private void selectFromFactory(@NonNull final IFilterFactory factory, final String menuTitle, final Action1<IFilter> runAfterwards) {
         final List<IFilter> filters = Collections.unmodifiableList(factory.getFilters());
         if (filters.size() == 1) {
             runAfterwards.call(filters.get(0));

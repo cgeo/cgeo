@@ -26,14 +26,16 @@ public class TravelBugConnectorTest extends TestCase {
     }
 
     public static void testOnlineSearchBySecretCode() {
-        Trackable trackable = getConnector().searchTrackable("GST9HV", null, null);
+        final Trackable trackable = getConnector().searchTrackable("GST9HV", null, null);
         assertThat(trackable).isNotNull();
+        assert trackable != null;
         assertThat(trackable.getName()).isEqualTo("Deutschland");
     }
 
     public static void testOnlineSearchByPublicCode() {
-        Trackable trackable = getConnector().searchTrackable("TB4JD36", null, null);
+        final Trackable trackable = getConnector().searchTrackable("TB4JD36", null, null);
         assertThat(trackable).isNotNull();
+        assert trackable != null;
         assertThat(trackable.getName()).isEqualTo("Mein Kilometerzähler");
     }
 

@@ -2,6 +2,8 @@ package cgeo.geocaching.enumerations;
 
 import cgeo.geocaching.R;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.content.res.Resources;
 
 public enum StatusCode {
@@ -35,6 +37,7 @@ public enum StatusCode {
         return error_string;
     }
 
+    @NonNull
     public String getErrorString(final Resources res) {
         return res.getString(error_string);
     }

@@ -130,19 +130,22 @@ public enum CacheAttribute {
     // THIS LIST IS GENERATED: don't change anything here but read
     // project/attributes/readme.txt
 
+    @NonNull
     private static final String INTERNAL_YES = "_yes";
+    @NonNull
     private static final String INTERNAL_NO = "_no";
 
     public static final int NO_ID = -1;
 
     public final int gcid;
     public final int ocacode;
+    @NonNull
     public final String rawName;
     public final int drawableId;
     public final int stringIdYes;
     public final int stringIdNo;
 
-    CacheAttribute(final int gcid, final int ocacode, final String rawName,
+    CacheAttribute(final int gcid, final int ocacode, @NonNull final String rawName,
             final int drawableId, final int stringIdYes, final int stringIdNo) {
         this.gcid = gcid;
         this.ocacode = ocacode;
@@ -159,12 +162,15 @@ public enum CacheAttribute {
      *            true: for positive text, false: for negative text
      * @return the localized text
      */
+    @NonNull
     public String getL10n(final boolean enabled) {
         return CgeoApplication.getInstance().getResources().getString(
                 enabled ? stringIdYes : stringIdNo);
     }
 
+    @NonNull
     private final static Map<String, CacheAttribute> FIND_BY_GCRAWNAME = new HashMap<>();
+    @NonNull
     private final static SparseArray<CacheAttribute> FIND_BY_OCACODE = new SparseArray<>();
     static {
         for (final CacheAttribute attr : values()) {
@@ -176,7 +182,7 @@ public enum CacheAttribute {
     }
 
     @Nullable
-    public static CacheAttribute getByRawName(final String rawName) {
+    public static CacheAttribute getByRawName(@Nullable final String rawName) {
         return rawName != null ? FIND_BY_GCRAWNAME.get(rawName) : null;
     }
 
@@ -186,14 +192,14 @@ public enum CacheAttribute {
     }
 
     @NonNull
-    public static String trimAttributeName(final String attributeName) {
+    public static String trimAttributeName(@Nullable final String attributeName) {
         if (null == attributeName) {
             return "";
         }
         return attributeName.replace(INTERNAL_YES, "").replace(INTERNAL_NO, "").trim();
     }
 
-    public static boolean isEnabled(final String attributeName) {
+    public static boolean isEnabled(@Nullable final String attributeName) {
         return !StringUtils.endsWithIgnoreCase(attributeName, INTERNAL_NO);
     }
 

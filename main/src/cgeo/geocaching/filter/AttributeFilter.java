@@ -15,7 +15,7 @@ class AttributeFilter extends AbstractFilter {
 
     private final String attribute;
 
-    public AttributeFilter(final String name, final String attribute) {
+    public AttributeFilter(@NonNull final String name, final String attribute) {
         super(name);
         this.attribute = attribute;
     }

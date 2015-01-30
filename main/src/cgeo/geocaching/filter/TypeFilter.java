@@ -11,7 +11,7 @@ import java.util.List;
 class TypeFilter extends AbstractFilter {
     private final CacheType cacheType;
 
-    public TypeFilter(final CacheType cacheType) {
+    public TypeFilter(@NonNull final CacheType cacheType) {
         super(cacheType.id);
         this.cacheType = cacheType;
     }
@@ -22,6 +22,7 @@ class TypeFilter extends AbstractFilter {
     }
 
     @Override
+    @NonNull
     public String getName() {
         return cacheType.getL10n();
     }

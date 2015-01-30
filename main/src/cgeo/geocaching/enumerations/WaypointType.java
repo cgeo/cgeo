@@ -49,6 +49,7 @@ public enum WaypointType {
             }
         }
     }
+    @NonNull
     public static final Set<WaypointType> ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL = Collections.unmodifiableSet(ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL_TMP);
 
     /**
@@ -67,6 +68,7 @@ public enum WaypointType {
         return waypointType;
     }
 
+    @NonNull
     public final String getL10n() {
         return CgeoApplication.getInstance().getBaseContext().getResources().getString(stringId);
     }

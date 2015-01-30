@@ -25,7 +25,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     private final boolean allLogs;
     private final Resources res = CgeoApplication.getInstance().getResources();
 
-    public CacheLogsViewCreator(CacheDetailActivity cacheDetailActivity, boolean allLogs) {
+    public CacheLogsViewCreator(final CacheDetailActivity cacheDetailActivity, final boolean allLogs) {
         super(cacheDetailActivity);
         this.allLogs = allLogs;
     }
@@ -37,7 +37,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
      */
     private Geocache getCache() {
         if (this.activity instanceof CacheDetailActivity) {
-            CacheDetailActivity details = (CacheDetailActivity) this.activity;
+            final CacheDetailActivity details = (CacheDetailActivity) this.activity;
             return details.getCache();
         }
         return null;
@@ -56,7 +56,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
             final List<Entry<LogType, Integer>> sortedLogCounts = new ArrayList<>(logCounts.size());
             for (final Entry<LogType, Integer> entry : logCounts.entrySet()) {
                 // it may happen that the label is unknown -> then avoid any output for this type
-                if (entry.getKey() != LogType.PUBLISH_LISTING && entry.getKey().getL10n() != null && entry.getValue() != 0) {
+                if (entry.getKey() != LogType.PUBLISH_LISTING && entry.getValue() != 0) {
                     sortedLogCounts.add(entry);
                 }
             }
@@ -66,7 +66,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
                 Collections.sort(sortedLogCounts, new Comparator<Entry<LogType, Integer>>() {
 
                     @Override
-                    public int compare(Entry<LogType, Integer> logCountItem1, Entry<LogType, Integer> logCountItem2) {
+                    public int compare(final Entry<LogType, Integer> logCountItem1, final Entry<LogType, Integer> logCountItem2) {
                         return logCountItem1.getKey().compareTo(logCountItem2.getKey());
                     }
                 });
@@ -84,7 +84,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     }
 
     @Override
-    protected void fillCountOrLocation(LogViewHolder holder, final LogEntry log) {
+    protected void fillCountOrLocation(final LogViewHolder holder, final LogEntry log) {
         // finds count
         if (log.found == -1) {
             holder.countOrLocation.setVisibility(View.GONE);

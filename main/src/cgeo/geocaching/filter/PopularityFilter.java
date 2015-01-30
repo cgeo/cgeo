@@ -13,7 +13,7 @@ class PopularityFilter extends AbstractFilter {
     private final int minFavorites;
     private final int maxFavorites;
 
-    public PopularityFilter(final String name, final int minFavorites, final int maxFavorites) {
+    public PopularityFilter(@NonNull final String name, final int minFavorites, final int maxFavorites) {
         super(name);
         this.minFavorites = minFavorites;
         this.maxFavorites = maxFavorites;

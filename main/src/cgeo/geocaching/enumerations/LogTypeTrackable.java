@@ -18,6 +18,7 @@ public enum LogTypeTrackable {
         this.resourceId = resourceId;
     }
 
+    @NonNull
     public String getLabel() {
         return CgeoApplication.getInstance().getString(resourceId);
     }

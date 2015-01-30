@@ -18,7 +18,7 @@ class PopularityRatioFilter extends AbstractFilter {
     private final int minRatio;
     private final int maxRatio;
 
-    public PopularityRatioFilter(final String name, final int minRatio, final int maxRatio) {
+    public PopularityRatioFilter(@NonNull final String name, final int minRatio, final int maxRatio) {
         super(name);
         this.minRatio = minRatio;
         this.maxRatio = maxRatio;

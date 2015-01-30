@@ -1,5 +1,7 @@
 package cgeo.geocaching.enumerations;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import java.util.EnumSet;
 
 /**
@@ -33,6 +35,7 @@ public interface LoadFlags {
         DB // include saving to CacheCache
     }
 
+    @NonNull
     public final static EnumSet<SaveFlag> SAVE_ALL = EnumSet.allOf(SaveFlag.class);
 
     public enum RemoveFlag {
@@ -41,6 +44,7 @@ public interface LoadFlags {
         OWN_WAYPOINTS_ONLY_FOR_TESTING // only to be used in unit testing (as we never delete own waypoints)
     }
 
+    @NonNull
     public final static EnumSet<RemoveFlag> REMOVE_ALL = EnumSet.of(RemoveFlag.CACHE, RemoveFlag.DB);
 
 }

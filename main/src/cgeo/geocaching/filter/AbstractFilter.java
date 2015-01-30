@@ -8,9 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 abstract class AbstractFilter implements IFilter {
+    @NonNull
     private final String name;
 
-    protected AbstractFilter(final String name) {
+    protected AbstractFilter(@NonNull final String name) {
         this.name = name;
     }
 
@@ -26,6 +27,7 @@ abstract class AbstractFilter implements IFilter {
     }
 
     @Override
+    @NonNull
     public String getName() {
         return name;
     }

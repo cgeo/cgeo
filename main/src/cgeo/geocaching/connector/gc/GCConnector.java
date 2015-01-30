@@ -305,7 +305,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public String getGeocodeFromUrl(final String url) {
+    @Nullable
+    public String getGeocodeFromUrl(@NonNull final String url) {
         // coord.info URLs
         String code = StringUtils.substringAfterLast(url, "coord.info/");
         if (code != null && canHandle(code)) {
@@ -375,7 +376,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public String getWaypointGpxId(final String prefix, final String geocode) {
+    public String getWaypointGpxId(final String prefix, @NonNull final String geocode) {
         String gpxId = prefix;
         if (StringUtils.isNotBlank(geocode) && geocode.length() > 2) {
             gpxId += geocode.substring(2);

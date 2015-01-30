@@ -214,9 +214,12 @@ public final class ConnectorFactory {
     }
 
     @Nullable
-    public static String getGeocodeFromURL(final String url) {
+    public static String getGeocodeFromURL(@Nullable final String url) {
+        if (url == null) {
+            return null;
+        }
         for (final IConnector connector : CONNECTORS) {
-            final String geocode = connector.getGeocodeFromUrl(url);
+            @Nullable final String geocode = connector.getGeocodeFromUrl(url);
             if (StringUtils.isNotBlank(geocode)) {
                 return geocode;
             }

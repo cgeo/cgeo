@@ -11,7 +11,7 @@ import java.util.List;
 class SizeFilter extends AbstractFilter {
     private final CacheSize cacheSize;
 
-    public SizeFilter(final CacheSize cacheSize) {
+    public SizeFilter(@NonNull final CacheSize cacheSize) {
         super(cacheSize.id);
         this.cacheSize = cacheSize;
     }
@@ -22,6 +22,7 @@ class SizeFilter extends AbstractFilter {
     }
 
     @Override
+    @NonNull
     public String getName() {
         return cacheSize.getL10n();
     }

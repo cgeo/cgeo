@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.trackable;
 import cgeo.geocaching.Trackable;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 public class UnknownTrackableConnector extends AbstractTrackableConnector {
 
@@ -18,6 +19,7 @@ public class UnknownTrackableConnector extends AbstractTrackableConnector {
     }
 
     @Override
+    @Nullable
     public Trackable searchTrackable(final String geocode, final String guid, final String id) {
         return null;
     }

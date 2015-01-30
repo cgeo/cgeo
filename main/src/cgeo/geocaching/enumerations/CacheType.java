@@ -57,8 +57,11 @@ public enum CacheType {
         this.markerId = markerId;
     }
 
+    @NonNull
     private final static Map<String, CacheType> FIND_BY_ID = new HashMap<>();
+    @NonNull
     private final static Map<String, CacheType> FIND_BY_PATTERN = new HashMap<>();
+    @NonNull
     private final static Map<String, CacheType> FIND_BY_GUID = new HashMap<>();
 
     static {
@@ -102,6 +105,7 @@ public enum CacheType {
         return result;
     }
 
+    @NonNull
     public final String getL10n() {
         return CgeoApplication.getInstance().getBaseContext().getResources().getString(stringId);
     }

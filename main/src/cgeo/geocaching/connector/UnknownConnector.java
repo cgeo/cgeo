@@ -43,7 +43,8 @@ class UnknownConnector extends AbstractConnector {
     }
 
     @Override
-    public String getGeocodeFromUrl(final String url) {
+    @Nullable
+    public String getGeocodeFromUrl(@NonNull final String url) {
         return null;
     }
 
