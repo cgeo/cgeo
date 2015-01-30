@@ -14,10 +14,10 @@ public class SwaggieParserTest extends TestCase {
         final Trackable trackableIn = new Trackable();
         trackableIn.setGeocode("SW0017");
 
-        final String cacheUrl = ConnectorFactory.getTrackableConnector(trackableIn.getGeocode()).getUrl(trackableIn);
-        assertThat(cacheUrl).isNotNull();
+        final String trackableUrl = ConnectorFactory.getTrackableConnector(trackableIn.getGeocode()).getUrl(trackableIn);
+        assertThat(trackableUrl).isNotNull();
 
-        final String page = Network.getResponseData(Network.getRequest(cacheUrl));
+        final String page = Network.getResponseData(Network.getRequest(trackableUrl));
         assertThat(page).isNotNull();
 
         assert page != null;
