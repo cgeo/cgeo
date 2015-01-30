@@ -25,7 +25,7 @@ public class ExportTest extends CGeoTestCase {
         final Geocache cache = new Geocache();
         cache.setGeocode("GCX1234");
         final LogEntry log = new LogEntry(1353244820000L, LogType.FOUND_IT, "Hidden in a tree");
-        FieldNotes fieldNotes = new FieldNotes();
+        final FieldNotes fieldNotes = new FieldNotes();
         fieldNotes.add(cache, log);
         assertEquals("Non matching export " + fieldNotes.getContent(), "GCX1234,2012-11-18T13:20:20Z,Found it,\"Hidden in a tree\"\n", fieldNotes.getContent());
     }
@@ -55,8 +55,8 @@ public class ExportTest extends CGeoTestCase {
         cache.setDetailed(true);
         DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
 
-        List<Geocache> exportList = Collections.singletonList(cache);
-        GpxExportTester gpxExport = new GpxExportTester();
+        final List<Geocache> exportList = Collections.singletonList(cache);
+        final GpxExportTester gpxExport = new GpxExportTester();
         File result = null;
         try {
             result = gpxExport.testExportSync(exportList);
@@ -67,17 +67,22 @@ public class ExportTest extends CGeoTestCase {
         assertThat(result).isNotNull();
 
         // make sure we actually exported waypoints
-        String gpx = org.apache.commons.io.FileUtils.readFileToString(result);
+        final String gpx = org.apache.commons.io.FileUtils.readFileToString(result);
         assertThat(gpx).contains("<wpt");
         assertThat(gpx).contains(cache.getGeocode());
+        if (cache.getUrl() != null) {
+            assertThat(gpx).contains("<url>");
+        } else {
+            assertThat(gpx).doesNotContain("<url>");
+        }
 
         FileUtils.deleteIgnoringFailure(result);
     }
 
     private static class GpxExportTester extends GpxExport {
 
-        public File testExportSync(List<Geocache> caches) throws InterruptedException, ExecutionException {
-            final ArrayList<String> geocodes = new ArrayList<String>(caches.size());
+        public File testExportSync(final List<Geocache> caches) throws InterruptedException, ExecutionException {
+            final ArrayList<String> geocodes = new ArrayList<>(caches.size());
             for (final Geocache cache : caches) {
                 geocodes.add(cache.getGeocode());
             }

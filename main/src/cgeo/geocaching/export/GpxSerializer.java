@@ -110,11 +110,7 @@ public final class GpxSerializer {
 
             XmlUtils.multipleTexts(gpx, PREFIX_GPX,
                     "name", cache.getGeocode(),
-                    "desc", cache.getName());
-            if (StringUtils.isNotEmpty(cache.getUrl())) {
-                gpx.attribute(PREFIX_GPX, "url", cache.getUrl());
-            }
-            XmlUtils.multipleTexts(gpx, PREFIX_GPX,
+                    "desc", cache.getName(),
                     "url", cache.getUrl(),
                     "urlname", cache.getName(),
                     "sym", cache.isFound() ? "Geocache Found" : "Geocache",
