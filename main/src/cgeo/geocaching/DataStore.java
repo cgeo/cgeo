@@ -2951,7 +2951,7 @@ public class DataStore {
 
     private static enum PreparedStatement {
 
-        HISTORY_COUNT("select count(_id) from " + dbTableCaches + " where visiteddate > 0"),
+        HISTORY_COUNT("SELECT COUNT(_id) FROM " + dbTableCaches + " WHERE visiteddate > 0"),
         MOVE_TO_STANDARD_LIST("UPDATE " + dbTableCaches + " SET reason = " + StoredList.STANDARD_LIST_ID + " WHERE reason = ?"),
         MOVE_TO_LIST("UPDATE " + dbTableCaches + " SET reason = ? WHERE geocode = ?"),
         UPDATE_VISIT_DATE("UPDATE " + dbTableCaches + " SET visiteddate = ? WHERE geocode = ?"),
@@ -2967,10 +2967,10 @@ public class DataStore {
         LIST_ID_OF_GUID("SELECT reason FROM " + dbTableCaches + " WHERE guid = ?"),
         GEOCODE_OF_GUID("SELECT geocode FROM " + dbTableCaches + " WHERE guid = ?"),
         INSERT_SEARCH_DESTINATION("INSERT INTO " + dbTableSearchDestinationHistory + " (date, latitude, longitude) VALUES (?, ?, ?)"),
-        COUNT_TYPE_ALL_LIST("select count(_id) from " + dbTableCaches + " where detailed = 1 and type = ? and reason > 0"), // See use of COUNT_TYPE_LIST for synchronization
-        COUNT_ALL_TYPES_ALL_LIST("select count(_id) from " + dbTableCaches + " where detailed = 1 and reason > 0"), // See use of COUNT_TYPE_LIST for synchronization
-        COUNT_TYPE_LIST("select count(_id) from " + dbTableCaches + " where detailed = 1 and type = ? and reason = ?"),
-        COUNT_ALL_TYPES_LIST("select count(_id) from " + dbTableCaches + " where detailed = 1 and reason = ?"), // See use of COUNT_TYPE_LIST for synchronization
+        COUNT_TYPE_ALL_LIST("SELECT COUNT(_id) FROM " + dbTableCaches + " WHERE detailed = 1 AND type = ? AND reason > 0"), // See use of COUNT_TYPE_LIST for synchronization
+        COUNT_ALL_TYPES_ALL_LIST("SELECT COUNT(_id) FROM " + dbTableCaches + " WHERE detailed = 1 AND reason > 0"), // See use of COUNT_TYPE_LIST for synchronization
+        COUNT_TYPE_LIST("SELECT COUNT(_id) FROM " + dbTableCaches + " WHERE detailed = 1 AND type = ? AND reason = ?"),
+        COUNT_ALL_TYPES_LIST("SELECT COUNT(_id) FROM " + dbTableCaches + " WHERE detailed = 1 AND reason = ?"), // See use of COUNT_TYPE_LIST for synchronization
         CHECK_IF_PRESENT("SELECT COUNT(*) FROM " + dbTableCaches + " WHERE geocode = ?");
 
         private static final List<PreparedStatement> statements = new ArrayList<>();
