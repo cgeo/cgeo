@@ -884,7 +884,7 @@ public class DataStore {
         final File[] files = LocalStorage.getStorage().listFiles();
         if (ArrayUtils.isNotEmpty(files)) {
             final Pattern oldFilePattern = Pattern.compile("^[GC|TB|EC|GK|O][A-Z0-9]{4,7}$");
-            final SQLiteStatement select = db.compileStatement("select count(*) from " + dbTableCaches + " where geocode = ?");
+            final SQLiteStatement select = PreparedStatement.CHECK_IF_PRESENT.getStatement();
             final ArrayList<File> toRemove = new ArrayList<>(files.length);
             for (final File file : files) {
                 if (file.isDirectory()) {
@@ -2970,7 +2970,8 @@ public class DataStore {
         COUNT_TYPE_ALL_LIST("select count(_id) from " + dbTableCaches + " where detailed = 1 and type = ? and reason > 0"), // See use of COUNT_TYPE_LIST for synchronization
         COUNT_ALL_TYPES_ALL_LIST("select count(_id) from " + dbTableCaches + " where detailed = 1 and reason > 0"), // See use of COUNT_TYPE_LIST for synchronization
         COUNT_TYPE_LIST("select count(_id) from " + dbTableCaches + " where detailed = 1 and type = ? and reason = ?"),
-        COUNT_ALL_TYPES_LIST("select count(_id) from " + dbTableCaches + " where detailed = 1 and reason = ?"); // See use of COUNT_TYPE_LIST for synchronization
+        COUNT_ALL_TYPES_LIST("select count(_id) from " + dbTableCaches + " where detailed = 1 and reason = ?"), // See use of COUNT_TYPE_LIST for synchronization
+        CHECK_IF_PRESENT("SELECT COUNT(*) FROM " + dbTableCaches + " WHERE geocode = ?");
 
         private static final List<PreparedStatement> statements = new ArrayList<>();
 
