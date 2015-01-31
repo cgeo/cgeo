@@ -4,6 +4,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
+import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.sensors.Sensors;
@@ -98,6 +99,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             ButterKnife.inject(this, view);
             system.setText(systemInformation(AboutActivity.this));
             system.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+            Compatibility.setTextIsSelectable(system, true);
             return view;
         }
     }
