@@ -76,6 +76,10 @@ public abstract class Formatter {
         return dateFormat.format(date);
     }
 
+    private static String formatShortDateIncludingWeekday(final long time) {
+        return DateUtils.formatDateTime(CgeoApplication.getInstance().getBaseContext(), time, DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_WEEKDAY) + ", " + formatShortDate(time);
+    }
+
     /**
      * Generate a numeric date string according to system-wide settings (locale, date format)
      * such as "10/20/2010". Today and yesterday will be presented as strings "today" and "yesterday".
@@ -157,7 +161,7 @@ public abstract class Formatter {
         } else if (cache.isEventCache()) {
             final Date hiddenDate = cache.getHiddenDate();
             if (hiddenDate != null) {
-                infos.add(Formatter.formatShortDate(hiddenDate.getTime()));
+                infos.add(Formatter.formatShortDateIncludingWeekday(hiddenDate.getTime()));
             }
         }
     }
