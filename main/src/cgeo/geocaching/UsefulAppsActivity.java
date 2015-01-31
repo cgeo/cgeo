@@ -7,6 +7,10 @@ import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.utils.ProcessUtils;
 
+import org.eclipse.jdt.annotation.NonNull;
+
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -34,18 +38,16 @@ public class UsefulAppsActivity extends AbstractActionBarActivity {
         private final int titleId;
         private final int descriptionId;
         private final int iconId;
+        @NonNull
         private final String packageName;
 
-        public HelperApp(final int title, final int description, final int icon, final String packageName) {
+        public HelperApp(final int title, final int description, final int icon, @NonNull final String packageName) {
             this.titleId = title;
             this.descriptionId = description;
             this.iconId = icon;
             this.packageName = packageName;
         }
 
-        public String getMarketUrl() {
-            return (packageName.startsWith("http:")) ? packageName : "market://details?id=" + packageName;
-        }
     }
 
     private static final HelperApp[] HELPER_APPS = {
@@ -95,7 +97,12 @@ public class UsefulAppsActivity extends AbstractActionBarActivity {
             @Override
             public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
                 final HelperApp helperApp = HELPER_APPS[position];
-                ProcessUtils.openMarket(UsefulAppsActivity.this, helperApp.getMarketUrl());
+                if (helperApp.packageName.startsWith("http")) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(helperApp.packageName)));
+                }
+                else {
+                    ProcessUtils.openMarket(UsefulAppsActivity.this, helperApp.packageName);
+                }
             }
         });
     }

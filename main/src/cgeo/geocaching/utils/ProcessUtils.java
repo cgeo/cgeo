@@ -108,15 +108,17 @@ public final class ProcessUtils {
     }
 
     @SuppressWarnings("deprecation")
-    public static void openMarket(final Activity activity, final String url) {
+    public static void openMarket(final Activity activity, @NonNull final String packageName) {
         try {
             // allow also opening pure http URLs in addition to market packages
+            final String url = "market://details?id=" + packageName;
             final Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             marketIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
             activity.startActivity(marketIntent);
 
         } catch (final RuntimeException ignored) {
-            // market not available in standard emulator
+            // market not available, fall back to browser
+            activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + packageName)));
         }
     }
 

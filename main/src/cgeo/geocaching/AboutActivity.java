@@ -128,7 +128,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
                 @Override
                 public void onClick(final View v) {
-                    ProcessUtils.openMarket(AboutActivity.this, "market://details?id=" + getPackageName());
+                    ProcessUtils.openMarket(AboutActivity.this, getPackageName());
                 }
             });
             return view;

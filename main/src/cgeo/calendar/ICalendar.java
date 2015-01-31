@@ -3,6 +3,7 @@ package cgeo.calendar;
 import org.eclipse.jdt.annotation.NonNull;
 
 public interface ICalendar {
+    @Deprecated
     @NonNull static final String CALENDAR_ADDON_URI = "market://details?id=cgeo.calendar";
 
     @NonNull static final String INTENT = "cgeo.calendar.RESERVE";

@@ -54,7 +54,7 @@ public class CalendarAddon {
                     .toString(), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(final DialogInterface dialog, final int id) {
-                    ProcessUtils.openMarket(activity, ICalendar.CALENDAR_ADDON_URI);
+                    ProcessUtils.openMarket(activity, "cgeo.calendar");
                 }
             });
         }
