@@ -110,7 +110,6 @@ public final class ProcessUtils {
     @SuppressWarnings("deprecation")
     public static void openMarket(final Activity activity, @NonNull final String packageName) {
         try {
-            // allow also opening pure http URLs in addition to market packages
             final String url = "market://details?id=" + packageName;
             final Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             marketIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
