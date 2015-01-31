@@ -559,7 +559,7 @@
   <string name="cache_dialog_loading_details_status_cache">Apkopo datus</string>
   <string name="cache_dialog_loading_details_status_render">Gatavo attēlošanai</string>
   <string name="cache_dialog_offline_save_title">Bezsaistes režīmā</string>
-  <string name="cache_dialog_offline_save_message">Saglabā slēpni bezsaistes lietošanai...</string>
+  <string name="cache_dialog_offline_save_message">Saglabā slēpni bezsaistes lietošanai…</string>
   <string name="cache_dialog_offline_drop_title">Bezsaistes režīmā</string>
   <string name="cache_dialog_offline_drop_message">Notiek slēpņa izdzēšana no ierīces atmiņas…</string>
   <string name="cache_dialog_refresh_title">Atjaunot</string>

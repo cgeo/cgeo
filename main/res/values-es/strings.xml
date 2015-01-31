@@ -56,7 +56,7 @@
   <string name="log_attended">Asistí</string>
   <string name="log_retrieved">Recogido</string>
   <string name="log_placed">Depositado</string>
-  <string name="log_grabbed">Recogido de alguna parte</string>
+  <string name="log_grabbed">Cogido de otro sitio</string>
   <string name="log_movecollection">Mover a la colección</string>
   <string name="log_moveinventory">Mover al inventario</string>
   <string name="log_maintained">Mantenimiento efectuado</string>
@@ -243,7 +243,7 @@
     <item quantity="other">%d minutos</item>
   </plurals>
   <string name="caches_store_offline">Usar sin conexión luego</string>
-  <string name="caches_store_selected">Almacenamiento seleccionado</string>
+  <string name="caches_store_selected">Guardar seleccionados</string>
   <string name="caches_history">Historial</string>
   <string name="caches_on_map">Ver en mapa</string>
   <string name="caches_sort">Ordenar</string>
@@ -526,7 +526,7 @@
   <string name="feature_online_logging">Registro online</string>
   <string name="feature_log_images">Adjuntar imágenes a los registros</string>
   <string name="feature_watch_list">Lista de seguimiento</string>
-  <string name="feature_own_coordinates">Almacenamiento de coordenadas modificadas</string>
+  <string name="feature_own_coordinates">Almacenar coordenadas modificadas</string>
   <string name="feature_search_keyword">Buscar por palabra clave</string>
   <string name="feature_search_live_map">Mapa en vivo</string>
   <string name="feature_search_center">Búsqueda por posición</string>
@@ -1086,7 +1086,7 @@
   <string name="attribute_arithmetic_no">No es un problema aritmético</string>
   <string name="attribute_other_cache_yes">Caché de otro tipo</string>
   <string name="attribute_other_cache_no">No es caché de otro tipo</string>
-  <string name="attribute_ask_owner_yes">Pregunta al propietario las las condiciones iniciales</string>
+  <string name="attribute_ask_owner_yes">Pregunta al propietario las condiciones iniciales</string>
   <string name="attribute_ask_owner_no">No es necesario preguntar al propietario las condiciones iniciales</string>
   <string name="attribute_unknown_yes">Hay un atributo desconocido</string>
   <string name="attribute_unknown_no">No hay atributo desconocido</string>
