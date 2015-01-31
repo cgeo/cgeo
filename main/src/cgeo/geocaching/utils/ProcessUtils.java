@@ -6,6 +6,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -104,6 +105,19 @@ public final class ProcessUtils {
         final List<ResolveInfo> servicesList = packageManager.queryIntentServices(intent,
                 PackageManager.MATCH_DEFAULT_ONLY);
         return CollectionUtils.isNotEmpty(list) || CollectionUtils.isNotEmpty(servicesList);
+    }
+
+    @SuppressWarnings("deprecation")
+    public static void openMarket(final Activity activity, final String url) {
+        try {
+            // allow also opening pure http URLs in addition to market packages
+            final Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            marketIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+            activity.startActivity(marketIntent);
+
+        } catch (final RuntimeException ignored) {
+            // market not available in standard emulator
+        }
     }
 
 }

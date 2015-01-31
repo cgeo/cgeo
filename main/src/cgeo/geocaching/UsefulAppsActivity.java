@@ -5,10 +5,8 @@ import butterknife.InjectView;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.ui.AbstractViewHolder;
+import cgeo.geocaching.utils.ProcessUtils;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -45,18 +43,8 @@ public class UsefulAppsActivity extends AbstractActionBarActivity {
             this.packageName = packageName;
         }
 
-        @SuppressWarnings("deprecation")
-        private void installFromMarket(final Activity activity) {
-            try {
-                // allow also opening pure http URLs in addition to market packages
-                final String url = (packageName.startsWith("http:")) ? packageName : "market://details?id=" + packageName;
-                final Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                marketIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-                activity.startActivity(marketIntent);
-
-            } catch (final RuntimeException ignored) {
-                // market not available in standard emulator
-            }
+        public String getMarketUrl() {
+            return (packageName.startsWith("http:")) ? packageName : "market://details?id=" + packageName;
         }
     }
 
@@ -107,7 +95,7 @@ public class UsefulAppsActivity extends AbstractActionBarActivity {
             @Override
             public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
                 final HelperApp helperApp = HELPER_APPS[position];
-                helperApp.installFromMarket(UsefulAppsActivity.this);
+                ProcessUtils.openMarket(UsefulAppsActivity.this, helperApp.getMarketUrl());
             }
         });
     }

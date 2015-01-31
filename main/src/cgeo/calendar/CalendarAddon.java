@@ -54,9 +54,7 @@ public class CalendarAddon {
                     .toString(), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(final DialogInterface dialog, final int id) {
-                    final Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse(ICalendar.CALENDAR_ADDON_URI));
-                    activity.startActivity(intent);
+                    ProcessUtils.openMarket(activity, ICalendar.CALENDAR_ADDON_URI);
                 }
             });
         }

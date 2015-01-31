@@ -11,6 +11,7 @@ import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
+import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.Version;
 
 import org.apache.commons.io.IOUtils;
@@ -127,7 +128,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
                 @Override
                 public void onClick(final View v) {
-                    market();
+                    ProcessUtils.openMarket(AboutActivity.this, "market://details?id=" + getPackageName());
                 }
             });
             return view;
@@ -190,13 +191,6 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
     private void startUrl(final String url) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-    }
-
-    @SuppressWarnings("deprecation")
-    final void market() {
-        final Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getPackageName()));
-        marketIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-        startActivity(marketIntent);
     }
 
     @Override
