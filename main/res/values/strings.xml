@@ -1236,13 +1236,15 @@
     <string name="quote">To make geocaching easier, to make users lazier.</string>
     <string name="powered_by">carnero</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
-    <string name="support">Support: <a href="">support@cgeo.org</a></string>
-    <string name="website">Website: <a href="">cgeo.org</a></string>
-    <string name="facebook">Facebook: <a href="">c:geo page</a></string>
-    <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-    <string name="market">Android: <a href="">c:geo on Google Play</a></string>
+    <string name="support_title">Support</string>
+    <string name="website_title">Website</string>
+    <string name="facebook_title">Facebook</string>
+    <string name="facebook_link"><a href="">c:geo page</a></string>
+    <string name="twitter_title">Twitter</string>
+    <string name="market_title">Google Play</string>
+    <string name="market_link"><a href="">c:geo on Google Play</a></string>
     <string name="about_twitter">Should <b>c:geo</b> publish a new status on Twitter every time you log a cache?</string>
-    <string name="faq">FAQ: <a href="">faq.cgeo.org</a></string>
+    <string name="faq_title">FAQ</string>
     
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">New release available.\nClick to install.</string>

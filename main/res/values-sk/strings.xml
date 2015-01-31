@@ -1135,13 +1135,7 @@
   <string name="attribute_offset_cache_no">Nie je offset cache</string>
   <string name="quote">Pre jednoduchšie hľadanie skrýš a používateľov lenivších.</string>
   <string name="powered_by">carnero</string>
-  <string name="support">Podpora: <a href="">support@cgeo.org</a></string>
-  <string name="website">Web: <a href="">cgeo.org</a></string>
-  <string name="facebook">Facebook: <a href="">c:geo page</a></string>
-  <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="market">Android: <a href=""> c:geo na Google Play</a></string>
   <string name="about_twitter">Chcete, aby <b>c:geo</b> napísalo na váš Twitter vždy, keď zapíšete nájdenie skrýše?</string>
-  <string name="faq">FAQ: <a href="">faq.cgeo.org</a></string>
   <string name="status_new_release" tools:ignore="UnusedResources">Je dostupné nové vydanie.\nKliknite pre inštaláciu.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Je dostupná nová nočná zostava.\nKliknite pre inštaláciu.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Je dostupná nová verzia „release candidate“.\nKliknite pre inštaláciu.</string>

@@ -1127,11 +1127,6 @@
   <string name="attribute_offset_cache_yes">Offset cache</string>
   <string name="attribute_offset_cache_no">No offset cache</string>
   <string name="quote">To make geocaching easier, to make users lazier.</string>
-  <string name="support">Palaikymas: <a href="">support@cgeo.org</a></string>
-  <string name="website">Tinklapis: <a href="">cgeo.org</a></string>
-  <string name="facebook">Facebook: <a href="">c:geo page</a></string>
-  <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="market">Android: <a href="">c:geo on Google Play</a></string>
   <string name="about_twitter">Kaskart registruojant slėptuvę <b>c:geo</b> paskelbs nauja statusą Twitter paskyroje.</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Galima nauja versija. \nPaspauskite čia ir įdiekite.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Galima nauja naktinė versija.\nPaspauskite čia ir įdiekite.</string>

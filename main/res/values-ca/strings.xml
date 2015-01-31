@@ -1138,13 +1138,7 @@
   <string name="attribute_offset_cache_no">No és un catxé offset</string>
   <string name="quote">Per fer el geocatxing més fàcil, per fer els usuaris més dropos.</string>
   <string name="powered_by">Carnero</string>
-  <string name="support">Suport: <a href="">support@cgeo.org</a></string>
-  <string name="website">Lloc web: <a href=""> cgeo.org</a></string>
-  <string name="facebook">Facebook: <a href="">Pàgina del c:geo</a></string>
-  <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="market">Android: <a href="">El c:geo a Google Play</a></string>
   <string name="about_twitter">Voleu que <b>el c:geo</b>  publiqui un nou estatus al Twitter cada vegada que registreu un catxé?</string>
-  <string name="faq">PMF: <a href=""> faq.cgeo.org</a></string>
   <string name="status_new_release" tools:ignore="UnusedResources">Nova versió disponible.\nCliqueu per instal·lar-la.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Nova versió nightly build disponible.\nCliqueu per instal·lar-la.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Nova versió candidate disponible.\nCliqueu per instal·lar-la.</string>

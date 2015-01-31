@@ -90,5 +90,10 @@
 
     <string name="caches_map_mapswithme" translatable="false">Maps.me</string>
     <string name="cache_menu_mapswithme" translatable="false">Maps.me</string>
+    <string name="faq_link"><a href="">faq.cgeo.org</a></string>
+    <string name="website_link"><a href="">cgeo.org</a></string>
+    <string name="twitter_link"><a href="">@android_GC</a></string>
+    <string name="support_link"><a href="">support@cgeo.org</a></string>
+    
 
 </resources>

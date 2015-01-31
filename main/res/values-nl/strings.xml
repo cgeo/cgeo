@@ -1133,13 +1133,7 @@
   <string name="attribute_offset_cache_no">Geen offset cache</string>
   <string name="quote">Om geocaching makkelijker en gebruikers luier te maken.</string>
   <string name="powered_by">carnero</string>
-  <string name="support">Support: <a href="">support@cgeo.org</a></string>
-  <string name="website">Website: <a href="">cgeo.org</a></string>
-  <string name="facebook">Facebook: <a href="">c:geo page</a></string>
-  <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="market">Android: <a href="">c:geo op Google Play</a></string>
   <string name="about_twitter">Moet <b>c:geo</b> elke cache vondst publiceren naar Twitter?</string>
-  <string name="faq">FAQ: <a href=""> faq.cgeo.org</a></string>
   <string name="status_new_release" tools:ignore="UnusedResources">Nieuwe release beschikbaar.\nTik om te installeren.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Nieuwe nightly-release beschikbaar.\nTik om te installeren.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Nieuwe release-candidaad beschikbaar.\nTik om te installeren.</string>
