@@ -5,6 +5,7 @@
     <b>Next release</b>\n
     · Fix: Crash exporting GPX for lab caches\n
     · Fix: Crash restoring non-existing database backup\n
+    · Fix: Spoiler photo from hint not always downloaded\n
     · Fix: Bad sort order for filter names in some languages\n
     \n
     \n
