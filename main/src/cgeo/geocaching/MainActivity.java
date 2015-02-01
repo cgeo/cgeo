@@ -70,6 +70,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -463,11 +464,11 @@ public class MainActivity extends AbstractActionBarActivity {
         sorted.addAll(Arrays.asList(CacheType.values()));
         sorted.removeAll(cacheTypes);
 
+        final Collator collator = TextUtils.getCollator();
         Collections.sort(sorted, new Comparator<CacheType>() {
-
             @Override
             public int compare(final CacheType left, final CacheType right) {
-                return left.getL10n().compareToIgnoreCase(right.getL10n());
+                return collator.compare(left.getL10n(), right.getL10n());
             }
         });
 
