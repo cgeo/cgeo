@@ -7,6 +7,7 @@
     · New: sort events of same date by time (if recognized from cache description)\n
     · New: show rudimentary details for geocaching.com.au swaggies\n
     · New: Weekday shown in event lists\n
+    · New: Filter for caches with offline logs\n
     \n
   </string>
 </resources>

@@ -325,6 +325,7 @@
     <string name="caches_filter_track">With Trackables</string>
     <string name="caches_filter_clear">Clear filters</string>
     <string name="caches_filter_modified">With modified coordinates</string>
+    <string name="caches_filter_offline_log">With offline log</string>
     <string name="caches_filter_origin">Origin</string>
     <string name="caches_filter_distance">Distance</string>
     <string name="caches_filter_personal_note">With personal note</string>
