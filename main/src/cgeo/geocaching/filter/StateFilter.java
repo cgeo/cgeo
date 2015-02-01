@@ -1,12 +1,9 @@
 package cgeo.geocaching.filter;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 
 import org.eclipse.jdt.annotation.NonNull;
-
-import android.content.res.Resources;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,16 +12,14 @@ import java.util.List;
 
 abstract class StateFilter extends AbstractFilter {
 
-    static final Resources res = CgeoApplication.getInstance().getResources();
-
-    protected StateFilter(@NonNull final String name) {
-        super(name);
+    protected StateFilter(final int nameResourceId) {
+        super(nameResourceId);
     }
 
     static class StateFoundFilter extends StateFilter {
 
         public StateFoundFilter() {
-            super(res.getString(R.string.cache_status_found));
+            super(R.string.cache_status_found);
         }
 
         @Override
@@ -37,7 +32,7 @@ abstract class StateFilter extends AbstractFilter {
     static class StateNotFoundFilter extends StateFilter {
 
         public StateNotFoundFilter() {
-            super(res.getString(R.string.cache_not_status_found));
+            super(R.string.cache_not_status_found);
         }
 
         @Override
@@ -49,7 +44,7 @@ abstract class StateFilter extends AbstractFilter {
 
     static class StateArchivedFilter extends StateFilter {
         public StateArchivedFilter() {
-            super(res.getString(R.string.cache_status_archived));
+            super(R.string.cache_status_archived);
         }
 
         @Override
@@ -60,7 +55,7 @@ abstract class StateFilter extends AbstractFilter {
 
     static class StateDisabledFilter extends StateFilter {
         public StateDisabledFilter() {
-            super(res.getString(R.string.cache_status_disabled));
+            super(R.string.cache_status_disabled);
         }
 
         @Override
@@ -71,7 +66,7 @@ abstract class StateFilter extends AbstractFilter {
 
     static class StatePremiumFilter extends StateFilter {
         public StatePremiumFilter() {
-            super(res.getString(R.string.cache_status_premium));
+            super(R.string.cache_status_premium);
         }
 
         @Override
@@ -82,7 +77,7 @@ abstract class StateFilter extends AbstractFilter {
 
     static class StateNonPremiumFilter extends StateFilter {
         public StateNonPremiumFilter() {
-            super(res.getString(R.string.cache_status_not_premium));
+            super(R.string.cache_status_not_premium);
         }
 
         @Override
@@ -93,7 +88,7 @@ abstract class StateFilter extends AbstractFilter {
 
     private static class StateOfflineLogFilter extends StateFilter {
         public StateOfflineLogFilter() {
-            super(res.getString(R.string.cache_status_offline_log));
+            super(R.string.cache_status_offline_log);
         }
 
         @Override
@@ -104,7 +99,7 @@ abstract class StateFilter extends AbstractFilter {
 
     static class StateStoredFilter extends StateFilter {
         public StateStoredFilter() {
-            super(res.getString(R.string.cache_status_stored));
+            super(R.string.cache_status_stored);
         }
 
         @Override
@@ -115,7 +110,7 @@ abstract class StateFilter extends AbstractFilter {
 
     static class StateNotStoredFilter extends StateFilter {
         public StateNotStoredFilter() {
-            super(res.getString(R.string.cache_status_not_stored));
+            super(R.string.cache_status_not_stored);
         }
 
         @Override

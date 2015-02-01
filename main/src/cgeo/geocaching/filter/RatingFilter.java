@@ -1,6 +1,5 @@
 package cgeo.geocaching.filter;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.gcvote.GCVote;
@@ -18,7 +17,7 @@ import java.util.List;
 public class RatingFilter extends AbstractFilter implements IFilterFactory {
 
     protected RatingFilter() {
-        super(CgeoApplication.getInstance().getString(R.string.caches_filter_rating));
+        super(R.string.caches_filter_rating);
     }
 
     @Override
