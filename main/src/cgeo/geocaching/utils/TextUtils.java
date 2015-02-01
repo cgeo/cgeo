@@ -8,6 +8,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.eclipse.jdt.annotation.Nullable;
 
 import java.nio.charset.Charset;
+import java.text.Collator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.CRC32;
@@ -182,5 +183,17 @@ public final class TextUtils {
         final CRC32 checksum = new CRC32();
         checksum.update(input.getBytes(CHARSET_UTF8));
         return checksum.getValue();
+    }
+
+    /**
+     * Build a Collator instance appropriate for comparing strings using the default locale while ignoring the casing.
+     *
+     * @return a collator
+     */
+    public static Collator getCollator() {
+        final Collator collator = Collator.getInstance();
+        collator.setDecomposition(Collator.CANONICAL_DECOMPOSITION);
+        collator.setStrength(Collator.TERTIARY);
+        return collator;
     }
 }
