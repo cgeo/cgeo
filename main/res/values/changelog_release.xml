@@ -5,6 +5,7 @@
     <b>Next release</b>\n
     · Fix: Crash exporting GPX for lab caches\n
     · Fix: Crash restoring non-existing database backup\n
+    · Fix: Bad sort order for filter names in some languages\n
     \n
     \n
     <b>2015.01.20:</b>\n
