@@ -13,11 +13,7 @@ import java.text.Collator;
  */
 class NameComparator extends AbstractCacheComparator {
 
-    private final Collator collator;
-
-    public NameComparator() {
-        collator = TextUtils.getCollator();
-    }
+    private final Collator collator = TextUtils.getCollator();
 
     @Override
     protected boolean canCompare(final Geocache cache) {
