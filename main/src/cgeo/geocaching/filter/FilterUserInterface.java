@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 
 import rx.functions.Action1;
 
@@ -14,6 +15,7 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.widget.ArrayAdapter;
 
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -62,11 +64,12 @@ public final class FilterUserInterface {
         register(R.string.caches_filter_rating, RatingFilter.class);
 
         // sort by localized names
+        final Collator collator = TextUtils.getCollator();
         Collections.sort(registry, new Comparator<FactoryEntry>() {
 
             @Override
             public int compare(final FactoryEntry lhs, final FactoryEntry rhs) {
-                return lhs.name.compareToIgnoreCase(rhs.name);
+                return collator.compare(lhs.name, rhs.name);
             }
         });
 
