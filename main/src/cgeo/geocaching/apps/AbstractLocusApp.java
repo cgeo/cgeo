@@ -147,18 +147,23 @@ public abstract class AbstractLocusApp extends AbstractApp {
         if (withWaypoints && cache.hasWaypoints()) {
             pg.waypoints = new ArrayList<>();
             for (final Waypoint waypoint : cache.getWaypoints()) {
-                if (waypoint == null || waypoint.getCoords() == null) {
+                if (waypoint == null) {
                     continue;
                 }
+
                 final PointGeocachingDataWaypoint wp = new PointGeocachingDataWaypoint();
-                wp.code = waypoint.getGeocode();
+                wp.code = waypoint.getLookup();
                 wp.name = waypoint.getName();
+                wp.description = waypoint.getNote();
                 final String locusWpId = toLocusWaypoint(waypoint.getWaypointType());
                 if (locusWpId != null) {
                     wp.type = locusWpId;
                 }
-                wp.lat = waypoint.getCoords().getLatitude();
-                wp.lon = waypoint.getCoords().getLongitude();
+
+                if (waypoint.getCoords() != null) {
+                    wp.lat = waypoint.getCoords().getLatitude();
+                    wp.lon = waypoint.getCoords().getLongitude();
+                }
                 pg.waypoints.add(wp);
             }
         }
@@ -275,5 +280,4 @@ public abstract class AbstractLocusApp extends AbstractApp {
                 return null;
         }
     }
-
 }
