@@ -190,7 +190,7 @@ public final class ActivityMixin {
     }
 
     public static void presentShowcase(final IAbstractActivity activity) {
-        if (VERSION.SDK_INT < 11) {
+        if (VERSION.SDK_INT < 14) {
             return;
         }
         final ShowcaseViewBuilder builder = activity.getShowcase();
