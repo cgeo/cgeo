@@ -62,8 +62,16 @@ import java.util.Map;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
 
+/**
+ * Client for the OpenCaching API (Okapi).
+ * 
+ * @see <a href="http://www.opencaching.de/okapi/introduction.html">Okapi overview</a>
+ *
+ */
 final class OkapiClient {
 
+    private static final String PARAMETER_LOGCOUNT_VALUE = "all";
+    private static final String PARAMETER_LOGCOUNT_KEY = "lpc";
     private static final char SEPARATOR = '|';
     private static final String SEPARATOR_STRING = Character.toString(SEPARATOR);
     private static final SynchronizedDateFormat LOG_DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ", TimeZone.getTimeZone("UTC"), Locale.US);
@@ -149,6 +157,7 @@ final class OkapiClient {
 
         params.add("fields", getFullFields(ocapiConn));
         params.add("attribution_append", "none");
+        params.add(PARAMETER_LOGCOUNT_KEY, PARAMETER_LOGCOUNT_VALUE);
 
         final JSONResult result = request(ocapiConn, OkapiService.SERVICE_CACHE, params);
 

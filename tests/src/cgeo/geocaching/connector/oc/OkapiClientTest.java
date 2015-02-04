@@ -30,7 +30,7 @@ public class OkapiClientTest extends CGeoTestCase {
 
     public static void testOCSearchMustWorkWithoutOAuthAccessTokens() {
         final String geoCode = "OC1234";
-        Geocache cache = OkapiClient.getCache(geoCode);
+        final Geocache cache = OkapiClient.getCache(geoCode);
         assertThat(cache).overridingErrorMessage("You must have a valid OKAPI key installed for running this test (but you do not need to set credentials in the app).").isNotNull();
         assertThat(cache.getName()).isEqualTo("Wupper-Schein");
     }
@@ -55,9 +55,16 @@ public class OkapiClientTest extends CGeoTestCase {
         final String geoCode = "OC6465";
 
         removeCacheCompletely(geoCode);
-        Geocache cache = OkapiClient.getCache(geoCode);
+        final Geocache cache = OkapiClient.getCache(geoCode);
         assertThat(cache).as("Cache from OKAPI").isNotNull();
         assertThat(cache.getLogCounts().get(LogType.WILL_ATTEND)).isGreaterThan(0);
+    }
+
+    public static void testGetAllLogs() {
+        final String geoCode = "OC10CB8";
+        final Geocache cache = OkapiClient.getCache(geoCode);
+        final int defaultLogCount = 10;
+        assertThat(cache.getLogs().size()).isGreaterThan(defaultLogCount);
     }
 
 }
