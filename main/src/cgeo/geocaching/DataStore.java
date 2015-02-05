@@ -39,7 +39,6 @@ import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
-import rx.util.async.Async;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -407,12 +406,12 @@ public class DataStore {
      */
     public static void moveDatabase(final Activity fromActivity) {
         final ProgressDialog dialog = ProgressDialog.show(fromActivity, fromActivity.getString(R.string.init_dbmove_dbmove), fromActivity.getString(R.string.init_dbmove_running), true, false);
-        AppObservable.bindActivity(fromActivity, Async.fromCallable(new Func0<Boolean>() {
+        AppObservable.bindActivity(fromActivity, Observable.defer(new Func0<Observable<Boolean>>() {
             @Override
-            public Boolean call() {
+            public Observable<Boolean> call() {
                 if (!LocalStorage.isExternalStorageAvailable()) {
                     Log.w("Database was not moved: external memory not available");
-                    return false;
+                    return Observable.just(false);
                 }
                 closeDb();
 
@@ -421,7 +420,7 @@ public class DataStore {
                 if (!LocalStorage.copy(source, target)) {
                     Log.e("Database could not be moved to " + target);
                     init();
-                    return false;
+                    return Observable.just(false);
                 }
                 if (!FileUtils.delete(source)) {
                     Log.e("Original database could not be deleted during move");
@@ -430,7 +429,7 @@ public class DataStore {
                 Log.i("Database was moved to " + target);
 
                 init();
-                return true;
+                return Observable.just(true);
             }
         })).subscribeOn(Schedulers.io()).subscribe(new Action1<Boolean>() {
             @Override

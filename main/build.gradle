@@ -29,7 +29,6 @@ gradle connectedCheck
 def AAVersion = '3.2'
 def RXJavaVersion = '1.0.5'
 def RXAndroidVersion = '0.24.0'
-def RXJavaAsyncUtilVersion = '0.21.0'
 def JacksonCoreVersion = '2.4.4'
 def JacksonDatabindVersion = '2.4.4'
 def JacksonAnnotationsVersion = '2.4.4'
@@ -168,7 +167,6 @@ dependencies {
 
     compile "io.reactivex:rxjava:$RXJavaVersion"
     compile "io.reactivex:rxandroid:$RXAndroidVersion"
-    compile "io.reactivex:rxjava-async-util:$RXJavaAsyncUtilVersion"
 
     compile "com.fasterxml.jackson.core:jackson-core:$JacksonCoreVersion"
     compile "com.fasterxml.jackson.core:jackson-databind:$JacksonDatabindVersion"

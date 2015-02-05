@@ -16,9 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
 import rx.Observable;
-import rx.functions.Action0;
 import rx.functions.Func0;
-import rx.util.async.Async;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -86,9 +84,9 @@ public final class StaticMapsProvider {
         final int requestWidth = Math.min(width / scale, GOOGLE_MAPS_MAX_SIZE);
         final int requestHeight = (aspectRatio > 1) ? Math.round(requestWidth / aspectRatio) : requestWidth;
         final int requestZoom = Math.min((scale == 2) ? zoom + 1 : zoom, GOOGLE_MAX_ZOOM);
-        return checkDownloadPermission(Async.fromAction(new Action0() {
+        return checkDownloadPermission(Observable.defer(new Func0<Observable<String>>() {
             @Override
-            public void call() {
+            public Observable<String> call() {
                 final Parameters params = new Parameters(
                         "center", latlonMap,
                         "zoom", String.valueOf(requestZoom),
@@ -104,7 +102,7 @@ public final class StaticMapsProvider {
 
                 if (httpResponse == null) {
                     Log.e("StaticMapsProvider.downloadMap: httpResponse is null");
-                    return;
+                    return Observable.just(prefix);
                 }
                 final int statusCode = httpResponse.getStatusLine().getStatusCode();
                 if (statusCode != 200) {
@@ -112,7 +110,7 @@ public final class StaticMapsProvider {
                     if (statusCode == 403) {
                         last403 = System.currentTimeMillis();
                     }
-                    return;
+                    return Observable.just(prefix);
                 }
                 final File file = getMapFile(geocode, prefix, true);
                 if (LocalStorage.saveEntityToFile(httpResponse, file)) {
@@ -122,8 +120,9 @@ public final class StaticMapsProvider {
                         FileUtils.deleteIgnoringFailure(file);
                     }
                 }
+                return Observable.just(prefix);
             }
-        }, prefix, RxUtils.networkScheduler));
+        }).subscribeOn(RxUtils.networkScheduler));
     }
 
     public static Observable<String> downloadMaps(final Geocache cache) {

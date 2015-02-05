@@ -16,7 +16,6 @@ import rx.observers.Subscribers;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 import rx.subscriptions.Subscriptions;
-import rx.util.async.Async;
 
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -131,20 +130,26 @@ public class RxUtils {
     }
 
     public static <T> void andThenOnUi(final Scheduler scheduler, final Func0<T> background, final Action1<T> foreground) {
-        Async.fromCallable(background, scheduler).observeOn(AndroidSchedulers.mainThread()).subscribe(foreground);
+        scheduler.createWorker().schedule(new Action0() {
+            @Override
+            public void call() {
+                final T value = background.call();
+                AndroidSchedulers.mainThread().createWorker().schedule(new Action0() {
+                    @Override
+                    public void call() {
+                        foreground.call(value);
+                    }
+                });
+            }
+        });
     }
 
     public static void andThenOnUi(final Scheduler scheduler, final Action0 background, final Action0 foreground) {
-        andThenOnUi(scheduler, new Func0<Void>() {
+        scheduler.createWorker().schedule(new Action0() {
             @Override
-            public Void call() {
+            public void call() {
                 background.call();
-                return null;
-            }
-        }, new Action1<Void>() {
-            @Override
-            public void call(final Void ignored) {
-                foreground.call();
+                AndroidSchedulers.mainThread().createWorker().schedule(foreground);
             }
         });
     }

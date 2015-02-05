@@ -15,7 +15,6 @@ import org.eclipse.jdt.annotation.NonNull;
 
 import rx.Observable;
 import rx.functions.Func0;
-import rx.util.async.Async;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -241,12 +240,12 @@ public class Tile {
 
     static Observable<String> requestMapInfo(final String url, final Parameters params, final String referer) {
         final HttpResponse response = Network.getRequest(url, params, new Parameters("Referer", referer));
-        return Async.start(new Func0<String>() {
+        return Observable.defer(new Func0<Observable<String>>() {
             @Override
-            public String call() {
-                return Network.getResponseData(response);
+            public Observable<String> call() {
+                return Observable.just(Network.getResponseData(response));
             }
-        }, RxUtils.networkScheduler);
+        }).subscribeOn(RxUtils.networkScheduler);
     }
 
     /** Request .png image for a tile. Return as soon as the request has been made, before the answer has been
@@ -256,17 +255,17 @@ public class Tile {
      */
     static Observable<Bitmap> requestMapTile(final Parameters params) {
         final HttpResponse response = Network.getRequest(GCConstants.URL_MAP_TILE, params, new Parameters("Referer", GCConstants.URL_LIVE_MAP));
-        return Async.start(new Func0<Bitmap>() {
+        return Observable.defer(new Func0<Observable<Bitmap>>() {
             @Override
-            public Bitmap call() {
+            public Observable<Bitmap> call() {
                 try {
-                    return response != null ? BitmapFactory.decodeStream(response.getEntity().getContent()) : null;
+                    return Observable.just(response != null ? BitmapFactory.decodeStream(response.getEntity().getContent()) : null);
                 } catch (final IOException e) {
                     Log.e("Tile.requestMapTile() ", e);
-                    return null;
+                    return Observable.just(null);
                 }
             }
-        }, RxUtils.computationScheduler);
+        }).subscribeOn(RxUtils.computationScheduler);
     }
 
     public boolean containsPoint(final @NonNull ICoordinates point) {

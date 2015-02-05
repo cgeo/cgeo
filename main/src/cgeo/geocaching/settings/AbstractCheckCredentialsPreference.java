@@ -14,7 +14,6 @@ import rx.Observable;
 import rx.android.app.AppObservable;
 import rx.functions.Action1;
 import rx.functions.Func0;
-import rx.util.async.Async;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -74,10 +73,10 @@ public abstract class AbstractCheckCredentialsPreference extends AbstractClickab
             loginDialog.setCancelable(false);
             Cookies.clearCookies();
 
-            AppObservable.bindActivity(settingsActivity, Async.start(new Func0<ImmutablePair<StatusCode, Observable<Drawable>>>() {
+            AppObservable.bindActivity(settingsActivity, Observable.defer(new Func0<Observable<ImmutablePair<StatusCode, Observable<Drawable>>>>() {
                 @Override
-                public ImmutablePair<StatusCode, Observable<Drawable>> call() {
-                    return login();
+                public Observable<ImmutablePair<StatusCode, Observable<Drawable>>> call() {
+                    return Observable.just(login());
                 }
             })).subscribeOn(RxUtils.networkScheduler).subscribe(new Action1<ImmutablePair<StatusCode, Observable<Drawable>>>() {
                 @Override

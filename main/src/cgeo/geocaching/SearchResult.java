@@ -19,7 +19,6 @@ import rx.Observable;
 import rx.functions.Func0;
 import rx.functions.Func1;
 import rx.functions.Func2;
-import rx.util.async.Async;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -319,12 +318,12 @@ public class SearchResult implements Parcelable {
         return Observable.from(connectors).flatMap(new Func1<C, Observable<SearchResult>>() {
             @Override
             public Observable<SearchResult> call(final C connector) {
-                return connector.isActive() ? Async.start(new Func0<SearchResult>() {
+                return connector.isActive() ? Observable.defer(new Func0<Observable<SearchResult>>() {
                     @Override
-                    public SearchResult call() {
-                        return func.call(connector);
+                    public Observable<SearchResult> call() {
+                        return Observable.just(func.call(connector));
                     }
-                }, RxUtils.networkScheduler) : Observable.<SearchResult>empty();
+                }).subscribeOn(RxUtils.networkScheduler) : Observable.<SearchResult>empty();
             }
         }).reduce(new SearchResult(), new Func2<SearchResult, SearchResult, SearchResult>() {
             @Override

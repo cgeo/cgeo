@@ -3,7 +3,6 @@
 
 RXJAVA=1.0.5
 RXANDROID=0.24.0
-RXJAVAASYNCUTIL=0.21.0
 JACKSONCORE=2.4.4
 JACKSONDATABIND=2.4.4
 JACKSONANNOTATIONS=2.4.4
@@ -39,8 +38,6 @@ updatelib io/reactivex rxjava $RXJAVA
 fixgradle RXJavaVersion $RXJAVA
 updatelib io/reactivex rxandroid $RXANDROID
 fixgradle RXAndroidVersion $RXANDROID
-updatelib io/reactivex rxjava-async-util $RXJAVAASYNCUTIL
-fixgradle RXJavaAsyncUtilVersion $RXJAVAASYNCUTIL
 
 updatelib com/fasterxml/jackson/core jackson-core $JACKSONCORE
 fixgradle JacksonCoreVersion $JACKSONCORE

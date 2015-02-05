@@ -57,7 +57,6 @@ import rx.functions.Action1;
 import rx.functions.Func0;
 import rx.functions.Func2;
 import rx.schedulers.Schedulers;
-import rx.util.async.Async;
 
 import android.net.Uri;
 import android.text.Html;
@@ -304,12 +303,13 @@ public abstract class GCParser {
 
         if (!cids.isEmpty() && (Settings.isGCPremiumMember() || showCaptcha) && ((recaptchaReceiver == null || StringUtils.isBlank(recaptchaReceiver.getChallenge())) || StringUtils.isNotBlank(recaptchaText))) {
             Log.i("Trying to get .loc for " + cids.size() + " caches");
-            final Observable<Set<Geocache>> storedCaches = Async.start(new Func0<Set<Geocache>>() {
+            final Observable<Set<Geocache>> storedCaches = Observable.defer(new Func0<Observable<Set<Geocache>>>() {
                 @Override
-                public Set<Geocache> call() {
-                    return DataStore.loadCaches(Geocache.getGeocodes(caches), LoadFlags.LOAD_CACHE_OR_DB);
+                public Observable<Set<Geocache>> call() {
+                    return Observable.just(DataStore.loadCaches(Geocache.getGeocodes(caches), LoadFlags.LOAD_CACHE_OR_DB));
                 }
-            }, Schedulers.io());
+            }).subscribeOn(Schedulers.io()).cache();
+            storedCaches.subscribe();  // Force asynchronous start of database loading
 
             try {
                 // get coordinates for parsed caches
@@ -979,22 +979,22 @@ public abstract class GCParser {
      * Observable that fetches a list of pocket queries. Returns a single element (which may be an empty list).
      * Executes on the network scheduler.
      */
-    public static final Observable<List<PocketQueryList>> searchPocketQueryListObservable = Async.fromCallable(new Func0<List<PocketQueryList>>() {
+    public static final Observable<List<PocketQueryList>> searchPocketQueryListObservable = Observable.defer(new Func0<Observable<List<PocketQueryList>>>() {
         @Override
-        public List<PocketQueryList> call() {
+        public Observable<List<PocketQueryList>> call() {
             final Parameters params = new Parameters();
 
             final String page = GCLogin.getInstance().getRequestLogged("http://www.geocaching.com/pocket/default.aspx", params);
 
             if (StringUtils.isBlank(page)) {
                 Log.e("GCParser.searchPocketQueryList: No data from server");
-                return Collections.emptyList();
+                return Observable.just(Collections.<PocketQueryList>emptyList());
             }
 
             final String subPage = StringUtils.substringAfter(page, "class=\"PocketQueryListTable");
             if (StringUtils.isEmpty(subPage)) {
                 Log.e("GCParser.searchPocketQueryList: class \"PocketQueryListTable\" not found on page");
-                return Collections.emptyList();
+                return Observable.just(Collections.<PocketQueryList>emptyList());
             }
 
             final List<PocketQueryList> list = new ArrayList<>();
@@ -1024,9 +1024,9 @@ public abstract class GCParser {
                 }
             });
 
-            return list;
+            return Observable.just(list);
         }
-    }, RxUtils.networkScheduler);
+    }).subscribeOn(RxUtils.networkScheduler);
 
     public static ImmutablePair<StatusCode, String> postLog(final String geocode, final String cacheid, final String[] viewstates,
             final LogType logType, final int year, final int month, final int day,
