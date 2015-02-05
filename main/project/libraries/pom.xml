@@ -30,9 +30,8 @@
 		<JacksonCoreVersion>2.4.4</JacksonCoreVersion>
 		<JacksonDatabindVersion>2.4.4</JacksonDatabindVersion>
 
-		<RXAndroidVersion>0.23.0</RXAndroidVersion>
-		<RXJavaVersion>1.0.3</RXJavaVersion>
-		<RXJavaAsyncUtilVersion>0.21.0</RXJavaAsyncUtilVersion>
+		<RXAndroidVersion>0.24.0</RXAndroidVersion>
+		<RXJavaVersion>1.0.5</RXJavaVersion>
 	</properties>
 
 	<dependencies>
@@ -95,11 +94,6 @@
 			<groupId>io.reactivex</groupId>
 			<artifactId>rxjava</artifactId>
 			<version>${RXJavaVersion}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.reactivex</groupId>
-			<artifactId>rxjava-async-util</artifactId>
-			<version>${RXJavaAsyncUtilVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.reactivex</groupId>
