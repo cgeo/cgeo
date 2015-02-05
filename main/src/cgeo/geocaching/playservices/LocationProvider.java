@@ -102,12 +102,12 @@ public class LocationProvider implements GoogleApiClient.ConnectionCallbacks, Go
         // no less precise than 20 meters.
         final Observable<GeoData> untilPreciseEnoughObservable =
                 lowPowerObservable.mergeWith(highPowerObservable.delaySubscription(6, TimeUnit.SECONDS))
-                        .lift(RxUtils.operatorTakeUntil(new Func1<GeoData, Boolean>() {
+                        .takeUntil(new Func1<GeoData, Boolean>() {
                             @Override
                             public Boolean call(final GeoData geoData) {
                                 return geoData.getAccuracy() <= 20;
                             }
-                        }));
+                        });
 
         // After sending the last known location, try to get a precise location then use the low-power mode. If no
         // location information is given for 25 seconds (if the network location is turned off for example), get

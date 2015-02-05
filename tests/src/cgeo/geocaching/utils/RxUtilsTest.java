@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import rx.Observable;
 import rx.Subscription;
-import rx.functions.Func1;
 import rx.subjects.PublishSubject;
 import rx.subjects.ReplaySubject;
 
@@ -19,16 +18,6 @@ public class RxUtilsTest extends AndroidTestCase {
             range.onNext(i);
         }
         range.onCompleted();
-    }
-
-    public static void testTakeUntil() {
-        final Observable<Integer> observable = range.lift(RxUtils.operatorTakeUntil(new Func1<Integer, Boolean>() {
-            @Override
-            public Boolean call(final Integer value) {
-                return value > 6;
-            }
-        }));
-        assertThat(observable.toList().toBlocking().single().toArray()).isEqualTo(new int[]{1, 2, 3, 4, 5, 6, 7});
     }
 
     public static void testRememberLast() {

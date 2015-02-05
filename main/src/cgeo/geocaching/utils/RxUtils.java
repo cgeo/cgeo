@@ -2,7 +2,6 @@ package cgeo.geocaching.utils;
 
 import rx.Observable;
 import rx.Observable.OnSubscribe;
-import rx.Observable.Operator;
 import rx.Scheduler;
 import rx.Scheduler.Worker;
 import rx.Subscriber;
@@ -113,49 +112,6 @@ public class RxUtils {
         abstract protected void onStart();
 
         abstract protected void onStop();
-    }
-
-    public static <T> Operator<T, T> operatorTakeUntil(final Func1<? super T, Boolean> predicate) {
-        return new Operator<T, T>() {
-            @Override
-            public Subscriber<? super T> call(final Subscriber<? super T> subscriber) {
-                return new Subscriber<T>(subscriber) {
-                    private boolean done = false;
-
-                    @Override
-                    public void onCompleted() {
-                        if (!done) {
-                            subscriber.onCompleted();
-                        }
-                    }
-
-                    @Override
-                    public void onError(final Throwable throwable) {
-                        if (!done) {
-                            subscriber.onError(throwable);
-                        }
-                    }
-
-                    @Override
-                    public void onNext(final T value) {
-                        subscriber.onNext(value);
-                        boolean shouldEnd = false;
-                        try {
-                            shouldEnd = predicate.call(value);
-                        } catch (final Throwable e) {
-                            done = true;
-                            subscriber.onError(e);
-                            unsubscribe();
-                        }
-                        if (shouldEnd) {
-                            done = true;
-                            subscriber.onCompleted();
-                            unsubscribe();
-                        }
-                    }
-                };
-            }
-        };
     }
 
     public static<T> Observable<T> rememberLast(final Observable<T> observable, final T initialValue) {
