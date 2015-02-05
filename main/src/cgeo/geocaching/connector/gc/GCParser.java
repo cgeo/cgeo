@@ -64,6 +64,7 @@ import android.text.Html;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.Collator;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -1016,11 +1017,12 @@ public abstract class GCParser {
             }
 
             // just in case, lets sort the resulting list
+            final Collator collator = TextUtils.getCollator();
             Collections.sort(list, new Comparator<PocketQueryList>() {
 
                 @Override
                 public int compare(final PocketQueryList left, final PocketQueryList right) {
-                    return String.CASE_INSENSITIVE_ORDER.compare(left.getName(), right.getName());
+                    return collator.compare(left.getName(), right.getName());
                 }
             });
 
