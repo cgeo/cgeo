@@ -14,6 +14,8 @@ import rx.Observable;
 import android.location.Address;
 import android.location.Geocoder;
 
+import java.util.Locale;
+
 public class GeocoderTest extends CGeoTestCase {
 
     private static final String TEST_ADDRESS = "46 rue Barrault, Paris, France";
@@ -23,13 +25,19 @@ public class GeocoderTest extends CGeoTestCase {
     private static final Offset<Double> TEST_OFFSET = Offset.offset(0.00050);
 
     public static void testAndroidGeocoder() {
-        // Some emulators don't have access to Google Android geocoder
-        if (Geocoder.isPresent()) {
-            final AndroidGeocoder geocoder = new AndroidGeocoder(CgeoApplication.getInstance());
-            testGeocoder(geocoder.getFromLocationName(TEST_ADDRESS), "Android", true);
-            testGeocoder(geocoder.getFromLocation(TEST_COORDS), "Android reverse", true);
-        } else {
-            Log.i("not testing absent Android geocoder");
+        final Locale locale = Locale.getDefault();
+        try {
+            Locale.setDefault(Locale.US);
+            // Some emulators don't have access to Google Android geocoder
+            if (Geocoder.isPresent()) {
+                final AndroidGeocoder geocoder = new AndroidGeocoder(CgeoApplication.getInstance());
+                testGeocoder(geocoder.getFromLocationName(TEST_ADDRESS), "Android", true);
+                testGeocoder(geocoder.getFromLocation(TEST_COORDS), "Android reverse", true);
+            } else {
+                Log.i("not testing absent Android geocoder");
+            }
+        } finally {
+            Locale.setDefault(locale);
         }
     }
 
@@ -38,8 +46,14 @@ public class GeocoderTest extends CGeoTestCase {
     }
 
     public static void testMapQuestGeocoder() {
-        testGeocoder(MapQuestGeocoder.getFromLocationName(TEST_ADDRESS), "MapQuest", true);
-        testGeocoder(MapQuestGeocoder.getFromLocation(TEST_COORDS), "MapQuest reverse", true);
+        final Locale locale = Locale.getDefault();
+        try {
+            Locale.setDefault(Locale.US);
+            testGeocoder(MapQuestGeocoder.getFromLocationName(TEST_ADDRESS), "MapQuest", true);
+            testGeocoder(MapQuestGeocoder.getFromLocation(TEST_COORDS), "MapQuest reverse", true);
+        } finally {
+            Locale.setDefault(locale);
+        }
     }
 
     public static void testGeocoder(final Observable<Address> addressObservable, final String geocoder, final boolean withAddress) {
@@ -47,7 +61,7 @@ public class GeocoderTest extends CGeoTestCase {
         assertThat(address.getLatitude()).as(describe("latitude", geocoder)).isCloseTo(TEST_LATITUDE, TEST_OFFSET);
         assertThat(address.getLongitude()).as(describe("longitude", geocoder)).isCloseTo(TEST_LONGITUDE, TEST_OFFSET);
         if (withAddress) {
-            assertThat(StringUtils.lowerCase(address.getAddressLine(0))).as(describe("street address", geocoder)).startsWith("46 rue barrault");
+            assertThat(StringUtils.lowerCase(address.getAddressLine(0))).as(describe("street address", geocoder)).contains("rue barrault");
             assertThat(address.getLocality()).as(describe("locality", geocoder)).isEqualTo("Paris");
             assertThat(address.getCountryCode()).as(describe("country code", geocoder)).isEqualTo("FR");
             // don't assert on country name, as this can be localized, e.g. with the mapquest geocoder
