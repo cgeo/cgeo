@@ -1,5 +1,7 @@
 package cgeo.geocaching.apps.cachelist;
 
+import cgeo.geocaching.ui.AbstractMenuActionProvider;
+
 import android.content.Context;
 import android.support.v4.view.ActionProvider;
 import android.support.v4.view.MenuItemCompat;
@@ -7,11 +9,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.SubMenu;
-import android.view.View;
 
 import java.util.List;
 
-public class ListNavigationSelectionActionProvider extends ActionProvider {
+public class ListNavigationSelectionActionProvider extends AbstractMenuActionProvider {
 
     public static interface Callback {
         void onListNavigationSelected(final CacheListApp app);
@@ -21,17 +22,6 @@ public class ListNavigationSelectionActionProvider extends ActionProvider {
 
     public ListNavigationSelectionActionProvider(final Context context) {
         super(context);
-    }
-
-    @Override
-    public boolean hasSubMenu() {
-        return true;
-    }
-
-    @Override
-    public View onCreateActionView() {
-        // must return null, otherwise the menu will not work
-        return null;
     }
 
     public void setCallback(final Callback callback) {
