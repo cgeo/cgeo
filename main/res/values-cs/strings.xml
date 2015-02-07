@@ -240,7 +240,7 @@
   <plurals name="caches_eta_mins">
     <item quantity="one">%d minuta</item>
     <item quantity="few">%d minuty</item>
-    <item quantity="other">%d minuty</item>
+    <item quantity="other">%d minut</item>
   </plurals>
   <string name="caches_store_offline">Uložit pro offline</string>
   <string name="caches_store_selected">Uložit vybrané</string>
@@ -563,6 +563,11 @@
   <string name="auth_ocro">opencaching.ro</string>
   <string name="auth_ocuk">opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:geo je nyní autorizováno pro interakce s %s.</string>
+  <plurals name="cache_counts">
+    <item quantity="one">Jedna keš</item>
+    <item quantity="few">%1$d keše</item>
+    <item quantity="other">%1$d keší</item>
+  </plurals>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Obnovit</string>
   <string name="cache_offline_drop">Smazat</string>
@@ -1144,12 +1149,42 @@
   <string name="tts_stopped">Řeč ukončena</string>
   <string name="err_tts_lang_not_supported">Převod textu na řeč není pro tento jazyk k dispozici.</string>
   <string name="tts_one_kilometer">jeden kilometr</string>
+  <plurals name="tts_kilometers">
+    <item quantity="one">%s kilometr</item>
+    <item quantity="few">%s kilometry</item>
+    <item quantity="other">%s kilometrů</item>
+  </plurals>
   <string name="tts_one_meter">jeden metr</string>
+  <plurals name="tts_meters">
+    <item quantity="one">%s metr</item>
+    <item quantity="few">%s metry</item>
+    <item quantity="other">%s metrů</item>
+  </plurals>
   <string name="tts_one_mile">jedna míle</string>
+  <plurals name="tts_miles">
+    <item quantity="one">%s míle</item>
+    <item quantity="few">%s míle</item>
+    <item quantity="other">%s mil</item>
+  </plurals>
   <string name="tts_one_foot">jedna stopa</string>
+  <plurals name="tts_feet">
+    <item quantity="one">%s stopa</item>
+    <item quantity="few">%s stopy</item>
+    <item quantity="other">%s stop</item>
+  </plurals>
   <string name="tts_one_oclock">jedna hodina</string>
   <string name="tts_oclock">%s hodin</string>
   <string name="clipboard_copy_ok">Zkopírováno do schránky</string>
+  <plurals name="days_ago">
+    <item quantity="one">včera</item>
+    <item quantity="few">před %d dny</item>
+    <item quantity="other">před %d dny</item>
+  </plurals>
+  <plurals name="favorite_points">
+    <item quantity="one">%s oblíbená</item>
+    <item quantity="few">%s oblíbené</item>
+    <item quantity="other">%s oblíbených</item>
+  </plurals>
   <string name="more_than_percent_favorite_points">&gt; %d%% oblíbených položek</string>
   <string name="cgeo_shortcut">c:geo zástupce</string>
   <string name="create_shortcut">Vytvořit zástupce</string>
