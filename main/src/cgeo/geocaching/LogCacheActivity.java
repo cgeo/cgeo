@@ -618,6 +618,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             Dialogs.message(this, R.string.log_post_not_possible);
             return;
         }
+        if (DateUtils.isFuture(date)) {
+            Dialogs.message(this, R.string.log_date_future_not_allowed);
+            return;
+        }
         if (typeSelected.mustConfirmLog()) {
             Dialogs.confirm(this, R.string.confirm_log_title, res.getString(R.string.confirm_log_message, typeSelected.getL10n()), new OnClickListener() {
 

@@ -91,6 +91,7 @@
     <string name="log_saving_and_uploading">Sending log and uploading image…</string>
     <string name="log_clear">Clear</string>
     <string name="log_post_not_possible">Loading Log Page…</string>
+    <string name="log_date_future_not_allowed">Future log dates are not allowed.</string>
     <string name="log_add">Add</string>
     <string name="log_repeat">Repeat last log</string>
     <string name="log_no_rating">No rating</string>

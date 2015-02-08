@@ -32,7 +32,7 @@ public class DateUtilsTest extends TestCase {
         assertPastEvent(start, true);
     }
 
-    private static void assertPastEvent(final Calendar start, boolean expectedPast) {
+    private static void assertPastEvent(final Calendar start, final boolean expectedPast) {
         final Geocache cache = new Geocache();
         cache.setType(CacheType.EVENT);
 
@@ -40,4 +40,14 @@ public class DateUtilsTest extends TestCase {
         assertThat(DateUtils.isPastEvent(cache)).isEqualTo(expectedPast);
     }
 
+    public static void testIsFuture() {
+        final Calendar date = Calendar.getInstance();
+        assertThat(DateUtils.isFuture(date)).isFalse();
+
+        date.add(Calendar.DAY_OF_MONTH, 1);
+        assertThat(DateUtils.isFuture(date)).isFalse();
+
+        date.add(Calendar.DAY_OF_MONTH, 1);
+        assertThat(DateUtils.isFuture(date)).isTrue();
+    }
 }
