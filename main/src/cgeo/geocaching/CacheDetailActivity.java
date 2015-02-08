@@ -306,6 +306,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 }
                 requireGeodata = getPage(position) == Page.DETAILS;
                 startOrStopGeoDataListener();
+
+                // cancel contextual actions on page change
+                if (currentActionMode != null) {
+                    currentActionMode.finish();
+                }
             }
         });
         requireGeodata = pageToOpen == 1;
@@ -1288,6 +1293,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     });
 
+    /**
+     * Reflect the (contextual) action mode of the action bar.
+     */
+    protected ActionMode currentActionMode;
+
     protected class DescriptionViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
         @InjectView(R.id.personalnote) protected TextView personalNoteView;
@@ -1788,7 +1798,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             @Override
             public boolean onLongClick(final View v) {
-                startSupportActionMode(new ActionMode.Callback() {
+                currentActionMode = startSupportActionMode(new ActionMode.Callback() {
 
                     @Override
                     public boolean onPrepareActionMode(final ActionMode actionMode, final Menu menu) {
@@ -1837,7 +1847,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
                     @Override
                     public void onDestroyActionMode(final ActionMode actionMode) {
-                        // do nothing
+                        currentActionMode = null;
                     }
 
                     @Override
