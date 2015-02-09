@@ -46,6 +46,9 @@
         <option name="JD_KEEP_EMPTY_RETURN" value="false" />
         <option name="JD_PARAM_DESCRIPTION_ON_NEW_LINE" value="true" />
         <option name="WRAP_COMMENTS" value="true" />
+        <JavaCodeStyleSettings>
+          <option name="DO_NOT_WRAP_AFTER_SINGLE_ANNOTATION" value="true" />
+        </JavaCodeStyleSettings>
         <XML>
           <option name="XML_KEEP_LINE_BREAKS" value="false" />
           <option name="XML_ALIGN_ATTRIBUTES" value="false" />
@@ -63,6 +66,7 @@
           <option name="DOWHILE_BRACE_FORCE" value="3" />
           <option name="WHILE_BRACE_FORCE" value="3" />
           <option name="FOR_BRACE_FORCE" value="3" />
+          <option name="FIELD_ANNOTATION_WRAP" value="1" />
         </codeStyleSettings>
         <codeStyleSettings language="XML">
           <indentOptions>
