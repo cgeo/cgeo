@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps.mapsforge.v024;
 
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.PositionAndScaleOverlay;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
@@ -17,15 +18,15 @@ import java.util.concurrent.locks.ReentrantLock;
 public class MapsforgeOverlay extends Overlay implements OverlayImpl {
 
     private PositionAndScaleOverlay overlayBase = null;
-    private Lock lock = new ReentrantLock();
+    private final Lock lock = new ReentrantLock();
 
-    public MapsforgeOverlay() {
-        overlayBase = new PositionAndScaleOverlay(this);
+    public MapsforgeOverlay(final MapViewImpl mapView, final Geopoint coords, final String geocode) {
+        overlayBase = new PositionAndScaleOverlay(this, mapView, coords, geocode);
     }
 
     @Override
-    protected void drawOverlayBitmap(Canvas canvas, Point drawPosition,
-            Projection projection, byte drawZoomLevel) {
+    protected void drawOverlayBitmap(final Canvas canvas, final Point drawPosition,
+            final Projection projection, final byte drawZoomLevel) {
 
         if (overlayBase != null) {
             overlayBase.drawOverlayBitmap(canvas, drawPosition, new MapsforgeMapProjection(projection), drawZoomLevel);

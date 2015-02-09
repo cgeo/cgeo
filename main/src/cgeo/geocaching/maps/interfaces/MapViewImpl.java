@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps.interfaces;
 
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.CachesOverlay;
 import cgeo.geocaching.maps.PositionAndScaleOverlay;
@@ -46,7 +47,7 @@ public interface MapViewImpl {
 
     CachesOverlay createAddMapOverlay(Context context, Drawable drawable);
 
-    PositionAndScaleOverlay createAddPositionAndScaleOverlay();
+    PositionAndScaleOverlay createAddPositionAndScaleOverlay(final Geopoint coords, final String geocode);
 
     void setMapSource();
 

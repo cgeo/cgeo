@@ -449,10 +449,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         mapView.clearOverlays();
 
         overlayCaches = mapView.createAddMapOverlay(mapView.getContext(), getResources().getDrawable(R.drawable.marker));
-        overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay();
+
+
+        overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay(coordsIntent, geocodeIntent);
         if (trailHistory != null) {
             overlayPositionAndScale.setHistory(trailHistory);
         }
+
 
         mapView.repaintRequired(null);
 
@@ -1000,6 +1003,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                         }
 
                         if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
+
                             map.overlayPositionAndScale.setCoordinates(currentLocation);
                             map.overlayPositionAndScale.setHeading(currentHeading);
                             map.mapView.repaintRequired(map.overlayPositionAndScale);
