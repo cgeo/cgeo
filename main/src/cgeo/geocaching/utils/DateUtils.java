@@ -39,9 +39,9 @@ public final class DateUtils {
     /**
      * Return whether the given date is *more* than 1 day away. We allow 1 day to be "present time" to compensate for
      * potential timezone issues.
-     * 
+     *
      * @param date
-     * @return
+     *            the date
      */
     public static boolean isFuture(final Calendar date) {
         return daysSince(date) < -1;
