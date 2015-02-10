@@ -3,6 +3,7 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
+    · New: distance and direction shown on map\n
     · New: confirmation on backup/restore\n
     · New: sort events of same date by time (if recognized from cache description)\n
     · New: show rudimentary details for geocaching.com.au swaggies\n
