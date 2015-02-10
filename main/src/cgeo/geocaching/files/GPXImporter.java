@@ -95,8 +95,6 @@ public class GPXImporter {
      *
      * @param uri
      *            URI of the file to import
-     * @param mimeType
-     * @param pathName
      */
     public void importGPX(final Uri uri, final @Nullable String mimeType, final @Nullable String pathName) {
         final ContentResolver contentResolver = fromActivity.getContentResolver();

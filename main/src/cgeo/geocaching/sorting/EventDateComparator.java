@@ -17,9 +17,6 @@ public class EventDateComparator extends DateComparator {
     /**
      * copy of {@link Integer#compare(int, int)}, as that is not available on lower API levels
      *
-     * @param left
-     * @param right
-     * @return
      */
     private static int compare(final int left, final int right) {
         return left < right ? -1 : (left == right ? 0 : 1);

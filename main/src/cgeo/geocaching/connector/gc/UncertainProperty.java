@@ -4,7 +4,6 @@ package cgeo.geocaching.connector.gc;
 /**
  * Property with certainty. When merging properties, the one with higher certainty wins.
  * 
- * @param <T>
  */
 public class UncertainProperty<T> {
 

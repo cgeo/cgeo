@@ -45,8 +45,6 @@ public class MatcherWrapper {
      * <p>
      * Do not change this method, even if Findbugs and other tools will report a violation for that line!
      *
-     * @param input
-     * @return
      */
     @SuppressFBWarnings("DM_STRING_CTOR")
     private static String newString(final String input) {

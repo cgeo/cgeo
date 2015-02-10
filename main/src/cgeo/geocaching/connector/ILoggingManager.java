@@ -16,13 +16,8 @@ public interface ILoggingManager {
     /**
      * Post a log for a cache online
      *
-     * @param logType
-     * @param date
-     * @param log
      * @param logPassword
      *            optional, maybe null
-     * @param trackableLogs
-     * @return
      */
     @NonNull
     LogResult postLog(@NonNull LogType logType,

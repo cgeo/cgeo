@@ -511,7 +511,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     /**
      * Set the zoom of the map. The zoom is restricted to a certain minimum in case of live map.
      *
-     * @param zoom
      */
     private void setZoom(final int zoom) {
         mapView.getMapController().setZoom(isLiveEnabled ? Math.max(zoom, MIN_LIVEMAP_ZOOM) : zoom);
@@ -1120,7 +1119,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
     /**
      * get if map is loading something
      *
-     * @return
      */
     public boolean isLoading() {
         return !loadTimer.isUnsubscribed() &&

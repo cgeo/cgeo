@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 /**
  * View creator which destroys the created view on every {@link #notifyDataSetChanged()}.
  *
- * @param <ViewClass>
  */
 public abstract class AbstractCachingPageViewCreator<ViewClass extends View> implements PageViewCreator {
 

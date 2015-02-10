@@ -143,7 +143,6 @@ public class Tile {
      *            First point
      * @param right
      *            Second point
-     * @return
      */
     static int calcZoomLon(final Geopoint left, final Geopoint right, final int numberOfTiles) {
 
@@ -176,7 +175,6 @@ public class Tile {
      *            First point
      * @param top
      *            Second point
-     * @return
      */
     static int calcZoomLat(final Geopoint bottom, final Geopoint top, final int numberOfTiles) {
 
@@ -207,8 +205,6 @@ public class Tile {
      * Calculates the inverted hyperbolic sine
      * (after Bronstein, Semendjajew: Taschenbuch der Mathematik)
      *
-     * @param x
-     * @return
      */
     private static double asinh(final double x) {
         return Math.log(x + Math.sqrt(x * x + 1.0));
@@ -280,8 +276,6 @@ public class Tile {
      * Calculate needed tiles for the given viewport to cover it with
      * max 2x2 tiles
      *
-     * @param viewport
-     * @return
      */
     protected static Set<Tile> getTilesForViewport(final Viewport viewport) {
         return getTilesForViewport(viewport, 2, Tile.ZOOMLEVEL_MIN);
@@ -292,10 +286,6 @@ public class Tile {
      * You can define the minimum number of tiles on the longer axis
      * and/or the minimum zoom level.
      *
-     * @param viewport
-     * @param tilesOnAxis
-     * @param minZoom
-     * @return
      */
     protected static Set<Tile> getTilesForViewport(final Viewport viewport, final int tilesOnAxis, final int minZoom) {
         final Set<Tile> tiles = new HashSet<>();

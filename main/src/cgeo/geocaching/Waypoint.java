@@ -37,8 +37,6 @@ public class Waypoint implements IWaypoint {
     /**
      * require name and type for every waypoint
      *
-     * @param name
-     * @param type
      */
     public Waypoint(final String name, final WaypointType type, final boolean own) {
         this.name = name;
@@ -49,7 +47,6 @@ public class Waypoint implements IWaypoint {
     /**
      * copy constructor
      *
-     * @param other
      */
     public Waypoint(final Waypoint other) {
         merge(other);
@@ -262,7 +259,6 @@ public class Waypoint implements IWaypoint {
     /**
      * Delegates the creation of the waypoint-id for gpx-export to the waypoint
      *
-     * @return
      */
     public String getGpxId() {
 

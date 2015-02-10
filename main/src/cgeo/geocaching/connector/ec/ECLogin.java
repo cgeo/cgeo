@@ -88,7 +88,6 @@ public class ECLogin extends AbstractLogin {
     /**
      * Check if the user has been logged in when he retrieved the data.
      *
-     * @param data
      * @return <code>true</code> if user is logged in, <code>false</code> otherwise
      */
     private boolean getLoginStatus(@Nullable final String data) {

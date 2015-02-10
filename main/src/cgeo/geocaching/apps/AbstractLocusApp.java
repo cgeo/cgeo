@@ -51,7 +51,6 @@ public abstract class AbstractLocusApp extends AbstractApp {
      *            which caches/waypoints to show
      * @param withCacheWaypoints
      *            Whether to give waypoints of caches to Locus or not
-     * @param activity
      */
     protected static boolean showInLocus(final List<?> objectsToShow, final boolean withCacheWaypoints, final boolean export,
             final Activity activity) {
@@ -94,7 +93,6 @@ public abstract class AbstractLocusApp extends AbstractApp {
     /**
      * This method constructs a <code>Point</code> for displaying in Locus
      *
-     * @param cache
      * @param withWaypoints
      *            whether to give waypoints to Locus or not
      * @param withCacheDetails
@@ -184,7 +182,6 @@ public abstract class AbstractLocusApp extends AbstractApp {
     /**
      * This method constructs a <code>Point</code> for displaying in Locus
      *
-     * @param waypoint
      * @return null, when the <code>Point</code> could not be constructed
      */
     @Nullable

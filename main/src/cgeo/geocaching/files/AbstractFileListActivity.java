@@ -201,7 +201,6 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
      * Check if a filename belongs to the AbstractFileListActivity. This implementation checks for file extensions.
      * Subclasses may override this method to filter out specific files.
      *
-     * @param filename
      * @return <code>true</code> if the filename belongs to the list
      */
     protected boolean filenameBelongsToList(@NonNull final String filename) {

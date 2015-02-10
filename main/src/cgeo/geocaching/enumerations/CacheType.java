@@ -122,7 +122,6 @@ public enum CacheType {
     /**
      * Whether this type contains the given cache.
      *
-     * @param cache
      * @return true if this is the ALL type or if this type equals the type of the cache.
      */
     public boolean contains(final Geocache cache) {

@@ -226,7 +226,6 @@ public class GCMap {
      *            Area to search
      * @param tokens
      *            Live map tokens
-     * @return
      */
     @NonNull
     public static SearchResult searchByViewport(final Viewport viewport, final MapTokens tokens) {
@@ -257,7 +256,6 @@ public class GCMap {
      *            Live map tokens
      * @param strategy
      *            Strategy for data retrieval and parsing, @see Strategy
-     * @return
      */
     @NonNull
     private static SearchResult searchByViewport(final Viewport viewport, final MapTokens tokens, final Strategy strategy) {
@@ -360,7 +358,6 @@ public class GCMap {
      *
      * @param typeToDisplay
      *            - cache type to omit from exclusion list so it gets displayed
-     * @return
      *
      *         cache types for live map filter:
      *         2 = traditional, 9 = ape, 5 = letterbox

@@ -82,8 +82,6 @@ public class DatabaseBackupUtils {
     /**
      * Create a backup after confirming to overwrite the existing backup.
      *
-     * @param activity
-     * @param runAfterwards
      */
     public static void createBackup(final Activity activity, final Runnable runAfterwards) {
         // avoid overwriting an existing backup with an empty database

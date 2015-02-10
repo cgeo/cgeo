@@ -26,7 +26,6 @@ public class OfflineGeocacheListLoader extends AbstractSearchLoader {
     }
 
     /**
-     * @param listId
      * @return the bundle needed for querying the LoaderManager for the offline list with the given id
      */
     public static Bundle getBundleForList(final int listId) {

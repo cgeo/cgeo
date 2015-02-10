@@ -208,7 +208,6 @@ public abstract class Formatter {
     /**
      * Formatting of the hidden date of a cache
      *
-     * @param cache
      * @return {@code null} or hidden date of the cache (or event date of the cache) in human readable format
      */
     public static String formatHiddenDate(final Geocache cache) {

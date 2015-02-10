@@ -106,8 +106,6 @@ public final class TextUtils {
     /**
      * Searches for the pattern pattern in the data.
      *
-     * @param data
-     * @param pattern
      * @return true if data contains the pattern pattern
      */
     public static boolean matches(final String data, final Pattern pattern) {
@@ -164,8 +162,6 @@ public final class TextUtils {
      * Remove all control characters (which are not valid in XML or HTML), as those should not appear in cache texts
      * anyway
      *
-     * @param input
-     * @return
      */
     public static String removeControlCharacters(final String input) {
         final Matcher remover = PATTERN_REMOVE_NONPRINTABLE.matcher(input);

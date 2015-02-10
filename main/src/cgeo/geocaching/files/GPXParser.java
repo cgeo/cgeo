@@ -840,7 +840,6 @@ public abstract class GPXParser extends FileParser {
     /**
      * Add listeners for GSAK extensions
      *
-     * @param cacheParent
      */
     private void registerGsakExtensions(final Element cacheParent) {
         for (final String gsakNamespace : GSAK_NS) {
@@ -901,7 +900,6 @@ public abstract class GPXParser extends FileParser {
     /**
      * Add listeners for c:geo extensions
      *
-     * @param cacheParent
      */
     private void registerCgeoExtensions(final Element cacheParent) {
         final Element cgeoVisited = cacheParent.getChild(CGEO_NS, "visited");
@@ -940,8 +938,6 @@ public abstract class GPXParser extends FileParser {
      * GPX 1.0 and 1.1 use different XML elements to put the cache into, therefore needs to be overwritten in the
      * version specific subclasses
      *
-     * @param waypoint
-     * @return
      */
     protected abstract Element getCacheParent(Element waypoint);
 

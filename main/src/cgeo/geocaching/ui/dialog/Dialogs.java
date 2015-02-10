@@ -408,7 +408,6 @@ public final class Dialogs {
     /**
      * Move the cursor to the end of the input field.
      *
-     * @param input
      */
     public static void moveCursorToEnd(final EditText input) {
         input.setSelection(input.getText().length(), input.getText().length());

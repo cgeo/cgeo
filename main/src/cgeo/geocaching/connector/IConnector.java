@@ -15,7 +15,6 @@ public interface IConnector {
     /**
      * get name for display (currently only used in links)
      *
-     * @return
      */
     @NonNull
     public String getName();
@@ -32,8 +31,6 @@ public interface IConnector {
     /**
      * Get the browser URL for the given cache.
      *
-     * @param cache
-     * @return
      */
     @Nullable
     public String getCacheUrl(final @NonNull Geocache cache);
@@ -41,8 +38,6 @@ public interface IConnector {
     /**
      * get long browser URL for the given cache
      *
-     * @param cache
-     * @return
      */
     @Nullable
     public String getLongCacheUrl(final @NonNull Geocache cache);
@@ -50,14 +45,12 @@ public interface IConnector {
     /**
      * enable/disable watchlist controls in cache details
      *
-     * @return
      */
     public boolean supportsWatchList();
 
     /**
      * Add the cache to the watchlist
      *
-     * @param cache
      * @return True - success/False - failure
      */
     public boolean addToWatchlist(@NonNull Geocache cache);
@@ -65,7 +58,6 @@ public interface IConnector {
     /**
      * Remove the cache from the watchlist
      *
-     * @param cache
      * @return True - success/False - failure
      */
     public boolean removeFromWatchlist(@NonNull Geocache cache);
@@ -73,28 +65,24 @@ public interface IConnector {
     /**
      * enable/disable favorite points controls in cache details
      *
-     * @return
      */
     public boolean supportsFavoritePoints(@NonNull final Geocache cache);
 
     /**
      * enable/disable logging controls in cache details
      *
-     * @return
      */
     public boolean supportsLogging();
 
     /**
      * enable/disable attaching image to log
      *
-     * @return
      */
     public boolean supportsLogImages();
 
     /**
      * Get an ILoggingManager to guide the logging process.
      *
-     * @return
      */
     @NonNull
     public ILoggingManager getLoggingManager(@NonNull final LogCacheActivity activity, @NonNull final Geocache cache);
@@ -102,7 +90,6 @@ public interface IConnector {
     /**
      * Get host name of the connector server for dynamic loading of data.
      *
-     * @return
      */
     @NonNull
     public String getHost();
@@ -110,8 +97,6 @@ public interface IConnector {
     /**
      * Get cache data license text. This is displayed somewhere near the cache details.
      *
-     * @param cache
-     * @return
      */
     @NonNull
     public String getLicenseText(final @NonNull Geocache cache);
@@ -119,8 +104,6 @@ public interface IConnector {
     /**
      * return true if this is a ZIP file containing a GPX file
      *
-     * @param fileName
-     * @return
      */
     public boolean isZippedGPXFile(@NonNull final String fileName);
 
@@ -129,15 +112,12 @@ public interface IConnector {
      *
      * @param cacheHasReliableLatLon
      *            flag of the cache
-     * @return
      */
     public boolean isReliableLatLon(boolean cacheHasReliableLatLon);
 
     /**
      * extract a geocode from the given URL, if this connector can handle that URL somehow
      *
-     * @param url
-     * @return
      */
     @Nullable
     public String getGeocodeFromUrl(@NonNull final String url);
@@ -152,7 +132,6 @@ public interface IConnector {
     /**
      * Uploading personal note to website
      *
-     * @param cache
      * @return success
      */
     public boolean uploadPersonalNote(@NonNull Geocache cache);
@@ -167,7 +146,6 @@ public interface IConnector {
     /**
      * Resetting of modified coordinates on website to details
      *
-     * @param cache
      * @return success
      */
     public boolean deleteModifiedCoordinates(@NonNull Geocache cache);
@@ -175,8 +153,6 @@ public interface IConnector {
     /**
      * Uploading modified coordinates to website
      *
-     * @param cache
-     * @param wpt
      * @return success
      */
     public boolean uploadModifiedCoordinates(@NonNull Geocache cache, @NonNull Geopoint wpt);
@@ -185,7 +161,6 @@ public interface IConnector {
      * Return {@code true} if this connector is active for online interaction (download details, do searches, ...). If
      * this is {@code false}, the connector will still be used for already stored offline caches.
      *
-     * @return
      */
 
     public boolean isActive();
@@ -202,8 +177,6 @@ public interface IConnector {
      * Check if the cache information is complete enough to be
      * able to log online.
      *
-     * @param geocache
-     * @return
      */
     public boolean canLog(@NonNull Geocache geocache);
 
@@ -220,8 +193,6 @@ public interface IConnector {
      * Get the list of <b>potentially</b> possible log types for a cache. Those may still be filtered further during the
      * actual logging activity.
      *
-     * @param geocache
-     * @return
      */
     @NonNull
     public List<LogType> getPossibleLogTypes(@NonNull Geocache geocache);
@@ -230,16 +201,12 @@ public interface IConnector {
      * Get the GPX id for a waypoint when exporting. For some connectors there is an inherent name logic,
      * for others its just the 'prefix'.
      *
-     * @param prefix
-     * @return
      */
     public String getWaypointGpxId(String prefix, @NonNull String geocode);
 
     /**
      * Get the 'prefix' (key) for a waypoint from the 'name' in the GPX file
      *
-     * @param name
-     * @return
      */
     @NonNull
     public String getWaypointPrefix(String name);
@@ -247,14 +214,12 @@ public interface IConnector {
     /**
      * Get the maximum value for Terrain
      *
-     * @return
      */
     public int getMaxTerrain();
 
     /**
      * Get a user readable collection of all online features of this connector.
      *
-     * @return
      */
     @NonNull
     public Collection<String> getCapabilities();

@@ -45,7 +45,6 @@ public class MapsWithMeCacheListApp extends AbstractApp implements CacheListApp 
     /**
      * get cache code from a PendingIntent after an invocation of MapsWithMe
      *
-     * @return
      */
     @Nullable
     public static String getCacheFromMapsWithMe(final Context context, final Intent intent) {

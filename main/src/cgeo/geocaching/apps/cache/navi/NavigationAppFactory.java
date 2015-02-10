@@ -117,10 +117,6 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * Delegates to {@link #showNavigationMenu(Activity, cgeo.geocaching.Geocache, cgeo.geocaching.Waypoint, Geopoint, boolean, boolean)} with
      * <code>showInternalMap = true</code> and <code>showDefaultNavigation = false</code>
      *
-     * @param activity
-     * @param cache
-     * @param waypoint
-     * @param destination
      */
     public static void showNavigationMenu(final Activity activity,
             final Geocache cache, final Waypoint waypoint, final Geopoint destination) {
@@ -131,7 +127,6 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * Specialized way to handle selection of navigation tool.<br />
      * A dialog is created for tool selection and the selected tool is started afterwards.
      *
-     * @param activity
      * @param cache
      *            may be <code>null</code>
      * @param waypoint
@@ -196,7 +191,6 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     /**
      * Returns all installed navigation apps.
      *
-     * @return
      */
     static List<NavigationAppsEnum> getInstalledNavigationApps() {
         final List<NavigationAppsEnum> installedNavigationApps = new ArrayList<>();
@@ -224,7 +218,6 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     /**
      * Returns all installed navigation apps for default navigation.
      *
-     * @return
      */
     public static List<NavigationAppsEnum> getInstalledDefaultNavigationApps() {
         final List<NavigationAppsEnum> installedNavigationApps = new ArrayList<>();
@@ -240,10 +233,6 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * Handles menu selections for menu entries created with
      * {@link #showNavigationMenu(Activity, Geocache, Waypoint, Geopoint)}.
      *
-     * @param item
-     * @param activity
-     * @param cache
-     * @return
      */
     public static boolean onMenuItemSelected(final MenuItem item, final Activity activity, final Geocache cache) {
         final App menuItem = getAppFromMenuItem(item);
@@ -286,10 +275,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     /**
      * Starts the default navigation tool if correctly set and installed or the compass app as default fallback.
      *
-     * @param defaultNavigation
      *
-     * @param activity
-     * @param cache
      */
     public static void startDefaultNavigationApplication(final int defaultNavigation, final Activity activity, final Geocache cache) {
         if (cache == null || cache.getCoords() == null) {
@@ -310,8 +296,6 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     /**
      * Starts the default navigation tool if correctly set and installed or the compass app as default fallback.
      *
-     * @param activity
-     * @param waypoint
      */
     public static void startDefaultNavigationApplication(final int defaultNavigation, final Activity activity, final Waypoint waypoint) {
         if (waypoint == null || waypoint.getCoords() == null) {
@@ -324,8 +308,6 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     /**
      * Starts the default navigation tool if correctly set and installed or the compass app as default fallback.
      *
-     * @param activity
-     * @param destination
      */
     public static void startDefaultNavigationApplication(final int defaultNavigation, final Activity activity, final Geopoint destination) {
         if (destination == null) {

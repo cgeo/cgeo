@@ -117,7 +117,6 @@ public abstract class LeastRecentlyUsedMap<K, V> extends LinkedHashMap<K, V> {
      * Interface for handlers that wish to get notified when items are
      * removed from the LRUMap
      *
-     * @param <V>
      */
     public interface RemoveHandler<V> {
 

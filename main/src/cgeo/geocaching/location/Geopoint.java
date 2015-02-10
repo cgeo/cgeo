@@ -97,12 +97,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Create new Geopoint from individual textual components.
      *
-     * @param latDir
-     * @param latDeg
-     * @param latDegFrac
-     * @param lonDir
-     * @param lonDeg
-     * @param lonDegFrac
      */
     public Geopoint(final String latDir, final String latDeg, final String latDegFrac,
                     final String lonDir, final String lonDeg, final String lonDegFrac) {
@@ -113,14 +107,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Create new Geopoint from individual textual components.
      *
-     * @param latDir
-     * @param latDeg
-     * @param latMin
-     * @param latMinFrac
-     * @param lonDir
-     * @param lonDeg
-     * @param lonMin
-     * @param lonMinFrac
      */
     public Geopoint(final String latDir, final String latDeg, final String latMin, final String latMinFrac,
                     final String lonDir, final String lonDeg, final String lonMin, final String lonMinFrac) {
@@ -131,16 +117,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Create new Geopoint from individual textual components.
      *
-     * @param latDir
-     * @param latDeg
-     * @param latMin
-     * @param latSec
-     * @param latSecFrac
-     * @param lonDir
-     * @param lonDeg
-     * @param lonMin
-     * @param lonSec
-     * @param lonSecFrac
      */
     public Geopoint(final String latDir, final String latDeg, final String latMin, final String latSec, final String latSecFrac,
             final String lonDir, final String lonDeg, final String lonMin, final String lonSec, final String lonSecFrac) {
@@ -347,7 +323,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Get latitude character (N or S).
      *
-     * @return
      */
     public char getLatDir() {
         return latitude >= 0 ? 'N' : 'S';
@@ -356,7 +331,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Get longitude character (E or W).
      *
-     * @return
      */
     public char getLonDir() {
         return longitude >= 0 ? 'E' : 'W';
@@ -365,7 +339,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Get the integral non-negative latitude degrees.
      *
-     * @return
      */
     public int getLatDeg() {
         return getDeg(latitude);
@@ -374,7 +347,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Get the integral non-negative longitude degrees.
      *
-     * @return
      */
     public int getLonDeg() {
         return getDeg(longitude);
@@ -387,7 +359,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Get the fractional part of the latitude degrees scaled up by 10^5.
      *
-     * @return
      */
     public int getLatDegFrac() {
         return getDegFrac(latitude);
@@ -396,7 +367,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Get the fractional part of the longitude degrees scaled up by 10^5.
      *
-     * @return
      */
     public int getLonDegFrac() {
         return getDegFrac(longitude);
@@ -409,7 +379,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Get the integral latitude minutes.
      *
-     * @return
      */
     public int getLatMin() {
         return getMin(latitude);
@@ -418,7 +387,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Get the integral longitude minutes.
      *
-     * @return
      */
     public int getLonMin() {
         return getMin(longitude);
@@ -431,7 +399,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Get the fractional part of the latitude minutes scaled up by 1000.
      *
-     * @return
      */
     public int getLatMinFrac() {
         return getMinFrac(latitude);
@@ -440,7 +407,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Get the fractional part of the longitude minutes scaled up by 1000.
      *
-     * @return
      */
     public int getLonMinFrac() {
         return getMinFrac(longitude);
@@ -453,7 +419,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Get the latitude minutes.
      *
-     * @return
      */
     public double getLatMinRaw() {
         return getMinRaw(latitude);
@@ -462,7 +427,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Get the longitude minutes.
      *
-     * @return
      */
     public double getLonMinRaw() {
         return getMinRaw(longitude);
@@ -475,7 +439,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Get the integral part of the latitude seconds.
      *
-     * @return
      */
     public int getLatSec() {
         return getSec(latitude);
@@ -484,7 +447,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Get the integral part of the longitude seconds.
      *
-     * @return
      */
     public int getLonSec() {
         return getSec(longitude);
@@ -497,7 +459,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Get the fractional part of the latitude seconds scaled up by 1000.
      *
-     * @return
      */
 
     public int getLatSecFrac() {
@@ -507,7 +468,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Get the fractional part of the longitude seconds scaled up by 1000.
      *
-     * @return
      */
 
     public int getLonSecFrac() {
@@ -521,7 +481,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Get the latitude seconds.
      *
-     * @return
      */
     public double getLatSecRaw() {
         return getSecRaw(latitude);
@@ -530,7 +489,6 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Get the longitude seconds.
      *
-     * @return
      */
     public double getLonSecRaw() {
         return getSecRaw(longitude);

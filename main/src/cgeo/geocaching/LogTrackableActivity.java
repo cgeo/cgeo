@@ -334,7 +334,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
      * Adds the new log to the list of log entries for this trackable to be able to show it in the trackable activity.
      *
      *
-     * @param logText
      */
     private void addLocalTrackableLog(final String logText) {
         final LogEntry logEntry = new LogEntry(date.getTimeInMillis(), typeSelected, logText);

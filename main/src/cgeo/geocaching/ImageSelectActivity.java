@@ -293,7 +293,6 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     /**
      * Scales and writes the scaled image.
      *
-     * @param filePath
      * @return the scaled image path, or <tt>null</tt> if the image cannot be decoded
      */
     @Nullable

@@ -91,8 +91,6 @@ public class InfoPreference extends AbstractAttributeBasedPrefence {
     /**
      * Add an info icon at the left hand side of the preference.
      *
-     * @param parent
-     * @return
      */
     private View addInfoIcon(ViewGroup parent) {
         View preferenceView = super.onCreateView(parent);

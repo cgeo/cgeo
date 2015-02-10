@@ -12,7 +12,6 @@ public interface IFilter {
     String getName();
 
     /**
-     * @param cache
      * @return true if the filter accepts the cache, false otherwise
      */
     boolean accepts(@NonNull final Geocache cache);

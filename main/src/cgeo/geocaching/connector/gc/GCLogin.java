@@ -166,7 +166,6 @@ public class GCLogin extends AbstractLogin {
     /**
      * Check if the user has been logged in when he retrieved the data.
      *
-     * @param page
      * @return <code>true</code> if user is logged in, <code>false</code> otherwise
      */
     boolean getLoginStatus(@Nullable final String page) {
@@ -412,8 +411,6 @@ public class GCLogin extends AbstractLogin {
     /**
      * POST HTTP request. Do the request a second time if the user is not logged in
      *
-     * @param uri
-     * @return
      */
     String postRequestLogged(final String uri, final Parameters params) {
         final String data = Network.getResponseData(Network.postRequest(uri, params));
@@ -433,9 +430,6 @@ public class GCLogin extends AbstractLogin {
     /**
      * GET HTTP request. Do the request a second time if the user is not logged in
      *
-     * @param uri
-     * @param params
-     * @return
      */
     @Nullable
     String getRequestLogged(@NonNull final String uri, @Nullable final Parameters params) {
@@ -459,8 +453,6 @@ public class GCLogin extends AbstractLogin {
      * Unfortunately the cache details page contains user generated whitespace in the personal note, therefore we cannot
      * remove the white space from cache details pages.
      *
-     * @param uri
-     * @return
      */
     private static boolean canRemoveWhitespace(final String uri) {
         return !StringUtils.contains(uri, "cache_details");

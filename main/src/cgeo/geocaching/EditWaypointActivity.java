@@ -331,7 +331,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
      * @param type
      *            type to create a new default name for
      *
-     * @return
      */
     private String getDefaultWaypointName(final WaypointType type) {
         final ArrayList<String> wpNames = new ArrayList<>();

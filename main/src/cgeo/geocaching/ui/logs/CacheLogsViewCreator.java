@@ -33,7 +33,6 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     /**
      * May return null!
      *
-     * @return
      */
     private Geocache getCache() {
         if (this.activity instanceof CacheDetailActivity) {

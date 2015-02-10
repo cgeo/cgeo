@@ -68,14 +68,12 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
         /**
          * Returns a validated view.
          *
-         * @return
          */
         public View getDispatchedView(final ViewGroup parentView);
 
         /**
          * Returns a (maybe cached) view.
          *
-         * @return
          */
         public View getView(final ViewGroup parentView);
 

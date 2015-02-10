@@ -402,7 +402,6 @@ public class DataStore {
      * Move the database to/from external cgdata in a new thread,
      * showing a progress window
      *
-     * @param fromActivity
      */
     public static void moveDatabase(final Activity fromActivity) {
         final ProgressDialog dialog = ProgressDialog.show(fromActivity, fromActivity.getString(R.string.init_dbmove_dbmove), fromActivity.getString(R.string.init_dbmove_running), true, false);
@@ -1061,7 +1060,6 @@ public class DataStore {
      *
      * @param cache
      *            the Cache to save in the CacheCache/DB
-     * @param saveFlags
      *
      */
     public static void saveCache(final Geocache cache, final Set<LoadFlags.SaveFlag> saveFlags) {
@@ -1073,7 +1071,6 @@ public class DataStore {
      *
      * @param caches
      *            the caches to save in the CacheCache/DB
-     * @param saveFlags
      *
      */
     public static void saveCaches(final Collection<Geocache> caches, final Set<LoadFlags.SaveFlag> saveFlags) {
@@ -1312,7 +1309,6 @@ public class DataStore {
     /**
      * remove all waypoints of the given cache, where the id is not in the given list
      *
-     * @param cache
      * @param remainingWaypointIds
      *            ids of waypoints which shall not be deleted
      */
@@ -1562,7 +1558,6 @@ public class DataStore {
     /**
      * Load caches.
      *
-     * @param geocodes
      * @return Set of loaded caches. Never null.
      */
     @NonNull
@@ -1618,8 +1613,6 @@ public class DataStore {
     /**
      * Load caches.
      *
-     * @param geocodes
-     * @param loadFlags
      * @return Set of loaded caches. Never null.
      */
     @NonNull
@@ -1709,9 +1702,6 @@ public class DataStore {
     /**
      * Builds a where for a viewport with the size enhanced by 50%.
      *
-     * @param dbTable
-     * @param viewport
-     * @return
      */
 
     @NonNull
@@ -1722,7 +1712,6 @@ public class DataStore {
     /**
      * creates a Cache from the cursor. Doesn't next.
      *
-     * @param cursor
      * @return Cache from DB
      */
     @NonNull
@@ -1938,7 +1927,6 @@ public class DataStore {
     }
 
     /**
-     * @param geocode
      * @return an immutable, non null list of logs
      */
     @NonNull
@@ -2088,9 +2076,6 @@ public class DataStore {
     /**
      * Number of caches stored for a given type and/or list
      *
-     * @param cacheType
-     * @param list
-     * @return
      */
     public static int getAllStoredCachesCount(final CacheType cacheType, final int list) {
         if (cacheType == null) {
@@ -2176,8 +2161,6 @@ public class DataStore {
      *
      * @param coords
      *            the current coordinates to sort by distance, or null to sort by geocode
-     * @param cacheType
-     * @param listId
      * @return a non-null set of geocodes
      */
     @NonNull
@@ -2390,8 +2373,6 @@ public class DataStore {
     /**
      * remove all geocodes from the given list of geocodes where an offline log exists
      *
-     * @param geocodes
-     * @return
      */
     @NonNull
     private static Set<String> exceptCachesWithOfflineLog(@NonNull final Set<String> geocodes) {
@@ -2738,7 +2719,6 @@ public class DataStore {
     /**
      * Remove a list. Caches in the list are moved to the standard list.
      *
-     * @param listId
      * @return true if the list got deleted, false else
      */
     public static boolean removeList(final int listId) {
@@ -2830,8 +2810,6 @@ public class DataStore {
     /**
      * Load the lazily initialized fields of a cache and return them as partial cache (all other fields unset).
      *
-     * @param geocode
-     * @return
      */
     @NonNull
     public static Geocache loadCacheTexts(final String geocode) {
@@ -2908,10 +2886,6 @@ public class DataStore {
     /**
      * Loads all Waypoints in the coordinate rectangle.
      *
-     * @param excludeDisabled
-     * @param excludeMine
-     * @param type
-     * @return
      */
 
     @NonNull

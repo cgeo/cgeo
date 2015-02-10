@@ -160,7 +160,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     /**
      * change the sort order
      *
-     * @param comparator
      */
     public void setComparator(final CacheComparator comparator) {
         cacheComparator = comparator;

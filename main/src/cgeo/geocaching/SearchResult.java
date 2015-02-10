@@ -216,10 +216,6 @@ public class SearchResult implements Parcelable {
     }
 
     /**
-     * @param excludeDisabled
-     * @param excludeMine
-     * @param cacheType
-     * @return
      */
     public SearchResult filterSearchResults(final boolean excludeDisabled, final boolean excludeMine, final CacheType cacheType) {
 

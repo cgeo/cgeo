@@ -42,7 +42,6 @@ public abstract class AbstractAttributeBasedPrefence extends Preference {
     /**
      * Evaluate the attributes which where requested in {@link AbstractAttributeBasedPrefence#getAttributeNames()}.
      * 
-     * @param values
      */
     protected abstract void processAttributeValues(TypedArray values);
 

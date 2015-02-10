@@ -14,8 +14,6 @@ import android.os.AsyncTask;
  * automatically derived from the number of {@code Params} given to the task in {@link #execute(Object...)}.
  * </p>
  *
- * @param <Params>
- * @param <Result>
  */
 public abstract class AsyncTaskWithProgress<Params, Result> extends AsyncTask<Params, Integer, Result> {
 
@@ -28,9 +26,6 @@ public abstract class AsyncTaskWithProgress<Params, Result> extends AsyncTask<Pa
     /**
      * Creates an AsyncTask with progress dialog.
      *
-     * @param activity
-     * @param progressTitle
-     * @param progressMessage
      */
     public AsyncTaskWithProgress(final Activity activity, final String progressTitle, final String progressMessage) {
         this(activity, progressTitle, progressMessage, false);
@@ -39,8 +34,6 @@ public abstract class AsyncTaskWithProgress<Params, Result> extends AsyncTask<Pa
     /**
      * Creates an AsyncTask with progress dialog.
      *
-     * @param activity
-     * @param progressTitle
      */
     public AsyncTaskWithProgress(final Activity activity, final String progressTitle) {
         this(activity, progressTitle, null);
@@ -49,9 +42,6 @@ public abstract class AsyncTaskWithProgress<Params, Result> extends AsyncTask<Pa
     /**
      * Creates an AsyncTask with progress dialog.
      *
-     * @param activity
-     * @param progressTitle
-     * @param progressMessage
      */
     public AsyncTaskWithProgress(final Activity activity, final String progressTitle, final String progressMessage, final boolean indeterminate) {
         this.activity = activity;
@@ -63,8 +53,6 @@ public abstract class AsyncTaskWithProgress<Params, Result> extends AsyncTask<Pa
     /**
      * Creates an AsyncTask with progress dialog.
      *
-     * @param activity
-     * @param progressTitle
      */
     public AsyncTaskWithProgress(final Activity activity, final String progressTitle, final boolean indeterminate) {
         this(activity, progressTitle, null, indeterminate);
@@ -101,7 +89,6 @@ public abstract class AsyncTaskWithProgress<Params, Result> extends AsyncTask<Pa
     /**
      * This method should typically be overridden by sub classes instead of {@link #onPostExecute(Object)}.
      *
-     * @param result
      */
     protected void onPostExecuteInternal(final Result result) {
         // empty by default

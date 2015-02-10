@@ -36,7 +36,6 @@ final class UTFGridPosition {
     /**
      * @param key
      *            Key in the format (xx, xx)
-     * @return
      */
     static UTFGridPosition fromString(final String key) {
         final MatcherWrapper matcher = new MatcherWrapper(UTFGridPosition.PATTERN_JSON_KEY, key);

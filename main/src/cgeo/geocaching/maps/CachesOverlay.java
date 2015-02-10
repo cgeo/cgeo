@@ -158,8 +158,6 @@ public class CachesOverlay extends AbstractItemizedOverlay {
      * reality and therefore the minor changes due to the projection will not make any visible difference at the zoom
      * levels which are used to see the circles.
      *
-     * @param projection
-     * @return
      */
     private int calculateDrawingRadius(MapProjectionImpl projection) {
         float[] distanceArray = new float[1];

@@ -19,7 +19,6 @@ public class TrackableLogsViewCreator extends LogsViewCreator {
     private final TrackableActivity trackableActivity;
 
     /**
-     * @param trackableActivity
      */
     public TrackableLogsViewCreator(final TrackableActivity trackableActivity) {
         super(trackableActivity);

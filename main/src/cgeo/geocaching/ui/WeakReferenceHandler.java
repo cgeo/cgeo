@@ -11,7 +11,6 @@ import java.lang.ref.WeakReference;
  *
  * Create static private subclasses of this handler class in your activity.
  *
- * @param <ActivityType>
  */
 public abstract class WeakReferenceHandler<ActivityType extends Activity> extends Handler {
 

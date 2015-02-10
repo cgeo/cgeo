@@ -1650,8 +1650,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     /**
      * Allow the title bar spinner to show the same subtitle like the activity itself would show.
      *
-     * @param list
-     * @return
      */
     public CharSequence getCacheListSubtitle(@NonNull final AbstractList list) {
         // if this is the current list, be aware of filtering
@@ -1669,7 +1667,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     /**
      * Calculate the subtitle of the current list depending on (optional) filters.
      *
-     * @return
      */
     private CharSequence getCurrentSubtitle() {
         final ArrayList<String> numbers = new ArrayList<>();

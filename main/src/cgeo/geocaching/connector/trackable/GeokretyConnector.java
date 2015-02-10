@@ -59,8 +59,6 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     /**
      * Get geocode from geokrety id
      *
-     * @param id
-     * @return
      */
     public static String geocode(final int id) {
         return String.format("GK%04X", id);

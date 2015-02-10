@@ -174,7 +174,6 @@ public final class GpxSerializer {
     }
 
     /**
-     * @param boolFlag
      * @return XML schema compliant boolean representation of the boolean flag. This must be either true, false, 0 or 1,
      *         but no other value (also not upper case True/False).
      */

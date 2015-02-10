@@ -21,8 +21,6 @@ public final class HtmlUtils {
      * Extract the text from a HTML based string. This is similar to what HTML.fromHtml(...) does, but this method also
      * removes the embedded images instead of replacing them by a small rectangular representation character.
      *
-     * @param html
-     * @return
      */
     public static String extractText(final CharSequence html) {
         if (StringUtils.isBlank(html)) {

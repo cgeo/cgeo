@@ -37,7 +37,6 @@ abstract class AbstractCacheComparator implements CacheComparator {
      *
      * The default returns <code>true</code> and can be overridden if needed in child classes.
      *
-     * @param cache
      * @return <code>true</code> if the cache holds the necessary data to be compared meaningfully
      */
     @SuppressWarnings("static-method")
@@ -51,8 +50,6 @@ abstract class AbstractCacheComparator implements CacheComparator {
      * A cache is smaller than another cache if it is desirable to show it first when presented to the user.
      * For example, a highly rated cache must be considered smaller than a poorly rated one.
      *
-     * @param cache1
-     * @param cache2
      * @return an integer < 0 if cache1 is less than cache2, 0 if they are equal, and > 0 if cache1 is greater than
      *         cache2.
      */

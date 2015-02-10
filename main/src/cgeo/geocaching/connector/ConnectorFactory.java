@@ -235,7 +235,6 @@ public final class ConnectorFactory {
     /**
      * Get the geocode of a trackable from a URL.
      *
-     * @param url
      * @return {@code null} if the URL cannot be decoded
      */
     @Nullable

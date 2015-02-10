@@ -133,8 +133,6 @@ public final class ActivityMixin {
     /**
      * insert text into the EditText at the current cursor position
      *
-     * @param editText
-     * @param insertText
      * @param moveCursor
      *            place the cursor after the inserted text
      */
@@ -163,8 +161,6 @@ public final class ActivityMixin {
      * was created from an intent by another app, and our own app is not yet running. The bug seems to be fixed in
      * Android 4.4.something, however.
      *
-     * @param activity
-     * @return
      */
     public static boolean navigateUp(@NonNull final Activity activity) {
         // see http://developer.android.com/training/implementing-navigation/ancestral.html

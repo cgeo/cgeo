@@ -37,7 +37,6 @@ public final class Log {
     /**
      * Save a copy of the debug flag from the settings for performance reasons.
      *
-     * @param isDebug
      */
     public static void setDebug(final boolean isDebug) {
         Log.isDebug = isDebug;
