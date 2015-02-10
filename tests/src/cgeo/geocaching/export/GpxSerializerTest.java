@@ -38,13 +38,13 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         final AtomicReference<Integer> importedCount = new AtomicReference<Integer>(0);
         final StringWriter writer = new StringWriter();
 
-        Geocache cache = loadCacheFromResource(R.raw.gc1bkp3_gpx101);
+        final Geocache cache = loadCacheFromResource(R.raw.gc1bkp3_gpx101);
         assertThat(cache).isNotNull();
 
         new GpxSerializer().writeGPX(Collections.singletonList("GC1BKP3"), writer, new GpxSerializer.ProgressListener() {
 
             @Override
-            public void publishProgress(int countExported) {
+            public void publishProgress(final int countExported) {
                 importedCount.set(countExported);
             }
         });
@@ -54,8 +54,6 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
     /**
      * This test verifies that a loop of import, export, import leads to the same cache information.
      *
-     * @throws IOException
-     * @throws ParserException
      */
     public void testStableExportImportExport() throws IOException, ParserException {
         final String geocode = "GC1BKP3";
@@ -70,7 +68,7 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         final GPX10Parser parser = new GPX10Parser(StoredList.TEMPORARY_LIST.id);
 
         final InputStream stream = new ByteArrayInputStream(gpxFirst.getBytes(CharEncoding.UTF_8));
-        Collection<Geocache> caches = parser.parse(stream, null);
+        final Collection<Geocache> caches = parser.parse(stream, null);
         assertThat(caches).isNotNull();
         assertThat(caches).hasSize(1);
 
@@ -78,43 +76,43 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
         assertThat(replaceLogIds(gpxSecond)).isEqualTo(replaceLogIds(gpxFirst));
     }
 
-    private static String replaceLogIds(String gpx) {
+    private static String replaceLogIds(final String gpx) {
         return gpx.replaceAll("log id=\"\\d*\"", "");
     }
 
-    private static String getGPXFromCache(String geocode) throws IOException {
+    private static String getGPXFromCache(final String geocode) throws IOException {
         final StringWriter writer = new StringWriter();
         new GpxSerializer().writeGPX(Collections.singletonList(geocode), writer, null);
         return writer.toString();
     }
 
     public static void testStateFromStateCountry() throws Exception {
-        Geocache cache = withLocation("state, country");
+        final Geocache cache = withLocation("state, country");
         assertThat(GpxSerializer.getState(cache)).isEqualTo("state");
     }
 
     public static void testCountryFromStateCountry() throws Exception {
-        Geocache cache = withLocation("state, country");
+        final Geocache cache = withLocation("state, country");
         assertThat(GpxSerializer.getCountry(cache)).isEqualTo("country");
     }
 
     public static void testCountryFromCountryOnly() throws Exception {
-        Geocache cache = withLocation("somewhere");
+        final Geocache cache = withLocation("somewhere");
         assertThat(GpxSerializer.getCountry(cache)).isEqualTo("somewhere");
     }
 
     public static void testStateFromCountryOnly() throws Exception {
-        Geocache cache = withLocation("somewhere");
+        final Geocache cache = withLocation("somewhere");
         assertThat(GpxSerializer.getState(cache)).isEmpty();
     }
 
     public static void testCountryFromExternalCommaString() throws Exception {
-        Geocache cache = withLocation("first,second"); // this was not created by c:geo, therefore don't split it
+        final Geocache cache = withLocation("first,second"); // this was not created by c:geo, therefore don't split it
         assertThat(GpxSerializer.getState(cache)).isEmpty();
     }
 
     private static Geocache withLocation(final String location) {
-        Geocache cache = new Geocache();
+        final Geocache cache = new Geocache();
         cache.setLocation(location);
         return cache;
     }

@@ -94,7 +94,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
         // no assumption possible: assertThat(tb.getSpottedName()).isEqualTo("Nice place for a break cache");
 
         // we can't check specifics in the log entries since they change, but we can verify data was parsed
-        for (LogEntry log : tb.getLogs()) {
+        for (final LogEntry log : tb.getLogs()) {
             assertThat(log.date).isGreaterThan(0);
             assertThat(log.author).isNotEmpty();
             if (log.type == LogType.PLACED_IT || log.type == LogType.RETRIEVED_IT) {
@@ -135,7 +135,6 @@ public class CgeoApplicationTest extends CGeoTestCase {
     /**
      * Set the login data to the cgeo login, run the given Runnable, and restore the login.
      *
-     * @param runnable
      */
     private static void withMockedLoginDo(final Runnable runnable) {
         final ImmutablePair<String, String> login = Settings.getGcCredentials();
@@ -211,9 +210,8 @@ public class CgeoApplicationTest extends CGeoTestCase {
     /**
      * mock the "exclude disabled caches" and "exclude my caches" options for the execution of the runnable
      *
-     * @param runnable
      */
-    private static void withMockedFilters(Runnable runnable) {
+    private static void withMockedFilters(final Runnable runnable) {
         // backup user settings
         final boolean excludeMine = Settings.isExcludeMyCaches();
         final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
@@ -401,7 +399,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
      * Test cache parsing. Esp. useful after a GC.com update
      */
     public static void testSearchByGeocodeBasis() {
-        for (MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
+        for (final MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
             final String oldUser = mockedCache.getMockedDataUser();
             try {
                 mockedCache.setMockedDataUser(Settings.getUsername());
@@ -425,7 +423,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     }
 
     /** Remove cache from DB and cache to ensure that the cache is not loaded from the database */
-    private static void deleteCacheFromDBAndLogout(String geocode) {
+    private static void deleteCacheFromDBAndLogout(final String geocode) {
         deleteCacheFromDB(geocode);
 
         GCLogin.getInstance().logout();

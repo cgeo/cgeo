@@ -18,7 +18,7 @@ public class NameComparatorTest extends AndroidTestCase {
         }
     }
 
-    private NameComparator comp = new NameComparator();
+    private final NameComparator comp = new NameComparator();
 
     public void testLexical() {
         assertSorted(new NamedCache("A"), new NamedCache("Z"));
@@ -38,11 +38,10 @@ public class NameComparatorTest extends AndroidTestCase {
     /**
      * Assert that a given collection of names is already sorted correctly.
      *
-     * @param names
      */
-    private void assertSortedNames(String... names) {
-        ArrayList<Geocache> caches = new ArrayList<Geocache>(names.length);
-        for (String name : names) {
+    private void assertSortedNames(final String... names) {
+        final ArrayList<Geocache> caches = new ArrayList<Geocache>(names.length);
+        for (final String name : names) {
             caches.add(new NamedCache(name));
         }
         Collections.sort(caches, comp);

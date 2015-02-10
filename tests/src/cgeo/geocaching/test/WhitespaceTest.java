@@ -30,8 +30,6 @@ public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
      * The place for the implementation to prove that the new version of replaceWhitespace is faster than
      * BaseUtils.replaceWhitespace()
      *
-     * @param data
-     * @return
      */
     public static String replaceWhitespaceManually(final String data) {
         final int length = data.length();
@@ -39,7 +37,7 @@ public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
         data.getChars(0, length, chars, 0);
         int resultSize = 0;
         boolean lastWasWhitespace = true;
-        for (char c : chars) {
+        for (final char c : chars) {
             if (c == ' ' || c == '\n' || c == '\r' || c == '\t') {
                 if (!lastWasWhitespace) {
                     chars[resultSize++] = ' ';

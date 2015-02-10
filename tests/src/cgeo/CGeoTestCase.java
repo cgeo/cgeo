@@ -29,14 +29,12 @@ public abstract class CGeoTestCase extends ApplicationTestCase<CgeoApplication> 
     }
 
     /** Remove cache from DB and cache to ensure that the cache is not loaded from the database */
-    protected static void deleteCacheFromDB(String geocode) {
+    protected static void deleteCacheFromDB(final String geocode) {
         DataStore.removeCache(geocode, LoadFlags.REMOVE_ALL);
     }
 
     /**
      * remove cache from database and file system
-     *
-     * @param geocode
      */
     protected static void removeCacheCompletely(final String geocode) {
         final EnumSet<RemoveFlag> flags = EnumSet.copyOf(LoadFlags.REMOVE_ALL);
@@ -71,10 +69,8 @@ public abstract class CGeoTestCase extends ApplicationTestCase<CgeoApplication> 
     /**
      * can be called after recordMapStoreFlags,
      * to set the flags for map storing as necessary
-     * @param storeCacheMap
-     * @param storeWpMaps
      */
-    protected void setMapStoreFlags(boolean storeCacheMap, boolean storeWpMaps) {
+    protected void setMapStoreFlags(final boolean storeCacheMap, final boolean storeWpMaps) {
         if (!oldMapStoreFlagsRecorded) {
             throw new IllegalStateException("Previous MapStoreFlags havn't been recorded! Setting not allowed");
         }

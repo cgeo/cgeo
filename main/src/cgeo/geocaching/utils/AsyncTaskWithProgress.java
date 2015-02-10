@@ -89,6 +89,9 @@ public abstract class AsyncTaskWithProgress<Params, Result> extends AsyncTask<Pa
     /**
      * This method should typically be overridden by sub classes instead of {@link #onPostExecute(Object)}.
      *
+     * @param result
+     *            The result of the operation computed by {@link #doInBackground(Object...)}.
+     *
      */
     protected void onPostExecuteInternal(final Result result) {
         // empty by default
