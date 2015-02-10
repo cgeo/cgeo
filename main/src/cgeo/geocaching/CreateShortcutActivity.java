@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.maps.MapActivity;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -67,8 +68,11 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
         // shortcuts.add(new Shortcut(R.string.cache_menu_visit, new Intent(this, LogCacheActivity.class)));
         // shortcuts.add(new Shortcut(R.string.trackable_log_touch, new Intent(this, LogTrackableActivity.class)));
 
-        final Shortcut offlineShortcut = new Shortcut(R.string.stored_caches_button, R.drawable.main_stored, null);
+        final Shortcut offlineShortcut = new Shortcut(R.string.list_title, R.drawable.main_stored, null);
         shortcuts.add(offlineShortcut);
+        final Intent allIntent = new Intent(this, CacheListActivity.class);
+        allIntent.putExtra(Intents.EXTRA_LIST_ID, PseudoList.ALL_LIST.id);
+        shortcuts.add(new Shortcut(R.string.list_all_lists, R.drawable.main_stored, allIntent));
         shortcuts.add(new Shortcut(R.string.advanced_search_button, R.drawable.main_search, new Intent(this, SearchActivity.class)));
         shortcuts.add(new Shortcut(R.string.any_button, R.drawable.main_any, new Intent(this, NavigateAnyPointActivity.class)));
         shortcuts.add(new Shortcut(R.string.menu_history, R.drawable.main_stored, CacheListActivity.getHistoryIntent(this)));
@@ -94,7 +98,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
             public void call(final Integer listId) {
                 createOfflineListShortcut(listId);
             }
-        }, true, -1);
+        }, true, PseudoList.NEW_LIST.id);
     }
 
     protected void createOfflineListShortcut(final int listId) {
