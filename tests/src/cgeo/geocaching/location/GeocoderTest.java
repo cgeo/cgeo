@@ -13,7 +13,6 @@ import rx.Observable;
 
 import android.location.Address;
 import android.location.Geocoder;
-import android.test.suitebuilder.annotation.Suppress;
 
 import java.util.Locale;
 
@@ -46,7 +45,6 @@ public class GeocoderTest extends CGeoTestCase {
         testGeocoder(GCGeocoder.getFromLocationName(TEST_ADDRESS), "GC", false);
     }
 
-    @Suppress
     public static void testMapQuestGeocoder() {
         final Locale locale = Locale.getDefault();
         try {
