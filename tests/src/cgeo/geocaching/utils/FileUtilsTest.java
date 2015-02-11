@@ -31,7 +31,7 @@ public class FileUtilsTest extends TestCase {
         }
     }
 
-    public void testFileUrl() {
+    public static void testFileUrl() {
         assertThat(FileUtils.isFileUrl("file:///tmp/foo/bar")).isTrue();
         assertThat(FileUtils.isFileUrl("http://www.google.com")).isFalse();
         assertThat(FileUtils.fileToUrl(new File("/tmp/foo/bar"))).isEqualTo("file:///tmp/foo/bar");
