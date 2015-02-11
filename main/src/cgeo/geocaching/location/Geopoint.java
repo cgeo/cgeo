@@ -178,8 +178,8 @@ public final class Geopoint implements ICoordinates, Parcelable {
      * @return An array of floats: the distance in meters, then the bearing in degrees
      */
     private float[] pathTo(final Geopoint target) {
-        float[] results = new float[2];
-        android.location.Location.distanceBetween(latitude, longitude, target.latitude, target.longitude, results);
+        final float[] results = new float[2];
+        Location.distanceBetween(latitude, longitude, target.latitude, target.longitude, results);
         return results;
     }
 
@@ -259,7 +259,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
      * @see GeopointFormatter
      * @return formatted coordinates
      */
-    public String format(GeopointFormatter.Format format) {
+    public String format(final GeopointFormatter.Format format) {
         return GeopointFormatter.format(format, this);
     }
 
@@ -277,7 +277,7 @@ public final class Geopoint implements ICoordinates, Parcelable {
     abstract public static class GeopointException extends NumberFormatException {
         private static final long serialVersionUID = 1L;
 
-        protected GeopointException(String msg) {
+        protected GeopointException(final String msg) {
             super(msg);
         }
     }
@@ -513,19 +513,19 @@ public final class Geopoint implements ICoordinates, Parcelable {
     /**
      * Gets distance in meters (workaround for 4.2.1 JIT bug).
      */
-    public static double getDistance(double lat1, double lon1, double lat2, double lon2) {
+    public static double getDistance(final double lat1, final double lon1, final double lat2, final double lon2) {
         // for haversine use R = 6372.8 km instead of 6371 km
-        double earthRadius = 6372.8;
-        double dLat = toRadians(lat2 - lat1);
-        double dLon = toRadians(lon2 - lon1);
-        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        final double earthRadius = 6372.8;
+        final double dLat = toRadians(lat2 - lat1);
+        final double dLon = toRadians(lon2 - lon1);
+        final double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
                 Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
                 Math.sin(dLon / 2) * Math.sin(dLon / 2);
         // simplify haversine
         return (2 * earthRadius * 1000 * Math.asin(Math.sqrt(a)));
     }
 
-    private static double toRadians(double angdeg) {
+    private static double toRadians(final double angdeg) {
         return angdeg * DEG_TO_RAD;
     }
 
