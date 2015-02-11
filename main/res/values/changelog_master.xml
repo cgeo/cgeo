@@ -12,6 +12,7 @@
     · New: Show hint in compass\n
     · Fix: Don\'t allow logs in the future\n
     · Fix: Allow shortcut creation for All caches list\n
+    · Fix: Some menus not available when invoking map from compass\n
     \n
   </string>
 </resources>

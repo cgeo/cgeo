@@ -182,7 +182,12 @@ public class CompassActivity extends AbstractActionBarActivity {
         final int id = item.getItemId();
         switch (id) {
             case R.id.menu_map:
-                CGeoMap.startActivityCoords(this, dstCoords, null, null);
+                if (cache != null) {
+                    CGeoMap.startActivityGeoCode(this, cache.getGeocode());
+                }
+                else {
+                    CGeoMap.startActivityCoords(this, dstCoords, null, null);
+                }
                 return true;
             case R.id.menu_compass_sensor_gps:
                 Settings.setUseCompass(false);
