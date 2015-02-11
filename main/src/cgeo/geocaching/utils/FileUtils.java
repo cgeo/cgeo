@@ -86,18 +86,20 @@ public final class FileUtils {
      * </ul>
      * which does not yet exist.
      */
-    public static File getUniqueNamedFile(final String baseNameAndPath) {
-        String extension = StringUtils.substringAfterLast(baseNameAndPath, ".");
-        String pathName = StringUtils.substringBeforeLast(baseNameAndPath, ".");
-        int number = 1;
-        while (new File(getNumberedFileName(pathName, extension, number)).exists()) {
-            number++;
+    public static File getUniqueNamedFile(final File file) {
+        if (!file.exists()) {
+            return file;
         }
-        return new File(getNumberedFileName(pathName, extension, number));
-    }
-
-    private static String getNumberedFileName(String pathName, String extension, int number) {
-        return pathName + (number > 1 ? "_" + Integer.toString(number) : "") + "." + extension;
+        final String baseNameAndPath = file.getPath();
+        final String prefix = StringUtils.substringBeforeLast(baseNameAndPath, ".") + "_";
+        final String extension = "." + StringUtils.substringAfterLast(baseNameAndPath, ".");
+        for (int i = 1; i < Integer.MAX_VALUE; i++) {
+            final File numbered = new File(prefix + i + extension);
+            if (!numbered.exists()) {
+                return numbered;
+            }
+        }
+        throw new IllegalStateException("Unable to generate a non-existing file name");
     }
 
     /**

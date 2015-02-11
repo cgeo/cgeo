@@ -22,15 +22,14 @@ public class DebugUtils {
 
     public static void createMemoryDump(final @NonNull Context context) {
         try {
-            final Date now = new Date();
             final SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyy-MM-dd_hh-mm", Locale.US);
-            File file = FileUtils.getUniqueNamedFile(Environment.getExternalStorageDirectory().getPath()
-                    + File.separatorChar + "cgeo_dump_" + fileNameDateFormat.format(now) + ".hprof");
+            final File file = FileUtils.getUniqueNamedFile(new File(Environment.getExternalStorageDirectory(),
+                    "cgeo_dump_" + fileNameDateFormat.format(new Date()) + ".hprof"));
             android.os.Debug.dumpHprofData(file.getPath());
             Toast.makeText(context, context.getString(R.string.init_memory_dumped, file.getAbsolutePath()),
                     Toast.LENGTH_LONG).show();
             ShareUtils.share(context, file, R.string.init_memory_dump);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             Log.e("createMemoryDump", e);
         }
     }

@@ -117,8 +117,7 @@ public class GpxExport extends AbstractExport {
 
         private File getExportFile() {
             final SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-            final Date now = new Date();
-            return FileUtils.getUniqueNamedFile(Settings.getGpxExportDir() + File.separatorChar + "export_" + fileNameDateFormat.format(now) + ".gpx");
+            return FileUtils.getUniqueNamedFile(new File(Settings.getGpxExportDir(), "export_" + fileNameDateFormat.format(new Date()) + ".gpx"));
         }
 
         @Override
