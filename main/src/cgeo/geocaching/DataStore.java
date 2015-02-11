@@ -905,7 +905,7 @@ public class DataStore {
                 public void call() {
                     for (final File dir : toRemove) {
                         Log.i("Removing obsolete cache directory for " + dir.getName());
-                        LocalStorage.deleteDirectory(dir);
+                        FileUtils.deleteDirectory(dir);
                     }
                 }
             });
@@ -2356,7 +2356,7 @@ public class DataStore {
                     database.delete(dbTableLogImages, "log_id NOT IN (SELECT _id FROM " + dbTableLogs + ")", null);
 
                     // Remove the obsolete "_others" directory where the user avatar used to be stored.
-                    LocalStorage.deleteDirectory(LocalStorage.getStorageDir("_others"));
+                    FileUtils.deleteDirectory(LocalStorage.getStorageDir("_others"));
 
                     if (version > -1) {
                         Settings.setVersion(version);
@@ -2452,7 +2452,7 @@ public class DataStore {
 
             // Delete cache directories
             for (final String geocode : geocodes) {
-                LocalStorage.deleteDirectory(LocalStorage.getStorageDir(geocode));
+                FileUtils.deleteDirectory(LocalStorage.getStorageDir(geocode));
             }
         }
     }

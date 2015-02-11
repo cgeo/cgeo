@@ -29,7 +29,7 @@ public class FileUtilsTest extends TestCase {
     }
 
     public void testGetUniqueNamedFile() throws IOException {
-        LocalStorage.deleteDirectory(cacheDir);
+        FileUtils.deleteDirectory(cacheDir);
         cacheDir.mkdirs();
         try {
             assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(baseFile);
@@ -39,7 +39,7 @@ public class FileUtilsTest extends TestCase {
             assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(alternative2);
             assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(alternative2);
         } finally {
-            LocalStorage.deleteDirectory(cacheDir);
+            FileUtils.deleteDirectory(cacheDir);
         }
     }
 

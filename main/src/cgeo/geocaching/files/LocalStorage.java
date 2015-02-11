@@ -364,24 +364,6 @@ public final class LocalStorage {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
     }
 
-    public static boolean deleteDirectory(@NonNull final File dir) {
-        final File[] files = dir.listFiles();
-
-        // Although we are called on an existing directory, it might have been removed concurrently
-        // in the meantime, for example by the user or by another cleanup task.
-        if (files != null) {
-            for (final File file : files) {
-                if (file.isDirectory()) {
-                    deleteDirectory(file);
-                } else {
-                    FileUtils.delete(file);
-                }
-            }
-        }
-
-        return FileUtils.delete(dir);
-    }
-
     /**
      * Deletes all files from directory geocode with the given prefix.
      *

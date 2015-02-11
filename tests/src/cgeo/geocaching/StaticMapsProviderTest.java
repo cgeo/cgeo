@@ -7,6 +7,7 @@ import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.RxUtils;
 
 import junit.framework.TestCase;
@@ -78,7 +79,7 @@ public class StaticMapsProviderTest extends TestCase {
 
     private static void deleteCacheDirectory(String geocode) {
         File cacheDir = LocalStorage.getStorageDir(geocode);
-        LocalStorage.deleteDirectory(cacheDir);
+        FileUtils.deleteDirectory(cacheDir);
     }
 
 }

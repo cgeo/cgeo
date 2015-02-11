@@ -4,6 +4,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.os.Handler;
 import android.os.Message;
@@ -29,7 +30,7 @@ public final class FileUtils {
         // utility class
     }
 
-    public static void listDir(List<File> result, File directory, FileSelector chooser, Handler feedBackHandler) {
+    public static void listDir(final List<File> result, final File directory, final FileSelector chooser, final Handler feedBackHandler) {
 
         if (directory == null || !directory.isDirectory() || !directory.canRead()
                 || result == null
@@ -40,7 +41,7 @@ public final class FileUtils {
         final File[] files = directory.listFiles();
 
         if (ArrayUtils.isNotEmpty(files)) {
-            for (File file : files) {
+            for (final File file : files) {
                 if (chooser.shouldEnd()) {
                     return;
                 }
@@ -67,6 +68,24 @@ public final class FileUtils {
                 }
             }
         }
+    }
+
+    public static boolean deleteDirectory(@NonNull final File dir) {
+        final File[] files = dir.listFiles();
+
+        // Although we are called on an existing directory, it might have been removed concurrently
+        // in the meantime, for example by the user or by another cleanup task.
+        if (files != null) {
+            for (final File file : files) {
+                if (file.isDirectory()) {
+                    deleteDirectory(file);
+                } else {
+                    delete(file);
+                }
+            }
+        }
+
+        return delete(dir);
     }
 
     public static abstract class FileSelector {
@@ -131,7 +150,7 @@ public final class FileUtils {
      * @return <code>true</code> if the directory was created, <code>false</code> on failure or if the directory already
      *         existed.
      */
-    public static boolean mkdirs(File file) {
+    public static boolean mkdirs(final File file) {
         final boolean success = file.mkdirs() || file.isDirectory(); // mkdirs returns false on existing directories
         if (!success) {
             Log.e("Could not make directories " + file.getAbsolutePath());
@@ -139,7 +158,7 @@ public final class FileUtils {
         return success;
     }
 
-    public static boolean writeFileUTF16(File file, String content) {
+    public static boolean writeFileUTF16(final File file, final String content) {
         // TODO: replace by some apache.commons IOUtils or FileUtils code
         Writer fileWriter = null;
         BufferedOutputStream buffer = null;
