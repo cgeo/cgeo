@@ -14,10 +14,10 @@ import java.io.IOException;
 
 public class FileUtilsTest extends TestCase {
 
-    final File cacheDir = LocalStorage.getStorageDir("automated-tests");
-    final File baseFile = new File(cacheDir, "prefix.ext");
-    final File alternative1 = new File(cacheDir, "prefix_1.ext");
-    final File alternative2 = new File(cacheDir, "prefix_2.ext");
+    final File testDir = LocalStorage.getStorageDir("automated-tests");
+    final File baseFile = new File(testDir, "prefix.ext");
+    final File alternative1 = new File(testDir, "prefix_1.ext");
+    final File alternative2 = new File(testDir, "prefix_2.ext");
 
     private Context getTestContext() {
         try {
@@ -29,8 +29,8 @@ public class FileUtilsTest extends TestCase {
     }
 
     public void testGetUniqueNamedFile() throws IOException {
-        FileUtils.deleteDirectory(cacheDir);
-        cacheDir.mkdirs();
+        FileUtils.deleteDirectory(testDir);
+        testDir.mkdirs();
         try {
             assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(baseFile);
             baseFile.createNewFile();
@@ -39,7 +39,7 @@ public class FileUtilsTest extends TestCase {
             assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(alternative2);
             assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(alternative2);
         } finally {
-            FileUtils.deleteDirectory(cacheDir);
+            FileUtils.deleteDirectory(testDir);
         }
     }
 
@@ -48,5 +48,14 @@ public class FileUtilsTest extends TestCase {
         assertThat(FileUtils.isFileUrl("http://www.google.com")).isFalse();
         assertThat(FileUtils.fileToUrl(new File("/tmp/foo/bar"))).isEqualTo("file:///tmp/foo/bar");
         assertThat(FileUtils.urlToFile("file:///tmp/foo/bar").getPath()).isEqualTo("/tmp/foo/bar");
+    }
+
+    public void testCreateRemoveDirectories() {
+        FileUtils.deleteDirectory(testDir);
+        assertThat(testDir.exists()).isFalse();
+        FileUtils.mkdirs(testDir);
+        assertThat(testDir.exists()).isTrue();
+        FileUtils.deleteDirectory(testDir);
+        assertThat(testDir.exists()).isFalse();
     }
 }
