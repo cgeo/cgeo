@@ -56,7 +56,7 @@ public class MapQuestGeocoder {
         return Observable.defer(new Func0<Observable<Address>>() {
             @Override
             public Observable<Address> call() {
-                final ObjectNode response = Network.requestJSON("https://www.mapquestapi.com/geocoding/v1/" + method,
+                final ObjectNode response = Network.requestJSON("https://open.mapquestapi.com/geocoding/v1/" + method,
                         parameters.put("key", MAPQUEST_KEY));
                 if (response == null) {
                     Log.w("MapQuest decoder error: no response");
