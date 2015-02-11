@@ -676,6 +676,7 @@
 
     <string name="cache_waypoints_add">Add Waypoint</string>
     <string name="cache_hint">Hint</string>
+    <string name="cache_hint_not_available">No hint available</string>
     <string name="cache_logs">Logbook</string>
     <string name="cache_logs_friends_and_own">Friends/Own Logs</string>
     <string name="cache_dialog_loading_details">Loading cache details…</string>

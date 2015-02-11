@@ -9,6 +9,11 @@
         app:showAsAction="ifRoom|withText">
     </item>
     <item
+        android:id="@+id/menu_hint"
+        android:title="@string/cache_hint"
+        app:showAsAction="ifRoom|withText">
+    </item>
+    <item
         android:id="@+id/menu_tts_start"
         android:icon="@drawable/ic_menu_start_conversation"
         android:title="@string/tts_start"

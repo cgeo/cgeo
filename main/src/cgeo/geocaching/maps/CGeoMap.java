@@ -682,6 +682,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 default: // DETAILED
                     menu.findItem(R.id.menu_strategy_detailed).setChecked(true);
             }
+            menu.findItem(R.id.menu_hint).setVisible(mapMode == MapMode.SINGLE);
         } catch (final RuntimeException e) {
             Log.e("CGeoMap.onPrepareOptionsMenu", e);
         }
@@ -785,6 +786,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 Settings.setLiveMapStrategy(Strategy.DETAILED);
                 return true;
             }
+            case R.id.menu_hint:
+                if (caches.size() == 1) {
+                    final String hint = caches.iterator().next().getHint();
+                    ActivityMixin.showToast(getActivity(), StringUtils.defaultString(hint, getActivity().getString(R.string.cache_hint_not_available)));
+                }
+                return true;
             default:
                 final MapSource mapSource = MapProviderFactory.getMapSource(id);
                 if (mapSource != null) {

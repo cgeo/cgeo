@@ -30,6 +30,12 @@
         app:showAsAction="ifRoom|withText">
     </item>
     <item
+        android:id="@+id/menu_hint"
+        android:title="@string/cache_hint"
+        app:showAsAction="ifRoom|withText"
+        android:visible="false">
+    </item>
+    <item
         android:id="@+id/menu_store_caches"
         android:icon="@drawable/ic_menu_set_as"
         android:showAsAction="ifRoom|withText"
