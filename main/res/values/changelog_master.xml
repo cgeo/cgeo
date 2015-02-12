@@ -3,10 +3,10 @@
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
-    · New: distance and direction shown on map\n
-    · New: confirmation on backup/restore\n
-    · New: sort events of same date by time (if recognized from cache description)\n
-    · New: show rudimentary details for geocaching.com.au swaggies\n
+    · New: Distance and direction shown on map\n
+    · New: Confirmation on backup/restore\n
+    · New: Sort events of same date by time (if recognized from cache description)\n
+    · New: Show rudimentary details for geocaching.com.au swaggies\n
     · New: Weekday shown in event lists\n
     · New: Filter for caches with offline logs\n
     · New: Show hint in compass\n
