@@ -31,7 +31,7 @@
 		<JacksonDatabindVersion>2.4.4</JacksonDatabindVersion>
 
 		<RXAndroidVersion>0.24.0</RXAndroidVersion>
-		<RXJavaVersion>1.0.5</RXJavaVersion>
+		<RXJavaVersion>1.0.6</RXJavaVersion>
 	</properties>
 
 	<dependencies>
