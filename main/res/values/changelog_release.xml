@@ -7,6 +7,7 @@
     · Fix: Crash restoring non-existing database backup\n
     · Fix: Spoiler photo from hint not always downloaded\n
     · Fix: Bad sort order for filter names in some languages\n
+    · Fix: Crash searching maps on broken file system\n
     \n
     \n
     <b>2015.01.20:</b>\n

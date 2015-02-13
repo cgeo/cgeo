@@ -23,14 +23,18 @@ import java.util.List;
  */
 public final class FileUtils {
 
+    private static final int MAX_DIRECTORY_SCAN_DEPTH = 30;
     private static final String FILE_PROTOCOL = "file://";
 
     private FileUtils() {
         // utility class
     }
 
-    public static void listDir(List<File> result, File directory, FileSelector chooser, Handler feedBackHandler) {
+    public static void listDir(final List<File> result, final File directory, final FileSelector chooser, final Handler feedBackHandler) {
+        listDirInternally(result, directory, chooser, feedBackHandler, 0);
+    }
 
+    private static void listDirInternally(final List<File> result, final File directory, final FileSelector chooser, final Handler feedBackHandler, final int depths) {
         if (directory == null || !directory.isDirectory() || !directory.canRead()
                 || result == null
                 || chooser == null) {
@@ -40,7 +44,7 @@ public final class FileUtils {
         final File[] files = directory.listFiles();
 
         if (ArrayUtils.isNotEmpty(files)) {
-            for (File file : files) {
+            for (final File file : files) {
                 if (chooser.shouldEnd()) {
                     return;
                 }
@@ -63,7 +67,9 @@ public final class FileUtils {
                         feedBackHandler.sendMessage(Message.obtain(feedBackHandler, 0, name));
                     }
 
-                    listDir(result, file, chooser, feedBackHandler); // go deeper
+                    if (depths < MAX_DIRECTORY_SCAN_DEPTH) {
+                        listDirInternally(result, file, chooser, feedBackHandler, depths + 1); // go deeper
+                    }
                 }
             }
         }
@@ -87,8 +93,8 @@ public final class FileUtils {
      * which does not yet exist.
      */
     public static File getUniqueNamedFile(final String baseNameAndPath) {
-        String extension = StringUtils.substringAfterLast(baseNameAndPath, ".");
-        String pathName = StringUtils.substringBeforeLast(baseNameAndPath, ".");
+        final String extension = StringUtils.substringAfterLast(baseNameAndPath, ".");
+        final String pathName = StringUtils.substringBeforeLast(baseNameAndPath, ".");
         int number = 1;
         while (new File(getNumberedFileName(pathName, extension, number)).exists()) {
             number++;
@@ -96,7 +102,7 @@ public final class FileUtils {
         return new File(getNumberedFileName(pathName, extension, number));
     }
 
-    private static String getNumberedFileName(String pathName, String extension, int number) {
+    private static String getNumberedFileName(final String pathName, final String extension, final int number) {
         return pathName + (number > 1 ? "_" + Integer.toString(number) : "") + "." + extension;
     }
 
@@ -129,7 +135,7 @@ public final class FileUtils {
      * @return <code>true</code> if the directory was created, <code>false</code> on failure or if the directory already
      *         existed.
      */
-    public static boolean mkdirs(File file) {
+    public static boolean mkdirs(final File file) {
         final boolean success = file.mkdirs() || file.isDirectory(); // mkdirs returns false on existing directories
         if (!success) {
             Log.e("Could not make directories " + file.getAbsolutePath());
@@ -137,7 +143,7 @@ public final class FileUtils {
         return success;
     }
 
-    public static boolean writeFileUTF16(File file, String content) {
+    public static boolean writeFileUTF16(final File file, final String content) {
         // TODO: replace by some apache.commons IOUtils or FileUtils code
         Writer fileWriter = null;
         BufferedOutputStream buffer = null;
@@ -177,7 +183,7 @@ public final class FileUtils {
 
     /**
      * Local file name when {@link #isFileUrl(String)} is <tt>true</tt>.
-     * 
+     *
      * @return the local file
      */
     public static File urlToFile(final String url) {
