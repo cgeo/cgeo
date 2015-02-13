@@ -49,7 +49,12 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     public @Nullable
     String getTrackableCodeFromUrl(@NonNull final String url) {
         // http://geokrety.org/konkret.php?id=38545
-        final String id = StringUtils.substringAfterLast(url, "konkret.php?id=");
+        String id = StringUtils.substringAfterLast(url, "konkret.php?id=");
+        if (StringUtils.isNumeric(id)) {
+            return geocode(Integer.parseInt(id));
+        }
+        // http://geokretymap.org/38545
+        id = StringUtils.substringAfterLast(url, "geokretymap.org/");
         if (StringUtils.isNumeric(id)) {
             return geocode(Integer.parseInt(id));
         }
