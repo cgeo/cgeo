@@ -1805,4 +1805,12 @@ public class Geocache implements IWaypoint {
         return geocodes;
     }
 
+    /**
+     * Show the hint as toast message. If no hint is available, a default "no hint available" will be shown instead.
+     */
+    public void showHintToast(final Activity activity) {
+        final String hint = getHint();
+        ActivityMixin.showToast(activity, StringUtils.defaultIfBlank(hint, activity.getString(R.string.cache_hint_not_available)));
+    }
+
 }

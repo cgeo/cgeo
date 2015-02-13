@@ -209,7 +209,7 @@ public class CompassActivity extends AbstractActionBarActivity {
                 setTarget(cache);
                 return true;
             case R.id.menu_hint:
-                showHint();
+                cache.showHintToast(this);
                 return true;
             default:
                 if (LoggingUI.onMenuItemSelected(item, this, cache)) {
@@ -224,11 +224,6 @@ public class CompassActivity extends AbstractActionBarActivity {
                 }
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void showHint() {
-        final String hint = cache.getHint();
-        showToast(StringUtils.defaultString(hint, getString(R.string.cache_hint_not_available)));
     }
 
     private void setTarget(@NonNull final Geopoint coords, final String newDescription) {

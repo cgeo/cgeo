@@ -788,8 +788,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             }
             case R.id.menu_hint:
                 if (caches.size() == 1) {
-                    final String hint = caches.iterator().next().getHint();
-                    ActivityMixin.showToast(getActivity(), StringUtils.defaultString(hint, getActivity().getString(R.string.cache_hint_not_available)));
+                    caches.iterator().next().showHintToast(getActivity());
                 }
                 return true;
             default:
