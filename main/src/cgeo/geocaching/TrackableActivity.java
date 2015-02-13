@@ -127,7 +127,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             geocode = ConnectorFactory.getTrackableFromURL(uri.toString());
 
             final String uriHost = uri.getHost().toLowerCase(Locale.US);
-            if (uriHost.contains("geocaching.com")) {
+            if (uriHost.endsWith("geocaching.com")) {
                 geocode = uri.getQueryParameter("tracker");
                 guid = uri.getQueryParameter("guid");
                 id = uri.getQueryParameter("id");
@@ -144,17 +144,6 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                     geocode = null;
                     guid = null;
                     id = id.toLowerCase(Locale.US);
-                } else {
-                    showToast(res.getString(R.string.err_tb_details_open));
-                    finish();
-                    return;
-                }
-            } else if (uriHost.contains("coord.info")) {
-                final String uriPath = uri.getPath().toLowerCase(Locale.US);
-                if (StringUtils.startsWith(uriPath, "/tb")) {
-                    geocode = uriPath.substring(1).toUpperCase(Locale.US);
-                    guid = null;
-                    id = null;
                 } else {
                     showToast(res.getString(R.string.err_tb_details_open));
                     finish();
