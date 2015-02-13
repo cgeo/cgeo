@@ -4,6 +4,7 @@ import cgeo.geocaching.Geocache;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 class WaymarkingConnector extends AbstractConnector {
 
@@ -40,5 +41,21 @@ class WaymarkingConnector extends AbstractConnector {
     @Override
     public boolean canHandle(@NonNull final String geocode) {
         return StringUtils.startsWith(geocode, "WM");
+    }
+
+    @Override
+    @Nullable
+    public String getGeocodeFromUrl(@NonNull final String url) {
+        // coord.info URLs
+        String code = StringUtils.substringAfterLast(url, "coord.info/");
+        if (code != null && canHandle(code)) {
+            return code;
+        }
+        // waymarking URLs http://www.waymarking.com/waymarks/WMNCDT_American_Legion_Flagpole_1983_University_of_Oregon
+        code = StringUtils.substringBetween(url, "waymarks/", "_");
+        if (code != null && canHandle(code)) {
+            return code;
+        }
+        return null;
     }
 }

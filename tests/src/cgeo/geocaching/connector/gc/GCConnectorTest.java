@@ -82,7 +82,7 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
         assertTileAt(7536, 4915, new Tile(new Geopoint("S 33° 50.326 E 151° 12.426"), 13));
     }
 
-    private static void assertTileAt(int x, int y, final Tile tile) {
+    private static void assertTileAt(final int x, final int y, final Tile tile) {
         assertThat(tile.getX()).isEqualTo(x);
         assertThat(tile.getY()).isEqualTo(y);
     }
@@ -96,5 +96,6 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
 
         assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://coord.info/TB1234")).isNull();
         assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://www.coord.info/TB1234")).isNull();
+        assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://www.coord.info/WM1234")).isNull();
     }
 }
