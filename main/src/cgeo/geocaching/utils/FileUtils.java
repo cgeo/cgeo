@@ -24,6 +24,7 @@ import java.util.List;
  */
 public final class FileUtils {
 
+    private static final int MAX_DIRECTORY_SCAN_DEPTH = 30;
     private static final String FILE_PROTOCOL = "file://";
 
     private FileUtils() {
@@ -31,7 +32,10 @@ public final class FileUtils {
     }
 
     public static void listDir(final List<File> result, final File directory, final FileSelector chooser, final Handler feedBackHandler) {
+        listDirInternally(result, directory, chooser, feedBackHandler, 0);
+    }
 
+    private static void listDirInternally(final List<File> result, final File directory, final FileSelector chooser, final Handler feedBackHandler, final int depths) {
         if (directory == null || !directory.isDirectory() || !directory.canRead()
                 || result == null
                 || chooser == null) {
@@ -64,7 +68,9 @@ public final class FileUtils {
                         feedBackHandler.sendMessage(Message.obtain(feedBackHandler, 0, name));
                     }
 
-                    listDir(result, file, chooser, feedBackHandler); // go deeper
+                    if (depths < MAX_DIRECTORY_SCAN_DEPTH) {
+                        listDirInternally(result, file, chooser, feedBackHandler, depths + 1); // go deeper
+                    }
                 }
             }
         }
@@ -198,7 +204,7 @@ public final class FileUtils {
 
     /**
      * Local file name when {@link #isFileUrl(String)} is <tt>true</tt>.
-     * 
+     *
      * @return the local file
      */
     public static File urlToFile(final String url) {
