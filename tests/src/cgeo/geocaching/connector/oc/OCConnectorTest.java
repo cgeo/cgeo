@@ -24,4 +24,15 @@ public class OCConnectorTest extends TestCase {
         return ocConnector;
     }
 
+    public static void testGetGeocodeFromUrlDe() throws Exception {
+        final IConnector connector = ConnectorFactory.getConnector("OC0028");
+        assertThat(connector.getGeocodeFromUrl("http://opencaching.de/OC0028")).isEqualTo("OC0028");
+        assertThat(connector.getGeocodeFromUrl("http://www.opencaching.de/OC0028")).isEqualTo("OC0028");
+    }
+
+    public static void testGetGeocodeFromUrlUs() throws Exception {
+        final IConnector connector = ConnectorFactory.getConnector("OU07A0");
+        assertThat(connector.getGeocodeFromUrl("http://www.opencaching.us/viewcache.php?wp=OU07A0")).isEqualTo("OU07A0");
+    }
+
 }

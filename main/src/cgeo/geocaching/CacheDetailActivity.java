@@ -242,31 +242,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                         return;
                     }
                 }
-            } else if (uriHost.contains("coord.info")) {
-                if (StringUtils.startsWith(uriPath, "/gc")) {
-                    geocode = uriPath.substring(1).toUpperCase(Locale.US);
-                } else {
-                    showToast(res.getString(R.string.err_detail_open));
-                    finish();
-                    return;
-                }
-            } else if (uriHost.contains("opencaching.de") || uriHost.contains("opencaching.fr")) {
-                if (StringUtils.startsWith(uriPath, "/oc")) {
-                    geocode = uriPath.substring(1).toUpperCase(Locale.US);
-                } else {
-                    geocode = uri.getQueryParameter("wp");
-                    if (StringUtils.isNotBlank(geocode)) {
-                        geocode = geocode.toUpperCase(Locale.US);
-                    } else {
-                        showToast(res.getString(R.string.err_detail_open));
-                        finish();
-                        return;
-                    }
-                }
-            } else {
-                showToast(res.getString(R.string.err_detail_open));
-                finish();
-                return;
             }
         }
 

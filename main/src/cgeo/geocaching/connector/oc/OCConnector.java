@@ -5,7 +5,9 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.enumerations.LogType;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -82,5 +84,25 @@ public class OCConnector extends AbstractConnector {
         }
 
         return STANDARD_LOG_TYPES;
+    }
+
+    @Override
+    @Nullable
+    public String getGeocodeFromUrl(@NonNull final String url) {
+        // different opencaching installations have different supported URLs
+
+        // host.tld/geocode
+        final String shortHost = StringUtils.remove(getHost(), "www.");
+        String geocode = StringUtils.substringAfter(url, shortHost + "/");
+        if (canHandle(geocode)) {
+            return geocode;
+        }
+
+        // host.tld/viewcache.php?wp=geocode
+        geocode = StringUtils.substringAfter(url, shortHost + "/viewcache.php?wp=");
+        if (canHandle(geocode)) {
+            return geocode;
+        }
+        return super.getGeocodeFromUrl(url);
     }
 }
