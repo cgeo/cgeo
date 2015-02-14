@@ -207,6 +207,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             geocode = MapsWithMeCacheListApp.getCacheFromMapsWithMe(this, getIntent());
         }
 
+        if (geocode == null && uri != null) {
+            geocode = ConnectorFactory.getGeocodeFromURL(uri.toString());
+        }
+
         // try to get data from URI
         if (geocode == null && guid == null && uri != null) {
             final String uriHost = uri.getHost().toLowerCase(Locale.US);

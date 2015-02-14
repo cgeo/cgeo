@@ -14,4 +14,10 @@ public class OXConnectorTest extends TestCase {
         assertThat(oxConnector.canHandle("OX_")).isFalse();
     }
 
+    public static void testGetGeocodeFromUrl() {
+        final OXConnector connector = new OXConnector();
+        assertThat(connector.getGeocodeFromUrl("http://www.opencaching.com/de/#!geocache/OX1R421")).isEqualTo("OX1R421");
+        assertThat(connector.getGeocodeFromUrl("http://www.opencaching.com/#!geocache/OX1R421")).isEqualTo("OX1R421");
+    }
+
 }

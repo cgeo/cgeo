@@ -32,4 +32,8 @@ public class ECConnectorTest extends TestCase {
         return geocache;
     }
 
+    public static void testGetGeocodeFromUrl() throws Exception {
+        assertThat(ECConnector.getInstance().getGeocodeFromUrl("http://extremcaching.com/index.php/output-2/738")).isEqualTo("EC738");
+    }
+
 }

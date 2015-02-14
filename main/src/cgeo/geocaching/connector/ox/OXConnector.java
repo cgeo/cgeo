@@ -14,6 +14,7 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CancellableHandler;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -108,5 +109,15 @@ public class OXConnector extends AbstractConnector implements ISearchByCenter, I
             return null;
         }
         return new SearchResult(caches);
+    }
+
+    @Override
+    @Nullable
+    public String getGeocodeFromUrl(@NonNull final String url) {
+        final String geocode = StringUtils.substringAfter(url, "http://www.opencaching.com/de/#!geocache/");
+        if (canHandle(geocode)) {
+            return geocode;
+        }
+        return super.getGeocodeFromUrl(url);
     }
 }
