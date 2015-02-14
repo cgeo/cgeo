@@ -861,31 +861,6 @@
                     android:scheme="http" />
             </intent-filter>
 
-            <!--
-            Geokrety QR code URLs, not yet implemented
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="geokrety.org"
-                    android:pathPrefix="/m/qr.php"
-                    android:scheme="http" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.geokrety.org"
-                    android:pathPrefix="/m/qr.php"
-                    android:scheme="http" />
-            </intent-filter>
-            -->
         </activity>
         <activity
             android:name=".CompassActivity"
