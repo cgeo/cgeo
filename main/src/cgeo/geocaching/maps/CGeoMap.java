@@ -665,7 +665,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             item = menu.findItem(R.id.menu_theme_mode); // show theme selection
             item.setVisible(mapView.hasMapThemes());
 
-            menu.findItem(R.id.menu_as_list).setVisible(!isLoading());
+            menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
 
             menu.findItem(R.id.submenu_strategy).setVisible(isLiveEnabled);
 
