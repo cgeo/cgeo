@@ -2,6 +2,7 @@ package cgeo.geocaching.ui.logs;
 
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
 import cgeo.geocaching.R;
@@ -24,27 +25,33 @@ import java.util.Map.Entry;
 public class CacheLogsViewCreator extends LogsViewCreator {
     private final boolean allLogs;
     private final Resources res = CgeoApplication.getInstance().getResources();
+    private final CacheDetailActivity cacheDetailActivity;
 
     public CacheLogsViewCreator(final CacheDetailActivity cacheDetailActivity, final boolean allLogs) {
         super(cacheDetailActivity);
+        this.cacheDetailActivity = cacheDetailActivity;
         this.allLogs = allLogs;
     }
 
-    /**
-     * May return null!
-     *
-     */
     private Geocache getCache() {
-        if (this.activity instanceof CacheDetailActivity) {
-            final CacheDetailActivity details = (CacheDetailActivity) this.activity;
-            return details.getCache();
-        }
-        return null;
+        return cacheDetailActivity.getCache();
     }
 
     @Override
     protected List<LogEntry> getLogs() {
-        return allLogs ? getCache().getLogs() : getCache().getFriendsLogs();
+        final Geocache cache = getCache();
+        final List<LogEntry> logs = allLogs ? cache.getLogs() : cache.getFriendsLogs();
+        return addOwnOfflineLog(cache, logs);
+    }
+
+    private List<LogEntry> addOwnOfflineLog(final Geocache cache, final List<LogEntry> logsIn) {
+        final LogEntry log = DataStore.loadLogOffline(cache.getGeocode());
+        final ArrayList<LogEntry> logs = new ArrayList<>(logsIn);
+        if (log != null) {
+            log.author = res.getString(R.string.log_your_saved_log);
+            logs.add(0, log);
+        }
+        return logs;
     }
 
     @Override
@@ -91,6 +98,21 @@ public class CacheLogsViewCreator extends LogsViewCreator {
             holder.countOrLocation.setVisibility(View.VISIBLE);
             holder.countOrLocation.setText(res.getQuantityString(R.plurals.cache_counts, log.found, log.found));
         }
+    }
+
+    @Override
+    protected void fillViewHolder(final View convertView, final LogViewHolder holder, final LogEntry log) {
+        super.fillViewHolder(convertView, holder, log);
+        if (null == convertView) {
+            if (isOfflineLog(log)) {
+                holder.author.setOnClickListener(new EditOfflineLogListener(getCache(), cacheDetailActivity));
+                holder.text.setOnClickListener(new EditOfflineLogListener(getCache(), cacheDetailActivity));
+            }
+        }
+    }
+
+    private boolean isOfflineLog(final LogEntry log) {
+        return log.author.equals(activity.getString(R.string.log_your_saved_log));
     }
 
     @Override

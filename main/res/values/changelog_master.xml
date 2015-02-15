@@ -4,17 +4,19 @@
   <string name="changelog_master" translatable="false">
     <b>Next feature release:</b>\n
     · New: Distance and direction shown on map\n
-    · New: Confirmation on backup/restore\n
+    · New: Show own saved log first in logbook\n
+    · New: Show hint in compass and map action bar\n
     · New: Sort events of same date by time (if recognized from cache description)\n
-    · New: Show rudimentary details for geocaching.com.au swaggies\n
     · New: Weekday shown in event lists\n
+    · New: Show rudimentary details for geocaching.com.au swaggies\n
     · New: Filter for caches with offline logs\n
-    · New: Show hint in compass\n
     · New: Allow export of waypoints without coords to Locus\n
+    · New: Confirmation on backup/restore\n
     · Fix: Don\'t allow logs in the future\n
     · Fix: Allow shortcut creation for All caches list\n
     · Fix: Some menus not available when invoking map from compass\n
     · Fix: Do not limit to 10 logs for OC caches\n
+    · Fix: Recognize more hyperlinks of opencaching caches\n
     \n
   </string>
 </resources>

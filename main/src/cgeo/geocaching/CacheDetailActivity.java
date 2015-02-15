@@ -2187,4 +2187,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     public void cachesAround() {
         CacheListActivity.startActivityCoordinates(this, cache.getCoords());
     }
+
+    public void setNeedsRefresh() {
+        refreshOnResume = true;
+    }
 }
