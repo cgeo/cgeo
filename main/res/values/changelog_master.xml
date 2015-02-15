@@ -17,6 +17,7 @@
     · Fix: Some menus not available when invoking map from compass\n
     · Fix: Do not limit to 10 logs for OC caches\n
     · Fix: Recognize more hyperlinks of opencaching caches\n
+    · Fix: Remove empty space in some opencaching logs\n
     \n
   </string>
 </resources>

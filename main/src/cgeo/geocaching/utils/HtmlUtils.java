@@ -59,7 +59,8 @@ public final class HtmlUtils {
         return Html.fromHtml(result).toString().trim();
     }
 
-    public static String removeExtraParagraph(final String html) {
+    public static String removeExtraParagraph(final String htmlIn) {
+        final String html = StringUtils.trim(htmlIn);
         if (StringUtils.startsWith(html, "<p>") && StringUtils.endsWith(html, "</p>")) {
             final String paragraph = StringUtils.substring(html, "<p>".length(), html.length() - "</p>".length()).trim();
             if (extractText(paragraph).equals(paragraph)) {

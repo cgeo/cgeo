@@ -30,6 +30,7 @@ import cgeo.geocaching.network.OAuth;
 import cgeo.geocaching.network.OAuthTokens;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
@@ -64,7 +65,7 @@ import java.util.regex.Pattern;
 
 /**
  * Client for the OpenCaching API (Okapi).
- * 
+ *
  * @see <a href="http://www.opencaching.de/okapi/introduction.html">Okapi overview</a>
  *
  */
@@ -467,7 +468,7 @@ final class OkapiClient {
                         parseUser(logResponse.get(LOG_USER)),
                         parseDate(logResponse.get(LOG_DATE).asText()).getTime(),
                         parseLogType(logResponse.get(LOG_TYPE).asText()),
-                        logResponse.get(LOG_COMMENT).asText().trim());
+                        HtmlUtils.removeExtraParagraph(logResponse.get(LOG_COMMENT).asText().trim()));
                 result.add(log);
             } catch (final NullPointerException e) {
                 Log.e("OkapiClient.parseLogs", e);
