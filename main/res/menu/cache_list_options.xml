@@ -57,8 +57,8 @@
         android:actionProviderClass="cgeo.geocaching.apps.cachelist.ListNavigationSelectionActionProvider"
         android:icon="@drawable/ic_menu_goto"
         android:title="@string/caches_on_map"
-        app:actionProviderClass="cgeo.geocaching.apps.cachelist.ListNavigationSelectionActionProvider"
-        android:visible="false">
+        android:visible="false"
+        app:actionProviderClass="cgeo.geocaching.apps.cachelist.ListNavigationSelectionActionProvider">
     </item>
     <item
         android:id="@+id/menu_create_list"

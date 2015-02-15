@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <item
         android:id="@+id/menu_default_navigation"
@@ -21,37 +21,37 @@
     <item
         android:id="@+id/menu_log_visit_offline"
         android:icon="@drawable/ic_menu_edit"
-        app:showAsAction="ifRoom|withText"
-        android:title="@string/cache_menu_visit_offline">
+        android:title="@string/cache_menu_visit_offline"
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_log_visit"
         android:icon="@drawable/ic_menu_edit"
-        app:showAsAction="ifRoom|withText"
-        android:title="@string/cache_menu_visit">
+        android:title="@string/cache_menu_visit"
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_drop_cache"
-        app:showAsAction="ifRoom|withText"
         android:icon="@drawable/ic_menu_delete"
-        android:title="@string/cache_offline_drop">
+        android:title="@string/cache_offline_drop"
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_move_to_list"
-        app:showAsAction="ifRoom|withText"
-        android:title="@string/cache_menu_move_list">
+        android:title="@string/cache_menu_move_list"
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_refresh"
-        app:showAsAction="ifRoom|withText"
         android:icon="@drawable/ic_menu_refresh"
-        android:title="@string/cache_menu_refresh">
+        android:title="@string/cache_menu_refresh"
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_store_cache"
-        app:showAsAction="ifRoom|withText"
         android:icon="@drawable/ic_menu_save"
-        android:title="@string/cache_offline_store">
+        android:title="@string/cache_offline_store"
+        app:showAsAction="ifRoom|withText">
     </item>
 
 </menu>

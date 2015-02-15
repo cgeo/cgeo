@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <item
         android:id="@+id/menu_search_own_caches"
         android:icon="@drawable/ic_menu_myplaces"
         android:title="@string/search_own_caches"
-        app:showAsAction="ifRoom|withText"
-        >
+        app:showAsAction="ifRoom|withText">
     </item>
 
 </menu>

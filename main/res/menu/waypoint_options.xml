@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
     <item
         android:id="@+id/menu_waypoint_reset_cache_coords"
         android:title="@string/waypoint_reset_cache_coords">
@@ -30,4 +30,5 @@
         android:id="@+id/menu_waypoint_caches_around"
         android:title="@string/cache_menu_around">
     </item>
+
 </menu>

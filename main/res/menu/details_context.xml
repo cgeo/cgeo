@@ -10,8 +10,8 @@
     </item>
     <item
         android:id="@+id/menu_cache_share_field"
-        android:title="@string/cache_share_field"
         android:icon="@drawable/ic_menu_share"
+        android:title="@string/cache_share_field"
         app:showAsAction="ifRoom">
     </item>
     <item
