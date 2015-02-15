@@ -11,11 +11,6 @@ import android.view.WindowManager;
 class AndroidLevel13Emulation implements AndroidLevel13Interface {
 
     @Override
-    public int getDisplayWidth() {
-        return getDisplay().getWidth();
-    }
-
-    @Override
     public Point getDisplaySize() {
         final Display display = getDisplay();
         return new Point(display.getWidth(), display.getHeight());

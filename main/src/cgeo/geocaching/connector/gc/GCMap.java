@@ -11,8 +11,8 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter.Format;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.maps.LiveMapStrategy.Strategy;
-import cgeo.geocaching.maps.LiveMapStrategy.StrategyFlag;
+import cgeo.geocaching.maps.LivemapStrategy;
+import cgeo.geocaching.maps.LivemapStrategy.Flag;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
@@ -110,7 +110,7 @@ public class GCMap {
      *            Retrieved data.
      * @return SearchResult. Never null.
      */
-    public static SearchResult parseMapJSON(final String data, final Tile tile, final Bitmap bitmap, final Strategy strategy) {
+    public static SearchResult parseMapJSON(final String data, final Tile tile, final Bitmap bitmap, final LivemapStrategy strategy) {
         final SearchResult searchResult = new SearchResult();
 
         try {
@@ -185,7 +185,7 @@ public class GCMap {
                 cache.setGeocode(id);
                 cache.setName(nameCache.get(id));
                 cache.setCoords(tile.getCoord(xy), tile.getZoomLevel());
-                if (strategy.flags.contains(StrategyFlag.PARSE_TILES) && bitmap != null) {
+                if (strategy.flags.contains(LivemapStrategy.Flag.PARSE_TILES) && bitmap != null) {
                     for (final UTFGridPosition singlePos : singlePositions.get(id)) {
                         if (IconDecoder.parseMapPNG(cache, bitmap, singlePos, tile.getZoomLevel())) {
                             break; // cache parsed
@@ -230,9 +230,9 @@ public class GCMap {
     @NonNull
     public static SearchResult searchByViewport(final Viewport viewport, final MapTokens tokens) {
         final int speed = (int) Sensors.getInstance().currentGeo().getSpeed() * 60 * 60 / 1000; // in km/h
-        Strategy strategy = Settings.getLiveMapStrategy();
-        if (strategy == Strategy.AUTO) {
-            strategy = speed >= 30 ? Strategy.FAST : Strategy.DETAILED;
+        LivemapStrategy strategy = Settings.getLiveMapStrategy();
+        if (strategy == LivemapStrategy.AUTO) {
+            strategy = speed >= 30 ? LivemapStrategy.FAST : LivemapStrategy.DETAILED;
         }
 
         final SearchResult result = searchByViewport(viewport, tokens, strategy);
@@ -258,7 +258,7 @@ public class GCMap {
      *            Strategy for data retrieval and parsing, @see Strategy
      */
     @NonNull
-    private static SearchResult searchByViewport(final Viewport viewport, final MapTokens tokens, final Strategy strategy) {
+    private static SearchResult searchByViewport(final Viewport viewport, final MapTokens tokens, final LivemapStrategy strategy) {
         Log.d("GCMap.searchByViewport" + viewport.toString());
 
         final SearchResult searchResult = new SearchResult();
@@ -267,7 +267,7 @@ public class GCMap {
             searchResult.setUrl(viewport.getCenter().format(Format.LAT_LON_DECMINUTE));
         }
 
-        if (strategy.flags.contains(StrategyFlag.LOAD_TILES)) {
+        if (strategy.flags.contains(LivemapStrategy.Flag.LOAD_TILES)) {
             final Set<Tile> tiles = Tile.getTilesForViewport(viewport);
 
             if (Settings.isDebug()) {
@@ -337,7 +337,7 @@ public class GCMap {
             }
         }
 
-        if (strategy.flags.contains(StrategyFlag.SEARCH_NEARBY) && Settings.isGCPremiumMember()) {
+        if (strategy.flags.contains(Flag.SEARCH_NEARBY) && Settings.isGCPremiumMember()) {
             final Geopoint center = viewport.getCenter();
             if ((lastSearchViewport == null) || !lastSearchViewport.contains(center)) {
                 //FIXME We don't have a RecaptchaReceiver!?

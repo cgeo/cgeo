@@ -31,7 +31,7 @@ public class Image implements Parcelable {
     }
 
     public Image(final File file) {
-        this("file://" + file.getAbsolutePath(), file.getName(), null);
+        this(FileUtils.fileToUrl(file), file.getName(), null);
     }
 
     public Image(final Parcel in) {
@@ -46,7 +46,7 @@ public class Image implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
+    public void writeToParcel(final Parcel dest, final int flags) {
         dest.writeString(url);
         dest.writeString(title);
         dest.writeString(description);
@@ -54,12 +54,12 @@ public class Image implements Parcelable {
 
     public static final Parcelable.Creator<Image> CREATOR = new Parcelable.Creator<Image>() {
         @Override
-        public Image createFromParcel(Parcel in) {
+        public Image createFromParcel(final Parcel in) {
             return new Image(in);
         }
 
         @Override
-        public Image[] newArray(int size) {
+        public Image[] newArray(final int size) {
             return new Image[size];
         }
     };

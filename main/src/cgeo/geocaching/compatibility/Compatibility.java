@@ -25,10 +25,6 @@ public final class Compatibility {
         // utility class
     }
 
-    public static int getDisplayWidth() {
-        return LEVEL_13.getDisplayWidth();
-    }
-
     public static Point getDisplaySize() {
         return LEVEL_13.getDisplaySize();
     }

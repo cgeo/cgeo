@@ -11,11 +11,6 @@ import android.view.WindowManager;
 class AndroidLevel13 implements AndroidLevel13Interface {
 
     @Override
-    public int getDisplayWidth() {
-        return getDisplaySize().x;
-    }
-
-    @Override
     public Point getDisplaySize() {
         final Point dimensions = new Point();
         ((WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE))

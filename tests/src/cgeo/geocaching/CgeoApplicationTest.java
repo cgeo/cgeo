@@ -16,7 +16,7 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.maps.LiveMapStrategy.Strategy;
+import cgeo.geocaching.maps.LivemapStrategy;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
 import cgeo.geocaching.test.RegExPerformanceTest;
@@ -290,7 +290,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
             @Override
             public void run() {
                 // backup user settings
-                final Strategy strategy = Settings.getLiveMapStrategy();
+                final LivemapStrategy strategy = Settings.getLiveMapStrategy();
                 final CacheType cacheType = Settings.getCacheType();
 
                 try {
@@ -305,7 +305,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     final Viewport viewport = new Viewport(mockedCache, 0.003, 0.003);
 
                     // check coords for DETAILED
-                    Settings.setLiveMapStrategy(Strategy.DETAILED);
+                    Settings.setLiveMapStrategy(LivemapStrategy.DETAILED);
                     SearchResult search = ConnectorFactory.searchByViewport(viewport, tokens);
                     assertThat(search).isNotNull();
                     assertThat(search.getGeocodes().contains(mockedCache.getGeocode())).isTrue();
@@ -317,7 +317,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     assertThat(parsedCache.isReliableLatLon()).isEqualTo(Settings.isGCPremiumMember());
 
                     // check update after switch strategy to FAST
-                    Settings.setLiveMapStrategy(Strategy.FAST);
+                    Settings.setLiveMapStrategy(LivemapStrategy.FAST);
                     Tile.cache.removeFromTileCache(mockedCache);
 
                     search = ConnectorFactory.searchByViewport(viewport, tokens);
@@ -348,8 +348,8 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
             @Override
             public void run() {
-                final Strategy strategy = Settings.getLiveMapStrategy();
-                final Strategy testStrategy = Strategy.FAST; // FASTEST, FAST or DETAILED for tests
+                final LivemapStrategy strategy = Settings.getLiveMapStrategy();
+                final LivemapStrategy testStrategy = LivemapStrategy.FAST; // FASTEST, FAST or DETAILED for tests
                 Settings.setLiveMapStrategy(testStrategy);
                 final CacheType cacheType = Settings.getCacheType();
 
@@ -374,7 +374,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                     Log.d("cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cacheFromViewport.getCoords());
                     assertThat(cache.getCoords().distanceTo(cacheFromViewport.getCoords()) <= 1e-3).isFalse();
                     // depending on the chosen strategy the coords can be reliable or not
-                    assertThat(cacheFromViewport.isReliableLatLon()).isEqualTo(testStrategy == Strategy.DETAILED);
+                    assertThat(cacheFromViewport.isReliableLatLon()).isEqualTo(testStrategy == LivemapStrategy.DETAILED);
 
                     // premium cache
                     cache = new GC2JVEH();

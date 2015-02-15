@@ -11,8 +11,8 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.CGeoMap.MapMode;
-import cgeo.geocaching.maps.LiveMapStrategy.Strategy;
 import cgeo.geocaching.maps.MapProviderFactory;
+import cgeo.geocaching.maps.LivemapStrategy;
 import cgeo.geocaching.maps.google.v1.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapProvider;
@@ -188,7 +188,7 @@ public class Settings {
             e.putInt(getKey(R.string.pref_lastdetailspage), prefsV0.getInt(getKey(R.string.pref_lastdetailspage), 1));
             e.putInt(getKey(R.string.pref_defaultNavigationTool), prefsV0.getInt(getKey(R.string.pref_defaultNavigationTool), NavigationAppsEnum.COMPASS.id));
             e.putInt(getKey(R.string.pref_defaultNavigationTool2), prefsV0.getInt(getKey(R.string.pref_defaultNavigationTool2), NavigationAppsEnum.INTERNAL_MAP.id));
-            e.putInt(getKey(R.string.pref_livemapstrategy), prefsV0.getInt(getKey(R.string.pref_livemapstrategy), Strategy.AUTO.id));
+            e.putInt(getKey(R.string.pref_livemapstrategy), prefsV0.getInt(getKey(R.string.pref_livemapstrategy), LivemapStrategy.AUTO.id));
             e.putBoolean(getKey(R.string.pref_debug), prefsV0.getBoolean(getKey(R.string.pref_debug), false));
             e.putInt(getKey(R.string.pref_livemaphintshowcount), prefsV0.getInt(getKey(R.string.pref_livemaphintshowcount), 0));
 
@@ -906,11 +906,11 @@ public class Settings {
                 String.valueOf(NavigationAppsEnum.INTERNAL_MAP.id)));
     }
 
-    public static Strategy getLiveMapStrategy() {
-        return Strategy.getById(getInt(R.string.pref_livemapstrategy, Strategy.AUTO.id));
+    public static LivemapStrategy getLiveMapStrategy() {
+        return LivemapStrategy.getById(getInt(R.string.pref_livemapstrategy, LivemapStrategy.AUTO.id));
     }
 
-    public static void setLiveMapStrategy(final Strategy strategy) {
+    public static void setLiveMapStrategy(final LivemapStrategy strategy) {
         putInt(R.string.pref_livemapstrategy, strategy.id);
     }
 

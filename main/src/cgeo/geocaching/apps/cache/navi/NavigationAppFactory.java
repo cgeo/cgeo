@@ -5,7 +5,6 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.apps.App;
 import cgeo.geocaching.apps.cache.WhereYouGoApp;
 import cgeo.geocaching.apps.cache.navi.GoogleNavigationApp.GoogleNavigationBikeApp;
@@ -25,7 +24,7 @@ import android.widget.ArrayAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class NavigationAppFactory extends AbstractAppFactory {
+public final class NavigationAppFactory {
 
     private NavigationAppFactory() {
         // utility class

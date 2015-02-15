@@ -33,5 +33,8 @@ public interface MapActivityImpl {
 
     boolean superOnOptionsItemSelected(MenuItem item);
 
+    /**
+     * called from the pseudo actionbar layout
+     */
     public abstract void navigateUp(View view);
 }

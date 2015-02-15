@@ -23,7 +23,6 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.maps.LiveMapStrategy.Strategy;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
@@ -770,22 +769,22 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             }
             case R.id.menu_strategy_fastest: {
                 item.setChecked(true);
-                Settings.setLiveMapStrategy(Strategy.FASTEST);
+                Settings.setLiveMapStrategy(LivemapStrategy.FASTEST);
                 return true;
             }
             case R.id.menu_strategy_fast: {
                 item.setChecked(true);
-                Settings.setLiveMapStrategy(Strategy.FAST);
+                Settings.setLiveMapStrategy(LivemapStrategy.FAST);
                 return true;
             }
             case R.id.menu_strategy_auto: {
                 item.setChecked(true);
-                Settings.setLiveMapStrategy(Strategy.AUTO);
+                Settings.setLiveMapStrategy(LivemapStrategy.AUTO);
                 return true;
             }
             case R.id.menu_strategy_detailed: {
                 item.setChecked(true);
-                Settings.setLiveMapStrategy(Strategy.DETAILED);
+                Settings.setLiveMapStrategy(LivemapStrategy.DETAILED);
                 return true;
             }
             case R.id.menu_hint:
