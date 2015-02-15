@@ -4,6 +4,7 @@ import butterknife.ButterKnife;
 
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.CompassActivity;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Intents;
@@ -683,6 +684,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                     menu.findItem(R.id.menu_strategy_detailed).setChecked(true);
             }
             menu.findItem(R.id.menu_hint).setVisible(mapMode == MapMode.SINGLE);
+            menu.findItem(R.id.menu_compass).setVisible(mapMode == MapMode.SINGLE);
         } catch (final RuntimeException e) {
             Log.e("CGeoMap.onPrepareOptionsMenu", e);
         }
@@ -789,6 +791,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             case R.id.menu_hint:
                 if (caches.size() == 1) {
                     caches.iterator().next().showHintToast(getActivity());
+                }
+                return true;
+            case R.id.menu_compass:
+                if (caches.size() == 1) {
+                    CompassActivity.startActivityCache(this.getActivity(), caches.iterator().next());
                 }
                 return true;
             default:

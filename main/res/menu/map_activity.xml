@@ -32,8 +32,15 @@
     <item
         android:id="@+id/menu_hint"
         android:title="@string/cache_hint"
-        app:showAsAction="ifRoom|withText"
-        android:visible="false">
+        android:visible="false"
+        app:showAsAction="ifRoom|withText">
+    </item>
+    <item
+        android:id="@+id/menu_compass"
+        android:icon="@drawable/ic_menu_compass"
+        android:title="@string/compass_title"
+        android:visible="false"
+        app:showAsAction="ifRoom|withText">
     </item>
     <item
         android:id="@+id/menu_store_caches"
