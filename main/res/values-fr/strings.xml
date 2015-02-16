@@ -5,7 +5,7 @@
   <string name="cache">Cache</string>
   <string name="detail">Détails</string>
   <string name="search">Rechercher</string>
-  <string name="helpers">Aide à l\'installation</string>
+  <string name="helpers">Applications utiles</string>
   <string name="about">À propos de c:geo</string>
   <string name="latitude">Latitude</string>
   <string name="longitude">Longitude</string>
@@ -79,6 +79,7 @@
   <string name="log_saving_and_uploading">Envoi de la note et de l\'image…</string>
   <string name="log_clear">Effacer</string>
   <string name="log_post_not_possible">Chargement de la page…</string>
+  <string name="log_date_future_not_allowed">Les entrées de carnet dans le futur sont interdites.</string>
   <string name="log_add">Ajouter</string>
   <string name="log_repeat">Recopier la dernière entrée</string>
   <string name="log_no_rating">Pas de note</string>
@@ -297,6 +298,7 @@
   <string name="caches_filter_track">Avec des objets voyageurs</string>
   <string name="caches_filter_clear">Effacer les filtres</string>
   <string name="caches_filter_modified">Avec les coordonnées modifiées</string>
+  <string name="caches_filter_offline_log">Avec entrée de carnet hors connexion</string>
   <string name="caches_filter_origin">Avec les coordonées originales</string>
   <string name="caches_filter_distance">Distance</string>
   <string name="caches_filter_personal_note">Avec une note personnelle</string>
@@ -460,6 +462,8 @@
   <string name="init_backup_success">La base de données de c:geo a été sauvegardée dans un fichier</string>
   <string name="init_backup_failed">La sauvegarde de la base de données de c:geo a échouée.</string>
   <string name="init_backup_unnecessary">La base de données est vide, sauvegarde non nécessaire.</string>
+  <string name="backup_confirm_overwrite">Voulez-vous remplacer la sauvegarde existante de %s ?</string>
+  <string name="restore_confirm_overwrite">Voulez vous remplacer %s sur votre appareil par la sauvegarde ?</string>
   <string name="init_restore_success">Restauration terminée.</string>
   <string name="init_restore_failed">Échec de la restauration.</string>
   <string name="init_restore_running">Restauration de la base de données des caches…</string>
@@ -1136,7 +1140,15 @@
   <string name="attribute_offset_cache_no">Pas de cache relative</string>
   <string name="quote">Pour faciliter le géocaching.</string>
   <string name="powered_by">carnero</string>
+  <string name="support_title">Assistance</string>
+  <string name="website_title">Site web</string>
+  <string name="facebook_title">Facebook</string>
+  <string name="facebook_link"><a href="">Page de c:geo</a></string>
+  <string name="twitter_title">Twitter</string>
+  <string name="market_title">Google Play</string>
+  <string name="market_link"><a href="">c:geo sur Google Play</a></string>
   <string name="about_twitter">Voulez-vous publier un nouveau statut sur Twitter à chaque nouvelle cache découverte sous <b>c:geo</b>?</string>
+  <string name="faq_title">FAQ</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Nouvelle version disponible.\nCliquer pour installer.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Nouvelle version de test disponible.\nCliquer pour installer.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Nouvelle version candidate disponible.\nCliquer pour installer.</string>

@@ -78,6 +78,7 @@
   <string name="log_saving_and_uploading">Odesílání Logu a nahrávání obrázku…</string>
   <string name="log_clear">Vyčistit</string>
   <string name="log_post_not_possible">Načítání stránky s Logovacím formulářem…</string>
+  <string name="log_date_future_not_allowed">Log s nadcházejícím datem není povolen.</string>
   <string name="log_add">Přidat</string>
   <string name="log_repeat">Opakovat poslední log</string>
   <string name="log_no_rating">Bez hodnocení</string>
@@ -216,7 +217,7 @@
   <string name="loc_no_addr">Neznámá adresa</string>
   <string name="loc_gps_disabled">GPS zakázáno</string>
   <string name="menu_centerposition">Vycentrovat na mou polohu</string>
-  <string name="menu_about">O programu</string>
+  <string name="menu_about">O aplikaci</string>
   <string name="menu_helpers">Pomocné programy</string>
   <string name="menu_settings">Nastavení</string>
   <string name="menu_history">Historie</string>
@@ -269,7 +270,17 @@
   <string name="caches_nearby">Blízké</string>
   <string name="caches_manage">Správa</string>
   <string name="caches_remove_all">Odstranit vše</string>
+  <plurals name="caches_remove_all_confirm">
+    <item quantity="one">Opravdu chceš smazat tuto keš z aktuálního seznamu?</item>
+    <item quantity="few">Opravdu chceš smazat všechny keše (%d) ze seznamu?</item>
+    <item quantity="other">Opravdu chceš smazat všechny keše (%d) ze seznamu?</item>
+  </plurals>
   <string name="caches_remove_selected">Odstranit vybrané</string>
+  <plurals name="caches_remove_selected_confirm">
+    <item quantity="one">Opravdu chceš tuto keš odstranit z tvého zařízení?</item>
+    <item quantity="few">Opravdu chceš odstranit vybrané keše (%d) z tvého zařízení?</item>
+    <item quantity="other">Opravdu chceš odstranit vybrané keše (%d) z tvého zařízení?</item>
+  </plurals>
   <string name="caches_remove_progress">Odstraňování keší</string>
   <string name="caches_delete_events">Vymazat staré události</string>
   <string name="caches_refresh_selected">Aktualizovat vybrané</string>
@@ -289,6 +300,7 @@
   <string name="caches_filter_track">Se sledovatelnými předměty</string>
   <string name="caches_filter_clear">Vymazat filtry</string>
   <string name="caches_filter_modified">S upravenými souřadnicemi</string>
+  <string name="caches_filter_offline_log">S offline logy</string>
   <string name="caches_filter_origin">Původ keše</string>
   <string name="caches_filter_distance">Vzdálenost</string>
   <string name="caches_filter_personal_note">S osobní poznámkou</string>
@@ -313,7 +325,7 @@
   <string name="list_dialog_create_ok">Nový seznam byl vytvořen</string>
   <string name="list_dialog_create_err">c:geo nedokázalo vytvořit nový seznam</string>
   <string name="list_dialog_remove_title">Odstranit seznam</string>
-  <string name="list_dialog_remove_description">Chceš odstranit aktuální seznam keší? Všechny zbývající keše budou přesunuty do seznamu \"Uložené\".</string>
+  <string name="list_dialog_remove_description">Chceš odstranit aktuální seznam keší? Všechny zbývající keše budou přesunuty do seznamu „Uložené“.</string>
   <string name="list_dialog_remove">Odstranit</string>
   <string name="list_dialog_remove_ok">Seznam byl odstraněn</string>
   <string name="list_dialog_remove_err">c:geo nedokázalo odstranit aktuální seznam</string>
@@ -452,6 +464,8 @@
   <string name="init_backup_success">Databáze c:geo byla úspěšně zkopírována do souboru</string>
   <string name="init_backup_failed">Zálohování databáze c:geo selhalo.</string>
   <string name="init_backup_unnecessary">Databáze je prázdná, takže není třeba zálohovat.</string>
+  <string name="backup_confirm_overwrite">Opravdu chceš přesat existující zálohu z %s?</string>
+  <string name="restore_confirm_overwrite">Chceš přepsat %s na svém zařízení zálohou?</string>
   <string name="init_restore_success">Obnova dokončena.</string>
   <string name="init_restore_failed">Obnova selhala.</string>
   <string name="init_restore_running">Obnovování databáze keší…</string>
@@ -459,7 +473,7 @@
   <string name="init_backup_last">Dostupná záloha z</string>
   <string name="init_backup_last_no">Nenalezen žádný soubor se zálohou.</string>
   <string name="settings_info_offline_maps_title">Info o Offline mapách</string>
-  <string name="settings_info_offline_maps">c:geo podporuje používání offline map. Mapy si můžeš stáhnout z Mapsforge a nebo si vytvořit vlastní z dat Open Street Map (OSM). Aby bylo možné offline mapy používat, musíš nejprve zvolit místo jejich uložení.</string>
+  <string name="settings_info_offline_maps">c:geo podporuje používání offline mapových podkladů, které si můžeš stáhnout z Mapsforge a nebo si vytvořit vlastní z dat Open Street Map (OSM). Aby bylo možné offline mapy používat, musíš nejprve zvolit místo jejich umístění (volba „Složka s offline mapami“).</string>
   <string name="settings_info_themes_title">Info o stylech mapy</string>
   <string name="settings_info_themes">c:geo podporuje vlastní styly pro offline mapy. Ty mohou být použity pro změnu barevného stylu mapy (např. noční mapa), pro zvýraznění důležitých objektů (jako jsou např. cykloztezky) nebo pro určení šířky čar.</string>
   <string name="init_mapsource_select">Vyber mapový zdroj</string>
@@ -554,7 +568,7 @@
   <string name="auth_again">Znovu autorizovat</string>
   <string name="auth_dialog_waiting">Čekání na %s…</string>
   <string name="auth_explain_short">Následující proces umožní <b>c:geu</b> přístup k %s.</string>
-  <string name="auth_explain_long">Stisknutím tlačítka \"Autorizovat c:geo\" bude proces zahájen. Tento proces otevře webový prohlížeč se stránkou %s. Na této stránce se přihlaš a povol <b>c:geu</b> přistupovat k tvému účtu. To je vše.</string>
+  <string name="auth_explain_long">Stisknutím tlačítka „Autorizovat c:geo“ bude proces zahájen. Tento proces otevře webový prohlížeč se stránkou %s. Na této stránce se přihlaš a povol <b>c:geu</b> přistupovat k tvému účtu. To je vše.</string>
   <string name="auth_dialog_completed_twitter">c:geo nyní může posílat zprávy na Tvůj Twitter.</string>
   <string name="auth_ocde">Opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
@@ -655,7 +669,7 @@
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Otevřít v prohlížečí</string>
   <string name="cache_menu_visit">Zalogovat návštěvu</string>
-  <string name="cache_menu_visit_offline">Offline log jedním klepnutím</string>
+  <string name="cache_menu_visit_offline">Rychlý offline log</string>
   <string name="cache_menu_spoilers">Obrázky</string>
   <string name="cache_menu_around">Keš v okolí</string>
   <string name="cache_menu_event">Přidat do kalendáře</string>
@@ -800,7 +814,7 @@
   <string name="map_strategy_fast">Rychlá</string>
   <string name="map_strategy_auto">Závislá na rychlosti</string>
   <string name="map_strategy_detailed">Detailní</string>
-  <string name="live_map_notification">Na nové Aktivní mapě nemusí být souřadnice vždy přesné. Případné nepřesné souřadnice jsou na mapě označeny oranžovým kruhem.\nPři otevření detailů keše nebo jejím uložení pro Offline použití jsou již souřadnice přesné.\n\nVíce informací o všech změnách lze najít na stránce \"O programu\" v aplikaci.</string>
+  <string name="live_map_notification">Na nové Aktivní mapě nemusí být souřadnice vždy přesné. Případné nepřesné souřadnice jsou na mapě označeny oranžovým kruhem.\nPři otevření detailů keše nebo jejím uložení pro Offline použití jsou již souřadnice přesné.\n\nVíce informací o všech změnách lze najít v aplikaci na stránce „O aplikaci“.</string>
   <string name="search_bar_hint">Hledaní kešek</string>
   <string name="search_bar_desc">Keše (GC-kód, klíčové slovo), Sledovatelné předměty (TB-kód)</string>
   <string name="search_coordinates">Souřadnice</string>
@@ -1134,7 +1148,15 @@
   <string name="attribute_offset_cache_no">Není to Offset keš</string>
   <string name="quote">Učinit Geocaching lehčí a uživatele línější.</string>
   <string name="powered_by">carnero</string>
+  <string name="support_title">Podpora</string>
+  <string name="website_title">Webové stránky</string>
+  <string name="facebook_title">Facebook</string>
+  <string name="facebook_link"><a href="">stránka c:geo</a></string>
+  <string name="twitter_title">Twitter</string>
+  <string name="market_title">Google Play</string>
+  <string name="market_link"><a href="">c:geo na Google Play</a></string>
   <string name="about_twitter">Má <b>c:geo</b> publikovat nový status na Twitteru vždy, když zaloguješ keš?</string>
+  <string name="faq_title">FAQ</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Dostupné nové vydání.\nKlepni pro instalaci.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Dostupné nové \"noční sestavení\"\nKlepni pro instalaci.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Dostupný nový kandidát na vydání.\nKlepni pro instalaci.</string>

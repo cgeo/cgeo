@@ -79,6 +79,7 @@
   <string name="log_saving_and_uploading">Siunčiamas įrašas ir įkeliama nuotrauka…</string>
   <string name="log_clear">Išvalyti</string>
   <string name="log_post_not_possible">Įkeliamas įrašo puslapis…</string>
+  <string name="log_date_future_not_allowed">Būsimos datos įrašai negalimi.</string>
   <string name="log_add">Pridėti</string>
   <string name="log_repeat">Pakartoti paskutinį įrašą</string>
   <string name="log_no_rating">Nėra reitingo</string>
@@ -300,6 +301,7 @@
   <string name="caches_filter_track">Su keliauninkais</string>
   <string name="caches_filter_clear">Valyti filtrus</string>
   <string name="caches_filter_modified">Su pakeistomis koordinatėmis</string>
+  <string name="caches_filter_offline_log">Su išsaugotu įrašu</string>
   <string name="caches_filter_origin">Šaltinis</string>
   <string name="caches_filter_distance">Atstumas</string>
   <string name="caches_filter_personal_note">Su asmenine pastaba</string>
@@ -453,6 +455,8 @@
   <string name="init_backup_success">c:geo duomenų bazė sėkmingai nukopijuota į:</string>
   <string name="init_backup_failed">Nepavyko sukurti atsarginės c:geo duomenų bazės kopijos.</string>
   <string name="init_backup_unnecessary">Duomenų bazė tuščia, atsarginė kopija nereikalinga.</string>
+  <string name="backup_confirm_overwrite">Ar norite perrašyti esamą atsarginę kopiją nuo %s?</string>
+  <string name="restore_confirm_overwrite">Ar norite perrašyti %s įrenginyje su atsargine kopija?</string>
   <string name="init_restore_success">Atkūrimas baigtas.</string>
   <string name="init_restore_failed">Atkurti nepavyko.</string>
   <string name="init_restore_running">Atkuriama slėptuvių duomenų bazė…</string>
@@ -1127,7 +1131,15 @@
   <string name="attribute_offset_cache_yes">Offset cache</string>
   <string name="attribute_offset_cache_no">No offset cache</string>
   <string name="quote">To make geocaching easier, to make users lazier.</string>
+  <string name="support_title">Palaikymas</string>
+  <string name="website_title">Tinklapis</string>
+  <string name="facebook_title">Facebook</string>
+  <string name="facebook_link"><a href=""> c:Geo puslapis</a></string>
+  <string name="twitter_title">Twitter</string>
+  <string name="market_title">Google Play</string>
+  <string name="market_link"><a href="">c:geo Google Play</a></string>
   <string name="about_twitter">Kaskart registruojant slėptuvę <b>c:geo</b> paskelbs nauja statusą Twitter paskyroje.</string>
+  <string name="faq_title">FAQ</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Galima nauja versija. \nPaspauskite čia ir įdiekite.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Galima nauja naktinė versija.\nPaspauskite čia ir įdiekite.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Galima nauja versija. \nPaspauskite čia ir įdiekite.</string>
