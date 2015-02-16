@@ -79,6 +79,7 @@
   <string name="log_saving_and_uploading">Log und Bild werden gesendet…</string>
   <string name="log_clear">Leeren</string>
   <string name="log_post_not_possible">Lade Log-Seite…</string>
+  <string name="log_date_future_not_allowed">Logs in der Zukunft sind nicht erlaubt.</string>
   <string name="log_add">Hinzufügen</string>
   <string name="log_repeat">Verwende das letzte Log erneut</string>
   <string name="log_no_rating">Keine Bewertung</string>
@@ -297,6 +298,7 @@
   <string name="caches_filter_track">Mit Trackables</string>
   <string name="caches_filter_clear">Filter zurücksetzen</string>
   <string name="caches_filter_modified">Mit geänderten Koordinaten</string>
+  <string name="caches_filter_offline_log">Mit Offline-Log</string>
   <string name="caches_filter_origin">Herkunft</string>
   <string name="caches_filter_distance">Entfernung</string>
   <string name="caches_filter_personal_note">Mit persönlicher Notiz</string>
@@ -459,6 +461,8 @@
   <string name="init_backup_success">Datenbank von c:geo wurde erfolgreich kopiert nach:</string>
   <string name="init_backup_failed">Sicherung der Datenbank von c:geo fehlgeschlagen.</string>
   <string name="init_backup_unnecessary">Datenbank ist leer, keine Sicherung notwendig.</string>
+  <string name="backup_confirm_overwrite">Möchtest du das existierende Backup vom %s überschreiben?</string>
+  <string name="restore_confirm_overwrite">Möchtest du %s auf deinem Gerät mit dem Backup überschreiben?</string>
   <string name="init_restore_success">Wiederherstellung fertig.</string>
   <string name="init_restore_failed">Wiederherstellung fehlgeschlagen.</string>
   <string name="init_restore_running">Wiederherstellung der Cache-Datenbank…</string>
@@ -1135,7 +1139,15 @@
   <string name="attribute_offset_cache_no">Kein Offset Cache</string>
   <string name="quote">Um Geocachen einfacher zu machen, um es Anwendern bequemer zu machen.</string>
   <string name="powered_by">carnero</string>
+  <string name="support_title">Support</string>
+  <string name="website_title">Webseite</string>
+  <string name="facebook_title">Facebook</string>
+  <string name="facebook_link"><a href="">Seite von c:geo</a></string>
+  <string name="twitter_title">Twitter</string>
+  <string name="market_title">Google Play</string>
+  <string name="market_link"><a href="">c:geo bei Google Play</a></string>
   <string name="about_twitter">Soll jeder neue Fund auf Twitter veröffentlicht werden, wenn er über <b>c:geo</b> geloggt wird?</string>
+  <string name="faq_title">FAQs</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Neuer Release verfügbar.\nKlicken zum Installieren.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Neuer Nightly Build verfügbar.\nKlicken zum Installieren.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Neuer Release Candidate verfügbar.\nKlicken zum Installieren.</string>

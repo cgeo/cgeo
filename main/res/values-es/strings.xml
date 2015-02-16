@@ -79,6 +79,7 @@
   <string name="log_saving_and_uploading">Enviando registro y subiendo imagen…</string>
   <string name="log_clear">Limpiar</string>
   <string name="log_post_not_possible">Cargando página de registro…</string>
+  <string name="log_date_future_not_allowed">No se permiten registros con fechas futuras.</string>
   <string name="log_add">Añadir</string>
   <string name="log_repeat">Repetir el último registro</string>
   <string name="log_no_rating">Sin puntuación</string>
@@ -297,6 +298,7 @@
   <string name="caches_filter_track">Con rastreables</string>
   <string name="caches_filter_clear">Limpiar filtros</string>
   <string name="caches_filter_modified">Con las coordenadas modificadas</string>
+  <string name="caches_filter_offline_log">Con registro sin conexión</string>
   <string name="caches_filter_origin">Coordenadas originales</string>
   <string name="caches_filter_distance">Distancia</string>
   <string name="caches_filter_personal_note">Con nota personal</string>
@@ -758,7 +760,7 @@
   <string name="waypoint_being_saved">Se está guardando el waypoint…</string>
   <string name="waypoint_coordinates_couldnt_be_modified_on_website">El sitio web no permite modificar las coordenadas del caché.</string>
   <string name="waypoint_coordinates_upload_error">Ha ocurrido un error mientras se modificaban las coordenadas en la web.</string>
-  <string name="waypoint_coordinates_uploading_to_website">Subiendo coordenadas a la página %s.</string>
+  <string name="waypoint_coordinates_uploading_to_website">Subiendo coordenadas %s a la web.</string>
   <string name="waypoint_coordinates_has_been_modified_on_website">Las coordenadas del caché en la web modificadas a: %s.</string>
   <string name="waypoint_done">Hecho</string>
   <string name="waypoint_duplicate">Duplicar</string>
@@ -1125,6 +1127,11 @@
   <string name="attribute_offset_cache_yes">Caché offset</string>
   <string name="attribute_offset_cache_no">No es caché offset</string>
   <string name="quote">Para hacer el geocaching más sencillo, para hacer a los usuarios más vagos.</string>
+  <string name="website_title">Sitio Web</string>
+  <string name="facebook_title">Facebook</string>
+  <string name="twitter_title">Twitter</string>
+  <string name="market_title">Google Play</string>
+  <string name="market_link"><a href="">c:geo en Google Play</a></string>
   <string name="about_twitter">¿Debe <b>c:geo</b> publicar el nuevo estado en Twitter cuando registras un caché?</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Nueva versión disponible. \nClick para instalar.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Nueva versión nightly build disponible.\nHaz clic para instalar.</string>
