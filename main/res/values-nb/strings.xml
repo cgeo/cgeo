@@ -1124,11 +1124,6 @@
   <string name="attribute_offset_cache_no">Ikke offset-cache</string>
   <string name="quote">For å gjøre geocaching enklere og brukerne latere.</string>
   <string name="powered_by">carnero</string>
-  <string name="support">e-post adresse: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
-  <string name="website">web-side: <a href="http://cgeo.org/">cgeo.org</a></string>
-  <string name="facebook">facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
-  <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="market">Android: <a href="">c:geo i Google Play</a></string>
   <string name="about_twitter">Ønsker du at <b>c:geo</b> skal poste en status på Twitter hver gang du logger ett funn via <b>c:geo</b>?</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Ny versjon tilgjengelig. \nKlikk for å installere.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Ny \"nightly build\" er tilgjengelig.\nKlikk for å installere.</string>

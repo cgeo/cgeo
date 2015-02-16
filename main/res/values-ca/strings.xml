@@ -79,6 +79,7 @@
   <string name="log_saving_and_uploading">S\'està enviant el registre i pujant la imatge…</string>
   <string name="log_clear">Esborra</string>
   <string name="log_post_not_possible">S\'està carregant la pàgina del registre…</string>
+  <string name="log_date_future_not_allowed">No estan permesos els registres amb data futura.</string>
   <string name="log_add">Afegeix</string>
   <string name="log_repeat">Repeteix l\'últim registre</string>
   <string name="log_no_rating">Sense puntuació</string>
@@ -297,6 +298,7 @@
   <string name="caches_filter_track">Amb traçables</string>
   <string name="caches_filter_clear">Neteja els filtres</string>
   <string name="caches_filter_modified">Amb les coordenades modificades</string>
+  <string name="caches_filter_offline_log">Amb registre fora de línia</string>
   <string name="caches_filter_origin">Origen</string>
   <string name="caches_filter_distance">Distància</string>
   <string name="caches_filter_personal_note">Amb una nota personal</string>
@@ -459,6 +461,8 @@
   <string name="init_backup_success">La base de dades del c:geo s\'ha copiat amb èxit a:</string>
   <string name="init_backup_failed">Ha fallat la còpia de seguretat de la base de dades de c:geo.</string>
   <string name="init_backup_unnecessary">La base de dades està buida, no cal fer una còpia de seguretat.</string>
+  <string name="backup_confirm_overwrite">Voleu sobreescriure la còpia de seguretat existent de %s?</string>
+  <string name="restore_confirm_overwrite">Voleu sobreescriure %s al dispositiu amb la còpia de seguretat?</string>
   <string name="init_restore_success">La restauració s\'ha completat.</string>
   <string name="init_restore_failed">Ha fallat la restauració.</string>
   <string name="init_restore_running">S\'està restaurant la base de dades dels catxés…</string>
@@ -1138,13 +1142,15 @@
   <string name="attribute_offset_cache_no">No és un catxé offset</string>
   <string name="quote">Per fer el geocatxing més fàcil, per fer els usuaris més dropos.</string>
   <string name="powered_by">Carnero</string>
-  <string name="support">Suport: <a href="">support@cgeo.org</a></string>
-  <string name="website">Lloc web: <a href=""> cgeo.org</a></string>
-  <string name="facebook">Facebook: <a href="">Pàgina del c:geo</a></string>
-  <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="market">Android: <a href="">El c:geo a Google Play</a></string>
+  <string name="support_title">Ajut</string>
+  <string name="website_title">Lloc web</string>
+  <string name="facebook_title">Facebook</string>
+  <string name="facebook_link"><a href="">Pàgina del c:geo</a></string>
+  <string name="twitter_title">Twitter</string>
+  <string name="market_title">Google Play</string>
+  <string name="market_link"><a href=""> c:geo a Google Play</a></string>
   <string name="about_twitter">Voleu que <b>el c:geo</b>  publiqui un nou estatus al Twitter cada vegada que registreu un catxé?</string>
-  <string name="faq">PMF: <a href=""> faq.cgeo.org</a></string>
+  <string name="faq_title">Preguntes freqüents</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Nova versió disponible.\nCliqueu per instal·lar-la.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Nova versió nightly build disponible.\nCliqueu per instal·lar-la.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Nova versió candidate disponible.\nCliqueu per instal·lar-la.</string>

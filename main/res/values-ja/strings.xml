@@ -992,11 +992,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
   <string name="attribute_geotour_no">ジオツアーの一部ではない</string>
   <string name="quote">To make geocaching easier, to make users lazier.</string>
   <string name="powered_by">carnero</string>
-  <string name="support">サポート: <a href="">support@cgeo.org</a></string>
-  <string name="website">Webサイト: <a href="">cgeo.org</a></string>
-  <string name="facebook">Facebook: <a href="">c:geo page</a></string>
-  <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="market">Android: <a href="">Google Playのc:geo</a></string>
   <string name="about_twitter">キャッシュのログを書いたら<b>c:geo</b>にTwitterでつぶやいてほしい?</string>
   <string name="status_new_release" tools:ignore="UnusedResources">新しいバージョンがあります。\nクリックしてインストールしてください。</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">新しいナイトリービルドがあります。\nクリックしてインストールしてください。</string>

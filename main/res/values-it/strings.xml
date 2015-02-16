@@ -1128,13 +1128,7 @@
   <string name="attribute_offset_cache_no">Non è un offset cache</string>
   <string name="quote">Per rendere il geocaching più facile e gli utenti più pigri.</string>
   <string name="powered_by">carnero</string>
-  <string name="support">Supporto: <a href="">support@cgeo.org</a></string>
-  <string name="website">Sito: <a href="">cgeo.org</a></string>
-  <string name="facebook">Facebook: <a href="">Pagina c:geo</a></string>
-  <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="market">Android: <a href="">c:geo su Google Play</a></string>
   <string name="about_twitter">Può <b>c:geo</b> pubblicare su Twitter ogni volta che logghi un cache?</string>
-  <string name="faq">FAQ: <a href="">faq.cgeo.org</a></string>
   <string name="status_new_release" tools:ignore="UnusedResources">Una nuova versione è disponibile.\nClicca per installarla.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Una nuova versione nightly è disponibile.\nClicca per installarla.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Una nuova release candidate è disponibile.\nClicca per installarla.</string>
