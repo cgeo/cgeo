@@ -103,11 +103,11 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     @Override
     protected void fillViewHolder(final View convertView, final LogViewHolder holder, final LogEntry log) {
         super.fillViewHolder(convertView, holder, log);
-        if (null == convertView) {
-            if (isOfflineLog(log)) {
-                holder.author.setOnClickListener(new EditOfflineLogListener(getCache(), cacheDetailActivity));
-                holder.text.setOnClickListener(new EditOfflineLogListener(getCache(), cacheDetailActivity));
-            }
+        if (isOfflineLog(log)) {
+            holder.author.setOnClickListener(new EditOfflineLogListener(getCache(), cacheDetailActivity));
+            holder.text.setOnClickListener(new EditOfflineLogListener(getCache(), cacheDetailActivity));
+            holder.marker.setVisibility(View.VISIBLE);
+            holder.marker.setImageResource(R.drawable.mark_orange);
         }
     }
 

@@ -116,12 +116,10 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
             holder.marker.setVisibility(View.GONE);
         }
 
-        if (null == convertView) {
-            holder.author.setOnClickListener(createUserActionsListener());
-            holder.text.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-            holder.text.setOnClickListener(new DecryptTextClickListener(holder.text));
-            activity.registerForContextMenu(holder.text);
-        }
+        holder.author.setOnClickListener(createUserActionsListener());
+        holder.text.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+        holder.text.setOnClickListener(new DecryptTextClickListener(holder.text));
+        activity.registerForContextMenu(holder.text);
     }
 
     abstract protected UserActionsClickListener createUserActionsListener();
