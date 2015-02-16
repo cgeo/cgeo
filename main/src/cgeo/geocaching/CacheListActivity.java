@@ -57,7 +57,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.CancellableHandler;
-import cgeo.geocaching.utils.DateUtils;
+import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxUtils;
 
@@ -663,7 +663,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private boolean containsPastEvents() {
         for (final Geocache cache : adapter.getCheckedOrAllCaches()) {
-            if (DateUtils.isPastEvent(cache)) {
+            if (CalendarUtils.isPastEvent(cache)) {
                 return true;
             }
         }
@@ -786,7 +786,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private void deletePastEvents() {
         final List<Geocache> deletion = new ArrayList<>();
         for (final Geocache cache : adapter.getCheckedOrAllCaches()) {
-            if (DateUtils.isPastEvent(cache)) {
+            if (CalendarUtils.isPastEvent(cache)) {
                 deletion.add(cache);
             }
         }

@@ -18,7 +18,7 @@ import cgeo.geocaching.sorting.EventDateComparator;
 import cgeo.geocaching.sorting.InverseComparator;
 import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.utils.AngleUtils;
-import cgeo.geocaching.utils.DateUtils;
+import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
@@ -414,7 +414,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         }
 
         Spannable spannable = null;
-        if (cache.isDisabled() || cache.isArchived() || DateUtils.isPastEvent(cache)) { // strike
+        if (cache.isDisabled() || cache.isArchived() || CalendarUtils.isPastEvent(cache)) { // strike
             spannable = Spannable.Factory.getInstance().newSpannable(cache.getName());
             spannable.setSpan(new StrikethroughSpan(), 0, spannable.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }

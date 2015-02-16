@@ -19,7 +19,7 @@ import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.dialog.DateDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
-import cgeo.geocaching.utils.DateUtils;
+import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.LogTemplateProvider;
@@ -301,7 +301,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         rating = GCVote.NO_RATING;
         typeSelected = cache.getDefaultLogType();
         // it this is an attended event log, use the event date by default instead of the current date
-        if (cache.isEventCache() && DateUtils.isPastEvent(cache) && typeSelected == LogType.ATTENDED) {
+        if (cache.isEventCache() && CalendarUtils.isPastEvent(cache) && typeSelected == LogType.ATTENDED) {
             date.setTime(cache.getHiddenDate());
         }
         text = null;
@@ -618,7 +618,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             Dialogs.message(this, R.string.log_post_not_possible);
             return;
         }
-        if (DateUtils.isFuture(date)) {
+        if (CalendarUtils.isFuture(date)) {
             Dialogs.message(this, R.string.log_date_future_not_allowed);
             return;
         }

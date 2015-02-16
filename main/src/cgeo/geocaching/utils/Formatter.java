@@ -89,7 +89,7 @@ public abstract class Formatter {
      * @return the formatted string
      */
     public static String formatShortDateVerbally(final long date) {
-        final int diff = cgeo.geocaching.utils.DateUtils.daysSince(date);
+        final int diff = CalendarUtils.daysSince(date);
         switch (diff) {
             case 0:
                 return CgeoApplication.getInstance().getString(R.string.log_today);
@@ -194,7 +194,7 @@ public abstract class Formatter {
     }
 
     public static String formatDaysAgo(final long date) {
-        final int days = cgeo.geocaching.utils.DateUtils.daysSince(date);
+        final int days = CalendarUtils.daysSince(date);
         switch (days) {
             case 0:
                 return CgeoApplication.getInstance().getString(R.string.log_today);

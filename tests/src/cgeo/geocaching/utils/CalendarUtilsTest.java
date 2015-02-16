@@ -5,17 +5,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.enumerations.CacheType;
 
-import java.util.Calendar;
-
 import junit.framework.TestCase;
 
-public class DateUtilsTest extends TestCase {
+import java.util.Calendar;
+
+public class CalendarUtilsTest extends TestCase {
 
     public static void testDaysSince() {
         final Calendar start = Calendar.getInstance();
         for (int hour = 0; hour < 24; hour++) {
             start.set(Calendar.HOUR_OF_DAY, hour);
-            assertThat(DateUtils.daysSince(start.getTimeInMillis())).isEqualTo(0);
+            assertThat(CalendarUtils.daysSince(start.getTimeInMillis())).isEqualTo(0);
         }
     }
 
@@ -37,17 +37,17 @@ public class DateUtilsTest extends TestCase {
         cache.setType(CacheType.EVENT);
 
         cache.setHidden(start.getTime());
-        assertThat(DateUtils.isPastEvent(cache)).isEqualTo(expectedPast);
+        assertThat(CalendarUtils.isPastEvent(cache)).isEqualTo(expectedPast);
     }
 
     public static void testIsFuture() {
         final Calendar date = Calendar.getInstance();
-        assertThat(DateUtils.isFuture(date)).isFalse();
+        assertThat(CalendarUtils.isFuture(date)).isFalse();
 
         date.add(Calendar.DAY_OF_MONTH, 1);
-        assertThat(DateUtils.isFuture(date)).isFalse();
+        assertThat(CalendarUtils.isFuture(date)).isFalse();
 
         date.add(Calendar.DAY_OF_MONTH, 1);
-        assertThat(DateUtils.isFuture(date)).isTrue();
+        assertThat(CalendarUtils.isFuture(date)).isTrue();
     }
 }

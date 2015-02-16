@@ -5,9 +5,9 @@ import cgeo.geocaching.Geocache;
 import java.util.Calendar;
 import java.util.Date;
 
-public final class DateUtils {
+public final class CalendarUtils {
 
-    private DateUtils() {
+    private CalendarUtils() {
         // utility class
     }
 
@@ -33,7 +33,7 @@ public final class DateUtils {
             return false;
         }
         final Date hiddenDate = cache.getHiddenDate();
-        return hiddenDate != null && DateUtils.daysSince(hiddenDate.getTime()) > 0;
+        return hiddenDate != null && CalendarUtils.daysSince(hiddenDate.getTime()) > 0;
     }
 
     /**
