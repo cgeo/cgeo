@@ -1127,13 +1127,7 @@
   <string name="attribute_offset_cache_no">Nie jest to skrzynka Offset</string>
   <string name="quote">Aby uczynić geocaching prostszym, a użytkowników bardziej leniwymi.</string>
   <string name="powered_by">carnero</string>
-  <string name="support">Wsparcie: <a href="">support@cgeo.org</a></string>
-  <string name="website">Website: <a href="">cgeo.org</a></string>
-  <string name="facebook">Facebook: <a href="">c:geo strona</a></string>
-  <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="market">Android: <a href="">c:geo w Google Play</a></string>
   <string name="about_twitter">Czy chczesz aby <b>c:geo</b> publikował nowy status na Twitter za każdym razem kiedy znajdziesz skrzynkę?</string>
-  <string name="faq">FAQ: <a href="">faq.cgeo.org</a></string>
   <string name="status_new_release" tools:ignore="UnusedResources">Dostępna nowa wersja.\nKliknij aby zainstalować.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Dostępna nowa codzienna wersja.\nKliknij aby zainstalować.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Dostępny nowy kandydat na nową wersję.\nKliknij aby zainstalować.</string>

@@ -1110,13 +1110,7 @@
   <string name="attribute_offset_cache_no">Ni Offset zaklad</string>
   <string name="quote">Za lažji geocaching in bolj lene zakladolovce.</string>
   <string name="powered_by">carnero</string>
-  <string name="support">Podpora: <a href="">support@cgeo.org</a></string>
-  <string name="website">Spletna stran: <a href="">cgeo.org</a></string>
-  <string name="facebook">Facebook: <a href="">c:geo stran</a></string>
-  <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="market">Android: <a href="">c:geo na Google Play</a></string>
   <string name="about_twitter">Naj <b>c:geo</b> objavi nov status na Twitter, ko objavite nov zapis pri zakladu?</string>
-  <string name="faq">Pogosto zastavljena vprašanja: <a href="">faq.cgeo.org</a></string>
   <string name="status_new_release" tools:ignore="UnusedResources">Na voljo je nova različica.\nKliknite za namestitev.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Na voljo je nova dnevna različica.\nKliknite za namestitev.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Na voljo je nova preizkusna različica.\nKliknite za namestitev.</string>

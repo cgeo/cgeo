@@ -1141,13 +1141,7 @@
   <string name="attribute_offset_cache_no">Nem offset láda</string>
   <string name="quote">Az egyszerűbb ládázásért, a lustább játékosokért.</string>
   <string name="powered_by">carnero</string>
-  <string name="support">Támogatás: <a href="">support@cgeo.org</a></string>
-  <string name="website">Weboldal: <a href="">cgeo.org</a></string>
-  <string name="facebook">Facebook: <a href="">c:geo page</a></string>
-  <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="market">Androidra: <a href="">c:geo a Google Play-en</a></string>
   <string name="about_twitter">Akarod, hogy a <b>c:geo</b> új bejegyzést írjon a Twitter-re, amikor megtalálsz egy ládát?</string>
-  <string name="faq">GYIK: <a href="">faq.cgeo.org</a></string>
   <string name="status_new_release" tools:ignore="UnusedResources">Új kiadás jelent meg.\nKattints a telepítéshez.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Új napi frissítés jelent meg.\nKattints a telepítéshez.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Új kiadás előtti verzió jelent meg.\nKattints a telepítéshez.</string>

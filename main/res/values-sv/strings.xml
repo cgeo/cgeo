@@ -1137,13 +1137,7 @@
   <string name="attribute_offset_cache_no">Ingen offset cache</string>
   <string name="quote">To make geocaching easier, to make users lazier.</string>
   <string name="powered_by">carnero</string>
-  <string name="support">Support: <a href="">support@cgeo.org</a></string>
-  <string name="website">Hemsida: <a href="">cgeo.org</a></string>
-  <string name="facebook">Facebook: <a href="">c:geo</a></string>
-  <string name="twitter">Twitter: <a href="">@android_GC</a></string>
-  <string name="market">Android: <a href="">c:geo på Google Play</a></string>
   <string name="about_twitter">Ska <b>c:geo</b> publicera ny status på Twitter varje gång en cache loggas?</string>
-  <string name="faq">FAQ: <a href="">faq.cgeo.org</a></string>
   <string name="status_new_release" tools:ignore="UnusedResources">Ny officiell version finns tillgänglig.\nKlicka för att installera.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Nytt nattligt bygge finns tillgängligt.\nKlicka för att installera.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Ny kandidat till officiellt bygge finns tillgängligt.\nKlicka för att installera.</string>
