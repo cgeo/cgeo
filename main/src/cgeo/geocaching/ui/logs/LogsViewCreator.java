@@ -68,7 +68,7 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
         return view;
     }
 
-    protected void fillViewHolder(final View convertView, final LogViewHolder holder, final LogEntry log) {
+    protected void fillViewHolder(@SuppressWarnings("unused") final View convertView, final LogViewHolder holder, final LogEntry log) {
         if (log.date > 0) {
             holder.date.setText(Formatter.formatShortDateVerbally(log.date));
             holder.date.setVisibility(View.VISIBLE);

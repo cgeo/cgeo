@@ -9,6 +9,10 @@ import android.support.v4.view.ActionProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 
+/**
+ * Action provider showing the compass icon, and reacting to normal click (primary navigation) and long click (secondary
+ * navigation).
+ */
 public class NavigationActionProvider extends ActionProvider {
 
     private final Context context;

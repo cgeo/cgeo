@@ -16,6 +16,9 @@ import android.view.SubMenu;
 
 import java.util.List;
 
+/**
+ * Action provider listing all available navigation actions as sub menu.
+ */
 public class NavigationSelectionActionProvider extends AbstractMenuActionProvider {
 
     private Geocache geocache;
