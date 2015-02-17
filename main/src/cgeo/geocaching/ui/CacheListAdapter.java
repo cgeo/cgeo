@@ -112,7 +112,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         @InjectView(R.id.distance) protected DistanceView distance;
         @InjectView(R.id.favorite) protected TextView favorite;
         @InjectView(R.id.info) protected TextView info;
-        @InjectView(R.id.inventory) protected ImageView inventory;
+        @InjectView(R.id.inventory) protected TextView inventory;
         @InjectView(R.id.direction) protected CompassMiniView direction;
         @InjectView(R.id.dirimg) protected ImageView dirImg;
         public Geocache cache = null;
@@ -433,7 +433,9 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         }
         holder.text.setCompoundDrawablesWithIntrinsicBounds(getCacheIcon(cache), null, null, null);
 
-        if (cache.getInventoryItems() > 0) {
+        final int inventorySize = cache.getInventoryItems();
+        if (inventorySize > 0) {
+            holder.inventory.setText(Integer.toString(inventorySize));
             holder.inventory.setVisibility(View.VISIBLE);
         } else {
             holder.inventory.setVisibility(View.GONE);

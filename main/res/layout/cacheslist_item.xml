@@ -140,15 +140,23 @@
         android:layout_marginBottom="1dip"
         android:layout_marginTop="1dip" >
 
-        <ImageView
+        <TextView
             android:id="@+id/inventory"
             android:layout_width="35dip"
             android:layout_height="22dip"
             android:layout_alignParentTop="true"
             android:layout_gravity="center_vertical|center_horizontal"
             android:background="?inventory"
+            android:drawableLeft="@drawable/trackable_all"
+            android:drawablePadding="-10sp"
+            android:gravity="center"
             android:scaleType="center"
-            android:src="@drawable/trackable_all" />
+            android:singleLine="true"
+            android:text=""
+            android:textColor="?text_color"
+            android:textIsSelectable="false"
+            android:textSize="12sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/favorite"
