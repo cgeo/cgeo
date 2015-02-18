@@ -15,6 +15,7 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.MapTokens;
 import cgeo.geocaching.connector.oc.OCApiConnector.ApiSupport;
 import cgeo.geocaching.connector.oc.OCApiLiveConnector;
+import cgeo.geocaching.connector.oc.OCCZConnector;
 import cgeo.geocaching.connector.oc.OCConnector;
 import cgeo.geocaching.connector.ox.OXConnector;
 import cgeo.geocaching.connector.trackable.GeokretyConnector;
@@ -44,7 +45,7 @@ public final class ConnectorFactory {
             new OCApiLiveConnector("opencaching.de", "www.opencaching.de", "OC", "CC BY-NC-ND, alle Logeinträge © jeweiliger Autor",
                     R.string.oc_de_okapi_consumer_key, R.string.oc_de_okapi_consumer_secret,
                     R.string.pref_connectorOCActive, R.string.pref_ocde_tokenpublic, R.string.pref_ocde_tokensecret, ApiSupport.current),
-            new OCConnector("OpenCaching.CZ", "www.opencaching.cz", "OZ"),
+            new OCCZConnector(),
             new OCApiLiveConnector("opencaching.org.uk", "www.opencaching.org.uk", "OK", "CC BY-NC-SA 2.5",
                     R.string.oc_uk_okapi_consumer_key, R.string.oc_uk_okapi_consumer_secret,
                     R.string.pref_connectorOCUKActive, R.string.pref_ocuk_tokenpublic, R.string.pref_ocuk_tokensecret, ApiSupport.oldapi),
