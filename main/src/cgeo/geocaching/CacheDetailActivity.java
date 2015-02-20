@@ -102,6 +102,7 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
+import android.text.util.Linkify;
 import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -2168,6 +2169,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         personalNoteView.setText(personalNote, TextView.BufferType.SPANNABLE);
         if (StringUtils.isNotBlank(personalNote)) {
             personalNoteView.setVisibility(View.VISIBLE);
+            Linkify.addLinks(personalNoteView, Linkify.ALL);
         } else {
             personalNoteView.setVisibility(View.GONE);
         }
