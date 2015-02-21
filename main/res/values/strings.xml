@@ -731,6 +731,7 @@
     <string name="cache_menu_pebble">Pebble</string>
     <string name="cache_menu_android_wear">Android Wear</string>
     <string name="cache_menu_vote">Vote</string>
+    <string name="cache_menu_checker">Open geo checker</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Saved Log</string>
     <string name="cache_status_found">Found</string>

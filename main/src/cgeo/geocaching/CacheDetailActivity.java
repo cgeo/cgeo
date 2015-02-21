@@ -44,6 +44,7 @@ import cgeo.geocaching.ui.OwnerActionsClickListener;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.logs.CacheLogsViewCreator;
+import cgeo.geocaching.utils.CheckerUtils;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
@@ -498,6 +499,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         menu.findItem(R.id.menu_delete).setVisible(cache != null && cache.isOffline());
         menu.findItem(R.id.menu_refresh).setVisible(cache != null && cache.isOffline());
         menu.findItem(R.id.menu_gcvote).setVisible(cache != null && GCVote.isVotingPossible(cache));
+        menu.findItem(R.id.menu_checker).setVisible(cache != null && StringUtils.isNotEmpty(CheckerUtils.getCheckerUrl(cache)));
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -521,6 +523,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return true;
             case R.id.menu_gcvote:
                 showVoteDialog();
+                return true;
+            case R.id.menu_checker:
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(CheckerUtils.getCheckerUrl(cache))));
                 return true;
             default:
                 if (NavigationAppFactory.onMenuItemSelected(item, this, cache)) {
