@@ -1,5 +1,7 @@
 package cgeo.geocaching.activity;
 
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 
@@ -155,19 +157,17 @@ public final class ActivityMixin {
         editText.setSelection(newCursor);
     }
 
-    /**
-     * This is the exact code from Google to implement Up navigation, with one exception: activity.isTaskRoot() was
-     * added as {@link NavUtils#shouldUpRecreateTask(Activity, Intent)} seems not to handle the case, that this activity
-     * was created from an intent by another app, and our own app is not yet running. The bug seems to be fixed in
-     * Android 4.4.something, however.
-     *
-     */
     public static boolean navigateUp(@NonNull final Activity activity) {
-        // see http://developer.android.com/training/implementing-navigation/ancestral.html
-        final Intent upIntent = NavUtils.getParentActivityIntent(activity);
-        if (upIntent == null) {
+        // first check if there is a parent declared in the manifest
+        Intent upIntent = NavUtils.getParentActivityIntent(activity);
+        // if there is no parent, and if this was not a new task, then just go back to simulate going to a parent
+        if (upIntent == null && !activity.isTaskRoot()) {
             activity.finish();
             return true;
+        }
+        // use the main activity, if there was no back stack and no manifest based parent
+        if (upIntent == null) {
+            upIntent = new Intent(CgeoApplication.getInstance(), MainActivity.class);
         }
         if (NavUtils.shouldUpRecreateTask(activity, upIntent) || activity.isTaskRoot()) {
             // This activity is NOT part of this app's task, so create a new task

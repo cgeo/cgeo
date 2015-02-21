@@ -24,6 +24,7 @@
     · Fix: Do not limit to 10 logs for OC caches\n
     · Fix: Recognize more hyperlinks of opencaching caches\n
     · Fix: Remove empty space in some opencaching logs\n
+    · Fix: Allow up navigation when opening the app from a link\n
     \n
   </string>
 </resources>
