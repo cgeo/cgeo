@@ -17,6 +17,9 @@ public class OCCZConnector extends OCConnector {
     @Override
     @Nullable
     public String getGeocodeFromUrl(@NonNull final String url) {
+        if (!StringUtils.containsIgnoreCase(url, "opencaching.cz")) {
+            return null;
+        }
         final String id = StringUtils.substringAfter(url, "cacheid=");
         try {
             final String geocode = GEOCODE_PREFIX + StringUtils.leftPad(Integer.toHexString(Integer.valueOf(id)), 4, '0');
