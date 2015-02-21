@@ -29,6 +29,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Observable;
 import rx.android.app.AppObservable;
@@ -181,6 +182,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
         }));
     }
 
+    @Nullable
     @Override
     public String getAndroidBeamUri() {
         return trackable != null ? trackable.getUrl() : null;

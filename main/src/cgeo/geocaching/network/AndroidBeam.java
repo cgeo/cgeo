@@ -3,6 +3,7 @@ package cgeo.geocaching.network;
 import cgeo.geocaching.CgeoApplication;
 
 import org.apache.commons.io.Charsets;
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.Nullable;
 
 import android.annotation.TargetApi;
@@ -74,10 +75,12 @@ public class AndroidBeam {
         return new NfcAdapter.CreateNdefMessageCallback() {
             @Override
             public NdefMessage createNdefMessage(final NfcEvent event) {
-                final String uri = sharingInterface.getAndroidBeamUri();
+                String uri = sharingInterface.getAndroidBeamUri();
                 if (uri == null) {
                     return null;
                 }
+                // normalize our modified URLs for beaming
+                uri = StringUtils.replace(uri, "geocaching.com//", "geocaching.com/");
                 final NdefRecord[] records = {
                         NdefRecord.createUri(uri),
                         NdefRecord.createApplicationRecord(CgeoApplication.getInstance().getPackageName())
