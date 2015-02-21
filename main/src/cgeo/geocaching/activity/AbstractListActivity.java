@@ -1,6 +1,7 @@
 package cgeo.geocaching.activity;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.network.AndroidBeam;
 
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -48,6 +49,7 @@ public abstract class AbstractListActivity extends ActionBarListActivity impleme
 
         initializeCommonFields();
         initUpAction();
+        AndroidBeam.disable(this);
     }
 
     protected void initUpAction() {

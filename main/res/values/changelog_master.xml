@@ -16,6 +16,7 @@
     · New: Links in personal notes can be clicked\n
     · New: Menu in cache details to open geo checker\n
     · Fix: Improve detection pattern for event start time\n
+    · Fix: Disable Android Beam when not useful\n
     · Fix: Don\'t allow logs in the future\n
     · Fix: Allow shortcut creation for All caches list\n
     · Fix: Some menus not available when invoking map from compass\n

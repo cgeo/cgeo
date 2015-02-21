@@ -6,6 +6,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -20,14 +21,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.nfc.NdefMessage;
-import android.nfc.NdefRecord;
-import android.nfc.NfcAdapter;
-import android.nfc.NfcEvent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
@@ -78,6 +73,7 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
         initializeCommonFields();
+        AndroidBeam.disable(this);
     }
 
     @Override
@@ -204,45 +200,6 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
             default:
                 return false;
         }
-    }
-
-    // Do not support older devices than Android 4.0
-    // Although there even are 2.3 devices  (Nexus S)
-    // these are so few that we don't want to deal with the older (non Android Beam) API
-
-    public interface ActivitySharingInterface {
-        /** Return an URL that represent the current activity for sharing or null for no sharing. */
-        @Nullable
-        public String getAndroidBeamUri();
-    }
-
-    protected void initializeAndroidBeam(final ActivitySharingInterface sharingInterface) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-            initializeICSAndroidBeam(sharingInterface);
-        }
-    }
-
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-    protected void initializeICSAndroidBeam(final ActivitySharingInterface sharingInterface) {
-        final NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        if (nfcAdapter == null) {
-            return;
-        }
-        nfcAdapter.setNdefPushMessageCallback(new NfcAdapter.CreateNdefMessageCallback() {
-            @Override
-            public NdefMessage createNdefMessage(final NfcEvent event) {
-                final String uri = sharingInterface.getAndroidBeamUri();
-                if (uri == null) {
-                    return null;
-                }
-                final NdefRecord[] records = {
-                        NdefRecord.createUri(uri),
-                        NdefRecord.createApplicationRecord(CgeoApplication.getInstance().getPackageName())
-                };
-                return new NdefMessage(records);
-            }
-        }, this);
-
     }
 
     protected void setCacheTitleBar(@Nullable final String geocode, @Nullable final String name, @Nullable final CacheType type) {

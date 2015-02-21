@@ -5,7 +5,6 @@ import butterknife.InjectView;
 
 import cgeo.calendar.CalendarAddon;
 import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.activity.AbstractActivity.ActivitySharingInterface;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.activity.INavigationSource;
 import cgeo.geocaching.activity.Progress;
@@ -24,6 +23,7 @@ import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteDialog;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Units;
+import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.sensors.GeoData;
@@ -57,7 +57,6 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.io.Charsets;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -87,8 +86,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
-import android.nfc.NdefMessage;
-import android.nfc.NfcAdapter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -139,7 +136,7 @@ import java.util.regex.Pattern;
  * e.g. details, description, logs, waypoints, inventory...
  */
 public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailActivity.Page>
-        implements CacheMenuHandler.ActivityInterface, INavigationSource, ActivitySharingInterface, EditNoteDialogListener {
+        implements CacheMenuHandler.ActivityInterface, INavigationSource, AndroidBeam.ActivitySharingInterface, EditNoteDialogListener {
 
     private static final int MESSAGE_FAILED = -1;
     private static final int MESSAGE_SUCCEEDED = 1;
@@ -188,17 +185,14 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
-        Uri uri = getIntent().getData();
+        final Uri uri = AndroidBeam.getUri(getIntent());
 
         // try to get data from extras
         String name = null;
         String geocode = null;
         String guid = null;
 
-        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
-            final NdefMessage msg = (NdefMessage) extras.getParcelableArray(NfcAdapter.EXTRA_NDEF_MESSAGES)[0];
-            uri = Uri.parse("http://" + new String(msg.getRecords()[0].getPayload(), Charsets.UTF_8));
-        } else if (extras != null) {
+        if (extras != null) {
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
             name = extras.getString(Intents.EXTRA_NAME);
             guid = extras.getString(Intents.EXTRA_GUID);
@@ -309,7 +303,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         locationUpdater = new CacheDetailsGeoDirHandler(this);
 
         // If we have a newer Android device setup Android Beam for easy cache sharing
-        initializeAndroidBeam(this);
+        AndroidBeam.enable(this, this);
     }
 
     @Override

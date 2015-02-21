@@ -12,6 +12,7 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.files.SimpleDirChooser;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
+import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.utils.DatabaseBackupUtils;
 import cgeo.geocaching.utils.DebugUtils;
@@ -100,6 +101,7 @@ public class SettingsActivity extends PreferenceActivity {
 
         final Intent intent = getIntent();
         openInitialScreen(intent.getIntExtra(INTENT_OPEN_SCREEN, 0));
+        AndroidBeam.disable(this);
     }
 
     private void openInitialScreen(final int initialScreen) {

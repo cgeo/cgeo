@@ -32,6 +32,7 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
+import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
@@ -496,6 +497,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         if (!CgeoApplication.getInstance().isLiveMapHintShownInThisSession() && Settings.getLiveMapHintShowCount() <= 3) {
             LiveMapInfoDialogBuilder.create(activity).show();
         }
+        AndroidBeam.disable(activity);
     }
 
     private void initMyLocationSwitchButton(final CheckBox locSwitch) {
