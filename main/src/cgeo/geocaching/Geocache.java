@@ -24,8 +24,8 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CalendarUtils;
+import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LazyInitializedList;
 import cgeo.geocaching.utils.Log;
@@ -1646,7 +1646,7 @@ public class Geocache implements IWaypoint {
             // 17 - 20 o'clock
             patterns.add(Pattern.compile("\\b(\\d{1,2})(?:\\.00)?" + "\\s*(?:-|[a-z]+)\\s*" + "(?:\\d{1,2})(?:\\.00)?" + "\\s+" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
             // 12 o'clock, 12.00 o'clock
-            patterns.add(Pattern.compile("\\b(\\d{1,2})(?:\\.00)?\\s+" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
+            patterns.add(Pattern.compile("\\b(\\d{1,2})(?:\\.(00|15|30|45))?\\s+" + Pattern.quote(hourLocalized), Pattern.CASE_INSENSITIVE));
         }
 
         final String searchText = getShortDescription() + ' ' + getDescription();
@@ -1656,7 +1656,7 @@ public class Geocache implements IWaypoint {
                 try {
                     final int hours = Integer.parseInt(matcher.group(1));
                     int minutes = 0;
-                    if (matcher.groupCount() >= 2) {
+                    if (matcher.groupCount() >= 2 && !StringUtils.isEmpty(matcher.group(2))) {
                         minutes = Integer.parseInt(matcher.group(2));
                     }
                     if (hours >= 0 && hours < 24 && minutes >= 0 && minutes < 60) {
