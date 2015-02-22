@@ -2,6 +2,7 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.Geocache;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -25,7 +26,7 @@ public final class CheckerUtils {
             final String url = matcher.group();
             for (final String checker : CHECKERS) {
                 if (StringUtils.containsIgnoreCase(url, checker)) {
-                    return url;
+                    return StringEscapeUtils.unescapeHtml4(url);
                 }
             }
         }
