@@ -19,6 +19,7 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
+import cgeo.geocaching.connector.capability.IgnoreCapability;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.loaders.RecaptchaReceiver;
 import cgeo.geocaching.location.Geopoint;
@@ -47,7 +48,7 @@ import java.io.File;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ISearchByKeyword, ILogin, ICredentials, ISearchByOwner, ISearchByFinder, FieldNotesCapability {
+public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort, ISearchByKeyword, ILogin, ICredentials, ISearchByOwner, ISearchByFinder, FieldNotesCapability, IgnoreCapability {
 
     @NonNull
     private static final String CACHE_URL_SHORT = "http://coord.info/";
@@ -479,6 +480,16 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
             return false;
         }
         return true;
+    }
+
+    @Override
+    public boolean canIgnoreCache(@NonNull final Geocache cache) {
+        return StringUtils.isNotEmpty(cache.getType().wptTypeId);
+    }
+
+    @Override
+    public void ignoreCache(@NonNull final Geocache cache) {
+        GCParser.ignoreCache(cache);
     }
 
 }

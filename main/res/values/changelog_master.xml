@@ -15,6 +15,7 @@
     · New: Confirmation on backup/restore\n
     · New: Links in personal notes can be clicked\n
     · New: Menu in cache details to open geo checker\n
+    · New: Menu in cache details to put cache on ignore list (but not to remove)\n
     · Fix: Improve detection pattern for event start time\n
     · Fix: Android Beam working with trackables again\n
     · Fix: Disable Android Beam when not useful\n

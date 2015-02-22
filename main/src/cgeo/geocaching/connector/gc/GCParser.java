@@ -1979,4 +1979,25 @@ public abstract class GCParser {
         return false;
     }
 
+    public static boolean ignoreCache(@NonNull final Geocache cache) {
+        final String uri = "http://www.geocaching.com/bookmarks/ignore.aspx?guid=" + cache.getGuid() + "&WptTypeID=" + cache.getType().wptTypeId;
+        final String page = GCLogin.getInstance().postRequestLogged(uri, null);
+
+        if (StringUtils.isBlank(page)) {
+            Log.e("GCParser.ignoreCache: No data from server");
+            return false;
+        }
+
+        final String[] viewstates = GCLogin.getViewstates(page);
+
+        final Parameters params = new Parameters(
+                "__EVENTTARGET", "",
+                "__EVENTARGUMENT", "",
+                "ctl00$ContentBody$btnYes", "Yes. Ignore it.");
+
+        GCLogin.putViewstates(params, viewstates);
+        final String response = Network.getResponseData(Network.postRequest(uri, params));
+
+        return StringUtils.contains(response, "<p class=\"Success\">");
+    }
 }

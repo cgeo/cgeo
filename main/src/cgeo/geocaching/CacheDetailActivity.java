@@ -13,6 +13,7 @@ import cgeo.geocaching.apps.cache.navi.NavigationSelectionActionProvider;
 import cgeo.geocaching.apps.cachelist.MapsWithMeCacheListApp;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.capability.IgnoreCapability;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.enumerations.CacheAttribute;
@@ -494,6 +495,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         menu.findItem(R.id.menu_refresh).setVisible(cache != null && cache.isOffline());
         menu.findItem(R.id.menu_gcvote).setVisible(cache != null && GCVote.isVotingPossible(cache));
         menu.findItem(R.id.menu_checker).setVisible(cache != null && StringUtils.isNotEmpty(CheckerUtils.getCheckerUrl(cache)));
+        if (cache != null) {
+            final IConnector connector = ConnectorFactory.getConnector(cache);
+            if (connector instanceof IgnoreCapability) {
+                menu.findItem(R.id.menu_ignore).setVisible(((IgnoreCapability) connector).canIgnoreCache(cache));
+            }
+        }
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -521,6 +528,9 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             case R.id.menu_checker:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(CheckerUtils.getCheckerUrl(cache))));
                 return true;
+            case R.id.menu_ignore:
+                ignoreCache();
+                return true;
             default:
                 if (NavigationAppFactory.onMenuItemSelected(item, this, cache)) {
                     return true;
@@ -532,6 +542,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void ignoreCache() {
+        RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+            @Override
+            public void call() {
+                ((IgnoreCapability) ConnectorFactory.getConnector(cache)).ignoreCache(cache);
+            }
+        });
     }
 
     private void showVoteDialog() {
