@@ -70,7 +70,7 @@ public final class ProcessUtils {
         }
     }
 
-    public static boolean isIntentAvailable(final String intent) {
+    public static boolean isIntentAvailable(@NonNull final String intent) {
         return isIntentAvailable(intent, null);
     }
 

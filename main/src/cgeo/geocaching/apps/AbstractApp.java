@@ -38,6 +38,10 @@ public abstract class AbstractApp implements App {
         if (StringUtils.isNotEmpty(packageName) && ProcessUtils.isLaunchable(packageName)) {
             return true;
         }
+        if (intent == null) {
+            return false;
+        }
+        assert intent != null; // eclipse issue
         return ProcessUtils.isIntentAvailable(intent);
     }
 

@@ -22,7 +22,7 @@ public class OCCZConnector extends OCConnector {
         }
         final String id = StringUtils.substringAfter(url, "cacheid=");
         try {
-            final String geocode = GEOCODE_PREFIX + StringUtils.leftPad(Integer.toHexString(Integer.valueOf(id)), 4, '0');
+            final String geocode = GEOCODE_PREFIX + StringUtils.leftPad(Integer.toHexString(Integer.parseInt(id)), 4, '0');
             if (canHandle(geocode)) {
                 return geocode;
             }
