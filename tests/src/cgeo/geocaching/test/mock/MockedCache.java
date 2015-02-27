@@ -11,7 +11,7 @@ import cgeo.geocaching.utils.TextUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
-import org.mapsforge.core.IOUtils;
+import org.mapsforge.v3.core.IOUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
