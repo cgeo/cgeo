@@ -6,8 +6,8 @@ import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 
-import org.mapsforge.android.maps.Projection;
-import org.mapsforge.android.maps.overlay.Overlay;
+import org.mapsforge.v3.android.maps.Projection;
+import org.mapsforge.v3.android.maps.overlay.Overlay;
 
 import android.graphics.Canvas;
 import android.graphics.Point;

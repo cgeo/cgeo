@@ -17,13 +17,13 @@ import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
-import org.mapsforge.android.maps.MapView;
-import org.mapsforge.android.maps.Projection;
-import org.mapsforge.android.maps.mapgenerator.MapGenerator;
-import org.mapsforge.android.maps.mapgenerator.MapGeneratorFactory;
-import org.mapsforge.android.maps.mapgenerator.MapGeneratorInternal;
-import org.mapsforge.android.maps.overlay.Overlay;
-import org.mapsforge.core.GeoPoint;
+import org.mapsforge.v3.android.maps.MapView;
+import org.mapsforge.v3.android.maps.Projection;
+import org.mapsforge.v3.android.maps.mapgenerator.MapGenerator;
+import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorFactory;
+import org.mapsforge.v3.android.maps.mapgenerator.MapGeneratorInternal;
+import org.mapsforge.v3.android.maps.overlay.Overlay;
+import org.mapsforge.v3.core.GeoPoint;
 
 import android.content.Context;
 import android.graphics.Canvas;

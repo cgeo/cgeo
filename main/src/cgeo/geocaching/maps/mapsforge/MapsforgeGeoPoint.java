@@ -3,7 +3,7 @@ package cgeo.geocaching.maps.mapsforge;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 
-import org.mapsforge.core.GeoPoint;
+import org.mapsforge.v3.core.GeoPoint;
 
 public class MapsforgeGeoPoint extends GeoPoint implements GeoPointImpl {
 
