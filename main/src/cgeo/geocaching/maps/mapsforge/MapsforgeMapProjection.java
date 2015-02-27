@@ -3,8 +3,8 @@ package cgeo.geocaching.maps.mapsforge;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 
-import org.mapsforge.android.maps.Projection;
-import org.mapsforge.core.GeoPoint;
+import org.mapsforge.v3.android.maps.Projection;
+import org.mapsforge.v3.core.GeoPoint;
 
 import android.graphics.Point;
 

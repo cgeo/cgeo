@@ -6,7 +6,7 @@ import cgeo.geocaching.maps.AbstractMap;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 
-import org.mapsforge.android.maps.MapActivity;
+import org.mapsforge.v3.android.maps.MapActivity;
 
 import android.app.Activity;
 import android.os.Bundle;
