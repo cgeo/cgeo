@@ -219,28 +219,34 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             switch (what) {
                 case UPDATE_TITLE:
                     // set title
-                    final StringBuilder title = new StringBuilder();
-
                     if (map.mapMode == MapMode.LIVE && map.isLiveEnabled) {
-                        title.append(map.res.getString(R.string.map_live));
+                        map.setTitle(map.res.getString(R.string.map_live));
                     } else {
-                        title.append(map.mapTitle);
+                        map.setTitle(map.mapTitle);
                     }
 
+                    // count caches in the sub title
                     map.countVisibleCaches();
-                    if (!map.caches.isEmpty() && !map.mapTitle.contains("[")) {
-                        title.append(" [").append(map.cachesCnt);
-                        if (map.cachesCnt != map.caches.size() && Settings.isDebug()) {
-                            title.append('/').append(map.caches.size());
+                    final StringBuilder subtitle = new StringBuilder();
+                    if (!map.caches.isEmpty()) {
+                        final int totalCount = map.caches.size();
+
+                        if (map.cachesCnt != totalCount && Settings.isDebug()) {
+                            subtitle.append(map.cachesCnt).append('/').append(totalCount).append(map.res.getQuantityString(R.plurals.cache_counts, totalCount, totalCount));
                         }
-                        title.append(']');
+                        else {
+                            subtitle.append(map.res.getQuantityString(R.plurals.cache_counts, map.cachesCnt, map.cachesCnt));
+                        }
                     }
 
                     if (Settings.isDebug() && map.lastSearchResult != null && StringUtils.isNotBlank(map.lastSearchResult.getUrl())) {
-                        title.append('[').append(map.lastSearchResult.getUrl()).append(']');
+                        subtitle.append(" [").append(map.lastSearchResult.getUrl()).append(']');
                     }
 
-                    map.setTitle(title.toString());
+                    if (subtitle.length() > 0) {
+                        map.setSubtitle(subtitle.toString());
+                    }
+
                     break;
                 case INVALIDATE_MAP:
                     map.mapView.repaintRequired(null);
@@ -267,10 +273,27 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
     }
 
+    private void setSubtitle(final String subtitle) {
+        /* Compatibility for the old Action Bar, only used by the maps activity at the moment */
+        final TextView titleView = ButterKnife.findById(activity, R.id.actionbar_title);
+        if (titleView != null) {
+            titleView.setText(titleView.getText().toString() + ' ' + subtitle);
+        }
+        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)) {
+            setSubtitleIceCreamSandwich(subtitle);
+        }
+    }
+
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     private void setTitleIceCreamSandwich(final String title) {
         activity.getActionBar().setTitle(title);
     }
+
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    private void setSubtitleIceCreamSandwich(final String subtitle) {
+        activity.getActionBar().setSubtitle(subtitle);
+    }
+
     /** Updates the progress. */
     private static final class ShowProgressHandler extends Handler {
         private int counter = 0;

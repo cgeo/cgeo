@@ -56,8 +56,8 @@ import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
-import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CalendarUtils;
+import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxUtils;
 
@@ -1395,12 +1395,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         // apply filter settings (if there's a filter)
         final SearchResult searchToUse = getFilteredSearch();
-        final int count = searchToUse.getCount();
-        String mapTitle = title;
-        if (count > 0) {
-            mapTitle = title + " [" + count + "]";
-        }
-        CGeoMap.startActivitySearch(this, searchToUse, mapTitle);
+        CGeoMap.startActivitySearch(this, searchToUse, title);
     }
 
     private void refreshCurrentList() {
