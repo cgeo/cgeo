@@ -232,7 +232,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                         final int totalCount = map.caches.size();
 
                         if (map.cachesCnt != totalCount && Settings.isDebug()) {
-                            subtitle.append(map.cachesCnt).append('/').append(totalCount).append(map.res.getQuantityString(R.plurals.cache_counts, totalCount, totalCount));
+                            subtitle.append(map.cachesCnt).append('/').append(map.res.getQuantityString(R.plurals.cache_counts, totalCount, totalCount));
                         }
                         else {
                             subtitle.append(map.res.getQuantityString(R.plurals.cache_counts, map.cachesCnt, map.cachesCnt));
