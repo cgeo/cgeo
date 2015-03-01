@@ -449,7 +449,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return true;
             case R.id.menu_waypoint_caches_around:
                 if (selectedWaypoint != null) {
-                    CacheListActivity.startActivityCoordinates(this, selectedWaypoint.getCoords());
+                    CacheListActivity.startActivityCoordinates(this, selectedWaypoint.getCoords(), selectedWaypoint.getName());
                 }
                 return true;
             case R.id.menu_waypoint_reset_cache_coords:
@@ -2205,7 +2205,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
     @Override
     public void cachesAround() {
-        CacheListActivity.startActivityCoordinates(this, cache.getCoords());
+        CacheListActivity.startActivityCoordinates(this, cache.getCoords(), cache.getName());
     }
 
     public void setNeedsRefresh() {

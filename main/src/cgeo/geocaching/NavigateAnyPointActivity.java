@@ -457,7 +457,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity implemen
             return;
         }
 
-        CacheListActivity.startActivityCoordinates(this, coords);
+        CacheListActivity.startActivityCoordinates(this, coords, null);
 
         finish();
     }

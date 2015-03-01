@@ -340,7 +340,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
             showToast(res.getString(R.string.err_location_unknown));
             return;
         }
-        CacheListActivity.startActivityCoordinates((AbstractActivity) getActivity(), coords);
+        CacheListActivity.startActivityCoordinates((AbstractActivity) getActivity(), coords, cache != null ? cache.getName() : null);
         getActivity().finish();
     }
 

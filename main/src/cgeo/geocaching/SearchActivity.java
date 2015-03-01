@@ -315,7 +315,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
             buttonLongitude.setText(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE));
         } else {
             try {
-                CacheListActivity.startActivityCoordinates(this, new Geopoint(latText, lonText));
+                CacheListActivity.startActivityCoordinates(this, new Geopoint(latText, lonText), null);
             } catch (final Geopoint.ParseException e) {
                 showToast(res.getString(e.resource));
             }

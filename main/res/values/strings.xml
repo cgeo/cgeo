@@ -720,6 +720,7 @@
     <string name="cache_menu_visit_offline">One click offline log</string>
     <string name="cache_menu_spoilers">Spoiler images</string>
     <string name="cache_menu_around">Caches around</string>
+    <string name="around">Around %s</string>
     <string name="cache_menu_event">Add to calendar</string>
     <string name="cache_menu_details">Details</string>
     <string name="cache_menu_refresh">Refresh</string>

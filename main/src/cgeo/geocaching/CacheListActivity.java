@@ -1469,13 +1469,23 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(addressIntent);
     }
 
-    public static void startActivityCoordinates(final AbstractActivity context, final Geopoint coords) {
+    /**
+     * start list activity, by searching around the given point.
+     *
+     * @param name
+     *            name of coordinates, will lead to a title like "Around ..." instead of directly showing the
+     *            coordinates as title
+     */
+    public static void startActivityCoordinates(final AbstractActivity context, final Geopoint coords, @Nullable final String name) {
         if (!isValidCoords(context, coords)) {
             return;
         }
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
         Intents.putListType(cachesIntent, CacheListType.COORDINATE);
         cachesIntent.putExtra(Intents.EXTRA_COORDS, coords);
+        if (StringUtils.isNotEmpty(name)) {
+            cachesIntent.putExtra(Intents.EXTRA_TITLE, context.getString(R.string.around, name));
+        }
         context.startActivity(cachesIntent);
     }
 
@@ -1605,6 +1615,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 title = extras.getString(Intents.EXTRA_NAME);
                 loader = new PocketGeocacheListLoader(app, guid);
                 break;
+        }
+        // if there is a title given in the activity start request, use this one instead of the default
+        if (StringUtils.isNotBlank(extras.getString(Intents.EXTRA_TITLE))) {
+            title = extras.getString(Intents.EXTRA_TITLE);
         }
         updateTitle();
         showProgress(true);
