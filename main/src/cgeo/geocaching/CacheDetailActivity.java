@@ -27,6 +27,7 @@ import cgeo.geocaching.location.Units;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
@@ -1675,7 +1676,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 noteView.setOnClickListener(new DecryptTextClickListener(noteView));
                 noteView.setVisibility(View.VISIBLE);
                 if (TextUtils.containsHtml(wpt.getNote())) {
-                    noteView.setText(Html.fromHtml(wpt.getNote()), TextView.BufferType.SPANNABLE);
+                    noteView.setText(Html.fromHtml(wpt.getNote(), new SmileyImage(cache.getGeocode(), noteView), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
                 }
                 else {
                     noteView.setText(wpt.getNote());
