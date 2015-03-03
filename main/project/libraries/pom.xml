@@ -119,7 +119,7 @@
 					</execution>
 					<execution>
 						<id>update-properties</id>
-						<phase>install</phase>
+						<phase>package</phase>
 						<goals>
 							<goal>update-properties</goal>
 						</goals>
