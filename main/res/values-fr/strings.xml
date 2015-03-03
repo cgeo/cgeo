@@ -109,6 +109,7 @@
   <string name="log_password_title">Mot de passe du carnet :</string>
   <string name="log_hint_log_password">Entrez votre mot de passe pour le carnet</string>
   <string name="log_oc_team_comment">Commentaire de l\'équipe OC</string>
+  <string name="log_your_saved_log">Votre journal enregistré</string>
   <string-array name="log_image_scales">
     <item>Taille originale</item>
     <item>512 px</item>
@@ -622,6 +623,7 @@
   </plurals>
   <string name="cache_waypoints_add">Ajouter une étape</string>
   <string name="cache_hint">Indice</string>
+  <string name="cache_hint_not_available">Aucun indice disponible</string>
   <string name="cache_logs">Carnet de bord</string>
   <string name="cache_logs_friends_and_own">Vous / amis</string>
   <string name="cache_dialog_loading_details">Chargement des détails…</string>
@@ -664,6 +666,7 @@
   <string name="cache_menu_visit_offline">Journal hors connexion en un clic</string>
   <string name="cache_menu_spoilers">Images indices</string>
   <string name="cache_menu_around">Alentours</string>
+  <string name="around">Autour de %s</string>
   <string name="cache_menu_event">Ajouter à l\'agenda</string>
   <string name="cache_menu_details">Détails</string>
   <string name="cache_menu_refresh">Recharger</string>
@@ -674,6 +677,8 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Noter</string>
+  <string name="cache_menu_checker">Ouvrir le vérificateur</string>
+  <string name="cache_menu_ignore">Ignorer la cache</string>
   <string name="cache_status">Statut</string>
   <string name="cache_status_offline_log">Visite sauvée hors-ligne</string>
   <string name="cache_status_found">Trouvée</string>

@@ -109,6 +109,7 @@
   <string name="log_password_title">Log-Passwort:</string>
   <string name="log_hint_log_password">Log-Passwort eingeben</string>
   <string name="log_oc_team_comment">OC Team Bemerkung</string>
+  <string name="log_your_saved_log">Dein gespeichertes Log</string>
   <string-array name="log_image_scales">
     <item>Keine Skalierung</item>
     <item>512 px</item>
@@ -621,6 +622,7 @@
   </plurals>
   <string name="cache_waypoints_add">Wegpunkt hinzufügen</string>
   <string name="cache_hint">Hinweis</string>
+  <string name="cache_hint_not_available">Kein Hinweis verfügbar</string>
   <string name="cache_logs">Logbuch</string>
   <string name="cache_logs_friends_and_own">Logbuch (Freunde/Eigene)</string>
   <string name="cache_dialog_loading_details">Lade Cache-Details…</string>
@@ -663,6 +665,7 @@
   <string name="cache_menu_visit_offline">Offline loggen</string>
   <string name="cache_menu_spoilers">Hinweisbild</string>
   <string name="cache_menu_around">Caches im Umkreis</string>
+  <string name="around">In der Nähe von %s</string>
   <string name="cache_menu_event">Zum Kalender hinzufügen</string>
   <string name="cache_menu_details">Details</string>
   <string name="cache_menu_refresh">Aktualisieren</string>
@@ -673,6 +676,8 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble Smartwatch</string>
   <string name="cache_menu_vote">Bewerten</string>
+  <string name="cache_menu_checker">Öffne Geochecker</string>
+  <string name="cache_menu_ignore">Cache ignorieren</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Gespeicherter Log</string>
   <string name="cache_status_found">Gefunden</string>
