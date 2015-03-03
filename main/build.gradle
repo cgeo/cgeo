@@ -159,7 +159,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:19.1.0'
     compile 'com.google.android.gms:play-services:6.5.+'
 
-    compile 'com.jakewharton:butterknife:6.0.0'
+    compile 'com.jakewharton:butterknife:6.1.0'
     compile "org.apache.commons:commons-collections4:$CommonsCollections4Version"
     compile "org.apache.commons:commons-lang3:$CommonsLang3Version"
     compile "commons-io:commons-io:$CommonsIoVersion"
@@ -258,7 +258,7 @@ dependencies {
     unitTestCompile 'com.google.android:android-test:4.1.1.4'
 
     unitTestCompile 'com.googlecode.androidannotations:androidannotations-api:$AAVersion'
-    unitTestCompile 'com.jakewharton:butterknife:6.0.0'
+    unitTestCompile 'com.jakewharton:butterknife:6.1.0'
     unitTestCompile 'org.apache.commons:commons-collections4:4.0'
     unitTestCompile 'commons-io:commons-io:2.4'
     unitTestCompile 'org.apache.commons:commons-lang3:$CommonsLang3Version'
