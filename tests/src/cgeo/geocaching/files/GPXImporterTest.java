@@ -153,11 +153,11 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertThat(cache.getName()).isEqualTo("First Aid Station #1");
     }
 
-    private void assertImportStepMessages(int... importSteps) {
-        assertThat(importStepHandler.messages).hasSize(importSteps.length);
-        for (int i = 0; i < importSteps.length; i++) {
+    private void assertImportStepMessages(final int... importSteps) {
+        for (int i = 0; i < Math.min(importSteps.length, importStepHandler.messages.size()); i++) {
             assertThat(importStepHandler.messages.get(i).what).isEqualTo(importSteps[i]);
         }
+        assertThat(importStepHandler.messages).hasSize(importSteps.length);
     }
 
     public void testImportLoc() throws IOException {
