@@ -26,6 +26,7 @@
     · Fix: Recognize more hyperlinks of opencaching caches\n
     · Fix: Remove empty space in some opencaching logs\n
     · Fix: Allow up navigation when opening the app from a link\n
+    · Removed: No longer support loading mapsforge 0.24 maps\n
     \n
   </string>
 </resources>

@@ -7,8 +7,6 @@ import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
-import cgeo.geocaching.maps.mapsforge.v024.MapsforgeMapActivity024;
-import cgeo.geocaching.maps.mapsforge.v024.MapsforgeMapItemFactory024;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
@@ -30,7 +28,6 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
 
     public static final String MAPSFORGE_CYCLEMAP_ID = "MAPSFORGE_CYCLEMAP";
     public static final String MAPSFORGE_MAPNIK_ID = "MAPSFORGE_MAPNIK";
-    private boolean oldMap = false;
     private MapItemFactory mapItemFactory = new MapsforgeMapItemFactory();
 
     private MapsforgeMapProvider() {
@@ -56,13 +53,13 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
             return Collections.emptyList();
         }
 
-        File directory = new File(directoryPath);
+        final File directory = new File(directoryPath);
         if (directory.isDirectory()) {
             try {
-                ArrayList<String> mapFileList = new ArrayList<>();
+                final ArrayList<String> mapFileList = new ArrayList<>();
                 final File[] files = directory.listFiles();
                 if (ArrayUtils.isNotEmpty(files)) {
-                    for (File file : files) {
+                    for (final File file : files) {
                         if (file.getName().endsWith(".map")) {
                             if (MapsforgeMapProvider.isValidMapFile(file.getAbsolutePath())) {
                                 mapFileList.add(file.getAbsolutePath());
@@ -72,69 +69,44 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
                     Collections.sort(mapFileList, String.CASE_INSENSITIVE_ORDER);
                 }
                 return mapFileList;
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 Log.e("MapsforgeMapProvider.getOfflineMaps: ", e);
             }
         }
         return Collections.emptyList();
     }
 
-    public static boolean isValidMapFile(String mapFileIn) {
+    public static boolean isValidMapFile(final String mapFileIn) {
 
         if (StringUtils.isEmpty(mapFileIn)) {
             return false;
         }
 
-        MapDatabase mapDB = new MapDatabase();
-        FileOpenResult result = mapDB.openFile(new File(mapFileIn));
+        final MapDatabase mapDB = new MapDatabase();
+        final FileOpenResult result = mapDB.openFile(new File(mapFileIn));
         mapDB.closeFile();
 
-        boolean isValid = result.isSuccess();
-
-        if (!isValid) {
-            isValid = isMapfile024(mapFileIn);
-        }
-
-        return isValid;
-    }
-
-    private static boolean isMapfile024(String mapFileIn) {
-        return mapFileIn != null && org.mapsforge.android.mapsold.MapDatabase.isValidMapFile(mapFileIn);
+        return result.isSuccess();
     }
 
     @Override
     public boolean isSameActivity(final MapSource source1, final MapSource source2) {
-        return source1 == source2 ||
-                !isMapfile024(Settings.getMapFile()) ||
-                (!(source1 instanceof OfflineMapSource) && !(source2 instanceof OfflineMapSource));
+        return source1 == source2 || (!(source1 instanceof OfflineMapSource) && !(source2 instanceof OfflineMapSource));
     }
 
     @Override
     public Class<? extends Activity> getMapClass() {
-        final MapSource source = Settings.getMapSource();
-        if (source instanceof OfflineMapSource && isMapfile024(Settings.getMapFile())) {
-            oldMap = true;
-            mapItemFactory = new MapsforgeMapItemFactory024();
-            return MapsforgeMapActivity024.class;
-        }
-        oldMap = false;
         mapItemFactory = new MapsforgeMapItemFactory();
         return MapsforgeMapActivity.class;
     }
 
     @Override
     public int getMapViewId() {
-        if (oldMap) {
-            return R.id.mfmap_old;
-        }
         return R.id.mfmap;
     }
 
     @Override
     public int getMapLayoutId() {
-        if (oldMap) {
-            return R.layout.map_mapsforge_old;
-        }
         return R.layout.map_mapsforge;
     }
 
@@ -152,7 +124,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
 
         private final String fileName;
 
-        public OfflineMapSource(final String fileName, MapProvider mapProvider, final String name, final MapGeneratorInternal generator) {
+        public OfflineMapSource(final String fileName, final MapProvider mapProvider, final String name, final MapGeneratorInternal generator) {
             super(fileName, mapProvider, name, generator);
             this.fileName = fileName;
         }
@@ -171,7 +143,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         MapProviderFactory.deleteOfflineMapSources();
         final Resources resources = CgeoApplication.getInstance().getResources();
         final List<String> offlineMaps = getOfflineMaps();
-        for (String mapFile : offlineMaps) {
+        for (final String mapFile : offlineMaps) {
             final String mapName = StringUtils.capitalize(StringUtils.substringBeforeLast(new File(mapFile).getName(), "."));
             registerMapSource(new OfflineMapSource(mapFile, this, mapName + " (" + resources.getString(R.string.map_source_osm_offline) + ")", MapGeneratorInternal.DATABASE_RENDERER));
         }
