@@ -27,6 +27,7 @@ import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -73,6 +74,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
 
         @InjectView(R.id.changelog_master) protected TextView changeLogMaster;
         @InjectView(R.id.changelog_release) protected TextView changeLogRelease;
+        @InjectView(R.id.changelog_github) protected TextView changeLogLink;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
@@ -85,6 +87,13 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             } else {
                 changeLogMaster.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             }
+            changeLogLink.setOnClickListener(new OnClickListener() {
+
+                @Override
+                public void onClick(final View v) {
+                    startUrl("https://github.com/cgeo/cgeo/releases");
+                }
+            });
             return view;
         }
 

@@ -373,6 +373,7 @@
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Help</string>
     <string name="about_system_include">Please include the following system information when sending a bug report or asking for more information about c:geo:</string>
+    <string name="changelog_github">List of all changes</string>
     
     <!-- settings -->
     <string name="settings_title_services">Services</string>

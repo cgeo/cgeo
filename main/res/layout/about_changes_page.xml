@@ -37,6 +37,21 @@
             android:textColor="?text_color"
             android:textColorLink="?text_color_link"
             android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/changelog_github"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dip"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:clickable="true"
+            android:focusable="true"
+            android:linksClickable="true"
+            android:text="@string/changelog_github"
+            android:textColor="?text_color_link"
+            android:textColorLink="?text_color_link"
+            android:textSize="12sp" />
     </LinearLayout>
 
 </ScrollView>
