@@ -2,6 +2,10 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>Next bugfix release</b>\n
+    · Fix: Smilies in waypoints not shown\n	
+    \n
+    \n
     <b>2015.02.23</b>\n
     · Fix: Home location not parsed correctly\n	
     · Fix: Crash exporting GPX for lab caches\n
