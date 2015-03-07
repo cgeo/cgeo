@@ -7,6 +7,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.database.Cursor;
@@ -87,6 +88,14 @@ public final class ContactsActivity extends Activity {
                         final int contactId = contacts.get(which).first;
                         dialog.dismiss();
                         openContactAndFinish(contactId);
+                    }
+                })
+                .setOnCancelListener(new OnCancelListener() {
+
+                    @Override
+                    public void onCancel(final DialogInterface dialog) {
+                        dialog.dismiss();
+                        finish();
                     }
                 })
                 .create().show();
