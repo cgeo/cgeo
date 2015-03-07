@@ -1616,7 +1616,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 break;
         }
         // if there is a title given in the activity start request, use this one instead of the default
-        if (StringUtils.isNotBlank(extras.getString(Intents.EXTRA_TITLE))) {
+        if (extras != null && StringUtils.isNotBlank(extras.getString(Intents.EXTRA_TITLE))) {
             title = extras.getString(Intents.EXTRA_TITLE);
         }
         updateTitle();
