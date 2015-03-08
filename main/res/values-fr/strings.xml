@@ -341,6 +341,7 @@
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Aide</string>
   <string name="about_system_include">Merci d\'inclure systématiquement les informations suivantes lorsque vous signalez un problème ou demandez plus d\'information à propos de c:geo:</string>
+  <string name="changelog_github">Liste de toutes les modifications</string>
   <string name="settings_title_services">Services</string>
   <string name="settings_summary_services">Configuration des données de connexion et des services optionnels.</string>
   <string name="settings_title_appearance">Apparence</string>
@@ -789,6 +790,7 @@
   <string name="search_history_cleared">Historique effacé</string>
   <string name="waypoint_coordinate_formats_plain">Texte</string>
   <string name="from_clipboard">Depuis le presse-papiers</string>
+  <string name="copy_to_clipboard">Copier dans le presse-papiers</string>
   <string name="visit_tweet">Publier votre découverte sur Twitter</string>
   <string name="map_map">Carte</string>
   <string name="map_live">Carte active</string>

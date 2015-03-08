@@ -662,6 +662,8 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Votar</string>
+  <string name="cache_menu_checker">Abrir geochecker</string>
+  <string name="cache_menu_ignore">Ignorar caché</string>
   <string name="cache_status">Estado</string>
   <string name="cache_status_offline_log">Registro guardado</string>
   <string name="cache_status_found">Encontrado</string>

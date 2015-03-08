@@ -109,6 +109,7 @@
   <string name="log_password_title">Įrašo slaptažodis:</string>
   <string name="log_hint_log_password">Įveskite savo įrašo slaptažodį</string>
   <string name="log_oc_team_comment">OC komandos komentaras</string>
+  <string name="log_your_saved_log">Jūsų išsaugotas įrašas</string>
   <string-array name="log_image_scales">
     <item>Nekeisti dydžio</item>
     <item>512 px</item>
@@ -615,6 +616,7 @@
   </plurals>
   <string name="cache_waypoints_add">Pridėti papildomą tašką</string>
   <string name="cache_hint">Užuomina</string>
+  <string name="cache_hint_not_available">Užuomina nepateikiama</string>
   <string name="cache_logs">Įrašai</string>
   <string name="cache_logs_friends_and_own">Draugų/savi įrašai</string>
   <string name="cache_dialog_loading_details">Įkeliama slėptuvės informacija…</string>
@@ -657,6 +659,7 @@
   <string name="cache_menu_visit_offline">Vienu paspaudimu žurnalo įrašo išsaugojimas</string>
   <string name="cache_menu_spoilers">Užuominų nuotraukos</string>
   <string name="cache_menu_around">Slėptuvės aplink</string>
+  <string name="around">Aplink %s</string>
   <string name="cache_menu_event">Įtraukti į kalendorių</string>
   <string name="cache_menu_details">Informacija</string>
   <string name="cache_menu_refresh">Atnaujinti</string>
@@ -666,6 +669,8 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Balsuoti</string>
+  <string name="cache_menu_checker">Atidaryti geo tikrintuvą</string>
+  <string name="cache_menu_ignore">Ignoruoti slėptuvę</string>
   <string name="cache_status">Būsena</string>
   <string name="cache_status_offline_log">Išsaugotas įrašas</string>
   <string name="cache_status_found">Rasta</string>
