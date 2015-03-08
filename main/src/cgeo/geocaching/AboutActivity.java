@@ -5,6 +5,8 @@ import butterknife.InjectView;
 
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.sensors.Sensors;
@@ -266,17 +268,22 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 .append("\nAndroid version: ").append(VERSION.RELEASE)
                 .append("\nAndroid build: ").append(Build.DISPLAY)
                 .append("\nCgeo version: ").append(Version.getVersionName(context))
-                .append("\nPlay services: ").append(presence(googlePlayServicesAvailable));
-        if (googlePlayServicesAvailable) {
-            body.append("\nUse Play services: ").append(Settings.useGooglePlayServices() ? "yes" : "no");
-        }
-        body
+                .append("\nGoogle Play services: ").append(googlePlayServicesAvailable ? (Settings.useGooglePlayServices() ? "enabled" : "disabled") : "unavailable")
                 .append("\nLow power mode: ").append(Settings.useLowPowerMode() ? "active" : "inactive")
                 .append("\nCompass capabilities: ").append(Sensors.getInstance().hasCompassCapabilities() ? "yes" : "no")
                 .append("\nRotation sensor: ").append(presence(RotationProvider.hasRotationSensor(context)))
                 .append("\nGeomagnetic rotation sensor: ").append(presence(RotationProvider.hasGeomagneticRotationSensor(context)))
                 .append("\nOrientation sensor: ").append(presence(OrientationProvider.hasOrientationSensor(context)))
-                .append("\n--- End of system information ---\n");
+                .append("\nHide own/found: ").append(Settings.isExcludeMyCaches())
+                .append("\nMap strategy: ").append(Settings.getLiveMapStrategy());
+        for (final ILogin connector : ConnectorFactory.getActiveLiveConnectors()) {
+            body.append('\n').append(connector.getName()).append(": ").append(connector.isLoggedIn() ? "logged in" : "not logged in")
+                    .append(" (").append(connector.getLoginStatusString()).append(')');
+            if (connector.getName().equals("geocaching.com") && connector.isLoggedIn()) {
+                body.append(" / ").append(Settings.getGCMemberStatus());
+            }
+        }
+        body.append("\n--- End of system information ---\n");
         return body.toString();
     }
 
