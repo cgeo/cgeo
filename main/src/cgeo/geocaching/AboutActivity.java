@@ -39,6 +39,7 @@ import android.widget.TextView;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page> {
@@ -293,6 +294,10 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             if (connector.getName().equals("geocaching.com") && connector.isLoggedIn()) {
                 body.append(" / ").append(Settings.getGCMemberStatus());
             }
+        }
+        body.append("\nLanguage used: ").append(Locale.getDefault());
+        if (Settings.isUseEnglish()) {
+            body.append(" (forced)");
         }
         body.append("\n--- End of system information ---\n");
         return body.toString();
