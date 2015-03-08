@@ -265,7 +265,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     @Nullable
     private Geocache getSingleModeCache() {
-        for (final Geocache geocache : caches) {
+        // use a copy of the caches list to avoid concurrent modification
+        for (final Geocache geocache : new ArrayList<>(caches)) {
             if (geocache.getGeocode().equals(geocodeIntent)) {
                 return geocache;
             }
