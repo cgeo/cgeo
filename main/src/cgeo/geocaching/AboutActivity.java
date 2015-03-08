@@ -13,6 +13,7 @@ import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
+import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.Version;
 
@@ -31,6 +32,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -104,14 +106,23 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
     class SystemViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
 
         @InjectView(R.id.system) protected TextView system;
+        @InjectView(R.id.copy) protected Button copy;
 
         @Override
         public ScrollView getDispatchedView(final ViewGroup parentView) {
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_system_page, parentView, false);
             ButterKnife.inject(this, view);
-            system.setText(systemInformation(AboutActivity.this));
+            final String systemInfo = systemInformation(AboutActivity.this);
+            system.setText(systemInfo);
             system.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             Compatibility.setTextIsSelectable(system, true);
+            copy.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(final View view) {
+                    ClipboardUtils.copyToClipboard(systemInfo);
+                    showShortToast(getString(R.string.clipboard_copy_ok));
+                }
+            });
             return view;
         }
     }

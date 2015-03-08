@@ -11,6 +11,12 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
+        <Button android:id="@+id/copy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/copy_to_clipboard"
+            android:layout_gravity="center_horizontal"
+            android:padding="12dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
