@@ -320,26 +320,27 @@ public final class ImageUtils {
 
     /**
      * Add images present in the HTML description to the existing collection.
-     *
-     * @param images a collection of images
-     * @param htmlText the HTML description to be parsed
+     *  @param images a collection of images
      * @param geocode the common title for images in the description
+     * @param htmlText the HTML description to be parsed, can be repeated
      */
-    public static void addImagesFromHtml(final Collection<Image> images, final String htmlText, final String geocode) {
+    public static void addImagesFromHtml(final Collection<Image> images, final String geocode, final String... htmlText) {
         final Set<String> urls = new LinkedHashSet<>();
         for (final Image image : images) {
             urls.add(image.getUrl());
         }
-        Html.fromHtml(StringUtils.defaultString(htmlText), new ImageGetter() {
-            @Override
-            public Drawable getDrawable(final String source) {
-                if (!urls.contains(source) && canBeOpenedExternally(source)) {
-                    images.add(new Image(source, StringUtils.defaultString(geocode)));
-                    urls.add(source);
+        for (final String text: htmlText) {
+            Html.fromHtml(StringUtils.defaultString(text), new ImageGetter() {
+                @Override
+                public Drawable getDrawable(final String source) {
+                    if (!urls.contains(source) && canBeOpenedExternally(source)) {
+                        images.add(new Image(source, StringUtils.defaultString(geocode)));
+                        urls.add(source);
+                    }
+                    return null;
                 }
-                return null;
-            }
-        }, null);
+            }, null);
+        }
     }
 
     /**
