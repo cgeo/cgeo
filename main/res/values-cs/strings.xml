@@ -342,6 +342,7 @@
   <string name="about_apache_license"><a href=""> licence Apache, verze 2.0</a></string>
   <string name="about_help">Nápověda</string>
   <string name="about_system_include">Při odesílání hlášení o chybě nebo žádosti o další informace uveďte prosím následující systémové informace:</string>
+  <string name="changelog_github">Seznam všech změn</string>
   <string name="settings_title_services">Služby</string>
   <string name="settings_summary_services">Nastavení uživatelského účtu a přístupu k volitelným službám.</string>
   <string name="settings_title_appearance">Vzhled</string>
@@ -792,6 +793,7 @@
   <string name="search_history_cleared">Historie vymazána</string>
   <string name="waypoint_coordinate_formats_plain">Prostý</string>
   <string name="from_clipboard">Ze schránky</string>
+  <string name="copy_to_clipboard">Kopírovat do schránky</string>
   <string name="visit_tweet">Oznámit nález na Twitteru</string>
   <string name="map_map">Mapa</string>
   <string name="map_live">Aktivní mapa</string>

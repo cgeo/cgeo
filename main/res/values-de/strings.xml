@@ -341,6 +341,7 @@
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Hilfe</string>
   <string name="about_system_include">Bitte die folgende Systeminformation bei jedem Fehlerbericht oder bei Informationsanfragen zu c:geo mitsenden:</string>
+  <string name="changelog_github">Liste aller Änderungen</string>
   <string name="settings_title_services">Dienste</string>
   <string name="settings_summary_services">Konfiguriere Zugangsdaten und den Zugriff auf optionale Dienste.</string>
   <string name="settings_title_appearance">Erscheinungsbild</string>
@@ -788,6 +789,7 @@
   <string name="search_history_cleared">Verlauf gelöscht</string>
   <string name="waypoint_coordinate_formats_plain">Schlicht</string>
   <string name="from_clipboard">Aus der Zwischenablage</string>
+  <string name="copy_to_clipboard">In Zwischenablage kopieren</string>
   <string name="visit_tweet">Diesen Eintrag auf Twitter veröffentlichen</string>
   <string name="map_map">Karte</string>
   <string name="map_live">Live-Karte</string>
