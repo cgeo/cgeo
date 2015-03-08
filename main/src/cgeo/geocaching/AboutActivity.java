@@ -295,9 +295,9 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 body.append(" / ").append(Settings.getGCMemberStatus());
             }
         }
-        body.append("\nLanguage used: ").append(Locale.getDefault());
+        body.append("\nSystem language: ").append(Locale.getDefault());
         if (Settings.isUseEnglish()) {
-            body.append(" (forced)");
+            body.append(" (cgeo forced to English)");
         }
         body.append("\n--- End of system information ---\n");
         return body.toString();
