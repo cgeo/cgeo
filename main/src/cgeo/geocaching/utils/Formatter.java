@@ -17,6 +17,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public abstract class Formatter {
 
@@ -149,10 +150,10 @@ public abstract class Formatter {
 
     private static void addShortInfos(final Geocache cache, final ArrayList<String> infos) {
         if (cache.hasDifficulty()) {
-            infos.add("D " + String.format("%.1f", cache.getDifficulty()));
+            infos.add("D " + formatDT(cache.getDifficulty()));
         }
         if (cache.hasTerrain()) {
-            infos.add("T " + String.format("%.1f", cache.getTerrain()));
+            infos.add("T " + formatDT(cache.getTerrain()));
         }
 
         // don't show "not chosen" for events and virtuals, that should be the normal case
@@ -164,6 +165,10 @@ public abstract class Formatter {
                 infos.add(Formatter.formatShortDateIncludingWeekday(hiddenDate.getTime()));
             }
         }
+    }
+
+    private static String formatDT(final float value) {
+        return String.format(Locale.getDefault(), "%.1f", value);
     }
 
     public static String formatCacheInfoHistory(final Geocache cache) {
@@ -224,6 +229,10 @@ public abstract class Formatter {
             dateString = DateUtils.formatDateTime(CgeoApplication.getInstance().getBaseContext(), time, DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + dateString;
         }
         return dateString;
+    }
+
+    public static String formatMapSubtitle(final Geocache cache) {
+        return "D " + formatDT(cache.getDifficulty()) + SEPARATOR + "T " + formatDT(cache.getTerrain()) + SEPARATOR + cache.getGeocode();
     }
 
 }

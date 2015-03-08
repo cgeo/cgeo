@@ -40,6 +40,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.LiveMapInfoDialogBuilder;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapUtils;
@@ -47,6 +48,7 @@ import cgeo.geocaching.utils.MapUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Subscription;
 import rx.functions.Action0;
@@ -218,34 +220,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
             switch (what) {
                 case UPDATE_TITLE:
-                    // set title
-                    if (map.mapMode == MapMode.LIVE && map.isLiveEnabled) {
-                        map.setTitle(map.res.getString(R.string.map_live));
-                    } else {
-                        map.setTitle(map.mapTitle);
-                    }
-
-                    // count caches in the sub title
-                    map.countVisibleCaches();
-                    final StringBuilder subtitle = new StringBuilder();
-                    if (!map.caches.isEmpty()) {
-                        final int totalCount = map.caches.size();
-
-                        if (map.cachesCnt != totalCount && Settings.isDebug()) {
-                            subtitle.append(map.cachesCnt).append('/').append(map.res.getQuantityString(R.plurals.cache_counts, totalCount, totalCount));
-                        }
-                        else {
-                            subtitle.append(map.res.getQuantityString(R.plurals.cache_counts, map.cachesCnt, map.cachesCnt));
-                        }
-                    }
-
-                    if (Settings.isDebug() && map.lastSearchResult != null && StringUtils.isNotBlank(map.lastSearchResult.getUrl())) {
-                        subtitle.append(" [").append(map.lastSearchResult.getUrl()).append(']');
-                    }
-
-                    if (subtitle.length() > 0) {
-                        map.setSubtitle(subtitle.toString());
-                    }
+                    map.setTitle();
+                    map.setSubtitle();
 
                     break;
                 case INVALIDATE_MAP:
@@ -261,7 +237,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
     final private Handler displayHandler = new DisplayHandler(this);
 
-    private void setTitle(final String title) {
+    private void setTitle() {
+        final String title = calculateTitle();
         /* Compatibility for the old Action Bar, only used by the maps activity at the moment */
         final TextView titleview = ButterKnife.findById(activity, R.id.actionbar_title);
         if (titleview != null) {
@@ -273,7 +250,35 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
     }
 
-    private void setSubtitle(final String subtitle) {
+    private String calculateTitle() {
+        if (isLiveEnabled) {
+            return res.getString(R.string.map_live);
+        }
+        if (mapMode == MapMode.SINGLE) {
+            final Geocache cache = getSingleModeCache();
+            if (cache != null) {
+                return cache.getName();
+            }
+        }
+        return StringUtils.defaultIfEmpty(mapTitle, res.getString(R.string.map_map));
+    }
+
+    @Nullable
+    private Geocache getSingleModeCache() {
+        for (final Geocache geocache : caches) {
+            if (geocache.getGeocode().equals(geocodeIntent)) {
+                return geocache;
+            }
+        }
+        return null;
+    }
+
+    private void setSubtitle() {
+        final String subtitle = calculateSubtitle();
+        if (StringUtils.isEmpty(subtitle)) {
+            return;
+        }
+
         /* Compatibility for the old Action Bar, only used by the maps activity at the moment */
         final TextView titleView = ButterKnife.findById(activity, R.id.actionbar_title);
         if (titleView != null) {
@@ -282,6 +287,34 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)) {
             setSubtitleIceCreamSandwich(subtitle);
         }
+    }
+
+    private String calculateSubtitle() {
+        // count caches in the sub title
+        countVisibleCaches();
+        final StringBuilder subtitle = new StringBuilder();
+        if (!isLiveEnabled && mapMode == MapMode.SINGLE) {
+            final Geocache cache = getSingleModeCache();
+            if (cache != null) {
+                return Formatter.formatMapSubtitle(cache);
+            }
+        }
+        if (!caches.isEmpty()) {
+            final int totalCount = caches.size();
+
+            if (cachesCnt != totalCount && Settings.isDebug()) {
+                subtitle.append(cachesCnt).append('/').append(res.getQuantityString(R.plurals.cache_counts, totalCount, totalCount));
+            }
+            else {
+                subtitle.append(res.getQuantityString(R.plurals.cache_counts, cachesCnt, cachesCnt));
+            }
+        }
+
+        if (Settings.isDebug() && lastSearchResult != null && StringUtils.isNotBlank(lastSearchResult.getUrl())) {
+            subtitle.append(" [").append(lastSearchResult.getUrl()).append(']');
+        }
+
+        return subtitle.toString();
     }
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
@@ -459,7 +492,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             activity.getActionBar().setDisplayHomeAsUpEnabled(true);
         }
         activity.setContentView(mapProvider.getMapLayoutId());
-        setTitle(res.getString(R.string.map_map));
+        setTitle();
 
         // initialize map
         mapView = (MapViewImpl) activity.findViewById(mapProvider.getMapViewId());
@@ -737,6 +770,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 lastSearchResult = null;
                 searchIntent = null;
                 ActivityMixin.invalidateOptionsMenu(activity);
+                if (mapMode != MapMode.SINGLE) {
+                    mapTitle = StringUtils.EMPTY;
+                }
+                updateMapTitle();
                 return true;
             case R.id.menu_store_caches:
                 if (!isLoading()) {
@@ -813,14 +850,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 return true;
             }
             case R.id.menu_hint:
-                if (caches.size() == 1) {
-                    caches.iterator().next().showHintToast(getActivity());
-                }
+                menuShowHint();
                 return true;
             case R.id.menu_compass:
-                if (caches.size() == 1) {
-                    CompassActivity.startActivityCache(this.getActivity(), caches.iterator().next());
-                }
+                menuCompass();
                 return true;
             default:
                 final MapSource mapSource = MapProviderFactory.getMapSource(id);
@@ -831,6 +864,20 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 }
         }
         return false;
+    }
+
+    private void menuCompass() {
+        final Geocache cache = getSingleModeCache();
+        if (cache != null) {
+            CompassActivity.startActivityCache(this.getActivity(), cache);
+        }
+    }
+
+    private void menuShowHint() {
+        final Geocache cache = getSingleModeCache();
+        if (cache != null) {
+            cache.showHintToast(getActivity());
+        }
     }
 
     private void selectMapTheme() {
@@ -1132,7 +1179,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
 
                 // update title on any change
                 if (moved || !viewportNow.equals(previousViewport)) {
-                    map.displayHandler.sendEmptyMessage(UPDATE_TITLE);
+                    map.updateMapTitle();
                 }
                 previousZoom = zoomNow;
 
@@ -1358,7 +1405,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             }
             displayHandler.sendEmptyMessage(INVALIDATE_MAP);
 
-            displayHandler.sendEmptyMessage(UPDATE_TITLE);
+            updateMapTitle();
         } finally {
             showProgressHandler.sendEmptyMessage(HIDE_PROGRESS);
         }
@@ -1371,9 +1418,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         final CachesOverlayItemImpl item = getWaypointItem(waypoint);
         overlayCaches.updateItems(item);
         displayHandler.sendEmptyMessage(INVALIDATE_MAP);
-        displayHandler.sendEmptyMessage(UPDATE_TITLE);
+        updateMapTitle();
 
         cachesCnt = 1;
+    }
+
+    private void updateMapTitle() {
+        displayHandler.sendEmptyMessage(UPDATE_TITLE);
     }
 
     private static abstract class DoRunnable implements Runnable {
@@ -1688,7 +1739,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         mapIntent.putExtra(Intents.EXTRA_MAP_MODE, MapMode.SINGLE);
         mapIntent.putExtra(Intents.EXTRA_LIVE_ENABLED, false);
         mapIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
-        mapIntent.putExtra(Intents.EXTRA_TITLE, geocode);
         fromActivity.startActivity(mapIntent);
     }
 
