@@ -3,6 +3,8 @@ package cgeo.geocaching;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+import cgeo.calendar.CalendarAddon;
+import cgeo.contacts.ContactsAddon;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -298,6 +300,19 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         body.append("\nSystem language: ").append(Locale.getDefault());
         if (Settings.isUseEnglish()) {
             body.append(" (cgeo forced to English)");
+        }
+        final boolean calendarAddonAvailable = CalendarAddon.isAvailable();
+        final boolean contactsAddonAvailable = ContactsAddon.isAvailable();
+        body.append("\nInstalled plugins:");
+        if (calendarAddonAvailable || contactsAddonAvailable) {
+            if (calendarAddonAvailable) {
+                body.append(" calendar");
+            }
+            if (contactsAddonAvailable) {
+                body.append(" contacts");
+            }
+        } else {
+            body.append("none");
         }
         body.append("\n--- End of system information ---\n");
         return body.toString();
