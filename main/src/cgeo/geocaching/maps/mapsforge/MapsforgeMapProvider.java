@@ -91,7 +91,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
 
     @Override
     public boolean isSameActivity(final MapSource source1, final MapSource source2) {
-        return source1 == source2 || (!(source1 instanceof OfflineMapSource) && !(source2 instanceof OfflineMapSource));
+        return source1.getNumericalId() == source2.getNumericalId() || (!(source1 instanceof OfflineMapSource) && !(source2 instanceof OfflineMapSource));
     }
 
     @Override
