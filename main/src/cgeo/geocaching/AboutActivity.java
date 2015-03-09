@@ -289,7 +289,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 .append("\nGeomagnetic rotation sensor: ").append(presence(RotationProvider.hasGeomagneticRotationSensor(context)))
                 .append("\nOrientation sensor: ").append(presence(OrientationProvider.hasOrientationSensor(context)))
                 .append("\nHide own/found: ").append(Settings.isExcludeMyCaches())
-                .append("\nMap strategy: ").append(Settings.getLiveMapStrategy());
+                .append("\nMap strategy: ").append(Settings.getLiveMapStrategy().toString().toLowerCase(Locale.getDefault()));
         for (final ILogin connector : ConnectorFactory.getActiveLiveConnectors()) {
             body.append('\n').append(connector.getName()).append(": ").append(connector.isLoggedIn() ? "logged in" : "not logged in")
                     .append(" (").append(connector.getLoginStatusString()).append(')');
@@ -303,7 +303,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         }
         final boolean calendarAddonAvailable = CalendarAddon.isAvailable();
         final boolean contactsAddonAvailable = ContactsAddon.isAvailable();
-        body.append("\nInstalled plugins:");
+        body.append("\nInstalled cgeo plugins:");
         if (calendarAddonAvailable || contactsAddonAvailable) {
             if (calendarAddonAvailable) {
                 body.append(" calendar");
@@ -312,7 +312,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 body.append(" contacts");
             }
         } else {
-            body.append("none");
+            body.append(" none");
         }
         body.append("\n--- End of system information ---\n");
         return body.toString();
