@@ -326,17 +326,25 @@ public abstract class GCParser {
                     params.put("recaptcha_challenge_field", recaptchaReceiver.getChallenge());
                     params.put("recaptcha_response_field", recaptchaText);
                 }
-                params.put("ctl00$ContentBody$uxDownloadLoc", "Download Waypoints");
+                params.put("Download", "Download Waypoints");
 
-                final String coordinates = Network.getResponseData(Network.postRequest("http://www.geocaching.com/seek/nearest.aspx", params), false);
+                // retrieve target url
+                final String queryUrl = TextUtils.getMatch(pageContent, GCConstants.PATTERN_SEARCH_POST_ACTION, "");
 
-                if (StringUtils.contains(coordinates, "You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
-                    Log.i("User has not agreed to the license agreement. Can\'t download .loc file.");
-                    searchResult.setError(StatusCode.UNAPPROVED_LICENSE);
-                    return searchResult;
+                if (StringUtils.isEmpty(queryUrl)) {
+                    Log.w("Loc download url not found");
+                } else {
+
+                    final String coordinates = Network.getResponseData(Network.postRequest("http://www.geocaching.com/seek/" + queryUrl, params), false);
+
+                    if (StringUtils.contains(coordinates, "You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
+                        Log.i("User has not agreed to the license agreement. Can\'t download .loc file.");
+                        searchResult.setError(StatusCode.UNAPPROVED_LICENSE);
+                        return searchResult;
+                    }
+
+                    LocParser.parseLoc(searchResult, coordinates, storedCaches.toBlocking().single());
                 }
-
-                LocParser.parseLoc(searchResult, coordinates, storedCaches.toBlocking().single());
 
             } catch (final RuntimeException e) {
                 Log.e("GCParser.parseSearch.CIDs", e);

@@ -3,7 +3,8 @@
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
     <b>Next bugfix release</b>\n
-    · Fix: Smilies in waypoints not shown\n	
+    · Fix: Images from short description not shown in image gallery\n
+    · Fix: Smilies in waypoint descriptions not shown\n	
     \n
     \n
     <b>2015.02.23</b>\n
