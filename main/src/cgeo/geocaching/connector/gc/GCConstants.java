@@ -134,6 +134,7 @@ public final class GCConstants {
     final static Pattern PATTERN_SEARCH_RECAPTCHA = Pattern.compile("<script[^>]*src=\"[^\"]*/recaptcha/api/challenge\\?k=([^\"]+)\"[^>]*>");
     public final static Pattern PATTERN_SEARCH_RECAPTCHACHALLENGE = Pattern.compile("challenge : '([^']+)'");
     final static Pattern PATTERN_SEARCH_HIDDEN_DATE = Pattern.compile("<td style=\"width:70px\">[^<]+<span class=\"small\">([^<]+)</span>");
+    final static Pattern PATTERN_SEARCH_POST_ACTION = Pattern.compile("<form name=\"aspnetForm\" method=\"post\" action=\"(.*)\" id=\"aspnetForm\"");
 
     /**
      * Patterns for waypoints
