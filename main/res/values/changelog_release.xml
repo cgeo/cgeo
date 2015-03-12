@@ -2,13 +2,13 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>Next bugfix release</b>\n
+    <b>2015.03.12:</b>\n
     · Fix: Searches not returning coordinates for premium members\n
     · Fix: Images from short description not shown in image gallery\n
     · Fix: Smilies in waypoint descriptions not shown\n	
     \n
     \n
-    <b>2015.02.23</b>\n
+    <b>2015.02.23:</b>\n
     · Fix: Home location not parsed correctly\n	
     · Fix: Crash exporting GPX for lab caches\n
     · Fix: Crash restoring non-existing database backup\n
