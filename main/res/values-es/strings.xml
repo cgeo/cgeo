@@ -774,6 +774,7 @@
   <string name="search_history_cleared">Historial borrado</string>
   <string name="waypoint_coordinate_formats_plain">Sencillo</string>
   <string name="from_clipboard">Desde portapapeles</string>
+  <string name="copy_to_clipboard">Copiar al portapapeles</string>
   <string name="visit_tweet">Publicar en Twitter</string>
   <string name="map_map">Mapa</string>
   <string name="map_live">Mapa activo</string>

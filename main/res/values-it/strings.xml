@@ -79,6 +79,7 @@
   <string name="log_saving_and_uploading">Invio log e immagine…</string>
   <string name="log_clear">Azzera</string>
   <string name="log_post_not_possible">Connessione…</string>
+  <string name="log_date_future_not_allowed">Non sono ammesse date future per i log.</string>
   <string name="log_add">Aggiungi</string>
   <string name="log_repeat">Ripeti l\'ultimo log</string>
   <string name="log_no_rating">Nessun voto</string>
@@ -108,6 +109,7 @@
   <string name="log_password_title">Log Password:</string>
   <string name="log_hint_log_password">Inserisci la password per il log</string>
   <string name="log_oc_team_comment">Commenti del Team OC</string>
+  <string name="log_your_saved_log">I tuoi log salvati</string>
   <string-array name="log_image_scales">
     <item>Dimensioni originali</item>
     <item>512 px</item>
@@ -293,6 +295,7 @@
   <string name="caches_filter_track">Con oggetti trackables</string>
   <string name="caches_filter_clear">Rimuovi filtri</string>
   <string name="caches_filter_modified">Con coordinate modificate</string>
+  <string name="caches_filter_offline_log">Con log offline</string>
   <string name="caches_filter_origin">Origine</string>
   <string name="caches_filter_distance">Distanza</string>
   <string name="caches_filter_personal_note">Con una nota personale</string>
@@ -334,6 +337,7 @@
   <string name="about_apache_license"><a href="">Licenza Apache, versione 2.0</a></string>
   <string name="about_help">Guida</string>
   <string name="about_system_include">Si prega di includere le seguenti informazioni di sistema quando si invia una segnalazione di bug o per chiedere ulteriori informazioni su c:geo:</string>
+  <string name="changelog_github">Elenco di tutte le modifiche</string>
   <string name="settings_title_services">Servizi</string>
   <string name="settings_summary_services">Configura le informazioni utente dell\'account ed accede a servizi opzionali.</string>
   <string name="settings_title_appearance">Aspetto</string>
@@ -452,6 +456,8 @@
   <string name="init_backup_success">Il database di c:geo è stato salvato con successo nel file: </string>
   <string name="init_backup_failed">Backup del database di c:geo fallito.</string>
   <string name="init_backup_unnecessary">Il database è vuoto, il backup non è necessario.</string>
+  <string name="backup_confirm_overwrite">Vuoi sovrascrivere il backup esistente da %s?</string>
+  <string name="restore_confirm_overwrite">Vuoi sovrascrivere %s sul tuo dispositivo con il backup?</string>
   <string name="init_restore_success">Ripristino completato.</string>
   <string name="init_restore_failed">Ripristino fallito.</string>
   <string name="init_restore_running">Ripristino del database dei cache…</string>
@@ -610,6 +616,7 @@
   </plurals>
   <string name="cache_waypoints_add">Aggiungi waypoint</string>
   <string name="cache_hint">Aiuto (spoiler)</string>
+  <string name="cache_hint_not_available">Nessun aiuto disponibile</string>
   <string name="cache_logs">Logbook</string>
   <string name="cache_logs_friends_and_own">Log tuoi e degli amici</string>
   <string name="cache_dialog_loading_details">Caricamento dettagli del cache…</string>
@@ -652,6 +659,7 @@
   <string name="cache_menu_visit_offline">Log offline con un solo click</string>
   <string name="cache_menu_spoilers">Immagini spoiler</string>
   <string name="cache_menu_around">Cache qui intorno</string>
+  <string name="around">Nei dintorni di %s</string>
   <string name="cache_menu_event">Aggiungi al calendario</string>
   <string name="cache_menu_details">Dettagli</string>
   <string name="cache_menu_refresh">Aggiorna</string>
@@ -662,6 +670,8 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Vota</string>
+  <string name="cache_menu_checker">Apri geo checker</string>
+  <string name="cache_menu_ignore">Ignora cache</string>
   <string name="cache_status">Stato</string>
   <string name="cache_status_offline_log">Log salvato</string>
   <string name="cache_status_found">Trovato</string>
@@ -772,6 +782,7 @@
   <string name="search_history_cleared">Cronologia azzerata</string>
   <string name="waypoint_coordinate_formats_plain">Plain</string>
   <string name="from_clipboard">Dagli appunti</string>
+  <string name="copy_to_clipboard">Copia nella Clipboard</string>
   <string name="visit_tweet">Segnala questo ritrovamento su Twitter</string>
   <string name="map_map">Mappa</string>
   <string name="map_live">Mappa Live</string>
@@ -1128,7 +1139,15 @@
   <string name="attribute_offset_cache_no">Non è un offset cache</string>
   <string name="quote">Per rendere il geocaching più facile e gli utenti più pigri.</string>
   <string name="powered_by">carnero</string>
+  <string name="support_title">Aiuto</string>
+  <string name="website_title">Sito Internet</string>
+  <string name="facebook_title">Facebook</string>
+  <string name="facebook_link"><a href="">pagina c:geo</a></string>
+  <string name="twitter_title">Twitter</string>
+  <string name="market_title">Google Play</string>
+  <string name="market_link"><a href="">c:geo su Google Play</a></string>
   <string name="about_twitter">Può <b>c:geo</b> pubblicare su Twitter ogni volta che logghi un cache?</string>
+  <string name="faq_title">FAQ</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Una nuova versione è disponibile.\nClicca per installarla.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Una nuova versione nightly è disponibile.\nClicca per installarla.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Una nuova release candidate è disponibile.\nClicca per installarla.</string>
