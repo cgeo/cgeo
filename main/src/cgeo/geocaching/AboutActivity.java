@@ -270,7 +270,6 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         fromActivity.startActivity(intent);
     }
 
-
     private static String presence(final Boolean present) {
         return present ? "present" : "absent";
     }
@@ -289,7 +288,9 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 .append("\nGeomagnetic rotation sensor: ").append(presence(RotationProvider.hasGeomagneticRotationSensor(context)))
                 .append("\nOrientation sensor: ").append(presence(OrientationProvider.hasOrientationSensor(context)))
                 .append("\nHide own/found: ").append(Settings.isExcludeMyCaches())
-                .append("\nMap strategy: ").append(Settings.getLiveMapStrategy().toString().toLowerCase(Locale.getDefault()));
+                .append("\nMap strategy: ").append(Settings.getLiveMapStrategy().toString().toLowerCase(Locale.getDefault()))
+                .append("\nHW-acceleration: ").append(Settings.useHardwareAcceleration() ? "enabled" : "disabled")
+                .append(" (Disabled by default: ").append(Settings.HW_ACCEL_DISABLED_BY_DEFAULT ? "yes" : "no").append(")");
         for (final ILogin connector : ConnectorFactory.getActiveLiveConnectors()) {
             body.append('\n').append(connector.getName()).append(": ").append(connector.isLoggedIn() ? "logged in" : "not logged in")
                     .append(" (").append(connector.getLoginStatusString()).append(')');
