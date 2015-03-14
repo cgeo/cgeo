@@ -79,7 +79,7 @@ import java.util.List;
 
 public class MainActivity extends AbstractActionBarActivity {
     @InjectView(R.id.nav_satellites) protected TextView navSatellites;
-    @InjectView(R.id.filter_button_title)protected TextView filterTitle;
+    @InjectView(R.id.filter_button_title) protected TextView filterTitle;
     @InjectView(R.id.map) protected ImageView findOnMap;
     @InjectView(R.id.search_offline) protected ImageView findByOffline;
     @InjectView(R.id.advanced_button) protected ImageView advanced;
@@ -97,6 +97,7 @@ public class MainActivity extends AbstractActionBarActivity {
     private Geopoint addCoords = null;
     private boolean initialized = false;
     private ConnectivityChangeReceiver connectivityChangeReceiver;
+    private MenuItem searchMenuItem;
 
     private final UpdateLocation locationUpdater = new UpdateLocation();
 
@@ -283,8 +284,20 @@ public class MainActivity extends AbstractActionBarActivity {
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.main_activity_options, menu);
         final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        final MenuItem searchItem = menu.findItem(R.id.menu_gosearch);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        this.searchMenuItem = menu.findItem(R.id.menu_gosearch);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchMenuItem);
+        searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
+            @Override
+            public boolean onSuggestionClick(final int arg0) {
+                MainActivity.this.collapseSearchView();
+                return false;
+            }
+
+            @Override
+            public boolean onSuggestionSelect(final int arg0) {
+                return false;
+            }
+        });
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         presentShowcase();
         return true;
@@ -299,6 +312,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
+        this.collapseSearchView();
         final int id = item.getItemId();
         switch (id) {
             case android.R.id.home:
@@ -382,6 +396,7 @@ public class MainActivity extends AbstractActionBarActivity {
         findOnMap.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
+                MainActivity.this.collapseSearchView();
                 cgeoFindOnMap(v);
             }
         });
@@ -390,6 +405,7 @@ public class MainActivity extends AbstractActionBarActivity {
         findByOffline.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
+                MainActivity.this.collapseSearchView();
                 cgeoFindByOffline(v);
             }
         });
@@ -397,6 +413,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
             @Override
             public boolean onLongClick(final View v) {
+                MainActivity.this.collapseSearchView();
                 new StoredList.UserInterface(MainActivity.this).promptForListSelection(R.string.list_title, new Action1<Integer>() {
 
                     @Override
@@ -414,6 +431,7 @@ public class MainActivity extends AbstractActionBarActivity {
         advanced.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
+                MainActivity.this.collapseSearchView();
                 cgeoSearch(v);
             }
         });
@@ -422,6 +440,7 @@ public class MainActivity extends AbstractActionBarActivity {
         any.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
+                MainActivity.this.collapseSearchView();
                 cgeoPoint(v);
             }
         });
@@ -430,6 +449,7 @@ public class MainActivity extends AbstractActionBarActivity {
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
+                MainActivity.this.collapseSearchView();
                 selectGlobalTypeFilter();
             }
         });
@@ -437,6 +457,7 @@ public class MainActivity extends AbstractActionBarActivity {
 
             @Override
             public boolean onLongClick(final View v) {
+                MainActivity.this.collapseSearchView();
                 Settings.setCacheType(CacheType.ALL);
                 setFilterTitle();
                 return true;
@@ -557,6 +578,7 @@ public class MainActivity extends AbstractActionBarActivity {
                 nearestView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(final View v) {
+                        MainActivity.this.collapseSearchView();
                         cgeoFindNearest(v);
                     }
                 });
@@ -677,6 +699,20 @@ public class MainActivity extends AbstractActionBarActivity {
         } catch (final Exception ex) {
             Log.e("Error checking/showing changelog!", ex);
         }
+    }
+
+    private void collapseSearchView() {
+        if (this.searchMenuItem != null && MenuItemCompat.isActionViewExpanded(this.searchMenuItem)) {
+            MenuItemCompat.collapseActionView(this.searchMenuItem);
+        }
+    }
+
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
+    public void mainActivityOnClick(final View view) {
+        this.collapseSearchView();
     }
 
     /**
