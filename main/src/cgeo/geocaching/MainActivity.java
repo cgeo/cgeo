@@ -707,6 +707,10 @@ public class MainActivity extends AbstractActionBarActivity {
         }
     }
 
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void mainActivityOnClick(final View view) {
         this.collapseSearchView();
     }
