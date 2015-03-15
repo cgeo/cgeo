@@ -675,6 +675,11 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         Settings.addCacheToHistory(cache.getGeocode());
     }
 
+    @Override
+    protected void onUpdate() {
+        notifyDataSetChanged();
+    }
+
     /**
      * Tries to navigate to the {@link Geocache} of this activity using the default navigation tool.
      */

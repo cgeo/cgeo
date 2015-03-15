@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <item
+        android:id="@+id/menu_edit_waypoint_cancel"
+        android:icon="@drawable/ic_menu_cancel_holo_dark"
+        android:title="Cancel"
+        app:showAsAction="always">
+    </item>
+    <item
+        android:id="@+id/menu_edit_waypoint_save"
+        android:icon="@drawable/ic_menu_done_holo_dark"
+        android:title="Save"
+        app:showAsAction="always">
+    </item>
+
+</menu>
