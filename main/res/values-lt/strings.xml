@@ -344,6 +344,7 @@
   <string name="about_apache_license"><a href=""> Apache licencija, versija 2.0</a></string>
   <string name="about_help">Pagalba</string>
   <string name="about_system_include">Pridėkite papildomą sisteminę informaciją, kai siunčiate klaidos pranešimą arba norite gauti daugiau informacijos apie c:geo:</string>
+  <string name="changelog_github">Pakeitimų sąrašas</string>
   <string name="settings_title_services">Paslaugos</string>
   <string name="settings_summary_services">Nustatyk naudotojo paskyros informaciją ir prieiga prie pasirinktinų paslaugų.</string>
   <string name="settings_title_appearance">Išvaizda</string>
@@ -781,6 +782,7 @@
   <string name="search_history_cleared">Istorija išvalyta</string>
   <string name="waypoint_coordinate_formats_plain">Paprastas</string>
   <string name="from_clipboard">Iš mainų srities</string>
+  <string name="copy_to_clipboard">Kopijuoti į mainų sritį</string>
   <string name="visit_tweet">Skelbti radybas Twitter paskytoje</string>
   <string name="map_map">Išsaugotos slėptuvės</string>
   <string name="map_live">Slėptuvės iš interneto</string>
