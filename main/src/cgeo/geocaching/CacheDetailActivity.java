@@ -496,12 +496,16 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         menu.findItem(R.id.menu_refresh).setVisible(cache != null && cache.isOffline());
         menu.findItem(R.id.menu_gcvote).setVisible(cache != null && GCVote.isVotingPossible(cache));
         menu.findItem(R.id.menu_checker).setVisible(cache != null && StringUtils.isNotEmpty(CheckerUtils.getCheckerUrl(cache)));
+        // Comment out ignoring capabilities for this release, as this feature needs to be polished and accessible from
+        // other places as well as undo-able.
+        /*
         if (cache != null) {
             final IConnector connector = ConnectorFactory.getConnector(cache);
             if (connector instanceof IgnoreCapability) {
                 menu.findItem(R.id.menu_ignore).setVisible(((IgnoreCapability) connector).canIgnoreCache(cache));
             }
         }
+        */
         return super.onPrepareOptionsMenu(menu);
     }
 
