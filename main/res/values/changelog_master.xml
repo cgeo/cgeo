@@ -2,5 +2,8 @@
 <resources>
   <!-- changelog for the master branch -->
   <string name="changelog_master" translatable="false">
+    <b>Next feature release:</b>\n
+    · New: Menu in cache details to put cache on ignore list (but not to remove)\n
+    \n
   </string>
 </resources>
