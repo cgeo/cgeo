@@ -290,7 +290,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 .append("\nHide own/found: ").append(Settings.isExcludeMyCaches())
                 .append("\nMap strategy: ").append(Settings.getLiveMapStrategy().toString().toLowerCase(Locale.getDefault()))
                 .append("\nHW-acceleration: ").append(Settings.useHardwareAcceleration() ? "enabled" : "disabled")
-                .append(" (Disabled by default: ").append(Settings.HW_ACCEL_DISABLED_BY_DEFAULT ? "yes" : "no").append(")");
+                .append(" (").append(Settings.useHardwareAcceleration() != Settings.HW_ACCEL_DISABLED_BY_DEFAULT ? "default state" : "manually changed").append(")");
         for (final ILogin connector : ConnectorFactory.getActiveLiveConnectors()) {
             body.append('\n').append(connector.getName()).append(": ").append(connector.isLoggedIn() ? "logged in" : "not logged in")
                     .append(" (").append(connector.getLoginStatusString()).append(')');

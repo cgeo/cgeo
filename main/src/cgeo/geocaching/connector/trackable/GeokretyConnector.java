@@ -40,7 +40,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             final String hex = geocode.substring(2);
             return Integer.parseInt(hex, 16);
         } catch (final NumberFormatException e) {
-            Log.e("Trackable.getUrl", e);
+            Log.e("Trackable.getId", e);
         }
         return -1;
     }

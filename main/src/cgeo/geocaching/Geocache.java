@@ -1207,7 +1207,9 @@ public class Geocache implements IWaypoint {
         waypoint.setGeocode(geocode);
 
         if (waypoint.getId() < 0) { // this is a new waypoint
-            assignUniquePrefix(waypoint);
+            if (StringUtils.isBlank(waypoint.getPrefix())) {
+                assignUniquePrefix(waypoint);
+            }
             waypoints.add(waypoint);
             if (waypoint.isFinalWithCoords()) {
                 finalDefined = true;
@@ -1242,13 +1244,14 @@ public class Geocache implements IWaypoint {
         }
 
         for (int i = OWN_WP_PREFIX_OFFSET; i < 100; i++) {
-            final String prefixCandidate = StringUtils.leftPad(String.valueOf(i), 2, '0');
+            final String prefixCandidate = String.valueOf(i);
             if (!assignedPrefixes.contains(prefixCandidate)) {
                 waypoint.setPrefix(prefixCandidate);
-                break;
+                return;
             }
         }
 
+        throw new IllegalStateException("too many waypoints, unable to assign unique prefix");
     }
 
     public boolean hasWaypoints() {
