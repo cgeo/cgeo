@@ -2,7 +2,6 @@ package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.Trackable;
 
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 public class UnknownTrackableConnector extends AbstractTrackableConnector {
@@ -13,9 +12,8 @@ public class UnknownTrackableConnector extends AbstractTrackableConnector {
     }
 
     @Override
-    @NonNull
-    public String getUrl(@NonNull final Trackable trackable) {
-        throw new IllegalStateException("getUrl cannot be called on unknown trackables");
+    public boolean hasTrackableUrls() {
+        return false;
     }
 
     @Override
