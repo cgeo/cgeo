@@ -42,6 +42,13 @@ public class Trackable implements ILogable {
     private List<LogEntry> logs = new ArrayList<>();
     private String trackingcode = null;
 
+    /**
+     * Check whether this trackable has a corresponding URL.
+     */
+    public boolean hasUrl() {
+        return getConnector().hasTrackableUrls();
+    }
+
     @NonNull
     public String getUrl() {
         return getConnector().getUrl(this);

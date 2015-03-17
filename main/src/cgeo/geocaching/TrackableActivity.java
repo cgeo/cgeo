@@ -211,7 +211,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     public boolean onPrepareOptionsMenu(final Menu menu) {
         if (trackable != null) {
             menu.findItem(R.id.menu_log_touch).setVisible(StringUtils.isNotBlank(geocode) && trackable.isLoggable());
-            menu.findItem(R.id.menu_browser_trackable).setVisible(StringUtils.isNotBlank(trackable.getUrl()));
+            menu.findItem(R.id.menu_browser_trackable).setVisible(trackable.hasUrl());
         }
         return super.onPrepareOptionsMenu(menu);
     }
