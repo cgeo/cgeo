@@ -10,11 +10,11 @@ public class UncertainProperty<T> {
     private final T value;
     private final int certaintyLevel;
 
-    public UncertainProperty(T value) {
+    public UncertainProperty(final T value) {
         this(value, Tile.ZOOMLEVEL_MAX + 1);
     }
 
-    public UncertainProperty(T value, int certaintyLevel) {
+    public UncertainProperty(final T value, final int certaintyLevel) {
         this.value = value;
         this.certaintyLevel = certaintyLevel;
     }
@@ -41,7 +41,7 @@ public class UncertainProperty<T> {
         return this;
     }
 
-    public static <T> UncertainProperty<T> getMergedProperty(UncertainProperty<T> property, UncertainProperty<T> otherProperty) {
+    public static <T> UncertainProperty<T> getMergedProperty(final UncertainProperty<T> property, final UncertainProperty<T> otherProperty) {
         if (null == property) {
             return otherProperty;
         }

@@ -7,7 +7,7 @@ import com.google.android.maps.GeoPoint;
 
 public class GoogleGeoPoint extends GeoPoint implements GeoPointImpl {
 
-    public GoogleGeoPoint(int latitudeE6, int longitudeE6) {
+    public GoogleGeoPoint(final int latitudeE6, final int longitudeE6) {
         super(latitudeE6, longitudeE6);
     }
 

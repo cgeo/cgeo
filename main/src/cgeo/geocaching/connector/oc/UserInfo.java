@@ -15,11 +15,11 @@ public class UserInfo {
 
         public final int resId;
 
-        UserInfoStatus(int resId) {
+        UserInfoStatus(final int resId) {
             this.resId = resId;
         }
 
-        public static UserInfoStatus getFromOkapiError(OkapiErrors result) {
+        public static UserInfoStatus getFromOkapiError(final OkapiErrors result) {
             switch (result) {
                 case NO_ERROR:
                     return SUCCESSFUL;
@@ -37,7 +37,7 @@ public class UserInfo {
     private final int finds;
     private final UserInfoStatus status;
 
-    UserInfo(String name, int finds, UserInfoStatus status) {
+    UserInfo(final String name, final int finds, final UserInfoStatus status) {
         this.name = name;
         this.finds = finds;
         this.status = status;

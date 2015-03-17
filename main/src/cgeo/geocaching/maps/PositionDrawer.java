@@ -28,21 +28,21 @@ public class PositionDrawer {
     private Paint accuracyCircle = null;
     private Paint historyLine = null;
     private Paint historyLineShadow = null;
-    private Point center = new Point();
-    private Point left = new Point();
+    private final Point center = new Point();
+    private final Point left = new Point();
     private Bitmap arrow = null;
     private int widthArrowHalf = 0;
     private int heightArrowHalf = 0;
     private PaintFlagsDrawFilter setfil = null;
     private PaintFlagsDrawFilter remfil = null;
-    private PositionHistory positionHistory = new PositionHistory();
-    private MapItemFactory mapItemFactory;
+    private final PositionHistory positionHistory = new PositionHistory();
+    private final MapItemFactory mapItemFactory;
 
     public PositionDrawer() {
         this.mapItemFactory = Settings.getMapProvider().getMapItemFactory();
     }
 
-    void drawPosition(Canvas canvas, MapProjectionImpl projection) {
+    void drawPosition(final Canvas canvas, final MapProjectionImpl projection) {
         if (coordinates == null || location == null) {
             return;
         }
@@ -76,20 +76,20 @@ public class PositionDrawer {
 
         canvas.setDrawFilter(setfil);
 
-        double latitude = coordinates.getLatitude();
-        double longitude = coordinates.getLongitude();
-        float accuracy = coordinates.getAccuracy();
+        final double latitude = coordinates.getLatitude();
+        final double longitude = coordinates.getLongitude();
+        final float accuracy = coordinates.getAccuracy();
 
-        float[] result = new float[1];
+        final float[] result = new float[1];
 
         Location.distanceBetween(latitude, longitude, latitude, longitude + 1, result);
-        float longitudeLineDistance = result[0];
+        final float longitudeLineDistance = result[0];
 
         final Geopoint leftCoords = new Geopoint(latitude, longitude - accuracy / longitudeLineDistance);
-        GeoPointImpl leftGeo = mapItemFactory.getGeoPointBase(leftCoords);
+        final GeoPointImpl leftGeo = mapItemFactory.getGeoPointBase(leftCoords);
         projection.toPixels(leftGeo, left);
         projection.toPixels(location, center);
-        int radius = center.x - left.x;
+        final int radius = center.x - left.x;
 
         accuracyCircle.setColor(0x66000000);
         accuracyCircle.setStyle(Style.STROKE);
@@ -106,23 +106,23 @@ public class PositionDrawer {
             final ArrayList<Location> paintHistory = new ArrayList<>(positionHistory.getHistory());
             paintHistory.add(coordinates);
 
-            int size = paintHistory.size();
+            final int size = paintHistory.size();
             if (size > 1) {
                 int alphaCnt = size - 201;
                 if (alphaCnt < 1) {
                     alphaCnt = 1;
                 }
 
-                Point pointNow = new Point();
-                Point pointPrevious = new Point();
-                Location prev = paintHistory.get(0);
+                final Point pointNow = new Point();
+                final Point pointPrevious = new Point();
+                final Location prev = paintHistory.get(0);
                 projection.toPixels(mapItemFactory.getGeoPointBase(new Geopoint(prev)), pointPrevious);
 
                 for (int cnt = 1; cnt < size; cnt++) {
-                    Location now = paintHistory.get(cnt);
+                    final Location now = paintHistory.get(cnt);
                     projection.toPixels(mapItemFactory.getGeoPointBase(new Geopoint(now)), pointNow);
 
-                    int alpha;
+                    final int alpha;
                     if ((alphaCnt - cnt) > 0) {
                         alpha = 255 / (alphaCnt - cnt);
                     }
@@ -147,10 +147,10 @@ public class PositionDrawer {
             heightArrowHalf = arrow.getHeight() / 2;
         }
 
-        int marginLeft = center.x - widthArrowHalf;
-        int marginTop = center.y - heightArrowHalf;
+        final int marginLeft = center.x - widthArrowHalf;
+        final int marginTop = center.y - heightArrowHalf;
 
-        Matrix matrix = new Matrix();
+        final Matrix matrix = new Matrix();
         matrix.setRotate(heading, widthArrowHalf, heightArrowHalf);
         matrix.postTranslate(marginLeft, marginTop);
 
@@ -163,11 +163,11 @@ public class PositionDrawer {
         return positionHistory.getHistory();
     }
 
-    public void setHistory(ArrayList<Location> history) {
+    public void setHistory(final ArrayList<Location> history) {
         positionHistory.setHistory(history);
     }
 
-    public void setHeading(float bearingNow) {
+    public void setHeading(final float bearingNow) {
         heading = bearingNow;
     }
 
@@ -175,7 +175,7 @@ public class PositionDrawer {
         return heading;
     }
 
-    public void setCoordinates(Location coordinatesIn) {
+    public void setCoordinates(final Location coordinatesIn) {
         coordinates = coordinatesIn;
         location = mapItemFactory.getGeoPointBase(new Geopoint(coordinates));
     }

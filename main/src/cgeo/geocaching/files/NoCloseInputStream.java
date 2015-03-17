@@ -9,9 +9,9 @@ import java.io.InputStream;
  * one input stream (e.g. ZipInputStream) because SAX parser closes stream.
  */
 public class NoCloseInputStream extends FilterInputStream {
-    private static ClosedInputStream closedInputStream = new ClosedInputStream();
+    private static final ClosedInputStream closedInputStream = new ClosedInputStream();
 
-    public NoCloseInputStream(InputStream in) {
+    public NoCloseInputStream(final InputStream in) {
         super(in);
     }
 

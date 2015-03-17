@@ -12,7 +12,7 @@ public class MapsforgeCacheOverlayItem extends OverlayItem implements CachesOver
     final private IWaypoint coord;
     final private boolean applyDistanceRule;
 
-    public MapsforgeCacheOverlayItem(IWaypoint coordinate, boolean applyDistanceRule) {
+    public MapsforgeCacheOverlayItem(final IWaypoint coordinate, final boolean applyDistanceRule) {
         super(new GeoPoint(coordinate.getCoords().getLatitudeE6(), coordinate.getCoords().getLongitudeE6()), coordinate.getName(), "");
 
         this.coord = coordinate;
@@ -25,7 +25,7 @@ public class MapsforgeCacheOverlayItem extends OverlayItem implements CachesOver
     }
 
     @Override
-    public Drawable getMarker(int index) {
+    public Drawable getMarker(final int index) {
         return getMarker();
     }
 

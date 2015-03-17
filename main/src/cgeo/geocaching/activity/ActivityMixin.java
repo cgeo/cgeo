@@ -145,7 +145,7 @@ public final class ActivityMixin {
         final int end = Math.max(selectionStart, selectionEnd);
 
         final String content = editText.getText().toString();
-        String completeText;
+        final String completeText;
         if (start > 0 && !Character.isWhitespace(content.charAt(start - 1))) {
             completeText = " " + insertText;
         } else {

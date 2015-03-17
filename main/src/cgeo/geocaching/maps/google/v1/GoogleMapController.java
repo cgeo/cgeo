@@ -8,34 +8,34 @@ import com.google.android.maps.MapController;
 
 public class GoogleMapController implements MapControllerImpl {
 
-    private MapController mapController;
+    private final MapController mapController;
 
-    public GoogleMapController(MapController mapControllerIn) {
+    public GoogleMapController(final MapController mapControllerIn) {
         mapController = mapControllerIn;
     }
 
     @Override
-    public void animateTo(GeoPointImpl geoPoint) {
+    public void animateTo(final GeoPointImpl geoPoint) {
         mapController.animateTo(castToGeoPointImpl(geoPoint));
     }
 
-    private static GeoPoint castToGeoPointImpl(GeoPointImpl geoPoint) {
+    private static GeoPoint castToGeoPointImpl(final GeoPointImpl geoPoint) {
         assert geoPoint instanceof GeoPoint;
         return (GeoPoint) geoPoint;
     }
 
     @Override
-    public void setCenter(GeoPointImpl geoPoint) {
+    public void setCenter(final GeoPointImpl geoPoint) {
         mapController.setCenter(castToGeoPointImpl(geoPoint));
     }
 
     @Override
-    public void setZoom(int mapzoom) {
+    public void setZoom(final int mapzoom) {
         mapController.setZoom(mapzoom);
     }
 
     @Override
-    public void zoomToSpan(int latSpanE6, int lonSpanE6) {
+    public void zoomToSpan(final int latSpanE6, final int lonSpanE6) {
         mapController.zoomToSpan(latSpanE6, lonSpanE6);
     }
 

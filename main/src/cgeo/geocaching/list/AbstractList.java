@@ -25,7 +25,7 @@ public abstract class AbstractList {
     public abstract int getNumberOfCaches();
 
     @Nullable
-    public static AbstractList getListById(int listId) {
+    public static AbstractList getListById(final int listId) {
         return LISTS.get(listId);
     }
 

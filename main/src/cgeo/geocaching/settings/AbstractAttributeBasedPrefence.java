@@ -13,25 +13,25 @@ import android.util.AttributeSet;
  */
 public abstract class AbstractAttributeBasedPrefence extends Preference {
 
-    public AbstractAttributeBasedPrefence(Context context) {
+    public AbstractAttributeBasedPrefence(final Context context) {
         super(context);
     }
 
-    public AbstractAttributeBasedPrefence(Context context, AttributeSet attrs) {
+    public AbstractAttributeBasedPrefence(final Context context, final AttributeSet attrs) {
         super(context, attrs);
         processAttributes(context, attrs, 0);
     }
 
-    public AbstractAttributeBasedPrefence(Context context, AttributeSet attrs, int defStyle) {
+    public AbstractAttributeBasedPrefence(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
         processAttributes(context, attrs, defStyle);
     }
 
-    private void processAttributes(Context context, @Nullable AttributeSet attrs, int defStyle) {
+    private void processAttributes(final Context context, @Nullable final AttributeSet attrs, final int defStyle) {
         if (attrs == null) {
             return;
         }
-        TypedArray types = context.obtainStyledAttributes(attrs, getAttributeNames(),
+        final TypedArray types = context.obtainStyledAttributes(attrs, getAttributeNames(),
                 defStyle, 0);
 
         processAttributeValues(types);

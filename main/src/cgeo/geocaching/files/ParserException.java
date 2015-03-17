@@ -9,11 +9,11 @@ public class ParserException extends Exception {
     public ParserException() {
     }
 
-    public ParserException(String detailMessage) {
+    public ParserException(final String detailMessage) {
         super(detailMessage);
     }
 
-    public ParserException(String detailMessage, Throwable throwable) {
+    public ParserException(final String detailMessage, final Throwable throwable) {
         super(detailMessage, throwable);
     }
 

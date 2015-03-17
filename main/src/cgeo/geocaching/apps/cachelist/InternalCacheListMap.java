@@ -22,7 +22,7 @@ class InternalCacheListMap extends AbstractApp implements CacheListApp {
     }
 
     @Override
-    public boolean invoke(List<Geocache> caches, Activity activity, final SearchResult search) {
+    public boolean invoke(final List<Geocache> caches, final Activity activity, final SearchResult search) {
         CGeoMap.startActivitySearch(activity, search, null);
         return true;
     }

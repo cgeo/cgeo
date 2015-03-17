@@ -20,7 +20,7 @@ public class LogViewHolder extends AbstractViewHolder {
 
     private int position;
 
-    public LogViewHolder(View rowView) {
+    public LogViewHolder(final View rowView) {
         super(rowView);
     }
 

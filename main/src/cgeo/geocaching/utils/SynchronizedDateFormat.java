@@ -13,7 +13,7 @@ public class SynchronizedDateFormat {
         format = new SimpleDateFormat(pattern, locale);
     }
 
-    public SynchronizedDateFormat(String pattern, TimeZone timeZone, Locale locale) {
+    public SynchronizedDateFormat(final String pattern, final TimeZone timeZone, final Locale locale) {
         format = new SimpleDateFormat(pattern, locale);
         format.setTimeZone(timeZone);
     }

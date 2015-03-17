@@ -13,7 +13,7 @@ import java.io.Reader;
 public class InvalidXMLCharacterFilterReader extends FilterReader
 {
 
-    public InvalidXMLCharacterFilterReader(Reader in) {
+    public InvalidXMLCharacterFilterReader(final Reader in) {
         super(in);
     }
 
@@ -28,8 +28,8 @@ public class InvalidXMLCharacterFilterReader extends FilterReader
      *         underling reader was reached.
      */
     @Override
-    public int read(char[] cbuf, int off, int len) throws IOException {
-        int read = super.read(cbuf, off, len);
+    public int read(final char[] cbuf, final int off, final int len) throws IOException {
+        final int read = super.read(cbuf, off, len);
         // check for end
         if (read == -1) {
             return -1;
@@ -48,11 +48,11 @@ public class InvalidXMLCharacterFilterReader extends FilterReader
                 case ';':
                     pos++;
                     if (entityStart >= 0) {
-                        int entityLength = readPos - entityStart + 1;
+                        final int entityLength = readPos - entityStart + 1;
                         if (entityLength <= 5) {
-                            String entity = new String(cbuf, entityStart, entityLength);
+                            final String entity = new String(cbuf, entityStart, entityLength);
                             if (StringUtils.startsWith(entity, "&#")) {
-                                String numberString = StringUtils.substringBetween(entity, "&#", ";");
+                                final String numberString = StringUtils.substringBetween(entity, "&#", ";");
                                 final int value;
                                 if (StringUtils.startsWith(numberString, "x")) {
                                     value = Integer.parseInt(numberString.substring(1), 16);

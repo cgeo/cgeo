@@ -22,7 +22,7 @@ abstract class AbstractExport implements Export {
      *            the resource id of the string
      * @return localized string
      */
-    protected static String getString(int resourceId) {
+    protected static String getString(final int resourceId) {
         return CgeoApplication.getInstance().getString(resourceId);
     }
 
@@ -35,7 +35,7 @@ abstract class AbstractExport implements Export {
      *            The parameter
      * @return localized string
      */
-    protected static String getString(int resourceId, Object... params) {
+    protected static String getString(final int resourceId, final Object... params) {
         return CgeoApplication.getInstance().getString(resourceId, params);
     }
 

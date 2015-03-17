@@ -30,7 +30,7 @@ public abstract class LeastRecentlyUsedMap<K, V> extends LinkedHashMap<K, V> {
     final int initialCapacity;
     final float loadFactor;
 
-    protected LeastRecentlyUsedMap(int maxEntries, int initialCapacity, float loadFactor, OperationModes opMode) {
+    protected LeastRecentlyUsedMap(final int maxEntries, final int initialCapacity, final float loadFactor, final OperationModes opMode) {
     	super(initialCapacity, loadFactor, (opMode==OperationModes.LRU_CACHE));
     	this.initialCapacity = initialCapacity;
     	this.loadFactor = loadFactor;
@@ -38,12 +38,12 @@ public abstract class LeastRecentlyUsedMap<K, V> extends LinkedHashMap<K, V> {
         this.opMode = opMode;
     }
 
-    protected LeastRecentlyUsedMap(int maxEntries, OperationModes opMode) {
+    protected LeastRecentlyUsedMap(final int maxEntries, final OperationModes opMode) {
     	this(maxEntries, 16, 0.75f, opMode);
     }
 
     @Override
-    public V put(K key, V value) {
+    public V put(final K key, final V value) {
     	// in case the underlying Map is not running with accessOrder==true, the map won't notice any changes
     	// of existing keys, so for the normal BOUNDED mode we remove and put the value to get its order updated.
     	if (opMode == OperationModes.BOUNDED && containsKey(key)) {
@@ -57,7 +57,7 @@ public abstract class LeastRecentlyUsedMap<K, V> extends LinkedHashMap<K, V> {
     }
 
     @Override
-    protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
+    protected boolean removeEldestEntry(final Map.Entry<K, V> eldest) {
         return size() > maxEntries;
     }
 
@@ -66,9 +66,9 @@ public abstract class LeastRecentlyUsedMap<K, V> extends LinkedHashMap<K, V> {
 	}
 
     @Override
-    public V remove(Object key) {
+    public V remove(final Object key) {
 
-        V removed = super.remove(key);
+        final V removed = super.remove(key);
 
         if (removed != null && removeHandler != null) {
             removeHandler.onRemove(removed);
@@ -84,18 +84,18 @@ public abstract class LeastRecentlyUsedMap<K, V> extends LinkedHashMap<K, V> {
      * @param removeHandler
      *            The new handler to receive notifications or null to remove a handler
      */
-    public void setRemoveHandler(RemoveHandler<V> removeHandler) {
+    public void setRemoveHandler(final RemoveHandler<V> removeHandler) {
         this.removeHandler = removeHandler;
     }
 
     public static class LruCache<K, V> extends LeastRecentlyUsedMap<K, V> {
         private static final long serialVersionUID = 9028478916221334454L;
 
-        public LruCache(int maxEntries, int initialCapacity, float loadFactor) {
+        public LruCache(final int maxEntries, final int initialCapacity, final float loadFactor) {
             super(maxEntries, initialCapacity, loadFactor, OperationModes.LRU_CACHE);
         }
 
-        public LruCache(int maxEntries) {
+        public LruCache(final int maxEntries) {
             super(maxEntries, OperationModes.LRU_CACHE);
         }
     }
@@ -104,11 +104,11 @@ public abstract class LeastRecentlyUsedMap<K, V> extends LinkedHashMap<K, V> {
 
         private static final long serialVersionUID = -1476389304214398315L;
 
-        public Bounded(int maxEntries, int initialCapacity, float loadFactor) {
+        public Bounded(final int maxEntries, final int initialCapacity, final float loadFactor) {
             super(maxEntries, initialCapacity, loadFactor, OperationModes.BOUNDED);
         }
 
-        public Bounded(int maxEntries) {
+        public Bounded(final int maxEntries) {
             super(maxEntries, OperationModes.BOUNDED);
         }
     }

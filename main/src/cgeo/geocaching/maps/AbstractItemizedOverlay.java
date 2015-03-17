@@ -17,9 +17,9 @@ import android.graphics.drawable.Drawable;
  */
 public abstract class AbstractItemizedOverlay implements GeneralOverlay {
 
-    private ItemizedOverlayImpl ovlImpl;
+    private final ItemizedOverlayImpl ovlImpl;
 
-    protected AbstractItemizedOverlay(ItemizedOverlayImpl ovlImplIn) {
+    protected AbstractItemizedOverlay(final ItemizedOverlayImpl ovlImplIn) {
         ovlImpl = ovlImplIn;
     }
 
@@ -27,26 +27,26 @@ public abstract class AbstractItemizedOverlay implements GeneralOverlay {
         ovlImpl.superPopulate();
     }
 
-    public boolean onTap(int index) {
+    public boolean onTap(final int index) {
         return ovlImpl.superOnTap(index);
     }
 
-    Drawable boundCenterBottom(Drawable markerIn) {
+    Drawable boundCenterBottom(final Drawable markerIn) {
         return ovlImpl.superBoundCenterBottom(markerIn);
     }
 
-    void setLastFocusedItemIndex(int index) {
+    void setLastFocusedItemIndex(final int index) {
         ovlImpl.superSetLastFocusedItemIndex(index);
     }
 
     @Override
-    public void draw(Canvas canvas, MapViewImpl mapView, boolean shadow) {
+    public void draw(final Canvas canvas, final MapViewImpl mapView, final boolean shadow) {
         ovlImpl.superDraw(canvas, mapView, shadow);
     }
 
     @Override
-    public void drawOverlayBitmap(Canvas canvas, Point drawPosition,
-            MapProjectionImpl projection, byte drawZoomLevel) {
+    public void drawOverlayBitmap(final Canvas canvas, final Point drawPosition,
+            final MapProjectionImpl projection, final byte drawZoomLevel) {
         ovlImpl.superDrawOverlayBitmap(canvas, drawPosition, projection, drawZoomLevel);
     }
 

@@ -21,14 +21,14 @@ import java.util.Locale;
  * on unit expressions.
  */
 public class TextFactory {
-    public static String getText(Geopoint position, Geopoint target, float direction) {
+    public static String getText(final Geopoint position, final Geopoint target, final float direction) {
         if (position == null || target == null) {
             return null;
         }
         return getDirection(position, target, direction) + ". " + getDistance(position, target);
     }
 
-    private static String getDistance(Geopoint position, Geopoint target) {
+    private static String getDistance(final Geopoint position, final Geopoint target) {
         final float kilometers = position.distanceTo(target);
 
         if (Settings.useImperialUnits()) {
@@ -44,9 +44,9 @@ public class TextFactory {
                 R.plurals.tts_meters, R.string.tts_one_meter);
     }
 
-    private static String getDistance(float farDistance, int nearDistance,
-            float farFarAway, float farNearAway, int nearFarAway,
-            int farId, int farOneId, int nearId, int nearOneId) {
+    private static String getDistance(final float farDistance, final int nearDistance,
+            final float farFarAway, final float farNearAway, final int nearFarAway,
+            final int farId, final int farOneId, final int nearId, final int nearOneId) {
         if (farDistance >= farFarAway) {
             // example: "5 kilometers" - always without decimal digits
             final int quantity = Math.round(farDistance);
@@ -84,15 +84,15 @@ public class TextFactory {
         return getQuantityString(nearId, quantity, String.valueOf(quantity));
     }
 
-    private static String getString(int resourceId, Object... formatArgs) {
+    private static String getString(final int resourceId, final Object... formatArgs) {
         return CgeoApplication.getInstance().getString(resourceId, formatArgs);
     }
 
-    private static String getQuantityString(int resourceId, int quantity, Object... formatArgs) {
+    private static String getQuantityString(final int resourceId, final int quantity, final Object... formatArgs) {
         return CgeoApplication.getInstance().getResources().getQuantityString(resourceId, quantity, formatArgs);
     }
 
-    private static String getDirection(Geopoint position, Geopoint target, float direction) {
+    private static String getDirection(final Geopoint position, final Geopoint target, final float direction) {
         final int bearing = (int) position.bearingTo(target);
         final int degrees = (int) AngleUtils.normalize(bearing - direction);
 

@@ -10,14 +10,14 @@ import android.graphics.Point;
 
 public class GoogleMapProjection implements MapProjectionImpl {
 
-    private Projection projection;
+    private final Projection projection;
 
-    public GoogleMapProjection(Projection projectionIn) {
+    public GoogleMapProjection(final Projection projectionIn) {
         projection = projectionIn;
     }
 
     @Override
-    public void toPixels(GeoPointImpl leftGeo, Point left) {
+    public void toPixels(final GeoPointImpl leftGeo, final Point left) {
         projection.toPixels((GeoPoint) leftGeo, left);
     }
 

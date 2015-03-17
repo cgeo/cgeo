@@ -20,26 +20,26 @@ public class CheckBoxWithPopupPreference extends CheckBoxPreference {
     private String urlButton;
     private OnPreferenceChangeListener baseOnPrefChangeListener = null;
 
-    public CheckBoxWithPopupPreference(Context context) {
+    public CheckBoxWithPopupPreference(final Context context) {
         super(context);
     }
 
-    public CheckBoxWithPopupPreference(Context context, AttributeSet attrs) {
+    public CheckBoxWithPopupPreference(final Context context, final AttributeSet attrs) {
         super(context, attrs);
         processAttributes(context, attrs, 0);
     }
 
-    public CheckBoxWithPopupPreference(Context context, AttributeSet attrs, int defStyle) {
+    public CheckBoxWithPopupPreference(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
         processAttributes(context, attrs, defStyle);
     }
 
-    private void processAttributes(Context context, AttributeSet attrs, int defStyle) {
+    private void processAttributes(final Context context, final AttributeSet attrs, final int defStyle) {
         if (attrs == null) {
             return; // coward's retreat
         }
 
-        TypedArray types = context.obtainStyledAttributes(attrs, new int[] {
+        final TypedArray types = context.obtainStyledAttributes(attrs, new int[] {
                 R.attr.title, R.attr.text, R.attr.url, R.attr.urlButton },
                 defStyle, 0);
 
@@ -52,7 +52,7 @@ public class CheckBoxWithPopupPreference extends CheckBoxPreference {
     }
 
     @Override
-    protected View onCreateView(ViewGroup parent) {
+    protected View onCreateView(final ViewGroup parent) {
 
         if (baseOnPrefChangeListener == null) {
             baseOnPrefChangeListener = getOnPreferenceChangeListener();
@@ -61,7 +61,7 @@ public class CheckBoxWithPopupPreference extends CheckBoxPreference {
         // show dialog when checkbox enabled
         setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
-            public boolean onPreferenceChange(final Preference preference, Object newValue) {
+            public boolean onPreferenceChange(final Preference preference, final Object newValue) {
                 if (baseOnPrefChangeListener != null) {
                     baseOnPrefChangeListener.onPreferenceChange(preference, newValue);
                 }

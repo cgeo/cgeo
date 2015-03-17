@@ -21,17 +21,17 @@ class InternalMap extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(Activity activity, Geopoint coords) {
+    public void navigate(final Activity activity, final Geopoint coords) {
         CGeoMap.startActivityCoords(activity, coords, WaypointType.WAYPOINT, null);
     }
 
     @Override
-    public void navigate(Activity activity, Waypoint waypoint) {
+    public void navigate(final Activity activity, final Waypoint waypoint) {
         CGeoMap.startActivityCoords(activity, waypoint.getCoords(), waypoint.getWaypointType(), waypoint.getName());
     }
 
     @Override
-    public void navigate(Activity activity, Geocache cache) {
+    public void navigate(final Activity activity, final Geocache cache) {
         CGeoMap.startActivityGeoCode(activity, cache.getGeocode());
     }
 

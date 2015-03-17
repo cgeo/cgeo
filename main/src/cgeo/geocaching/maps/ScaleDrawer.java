@@ -25,8 +25,8 @@ public class ScaleDrawer {
     private float pixelDensity = 0;
 
     public ScaleDrawer() {
-        DisplayMetrics metrics = new DisplayMetrics();
-        WindowManager windowManager = (WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
+        final DisplayMetrics metrics = new DisplayMetrics();
+        final WindowManager windowManager = (WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
         windowManager.getDefaultDisplay().getMetrics(metrics);
         pixelDensity = metrics.density;
     }
@@ -36,7 +36,7 @@ public class ScaleDrawer {
         return scale * Math.floor(distance / scale);
     }
 
-    void drawScale(Canvas canvas, MapViewImpl mapView) {
+    void drawScale(final Canvas canvas, final MapViewImpl mapView) {
         final double span = mapView.getLongitudeSpan() / 1e6;
         final GeoPointImpl center = mapView.getMapViewCenter();
 

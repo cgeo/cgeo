@@ -17,7 +17,7 @@ class NavigonApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(Activity activity, Geopoint point) {
+    public void navigate(final Activity activity, final Geopoint point) {
         final Intent intent = new Intent(INTENT);
 
         /*

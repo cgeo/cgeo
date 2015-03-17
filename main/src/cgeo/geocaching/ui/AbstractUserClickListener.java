@@ -24,7 +24,7 @@ abstract class AbstractUserClickListener implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(final View view) {
         if (view == null) {
             return;
         }
@@ -45,8 +45,8 @@ abstract class AbstractUserClickListener implements View.OnClickListener {
         final AbstractActivity activity = (AbstractActivity) view.getContext();
         final Resources res = activity.getResources();
 
-        ArrayList<String> labels = new ArrayList<>(userActions.size());
-        for (UserAction action : userActions) {
+        final ArrayList<String> labels = new ArrayList<>(userActions.size());
+        for (final UserAction action : userActions) {
             labels.add(res.getString(action.displayResourceId));
         }
         final CharSequence[] items = labels.toArray(new String[labels.size()]);
@@ -55,7 +55,7 @@ abstract class AbstractUserClickListener implements View.OnClickListener {
         builder.setTitle(res.getString(R.string.user_menu_title) + " " + userName);
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int item) {
+            public void onClick(final DialogInterface dialog, final int item) {
                 userActions.get(item).run(new Context(userName, activity));
             }
         });

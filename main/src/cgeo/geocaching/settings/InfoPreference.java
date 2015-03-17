@@ -39,22 +39,22 @@ public class InfoPreference extends AbstractAttributeBasedPrefence {
 
     private LayoutInflater inflater;
 
-    public InfoPreference(Context context) {
+    public InfoPreference(final Context context) {
         super(context);
         init(context);
     }
 
-    public InfoPreference(Context context, AttributeSet attrs) {
+    public InfoPreference(final Context context, final AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public InfoPreference(Context context, AttributeSet attrs, int defStyle) {
+    public InfoPreference(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
         init(context);
     }
 
-    private void init(Context context) {
+    private void init(final Context context) {
         inflater = ((Activity) context).getLayoutInflater();
         setPersistent(false);
     }
@@ -65,14 +65,14 @@ public class InfoPreference extends AbstractAttributeBasedPrefence {
     }
 
     @Override
-    protected void processAttributeValues(TypedArray values) {
+    protected void processAttributeValues(final TypedArray values) {
         text = values.getString(0);
         url = values.getString(1);
         urlButton = values.getString(2);
     }
 
     @Override
-    protected View onCreateView(ViewGroup parent) {
+    protected View onCreateView(final ViewGroup parent) {
 
         // show popup when clicked
         setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -92,11 +92,11 @@ public class InfoPreference extends AbstractAttributeBasedPrefence {
      * Add an info icon at the left hand side of the preference.
      *
      */
-    private View addInfoIcon(ViewGroup parent) {
-        View preferenceView = super.onCreateView(parent);
+    private View addInfoIcon(final ViewGroup parent) {
+        final View preferenceView = super.onCreateView(parent);
 
-        ImageView iconView = (ImageView) inflater.inflate(R.layout.preference_info_icon, parent, false);
-        LinearLayout frame = (LinearLayout) preferenceView.findViewById(android.R.id.widget_frame);
+        final ImageView iconView = (ImageView) inflater.inflate(R.layout.preference_info_icon, parent, false);
+        final LinearLayout frame = (LinearLayout) preferenceView.findViewById(android.R.id.widget_frame);
         frame.setVisibility(View.VISIBLE);
         frame.addView(iconView);
 

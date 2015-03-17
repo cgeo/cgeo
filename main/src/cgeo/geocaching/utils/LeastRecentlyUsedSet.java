@@ -25,13 +25,13 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E> {
     private final LeastRecentlyUsedMap<E, Object> map;
     private static final Object PRESENT = new Object();
 
-    public LeastRecentlyUsedSet(int maxEntries, int initialCapacity, float loadFactor) {
+    public LeastRecentlyUsedSet(final int maxEntries, final int initialCapacity, final float loadFactor) {
         // because we don't use any Map.get() methods from the Set, BOUNDED and LRU_CACHE have the exact same Behaviour
         // So we use LRU_CACHE mode because it should perform a bit better (as it doesn't re-add explicitly)
         map = new LeastRecentlyUsedMap.LruCache<>(maxEntries, initialCapacity, loadFactor);
     }
 
-    public LeastRecentlyUsedSet(int maxEntries) {
+    public LeastRecentlyUsedSet(final int maxEntries) {
         map = new LeastRecentlyUsedMap.LruCache<>(maxEntries);
     }
 
@@ -76,7 +76,7 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E> {
      * @see HashSet
      */
     @Override
-    public synchronized boolean contains(Object o) {
+    public synchronized boolean contains(final Object o) {
         return map.containsKey(o);
     }
 
@@ -87,7 +87,7 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E> {
      * @see HashSet
      */
     @Override
-    public synchronized boolean add(E e) {
+    public synchronized boolean add(final E e) {
         if (e == null) {
             throw new IllegalArgumentException("LeastRecentlyUsedSet cannot take null element");
         }
@@ -101,7 +101,7 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E> {
      * @see HashSet
      */
     @Override
-    public synchronized boolean remove(Object o) {
+    public synchronized boolean remove(final Object o) {
         return map.remove(o) == PRESENT;
     }
 

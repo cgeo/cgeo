@@ -48,10 +48,10 @@ public class OpenCachingApi {
         if (response == null) {
             return Collections.emptyList();
         }
-        Collection<Geocache> caches;
+        final Collection<Geocache> caches;
         try {
             caches = new OXGPXParser(StoredList.TEMPORARY_LIST.id, isDetailed).parse(response.getEntity().getContent(), null);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Log.e("Error importing from OpenCaching.com", e);
             return Collections.emptyList();
         }
@@ -81,10 +81,10 @@ public class OpenCachingApi {
      *            Parameters to modify
      * @return True - query possible, False - no query, all caches excluded
      */
-    private static boolean addTypeFilter(Parameters queryParameters) {
+    private static boolean addTypeFilter(final Parameters queryParameters) {
         boolean doQuery = true;
         if (Settings.getCacheType() != CacheType.ALL) {
-            String typeFilter;
+            final String typeFilter;
             switch (Settings.getCacheType()) {
                 case TRADITIONAL:
                     typeFilter = "Traditional Cache";

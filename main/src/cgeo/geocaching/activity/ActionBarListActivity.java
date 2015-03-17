@@ -18,12 +18,12 @@ public class ActionBarListActivity extends ActionBarActivity {
         return mListView;
     }
 
-    protected void setListAdapter(ListAdapter adapter) {
+    protected void setListAdapter(final ListAdapter adapter) {
         getListView().setAdapter(adapter);
     }
 
     protected ListAdapter getListAdapter() {
-        ListAdapter adapter = getListView().getAdapter();
+        final ListAdapter adapter = getListView().getAdapter();
         if (adapter instanceof HeaderViewListAdapter) {
             return ((HeaderViewListAdapter)adapter).getWrappedAdapter();
         }

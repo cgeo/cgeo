@@ -25,20 +25,20 @@ class GoogleMapsApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(Activity activity, Geopoint point) {
+    public void navigate(final Activity activity, final Geopoint point) {
         navigate(activity, point, activity.getString(R.string.waypoint));
     }
 
-    private static void navigate(Activity activity, Geopoint point, String label) {
+    private static void navigate(final Activity activity, final Geopoint point, final String label) {
         try {
-            String latitude = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, point);
-            String longitude = GeopointFormatter.format(Format.LON_DECDEGREE_RAW, point);
+            final String latitude = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, point);
+            final String longitude = GeopointFormatter.format(Format.LON_DECDEGREE_RAW, point);
             final String geoLocation = "geo:" + latitude + "," + longitude;
             final String query = latitude + "," + longitude + "(" + label + ")";
             final String uriString = geoLocation + "?q=" + Uri.encode(query);
             activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uriString)));
             return;
-        } catch (RuntimeException ignored) {
+        } catch (final RuntimeException ignored) {
             // nothing
         }
         Log.i("GoogleMapsApp.navigate: No maps application available.");
@@ -47,12 +47,12 @@ class GoogleMapsApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(Activity activity, Geocache cache) {
+    public void navigate(final Activity activity, final Geocache cache) {
         navigate(activity, cache.getCoords(), cache.getName());
     }
 
     @Override
-    public void navigate(Activity activity, Waypoint waypoint) {
+    public void navigate(final Activity activity, final Waypoint waypoint) {
         navigate(activity, waypoint.getCoords(), waypoint.getName());
     }
 }
