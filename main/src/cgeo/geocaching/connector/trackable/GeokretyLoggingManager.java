@@ -33,6 +33,7 @@ public class GeokretyLoggingManager extends AbstractTrackableLoggingManager {
     public LogResult postLog(final Geocache cache, final TrackableLog trackableLog, final Calendar date, final String log) {
         try {
             final ImmutablePair<StatusCode, ArrayList<String>> response = GeokretyConnector.postLogTrackable(
+                    getContext(),
                     cache,
                     trackableLog,
                     date,
