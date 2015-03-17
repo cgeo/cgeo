@@ -172,6 +172,10 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
                 }
             }
         });
+        refreshTrackable(message);
+    }
+
+    private void refreshTrackable(final String message) {
         waitDialog = ProgressDialog.show(this, message, res.getString(R.string.trackable_details_loading), true, true);
         createSubscriptions.add(AppObservable.bindActivity(this, loadTrackable(geocode, guid, id)).singleOrDefault(null).subscribe(new Action1<Trackable>() {
             @Override
@@ -198,7 +202,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_log_touch:
-                startActivity(LogTrackableActivity.getIntent(this, trackable));
+                startActivityForResult(LogTrackableActivity.getIntent(this, trackable), LogTrackableActivity.LOG_TRACKABLE);
                 return true;
             case R.id.menu_browser_trackable:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getUrl())));
@@ -598,16 +602,10 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        // refresh the logs view after coming back from logging a trackable
-        if (trackable != null) {
-            final Trackable updatedTrackable = DataStore.loadTrackable(trackable.getGeocode());
-            // if this activity is resumed after a long time, the trackable might be gone due to regular cleanup
-            if (updatedTrackable != null) {
-                trackable.setLogs(updatedTrackable.getLogs());
-                reinitializeViewPager();
-            }
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        // Refresh the logs view after coming back from logging a trackable
+        if (requestCode == LogTrackableActivity.LOG_TRACKABLE && resultCode == RESULT_OK) {
+            refreshTrackable(StringUtils.defaultIfBlank(trackable.getName(), trackable.getGeocode()));
         }
     }
 
