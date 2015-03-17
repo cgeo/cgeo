@@ -10,7 +10,7 @@ public class GoogleCacheOverlayItem extends OverlayItem implements CachesOverlay
     final private IWaypoint coord;
     final private boolean applyDistanceRule;
 
-    public GoogleCacheOverlayItem(final IWaypoint coordinate, boolean applyDistanceRule) {
+    public GoogleCacheOverlayItem(final IWaypoint coordinate, final boolean applyDistanceRule) {
         super(new GeoPoint(coordinate.getCoords().getLatitudeE6(), coordinate.getCoords().getLongitudeE6()), coordinate.getName(), "");
 
         this.coord = coordinate;

@@ -40,7 +40,7 @@ public class FileSelectionListAdapter extends ArrayAdapter<File> {
 
         View v = rowView;
 
-        ViewHolder holder;
+        final ViewHolder holder;
         if (v == null) {
             v = inflater.inflate(R.layout.mapfile_item, parent, false);
             holder = new ViewHolder(v);

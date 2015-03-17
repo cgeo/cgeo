@@ -225,7 +225,7 @@ public abstract class GPXParser extends FileParser {
                 return null; // id not found
             }
             // get text for string
-            String stringName;
+            final String stringName;
             try {
                 stringName = CgeoApplication.getInstance().getResources().getResourceName(stringId);
             } catch (final NullPointerException ignored) {

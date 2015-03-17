@@ -17,20 +17,20 @@ public class UrlPopup {
     }
 
     public void show(final String title, final String message, final String url, final String urlButtonTitle) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(message)
                 .setIcon(android.R.drawable.ic_dialog_info)
                 .setTitle(title)
                 .setPositiveButton(R.string.err_none, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int id) {
+                    public void onClick(final DialogInterface dialog, final int id) {
                         dialog.cancel();
                     }
                 })
                 .setNegativeButton(urlButtonTitle, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        Intent i = new Intent(Intent.ACTION_VIEW);
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        final Intent i = new Intent(Intent.ACTION_VIEW);
                         i.setData(Uri.parse(url));
                         context.startActivity(i);
                     }

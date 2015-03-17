@@ -58,7 +58,7 @@ public final class CryptUtils {
             } else if (result == ']') {
                 plaintext = false;
             } else if (!plaintext) {
-                int capitalized = result & 32;
+                final int capitalized = result & 32;
                 result &= ~capitalized;
                 result = ((result >= 'A') && (result <= 'Z') ? ((result - 'A' + 13) % 26 + 'A') : result)
                         | capitalized;
@@ -68,22 +68,22 @@ public final class CryptUtils {
     }
 
     @NonNull
-    public static String rot13(String text) {
+    public static String rot13(final String text) {
         if (text == null) {
             return StringUtils.EMPTY;
         }
         final StringBuilder result = new StringBuilder();
-        Rot13Encryption rot13 = new Rot13Encryption();
+        final Rot13Encryption rot13 = new Rot13Encryption();
 
         final int length = text.length();
         for (int index = 0; index < length; index++) {
-            char c = text.charAt(index);
+            final char c = text.charAt(index);
             result.append(rot13.getNextEncryptedCharacter(c));
         }
         return result.toString();
     }
 
-    public static String md5(String text) {
+    public static String md5(final String text) {
         try {
             final MessageDigest digest = MessageDigest.getInstance("MD5");
             digest.update(text.getBytes(CharEncoding.UTF_8), 0, text.length());
@@ -95,7 +95,7 @@ public final class CryptUtils {
         return StringUtils.EMPTY;
     }
 
-    public static byte[] hashHmac(String text, String salt) {
+    public static byte[] hashHmac(final String text, final String salt) {
 
         try {
             final SecretKeySpec secretKeySpec = new SecretKeySpec(salt.getBytes(CharEncoding.UTF_8), "HmacSHA1");
@@ -113,32 +113,32 @@ public final class CryptUtils {
         // a SpannableStringBuilder instead of the pure text and we must replace each character inline.
         // Otherwise we loose all the images, colors and so on...
         final SpannableStringBuilder buffer = new SpannableStringBuilder(span);
-        Rot13Encryption rot13 = new Rot13Encryption();
+        final Rot13Encryption rot13 = new Rot13Encryption();
 
         final int length = span.length();
         for (int index = 0; index < length; index++) {
-            char c = span.charAt(index);
+            final char c = span.charAt(index);
             buffer.replace(index, index + 1, String.valueOf(rot13.getNextEncryptedCharacter(c)));
         }
         return buffer;
     }
 
-    public static String base64Encode(byte[] in) {
-        int iLen = in.length;
-        int oDataLen = (iLen * 4 + 2) / 3; // output length without padding
-        int oLen = ((iLen + 2) / 3) * 4; // output length including padding
-        char[] out = new char[oLen];
+    public static String base64Encode(final byte[] in) {
+        final int iLen = in.length;
+        final int oDataLen = (iLen * 4 + 2) / 3; // output length without padding
+        final int oLen = ((iLen + 2) / 3) * 4; // output length including padding
+        final char[] out = new char[oLen];
         int ip = 0;
         int op = 0;
 
         while (ip < iLen) {
-            int i0 = in[ip++] & 0xff;
-            int i1 = ip < iLen ? in[ip++] & 0xff : 0;
-            int i2 = ip < iLen ? in[ip++] & 0xff : 0;
-            int o0 = i0 >>> 2;
-            int o1 = ((i0 & 3) << 4) | (i1 >>> 4);
-            int o2 = ((i1 & 0xf) << 2) | (i2 >>> 6);
-            int o3 = i2 & 0x3F;
+            final int i0 = in[ip++] & 0xff;
+            final int i1 = ip < iLen ? in[ip++] & 0xff : 0;
+            final int i2 = ip < iLen ? in[ip++] & 0xff : 0;
+            final int o0 = i0 >>> 2;
+            final int o1 = ((i0 & 3) << 4) | (i1 >>> 4);
+            final int o2 = ((i1 & 0xf) << 2) | (i2 >>> 6);
+            final int o3 = i2 & 0x3F;
             out[op++] = BASE64MAP1[o0];
             out[op++] = BASE64MAP1[o1];
             out[op] = op < oDataLen ? BASE64MAP1[o2] : '=';

@@ -19,7 +19,7 @@ public class Progress {
     private int progressDivider = 1;
     final private boolean hideAbsolute;
 
-    public Progress(boolean hideAbsolute) {
+    public Progress(final boolean hideAbsolute) {
         this.hideAbsolute = hideAbsolute;
     }
 

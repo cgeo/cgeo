@@ -48,7 +48,7 @@ public abstract class AbstractImageAdapter extends BaseAdapter {
     // create a new ImageView for each item referenced by the Adapter
     @Override
     public View getView(final int position, final View convertView, final ViewGroup parent) {
-        ImageView imageView;
+        final ImageView imageView;
         if (convertView == null) { // if it's not recycled, initialize some attributes
             imageView = (ImageView) LayoutInflater.from(context).inflate(R.layout.grid_image, null);
         } else {

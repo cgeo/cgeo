@@ -10,12 +10,12 @@ public class InverseComparator implements CacheComparator {
 
     private final CacheComparator originalComparator;
 
-    public InverseComparator(CacheComparator comparator) {
+    public InverseComparator(final CacheComparator comparator) {
         this.originalComparator = comparator;
     }
 
     @Override
-    public int compare(Geocache lhs, Geocache rhs) {
+    public int compare(final Geocache lhs, final Geocache rhs) {
         return originalComparator.compare(rhs, lhs);
     }
 

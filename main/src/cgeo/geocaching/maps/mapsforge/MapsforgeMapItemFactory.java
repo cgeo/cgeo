@@ -14,7 +14,7 @@ public class MapsforgeMapItemFactory implements MapItemFactory {
     }
 
     @Override
-    public CachesOverlayItemImpl getCachesOverlayItem(final IWaypoint coordinate, boolean applyDistanceRule) {
+    public CachesOverlayItemImpl getCachesOverlayItem(final IWaypoint coordinate, final boolean applyDistanceRule) {
         return new MapsforgeCacheOverlayItem(coordinate, applyDistanceRule);
     }
 

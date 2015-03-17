@@ -24,7 +24,7 @@ public class DecryptTextClickListener implements View.OnClickListener {
                 return;
             }
 
-            CharSequence text = targetView.getText();
+            final CharSequence text = targetView.getText();
             if (text instanceof Spannable) {
                 targetView.setText(CryptUtils.rot13((Spannable) text));
             } else {

@@ -16,7 +16,7 @@ import android.view.View;
 
 public class GoogleMapActivity extends MapActivity implements MapActivityImpl, FilteredActivity {
 
-    private AbstractMap mapBase;
+    private final AbstractMap mapBase;
 
     public GoogleMapActivity() {
         mapBase = new CGeoMap(this);
@@ -33,7 +33,7 @@ public class GoogleMapActivity extends MapActivity implements MapActivityImpl, F
     }
 
     @Override
-    protected void onCreate(Bundle icicle) {
+    protected void onCreate(final Bundle icicle) {
         mapBase.onCreate(icicle);
     }
 
@@ -58,17 +58,17 @@ public class GoogleMapActivity extends MapActivity implements MapActivityImpl, F
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         return mapBase.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         return mapBase.onOptionsItemSelected(item);
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
+    public boolean onPrepareOptionsMenu(final Menu menu) {
         return mapBase.onPrepareOptionsMenu(menu);
     }
 
@@ -78,12 +78,12 @@ public class GoogleMapActivity extends MapActivity implements MapActivityImpl, F
     }
 
     @Override
-    public void superOnCreate(Bundle savedInstanceState) {
+    public void superOnCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     @Override
-    public boolean superOnCreateOptionsMenu(Menu menu) {
+    public boolean superOnCreateOptionsMenu(final Menu menu) {
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -93,12 +93,12 @@ public class GoogleMapActivity extends MapActivity implements MapActivityImpl, F
     }
 
     @Override
-    public boolean superOnOptionsItemSelected(MenuItem item) {
+    public boolean superOnOptionsItemSelected(final MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void navigateUp(View view) {
+    public void navigateUp(final View view) {
         ActivityMixin.navigateUp(this);
     }
 
@@ -118,12 +118,12 @@ public class GoogleMapActivity extends MapActivity implements MapActivityImpl, F
     }
 
     @Override
-    public boolean superOnPrepareOptionsMenu(Menu menu) {
+    public boolean superOnPrepareOptionsMenu(final Menu menu) {
         return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
-    public void showFilterMenu(View view) {
+    public void showFilterMenu(final View view) {
         // do nothing, the filter bar only shows the global filter
     }
 }

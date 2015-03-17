@@ -20,11 +20,11 @@ class RMapsApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(Activity activity, Waypoint waypoint) {
+    public void navigate(final Activity activity, final Waypoint waypoint) {
         navigate(activity, waypoint.getCoords(), waypoint.getLookup(), waypoint.getName());
     }
 
-    private static void navigate(Activity activity, Geopoint coords, String code, String name) {
+    private static void navigate(final Activity activity, final Geopoint coords, final String code, final String name) {
         final ArrayList<String> locations = new ArrayList<>();
         locations.add(coords.format(Format.LAT_LON_DECDEGREE_COMMA) + ";" + code + ";" + name);
         final Intent intent = new Intent(INTENT);
@@ -33,12 +33,12 @@ class RMapsApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(Activity activity, Geocache cache) {
+    public void navigate(final Activity activity, final Geocache cache) {
         navigate(activity, cache.getCoords(), cache.getGeocode(), cache.getName());
     }
 
     @Override
-    public void navigate(Activity activity, Geopoint coords) {
+    public void navigate(final Activity activity, final Geopoint coords) {
         navigate(activity, coords, "", "");
     }
 }

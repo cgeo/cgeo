@@ -6,7 +6,7 @@ import cgeo.geocaching.maps.interfaces.MapSource;
 public abstract class AbstractMapProvider implements MapProvider {
 
     @Override
-    public void registerMapSource(MapSource mapSource) {
+    public void registerMapSource(final MapSource mapSource) {
         MapProviderFactory.registerMapSource(mapSource);
     }
 }

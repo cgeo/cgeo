@@ -15,13 +15,13 @@ public class OwnerActionsClickListener extends AbstractUserClickListener {
 
     private final Geocache cache;
 
-    public OwnerActionsClickListener(Geocache cache) {
+    public OwnerActionsClickListener(final Geocache cache) {
         super(ConnectorFactory.getConnector(cache).getUserActions());
         this.cache = cache;
     }
 
     @Override
-    protected String getUserName(View view) {
+    protected String getUserName(final View view) {
         // Use real owner name vice the one owner chose to display
         if (StringUtils.isNotBlank(cache.getOwnerUserId())) {
             return cache.getOwnerUserId();

@@ -14,20 +14,20 @@ import android.util.AttributeSet;
  */
 public class EditPasswordPreference extends EditTextPreference {
 
-    public EditPasswordPreference(Context context) {
+    public EditPasswordPreference(final Context context) {
         super(context);
     }
 
-    public EditPasswordPreference(Context context, AttributeSet attrs) {
+    public EditPasswordPreference(final Context context, final AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public EditPasswordPreference(Context context, AttributeSet attrs, int defStyle) {
+    public EditPasswordPreference(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
     }
 
     @Override
-    public void setSummary(CharSequence summary) {
+    public void setSummary(final CharSequence summary) {
         if (StringUtils.isBlank(summary)) {
             super.setSummary(StringUtils.EMPTY);
         } else {

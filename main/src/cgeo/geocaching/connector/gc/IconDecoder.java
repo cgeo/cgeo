@@ -60,7 +60,7 @@ abstract class IconDecoder {
                     continue;
                 }
 
-                int type;
+                final int type;
                 if (zoomlevel < 12) {
                     type = getCacheTypeFromPixel11(r, g, b);
                 } else {

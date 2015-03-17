@@ -24,7 +24,7 @@ public class PositionHistory {
     /**
      * Adds the current position to the trail history to be able to show the trail on the map.
      */
-    void rememberTrailPosition(Location coordinates) {
+    void rememberTrailPosition(final Location coordinates) {
         if (coordinates.getAccuracy() >= 50f) {
             return;
         }
@@ -36,7 +36,7 @@ public class PositionHistory {
             return;
         }
 
-        Location historyRecent = history.get(history.size() - 1);
+        final Location historyRecent = history.get(history.size() - 1);
         if (historyRecent.distanceTo(coordinates) <= MINIMUM_DISTANCE_METERS) {
             return;
         }
@@ -56,7 +56,7 @@ public class PositionHistory {
         return history;
     }
 
-    public void setHistory(ArrayList<Location> history) {
+    public void setHistory(final ArrayList<Location> history) {
         this.history = history;
     }
 

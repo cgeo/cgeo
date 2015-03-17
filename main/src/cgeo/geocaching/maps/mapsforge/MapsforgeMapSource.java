@@ -9,7 +9,7 @@ class MapsforgeMapSource extends AbstractMapSource {
 
     private final MapGeneratorInternal generator;
 
-    public MapsforgeMapSource(final String id, MapProvider mapProvider, String name, MapGeneratorInternal generator) {
+    public MapsforgeMapSource(final String id, final MapProvider mapProvider, final String name, final MapGeneratorInternal generator) {
         super(id, mapProvider, name);
         this.generator = generator;
     }

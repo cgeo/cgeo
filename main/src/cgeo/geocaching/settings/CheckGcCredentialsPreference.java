@@ -13,11 +13,11 @@ import android.util.AttributeSet;
 
 public class CheckGcCredentialsPreference extends AbstractCheckCredentialsPreference {
 
-    public CheckGcCredentialsPreference(Context context, AttributeSet attrs) {
+    public CheckGcCredentialsPreference(final Context context, final AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public CheckGcCredentialsPreference(Context context, AttributeSet attrs, int defStyle) {
+    public CheckGcCredentialsPreference(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
     }
 

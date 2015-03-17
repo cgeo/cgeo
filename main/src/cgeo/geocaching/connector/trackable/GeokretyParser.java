@@ -26,7 +26,7 @@ public class GeokretyParser {
         geokret.setEndTextElementListener(new EndTextElementListener() {
 
             @Override
-            public void end(String name) {
+            public void end(final String name) {
                 trackable.setName(name);
             }
         });
@@ -34,7 +34,7 @@ public class GeokretyParser {
         geokret.setStartElementListener(new StartElementListener() {
 
             @Override
-            public void start(Attributes attributes) {
+            public void start(final Attributes attributes) {
                 try {
                     final String kretyId = attributes.getValue("id");
                     if (StringUtils.isNumeric(kretyId)) {
@@ -73,7 +73,7 @@ public class GeokretyParser {
         return null;
     }
 
-    protected static String getType(int type) {
+    protected static String getType(final int type) {
         switch (type) {
             case 0:
                 return CgeoApplication.getInstance().getString(R.string.geokret_type_traditional);

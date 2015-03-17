@@ -30,10 +30,10 @@ public abstract class AbstractCachingListViewPageViewCreator extends AbstractCac
         if (view == null) {
             return null;
         }
-        int position = view.getFirstVisiblePosition();
-        View child = view.getChildAt(0);
-        int positionFromTop = (child == null) ? 0 : child.getTop();
-        Bundle state = new Bundle();
+        final int position = view.getFirstVisiblePosition();
+        final View child = view.getChildAt(0);
+        final int positionFromTop = (child == null) ? 0 : child.getTop();
+        final Bundle state = new Bundle();
         state.putInt(STATE_POSITION, position);
         state.putInt(STATE_POSITION_FROM_TOP, positionFromTop);
         return state;
@@ -44,12 +44,12 @@ public abstract class AbstractCachingListViewPageViewCreator extends AbstractCac
      *
      */
     @Override
-    public void setViewState(@NonNull Bundle state) {
+    public void setViewState(@NonNull final Bundle state) {
         if (view == null) {
             return;
         }
-        int logViewPosition = state.getInt(STATE_POSITION);
-        int logViewPositionFromTop = state.getInt(STATE_POSITION_FROM_TOP);
+        final int logViewPosition = state.getInt(STATE_POSITION);
+        final int logViewPositionFromTop = state.getInt(STATE_POSITION_FROM_TOP);
         view.setSelectionFromTop(logViewPosition, logViewPositionFromTop);
     }
 

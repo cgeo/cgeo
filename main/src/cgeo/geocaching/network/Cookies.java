@@ -29,7 +29,7 @@ public abstract class Cookies {
     }
 
     public static String dumpCookieStore() {
-        StringBuilder cookies = new StringBuilder();
+        final StringBuilder cookies = new StringBuilder();
         for (final Cookie cookie : cookieStore.getCookies()) {
             cookies.append(cookie.getName());
             cookies.append('=');

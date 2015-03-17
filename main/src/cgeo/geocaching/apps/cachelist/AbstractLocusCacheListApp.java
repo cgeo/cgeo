@@ -14,9 +14,9 @@ import java.util.List;
 
 abstract class AbstractLocusCacheListApp extends AbstractLocusApp implements CacheListApp {
 
-    private boolean export;
+    private final boolean export;
 
-    public AbstractLocusCacheListApp(final int id, boolean export) {
+    public AbstractLocusCacheListApp(final int id, final boolean export) {
         super(getString(export ? R.string.caches_map_locus_export : R.string.caches_map_locus), id, Intent.ACTION_VIEW);
         this.export = export;
     }
@@ -27,7 +27,7 @@ abstract class AbstractLocusCacheListApp extends AbstractLocusApp implements Cac
      * @see AbstractLocusApp#showInLocus
      */
     @Override
-    public boolean invoke(List<Geocache> cacheList, Activity activity, final SearchResult search) {
+    public boolean invoke(final List<Geocache> cacheList, final Activity activity, final SearchResult search) {
         if (CollectionUtils.isEmpty(cacheList)) {
             return false;
         }

@@ -8,26 +8,26 @@ import org.mapsforge.core.GeoPoint;
 
 public class MapsforgeMapController implements MapControllerImpl {
 
-    private MapController mapController;
-    private int maxZoomLevel;
+    private final MapController mapController;
+    private final int maxZoomLevel;
 
-    public MapsforgeMapController(MapController mapControllerIn, int maxZoomLevelIn) {
+    public MapsforgeMapController(final MapController mapControllerIn, final int maxZoomLevelIn) {
         mapController = mapControllerIn;
         maxZoomLevel = maxZoomLevelIn;
     }
 
     @Override
-    public void animateTo(GeoPointImpl geoPoint) {
+    public void animateTo(final GeoPointImpl geoPoint) {
         mapController.setCenter(castToGeoPoint(geoPoint));
     }
 
-    private static GeoPoint castToGeoPoint(GeoPointImpl geoPoint) {
+    private static GeoPoint castToGeoPoint(final GeoPointImpl geoPoint) {
         assert geoPoint instanceof GeoPoint;
         return (GeoPoint) geoPoint;
     }
 
     @Override
-    public void setCenter(GeoPointImpl geoPoint) {
+    public void setCenter(final GeoPointImpl geoPoint) {
         mapController.setCenter(castToGeoPoint(geoPoint));
     }
 
@@ -36,19 +36,19 @@ public class MapsforgeMapController implements MapControllerImpl {
      * mapzoom-1 is used to be compatible with Google Maps zoom levels
      */
     @Override
-    public void setZoom(int mapzoom) {
+    public void setZoom(final int mapzoom) {
         // Google Maps and OSM Maps use different zoom levels for the same view.
         // All OSM Maps zoom levels are offset by 1 so they match Google Maps.
         mapController.setZoom(Math.min(mapzoom - 1, maxZoomLevel));
     }
 
     @Override
-    public void zoomToSpan(int latSpanE6, int lonSpanE6) {
+    public void zoomToSpan(final int latSpanE6, final int lonSpanE6) {
 
         if (latSpanE6 != 0 && lonSpanE6 != 0) {
             // calculate zoomlevel
-            int distDegree = Math.max(latSpanE6, lonSpanE6);
-            int zoomLevel = (int) Math.floor(Math.log(360.0 * 1e6 / distDegree) / Math.log(2));
+            final int distDegree = Math.max(latSpanE6, lonSpanE6);
+            final int zoomLevel = (int) Math.floor(Math.log(360.0 * 1e6 / distDegree) / Math.log(2));
             mapController.setZoom(zoomLevel + 1);
         }
     }

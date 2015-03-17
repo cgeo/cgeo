@@ -9,7 +9,7 @@ import android.content.Context;
 public class PocketGeocacheListLoader extends AbstractSearchLoader {
     private final String guid;
 
-    public PocketGeocacheListLoader(Context context, String guid) {
+    public PocketGeocacheListLoader(final Context context, final String guid) {
         super(context);
         this.guid = guid;
     }

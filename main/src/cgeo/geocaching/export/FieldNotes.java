@@ -41,7 +41,7 @@ class FieldNotes {
         return buffer.toString();
     }
 
-    File writeToDirectory(File exportLocation) {
+    File writeToDirectory(final File exportLocation) {
         if (!LocalStorage.isExternalStorageAvailable()) {
             return null;
         }

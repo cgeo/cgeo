@@ -23,20 +23,20 @@ public class CapabilitiesPreference extends AbstractAttributeBasedPrefence {
 
     private String connectorCode;
 
-    public CapabilitiesPreference(Context context) {
+    public CapabilitiesPreference(final Context context) {
         super(context);
     }
 
-    public CapabilitiesPreference(Context context, AttributeSet attrs) {
+    public CapabilitiesPreference(final Context context, final AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public CapabilitiesPreference(Context context, AttributeSet attrs, int defStyle) {
+    public CapabilitiesPreference(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
     }
 
     @Override
-    public View getView(View convertView, ViewGroup parent) {
+    public View getView(final View convertView, final ViewGroup parent) {
         setOnPreferenceClickListener(new ClickListener());
         return super.getView(convertView, parent);
     }
@@ -44,15 +44,15 @@ public class CapabilitiesPreference extends AbstractAttributeBasedPrefence {
     private final class ClickListener implements OnPreferenceClickListener {
         @Override
         public boolean onPreferenceClick(final Preference preference) {
-            WebView htmlView = new WebView(preference.getContext());
+            final WebView htmlView = new WebView(preference.getContext());
             htmlView.loadDataWithBaseURL(null, createCapabilitiesMessage(), "text/html", "utf-8", null);
-            AlertDialog.Builder builder = new AlertDialog.Builder(preference.getContext());
+            final AlertDialog.Builder builder = new AlertDialog.Builder(preference.getContext());
             builder.setView(htmlView)
                     .setIcon(android.R.drawable.ic_dialog_info)
                     .setTitle(R.string.settings_features)
                     .setPositiveButton(R.string.err_none, new DialogInterface.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int id) {
+                        public void onClick(final DialogInterface dialog, final int id) {
                             dialog.cancel();
                         }
                     });
@@ -63,11 +63,11 @@ public class CapabilitiesPreference extends AbstractAttributeBasedPrefence {
 
     public String createCapabilitiesMessage() {
         // TODO: this needs a better key for the connectors
-        IConnector connector = ConnectorFactory.getConnector(connectorCode + "1234");
-        StringBuilder builder = new StringBuilder("<p>"
+        final IConnector connector = ConnectorFactory.getConnector(connectorCode + "1234");
+        final StringBuilder builder = new StringBuilder("<p>"
                 + TextUtils.htmlEncode(CgeoApplication.getInstance().getString(R.string.feature_description)) + "</p><ul>");
 
-        for (String capability : connector.getCapabilities()) {
+        for (final String capability : connector.getCapabilities()) {
             builder.append("<li>").append(TextUtils.htmlEncode(capability)).append("</li>");
         }
 
@@ -76,7 +76,7 @@ public class CapabilitiesPreference extends AbstractAttributeBasedPrefence {
     }
 
     @Override
-    protected void processAttributeValues(TypedArray values) {
+    protected void processAttributeValues(final TypedArray values) {
         connectorCode = values.getString(0);
     }
 

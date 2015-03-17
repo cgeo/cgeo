@@ -21,10 +21,10 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class GoogleCacheOverlay extends ItemizedOverlay<GoogleCacheOverlayItem> implements ItemizedOverlayImpl {
 
-    private CachesOverlay base;
-    private Lock lock = new ReentrantLock();
+    private final CachesOverlay base;
+    private final Lock lock = new ReentrantLock();
 
-    public GoogleCacheOverlay(Context contextIn, Drawable markerIn) {
+    public GoogleCacheOverlay(final Context contextIn, final Drawable markerIn) {
         super(boundCenterBottom(markerIn));
         base = new CachesOverlay(this, contextIn);
     }
@@ -35,7 +35,7 @@ public class GoogleCacheOverlay extends ItemizedOverlay<GoogleCacheOverlayItem> 
     }
 
     @Override
-    protected GoogleCacheOverlayItem createItem(int i) {
+    protected GoogleCacheOverlayItem createItem(final int i) {
         if (base == null) {
             return null;
         }
@@ -53,7 +53,7 @@ public class GoogleCacheOverlay extends ItemizedOverlay<GoogleCacheOverlayItem> 
     }
 
     @Override
-    protected boolean onTap(int arg0) {
+    protected boolean onTap(final int arg0) {
         if (base == null) {
             return false;
         }
@@ -62,11 +62,11 @@ public class GoogleCacheOverlay extends ItemizedOverlay<GoogleCacheOverlayItem> 
     }
 
     @Override
-    public void draw(Canvas canvas, MapView mapView, boolean shadow) {
+    public void draw(final Canvas canvas, final MapView mapView, final boolean shadow) {
         base.draw(canvas, castMapViewImpl(mapView), shadow);
     }
 
-    private static MapViewImpl castMapViewImpl(MapView mapView) {
+    private static MapViewImpl castMapViewImpl(final MapView mapView) {
         assert mapView instanceof MapViewImpl;
         return (MapViewImpl) mapView;
     }
@@ -77,28 +77,28 @@ public class GoogleCacheOverlay extends ItemizedOverlay<GoogleCacheOverlayItem> 
     }
 
     @Override
-    public Drawable superBoundCenterBottom(Drawable marker) {
+    public Drawable superBoundCenterBottom(final Drawable marker) {
         return ItemizedOverlay.boundCenterBottom(marker);
     }
 
     @Override
-    public void superSetLastFocusedItemIndex(int i) {
+    public void superSetLastFocusedItemIndex(final int i) {
         super.setLastFocusedIndex(i);
     }
 
     @Override
-    public boolean superOnTap(int index) {
+    public boolean superOnTap(final int index) {
         return super.onTap(index);
     }
 
     @Override
-    public void superDraw(Canvas canvas, MapViewImpl mapView, boolean shadow) {
+    public void superDraw(final Canvas canvas, final MapViewImpl mapView, final boolean shadow) {
         super.draw(canvas, (MapView) mapView, shadow);
     }
 
     @Override
-    public void superDrawOverlayBitmap(Canvas canvas, Point drawPosition,
-            MapProjectionImpl projection, byte drawZoomLevel) {
+    public void superDrawOverlayBitmap(final Canvas canvas, final Point drawPosition,
+            final MapProjectionImpl projection, final byte drawZoomLevel) {
         // Nothing to do here...
     }
 

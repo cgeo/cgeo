@@ -194,12 +194,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
      */
     private static final int MIN_LIVEMAP_ZOOM = 12;
     // Thread pooling
-    private static BlockingQueue<Runnable> displayQueue = new ArrayBlockingQueue<>(1);
-    private static ThreadPoolExecutor displayExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, displayQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
-    private static BlockingQueue<Runnable> downloadQueue = new ArrayBlockingQueue<>(1);
-    private static ThreadPoolExecutor downloadExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, downloadQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
-    private static BlockingQueue<Runnable> loadQueue = new ArrayBlockingQueue<>(1);
-    private static ThreadPoolExecutor loadExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, loadQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
+    private static final BlockingQueue<Runnable> displayQueue = new ArrayBlockingQueue<>(1);
+    private static final ThreadPoolExecutor displayExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, displayQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
+    private static final BlockingQueue<Runnable> downloadQueue = new ArrayBlockingQueue<>(1);
+    private static final ThreadPoolExecutor downloadExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, downloadQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
+    private static final BlockingQueue<Runnable> loadQueue = new ArrayBlockingQueue<>(1);
+    private static final ThreadPoolExecutor loadExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, loadQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
     // handlers
     /** Updates the titles */
 
@@ -382,7 +382,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             if (msg.what == UPDATE_PROGRESS) {
                 if (waitDialog != null) {
                     final int secondsElapsed = (int) ((System.currentTimeMillis() - detailProgressTime) / 1000);
-                    int secondsRemaining;
+                    final int secondsRemaining;
                     if (detailProgress > 0) {
                         secondsRemaining = (detailTotal - detailProgress) * secondsElapsed / detailProgress;
                     } else {
@@ -1234,7 +1234,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             showProgressHandler.sendEmptyMessage(SHOW_PROGRESS);
             loadThreadRun = System.currentTimeMillis();
 
-            SearchResult searchResult;
+            final SearchResult searchResult;
             if (mapMode == MapMode.LIVE) {
                 searchResult = isLiveEnabled ? new SearchResult() : new SearchResult(DataStore.loadStoredInViewport(mapView.getViewport(), Settings.getCacheType()));
             } else {

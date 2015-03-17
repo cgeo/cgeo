@@ -23,9 +23,9 @@ public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
     private int tempTokenSecretPrefKey;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
 
-        Bundle extras = getIntent().getExtras();
+        final Bundle extras = getIntent().getExtras();
         if (extras != null) {
             titleResId = extras.getInt(Intents.EXTRA_OAUTH_TITLE_RES_ID);
             tokenPublicPrefKey = extras.getInt(Intents.EXTRA_OAUTH_TOKEN_PUBLIC_KEY);
@@ -68,8 +68,8 @@ public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
      * Return an extended error in case of an invalid time stamp
      */
     @Override
-    protected String getExtendedErrorMsg(HttpResponse response) {
-        OkapiError error = OkapiClient.decodeErrorResponse(response);
+    protected String getExtendedErrorMsg(final HttpResponse response) {
+        final OkapiError error = OkapiClient.decodeErrorResponse(response);
         if (error.getResult() == OkapiErrors.INVALID_TIMESTAMP) {
             return res.getString(R.string.init_login_popup_invalid_timestamp);
         }

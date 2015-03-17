@@ -26,7 +26,7 @@ public class OkapiError {
     @NonNull private final OkapiErrors state;
     @NonNull private final String message;
 
-    public OkapiError(@Nullable ObjectNode data) {
+    public OkapiError(@Nullable final ObjectNode data) {
 
         // A null-response is by definition an error (some exception occurred somewhere in the flow)
         if (data == null) {

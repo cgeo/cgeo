@@ -13,7 +13,7 @@ public class KeywordGeocacheListLoader extends AbstractSearchLoader {
 
     private final @NonNull String keyword;
 
-    public KeywordGeocacheListLoader(Context context, final @NonNull String keyword) {
+    public KeywordGeocacheListLoader(final Context context, final @NonNull String keyword) {
         super(context);
         this.keyword = keyword;
     }

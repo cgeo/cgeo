@@ -24,11 +24,11 @@ import android.util.AttributeSet;
 
 public abstract class AbstractCheckCredentialsPreference extends AbstractClickablePreference {
 
-    public AbstractCheckCredentialsPreference(Context context, AttributeSet attrs) {
+    public AbstractCheckCredentialsPreference(final Context context, final AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public AbstractCheckCredentialsPreference(Context context, AttributeSet attrs, int defStyle) {
+    public AbstractCheckCredentialsPreference(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
     }
 
@@ -56,7 +56,7 @@ public abstract class AbstractCheckCredentialsPreference extends AbstractClickab
         }
 
         @Override
-        public boolean onPreferenceClick(Preference preference) {
+        public boolean onPreferenceClick(final Preference preference) {
             final Resources res = settingsActivity.getResources();
             final ImmutablePair<String, String> credentials = getCredentials();
 

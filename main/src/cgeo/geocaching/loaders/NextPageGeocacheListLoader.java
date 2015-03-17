@@ -9,7 +9,7 @@ import android.content.Context;
 public class NextPageGeocacheListLoader extends AbstractSearchLoader {
     private final SearchResult search;
 
-    public NextPageGeocacheListLoader(Context context, SearchResult search) {
+    public NextPageGeocacheListLoader(final Context context, final SearchResult search) {
         super(context);
         this.search = search;
     }
