@@ -106,6 +106,34 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
         super.onPause();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        app.registerListener(this);
+    }
+
+    @Override
+    protected void onStop() {
+        app.unregisterListener(this);
+        super.onStop();
+    }
+
+    /**
+     * will be called on the ui thread
+     */
+    protected void onUpdate() {
+        // nothing to do in the base
+    }
+
+    public void onUpdateBgThread() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                onUpdate();
+            }
+        });
+    }
+
     protected static void disableSuggestions(final EditText edit) {
         EditUtils.disableSuggestions(edit);
     }
@@ -218,5 +246,4 @@ public abstract class AbstractActivity extends ActionBarActivity implements IAbs
     protected void setCacheTitleBar(final @NonNull Geocache cache) {
         setCacheTitleBar(cache.getGeocode(), cache.getName(), cache.getType());
     }
-
 }

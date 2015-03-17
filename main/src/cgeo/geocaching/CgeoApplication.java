@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
@@ -23,6 +24,8 @@ public class CgeoApplication extends Application {
     private boolean liveMapHintShownInThisSession = false; // livemap hint has been shown
     private static CgeoApplication instance;
     private boolean isGooglePlayServicesAvailable = false;
+
+    private AbstractActivity notificationListener;
 
     public static void dumpOnOutOfMemory(final boolean enable) {
 
@@ -121,6 +124,28 @@ public class CgeoApplication extends Application {
 
     public boolean isGooglePlayServicesAvailable() {
         return isGooglePlayServicesAvailable;
+    }
+
+    public synchronized void registerListener(final AbstractActivity activity) {
+        notificationListener = activity;
+    }
+
+    public synchronized void unregisterListener(final AbstractActivity activity) {
+        if (activity == notificationListener) {
+            notificationListener = null;
+        }
+    }
+
+    public synchronized void notifyUpdate() {
+        if (notificationListener != null) {
+            notificationListener.onUpdateBgThread();
+        }
+    }
+
+    public synchronized void showToastFromBg(final String message) {
+        if (notificationListener != null) {
+            notificationListener.showToast(message);
+        }
     }
 
 }

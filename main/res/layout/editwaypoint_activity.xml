@@ -103,10 +103,6 @@
                 android:visibility="gone" />
         </RadioGroup>
 
-        <Button
-            android:id="@+id/add_waypoint"
-            style="@style/button_full"
-            android:text="@string/waypoint_save" />
     </LinearLayout>
 
 </ScrollView>
