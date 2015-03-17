@@ -36,6 +36,9 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
      */
     private CacheComparator selection;
 
+    // Used to change menu Filter label
+    private boolean isEventsOnly = false;
+
     private static final class ComparatorEntry {
         private final String name;
         private final Class<? extends CacheComparator> cacheComparator;
@@ -51,10 +54,10 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
         }
     }
 
+
     public SortActionProvider(final Context context) {
         super(context);
         mContext = context;
-        registerComparators();
     }
 
     private void register(final int resourceId, final Class<? extends CacheComparator> comparatorClass) {
@@ -62,8 +65,13 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
     }
 
     private void registerComparators() {
+        registry.clear();
         register(R.string.caches_sort_distance, DistanceComparator.class);
-        register(R.string.caches_sort_date_hidden, DateComparator.class);
+        if (isEventsOnly) {
+            register(R.string.caches_sort_eventdate, EventDateComparator.class);
+        } else {
+            register(R.string.caches_sort_date_hidden, DateComparator.class);
+        }
         register(R.string.caches_sort_difficulty, DifficultyComparator.class);
         register(R.string.caches_sort_finds, FindsComparator.class);
         register(R.string.caches_sort_geocode, GeocodeComparator.class);
@@ -103,6 +111,7 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
     @Override
     public void onPrepareSubMenu(final SubMenu subMenu){
         subMenu.clear();
+        registerComparators();
         for (int i = 0; i < registry.size(); i++) {
             final ComparatorEntry comparatorEntry = registry.get(i);
             final MenuItem menuItem = subMenu.add(MENU_GROUP, i, i, comparatorEntry.name);
@@ -147,5 +156,9 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
 
     public void setSelection(final CacheComparator selection) {
         this.selection = selection;
+    }
+
+    public void setIsEventsOnly(final boolean isEventsOnly) {
+        this.isEventsOnly = isEventsOnly;
     }
 }

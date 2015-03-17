@@ -563,6 +563,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         sortProvider = (SortActionProvider) MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_sort));
         assert sortProvider != null;  // We set it in the XML file
         sortProvider.setSelection(adapter.getCacheComparator());
+        sortProvider.setIsEventsOnly(adapter.isEventsOnly());
         sortProvider.setClickListener(new Action1<CacheComparator>() {
 
             @Override

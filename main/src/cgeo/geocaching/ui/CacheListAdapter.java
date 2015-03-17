@@ -348,6 +348,11 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         return comparator == null || comparator instanceof DistanceComparator;
     }
 
+    private boolean isSortedByEvent() {
+        final CacheComparator comparator = getCacheComparator();
+        return comparator == null || comparator instanceof EventDateComparator;
+    }
+
     public void setActualHeading(final float direction) {
         if (Math.abs(AngleUtils.difference(azimuth, direction)) < 5) {
             return;
@@ -667,8 +672,15 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         for (final Geocache cache : list) {
             if (!cache.isEventCache()) {
                 eventsOnly = false;
+                if (isSortedByEvent()) {
+                    setComparator(DistanceComparator.singleton);
+                }
                 return;
             }
         }
+    }
+
+    public boolean isEventsOnly() {
+        return eventsOnly;
     }
 }
