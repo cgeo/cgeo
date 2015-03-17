@@ -65,6 +65,8 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     private int attempts = 0;
     private Trackable trackable;
 
+    final public static int LOG_TRACKABLE = 1;
+
     private final Handler showProgressHandler = new Handler() {
         @Override
         public void handleMessage(final Message msg) {
@@ -110,6 +112,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
             final StatusCode error = (StatusCode) msg.obj;
             if (error == StatusCode.NO_ERROR) {
                 showToast(res.getString(R.string.info_log_posted));
+                setResult(RESULT_OK);
                 finish();
             } else {
                 showToast(error.getErrorString(res));
@@ -138,6 +141,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
 
         if (trackable == null) {
             Log.e("LogTrackableActivity.onCreate: cannot load trackable " + geocode);
+            setResult(RESULT_CANCELED);
             finish();
             return;
         }
