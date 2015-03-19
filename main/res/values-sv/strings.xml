@@ -79,6 +79,7 @@
   <string name="log_saving_and_uploading">Sparar logg och laddar upp bild…</string>
   <string name="log_clear">Rensa</string>
   <string name="log_post_not_possible">Laddar loggningssida…</string>
+  <string name="log_date_future_not_allowed">Framtida loggdatum är inte tillåtna.</string>
   <string name="log_add">Lägg till</string>
   <string name="log_repeat">Upprepa senaste loggen</string>
   <string name="log_no_rating">Inget betyg</string>
@@ -108,6 +109,7 @@
   <string name="log_password_title">Logglösenord:</string>
   <string name="log_hint_log_password">Ange ditt lösenord för loggning</string>
   <string name="log_oc_team_comment">Meddelande från OC Team</string>
+  <string name="log_your_saved_log">Din sparade logg</string>
   <string-array name="log_image_scales">
     <item>Ingen skalning</item>
     <item>512 px</item>
@@ -229,7 +231,7 @@
   <string name="caches_nearby_button">Nära</string>
   <string name="advanced_search_button">Sök</string>
   <string name="stored_caches_button">Sparade</string>
-  <string name="any_button">Valfritt mål</string>
+  <string name="any_button">Gå till</string>
   <string name="unknown_scan">Hittade inte någon geokod i scanningen.</string>
   <string name="caches_no_cache">Det finns ingen cache</string>
   <string name="caches_more_caches">Ladda fler cacher</string>
@@ -263,6 +265,7 @@
   <string name="caches_sort_finds">Antal som hittat</string>
   <string name="caches_sort_state">Status</string>
   <string name="caches_sort_storage">Tid för sparandet i enheten</string>
+  <string name="caches_sort_eventdate">Eventdatum</string>
   <string name="caches_select_mode">Markeringsläge</string>
   <string name="caches_select_mode_exit">Avsluta markeringsläge</string>
   <string name="caches_select_invert">Invertera valda</string>
@@ -293,6 +296,7 @@
   <string name="caches_filter_track">Med trackables</string>
   <string name="caches_filter_clear">Rensa filter</string>
   <string name="caches_filter_modified">Med tillagda koordinater</string>
+  <string name="caches_filter_offline_log">Med offlinelogg</string>
   <string name="caches_filter_origin">Ursprung</string>
   <string name="caches_filter_distance">Avstånd</string>
   <string name="caches_filter_personal_note">Med personlig anteckning</string>
@@ -334,6 +338,7 @@
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Hjälp</string>
   <string name="about_system_include">Vänligen inkludera följande systeminformation när du skickar en felrapport eller ber om mer information om c:geo:</string>
+  <string name="changelog_github">Lista över alla ändringar</string>
   <string name="settings_title_services">Tjänster</string>
   <string name="settings_summary_services">Ställ in kontoinformation och tillgång till valbara tjänster.</string>
   <string name="settings_title_appearance">Utseende</string>
@@ -456,6 +461,8 @@
   <string name="init_backup_success">Databasen som används av c:geo har kopierats till filen</string>
   <string name="init_backup_failed">Kopieringen av c:geos databas misslyckades.</string>
   <string name="init_backup_unnecessary">Databasen är tom, säkerhetkopiering behövs inte.</string>
+  <string name="backup_confirm_overwrite">Vill du skriva över den befintliga säkerhetskopian från %s?</string>
+  <string name="restore_confirm_overwrite">Vill du skriva över %s på enheten med säkerhetskopian?</string>
   <string name="init_restore_success">Återställning klar.</string>
   <string name="init_restore_failed">Återställningen misslyckades.</string>
   <string name="init_restore_running">Återställer databasen med cacher…</string>
@@ -618,6 +625,7 @@
   </plurals>
   <string name="cache_waypoints_add">Lägg till punkt</string>
   <string name="cache_hint">Tips</string>
+  <string name="cache_hint_not_available">Ingen ledtråd tillgänglig</string>
   <string name="cache_logs">Loggbok</string>
   <string name="cache_logs_friends_and_own">Vänners/egna loggar</string>
   <string name="cache_dialog_loading_details">Laddar detaljer om cachen…</string>
@@ -660,6 +668,7 @@
   <string name="cache_menu_visit_offline">Snabblogga offline</string>
   <string name="cache_menu_spoilers">Spoiler bilder</string>
   <string name="cache_menu_around">Cacher i närheten</string>
+  <string name="around">Kring %s</string>
   <string name="cache_menu_event">Lägg till i kalender</string>
   <string name="cache_menu_details">Detaljer</string>
   <string name="cache_menu_refresh">Uppdatera</string>
@@ -671,6 +680,8 @@
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Rösta</string>
+  <string name="cache_menu_checker">Öppna geochecker</string>
+  <string name="cache_menu_ignore">Ignorera cache</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Sparad logg</string>
   <string name="cache_status_found">Hittad</string>
@@ -781,6 +792,7 @@
   <string name="search_history_cleared">Historiken rensad</string>
   <string name="waypoint_coordinate_formats_plain">Standard</string>
   <string name="from_clipboard">Från Urklipp</string>
+  <string name="copy_to_clipboard">Kopiera till urklipp</string>
   <string name="visit_tweet">Skicka att du hittat till Twitter</string>
   <string name="map_map">Karta</string>
   <string name="map_live">Live karta</string>
@@ -1137,7 +1149,15 @@
   <string name="attribute_offset_cache_no">Ingen offset cache</string>
   <string name="quote">To make geocaching easier, to make users lazier.</string>
   <string name="powered_by">carnero</string>
+  <string name="support_title">Support</string>
+  <string name="website_title">Webbsida</string>
+  <string name="facebook_title">Facebook</string>
+  <string name="facebook_link"><a href="">c:geo på Facebook</a></string>
+  <string name="twitter_title">Twitter</string>
+  <string name="market_title">Google Play</string>
+  <string name="market_link"><a href="">c:geo på Google Play</a></string>
   <string name="about_twitter">Ska <b>c:geo</b> publicera ny status på Twitter varje gång en cache loggas?</string>
+  <string name="faq_title">FAQ</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Ny officiell version finns tillgänglig.\nKlicka för att installera.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Nytt nattligt bygge finns tillgängligt.\nKlicka för att installera.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Ny kandidat till officiellt bygge finns tillgängligt.\nKlicka för att installera.</string>
@@ -1182,7 +1202,7 @@
   <string name="cgeo_shortcut">c:geo genväg</string>
   <string name="create_shortcut">Skapa genväg</string>
   <string name="send">Skicka</string>
-  <string name="showcase_logcache_title">Skickar loggen</string>
+  <string name="showcase_logcache_title">Skicka loggen</string>
   <string name="showcase_logcache_text">Kom ihåg, många kommandon hittar du nu i titelraden. Där hittar du knappen för att skicka den avslutade loggen.</string>
   <string name="showcase_main_title">Nya menyer</string>
   <string name="showcase_main_text">c:geo placerar nu menyalternativ i titelraden likt andra moderna appar. Några alternativ döljs bakom symbolen med prickar. Tryck länge på en knapp för att se dess beskrivning.</string>

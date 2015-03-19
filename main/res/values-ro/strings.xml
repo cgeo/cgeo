@@ -79,6 +79,7 @@
   <string name="log_saving_and_uploading">Trimitre jurnal şi încarcare poze…</string>
   <string name="log_clear">Şterge</string>
   <string name="log_post_not_possible">Încărcare pagină însemnări…</string>
+  <string name="log_date_future_not_allowed">Nu sunt permise însemnări datate în viitor.</string>
   <string name="log_add">Adaugă</string>
   <string name="log_repeat">Repetă ultima însemnare</string>
   <string name="log_no_rating">Fără voturi</string>
@@ -108,6 +109,7 @@
   <string name="log_password_title">Parolă:</string>
   <string name="log_hint_log_password">Introdu parola pentru jurnal</string>
   <string name="log_oc_team_comment">Comentariu din partea echipei OC</string>
+  <string name="log_your_saved_log">Însemnare salvată</string>
   <string-array name="log_image_scales">
     <item>Fără redimensionare</item>
     <item>512 px</item>
@@ -229,7 +231,7 @@
   <string name="caches_nearby_button">În apropiere</string>
   <string name="advanced_search_button">Caută</string>
   <string name="stored_caches_button">Stocate</string>
-  <string name="any_button">Orice destinaţie</string>
+  <string name="any_button">Coordonate</string>
   <string name="unknown_scan">Nu a fost găsit nici un geocod în rezultatul scanării.</string>
   <string name="caches_no_cache">Nici o cutie</string>
   <string name="caches_more_caches">Încarcă mai multe cutii</string>
@@ -264,6 +266,7 @@
   <string name="caches_sort_finds">Găsite</string>
   <string name="caches_sort_state">Stare</string>
   <string name="caches_sort_storage">Data salvării pe acest dispozitiv</string>
+  <string name="caches_sort_eventdate">Data evenimentului</string>
   <string name="caches_select_mode">Mod selecţie</string>
   <string name="caches_select_mode_exit">Renunţă la modul selecţie</string>
   <string name="caches_select_invert">Inversează selecţia</string>
@@ -300,6 +303,7 @@
   <string name="caches_filter_track">Conţine obiecte călătoare</string>
   <string name="caches_filter_clear">Anulează filtrele</string>
   <string name="caches_filter_modified">Cu coordonate modificate</string>
+  <string name="caches_filter_offline_log">Cu însemnări salvate</string>
   <string name="caches_filter_origin">Origine</string>
   <string name="caches_filter_distance">Distanţă</string>
   <string name="caches_filter_personal_note">Scrie notă personală</string>
@@ -341,6 +345,7 @@
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Ajutor</string>
   <string name="about_system_include">Te rog include urmatoarele informaţii despre sistem atunci când trimiţi o sesizare sau întrebi despre c:geo:</string>
+  <string name="changelog_github">Afişează toate modificările</string>
   <string name="settings_title_services">Servicii internet</string>
   <string name="settings_summary_services">Configurează-ţi contul şi accesul la servicii opţionale.</string>
   <string name="settings_title_appearance">Aspect vizual</string>
@@ -462,6 +467,8 @@
   <string name="init_backup_success">Baza de date a c:geo a fost copiată aici:</string>
   <string name="init_backup_failed">Salvarea bazei de date a eşuat.</string>
   <string name="init_backup_unnecessary">Baza de date este goală. Nu este necesară o salvare de siguranţă.</string>
+  <string name="backup_confirm_overwrite">Vrei să scrii peste salvarea de siguranţă din %s?</string>
+  <string name="restore_confirm_overwrite">Vrei să înlocuieşti %s din dispozitivul tău cu cele din salvarea de siguranţă?</string>
   <string name="init_restore_success">Restaurare finalizată.</string>
   <string name="init_restore_failed">Restaurarea nu a reușit.</string>
   <string name="init_restore_running">Restaurare bază de date cutii…</string>
@@ -614,6 +621,7 @@
   <string name="cache_waypoints">Puncte</string>
   <string name="cache_waypoints_add">Adaugă punct</string>
   <string name="cache_hint">Indiciu</string>
+  <string name="cache_hint_not_available">Fără indiciu</string>
   <string name="cache_logs">Jurnal</string>
   <string name="cache_logs_friends_and_own">Însemnări proprii/de la prieteni</string>
   <string name="cache_dialog_loading_details">Încărcare detaliile cutiei…</string>
@@ -656,6 +664,7 @@
   <string name="cache_menu_visit_offline">Însemnare locală cu un singur clic</string>
   <string name="cache_menu_spoilers">Imagini (indicii?)</string>
   <string name="cache_menu_around">Cutii din împrejurimi</string>
+  <string name="around">Aproximativ %s</string>
   <string name="cache_menu_event">Adaugă la calendar</string>
   <string name="cache_menu_details">Detalii</string>
   <string name="cache_menu_refresh">Împrospătează</string>
@@ -666,6 +675,8 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Ceas \"Pebble\"</string>
   <string name="cache_menu_vote">Votează</string>
+  <string name="cache_menu_checker">Accesează Geochecker</string>
+  <string name="cache_menu_ignore">Ignoră geocutia</string>
   <string name="cache_status">Stare</string>
   <string name="cache_status_offline_log">Jurnal salvat</string>
   <string name="cache_status_found">Găsit</string>
@@ -776,6 +787,7 @@
   <string name="search_history_cleared">Istoric şters</string>
   <string name="waypoint_coordinate_formats_plain">Simplu</string>
   <string name="from_clipboard">Din memoria temporară</string>
+  <string name="copy_to_clipboard">Copiază în memoria temporară</string>
   <string name="visit_tweet">Publică pe Twitter</string>
   <string name="map_map">Hartă</string>
   <string name="map_live">Hartă</string>
@@ -1132,7 +1144,15 @@
   <string name="attribute_offset_cache_no">Nu este geocutie decalată</string>
   <string name="quote">Pentru geocaching mai uşor, pentru căutători mai leneşi.</string>
   <string name="powered_by">carnero</string>
+  <string name="support_title">Suport</string>
+  <string name="website_title">Pagină Web</string>
+  <string name="facebook_title">Facebook</string>
+  <string name="facebook_link"><a href="">pagina c:geo</a></string>
+  <string name="twitter_title">Twitter</string>
+  <string name="market_title">Google Play</string>
+  <string name="market_link"><a href="">c:geo pe Google Play</a></string>
   <string name="about_twitter">Ar trebui ca <b>c:geo</b> să publice un statut nou pe Twitter de fiecare dată când scrii o însemnare pentru o geocutie?</string>
+  <string name="faq_title">Întrebari frecvente</string>
   <string name="status_new_release" tools:ignore="UnusedResources">A apărut o versiune nouă.\nApasă aici pentru a instala.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">A apărut o nouă versiune zilnică.\nApasă aici pentru a instala.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">A apărut o un candidat pentru o versiune nouă.\nApasă aici pentru a instala.</string>

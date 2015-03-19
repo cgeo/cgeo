@@ -229,7 +229,6 @@
   <string name="caches_nearby_button">A közelben</string>
   <string name="advanced_search_button">Keresés</string>
   <string name="stored_caches_button">Mentett</string>
-  <string name="any_button">Szabad cél</string>
   <string name="unknown_scan">Nem található geokód a scannelés eredményében.</string>
   <string name="caches_no_cache">Nem található láda</string>
   <string name="caches_more_caches">Nem elég? Keress több ládát!</string>

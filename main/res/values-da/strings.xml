@@ -229,7 +229,6 @@
   <string name="caches_nearby_button">I nærheden</string>
   <string name="advanced_search_button">Søg</string>
   <string name="stored_caches_button">Gemte</string>
-  <string name="any_button">Navigation</string>
   <string name="unknown_scan">Der blev ikke fundet nogen geokoder i skanningen.</string>
   <string name="caches_no_cache">Ingen cache</string>
   <string name="caches_more_caches">Flere cacher</string>

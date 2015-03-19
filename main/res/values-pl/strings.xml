@@ -79,6 +79,7 @@
   <string name="log_saving_and_uploading">Zapisuję w dzienniku i wysyłam zdjęcie…</string>
   <string name="log_clear">Wyczyść</string>
   <string name="log_post_not_possible">Ładuję dziennik…</string>
+  <string name="log_date_future_not_allowed">Wpisy z przyszłą datą nie są dozwolone.</string>
   <string name="log_add">Dodaj</string>
   <string name="log_repeat">Powtórz ostatni wpis</string>
   <string name="log_no_rating">Bez oceny</string>
@@ -108,6 +109,7 @@
   <string name="log_password_title">Hasło do logu:</string>
   <string name="log_hint_log_password">Wpisz hasło do logu</string>
   <string name="log_oc_team_comment">Komentarz zespołu OC</string>
+  <string name="log_your_saved_log">Twój zapisany wpis</string>
   <string-array name="log_image_scales">
     <item>Brak skalowania</item>
     <item>512 px</item>
@@ -229,7 +231,6 @@
   <string name="caches_nearby_button">Najbliższe</string>
   <string name="advanced_search_button">Szukaj</string>
   <string name="stored_caches_button">Zapisane</string>
-  <string name="any_button">Współrzędne</string>
   <string name="unknown_scan">c:geo nie znalazł żadnego GC-kodu w wynikach skanowania.</string>
   <string name="caches_no_cache">Brak skrzynek</string>
   <string name="caches_more_caches">Więcej skrzynek</string>
@@ -264,6 +265,7 @@
   <string name="caches_sort_finds">Ile razy znaleziona</string>
   <string name="caches_sort_state">Stan</string>
   <string name="caches_sort_storage">Data zapisania w urządzeniu</string>
+  <string name="caches_sort_eventdate">Data wydarzenia</string>
   <string name="caches_select_mode">Tryb wyboru</string>
   <string name="caches_select_mode_exit">Wyjście z trybu wyboru</string>
   <string name="caches_select_invert">Odwróć zaznaczenie</string>
@@ -290,6 +292,7 @@
   <string name="caches_filter_track">Z przedmiotami podróżnymi</string>
   <string name="caches_filter_clear">Usuń filtr</string>
   <string name="caches_filter_modified">Zmiany współrzędnych</string>
+  <string name="caches_filter_offline_log">Z wpisami offline</string>
   <string name="caches_filter_origin">Źródło</string>
   <string name="caches_filter_distance">Odległość</string>
   <string name="caches_filter_personal_note">Zawiera notatkę</string>
@@ -331,6 +334,7 @@
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Pomoc</string>
   <string name="about_system_include">Proszę załączyć następujące informacje o systemie podczas przesyłania raportu błędu albo podczas prośby o więcej informacji odnośnie c:geo:</string>
+  <string name="changelog_github">Lista wszystkich zmian</string>
   <string name="settings_title_services">Usługi</string>
   <string name="settings_summary_services">Konfigurowanie informacji o koncie użytkownika i dostęp do usług opcjonalnych.</string>
   <string name="settings_title_appearance">Wygląd</string>
@@ -449,6 +453,8 @@
   <string name="init_backup_success">Baza danych c:geo została pomyślnie skopiowana do pliku</string>
   <string name="init_backup_failed">Tworzenie kopii zapasowej bazy danych c:geo nie powiodło się.</string>
   <string name="init_backup_unnecessary">Baza danych jest pusta, tworzenie kopii zapasowej nie jest potrzebne.</string>
+  <string name="backup_confirm_overwrite">Czy chcesz nadpisać aktualną kopię zapasową z %s?</string>
+  <string name="restore_confirm_overwrite">Czy chcesz nadpisać %s w twoim urządzeniu kopią zapasową?</string>
   <string name="init_restore_success">Odzyskiwanie zakończone.</string>
   <string name="init_restore_failed">Odzyskiwanie nie powiodło się.</string>
   <string name="init_restore_running">Odzyskiwanie bazy skrzynek…</string>
@@ -609,6 +615,7 @@
   </plurals>
   <string name="cache_waypoints_add">Dodaj punkt nawigacji</string>
   <string name="cache_hint">Wskazówka</string>
+  <string name="cache_hint_not_available">Brak podpowiedzi</string>
   <string name="cache_logs">Dziennik</string>
   <string name="cache_logs_friends_and_own">Wpisy przyjaciół/własne</string>
   <string name="cache_dialog_loading_details">Ładuję szczegóły skrzynki…</string>
@@ -651,6 +658,7 @@
   <string name="cache_menu_visit_offline">Wpisz wizytę offline</string>
   <string name="cache_menu_spoilers">Zdjęcia spoiler</string>
   <string name="cache_menu_around">Skrzynki w pobliżu</string>
+  <string name="around">W pobliżu %s</string>
   <string name="cache_menu_event">Dodaj do kalendarza</string>
   <string name="cache_menu_details">Szczegóły</string>
   <string name="cache_menu_refresh">Odśwież</string>
@@ -661,6 +669,8 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Zegarek Pebble</string>
   <string name="cache_menu_vote">Głosuj</string>
+  <string name="cache_menu_checker">Otwórz geo checker</string>
+  <string name="cache_menu_ignore">Ignoruj skrzynkę</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Zapamiętany wpis</string>
   <string name="cache_status_found">Znaleziona</string>
@@ -771,6 +781,7 @@
   <string name="search_history_cleared">Historia usunięta</string>
   <string name="waypoint_coordinate_formats_plain">zwykłe</string>
   <string name="from_clipboard">Ze schowka</string>
+  <string name="copy_to_clipboard">Kopiuj do schowka</string>
   <string name="visit_tweet">Wyślij informację do Twitter</string>
   <string name="map_map">Mapa</string>
   <string name="map_live">Mapa online</string>
@@ -1127,7 +1138,15 @@
   <string name="attribute_offset_cache_no">Nie jest to skrzynka Offset</string>
   <string name="quote">Aby uczynić geocaching prostszym, a użytkowników bardziej leniwymi.</string>
   <string name="powered_by">carnero</string>
+  <string name="support_title">Pomoc</string>
+  <string name="website_title">Adres strony</string>
+  <string name="facebook_title">Facebook</string>
+  <string name="facebook_link"><a href="">c:geo na fb</a></string>
+  <string name="twitter_title">Twitter</string>
+  <string name="market_title">Google Play</string>
+  <string name="market_link"><a href="">c:geo w Google Play</a></string>
   <string name="about_twitter">Czy chczesz aby <b>c:geo</b> publikował nowy status na Twitter za każdym razem kiedy znajdziesz skrzynkę?</string>
+  <string name="faq_title">FAQ</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Dostępna nowa wersja.\nKliknij aby zainstalować.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Dostępna nowa codzienna wersja.\nKliknij aby zainstalować.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Dostępny nowy kandydat na nową wersję.\nKliknij aby zainstalować.</string>
