@@ -230,7 +230,6 @@
   <string name="caches_nearby_button">Propers</string>
   <string name="advanced_search_button">Cerca</string>
   <string name="stored_caches_button">Desats</string>
-  <string name="any_button">Vés a…</string>
   <string name="unknown_scan">No s\'ha trobat cap geocodi en el resultat de l\'exploració.</string>
   <string name="caches_no_cache">Aquí no hi ha catxés</string>
   <string name="caches_more_caches">Carrega més catxés</string>

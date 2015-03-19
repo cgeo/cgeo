@@ -229,7 +229,6 @@
   <string name="caches_nearby_button">V okolí</string>
   <string name="advanced_search_button">Hľadanie</string>
   <string name="stored_caches_button">Uložené</string>
-  <string name="any_button">Ciele</string>
   <string name="unknown_scan">Nepodarilo sa nájsť geokód v načítanom výsledku.</string>
   <string name="caches_no_cache">Žiadne skrýše</string>
   <string name="caches_more_caches">Načítať ďalšie skrýše</string>

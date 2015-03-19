@@ -231,7 +231,7 @@
   <string name="caches_nearby_button">Vicini</string>
   <string name="advanced_search_button">Cerca</string>
   <string name="stored_caches_button">Salvati</string>
-  <string name="any_button">Ovunque</string>
+  <string name="any_button">Vai a</string>
   <string name="unknown_scan">Nessun geocode trovato nello scan.</string>
   <string name="caches_no_cache">Non ci sono cache</string>
   <string name="caches_more_caches">Carica altri cache</string>
@@ -265,6 +265,7 @@
   <string name="caches_sort_finds">Numero ritrovamenti</string>
   <string name="caches_sort_state">Stato</string>
   <string name="caches_sort_storage">Data salvataggio</string>
+  <string name="caches_sort_eventdate">Data Evento</string>
   <string name="caches_select_mode">Modo Selezione</string>
   <string name="caches_select_mode_exit">Esci dal modo Selezione</string>
   <string name="caches_select_invert">Inverti selezione</string>

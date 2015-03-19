@@ -223,7 +223,6 @@
   <string name="caches_nearby_button">Tuvumā</string>
   <string name="advanced_search_button">Meklēt</string>
   <string name="stored_caches_button">Saglabātie bezsaistē</string>
-  <string name="any_button">Jebkura vieta</string>
   <string name="unknown_scan">Skenēšanas rezultātā neviens ģeokods netika atrasts.</string>
   <string name="caches_no_cache">Šeit nav slēpņu</string>
   <string name="caches_more_caches">Ielādēt vairāk slēpņus</string>

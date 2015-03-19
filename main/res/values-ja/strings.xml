@@ -213,7 +213,6 @@
   <string name="caches_nearby_button">近く</string>
   <string name="advanced_search_button">検索</string>
   <string name="stored_caches_button">保存済み</string>
-  <string name="any_button">目的地</string>
   <string name="unknown_scan">GCコードが見つかりませんでした。</string>
   <string name="caches_no_cache">キャッシュはありません</string>
   <string name="caches_more_caches">次のキャッシュ</string>

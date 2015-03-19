@@ -41,7 +41,7 @@
   <string name="cache_size_very_large">Erg Groot</string>
   <string name="wp_final">Eindbestemming</string>
   <string name="wp_stage">Multi-cache punt</string>
-  <string name="wp_puzzle">Vraag voor antwoord</string>
+  <string name="wp_puzzle">Te beantwoorden vraag</string>
   <string name="wp_pkg">Parkeer gelegenheid</string>
   <string name="wp_trailhead">Trailhead</string>
   <string name="wp_waypoint">Referentie punt</string>
@@ -79,6 +79,7 @@
   <string name="log_saving_and_uploading">Verzenden van log en uploaden foto…</string>
   <string name="log_clear">Wissen</string>
   <string name="log_post_not_possible">Laden Log Pagina…</string>
+  <string name="log_date_future_not_allowed">Log datums in de toekomst zijn niet toegestaan.</string>
   <string name="log_add">Toevoegen</string>
   <string name="log_repeat">Herhaal laatste log</string>
   <string name="log_no_rating">Geen beoordeling</string>
@@ -108,6 +109,7 @@
   <string name="log_password_title">Log wachtwoord:</string>
   <string name="log_hint_log_password">Voer Login Wachtwoord</string>
   <string name="log_oc_team_comment">OC Team commentaar</string>
+  <string name="log_your_saved_log">Je opgeslagen log</string>
   <string-array name="log_image_scales">
     <item>Niet schalen</item>
     <item>512 px</item>
@@ -229,7 +231,7 @@
   <string name="caches_nearby_button">Dichtbij</string>
   <string name="advanced_search_button">Zoeken</string>
   <string name="stored_caches_button">Opgeslagen</string>
-  <string name="any_button">Elke locatie</string>
+  <string name="any_button">Ga naar</string>
   <string name="unknown_scan">De gescande afbeelding bevat geen geocode.</string>
   <string name="caches_no_cache">Geen caches</string>
   <string name="caches_more_caches">Meer caches</string>
@@ -263,6 +265,7 @@
   <string name="caches_sort_finds">Aantal keer gevonden</string>
   <string name="caches_sort_state">Selectie omkeren</string>
   <string name="caches_sort_storage">Datum opgeslagen op apparaat</string>
+  <string name="caches_sort_eventdate">Event datum</string>
   <string name="caches_select_mode">Selectie modus</string>
   <string name="caches_select_mode_exit">Selectie modus beëindigen</string>
   <string name="caches_select_invert">Selectie omkeren</string>
@@ -289,6 +292,7 @@
   <string name="caches_filter_track">Met trackables</string>
   <string name="caches_filter_clear">Maak filters leeg</string>
   <string name="caches_filter_modified">Met aangepaste coordinaten</string>
+  <string name="caches_filter_offline_log">Met offline log</string>
   <string name="caches_filter_origin">Oorsprong</string>
   <string name="caches_filter_distance">Afstand</string>
   <string name="caches_filter_personal_note">Met privé cachenotitie</string>
@@ -330,6 +334,7 @@
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Help</string>
   <string name="about_system_include">Voeg volgende systeem informatie toe wanneer je een bug report stuurt of vraagt om meer informatie over c:geo:</string>
+  <string name="changelog_github">Lijst met alle wijzigingen</string>
   <string name="settings_title_services">Diensten</string>
   <string name="settings_summary_services">Gebruikersaccount informatie en toegang tot optionele services configureren.</string>
   <string name="settings_title_appearance">Uiterlijk</string>
@@ -452,6 +457,8 @@
   <string name="init_backup_success">De database van c:geo was succesvol gekopieerd naar het bestand:</string>
   <string name="init_backup_failed">Backup van c:geo database is niet gelukt.</string>
   <string name="init_backup_unnecessary">Database is leeg, backup niet nodig.</string>
+  <string name="backup_confirm_overwrite">Wilt je de bestaande backup van %s overschrijven?</string>
+  <string name="restore_confirm_overwrite">Wil je %s op uw apparaat overschrijven met de backup?</string>
   <string name="init_restore_success">Herstellen is gelukt.</string>
   <string name="init_restore_failed">Herstellen is niet gelukt.</string>
   <string name="init_restore_running">Herstellen van de cache database…</string>
@@ -614,6 +621,7 @@
   </plurals>
   <string name="cache_waypoints_add">Waypoint toevoegen</string>
   <string name="cache_hint">Hint</string>
+  <string name="cache_hint_not_available">Geen hint beschikbaar</string>
   <string name="cache_logs">Logboek</string>
   <string name="cache_logs_friends_and_own">Vrienden/Eigen Logs</string>
   <string name="cache_dialog_loading_details">Cache details laden…</string>
@@ -656,6 +664,7 @@
   <string name="cache_menu_visit_offline">Enkele klik offline log</string>
   <string name="cache_menu_spoilers">Spoiler afbeeldingen</string>
   <string name="cache_menu_around">Caches rondom</string>
+  <string name="around">Rondom %s</string>
   <string name="cache_menu_event">Toevoegen aan kalender</string>
   <string name="cache_menu_details">Details</string>
   <string name="cache_menu_refresh">Verversen</string>
@@ -667,6 +676,8 @@
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Stem</string>
+  <string name="cache_menu_checker">Open geo checker</string>
+  <string name="cache_menu_ignore">Negeer cache</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Log opgeslagen</string>
   <string name="cache_status_found">Gevonden</string>
@@ -777,6 +788,7 @@
   <string name="search_history_cleared">Geschiedenis leeggemaakt</string>
   <string name="waypoint_coordinate_formats_plain">Plat</string>
   <string name="from_clipboard">Van klembord</string>
+  <string name="copy_to_clipboard">Kopieer naar klembord</string>
   <string name="visit_tweet">Post deze vondst op Twitter</string>
   <string name="map_map">Kaart</string>
   <string name="map_live">Live kaart</string>
@@ -1133,7 +1145,15 @@
   <string name="attribute_offset_cache_no">Geen offset cache</string>
   <string name="quote">Om geocaching makkelijker en gebruikers luier te maken.</string>
   <string name="powered_by">carnero</string>
+  <string name="support_title">Ondersteuning</string>
+  <string name="website_title">Website</string>
+  <string name="facebook_title">Facebook</string>
+  <string name="facebook_link"><a href="">c:geo pagina</a></string>
+  <string name="twitter_title">Twitter</string>
+  <string name="market_title">Google Play</string>
+  <string name="market_link"><a href="">c:geo op Google Play</a></string>
   <string name="about_twitter">Moet <b>c:geo</b> elke cache vondst publiceren naar Twitter?</string>
+  <string name="faq_title">FAQ</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Nieuwe release beschikbaar.\nTik om te installeren.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Nieuwe nightly-release beschikbaar.\nTik om te installeren.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Nieuwe release-candidaad beschikbaar.\nTik om te installeren.</string>
