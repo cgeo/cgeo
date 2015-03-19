@@ -10,6 +10,7 @@ import org.eclipse.jdt.annotation.NonNull;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
@@ -18,6 +19,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
@@ -49,12 +51,15 @@ public final class ActivityMixin {
 
     }
 
-    public static void setTheme(final Activity activity) {
+    private static int getThemeId() {
         if (Settings.isLightSkin()) {
-            activity.setTheme(R.style.light);
-        } else {
-            activity.setTheme(R.style.dark);
+            return R.style.light;
         }
+        return R.style.dark;
+    }
+
+    public static void setTheme(final Activity activity) {
+        activity.setTheme(getThemeId());
     }
 
     public static int getDialogTheme() {
@@ -75,17 +80,30 @@ public final class ActivityMixin {
         ActivityMixin.showToast(activity, activity.getString(resId));
     }
 
+    private static void showCgeoToast(final Context context, final String text, final int toastDuration) {
+        final Toast toast = Toast.makeText(context, text, toastDuration);
+        toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
+        toast.show();
+    }
+
     private static void postShowToast(final Activity activity, final String text, final int toastDuration) {
         if (StringUtils.isNotBlank(text)) {
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    final Toast toast = Toast.makeText(activity, text, toastDuration);
-                    toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
-                    toast.show();
+                    showCgeoToast(activity, text, toastDuration);
                 }
+
             });
         }
+    }
+
+    /**
+     * Show a (long) toast message in application context (e.g. from background threads)
+     */
+    public static void showApplicationToast(final String message) {
+        final Context context = new ContextThemeWrapper(CgeoApplication.getInstance().getApplicationContext(), getThemeId());
+        ActivityMixin.showCgeoToast(context, message, Toast.LENGTH_LONG);
     }
 
     /**

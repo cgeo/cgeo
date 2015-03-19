@@ -78,9 +78,11 @@ import rx.subscriptions.Subscriptions;
 import android.R.color;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
@@ -93,6 +95,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.view.ActionMode;
 import android.text.Editable;
@@ -328,6 +331,13 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(updateReceiver, new IntentFilter(Intents.INTENT_CACHE_CHANGED));
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         startOrStopGeoDataListener();
@@ -355,6 +365,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (cache != null) {
             cache.setChangeNotificationHandler(null);
         }
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(updateReceiver);
         super.onStop();
     }
 
@@ -674,6 +685,17 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         Settings.addCacheToHistory(cache.getGeocode());
     }
+
+    /**
+     * Receives update notifications from asynchronous processes
+     */
+    private final BroadcastReceiver updateReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(final Context context, final Intent intent) {
+            notifyDataSetChanged();
+        }
+    };
 
     /**
      * Tries to navigate to the {@link Geocache} of this activity using the default navigation tool.
