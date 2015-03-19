@@ -231,7 +231,7 @@
   <string name="caches_nearby_button">Netoliese</string>
   <string name="advanced_search_button">Ieškoti</string>
   <string name="stored_caches_button">Išsaugota</string>
-  <string name="any_button">Bet kur</string>
+  <string name="any_button">Eiti į</string>
   <string name="unknown_scan">Nepavyko rasti geo kodo.</string>
   <string name="caches_no_cache">Slėptuvių čia nėra</string>
   <string name="caches_more_caches">Įkelti daugiau slėptuvių</string>
@@ -266,6 +266,7 @@
   <string name="caches_sort_finds">Radimų kiekis</string>
   <string name="caches_sort_state">Būsena</string>
   <string name="caches_sort_storage">Išsaugojimo prietaise data</string>
+  <string name="caches_sort_eventdate">Renginio data</string>
   <string name="caches_select_mode">Pasirinkti</string>
   <string name="caches_select_mode_exit">Nebesirinkti</string>
   <string name="caches_select_invert">Žymėti priešingai</string>

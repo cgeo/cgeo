@@ -43,7 +43,7 @@
   <string name="wp_stage">Steg i multicache</string>
   <string name="wp_puzzle">Spørsmål til svar</string>
   <string name="wp_pkg">Parkeringsplass</string>
-  <string name="wp_trailhead">Startpunkt</string>
+  <string name="wp_trailhead">Stistart</string>
   <string name="wp_waypoint">Referansepunkt</string>
   <string name="wp_original">Opprinnelige koordinater</string>
   <string name="log_found">Funnet</string>
@@ -79,6 +79,7 @@
   <string name="log_saving_and_uploading">Sender logg og laster opp bilde…</string>
   <string name="log_clear">Tøm</string>
   <string name="log_post_not_possible">Laster loggsiden…</string>
+  <string name="log_date_future_not_allowed">Fremtidige loggdatoer er ikke tillatt.</string>
   <string name="log_add">Legg til</string>
   <string name="log_repeat">Gjenta siste logg</string>
   <string name="log_no_rating">Ingen rangering</string>
@@ -108,6 +109,7 @@
   <string name="log_password_title">Passord for logg:</string>
   <string name="log_hint_log_password">Angi passordet for logg</string>
   <string name="log_oc_team_comment">Kommentar fra OC-teamet</string>
+  <string name="log_your_saved_log">Din lagrede logg</string>
   <string-array name="log_image_scales">
     <item>Ingen skalering</item>
     <item>512 px</item>
@@ -123,13 +125,13 @@
   <string name="err_server">Klarte ikke å koble til Geocaching.com (server eller tilkobling nede?)</string>
   <string name="err_server_ec">Får ikke kontakt med Extremcaching.com. Nettstedet kan være nede eller Internettilkoblingen fungerer ikke.</string>
   <string name="err_login">Ingen innloggingsopplysninger lagret</string>
-  <string name="err_login_failed_toast">c:geo kan ikke logge inn. c:geo fungerer frakoblet med lagrede cacher. Sjekk innloggingsinnstillinger eller aktiver Internettforbindelsen.</string>
+  <string name="err_login_failed_toast">c:geo kan ikke logge inn. c:geo fungerer offline med cacher du har lagret. Sjekk innloggingsinnstillinger eller aktiver internettforbindelsen.</string>
   <string name="err_unknown">Ukjent feil</string>
   <string name="err_unknown_address">c:geo klarte ikke finne et sted ut fra denne adressen</string>
   <string name="err_comm">Ukjent tilkoblingsfeil</string>
   <string name="err_missing_auth">Brukernavn eller passord er ikke oppgitt.</string>
   <string name="err_wrong">Feilaktige innloggingsopplysninger</string>
-  <string name="err_maintenance">Geocaching.com er nede for vedlikehold. c:geo arbeider frakoblet med lagrede cacher.</string>
+  <string name="err_maintenance">Geocaching.com er nede for vedlikehold. c:geo arbeider offline med lagrede cacher.</string>
   <string name="err_license">Brukeren har ikke akseptert Geocaching.com sin lisens. c:geo kan ikke laste cachens koordinater.</string>
   <string name="err_unvalidated_account">Du må aktivere kontoen din på Geocaching.com først.</string>
   <string name="err_unpublished">Den forespurte cachen er ikke publisert.</string>
@@ -229,7 +231,7 @@
   <string name="caches_nearby_button">I nærheten</string>
   <string name="advanced_search_button">Søk</string>
   <string name="stored_caches_button">Lagret</string>
-  <string name="any_button">Finn</string>
+  <string name="any_button">Gå til</string>
   <string name="unknown_scan">Fant ingen GC-koder i det skannede bildet.</string>
   <string name="caches_no_cache">ingen cacher</string>
   <string name="caches_more_caches">flere cacher</string>
@@ -263,13 +265,22 @@
   <string name="caches_sort_finds">Antall funn</string>
   <string name="caches_sort_state">Status</string>
   <string name="caches_sort_storage">Dato lagret i c:geo</string>
+  <string name="caches_sort_eventdate">Eventdato</string>
   <string name="caches_select_mode">Velge-modus</string>
   <string name="caches_select_mode_exit">Avslutt velge-modus</string>
   <string name="caches_select_invert">Inverter merking</string>
   <string name="caches_nearby">I nærheten</string>
   <string name="caches_manage">Administrer</string>
   <string name="caches_remove_all">Fjern alle</string>
+  <plurals name="caches_remove_all_confirm">
+    <item quantity="one">Vil du fjerne denne cachen fra listen?</item>
+    <item quantity="other">Vil du fjerne alle %d cachene fra listen din?</item>
+  </plurals>
   <string name="caches_remove_selected">Fjern valgte</string>
+  <plurals name="caches_remove_selected_confirm">
+    <item quantity="one">Vil du fjerne denne cachen fra enheten?</item>
+    <item quantity="other">Vil du slette de %d valgte cachene fra enheten?</item>
+  </plurals>
   <string name="caches_remove_progress">Fjerner cacher</string>
   <string name="caches_delete_events">Slett gamle eventer</string>
   <string name="caches_refresh_selected">Oppdater valgte</string>
@@ -283,12 +294,13 @@
   <string name="caches_recaptcha_hint">Tekst fra bilde</string>
   <string name="caches_recaptcha_continue">Fortsett</string>
   <string name="caches_filter">Filter</string>
-  <string name="caches_filter_title">Filtrer etter</string>
+  <string name="caches_filter_title">Filter</string>
   <string name="caches_filter_size">Størrelse</string>
   <string name="caches_filter_type">Type</string>
   <string name="caches_filter_track">Med sporbare</string>
   <string name="caches_filter_clear">Nullstill filtre</string>
   <string name="caches_filter_modified">Med endrede koordinater</string>
+  <string name="caches_filter_offline_log">Med offlinelogg</string>
   <string name="caches_filter_origin">Opprinnelig posisjon</string>
   <string name="caches_filter_distance">Avstand</string>
   <string name="caches_filter_personal_note">Med personlig notat</string>
@@ -322,12 +334,15 @@
   <string name="list_not_available">Listen er ikke lenger tilgjengelig, bytter til standarlisten</string>
   <string name="about_version">Versjon</string>
   <string name="about_changelog">Oppdateringslogg</string>
+  <string name="about_system">System</string>
   <string name="about_donate">Donér</string>
   <string name="about_donation_more">Donér til\nutviklerne</string>
   <string name="about_contributors">Bidragsytere</string>
   <string name="about_license">Lisens</string>
   <string name="about_apache_license"><a href="">Apache-lisens, versjon 2.0</a></string>
   <string name="about_help">Hjelp</string>
+  <string name="about_system_include">Inkluder den følgende informasjonen når du sender en feilrapport eller ber om mer informasjon fra c:geo:</string>
+  <string name="changelog_github">Liste over alle endringer</string>
   <string name="settings_title_services">Tjenester</string>
   <string name="settings_summary_services">Konfigurer kontoinformasjon og tilgang til tilleggstjenester.</string>
   <string name="settings_title_appearance">Utseende</string>
@@ -377,8 +392,8 @@
   <string name="settings_activate_oc_uk">Aktiver</string>
   <string name="init_oc_uk_description">Gi c:geo tilgang til å bruke opencaching.org.uk for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
   <string name="init_gcvote">GCVote.com</string>
-  <string name="init_gcvote_password_description">For å kunne vurdere en cache, må du følge instruksjonene på GCVote.com og angi ditt GCVote passord her.</string>
-  <string name="err_gcvote_send_rating">Feil ved sending av rating, sjekk GCVote passord i innstillinger eller tøm den.</string>
+  <string name="init_gcvote_password_description">For å kunne vurdere en cache må du følge instruksjonene på GCVote.com og angi ditt GCVote passord her.</string>
+  <string name="err_gcvote_send_rating">Feil ved sending av vurdering. Sjekk at passordet for GCVote i innstillingene er riktig eller fjern passordet.</string>
   <string name="gcvote_sent">Stemmegivning sendt</string>
   <string name="init_twitter">Twitter</string>
   <string name="settings_activate_twitter">Aktiver</string>
@@ -450,6 +465,8 @@
   <string name="init_backup_success">Databasen til c:geo ble kopiert til:</string>
   <string name="init_backup_failed">Sikkerhetskopi av databasen til c:geo mislyktes.</string>
   <string name="init_backup_unnecessary">Databasen er tom, sikkerhetskopiering er ikke nødvendig.</string>
+  <string name="backup_confirm_overwrite">Vil du overskrive den eksisterende sikkerhetskopien fra %s?</string>
+  <string name="restore_confirm_overwrite">Vil du overskrive %s på enheten din med sikkerhetskopien?</string>
   <string name="init_restore_success">Gjenoppretting fullført.</string>
   <string name="init_restore_failed">Gjenoppretting mislyktes.</string>
   <string name="init_restore_running">Gjenoppretter databasen…</string>
@@ -557,7 +574,7 @@
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_dialog_completed_oc">c:geo har nå fått godkjenning til å kommunisere med %s.</string>
   <plurals name="cache_counts">
-    <item quantity="one">Én cache</item>
+    <item quantity="one">En cache</item>
     <item quantity="other">%1$d cacher</item>
   </plurals>
   <string name="cache_offline">Offline</string>
@@ -602,11 +619,12 @@
   <string name="cache_images">Bilder</string>
   <string name="cache_waypoints">Veipunkter</string>
   <plurals name="waypoints">
-    <item quantity="one">1 veipunkt</item>
+    <item quantity="one">Et veipunkt</item>
     <item quantity="other">%d veipunkter</item>
   </plurals>
   <string name="cache_waypoints_add">Legg til veipunkter</string>
   <string name="cache_hint">Hint</string>
+  <string name="cache_hint_not_available">Ingen hint tilgjengelig</string>
   <string name="cache_logs">Loggbok</string>
   <string name="cache_logs_friends_and_own">Venners/egne logger</string>
   <string name="cache_dialog_loading_details">Laster cachens detaljer…</string>
@@ -646,9 +664,10 @@
   <string name="cache_menu_streetview">Gatevisning</string>
   <string name="cache_menu_browser">Åpne i nettleseren</string>
   <string name="cache_menu_visit">Logg funn</string>
-  <string name="cache_menu_visit_offline">Ett klikk frakoblet Logg</string>
+  <string name="cache_menu_visit_offline">Ett-klikks offlinelogg</string>
   <string name="cache_menu_spoilers">Bilder</string>
   <string name="cache_menu_around">Cacher i nærheten</string>
+  <string name="around">Rundt %s</string>
   <string name="cache_menu_event">Eksporter til kalender</string>
   <string name="cache_menu_details">Detaljer</string>
   <string name="cache_menu_refresh">Oppdater</string>
@@ -658,6 +677,8 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Avgi stemme</string>
+  <string name="cache_menu_checker">Åpne geo-checker</string>
+  <string name="cache_menu_ignore">Ignorer cache</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Logg lagret</string>
   <string name="cache_status_found">Funnet</string>
@@ -768,6 +789,7 @@
   <string name="search_history_cleared">Historikken er slettet</string>
   <string name="waypoint_coordinate_formats_plain">Ren tekst</string>
   <string name="from_clipboard">Fra utklippstavlen.</string>
+  <string name="copy_to_clipboard">Kopier til utklippstavle</string>
   <string name="visit_tweet">Del dette funnet på Twitter</string>
   <string name="map_map">Kart</string>
   <string name="map_live">Live-kart</string>
@@ -799,7 +821,7 @@
   <string name="search_address_button">Søk med adresse</string>
   <string name="search_geo">Geokode</string>
   <string name="search_geo_button">Søk med geokode</string>
-  <string name="search_kw">Nøkklord</string>
+  <string name="search_kw">Nøkkelord</string>
   <string name="search_kw_prefill">Nøkkelord</string>
   <string name="search_kw_button">Søk med nøkkelord</string>
   <string name="search_fbu">Funnet av bruker</string>
@@ -809,7 +831,7 @@
   <string name="search_hbu_prefill">Eier</string>
   <string name="search_hbu_button">Søk med</string>
   <string name="search_tb">Sporbar (trackable)</string>
-  <string name="search_tb_hint">Identifisering av sporbare</string>
+  <string name="search_tb_hint">Sporingskode</string>
   <string name="search_tb_button">Søk etter sporbare</string>
   <string name="search_destination">Lokaliser ved hjelp av koordinater</string>
   <string name="search_direction_rel">Fra denne plassen</string>
@@ -819,7 +841,7 @@
   <string name="search_pocket_title">Pocket Query</string>
   <string name="search_pocket_loading">Laster en liste med Pocket Queries</string>
   <string name="search_pocket_select">Velg Pocket Query</string>
-  <string name="trackable">Sporbar</string>
+  <string name="trackable">Sporbar (TB eller coin)</string>
   <string name="trackable_details_loading">Laster detaljene til den sporbare…</string>
   <string name="trackable_log_touch">Logg sporbar</string>
   <string name="trackable_browser_open">Åpne i nettleseren</string>
@@ -872,7 +894,7 @@
   <string name="helper_contacts_description">Gjør det mulig å åpne en kontakt (i telefonens adressebok) direkte fra en logg så du enklere kan be om hjelp fra dine venner.</string>
   <string name="helper_sendtocgeo_description">Send til c:geo (send2c:geo) er en nettleserutvidelse <strong>for din pc</strong>. På geocaching.com kan du sende cacher til din smarttelefon ved hjelp av en egen knapp i nettleseren.</string>
   <string name="helper_locus_title">Locus</string>
-  <string name="helper_locus_description">utendørs-navigasjon app for din telefon eller tablet. Se topo kart frakoblet, spore ruten din, let etter turbokser eller bruk en stemme guide og gjør enda mer.</string>
+  <string name="helper_locus_description">App for utendørs navigasjon til din mobil eller tablet. I appen kan du se topo-kart offline, spore ruten din, lete etter turbokser, bruke en stemmeguide og mye annet.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
   <string name="helper_gpsstatus_description">Du kan bruke radaren i denne appen sammen med c:geo. Den gir mye GPS-relatert informasjon.</string>
   <string name="helper_bluetoothgps_title">Blåtann-GPS</string>
@@ -1124,7 +1146,15 @@
   <string name="attribute_offset_cache_no">Ikke offset-cache</string>
   <string name="quote">For å gjøre geocaching enklere og brukerne latere.</string>
   <string name="powered_by">carnero</string>
+  <string name="support_title">Støtte</string>
+  <string name="website_title">Nettside</string>
+  <string name="facebook_title">Facebook</string>
+  <string name="facebook_link"><a href=""> c:geo-siden</a></string>
+  <string name="twitter_title">Twitter</string>
+  <string name="market_title">Google Play</string>
+  <string name="market_link"><a href="">c:geo i Google Play</a></string>
   <string name="about_twitter">Ønsker du at <b>c:geo</b> skal poste en status på Twitter hver gang du logger ett funn via <b>c:geo</b>?</string>
+  <string name="faq_title">Ofte Stilte Spørsmål</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Ny versjon tilgjengelig. \nKlikk for å installere.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Ny \"nightly build\" er tilgjengelig.\nKlikk for å installere.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Ny \"release candidate\" er tilgjengelig.\nKlikk for å installere.</string>
@@ -1159,7 +1189,7 @@
   </plurals>
   <plurals name="favorite_points">
     <item quantity="one">%s favoritt</item>
-    <item quantity="other">%s favoritt</item>
+    <item quantity="other">%s favoritter</item>
   </plurals>
   <string name="more_than_percent_favorite_points">&gt; %d%% favoritter.</string>
   <string name="cgeo_shortcut">c:geo-snartvei</string>

@@ -230,7 +230,7 @@
   <string name="caches_nearby_button">Cercanos</string>
   <string name="advanced_search_button">Buscar</string>
   <string name="stored_caches_button">Guardados</string>
-  <string name="any_button">Manual</string>
+  <string name="any_button">Ir a</string>
   <string name="unknown_scan">No se ha encontrado ningún geocódigo en la imagen.</string>
   <string name="caches_no_cache">Ningún caché</string>
   <string name="caches_more_caches">Cargar más cachés</string>
@@ -264,6 +264,7 @@
   <string name="caches_sort_finds">Encontrados</string>
   <string name="caches_sort_state">Estado</string>
   <string name="caches_sort_storage">Fecha de guardado en dispositivo</string>
+  <string name="caches_sort_eventdate">Fecha del evento</string>
   <string name="caches_select_mode">Modo selección</string>
   <string name="caches_select_mode_exit">Salir de modo selección</string>
   <string name="caches_select_invert">Invertir selección</string>
@@ -611,6 +612,7 @@
   </plurals>
   <string name="cache_waypoints_add">Añadir waypoint</string>
   <string name="cache_hint">Pista</string>
+  <string name="cache_hint_not_available">No hay pista disponible</string>
   <string name="cache_logs">Registros</string>
   <string name="cache_logs_friends_and_own">Amigos/propios</string>
   <string name="cache_dialog_loading_details">Cargando detalles del caché…</string>
@@ -1136,6 +1138,7 @@
   <string name="market_title">Google Play</string>
   <string name="market_link"><a href="">c:geo en Google Play</a></string>
   <string name="about_twitter">¿Debe <b>c:geo</b> publicar el nuevo estado en Twitter cuando registras un caché?</string>
+  <string name="faq_title">Preguntas frecuentes</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Nueva versión disponible. \nClick para instalar.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Nueva versión nightly build disponible.\nHaz clic para instalar.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Nueva versión candidate disponible.\nHaz clic para instalar.</string>

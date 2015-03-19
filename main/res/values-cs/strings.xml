@@ -108,6 +108,7 @@
   <string name="log_password_title">Logovací heslo:</string>
   <string name="log_hint_log_password">Zadej své logovací heslo</string>
   <string name="log_oc_team_comment">Komentář týmu OC</string>
+  <string name="log_your_saved_log">Tvé uložené logy</string>
   <string-array name="log_image_scales">
     <item>Bez měřítka</item>
     <item>512 px</item>
@@ -229,7 +230,7 @@
   <string name="caches_nearby_button">Nejbližší</string>
   <string name="advanced_search_button">Hledání</string>
   <string name="stored_caches_button">Uložené</string>
-  <string name="any_button">Cíl</string>
+  <string name="any_button">Přejít</string>
   <string name="unknown_scan">Ve výsledku skenu nenalezen žádný geokód.</string>
   <string name="caches_no_cache">Žádná keš</string>
   <string name="caches_more_caches">Načíst další keše</string>
@@ -264,6 +265,7 @@
   <string name="caches_sort_finds">Počtu nálezů</string>
   <string name="caches_sort_state">Stavu</string>
   <string name="caches_sort_storage">Data uložení do zařízení</string>
+  <string name="caches_sort_eventdate">Datum události</string>
   <string name="caches_select_mode">Mód výběru</string>
   <string name="caches_select_mode_exit">Opustit mód výběru</string>
   <string name="caches_select_invert">Invertovat výběr</string>
@@ -631,6 +633,7 @@
   </plurals>
   <string name="cache_waypoints_add">Přidat Bod trasy</string>
   <string name="cache_hint">Nápověda</string>
+  <string name="cache_hint_not_available">Nápověda není dostupná</string>
   <string name="cache_logs">Logbook</string>
   <string name="cache_logs_friends_and_own">Moje logy a logy přátel</string>
   <string name="cache_dialog_loading_details">Načítání detailů keše…</string>
@@ -673,6 +676,7 @@
   <string name="cache_menu_visit_offline">Rychlý offline log</string>
   <string name="cache_menu_spoilers">Obrázky</string>
   <string name="cache_menu_around">Keš v okolí</string>
+  <string name="around">V okolí %s</string>
   <string name="cache_menu_event">Přidat do kalendáře</string>
   <string name="cache_menu_details">Detaily</string>
   <string name="cache_menu_refresh">Obnovit</string>
@@ -683,6 +687,8 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Hlasovat</string>
+  <string name="cache_menu_checker">Otevřít Geochecker</string>
+  <string name="cache_menu_ignore">Ignorovat keš</string>
   <string name="cache_status">Stav</string>
   <string name="cache_status_offline_log">Připravený Log</string>
   <string name="cache_status_found">Nalezena</string>
