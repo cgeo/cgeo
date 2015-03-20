@@ -77,6 +77,9 @@ public class Intents {
     public static final String EXTRA_OAUTH_TOKEN_PUBLIC_KEY = PREFIX_OAUTH + "publicTokenPref";
     public static final String EXTRA_OAUTH_TOKEN_SECRET_KEY = PREFIX_OAUTH + "secretTokenPref";
 
+    private static final String PREFIX_INTERNAL = "cgeo.geocaching.intent.internal.";
+    public static final String INTENT_CACHE_CHANGED = PREFIX_INTERNAL + "cache-changed";
+
     public static Intent putListType(final Intent intent, final @NonNull CacheListType listType) {
         intent.putExtra(Intents.EXTRA_LIST_TYPE, listType.name());
         return intent;
