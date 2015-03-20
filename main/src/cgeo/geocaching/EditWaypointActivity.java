@@ -428,7 +428,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
             // bearing & distance
-            double bearing;
+            final double bearing;
             try {
                 bearing = Double.parseDouble(bearingText);
             } catch (final NumberFormatException ignored) {
@@ -436,7 +436,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 return;
             }
 
-            double distance;
+            final double distance;
             try {
                 distance = DistanceParser.parseDistance(distanceText,
                         !Settings.useImperialUnits());
