@@ -1058,8 +1058,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             final int[] filterIndex = data.getIntArrayExtra(FilterActivity.EXTRA_FILTER_RESULT);
             setFilter(FilterActivity.getFilterFromPosition(filterIndex[0], filterIndex[1]));
         }
-
-        refreshCurrentList();
+        // refresh only offline lists
+        if (search == null) {
+            refreshCurrentList();
+        }
     }
 
     private String getDisplayName(final Uri uri) {
