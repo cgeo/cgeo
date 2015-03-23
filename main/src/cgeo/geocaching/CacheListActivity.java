@@ -1059,7 +1059,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setFilter(FilterActivity.getFilterFromPosition(filterIndex[0], filterIndex[1]));
         }
 
-        refreshCurrentList();
+        if (type == CacheListType.OFFLINE) {
+            refreshCurrentList();
+        }
     }
 
     private String getDisplayName(final Uri uri) {
