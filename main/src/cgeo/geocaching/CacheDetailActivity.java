@@ -135,8 +135,10 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -1810,15 +1812,19 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             // TODO: fix layout, then switch back to Android-resource and delete copied one
             // this copy is modified to respect the text color
             final TrackableListAdapter adapterTrackables = new TrackableListAdapter(CacheDetailActivity.this);
-            final ArrayList<Trackable> trackables = new ArrayList<>();
+            final HashMap<String, Trackable> trackables = new HashMap<>();
             if (cache.getInventory() != null) {
-                trackables.addAll(cache.getInventory());
+                for (final Trackable trackable: cache.getInventory()) {
+                    trackables.put(trackable.getGeocode(), trackable);
+                }
             }
             if (genericTrackables != null) {
-                trackables.addAll(genericTrackables);
+                for (final Trackable trackable: genericTrackables) {
+                    trackables.put(trackable.getGeocode(), trackable);
+                }
             }
-            for (final Trackable trackable: trackables) {
-                adapterTrackables.add(trackable);
+            for (final Map.Entry<String, Trackable> trackable: trackables.entrySet()) {
+                adapterTrackables.add(trackable.getValue());
             }
             view.setAdapter(adapterTrackables);
             view.setOnItemClickListener(new OnItemClickListener() {
