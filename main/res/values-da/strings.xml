@@ -79,6 +79,7 @@
   <string name="log_saving_and_uploading">Sender logbesked og billede…</string>
   <string name="log_clear">Fjern</string>
   <string name="log_post_not_possible">Indlæser logside…</string>
+  <string name="log_date_future_not_allowed">Logdatoer, der ligger i fremtiden, er ikke tilladt.</string>
   <string name="log_add">Tilføj</string>
   <string name="log_repeat">Gentag sidste logbesked</string>
   <string name="log_no_rating">Ingen vurdering</string>
@@ -229,6 +230,7 @@
   <string name="caches_nearby_button">I nærheden</string>
   <string name="advanced_search_button">Søg</string>
   <string name="stored_caches_button">Gemte</string>
+  <string name="any_button">Navigation</string>
   <string name="unknown_scan">Der blev ikke fundet nogen geokoder i skanningen.</string>
   <string name="caches_no_cache">Ingen cache</string>
   <string name="caches_more_caches">Flere cacher</string>
@@ -262,6 +264,7 @@
   <string name="caches_sort_finds">Fund</string>
   <string name="caches_sort_state">Status</string>
   <string name="caches_sort_storage">Dato for lagring på enhed</string>
+  <string name="caches_sort_eventdate">Eventdato</string>
   <string name="caches_select_mode">Markér</string>
   <string name="caches_select_mode_exit">Afslut markering</string>
   <string name="caches_select_invert">Omvend markering</string>
@@ -333,6 +336,7 @@
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Hjælp</string>
   <string name="about_system_include">Vedhæft følgende systemoplysninger når du sender en fejlrapport eller beder om yderligere oplysninger om c:geo:</string>
+  <string name="changelog_github">Liste over alle ændringer</string>
   <string name="settings_title_services">Tjenester</string>
   <string name="settings_summary_services">Konfigurér oplysninger om brugerkonto og adgang til valgfrie tjenester.</string>
   <string name="settings_title_appearance">Udseende</string>
@@ -445,6 +449,8 @@
   <string name="init_backup_success">Database blev kopieret til:</string>
   <string name="init_backup_failed">Backup af database fejlede.</string>
   <string name="init_backup_unnecessary">Databasen er tom og det er ikke nødvendigt at tage backup.</string>
+  <string name="backup_confirm_overwrite">Vil du overskrive den eksisterende backup fra %s?</string>
+  <string name="restore_confirm_overwrite">Vil du overskrive %s på din enhed med denne backup?</string>
   <string name="init_restore_success">Gendannelse fuldført.</string>
   <string name="init_restore_failed">Gendannelse fejlede.</string>
   <string name="init_restore_running">Gendanner cache-database…</string>
@@ -601,6 +607,7 @@
   </plurals>
   <string name="cache_waypoints_add">Tilføj waypoint</string>
   <string name="cache_hint">Hint</string>
+  <string name="cache_hint_not_available">Intet hint tilgængeligt</string>
   <string name="cache_logs">Logbog</string>
   <string name="cache_logs_friends_and_own">Venners/egne logbeskeder</string>
   <string name="cache_dialog_loading_details">Indlæser cachedetaljer…</string>
@@ -643,6 +650,7 @@
   <string name="cache_menu_visit_offline">Hurtig offline logbesked</string>
   <string name="cache_menu_spoilers">Spoilerbilleder</string>
   <string name="cache_menu_around">Cacher i nærheden</string>
+  <string name="around">I nærheden af %s</string>
   <string name="cache_menu_event">Tilføj til kalender</string>
   <string name="cache_menu_details">Detaljer</string>
   <string name="cache_menu_refresh">Genindlæs</string>
@@ -652,6 +660,8 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Stem</string>
+  <string name="cache_menu_checker">Åben geochecker</string>
+  <string name="cache_menu_ignore">Ignorér cache</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Log gemt</string>
   <string name="cache_status_found">Fundet</string>
@@ -762,6 +772,7 @@
   <string name="search_history_cleared">Historik slettet</string>
   <string name="waypoint_coordinate_formats_plain">Simpel</string>
   <string name="from_clipboard">Fra udklipsholder</string>
+  <string name="copy_to_clipboard">Kopiér til upklipsholder</string>
   <string name="visit_tweet">Post fund på Twitter</string>
   <string name="map_map">Kort</string>
   <string name="map_live">Live-kort</string>
@@ -1117,7 +1128,15 @@
   <string name="attribute_offset_cache_yes">Offset-cache</string>
   <string name="attribute_offset_cache_no">Ikke en offset-cache</string>
   <string name="quote">To make geocaching easier, to make users lazier.</string>
+  <string name="support_title">Support</string>
+  <string name="website_title">Websted</string>
+  <string name="facebook_title">Facebook</string>
+  <string name="facebook_link"><a href="">c:geo webside</a></string>
+  <string name="twitter_title">Twitter</string>
+  <string name="market_title">Google Play</string>
+  <string name="market_link"><a href="">c:geo på Google Play</a></string>
   <string name="about_twitter">Skal <b>c:geo</b> sende status til Twitter hver gang du logger en cache?</string>
+  <string name="faq_title">Ofte stillede spørgsmål</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Ny udgave er tilgængelig.\nKlik for at installere.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Nyt nightly build af c:geo er tilgængelig.\nKlik for at installere.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Ny release kandidat af c:geo er tilgængelig.\nKlik for at installere.</string>
