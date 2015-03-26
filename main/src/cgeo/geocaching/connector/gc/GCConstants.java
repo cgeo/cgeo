@@ -68,12 +68,11 @@ public final class GCConstants {
 
     // Info box top-right
     public static final Pattern PATTERN_LOGIN_NAME = Pattern.compile("\"SignedInProfileLink\">(.*?)</a>");
-    public static final Pattern PATTERN_MEMBER_STATUS = Pattern.compile("<span id=\"ctl00_litPMLevel\">([^<]+)</span>");
-    static final String MEMBER_STATUS_RENEW = "<a id=\"ctl00_hlRenew";
-    public static final String MEMBER_STATUS_PREMIUM = "Premium Member";
-    public static final String MEMBER_STATUS_CHARTER = "Charter Member";
+    public static final Pattern PATTERN_MEMBERSHIP = Pattern.compile("<dl class=\"membership-details\">.*?<dt>Membership</dt>.*?<dd>\\s*(\\p{Alpha}+)\\s*</dd>", Pattern.DOTALL);
+    public static final String MEMBER_STATUS_PREMIUM = "Premium";
+    public static final String MEMBER_STATUS_CHARTER = "Charter";
     /** Use replaceAll("[,.]","") on the resulting string before converting to an int */
-    static final Pattern PATTERN_CACHES_FOUND = Pattern.compile("<strong[^>]*>.*?([\\d,.]+) Caches? Found", Pattern.DOTALL);
+    static final Pattern PATTERN_CACHES_FOUND = Pattern.compile("<span[^>]*>.*?([\\d,.]+) Find?", Pattern.DOTALL);
     static final Pattern PATTERN_AVATAR_IMAGE_PROFILE_PAGE = Pattern.compile("src=\"(https?://(img(?:cdn)?\\.geocaching\\.com|[^>\"]+\\.cloudfront\\.net)/avatar/[0-9a-f-]+\\.jpg)\"[^>]*alt=\"");
     static final Pattern PATTERN_LOGIN_NAME_LOGIN_PAGE = Pattern.compile("ctl00_ContentBody_lbUsername\">.*<strong>(.*)</strong>");
     static final Pattern PATTERN_CUSTOMDATE = Pattern.compile("<option selected=\"selected\" value=\"([ /.Mdy-]+)\">");

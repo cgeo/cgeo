@@ -26,7 +26,7 @@ public class GCLoginTest extends TestCase {
 
     @Suppress // It currently fails on CI
     public void testAvatar() {
-        assertThat(instance.downloadAvatarAndGetMemberStatus()).isNotNull();
+        assertThat(instance.downloadAvatar()).isNotNull();
     }
 
 }
