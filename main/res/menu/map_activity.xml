@@ -31,6 +31,7 @@
     </item>
     <item
         android:id="@+id/menu_hint"
+        android:icon="@drawable/ic_menu_hint"
         android:title="@string/cache_hint"
         android:visible="false"
         app:showAsAction="ifRoom|withText">

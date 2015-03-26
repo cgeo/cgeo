@@ -4,6 +4,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.activity.ShowcaseViewBuilder;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
@@ -19,6 +20,8 @@ import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
+
+import com.github.amlcurran.showcaseview.targets.ActionItemTarget;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
@@ -103,6 +106,8 @@ public class CompassActivity extends AbstractActionBarActivity {
 
         // make sure we can control the TTS volume
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
+
+        presentShowcase();
     }
 
     @Override
@@ -224,6 +229,13 @@ public class CompassActivity extends AbstractActionBarActivity {
                 }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public ShowcaseViewBuilder getShowcase() {
+        return new ShowcaseViewBuilder(this)
+                .setTarget(new ActionItemTarget(this, R.id.menu_hint))
+                .setContent(R.string.showcase_compass_hint_title, R.string.showcase_compass_hint_text);
     }
 
     private void setTarget(@NonNull final Geopoint coords, final String newDescription) {

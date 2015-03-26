@@ -1319,6 +1319,8 @@
     <string name="showcase_main_text">c:geo now places menu items in the title bar like other modern apps. Some items are hidden behind the dotted symbol. Long press a button to see its description.</string>
     <string name="showcase_cachelist_title">Switching lists</string>
     <string name="showcase_cachelist_text">You can switch between your geocache lists by clicking the title of the list.</string>
+    <string name="showcase_compass_hint_title">Show the hint</string>
+    <string name="showcase_compass_hint_text">This new menu item might give you an idea where to find the cache - it shows the hint, if available.</string>
     <string name="confirm_log_title">Unusual log type</string>
     <string name="confirm_log_message">You want to log \'%s\'. Are you sure?</string>
 </resources>
