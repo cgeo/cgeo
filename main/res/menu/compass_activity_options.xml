@@ -3,14 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <item
-        android:id="@+id/menu_map"
-        android:icon="@drawable/ic_menu_mapmode"
-        android:title="@string/caches_on_map"
+        android:id="@+id/menu_hint"
+        android:icon="@drawable/ic_menu_hint"
+        android:title="@string/cache_hint"
         app:showAsAction="ifRoom|withText">
     </item>
     <item
-        android:id="@+id/menu_hint"
-        android:title="@string/cache_hint"
+        android:id="@+id/menu_map"
+        android:icon="@drawable/ic_menu_mapmode"
+        android:title="@string/caches_on_map"
         app:showAsAction="ifRoom|withText">
     </item>
     <item
