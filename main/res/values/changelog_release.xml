@@ -3,6 +3,7 @@
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
     <b>Next feature release:</b>\n
+    · Fix: Adaption to website changes on gc.com\n
     · New: Distance and direction shown on map of a single cache\n
     · New: Show own saved log first in logbook\n
     · New: Show hint in compass and map action bar\n
