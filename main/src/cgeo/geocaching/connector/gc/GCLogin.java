@@ -32,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.regex.Matcher;
 
 public class GCLogin extends AbstractLogin {
 
@@ -87,6 +88,7 @@ public class GCLogin extends AbstractLogin {
                 return login(false);
             }
             setHomeLocation();
+            refreshMemberStatus();
             detectGcCustomDate();
             return StatusCode.NO_ERROR; // logged in
         }
@@ -124,6 +126,8 @@ public class GCLogin extends AbstractLogin {
             }
             Log.i("Successfully logged in Geocaching.com as " + username + " (" + Settings.getGCMemberStatus() + ')');
             Settings.setCookieStore(Cookies.dumpCookieStore());
+            setHomeLocation();
+            refreshMemberStatus();
             detectGcCustomDate();
             return StatusCode.NO_ERROR; // logged in
         }
@@ -192,10 +196,6 @@ public class GCLogin extends AbstractLogin {
                 Log.e("getLoginStatus: bad cache count", e);
             }
             setActualCachesFound(cachesCount);
-            Settings.setGCMemberStatus(TextUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, null));
-            if (page.contains(GCConstants.MEMBER_STATUS_RENEW)) {
-                Settings.setGCMemberStatus(GCConstants.MEMBER_STATUS_PREMIUM);
-            }
             return true;
         }
 
@@ -242,15 +242,10 @@ public class GCLogin extends AbstractLogin {
         return false;
     }
 
-    public Observable<Drawable> downloadAvatarAndGetMemberStatus() {
+    public Observable<Drawable> downloadAvatar() {
         try {
             final String responseData = StringUtils.defaultString(Network.getResponseData(Network.getRequest("http://www.geocaching.com/my/")));
             final String profile = TextUtils.replaceWhitespace(responseData);
-
-            Settings.setGCMemberStatus(TextUtils.getMatch(profile, GCConstants.PATTERN_MEMBER_STATUS, true, null));
-            if (profile.contains(GCConstants.MEMBER_STATUS_RENEW)) {
-                Settings.setGCMemberStatus(GCConstants.MEMBER_STATUS_PREMIUM);
-            }
 
             setActualCachesFound(Integer.parseInt(removeDotAndComma(TextUtils.getMatch(profile, GCConstants.PATTERN_CACHES_FOUND, true, "-1"))));
 
@@ -282,6 +277,22 @@ public class GCLogin extends AbstractLogin {
                     assert homeLocationStr != null;
                     Log.i("Setting home location to " + homeLocationStr);
                     Settings.setHomeLocation(homeLocationStr);
+                }
+            }
+        });
+    }
+
+    private static void refreshMemberStatus() {
+        RxUtils.networkScheduler.createWorker().schedule(new Action0() {
+            @Override
+            public void call() {
+                final String page = StringUtils.defaultString(Network.getResponseData(Network.getRequest("https://www.geocaching.com/account/settings/membership")));
+                final Matcher match = GCConstants.PATTERN_MEMBERSHIP.matcher(page);
+                if (match.find()) {
+                    Log.d("Setting member status to " + match.group(1));
+                    Settings.setGCMemberStatus(match.group(1));
+                } else {
+                    Log.w("Cannot determine member status");
                 }
             }
         });
