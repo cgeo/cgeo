@@ -35,7 +35,7 @@ import java.util.Locale;
 
 public class GCLogin extends AbstractLogin {
 
-    private final static String ENGLISH = "<a href=\"#\">English &#9660;</a>";
+    private final static String ENGLISH = "<a href=\"#\">English</a>";
 
     private static final String LANGUAGE_CHANGE_URI = "http://www.geocaching.com/my/souvenirs.aspx";
 
