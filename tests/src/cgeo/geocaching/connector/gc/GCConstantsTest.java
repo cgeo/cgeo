@@ -11,8 +11,8 @@ import android.text.Html;
 public class GCConstantsTest extends AndroidTestCase {
 
     // adapt the following after downloading new mock html files
-    public static final String MOCK_LOGIN_NAME = "JoSaMaJa";
-    public static final int MOCK_CACHES_FOUND = 484;
+    public static final String MOCK_LOGIN_NAME = "ra_sch";
+    public static final int MOCK_CACHES_FOUND = 1298;
 
     public static void testLocation() {
         // GC37GFJ
@@ -26,15 +26,15 @@ public class GCConstantsTest extends AndroidTestCase {
     }
 
     public static void testCacheCount() {
-        assertCacheCount(1510, "<strong style=\"display:block\"> 1.510 Caches Found</strong>");
-        assertCacheCount(1510, "<strong style=\"display:block\"> 1,510 Caches Found</strong>");
+        assertCacheCount(1510, "<span>1.510 Finds</span>");
+        assertCacheCount(1510, "<span>1,510 Finds</span>");
         assertCacheCount(MOCK_CACHES_FOUND, MockedCache.readCachePage("GC2CJPF"));
     }
 
     private static void assertCacheCount(final int count, final String html) {
         try {
             assertEquals(count, Integer.parseInt(TextUtils.getMatch(html, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll("[,.]", "")));
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
             fail();
         }
     }
