@@ -678,6 +678,7 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble Smartwatch</string>
   <string name="cache_menu_vote">Bewerten</string>
+  <string name="cache_menu_checker">Öffne Geochecker</string>
   <string name="cache_menu_ignore">Cache ignorieren</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Gespeicherter Log</string>
@@ -764,6 +765,7 @@
   <string name="waypoint_note">Notiz</string>
   <string name="waypoint_visited">Besucht</string>
   <string name="waypoint_save">Speichern</string>
+  <string name="waypoint_cancel_edit">Abbrechen</string>
   <string name="waypoint_loading">Lade Wegpunkt…</string>
   <string name="waypoint_do_not_touch_cache_coordinates">Cache-Koordinaten nicht ändern</string>
   <string name="waypoint_set_as_cache_coords">Als Cache-Koordinaten lokal setzen</string>
@@ -1209,6 +1211,8 @@
   <string name="showcase_main_text">c:geo nutzt nun die Titelzeile für Menü-Optionen wie in anderen modernen Apps. Einige Menüpunkte sind dabei hinter der Drei-Punkt Schaltfläche versteckt. Ein langer Druck auf eine Schaltfläche zeigt die Bedeutung.</string>
   <string name="showcase_cachelist_title">Liste wechseln</string>
   <string name="showcase_cachelist_text">Du kannst zwischen deinen Listen wechseln, indem du auf den Titel der Liste klickst.</string>
+  <string name="showcase_compass_hint_title">Zeige den Hint</string>
+  <string name="showcase_compass_hint_text">Diese neue Option könnte dir helfen den Cache zu finden - sie zeigt den Hint an, wenn es einen gibt.</string>
   <string name="confirm_log_title">Ungewöhnlicher Log-Typ</string>
   <string name="confirm_log_message">Du möchtest \'%s\' loggen. Bist du dir sicher?</string>
 </resources>

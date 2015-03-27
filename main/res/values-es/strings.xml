@@ -669,6 +669,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Votar</string>
+  <string name="cache_menu_checker">Abrir Geochecker</string>
   <string name="cache_menu_ignore">Ignorar caché</string>
   <string name="cache_status">Estado</string>
   <string name="cache_status_offline_log">Registro guardado</string>
@@ -755,6 +756,7 @@
   <string name="waypoint_note">Nota</string>
   <string name="waypoint_visited">Visitado</string>
   <string name="waypoint_save">Guardar</string>
+  <string name="waypoint_cancel_edit">Cancelar</string>
   <string name="waypoint_loading">Cargando waypoint…</string>
   <string name="waypoint_do_not_touch_cache_coordinates">No cambiar las coordenadas del caché</string>
   <string name="waypoint_set_as_cache_coords">Establecer como coordenadas del caché en c:geo</string>
