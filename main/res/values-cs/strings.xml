@@ -687,7 +687,6 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Hlasovat</string>
-  <string name="cache_menu_checker">Otevřít Geochecker</string>
   <string name="cache_menu_ignore">Ignorovat keš</string>
   <string name="cache_status">Stav</string>
   <string name="cache_status_offline_log">Připravený Log</string>

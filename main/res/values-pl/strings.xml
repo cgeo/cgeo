@@ -669,7 +669,6 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Zegarek Pebble</string>
   <string name="cache_menu_vote">Głosuj</string>
-  <string name="cache_menu_checker">Otwórz geo checker</string>
   <string name="cache_menu_ignore">Ignoruj skrzynkę</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Zapamiętany wpis</string>

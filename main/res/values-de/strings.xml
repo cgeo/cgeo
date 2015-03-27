@@ -678,7 +678,6 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble Smartwatch</string>
   <string name="cache_menu_vote">Bewerten</string>
-  <string name="cache_menu_checker">Öffne Geochecker</string>
   <string name="cache_menu_ignore">Cache ignorieren</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Gespeicherter Log</string>

@@ -676,7 +676,6 @@
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Stem</string>
-  <string name="cache_menu_checker">Open geo checker</string>
   <string name="cache_menu_ignore">Negeer cache</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Log opgeslagen</string>
