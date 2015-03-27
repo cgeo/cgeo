@@ -1212,6 +1212,8 @@
   <string name="showcase_main_text">c:geo place maintenant les entrées de menu dans la barre de titre. Certaines sont cachées derrière les trois points. Un appui long donne la description d\'un bouton.</string>
   <string name="showcase_cachelist_title">Changer de liste</string>
   <string name="showcase_cachelist_text">Vous pouvez basculer entre vos différentes listes en cliquant sur le nom de la liste courante.</string>
+  <string name="showcase_compass_hint_title">Afficher l\'indice</string>
+  <string name="showcase_compass_hint_text">Cette nouvelle entrée de menu peut vous aider à trouver la géocache - elle montre l\'indice, s\'il y en a un.</string>
   <string name="confirm_log_title">Type inhabituel d\'entrée de journal</string>
   <string name="confirm_log_message">Vous allez envoyer \'%s\'. Êtes-vous sûr(e) ?</string>
 </resources>

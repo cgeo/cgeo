@@ -109,6 +109,7 @@
   <string name="log_password_title">Adgangskode til log:</string>
   <string name="log_hint_log_password">Skriv adgangskode til log</string>
   <string name="log_oc_team_comment">OC Hold-meddelelse</string>
+  <string name="log_your_saved_log">Dine gemte log</string>
   <string-array name="log_image_scales">
     <item>Ingen skalering</item>
     <item>512 px</item>
@@ -295,6 +296,7 @@
   <string name="caches_filter_track">Med Trackables</string>
   <string name="caches_filter_clear">Nulstil filtre</string>
   <string name="caches_filter_modified">Med ændret position</string>
+  <string name="caches_filter_offline_log">Med offline log</string>
   <string name="caches_filter_origin">Kilde</string>
   <string name="caches_filter_distance">Afstand</string>
   <string name="caches_filter_personal_note">Med personlig note</string>
@@ -660,6 +662,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Stem</string>
+  <string name="cache_menu_checker">Åben Geochecker</string>
   <string name="cache_menu_ignore">Ignorér cache</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Log gemt</string>
@@ -746,6 +749,7 @@
   <string name="waypoint_note">Note</string>
   <string name="waypoint_visited">Besøgt</string>
   <string name="waypoint_save">Gem</string>
+  <string name="waypoint_cancel_edit">Annullér</string>
   <string name="waypoint_loading">Indlæser waypoint…</string>
   <string name="waypoint_do_not_touch_cache_coordinates">Ingen ændringer i cacheposition</string>
   <string name="waypoint_set_as_cache_coords">Sæt som cacheposition i c:geo</string>
@@ -1186,6 +1190,8 @@
   <string name="showcase_main_text">Som i andre moderne apps er menupunkter i c:geo nu placeret i titellinien. Nogle menupunkter er skjult og bliver først vist når du trykker på knappen med tre prikker. Et langt tryk på et menupunkt åbner en beskrivelse af menupunktet.</string>
   <string name="showcase_cachelist_title">Skift af liste</string>
   <string name="showcase_cachelist_text">Du kan skifte mellem dine lister ved at trykke på listens titel.</string>
+  <string name="showcase_compass_hint_title">Vis tip</string>
+  <string name="showcase_compass_hint_text">Dette nye menupunkt kan give dig en idé om hvor man kan finde cachen - det viser tippet, hvis det er tilgængelig.</string>
   <string name="confirm_log_title">Usædvanlig logtype</string>
   <string name="confirm_log_message">Du er ved at logge \"%s\". Er du sikker?</string>
 </resources>

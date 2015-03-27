@@ -79,6 +79,7 @@
   <string name="log_saving_and_uploading">Odosielanie logu a nahrávanie obrázku…</string>
   <string name="log_clear">Vyčistiť</string>
   <string name="log_post_not_possible">Načítanie stránky s logmi…</string>
+  <string name="log_date_future_not_allowed">Log s budúcim dátumom nie je povolený.</string>
   <string name="log_add">Pridať</string>
   <string name="log_repeat">Zopakovať posledný log</string>
   <string name="log_no_rating">Nehlasovať</string>
@@ -108,6 +109,7 @@
   <string name="log_password_title">Logovacie heslo:</string>
   <string name="log_hint_log_password">Zadajte svoje logovacie heslo</string>
   <string name="log_oc_team_comment">Komentár tímu OC</string>
+  <string name="log_your_saved_log">Tvoj uložený log</string>
   <string-array name="log_image_scales">
     <item>Bez zmeny mierky</item>
     <item>512 px</item>
@@ -229,6 +231,7 @@
   <string name="caches_nearby_button">V okolí</string>
   <string name="advanced_search_button">Hľadanie</string>
   <string name="stored_caches_button">Uložené</string>
+  <string name="any_button">Choď k</string>
   <string name="unknown_scan">Nepodarilo sa nájsť geokód v načítanom výsledku.</string>
   <string name="caches_no_cache">Žiadne skrýše</string>
   <string name="caches_more_caches">Načítať ďalšie skrýše</string>
@@ -258,6 +261,7 @@
   <string name="caches_sort_finds">počtu nájdení</string>
   <string name="caches_sort_state">stavu</string>
   <string name="caches_sort_storage">dátumu uloženia v zariadení</string>
+  <string name="caches_sort_eventdate">Dátum Eventu</string>
   <string name="caches_select_mode">Mód výberu</string>
   <string name="caches_select_mode_exit">Opustiť mód výberu</string>
   <string name="caches_select_invert">Inverzný výber</string>
@@ -294,6 +298,7 @@
   <string name="caches_filter_track">S trasovateľnými predmetmi</string>
   <string name="caches_filter_clear">Bez filtrovania</string>
   <string name="caches_filter_modified">S upravenými súradnicami</string>
+  <string name="caches_filter_offline_log">S offline logmi</string>
   <string name="caches_filter_origin">Pôvod</string>
   <string name="caches_filter_distance">Vzdialenosť</string>
   <string name="caches_filter_personal_note">S osobnou poznámkou</string>
@@ -335,6 +340,7 @@
   <string name="about_apache_license"><a href=""> Apache License, verzia 2.0</a></string>
   <string name="about_help">Pomoc</string>
   <string name="about_system_include">Keď budete posielať správu o chybe alebo budete chcieť vedieť viac o c:geo, uveďte, prosím, nasledujúce systémové informácie:</string>
+  <string name="changelog_github">Zoznam všetkých zmien</string>
   <string name="settings_title_services">Služby</string>
   <string name="settings_summary_services">Konfigurovať informácie o používateľskom konte a prístup k voliteľným službám.</string>
   <string name="settings_title_appearance">Vzhľad</string>
@@ -457,6 +463,8 @@
   <string name="init_backup_success">Databáza c:geo bola úspešne skopírovaná do:</string>
   <string name="init_backup_failed">Záloha databázy c:geo zlyhala.</string>
   <string name="init_backup_unnecessary">Databáza je prázdna, záloha nie je potrebná.</string>
+  <string name="backup_confirm_overwrite">Naozaj chceš prepísať existujúcu zálohu z %s?</string>
+  <string name="restore_confirm_overwrite">Naozaj chceš prepísať %s na tvojom zariadení zálohou?</string>
   <string name="init_restore_success">Úspešne obnovené.</string>
   <string name="init_restore_failed">Obnova zlyhala.</string>
   <string name="init_restore_running">Obnovovanie databázy skrýš…</string>
@@ -616,6 +624,7 @@
   </plurals>
   <string name="cache_waypoints_add">Pridať bod</string>
   <string name="cache_hint">Nápoveda</string>
+  <string name="cache_hint_not_available">Žiadna nápoveda</string>
   <string name="cache_logs">Logbook</string>
   <string name="cache_logs_friends_and_own">Logy priateľov/vlastné</string>
   <string name="cache_dialog_loading_details">Načítanie detailov skrýše…</string>
@@ -658,6 +667,7 @@
   <string name="cache_menu_visit_offline">Zalogovať offline</string>
   <string name="cache_menu_spoilers">Obrázky s nápovedou</string>
   <string name="cache_menu_around">Skrýše v okolí</string>
+  <string name="around">Okolo %s</string>
   <string name="cache_menu_event">Pridať do kalendára</string>
   <string name="cache_menu_details">Detaily</string>
   <string name="cache_menu_refresh">Obnoviť</string>
@@ -668,6 +678,8 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Hlasovať</string>
+  <string name="cache_menu_checker">Otvoriť Geochecker</string>
+  <string name="cache_menu_ignore">Ignorovať keš</string>
   <string name="cache_status">Stav</string>
   <string name="cache_status_offline_log">Uložený log</string>
   <string name="cache_status_found">Nájdená</string>
@@ -753,6 +765,7 @@
   <string name="waypoint_note">poznámka</string>
   <string name="waypoint_visited">navštívený</string>
   <string name="waypoint_save">Uložiť</string>
+  <string name="waypoint_cancel_edit">Zrušiť</string>
   <string name="waypoint_loading">Načítanie bodu trasy…</string>
   <string name="waypoint_do_not_touch_cache_coordinates">Bez zmeny súradníc skrýše</string>
   <string name="waypoint_set_as_cache_coords">Nastaviť ako súradnice skrýše v c:geo</string>
@@ -778,6 +791,7 @@
   <string name="search_history_cleared">História zmazaná</string>
   <string name="waypoint_coordinate_formats_plain">Iba text</string>
   <string name="from_clipboard">Zo schránky</string>
+  <string name="copy_to_clipboard">Kopírovať do schránky</string>
   <string name="visit_tweet">Informovať o nájdení na Twitteri</string>
   <string name="map_map">Mapa</string>
   <string name="map_live">Aktívna mapa</string>
@@ -1134,7 +1148,15 @@
   <string name="attribute_offset_cache_no">Nie je offset cache</string>
   <string name="quote">Pre jednoduchšie hľadanie skrýš a používateľov lenivších.</string>
   <string name="powered_by">carnero</string>
+  <string name="support_title">Podpora</string>
+  <string name="website_title">Webová stránka</string>
+  <string name="facebook_title">Facebook</string>
+  <string name="facebook_link"><a href="">stránka c:geo</a></string>
+  <string name="twitter_title">Twitter</string>
+  <string name="market_title">Google Play</string>
+  <string name="market_link"><a href="">c:geo na Google Play</a></string>
   <string name="about_twitter">Chcete, aby <b>c:geo</b> napísalo na váš Twitter vždy, keď zapíšete nájdenie skrýše?</string>
+  <string name="faq_title">FAQ</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Je dostupné nové vydanie.\nKliknite pre inštaláciu.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Je dostupná nová nočná zostava.\nKliknite pre inštaláciu.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Je dostupná nová verzia „release candidate“.\nKliknite pre inštaláciu.</string>
@@ -1195,6 +1217,8 @@
   <string name="showcase_main_text">c:geo teraz umiestňuje položky menu v záhlaví, ako iné moderné aplikácie. Niektoré položky sú skryté za symbolom bodiek. Dlhým podržaním tlačidla sa zobrazí jeho popis.</string>
   <string name="showcase_cachelist_title">Prepínanie zoznamov</string>
   <string name="showcase_cachelist_text">Môžete prepínať medzi svojimi zoznamami skrýš kliknutím na názov zoznamu.</string>
+  <string name="showcase_compass_hint_title">Zobraziť nápovedu</string>
+  <string name="showcase_compass_hint_text">Táto vec ti môže pomôcť pri hľadaní skrýše - zobrazí nápovedu ak je dostupná.</string>
   <string name="confirm_log_title">Nezvyčajný typ logu</string>
   <string name="confirm_log_message">Chceš zalogovať \'%s\'. Určite?</string>
 </resources>

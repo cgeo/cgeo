@@ -231,6 +231,7 @@
   <string name="caches_nearby_button">Najbliższe</string>
   <string name="advanced_search_button">Szukaj</string>
   <string name="stored_caches_button">Zapisane</string>
+  <string name="any_button">Idź do</string>
   <string name="unknown_scan">c:geo nie znalazł żadnego GC-kodu w wynikach skanowania.</string>
   <string name="caches_no_cache">Brak skrzynek</string>
   <string name="caches_more_caches">Więcej skrzynek</string>
@@ -669,6 +670,7 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Zegarek Pebble</string>
   <string name="cache_menu_vote">Głosuj</string>
+  <string name="cache_menu_checker">Otwórz Geochecker\'a</string>
   <string name="cache_menu_ignore">Ignoruj skrzynkę</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Zapamiętany wpis</string>
@@ -755,6 +757,7 @@
   <string name="waypoint_note">Notatka</string>
   <string name="waypoint_visited">Odwiedzony</string>
   <string name="waypoint_save">Zapisz</string>
+  <string name="waypoint_cancel_edit">Anuluj</string>
   <string name="waypoint_loading">Ładuję punkt nawigacji…</string>
   <string name="waypoint_do_not_touch_cache_coordinates">Współrzędne skrzynki bez zmian</string>
   <string name="waypoint_set_as_cache_coords">Ustaw jako współrzędne skrzynki w c:geo</string>
@@ -1206,6 +1209,8 @@
   <string name="showcase_main_text">c:geo umieszcza teraz opcje menu w pasku tytułowym jak inne współczesne programy. Niektóre opcje są schowane za kropkowanym symbolem. Naciśnij dłużej przycisk by zobaczyć opis.</string>
   <string name="showcase_cachelist_title">Przełączanie list</string>
   <string name="showcase_cachelist_text">Możesz przełączać między listami skrzynek klikając tytuł listy.</string>
+  <string name="showcase_compass_hint_title">Podpowiedź</string>
+  <string name="showcase_compass_hint_text">Ten nowy element menu może Ci pomóc przy szukaniu skrzynki - pokazuje podpowiedź, o ile jest dostępna.</string>
   <string name="confirm_log_title">Niezwykły typ wpisu</string>
   <string name="confirm_log_message">Chcesz wpisać \'%s\'. Czy jesteś pewien?</string>
 </resources>
