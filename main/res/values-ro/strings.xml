@@ -675,7 +675,6 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Ceas \"Pebble\"</string>
   <string name="cache_menu_vote">Votează</string>
-  <string name="cache_menu_checker">Accesează Geochecker</string>
   <string name="cache_menu_ignore">Ignoră geocutia</string>
   <string name="cache_status">Stare</string>
   <string name="cache_status_offline_log">Jurnal salvat</string>

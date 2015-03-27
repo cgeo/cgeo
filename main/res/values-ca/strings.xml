@@ -109,6 +109,7 @@
   <string name="log_password_title">Contrasenya d\'accés:</string>
   <string name="log_hint_log_password">Introduïu la contrasenya d\'accés</string>
   <string name="log_oc_team_comment">Comentari de l\'equip OC</string>
+  <string name="log_your_saved_log">El registre que heu desat</string>
   <string-array name="log_image_scales">
     <item>Sense escala</item>
     <item>512 px</item>
@@ -230,6 +231,7 @@
   <string name="caches_nearby_button">Propers</string>
   <string name="advanced_search_button">Cerca</string>
   <string name="stored_caches_button">Desats</string>
+  <string name="any_button">Vés a</string>
   <string name="unknown_scan">No s\'ha trobat cap geocodi en el resultat de l\'exploració.</string>
   <string name="caches_no_cache">Aquí no hi ha catxés</string>
   <string name="caches_more_caches">Carrega més catxés</string>
@@ -263,6 +265,7 @@
   <string name="caches_sort_finds">Trobats</string>
   <string name="caches_sort_state">Estat</string>
   <string name="caches_sort_storage">Data d\'emmagatzemat al dispositiu</string>
+  <string name="caches_sort_eventdate">Data de la trobada</string>
   <string name="caches_select_mode">Mode seleccionar</string>
   <string name="caches_select_mode_exit">Surt del mode seleccionar</string>
   <string name="caches_select_invert">Inverteix la selecció</string>
@@ -339,6 +342,7 @@
   <string name="about_apache_license"><a href="">Llicència Apache, versió 2.0</a></string>
   <string name="about_help">Ajuda</string>
   <string name="about_system_include">Si us plau incloure la següent informació de sistema quan envieu un informe d\'error o demanar més informació sobre c:geo:</string>
+  <string name="changelog_github">Llista de tots els canvis</string>
   <string name="settings_title_services">Serveis</string>
   <string name="settings_summary_services">Configureu la informació del compte d\'usuari i l\'accés a serveis opcionals.</string>
   <string name="settings_title_appearance">Aparença</string>
@@ -623,6 +627,7 @@
   </plurals>
   <string name="cache_waypoints_add">Afegeix una fita</string>
   <string name="cache_hint">Pista</string>
+  <string name="cache_hint_not_available">No hi ha cap pista disponible</string>
   <string name="cache_logs">Llibre de registre</string>
   <string name="cache_logs_friends_and_own">Registres dels amics o propis</string>
   <string name="cache_dialog_loading_details">S\'està carregant els detalls del catxé…</string>
@@ -665,6 +670,7 @@
   <string name="cache_menu_visit_offline">Registra fora de línia amb un sol clic</string>
   <string name="cache_menu_spoilers">Imatges d\'ajuda</string>
   <string name="cache_menu_around">Catxés propers</string>
+  <string name="around">Al voltant de %s</string>
   <string name="cache_menu_event">Afegeix al calendari</string>
   <string name="cache_menu_details">Detalls</string>
   <string name="cache_menu_refresh">Actualitza</string>
@@ -675,6 +681,7 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Vota</string>
+  <string name="cache_menu_ignore">Ignora el catxé</string>
   <string name="cache_status">Estat</string>
   <string name="cache_status_offline_log">Registre desat</string>
   <string name="cache_status_found">Trobat</string>
@@ -785,6 +792,7 @@
   <string name="search_history_cleared">S\'ha esborrat l\'historial</string>
   <string name="waypoint_coordinate_formats_plain">Senzill</string>
   <string name="from_clipboard">Des del porta-retalls</string>
+  <string name="copy_to_clipboard">Copia al porta-retalls</string>
   <string name="visit_tweet">Envia aquest \"trobat\" al Twitter</string>
   <string name="map_map">Mapa</string>
   <string name="map_live">Mapa en viu</string>

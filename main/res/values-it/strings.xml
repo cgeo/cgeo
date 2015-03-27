@@ -671,7 +671,6 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Vota</string>
-  <string name="cache_menu_checker">Apri geo checker</string>
   <string name="cache_menu_ignore">Ignora cache</string>
   <string name="cache_status">Stato</string>
   <string name="cache_status_offline_log">Log salvato</string>

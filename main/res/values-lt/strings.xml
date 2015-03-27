@@ -671,7 +671,6 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Balsuoti</string>
-  <string name="cache_menu_checker">Atidaryti geo tikrintuvą</string>
   <string name="cache_menu_ignore">Ignoruoti slėptuvę</string>
   <string name="cache_status">Būsena</string>
   <string name="cache_status_offline_log">Išsaugotas įrašas</string>

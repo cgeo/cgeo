@@ -680,7 +680,6 @@
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Rösta</string>
-  <string name="cache_menu_checker">Öppna geochecker</string>
   <string name="cache_menu_ignore">Ignorera cache</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Sparad logg</string>

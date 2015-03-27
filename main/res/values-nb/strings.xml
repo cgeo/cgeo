@@ -677,7 +677,6 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Avgi stemme</string>
-  <string name="cache_menu_checker">Åpne geo-checker</string>
   <string name="cache_menu_ignore">Ignorer cache</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Logg lagret</string>

@@ -679,7 +679,7 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Noter</string>
-  <string name="cache_menu_checker">Ouvrir le vérificateur</string>
+  <string name="cache_menu_checker">Ouvrir le geovérificateur</string>
   <string name="cache_menu_ignore">Ignorer la cache</string>
   <string name="cache_status">Statut</string>
   <string name="cache_status_offline_log">Visite sauvée hors-ligne</string>
@@ -766,6 +766,7 @@
   <string name="waypoint_note">Note</string>
   <string name="waypoint_visited">Marquer comme visité</string>
   <string name="waypoint_save">Sauver</string>
+  <string name="waypoint_cancel_edit">Annuler</string>
   <string name="waypoint_loading">Chargement d\'une étape…</string>
   <string name="waypoint_do_not_touch_cache_coordinates">Ne pas modifier les coordonnées de la cache</string>
   <string name="waypoint_set_as_cache_coords">Utiliser comme coordonnées de la cache dans c:geo</string>

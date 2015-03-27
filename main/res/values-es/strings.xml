@@ -109,6 +109,7 @@
   <string name="log_password_title">Contraseña:</string>
   <string name="log_hint_log_password">Introduzca su contraseña</string>
   <string name="log_oc_team_comment">Comentario equipo OC</string>
+  <string name="log_your_saved_log">Tu registro guardado</string>
   <string-array name="log_image_scales">
     <item>Sin redimensionar</item>
     <item>512 px</item>
@@ -456,6 +457,8 @@
   <string name="init_backup_success">La base de datos de c:geo se ha copiado a:</string>
   <string name="init_backup_failed">Ha fallado la copia de seguridad.</string>
   <string name="init_backup_unnecessary">La base de datos está vacía, no es necesaria una copia de seguridad.</string>
+  <string name="backup_confirm_overwrite">¿Quieres sobreescribir la copia de seguridad existente de %s?</string>
+  <string name="restore_confirm_overwrite">¿Quieres sobreescribir %s en tu dispositivo con la copia de seguridad?</string>
   <string name="init_restore_success">Restauración completa.</string>
   <string name="init_restore_failed">Restauración errónea.</string>
   <string name="init_restore_running">Restaurando la base de datos de cachés…</string>
@@ -656,6 +659,7 @@
   <string name="cache_menu_visit_offline">Registro rápido sin conexión</string>
   <string name="cache_menu_spoilers">Revelaciones</string>
   <string name="cache_menu_around">Cachés cercanos</string>
+  <string name="around">Cerca de %s</string>
   <string name="cache_menu_event">Añadir al calendario</string>
   <string name="cache_menu_details">Detalles</string>
   <string name="cache_menu_refresh">Actualizar</string>
@@ -665,7 +669,6 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Votar</string>
-  <string name="cache_menu_checker">Abrir geochecker</string>
   <string name="cache_menu_ignore">Ignorar caché</string>
   <string name="cache_status">Estado</string>
   <string name="cache_status_offline_log">Registro guardado</string>
@@ -1133,8 +1136,10 @@
   <string name="attribute_offset_cache_yes">Caché offset</string>
   <string name="attribute_offset_cache_no">No es caché offset</string>
   <string name="quote">Para hacer el geocaching más sencillo, para hacer a los usuarios más vagos.</string>
+  <string name="support_title">Soporte técnico</string>
   <string name="website_title">Sitio Web</string>
   <string name="facebook_title">Facebook</string>
+  <string name="facebook_link"><a href="">Página de c:geo</a></string>
   <string name="twitter_title">Twitter</string>
   <string name="market_title">Google Play</string>
   <string name="market_link"><a href="">c:geo en Google Play</a></string>
