@@ -79,6 +79,7 @@
   <string name="log_saving_and_uploading">A enviar o registo e a imagem…</string>
   <string name="log_clear">Limpar</string>
   <string name="log_post_not_possible">A carregar página de registo…</string>
+  <string name="log_date_future_not_allowed">Registos com datas futuras não são permitidos.</string>
   <string name="log_add">Adicionar</string>
   <string name="log_repeat">Repetir último registo</string>
   <string name="log_no_rating">Não votar</string>
@@ -108,6 +109,7 @@
   <string name="log_password_title">Password do registo:</string>
   <string name="log_hint_log_password">Inserira a password do registo</string>
   <string name="log_oc_team_comment">Comentário da OC Team</string>
+  <string name="log_your_saved_log">O seu registo gravado</string>
   <string-array name="log_image_scales">
     <item>Não dimensionar</item>
     <item>512 px</item>
@@ -229,6 +231,7 @@
   <string name="caches_nearby_button">Por perto</string>
   <string name="advanced_search_button">Pesquisar</string>
   <string name="stored_caches_button">Arquivo</string>
+  <string name="any_button">Ir para</string>
   <string name="unknown_scan">Sem resultados do scan.</string>
   <string name="caches_no_cache">Nenhuma cache</string>
   <string name="caches_more_caches">Mais caches</string>
@@ -262,6 +265,7 @@
   <string name="caches_sort_finds">Encontradas</string>
   <string name="caches_sort_state">Estado</string>
   <string name="caches_sort_storage">Data gravada no dispositivo</string>
+  <string name="caches_sort_eventdate">Data do evento</string>
   <string name="caches_select_mode">Modo de selecção</string>
   <string name="caches_select_mode_exit">Sair do modo de selecção</string>
   <string name="caches_select_invert">Inverter selecção</string>
@@ -292,6 +296,7 @@
   <string name="caches_filter_track">Com trackables</string>
   <string name="caches_filter_clear">Limpar filtros</string>
   <string name="caches_filter_modified">Com as coordenadas modificadas</string>
+  <string name="caches_filter_offline_log">Com registo offline</string>
   <string name="caches_filter_origin">Origem</string>
   <string name="caches_filter_distance">Distância</string>
   <string name="caches_filter_personal_note">Com nota pessoal</string>
@@ -333,6 +338,7 @@
   <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
   <string name="about_help">Ajuda</string>
   <string name="about_system_include">Por favor inclua as seguintes informações de sistema ao enviar um relatório de bug ou ao pedir mais informações sobre c:geo:</string>
+  <string name="changelog_github">Lista de todas as alterações</string>
   <string name="settings_title_services">Serviços</string>
   <string name="settings_summary_services">Configure a informação da conta de utilizador e o acesso a serviços opcionais.</string>
   <string name="settings_title_appearance">Aparência</string>
@@ -454,6 +460,8 @@
   <string name="init_backup_success">A base de dados do c:geo foi copiada com sucesso</string>
   <string name="init_backup_failed">O backup da base de dados do c:geo falhou.</string>
   <string name="init_backup_unnecessary">Base de dados vazia, não é necessário um backup.</string>
+  <string name="backup_confirm_overwrite">Quer substituir o backup existente de %s?</string>
+  <string name="restore_confirm_overwrite">Quer substituir %s no seu dispositivo com o backup?</string>
   <string name="init_restore_success">Restauro concluído.</string>
   <string name="init_restore_failed">O restauro falhou.</string>
   <string name="init_restore_running">A restaurar a base de dados de caches…</string>
@@ -612,6 +620,7 @@
   </plurals>
   <string name="cache_waypoints_add">Adicionar ponto de referência</string>
   <string name="cache_hint">Pista</string>
+  <string name="cache_hint_not_available">Nenhuma pista disponível</string>
   <string name="cache_logs">Logbook</string>
   <string name="cache_logs_friends_and_own">Registos de amigos/próprios</string>
   <string name="cache_dialog_loading_details">A carregar os detalhes da cache…</string>
@@ -654,6 +663,7 @@
   <string name="cache_menu_visit_offline">Registo offline rápido</string>
   <string name="cache_menu_spoilers">Imagens spoiler</string>
   <string name="cache_menu_around">Caches próximas</string>
+  <string name="around">Perto de %s</string>
   <string name="cache_menu_event">Adicionar ao calendário</string>
   <string name="cache_menu_details">Detalhes</string>
   <string name="cache_menu_refresh">Actualizar</string>
@@ -664,6 +674,8 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Seixo</string>
   <string name="cache_menu_vote">Voto</string>
+  <string name="cache_menu_checker">Abrir Geochecker</string>
+  <string name="cache_menu_ignore">Ignorar a cache</string>
   <string name="cache_status">Estado</string>
   <string name="cache_status_offline_log">Registo gravado</string>
   <string name="cache_status_found">Encontrada</string>
@@ -749,6 +761,7 @@
   <string name="waypoint_note">Nota</string>
   <string name="waypoint_visited">Visitado</string>
   <string name="waypoint_save">Gravar</string>
+  <string name="waypoint_cancel_edit">Cancelar</string>
   <string name="waypoint_loading">A carregar ponto de referência…</string>
   <string name="waypoint_do_not_touch_cache_coordinates">Nenhuma mudança às coordenadas da cache</string>
   <string name="waypoint_set_as_cache_coords">Definir como coordenadas da cache no c:geo</string>
@@ -774,6 +787,7 @@
   <string name="search_history_cleared">Histórico limpo</string>
   <string name="waypoint_coordinate_formats_plain">Plano</string>
   <string name="from_clipboard">Da área de transferência</string>
+  <string name="copy_to_clipboard">Copiar para área de transferência</string>
   <string name="visit_tweet">Publicar esta descoberta no Twitter</string>
   <string name="map_map">Mapa</string>
   <string name="map_live">Mapa ao vivo</string>
@@ -1130,7 +1144,15 @@
   <string name="attribute_offset_cache_no">Cache sem offset de translação</string>
   <string name="quote">Para tornar o geocaching mais fácil, para tornar os utilizadores mais preguiçosos.</string>
   <string name="powered_by">carnero</string>
+  <string name="support_title">Suporte</string>
+  <string name="website_title">Página Web</string>
+  <string name="facebook_title">Facebook</string>
+  <string name="facebook_link"><a href="">Página do c:geo</a></string>
+  <string name="twitter_title">Twitter</string>
+  <string name="market_title">Google Play</string>
+  <string name="market_link"><a href="">c:geo no Google Play</a></string>
   <string name="about_twitter">O <b>c:geo</b> deve publicar no Twitter de cada vez que uma cache foi registrada?</string>
+  <string name="faq_title">Perguntas Frequentes</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Nova versão disponível.\nClique para instalar.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Nova \'nightly build\' disponível.\nClique para instalar.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Nova \'release candidate\' disponível .\nClique para instalar.</string>
@@ -1185,6 +1207,8 @@
   <string name="showcase_main_text">c:Geo coloca agora itens de menu na barra de título como outras aplicações modernas. Alguns itens estão escondidos atrás do símbolo dos pontos. Prima longamente um botão para ver sua descrição.</string>
   <string name="showcase_cachelist_title">A trocar de listas</string>
   <string name="showcase_cachelist_text">Pode alternar entre listas de caches clicando no título da lista.</string>
+  <string name="showcase_compass_hint_title">Mostrar a dica</string>
+  <string name="showcase_compass_hint_text">montra_bussola_dica_texto</string>
   <string name="confirm_log_title">Tipo de registo invulgar</string>
   <string name="confirm_log_message">Quer fazer o registo \'%s\'. Tem a certeza?</string>
 </resources>

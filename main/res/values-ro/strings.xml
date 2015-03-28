@@ -675,6 +675,7 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Ceas \"Pebble\"</string>
   <string name="cache_menu_vote">Votează</string>
+  <string name="cache_menu_checker">Accesează Geochecker</string>
   <string name="cache_menu_ignore">Ignoră geocutia</string>
   <string name="cache_status">Stare</string>
   <string name="cache_status_offline_log">Jurnal salvat</string>
@@ -761,6 +762,7 @@
   <string name="waypoint_note">Notă</string>
   <string name="waypoint_visited">Vizitat</string>
   <string name="waypoint_save">Salvează</string>
+  <string name="waypoint_cancel_edit">Anulează</string>
   <string name="waypoint_loading">Încărcare punct…</string>
   <string name="waypoint_do_not_touch_cache_coordinates">Nu se modifică coordonatele cutiei</string>
   <string name="waypoint_set_as_cache_coords">Salvează ca coordonatele geocutiei în c:geo</string>
@@ -1182,6 +1184,8 @@
   <string name="showcase_main_text">c:geo foloseşte meniu în bara de titlu precum alte aplicaţii moderne. Unele elemente sunt ascunse în spatele simbolului punctat. O apăsare prelungită pe un buton afişează descrierea acestuia.</string>
   <string name="showcase_cachelist_title">Comutare între liste</string>
   <string name="showcase_cachelist_text">Poţi să schimbi lista afişată apăsând pe titlul listei.</string>
+  <string name="showcase_compass_hint_title">Arată indiciu</string>
+  <string name="showcase_compass_hint_text">Această opţiune îţi poate da informaţii suplimentare despre unde ar putea fi ascunsă geocutia - afişează indiciul, dacă există.</string>
   <string name="confirm_log_title">Tip neobişnuit de însemnare</string>
   <string name="confirm_log_message">Vrei să scrii o însemnare pentru \'%s\'. Eşti sigur?</string>
 </resources>

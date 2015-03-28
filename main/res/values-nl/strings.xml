@@ -676,6 +676,7 @@
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Stem</string>
+  <string name="cache_menu_checker">Open Geochecker</string>
   <string name="cache_menu_ignore">Negeer cache</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Log opgeslagen</string>
@@ -762,6 +763,7 @@
   <string name="waypoint_note">Notitie</string>
   <string name="waypoint_visited">Bezocht</string>
   <string name="waypoint_save">Opslaan</string>
+  <string name="waypoint_cancel_edit">Annuleren</string>
   <string name="waypoint_loading">Waypoint laden…</string>
   <string name="waypoint_do_not_touch_cache_coordinates">Wijzig cachecoördinaten niet</string>
   <string name="waypoint_set_as_cache_coords">Zet als cachecoördinaten in c:geo</string>
@@ -1004,7 +1006,7 @@
   <string name="attribute_snowshoes_no">Geen sneeuwschoenen nodig</string>
   <string name="attribute_skiis_yes">Langlaufski\'s nodig</string>
   <string name="attribute_skiis_no">Langlaufski\'s niet nodig</string>
-  <string name="attribute_s_tool_yes">Speciate gereedschappen nodig</string>
+  <string name="attribute_s_tool_yes">Speciale gereedschappen nodig</string>
   <string name="attribute_s_tool_no">Geen speciale gereedschappen nodig</string>
   <string name="attribute_wirelessbeacon_yes">Draadloos baken</string>
   <string name="attribute_wirelessbeacon_no">Geen draadloos baken</string>
@@ -1207,6 +1209,8 @@
   <string name="showcase_main_text">c:geo plaatst nu menu-items in de titelbalk, zoals veel andere moderne apps. Sommige items zijn verborgen achter het symbool met de drie puntjes. Druk lang op een knop om de beschrijving te zien.</string>
   <string name="showcase_cachelist_title">Wisselen van lijst</string>
   <string name="showcase_cachelist_text">Je kan wisselen tussen geocache lijsten door te klikken op de titel van de lijst.</string>
+  <string name="showcase_compass_hint_title">Toon hint</string>
+  <string name="showcase_compass_hint_text">Dit nieuwe menu-item kan een idee geven waar de cache gevonden kan worden - het toont de hint, indien beschikbaar.</string>
   <string name="confirm_log_title">Ongebruikelijk logtype</string>
   <string name="confirm_log_message">Je wilt \'%s\' loggen. Weet je het zeker?</string>
 </resources>

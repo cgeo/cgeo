@@ -1201,6 +1201,8 @@
   <string name="showcase_main_text">c:geo coloca ahora los elementos del menú en la barra de título como otras apps modernas. Algunos elementos se esconden detrás del símbolo de puntos. Presiona de manera larga para ver su descripción.</string>
   <string name="showcase_cachelist_title">Cambio entre listas</string>
   <string name="showcase_cachelist_text">Puedes cambiar entre tus listas de cachés haciendo clic sobre el nombre de la lista.</string>
+  <string name="showcase_compass_hint_title">Mostrar la pista</string>
+  <string name="showcase_compass_hint_text">Este nuevo elemento de menú puede darte una idea donde se encuentra la caché - demuestra la pista, si está disponible.</string>
   <string name="confirm_log_title">Tipo de registro inusual</string>
   <string name="confirm_log_message">Vas a registrar \'%s\'. ¿Estás seguro?</string>
 </resources>

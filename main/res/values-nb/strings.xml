@@ -677,6 +677,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Avgi stemme</string>
+  <string name="cache_menu_checker">Åpne Geochecker</string>
   <string name="cache_menu_ignore">Ignorer cache</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Logg lagret</string>
@@ -763,6 +764,7 @@
   <string name="waypoint_note">Note</string>
   <string name="waypoint_visited">Besøkte</string>
   <string name="waypoint_save">Save</string>
+  <string name="waypoint_cancel_edit">Avbryt</string>
   <string name="waypoint_loading">Laster veipunkt…</string>
   <string name="waypoint_do_not_touch_cache_coordinates">Ingen endring i cachens koordinater</string>
   <string name="waypoint_set_as_cache_coords">Angi som cachens koordinater i c:geo</string>
@@ -1200,6 +1202,8 @@
   <string name="showcase_main_text">c:geo har nå plassert menyelementer i tittellinjen, slik som andre moderne app-er. Noen elementer er skjult bak symbolet med prikker. Langt trykk på en knapp viser en beskrivelse av funksjonen.</string>
   <string name="showcase_cachelist_title">Bytter lister.</string>
   <string name="showcase_cachelist_text">Du kan bytte mellom geocache lister ved å klikke på tittelen på listen.</string>
+  <string name="showcase_compass_hint_title">Vis hint</string>
+  <string name="showcase_compass_hint_text">Denne nye menyen kan gi deg hjelp til å finne cachen - her vises hintet, hvis det er tilgjengelig.</string>
   <string name="confirm_log_title">Uvanlig loggtype</string>
   <string name="confirm_log_message">Du vil logge \'%s\'. Er du sikker?</string>
 </resources>
