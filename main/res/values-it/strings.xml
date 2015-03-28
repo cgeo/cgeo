@@ -671,6 +671,7 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Vota</string>
+  <string name="cache_menu_checker">Open Geochecker</string>
   <string name="cache_menu_ignore">Ignora cache</string>
   <string name="cache_status">Stato</string>
   <string name="cache_status_offline_log">Log salvato</string>
@@ -757,6 +758,7 @@
   <string name="waypoint_note">Note</string>
   <string name="waypoint_visited">Visitato</string>
   <string name="waypoint_save">Salva</string>
+  <string name="waypoint_cancel_edit">Annulla</string>
   <string name="waypoint_loading">Caricamento waypoint…</string>
   <string name="waypoint_do_not_touch_cache_coordinates">Nessuna modifica alle coordinate cache</string>
   <string name="waypoint_set_as_cache_coords">Setta come coordinate cache in c:geo</string>
@@ -1202,6 +1204,8 @@
   <string name="showcase_main_text">c:geo ora ha le voci di menu nella barra del titolo come altre moderne applicazioni. Alcuni elementi potrebbero essere nascosti dietro il simbolo dei puntini. Tenere premuto un bottone per vederne la descrizione.</string>
   <string name="showcase_cachelist_title">Cambio di liste</string>
   <string name="showcase_cachelist_text">Puoi cambiare la lista attiva cliccando sul titolo.</string>
+  <string name="showcase_compass_hint_title">Visualizza l\'hint</string>
+  <string name="showcase_compass_hint_text">Questo nuovo menu potrebbe darti un\'idea di dove si trova il cache. Mostra l\'hint, se disponibile.</string>
   <string name="confirm_log_title">Tipo di Log non usuale</string>
   <string name="confirm_log_message">Si desidera registrare \'%s\'. Sei sicuro?</string>
 </resources>

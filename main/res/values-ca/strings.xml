@@ -681,6 +681,7 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Vota</string>
+  <string name="cache_menu_checker">Obre el Geochecker</string>
   <string name="cache_menu_ignore">Ignora el catxé</string>
   <string name="cache_status">Estat</string>
   <string name="cache_status_offline_log">Registre desat</string>
@@ -767,6 +768,7 @@
   <string name="waypoint_note">Nota</string>
   <string name="waypoint_visited">Visitat</string>
   <string name="waypoint_save">Desa</string>
+  <string name="waypoint_cancel_edit">Cancel•la</string>
   <string name="waypoint_loading">S\'està carregant la fita…</string>
   <string name="waypoint_do_not_touch_cache_coordinates">No s\'ha fet cap canvi a les coordenades del catxé</string>
   <string name="waypoint_set_as_cache_coords">Estableix com a coordenades del catxé al c:geo</string>
@@ -1212,6 +1214,8 @@
   <string name="showcase_main_text">Ara el c:geo posa elements del menú a la barra de títol al igual que altres aplicacions modernes. Alguns elements s\'amaguen darrere el símbol de punts. Premeu el botó de forma llarga per veure la seva descripció.</string>
   <string name="showcase_cachelist_title">Llista de canvis</string>
   <string name="showcase_cachelist_text">Es pot canviar entre les diferents llistes fent un clic al nom de la llista actual.</string>
+  <string name="showcase_compass_hint_title">Mostrar la pista</string>
+  <string name="showcase_compass_hint_text">Aquest element de menú nou podria donar una idea on trobar l\'amagatall - li mostra la pista, si està disponible.</string>
   <string name="confirm_log_title">Tipus de registre poc habitual</string>
   <string name="confirm_log_message">Voleu registrar \'%s\'. N\'esteu segurs?</string>
 </resources>
