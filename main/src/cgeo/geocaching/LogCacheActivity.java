@@ -4,9 +4,12 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import cgeo.geocaching.activity.ShowcaseViewBuilder;
+import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
+import cgeo.geocaching.connector.trackable.TrackableConnector;
+import cgeo.geocaching.connector.trackable.TrackableLoggingManager;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
@@ -38,6 +41,8 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -46,15 +51,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class LogCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent {
+public class LogCacheActivity extends AbstractLoggingActivity implements DateDialog.DateDialogParent, LoaderCallbacks<List<TrackableLog>> {
 
     private static final String SAVED_STATE_RATING = "cgeo.geocaching.saved_state_rating";
     private static final String SAVED_STATE_TYPE = "cgeo.geocaching.saved_state_type";
@@ -70,13 +78,14 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private String geocode = null;
     private String text = null;
     private List<LogType> possibleLogTypes = new ArrayList<>();
-    private List<TrackableLog> trackables = null;
+    private final Set<TrackableLog> trackables = new HashSet<>();
     protected @InjectView(R.id.tweet) CheckBox tweetCheck;
     protected @InjectView(R.id.tweet_box) LinearLayout tweetBox;
     protected @InjectView(R.id.log_password_box) LinearLayout logPasswordBox;
     private SparseArray<TrackableLog> actionButtons;
 
     private ILoggingManager loggingManager;
+    private List<TrackableConnector> trackablesConnectors;
 
     // Data to be saved while reconfiguring
     private float rating;
@@ -87,13 +96,34 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private Uri imageUri;
     private boolean sendButtonEnabled;
 
+    @Override
+    public Loader<List<TrackableLog>> onCreateLoader(final int id, final Bundle bundle) {
+        for (final TrackableConnector connector: trackablesConnectors) {
+            if (id == connector.getInventoryLoaderId()) {
+                return connector.getInventoryLoader(app);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(final Loader<List<TrackableLog>> listLoader, final List<TrackableLog> trackableList) {
+        trackables.addAll(trackableList);
+        updateTrackablesList();
+    }
+
+    @Override
+    public void onLoaderReset(final Loader<List<TrackableLog>> listLoader) {
+        // nothing
+    }
+
     public void onLoadFinished() {
         if (loggingManager.hasLoaderError()) {
             showErrorLoadingData();
             return;
         }
 
-        trackables = loggingManager.getTrackables();
+        trackables.addAll(loggingManager.getTrackables());
         possibleLogTypes = loggingManager.getPossibleLogTypes();
 
         if (possibleLogTypes.isEmpty()) {
@@ -146,6 +176,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         for (final TrackableLog tb : trackables) {
             final LinearLayout inventoryItem = (LinearLayout) inflater.inflate(R.layout.logcache_trackable_item, inventoryView, false);
 
+            final ImageView brandView = ButterKnife.findById(inventoryItem, R.id.trackable_image_brand);
+            brandView.setImageResource(tb.brand.getIconResource());
             final TextView codeView = ButterKnife.findById(inventoryItem, R.id.trackcode);
             codeView.setText(tb.trackCode);
             final TextView nameView = ButterKnife.findById(inventoryItem, R.id.name);
@@ -162,7 +194,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                 }
             });
 
-            final String tbCode = tb.trackCode;
+            final String tbCode = (StringUtils.isNotEmpty(tb.geocode) ? tb.geocode : tb.trackCode);
             inventoryItem.setClickable(true);
             ButterKnife.findById(inventoryItem, R.id.info).setOnClickListener(new View.OnClickListener() {
 
@@ -279,8 +311,15 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         updateLogPasswordBox(typeSelected);
 
         loggingManager = cache.getLoggingManager(this);
-
         loggingManager.init();
+
+        trackablesConnectors = ConnectorFactory.getGenericTrackablesConnectors();
+        for (final TrackableConnector connector: trackablesConnectors) {
+            if (connector.isRegistered()) {
+                getSupportLoaderManager().initLoader(connector.getInventoryLoaderId(), null, this).forceLoad();
+            }
+        }
+
         requestKeyboardForLogging();
     }
 
@@ -395,8 +434,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private class Poster extends AsyncTaskWithProgress<String, StatusCode> {
 
+        final Activity activity;
+
         public Poster(final Activity activity, final String progressMessage) {
             super(activity, null, progressMessage, true);
+            this.activity = activity;
         }
 
         @Override
@@ -404,7 +446,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
             final String log = logTexts[0];
             final String logPwd = logTexts.length > 1 ? logTexts[1] : null;
             try {
-                final LogResult logResult = loggingManager.postLog(typeSelected, date, log, logPwd, trackables);
+                final LogResult logResult = loggingManager.postLog(typeSelected, date, log, logPwd, new ArrayList<>(trackables));
 
                 if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
                     // update geocache in DB
@@ -435,6 +477,14 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                             DataStore.saveChangedCache(cache);
                         } else {
                             showToast(res.getString(R.string.err_gcvote_send_rating));
+                        }
+                    }
+
+                    for (final TrackableConnector connector: trackablesConnectors) {
+                        final TrackableLoggingManager manager = connector.getTrackableLoggingManager((AbstractLoggingActivity) activity);
+                        for (final TrackableLog trackableLog: trackables) {
+                            manager.postLog(cache, trackableLog, date, log);
+
                         }
                     }
 
@@ -502,14 +552,17 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
     private void selectAllTrackablesAction() {
         final Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(res.getString(R.string.log_tb_changeall));
-        final String[] tbLogTypes = getTBLogTypes();
+
+        final ArrayList<LogTypeTrackable> tbLogTypeValues = LogTypeTrackable.getLogTypeTrackableForLogCache();
+        final String[] tbLogTypes = getTBLogTypes(tbLogTypeValues);
         alert.setItems(tbLogTypes, new OnClickListener() {
 
             @Override
             public void onClick(final DialogInterface dialog, final int position) {
-                final LogTypeTrackable logType = LogTypeTrackable.values()[position];
+                final LogTypeTrackable logType = tbLogTypeValues.get(position);
                 for (final TrackableLog tb : trackables) {
                     tb.action = logType;
+                    Log.i("Trackable " + tb.trackCode + " (" + tb.name + ") has new action: #" + logType);
                 }
                 updateTrackablesList();
                 dialog.dismiss();
@@ -518,14 +571,14 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         alert.create().show();
     }
 
-    private static String[] getTBLogTypes() {
-        final LogTypeTrackable[] logTypeValues = LogTypeTrackable.values();
-        final String[] logTypes = new String[logTypeValues.length];
-        for (int i = 0; i < logTypes.length; i++) {
-            logTypes[i] = logTypeValues[i].getLabel();
+    private static String[] getTBLogTypes(final ArrayList<LogTypeTrackable> tbLogTypeValues) {
+        final String[] tbLogTypes = new String[tbLogTypeValues.size()];
+        for (int i = 0; i < tbLogTypes.length; i++) {
+            tbLogTypes[i] = tbLogTypeValues.get(i).getLabel();
         }
-        return logTypes;
+        return tbLogTypes;
     }
+
 
     private void selectLogType() {
         // use a local copy of the possible types, as that one might be modified in the background by the loader
@@ -552,12 +605,13 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         final Builder alert = new AlertDialog.Builder(this);
         final TrackableLog trackableLog = actionButtons.get(realViewId);
         alert.setTitle(trackableLog.name);
-        final String[] tbLogTypes = getTBLogTypes();
+        final ArrayList<LogTypeTrackable> tbLogTypeValues = LogTypeTrackable.getLogTypeTrackableForLogCache();
+        final String[] tbLogTypes = getTBLogTypes(tbLogTypeValues);
         alert.setItems(tbLogTypes, new OnClickListener() {
 
             @Override
             public void onClick(final DialogInterface dialog, final int position) {
-                final LogTypeTrackable logType = LogTypeTrackable.values()[position];
+                final LogTypeTrackable logType = tbLogTypeValues.get(position);
                 trackableLog.action = logType;
                 Log.i("Trackable " + trackableLog.trackCode + " (" + trackableLog.name + ") has new action: #" + logType);
                 updateTrackablesList();

@@ -2,7 +2,8 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
-import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.enumerations.LogTypeTrackable;
+import cgeo.geocaching.enumerations.TrackableBrand;
 import cgeo.geocaching.utils.ImageUtils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -41,6 +42,8 @@ public class Trackable implements ILogable {
     private String image = null;
     private List<LogEntry> logs = new ArrayList<>();
     private String trackingcode = null;
+    private TrackableBrand brand = null;
+    private TrackableConnector trackableConnector = null;
 
     /**
      * Check whether this trackable has a corresponding URL.
@@ -56,7 +59,10 @@ public class Trackable implements ILogable {
 
     @NonNull
     private TrackableConnector getConnector() {
-        return ConnectorFactory.getConnector(this);
+        if (trackableConnector == null) {
+            trackableConnector = ConnectorFactory.getConnector(this);
+        }
+        return trackableConnector;
     }
 
     public String getGuid() {
@@ -78,6 +84,30 @@ public class Trackable implements ILogable {
 
     public String getIconUrl() {
         return iconUrl;
+    }
+
+
+    public int getIconBrand() {
+        return getBrand().getIconResource();
+    }
+
+    public void forceSetBrand(final TrackableBrand trackableBrand) {
+        this.brand = trackableBrand;
+    }
+
+    public TrackableBrand getBrand() {
+        if (brand == null) {
+            if (StringUtils.isNotEmpty(geocode)) {
+                final TrackableConnector connector = ConnectorFactory.getTrackableConnector(geocode);
+                    if (connector != ConnectorFactory.UNKNOWN_TRACKABLE_CONNECTOR) {
+                    brand = connector.getBrand();
+                    return brand;
+                }
+            }
+            // Fallback to Unkwown
+            brand = TrackableBrand.UNKNOWN;
+        }
+        return brand;
     }
 
     public void setIconUrl(final String iconUrl) {
@@ -242,12 +272,12 @@ public class Trackable implements ILogable {
     }
 
     @NonNull
-    static List<LogType> getPossibleLogTypes() {
-        final List<LogType> logTypes = new ArrayList<>();
-        logTypes.add(LogType.RETRIEVED_IT);
-        logTypes.add(LogType.GRABBED_IT);
-        logTypes.add(LogType.NOTE);
-        logTypes.add(LogType.DISCOVERED_IT);
+    static public List<LogTypeTrackable> getPossibleLogTypes() {
+        final List<LogTypeTrackable> logTypes = new ArrayList<>();
+        logTypes.add(LogTypeTrackable.RETRIEVED_IT);
+        logTypes.add(LogTypeTrackable.GRABBED_IT);
+        logTypes.add(LogTypeTrackable.NOTE);
+        logTypes.add(LogTypeTrackable.DISCOVERED_IT);
 
         return logTypes;
     }

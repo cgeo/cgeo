@@ -1,10 +1,16 @@
 package cgeo.geocaching.connector.trackable;
 
+import cgeo.geocaching.AbstractLoggingActivity;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.UserAction;
+import cgeo.geocaching.enumerations.TrackableBrand;
+import cgeo.geocaching.loaders.AbstractCacheInventoryLoader;
+import cgeo.geocaching.loaders.AbstractInventoryLoader;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
+import android.content.Context;
 
 import java.util.List;
 
@@ -37,7 +43,9 @@ public interface TrackableConnector {
     public boolean isLoggable();
 
     @Nullable
-    public Trackable searchTrackable(String geocode, String guid, String id);
+    public Trackable searchTrackable(final String geocode, final String guid, final String id);
+
+    public List<Trackable> searchTrackables(final String geocode);
 
     @Nullable
     public String getTrackableCodeFromUrl(final @NonNull String url);
@@ -45,4 +53,25 @@ public interface TrackableConnector {
     @NonNull
     public List<UserAction> getUserActions();
 
+    public TrackableBrand getBrand();
+
+    public List<Trackable> loadInventory();
+
+    public AbstractTrackableLoggingManager getTrackableLoggingManager(final AbstractLoggingActivity activity);
+
+    boolean isGenericLoggable();
+
+    boolean isActive();
+
+    public boolean isRegistered();
+
+    public int getInventoryLoaderId();
+
+    public int getCacheInventoryLoaderId();
+
+    public int getTrackableLoggingManagerLoaderId();
+
+    public AbstractInventoryLoader getInventoryLoader(final Context context);
+
+    public AbstractCacheInventoryLoader getCacheInventoryLoader(final Context context, final String geocode);
 }

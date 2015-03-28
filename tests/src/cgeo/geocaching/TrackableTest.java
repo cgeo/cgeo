@@ -29,7 +29,7 @@ public class TrackableTest extends AndroidTestCase {
 
     public static void testLoggable() {
         assertThat(createTrackable("TB1234").isLoggable()).isTrue();
-        assertThat(createTrackable("GK1234").isLoggable()).isFalse();
+        assertThat(createTrackable("GK1234").isLoggable()).isTrue();
     }
 
     private static Trackable createTrackable(String geocode) {

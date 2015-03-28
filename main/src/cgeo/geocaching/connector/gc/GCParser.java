@@ -18,6 +18,7 @@ import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.enumerations.TrackableBrand;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocParser;
 import cgeo.geocaching.gcvote.GCVote;
@@ -654,6 +655,7 @@ public abstract class GCParser {
                         while (matcherInventoryInside.find()) {
                             if (matcherInventoryInside.groupCount() > 0) {
                                 final Trackable inventoryItem = new Trackable();
+                                inventoryItem.forceSetBrand(TrackableBrand.TRAVELBUG);
                                 inventoryItem.setGuid(matcherInventoryInside.group(1));
                                 inventoryItem.setName(matcherInventoryInside.group(2));
 
@@ -1080,7 +1082,7 @@ public abstract class GCParser {
             final StringBuilder hdnSelected = new StringBuilder();
 
             for (final TrackableLog tb : trackables) {
-                if (tb.action != LogTypeTrackable.DO_NOTHING) {
+                if (tb.action != LogTypeTrackable.DO_NOTHING && tb.brand == TrackableBrand.TRAVELBUG) {
                     hdnSelected.append(Integer.toString(tb.id));
                     hdnSelected.append(tb.action.action);
                     hdnSelected.append(',');
@@ -1240,7 +1242,7 @@ public abstract class GCParser {
      * @return status code of the upload and ID of the log
      */
     public static StatusCode postLogTrackable(final String tbid, final String trackingCode, final String[] viewstates,
-            final LogType logType, final int year, final int month, final int day, final String log) {
+            final LogTypeTrackable logType, final int year, final int month, final int day, final String log) {
         if (GCLogin.isEmpty(viewstates)) {
             Log.e("GCParser.postLogTrackable: No viewstate given");
             return StatusCode.LOG_POST_ERROR;
@@ -1466,6 +1468,7 @@ public abstract class GCParser {
         }
 
         final Trackable trackable = new Trackable();
+        trackable.forceSetBrand(TrackableBrand.TRAVELBUG);
 
         // trackable geocode
         trackable.setGeocode(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GEOCODE, true, StringUtils.upperCase(possibleTrackingcode)));
@@ -1802,6 +1805,33 @@ public abstract class GCParser {
     }
 
     @NonNull
+    public static ArrayList<LogTypeTrackable> parseLogTypesTrackables(final String page) {
+        if (StringUtils.isEmpty(page)) {
+            return new ArrayList();
+        }
+
+        final ArrayList<LogTypeTrackable> types = new ArrayList<>();
+
+        final MatcherWrapper typeBoxMatcher = new MatcherWrapper(GCConstants.PATTERN_TYPEBOX, page);
+        if (typeBoxMatcher.find() && typeBoxMatcher.groupCount() > 0) {
+            final String typesText = typeBoxMatcher.group(1);
+            final MatcherWrapper typeMatcher = new MatcherWrapper(GCConstants.PATTERN_TYPE2, typesText);
+            while (typeMatcher.find()) {
+                if (typeMatcher.groupCount() > 1) {
+                    try {
+                        final int type = Integer.parseInt(typeMatcher.group(2));
+                        if (type > 0) {
+                            types.add(LogTypeTrackable.getById(type));
+                        }
+                    } catch (final NumberFormatException e) {
+                        Log.e("Error parsing trackable log types", e);
+                    }
+                }
+            }
+        }
+        return types;
+    }
+
     public static List<TrackableLog> parseTrackableLog(final String page) {
         if (StringUtils.isEmpty(page)) {
             return Collections.emptyList();
@@ -1832,7 +1862,7 @@ public abstract class GCParser {
                     final Integer ctl = Integer.valueOf(trackableMatcher.group(3));
                     final Integer id = Integer.valueOf(trackableMatcher.group(5));
                     if (trackCode != null && ctl != null && id != null) {
-                        final TrackableLog entry = new TrackableLog(trackCode, name, id, ctl);
+                        final TrackableLog entry = new TrackableLog("", trackCode, name, id, ctl, TrackableBrand.TRAVELBUG);
 
                         Log.i("Trackable in inventory (#" + entry.ctl + "/" + entry.id + "): " + entry.trackCode + " - " + entry.name);
                         trackableLogs.add(entry);

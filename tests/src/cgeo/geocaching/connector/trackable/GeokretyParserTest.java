@@ -7,15 +7,72 @@ import cgeo.geocaching.Trackable;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.xml.sax.InputSource;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase {
 
-    public void testParse() {
-        Trackable trackable = GeokretyParser.parse(getFileContent(R.raw.geokret141_xml));
-        assertThat(trackable).isNotNull();
-        assertThat(trackable.getName()).isEqualTo("WeltenbummlerKret");
-        assertThat(trackable.getGeocode()).isEqualTo("GK008D");
-        assertThat(trackable.getDistance()).isEqualTo(2235f);
-        assertThat(trackable.getType()).isEqualTo(CgeoApplication.getInstance().getString(cgeo.geocaching.R.string.geokret_type_traditional));
+    public void testParse() throws Exception {
+        final CgeoApplication app = CgeoApplication.getInstance();
+
+        final List<Trackable> trackables = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret141_xml)));
+        assertThat(trackables).hasSize(2);
+
+        // Check first GK in list
+        final Trackable trackable1 = trackables.get(0);
+        assertThat(trackable1).isNotNull();
+        assertThat(trackable1.getName()).isEqualTo("c:geo One");
+        assertThat(trackable1.getGeocode()).isEqualTo("GKB580");
+        assertThat(trackable1.getDistance()).isEqualTo(0);
+        assertThat(trackable1.getType()).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_traditional));
+
+        // Check second GK in list
+        final Trackable trackable2 = trackables.get(1);
+        assertThat(trackable2).isNotNull();
+        assertThat(trackable2.getName()).isEqualTo("c:geo Two");
+        assertThat(trackable2.getGeocode()).isEqualTo("GKB581");
+        assertThat(trackable2.getDistance()).isEqualTo(0);
+        assertThat(trackable2.getType()).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_post));
     }
 
+    public void testParseResponse() throws Exception {
+        final ImmutablePair<Integer, ArrayList<String>> response1 = GeokretyParser.parseResponse(getFileContent(R.raw.geokret142_xml));
+        assertThat(response1).isNotNull();
+        assertThat(response1.getLeft()).isNotNull();
+        assertThat(response1.getLeft()).isEqualTo(0);
+        assertThat(response1.getRight()).isNotNull();
+        assertThat(response1.getRight()).hasSize(2);
+        assertThat(response1.getRight().get(0)).isEqualTo("Identical log has been submited.");
+        assertThat(response1.getRight().get(1)).isEqualTo("There is an entry with this date. Correct the date or the hour.");
+
+        final ImmutablePair<Integer, ArrayList<String>> response2 = GeokretyParser.parseResponse(getFileContent(R.raw.geokret143_xml));
+        assertThat(response2).isNotNull();
+        assertThat(response2.getLeft()).isNotNull();
+        assertThat(response2.getLeft()).isEqualTo(27334);
+        assertThat(response2.getRight()).isNotNull();
+        assertThat(response2.getRight()).hasSize(0);
+
+        final ImmutablePair<Integer, ArrayList<String>> response3 = GeokretyParser.parseResponse(getFileContent(R.raw.geokret144_xml));
+        assertThat(response3).isNotNull();
+        assertThat(response3.getLeft()).isNotNull();
+        assertThat(response3.getLeft()).isEqualTo(0);
+        assertThat(response3.getRight()).isNotNull();
+        assertThat(response3.getRight()).hasSize(2);
+        assertThat(response3.getRight().get(0)).isEqualTo("Wrong secid");
+        assertThat(response3.getRight().get(1)).isEqualTo("Wrond date or time");
+    }
+
+    public void testGetType() throws Exception {
+        final CgeoApplication app = CgeoApplication.getInstance();
+        assertEquals(GeokretyParser.getType(0), app.getString(cgeo.geocaching.R.string.geokret_type_traditional));
+        assertEquals(GeokretyParser.getType(1), app.getString(cgeo.geocaching.R.string.geokret_type_book_or_media));
+        assertEquals(GeokretyParser.getType(2), app.getString(cgeo.geocaching.R.string.geokret_type_human));
+        assertEquals(GeokretyParser.getType(3), app.getString(cgeo.geocaching.R.string.geokret_type_coin));
+        assertEquals(GeokretyParser.getType(4), app.getString(cgeo.geocaching.R.string.geokret_type_post));
+        assertNull(GeokretyParser.getType(5));
+        assertNull(GeokretyParser.getType(42));
+    }
 }

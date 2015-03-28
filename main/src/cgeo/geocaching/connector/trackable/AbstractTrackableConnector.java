@@ -1,12 +1,18 @@
 package cgeo.geocaching.connector.trackable;
 
+import cgeo.geocaching.AbstractLoggingActivity;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.UserAction;
+import cgeo.geocaching.loaders.AbstractCacheInventoryLoader;
+import cgeo.geocaching.loaders.AbstractInventoryLoader;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
+import android.content.Context;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractTrackableConnector implements TrackableConnector {
@@ -37,5 +43,56 @@ public abstract class AbstractTrackableConnector implements TrackableConnector {
     @NonNull
     public String getUrl(@NonNull final Trackable trackable) {
         throw new IllegalStateException("this trackable does not have a corresponding URL");
+    }
+
+    @Override
+    public List<Trackable> searchTrackables(final String geocode) { return new ArrayList<>(); }
+
+    @Override
+    public List<Trackable> loadInventory() { return new ArrayList<>(); }
+
+    @Override
+    public boolean isGenericLoggable() {
+        return false;
+    }
+
+    @Override
+    public boolean isActive() {
+        return false;
+    }
+
+    @Override
+    public boolean isRegistered() {
+        return false;
+    }
+
+    @Override
+    public int getInventoryLoaderId() {
+        return 0;
+    }
+
+    @Override
+    public int getCacheInventoryLoaderId() {
+        return 0;
+    }
+
+    @Override
+    public int getTrackableLoggingManagerLoaderId() {
+        return 0;
+    }
+
+    @Override
+    public AbstractInventoryLoader getInventoryLoader(final Context context) {
+        return null;
+    }
+
+    @Override
+    public AbstractCacheInventoryLoader getCacheInventoryLoader(final Context context, final String geocode) {
+        return null;
+    }
+
+    @Override
+    public AbstractTrackableLoggingManager getTrackableLoggingManager(final AbstractLoggingActivity activity) {
+        return null;
     }
 }

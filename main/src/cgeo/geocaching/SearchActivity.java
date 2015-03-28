@@ -79,7 +79,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
 
         // search suggestion for a trackable
         if (Intents.ACTION_TRACKABLE.equals(intent.getAction())) {
-            TrackableActivity.startActivity(this, null, intent.getStringExtra(SearchManager.QUERY), null);
+            TrackableActivity.startActivity(this, null, intent.getStringExtra(SearchManager.QUERY), null, null);
             finish();
             return;
         }

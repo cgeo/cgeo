@@ -16,6 +16,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.IgnoreCapability;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
+import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
@@ -43,6 +44,7 @@ import cgeo.geocaching.ui.IndexOutOfBoundsAvoidingTextView;
 import cgeo.geocaching.ui.LoggingUI;
 import cgeo.geocaching.ui.NavigationActionProvider;
 import cgeo.geocaching.ui.OwnerActionsClickListener;
+import cgeo.geocaching.ui.TrackableListAdapter;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.logs.CacheLogsViewCreator;
@@ -95,6 +97,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.view.ActionMode;
@@ -131,8 +135,10 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -141,7 +147,7 @@ import java.util.regex.Pattern;
  * e.g. details, description, logs, waypoints, inventory...
  */
 public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailActivity.Page>
-        implements CacheMenuHandler.ActivityInterface, INavigationSource, AndroidBeam.ActivitySharingInterface, EditNoteDialogListener {
+        implements CacheMenuHandler.ActivityInterface, INavigationSource, AndroidBeam.ActivitySharingInterface, EditNoteDialogListener, LoaderCallbacks<List<Trackable>> {
 
     private static final int MESSAGE_FAILED = -1;
     private static final int MESSAGE_SUCCEEDED = 1;
@@ -155,7 +161,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             Pattern.compile("((?<!bg)color)=\"" + "white" + "\"", Pattern.CASE_INSENSITIVE) };
     public static final String STATE_PAGE_INDEX = "cgeo.geocaching.pageIndex";
 
+    // Store Geocode here, as 'cache' is loaded Async.
+    private String geocode;
     private Geocache cache;
+    private final List<Trackable> genericTrackables = new ArrayList<>();
     private final Progress progress = new Progress();
 
     private SearchResult search;
@@ -182,6 +191,29 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private boolean requireGeodata;
     private Subscription geoDataSubscription = Subscriptions.empty();
 
+    private ArrayList<TrackableConnector> trackablesConnectors;
+
+    @Override
+    public Loader<List<Trackable>> onCreateLoader(final int id, final Bundle bundle) {
+        for (final TrackableConnector connector: trackablesConnectors) {
+            if (id == connector.getCacheInventoryLoaderId()) {
+                return connector.getCacheInventoryLoader(app, geocode);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(final Loader<List<Trackable>> listLoader, final List<Trackable> trackables) {
+        genericTrackables.addAll(trackables);
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void onLoaderReset(final Loader<List<Trackable>> listLoader) {
+        // nothing
+    }
+
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.cachedetail_activity);
@@ -194,7 +226,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         // try to get data from extras
         String name = null;
-        String geocode = null;
         String guid = null;
 
         if (extras != null) {
@@ -304,6 +335,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 loadCacheHandler.sendMessage(Message.obtain());
             }
         });
+
+        // Load Generic trackables connectors Async
+        trackablesConnectors = ConnectorFactory.getGenericTrackablesConnectors();
+        for (final TrackableConnector connector: trackablesConnectors) {
+            getSupportLoaderManager().initLoader(connector.getCacheInventoryLoaderId(), null, this).forceLoad();
+        }
 
         locationUpdater = new CacheDetailsGeoDirHandler(this);
 
@@ -1774,14 +1811,29 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
             // TODO: fix layout, then switch back to Android-resource and delete copied one
             // this copy is modified to respect the text color
-            view.setAdapter(new ArrayAdapter<>(CacheDetailActivity.this, R.layout.simple_list_item_1, cache.getInventory()));
+            final TrackableListAdapter adapterTrackables = new TrackableListAdapter(CacheDetailActivity.this);
+            final HashMap<String, Trackable> trackables = new HashMap<>();
+            if (cache.getInventory() != null) {
+                for (final Trackable trackable: cache.getInventory()) {
+                    trackables.put(trackable.getGeocode(), trackable);
+                }
+            }
+            if (genericTrackables != null) {
+                for (final Trackable trackable: genericTrackables) {
+                    trackables.put(trackable.getGeocode(), trackable);
+                }
+            }
+            for (final Map.Entry<String, Trackable> trackable: trackables.entrySet()) {
+                adapterTrackables.add(trackable.getValue());
+            }
+            view.setAdapter(adapterTrackables);
             view.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(final AdapterView<?> arg0, final View arg1, final int arg2, final long arg3) {
                     final Object selection = arg0.getItemAtPosition(arg2);
                     if (selection instanceof Trackable) {
                         final Trackable trackable = (Trackable) selection;
-                        TrackableActivity.startActivity(CacheDetailActivity.this, trackable.getGuid(), trackable.getGeocode(), trackable.getName());
+                        TrackableActivity.startActivity(CacheDetailActivity.this, trackable.getGuid(), trackable.getGeocode(), trackable.getName(), cache.getGeocode());
                     }
                 }
             });
@@ -2033,7 +2085,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         if (CollectionUtils.isNotEmpty(cache.getFriendsLogs())) {
             pages.add(Page.LOGSFRIENDS);
         }
-        if (CollectionUtils.isNotEmpty(cache.getInventory())) {
+        if (CollectionUtils.isNotEmpty(cache.getInventory()) || CollectionUtils.isNotEmpty(genericTrackables)) {
             pages.add(Page.INVENTORY);
         }
         if (CollectionUtils.isNotEmpty(cache.getImages())) {

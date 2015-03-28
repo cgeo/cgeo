@@ -1,6 +1,7 @@
 package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.Trackable;
+import cgeo.geocaching.enumerations.TrackableBrand;
 import cgeo.geocaching.network.Network;
 
 import org.apache.commons.lang3.StringUtils;
@@ -48,4 +49,8 @@ public final class SwaggieConnector extends AbstractTrackableConnector {
         return "http://geocaching.com.au/swaggie/" + geocode;
     }
 
+    @Override
+    public TrackableBrand getBrand() {
+        return TrackableBrand.SWAGGIE;
+    }
 }
