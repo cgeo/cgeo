@@ -132,7 +132,7 @@ public class GeokretyParser {
                 if (localName.equalsIgnoreCase("distancetravelled")) {
                     trackable.setDistance(Float.parseFloat(content));
                 }
-                if (localName.equalsIgnoreCase("image")) {
+                if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("image")) {
                     trackable.setImage("http://geokrety.org/obrazki/" + content);
                 }
                 if (localName.equalsIgnoreCase("state")) {
