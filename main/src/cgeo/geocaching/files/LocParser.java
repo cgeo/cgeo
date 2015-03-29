@@ -1,7 +1,6 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Geopoint;
@@ -23,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -52,16 +50,9 @@ public final class LocParser extends FileParser {
 
     private final int listId;
 
-    public static void parseLoc(final SearchResult searchResult, final String fileContent, final Set<Geocache> caches) {
+    public static void parseLoc(final String fileContent, final Set<Geocache> caches) {
         final Map<String, Geocache> cidCoords = parseLoc(fileContent);
 
-        // save found cache coordinates
-        final HashSet<String> contained = new HashSet<>();
-        for (final String geocode : searchResult.getGeocodes()) {
-            if (cidCoords.containsKey(geocode)) {
-                contained.add(geocode);
-            }
-        }
         for (final Geocache cache : caches) {
             if (!cache.isReliableLatLon()) {
                 final Geocache coord = cidCoords.get(cache.getGeocode());

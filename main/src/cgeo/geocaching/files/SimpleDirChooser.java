@@ -7,6 +7,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.AlertDialog;
@@ -58,7 +59,7 @@ public class SimpleDirChooser extends AbstractListActivity {
 
         fill(currentDir);
 
-        okButton = (Button) findViewById(R.id.simple_dir_chooser_ok);
+        okButton = ButterKnife.findById(this, R.id.simple_dir_chooser_ok);
         resetOkButton();
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +80,7 @@ public class SimpleDirChooser extends AbstractListActivity {
             }
         });
 
-        final EditText pathField = (EditText) findViewById(R.id.simple_dir_chooser_path);
+        final EditText pathField = ButterKnife.findById(this, R.id.simple_dir_chooser_path);
         pathField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -134,15 +135,14 @@ public class SimpleDirChooser extends AbstractListActivity {
     private void fill(final File dir) {
         lastPosition = -1;
         resetOkButton();
-        final EditText path = (EditText) findViewById(R.id.simple_dir_chooser_path);
+        final EditText path = ButterKnife.findById(this, R.id.simple_dir_chooser_path);
         path.setText(this.getResources().getString(R.string.simple_dir_chooser_current_path) + " " + dir.getAbsolutePath());
         final File[] dirs = dir.listFiles(new DirOnlyFilenameFilter());
         final List<Option> listDirs = new ArrayList<>();
-        try {
+        if (dirs != null) {
             for (final File currentDir : dirs) {
                 listDirs.add(new Option(currentDir.getName(), currentDir.getAbsolutePath(), currentDir.canWrite()));
             }
-        } catch (final RuntimeException ignored) {
         }
         Collections.sort(listDirs, Option.NAME_COMPARATOR);
         if (dir.getParent() != null) {
@@ -222,7 +222,8 @@ public class SimpleDirChooser extends AbstractListActivity {
                 fill(currentDir);
             } else {
                 final File dir = new File(option.getPath());
-                if (dir.list(new DirOnlyFilenameFilter()).length > 0) {
+                final String[] subDirs = dir.list(new DirOnlyFilenameFilter());
+                if (ArrayUtils.isNotEmpty(subDirs)) {
                     currentDir = dir;
                     fill(currentDir);
                 }

@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.utils.Log;
@@ -74,7 +76,7 @@ public class StaticMapsActivity extends AbstractActionBarActivity {
         }
 
         if (smapsView == null) {
-            smapsView = (LinearLayout) findViewById(R.id.maps_list);
+            smapsView = ButterKnife.findById(this, R.id.maps_list);
         }
         smapsView.removeAllViews();
 

@@ -14,13 +14,13 @@ public class LeastRecentlyUsedSetTest extends AbstractLRUTest {
         set.add("two");
         set.add("three");
         // read does not change anything
-        set.contains("one");
+        assertThat(set.contains("one")).isTrue();
         set.add("four");
         // re-put should update the order
         set.add("three");
         set.add("five");
         // read does not change anything
-        set.contains("one");
+        assertThat(set.contains("one")).isTrue();
         set.add("six");
         set.add("seven");
 

@@ -1447,7 +1447,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 output.append(", ").append(adapter.getFilterName());
             }
 
-            ((TextView) findViewById(R.id.filter_text)).setText(output.toString());
+            final TextView filterTextView = ButterKnife.findById(this, R.id.filter_text);
+            filterTextView.setText(output.toString());
             findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
         }
         else {

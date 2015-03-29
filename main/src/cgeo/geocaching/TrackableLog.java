@@ -34,6 +34,9 @@ public final class TrackableLog {
 
     @Override
     public boolean equals(final Object obj) {
+        if (!(obj instanceof TrackableLog)) {
+            return false;
+        }
         final TrackableLog tb = (TrackableLog) obj;
         return StringUtils.defaultString(tb.trackCode).equals(trackCode);
     }

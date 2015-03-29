@@ -344,7 +344,7 @@ public abstract class GCParser {
                         return searchResult;
                     }
 
-                    LocParser.parseLoc(searchResult, coordinates, storedCaches.toBlocking().single());
+                    LocParser.parseLoc(coordinates, storedCaches.toBlocking().single());
                 }
 
             } catch (final RuntimeException e) {

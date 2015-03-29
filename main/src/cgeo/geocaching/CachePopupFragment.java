@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.list.StoredList;
@@ -32,12 +34,12 @@ import android.widget.TextView;
 public class CachePopupFragment extends AbstractDialogFragment {
     private final Progress progress = new Progress();
 
-    public static DialogFragment newInstance(String geocode) {
+    public static DialogFragment newInstance(final String geocode) {
 
-        Bundle args = new Bundle();
+        final Bundle args = new Bundle();
         args.putString(GEOCODE_ARG,geocode);
 
-        DialogFragment f = new CachePopupFragment();
+        final DialogFragment f = new CachePopupFragment();
         f.setStyle(DialogFragment.STYLE_NO_TITLE,0);
         f.setArguments(args);
 
@@ -52,7 +54,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
         }
 
         @Override
-        public void handleRegularMessage(Message msg) {
+        public void handleRegularMessage(final Message msg) {
             if (UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
                 updateStatusMsg((String) msg.obj);
             } else {
@@ -69,14 +71,14 @@ public class CachePopupFragment extends AbstractDialogFragment {
 
     private class DropCacheHandler extends Handler {
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(final Message msg) {
             getActivity().finish();
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.popup, container, false);
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+        final View v = inflater.inflate(R.layout.popup, container, false);
         initCustomActionBar(v);
         return v;
     }
@@ -92,16 +94,18 @@ public class CachePopupFragment extends AbstractDialogFragment {
                 setTitle(geocode);
             }
 
-            ((TextView) getView().findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cache.getType().markerId), null, null, null);
+            final TextView titleView = ButterKnife.findById(getView(), R.id.actionbar_title);
+            titleView.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cache.getType().markerId), null, null, null);
 
-            details = new CacheDetailsCreator(getActivity(), (LinearLayout) getView().findViewById(R.id.details_list));
+            final LinearLayout layout = ButterKnife.findById(getView(), R.id.details_list);
+            details = new CacheDetailsCreator(getActivity(), layout);
 
             addCacheDetails();
 
             // offline use
             CacheDetailActivity.updateOfflineBox(getView(), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener());
 
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Log.e("CachePopupFragment.init", e);
         }
 
@@ -112,7 +116,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
 
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
         init();
@@ -120,7 +124,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
 
     private class StoreCacheClickListener implements View.OnClickListener {
         @Override
-        public void onClick(View arg0) {
+        public void onClick(final View arg0) {
             if (progress.isShowing()) {
                 showToast(res.getString(R.string.err_detail_still_working));
                 return;
@@ -160,7 +164,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
 
     private class RefreshCacheClickListener implements View.OnClickListener {
         @Override
-        public void onClick(View arg0) {
+        public void onClick(final View arg0) {
             if (progress.isShowing()) {
                 showToast(res.getString(R.string.err_detail_still_working));
                 return;
@@ -179,7 +183,7 @@ public class CachePopupFragment extends AbstractDialogFragment {
 
     private class DropCacheClickListener implements View.OnClickListener {
         @Override
-        public void onClick(View arg0) {
+        public void onClick(final View arg0) {
             if (progress.isShowing()) {
                 showToast(res.getString(R.string.err_detail_still_working));
                 return;

@@ -14,12 +14,12 @@ public class LeastRecentlyUsedMapTest extends AbstractLRUTest {
         map.put("two", "2");
         map.put("three", "3");
         // keep in cache
-        map.get("one");
+        assertThat(map.get("one")).isNotNull();
         map.put("four", "4");
         map.put("five", "5");
         map.put("six", "6");
         // keep in cache
-        map.get("one");
+        assertThat(map.get("one")).isNotNull();
         // re-add
         map.put("five", "5");
         map.put("seven", "7");
@@ -33,7 +33,7 @@ public class LeastRecentlyUsedMapTest extends AbstractLRUTest {
         map.put("two", "2");
         map.put("three", "3");
         // read does not change anything
-        map.get("one");
+        assertThat(map.get("one")).isNotNull();
         map.put("four", "4");
         // re-put should update the order
         map.put("three", "3");

@@ -4,10 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import cgeo.geocaching.files.LocalStorage;
 
-import junit.framework.TestCase;
-
 import java.io.File;
 import java.io.IOException;
+
+import junit.framework.TestCase;
 
 public class FileUtilsTest extends TestCase {
 
@@ -18,10 +18,10 @@ public class FileUtilsTest extends TestCase {
 
     public void testGetUniqueNamedFile() throws IOException {
         FileUtils.deleteDirectory(testDir);
-        testDir.mkdirs();
+        assertThat(testDir.mkdirs()).isTrue();
         try {
             assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(baseFile);
-            baseFile.createNewFile();
+            assertThat(baseFile.createNewFile()).isTrue();
             assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(alternative1);
             alternative1.createNewFile();
             assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(alternative2);

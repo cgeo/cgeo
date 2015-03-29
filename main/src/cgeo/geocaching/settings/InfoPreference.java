@@ -1,5 +1,7 @@
 package cgeo.geocaching.settings;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.R;
 import cgeo.geocaching.ui.UrlPopup;
 
@@ -96,7 +98,7 @@ public class InfoPreference extends AbstractAttributeBasedPrefence {
         final View preferenceView = super.onCreateView(parent);
 
         final ImageView iconView = (ImageView) inflater.inflate(R.layout.preference_info_icon, parent, false);
-        final LinearLayout frame = (LinearLayout) preferenceView.findViewById(android.R.id.widget_frame);
+        final LinearLayout frame = ButterKnife.findById(preferenceView, android.R.id.widget_frame);
         frame.setVisibility(View.VISIBLE);
         frame.addView(iconView);
 

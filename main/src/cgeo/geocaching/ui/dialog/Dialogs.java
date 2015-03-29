@@ -1,5 +1,7 @@
 package cgeo.geocaching.ui.dialog;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
@@ -436,7 +438,7 @@ public final class Dialogs {
                 final View v = super.getView(position, convertView, parent);
 
                 // add image
-                final TextView tv = (TextView) v.findViewById(android.R.id.text1);
+                final TextView tv = ButterKnife.findById(v, android.R.id.text1);
                 tv.setCompoundDrawablesWithIntrinsicBounds(items.get(position).getIcon(), 0, 0, 0);
 
                 // Add margin between image and text

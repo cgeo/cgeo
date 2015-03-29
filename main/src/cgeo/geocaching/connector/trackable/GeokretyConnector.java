@@ -278,7 +278,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             }
             Log.i("Geokrety Log successfully posted to trackable #" + trackableLog.trackCode);
             return new ImmutablePair<>(StatusCode.NO_ERROR, Collections.<String> emptyList());
-        } catch (final Exception e) {
+        } catch (final RuntimeException e) {
             Log.w("GeokretyConnector.searchTrackable", e);
             return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, Collections.<String> emptyList());
         }

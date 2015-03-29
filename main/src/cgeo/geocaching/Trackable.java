@@ -142,7 +142,7 @@ public class Trackable implements ILogable {
     }
 
     public Date getReleased() {
-        return released;
+        return new Date(released.getTime());
     }
 
     public void setReleased(final Date released) {

@@ -764,7 +764,7 @@ public class Geocache implements IWaypoint {
 
     @Nullable
     public Date getHiddenDate() {
-        return hidden;
+        return new Date(hidden.getTime());
     }
 
     @NonNull

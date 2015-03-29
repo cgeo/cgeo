@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.list.AbstractList;
 
 import android.content.Context;
@@ -46,8 +48,8 @@ class CacheListSpinnerAdapter extends ArrayAdapter<AbstractList> {
         if (resultView == null) {
             resultView = inflater.inflate(R.layout.cachelist_spinneritem, parent, false);
             holder = new ViewHolder();
-            holder.title = (TextView) resultView.findViewById(android.R.id.text1);
-            holder.subtitle = (TextView) resultView.findViewById(android.R.id.text2);
+            holder.title = ButterKnife.findById(resultView, android.R.id.text1);
+            holder.subtitle = ButterKnife.findById(resultView, android.R.id.text2);
 
             resultView.setTag(holder);
         } else {

@@ -1,5 +1,7 @@
 package cgeo.geocaching.activity;
 
+import butterknife.ButterKnife;
+
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.Log;
 
@@ -218,7 +220,7 @@ public abstract class AbstractViewPagerActivity<Page extends Enum<Page>> extends
      */
     protected final void createViewPager(final int startPageIndex, final OnPageSelectedListener pageSelectedListener) {
         // initialize ViewPager
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = ButterKnife.findById(this, R.id.viewpager);
         viewPagerAdapter = new ViewPagerAdapter();
         viewPager.setAdapter(viewPagerAdapter);
 

@@ -17,8 +17,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -116,7 +118,7 @@ public final class GCVote {
             }
             RATINGS_CACHE.putAll(ratings);
             return ratings;
-        } catch (final Exception e) {
+        } catch (final NumberFormatException | XmlPullParserException | IOException e) {
             Log.e("Cannot parse GC vote result", e);
             return Collections.emptyMap();
 

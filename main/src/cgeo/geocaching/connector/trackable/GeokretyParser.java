@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
@@ -171,7 +172,7 @@ public class GeokretyParser {
                 xmlR.parse(page);
 
                 return gkXMLHandler.getTrackables();
-            } catch (final Exception e) {
+            } catch (final SAXException | IOException | ParserConfigurationException e) {
                 Log.w("Cannot parse geokrety", e);
             }
         }

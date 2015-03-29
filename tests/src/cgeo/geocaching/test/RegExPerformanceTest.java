@@ -11,6 +11,7 @@ import cgeo.geocaching.utils.TextUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -71,13 +72,13 @@ public class RegExPerformanceTest extends TestCase {
 
     public final static List<MockedCache> MOCKED_CACHES;
     static {
-        MOCKED_CACHES = Arrays.asList(new GC2CJPF(), new GC1ZXX2(), new GC2JVEH(), new GC3XX5J());
+        MOCKED_CACHES = Collections.unmodifiableList(Arrays.asList(new GC2CJPF(), new GC1ZXX2(), new GC2JVEH(), new GC3XX5J()));
     }
 
     public static void testRegEx() {
         final List<String> output = doTheTests(10);
 
-        for (String s : output) {
+        for (final String s : output) {
             System.out.println(s);
         }
     }
@@ -91,15 +92,15 @@ public class RegExPerformanceTest extends TestCase {
         return output;
     }
 
-    private static List<String> measure(int iterations, String fieldName, Pattern p1, Pattern p2) {
+    private static List<String> measure(final int iterations, final String fieldName, final Pattern p1, final Pattern p2) {
 
         final List<String> output = new ArrayList<String>();
         output.add(fieldName + ":");
 
-        for (MockedCache cache : MOCKED_CACHES) {
-            String page = cache.getData();
-            String result1 = TextUtils.getMatch(page, p1, true, "");
-            String result2 = TextUtils.getMatch(page, p2, true, "");
+        for (final MockedCache cache : MOCKED_CACHES) {
+            final String page = cache.getData();
+            final String result1 = TextUtils.getMatch(page, p1, true, "");
+            final String result2 = TextUtils.getMatch(page, p2, true, "");
             assertThat(result2).isEqualTo(result1);
 
             long diff1, diff2;
@@ -112,7 +113,7 @@ public class RegExPerformanceTest extends TestCase {
             diff2 = parse(page, p2, iterations);
             output.add("Time pattern 2:\t" + diff2 + " ms");
 
-            float reduction = (float) diff2 * 100 / diff1;
+            final float reduction = (float) diff2 * 100 / diff1;
             output.add("New runtime:\t" + String.format("%.1f", reduction) + "%\n");
         }
 
@@ -120,7 +121,7 @@ public class RegExPerformanceTest extends TestCase {
 
     }
 
-    private static long parse(String page, Pattern pattern, int iterations) {
+    private static long parse(final String page, final Pattern pattern, final int iterations) {
         final long start = System.currentTimeMillis();
         for (int j = 0; j < iterations; j++) {
             TextUtils.getMatch(page, pattern, true, "");

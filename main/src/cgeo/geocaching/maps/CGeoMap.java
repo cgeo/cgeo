@@ -357,7 +357,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 return;
             }
 
-            final ProgressBar progress = (ProgressBar) map.activity.findViewById(R.id.actionbar_progress);
+            final ProgressBar progress = ButterKnife.findById(map.activity, R.id.actionbar_progress);
             if (progress != null) {
                 if (show) {
                     progress.setVisibility(View.VISIBLE);

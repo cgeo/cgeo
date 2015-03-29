@@ -515,6 +515,9 @@ public class GPXImporter {
         final String gpxFileName = gpxfile.getName();
         final File dir = gpxfile.getParentFile();
         final String[] filenameList = dir.list();
+        if (filenameList == null) {
+            return null;
+        }
         for (final String filename : filenameList) {
             if (!StringUtils.containsIgnoreCase(filename, WAYPOINTS_FILE_SUFFIX)) {
                 continue;
