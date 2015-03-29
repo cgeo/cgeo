@@ -78,6 +78,11 @@ public class GeokretyLoggingManager extends AbstractTrackableLoggingManager {
     }
 
     @Override
+    public void setGuid(final String guid) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public boolean isRegistered() {
         return Settings.isRegisteredForGeokrety();
     }

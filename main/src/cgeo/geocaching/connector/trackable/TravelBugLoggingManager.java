@@ -105,7 +105,22 @@ public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
     }
 
     @Override
+    public boolean canLogTime() {
+        return false;
+    }
+
+    @Override
+    public boolean canLogCoordinates() {
+        return false;
+    }
+
+    @Override
     public void setGuid(final String guid) {
         this.guid = guid;
+    }
+
+    @Override
+    public boolean isRegistered() {
+        return Settings.isLogin();
     }
 }

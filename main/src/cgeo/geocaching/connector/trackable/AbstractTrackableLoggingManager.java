@@ -14,31 +14,17 @@ public abstract class AbstractTrackableLoggingManager extends AsyncTaskLoader<Li
     }
 
     @Override
-    public boolean hasLoaderError() {
-        return false;
-    }
+    public abstract boolean canLogTime();
 
     @Override
-    public boolean canLogTime() {
-        return false;
-    }
+    public abstract boolean canLogCoordinates();
 
     @Override
-    public boolean canLogCoordinates() {
-        return false;
-    }
+    public abstract void setGuid (final String guid);
 
     @Override
-    public void setGuid (final String guid) {
-    }
+    public abstract boolean isRegistered();
 
     @Override
-    public boolean isRegistered() {
-        return false;
-    }
-
-    @Override
-    public boolean postReady() {
-        return false;
-    }
+    public abstract boolean postReady();
 }

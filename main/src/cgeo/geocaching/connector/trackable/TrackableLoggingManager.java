@@ -30,8 +30,6 @@ public interface TrackableLoggingManager {
                              String imageDescription,
                              Uri imageUri);
 
-    public boolean hasLoaderError();
-
     @NonNull
     public List<LogTypeTrackable> getPossibleLogTypesTrackable();
 
