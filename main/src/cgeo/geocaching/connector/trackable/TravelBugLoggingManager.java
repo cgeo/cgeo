@@ -39,7 +39,7 @@ public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
 
     @Override
     public List<LogTypeTrackable> loadInBackground() {
-        if (!Settings.isLogin()) { // allow offline logging
+        if (!Settings.hasGCCredentials()) { // allow offline logging
             ActivityMixin.showToast(activity, activity.getResources().getString(R.string.err_login));
             return null;
         }
@@ -121,6 +121,6 @@ public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
 
     @Override
     public boolean isRegistered() {
-        return Settings.isLogin();
+        return Settings.hasGCCredentials();
     }
 }

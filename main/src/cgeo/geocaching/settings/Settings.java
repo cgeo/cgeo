@@ -304,7 +304,7 @@ public class Settings {
         resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 
-    public static boolean isLogin() {
+    public static boolean hasGCCredentials() {
         final String preUsername = getString(R.string.pref_username, null);
         final String prePassword = getString(R.string.pref_password, null);
 
@@ -612,7 +612,7 @@ public class Settings {
     }
 
     public static boolean isFriendLogsWanted() {
-        if (!isLogin()) {
+        if (!hasGCCredentials()) {
             // don't show a friends log if the user is anonymous
             return false;
         }

@@ -50,7 +50,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     @Nullable
     @Override
     public Loader<String> onCreateLoader(final int arg0, final Bundle arg1) {
-        if (!Settings.isLogin()) { // allow offline logging
+        if (!Settings.hasGCCredentials()) { // allow offline logging
             ActivityMixin.showToast(activity, activity.getResources().getString(R.string.err_login));
             return null;
         }
