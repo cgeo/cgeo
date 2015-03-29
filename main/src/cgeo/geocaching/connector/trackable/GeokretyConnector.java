@@ -233,7 +233,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
         }
         try {
             // SecId is mandatory when using API, anonymous log are only possible via website
-            if (null == Settings.getGeokretySecId() || Settings.getGeokretySecId().isEmpty()) {
+            if (Settings.getGeokretySecId() == null || Settings.getGeokretySecId().isEmpty()) {
                 Log.e("GeokretyConnector.postLogTrackable: not authenticated");
                 return new ImmutablePair<>(StatusCode.NO_LOGIN_INFO_STORED, Collections.<String> emptyList());
             }
@@ -254,10 +254,10 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                     "mobile_lang", Locale.getDefault().toString()
             );
             // See doc: http://geokrety.org/help.php#acceptableformats
-            if (null != cache && null != cache.getCoords()) {
+            if (cache != null && cache.getCoords() != null) {
                 params.add("latlon", cache.getCoords().toString());
             }
-            if (null != cache && null != cache.getGeocode()) {
+            if (cache != null && cache.getGeocode() != null) {
                 params.add("wpt", cache.getGeocode());
             }
 
@@ -268,7 +268,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             }
 
             final ImmutablePair<Integer, List<String>> response = GeokretyParser.parseResponse(page);
-            if (null == response) {
+            if (response == null) {
                 Log.w("GeokretyConnector.postLogTrackable: Cannot parseResponse geokrety");
                 return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, Collections.<String> emptyList());
             }
