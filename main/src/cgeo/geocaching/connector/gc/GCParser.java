@@ -11,6 +11,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.TrackableLog;
 import cgeo.geocaching.Waypoint;
+import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -18,7 +19,6 @@ import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.enumerations.TrackableBrand;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocParser;
 import cgeo.geocaching.gcvote.GCVote;
@@ -1807,7 +1807,7 @@ public abstract class GCParser {
     @NonNull
     public static ArrayList<LogTypeTrackable> parseLogTypesTrackables(final String page) {
         if (StringUtils.isEmpty(page)) {
-            return new ArrayList();
+            return new ArrayList<>();
         }
 
         final ArrayList<LogTypeTrackable> types = new ArrayList<>();

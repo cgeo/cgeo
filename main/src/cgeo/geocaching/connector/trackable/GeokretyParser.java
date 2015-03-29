@@ -3,11 +3,13 @@ package cgeo.geocaching.connector.trackable;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Trackable;
-import cgeo.geocaching.enumerations.TrackableBrand;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.SynchronizedDateFormat;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -20,20 +22,23 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.IOException;
 import java.io.StringReader;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 public class GeokretyParser {
     static class GeokretyHandler extends DefaultHandler {
+        private static final SynchronizedDateFormat DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd kk:mm:ss", TimeZone.getTimeZone("UTC"), Locale.US);
         private final List<Trackable> trackables = new ArrayList<>();
         private Trackable trackable;
         private String content;
 
+        @NonNull
         public final List<Trackable> getTrackables() {
             return trackables;
         }
@@ -107,7 +112,7 @@ public class GeokretyParser {
         public final void endElement(final String uri, final String localName, final String qName)
                 throws SAXException {
             try {
-                if (localName.equalsIgnoreCase("geokret") && !content.trim().isEmpty()) {
+                if (localName.equalsIgnoreCase("geokret") && StringUtils.isNotEmpty(content)) {
                     trackable.setName(content);
                 }
                 if (localName.equalsIgnoreCase("name")) {
@@ -120,7 +125,7 @@ public class GeokretyParser {
                     trackable.setOwner(content);
                 }
                 if (localName.equalsIgnoreCase("datecreated")) {
-                    final Date date = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss").parse(content);
+                    final Date date = DATE_FORMAT.parse(content);
                     trackable.setReleased(date);
                 }
                 if (localName.equalsIgnoreCase("distancetravelled")) {
@@ -140,15 +145,15 @@ public class GeokretyParser {
                     trackable.setSpottedName(content);
                     trackable.setSpottedType(Trackable.SPOTTED_CACHE);
                 }
-            } catch (final ParseException e) {
+            } catch (final ParseException | NumberFormatException e) {
                 Log.e("Parsing geokret", e);
             }
-        };
+        }
 
         @Override
         public final void characters(final char[] ch, final int start, final int length)
                 throws SAXException {
-            content = new String(ch, start, length);
+            content = StringUtils.trim(new String(ch, start, length));
         }
     }
 
@@ -173,13 +178,13 @@ public class GeokretyParser {
         return null;
     }
 
-    public static class GeokretyRuchyXmlParser {
+    private static class GeokretyRuchyXmlParser {
         private int gkid;
-        private final ArrayList<String> errors;
+        private final List<String> errors;
         private String text;
 
         public GeokretyRuchyXmlParser() {
-            errors = new ArrayList<String>();
+            errors = new ArrayList<>();
             gkid = 0;
         }
 
@@ -191,6 +196,7 @@ public class GeokretyParser {
             return gkid;
         }
 
+        @NonNull
         public List<String> parse(final String page) {
             try {
                 final XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -234,6 +240,7 @@ public class GeokretyParser {
         }
     }
 
+    @Nullable
     protected static String getType(final int type) {
         switch (type) {
             case 0:
@@ -250,12 +257,13 @@ public class GeokretyParser {
         return null;
     }
 
-    public static ImmutablePair<Integer, ArrayList<String>> parseResponse(final String page) {
+    @Nullable
+    public static ImmutablePair<Integer, List<String>> parseResponse(final String page) {
         if (null != page) {
             try {
                 final GeokretyRuchyXmlParser parser = new GeokretyRuchyXmlParser();
                 parser.parse(page);
-                return new ImmutablePair(parser.getGkid(), parser.getErrors());
+                return new ImmutablePair<>(parser.getGkid(), parser.getErrors());
             } catch (final Exception e) {
                 Log.w("Cannot parseResponse geokrety", e);
             }

@@ -12,7 +12,7 @@ import org.eclipse.jdt.annotation.Nullable;
 
 import android.content.Context;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class AbstractTrackableConnector implements TrackableConnector {
@@ -46,10 +46,15 @@ public abstract class AbstractTrackableConnector implements TrackableConnector {
     }
 
     @Override
-    public List<Trackable> searchTrackables(final String geocode) { return new ArrayList<>(); }
+    public List<Trackable> searchTrackables(final String geocode) {
+        return Collections.emptyList();
+    }
 
     @Override
-    public List<Trackable> loadInventory() { return new ArrayList<>(); }
+    @NonNull
+    public List<Trackable> loadInventory() {
+        return Collections.emptyList();
+    }
 
     @Override
     public boolean isGenericLoggable() {

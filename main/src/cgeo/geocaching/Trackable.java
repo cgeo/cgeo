@@ -1,9 +1,9 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
-import cgeo.geocaching.enumerations.TrackableBrand;
 import cgeo.geocaching.utils.ImageUtils;
 
 import org.apache.commons.lang3.StringUtils;

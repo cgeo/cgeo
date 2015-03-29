@@ -14,6 +14,9 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 import android.net.Uri;
 
 import java.util.ArrayList;
@@ -82,12 +85,14 @@ public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
     }
 
     @Override
+    @Nullable
     public ImageResult postLogImage(final String logId, final String imageCaption, final String imageDescription, final Uri imageUri) {
         return null;
     }
 
     @Override
-    public ArrayList<LogTypeTrackable> getPossibleLogTypesTrackable() {
+    @NonNull
+    public List<LogTypeTrackable> getPossibleLogTypesTrackable() {
         if (hasLoaderError) {
             final ArrayList<LogTypeTrackable> logTypes = new ArrayList<>();
             logTypes.add(LogTypeTrackable.RETRIEVED_IT);

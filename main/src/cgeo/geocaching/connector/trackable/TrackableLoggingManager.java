@@ -6,27 +6,25 @@ import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 import android.net.Uri;
 
-import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public interface TrackableLoggingManager {
 
     /**
-     * Post a log for a cache online
-     *
-     * @param trackable
-     * @param logType
-     * @param date
-     * @param log
-     * @return
+     * Post a log for a trackable online
      */
     LogResult postLog(Geocache cache,
                       TrackableLog trackableLog,
                       Calendar date,
                       String log);
 
+    @Nullable
     ImageResult postLogImage(String logId,
                              String imageCaption,
                              String imageDescription,
@@ -34,7 +32,8 @@ public interface TrackableLoggingManager {
 
     public boolean hasLoaderError();
 
-    public ArrayList<LogTypeTrackable> getPossibleLogTypesTrackable();
+    @NonNull
+    public List<LogTypeTrackable> getPossibleLogTypesTrackable();
 
     public boolean canLogTime();
 

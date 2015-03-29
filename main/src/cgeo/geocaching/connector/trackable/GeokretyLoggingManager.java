@@ -11,6 +11,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.net.Uri;
 
@@ -32,7 +33,7 @@ public class GeokretyLoggingManager extends AbstractTrackableLoggingManager {
     @Override
     public LogResult postLog(final Geocache cache, final TrackableLog trackableLog, final Calendar date, final String log) {
         try {
-            final ImmutablePair<StatusCode, ArrayList<String>> response = GeokretyConnector.postLogTrackable(
+            final ImmutablePair<StatusCode, List<String>> response = GeokretyConnector.postLogTrackable(
                     getContext(),
                     cache,
                     trackableLog,
@@ -55,7 +56,8 @@ public class GeokretyLoggingManager extends AbstractTrackableLoggingManager {
     }
 
     @Override
-    public ArrayList<LogTypeTrackable> getPossibleLogTypesTrackable() {
+    @NonNull
+    public List<LogTypeTrackable> getPossibleLogTypesTrackable() {
         final ArrayList<LogTypeTrackable> list = new ArrayList<>();
         list.add(LogTypeTrackable.RETRIEVED_IT);
         list.add(LogTypeTrackable.DISCOVERED_IT);

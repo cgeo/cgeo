@@ -10,7 +10,6 @@ import cgeo.geocaching.test.R;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.xml.sax.InputSource;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase {
@@ -39,8 +38,9 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
     }
 
     public void testParseResponse() throws Exception {
-        final ImmutablePair<Integer, ArrayList<String>> response1 = GeokretyParser.parseResponse(getFileContent(R.raw.geokret142_xml));
+        final ImmutablePair<Integer, List<String>> response1 = GeokretyParser.parseResponse(getFileContent(R.raw.geokret142_xml));
         assertThat(response1).isNotNull();
+        assert response1 != null;
         assertThat(response1.getLeft()).isNotNull();
         assertThat(response1.getLeft()).isEqualTo(0);
         assertThat(response1.getRight()).isNotNull();
@@ -48,15 +48,17 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         assertThat(response1.getRight().get(0)).isEqualTo("Identical log has been submited.");
         assertThat(response1.getRight().get(1)).isEqualTo("There is an entry with this date. Correct the date or the hour.");
 
-        final ImmutablePair<Integer, ArrayList<String>> response2 = GeokretyParser.parseResponse(getFileContent(R.raw.geokret143_xml));
+        final ImmutablePair<Integer, List<String>> response2 = GeokretyParser.parseResponse(getFileContent(R.raw.geokret143_xml));
         assertThat(response2).isNotNull();
+        assert response2 != null;
         assertThat(response2.getLeft()).isNotNull();
         assertThat(response2.getLeft()).isEqualTo(27334);
         assertThat(response2.getRight()).isNotNull();
         assertThat(response2.getRight()).hasSize(0);
 
-        final ImmutablePair<Integer, ArrayList<String>> response3 = GeokretyParser.parseResponse(getFileContent(R.raw.geokret144_xml));
+        final ImmutablePair<Integer, List<String>> response3 = GeokretyParser.parseResponse(getFileContent(R.raw.geokret144_xml));
         assertThat(response3).isNotNull();
+        assert response3 != null;
         assertThat(response3.getLeft()).isNotNull();
         assertThat(response3.getLeft()).isEqualTo(0);
         assertThat(response3.getRight()).isNotNull();
@@ -65,7 +67,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         assertThat(response3.getRight().get(1)).isEqualTo("Wrond date or time");
     }
 
-    public void testGetType() throws Exception {
+    public static void testGetType() throws Exception {
         final CgeoApplication app = CgeoApplication.getInstance();
         assertEquals(GeokretyParser.getType(0), app.getString(cgeo.geocaching.R.string.geokret_type_traditional));
         assertEquals(GeokretyParser.getType(1), app.getString(cgeo.geocaching.R.string.geokret_type_book_or_media));

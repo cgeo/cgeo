@@ -1,8 +1,8 @@
 package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.Trackable;
-import cgeo.geocaching.enumerations.TrackableBrand;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 public class UnknownTrackableConnector extends AbstractTrackableConnector {
@@ -24,6 +24,7 @@ public class UnknownTrackableConnector extends AbstractTrackableConnector {
     }
 
     @Override
+    @NonNull
     public TrackableBrand getBrand() {
         return TrackableBrand.UNKNOWN;
     }

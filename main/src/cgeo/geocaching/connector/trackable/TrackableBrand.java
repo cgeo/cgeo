@@ -1,7 +1,9 @@
-package cgeo.geocaching.enumerations;
+package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+
+import org.eclipse.jdt.annotation.NonNull;
 
 public enum TrackableBrand {
     TRAVELBUG(1, R.drawable.trackable_travelbug, R.string.trackable_travelbug),
@@ -31,6 +33,7 @@ public enum TrackableBrand {
         return CgeoApplication.getInstance().getString(stringId);
     }
 
+    @NonNull
     public static TrackableBrand getById(final int id) {
         for (final TrackableBrand brand : values()) {
             if (brand.id == id) {

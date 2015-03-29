@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
-import cgeo.geocaching.enumerations.TrackableBrand;
 
 import org.apache.commons.lang3.StringUtils;
 

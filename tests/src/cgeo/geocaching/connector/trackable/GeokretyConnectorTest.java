@@ -2,15 +2,17 @@ package cgeo.geocaching.connector.trackable;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import cgeo.geocaching.enumerations.TrackableBrand;
-import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.Trackable;
+import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 
 import org.xml.sax.InputSource;
 
 import java.util.List;
 
+/**
+ * test for {@link GeokretyConnector}
+ */
 public class GeokretyConnectorTest extends AbstractResourceInstrumentationTestCase {
 
     public static void testCanHandleTrackable() {
@@ -29,7 +31,7 @@ public class GeokretyConnectorTest extends AbstractResourceInstrumentationTestCa
         assertThat(GeokretyConnector.geocode(46464)).isEqualTo("GKB580");
     }
 
-    public void testGetId() throws Exception {
+    public static void testGetId() throws Exception {
         assertThat(GeokretyConnector.getId("GKB581")).isEqualTo(46465);
     }
 

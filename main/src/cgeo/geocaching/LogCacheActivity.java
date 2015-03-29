@@ -482,9 +482,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
                     for (final TrackableConnector connector: trackablesConnectors) {
                         final TrackableLoggingManager manager = connector.getTrackableLoggingManager((AbstractLoggingActivity) activity);
-                        for (final TrackableLog trackableLog: trackables) {
-                            manager.postLog(cache, trackableLog, date, log);
-
+                        if (manager != null) {
+                            for (final TrackableLog trackableLog : trackables) {
+                                manager.postLog(cache, trackableLog, date, log);
+                            }
                         }
                     }
 
