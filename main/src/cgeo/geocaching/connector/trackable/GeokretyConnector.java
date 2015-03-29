@@ -254,8 +254,10 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                     "mobile_lang", Locale.getDefault().toString()
             );
             // See doc: http://geokrety.org/help.php#acceptableformats
-            if (null != cache && null != cache.getCoords() && null != cache.getGeocode()) {
+            if (null != cache && null != cache.getCoords()) {
                 params.add("latlon", cache.getCoords().toString());
+            }
+            if (null != cache && null != cache.getGeocode()) {
                 params.add("wpt", cache.getGeocode());
             }
 
