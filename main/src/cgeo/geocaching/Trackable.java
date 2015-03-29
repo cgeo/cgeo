@@ -78,6 +78,16 @@ public class Trackable implements ILogable {
         return geocode;
     }
 
+    public String getUniqueID() {
+        if (StringUtils.isNotEmpty(guid)) {
+            return guid;
+        }
+        if (StringUtils.isNotEmpty(geocode)) {
+            return geocode;
+        }
+        throw new IllegalStateException("Trackable must have at least one of geocode or guid");
+    }
+
     public void setGeocode(final String geocode) {
         this.geocode = StringUtils.upperCase(geocode);
     }

@@ -11,6 +11,13 @@ public class TrackableTest extends AndroidTestCase {
         assertThat(trackable.getGeocode()).isEqualTo("TB1234");
     }
 
+    public static void testGetUniqueID() {
+        final Trackable trackable = createTrackable("tb1234");
+        assertThat(trackable.getUniqueID()).isEqualTo("TB1234");
+        trackable.setGuid("1234-567-890");
+        assertThat(trackable.getUniqueID()).isEqualTo("1234-567-890");
+    }
+
     public static void testSetLogsNull() {
         final Trackable trackable = new Trackable();
         trackable.setLogs(null);

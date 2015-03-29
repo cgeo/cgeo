@@ -1815,12 +1815,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             final HashMap<String, Trackable> trackables = new HashMap<>();
             if (cache.getInventory() != null) {
                 for (final Trackable trackable: cache.getInventory()) {
-                    trackables.put(trackable.getGeocode(), trackable);
+                    trackables.put(trackable.getUniqueID(), trackable);
                 }
             }
             if (genericTrackables != null) {
                 for (final Trackable trackable: genericTrackables) {
-                    trackables.put(trackable.getGeocode(), trackable);
+                    trackables.put(trackable.getUniqueID(), trackable);
                 }
             }
             for (final Map.Entry<String, Trackable> trackable: trackables.entrySet()) {
