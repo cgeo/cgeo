@@ -56,6 +56,7 @@
             <Button
                 android:id="@+id/coordinates"
                 style="@style/button_full"
+                android:hint="@string/cache_coordinates"
                 android:layout_width="0dip"
                 android:layout_weight="1" />
         </LinearLayout>
