@@ -8,6 +8,7 @@ import cgeo.geocaching.utils.ImageUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.text.Html;
 
@@ -29,6 +30,7 @@ public class Trackable implements ILogable {
     private String iconUrl = "";
     private String name = "";
     private String type = null;
+    @Nullable
     private Date released = null;
     private float distance = -1;
     private String origin = null;
@@ -141,11 +143,15 @@ public class Trackable implements ILogable {
         this.type = type;
     }
 
+    @Nullable
     public Date getReleased() {
-        return new Date(released.getTime());
+        if (released != null) {
+            return new Date(released.getTime());
+        }
+        return null;
     }
 
-    public void setReleased(final Date released) {
+    public void setReleased(@Nullable final Date released) {
         if (released == null) {
             this.released = null;
         }

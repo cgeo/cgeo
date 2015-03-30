@@ -1513,8 +1513,9 @@ public class DataStore {
                 values.put("guid", trackable.getGuid());
                 values.put("title", trackable.getName());
                 values.put("owner", trackable.getOwner());
-                if (trackable.getReleased() != null) {
-                    values.put("released", trackable.getReleased().getTime());
+                final Date releasedDate = trackable.getReleased();
+                if (releasedDate != null) {
+                    values.put("released", releasedDate.getTime());
                 } else {
                     values.put("released", 0L);
                 }

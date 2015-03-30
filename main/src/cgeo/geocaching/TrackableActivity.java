@@ -60,6 +60,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -490,8 +491,9 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             }
 
             // trackable released
-            if (trackable.getReleased() != null) {
-                addContextMenu(details.add(R.string.trackable_released, Formatter.formatDate(trackable.getReleased().getTime())).right);
+            final Date releasedDate = trackable.getReleased();
+            if (releasedDate != null) {
+                addContextMenu(details.add(R.string.trackable_released, Formatter.formatDate(releasedDate.getTime())).right);
             }
 
             // trackable distance
