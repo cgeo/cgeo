@@ -118,6 +118,14 @@ public abstract class GPXParser extends FileParser {
      * URL contained in the header of the GPX file. Used to guess where the file is coming from.
      */
     protected String scriptUrl;
+    /**
+     * original longitude in case of modified coordinates
+     */
+    @Nullable protected String originalLon;
+    /**
+     * original latitude in case of modified coordinates
+     */
+    @Nullable protected String originalLat;
 
     private final class UserDataListener implements EndTextElementListener {
         private final int index;
@@ -894,6 +902,34 @@ public abstract class GPXParser extends FileParser {
                     cache.setPremiumMembersOnly(Boolean.parseBoolean(premium));
                 }
             });
+
+            gsak.getChild(gsakNamespace, "LatBeforeCorrect").setEndTextElementListener(new EndTextElementListener() {
+
+                @Override
+                public void end(final String latitude) {
+                    originalLat = latitude;
+                    addOriginalCoordinates();
+                }
+            });
+
+            gsak.getChild(gsakNamespace, "LonBeforeCorrect").setEndTextElementListener(new EndTextElementListener() {
+
+                @Override
+                public void end(final String longitude) {
+                    originalLon = longitude;
+                    addOriginalCoordinates();
+                }
+            });
+
+        }
+    }
+
+    protected void addOriginalCoordinates() {
+        if (StringUtils.isNotEmpty(originalLat) && StringUtils.isNotEmpty(originalLon)) {
+            final Waypoint waypoint = new Waypoint(CgeoApplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
+            waypoint.setCoords(new Geopoint(originalLat, originalLon));
+            cache.addOrChangeWaypoint(waypoint, false);
+            cache.setUserModifiedCoords(true);
         }
     }
 
@@ -1025,6 +1061,8 @@ public abstract class GPXParser extends FileParser {
         for (int i = 0; i < userData.length; i++) {
             userData[i] = null;
         }
+        originalLon = null;
+        originalLat = null;
     }
 
     /**

@@ -376,6 +376,18 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(cache.isPremiumMembersOnly()).isTrue();
     }
 
+    public void testGsakModified() throws IOException, ParserException {
+        final Geocache unmodified = getFirstCache(R.raw.gc3t1xg_gsak);
+        assertThat(unmodified.hasUserModifiedCoords()).isFalse();
+        final Geocache cache = getFirstCache(R.raw.modified_gsak);
+        assertThat(cache.hasUserModifiedCoords()).isTrue();
+        assertThat(cache.getWaypoints()).hasSize(1);
+        final Waypoint waypoint = cache.getWaypoints().get(0);
+        assertThat(waypoint.getWaypointType()).isEqualTo(WaypointType.ORIGINAL);
+        assertThat(waypoint.getCoords()).isEqualTo(new Geopoint("51.223032", "6.026147"));
+        assertThat(cache.getCoords()).isEqualTo(new Geopoint("51.223033", "6.027767"));
+    }
+
     public void testGPXMysteryType() throws IOException, ParserException {
         final List<Geocache> caches = readGPX10(R.raw.tc2012);
         final Geocache mystery = getCache(caches, "U017");
