@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<gkxml version="1.0" date="2015-03-31 00:53:46"><geokrety>
+  <geokret id="49728">
+    <name><![CDATA[c:geo Test]]></name>
+    <description><![CDATA[Dieser Geokret dient zum Testen von c:geo.<br />
+Er befindet sich nicht wirklich im gelisteten Cache. <br />
+<br />
+Bitte ignorieren.]]></description>
+    <owner id="17135"><![CDATA[Lineflyer]]></owner>
+    <datecreated>2015-03-29 00:12:15</datecreated>
+    <distancetravelled>2254</distancetravelled>
+    <state>5</state>
+    <missing>0</missing>
+    <position latitude="51.31667" longitude="7.00000"/>
+    <waypoints>
+      <waypoint/>
+    </waypoints>
+    <type id="0">Traditional</type>
+    <image>1427622499j2yp8.png</image>
+  </geokret>
+</geokrety><history/></gkxml>
