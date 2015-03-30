@@ -94,6 +94,7 @@ public class Geocache implements IWaypoint {
     private String name = "";
     private String ownerDisplayName = "";
     private String ownerUserId = "";
+    @Nullable
     private Date hidden = null;
     /**
      * lazy initialized
@@ -436,6 +437,7 @@ public class Geocache implements IWaypoint {
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
+        assert hidden != null; // Eclipse compiler issue
         return hidden.compareTo(cal.getTime()) >= 0;
     }
 
@@ -764,7 +766,10 @@ public class Geocache implements IWaypoint {
 
     @Nullable
     public Date getHiddenDate() {
-        return new Date(hidden.getTime());
+        if (hidden != null) {
+            return new Date(hidden.getTime());
+        }
+        return null;
     }
 
     @NonNull
