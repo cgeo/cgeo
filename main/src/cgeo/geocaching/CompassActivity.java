@@ -179,6 +179,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         menu.findItem(R.id.menu_tts_start).setVisible(!SpeechService.isRunning());
         menu.findItem(R.id.menu_tts_stop).setVisible(SpeechService.isRunning());
         menu.findItem(R.id.menu_compass_cache).setVisible(cache != null);
+        menu.findItem(R.id.menu_hint).setVisible(cache != null);
         return true;
     }
 
