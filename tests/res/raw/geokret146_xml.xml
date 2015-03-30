@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<gkxml version="1.0" date="2015-03-31 01:43:52"><geokrety>
+  <geokret id="49729">
+    <name><![CDATA[Wojna]]></name>
+    <description><![CDATA[Byle gdzie ale żeby było miło :D]]></description>
+    <owner id="28656"><![CDATA[Ładżi]]></owner>
+    <datecreated/>
+    <distancetravelled/>
+    <state/>
+    <missing>0</missing>
+    <position latitude="" longitude=""/>
+    <waypoints>
+      <waypoint/>
+    </waypoints>
+    <type id="0">Traditional</type>
+    <image/>
+  </geokret>
+</geokrety><history/></gkxml>
