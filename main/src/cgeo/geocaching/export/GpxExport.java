@@ -63,10 +63,11 @@ public class GpxExport extends AbstractExport {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
         final Context themedContext;
-        if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB)
+        if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB) {
             themedContext = new ContextThemeWrapper(activity, R.style.dark);
-        else
+        } else {
             themedContext = activity;
+        }
 
         final View layout = View.inflate(themedContext, R.layout.gpx_export_dialog, null);
         builder.setView(layout);

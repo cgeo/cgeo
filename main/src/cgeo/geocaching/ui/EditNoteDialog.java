@@ -53,10 +53,11 @@ public class EditNoteDialog extends DialogFragment {
         final @NonNull FragmentActivity activity = getActivity();
 
         final Context themedContext;
-        if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB)
+        if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB) {
             themedContext = new ContextThemeWrapper(activity, R.style.dark);
-        else
+        } else {
             themedContext = activity;
+        }
 
         final View view = View.inflate(themedContext, R.layout.fragment_edit_note, null);
         mEditText = ButterKnife.findById(view, R.id.note);
