@@ -1208,7 +1208,6 @@
   <string name="showcase_cachelist_title">A trocar de listas</string>
   <string name="showcase_cachelist_text">Pode alternar entre listas de caches clicando no título da lista.</string>
   <string name="showcase_compass_hint_title">Mostrar a dica</string>
-  <string name="showcase_compass_hint_text">montra_bussola_dica_texto</string>
   <string name="confirm_log_title">Tipo de registo invulgar</string>
   <string name="confirm_log_message">Quer fazer o registo \'%s\'. Tem a certeza?</string>
 </resources>

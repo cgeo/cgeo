@@ -687,6 +687,7 @@
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Hlasovat</string>
+  <string name="cache_menu_checker">Otevřít Geocheck</string>
   <string name="cache_menu_ignore">Ignorovat keš</string>
   <string name="cache_status">Stav</string>
   <string name="cache_status_offline_log">Připravený Log</string>
@@ -773,6 +774,7 @@
   <string name="waypoint_note">Poznámka</string>
   <string name="waypoint_visited">Navštíven</string>
   <string name="waypoint_save">Uložit</string>
+  <string name="waypoint_cancel_edit">Zrušit</string>
   <string name="waypoint_loading">Načítání bodu trasy…</string>
   <string name="waypoint_do_not_touch_cache_coordinates">Neměnit souřadnice keše</string>
   <string name="waypoint_set_as_cache_coords">Nastavit jako souřadnice keše v c:geo</string>
@@ -1224,6 +1226,8 @@
   <string name="showcase_main_text">c:geo nyní umísťuje položky menu v záhlaví jako ostatní moderní aplikace. Některé položky jsou skryty za symbolem tří teček. Dlouhým stiskem tlačítka zobrazíš jeho popis.</string>
   <string name="showcase_cachelist_title">Přepínání seznamů</string>
   <string name="showcase_cachelist_text">Mezi seznamy s keškami můžeš přepínat klepnutím na název seznamu.</string>
+  <string name="showcase_compass_hint_title">Zobrazit nápovědu</string>
+  <string name="showcase_compass_hint_text">Tato nová položka vám může poradit, kde kešku hledat - zobrazuje nápovědu, pokud je k dispozici.</string>
   <string name="confirm_log_title">Neobvyklý typ logu</string>
   <string name="confirm_log_message">Opravdu chceš zalogovat „%s“?</string>
 </resources>

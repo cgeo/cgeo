@@ -74,6 +74,9 @@
   <string name="log_tb_visit">Visitado</string>
   <string name="log_tb_drop">Dejar aquí</string>
   <string name="log_tb_changeall">Cambiar todo</string>
+  <string name="log_tb_note">Nota</string>
+  <string name="log_tb_discovered">Descubierto</string>
+  <string name="log_tb_archived">Archivado</string>
   <string name="log_save">Guardar sin conexión</string>
   <string name="log_saving">Enviando registro…</string>
   <string name="log_saving_and_uploading">Enviando registro y subiendo imagen…</string>
@@ -124,6 +127,7 @@
   <string name="err_parse">Error procesando la página de acceso</string>
   <string name="err_server">Error conectando a Geocaching.com (¿servidor o conexión caidos?)</string>
   <string name="err_server_ec">Imposible conectar a Extremcaching.com. La página web puede estar caída o su conexión a Internet no funciona.</string>
+  <string name="err_server_gk">No se pudo contactar con Geokrety.org. El sitio web puede estar caído o la conexión a internet no funciona.</string>
   <string name="err_login">No hay información de acceso guardada</string>
   <string name="err_login_failed_toast">c:geo no puede iniciar sesión. c:geo puede funcionar sin conexión con los cachés que hayan sido almacenados. Comprueba las opciones de inicio de sesión o active la conexión a internet.</string>
   <string name="err_unknown">Error desconocido</string>
@@ -162,6 +166,7 @@
   <string name="err_acquire_image_failed">No se pudo obtener una imagen.</string>
   <string name="err_tb_display">c:geo no puede mostrar el rastreable que buscas. ¿Es realmente un rastreable?</string>
   <string name="err_tb_details_open">c:geo no puede abrir los detalles del rastreable.</string>
+  <string name="err_tb_not_loggable">Este rastreable no se puede registrar.</string>
   <string name="err_tb_find">c:geo no encuentra el rasteable</string>
   <string name="err_tb_find_that">c:geo no encuentra ese rastreable.</string>
   <string name="err_waypoint_cache_unknown">c:geo no sabe a qué caché quieres añadir un punto de referencia.</string>
@@ -174,7 +179,11 @@
   <string name="err_log_load_data">c:geo no puede cargar los datos necesarios para registrar la visita.</string>
   <string name="err_log_load_data_again">c:geo no puede cargar los datos necesarios para registrar la visita. Intentándolo de nuevo.</string>
   <string name="err_log_load_data_still">c:geo sigue cargando datos para registrar el caché. Debes esperar un poquito más.</string>
+  <string name="err_log_post_missing_tracking_code">Falta el código rastreable.</string>
+  <string name="err_log_post_missing_coordinates">Faltan las coordenadas.</string>
   <string name="err_log_post_failed">Parece que tu registro no ha sido publicado. Compruébalo en la página original del caché.</string>
+  <string name="err_log_post_failed_ec">Parece que su registro no ha sido publicado. Por favor compruébalo en Extremcaching.com.</string>
+  <string name="err_log_post_failed_gk">Parece que su registro no ha sido publicado. Por favor compruébalo en geokrety.org.</string>
   <string name="err_logimage_post_failed">Parece que tu imagen no se ha subido. Compruébalo en la página original del caché.</string>
   <string name="err_search_address_forgot">c:geo ha olvidado la dirección que buscabas.</string>
   <string name="err_parse_lat">c:geo no puede procesar la latitud.</string>
@@ -520,6 +529,7 @@
   <string name="init_hardware_acceleration_note">La aceleración por hardware renderiza los elementos gráficos en pantalla de manera más rápida. Sin embargo en algunos dispositivos el sistema operativo Android contiene fallos y algunos textos pueden aparecer borrosos (especialmente caracteres en negrita). Inhabilita la aceleración por hardware si ocurriera esto.</string>
   <string name="init_hardware_acceleration">Habilitar aceleración por hardware</string>
   <string name="settings_open_website">Abrir el sitio web</string>
+  <string name="settings_open_geokretymap_website">Abrir el sitio web GeokretyMap.org</string>
   <string name="settings_settings">Ajustes</string>
   <string name="settings_information">Información</string>
   <string name="settings_twitter_cache_message">Mensaje para caché encontrado</string>
@@ -841,7 +851,7 @@
   <string name="trackable_goal">Objetivo</string>
   <string name="trackable_details">Detalles</string>
   <string name="trackable_image">Imagen</string>
-  <string name="trackable_code">Código TB</string>
+  <string name="trackable_code">Código rastreable</string>
   <string name="trackable_name">Nombre</string>
   <string name="trackable_type">Tipo</string>
   <string name="trackable_owner">Propietario</string>
@@ -856,6 +866,7 @@
   <string name="trackable_distance">Recorrido</string>
   <string name="trackable_touch">Contacto</string>
   <string name="trackable_not_activated">Rasteable no activado</string>
+  <string name="trackable_geokrety">Geokrety</string>
   <string name="geokret_type_traditional">Tradicional</string>
   <string name="geokret_type_book_or_media">Libro o medio electrónicos</string>
   <string name="geokret_type_human">Humano</string>
@@ -1202,7 +1213,13 @@
   <string name="showcase_cachelist_title">Cambio entre listas</string>
   <string name="showcase_cachelist_text">Puedes cambiar entre tus listas de cachés haciendo clic sobre el nombre de la lista.</string>
   <string name="showcase_compass_hint_title">Mostrar la pista</string>
-  <string name="showcase_compass_hint_text">Este nuevo elemento de menú puede darte una idea donde se encuentra la caché - demuestra la pista, si está disponible.</string>
+  <string name="showcase_compass_hint_text">Este nuevo elemento del menú puede darte una idea de dónde encontrar el caché - muestra la pista, si está disponible.</string>
   <string name="confirm_log_title">Tipo de registro inusual</string>
   <string name="confirm_log_message">Vas a registrar \'%s\'. ¿Estás seguro?</string>
+  <string name="init_geokrety">Geokrety.org</string>
+  <string name="init_geokrety_login">Iniciar sesión en Geokrety.org</string>
+  <string name="init_connectorGeokretyActive">Rastreables de Geokrety</string>
+  <string name="init_summary_geokrety">Habilitar rastreables de Geokrety.org</string>
+  <string name="init_summary_geokrety_cache">Mejorar la velocidad de carga.</string>
+  <string name="init_summary_geokrety_account">No hay cuenta configurada.</string>
 </resources>
