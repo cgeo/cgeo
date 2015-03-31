@@ -2,6 +2,11 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
+    <b>2015.03.31:</b>\n
+    · Fix: Adaption to website changes on gc.com (login failed message on main screen)\n
+    · Updated translations\n
+    \n
+    \n
     <b>2015.03.28:</b>\n
     · Fix: Adaption to website changes on gc.com\n
     · New: Distance and direction shown on map of a single cache\n
