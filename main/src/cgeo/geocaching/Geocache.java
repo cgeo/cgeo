@@ -1433,8 +1433,8 @@ public class Geocache implements IWaypoint {
         return this == obj || (obj instanceof Geocache && StringUtils.isNotEmpty(geocode) && geocode.equals(((Geocache) obj).geocode));
     }
 
-    public void store(final CancellableHandler handler) {
-        store(StoredList.TEMPORARY_LIST.id, handler);
+    public void store() {
+        store(StoredList.TEMPORARY_LIST.id, null);
     }
 
     public void store(final int listId, final CancellableHandler handler) {
