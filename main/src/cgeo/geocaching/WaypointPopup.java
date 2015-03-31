@@ -16,7 +16,7 @@ public class WaypointPopup extends AbstractActivity {
     private String geocode;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -44,15 +44,15 @@ public class WaypointPopup extends AbstractActivity {
         // DialogFragment.show() will take care of adding the fragment
         // in a transaction.  We also want to remove any currently showing
         // dialog, so make our own transaction and take care of that here.
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        Fragment prev = getSupportFragmentManager().findFragmentByTag("dialog");
+        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        final Fragment prev = getSupportFragmentManager().findFragmentByTag("dialog");
         if (prev != null) {
             ft.remove(prev);
         }
         ft.addToBackStack(null);
 
         // Create and show the dialog.
-        DialogFragment newFragment = WaypointPopupFragment.newInstance(geocode, waypointId);
+        final DialogFragment newFragment = WaypointPopupFragment.newInstance(geocode, waypointId);
         newFragment.show(ft, "dialog");
     }
 

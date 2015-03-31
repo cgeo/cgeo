@@ -44,7 +44,7 @@ class CacheListSpinnerAdapter extends ArrayAdapter<AbstractList> {
                 (LayoutInflater) cacheListActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 
-        CacheListSpinnerAdapter.ViewHolder holder;
+        final CacheListSpinnerAdapter.ViewHolder holder;
         if (resultView == null) {
             resultView = inflater.inflate(R.layout.cachelist_spinneritem, parent, false);
             holder = new ViewHolder();

@@ -16,7 +16,7 @@ public class WaypointViewHolder extends AbstractViewHolder {
     @InjectView(R.id.note) protected TextView noteView;
     @InjectView(R.id.wpDefaultNavigation) protected ImageView wpNavView;
 
-    public WaypointViewHolder(View rowView) {
+    public WaypointViewHolder(final View rowView) {
         super(rowView);
     }
 

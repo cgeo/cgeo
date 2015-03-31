@@ -45,12 +45,12 @@ public class SearchResult implements Parcelable {
 
     final public static Parcelable.Creator<SearchResult> CREATOR = new Parcelable.Creator<SearchResult>() {
         @Override
-        public SearchResult createFromParcel(Parcel in) {
+        public SearchResult createFromParcel(final Parcel in) {
             return new SearchResult(in);
         }
 
         @Override
-        public SearchResult[] newArray(int size) {
+        public SearchResult[] newArray(final int size) {
             return new SearchResult[size];
         }
     };
@@ -187,7 +187,7 @@ public class SearchResult implements Parcelable {
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(final String url) {
         this.url = url;
     }
 
@@ -195,7 +195,7 @@ public class SearchResult implements Parcelable {
         return viewstates;
     }
 
-    public void setViewstates(String[] viewstates) {
+    public void setViewstates(final String[] viewstates) {
         if (GCLogin.isEmpty(viewstates)) {
             return;
         }
@@ -211,7 +211,7 @@ public class SearchResult implements Parcelable {
         return totalCountGC;
     }
 
-    public void setTotalCountGC(int totalCountGC) {
+    public void setTotalCountGC(final int totalCountGC) {
         this.totalCountGC = totalCountGC;
     }
 
@@ -219,12 +219,12 @@ public class SearchResult implements Parcelable {
      */
     public SearchResult filterSearchResults(final boolean excludeDisabled, final boolean excludeMine, final CacheType cacheType) {
 
-        SearchResult result = new SearchResult(this);
+        final SearchResult result = new SearchResult(this);
         result.geocodes.clear();
         final ArrayList<Geocache> includedCaches = new ArrayList<>();
         final Set<Geocache> caches = DataStore.loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
         int excluded = 0;
-        for (Geocache cache : caches) {
+        for (final Geocache cache : caches) {
             // Is there any reason to exclude the cache from the list?
             final boolean excludeCache = (excludeDisabled && (cache.isDisabled() || cache.isArchived())) ||
                     (excludeMine && (cache.isOwner() || cache.isFound())) ||
@@ -260,13 +260,13 @@ public class SearchResult implements Parcelable {
     }
 
     /** Add the geocodes to the search. No caches are loaded into the CacheCache */
-    public boolean addGeocodes(Set<String> geocodes) {
+    public boolean addGeocodes(final Set<String> geocodes) {
         return this.geocodes.addAll(geocodes);
     }
 
     /** Add the cache geocode to the search and store the cache in the CacheCache */
     public void addAndPutInCache(final Collection<Geocache> caches) {
-        for (Geocache geocache : caches) {
+        for (final Geocache geocache : caches) {
             addGeocode(geocache.getGeocode());
         }
         DataStore.saveCaches(caches, EnumSet.of(SaveFlag.CACHE));
@@ -285,7 +285,7 @@ public class SearchResult implements Parcelable {
         return false;
     }
 
-    public void addFilteredGeocodes(Set<String> cachedMissingFromSearch) {
+    public void addFilteredGeocodes(final Set<String> cachedMissingFromSearch) {
         filteredGeocodes.addAll(cachedMissingFromSearch);
     }
 
@@ -293,7 +293,7 @@ public class SearchResult implements Parcelable {
         return Collections.unmodifiableSet(filteredGeocodes);
     }
 
-    public void addSearchResult(SearchResult other) {
+    public void addSearchResult(final SearchResult other) {
         if (other == null) {
             return;
         }

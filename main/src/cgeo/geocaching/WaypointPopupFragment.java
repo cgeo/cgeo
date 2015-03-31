@@ -33,8 +33,8 @@ public class WaypointPopupFragment extends AbstractDialogFragment {
     private TextView waypointDistance = null;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View  v = inflater.inflate(R.layout.waypoint_popup, container, false);
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+        final View  v = inflater.inflate(R.layout.waypoint_popup, container, false);
         initCustomActionBar(v);
         ButterKnife.inject(this,v);
 
@@ -48,7 +48,7 @@ public class WaypointPopupFragment extends AbstractDialogFragment {
     }
 
     @Override
-    protected void onUpdateGeoData(GeoData geo) {
+    protected void onUpdateGeoData(final GeoData geo) {
         if (waypoint != null && waypoint.getCoords() != null) {
             waypointDistance.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(waypoint.getCoords())));
             waypointDistance.bringToFront();
@@ -90,7 +90,7 @@ public class WaypointPopupFragment extends AbstractDialogFragment {
             buttonEdit.setOnClickListener(new OnClickListener() {
 
                 @Override
-                public void onClick(View arg0) {
+                public void onClick(final View arg0) {
                     EditWaypointActivity.startActivityEditWaypoint(getActivity(), cache, waypoint.getId());
                     getActivity().finish();
                 }
@@ -101,7 +101,7 @@ public class WaypointPopupFragment extends AbstractDialogFragment {
 
             addCacheDetails();
 
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Log.e("WaypointPopup.init", e);
         }
     }
@@ -139,13 +139,13 @@ public class WaypointPopupFragment extends AbstractDialogFragment {
         return waypoint.getCoords();
     }
 
-    public static DialogFragment newInstance(String geocode, int waypointId) {
+    public static DialogFragment newInstance(final String geocode, final int waypointId) {
 
-        Bundle args = new Bundle();
+        final Bundle args = new Bundle();
         args.putInt(WAYPOINT_ARG, waypointId);
         args.putString(GEOCODE_ARG, geocode);
 
-        DialogFragment f = new WaypointPopupFragment();
+        final DialogFragment f = new WaypointPopupFragment();
         f.setArguments(args);
         f.setStyle(DialogFragment.STYLE_NO_TITLE,0);
 

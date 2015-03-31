@@ -36,7 +36,7 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
     private final static int REQUEST_DIRECTORY = 1;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.inject(this);
 
@@ -45,7 +45,7 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
         selectDirectory.setOnClickListener(new OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 try {
                     final Intent dirChooser = new Intent(FileManagerIntents.ACTION_PICK_DIRECTORY);
                     dirChooser.putExtra(FileManagerIntents.EXTRA_TITLE,
@@ -53,7 +53,7 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
                     dirChooser.putExtra(FileManagerIntents.EXTRA_BUTTON_TEXT,
                             getString(android.R.string.ok));
                     startActivityForResult(dirChooser, REQUEST_DIRECTORY);
-                } catch (android.content.ActivityNotFoundException ignored) {
+                } catch (final android.content.ActivityNotFoundException ignored) {
                     // OI file manager not available
                     final Intent dirChooser = new Intent(SelectMapfileActivity.this, SimpleDirChooser.class);
                     dirChooser.putExtra(Intents.EXTRA_START_DIR, LocalStorage.getStorage().getAbsolutePath());
@@ -68,7 +68,7 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
     @Override
     public void close() {
 
-        Intent intent = new Intent();
+        final Intent intent = new Intent();
         intent.putExtra(Intents.EXTRA_MAP_FILE, mapFile);
 
         setResult(RESULT_OK, intent);
@@ -77,14 +77,14 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
     }
 
     @Override
-    protected FileSelectionListAdapter getAdapter(List<File> files) {
+    protected FileSelectionListAdapter getAdapter(final List<File> files) {
         return new FileSelectionListAdapter(this, files);
     }
 
     @Override
     protected List<File> getBaseFolders() {
-        List<File> folders = new ArrayList<>();
-        for (File dir : LocalStorage.getStorages()) {
+        final List<File> folders = new ArrayList<>();
+        for (final File dir : LocalStorage.getStorages()) {
             folders.add(new File(dir, "mfmaps"));
             folders.add(new File(new File(dir, "Locus"), "mapsVector"));
             folders.add(new File(dir, LocalStorage.CACHE_DIRNAME));
@@ -98,7 +98,7 @@ public class SelectMapfileActivity extends AbstractFileListActivity<FileSelectio
     }
 
     @Override
-    public void setCurrentFile(String name) {
+    public void setCurrentFile(final String name) {
         mapFile = name;
     }
 
