@@ -148,7 +148,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
         private final FileListSelector selector = new FileListSelector();
 
         public void notifyEnd() {
-            selector.setShouldEnd(true);
+            selector.setShouldEnd();
         }
 
         @Override
@@ -254,8 +254,8 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
             return shouldEnd;
         }
 
-        public synchronized void setShouldEnd(final boolean shouldEnd) {
-            this.shouldEnd = shouldEnd;
+        public synchronized void setShouldEnd() {
+            this.shouldEnd = true;
         }
     }
 }
