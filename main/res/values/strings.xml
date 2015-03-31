@@ -728,7 +728,7 @@
     <string name="cache_menu_map_static">Static Maps</string>
     <string name="cache_menu_download_map_static">Download Static Maps</string>
     <string name="cache_menu_rmaps">Rmaps</string>
-    <string name="cache_menu_map_ext">Show on ext. map</string>
+    <string name="cache_menu_map_ext">Other external apps</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Open in browser</string>
     <string name="cache_menu_visit">Log Visit</string>
