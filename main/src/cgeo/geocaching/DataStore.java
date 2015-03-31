@@ -938,7 +938,7 @@ public class DataStore {
         db.execSQL("drop table if exists " + dbTableTrackables);
     }
 
-    public static boolean isThere(final String geocode, final String guid, final boolean detailed, final boolean checkTime) {
+    public static boolean isThere(final String geocode, final String guid, final boolean checkTime) {
         init();
 
         long dataUpdated = 0;
@@ -983,18 +983,13 @@ public class DataStore {
             Log.e("DataStore.isThere", e);
         }
 
-        if (detailed && dataDetailed == 0) {
+        if (dataDetailed == 0) {
             // we want details, but these are not stored
             return false;
         }
 
-        if (checkTime && detailed && dataDetailedUpdate < (System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED)) {
+        if (checkTime && dataDetailedUpdate < (System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED)) {
             // we want to check time for detailed cache, but data are older than 3 hours
-            return false;
-        }
-
-        if (checkTime && !detailed && dataUpdated < (System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED)) {
-            // we want to check time for short cache, but data are older than 3 hours
             return false;
         }
 
@@ -1788,8 +1783,6 @@ public class DataStore {
                 "geocode = ?",
                 new String[]{geocode},
                 null,
-                null,
-                null,
                 "100",
                 new LinkedList<String>(),
                 GET_STRING_0);
@@ -1832,8 +1825,6 @@ public class DataStore {
                 WAYPOINT_COLUMNS,
                 "geocode = ?",
                 new String[]{geocode},
-                null,
-                null,
                 "_id",
                 "100",
                 new LinkedList<Waypoint>(),
@@ -1873,8 +1864,6 @@ public class DataStore {
                 "geocode = ?",
                 new String[]{geocode},
                 null,
-                null,
-                null,
                 "100",
                 new LinkedList<Image>(),
                 new Func1<Cursor, Image>() {
@@ -1896,8 +1885,6 @@ public class DataStore {
         return queryToColl(dbTableSearchDestinationHistory,
                 new String[]{"_id", "date", "latitude", "longitude"},
                 "latitude IS NOT NULL AND longitude IS NOT NULL",
-                null,
-                null,
                 null,
                 "date desc",
                 "100",
@@ -2135,14 +2122,12 @@ public class DataStore {
                                                                      final String[] columns,
                                                                      final String selection,
                                                                      final String[] selectionArgs,
-                                                                     final String groupBy,
-                                                                     final String having,
                                                                      final String orderBy,
                                                                      final String limit,
                                                                      final U result,
                                                                      final Func1<? super Cursor, ? extends T> func) {
         init();
-        final Cursor cursor = database.query(table, columns, selection, selectionArgs, groupBy, having, orderBy, limit);
+        final Cursor cursor = database.query(table, columns, selection, selectionArgs, null, null, orderBy, limit);
         return cursorToColl(cursor, result, func);
     }
 
@@ -2188,8 +2173,6 @@ public class DataStore {
                                 ") + abs(longitude-" + String.format((Locale) null, "%.6f", coords.getLongitude()) + ")) as dif"},
                         selection.toString(),
                         selectionArgs,
-                        null,
-                        null,
                         "dif",
                         null,
                         new HashSet<String>(),
@@ -2199,8 +2182,6 @@ public class DataStore {
                     new String[] { "geocode" },
                     selection.toString(),
                     selectionArgs,
-                    null,
-                    null,
                     "geocode",
                     null,
                     new HashSet<String>(),
@@ -2229,8 +2210,6 @@ public class DataStore {
                     new String[]{"geocode"},
                     selection.toString(),
                     selectionArgs,
-                    null,
-                    null,
                     "visiteddate",
                     null,
                     new HashSet<String>(),
@@ -2292,8 +2271,6 @@ public class DataStore {
                     selection.toString(),
                     selectionArgs,
                     null,
-                    null,
-                    null,
                     "500",
                     geocodes,
                     GET_STRING_0));
@@ -2328,8 +2305,6 @@ public class DataStore {
                                 null,
                                 null,
                                 null,
-                                null,
-                                null,
                                 geocodes,
                                 GET_STRING_0);
                     } else {
@@ -2339,8 +2314,6 @@ public class DataStore {
                                 new String[]{"geocode"},
                                 "reason = 0 and detailed < ? and detailedupdate < ? and visiteddate < ?",
                                 new String[]{timestampString, timestampString, timestampString},
-                                null,
-                                null,
                                 null,
                                 null,
                                 geocodes,
@@ -2383,8 +2356,6 @@ public class DataStore {
 
         final List<String> geocodesWithOfflineLog = queryToColl(dbTableLogsOffline,
                 new String[] { "geocode" },
-                null,
-                null,
                 null,
                 null,
                 null,

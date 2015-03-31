@@ -1612,7 +1612,7 @@ public class Geocache implements IWaypoint {
             return null;
         }
 
-        if (!forceReload && listId == StoredList.TEMPORARY_LIST.id && (DataStore.isOffline(geocode, guid) || DataStore.isThere(geocode, guid, true, true))) {
+        if (!forceReload && listId == StoredList.TEMPORARY_LIST.id && (DataStore.isOffline(geocode, guid) || DataStore.isThere(geocode, guid, true))) {
             final SearchResult search = new SearchResult();
             final String realGeocode = StringUtils.isNotBlank(geocode) ? geocode : DataStore.getGeocodeForGuid(guid);
             search.addGeocode(realGeocode);
