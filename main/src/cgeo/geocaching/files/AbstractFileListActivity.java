@@ -240,7 +240,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
         }
     }
 
-    private class FileListSelector extends FileUtils.FileSelector {
+    private class FileListSelector implements FileUtils.FileSelector {
 
         boolean shouldEnd = false;
 

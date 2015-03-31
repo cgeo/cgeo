@@ -1008,7 +1008,7 @@ public class Settings {
         return result.toArray(new File[result.size()]);
     }
 
-    private static class ExtensionsBasedFileSelector extends FileSelector {
+    private static class ExtensionsBasedFileSelector implements FileSelector {
         private final String[] extensions;
         public ExtensionsBasedFileSelector(final String[] extensions) {
             this.extensions = extensions;

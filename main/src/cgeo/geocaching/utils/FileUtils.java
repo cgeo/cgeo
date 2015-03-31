@@ -94,10 +94,9 @@ public final class FileUtils {
         return delete(dir);
     }
 
-    public static abstract class FileSelector {
-        public abstract boolean isSelected(File file);
-
-        public abstract boolean shouldEnd();
+    public interface FileSelector {
+        boolean isSelected(File file);
+        boolean shouldEnd();
     }
 
     /**
