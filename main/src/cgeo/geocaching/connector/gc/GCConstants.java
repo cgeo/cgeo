@@ -67,7 +67,7 @@ public final class GCConstants {
     final static Pattern PATTERN_RELATED_WEB_PAGE = Pattern.compile("id=\"ctl00_ContentBody_uxCacheUrl\" title=\"Related Web Page\" href=\"(.*?)\">");
 
     // Info box top-right
-    public static final Pattern PATTERN_LOGIN_NAME = Pattern.compile("\"SignedInProfileLink\">(.*?)</a>");
+    public static final Pattern PATTERN_LOGIN_NAME = Pattern.compile("class=\"li-user-info\"[^>]*>.*?<span>(.*?)</span>", Pattern.DOTALL);
     public static final Pattern PATTERN_MEMBERSHIP = Pattern.compile("<dl class=\"membership-details\">.*?<dt>Membership</dt>.*?<dd>\\s*(\\p{Alpha}+)\\s*</dd>", Pattern.DOTALL);
     public static final String MEMBER_STATUS_PREMIUM = "Premium";
     public static final String MEMBER_STATUS_CHARTER = "Charter";

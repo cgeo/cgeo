@@ -74,11 +74,16 @@
   <string name="log_tb_visit">Besucht</string>
   <string name="log_tb_drop">Abgelegt</string>
   <string name="log_tb_changeall">Alle ändern</string>
+  <string name="log_tb_grabbed">Woanders mitgenommen</string>
+  <string name="log_tb_note">Notiz</string>
+  <string name="log_tb_discovered">Gesehen</string>
+  <string name="log_tb_archived">Archiviert</string>
   <string name="log_save">Offline speichern</string>
   <string name="log_saving">Log wird gesendet…</string>
   <string name="log_saving_and_uploading">Log und Bild werden gesendet…</string>
   <string name="log_clear">Leeren</string>
   <string name="log_post_not_possible">Lade Log-Seite…</string>
+  <string name="log_post_geocode_missing">Geocode fehlt…</string>
   <string name="log_date_future_not_allowed">Logs in der Zukunft sind nicht erlaubt.</string>
   <string name="log_add">Hinzufügen</string>
   <string name="log_repeat">Verwende das letzte Log erneut</string>
@@ -123,7 +128,8 @@
   <string name="err_none">OK</string>
   <string name="err_parse">Parsing der Anmeldung gescheitert</string>
   <string name="err_server">Verbindung zu Geocaching.com konnte nicht hergestellt werden (Server oder Verbindung inaktiv?)</string>
-  <string name="err_server_ec">Verbindung zu Extremcaching.com konnte nicht hergestellt werden (Server oder Verbindung inaktiv?)</string>
+  <string name="err_server_ec">Verbindung zu extremcaching.com konnte nicht hergestellt werden. Server ist nicht verfügbar oder keine Internet-Verbindung vorhanden.</string>
+  <string name="err_server_gk">Verbindung zu geokrety.org konnte nicht hergestellt werden. Server ist nicht verfügbar oder keine Internet-Verbindung vorhanden.</string>
   <string name="err_login">Keine Anmeldedaten gespeichert.</string>
   <string name="err_login_failed_toast">c:geo konnte sich nicht einloggen und arbeitet im Offline-Modus. Bitte die Login-Daten in den Einstellungen überprüfen oder eine Internetverbindung herstellen.</string>
   <string name="err_unknown">Unbekannter Fehler</string>
@@ -162,6 +168,7 @@
   <string name="err_acquire_image_failed">Erstellen eines Fotos ist fehlgeschlagen.</string>
   <string name="err_tb_display">c:geo kann den gewünschten Trackable nicht anzeigen. Ist es wirklich einer?</string>
   <string name="err_tb_details_open">c:geo konnte die Details des Trackables nicht öffnen.</string>
+  <string name="err_tb_not_loggable">Dieser Trackable ist nicht logbar.</string>
   <string name="err_tb_find">c:geo findet den Trackable nicht</string>
   <string name="err_tb_find_that">c:geo konnte diesen Trackable nicht finden.</string>
   <string name="err_waypoint_cache_unknown">c:geo weiß nicht, zu welchem Cache der Wegpunkt hinzugefügt werden soll.</string>
@@ -174,7 +181,11 @@
   <string name="err_log_load_data">c:geo konnte die benötigten Daten nicht laden, um den Besuch zu loggen.</string>
   <string name="err_log_load_data_again">c:geo konnte die benötigten Daten nicht laden, um den Besuch zu loggen. Bitte erneut versuchen.</string>
   <string name="err_log_load_data_still">c:geo lädt gerade die benötigten Daten. Bitte kurz warten.</string>
+  <string name="err_log_post_missing_tracking_code">Tracking-Code fehlt.</string>
+  <string name="err_log_post_missing_coordinates">Koordinaten fehlen.</string>
   <string name="err_log_post_failed">Der Log-Eintrag wurde scheinbar nicht gesendet. Bitte auf der betreffenden Geocaching-Webseite prüfen.</string>
+  <string name="err_log_post_failed_ec">c:geo konnte den Log nicht absenden. Bitte auf Extremcaching.com überprüfen.</string>
+  <string name="err_log_post_failed_gk">c:geo konnte den Log nicht absenden. Bitte auf GeoKrety.org überprüfen.</string>
   <string name="err_logimage_post_failed">Das Log-Bild wurde scheinbar nicht hochgeladen. Bitte auf der betreffenden Geocaching-Webseite prüfen.</string>
   <string name="err_search_address_forgot">c:geo hat die Adresse vergessen, die gesucht wurde.</string>
   <string name="err_parse_lat">c:geo konnte den Breitengrad nicht verarbeiten.</string>
@@ -388,6 +399,7 @@
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Aktivieren</string>
   <string name="init_oc_ro_description">Autorisiere c:geo auf opencaching.ro zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
+  <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Aktivieren</string>
   <string name="init_oc_uk_description">Autorisiere c:geo auf opencaching.org.uk zuzugreifen um Caches zu suchen und nach deinen Funden zu filtern.</string>
   <string name="init_gcvote">GCvote.com</string>
@@ -527,6 +539,8 @@
   <string name="init_hardware_acceleration_note">Mittels Hardwarebeschleunigung werden grafische Elemente schneller auf den Bildschirm dargestellt. Jedoch enthält das Android auf manchen Geräten Fehler, die zu verschwommenem Text (meistens bei fettgedruckten Zeichen) führen können. in diesen Fällen sollte die Hardwarebeschleunigung deaktiviert werden.</string>
   <string name="init_hardware_acceleration">Hardwarebeschleunigung aktivieren</string>
   <string name="settings_open_website">Webseite öffnen</string>
+  <string name="settings_open_geokrety_register">Öffne Registrierungs-Seite auf GeoKrety.org</string>
+  <string name="settings_open_geokretymap_website">Öffne GeokretyMap.org Webseite</string>
   <string name="settings_settings">Einstellungen</string>
   <string name="settings_information">Information</string>
   <string name="settings_twitter_cache_message">Nachricht für gefundenen Cache</string>
@@ -572,6 +586,10 @@
   <string name="auth_dialog_completed_twitter">c:geo ist nun autorisiert, Tweets bei Twitter zu erstellen.</string>
   <string name="auth_ocde">opencaching.de</string>
   <string name="auth_ocpl">opencaching.pl</string>
+  <string name="auth_ocnl">opencaching.nl</string>
+  <string name="auth_ocus">opencaching.us</string>
+  <string name="auth_ocro">opencaching.ro</string>
+  <string name="auth_ocuk">opencaching.org.uk</string>
   <string name="auth_dialog_completed_oc">c:geo ist nun autorisiert, Caches zu laden und auf %s zu loggen.</string>
   <plurals name="cache_counts">
     <item quantity="one">Ein Cache</item>
@@ -677,6 +695,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_navigon">Navigon</string>
   <string name="cache_menu_pebble">Pebble Smartwatch</string>
+  <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Bewerten</string>
   <string name="cache_menu_checker">Öffne Geochecker</string>
   <string name="cache_menu_ignore">Cache ignorieren</string>
@@ -833,7 +852,7 @@
   <string name="search_hbu_prefill">Besitzer</string>
   <string name="search_hbu_button">Suche mit Besitzername</string>
   <string name="search_tb">Trackable</string>
-  <string name="search_tb_hint">Trackingnummer</string>
+  <string name="search_tb_hint">Tracking-Code</string>
   <string name="search_tb_button">Suche nach Trackable</string>
   <string name="search_destination">Ziel</string>
   <string name="search_direction_rel">Vom aktuellen Standort</string>
@@ -850,7 +869,7 @@
   <string name="trackable_goal">Derzeitiges Ziel</string>
   <string name="trackable_details">Über diesen Trackable</string>
   <string name="trackable_image">Foto</string>
-  <string name="trackable_code">TB-Code</string>
+  <string name="trackable_code">Tracking-Code</string>
   <string name="trackable_name">Name</string>
   <string name="trackable_type">Typ</string>
   <string name="trackable_owner">Eigentümer</string>
@@ -865,6 +884,9 @@
   <string name="trackable_distance">Zurückgelegte Strecke</string>
   <string name="trackable_touch">Trackable-Aktion</string>
   <string name="trackable_not_activated">Trackable nicht aktiviert</string>
+  <string name="trackable_travelbug">Travelbug</string>
+  <string name="trackable_geokrety">Geokrety</string>
+  <string name="trackable_swaggie">Swaggie</string>
   <string name="geokret_type_traditional">Traditionell</string>
   <string name="geokret_type_book_or_media">Buch oder elektronisches Medium</string>
   <string name="geokret_type_human">Mensch</string>
@@ -1215,4 +1237,17 @@
   <string name="showcase_compass_hint_text">Diese neue Option könnte dir helfen den Cache zu finden - sie zeigt den Hint an, wenn es einen gibt.</string>
   <string name="confirm_log_title">Ungewöhnlicher Log-Typ</string>
   <string name="confirm_log_message">Du möchtest \'%s\' loggen. Bist du dir sicher?</string>
+  <string name="init_geokrety">Geokrety.org</string>
+  <string name="init_geokrety_login">EInloggen auf GeoKrety.org</string>
+  <string name="init_connectorGeokretyActive">Geokrety Trackables</string>
+  <string name="init_summary_geokrety">Lädt Trackables von Geokrety.org</string>
+  <string name="init_summary_geokrety_cache">Verbessert die Ladezeit.</string>
+  <string name="init_summary_geokrety_account">Kein Konto konfiguriert.</string>
+  <string name="init_summary_geokrety_not_anonymous">Loggen aus c:geo kann nicht anonym erfolgen. Bitte registrieren.</string>
+  <string name="init_geokrety_register_ok">Login erfolgreich</string>
+  <string name="init_geokrety_register_fail">Login fehlgeschlagen</string>
+  <string name="init_geokrety_get_secid">API-Schlüssel abrufen</string>
+  <string name="init_geokrety_description">Speichere deinen API-SChlüssel in c:geo um das Loggen von GeoKrety zu vereinfachen</string>
+  <string name="init_geokrety_cache_description">GeokretyMap.org stellt zwischengespeicherte Daten für GeoKrety-Trackables zur Verfügung. Die Daten sind möglichweise nicht auf dem neuesten Stand!\nPositionen:  ~30min.\nBeschreibungen: ~24h.</string>
+  <string name="init_geokrety_cache">Benutze zwischengespeicherte Daten</string>
 </resources>
