@@ -6,6 +6,7 @@ import cgeo.geocaching.R;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ public class TimeDialog extends DialogFragment {
         picker.setCurrentHour(date.get(Calendar.HOUR_OF_DAY));
         picker.setCurrentMinute(date.get(Calendar.MINUTE));
         picker.setOnTimeChangedListener(new TimePickerListener());
+        picker.setIs24HourView(DateFormat.is24HourFormat(getActivity()));
         return view;
     }
 
