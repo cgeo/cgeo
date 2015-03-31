@@ -41,7 +41,7 @@ public class GeopointFormatter {
         LON_DECMINUTE,
 
         /** Example: "W 5 12,345" */
-        LON_DECMINUTE_RAW;
+        LON_DECMINUTE_RAW
     }
 
     /**

@@ -20,7 +20,7 @@ public class OkapiError {
         NO_ERROR,
         UNSPECIFIED,
         INVALID_TIMESTAMP,
-        INVALID_TOKEN;
+        INVALID_TOKEN
     }
 
     @NonNull private final OkapiErrors state;
