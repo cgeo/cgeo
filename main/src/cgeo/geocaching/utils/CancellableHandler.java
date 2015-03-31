@@ -89,24 +89,14 @@ public abstract class CancellableHandler extends Handler {
      * @return a cancel message
      */
     public Message cancelMessage(final Object extra) {
-        return this.obtainMessage(0, new CancelHolder(extra));
+        return obtainMessage(0, new CancelHolder(extra));
     }
 
     /**
      * Cancel the current handler. This can be called from any thread.
      */
     public void cancel() {
-        cancel(null);
-    }
-
-    /**
-     * Cancel the current handler. This can be called from any thread.
-     *
-     * @param extra
-     *            the extra parameter to give to the cancel handler
-     */
-    public void cancel(final Object extra) {
-        cancelMessage(extra).sendToTarget();
+        cancelMessage().sendToTarget();
     }
 
     /**
