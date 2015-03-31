@@ -26,7 +26,6 @@ public class DistanceDrawer {
     private BlurMaskFilter blurBoxShadow = null;
 
     private final boolean needsInvertedColors;
-    private float pixelDensity = 0;
     private final float boxWidth, boxHeight, boxCornerRadius, boxShadowSize, boxPadding;
     private final float textHeight, maxTextWidth;
     private final float boxX, boxY;
@@ -40,7 +39,7 @@ public class DistanceDrawer {
         final WindowManager windowManager = (WindowManager) CgeoApplication.getInstance().getSystemService(Context.WINDOW_SERVICE);
         windowManager.getDefaultDisplay().getMetrics(metrics);
 
-        pixelDensity = metrics.density;
+        final float pixelDensity = metrics.density;
 
         boxPadding = 2;
         boxWidth = 100 * pixelDensity + 3 * boxPadding;
