@@ -125,24 +125,24 @@ public class GeokretyParser {
                 if (localName.equalsIgnoreCase("owner")) {
                     trackable.setOwner(content);
                 }
-                if (localName.equalsIgnoreCase("datecreated")) {
+                if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("datecreated")) {
                     final Date date = DATE_FORMAT.parse(content);
                     trackable.setReleased(date);
                 }
-                if (localName.equalsIgnoreCase("distancetravelled")) {
+                if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("distancetravelled")) {
                     trackable.setDistance(Float.parseFloat(content));
                 }
                 if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("image")) {
                     trackable.setImage("http://geokrety.org/obrazki/" + content);
                 }
-                if (localName.equalsIgnoreCase("state")) {
+                if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("state")) {
                     trackable.setSpottedType(Integer.parseInt(content));
                 }
                 // TODO: Can be parsed but not supported in c:geo, yet...
-                //if (localName.equalsIgnoreCase("missing")) {
+                //if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("missing")) {
                 //    trackable.setMissing(Boolean.parseBoolean(content));
                 //}
-                if (localName.equalsIgnoreCase("waypoint")) {
+                if (StringUtils.isNotBlank(content) && localName.equalsIgnoreCase("waypoint")) {
                     trackable.setSpottedName(content);
                     trackable.setSpottedType(Trackable.SPOTTED_CACHE);
                 }
