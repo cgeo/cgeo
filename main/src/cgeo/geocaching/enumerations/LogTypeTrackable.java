@@ -18,7 +18,7 @@ public enum LogTypeTrackable {
     UNKNOWN(0, -1, "", R.string.err_unknown, LogType.UNKNOWN);
 
     public final int id; // id matching LogTypes
-    public final int gkid; // This is the id from Geokrety
+    public final int gkid; // This is the id from GeoKrety
     @NonNull final public String action;
     final private int resourceId;
     public final int markerId;

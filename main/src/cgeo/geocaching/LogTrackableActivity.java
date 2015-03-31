@@ -472,7 +472,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
             alertDialog.setMessage(R.string.init_summary_geokrety_not_anonymous);
             alertDialog.setPositiveButton(R.string.ok, null);
             alertDialog.show();
-            // TODO redirect user to geokrety settings page
+            // TODO redirect user to GeoKrety settings page
             // this throw "android.util.AndroidRuntimeException: Calling startActivity() from outside of an Activity  context requires the FLAG_ACTIVITY_NEW_TASK flag. Is this really what you want?"
             //SettingsActivity.openForScreen(R.string.preference_screen_geokrety, getApplicationContext());
             return;
