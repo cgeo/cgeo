@@ -48,7 +48,7 @@ class WaymarkingConnector extends AbstractConnector {
     public String getGeocodeFromUrl(@NonNull final String url) {
         // coord.info URLs
         String code = StringUtils.substringAfterLast(url, "coord.info/");
-        if (code != null && canHandle(code)) {
+        if (canHandle(code)) {
             return code;
         }
         // waymarking URLs http://www.waymarking.com/waymarks/WMNCDT_American_Legion_Flagpole_1983_University_of_Oregon

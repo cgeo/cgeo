@@ -310,7 +310,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     public String getGeocodeFromUrl(@NonNull final String url) {
         // coord.info URLs
         String code = StringUtils.substringAfterLast(url, "coord.info/");
-        if (code != null && canHandle(code)) {
+        if (canHandle(code)) {
             return code;
         }
         // expanded geocaching.com URLs
