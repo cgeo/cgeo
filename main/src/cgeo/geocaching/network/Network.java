@@ -48,7 +48,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.regex.Pattern;
 
-public abstract class Network {
+public final class Network {
 
     /** User agent id */
     private final static String PC_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:9.0.1) Gecko/20100101 Firefox/9.0.1";
@@ -64,6 +64,10 @@ public abstract class Network {
         CLIENT_PARAMS.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
         CLIENT_PARAMS.setParameter(CoreConnectionPNames.SO_TIMEOUT, 30000);
         CLIENT_PARAMS.setParameter(ClientPNames.HANDLE_REDIRECTS, true);
+    }
+
+    private Network() {
+        // Utility class
     }
 
     private static String hidePassword(final String message) {

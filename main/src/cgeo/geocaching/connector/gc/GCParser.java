@@ -78,7 +78,7 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-public abstract class GCParser {
+public final class GCParser {
     @NonNull
     private final static SynchronizedDateFormat DATE_TB_IN_1 = new SynchronizedDateFormat("EEEEE, dd MMMMM yyyy", Locale.ENGLISH); // Saturday, 28 March 2009
 
@@ -87,6 +87,10 @@ public abstract class GCParser {
 
     @NonNull
     private final static ImmutablePair<StatusCode, Geocache> UNKNOWN_PARSE_ERROR = ImmutablePair.of(StatusCode.UNKNOWN_ERROR, null);
+
+    private GCParser() {
+        // Utility class
+    }
 
     @Nullable
     private static SearchResult parseSearch(final String url, final String pageContent, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {

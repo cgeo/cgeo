@@ -6,10 +6,14 @@ import ch.boye.httpclientandroidlib.impl.client.BasicCookieStore;
 import ch.boye.httpclientandroidlib.impl.cookie.BasicClientCookie;
 import org.apache.commons.lang3.StringUtils;
 
-public abstract class Cookies {
+public final class Cookies {
 
     private static boolean cookieStoreRestored = false;
     final static CookieStore cookieStore = new BasicCookieStore();
+
+    private Cookies() {
+        // Utility class
+    }
 
     public static void restoreCookieStore(final String oldCookies) {
         if (!cookieStoreRestored) {

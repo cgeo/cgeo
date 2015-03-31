@@ -19,12 +19,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public abstract class Formatter {
+public final class Formatter {
 
     /** Text separator used for formatting texts */
     public static final String SEPARATOR = " · ";
 
     private static final Context context = CgeoApplication.getInstance().getBaseContext();
+
+    private Formatter() {
+        // Utility class
+    }
 
     /**
      * Generate a time string according to system-wide settings (locale, 12/24 hour)
@@ -139,13 +143,13 @@ public abstract class Formatter {
         if (cacheListType != CacheListType.OFFLINE && cacheListType != CacheListType.HISTORY && cache.getListId() > 0) {
             infos.add(CgeoApplication.getInstance().getString(R.string.cache_offline));
         }
-        return StringUtils.join(infos, Formatter.SEPARATOR);
+        return StringUtils.join(infos, SEPARATOR);
     }
 
     public static String formatCacheInfoShort(final Geocache cache) {
         final ArrayList<String> infos = new ArrayList<>();
         addShortInfos(cache, infos);
-        return StringUtils.join(infos, Formatter.SEPARATOR);
+        return StringUtils.join(infos, SEPARATOR);
     }
 
     private static void addShortInfos(final Geocache cache, final ArrayList<String> infos) {
@@ -162,7 +166,7 @@ public abstract class Formatter {
         } else if (cache.isEventCache()) {
             final Date hiddenDate = cache.getHiddenDate();
             if (hiddenDate != null) {
-                infos.add(Formatter.formatShortDateIncludingWeekday(hiddenDate.getTime()));
+                infos.add(formatShortDateIncludingWeekday(hiddenDate.getTime()));
             }
         }
     }
@@ -174,9 +178,9 @@ public abstract class Formatter {
     public static String formatCacheInfoHistory(final Geocache cache) {
         final ArrayList<String> infos = new ArrayList<>(3);
         infos.add(StringUtils.upperCase(cache.getGeocode()));
-        infos.add(Formatter.formatDate(cache.getVisitedDate()));
-        infos.add(Formatter.formatTime(cache.getVisitedDate()));
-        return StringUtils.join(infos, Formatter.SEPARATOR);
+        infos.add(formatDate(cache.getVisitedDate()));
+        infos.add(formatTime(cache.getVisitedDate()));
+        return StringUtils.join(infos, SEPARATOR);
     }
 
     public static String formatWaypointInfo(final Waypoint waypoint) {
@@ -195,7 +199,7 @@ public abstract class Formatter {
                 infos.add(waypoint.getLookup());
             }
         }
-        return StringUtils.join(infos, Formatter.SEPARATOR);
+        return StringUtils.join(infos, SEPARATOR);
     }
 
     public static String formatDaysAgo(final long date) {
@@ -224,7 +228,7 @@ public abstract class Formatter {
         if (time <= 0) {
             return null;
         }
-        String dateString = Formatter.formatFullDate(time);
+        String dateString = formatFullDate(time);
         if (cache.isEventCache()) {
             dateString = DateUtils.formatDateTime(CgeoApplication.getInstance().getBaseContext(), time, DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + dateString;
         }
