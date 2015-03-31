@@ -36,7 +36,7 @@ public class StatusFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         final ViewGroup statusGroup = (ViewGroup) inflater.inflate(R.layout.status, container, false);
         ButterKnife.inject(this, statusGroup);
-        statusSubscription = AppObservable.bindFragment(this, StatusUpdater.latestStatus)
+        statusSubscription = AppObservable.bindFragment(this, StatusUpdater.LATEST_STATUS)
                 .subscribe(new Action1<Status>() {
                     @Override
                     public void call(final Status status) {

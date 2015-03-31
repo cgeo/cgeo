@@ -17,13 +17,17 @@ import java.util.concurrent.TimeUnit;
 
 public class StatusUpdater {
 
+    private StatusUpdater() {
+        // Utility class
+    }
+
     static public class Status {
         final public String message;
         final public String messageId;
         final public String icon;
         final public String url;
 
-        Status(final String message, final String messageId, final String icon, final String url) {
+        private Status(final String message, final String messageId, final String icon, final String url) {
             this.message = message;
             this.messageId = messageId;
             this.icon = icon;
@@ -37,18 +41,18 @@ public class StatusUpdater {
             url = response.path("url").asText(null);
         }
 
-        final static public Status closeoutStatus =
+        final static public Status CLOSEOUT_STATUS =
                 new Status("", "status_closeout_warning", "attribute_abandonedbuilding", "http://faq.cgeo.org/#7_69");
 
         final static public Status defaultStatus(final Status upToDate) {
             if (upToDate != null && upToDate.message != null) {
                 return upToDate;
             }
-            return VERSION.SDK_INT < VERSION_CODES.ECLAIR_MR1 ? closeoutStatus : null;
+            return VERSION.SDK_INT < VERSION_CODES.ECLAIR_MR1 ? CLOSEOUT_STATUS : null;
         }
     }
 
-    final static public BehaviorSubject<Status> latestStatus = BehaviorSubject.create(Status.defaultStatus(null));
+    final static public BehaviorSubject<Status> LATEST_STATUS = BehaviorSubject.create(Status.defaultStatus(null));
 
     static {
         RxUtils.networkScheduler.createWorker().schedulePeriodically(new Action0() {
@@ -60,7 +64,7 @@ public class StatusUpdater {
                                         "version_name", Version.getVersionName(CgeoApplication.getInstance()),
                                         "locale", Locale.getDefault().toString()));
                 if (response != null) {
-                    latestStatus.onNext(Status.defaultStatus(new Status(response)));
+                    LATEST_STATUS.onNext(Status.defaultStatus(new Status(response)));
                 }
             }
         }, 0, 1800, TimeUnit.SECONDS);
