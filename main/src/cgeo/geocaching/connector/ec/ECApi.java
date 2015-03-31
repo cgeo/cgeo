@@ -99,11 +99,6 @@ final class ECApi {
 
     @NonNull
     static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log) {
-        return postLog(cache, logType, date, log, false);
-    }
-
-    @NonNull
-    private static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, final boolean isRetry) {
         final Parameters params = new Parameters("cache_id", cache.getGeocode());
         params.add("type", logType.type);
         params.add("log", log);
@@ -116,7 +111,7 @@ final class ECApi {
         if (response == null) {
             return new LogResult(StatusCode.LOG_POST_ERROR, "");
         }
-        if (!isRetry && response.getStatusLine().getStatusCode() == 403) {
+        if (response.getStatusLine().getStatusCode() == 403) {
             if (ecLogin.login() == StatusCode.NO_ERROR) {
                 apiRequest(uri, params, true);
             }
