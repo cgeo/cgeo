@@ -941,7 +941,6 @@ public class DataStore {
     public static boolean isThere(final String geocode, final String guid, final boolean checkTime) {
         init();
 
-        long dataUpdated = 0;
         long dataDetailedUpdate = 0;
         int dataDetailed = 0;
 
@@ -975,7 +974,6 @@ public class DataStore {
             if (cursor.moveToFirst()) {
                 dataDetailed = cursor.getInt(0);
                 dataDetailedUpdate = cursor.getLong(1);
-                dataUpdated = cursor.getLong(2);
             }
 
             cursor.close();
@@ -989,7 +987,7 @@ public class DataStore {
         }
 
         if (checkTime && dataDetailedUpdate < (System.currentTimeMillis() - DAYS_AFTER_CACHE_IS_DELETED)) {
-            // we want to check time for detailed cache, but data are older than 3 hours
+            // we want to check time for detailed cache, but data are older than 3 days
             return false;
         }
 
