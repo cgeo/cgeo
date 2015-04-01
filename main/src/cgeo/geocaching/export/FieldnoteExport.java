@@ -39,7 +39,7 @@ public class FieldnoteExport extends AbstractExport {
     private static int fieldNotesCount = 0;
 
     public FieldnoteExport() {
-        super(getString(R.string.export_fieldnotes));
+        super(R.string.export_fieldnotes);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class FieldnoteExport extends AbstractExport {
         onlyNewOption.setChecked(Settings.getFieldNoteExportOnlyNew());
 
         if (Settings.getFieldnoteExportDate() > 0) {
-            onlyNewOption.setText(getString(R.string.export_fieldnotes_onlynew) + " (" + Formatter.formatDateTime(Settings.getFieldnoteExportDate()) + ')');
+            onlyNewOption.setText(activity.getString(R.string.export_fieldnotes_onlynew) + " (" + Formatter.formatDateTime(Settings.getFieldnoteExportDate()) + ')');
         }
 
         builder.setPositiveButton(R.string.export, new DialogInterface.OnClickListener() {
@@ -112,7 +112,7 @@ public class FieldnoteExport extends AbstractExport {
          *            Upload/export only new logs since last export
          */
         public ExportTask(final Activity activity, final boolean upload, final boolean onlyNew) {
-            super(activity, getProgressTitle(), getString(R.string.export_fieldnotes_creating), true);
+            super(activity, getProgressTitle(), activity.getString(R.string.export_fieldnotes_creating), true);
             this.activity = activity;
             this.upload = upload;
             this.onlyNew = onlyNew;
@@ -171,13 +171,13 @@ public class FieldnoteExport extends AbstractExport {
                 if (result) {
                     Settings.setFieldnoteExportDate(System.currentTimeMillis());
 
-                    ActivityMixin.showToast(activity, getName() + ' ' + getString(R.string.export_exportedto) + ": " + exportFile.toString());
+                    ActivityMixin.showToast(activity, getName() + ' ' + activity.getString(R.string.export_exportedto) + ": " + exportFile.toString());
 
                     if (upload) {
-                        ActivityMixin.showToast(activity, getString(R.string.export_fieldnotes_upload_success));
+                        ActivityMixin.showToast(activity, activity.getString(R.string.export_fieldnotes_upload_success));
                     }
                 } else {
-                    ActivityMixin.showToast(activity, getString(R.string.export_failed));
+                    ActivityMixin.showToast(activity, activity.getString(R.string.export_failed));
                 }
             }
         }
@@ -185,7 +185,7 @@ public class FieldnoteExport extends AbstractExport {
         @Override
         protected void onProgressUpdateInternal(final int status) {
             if (null != activity) {
-                setMessage(getString(STATUS_UPLOAD == status ? R.string.export_fieldnotes_uploading : R.string.export_fieldnotes_creating) + " (" + fieldNotesCount + ')');
+                setMessage(activity.getString(STATUS_UPLOAD == status ? R.string.export_fieldnotes_uploading : R.string.export_fieldnotes_creating) + " (" + fieldNotesCount + ')');
             }
         }
     }

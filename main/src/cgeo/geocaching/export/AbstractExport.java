@@ -3,40 +3,21 @@ package cgeo.geocaching.export;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
+import android.content.res.Resources;
+
 abstract class AbstractExport implements Export {
     private final String name;
+    private final String progressTitle;
 
-    protected AbstractExport(final String name) {
-        this.name = name;
+    protected AbstractExport(final int name) {
+        final Resources resources = CgeoApplication.getInstance().getResources();
+        this.name = resources.getString(name);
+        progressTitle = resources.getString(R.string.export, this.name);
     }
 
     @Override
     public String getName() {
         return name;
-    }
-
-    /**
-     * Generates a localized string from a resource id.
-     *
-     * @param resourceId
-     *            the resource id of the string
-     * @return localized string
-     */
-    protected static String getString(final int resourceId) {
-        return CgeoApplication.getInstance().getString(resourceId);
-    }
-
-    /**
-     * Generates a localized string from a resource id.
-     *
-     * @param resourceId
-     *            the resource id of the string
-     * @param params
-     *            The parameter
-     * @return localized string
-     */
-    protected static String getString(final int resourceId, final Object... params) {
-        return CgeoApplication.getInstance().getString(resourceId, params);
     }
 
     @Override
@@ -46,6 +27,6 @@ abstract class AbstractExport implements Export {
     }
 
     protected String getProgressTitle() {
-        return getString(R.string.export) + ": " + getName();
+        return progressTitle;
     }
 }

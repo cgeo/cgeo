@@ -42,7 +42,7 @@ import java.util.Locale;
 public class GpxExport extends AbstractExport {
 
     public GpxExport() {
-        super(getString(R.string.export_gpx));
+        super(R.string.export_gpx);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class GpxExport extends AbstractExport {
         builder.setView(layout);
 
         final TextView text = ButterKnife.findById(layout, R.id.info);
-        text.setText(getString(R.string.export_gpx_info, Settings.getGpxExportDir()));
+        text.setText(activity.getString(R.string.export_gpx_info, Settings.getGpxExportDir()));
 
         final CheckBox shareOption = ButterKnife.findById(layout, R.id.share);
 
@@ -171,12 +171,12 @@ public class GpxExport extends AbstractExport {
         protected void onPostExecuteInternal(final File exportFile) {
             if (null != activity) {
                 if (exportFile != null) {
-                    ActivityMixin.showToast(activity, getName() + ' ' + getString(R.string.export_exportedto) + ": " + exportFile.toString());
+                    ActivityMixin.showToast(activity, getName() + ' ' + activity.getString(R.string.export_exportedto) + ": " + exportFile.toString());
                     if (Settings.getShareAfterExport()) {
                         ShareUtils.share(activity, exportFile, "application/xml", R.string.export_gpx_to);
                     }
                 } else {
-                    ActivityMixin.showToast(activity, getString(R.string.export_failed));
+                    ActivityMixin.showToast(activity, activity.getString(R.string.export_failed));
                 }
             }
         }
