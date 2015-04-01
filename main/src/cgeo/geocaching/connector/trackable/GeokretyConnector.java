@@ -211,7 +211,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     }
 
     /**
-     * Get geocode from geokrety id
+     * Get geocode from GeoKrety id
      *
      */
     public static String geocode(final int id) {
@@ -273,7 +273,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
 
             final ImmutablePair<Integer, List<String>> response = GeokretyParser.parseResponse(page);
             if (response == null) {
-                Log.w("GeokretyConnector.postLogTrackable: Cannot parseResponse geokrety");
+                Log.w("GeokretyConnector.postLogTrackable: Cannot parseResponse GeoKrety");
                 return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, Collections.<String> emptyList());
             }
             if (!response.getRight().isEmpty()) {

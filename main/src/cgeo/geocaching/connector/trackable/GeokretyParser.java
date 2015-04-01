@@ -105,7 +105,7 @@ public class GeokretyParser {
                 //}
                 //}
             } catch (final NumberFormatException e) {
-                Log.e("Parsing geokret", e);
+                Log.e("Parsing GeoKret", e);
             }
         }
 
@@ -147,7 +147,7 @@ public class GeokretyParser {
                     trackable.setSpottedType(Trackable.SPOTTED_CACHE);
                 }
             } catch (final ParseException | NumberFormatException e) {
-                Log.e("Parsing geokret", e);
+                Log.e("Parsing GeoKret", e);
             }
         }
 
@@ -174,7 +174,7 @@ public class GeokretyParser {
 
                 return gkXMLHandler.getTrackables();
             } catch (final SAXException | IOException | ParserConfigurationException e) {
-                Log.w("Cannot parse geokrety", e);
+                Log.w("Cannot parse GeoKrety", e);
             }
         }
         return null;
@@ -267,7 +267,7 @@ public class GeokretyParser {
                 parser.parse(page);
                 return new ImmutablePair<>(parser.getGkid(), parser.getErrors());
             } catch (final Exception e) {
-                Log.w("Cannot parseResponse geokrety", e);
+                Log.w("Cannot parse response for the GeoKret", e);
             }
         }
         return null;
