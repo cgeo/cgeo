@@ -871,13 +871,8 @@ public class Geocache implements IWaypoint {
         this.detailed = detailed;
     }
 
-    public void setHidden(final Date hidden) {
-        if (hidden == null) {
-            this.hidden = null;
-        }
-        else {
-            this.hidden = new Date(hidden.getTime()); // avoid storing the external reference in this object
-        }
+    public void setHidden(@Nullable final Date hidden) {
+        this.hidden = hidden != null ? new Date(hidden.getTime()) : null;
     }
 
     public Float getDirection() {

@@ -144,6 +144,7 @@ public class GC2JVEH extends MockedCache {
     }
 
     @Override
+    @NonNull
     public List<Image> getSpoilers() {
         final ArrayList<Image> spoilers = new ArrayList<Image>();
         final Image mockedImage = new Image(null, null, null);
