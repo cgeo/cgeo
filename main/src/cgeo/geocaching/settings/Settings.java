@@ -304,7 +304,7 @@ public class Settings {
         resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 
-    public static Locale getLanguage() {
+    public static Locale getApplicationLocale() {
         final Configuration config = new Configuration();
         final Resources resources = CgeoApplication.getInstance().getResources();
         return resources.getConfiguration().locale;

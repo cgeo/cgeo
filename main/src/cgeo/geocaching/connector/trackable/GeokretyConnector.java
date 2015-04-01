@@ -253,7 +253,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                     "comment", log,
                     "app", context.getString(R.string.app_name),
                     "app_ver", Version.getVersionName(context),
-                    "mobile_lang", Settings.getLanguage().toString() + ".UTF-8"
+                    "mobile_lang", Settings.getApplicationLocale().toString() + ".UTF-8"
             );
 
             // See doc: http://geokrety.org/help.php#acceptableformats
