@@ -126,13 +126,13 @@ public abstract class AbstractLocusApp extends AbstractApp {
         if (hiddenDate != null) {
             pg.hidden = ISO8601DATE.format(hiddenDate);
         }
-        int locusId = toLocusType(cache.getType());
-        if (locusId != NO_LOCUS_ID) {
-            pg.type = locusId;
+        final int type = toLocusType(cache.getType());
+        if (type != NO_LOCUS_ID) {
+            pg.type = type;
         }
-        locusId = toLocusSize(cache.getSize());
-        if (locusId != NO_LOCUS_ID) {
-            pg.container = locusId;
+        final int container = toLocusSize(cache.getSize());
+        if (container != NO_LOCUS_ID) {
+            pg.container = container;
         }
         if (cache.getDifficulty() > 0) {
             pg.difficulty = cache.getDifficulty();

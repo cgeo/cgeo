@@ -1731,17 +1731,17 @@ public class DataStore {
         // do not set cache.hint
         cache.setSize(CacheSize.getById(cursor.getString(14)));
         cache.setDifficulty(cursor.getFloat(15));
-        int index = 16;
-        if (cursor.isNull(index)) {
+        final int directionIndex = 16;
+        if (cursor.isNull(directionIndex)) {
             cache.setDirection(null);
         } else {
-            cache.setDirection(cursor.getFloat(index));
+            cache.setDirection(cursor.getFloat(directionIndex));
         }
-        index = 17;
-        if (cursor.isNull(index)) {
+        final int distanceIndex = 17;
+        if (cursor.isNull(distanceIndex)) {
             cache.setDistance(null);
         } else {
-            cache.setDistance(cursor.getFloat(index));
+            cache.setDistance(cursor.getFloat(distanceIndex));
         }
         cache.setTerrain(cursor.getFloat(18));
         // do not set cache.location

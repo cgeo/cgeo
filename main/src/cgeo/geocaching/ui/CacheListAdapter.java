@@ -134,10 +134,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         final Drawable modifiedCoordinatesMarker = activity.getResources().getDrawable(R.drawable.marker_usermodifiedcoords);
         for (final CacheType cacheType : CacheType.values()) {
             // unmodified icon
-            int hashCode = getIconHashCode(cacheType, false);
-            gcIconDrawables.put(hashCode, activity.getResources().getDrawable(cacheType.markerId));
+            gcIconDrawables.put(getIconHashCode(cacheType, false), activity.getResources().getDrawable(cacheType.markerId));
             // icon with flag for user modified coordinates
-            hashCode = getIconHashCode(cacheType, true);
             final Drawable[] layers = new Drawable[2];
             layers[0] = activity.getResources().getDrawable(cacheType.markerId);
             layers[1] = modifiedCoordinatesMarker;
@@ -146,7 +144,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
                     layers[0].getIntrinsicWidth() - layers[1].getIntrinsicWidth(),
                     layers[0].getIntrinsicHeight() - layers[1].getIntrinsicHeight(),
                     0, 0);
-            gcIconDrawables.put(hashCode, ld);
+            gcIconDrawables.put(getIconHashCode(cacheType, true), ld);
         }
     }
 
@@ -515,15 +513,10 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     }
 
     private static Drawable getCacheIcon(final Geocache cache) {
-        int hashCode = getIconHashCode(cache.getType(), cache.hasUserModifiedCoords() || cache.hasFinalDefined());
-        final Drawable drawable = gcIconDrawables.get(hashCode);
-        if (drawable != null) {
-            return drawable;
-        }
-
-        // fallback to mystery icon
-        hashCode = getIconHashCode(CacheType.MYSTERY, cache.hasUserModifiedCoords() || cache.hasFinalDefined());
-        return gcIconDrawables.get(hashCode);
+        final boolean userModifiedOrFinal = cache.hasUserModifiedCoords() || cache.hasFinalDefined();
+        // Fallback to mystery icon if the drawable is right icon type is not found
+        final Drawable drawable = gcIconDrawables.get(getIconHashCode(cache.getType(), userModifiedOrFinal));
+        return drawable != null ? drawable : gcIconDrawables.get(getIconHashCode(CacheType.MYSTERY, userModifiedOrFinal));
     }
 
     @Override

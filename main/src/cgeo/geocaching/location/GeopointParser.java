@@ -84,11 +84,8 @@ class GeopointParser {
      * @throws Geopoint.ParseException if the text cannot be parsed
      */
     private static ResultWrapper parseHelper(@NonNull final String text, final LatLon latlon) {
-        MatcherWrapper matcher = new MatcherWrapper(PATTERN_BAD_BLANK, text);
-        final String replaceSpaceAfterComma = matcher.replaceAll("$1.$2");
-
-        final Pattern pattern = LatLon.LAT == latlon ? PATTERN_LAT : PATTERN_LON;
-        matcher = new MatcherWrapper(pattern, replaceSpaceAfterComma);
+        final String replaceSpaceAfterComma = new MatcherWrapper(PATTERN_BAD_BLANK, text).replaceAll("$1.$2");
+        final MatcherWrapper matcher = new MatcherWrapper(LatLon.LAT == latlon ? PATTERN_LAT : PATTERN_LON, replaceSpaceAfterComma);
 
         try {
             return new ResultWrapper(Double.valueOf(replaceSpaceAfterComma), 0, text.length());

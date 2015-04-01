@@ -701,28 +701,25 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
 
         try {
-            MenuItem item = menu.findItem(R.id.menu_trail_mode);
-            item.setChecked(Settings.isMapTrail());
+            final MenuItem itemTrailMode = menu.findItem(R.id.menu_trail_mode);
+            itemTrailMode.setChecked(Settings.isMapTrail());
 
-            item = menu.findItem(R.id.menu_map_live); // live map
+            final MenuItem itemMapLive = menu.findItem(R.id.menu_map_live);
             if (isLiveEnabled) {
-                item.setTitle(res.getString(R.string.map_live_disable));
+                itemMapLive.setTitle(res.getString(R.string.map_live_disable));
             } else {
-                item.setTitle(res.getString(R.string.map_live_enable));
+                itemMapLive.setTitle(res.getString(R.string.map_live_enable));
             }
-            item.setVisible(coordsIntent == null);
+            itemMapLive.setVisible(coordsIntent == null);
 
-            item = menu.findItem(R.id.menu_mycaches_mode); // own & found caches
-            item.setChecked(Settings.isExcludeMyCaches());
+            menu.findItem(R.id.menu_mycaches_mode).setChecked(Settings.isExcludeMyCaches());
 
             final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
             menu.findItem(R.id.menu_store_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport) && new SearchResult(geocodesInViewport).hasUnsavedCaches());
 
-            item = menu.findItem(R.id.menu_circle_mode); // show circles
-            item.setChecked(overlayCaches.getCircles());
+            menu.findItem(R.id.menu_circle_mode).setChecked(overlayCaches.getCircles());
 
-            item = menu.findItem(R.id.menu_theme_mode); // show theme selection
-            item.setVisible(mapView.hasMapThemes());
+            menu.findItem(R.id.menu_theme_mode).setVisible(mapView.hasMapThemes());
 
             menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
 

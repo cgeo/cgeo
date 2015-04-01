@@ -196,31 +196,19 @@ public class CompassView extends View {
         canvas.save();
         canvas.setDrawFilter(setfil);
 
-        int marginLeftTemp = (getWidth() - compassUnderlayWidth) / 2;
-        int marginTopTemp = (getHeight() - compassUnderlayHeight) / 2;
-
-        canvas.drawBitmap(compassUnderlay, marginLeftTemp, marginTopTemp, null);
-
-        marginLeftTemp = (getWidth() - compassRoseWidth) / 2;
-        marginTopTemp = (getHeight() - compassRoseHeight) / 2;
+        canvas.drawBitmap(compassUnderlay, (getWidth() - compassUnderlayWidth) / 2.0f, (getHeight() - compassUnderlayHeight) / 2.0f, null);
 
         canvas.save();
         canvas.rotate(-azimuthTemp, canvasCenterX, canvasCenterY);
-        canvas.drawBitmap(compassRose, marginLeftTemp, marginTopTemp, null);
+        canvas.drawBitmap(compassRose, (getWidth() - compassRoseWidth) / 2.0f, (getHeight() - compassRoseHeight) / 2.0f, null);
         canvas.restore();
-
-        marginLeftTemp = (getWidth() - compassArrowWidth) / 2;
-        marginTopTemp = (getHeight() - compassArrowHeight) / 2;
 
         canvas.save();
         canvas.rotate(-azimuthRelative, canvasCenterX, canvasCenterY);
-        canvas.drawBitmap(compassArrow, marginLeftTemp, marginTopTemp, null);
+        canvas.drawBitmap(compassArrow, (getWidth() - compassArrowWidth) / 2.0f, (getHeight() - compassArrowHeight) / 2.0f, null);
         canvas.restore();
 
-        marginLeftTemp = (getWidth() - compassOverlayWidth) / 2;
-        marginTopTemp = (getHeight() - compassOverlayHeight) / 2;
-
-        canvas.drawBitmap(compassOverlay, marginLeftTemp, marginTopTemp, null);
+        canvas.drawBitmap(compassOverlay, (getWidth() - compassOverlayWidth) / 2.0f, (getHeight() - compassOverlayHeight) / 2.0f, null);
 
         canvas.setDrawFilter(remfil);
         canvas.restore();

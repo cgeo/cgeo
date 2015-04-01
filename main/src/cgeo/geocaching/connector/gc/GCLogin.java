@@ -71,20 +71,20 @@ public class GCLogin extends AbstractLogin {
         }
 
         setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
-        HttpResponse loginResponse = Network.getRequest("https://www.geocaching.com/login/default.aspx");
-        String loginData = Network.getResponseData(loginResponse);
-        if (loginResponse != null && loginResponse.getStatusLine().getStatusCode() == 503 && TextUtils.matches(loginData, GCConstants.PATTERN_MAINTENANCE)) {
+        final HttpResponse tryLoggedInResponse = Network.getRequest("https://www.geocaching.com/login/default.aspx");
+        final String tryLoggedInData = Network.getResponseData(tryLoggedInResponse);
+        if (tryLoggedInResponse != null && tryLoggedInResponse.getStatusLine().getStatusCode() == 503 && TextUtils.matches(tryLoggedInData, GCConstants.PATTERN_MAINTENANCE)) {
             return StatusCode.MAINTENANCE;
         }
 
-        if (StringUtils.isBlank(loginData)) {
+        if (StringUtils.isBlank(tryLoggedInData)) {
             Log.e("Login.login: Failed to retrieve login page (1st)");
             return StatusCode.CONNECTION_FAILED; // no login page
         }
 
-        if (getLoginStatus(loginData)) {
+        if (getLoginStatus(tryLoggedInData)) {
             Log.i("Already logged in Geocaching.com as " + username + " (" + Settings.getGCMemberStatus() + ')');
-            if (switchToEnglish(loginData) && retry) {
+            if (switchToEnglish(tryLoggedInData) && retry) {
                 return login(false);
             }
             setHomeLocation();
@@ -103,15 +103,15 @@ public class GCLogin extends AbstractLogin {
                 "ctl00$ContentBody$tbPassword", password,
                 "ctl00$ContentBody$cbRememberMe", "on",
                 "ctl00$ContentBody$btnSignIn", "Login");
-        final String[] viewstates = GCLogin.getViewstates(loginData);
+        final String[] viewstates = GCLogin.getViewstates(tryLoggedInData);
         if (isEmpty(viewstates)) {
             Log.e("Login.login: Failed to find viewstates");
             return StatusCode.LOGIN_PARSE_ERROR; // no viewstates
         }
         GCLogin.putViewstates(params, viewstates);
 
-        loginResponse = Network.postRequest("https://www.geocaching.com/login/default.aspx", params);
-        loginData = Network.getResponseData(loginResponse);
+        final HttpResponse loginResponse = Network.postRequest("https://www.geocaching.com/login/default.aspx", params);
+        final String loginData = Network.getResponseData(loginResponse);
 
         if (StringUtils.isBlank(loginData)) {
             Log.e("Login.login: Failed to retrieve login page (2nd)");

@@ -267,10 +267,9 @@ public abstract class GPXParser extends FileParser {
     }
 
     static Date parseDate(final String inputUntrimmed) throws ParseException {
-        String input = inputUntrimmed.trim();
         // remove milliseconds to reduce number of needed patterns
-        final MatcherWrapper matcher = new MatcherWrapper(PATTERN_MILLISECONDS, input);
-        input = matcher.replaceFirst("");
+        final MatcherWrapper matcher = new MatcherWrapper(PATTERN_MILLISECONDS, inputUntrimmed.trim());
+        final String input = matcher.replaceFirst("");
         if (input.contains("Z")) {
             return formatSimpleZ.parse(input);
         }

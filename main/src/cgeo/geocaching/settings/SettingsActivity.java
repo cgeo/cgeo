@@ -259,12 +259,12 @@ public class SettingsActivity extends PreferenceActivity {
             values[i] = String.valueOf(apps.get(i).id);
         }
 
-        ListPreference pref = (ListPreference) getPreference(R.string.pref_defaultNavigationTool);
-        pref.setEntries(entries);
-        pref.setEntryValues(values);
-        pref = (ListPreference) getPreference(R.string.pref_defaultNavigationTool2);
-        pref.setEntries(entries);
-        pref.setEntryValues(values);
+        final ListPreference defaultNavigationTool = (ListPreference) getPreference(R.string.pref_defaultNavigationTool);
+        defaultNavigationTool.setEntries(entries);
+        defaultNavigationTool.setEntryValues(values);
+        final ListPreference defaultNavigationTool2 = (ListPreference) getPreference(R.string.pref_defaultNavigationTool2);
+        defaultNavigationTool2.setEntries(entries);
+        defaultNavigationTool2.setEntryValues(values);
     }
 
     private void initDirChoosers() {

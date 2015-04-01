@@ -82,14 +82,12 @@ public abstract class LogsViewCreator extends AbstractCachingListViewPageViewCre
         fillCountOrLocation(holder, log);
 
         // log text, avoid parsing HTML if not necessary
-        String logText = log.log;
-        if (TextUtils.containsHtml(logText)) {
-            logText = log.getDisplayText();
+        if (TextUtils.containsHtml(log.log)) {
             final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
-            holder.text.setText(Html.fromHtml(logText, new SmileyImage(getGeocode(), holder.text),
+            holder.text.setText(Html.fromHtml(log.getDisplayText(), new SmileyImage(getGeocode(), holder.text),
                     unknownTagsHandler), TextView.BufferType.SPANNABLE);
         } else {
-            holder.text.setText(logText, TextView.BufferType.SPANNABLE);
+            holder.text.setText(log.log, TextView.BufferType.SPANNABLE);
         }
 
         // images

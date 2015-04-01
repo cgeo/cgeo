@@ -93,16 +93,13 @@ public class OCConnector extends AbstractConnector {
 
         // host.tld/geocode
         final String shortHost = StringUtils.remove(getHost(), "www.");
-        String geocode = StringUtils.substringAfter(url, shortHost + "/");
-        if (canHandle(geocode)) {
-            return geocode;
+        final String firstLevel = StringUtils.substringAfter(url, shortHost + "/");
+        if (canHandle(firstLevel)) {
+            return firstLevel;
         }
 
         // host.tld/viewcache.php?wp=geocode
-        geocode = StringUtils.substringAfter(url, shortHost + "/viewcache.php?wp=");
-        if (canHandle(geocode)) {
-            return geocode;
-        }
-        return super.getGeocodeFromUrl(url);
+        final String secondLevel = StringUtils.substringAfter(url, shortHost + "/viewcache.php?wp=");
+        return canHandle(secondLevel) ? secondLevel : super.getGeocodeFromUrl(url);
     }
 }

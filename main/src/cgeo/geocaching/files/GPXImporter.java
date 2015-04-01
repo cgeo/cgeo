@@ -366,35 +366,35 @@ public class GPXImporter {
             Collection<Geocache> caches = Collections.emptySet();
             // can't assume that GPX file comes before waypoint file in zip -> so we need two passes
             // 1. parse GPX files
-            ZipInputStream zis = new ZipInputStream(new BufferedInputStream(getInputStream()));
+            final ZipInputStream zisPass1 = new ZipInputStream(new BufferedInputStream(getInputStream()));
             try {
-                for (ZipEntry zipEntry = zis.getNextEntry(); zipEntry != null; zipEntry = zis.getNextEntry()) {
+                for (ZipEntry zipEntry = zisPass1.getNextEntry(); zipEntry != null; zipEntry = zisPass1.getNextEntry()) {
                     if (StringUtils.endsWithIgnoreCase(zipEntry.getName(), GPX_FILE_EXTENSION)) {
                         if (!StringUtils.endsWithIgnoreCase(zipEntry.getName(), WAYPOINTS_FILE_SUFFIX_AND_EXTENSION)) {
                             importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches, (int) zipEntry.getSize()));
-                            caches = parser.parse(new NoCloseInputStream(zis), progressHandler);
+                            caches = parser.parse(new NoCloseInputStream(zisPass1), progressHandler);
                         }
                     } else {
                         throw new ParserException("Imported zip is not a GPX zip file.");
                     }
-                    zis.closeEntry();
+                    zisPass1.closeEntry();
                 }
             } finally {
-                zis.close();
+                zisPass1.close();
             }
 
             // 2. parse waypoint files
-            zis = new ZipInputStream(new BufferedInputStream(getInputStream()));
+            final ZipInputStream zisPass2 = new ZipInputStream(new BufferedInputStream(getInputStream()));
             try {
-                for (ZipEntry zipEntry = zis.getNextEntry(); zipEntry != null; zipEntry = zis.getNextEntry()) {
+                for (ZipEntry zipEntry = zisPass2.getNextEntry(); zipEntry != null; zipEntry = zisPass2.getNextEntry()) {
                     if (StringUtils.endsWithIgnoreCase(zipEntry.getName(), WAYPOINTS_FILE_SUFFIX_AND_EXTENSION)) {
                         importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_WPT_FILE, R.string.gpx_import_loading_waypoints, (int) zipEntry.getSize()));
-                        caches = parser.parse(new NoCloseInputStream(zis), progressHandler);
+                        caches = parser.parse(new NoCloseInputStream(zisPass2), progressHandler);
                     }
-                    zis.closeEntry();
+                    zisPass2.closeEntry();
                 }
             } finally {
-                zis.close();
+                zisPass2.close();
             }
 
             return caches;
