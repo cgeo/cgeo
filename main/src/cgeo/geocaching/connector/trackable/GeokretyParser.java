@@ -38,6 +38,7 @@ public class GeokretyParser {
         private static final SynchronizedDateFormat DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd kk:mm:ss", TimeZone.getTimeZone("UTC"), Locale.US);
         private final List<Trackable> trackables = new ArrayList<>();
         private Trackable trackable;
+        private Boolean isMessage = false;
         private String content;
 
         @NonNull
@@ -48,6 +49,7 @@ public class GeokretyParser {
         @Override
         public final void startElement(final String uri, final String localName, final String qName,
                                        final Attributes attributes) throws SAXException {
+            content = "";
             if (localName.equalsIgnoreCase("geokret")) {
 
                 trackable = new Trackable();
@@ -94,6 +96,9 @@ public class GeokretyParser {
                         trackable.setType(getType(Integer.parseInt(kretyType)));
                     }
                 }
+                if (localName.equalsIgnoreCase("description")) {
+                    isMessage = true;
+                }
                 // TODO: latitude/longitude could be parsed, but trackable doesn't support it, yet...
                 //if (localName.equalsIgnoreCase("position")) {
                 //final String latitude = attributes.getValue("latitude");
@@ -122,6 +127,7 @@ public class GeokretyParser {
                 }
                 if (localName.equalsIgnoreCase("description")) {
                     trackable.setDetails(content);
+                    isMessage = false;
                 }
                 if (localName.equalsIgnoreCase("owner")) {
                     trackable.setOwner(content);
@@ -155,7 +161,8 @@ public class GeokretyParser {
         @Override
         public final void characters(final char[] ch, final int start, final int length)
                 throws SAXException {
-            content = StringUtils.trim(new String(ch, start, length));
+            final String text = StringUtils.trim(new String(ch, start, length));
+            content = isMessage ? StringUtils.join(content, text) : text;
         }
     }
 

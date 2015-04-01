@@ -19,6 +19,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
 
         final List<Trackable> trackables = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret141_xml)));
         assertThat(trackables).hasSize(2);
+        assert trackables != null;
 
         // Check first GK in list
         final Trackable trackable1 = trackables.get(0);
@@ -83,6 +84,7 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
 
         final List<Trackable> trackables = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret146_xml)));
         assertThat(trackables).hasSize(1);
+        assert trackables != null;
 
         final Trackable trackable1 = trackables.get(0);
         assertThat(trackable1).isNotNull();
@@ -96,4 +98,20 @@ public class GeokretyParserTest extends AbstractResourceInstrumentationTestCase 
         assertThat(trackable1.getType()).isEqualTo(app.getString(cgeo.geocaching.R.string.geokret_type_traditional));
     }
 
+    public void testParseDescription() throws Exception {
+        final List<Trackable> trackables = GeokretyParser.parse(new InputSource(getResourceStream(R.raw.geokret145_xml)));
+        assertThat(trackables).hasSize(1);
+        assert trackables != null;
+
+        // Check first GK in list
+        final Trackable trackable1 = trackables.get(0);
+        assertThat(trackable1).isNotNull();
+        assertThat(trackable1.getName()).isEqualTo("c:geo Test");
+        assertThat(trackable1.getGeocode()).isEqualTo("GKC240");
+        assertThat(trackable1.getDistance()).isEqualTo(2254);
+        assertThat(trackable1.getDetails()).isEqualTo("Dieser Geokret dient zum Testen von c:geo.<br />" +
+                "Er befindet sich nicht wirklich im gelisteten Cache. <br />" +
+                "<br />" +
+                "Bitte ignorieren.");
+    }
 }
