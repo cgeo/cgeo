@@ -63,6 +63,8 @@ import java.util.Locale;
 public class SettingsActivity extends PreferenceActivity {
 
     private static final String INTENT_OPEN_SCREEN = "OPEN_SCREEN";
+    public static final int NO_RESTART_NEEDED = 1;
+    public static final int RESTART_NEEDED = 2;
 
     /**
      * Enumeration for directory choosers. This is how we can retrieve information about the
@@ -102,6 +104,8 @@ public class SettingsActivity extends PreferenceActivity {
         final Intent intent = getIntent();
         openInitialScreen(intent.getIntExtra(INTENT_OPEN_SCREEN, 0));
         AndroidBeam.disable(this);
+
+        setResult(NO_RESTART_NEEDED);
     }
 
     private void openInitialScreen(final int initialScreen) {
@@ -436,7 +440,7 @@ public class SettingsActivity extends PreferenceActivity {
         p.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-                CgeoApplication.getInstance().initApplicationLocale((Boolean) newValue);
+                setResult(RESTART_NEEDED);
                 return true;
             }
         });

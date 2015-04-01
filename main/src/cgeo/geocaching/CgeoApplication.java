@@ -11,7 +11,11 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import android.app.AlarmManager;
 import android.app.Application;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.view.ViewConfiguration;
@@ -133,7 +137,7 @@ public class CgeoApplication extends Application {
      *
      * @param useEnglish {@code true} if English should be used, {@code false} to use the systems settings
      */
-    public void initApplicationLocale(final boolean useEnglish) {
+    private void initApplicationLocale(final boolean useEnglish) {
         applicationLocale = useEnglish ? Locale.ENGLISH : Locale.getDefault();
         final Configuration config = new Configuration();
         config.locale = applicationLocale;
@@ -148,6 +152,17 @@ public class CgeoApplication extends Application {
      */
     public Locale getApplicationLocale() {
         return applicationLocale;
+    }
+
+    /**
+     * Kill and restart the application.
+     */
+    public void restartApplication() {
+        final Intent launchIntent = new Intent(this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        final PendingIntent intent= PendingIntent.getActivity(this, 0, launchIntent, 0);
+        final AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC, System.currentTimeMillis() + 500, intent);
+        System.exit(0);
     }
 
 

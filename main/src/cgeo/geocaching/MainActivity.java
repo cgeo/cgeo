@@ -92,6 +92,7 @@ public class MainActivity extends AbstractActionBarActivity {
     @InjectView(R.id.offline_count) protected TextView countBubble;
     @InjectView(R.id.info_area) protected LinearLayout infoArea;
 
+    public static final int SETTINGS_ACTIVITY_REQUEST_CODE = 1;
     public static final int SEARCH_REQUEST_CODE = 2;
 
     private Geopoint addCoords = null;
@@ -312,7 +313,7 @@ public class MainActivity extends AbstractActionBarActivity {
                 startActivity(new Intent(this, UsefulAppsActivity.class));
                 return true;
             case R.id.menu_settings:
-                startActivity(new Intent(this, SettingsActivity.class));
+                startActivityForResult(new Intent(this, SettingsActivity.class), SETTINGS_ACTIVITY_REQUEST_CODE);
                 return true;
             case R.id.menu_history:
                 startActivity(CacheListActivity.getHistoryIntent(this));
@@ -348,21 +349,27 @@ public class MainActivity extends AbstractActionBarActivity {
 
     @Override
     public void onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
-        final IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-        if (scanResult != null) {
-            final String scan = scanResult.getContents();
-            if (StringUtils.isBlank(scan)) {
-                return;
+        if (requestCode == SETTINGS_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == SettingsActivity.RESTART_NEEDED) {
+                CgeoApplication.getInstance().restartApplication();
             }
-            SearchActivity.startActivityScan(scan, this);
-        } else if (requestCode == SEARCH_REQUEST_CODE) {
-            // SearchActivity activity returned without making a search
-            if (resultCode == RESULT_CANCELED) {
-                String query = intent.getStringExtra(SearchManager.QUERY);
-                if (query == null) {
-                    query = "";
+        } else {
+            final IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+            if (scanResult != null) {
+                final String scan = scanResult.getContents();
+                if (StringUtils.isBlank(scan)) {
+                    return;
                 }
-                Dialogs.message(this, res.getString(R.string.unknown_scan) + "\n\n" + query);
+                SearchActivity.startActivityScan(scan, this);
+            } else if (requestCode == SEARCH_REQUEST_CODE) {
+                // SearchActivity activity returned without making a search
+                if (resultCode == RESULT_CANCELED) {
+                    String query = intent.getStringExtra(SearchManager.QUERY);
+                    if (query == null) {
+                        query = "";
+                    }
+                    Dialogs.message(this, res.getString(R.string.unknown_scan) + "\n\n" + query);
+                }
             }
         }
     }
