@@ -45,13 +45,11 @@ public class OpenCachingApi {
         return null;
     }
 
-    @Nullable
     private static HttpResponse getRequest(final String uri, final Parameters parameters) {
         parameters.add("Authorization", DEV_KEY);
         return Network.getRequest(uri, parameters);
     }
 
-    @NonNull
     private static Collection<Geocache> importCachesFromResponse(final HttpResponse response, final boolean isDetailed) {
         if (response == null) {
             return Collections.emptyList();
