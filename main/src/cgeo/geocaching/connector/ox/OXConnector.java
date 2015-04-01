@@ -104,10 +104,8 @@ public class OXConnector extends AbstractConnector implements ISearchByCenter, I
         return createSearchResult(OpenCachingApi.searchByKeyword(name));
     }
 
-    private static SearchResult createSearchResult(final Collection<Geocache> caches) {
-        if (caches == null) {
-            return null;
-        }
+    @NonNull
+    private static SearchResult createSearchResult(@NonNull final Collection<Geocache> caches) {
         return new SearchResult(caches);
     }
 

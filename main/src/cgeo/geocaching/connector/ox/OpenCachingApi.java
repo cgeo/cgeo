@@ -17,6 +17,7 @@ import ch.boye.httpclientandroidlib.HttpResponse;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -26,6 +27,11 @@ public class OpenCachingApi {
     private static final String API_URL_CACHES_GPX = "http://www.opencaching.com/api/geocache.gpx";
     private static final String DEV_KEY = CryptUtils.rot13("PtqQnHo9RUTht3Np");
 
+    private OpenCachingApi() {
+        // Utility class
+    }
+
+    @Nullable
     public static Geocache searchByGeoCode(final @NonNull String geocode) {
         final HttpResponse response = getRequest("http://www.opencaching.com/api/geocache/" + geocode + ".gpx",
                 new Parameters(
@@ -39,11 +45,13 @@ public class OpenCachingApi {
         return null;
     }
 
+    @Nullable
     private static HttpResponse getRequest(final String uri, final Parameters parameters) {
         parameters.add("Authorization", DEV_KEY);
         return Network.getRequest(uri, parameters);
     }
 
+    @NonNull
     private static Collection<Geocache> importCachesFromResponse(final HttpResponse response, final boolean isDetailed) {
         if (response == null) {
             return Collections.emptyList();
@@ -58,6 +66,7 @@ public class OpenCachingApi {
         return caches;
     }
 
+    @NonNull
     public static Collection<Geocache> searchByCenter(final @NonNull Geopoint center) {
         final Parameters queryParameters = new Parameters(
                 "log_limit", "0",
@@ -107,8 +116,9 @@ public class OpenCachingApi {
         return doQuery;
     }
 
+    @NonNull
     public static Collection<Geocache> searchByBoundingBox(final @NonNull Viewport viewport) {
-        final String bbox = viewport.bottomLeft.format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA) + "," + viewport.topRight.format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA);
+        final String bbox = viewport.bottomLeft.format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA) + ',' + viewport.topRight.format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA);
         final Parameters queryParameters = new Parameters(
                 "log_limit", "0",
                 "hint", "false",
@@ -122,6 +132,7 @@ public class OpenCachingApi {
         return Collections.emptyList();
     }
 
+    @NonNull
     public static Collection<Geocache> searchByKeyword(final @NonNull String name) {
         final Parameters queryParameters = new Parameters(
                 "log_limit", "5",

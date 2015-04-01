@@ -141,7 +141,7 @@ public class SearchResult implements Parcelable {
      *
      * @param caches the non-null collection of caches to include
      */
-    public SearchResult(final Collection<Geocache> caches) {
+    public SearchResult(@NonNull final Collection<Geocache> caches) {
         this();
         addAndPutInCache(caches);
     }
@@ -265,7 +265,7 @@ public class SearchResult implements Parcelable {
     }
 
     /** Add the cache geocode to the search and store the cache in the CacheCache */
-    public void addAndPutInCache(final Collection<Geocache> caches) {
+    public void addAndPutInCache(@NonNull final Collection<Geocache> caches) {
         for (final Geocache geocache : caches) {
             addGeocode(geocache.getGeocode());
         }
