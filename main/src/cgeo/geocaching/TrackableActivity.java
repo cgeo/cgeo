@@ -37,6 +37,8 @@ import rx.android.view.OnClickEvent;
 import rx.android.view.ViewObservable;
 import rx.functions.Action1;
 import rx.functions.Func0;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
 import android.app.ProgressDialog;
@@ -224,31 +226,46 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     }
 
     private static Observable<Trackable> loadTrackable(final String geocode, final String guid, final String id) {
-        return Observable.defer(new Func0<Observable<Trackable>>() {
-            @Override
-            public Observable<Trackable> call() {
-                if (StringUtils.isNotEmpty(geocode)) {
-                    // iterate over the connectors as some codes may be handled by multiple connectors
-                    for (final TrackableConnector trackableConnector : ConnectorFactory.getTrackableConnectors()) {
-                        if (trackableConnector.canHandleTrackable(geocode)) {
-                            final Trackable trackable = trackableConnector.searchTrackable(geocode, guid, id);
-                            if (trackable != null) {
-                                return Observable.just(trackable);
-                            }
-                        }
-                    }
-                    // Check local storage (offline case)
-                    final Trackable trackable = DataStore.loadTrackable(geocode);
-                    if (trackable != null) {
-                        return Observable.just(trackable);
-                    }
+        if (StringUtils.isEmpty(geocode)) {
+            // Only solution is GC search by uid
+            return RxUtils.deferredNullable(new Func0<Trackable>() {
+                @Override
+                public Trackable call() {
+                    return TravelBugConnector.getInstance().searchTrackable(geocode, guid, id);
                 }
+            }).subscribeOn(RxUtils.networkScheduler);
+        }
 
-                // Fall back to GC search by GUID
-                final Trackable trackable = TravelBugConnector.getInstance().searchTrackable(geocode, guid, id);
-                return trackable != null ? Observable.just(trackable) : Observable.<Trackable>empty();
+        // We query all the connectors that can handle the trackable in parallel as well as the local storage.
+        // We return the first positive result coming from a connector, or, if none, the result of loading from
+        // the local storage.
+
+        final Observable<Trackable> fromNetwork =
+                Observable.from(ConnectorFactory.getTrackableConnectors()).filter(new Func1<TrackableConnector, Boolean>() {
+                    @Override
+                    public Boolean call(final TrackableConnector trackableConnector) {
+                        return trackableConnector.canHandleTrackable(geocode);
+                    }
+                }).flatMap(new Func1<TrackableConnector, Observable<Trackable>>() {
+                    @Override
+                    public Observable<Trackable> call(final TrackableConnector trackableConnector) {
+                        return RxUtils.deferredNullable(new Func0<Trackable>() {
+                            @Override
+                            public Trackable call() {
+                                return trackableConnector.searchTrackable(geocode, guid, id);
+                            }
+                        }).subscribeOn(RxUtils.networkScheduler);
+                    }
+                });
+
+        final Observable<Trackable> fromLocalStorage = RxUtils.deferredNullable(new Func0<Trackable>() {
+            @Override
+            public Trackable call() {
+                return DataStore.loadTrackable(geocode);
             }
-        }).subscribeOn(RxUtils.networkScheduler);
+        }).subscribeOn(Schedulers.io());
+
+        return fromNetwork.concatWith(fromLocalStorage).take(1);
     }
 
     public void displayTrackable() {
