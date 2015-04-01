@@ -10,6 +10,7 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -40,7 +41,7 @@ public class GeokretyLoggingManager extends AbstractTrackableLoggingManager {
                     date,
                     log);
 
-            final String logs = (response.getRight().isEmpty() ? "" : response.getRight().toString());
+            final String logs = (response.getRight().isEmpty() ? "" : StringUtils.join(response.getRight(), "\n"));
             return new LogResult(response.getLeft(), logs);
         } catch (final Exception e) {
             Log.e("GeokretyLoggingManager.postLog", e);

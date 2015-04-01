@@ -304,6 +304,12 @@ public class Settings {
         resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 
+    public static Locale getLanguage() {
+        final Configuration config = new Configuration();
+        final Resources resources = CgeoApplication.getInstance().getResources();
+        return resources.getConfiguration().locale;
+    }
+
     public static boolean hasGCCredentials() {
         final String preUsername = getString(R.string.pref_username, null);
         final String prePassword = getString(R.string.pref_password, null);
