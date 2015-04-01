@@ -21,7 +21,6 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
@@ -79,7 +78,6 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             final List<Trackable> trackables = GeokretyParser.parse(is);
 
             if (CollectionUtils.isNotEmpty(trackables)) {
-                assert trackables != null;  // Help Eclipse
                 DataStore.saveTrackable(trackables.get(0));
                 return trackables.get(0);
             }
@@ -91,19 +89,20 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     }
 
     @Override
+    @NonNull
     public List<Trackable> searchTrackables(final String geocode) {
         Log.d("GeokretyConnector.searchTrackables: wpt=" + geocode);
         try {
             final InputStream response = Network.getResponseStream(Network.getRequest(getUrlCache() + "/export2.php?wpt=" + geocode));
             if (response == null) {
                 Log.e("GeokretyConnector.searchTrackable: No data from server");
-                return null;
+                return Collections.emptyList();
             }
             final InputSource is = new InputSource(response);
             return GeokretyParser.parse(is);
         } catch (final Exception e) {
             Log.w("GeokretyConnector.searchTrackables", e);
-            return null;
+            return Collections.emptyList();
         }
     }
 
@@ -122,7 +121,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                 // retrieve someone inventory
                 params.put("userid", String.valueOf(userid));
             } else {
-                // Retrieve intentory, with tracking codes
+                // Retrieve inventory, with tracking codes
                 params.put("secid", Settings.getGeokretySecId());
             }
             final InputStream response = Network.getResponseStream(Network.getRequest(URL + "/export2.php", params));
@@ -131,7 +130,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                 return Collections.emptyList();
             }
             final InputSource is = new InputSource(response);
-            return ListUtils.emptyIfNull(GeokretyParser.parse(is));
+            return GeokretyParser.parse(is);
         } catch (final Exception e) {
             Log.w("GeokretyConnector.loadInventory", e);
             return new ArrayList<>();

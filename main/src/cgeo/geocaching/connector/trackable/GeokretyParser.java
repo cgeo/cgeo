@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -158,7 +159,7 @@ public class GeokretyParser {
         }
     }
 
-    @Nullable
+    @NonNull
     public static List<Trackable> parse(final InputSource page) {
         if (page != null) {
             try {
@@ -177,7 +178,7 @@ public class GeokretyParser {
                 Log.w("Cannot parse GeoKrety", e);
             }
         }
-        return null;
+        return Collections.emptyList();
     }
 
     private static class GeokretyRuchyXmlParser {

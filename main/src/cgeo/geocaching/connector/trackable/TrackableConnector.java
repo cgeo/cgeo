@@ -44,6 +44,7 @@ public interface TrackableConnector {
     @Nullable
     public Trackable searchTrackable(final String geocode, final String guid, final String id);
 
+    @NonNull
     public List<Trackable> searchTrackables(final String geocode);
 
     @Nullable
