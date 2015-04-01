@@ -78,7 +78,7 @@ public final class MapUtils {
 
     private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint) {
         final Drawable marker = res.getDrawable(!waypoint.isVisited() ? R.drawable.marker : R.drawable.marker_transparent);
-        final Drawable[] layers = new Drawable[] {
+        final Drawable[] layers = {
                 marker,
                 res.getDrawable(waypoint.getWaypointType().markerId)
         };

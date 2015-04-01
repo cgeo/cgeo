@@ -53,7 +53,7 @@ import java.util.Map;
 
 public class HtmlImage implements Html.ImageGetter {
 
-    private static final String[] BLOCKED = new String[] {
+    private static final String[] BLOCKED = {
             "gccounter.de",
             "gccounter.com",
             "cachercounter/?",

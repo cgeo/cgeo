@@ -52,18 +52,18 @@ import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public final class ImageUtils {
-    private static final int[] ORIENTATIONS = new int[] {
+    private static final int[] ORIENTATIONS = {
             ExifInterface.ORIENTATION_ROTATE_90,
             ExifInterface.ORIENTATION_ROTATE_180,
             ExifInterface.ORIENTATION_ROTATE_270
     };
 
-    private static final int[] ROTATION = new int[] { 90, 180, 270 };
+    private static final int[] ROTATION = { 90, 180, 270 };
     private static final int MAX_DISPLAY_IMAGE_XY = 800;
 
     // Images whose URL contains one of those patterns will not be available on the Images tab
     // for opening into an external application.
-    private final static String[] NO_EXTERNAL = new String[] { "geocheck.org" };
+    private final static String[] NO_EXTERNAL = { "geocheck.org" };
 
     private ImageUtils() {
         // Do not let this class be instantiated, this is a utility class.

@@ -69,7 +69,7 @@ public abstract class GPXParser extends FileParser {
     /**
      * supported groundspeak extensions of the GPX format
      */
-    private static final String[] GROUNDSPEAK_NAMESPACE = new String[] {
+    private static final String[] GROUNDSPEAK_NAMESPACE = {
             "http://www.groundspeak.com/cache/1/1", // PQ 1.1
             "http://www.groundspeak.com/cache/1/0/1", // PQ 1.0.1
             "http://www.groundspeak.com/cache/1/0", // PQ 1.0
@@ -78,7 +78,7 @@ public abstract class GPXParser extends FileParser {
     /**
      * supported GSAK extension of the GPX format
      */
-    private static final String[] GSAK_NS = new String[] {
+    private static final String[] GSAK_NS = {
             "http://www.gsak.net/xmlv1/4",
             "http://www.gsak.net/xmlv1/5",
             "http://www.gsak.net/xmlv1/6"
