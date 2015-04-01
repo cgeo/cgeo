@@ -74,6 +74,9 @@
   <string name="log_tb_visit">Apsilankė</string>
   <string name="log_tb_drop">Paliktas</string>
   <string name="log_tb_changeall">Keisti visus</string>
+  <string name="log_tb_grabbed">Paimtas kažkur</string>
+  <string name="log_tb_discovered">Atrastas</string>
+  <string name="log_tb_archived">Archyvuota</string>
   <string name="log_save">Išsaugoti neprisijungus</string>
   <string name="log_saving">Siunčiamas įrašas…</string>
   <string name="log_saving_and_uploading">Siunčiamas įrašas ir įkeliama nuotrauka…</string>
@@ -757,6 +760,7 @@
   <string name="waypoint_note">Pastaba</string>
   <string name="waypoint_visited">Aplankytas</string>
   <string name="waypoint_save">Išsaugoti</string>
+  <string name="waypoint_cancel_edit">Atšaukti</string>
   <string name="waypoint_loading">Įkeliamas papildomas taškas…</string>
   <string name="waypoint_do_not_touch_cache_coordinates">Nekeisti slėptuvės koordinačių</string>
   <string name="waypoint_set_as_cache_coords">Nustatyti kaip slėptuvės koordinatės c:geo programoje</string>
@@ -856,6 +860,7 @@
   <string name="trackable_distance">Nukeliauta</string>
   <string name="trackable_touch">Registruoti</string>
   <string name="trackable_not_activated">Keliauninkas neaktyvuotas</string>
+  <string name="trackable_swaggie">Swaggie</string>
   <string name="geokret_type_traditional">Tradicinis</string>
   <string name="geokret_type_book_or_media">Knyga arba elektroninės priemonės</string>
   <string name="geokret_type_human">Žmogus</string>
@@ -1207,6 +1212,13 @@
   <string name="showcase_main_text">c:geo dabar meniu komandas patalpino pavadinimo juostoje kaip ir kituose šiuolaikinėse programose. Kai kurie elementai yra paslėpti už trijų taškų simbolio. Norėdami peržiūrėti jų aprašymus, ilgai spauskite mygtuką.</string>
   <string name="showcase_cachelist_title">Sąrašų perjungimas</string>
   <string name="showcase_cachelist_text">Galite perjungti slėptuvių sąrašus spustelėdami sąrašo pavadinimą.</string>
+  <string name="showcase_compass_hint_title">Rodyti užuominą</string>
   <string name="confirm_log_title">Neįprastas įrašo tipas</string>
   <string name="confirm_log_message">Norite registruoti \'%s\'. Ar tikrai?</string>
+  <string name="init_summary_geokrety_cache">Padidina užkrovimo greitį.</string>
+  <string name="init_summary_geokrety_account">Nesukonfigūruota paskyra.</string>
+  <string name="init_geokrety_register_ok">Prisijungta sėkmingai</string>
+  <string name="init_geokrety_register_fail">Nepavyko prisijungti</string>
+  <string name="init_geokrety_get_secid">Gauti API raktą</string>
+  <string name="init_geokrety_cache">Naudoti duomenis iš podėlio</string>
 </resources>

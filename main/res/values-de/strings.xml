@@ -1237,17 +1237,11 @@
   <string name="showcase_compass_hint_text">Diese neue Option könnte dir helfen den Cache zu finden - sie zeigt den Hint an, wenn es einen gibt.</string>
   <string name="confirm_log_title">Ungewöhnlicher Log-Typ</string>
   <string name="confirm_log_message">Du möchtest \'%s\' loggen. Bist du dir sicher?</string>
-  <string name="init_geokrety">Geokrety.org</string>
-  <string name="init_geokrety_login">EInloggen auf GeoKrety.org</string>
-  <string name="init_connectorGeokretyActive">Geokrety Trackables</string>
-  <string name="init_summary_geokrety">Lädt Trackables von Geokrety.org</string>
   <string name="init_summary_geokrety_cache">Verbessert die Ladezeit.</string>
   <string name="init_summary_geokrety_account">Kein Konto konfiguriert.</string>
-  <string name="init_summary_geokrety_not_anonymous">Loggen aus c:geo kann nicht anonym erfolgen. Bitte registrieren.</string>
   <string name="init_geokrety_register_ok">Login erfolgreich</string>
   <string name="init_geokrety_register_fail">Login fehlgeschlagen</string>
   <string name="init_geokrety_get_secid">API-Schlüssel abrufen</string>
-  <string name="init_geokrety_description">Speichere deinen API-SChlüssel in c:geo um das Loggen von GeoKrety zu vereinfachen</string>
-  <string name="init_geokrety_cache_description">GeokretyMap.org stellt zwischengespeicherte Daten für GeoKrety-Trackables zur Verfügung. Die Daten sind möglichweise nicht auf dem neuesten Stand!\nPositionen:  ~30min.\nBeschreibungen: ~24h.</string>
-  <string name="init_geokrety_cache">Benutze zwischengespeicherte Daten</string>
+  <string name="init_geokrety_description">Speichere deinen API-Schlüssel in c:geo um das Loggen von GeoKrets zu vereinfachen</string>
+  <string name="init_geokrety_cache">Nutze Zwischenspeicherung</string>
 </resources>

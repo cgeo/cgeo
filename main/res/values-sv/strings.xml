@@ -79,6 +79,7 @@
   <string name="log_saving_and_uploading">Sparar logg och laddar upp bild…</string>
   <string name="log_clear">Rensa</string>
   <string name="log_post_not_possible">Laddar loggningssida…</string>
+  <string name="log_post_geocode_missing">Geocode saknas…</string>
   <string name="log_date_future_not_allowed">Framtida loggdatum är inte tillåtna.</string>
   <string name="log_add">Lägg till</string>
   <string name="log_repeat">Upprepa senaste loggen</string>
@@ -174,7 +175,9 @@
   <string name="err_log_load_data">Tyvärr kan c:geo inte ladda information som krävs för att logga ditt besök.</string>
   <string name="err_log_load_data_again">Tyvärr kan c:geo inte ladda information som krävs för att logga ditt besök. Försöker igen.</string>
   <string name="err_log_load_data_still">c:geo laddar fortfarande data för att kunna posta loggen. Vänligen vänta en stund till.</string>
+  <string name="err_log_post_missing_coordinates">Koordinater saknas.</string>
   <string name="err_log_post_failed">Det verkar som att din logg inte kunde postas. Kontrollera loggen på cachens ursprungliga hemsida.</string>
+  <string name="err_log_post_failed_ec">Det verkar som att din logg inte kunde laddas upp. Kontrollera loggen på Extremcaching.com.</string>
   <string name="err_logimage_post_failed">Det verkar som att din logg bild inte kunde laddas upp. Kontrollera bilden på cachens hemsida.</string>
   <string name="err_search_address_forgot">Tyvärr glömde c:geo adressen du sökte efter.</string>
   <string name="err_parse_lat">Tyvärr kan c:geo inte tolka latitud.</string>
@@ -680,6 +683,7 @@
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Rösta</string>
+  <string name="cache_menu_checker">Öppna Geochecker</string>
   <string name="cache_menu_ignore">Ignorera cache</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Sparad logg</string>
@@ -766,6 +770,7 @@
   <string name="waypoint_note">Kommentar</string>
   <string name="waypoint_visited">Besökt</string>
   <string name="waypoint_save">Spara</string>
+  <string name="waypoint_cancel_edit">Avbryt</string>
   <string name="waypoint_loading">Laddar punkt…</string>
   <string name="waypoint_do_not_touch_cache_coordinates">Ingen förändring av cachens koordinater</string>
   <string name="waypoint_set_as_cache_coords">Ange som cachens koordinater i c:geo</string>
@@ -865,6 +870,7 @@
   <string name="trackable_distance">Rest sträcka</string>
   <string name="trackable_touch">Logga</string>
   <string name="trackable_not_activated">Trackable är inte aktiverad</string>
+  <string name="trackable_travelbug">Travelbug</string>
   <string name="geokret_type_traditional">Traditionell</string>
   <string name="geokret_type_book_or_media">Bok eller elektronisk media</string>
   <string name="geokret_type_human">Mänsklig</string>
@@ -1207,6 +1213,8 @@
   <string name="showcase_main_text">c:geo placerar nu menyalternativ i titelraden likt andra moderna appar. Några alternativ döljs bakom symbolen med prickar. Tryck länge på en knapp för att se dess beskrivning.</string>
   <string name="showcase_cachelist_title">Byt listor</string>
   <string name="showcase_cachelist_text">Du kan växla mellan dina geocachelistor genom att klicka på rubriken för listan.</string>
+  <string name="showcase_compass_hint_title">Visa ledtråd</string>
   <string name="confirm_log_title">Ovanlig loggtyp</string>
   <string name="confirm_log_message">Du vill logga \'%s\'. Är du säker?</string>
+  <string name="init_summary_geokrety_cache">Förbättra laddningshastighet.</string>
 </resources>

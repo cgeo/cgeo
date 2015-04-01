@@ -161,6 +161,7 @@
   <string name="err_acquire_image_failed">Získání obrázku selhalo.</string>
   <string name="err_tb_display">c:geo nemůže zobrazit sledovatelný předmět. Je to opravdu sledovatelný předmět?</string>
   <string name="err_tb_details_open">c:geo nemůže otevřít podrobnosti ke sledovatelnému předmětu.</string>
+  <string name="err_tb_not_loggable">Tento sledovatelný předmět není zalogovatelný.</string>
   <string name="err_tb_find">c:geo nemůže najít sledovatelný předmět.</string>
   <string name="err_tb_find_that">c:geo nemůže najít tento sledovatelný předmět.</string>
   <string name="err_waypoint_cache_unknown">c:geo neví k jaké keši chceš přidat bod trasy.</string>
@@ -173,7 +174,9 @@
   <string name="err_log_load_data">c:geo nemůže načíst data požadovaná k zalogování návštěvy.</string>
   <string name="err_log_load_data_again">c:geo nemůže načíst data požadovaná k zalogování návštěvy. Zkouší to znovu.</string>
   <string name="err_log_load_data_still">c:geo stále načítá data požadovaná k odeslání Logu. Prosím, počkej ještě chvíli.</string>
+  <string name="err_log_post_missing_tracking_code">Chybí identifikační kód.</string>
   <string name="err_log_post_failed">Zdá se, že tvůj log nebyl správně zveřejněn. Prosím, zkontroluj ho přímo na webové stránce keše.</string>
+  <string name="err_log_post_failed_ec">Zdá se, že tvůj Log nebyl odeslán. Prosím, zkontroluj to na Extremcaching.com.</string>
   <string name="err_logimage_post_failed">Zdá se, že obrázek u logu nebyl správně odeslán. Prosím, zkontroluj to přímo na webové stránce keše.</string>
   <string name="err_search_address_forgot">c:geo zapomnělo hledanou adresu.</string>
   <string name="err_parse_lat">c:geo nemůže dopočítat zeměpisnou šířku.</string>
@@ -859,7 +862,7 @@
   <string name="trackable_goal">Cíl</string>
   <string name="trackable_details">Detaily</string>
   <string name="trackable_image">Obrázek</string>
-  <string name="trackable_code">TB-kód</string>
+  <string name="trackable_code">Identifikační kód</string>
   <string name="trackable_name">Název</string>
   <string name="trackable_type">Typ</string>
   <string name="trackable_owner">Vlastník</string>
@@ -874,6 +877,8 @@
   <string name="trackable_distance">Nacestoval</string>
   <string name="trackable_touch">Dotyk</string>
   <string name="trackable_not_activated">Sledovatelný předmět není aktivován</string>
+  <string name="trackable_travelbug">Travelbug</string>
+  <string name="trackable_swaggie">Swaggie</string>
   <string name="geokret_type_traditional">Tradiční</string>
   <string name="geokret_type_book_or_media">Kniha nebo elektronická média</string>
   <string name="geokret_type_human">Člověk</string>
@@ -1227,7 +1232,11 @@
   <string name="showcase_cachelist_title">Přepínání seznamů</string>
   <string name="showcase_cachelist_text">Mezi seznamy s keškami můžeš přepínat klepnutím na název seznamu.</string>
   <string name="showcase_compass_hint_title">Zobrazit nápovědu</string>
-  <string name="showcase_compass_hint_text">Tato nová položka vám může poradit, kde kešku hledat - zobrazuje nápovědu, pokud je k dispozici.</string>
+  <string name="showcase_compass_hint_text">Tato nová položka ti může poradit, kde kešku hledat - zobrazuje nápovědu, pokud je k dispozici.</string>
   <string name="confirm_log_title">Neobvyklý typ logu</string>
   <string name="confirm_log_message">Opravdu chceš zalogovat „%s“?</string>
+  <string name="init_summary_geokrety_cache">Zlepšení rychlosti načítání.</string>
+  <string name="init_summary_geokrety_account">Účet nebyl nastaven.</string>
+  <string name="init_geokrety_register_ok">Přihlášení bylo úspěšné</string>
+  <string name="init_geokrety_register_fail">Přihlášení selhalo</string>
 </resources>
