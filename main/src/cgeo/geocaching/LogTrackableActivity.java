@@ -13,6 +13,7 @@ import cgeo.geocaching.enumerations.Loaders;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
@@ -339,7 +340,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     private class CoordinatesListener implements View.OnClickListener {
         @Override
         public void onClick(final View arg0) {
-            final CoordinatesInputDialog coordinatesDialog = CoordinatesInputDialog.getInstance(null, geopoint, null);
+            final CoordinatesInputDialog coordinatesDialog = CoordinatesInputDialog.getInstance(geocache, geopoint, Sensors.getInstance().currentGeo());
             coordinatesDialog.setCancelable(true);
             coordinatesDialog.show(getSupportFragmentManager(),"coordinates_dialog");
         }
