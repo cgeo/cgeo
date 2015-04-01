@@ -672,7 +672,6 @@
   <string name="cache_menu_map_static">Statické mapy</string>
   <string name="cache_menu_download_map_static">Stáhnout statické mapy</string>
   <string name="cache_menu_rmaps">Rmaps</string>
-  <string name="cache_menu_map_ext">Zobrazit na jiné mapě</string>
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Otevřít v prohlížečí</string>
   <string name="cache_menu_visit">Zalogovat návštěvu</string>

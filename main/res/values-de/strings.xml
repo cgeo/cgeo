@@ -75,7 +75,7 @@
   <string name="log_tb_drop">Abgelegt</string>
   <string name="log_tb_changeall">Alle ändern</string>
   <string name="log_tb_grabbed">Woanders mitgenommen</string>
-  <string name="log_tb_note">Notiz</string>
+  <string name="log_tb_note">Bemerkung</string>
   <string name="log_tb_discovered">Gesehen</string>
   <string name="log_tb_archived">Archiviert</string>
   <string name="log_save">Offline speichern</string>
@@ -129,7 +129,7 @@
   <string name="err_parse">Parsing der Anmeldung gescheitert</string>
   <string name="err_server">Verbindung zu Geocaching.com konnte nicht hergestellt werden (Server oder Verbindung inaktiv?)</string>
   <string name="err_server_ec">Verbindung zu extremcaching.com konnte nicht hergestellt werden. Server ist nicht verfügbar oder keine Internet-Verbindung vorhanden.</string>
-  <string name="err_server_gk">Verbindung zu geokrety.org konnte nicht hergestellt werden. Server ist nicht verfügbar oder keine Internet-Verbindung vorhanden.</string>
+  <string name="err_server_gk">Verbindung zu GeoKrety.org konnte nicht hergestellt werden. Server ist nicht verfügbar oder keine Internet-Verbindung vorhanden.</string>
   <string name="err_login">Keine Anmeldedaten gespeichert.</string>
   <string name="err_login_failed_toast">c:geo konnte sich nicht einloggen und arbeitet im Offline-Modus. Bitte die Login-Daten in den Einstellungen überprüfen oder eine Internetverbindung herstellen.</string>
   <string name="err_unknown">Unbekannter Fehler</string>
@@ -540,7 +540,7 @@
   <string name="init_hardware_acceleration">Hardwarebeschleunigung aktivieren</string>
   <string name="settings_open_website">Webseite öffnen</string>
   <string name="settings_open_geokrety_register">Öffne Registrierungs-Seite auf GeoKrety.org</string>
-  <string name="settings_open_geokretymap_website">Öffne GeokretyMap.org Webseite</string>
+  <string name="settings_open_geokretymap_website">Öffne GeoKretyMap.org Webseite</string>
   <string name="settings_settings">Einstellungen</string>
   <string name="settings_information">Information</string>
   <string name="settings_twitter_cache_message">Nachricht für gefundenen Cache</string>
@@ -678,7 +678,7 @@
   <string name="cache_menu_map_static">Statische Karten</string>
   <string name="cache_menu_download_map_static">Statische Karten speichern</string>
   <string name="cache_menu_rmaps">Rmaps</string>
-  <string name="cache_menu_map_ext">Auf ext. Karte zeigen</string>
+  <string name="cache_menu_map_ext">Andere externe App</string>
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Im Browser öffnen</string>
   <string name="cache_menu_visit">Besuch loggen</string>
@@ -885,7 +885,7 @@
   <string name="trackable_touch">Trackable-Aktion</string>
   <string name="trackable_not_activated">Trackable nicht aktiviert</string>
   <string name="trackable_travelbug">Travelbug</string>
-  <string name="trackable_geokrety">Geokrety</string>
+  <string name="trackable_geokrety">GeoKrety</string>
   <string name="trackable_swaggie">Swaggie</string>
   <string name="geokret_type_traditional">Traditionell</string>
   <string name="geokret_type_book_or_media">Buch oder elektronisches Medium</string>
@@ -1237,11 +1237,17 @@
   <string name="showcase_compass_hint_text">Diese neue Option könnte dir helfen den Cache zu finden - sie zeigt den Hint an, wenn es einen gibt.</string>
   <string name="confirm_log_title">Ungewöhnlicher Log-Typ</string>
   <string name="confirm_log_message">Du möchtest \'%s\' loggen. Bist du dir sicher?</string>
+  <string name="init_geokrety">GeoKrety.org</string>
+  <string name="init_geokrety_login">Einloggen auf GeoKrety.org</string>
+  <string name="init_connectorGeokretyActive">GeoKrety Trackables</string>
+  <string name="init_summary_geokrety">Lädt Trackables von GeoKrety.org</string>
   <string name="init_summary_geokrety_cache">Verbessert die Ladezeit.</string>
   <string name="init_summary_geokrety_account">Kein Konto konfiguriert.</string>
+  <string name="init_summary_geokrety_not_anonymous">Das Loggen von GeoKrets aus c:geo kann nicht anonym erfolgen. Bitte registrieren.</string>
   <string name="init_geokrety_register_ok">Login erfolgreich</string>
   <string name="init_geokrety_register_fail">Login fehlgeschlagen</string>
   <string name="init_geokrety_get_secid">API-Schlüssel abrufen</string>
   <string name="init_geokrety_description">Speichere deinen API-Schlüssel in c:geo um das Loggen von GeoKrets zu vereinfachen</string>
+  <string name="init_geokrety_cache_description">GeoKretyMap.org stellt zwischengespeicherte Daten für GeoKrety-Trackables zur Verfügung. Die Daten sind möglichweise nicht auf dem neuesten Stand!\nPositionen:  ~30min.\nBeschreibungen: ~24h.</string>
   <string name="init_geokrety_cache">Nutze Zwischenspeicherung</string>
 </resources>

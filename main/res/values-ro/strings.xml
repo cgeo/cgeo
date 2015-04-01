@@ -657,7 +657,6 @@
   <string name="cache_menu_map_static">Hărţi statice</string>
   <string name="cache_menu_download_map_static">Descarcă hărţi statice</string>
   <string name="cache_menu_rmaps">Rmaps</string>
-  <string name="cache_menu_map_ext">Arată pe hartă externă</string>
   <string name="cache_menu_streetview">Vedere stradală</string>
   <string name="cache_menu_browser">Afişează în browser</string>
   <string name="cache_menu_visit">Jurnal</string>
@@ -847,7 +846,6 @@
   <string name="trackable_goal">Ţel</string>
   <string name="trackable_details">Detalii</string>
   <string name="trackable_image">Imagine</string>
-  <string name="trackable_code">Cod-TB</string>
   <string name="trackable_name">Nume</string>
   <string name="trackable_type">Tip</string>
   <string name="trackable_owner">Proprietar</string>

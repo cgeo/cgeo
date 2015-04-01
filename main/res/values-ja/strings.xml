@@ -552,7 +552,6 @@
   <string name="cache_menu_map_static">オフライン地図</string>
   <string name="cache_menu_download_map_static">オフライン用に地図をダウンロード</string>
   <string name="cache_menu_rmaps">Rmaps</string>
-  <string name="cache_menu_map_ext">外部地図で表示</string>
   <string name="cache_menu_streetview">Googleストリートビュー</string>
   <string name="cache_menu_browser">ブラウザで開く</string>
   <string name="cache_menu_visit">ログを書く</string>
@@ -727,7 +726,6 @@
   <string name="trackable_goal">目的</string>
   <string name="trackable_details">詳細</string>
   <string name="trackable_image">画像</string>
-  <string name="trackable_code">TBコード</string>
   <string name="trackable_name">名前</string>
   <string name="trackable_type">タイプ</string>
   <string name="trackable_owner">オーナー</string>

@@ -656,7 +656,6 @@
   <string name="cache_menu_map_static">Mapas estáticos</string>
   <string name="cache_menu_download_map_static">Descarregar os mapas estáticos</string>
   <string name="cache_menu_rmaps">Rmaps</string>
-  <string name="cache_menu_map_ext">Mostrar no mapa ext.</string>
   <string name="cache_menu_streetview">Vista de rua</string>
   <string name="cache_menu_browser">Abrir no browser</string>
   <string name="cache_menu_visit">Registar visita</string>
@@ -846,7 +845,6 @@
   <string name="trackable_goal">Objectivo</string>
   <string name="trackable_details">Detalhes</string>
   <string name="trackable_image">Imagem</string>
-  <string name="trackable_code">Código TB</string>
   <string name="trackable_name">Nome</string>
   <string name="trackable_type">Tipo</string>
   <string name="trackable_owner">Dono</string>

@@ -663,7 +663,6 @@
   <string name="cache_menu_map_static">Mapes estàtics</string>
   <string name="cache_menu_download_map_static">Baixa els mapes estàtics</string>
   <string name="cache_menu_rmaps">Rmaps</string>
-  <string name="cache_menu_map_ext">Mostra al mapa ext.</string>
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Obre al navegador</string>
   <string name="cache_menu_visit">Registra visita</string>
@@ -853,7 +852,6 @@
   <string name="trackable_goal">Objectiu</string>
   <string name="trackable_details">Detalls</string>
   <string name="trackable_image">Imatge</string>
-  <string name="trackable_code">Codi TB</string>
   <string name="trackable_name">Nom</string>
   <string name="trackable_type">Tipus</string>
   <string name="trackable_owner">Propietari</string>

@@ -652,7 +652,6 @@
   <string name="cache_menu_map_static">Mapa statyczna</string>
   <string name="cache_menu_download_map_static">Pobierz mapę statyczną</string>
   <string name="cache_menu_rmaps">Rmaps</string>
-  <string name="cache_menu_map_ext">Pokaż na zewn. mapie</string>
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Otwórz w przeglądarce</string>
   <string name="cache_menu_visit">Wpisz wizytę</string>
@@ -842,7 +841,6 @@
   <string name="trackable_goal">Cel</string>
   <string name="trackable_details">Szczegóły</string>
   <string name="trackable_image">Zdjęcie</string>
-  <string name="trackable_code">TB-kod</string>
   <string name="trackable_name">Nazwa</string>
   <string name="trackable_type">Typ</string>
   <string name="trackable_owner">Właściciel</string>
