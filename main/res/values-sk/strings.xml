@@ -907,7 +907,6 @@
   <string name="helper_google_translate_description">Ak prevezmete balíky prekladov v aplikácii Google Translate, môžete ľahko preložiť popisy skrýš v c:geo dlhým kliknutím na text s popisom skrýše (aj bez pripojenia k internetu).</string>
   <string name="addon_missing_title">Chýbajúci doplnok</string>
   <string name="addon_download_prompt">Získať doplnok teraz z Google Play.</string>
-  <string name="export">Exportovať</string>
   <string name="export_exportedto">exportované do</string>
   <string name="export_failed">Export zlyhal</string>
   <string name="export_fieldnotes">Poznámky</string>

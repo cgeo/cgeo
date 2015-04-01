@@ -913,7 +913,6 @@
   <string name="helper_google_translate_description">Om du hämtar översättningspaket i Google Translate appen, kan du enkelt översätta cachebeskrivningar i c:geo med en lång tryckning på cache-beskrivningstexten (även utan Internet-anslutning).</string>
   <string name="addon_missing_title">Tillägg saknas</string>
   <string name="addon_download_prompt">Hämta det nu från Google Play.</string>
-  <string name="export">Exportera</string>
   <string name="export_exportedto">exporterat till</string>
   <string name="export_failed">Exporteringen misslyckades</string>
   <string name="export_fieldnotes">Field Notes</string>

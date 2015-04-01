@@ -899,7 +899,6 @@
   <string name="helper_google_translate_description">Jeśli pobierzesz paczki tłumaczeń w aplikacji Google Tłumacz, będziesz mógł łatwo tłumaczyć opisy skrzynek przytrzymując na nich palcem chwilę dłużej (bez połączenia z internetem).</string>
   <string name="addon_missing_title">Brakujący dodatek</string>
   <string name="addon_download_prompt">Pobierz teraz z Google Play.</string>
-  <string name="export">Eksport</string>
   <string name="export_exportedto">wyeksportowano do</string>
   <string name="export_failed">Eksport nie powiódł się</string>
   <string name="export_fieldnotes">Notatki</string>

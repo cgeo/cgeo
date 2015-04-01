@@ -903,7 +903,6 @@
   <string name="helper_google_translate_description">Se fizer o download dos pacotes de tradução na app Google Translate, pode facilmente traduzir as descrições da cache no c:geo com um toque longo sobre o texto da descrição da cache (mesmo sem ligação à Internet).</string>
   <string name="addon_missing_title">Add-On em falta</string>
   <string name="addon_download_prompt">Obter agora a partir de Google Play.</string>
-  <string name="export">Exportar</string>
   <string name="export_exportedto">exportado para</string>
   <string name="export_failed">Exportação falhou</string>
   <string name="export_fieldnotes">Notas de campo</string>

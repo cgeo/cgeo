@@ -904,7 +904,6 @@
   <string name="helper_google_translate_description">Dacă ai descărcat pachete cu traduceri în aplicaţia Google Translate atunci poţi traduce descrierile geocutiilor în c:geo apăsând prelungit pe textul descrierii (chiar şi fără conexiune internet).</string>
   <string name="addon_missing_title">Extensie lipsă</string>
   <string name="addon_download_prompt">Ia acum de pe Google Play.</string>
-  <string name="export">Exportă</string>
   <string name="export_exportedto">exportat către</string>
   <string name="export_failed">Exportul nu a reușit</string>
   <string name="export_fieldnotes">Note din teren</string>

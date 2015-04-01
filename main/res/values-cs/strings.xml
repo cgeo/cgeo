@@ -922,7 +922,6 @@
   <string name="helper_google_translate_description">Pokud si v aplikaci Překladač Google stáhneš překladový balíček, můžeš jednoduše překládat popisy keší v c:geu dlouhým podržením textu (a to bez připojení k Internetu).</string>
   <string name="addon_missing_title">Chybějící modul</string>
   <string name="addon_download_prompt">Získat nyní z Google Play.</string>
-  <string name="export">Export</string>
   <string name="export_exportedto">Exportováno do</string>
   <string name="export_failed">Export selhal</string>
   <string name="export_fieldnotes">Poznámky z terénu</string>

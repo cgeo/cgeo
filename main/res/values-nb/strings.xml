@@ -906,7 +906,6 @@
   <string name="helper_google_translate_description">Hvis du laster ned oversettelsespakker i Google Oversetter-appen kan du enkelt oversette cachebeskrivelsen i c:geo ved å trykke lenge på teksten (uten å ha tilgang til Internett).</string>
   <string name="addon_missing_title">Manglende tillegg</string>
   <string name="addon_download_prompt">Last ned nå fra Google Play.</string>
-  <string name="export">Eksporter</string>
   <string name="export_exportedto">eksportert til</string>
   <string name="export_failed">Eksporteringen mislyktes</string>
   <string name="export_fieldnotes">Feltnotater</string>

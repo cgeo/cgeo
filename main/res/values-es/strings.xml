@@ -906,7 +906,6 @@
   <string name="helper_google_translate_description">Si descargas paquetes de idiomas en la app Traductor de Google, puedes traducir las descripciones de los cachés en c:geo pulsando de forma larga en el texto del caché (sin conexión a internet).</string>
   <string name="addon_missing_title">No se encuentra el complemento</string>
   <string name="addon_download_prompt">Obtenlo ahora desde Google Play.</string>
-  <string name="export">Exportar</string>
   <string name="export_exportedto">exportado a</string>
   <string name="export_failed">Error en la exportación</string>
   <string name="export_fieldnotes">Notas de campo</string>

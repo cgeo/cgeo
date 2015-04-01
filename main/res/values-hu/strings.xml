@@ -899,7 +899,6 @@
   <string name="helper_google_translate_description">A Google Fordító app-hoz letöltött fordító csomagokkal könnyedén lefordíthatod a c:geo ládaleírásait, ha hosszan tartva megnyomod a ládaleírás szövegét. (Internet kapcsolat nélkül is működik.)</string>
   <string name="addon_missing_title">Hiányzó add-on</string>
   <string name="addon_download_prompt">Töltsd le most a Google Play-ről.</string>
-  <string name="export">Exportálás</string>
   <string name="export_exportedto">exportálva ide</string>
   <string name="export_failed">Exportálás sikertelen</string>
   <string name="export_fieldnotes">Helyszíni jegyzetek</string>

@@ -905,7 +905,6 @@
   <string name="helper_google_translate_description">Als je vertaal pakketten in de Google Translate app download, kan je eenvoudig een cache omschrijving vertalen in c:geo door een lange tik op deze omschrijvingstekst (zonder een internet verbinding).</string>
   <string name="addon_missing_title">Add-On ontbreekt</string>
   <string name="addon_download_prompt">Haal de add-on nu op van Google Play.</string>
-  <string name="export">Export</string>
   <string name="export_exportedto">Geexporteerd naar</string>
   <string name="export_failed">Exporteren mislukt</string>
   <string name="export_fieldnotes">Veld-notities</string>

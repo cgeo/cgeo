@@ -868,7 +868,6 @@
   <string name="helper_google_translate_description">Če prenesete pakete prevodov znotraj Google Translate aplikacije, lahko prevajate opise zakladov v c:geo tudi brez povezave z dolgim pritiskom na tekst.</string>
   <string name="addon_missing_title">Manjkajoči dodatek</string>
   <string name="addon_download_prompt">Prenesite iz Google Play.</string>
-  <string name="export">Izvozi</string>
   <string name="export_exportedto">izvoženo v</string>
   <string name="export_failed">Izvažanje ni uspelo</string>
   <string name="export_fieldnotes">Field Notes zapisi</string>

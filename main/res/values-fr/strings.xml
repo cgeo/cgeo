@@ -926,7 +926,7 @@
   <string name="helper_google_translate_description">Si vous téléchargez des modules de traduction dans l\'application Google Traduction, vous pourrez facilement traduire les descriptions des caches dans c:geo par un clic long sur le texte de la description (même sans connexion Internet).</string>
   <string name="addon_missing_title">Module complémentaire manquant</string>
   <string name="addon_download_prompt">Le télécharger sur Google Play.</string>
-  <string name="export">Exporter</string>
+  <string name="export">Exporter : %1$s</string>
   <string name="export_exportedto">exporté vers</string>
   <string name="export_failed">Échec de l\'exportation</string>
   <string name="export_fieldnotes">Notes de terrain</string>

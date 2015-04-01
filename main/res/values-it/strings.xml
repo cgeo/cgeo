@@ -900,7 +900,6 @@
   <string name="helper_google_translate_description">Se si scaricano anche le lingue offline dell\'applicazione Google Traduttore, puoi facilmente tradurre le descrizioni dei cache in c:geo toccando e tenendo premuto sul testo (senza bisogno di una connessione Internet).</string>
   <string name="addon_missing_title">Add-On mancante</string>
   <string name="addon_download_prompt">Scaricalo ora da Google Play.</string>
-  <string name="export">Esporta</string>
   <string name="export_exportedto">esportato in</string>
   <string name="export_failed">Esportazione fallita</string>
   <string name="export_fieldnotes">Field Note</string>

@@ -931,7 +931,6 @@
   <string name="helper_google_translate_description">Wenn Sie Übersetzungspakete mit der Google Übersetzer-App herunterladen, können Sie Cache-Beschreibungen in c:geo durch langes Drücken auf den Cache-Beschreibungstext übersetzen (ohne Internetverbindung) .</string>
   <string name="addon_missing_title">Fehlendes Plugin</string>
   <string name="addon_download_prompt">Jetzt im Google Play Store herunterladen</string>
-  <string name="export">Exportieren</string>
   <string name="export_exportedto">exportiert nach</string>
   <string name="export_failed">Exportieren fehlgeschlagen</string>
   <string name="export_fieldnotes">Field Notes</string>

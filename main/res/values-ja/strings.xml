@@ -782,7 +782,6 @@
 Google翻訳アプリで各言語の辞書をダウンロードしておけばオフラインでも使用できます。</string>
   <string name="addon_missing_title">アドオンが見つかりません</string>
   <string name="addon_download_prompt">Google Playからインストールしますか?</string>
-  <string name="export">エクスポート</string>
   <string name="export_exportedto">にエクスポートしました</string>
   <string name="export_failed">エクスポートに失敗しました</string>
   <string name="export_fieldnotes">フィールドノート</string>
