@@ -80,11 +80,15 @@ public class GeokretyParser {
                     if (StringUtils.isNotBlank(imageName)) {
                         trackable.setImage("http://geokrety.org/obrazki/" + imageName);
                     }
+                    final String ownerId = attributes.getValue("owner_id");
+                    if (StringUtils.isNotBlank(ownerId)) {
+                        trackable.setOwner(CgeoApplication.getInstance().getString(R.string.init_geokrety_userid, ownerId));
+                    }
                 }
                 if (localName.equalsIgnoreCase("owner")) {
-                    final String owner = attributes.getValue("id");
-                    if (StringUtils.isNotBlank(owner)) {
-                        trackable.setOwnerGuid(getType(Integer.parseInt(owner)));
+                    final String ownerId = attributes.getValue("id");
+                    if (StringUtils.isNotBlank(ownerId)) {
+                        trackable.setOwner(CgeoApplication.getInstance().getString(R.string.init_geokrety_userid, ownerId));
                     }
                 }
                 if (localName.equalsIgnoreCase("type")) {
@@ -96,12 +100,12 @@ public class GeokretyParser {
                 // TODO: latitude/longitude could be parsed, but trackable doesn't support it, yet...
                 //if (localName.equalsIgnoreCase("position")) {
                 //final String latitude = attributes.getValue("latitude");
-                //if (StringUtils.isNotBlank(latitude)) {
-                //    trackable.setLatitude(getType(Integer.parseInt(latitude)));
+                //if (StringUtils.isNotBlank(latitude) {
+                //    trackable.setLatitude(latitude);
                 //}
                 //final String longitude = attributes.getValue("longitude");
-                //if (StringUtils.isNotBlank(longitude)) {
-                //    trackable.setLongitude(getType(Integer.parseInt(longitude)));
+                //if (StringUtils.isNotBlank(longitude) {
+                //    trackable.setLongitude(longitude);
                 //}
                 //}
             } catch (final NumberFormatException e) {

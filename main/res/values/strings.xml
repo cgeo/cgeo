@@ -1356,5 +1356,6 @@
     <string name="init_geokrety_description">Store your API key in c:geo to ease logging GeoKrety</string>
     <string name="init_geokrety_cache_description">GeoKretyMap.org provides cached datas for GeoKrety trackables. Datas may not be up to date!\nPositions: ~30min.\nDescriptions: ~24h.</string>
     <string name="init_geokrety_cache">Use cached datas</string>
+    <string name="init_geokrety_userid">User Id: %s</string>
 
 </resources>
