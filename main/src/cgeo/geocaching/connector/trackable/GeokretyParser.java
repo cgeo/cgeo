@@ -158,6 +158,7 @@ public class GeokretyParser {
         }
     }
 
+    @Nullable
     public static List<Trackable> parse(final InputSource page) {
         if (page != null) {
             try {

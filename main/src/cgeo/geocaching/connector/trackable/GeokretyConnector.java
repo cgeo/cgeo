@@ -19,6 +19,8 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.eclipse.jdt.annotation.NonNull;
@@ -32,7 +34,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class GeokretyConnector extends AbstractTrackableConnector {
@@ -76,7 +77,8 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             final InputSource is = new InputSource(response);
             final List<Trackable> trackables = GeokretyParser.parse(is);
 
-            if (!trackables.isEmpty()) {
+            if (CollectionUtils.isNotEmpty(trackables)) {
+                assert trackables != null;  // Help Eclipse
                 DataStore.saveTrackable(trackables.get(0));
                 return trackables.get(0);
             }
@@ -125,10 +127,10 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             final InputStream response = Network.getResponseStream(Network.getRequest(URL + "/export2.php", params));
             if (response == null) {
                 Log.e("GeokretyConnector.loadInventory: No data from server");
-                return new ArrayList<>();
+                return Collections.emptyList();
             }
             final InputSource is = new InputSource(response);
-            return GeokretyParser.parse(is);
+            return ListUtils.emptyIfNull(GeokretyParser.parse(is));
         } catch (final Exception e) {
             Log.w("GeokretyConnector.loadInventory", e);
             return new ArrayList<>();
