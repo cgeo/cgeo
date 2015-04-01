@@ -34,6 +34,11 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 public class GeokretyParser {
+
+    private GeokretyParser() {
+        // Utility class
+    }
+
     static class GeokretyHandler extends DefaultHandler {
         private static final SynchronizedDateFormat DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd kk:mm:ss", TimeZone.getTimeZone("UTC"), Locale.US);
         private final List<Trackable> trackables = new ArrayList<>();
