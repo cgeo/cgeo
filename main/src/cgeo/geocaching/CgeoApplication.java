@@ -12,9 +12,12 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.Application;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.view.ViewConfiguration;
 
 import java.lang.reflect.Field;
+import java.util.Locale;
 
 public class CgeoApplication extends Application {
 
@@ -23,6 +26,8 @@ public class CgeoApplication extends Application {
     private boolean liveMapHintShownInThisSession = false; // livemap hint has been shown
     private static CgeoApplication instance;
     private boolean isGooglePlayServicesAvailable = false;
+    private Locale applicationLocale;
+
 
     public static void dumpOnOutOfMemory(final boolean enable) {
 
@@ -61,7 +66,7 @@ public class CgeoApplication extends Application {
         }
 
         // Set language to English if the user decided so.
-        Settings.setLanguage(Settings.isUseEnglish());
+        initApplicationLocale(Settings.useEnglish());
 
         // ensure initialization of lists
         DataStore.getLists();
@@ -122,5 +127,28 @@ public class CgeoApplication extends Application {
     public boolean isGooglePlayServicesAvailable() {
         return isGooglePlayServicesAvailable;
     }
+
+    /**
+     * Set the current application language.
+     *
+     * @param useEnglish {@code true} if English should be used, {@code false} to use the systems settings
+     */
+    public void initApplicationLocale(final boolean useEnglish) {
+        applicationLocale = useEnglish ? Locale.ENGLISH : Locale.getDefault();
+        final Configuration config = new Configuration();
+        config.locale = applicationLocale;
+        final Resources resources = getResources();
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
+    }
+
+    /**
+     * Return the locale that should be used to display information to the user.
+     *
+     * @return either the system locale or an English one, depending on the settings
+     */
+    public Locale getApplicationLocale() {
+        return applicationLocale;
+    }
+
 
 }

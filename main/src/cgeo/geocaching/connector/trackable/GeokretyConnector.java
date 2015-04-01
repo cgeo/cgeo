@@ -1,6 +1,7 @@
 package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.AbstractLoggingActivity;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.R;
@@ -253,7 +254,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                     "comment", log,
                     "app", context.getString(R.string.app_name),
                     "app_ver", Version.getVersionName(context),
-                    "mobile_lang", Settings.getApplicationLocale().toString() + ".UTF-8"
+                    "mobile_lang", CgeoApplication.getInstance().getApplicationLocale().toString() + ".UTF-8"
             );
 
             // See doc: http://geokrety.org/help.php#acceptableformats

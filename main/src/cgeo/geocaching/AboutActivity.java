@@ -299,7 +299,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             }
         }
         body.append("\nSystem language: ").append(Locale.getDefault());
-        if (Settings.isUseEnglish()) {
+        if (Settings.useEnglish()) {
             body.append(" (cgeo forced to English)");
         }
         final boolean calendarAddonAvailable = CalendarAddon.isAvailable();

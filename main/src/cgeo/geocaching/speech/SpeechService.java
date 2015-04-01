@@ -1,12 +1,12 @@
 package cgeo.geocaching.speech;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -21,8 +21,6 @@ import android.os.IBinder;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.Engine;
 import android.speech.tts.TextToSpeech.OnInitListener;
-
-import java.util.Locale;
 
 /**
  * Service to speak the compass directions.
@@ -126,12 +124,7 @@ public class SpeechService extends Service implements OnInitListener {
             return;
         }
 
-        Locale locale = Locale.getDefault();
-        if (Settings.isUseEnglish()) {
-            locale = Locale.ENGLISH;
-        }
-
-        final int switchLocale = tts.setLanguage(locale);
+        final int switchLocale = tts.setLanguage(CgeoApplication.getInstance().getApplicationLocale());
 
         if (switchLocale == TextToSpeech.LANG_MISSING_DATA) {
             startingActivity.startActivity(new Intent(Engine.ACTION_INSTALL_TTS_DATA));

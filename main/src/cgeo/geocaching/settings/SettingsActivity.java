@@ -138,6 +138,7 @@ public class SettingsActivity extends PreferenceActivity {
         initSend2CgeoPreferences();
         initServicePreferences();
         initNavigationMenuPreferences();
+        initLanguagePreferences();
         initMaintenanceButtons();
 
         for (final int k : new int[] { R.string.pref_username, R.string.pref_password,
@@ -425,6 +426,17 @@ public class SettingsActivity extends PreferenceActivity {
                 final boolean isDebug = (Boolean) newValue;
                 Log.setDebug(isDebug);
                 CgeoApplication.dumpOnOutOfMemory(isDebug);
+                return true;
+            }
+        });
+    }
+
+    private void initLanguagePreferences() {
+        final Preference p = getPreference(R.string.pref_useenglish);
+        p.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(final Preference preference, final Object newValue) {
+                CgeoApplication.getInstance().initApplicationLocale((Boolean) newValue);
                 return true;
             }
         });

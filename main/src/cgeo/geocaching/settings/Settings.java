@@ -32,8 +32,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
@@ -297,19 +295,6 @@ public class Settings {
         return sharedPrefs.contains(getKey(prefKeyId));
     }
 
-    public static void setLanguage(final boolean useEnglish) {
-        final Configuration config = new Configuration();
-        config.locale = useEnglish ? Locale.ENGLISH : Locale.getDefault();
-        final Resources resources = CgeoApplication.getInstance().getResources();
-        resources.updateConfiguration(config, resources.getDisplayMetrics());
-    }
-
-    public static Locale getApplicationLocale() {
-        final Configuration config = new Configuration();
-        final Resources resources = CgeoApplication.getInstance().getResources();
-        return resources.getConfiguration().locale;
-    }
-
     public static boolean hasGCCredentials() {
         final String preUsername = getString(R.string.pref_username, null);
         final String prePassword = getString(R.string.pref_password, null);
@@ -553,7 +538,7 @@ public class Settings {
         return getBoolean(R.string.pref_excludemine, false);
     }
 
-    public static boolean isUseEnglish() {
+    public static boolean useEnglish() {
         return getBoolean(R.string.pref_useenglish, false);
     }
 
