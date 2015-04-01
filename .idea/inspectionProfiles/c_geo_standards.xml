@@ -665,6 +665,9 @@
       <option name="m_minLength" value="1" />
       <option name="m_maxLength" value="16" />
     </inspection_tool>
+    <inspection_tool class="UNUSED_IMPORT" enabled="true" level="WARNING" enabled_by_default="true">
+      <scope name="cgeo project sources" level="ERROR" enabled="true" />
+    </inspection_tool>
     <inspection_tool class="UnaryPlus" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="UnconditionalWait" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="UnnecessarilyQualifiedStaticUsage" enabled="true" level="WARNING" enabled_by_default="false">
