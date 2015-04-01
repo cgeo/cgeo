@@ -645,7 +645,6 @@
   <string name="cache_menu_map_static">Statiske kort</string>
   <string name="cache_menu_download_map_static">Indlæs statiske kort</string>
   <string name="cache_menu_rmaps">Rmaps</string>
-  <string name="cache_menu_map_ext">Vis på ext. kort</string>
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Åbn i browser</string>
   <string name="cache_menu_visit">Log besøg</string>
@@ -834,7 +833,6 @@
   <string name="trackable_goal">Mål</string>
   <string name="trackable_details">Detaljer</string>
   <string name="trackable_image">Billede</string>
-  <string name="trackable_code">TB-kode</string>
   <string name="trackable_name">Navn</string>
   <string name="trackable_type">Type</string>
   <string name="trackable_owner">Ejer</string>

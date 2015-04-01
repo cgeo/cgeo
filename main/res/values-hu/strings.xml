@@ -656,7 +656,6 @@
   <string name="cache_menu_map_static">Statikus térképek</string>
   <string name="cache_menu_download_map_static">Statikus térképek letöltése</string>
   <string name="cache_menu_rmaps">Rmaps</string>
-  <string name="cache_menu_map_ext">Mutassa kit. térképen</string>
   <string name="cache_menu_streetview">Utcanézet</string>
   <string name="cache_menu_browser">Megnyitás böngészőben</string>
   <string name="cache_menu_visit">Megtalálás bejelentése</string>
@@ -842,7 +841,6 @@
   <string name="trackable_goal">Cél</string>
   <string name="trackable_details">Részletek</string>
   <string name="trackable_image">Kép</string>
-  <string name="trackable_code">TB-kód</string>
   <string name="trackable_name">Név</string>
   <string name="trackable_type">Típus</string>
   <string name="trackable_owner">Tulajdonos</string>

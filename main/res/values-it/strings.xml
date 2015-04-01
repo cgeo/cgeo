@@ -653,7 +653,6 @@
   <string name="cache_menu_map_static">Mappe statiche</string>
   <string name="cache_menu_download_map_static">Scarica mappe statiche</string>
   <string name="cache_menu_rmaps">Rmaps</string>
-  <string name="cache_menu_map_ext">Mappa su app esterna</string>
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Apri nel browser</string>
   <string name="cache_menu_visit">Scrivi Log</string>
@@ -843,7 +842,6 @@
   <string name="trackable_goal">Obiettivo</string>
   <string name="trackable_details">Dettagli</string>
   <string name="trackable_image">Immagine</string>
-  <string name="trackable_code">TB-Code</string>
   <string name="trackable_name">Nome</string>
   <string name="trackable_type">Tipo</string>
   <string name="trackable_owner">Proprietario</string>

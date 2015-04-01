@@ -657,7 +657,6 @@
   <string name="cache_menu_map_static">Statische kaarten</string>
   <string name="cache_menu_download_map_static">Download statische kaarten</string>
   <string name="cache_menu_rmaps">Rmaps</string>
-  <string name="cache_menu_map_ext">Toon op ext. kaart</string>
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Open in browser</string>
   <string name="cache_menu_visit">Log bezoek</string>
@@ -848,7 +847,6 @@
   <string name="trackable_goal">Doel</string>
   <string name="trackable_details">Details</string>
   <string name="trackable_image">Afbeelding</string>
-  <string name="trackable_code">TB-Code</string>
   <string name="trackable_name">Naam</string>
   <string name="trackable_type">Type</string>
   <string name="trackable_owner">Eigenaar</string>

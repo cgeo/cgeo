@@ -664,7 +664,6 @@
   <string name="cache_menu_map_static">Sparade kartor</string>
   <string name="cache_menu_download_map_static">Spara kartor</string>
   <string name="cache_menu_rmaps">Rmaps</string>
-  <string name="cache_menu_map_ext">Visa på extern karta</string>
   <string name="cache_menu_streetview">Gatuvy</string>
   <string name="cache_menu_browser">Öppna i webbläsare</string>
   <string name="cache_menu_visit">Logga besök</string>
@@ -855,7 +854,6 @@
   <string name="trackable_goal">Uppdrag</string>
   <string name="trackable_details">Detaljer</string>
   <string name="trackable_image">Bild</string>
-  <string name="trackable_code">TB-kod</string>
   <string name="trackable_name">Namn</string>
   <string name="trackable_type">Typ</string>
   <string name="trackable_owner">Ägare</string>

@@ -630,7 +630,6 @@
   <string name="cache_menu_map_static">Statični zemljevidi</string>
   <string name="cache_menu_download_map_static">Prenesi statične zemljevide</string>
   <string name="cache_menu_rmaps">Rmaps</string>
-  <string name="cache_menu_map_ext">Pokaži na drugem zemljevidu</string>
   <string name="cache_menu_streetview">Pogled ulic</string>
   <string name="cache_menu_browser">Odpri v brskalniku</string>
   <string name="cache_menu_visit">Objavi zapis</string>
@@ -812,7 +811,6 @@
   <string name="trackable_goal">Cilj</string>
   <string name="trackable_details">Podrobnosti</string>
   <string name="trackable_image">Slika</string>
-  <string name="trackable_code">TB koda</string>
   <string name="trackable_name">Ime</string>
   <string name="trackable_type">Tip</string>
   <string name="trackable_owner">Lastnik</string>

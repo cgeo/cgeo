@@ -75,6 +75,7 @@
   <string name="log_tb_drop">Paliktas</string>
   <string name="log_tb_changeall">Keisti visus</string>
   <string name="log_tb_grabbed">Paimtas kažkur</string>
+  <string name="log_tb_note">Pastaba</string>
   <string name="log_tb_discovered">Atrastas</string>
   <string name="log_tb_archived">Archyvuota</string>
   <string name="log_save">Išsaugoti neprisijungus</string>
@@ -82,6 +83,7 @@
   <string name="log_saving_and_uploading">Siunčiamas įrašas ir įkeliama nuotrauka…</string>
   <string name="log_clear">Išvalyti</string>
   <string name="log_post_not_possible">Įkeliamas įrašo puslapis…</string>
+  <string name="log_post_geocode_missing">Trūksta geo kodo…</string>
   <string name="log_date_future_not_allowed">Būsimos datos įrašai negalimi.</string>
   <string name="log_add">Pridėti</string>
   <string name="log_repeat">Pakartoti paskutinį įrašą</string>
@@ -127,6 +129,7 @@
   <string name="err_parse">Nepavyko išanalizuoti prisijungimo puslapio</string>
   <string name="err_server">Nepavyksta susisiekti su Geocaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
   <string name="err_server_ec">Nepavyksta susisiekti su Extremcaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
+  <string name="err_server_gk">Nepavyksta susisiekti su GeoKrety.org. Neveikia svetainė arba jūsų interneto ryšys.</string>
   <string name="err_login">Nėra išsaugotos prisijungimo informacijos</string>
   <string name="err_login_failed_toast">c:geo negali prisijungti. c:geo veikia neprisijungusi su išsaugotomis slėptuvėmis. Patikrinkite prisijungimo nustatymus arba įjunkite prietaiso interneto ryšį.</string>
   <string name="err_unknown">Nežinoma klaida</string>
@@ -165,6 +168,7 @@
   <string name="err_acquire_image_failed">Nepavyko pasiekti nuotraukos.</string>
   <string name="err_tb_display">c:geo negali parodyti norimo keliauninko. Ar tai tikrai keliauninkas?</string>
   <string name="err_tb_details_open">c:geo negali atidaryti keliauninko informacijos.</string>
+  <string name="err_tb_not_loggable">Šis keliauninkas neregistruojamas.</string>
   <string name="err_tb_find">c:geo neranda keliauninko</string>
   <string name="err_tb_find_that">c:geo neranda šito keliauninko.</string>
   <string name="err_waypoint_cache_unknown">c:geo nežino, kokiai slėptuvei norite pridėti papildomą tašką.</string>
@@ -177,7 +181,11 @@
   <string name="err_log_load_data">c:geo negali įkelti duomenų reikalingų apsilankymui įrašyti.</string>
   <string name="err_log_load_data_again">c:geo negali įkelti duomenų reikalingų apsilankymui įrašyti. Bando dar kartą.</string>
   <string name="err_log_load_data_still">c:geo dar įkelia duomenis reikalingus apsilankymui įrašyti. Prašome palaukti šiek tiek ilgiau.</string>
+  <string name="err_log_post_missing_tracking_code">Trūksta sekimo kodo.</string>
+  <string name="err_log_post_missing_coordinates">Trūksta koordinačių.</string>
   <string name="err_log_post_failed">Atrodo, kad jūsų įrašas nebuvo paskelbtas. Prašome patikrinti jį slėptuvės svetainėje.</string>
+  <string name="err_log_post_failed_ec">Atrodo, kad jūsų įrašas nebuvo paskelbtas. Prašome patikrinti jį Extremcaching.com svetainėje.</string>
+  <string name="err_log_post_failed_gk">Atrodo, kad jūsų įrašas nebuvo paskelbtas. Prašome patikrinti jį GeoKrety.org svetainėje.</string>
   <string name="err_logimage_post_failed">Atrodo, kad jūsų įrašo nuotrauka nebuvo paskelbta. Prašome patikrinti ją slėptuvės svetainėje.</string>
   <string name="err_search_address_forgot">c:geo pamiršo adresą kurio bandėte ieškoti.</string>
   <string name="err_parse_lat">c:geo nesupranta įvestos platumos.</string>
@@ -524,6 +532,8 @@
   <string name="init_hardware_acceleration_note">Aparatinis spartinimas greičiau pateikia grafinius elementus ekrane. Tačiau kai kuriuose įrenginiuose Android operacinėje sistemoje yra klaidų ir kai kuris tekstas gali būti neryškus (ypač paryškinti simboliai).  Jeigu taip atsitiktų, išjunkite aparatūros spartinimą.</string>
   <string name="init_hardware_acceleration">Įjungti aparatinį spartinimą</string>
   <string name="settings_open_website">Atidaryti interneto svetainę</string>
+  <string name="settings_open_geokrety_register">Atidaryti GeoKrety.org registracijos puslapį</string>
+  <string name="settings_open_geokretymap_website">Atidaryti GeoKretyMap.org svetainę</string>
   <string name="settings_settings">Nustatymai</string>
   <string name="settings_information">Informacija</string>
   <string name="settings_twitter_cache_message">Rastos slėptuvės žinutė</string>
@@ -657,7 +667,7 @@
   <string name="cache_menu_map_static">Statinis žemėlapis</string>
   <string name="cache_menu_download_map_static">Parsisiųsti statinį žemėlapį</string>
   <string name="cache_menu_rmaps">Rmaps</string>
-  <string name="cache_menu_map_ext">Rodyti išoriniame žemėlapyje</string>
+  <string name="cache_menu_map_ext">Kitos išorinės programos</string>
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Atidaryti naršyklėje</string>
   <string name="cache_menu_visit">Registruoti</string>
@@ -674,6 +684,7 @@
   <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_menu_pebble">Pebble</string>
   <string name="cache_menu_vote">Balsuoti</string>
+  <string name="cache_menu_checker">Atidaryti Geochecker</string>
   <string name="cache_menu_ignore">Ignoruoti slėptuvę</string>
   <string name="cache_status">Būsena</string>
   <string name="cache_status_offline_log">Išsaugotas įrašas</string>
@@ -845,7 +856,7 @@
   <string name="trackable_goal">Tikslas</string>
   <string name="trackable_details">Informacija</string>
   <string name="trackable_image">Nuotrauka</string>
-  <string name="trackable_code">TB-kodas</string>
+  <string name="trackable_code">Sekimo kodas</string>
   <string name="trackable_name">Pavadinimas</string>
   <string name="trackable_type">Tipas</string>
   <string name="trackable_owner">Savininkas</string>
@@ -860,6 +871,8 @@
   <string name="trackable_distance">Nukeliauta</string>
   <string name="trackable_touch">Registruoti</string>
   <string name="trackable_not_activated">Keliauninkas neaktyvuotas</string>
+  <string name="trackable_travelbug">Keliauninkas</string>
+  <string name="trackable_geokrety">GeoKrety</string>
   <string name="trackable_swaggie">Swaggie</string>
   <string name="geokret_type_traditional">Tradicinis</string>
   <string name="geokret_type_book_or_media">Knyga arba elektroninės priemonės</string>
@@ -1213,12 +1226,20 @@
   <string name="showcase_cachelist_title">Sąrašų perjungimas</string>
   <string name="showcase_cachelist_text">Galite perjungti slėptuvių sąrašus spustelėdami sąrašo pavadinimą.</string>
   <string name="showcase_compass_hint_title">Rodyti užuominą</string>
+  <string name="showcase_compass_hint_text">Šis naujas meniu punktas gali suteikti jums idėja kur rasti slėptuvę - jis rodo užuominas, jei tokios yra.</string>
   <string name="confirm_log_title">Neįprastas įrašo tipas</string>
   <string name="confirm_log_message">Norite registruoti \'%s\'. Ar tikrai?</string>
+  <string name="init_geokrety">Geokrety.org</string>
+  <string name="init_geokrety_login">Prisijungti prie GeoKrety.org</string>
+  <string name="init_connectorGeokretyActive">Geokrety Keliauninkai</string>
+  <string name="init_summary_geokrety">Įjungti keliauninkus iš GeoKrety.org</string>
   <string name="init_summary_geokrety_cache">Padidina užkrovimo greitį.</string>
   <string name="init_summary_geokrety_account">Nesukonfigūruota paskyra.</string>
+  <string name="init_summary_geokrety_not_anonymous">GeoKrety registracija iš c:geo negali būti anoniminė. Prašome registruotis.</string>
   <string name="init_geokrety_register_ok">Prisijungta sėkmingai</string>
   <string name="init_geokrety_register_fail">Nepavyko prisijungti</string>
   <string name="init_geokrety_get_secid">Gauti API raktą</string>
+  <string name="init_geokrety_description">Išsaugokite savo API raktą c:geo programoje, tai palengvina prisijungimą prie GeoKrety</string>
+  <string name="init_geokrety_cache_description">GeoKretyMap.org suteikia duomenis apie GeoKrety keliauninkus. Duomenis gali būti ne patys naujausi! \nPadėtis: ~ 30min. \nAprašymai: ~ 24h.</string>
   <string name="init_geokrety_cache">Naudoti duomenis iš podėlio</string>
 </resources>

@@ -660,7 +660,6 @@
   <string name="cache_menu_map_static">Statická mapa</string>
   <string name="cache_menu_download_map_static">Prevziať statické mapy</string>
   <string name="cache_menu_rmaps">Rmaps</string>
-  <string name="cache_menu_map_ext">Zobraziť na externej mape</string>
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Otvoriť v prehliadači</string>
   <string name="cache_menu_visit">Zalogovať návštevu</string>
@@ -850,7 +849,6 @@
   <string name="trackable_goal">Cieľ</string>
   <string name="trackable_details">Detaily</string>
   <string name="trackable_image">Obrázok</string>
-  <string name="trackable_code">TB kód</string>
   <string name="trackable_name">Názov</string>
   <string name="trackable_type">Typ</string>
   <string name="trackable_owner">Vlastník</string>
