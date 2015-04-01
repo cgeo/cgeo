@@ -283,7 +283,7 @@ final class OkapiClient {
         params.add("comment", log);
         params.add("comment_format", "plaintext");
         params.add("when", LOG_DATE_FORMAT.format(date.getTime()));
-        if (logType.equals(LogType.NEEDS_MAINTENANCE)) {
+        if (logType == LogType.NEEDS_MAINTENANCE) {
             params.add("needs_maintenance", "true");
         }
         if (logPassword != null) {
