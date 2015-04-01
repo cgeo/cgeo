@@ -327,7 +327,8 @@ public final class GCParser {
                     params.put("CID", cid);
                 }
 
-                if (StringUtils.isNotBlank(recaptchaText) && recaptchaReceiver != null) {
+                if (StringUtils.isNotBlank(recaptchaText)) {
+                    assert recaptchaReceiver != null;  // Help Eclipse here. If recaptchaReceiver could be null, recaptchaText would have stayed null also.
                     params.put("recaptcha_challenge_field", recaptchaReceiver.getChallenge());
                     params.put("recaptcha_response_field", recaptchaText);
                 }
