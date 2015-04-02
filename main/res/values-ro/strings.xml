@@ -74,6 +74,10 @@
   <string name="log_tb_visit">Vizitat</string>
   <string name="log_tb_drop">Lăsat</string>
   <string name="log_tb_changeall">Schimbă toate</string>
+  <string name="log_tb_grabbed">Preluat de undeva</string>
+  <string name="log_tb_note">Notă</string>
+  <string name="log_tb_discovered">Descoperit</string>
+  <string name="log_tb_archived">Arhivată</string>
   <string name="log_save">Salvează local</string>
   <string name="log_saving">Trimitere jurnal…</string>
   <string name="log_saving_and_uploading">Trimitre jurnal şi încarcare poze…</string>
@@ -175,6 +179,8 @@
   <string name="err_log_load_data_again">c:geo nu poate încărca informaţiile necesare pentru a posta o însemnare. Te rog încearcă din nou.</string>
   <string name="err_log_load_data_still">c:geo încă încarcă informaţiale necesare pentru a posta o însemnare. Te rog mai aşteaptă.</string>
   <string name="err_log_post_failed">Se pare că însemnarea ta nu a fost postată. Te rog verifică pe site-ul pe care se află publicată această geocutie.</string>
+  <string name="err_log_post_failed_ec">Se pare că însemnarea nu a fost postată. Verifică pe Extremcaching.com.</string>
+  <string name="err_log_post_failed_gk">Se pare că însemnarea nu a fost postată. Verifică pe GeoKrety.org.</string>
   <string name="err_logimage_post_failed">Se pare că imaginea pe care încercai să o trimiţi odată cu însemnarea nu a putut fi încărcată. Te rog verifică însemnarea în jurnalul geocutiei pe site-ul unde este publicată.</string>
   <string name="err_search_address_forgot">c:geo a uitat adresa pe care o căutai.</string>
   <string name="err_parse_lat">c:geo nu înţelege latitudinea.</string>
@@ -860,6 +866,9 @@
   <string name="trackable_distance">A călătorit</string>
   <string name="trackable_touch">Descoperă</string>
   <string name="trackable_not_activated">Obiectul călător nu a fost activat</string>
+  <string name="trackable_travelbug">Travelbug</string>
+  <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_swaggie">Swaggie</string>
   <string name="geokret_type_traditional">Tradiţional</string>
   <string name="geokret_type_book_or_media">Carte sau memorie electronică</string>
   <string name="geokret_type_human">Persoană</string>
@@ -1185,4 +1194,6 @@
   <string name="showcase_compass_hint_text">Această opţiune îţi poate da informaţii suplimentare despre unde ar putea fi ascunsă geocutia - afişează indiciul, dacă există.</string>
   <string name="confirm_log_title">Tip neobişnuit de însemnare</string>
   <string name="confirm_log_message">Vrei să scrii o însemnare pentru \'%s\'. Eşti sigur?</string>
+  <string name="init_geokrety">GeoKrety.org</string>
+  <string name="init_connectorGeokretyActive">GeoKrety Trackables</string>
 </resources>

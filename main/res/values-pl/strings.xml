@@ -74,6 +74,10 @@
   <string name="log_tb_visit">Odwiedzony</string>
   <string name="log_tb_drop">Odłożony</string>
   <string name="log_tb_changeall">Zmień wszystko</string>
+  <string name="log_tb_grabbed">Znalazłem gdzieś indziej</string>
+  <string name="log_tb_note">Notatka</string>
+  <string name="log_tb_discovered">Odkryta</string>
+  <string name="log_tb_archived">Zarchiwizowana</string>
   <string name="log_save">Zapisz offline</string>
   <string name="log_saving">Zapisuję w dzienniku…</string>
   <string name="log_saving_and_uploading">Zapisuję w dzienniku i wysyłam zdjęcie…</string>
@@ -175,6 +179,8 @@
   <string name="err_log_load_data_again">c:geo nie może załadować danych wymaganych do wpisania wizyty. Próbuję ponownie.</string>
   <string name="err_log_load_data_still">Nadal trwa ładowanie danych wymaganych do wpisu w dzienniku. Proszę czekać…</string>
   <string name="err_log_post_failed">Wygląda na to, że wpis nie został dodany. Proszę sprawdzić to na stronie internetowej skrzynki.</string>
+  <string name="err_log_post_failed_ec">Wygląda na to, że Twój wpis nie został wysłany. Proszę sprawdź na Extremcaching.com.</string>
+  <string name="err_log_post_failed_gk">Wygląda na to, że Twój wpis nie został wysłany. Proszę sprawdź na GeoKrety.org.</string>
   <string name="err_logimage_post_failed">Wygląda na to, że zdjęcie nie zostało przesłane. Proszę sprawdzić to na stronie internetowej skrzynki.</string>
   <string name="err_search_address_forgot">c:geo zapomniał adresu, którego szukałeś.</string>
   <string name="err_parse_lat">c:geo nie może obliczyć szerokości geograficznej.</string>
@@ -855,6 +861,9 @@
   <string name="trackable_distance">W podróży</string>
   <string name="trackable_touch">TB-Akcja</string>
   <string name="trackable_not_activated">Przedmiot podróżny nie został zaktywowany</string>
+  <string name="trackable_travelbug">Travelbug</string>
+  <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_swaggie">Swaggie</string>
   <string name="geokret_type_traditional">Tradycyjny</string>
   <string name="geokret_type_book_or_media">Książka lub media elektroniczne</string>
   <string name="geokret_type_human">Człowiek</string>
@@ -1210,4 +1219,6 @@
   <string name="showcase_compass_hint_text">Ten nowy element menu może Ci pomóc przy szukaniu skrzynki - pokazuje podpowiedź, o ile jest dostępna.</string>
   <string name="confirm_log_title">Niezwykły typ wpisu</string>
   <string name="confirm_log_message">Chcesz wpisać \'%s\'. Czy jesteś pewien?</string>
+  <string name="init_geokrety">GeoKrety.org</string>
+  <string name="init_connectorGeokretyActive">GeoKrety Trackables</string>
 </resources>

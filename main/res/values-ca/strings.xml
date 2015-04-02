@@ -124,6 +124,7 @@
   <string name="err_parse">S\'ha produït un error interpretant la pàgina d\'accés</string>
   <string name="err_server">No es pot contactar amb Geocaching.com. Potser el lloc web està inactiu o la connexió a Internet no funciona.</string>
   <string name="err_server_ec">No es pot contactar amb Extremcaching.com. Potser el lloc web està inactiu o la connexió a Internet no funciona.</string>
+  <string name="err_server_gk">No s\'ha pogut contactar amb GeoKrety.org. La pàgina web pot haver caigut o la connexió a internet no funciona.</string>
   <string name="err_login">No hi ha desada cap informació d\'accés</string>
   <string name="err_login_failed_toast">El c:geo no pot iniciar la sessió. El c:geo treballa fora línia amb els catxés desats. Comproveu la configuració de la connexió o activeu la connexió a Internet.</string>
   <string name="err_unknown">Error desconegut</string>
@@ -175,6 +176,7 @@
   <string name="err_log_load_data_again">El c:geo no pot carregar les dades necessàries per registrar la visita. Torneu a intentar-ho.</string>
   <string name="err_log_load_data_still">El c:geo encara està carregant les dades necessàries per enviar el registre. Si us plau, espereu una estona més.</string>
   <string name="err_log_post_failed">El registre no s\'ha publicat. Comproveu la memòria del lloc web d\'origen.</string>
+  <string name="err_log_post_failed_gk">Sembla que el seu registre no ha estat publicat. Si us plau comproviu a GeoKrety.org.</string>
   <string name="err_logimage_post_failed">La imatge de registre no s\'ha pujat. Comproveu la memòria del lloc web d\'origen.</string>
   <string name="err_search_address_forgot">El c:geo ha oblidat l\'adreça que intentaves trobar.</string>
   <string name="err_parse_lat">El c:geo no pot calcular la latitud.</string>
@@ -388,6 +390,7 @@
   <string name="init_oc_ro">Opencaching.ro</string>
   <string name="settings_activate_oc_ro">Activa</string>
   <string name="init_oc_ro_description">Autoritza al c:geo a opencaching.ro per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
+  <string name="init_oc_uk">Opencaching.org.uk</string>
   <string name="settings_activate_oc_uk">Activa</string>
   <string name="init_oc_uk_description">Autoritza al c:geo a opencaching.org.uk per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
   <string name="init_gcvote">GCvote.com</string>
@@ -527,6 +530,8 @@
   <string name="init_hardware_acceleration_note">L\'acceleració per maquinari renderitza més ràpidament els elements gràfics a la pantalla. Tanmateix, en alguns dispositius Android, el sistema operatiu conté errors i algun text pot aparèixer borrós (caràcters en negreta molt notables). Inhabiliteu l\'acceleració per maquinari si teniu aquest problema.</string>
   <string name="init_hardware_acceleration">Activa l\'acceleració per maquinari</string>
   <string name="settings_open_website">Obre el lloc web</string>
+  <string name="settings_open_geokrety_register">Obrir la pàgina de registre de GeoKrety.org</string>
+  <string name="settings_open_geokretymap_website">Obrir la pàgina web de GeoKretyMap.org</string>
   <string name="settings_settings">Configuració</string>
   <string name="settings_information">Informació</string>
   <string name="settings_twitter_cache_message">Missatge per un catxé trobat</string>
@@ -866,6 +871,9 @@
   <string name="trackable_distance">Viatjat</string>
   <string name="trackable_touch">Contacte</string>
   <string name="trackable_not_activated">Traçable no activat</string>
+  <string name="trackable_travelbug">Travelbug</string>
+  <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_swaggie">Swaggie</string>
   <string name="geokret_type_traditional">Tradicional</string>
   <string name="geokret_type_book_or_media">Llibre o mitjans electrònics</string>
   <string name="geokret_type_human">Humà</string>
@@ -1215,4 +1223,8 @@
   <string name="showcase_compass_hint_text">Aquest element de menú nou podria donar una idea on trobar l\'amagatall - li mostra la pista, si està disponible.</string>
   <string name="confirm_log_title">Tipus de registre poc habitual</string>
   <string name="confirm_log_message">Voleu registrar \'%s\'. N\'esteu segurs?</string>
+  <string name="init_geokrety">GeoKrety.org</string>
+  <string name="init_geokrety_login">Iniciar sessió a GeoKrety.org</string>
+  <string name="init_connectorGeokretyActive">GeoKrety Trackables</string>
+  <string name="init_summary_geokrety">Habilitar traçables de GeoKrety.org</string>
 </resources>

@@ -74,11 +74,14 @@
   <string name="log_tb_visit">Visitato</string>
   <string name="log_tb_drop">Lasciato</string>
   <string name="log_tb_changeall">Cambia tutto</string>
+  <string name="log_tb_note">Nota</string>
+  <string name="log_tb_archived">Archiviato</string>
   <string name="log_save">Salva offline</string>
   <string name="log_saving">Invio log…</string>
   <string name="log_saving_and_uploading">Invio log e immagine…</string>
   <string name="log_clear">Azzera</string>
   <string name="log_post_not_possible">Connessione…</string>
+  <string name="log_post_geocode_missing">Geocode mancante…</string>
   <string name="log_date_future_not_allowed">Non sono ammesse date future per i log.</string>
   <string name="log_add">Aggiungi</string>
   <string name="log_repeat">Ripeti l\'ultimo log</string>
@@ -124,6 +127,7 @@
   <string name="err_parse">Errore analizzando la pagina di login</string>
   <string name="err_server">Connessione fallita con Geocaching.com (server o connessione non disponibile?)</string>
   <string name="err_server_ec">Impossibile contattare Extremcaching.com. Il sito Web potrebbe essere non attivoo la tua connessione internet non funziona.</string>
+  <string name="err_server_gk">Impossibile contattare GeoKrety.org. Il sito Web potrebbe essere inattivo o la tua connessione internet non sta funzionando.</string>
   <string name="err_login">Informazioni di login non memorizzate</string>
   <string name="err_login_failed_toast">c:geo non può effettuare login. Attivata la modalità offline. Verificare le informazioni di login nelle impostazioni o abilitare una connessione internet.</string>
   <string name="err_unknown">Errore sconosciuto</string>
@@ -162,6 +166,7 @@
   <string name="err_acquire_image_failed">Acquisizione immagine fallita.</string>
   <string name="err_tb_display">c:geo non riesce a visualizzare il trackable che vuoi. È veramente un trackable?</string>
   <string name="err_tb_details_open">c:geo non riesce ad aprire i dettagli del trackable.</string>
+  <string name="err_tb_not_loggable">Questo trackable non è loggabile.</string>
   <string name="err_tb_find">c:geo non trova nessun trackable</string>
   <string name="err_tb_find_that">c:geo non trova quel trackable.</string>
   <string name="err_waypoint_cache_unknown">c:geo non conosce a quale cache vuoi aggiungere un waypoint.</string>
@@ -174,7 +179,11 @@
   <string name="err_log_load_data">c:geo non riesce a caricare i dati necessari per salvare il log della tua visita.</string>
   <string name="err_log_load_data_again">c:geo non riesce a caricare i dati necessari per salvare il log della tua visita. Nuovo tentativo in corso.</string>
   <string name="err_log_load_data_still">c:geo sta ancora caricando i dati necessari per salvare il log. Per cortesia attendere ancora un pochino.</string>
+  <string name="err_log_post_missing_tracking_code">Il codice di tracking è mancante.</string>
+  <string name="err_log_post_missing_coordinates">Mancano le coordinate.</string>
   <string name="err_log_post_failed">Sembra che il log non sia stato pubblicato. Si prega di controllare sul sito Web del cache originario.</string>
+  <string name="err_log_post_failed_ec">Sembra che il tuo log non sia stato pubblicato. Controlla su Extremcaching.com.</string>
+  <string name="err_log_post_failed_gk">Sembra che il tuo log non sia stato pubblicato. Controlla su GeoKrety.org.</string>
   <string name="err_logimage_post_failed">Sembra che l\'immagine del registro non sia stata caricata. Si prega di controllare sul sito Web del cache originario.</string>
   <string name="err_search_address_forgot">c:geo ha dimenticato l\'indirizzo che vuoi trovare.</string>
   <string name="err_parse_lat">c:geo non riesce ad interpretare la latitudine.</string>
@@ -394,7 +403,7 @@
   <string name="init_login">Verifica login</string>
   <string name="init_login_popup">Login</string>
   <string name="init_login_popup_working">Logging…</string>
-  <string name="init_login_popup_ok">Login OK.</string>
+  <string name="init_login_popup_ok">Login OK</string>
   <string name="init_login_popup_failed">Login fallito.</string>
   <string name="init_login_popup_failed_reason">Login fallito: </string>
   <string name="init_login_popup_not_authorized">Non autorizzato</string>
@@ -520,6 +529,8 @@
   <string name="init_hardware_acceleration_note">L\'accelerazione hardware esegue il rendering di elementi grafici sullo schermo più velocemente. Tuttavia su alcuni dispositivi il sistema operativo contiene bug e qualche testo potrebbe apparire sfocato (i caratteri in grassetto in particolare). Disattivare l\'accelerazione hardware in questi casi.</string>
   <string name="init_hardware_acceleration">Abilita accelerazione hardware</string>
   <string name="settings_open_website">Apri il sito</string>
+  <string name="settings_open_geokrety_register">Apri la pagina di registrazione di GeoKrety.org</string>
+  <string name="settings_open_geokretymap_website">Apri il sito di GeoKretyMap.org</string>
   <string name="settings_settings">Impostazioni</string>
   <string name="settings_information">Informazioni</string>
   <string name="settings_twitter_cache_message">Messaggio per cache trovato</string>
@@ -842,6 +853,7 @@
   <string name="trackable_goal">Obiettivo</string>
   <string name="trackable_details">Dettagli</string>
   <string name="trackable_image">Immagine</string>
+  <string name="trackable_code">Codice di tracking</string>
   <string name="trackable_name">Nome</string>
   <string name="trackable_type">Tipo</string>
   <string name="trackable_owner">Proprietario</string>
@@ -856,6 +868,9 @@
   <string name="trackable_distance">Portato</string>
   <string name="trackable_touch">Contatto</string>
   <string name="trackable_not_activated">Trackable non attivato</string>
+  <string name="trackable_travelbug">Travelbug</string>
+  <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_swaggie">Swaggie</string>
   <string name="geokret_type_traditional">Tradizionale</string>
   <string name="geokret_type_book_or_media">Libro o media elettronici</string>
   <string name="geokret_type_human">Umano</string>
@@ -1205,4 +1220,16 @@
   <string name="showcase_compass_hint_text">Questo nuovo menu potrebbe darti un\'idea di dove si trova il cache. Mostra l\'hint, se disponibile.</string>
   <string name="confirm_log_title">Tipo di Log non usuale</string>
   <string name="confirm_log_message">Si desidera registrare \'%s\'. Sei sicuro?</string>
+  <string name="init_geokrety">GeoKrety.org</string>
+  <string name="init_geokrety_login">Fai login su Geokrety.org</string>
+  <string name="init_connectorGeokretyActive">Trackable GeoKrety</string>
+  <string name="init_summary_geokrety">Abilitare le trackablee da GeoKrety.org</string>
+  <string name="init_summary_geokrety_cache">Migliorare la velocità di caricamento.</string>
+  <string name="init_summary_geokrety_account">Nessun account configurato.</string>
+  <string name="init_geokrety_register_ok">Il login è avvenuto con successo</string>
+  <string name="init_geokrety_register_fail">Login fallito</string>
+  <string name="init_geokrety_get_secid">Recupera la chiave API</string>
+  <string name="init_geokrety_description">Memorizza la tua chiave API su c:geo per facilitare la registrazione su GeoKrety</string>
+  <string name="init_geokrety_cache_description">GeoKretyMap.org fornisce dati memorizzati nella cache per trackable Geokrety. I dati non possono essere aggiornati! \nPosizione: ~ 30 min\nDescrizione: ~ 24h.</string>
+  <string name="init_geokrety_cache">Utilizzare i dati memorizzati nella cache</string>
 </resources>

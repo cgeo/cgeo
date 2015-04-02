@@ -74,6 +74,10 @@
   <string name="log_tb_visit">Besök</string>
   <string name="log_tb_drop">Lämna här</string>
   <string name="log_tb_changeall">Ändra alla</string>
+  <string name="log_tb_grabbed">Tog den någonstans</string>
+  <string name="log_tb_note">Kommentar</string>
+  <string name="log_tb_discovered">Såg den</string>
+  <string name="log_tb_archived">Arkiverad</string>
   <string name="log_save">Spara offline</string>
   <string name="log_saving">Sparar logg…</string>
   <string name="log_saving_and_uploading">Sparar logg och laddar upp bild…</string>
@@ -125,6 +129,7 @@
   <string name="err_parse">Misslyckades att analysera inloggningssidan</string>
   <string name="err_server">Misslyckades att ansluta till Geocaching.com. Hemsidan kan vara ur funktion eller så är det problem med din anslutning till Internet.</string>
   <string name="err_server_ec">Det gick inte att kontakta Extremcaching.com. Webbplatsen kan ha problem eller så fungerar inte din internet-anslutning.</string>
+  <string name="err_server_gk">Det gick inte att kontakta GeoKrety.org. Webbplatsen kan vara nere eller så fungerar inte din internet-anslutning.</string>
   <string name="err_login">Inloggningsinformationen ej sparad</string>
   <string name="err_login_failed_toast">Tyvärr kan c:geo inte logga in. c:geo kommer att köra i offline läge med sparade cacher. Kontrollera dina inloggningsuppgifter och aktivera din internetanslutning.</string>
   <string name="err_unknown">Okänt fel</string>
@@ -163,6 +168,7 @@
   <string name="err_acquire_image_failed">Hämtning av bilden misslyckades.</string>
   <string name="err_tb_display">Tyvärr kan c:geo inte visa den trackable du önskar. Är den verkligen trackable?</string>
   <string name="err_tb_details_open">Tyvärr kan c:geo inte öppna detaljer för trackable.</string>
+  <string name="err_tb_not_loggable">Detta spårbara objekt är inte loggbart.</string>
   <string name="err_tb_find">Tyvärr kunde c:geo inte hitta trackable</string>
   <string name="err_tb_find_that">Tyvärr kan c:geo inte hitta önskad trackable.</string>
   <string name="err_waypoint_cache_unknown">Tyvärr vet inte c:geo till vilken cache du vill lägga till en punkt.</string>
@@ -175,9 +181,11 @@
   <string name="err_log_load_data">Tyvärr kan c:geo inte ladda information som krävs för att logga ditt besök.</string>
   <string name="err_log_load_data_again">Tyvärr kan c:geo inte ladda information som krävs för att logga ditt besök. Försöker igen.</string>
   <string name="err_log_load_data_still">c:geo laddar fortfarande data för att kunna posta loggen. Vänligen vänta en stund till.</string>
+  <string name="err_log_post_missing_tracking_code">Spårningskoden saknas.</string>
   <string name="err_log_post_missing_coordinates">Koordinater saknas.</string>
   <string name="err_log_post_failed">Det verkar som att din logg inte kunde postas. Kontrollera loggen på cachens ursprungliga hemsida.</string>
   <string name="err_log_post_failed_ec">Det verkar som att din logg inte kunde laddas upp. Kontrollera loggen på Extremcaching.com.</string>
+  <string name="err_log_post_failed_gk">Det verkar som att din logg inte kunde laddas upp. Kontrollera loggen på GeoKrety.org.</string>
   <string name="err_logimage_post_failed">Det verkar som att din logg bild inte kunde laddas upp. Kontrollera bilden på cachens hemsida.</string>
   <string name="err_search_address_forgot">Tyvärr glömde c:geo adressen du sökte efter.</string>
   <string name="err_parse_lat">Tyvärr kan c:geo inte tolka latitud.</string>
@@ -527,6 +535,8 @@
   <string name="init_hardware_acceleration_note">Hårdvaruacceleration visar grafik snabbare på skärmen. På vissa enheter har Android buggar som gör att viss text blir suddig (eller som feta bokstäver). Inaktivera hårdvaruacceleration om du upplever detta.</string>
   <string name="init_hardware_acceleration">Aktivera hårdvaruacceleration</string>
   <string name="settings_open_website">Öppna hemsida</string>
+  <string name="settings_open_geokrety_register">Öppna GeoKrety.orgs registreringssida</string>
+  <string name="settings_open_geokretymap_website">Öppna GeoKretyMap.org hemsida</string>
   <string name="settings_settings">Inställningar</string>
   <string name="settings_information">Information</string>
   <string name="settings_twitter_cache_message">Meddelande för hittad cache</string>
@@ -854,6 +864,7 @@
   <string name="trackable_goal">Uppdrag</string>
   <string name="trackable_details">Detaljer</string>
   <string name="trackable_image">Bild</string>
+  <string name="trackable_code">Spårningskod</string>
   <string name="trackable_name">Namn</string>
   <string name="trackable_type">Typ</string>
   <string name="trackable_owner">Ägare</string>
@@ -869,6 +880,8 @@
   <string name="trackable_touch">Logga</string>
   <string name="trackable_not_activated">Trackable är inte aktiverad</string>
   <string name="trackable_travelbug">Travelbug</string>
+  <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_swaggie">Swaggie</string>
   <string name="geokret_type_traditional">Traditionell</string>
   <string name="geokret_type_book_or_media">Bok eller elektronisk media</string>
   <string name="geokret_type_human">Mänsklig</string>
@@ -1211,7 +1224,19 @@
   <string name="showcase_cachelist_title">Byt listor</string>
   <string name="showcase_cachelist_text">Du kan växla mellan dina geocachelistor genom att klicka på rubriken för listan.</string>
   <string name="showcase_compass_hint_title">Visa ledtråd</string>
+  <string name="showcase_compass_hint_text">Det här nya menyalternativet kan ge dig en idé var du kan hitta cachen - det visar tipset, om något sådant finns.</string>
   <string name="confirm_log_title">Ovanlig loggtyp</string>
   <string name="confirm_log_message">Du vill logga \'%s\'. Är du säker?</string>
+  <string name="init_geokrety">GeoKrety.org</string>
+  <string name="init_geokrety_login">Logga in på GeoKrety.org</string>
+  <string name="init_connectorGeokretyActive">Spårbara GeoKrety</string>
+  <string name="init_summary_geokrety">Aktivera trackables från GeoKrety.org</string>
   <string name="init_summary_geokrety_cache">Förbättra laddningshastighet.</string>
+  <string name="init_summary_geokrety_account">Inget konto har konfigurerats.</string>
+  <string name="init_geokrety_register_ok">Inloggningen lyckades</string>
+  <string name="init_geokrety_register_fail">Inloggningen misslyckades</string>
+  <string name="init_geokrety_get_secid">Hämta API-nyckel</string>
+  <string name="init_geokrety_description">Lagra din API-nyckel i c:geo för att underlätta loggning av GeoKrety</string>
+  <string name="init_geokrety_cache_description">GeoKretyMap.org innehåller lagrade data för spårbara Geokrety. Data är kanske inte uppdaterade!\nPositioner: ~30min.\nBeskrivningar: ~24timmar.</string>
+  <string name="init_geokrety_cache">Använd lagrade data</string>
 </resources>

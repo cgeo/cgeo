@@ -918,6 +918,7 @@
   <string name="helper_google_translate_description">Atsisiuntę vertimo paketą Google Translate programai galėsite lengvai išversti slėptuvės aprašymus ilgai paspaudę ant slėptuvės aprašymo teksto (tam nereikės interneto ryšio).</string>
   <string name="addon_missing_title">Trūksta įskiepio</string>
   <string name="addon_download_prompt">Parsisiųsti iš Google Play dabar.</string>
+  <string name="export">Eksportuoti: %1$s</string>
   <string name="export_exportedto">eksportuota į</string>
   <string name="export_failed">Eksportuoti nepavyko</string>
   <string name="export_fieldnotes">Lauko užrašai</string>

@@ -74,6 +74,10 @@
   <string name="log_tb_visit">Navštívené</string>
   <string name="log_tb_drop">Nechať tu</string>
   <string name="log_tb_changeall">Zmeniť všetko</string>
+  <string name="log_tb_grabbed">Prevzatý</string>
+  <string name="log_tb_note">Poznámka</string>
+  <string name="log_tb_discovered">Zahliadnutý</string>
+  <string name="log_tb_archived">Archivácia</string>
   <string name="log_save">Uložiť offline</string>
   <string name="log_saving">Ukladanie logu…</string>
   <string name="log_saving_and_uploading">Odosielanie logu a nahrávanie obrázku…</string>
@@ -175,6 +179,8 @@
   <string name="err_log_load_data_again">c:geo nemôže načítať dáta potrebné pre zalogovanie návštevy. Skúša to znovu.</string>
   <string name="err_log_load_data_still">c:geo stále načítava dáta potrebné pre zalogovanie návštevy. Prosím, počkajte chvíľu.</string>
   <string name="err_log_post_failed">Zdá sa že tvoj log nebol uverejnený. Skontroluj to na stránke keše.</string>
+  <string name="err_log_post_failed_ec">c:geo pravdepodobne nemohlo odoslať log. Skontrolujte to, prosím, na Extremcaching.com.</string>
+  <string name="err_log_post_failed_gk">c:geo pravdepodobne nemohlo odoslať log. Skontrolujte to, prosím, na GeoKrety.org.</string>
   <string name="err_logimage_post_failed">Zdá sa že obrázok logu nebol nahratý. Skontroluj to na stránke keše.</string>
   <string name="err_search_address_forgot">c:geo zabudlo adresu, ktorú sa pokúšate nájsť.</string>
   <string name="err_parse_lat">c:geo nemôže zistiť zemepisnú šírku.</string>
@@ -863,6 +869,9 @@
   <string name="trackable_distance">Precestované</string>
   <string name="trackable_touch">Dotyk</string>
   <string name="trackable_not_activated">Trackable neaktivovaný</string>
+  <string name="trackable_travelbug">Travelbug</string>
+  <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_swaggie">Swaggie</string>
   <string name="geokret_type_traditional">Tradičné</string>
   <string name="geokret_type_book_or_media">Kniha alebo elektronické médium</string>
   <string name="geokret_type_human">Človek</string>
@@ -1218,4 +1227,5 @@
   <string name="showcase_compass_hint_text">Táto vec ti môže pomôcť pri hľadaní skrýše - zobrazí nápovedu ak je dostupná.</string>
   <string name="confirm_log_title">Nezvyčajný typ logu</string>
   <string name="confirm_log_message">Chceš zalogovať \'%s\'. Určite?</string>
+  <string name="init_geokrety">GeoKrety.org</string>
 </resources>

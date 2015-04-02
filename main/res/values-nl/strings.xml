@@ -74,6 +74,10 @@
   <string name="log_tb_visit">Bezoek</string>
   <string name="log_tb_drop">Hier droppen</string>
   <string name="log_tb_changeall">Wijzig alles</string>
+  <string name="log_tb_grabbed">Ergens gepakt</string>
+  <string name="log_tb_note">Notitie</string>
+  <string name="log_tb_discovered">Ontdekt</string>
+  <string name="log_tb_archived">Gearchiveerd</string>
   <string name="log_save">Off line opslaan</string>
   <string name="log_saving">Log opslaan…</string>
   <string name="log_saving_and_uploading">Verzenden van log en uploaden foto…</string>
@@ -175,6 +179,8 @@
   <string name="err_log_load_data_again">Sorry, c:geo kan data om bezoek te loggen niet laden. Bezig nogmaals te proberen.</string>
   <string name="err_log_load_data_still">c:geo is nog steeds bezig om data te laden om bezoek te loggen. Graag nog even geduld.</string>
   <string name="err_log_post_failed">Het lijkt erop dat je log niet werd gepost. Controleer het op de cache webpagina.</string>
+  <string name="err_log_post_failed_ec">Het lijkt erop dat uw log niet werd gepost. Controleer het op Extremcaching.com.</string>
+  <string name="err_log_post_failed_gk">Het lijkt erop dat uw log niet werd gepost. Controleer het op GeoKrety.org.</string>
   <string name="err_logimage_post_failed">Het lijkt erop dat uw log-afbeelding niet is geüpload. Controleer het op de cache webpagina.</string>
   <string name="err_search_address_forgot">Sorry, c:geo is het adres dat je zoekt vergeten.</string>
   <string name="err_parse_lat">Sorry, c:geo kan breedtegraad niet verwerken.</string>
@@ -394,7 +400,7 @@
   <string name="init_login">Login controleren</string>
   <string name="init_login_popup">Inloggen</string>
   <string name="init_login_popup_working">Inloggen op Geocaching.com…</string>
-  <string name="init_login_popup_ok">Ingelogd.</string>
+  <string name="init_login_popup_ok">Ingelogd</string>
   <string name="init_login_popup_failed">Inloggen mislukt.</string>
   <string name="init_login_popup_failed_reason">Inloggen mislukt omdat </string>
   <string name="init_login_popup_not_authorized">Niet geautoriseerd</string>
@@ -657,6 +663,7 @@
   <string name="cache_menu_map_static">Statische kaarten</string>
   <string name="cache_menu_download_map_static">Download statische kaarten</string>
   <string name="cache_menu_rmaps">Rmaps</string>
+  <string name="cache_menu_map_ext">Andere externe apps</string>
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Open in browser</string>
   <string name="cache_menu_visit">Log bezoek</string>
@@ -847,6 +854,7 @@
   <string name="trackable_goal">Doel</string>
   <string name="trackable_details">Details</string>
   <string name="trackable_image">Afbeelding</string>
+  <string name="trackable_code">Tracking Code</string>
   <string name="trackable_name">Naam</string>
   <string name="trackable_type">Type</string>
   <string name="trackable_owner">Eigenaar</string>
@@ -861,6 +869,9 @@
   <string name="trackable_distance">Afgelegd</string>
   <string name="trackable_touch">Aanraking</string>
   <string name="trackable_not_activated">Trackable niet geactiveerd</string>
+  <string name="trackable_travelbug">Travelbug</string>
+  <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_swaggie">Swaggie</string>
   <string name="geokret_type_traditional">Traditioneel</string>
   <string name="geokret_type_book_or_media">Boek of electronische media</string>
   <string name="geokret_type_human">Mens</string>
@@ -1210,4 +1221,8 @@
   <string name="showcase_compass_hint_text">Dit nieuwe menu-item kan een idee geven waar de cache gevonden kan worden - het toont de hint, indien beschikbaar.</string>
   <string name="confirm_log_title">Ongebruikelijk logtype</string>
   <string name="confirm_log_message">Je wilt \'%s\' loggen. Weet je het zeker?</string>
+  <string name="init_geokrety">GeoKrety.org</string>
+  <string name="init_geokrety_login">Login op GeoKrety.org</string>
+  <string name="init_connectorGeokretyActive">GeoKrety Trackables</string>
+  <string name="init_geokrety_register_fail">Inloggen mislukt</string>
 </resources>
