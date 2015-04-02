@@ -88,7 +88,7 @@ class GeopointParser {
         final MatcherWrapper matcher = new MatcherWrapper(LatLon.LAT == latlon ? PATTERN_LAT : PATTERN_LON, replaceSpaceAfterComma);
 
         try {
-            return new ResultWrapper(Double.valueOf(replaceSpaceAfterComma), 0, text.length());
+            return new ResultWrapper(Double.parseDouble(replaceSpaceAfterComma), 0, text.length());
         } catch (final NumberFormatException ignored) {
             // fall through to advanced parsing
         }

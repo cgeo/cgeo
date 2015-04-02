@@ -94,8 +94,8 @@ public final class LocParser extends FileParser {
                             }
                             break;
                         case "coord":
-                            currentCache.setCoords(new Geopoint(Double.valueOf(xpp.getAttributeValue(null, "lat")),
-                                    Double.valueOf(xpp.getAttributeValue(null, "lon"))));
+                            currentCache.setCoords(new Geopoint(Double.parseDouble(xpp.getAttributeValue(null, "lat")),
+                                    Double.parseDouble(xpp.getAttributeValue(null, "lon"))));
                             currentCache.setReliableLatLon(true);
                             break;
                         case "container":
@@ -105,12 +105,12 @@ public final class LocParser extends FileParser {
                             break;
                         case "difficulty":
                             if (xpp.next() == XmlPullParser.TEXT) {
-                                currentCache.setDifficulty(Float.valueOf(xpp.getText()));
+                                currentCache.setDifficulty(Float.parseFloat(xpp.getText()));
                             }
                             break;
                         case "terrain":
                             if (xpp.next() == XmlPullParser.TEXT) {
-                                currentCache.setTerrain(Float.valueOf(xpp.getText()));
+                                currentCache.setTerrain(Float.parseFloat(xpp.getText()));
                             }
                             break;
                         default:
@@ -146,7 +146,7 @@ public final class LocParser extends FileParser {
     public static Geopoint parsePoint(final String latitude, final String longitude) {
         // the loc file contains the coordinates as plain floating point values, therefore avoid using the GeopointParser
         try {
-            return new Geopoint(Double.valueOf(latitude), Double.valueOf(longitude));
+            return new Geopoint(Double.parseDouble(latitude), Double.parseDouble(longitude));
         } catch (final NumberFormatException e) {
             Log.e("LOC format has changed", e);
         }

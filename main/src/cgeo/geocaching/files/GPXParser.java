@@ -306,8 +306,8 @@ public abstract class GPXParser extends FileParser {
                         final String longitude = attrs.getValue("lon");
                         // latitude and longitude are required attributes, but we export them empty for waypoints without coordinates
                         if (StringUtils.isNotBlank(latitude) && StringUtils.isNotBlank(longitude)) {
-                            cache.setCoords(new Geopoint(Double.valueOf(latitude),
-                                    Double.valueOf(longitude)));
+                            cache.setCoords(new Geopoint(Double.parseDouble(latitude),
+                                    Double.parseDouble(longitude)));
                         }
                     }
                 } catch (final NumberFormatException e) {
@@ -855,7 +855,7 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void end(final String watchList) {
-                    cache.setOnWatchlist(Boolean.valueOf(watchList.trim()));
+                    cache.setOnWatchlist(Boolean.parseBoolean(watchList.trim()));
                 }
             });
 
@@ -943,7 +943,7 @@ public abstract class GPXParser extends FileParser {
 
             @Override
             public void end(final String visited) {
-                wptVisited = Boolean.valueOf(visited.trim());
+                wptVisited = Boolean.parseBoolean(visited.trim());
             }
         });
 
@@ -953,7 +953,7 @@ public abstract class GPXParser extends FileParser {
 
             @Override
             public void end(final String userDefined) {
-                wptUserDefined = Boolean.valueOf(userDefined.trim());
+                wptUserDefined = Boolean.parseBoolean(userDefined.trim());
             }
         });
     }
