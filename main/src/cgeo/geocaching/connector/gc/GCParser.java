@@ -689,7 +689,7 @@ public final class GCParser {
                     if (StringUtils.isNotBlank(typeStr)
                             && LogType.UNKNOWN != LogType.getByIconName(typeStr)
                             && StringUtils.isNotBlank(countStr)) {
-                        cache.getLogCounts().put(LogType.getByIconName(typeStr), Integer.parseInt(countStr));
+                        cache.getLogCounts().put(LogType.getByIconName(typeStr), Integer.valueOf(countStr));
                     }
                 }
             }
