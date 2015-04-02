@@ -74,6 +74,10 @@
   <string name="log_tb_visit">Látogatás</string>
   <string name="log_tb_drop">Ládába helyezés</string>
   <string name="log_tb_changeall">Az összes megváltoztatása</string>
+  <string name="log_tb_grabbed">Mástól átvéve</string>
+  <string name="log_tb_note">Jegyzet</string>
+  <string name="log_tb_discovered">Felfedezve</string>
+  <string name="log_tb_archived">Arhiválva</string>
   <string name="log_save">Offline mentés</string>
   <string name="log_saving">Log mentése…</string>
   <string name="log_saving_and_uploading">Log beküldése és kép feltöltése…</string>
@@ -173,6 +177,8 @@
   <string name="err_log_load_data_again">Sajnáljuk, a c:geo nem tudja betölteni a megtalálás bejelentéséhez szükségesek adatokat. Újrapróbálkozás.</string>
   <string name="err_log_load_data_still">A c:geo még tölti a megtalálás bejelentéséhez szükségesek adatokat. Kérlek, várj egy kicsit tovább.</string>
   <string name="err_log_post_failed">Úgy tűnik, hogy a logod nem ment át. Kérlek, ellenőrizd a láda eredeti oldalát.</string>
+  <string name="err_log_post_failed_ec">Úgy tűnik, hogy a logod nem került hozzáadásra. Kérlek, ellenőrizd a extremcaching.com-on.</string>
+  <string name="err_log_post_failed_gk">Úgy tűnik, hogy a logod nem került hozzáadásra. Kérlek, ellenőrizd a GeoKrety.org-on.</string>
   <string name="err_logimage_post_failed">Úgy tűnik, hogy a logfotóid nem mentek át. Kérlek, ellenőrizd a láda eredeti oldalát.</string>
   <string name="err_search_address_forgot">Sajnáljuk, a c:geo elfelejtette a keresett címet.</string>
   <string name="err_parse_lat">Sajnáljuk, a c:geo nem tudja értelmezni a szélességet.</string>
@@ -229,6 +235,7 @@
   <string name="caches_nearby_button">A közelben</string>
   <string name="advanced_search_button">Keresés</string>
   <string name="stored_caches_button">Mentett</string>
+  <string name="any_button">Menj a</string>
   <string name="unknown_scan">Nem található geokód a scannelés eredményében.</string>
   <string name="caches_no_cache">Nem található láda</string>
   <string name="caches_more_caches">Nem elég? Keress több ládát!</string>
@@ -396,7 +403,7 @@
   <string name="init_login">Belépés</string>
   <string name="init_login_popup">Belépés</string>
   <string name="init_login_popup_working">Belépés a geocaching.com-ra…</string>
-  <string name="init_login_popup_ok">Belépés ok.</string>
+  <string name="init_login_popup_ok">Belépés ok</string>
   <string name="init_login_popup_failed">Belépés sikertelen.</string>
   <string name="init_login_popup_failed_reason">Belépés sikertelen, mert </string>
   <string name="init_login_popup_not_authorized">Nem engedélyezett</string>
@@ -673,6 +680,7 @@
   <string name="cache_menu_pebble">Pebble (okosóra)</string>
   <string name="cache_menu_android_wear">Android Wear</string>
   <string name="cache_menu_vote">Értékelés</string>
+  <string name="cache_menu_checker">Nyílt Geochecker</string>
   <string name="cache_status">Állapot</string>
   <string name="cache_status_offline_log">Mentett bejegyzés</string>
   <string name="cache_status_found">Megtalált</string>
@@ -758,6 +766,7 @@
   <string name="waypoint_note">Jegyzet</string>
   <string name="waypoint_visited">Meglátogatva</string>
   <string name="waypoint_save">Mentés</string>
+  <string name="waypoint_cancel_edit">Mégsem</string>
   <string name="waypoint_loading">Útpont betöltése…</string>
   <string name="waypoint_do_not_touch_cache_coordinates">Geoláda koordinátái nem változtak</string>
   <string name="waypoint_set_as_cache_coords">A geoláda koordinátáiként megadni a c:geo-ban</string>
@@ -855,6 +864,9 @@
   <string name="trackable_distance">Megtett táv</string>
   <string name="trackable_touch">Érintés</string>
   <string name="trackable_not_activated">Követhető tárgy nem aktivált</string>
+  <string name="trackable_travelbug">Travelbug</string>
+  <string name="trackable_geokrety">GeoKrety</string>
+  <string name="trackable_swaggie">Swaggie</string>
   <string name="geokret_type_traditional">Hagyományos</string>
   <string name="geokret_type_book_or_media">Könyv vagy elektronikus média</string>
   <string name="geokret_type_human">Humán</string>
@@ -1137,7 +1149,11 @@
   <string name="attribute_offset_cache_no">Nem offset láda</string>
   <string name="quote">Az egyszerűbb ládázásért, a lustább játékosokért.</string>
   <string name="powered_by">carnero</string>
+  <string name="facebook_title">Facebook</string>
+  <string name="twitter_title">Twitter</string>
+  <string name="market_title">Google Play</string>
   <string name="about_twitter">Akarod, hogy a <b>c:geo</b> új bejegyzést írjon a Twitter-re, amikor megtalálsz egy ládát?</string>
+  <string name="faq_title">FAQ</string>
   <string name="status_new_release" tools:ignore="UnusedResources">Új kiadás jelent meg.\nKattints a telepítéshez.</string>
   <string name="status_new_nightly" tools:ignore="UnusedResources">Új napi frissítés jelent meg.\nKattints a telepítéshez.</string>
   <string name="status_new_rc" tools:ignore="UnusedResources">Új kiadás előtti verzió jelent meg.\nKattints a telepítéshez.</string>
@@ -1194,4 +1210,6 @@
   <string name="showcase_cachelist_text">Váltogathatsz a ládalistáid között a listák címére kattintva.</string>
   <string name="confirm_log_title">Különleges logtípus</string>
   <string name="confirm_log_message">Logod a következő: \'%s\'. Biztosan ezt akarod?</string>
+  <string name="init_geokrety">GeoKrety.org</string>
+  <string name="init_connectorGeokretyActive">GeoKrety Trackables</string>
 </resources>

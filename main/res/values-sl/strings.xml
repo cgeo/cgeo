@@ -74,6 +74,10 @@
   <string name="log_tb_visit">Obisk</string>
   <string name="log_tb_drop">Pusti v zakladu</string>
   <string name="log_tb_changeall">Spremeni vse</string>
+  <string name="log_tb_grabbed">Vzel nekje</string>
+  <string name="log_tb_note">Komentar</string>
+  <string name="log_tb_discovered">Odkrit</string>
+  <string name="log_tb_archived">Arhiviran</string>
   <string name="log_saving">Pošiljam…</string>
   <string name="log_saving_and_uploading">Pošiljam zapis in nalagam sliko…</string>
   <string name="log_clear">Počisti</string>
@@ -169,6 +173,8 @@
   <string name="err_log_load_data">c:geo ni mogel naložiti podatkov za zapis obiska.</string>
   <string name="err_log_load_data_again">c:geo ne more naložiti podatkov za zapis obiska. Ponovni poskus…</string>
   <string name="err_log_load_data_still">c:geo še vedno nalaga podatke za zapis obiska. Prosimo počakajte še trenutek.</string>
+  <string name="err_log_post_failed_ec">Izgleda, da vaš zapis ni bil objavljen. Preverite na Extremcaching.com.</string>
+  <string name="err_log_post_failed_gk">Izgleda, da vaš zapis ni bil objavljen. Preverite na GeoKrety.org.</string>
   <string name="err_search_address_forgot">c:geo je pozabil naslov, ki ste ga hoteli najti.</string>
   <string name="err_parse_lat">c:geo ni razumel geografske širine.</string>
   <string name="err_parse_lon">c:geo ni razumel geografske dolžine.</string>

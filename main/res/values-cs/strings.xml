@@ -123,6 +123,7 @@
   <string name="err_parse">Čtení přihlašovací obrazovky selhalo</string>
   <string name="err_server">Nelze se připojit na Geocaching.com. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu</string>
   <string name="err_server_ec">Nelze se připojit na Extremcaching.com. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu.</string>
+  <string name="err_server_gk">Službu GeoKrety.org nelze kontaktovat. Stránka může mít výpadek a nebo tvé připojení k Internetu nefunguje.</string>
   <string name="err_login">Nejsou uloženy žádné přihlašovací údaje</string>
   <string name="err_login_failed_toast">Nelze se přihlásit. c:geo bude pracovat Offline s uloženými informacemi. Zkontroluj nastavení přihlašování a připojení k Internetu.</string>
   <string name="err_unknown">Neznámá chyba</string>
@@ -177,6 +178,7 @@
   <string name="err_log_post_missing_tracking_code">Chybí identifikační kód.</string>
   <string name="err_log_post_failed">Zdá se, že tvůj log nebyl správně zveřejněn. Prosím, zkontroluj ho přímo na webové stránce keše.</string>
   <string name="err_log_post_failed_ec">Zdá se, že tvůj Log nebyl odeslán. Prosím, zkontroluj to na Extremcaching.com.</string>
+  <string name="err_log_post_failed_gk">Zdá se, že tvůj Log nebyl odeslán. Prosím, zkontroluj to na GeoKrety.org.</string>
   <string name="err_logimage_post_failed">Zdá se, že obrázek u logu nebyl správně odeslán. Prosím, zkontroluj to přímo na webové stránce keše.</string>
   <string name="err_search_address_forgot">c:geo zapomnělo hledanou adresu.</string>
   <string name="err_parse_lat">c:geo nemůže dopočítat zeměpisnou šířku.</string>
@@ -378,7 +380,7 @@
   <string name="settings_info_facebook_login">Přes c:geo se sice na Geocaching.com svým Facebookovým účtem nepřihlásíš, ale je tu jednoduché řešení…</string>
   <string name="settings_authorize">Autorizovat c:geo</string>
   <string name="settings_reauthorize">Znovu autorizovat c:geo</string>
-  <string name="init_oc">opencaching.de</string>
+  <string name="init_oc">Opencaching.de</string>
   <string name="settings_activate_oc">Aktivovat</string>
   <string name="init_oc_de_description">Autorizovat c:geo pro hledání keší a přístup/filtrování tvých nalezených keší služby opencaching.de.</string>
   <string name="init_oc_pl">Opencaching.pl</string>
@@ -533,6 +535,8 @@
   <string name="init_hardware_acceleration_note">S hardwarovou akcelerací se uživatelské rozhraní vykreslí rychleji. Operační systém Android však na některých zařízeních obsahuje chyby a některé části textu mohou být rozmazané (zejména tučné znaky). Pokud zaznamenáváš potíže, vypni hardwarovou akceleraci.</string>
   <string name="init_hardware_acceleration">Povolit hardwarovou akceleraci</string>
   <string name="settings_open_website">Otevřít webovou stránku</string>
+  <string name="settings_open_geokrety_register">Otevřít registrační stránku GeoKrety.org</string>
+  <string name="settings_open_geokretymap_website">Otevřít stránku GeoKretyMap.org</string>
   <string name="settings_settings">Nastavení</string>
   <string name="settings_information">Informace</string>
   <string name="settings_twitter_cache_message">Zpráva pro nalezení keše</string>
@@ -561,7 +565,7 @@
   <string name="init_sendToCgeo">Poslat do c:geo</string>
   <string name="settings_info_send2cgeo_title">Info o funkci send2c:geo</string>
   <string name="init_sendToCgeo_name">Název tvého zařízení</string>
-  <string name="init_sendToCgeo_description">Funkce <b>Send2c:geo</b> umožňuje stahovat keše přímo ze stránky Geocaching.com pomocí speciálního doplňku pro webové prohlížeče. Před registrací zkoukni <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Pokud chceš používat funkci send2c:geo, musíš se zaregistrovat. Aplikace c:geo může samozřejmě pracovat normálně i bez registrace této funkce.</string>
+  <string name="init_sendToCgeo_description">Funkce <b>send2c:geo</b> umožňuje stahovat keše přímo ze stránky Geocaching.com pomocí speciálního doplňku pro webové prohlížeče. Pokud chceš používat funkci send2c:geo, musíš se zaregistrovat. Před registrací navštiv stránku <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Aplikace c:geo může samozřejmě pracovat normálně i bez registrace této funkce.</string>
   <string name="init_sendToCgeo_register">Požádat o registraci</string>
   <string name="init_sendToCgeo_registering">Registrace tvého zařízení pro funkci Poslat do c:geo…</string>
   <string name="init_sendToCgeo_register_ok">Registrace úspěšně dokončena. PIN kód je ####. Použij ho na stránce c:geo pro přidání zařízení do tvého prohlížeče.</string>
@@ -877,6 +881,7 @@
   <string name="trackable_touch">Dotyk</string>
   <string name="trackable_not_activated">Sledovatelný předmět není aktivován</string>
   <string name="trackable_travelbug">Travelbug</string>
+  <string name="trackable_geokrety">GeoKrety</string>
   <string name="trackable_swaggie">Swaggie</string>
   <string name="geokret_type_traditional">Tradiční</string>
   <string name="geokret_type_book_or_media">Kniha nebo elektronická média</string>
@@ -1233,8 +1238,13 @@
   <string name="showcase_compass_hint_text">Tato nová položka ti může poradit, kde kešku hledat - zobrazuje nápovědu, pokud je k dispozici.</string>
   <string name="confirm_log_title">Neobvyklý typ logu</string>
   <string name="confirm_log_message">Opravdu chceš zalogovat „%s“?</string>
+  <string name="init_geokrety">GeoKrety.org</string>
+  <string name="init_geokrety_login">Přihlášení na GeoKrety.org</string>
+  <string name="init_connectorGeokretyActive">Sledovatelné předměty GeoKrety</string>
+  <string name="init_summary_geokrety">Povolit sledovatelné předměty z GeoKrety.org</string>
   <string name="init_summary_geokrety_cache">Zlepšení rychlosti načítání.</string>
   <string name="init_summary_geokrety_account">Účet nebyl nastaven.</string>
   <string name="init_geokrety_register_ok">Přihlášení bylo úspěšné</string>
   <string name="init_geokrety_register_fail">Přihlášení selhalo</string>
+  <string name="init_geokrety_cache_description">GeoKretyMap.org poskytuje informace o sledovatelných předmětech služby Geokrety. Data nemusí být aktuální!\nPozice: ~30 min\nPopisy: ~24 h.</string>
 </resources>

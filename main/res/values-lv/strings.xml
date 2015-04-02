@@ -129,6 +129,7 @@
   <string name="err_parse">Kļūda autorizācijas lapas apstrādē</string>
   <string name="err_server">Nevar sazināties ar Geocaching.com. Vietne šobrīd var nedarboties vai arī jūsu interneta savienojums nedarbojas.</string>
   <string name="err_server_ec">Nevar sazināties ar Extremcaching.com. Vietne šobrīd var nedarboties vai arī jūsu interneta savienojums nedarbojas.</string>
+  <string name="err_server_gk">Nevar sazināties ar GeoKrety.org. Vietne var būt uz laiku nepieejama vai arī jūsu interneta savienojums nedarbojas.</string>
   <string name="err_login">Nav saglabāta pieteikšanās informācija</string>
   <string name="err_login_failed_toast">c:geo nevar pierakstīties. c:geo darbojas bezsaistē ar bezsaistē saglabātajiem slēpņiem. Pārbaudiet ielogošanās iestatījumus vai iespējojiet interneta savienojumu.</string>
   <string name="err_unknown">Nezināma kļūda</string>
@@ -182,6 +183,8 @@
 </string>
   <string name="err_log_load_data_still">c:geo joprojām ielādē datus, kas vajadzīgi, lai pierakstītos. Lūdzu, uzgaidiet nedaudz ilgāk.</string>
   <string name="err_log_post_failed">Šķiet, ka jūsu apmeklējuma ieraksts nav pievienots. Lūdzu, pārbaudiet to slēpņa mājas lapā.</string>
+  <string name="err_log_post_failed_ec">Šķiet, ka jūsu pieraksts netika iegrāmatots. Lūdzu pārbaudiet to Extremcaching.com.</string>
+  <string name="err_log_post_failed_gk">Šķiet, ka jūsu pieraksts netika iegrāmatots. Lūdzu pārbaudiet to GeoKrety.org.</string>
   <string name="err_logimage_post_failed">Šķiet, ka jūsu apmeklējuma ieraksta attēls nav augšupielādēts. Lūdzu, pārbaudiet to slēpņa mājas lapā.</string>
   <string name="err_search_address_forgot">c:geo aizmirsa adresi, kuru mēģinājāt atrast.</string>
   <string name="err_parse_lat">c:geo nevar apstrādāt platuma grādus.</string>
@@ -417,6 +420,7 @@
   <string name="init_address">Rādīt adresi</string>
   <string name="init_summary_address">Rādīt adresi, nevis koordinātes galvenajā ekrānā</string>
   <string name="init_captcha">Rādīt CAPTCHA</string>
+  <string name="init_summary_captcha">Parādīt CAPTCHA, ja nepieciešams (tikai parasti lietotāji)</string>
   <string name="init_useenglish">Lietot angļu valodu</string>
   <string name="init_summary_useenglish">Izmantot angļu valodu c:geo (nepieciešama restartēšana)</string>
   <string name="init_exclude">Nerādīt savus un atrastos</string>
@@ -427,6 +431,7 @@
   <string name="init_summary_disabled">Izlaist atspējotos slēpņus</string>
   <string name="init_offline">Statiska karte</string>
   <string name="init_summary_offline">Uzglabāt statiskas slēpņu kartes bezsaistes lietošanai</string>
+  <string name="init_offline_wp">Statiskas kartes (SP)</string>
   <string name="init_summary_offline_wp">Saglabāt Starpposmu statiskās kartes lietošanai bezsaistē</string>
   <string name="init_save_log_img">Saglabāt attēlus</string>
   <string name="init_summary_save_log_img">Saglabāt attēlus no ierakstiem</string>

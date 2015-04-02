@@ -71,6 +71,10 @@
   <string name="log_tb_visit">訪れた</string>
   <string name="log_tb_drop">ここに置く</string>
   <string name="log_tb_changeall">すべてを変更する</string>
+  <string name="log_tb_grabbed">どこかで捕まえた</string>
+  <string name="log_tb_note">メモ</string>
+  <string name="log_tb_discovered">発見した</string>
+  <string name="log_tb_archived">アーカイブされた</string>
   <string name="log_saving">ログを送信中…</string>
   <string name="log_saving_and_uploading">ログと画像を送信中…</string>
   <string name="log_clear">消去</string>
@@ -165,6 +169,8 @@
   <string name="err_log_load_data">ログを書くのに必要なデータをロードすることができません。</string>
   <string name="err_log_load_data_again">ログを書くのに必要なデータをロードすることができません。もう一度やってみてください。</string>
   <string name="err_log_load_data_still">ログを投稿するのに必要なデータをまだロード中です。もう少しお待ちください。</string>
+  <string name="err_log_post_failed_ec">ログを投稿することができなかったようです。Extremcaching.comで確認してください。</string>
+  <string name="err_log_post_failed_gk">ログを投稿することができなかったようです。GeoKrety.orgで確認してください。</string>
   <string name="err_search_address_forgot">c:geoはあなたの検索したアドレスを忘れてしまいました。</string>
   <string name="err_parse_lat">緯度の解析ができません。</string>
   <string name="err_parse_lon">経度の解析ができません。</string>
