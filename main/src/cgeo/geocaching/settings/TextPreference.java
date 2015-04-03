@@ -25,7 +25,7 @@ import android.widget.TextView;
  *
  * </p>
  */
-public class TextPreference extends AbstractAttributeBasedPrefence {
+public class TextPreference extends AbstractAttributeBasedPreference {
 
     private String text;
     private TextView summaryView;

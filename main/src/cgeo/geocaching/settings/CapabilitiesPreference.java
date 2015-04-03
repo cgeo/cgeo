@@ -19,7 +19,7 @@ import android.webkit.WebView;
 /**
  * Preference for displaying the supported capabilities of an {@link IConnector} implementation.
  */
-public class CapabilitiesPreference extends AbstractAttributeBasedPrefence {
+public class CapabilitiesPreference extends AbstractAttributeBasedPreference {
 
     private String connectorCode;
 

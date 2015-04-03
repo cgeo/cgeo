@@ -24,7 +24,7 @@ import android.widget.LinearLayout;
  * </p>
  *
  */
-public class InfoPreference extends AbstractAttributeBasedPrefence {
+public class InfoPreference extends AbstractAttributeBasedPreference {
 
     /**
      * Content of the dialog, filled from preferences XML.

@@ -11,18 +11,18 @@ import android.util.AttributeSet;
  * Base class for preferences which evaluate their XML attributes for further processing.
  *
  */
-public abstract class AbstractAttributeBasedPrefence extends Preference {
+public abstract class AbstractAttributeBasedPreference extends Preference {
 
-    public AbstractAttributeBasedPrefence(final Context context) {
+    public AbstractAttributeBasedPreference(final Context context) {
         super(context);
     }
 
-    public AbstractAttributeBasedPrefence(final Context context, final AttributeSet attrs) {
+    public AbstractAttributeBasedPreference(final Context context, final AttributeSet attrs) {
         super(context, attrs);
         processAttributes(context, attrs, 0);
     }
 
-    public AbstractAttributeBasedPrefence(final Context context, final AttributeSet attrs, final int defStyle) {
+    public AbstractAttributeBasedPreference(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
         processAttributes(context, attrs, defStyle);
     }
@@ -40,7 +40,7 @@ public abstract class AbstractAttributeBasedPrefence extends Preference {
     }
 
     /**
-     * Evaluate the attributes which where requested in {@link AbstractAttributeBasedPrefence#getAttributeNames()}.
+     * Evaluate the attributes which where requested in {@link AbstractAttributeBasedPreference#getAttributeNames()}.
      * 
      */
     protected abstract void processAttributeValues(TypedArray values);
