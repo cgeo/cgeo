@@ -12,7 +12,7 @@ abstract class AbstractExport implements Export {
     protected AbstractExport(final int name) {
         final Resources resources = CgeoApplication.getInstance().getResources();
         this.name = resources.getString(name);
-        progressTitle = resources.getString(R.string.export, this.name);
+        progressTitle = resources.getString(R.string.export_progress, this.name);
     }
 
     @Override
