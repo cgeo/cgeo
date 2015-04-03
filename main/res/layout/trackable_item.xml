@@ -17,7 +17,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:gravity="center_vertical"
-        android:layout_toRightOf="@+id/trackable_image_brand"
         android:minHeight="?android:attr/listPreferredItemHeight"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="?text_color"
