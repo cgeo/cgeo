@@ -1351,7 +1351,7 @@
     <string name="init_summary_geokrety_cache">Improve loading speed.</string>
     <string name="init_summary_geokrety_account">No account configured.</string>
     <string name="init_summary_geokrety_not_anonymous">Logging GeoKrety from c:geo cannot be anonymous. Please register.</string>
-    <string name="init_geokrety_register_ok">Login successfull</string>
+    <string name="init_geokrety_register_ok">Login successful</string>
     <string name="init_geokrety_register_fail">Login failed</string>
     <string name="init_geokrety_get_secid">Retrieve API key</string>
     <string name="init_geokrety_description">Store your API key in c:geo to ease logging GeoKrety</string>
