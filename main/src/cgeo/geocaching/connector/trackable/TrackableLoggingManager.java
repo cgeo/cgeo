@@ -41,5 +41,7 @@ public interface TrackableLoggingManager {
 
     public boolean isRegistered();
 
+    public boolean isTrackingCodeNeededToPostNote();
+
     public boolean postReady();
 }

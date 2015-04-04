@@ -249,6 +249,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         dateButton.setOnClickListener(new DateListener());
         setDate(date);
 
+        // show/hide Time selector
         if (loggingManager.canLogTime()) {
             timeButton.setOnClickListener(new TimeListener());
             setTime(date);
@@ -290,12 +291,21 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     public void setType(final LogTypeTrackable type) {
         typeSelected = type;
         typeButton.setText(typeSelected.getLabel());
+
+        // show/hide Coordinate fields as Trackable needs
         if (LogTypeTrackable.isCoordinatesNeeded(typeSelected) && loggingManager.canLogCoordinates()) {
             geocacheEditText.setVisibility(View.VISIBLE);
             coordinatesButton.setVisibility(View.VISIBLE);
         } else {
             geocacheEditText.setVisibility(View.GONE);
             coordinatesButton.setVisibility(View.GONE);
+        }
+
+        // show/hide Tracking Code Field for note type
+        if (typeSelected != LogTypeTrackable.NOTE || typeSelected == LogTypeTrackable.NOTE && loggingManager.isTrackingCodeNeededToPostNote()) {
+            trackingEditText.setVisibility(View.VISIBLE);
+        } else {
+            trackingEditText.setVisibility(View.GONE);
         }
     }
 
@@ -482,7 +492,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         }
 
         // Check Tracking Code existance
-        if (trackingEditText.getText().toString().isEmpty()) {
+        if (loggingManager.isTrackingCodeNeededToPostNote() && trackingEditText.getText().toString().isEmpty()) {
             showToast(res.getString(R.string.err_log_post_missing_tracking_code));
             return;
         }
