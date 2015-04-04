@@ -15,6 +15,7 @@ import android.content.Intent;
  */
 class AndroidWearApp extends AbstractPointNavigationApp {
     private static final String INTENT_ACTION = "cgeo.geocaching.wear.NAVIGATE_TO";
+    private static final String INTENT_PACKAGE = "com.javadog.cgeowear";
 
     public AndroidWearApp() {
         super(getString(R.string.cache_menu_android_wear), R.id.cache_app_android_wear, INTENT_ACTION, null);
@@ -43,6 +44,7 @@ class AndroidWearApp extends AbstractPointNavigationApp {
     private static void navigate(final Activity activity, final String destName,
                                  final String destCode, final Geopoint coords) {
         final Intent launchIntent = new Intent(INTENT_ACTION);
+        launchIntent.setPackage(INTENT_PACKAGE);
         launchIntent.putExtra(Intents.EXTRA_NAME, destName)
                 .putExtra(Intents.EXTRA_GEOCODE, destCode)
                 .putExtra(Intents.EXTRA_LATITUDE, coords.getLatitude())
