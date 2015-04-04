@@ -137,7 +137,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
         return true;
     }
 
-    public boolean supportsPersonalization() {
+    private boolean supportsPersonalization() {
         return getSupportedAuthLevel() == OAuthLevel.Level3;
     }
 

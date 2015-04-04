@@ -20,7 +20,7 @@ public final class TranslationUtils {
     private static final String TRANSLATION_AUTO_SELECT = "#auto";
     private static final String TRANSLATION_FIELD_SEPARATOR = "|";
 
-    public static final int TRANSLATION_TEXT_LENGTH_WARN = 500;
+    private static final int TRANSLATION_TEXT_LENGTH_WARN = 500;
     private static final String TRANSLATION_APP = "com.google.android.apps.translate";
 
     private TranslationUtils() {
@@ -29,7 +29,7 @@ public final class TranslationUtils {
 
     /**
      * Build a URI for Google Translate.
-     * 
+     *
      * @param toLang
      *            The two-letter lowercase ISO language codes as defined by ISO 639-1
      * @param text

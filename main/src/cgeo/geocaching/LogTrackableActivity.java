@@ -236,7 +236,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
         return false;
     }
 
-    public void init() {
+    private void init() {
         registerForContextMenu(typeButton);
         typeButton.setOnClickListener(new View.OnClickListener() {
             @Override

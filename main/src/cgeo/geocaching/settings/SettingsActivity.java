@@ -335,7 +335,7 @@ public class SettingsActivity extends PreferenceActivity {
         }
     }
 
-    public void initBackupButtons() {
+    private void initBackupButtons() {
         final Preference backup = getPreference(R.string.pref_fakekey_preference_backup);
         backup.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
@@ -361,7 +361,7 @@ public class SettingsActivity extends PreferenceActivity {
         });
     }
 
-    public void initMaintenanceButtons() {
+    private void initMaintenanceButtons() {
         final Preference dirMaintenance = getPreference(R.string.pref_fakekey_preference_maintenance_directories);
         dirMaintenance.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             @Override
@@ -398,7 +398,7 @@ public class SettingsActivity extends PreferenceActivity {
                 });
     }
 
-    public static void initDeviceSpecificPreferences() {
+    private static void initDeviceSpecificPreferences() {
         // We have to ensure that those preferences are initialized so that devices with specific default values
         // will get the appropriate ones.
         Settings.setUseHardwareAcceleration(Settings.useHardwareAcceleration());
@@ -486,12 +486,12 @@ public class SettingsActivity extends PreferenceActivity {
      * @param key
      *            Key of a preference screen.
      */
-    void redrawScreen(final int key) {
+    private void redrawScreen(final int key) {
         final Preference preference = getPreference(key);
         redrawScreen(preference);
     }
 
-    static void redrawScreen(final Preference preference) {
+    private static void redrawScreen(final Preference preference) {
         if (!(preference instanceof PreferenceScreen)) {
             return;
         }
@@ -524,7 +524,7 @@ public class SettingsActivity extends PreferenceActivity {
         }
     }
 
-    void setOCAuthTitle(final OCPreferenceKeys key) {
+    private void setOCAuthTitle(final OCPreferenceKeys key) {
         if (key != null) {
             getPreference(key.authPrefId)
                     .setTitle(getString(Settings.hasOCAuthorization(key.publicTokenPrefId, key.privateTokenPrefId)
@@ -533,7 +533,7 @@ public class SettingsActivity extends PreferenceActivity {
         }
     }
 
-    void setTwitterAuthTitle() {
+    private void setTwitterAuthTitle() {
         getPreference(R.string.pref_fakekey_twitter_authorization)
                 .setTitle(getString(Settings.hasTwitterAuthorization()
                         ? R.string.settings_reauthorize
@@ -750,12 +750,12 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
     @SuppressWarnings("deprecation")
-    public static Preference findPreference(final PreferenceActivity preferenceActivity, final CharSequence key) {
+    private static Preference findPreference(final PreferenceActivity preferenceActivity, final CharSequence key) {
         return preferenceActivity.findPreference(key);
     }
 
     @SuppressWarnings("deprecation")
-    public static void addPreferencesFromResource(final PreferenceActivity preferenceActivity, final int preferencesResId) {
+    private static void addPreferencesFromResource(final PreferenceActivity preferenceActivity, final int preferencesResId) {
         preferenceActivity.addPreferencesFromResource(preferencesResId);
     }
 

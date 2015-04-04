@@ -11,8 +11,8 @@ import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.CGeoMap.MapMode;
-import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.LivemapStrategy;
+import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.google.v1.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapProvider;
@@ -54,7 +54,7 @@ public class Settings {
      */
     private static final int INITIAL_MAP_ZOOM_LIMIT = 16;
     private static final char HISTORY_SEPARATOR = ',';
-    public static final int SHOW_WP_THRESHOLD_DEFAULT = 10;
+    private static final int SHOW_WP_THRESHOLD_DEFAULT = 10;
     public static final int SHOW_WP_THRESHOLD_MAX = 50;
     private static final int MAP_SOURCE_DEFAULT = GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
 
@@ -465,7 +465,7 @@ public class Settings {
         return getString(R.string.pref_mapfile, null);
     }
 
-    public static void setMapFile(final String mapFile) {
+    static void setMapFile(final String mapFile) {
         putString(R.string.pref_mapfile, mapFile);
         if (mapFile != null) {
             setMapFileDirectory(new File(mapFile).getParent());
@@ -484,12 +484,12 @@ public class Settings {
         return null;
     }
 
-    public static void setMapFileDirectory(final String mapFileDirectory) {
+    static void setMapFileDirectory(final String mapFileDirectory) {
         putString(R.string.pref_mapDirectory, mapFileDirectory);
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
     }
 
-    public static boolean isValidMapFile() {
+    private static boolean isValidMapFile() {
         return isValidMapFile(getMapFile());
     }
 
@@ -582,11 +582,11 @@ public class Settings {
         return getBoolean(R.string.pref_geokrety_cache, true);
     }
 
-    public static String getGeokretyUsername() {
+    static String getGeokretyUsername() {
         return getString(R.string.pref_geokrety_username, null);
     }
 
-    public static String getGeokretyPassword() {
+    static String getGeokretyPassword() {
         return getString(R.string.pref_geokrety_password, null);
     }
 
@@ -594,7 +594,7 @@ public class Settings {
         return getString(R.string.pref_geokrety_secid, null);
     }
 
-    public static void setGeokretySecId(final String secid) {
+    static void setGeokretySecId(final String secid) {
         putString(R.string.pref_geokrety_secid, secid);
     }
 
@@ -622,7 +622,7 @@ public class Settings {
         return getBoolean(R.string.pref_sigautoinsert, false);
     }
 
-    public static void setUseImperialUnits(final boolean useImperialUnits) {
+    static void setUseImperialUnits(final boolean useImperialUnits) {
         putBoolean(R.string.pref_units_imperial, useImperialUnits);
     }
 
@@ -630,7 +630,7 @@ public class Settings {
         return getBoolean(R.string.pref_units_imperial, useImperialUnitsByDefault());
     }
 
-    static boolean useImperialUnitsByDefault() {
+    private static boolean useImperialUnitsByDefault() {
         final String countryCode = Locale.getDefault().getCountry();
         return "US".equals(countryCode)  // USA
             || "LR".equals(countryCode)  // Liberia
@@ -819,7 +819,7 @@ public class Settings {
         return getWebDeviceCode() != null;
     }
 
-    public static String getWebDeviceName() {
+    static String getWebDeviceName() {
         return getString(R.string.pref_webDeviceName, Build.MODEL);
     }
 
@@ -839,7 +839,7 @@ public class Settings {
         return getInt(R.string.pref_showwaypointsthreshold, SHOW_WP_THRESHOLD_DEFAULT);
     }
 
-    public static void setShowWaypointsThreshold(final int threshold) {
+    static void setShowWaypointsThreshold(final int threshold) {
         putInt(R.string.pref_showwaypointsthreshold, threshold);
     }
 
@@ -847,7 +847,7 @@ public class Settings {
         return getBoolean(R.string.pref_twitter, false);
     }
 
-    public static void setUseTwitter(final boolean useTwitter) {
+    private static void setUseTwitter(final boolean useTwitter) {
         putBoolean(R.string.pref_twitter, useTwitter);
     }
 
@@ -865,7 +865,7 @@ public class Settings {
 
     }
 
-    public static boolean hasTwitterAuthorization() {
+    static boolean hasTwitterAuthorization() {
         return StringUtils.isNotBlank(getTokenPublic())
                 && StringUtils.isNotBlank(getTokenSecret());
     }
@@ -979,7 +979,7 @@ public class Settings {
         putInt(R.string.pref_trackableaction, trackableAction);
     }
 
-    public static String getCustomRenderThemeBaseFolder() {
+    private static String getCustomRenderThemeBaseFolder() {
         return getString(R.string.pref_renderthemepath, "");
     }
 
@@ -1127,7 +1127,7 @@ public class Settings {
         return getBoolean(R.string.pref_hardware_acceleration, !HW_ACCEL_DISABLED_BY_DEFAULT);
     }
 
-    public static void setUseHardwareAcceleration(final boolean useHardwareAcceleration) {
+    static void setUseHardwareAcceleration(final boolean useHardwareAcceleration) {
         putBoolean(R.string.pref_hardware_acceleration, useHardwareAcceleration);
     }
 

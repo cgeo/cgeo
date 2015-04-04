@@ -64,7 +64,7 @@ public enum OCPreferenceKeys {
         return FIND_BY_ISACTIVE_ID.get(prefId) != null;
     }
 
-    public static boolean isOCPreference(final String prefKey) {
+    static boolean isOCPreference(final String prefKey) {
         return FIND_BY_ISACTIVE_KEY.containsKey(prefKey);
     }
 
@@ -72,11 +72,11 @@ public enum OCPreferenceKeys {
         return FIND_BY_ISACTIVE_ID.get(prefId);
     }
 
-    public static OCPreferenceKeys getByAuthId(final int authPrefId) {
+    static OCPreferenceKeys getByAuthId(final int authPrefId) {
         return FIND_BY_AUTH_PREF_ID.get(authPrefId);
     }
 
-    public static OCPreferenceKeys getByKey(final String prefKey) {
+    static OCPreferenceKeys getByKey(final String prefKey) {
         return FIND_BY_ISACTIVE_KEY.get(prefKey);
     }
 

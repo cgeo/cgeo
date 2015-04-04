@@ -905,7 +905,7 @@ public final class GCParser {
         return searchByAny(cacheType, false, showCaptcha, params, recaptchaReceiver);
     }
 
-    public static SearchResult searchByKeyword(final @NonNull String keyword, @NonNull final CacheType cacheType, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
+    static SearchResult searchByKeyword(final @NonNull String keyword, @NonNull final CacheType cacheType, final boolean showCaptcha, final RecaptchaReceiver recaptchaReceiver) {
         if (StringUtils.isBlank(keyword)) {
             Log.e("GCParser.searchByKeyword: No keyword given");
             return null;
@@ -1045,7 +1045,7 @@ public final class GCParser {
         }
     }).subscribeOn(RxUtils.networkScheduler);
 
-    public static ImmutablePair<StatusCode, String> postLog(final String geocode, final String cacheid, final String[] viewstates,
+    static ImmutablePair<StatusCode, String> postLog(final String geocode, final String cacheid, final String[] viewstates,
             final LogType logType, final int year, final int month, final int day,
             final String log, final List<TrackableLog> trackables) {
         if (GCLogin.isEmpty(viewstates)) {
@@ -1201,7 +1201,7 @@ public final class GCParser {
      *            the URI for the image to be uploaded
      * @return status code to indicate success or failure
      */
-    public static ImmutablePair<StatusCode, String> uploadLogImage(final String logId, final String caption, final String description, final Uri imageUri) {
+    static ImmutablePair<StatusCode, String> uploadLogImage(final String logId, final String caption, final String description, final Uri imageUri) {
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/upload.aspx").encodedQuery("LID=" + logId).build().toString();
 
         final String page = GCLogin.getInstance().getRequestLogged(uri, null);
@@ -1778,7 +1778,7 @@ public final class GCParser {
     }
 
     @NonNull
-    public static List<LogType> parseTypes(final String page) {
+    static List<LogType> parseTypes(final String page) {
         if (StringUtils.isEmpty(page)) {
             return Collections.emptyList();
         }
@@ -1837,7 +1837,7 @@ public final class GCParser {
         return types;
     }
 
-    public static List<TrackableLog> parseTrackableLog(final String page) {
+    static List<TrackableLog> parseTrackableLog(final String page) {
         if (StringUtils.isEmpty(page)) {
             return Collections.emptyList();
         }
@@ -1965,15 +1965,15 @@ public final class GCParser {
         }
     }
 
-    public static boolean uploadModifiedCoordinates(final Geocache cache, final Geopoint wpt) {
+    static boolean uploadModifiedCoordinates(final Geocache cache, final Geopoint wpt) {
         return editModifiedCoordinates(cache, wpt);
     }
 
-    public static boolean deleteModifiedCoordinates(final Geocache cache) {
+    static boolean deleteModifiedCoordinates(final Geocache cache) {
         return editModifiedCoordinates(cache, null);
     }
 
-    public static boolean editModifiedCoordinates(final Geocache cache, final Geopoint wpt) {
+    static boolean editModifiedCoordinates(final Geocache cache, final Geopoint wpt) {
         final String userToken = getUserToken(cache);
         if (StringUtils.isEmpty(userToken)) {
             return false;
@@ -1999,7 +1999,7 @@ public final class GCParser {
         return false;
     }
 
-    public static boolean uploadPersonalNote(final Geocache cache) {
+    static boolean uploadPersonalNote(final Geocache cache) {
         final String userToken = getUserToken(cache);
         if (StringUtils.isEmpty(userToken)) {
             return false;
@@ -2022,7 +2022,7 @@ public final class GCParser {
         return false;
     }
 
-    public static boolean ignoreCache(@NonNull final Geocache cache) {
+    static boolean ignoreCache(@NonNull final Geocache cache) {
         final String uri = "http://www.geocaching.com/bookmarks/ignore.aspx?guid=" + cache.getGuid() + "&WptTypeID=" + cache.getType().wptTypeId;
         final String page = GCLogin.getInstance().postRequestLogged(uri, null);
 

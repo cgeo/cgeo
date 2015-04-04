@@ -92,7 +92,7 @@ public final class LogTemplateProvider {
             return template;
         }
 
-        protected final String apply(final String input, final LogContext context) {
+        private final String apply(final String input, final LogContext context) {
             final String bracketedTemplate = "[" + template + "]";
 
             // check containment first to not unconditionally call the getValue(...) method

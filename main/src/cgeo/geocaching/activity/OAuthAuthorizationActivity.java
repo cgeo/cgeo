@@ -309,21 +309,21 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
 
     protected abstract String getAuthTitle();
 
-    protected String getAuthAgain() {
+    private String getAuthAgain() {
         return getString(R.string.auth_again);
     }
 
-    protected String getErrAuthInitialize() {
+    private String getErrAuthInitialize() {
         return getString(R.string.err_auth_initialize);
     }
 
-    protected String getAuthStart() {
+    private String getAuthStart() {
         return getString(R.string.auth_start);
     }
 
     protected abstract String getAuthDialogCompleted();
 
-    protected String getErrAuthProcess() {
+    private String getErrAuthProcess() {
         return res.getString(R.string.err_auth_process);
     }
 
@@ -339,19 +339,19 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         return StringUtils.EMPTY;
     }
 
-    protected String getAuthDialogWait() {
+    private String getAuthDialogWait() {
         return res.getString(R.string.auth_dialog_waiting, getAuthTitle());
     }
 
-    protected String getAuthExplainShort() {
+    private String getAuthExplainShort() {
         return res.getString(R.string.auth_explain_short, getAuthTitle());
     }
 
-    protected String getAuthExplainLong() {
+    private String getAuthExplainLong() {
         return res.getString(R.string.auth_explain_long, getAuthTitle());
     }
 
-    protected String getAuthAuthorize() {
+    private String getAuthAuthorize() {
         return res.getString(R.string.auth_authorize, getAuthTitle());
     }
 

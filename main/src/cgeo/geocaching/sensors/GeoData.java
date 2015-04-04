@@ -14,14 +14,14 @@ import android.location.LocationManager;
 
 public class GeoData extends Location {
 
-    public static final String INITIAL_PROVIDER = "initial";
-    public static final String HOME_PROVIDER = "home";
-    public static final String FUSED_PROVIDER = "fused";
+    private static final String INITIAL_PROVIDER = "initial";
+    private static final String HOME_PROVIDER = "home";
+    private static final String FUSED_PROVIDER = "fused";
     public static final String LOW_POWER_PROVIDER = "low-power";
 
     // Some devices will not have the last position available (for example the emulator). In this case,
     // rather than waiting forever for a position update which might never come, we emulate it by placing
-    // the user arbitrarly at Paris Notre-Dame, one of the most visited free tourist attractions in the world.
+    // the user arbitrarily at Paris Notre-Dame, one of the most visited free tourist attractions in the world.
     final public static GeoData DUMMY_LOCATION = new GeoData(new Location(INITIAL_PROVIDER));
 
     static {

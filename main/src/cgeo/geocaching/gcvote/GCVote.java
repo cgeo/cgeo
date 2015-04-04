@@ -208,7 +208,7 @@ public final class GCVote {
         return Settings.isGCvoteLogin() && StringUtils.isNotBlank(cache.getGuid()) && cache.supportsGCVote();
     }
 
-    public static String getDescription(final float rating) {
+    static String getDescription(final float rating) {
         switch (Math.round(rating * 2f)) {
             case 2:
                 return getString(R.string.log_stars_1_description);

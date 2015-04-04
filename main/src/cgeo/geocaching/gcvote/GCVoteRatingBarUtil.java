@@ -50,7 +50,7 @@ public final class GCVoteRatingBarUtil {
         }
     }
 
-    public static float getRating(final View parentView) {
+    static float getRating(final View parentView) {
         final RatingBar ratingBar = ButterKnife.findById(parentView, R.id.gcvoteRating);
         return ratingBar.getRating();
     }

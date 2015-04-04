@@ -80,17 +80,17 @@ final public class CompassMiniView extends View {
         targetCoords = point;
     }
 
-    public void updateAzimuth(final float azimuth) {
+    void updateAzimuth(final float azimuth) {
         this.azimuth = azimuth;
         updateDirection();
     }
 
-    public void updateHeading(final float heading) {
+    void updateHeading(final float heading) {
         this.heading = heading;
         updateDirection();
     }
 
-    public void updateCurrentCoords(@NonNull final Geopoint currentCoords) {
+    void updateCurrentCoords(@NonNull final Geopoint currentCoords) {
         if (targetCoords == null) {
             return;
         }

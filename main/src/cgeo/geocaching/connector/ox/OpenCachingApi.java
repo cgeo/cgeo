@@ -32,7 +32,7 @@ public class OpenCachingApi {
     }
 
     @Nullable
-    public static Geocache searchByGeoCode(final @NonNull String geocode) {
+    static Geocache searchByGeoCode(final @NonNull String geocode) {
         final HttpResponse response = getRequest("http://www.opencaching.com/api/geocache/" + geocode + ".gpx",
                 new Parameters(
                         "log_limit", "50",
@@ -65,7 +65,7 @@ public class OpenCachingApi {
     }
 
     @NonNull
-    public static Collection<Geocache> searchByCenter(final @NonNull Geopoint center) {
+    static Collection<Geocache> searchByCenter(final @NonNull Geopoint center) {
         final Parameters queryParameters = new Parameters(
                 "log_limit", "0",
                 "hint", "false",
@@ -115,7 +115,7 @@ public class OpenCachingApi {
     }
 
     @NonNull
-    public static Collection<Geocache> searchByBoundingBox(final @NonNull Viewport viewport) {
+    static Collection<Geocache> searchByBoundingBox(final @NonNull Viewport viewport) {
         final String bbox = viewport.bottomLeft.format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA) + ',' + viewport.topRight.format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA);
         final Parameters queryParameters = new Parameters(
                 "log_limit", "0",
@@ -131,7 +131,7 @@ public class OpenCachingApi {
     }
 
     @NonNull
-    public static Collection<Geocache> searchByKeyword(final @NonNull String name) {
+    static Collection<Geocache> searchByKeyword(final @NonNull String name) {
         final Parameters queryParameters = new Parameters(
                 "log_limit", "5",
                 "hint", "false",

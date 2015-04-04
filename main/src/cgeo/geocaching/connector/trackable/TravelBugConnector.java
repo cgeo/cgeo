@@ -34,7 +34,7 @@ public class TravelBugConnector extends AbstractTrackableConnector {
         return "http://www.geocaching.com//track/details.aspx?tracker=" + trackable.getGeocode();
     }
 
-    public static String getTravelbugViewstates(final String guid) {
+    static String getTravelbugViewstates(final String guid) {
         return Network.getResponseData(Network.getRequest("http://www.geocaching.com/track/log.aspx", new Parameters("wid", guid)));
     }
 
