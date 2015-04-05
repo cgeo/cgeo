@@ -260,7 +260,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             if (cache != null && cache.getCoords() != null) {
                 params.add("latlon", cache.getCoords().toString());
             }
-            if (cache != null && cache.getGeocode() != null) {
+            if (cache != null && StringUtils.isNotEmpty(cache.getGeocode())) {
                 params.add("wpt", cache.getGeocode());
             }
 

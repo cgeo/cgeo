@@ -5,6 +5,7 @@ import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.mapsforge.android.maps.Projection;
 import org.mapsforge.android.maps.overlay.ItemizedOverlay;
 
@@ -18,7 +19,9 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class MapsforgeCacheOverlay extends ItemizedOverlay<MapsforgeCacheOverlayItem> implements ItemizedOverlayImpl {
 
+    @NonNull
     private final CachesOverlay base;
+    @NonNull
     private final Lock lock = new ReentrantLock();
 
     public MapsforgeCacheOverlay(final Context contextIn, final Drawable markerIn) {
@@ -33,28 +36,16 @@ public class MapsforgeCacheOverlay extends ItemizedOverlay<MapsforgeCacheOverlay
 
     @Override
     protected MapsforgeCacheOverlayItem createItem(final int i) {
-        if (base == null) {
-            return null;
-        }
-
         return (MapsforgeCacheOverlayItem) base.createItem(i);
     }
 
     @Override
     public int size() {
-        if (base == null) {
-            return 0;
-        }
-
         return base.size();
     }
 
     @Override
     protected boolean onTap(final int arg0) {
-        if (base == null) {
-            return false;
-        }
-
         return base.onTap(arg0);
     }
 

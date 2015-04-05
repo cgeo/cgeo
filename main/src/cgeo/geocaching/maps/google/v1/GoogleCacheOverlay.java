@@ -8,6 +8,8 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapView;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
@@ -21,7 +23,9 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class GoogleCacheOverlay extends ItemizedOverlay<GoogleCacheOverlayItem> implements ItemizedOverlayImpl {
 
+    @NonNull
     private final CachesOverlay base;
+    @NonNull
     private final Lock lock = new ReentrantLock();
 
     public GoogleCacheOverlay(final Context contextIn, final Drawable markerIn) {
@@ -36,28 +40,16 @@ public class GoogleCacheOverlay extends ItemizedOverlay<GoogleCacheOverlayItem> 
 
     @Override
     protected GoogleCacheOverlayItem createItem(final int i) {
-        if (base == null) {
-            return null;
-        }
-
         return (GoogleCacheOverlayItem) base.createItem(i);
     }
 
     @Override
     public int size() {
-        if (base == null) {
-            return 0;
-        }
-
         return base.size();
     }
 
     @Override
     protected boolean onTap(final int arg0) {
-        if (base == null) {
-            return false;
-        }
-
         return base.onTap(arg0);
     }
 

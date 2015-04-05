@@ -65,6 +65,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import rx.Observable;
@@ -164,6 +165,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     // Store Geocode here, as 'cache' is loaded Async.
     private String geocode;
     private Geocache cache;
+    @NonNull
     private final List<Trackable> genericTrackables = new ArrayList<>();
     private final Progress progress = new Progress();
 
@@ -1818,10 +1820,8 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     trackables.put(trackable.getUniqueID(), trackable);
                 }
             }
-            if (genericTrackables != null) {
-                for (final Trackable trackable: genericTrackables) {
-                    trackables.put(trackable.getUniqueID(), trackable);
-                }
+            for (final Trackable trackable : genericTrackables) {
+                trackables.put(trackable.getUniqueID(), trackable);
             }
             for (final Map.Entry<String, Trackable> trackable: trackables.entrySet()) {
                 adapterTrackables.add(trackable.getValue());

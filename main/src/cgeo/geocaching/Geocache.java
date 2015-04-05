@@ -548,6 +548,7 @@ public class Geocache implements IWaypoint {
     }
 
     @Override
+    @NonNull
     public String getGeocode() {
         return geocode;
     }

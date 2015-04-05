@@ -2,6 +2,7 @@ package cgeo.geocaching.export;
 
 import butterknife.ButterKnife;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.DataStore;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.LogEntry;
@@ -14,6 +15,8 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
+
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -94,6 +97,7 @@ public class FieldnoteExport extends AbstractExport {
     }
 
     private class ExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
+        @Nullable
         private final Activity activity;
         private final boolean upload;
         private final boolean onlyNew;
@@ -111,8 +115,8 @@ public class FieldnoteExport extends AbstractExport {
          * @param onlyNew
          *            Upload/export only new logs since last export
          */
-        public ExportTask(final Activity activity, final boolean upload, final boolean onlyNew) {
-            super(activity, getProgressTitle(), activity.getString(R.string.export_fieldnotes_creating), true);
+        public ExportTask(@Nullable final Activity activity, final boolean upload, final boolean onlyNew) {
+            super(activity, getProgressTitle(), CgeoApplication.getInstance().getString(R.string.export_fieldnotes_creating), true);
             this.activity = activity;
             this.upload = upload;
             this.onlyNew = onlyNew;
@@ -168,16 +172,17 @@ public class FieldnoteExport extends AbstractExport {
         @Override
         protected void onPostExecuteInternal(final Boolean result) {
             if (null != activity) {
+                final Context nonNullActivity = activity;
                 if (result) {
                     Settings.setFieldnoteExportDate(System.currentTimeMillis());
 
-                    ActivityMixin.showToast(activity, getName() + ' ' + activity.getString(R.string.export_exportedto) + ": " + exportFile.toString());
+                    ActivityMixin.showToast(activity, getName() + ' ' + nonNullActivity.getString(R.string.export_exportedto) + ": " + exportFile.toString());
 
                     if (upload) {
-                        ActivityMixin.showToast(activity, activity.getString(R.string.export_fieldnotes_upload_success));
+                        ActivityMixin.showToast(activity, nonNullActivity.getString(R.string.export_fieldnotes_upload_success));
                     }
                 } else {
-                    ActivityMixin.showToast(activity, activity.getString(R.string.export_failed));
+                    ActivityMixin.showToast(activity, nonNullActivity.getString(R.string.export_failed));
                 }
             }
         }
