@@ -456,6 +456,8 @@
     <string name="init_login_popup_not_authorized">Not authorized</string>
     <string name="init_login_popup_invalid_timestamp">Local time invalid, adjust device time</string>
     <string name="init_login_popup_invalid_token">Authorization invalid, re-authorize</string>
+    <string name="init_authorization_credential_username">Username</string>
+    <string name="init_authorization_credential_password">Password</string>
     <string name="settings_service_active">Active</string>
     <string name="init_signature">Signature</string>
     <string name="init_template_help">Placeholder strings like [NAME] will be expanded later when this template is used.</string>
@@ -624,6 +626,11 @@
     <string name="auth_dialog_waiting">Waiting for %s…</string>
     <string name="auth_explain_short">The following process will allow <b>c:geo</b> to access %s.</string>
     <string name="auth_explain_long">Pressing the \"authorize c:geo\" button will start the process. This process will open up a web browser with a %s page. Log in on this page and allow <b>c:geo</b> to access your account. That\'s all.</string>
+
+    <!-- auth token -->
+    <string name="auth_token_register">Create an account</string>
+    <string name="auth_token_explain_short">The following process will allow <b>c:geo</b> to access %s.</string>
+    <string name="auth_token_explain_long">Filling your credential and pressing the \"authorize c:geo\" button will start the process. This process will connect to %s and retrieve an authentication token. That\'s all.</string>
 
     <!-- auth Twitter -->
     <string name="auth_dialog_completed_twitter">c:geo is now authorized to post on Twitter.</string>
