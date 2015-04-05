@@ -23,9 +23,6 @@ public abstract class AbstractTrackableLoggingManager extends AsyncTaskLoader<Li
     public abstract void setGuid (final String guid);
 
     @Override
-    public abstract boolean isRegistered();
-
-    @Override
     public boolean isTrackingCodeNeededToPostNote() {
         return false;
     }

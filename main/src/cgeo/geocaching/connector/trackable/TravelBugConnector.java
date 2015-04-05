@@ -9,6 +9,7 @@ import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.enumerations.Loaders;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.settings.Settings;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
@@ -48,6 +49,11 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     @Override
     public boolean isLoggable() {
         return true;
+    }
+
+    @Override
+    public boolean isRegistered() {
+        return Settings.hasGCCredentials();
     }
 
     @Override

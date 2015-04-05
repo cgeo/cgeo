@@ -598,7 +598,7 @@ public class Settings {
         putString(R.string.pref_geokrety_secid, secid);
     }
 
-    public static boolean isRegisteredForGeokrety() {
+    public static boolean isRegisteredForGeokretyLogging() {
         return getGeokretySecId() != null;
     }
 

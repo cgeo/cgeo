@@ -186,7 +186,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
 
     @Override
     public boolean isRegistered() {
-        return Settings.isRegisteredForGeokrety();
+        return Settings.isRegisteredForGeokretyLogging() && Settings.isGeokretyConnectorActive();
     }
 
     @Override
