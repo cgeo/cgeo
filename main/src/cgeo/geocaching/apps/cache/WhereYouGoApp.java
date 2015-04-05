@@ -17,7 +17,7 @@ public class WhereYouGoApp extends AbstractGeneralApp {
     private static final Pattern PATTERN_CARTRIDGE = Pattern.compile("(" + Pattern.quote("http://www.wherigo.com/cartridge/details.aspx?") + ".*?)" + Pattern.quote("\""));
 
     public WhereYouGoApp() {
-        super(getString(R.string.cache_menu_whereyougo), R.id.cache_app_whereyougo, "menion.android.whereyougo");
+        super(getString(R.string.cache_menu_whereyougo), "menion.android.whereyougo");
     }
 
     @Override

@@ -16,8 +16,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import android.app.Activity;
 
 abstract class AbstractStaticMapsApp extends AbstractApp implements CacheNavigationApp, WaypointNavigationApp {
-    protected AbstractStaticMapsApp(@NonNull final String name, final int id) {
-        super(name, id, null);
+    protected AbstractStaticMapsApp(@NonNull final String name) {
+        super(name, null);
     }
 
     @Override

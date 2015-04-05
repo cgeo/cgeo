@@ -9,7 +9,7 @@ import android.app.Activity;
 class StaticMapApp extends AbstractStaticMapsApp {
 
     StaticMapApp() {
-        super(getString(R.string.cache_menu_map_static), R.id.cache_app_show_static_maps);
+        super(getString(R.string.cache_menu_map_static));
     }
 
     @Override

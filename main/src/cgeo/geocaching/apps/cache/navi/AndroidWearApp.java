@@ -18,7 +18,7 @@ class AndroidWearApp extends AbstractPointNavigationApp {
     private static final String INTENT_PACKAGE = "com.javadog.cgeowear";
 
     public AndroidWearApp() {
-        super(getString(R.string.cache_menu_android_wear), R.id.cache_app_android_wear, INTENT_ACTION, null);
+        super(getString(R.string.cache_menu_android_wear), INTENT_ACTION, null);
     }
 
     @Override

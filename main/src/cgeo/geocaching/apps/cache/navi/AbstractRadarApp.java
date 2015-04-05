@@ -14,8 +14,8 @@ abstract class AbstractRadarApp extends AbstractPointNavigationApp {
 
     private final String intentAction;
 
-    protected AbstractRadarApp(final String name, final int id, final String intent, final String packageName) {
-        super(name, id, intent, packageName);
+    protected AbstractRadarApp(final String name, final String intent, final String packageName) {
+        super(name, intent, packageName);
         this.intentAction = intent;
     }
 

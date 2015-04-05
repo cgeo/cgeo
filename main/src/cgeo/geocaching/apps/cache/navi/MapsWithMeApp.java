@@ -12,7 +12,7 @@ import android.app.Activity;
 class MapsWithMeApp extends AbstractPointNavigationApp {
 
     protected MapsWithMeApp() {
-        super(getString(R.string.cache_menu_mapswithme), R.id.cache_app_mapswithme, null);
+        super(getString(R.string.cache_menu_mapswithme), null);
     }
 
     @Override

@@ -16,11 +16,6 @@ public interface App {
     public String getName();
 
     /**
-     * @return the unique ID of the application, defined in res/values/ids.xml
-     */
-    int getId();
-
-    /**
      * Whether or not the app can be used with the given cache (may depend on properties of the cache).
      *
      */

@@ -15,7 +15,7 @@ class PebbleApp extends AbstractRadarApp {
     private static final String PACKAGE_NAME = "com.webmajstr.pebble_gc";
 
     PebbleApp() {
-        super(getString(R.string.cache_menu_pebble), R.id.cache_app_pebble, INTENT, PACKAGE_NAME);
+        super(getString(R.string.cache_menu_pebble), INTENT, PACKAGE_NAME);
     }
 
     @Override

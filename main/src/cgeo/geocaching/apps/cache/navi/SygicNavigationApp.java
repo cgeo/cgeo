@@ -22,7 +22,7 @@ class SygicNavigationApp extends AbstractPointNavigationApp {
     private static final String PACKAGE_VOUCHER = "com.sygic.aura_voucher";
 
     SygicNavigationApp() {
-        super(getString(R.string.cache_menu_sygic), R.id.cache_app_sygic, null, PACKAGE_NORMAL);
+        super(getString(R.string.cache_menu_sygic), null, PACKAGE_NORMAL);
     }
 
     @Override

@@ -11,7 +11,7 @@ class RadarApp extends AbstractRadarApp {
     private static final String PACKAGE_NAME = "com.eclipsim.gpsstatus2";
 
     RadarApp() {
-        super(getString(R.string.cache_menu_radar), R.id.cache_app_radar, INTENT, PACKAGE_NAME);
+        super(getString(R.string.cache_menu_radar), INTENT, PACKAGE_NAME);
     }
 
     @Override

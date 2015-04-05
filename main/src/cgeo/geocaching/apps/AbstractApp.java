@@ -16,21 +16,16 @@ public abstract class AbstractApp implements App {
     @Nullable private final String intent;
     @NonNull
     private final String name;
-    /**
-     * a unique id, defined in res/values/ids.xml
-     */
-    private final int id;
 
-    protected AbstractApp(@NonNull final String name, final int id, @Nullable final String intent,
+    protected AbstractApp(@NonNull final String name, @Nullable final String intent,
             @Nullable final String packageName) {
         this.name = name;
-        this.id = id;
         this.intent = intent;
         this.packageName = packageName;
     }
 
-    protected AbstractApp(@NonNull final String name, final int id, @Nullable final String intent) {
-        this(name, id, intent, null);
+    protected AbstractApp(@NonNull final String name, @Nullable final String intent) {
+        this(name, intent, null);
     }
 
     @Override
@@ -59,11 +54,6 @@ public abstract class AbstractApp implements App {
     @NonNull
     public String getName() {
         return name;
-    }
-
-    @Override
-    public int getId() {
-        return id;
     }
 
     protected static String getString(final int ressourceId) {

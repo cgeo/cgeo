@@ -17,12 +17,12 @@ import android.content.Intent;
  */
 abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNavigationApp, WaypointNavigationApp, GeopointNavigationApp {
 
-    protected AbstractPointNavigationApp(@NonNull final String name, final int id, final String intent) {
-        super(name, id, intent);
+    protected AbstractPointNavigationApp(@NonNull final String name, final String intent) {
+        super(name, intent);
     }
 
-    protected AbstractPointNavigationApp(@NonNull final String name, final int id, final String intent, final String packageName) {
-        super(name, id, intent, packageName);
+    protected AbstractPointNavigationApp(@NonNull final String name, final String intent, final String packageName) {
+        super(name, intent, packageName);
     }
 
     @Override

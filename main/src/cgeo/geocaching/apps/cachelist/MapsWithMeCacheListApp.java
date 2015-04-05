@@ -22,7 +22,7 @@ import java.util.List;
 public class MapsWithMeCacheListApp extends AbstractApp implements CacheListApp {
 
     protected MapsWithMeCacheListApp() {
-        super(getString(R.string.caches_map_mapswithme), R.id.cache_app_mapswithme, Intent.ACTION_VIEW);
+        super(getString(R.string.caches_map_mapswithme), Intent.ACTION_VIEW);
     }
 
     @Override

@@ -16,7 +16,7 @@ import android.net.Uri;
 class GoogleMapsApp extends AbstractPointNavigationApp {
 
     GoogleMapsApp() {
-        super(getString(R.string.cache_menu_map_ext), R.id.cache_app_google_maps, null);
+        super(getString(R.string.cache_menu_map_ext), null);
     }
 
     @Override

@@ -16,7 +16,7 @@ class RMapsApp extends AbstractPointNavigationApp {
     private static final String INTENT = "com.robert.maps.action.SHOW_POINTS";
 
     RMapsApp() {
-        super(getString(R.string.cache_menu_rmaps), R.id.cache_app_rmaps, INTENT);
+        super(getString(R.string.cache_menu_rmaps), INTENT);
     }
 
     @Override

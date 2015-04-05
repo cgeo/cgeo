@@ -12,7 +12,7 @@ import android.app.Activity;
 class InternalMap extends AbstractPointNavigationApp {
 
     InternalMap() {
-        super(getString(R.string.cache_menu_map), R.id.cache_app_internal_map, null);
+        super(getString(R.string.cache_menu_map), null);
     }
 
     @Override

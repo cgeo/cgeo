@@ -35,8 +35,8 @@ import java.util.Locale;
 public abstract class AbstractLocusApp extends AbstractApp {
     private static final SynchronizedDateFormat ISO8601DATE = new SynchronizedDateFormat("yyyy-MM-dd'T'", Locale.US);
 
-    protected AbstractLocusApp(@NonNull final String text, final int id, @NonNull final String intent) {
-        super(text, id, intent);
+    protected AbstractLocusApp(@NonNull final String text, @NonNull final String intent) {
+        super(text, intent);
     }
 
     @Override

@@ -11,7 +11,7 @@ import android.app.Activity;
 class CompassApp extends AbstractPointNavigationApp {
 
     CompassApp() {
-        super(getString(R.string.compass_title), R.id.cache_app_compass, null);
+        super(getString(R.string.compass_title), null);
     }
 
     @Override
