@@ -92,14 +92,14 @@
                 style="@style/button_full"
                 android:layout_width="0dip"
                 android:layout_weight="1"
-                android:text="@android:string/yes" />
+                android:text="@android:string/ok" />
 
             <Button
                 android:id="@+id/cancel"
                 style="@style/button_full"
                 android:layout_width="0dip"
                 android:layout_weight="1"
-                android:text="@android:string/no" />
+                android:text="@android:string/cancel" />
         </LinearLayout>
     </LinearLayout>
 
