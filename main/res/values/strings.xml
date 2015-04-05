@@ -236,6 +236,7 @@
     <string name="info_stored_image">New image saved to:</string>
     <string name="info_storing_static_maps">Trying to store static maps</string>
     <string name="info_cache_saved">The cache has been stored locally</string>
+    <string name="err_trackable_log_not_anonymous">Logging trackables from c:geo cannot be anonymous. Please connect to the service.</string>
 
     <!-- location service -->
     <string name="loc_last">Last known</string>
@@ -1354,7 +1355,6 @@
     <string name="init_summary_geokrety">Enable trackables from GeoKrety.org</string>
     <string name="init_summary_geokrety_cache">Improve loading speed.</string>
     <string name="init_summary_geokrety_account">No account configured.</string>
-    <string name="init_summary_geokrety_not_anonymous">Logging GeoKrety from c:geo cannot be anonymous. Please register.</string>
     <string name="init_geokrety_register_ok">Login successful</string>
     <string name="init_geokrety_register_fail">Login failed</string>
     <string name="init_geokrety_get_secid">Retrieve API key</string>

@@ -18,6 +18,9 @@ import java.util.List;
 public abstract class AbstractTrackableConnector implements TrackableConnector {
 
     @Override
+    public abstract int getPreferenceActivity();
+
+    @Override
     public boolean isLoggable() {
         return false;
     }

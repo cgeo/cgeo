@@ -43,6 +43,11 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     private static final String URLPROXY = "http://geokretymap.org";
 
     @Override
+    public int getPreferenceActivity() {
+        return R.string.preference_screen_geokrety;
+    }
+
+    @Override
     public boolean canHandleTrackable(final String geocode) {
         return geocode != null && PATTERN_GK_CODE.matcher(geocode).matches();
     }

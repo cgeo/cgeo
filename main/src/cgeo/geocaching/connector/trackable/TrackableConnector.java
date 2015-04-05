@@ -19,6 +19,8 @@ import java.util.List;
  */
 public interface TrackableConnector {
 
+    public int getPreferenceActivity();
+
     public boolean canHandleTrackable(final String geocode);
 
     /**

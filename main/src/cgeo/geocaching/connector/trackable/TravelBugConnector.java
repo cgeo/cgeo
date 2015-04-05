@@ -1,6 +1,7 @@
 package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.AbstractLoggingActivity;
+import cgeo.geocaching.R;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -22,6 +23,12 @@ public class TravelBugConnector extends AbstractTrackableConnector {
      * TB codes really start with TB1, there is no padding or minimum length
      */
     private final static Pattern PATTERN_TB_CODE = Pattern.compile("(TB[0-9A-Z]+)|([0-9A-Z]{6})", Pattern.CASE_INSENSITIVE);
+
+    @Override
+    public int getPreferenceActivity() {
+        return R.string.preference_screen_gc;
+    }
+
 
     @Override
     public boolean canHandleTrackable(final String geocode) {

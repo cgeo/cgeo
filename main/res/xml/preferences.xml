@@ -352,7 +352,7 @@
                 android:title="@string/init_geokrety" >
                 <PreferenceCategory android:title="@string/settings_settings" >
                     <CheckBoxPreference
-                        android:defaultValue="true"
+                        android:defaultValue="false"
                         android:key="@string/pref_connectorGeokretyActive"
                         android:summary="@string/init_summary_geokrety"
                         android:title="@string/init_connectorGeokretyActive" />
