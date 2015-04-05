@@ -1173,7 +1173,7 @@ public final class GCParser {
                 gcLogin.getLoginStatus(page);
                 // the log-successful-page contains still the old value
                 if (gcLogin.getActualCachesFound() >= 0) {
-                    gcLogin.setActualCachesFound(gcLogin.getActualCachesFound() + 1);
+                    gcLogin.setActualCachesFound(gcLogin.getActualCachesFound() + (logType.isFoundLog() ? 1 : 0));
                 }
 
                 final String logID = TextUtils.getMatch(page, GCConstants.PATTERN_LOG_IMAGE_UPLOAD, "");
