@@ -61,6 +61,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.SearchView.OnSuggestionListener;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -79,7 +80,7 @@ import java.util.List;
 
 public class MainActivity extends AbstractActionBarActivity {
     @InjectView(R.id.nav_satellites) protected TextView navSatellites;
-    @InjectView(R.id.filter_button_title)protected TextView filterTitle;
+    @InjectView(R.id.filter_button_title) protected TextView filterTitle;
     @InjectView(R.id.map) protected ImageView findOnMap;
     @InjectView(R.id.search_offline) protected ImageView findByOffline;
     @InjectView(R.id.advanced_button) protected ImageView advanced;
@@ -95,6 +96,10 @@ public class MainActivity extends AbstractActionBarActivity {
     public static final int SETTINGS_ACTIVITY_REQUEST_CODE = 1;
     public static final int SEARCH_REQUEST_CODE = 2;
 
+    /**
+     * view of the action bar search
+     */
+    private SearchView searchView;
     private Geopoint addCoords = null;
     private boolean initialized = false;
     private ConnectivityChangeReceiver connectivityChangeReceiver;
@@ -285,10 +290,29 @@ public class MainActivity extends AbstractActionBarActivity {
         getMenuInflater().inflate(R.menu.main_activity_options, menu);
         final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         final MenuItem searchItem = menu.findItem(R.id.menu_gosearch);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        hideKeyboardOnSearchClick(searchItem);
         presentShowcase();
         return true;
+    }
+
+    private void hideKeyboardOnSearchClick(final MenuItem searchItem) {
+        searchView.setOnSuggestionListener(new OnSuggestionListener() {
+
+            @Override
+            public boolean onSuggestionSelect(final int arg0) {
+                return false;
+            }
+
+            @Override
+            public boolean onSuggestionClick(final int arg0) {
+                MenuItemCompat.collapseActionView(searchItem);
+                searchView.setIconified(true);
+                // return false to invoke standard behavior of launching the intent for the search result
+                return false;
+            }
+        });
     }
 
     @Override
@@ -699,5 +723,16 @@ public class MainActivity extends AbstractActionBarActivity {
         return new ShowcaseViewBuilder(this)
                 .setTarget(new ActionViewTarget(this, ActionViewTarget.Type.OVERFLOW))
                 .setContent(R.string.showcase_main_title, R.string.showcase_main_text);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // back may exit the app instead of closing the search action bar
+        if (searchView != null && !searchView.isIconified()) {
+            searchView.setIconified(true);
+        }
+        else {
+            super.onBackPressed();
+        }
     }
 }
