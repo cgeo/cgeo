@@ -1,7 +1,9 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 import cgeo.geocaching.activity.TokenAuthorizationActivity.TokenAuthParameters;
+import cgeo.geocaching.connector.trackable.GeokretyAuthorizationActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +15,8 @@ public class TokenPreference extends AbstractClickablePreference {
     private static final int NO_KEY = -1;
 
     private enum TokenActivityMapping {
-        NONE(NO_KEY, null, null);
+        NONE(NO_KEY, null, null),
+        GEOKRETY(R.string.pref_fakekey_geokrety_authorization, GeokretyAuthorizationActivity.class, GeokretyAuthorizationActivity.GEOKRETY_TOKEN_AUTH_PARAMS);
 
         public final int prefKeyId;
         public final Class<?> authActivity;

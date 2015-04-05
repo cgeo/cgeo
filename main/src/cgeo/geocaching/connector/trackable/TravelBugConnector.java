@@ -31,7 +31,6 @@ public class TravelBugConnector extends AbstractTrackableConnector {
         return R.string.preference_screen_gc;
     }
 
-
     @Override
     public boolean canHandleTrackable(final String geocode) {
         return PATTERN_TB_CODE.matcher(geocode).matches() && !StringUtils.startsWithIgnoreCase(geocode, "GC");

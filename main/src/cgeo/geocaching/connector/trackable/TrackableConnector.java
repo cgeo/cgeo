@@ -19,6 +19,12 @@ import java.util.List;
  */
 public interface TrackableConnector {
 
+    /**
+     * Return the preference activity for which the connector is attached to.
+     * The service could be launched to ask user to configure something.
+     *
+     * @return the service ID corresponding to the preference activity for the connector
+     */
     public int getPreferenceActivity();
 
     public boolean canHandleTrackable(final String geocode);

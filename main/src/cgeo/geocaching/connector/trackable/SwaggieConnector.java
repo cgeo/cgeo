@@ -1,7 +1,5 @@
 package cgeo.geocaching.connector.trackable;
 
-import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.R;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.network.Network;
 
@@ -14,11 +12,6 @@ import java.util.regex.Pattern;
 public final class SwaggieConnector extends AbstractTrackableConnector {
 
     private static final Pattern PATTERN_SW_CODE = Pattern.compile("SW[0-9]{4}");
-
-    @Override
-    public int getPreferenceActivity() {
-        return 0;
-    }
 
     @Override
     public boolean canHandleTrackable(final String geocode) {

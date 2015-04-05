@@ -8,11 +8,6 @@ import org.eclipse.jdt.annotation.Nullable;
 public class UnknownTrackableConnector extends AbstractTrackableConnector {
 
     @Override
-    public int getPreferenceActivity() {
-        return 0;
-    }
-
-    @Override
     public boolean canHandleTrackable(final String geocode) {
         return false;
     }

@@ -151,7 +151,6 @@ public class SettingsActivity extends PreferenceActivity {
                 R.string.pref_gpxExportDir, R.string.pref_gpxImportDir,
                 R.string.pref_mapDirectory, R.string.pref_defaultNavigationTool,
                 R.string.pref_defaultNavigationTool2, R.string.pref_webDeviceName,
-                R.string.pref_geokrety_username, R.string.pref_geokrety_password,
                 R.string.pref_fakekey_preference_backup_info, R.string.pref_twitter_cache_message, R.string.pref_twitter_trackable_message,
                 R.string.pref_ecusername, R.string.pref_ecpassword, R.string.pref_ec_icons }) {
             bindSummaryToStringValue(k);
@@ -194,6 +193,7 @@ public class SettingsActivity extends PreferenceActivity {
         getPreference(R.string.pref_connectorGeokretyActive).setOnPreferenceChangeListener(VALUE_CHANGE_LISTENER);
         setWebsite(R.string.pref_fakekey_geokrety_website, "geokrety.org");
         setWebsite(R.string.pref_fakekey_geokretymap_website, "geokretymap.org");
+        setWebsite(R.string.pref_fakekey_geokrety_register, "geokrety.org/adduser.php");
         getPreference(R.string.preference_screen_geokrety).setSummary(getServiceSummary(Settings.isGeokretyConnectorActive()));
 
         setWebsite(R.string.pref_fakekey_sendtocgeo_website, "send2.cgeo.org");
@@ -519,6 +519,9 @@ public class SettingsActivity extends PreferenceActivity {
             case R.string.pref_fakekey_twitter_authorization:
                 setTwitterAuthTitle();
                 break;
+            case R.string.pref_fakekey_geokrety_authorization:
+                setGeokretyAuthTitle();
+                break;
             default:
                 Log.e(String.format(Locale.ENGLISH, "Invalid key %d in SettingsActivity.setTitle()", prefKeyId));
         }
@@ -536,6 +539,13 @@ public class SettingsActivity extends PreferenceActivity {
     private void setTwitterAuthTitle() {
         getPreference(R.string.pref_fakekey_twitter_authorization)
                 .setTitle(getString(Settings.hasTwitterAuthorization()
+                        ? R.string.settings_reauthorize
+                        : R.string.settings_authorize));
+    }
+
+    void setGeokretyAuthTitle() {
+        getPreference(R.string.pref_fakekey_geokrety_authorization)
+                .setTitle(getString(Settings.hasGeokretyAuthorization()
                         ? R.string.settings_reauthorize
                         : R.string.settings_authorize));
     }
@@ -599,6 +609,10 @@ public class SettingsActivity extends PreferenceActivity {
             case R.string.pref_fakekey_twitter_authorization:
                 setTwitterAuthTitle();
                 redrawScreen(R.string.preference_screen_twitter);
+                break;
+            case R.string.pref_fakekey_geokrety_authorization:
+                setGeokretyAuthTitle();
+                redrawScreen(R.string.preference_screen_geokrety);
                 break;
             default:
                 throw new IllegalArgumentException();

@@ -54,6 +54,12 @@ public class GeokretyConnector extends AbstractTrackableConnector {
 
     @Override
     @NonNull
+    public String getServiceTitle() {
+        return CgeoApplication.getInstance().getString(R.string.init_geokrety);
+    }
+
+    @Override
+    @NonNull
     public String getUrl(@NonNull final Trackable trackable) {
         return "http://geokrety.org/konkret.php?id=" + getId(trackable.getGeocode());
     }
@@ -181,7 +187,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
 
     @Override
     public boolean isActive() {
-        return Settings.isGeokretyConnectorActive();
+        return true;
     }
 
     @Override

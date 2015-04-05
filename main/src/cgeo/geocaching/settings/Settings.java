@@ -575,27 +575,23 @@ public class Settings {
     }
 
     public static boolean isGeokretyConnectorActive() {
-        return getBoolean(R.string.pref_connectorGeokretyActive, true);
+        return getBoolean(R.string.pref_connectorGeokretyActive, false);
     }
 
     public static boolean isGeokretyCacheActive() {
         return getBoolean(R.string.pref_geokrety_cache, true);
     }
 
-    static String getGeokretyUsername() {
-        return getString(R.string.pref_geokrety_username, null);
-    }
-
-    static String getGeokretyPassword() {
-        return getString(R.string.pref_geokrety_password, null);
+    static boolean hasGeokretyAuthorization() {
+        return StringUtils.isNotBlank(getGeokretySecId());
     }
 
     public static String getGeokretySecId() {
-        return getString(R.string.pref_geokrety_secid, null);
+        return getString(R.string.pref_fakekey_geokrety_authorization, null);
     }
 
-    static void setGeokretySecId(final String secid) {
-        putString(R.string.pref_geokrety_secid, secid);
+    public static void setGeokretySecId(final String secid) {
+        putString(R.string.pref_fakekey_geokrety_authorization, secid);
     }
 
     public static boolean isRegisteredForGeokretyLogging() {

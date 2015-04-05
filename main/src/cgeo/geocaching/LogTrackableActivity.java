@@ -466,7 +466,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
                 if (connector.isRegistered()) {
                     sendLog();
                 } else {
-                    showToast(res.getString(R.string.err_trackable_log_not_anonymous));
+                    showToast(res.getString(R.string.err_trackable_log_not_anonymous, connector.getServiceTitle()));
                     if (connector.getPreferenceActivity() > 0) {
                         SettingsActivity.openForScreen(connector.getPreferenceActivity(), this);
                     }

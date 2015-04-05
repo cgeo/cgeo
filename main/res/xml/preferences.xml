@@ -354,48 +354,26 @@
                     <CheckBoxPreference
                         android:defaultValue="false"
                         android:key="@string/pref_connectorGeokretyActive"
-                        android:summary="@string/init_summary_geokrety"
-                        android:title="@string/init_connectorGeokretyActive" />
-
-                    <EditTextPreference
-                        android:dependency="@string/pref_connectorGeokretyActive"
-                        android:dialogTitle="@string/init_username"
-                        android:hint="@string/init_username"
-                        android:imeOptions="actionDone"
-                        android:key="@string/pref_geokrety_username"
-                        android:singleLine="true"
-                        android:title="@string/init_username" />
-
-                    <cgeo.geocaching.settings.EditPasswordPreference
-                        android:dependency="@string/pref_connectorGeokretyActive"
-                        android:dialogTitle="@string/init_password"
-                        android:hint="@string/init_password"
-                        android:imeOptions="actionDone"
-                        android:inputType="textPassword"
-                        android:key="@string/pref_geokrety_password"
-                        android:singleLine="true"
-                        android:title="@string/init_password" />
+                        android:title="@string/settings_activate_geokrety" />
 
                     <cgeo.geocaching.settings.TextPreference
                         android:dependency="@string/pref_connectorGeokretyActive"
                         android:layout="@layout/text_preference"
                         android:text="@string/init_geokrety_description" />
 
-                    <cgeo.geocaching.settings.CheckGeokretyCredentialsPreference
+                    <cgeo.geocaching.settings.TokenPreference
                         android:dependency="@string/pref_connectorGeokretyActive"
-                        android:title="@string/init_geokrety_get_secid" />
-
-                    <cgeo.geocaching.settings.TextPreference
-                        android:dependency="@string/pref_connectorGeokretyActive"
-                        android:layout="@layout/text_preference"
-                        android:text="@string/init_geokrety_cache_description" />
-
+                        android:key="@string/pref_fakekey_geokrety_authorization" />
+                </PreferenceCategory>
+                <PreferenceCategory android:title="@string/settings_advanced" >
                     <CheckBoxPreference
                         android:defaultValue="true"
                         android:key="@string/pref_geokrety_cache"
-                        android:dependency="@string/pref_connectorGeokretyActive"
-                        android:summary="@string/init_summary_geokrety_cache"
                         android:title="@string/init_geokrety_cache" />
+
+                    <cgeo.geocaching.settings.TextPreference
+                        android:layout="@layout/text_preference"
+                        android:text="@string/init_geokrety_cache_description" />
                 </PreferenceCategory>
                 <PreferenceCategory android:title="@string/settings_information" >
                     <Preference

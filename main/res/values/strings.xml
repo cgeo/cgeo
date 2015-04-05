@@ -236,7 +236,7 @@
     <string name="info_stored_image">New image saved to:</string>
     <string name="info_storing_static_maps">Trying to store static maps</string>
     <string name="info_cache_saved">The cache has been stored locally</string>
-    <string name="err_trackable_log_not_anonymous">Logging trackables from c:geo cannot be anonymous. Please connect to the service.</string>
+    <string name="err_trackable_log_not_anonymous">Logging trackables from c:geo cannot be done anonymously. Please, fill in your credentials in the %s settings.</string>
 
     <!-- location service -->
     <string name="loc_last">Last known</string>
@@ -583,6 +583,7 @@
     <string name="settings_open_geokretymap_website">Open GeoKretyMap.org website</string>
     <string name="settings_settings">Settings</string>
     <string name="settings_information">Information</string>
+    <string name="settings_advanced">Advanced settings</string>
     <string name="settings_twitter_cache_message">Message for found cache</string>
     <string name="settings_twitter_trackable_message">Message for found trackable</string>
     <string name="init_ec_icons">Map Icons</string>
@@ -644,6 +645,11 @@
     <string name="auth_ocro">opencaching.ro</string>
     <string name="auth_ocuk">opencaching.org.uk</string>
     <string name="auth_dialog_completed_oc">c:geo is now authorized to interact with %s.</string>
+
+    <!-- auth geokrety -->
+    <string name="auth_dialog_completed_geokrety">c:geo is now authorized to interact with %s.</string>
+    <string name="err_auth_geokrety_bad_password">Your username/password seems invalid.</string>
+    <string name="err_auth_geokrety_unknown">%1$s returned: %2$s.</string>
 
     <!-- cache -->
     <plurals name="cache_counts">
@@ -1349,18 +1355,16 @@
     <string name="confirm_log_message">You want to log \'%s\'. Are you sure?</string>
 
     <!-- Geokrety -->
+    <string name="settings_activate_geokrety">Activate</string>
     <string name="init_geokrety">GeoKrety.org</string>
-    <string name="init_geokrety_login">Login on GeoKrety.org</string>
-    <string name="init_connectorGeokretyActive">GeoKrety Trackables</string>
+    <string name="init_connectorGeokretyActive">Geokrety Trackables</string>
     <string name="init_summary_geokrety">Enable trackables from GeoKrety.org</string>
-    <string name="init_summary_geokrety_cache">Improve loading speed.</string>
     <string name="init_summary_geokrety_account">No account configured.</string>
     <string name="init_geokrety_register_ok">Login successful</string>
     <string name="init_geokrety_register_fail">Login failed</string>
-    <string name="init_geokrety_get_secid">Retrieve API key</string>
-    <string name="init_geokrety_description">Store your API key in c:geo to ease logging GeoKrety</string>
-    <string name="init_geokrety_cache_description">GeoKretyMap.org provides cached datas for GeoKrety trackables. Datas may not be up to date!\nPositions: ~30min.\nDescriptions: ~24h.</string>
-    <string name="init_geokrety_cache">Use cached datas</string>
+    <string name="init_geokrety_description">Authorize c:geo with GeoKrety.org to log GeoKrety trackables.</string>
+    <string name="init_geokrety_cache_description">GeokretyMap.org provides cached datas for GeoKrety trackables.\nAvailable datas contains more GeoKrety informations like \'description\' or \'missing\' status.\n\nDatas are not live!\nPositions: ~30min.\nDescriptions: ~24h.</string>
+    <string name="init_geokrety_cache">Use GeoKretyMap.org</string>
     <string name="init_geokrety_userid">User Id: %s</string>
 
 </resources>
