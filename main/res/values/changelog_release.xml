@@ -2,38 +2,8 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false">\n
-    <b>2015.03.31:</b>\n
-    · Fix: Adaption to website changes on gc.com (login failed message on main screen)\n
-    · Updated translations\n
-    \n
-    \n
-    <b>2015.03.28:</b>\n
-    · Fix: Adaption to website changes on gc.com\n
-    · New: Distance and direction shown on map of a single cache\n
-    · New: Show own saved log first in logbook\n
-    · New: Show hint in compass and map action bar\n
-    · New: Sort events of same date by time (if recognized from cache description)\n
-    · New: Show number of trackables in cache list\n
-    · New: Weekday shown in event lists\n
-    · New: Show rudimentary details for geocaching.com.au swaggies\n
-    · New: Filter for caches with offline logs\n
-    · New: Allow export of waypoints without coords to Locus\n
-    · New: Confirmation on backup/restore\n
-    · New: Links in personal notes can be clicked\n
-    · New: Menu in cache details to open geo checker\n
-    · New: Map title shows more details\n
-    · Fix: Improve detection pattern for event start time\n
-    · Fix: Android Beam working with trackables again\n
-    · Fix: Disable Android Beam when not useful\n
-    · Fix: Don\'t allow logs in the future\n
-    · Fix: Allow shortcut creation for All caches list\n
-    · Fix: Some menus not available when invoking map from compass\n
-    · Fix: Do not limit to 10 logs for OC caches\n
-    · Fix: Recognize more hyperlinks of opencaching caches\n
-    · Fix: Remove empty space in some opencaching logs\n
-    · Fix: Allow up navigation when opening the app from a link\n
-    · Fix: Opening coord.info links from some mail clients was not working\n
-    · Removed: No longer support loading mapsforge 0.24 maps\n
+    <b>next bugfix release</b>\n
+    · Fix: wrong log count shown after logging something else than a found
     \n
     \n
     <b>Known Limitations/Bugs:</b>\n
