@@ -2,6 +2,7 @@ package cgeo.geocaching.location;
 
 import cgeo.geocaching.utils.MatcherWrapper;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -77,7 +78,7 @@ class GeopointParser {
 
     /**
      * Helper for coordinates-parsing
-     * 
+     *
      * @param text the text to parse
      * @param latlon the kind of coordinate to parse
      * @return a wrapper with the result and the corresponding matching part
@@ -120,8 +121,9 @@ class GeopointParser {
         // Nothing found with "N 52...", try to match string as decimal degree parts (i.e. multiple doubles)
         try {
             final String[] items = StringUtils.split(StringUtils.trimToEmpty(text));
-            if (items.length > 0 && items.length <= 2) {
-                final int index = (latlon == LatLon.LON ? items.length - 1 : 0);
+            final int length = ArrayUtils.getLength(items);
+            if (length > 0 && length <= 2) {
+                final int index = (latlon == LatLon.LON ? length - 1 : 0);
                 final String textPart = items[index];
                 final int pos = (latlon == LatLon.LON ? text.lastIndexOf(textPart) : text.indexOf(textPart));
                 return new ResultWrapper(Double.parseDouble(textPart), pos, textPart.length());
