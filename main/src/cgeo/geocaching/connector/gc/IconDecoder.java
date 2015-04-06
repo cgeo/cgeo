@@ -10,7 +10,7 @@ import android.graphics.Bitmap;
  * icon decoder for cache icons
  *
  */
-abstract class IconDecoder {
+final class IconDecoder {
     private static final int CT_TRADITIONAL = 0;
     private static final int CT_MULTI = 1;
     private static final int CT_MYSTERY = 2;
@@ -24,6 +24,10 @@ abstract class IconDecoder {
     private static final int CT_WHERIGO = 10;
     private static final int CT_VIRTUAL = 11;
     private static final int CT_LETTERBOX = 12;
+
+    private IconDecoder() {
+        throw new IllegalStateException("utility class");
+    }
 
     static boolean parseMapPNG(final Geocache cache, final Bitmap bitmap, final UTFGridPosition xy, final int zoomlevel) {
         final int topX = xy.getX() * 4;
