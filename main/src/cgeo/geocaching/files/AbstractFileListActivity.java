@@ -52,7 +52,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
         }
 
         private String getDefaultFolders() {
-            final ArrayList<String> names = new ArrayList<>();
+            final List<String> names = new ArrayList<>();
             for (final File dir : getExistingBaseFolders()) {
                 names.add(dir.getPath());
             }
@@ -213,7 +213,7 @@ public abstract class AbstractFileListActivity<T extends ArrayAdapter<File>> ext
     }
 
     protected List<File> getExistingBaseFolders() {
-        final ArrayList<File> result = new ArrayList<>();
+        final List<File> result = new ArrayList<>();
         for (final File dir : getBaseFolders()) {
             if (dir.exists() && dir.isDirectory()) {
                 result.add(dir);

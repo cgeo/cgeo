@@ -883,7 +883,7 @@ public class DataStore {
         if (ArrayUtils.isNotEmpty(files)) {
             final Pattern oldFilePattern = Pattern.compile("^[GC|TB|EC|GK|O][A-Z0-9]{4,7}$");
             final SQLiteStatement select = PreparedStatement.CHECK_IF_PRESENT.getStatement();
-            final ArrayList<File> toRemove = new ArrayList<>(files.length);
+            final List<File> toRemove = new ArrayList<>(files.length);
             for (final File file : files) {
                 if (file.isDirectory()) {
                     final String geocode = file.getName();
@@ -1070,8 +1070,8 @@ public class DataStore {
         if (CollectionUtils.isEmpty(caches)) {
             return;
         }
-        final ArrayList<String> cachesFromDatabase = new ArrayList<>();
-        final HashMap<String, Geocache> existingCaches = new HashMap<>();
+        final List<String> cachesFromDatabase = new ArrayList<>();
+        final Map<String, Geocache> existingCaches = new HashMap<>();
 
         // first check which caches are in the memory cache
         for (final Geocache cache : caches) {
@@ -1090,7 +1090,7 @@ public class DataStore {
             existingCaches.put(cacheFromDatabase.getGeocode(), cacheFromDatabase);
         }
 
-        final ArrayList<Geocache> toBeStored = new ArrayList<>();
+        final List<Geocache> toBeStored = new ArrayList<>();
         // Merge with the data already stored in the CacheCache or in the database if
         // the cache had not been loaded before, and update the CacheCache.
         // Also, a DB update is required if the merge data comes from the CacheCache
@@ -1270,7 +1270,7 @@ public class DataStore {
 
         final List<Waypoint> waypoints = cache.getWaypoints();
         if (CollectionUtils.isNotEmpty(waypoints)) {
-            final ArrayList<String> currentWaypointIds = new ArrayList<>();
+            final List<String> currentWaypointIds = new ArrayList<>();
             final ContentValues values = new ContentValues();
             final long timeStamp = System.currentTimeMillis();
             for (final Waypoint oneWaypoint : waypoints) {
@@ -2573,7 +2573,7 @@ public class DataStore {
     }
 
     @NonNull
-    private static ArrayList<StoredList> getListsFromCursor(final Cursor cursor) {
+    private static List<StoredList> getListsFromCursor(final Cursor cursor) {
         final int indexId = cursor.getColumnIndex("_id");
         final int indexTitle = cursor.getColumnIndex("title");
         final int indexCount = cursor.getColumnIndex("count");
@@ -2598,7 +2598,7 @@ public class DataStore {
                     null,
                     null,
                     null);
-            final ArrayList<StoredList> lists = getListsFromCursor(cursor);
+            final List<StoredList> lists = getListsFromCursor(cursor);
             if (!lists.isEmpty()) {
                 return lists.get(0);
             }
@@ -3136,12 +3136,12 @@ public class DataStore {
      * @return list of last caches opened in the details view, ordered by most recent first
      */
     @NonNull
-    public static ArrayList<Geocache> getLastOpenedCaches() {
+    public static List<Geocache> getLastOpenedCaches() {
         final List<String> geocodes = Settings.getLastOpenedCaches();
         final Set<Geocache> cachesSet = loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
 
         // order result set by time again
-        final ArrayList<Geocache> caches = new ArrayList<>(cachesSet);
+        final List<Geocache> caches = new ArrayList<>(cachesSet);
         Collections.sort(caches, new Comparator<Geocache>() {
 
             @Override

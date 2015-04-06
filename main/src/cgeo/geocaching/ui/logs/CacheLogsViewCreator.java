@@ -46,7 +46,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
 
     private List<LogEntry> addOwnOfflineLog(final Geocache cache, final List<LogEntry> logsIn) {
         final LogEntry log = DataStore.loadLogOffline(cache.getGeocode());
-        final ArrayList<LogEntry> logs = new ArrayList<>(logsIn);
+        final List<LogEntry> logs = new ArrayList<>(logsIn);
         if (log != null) {
             log.author = res.getString(R.string.log_your_saved_log);
             logs.add(0, log);
@@ -77,7 +77,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
                     }
                 });
 
-                final ArrayList<String> labels = new ArrayList<>(sortedLogCounts.size());
+                final List<String> labels = new ArrayList<>(sortedLogCounts.size());
                 for (final Entry<LogType, Integer> pair : sortedLogCounts) {
                     labels.add(pair.getValue() + "× " + pair.getKey().getL10n());
                 }

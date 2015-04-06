@@ -59,7 +59,7 @@ public class GeokretyLoggingManager extends AbstractTrackableLoggingManager {
     @Override
     @NonNull
     public List<LogTypeTrackable> getPossibleLogTypesTrackable() {
-        final ArrayList<LogTypeTrackable> list = new ArrayList<>();
+        final List<LogTypeTrackable> list = new ArrayList<>();
         list.add(LogTypeTrackable.RETRIEVED_IT);
         list.add(LogTypeTrackable.DISCOVERED_IT);
         list.add(LogTypeTrackable.DROPPED_OFF);

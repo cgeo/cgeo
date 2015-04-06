@@ -81,7 +81,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     private String prefix = "OWN";
     private String lookup = "---";
     private boolean own = true;
-    ArrayList<String> distanceUnits = null;
+    List<String> distanceUnits = null;
     /**
      * {@code true} if the activity is newly created, {@code false} if it is restored from an instance state
      */

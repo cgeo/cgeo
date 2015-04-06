@@ -47,6 +47,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -412,7 +413,7 @@ public final class ImageUtils {
             if (!REDRAW_QUEUE.isEmpty()) {
                 // Add a small margin so that drawables arriving between the beginning of the allocation and the draining
                 // of the queue might be absorbed without reallocation.
-                final ArrayList<ImmutablePair<ContainerDrawable, Drawable>> toRedraw = new ArrayList<>(REDRAW_QUEUE.size() + 16);
+                final List<ImmutablePair<ContainerDrawable, Drawable>> toRedraw = new ArrayList<>(REDRAW_QUEUE.size() + 16);
                 synchronized (lock) {
                     // Empty the queue inside the lock to match the check done in call().
                     REDRAW_QUEUE.drainTo(toRedraw);

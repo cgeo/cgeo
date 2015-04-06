@@ -330,7 +330,7 @@ public class Geocache implements IWaypoint {
             this.setWaypoints(other.waypoints, false);
         }
         else {
-            final ArrayList<Waypoint> newPoints = new ArrayList<>(waypoints);
+            final List<Waypoint> newPoints = new ArrayList<>(waypoints);
             Waypoint.mergeWayPoints(newPoints, other.waypoints, false);
             this.setWaypoints(newPoints, false);
         }
@@ -1029,7 +1029,7 @@ public class Geocache implements IWaypoint {
      */
     @NonNull
     public List<LogEntry> getFriendsLogs() {
-        final ArrayList<LogEntry> friendLogs = new ArrayList<>();
+        final List<LogEntry> friendLogs = new ArrayList<>();
         for (final LogEntry log : getLogs()) {
             if (log.friend) {
                 friendLogs.add(log);
@@ -1642,7 +1642,7 @@ public class Geocache implements IWaypoint {
         }
 
         final String hourLocalized = CgeoApplication.getInstance().getString(R.string.cache_time_full_hours);
-        final ArrayList<Pattern> patterns = new ArrayList<>();
+        final List<Pattern> patterns = new ArrayList<>();
 
         // 12:34
         patterns.add(Pattern.compile("\\b(\\d{1,2})\\:(\\d\\d)\\b"));
@@ -1680,7 +1680,7 @@ public class Geocache implements IWaypoint {
 
     @NonNull
     public Collection<Image> getImages() {
-        final LinkedList<Image> result = new LinkedList<>();
+        final List<Image> result = new LinkedList<>();
         result.addAll(getSpoilers());
         addLocalSpoilersTo(result);
         for (final LogEntry log : getLogs()) {

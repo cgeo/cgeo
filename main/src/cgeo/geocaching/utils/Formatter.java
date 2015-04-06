@@ -130,7 +130,7 @@ public final class Formatter {
     }
 
     public static String formatCacheInfoLong(final Geocache cache, final CacheListType cacheListType) {
-        final ArrayList<String> infos = new ArrayList<>();
+        final List<String> infos = new ArrayList<>();
         if (StringUtils.isNotBlank(cache.getGeocode())) {
             infos.add(cache.getGeocode());
         }
@@ -147,12 +147,12 @@ public final class Formatter {
     }
 
     public static String formatCacheInfoShort(final Geocache cache) {
-        final ArrayList<String> infos = new ArrayList<>();
+        final List<String> infos = new ArrayList<>();
         addShortInfos(cache, infos);
         return StringUtils.join(infos, SEPARATOR);
     }
 
-    private static void addShortInfos(final Geocache cache, final ArrayList<String> infos) {
+    private static void addShortInfos(final Geocache cache, final List<String> infos) {
         if (cache.hasDifficulty()) {
             infos.add("D " + formatDT(cache.getDifficulty()));
         }
@@ -176,7 +176,7 @@ public final class Formatter {
     }
 
     public static String formatCacheInfoHistory(final Geocache cache) {
-        final ArrayList<String> infos = new ArrayList<>(3);
+        final List<String> infos = new ArrayList<>(3);
         infos.add(StringUtils.upperCase(cache.getGeocode()));
         infos.add(formatDate(cache.getVisitedDate()));
         infos.add(formatTime(cache.getVisitedDate()));

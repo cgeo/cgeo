@@ -323,7 +323,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
         if (coords == null) {
             return;
         }
-        final ArrayList<Geocache> oldList = new ArrayList<>(list);
+        final List<Geocache> oldList = new ArrayList<>(list);
         Collections.sort(list, getPotentialInversion(new DistanceComparator(coords, list)));
 
         // avoid an update if the list has not changed due to location update
@@ -635,7 +635,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> {
     }
 
     public List<Geocache> getCheckedCaches() {
-        final ArrayList<Geocache> result = new ArrayList<>();
+        final List<Geocache> result = new ArrayList<>();
         for (final Geocache cache : list) {
             if (cache.isStatusChecked()) {
                 result.add(cache);

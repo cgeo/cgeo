@@ -23,7 +23,7 @@ import java.util.List;
 public class ImagesActivity extends AbstractActionBarActivity {
 
     private boolean offline;
-    private ArrayList<Image> imageNames;
+    private List<Image> imageNames;
     private ImageType imgType = ImageType.SpoilerImages;
     private ImagesList imagesList;
     private Subscription subscription;

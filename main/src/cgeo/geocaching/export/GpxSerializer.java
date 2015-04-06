@@ -57,7 +57,7 @@ public final class GpxSerializer {
 
     public void writeGPX(final List<String> allGeocodesIn, final Writer writer, final ProgressListener progressListener) throws IOException {
         // create a copy of the geocode list, as we need to modify it, but it might be immutable
-        final ArrayList<String> allGeocodes = new ArrayList<>(allGeocodesIn);
+        final List<String> allGeocodes = new ArrayList<>(allGeocodesIn);
 
         this.progressListener = progressListener;
         gpx.setOutput(writer);

@@ -30,7 +30,7 @@ public class OriginFilter extends AbstractFilter {
         @Override
         @NonNull
         public List<OriginFilter> getFilters() {
-            final ArrayList<OriginFilter> filters = new ArrayList<>();
+            final List<OriginFilter> filters = new ArrayList<>();
             for (final IConnector connector : ConnectorFactory.getConnectors()) {
                 filters.add(new OriginFilter(connector));
             }

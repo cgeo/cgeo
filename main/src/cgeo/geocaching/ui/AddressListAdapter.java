@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AddressListAdapter extends ArrayAdapter<Address> {
 
@@ -82,7 +83,7 @@ public class AddressListAdapter extends ArrayAdapter<Address> {
 
     private static CharSequence getAddressText(final Address address) {
         final int maxIndex = address.getMaxAddressLineIndex();
-        final ArrayList<String> lines = new ArrayList<>();
+        final List<String> lines = new ArrayList<>();
         for (int i = 0; i <= maxIndex; i++) {
             final String line = address.getAddressLine(i);
             if (StringUtils.isNotBlank(line)) {

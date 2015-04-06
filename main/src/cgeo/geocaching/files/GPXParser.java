@@ -391,10 +391,10 @@ public abstract class GPXParser extends FileParser {
                         waypoint.setCoords(cache.getCoords());
                         waypoint.setNote(cache.getDescription());
                         waypoint.setVisited(wptVisited);
-                        final ArrayList<Waypoint> mergedWayPoints = new ArrayList<>();
+                        final List<Waypoint> mergedWayPoints = new ArrayList<>();
                         mergedWayPoints.addAll(cacheForWaypoint.getWaypoints());
 
-                        final ArrayList<Waypoint> newPoints = new ArrayList<>();
+                        final List<Waypoint> newPoints = new ArrayList<>();
                         newPoints.add(waypoint);
                         Waypoint.mergeWayPoints(newPoints, mergedWayPoints, true);
                         cacheForWaypoint.setWaypoints(newPoints, false);

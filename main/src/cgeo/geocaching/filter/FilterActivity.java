@@ -92,7 +92,7 @@ public class FilterActivity extends AbstractActionBarActivity {
      * Creates the group list with the mapped properties.
      */
     private static List<Map<String, String>> createFilterTopLevelGroups() {
-        final ArrayList<Map<String, String>> groups = new ArrayList<>();
+        final List<Map<String, String>> groups = new ArrayList<>();
         for (final FactoryEntry factoryEntry : FilterRegistry.getInstance().getFactories()) {
             final Map<String, String> map = new HashMap<>();
             map.put(KEY_FILTER_GROUP_NAME, factoryEntry.getName());
@@ -111,7 +111,7 @@ public class FilterActivity extends AbstractActionBarActivity {
             final List<Map<String, String>> childGroups = new ArrayList<>(filters.size());
 
             for (final IFilter filter : filters) {
-                final HashMap<String, String> hashMap = new HashMap<>(1);
+                final Map<String, String> hashMap = new HashMap<>(1);
                 hashMap.put(KEY_FILTER_NAME, filter.getName());
                 hashMap.put("CHILD_NAME", filter.getName());
                 childGroups.add(hashMap);

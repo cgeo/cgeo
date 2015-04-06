@@ -30,7 +30,7 @@ public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
 
     private boolean hasLoaderError = true;
     private String[] viewstates = null;
-    private ArrayList<LogTypeTrackable> possibleLogTypesTrackable;
+    private List<LogTypeTrackable> possibleLogTypesTrackable;
 
     public TravelBugLoggingManager(final AbstractLoggingActivity activity) {
         super(activity);
@@ -94,7 +94,7 @@ public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
     @NonNull
     public List<LogTypeTrackable> getPossibleLogTypesTrackable() {
         if (hasLoaderError) {
-            final ArrayList<LogTypeTrackable> logTypes = new ArrayList<>();
+            final List<LogTypeTrackable> logTypes = new ArrayList<>();
             logTypes.add(LogTypeTrackable.RETRIEVED_IT);
             logTypes.add(LogTypeTrackable.GRABBED_IT);
             logTypes.add(LogTypeTrackable.NOTE);

@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 
 import org.eclipse.jdt.annotation.NonNull;
 import java.util.ArrayList;
+import java.util.List;
 
 public enum LogTypeTrackable {
     DO_NOTHING(1, -1, "", R.string.log_tb_nothing, LogType.UNKNOWN),
@@ -53,8 +54,8 @@ public enum LogTypeTrackable {
     }
 
     // Specify the list of trackable action when in LogCacheActivity
-    public static final ArrayList<LogTypeTrackable> getLogTypeTrackableForLogCache() {
-        final ArrayList<LogTypeTrackable> list = new ArrayList<>();
+    public static final List<LogTypeTrackable> getLogTypeTrackableForLogCache() {
+        final List<LogTypeTrackable> list = new ArrayList<>();
         list.add(DO_NOTHING);
         list.add(VISITED);
         list.add(DROPPED_OFF);

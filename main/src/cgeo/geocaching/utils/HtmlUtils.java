@@ -10,6 +10,7 @@ import android.text.style.ImageSpan;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public final class HtmlUtils {
 
@@ -32,7 +33,7 @@ public final class HtmlUtils {
         if (html instanceof Spanned) {
             final Spanned text = (Spanned) html;
             final Object[] styles = text.getSpans(0, text.length(), Object.class);
-            final ArrayList<Pair<Integer, Integer>> removals = new ArrayList<>();
+            final List<Pair<Integer, Integer>> removals = new ArrayList<>();
             for (final Object style : styles) {
                 if (style instanceof ImageSpan) {
                     final int start = text.getSpanStart(style);

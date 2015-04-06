@@ -457,7 +457,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
                     DataStore.saveChangedCache(cache);
 
                     // update logs in DB
-                    final ArrayList<LogEntry> newLogs = new ArrayList<>(cache.getLogs());
+                    final List<LogEntry> newLogs = new ArrayList<>(cache.getLogs());
                     final LogEntry logNow = new LogEntry(date.getTimeInMillis(), typeSelected, log);
                     logNow.friend = true;
                     newLogs.add(0, logNow);
@@ -554,7 +554,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         final Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(res.getString(R.string.log_tb_changeall));
 
-        final ArrayList<LogTypeTrackable> tbLogTypeValues = LogTypeTrackable.getLogTypeTrackableForLogCache();
+        final List<LogTypeTrackable> tbLogTypeValues = LogTypeTrackable.getLogTypeTrackableForLogCache();
         final String[] tbLogTypes = getTBLogTypes(tbLogTypeValues);
         alert.setItems(tbLogTypes, new OnClickListener() {
 
@@ -572,7 +572,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         alert.create().show();
     }
 
-    private static String[] getTBLogTypes(final ArrayList<LogTypeTrackable> tbLogTypeValues) {
+    private static String[] getTBLogTypes(final List<LogTypeTrackable> tbLogTypeValues) {
         final String[] tbLogTypes = new String[tbLogTypeValues.size()];
         for (int i = 0; i < tbLogTypes.length; i++) {
             tbLogTypes[i] = tbLogTypeValues.get(i).getLabel();
@@ -583,7 +583,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
 
     private void selectLogType() {
         // use a local copy of the possible types, as that one might be modified in the background by the loader
-        final ArrayList<LogType> possible = new ArrayList<>(possibleLogTypes);
+        final List<LogType> possible = new ArrayList<>(possibleLogTypes);
 
         final Builder alert = new AlertDialog.Builder(this);
         final String[] choices = new String[possible.size()];
@@ -606,7 +606,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements DateDia
         final Builder alert = new AlertDialog.Builder(this);
         final TrackableLog trackableLog = actionButtons.get(realViewId);
         alert.setTitle(trackableLog.name);
-        final ArrayList<LogTypeTrackable> tbLogTypeValues = LogTypeTrackable.getLogTypeTrackableForLogCache();
+        final List<LogTypeTrackable> tbLogTypeValues = LogTypeTrackable.getLogTypeTrackableForLogCache();
         final String[] tbLogTypes = getTBLogTypes(tbLogTypeValues);
         alert.setItems(tbLogTypes, new OnClickListener() {
 

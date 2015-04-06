@@ -78,7 +78,7 @@ public class GCMap {
                 throw new ParserException("No data inside JSON");
             }
 
-            final ArrayList<Geocache> caches = new ArrayList<>();
+            final List<Geocache> caches = new ArrayList<>();
             for (final JsonNode dataObject: dataArray) {
                 final Geocache cache = new Geocache();
                 cache.setName(dataObject.path("name").asText());
@@ -174,7 +174,7 @@ public class GCMap {
                 }
             }
 
-            final ArrayList<Geocache> caches = new ArrayList<>();
+            final List<Geocache> caches = new ArrayList<>();
             for (final Entry<String, List<UTFGridPosition>> entry : positions.entrySet()) {
                 final String id = entry.getKey();
                 final List<UTFGridPosition> pos = entry.getValue();

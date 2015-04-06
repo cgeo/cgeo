@@ -423,7 +423,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     private void addLocalTrackableLog(final String logText) {
         // TODO create a LogTrackableEntry. For now use "oldLogtype" as a temporary migration path
         final LogEntry logEntry = new LogEntry(date.getTimeInMillis(), typeSelected.oldLogtype, logText);
-        final ArrayList<LogEntry> modifiedLogs = new ArrayList<>(trackable.getLogs());
+        final List<LogEntry> modifiedLogs = new ArrayList<>(trackable.getLogs());
         modifiedLogs.add(0, logEntry);
         trackable.setLogs(modifiedLogs);
         DataStore.saveTrackable(trackable);

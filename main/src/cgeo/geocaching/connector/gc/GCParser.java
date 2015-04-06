@@ -146,7 +146,7 @@ public final class GCParser {
         final int rowsCount = rows.length;
 
         int excludedCaches = 0;
-        final ArrayList<Geocache> caches = new ArrayList<>();
+        final List<Geocache> caches = new ArrayList<>();
         for (int z = 1; z < rowsCount; z++) {
             final Geocache cache = new Geocache();
             final String row = rows[z];
@@ -583,7 +583,7 @@ public final class GCParser {
 
         // cache attributes
         try {
-            final ArrayList<String> attributes = new ArrayList<>();
+            final List<String> attributes = new ArrayList<>();
             final String attributesPre = TextUtils.getMatch(page, GCConstants.PATTERN_ATTRIBUTES, true, null);
             if (attributesPre != null) {
                 final MatcherWrapper matcherAttributesInside = new MatcherWrapper(GCConstants.PATTERN_ATTRIBUTESINSIDE, attributesPre);
@@ -1810,12 +1810,12 @@ public final class GCParser {
     }
 
     @NonNull
-    public static ArrayList<LogTypeTrackable> parseLogTypesTrackables(final String page) {
+    public static List<LogTypeTrackable> parseLogTypesTrackables(final String page) {
         if (StringUtils.isEmpty(page)) {
             return new ArrayList<>();
         }
 
-        final ArrayList<LogTypeTrackable> types = new ArrayList<>();
+        final List<LogTypeTrackable> types = new ArrayList<>();
 
         final MatcherWrapper typeBoxMatcher = new MatcherWrapper(GCConstants.PATTERN_TYPEBOX, page);
         if (typeBoxMatcher.find() && typeBoxMatcher.groupCount() > 0) {

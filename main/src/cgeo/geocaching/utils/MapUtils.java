@@ -12,6 +12,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.util.SparseArray;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public final class MapUtils {
 
@@ -99,8 +100,8 @@ public final class MapUtils {
 
     private static LayerDrawable createCacheMarker(final Resources res, final Geocache cache) {
         // Set initial capacities to the maximum of layers and insets to avoid dynamic reallocation
-        final ArrayList<Drawable> layers = new ArrayList<>(9);
-        final ArrayList<int[]> insets = new ArrayList<>(8);
+        final List<Drawable> layers = new ArrayList<>(9);
+        final List<int[]> insets = new ArrayList<>(8);
 
         // background: disabled or not
         final Drawable marker = res.getDrawable(cache.getMapMarkerId());

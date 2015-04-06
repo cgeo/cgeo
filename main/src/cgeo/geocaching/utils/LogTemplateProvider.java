@@ -12,6 +12,7 @@ import cgeo.geocaching.settings.Settings;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Provides all the available templates for logging.
@@ -106,8 +107,8 @@ public final class LogTemplateProvider {
     /**
      * @return all templates, but not the signature template itself
      */
-    public static ArrayList<LogTemplate> getTemplatesWithoutSignature() {
-        final ArrayList<LogTemplate> templates = new ArrayList<>();
+    public static List<LogTemplate> getTemplatesWithoutSignature() {
+        final List<LogTemplate> templates = new ArrayList<>();
         templates.add(new LogTemplate("DATE", R.string.init_signature_template_date) {
 
             @Override
@@ -236,8 +237,8 @@ public final class LogTemplateProvider {
     /**
      * @return all templates, including the signature template
      */
-    public static ArrayList<LogTemplate> getTemplatesWithSignature() {
-        final ArrayList<LogTemplate> templates = getTemplatesWithoutSignature();
+    public static List<LogTemplate> getTemplatesWithSignature() {
+        final List<LogTemplate> templates = getTemplatesWithoutSignature();
         templates.add(new LogTemplate("SIGNATURE", R.string.init_signature) {
             @Override
             public String getValue(final LogContext context) {

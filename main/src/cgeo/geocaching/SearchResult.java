@@ -28,6 +28,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class SearchResult implements Parcelable {
@@ -221,7 +222,7 @@ public class SearchResult implements Parcelable {
 
         final SearchResult result = new SearchResult(this);
         result.geocodes.clear();
-        final ArrayList<Geocache> includedCaches = new ArrayList<>();
+        final List<Geocache> includedCaches = new ArrayList<>();
         final Set<Geocache> caches = DataStore.loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
         int excluded = 0;
         for (final Geocache cache : caches) {

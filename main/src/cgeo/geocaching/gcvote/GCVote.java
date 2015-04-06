@@ -157,12 +157,12 @@ public final class GCVote {
         return true;
     }
 
-    public static void loadRatings(final @NonNull ArrayList<Geocache> caches) {
+    public static void loadRatings(final @NonNull List<Geocache> caches) {
         if (!Settings.isRatingWanted()) {
             return;
         }
 
-        final ArrayList<String> geocodes = getVotableGeocodes(caches);
+        final List<String> geocodes = getVotableGeocodes(caches);
         if (geocodes.isEmpty()) {
             return;
         }
@@ -189,8 +189,8 @@ public final class GCVote {
      * Get geocodes of all the caches, which can be used with GCVote. Non-GC caches will be filtered out.
      */
     private static @NonNull
-    ArrayList<String> getVotableGeocodes(final @NonNull Collection<Geocache> caches) {
-        final ArrayList<String> geocodes = new ArrayList<>(caches.size());
+    List<String> getVotableGeocodes(final @NonNull Collection<Geocache> caches) {
+        final List<String> geocodes = new ArrayList<>(caches.size());
         for (final Geocache cache : caches) {
             final String geocode = cache.getGeocode();
             if (StringUtils.isNotBlank(geocode) && cache.supportsGCVote()) {

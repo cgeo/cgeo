@@ -193,7 +193,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     private boolean requireGeodata;
     private Subscription geoDataSubscription = Subscriptions.empty();
 
-    private ArrayList<TrackableConnector> trackablesConnectors;
+    private List<TrackableConnector> trackablesConnectors;
 
     @Override
     public Loader<List<Trackable>> onCreateLoader(final int id, final Bundle bundle) {
@@ -1814,7 +1814,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
             // TODO: fix layout, then switch back to Android-resource and delete copied one
             // this copy is modified to respect the text color
             final TrackableListAdapter adapterTrackables = new TrackableListAdapter(CacheDetailActivity.this);
-            final HashMap<String, Trackable> trackables = new HashMap<>();
+            final Map<String, Trackable> trackables = new HashMap<>();
             if (cache.getInventory() != null) {
                 for (final Trackable trackable: cache.getInventory()) {
                     trackables.put(trackable.getUniqueID(), trackable);

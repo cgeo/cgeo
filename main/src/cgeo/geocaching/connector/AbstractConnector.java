@@ -223,7 +223,7 @@ public abstract class AbstractConnector implements IConnector {
     @Override
     @NonNull
     public final Collection<String> getCapabilities() {
-        final ArrayList<String> list = new ArrayList<>();
+        final List<String> list = new ArrayList<>();
         addCapability(list, ISearchByViewPort.class, R.string.feature_search_live_map);
         addCapability(list, ISearchByKeyword.class, R.string.feature_search_keyword);
         addCapability(list, ISearchByCenter.class, R.string.feature_search_center);
@@ -248,7 +248,7 @@ public abstract class AbstractConnector implements IConnector {
         return list;
     }
 
-    private void addCapability(final ArrayList<String> capabilities, final Class<? extends IConnector> clazz, final int featureResourceId) {
+    private void addCapability(final List<String> capabilities, final Class<? extends IConnector> clazz, final int featureResourceId) {
         if (clazz.isInstance(this)) {
             capabilities.add(feature(featureResourceId));
         }
@@ -290,7 +290,7 @@ public abstract class AbstractConnector implements IConnector {
      */
     static @NonNull
     public List<UserAction> getDefaultUserActions() {
-        final ArrayList<UserAction> actions = new ArrayList<>();
+        final List<UserAction> actions = new ArrayList<>();
         if (ContactsAddon.isAvailable()) {
             actions.add(new UserAction(R.string.user_menu_open_contact, new Action1<UserAction.Context>() {
 

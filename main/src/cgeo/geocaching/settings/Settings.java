@@ -1116,7 +1116,7 @@ public class Settings {
     }
 
     public static void addCacheToHistory(@NonNull final String geocode) {
-        final ArrayList<String> history = new ArrayList<>(getLastOpenedCaches());
+        final List<String> history = new ArrayList<>(getLastOpenedCaches());
         // bring entry to front, if it already existed
         history.remove(geocode);
         history.add(0, geocode);

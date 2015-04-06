@@ -109,7 +109,7 @@ public class MapProviderFactory {
      * remove offline map sources after changes of the settings
      */
     public static void deleteOfflineMapSources() {
-        final ArrayList<MapSource> deletion = new ArrayList<>();
+        final List<MapSource> deletion = new ArrayList<>();
         for (final MapSource mapSource : mapSources) {
             if (mapSource instanceof MapsforgeMapProvider.OfflineMapSource) {
                 deletion.add(mapSource);

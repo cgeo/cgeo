@@ -152,7 +152,7 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     private static String formatAddress(final Address address) {
-        final ArrayList<String> addressParts = new ArrayList<>();
+        final List<String> addressParts = new ArrayList<>();
 
         final String countryName = address.getCountryName();
         if (countryName != null) {
