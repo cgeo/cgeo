@@ -33,7 +33,7 @@ public final class CalendarUtils {
             return false;
         }
         final Date hiddenDate = cache.getHiddenDate();
-        return hiddenDate != null && CalendarUtils.daysSince(hiddenDate.getTime()) > 0;
+        return hiddenDate != null && daysSince(hiddenDate.getTime()) > 0;
     }
 
     /**

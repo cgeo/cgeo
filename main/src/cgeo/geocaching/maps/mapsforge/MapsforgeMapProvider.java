@@ -61,7 +61,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
                 if (ArrayUtils.isNotEmpty(files)) {
                     for (final File file : files) {
                         if (file.getName().endsWith(".map")) {
-                            if (MapsforgeMapProvider.isValidMapFile(file.getAbsolutePath())) {
+                            if (isValidMapFile(file.getAbsolutePath())) {
                                 mapFileList.add(file.getAbsolutePath());
                             }
                         }

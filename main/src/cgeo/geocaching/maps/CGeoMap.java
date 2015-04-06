@@ -1078,7 +1078,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                         final boolean needsRepaintForHeading = needsRepaintForHeading();
 
                         if (needsRepaintForDistanceOrAccuracy) {
-                            if (CGeoMap.followMyLocation) {
+                            if (followMyLocation) {
                                 map.centerMap(new Geopoint(currentLocation));
                             }
                         }
@@ -1257,7 +1257,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
             if (mapMode == MapMode.LIVE) {
                 synchronized(caches) {
-                    CGeoMap.filter(caches);
+                    filter(caches);
                 }
             }
             countVisibleCaches();
@@ -1332,7 +1332,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             downloaded = true;
 
             final Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-            CGeoMap.filter(result);
+            filter(result);
             // update the caches
             // first remove filtered out
             final Set<String> filteredCodes = searchResult.getFilteredGeocodes();

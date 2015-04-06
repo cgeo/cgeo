@@ -85,7 +85,7 @@ public final class TextUtils {
      * @return defaultValue or the first group if the pattern matches (trimmed if wanted)
      */
     public static String getMatch(final String data, final Pattern pattern, final boolean trim, final String defaultValue) {
-        return TextUtils.getMatch(data, pattern, trim, 1, defaultValue, false);
+        return getMatch(data, pattern, trim, 1, defaultValue, false);
     }
 
     /**
@@ -100,7 +100,7 @@ public final class TextUtils {
      * @return defaultValue or the first group if the pattern matches (trimmed)
      */
     public static String getMatch(@Nullable final String data, final Pattern pattern, final String defaultValue) {
-        return TextUtils.getMatch(data, pattern, true, 1, defaultValue, false);
+        return getMatch(data, pattern, true, 1, defaultValue, false);
     }
 
     /**

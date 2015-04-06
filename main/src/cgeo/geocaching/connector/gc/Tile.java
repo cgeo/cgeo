@@ -278,7 +278,7 @@ public class Tile {
      *
      */
     protected static Set<Tile> getTilesForViewport(final Viewport viewport) {
-        return getTilesForViewport(viewport, 2, Tile.ZOOMLEVEL_MIN);
+        return getTilesForViewport(viewport, 2, ZOOMLEVEL_MIN);
     }
 
     /**
@@ -290,8 +290,8 @@ public class Tile {
     protected static Set<Tile> getTilesForViewport(final Viewport viewport, final int tilesOnAxis, final int minZoom) {
         final Set<Tile> tiles = new HashSet<>();
         final int zoom = Math.max(
-                Math.min(Tile.calcZoomLon(viewport.bottomLeft, viewport.topRight, tilesOnAxis),
-                        Tile.calcZoomLat(viewport.bottomLeft, viewport.topRight, tilesOnAxis)),
+                Math.min(calcZoomLon(viewport.bottomLeft, viewport.topRight, tilesOnAxis),
+                        calcZoomLat(viewport.bottomLeft, viewport.topRight, tilesOnAxis)),
                 minZoom);
 
         final Tile tileBottomLeft = new Tile(viewport.bottomLeft, zoom);

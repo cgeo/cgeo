@@ -63,7 +63,7 @@ public enum LogTypeTrackable {
 
     // Some log type doesn't need Coordinates
     public static boolean isCoordinatesNeeded(final LogTypeTrackable typeSelected) {
-        return !(LogTypeTrackable.RETRIEVED_IT == typeSelected || LogTypeTrackable.NOTE == typeSelected);
+        return !(RETRIEVED_IT == typeSelected || NOTE == typeSelected);
     }
 
 }

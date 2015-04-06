@@ -249,7 +249,7 @@ public final class StaticMapsProvider {
         final int waypointId = waypoint.getId();
         final int waypointMapHash = waypoint.getStaticMapsHashcode();
         for (int level = 1; level <= MAPS_LEVEL_MAX; level++) {
-            final File mapFile = StaticMapsProvider.getMapFile(geocode, WAYPOINT_PREFIX + waypointId + "_" + waypointMapHash + '_' + level, false);
+            final File mapFile = getMapFile(geocode, WAYPOINT_PREFIX + waypointId + "_" + waypointMapHash + '_' + level, false);
             if (!FileUtils.delete(mapFile)) {
                 Log.e("StaticMapsProvider.removeWpStaticMaps failed for " + mapFile.getAbsolutePath());
             }
@@ -267,7 +267,7 @@ public final class StaticMapsProvider {
             return false;
         }
         for (int level = 1; level <= MAPS_LEVEL_MAX; level++) {
-            final File mapFile = StaticMapsProvider.getMapFile(geocode, String.valueOf(level), false);
+            final File mapFile = getMapFile(geocode, String.valueOf(level), false);
             if (mapFile.exists()) {
                 return true;
             }
@@ -284,7 +284,7 @@ public final class StaticMapsProvider {
         final int waypointId = waypoint.getId();
         final int waypointMapHash = waypoint.getStaticMapsHashcode();
         for (int level = 1; level <= MAPS_LEVEL_MAX; level++) {
-            final File mapFile = StaticMapsProvider.getMapFile(geocode, WAYPOINT_PREFIX + waypointId + "_" + waypointMapHash + "_" + level, false);
+            final File mapFile = getMapFile(geocode, WAYPOINT_PREFIX + waypointId + "_" + waypointMapHash + "_" + level, false);
             if (mapFile.exists()) {
                 return true;
             }
@@ -301,7 +301,7 @@ public final class StaticMapsProvider {
         final int waypointId = waypoint.getId();
         final int waypointMapHash = waypoint.getStaticMapsHashcode();
         for (int level = 1; level <= MAPS_LEVEL_MAX; level++) {
-            final File mapFile = StaticMapsProvider.getMapFile(geocode, WAYPOINT_PREFIX + waypointId + "_" + waypointMapHash + "_" + level, false);
+            final File mapFile = getMapFile(geocode, WAYPOINT_PREFIX + waypointId + "_" + waypointMapHash + "_" + level, false);
             final boolean mapExists = mapFile.exists();
             if (!mapExists) {
                 return false;
@@ -311,17 +311,17 @@ public final class StaticMapsProvider {
     }
 
     public static Bitmap getPreviewMap(final Geocache cache) {
-        return decodeFile(StaticMapsProvider.getMapFile(cache.getGeocode(), PREFIX_PREVIEW, false));
+        return decodeFile(getMapFile(cache.getGeocode(), PREFIX_PREVIEW, false));
     }
 
     public static Bitmap getWaypointMap(final String geocode, final Waypoint waypoint, final int level) {
         final int waypointId = waypoint.getId();
         final int waypointMapHash = waypoint.getStaticMapsHashcode();
-        return decodeFile(StaticMapsProvider.getMapFile(geocode, WAYPOINT_PREFIX + waypointId + "_" + waypointMapHash + "_" + level, false));
+        return decodeFile(getMapFile(geocode, WAYPOINT_PREFIX + waypointId + "_" + waypointMapHash + "_" + level, false));
     }
 
     public static Bitmap getCacheMap(final String geocode, final int level) {
-        return decodeFile(StaticMapsProvider.getMapFile(geocode, String.valueOf(level), false));
+        return decodeFile(getMapFile(geocode, String.valueOf(level), false));
     }
 
     private static Bitmap decodeFile(final File mapFile) {

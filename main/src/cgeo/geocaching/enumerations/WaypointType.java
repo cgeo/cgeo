@@ -44,7 +44,7 @@ public enum WaypointType {
     static {
         for (final WaypointType wt : values()) {
             FIND_BY_ID.put(wt.id, wt);
-            if (wt != WaypointType.OWN && wt != WaypointType.ORIGINAL) {
+            if (wt != OWN && wt != ORIGINAL) {
                 ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL_TMP.add(wt);
             }
         }

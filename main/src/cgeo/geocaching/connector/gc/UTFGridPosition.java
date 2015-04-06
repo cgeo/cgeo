@@ -38,7 +38,7 @@ final class UTFGridPosition {
      *            Key in the format (xx, xx)
      */
     static UTFGridPosition fromString(final String key) {
-        final MatcherWrapper matcher = new MatcherWrapper(UTFGridPosition.PATTERN_JSON_KEY, key);
+        final MatcherWrapper matcher = new MatcherWrapper(PATTERN_JSON_KEY, key);
         try {
             if (matcher.matches()) {
                 final int x = Integer.parseInt(matcher.group(1));

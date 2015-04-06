@@ -168,7 +168,7 @@ public final class GCVote {
         }
 
         try {
-            final Map<String, GCVoteRating> ratings = GCVote.getRating(null, geocodes);
+            final Map<String, GCVoteRating> ratings = getRating(null, geocodes);
 
             // save found cache coordinates
             for (final Geocache cache : caches) {

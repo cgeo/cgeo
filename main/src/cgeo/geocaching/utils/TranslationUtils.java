@@ -56,7 +56,7 @@ public final class TranslationUtils {
      *            The text to be translated
      */
     public static void startActivityTranslate(final Activity activity, final String toLang, final String text) {
-        if (text.length() > TranslationUtils.TRANSLATION_TEXT_LENGTH_WARN) {
+        if (text.length() > TRANSLATION_TEXT_LENGTH_WARN) {
             ActivityMixin.showToast(activity, R.string.translate_length_warning);
         }
         activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(buildTranslationURI(toLang, text))));

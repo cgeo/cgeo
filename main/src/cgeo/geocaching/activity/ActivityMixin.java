@@ -77,7 +77,7 @@ public final class ActivityMixin {
      * @param resId the message
      */
     public static void showToast(final Activity activity, final int resId) {
-        ActivityMixin.showToast(activity, activity.getString(resId));
+        showToast(activity, activity.getString(resId));
     }
 
     private static void showCgeoToast(final Context context, final String text, final int toastDuration) {
@@ -103,7 +103,7 @@ public final class ActivityMixin {
      */
     public static void showApplicationToast(final String message) {
         final Context context = new ContextThemeWrapper(CgeoApplication.getInstance().getApplicationContext(), getThemeId());
-        ActivityMixin.showCgeoToast(context, message, Toast.LENGTH_LONG);
+        showCgeoToast(context, message, Toast.LENGTH_LONG);
     }
 
     /**

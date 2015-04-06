@@ -42,7 +42,7 @@ public class EditNoteDialog extends DialogFragment {
         final EditNoteDialog dialog = new EditNoteDialog();
 
         final Bundle arguments = new Bundle();
-        arguments.putString(EditNoteDialog.ARGUMENT_INITIAL_NOTE, initialNote);
+        arguments.putString(ARGUMENT_INITIAL_NOTE, initialNote);
         dialog.setArguments(arguments);
 
         return dialog;

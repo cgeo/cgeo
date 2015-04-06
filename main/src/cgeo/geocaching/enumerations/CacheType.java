@@ -82,7 +82,7 @@ public enum CacheType {
 
     @NonNull
     public static CacheType getById(final String id) {
-        final CacheType result = (id != null) ? CacheType.FIND_BY_ID.get(id.toLowerCase(Locale.US).trim()) : null;
+        final CacheType result = (id != null) ? FIND_BY_ID.get(id.toLowerCase(Locale.US).trim()) : null;
         if (result == null) {
             return UNKNOWN;
         }
@@ -91,7 +91,7 @@ public enum CacheType {
 
     @NonNull
     public static CacheType getByPattern(final String pattern) {
-        final CacheType result = (pattern != null) ? CacheType.FIND_BY_PATTERN.get(pattern.toLowerCase(Locale.US).trim()) : null;
+        final CacheType result = (pattern != null) ? FIND_BY_PATTERN.get(pattern.toLowerCase(Locale.US).trim()) : null;
         if (result == null) {
             return UNKNOWN;
         }
@@ -100,7 +100,7 @@ public enum CacheType {
 
     @NonNull
     public static CacheType getByGuid(final String id) {
-        final CacheType result = (id != null) ? CacheType.FIND_BY_GUID.get(id) : null;
+        final CacheType result = (id != null) ? FIND_BY_GUID.get(id) : null;
         if (result == null) {
             return UNKNOWN;
         }

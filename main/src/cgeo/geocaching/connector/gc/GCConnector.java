@@ -86,7 +86,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean canHandle(@NonNull final String geocode) {
-        return GCConnector.PATTERN_GC_CODE.matcher(geocode).matches();
+        return PATTERN_GC_CODE.matcher(geocode).matches();
     }
 
     @Override

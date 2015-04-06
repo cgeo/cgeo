@@ -74,7 +74,7 @@ public final class LocalStorage {
     private static File getStorageSpecific(final boolean secondary) {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) ^ secondary ?
                 getExternalStorageBase() :
-                new File(getInternalStorageBase(), LocalStorage.CACHE_DIRNAME);
+                new File(getInternalStorageBase(), CACHE_DIRNAME);
     }
 
     public static File getExternalDbDirectory() {
@@ -86,7 +86,7 @@ public final class LocalStorage {
     }
 
     private static File getExternalStorageBase() {
-        return new File(Environment.getExternalStorageDirectory(), LocalStorage.CACHE_DIRNAME);
+        return new File(Environment.getExternalStorageDirectory(), CACHE_DIRNAME);
     }
 
     private static File getInternalStorageBase() {
@@ -405,7 +405,7 @@ public final class LocalStorage {
                 return filename.startsWith(filenamePrefix);
             }
         };
-        return LocalStorage.getStorageDir(geocode).listFiles(filter);
+        return getStorageDir(geocode).listFiles(filter);
     }
 
     /**

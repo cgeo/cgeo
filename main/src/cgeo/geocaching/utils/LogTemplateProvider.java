@@ -245,7 +245,7 @@ public final class LogTemplateProvider {
                 if (StringUtils.contains(nestedTemplate, "SIGNATURE")) {
                     return "invalid signature template";
                 }
-                return LogTemplateProvider.applyTemplates(nestedTemplate, context);
+                return applyTemplates(nestedTemplate, context);
             }
         });
         return templates;

@@ -49,7 +49,7 @@ public enum CacheSize {
             FIND_BY_ID.put(cs.ocSize2.toLowerCase(Locale.US), cs);
         }
         // add medium as additional string for Regular
-        FIND_BY_ID.put("medium", CacheSize.REGULAR);
+        FIND_BY_ID.put("medium", REGULAR);
     }
 
     @NonNull
@@ -58,12 +58,12 @@ public enum CacheSize {
             return UNKNOWN;
         }
         // avoid String operations for performance reasons
-        final CacheSize result = CacheSize.FIND_BY_ID.get(id);
+        final CacheSize result = FIND_BY_ID.get(id);
         if (result != null) {
             return result;
         }
         // only if String was not found, normalize it
-        final CacheSize resultNormalized = CacheSize.FIND_BY_ID.get(id.toLowerCase(Locale.US).trim());
+        final CacheSize resultNormalized = FIND_BY_ID.get(id.toLowerCase(Locale.US).trim());
         if (resultNormalized != null) {
             return resultNormalized;
         }

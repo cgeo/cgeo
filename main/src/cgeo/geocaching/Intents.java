@@ -82,7 +82,7 @@ public class Intents {
     public static final String INTENT_CACHE_CHANGED = PREFIX_INTERNAL + "cache-changed";
 
     public static Intent putListType(final Intent intent, final @NonNull CacheListType listType) {
-        intent.putExtra(Intents.EXTRA_LIST_TYPE, listType.name());
+        intent.putExtra(EXTRA_LIST_TYPE, listType.name());
         return intent;
     }
 
@@ -91,7 +91,7 @@ public class Intents {
         if (extras == null) {
             return CacheListType.OFFLINE;
         }
-        final String typeName = extras.getString(Intents.EXTRA_LIST_TYPE);
+        final String typeName = extras.getString(EXTRA_LIST_TYPE);
         if (StringUtils.isBlank(typeName)) {
             return CacheListType.OFFLINE;
         }

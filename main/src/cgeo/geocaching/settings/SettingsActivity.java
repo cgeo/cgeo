@@ -98,7 +98,7 @@ public class SettingsActivity extends PreferenceActivity {
 
         initDeviceSpecificPreferences();
         initUnitPreferences();
-        SettingsActivity.addPreferencesFromResource(this, R.xml.preferences);
+        addPreferencesFromResource(this, R.xml.preferences);
         initPreferences();
 
         final Intent intent = getIntent();
@@ -225,7 +225,7 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
     private Preference getPreference(final int keyId) {
-        return SettingsActivity.findPreference(this, getKey(keyId));
+        return findPreference(this, getKey(keyId));
     }
 
     /**

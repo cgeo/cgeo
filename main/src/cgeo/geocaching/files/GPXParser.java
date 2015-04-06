@@ -252,7 +252,7 @@ public abstract class GPXParser extends FileParser {
 
         // @return  baseName + "_yes" or "_no" e.g. "food_no" or "uv_yes"
         public static String getInternalId(final int attributeId, final boolean active) {
-            final String baseName = CacheAttributeTranslator.getBaseName(attributeId);
+            final String baseName = getBaseName(attributeId);
             if (baseName == null) {
                 return null;
             }

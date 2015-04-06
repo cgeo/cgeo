@@ -1324,7 +1324,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         if (id == PseudoList.HISTORY_LIST.id) {
-            startActivity(CacheListActivity.getHistoryIntent(this));
+            startActivity(getHistoryIntent(this));
             finish();
             return;
         }

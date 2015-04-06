@@ -98,7 +98,7 @@ public enum LogType {
         if ("68".equals(imageType)) {
             return POST_REVIEWER_NOTE;
         }
-        final LogType result = imageType != null ? LogType.FIND_BY_ICONNAME.get(imageType.toLowerCase(Locale.US).trim()) : null;
+        final LogType result = imageType != null ? FIND_BY_ICONNAME.get(imageType.toLowerCase(Locale.US).trim()) : null;
         if (result == null) {
             return UNKNOWN;
         }
@@ -107,7 +107,7 @@ public enum LogType {
 
     @NonNull
     public static LogType getByType(final String type) {
-        final LogType result = type != null ? LogType.FIND_BY_TYPE.get(type.toLowerCase(Locale.US).trim()) : null;
+        final LogType result = type != null ? FIND_BY_TYPE.get(type.toLowerCase(Locale.US).trim()) : null;
         if (result == null) {
             return UNKNOWN;
         }
@@ -120,7 +120,7 @@ public enum LogType {
     }
 
     public final boolean isFoundLog() {
-        return this == LogType.FOUND_IT || this == LogType.ATTENDED || this == LogType.WEBCAM_PHOTO_TAKEN;
+        return this == FOUND_IT || this == ATTENDED || this == WEBCAM_PHOTO_TAKEN;
     }
 
     public boolean mustConfirmLog() {

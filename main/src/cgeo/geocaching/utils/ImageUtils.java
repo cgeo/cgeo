@@ -173,7 +173,7 @@ public final class ImageUtils {
             return null;
         }
         final BitmapDrawable scaledImage = scaleBitmapTo(image, maxXY, maxXY);
-        final File tempImageFile = ImageUtils.getOutputImageFile();
+        final File tempImageFile = getOutputImageFile();
         if (tempImageFile == null) {
             Log.e("ImageUtils.readScaleAndWriteImage: unable to write scaled image");
             return null;
@@ -440,7 +440,7 @@ public final class ImageUtils {
         @Override
         protected TextView updateDrawable(final Drawable newDrawable) {
             super.updateDrawable(newDrawable);
-            setBounds(ImageUtils.scaleImageToLineHeight(newDrawable, view));
+            setBounds(scaleImageToLineHeight(newDrawable, view));
             return view;
         }
     }

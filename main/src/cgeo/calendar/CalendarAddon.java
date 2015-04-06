@@ -30,7 +30,7 @@ public class CalendarAddon {
 
     public static void addToCalendarWithIntent(@NonNull final Activity activity, @NonNull final Geocache cache) {
         final Resources res = activity.getResources();
-        if (CalendarAddon.isAvailable()) {
+        if (isAvailable()) {
             final Date hiddenDate = cache.getHiddenDate();
             final String startTime = cache.guessEventTimeMinutes() >= 0 ? String.valueOf(cache.guessEventTimeMinutes()) : StringUtils.EMPTY;
             final Parameters params = new Parameters(

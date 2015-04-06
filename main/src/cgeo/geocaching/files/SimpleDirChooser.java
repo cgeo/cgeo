@@ -52,7 +52,7 @@ public class SimpleDirChooser extends AbstractListActivity {
         super.onCreate(savedInstanceState);
         final Bundle extras = getIntent().getExtras();
         currentDir = dirContaining(extras.getString(Intents.EXTRA_START_DIR));
-        chooseForWriting = extras.getBoolean(SimpleDirChooser.EXTRA_CHOOSE_FOR_WRITING, false);
+        chooseForWriting = extras.getBoolean(EXTRA_CHOOSE_FOR_WRITING, false);
 
         ActivityMixin.setTheme(this);
         setContentView(R.layout.simple_dir_chooser);

@@ -344,7 +344,7 @@ public class Settings {
     }
 
     public static boolean isGCPremiumMember() {
-        final String memberStatus = Settings.getGCMemberStatus();
+        final String memberStatus = getGCMemberStatus();
         return StringUtils.equalsIgnoreCase(memberStatus, GCConstants.MEMBER_STATUS_PREMIUM) ||
                 StringUtils.equalsIgnoreCase(memberStatus, GCConstants.MEMBER_STATUS_CHARTER);
     }
@@ -749,7 +749,7 @@ public class Settings {
             case MFMAP_BASEID + CYCLEMAP:
                 return MapsforgeMapProvider.MAPSFORGE_CYCLEMAP_ID.hashCode();
             case MFMAP_BASEID + OFFLINE: {
-                final String mapFile = Settings.getMapFile();
+                final String mapFile = getMapFile();
                 if (StringUtils.isNotEmpty(mapFile)) {
                     return mapFile.hashCode();
                 }
@@ -992,7 +992,7 @@ public class Settings {
     }
 
     public static File[] getMapThemeFiles() {
-        final File directory = new File(Settings.getCustomRenderThemeBaseFolder());
+        final File directory = new File(getCustomRenderThemeBaseFolder());
         final List<File> result = new ArrayList<>();
         FileUtils.listDir(result, directory, new ExtensionsBasedFileSelector(new String[] { "xml" }), null);
 

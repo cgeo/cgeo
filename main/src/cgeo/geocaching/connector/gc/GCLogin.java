@@ -103,12 +103,12 @@ public class GCLogin extends AbstractLogin {
                 "ctl00$ContentBody$tbPassword", password,
                 "ctl00$ContentBody$cbRememberMe", "on",
                 "ctl00$ContentBody$btnSignIn", "Login");
-        final String[] viewstates = GCLogin.getViewstates(tryLoggedInData);
+        final String[] viewstates = getViewstates(tryLoggedInData);
         if (isEmpty(viewstates)) {
             Log.e("Login.login: Failed to find viewstates");
             return StatusCode.LOGIN_PARSE_ERROR; // no viewstates
         }
-        GCLogin.putViewstates(params, viewstates);
+        putViewstates(params, viewstates);
 
         final HttpResponse loginResponse = Network.postRequest("https://www.geocaching.com/login/default.aspx", params);
         final String loginData = Network.getResponseData(loginResponse);
@@ -231,7 +231,7 @@ public class GCLogin extends AbstractLogin {
             final Parameters params = new Parameters(
                     "__EVENTTARGET", "ctl00$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem", // switch to english
                     "__EVENTARGUMENT", "");
-            GCLogin.transferViewstates(page, params);
+            transferViewstates(page, params);
             final HttpResponse response = Network.postRequest(LANGUAGE_CHANGE_URI, params, new Parameters("Referer", LANGUAGE_CHANGE_URI));
             if (Network.isSuccess(response)) {
                 Log.i("changed language on geocaching.com to English");

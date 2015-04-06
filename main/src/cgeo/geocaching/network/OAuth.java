@@ -30,12 +30,12 @@ public class OAuth {
 
         final List<String> paramsEncoded = new ArrayList<>();
         for (final NameValuePair nameValue : params) {
-            paramsEncoded.add(nameValue.getName() + "=" + OAuth.percentEncode(nameValue.getValue()));
+            paramsEncoded.add(nameValue.getName() + "=" + percentEncode(nameValue.getValue()));
         }
 
         final String keysPacked = consumerSecret + "&" + StringUtils.defaultString(tokens.getTokenSecret()); // both even if empty some of them!
         final @NonNull String joinedParams = StringUtils.join(paramsEncoded.toArray(), '&');
-        final String requestPacked = method + "&" + OAuth.percentEncode((https ? "https" : "http") + "://" + host + path) + "&" + OAuth.percentEncode(joinedParams);
+        final String requestPacked = method + "&" + percentEncode((https ? "https" : "http") + "://" + host + path) + "&" + percentEncode(joinedParams);
         params.put("oauth_signature", CryptUtils.base64Encode(CryptUtils.hashHmac(requestPacked, keysPacked)));
     }
 

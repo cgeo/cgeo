@@ -1629,7 +1629,7 @@ public class DataStore {
         }
 
         query.append(" WHERE ").append(dbTableCaches).append('.');
-        query.append(DataStore.whereGeocodeIn(geocodes));
+        query.append(whereGeocodeIn(geocodes));
 
         final Cursor cursor = database.rawQuery(query.toString(), null);
         try {
@@ -2889,7 +2889,7 @@ public class DataStore {
     }
 
     public static void saveChangedCache(final Geocache cache) {
-        DataStore.saveCache(cache, cache.inDatabase() ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.CACHE));
+        saveCache(cache, cache.inDatabase() ? LoadFlags.SAVE_ALL : EnumSet.of(SaveFlag.CACHE));
     }
 
     private static enum PreparedStatement {
@@ -2901,7 +2901,7 @@ public class DataStore {
         INSERT_LOG_IMAGE("INSERT INTO " + dbTableLogImages + " (log_id, title, url) VALUES (?, ?, ?)"),
         INSERT_LOG_COUNTS("INSERT INTO " + dbTableLogCount + " (geocode, updated, type, count) VALUES (?, ?, ?, ?)"),
         INSERT_SPOILER("INSERT INTO " + dbTableSpoilers + " (geocode, updated, url, title, description) VALUES (?, ?, ?, ?, ?)"),
-        LOG_COUNT_OF_GEOCODE("SELECT count(_id) FROM " + DataStore.dbTableLogsOffline + " WHERE geocode = ?"),
+        LOG_COUNT_OF_GEOCODE("SELECT count(_id) FROM " + dbTableLogsOffline + " WHERE geocode = ?"),
         COUNT_CACHES_ON_STANDARD_LIST("SELECT count(_id) FROM " + dbTableCaches + " WHERE reason = " + StoredList.STANDARD_LIST_ID),
         COUNT_ALL_CACHES("SELECT count(_id) FROM " + dbTableCaches + " WHERE reason >= " + StoredList.STANDARD_LIST_ID),
         INSERT_LOG("INSERT INTO " + dbTableLogs + " (geocode, updated, type, author, log, date, found, friend) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"),
@@ -2970,7 +2970,7 @@ public class DataStore {
             return null;
         }
 
-        return DataStore.getBounds(Collections.singleton(geocode));
+        return getBounds(Collections.singleton(geocode));
     }
 
     public static void clearVisitDate(final String[] selected) {
@@ -2979,19 +2979,19 @@ public class DataStore {
 
     @NonNull
     public static SearchResult getBatchOfStoredCaches(final Geopoint coords, final CacheType cacheType, final int listId) {
-        final Set<String> geocodes = DataStore.loadBatchOfStoredGeocodes(coords, cacheType, listId);
-        return new SearchResult(geocodes, DataStore.getAllStoredCachesCount(cacheType, listId));
+        final Set<String> geocodes = loadBatchOfStoredGeocodes(coords, cacheType, listId);
+        return new SearchResult(geocodes, getAllStoredCachesCount(cacheType, listId));
     }
 
     @NonNull
     public static SearchResult getHistoryOfCaches(final boolean detailedOnly, final CacheType cacheType) {
-        final Set<String> geocodes = DataStore.loadBatchOfHistoricGeocodes(detailedOnly, cacheType);
-        return new SearchResult(geocodes, DataStore.getAllHistoryCachesCount());
+        final Set<String> geocodes = loadBatchOfHistoricGeocodes(detailedOnly, cacheType);
+        return new SearchResult(geocodes, getAllHistoryCachesCount());
     }
 
     public static boolean saveWaypoint(final int id, final String geocode, final Waypoint waypoint) {
-        if (DataStore.saveWaypointInternal(id, geocode, waypoint)) {
-            DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.CACHE));
+        if (saveWaypointInternal(id, geocode, waypoint)) {
+            removeCache(geocode, EnumSet.of(RemoveFlag.CACHE));
             return true;
         }
         return false;
@@ -3138,7 +3138,7 @@ public class DataStore {
     @NonNull
     public static ArrayList<Geocache> getLastOpenedCaches() {
         final List<String> geocodes = Settings.getLastOpenedCaches();
-        final Set<Geocache> cachesSet = DataStore.loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
+        final Set<Geocache> cachesSet = loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
 
         // order result set by time again
         final ArrayList<Geocache> caches = new ArrayList<>(cachesSet);

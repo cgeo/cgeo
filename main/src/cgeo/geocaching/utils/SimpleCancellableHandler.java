@@ -82,7 +82,7 @@ public class SimpleCancellableHandler extends CancellableHandler {
         if (activity != null) {
             final Message msg = obtainMessage(what);
             final Bundle bundle = new Bundle();
-            bundle.putString(SimpleCancellableHandler.MESSAGE_TEXT, activity.getResources().getString(resId));
+            bundle.putString(MESSAGE_TEXT, activity.getResources().getString(resId));
             msg.setData(bundle);
             msg.sendToTarget();
         }

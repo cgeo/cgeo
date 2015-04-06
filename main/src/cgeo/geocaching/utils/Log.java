@@ -121,7 +121,7 @@ public final class Log {
             writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), CharEncoding.UTF_8));
             writer.write(addThreadInfo(msg));
         } catch (final IOException e) {
-            Log.e("logToFile: cannot write to " + file, e);
+            e("logToFile: cannot write to " + file, e);
         } finally {
             IOUtils.closeQuietly(writer);
         }
@@ -136,7 +136,7 @@ public final class Log {
         try {
             throw new StackTraceDebug();
         } catch (final StackTraceDebug dbg) {
-            Log.d(msg, dbg);
+            d(msg, dbg);
         }
     }
 }

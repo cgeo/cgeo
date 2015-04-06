@@ -68,7 +68,7 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean canHandle(@NonNull final String geocode) {
-        return ECConnector.PATTERN_EC_CODE.matcher(geocode).matches();
+        return PATTERN_EC_CODE.matcher(geocode).matches();
     }
 
     @Override
