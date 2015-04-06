@@ -39,7 +39,7 @@ import java.util.List;
 
 public final class ConnectorFactory {
     @NonNull private static final UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
-    @NonNull private static final Collection<IConnector> CONNECTORS = Collections.unmodifiableCollection(Arrays.asList(new IConnector[] {
+    @NonNull private static final Collection<IConnector> CONNECTORS = Collections.unmodifiableCollection(Arrays.<IConnector> asList(
             GCConnector.getInstance(),
             ECConnector.getInstance(),
             new OCApiLiveConnector("opencaching.de", "www.opencaching.de", "OC", "CC BY-NC-ND, alle Logeinträge © jeweiliger Autor",
@@ -70,17 +70,17 @@ public final class ConnectorFactory {
             new GeopeitusConnector(),
             new WaymarkingConnector(),
             UNKNOWN_CONNECTOR // the unknown connector MUST be the last one
-    }));
+    ));
 
     @NonNull public static final UnknownTrackableConnector UNKNOWN_TRACKABLE_CONNECTOR = new UnknownTrackableConnector();
 
     @NonNull
-    private static final Collection<TrackableConnector> TRACKABLE_CONNECTORS = Collections.unmodifiableCollection(Arrays.asList(new TrackableConnector[] {
+ private static final Collection<TrackableConnector> TRACKABLE_CONNECTORS = Collections.unmodifiableCollection(Arrays.<TrackableConnector> asList(
             new GeokretyConnector(),
             new SwaggieConnector(),
             TravelBugConnector.getInstance(), // travel bugs last, as their secret codes overlap with other connectors
             UNKNOWN_TRACKABLE_CONNECTOR // must be last
-    }));
+    ));
 
     @NonNull
     private static final Collection<ISearchByViewPort> searchByViewPortConns = getMatchingConnectors(ISearchByViewPort.class);
