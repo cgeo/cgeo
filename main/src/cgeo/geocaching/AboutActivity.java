@@ -291,14 +291,18 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
                 .append("\nMap strategy: ").append(Settings.getLiveMapStrategy().toString().toLowerCase(Locale.getDefault()))
                 .append("\nHW-acceleration: ").append(Settings.useHardwareAcceleration() ? "enabled" : "disabled")
                 .append(" (").append(Settings.useHardwareAcceleration() != Settings.HW_ACCEL_DISABLED_BY_DEFAULT ? "default state" : "manually changed").append(")");
+        final StringBuilder connectors = new StringBuilder();
+        int connectorCount = 0;
         for (final ILogin connector : ConnectorFactory.getActiveLiveConnectors()) {
-            body.append('\n').append(connector.getName()).append(": ").append(connector.isLoggedIn() ? "logged in" : "not logged in")
+            connectorCount++;
+            connectors.append("\n - ").append(connector.getName()).append(": ").append(connector.isLoggedIn() ? "logged in" : "not logged in")
                     .append(" (").append(connector.getLoginStatusString()).append(')');
             if (connector.getName().equals("geocaching.com") && connector.isLoggedIn()) {
-                body.append(" / ").append(Settings.getGCMemberStatus());
+                connectors.append(" / ").append(Settings.getGCMemberStatus());
             }
         }
-        body.append("\nSystem language: ").append(Locale.getDefault());
+        body.append("\nGeocaching sites enabled:").append(connectorCount > 0 ? connectors : " none")
+                .append("\nSystem language: ").append(Locale.getDefault());
         if (Settings.isUseEnglish()) {
             body.append(" (cgeo forced to English)");
         }
