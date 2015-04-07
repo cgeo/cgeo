@@ -8,7 +8,7 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapView;
 
-import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -23,9 +23,11 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class GoogleCacheOverlay extends ItemizedOverlay<GoogleCacheOverlayItem> implements ItemizedOverlayImpl {
 
-    @NonNull
-    private final CachesOverlay base;
-    @NonNull
+    /**
+     * The super constructor already invokes methods accessing this member before it is initialized. Therefore it can be
+     * null, although it is assigned in the constructor. Don't trust static code analysis here.
+     */
+    @Nullable private final CachesOverlay base;
     private final Lock lock = new ReentrantLock();
 
     public GoogleCacheOverlay(final Context contextIn, final Drawable markerIn) {
@@ -40,22 +42,33 @@ public class GoogleCacheOverlay extends ItemizedOverlay<GoogleCacheOverlayItem> 
 
     @Override
     protected GoogleCacheOverlayItem createItem(final int i) {
-        return (GoogleCacheOverlayItem) base.createItem(i);
+        if (base != null) {
+            return (GoogleCacheOverlayItem) base.createItem(i);
+        }
+        return null;
     }
 
     @Override
     public int size() {
-        return base.size();
+        if (base != null) {
+            return base.size();
+        }
+        return 0;
     }
 
     @Override
     protected boolean onTap(final int arg0) {
-        return base.onTap(arg0);
+        if (base != null) {
+            return base.onTap(arg0);
+        }
+        return false;
     }
 
     @Override
     public void draw(final Canvas canvas, final MapView mapView, final boolean shadow) {
-        base.draw(canvas, castMapViewImpl(mapView), shadow);
+        if (base != null) {
+            base.draw(canvas, castMapViewImpl(mapView), shadow);
+        }
     }
 
     private static MapViewImpl castMapViewImpl(final MapView mapView) {
