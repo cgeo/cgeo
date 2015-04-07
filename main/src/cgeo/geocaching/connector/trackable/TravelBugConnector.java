@@ -1,6 +1,7 @@
 package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.AbstractLoggingActivity;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.UserAction;
@@ -34,6 +35,12 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     @Override
     public boolean canHandleTrackable(final String geocode) {
         return PATTERN_TB_CODE.matcher(geocode).matches() && !StringUtils.startsWithIgnoreCase(geocode, "GC");
+    }
+
+    @NonNull
+    @Override
+    public String getServiceTitle() {
+        return CgeoApplication.getInstance().getString(R.string.settings_title_gc);
     }
 
     @Override

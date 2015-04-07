@@ -24,6 +24,16 @@ public interface TrackableConnector {
     public boolean canHandleTrackable(final String geocode);
 
     /**
+     * Return the Title of the service the connector is attached to.
+     * Title may be used in messages given to the user, like to say which connector need to
+     * be activated for a specific feature.
+     *
+     * @return the service TITLE corresponding to this connector
+     */
+    @NonNull
+    public String getServiceTitle();
+
+    /**
      * Check whether the connector has URLs corresponding the the trackable.
      *
      * @return <tt>true</tt> if the connector handles URLs, <tt>false</tt> otherwise

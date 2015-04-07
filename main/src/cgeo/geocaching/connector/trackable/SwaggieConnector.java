@@ -1,5 +1,7 @@
 package cgeo.geocaching.connector.trackable;
 
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.network.Network;
 
@@ -21,6 +23,12 @@ public final class SwaggieConnector extends AbstractTrackableConnector {
     @Override
     public boolean canHandleTrackable(final String geocode) {
         return geocode != null && PATTERN_SW_CODE.matcher(geocode).matches();
+    }
+
+    @NonNull
+    @Override
+    public String getServiceTitle() {
+        throw new IllegalStateException("this connector does not have a corresponding name.");
     }
 
     @Override

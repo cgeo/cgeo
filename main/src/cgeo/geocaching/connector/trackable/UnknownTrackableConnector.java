@@ -17,6 +17,12 @@ public class UnknownTrackableConnector extends AbstractTrackableConnector {
         return false;
     }
 
+    @NonNull
+    @Override
+    public String getServiceTitle() {
+        throw new IllegalStateException("this connector does not have a corresponding name.");
+    }
+
     @Override
     public boolean hasTrackableUrls() {
         return false;
