@@ -1879,6 +1879,10 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
                     @Override
                     public boolean onPrepareActionMode(final ActionMode actionMode, final Menu menu) {
+                        return prepareClipboardActionMode(view, actionMode, menu);
+                    }
+
+                    private boolean prepareClipboardActionMode(final View view, final ActionMode actionMode, final Menu menu) {
                         switch (view.getId()) {
                             case R.id.value: // coordinates, gc-code, name
                                 assert view instanceof TextView;
@@ -1930,7 +1934,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     @Override
                     public boolean onCreateActionMode(final ActionMode actionMode, final Menu menu) {
                         actionMode.getMenuInflater().inflate(R.menu.details_context, menu);
-
+                        prepareClipboardActionMode(view, actionMode, menu);
                         // Return true so that the action mode is shown
                         return true;
                     }
