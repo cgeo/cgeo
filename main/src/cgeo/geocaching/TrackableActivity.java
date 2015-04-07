@@ -561,6 +561,10 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
 
             @Override
             public boolean onPrepareActionMode(final ActionMode actionMode, final Menu menu) {
+                return prepareClipboardActionMode(view, actionMode, menu);
+            }
+
+            private boolean prepareClipboardActionMode(final View view, final ActionMode actionMode, final Menu menu) {
                 final int viewId = view.getId();
                 assert view instanceof TextView;
                 clickedItemText = ((TextView) view).getText();
@@ -590,6 +594,7 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             @Override
             public boolean onCreateActionMode(final ActionMode actionMode, final Menu menu) {
                 actionMode.getMenuInflater().inflate(R.menu.details_context, menu);
+                prepareClipboardActionMode(view, actionMode, menu);
                 return true;
             }
 
