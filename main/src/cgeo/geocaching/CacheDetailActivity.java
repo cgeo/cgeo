@@ -1,8 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-
 import cgeo.calendar.CalendarAddon;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
@@ -68,16 +65,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.app.AppObservable;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.subscriptions.CompositeSubscription;
-import rx.subscriptions.Subscriptions;
-
 import android.R.color;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -141,6 +128,18 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.app.AppObservable;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.subscriptions.CompositeSubscription;
+import rx.subscriptions.Subscriptions;
 
 /**
  * Activity to handle all single-cache-stuff.
@@ -1524,6 +1523,44 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     });
         }
 
+        /**
+         * Load the description in the background.
+         * 
+         * @param descriptionString
+         *            the HTML description as retrieved from the connector
+         * @param descriptionView
+         *            the view to fill
+         * @param loadingIndicatorView
+         *            the loading indicator view, will be hidden when completed
+         */
+        private void loadDescription(final String descriptionString, final IndexOutOfBoundsAvoidingTextView descriptionView, final View loadingIndicatorView) {
+            try {
+                final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
+                final Spanned description = Html.fromHtml(descriptionString, new HtmlImage(cache.getGeocode(), true, cache.getListId(), false, descriptionView), unknownTagsHandler);
+                addWarning(unknownTagsHandler, description);
+                if (StringUtils.isNotBlank(descriptionString)) {
+                    try {
+                        descriptionView.setText(description, TextView.BufferType.SPANNABLE);
+                    } catch (final Exception e) {
+                        // On 4.1, there is sometimes a crash on measuring the layout: https://code.google.com/p/android/issues/detail?id=35412
+                        Log.e("Android bug setting text: ", e);
+                        // remove the formatting by converting to a simple string
+                        descriptionView.setText(description.toString());
+                    }
+                    descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
+                    fixTextColor(descriptionString, descriptionView);
+                    descriptionView.setVisibility(View.VISIBLE);
+                    addContextMenu(descriptionView);
+                    potentiallyHideShortDescription();
+                }
+                if (null != loadingIndicatorView) {
+                    loadingIndicatorView.setVisibility(View.GONE);
+                }
+            } catch (final Exception ignored) {
+                showToast(res.getString(R.string.err_load_descr_failed));
+            }
+        }
+
     }
 
     // If description has an HTML construct which may be problematic to render, add a note at the end of the long description.
@@ -1538,39 +1575,6 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 ((Editable) description).append("\n\n").append(tableNote);
                 ((Editable) description).setSpan(new StyleSpan(Typeface.ITALIC), startPos, description.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
-        }
-    }
-    /**
-     * Load the description in the background.
-     * @param descriptionString the HTML description as retrieved from the connector
-     * @param descriptionView the view to fill
-     * @param loadingIndicatorView the loading indicator view, will be hidden when completed
-     */
-    private void loadDescription(final String descriptionString, final IndexOutOfBoundsAvoidingTextView descriptionView, final View loadingIndicatorView) {
-        try {
-            final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
-            final Spanned description = Html.fromHtml(descriptionString, new HtmlImage(cache.getGeocode(), true, cache.getListId(), false, descriptionView), unknownTagsHandler);
-            addWarning(unknownTagsHandler, description);
-            if (StringUtils.isNotBlank(descriptionString)) {
-                try {
-                    descriptionView.setText(description, TextView.BufferType.SPANNABLE);
-                } catch (final Exception e) {
-                    // On 4.1, there is sometimes a crash on measuring the layout: https://code.google.com/p/android/issues/detail?id=35412
-                    Log.e("Android bug setting text: ", e);
-                    // remove the formatting by converting to a simple string
-                    descriptionView.setText(description.toString());
-                }
-                descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-                fixTextColor(descriptionString, descriptionView);
-                descriptionView.setVisibility(View.VISIBLE);
-                addContextMenu(descriptionView);
-                potentiallyHideShortDescription();
-            }
-            if (null != loadingIndicatorView) {
-                loadingIndicatorView.setVisibility(View.GONE);
-            }
-        } catch (final Exception ignored) {
-            showToast(res.getString(R.string.err_load_descr_failed));
         }
     }
 

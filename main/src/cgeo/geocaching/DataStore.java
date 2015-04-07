@@ -30,16 +30,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.android.app.AppObservable;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -76,6 +66,16 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
+
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.android.app.AppObservable;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 public class DataStore {
 
@@ -863,6 +863,33 @@ public class DataStore {
                 }
             }
         }
+
+        /*
+         * Remove empty directories created in the secondary storage area.
+         */
+        private static void removeSecEmptyDirs() {
+            final File[] files = LocalStorage.getStorageSec().listFiles();
+            if (ArrayUtils.isNotEmpty(files)) {
+                for (final File file : files) {
+                    if (file.isDirectory()) {
+                        // This will silently fail if the directory is not empty.
+                        FileUtils.deleteIgnoringFailure(file);
+                    }
+                }
+            }
+        }
+
+        private static void dropDatabase(final SQLiteDatabase db) {
+            db.execSQL("drop table if exists " + dbTableCaches);
+            db.execSQL("drop table if exists " + dbTableAttributes);
+            db.execSQL("drop table if exists " + dbTableWaypoints);
+            db.execSQL("drop table if exists " + dbTableSpoilers);
+            db.execSQL("drop table if exists " + dbTableLogs);
+            db.execSQL("drop table if exists " + dbTableLogCount);
+            db.execSQL("drop table if exists " + dbTableLogsOffline);
+            db.execSQL("drop table if exists " + dbTableTrackables);
+        }
+
     }
 
     /**
@@ -910,32 +937,6 @@ public class DataStore {
                 }
             });
         }
-    }
-
-    /*
-     * Remove empty directories created in the secondary storage area.
-     */
-    private static void removeSecEmptyDirs() {
-        final File[] files = LocalStorage.getStorageSec().listFiles();
-        if (ArrayUtils.isNotEmpty(files)) {
-            for (final File file : files) {
-                if (file.isDirectory()) {
-                    // This will silently fail if the directory is not empty.
-                    FileUtils.deleteIgnoringFailure(file);
-                }
-            }
-        }
-    }
-
-    private static void dropDatabase(final SQLiteDatabase db) {
-        db.execSQL("drop table if exists " + dbTableCaches);
-        db.execSQL("drop table if exists " + dbTableAttributes);
-        db.execSQL("drop table if exists " + dbTableWaypoints);
-        db.execSQL("drop table if exists " + dbTableSpoilers);
-        db.execSQL("drop table if exists " + dbTableLogs);
-        db.execSQL("drop table if exists " + dbTableLogCount);
-        db.execSQL("drop table if exists " + dbTableLogsOffline);
-        db.execSQL("drop table if exists " + dbTableTrackables);
     }
 
     public static boolean isThere(final String geocode, final String guid, final boolean checkTime) {

@@ -5,8 +5,6 @@ import cgeo.geocaching.utils.RxUtils.LooperCallbacks;
 
 import org.apache.commons.lang3.StringUtils;
 
-import rx.Observable;
-
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
@@ -14,6 +12,8 @@ import android.location.LocationManager;
 import android.os.Bundle;
 
 import java.util.concurrent.TimeUnit;
+
+import rx.Observable;
 
 public class GeoDataProvider extends LooperCallbacks<GeoData> {
 
@@ -93,12 +93,13 @@ public class GeoDataProvider extends LooperCallbacks<GeoData> {
         public void onProviderEnabled(final String provider) {
             // nothing
         }
-    }
 
-    private void assign(final Location location) {
-        // We do not necessarily get signalled when satellites go to 0/0.
-        final GeoData current = new GeoData(location);
-        subject.onNext(current);
+        private void assign(final Location location) {
+            // We do not necessarily get signaled when satellites go to 0/0.
+            final GeoData current = new GeoData(location);
+            subject.onNext(current);
+        }
+
     }
 
 }

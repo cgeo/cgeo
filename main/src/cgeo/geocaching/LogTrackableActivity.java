@@ -1,8 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.LogResult;
@@ -54,6 +51,9 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 public class LogTrackableActivity extends AbstractLoggingActivity implements DateDialogParent, TimeDialogParent, CoordinateUpdate, LoaderManager.LoaderCallbacks<List<LogTypeTrackable>> {
 
@@ -413,20 +413,22 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
                 showToast(status.getErrorString(res));
             }
         }
-    }
 
-    /**
-     * Adds the new log to the list of log entries for this trackable to be able to show it in the trackable activity.
-     *
-     *
-     */
-    private void addLocalTrackableLog(final String logText) {
-        // TODO create a LogTrackableEntry. For now use "oldLogtype" as a temporary migration path
-        final LogEntry logEntry = new LogEntry(date.getTimeInMillis(), typeSelected.oldLogtype, logText);
-        final List<LogEntry> modifiedLogs = new ArrayList<>(trackable.getLogs());
-        modifiedLogs.add(0, logEntry);
-        trackable.setLogs(modifiedLogs);
-        DataStore.saveTrackable(trackable);
+        /**
+         * Adds the new log to the list of log entries for this trackable to be able to show it in the trackable
+         * activity.
+         *
+         *
+         */
+        private void addLocalTrackableLog(final String logText) {
+            // TODO create a LogTrackableEntry. For now use "oldLogtype" as a temporary migration path
+            final LogEntry logEntry = new LogEntry(date.getTimeInMillis(), typeSelected.oldLogtype, logText);
+            final List<LogEntry> modifiedLogs = new ArrayList<>(trackable.getLogs());
+            modifiedLogs.add(0, logEntry);
+            trackable.setLogs(modifiedLogs);
+            DataStore.saveTrackable(trackable);
+        }
+
     }
 
     public static Intent getIntent(final Context context, final Trackable trackable) {

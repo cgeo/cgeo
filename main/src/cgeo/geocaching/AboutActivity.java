@@ -1,8 +1,5 @@
 package cgeo.geocaching;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-
 import cgeo.calendar.CalendarAddon;
 import cgeo.contacts.ContactsAddon;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
@@ -44,6 +41,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page> {
 
     private static final String EXTRA_ABOUT_STARTPAGE = "cgeo.geocaching.extra.about.startpage";
@@ -61,6 +61,20 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             licenseText.setText(getRawResourceString(R.raw.license));
             return view;
         }
+
+        private String getRawResourceString(final int resourceId) {
+            InputStream ins = null;
+            Scanner scanner = null;
+            try {
+                ins = res.openRawResource(resourceId);
+                scanner = new Scanner(ins, CharEncoding.UTF_8);
+                return scanner.useDelimiter("\\A").next();
+            } finally {
+                IOUtils.closeQuietly(scanner);
+                IOUtils.closeQuietly(ins);
+            }
+        }
+
     }
 
     class ContributorsViewCreator extends AbstractCachingPageViewCreator<ScrollView> {
@@ -246,19 +260,6 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
     protected final Pair<List<? extends Page>, Integer> getOrderedPages() {
         final List<Page> pages = Arrays.asList(Page.values());
         return new ImmutablePair<List<? extends Page>, Integer>(pages, 0);
-    }
-
-    private String getRawResourceString(final int resourceId) {
-        InputStream ins = null;
-        Scanner scanner = null;
-        try {
-            ins = res.openRawResource(resourceId);
-            scanner = new Scanner(ins, CharEncoding.UTF_8);
-            return scanner.useDelimiter("\\A").next();
-        } finally {
-            IOUtils.closeQuietly(scanner);
-            IOUtils.closeQuietly(ins);
-        }
     }
 
     public static void showChangeLog(final Context fromActivity) {
