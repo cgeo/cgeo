@@ -4,6 +4,7 @@ import cgeo.calendar.CalendarAddon;
 import cgeo.contacts.ContactsAddon;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
@@ -25,7 +26,7 @@ import java.util.Locale;
 public final class SystemInformation {
 
     @NonNull
-    public static String getSystemInformation(final Context context) {
+    public static String getSystemInformation(@NonNull final Context context) {
         final boolean googlePlayServicesAvailable = CgeoApplication.getInstance().isGooglePlayServicesAvailable();
         final StringBuilder body = new StringBuilder("--- System information ---")
                 .append("\nDevice: ").append(Build.MODEL).append(" (").append(Build.PRODUCT).append(", ").append(Build.BRAND).append(")")
@@ -41,25 +42,35 @@ public final class SystemInformation {
                 .append("\nHide own/found: ").append(Settings.isExcludeMyCaches())
                 .append("\nMap strategy: ").append(Settings.getLiveMapStrategy().toString().toLowerCase(Locale.getDefault()))
                 .append("\nHW acceleration: ").append(Settings.useHardwareAcceleration() ? "enabled" : "disabled")
-                .append(" (").append(Settings.useHardwareAcceleration() != Settings.HW_ACCEL_DISABLED_BY_DEFAULT ? "default state" : "manually changed").append(")");
-        final StringBuilder connectors = new StringBuilder();
-        int connectorCount = 0;
-        for (final ILogin connector : ConnectorFactory.getActiveLiveConnectors()) {
-            connectorCount++;
-            connectors.append("\n - ").append(connector.getName()).append(": ").append(connector.isLoggedIn() ? "logged in" : "not logged in")
-                    .append(" (").append(connector.getLoginStatusString()).append(')');
-            if (connector.getName().equals("geocaching.com") && connector.isLoggedIn()) {
-                connectors.append(" / ").append(Settings.getGCMemberStatus());
-            }
-        }
-        body.append("\nGeocaching sites enabled:").append(connectorCount > 0 ? connectors : " none")
+                .append(" (").append(Settings.useHardwareAcceleration() != Settings.HW_ACCEL_DISABLED_BY_DEFAULT ? "default state" : "manually changed").append(")")
                 .append("\nSystem language: ").append(Locale.getDefault());
         if (Settings.useEnglish()) {
             body.append(" (cgeo forced to English)");
         }
+        appendConnectors(body);
         appendAddons(body);
         body.append("\n--- End of system information ---\n");
         return body.toString();
+    }
+
+    private static void appendConnectors(@NonNull final StringBuilder body) {
+        final StringBuilder connectors = new StringBuilder();
+        int connectorCount = 0;
+        for (final IConnector connector : ConnectorFactory.getConnectors()) {
+            if (connector.isActive()) {
+                connectorCount++;
+                connectors.append("\n - ").append(connector.getName());
+                if (connector instanceof ILogin) {
+                    final ILogin login = (ILogin) connector;
+                    connectors.append(": ").append(login.isLoggedIn() ? "logged in" : "not logged in")
+                            .append(" (").append(login.getLoginStatusString()).append(')');
+                    if (login.getName().equals("geocaching.com") && login.isLoggedIn()) {
+                        connectors.append(" / ").append(Settings.getGCMemberStatus());
+                    }
+                }
+            }
+        }
+        body.append("\nGeocaching sites enabled:").append(connectorCount > 0 ? connectors : " none");
     }
 
     private static void appendAddons(@NonNull final StringBuilder body) {
