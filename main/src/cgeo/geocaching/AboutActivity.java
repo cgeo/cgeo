@@ -1,19 +1,12 @@
 package cgeo.geocaching;
 
-import cgeo.calendar.CalendarAddon;
-import cgeo.contacts.ContactsAddon;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.compatibility.Compatibility;
-import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.capability.ILogin;
-import cgeo.geocaching.sensors.OrientationProvider;
-import cgeo.geocaching.sensors.RotationProvider;
-import cgeo.geocaching.sensors.Sensors;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.ProcessUtils;
+import cgeo.geocaching.utils.SystemInformation;
 import cgeo.geocaching.utils.Version;
 
 import org.apache.commons.io.IOUtils;
@@ -25,8 +18,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
-import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -38,7 +29,6 @@ import android.widget.TextView;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 import butterknife.ButterKnife;
@@ -129,7 +119,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         public ScrollView getDispatchedView(final ViewGroup parentView) {
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_system_page, parentView, false);
             ButterKnife.inject(this, view);
-            final String systemInfo = systemInformation(AboutActivity.this);
+            final String systemInfo = SystemInformation.getSystemInformation(AboutActivity.this);
             system.setText(systemInfo);
             system.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
             Compatibility.setTextIsSelectable(system, true);
@@ -158,7 +148,7 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
             final ScrollView view = (ScrollView) getLayoutInflater().inflate(R.layout.about_help_page, parentView, false);
             ButterKnife.inject(this, view);
             setClickListener(support, "mailto:support@cgeo.org?subject=" + Uri.encode("cgeo " + Version.getVersionName(AboutActivity.this)) +
-                    "&body=" + Uri.encode(systemInformation(AboutActivity.this)) + "\n");
+                    "&body=" + Uri.encode(SystemInformation.getSystemInformation(AboutActivity.this)) + "\n");
             setClickListener(website, "http://www.cgeo.org/");
             setClickListener(facebook, "http://www.facebook.com/pages/cgeo/297269860090");
             setClickListener(twitter, "http://twitter.com/android_gc");
@@ -266,59 +256,6 @@ public class AboutActivity extends AbstractViewPagerActivity<AboutActivity.Page>
         final Intent intent = new Intent(fromActivity, AboutActivity.class);
         intent.putExtra(EXTRA_ABOUT_STARTPAGE, Page.CHANGELOG.ordinal());
         fromActivity.startActivity(intent);
-    }
-
-    private static String presence(final Boolean present) {
-        return present ? "present" : "absent";
-    }
-
-    private static String systemInformation(final Context context) {
-        final boolean googlePlayServicesAvailable = CgeoApplication.getInstance().isGooglePlayServicesAvailable();
-        final StringBuilder body = new StringBuilder("--- System information ---")
-                .append("\nDevice: ").append(Build.MODEL).append(" (").append(Build.PRODUCT).append(", ").append(Build.BRAND).append(")")
-                .append("\nAndroid version: ").append(VERSION.RELEASE)
-                .append("\nAndroid build: ").append(Build.DISPLAY)
-                .append("\nCgeo version: ").append(Version.getVersionName(context))
-                .append("\nGoogle Play services: ").append(googlePlayServicesAvailable ? (Settings.useGooglePlayServices() ? "enabled" : "disabled") : "unavailable")
-                .append("\nLow power mode: ").append(Settings.useLowPowerMode() ? "active" : "inactive")
-                .append("\nCompass capabilities: ").append(Sensors.getInstance().hasCompassCapabilities() ? "yes" : "no")
-                .append("\nRotation sensor: ").append(presence(RotationProvider.hasRotationSensor(context)))
-                .append("\nGeomagnetic rotation sensor: ").append(presence(RotationProvider.hasGeomagneticRotationSensor(context)))
-                .append("\nOrientation sensor: ").append(presence(OrientationProvider.hasOrientationSensor(context)))
-                .append("\nHide own/found: ").append(Settings.isExcludeMyCaches())
-                .append("\nMap strategy: ").append(Settings.getLiveMapStrategy().toString().toLowerCase(Locale.getDefault()))
-                .append("\nHW-acceleration: ").append(Settings.useHardwareAcceleration() ? "enabled" : "disabled")
-                .append(" (").append(Settings.useHardwareAcceleration() != Settings.HW_ACCEL_DISABLED_BY_DEFAULT ? "default state" : "manually changed").append(")");
-        final StringBuilder connectors = new StringBuilder();
-        int connectorCount = 0;
-        for (final ILogin connector : ConnectorFactory.getActiveLiveConnectors()) {
-            connectorCount++;
-            connectors.append("\n - ").append(connector.getName()).append(": ").append(connector.isLoggedIn() ? "logged in" : "not logged in")
-                    .append(" (").append(connector.getLoginStatusString()).append(')');
-            if (connector.getName().equals("geocaching.com") && connector.isLoggedIn()) {
-                connectors.append(" / ").append(Settings.getGCMemberStatus());
-            }
-        }
-        body.append("\nGeocaching sites enabled:").append(connectorCount > 0 ? connectors : " none")
-                .append("\nSystem language: ").append(Locale.getDefault());
-        if (Settings.useEnglish()) {
-            body.append(" (cgeo forced to English)");
-        }
-        final boolean calendarAddonAvailable = CalendarAddon.isAvailable();
-        final boolean contactsAddonAvailable = ContactsAddon.isAvailable();
-        body.append("\nInstalled cgeo plugins:");
-        if (calendarAddonAvailable || contactsAddonAvailable) {
-            if (calendarAddonAvailable) {
-                body.append(" calendar");
-            }
-            if (contactsAddonAvailable) {
-                body.append(" contacts");
-            }
-        } else {
-            body.append(" none");
-        }
-        body.append("\n--- End of system information ---\n");
-        return body.toString();
     }
 
 }
