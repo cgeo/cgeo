@@ -21,3 +21,4 @@
 
 -dontwarn com.google.android.gms.common.**
 -dontwarn com.google.android.gms.internal.**
+-dontwarn com.google.android.gms.**
