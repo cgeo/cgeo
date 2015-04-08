@@ -57,7 +57,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public void draw(@NonNull final Canvas canvas) {
+    public void draw(final Canvas canvas) {
         try {
             // Google Maps and OSM Maps use different zoom levels for the same view.
             // Here we don't want the Google Maps compatible zoom level, but the actual one.
