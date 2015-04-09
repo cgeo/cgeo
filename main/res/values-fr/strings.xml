@@ -895,9 +895,8 @@
   <string name="user_menu_open_contact">Ouvrir la fiche du contact</string>
   <string name="navigation">Navigation</string>
   <string name="compass_title">Boussole</string>
-  <string name="compass_sensors">Capteurs actifs</string>
-  <string name="use_gps">Utiliser GPS</string>
-  <string name="use_compass">Utiliser la boussole</string>
+  <string name="use_gps">GPS uniquement</string>
+  <string name="use_compass">GPS et boussole</string>
   <string name="destination_select">Choisir une destination</string>
   <string name="navigation_direct_navigation">Navigation directe</string>
   <string name="navigation_target">Cible</string>
@@ -926,7 +925,8 @@
   <string name="helper_google_translate_description">Si vous téléchargez des modules de traduction dans l\'application Google Traduction, vous pourrez facilement traduire les descriptions des caches dans c:geo par un clic long sur le texte de la description (même sans connexion Internet).</string>
   <string name="addon_missing_title">Module complémentaire manquant</string>
   <string name="addon_download_prompt">Le télécharger sur Google Play.</string>
-  <string name="export">Exporter : %1$s</string>
+  <string name="export">Exporter</string>
+  <string name="export_progress">Exportation : %1$s</string>
   <string name="export_exportedto">exporté vers</string>
   <string name="export_failed">Échec de l\'exportation</string>
   <string name="export_fieldnotes">Notes de terrain</string>
@@ -1245,4 +1245,5 @@
   <string name="init_geokrety_description">Enregistrer la clé d\'API dans c:geo pour faciliter la connexion à GeoKrety.org</string>
   <string name="init_geokrety_cache_description">GeoKretyMap.org fournit des données mises en cache pour les objets voyageurs GeoKrety. Les données peuvent ne pas être à jour !\nPositions : ~30min.\nDescriptions : ~24h.</string>
   <string name="init_geokrety_cache">Utiliser les données mises en cache</string>
+  <string name="init_geokrety_userid">Utilisateur : %s</string>
 </resources>
