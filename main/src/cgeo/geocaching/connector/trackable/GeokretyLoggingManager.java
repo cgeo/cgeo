@@ -89,6 +89,11 @@ public class GeokretyLoggingManager extends AbstractTrackableLoggingManager {
     }
 
     @Override
+    public boolean isTrackingCodeNeededToPostNote() {
+        return true;
+    }
+
+    @Override
     public boolean postReady() {
         return true;
     }
