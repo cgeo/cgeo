@@ -24,6 +24,13 @@
                 style="@style/button_full"
                 android:layout_width="0dip"
                 android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:orientation="horizontal" >
 
             <Button
                 android:id="@+id/date"
