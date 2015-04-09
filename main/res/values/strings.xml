@@ -980,6 +980,8 @@
     <!-- navigation -->
     <string name="navigation">Navigation</string>
     <string name="compass_title">Compass</string>
+    <string name="use_gps">GPS only used</string>
+    <string name="use_compass">GPS and Magnetic Compass used</string>
     <string name="destination_select">Select destination</string>
     <string name="navigation_direct_navigation">Direct Navigation</string>
     <string name="navigation_target">Target</string>

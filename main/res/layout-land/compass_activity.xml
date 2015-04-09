@@ -46,8 +46,8 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:gravity="center_horizontal"
-            android:textOn="@string/attribute_compass_yes"
-            android:textOff="@string/attribute_compass_no" />
+            android:textOn="@string/use_compass"
+            android:textOff="@string/use_gps" />
 
         <TextView
             android:id="@+id/heading"

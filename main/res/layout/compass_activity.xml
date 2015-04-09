@@ -38,8 +38,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textOn="@string/attribute_compass_yes"
-            android:textOff="@string/attribute_compass_no" />
+            android:textOn="@string/use_compass"
+            android:textOff="@string/use_gps" />
 
         <RelativeLayout
             android:layout_width="fill_parent"
