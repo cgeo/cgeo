@@ -59,7 +59,7 @@ public class StatusUpdater {
             @Override
             public void call() {
                 final ObjectNode response =
-                        Network.requestJSON("http://status.cgeo.org/api/status.json",
+                        Network.requestJSON("https://cgeo-status.herokuapp.com/api/status.json",
                                 new Parameters("version_code", String.valueOf(Version.getVersionCode(CgeoApplication.getInstance())),
                                         "version_name", Version.getVersionName(CgeoApplication.getInstance()),
                                         "locale", Locale.getDefault().toString()));
