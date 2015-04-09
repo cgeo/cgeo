@@ -975,7 +975,20 @@
             android:name=".filter.FilterActivity_"
             android:label="@string/caches_filter_title" >
         </activity>
-        
+
+        <activity
+            android:name="cgeo.geocaching.connector.trackable.GeokretyAuthorizationActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <!-- provide enhanced meta data for caches (and waypoints) when invoking Locus from c:geo -->
         <provider
             android:name="menion.android.locus.LocusDataStorageProvider"

@@ -7,7 +7,6 @@ import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import org.apache.commons.lang3.StringUtils;
@@ -81,11 +80,6 @@ public class GeokretyLoggingManager extends AbstractTrackableLoggingManager {
     @Override
     public void setGuid(final String guid) {
         throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean isRegistered() {
-        return Settings.isRegisteredForGeokrety();
     }
 
     @Override

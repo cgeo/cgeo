@@ -1,6 +1,8 @@
 package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.AbstractLoggingActivity;
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 import cgeo.geocaching.Trackable;
 import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -8,6 +10,7 @@ import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.enumerations.Loaders;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.settings.Settings;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.annotation.NonNull;
@@ -24,8 +27,19 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     private final static Pattern PATTERN_TB_CODE = Pattern.compile("(TB[0-9A-Z]+)|([0-9A-Z]{6})", Pattern.CASE_INSENSITIVE);
 
     @Override
+    public int getPreferenceActivity() {
+        return R.string.preference_screen_gc;
+    }
+
+    @Override
     public boolean canHandleTrackable(final String geocode) {
         return PATTERN_TB_CODE.matcher(geocode).matches() && !StringUtils.startsWithIgnoreCase(geocode, "GC");
+    }
+
+    @NonNull
+    @Override
+    public String getServiceTitle() {
+        return CgeoApplication.getInstance().getString(R.string.settings_title_gc);
     }
 
     @Override
@@ -41,6 +55,11 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     @Override
     public boolean isLoggable() {
         return true;
+    }
+
+    @Override
+    public boolean isRegistered() {
+        return Settings.hasGCCredentials();
     }
 
     @Override

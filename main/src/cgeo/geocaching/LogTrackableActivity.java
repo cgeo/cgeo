@@ -12,6 +12,7 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog.CoordinateUpdate;
@@ -31,7 +32,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -463,7 +463,14 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
     public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_send:
-                sendLog();
+                if (connector.isRegistered()) {
+                    sendLog();
+                } else {
+                    showToast(res.getString(R.string.err_trackable_log_not_anonymous, connector.getServiceTitle()));
+                    if (connector.getPreferenceActivity() > 0) {
+                        SettingsActivity.openForScreen(connector.getPreferenceActivity(), this);
+                    }
+                }
                 return true;
             default:
                 break;
@@ -479,19 +486,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
             return;
         }
 
-        if (!loggingManager.isRegistered()) {
-            final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-            alertDialog.setTitle(R.string.init_summary_geokrety_account);
-            alertDialog.setMessage(R.string.init_summary_geokrety_not_anonymous);
-            alertDialog.setPositiveButton(R.string.ok, null);
-            alertDialog.show();
-            // TODO redirect user to GeoKrety settings page
-            // this throw "android.util.AndroidRuntimeException: Calling startActivity() from outside of an Activity  context requires the FLAG_ACTIVITY_NEW_TASK flag. Is this really what you want?"
-            //SettingsActivity.openForScreen(R.string.preference_screen_geokrety, getApplicationContext());
-            return;
-        }
-
-        // Check Tracking Code existance
+        // Check Tracking Code existence
         if (loggingManager.isTrackingCodeNeededToPostNote() && trackingEditText.getText().toString().isEmpty()) {
             showToast(res.getString(R.string.err_log_post_missing_tracking_code));
             return;

@@ -39,8 +39,6 @@ public interface TrackableLoggingManager {
 
     public void setGuid(final String guid);
 
-    public boolean isRegistered();
-
     public boolean isTrackingCodeNeededToPostNote();
 
     public boolean postReady();

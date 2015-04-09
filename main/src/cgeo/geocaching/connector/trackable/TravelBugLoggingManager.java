@@ -118,9 +118,4 @@ public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
     public void setGuid(final String guid) {
         this.guid = guid;
     }
-
-    @Override
-    public boolean isRegistered() {
-        return Settings.hasGCCredentials();
-    }
 }

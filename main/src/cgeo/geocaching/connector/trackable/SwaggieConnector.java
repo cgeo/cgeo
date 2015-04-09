@@ -18,6 +18,12 @@ public final class SwaggieConnector extends AbstractTrackableConnector {
         return geocode != null && PATTERN_SW_CODE.matcher(geocode).matches();
     }
 
+    @NonNull
+    @Override
+    public String getServiceTitle() {
+        throw new IllegalStateException("this connector does not have a corresponding name.");
+    }
+
     @Override
     @NonNull
     public String getUrl(@NonNull final Trackable trackable) {

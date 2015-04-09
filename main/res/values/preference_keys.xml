@@ -30,6 +30,7 @@
     <string name="pref_fakekey_ocro_authorization">fakekey_ocro_authorization</string>
     <string name="pref_fakekey_ocuk_authorization">fakekey_ocuk_authorization</string>
     <string name="pref_fakekey_twitter_authorization">fakekey_twitter_authorization</string>
+    <string name="pref_fakekey_geokrety_authorization">fakekey_geokrety_authorization</string>
     <string name="pref_connectorGCActive">connectorGCActive</string>
     <string name="pref_username">username</string>
     <string name="pref_password">password</string>
@@ -44,9 +45,6 @@
     <string name="pref_connectorECActive">connectorECActive</string>
     <string name="pref_connectorOXActive">connectorOXActive</string>
     <string name="pref_connectorGeokretyActive">connectorGeokretyActive</string>
-    <string name="pref_geokrety_username">geokretyusername</string>
-    <string name="pref_geokrety_password">geokretypassword</string>
-    <string name="pref_geokrety_secid">geokretysecid</string>
     <string name="pref_geokrety_cache">geokretycache</string>
     <string name="pref_pass_vote">pass-vote</string>
     <string name="pref_twitter">twitter</string>

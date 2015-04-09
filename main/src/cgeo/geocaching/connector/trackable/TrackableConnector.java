@@ -19,7 +19,25 @@ import java.util.List;
  */
 public interface TrackableConnector {
 
+    /**
+     * Return the preference activity for which the connector is attached to.
+     * The service could be launched to ask user to configure something.
+     *
+     * @return the service ID corresponding to the preference activity for the connector
+     */
+    public int getPreferenceActivity();
+
     public boolean canHandleTrackable(final String geocode);
+
+    /**
+     * Return the Title of the service the connector is attached to.
+     * Title may be used in messages given to the user, like to say which connector need to
+     * be activated for a specific feature.
+     *
+     * @return the service TITLE corresponding to this connector
+     */
+    @NonNull
+    public String getServiceTitle();
 
     /**
      * Check whether the connector has URLs corresponding the the trackable.
