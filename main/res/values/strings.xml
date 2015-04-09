@@ -1204,8 +1204,8 @@
     <string name="attribute_breeding_no">No breeding season / protected nature</string>
     <string name="attribute_snow_proof_yes">Snow-proof hiding place</string>
     <string name="attribute_snow_proof_no">No snow-proof hiding place</string>
-    <string name="attribute_compass_yes">Magnetic compass active</string>
-    <string name="attribute_compass_no">Magnetic compass disabled</string>
+    <string name="attribute_compass_yes">Compass</string>
+    <string name="attribute_compass_no">No compass</string>
     <string name="attribute_cave_yes">Cave equipment</string>
     <string name="attribute_cave_no">No cave equipment</string>
     <string name="attribute_aircraft_yes">Aircraft</string>
