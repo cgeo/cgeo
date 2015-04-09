@@ -900,9 +900,8 @@
   <string name="user_menu_open_contact">Kontakt öffnen</string>
   <string name="navigation">Navigation</string>
   <string name="compass_title">Kompass</string>
-  <string name="compass_sensors">Aktive Sensoren</string>
-  <string name="use_gps">Nur GPS nutzen</string>
-  <string name="use_compass">GPS und Kompass nutzen</string>
+  <string name="use_gps">Nur GPS verwendet</string>
+  <string name="use_compass">GPS und Magnetkompass verwendet</string>
   <string name="destination_select">Ziel auswählen</string>
   <string name="navigation_direct_navigation">Direkte Navigation</string>
   <string name="navigation_target">Ziel</string>
@@ -931,7 +930,8 @@
   <string name="helper_google_translate_description">Wenn Sie Übersetzungspakete mit der Google Übersetzer-App herunterladen, können Sie Cache-Beschreibungen in c:geo durch langes Drücken auf den Cache-Beschreibungstext übersetzen (ohne Internetverbindung) .</string>
   <string name="addon_missing_title">Fehlendes Plugin</string>
   <string name="addon_download_prompt">Jetzt im Google Play Store herunterladen</string>
-  <string name="export">Export: %1$s</string>
+  <string name="export">Exportieren</string>
+  <string name="export_progress">Export: %1$s</string>
   <string name="export_exportedto">exportiert nach</string>
   <string name="export_failed">Exportieren fehlgeschlagen</string>
   <string name="export_fieldnotes">Field Notes</string>
@@ -1244,10 +1244,11 @@
   <string name="init_summary_geokrety_cache">Verbessert die Ladezeit.</string>
   <string name="init_summary_geokrety_account">Kein Konto konfiguriert.</string>
   <string name="init_summary_geokrety_not_anonymous">Das Loggen von GeoKrets aus c:geo kann nicht anonym erfolgen. Bitte registrieren.</string>
-  <string name="init_geokrety_register_ok">Login erfolgreich</string>
+  <string name="init_geokrety_register_ok">Login OK</string>
   <string name="init_geokrety_register_fail">Login fehlgeschlagen</string>
   <string name="init_geokrety_get_secid">API-Schlüssel abrufen</string>
   <string name="init_geokrety_description">Speichere deinen API-Schlüssel in c:geo um das Loggen von GeoKrets zu vereinfachen</string>
   <string name="init_geokrety_cache_description">GeoKretyMap.org stellt zwischengespeicherte Daten für GeoKrety-Trackables zur Verfügung. Die Daten sind möglichweise nicht auf dem neuesten Stand!\nPositionen:  ~30min.\nBeschreibungen: ~24h.</string>
   <string name="init_geokrety_cache">Nutze Zwischenspeicherung</string>
+  <string name="init_geokrety_userid">Nutzer-ID: %s</string>
 </resources>
