@@ -317,7 +317,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                     loadCacheImages();
                 }
                 requireGeodata = getPage(position) == Page.DETAILS;
-                startOrStopGeoDataListener();
+                startOrStopGeoDataListener(false);
 
                 // cancel contextual actions on page change
                 if (currentActionMode != null) {
@@ -361,9 +361,15 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
         outState.putInt(STATE_PAGE_INDEX, getCurrentItem());
     }
 
-    private void startOrStopGeoDataListener() {
-        geoDataSubscription.unsubscribe();
-        if (requireGeodata) {
+    private void startOrStopGeoDataListener(final boolean initial) {
+        final boolean start;
+        if (Settings.useLowPowerMode()) {
+            geoDataSubscription.unsubscribe();
+            start = requireGeodata;
+        } else {
+            start = initial;
+        }
+        if (start) {
             geoDataSubscription = locationUpdater.start(GeoDirHandler.UPDATE_GEODATA);
         }
     }
@@ -378,7 +384,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
     @Override
     public void onResume() {
         super.onResume();
-        startOrStopGeoDataListener();
+        startOrStopGeoDataListener(true);
 
         if (refreshOnResume) {
             notifyDataSetChanged();
