@@ -6,6 +6,7 @@
     · New: Menu in cache details to put cache on ignore list (but not to remove)\n
     · New: Full support of GeoKrety (Use: Menu - Services - GeoKrety)\n
     · New: Improved waypoint editor design (Save button now in title bar)\n
+    · New: Only turn off GPS in some views if \"Low power mode\" is active in settings\n
     · Fix: Close search bar when selecting a cache\n
     \n
   </string>
