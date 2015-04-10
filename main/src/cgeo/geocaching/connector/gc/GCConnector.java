@@ -308,15 +308,16 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     @Nullable
     public String getGeocodeFromUrl(@NonNull final String url) {
+        final String noQueryString = StringUtils.substringBefore(url, "?");
         // coord.info URLs
-        String code = StringUtils.substringAfterLast(url, "coord.info/");
-        if (code != null && canHandle(code)) {
-            return code;
+        final String afterCoord = StringUtils.substringAfterLast(noQueryString, "coord.info/");
+        if (canHandle(afterCoord)) {
+            return afterCoord;
         }
         // expanded geocaching.com URLs
-        code = StringUtils.substringBetween(url, "/geocache/", "_");
-        if (code != null && canHandle(code)) {
-            return code;
+        final String afterGeocache  = StringUtils.substringBetween(noQueryString, "/geocache/", "_");
+        if (afterGeocache != null && canHandle(afterGeocache)) {
+            return afterGeocache;
         }
         return null;
     }
