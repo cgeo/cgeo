@@ -1,5 +1,8 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -9,6 +12,9 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.network.HtmlImage;
+import cgeo.geocaching.sensors.GeoData;
+import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AbstractCachingPageViewCreator;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
@@ -27,6 +33,18 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.jdt.annotation.Nullable;
+
+import rx.Observable;
+import rx.Subscription;
+import rx.android.app.AppObservable;
+import rx.android.view.OnClickEvent;
+import rx.android.view.ViewObservable;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
+import rx.subscriptions.Subscriptions;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -52,18 +70,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import rx.Observable;
-import rx.android.app.AppObservable;
-import rx.android.view.OnClickEvent;
-import rx.android.view.ViewObservable;
-import rx.functions.Action1;
-import rx.functions.Func0;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
 
 public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivity.Page> implements AndroidBeam.ActivitySharingInterface {
 
@@ -91,6 +97,13 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
     private ProgressDialog waitDialog = null;
     private CharSequence clickedItemText = null;
     private ImagesList imagesList = null;
+    private Subscription geoDataSubscription = Subscriptions.empty();
+    private static final GeoDirHandler locationUpdater = new GeoDirHandler() {
+        @Override
+        public void updateGeoData(final GeoData geoData) {
+            // Do not do anything, as we just want to maintain the GPS on
+        }
+    };
 
     /**
      * Action mode of the current contextual action bar (e.g. for copy and share actions).
@@ -177,6 +190,20 @@ public class TrackableActivity extends AbstractViewPagerActivity<TrackableActivi
             }
         });
         refreshTrackable(message);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!Settings.useLowPowerMode()) {
+            geoDataSubscription = locationUpdater.start(GeoDirHandler.UPDATE_GEODATA);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        geoDataSubscription.unsubscribe();
+        super.onPause();
     }
 
     private void refreshTrackable(final String message) {
