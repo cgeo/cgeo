@@ -88,18 +88,18 @@
             android:orientation="horizontal" >
 
             <Button
-                android:id="@+id/save"
-                style="@style/button_full"
-                android:layout_width="0dip"
-                android:layout_weight="1"
-                android:text="@android:string/ok" />
-
-            <Button
                 android:id="@+id/cancel"
                 style="@style/button_full"
                 android:layout_width="0dip"
                 android:layout_weight="1"
                 android:text="@android:string/cancel" />
+
+            <Button
+                android:id="@+id/save"
+                style="@style/button_full"
+                android:layout_width="0dip"
+                android:layout_weight="1"
+                android:text="@android:string/ok" />
         </LinearLayout>
     </LinearLayout>
 
