@@ -33,6 +33,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -466,10 +468,17 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Dat
                 if (connector.isRegistered()) {
                     sendLog();
                 } else {
-                    showToast(res.getString(R.string.err_trackable_log_not_anonymous, connector.getServiceTitle()));
-                    if (connector.getPreferenceActivity() > 0) {
-                        SettingsActivity.openForScreen(connector.getPreferenceActivity(), this);
-                    }
+                    // Redirect user to concerned connector settings
+                    Dialogs.confirmYesNo(this, res.getString(R.string.settings_title_open_settings), res.getString(R.string.err_trackable_log_not_anonymous, trackable.getBrand().getLabel(), connector.getServiceTitle()), new OnClickListener() {
+                        @Override
+                        public void onClick(final DialogInterface dialog, final int which) {
+                            if (connector.getPreferenceActivity() > 0) {
+                                SettingsActivity.openForScreen(connector.getPreferenceActivity(), LogTrackableActivity.this);
+                            } else {
+                                showToast(res.getString(R.string.err_trackable_no_preference_activity, connector.getServiceTitle()));
+                            }
+                        }
+                    });
                 }
                 return true;
             default:
