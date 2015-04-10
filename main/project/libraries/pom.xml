@@ -22,16 +22,16 @@
 
 		<CommonsCollections4Version>4.0</CommonsCollections4Version>
 		<CommonsIoVersion>2.4</CommonsIoVersion>
-		<CommonsLang3Version>3.3.2</CommonsLang3Version>
+		<CommonsLang3Version>3.4</CommonsLang3Version>
 
 		<FindbugsAnnotationsVersion>3.0.0</FindbugsAnnotationsVersion>
 
-		<JacksonAnnotationsVersion>2.5.1</JacksonAnnotationsVersion>
-		<JacksonCoreVersion>2.5.1</JacksonCoreVersion>
-		<JacksonDatabindVersion>2.5.1</JacksonDatabindVersion>
+		<JacksonAnnotationsVersion>2.5.2</JacksonAnnotationsVersion>
+		<JacksonCoreVersion>2.5.2</JacksonCoreVersion>
+		<JacksonDatabindVersion>2.5.2</JacksonDatabindVersion>
 
 		<RXAndroidVersion>0.24.0</RXAndroidVersion>
-		<RXJavaVersion>1.0.7</RXJavaVersion>
+		<RXJavaVersion>1.0.9</RXJavaVersion>
 	</properties>
 
 	<dependencies>
