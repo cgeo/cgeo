@@ -13,5 +13,5 @@
 <stringAttribute key="M2_USER_SETTINGS" value=""/>
 <booleanAttribute key="M2_WORKSPACE_RESOLUTION" value="false"/>
 <stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${workspace}"/>
-<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="D:/development/cgeo/git/cgeo/main/project/libraries"/>
+<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="${workspace_loc:/cgeo/project/libraries}"/>
 </launchConfiguration>
