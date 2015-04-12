@@ -23,9 +23,9 @@ public class GeokretyCacheInventoryLoader extends AbstractCacheInventoryLoader {
     @Override
     public List<Trackable> loadInBackground() {
         try {
-                for (final Trackable trackable: connector.searchTrackables(geocache)) {
-                    trackables.add(trackable);
-                }
+            for (final Trackable trackable: connector.searchTrackables(geocache)) {
+                trackables.add(trackable);
+            }
 
             // Return request status
             return trackables;
