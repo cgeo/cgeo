@@ -69,7 +69,7 @@ public final class GCVote {
         }
 
         final Parameters params = new Parameters("version", "cgeo");
-        final ImmutablePair<String, String> login = Settings.getGCvoteLogin();
+        final ImmutablePair<String, String> login = Settings.getGCVoteLogin();
         if (login != null) {
             params.put("userName", login.left, "password", login.right);
         }
@@ -119,7 +119,7 @@ public final class GCVote {
             RATINGS_CACHE.putAll(ratings);
             return ratings;
         } catch (final NumberFormatException | XmlPullParserException | IOException e) {
-            Log.e("Cannot parse GC vote result", e);
+            Log.e("Cannot parse GCVote result", e);
             return Collections.emptyMap();
 
         }
@@ -140,7 +140,7 @@ public final class GCVote {
             throw new IllegalArgumentException("invalid rating " + rating);
         }
 
-        final ImmutablePair<String, String> login = Settings.getGCvoteLogin();
+        final ImmutablePair<String, String> login = Settings.getGCVoteLogin();
         final Parameters params = new Parameters(
                 "userName", login.left,
                 "password", login.right,
@@ -181,7 +181,7 @@ public final class GCVote {
                 }
             }
         } catch (final Exception e) {
-            Log.e("GCvote.loadRatings", e);
+            Log.e("GCVote.loadRatings", e);
         }
     }
 
@@ -205,7 +205,7 @@ public final class GCVote {
     }
 
     public static boolean isVotingPossible(@NonNull final Geocache cache) {
-        return Settings.isGCvoteLogin() && StringUtils.isNotBlank(cache.getGuid()) && cache.supportsGCVote();
+        return Settings.isGCVoteLogin() && StringUtils.isNotBlank(cache.getGuid()) && cache.supportsGCVote();
     }
 
     static String getDescription(final float rating) {
