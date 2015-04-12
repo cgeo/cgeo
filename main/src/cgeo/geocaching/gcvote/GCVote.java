@@ -141,6 +141,10 @@ public final class GCVote {
         }
 
         final ImmutablePair<String, String> login = Settings.getGCVoteLogin();
+        if (login == null) {
+            Log.e("GCVote.setRating: cannot find credentials");
+            return false;
+        }
         final Parameters params = new Parameters(
                 "userName", login.left,
                 "password", login.right,
