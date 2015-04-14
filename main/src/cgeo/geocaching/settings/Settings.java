@@ -386,11 +386,11 @@ public class Settings {
                 && StringUtils.isNotBlank(getString(tokenSecretPrefKeyId, ""));
     }
 
-    public static boolean isGCvoteLogin() {
-        return getGCvoteLogin() != null;
+    public static boolean isGCVoteLogin() {
+        return getGCVoteLogin() != null;
     }
 
-    public static ImmutablePair<String, String> getGCvoteLogin() {
+    public static ImmutablePair<String, String> getGCVoteLogin() {
         final String username = getString(R.string.pref_username, null);
         final String password = getString(R.string.pref_pass_vote, null);
 
