@@ -19,5 +19,5 @@ public interface App {
      * Whether or not the app can be used with the given cache (may depend on properties of the cache).
      *
      */
-    boolean isEnabled(final Geocache cache);
+    boolean isEnabled(@NonNull final Geocache cache);
 }

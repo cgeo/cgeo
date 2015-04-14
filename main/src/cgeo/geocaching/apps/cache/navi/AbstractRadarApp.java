@@ -4,6 +4,8 @@ import cgeo.geocaching.Geocache;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.location.Geopoint;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.app.Activity;
 import android.content.Intent;
 
@@ -26,19 +28,19 @@ abstract class AbstractRadarApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(final Activity activity, final Geopoint point) {
+    public void navigate(final @NonNull Activity activity, final @NonNull Geopoint point) {
         activity.startActivity(createIntent(point));
     }
 
     @Override
-    public void navigate(final Activity activity, final Geocache cache) {
+    public void navigate(final @NonNull Activity activity, final @NonNull Geocache cache) {
         final Intent intent = createIntent(cache.getCoords());
         addIntentExtras(intent, cache);
         activity.startActivity(intent);
     }
 
     @Override
-    public void navigate(final Activity activity, final Waypoint waypoint) {
+    public void navigate(final @NonNull Activity activity, final @NonNull Waypoint waypoint) {
         final Intent intent = createIntent(waypoint.getCoords());
         addIntentExtras(intent, waypoint);
         activity.startActivity(intent);

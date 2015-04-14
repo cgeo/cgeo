@@ -6,6 +6,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.utils.TextUtils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -21,12 +22,12 @@ public class WhereYouGoApp extends AbstractGeneralApp {
     }
 
     @Override
-    public boolean isEnabled(final Geocache cache) {
+    public boolean isEnabled(final @NonNull Geocache cache) {
         return cache.getType() == CacheType.WHERIGO && StringUtils.isNotEmpty(getWhereIGoUrl(cache));
     }
 
     @Override
-    public void navigate(final Activity activity, final Geocache cache) {
+    public void navigate(final @NonNull Activity activity, final @NonNull Geocache cache) {
         activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getWhereIGoUrl(cache))));
     }
 

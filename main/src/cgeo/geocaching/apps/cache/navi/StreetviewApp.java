@@ -6,6 +6,8 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.ProcessUtils;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -26,7 +28,7 @@ class StreetviewApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(final Activity activity, final Geopoint point) {
+    public void navigate(final @NonNull Activity activity, final @NonNull Geopoint point) {
         try {
             activity.startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse("google.streetview:cbll=" + point.getLatitude() + "," + point.getLongitude())));

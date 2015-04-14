@@ -6,6 +6,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.apps.AbstractLocusApp;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.app.Activity;
 import android.content.Intent;
 
@@ -20,12 +22,12 @@ class LocusApp extends AbstractLocusApp implements CacheNavigationApp, WaypointN
     }
 
     @Override
-    public boolean isEnabled(final Waypoint waypoint) {
+    public boolean isEnabled(final @NonNull Waypoint waypoint) {
         return waypoint.getCoords() != null;
     }
 
     @Override
-    public boolean isEnabled(final Geocache cache) {
+    public boolean isEnabled(final @NonNull Geocache cache) {
         return cache.getCoords() != null;
     }
 
@@ -35,12 +37,12 @@ class LocusApp extends AbstractLocusApp implements CacheNavigationApp, WaypointN
      *
      */
     @Override
-    public void navigate(final Activity activity, final Waypoint waypoint) {
+    public void navigate(final @NonNull Activity activity, final @NonNull Waypoint waypoint) {
         showInLocus(Collections.singletonList(waypoint), true, false, activity);
     }
 
     @Override
-    public void navigate(final Activity activity, final Geocache cache) {
+    public void navigate(final @NonNull Activity activity, final @NonNull Geocache cache) {
         showInLocus(Collections.singletonList(cache), true, false, activity);
     }
 }

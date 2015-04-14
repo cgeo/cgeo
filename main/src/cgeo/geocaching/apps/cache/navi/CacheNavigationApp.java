@@ -3,6 +3,8 @@ package cgeo.geocaching.apps.cache.navi;
 import cgeo.geocaching.Geocache;
 import cgeo.geocaching.apps.App;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.app.Activity;
 
 /**
@@ -10,5 +12,5 @@ import android.app.Activity;
  *
  */
 public interface CacheNavigationApp extends App {
-    void navigate(final Activity activity, final Geocache cache);
+    void navigate(final @NonNull Activity activity, @NonNull final Geocache cache);
 }

@@ -13,6 +13,7 @@ import cgeo.geocaching.apps.cache.navi.GoogleNavigationApp.GoogleNavigationWalki
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import android.app.Activity;
@@ -191,6 +192,7 @@ public final class NavigationAppFactory {
      * Returns all installed navigation apps.
      *
      */
+    @NonNull
     static List<NavigationAppsEnum> getInstalledNavigationApps() {
         final List<NavigationAppsEnum> installedNavigationApps = new ArrayList<>();
         for (final NavigationAppsEnum appEnum : NavigationAppsEnum.values()) {
@@ -204,6 +206,7 @@ public final class NavigationAppFactory {
     /**
      * @return all navigation apps, which are installed and activated in the settings
      */
+    @NonNull
     static List<NavigationAppsEnum> getActiveNavigationApps() {
         final List<NavigationAppsEnum> activeApps = new ArrayList<>();
         for (final NavigationAppsEnum appEnum : getInstalledNavigationApps()) {
@@ -218,6 +221,7 @@ public final class NavigationAppFactory {
      * Returns all installed navigation apps for default navigation.
      *
      */
+    @NonNull
     public static List<NavigationAppsEnum> getInstalledDefaultNavigationApps() {
         final List<NavigationAppsEnum> installedNavigationApps = new ArrayList<>();
         for (final NavigationAppsEnum appEnum : NavigationAppsEnum.values()) {
@@ -285,6 +289,7 @@ public final class NavigationAppFactory {
         navigateCache(activity, cache, getDefaultNavigationApplication(defaultNavigation));
     }
 
+    @NonNull
     private static App getDefaultNavigationApplication(final int defaultNavigation) {
         if (defaultNavigation == 2) {
             return getNavigationAppForId(Settings.getDefaultNavigationTool2());
@@ -322,10 +327,12 @@ public final class NavigationAppFactory {
      *
      * @return never <code>null</code>
      */
+    @NonNull
     public static App getDefaultNavigationApplication() {
         return getDefaultNavigationApplication(1);
     }
 
+    @NonNull
     private static App getNavigationAppForId(final int navigationAppId) {
         final List<NavigationAppsEnum> installedNavigationApps = getInstalledNavigationApps();
 

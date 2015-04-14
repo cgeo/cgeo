@@ -9,6 +9,8 @@ import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.GeopointFormatter.Format;
 import cgeo.geocaching.utils.Log;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -25,7 +27,7 @@ class GoogleMapsApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(final Activity activity, final Geopoint point) {
+    public void navigate(final @NonNull Activity activity, final @NonNull Geopoint point) {
         navigate(activity, point, activity.getString(R.string.waypoint));
     }
 
@@ -47,12 +49,12 @@ class GoogleMapsApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(final Activity activity, final Geocache cache) {
+    public void navigate(final @NonNull Activity activity, final @NonNull Geocache cache) {
         navigate(activity, cache.getCoords(), cache.getName());
     }
 
     @Override
-    public void navigate(final Activity activity, final Waypoint waypoint) {
+    public void navigate(final @NonNull Activity activity, final @NonNull Waypoint waypoint) {
         navigate(activity, waypoint.getCoords(), waypoint.getName());
     }
 }

@@ -3,6 +3,8 @@ package cgeo.geocaching.apps.cache.navi;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.app.Activity;
 import android.content.Intent;
 
@@ -17,7 +19,7 @@ class NavigonApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(final Activity activity, final Geopoint point) {
+    public void navigate(final @NonNull Activity activity, final @NonNull Geopoint point) {
         final Intent intent = new Intent(INTENT);
 
         /*

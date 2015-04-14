@@ -7,6 +7,8 @@ import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.ProcessUtils;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.app.Activity;
 import android.content.Intent;
 
@@ -27,17 +29,17 @@ class AndroidWearApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(final Activity activity, final Geopoint coords) {
+    public void navigate(final @NonNull Activity activity, final @NonNull Geopoint coords) {
         navigate(activity, null, null, coords);
     }
 
     @Override
-    public void navigate(final Activity activity, final Geocache cache) {
+    public void navigate(final @NonNull Activity activity, final @NonNull Geocache cache) {
         navigate(activity, cache.getName(), cache.getGeocode(), cache.getCoords());
     }
 
     @Override
-    public void navigate(final Activity activity, final Waypoint waypoint) {
+    public void navigate(final @NonNull Activity activity, final @NonNull Waypoint waypoint) {
         navigate(activity, waypoint.getName(), waypoint.getGeocode(), waypoint.getCoords());
     }
 

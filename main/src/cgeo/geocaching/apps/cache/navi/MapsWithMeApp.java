@@ -7,6 +7,8 @@ import cgeo.geocaching.location.Geopoint;
 
 import com.mapswithme.maps.api.MapsWithMeApi;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.app.Activity;
 
 class MapsWithMeApp extends AbstractPointNavigationApp {
@@ -16,12 +18,12 @@ class MapsWithMeApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(final Activity activity, final Geopoint coords) {
+    public void navigate(final @NonNull Activity activity, final @NonNull Geopoint coords) {
         navigate(activity, coords, getString(R.string.unknown));
     }
 
     @Override
-    public void navigate(final Activity activity, final Geocache cache) {
+    public void navigate(final @NonNull Activity activity, final @NonNull Geocache cache) {
         navigate(activity, cache.getCoords(), cache.getName());
     }
 
@@ -30,7 +32,7 @@ class MapsWithMeApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(final Activity activity, final Waypoint waypoint) {
+    public void navigate(final @NonNull Activity activity, final @NonNull Waypoint waypoint) {
         navigate(activity, waypoint.getCoords(), waypoint.getName());
     }
 

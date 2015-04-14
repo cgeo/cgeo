@@ -2,6 +2,8 @@ package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.location.Geopoint;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.app.Activity;
 
 /**
@@ -9,5 +11,5 @@ import android.app.Activity;
  *
  */
 interface GeopointNavigationApp {
-    void navigate(final Activity activity, final Geopoint coords);
+    void navigate(@NonNull final Activity activity, @NonNull final Geopoint coords);
 }

@@ -6,6 +6,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Waypoint;
 import cgeo.geocaching.location.Geopoint;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.app.Activity;
 
 class CompassApp extends AbstractPointNavigationApp {
@@ -20,17 +22,17 @@ class CompassApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(final Activity activity, final Geopoint coords) {
+    public void navigate(final @NonNull Activity activity, final @NonNull Geopoint coords) {
         CompassActivity.startActivityPoint(activity, coords, getString(R.string.navigation_direct_navigation));
     }
 
     @Override
-    public void navigate(final Activity activity, final Waypoint waypoint) {
+    public void navigate(final @NonNull Activity activity, final @NonNull Waypoint waypoint) {
         CompassActivity.startActivityWaypoint(activity, waypoint);
     }
 
     @Override
-    public void navigate(final Activity activity, final Geocache cache) {
+    public void navigate(final @NonNull Activity activity, final @NonNull Geocache cache) {
         CompassActivity.startActivityCache(activity, cache);
     }
 
