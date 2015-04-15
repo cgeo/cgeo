@@ -1368,5 +1368,9 @@
     <string name="init_geokrety_cache_description">GeokretyMap.org provides cached datas for GeoKrety trackables.\nAvailable datas contains more GeoKrety informations like \'description\' or \'missing\' status.\n\nDatas are not live!\nPositions: ~30min.\nDescriptions: ~24h.</string>
     <string name="init_geokrety_cache">Use GeoKretyMap.org</string>
     <string name="init_geokrety_userid">User Id: %s</string>
-
+    
+    <string name="settings_map_direction">Show direction</string>
+    <string name="settings_summary_map_direction">Show a direction line to the navigation target</string>
+    <string name="map_direction">Show direction</string>
+    
 </resources>

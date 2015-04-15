@@ -759,6 +759,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
                 mapView.repaintRequired(overlayPositionAndScale);
                 ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
+            case R.id.menu_direction_line:
+                Settings.setMapDirection(!Settings.isMapDirection());
+                mapView.repaintRequired(overlayPositionAndScale);
+                ActivityMixin.invalidateOptionsMenu(activity);
+                return true;
             case R.id.menu_map_live:
                 isLiveEnabled = !isLiveEnabled;
                 if (mapMode == MapMode.LIVE) {

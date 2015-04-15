@@ -58,10 +58,16 @@
         app:showAsAction="ifRoom|withText">
         <menu>
             <item
-                android:id="@+id/menu_trail_mode"
+                android:id="@+id/menu_mycaches_mode"
                 android:checkable="true"
-                android:icon="@drawable/ic_menu_trail"
-                android:title="@string/map_trail_show"
+                android:icon="@android:drawable/ic_menu_myplaces"
+                android:title="@string/map_mycaches_hide"
+                app:showAsAction="ifRoom|withText">
+            </item>
+            <item
+                android:id="@+id/menu_direction_line"
+                android:checkable="true"
+                android:title="@string/map_direction"
                 app:showAsAction="ifRoom|withText">
             </item>
             <item
@@ -72,10 +78,10 @@
                 app:showAsAction="ifRoom|withText">
             </item>
             <item
-                android:id="@+id/menu_mycaches_mode"
+                android:id="@+id/menu_trail_mode"
                 android:checkable="true"
-                android:icon="@android:drawable/ic_menu_myplaces"
-                android:title="@string/map_mycaches_hide"
+                android:icon="@drawable/ic_menu_trail"
+                android:title="@string/map_trail_show"
                 app:showAsAction="ifRoom|withText">
             </item>
         </menu>

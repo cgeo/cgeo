@@ -562,6 +562,11 @@
                 android:layout="@layout/wp_threshold_preference" />
 
             <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="@string/pref_map_direction"
+                android:summary="@string/settings_summary_map_direction"
+                android:title="@string/settings_map_direction" />
+            <CheckBoxPreference
                 android:defaultValue="false"
                 android:key="@string/pref_maptrail"
                 android:summary="@string/init_summary_maptrail"

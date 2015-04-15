@@ -193,4 +193,5 @@
     <string name="pref_last_cache_log">last_cache_log</string>
     <string name="pref_last_trackable_log">last_trackable_log</string>
     <string name="pref_home_location">home_location</string>
+    <string name="pref_map_direction">map_direction</string>
 </resources>

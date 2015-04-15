@@ -43,6 +43,10 @@ public class DirectionDrawer {
             return;
         }
 
+        if (!Settings.isMapDirection()) {
+            return;
+        }
+
         if (line == null) {
             line = new Paint();
             line.setAntiAlias(true);

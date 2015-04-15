@@ -650,6 +650,17 @@ public class Settings {
     }
 
     /**
+     * whether to show a direction line on the map
+     */
+    public static boolean isMapDirection() {
+        return getBoolean(R.string.pref_map_direction, true);
+    }
+
+    public static void setMapDirection(final boolean showDirection) {
+        putBoolean(R.string.pref_map_direction, showDirection);
+    }
+
+    /**
      * Get last used zoom of the internal map. Differentiate between two use cases for a map of multiple caches (e.g.
      * live map) and the map of a single cache (which is often zoomed in more deep).
      */
