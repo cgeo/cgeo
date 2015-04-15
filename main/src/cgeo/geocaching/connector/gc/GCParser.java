@@ -893,7 +893,7 @@ public final class GCParser {
             return searchResult;
         }
 
-        final SearchResult search = searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(), false, cacheType);
+        final SearchResult search = searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(), cacheType);
 
         GCLogin.getInstance().getLoginStatus(page);
 

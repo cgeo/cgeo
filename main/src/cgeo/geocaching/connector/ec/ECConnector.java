@@ -106,7 +106,7 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     public SearchResult searchByViewport(@NonNull final Viewport viewport, @NonNull final MapTokens tokens) {
         final Collection<Geocache> caches = ECApi.searchByBBox(viewport);
         final SearchResult searchResult = new SearchResult(caches);
-        return searchResult.filterSearchResults(false, false, Settings.getCacheType());
+        return searchResult.filterSearchResults(false, Settings.getCacheType());
     }
 
     @Override
@@ -114,7 +114,7 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     public SearchResult searchByCenter(@NonNull final Geopoint center, final @NonNull RecaptchaReceiver recaptchaReceiver) {
         final Collection<Geocache> caches = ECApi.searchByCenter(center);
         final SearchResult searchResult = new SearchResult(caches);
-        return searchResult.filterSearchResults(false, false, Settings.getCacheType());
+        return searchResult.filterSearchResults(false, Settings.getCacheType());
     }
 
     @Override
