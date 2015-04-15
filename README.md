@@ -9,7 +9,8 @@ Perfect! Please **tell us in the [issue tracker](https://github.com/cgeo/cgeo/is
 
 [![Build Status](http://ci.cgeo.org/job/c-geo/badge/icon)](http://ci.cgeo.org/job/c-geo/)<br>
 [![Issue Stats](http://issuestats.com/github/cgeo/cgeo/badge/pr)](http://issuestats.com/github/cgeo/cgeo)<br>
-[![Issue Stats](http://issuestats.com/github/cgeo/cgeo/badge/issue)](http://issuestats.com/github/cgeo/cgeo)
+[![Issue Stats](http://issuestats.com/github/cgeo/cgeo/badge/issue)](http://issuestats.com/github/cgeo/cgeo)<br>
+[![Dependency Status](https://www.versioneye.com/user/projects/552eb65710e71412110008bb/badge.svg?style=flat)](https://www.versioneye.com/user/projects/552eb65710e71412110008bb)
 
 ## Get the source
 
