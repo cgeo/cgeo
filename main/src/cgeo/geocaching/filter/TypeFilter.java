@@ -44,8 +44,4 @@ class TypeFilter extends AbstractFilter {
 
     }
 
-    @Override
-    public int getImageId() {
-        return cacheType.markerId;
-    }
 }

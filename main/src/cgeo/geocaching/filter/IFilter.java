@@ -18,5 +18,4 @@ public interface IFilter {
 
     void filter(@NonNull final List<Geocache> list);
 
-    int getImageId();
 }

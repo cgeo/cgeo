@@ -48,8 +48,4 @@ abstract class AbstractFilter implements IFilter {
         return getName();
     }
 
-    @Override
-    public int getImageId() {
-        return 0;
-    }
 }
