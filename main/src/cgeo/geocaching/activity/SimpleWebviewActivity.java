@@ -13,7 +13,7 @@ public class SimpleWebviewActivity extends AbstractActionBarActivity {
 
     private WebView webview;
 
-    class SimplelWebviewClient extends WebViewClient {
+    class SimpleWebviewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(final WebView view, final String url) {
             webview.loadUrl(url);
@@ -28,7 +28,7 @@ public class SimpleWebviewActivity extends AbstractActionBarActivity {
 
         webview = ButterKnife.findById(this, R.id.webview);
         webview.getSettings().setJavaScriptEnabled(true);
-        webview.setWebViewClient(new SimplelWebviewClient());
+        webview.setWebViewClient(new SimpleWebviewClient());
         webview.loadUrl(String.valueOf(getIntent().getData()));
     }
 }
