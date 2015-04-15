@@ -164,7 +164,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
     private class StartListener implements View.OnClickListener {
 
         @Override
-        public void onClick(final View arg0) {
+        public void onClick(final View view) {
             if (requestTokenDialog == null) {
                 requestTokenDialog = new ProgressDialog(TokenAuthorizationActivity.this);
                 requestTokenDialog.setCancelable(false);
@@ -190,7 +190,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
     private class RegisterListener implements View.OnClickListener {
 
         @Override
-        public void onClick(final View arg0) {
+        public void onClick(final View view) {
             final Activity activity = TokenAuthorizationActivity.this;
             try {
                 activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(urlRegister)));
@@ -209,10 +209,12 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
 
     protected abstract String getAuthTitle();
 
+    @SuppressWarnings("static-method")
     protected Pattern getPatternIsError() {
         return PATTERN_IS_ERROR;
     }
 
+    @SuppressWarnings("static-method")
     protected Pattern getPatternToken() {
         return PATTERN_TOKEN;
     }
@@ -248,7 +250,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
     }
 
     @SuppressWarnings("static-method")
-    protected String getExtendedErrorMsg(final String response) {
+    protected String getExtendedErrorMsg(@SuppressWarnings("unused") final String response) {
         return StringUtils.EMPTY;
     }
 
