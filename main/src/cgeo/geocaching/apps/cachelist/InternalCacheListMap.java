@@ -6,6 +6,8 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.apps.AbstractApp;
 import cgeo.geocaching.maps.CGeoMap;
 
+import org.eclipse.jdt.annotation.NonNull;
+
 import android.app.Activity;
 
 import java.util.List;
@@ -22,7 +24,7 @@ class InternalCacheListMap extends AbstractApp implements CacheListApp {
     }
 
     @Override
-    public boolean invoke(final List<Geocache> caches, final Activity activity, final SearchResult search) {
+    public boolean invoke(final @NonNull List<Geocache> caches, final @NonNull Activity activity, final @NonNull SearchResult search) {
         CGeoMap.startActivitySearch(activity, search, null);
         return true;
     }

@@ -10,6 +10,7 @@ import com.mapswithme.maps.api.MWMPoint;
 import com.mapswithme.maps.api.MWMResponse;
 import com.mapswithme.maps.api.MapsWithMeApi;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 import android.app.Activity;
@@ -26,7 +27,7 @@ public class MapsWithMeCacheListApp extends AbstractApp implements CacheListApp 
     }
 
     @Override
-    public boolean invoke(final List<Geocache> caches, final Activity activity, final SearchResult search) {
+    public boolean invoke(@NonNull final List<Geocache> caches, @NonNull final Activity activity, final @NonNull SearchResult search) {
         final MWMPoint[] points = new MWMPoint[caches.size()];
         for (int i = 0; i < points.length; i++) {
             final Geocache geocache = caches.get(i);

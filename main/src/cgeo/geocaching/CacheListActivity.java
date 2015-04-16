@@ -586,7 +586,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             @Override
             public void onListNavigationSelected(final CacheListApp app) {
-                app.invoke(cacheList, CacheListActivity.this, getFilteredSearch());
+                final ArrayList<Geocache> cachesWithCoords = new ArrayList<>(cacheList.size());
+                for (final Geocache geocache : cacheList) {
+                    if (geocache.getCoords() != null) {
+                        cachesWithCoords.add(geocache);
+                    }
+                }
+                app.invoke(cachesWithCoords, CacheListActivity.this, getFilteredSearch());
             }
         });
 

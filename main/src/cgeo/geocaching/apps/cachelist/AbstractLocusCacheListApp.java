@@ -6,6 +6,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.apps.AbstractLocusApp;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.eclipse.jdt.annotation.NonNull;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -27,7 +28,7 @@ abstract class AbstractLocusCacheListApp extends AbstractLocusApp implements Cac
      * @see AbstractLocusApp#showInLocus
      */
     @Override
-    public boolean invoke(final List<Geocache> cacheList, final Activity activity, final SearchResult search) {
+    public boolean invoke(final @NonNull List<Geocache> cacheList, final @NonNull Activity activity, final @NonNull SearchResult search) {
         if (CollectionUtils.isEmpty(cacheList)) {
             return false;
         }
