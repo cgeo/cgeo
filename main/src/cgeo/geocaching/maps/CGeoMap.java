@@ -701,9 +701,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
         }
 
         try {
-            final MenuItem itemTrailMode = menu.findItem(R.id.menu_trail_mode);
-            itemTrailMode.setChecked(Settings.isMapTrail());
-
             final MenuItem itemMapLive = menu.findItem(R.id.menu_map_live);
             if (isLiveEnabled) {
                 itemMapLive.setTitle(res.getString(R.string.map_live_disable));
@@ -712,12 +709,14 @@ public class CGeoMap extends AbstractMap implements ViewFactory {
             }
             itemMapLive.setVisible(coordsIntent == null);
 
-            menu.findItem(R.id.menu_mycaches_mode).setChecked(Settings.isExcludeMyCaches());
 
             final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
             menu.findItem(R.id.menu_store_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport) && new SearchResult(geocodesInViewport).hasUnsavedCaches());
 
+            menu.findItem(R.id.menu_mycaches_mode).setChecked(Settings.isExcludeMyCaches());
+            menu.findItem(R.id.menu_direction_line).setChecked(Settings.isMapDirection());
             menu.findItem(R.id.menu_circle_mode).setChecked(overlayCaches.getCircles());
+            menu.findItem(R.id.menu_trail_mode).setChecked(Settings.isMapTrail());
 
             menu.findItem(R.id.menu_theme_mode).setVisible(mapView.hasMapThemes());
 
