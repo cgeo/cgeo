@@ -116,7 +116,7 @@ public class CompassActivity extends AbstractActionBarActivity {
             });
             useCompassSwitch.setVisibility(View.VISIBLE);
         } else {
-            useCompassSwitch.setVisibility(View.INVISIBLE);
+            useCompassSwitch.setVisibility(View.GONE);
         }
 
         // make sure we can control the TTS volume
