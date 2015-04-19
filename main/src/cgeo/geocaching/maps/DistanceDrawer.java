@@ -17,7 +17,6 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 public class DistanceDrawer {
-    private Geopoint currentCoords;
     private final Geopoint destinationCoords;
 
     private Paint paintBox = null;
@@ -55,15 +54,15 @@ public class DistanceDrawer {
         maxTextWidth = boxWidth - 3 * boxPadding;
     }
 
-    public void setCoordinates(final Location coordinatesIn) {
-        currentCoords = new Geopoint(coordinatesIn);
+    public void setCoordinates(final Location location) {
+        final Geopoint currentCoords = new Geopoint(location);
 
         final float distance = currentCoords.distanceTo(destinationCoords);
         distanceText = Units.getDistanceFromKilometers(distance);
     }
 
     void drawDistance(final Canvas canvas) {
-        if (currentCoords == null) {
+        if (distanceText == null) {
             return;
         }
 
