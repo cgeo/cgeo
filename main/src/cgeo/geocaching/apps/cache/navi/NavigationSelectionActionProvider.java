@@ -1,7 +1,6 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.Geocache;
-import cgeo.geocaching.apps.App;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.ui.AbstractMenuActionProvider;
 
@@ -13,8 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.SubMenu;
-
-import java.util.List;
 
 /**
  * Action provider listing all available navigation actions as sub menu.
@@ -40,30 +37,21 @@ public class NavigationSelectionActionProvider extends AbstractMenuActionProvide
             return;
         }
         for (final NavigationAppsEnum app : NavigationAppFactory.getActiveNavigationApps()) {
+            if (!(app.app instanceof CacheNavigationApp)) {
+                continue;
+            }
+            final CacheNavigationApp cacheApp = (CacheNavigationApp) app.app;
             if (app.app.isEnabled(geocache)) {
                 subMenu.add(Menu.NONE, app.id, Menu.NONE, app.app.getName()).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 
                     @Override
                     public boolean onMenuItemClick(final MenuItem item) {
-                        final CacheNavigationApp app = (CacheNavigationApp) getNavigationAppForId(item.getItemId());
-                        app.navigate(activity, geocache);
+                        cacheApp.navigate(activity, geocache);
                         return true;
                     }
                 });
             }
         }
-    }
-
-    private static App getNavigationAppForId(final int navigationAppId) {
-        final List<NavigationAppsEnum> installedNavigationApps = NavigationAppFactory.getInstalledNavigationApps();
-
-        for (final NavigationAppsEnum navigationApp : installedNavigationApps) {
-            if (navigationApp.id == navigationAppId) {
-                return navigationApp.app;
-            }
-        }
-        // default navigation tool wasn't set already or couldn't be found (not installed any more for example)
-        return NavigationAppsEnum.COMPASS.app;
     }
 
     public static void initialize(final MenuItem menuItem, final Geocache cache) {

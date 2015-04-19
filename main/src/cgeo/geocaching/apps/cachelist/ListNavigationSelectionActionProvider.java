@@ -41,7 +41,6 @@ public class ListNavigationSelectionActionProvider extends AbstractMenuActionPro
 
                 @Override
                 public boolean onMenuItemClick(final MenuItem item) {
-                    final CacheListApp app = activeApps.get(item.getItemId());
                     callback.onListNavigationSelected(app);
                     return true;
                 }
