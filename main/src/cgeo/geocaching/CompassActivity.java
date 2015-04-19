@@ -17,6 +17,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.ui.CompassView;
 import cgeo.geocaching.ui.LoggingUI;
+import cgeo.geocaching.ui.WaypointSelectionActionProvider;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
@@ -37,13 +38,10 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-
-import java.util.List;
 
 public class CompassActivity extends AbstractActionBarActivity {
 
@@ -97,7 +95,7 @@ public class CompassActivity extends AbstractActionBarActivity {
             }
         }
         else if (extras.containsKey(Intents.EXTRA_COORDS)) {
-            setTarget(extras.<Geopoint>getParcelable(Intents.EXTRA_COORDS), extras.getString(Intents.EXTRA_DESCRIPTION));
+            setTarget(extras.<Geopoint> getParcelable(Intents.EXTRA_COORDS), extras.getString(Intents.EXTRA_DESCRIPTION));
         }
         else {
             setTarget(cache);
@@ -166,24 +164,25 @@ public class CompassActivity extends AbstractActionBarActivity {
         getMenuInflater().inflate(R.menu.compass_activity_options, menu);
         if (cache != null) {
             LoggingUI.addMenuItems(this, menu, cache);
+            initializeTargetActionProvider(menu);
         }
-        addWaypointItems(menu);
         return true;
     }
 
-    private void addWaypointItems(final Menu menu) {
-        if (cache != null) {
-            final List<Waypoint> waypoints = cache.getWaypoints();
-            boolean visible = false;
-            final SubMenu subMenu = menu.findItem(R.id.menu_select_destination).getSubMenu();
-            for (final Waypoint waypoint : waypoints) {
-                if (waypoint.getCoords() != null) {
-                    subMenu.add(0, waypoint.getId(), 0, waypoint.getName());
-                    visible = true;
-                }
+    private void initializeTargetActionProvider(final Menu menu) {
+        final MenuItem destinationMenu = menu.findItem(R.id.menu_select_destination);
+        WaypointSelectionActionProvider.initialize(destinationMenu, cache, new WaypointSelectionActionProvider.Callback() {
+
+            @Override
+            public void onWaypointSelected(final Waypoint waypoint) {
+                setTarget(waypoint);
             }
-            menu.findItem(R.id.menu_select_destination).setVisible(visible);
-        }
+
+            @Override
+            public void onGeocacheSelected(final Geocache geocache) {
+                setTarget(geocache);
+            }
+        });
     }
 
     @Override
@@ -191,7 +190,6 @@ public class CompassActivity extends AbstractActionBarActivity {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_tts_start).setVisible(!SpeechService.isRunning());
         menu.findItem(R.id.menu_tts_stop).setVisible(SpeechService.isRunning());
-        menu.findItem(R.id.menu_compass_cache).setVisible(cache != null);
         menu.findItem(R.id.menu_hint).setVisible(cache != null);
         return true;
     }
@@ -219,22 +217,12 @@ public class CompassActivity extends AbstractActionBarActivity {
                 SpeechService.stopService(this);
                 invalidateOptionsMenuCompatible();
                 return true;
-            case R.id.menu_compass_cache:
-                setTarget(cache);
-                return true;
             case R.id.menu_hint:
                 cache.showHintToast(this);
                 return true;
             default:
                 if (LoggingUI.onMenuItemSelected(item, this, cache)) {
                     return true;
-                }
-                if (cache != null) {
-                    final Waypoint waypoint = cache.getWaypointById(id);
-                    if (waypoint != null) {
-                        setTarget(waypoint);
-                        return true;
-                    }
                 }
         }
         return super.onOptionsItemSelected(item);
