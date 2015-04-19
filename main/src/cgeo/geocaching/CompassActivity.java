@@ -59,9 +59,13 @@ public class CompassActivity extends AbstractActionBarActivity {
     @InjectView(R.id.use_compass) protected ToggleButton useCompassSwitch;
 
     /**
-     * Destination of the compass, or null (if the compass is used for a waypoint only).
+     * Destination cache, may be null
      */
     private Geocache cache = null;
+    /**
+     * Destination waypoint, may be null
+     */
+    private Waypoint waypoint = null;
     private Geopoint dstCoords = null;
     private float cacheHeading = 0;
     private String description;
@@ -197,7 +201,10 @@ public class CompassActivity extends AbstractActionBarActivity {
         final int id = item.getItemId();
         switch (id) {
             case R.id.menu_map:
-                if (cache != null) {
+                if (waypoint != null) {
+                    CGeoMap.startActivityCoords(this, waypoint.getCoords(), waypoint.getWaypointType(), waypoint.getName());
+                }
+                else if (cache != null) {
                     CGeoMap.startActivityGeoCode(this, cache.getGeocode());
                 }
                 else {
@@ -248,8 +255,9 @@ public class CompassActivity extends AbstractActionBarActivity {
         Log.d("destination set: " + newDescription + " (" + dstCoords + ")");
     }
 
-    private void setTarget(final @NonNull Waypoint waypoint) {
-        setTarget(waypoint.getCoords(), waypoint.getName());
+    private void setTarget(final @NonNull Waypoint waypointIn) {
+        waypoint = waypointIn;
+        setTarget(waypointIn.getCoords(), waypointIn.getName());
     }
 
     private void setTarget(final Geocache cache) {
