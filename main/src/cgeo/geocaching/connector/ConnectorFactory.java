@@ -232,7 +232,7 @@ public final class ConnectorFactory {
         for (final IConnector connector : CONNECTORS) {
             @Nullable final String geocode = connector.getGeocodeFromUrl(url);
             if (StringUtils.isNotBlank(geocode)) {
-                return geocode;
+                return StringUtils.upperCase(geocode);
             }
         }
         return null;

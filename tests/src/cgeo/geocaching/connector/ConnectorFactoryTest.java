@@ -79,6 +79,9 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
 
         // make sure that a mixture of different connector and geocode is recognized as invalid
         assertThat(ConnectorFactory.getGeocodeFromURL("http://www.opencaching.com/#!geocache/" + "GC12345")).isNull();
+
+        // lowercase URL
+        assertThat(ConnectorFactory.getGeocodeFromURL("http://coord.info/gc77")).isEqualTo("GC77");
     }
 
     public static void testGetTrackableFromURL() throws Exception {

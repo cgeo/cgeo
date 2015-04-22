@@ -51,6 +51,7 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
     public static void testCanHandle() {
         assertThat(GCConnector.getInstance().canHandle("GC2MEGA")).isTrue();
         assertThat(GCConnector.getInstance().canHandle("OXZZZZZ")).isFalse();
+        assertThat(GCConnector.getInstance().canHandle("gc77")).isTrue();
     }
 
     /**
@@ -97,5 +98,8 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
         assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://coord.info/TB1234")).isNull();
         assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://www.coord.info/TB1234")).isNull();
         assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://www.coord.info/WM1234")).isNull();
+
+        // uppercase is managed in ConnectorFactory
+        assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://coord.info/gc77")).isEqualTo("gc77");
     }
 }
