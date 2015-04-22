@@ -67,6 +67,7 @@
             <item
                 android:id="@+id/menu_direction_line"
                 android:checkable="true"
+                android:icon="@drawable/ic_menu_goto"
                 android:title="@string/map_direction"
                 app:showAsAction="ifRoom|withText">
             </item>
