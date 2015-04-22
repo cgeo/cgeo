@@ -1,27 +1,25 @@
 package cgeo.geocaching.activity.waypoint;
 
-import cgeo.geocaching.R;
-import cgeo.geocaching.enumerations.WaypointType;
-
-import com.google.android.apps.common.testing.ui.espresso.action.ViewActions;
-
 import static com.google.android.apps.common.testing.ui.espresso.Espresso.onData;
 import static com.google.android.apps.common.testing.ui.espresso.Espresso.onView;
-
+import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.click;
 import static com.google.android.apps.common.testing.ui.espresso.assertion.ViewAssertions.matches;
-
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isClickable;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isDisplayed;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isNotChecked;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withChild;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withId;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withText;
-
-import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.click;
-
 import static org.hamcrest.Matchers.hasToString;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWith;
+
+import cgeo.geocaching.R;
+import cgeo.geocaching.enumerations.WaypointType;
+
+import com.google.android.apps.common.testing.ui.espresso.action.ViewActions;
+
+import android.test.suitebuilder.annotation.Suppress;
 
 public class AddWaypointActivityTest extends AbstractAddWaypointActivityTest {
 
@@ -29,6 +27,9 @@ public class AddWaypointActivityTest extends AbstractAddWaypointActivityTest {
         onView(withId(R.id.type)).check(matches(isDisplayed()));
     }
 
+    // disabled because of issues with testing on Lollipop
+
+    @Suppress
     public static void testDefaultWaypointTypeForTraditional() {
         onView(withId(R.id.type)).check(matches(withChild(withText(WaypointType.WAYPOINT.getL10n()))));
         onView(withId(R.id.name)).check(matches(withText(WaypointType.WAYPOINT.getL10n() + " 1")));
@@ -44,8 +45,11 @@ public class AddWaypointActivityTest extends AbstractAddWaypointActivityTest {
         onView(withId(R.id.wpt_visited_checkbox)).check(matches(isNotChecked()));
     }
 
+    // disabled because of issues with testing on Lollipop
+
+    @Suppress
     public static void testSwitchingWaypointTypeChangesWaypointName() {
-        WaypointType waypointType = WaypointType.FINAL;
+        final WaypointType waypointType = WaypointType.FINAL;
 
         // verify we don't have a final type yet
         onView(withId(R.id.name)).check(matches(not(withText(waypointType.getL10n()))));

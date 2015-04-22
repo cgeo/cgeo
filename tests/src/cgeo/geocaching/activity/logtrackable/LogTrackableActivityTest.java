@@ -8,6 +8,10 @@ import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMat
 
 import cgeo.geocaching.R;
 
+import android.test.suitebuilder.annotation.Suppress;
+
+// disabled because of issues with testing on Lollipop
+@Suppress
 public class LogTrackableActivityTest extends AbstractLogTrackableActivityTest {
 
     public void testInsertNameExists() throws Exception {
