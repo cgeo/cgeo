@@ -1,5 +1,8 @@
 package cgeo.geocaching;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 import cgeo.calendar.CalendarAddon;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractViewPagerActivity;
@@ -18,6 +21,8 @@ import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.export.FieldnoteExport;
+import cgeo.geocaching.export.GpxExport;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteDialog;
 import cgeo.geocaching.list.StoredList;
@@ -64,6 +69,16 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
+import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.app.AppObservable;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.subscriptions.CompositeSubscription;
+import rx.subscriptions.Subscriptions;
 
 import android.R.color;
 import android.app.AlertDialog;
@@ -128,18 +143,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import rx.Observable;
-import rx.Observable.OnSubscribe;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.app.AppObservable;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.subscriptions.CompositeSubscription;
-import rx.subscriptions.Subscriptions;
 
 /**
  * Activity to handle all single-cache-stuff.
@@ -586,6 +589,12 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
                 return true;
             case R.id.menu_ignore:
                 ignoreCache();
+                return true;
+            case R.id.menu_export_gpx:
+                new GpxExport().export(Collections.singletonList(cache), this);
+                return true;
+            case R.id.menu_export_fieldnotes:
+                new FieldnoteExport().export(Collections.singletonList(cache), this);
                 return true;
             default:
                 if (NavigationAppFactory.onMenuItemSelected(item, this, cache)) {
@@ -1531,7 +1540,7 @@ public class CacheDetailActivity extends AbstractViewPagerActivity<CacheDetailAc
 
         /**
          * Load the description in the background.
-         * 
+         *
          * @param descriptionString
          *            the HTML description as retrieved from the connector
          * @param descriptionView

@@ -41,12 +41,15 @@ import java.util.Locale;
 
 public class GpxExport extends AbstractExport {
 
+    private String fileName;
+
     public GpxExport() {
         super(R.string.export_gpx);
     }
 
     @Override
     public void export(final List<Geocache> caches, final Activity activity) {
+        calculateFileName(caches);
         final String[] geocodes = getGeocodes(caches);
         if (null == activity) {
             // No activity given, so no user interaction possible.
@@ -59,8 +62,22 @@ public class GpxExport extends AbstractExport {
         }
     }
 
+    private void calculateFileName(final List<Geocache> caches) {
+        if (caches.size() == 1) {
+            // geocode as file name
+            fileName = caches.get(0).getGeocode() + ".gpx";
+        }
+        else {
+            // date and time as file name
+            final SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+            fileName = "export_" + fileNameDateFormat.format(new Date()) + ".gpx";
+        }
+        fileName = FileUtils.getUniqueNamedFile(new File(Settings.getGpxExportDir(), fileName)).getName();
+    }
+
     private Dialog getExportDialog(final String[] geocodes, final Activity activity) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(activity.getString(R.string.export_confirm_title, activity.getString(R.string.export_gpx)));
 
         final Context themedContext;
         if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB) {
@@ -73,7 +90,7 @@ public class GpxExport extends AbstractExport {
         builder.setView(layout);
 
         final TextView text = ButterKnife.findById(layout, R.id.info);
-        text.setText(activity.getString(R.string.export_gpx_info, Settings.getGpxExportDir()));
+        text.setText(activity.getString(R.string.export_confirm_message, Settings.getGpxExportDir(), fileName));
 
         final CheckBox shareOption = ButterKnife.findById(layout, R.id.share);
 
@@ -117,8 +134,7 @@ public class GpxExport extends AbstractExport {
         }
 
         private File getExportFile() {
-            final SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-            return FileUtils.getUniqueNamedFile(new File(Settings.getGpxExportDir(), "export_" + fileNameDateFormat.format(new Date()) + ".gpx"));
+            return FileUtils.getUniqueNamedFile(new File(Settings.getGpxExportDir(), fileName));
         }
 
         @Override

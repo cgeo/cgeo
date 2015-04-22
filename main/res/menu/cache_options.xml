@@ -95,5 +95,20 @@
         android:visible="false"
         app:showAsAction="ifRoom">
     </item>
+    <item
+        android:id="@+id/menu_export"
+        android:title="@string/export"
+        app:showAsAction="never|withText">
+        <menu>
+            <item
+                android:id="@+id/menu_export_gpx"
+                android:title="@string/export_gpx">
+            </item>
+            <item
+                android:id="@+id/menu_export_fieldnotes"
+                android:title="@string/export_fieldnotes">
+            </item>
+        </menu>
+    </item>
     
 </menu>

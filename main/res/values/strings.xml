@@ -1046,7 +1046,9 @@
     <string name="export_gpx">GPX</string>
     <string name="export_gpx_info">The GPX file will be exported to %1$s with the current date and time as its file name.</string>
     <string name="export_gpx_to">Send exported GPX to</string>
-
+    <string name="export_confirm_title">Exporting %1$s</string>
+    <string name="export_confirm_message">To Path: %1$s\nFile Name: %2$s</string>
+    
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Dogs allowed</string>
     <string name="attribute_dogs_no">Dogs not allowed</string>
