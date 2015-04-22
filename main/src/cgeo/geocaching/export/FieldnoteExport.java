@@ -29,9 +29,13 @@ import android.os.Environment;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Exports offline logs in the Groundspeak Field Note format.
@@ -40,9 +44,12 @@ import java.util.List;
 public class FieldnoteExport extends AbstractExport {
     private static final File exportLocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/field-notes");
     private static int fieldNotesCount = 0;
+    private final String fileName;
 
     public FieldnoteExport() {
         super(R.string.export_fieldnotes);
+        final SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
+        fileName = fileNameDateFormat.format(new Date()) + ".txt";
     }
 
     @Override
@@ -60,6 +67,7 @@ public class FieldnoteExport extends AbstractExport {
 
     private Dialog getExportOptionsDialog(final Geocache[] caches, final Activity activity) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(activity.getString(R.string.export_confirm_title, activity.getString(R.string.export_fieldnotes)));
 
         final Context themedContext;
         if (Settings.isLightSkin() && VERSION.SDK_INT < VERSION_CODES.HONEYCOMB) {
@@ -68,8 +76,10 @@ public class FieldnoteExport extends AbstractExport {
             themedContext = activity;
         }
         final View layout = View.inflate(themedContext, R.layout.fieldnote_export_dialog, null);
-
         builder.setView(layout);
+
+        final TextView text = ButterKnife.findById(layout, R.id.info);
+        text.setText(activity.getString(R.string.export_confirm_message, exportLocation.getAbsolutePath(), fileName));
 
         final CheckBox uploadOption = ButterKnife.findById(layout, R.id.upload);
         uploadOption.setChecked(Settings.getFieldNoteExportUpload());
@@ -97,8 +107,7 @@ public class FieldnoteExport extends AbstractExport {
     }
 
     private class ExportTask extends AsyncTaskWithProgress<Geocache, Boolean> {
-        @Nullable
-        private final Activity activity;
+        @Nullable private final Activity activity;
         private final boolean upload;
         private final boolean onlyNew;
         private File exportFile;
@@ -154,7 +163,7 @@ public class FieldnoteExport extends AbstractExport {
             }
             fieldNotesCount += fieldNotes.size();
 
-            exportFile = fieldNotes.writeToDirectory(exportLocation);
+            exportFile = fieldNotes.writeToDirectory(exportLocation, fileName);
             if (exportFile == null) {
                 return false;
             }

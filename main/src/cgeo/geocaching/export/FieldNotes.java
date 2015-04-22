@@ -9,7 +9,6 @@ import cgeo.geocaching.utils.SynchronizedDateFormat;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -41,15 +40,14 @@ class FieldNotes {
         return buffer.toString();
     }
 
-    File writeToDirectory(final File exportLocation) {
+    File writeToDirectory(final File exportLocation, final String fileName) {
         if (!LocalStorage.isExternalStorageAvailable()) {
             return null;
         }
 
         FileUtils.mkdirs(exportLocation);
 
-        final SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
-        final File exportFile = new File(exportLocation.toString() + '/' + fileNameDateFormat.format(new Date()) + ".txt");
+        final File exportFile = new File(exportLocation.toString() + '/' + fileName);
 
         if (!FileUtils.writeFileUTF16(exportFile, getContent())) {
             return null;
