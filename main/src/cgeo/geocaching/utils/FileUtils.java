@@ -117,7 +117,7 @@ public final class FileUtils {
         final String baseNameAndPath = file.getPath();
         final String prefix = StringUtils.substringBeforeLast(baseNameAndPath, ".") + "_";
         final String extension = "." + StringUtils.substringAfterLast(baseNameAndPath, ".");
-        for (int i = 1; i < Integer.MAX_VALUE; i++) {
+        for (int i = 2; i < Integer.MAX_VALUE; i++) {
             final File numbered = new File(prefix + i + extension);
             if (!numbered.exists()) {
                 return numbered;

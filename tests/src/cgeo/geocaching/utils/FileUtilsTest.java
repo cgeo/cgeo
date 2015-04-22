@@ -12,14 +12,15 @@ import junit.framework.TestCase;
 public class FileUtilsTest extends TestCase {
 
     final File testDir = LocalStorage.getStorageDir("automated-tests");
-    final File baseFile = new File(testDir, "prefix.ext");
-    final File alternative1 = new File(testDir, "prefix_1.ext");
-    final File alternative2 = new File(testDir, "prefix_2.ext");
 
     public void testGetUniqueNamedFile() throws IOException {
         FileUtils.deleteDirectory(testDir);
         assertThat(testDir.mkdirs()).isTrue();
         try {
+            final File baseFile = new File(testDir, "prefix.ext");
+            final File alternative1 = new File(testDir, "prefix_2.ext");
+            final File alternative2 = new File(testDir, "prefix_3.ext");
+
             assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(baseFile);
             assertThat(baseFile.createNewFile()).isTrue();
             assertThat(FileUtils.getUniqueNamedFile(baseFile)).isEqualTo(alternative1);
